@@ -1,0 +1,1019 @@
+[
+  {
+    "dataset": "justicedao/uscode-autoformal-span-cache",
+    "config": "paired_spans",
+    "status": 200,
+    "url": "https://datasets-server.huggingface.co/rows?dataset=justicedao%2Fuscode-autoformal-span-cache&config=paired_spans&split=train&offset=0&length=5",
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/uscode-autoformal-span-cache-paired_spans-rows-preview.json",
+    "sha256": "7b80b89cabdead9b2aee074cb6484cb359245bf027d30d299a3c412d25a4296a",
+    "bytes": 25190,
+    "num_rows_total": 4888,
+    "features": [
+      {
+        "feature_idx": 0,
+        "name": "schema_version",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 1,
+        "name": "repository_id",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 2,
+        "name": "source",
+        "type": {
+          "span_id": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "text": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "text_sha256": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "legal_id": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "revision": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "constitution": {
+            "dtype": "bool",
+            "_type": "Value"
+          }
+        }
+      },
+      {
+        "feature_idx": 3,
+        "name": "autoencoder",
+        "type": {
+          "status": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "model_identity": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "embedding_model": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "semantic_embeddings": {
+            "dtype": "bool",
+            "_type": "Value"
+          },
+          "formal_outputs": {
+            "feature": {
+              "family": {
+                "dtype": "string",
+                "_type": "Value"
+              },
+              "format": {
+                "dtype": "string",
+                "_type": "Value"
+              },
+              "payload_json": {
+                "dtype": "string",
+                "_type": "Value"
+              },
+              "sha256": {
+                "dtype": "string",
+                "_type": "Value"
+              },
+              "origin": {
+                "dtype": "string",
+                "_type": "Value"
+              },
+              "independent": {
+                "dtype": "bool",
+                "_type": "Value"
+              },
+              "target_conditioned": {
+                "dtype": "bool",
+                "_type": "Value"
+              },
+              "syntax_status": {
+                "dtype": "string",
+                "_type": "Value"
+              }
+            },
+            "_type": "List"
+          },
+          "source_binding_verified": {
+            "dtype": "bool",
+            "_type": "Value"
+          },
+          "complete": {
+            "dtype": "bool",
+            "_type": "Value"
+          },
+          "raw_vector": {
+            "feature": {
+              "dtype": "float64",
+              "_type": "Value"
+            },
+            "_type": "List"
+          },
+          "cosine_similarity": {
+            "dtype": "float64",
+            "_type": "Value"
+          },
+          "reconstruction_loss": {
+            "dtype": "float64",
+            "_type": "Value"
+          },
+          "projected_vector": {
+            "feature": {
+              "dtype": "float64",
+              "_type": "Value"
+            },
+            "_type": "List"
+          },
+          "projected_cosine_similarity": {
+            "dtype": "float64",
+            "_type": "Value"
+          },
+          "projected_reconstruction_loss": {
+            "dtype": "float64",
+            "_type": "Value"
+          },
+          "projected_target_conditioned": {
+            "dtype": "bool",
+            "_type": "Value"
+          }
+        }
+      },
+      {
+        "feature_idx": 4,
+        "name": "compiler",
+        "type": {
+          "status": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "reason": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "complete": {
+            "dtype": "bool",
+            "_type": "Value"
+          },
+          "canonical_complete": {
+            "dtype": "bool",
+            "_type": "Value"
+          },
+          "decompiled": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "roundtrip_ok": {
+            "dtype": "bool",
+            "_type": "Value"
+          },
+          "formal_outputs": {
+            "feature": {
+              "family": {
+                "dtype": "string",
+                "_type": "Value"
+              },
+              "format": {
+                "dtype": "string",
+                "_type": "Value"
+              },
+              "payload_json": {
+                "dtype": "string",
+                "_type": "Value"
+              },
+              "sha256": {
+                "dtype": "string",
+                "_type": "Value"
+              },
+              "origin": {
+                "dtype": "string",
+                "_type": "Value"
+              },
+              "independent": {
+                "dtype": "bool",
+                "_type": "Value"
+              },
+              "target_conditioned": {
+                "dtype": "bool",
+                "_type": "Value"
+              },
+              "syntax_status": {
+                "dtype": "string",
+                "_type": "Value"
+              }
+            },
+            "_type": "List"
+          },
+          "canonical_formal_outputs": {
+            "feature": {
+              "family": {
+                "dtype": "string",
+                "_type": "Value"
+              },
+              "format": {
+                "dtype": "string",
+                "_type": "Value"
+              },
+              "payload_json": {
+                "dtype": "string",
+                "_type": "Value"
+              },
+              "sha256": {
+                "dtype": "string",
+                "_type": "Value"
+              },
+              "origin": {
+                "dtype": "string",
+                "_type": "Value"
+              },
+              "independent": {
+                "dtype": "bool",
+                "_type": "Value"
+              },
+              "target_conditioned": {
+                "dtype": "bool",
+                "_type": "Value"
+              },
+              "syntax_status": {
+                "dtype": "string",
+                "_type": "Value"
+              }
+            },
+            "_type": "List"
+          },
+          "component_count": {
+            "dtype": "int64",
+            "_type": "Value"
+          },
+          "components_artifact_sha256": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "components_artifact_pointer": {
+            "dtype": "string",
+            "_type": "Value"
+          }
+        }
+      },
+      {
+        "feature_idx": 5,
+        "name": "provenance",
+        "type": {
+          "agent_id": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "code_identity": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "model_identity": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "batch_id": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "elapsed_seconds": {
+            "dtype": "float64",
+            "_type": "Value"
+          },
+          "wall_seconds_per_span": {
+            "dtype": "float64",
+            "_type": "Value"
+          },
+          "bridge_names": {
+            "feature": {
+              "dtype": "string",
+              "_type": "Value"
+            },
+            "_type": "List"
+          },
+          "evaluate_provers": {
+            "dtype": "bool",
+            "_type": "Value"
+          },
+          "disk_cache": {
+            "dtype": "bool",
+            "_type": "Value"
+          },
+          "parallel_workers": {
+            "dtype": "int64",
+            "_type": "Value"
+          },
+          "sample_count": {
+            "dtype": "int64",
+            "_type": "Value"
+          }
+        }
+      },
+      {
+        "feature_idx": 6,
+        "name": "lake",
+        "type": {
+          "status": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "receipt_sha256": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "admitted": {
+            "dtype": "bool",
+            "_type": "Value"
+          }
+        }
+      },
+      {
+        "feature_idx": 7,
+        "name": "source_target_artifact_sha256",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 8,
+        "name": "source_target_artifact_pointer",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 9,
+        "name": "goal_ids",
+        "type": {
+          "feature": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "_type": "List"
+        }
+      },
+      {
+        "feature_idx": 10,
+        "name": "admitted",
+        "type": {
+          "dtype": "bool",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 11,
+        "name": "formalized",
+        "type": {
+          "dtype": "bool",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 12,
+        "name": "comparison",
+        "type": {
+          "status": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "comparable": {
+            "dtype": "bool",
+            "_type": "Value"
+          },
+          "agrees": {
+            "dtype": "bool",
+            "_type": "Value"
+          },
+          "independent": {
+            "dtype": "bool",
+            "_type": "Value"
+          },
+          "method": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "coverage_scope": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "reason": {
+            "dtype": "string",
+            "_type": "Value"
+          },
+          "mismatches": {
+            "feature": {
+              "dtype": "string",
+              "_type": "Value"
+            },
+            "_type": "List"
+          },
+          "autoencoder_output_count": {
+            "dtype": "int64",
+            "_type": "Value"
+          },
+          "compiler_output_count": {
+            "dtype": "int64",
+            "_type": "Value"
+          }
+        }
+      },
+      {
+        "feature_idx": 13,
+        "name": "observation_id",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      }
+    ],
+    "row_field_names": [
+      [
+        "schema_version",
+        "repository_id",
+        "source",
+        "autoencoder",
+        "compiler",
+        "provenance",
+        "lake",
+        "source_target_artifact_sha256",
+        "source_target_artifact_pointer",
+        "goal_ids",
+        "admitted",
+        "formalized",
+        "comparison",
+        "observation_id"
+      ],
+      [
+        "schema_version",
+        "repository_id",
+        "source",
+        "autoencoder",
+        "compiler",
+        "provenance",
+        "lake",
+        "source_target_artifact_sha256",
+        "source_target_artifact_pointer",
+        "goal_ids",
+        "admitted",
+        "formalized",
+        "comparison",
+        "observation_id"
+      ],
+      [
+        "schema_version",
+        "repository_id",
+        "source",
+        "autoencoder",
+        "compiler",
+        "provenance",
+        "lake",
+        "source_target_artifact_sha256",
+        "source_target_artifact_pointer",
+        "goal_ids",
+        "admitted",
+        "formalized",
+        "comparison",
+        "observation_id"
+      ],
+      [
+        "schema_version",
+        "repository_id",
+        "source",
+        "autoencoder",
+        "compiler",
+        "provenance",
+        "lake",
+        "source_target_artifact_sha256",
+        "source_target_artifact_pointer",
+        "goal_ids",
+        "admitted",
+        "formalized",
+        "comparison",
+        "observation_id"
+      ],
+      [
+        "schema_version",
+        "repository_id",
+        "source",
+        "autoencoder",
+        "compiler",
+        "provenance",
+        "lake",
+        "source_target_artifact_sha256",
+        "source_target_artifact_pointer",
+        "goal_ids",
+        "admitted",
+        "formalized",
+        "comparison",
+        "observation_id"
+      ]
+    ],
+    "sample_metadata": [
+      {
+        "schema_version": "uscode-paired-span-census/v1",
+        "admitted": false,
+        "long_text_field_sizes": {}
+      },
+      {
+        "schema_version": "uscode-paired-span-census/v1",
+        "admitted": false,
+        "long_text_field_sizes": {}
+      }
+    ]
+  },
+  {
+    "dataset": "justicedao/uscode-autoformal-span-cache",
+    "config": "formal_logic_text",
+    "status": 200,
+    "url": "https://datasets-server.huggingface.co/rows?dataset=justicedao%2Fuscode-autoformal-span-cache&config=formal_logic_text&split=train&offset=0&length=5",
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/uscode-autoformal-span-cache-formal_logic_text-rows-preview.json",
+    "sha256": "043467872f6c0b68f206885172b374a4b5979ea23ee32175407a91f3957f4780",
+    "bytes": 12166,
+    "num_rows_total": 372,
+    "features": [
+      {
+        "feature_idx": 0,
+        "name": "source_text",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 1,
+        "name": "formula_text",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 2,
+        "name": "view_name",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 3,
+        "name": "producer_origin",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 4,
+        "name": "fallback_origin",
+        "type": {
+          "dtype": "bool",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 5,
+        "name": "producer_record_source_id",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 6,
+        "name": "source_span_id",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 7,
+        "name": "legal_id",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 8,
+        "name": "format",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 9,
+        "name": "formula_field",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 10,
+        "name": "formula_sha256",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 11,
+        "name": "learned_formula_generation",
+        "type": {
+          "dtype": "bool",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 12,
+        "name": "reported_validation_json",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 13,
+        "name": "independent_validation",
+        "type": {
+          "dtype": "bool",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 14,
+        "name": "admitted",
+        "type": {
+          "dtype": "bool",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 15,
+        "name": "training_qualified",
+        "type": {
+          "dtype": "bool",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 16,
+        "name": "source_report_path_in_repo",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 17,
+        "name": "source_report_revision",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 18,
+        "name": "source_report_sha256",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 19,
+        "name": "source_receipt_sha256",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 20,
+        "name": "source_document_sha256",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 21,
+        "name": "recorded_document_sha256",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 22,
+        "name": "recorded_document_identity_status",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 23,
+        "name": "decoded_document_json_pointer",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      }
+    ],
+    "row_field_names": [
+      [
+        "source_text",
+        "formula_text",
+        "view_name",
+        "producer_origin",
+        "fallback_origin",
+        "producer_record_source_id",
+        "source_span_id",
+        "legal_id",
+        "format",
+        "formula_field",
+        "formula_sha256",
+        "learned_formula_generation",
+        "reported_validation_json",
+        "independent_validation",
+        "admitted",
+        "training_qualified",
+        "source_report_path_in_repo",
+        "source_report_revision",
+        "source_report_sha256",
+        "source_receipt_sha256",
+        "source_document_sha256",
+        "recorded_document_sha256",
+        "recorded_document_identity_status",
+        "decoded_document_json_pointer"
+      ],
+      [
+        "source_text",
+        "formula_text",
+        "view_name",
+        "producer_origin",
+        "fallback_origin",
+        "producer_record_source_id",
+        "source_span_id",
+        "legal_id",
+        "format",
+        "formula_field",
+        "formula_sha256",
+        "learned_formula_generation",
+        "reported_validation_json",
+        "independent_validation",
+        "admitted",
+        "training_qualified",
+        "source_report_path_in_repo",
+        "source_report_revision",
+        "source_report_sha256",
+        "source_receipt_sha256",
+        "source_document_sha256",
+        "recorded_document_sha256",
+        "recorded_document_identity_status",
+        "decoded_document_json_pointer"
+      ],
+      [
+        "source_text",
+        "formula_text",
+        "view_name",
+        "producer_origin",
+        "fallback_origin",
+        "producer_record_source_id",
+        "source_span_id",
+        "legal_id",
+        "format",
+        "formula_field",
+        "formula_sha256",
+        "learned_formula_generation",
+        "reported_validation_json",
+        "independent_validation",
+        "admitted",
+        "training_qualified",
+        "source_report_path_in_repo",
+        "source_report_revision",
+        "source_report_sha256",
+        "source_receipt_sha256",
+        "source_document_sha256",
+        "recorded_document_sha256",
+        "recorded_document_identity_status",
+        "decoded_document_json_pointer"
+      ],
+      [
+        "source_text",
+        "formula_text",
+        "view_name",
+        "producer_origin",
+        "fallback_origin",
+        "producer_record_source_id",
+        "source_span_id",
+        "legal_id",
+        "format",
+        "formula_field",
+        "formula_sha256",
+        "learned_formula_generation",
+        "reported_validation_json",
+        "independent_validation",
+        "admitted",
+        "training_qualified",
+        "source_report_path_in_repo",
+        "source_report_revision",
+        "source_report_sha256",
+        "source_receipt_sha256",
+        "source_document_sha256",
+        "recorded_document_sha256",
+        "recorded_document_identity_status",
+        "decoded_document_json_pointer"
+      ],
+      [
+        "source_text",
+        "formula_text",
+        "view_name",
+        "producer_origin",
+        "fallback_origin",
+        "producer_record_source_id",
+        "source_span_id",
+        "legal_id",
+        "format",
+        "formula_field",
+        "formula_sha256",
+        "learned_formula_generation",
+        "reported_validation_json",
+        "independent_validation",
+        "admitted",
+        "training_qualified",
+        "source_report_path_in_repo",
+        "source_report_revision",
+        "source_report_sha256",
+        "source_receipt_sha256",
+        "source_document_sha256",
+        "recorded_document_sha256",
+        "recorded_document_identity_status",
+        "decoded_document_json_pointer"
+      ]
+    ],
+    "sample_metadata": [
+      {
+        "admitted": false,
+        "recorded_document_identity_status": "verified",
+        "long_text_field_sizes": {
+          "reported_validation_json": 300
+        }
+      },
+      {
+        "admitted": false,
+        "recorded_document_identity_status": "verified",
+        "long_text_field_sizes": {
+          "reported_validation_json": 300
+        }
+      }
+    ]
+  },
+  {
+    "dataset": "justicedao/open-us-law-span-cache",
+    "config": "default",
+    "status": 200,
+    "url": "https://datasets-server.huggingface.co/rows?dataset=justicedao%2Fopen-us-law-span-cache&config=default&split=train&offset=0&length=5",
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/open-us-law-span-cache-default-rows-preview.json",
+    "sha256": "fac9883912bc1c80146d88c2c886cc28d56e7cf5339ec5c7d5847d98889758cf",
+    "bytes": 1396,
+    "num_rows_total": 51,
+    "features": [
+      {
+        "feature_idx": 0,
+        "name": "admitted",
+        "type": {
+          "dtype": "bool",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 1,
+        "name": "documents",
+        "type": {
+          "dtype": "int64",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 2,
+        "name": "formalized",
+        "type": {
+          "dtype": "bool",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 3,
+        "name": "jurisdiction",
+        "type": {
+          "dtype": "string",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 4,
+        "name": "pending",
+        "type": {
+          "dtype": "int64",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 5,
+        "name": "sealed",
+        "type": {
+          "dtype": "int64",
+          "_type": "Value"
+        }
+      },
+      {
+        "feature_idx": 6,
+        "name": "spans",
+        "type": {
+          "dtype": "int64",
+          "_type": "Value"
+        }
+      }
+    ],
+    "row_field_names": [
+      [
+        "admitted",
+        "documents",
+        "formalized",
+        "jurisdiction",
+        "pending",
+        "sealed",
+        "spans"
+      ],
+      [
+        "admitted",
+        "documents",
+        "formalized",
+        "jurisdiction",
+        "pending",
+        "sealed",
+        "spans"
+      ],
+      [
+        "admitted",
+        "documents",
+        "formalized",
+        "jurisdiction",
+        "pending",
+        "sealed",
+        "spans"
+      ],
+      [
+        "admitted",
+        "documents",
+        "formalized",
+        "jurisdiction",
+        "pending",
+        "sealed",
+        "spans"
+      ],
+      [
+        "admitted",
+        "documents",
+        "formalized",
+        "jurisdiction",
+        "pending",
+        "sealed",
+        "spans"
+      ]
+    ],
+    "sample_metadata": [
+      {
+        "admitted": false,
+        "long_text_field_sizes": {}
+      },
+      {
+        "admitted": false,
+        "long_text_field_sizes": {}
+      }
+    ]
+  }
+]

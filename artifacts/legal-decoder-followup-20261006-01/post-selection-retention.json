@@ -1,0 +1,2864 @@
+{
+  "schema": "grouped-boundary-post-selection-retention/v1",
+  "old_panel_is_exposed": true,
+  "official_paragraphs_are_previously_exposed_and_have_no_gold": true,
+  "training_calls": 0,
+  "selection_changes": 0,
+  "legal_accuracy_claimed": false,
+  "models": {
+    "parent": {
+      "checkpoint_sha256": "efd7f7e71159592672769c7f580112917381e9a854f021a72f8de1613d299b95",
+      "steps": 480,
+      "exposed_regression": {
+        "positive_exact_count": 128,
+        "positive_count": 128,
+        "negative_learned_refusal_count": 119,
+        "negative_safe_refusal_count": 126,
+        "negative_count": 128,
+        "negative_emitted_request_count": 2,
+        "mixed_exact_count": 247,
+        "case_count": 256,
+        "mixed_exact_rate": 0.96484375,
+        "mixed_safe_exact_count": 254,
+        "support_classification_correct": 247,
+        "support_classifier_available": true,
+        "positive_false_abstention_count": 0,
+        "negative_incidental_block_count": 7
+      },
+      "real_source_probes": [
+        {
+          "source_id": "usc:us:18:3284-p0",
+          "source_sha256": "1c34d726204f427313ef3f90cfa32010e2ec2789701eb3315eaa3e6d0b03c6d6",
+          "modal_scope": "modal_over_actions",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 7,
+              "modal_scope": "modal_over_actions",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 4,
+                  "action_start": 20,
+                  "action_end": 28
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 1,
+                  "actor_end": 11,
+                  "action_start": 34,
+                  "action_end": 15
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 1,
+                  "actor_end": 4,
+                  "action_start": 21,
+                  "action_end": 23
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 38,
+                  "action_start": 21,
+                  "action_end": 28
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 1,
+                  "actor_end": 38,
+                  "action_start": 34,
+                  "action_end": 47
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 36,
+                  "actor_end": 38,
+                  "action_start": 44,
+                  "action_end": 37
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 36,
+                  "actor_end": 38,
+                  "action_start": 43,
+                  "action_end": 43
+                }
+              ],
+              "support_probability": 2.7598101951298304e-05
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 2.7598101951298304e-05,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 2.7598101951298304e-05,
+              "count": 0.7050551772117615,
+              "scope": 0.9943687319755554
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:18:3284-p0",
+          "source_sha256": "1c34d726204f427313ef3f90cfa32010e2ec2789701eb3315eaa3e6d0b03c6d6",
+          "modal_scope": "disjunction_of_norms",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 7,
+              "modal_scope": "disjunction_of_norms",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 4,
+                  "action_start": 20,
+                  "action_end": 28
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 1,
+                  "actor_end": 11,
+                  "action_start": 21,
+                  "action_end": 15
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 1,
+                  "actor_end": 4,
+                  "action_start": 21,
+                  "action_end": 23
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 38,
+                  "action_start": 21,
+                  "action_end": 28
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 1,
+                  "actor_end": 38,
+                  "action_start": 34,
+                  "action_end": 47
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 36,
+                  "actor_end": 38,
+                  "action_start": 44,
+                  "action_end": 36
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 36,
+                  "actor_end": 38,
+                  "action_start": 43,
+                  "action_end": 43
+                }
+              ],
+              "support_probability": 4.6179637138266116e-05
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 4.6179637138266116e-05,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 4.6179637138266116e-05,
+              "count": 0.4800269901752472,
+              "scope": 0.9370175004005432
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:18:3284-p9",
+          "source_sha256": "975cc82375f1e5f0a0093e04937ab57da9943b792ff5c99752757a2429169a1a",
+          "modal_scope": "modal_over_actions",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 5,
+              "modal_scope": "modal_over_actions",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 2,
+                  "action_start": 5,
+                  "action_end": 7
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 9,
+                  "actor_end": 12,
+                  "action_start": 14,
+                  "action_end": 16
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 16,
+                  "actor_end": 12,
+                  "action_start": 14,
+                  "action_end": 18
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 22,
+                  "actor_end": 24,
+                  "action_start": 29,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 22,
+                  "actor_end": 34,
+                  "action_start": 46,
+                  "action_end": 42
+                }
+              ],
+              "support_probability": 3.47413333656732e-05
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 3.47413333656732e-05,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 3.47413333656732e-05,
+              "count": 0.48025575280189514,
+              "scope": 0.9982520937919617
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:18:3284-p9",
+          "source_sha256": "975cc82375f1e5f0a0093e04937ab57da9943b792ff5c99752757a2429169a1a",
+          "modal_scope": "disjunction_of_norms",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 5,
+              "modal_scope": "disjunction_of_norms",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 2,
+                  "action_start": 5,
+                  "action_end": 7
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 9,
+                  "actor_end": 12,
+                  "action_start": 14,
+                  "action_end": 18
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 16,
+                  "actor_end": 12,
+                  "action_start": 14,
+                  "action_end": 18
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 22,
+                  "actor_end": 24,
+                  "action_start": 29,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 22,
+                  "actor_end": 34,
+                  "action_start": 46,
+                  "action_end": 34
+                }
+              ],
+              "support_probability": 3.362894494784996e-05
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 3.362894494784996e-05,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 3.362894494784996e-05,
+              "count": 0.3784530758857727,
+              "scope": 0.9388409852981567
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p9",
+          "source_sha256": "33abdd2027f8edf90ae63baf3fd8509be5b33f83a8603cbde6b42f257a98b84d",
+          "modal_scope": "modal_over_actions",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 6,
+              "modal_scope": "modal_over_actions",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 15,
+                  "action_start": 8,
+                  "action_end": 26
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 15,
+                  "action_start": 30,
+                  "action_end": 15
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 15,
+                  "action_start": 33,
+                  "action_end": 26
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 15,
+                  "action_start": 33,
+                  "action_end": 35
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 15,
+                  "action_start": 33,
+                  "action_end": 35
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 41,
+                  "actor_end": 15,
+                  "action_start": 48,
+                  "action_end": 61
+                }
+              ],
+              "support_probability": 6.2324256759893615e-06
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 6.2324256759893615e-06,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 6.2324256759893615e-06,
+              "count": 0.4242478907108307,
+              "scope": 0.9612706303596497
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p9",
+          "source_sha256": "33abdd2027f8edf90ae63baf3fd8509be5b33f83a8603cbde6b42f257a98b84d",
+          "modal_scope": "disjunction_of_norms",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 6,
+              "modal_scope": "disjunction_of_norms",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 15,
+                  "action_start": 8,
+                  "action_end": 26
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 15,
+                  "action_start": 30,
+                  "action_end": 15
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 15,
+                  "action_start": 33,
+                  "action_end": 26
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 15,
+                  "action_start": 33,
+                  "action_end": 35
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 15,
+                  "action_start": 33,
+                  "action_end": 35
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 41,
+                  "actor_end": 15,
+                  "action_start": 48,
+                  "action_end": 61
+                }
+              ],
+              "support_probability": 6.7948444666399155e-06
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 6.7948444666399155e-06,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 6.7948444666399155e-06,
+              "count": 0.35794681310653687,
+              "scope": 0.9356170892715454
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p38",
+          "source_sha256": "ab2bab157a338e59ff6cfe4448cc301a1f50a283d7e63062eb786b94f848ccbc",
+          "modal_scope": "modal_over_actions",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 6,
+              "modal_scope": "modal_over_actions",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 4,
+                  "action_start": 7,
+                  "action_end": 10
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 14,
+                  "actor_end": 26,
+                  "action_start": 32,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 14,
+                  "actor_end": 26,
+                  "action_start": 32,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 14,
+                  "actor_end": 26,
+                  "action_start": 32,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 14,
+                  "actor_end": 26,
+                  "action_start": 32,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 36,
+                  "actor_end": 46,
+                  "action_start": 46,
+                  "action_end": 57
+                }
+              ],
+              "support_probability": 1.2881991096946876e-05
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 1.2881991096946876e-05,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 1.2881991096946876e-05,
+              "count": 0.38422778248786926,
+              "scope": 0.988137423992157
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p38",
+          "source_sha256": "ab2bab157a338e59ff6cfe4448cc301a1f50a283d7e63062eb786b94f848ccbc",
+          "modal_scope": "disjunction_of_norms",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 6,
+              "modal_scope": "disjunction_of_norms",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 4,
+                  "action_start": 7,
+                  "action_end": 10
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 14,
+                  "actor_end": 16,
+                  "action_start": 32,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 14,
+                  "actor_end": 26,
+                  "action_start": 32,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 14,
+                  "actor_end": 26,
+                  "action_start": 32,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 14,
+                  "actor_end": 26,
+                  "action_start": 32,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 40,
+                  "actor_end": 46,
+                  "action_start": 46,
+                  "action_end": 57
+                }
+              ],
+              "support_probability": 1.5145822544582188e-05
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 1.5145822544582188e-05,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 1.5145822544582188e-05,
+              "count": 0.5000607967376709,
+              "scope": 0.9182997941970825
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p40",
+          "source_sha256": "09df3d9b5d04bf89930bd2b51b930fa19f36f32fe48b1a75f593ba3a56c5f59a",
+          "modal_scope": "modal_over_actions",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 4,
+              "modal_scope": "modal_over_actions",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 3,
+                  "action_start": 7,
+                  "action_end": 19
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 1,
+                  "actor_end": 3,
+                  "action_start": 17,
+                  "action_end": 26
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 3,
+                  "action_start": 17,
+                  "action_end": 26
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 19,
+                  "actor_end": 24,
+                  "action_start": 24,
+                  "action_end": 26
+                }
+              ],
+              "support_probability": 3.181313877576031e-05
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 3.181313877576031e-05,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 3.181313877576031e-05,
+              "count": 0.47890257835388184,
+              "scope": 0.9781477451324463
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p40",
+          "source_sha256": "09df3d9b5d04bf89930bd2b51b930fa19f36f32fe48b1a75f593ba3a56c5f59a",
+          "modal_scope": "disjunction_of_norms",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 4,
+              "modal_scope": "disjunction_of_norms",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 3,
+                  "action_start": 7,
+                  "action_end": 20
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 1,
+                  "actor_end": 3,
+                  "action_start": 17,
+                  "action_end": 26
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 3,
+                  "action_start": 17,
+                  "action_end": 26
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 19,
+                  "actor_end": 24,
+                  "action_start": 24,
+                  "action_end": 26
+                }
+              ],
+              "support_probability": 2.778650014079176e-05
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 2.778650014079176e-05,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 2.778650014079176e-05,
+              "count": 0.3917504549026489,
+              "scope": 0.979072630405426
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p47",
+          "source_sha256": "f8c195ca5170443da153b5785673cf20b728568ffc67deb2db696642a31d5ff3",
+          "modal_scope": "modal_over_actions",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 5,
+              "modal_scope": "modal_over_actions",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 45,
+                  "action_start": 6,
+                  "action_end": 9
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 13,
+                  "actor_end": 14,
+                  "action_start": 14,
+                  "action_end": 15
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 13,
+                  "actor_end": 14,
+                  "action_start": 17,
+                  "action_end": 20
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 26,
+                  "actor_end": 36,
+                  "action_start": 25,
+                  "action_end": 25
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 26,
+                  "actor_end": 36,
+                  "action_start": 32,
+                  "action_end": 32
+                }
+              ],
+              "support_probability": 0.0009364362922497094
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 0.0009364362922497094,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 0.0009364362922497094,
+              "count": 0.871082603931427,
+              "scope": 0.9984641075134277
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p47",
+          "source_sha256": "f8c195ca5170443da153b5785673cf20b728568ffc67deb2db696642a31d5ff3",
+          "modal_scope": "disjunction_of_norms",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 5,
+              "modal_scope": "disjunction_of_norms",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 45,
+                  "action_start": 6,
+                  "action_end": 9
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 13,
+                  "actor_end": 14,
+                  "action_start": 14,
+                  "action_end": 15
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 13,
+                  "actor_end": 14,
+                  "action_start": 17,
+                  "action_end": 20
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 26,
+                  "actor_end": 36,
+                  "action_start": 25,
+                  "action_end": 25
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 26,
+                  "actor_end": 36,
+                  "action_start": 32,
+                  "action_end": 32
+                }
+              ],
+              "support_probability": 0.00118671462405473
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 0.00118671462405473,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 0.00118671462405473,
+              "count": 0.872859001159668,
+              "scope": 0.9914728403091431
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p51",
+          "source_sha256": "f83c3516d903bc6b0522ebf9b901d4a2d99cbd7be77f60037527c5cf27ce84a5",
+          "modal_scope": "modal_over_actions",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 6,
+              "modal_scope": "modal_over_actions",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 61,
+                  "action_start": 63,
+                  "action_end": 6
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 23,
+                  "actor_end": 16,
+                  "action_start": 11,
+                  "action_end": 15
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 23,
+                  "actor_end": 16,
+                  "action_start": 24,
+                  "action_end": 24
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 23,
+                  "actor_end": 24,
+                  "action_start": 31,
+                  "action_end": 33
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 23,
+                  "actor_end": 24,
+                  "action_start": 33,
+                  "action_end": 33
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 35,
+                  "actor_end": 61,
+                  "action_start": 63,
+                  "action_end": 50
+                }
+              ],
+              "support_probability": 0.0019440053729340434
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 0.0019440053729340434,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 0.0019440053729340434,
+              "count": 0.8014015555381775,
+              "scope": 0.999890923500061
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p51",
+          "source_sha256": "f83c3516d903bc6b0522ebf9b901d4a2d99cbd7be77f60037527c5cf27ce84a5",
+          "modal_scope": "disjunction_of_norms",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 6,
+              "modal_scope": "disjunction_of_norms",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 61,
+                  "action_start": 6,
+                  "action_end": 6
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 16,
+                  "action_start": 11,
+                  "action_end": 15
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 16,
+                  "action_start": 24,
+                  "action_end": 24
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 23,
+                  "actor_end": 24,
+                  "action_start": 31,
+                  "action_end": 24
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 23,
+                  "actor_end": 24,
+                  "action_start": 33,
+                  "action_end": 33
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 35,
+                  "actor_end": 61,
+                  "action_start": 44,
+                  "action_end": 50
+                }
+              ],
+              "support_probability": 0.0013734970707446337
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 0.0013734970707446337,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 0.0013734970707446337,
+              "count": 0.9235348105430603,
+              "scope": 0.9974457025527954
+            }
+          }
+        }
+      ],
+      "real_source_requests_emitted": 0,
+      "real_source_learned_refusals": 14,
+      "source_semantics_verified": false
+    },
+    "original_negatives": {
+      "checkpoint_sha256": "402dca5fde0a32612a99b2ba4b3f4082cda5b7737bc44f948e20d3d733808be6",
+      "steps": 580,
+      "exposed_regression": {
+        "positive_exact_count": 128,
+        "positive_count": 128,
+        "negative_learned_refusal_count": 124,
+        "negative_safe_refusal_count": 127,
+        "negative_count": 128,
+        "negative_emitted_request_count": 1,
+        "mixed_exact_count": 252,
+        "case_count": 256,
+        "mixed_exact_rate": 0.984375,
+        "mixed_safe_exact_count": 255,
+        "support_classification_correct": 252,
+        "support_classifier_available": true,
+        "positive_false_abstention_count": 0,
+        "negative_incidental_block_count": 3
+      },
+      "real_source_probes": [
+        {
+          "source_id": "usc:us:18:3284-p0",
+          "source_sha256": "1c34d726204f427313ef3f90cfa32010e2ec2789701eb3315eaa3e6d0b03c6d6",
+          "modal_scope": "modal_over_actions",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 7,
+              "modal_scope": "modal_over_actions",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 4,
+                  "action_start": 20,
+                  "action_end": 28
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 1,
+                  "actor_end": 11,
+                  "action_start": 34,
+                  "action_end": 15
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 1,
+                  "actor_end": 4,
+                  "action_start": 21,
+                  "action_end": 23
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 38,
+                  "action_start": 21,
+                  "action_end": 28
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 1,
+                  "actor_end": 38,
+                  "action_start": 34,
+                  "action_end": 47
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 36,
+                  "actor_end": 38,
+                  "action_start": 44,
+                  "action_end": 36
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 36,
+                  "actor_end": 38,
+                  "action_start": 43,
+                  "action_end": 43
+                }
+              ],
+              "support_probability": 1.9055523807764985e-05
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 1.9055523807764985e-05,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 1.9055523807764985e-05,
+              "count": 0.6588470935821533,
+              "scope": 0.9937048554420471
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:18:3284-p0",
+          "source_sha256": "1c34d726204f427313ef3f90cfa32010e2ec2789701eb3315eaa3e6d0b03c6d6",
+          "modal_scope": "disjunction_of_norms",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 6,
+              "modal_scope": "disjunction_of_norms",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 4,
+                  "action_start": 20,
+                  "action_end": 28
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 1,
+                  "actor_end": 11,
+                  "action_start": 21,
+                  "action_end": 15
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 1,
+                  "actor_end": 11,
+                  "action_start": 21,
+                  "action_end": 23
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 38,
+                  "action_start": 21,
+                  "action_end": 28
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 1,
+                  "actor_end": 38,
+                  "action_start": 34,
+                  "action_end": 47
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 36,
+                  "actor_end": 38,
+                  "action_start": 44,
+                  "action_end": 36
+                }
+              ],
+              "support_probability": 2.8483422283898108e-05
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 2.8483422283898108e-05,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 2.8483422283898108e-05,
+              "count": 0.5093616843223572,
+              "scope": 0.9144505858421326
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:18:3284-p9",
+          "source_sha256": "975cc82375f1e5f0a0093e04937ab57da9943b792ff5c99752757a2429169a1a",
+          "modal_scope": "modal_over_actions",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 5,
+              "modal_scope": "modal_over_actions",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 2,
+                  "action_start": 5,
+                  "action_end": 7
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 9,
+                  "actor_end": 12,
+                  "action_start": 14,
+                  "action_end": 16
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 9,
+                  "actor_end": 12,
+                  "action_start": 14,
+                  "action_end": 16
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 22,
+                  "actor_end": 34,
+                  "action_start": 29,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 22,
+                  "actor_end": 34,
+                  "action_start": 46,
+                  "action_end": 42
+                }
+              ],
+              "support_probability": 1.5794395949342288e-05
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 1.5794395949342288e-05,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 1.5794395949342288e-05,
+              "count": 0.3876153826713562,
+              "scope": 0.9962181448936462
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:18:3284-p9",
+          "source_sha256": "975cc82375f1e5f0a0093e04937ab57da9943b792ff5c99752757a2429169a1a",
+          "modal_scope": "disjunction_of_norms",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 2,
+              "modal_scope": "disjunction_of_norms",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 2,
+                  "action_start": 5,
+                  "action_end": 7
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 9,
+                  "actor_end": 12,
+                  "action_start": 14,
+                  "action_end": 16
+                }
+              ],
+              "support_probability": 1.6254982256214134e-05
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 1.6254982256214134e-05,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 1.6254982256214134e-05,
+              "count": 0.46164649724960327,
+              "scope": 0.9208688735961914
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p9",
+          "source_sha256": "33abdd2027f8edf90ae63baf3fd8509be5b33f83a8603cbde6b42f257a98b84d",
+          "modal_scope": "modal_over_actions",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 6,
+              "modal_scope": "modal_over_actions",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 15,
+                  "action_start": 59,
+                  "action_end": 26
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 15,
+                  "action_start": 30,
+                  "action_end": 15
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 15,
+                  "action_start": 33,
+                  "action_end": 26
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 15,
+                  "action_start": 33,
+                  "action_end": 35
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 15,
+                  "action_start": 33,
+                  "action_end": 35
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 41,
+                  "actor_end": 15,
+                  "action_start": 48,
+                  "action_end": 61
+                }
+              ],
+              "support_probability": 4.673584044212475e-06
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 4.673584044212475e-06,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 4.673584044212475e-06,
+              "count": 0.37115249037742615,
+              "scope": 0.9441958665847778
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p9",
+          "source_sha256": "33abdd2027f8edf90ae63baf3fd8509be5b33f83a8603cbde6b42f257a98b84d",
+          "modal_scope": "disjunction_of_norms",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 6,
+              "modal_scope": "disjunction_of_norms",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 15,
+                  "action_start": 59,
+                  "action_end": 26
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 15,
+                  "action_start": 30,
+                  "action_end": 15
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 15,
+                  "action_start": 33,
+                  "action_end": 26
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 15,
+                  "action_start": 33,
+                  "action_end": 35
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 15,
+                  "action_start": 33,
+                  "action_end": 35
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 41,
+                  "actor_end": 15,
+                  "action_start": 48,
+                  "action_end": 61
+                }
+              ],
+              "support_probability": 4.894394805887714e-06
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 4.894394805887714e-06,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 4.894394805887714e-06,
+              "count": 0.29763704538345337,
+              "scope": 0.9256641268730164
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p38",
+          "source_sha256": "ab2bab157a338e59ff6cfe4448cc301a1f50a283d7e63062eb786b94f848ccbc",
+          "modal_scope": "modal_over_actions",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 6,
+              "modal_scope": "modal_over_actions",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 4,
+                  "action_start": 7,
+                  "action_end": 10
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 14,
+                  "actor_end": 26,
+                  "action_start": 32,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 14,
+                  "actor_end": 26,
+                  "action_start": 32,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 14,
+                  "actor_end": 26,
+                  "action_start": 32,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 14,
+                  "actor_end": 26,
+                  "action_start": 32,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 40,
+                  "actor_end": 46,
+                  "action_start": 46,
+                  "action_end": 57
+                }
+              ],
+              "support_probability": 7.119853307813173e-06
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 7.119853307813173e-06,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 7.119853307813173e-06,
+              "count": 0.3977430760860443,
+              "scope": 0.9824878573417664
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p38",
+          "source_sha256": "ab2bab157a338e59ff6cfe4448cc301a1f50a283d7e63062eb786b94f848ccbc",
+          "modal_scope": "disjunction_of_norms",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 6,
+              "modal_scope": "disjunction_of_norms",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 4,
+                  "action_start": 7,
+                  "action_end": 10
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 14,
+                  "actor_end": 26,
+                  "action_start": 32,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 14,
+                  "actor_end": 26,
+                  "action_start": 32,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 14,
+                  "actor_end": 26,
+                  "action_start": 32,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 14,
+                  "actor_end": 26,
+                  "action_start": 32,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 40,
+                  "actor_end": 46,
+                  "action_start": 46,
+                  "action_end": 57
+                }
+              ],
+              "support_probability": 7.73375722928904e-06
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 7.73375722928904e-06,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 7.73375722928904e-06,
+              "count": 0.47335371375083923,
+              "scope": 0.8816425204277039
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p40",
+          "source_sha256": "09df3d9b5d04bf89930bd2b51b930fa19f36f32fe48b1a75f593ba3a56c5f59a",
+          "modal_scope": "modal_over_actions",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 4,
+              "modal_scope": "modal_over_actions",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 3,
+                  "action_start": 7,
+                  "action_end": 19
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 1,
+                  "actor_end": 3,
+                  "action_start": 17,
+                  "action_end": 26
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 3,
+                  "action_start": 17,
+                  "action_end": 26
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 19,
+                  "actor_end": 24,
+                  "action_start": 24,
+                  "action_end": 26
+                }
+              ],
+              "support_probability": 1.2378764040477108e-05
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 1.2378764040477108e-05,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 1.2378764040477108e-05,
+              "count": 0.34755203127861023,
+              "scope": 0.9383620619773865
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p40",
+          "source_sha256": "09df3d9b5d04bf89930bd2b51b930fa19f36f32fe48b1a75f593ba3a56c5f59a",
+          "modal_scope": "disjunction_of_norms",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 4,
+              "modal_scope": "disjunction_of_norms",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 3,
+                  "action_start": 7,
+                  "action_end": 19
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 1,
+                  "actor_end": 3,
+                  "action_start": 17,
+                  "action_end": 26
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 3,
+                  "action_start": 17,
+                  "action_end": 26
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 19,
+                  "actor_end": 24,
+                  "action_start": 24,
+                  "action_end": 26
+                }
+              ],
+              "support_probability": 1.14301901703584e-05
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 1.14301901703584e-05,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 1.14301901703584e-05,
+              "count": 0.29112038016319275,
+              "scope": 0.9661185145378113
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p47",
+          "source_sha256": "f8c195ca5170443da153b5785673cf20b728568ffc67deb2db696642a31d5ff3",
+          "modal_scope": "modal_over_actions",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 5,
+              "modal_scope": "modal_over_actions",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 45,
+                  "action_start": 6,
+                  "action_end": 9
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 13,
+                  "actor_end": 14,
+                  "action_start": 14,
+                  "action_end": 15
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 13,
+                  "actor_end": 14,
+                  "action_start": 17,
+                  "action_end": 19
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 28,
+                  "actor_end": 36,
+                  "action_start": 25,
+                  "action_end": 25
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 34,
+                  "actor_end": 36,
+                  "action_start": 32,
+                  "action_end": 32
+                }
+              ],
+              "support_probability": 0.00027368878363631666
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 0.00027368878363631666,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 0.00027368878363631666,
+              "count": 0.8343254327774048,
+              "scope": 0.9974581599235535
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p47",
+          "source_sha256": "f8c195ca5170443da153b5785673cf20b728568ffc67deb2db696642a31d5ff3",
+          "modal_scope": "disjunction_of_norms",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 5,
+              "modal_scope": "disjunction_of_norms",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 45,
+                  "action_start": 6,
+                  "action_end": 9
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 13,
+                  "actor_end": 14,
+                  "action_start": 14,
+                  "action_end": 15
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 13,
+                  "actor_end": 14,
+                  "action_start": 17,
+                  "action_end": 19
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 26,
+                  "actor_end": 36,
+                  "action_start": 25,
+                  "action_end": 25
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 28,
+                  "actor_end": 36,
+                  "action_start": 32,
+                  "action_end": 32
+                }
+              ],
+              "support_probability": 0.00038019957719370723
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 0.00038019957719370723,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 0.00038019957719370723,
+              "count": 0.8454517126083374,
+              "scope": 0.9832483530044556
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p51",
+          "source_sha256": "f83c3516d903bc6b0522ebf9b901d4a2d99cbd7be77f60037527c5cf27ce84a5",
+          "modal_scope": "modal_over_actions",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 6,
+              "modal_scope": "modal_over_actions",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 61,
+                  "action_start": 6,
+                  "action_end": 6
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 16,
+                  "action_start": 11,
+                  "action_end": 15
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 23,
+                  "actor_end": 16,
+                  "action_start": 24,
+                  "action_end": 24
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 23,
+                  "actor_end": 24,
+                  "action_start": 31,
+                  "action_end": 33
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 23,
+                  "actor_end": 24,
+                  "action_start": 63,
+                  "action_end": 33
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 35,
+                  "actor_end": 61,
+                  "action_start": 63,
+                  "action_end": 50
+                }
+              ],
+              "support_probability": 0.00017921344260685146
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 0.00017921344260685146,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 0.00017921344260685146,
+              "count": 0.7921713590621948,
+              "scope": 0.9996482133865356
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p51",
+          "source_sha256": "f83c3516d903bc6b0522ebf9b901d4a2d99cbd7be77f60037527c5cf27ce84a5",
+          "modal_scope": "disjunction_of_norms",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 6,
+              "modal_scope": "disjunction_of_norms",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 61,
+                  "action_start": 6,
+                  "action_end": 6
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 16,
+                  "action_start": 11,
+                  "action_end": 15
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 16,
+                  "action_start": 24,
+                  "action_end": 24
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 23,
+                  "actor_end": 24,
+                  "action_start": 31,
+                  "action_end": 33
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 23,
+                  "actor_end": 24,
+                  "action_start": 63,
+                  "action_end": 33
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 35,
+                  "actor_end": 61,
+                  "action_start": 63,
+                  "action_end": 50
+                }
+              ],
+              "support_probability": 0.00017205187759827822
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 0.00017205187759827822,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 0.00017205187759827822,
+              "count": 0.9200417995452881,
+              "scope": 0.9932639598846436
+            }
+          }
+        }
+      ],
+      "real_source_requests_emitted": 0,
+      "real_source_learned_refusals": 14,
+      "source_semantics_verified": false
+    },
+    "position_local_negatives": {
+      "checkpoint_sha256": "0174d11019a0a4eb894337f7f3d79a9dec7a2e11b0e406832d27312cee05daba",
+      "steps": 680,
+      "exposed_regression": {
+        "positive_exact_count": 128,
+        "positive_count": 128,
+        "negative_learned_refusal_count": 128,
+        "negative_safe_refusal_count": 128,
+        "negative_count": 128,
+        "negative_emitted_request_count": 0,
+        "mixed_exact_count": 256,
+        "case_count": 256,
+        "mixed_exact_rate": 1.0,
+        "mixed_safe_exact_count": 256,
+        "support_classification_correct": 256,
+        "support_classifier_available": true,
+        "positive_false_abstention_count": 0,
+        "negative_incidental_block_count": 0
+      },
+      "real_source_probes": [
+        {
+          "source_id": "usc:us:18:3284-p0",
+          "source_sha256": "1c34d726204f427313ef3f90cfa32010e2ec2789701eb3315eaa3e6d0b03c6d6",
+          "modal_scope": "modal_over_actions",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 7,
+              "modal_scope": "modal_over_actions",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 38,
+                  "action_start": 21,
+                  "action_end": 28
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 1,
+                  "actor_end": 11,
+                  "action_start": 34,
+                  "action_end": 15
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 1,
+                  "actor_end": 11,
+                  "action_start": 21,
+                  "action_end": 23
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 38,
+                  "action_start": 34,
+                  "action_end": 28
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 1,
+                  "actor_end": 38,
+                  "action_start": 34,
+                  "action_end": 47
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 36,
+                  "actor_end": 38,
+                  "action_start": 50,
+                  "action_end": 36
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 36,
+                  "actor_end": 38,
+                  "action_start": 43,
+                  "action_end": 43
+                }
+              ],
+              "support_probability": 1.4431691852223594e-05
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 1.4431691852223594e-05,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 1.4431691852223594e-05,
+              "count": 0.5659953951835632,
+              "scope": 0.9932899475097656
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:18:3284-p0",
+          "source_sha256": "1c34d726204f427313ef3f90cfa32010e2ec2789701eb3315eaa3e6d0b03c6d6",
+          "modal_scope": "disjunction_of_norms",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 6,
+              "modal_scope": "disjunction_of_norms",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 4,
+                  "action_start": 21,
+                  "action_end": 28
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 1,
+                  "actor_end": 11,
+                  "action_start": 14,
+                  "action_end": 15
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 1,
+                  "actor_end": 11,
+                  "action_start": 20,
+                  "action_end": 23
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 38,
+                  "action_start": 21,
+                  "action_end": 28
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 1,
+                  "actor_end": 38,
+                  "action_start": 34,
+                  "action_end": 47
+                },
+                {
+                  "modality": "F",
+                  "actor_start": 36,
+                  "actor_end": 38,
+                  "action_start": 50,
+                  "action_end": 36
+                }
+              ],
+              "support_probability": 1.733252065605484e-05
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 1.733252065605484e-05,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 1.733252065605484e-05,
+              "count": 0.5603481531143188,
+              "scope": 0.8766462802886963
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:18:3284-p9",
+          "source_sha256": "975cc82375f1e5f0a0093e04937ab57da9943b792ff5c99752757a2429169a1a",
+          "modal_scope": "modal_over_actions",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 2,
+              "modal_scope": "modal_over_actions",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 2,
+                  "action_start": 5,
+                  "action_end": 7
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 78,
+                  "actor_end": 12,
+                  "action_start": 14,
+                  "action_end": 16
+                }
+              ],
+              "support_probability": 9.796506674319971e-06
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 9.796506674319971e-06,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 9.796506674319971e-06,
+              "count": 0.5250717401504517,
+              "scope": 0.989738404750824
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:18:3284-p9",
+          "source_sha256": "975cc82375f1e5f0a0093e04937ab57da9943b792ff5c99752757a2429169a1a",
+          "modal_scope": "disjunction_of_norms",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 2,
+              "modal_scope": "disjunction_of_norms",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 2,
+                  "action_start": 5,
+                  "action_end": 7
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 78,
+                  "actor_end": 12,
+                  "action_start": 14,
+                  "action_end": 16
+                }
+              ],
+              "support_probability": 1.1164997886226047e-05
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 1.1164997886226047e-05,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 1.1164997886226047e-05,
+              "count": 0.5878857970237732,
+              "scope": 0.916232705116272
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p9",
+          "source_sha256": "33abdd2027f8edf90ae63baf3fd8509be5b33f83a8603cbde6b42f257a98b84d",
+          "modal_scope": "modal_over_actions",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 2,
+              "modal_scope": "modal_over_actions",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 15,
+                  "action_start": 59,
+                  "action_end": 10
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 15,
+                  "action_start": 30,
+                  "action_end": 62
+                }
+              ],
+              "support_probability": 4.860197805101052e-06
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 4.860197805101052e-06,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 4.860197805101052e-06,
+              "count": 0.3402673900127411,
+              "scope": 0.9164310097694397
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p9",
+          "source_sha256": "33abdd2027f8edf90ae63baf3fd8509be5b33f83a8603cbde6b42f257a98b84d",
+          "modal_scope": "disjunction_of_norms",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 2,
+              "modal_scope": "disjunction_of_norms",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 15,
+                  "action_start": 59,
+                  "action_end": 10
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 15,
+                  "action_start": 30,
+                  "action_end": 62
+                }
+              ],
+              "support_probability": 5.035831236455124e-06
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 5.035831236455124e-06,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 5.035831236455124e-06,
+              "count": 0.3022101819515228,
+              "scope": 0.9094657301902771
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p38",
+          "source_sha256": "ab2bab157a338e59ff6cfe4448cc301a1f50a283d7e63062eb786b94f848ccbc",
+          "modal_scope": "modal_over_actions",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 6,
+              "modal_scope": "modal_over_actions",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 4,
+                  "action_start": 7,
+                  "action_end": 10
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 14,
+                  "actor_end": 26,
+                  "action_start": 32,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 14,
+                  "actor_end": 26,
+                  "action_start": 32,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 26,
+                  "action_start": 32,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 25,
+                  "actor_end": 26,
+                  "action_start": 32,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 36,
+                  "actor_end": 46,
+                  "action_start": 55,
+                  "action_end": 57
+                }
+              ],
+              "support_probability": 6.892158125992864e-06
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 6.892158125992864e-06,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 6.892158125992864e-06,
+              "count": 0.4370356500148773,
+              "scope": 0.9780307412147522
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p38",
+          "source_sha256": "ab2bab157a338e59ff6cfe4448cc301a1f50a283d7e63062eb786b94f848ccbc",
+          "modal_scope": "disjunction_of_norms",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 6,
+              "modal_scope": "disjunction_of_norms",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 4,
+                  "action_start": 7,
+                  "action_end": 10
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 14,
+                  "actor_end": 4,
+                  "action_start": 32,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 14,
+                  "actor_end": 26,
+                  "action_start": 32,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 26,
+                  "action_start": 32,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 26,
+                  "action_start": 32,
+                  "action_end": 34
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 36,
+                  "actor_end": 46,
+                  "action_start": 55,
+                  "action_end": 57
+                }
+              ],
+              "support_probability": 7.643299795745406e-06
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 7.643299795745406e-06,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 7.643299795745406e-06,
+              "count": 0.5168688297271729,
+              "scope": 0.8457387685775757
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p40",
+          "source_sha256": "09df3d9b5d04bf89930bd2b51b930fa19f36f32fe48b1a75f593ba3a56c5f59a",
+          "modal_scope": "modal_over_actions",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 2,
+              "modal_scope": "modal_over_actions",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 3,
+                  "action_start": 17,
+                  "action_end": 19
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 3,
+                  "action_start": 17,
+                  "action_end": 26
+                }
+              ],
+              "support_probability": 8.306686140713282e-06
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 8.306686140713282e-06,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 8.306686140713282e-06,
+              "count": 0.3601628541946411,
+              "scope": 0.8651596903800964
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p40",
+          "source_sha256": "09df3d9b5d04bf89930bd2b51b930fa19f36f32fe48b1a75f593ba3a56c5f59a",
+          "modal_scope": "disjunction_of_norms",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 2,
+              "modal_scope": "disjunction_of_norms",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 3,
+                  "action_start": 17,
+                  "action_end": 19
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 3,
+                  "action_start": 17,
+                  "action_end": 26
+                }
+              ],
+              "support_probability": 8.44880923978053e-06
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 8.44880923978053e-06,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 8.44880923978053e-06,
+              "count": 0.32234665751457214,
+              "scope": 0.9579210877418518
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p47",
+          "source_sha256": "f8c195ca5170443da153b5785673cf20b728568ffc67deb2db696642a31d5ff3",
+          "modal_scope": "modal_over_actions",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 5,
+              "modal_scope": "modal_over_actions",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 45,
+                  "action_start": 6,
+                  "action_end": 9
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 13,
+                  "actor_end": 14,
+                  "action_start": 14,
+                  "action_end": 18
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 13,
+                  "actor_end": 14,
+                  "action_start": 17,
+                  "action_end": 20
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 28,
+                  "actor_end": 45,
+                  "action_start": 25,
+                  "action_end": 25
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 28,
+                  "actor_end": 45,
+                  "action_start": 32,
+                  "action_end": 32
+                }
+              ],
+              "support_probability": 5.329997657099739e-05
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 5.329997657099739e-05,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 5.329997657099739e-05,
+              "count": 0.7309525012969971,
+              "scope": 0.9921980500221252
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p47",
+          "source_sha256": "f8c195ca5170443da153b5785673cf20b728568ffc67deb2db696642a31d5ff3",
+          "modal_scope": "disjunction_of_norms",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 5,
+              "modal_scope": "disjunction_of_norms",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 45,
+                  "action_start": 6,
+                  "action_end": 9
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 13,
+                  "actor_end": 14,
+                  "action_start": 14,
+                  "action_end": 18
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 13,
+                  "actor_end": 14,
+                  "action_start": 17,
+                  "action_end": 20
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 28,
+                  "actor_end": 45,
+                  "action_start": 25,
+                  "action_end": 25
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 28,
+                  "actor_end": 45,
+                  "action_start": 32,
+                  "action_end": 32
+                }
+              ],
+              "support_probability": 6.819643749622628e-05
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 6.819643749622628e-05,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 6.819643749622628e-05,
+              "count": 0.7847619652748108,
+              "scope": 0.9508626461029053
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p51",
+          "source_sha256": "f83c3516d903bc6b0522ebf9b901d4a2d99cbd7be77f60037527c5cf27ce84a5",
+          "modal_scope": "modal_over_actions",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 6,
+              "modal_scope": "modal_over_actions",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 61,
+                  "action_start": 59,
+                  "action_end": 6
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 16,
+                  "action_start": 11,
+                  "action_end": 15
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 16,
+                  "action_start": 23,
+                  "action_end": 24
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 23,
+                  "actor_end": 24,
+                  "action_start": 33,
+                  "action_end": 33
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 23,
+                  "actor_end": 31,
+                  "action_start": 63,
+                  "action_end": 33
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 35,
+                  "actor_end": 38,
+                  "action_start": 63,
+                  "action_end": 50
+                }
+              ],
+              "support_probability": 3.3946191251743585e-05
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 3.3946191251743585e-05,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 3.3946191251743585e-05,
+              "count": 0.6832020878791809,
+              "scope": 0.9983417987823486
+            }
+          }
+        },
+        {
+          "source_id": "usc:us:10:4873-p51",
+          "source_sha256": "f83c3516d903bc6b0522ebf9b901d4a2d99cbd7be77f60037527c5cf27ce84a5",
+          "modal_scope": "disjunction_of_norms",
+          "prediction": {
+            "schema": "legal-grouped-span-decoder-prediction/v2",
+            "status": "abstained",
+            "request": null,
+            "blockers": [
+              "learned_source_unsupported"
+            ],
+            "raw_prediction": {
+              "count": 6,
+              "modal_scope": "disjunction_of_norms",
+              "members": [
+                {
+                  "modality": "P",
+                  "actor_start": 1,
+                  "actor_end": 61,
+                  "action_start": 59,
+                  "action_end": 6
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 16,
+                  "action_start": 11,
+                  "action_end": 15
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 10,
+                  "actor_end": 16,
+                  "action_start": 23,
+                  "action_end": 24
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 23,
+                  "actor_end": 24,
+                  "action_start": 31,
+                  "action_end": 33
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 23,
+                  "actor_end": 24,
+                  "action_start": 63,
+                  "action_end": 33
+                },
+                {
+                  "modality": "P",
+                  "actor_start": 35,
+                  "actor_end": 38,
+                  "action_start": 63,
+                  "action_end": 50
+                }
+              ],
+              "support_probability": 3.4868055081460625e-05
+            },
+            "source_semantics_verified": false,
+            "proof_ready": false,
+            "model_accuracy_claimed": false,
+            "targets_used_at_inference": false,
+            "support_probability": 3.4868055081460625e-05,
+            "support_threshold": 0.5,
+            "confidence": {
+              "support": 3.4868055081460625e-05,
+              "count": 0.7388761639595032,
+              "scope": 0.9827086329460144
+            }
+          }
+        }
+      ],
+      "real_source_requests_emitted": 0,
+      "real_source_learned_refusals": 14,
+      "source_semantics_verified": false
+    }
+  }
+}

@@ -1,0 +1,547 @@
+{
+  "schema": "grouped-boundary-checkpoint-replay-native/v1",
+  "status": "passed",
+  "runner": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/verify_checkpoints_and_native.py",
+    "sha256": "d46bfa6fe1cfaf9d4bd8fe0f3cbba72c0e2c4371212c1629e9ba86fde8e43d2e",
+    "bytes": 4942
+  },
+  "reused_builder": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-grouped-head-v2-20261006/audit_checkpoint_native.py",
+    "sha256": "7404580b1b7f6bdb05b85eef0958a67fec81c991aa2ab5a7a7435cee2cebaee1",
+    "bytes": 16172
+  },
+  "producer_pins": {
+    "implementation_sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8",
+    "semantic_decoder_sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f",
+    "torch_version": "2.13.0+cu130",
+    "tokenizer_profile": "unicode_word_or_punctuation_utf8_offsets/v1",
+    "byte_encoder_profile": "masked_two_conv3_gelu_mean_max/v2"
+  },
+  "models": {
+    "original_negatives": {
+      "predictions_exact": 128,
+      "optimizer_steps_verified": 580,
+      "checkpoint_exact_resave": true,
+      "checkpoint": {
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/runs/original_negatives/checkpoint-100.json",
+        "sha256": "402dca5fde0a32612a99b2ba4b3f4082cda5b7737bc44f948e20d3d733808be6",
+        "bytes": 30527596
+      }
+    },
+    "position_local_negatives": {
+      "predictions_exact": 128,
+      "optimizer_steps_verified": 680,
+      "checkpoint_exact_resave": true,
+      "checkpoint": {
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/runs/position_local_negatives/checkpoint-200.json",
+        "sha256": "0174d11019a0a4eb894337f7f3d79a9dec7a2e11b0e406832d27312cee05daba",
+        "bytes": 30517520
+      }
+    }
+  },
+  "exact_fresh_prediction_replays": 256,
+  "native_generated_cases": [
+    {
+      "case_id": "fresh-boundary-084a5eb679c94eada6bfa7afc226832283e84c1e6e671a5f7624760304c88bef-modal_over_actions",
+      "input": {
+        "source_text": "The Fuscous Tabletwarden is permitted to emboss the vellum or the Fuscous Tabletwarden may tint the intaglio or is permitted to fold the cyanotype or the Fuscous Tabletwarden may trim the watermark or is permitted to bind the woodcut or the Fuscous Tabletwarden may perforate the parchment or is permitted to etch the etching or the Fuscous Tabletwarden may staple the linocut.",
+        "modal_scope": "modal_over_actions"
+      },
+      "prediction": {
+        "schema": "legal-grouped-span-decoder-prediction/v2",
+        "status": "predicted",
+        "request": {
+          "schema": "legal-coordination-decode-request/v1",
+          "modal_scope": "modal_over_actions",
+          "connective": "inclusive_or",
+          "binding_profile": "universal_actor_predicate",
+          "members": [
+            {
+              "actor": "fuscous tabletwarden",
+              "modality": "P",
+              "action": "emboss the vellum"
+            },
+            {
+              "actor": "fuscous tabletwarden",
+              "modality": "P",
+              "action": "tint the intaglio"
+            },
+            {
+              "actor": "fuscous tabletwarden",
+              "modality": "P",
+              "action": "fold the cyanotype"
+            },
+            {
+              "actor": "fuscous tabletwarden",
+              "modality": "P",
+              "action": "trim the watermark"
+            },
+            {
+              "actor": "fuscous tabletwarden",
+              "modality": "P",
+              "action": "bind the woodcut"
+            },
+            {
+              "actor": "fuscous tabletwarden",
+              "modality": "P",
+              "action": "perforate the parchment"
+            },
+            {
+              "actor": "fuscous tabletwarden",
+              "modality": "P",
+              "action": "etch the etching"
+            },
+            {
+              "actor": "fuscous tabletwarden",
+              "modality": "P",
+              "action": "staple the linocut"
+            }
+          ]
+        },
+        "blockers": [],
+        "raw_prediction": {
+          "count": 8,
+          "modal_scope": "modal_over_actions",
+          "members": [
+            {
+              "modality": "P",
+              "actor_start": 1,
+              "actor_end": 2,
+              "action_start": 6,
+              "action_end": 8
+            },
+            {
+              "modality": "P",
+              "actor_start": 11,
+              "actor_end": 12,
+              "action_start": 14,
+              "action_end": 16
+            },
+            {
+              "modality": "P",
+              "actor_start": 11,
+              "actor_end": 12,
+              "action_start": 21,
+              "action_end": 23
+            },
+            {
+              "modality": "P",
+              "actor_start": 26,
+              "actor_end": 27,
+              "action_start": 29,
+              "action_end": 31
+            },
+            {
+              "modality": "P",
+              "actor_start": 26,
+              "actor_end": 27,
+              "action_start": 36,
+              "action_end": 38
+            },
+            {
+              "modality": "P",
+              "actor_start": 41,
+              "actor_end": 42,
+              "action_start": 44,
+              "action_end": 46
+            },
+            {
+              "modality": "P",
+              "actor_start": 41,
+              "actor_end": 42,
+              "action_start": 51,
+              "action_end": 53
+            },
+            {
+              "modality": "P",
+              "actor_start": 56,
+              "actor_end": 57,
+              "action_start": 59,
+              "action_end": 61
+            }
+          ],
+          "support_probability": 0.7572275996208191
+        },
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "model_accuracy_claimed": false,
+        "targets_used_at_inference": false,
+        "support_probability": 0.7572275996208191,
+        "support_threshold": 0.5,
+        "confidence": {
+          "support": 0.7572275996208191,
+          "count": 0.9851271510124207,
+          "scope": 0.9997050166130066
+        },
+        "predicted_character_spans": [
+          {
+            "actor": [
+              4,
+              24
+            ],
+            "action": [
+              41,
+              58
+            ]
+          },
+          {
+            "actor": [
+              66,
+              86
+            ],
+            "action": [
+              91,
+              108
+            ]
+          },
+          {
+            "actor": [
+              66,
+              86
+            ],
+            "action": [
+              128,
+              146
+            ]
+          },
+          {
+            "actor": [
+              154,
+              174
+            ],
+            "action": [
+              179,
+              197
+            ]
+          },
+          {
+            "actor": [
+              154,
+              174
+            ],
+            "action": [
+              217,
+              233
+            ]
+          },
+          {
+            "actor": [
+              241,
+              261
+            ],
+            "action": [
+              266,
+              289
+            ]
+          },
+          {
+            "actor": [
+              241,
+              261
+            ],
+            "action": [
+              309,
+              325
+            ]
+          },
+          {
+            "actor": [
+              333,
+              353
+            ],
+            "action": [
+              358,
+              376
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "fresh-boundary-084a5eb679c94eada6bfa7afc226832283e84c1e6e671a5f7624760304c88bef-disjunction_of_norms",
+      "input": {
+        "source_text": "The Fuscous Tabletwarden is permitted to emboss the vellum or the Fuscous Tabletwarden may tint the intaglio or is permitted to fold the cyanotype or the Fuscous Tabletwarden may trim the watermark or is permitted to bind the woodcut or the Fuscous Tabletwarden may perforate the parchment or is permitted to etch the etching or the Fuscous Tabletwarden may staple the linocut.",
+        "modal_scope": "disjunction_of_norms"
+      },
+      "prediction": {
+        "schema": "legal-grouped-span-decoder-prediction/v2",
+        "status": "predicted",
+        "request": {
+          "schema": "legal-coordination-decode-request/v1",
+          "modal_scope": "disjunction_of_norms",
+          "connective": "inclusive_or",
+          "binding_profile": "universal_actor_predicate",
+          "members": [
+            {
+              "actor": "fuscous tabletwarden",
+              "modality": "P",
+              "action": "emboss the vellum"
+            },
+            {
+              "actor": "fuscous tabletwarden",
+              "modality": "P",
+              "action": "tint the intaglio"
+            },
+            {
+              "actor": "fuscous tabletwarden",
+              "modality": "P",
+              "action": "fold the cyanotype"
+            },
+            {
+              "actor": "fuscous tabletwarden",
+              "modality": "P",
+              "action": "trim the watermark"
+            },
+            {
+              "actor": "fuscous tabletwarden",
+              "modality": "P",
+              "action": "bind the woodcut"
+            },
+            {
+              "actor": "fuscous tabletwarden",
+              "modality": "P",
+              "action": "perforate the parchment"
+            },
+            {
+              "actor": "fuscous tabletwarden",
+              "modality": "P",
+              "action": "etch the etching"
+            },
+            {
+              "actor": "fuscous tabletwarden",
+              "modality": "P",
+              "action": "staple the linocut"
+            }
+          ]
+        },
+        "blockers": [],
+        "raw_prediction": {
+          "count": 8,
+          "modal_scope": "disjunction_of_norms",
+          "members": [
+            {
+              "modality": "P",
+              "actor_start": 1,
+              "actor_end": 2,
+              "action_start": 6,
+              "action_end": 8
+            },
+            {
+              "modality": "P",
+              "actor_start": 11,
+              "actor_end": 12,
+              "action_start": 14,
+              "action_end": 16
+            },
+            {
+              "modality": "P",
+              "actor_start": 11,
+              "actor_end": 12,
+              "action_start": 21,
+              "action_end": 23
+            },
+            {
+              "modality": "P",
+              "actor_start": 26,
+              "actor_end": 27,
+              "action_start": 29,
+              "action_end": 31
+            },
+            {
+              "modality": "P",
+              "actor_start": 26,
+              "actor_end": 27,
+              "action_start": 36,
+              "action_end": 38
+            },
+            {
+              "modality": "P",
+              "actor_start": 41,
+              "actor_end": 42,
+              "action_start": 44,
+              "action_end": 46
+            },
+            {
+              "modality": "P",
+              "actor_start": 41,
+              "actor_end": 42,
+              "action_start": 51,
+              "action_end": 53
+            },
+            {
+              "modality": "P",
+              "actor_start": 56,
+              "actor_end": 57,
+              "action_start": 59,
+              "action_end": 61
+            }
+          ],
+          "support_probability": 0.8249545693397522
+        },
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "model_accuracy_claimed": false,
+        "targets_used_at_inference": false,
+        "support_probability": 0.8249545693397522,
+        "support_threshold": 0.5,
+        "confidence": {
+          "support": 0.8249545693397522,
+          "count": 0.9886052012443542,
+          "scope": 0.9995895028114319
+        },
+        "predicted_character_spans": [
+          {
+            "actor": [
+              4,
+              24
+            ],
+            "action": [
+              41,
+              58
+            ]
+          },
+          {
+            "actor": [
+              66,
+              86
+            ],
+            "action": [
+              91,
+              108
+            ]
+          },
+          {
+            "actor": [
+              66,
+              86
+            ],
+            "action": [
+              128,
+              146
+            ]
+          },
+          {
+            "actor": [
+              154,
+              174
+            ],
+            "action": [
+              179,
+              197
+            ]
+          },
+          {
+            "actor": [
+              154,
+              174
+            ],
+            "action": [
+              217,
+              233
+            ]
+          },
+          {
+            "actor": [
+              241,
+              261
+            ],
+            "action": [
+              266,
+              289
+            ]
+          },
+          {
+            "actor": [
+              241,
+              261
+            ],
+            "action": [
+              309,
+              325
+            ]
+          },
+          {
+            "actor": [
+              333,
+              353
+            ],
+            "action": [
+              358,
+              376
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "positive_build": {
+    "command": [
+      "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+      "build",
+      "legal"
+    ],
+    "cwd": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/native-positive",
+    "returncode": 0,
+    "files": [
+      {
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/native-positive/lakefile.toml",
+        "sha256": "e318caef4066ec583ce301d066b4832683020bc44758d758957d372132e71b86",
+        "bytes": 120
+      },
+      {
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/native-positive/PredictionWitness.lean",
+        "sha256": "45cf984abcb19ab5e9d4fa7da96211cfa74735aca6855a8a17dc779c2071991a",
+        "bytes": 7079
+      },
+      {
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/native-positive/stdout.txt",
+        "sha256": "f7e34dc32313f2774cf13589c28ab4241d2035dce75d9a3c443cedc286707468",
+        "bytes": 80
+      },
+      {
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/native-positive/stderr.txt",
+        "sha256": "3b5f4a445ccac11fa853be6cfc3e20de40ee3a8559f7242fe102c822f531a9b4",
+        "bytes": 150
+      }
+    ]
+  },
+  "false_scope_build": {
+    "command": [
+      "/home/barberb/.elan/toolchains/leanprover--lean4---v4.26.0/bin/lake",
+      "build",
+      "legal"
+    ],
+    "cwd": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/native-negative",
+    "returncode": 1,
+    "files": [
+      {
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/native-negative/lakefile.toml",
+        "sha256": "e318caef4066ec583ce301d066b4832683020bc44758d758957d372132e71b86",
+        "bytes": 120
+      },
+      {
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/native-negative/PredictionWitness.lean",
+        "sha256": "086382bfdb2431872ef064e9221ee869b8d792abb4d6014a1d8599826157ff80",
+        "bytes": 7162
+      },
+      {
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/native-negative/stdout.txt",
+        "sha256": "c00b676c29a69fb08fca3379775feacdeda27f8cc14167e8e8b0a276920e5729",
+        "bytes": 1043
+      },
+      {
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/native-negative/stderr.txt",
+        "sha256": "9dac5f672b2ddbcf6bbe6f6bb2a5da6245b1f650c2717dfedb4b240344331b9a",
+        "bytes": 170
+      }
+    ]
+  },
+  "actual_lake_build_legal_passed": true,
+  "false_scope_claim_rejected": true,
+  "native_scope": "Constructed two-world witness from actual eight-member selection outputs.",
+  "legal_meaning_verified": false,
+  "global_proof_admission": false,
+  "training_calls": 0,
+  "selection_changes": 0
+}

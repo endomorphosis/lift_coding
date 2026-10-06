@@ -1,0 +1,448 @@
+{
+  "schema": "matched-grouped-boundary-continuation-results/v1",
+  "status": "completed",
+  "plan": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/experiment-plan.json",
+    "bytes": 2516,
+    "sha256": "1c7e3639c512d8661fb961a0bb1271bcfc81cbc9b447c8eb1335e763a410651e"
+  },
+  "runner": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/run_boundary_experiment.py",
+    "bytes": 10305,
+    "sha256": "a1f3a902fa4e83e4d0acca1f62512cd61baab08171fb711380cc3c01d3604534"
+  },
+  "producer_pins": {
+    "implementation_sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8",
+    "semantic_decoder_sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f",
+    "torch_version": "2.13.0+cu130",
+    "tokenizer_profile": "unicode_word_or_punctuation_utf8_offsets/v1",
+    "byte_encoder_profile": "masked_two_conv3_gelu_mean_max/v2"
+  },
+  "barrier": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/both-selections-durable-before-final.json",
+    "bytes": 13088,
+    "sha256": "2f21ecc754b42c0aed731b9abf2980190456fe3b168b84055bc0bb285f1a87f6"
+  },
+  "arms": {
+    "original_negatives": {
+      "selected": {
+        "additional_updates": 100,
+        "optimizer_steps": 580,
+        "summary": {
+          "positive_exact_count": 56,
+          "positive_count": 64,
+          "negative_learned_refusal_count": 22,
+          "negative_safe_refusal_count": 37,
+          "negative_count": 64,
+          "negative_emitted_request_count": 27,
+          "mixed_exact_count": 78,
+          "case_count": 128,
+          "mixed_exact_rate": 0.609375,
+          "mixed_safe_exact_count": 93,
+          "support_classification_correct": 85,
+          "support_classifier_available": true,
+          "positive_false_abstention_count": 1,
+          "negative_incidental_block_count": 15
+        },
+        "checkpoint": {
+          "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/runs/original_negatives/checkpoint-100.json",
+          "bytes": 30527596,
+          "sha256": "402dca5fde0a32612a99b2ba4b3f4082cda5b7737bc44f948e20d3d733808be6"
+        },
+        "evaluation": {
+          "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/runs/original_negatives/selection-100.json",
+          "bytes": 630780,
+          "sha256": "70ef9961476b2d09cade671402cb1b1c03974b601d9e367c2bc03430922543ef"
+        }
+      },
+      "selection_checkpoints": [
+        {
+          "additional_updates": 0,
+          "optimizer_steps": 480,
+          "summary": {
+            "positive_exact_count": 56,
+            "positive_count": 64,
+            "negative_learned_refusal_count": 15,
+            "negative_safe_refusal_count": 32,
+            "negative_count": 64,
+            "negative_emitted_request_count": 32,
+            "mixed_exact_count": 71,
+            "case_count": 128,
+            "mixed_exact_rate": 0.5546875,
+            "mixed_safe_exact_count": 88,
+            "support_classification_correct": 78,
+            "support_classifier_available": true,
+            "positive_false_abstention_count": 1,
+            "negative_incidental_block_count": 17
+          },
+          "checkpoint": {
+            "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/runs/original_negatives/checkpoint-0.json",
+            "bytes": 30519316,
+            "sha256": "800857bb4a4656f185fabb3eb28f029751ce3e8949de371594b7646895dab8b6"
+          },
+          "evaluation": {
+            "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/runs/original_negatives/selection-0.json",
+            "bytes": 644654,
+            "sha256": "fb163dfd364f4c57bdc9f91feefdd9e1a49b963ead5ecef9a6df2ef5c042cfe5"
+          }
+        },
+        {
+          "additional_updates": 100,
+          "optimizer_steps": 580,
+          "summary": {
+            "positive_exact_count": 56,
+            "positive_count": 64,
+            "negative_learned_refusal_count": 22,
+            "negative_safe_refusal_count": 37,
+            "negative_count": 64,
+            "negative_emitted_request_count": 27,
+            "mixed_exact_count": 78,
+            "case_count": 128,
+            "mixed_exact_rate": 0.609375,
+            "mixed_safe_exact_count": 93,
+            "support_classification_correct": 85,
+            "support_classifier_available": true,
+            "positive_false_abstention_count": 1,
+            "negative_incidental_block_count": 15
+          },
+          "checkpoint": {
+            "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/runs/original_negatives/checkpoint-100.json",
+            "bytes": 30527596,
+            "sha256": "402dca5fde0a32612a99b2ba4b3f4082cda5b7737bc44f948e20d3d733808be6"
+          },
+          "evaluation": {
+            "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/runs/original_negatives/selection-100.json",
+            "bytes": 630780,
+            "sha256": "70ef9961476b2d09cade671402cb1b1c03974b601d9e367c2bc03430922543ef"
+          }
+        },
+        {
+          "additional_updates": 200,
+          "optimizer_steps": 680,
+          "summary": {
+            "positive_exact_count": 57,
+            "positive_count": 64,
+            "negative_learned_refusal_count": 21,
+            "negative_safe_refusal_count": 34,
+            "negative_count": 64,
+            "negative_emitted_request_count": 30,
+            "mixed_exact_count": 78,
+            "case_count": 128,
+            "mixed_exact_rate": 0.609375,
+            "mixed_safe_exact_count": 91,
+            "support_classification_correct": 84,
+            "support_classifier_available": true,
+            "positive_false_abstention_count": 1,
+            "negative_incidental_block_count": 13
+          },
+          "checkpoint": {
+            "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/runs/original_negatives/checkpoint-200.json",
+            "bytes": 30529249,
+            "sha256": "acd96d058975962901af9fdd55528d935ca23705a126185b9ef83ca2bec3c93d"
+          },
+          "evaluation": {
+            "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/runs/original_negatives/selection-200.json",
+            "bytes": 634742,
+            "sha256": "2ce528e7cad021043d8a689db992797a99c9d1083b5ea57108b4806cb3f3a05d"
+          }
+        }
+      ],
+      "completed_updates": 200,
+      "row_presentations": {
+        "positive": 1600,
+        "qualified": 329,
+        "single_duty": 324,
+        "missing_modal": 318,
+        "permuted_modal": 316,
+        "mixed_coordination": 313
+      },
+      "optimizer_parent_steps": 480,
+      "schedule": {
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/training-schedule.json",
+        "bytes": 72121,
+        "sha256": "5f4902550d14db7a6387b5ea5e80820cc9ccc9f050d9b05b059377204c1e29c4"
+      },
+      "fresh_final": {
+        "positive_exact_count": 56,
+        "positive_count": 64,
+        "negative_learned_refusal_count": 21,
+        "negative_safe_refusal_count": 41,
+        "negative_count": 64,
+        "negative_emitted_request_count": 23,
+        "mixed_exact_count": 77,
+        "case_count": 128,
+        "mixed_exact_rate": 0.6015625,
+        "mixed_safe_exact_count": 97,
+        "support_classification_correct": 85,
+        "support_classifier_available": true,
+        "positive_false_abstention_count": 0,
+        "negative_incidental_block_count": 20
+      },
+      "negative_categories": {
+        "missing_modal_local": {
+          "case_count": 32,
+          "learned_refusal_count": 14,
+          "safe_refusal_count": 24
+        },
+        "misspelled_modal_local": {
+          "case_count": 32,
+          "learned_refusal_count": 7,
+          "safe_refusal_count": 17
+        }
+      },
+      "fresh_final_source_spans": {
+        "counting_unit": "all supported whole ordered examples, including blocked/abstained predictions",
+        "case_count": 64,
+        "measure_counts": {
+          "member_count_exact": 58,
+          "caller_scope_exact": 64,
+          "actor_spans_exact": 56,
+          "action_spans_exact": 58,
+          "ordered_modalities_exact": 58,
+          "all_source_spans_exact": 56
+        },
+        "measure_rates": {
+          "member_count_exact": 0.90625,
+          "caller_scope_exact": 1.0,
+          "actor_spans_exact": 0.875,
+          "action_spans_exact": 0.90625,
+          "ordered_modalities_exact": 0.90625,
+          "all_source_spans_exact": 0.875
+        },
+        "slot_counts": {
+          "actor_exact": 305,
+          "action_exact": 305,
+          "modality_exact": 307,
+          "denominator": 313
+        },
+        "slot_denominator": "sum max(expected_count,predicted_count); unmatched slots count wrong"
+      }
+    },
+    "position_local_negatives": {
+      "selected": {
+        "additional_updates": 200,
+        "optimizer_steps": 680,
+        "summary": {
+          "positive_exact_count": 54,
+          "positive_count": 64,
+          "negative_learned_refusal_count": 58,
+          "negative_safe_refusal_count": 61,
+          "negative_count": 64,
+          "negative_emitted_request_count": 3,
+          "mixed_exact_count": 112,
+          "case_count": 128,
+          "mixed_exact_rate": 0.875,
+          "mixed_safe_exact_count": 115,
+          "support_classification_correct": 118,
+          "support_classifier_available": true,
+          "positive_false_abstention_count": 4,
+          "negative_incidental_block_count": 3
+        },
+        "checkpoint": {
+          "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/runs/position_local_negatives/checkpoint-200.json",
+          "bytes": 30517520,
+          "sha256": "0174d11019a0a4eb894337f7f3d79a9dec7a2e11b0e406832d27312cee05daba"
+        },
+        "evaluation": {
+          "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/runs/position_local_negatives/selection-200.json",
+          "bytes": 578762,
+          "sha256": "c32b4d62ff3b3963a3ff0507b9cf9999bdf6f19d39eb8f9b41c66862a2aefc7b"
+        }
+      },
+      "selection_checkpoints": [
+        {
+          "additional_updates": 0,
+          "optimizer_steps": 480,
+          "summary": {
+            "positive_exact_count": 56,
+            "positive_count": 64,
+            "negative_learned_refusal_count": 15,
+            "negative_safe_refusal_count": 32,
+            "negative_count": 64,
+            "negative_emitted_request_count": 32,
+            "mixed_exact_count": 71,
+            "case_count": 128,
+            "mixed_exact_rate": 0.5546875,
+            "mixed_safe_exact_count": 88,
+            "support_classification_correct": 78,
+            "support_classifier_available": true,
+            "positive_false_abstention_count": 1,
+            "negative_incidental_block_count": 17
+          },
+          "checkpoint": {
+            "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/runs/position_local_negatives/checkpoint-0.json",
+            "bytes": 30519316,
+            "sha256": "800857bb4a4656f185fabb3eb28f029751ce3e8949de371594b7646895dab8b6"
+          },
+          "evaluation": {
+            "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/runs/position_local_negatives/selection-0.json",
+            "bytes": 644654,
+            "sha256": "fb163dfd364f4c57bdc9f91feefdd9e1a49b963ead5ecef9a6df2ef5c042cfe5"
+          }
+        },
+        {
+          "additional_updates": 100,
+          "optimizer_steps": 580,
+          "summary": {
+            "positive_exact_count": 55,
+            "positive_count": 64,
+            "negative_learned_refusal_count": 56,
+            "negative_safe_refusal_count": 60,
+            "negative_count": 64,
+            "negative_emitted_request_count": 4,
+            "mixed_exact_count": 111,
+            "case_count": 128,
+            "mixed_exact_rate": 0.8671875,
+            "mixed_safe_exact_count": 115,
+            "support_classification_correct": 118,
+            "support_classifier_available": true,
+            "positive_false_abstention_count": 2,
+            "negative_incidental_block_count": 4
+          },
+          "checkpoint": {
+            "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/runs/position_local_negatives/checkpoint-100.json",
+            "bytes": 30513858,
+            "sha256": "a84db18ae549e67993515a9680cef422854e23a654e9810b0e3ae3773fff611e"
+          },
+          "evaluation": {
+            "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/runs/position_local_negatives/selection-100.json",
+            "bytes": 584595,
+            "sha256": "6e3ba998ca56c1d8abf90d7eccb18b14a9a01e11bdca76273fc2bdee884d600e"
+          }
+        },
+        {
+          "additional_updates": 200,
+          "optimizer_steps": 680,
+          "summary": {
+            "positive_exact_count": 54,
+            "positive_count": 64,
+            "negative_learned_refusal_count": 58,
+            "negative_safe_refusal_count": 61,
+            "negative_count": 64,
+            "negative_emitted_request_count": 3,
+            "mixed_exact_count": 112,
+            "case_count": 128,
+            "mixed_exact_rate": 0.875,
+            "mixed_safe_exact_count": 115,
+            "support_classification_correct": 118,
+            "support_classifier_available": true,
+            "positive_false_abstention_count": 4,
+            "negative_incidental_block_count": 3
+          },
+          "checkpoint": {
+            "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/runs/position_local_negatives/checkpoint-200.json",
+            "bytes": 30517520,
+            "sha256": "0174d11019a0a4eb894337f7f3d79a9dec7a2e11b0e406832d27312cee05daba"
+          },
+          "evaluation": {
+            "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/runs/position_local_negatives/selection-200.json",
+            "bytes": 578762,
+            "sha256": "c32b4d62ff3b3963a3ff0507b9cf9999bdf6f19d39eb8f9b41c66862a2aefc7b"
+          }
+        }
+      ],
+      "completed_updates": 200,
+      "row_presentations": {
+        "positive": 1600,
+        "qualified": 170,
+        "single_duty": 170,
+        "missing_modal": 142,
+        "missing_modal_local": 399,
+        "misspelled_modal_local": 401,
+        "permuted_modal": 162,
+        "mixed_coordination": 156
+      },
+      "optimizer_parent_steps": 480,
+      "schedule": {
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/training-schedule.json",
+        "bytes": 72121,
+        "sha256": "5f4902550d14db7a6387b5ea5e80820cc9ccc9f050d9b05b059377204c1e29c4"
+      },
+      "fresh_final": {
+        "positive_exact_count": 55,
+        "positive_count": 64,
+        "negative_learned_refusal_count": 54,
+        "negative_safe_refusal_count": 57,
+        "negative_count": 64,
+        "negative_emitted_request_count": 7,
+        "mixed_exact_count": 109,
+        "case_count": 128,
+        "mixed_exact_rate": 0.8515625,
+        "mixed_safe_exact_count": 112,
+        "support_classification_correct": 116,
+        "support_classifier_available": true,
+        "positive_false_abstention_count": 2,
+        "negative_incidental_block_count": 3
+      },
+      "negative_categories": {
+        "missing_modal_local": {
+          "case_count": 32,
+          "learned_refusal_count": 30,
+          "safe_refusal_count": 32
+        },
+        "misspelled_modal_local": {
+          "case_count": 32,
+          "learned_refusal_count": 24,
+          "safe_refusal_count": 25
+        }
+      },
+      "fresh_final_source_spans": {
+        "counting_unit": "all supported whole ordered examples, including blocked/abstained predictions",
+        "case_count": 64,
+        "measure_counts": {
+          "member_count_exact": 58,
+          "caller_scope_exact": 64,
+          "actor_spans_exact": 56,
+          "action_spans_exact": 58,
+          "ordered_modalities_exact": 58,
+          "all_source_spans_exact": 56
+        },
+        "measure_rates": {
+          "member_count_exact": 0.90625,
+          "caller_scope_exact": 1.0,
+          "actor_spans_exact": 0.875,
+          "action_spans_exact": 0.90625,
+          "ordered_modalities_exact": 0.90625,
+          "all_source_spans_exact": 0.875
+        },
+        "slot_counts": {
+          "actor_exact": 302,
+          "action_exact": 302,
+          "modality_exact": 304,
+          "denominator": 311
+        },
+        "slot_denominator": "sum max(expected_count,predicted_count); unmatched slots count wrong"
+      }
+    }
+  },
+  "parent_fresh_final": {
+    "positive_exact_count": 55,
+    "positive_count": 64,
+    "negative_learned_refusal_count": 16,
+    "negative_safe_refusal_count": 39,
+    "negative_count": 64,
+    "negative_emitted_request_count": 25,
+    "mixed_exact_count": 71,
+    "case_count": 128,
+    "mixed_exact_rate": 0.5546875,
+    "mixed_safe_exact_count": 94,
+    "support_classification_correct": 80,
+    "support_classifier_available": true,
+    "positive_false_abstention_count": 0,
+    "negative_incidental_block_count": 23
+  },
+  "actual_optimizer_updates": 400,
+  "additional_row_presentations": 6400,
+  "fresh_final_reference_used_for_tuning": false,
+  "support_threshold": 0.5,
+  "architecture_or_decoder_changed": false,
+  "latent_conditioned": false,
+  "legal_gold": false,
+  "source_semantics_verified": false,
+  "proof_ready": false,
+  "existing_default_weights_changed": false,
+  "wall_seconds": 108.2355848979787,
+  "device": "cpu",
+  "threads": 2,
+  "cuda_initialized": false
+}
