@@ -80,6 +80,18 @@ recorded alongside this report. Existing locked/dirty worktrees, canonical
 branches and indexes remain preserved; all contribution edits occur in two
 fresh main-based candidates.
 
+The datasets contribution is merged in [PR #1271](https://github.com/endomorphosis/ipfs_datasets_py/pull/1271),
+commit `0f36163a585a9bf514c41d8eabe202936c000705`. Its merge preserves a concurrent
+13-path contextual input-provenance correction from another agent. That correction
+reports paragraph vectors as caller-pinned bytes with no authenticated saved
+paragraph-vector producer, and exposes the input contract in the runtime description.
+All 102 project modules imported during the grouped replay remain byte-identical.
+A final [actual merged-main check](../../artifacts/autoencoder-consolidation-20261006-02/merged-main-validation.json)
+passes all 407 retained cases plus eleven contextual runtime cases: 418 passed,
+no failures, errors or skips. The workspace datasets pin records this combined
+commit. GitHub CodeQL did not start because of an account billing lock; hosted
+CI is not recorded as passing.
+
 ## Interpretation and next training priorities
 
 The selected v2 has 64/64 exact authored positive outputs on a fresh final set
