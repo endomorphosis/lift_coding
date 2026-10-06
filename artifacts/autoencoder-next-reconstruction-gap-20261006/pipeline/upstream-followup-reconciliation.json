@@ -1,0 +1,41 @@
+{
+  "architectures_and_cohorts_kept_separate": true,
+  "authored_compact_resource_pending_marker": "historical author-time metadata; completed independent reviews are bound by evidence index",
+  "datasets_parent": "1c1f91c8010ce058243734f143587e92fab2f0a2",
+  "existing_direct_qualifier_owners_changed": false,
+  "findings": [],
+  "grouped_boundary_reported_final": {
+    "control_exact_positives": 56,
+    "control_learned_refusals": 21,
+    "positive_total": 64,
+    "targeted_exact_positives": 55,
+    "targeted_learned_refusals": 54,
+    "targeted_unsupported_requests_emitted": 7,
+    "unsupported_total": 64
+  },
+  "new_inference_or_training_execution": false,
+  "new_occurrence_proposal_admission_masks_zero": true,
+  "new_qualification_granted": false,
+  "new_source_transport_untrained": true,
+  "new_work_inherited_from_current_main": true,
+  "passed": true,
+  "primary_git_blobs": [
+    {
+      "bytes": 7804,
+      "commit": "1c1f91c8010ce058243734f143587e92fab2f0a2",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py",
+      "repository": "datasets",
+      "sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65"
+    },
+    {
+      "bytes": 5743,
+      "commit": "1c1f91c8010ce058243734f143587e92fab2f0a2",
+      "path": "docs/autoencoders/grouped_support_boundary_training.md",
+      "repository": "datasets",
+      "sha256": "0ec8f1dec05890e5733c890cb48e23a7943095cd1461b54894669ecbcdc61bc9"
+    }
+  ],
+  "schema": "latest-agent-followup-reconciliation/v1",
+  "unavailable_context_remains_ineligible": true,
+  "workspace_parent": "2d4f840583ffe916d416f101e4a570a5d4856e37"
+}

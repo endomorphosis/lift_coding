@@ -1,0 +1,492 @@
+{
+  "archive": {
+    "bytes": 8815502,
+    "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/reconstruction-gap-evidence.tar.gz",
+    "sha256": "b46e285619c42946ee3d33f409b6d335c4a33bb84a98252474e2b77033d036a7"
+  },
+  "entries": [
+    {
+      "bytes": 5287,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/diagnosis/README.md",
+      "sha256": "17b00eef6c2fc400c5144c3e5f3e6678eb431c4e9c2c7ff856eb674cc775f8c3"
+    },
+    {
+      "bytes": 5036856,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/diagnosis/all-reference-sites.jsonl",
+      "sha256": "0a78d3ff6be5d021c1f024a03111aed88374a69091f1b6d35093eed15a8d5d06"
+    },
+    {
+      "bytes": 30731,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/diagnosis/diagnose_retention.py",
+      "sha256": "e014d175c44436f26cfe7a625d580c73f945ef081a13beedfa6328604738102a"
+    },
+    {
+      "bytes": 924,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/diagnosis/diagnosis-plan.json",
+      "sha256": "16d5dcc7c6620788003d25d8beda30cc44f6c55bb9770140128d7ed714067eb0"
+    },
+    {
+      "bytes": 3050,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/diagnosis/diagnosis-readiness.json",
+      "sha256": "db1df25879d089dbf01cc31dad6f2659fa45998ccd57aceaed5593de98af5edf"
+    },
+    {
+      "bytes": 487540,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/diagnosis/numeric-diagnosis.json",
+      "sha256": "cebe2566589be995b422cb2b44cd13f9c051cdf1f3004a9fdcce129247b978e8"
+    },
+    {
+      "bytes": 1072,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/diagnosis/pure-tests-receipt.json",
+      "sha256": "430ec99ab7cfadc88e5800af1c124b3ffe3e4993505a3b2ffc1d7fbd9c921f23"
+    },
+    {
+      "bytes": 2539,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/diagnosis/pure-tests.log",
+      "sha256": "b902bc44ae7e2a8802dd98dd9b40330e999fcbc350c5648af9a21c89469cd841"
+    },
+    {
+      "bytes": 6257,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/diagnosis/tests/test_numeric_diagnosis.py",
+      "sha256": "c62d0be72d7413623fd124ba2562f05f978f5e80243961b4e2fcc289f9c6cbe5"
+    },
+    {
+      "bytes": 932,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/guardian/guardian-adaptation.diff",
+      "sha256": "9ad64cc8f1888c2a8c6742da1349f07b264268899adad3f68589ad02f18d86e5"
+    },
+    {
+      "bytes": 364241,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/guardian/guardian-execution-readiness.json",
+      "sha256": "93e3bafab5a41f37b0bd0fe60c73066a61286784894a3096e245eab5cc7a3824"
+    },
+    {
+      "bytes": 2331,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/guardian/guardian-freeze.json",
+      "sha256": "86813db77436925d6da334936c8ec75b1d9bbe382ac9ff6bbe6fc9e2bf28e449"
+    },
+    {
+      "bytes": 359091,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/guardian/independent-input-hash-review.json",
+      "sha256": "3bdb1467a2299bc51a68c903ab2a8489c030da62ce488cb80e12a774204dbf81"
+    },
+    {
+      "bytes": 366176,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/guardian/postrun-input-nonmutation.json",
+      "sha256": "669adebc3b4f6ca7b2e7a45734607b5eb524b22fffb83fc45a07cbcfb8787620"
+    },
+    {
+      "bytes": 1502,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/guardian/proposal-copy-receipt.json",
+      "sha256": "ad33fcb16780114c43ea17b4d686344d7fac0e30a80814c202123a0493f88df0"
+    },
+    {
+      "bytes": 377767,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/guardian/terminal-resource-independent-review.json",
+      "sha256": "8b5bffd7e9c15cdecebc91448b08265ec1811dfe41aeb3e0b4db2822b95ebebf"
+    },
+    {
+      "bytes": 2132,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/qualifier-review/implementation-freeze.json",
+      "sha256": "dc05931b1043baab454936892fe8df9c6e38188652c7bcb536c402bd8928b17a"
+    },
+    {
+      "bytes": 3148,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/qualifier-review/implementation-validation-r1.json",
+      "sha256": "393b55407925f243f7ca98f3b83cd115641382da633a811c79b0e77566b33764"
+    },
+    {
+      "bytes": 3644,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/qualifier-review/implementation-validation.json",
+      "sha256": "4a194ba451bbf57da93a366a0ebad3f56accaaaa86ab2a2441c43f4c6cb287d7"
+    },
+    {
+      "bytes": 24518,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/qualifier-review/independent-preflight-review.json",
+      "sha256": "64037f6102c34c4e28c7080877b6a704320f5166dfa74478064afab5a3dab0e5"
+    },
+    {
+      "bytes": 5828,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/qualifier-review/preflight-tests-final.xml",
+      "sha256": "54ab20ee556f7fe50fe6dc638bb0c9cf891e9076a72d679f028baf50404615b0"
+    },
+    {
+      "bytes": 6748,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/qualifier-review/preflight-tests-freeze.xml",
+      "sha256": "c559cfa6530e33977deb8f9640a3dbcf8366697742410a97c24ec37d4bfa49bd"
+    },
+    {
+      "bytes": 4927,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/qualifier-review/preflight-tests-r1.xml",
+      "sha256": "b74f955d68f3cdd17b4ca5ce8a92c7c49bf15f17cc794b81cfffd10af6b8c6d0"
+    },
+    {
+      "bytes": 5283,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/qualifier-review/preflight-tests-r2.xml",
+      "sha256": "b05405f615407da96b5e996b3041b17e1a1b9ae0971973a0ed6e0ecff4693419"
+    },
+    {
+      "bytes": 5828,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/qualifier-review/preflight-tests-r3.xml",
+      "sha256": "7b9abfc33c4cc4a32a5875101f8f8e2818e3e337a8c3a029e23ef75624ba66df"
+    },
+    {
+      "bytes": 302,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/qualifier-review/pytest-cache/README.md",
+      "sha256": "73fd6fccdd802c419a6b2d983d6c3173b7da97558ac4b589edec2dfe443db9ad"
+    },
+    {
+      "bytes": 49090,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/qualifier-review/qualifier-review-initial.json",
+      "sha256": "4c2eed66b602eb1b4a00d75f17f00784e5c9bc541b92a5a44fe9bfb9e84f372e"
+    },
+    {
+      "bytes": 49593,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/qualifier-review/qualifier-review.json",
+      "sha256": "5d209855b3e5eb347aae4db3f2ca42e33aeaace6877a2586ba841309bc7af99c"
+    },
+    {
+      "bytes": 5547,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/qualifier-review/qualifier-review.md",
+      "sha256": "b76f6458f7886b189061ee50f538e1cad8f561f4dffbc380802eea38f9adcb92"
+    },
+    {
+      "bytes": 17968,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/qualifier-review/source-pins.json",
+      "sha256": "0250cfa99a0d2884fb630c4e0e652d092cb0eb98a5fc5685eaf45263d54b0f3e"
+    },
+    {
+      "bytes": 4364,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/retain_evidence.py",
+      "sha256": "cd335997a97b45d4ee8122e0811381d13d827be3902ae8c092db48f27e4c60a4"
+    },
+    {
+      "bytes": 4021,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/train-observation/README.md",
+      "sha256": "e610f43dcaaae70641a1490d3c26d48cf5ee9778940bd799a68f12eae3c9f9d7"
+    },
+    {
+      "bytes": 127488,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/train-observation/actual-result-independent-review.json",
+      "sha256": "c1d7eac80cbe52bbbe7b265f8d024dc7636116ed9a8348ea387cc1ee145dceb5"
+    },
+    {
+      "bytes": 24839,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/train-observation/audit_actual_training_observation.py",
+      "sha256": "cf5110adaac56ebcfed2dd8a8aa7d841a9c1020024931f83555727694ad61aa9"
+    },
+    {
+      "bytes": 38137,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/train-observation/experiment-source/scripts/ops/autoencoder/observe_normative_training_readouts.py",
+      "sha256": "8e26fa314a29ff749c7189db3f9f68ccbb3a0ab66696681ef346449835fbbaca"
+    },
+    {
+      "bytes": 342423,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/train-observation/independent-input-hash-review.json",
+      "sha256": "1c188a9951efc44170eb284fac30d9a13968cba838c471c089a5927adecb0f90"
+    },
+    {
+      "bytes": 2885,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/train-observation/independent-pure-contract-tests.log",
+      "sha256": "acf2fa00c8a4e28b61bf5a1a5b61555d599c520861589615040283b5eab6c719"
+    },
+    {
+      "bytes": 1252,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/train-observation/independent-pure-contract-validation.json",
+      "sha256": "393cc13a61ac6d79f8728d1c500dca72badd86e65c9e8b3742d16bad3a9b72b6"
+    },
+    {
+      "bytes": 353053,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/train-observation/independent-runner-readiness.json",
+      "sha256": "e15162b010a641db2a06cc68ba117141d9ab5135929537464784c6eacb929b25"
+    },
+    {
+      "bytes": 361947,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/train-observation/independent-runner-review.json",
+      "sha256": "81cc5251f67ce9ebe1b6302f22d0edbcb03eb257ef4187bf67fef6875f3300f6"
+    },
+    {
+      "bytes": 298697,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/train-observation/observation-manifest.json",
+      "sha256": "6396b6a64f44a36aa429f54be77e12d4275bc4b990c53592e0ab88687484a582"
+    },
+    {
+      "bytes": 289799,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/train-observation/observation-plan.json",
+      "sha256": "d2ac586f2f144e737e736d3ab49e594c917dafc745be57a41c3bf1611257a8a0"
+    },
+    {
+      "bytes": 25531,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/train-observation/prepare_proposal.py",
+      "sha256": "fe60e8ae7fd21c22ba91c3c7cde0f8a5c255192b1d79b0417c5be275bde1d280"
+    },
+    {
+      "bytes": 1298,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/train-observation/proposal-receipt.json",
+      "sha256": "68ef356462a6418f6c6c942e72f70e970f05fa4bf43e417f7152cbdedeea757b"
+    },
+    {
+      "bytes": 2405,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/train-observation/pure-contract-tests.log",
+      "sha256": "8d94b28291e817438f12ab67a1dc033b7c2ffa041b0d6b308dee4d64ec056c01"
+    },
+    {
+      "bytes": 1132,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/train-observation/pure-contract-validation.json",
+      "sha256": "5d015f74001d36b0b43f8a1533a6eec1319907a7e3b581fc68ad2012a76321a1"
+    },
+    {
+      "bytes": 17667,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/train-observation/pure_contract_tests.py",
+      "sha256": "addb721042bacb100bd9f52bf06ae16056c6cd38a9bd9b436fcd372f6773fb4e"
+    },
+    {
+      "bytes": 33490,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/train-observation/runner-adaptation.diff",
+      "sha256": "5ef0903d2fedee6b9a8cd45ae06b4481575553cbea8287fc081572be52375fdd"
+    },
+    {
+      "bytes": 3305,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/train-observation/source-freeze.json",
+      "sha256": "68307b0646c5cc4966159b79496e6aa5aa0355776b1a8f3672c372c358959c8f"
+    },
+    {
+      "bytes": 58737,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/training-review/proposal.json",
+      "sha256": "6d68c0d0cdd56523908b6fdb3bec01e7104c35de5ce7c37d21c7abd98d87bf1b"
+    },
+    {
+      "bytes": 5356,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/training-review/proposal.md",
+      "sha256": "08d927386f6320f20d7ab45c066a727f84b486628531bc43df6fea37ce56bed7"
+    },
+    {
+      "bytes": 31218,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/training-review/source-margin-summary.json",
+      "sha256": "9af38f019688501cf86da89c27b0be38f626545b80cff6ee7b5b8e226fc5e80a"
+    },
+    {
+      "bytes": 11206,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/adopt_shared_scheduler.py",
+      "sha256": "4956baa1e41abe53fc83a2d4ae7709b3be13ebc1c775b44571a33903b8f70b1f"
+    },
+    {
+      "bytes": 298697,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/evaluation-manifest.json",
+      "sha256": "6396b6a64f44a36aa429f54be77e12d4275bc4b990c53592e0ab88687484a582"
+    },
+    {
+      "bytes": 289799,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/evaluation-plan.json",
+      "sha256": "d2ac586f2f144e737e736d3ab49e594c917dafc745be57a41c3bf1611257a8a0"
+    },
+    {
+      "bytes": 38137,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/experiment-source/scripts/ops/autoencoder/observe_normative_training_readouts.py",
+      "sha256": "8e26fa314a29ff749c7189db3f9f68ccbb3a0ab66696681ef346449835fbbaca"
+    },
+    {
+      "bytes": 1345,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/lazy_scheduler_adoption.py",
+      "sha256": "42f31d8da1eb5b44274ca0b8c8180cd78bc083dfd0e93438e61f38223929d84a"
+    },
+    {
+      "bytes": 20712,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/owned_lease_watchdog.py",
+      "sha256": "f1b9f71e375cf5ed4004e023bbef2d6f7f61e1ecb588078a1094d7b1982609b3"
+    },
+    {
+      "bytes": 2522,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/run_guardian.py",
+      "sha256": "25a1254e785ccd656c9e50fceba0d6a70e8c0345b0abf6633748b880ab1e151e"
+    },
+    {
+      "bytes": 17157,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/run_reserved.py",
+      "sha256": "0b4a763ca1f54fab11d2581cfeaf65ae2e90cdf109f6bb77db5db1769d2d399f"
+    },
+    {
+      "bytes": 324,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/child-exit.json",
+      "sha256": "b3a195138ad8c9315e459e6f27ec79f90eccd26220f4282ebbcf317c422b48bd"
+    },
+    {
+      "bytes": 44,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/child-identity.json",
+      "sha256": "6abdcc3594c4f070387c2acfb248b4596e2aa97a4a941455499486233978e52c"
+    },
+    {
+      "bytes": 1674,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/child.log",
+      "sha256": "80633b4fc45621a5a5c2203d00ea83a4412b2d1b0366cfea5b07cd2749289302"
+    },
+    {
+      "bytes": 6463,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/command.json",
+      "sha256": "5ad2684683bd31eb5b8815a1113b6fad79d90759d1199aae85e1ed611c33493a"
+    },
+    {
+      "bytes": 694,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/lease-binding.json",
+      "sha256": "6c98eff6295c64ce75b50907ff5ccd6f65b75177e8fd3828fb7841785dab8090"
+    },
+    {
+      "bytes": 1743,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/resource-observations.json",
+      "sha256": "514c07ee5e649834005f60aef86d3a75a54307a609d0c0f6474c2ab55a8b40d4"
+    },
+    {
+      "bytes": 5863,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/resources-final.json",
+      "sha256": "d94184fb93f820f08bb49b0b7fdc2c420489847a693be979f5c2e6bf767d9607"
+    },
+    {
+      "bytes": 3193,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/resources-start.json",
+      "sha256": "9fee2633fb324ccf8dde547760da3bb9f91aaac697790edba737e569c7b7a83e"
+    },
+    {
+      "bytes": 52067,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/results/384-normative-wording-ce/selected-predictions.json",
+      "sha256": "12d5c3b353ee9e08c7f3fec75f4902ad81e62d9528730232a2e5f54ed92e5b16"
+    },
+    {
+      "bytes": 1265185,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/results/384-normative-wording-ce/selected-score.json",
+      "sha256": "4fc1c30aa6c09cbefcb6a00e3d793aaa90f2c518e5571ff29b5a7c17f25ceaad"
+    },
+    {
+      "bytes": 1059327,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/results/384-normative-wording-ce/selected-source-head-formula-join.json",
+      "sha256": "abdca9c64bf2294f1ba474f229739bef07a529ac9f8c79d8aea8ff0da2b911e9"
+    },
+    {
+      "bytes": 1200925,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/results/384-normative-wording-ce/selected-source-head-score.json",
+      "sha256": "2e959513d0ed464132a5cc3d7b11e5fb7f4371701bbdabf7b8104376474d0675"
+    },
+    {
+      "bytes": 3327072,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/results/384-normative-wording-ce/selected-source-head-trace.json",
+      "sha256": "e0fbe58d0c8bf52d36daac4e85df27f679932c133875ea51be54009ce559db4c"
+    },
+    {
+      "bytes": 52066,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/results/384-normative-wording-zero/selected-predictions.json",
+      "sha256": "beb43c0a082158e2b6a32462aa402a3f4d09baf1fdaf685aa52c1408aac0182c"
+    },
+    {
+      "bytes": 1264785,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/results/384-normative-wording-zero/selected-score.json",
+      "sha256": "f66e4f15427d750bd545a0cc5f8fad13d2871d8490bd443bf5be2b6c3ceeeeb0"
+    },
+    {
+      "bytes": 1062131,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/results/384-normative-wording-zero/selected-source-head-formula-join.json",
+      "sha256": "1332343af742e1d1992ee9e3cf2ff449e2d4ff83f2a68c563e780c2917dcf4b7"
+    },
+    {
+      "bytes": 1203610,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/results/384-normative-wording-zero/selected-source-head-score.json",
+      "sha256": "26eefa0d191366f758d9dc5bb9b9caaf272428e12d2263c5a79d40e052d22554"
+    },
+    {
+      "bytes": 3329194,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/results/384-normative-wording-zero/selected-source-head-trace.json",
+      "sha256": "740e9fe1994f30cb5b58b38ded3d0d60086c176aefbf330b5a699775c605f3f4"
+    },
+    {
+      "bytes": 52066,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/results/768-normative-wording-ce/selected-predictions.json",
+      "sha256": "292f4fefd2cef135ac51e6c2e6df953262c35d6eeb251ed97e888a56a369ac81"
+    },
+    {
+      "bytes": 1264357,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/results/768-normative-wording-ce/selected-score.json",
+      "sha256": "f90324b1bcad3d6c344f9472729f911949300c51b24578dfb6891545d90bafa6"
+    },
+    {
+      "bytes": 1060242,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/results/768-normative-wording-ce/selected-source-head-formula-join.json",
+      "sha256": "49d2c36200a581e238ebe04cfadfec46e8804e5c34f82d1b938504cb96e79c77"
+    },
+    {
+      "bytes": 1201842,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/results/768-normative-wording-ce/selected-source-head-score.json",
+      "sha256": "72b53aca9594eb25bcb08e66605b0b4443250c1fcf2eadd6d1a76d18db4a09a4"
+    },
+    {
+      "bytes": 3327691,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/results/768-normative-wording-ce/selected-source-head-trace.json",
+      "sha256": "3d61ea8819982cfa68dddf3829a24fb3629c0e0c9dd2166be94ee7b13a51e268"
+    },
+    {
+      "bytes": 52067,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/results/768-normative-wording-zero/selected-predictions.json",
+      "sha256": "a243f1146065387082b1c8ff591c0d3e9192a762d52c6d67a1e2847700190c8f"
+    },
+    {
+      "bytes": 1263625,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/results/768-normative-wording-zero/selected-score.json",
+      "sha256": "bb39e81e820b3d27b7f8ea9aa99807811469f8425f31d691c426bc8920d068f0"
+    },
+    {
+      "bytes": 1060944,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/results/768-normative-wording-zero/selected-source-head-formula-join.json",
+      "sha256": "68b56d81554afcdf1ecd53b651c4158b790da2a20ed17118607bba7533b525ce"
+    },
+    {
+      "bytes": 1202512,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/results/768-normative-wording-zero/selected-source-head-score.json",
+      "sha256": "df3b486e9d0e7137f9b82b4ef69ddc71451ea7691f63061842e6b5e44e406218"
+    },
+    {
+      "bytes": 3329143,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/results/768-normative-wording-zero/selected-source-head-trace.json",
+      "sha256": "21e85d7de331d5a66a1b1cff48f76daf0f5429750f3a5fcf47ff0b050b083b55"
+    },
+    {
+      "bytes": 5418,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/results/predictions-complete.json",
+      "sha256": "fec91404ac7c11127cbbabcf00a0704d71a5bc4e55b187cce10044e21de7e58f"
+    },
+    {
+      "bytes": 573339,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/results/sealed-recipe.json",
+      "sha256": "c30e329fd957cc8b7798d6eed6e0413d5fb3d33b01e671591b48464b0814eb78"
+    },
+    {
+      "bytes": 105505,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1/results/summary.json",
+      "sha256": "ff91fc49df6f60f895c507f8f242828755c2a36bc3f4d15d69e8fbe2a697caab"
+    },
+    {
+      "bytes": 60,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1-guardian-exit.json",
+      "sha256": "2054bdf856e7bb9874d5a548631106ca3d0b0447bdb747604e0cd870b915ac48"
+    },
+    {
+      "bytes": 5137,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1-guardian.log",
+      "sha256": "43b0599567e0709fdd7705ca98a3a89f99dc50375254a28ec43d0757cbdd3ef8"
+    },
+    {
+      "bytes": 42791,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1-lease-observations.jsonl",
+      "sha256": "a47aca208ecabc14556499d8a94874bfac174481c405e02df58445f4f390d1f5"
+    },
+    {
+      "bytes": 4646,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-train-readout-observation-20261006/train-observation-r1-scheduler-adoption.json",
+      "sha256": "ba8044a00eae2b626af06e8a3b0920a822fb045fb878354ca1776f800d0fd574"
+    }
+  ],
+  "findings": [],
+  "model_execution_performed": false,
+  "passed": true,
+  "qualification_granted": false,
+  "schema": "reconstruction-gap-evidence-retention/v1",
+  "source_bytes": 38327216,
+  "source_modified": false,
+  "tensor_and_embedding_bodies_archived": false
+}

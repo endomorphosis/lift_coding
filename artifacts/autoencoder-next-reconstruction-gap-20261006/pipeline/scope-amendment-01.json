@@ -1,0 +1,44 @@
+{
+  "archive": {
+    "bytes": 8815502,
+    "sha256": "b46e285619c42946ee3d33f409b6d335c4a33bb84a98252474e2b77033d036a7"
+  },
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/documentation/final-publication-guide.md": {
+      "bytes": 11297,
+      "sha256": "81272e0a2afc72a7f61dd2dabc9834702775b08a5134ad72c413eb6cce56470e"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/pipeline/final-documentation-bindings.json": {
+      "bytes": 3036,
+      "sha256": "ec7705eb61218cc0b3f53d869bbb5cd7831d1bcc7a890f5044ea8f767ee7ec3f"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/pipeline/upstream-followup-reconciliation.json": {
+      "bytes": 1655,
+      "sha256": "0d2dde043c126a22bdf2421778c3c3a2d404675aafa47ae091f8771f31e6f54f"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/prepare_publication.py": {
+      "bytes": 10342,
+      "sha256": "d721eb14f643d9ee0d65e9e5f3ea0bba5e37f4fdd5a7aeba77b85ed4b6633f72"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/evidence/reconstruction-gap-followup-20261006/evidence-index.json": {
+      "bytes": 5445,
+      "sha256": "f911b138d78c6d89141696494784a5070b34c18de455a5f667ffc2bf922c164f"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/reconstruction_gap_followup_20261006.md": {
+      "bytes": 11297,
+      "sha256": "81272e0a2afc72a7f61dd2dabc9834702775b08a5134ad72c413eb6cce56470e"
+    }
+  },
+  "final_independent_scope_seal_previously_absent": true,
+  "findings": [],
+  "model_results_and_archived_evidence_unchanged": true,
+  "package_paths_unchanged": 9,
+  "passed": true,
+  "prior_scope": {
+    "bytes": 10201,
+    "sha256": "611714c669201928c97b6809f7a2b8f0d6e75a451b6d69d8090d318633e8d1fd"
+  },
+  "reason": "inherit and document newly merged grouped boundary/occurrence contributions and disambiguate historical compact marker",
+  "schema": "unsealed-publication-scope-amendment/v1",
+  "workspace_paths_final": 29
+}

@@ -1,0 +1,52 @@
+{
+  "all_compact_result_files_byte_unchanged": true,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/documentation/build_compact_evidence.py": {
+      "bytes": 25093,
+      "sha256": "f550da27358c5f4c5dde4294b9ebf376408dc869338384e456d920c61ea742ac"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/documentation/evidence/fixed-prefix-scale-summary.json": {
+      "bytes": 24588,
+      "sha256": "2809aef1065847ef50a6e58101563757105ba1c7b273ef5ccc5235a0fd969365"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/documentation/evidence/independent-saved-output-summary-check.json": {
+      "bytes": 18686,
+      "sha256": "ac93553bf3943bd493239c5c40eb307703578e62e036af493d4977a21e6d9928"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/documentation/evidence/next-training-plan.json": {
+      "bytes": 6154,
+      "sha256": "823fc9698ce1b46a32317e9b2fc41896982848d86be0a40eacde5e6184257b6b"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/documentation/evidence/qualifier-preflight-summary.json": {
+      "bytes": 3815,
+      "sha256": "c5099069ed6da68bd4cde54a56023353f06ee2a86cbbb4abcf87ee5b8c42b9d1"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/documentation/evidence/train-observation-summary.json": {
+      "bytes": 79560,
+      "sha256": "b98e0607279988805179f3b062b53bd2753d36b4b7074b5892d245c6830849f1"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/documentation/publication-scope-proposal.json": {
+      "bytes": 5079,
+      "sha256": "75d618a84892665724902c71cd5558a25ea5bdf66265d478caea2dd95cf3cca2"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/documentation/reconstruction_gap_followup_20261006.md": {
+      "bytes": 9560,
+      "sha256": "74843f3d78dc43ccd0531f285b96f55e7f7e5cd45c0aa707be7f373d24fbdfb3"
+    }
+  },
+  "canonical_docs_or_frozen_scripts_edited": false,
+  "compact_evidence_target": "docs/autoencoders/evidence/reconstruction-gap-followup-20261006/",
+  "documentation_status": "Actual results finalized; archive/index and required separate-agent actual-output reviews pending.",
+  "findings": [],
+  "frozen_TRAIN_artifacts_rechecked_unchanged": 10,
+  "model_or_training_or_encoder_or_Lake_reruns": false,
+  "passed": true,
+  "previous_freeze": {
+    "bytes": 2628,
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/documentation/documentation-freeze-r1.json",
+    "sha256": "a4ee7d5619e417831820bc5aa5e80a84144dcdfef2c2a072ed904d9abc62d45e"
+  },
+  "refresh_scope": "Only guide syntax-validity wording and per-cohort cache provenance clarification, with scope hashes refreshed.",
+  "schema": "private-reconstruction-gap-documentation-freeze/v1",
+  "source_guide_target": "docs/autoencoders/reconstruction_gap_followup_20261006.md"
+}

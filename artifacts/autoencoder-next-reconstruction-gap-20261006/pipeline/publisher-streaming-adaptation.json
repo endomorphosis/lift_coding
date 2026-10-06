@@ -1,0 +1,33 @@
+{
+  "actual_remote_operations": 0,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/pipeline/publisher-adaptation.diff": {
+      "bytes": 3582,
+      "sha256": "5c0505a1585663d1d0109f6f02c1346cc48fa44eb8d8bb38a2faaf060e94e4b5"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/pipeline/publisher-synthetic-validation.json": {
+      "bytes": 2619,
+      "sha256": "38024316e475fcabffe24a949b2e9af2a8a5e14bdb8c16eb267c65d34b307042"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/publish_integration.py": {
+      "bytes": 8316,
+      "sha256": "ac3d75d840918118852c57faddd20e60761eb3b01bf4d11642711f3d0d66232a"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/publisher_review_tests.py": {
+      "bytes": 14941,
+      "sha256": "e434faf3660951e93fe16b7c4d9854c079eec646cd48cafc647b21435dcc5926"
+    }
+  },
+  "candidate_tree_and_commit_push_semantics_unchanged": true,
+  "changes": [
+    "commit descriptions",
+    "review artifact hashing streams 1MiB blocks",
+    "pathname and opened-descriptor identity fences include ctime and stable bytes-read"
+  ],
+  "historical_preliminary_receipts_are_not_active_publication_gates": true,
+  "replacement_and_restore_rejected": true,
+  "schema": "scoped-publisher-streaming-adaptation/v2",
+  "source_or_model_runtime_execution_performed": false,
+  "stable_hardlinks_accepted": true,
+  "unique_disposable_cases_passed": 9
+}

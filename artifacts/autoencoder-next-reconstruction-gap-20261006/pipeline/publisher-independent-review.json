@@ -1,0 +1,139 @@
+{
+  "actual_remote_operations": 0,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/pipeline/publisher-adaptation.diff": {
+      "bytes": 3582,
+      "sha256": "5c0505a1585663d1d0109f6f02c1346cc48fa44eb8d8bb38a2faaf060e94e4b5"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/pipeline/publisher-independent-review-initial.json": {
+      "bytes": 2988,
+      "sha256": "5e0d4b9dadd1f4b371ec5e7aa966ddd6613c88ee7ece5f6065de1b16c7991eab"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/pipeline/publisher-independent-test-execution.json": {
+      "bytes": 1423,
+      "sha256": "be0778dd85689bf0d6a91f3921b06279b491517b1ea3a51d9d17b828dc82b409"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/pipeline/publisher-streaming-adaptation.json": {
+      "bytes": 1548,
+      "sha256": "7a3185ea9682d73d6bf37acfed8587509fccefb63d0265793a973087ea573131"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/pipeline/publisher-synthetic-validation-r2.json": {
+      "bytes": 2084,
+      "sha256": "8447457683e4bb878d62999d3f78ff834e82db8d2581f413c7498e17b097dde4"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/pipeline/publisher-synthetic-validation-r3.log": {
+      "bytes": 253,
+      "sha256": "1fce07cd289849b7ce47b4906705c04ca58d9b520a9ab8455088c2c798365739"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/pipeline/publisher-synthetic-validation.json": {
+      "bytes": 2619,
+      "sha256": "38024316e475fcabffe24a949b2e9af2a8a5e14bdb8c16eb267c65d34b307042"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/publish_integration.py": {
+      "bytes": 8316,
+      "sha256": "ac3d75d840918118852c57faddd20e60761eb3b01bf4d11642711f3d0d66232a"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/publisher_review_tests.py": {
+      "bytes": 14941,
+      "sha256": "e434faf3660951e93fe16b7c4d9854c079eec646cd48cafc647b21435dcc5926"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-retention-integration-20261006/publish_integration.py": {
+      "bytes": 7609,
+      "sha256": "2c9973365ea5b2905301c05b2f35be0b8545f042f54be418a4b01286d8ada84b"
+    }
+  },
+  "canonical_source_changed": false,
+  "checks": [
+    {
+      "detail": "Baseline is the prior scoped retention publisher; only artifact hashing and commit descriptions change.",
+      "name": "recorded_diff_matches_exact_previous_publisher",
+      "passed": true
+    },
+    {
+      "detail": "Private-index staging, fetched ancestor parent, accepted preimages, exact changed-path bound, gitlink handling, nonforce push and ordinary HEAD/index preservation remain structurally identical.",
+      "name": "publication_main_unchanged_except_commit_descriptions",
+      "passed": true
+    },
+    {
+      "detail": "Closed normalized repository paths, duplicate JSON rejection, regular upstream modes and exclusive receipt creation remain unchanged.",
+      "name": "supporting_git_path_json_and_receipt_contracts_unchanged",
+      "passed": true
+    },
+    {
+      "detail": "All receipt artifacts match frozen current bytes; earlier source/test snapshots are preserved only as historical evidence.",
+      "name": "adaptation_receipt_binds_current_source_tests_diff_and_validation",
+      "passed": true
+    },
+    {
+      "detail": "Nine-case receipt binds the exact corrected publisher source.",
+      "name": "synthetic_receipt_binds_frozen_publisher",
+      "passed": true
+    },
+    {
+      "detail": "Six existing Git publication cases and three streaming/identity controls passed.",
+      "name": "all_nine_disposable_cases_passed",
+      "passed": true
+    },
+    {
+      "detail": "Disposable success fixtures assert upstream foreign bytes survive, unrelated ordinary staged work is excluded, and the workspace gitlink points to the mocked datasets publication.",
+      "name": "synthetic_publication_preserves_foreign_upstream_and_ordinary_state",
+      "passed": true
+    },
+    {
+      "detail": "Refusal fixtures reach no mocked push.",
+      "name": "changed_preimages_candidates_scope_and_unsafe_paths_reject",
+      "passed": true
+    },
+    {
+      "detail": "The synthetic 11,010,048-byte asset is authenticated through bounded 1 MiB reads; review JSON itself remains a normal small-file read.",
+      "name": "large_review_asset_hashes_without_full_body_read_bytes",
+      "passed": true
+    },
+    {
+      "detail": "This reproduces the initially confirmed race and now rejects it through descriptor identity parity.",
+      "name": "replacement_and_restore_cannot_authenticate_another_opened_inode",
+      "passed": true
+    },
+    {
+      "detail": "No single-link policy was introduced; unchanged hardlinked evidence remains usable.",
+      "name": "stable_hardlinked_regular_artifact_is_accepted",
+      "passed": true
+    },
+    {
+      "detail": "Before-open pathname identity, opened descriptor before/after metadata, final pathname metadata and bytes-read parity are all checked. The identity includes device, inode, size, mtime and ctime.",
+      "name": "streaming_fence_checks_descriptor_and_path_identity_with_ctime_and_size",
+      "passed": true
+    },
+    {
+      "detail": "The independent before/after snapshots cover the actual workspace and canonical datasets HEAD/index; only temporary repositories were exercised.",
+      "name": "real_normal_git_heads_and_indexes_preserved_during_disposable_suite",
+      "passed": true
+    },
+    {
+      "detail": "Remote commands are mocked in the disposable fixtures. No real fetch/push, models, numerical-owner imports, reservations or guardian runs occurred.",
+      "name": "zero_real_remote_operations_or_model_runtime",
+      "passed": true
+    },
+    {
+      "detail": "The initial failed review remains explicit history; the corrected current source is the active reviewed publisher.",
+      "name": "initial_race_finding_preserved_and_corrected",
+      "passed": true
+    },
+    {
+      "detail": "This adaptation review does not approve an unpublished scope or execute publication; the publisher still requires an independently sealed actual scope.",
+      "name": "final_actual_whitelist_review_remains_required",
+      "passed": true
+    }
+  ],
+  "final_actual_scope_review_required": true,
+  "findings": [],
+  "models_or_source_runtime_executed": false,
+  "normal_git_state_preserved": true,
+  "passed": true,
+  "publication_executed": false,
+  "publisher_exercised_only_in_disposable_repositories": true,
+  "review_boundary": "The corrected reuse adaptation and disposable tests are reviewed. Exact package/workspace whitelist and sealed archive still require a separate actual-scope review before real publication.",
+  "schema": "scoped-publisher-independent-adaptation-review/v1",
+  "test_case_count": 9,
+  "test_elapsed_seconds": 0.5568897740449756
+}

@@ -1,0 +1,41 @@
+{
+  "actual_git_diff_check_after": {
+    "returncode": 0,
+    "stdout": ""
+  },
+  "actual_git_diff_check_before": {
+    "returncode": 2,
+    "stdout": "artifacts/autoencoder-next-reconstruction-gap-20261006/pipeline/publisher-adaptation.diff:38: trailing whitespace.\n+ \n"
+  },
+  "actual_remote_operations_for_fix": 0,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/datasets-publication.json": {
+      "bytes": 1820,
+      "sha256": "4460acbf7aa89fdba765435758af9d5dc2222fc20bc57ee189d3ee876e8a512a"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/pipeline/publisher-adaptation.diff": {
+      "bytes": 3582,
+      "sha256": "5c0505a1585663d1d0109f6f02c1346cc48fa44eb8d8bb38a2faaf060e94e4b5"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/pipeline/publisher-adaptation.diff.gz": {
+      "bytes": 1468,
+      "sha256": "fca824124b2e892ead9cc8193e16e3bfd0efc96b38c1a8c2479a418f81c72f3d"
+    }
+  },
+  "code_tests_package_and_training_archive_unchanged": true,
+  "failed_attempt": "workspace gap01",
+  "failure_stage": "private staged Git whitespace check; before commit or push",
+  "findings": [],
+  "fix": "publish deterministic gzip representation of unchanged legitimate unified diff context bytes",
+  "gzip_exact_roundtrip": true,
+  "only_owned_alternate_index_mutated": true,
+  "original_review_preserved_as": "pipeline/publication-scope-independent-review-r1.json",
+  "package_publication_commit": "497362d8aa117a210769423ec6a14d8010d4588c",
+  "passed": true,
+  "prior_scope": {
+    "bytes": 11547,
+    "sha256": "cbd2b020ef0d9b63fc3fc768cc676cddf552f6f4c8529fd5bd0908235dac5adb"
+  },
+  "reviewed_diff_content_unchanged": true,
+  "schema": "publication-diff-whitespace-packaging-fix/v1"
+}

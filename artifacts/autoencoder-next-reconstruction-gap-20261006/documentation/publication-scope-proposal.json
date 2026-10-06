@@ -1,0 +1,82 @@
+{
+  "Git_mutated": false,
+  "additional_expected_all_new_package_path": "docs/autoencoders/evidence/reconstruction-gap-followup-20261006/evidence-index.json",
+  "archive_allowed": "Only current run traces/scorings/predictions, selected private source/protocol/pure tests, closure manifests and bounded new reviews/receipts. Retain prior owners by SHA/path references.",
+  "archive_excluded": [
+    "model or optimizer state bodies",
+    "embedding/vector cache bodies",
+    "previous archives",
+    "full repository mirrors",
+    "Git status dumps",
+    "unrelated dirty paths"
+  ],
+  "canonical_docs_edited": false,
+  "evidence_index_requirement": "Seal a new immutable workspace archive, exact member manifest/SHA/bytes, and completed independent numerical/resource/documentation review bindings before publication. Keep archive contents/closure receipts out of uncompressed package copies.",
+  "full_trace_ownership": "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006",
+  "no_additional_runtime_or_optimizer_source_changed": true,
+  "no_existing_guides_or_plans_updated": true,
+  "proposal_only": true,
+  "publication_readiness": "awaiting independent actual-output reviews and immutable archive/index seal",
+  "recommended_scope_count": 9,
+  "reviewed_package_main": "1ff99942caf57d8dc82cd3ddbe8df962752da7aa",
+  "schema": "reconstruction-gap-small-package-publication-proposal/v1",
+  "selected_existing_private_files": [
+    {
+      "bytes": 9560,
+      "package_path": "docs/autoencoders/reconstruction_gap_followup_20261006.md",
+      "present_at_reviewed_package_main": false,
+      "sha256": "74843f3d78dc43ccd0531f285b96f55e7f7e5cd45c0aa707be7f373d24fbdfb3",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/documentation/reconstruction_gap_followup_20261006.md"
+    },
+    {
+      "bytes": 3815,
+      "package_path": "docs/autoencoders/evidence/reconstruction-gap-followup-20261006/qualifier-preflight-summary.json",
+      "present_at_reviewed_package_main": false,
+      "sha256": "c5099069ed6da68bd4cde54a56023353f06ee2a86cbbb4abcf87ee5b8c42b9d1",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/documentation/evidence/qualifier-preflight-summary.json"
+    },
+    {
+      "bytes": 24588,
+      "package_path": "docs/autoencoders/evidence/reconstruction-gap-followup-20261006/fixed-prefix-scale-summary.json",
+      "present_at_reviewed_package_main": false,
+      "sha256": "2809aef1065847ef50a6e58101563757105ba1c7b273ef5ccc5235a0fd969365",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/documentation/evidence/fixed-prefix-scale-summary.json"
+    },
+    {
+      "bytes": 79560,
+      "package_path": "docs/autoencoders/evidence/reconstruction-gap-followup-20261006/train-observation-summary.json",
+      "present_at_reviewed_package_main": false,
+      "sha256": "b98e0607279988805179f3b062b53bd2753d36b4b7074b5892d245c6830849f1",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/documentation/evidence/train-observation-summary.json"
+    },
+    {
+      "bytes": 6154,
+      "package_path": "docs/autoencoders/evidence/reconstruction-gap-followup-20261006/next-training-plan.json",
+      "present_at_reviewed_package_main": false,
+      "sha256": "823fc9698ce1b46a32317e9b2fc41896982848d86be0a40eacde5e6184257b6b",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/documentation/evidence/next-training-plan.json"
+    },
+    {
+      "bytes": 18686,
+      "package_path": "docs/autoencoders/evidence/reconstruction-gap-followup-20261006/independent-saved-output-summary-check.json",
+      "present_at_reviewed_package_main": false,
+      "sha256": "ac93553bf3943bd493239c5c40eb307703578e62e036af493d4977a21e6d9928",
+      "source_path": "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/documentation/evidence/independent-saved-output-summary-check.json"
+    },
+    {
+      "bytes": 14908,
+      "package_path": "ipfs_datasets_py/logic/legal_ir/canonical_qualifier_training_preflight.py",
+      "present_at_reviewed_package_main": false,
+      "sha256": "58ebc41a4ea1f93d3497108ebd54ea3611bc652b5d74284214b13bb74a535489",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_qualifier_training_preflight.py"
+    },
+    {
+      "bytes": 16352,
+      "package_path": "tests/unit/logic/legal_ir/test_canonical_qualifier_training_preflight.py",
+      "present_at_reviewed_package_main": false,
+      "sha256": "57563f10077d8f978c66b5f0554cc618d34949b32455a1a1270438693129f913",
+      "source_path": "/home/barberb/lift_coding/external/ipfs_datasets/tests/unit/logic/legal_ir/test_canonical_qualifier_training_preflight.py"
+    }
+  ],
+  "source_changes": "Only the new pure preflight module and dedicated test; other package members are a new guide and compact evidence."
+}
