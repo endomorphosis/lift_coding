@@ -1,0 +1,128 @@
+{
+  "schema": "cross-agent-grouped-followthrough-independent-review/v1",
+  "status": "passed",
+  "decision": "clear",
+  "blocking_findings": [],
+  "time_utc": "2026-10-06T15:06:08.936867+00:00",
+  "runner": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/review_cross_agent_followthrough.py",
+    "sha256": "84ad69f22cf900668b61f9a0a3d880521e7e9ad424c5ecc3a6c3e2149fd5b38f",
+    "bytes": 8403
+  },
+  "candidate": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-followthrough",
+  "base": "b1a37b973fa670f18badda527ee5370ee825f84e",
+  "candidate_head_during_review": "b1a37b973fa670f18badda527ee5370ee825f84e",
+  "freeze": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-followthrough-freeze.json",
+    "sha256": "3a837a83435b89d259a01b33c62157883387989ae290c05b0ad30a74af559d48",
+    "bytes": 1277
+  },
+  "exact_three_file_diff_verified": true,
+  "files": [
+    {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-followthrough/docs/autoencoders/grouped_legal_decoders.md",
+      "sha256": "caea32c25f4713e050d154d0fc33a6f7e1cabbe6234b2f9908b4d90d9e14c84e",
+      "bytes": 9075
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-followthrough/docs/autoencoders/progress_reconciliation_20261006.md",
+      "sha256": "689205848379b69fdf771de4d6abe4c017fcdd4a5e006ad165b6ca1bea63bc7c",
+      "bytes": 11596
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-followthrough/tests/unit/logic/test_legal_grouped_phase1_integration.py",
+      "sha256": "12e9b330a35560bbb673a6fffbc3551c475c391d8ffb5cf43ab502d59d2ffe82",
+      "bytes": 13500
+    }
+  ],
+  "four_production_modules_unchanged": [
+    {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-followthrough/ipfs_datasets_py/logic/autoformal/legal_coordination_evaluation.py",
+      "sha256": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f",
+      "bytes": 6557
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-followthrough/ipfs_datasets_py/logic/deontic/coordination_decoder.py",
+      "sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f",
+      "bytes": 13298
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-followthrough/ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder.py",
+      "sha256": "d03c343d6130e4cb099468dbd605e524fdb15bd21092bc4f526c35c4167c9d51",
+      "bytes": 29370
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-followthrough/ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py",
+      "sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8",
+      "bytes": 33948
+    }
+  ],
+  "both_other_agent_sentinel_files_unchanged": [
+    {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-followthrough/tests/unit/logic/test_deontic_grouped_decoder.py",
+      "sha256": "de59814005b798404996a6d8a207bb7b17f806c93c8ea590eb483cbd60a8afb4",
+      "bytes": 11558
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-followthrough/tests/unit/logic/test_deontic_grouped_decoder_boundaries.py",
+      "sha256": "aa799e28e8e01d5e27ac650ad0158b5974bf65c96521737a23f0f83dccc8e719",
+      "bytes": 12950
+    }
+  ],
+  "all_previous_integration_test_bytes_and_AST_preserved": true,
+  "new_cases": [
+    [
+      "tests.unit.logic.test_legal_grouped_phase1_integration",
+      "test_source_prediction_and_native_render_isolate_real_helpers_and_cached_aliases[v1]"
+    ],
+    [
+      "tests.unit.logic.test_legal_grouped_phase1_integration",
+      "test_source_prediction_and_native_render_isolate_real_helpers_and_cached_aliases[v2]"
+    ]
+  ],
+  "boundary_review": {
+    "optional_source_group_and_bridge_imports_denied_with_negative_controls": true,
+    "real_parser_and_legacy_decoder_helpers_poisoned": true,
+    "identity_captured_aliases_poisoned_with_seeded_alias_negative_controls": true,
+    "training_label_and_v1_fallback_helpers_denied": true,
+    "actual_source_span_to_closed_request_and_native_renderer_path_exercised": true,
+    "model_heads_are_controlled_test_logits_not_accuracy_evidence": true,
+    "evaluator_and_rendering_do_not_grant_authority": true
+  },
+  "test_receipt": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/cross-agent-final-validation.json",
+    "sha256": "d56c2e6a148b3de8cc4f9fd720a34b762d8c4964ab046a274d812aeb4ba9a218",
+    "bytes": 4713
+  },
+  "test_xml": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/cross-agent-final-validation.xml",
+    "sha256": "5d0854120483275a5113a00408b72a271ca73b3c25091dc9ffe7c28ebb987d6b",
+    "bytes": 80248
+  },
+  "prior_test_xml": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/merged-main-validation.xml",
+    "sha256": "f7f81a9c276a06a0b91a34e8046b6854a6ec70ef22e9bb1a75160d5a84d3d7a0",
+    "bytes": 79880
+  },
+  "counts": {
+    "tests": 420,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "all_original_418_case_ids_retained": true,
+  "overlapping_populations_not_counted_as_independent_results": true,
+  "documentation_distinguishes_renderer_learned_heads_and_latent_models": true,
+  "real_law_and_family_limitations_retained": true,
+  "parent_reconciliation_document_read": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/workspace-followthrough/implementation_plan/docs/59-autoencoder-progress-reconciliation-2026-10-06.md",
+    "sha256": "73e85dbdbc28364dcd25586170ed5a69acd3d1cfeb51dad874fada1b104b8a55",
+    "bytes": 3843
+  },
+  "parent_publication_and_final_child_pin_not_reviewed_by_this_receipt": true,
+  "model_calls": 0,
+  "training_calls": 0,
+  "new_test_executions": 0,
+  "network_calls": 0,
+  "repository_edits_commits_or_pushes": 0
+}

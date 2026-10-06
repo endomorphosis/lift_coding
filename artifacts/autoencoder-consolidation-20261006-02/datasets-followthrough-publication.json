@@ -1,0 +1,28 @@
+{
+  "schema": "legal-cross-agent-guard-publication/v1",
+  "checked_at_utc": "2026-10-06T15:08:29.514036+00:00",
+  "pr_url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1272",
+  "state": "MERGED",
+  "merge_commit": "61c5db04538596ea00091cd4f013500854368397",
+  "head_commit": "575a129f19068d58d66cc8119e85c3d23faa560a",
+  "original_runtime_merge_retained": true,
+  "concurrent_other_agent_contribution_retained": true,
+  "reviewed_three_files_on_merge_verified": true,
+  "four_checkpoint_bound_modules_unchanged": {
+    "ipfs_datasets_py/logic/autoformal/legal_coordination_evaluation.py": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f",
+    "ipfs_datasets_py/logic/deontic/coordination_decoder.py": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f",
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder.py": "d03c343d6130e4cb099468dbd605e524fdb15bd21092bc4f526c35c4167c9d51",
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8"
+  },
+  "local_validation_counts": {
+    "tests": 420,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "ci_executed": false,
+  "ci_limitation": "CodeQL jobs did not start because GitHub account is locked due to billing.",
+  "admin_bypass_used": false,
+  "force_push_used": false,
+  "independent_review_sha256": "fb87ea9468d19bb64e3d20f868c95c0e3dda2e3918e76871153ca387e78e8b32"
+}

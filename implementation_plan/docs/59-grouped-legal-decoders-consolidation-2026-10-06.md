@@ -92,6 +92,17 @@ no failures, errors or skips. The workspace datasets pin records this combined
 commit. GitHub CodeQL did not start because of an account billing lock; hosted
 CI is not recorded as passing.
 
+The later [twenty-study working-copy review](59-autoencoder-progress-reconciliation-2026-10-06.md)
+shares the semantic interface and adds restoration, recovery and retention tooling.
+Its publication and this contribution remain in both main histories. Complementary
+v1/v2 isolation cases now combine optional-module denial with active real-helper
+and cached-alias guards while preserving the concurrent sentinel fixtures. The
+[final cross-agent panel](../../artifacts/autoencoder-consolidation-20261006-02/cross-agent-final-validation.json)
+passes 420 cases: all prior 418 IDs and exactly two additional isolation cases.
+The checkpoint-bound production files are unchanged. These overlapping test
+populations are separate observations and must not be added as independent
+evidence. The package and workspace guides now link both sets of findings.
+
 ## Interpretation and next training priorities
 
 The selected v2 has 64/64 exact authored positive outputs on a fresh final set
