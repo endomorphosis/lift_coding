@@ -1,0 +1,392 @@
+{
+  "all_runtime_and_import_dependencies_match_main": true,
+  "all_semantic_admission_masks_false": true,
+  "canonical_adapted_tests": {
+    "failed": 0,
+    "passed": 161,
+    "skipped": 0,
+    "tests": 161
+  },
+  "checkpoint_downloaded": false,
+  "current_legal_compiler_measured": false,
+  "direct_dependencies_match_main": true,
+  "encoder_executed": false,
+  "full_package_entrypoint_measured": false,
+  "install_executed": false,
+  "interpretation": "Exact main dependency bodies establish module-level typed IR, strict native AST/reparse and Lean rendering compatibility. Metadata namespace markers avoid package startup effects; this is not a full current compiler, source-semantic, model convergence or proof admission measurement.",
+  "lake_executed": false,
+  "main_actual_tests": {
+    "failed": 0,
+    "passed": 161,
+    "skipped": 0,
+    "tests": 161
+  },
+  "main_contract_passed": true,
+  "main_dependency_closure": {
+    "candidate_files": [
+      {
+        "bytes": 13298,
+        "path": "ipfs_datasets_py/logic/deontic/coordination_decoder.py",
+        "sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f",
+        "source": "unchanged_canonical_candidate"
+      },
+      {
+        "bytes": 6557,
+        "path": "ipfs_datasets_py/logic/autoformal/legal_coordination_evaluation.py",
+        "sha256": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f",
+        "source": "unchanged_canonical_candidate"
+      },
+      {
+        "bytes": 11558,
+        "path": "tests/unit/logic/test_deontic_grouped_decoder.py",
+        "sha256": "de59814005b798404996a6d8a207bb7b17f806c93c8ea590eb483cbd60a8afb4",
+        "source": "actual_canonical_adapted_test"
+      },
+      {
+        "bytes": 12950,
+        "path": "tests/unit/logic/test_deontic_grouped_decoder_boundaries.py",
+        "sha256": "aa799e28e8e01d5e27ac650ad0158b5974bf65c96521737a23f0f83dccc8e719",
+        "source": "actual_canonical_adapted_test"
+      }
+    ],
+    "closure": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/branches/main-coordination-closure",
+    "current_legal_compiler_measured": false,
+    "full_package_entrypoint_measured": false,
+    "metadata_namespace_markers": [
+      {
+        "bytes": 78,
+        "path": "ipfs_datasets_py/__init__.py",
+        "sha256": "2092087fef721de3683c0c473abd61fc7ca5db60c4766fde10bec07a21d37e66"
+      },
+      {
+        "bytes": 78,
+        "path": "ipfs_datasets_py/logic/__init__.py",
+        "sha256": "2092087fef721de3683c0c473abd61fc7ca5db60c4766fde10bec07a21d37e66"
+      },
+      {
+        "bytes": 78,
+        "path": "ipfs_datasets_py/logic/CEC/__init__.py",
+        "sha256": "2092087fef721de3683c0c473abd61fc7ca5db60c4766fde10bec07a21d37e66"
+      },
+      {
+        "bytes": 78,
+        "path": "ipfs_datasets_py/logic/CEC/native/__init__.py",
+        "sha256": "2092087fef721de3683c0c473abd61fc7ca5db60c4766fde10bec07a21d37e66"
+      },
+      {
+        "bytes": 78,
+        "path": "ipfs_datasets_py/logic/TDFOL/__init__.py",
+        "sha256": "2092087fef721de3683c0c473abd61fc7ca5db60c4766fde10bec07a21d37e66"
+      },
+      {
+        "bytes": 78,
+        "path": "ipfs_datasets_py/logic/autoformal/__init__.py",
+        "sha256": "2092087fef721de3683c0c473abd61fc7ca5db60c4766fde10bec07a21d37e66"
+      },
+      {
+        "bytes": 78,
+        "path": "ipfs_datasets_py/logic/deontic/__init__.py",
+        "sha256": "2092087fef721de3683c0c473abd61fc7ca5db60c4766fde10bec07a21d37e66"
+      },
+      {
+        "bytes": 78,
+        "path": "ipfs_datasets_py/logic/formalization/__init__.py",
+        "sha256": "2092087fef721de3683c0c473abd61fc7ca5db60c4766fde10bec07a21d37e66"
+      },
+      {
+        "bytes": 78,
+        "path": "ipfs_datasets_py/logic/formalization/autoencoder/__init__.py",
+        "sha256": "2092087fef721de3683c0c473abd61fc7ca5db60c4766fde10bec07a21d37e66"
+      },
+      {
+        "bytes": 78,
+        "path": "ipfs_datasets_py/logic/intent_ir/__init__.py",
+        "sha256": "2092087fef721de3683c0c473abd61fc7ca5db60c4766fde10bec07a21d37e66"
+      },
+      {
+        "bytes": 78,
+        "path": "ipfs_datasets_py/logic/intent_ir/formalize/__init__.py",
+        "sha256": "2092087fef721de3683c0c473abd61fc7ca5db60c4766fde10bec07a21d37e66"
+      },
+      {
+        "bytes": 79,
+        "path": "ipfs_datasets_py/logic/deontic/utils/__init__.py",
+        "sha256": "bbb13682a39c84635e780a1656a4b96505038d9c88e5cea0d81a132bd4d34be0"
+      }
+    ],
+    "models_or_lake_executed": false,
+    "negative_control_fixtures": "Only the two adapted test bodies register fail-on-call source helper modules; no external harness replacements.",
+    "runtime_dependency_pins": [
+      {
+        "bytes": 29000,
+        "canonical_matches_main": true,
+        "canonical_sha256": "6da3dc9981ad7eb805894be5a0822f1ae2cae3572b80d73a7eb691250fe5c1fe",
+        "main_blob": "20d150b9409907c71fec95ba2d6cd22eeb957e45",
+        "path": "ipfs_datasets_py/logic/formalization/autoencoder/native_family_lean_emitters.py",
+        "sha256": "6da3dc9981ad7eb805894be5a0822f1ae2cae3572b80d73a7eb691250fe5c1fe"
+      },
+      {
+        "bytes": 22238,
+        "canonical_matches_main": true,
+        "canonical_sha256": "7337b9266ed4f171ec7ee763828f8b637bf57930d8b89fa0d47139650996a14d",
+        "main_blob": "ed043a96be267fb18f78f7f454f320e08ab0fe8a",
+        "path": "ipfs_datasets_py/logic/intent_ir/formalize/modal_projections.py",
+        "sha256": "7337b9266ed4f171ec7ee763828f8b637bf57930d8b89fa0d47139650996a14d"
+      },
+      {
+        "bytes": 37698,
+        "canonical_matches_main": true,
+        "canonical_sha256": "4db56c904cce8a030e5889b5d14687f01e9348842093480dd699649ad96dc1a8",
+        "main_blob": "509d35f7e5c68acd2157f85f20face935cafcc31",
+        "path": "ipfs_datasets_py/logic/autoformal/family_qualification.py",
+        "sha256": "4db56c904cce8a030e5889b5d14687f01e9348842093480dd699649ad96dc1a8"
+      },
+      {
+        "bytes": 1948,
+        "canonical_matches_main": true,
+        "canonical_sha256": "587165942fb06ea9effc836b555e0ac0606c5876b013a374a1e76d25ee069e4d",
+        "main_blob": "3faf283b3affc5eb38e716e8287502d4c90e088c",
+        "path": "ipfs_datasets_py/logic/autoformal/tree_pin.py",
+        "sha256": "587165942fb06ea9effc836b555e0ac0606c5876b013a374a1e76d25ee069e4d"
+      },
+      {
+        "bytes": 29788,
+        "canonical_matches_main": true,
+        "canonical_sha256": "8e1f8885be6dc2a7d692ecdf0364ccc4d01692c38c81137775d9d222d8b8d9d3",
+        "main_blob": "6fab7228536c780d1b38704c946532fd9c27cb2f",
+        "path": "ipfs_datasets_py/logic/TDFOL/tdfol_parser.py",
+        "sha256": "8e1f8885be6dc2a7d692ecdf0364ccc4d01692c38c81137775d9d222d8b8d9d3"
+      },
+      {
+        "bytes": 28721,
+        "canonical_matches_main": true,
+        "canonical_sha256": "67be350d1fb0422a64ab040349b2d51c4008fbeeb8b59a99b8901d681d7d71c7",
+        "main_blob": "c89b513ad59ba3e8c124be78ac2a93355f88a829",
+        "path": "ipfs_datasets_py/logic/TDFOL/tdfol_core.py",
+        "sha256": "67be350d1fb0422a64ab040349b2d51c4008fbeeb8b59a99b8901d681d7d71c7"
+      },
+      {
+        "bytes": 18642,
+        "canonical_matches_main": true,
+        "canonical_sha256": "f039af934dba224d6c4984e8840fd8a4de00fe5e69837b0678d1d670dc26ac82",
+        "main_blob": "6306716e4d0bc35c7952629f55aaf0ef53737027",
+        "path": "ipfs_datasets_py/logic/CEC/native/dcec_integration.py",
+        "sha256": "f039af934dba224d6c4984e8840fd8a4de00fe5e69837b0678d1d670dc26ac82"
+      },
+      {
+        "bytes": 57189,
+        "canonical_matches_main": true,
+        "canonical_sha256": "bb977f411605fc1f0715ed23c988102d55fa012029053c21c8fc5b14aea17e14",
+        "main_blob": "baa0353e9da94dc1542a5fadb4296710e55f6ec5",
+        "path": "ipfs_datasets_py/logic/CEC/native/dcec_core.py",
+        "sha256": "bb977f411605fc1f0715ed23c988102d55fa012029053c21c8fc5b14aea17e14"
+      },
+      {
+        "bytes": 9131,
+        "canonical_matches_main": true,
+        "canonical_sha256": "06517ecd30e4889d2a54db6732279e61a53945906860ef66378b5d707cca04b0",
+        "main_blob": "95c482f2af3067181559c1eb5af733f5a85e8f0e",
+        "path": "ipfs_datasets_py/logic/CEC/native/dcec_cleaning.py",
+        "sha256": "06517ecd30e4889d2a54db6732279e61a53945906860ef66378b5d707cca04b0"
+      },
+      {
+        "bytes": 14204,
+        "canonical_matches_main": true,
+        "canonical_sha256": "2756e3c94acf902579bfc54d469e01ddd25b72f53d177b88921829d71df7da70",
+        "main_blob": "0feb2b0a0e86f6ad8885ebe08f9ef4636427e8e2",
+        "path": "ipfs_datasets_py/logic/CEC/native/dcec_parsing.py",
+        "sha256": "2756e3c94acf902579bfc54d469e01ddd25b72f53d177b88921829d71df7da70"
+      },
+      {
+        "bytes": 15038,
+        "canonical_matches_main": true,
+        "canonical_sha256": "0e0b231ed68c39054cfd2fd674780cb736fd258cde7570881cb3a41cb5d2680e",
+        "main_blob": "607e722ed7af91b4ff832142eb38acf2d057f6e7",
+        "path": "ipfs_datasets_py/logic/CEC/native/dcec_prototypes.py",
+        "sha256": "0e0b231ed68c39054cfd2fd674780cb736fd258cde7570881cb3a41cb5d2680e"
+      },
+      {
+        "bytes": 10095,
+        "canonical_matches_main": true,
+        "canonical_sha256": "cbbbafacf70d1c7355d7c930f48c5f71fc711765aa4789a817e5c229c8e60622",
+        "main_blob": "7d4d894fd23aaf15b8ab0948ee0d8c552fd061c7",
+        "path": "ipfs_datasets_py/logic/CEC/native/exceptions.py",
+        "sha256": "cbbbafacf70d1c7355d7c930f48c5f71fc711765aa4789a817e5c229c8e60622"
+      }
+    ],
+    "target": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+    "uses_actual_canonical_tests": true
+  },
+  "models_executed": false,
+  "network_executed_by_tests_or_schema_probe": false,
+  "pinned_main": "795d960170214d03e2eaf4c0a13ad4eb922c5c08",
+  "production_module_bodies_unchanged": true,
+  "qualifier_rejection_probe": [
+    {
+      "action": "publish notice within thirty days",
+      "qualifier_removed": false,
+      "reason": "Semantic labels cannot embed modal, qualifier, source, or compound structure",
+      "rejected": true,
+      "rendered": false
+    },
+    {
+      "action": "publish notice within 30 days",
+      "qualifier_removed": false,
+      "reason": "Semantic labels cannot embed modal, qualifier, source, or compound structure",
+      "rejected": true,
+      "rendered": false
+    },
+    {
+      "action": "publish notice within_duration",
+      "qualifier_removed": false,
+      "reason": "Bounded lexical semantic labels required",
+      "rejected": true,
+      "rendered": false
+    },
+    {
+      "action": "publish notice until approval",
+      "qualifier_removed": false,
+      "reason": "Semantic labels cannot embed modal, qualifier, source, or compound structure",
+      "rejected": true,
+      "rendered": false
+    },
+    {
+      "action": "publish notice before Friday",
+      "qualifier_removed": false,
+      "reason": "Semantic labels cannot embed modal, qualifier, source, or compound structure",
+      "rejected": true,
+      "rendered": false
+    }
+  ],
+  "root_ready_to_stage_exact_four_path_scope": true,
+  "schema": "main-compatible-coordination-interface-review/v1",
+  "scope": [
+    {
+      "bytes": 13298,
+      "main_preimage": null,
+      "mode": "100644",
+      "path": "ipfs_datasets_py/logic/deontic/coordination_decoder.py",
+      "sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f"
+    },
+    {
+      "bytes": 6557,
+      "main_preimage": null,
+      "mode": "100644",
+      "path": "ipfs_datasets_py/logic/autoformal/legal_coordination_evaluation.py",
+      "sha256": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f"
+    },
+    {
+      "bytes": 11558,
+      "main_preimage": null,
+      "mode": "100644",
+      "original_preimage_artifact": "coordination-test-preimages/test_deontic_grouped_decoder.py",
+      "original_uncommitted_preimage_sha256": "f60442632fcca4c7b5215a9f5d0e9d070ffc6d24095960867b1ecc2612e1c831",
+      "path": "tests/unit/logic/test_deontic_grouped_decoder.py",
+      "sha256": "de59814005b798404996a6d8a207bb7b17f806c93c8ea590eb483cbd60a8afb4",
+      "test_only_adaptation": "negative-control sentinels in sys.modules and parent attributes with monkeypatch restore"
+    },
+    {
+      "bytes": 12950,
+      "main_preimage": null,
+      "mode": "100644",
+      "original_preimage_artifact": "coordination-test-preimages/test_deontic_grouped_decoder_boundaries.py",
+      "original_uncommitted_preimage_sha256": "79aed55b07077d128f310ffe3455ad91760e5fd3fd42ad1df78dc5b0460c967c",
+      "path": "tests/unit/logic/test_deontic_grouped_decoder_boundaries.py",
+      "sha256": "aa799e28e8e01d5e27ac650ad0158b5974bf65c96521737a23f0f83dccc8e719",
+      "test_only_adaptation": "negative-control sentinels in sys.modules and parent attributes with monkeypatch restore"
+    }
+  ],
+  "scope_bytes": 44363,
+  "semantic_masks": [
+    {
+      "all_semantic_masks_false": true,
+      "evaluation_masks": {
+        "model_accuracy_claimed": false,
+        "proof_ready": false,
+        "semantic_equivalence_checked": false,
+        "source_semantics_verified": false
+      },
+      "family_masks": {
+        "admitted": false,
+        "formalized": false,
+        "semantic_equivalence_checked": false,
+        "source_bound": false
+      },
+      "model_calls": 0,
+      "output_schema": "legal-coordination-decode-result/v1",
+      "scope": "modal_over_actions",
+      "semantic_masks": {
+        "admitted": false,
+        "formalized": false,
+        "proof_ready": false,
+        "semantic_equivalence_checked": false,
+        "source_semantics_verified": false
+      },
+      "strict_native_validator": "strict_native_reparse_and_exact_AST",
+      "training_calls": 0
+    },
+    {
+      "all_semantic_masks_false": true,
+      "evaluation_masks": {
+        "model_accuracy_claimed": false,
+        "proof_ready": false,
+        "semantic_equivalence_checked": false,
+        "source_semantics_verified": false
+      },
+      "family_masks": {
+        "admitted": false,
+        "formalized": false,
+        "semantic_equivalence_checked": false,
+        "source_bound": false
+      },
+      "model_calls": 0,
+      "output_schema": "legal-coordination-decode-result/v1",
+      "scope": "disjunction_of_norms",
+      "semantic_masks": {
+        "admitted": false,
+        "formalized": false,
+        "proof_ready": false,
+        "semantic_equivalence_checked": false,
+        "source_semantics_verified": false
+      },
+      "strict_native_validator": "strict_native_reparse_and_exact_AST",
+      "training_calls": 0
+    }
+  ],
+  "source_edits": "Only the two root-authorized tests, with original SHA256 preimage guards and preserved preimages. No parser/compiler/source/supervisor/Grok runtime edits.",
+  "test_negative_controls": "Both test bodies explicitly guard sys.modules and loaded parent attributes; forbidden source helper calls raise. No harness sentinel substitutes while publishing unmodified tests.",
+  "validation_receipts": [
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "grouped-pure-tests.xml",
+      "sha256": "78a0ba8c8165e343aa1675934b37c830e3cd296874701781f6ac6065f755d0c9",
+      "skipped": 0,
+      "tests": 161
+    },
+    {
+      "errors": 0,
+      "failures": 40,
+      "path": "main-proposed-coordination-tests.xml",
+      "sha256": "02f660b86c738577a2225458a7fb4cecb34300543346d249f8e8ddc98bea745e",
+      "skipped": 0,
+      "tests": 161
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "main-actual-coordination-tests.xml",
+      "sha256": "d75f2d8500354ede6d22c3c9923024fca381918a6ed0ac3b80e986e49c2b27bc",
+      "skipped": 0,
+      "tests": 161
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "canonical-adapted-coordination-tests.xml",
+      "sha256": "efe18e7ac8af136051a90315335735c2c67152c11623a86b1b5a3707d4576566",
+      "skipped": 0,
+      "tests": 161
+    }
+  ]
+}
