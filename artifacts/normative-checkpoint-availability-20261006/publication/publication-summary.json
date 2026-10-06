@@ -1,0 +1,63 @@
+{
+  "schema": "normative-candidate-publication-summary/v1",
+  "completed": true,
+  "releases": [
+    {
+      "repository_id": "Publicus/legal-ir-autoencoder",
+      "revision": "aed9bff916e52f43f378dc31c93f98e8a9f52ed1",
+      "files_verified": 14,
+      "original_envelope_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/receipts/20261006T153347301569Z-1-Publicus--legal-ir-autoencoder.json",
+        "bytes": 15305,
+        "sha256": "b1da1399e0f5bde79d9bb79608d9d66d734f6ec97f02a6df0a9fd431758535b8"
+      },
+      "native_receipt_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/Publicus--legal-ir-autoencoder-native-publication-receipt.json",
+        "bytes": 12926,
+        "sha256": "5fdcfe543394c4788a0839a80227cc8c91a941fe34fa1387d7007e5a53bf897f"
+      },
+      "public": true,
+      "prior_remote_file_identities_preserved": true
+    },
+    {
+      "repository_id": "Publicus/legal-ir-autoencoder-384d",
+      "revision": "8199354f58af914768c2296c441ccda2f8e39daa",
+      "files_verified": 9,
+      "original_envelope_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/receipts/20261006T153347301569Z-2-Publicus--legal-ir-autoencoder-384d.json",
+        "bytes": 10871,
+        "sha256": "30c240113a8a7472f68c691b9611fe61e1fe5a4062baf141e5ae177621e129f2"
+      },
+      "native_receipt_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/Publicus--legal-ir-autoencoder-384d-native-publication-receipt.json",
+        "bytes": 8653,
+        "sha256": "4c17f2a0d0c180a507dbcb2edf5c8c1000c6465f02d066fb39bb330aad54ccc0"
+      },
+      "public": true,
+      "prior_remote_file_identities_preserved": true
+    },
+    {
+      "repository_id": "Publicus/legal-ir-autoencoder-768d",
+      "revision": "1cc315894142c9d3b05c6fff90556cde7a2578fe",
+      "files_verified": 9,
+      "original_envelope_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/receipts/20261006T153347301569Z-3-Publicus--legal-ir-autoencoder-768d.json",
+        "bytes": 10871,
+        "sha256": "7d8523c3d8176118d34d6ca5b5f9ea63ae4bef33530818e821f702a2ababa02d"
+      },
+      "native_receipt_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/Publicus--legal-ir-autoencoder-768d-native-publication-receipt.json",
+        "bytes": 8653,
+        "sha256": "2b0fc0b5caa29b4947ab2261e4ad0774204f122a658031706e3f5a2d18bb9b33"
+      },
+      "public": true,
+      "prior_remote_file_identities_preserved": true
+    }
+  ],
+  "container_count": 8,
+  "unique_tensor_endpoint_count": 4,
+  "runtime_ready": false,
+  "teacher_qualified": false,
+  "proof_authority": false,
+  "new_training_or_embeddings": false
+}

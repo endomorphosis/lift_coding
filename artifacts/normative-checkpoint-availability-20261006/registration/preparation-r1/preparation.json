@@ -1,0 +1,58 @@
+{
+  "completed": true,
+  "import_plan_pin": {
+    "bytes": 80344,
+    "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/registration/preparation-r1/model-manager-import-plan.json",
+    "sha256": "d90b38696d88b9600e9604661d689c4d7da97aaed7dbe9a806b9c24530c19ce6"
+  },
+  "importer_owner": {
+    "head": "61c5db04538596ea00091cd4f013500854368397",
+    "pin": {
+      "bytes": 29300,
+      "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-datasets-20261006/ipfs_datasets_py/logic/formalization/autoencoder/ir_model_manager_import.py",
+      "sha256": "5d50f879d6e1e80fc68a29060680fcac9e234f62a3732f7c697f31360ca9506b"
+    },
+    "relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/ir_model_manager_import.py"
+  },
+  "independent_authentication_pin": {
+    "bytes": 721862,
+    "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/authentication/authenticated-states.json",
+    "sha256": "582296018f40698159909d32423e5cc9496cfd3d44790ddfdc82b6b0879e06bd"
+  },
+  "manager_or_database_constructed": false,
+  "model_ids": [
+    "ir-model-asset-binding/v1:0ea60eed1f606e655940a8e45c5db151d9686fcb8bb532b94866e6f8947262c8",
+    "ir-model-asset-binding/v1:8d8f0e79a87b35daf4aa5e16222013303b590422d55889085ad9fa9c2e29fb1b",
+    "ir-model-asset-binding/v1:aa588d1669769d996f9626d2693ff5866ce402ca3372574e18e290342c7e4435",
+    "ir-model-asset-binding/v1:b7608ac88d3a420026523bff892e0c0acc3f2618b01b7f3e5cd6aa6ff043c64f",
+    "ir-model-asset-binding/v1:958f84ca889bf8c19e39f293e015b5bc54b23f49e751c25304020ab217912b6d",
+    "ir-model-asset-binding/v1:b7a871a4a7f8f5bad8f5b0e0fc9e9da6f0d6c1ea8431ef4fc19e1261f741b67d",
+    "ir-model-asset-binding/v1:d537d0366d6e846dfb9610ea6b237ccde8ec0389e33ead2c51b511f49cdcaa7a",
+    "ir-model-asset-binding/v1:13d156a0c143e5a00c3c9b6492882f6fe62de54877820797a920f258af5801ef"
+  ],
+  "native_preparation_passed": true,
+  "native_schema_profile_format_remain_null": true,
+  "prior_observation_pin": {
+    "bytes": 16067,
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/reconciliation-findings.json",
+    "sha256": "01390c913bb853b2556d7d38b02c4adcfe2b156799d91bfde9ca3b6fe0bc9d3a"
+  },
+  "proof_authority": false,
+  "release_receipt_pins": [
+    {
+      "bytes": 8653,
+      "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/Publicus--legal-ir-autoencoder-384d-native-publication-receipt.json",
+      "sha256": "4c17f2a0d0c180a507dbcb2edf5c8c1000c6465f02d066fb39bb330aad54ccc0"
+    },
+    {
+      "bytes": 8653,
+      "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/Publicus--legal-ir-autoencoder-768d-native-publication-receipt.json",
+      "sha256": "2b0fc0b5caa29b4947ab2261e4ad0774204f122a658031706e3f5a2d18bb9b33"
+    }
+  ],
+  "runtime_ready": false,
+  "schema": "normative-model-manager-plan-preparation/v1",
+  "serialization_binding_count": 8,
+  "teacher_qualified": false,
+  "unique_trained_tensor_count": 4
+}

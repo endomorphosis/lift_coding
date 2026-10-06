@@ -1,0 +1,121 @@
+{
+  "CLI_returncode": 0,
+  "command": [
+    "/home/barberb/.local/bin/hf",
+    "download",
+    "Publicus/legal-ir-autoencoder-768d",
+    "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-zero/selected-state.json",
+    "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-zero/last-attempt-state.json",
+    "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-ce/selected-state.json",
+    "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-ce/last-attempt-state.json",
+    "--revision",
+    "1cc315894142c9d3b05c6fff90556cde7a2578fe",
+    "--local-dir",
+    "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/roundtrip/Publicus--legal-ir-autoencoder-768d",
+    "--quiet"
+  ],
+  "complete": true,
+  "completed_at_utc": "2026-10-06T15:37:49.500367+00:00",
+  "downloaded_files": [
+    {
+      "arm": "normative-wording-zero",
+      "dimension": 768,
+      "downloaded_bytes_equal_original": true,
+      "downloaded_pin": {
+        "bytes": 4778674,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/roundtrip/Publicus--legal-ir-autoencoder-768d/releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-zero/selected-state.json",
+        "sha256": "c8beca3ef5ea2d477ebc9a1564c8922404b245098a0b56083197cd6185c3083f"
+      },
+      "native_reported_remote_identity": {
+        "blob_id": "72735705e9c500a786b09b8abb1c92978145f520",
+        "bytes": 4778674,
+        "scheme": "git-blob-sha1"
+      },
+      "original_checkpoint_pin": {
+        "bytes": 4778674,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-zero/selected-state.json",
+        "sha256": "c8beca3ef5ea2d477ebc9a1564c8922404b245098a0b56083197cd6185c3083f"
+      },
+      "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-zero/selected-state.json",
+      "role": "selected"
+    },
+    {
+      "arm": "normative-wording-zero",
+      "dimension": 768,
+      "downloaded_bytes_equal_original": true,
+      "downloaded_pin": {
+        "bytes": 4778678,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/roundtrip/Publicus--legal-ir-autoencoder-768d/releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-zero/last-attempt-state.json",
+        "sha256": "89590d3d13bd7de9550e96a0238e38d33f293996bb61ec1bdb33572097b4f0e2"
+      },
+      "native_reported_remote_identity": {
+        "blob_id": "49a63e7ef0a49248b849bdb35216fa7001989f73",
+        "bytes": 4778678,
+        "scheme": "git-blob-sha1"
+      },
+      "original_checkpoint_pin": {
+        "bytes": 4778678,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-zero/last-attempt-state.json",
+        "sha256": "89590d3d13bd7de9550e96a0238e38d33f293996bb61ec1bdb33572097b4f0e2"
+      },
+      "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-zero/last-attempt-state.json",
+      "role": "last-attempt"
+    },
+    {
+      "arm": "normative-wording-ce",
+      "dimension": 768,
+      "downloaded_bytes_equal_original": true,
+      "downloaded_pin": {
+        "bytes": 4779949,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/roundtrip/Publicus--legal-ir-autoencoder-768d/releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-ce/selected-state.json",
+        "sha256": "aa2f75cad0ade34a3965a4f0b71bdc2fe962f5b863b38133927978ea2673aeb3"
+      },
+      "native_reported_remote_identity": {
+        "blob_id": "18620846144965cb4218b095258903401ff78a66",
+        "bytes": 4779949,
+        "scheme": "git-blob-sha1"
+      },
+      "original_checkpoint_pin": {
+        "bytes": 4779949,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-ce/selected-state.json",
+        "sha256": "aa2f75cad0ade34a3965a4f0b71bdc2fe962f5b863b38133927978ea2673aeb3"
+      },
+      "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-ce/selected-state.json",
+      "role": "selected"
+    },
+    {
+      "arm": "normative-wording-ce",
+      "dimension": 768,
+      "downloaded_bytes_equal_original": true,
+      "downloaded_pin": {
+        "bytes": 4779953,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/roundtrip/Publicus--legal-ir-autoencoder-768d/releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-ce/last-attempt-state.json",
+        "sha256": "bcfd436b6f304c1b6c41c3443848d78f5ee59459cdf606d13b70096a87227e2f"
+      },
+      "native_reported_remote_identity": {
+        "blob_id": "043f255928364adf746130b699535f1a9edc330f",
+        "bytes": 4779953,
+        "scheme": "git-blob-sha1"
+      },
+      "original_checkpoint_pin": {
+        "bytes": 4779953,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-ce/last-attempt-state.json",
+        "sha256": "bcfd436b6f304c1b6c41c3443848d78f5ee59459cdf606d13b70096a87227e2f"
+      },
+      "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-ce/last-attempt-state.json",
+      "role": "last-attempt"
+    }
+  ],
+  "native_publication_receipt_pin": {
+    "bytes": 8653,
+    "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/Publicus--legal-ir-autoencoder-768d-native-publication-receipt.json",
+    "sha256": "2b0fc0b5caa29b4947ab2261e4ad0774204f122a658031706e3f5a2d18bb9b33"
+  },
+  "repository_id": "Publicus/legal-ir-autoencoder-768d",
+  "revision": "1cc315894142c9d3b05c6fff90556cde7a2578fe",
+  "started_at_utc": "2026-10-06T15:37:47.918737+00:00",
+  "stderr_bytes": 0,
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 125,
+  "stdout_sha256": "6a1b3a7f38f89701475e7551998a99eb779ab7356d8830f262740c725f05d4ec"
+}

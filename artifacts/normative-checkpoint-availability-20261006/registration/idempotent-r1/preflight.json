@@ -1,0 +1,340 @@
+{
+  "authentication_joins": [
+    {
+      "dimension": 384,
+      "model_id": "ir-model-asset-binding/v1:0ea60eed1f606e655940a8e45c5db151d9686fcb8bb532b94866e6f8947262c8",
+      "numeric_alias_group": "legal_ir/384/normative-wording-zero/e918a196684aa2f7d4021c210908eaba2517542e14523d98c4f72419c23ae3b3",
+      "original_checkpoint_pin": {
+        "bytes": 2798242,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-zero/selected-state.json",
+        "sha256": "82f326a83a2d00cc1628ff2e9baf3096aa887348bd07e49883ed3e7c0234014e"
+      },
+      "selected_header_value": true,
+      "serialization_role": "selected",
+      "tensor_sha256": "e918a196684aa2f7d4021c210908eaba2517542e14523d98c4f72419c23ae3b3"
+    },
+    {
+      "dimension": 384,
+      "model_id": "ir-model-asset-binding/v1:8d8f0e79a87b35daf4aa5e16222013303b590422d55889085ad9fa9c2e29fb1b",
+      "numeric_alias_group": "legal_ir/384/normative-wording-zero/e918a196684aa2f7d4021c210908eaba2517542e14523d98c4f72419c23ae3b3",
+      "original_checkpoint_pin": {
+        "bytes": 2798246,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-zero/last-attempt-state.json",
+        "sha256": "7575ce918ab16a5c76d60ce2f1b94d7a75ff72e12897634a3564d8e192c1b2e4"
+      },
+      "selected_header_value": true,
+      "serialization_role": "last-attempt",
+      "tensor_sha256": "e918a196684aa2f7d4021c210908eaba2517542e14523d98c4f72419c23ae3b3"
+    },
+    {
+      "dimension": 384,
+      "model_id": "ir-model-asset-binding/v1:aa588d1669769d996f9626d2693ff5866ce402ca3372574e18e290342c7e4435",
+      "numeric_alias_group": "legal_ir/384/normative-wording-ce/0b3c7c3b1a5581cd393d9bb8db1d24b87fe2cb9dff0be268aa2b5ed1f88b6594",
+      "original_checkpoint_pin": {
+        "bytes": 2797392,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-ce/selected-state.json",
+        "sha256": "6cab6fe31ef7c98db1508001bc64926b7ff176ef2a9bd385473d8e05f5f8c266"
+      },
+      "selected_header_value": true,
+      "serialization_role": "selected",
+      "tensor_sha256": "0b3c7c3b1a5581cd393d9bb8db1d24b87fe2cb9dff0be268aa2b5ed1f88b6594"
+    },
+    {
+      "dimension": 384,
+      "model_id": "ir-model-asset-binding/v1:b7608ac88d3a420026523bff892e0c0acc3f2618b01b7f3e5cd6aa6ff043c64f",
+      "numeric_alias_group": "legal_ir/384/normative-wording-ce/0b3c7c3b1a5581cd393d9bb8db1d24b87fe2cb9dff0be268aa2b5ed1f88b6594",
+      "original_checkpoint_pin": {
+        "bytes": 2797396,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-ce/last-attempt-state.json",
+        "sha256": "886cf857852bfbc7eead2aaf216e917a920e48d48e0d297ba0ccb07245f1e815"
+      },
+      "selected_header_value": true,
+      "serialization_role": "last-attempt",
+      "tensor_sha256": "0b3c7c3b1a5581cd393d9bb8db1d24b87fe2cb9dff0be268aa2b5ed1f88b6594"
+    },
+    {
+      "dimension": 768,
+      "model_id": "ir-model-asset-binding/v1:958f84ca889bf8c19e39f293e015b5bc54b23f49e751c25304020ab217912b6d",
+      "numeric_alias_group": "legal_ir/768/normative-wording-zero/991f9a1abdf01b72ac5f827adde5ef7be5af28fc0dc3a3db8e4e6e2d8816f379",
+      "original_checkpoint_pin": {
+        "bytes": 4778674,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-zero/selected-state.json",
+        "sha256": "c8beca3ef5ea2d477ebc9a1564c8922404b245098a0b56083197cd6185c3083f"
+      },
+      "selected_header_value": true,
+      "serialization_role": "selected",
+      "tensor_sha256": "991f9a1abdf01b72ac5f827adde5ef7be5af28fc0dc3a3db8e4e6e2d8816f379"
+    },
+    {
+      "dimension": 768,
+      "model_id": "ir-model-asset-binding/v1:b7a871a4a7f8f5bad8f5b0e0fc9e9da6f0d6c1ea8431ef4fc19e1261f741b67d",
+      "numeric_alias_group": "legal_ir/768/normative-wording-zero/991f9a1abdf01b72ac5f827adde5ef7be5af28fc0dc3a3db8e4e6e2d8816f379",
+      "original_checkpoint_pin": {
+        "bytes": 4778678,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-zero/last-attempt-state.json",
+        "sha256": "89590d3d13bd7de9550e96a0238e38d33f293996bb61ec1bdb33572097b4f0e2"
+      },
+      "selected_header_value": true,
+      "serialization_role": "last-attempt",
+      "tensor_sha256": "991f9a1abdf01b72ac5f827adde5ef7be5af28fc0dc3a3db8e4e6e2d8816f379"
+    },
+    {
+      "dimension": 768,
+      "model_id": "ir-model-asset-binding/v1:d537d0366d6e846dfb9610ea6b237ccde8ec0389e33ead2c51b511f49cdcaa7a",
+      "numeric_alias_group": "legal_ir/768/normative-wording-ce/3fe21b42657bf33f5d0d129d538b72dbb5808f9cc491a3822abd902b13a74b6d",
+      "original_checkpoint_pin": {
+        "bytes": 4779949,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-ce/selected-state.json",
+        "sha256": "aa2f75cad0ade34a3965a4f0b71bdc2fe962f5b863b38133927978ea2673aeb3"
+      },
+      "selected_header_value": true,
+      "serialization_role": "selected",
+      "tensor_sha256": "3fe21b42657bf33f5d0d129d538b72dbb5808f9cc491a3822abd902b13a74b6d"
+    },
+    {
+      "dimension": 768,
+      "model_id": "ir-model-asset-binding/v1:13d156a0c143e5a00c3c9b6492882f6fe62de54877820797a920f258af5801ef",
+      "numeric_alias_group": "legal_ir/768/normative-wording-ce/3fe21b42657bf33f5d0d129d538b72dbb5808f9cc491a3822abd902b13a74b6d",
+      "original_checkpoint_pin": {
+        "bytes": 4779953,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-ce/last-attempt-state.json",
+        "sha256": "bcfd436b6f304c1b6c41c3443848d78f5ee59459cdf606d13b70096a87227e2f"
+      },
+      "selected_header_value": true,
+      "serialization_role": "last-attempt",
+      "tensor_sha256": "3fe21b42657bf33f5d0d129d538b72dbb5808f9cc491a3822abd902b13a74b6d"
+    }
+  ],
+  "authentication_pin": {
+    "bytes": 721862,
+    "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/authentication/authenticated-states.json",
+    "sha256": "582296018f40698159909d32423e5cc9496cfd3d44790ddfdc82b6b0879e06bd"
+  },
+  "completed": true,
+  "custody_pin": {
+    "bytes": 2714,
+    "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/registration/custody.py",
+    "sha256": "c3b355c2b3e4743a839a721b61c1d2868fe25c609b8da562a6b302fbe0cb6864"
+  },
+  "database_opened": false,
+  "driver_pin": {
+    "bytes": 35576,
+    "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/registration/register_normative_states.py",
+    "sha256": "ba8f50acd731ae42ba1883b1289395fdc108e0ece1045b39f8afd0b785598309"
+  },
+  "manager_constructed": false,
+  "model_count": 8,
+  "plan_pin": {
+    "bytes": 80344,
+    "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/registration/preparation-r1/model-manager-import-plan.json",
+    "sha256": "d90b38696d88b9600e9604661d689c4d7da97aaed7dbe9a806b9c24530c19ce6"
+  },
+  "proof_authority": false,
+  "release_receipt_pins": [
+    {
+      "bytes": 8653,
+      "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/Publicus--legal-ir-autoencoder-384d-native-publication-receipt.json",
+      "sha256": "4c17f2a0d0c180a507dbcb2edf5c8c1000c6465f02d066fb39bb330aad54ccc0"
+    },
+    {
+      "bytes": 8653,
+      "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/Publicus--legal-ir-autoencoder-768d-native-publication-receipt.json",
+      "sha256": "2b0fc0b5caa29b4947ab2261e4ad0774204f122a658031706e3f5a2d18bb9b33"
+    }
+  ],
+  "runtime_ready": false,
+  "schema": "normative-model-manager-registration-preflight/v1",
+  "source_owners": [
+    {
+      "head": "61c5db04538596ea00091cd4f013500854368397",
+      "pin": {
+        "bytes": 29300,
+        "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-datasets-20261006/ipfs_datasets_py/logic/formalization/autoencoder/ir_model_manager_import.py",
+        "sha256": "5d50f879d6e1e80fc68a29060680fcac9e234f62a3732f7c697f31360ca9506b"
+      },
+      "relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/ir_model_manager_import.py"
+    },
+    {
+      "head": "45803f0dca3365982b6058bf7e7c9c94a95aefcf",
+      "pin": {
+        "bytes": 40208,
+        "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-accelerate-20261006/ipfs_accelerate_py/__init__.py",
+        "sha256": "5083369f823be18cd467346f6f3b955925ec65bedafe9eb28a61ca8897997c03"
+      },
+      "relative_path": "ipfs_accelerate_py/__init__.py"
+    },
+    {
+      "head": "45803f0dca3365982b6058bf7e7c9c94a95aefcf",
+      "pin": {
+        "bytes": 176248,
+        "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-accelerate-20261006/ipfs_accelerate_py/model_manager.py",
+        "sha256": "cd65b2e91c05a603ad984ddcef0e2967b90362f90ee212c1849f9e5bc81631d4"
+      },
+      "relative_path": "ipfs_accelerate_py/model_manager.py"
+    },
+    {
+      "head": "45803f0dca3365982b6058bf7e7c9c94a95aefcf",
+      "pin": {
+        "bytes": 1596,
+        "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-accelerate-20261006/ipfs_accelerate_py/model_catalog/__init__.py",
+        "sha256": "ecd4d6099e267ee2b65284691a298285f44d5443da4a1142e8bb260ae530ffd0"
+      },
+      "relative_path": "ipfs_accelerate_py/model_catalog/__init__.py"
+    },
+    {
+      "head": "45803f0dca3365982b6058bf7e7c9c94a95aefcf",
+      "pin": {
+        "bytes": 26636,
+        "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-accelerate-20261006/ipfs_accelerate_py/model_catalog/cache.py",
+        "sha256": "c8ae37197dad0db6e3e3a6788cb05b53bd20bc515206316138a18ada46af9534"
+      },
+      "relative_path": "ipfs_accelerate_py/model_catalog/cache.py"
+    },
+    {
+      "head": "45803f0dca3365982b6058bf7e7c9c94a95aefcf",
+      "pin": {
+        "bytes": 40317,
+        "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-accelerate-20261006/ipfs_accelerate_py/model_catalog/catalog.py",
+        "sha256": "badb30612917fa7f71deb036b2b1f0cf710161de11af61f02e4b07189f6397a5"
+      },
+      "relative_path": "ipfs_accelerate_py/model_catalog/catalog.py"
+    },
+    {
+      "head": "45803f0dca3365982b6058bf7e7c9c94a95aefcf",
+      "pin": {
+        "bytes": 20160,
+        "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-accelerate-20261006/ipfs_accelerate_py/model_catalog/events.py",
+        "sha256": "a5839de4c2e76fcba58be4060a549dd38492396874dc2d7c28fce310af386365"
+      },
+      "relative_path": "ipfs_accelerate_py/model_catalog/events.py"
+    },
+    {
+      "head": "45803f0dca3365982b6058bf7e7c9c94a95aefcf",
+      "pin": {
+        "bytes": 8918,
+        "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-accelerate-20261006/ipfs_accelerate_py/model_catalog/identity.py",
+        "sha256": "fbaf013ad8dd3035cfe04e9bfbb841aa72f8581ed04eb6a543abcd3d579caf44"
+      },
+      "relative_path": "ipfs_accelerate_py/model_catalog/identity.py"
+    },
+    {
+      "head": "45803f0dca3365982b6058bf7e7c9c94a95aefcf",
+      "pin": {
+        "bytes": 27067,
+        "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-accelerate-20261006/ipfs_accelerate_py/model_catalog/receipts.py",
+        "sha256": "3a956d2b9d2c35793a615ae0fb3e5a2f2709a489114624f974827c406facc487"
+      },
+      "relative_path": "ipfs_accelerate_py/model_catalog/receipts.py"
+    },
+    {
+      "head": "45803f0dca3365982b6058bf7e7c9c94a95aefcf",
+      "pin": {
+        "bytes": 30232,
+        "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-accelerate-20261006/ipfs_accelerate_py/model_catalog/registry.py",
+        "sha256": "2ba8aae587f5838016da8a71370b84e5b50b1985cd49c95682b02a8189e55284"
+      },
+      "relative_path": "ipfs_accelerate_py/model_catalog/registry.py"
+    },
+    {
+      "head": "45803f0dca3365982b6058bf7e7c9c94a95aefcf",
+      "pin": {
+        "bytes": 27779,
+        "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-accelerate-20261006/ipfs_accelerate_py/model_catalog/resolver.py",
+        "sha256": "17bfcbfdfc029ccca6458a3c11ae5bc2418c3dfc7ba423a942930edc6c8407a5"
+      },
+      "relative_path": "ipfs_accelerate_py/model_catalog/resolver.py"
+    },
+    {
+      "head": "45803f0dca3365982b6058bf7e7c9c94a95aefcf",
+      "pin": {
+        "bytes": 36178,
+        "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-accelerate-20261006/ipfs_accelerate_py/model_catalog/schema.py",
+        "sha256": "e1fa8ec5f8e9f856f626b40aa896df0bde490055978bddea0e4b8a9885b89f49"
+      },
+      "relative_path": "ipfs_accelerate_py/model_catalog/schema.py"
+    },
+    {
+      "head": "45803f0dca3365982b6058bf7e7c9c94a95aefcf",
+      "pin": {
+        "bytes": 30098,
+        "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-accelerate-20261006/ipfs_accelerate_py/model_catalog/security.py",
+        "sha256": "93a5b4dc3e6b1d119fcdc8af48d81f881ef1a89401dc21d1e2fe1253d64c9d0d"
+      },
+      "relative_path": "ipfs_accelerate_py/model_catalog/security.py"
+    },
+    {
+      "head": "45803f0dca3365982b6058bf7e7c9c94a95aefcf",
+      "pin": {
+        "bytes": 11886,
+        "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-accelerate-20261006/ipfs_accelerate_py/model_catalog/snapshot.py",
+        "sha256": "c17817f2c770103677e0a2880b8355d134df4c533590fd4824cf283ba4c4ef6a"
+      },
+      "relative_path": "ipfs_accelerate_py/model_catalog/snapshot.py"
+    },
+    {
+      "head": "45803f0dca3365982b6058bf7e7c9c94a95aefcf",
+      "pin": {
+        "bytes": 1043,
+        "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-accelerate-20261006/ipfs_accelerate_py/model_catalog/sources/__init__.py",
+        "sha256": "b771d4d00b5cf8f167e9bb7aa3951e25a8d5a225b78b0e872c1a21eabf5672f4"
+      },
+      "relative_path": "ipfs_accelerate_py/model_catalog/sources/__init__.py"
+    },
+    {
+      "head": "45803f0dca3365982b6058bf7e7c9c94a95aefcf",
+      "pin": {
+        "bytes": 47700,
+        "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-accelerate-20261006/ipfs_accelerate_py/model_catalog/sources/deployments.py",
+        "sha256": "31272b5b22b3c7a6a9934a338fc45d0587015deeeedc24d74959626fea665d2c"
+      },
+      "relative_path": "ipfs_accelerate_py/model_catalog/sources/deployments.py"
+    },
+    {
+      "head": "45803f0dca3365982b6058bf7e7c9c94a95aefcf",
+      "pin": {
+        "bytes": 19952,
+        "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-accelerate-20261006/ipfs_accelerate_py/model_catalog/sources/ir_persistent.py",
+        "sha256": "2cfdb2ad61c9bb1f2fe1c64cf6c70ca45c932d0ec53ccdd08640600d5730beed"
+      },
+      "relative_path": "ipfs_accelerate_py/model_catalog/sources/ir_persistent.py"
+    },
+    {
+      "head": "45803f0dca3365982b6058bf7e7c9c94a95aefcf",
+      "pin": {
+        "bytes": 27224,
+        "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-accelerate-20261006/ipfs_accelerate_py/model_catalog/sources/peers.py",
+        "sha256": "eebce1b7b560f7ee6e3dbaefdf00222234c7e02820dcd328570d3eec41eaa773"
+      },
+      "relative_path": "ipfs_accelerate_py/model_catalog/sources/peers.py"
+    },
+    {
+      "head": "45803f0dca3365982b6058bf7e7c9c94a95aefcf",
+      "pin": {
+        "bytes": 3331,
+        "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-accelerate-20261006/ipfs_accelerate_py/model_catalog/sources/persistent.py",
+        "sha256": "be262df4374f2fdcb08e8e517b7e05570bc524e94d79bcb47201bedff12edfa8"
+      },
+      "relative_path": "ipfs_accelerate_py/model_catalog/sources/persistent.py"
+    },
+    {
+      "head": "45803f0dca3365982b6058bf7e7c9c94a95aefcf",
+      "pin": {
+        "bytes": 7333,
+        "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-accelerate-20261006/ipfs_accelerate_py/model_catalog/sources/routers.py",
+        "sha256": "6cf638e7076b078a648dcbea288279db3763e735f5e772193bf40f9340fee5da"
+      },
+      "relative_path": "ipfs_accelerate_py/model_catalog/sources/routers.py"
+    },
+    {
+      "head": "45803f0dca3365982b6058bf7e7c9c94a95aefcf",
+      "pin": {
+        "bytes": 37159,
+        "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-accelerate-20261006/ipfs_accelerate_py/model_catalog/sources/static.py",
+        "sha256": "4f9b658aecc00820e2d87866445f298c248e6d9a39161b1499a884f6451281cf"
+      },
+      "relative_path": "ipfs_accelerate_py/model_catalog/sources/static.py"
+    }
+  ],
+  "teacher_qualified": false,
+  "trained_numeric_endpoint_count": 4
+}

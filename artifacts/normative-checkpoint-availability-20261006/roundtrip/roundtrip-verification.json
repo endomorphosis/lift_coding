@@ -1,0 +1,159 @@
+{
+  "HF_CLI": {
+    "command_path": "/home/barberb/.local/bin/hf",
+    "commands_retained_in_per_repository_receipts": true,
+    "resolved_executable_pin": {
+      "bytes": 325,
+      "path": "/home/barberb/.hf-cli/venv/bin/hf",
+      "sha256": "e5b4881dc420571cd681ea63ec78e6163684a163e52ec7fb53647022916a32a8"
+    },
+    "token_arguments_or_credentials_printed": false,
+    "version_output": "version=1.25.1"
+  },
+  "all_16_downloaded_checkpoint_bytes_equal_originals": true,
+  "all_originals_and_source_receipts_unchanged": true,
+  "authority": {
+    "proof_authority": false,
+    "quality_qualified": false,
+    "runtime_ready": false,
+    "source_semantics_verified": false,
+    "teacher_qualified": false
+  },
+  "completed": true,
+  "downloaded_copy_count": 16,
+  "downloaded_weight_bytes": 60617060,
+  "observed_at_utc": "2026-10-06T15:37:49.547445+00:00",
+  "operations": {
+    "Hub_upload_or_settings_changes": false,
+    "checkpoint_JSON_or_tensors_decoded": false,
+    "database_read_or_write": false,
+    "model_or_decoder_or_encoder_loaded": false,
+    "model_supplied_Python_executed": false,
+    "native_HF_CLI_weight_downloads": true,
+    "source_or_ref_changes": false,
+    "training_or_new_embeddings": false
+  },
+  "original_checkpoint_pins_after": [
+    {
+      "bytes": 2798242,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-zero/selected-state.json",
+      "sha256": "82f326a83a2d00cc1628ff2e9baf3096aa887348bd07e49883ed3e7c0234014e"
+    },
+    {
+      "bytes": 2798246,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-zero/last-attempt-state.json",
+      "sha256": "7575ce918ab16a5c76d60ce2f1b94d7a75ff72e12897634a3564d8e192c1b2e4"
+    },
+    {
+      "bytes": 2797392,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-ce/selected-state.json",
+      "sha256": "6cab6fe31ef7c98db1508001bc64926b7ff176ef2a9bd385473d8e05f5f8c266"
+    },
+    {
+      "bytes": 2797396,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-ce/last-attempt-state.json",
+      "sha256": "886cf857852bfbc7eead2aaf216e917a920e48d48e0d297ba0ccb07245f1e815"
+    },
+    {
+      "bytes": 4778674,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-zero/selected-state.json",
+      "sha256": "c8beca3ef5ea2d477ebc9a1564c8922404b245098a0b56083197cd6185c3083f"
+    },
+    {
+      "bytes": 4778678,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-zero/last-attempt-state.json",
+      "sha256": "89590d3d13bd7de9550e96a0238e38d33f293996bb61ec1bdb33572097b4f0e2"
+    },
+    {
+      "bytes": 4779949,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-ce/selected-state.json",
+      "sha256": "aa2f75cad0ade34a3965a4f0b71bdc2fe962f5b863b38133927978ea2673aeb3"
+    },
+    {
+      "bytes": 4779953,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-ce/last-attempt-state.json",
+      "sha256": "bcfd436b6f304c1b6c41c3443848d78f5ee59459cdf606d13b70096a87227e2f"
+    }
+  ],
+  "original_checkpoint_pins_before": [
+    {
+      "bytes": 2798242,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-zero/selected-state.json",
+      "sha256": "82f326a83a2d00cc1628ff2e9baf3096aa887348bd07e49883ed3e7c0234014e"
+    },
+    {
+      "bytes": 2798246,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-zero/last-attempt-state.json",
+      "sha256": "7575ce918ab16a5c76d60ce2f1b94d7a75ff72e12897634a3564d8e192c1b2e4"
+    },
+    {
+      "bytes": 2797392,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-ce/selected-state.json",
+      "sha256": "6cab6fe31ef7c98db1508001bc64926b7ff176ef2a9bd385473d8e05f5f8c266"
+    },
+    {
+      "bytes": 2797396,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-ce/last-attempt-state.json",
+      "sha256": "886cf857852bfbc7eead2aaf216e917a920e48d48e0d297ba0ccb07245f1e815"
+    },
+    {
+      "bytes": 4778674,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-zero/selected-state.json",
+      "sha256": "c8beca3ef5ea2d477ebc9a1564c8922404b245098a0b56083197cd6185c3083f"
+    },
+    {
+      "bytes": 4778678,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-zero/last-attempt-state.json",
+      "sha256": "89590d3d13bd7de9550e96a0238e38d33f293996bb61ec1bdb33572097b4f0e2"
+    },
+    {
+      "bytes": 4779949,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-ce/selected-state.json",
+      "sha256": "aa2f75cad0ade34a3965a4f0b71bdc2fe962f5b863b38133927978ea2673aeb3"
+    },
+    {
+      "bytes": 4779953,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-ce/last-attempt-state.json",
+      "sha256": "bcfd436b6f304c1b6c41c3443848d78f5ee59459cdf606d13b70096a87227e2f"
+    }
+  ],
+  "original_tensor_endpoint_count_from_authenticated_metadata": 4,
+  "per_repository_receipt_pins": [
+    {
+      "bytes": 11773,
+      "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/roundtrip/repository-1-download.json",
+      "sha256": "cf81a00bdb70ce37a2323dbc60f62dcd13fdd8e79877feea4c3ed50c795850eb"
+    },
+    {
+      "bytes": 6508,
+      "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/roundtrip/repository-2-download.json",
+      "sha256": "e624ea7d14f8d3cbb7f5cd404d7731014bc39d224422dcace83743e13264a5ff"
+    },
+    {
+      "bytes": 6506,
+      "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/roundtrip/repository-3-download.json",
+      "sha256": "7fcd327becb650bec87dc2cd0449a406f95907e69f38273922d3f7b7524cc2fb"
+    }
+  ],
+  "schema": "normative-checkpoint-native-HF-CLI-byte-roundtrip/v1",
+  "scope": "Independent native hf CLI download of16 immutable public checkpoint copies and streamed byte/SHA comparison to8 authenticated originals. Metadata/config/README files are not downloaded; existing32-file native publication receipts supply their declared metadata evidence only.",
+  "script_pin": {
+    "bytes": 9863,
+    "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/verify_hf_cli_roundtrip.py",
+    "sha256": "f38ba7ac68f98d637bfb431968986c6db9d787aa6858d69bc51cfe749b4d327e"
+  },
+  "source_authentication_pin": {
+    "bytes": 721862,
+    "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/authentication/authenticated-states.json",
+    "sha256": "582296018f40698159909d32423e5cc9496cfd3d44790ddfdc82b6b0879e06bd"
+  },
+  "source_filename_and_immutable_revision_provenance_retained": true,
+  "source_publication_summary_pin": {
+    "bytes": 2970,
+    "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/publication-summary.json",
+    "sha256": "8c20505d3a2d11ff31d5ac3af71c4fdd70870a6b489a1b3a51536d363a675ecb"
+  },
+  "unique_original_serialization_count": 8,
+  "weight_files_private_roundtrip_directory": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/roundtrip",
+  "weight_payloads_added_to_Git": false
+}

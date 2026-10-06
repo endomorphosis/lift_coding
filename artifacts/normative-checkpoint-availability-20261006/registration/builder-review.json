@@ -1,0 +1,176 @@
+{
+  "approved": true,
+  "builder_executed": false,
+  "checks": {
+    "32_vocab_is_not_output_limit": true,
+    "clause_shape": [
+      "batch",
+      8,
+      "dimension"
+    ],
+    "complete_runtime_io_contract_false": true,
+    "declared_output_limit_512_long_context_8192_false": true,
+    "decoder_tokens_output_shape": [
+      "batch",
+      "sequence"
+    ],
+    "default_optional_false_native_importer_preserves_mandatory_inputs": true,
+    "deterministic_native_asset_record_id_api_used": true,
+    "fixed_current_authenticated_eight_state_rows_match_prior_and_actual_files": true,
+    "four_unique_tensors_eight_concrete_serialization_role_bindings_preserved": true,
+    "fresh_optimizer_does_not_claim_resume": true,
+    "immutable_dimension_repository_receipts_required": true,
+    "last_attempt_selected_true_header_preserved_without_role_relabel": true,
+    "mask_dtype": "bool",
+    "mask_shape": [
+      "batch",
+      8
+    ],
+    "native_schema_profile_format_null_and_task_identity_explicit": true,
+    "no_manager_constructor_or_checkpoint_model_loader_called": true,
+    "original_facade_recipe_supported_false": true,
+    "output_dtype": "int64",
+    "paragraph_shape": [
+      "batch",
+      "dimension"
+    ],
+    "raw_donor_lineage_preserved_separate_from_immediate_continuation_parent": true,
+    "receipt_output_path_safe_immutable_validation_delegated_to_native_prepare": true,
+    "runtime_teacher_proof_false": true,
+    "three_mandatory_inputs_declared": true
+  },
+  "database_read_or_write": false,
+  "findings": [],
+  "inference_executed": false,
+  "limits": [
+    "Approval covers this frozen builder applied to the reviewed authentication/prior receipts; actual immutable Hub receipt joins and native _prepare success must be established when the builder runs.",
+    "The builder uses recursive pin discovery in the authentication receipt. This is acceptable for the independently pinned reviewed receipt, but does not constitute a generic signed or untrusted-input authority verifier.",
+    "Input shapes are declared candidate metadata; complete_runtime_io_contract remains false. Availability registration does not authenticate embedding producer bytes, qualify runtime dispatch, or promote semantic/prose/teacher/proof quality.",
+    "Private codec and serialization schema remain separate from nullable native IR schema/profile/format. Immediate parents and raw donor are represented through the independent custody receipt/original lineage rather than new duplicate-weight registrations.",
+    "Frozen recipe and alias roles are preserved. Registration creates eight serialization bindings for four numeric endpoints, not eight independent fits."
+  ],
+  "model_loaded": false,
+  "native_preparation_executed": false,
+  "network_read_or_write": false,
+  "new_embeddings_generated": false,
+  "observed_original_states": [
+    {
+      "arm": "normative-wording-zero",
+      "dimension": 384,
+      "pin": {
+        "bytes": 2798242,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-zero/selected-state.json",
+        "sha256": "82f326a83a2d00cc1628ff2e9baf3096aa887348bd07e49883ed3e7c0234014e"
+      },
+      "role": "selected",
+      "tensor_sha256": "e918a196684aa2f7d4021c210908eaba2517542e14523d98c4f72419c23ae3b3"
+    },
+    {
+      "arm": "normative-wording-zero",
+      "dimension": 384,
+      "pin": {
+        "bytes": 2798246,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-zero/last-attempt-state.json",
+        "sha256": "7575ce918ab16a5c76d60ce2f1b94d7a75ff72e12897634a3564d8e192c1b2e4"
+      },
+      "role": "last-attempt",
+      "tensor_sha256": "e918a196684aa2f7d4021c210908eaba2517542e14523d98c4f72419c23ae3b3"
+    },
+    {
+      "arm": "normative-wording-ce",
+      "dimension": 384,
+      "pin": {
+        "bytes": 2797392,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-ce/selected-state.json",
+        "sha256": "6cab6fe31ef7c98db1508001bc64926b7ff176ef2a9bd385473d8e05f5f8c266"
+      },
+      "role": "selected",
+      "tensor_sha256": "0b3c7c3b1a5581cd393d9bb8db1d24b87fe2cb9dff0be268aa2b5ed1f88b6594"
+    },
+    {
+      "arm": "normative-wording-ce",
+      "dimension": 384,
+      "pin": {
+        "bytes": 2797396,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-ce/last-attempt-state.json",
+        "sha256": "886cf857852bfbc7eead2aaf216e917a920e48d48e0d297ba0ccb07245f1e815"
+      },
+      "role": "last-attempt",
+      "tensor_sha256": "0b3c7c3b1a5581cd393d9bb8db1d24b87fe2cb9dff0be268aa2b5ed1f88b6594"
+    },
+    {
+      "arm": "normative-wording-zero",
+      "dimension": 768,
+      "pin": {
+        "bytes": 4778674,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-zero/selected-state.json",
+        "sha256": "c8beca3ef5ea2d477ebc9a1564c8922404b245098a0b56083197cd6185c3083f"
+      },
+      "role": "selected",
+      "tensor_sha256": "991f9a1abdf01b72ac5f827adde5ef7be5af28fc0dc3a3db8e4e6e2d8816f379"
+    },
+    {
+      "arm": "normative-wording-zero",
+      "dimension": 768,
+      "pin": {
+        "bytes": 4778678,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-zero/last-attempt-state.json",
+        "sha256": "89590d3d13bd7de9550e96a0238e38d33f293996bb61ec1bdb33572097b4f0e2"
+      },
+      "role": "last-attempt",
+      "tensor_sha256": "991f9a1abdf01b72ac5f827adde5ef7be5af28fc0dc3a3db8e4e6e2d8816f379"
+    },
+    {
+      "arm": "normative-wording-ce",
+      "dimension": 768,
+      "pin": {
+        "bytes": 4779949,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-ce/selected-state.json",
+        "sha256": "aa2f75cad0ade34a3965a4f0b71bdc2fe962f5b863b38133927978ea2673aeb3"
+      },
+      "role": "selected",
+      "tensor_sha256": "3fe21b42657bf33f5d0d129d538b72dbb5808f9cc491a3822abd902b13a74b6d"
+    },
+    {
+      "arm": "normative-wording-ce",
+      "dimension": 768,
+      "pin": {
+        "bytes": 4779953,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-ce/last-attempt-state.json",
+        "sha256": "bcfd436b6f304c1b6c41c3443848d78f5ee59459cdf606d13b70096a87227e2f"
+      },
+      "role": "last-attempt",
+      "tensor_sha256": "3fe21b42657bf33f5d0d129d538b72dbb5808f9cc491a3822abd902b13a74b6d"
+    }
+  ],
+  "reviewed_authentication_pin": {
+    "bytes": 721862,
+    "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/authentication/authenticated-states.json",
+    "sha256": "582296018f40698159909d32423e5cc9496cfd3d44790ddfdc82b6b0879e06bd"
+  },
+  "reviewed_builder_pin": {
+    "bytes": 11589,
+    "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/registration/build_plan.py",
+    "sha256": "ff415d03bf305466d7d85147f6866ab6e66d53ffc19372b8aa663bee681d770c"
+  },
+  "reviewed_dependency_pins": [
+    {
+      "bytes": 2714,
+      "path": "/home/barberb/lift_coding/artifacts/decoder-profile-recovery-20261006/custody.py",
+      "sha256": "c3b355c2b3e4743a839a721b61c1d2868fe25c609b8da562a6b302fbe0cb6864"
+    },
+    {
+      "bytes": 29300,
+      "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-datasets-20261006/ipfs_datasets_py/logic/formalization/autoencoder/ir_model_manager_import.py",
+      "sha256": "5d50f879d6e1e80fc68a29060680fcac9e234f62a3732f7c697f31360ca9506b"
+    }
+  ],
+  "reviewed_prior_observation_pin": {
+    "bytes": 16067,
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/reconciliation-findings.json",
+    "sha256": "01390c913bb853b2556d7d38b02c4adcfe2b156799d91bfde9ca3b6fe0bc9d3a"
+  },
+  "schema": "normative-registration-builder-independent-review/v1",
+  "scope": "Read-only builder/source review and fresh eight original-file byte joins; builder/importer preflight not executed and no Hub receipts were available during this review.",
+  "training_executed": false
+}

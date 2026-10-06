@@ -1,0 +1,221 @@
+{
+  "all32_published_path_metadata_matches_native_receipts": true,
+  "authority": {
+    "proof_authority": false,
+    "quality_qualified": false,
+    "runtime_ready": false,
+    "teacher_qualified": false
+  },
+  "completed": true,
+  "observed_at_utc": "2026-10-06T15:39:38.009557+00:00",
+  "operations": {
+    "Hub_upload_or_settings_changes": false,
+    "database_read_or_write": false,
+    "model_or_decoder_or_encoder_loaded": false,
+    "new_training_or_embeddings": false,
+    "weights_downloaded_by_this_metadata_check": false
+  },
+  "repositories": [
+    {
+      "files": [
+        {
+          "bytes": 2798242,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/384d/normative-wording-zero/selected-state.json",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 2798246,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/384d/normative-wording-zero/last-attempt-state.json",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 2797392,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/384d/normative-wording-ce/selected-state.json",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 2797396,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/384d/normative-wording-ce/last-attempt-state.json",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 4778674,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-zero/selected-state.json",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 4778678,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-zero/last-attempt-state.json",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 4779949,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-ce/selected-state.json",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 4779953,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-ce/last-attempt-state.json",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 244315,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/preprocessing/384d-metadata.json",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 303999,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/preprocessing/768d-metadata.json",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 721862,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/metadata/authenticated-states.json",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 13198,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/evidence/normative_wording_training.md",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 1776,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/README.md",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 31081,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/manifest.json",
+          "remote_identity_matches_native_receipt": true
+        }
+      ],
+      "immutable_revision": "aed9bff916e52f43f378dc31c93f98e8a9f52ed1",
+      "native_receipt_pin": {
+        "bytes": 12926,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/Publicus--legal-ir-autoencoder-native-publication-receipt.json",
+        "sha256": "5fdcfe543394c4788a0839a80227cc8c91a941fe34fa1387d7007e5a53bf897f"
+      },
+      "public": true,
+      "published_paths_verified": 14,
+      "repository_id": "Publicus/legal-ir-autoencoder"
+    },
+    {
+      "files": [
+        {
+          "bytes": 2798242,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/384d/normative-wording-zero/selected-state.json",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 2798246,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/384d/normative-wording-zero/last-attempt-state.json",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 2797392,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/384d/normative-wording-ce/selected-state.json",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 2797396,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/384d/normative-wording-ce/last-attempt-state.json",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 244315,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/preprocessing/384d-metadata.json",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 721862,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/metadata/authenticated-states.json",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 13198,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/evidence/normative_wording_training.md",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 1776,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/README.md",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 16690,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/manifest.json",
+          "remote_identity_matches_native_receipt": true
+        }
+      ],
+      "immutable_revision": "8199354f58af914768c2296c441ccda2f8e39daa",
+      "native_receipt_pin": {
+        "bytes": 8653,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/Publicus--legal-ir-autoencoder-384d-native-publication-receipt.json",
+        "sha256": "4c17f2a0d0c180a507dbcb2edf5c8c1000c6465f02d066fb39bb330aad54ccc0"
+      },
+      "public": true,
+      "published_paths_verified": 9,
+      "repository_id": "Publicus/legal-ir-autoencoder-384d"
+    },
+    {
+      "files": [
+        {
+          "bytes": 4778674,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-zero/selected-state.json",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 4778678,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-zero/last-attempt-state.json",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 4779949,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-ce/selected-state.json",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 4779953,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-ce/last-attempt-state.json",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 303999,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/preprocessing/768d-metadata.json",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 721862,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/metadata/authenticated-states.json",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 13198,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/evidence/normative_wording_training.md",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 1776,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/README.md",
+          "remote_identity_matches_native_receipt": true
+        },
+        {
+          "bytes": 16690,
+          "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/manifest.json",
+          "remote_identity_matches_native_receipt": true
+        }
+      ],
+      "immutable_revision": "1cc315894142c9d3b05c6fff90556cde7a2578fe",
+      "native_receipt_pin": {
+        "bytes": 8653,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/Publicus--legal-ir-autoencoder-768d-native-publication-receipt.json",
+        "sha256": "2b0fc0b5caa29b4947ab2261e4ad0774204f122a658031706e3f5a2d18bb9b33"
+      },
+      "public": true,
+      "published_paths_verified": 9,
+      "repository_id": "Publicus/legal-ir-autoencoder-768d"
+    }
+  ],
+  "schema": "normative-published-path-metadata-readback/v1",
+  "scope": "Anonymous file metadata at3 exact immutable publication revisions; this additional check downloads no model files and never decodes checkpoints. Independent native CLI weight byte verification is in roundtrip-verification.json."
+}

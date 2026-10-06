@@ -41,10 +41,15 @@ file absence is not automatically a main omission. The parent datasets tracking
 field is corrected from a deleted `agent/ui-ux-ir` branch to `main`, after exact
 historical UI source retention checks. Runtime metadata also now distinguishes
 caller-pinned paragraph bytes from saved clause-context inventory joins, without
-changing numerical calculations or the original pinned replay. The new normative
-checkpoint serializations are still absent from the inspected ModelManager and
-public Hub snapshots and need scoped candidate availability registration before
-new supervisor use.
+changing numerical calculations or the original pinned replay. The normative
+checkpoint serializations were absent from that inspection. The subsequent
+[availability completion](60-normative-checkpoint-availability-2026-10-06.md)
+publishes all eight containers and registers them in the genuine ModelManager,
+preserving all 670 previous records. These four unique trained endpoints remain
+separate from runtime, teacher and proof qualification. That completion also
+joins the other agent's newer retention panel to the same state identities:
+384D exact IR improves 20→31/48 and 768D 46→48/48. The exposed panel and the
+60-row wording panel above keep their distinct populations and measurements.
 
 During this reconciliation, datasets PR #1271 also published experimental grouped
 Legal decoders and retained handoffs at `0f36163a585a9bf514c41d8eabe202936c000705`.

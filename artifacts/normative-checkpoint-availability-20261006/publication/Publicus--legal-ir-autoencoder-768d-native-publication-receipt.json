@@ -1,0 +1,187 @@
+{
+  "commit_returned": true,
+  "commit_started": true,
+  "created_paths": [
+    "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-zero/selected-state.json",
+    "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-zero/last-attempt-state.json",
+    "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-ce/selected-state.json",
+    "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-ce/last-attempt-state.json",
+    "releases/20261006-normative-wording-checkpoints-v1/preprocessing/768d-metadata.json",
+    "releases/20261006-normative-wording-checkpoints-v1/metadata/authenticated-states.json",
+    "releases/20261006-normative-wording-checkpoints-v1/evidence/normative_wording_training.md",
+    "releases/20261006-normative-wording-checkpoints-v1/README.md",
+    "releases/20261006-normative-wording-checkpoints-v1/manifest.json"
+  ],
+  "cross_repository_transaction_atomic": false,
+  "existing_visibility_preserved": true,
+  "files": [
+    {
+      "bytes": 4778674,
+      "file_pin": {
+        "bytes": 4778674,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/stage/checkpoints/768d/normative-wording-zero/selected-state.json",
+        "sha256": "c8beca3ef5ea2d477ebc9a1564c8922404b245098a0b56083197cd6185c3083f"
+      },
+      "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-zero/selected-state.json",
+      "remote_identity": {
+        "blob_id": "72735705e9c500a786b09b8abb1c92978145f520",
+        "bytes": 4778674,
+        "scheme": "git-blob-sha1"
+      },
+      "sha256": "c8beca3ef5ea2d477ebc9a1564c8922404b245098a0b56083197cd6185c3083f",
+      "verified": true
+    },
+    {
+      "bytes": 4778678,
+      "file_pin": {
+        "bytes": 4778678,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/stage/checkpoints/768d/normative-wording-zero/last-attempt-state.json",
+        "sha256": "89590d3d13bd7de9550e96a0238e38d33f293996bb61ec1bdb33572097b4f0e2"
+      },
+      "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-zero/last-attempt-state.json",
+      "remote_identity": {
+        "blob_id": "49a63e7ef0a49248b849bdb35216fa7001989f73",
+        "bytes": 4778678,
+        "scheme": "git-blob-sha1"
+      },
+      "sha256": "89590d3d13bd7de9550e96a0238e38d33f293996bb61ec1bdb33572097b4f0e2",
+      "verified": true
+    },
+    {
+      "bytes": 4779949,
+      "file_pin": {
+        "bytes": 4779949,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/stage/checkpoints/768d/normative-wording-ce/selected-state.json",
+        "sha256": "aa2f75cad0ade34a3965a4f0b71bdc2fe962f5b863b38133927978ea2673aeb3"
+      },
+      "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-ce/selected-state.json",
+      "remote_identity": {
+        "blob_id": "18620846144965cb4218b095258903401ff78a66",
+        "bytes": 4779949,
+        "scheme": "git-blob-sha1"
+      },
+      "sha256": "aa2f75cad0ade34a3965a4f0b71bdc2fe962f5b863b38133927978ea2673aeb3",
+      "verified": true
+    },
+    {
+      "bytes": 4779953,
+      "file_pin": {
+        "bytes": 4779953,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/stage/checkpoints/768d/normative-wording-ce/last-attempt-state.json",
+        "sha256": "bcfd436b6f304c1b6c41c3443848d78f5ee59459cdf606d13b70096a87227e2f"
+      },
+      "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-ce/last-attempt-state.json",
+      "remote_identity": {
+        "blob_id": "043f255928364adf746130b699535f1a9edc330f",
+        "bytes": 4779953,
+        "scheme": "git-blob-sha1"
+      },
+      "sha256": "bcfd436b6f304c1b6c41c3443848d78f5ee59459cdf606d13b70096a87227e2f",
+      "verified": true
+    },
+    {
+      "bytes": 303999,
+      "file_pin": {
+        "bytes": 303999,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/stage/preprocessing/768d-metadata.json",
+        "sha256": "3af855b31096c202249972c1ee39d99af919ec5f0740e671f74427fd8213b3ab"
+      },
+      "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/preprocessing/768d-metadata.json",
+      "remote_identity": {
+        "blob_id": "15b9f01e4aeae6a708e492542256a077463eb81c",
+        "bytes": 303999,
+        "scheme": "git-blob-sha1"
+      },
+      "sha256": "3af855b31096c202249972c1ee39d99af919ec5f0740e671f74427fd8213b3ab",
+      "verified": true
+    },
+    {
+      "bytes": 721862,
+      "file_pin": {
+        "bytes": 721862,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/stage/metadata/authenticated-states.json",
+        "sha256": "582296018f40698159909d32423e5cc9496cfd3d44790ddfdc82b6b0879e06bd"
+      },
+      "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/metadata/authenticated-states.json",
+      "remote_identity": {
+        "blob_id": "07d6d431b72c0c626d1956db3c790ae20989eaa6",
+        "bytes": 721862,
+        "scheme": "git-blob-sha1"
+      },
+      "sha256": "582296018f40698159909d32423e5cc9496cfd3d44790ddfdc82b6b0879e06bd",
+      "verified": true
+    },
+    {
+      "bytes": 13198,
+      "file_pin": {
+        "bytes": 13198,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/stage/evidence/normative_wording_training.md",
+        "sha256": "ad19daea21c4bb2bd2ddef48c9c942a5f68edc00b40605553f89daf0ec0beb19"
+      },
+      "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/evidence/normative_wording_training.md",
+      "remote_identity": {
+        "blob_id": "ef8c592e0aad6a1044b74a26e84dc71ffffde37b",
+        "bytes": 13198,
+        "scheme": "git-blob-sha1"
+      },
+      "sha256": "ad19daea21c4bb2bd2ddef48c9c942a5f68edc00b40605553f89daf0ec0beb19",
+      "verified": true
+    },
+    {
+      "bytes": 1776,
+      "file_pin": {
+        "bytes": 1776,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/repository-metadata/Publicus--legal-ir-autoencoder-768d/README.md",
+        "sha256": "6585007b8b76c50f3aaf706b8c2b657d5a68a45b786a73966f8d0fab72626e23"
+      },
+      "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/README.md",
+      "remote_identity": {
+        "blob_id": "46158e9bf32ff867102394bee3559c8de4d4bc21",
+        "bytes": 1776,
+        "scheme": "git-blob-sha1"
+      },
+      "sha256": "6585007b8b76c50f3aaf706b8c2b657d5a68a45b786a73966f8d0fab72626e23",
+      "verified": true
+    },
+    {
+      "bytes": 16690,
+      "file_pin": {
+        "bytes": 16690,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/repository-metadata/Publicus--legal-ir-autoencoder-768d/manifest.json",
+        "sha256": "669a0c8be36e18ed642db1608afa9c311d1d843c57fd04a30c1e8bd718642e35"
+      },
+      "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/manifest.json",
+      "remote_identity": {
+        "blob_id": "4f89f7dc06ef34ad7c2ad82d41723f1d942da12b",
+        "bytes": 16690,
+        "scheme": "git-blob-sha1"
+      },
+      "sha256": "669a0c8be36e18ed642db1608afa9c311d1d843c57fd04a30c1e8bd718642e35",
+      "verified": true
+    }
+  ],
+  "files_verified": true,
+  "idempotent_reuse": false,
+  "initial_revision": "2fc77ccd037e7276c8bdd56a2c79cada0334fd79",
+  "manifest_pin": {
+    "bytes": 16690,
+    "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/repository-metadata/Publicus--legal-ir-autoencoder-768d/manifest.json",
+    "sha256": "669a0c8be36e18ed642db1608afa9c311d1d843c57fd04a30c1e8bd718642e35"
+  },
+  "model_loaded": false,
+  "numerical_quality_qualified": false,
+  "proof_qualified": false,
+  "repository_create_returned": false,
+  "repository_create_started": false,
+  "repository_created": false,
+  "repository_creation_indeterminate": false,
+  "repository_id": "Publicus/legal-ir-autoencoder-768d",
+  "repository_private": false,
+  "repository_supplied_python_executed": false,
+  "requested_private_new": false,
+  "reused_paths": [],
+  "revision": "1cc315894142c9d3b05c6fff90556cde7a2578fe",
+  "schema": "ir-model-hub-publication-receipt/v1",
+  "teacher_qualified": false,
+  "trust_remote_code": false
+}

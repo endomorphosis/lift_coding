@@ -1,0 +1,156 @@
+{
+  "schema": "normative-availability-final-custody-and-retention-join/v1",
+  "availability_completed": true,
+  "registered_serializations": 8,
+  "unique_tensor_endpoints": 4,
+  "model_manager_counts": [
+    670,
+    678
+  ],
+  "all_prior_670_metadata_activity_preserved": true,
+  "no_write_repeat": {
+    "already_present": 8,
+    "manager_constructed": false,
+    "counts": [
+      678,
+      678
+    ]
+  },
+  "roundtrip_verification_pin": {
+    "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/roundtrip/roundtrip-verification.json",
+    "bytes": 8611,
+    "sha256": "a74b1ee26d3405ced830080572e9d5a2d34642ee58b7d905c9534098b211da2d"
+  },
+  "latest_peer_retention": {
+    "repository": "endomorphosis/ipfs_datasets_py",
+    "commit": "1ff99942caf57d8dc82cd3ddbe8df962752da7aa",
+    "path": "docs/autoencoders/evidence/normative-wording-retention-20261006/summary.json",
+    "bytes": 43996,
+    "sha256": "cb1c36c1bb7005e8b63f2bdbba7d64ceff0e41e16e3cba4af156ccdc4e628b57",
+    "all_four_selected_endpoints_match_registered_and_published_assets": true,
+    "panels": [
+      {
+        "dimension": 384,
+        "arm": "normative-wording-zero",
+        "ordered_exact": 20,
+        "field_exact": {
+          "action": {
+            "correct": 179,
+            "total": 180
+          },
+          "actor": {
+            "correct": 180,
+            "total": 180
+          },
+          "modality": {
+            "correct": 139,
+            "total": 180
+          },
+          "object": {
+            "correct": 180,
+            "total": 180
+          }
+        },
+        "state_ref": {
+          "bytes": 2798242,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-zero/selected-state.json",
+          "sha256": "82f326a83a2d00cc1628ff2e9baf3096aa887348bd07e49883ed3e7c0234014e",
+          "tensor_sha256": "e918a196684aa2f7d4021c210908eaba2517542e14523d98c4f72419c23ae3b3"
+        }
+      },
+      {
+        "dimension": 384,
+        "arm": "normative-wording-ce",
+        "ordered_exact": 31,
+        "field_exact": {
+          "action": {
+            "correct": 179,
+            "total": 180
+          },
+          "actor": {
+            "correct": 180,
+            "total": 180
+          },
+          "modality": {
+            "correct": 159,
+            "total": 180
+          },
+          "object": {
+            "correct": 180,
+            "total": 180
+          }
+        },
+        "state_ref": {
+          "bytes": 2797392,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-ce/selected-state.json",
+          "sha256": "6cab6fe31ef7c98db1508001bc64926b7ff176ef2a9bd385473d8e05f5f8c266",
+          "tensor_sha256": "0b3c7c3b1a5581cd393d9bb8db1d24b87fe2cb9dff0be268aa2b5ed1f88b6594"
+        }
+      },
+      {
+        "dimension": 768,
+        "arm": "normative-wording-zero",
+        "ordered_exact": 46,
+        "field_exact": {
+          "action": {
+            "correct": 180,
+            "total": 180
+          },
+          "actor": {
+            "correct": 180,
+            "total": 180
+          },
+          "modality": {
+            "correct": 178,
+            "total": 180
+          },
+          "object": {
+            "correct": 180,
+            "total": 180
+          }
+        },
+        "state_ref": {
+          "bytes": 4778674,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-zero/selected-state.json",
+          "sha256": "c8beca3ef5ea2d477ebc9a1564c8922404b245098a0b56083197cd6185c3083f",
+          "tensor_sha256": "991f9a1abdf01b72ac5f827adde5ef7be5af28fc0dc3a3db8e4e6e2d8816f379"
+        }
+      },
+      {
+        "dimension": 768,
+        "arm": "normative-wording-ce",
+        "ordered_exact": 48,
+        "field_exact": {
+          "action": {
+            "correct": 180,
+            "total": 180
+          },
+          "actor": {
+            "correct": 180,
+            "total": 180
+          },
+          "modality": {
+            "correct": 180,
+            "total": 180
+          },
+          "object": {
+            "correct": 180,
+            "total": 180
+          }
+        },
+        "state_ref": {
+          "bytes": 4779949,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-ce/selected-state.json",
+          "sha256": "aa2f75cad0ade34a3965a4f0b71bdc2fe962f5b863b38133927978ea2673aeb3",
+          "tensor_sha256": "3fe21b42657bf33f5d0d129d538b72dbb5808f9cc491a3822abd902b13a74b6d"
+        }
+      }
+    ],
+    "fresh_holdout": false,
+    "observed_by_this_availability_run": false
+  },
+  "runtime_ready": false,
+  "teacher_qualified": false,
+  "proof_authority": false,
+  "new_training_or_embedding_generation": false
+}

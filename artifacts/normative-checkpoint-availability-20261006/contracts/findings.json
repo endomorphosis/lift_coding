@@ -1,0 +1,311 @@
+{
+  "schema": "normative-candidate-native-api-survey/v1",
+  "observed_utc": "2026-10-06T15:14:01.263002+00:00",
+  "source_scope": "Fixed committed Git objects; current worktree HEAD is not assumed to match them.",
+  "accelerate_commit": "45803f0dca3365982b6058bf7e7c9c94a95aefcf",
+  "datasets_commit": "61c5db04538596ea00091cd4f013500854368397",
+  "sources": [
+    {
+      "repository": "/home/barberb/lift_coding/.worktrees/contextual-legal-runtime-accelerate-20261006",
+      "commit": "45803f0dca3365982b6058bf7e7c9c94a95aefcf",
+      "relative_path": "ipfs_accelerate_py/model_manager.py",
+      "bytes": 176248,
+      "sha256": "cd65b2e91c05a603ad984ddcef0e2967b90362f90ee212c1849f9e5bc81631d4",
+      "git_blob_oid": "e287dad60eaf42d8f919161f9ecbcf54228101a7",
+      "prior_commit": "26dc83812d25093594752fedf3c0ef5b998f4d79",
+      "bytes_identical_to_prior": true,
+      "declarations": [
+        {
+          "name": "ModelManager.__init__",
+          "line": 609,
+          "end_line": 748,
+          "arguments": "self, storage_path: str=None, use_database: bool=None, enable_ipfs: bool=None, cache_memory_mb: int=100, cache_disk_mb: int=1024, cache_eviction_policy: str='lru', catalog: Optional[Any]=None, project_legacy_models: Optional[bool]=None, usage_service: Optional[Any]=None",
+          "docstring": "Initialize the model manager.\n\nArgs:\n    storage_path: Path for storage backend (JSON file or DuckDB database)\n    use_database: Whether to use DuckDB backend. If None, auto-detect.\n    enable_ipfs: Whether to enable IPFS backend for model storage. If None, auto-detect.\n    cache_memory_mb: In-memory cache size in MB for ipfs_kit_py tiered cache (default: 100).\n    cache_disk_mb: Disk cache quota in MB for ipfs_kit_py tiered cache (default: 1024).\n    cache_eviction_policy: Cache eviction policy \u2013 \"lru\", \"lfu\", or \"arc\" (default: \"lru\").\n    catalog: Optional pre-assembled AIServiceCatalog. Injected catalogs\n        are used directly and are not copied.\n    project_legacy_models: Whether to register this manager's persisted\n        ModelMetadata as a pure catalog source. Defaults to True; pass\n        False only when an injected catalog already owns that source.\n    usage_service: Optional read-only usage snapshot service (for example\n        a :class:`~ipfs_accelerate_py.endpoint_usage.coordinator.UsageCoordinator`).\n        When omitted, existing catalog APIs are unchanged and usage-plane\n        facades raise :class:`UsageServiceUnavailable`."
+        },
+        {
+          "name": "ModelManager._save_to_database",
+          "line": 1181,
+          "end_line": 1277,
+          "arguments": "self",
+          "docstring": "Save model metadata to DuckDB database."
+        },
+        {
+          "name": "ModelManager.add_model",
+          "line": 1365,
+          "end_line": 1406,
+          "arguments": "self, metadata: ModelMetadata",
+          "docstring": "Add or update a model in the registry.\n\nArgs:\n    metadata: ModelMetadata object\n\nReturns:\n    bool: True if successful, False otherwise"
+        },
+        {
+          "name": "ModelManager.get_model",
+          "line": 1408,
+          "end_line": 1425,
+          "arguments": "self, model_id: str",
+          "docstring": "Get model metadata by ID.\n\nArgs:\n    model_id: Model identifier\n\nReturns:\n    ModelMetadata object or None if not found"
+        },
+        {
+          "name": "ModelManager._record_model_access",
+          "line": 1501,
+          "end_line": 1537,
+          "arguments": "self, metadata: ModelMetadata",
+          "docstring": "Emit model access audit/provenance events without mutating state."
+        },
+        {
+          "name": "ModelManager.close",
+          "line": 3810,
+          "end_line": 3818,
+          "arguments": "self",
+          "docstring": "Close the model manager and save any pending changes."
+        }
+      ]
+    },
+    {
+      "repository": "/home/barberb/lift_coding/.worktrees/contextual-legal-runtime-accelerate-20261006",
+      "commit": "45803f0dca3365982b6058bf7e7c9c94a95aefcf",
+      "relative_path": "ipfs_accelerate_py/model_catalog/sources/ir_persistent.py",
+      "bytes": 19952,
+      "sha256": "2cfdb2ad61c9bb1f2fe1c64cf6c70ca45c932d0ec53ccdd08640600d5730beed",
+      "git_blob_oid": "a7d0aa35a0c330f75b662a8f8fa81ee8a7dfd48d",
+      "prior_commit": "26dc83812d25093594752fedf3c0ef5b998f4d79",
+      "bytes_identical_to_prior": true,
+      "declarations": [
+        {
+          "name": "IRPersistentCatalogResult.resolve_ir_binding",
+          "line": 209,
+          "end_line": 217,
+          "arguments": "self, request: dict",
+          "docstring": null
+        },
+        {
+          "name": "IRPersistentCatalogSource.__init__",
+          "line": 232,
+          "end_line": 241,
+          "arguments": "self, *, path: Any, source: str='ir-models.persisted', max_records: int=10000, max_config_bytes: int=MAX_CONFIG_BYTES, max_store_bytes: int=MAX_STORE_BYTES",
+          "docstring": null
+        },
+        {
+          "name": "IRPersistentCatalogSource.load",
+          "line": 293,
+          "end_line": 354,
+          "arguments": "self",
+          "docstring": null
+        },
+        {
+          "name": "IRPersistentCatalogSource.refresh",
+          "line": 356,
+          "end_line": 357,
+          "arguments": "self",
+          "docstring": null
+        },
+        {
+          "name": "IRPersistentCatalogSource.resolve_ir_binding",
+          "line": 359,
+          "end_line": 362,
+          "arguments": "self, request: dict",
+          "docstring": null
+        }
+      ]
+    },
+    {
+      "repository": "/home/barberb/lift_coding/.worktrees/contextual-legal-runtime-accelerate-20261006",
+      "commit": "45803f0dca3365982b6058bf7e7c9c94a95aefcf",
+      "relative_path": "ipfs_accelerate_py/model_catalog/sources/persistent.py",
+      "bytes": 3331,
+      "sha256": "be262df4374f2fdcb08e8e517b7e05570bc524e94d79bcb47201bedff12edfa8",
+      "git_blob_oid": "c5115a8259e94de55fc94f2c69456f35d887a1ed",
+      "prior_commit": "26dc83812d25093594752fedf3c0ef5b998f4d79",
+      "bytes_identical_to_prior": true,
+      "declarations": []
+    },
+    {
+      "repository": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-datasets-20261006",
+      "commit": "61c5db04538596ea00091cd4f013500854368397",
+      "relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/ir_model_manager_import.py",
+      "bytes": 29300,
+      "sha256": "5d50f879d6e1e80fc68a29060680fcac9e234f62a3732f7c697f31360ca9506b",
+      "git_blob_oid": "1ab6ba6a523137ca25ffbcc32e44a630e058569e",
+      "prior_commit": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+      "bytes_identical_to_prior": true,
+      "declarations": [
+        {
+          "name": "ir_model_asset_record_id",
+          "line": 184,
+          "end_line": 191,
+          "arguments": "ir_family_id, dimension, dimension_role, role, checkpoint_sha256",
+          "docstring": "Name a concrete asset binding, without inventing a decoder profile."
+        },
+        {
+          "name": "ir_model_component_record_id",
+          "line": 194,
+          "end_line": 207,
+          "arguments": "ir_family_id, dimension_role, role, checkpoint_sha256",
+          "docstring": "Name an explicit component without inventing an external IR lane width."
+        },
+        {
+          "name": "_metadata",
+          "line": 224,
+          "end_line": 286,
+          "arguments": "value, checkpoint",
+          "docstring": null
+        },
+        {
+          "name": "_prepare",
+          "line": 327,
+          "end_line": 380,
+          "arguments": "manifest_pin, release_receipts, maximum",
+          "docstring": null
+        },
+        {
+          "name": "_matches",
+          "line": 426,
+          "end_line": 429,
+          "arguments": "actual, expected",
+          "docstring": null
+        },
+        {
+          "name": "import_ir_model_manager_records",
+          "line": 451,
+          "end_line": 522,
+          "arguments": "manifest_pin, *, release_receipts, manager, readback, metadata_factory=None, max_reference_bytes=MAX_REFERENCE_BYTES",
+          "docstring": "Register pinned assets, refusing conflicts and requiring fresh readback.\n\n``readback(model_id)`` must return that record from independently reopened\npersisted storage. This contract is the driver's responsibility; this\nadapter cannot prove that an arbitrary injected callable actually reopens\nstorage. Returning True from ``add_model`` alone never qualifies a record.\nAlready identical records are not overwritten or reset. Ordinary failures\nretain partial outcomes; KeyboardInterrupt/SystemExit propagate unchanged."
+        }
+      ]
+    },
+    {
+      "repository": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-datasets-20261006",
+      "commit": "61c5db04538596ea00091cd4f013500854368397",
+      "relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/ir_model_hub_publish.py",
+      "bytes": 14204,
+      "sha256": "bf6e0faa7f78054b3bfa751a10b854249b2174b53b83981091b653c5572d9780",
+      "git_blob_oid": "33d28fccb01786fbb0fe01d2c0601f17cacc5819",
+      "prior_commit": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+      "bytes_identical_to_prior": true,
+      "declarations": [
+        {
+          "name": "publish_ir_model_hub_release",
+          "line": 219,
+          "end_line": 304,
+          "arguments": "plan, *, api=None, operation_factory=None",
+          "docstring": "Publish explicit files or reuse exact remote bytes; never overwrite a path.\n\n``api`` follows HfApi's model_info/create_repo/create_commit contract.\n``operation_factory`` follows CommitOperationAdd and enables inert tests.\nThe defaults import genuine huggingface_hub lazily after local validation.\nThe manifest is authenticated JSON metadata, not runtime/model qualification.\nRoot README.md is create-only like every other explicit destination."
+        }
+      ]
+    }
+  ],
+  "all_five_relevant_current_source_files_identical_to_prior_registration_owners": true,
+  "selected_store": {
+    "path": "/home/barberb/lift_coding/external/ipfs_accelerate/model_manager.duckdb",
+    "regular_file": true,
+    "bytes": 2980589568,
+    "mtime_ns": 1791276980054371024,
+    "content_read": false,
+    "database_connection_opened": false,
+    "current_record_count": null,
+    "current_catalog_revision": null
+  },
+  "prior_registration": {
+    "receipt_pin": {
+      "path": "/home/barberb/lift_coding/artifacts/decoder-profile-recovery-20261006/model-manager-registration.json",
+      "bytes": 7619,
+      "sha256": "73e0f2b11c718d3f275d42f3fc975defed247c6a6ca004c6d5c89c58bcd01e88"
+    },
+    "completed": true,
+    "before_count": 668,
+    "after_count": 670,
+    "current_record_count_claimed": false,
+    "record_ids": [
+      "ir-model-asset-binding/v1:10485c538f0f4a64e9ec0b6fa1c62e06af1f368446cd2c0e8e342e127e9055d9",
+      "ir-model-asset-binding/v1:c992440d87ae57cffb689aa37fe2f3b63e9ae4c251a9ad65697148e576f840e2"
+    ],
+    "cold_native_readback_verified": true,
+    "cold_genuine_manager_reload_verified": true,
+    "driver_pin": {
+      "path": "/home/barberb/lift_coding/artifacts/decoder-profile-recovery-20261006/register_original_contextual_states.py",
+      "bytes": 21050,
+      "sha256": "ddf62894bef8235f29321bd2173064c85b0132ccd8e8a75e9705753dcd753127"
+    },
+    "import_plan_pin": {
+      "path": "/home/barberb/lift_coding/artifacts/decoder-profile-recovery-20261006/contextual-model-manager-import-plan.json",
+      "bytes": 172556,
+      "sha256": "dbebc27e6a0c0de0bb96f0fbd600118389675ee8650a5771ba5dd0acd9cca99b"
+    },
+    "native_result_pin": {
+      "path": "/home/barberb/lift_coding/artifacts/decoder-profile-recovery-20261006/model-manager-api-import-result.json",
+      "bytes": 2220,
+      "sha256": "3702dadfad4e2e5e5a031a2fd7fe4d9159b75bd5fa5e39cf804f180e9b77b14e"
+    }
+  },
+  "existing_dimension_repositories": {
+    "receipt_pin": {
+      "path": "/home/barberb/lift_coding/artifacts/decoder-profile-recovery-20261006/dimension-mirrors/publication-summary.json",
+      "bytes": 2035,
+      "sha256": "757d37b29aeb4c5ed69c1ea2b9176f1d59de790dd34c41e3d303081ecd250583"
+    },
+    "repositories": [
+      {
+        "dimension": 384,
+        "repository_id": "Publicus/legal-ir-autoencoder-384d",
+        "prior_immutable_mirror_revision": "f2c3714f7bf8e30177a799270f0cead51baf19dc"
+      },
+      {
+        "dimension": 768,
+        "repository_id": "Publicus/legal-ir-autoencoder-768d",
+        "prior_immutable_mirror_revision": "2fc77ccd037e7276c8bdd56a2c79cada0334fd79"
+      }
+    ],
+    "current_remote_heads_observed": false,
+    "publisher_driver_pin": {
+      "path": "/home/barberb/lift_coding/artifacts/decoder-profile-recovery-20261006/dimension-mirrors/publish_dimension_mirrors.py",
+      "bytes": 10529,
+      "sha256": "c67fdc0fb27e285a5afe9a12d8a8cc964c181c4117b9e940732dfd51536d4431"
+    }
+  },
+  "binding_representation": {
+    "public_IRModelAssetBinding_class_found": false,
+    "native_representation": "ir-model-asset-binding/v1 deterministic record ID plus huggingface_config.ir_checkpoint declaration",
+    "asset_id_hash_fields": [
+      "ir_family_id",
+      "dimension",
+      "dimension_role",
+      "role",
+      "checkpoint_sha256"
+    ],
+    "exact_catalog_selector_fields": [
+      "record_id",
+      "ir_family_id",
+      "dimension",
+      "dimension_role",
+      "schema_version",
+      "task_id",
+      "profile_id",
+      "format_id",
+      "checkpoint_sha256",
+      "role"
+    ],
+    "task_schema_profile_format_or_run_are_not_implicitly_hashed": true
+  },
+  "known_source_requirements": {
+    "public_import_requires_verified_immutable_publication_receipts_first": true,
+    "all_collisions_inspected_before_first_add": true,
+    "matching_existing_records_skipped_by_import_adapter": true,
+    "driver_must_supply_independently_reopened_persisted_readback": true,
+    "adapter_cannot_authenticate_readback_implementation_or_remote_account": true,
+    "genuine_manager_save_and_close_rewrite_all_in_memory_rows_and_updated_at": true,
+    "genuine_manager_save_errors_are_logged_so_add_success_is_not_persistence_proof": true,
+    "catalog_import_or_refresh_does_not_update_other_running_managers": true,
+    "null_native_output_schema_profile_format_must_remain_explicit": true,
+    "serving_config_forbidden_by_import_plan": true
+  },
+  "survey_authority": {
+    "read_only": true,
+    "ModelManager_constructed": false,
+    "database_opened": false,
+    "checkpoint_payload_read": false,
+    "models_loaded": false,
+    "training_or_inference": false,
+    "HF_calls": false,
+    "refs_changed": false,
+    "runtime_qualified": false,
+    "teacher_qualified": false,
+    "proof_authority": false
+  }
+}

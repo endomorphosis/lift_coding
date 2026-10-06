@@ -1,0 +1,77 @@
+{
+  "all_2_training_summaries_completed": true,
+  "all_32_entry_typed_float32_and_int64_tensor_hashes_match": true,
+  "all_guardian_and_child_exit_codes_zero": true,
+  "all_resource_leases_released": true,
+  "all_three_published_training_prior_endpoint_joins_match": true,
+  "approved_for_unchanged_candidate_copy": true,
+  "catalog_read_or_write": false,
+  "decoder_format_id": null,
+  "decoder_profile_id": null,
+  "fixed_study_processes_observed": 0,
+  "generated_metadata_views": 2,
+  "heavy_libraries_imported": [],
+  "inference_executed": false,
+  "limitations": [
+    "Endpoint identity checks are cooperative and not an atomic snapshot.",
+    "8 serialized candidate identities represent four selected/last numeric alias pairs.",
+    "Last-attempt artifacts retain selected=true but role last-attempt; do not rewrite headers.",
+    "Normative recipe differs from contextual continuation runtime recipe; no runtime admission.",
+    "Exposed DEV meanings and empty qualifiers remain unqualified; publication is availability only.",
+    "Immediate continued parent and original raw donor lineage are distinct and preserved.",
+    "Source-owner byte pins cover the six current bounded source files, not a re-executed historical training closure.",
+    "Original full preprocessing feature corpora and raw embeddings are outside the upload list."
+  ],
+  "manifest_pin": {
+    "bytes": 721862,
+    "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/authentication/authenticated-states.json",
+    "sha256": "582296018f40698159909d32423e5cc9496cfd3d44790ddfdc82b6b0879e06bd"
+  },
+  "metadata_view_checks": [
+    {
+      "dimension": 384,
+      "exact_saved_normalization_transform_initializer_count_prior_retained": true,
+      "forbidden_corpus_or_embedding_payload_keys_present": [],
+      "frozen_training_aggregate_statistics_retained": true,
+      "pin": {
+        "bytes": 244315,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/authentication/preprocessing-384-metadata.json",
+        "sha256": "2c64212a31afc755af64ca5adb52ed0e16a407e88f3d827dae42f5c33210321a"
+      }
+    },
+    {
+      "dimension": 768,
+      "exact_saved_normalization_transform_initializer_count_prior_retained": true,
+      "forbidden_corpus_or_embedding_payload_keys_present": [],
+      "frozen_training_aggregate_statistics_retained": true,
+      "pin": {
+        "bytes": 303999,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/authentication/preprocessing-768-metadata.json",
+        "sha256": "3af855b31096c202249972c1ee39d99af919ec5f0740e671f74427fd8213b3ab"
+      }
+    }
+  ],
+  "model_loaded": false,
+  "native_ir_schema_version": null,
+  "new_embeddings_generated": false,
+  "original_checkpoint_bytes": 30308530,
+  "proof_authority": false,
+  "protected_original_source_support_files": 52,
+  "public_copy_list_pin": {
+    "bytes": 10508,
+    "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/authentication/public-copy-list.json",
+    "sha256": "6aea75aace7681ae620eb634648643f808d9941489ebcfcb03503633e760c5ba"
+  },
+  "remote_read_or_write": false,
+  "reproducer_pin": {
+    "bytes": 22957,
+    "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/authentication/authenticate_saved_states.py",
+    "sha256": "0e66b0cc873465ac9ac02f71ddbb3c258f68cfee1742df6e82c10a350eb194c5"
+  },
+  "runtime_admitted": false,
+  "schema": "normative-checkpoint-authentication-summary/v1",
+  "serialized_endpoint_count": 8,
+  "teacher_qualified": false,
+  "training_executed": false,
+  "unique_numeric_endpoint_count": 4
+}

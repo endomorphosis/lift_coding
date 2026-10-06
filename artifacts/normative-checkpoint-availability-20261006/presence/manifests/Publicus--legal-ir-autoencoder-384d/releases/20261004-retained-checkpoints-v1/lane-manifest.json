@@ -1,0 +1,2951 @@
+{
+  "authority": "Original byte identities and recorded provenance only.",
+  "checkpoints": [
+    {
+      "checkpoint": {
+        "bytes": 614534,
+        "path_in_repo": "releases/retained-checkpoints/6e3f4d731d798aa2732afc37bd74fec34da3267a323844975d2dab78f59f9c61/checkpoint.json",
+        "sha256": "6e3f4d731d798aa2732afc37bd74fec34da3267a323844975d2dab78f59f9c61"
+      },
+      "codec": {
+        "canonical_sha256": "cba3e5384e2bee12e709ccc8e9ee430e51cf09a8fc2e8abdd57143fdaa38dba2",
+        "policy": null,
+        "schema": "typed-json-lexical/v1",
+        "serialized_location": "embedded in original checkpoint; sidecar extraction must be labeled derived",
+        "source_vocabulary_count": null,
+        "target_vocabulary_count": 32
+      },
+      "companion_assets": [
+        {
+          "original_pin": {
+            "bytes": 1585950,
+            "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/train.json",
+            "sha256": "f4ad1d39677ed3184d019ad8556bf0cabd0957f855281c64343e8dfd73319c7b"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/f4ad1d39677ed3184d019ad8556bf0cabd0957f855281c64343e8dfd73319c7b/train.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 529665,
+            "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/validation.json",
+            "sha256": "4b55671a16186773dd65fa9b4b2d51aa7677e4ef89504e55b9937b1f9594fac7"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/4b55671a16186773dd65fa9b4b2d51aa7677e4ef89504e55b9937b1f9594fac7/validation.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 529323,
+            "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/test.json",
+            "sha256": "ea7532abc3c2bcc27ce38dc6358a3898250f62e7cb8fd17af723dd1b85d65444"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/ea7532abc3c2bcc27ce38dc6358a3898250f62e7cb8fd17af723dd1b85d65444/test.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 265747,
+            "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/canary.json",
+            "sha256": "9cd569111cdcc7edabf6a47f75f7b8f05630768ee8913aee9483df66841b9eef"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/9cd569111cdcc7edabf6a47f75f7b8f05630768ee8913aee9483df66841b9eef/canary.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 2142457,
+            "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/raw_ce-1729-development.json",
+            "sha256": "d2f9a0e34f6c20523cace4b50dcc637ca8f3ed44cd61137f6f2095abccfe5a8a"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/d2f9a0e34f6c20523cace4b50dcc637ca8f3ed44cd61137f6f2095abccfe5a8a/raw_ce-1729-development.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 806117,
+            "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/raw_ce-1729-evaluation.json",
+            "sha256": "ab97302bea53d0d31ec4e53c17ba6f696e2fe282b4f1cf066536f7b4e51e4d92"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/ab97302bea53d0d31ec4e53c17ba6f696e2fe282b4f1cf066536f7b4e51e4d92/raw_ce-1729-evaluation.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        }
+      ],
+      "config": {
+        "batch_size": 12,
+        "constant_weight": 1.0,
+        "embedding_provenance": {
+          "assets": [
+            {
+              "bytes": 190,
+              "name": "1_Pooling/config.json",
+              "sha256": "4be450dde3b0273bb9787637cfbd28fe04a7ba6ab9d36ac48e92b11e350ffc23"
+            },
+            {
+              "bytes": 583,
+              "name": "config.json",
+              "sha256": "00273cdfb3e05c7304d180270bdef8adae45023e7bdfc396338bdd815943dc59"
+            },
+            {
+              "bytes": 66746168,
+              "name": "model.safetensors",
+              "sha256": "9a1eb90bbac323ea08aa5629b624fe6ae75db121b904799c2266a1e2c2de22d2"
+            },
+            {
+              "bytes": 385,
+              "name": "modules.json",
+              "sha256": "73348a3d8f8ae4cc5f851dc6b98be3ea819390b814e83656d5eebbadf75fe43e"
+            },
+            {
+              "bytes": 57,
+              "name": "sentence_bert_config.json",
+              "sha256": "948201d8329907aae938fa62f9ceeed53f5694dacc2b87b9f3b78b37ee986529"
+            },
+            {
+              "bytes": 125,
+              "name": "special_tokens_map.json",
+              "sha256": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3"
+            },
+            {
+              "bytes": 711661,
+              "name": "tokenizer.json",
+              "sha256": "da0e79933b9ed51798a3ae27893d3c5fa4a201126cef75586296df9b4d2c62a0"
+            },
+            {
+              "bytes": 394,
+              "name": "tokenizer_config.json",
+              "sha256": "e1790949631401af1bfb6c9c7aeec7fcf612e274d73579d99f704faea40c8ba7"
+            },
+            {
+              "bytes": 231508,
+              "name": "vocab.txt",
+              "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+            }
+          ],
+          "batch_size": 32,
+          "device": "cuda",
+          "dimension": 384,
+          "dtype": "float32",
+          "encode_rows_per_second": 1343.4959378817957,
+          "encode_seconds": 0.7145537049509585,
+          "load_seconds": 0.6230878659989685,
+          "max_tokens_observed": 26,
+          "model_id": "thenlper/gte-small",
+          "normalized": true,
+          "revision": "17e1f347d17fe144873b1201da91788898c639cd",
+          "rows": 960,
+          "truncated": false
+        },
+        "epochs": 100,
+        "hidden_size": 32,
+        "input_normalization": "none",
+        "learning_rate": 0.003,
+        "max_optimizer_steps": 1500,
+        "max_seconds": 300,
+        "max_target_tokens": 512,
+        "patience": 0,
+        "projection_width": 8,
+        "reconstruction_weight": 0.1,
+        "seed": 1729,
+        "semantic_weight": 4.0,
+        "strategy": "reference_ce",
+        "structure_weight": 0.25,
+        "token_embedding_dim": 16,
+        "validation_interval": 10
+      },
+      "contract": null,
+      "declaration": {
+        "dimension_role": "input_embedding",
+        "input_width": 384,
+        "metric_scope": "exposed validation exactIR0/60; not text reconstruction",
+        "receipt": {
+          "bytes": 614534,
+          "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/raw_ce-1729-checkpoint.json",
+          "sha256": "6e3f4d731d798aa2732afc37bd74fec34da3267a323844975d2dab78f59f9c61"
+        },
+        "role": "retained source GRU donor"
+      },
+      "full_runtime_closure_verified": false,
+      "identity": {
+        "checkpoint_schema": "shared-source-384-autoencoder/v2",
+        "dimension": 384,
+        "dimension_role": "input_embedding",
+        "donor": true,
+        "donor_pins": null,
+        "embedded_decoder_schema": "shared-source-384-autoencoder/v2",
+        "format_id": null,
+        "initialization_only": false,
+        "ir_family_id": "legal_ir",
+        "legacy_profile": null,
+        "native_codebase_decoder_complete": null,
+        "original_checkpoint_pin": {
+          "bytes": 614534,
+          "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/raw_ce-1729-checkpoint.json",
+          "sha256": "6e3f4d731d798aa2732afc37bd74fec34da3267a323844975d2dab78f59f9c61"
+        },
+        "payload_ir_family": null,
+        "profile_id": null,
+        "proof_authority": false,
+        "record_id": "ir-model-asset-binding/v1:c5bd814acdf0c62bdfa66b069af057b1a9c1ad7c602c518fd1c6c67b73bda70c",
+        "retained_status": "retained_trained_development_variant",
+        "role": "retained source GRU donor",
+        "runtime_ready": false,
+        "schema_version": null,
+        "source_profile_id": null,
+        "task_id": null,
+        "teacher_qualified": false,
+        "trained": true
+      },
+      "license_scope": {
+        "repository_source": "AGPL-3.0, see SOURCE-LICENSE",
+        "weights_and_companions": "Original provenance retained; this release supplies no new blanket license grant."
+      },
+      "numerical_execution_performed": false,
+      "original_package": null,
+      "schema": "retained-ir-checkpoint-release/v1",
+      "source_binding_scope": "listed checkpoint implementation hashes only, not full import/native closure",
+      "source_map": [
+        {
+          "declaration_pointer": "/legal_codec_sha256",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+          "original_pin": {
+            "bytes": 14622,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+            "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py"
+        },
+        {
+          "declaration_pointer": "/native/dependencies/ipfs_datasets_py.logic.intent_ir.decoder",
+          "expected_relative_path": "ipfs_datasets_py/logic/intent_ir/decoder.py",
+          "original_pin": {
+            "bytes": 24220,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/intent_ir/decoder.py",
+            "sha256": "7bab5781c07e00b54b0283d3a2962926f75935caedc80eceb23264cb388be257"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/7bab5781c07e00b54b0283d3a2962926f75935caedc80eceb23264cb388be257/ipfs_datasets_py/logic/intent_ir/decoder.py"
+        },
+        {
+          "declaration_pointer": "/native/dependencies/ipfs_datasets_py.logic.intent_ir.formalize.rich_grammar",
+          "expected_relative_path": "ipfs_datasets_py/logic/intent_ir/formalize/rich_grammar.py",
+          "original_pin": {
+            "bytes": 11527,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/intent_ir/formalize/rich_grammar.py",
+            "sha256": "6c40ac99d7e339651b6029764f94b12430ca515d4c5f7426770b013499efe92b"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/6c40ac99d7e339651b6029764f94b12430ca515d4c5f7426770b013499efe92b/ipfs_datasets_py/logic/intent_ir/formalize/rich_grammar.py"
+        },
+        {
+          "declaration_pointer": "/native/dependencies/ipfs_datasets_py.logic.intent_ir.schema",
+          "expected_relative_path": "ipfs_datasets_py/logic/intent_ir/schema.py",
+          "original_pin": {
+            "bytes": 27163,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/intent_ir/schema.py",
+            "sha256": "93d38e4724c5f34aab7f39f050742e98ef0c8d80e2ff70459d2401541505fc56"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/93d38e4724c5f34aab7f39f050742e98ef0c8d80e2ff70459d2401541505fc56/ipfs_datasets_py/logic/intent_ir/schema.py"
+        },
+        {
+          "declaration_pointer": "/native/dependencies/ipfs_datasets_py.logic.security_ir.model",
+          "expected_relative_path": "ipfs_datasets_py/logic/security_ir/model.py",
+          "original_pin": {
+            "bytes": 37220,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/security_ir/model.py",
+            "sha256": "abc3aea9c2f4d1ce513ee2c9fc4c304d8bd387ded18e0d646247417422225d39"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/abc3aea9c2f4d1ce513ee2c9fc4c304d8bd387ded18e0d646247417422225d39/ipfs_datasets_py/logic/security_ir/model.py"
+        },
+        {
+          "declaration_pointer": "/native/dependencies/ipfs_datasets_py.logic.software_verification.program",
+          "expected_relative_path": "ipfs_datasets_py/logic/software_verification/program.py",
+          "original_pin": {
+            "bytes": 58065,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/software_verification/program.py",
+            "sha256": "f051f42d64c5f993451972924953cc7eaa6d17df097235ddabfd5d791d406f91"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/f051f42d64c5f993451972924953cc7eaa6d17df097235ddabfd5d791d406f91/ipfs_datasets_py/logic/software_verification/program.py"
+        },
+        {
+          "declaration_pointer": "/native/dependencies/ipfs_datasets_py.logic.ui_ux_ir.decoder",
+          "expected_relative_path": "ipfs_datasets_py/logic/ui_ux_ir/decoder.py",
+          "original_pin": {
+            "bytes": 8008,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/ui_ux_ir/decoder.py",
+            "sha256": "d7be6bff3a1f1464d4783567b90942258ef718bc1c2b7e02938698ed4e619e57"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/d7be6bff3a1f1464d4783567b90942258ef718bc1c2b7e02938698ed4e619e57/ipfs_datasets_py/logic/ui_ux_ir/decoder.py"
+        },
+        {
+          "declaration_pointer": "/native/dependencies/ipfs_datasets_py.logic.ui_ux_ir.schema",
+          "expected_relative_path": "ipfs_datasets_py/logic/ui_ux_ir/schema.py",
+          "original_pin": {
+            "bytes": 120714,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/ui_ux_ir/schema.py",
+            "sha256": "8a7b0cc90151043514d263b1a2655d6d41a2835dacd6b56018ba5c0c89961855"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/8a7b0cc90151043514d263b1a2655d6d41a2835dacd6b56018ba5c0c89961855/ipfs_datasets_py/logic/ui_ux_ir/schema.py"
+        },
+        {
+          "declaration_pointer": "/native/dependencies/ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_latent_formula",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+          "original_pin": {
+            "bytes": 35427,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+            "sha256": "ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py"
+        },
+        {
+          "declaration_pointer": "/native/runtime",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/domain_384_autoencoder.py",
+          "original_pin": {
+            "bytes": 34679,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/domain_384_autoencoder.py",
+            "sha256": "66c5ee320f9c7aacd3b246d0666c7fc3ee928e4679892e1e90c838e1b291dbc6"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/66c5ee320f9c7aacd3b246d0666c7fc3ee928e4679892e1e90c838e1b291dbc6/ipfs_datasets_py/optimizers/logic_theorem_optimizer/domain_384_autoencoder.py"
+        },
+        {
+          "declaration_pointer": "/numerical/files/canonical_contracts.py",
+          "expected_relative_path": "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+          "original_pin": {
+            "bytes": 109257,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+            "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py"
+        },
+        {
+          "declaration_pointer": "/numerical/files/legal_formula_codec.py",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+          "original_pin": {
+            "bytes": 14622,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+            "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py"
+        },
+        {
+          "declaration_pointer": "/numerical/files/legal_ir_grammar_decoder.py",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+          "original_pin": {
+            "bytes": 146870,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+            "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py"
+        },
+        {
+          "declaration_pointer": "/numerical/files/modal_latent_formula.py",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+          "original_pin": {
+            "bytes": 35427,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+            "sha256": "ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py"
+        },
+        {
+          "declaration_pointer": "/numerical/files/tree_pin.py",
+          "expected_relative_path": "ipfs_datasets_py/logic/autoformal/tree_pin.py",
+          "original_pin": {
+            "bytes": 1948,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/autoformal/tree_pin.py",
+            "sha256": "587165942fb06ea9effc836b555e0ac0606c5876b013a374a1e76d25ee069e4d"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/587165942fb06ea9effc836b555e0ac0606c5876b013a374a1e76d25ee069e4d/ipfs_datasets_py/logic/autoformal/tree_pin.py"
+        },
+        {
+          "declaration_pointer": "/runtime_sha256",
+          "expected_relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/source_training_v2.py",
+          "original_pin": {
+            "bytes": 31851,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/formalization/autoencoder/source_training_v2.py",
+            "sha256": "8de8096e895de9df08ccf5352dfd704806823296821d98b5badf08bb553a52e4"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/8de8096e895de9df08ccf5352dfd704806823296821d98b5badf08bb553a52e4/ipfs_datasets_py/logic/formalization/autoencoder/source_training_v2.py"
+        }
+      ],
+      "unknown_schema_task_profile_policy": "Unknown fields remain null; no family-only alias or default serving route."
+    },
+    {
+      "checkpoint": {
+        "bytes": 621716,
+        "path_in_repo": "releases/retained-checkpoints/36b6b3a5a31ce88748a7ff69f1ab55f16dae79a78bfb635436a7b13a34c9cbf2/checkpoint.json",
+        "sha256": "36b6b3a5a31ce88748a7ff69f1ab55f16dae79a78bfb635436a7b13a34c9cbf2"
+      },
+      "codec": {
+        "canonical_sha256": "cba3e5384e2bee12e709ccc8e9ee430e51cf09a8fc2e8abdd57143fdaa38dba2",
+        "policy": null,
+        "schema": "typed-json-lexical/v1",
+        "serialized_location": "embedded in original checkpoint; sidecar extraction must be labeled derived",
+        "source_vocabulary_count": null,
+        "target_vocabulary_count": 32
+      },
+      "companion_assets": [
+        {
+          "original_pin": {
+            "bytes": 1585950,
+            "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/train.json",
+            "sha256": "f4ad1d39677ed3184d019ad8556bf0cabd0957f855281c64343e8dfd73319c7b"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/f4ad1d39677ed3184d019ad8556bf0cabd0957f855281c64343e8dfd73319c7b/train.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 529665,
+            "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/validation.json",
+            "sha256": "4b55671a16186773dd65fa9b4b2d51aa7677e4ef89504e55b9937b1f9594fac7"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/4b55671a16186773dd65fa9b4b2d51aa7677e4ef89504e55b9937b1f9594fac7/validation.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 529323,
+            "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/test.json",
+            "sha256": "ea7532abc3c2bcc27ce38dc6358a3898250f62e7cb8fd17af723dd1b85d65444"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/ea7532abc3c2bcc27ce38dc6358a3898250f62e7cb8fd17af723dd1b85d65444/test.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 265747,
+            "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/canary.json",
+            "sha256": "9cd569111cdcc7edabf6a47f75f7b8f05630768ee8913aee9483df66841b9eef"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/9cd569111cdcc7edabf6a47f75f7b8f05630768ee8913aee9483df66841b9eef/canary.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 2133941,
+            "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/semantic-1729-development.json",
+            "sha256": "a9b328147455bf66a1f02d723366ca179f6c30d92ce3b516cfb809c0deff7d6a"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/a9b328147455bf66a1f02d723366ca179f6c30d92ce3b516cfb809c0deff7d6a/semantic-1729-development.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 801568,
+            "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/semantic-1729-evaluation.json",
+            "sha256": "7dadfb047fd7434a4fee18b72fc9e3077867905617fed3824af7852b15c711a1"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/7dadfb047fd7434a4fee18b72fc9e3077867905617fed3824af7852b15c711a1/semantic-1729-evaluation.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        }
+      ],
+      "config": {
+        "batch_size": 12,
+        "constant_weight": 1.0,
+        "embedding_provenance": {
+          "assets": [
+            {
+              "bytes": 190,
+              "name": "1_Pooling/config.json",
+              "sha256": "4be450dde3b0273bb9787637cfbd28fe04a7ba6ab9d36ac48e92b11e350ffc23"
+            },
+            {
+              "bytes": 583,
+              "name": "config.json",
+              "sha256": "00273cdfb3e05c7304d180270bdef8adae45023e7bdfc396338bdd815943dc59"
+            },
+            {
+              "bytes": 66746168,
+              "name": "model.safetensors",
+              "sha256": "9a1eb90bbac323ea08aa5629b624fe6ae75db121b904799c2266a1e2c2de22d2"
+            },
+            {
+              "bytes": 385,
+              "name": "modules.json",
+              "sha256": "73348a3d8f8ae4cc5f851dc6b98be3ea819390b814e83656d5eebbadf75fe43e"
+            },
+            {
+              "bytes": 57,
+              "name": "sentence_bert_config.json",
+              "sha256": "948201d8329907aae938fa62f9ceeed53f5694dacc2b87b9f3b78b37ee986529"
+            },
+            {
+              "bytes": 125,
+              "name": "special_tokens_map.json",
+              "sha256": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3"
+            },
+            {
+              "bytes": 711661,
+              "name": "tokenizer.json",
+              "sha256": "da0e79933b9ed51798a3ae27893d3c5fa4a201126cef75586296df9b4d2c62a0"
+            },
+            {
+              "bytes": 394,
+              "name": "tokenizer_config.json",
+              "sha256": "e1790949631401af1bfb6c9c7aeec7fcf612e274d73579d99f704faea40c8ba7"
+            },
+            {
+              "bytes": 231508,
+              "name": "vocab.txt",
+              "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+            }
+          ],
+          "batch_size": 32,
+          "device": "cuda",
+          "dimension": 384,
+          "dtype": "float32",
+          "encode_rows_per_second": 1343.4959378817957,
+          "encode_seconds": 0.7145537049509585,
+          "load_seconds": 0.6230878659989685,
+          "max_tokens_observed": 26,
+          "model_id": "thenlper/gte-small",
+          "normalized": true,
+          "revision": "17e1f347d17fe144873b1201da91788898c639cd",
+          "rows": 960,
+          "truncated": false
+        },
+        "epochs": 100,
+        "hidden_size": 32,
+        "input_normalization": "center_rms",
+        "learning_rate": 0.003,
+        "max_optimizer_steps": 1500,
+        "max_seconds": 300,
+        "max_target_tokens": 512,
+        "patience": 0,
+        "projection_width": 8,
+        "reconstruction_weight": 0.1,
+        "seed": 1729,
+        "semantic_weight": 4.0,
+        "strategy": "semantic_v2",
+        "structure_weight": 0.25,
+        "token_embedding_dim": 16,
+        "validation_interval": 10
+      },
+      "contract": null,
+      "declaration": {
+        "dimension_role": "input_embedding",
+        "input_width": 384,
+        "metric_scope": "archived exposed validation exactIR2/60; not independent teacher qualification",
+        "receipt": {
+          "bytes": 621716,
+          "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/semantic-1729-checkpoint.json",
+          "sha256": "36b6b3a5a31ce88748a7ff69f1ab55f16dae79a78bfb635436a7b13a34c9cbf2"
+        },
+        "role": "compatible alternative GRU"
+      },
+      "full_runtime_closure_verified": false,
+      "identity": {
+        "checkpoint_schema": "shared-source-384-autoencoder/v2",
+        "dimension": 384,
+        "dimension_role": "input_embedding",
+        "donor": null,
+        "donor_pins": null,
+        "embedded_decoder_schema": "shared-source-384-autoencoder/v2",
+        "format_id": null,
+        "initialization_only": false,
+        "ir_family_id": "legal_ir",
+        "legacy_profile": null,
+        "native_codebase_decoder_complete": null,
+        "original_checkpoint_pin": {
+          "bytes": 621716,
+          "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/semantic-1729-checkpoint.json",
+          "sha256": "36b6b3a5a31ce88748a7ff69f1ab55f16dae79a78bfb635436a7b13a34c9cbf2"
+        },
+        "payload_ir_family": null,
+        "profile_id": null,
+        "proof_authority": false,
+        "record_id": "ir-model-asset-binding/v1:e2d422d34d7cf1d199ec4f2dd1d376e558fbc2dabe65ed1e9f8a74008bfc55a8",
+        "retained_status": "retained_trained_development_variant",
+        "role": "compatible alternative GRU",
+        "runtime_ready": false,
+        "schema_version": null,
+        "source_profile_id": null,
+        "task_id": null,
+        "teacher_qualified": false,
+        "trained": true
+      },
+      "license_scope": {
+        "repository_source": "AGPL-3.0, see SOURCE-LICENSE",
+        "weights_and_companions": "Original provenance retained; this release supplies no new blanket license grant."
+      },
+      "numerical_execution_performed": false,
+      "original_package": null,
+      "schema": "retained-ir-checkpoint-release/v1",
+      "source_binding_scope": "listed checkpoint implementation hashes only, not full import/native closure",
+      "source_map": [
+        {
+          "declaration_pointer": "/legal_codec_sha256",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+          "original_pin": {
+            "bytes": 14622,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+            "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py"
+        },
+        {
+          "declaration_pointer": "/native/dependencies/ipfs_datasets_py.logic.intent_ir.decoder",
+          "expected_relative_path": "ipfs_datasets_py/logic/intent_ir/decoder.py",
+          "original_pin": {
+            "bytes": 24220,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/intent_ir/decoder.py",
+            "sha256": "7bab5781c07e00b54b0283d3a2962926f75935caedc80eceb23264cb388be257"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/7bab5781c07e00b54b0283d3a2962926f75935caedc80eceb23264cb388be257/ipfs_datasets_py/logic/intent_ir/decoder.py"
+        },
+        {
+          "declaration_pointer": "/native/dependencies/ipfs_datasets_py.logic.intent_ir.formalize.rich_grammar",
+          "expected_relative_path": "ipfs_datasets_py/logic/intent_ir/formalize/rich_grammar.py",
+          "original_pin": {
+            "bytes": 11527,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/intent_ir/formalize/rich_grammar.py",
+            "sha256": "6c40ac99d7e339651b6029764f94b12430ca515d4c5f7426770b013499efe92b"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/6c40ac99d7e339651b6029764f94b12430ca515d4c5f7426770b013499efe92b/ipfs_datasets_py/logic/intent_ir/formalize/rich_grammar.py"
+        },
+        {
+          "declaration_pointer": "/native/dependencies/ipfs_datasets_py.logic.intent_ir.schema",
+          "expected_relative_path": "ipfs_datasets_py/logic/intent_ir/schema.py",
+          "original_pin": {
+            "bytes": 27163,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/intent_ir/schema.py",
+            "sha256": "93d38e4724c5f34aab7f39f050742e98ef0c8d80e2ff70459d2401541505fc56"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/93d38e4724c5f34aab7f39f050742e98ef0c8d80e2ff70459d2401541505fc56/ipfs_datasets_py/logic/intent_ir/schema.py"
+        },
+        {
+          "declaration_pointer": "/native/dependencies/ipfs_datasets_py.logic.security_ir.model",
+          "expected_relative_path": "ipfs_datasets_py/logic/security_ir/model.py",
+          "original_pin": {
+            "bytes": 37220,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/security_ir/model.py",
+            "sha256": "abc3aea9c2f4d1ce513ee2c9fc4c304d8bd387ded18e0d646247417422225d39"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/abc3aea9c2f4d1ce513ee2c9fc4c304d8bd387ded18e0d646247417422225d39/ipfs_datasets_py/logic/security_ir/model.py"
+        },
+        {
+          "declaration_pointer": "/native/dependencies/ipfs_datasets_py.logic.software_verification.program",
+          "expected_relative_path": "ipfs_datasets_py/logic/software_verification/program.py",
+          "original_pin": {
+            "bytes": 58065,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/software_verification/program.py",
+            "sha256": "f051f42d64c5f993451972924953cc7eaa6d17df097235ddabfd5d791d406f91"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/f051f42d64c5f993451972924953cc7eaa6d17df097235ddabfd5d791d406f91/ipfs_datasets_py/logic/software_verification/program.py"
+        },
+        {
+          "declaration_pointer": "/native/dependencies/ipfs_datasets_py.logic.ui_ux_ir.decoder",
+          "expected_relative_path": "ipfs_datasets_py/logic/ui_ux_ir/decoder.py",
+          "original_pin": {
+            "bytes": 8008,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/ui_ux_ir/decoder.py",
+            "sha256": "d7be6bff3a1f1464d4783567b90942258ef718bc1c2b7e02938698ed4e619e57"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/d7be6bff3a1f1464d4783567b90942258ef718bc1c2b7e02938698ed4e619e57/ipfs_datasets_py/logic/ui_ux_ir/decoder.py"
+        },
+        {
+          "declaration_pointer": "/native/dependencies/ipfs_datasets_py.logic.ui_ux_ir.schema",
+          "expected_relative_path": "ipfs_datasets_py/logic/ui_ux_ir/schema.py",
+          "original_pin": {
+            "bytes": 120714,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/ui_ux_ir/schema.py",
+            "sha256": "8a7b0cc90151043514d263b1a2655d6d41a2835dacd6b56018ba5c0c89961855"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/8a7b0cc90151043514d263b1a2655d6d41a2835dacd6b56018ba5c0c89961855/ipfs_datasets_py/logic/ui_ux_ir/schema.py"
+        },
+        {
+          "declaration_pointer": "/native/dependencies/ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_latent_formula",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+          "original_pin": {
+            "bytes": 35427,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+            "sha256": "ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py"
+        },
+        {
+          "declaration_pointer": "/native/runtime",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/domain_384_autoencoder.py",
+          "original_pin": {
+            "bytes": 34679,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/domain_384_autoencoder.py",
+            "sha256": "66c5ee320f9c7aacd3b246d0666c7fc3ee928e4679892e1e90c838e1b291dbc6"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/66c5ee320f9c7aacd3b246d0666c7fc3ee928e4679892e1e90c838e1b291dbc6/ipfs_datasets_py/optimizers/logic_theorem_optimizer/domain_384_autoencoder.py"
+        },
+        {
+          "declaration_pointer": "/numerical/files/canonical_contracts.py",
+          "expected_relative_path": "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+          "original_pin": {
+            "bytes": 109257,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+            "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py"
+        },
+        {
+          "declaration_pointer": "/numerical/files/legal_formula_codec.py",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+          "original_pin": {
+            "bytes": 14622,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+            "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py"
+        },
+        {
+          "declaration_pointer": "/numerical/files/legal_ir_grammar_decoder.py",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+          "original_pin": {
+            "bytes": 146870,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+            "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py"
+        },
+        {
+          "declaration_pointer": "/numerical/files/modal_latent_formula.py",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+          "original_pin": {
+            "bytes": 35427,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+            "sha256": "ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py"
+        },
+        {
+          "declaration_pointer": "/numerical/files/tree_pin.py",
+          "expected_relative_path": "ipfs_datasets_py/logic/autoformal/tree_pin.py",
+          "original_pin": {
+            "bytes": 1948,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/autoformal/tree_pin.py",
+            "sha256": "587165942fb06ea9effc836b555e0ac0606c5876b013a374a1e76d25ee069e4d"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/587165942fb06ea9effc836b555e0ac0606c5876b013a374a1e76d25ee069e4d/ipfs_datasets_py/logic/autoformal/tree_pin.py"
+        },
+        {
+          "declaration_pointer": "/runtime_sha256",
+          "expected_relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/source_training_v2.py",
+          "original_pin": {
+            "bytes": 31851,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/formalization/autoencoder/source_training_v2.py",
+            "sha256": "8de8096e895de9df08ccf5352dfd704806823296821d98b5badf08bb553a52e4"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/8de8096e895de9df08ccf5352dfd704806823296821d98b5badf08bb553a52e4/ipfs_datasets_py/logic/formalization/autoencoder/source_training_v2.py"
+        }
+      ],
+      "unknown_schema_task_profile_policy": "Unknown fields remain null; no family-only alias or default serving route."
+    },
+    {
+      "checkpoint": {
+        "bytes": 1715990,
+        "path_in_repo": "releases/retained-checkpoints/26cb6d77947b5b8e1e6c08e68ff8c6ce1c8f23002d56bfc1ebbd024c55a0c2da/checkpoint.json",
+        "sha256": "26cb6d77947b5b8e1e6c08e68ff8c6ce1c8f23002d56bfc1ebbd024c55a0c2da"
+      },
+      "codec": {
+        "canonical_sha256": "1874082991bb8d15da67189b04e8336068ab301047c1a8bc93416016ba28ff2a",
+        "policy": {
+          "field_order": [
+            "modality",
+            "actor",
+            "action",
+            "object",
+            "conditions",
+            "exceptions",
+            "temporal"
+          ],
+          "generation_fallback": "none",
+          "identifier_hashing": false,
+          "max_qualifiers_per_facet": 4,
+          "max_source_tokens": 64,
+          "max_target_tokens": 64,
+          "max_vocabulary": 4096,
+          "qualifiers": "sorted_unique_input_required",
+          "rule_count": 1,
+          "source_pad_id": 0,
+          "source_tokenization": "unicode_casefold_word_or_punctuation/v1",
+          "source_unk_id": 1,
+          "source_unknown": "reject",
+          "target_bos_id": 1,
+          "target_eos_id": 2,
+          "target_pad_id": 0,
+          "target_schema": "CanonicalRoundTripIR@1",
+          "target_unknown": "reject",
+          "truncation": "reject",
+          "vocabulary_origin": "training_examples_only"
+        },
+        "schema": "legal-source-formula-codec/v1",
+        "serialized_location": "embedded in original checkpoint; sidecar extraction must be labeled derived",
+        "source_vocabulary_count": 3,
+        "target_vocabulary_count": 37
+      },
+      "companion_assets": [
+        {
+          "original_pin": {
+            "bytes": 3886,
+            "path": "/home/barberb/lift_coding/artifacts/ir-384-hub-release-20261002/packages/legal_ir/manifest.json",
+            "sha256": "34794ea4bbf128678eafdd8ba1862b58c8d0bf36b8ae83e20de75abf57e9debc"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/34794ea4bbf128678eafdd8ba1862b58c8d0bf36b8ae83e20de75abf57e9debc/manifest.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 3365,
+            "path": "/home/barberb/lift_coding/artifacts/ir-384-hub-release-20261002/packages/legal_ir/MODEL_CARD.md",
+            "sha256": "145229788b13fd8cc9f326493ffe90ddadb4573a4de74cc145062438db65362e"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/145229788b13fd8cc9f326493ffe90ddadb4573a4de74cc145062438db65362e/MODEL_CARD.md",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 1678190,
+            "path": "/home/barberb/lift_coding/artifacts/ir-384-hub-release-20261002/packages/legal_ir/parent-legal-head.json",
+            "sha256": "969461ab82a2806e54ad33ba242a1eb62d032fa1b3cfc808b77c66dcc965aa62"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/969461ab82a2806e54ad33ba242a1eb62d032fa1b3cfc808b77c66dcc965aa62/parent-legal-head.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 295985,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/embeddings.json",
+            "sha256": "4b1aa58d9a616aa532085e0dc2859f8a7f3bca628dbc487167215429fc6885cc"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/4b1aa58d9a616aa532085e0dc2859f8a7f3bca628dbc487167215429fc6885cc/embeddings.json",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 1715990,
+            "path": "/home/barberb/lift_coding/artifacts/ir-384-hub-release-20261002/packages/legal_ir/checkpoint.json",
+            "sha256": "26cb6d77947b5b8e1e6c08e68ff8c6ce1c8f23002d56bfc1ebbd024c55a0c2da"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/26cb6d77947b5b8e1e6c08e68ff8c6ce1c8f23002d56bfc1ebbd024c55a0c2da/checkpoint.json",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 391322,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/compiler.json",
+            "sha256": "d3aa9f97e94e27bae0ebea8b40d2c44c3ccd3715a8cced3b8f2be75344e596db"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/d3aa9f97e94e27bae0ebea8b40d2c44c3ccd3715a8cced3b8f2be75344e596db/compiler.json",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 19724,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/embedding-production.json",
+            "sha256": "5cc76711928c277b371540f46171ed9bc5514fe3070c02330dac980b57a99277"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/5cc76711928c277b371540f46171ed9bc5514fe3070c02330dac980b57a99277/embedding-production.json",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 19572,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/source-fixture.json",
+            "sha256": "ea49a9cbb6753ad79560de7f2536907a223d676882dc6da69986ffb8785c74c0"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/ea49a9cbb6753ad79560de7f2536907a223d676882dc6da69986ffb8785c74c0/source-fixture.json",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 926196,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/1729-original32-fit.json",
+            "sha256": "57547c9e849eba21c82a5150d7b3ffdff5575349dfd812d8ba256c2c17783684"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/57547c9e849eba21c82a5150d7b3ffdff5575349dfd812d8ba256c2c17783684/1729-original32-fit.json",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 1678190,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/1729-original32-head.json",
+            "sha256": "969461ab82a2806e54ad33ba242a1eb62d032fa1b3cfc808b77c66dcc965aa62"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/969461ab82a2806e54ad33ba242a1eb62d032fa1b3cfc808b77c66dcc965aa62/1729-original32-head.json",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 1678190,
+            "path": "/home/barberb/lift_coding/artifacts/ir-384-hub-release-20261002/packages/legal_ir/parent-legal-head.json",
+            "sha256": "969461ab82a2806e54ad33ba242a1eb62d032fa1b3cfc808b77c66dcc965aa62"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/969461ab82a2806e54ad33ba242a1eb62d032fa1b3cfc808b77c66dcc965aa62/parent-legal-head.json",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 25658,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/plan.json",
+            "sha256": "e4965c66965e5f37ea38ec89a98c62f9710ecdfac2e1f539c37714b455613df6"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/e4965c66965e5f37ea38ec89a98c62f9710ecdfac2e1f539c37714b455613df6/plan.json",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 779638,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/samples.json",
+            "sha256": "8166df50de693360dbb9f32b9d46c613d71626064b3218d3ec89d4bf39831b3c"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/8166df50de693360dbb9f32b9d46c613d71626064b3218d3ec89d4bf39831b3c/samples.json",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 25291,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/targets.json",
+            "sha256": "3e3574910bf7569fe7bb4531471ca06c4e8baf99476f0a6a780e1ac734582aa4"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/3e3574910bf7569fe7bb4531471ca06c4e8baf99476f0a6a780e1ac734582aa4/targets.json",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 39,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-auditor-prohibition.txt",
+            "sha256": "65a30d5d83a1c26631b99b88fd3a3073c9aec7411a6d4946f926d576576b9ea9"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/65a30d5d83a1c26631b99b88fd3a3073c9aec7411a6d4946f926d576576b9ea9/action-disjoint-v1-auditor-prohibition.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 55,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-auditor-minimum.txt",
+            "sha256": "9e81e3420b3decea617009f7d528a88ed6ad166f6e883c77cb4ee5b1de2a9dc4"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/9e81e3420b3decea617009f7d528a88ed6ad166f6e883c77cb4ee5b1de2a9dc4/action-disjoint-v1-auditor-minimum.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 34,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-auditor-publication.txt",
+            "sha256": "43e69e4223dc45ea3f0e0bd1d3d2a6190942304d4ed20029c4be9e8de1bd5982"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/43e69e4223dc45ea3f0e0bd1d3d2a6190942304d4ed20029c4be9e8de1bd5982/action-disjoint-v1-auditor-publication.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 38,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-auditor-review.txt",
+            "sha256": "e27572c41c4f40f72670ae40a655f61327b9d063339aab3854d616cb86a6003c"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/e27572c41c4f40f72670ae40a655f61327b9d063339aab3854d616cb86a6003c/action-disjoint-v1-auditor-review.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 43,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-coordinator-prohibition.txt",
+            "sha256": "d17880325804f72f2d6203e79635f684b4ef5b6c7a0a2f47093b7b88be01b4ac"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/d17880325804f72f2d6203e79635f684b4ef5b6c7a0a2f47093b7b88be01b4ac/action-disjoint-v1-coordinator-prohibition.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 59,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-coordinator-minimum.txt",
+            "sha256": "645d56e0045d1d4ee5ee534f3cddb23730f5c27b3c50f6eea09483a4f7679d34"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/645d56e0045d1d4ee5ee534f3cddb23730f5c27b3c50f6eea09483a4f7679d34/action-disjoint-v1-coordinator-minimum.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 38,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-coordinator-publication.txt",
+            "sha256": "c74c9e3361382833fa85e9e3471664511673fb5c0ff241f7387c3685180627b1"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/c74c9e3361382833fa85e9e3471664511673fb5c0ff241f7387c3685180627b1/action-disjoint-v1-coordinator-publication.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 42,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-coordinator-review.txt",
+            "sha256": "5ba571d7e949e73ddde03839cbea92b9b12ee4efbfbc1d1a5d417cbea948ceec"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/5ba571d7e949e73ddde03839cbea92b9b12ee4efbfbc1d1a5d417cbea948ceec/action-disjoint-v1-coordinator-review.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 34,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-delegate-report.txt",
+            "sha256": "fbc9349f025710aca3b8a56d2dfa2e238fd96507f7f07101ed01c9df682d88fe"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/fbc9349f025710aca3b8a56d2dfa2e238fd96507f7f07101ed01c9df682d88fe/action-disjoint-v1-delegate-report.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 72,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-delegate-deadline.txt",
+            "sha256": "1950989fd0841be8da4d359d20c40dc0994d0be278f2a2daaccb8b3605d910d1"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/1950989fd0841be8da4d359d20c40dc0994d0be278f2a2daaccb8b3605d910d1/action-disjoint-v1-delegate-deadline.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 35,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-delegate-publication.txt",
+            "sha256": "f671e59143067ecba4feac6fddd3a5674838571fe742e77512e33d9085a1c066"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/f671e59143067ecba4feac6fddd3a5674838571fe742e77512e33d9085a1c066/action-disjoint-v1-delegate-publication.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 39,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-delegate-review.txt",
+            "sha256": "47fa763262e8406003b7441954dbf9a9223b7c1ae261ee5cd9ecbc1b6bf78d4c"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/47fa763262e8406003b7441954dbf9a9223b7c1ae261ee5cd9ecbc1b6bf78d4c/action-disjoint-v1-delegate-review.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 33,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-manager-report.txt",
+            "sha256": "2b242e11a68f985acfb17cfb208daa97aa6f683b0409027c0eeb8f55824fa0d3"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/2b242e11a68f985acfb17cfb208daa97aa6f683b0409027c0eeb8f55824fa0d3/action-disjoint-v1-manager-report.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 39,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-manager-prohibition.txt",
+            "sha256": "647cf4c49f57251f121d050645372d3ffc1b1eb5ef9e2b35264ac588cac1fb1b"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/647cf4c49f57251f121d050645372d3ffc1b1eb5ef9e2b35264ac588cac1fb1b/action-disjoint-v1-manager-prohibition.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 71,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-manager-deadline.txt",
+            "sha256": "9f256f6b0882925e77d88cf3a1d99bd21a26a7abb55a5a3c430c0982dd118c85"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/9f256f6b0882925e77d88cf3a1d99bd21a26a7abb55a5a3c430c0982dd118c85/action-disjoint-v1-manager-deadline.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 38,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-manager-review.txt",
+            "sha256": "da6567e90d6bb12dfa9f8132ea63c7864fe90ab8b3ff08970772c3406812c40f"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/da6567e90d6bb12dfa9f8132ea63c7864fe90ab8b3ff08970772c3406812c40f/action-disjoint-v1-manager-review.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 36,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-supervisor-report.txt",
+            "sha256": "3f2001b144b0861bf9220edbefb0b10987ae97fdc2cd0e66f90aec2519bd04b3"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/3f2001b144b0861bf9220edbefb0b10987ae97fdc2cd0e66f90aec2519bd04b3/action-disjoint-v1-supervisor-report.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 42,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-supervisor-prohibition.txt",
+            "sha256": "5f3803270e7d94695dc519105d0bf83dc62c072dc12aec24fed8223ff44c613a"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/5f3803270e7d94695dc519105d0bf83dc62c072dc12aec24fed8223ff44c613a/action-disjoint-v1-supervisor-prohibition.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 58,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-supervisor-minimum.txt",
+            "sha256": "d02421c0412955901ab9675452e5722b5db2b99e040aa1ce28ebb5486c72864b"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/d02421c0412955901ab9675452e5722b5db2b99e040aa1ce28ebb5486c72864b/action-disjoint-v1-supervisor-minimum.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 74,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-supervisor-deadline.txt",
+            "sha256": "d34daefcab6c2c54424fc3a84d02e6728539c47f52450d28da0df5158d1a9eb6"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/d34daefcab6c2c54424fc3a84d02e6728539c47f52450d28da0df5158d1a9eb6/action-disjoint-v1-supervisor-deadline.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 35,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-treasurer-report.txt",
+            "sha256": "5c7eef94e1d1be558b37f3792a6e2fdd5306e48cc32fefe2465a0ed6cc279fb8"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/5c7eef94e1d1be558b37f3792a6e2fdd5306e48cc32fefe2465a0ed6cc279fb8/action-disjoint-v1-treasurer-report.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 57,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-treasurer-minimum.txt",
+            "sha256": "92e30601ff3768cf66c361b69dae53ba1a657933c924c666ea23e7a9c04568d5"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/92e30601ff3768cf66c361b69dae53ba1a657933c924c666ea23e7a9c04568d5/action-disjoint-v1-treasurer-minimum.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 73,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-treasurer-deadline.txt",
+            "sha256": "ad01e1a2de8aa0de67f88a5c06264bca5322b89542073263f4b8c798fde69ed0"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/ad01e1a2de8aa0de67f88a5c06264bca5322b89542073263f4b8c798fde69ed0/action-disjoint-v1-treasurer-deadline.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 36,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-treasurer-publication.txt",
+            "sha256": "e4cf9f8e75f3bbea59542187f70c3ca6f72755c191e0ef99d58ec459b93f6e14"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/e4cf9f8e75f3bbea59542187f70c3ca6f72755c191e0ef99d58ec459b93f6e14/action-disjoint-v1-treasurer-publication.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 33,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-trustee-report.txt",
+            "sha256": "78023c3ada71e8b5af891dd841b66efb0b8340800ab6fabd0871717d86620693"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/78023c3ada71e8b5af891dd841b66efb0b8340800ab6fabd0871717d86620693/action-disjoint-v1-trustee-report.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 55,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-trustee-minimum.txt",
+            "sha256": "fa6a76248c8417c058b623f89f6ee83187051d9979fb579d2564a1eb706b72ae"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/fa6a76248c8417c058b623f89f6ee83187051d9979fb579d2564a1eb706b72ae/action-disjoint-v1-trustee-minimum.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 71,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-trustee-deadline.txt",
+            "sha256": "81fe55d9c2e9936dd6b18ddc121c8be13dfc1e49634a660ccd3e9051cd49690a"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/81fe55d9c2e9936dd6b18ddc121c8be13dfc1e49634a660ccd3e9051cd49690a/action-disjoint-v1-trustee-deadline.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 38,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-trustee-review.txt",
+            "sha256": "2d4f3bed0e22751aac2f1e733374f301c6799a614d3f84c76da7d8b75c12030f"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/2d4f3bed0e22751aac2f1e733374f301c6799a614d3f84c76da7d8b75c12030f/action-disjoint-v1-trustee-review.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 35,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-secretary-report.txt",
+            "sha256": "75d05a2a65d14c42957a0e687a649b5c45bdb520605b85d60f05637fcbb1efe9"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/75d05a2a65d14c42957a0e687a649b5c45bdb520605b85d60f05637fcbb1efe9/action-disjoint-v1-secretary-report.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 41,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-secretary-prohibition.txt",
+            "sha256": "a0ab895c6e1673ae0b4d3e3aa776673e37a6820a996fafa8c8db87b2148004a8"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/a0ab895c6e1673ae0b4d3e3aa776673e37a6820a996fafa8c8db87b2148004a8/action-disjoint-v1-secretary-prohibition.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 73,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-secretary-deadline.txt",
+            "sha256": "f2610da4d54627bafb8679586832987cc1d00c7ff3346c09a2e36ccea646316b"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/f2610da4d54627bafb8679586832987cc1d00c7ff3346c09a2e36ccea646316b/action-disjoint-v1-secretary-deadline.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 36,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-secretary-publication.txt",
+            "sha256": "6a6cad17f34de80419ffa6743f05028ed10bb9c28b5055bc4ab6dad531f3110d"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/6a6cad17f34de80419ffa6743f05028ed10bb9c28b5055bc4ab6dad531f3110d/action-disjoint-v1-secretary-publication.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 38,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-auditor-prohibition-must-v1.txt",
+            "sha256": "b51915800e87f17d0465ed86fa4f6162387a6b498a397b50f62c001a9e3b963f"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/b51915800e87f17d0465ed86fa4f6162387a6b498a397b50f62c001a9e3b963f/action-disjoint-v1-auditor-prohibition-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 54,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-auditor-minimum-must-v1.txt",
+            "sha256": "908d2d3dd69409e753ce058fde32dd539d5c69dfd1d7571468537568068c86ee"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/908d2d3dd69409e753ce058fde32dd539d5c69dfd1d7571468537568068c86ee/action-disjoint-v1-auditor-minimum-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 33,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-auditor-publication-must-v1.txt",
+            "sha256": "8e0c4acdce826c453ef90f53032c164080efa253d1aa274fcd33250ea755b70e"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/8e0c4acdce826c453ef90f53032c164080efa253d1aa274fcd33250ea755b70e/action-disjoint-v1-auditor-publication-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 37,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-auditor-review-must-v1.txt",
+            "sha256": "99cce43b39ae698aa3bc64fb7b6e0cdb0ff847eb19eb679ae42c6b7046978ab6"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/99cce43b39ae698aa3bc64fb7b6e0cdb0ff847eb19eb679ae42c6b7046978ab6/action-disjoint-v1-auditor-review-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 42,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-coordinator-prohibition-must-v1.txt",
+            "sha256": "bc7607ffcf875307a7bc1335c04e7ccdd25487e67fd226c90e4a595bc88b15a5"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/bc7607ffcf875307a7bc1335c04e7ccdd25487e67fd226c90e4a595bc88b15a5/action-disjoint-v1-coordinator-prohibition-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 58,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-coordinator-minimum-must-v1.txt",
+            "sha256": "5c7af03139c04c8be1df2cbb781a4cb67a84f3a6e2cc743bcbe65bf32b0bbb89"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/5c7af03139c04c8be1df2cbb781a4cb67a84f3a6e2cc743bcbe65bf32b0bbb89/action-disjoint-v1-coordinator-minimum-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 37,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-coordinator-publication-must-v1.txt",
+            "sha256": "7d1bd873fd5d479eb0f4ca9a1e3edb0ef1370278e7dd1a88db83b33760656d62"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/7d1bd873fd5d479eb0f4ca9a1e3edb0ef1370278e7dd1a88db83b33760656d62/action-disjoint-v1-coordinator-publication-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 41,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-coordinator-review-must-v1.txt",
+            "sha256": "6c93473820bf3de117051b47550effc3f593999ff30d31a2de6e2240db971b46"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/6c93473820bf3de117051b47550effc3f593999ff30d31a2de6e2240db971b46/action-disjoint-v1-coordinator-review-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 33,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-delegate-report-must-v1.txt",
+            "sha256": "26031fdece77463a30b5d669b5223eef4b7e0f29d595347c4e6a9cb5b5710f22"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/26031fdece77463a30b5d669b5223eef4b7e0f29d595347c4e6a9cb5b5710f22/action-disjoint-v1-delegate-report-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 71,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-delegate-deadline-must-v1.txt",
+            "sha256": "e626188762601c44718d76c1831f0dd27c017da1e9939a6f22471be41a4ba8c1"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/e626188762601c44718d76c1831f0dd27c017da1e9939a6f22471be41a4ba8c1/action-disjoint-v1-delegate-deadline-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 34,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-delegate-publication-must-v1.txt",
+            "sha256": "3329df64e0fd472104f77b890de77b4648ff4863a0345d5dae2efb81f28f4658"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/3329df64e0fd472104f77b890de77b4648ff4863a0345d5dae2efb81f28f4658/action-disjoint-v1-delegate-publication-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 38,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-delegate-review-must-v1.txt",
+            "sha256": "24b4e9ba2382a24a83430d5ff15871cb45fc0798ed106146ebbb6ce44bda7276"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/24b4e9ba2382a24a83430d5ff15871cb45fc0798ed106146ebbb6ce44bda7276/action-disjoint-v1-delegate-review-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 32,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-manager-report-must-v1.txt",
+            "sha256": "aea8ac844504eb12020fcdc6204a554b3e5cf6a831182d62bca865201c36d4d4"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/aea8ac844504eb12020fcdc6204a554b3e5cf6a831182d62bca865201c36d4d4/action-disjoint-v1-manager-report-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 38,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-manager-prohibition-must-v1.txt",
+            "sha256": "faf315377a82a3dcb6ebc1c472f17a74a732109d00fdf6210b96f67db8429635"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/faf315377a82a3dcb6ebc1c472f17a74a732109d00fdf6210b96f67db8429635/action-disjoint-v1-manager-prohibition-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 70,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-manager-deadline-must-v1.txt",
+            "sha256": "5b3b0ea937152edded3da6ffed0929ac3c2afbb983ce66aefb667308a9131a5d"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/5b3b0ea937152edded3da6ffed0929ac3c2afbb983ce66aefb667308a9131a5d/action-disjoint-v1-manager-deadline-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 37,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-manager-review-must-v1.txt",
+            "sha256": "e734de5d8984a3d95afcd69c93cb550940bc4fd3d8c19d82be318f63789340c8"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/e734de5d8984a3d95afcd69c93cb550940bc4fd3d8c19d82be318f63789340c8/action-disjoint-v1-manager-review-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 35,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-supervisor-report-must-v1.txt",
+            "sha256": "c2f5939a00a7dc79bc8daa068e56edd96744174408f63f625a6e238f96826a77"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/c2f5939a00a7dc79bc8daa068e56edd96744174408f63f625a6e238f96826a77/action-disjoint-v1-supervisor-report-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 41,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-supervisor-prohibition-must-v1.txt",
+            "sha256": "25af1643ac189e236e9ed38705d045a7bf0e6b9df88f95c7d6b6d80155a90f57"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/25af1643ac189e236e9ed38705d045a7bf0e6b9df88f95c7d6b6d80155a90f57/action-disjoint-v1-supervisor-prohibition-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 57,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-supervisor-minimum-must-v1.txt",
+            "sha256": "b541e8d2df9d96206537c0113cc2555484aed7393586cb2977f011b61f5cb05d"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/b541e8d2df9d96206537c0113cc2555484aed7393586cb2977f011b61f5cb05d/action-disjoint-v1-supervisor-minimum-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 73,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-supervisor-deadline-must-v1.txt",
+            "sha256": "4e4a9d9e074df3a975d14b5bb7062543e7128914dbf01cef08bcbfb2a9e825dc"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/4e4a9d9e074df3a975d14b5bb7062543e7128914dbf01cef08bcbfb2a9e825dc/action-disjoint-v1-supervisor-deadline-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 34,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-treasurer-report-must-v1.txt",
+            "sha256": "c97c58cdcf7860dc400134d1519aec50ea859e948bd754d683f9f4f068b7fe01"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/c97c58cdcf7860dc400134d1519aec50ea859e948bd754d683f9f4f068b7fe01/action-disjoint-v1-treasurer-report-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 56,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-treasurer-minimum-must-v1.txt",
+            "sha256": "0d13ba46b36c91f38e4468cf96115c16991d62a2b8c4ae57b98c2c30966a7969"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/0d13ba46b36c91f38e4468cf96115c16991d62a2b8c4ae57b98c2c30966a7969/action-disjoint-v1-treasurer-minimum-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 72,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-treasurer-deadline-must-v1.txt",
+            "sha256": "03545737c1458869e2a11b0b67b2a5bdac61c867de0e4ad1d5e91120c876ca66"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/03545737c1458869e2a11b0b67b2a5bdac61c867de0e4ad1d5e91120c876ca66/action-disjoint-v1-treasurer-deadline-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 35,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-treasurer-publication-must-v1.txt",
+            "sha256": "de5621d2733e64b5825f119c0ce8aaf0aac49875849044a4d043c19bff98e5dc"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/de5621d2733e64b5825f119c0ce8aaf0aac49875849044a4d043c19bff98e5dc/action-disjoint-v1-treasurer-publication-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 32,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-trustee-report-must-v1.txt",
+            "sha256": "d682bcf51ae39acfdaf5b29096e05cd54de8a52ca04558c2f1e19469c0ac01ef"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/d682bcf51ae39acfdaf5b29096e05cd54de8a52ca04558c2f1e19469c0ac01ef/action-disjoint-v1-trustee-report-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 54,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-trustee-minimum-must-v1.txt",
+            "sha256": "58f85c41d322c39b617dacb56ecf00d483bfb72838761ab3bf9229b6ef163225"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/58f85c41d322c39b617dacb56ecf00d483bfb72838761ab3bf9229b6ef163225/action-disjoint-v1-trustee-minimum-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 70,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-trustee-deadline-must-v1.txt",
+            "sha256": "4d4de12e3279dba7a936fa0f3a0ce25c0bc0a850ec739ba09239a51fde8ad116"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/4d4de12e3279dba7a936fa0f3a0ce25c0bc0a850ec739ba09239a51fde8ad116/action-disjoint-v1-trustee-deadline-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 37,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-trustee-review-must-v1.txt",
+            "sha256": "414c17c062d271592f85889f199b1b86770bcff4637f1aaff6e3542f691ee7df"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/414c17c062d271592f85889f199b1b86770bcff4637f1aaff6e3542f691ee7df/action-disjoint-v1-trustee-review-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 34,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-secretary-report-must-v1.txt",
+            "sha256": "09118b64ee7a88c053e232159db3c2800d462eed8bbb8b29066d306aae19c9ea"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/09118b64ee7a88c053e232159db3c2800d462eed8bbb8b29066d306aae19c9ea/action-disjoint-v1-secretary-report-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 40,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-secretary-prohibition-must-v1.txt",
+            "sha256": "e370eb18adb489045b382f12eb55eee203915ff0fe013d98ae363b9d4f4a7b3d"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/e370eb18adb489045b382f12eb55eee203915ff0fe013d98ae363b9d4f4a7b3d/action-disjoint-v1-secretary-prohibition-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 72,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-secretary-deadline-must-v1.txt",
+            "sha256": "ebd3ec2bb90e74f3d6fd844b8e63bdfaacc902170dee6687a6f8fc760e04bbc2"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/ebd3ec2bb90e74f3d6fd844b8e63bdfaacc902170dee6687a6f8fc760e04bbc2/action-disjoint-v1-secretary-deadline-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 35,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-secretary-publication-must-v1.txt",
+            "sha256": "0b6b17a531fcba602cb47b476bb39615d0fa19006c2163aa739254ee24992236"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/0b6b17a531fcba602cb47b476bb39615d0fa19006c2163aa739254ee24992236/action-disjoint-v1-secretary-publication-must-v1.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 37,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-coordinator-report.txt",
+            "sha256": "47ee2a3aec2684d163ebb4d6192bd9d909492dc562a4a1dfdafd5f444b42c6a9"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/47ee2a3aec2684d163ebb4d6192bd9d909492dc562a4a1dfdafd5f444b42c6a9/action-disjoint-v1-coordinator-report.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 75,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-coordinator-deadline.txt",
+            "sha256": "f5f72b97d7b4a3b984c8b75e95d7dcaa1ba326419837c49fe906f9531fbff96b"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/f5f72b97d7b4a3b984c8b75e95d7dcaa1ba326419837c49fe906f9531fbff96b/action-disjoint-v1-coordinator-deadline.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 56,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-delegate-minimum.txt",
+            "sha256": "45da4c3694d17d7a7aab773cc847b295885f7a764fa714d3c5c5e1e2bbc700f9"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/45da4c3694d17d7a7aab773cc847b295885f7a764fa714d3c5c5e1e2bbc700f9/action-disjoint-v1-delegate-minimum.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 34,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-manager-publication.txt",
+            "sha256": "6b49830be915219e31481e5df2c53d014ef6cb1b837410ff241bc10e7ef3be7f"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/6b49830be915219e31481e5df2c53d014ef6cb1b837410ff241bc10e7ef3be7f/action-disjoint-v1-manager-publication.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 41,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-supervisor-review.txt",
+            "sha256": "d5367e169d9dbd121e3909d8ddd402a2cb4893f63a726a707102358023b4292c"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/d5367e169d9dbd121e3909d8ddd402a2cb4893f63a726a707102358023b4292c/action-disjoint-v1-supervisor-review.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 41,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-treasurer-prohibition.txt",
+            "sha256": "704c400a7cd694e1522aa1fd923d8bb8692b7472c5a5457d14d71012de368fc1"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/704c400a7cd694e1522aa1fd923d8bb8692b7472c5a5457d14d71012de368fc1/action-disjoint-v1-treasurer-prohibition.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 34,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-trustee-publication.txt",
+            "sha256": "f9649e203d4ebfee49e9e335fcae8b16835d637db2284d17096917affc0271a2"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/f9649e203d4ebfee49e9e335fcae8b16835d637db2284d17096917affc0271a2/action-disjoint-v1-trustee-publication.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        },
+        {
+          "original_pin": {
+            "bytes": 40,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/holdout-throughput-release-20261001/current-holdout-r1/development/sources/action-disjoint-v1-secretary-review.txt",
+            "sha256": "96db3397f8d9ad1f64168f8636cb8a331926d041c31d823d6fd7a98c79c10ec4"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/original-legal-replay/96db3397f8d9ad1f64168f8636cb8a331926d041c31d823d6fd7a98c79c10ec4/action-disjoint-v1-secretary-review.txt",
+          "scope": "recorded original Legal corpus/replay association; no new numerical execution"
+        }
+      ],
+      "config": {
+        "architecture": "residual-projection-latent-formula-gru/v1",
+        "batch_size": 8,
+        "device": "cpu",
+        "dtype": "float32",
+        "formula_weight": 1.0,
+        "hidden_size": 32,
+        "learning_rate": 0.005,
+        "max_target_tokens": 64,
+        "projection_width": 8,
+        "reconstruction_weight": 1.0,
+        "seed": 1729,
+        "source_input": "provenance_only_not_neural_input",
+        "temperature": 0,
+        "token_embedding_dim": 16,
+        "torch_version": "2.13.0+cu130"
+      },
+      "contract": null,
+      "declaration": {
+        "decoder_kind": "sparse core and formula GRU",
+        "dimension_role": "input_embedding",
+        "input_width": 384,
+        "max_decoder_tokens": 64,
+        "receipt": {
+          "bytes": 1715990,
+          "path": "/home/barberb/lift_coding/artifacts/ir-384-hub-release-20261002/packages/legal_ir/checkpoint.json",
+          "sha256": "26cb6d77947b5b8e1e6c08e68ff8c6ce1c8f23002d56bfc1ebbd024c55a0c2da"
+        },
+        "role": "published development parser-assisted package",
+        "source_access": "embedding plus parser-derived features"
+      },
+      "full_runtime_closure_verified": false,
+      "identity": {
+        "checkpoint_schema": "legal-current-384-inference-package/v1",
+        "dimension": 384,
+        "dimension_role": "input_embedding",
+        "donor": null,
+        "donor_pins": null,
+        "embedded_decoder_schema": "modal-latent-formula-checkpoint/v1",
+        "format_id": null,
+        "initialization_only": false,
+        "ir_family_id": "legal_ir",
+        "legacy_profile": null,
+        "native_codebase_decoder_complete": null,
+        "original_checkpoint_pin": {
+          "bytes": 1715990,
+          "path": "/home/barberb/lift_coding/artifacts/ir-384-hub-release-20261002/packages/legal_ir/checkpoint.json",
+          "sha256": "26cb6d77947b5b8e1e6c08e68ff8c6ce1c8f23002d56bfc1ebbd024c55a0c2da"
+        },
+        "payload_ir_family": null,
+        "profile_id": null,
+        "proof_authority": false,
+        "record_id": "ir-model-asset-binding/v1:81c396f3af5e30dc52f9781fabe99ada64e2d225d0eb0a42615781139995979e",
+        "retained_status": "retained_trained_development_variant",
+        "role": "published development parser-assisted package",
+        "runtime_ready": false,
+        "schema_version": null,
+        "source_profile_id": null,
+        "task_id": null,
+        "teacher_qualified": false,
+        "trained": true
+      },
+      "license_scope": {
+        "repository_source": "AGPL-3.0, see SOURCE-LICENSE",
+        "weights_and_companions": "Original provenance retained; this release supplies no new blanket license grant."
+      },
+      "numerical_execution_performed": false,
+      "original_package": {
+        "folder": "/home/barberb/lift_coding/artifacts/ir-384-hub-release-20261002/packages/legal_ir",
+        "manifest_receipt": {
+          "bytes": 3886,
+          "path": "/home/barberb/lift_coding/artifacts/ir-384-hub-release-20261002/packages/legal_ir/manifest.json",
+          "sha256": "34794ea4bbf128678eafdd8ba1862b58c8d0bf36b8ae83e20de75abf57e9debc"
+        },
+        "published_descriptor": {
+          "domain_id": "legal_ir",
+          "manifest_sha256": "34794ea4bbf128678eafdd8ba1862b58c8d0bf36b8ae83e20de75abf57e9debc",
+          "release_prefix": "releases/20261002-384-development-v1",
+          "repository_id": "Publicus/legal-ir-autoencoder",
+          "revision": "9542bbee70a55ea79fb24e4ef01ff2a6f88204a2",
+          "schema": "ir-384-hub-descriptor/v1"
+        }
+      },
+      "schema": "retained-ir-checkpoint-release/v1",
+      "source_binding_scope": "listed checkpoint implementation hashes only, not full import/native closure",
+      "source_map": [
+        {
+          "declaration_pointer": "/files/canonical_contracts.py",
+          "expected_relative_path": "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+          "original_pin": {
+            "bytes": 109257,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+            "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py"
+        },
+        {
+          "declaration_pointer": "/files/legal_formula_codec.py",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+          "original_pin": {
+            "bytes": 14622,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+            "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py"
+        },
+        {
+          "declaration_pointer": "/files/legal_ir_grammar_decoder.py",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+          "original_pin": {
+            "bytes": 146870,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+            "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py"
+        },
+        {
+          "declaration_pointer": "/files/modal_latent_formula.py",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+          "original_pin": {
+            "bytes": 35427,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+            "sha256": "ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py"
+        },
+        {
+          "declaration_pointer": "/files/tree_pin.py",
+          "expected_relative_path": "ipfs_datasets_py/logic/autoformal/tree_pin.py",
+          "original_pin": {
+            "bytes": 1948,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/autoformal/tree_pin.py",
+            "sha256": "587165942fb06ea9effc836b555e0ac0606c5876b013a374a1e76d25ee069e4d"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/587165942fb06ea9effc836b555e0ac0606c5876b013a374a1e76d25ee069e4d/ipfs_datasets_py/logic/autoformal/tree_pin.py"
+        }
+      ],
+      "unknown_schema_task_profile_policy": "Unknown fields remain null; no family-only alias or default serving route."
+    },
+    {
+      "checkpoint": {
+        "bytes": 621893,
+        "path_in_repo": "releases/retained-checkpoints/d1412b839029db3e4f69cc3b0c3d77cdae0a358776ce81afbcee05db60a0d0ba/checkpoint.json",
+        "sha256": "d1412b839029db3e4f69cc3b0c3d77cdae0a358776ce81afbcee05db60a0d0ba"
+      },
+      "codec": {
+        "canonical_sha256": "cba3e5384e2bee12e709ccc8e9ee430e51cf09a8fc2e8abdd57143fdaa38dba2",
+        "policy": null,
+        "schema": "typed-json-lexical/v1",
+        "serialized_location": "embedded in original checkpoint; sidecar extraction must be labeled derived",
+        "source_vocabulary_count": null,
+        "target_vocabulary_count": 32
+      },
+      "companion_assets": [
+        {
+          "original_pin": {
+            "bytes": 1585950,
+            "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/train.json",
+            "sha256": "f4ad1d39677ed3184d019ad8556bf0cabd0957f855281c64343e8dfd73319c7b"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/f4ad1d39677ed3184d019ad8556bf0cabd0957f855281c64343e8dfd73319c7b/train.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 529665,
+            "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/validation.json",
+            "sha256": "4b55671a16186773dd65fa9b4b2d51aa7677e4ef89504e55b9937b1f9594fac7"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/4b55671a16186773dd65fa9b4b2d51aa7677e4ef89504e55b9937b1f9594fac7/validation.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 529323,
+            "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/test.json",
+            "sha256": "ea7532abc3c2bcc27ce38dc6358a3898250f62e7cb8fd17af723dd1b85d65444"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/ea7532abc3c2bcc27ce38dc6358a3898250f62e7cb8fd17af723dd1b85d65444/test.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 265747,
+            "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/canary.json",
+            "sha256": "9cd569111cdcc7edabf6a47f75f7b8f05630768ee8913aee9483df66841b9eef"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/9cd569111cdcc7edabf6a47f75f7b8f05630768ee8913aee9483df66841b9eef/canary.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 2150304,
+            "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/centered_ce-1729-development.json",
+            "sha256": "68ee1e83a6dfbebc84716f33079b9418f3e5fc5ce183e0daf2fed94da21a035e"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/68ee1e83a6dfbebc84716f33079b9418f3e5fc5ce183e0daf2fed94da21a035e/centered_ce-1729-development.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 806734,
+            "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/centered_ce-1729-evaluation.json",
+            "sha256": "ce011d2ec420ec73b72ee1386199c66941327b6416ca60910ac66eb2ea28ec45"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/ce011d2ec420ec73b72ee1386199c66941327b6416ca60910ac66eb2ea28ec45/centered_ce-1729-evaluation.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        }
+      ],
+      "config": {
+        "batch_size": 12,
+        "constant_weight": 1.0,
+        "embedding_provenance": {
+          "assets": [
+            {
+              "bytes": 190,
+              "name": "1_Pooling/config.json",
+              "sha256": "4be450dde3b0273bb9787637cfbd28fe04a7ba6ab9d36ac48e92b11e350ffc23"
+            },
+            {
+              "bytes": 583,
+              "name": "config.json",
+              "sha256": "00273cdfb3e05c7304d180270bdef8adae45023e7bdfc396338bdd815943dc59"
+            },
+            {
+              "bytes": 66746168,
+              "name": "model.safetensors",
+              "sha256": "9a1eb90bbac323ea08aa5629b624fe6ae75db121b904799c2266a1e2c2de22d2"
+            },
+            {
+              "bytes": 385,
+              "name": "modules.json",
+              "sha256": "73348a3d8f8ae4cc5f851dc6b98be3ea819390b814e83656d5eebbadf75fe43e"
+            },
+            {
+              "bytes": 57,
+              "name": "sentence_bert_config.json",
+              "sha256": "948201d8329907aae938fa62f9ceeed53f5694dacc2b87b9f3b78b37ee986529"
+            },
+            {
+              "bytes": 125,
+              "name": "special_tokens_map.json",
+              "sha256": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3"
+            },
+            {
+              "bytes": 711661,
+              "name": "tokenizer.json",
+              "sha256": "da0e79933b9ed51798a3ae27893d3c5fa4a201126cef75586296df9b4d2c62a0"
+            },
+            {
+              "bytes": 394,
+              "name": "tokenizer_config.json",
+              "sha256": "e1790949631401af1bfb6c9c7aeec7fcf612e274d73579d99f704faea40c8ba7"
+            },
+            {
+              "bytes": 231508,
+              "name": "vocab.txt",
+              "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+            }
+          ],
+          "batch_size": 32,
+          "device": "cuda",
+          "dimension": 384,
+          "dtype": "float32",
+          "encode_rows_per_second": 1343.4959378817957,
+          "encode_seconds": 0.7145537049509585,
+          "load_seconds": 0.6230878659989685,
+          "max_tokens_observed": 26,
+          "model_id": "thenlper/gte-small",
+          "normalized": true,
+          "revision": "17e1f347d17fe144873b1201da91788898c639cd",
+          "rows": 960,
+          "truncated": false
+        },
+        "epochs": 100,
+        "hidden_size": 32,
+        "input_normalization": "center_rms",
+        "learning_rate": 0.003,
+        "max_optimizer_steps": 1500,
+        "max_seconds": 300,
+        "max_target_tokens": 512,
+        "patience": 0,
+        "projection_width": 8,
+        "reconstruction_weight": 0.1,
+        "seed": 1729,
+        "semantic_weight": 4.0,
+        "strategy": "reference_ce",
+        "structure_weight": 0.25,
+        "token_embedding_dim": 16,
+        "validation_interval": 10
+      },
+      "contract": null,
+      "declaration": {
+        "receipt": {
+          "bytes": 621893,
+          "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/centered_ce-1729-checkpoint.json",
+          "sha256": "d1412b839029db3e4f69cc3b0c3d77cdae0a358776ce81afbcee05db60a0d0ba"
+        },
+        "role": "retained centered reference-CE campaign candidate not listed in lane inventory"
+      },
+      "full_runtime_closure_verified": false,
+      "identity": {
+        "checkpoint_schema": "shared-source-384-autoencoder/v2",
+        "dimension": 384,
+        "dimension_role": "input_embedding",
+        "donor": null,
+        "donor_pins": null,
+        "embedded_decoder_schema": "shared-source-384-autoencoder/v2",
+        "format_id": null,
+        "initialization_only": false,
+        "ir_family_id": "legal_ir",
+        "legacy_profile": null,
+        "native_codebase_decoder_complete": null,
+        "original_checkpoint_pin": {
+          "bytes": 621893,
+          "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/centered_ce-1729-checkpoint.json",
+          "sha256": "d1412b839029db3e4f69cc3b0c3d77cdae0a358776ce81afbcee05db60a0d0ba"
+        },
+        "payload_ir_family": null,
+        "profile_id": null,
+        "proof_authority": false,
+        "record_id": "ir-model-asset-binding/v1:0afad5bed0e6f90781f81e4231fdac5a4fb8b66e5a8037f2e3ecb9411afd574e",
+        "retained_status": "retained_trained_development_variant",
+        "role": "retained centered reference-CE campaign candidate not listed in lane inventory",
+        "runtime_ready": false,
+        "schema_version": null,
+        "source_profile_id": null,
+        "task_id": null,
+        "teacher_qualified": false,
+        "trained": true
+      },
+      "license_scope": {
+        "repository_source": "AGPL-3.0, see SOURCE-LICENSE",
+        "weights_and_companions": "Original provenance retained; this release supplies no new blanket license grant."
+      },
+      "numerical_execution_performed": false,
+      "original_package": null,
+      "schema": "retained-ir-checkpoint-release/v1",
+      "source_binding_scope": "listed checkpoint implementation hashes only, not full import/native closure",
+      "source_map": [
+        {
+          "declaration_pointer": "/legal_codec_sha256",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+          "original_pin": {
+            "bytes": 14622,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+            "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py"
+        },
+        {
+          "declaration_pointer": "/native/dependencies/ipfs_datasets_py.logic.intent_ir.decoder",
+          "expected_relative_path": "ipfs_datasets_py/logic/intent_ir/decoder.py",
+          "original_pin": {
+            "bytes": 24220,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/intent_ir/decoder.py",
+            "sha256": "7bab5781c07e00b54b0283d3a2962926f75935caedc80eceb23264cb388be257"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/7bab5781c07e00b54b0283d3a2962926f75935caedc80eceb23264cb388be257/ipfs_datasets_py/logic/intent_ir/decoder.py"
+        },
+        {
+          "declaration_pointer": "/native/dependencies/ipfs_datasets_py.logic.intent_ir.formalize.rich_grammar",
+          "expected_relative_path": "ipfs_datasets_py/logic/intent_ir/formalize/rich_grammar.py",
+          "original_pin": {
+            "bytes": 11527,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/intent_ir/formalize/rich_grammar.py",
+            "sha256": "6c40ac99d7e339651b6029764f94b12430ca515d4c5f7426770b013499efe92b"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/6c40ac99d7e339651b6029764f94b12430ca515d4c5f7426770b013499efe92b/ipfs_datasets_py/logic/intent_ir/formalize/rich_grammar.py"
+        },
+        {
+          "declaration_pointer": "/native/dependencies/ipfs_datasets_py.logic.intent_ir.schema",
+          "expected_relative_path": "ipfs_datasets_py/logic/intent_ir/schema.py",
+          "original_pin": {
+            "bytes": 27163,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/intent_ir/schema.py",
+            "sha256": "93d38e4724c5f34aab7f39f050742e98ef0c8d80e2ff70459d2401541505fc56"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/93d38e4724c5f34aab7f39f050742e98ef0c8d80e2ff70459d2401541505fc56/ipfs_datasets_py/logic/intent_ir/schema.py"
+        },
+        {
+          "declaration_pointer": "/native/dependencies/ipfs_datasets_py.logic.security_ir.model",
+          "expected_relative_path": "ipfs_datasets_py/logic/security_ir/model.py",
+          "original_pin": {
+            "bytes": 37220,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/security_ir/model.py",
+            "sha256": "abc3aea9c2f4d1ce513ee2c9fc4c304d8bd387ded18e0d646247417422225d39"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/abc3aea9c2f4d1ce513ee2c9fc4c304d8bd387ded18e0d646247417422225d39/ipfs_datasets_py/logic/security_ir/model.py"
+        },
+        {
+          "declaration_pointer": "/native/dependencies/ipfs_datasets_py.logic.software_verification.program",
+          "expected_relative_path": "ipfs_datasets_py/logic/software_verification/program.py",
+          "original_pin": {
+            "bytes": 58065,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/software_verification/program.py",
+            "sha256": "f051f42d64c5f993451972924953cc7eaa6d17df097235ddabfd5d791d406f91"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/f051f42d64c5f993451972924953cc7eaa6d17df097235ddabfd5d791d406f91/ipfs_datasets_py/logic/software_verification/program.py"
+        },
+        {
+          "declaration_pointer": "/native/dependencies/ipfs_datasets_py.logic.ui_ux_ir.decoder",
+          "expected_relative_path": "ipfs_datasets_py/logic/ui_ux_ir/decoder.py",
+          "original_pin": {
+            "bytes": 8008,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/ui_ux_ir/decoder.py",
+            "sha256": "d7be6bff3a1f1464d4783567b90942258ef718bc1c2b7e02938698ed4e619e57"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/d7be6bff3a1f1464d4783567b90942258ef718bc1c2b7e02938698ed4e619e57/ipfs_datasets_py/logic/ui_ux_ir/decoder.py"
+        },
+        {
+          "declaration_pointer": "/native/dependencies/ipfs_datasets_py.logic.ui_ux_ir.schema",
+          "expected_relative_path": "ipfs_datasets_py/logic/ui_ux_ir/schema.py",
+          "original_pin": {
+            "bytes": 120714,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/ui_ux_ir/schema.py",
+            "sha256": "8a7b0cc90151043514d263b1a2655d6d41a2835dacd6b56018ba5c0c89961855"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/8a7b0cc90151043514d263b1a2655d6d41a2835dacd6b56018ba5c0c89961855/ipfs_datasets_py/logic/ui_ux_ir/schema.py"
+        },
+        {
+          "declaration_pointer": "/native/dependencies/ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_latent_formula",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+          "original_pin": {
+            "bytes": 35427,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+            "sha256": "ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py"
+        },
+        {
+          "declaration_pointer": "/native/runtime",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/domain_384_autoencoder.py",
+          "original_pin": {
+            "bytes": 34679,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/domain_384_autoencoder.py",
+            "sha256": "66c5ee320f9c7aacd3b246d0666c7fc3ee928e4679892e1e90c838e1b291dbc6"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/66c5ee320f9c7aacd3b246d0666c7fc3ee928e4679892e1e90c838e1b291dbc6/ipfs_datasets_py/optimizers/logic_theorem_optimizer/domain_384_autoencoder.py"
+        },
+        {
+          "declaration_pointer": "/numerical/files/canonical_contracts.py",
+          "expected_relative_path": "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+          "original_pin": {
+            "bytes": 109257,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+            "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py"
+        },
+        {
+          "declaration_pointer": "/numerical/files/legal_formula_codec.py",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+          "original_pin": {
+            "bytes": 14622,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+            "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py"
+        },
+        {
+          "declaration_pointer": "/numerical/files/legal_ir_grammar_decoder.py",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+          "original_pin": {
+            "bytes": 146870,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+            "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py"
+        },
+        {
+          "declaration_pointer": "/numerical/files/modal_latent_formula.py",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+          "original_pin": {
+            "bytes": 35427,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+            "sha256": "ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py"
+        },
+        {
+          "declaration_pointer": "/numerical/files/tree_pin.py",
+          "expected_relative_path": "ipfs_datasets_py/logic/autoformal/tree_pin.py",
+          "original_pin": {
+            "bytes": 1948,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/autoformal/tree_pin.py",
+            "sha256": "587165942fb06ea9effc836b555e0ac0606c5876b013a374a1e76d25ee069e4d"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/587165942fb06ea9effc836b555e0ac0606c5876b013a374a1e76d25ee069e4d/ipfs_datasets_py/logic/autoformal/tree_pin.py"
+        },
+        {
+          "declaration_pointer": "/runtime_sha256",
+          "expected_relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/source_training_v2.py",
+          "original_pin": {
+            "bytes": 31851,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/formalization/autoencoder/source_training_v2.py",
+            "sha256": "8de8096e895de9df08ccf5352dfd704806823296821d98b5badf08bb553a52e4"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/8de8096e895de9df08ccf5352dfd704806823296821d98b5badf08bb553a52e4/ipfs_datasets_py/logic/formalization/autoencoder/source_training_v2.py"
+        }
+      ],
+      "unknown_schema_task_profile_policy": "Unknown fields remain null; no family-only alias or default serving route."
+    },
+    {
+      "checkpoint": {
+        "bytes": 1678190,
+        "path_in_repo": "releases/retained-checkpoints/969461ab82a2806e54ad33ba242a1eb62d032fa1b3cfc808b77c66dcc965aa62/checkpoint.json",
+        "sha256": "969461ab82a2806e54ad33ba242a1eb62d032fa1b3cfc808b77c66dcc965aa62"
+      },
+      "codec": {
+        "canonical_sha256": "1874082991bb8d15da67189b04e8336068ab301047c1a8bc93416016ba28ff2a",
+        "policy": {
+          "field_order": [
+            "modality",
+            "actor",
+            "action",
+            "object",
+            "conditions",
+            "exceptions",
+            "temporal"
+          ],
+          "generation_fallback": "none",
+          "identifier_hashing": false,
+          "max_qualifiers_per_facet": 4,
+          "max_source_tokens": 64,
+          "max_target_tokens": 64,
+          "max_vocabulary": 4096,
+          "qualifiers": "sorted_unique_input_required",
+          "rule_count": 1,
+          "source_pad_id": 0,
+          "source_tokenization": "unicode_casefold_word_or_punctuation/v1",
+          "source_unk_id": 1,
+          "source_unknown": "reject",
+          "target_bos_id": 1,
+          "target_eos_id": 2,
+          "target_pad_id": 0,
+          "target_schema": "CanonicalRoundTripIR@1",
+          "target_unknown": "reject",
+          "truncation": "reject",
+          "vocabulary_origin": "training_examples_only"
+        },
+        "schema": "legal-source-formula-codec/v1",
+        "serialized_location": "embedded in original checkpoint; sidecar extraction must be labeled derived",
+        "source_vocabulary_count": 3,
+        "target_vocabulary_count": 37
+      },
+      "companion_assets": [],
+      "config": {
+        "architecture": "residual-projection-latent-formula-gru/v1",
+        "batch_size": 8,
+        "device": "cpu",
+        "dtype": "float32",
+        "formula_weight": 1.0,
+        "hidden_size": 32,
+        "learning_rate": 0.005,
+        "max_target_tokens": 64,
+        "projection_width": 8,
+        "reconstruction_weight": 1.0,
+        "seed": 1729,
+        "source_input": "provenance_only_not_neural_input",
+        "temperature": 0,
+        "token_embedding_dim": 16,
+        "torch_version": "2.13.0+cu130"
+      },
+      "contract": null,
+      "declaration": {
+        "receipt": {
+          "bytes": 1678190,
+          "path": "/home/barberb/lift_coding/artifacts/ir-384-hub-release-20261002/packages/legal_ir/parent-legal-head.json",
+          "sha256": "969461ab82a2806e54ad33ba242a1eb62d032fa1b3cfc808b77c66dcc965aa62"
+        },
+        "role": "published package exact historical parent dependency; also parent of three domain models"
+      },
+      "full_runtime_closure_verified": false,
+      "identity": {
+        "checkpoint_schema": "modal-latent-formula-checkpoint/v1",
+        "dimension": 384,
+        "dimension_role": "input_embedding",
+        "donor": null,
+        "donor_pins": null,
+        "embedded_decoder_schema": "modal-latent-formula-checkpoint/v1",
+        "format_id": null,
+        "initialization_only": false,
+        "ir_family_id": "legal_ir",
+        "legacy_profile": null,
+        "native_codebase_decoder_complete": null,
+        "original_checkpoint_pin": {
+          "bytes": 1678190,
+          "path": "/home/barberb/lift_coding/artifacts/ir-384-hub-release-20261002/packages/legal_ir/parent-legal-head.json",
+          "sha256": "969461ab82a2806e54ad33ba242a1eb62d032fa1b3cfc808b77c66dcc965aa62"
+        },
+        "payload_ir_family": null,
+        "profile_id": null,
+        "proof_authority": false,
+        "record_id": "ir-model-asset-binding/v1:6fdebb12e51e8d9bf1cc113951f6c04aac614979f83fb91dd406ccb62ccdf46c",
+        "retained_status": "retained_trained_development_variant",
+        "role": "published package exact historical parent dependency; also parent of three domain models",
+        "runtime_ready": false,
+        "schema_version": null,
+        "source_profile_id": null,
+        "task_id": null,
+        "teacher_qualified": false,
+        "trained": true
+      },
+      "license_scope": {
+        "repository_source": "AGPL-3.0, see SOURCE-LICENSE",
+        "weights_and_companions": "Original provenance retained; this release supplies no new blanket license grant."
+      },
+      "numerical_execution_performed": false,
+      "original_package": null,
+      "schema": "retained-ir-checkpoint-release/v1",
+      "source_binding_scope": "listed checkpoint implementation hashes only, not full import/native closure",
+      "source_map": [
+        {
+          "declaration_pointer": "/files/canonical_contracts.py",
+          "expected_relative_path": "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+          "original_pin": {
+            "bytes": 109257,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+            "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py"
+        },
+        {
+          "declaration_pointer": "/files/legal_formula_codec.py",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+          "original_pin": {
+            "bytes": 14622,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+            "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py"
+        },
+        {
+          "declaration_pointer": "/files/legal_ir_grammar_decoder.py",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+          "original_pin": {
+            "bytes": 146870,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+            "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py"
+        },
+        {
+          "declaration_pointer": "/files/modal_latent_formula.py",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+          "original_pin": {
+            "bytes": 35427,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+            "sha256": "ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py"
+        },
+        {
+          "declaration_pointer": "/files/tree_pin.py",
+          "expected_relative_path": "ipfs_datasets_py/logic/autoformal/tree_pin.py",
+          "original_pin": {
+            "bytes": 1948,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/autoformal/tree_pin.py",
+            "sha256": "587165942fb06ea9effc836b555e0ac0606c5876b013a374a1e76d25ee069e4d"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/587165942fb06ea9effc836b555e0ac0606c5876b013a374a1e76d25ee069e4d/ipfs_datasets_py/logic/autoformal/tree_pin.py"
+        }
+      ],
+      "unknown_schema_task_profile_policy": "Unknown fields remain null; no family-only alias or default serving route."
+    },
+    {
+      "checkpoint": {
+        "bytes": 447442,
+        "path_in_repo": "releases/retained-checkpoints/c8e42b07f5a6a5374e96d2e2334fb5daf7a2c66ad8d0eccaf06e990425424e08/checkpoint.json",
+        "sha256": "c8e42b07f5a6a5374e96d2e2334fb5daf7a2c66ad8d0eccaf06e990425424e08"
+      },
+      "codec": null,
+      "companion_assets": [
+        {
+          "original_pin": {
+            "bytes": 1321,
+            "path": "/home/barberb/lift_coding/artifacts/structured-ir-hub-release-20261001/packages/legal_ir/structured_native_v3/manifest.json",
+            "sha256": "83a89d38af2af3085cdbc34364ac68b3dd79cc88f7b663ea158af91a23afb7ee"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/83a89d38af2af3085cdbc34364ac68b3dd79cc88f7b663ea158af91a23afb7ee/manifest.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 2916,
+            "path": "/home/barberb/lift_coding/artifacts/structured-ir-hub-release-20261001/packages/legal_ir/structured_native_v3/README.md",
+            "sha256": "5747f0291d98f4aaa0853cdca9b2298d4c7d9bebc47273af5e7087605da3913d"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/5747f0291d98f4aaa0853cdca9b2298d4c7d9bebc47273af5e7087605da3913d/README.md",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 3259,
+            "path": "/home/barberb/lift_coding/artifacts/structured-ir-hub-release-20261001/packages/legal_ir/structured_native_v3/provenance.json",
+            "sha256": "53671c35d569acc6b76ee8ab18f66ef6d7ad4058d7a0e69ea04ddfc9a1d13962"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/53671c35d569acc6b76ee8ab18f66ef6d7ad4058d7a0e69ea04ddfc9a1d13962/provenance.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 32604,
+            "path": "/home/barberb/lift_coding/artifacts/structured-ir-hub-release-20261001/packages/legal_ir/structured_native_v3/replay-inputs.json",
+            "sha256": "e4381ed3cc3198ac159f2cb42b380365765472d0280a23424b6696352235d02d"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/e4381ed3cc3198ac159f2cb42b380365765472d0280a23424b6696352235d02d/replay-inputs.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 648,
+            "path": "/home/barberb/lift_coding/artifacts/structured-ir-hub-release-20261001/packages/legal_ir/structured_native_v3/validation.json",
+            "sha256": "6b0032500eccb4ef274ef53d7f289f6bcfa02e21836cf0b6135d0cd5c034a0c1"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/6b0032500eccb4ef274ef53d7f289f6bcfa02e21836cf0b6135d0cd5c034a0c1/validation.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        }
+      ],
+      "config": {
+        "embedding_provenance": {
+          "assets": [
+            {
+              "bytes": 190,
+              "name": "1_Pooling/config.json",
+              "sha256": "4be450dde3b0273bb9787637cfbd28fe04a7ba6ab9d36ac48e92b11e350ffc23"
+            },
+            {
+              "bytes": 583,
+              "name": "config.json",
+              "sha256": "00273cdfb3e05c7304d180270bdef8adae45023e7bdfc396338bdd815943dc59"
+            },
+            {
+              "bytes": 66746168,
+              "name": "model.safetensors",
+              "sha256": "9a1eb90bbac323ea08aa5629b624fe6ae75db121b904799c2266a1e2c2de22d2"
+            },
+            {
+              "bytes": 385,
+              "name": "modules.json",
+              "sha256": "73348a3d8f8ae4cc5f851dc6b98be3ea819390b814e83656d5eebbadf75fe43e"
+            },
+            {
+              "bytes": 57,
+              "name": "sentence_bert_config.json",
+              "sha256": "948201d8329907aae938fa62f9ceeed53f5694dacc2b87b9f3b78b37ee986529"
+            },
+            {
+              "bytes": 125,
+              "name": "special_tokens_map.json",
+              "sha256": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3"
+            },
+            {
+              "bytes": 711661,
+              "name": "tokenizer.json",
+              "sha256": "da0e79933b9ed51798a3ae27893d3c5fa4a201126cef75586296df9b4d2c62a0"
+            },
+            {
+              "bytes": 394,
+              "name": "tokenizer_config.json",
+              "sha256": "e1790949631401af1bfb6c9c7aeec7fcf612e274d73579d99f704faea40c8ba7"
+            },
+            {
+              "bytes": 231508,
+              "name": "vocab.txt",
+              "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+            }
+          ],
+          "batch_size": 32,
+          "device": "cuda",
+          "dimension": 384,
+          "dtype": "float32",
+          "encode_rows_per_second": 2155.864994796075,
+          "encode_seconds": 0.890593800926581,
+          "load_seconds": 0.6136547059286386,
+          "max_tokens_observed": 34,
+          "model_id": "thenlper/gte-small",
+          "normalized": true,
+          "revision": "17e1f347d17fe144873b1201da91788898c639cd",
+          "rows": 1920,
+          "truncated": false
+        },
+        "ridges": [
+          0.0001,
+          0.001,
+          0.01,
+          0.1
+        ]
+      },
+      "contract": null,
+      "declaration": {
+        "dimension_role": "input_embedding",
+        "input_width": 384,
+        "receipt": {
+          "bytes": 447442,
+          "path": "/home/barberb/lift_coding/artifacts/structured-ir-hub-release-20261001/packages/legal_ir/structured_native_v3/checkpoint.json",
+          "sha256": "c8e42b07f5a6a5374e96d2e2334fb5daf7a2c66ad8d0eccaf06e990425424e08"
+        },
+        "role": "previously published structured_native_v3 experimental trained candidate"
+      },
+      "full_runtime_closure_verified": false,
+      "identity": {
+        "checkpoint_schema": "structured-source-384-autoencoder/v1",
+        "dimension": 384,
+        "dimension_role": "input_embedding",
+        "donor": null,
+        "donor_pins": null,
+        "embedded_decoder_schema": "structured-source-384-autoencoder/v1",
+        "format_id": null,
+        "initialization_only": false,
+        "ir_family_id": "legal_ir",
+        "legacy_profile": null,
+        "native_codebase_decoder_complete": null,
+        "original_checkpoint_pin": {
+          "bytes": 447442,
+          "path": "/home/barberb/lift_coding/artifacts/structured-ir-hub-release-20261001/packages/legal_ir/structured_native_v3/checkpoint.json",
+          "sha256": "c8e42b07f5a6a5374e96d2e2334fb5daf7a2c66ad8d0eccaf06e990425424e08"
+        },
+        "payload_ir_family": null,
+        "profile_id": null,
+        "proof_authority": false,
+        "record_id": "ir-model-asset-binding/v1:72c08a5b2a45affbf4baa7efaa0f754360006309694b070538d1cfecfa2320bf",
+        "retained_status": "retained_trained_development_variant",
+        "role": "previously published structured_native_v3 experimental trained candidate",
+        "runtime_ready": false,
+        "schema_version": null,
+        "source_profile_id": null,
+        "task_id": null,
+        "teacher_qualified": false,
+        "trained": true
+      },
+      "license_scope": {
+        "repository_source": "AGPL-3.0, see SOURCE-LICENSE",
+        "weights_and_companions": "Original provenance retained; this release supplies no new blanket license grant."
+      },
+      "numerical_execution_performed": false,
+      "original_package": {
+        "folder": "/home/barberb/lift_coding/artifacts/structured-ir-hub-release-20261001/packages/legal_ir/structured_native_v3",
+        "manifest_receipt": {
+          "bytes": 1321,
+          "path": "/home/barberb/lift_coding/artifacts/structured-ir-hub-release-20261001/packages/legal_ir/structured_native_v3/manifest.json",
+          "sha256": "83a89d38af2af3085cdbc34364ac68b3dd79cc88f7b663ea158af91a23afb7ee"
+        },
+        "published_descriptor": {
+          "checkpoint_sha256": "c8e42b07f5a6a5374e96d2e2334fb5daf7a2c66ad8d0eccaf06e990425424e08",
+          "cold_download_verified": true,
+          "domain_id": "legal_ir",
+          "manifest_sha256": "83a89d38af2af3085cdbc34364ac68b3dd79cc88f7b663ea158af91a23afb7ee",
+          "numerical_replay_matches": true,
+          "offline_reload_verified": true,
+          "profile": "structured_native_v3",
+          "proof_authority": false,
+          "release_prefix": "releases/20261001-structured-native-v3-experimental",
+          "repository_id": "Publicus/legal-ir-autoencoder",
+          "revision": "249b2267b0115743320822af069de58790528e29",
+          "schema": "structured-ir-experimental-descriptor/v1",
+          "source_revision": "2d93857e78ceedc7f055637c887afeaa40653993"
+        }
+      },
+      "schema": "retained-ir-checkpoint-release/v1",
+      "source_binding_scope": "listed checkpoint implementation hashes only, not full import/native closure",
+      "source_map": [
+        {
+          "declaration_pointer": "/runtime_sha256",
+          "expected_relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/structured_source_384.py",
+          "original_pin": {
+            "bytes": 27328,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/formalization/autoencoder/structured_source_384.py",
+            "sha256": "3f9ca9ce7b4cf2a2d10d6aeb1fae78543c468133d2fa0df9fcb32f63f89e90f7"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/3f9ca9ce7b4cf2a2d10d6aeb1fae78543c468133d2fa0df9fcb32f63f89e90f7/ipfs_datasets_py/logic/formalization/autoencoder/structured_source_384.py"
+        },
+        {
+          "declaration_pointer": "/shared_runtime/legal_codec_sha256",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+          "original_pin": {
+            "bytes": 14622,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+            "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py"
+        },
+        {
+          "declaration_pointer": "/shared_runtime/native/dependencies/ipfs_datasets_py.logic.intent_ir.decoder",
+          "expected_relative_path": "ipfs_datasets_py/logic/intent_ir/decoder.py",
+          "original_pin": {
+            "bytes": 24220,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/intent_ir/decoder.py",
+            "sha256": "7bab5781c07e00b54b0283d3a2962926f75935caedc80eceb23264cb388be257"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/7bab5781c07e00b54b0283d3a2962926f75935caedc80eceb23264cb388be257/ipfs_datasets_py/logic/intent_ir/decoder.py"
+        },
+        {
+          "declaration_pointer": "/shared_runtime/native/dependencies/ipfs_datasets_py.logic.intent_ir.formalize.rich_grammar",
+          "expected_relative_path": "ipfs_datasets_py/logic/intent_ir/formalize/rich_grammar.py",
+          "original_pin": {
+            "bytes": 11527,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/intent_ir/formalize/rich_grammar.py",
+            "sha256": "6c40ac99d7e339651b6029764f94b12430ca515d4c5f7426770b013499efe92b"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/6c40ac99d7e339651b6029764f94b12430ca515d4c5f7426770b013499efe92b/ipfs_datasets_py/logic/intent_ir/formalize/rich_grammar.py"
+        },
+        {
+          "declaration_pointer": "/shared_runtime/native/dependencies/ipfs_datasets_py.logic.intent_ir.schema",
+          "expected_relative_path": "ipfs_datasets_py/logic/intent_ir/schema.py",
+          "original_pin": {
+            "bytes": 27163,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/intent_ir/schema.py",
+            "sha256": "93d38e4724c5f34aab7f39f050742e98ef0c8d80e2ff70459d2401541505fc56"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/93d38e4724c5f34aab7f39f050742e98ef0c8d80e2ff70459d2401541505fc56/ipfs_datasets_py/logic/intent_ir/schema.py"
+        },
+        {
+          "declaration_pointer": "/shared_runtime/native/dependencies/ipfs_datasets_py.logic.security_ir.model",
+          "expected_relative_path": "ipfs_datasets_py/logic/security_ir/model.py",
+          "original_pin": {
+            "bytes": 37220,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/security_ir/model.py",
+            "sha256": "abc3aea9c2f4d1ce513ee2c9fc4c304d8bd387ded18e0d646247417422225d39"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/abc3aea9c2f4d1ce513ee2c9fc4c304d8bd387ded18e0d646247417422225d39/ipfs_datasets_py/logic/security_ir/model.py"
+        },
+        {
+          "declaration_pointer": "/shared_runtime/native/dependencies/ipfs_datasets_py.logic.software_verification.program",
+          "expected_relative_path": "ipfs_datasets_py/logic/software_verification/program.py",
+          "original_pin": {
+            "bytes": 58065,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/software_verification/program.py",
+            "sha256": "f051f42d64c5f993451972924953cc7eaa6d17df097235ddabfd5d791d406f91"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/f051f42d64c5f993451972924953cc7eaa6d17df097235ddabfd5d791d406f91/ipfs_datasets_py/logic/software_verification/program.py"
+        },
+        {
+          "declaration_pointer": "/shared_runtime/native/dependencies/ipfs_datasets_py.logic.ui_ux_ir.decoder",
+          "expected_relative_path": "ipfs_datasets_py/logic/ui_ux_ir/decoder.py",
+          "original_pin": {
+            "bytes": 8008,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/ui_ux_ir/decoder.py",
+            "sha256": "d7be6bff3a1f1464d4783567b90942258ef718bc1c2b7e02938698ed4e619e57"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/d7be6bff3a1f1464d4783567b90942258ef718bc1c2b7e02938698ed4e619e57/ipfs_datasets_py/logic/ui_ux_ir/decoder.py"
+        },
+        {
+          "declaration_pointer": "/shared_runtime/native/dependencies/ipfs_datasets_py.logic.ui_ux_ir.schema",
+          "expected_relative_path": "ipfs_datasets_py/logic/ui_ux_ir/schema.py",
+          "original_pin": {
+            "bytes": 120714,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/ui_ux_ir/schema.py",
+            "sha256": "8a7b0cc90151043514d263b1a2655d6d41a2835dacd6b56018ba5c0c89961855"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/8a7b0cc90151043514d263b1a2655d6d41a2835dacd6b56018ba5c0c89961855/ipfs_datasets_py/logic/ui_ux_ir/schema.py"
+        },
+        {
+          "declaration_pointer": "/shared_runtime/native/dependencies/ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_latent_formula",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+          "original_pin": {
+            "bytes": 35427,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+            "sha256": "ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py"
+        },
+        {
+          "declaration_pointer": "/shared_runtime/native/runtime",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/domain_384_autoencoder.py",
+          "original_pin": {
+            "bytes": 34679,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/domain_384_autoencoder.py",
+            "sha256": "66c5ee320f9c7aacd3b246d0666c7fc3ee928e4679892e1e90c838e1b291dbc6"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/66c5ee320f9c7aacd3b246d0666c7fc3ee928e4679892e1e90c838e1b291dbc6/ipfs_datasets_py/optimizers/logic_theorem_optimizer/domain_384_autoencoder.py"
+        },
+        {
+          "declaration_pointer": "/shared_runtime/numerical/files/canonical_contracts.py",
+          "expected_relative_path": "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+          "original_pin": {
+            "bytes": 109257,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+            "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py"
+        },
+        {
+          "declaration_pointer": "/shared_runtime/numerical/files/legal_formula_codec.py",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+          "original_pin": {
+            "bytes": 14622,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+            "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py"
+        },
+        {
+          "declaration_pointer": "/shared_runtime/numerical/files/legal_ir_grammar_decoder.py",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+          "original_pin": {
+            "bytes": 146870,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+            "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py"
+        },
+        {
+          "declaration_pointer": "/shared_runtime/numerical/files/modal_latent_formula.py",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+          "original_pin": {
+            "bytes": 35427,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+            "sha256": "ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py"
+        },
+        {
+          "declaration_pointer": "/shared_runtime/numerical/files/tree_pin.py",
+          "expected_relative_path": "ipfs_datasets_py/logic/autoformal/tree_pin.py",
+          "original_pin": {
+            "bytes": 1948,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/autoformal/tree_pin.py",
+            "sha256": "587165942fb06ea9effc836b555e0ac0606c5876b013a374a1e76d25ee069e4d"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/587165942fb06ea9effc836b555e0ac0606c5876b013a374a1e76d25ee069e4d/ipfs_datasets_py/logic/autoformal/tree_pin.py"
+        },
+        {
+          "declaration_pointer": "/shared_runtime/runtime_sha256",
+          "expected_relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/source_training_v2.py",
+          "original_pin": {
+            "bytes": 31851,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/formalization/autoencoder/source_training_v2.py",
+            "sha256": "8de8096e895de9df08ccf5352dfd704806823296821d98b5badf08bb553a52e4"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/8de8096e895de9df08ccf5352dfd704806823296821d98b5badf08bb553a52e4/ipfs_datasets_py/logic/formalization/autoencoder/source_training_v2.py"
+        }
+      ],
+      "unknown_schema_task_profile_policy": "Unknown fields remain null; no family-only alias or default serving route."
+    },
+    {
+      "checkpoint": {
+        "bytes": 1715320,
+        "path_in_repo": "releases/retained-checkpoints/562d59c076e421bf27c3db5e140c33036937811161dc553241dd365188125454/checkpoint.json",
+        "sha256": "562d59c076e421bf27c3db5e140c33036937811161dc553241dd365188125454"
+      },
+      "codec": {
+        "canonical_sha256": "1874082991bb8d15da67189b04e8336068ab301047c1a8bc93416016ba28ff2a",
+        "policy": {
+          "field_order": [
+            "modality",
+            "actor",
+            "action",
+            "object",
+            "conditions",
+            "exceptions",
+            "temporal"
+          ],
+          "generation_fallback": "none",
+          "identifier_hashing": false,
+          "max_qualifiers_per_facet": 4,
+          "max_source_tokens": 64,
+          "max_target_tokens": 64,
+          "max_vocabulary": 4096,
+          "qualifiers": "sorted_unique_input_required",
+          "rule_count": 1,
+          "source_pad_id": 0,
+          "source_tokenization": "unicode_casefold_word_or_punctuation/v1",
+          "source_unk_id": 1,
+          "source_unknown": "reject",
+          "target_bos_id": 1,
+          "target_eos_id": 2,
+          "target_pad_id": 0,
+          "target_schema": "CanonicalRoundTripIR@1",
+          "target_unknown": "reject",
+          "truncation": "reject",
+          "vocabulary_origin": "training_examples_only"
+        },
+        "schema": "legal-source-formula-codec/v1",
+        "serialized_location": "embedded in original checkpoint; sidecar extraction must be labeled derived",
+        "source_vocabulary_count": 3,
+        "target_vocabulary_count": 37
+      },
+      "companion_assets": [
+        {
+          "original_pin": {
+            "bytes": 1851,
+            "path": "/home/barberb/lift_coding/artifacts/structured-ir-hub-release-20261001/legal-canonical-package-v2/manifest.json",
+            "sha256": "190c585f5fd4aee96876c765ef600f62b8b1797d0865e3d60367315a1b907145"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/190c585f5fd4aee96876c765ef600f62b8b1797d0865e3d60367315a1b907145/manifest.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        },
+        {
+          "original_pin": {
+            "bytes": 1678190,
+            "path": "/home/barberb/lift_coding/artifacts/structured-ir-hub-release-20261001/legal-canonical-package-v2/parent-legal-head.json",
+            "sha256": "969461ab82a2806e54ad33ba242a1eb62d032fa1b3cfc808b77c66dcc965aa62"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/context/969461ab82a2806e54ad33ba242a1eb62d032fa1b3cfc808b77c66dcc965aa62/parent-legal-head.json",
+          "scope": "recorded companion asset; not newly qualified fitting data"
+        }
+      ],
+      "config": {
+        "architecture": "residual-projection-latent-formula-gru/v1",
+        "batch_size": 8,
+        "device": "cpu",
+        "dtype": "float32",
+        "formula_weight": 1.0,
+        "hidden_size": 32,
+        "learning_rate": 0.005,
+        "max_target_tokens": 64,
+        "projection_width": 8,
+        "reconstruction_weight": 1.0,
+        "seed": 1729,
+        "source_input": "provenance_only_not_neural_input",
+        "temperature": 0,
+        "token_embedding_dim": 16,
+        "torch_version": "2.13.0+cu130"
+      },
+      "contract": null,
+      "declaration": {
+        "dimension_role": "input_embedding",
+        "input_width": 384,
+        "receipt": {
+          "bytes": 1715320,
+          "path": "/home/barberb/lift_coding/artifacts/structured-ir-hub-release-20261001/legal-canonical-package-v2/checkpoint.json",
+          "sha256": "562d59c076e421bf27c3db5e140c33036937811161dc553241dd365188125454"
+        },
+        "role": "published original-source-binding Legal inference package; original head/binding retained"
+      },
+      "full_runtime_closure_verified": false,
+      "identity": {
+        "checkpoint_schema": "legal-current-384-inference-package/v1",
+        "dimension": 384,
+        "dimension_role": "input_embedding",
+        "donor": null,
+        "donor_pins": null,
+        "embedded_decoder_schema": "modal-latent-formula-checkpoint/v1",
+        "format_id": null,
+        "initialization_only": false,
+        "ir_family_id": "legal_ir",
+        "legacy_profile": null,
+        "native_codebase_decoder_complete": null,
+        "original_checkpoint_pin": {
+          "bytes": 1715320,
+          "path": "/home/barberb/lift_coding/artifacts/structured-ir-hub-release-20261001/legal-canonical-package-v2/checkpoint.json",
+          "sha256": "562d59c076e421bf27c3db5e140c33036937811161dc553241dd365188125454"
+        },
+        "payload_ir_family": null,
+        "profile_id": null,
+        "proof_authority": false,
+        "record_id": "ir-model-asset-binding/v1:d5ea3d92029713f3b5005414643977a3271c7e14a2ce2b6e045857886f5ea4b7",
+        "retained_status": "retained_trained_development_variant",
+        "role": "published original-source-binding Legal inference package; original head/binding retained",
+        "runtime_ready": false,
+        "schema_version": null,
+        "source_profile_id": null,
+        "task_id": null,
+        "teacher_qualified": false,
+        "trained": true
+      },
+      "license_scope": {
+        "repository_source": "AGPL-3.0, see SOURCE-LICENSE",
+        "weights_and_companions": "Original provenance retained; this release supplies no new blanket license grant."
+      },
+      "numerical_execution_performed": false,
+      "original_package": {
+        "folder": "/home/barberb/lift_coding/artifacts/structured-ir-hub-release-20261001/legal-canonical-package-v2",
+        "manifest_receipt": {
+          "bytes": 1851,
+          "path": "/home/barberb/lift_coding/artifacts/structured-ir-hub-release-20261001/legal-canonical-package-v2/manifest.json",
+          "sha256": "190c585f5fd4aee96876c765ef600f62b8b1797d0865e3d60367315a1b907145"
+        },
+        "published_descriptor": {
+          "domain_id": "legal_ir",
+          "manifest_sha256": "190c585f5fd4aee96876c765ef600f62b8b1797d0865e3d60367315a1b907145",
+          "release_prefix": "releases/20261001-legal-source-binding-v2",
+          "repository_id": "Publicus/legal-ir-autoencoder",
+          "revision": "51522f1e1594a790facfa87d4c57cf932e53a824",
+          "schema": "ir-384-hub-descriptor/v1"
+        }
+      },
+      "schema": "retained-ir-checkpoint-release/v1",
+      "source_binding_scope": "listed checkpoint implementation hashes only, not full import/native closure",
+      "source_map": [
+        {
+          "declaration_pointer": "/files/canonical_contracts.py",
+          "expected_relative_path": "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+          "original_pin": {
+            "bytes": 109257,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+            "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py"
+        },
+        {
+          "declaration_pointer": "/files/legal_formula_codec.py",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+          "original_pin": {
+            "bytes": 14622,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+            "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py"
+        },
+        {
+          "declaration_pointer": "/files/legal_ir_grammar_decoder.py",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+          "original_pin": {
+            "bytes": 146870,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+            "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py"
+        },
+        {
+          "declaration_pointer": "/files/modal_latent_formula.py",
+          "expected_relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+          "original_pin": {
+            "bytes": 35427,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+            "sha256": "ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py"
+        },
+        {
+          "declaration_pointer": "/files/tree_pin.py",
+          "expected_relative_path": "ipfs_datasets_py/logic/autoformal/tree_pin.py",
+          "original_pin": {
+            "bytes": 1948,
+            "path": "/home/barberb/lift_coding/artifacts/legal-ir-inference-speed-review/audit/baseline_tree/ipfs_datasets_py/logic/autoformal/tree_pin.py",
+            "sha256": "587165942fb06ea9effc836b555e0ac0606c5876b013a374a1e76d25ee069e4d"
+          },
+          "path_in_repo": "releases/20261004-retained-checkpoints-v1/source/587165942fb06ea9effc836b555e0ac0606c5876b013a374a1e76d25ee069e4d/ipfs_datasets_py/logic/autoformal/tree_pin.py"
+        }
+      ],
+      "unknown_schema_task_profile_policy": "Unknown fields remain null; no family-only alias or default serving route."
+    }
+  ],
+  "dimension": 384,
+  "empty_lane": false,
+  "input_audit_pins": [
+    {
+      "bytes": 661812,
+      "path": "/home/barberb/lift_coding/artifacts/ir-model-manager-hf-sync-20261004/publication_inventory_audit.json",
+      "sha256": "8e857941cee73c75e8dc4ac7aa5df604e8953aa9dc87ec00bd2f83c0677e93ae"
+    },
+    {
+      "bytes": 1033525,
+      "path": "/home/barberb/lift_coding/artifacts/ir-model-manager-hf-sync-20261004/publication_source_binding_audit.json",
+      "sha256": "1ae36985f031ac16fa989cb4ec27f1ec49fdebf2d769b771c7db491dec1f6d9a"
+    }
+  ],
+  "ir_family_id": "legal_ir",
+  "original_lane_declaration": {
+    "cell_id": "legal_ir_384d",
+    "checkpoint_count": 3,
+    "dimension": 384,
+    "dimension_profile": {
+      "dimension": 384,
+      "dimension_role_required": true,
+      "encoder_kind": "GTE-small source embedding for source-conditioned tasks",
+      "hard_encoder_token_limit": 512,
+      "model_id": "thenlper/gte-small",
+      "model_revision": "17e1f347d17fe144873b1201da91788898c639cd",
+      "normalization": "l2",
+      "pooling": "mean",
+      "qualified_source_token_limit": null,
+      "unknown_limit_policy": "freeze task/span-specific admitted budget within encoder ceiling; historical compiler profiles remain separate"
+    },
+    "empty_model_lane": false,
+    "huggingface_plan": {
+      "existing_descriptor_source": {
+        "bytes": 1971,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/published_384_checkpoints.py",
+        "sha256": "a7ab0892799bf80fdca2e4780be12fabea1b5105d03cc34b98ea895c77b1617a"
+      },
+      "existing_read_only_descriptors": [
+        {
+          "domain_id": "legal_ir",
+          "manifest_sha256": "34794ea4bbf128678eafdd8ba1862b58c8d0bf36b8ae83e20de75abf57e9debc",
+          "release_prefix": "releases/20261002-384-development-v1",
+          "repository_id": "Publicus/legal-ir-autoencoder",
+          "revision": "9542bbee70a55ea79fb24e4ef01ff2a6f88204a2",
+          "schema": "ir-384-hub-descriptor/v1"
+        }
+      ],
+      "load_requires": [
+        "full immutable commit",
+        "manifest SHA256",
+        "matching family/dimension role/task/profile/codec",
+        "actual checkpoint SHA256"
+      ],
+      "namespace_write_access_verified": false,
+      "release_path_template": "releases/<task>/<profile>/<release_id>/",
+      "repo_type": "model",
+      "repository_id_template": "<hf_namespace>/legal-ir-autoencoder-384d",
+      "status": "proposed_not_created",
+      "suggested_namespace_from_existing_release_descriptors": "Publicus",
+      "suggested_repository_id": "Publicus/legal-ir-autoencoder-384d",
+      "visibility": null,
+      "visibility_status": "explicit deployment configuration required; no visibility changes performed during planning"
+    },
+    "inventory_receipt": {
+      "bytes": 10568,
+      "path": "/home/barberb/lift_coding/artifacts/codebase-ir-numerical-replay-20261003/inputs/inventories/legal_ir/384d.json",
+      "sha256": "77492b849bd2fa75a55a5d4f79de8eb5a3f6059346ab931df9ed5ccda75e1776"
+    },
+    "ir_family_id": "legal_ir",
+    "reference_checks": [
+      {
+        "kind": "checkpoint",
+        "receipt": {
+          "bytes": 614534,
+          "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/raw_ce-1729-checkpoint.json",
+          "sha256": "6e3f4d731d798aa2732afc37bd74fec34da3267a323844975d2dab78f59f9c61"
+        },
+        "status": "verified"
+      },
+      {
+        "kind": "checkpoint",
+        "receipt": {
+          "bytes": 621716,
+          "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/semantic-1729-checkpoint.json",
+          "sha256": "36b6b3a5a31ce88748a7ff69f1ab55f16dae79a78bfb635436a7b13a34c9cbf2"
+        },
+        "status": "verified"
+      },
+      {
+        "kind": "checkpoint",
+        "receipt": {
+          "bytes": 1715990,
+          "path": "/home/barberb/lift_coding/artifacts/ir-384-hub-release-20261002/packages/legal_ir/checkpoint.json",
+          "sha256": "26cb6d77947b5b8e1e6c08e68ff8c6ce1c8f23002d56bfc1ebbd024c55a0c2da"
+        },
+        "status": "verified"
+      },
+      {
+        "kind": "cached_vectors",
+        "receipt": {
+          "bytes": 3113459,
+          "path": "/home/barberb/lift_coding/artifacts/source-native-v3-20261001/run-02/legal_ir/train.json",
+          "sha256": "00f4074cca56daed9f766e74c90d3d35e608bfb1058c24db99fc30250314704f"
+        },
+        "status": "verified"
+      },
+      {
+        "kind": "cached_vectors",
+        "receipt": {
+          "bytes": 1038480,
+          "path": "/home/barberb/lift_coding/artifacts/source-native-v3-20261001/run-02/legal_ir/validation.json",
+          "sha256": "6a07b7a4d7c73802fc4a31a2666adcb312706fcc3deffbc46626d9d8914d43c9"
+        },
+        "status": "verified"
+      },
+      {
+        "kind": "cached_vectors",
+        "receipt": {
+          "bytes": 1037637,
+          "path": "/home/barberb/lift_coding/artifacts/source-native-v3-20261001/run-02/legal_ir/test.json",
+          "sha256": "33288ea40ee902788bb012b98dd48a767405c18090b92981ef82d680ddee0d72"
+        },
+        "status": "verified"
+      },
+      {
+        "kind": "cached_vectors",
+        "receipt": {
+          "bytes": 519374,
+          "path": "/home/barberb/lift_coding/artifacts/source-native-v3-20261001/run-02/legal_ir/canary.json",
+          "sha256": "ac7c55bb4d70f1428d5ecd81595b0546fa325bfb7f4c9ab67ad010dcdba813ec"
+        },
+        "status": "verified"
+      },
+      {
+        "kind": "descriptor_source",
+        "receipt": {
+          "bytes": 1971,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/published_384_checkpoints.py",
+          "sha256": "a7ab0892799bf80fdca2e4780be12fabea1b5105d03cc34b98ea895c77b1617a"
+        },
+        "status": "verified"
+      }
+    ],
+    "task_profiles_to_inventory": [
+      "source_to_native_ir",
+      "structural_reconstruction",
+      "native_ir_to_logic",
+      "native_ir_to_source",
+      "retained_source_byte_restoration"
+    ],
+    "unsupported_checkpoint_deserialization_for_runtime": false
+  },
+  "qualified_runtime_count": 0,
+  "repository_id": "Publicus/legal-ir-autoencoder-384d",
+  "schema": "retained-ir-lane-release/v1",
+  "teacher_qualified_count": 0,
+  "trained_768_model_count": 0
+}

@@ -1,0 +1,84 @@
+{
+  "manifest_pin": {
+    "bytes": 16690,
+    "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/repository-metadata/Publicus--legal-ir-autoencoder-768d/manifest.json",
+    "sha256": "669a0c8be36e18ed642db1608afa9c311d1d843c57fd04a30c1e8bd718642e35"
+  },
+  "operations": [
+    {
+      "file_pin": {
+        "bytes": 4778674,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/stage/checkpoints/768d/normative-wording-zero/selected-state.json",
+        "sha256": "c8beca3ef5ea2d477ebc9a1564c8922404b245098a0b56083197cd6185c3083f"
+      },
+      "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-zero/selected-state.json"
+    },
+    {
+      "file_pin": {
+        "bytes": 4778678,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/stage/checkpoints/768d/normative-wording-zero/last-attempt-state.json",
+        "sha256": "89590d3d13bd7de9550e96a0238e38d33f293996bb61ec1bdb33572097b4f0e2"
+      },
+      "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-zero/last-attempt-state.json"
+    },
+    {
+      "file_pin": {
+        "bytes": 4779949,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/stage/checkpoints/768d/normative-wording-ce/selected-state.json",
+        "sha256": "aa2f75cad0ade34a3965a4f0b71bdc2fe962f5b863b38133927978ea2673aeb3"
+      },
+      "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-ce/selected-state.json"
+    },
+    {
+      "file_pin": {
+        "bytes": 4779953,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/stage/checkpoints/768d/normative-wording-ce/last-attempt-state.json",
+        "sha256": "bcfd436b6f304c1b6c41c3443848d78f5ee59459cdf606d13b70096a87227e2f"
+      },
+      "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/checkpoints/768d/normative-wording-ce/last-attempt-state.json"
+    },
+    {
+      "file_pin": {
+        "bytes": 303999,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/stage/preprocessing/768d-metadata.json",
+        "sha256": "3af855b31096c202249972c1ee39d99af919ec5f0740e671f74427fd8213b3ab"
+      },
+      "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/preprocessing/768d-metadata.json"
+    },
+    {
+      "file_pin": {
+        "bytes": 721862,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/stage/metadata/authenticated-states.json",
+        "sha256": "582296018f40698159909d32423e5cc9496cfd3d44790ddfdc82b6b0879e06bd"
+      },
+      "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/metadata/authenticated-states.json"
+    },
+    {
+      "file_pin": {
+        "bytes": 13198,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/stage/evidence/normative_wording_training.md",
+        "sha256": "ad19daea21c4bb2bd2ddef48c9c942a5f68edc00b40605553f89daf0ec0beb19"
+      },
+      "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/evidence/normative_wording_training.md"
+    },
+    {
+      "file_pin": {
+        "bytes": 1776,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/repository-metadata/Publicus--legal-ir-autoencoder-768d/README.md",
+        "sha256": "6585007b8b76c50f3aaf706b8c2b657d5a68a45b786a73966f8d0fab72626e23"
+      },
+      "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/README.md"
+    },
+    {
+      "file_pin": {
+        "bytes": 16690,
+        "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/publication/repository-metadata/Publicus--legal-ir-autoencoder-768d/manifest.json",
+        "sha256": "669a0c8be36e18ed642db1608afa9c311d1d843c57fd04a30c1e8bd718642e35"
+      },
+      "path_in_repo": "releases/20261006-normative-wording-checkpoints-v1/manifest.json"
+    }
+  ],
+  "private_new": false,
+  "repository_id": "Publicus/legal-ir-autoencoder-768d",
+  "schema": "ir-model-hub-release-plan/v1"
+}

@@ -1,0 +1,185 @@
+{
+  "schema": "normative-checkpoint-availability-native-api-recipe/v1",
+  "status": "read-only actionable recipe; no publication or registration executed",
+  "survey_pin": {
+    "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/contracts/findings.json",
+    "bytes": 14790,
+    "sha256": "7723451bc8cd7029caa9e16798f1f113a611eb1792026b3250925460506ed538"
+  },
+  "reproduction_script_pin": {
+    "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/contracts/inspect_native_contracts.py",
+    "bytes": 8880,
+    "sha256": "6565c70c42483c15c94fd0ee51b2ffde088de1b9fc39588c4712322832ffe6d5"
+  },
+  "authorization": {
+    "prior_user_requested_checkpoint_imports_and_public_model_uploads": true,
+    "native_apis_require_new_user_confirmation": false,
+    "prior_driver_required_preparation_and_independent_review_receipts": "A guard in that isolated driver; prepare equivalent concrete reviewed scope before execution. It is not a new blanket user-approval requirement."
+  },
+  "selected_store": "/home/barberb/lift_coding/external/ipfs_accelerate/model_manager.duckdb",
+  "candidate_scope": {
+    "asset_count": 4,
+    "lanes": [
+      384,
+      768
+    ],
+    "family": "legal_ir",
+    "dimension_role": "input_embedding",
+    "other_families_and_8D": "Preserve all prior records, stores, repositories and default bindings; no candidate is inferred for an absent lane.",
+    "exact_new_asset_pins": "Fill only from the independent checkpoint-custody agent; this source-only survey does not authenticate new tensor payloads."
+  },
+  "native_apis": {
+    "asset_identity": "ipfs_datasets_py.logic.formalization.autoencoder.ir_model_manager_import.ir_model_asset_record_id(ir_family_id, dimension, dimension_role, role, checkpoint_sha256)",
+    "publish": "ipfs_datasets_py.logic.formalization.autoencoder.ir_model_hub_publish.publish_ir_model_hub_release(plan, *, api=None, operation_factory=None)",
+    "import": "ipfs_datasets_py.logic.formalization.autoencoder.ir_model_manager_import.import_ir_model_manager_records(manifest_pin, *, release_receipts, manager, readback, metadata_factory=None, max_reference_bytes=536870912)",
+    "manager": "ipfs_accelerate_py.model_manager.ModelManager(storage_path=STORE, use_database=True, enable_ipfs=False, project_legacy_models=True, usage_service=None)",
+    "cold_discovery": "ipfs_accelerate_py.model_catalog.sources.ir_persistent.IRPersistentCatalogSource(path=STORE, source=EXPLICIT_DISTINCT_SOURCE_NAME).load()",
+    "cold_exact_resolution": "result.resolve_ir_binding(EXACT_TEN_FIELD_REQUEST) or source.resolve_ir_binding(EXACT_TEN_FIELD_REQUEST)",
+    "binding_class": "There is no public IRModelAssetBinding class in these committed owners. The native binding is a closed declaration/record scheme plus ModelMetadata.",
+    "private_helpers": "The old driver used pinned _prepare and _matches for preflight. These are private helpers, not a separately public prepare API. Reuse only with exact source pins; do not bypass the public final importer."
+  },
+  "identity_and_metadata": {
+    "asset_record_hash_keys": [
+      "ir_family_id",
+      "dimension",
+      "dimension_role",
+      "role",
+      "checkpoint_sha256"
+    ],
+    "all_ten_selectors": [
+      "record_id",
+      "ir_family_id",
+      "dimension",
+      "dimension_role",
+      "schema_version",
+      "task_id",
+      "profile_id",
+      "format_id",
+      "checkpoint_sha256",
+      "role"
+    ],
+    "schema_version": null,
+    "profile_id": null,
+    "format_id": null,
+    "task_id": "semantic_IR_reconstruction as an explicit intended task declaration, retaining its study/producer provenance; this is not a recovered native output schema.",
+    "role_recipe": "Use a stable concise selected-normative-state role scoped by authenticated study/arm/run identifiers, at most256UTF8bytes. Native ID does not hash schema/task/run separately; immutable role/checkpoint bytes and full declared provenance prevent accidental collisions. Exact same bytes with a conflicting task/run declaration must refuse or receive an explicitly reviewed distinct role.",
+    "run_identity_storage": "Retain study_id, arm_id, training_run_id, selection receipt and producer/source/cache/checkpoint pins under huggingface_config.ir_checkpoint or an explicit adjacent provenance object. Do not use ModelMetadata.last_run_id for a training run; it is ignored activity metadata in native matching.",
+    "model_id": "Exact native ir_model_asset_record_id result; never catalog descriptor ID.",
+    "model_revision": "Original checkpoint SHA256",
+    "revision_id": "Original checkpoint SHA256",
+    "original_checkpoint_pin": "Exact original path/bytes/SHA; staged release bytes may have a different local path but must have identical size and SHA.",
+    "architecture": "Use the actual authenticated decoder architecture name; do not substitute gte encoder identity for decoder weights.",
+    "inputs_and_outputs": "Populate only authenticated declarative descriptors; empty lists are allowed for an availability-only candidate. Do not manufacture a complete executable IO ABI from old contextual masks/codec shapes.",
+    "serving_config": "Omit; non-null serving configuration is forbidden by importer.",
+    "training_flags": "Copy trained/initialization_only/donor status only from authenticated evidence. A genuine trained selected state may declare trained=True while all qualification flags stayFalse.",
+    "runtime_ready": false,
+    "teacher_qualified": false,
+    "proof_authority": false,
+    "complete_runtime_io_contract": false,
+    "model_quality_qualified": false,
+    "checkpoint_serialization_schema": "Retain its actual value separately; it must not fill native schema_version/profile_id/format_id.",
+    "source_url": "Use exact immutable HF blob/tree/resolve URL at the returned full40hex publication revision, never main/latest.",
+    "existing_contextual_records": "Preserve their original immutable aggregate49839 release bindings and selected_contextual_semantic_decoder_state roles. New normative availability records do not rewrite them or imply contextual runtime compatibility."
+  },
+  "publication": {
+    "existing_public_repositories": {
+      "384": "Publicus/legal-ir-autoencoder-384d",
+      "768": "Publicus/legal-ir-autoencoder-768d"
+    },
+    "proposed_new_subtree": "releases/20261006-normative-selected-v1/<authenticated-study>/<arm>/<run>/selected-state.json",
+    "per_width_plan": "Two unchanged original selected states, one truthful manifest and one scoped README: four explicit operations per existing dimension repository, eight total if both widths have two candidates.",
+    "stage": "Owned independent regular files, no symlink/hardlink aliases; preserve raw original checkpoint bytes. Refer to original cache/producer pins without uploading private caches.",
+    "plan_schema": "ir-model-hub-release-plan/v1",
+    "plan_fields": [
+      "schema",
+      "manifest_pin",
+      "repository_id",
+      "private_new",
+      "operations"
+    ],
+    "operation_fields": [
+      "file_pin",
+      "path_in_repo"
+    ],
+    "private_new": false,
+    "prior_revisions_are_historical_not_fresh_heads": {
+      "384": "f2c3714f7bf8e30177a799270f0cead51baf19dc",
+      "768": "2fc77ccd037e7276c8bdd56a2c79cada0334fd79"
+    },
+    "publication_order": "Publish/reuse exact bytes first, retain native verified publication receipts, then construct the immutable import plan. The importer requires those receipts.",
+    "existing_only_wrapper": "Require existing public repositories, refuse create_repo, capture fresh full file metadata, enforce publisher parent_commit equal to that exact observed head, preserve gated/private settings.",
+    "idempotency": "Native publisher reuses an existing destination only if exact remote byte identity matches. Different bytes refuse; do not select a latest default or overwrite root cards.",
+    "closing_checks": "At returned immutable commit compare every pre-existing path identity, root README/defaults, visibility/gating, and exact newly staged checkpoint byte identity. Independently stream-verify new raw payload SHA if stronger observation is needed. Preserve all source/original/stage pins.",
+    "transaction_scope": "Two repository publications are not atomic together; retain partial outcomes and resume by verified exact reuse."
+  },
+  "registration_steps": [
+    {
+      "step": 1,
+      "action": "Freeze four original checkpoint/producer/cache/codec/input-contract receipts and current committed native source pins. Prepare truthful release manifests and source-only availability metadata. Keep learned meaning/runtime/proof claimsFalse."
+    },
+    {
+      "step": 2,
+      "action": "Execute reviewed append-only public-dimension publication plans. Retain immutable native receipts with verified file identities. No tensor loading, fitting, cache generation, database or serving operation is part of this phase."
+    },
+    {
+      "step": 3,
+      "action": "Build the closed full import plan schema ir-model-manager-import-plan/v1 with only models; each model has exactly model_metadata, checkpoint_pin and release. Release has repository_id, revision, path_in_repo and checkpoint_sha256. Pin plan and publication receipts. Authenticate every same-path artifact and original/staged byte join."
+    },
+    {
+      "step": 4,
+      "action": "Coordinate a controlled writer window and select the explicit existing DuckDB path. Read a fresh native baseline, all rows/activity fields, schema/indexes and exact target collisions. Use typed canonical JSON comparisons for stable metadata, preserving bool versus int. Refuse conflicting IDs before any constructor/write. Retain a coherent native/byte backup; absent WAL alone is a cooperative check, not a lock or atomic snapshot. Do not assume the historical670count."
+    },
+    {
+      "step": 5,
+      "action": "Partition the full candidate plan into already-identical and absent target IDs. Preserve the original full plan and pin a derived missing-only plan; verify both belong to the same frozen candidate/release set. If none are absent, do no genuine ModelManager construction or close-save; verify exact existing records through independently reopened read-only storage and the public exact catalog reader. This gives a no-write idempotent rerun."
+    },
+    {
+      "step": 6,
+      "action": "For absent IDs only, construct the genuine owned manager with explicit store/database/local settings and blocked optional model/storage/GraphRAG/network owners. Verify its complete loaded population/schema against baseline before restricting its in-memory save dictionary under _model_lock to absent IDs only. This private population restriction preserves genuine public add_model methods and persisted existing rows; never call remove_model. The prior source requires stdlib logger seeding before executing its unchanged module under optional-import bombs."
+    },
+    {
+      "step": 7,
+      "action": "Invoke public import_ir_model_manager_records on the pinned missing-only plan with genuine manager, default real metadata factory and driver-owned independently reopened native readback. add_model=True is insufficient because save failures may be logged; require fresh exact persisted fields. No already-present baseline ID enters any save population. Keep serving_configNone and optional side-effect owners inactive."
+    },
+    {
+      "step": 8,
+      "action": "Close the owned genuine manager, cold-read all persisted rows/schema/indexes, and verify baseline rows including activity fields unchanged plus exactly absent_ids added. Cold genuine reload verifies full population/catalog; restrict that reload instance to only newly added IDs before its close so baseline timestamps remain unchanged. Repeat cold native readback after both closes, with closing artifact/source/file fences and partial failure receipts. Never blindly roll back or retry after uncertain writes."
+    },
+    {
+      "step": 9,
+      "action": "Load IRPersistentCatalogSource from the explicit store and resolve every candidate via all10 exact selectors, including explicit null native fields. Its closed typed validation is required beyond the importer stable-metadata equality helper. Retain catalog descriptor joins and catalog/binding generation revisions. Refresh only an explicitly owned catalog using an unused source name; do not claim another running service refreshed."
+    },
+    {
+      "step": 10,
+      "action": "Retain publication/import/cold-reload/readback receipts and unchanged original checkpoint/cache pins. Rebuild new supervisor task contexts against the new catalog generation through normal preparation; retain old sealed bundles untouched. Availability, byte custody and explicit intended task labels do not grant decoder dispatch, a teacher, a proof-index entry or learned fidelity."
+    }
+  ],
+  "limits_and_failures": {
+    "import_plan_bytes_max": 8388608,
+    "max_models": 256,
+    "per_reference_bytes_max": 536870912,
+    "publisher_files_max": 256,
+    "publisher_per_file_bytes_max": 536870912,
+    "publisher_total_bytes_max": 1073741824,
+    "publisher_manifest_bytes_max": 1048576,
+    "catalog_max_records": 10000,
+    "catalog_max_stored_config_bytes": 8388608,
+    "catalog_max_sidecar_bytes": 67108864,
+    "catalog_max_store_bytes": 4294967296,
+    "catalog_current_store_witness_scope": "Sequential cooperative endpoints, not an atomic snapshot or checkpoint authentication.",
+    "preflight_and_restore": "Do not downgrade to cwd/environment storage defaults, fabricate missing native identities, infer8Dassets, rewrite existing immutable release bindings, or rerun the private old registration driver unchanged. Its initial absent-target assumption was specific to its first668\u2192670operation.",
+    "external_source_generation": "Current458/61c5 relevant import, catalog and publication owners are byte-identical to the previously used26dc/3b3owners. No blanket component/source/cache update is needed to execute this bounded availability increment."
+  },
+  "recipe_authority": {
+    "ModelManager_import_executed": false,
+    "Hub_publication_executed": false,
+    "database_opened": false,
+    "new_checkpoint_payloads_authenticated_by_this_survey": false,
+    "model_loaded": false,
+    "training_executed": false,
+    "inference_executed": false,
+    "runtime_qualified": false,
+    "teacher_qualified": false,
+    "proof_authority": false
+  }
+}
