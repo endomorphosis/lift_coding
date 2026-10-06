@@ -1,0 +1,944 @@
+{
+  "arms": {
+    "T0": {
+      "deterministic_across_replays": true,
+      "deterministic_metric_hashes": [
+        "890c402e0400406a6dd86c0483059e1032135726f3a0de9f9f9f39782f7aecc6",
+        "890c402e0400406a6dd86c0483059e1032135726f3a0de9f9f9f39782f7aecc6",
+        "890c402e0400406a6dd86c0483059e1032135726f3a0de9f9f9f39782f7aecc6"
+      ],
+      "executed": true,
+      "replays": 3,
+      "update_count": 0
+    },
+    "T1": {
+      "executed": true,
+      "memory_diagnostic": true,
+      "seeds": [
+        104729,
+        130363,
+        155921
+      ]
+    },
+    "T2": {
+      "executed": true,
+      "packed_cpu": [
+        {
+          "accepted_epochs": 1,
+          "applied_packed_updates": 5,
+          "backend": "packed_cpu",
+          "considered_families": [
+            "combined",
+            "decoded_embedding",
+            "family_logits",
+            "legal_ir_view_global_logits",
+            "legal_ir_view_logits"
+          ],
+          "full_family_search": true,
+          "gradient_norms": [
+            0.0,
+            0.0,
+            0.0,
+            8.428086280822754,
+            8.428086280822754
+          ],
+          "losses": [
+            {
+              "cosine": 0.0,
+              "cross_entropy": 0.0,
+              "guarded_auxiliary": 0.0,
+              "l2": 0.0,
+              "legal_ir_cross_entropy": 0.6931471824645996,
+              "reconstruction": 0.0,
+              "total": 0.6931471824645996
+            },
+            {
+              "cosine": 0.0,
+              "cross_entropy": 0.0,
+              "guarded_auxiliary": 0.0,
+              "l2": 0.0,
+              "legal_ir_cross_entropy": 0.6931471824645996,
+              "reconstruction": 0.0,
+              "total": 0.6931471824645996
+            },
+            {
+              "total": 2.397895336151123
+            },
+            {
+              "cosine": 0.8038837909698486,
+              "cross_entropy": 0.0,
+              "guarded_auxiliary": 0.0,
+              "l2": 0.0,
+              "legal_ir_cross_entropy": 0.0,
+              "reconstruction": 0.0025270835030823946,
+              "total": 0.40446898341178894
+            },
+            {
+              "cosine": 0.8038837909698486,
+              "cross_entropy": 2.397895336151123,
+              "guarded_auxiliary": 0.0,
+              "l2": 0.0,
+              "legal_ir_cross_entropy": 0.6931471824645996,
+              "reconstruction": 0.0025270835030823946,
+              "total": 3.495511531829834
+            }
+          ],
+          "parameter_changed": true,
+          "report_count": 5,
+          "seed": 104729,
+          "shared_parameter_change": {
+            "after_sha256": "20f48097d69ff83f60db549596305273b4127b791d64c920318b2e4c72ba83a5",
+            "before_sha256": "e282fa0d5ffa44459298a3db4323d4b22d8017445ab510316b1ba21ce578c91a",
+            "changed_components": {
+              "compiler_quality_embedding_weights": 6912,
+              "decompiler_plan_embedding_weights": 1808640,
+              "family_embedding_weights": 3456,
+              "family_legal_ir_view_embedding_weights": 6912,
+              "family_semantic_slot_embedding_weights": 46106880,
+              "family_semantic_slot_legal_ir_view_embedding_weights": 92213760,
+              "feature_embedding_weights": 22117632,
+              "legal_ir_view_embedding_weights": 768,
+              "logic_signature_embedding_weights": 311040,
+              "predicate_argument_embedding_weights": 811776,
+              "round_trip_signal_embedding_weights": 34944,
+              "semantic_slot_embedding_weights": 6359424,
+              "semantic_slot_legal_ir_view_embedding_weights": 12718848
+            },
+            "changed_numeric_parameter_count": 182500992,
+            "components": [
+              "compiler_quality_embedding_weights",
+              "compiler_quality_family_logits",
+              "decompiler_plan_embedding_weights",
+              "decompiler_plan_family_logits",
+              "decompiler_plan_legal_ir_view_logits",
+              "family_embedding_weights",
+              "family_legal_ir_view_embedding_weights",
+              "family_semantic_slot_embedding_weights",
+              "family_semantic_slot_legal_ir_view_embedding_weights",
+              "family_semantic_slot_legal_ir_view_logits",
+              "feature_embedding_weights",
+              "feature_family_logits",
+              "feature_legal_ir_view_logits",
+              "legal_ir_view_embedding_weights",
+              "legal_ir_view_family_logits",
+              "legal_ir_view_logits",
+              "logic_signature_embedding_weights",
+              "logic_signature_family_logits",
+              "logic_signature_legal_ir_view_logits",
+              "predicate_argument_embedding_weights",
+              "predicate_argument_family_logits",
+              "predicate_argument_legal_ir_view_logits",
+              "round_trip_signal_embedding_weights",
+              "round_trip_signal_family_logits",
+              "round_trip_signal_legal_ir_view_logits",
+              "semantic_slot_embedding_weights",
+              "semantic_slot_family_logits",
+              "semantic_slot_legal_ir_view_embedding_weights",
+              "semantic_slot_legal_ir_view_family_logits",
+              "semantic_slot_legal_ir_view_logits"
+            ]
+          }
+        },
+        {
+          "accepted_epochs": 1,
+          "applied_packed_updates": 5,
+          "backend": "packed_cpu",
+          "considered_families": [
+            "combined",
+            "decoded_embedding",
+            "family_logits",
+            "legal_ir_view_global_logits",
+            "legal_ir_view_logits"
+          ],
+          "full_family_search": true,
+          "gradient_norms": [
+            0.0,
+            0.0,
+            0.0,
+            8.428086280822754,
+            8.428086280822754
+          ],
+          "losses": [
+            {
+              "cosine": 0.0,
+              "cross_entropy": 0.0,
+              "guarded_auxiliary": 0.0,
+              "l2": 0.0,
+              "legal_ir_cross_entropy": 0.6931471824645996,
+              "reconstruction": 0.0,
+              "total": 0.6931471824645996
+            },
+            {
+              "cosine": 0.0,
+              "cross_entropy": 0.0,
+              "guarded_auxiliary": 0.0,
+              "l2": 0.0,
+              "legal_ir_cross_entropy": 0.6931471824645996,
+              "reconstruction": 0.0,
+              "total": 0.6931471824645996
+            },
+            {
+              "total": 2.397895336151123
+            },
+            {
+              "cosine": 0.8038838505744934,
+              "cross_entropy": 0.0,
+              "guarded_auxiliary": 0.0,
+              "l2": 0.0,
+              "legal_ir_cross_entropy": 0.0,
+              "reconstruction": 0.0025270835030823946,
+              "total": 0.40446901321411133
+            },
+            {
+              "cosine": 0.8038838505744934,
+              "cross_entropy": 2.397895336151123,
+              "guarded_auxiliary": 0.0,
+              "l2": 0.0,
+              "legal_ir_cross_entropy": 0.6931471824645996,
+              "reconstruction": 0.0025270835030823946,
+              "total": 3.495511531829834
+            }
+          ],
+          "parameter_changed": true,
+          "report_count": 5,
+          "seed": 130363,
+          "shared_parameter_change": {
+            "after_sha256": "a564d2ae88958c5bbc5408f130908a3b488eea16cb0d1761b779fdb8ee751bed",
+            "before_sha256": "e282fa0d5ffa44459298a3db4323d4b22d8017445ab510316b1ba21ce578c91a",
+            "changed_components": {
+              "compiler_quality_embedding_weights": 6912,
+              "decompiler_plan_embedding_weights": 1808640,
+              "family_embedding_weights": 3456,
+              "family_legal_ir_view_embedding_weights": 6912,
+              "family_semantic_slot_embedding_weights": 46106880,
+              "family_semantic_slot_legal_ir_view_embedding_weights": 92213760,
+              "feature_embedding_weights": 22117632,
+              "legal_ir_view_embedding_weights": 768,
+              "logic_signature_embedding_weights": 311040,
+              "predicate_argument_embedding_weights": 811776,
+              "round_trip_signal_embedding_weights": 34944,
+              "semantic_slot_embedding_weights": 6359424,
+              "semantic_slot_legal_ir_view_embedding_weights": 12718848
+            },
+            "changed_numeric_parameter_count": 182500992,
+            "components": [
+              "compiler_quality_embedding_weights",
+              "compiler_quality_family_logits",
+              "decompiler_plan_embedding_weights",
+              "decompiler_plan_family_logits",
+              "decompiler_plan_legal_ir_view_logits",
+              "family_embedding_weights",
+              "family_legal_ir_view_embedding_weights",
+              "family_semantic_slot_embedding_weights",
+              "family_semantic_slot_legal_ir_view_embedding_weights",
+              "family_semantic_slot_legal_ir_view_logits",
+              "feature_embedding_weights",
+              "feature_family_logits",
+              "feature_legal_ir_view_logits",
+              "legal_ir_view_embedding_weights",
+              "legal_ir_view_family_logits",
+              "legal_ir_view_logits",
+              "logic_signature_embedding_weights",
+              "logic_signature_family_logits",
+              "logic_signature_legal_ir_view_logits",
+              "predicate_argument_embedding_weights",
+              "predicate_argument_family_logits",
+              "predicate_argument_legal_ir_view_logits",
+              "round_trip_signal_embedding_weights",
+              "round_trip_signal_family_logits",
+              "round_trip_signal_legal_ir_view_logits",
+              "semantic_slot_embedding_weights",
+              "semantic_slot_family_logits",
+              "semantic_slot_legal_ir_view_embedding_weights",
+              "semantic_slot_legal_ir_view_family_logits",
+              "semantic_slot_legal_ir_view_logits"
+            ]
+          }
+        },
+        {
+          "accepted_epochs": 1,
+          "applied_packed_updates": 5,
+          "backend": "packed_cpu",
+          "considered_families": [
+            "combined",
+            "decoded_embedding",
+            "family_logits",
+            "legal_ir_view_global_logits",
+            "legal_ir_view_logits"
+          ],
+          "full_family_search": true,
+          "gradient_norms": [
+            0.0,
+            0.0,
+            0.0,
+            8.428086280822754,
+            8.428086280822754
+          ],
+          "losses": [
+            {
+              "cosine": 0.0,
+              "cross_entropy": 0.0,
+              "guarded_auxiliary": 0.0,
+              "l2": 0.0,
+              "legal_ir_cross_entropy": 0.6931471824645996,
+              "reconstruction": 0.0,
+              "total": 0.6931471824645996
+            },
+            {
+              "cosine": 0.0,
+              "cross_entropy": 0.0,
+              "guarded_auxiliary": 0.0,
+              "l2": 0.0,
+              "legal_ir_cross_entropy": 0.6931471824645996,
+              "reconstruction": 0.0,
+              "total": 0.6931471824645996
+            },
+            {
+              "total": 2.397895336151123
+            },
+            {
+              "cosine": 0.8038837313652039,
+              "cross_entropy": 0.0,
+              "guarded_auxiliary": 0.0,
+              "l2": 0.0,
+              "legal_ir_cross_entropy": 0.0,
+              "reconstruction": 0.0025270835030823946,
+              "total": 0.40446895360946655
+            },
+            {
+              "cosine": 0.8038837313652039,
+              "cross_entropy": 2.397895336151123,
+              "guarded_auxiliary": 0.0,
+              "l2": 0.0,
+              "legal_ir_cross_entropy": 0.6931471824645996,
+              "reconstruction": 0.0025270835030823946,
+              "total": 3.495511293411255
+            }
+          ],
+          "parameter_changed": true,
+          "report_count": 5,
+          "seed": 155921,
+          "shared_parameter_change": {
+            "after_sha256": "94d76ac2d9d9bd0375968cd7aef541aef0979124dc13ad92a93350ab85cdaac8",
+            "before_sha256": "e282fa0d5ffa44459298a3db4323d4b22d8017445ab510316b1ba21ce578c91a",
+            "changed_components": {
+              "compiler_quality_embedding_weights": 6912,
+              "decompiler_plan_embedding_weights": 1808640,
+              "family_embedding_weights": 3456,
+              "family_legal_ir_view_embedding_weights": 6912,
+              "family_semantic_slot_embedding_weights": 46106880,
+              "family_semantic_slot_legal_ir_view_embedding_weights": 92213760,
+              "feature_embedding_weights": 22117632,
+              "legal_ir_view_embedding_weights": 768,
+              "logic_signature_embedding_weights": 311040,
+              "predicate_argument_embedding_weights": 811776,
+              "round_trip_signal_embedding_weights": 34944,
+              "semantic_slot_embedding_weights": 6359424,
+              "semantic_slot_legal_ir_view_embedding_weights": 12718848
+            },
+            "changed_numeric_parameter_count": 182500992,
+            "components": [
+              "compiler_quality_embedding_weights",
+              "compiler_quality_family_logits",
+              "decompiler_plan_embedding_weights",
+              "decompiler_plan_family_logits",
+              "decompiler_plan_legal_ir_view_logits",
+              "family_embedding_weights",
+              "family_legal_ir_view_embedding_weights",
+              "family_semantic_slot_embedding_weights",
+              "family_semantic_slot_legal_ir_view_embedding_weights",
+              "family_semantic_slot_legal_ir_view_logits",
+              "feature_embedding_weights",
+              "feature_family_logits",
+              "feature_legal_ir_view_logits",
+              "legal_ir_view_embedding_weights",
+              "legal_ir_view_family_logits",
+              "legal_ir_view_logits",
+              "logic_signature_embedding_weights",
+              "logic_signature_family_logits",
+              "logic_signature_legal_ir_view_logits",
+              "predicate_argument_embedding_weights",
+              "predicate_argument_family_logits",
+              "predicate_argument_legal_ir_view_logits",
+              "round_trip_signal_embedding_weights",
+              "round_trip_signal_family_logits",
+              "round_trip_signal_legal_ir_view_logits",
+              "semantic_slot_embedding_weights",
+              "semantic_slot_family_logits",
+              "semantic_slot_legal_ir_view_embedding_weights",
+              "semantic_slot_legal_ir_view_family_logits",
+              "semantic_slot_legal_ir_view_logits"
+            ]
+          }
+        }
+      ],
+      "parameter_changed": true,
+      "projection_update_backend": "packed_cpu",
+      "sample_memory_disabled": true,
+      "seeds": [
+        104729,
+        130363,
+        155921
+      ]
+    },
+    "T3": {
+      "admitted_feedback": 2606,
+      "executed": true,
+      "feedback_scope": "native_compiler_structural_contracts_only",
+      "partial": false,
+      "seeds": [
+        104729,
+        130363,
+        155921
+      ],
+      "semantic_fidelity_measured": false,
+      "unresolved_gate": null
+    }
+  },
+  "checkpoint_reload_verification": [
+    {
+      "all_parameters_equal": true,
+      "arm_id": "T0",
+      "file_sha256": "77f027f2e910955d18abcd5b82b5fed89ff2249471e327fc92b1357128b2fdc3",
+      "identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "loader": "ModalAutoencoderTrainingState.from_dict",
+      "path": "evidence/native_training/states/T0-replay1-initial.json",
+      "reloaded_identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "replay": 1
+    },
+    {
+      "all_parameters_equal": true,
+      "arm_id": "T0",
+      "file_sha256": "77f027f2e910955d18abcd5b82b5fed89ff2249471e327fc92b1357128b2fdc3",
+      "identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "loader": "ModalAutoencoderTrainingState.from_dict",
+      "path": "evidence/native_training/states/T0-replay1-final.json",
+      "reloaded_identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "replay": 1
+    },
+    {
+      "all_parameters_equal": true,
+      "arm_id": "T0",
+      "file_sha256": "1b51c489da13c7ec1c180e7ccbd1a1d1ef4243f6b43e1cf1949bc1ef64fc3a7a",
+      "identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "loader": "ModalAutoencoderTrainingState.from_dict",
+      "path": "evidence/native_training/states/T0-replay2-initial.json",
+      "reloaded_identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "replay": 2
+    },
+    {
+      "all_parameters_equal": true,
+      "arm_id": "T0",
+      "file_sha256": "1b51c489da13c7ec1c180e7ccbd1a1d1ef4243f6b43e1cf1949bc1ef64fc3a7a",
+      "identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "loader": "ModalAutoencoderTrainingState.from_dict",
+      "path": "evidence/native_training/states/T0-replay2-final.json",
+      "reloaded_identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "replay": 2
+    },
+    {
+      "all_parameters_equal": true,
+      "arm_id": "T0",
+      "file_sha256": "282925c91e76baf139ee3c692fb9d12780813dda22c65d43a3f7b6bb90441116",
+      "identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "loader": "ModalAutoencoderTrainingState.from_dict",
+      "path": "evidence/native_training/states/T0-replay3-initial.json",
+      "reloaded_identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "replay": 3
+    },
+    {
+      "all_parameters_equal": true,
+      "arm_id": "T0",
+      "file_sha256": "282925c91e76baf139ee3c692fb9d12780813dda22c65d43a3f7b6bb90441116",
+      "identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "loader": "ModalAutoencoderTrainingState.from_dict",
+      "path": "evidence/native_training/states/T0-replay3-final.json",
+      "reloaded_identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "replay": 3
+    },
+    {
+      "all_parameters_equal": true,
+      "arm_id": "T1",
+      "file_sha256": "841ea8be7b0d79cc8e73892db3d7e5ff62515e539d28bdcb88ba70c866d80648",
+      "identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "loader": "ModalAutoencoderTrainingState.from_dict",
+      "path": "evidence/native_training/states/T1-104729-initial.json",
+      "reloaded_identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "seed": 104729
+    },
+    {
+      "all_parameters_equal": true,
+      "arm_id": "T1",
+      "file_sha256": "abf1c43277a34dba88bf29710cb7009e33b525249e7db6326f74cd92dff9b748",
+      "identity_sha256": "e698f927655738c7d8f1ec87aafb5e98b86a3c3dfeb22b332cd2e5ae56f0d676",
+      "loader": "ModalAutoencoderTrainingState.from_dict",
+      "path": "evidence/native_training/states/T1-104729-final.json",
+      "reloaded_identity_sha256": "e698f927655738c7d8f1ec87aafb5e98b86a3c3dfeb22b332cd2e5ae56f0d676",
+      "seed": 104729
+    },
+    {
+      "all_parameters_equal": true,
+      "arm_id": "T1",
+      "file_sha256": "d489939eb0e34bfef0419e4dc09ced4f36064df88ccbbd7342bea90d40bc8a5b",
+      "identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "loader": "ModalAutoencoderTrainingState.from_dict",
+      "path": "evidence/native_training/states/T1-130363-initial.json",
+      "reloaded_identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "seed": 130363
+    },
+    {
+      "all_parameters_equal": true,
+      "arm_id": "T1",
+      "file_sha256": "f4a4964b22bae978c75e08f0dc358bb1b98fa0ee8448c9f60a444c3a18517ceb",
+      "identity_sha256": "1511d2fbc80878e700e86ba5e32ef4b6d7b617b562f0d55268dd8d0be9d0abc8",
+      "loader": "ModalAutoencoderTrainingState.from_dict",
+      "path": "evidence/native_training/states/T1-130363-final.json",
+      "reloaded_identity_sha256": "1511d2fbc80878e700e86ba5e32ef4b6d7b617b562f0d55268dd8d0be9d0abc8",
+      "seed": 130363
+    },
+    {
+      "all_parameters_equal": true,
+      "arm_id": "T1",
+      "file_sha256": "1639bb77ea842e64a458295e0dca7979e8fe5ab57a0b6aa03e634a346c704ed9",
+      "identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "loader": "ModalAutoencoderTrainingState.from_dict",
+      "path": "evidence/native_training/states/T1-155921-initial.json",
+      "reloaded_identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "seed": 155921
+    },
+    {
+      "all_parameters_equal": true,
+      "arm_id": "T1",
+      "file_sha256": "4655c3eb9dc1cf369f8d438b479124189152c942a2ea5be2d5c274cb0fe16645",
+      "identity_sha256": "19e801a1b46d797d7137f17dddcee7e6b280e5f6c29d71b5dc80ce1b9a8513ec",
+      "loader": "ModalAutoencoderTrainingState.from_dict",
+      "path": "evidence/native_training/states/T1-155921-final.json",
+      "reloaded_identity_sha256": "19e801a1b46d797d7137f17dddcee7e6b280e5f6c29d71b5dc80ce1b9a8513ec",
+      "seed": 155921
+    },
+    {
+      "all_parameters_equal": true,
+      "arm_id": "T2",
+      "file_sha256": "a55ec4451fabd8884e225154f35d1889fa28d2044b45a3ddeb92ca902e6895c6",
+      "identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "loader": "ModalAutoencoderTrainingState.from_dict",
+      "path": "evidence/native_training/states/T2-104729-initial.json",
+      "reloaded_identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "seed": 104729
+    },
+    {
+      "all_parameters_equal": true,
+      "arm_id": "T2",
+      "file_sha256": "a7128b133296bbfb18c5d92e85da088f1e1d57cd5a87ad2147a48efb57217932",
+      "identity_sha256": "00b940fcd4a96a67fdccde88310b5956e790e3a5d66055984d19cd1b3c61a8d8",
+      "loader": "ModalAutoencoderTrainingState.from_dict",
+      "path": "evidence/native_training/states/T2-104729-final.json",
+      "reloaded_identity_sha256": "00b940fcd4a96a67fdccde88310b5956e790e3a5d66055984d19cd1b3c61a8d8",
+      "seed": 104729
+    },
+    {
+      "all_parameters_equal": true,
+      "arm_id": "T3",
+      "file_sha256": "6e96f6f58f903ec444a8f27407dd6b63b5b798425aa876ce7f85ff38a25ec93a",
+      "identity_sha256": "00b940fcd4a96a67fdccde88310b5956e790e3a5d66055984d19cd1b3c61a8d8",
+      "loader": "ModalAutoencoderTrainingState.from_dict",
+      "matched_t2": "00b940fcd4a96a67fdccde88310b5956e790e3a5d66055984d19cd1b3c61a8d8",
+      "path": "evidence/native_training/states/T3-104729-initial.json",
+      "reloaded_identity_sha256": "00b940fcd4a96a67fdccde88310b5956e790e3a5d66055984d19cd1b3c61a8d8",
+      "seed": 104729
+    },
+    {
+      "all_parameters_equal": true,
+      "arm_id": "T3",
+      "file_sha256": "324e0488bf71b87124d431fd4b7099d6f5a7b4fc45b0c537e524c611f4d13dd0",
+      "identity_sha256": "def483e87bb57d27a8f24a3939a063d1039af95c111ec6d5733b452f612b5cbc",
+      "loader": "ModalAutoencoderTrainingState.from_dict",
+      "matched_t2": "00b940fcd4a96a67fdccde88310b5956e790e3a5d66055984d19cd1b3c61a8d8",
+      "path": "evidence/native_training/states/T3-104729-final.json",
+      "reloaded_identity_sha256": "def483e87bb57d27a8f24a3939a063d1039af95c111ec6d5733b452f612b5cbc",
+      "seed": 104729
+    },
+    {
+      "all_parameters_equal": true,
+      "arm_id": "T2",
+      "file_sha256": "ab8774257ca01d8a2dc841ff97476884691fc3eff973dee8c115337a5fa7fe55",
+      "identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "loader": "ModalAutoencoderTrainingState.from_dict",
+      "path": "evidence/native_training/states/T2-130363-initial.json",
+      "reloaded_identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "seed": 130363
+    },
+    {
+      "all_parameters_equal": true,
+      "arm_id": "T2",
+      "file_sha256": "7ea1f7a8e11d65958fa1900069471e1367c67bfb750091af0488b763f2a8c828",
+      "identity_sha256": "095147ede126c6a6f4f9f2817c208ce78e6662c3ce9d8ec6979a42aceac0ebf0",
+      "loader": "ModalAutoencoderTrainingState.from_dict",
+      "path": "evidence/native_training/states/T2-130363-final.json",
+      "reloaded_identity_sha256": "095147ede126c6a6f4f9f2817c208ce78e6662c3ce9d8ec6979a42aceac0ebf0",
+      "seed": 130363
+    },
+    {
+      "all_parameters_equal": true,
+      "arm_id": "T3",
+      "file_sha256": "69affc815b41a6bb4f6de5750cfab184464171ddee25a35ab3fae72035e32717",
+      "identity_sha256": "095147ede126c6a6f4f9f2817c208ce78e6662c3ce9d8ec6979a42aceac0ebf0",
+      "loader": "ModalAutoencoderTrainingState.from_dict",
+      "matched_t2": "095147ede126c6a6f4f9f2817c208ce78e6662c3ce9d8ec6979a42aceac0ebf0",
+      "path": "evidence/native_training/states/T3-130363-initial.json",
+      "reloaded_identity_sha256": "095147ede126c6a6f4f9f2817c208ce78e6662c3ce9d8ec6979a42aceac0ebf0",
+      "seed": 130363
+    },
+    {
+      "all_parameters_equal": true,
+      "arm_id": "T3",
+      "file_sha256": "bd76ef019fbdc97c57dc56d05359c875aac9887e21f835af4c5d483ec104794e",
+      "identity_sha256": "c90b4b9e7fd0120a7507b5e98bf7130e6c1e63091c14200afd3c2ee137ca5faf",
+      "loader": "ModalAutoencoderTrainingState.from_dict",
+      "matched_t2": "095147ede126c6a6f4f9f2817c208ce78e6662c3ce9d8ec6979a42aceac0ebf0",
+      "path": "evidence/native_training/states/T3-130363-final.json",
+      "reloaded_identity_sha256": "c90b4b9e7fd0120a7507b5e98bf7130e6c1e63091c14200afd3c2ee137ca5faf",
+      "seed": 130363
+    },
+    {
+      "all_parameters_equal": true,
+      "arm_id": "T2",
+      "file_sha256": "5f90df86e521cff035d66bd0e56253032321e1e5229524c1a803deb175f810cc",
+      "identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "loader": "ModalAutoencoderTrainingState.from_dict",
+      "path": "evidence/native_training/states/T2-155921-initial.json",
+      "reloaded_identity_sha256": "5975e52cd3db3f1ac7e8be248351d685782e102a56d69dd17ecb4b1ef1d23737",
+      "seed": 155921
+    },
+    {
+      "all_parameters_equal": true,
+      "arm_id": "T2",
+      "file_sha256": "cdd3f96c6bea69f864fe59760703f1de1f426f04713bddfd0ec40fda6d38b18d",
+      "identity_sha256": "cb766e9e811216a00f47ca8d96263c1d7dce4ec8c458f417ae36b11db8304c2b",
+      "loader": "ModalAutoencoderTrainingState.from_dict",
+      "path": "evidence/native_training/states/T2-155921-final.json",
+      "reloaded_identity_sha256": "cb766e9e811216a00f47ca8d96263c1d7dce4ec8c458f417ae36b11db8304c2b",
+      "seed": 155921
+    },
+    {
+      "all_parameters_equal": true,
+      "arm_id": "T3",
+      "file_sha256": "96bee7453dc6c2f8bf0b6368c92ef84c8b571df602bb66404acdcb647e419ff9",
+      "identity_sha256": "cb766e9e811216a00f47ca8d96263c1d7dce4ec8c458f417ae36b11db8304c2b",
+      "loader": "ModalAutoencoderTrainingState.from_dict",
+      "matched_t2": "cb766e9e811216a00f47ca8d96263c1d7dce4ec8c458f417ae36b11db8304c2b",
+      "path": "evidence/native_training/states/T3-155921-initial.json",
+      "reloaded_identity_sha256": "cb766e9e811216a00f47ca8d96263c1d7dce4ec8c458f417ae36b11db8304c2b",
+      "seed": 155921
+    },
+    {
+      "all_parameters_equal": true,
+      "arm_id": "T3",
+      "file_sha256": "e161f648d75653bc0e1c1515992028838ec6c96b3b87bbde0e2896bf6e809fdc",
+      "identity_sha256": "a4e7a375e63e8a62c13691673342560596418095a0b1f0835ad6929d66d18be8",
+      "loader": "ModalAutoencoderTrainingState.from_dict",
+      "matched_t2": "cb766e9e811216a00f47ca8d96263c1d7dce4ec8c458f417ae36b11db8304c2b",
+      "path": "evidence/native_training/states/T3-155921-final.json",
+      "reloaded_identity_sha256": "a4e7a375e63e8a62c13691673342560596418095a0b1f0835ad6929d66d18be8",
+      "seed": 155921
+    }
+  ],
+  "config": {
+    "compute_device": "cpu",
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "legal_ir_evaluate_provers": false,
+    "parser_text_chars": 4096,
+    "projection_update_backend": "packed_cpu",
+    "seeds": [
+      104729,
+      130363,
+      155921
+    ],
+    "t0_replays": 3,
+    "t1_epochs": 1,
+    "t1_learning_rate": 0.35,
+    "t2_epochs": 1,
+    "t2_learning_rate": 0.05,
+    "t2_line_search_attempts": 1,
+    "t2_max_seconds": 9000,
+    "t2_max_update_families": 0,
+    "t2_use_sample_memory": false,
+    "t3_learning_rate": 0.1
+  },
+  "config_id": "929723fc4a22d5ffdef3949e8083ff75e6ea51e5e79f321c49b85ea2f88c65a4",
+  "cpu_seconds": 13604.521,
+  "created_at": "2026-09-12T16:33:20.169938+00:00",
+  "dataset_id": "a9a40d3ab91fbae2f6efc0610e9dfa8f11273f88560fd159f19dc3478b64184e",
+  "environment": {
+    "amended_torch_threads": {
+      "interop": 1,
+      "intraop": 2
+    },
+    "legacy_declared_resource_limits": {
+      "compute_device": "cpu",
+      "gpu_or_model_service_slots": 1,
+      "memory_gib": 16,
+      "per_seed_wall_minutes": 30
+    },
+    "narrow_validator_is_separate": true,
+    "native_checkers": {
+      "cvc5": {
+        "on_process_path": true,
+        "resolved_path": "/home/barberb/.local/share/vericodegen-research-runtime/bin/cvc5",
+        "sha256": "cad00b4849b015ea6a7790f73cecdf639423f1a17f2c5ec90fda783f778611fb",
+        "usable": true,
+        "version": "This is cvc5 version 1.3.3 [git 8ff882e on branch HEAD]"
+      },
+      "lean": {
+        "on_process_path": true,
+        "resolved_path": "/home/barberb/.local/share/vericodegen-research-runtime/bin/lean",
+        "sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+        "usable": true,
+        "version": "Lean (version 4.33.1, aarch64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)"
+      },
+      "z3": {
+        "on_process_path": true,
+        "resolved_path": "/home/barberb/.local/share/vericodegen-research-runtime/bin/z3",
+        "sha256": "bbea82f99718e57d939db27db7a6e3afb2dfdee4bd11dd0858e5cfefbdf80fa1",
+        "usable": true,
+        "version": "Z3 version 4.15.4 - 64 bit"
+      }
+    },
+    "numpy": {
+      "file": "/home/barberb/.local/share/vericodegen-research-runtime/python/numpy/__init__.py",
+      "ok": true,
+      "sha256": "22cd1535fa14d74ef6f457cca149ffdc80875f460be313b8f895273f78bc402e",
+      "version": "1.26.4"
+    },
+    "projection_update_backend": "packed_cpu",
+    "research_toolchain_sha256": "babc2ef29c2e4328b4a7ebb13f639b35a3e24c2c79abd8aa16ee3f6e70943bc7",
+    "resource_limits": {
+      "T1_T3_outside_T2_interval": true,
+      "complete_T2_wall_seconds": 10800,
+      "compute_device": "cpu",
+      "cpu_limit": 2,
+      "gpu_or_model_service_slots": 1,
+      "memory_gib": 64,
+      "native_T2_soft_seconds": 9000,
+      "per_seed_total_wall_limit": null,
+      "pids": 64,
+      "scope": "Amended declared profile; actual host container receipt binds enforcement.",
+      "whole_wall_seconds": 36000
+    },
+    "stripped_profile_is_error": true,
+    "torch": {
+      "cpu": true,
+      "cuda_available": false,
+      "file": "/home/barberb/.local/share/vericodegen-research-runtime/python/torch/__init__.py",
+      "ok": true,
+      "sha256": "cf40c075c95864036e835795756d69b8cccfafa76f3bcde5eba9d06065ccd3d1",
+      "version": "2.13.0+cpu"
+    }
+  },
+  "final_test_locked": true,
+  "frozen_inputs": {
+    "environment_manifest_sha256": "06d1ff983d6879cfbe13e700267f4d2f2d21dbc2136c5d062276a4a7dfced1d5",
+    "experiment_plan_sha256": "b58ca30cca5c80b37df6875fe8534118fad3a4552b726304c926aa88640d058c",
+    "metrics_sha256": "6f9fbaa49fec388cd055f70b762c3d51a1dbc9e077b1437bdfd6db1ccc2c9794",
+    "modal_autoencoder_sha256": "70cf31bc8204a5d9ab4c5d9b851d47b54cfc20cefbc2392f0cfe7aa67519172e",
+    "native_training_inputs_sha256": "6177c6e0957502d22012aef4555a35bb30d137f64a185e41546cae0a5dcb964a",
+    "package_manifest_sha256": "595fe3c2b6b7339d967cfbf21de28f07de8fe03d819f625b999740d1c3038b15",
+    "preprocessing_manifest_sha256": "adc840668b7d12bb4eeebae23749b26939b9d90720d422c462291d4e0e9b1e01",
+    "selection_sources_sha256": "182adaba0b9fc218d30ab56915ad600a176295d2cab687f72a81abcc75bd308c",
+    "source_feedback_producer_sha256": "a40a9996c086e1c2a65857c82e09f071eb79fa605cc3139b428474bb13d5fdbf",
+    "splits_sha256": "d4989a3ea15f7035a4e85621bc220b4567828537733c4de4947fd17637bc0b27",
+    "train_sources_sha256": "4e54b902980cef97ae4cd5c8516f0b038505adf3251bde5a2aedd6d4e2abd532",
+    "training_backend_sha256": "c5a8854ef62b73db3b6e53615678b35cccb33907e0a554da766509f5d48181b5"
+  },
+  "preserved_prior": {
+    "AF-011": "papers/completion/autoformalization/receipts/AF-011.json",
+    "AF-012": "papers/completion/autoformalization/receipts/AF-012.json",
+    "AF-020": "papers/completion/autoformalization/receipts/AF-020.json"
+  },
+  "promotion": {
+    "e_locked": true,
+    "generic_file_existence_insufficient": true,
+    "requires_af013_identity_bound_canary": true
+  },
+  "repair_provenance": {
+    "hard_cumulative_budget_claimed": false,
+    "new_run_costs_accounted_separately": true,
+    "original_costs": {
+      "bytes": 26442,
+      "sha256": "dbf0b7c32cf448ceb88b4ba9682659e9a2730db16dc904197b0714e8005b9e17",
+      "source": "/home/barberb/.local/state/ipfs_accelerate_py/vericodegen-2026/autoformalization/worktrees/af-029-a991d0e9dc5e-attempt-1-1789200872/papers/completion/autoformalization/runs/native_training/costs.jsonl"
+    },
+    "preserved_cost_ledger": "evidence/native_training/prior_failed_run_costs.jsonl",
+    "preserved_cost_ledger_sha256": "dbf0b7c32cf448ceb88b4ba9682659e9a2730db16dc904197b0714e8005b9e17",
+    "prior_failure_manifest": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/original_failure_0910/manifest.private.json",
+    "prior_failure_manifest_sha256": "e67ac676636f35fadcecf4a972f68148a3364044998678fe6c6c07cfe7f68c97",
+    "prior_interrupted_usage_remains_unknown_where_unobserved": true,
+    "repair_budget": {
+      "amendment_does_not_authorize_dispatch": true,
+      "automatic_retries": false,
+      "frozen_at": "2026-09-12T12:26:38.588387+00:00",
+      "hard_cumulative_budget_claimed": false,
+      "historical_memory_engineering_qualification_cost": {
+        "charge_once": true,
+        "not_additive_to_historical_scientific_stage_costs": true,
+        "qualification_sha256": "295926655b6e4b944fb8eb549dbb01daf6687076216e404c3569c1bd9e846529",
+        "separate_engineering_not_training": true,
+        "test_elapsed_seconds": 13.343892667093314,
+        "whole_process_CPU_seconds": 17.055304,
+        "whole_process_max_rss_kib": 337188
+      },
+      "historical_normal_import_qualification_cost": {
+        "charge_once_not_per_seed": true,
+        "cpu_seconds": 5.08182616,
+        "peak_rss_kib": 562156,
+        "qualification_sha256": "b8bdb74e20ac7b58c0cf7e525cd796595d65621badbdc5f5041ac17735ea2502",
+        "separate_diagnostic_not_training": true,
+        "wall_seconds": 5.7849945339839906
+      },
+      "historical_operational_failure_costs": {
+        "earlier_precreate_failure": {
+          "docker_create_reached": false,
+          "measured_container_cpu_seconds": null,
+          "reconciliation_sha256": "8cfb6c9904927d666246ff81825bfe41f5780612850fbe324a1a6a3db075e48f",
+          "research_seeds_started": 0
+        },
+        "shared_setup_failure": {
+          "accounting": {
+            "full_container_cpu_and_peak_memory": "not retained; final container state sample alone does not provide cumulative cgroup usage",
+            "oom_killed": false,
+            "setup_terminal_stage_cost": {
+              "child_cpu_seconds": 0.131179,
+              "not_additive_to_corresponding_cost_ledger_rows": true,
+              "parent_cpu_seconds": 1.3999017440000001,
+              "scope": "exclusive_stage_interval_including_evaluation",
+              "wall_seconds": 1.5530699259834364
+            },
+            "stage_cost_not_additive_to_whole_container_cost": true,
+            "timed_out": false,
+            "whole_run_actual_wall_seconds": 4.261687724967487
+          },
+          "charge_once_not_per_seed": true,
+          "result_sha256": "558eca163f7135e3c4c1d3c950c1491aa284db0b23d262e30e2b7a367e83e278",
+          "review_sha256": "4f344753821a58852c289ca221e6ccbc76ed0c1e05db28430c20dd32f842a4a3",
+          "training_seeds_started": 0
+        }
+      },
+      "history_and_failure_accounting": "Preserve all original receipts, initial failed seeds, both OOMs and exact output inventories, known CPU/wall costs and unknown earlier interruptions. Historical whole and nested stage clocks must never be added twice. New costs are retained separately under the amended resource experiment; no failure or prior consumed allowance is refunded.",
+      "known_prior_costs": {
+        "known_per_seed_components": [
+          "T1",
+          "T2",
+          "T3"
+        ],
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/original_failure_0910/paper/runs/native_training/costs.jsonl",
+        "rows": 15,
+        "sha256": "dbf0b7c32cf448ceb88b4ba9682659e9a2730db16dc904197b0714e8005b9e17",
+        "shared_preprocessing_and_T0_costs": "retained separately in unchanged old ledger; not charged once per seed",
+        "unknown_interrupted_usage": "unknown, never inferred zero or refunded"
+      },
+      "native_t2_soft_seconds": 9000,
+      "native_update_family_count": 5,
+      "per_seed": {
+        "104729": {
+          "interrupted_usage_unknown": true,
+          "known_prior_wall_seconds": 1154.2743744041086,
+          "new_t2_wall_seconds": 10800
+        },
+        "130363": {
+          "interrupted_usage_unknown": true,
+          "known_prior_wall_seconds": 104.27518504797109,
+          "new_t2_wall_seconds": 10800
+        },
+        "155921": {
+          "interrupted_usage_unknown": true,
+          "known_prior_wall_seconds": 103.61372497008742,
+          "new_t2_wall_seconds": 10800
+        }
+      },
+      "population": {
+        "final": 0,
+        "selection": 15,
+        "train": 69
+      },
+      "prior_failure_manifest_sha256": "e67ac676636f35fadcecf4a972f68148a3364044998678fe6c6c07cfe7f68c97",
+      "prior_oom_runs": [
+        {
+          "output_root": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/corrected_run_20260912_v2/output",
+          "report": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/corrected_training_oom_review.private.json",
+          "report_sha256": "a54581eab8f1ebfc2bc4e0d7959b2418eb26ce6f3aa26bbb8ac5f129f812ebe3"
+        },
+        {
+          "output_root": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/corrected_run_600_v1/output",
+          "report": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/independent_run_observations/terminal_review.private.json",
+          "report_sha256": "2a5b7182d563f3d7ffaca4434539bea1cdb0408e4ed1d46f929f95999e0c1530"
+        }
+      ],
+      "resource_amendment": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/common_resource_amendment.private.json",
+        "sha256": "812fedea593e8241b77809968ad01808b053c86b9562ff34f5de571d94e900e7"
+      },
+      "resources": {
+        "cpus": 2,
+        "memory_bytes": 68719476736,
+        "pids": 64,
+        "t2_seconds_per_seed": 10800,
+        "wall_seconds": 36000
+      },
+      "runtime_manifest_sha256": "420a4d78ca4ccf152efa64fd11d5c03ae924113f6c76d30561326aa6d5ca87b0",
+      "runtime_profile_file": "papers/completion/toolchains/research_profile.json",
+      "schema": "af029-resource-amended-run-budget/v1",
+      "scope": {
+        "checkpoint_promotion": false,
+        "feedback": "native_compiler_structural_contracts_only",
+        "final_data_access": false,
+        "provider_calls": 0,
+        "semantic_fidelity_measured": false
+      },
+      "seeds": [
+        104729,
+        130363,
+        155921
+      ],
+      "source_commit_and_qualification_bound_by_separate_admission": true,
+      "storage": "Complete checkpoint bytes and exact native reload remain mandatory. The old64MiB/blob and512MiB/store transport caps are unchanged and not claimed sufficient; larger checkpoint archival needs explicit quota/chunk manifests. Retain all raw partial outputs.",
+      "timing_semantics": "CompleteT2 hard10800 seconds includes native training, evaluation and checkpoint save/reload. Native soft9000 seconds leaves an1800-second within-T2 reserve but does not guarantee return. T1/T3 are outside T2. Whole36000 seconds includes every phase. No claim of10800 total-per-seed or compliance with the superseded1800-second allowance.",
+      "two_failed_T2_intervals_seconds": 1050.7242299999998,
+      "two_failed_run_CPU_lower_bounds_sum": 2051.45014,
+      "two_failed_run_wall_seconds_sum": 2065.980525301071
+    },
+    "repair_budget_sha256": "3c23cc6e9bb7e408ef83b9c5aef03c2cea4867385a59b2168e1871cc91ea9c53"
+  },
+  "schema": "autoformalization-native-training-manifest/v1",
+  "t2_live_memory_checks": [
+    {
+      "decoded_embeddings_unchanged": true,
+      "evaluate_with_memory_matches_without": true,
+      "sample_memory_entry_count": 0,
+      "seed": 104729,
+      "trainer_sample_memory_used": false
+    },
+    {
+      "decoded_embeddings_unchanged": true,
+      "evaluate_with_memory_matches_without": true,
+      "sample_memory_entry_count": 0,
+      "seed": 130363,
+      "trainer_sample_memory_used": false
+    },
+    {
+      "decoded_embeddings_unchanged": true,
+      "evaluate_with_memory_matches_without": true,
+      "sample_memory_entry_count": 0,
+      "seed": 155921,
+      "trainer_sample_memory_used": false
+    }
+  ],
+  "t2_memory_contract": {
+    "source_sha256": "70cf31bc8204a5d9ab4c5d9b851d47b54cfc20cefbc2392f0cfe7aa67519172e",
+    "t2_memory_disabled_in_source": true,
+    "train_generalizable_projection_evaluation_use_sample_memory": false,
+    "train_generalizable_projection_returns_sample_memory_used_false": true
+  },
+  "task_id": "AF-029",
+  "wall_seconds": 13925.27
+}

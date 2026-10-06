@@ -1,0 +1,72 @@
+{
+  "Hub_transfer_executed": false,
+  "checkpoint_promoted": false,
+  "constitution_formalized": false,
+  "datasets_documentation_paths": 3,
+  "datasets_recovered_paths": 31,
+  "date": "2026-10-06",
+  "encoder_executed": false,
+  "findings_matrix": {
+    "bytes": 24910,
+    "sha256": "4ea1c62da24b33742faa9261d131b653f11cb03da7244d2d487babb82fa98dad"
+  },
+  "inventory": {
+    "datasets_refs": 410,
+    "datasets_worktrees": 16,
+    "workspace_refs": 298,
+    "workspace_worktrees": 35
+  },
+  "lake_executed": false,
+  "model_forward_executed": false,
+  "model_training_executed": false,
+  "qualification_granted": false,
+  "remaining_owner_review": "Retained snapshot.py ancestor-witness/physical-byte changes require a separate owner comparison; current implementation preserved. Broad semantic corpus/family qualification remains open.",
+  "reviewed_remote_heads": {
+    "datasets": "5171a632c6b9f0ecb2939d29d2ad74992cbfeb11",
+    "workspace": "3b0162bebe0b7a09727081cb8c5f5c15378caba1"
+  },
+  "schema": "cross-agent-autoencoder-integration-summary/v1",
+  "validation": {
+    "additional_mocked_probe_tests": 13,
+    "historical_accounting_tests": 30,
+    "publication_pure_tests": 22,
+    "pytest_tests": [
+      {
+        "bytes": 39044,
+        "path": "artifacts/autoencoder-integration-review-20261006/branches/profile-canonical-tests-r1.xml",
+        "sha256": "875d2d5edff2b33bf27dcb6cae276f11017fcd66b3f44014af6b67caa5edd386",
+        "tests": 129
+      },
+      {
+        "bytes": 162622,
+        "path": "artifacts/autoencoder-integration-review-20261006/branches/ir-wrapper-canonical-tests-r1.xml",
+        "sha256": "a23a606a5d0e64eea32d0528bb5813a9ae8b19f2225fd3cfedb0b2cdb605f5e6",
+        "tests": 774
+      },
+      {
+        "bytes": 4660,
+        "path": "artifacts/autoencoder-integration-review-20261006/branches/checkpoint-hub-existing-tests-r1.xml",
+        "sha256": "1f30838a240f11fc034c0f886de3ce15116c5a344534f48af9b0eb27ec45acb7",
+        "tests": 25
+      },
+      {
+        "bytes": 2920,
+        "path": "artifacts/autoencoder-integration-review-20261006/canonical-semantic-gates.xml",
+        "sha256": "9b7c5fc7d8e20f2fce90a861b3d9b370ae9087744a9c3629cea884aa9120a286",
+        "tests": 17
+      },
+      {
+        "bytes": 1380,
+        "path": "artifacts/autoencoder-integration-review-20261006/progress-tool-tests.xml",
+        "sha256": "52b44c163bab1b54c1ebcee5a5364a620002545251239303487c1695cec0f102",
+        "tests": 9
+      }
+    ],
+    "table_hash_replays": 3,
+    "total_targeted_unique_tests": 1019
+  },
+  "weights_downloaded": false,
+  "workspace_historical_recovery_paths": 23,
+  "workspace_publication_recovery_paths": 12,
+  "workspace_recovered_evidence_bytes": 2119998
+}

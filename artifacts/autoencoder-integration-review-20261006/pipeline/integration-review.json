@@ -1,0 +1,196 @@
+{
+  "schema": "workspace-autoencoder-integration-review/v1",
+  "main_snapshot": "3b0162bebe0b7a09727081cb8c5f5c15378caba1",
+  "normal_head": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+  "normal_index_sha256_after": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4",
+  "normal_index_unchanged": true,
+  "branch_summary": [
+    {
+      "ref": "agent/vericodegen-2026-autoformalization",
+      "commit": "091624a773179d24178d12bc1f410864885c10bf",
+      "ancestor_of_main": true,
+      "tip_paths": 218,
+      "identical_main_paths": 0
+    },
+    {
+      "ref": "codex/joint-span-policy-20261005-01",
+      "commit": "ec4302acd75f0dbb0d744586db35fef9d23980ac",
+      "ancestor_of_main": true,
+      "tip_paths": 30,
+      "identical_main_paths": 27
+    },
+    {
+      "ref": "codex/joint-conditioning-20261005-01",
+      "commit": "8c02d655e2d086bd644a9011ea67325060ef87bc",
+      "ancestor_of_main": false,
+      "tip_paths": 27,
+      "identical_main_paths": 25
+    },
+    {
+      "ref": "codex/joint-conditioning-20261005-02",
+      "commit": "3b39519d9bc9021a5e6a0bb183f6c57cb780bc5a",
+      "ancestor_of_main": true,
+      "tip_paths": 27,
+      "identical_main_paths": 27
+    }
+  ],
+  "effective_tree_regression": {
+    "branch": "agent/vericodegen-2026-autoformalization",
+    "branch_files": 1569,
+    "main_files": 487,
+    "identical": 481,
+    "changed_shared": 6,
+    "missing": 1082,
+    "main_only": 0,
+    "missing_bytes": 26455706,
+    "recovery": "23 absent bounded tooling/evidence files699974bytes; existing protocol/plan/taskboard/manuscript preserved"
+  },
+  "published_local_alignment_sources": {
+    "sampled_py_md": 215,
+    "exact_same_main": 209,
+    "absent_six_all_weights_tools_and_tests": 6,
+    "changed_shared": 0
+  },
+  "pipeline_map": [
+    {
+      "path": "JevOps/jevops/__init__.py",
+      "line": 14,
+      "purpose": "pins workspace datasets tree",
+      "bytes": 1940,
+      "working_tree_sha256": "2b1d193081e3d443f7247d22cec989a121c1bf569dd9e09b5ff76581b4fcd29d",
+      "scope": "static code inspection; no imports or execution"
+    },
+    {
+      "path": "JevOps/jevops/legal_adapter.py",
+      "line": 176,
+      "purpose": "explicit same-process/session backend provenance; source before/after call checks",
+      "bytes": 14495,
+      "working_tree_sha256": "f7924989f4ca2719701aa420a3e2f55d8e321aaedb38ee3e9507805787a07736",
+      "scope": "static code inspection; no imports or execution"
+    },
+    {
+      "path": "JevOps/jevops/statement_lock.py",
+      "line": 215,
+      "purpose": "locks source and minimum_duration threshold applicability",
+      "bytes": 19344,
+      "working_tree_sha256": "dc377f8359cac300023e225d694494ea631943298c44667ec44e1352de1e6237",
+      "scope": "static code inspection; no imports or execution"
+    },
+    {
+      "path": "JevOps/jevops/autoformal_tools.py",
+      "line": 122,
+      "purpose": "actual Lake build Legal and stored attestation",
+      "bytes": 18414,
+      "working_tree_sha256": "a5b5c11b2547242ab8e1822ace1de8157454c7ed62ff48f41d81e0c2ddcf1991",
+      "scope": "static code inspection; no imports or execution"
+    },
+    {
+      "path": "JevOps/jevops/autoencoder.py",
+      "line": 26,
+      "purpose": "separate16Dfunctional Lean-tactic IR; not8Dlegal or384Ddecoder",
+      "bytes": 65005,
+      "working_tree_sha256": "3cc9777c6aa31bc052efc17f0ebd7960ac978bf7ae922457e7e1778cdc97766c",
+      "scope": "static code inspection; no imports or execution"
+    },
+    {
+      "path": "JevOps/jevops/autoencoder_training.py",
+      "line": 2447,
+      "purpose": "Lean-tactic reconstruction/training facade",
+      "bytes": 140353,
+      "working_tree_sha256": "2819cd440ae5457a6f53a037089d61980590e5107cdc620d70dc3b6ea85cef9f",
+      "scope": "static code inspection; no imports or execution"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/autoformal/paired_span_census.py",
+      "line": 355,
+      "purpose": "three-table paired spans/goals/artifacts, guided versus source decoder origins",
+      "bytes": 59780,
+      "working_tree_sha256": "b3652d9cd022ec489a86337f129493ca34071cb44baa52a86d7e457a8495ef9e",
+      "scope": "static code inspection; no imports or execution"
+    },
+    {
+      "path": "external/ipfs_datasets/ipfs_datasets_py/logic/autoformal/span_cache_feed.py",
+      "line": 198,
+      "purpose": "bounded resumable census discovery and local DuckDB owner",
+      "bytes": 25476,
+      "working_tree_sha256": "157e063c0b8a8a90e3d89919a7ac8072fc880af96bfd720894a487c22939771e",
+      "scope": "static code inspection; no imports or execution"
+    },
+    {
+      "path": "external/ipfs_datasets/scripts/ops/legal_ir/import_span_cache_exchange.py",
+      "line": 782,
+      "purpose": "explicit sealed goal reingestion",
+      "bytes": 36148,
+      "working_tree_sha256": "a014b2ccbce65caaf15cd256cf3fb0f52facfcfde832d701701c6f4d287f9165",
+      "scope": "static code inspection; no imports or execution"
+    },
+    {
+      "path": "external/ipfs_datasets/scripts/ops/legal_ir/publish_span_cache_exchange.py",
+      "line": 120,
+      "purpose": "retained census/goals publish path",
+      "bytes": 8493,
+      "working_tree_sha256": "4b7eed721f17506aebed9573d0705574312db0d04f158324cf90b6819f1080ee",
+      "scope": "static code inspection; no imports or execution"
+    },
+    {
+      "path": "scripts/autoformalization_recovery_probe.py",
+      "line": 89,
+      "purpose": "raw Lean compiler diagnostics corrected to v2; accepted/admitted false, compile_passed separate",
+      "bytes": 15266,
+      "working_tree_sha256": "22291d4ccc342e4f5e6b2fda3f5c02e1c8fc539e5f36807150e94fa1a9f98ef3",
+      "scope": "static code inspection; no imports or execution"
+    },
+    {
+      "path": "implementation_plan/proof_grounded_ir_learning_fabric/SUPERVISOR_RUNBOOK.md",
+      "line": 15,
+      "purpose": "historically pinned freeze/admission/scheduler dependencies",
+      "bytes": 38157,
+      "working_tree_sha256": "86352dec50521e3aaad953390e592f24a60c24eb8556369b5b486f94fb7a358e",
+      "scope": "static code inspection; no imports or execution"
+    }
+  ],
+  "cross_agent_findings": [
+    {
+      "finding": "Frozen768 raw/PCA/AE conditioners yield identical discrete joint outcomes",
+      "evidence": "artifacts/autoformalization-publication-20261004/joint_conditioning/results-01/summary-01.json",
+      "scope": "64exposed authored sources \u00d73seeds; no independent fidelity, no training, no proof",
+      "implication": "Better vector reconstruction did not establish stronger formalization; keep source/formula end-to-end fidelity objective separate."
+    },
+    {
+      "finding": "Bounded top16/beam64 joint span selection raises structural proposals10/192to183/192",
+      "evidence": "artifacts/autoformalization-publication-20261004/joint_span/results-02/summary-01.json",
+      "scope": "same frozen one-rule literal-copy decoder; semantic flagsfalse; approximate pruning",
+      "implication": "Retain as opt-in candidate generation with source review, qualification and Lake gates; proposalcount alone is insufficient."
+    },
+    {
+      "finding": "Historical three-seed T2 target-assisted cosine1/MSE0 has unchanged family CE; guidance promotion all no_candidate",
+      "evidence": "papers/completion/autoformalization/evidence/final_correction/actual_execution.json",
+      "scope": "authentic saved historical scalar metadata only; newruntime0",
+      "implication": "Do not distill these vectors as independent formula labels; independently train source decoder and validate actual application/family coverage."
+    }
+  ],
+  "remaining_integration_work": [
+    "Connect separately trained decoder experiments to portable paired-span observations using explicit architecture/producer identity and all emitted family ASTs, preserving independent versus guided origins.",
+    "Reuse current admission/family gates; historical abstractnative receipt accounting and rawLean researchdiagnostics cannotgrant currentLake admission.",
+    "Move useful bounded joint span selector from artifact-specific frozen evaluator into versioned opt-in decoder policy only after independentsource-fidelity tests; preserve abstentions/pruning telemetry.",
+    "Maintain upstream projection/optimizer mechanisms as separate versioned source changes; do not infer decoder improvement from rawvector loss.",
+    "Keep all_weights release archive as immutable reference/source preservation; it is neither same-weights training synchronization nor DuckDB/Quack transactional update proof.",
+    "Expand genuine grouped source/formal targets and reviewed semantic coverage beyond the narrow copied deontic rule before claiming all40declared families."
+  ],
+  "new_model_or_encoder_forwards": 0,
+  "new_training_runs": 0,
+  "new_native_checker_or_Lake_calls": 0,
+  "Hub_calls": 0,
+  "HACC_or_hallucinate_app_edits": false,
+  "qualification_granted": false,
+  "corrected_raw_Lean_probe": {
+    "schema": "autoformalization-recovery-constructed-probe/v2",
+    "raw_compile_status": "native_compile_diagnostic",
+    "compile_passed_counts_explicit": true,
+    "accepted": false,
+    "admitted": false,
+    "lake_executed": false,
+    "mocked_tests_passed": 13,
+    "historical_receipts_rewritten": false
+  }
+}

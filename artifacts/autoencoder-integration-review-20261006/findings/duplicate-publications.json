@@ -1,0 +1,28 @@
+[
+  {
+    "repository": "/home/barberb/lift_coding",
+    "earlier": "8c02d655e2d086bd644a9011ea67325060ef87bc",
+    "later": "3b39519d9bc9021a5e6a0bb183f6c57cb780bc5a",
+    "scope": "artifacts/autoformalization-publication-20261004/joint_conditioning",
+    "changed_paths": [],
+    "identical_scope": true,
+    "interpretation": "These commits must not be counted as separate executed studies when their evidence is identical."
+  },
+  {
+    "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "earlier": "a3005bc37959f009a5a221bd4f097bb23db73f97",
+    "later": "60f5c2951ac34231f05b54e50f2725296871c5b9",
+    "scope": "docs/implementation/reports/evidence/decoder-paraphrase-modality-20261004",
+    "changed_paths": [
+      "A\tdocs/implementation/reports/evidence/decoder-paraphrase-modality-20261004/README.md",
+      "A\tdocs/implementation/reports/evidence/decoder-paraphrase-modality-20261004/evidence.tar.gz.part-001",
+      "A\tdocs/implementation/reports/evidence/decoder-paraphrase-modality-20261004/evidence.tar.gz.part-002",
+      "A\tdocs/implementation/reports/evidence/decoder-paraphrase-modality-20261004/evidence.tar.gz.part-003",
+      "A\tdocs/implementation/reports/evidence/decoder-paraphrase-modality-20261004/evidence.tar.gz.part-004",
+      "A\tdocs/implementation/reports/evidence/decoder-paraphrase-modality-20261004/manifest.json",
+      "A\tdocs/implementation/reports/evidence/decoder-paraphrase-modality-20261004/results.json"
+    ],
+    "identical_scope": false,
+    "interpretation": "The earlier commit contains no evidence directory at this scope; the later commit adds its complete archive. These are not identical artifact trees, and no independent-study count is inferred from commit count."
+  }
+]

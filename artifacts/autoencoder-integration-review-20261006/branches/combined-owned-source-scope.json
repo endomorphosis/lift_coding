@@ -1,0 +1,285 @@
+{
+  "origin_main": "5171a632c6b9f0ecb2939d29d2ad74992cbfeb11",
+  "paths": [
+    {
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/git_decoder_profile.py",
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "sha256": "e52fff88abf1ff6d6a6be3e781bd917a187d318e935094a14ef58382ccf0ab07",
+      "bytes": 3783,
+      "origin_main_preimage": null,
+      "worktree_preimage": "e52fff88abf1ff6d6a6be3e781bd917a187d318e935094a14ef58382ccf0ab07",
+      "exact_historical_restoration": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/chunked_snapshot.py",
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "sha256": "2a187d7ed7b228d4179302405bed47536754a7e789b5623f59a11e76cbe27f9d",
+      "bytes": 22314,
+      "origin_main_preimage": null,
+      "worktree_preimage": null,
+      "exact_historical_restoration": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/committed_snapshot.py",
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "sha256": "4700a72c4463f0398b6b68e3df4b694b030dfe88a24db006772322f0cee26a15",
+      "bytes": 14891,
+      "origin_main_preimage": null,
+      "worktree_preimage": null,
+      "exact_historical_restoration": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/paged_snapshot.py",
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "sha256": "6f4419e85df97097d2dc20c8253ae2cabb2175f1ea69abcf365f18bf98f00b68",
+      "bytes": 22375,
+      "origin_main_preimage": null,
+      "worktree_preimage": null,
+      "exact_historical_restoration": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/streaming_scanner.py",
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "sha256": "9426e27c783cc073aa85401b188fa405104564c5d338015776716611d24c3cd8",
+      "bytes": 26263,
+      "origin_main_preimage": null,
+      "worktree_preimage": null,
+      "exact_historical_restoration": true
+    },
+    {
+      "path": "tests/unit/logic/software_contracts/semantic_index/test_explicit_git_decoder_profile.py",
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "sha256": "98859c9cb3eb5b373166309ac83e9ce9272efeff01bd7ab5fc6472c991fcee05",
+      "bytes": 9948,
+      "origin_main_preimage": null,
+      "worktree_preimage": "98859c9cb3eb5b373166309ac83e9ce9272efeff01bd7ab5fc6472c991fcee05",
+      "exact_historical_restoration": true
+    },
+    {
+      "path": "tests/unit/logic/software_contracts/semantic_index/test_chunked_snapshot.py",
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "sha256": "05852b234ada4f2b1c1382a73f941ecf0a7f768f3b38ee050c2a20f3efa68b01",
+      "bytes": 16741,
+      "origin_main_preimage": null,
+      "worktree_preimage": null,
+      "exact_historical_restoration": true
+    },
+    {
+      "path": "tests/unit/logic/software_contracts/semantic_index/test_committed_snapshot.py",
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "sha256": "db6d592e15fbb1219748886890fde46ff5215cfa7677262f306d308621f7b814",
+      "bytes": 9519,
+      "origin_main_preimage": null,
+      "worktree_preimage": null,
+      "exact_historical_restoration": true
+    },
+    {
+      "path": "tests/unit/logic/software_contracts/semantic_index/test_paged_snapshot.py",
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "sha256": "43c9f29aba2731fdb9de3ef936ae03f6c42a4993c323de3f70651d4049aefa0d",
+      "bytes": 11821,
+      "origin_main_preimage": null,
+      "worktree_preimage": null,
+      "exact_historical_restoration": true
+    },
+    {
+      "path": "tests/unit/logic/software_contracts/semantic_index/test_streaming_scanner.py",
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "sha256": "ac88fbf352b061cacb9ba2abf0d017e1762bf01ec4168f4fa3132f3949cd1c4c",
+      "bytes": 11454,
+      "origin_main_preimage": null,
+      "worktree_preimage": null,
+      "exact_historical_restoration": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/CHUNKED_SNAPSHOTS.md",
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "sha256": "6b5a32f80cf24f04f1398964380636990491407aab853db65e68238434c93a96",
+      "bytes": 5909,
+      "origin_main_preimage": null,
+      "worktree_preimage": null,
+      "exact_historical_restoration": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/COMMITTED_SNAPSHOTS.md",
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "sha256": "5448f1001bdff14b0e0df711b6149eee6158ff31ab82b730fcfc5cb672cb46df",
+      "bytes": 3005,
+      "origin_main_preimage": null,
+      "worktree_preimage": null,
+      "exact_historical_restoration": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/PAGED_SNAPSHOT_EVIDENCE.md",
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "sha256": "1259e8425bb3d641ca41ee558316da0578647114215f34f425e1a62ed8a9c4dd",
+      "bytes": 3130,
+      "origin_main_preimage": null,
+      "worktree_preimage": null,
+      "exact_historical_restoration": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/STREAMING_SCANNER.md",
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "sha256": "49b076880eab714a3801b20ae9cca0d8c8026bae893a1ab820e105201b9b0d56",
+      "bytes": 3830,
+      "origin_main_preimage": null,
+      "worktree_preimage": null,
+      "exact_historical_restoration": true
+    },
+    {
+      "path": "docs/software_contracts/GIT_DECODER_PROFILES.md",
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "sha256": "4b2b1ca6ae96126d6026cfb55625ee18a998d593676688676f5fe8d85f387705",
+      "bytes": 3468,
+      "origin_main_preimage": null,
+      "worktree_preimage": "4b2b1ca6ae96126d6026cfb55625ee18a998d593676688676f5fe8d85f387705",
+      "exact_historical_restoration": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/software_contracts/content.py",
+      "worktree_preimage": "a7036a66ec6b476a78cb3e9a2384eaf9dca72cb8c7cf57ed0b25cd3b592720c9",
+      "origin_main_preimage": "a7036a66ec6b476a78cb3e9a2384eaf9dca72cb8c7cf57ed0b25cd3b592720c9",
+      "sha256": "c27c4e3cd4a5ee12ff5c3967a7f57e421ea1bb26ff36b66c7547e9d1e3cde2df",
+      "bytes": 22146,
+      "exact_historical_restoration": false,
+      "change": "add cid_for_byte_chunks using current CID encoder; add __all__ only"
+    },
+    {
+      "path": "tests/unit/logic/software_contracts/test_streaming_source_content_identity.py",
+      "worktree_preimage": null,
+      "origin_main_preimage": null,
+      "sha256": "1fda36412d320de4e7fc2ef3ae64be336c09d362e46ff763a04ef9e3bd8c0e5b",
+      "bytes": 2150,
+      "exact_historical_restoration": false,
+      "change": "test preserved whole-source identity and refusal behavior"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/ir_cell_routing.py",
+      "origin_main_preimage": null,
+      "sha256": "e5ad1d9ca5187abf39d66f18be7c4ec5a891a2da6d2e571ad4132edae8b7528a",
+      "bytes": 20422,
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "worktree_preimage": null
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/ir_cell_runtime.py",
+      "origin_main_preimage": null,
+      "sha256": "673702cc415b37d9597bbe5ccf259717d77f8335a0c2269265cddc4dff49ffdd",
+      "bytes": 15209,
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "worktree_preimage": null
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/ir_cell_target_compatibility.py",
+      "origin_main_preimage": null,
+      "sha256": "49251451146d94bf0ba784b4d9e439174efcb602d17daa16fc0bf9986fea33ab",
+      "bytes": 18253,
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "worktree_preimage": null
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/ir_original_corpus_runtime.py",
+      "origin_main_preimage": null,
+      "sha256": "03b9dd075227982f67543bdd7352f52186ba33f1dd98158342bab2aa37735b4f",
+      "bytes": 14468,
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "worktree_preimage": null
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/ir_decoder_format_runtime.py",
+      "origin_main_preimage": null,
+      "sha256": "e5521f573a5d592c2f452742c827104fe613d227591a04ab255ec46b2d34e33b",
+      "bytes": 22669,
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "worktree_preimage": null
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/ir_decoder_profile_inventory.py",
+      "origin_main_preimage": null,
+      "sha256": "bc8aab1ba3a53b91c0e39fc813983657e52e07118a14c0d65c3c4e2aa660face",
+      "bytes": 20396,
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "worktree_preimage": null
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_ir_cell_routing.py",
+      "origin_main_preimage": null,
+      "sha256": "cd941d503c18fb752202cfeceb72184c0496ea9f7cecfb5fa8721b450fc04bd4",
+      "bytes": 38015,
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "worktree_preimage": null
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_ir_cell_runtime.py",
+      "origin_main_preimage": null,
+      "sha256": "10d3dba7ffbf4867cac35e2a4e43bc7ef84955278a20d5c815c6d0aed8b98805",
+      "bytes": 29082,
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "worktree_preimage": null
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_ir_cell_target_compatibility.py",
+      "origin_main_preimage": null,
+      "sha256": "7386436c9efe3d8360cd0c90acaae33f9fa1a4e8f02258e3d6f4388e26f3fe33",
+      "bytes": 31880,
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "worktree_preimage": null
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_ir_original_corpus_runtime.py",
+      "origin_main_preimage": null,
+      "sha256": "6a0dcc17f6bb30cf8ae5a49add473315a15ac10ab5df6006cfd60c9efa7667bc",
+      "bytes": 23374,
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "worktree_preimage": null
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_ir_decoder_format_runtime.py",
+      "origin_main_preimage": null,
+      "sha256": "42270c0d7528b88da26b061e6e7fb74c265bfb56f5720a7aae4ac4b2a1aa14eb",
+      "bytes": 36795,
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "worktree_preimage": null
+    },
+    {
+      "path": "tests/unit/logic/formalization/autoencoder/test_ir_decoder_profile_inventory.py",
+      "origin_main_preimage": null,
+      "sha256": "991acbeae8e6faf4e631de2eeb792db4b4fbe5e1e6903eab7c298e0026b1305e",
+      "bytes": 24982,
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "worktree_preimage": null
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/checkpoint_hub.py",
+      "origin_main_preimage": "b54bc4c28520c18b3fca8718f1c19acb39e0b3517316ccd5f53222920e360c06",
+      "sha256": "80da578b0b67ec9867012535df0e51d06ca72ea4ae397e07c922713dc3d9691f",
+      "bytes": 16384,
+      "producer_commit": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "addition_functions": [
+        "open_ir_cell_autoencoder",
+        "preflight_ir_cell_cached_targets",
+        "open_ir_original_corpus_autoencoder",
+        "open_ir_decoder_format_autoencoder"
+      ],
+      "existing_functions_unchanged": true,
+      "worktree_preimage": "b54bc4c28520c18b3fca8718f1c19acb39e0b3517316ccd5f53222920e360c06"
+    },
+    {
+      "path": "docs/autoencoders/ir_progress_recovery.md",
+      "origin_main_preimage": null,
+      "worktree_preimage": null,
+      "sha256": "85d73aa103b676ee8da77cef0aa5175f02eeb47bf8f90b8c7c5455231a172234",
+      "bytes": 6398,
+      "change": "document recovered opt-in interfaces, exact scope and qualification limitations"
+    }
+  ],
+  "owned_path_count": 31,
+  "owned_bytes": 511074,
+  "worktree_and_main_preimages_pinned": true,
+  "normal_git_state_mutated": false,
+  "model_training_executed": false,
+  "model_forward_executed": false,
+  "downloads_performed": false,
+  "lean_admitted": false
+}

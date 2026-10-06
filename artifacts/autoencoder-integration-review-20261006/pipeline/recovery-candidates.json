@@ -1,0 +1,380 @@
+{
+  "schema": "workspace-autoencoder-recovery-candidates/v1",
+  "main_snapshot": "3b0162bebe0b7a09727081cb8c5f5c15378caba1",
+  "source_branch": "agent/vericodegen-2026-autoformalization",
+  "source_commit": "091624a773179d24178d12bc1f410864885c10bf",
+  "historical_recovery": [
+    {
+      "path": "papers/completion/autoformalization/evaluation/run_benchmark.py",
+      "source_commit": "091624a773179d24178d12bc1f410864885c10bf",
+      "source_blob_oid": "508893c477401b5bfe839855faf624b144ebbd9d",
+      "source_sha256": "b290535d18a3f3b2d92d77d663af30944ec0415a86124be5c22cf88764ab9a51",
+      "source_bytes": 42573,
+      "main_preimage_blob_oid": null,
+      "classification": "historical_tooling"
+    },
+    {
+      "path": "papers/completion/autoformalization/evaluation/test_result_accounting.py",
+      "source_commit": "091624a773179d24178d12bc1f410864885c10bf",
+      "source_blob_oid": "087576f636067cea2f49e56d6268dc7533461f04",
+      "source_sha256": "48f6892446276b195c462fef85e1187f3855b47f0ef4a465d7e152c8c726027b",
+      "source_bytes": 27668,
+      "main_preimage_blob_oid": null,
+      "classification": "historical_tooling"
+    },
+    {
+      "path": "papers/completion/autoformalization/evaluation/result_schema.json",
+      "source_commit": "091624a773179d24178d12bc1f410864885c10bf",
+      "source_blob_oid": "d323790ad8fa4ab3cf612c0cb5249ad902dc6692",
+      "source_sha256": "cc07be968842ad32e8c2f87dd58f4ad6c1e57d9d54589baeb2a767227b47b34d",
+      "source_bytes": 16527,
+      "main_preimage_blob_oid": null,
+      "classification": "historical_contract"
+    },
+    {
+      "path": "papers/completion/autoformalization/config/metrics.json",
+      "source_commit": "091624a773179d24178d12bc1f410864885c10bf",
+      "source_blob_oid": "2ad53be4880771e9f067bfe2e60444513dcc335a",
+      "source_sha256": "6f9fbaa49fec388cd055f70b762c3d51a1dbc9e077b1437bdfd6db1ccc2c9794",
+      "source_bytes": 10595,
+      "main_preimage_blob_oid": null,
+      "classification": "historical_contract"
+    },
+    {
+      "path": "papers/completion/autoformalization/evaluation/final_correction/regenerate_tables.py",
+      "source_commit": "091624a773179d24178d12bc1f410864885c10bf",
+      "source_blob_oid": "fc8773d255c3f3a296bd127418c0b2a7f316f20e",
+      "source_sha256": "3ab94586dfc6c84c20ce68568b93242c5a6d4ee9307d07d8b9d652ca7a3acc57",
+      "source_bytes": 8776,
+      "main_preimage_blob_oid": null,
+      "classification": "historical_tooling"
+    },
+    {
+      "path": "papers/completion/autoformalization/results/summary.json",
+      "source_commit": "091624a773179d24178d12bc1f410864885c10bf",
+      "source_blob_oid": "aa4462fd594cedceb0d77710fcdfdfbe754ca465",
+      "source_sha256": "d369e99ec3bcc9d1bbd12361ca73300d2297b5363806be77dcd2625889bb2276",
+      "source_bytes": 93339,
+      "main_preimage_blob_oid": null,
+      "classification": "retained_historical_evidence"
+    },
+    {
+      "path": "papers/completion/autoformalization/results/table6_pipeline.tex",
+      "source_commit": "091624a773179d24178d12bc1f410864885c10bf",
+      "source_blob_oid": "ea334d04db664ba6ebb1b245ce305a0e2fe5af52",
+      "source_sha256": "a2ebba34895da30b383954e93ec582d2738a212d15de7b329fecf5a4d0c7aa49",
+      "source_bytes": 2095,
+      "main_preimage_blob_oid": null,
+      "classification": "retained_historical_evidence"
+    },
+    {
+      "path": "papers/completion/autoformalization/results/table11_training.tex",
+      "source_commit": "091624a773179d24178d12bc1f410864885c10bf",
+      "source_blob_oid": "8bd9d3be55491dfb677f55d6b5a9a8515213ebce",
+      "source_sha256": "b30c46c02a85acb43dbe46e6a4008bff6d0416bb6f32bbc2c9dc90e4f8714a14",
+      "source_bytes": 2447,
+      "main_preimage_blob_oid": null,
+      "classification": "retained_historical_evidence"
+    },
+    {
+      "path": "papers/completion/autoformalization/results/table13_assistance.tex",
+      "source_commit": "091624a773179d24178d12bc1f410864885c10bf",
+      "source_blob_oid": "80f73e019fccf42d83beb34a7f630e94af8895a8",
+      "source_sha256": "dab02cc945ce5db5efb16685daa2d6ca4cfaef9b03a6f96781c7829611322117",
+      "source_bytes": 2209,
+      "main_preimage_blob_oid": null,
+      "classification": "retained_historical_evidence"
+    },
+    {
+      "path": "papers/completion/autoformalization/evidence/final_correction/actual_execution.json",
+      "source_commit": "091624a773179d24178d12bc1f410864885c10bf",
+      "source_blob_oid": "7ccf3ca10b2f70e088369a9fb4c462b63be752cc",
+      "source_sha256": "4b1296a3b19720237702739e05c890f4a340c9255696498a94b6265bae90592c",
+      "source_bytes": 8723,
+      "main_preimage_blob_oid": null,
+      "classification": "retained_historical_evidence"
+    },
+    {
+      "path": "papers/completion/autoformalization/runs/native_training/manifest.json",
+      "source_commit": "091624a773179d24178d12bc1f410864885c10bf",
+      "source_blob_oid": "95adcd5cb3c05bb2c85af0721c01ef4ed04ce2c5",
+      "source_sha256": "5efe5c80e4f7e03301c6921fcc3b7505301c278934f3639889433aa19107a33d",
+      "source_bytes": 42425,
+      "main_preimage_blob_oid": null,
+      "classification": "retained_historical_evidence"
+    },
+    {
+      "path": "papers/completion/autoformalization/evidence/native_training/adoption_scalar_summary.json",
+      "source_commit": "091624a773179d24178d12bc1f410864885c10bf",
+      "source_blob_oid": "11219c772c6f9b91bbce32b6b288d3825d75f0c3",
+      "source_sha256": "61506d9d94443600bb4653666cad58f5c2c2cd4abff5a13f94a6b798b0b6429f",
+      "source_bytes": 62573,
+      "main_preimage_blob_oid": null,
+      "classification": "retained_historical_evidence"
+    },
+    {
+      "path": "papers/completion/autoformalization/evidence/native_training/adoption_validation_costs.json",
+      "source_commit": "091624a773179d24178d12bc1f410864885c10bf",
+      "source_blob_oid": "4f7bf585a5881d39af1a833005dab2006a244b75",
+      "source_sha256": "3739b51c833f4c761a48a96ecb6e19cda2fa5158f2dac77817377a4abd54b69d",
+      "source_bytes": 34755,
+      "main_preimage_blob_oid": null,
+      "classification": "retained_historical_evidence"
+    },
+    {
+      "path": "papers/completion/autoformalization/evidence/native_training/adoption_handoff.json",
+      "source_commit": "091624a773179d24178d12bc1f410864885c10bf",
+      "source_blob_oid": "c5239acd8ed2d8ce772f0c84f774b54d40dc9a13",
+      "source_sha256": "1149e384356efdb292d0cac5ff758578caa8543fb57dd2c32290df1027667c7e",
+      "source_bytes": 5469,
+      "main_preimage_blob_oid": null,
+      "classification": "retained_historical_evidence"
+    },
+    {
+      "path": "papers/completion/autoformalization/evidence/consumer_activation.json",
+      "source_commit": "091624a773179d24178d12bc1f410864885c10bf",
+      "source_blob_oid": "b799efe38afbc21bd4c9ff269633d0e228a53c9a",
+      "source_sha256": "bd85d54c59b92c40a98dc35757c35498f46ae4316da8611f0f109d9c9c6af9fe",
+      "source_bytes": 21236,
+      "main_preimage_blob_oid": null,
+      "classification": "retained_historical_evidence"
+    },
+    {
+      "path": "papers/completion/autoformalization/evidence/rollback_receipt.json",
+      "source_commit": "091624a773179d24178d12bc1f410864885c10bf",
+      "source_blob_oid": "4c8822b941194227e49be3fc19252ffc30c9bc66",
+      "source_sha256": "d95cc91cdc9e142d20e602af2aa68b8850e4fcf4f2ac6a5e515d3089a3f0e1ab",
+      "source_bytes": 3664,
+      "main_preimage_blob_oid": null,
+      "classification": "retained_historical_evidence"
+    },
+    {
+      "path": "papers/completion/autoformalization/runs/guidance_promotion/results.jsonl",
+      "source_commit": "091624a773179d24178d12bc1f410864885c10bf",
+      "source_blob_oid": "b350236c9f4fd2fc50cd5942960daa1b24aacf47",
+      "source_sha256": "e2898a87f9c76ab4640b4a954fed536403fb2dd32ac2aacc94087a7ad324e373",
+      "source_bytes": 55497,
+      "main_preimage_blob_oid": null,
+      "classification": "retained_historical_evidence"
+    },
+    {
+      "path": "papers/completion/autoformalization/receipts/AF-029.json",
+      "source_commit": "091624a773179d24178d12bc1f410864885c10bf",
+      "source_blob_oid": "093037065fda81624585df6963fa6d19ff360c4e",
+      "source_sha256": "e5afe12686ae6bf4942c922a387c0c38aff36a5dd28f409c89ec3d3234b260c8",
+      "source_bytes": 67108,
+      "main_preimage_blob_oid": null,
+      "classification": "retained_historical_evidence"
+    },
+    {
+      "path": "papers/completion/autoformalization/receipts/AF-013.json",
+      "source_commit": "091624a773179d24178d12bc1f410864885c10bf",
+      "source_blob_oid": "e3f7ddbd2cfef84ec80b24c004b109e6eb833c07",
+      "source_sha256": "e7bd5d9e5f899d44a262f7f28cd0bd5e6f22fdd67dce5a4949a87e5c8b555152",
+      "source_bytes": 16714,
+      "main_preimage_blob_oid": null,
+      "classification": "retained_historical_evidence"
+    },
+    {
+      "path": "papers/completion/autoformalization/evidence/guidance_export.json",
+      "source_commit": "091624a773179d24178d12bc1f410864885c10bf",
+      "source_blob_oid": "49684e9ec9c54204e6bb0a15aaac63cf146375cb",
+      "source_sha256": "7bf7cbe0641dfd7175922dd530f5d7a7158403a49fb6dbf508136ce0434dcbff",
+      "source_bytes": 161628,
+      "main_preimage_blob_oid": null,
+      "classification": "retained_historical_evidence"
+    },
+    {
+      "path": "papers/completion/autoformalization/checkpoints/native_training/manifest.json",
+      "source_commit": "091624a773179d24178d12bc1f410864885c10bf",
+      "source_blob_oid": "b045572fee2865515f22bd29eb08ed1c295e2f0d",
+      "source_sha256": "a6cc9c3fa78c365977c8409b9a02e479a4cce8b3b3bde8035e889e40064a9fa3",
+      "source_bytes": 6296,
+      "main_preimage_blob_oid": null,
+      "classification": "retained_historical_evidence"
+    },
+    {
+      "path": "papers/completion/autoformalization/config/native_training_resource_amendment.json",
+      "source_commit": "091624a773179d24178d12bc1f410864885c10bf",
+      "source_blob_oid": "13c25ee17fec817251988ae388f1fe6d97047e92",
+      "source_sha256": "812fedea593e8241b77809968ad01808b053c86b9562ff34f5de571d94e900e7",
+      "source_bytes": 3972,
+      "main_preimage_blob_oid": null,
+      "classification": "historical_contract"
+    },
+    {
+      "path": "papers/completion/autoformalization/data/native_training_teacher_manifest.json",
+      "source_commit": "091624a773179d24178d12bc1f410864885c10bf",
+      "source_blob_oid": "ff2522e049648d5a8721a2f0fed567f37405b596",
+      "source_sha256": "3fb875b7fac796389ccbebbcbd798977fdd74e1e4198e0dda6341955c421e886",
+      "source_bytes": 3685,
+      "main_preimage_blob_oid": null,
+      "classification": "historical_contract"
+    }
+  ],
+  "historical_total_bytes": 699974,
+  "uncommitted_publication_recovery": [
+    {
+      "path": "artifacts/autoformalization-publication-20261004/all_weights/add_upstream_reference.py",
+      "source": "existing_uncommitted_file",
+      "source_sha256": "8c6721f97f3f74a6a45f1251fc520ab98a9bcb1b20835fdeee500e28593a96ff",
+      "source_bytes": 3436,
+      "main_preimage_blob_oid": null,
+      "classification": "append_only_publication_tooling"
+    },
+    {
+      "path": "artifacts/autoformalization-publication-20261004/all_weights/publish_all_weights.py",
+      "source": "existing_uncommitted_file",
+      "source_sha256": "7f8fd93c2173930f2cd6693e7927a7946bf9c63a1aabeabf2218f4df9dff2299",
+      "source_bytes": 17327,
+      "main_preimage_blob_oid": null,
+      "classification": "append_only_publication_tooling"
+    },
+    {
+      "path": "artifacts/autoformalization-publication-20261004/all_weights/stage_all_weights.py",
+      "source": "existing_uncommitted_file",
+      "source_sha256": "b83c016f28a171bf7389a75427c972c5188828fe07f0663b5aa324e4833d35a5",
+      "source_bytes": 33623,
+      "main_preimage_blob_oid": null,
+      "classification": "append_only_publication_tooling"
+    },
+    {
+      "path": "artifacts/autoformalization-publication-20261004/all_weights/staging-review-audit.py",
+      "source": "existing_uncommitted_file",
+      "source_sha256": "7596e2816b104779f8b477b49f27dfa9067d8197cc70a7ec83e21c2ea8b85c27",
+      "source_bytes": 21191,
+      "main_preimage_blob_oid": null,
+      "classification": "append_only_publication_tooling"
+    },
+    {
+      "path": "artifacts/autoformalization-publication-20261004/all_weights/test_publish_all_weights.py",
+      "source": "existing_uncommitted_file",
+      "source_sha256": "e8a69bd3427c6c5bdf779d2fd5824c796dc49d48372076db24eb24da0f20df2f",
+      "source_bytes": 8612,
+      "main_preimage_blob_oid": null,
+      "classification": "append_only_publication_tooling"
+    },
+    {
+      "path": "artifacts/autoformalization-publication-20261004/all_weights/test_stage_all_weights.py",
+      "source": "existing_uncommitted_file",
+      "source_sha256": "074a826e37e2cc0b811b5a5b2a5a71d3faeb4c8d55b081707131296cd940d29a",
+      "source_bytes": 14579,
+      "main_preimage_blob_oid": null,
+      "classification": "append_only_publication_tooling"
+    },
+    {
+      "path": "artifacts/autoformalization-publication-20261004/all_weights/completion-01.json",
+      "source": "existing_uncommitted_file",
+      "source_sha256": "2cecb94cb0a370f9813099dd2d857ed63393fa77b1f3d1d6aa489a2d94605689",
+      "source_bytes": 3841,
+      "main_preimage_blob_oid": null,
+      "classification": "retained_publication_evidence"
+    },
+    {
+      "path": "artifacts/autoformalization-publication-20261004/all_weights/independent-staging-audit-02.json",
+      "source": "existing_uncommitted_file",
+      "source_sha256": "7bd8a0ba1c815e3ba1f1b995a93d5edfed7e9d4155f9542eab6c963088a33777",
+      "source_bytes": 2847,
+      "main_preimage_blob_oid": null,
+      "classification": "retained_publication_evidence"
+    },
+    {
+      "path": "artifacts/autoformalization-publication-20261004/all_weights/staging-review-final-remote-publication-01.json",
+      "source": "existing_uncommitted_file",
+      "source_sha256": "04c744aeeea3e66e43c09a7e2f9737b438297135147a60fa7853551624bc338d",
+      "source_bytes": 732588,
+      "main_preimage_blob_oid": null,
+      "classification": "retained_publication_evidence"
+    },
+    {
+      "path": "artifacts/autoformalization-publication-20261004/all_weights/hf-upload-01/publication.json",
+      "source": "existing_uncommitted_file",
+      "source_sha256": "bb4fa26cfe780527a72a7c43cd8e0438829bb74e69521cc2af3d020e38a7a79e",
+      "source_bytes": 579797,
+      "main_preimage_blob_oid": null,
+      "classification": "retained_publication_evidence"
+    },
+    {
+      "path": "artifacts/autoformalization-publication-20261004/all_weights/staging-review-pure-checks-02.json",
+      "source": "existing_uncommitted_file",
+      "source_sha256": "d981c76ad5615d7165863014ee27a17c9852f85a985daf200dbefe127a6367c9",
+      "source_bytes": 1321,
+      "main_preimage_blob_oid": null,
+      "classification": "retained_publication_evidence"
+    },
+    {
+      "path": "artifacts/autoformalization-publication-20261004/all_weights/upstream-leanstral-reference-01.json",
+      "source": "existing_uncommitted_file",
+      "source_sha256": "b4a2d382f1dfc2073d3c3efcb108a817a7ad262393210a977873c15af6b2513c",
+      "source_bytes": 862,
+      "main_preimage_blob_oid": null,
+      "classification": "retained_publication_evidence"
+    }
+  ],
+  "uncommitted_total_bytes": 1420024,
+  "changed_existing_protocol_restored": false,
+  "new_model_calls": 0,
+  "new_training_runs": 0,
+  "Hub_calls": 0,
+  "qualification_granted": false,
+  "source_fidelity_claimed": false,
+  "complete_external_evidence_closure_claimed": false,
+  "standalone_checks": [
+    {
+      "cwd": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026",
+      "command": "python3 -B -m unittest discover -s papers/completion/autoformalization/evaluation -p 'test_result_accounting.py'",
+      "exit_code": 0,
+      "passed": 30,
+      "elapsed_reported_seconds": 0.015,
+      "native_checker_calls": 0
+    },
+    {
+      "cwd": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026",
+      "command": "python3 -B papers/completion/autoformalization/evaluation/final_correction/regenerate_tables.py --check",
+      "exit_code": 0,
+      "tables": 3,
+      "summary_sha256": "d369e99ec3bcc9d1bbd12361ca73300d2297b5363806be77dcd2625889bb2276",
+      "native_checker_calls": 0
+    },
+    {
+      "cwd": "/home/barberb/lift_coding",
+      "command": "python3 -B -m unittest discover -s artifacts/autoformalization-publication-20261004/all_weights -p 'test_*weights.py'",
+      "exit_code": 0,
+      "passed": 22,
+      "elapsed_reported_seconds": 0.108,
+      "Hub_calls": 0,
+      "native_checker_calls": 0
+    }
+  ],
+  "owned_recovery_documentation": [
+    {
+      "path": "papers/completion/autoformalization/INTEGRATION_RECOVERY_20261006.md",
+      "source": "owned integration recovery documentation",
+      "source_sha256": "92c006cb7a7ce0058e15728e40862d2b377ce8510d76c9a5525c22578a975c20",
+      "source_bytes": 3529,
+      "main_preimage_blob_oid": null
+    }
+  ],
+  "owned_current_source_repairs": [
+    {
+      "path": "scripts/autoformalization_recovery_probe.py",
+      "local_preimage_sha256": "23a1a0fe9204585273d57e648b13e1554aa826052610cbdcdfb7785ba9602366",
+      "preimage_blob_oid": "cf0cc679d9d526e7f5ccdc4d98081e4374373344",
+      "bytes": 14239,
+      "saved_preimage_path": "/home/barberb/lift_coding/artifacts/autoencoder-integration-review-20261006/pipeline/autoformalization_recovery_probe.py.preimage",
+      "main_commit": "3b0162bebe0b7a09727081cb8c5f5c15378caba1",
+      "source_sha256_after": "22291d4ccc342e4f5e6b2fda3f5c02e1c8fc539e5f36807150e94fa1a9f98ef3",
+      "source_bytes_after": 15266
+    },
+    {
+      "path": "tests/test_autoformalization_recovery_probe.py",
+      "local_preimage_sha256": "aa1895498ba217b4612b46915519d63f100badc4531b111e2ce3ccbe1d534b83",
+      "preimage_blob_oid": "c1ad1858f38f65ca348f76e151fcaa482a75e20d",
+      "bytes": 3986,
+      "saved_preimage_path": "/home/barberb/lift_coding/artifacts/autoencoder-integration-review-20261006/pipeline/test_autoformalization_recovery_probe.py.preimage",
+      "main_commit": "3b0162bebe0b7a09727081cb8c5f5c15378caba1",
+      "source_sha256_after": "e8a9eddb278a554e5019a1e40652f178b31782bf43548a80cb0bec3086717a20",
+      "source_bytes_after": 8703
+    }
+  ]
+}

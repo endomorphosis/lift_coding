@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Bounded recovery diagnostic on five existing constructed AF-018 goals.
 
-This is runtime qualification, not the untouched 1,913-unit evaluation.
+This is a raw Lean compile diagnostic, not the untouched 1,913-unit evaluation.
 No source labels/checkpoints/final-test data are loaded. Model proof bodies
 are untrusted: a small identifier grammar is checked before kernel checking.
+Only Lake can grant admission; this probe never invokes Lake or admits a proof.
 """
 from __future__ import annotations
 import argparse
@@ -27,6 +28,7 @@ ROOT = Path(__file__).resolve().parents[1]
 HISTORICAL = ROOT / '.worktrees/vericodegen-autoformalization-2026/papers/completion/autoformalization/receipts/snapshots/AF-018/measure_assistance.py'
 LEAN = Path('/home/barberb/.local/share/vericodegen-research-runtime/bin/lean')
 SOLVERS = {'z3': ['/home/barberb/.local/bin/z3', '-in', '-smt2'], 'cvc5': ['/home/barberb/.local/bin/cvc5', '--lang=smt2']}
+SCHEMA = 'autoformalization-recovery-constructed-probe/v2'
 GOALS = [
  {'goal_id':'h.fol_identity','declaration':'theorem recovery_goal (U : Type) (P : U → Prop) : ∀ x, P x → P x', 'control_proof':'by\n  intro x h\n  exact h', 'expected_provable':True,
   'smt':'(set-logic UF)\n(declare-sort U 0)\n(declare-fun P (U) Bool)\n(assert (not (forall ((x U)) (=> (P x) (P x)))))\n(check-sat)\n','expected_solver_status':'unsat'},
@@ -80,15 +82,15 @@ def proof_policy(body):
 
 def check_lean(goal,body,folder):
  rejection=proof_policy(body)
- if rejection:return {'status':'policy_rejected','reason':rejection,'accepted':False}
+ if rejection:return {'status':'policy_rejected','reason':rejection,'compile_passed':False,'accepted':False,'admitted':False,'lake_executed':False}
  source='set_option maxHeartbeats 100000\nset_option maxRecDepth 512\n'+goal['declaration']+' := '+body.strip()+'\n#print axioms recovery_goal\n'
  path=folder/'candidate.lean';path.write_text(source)
  result=command([str(LEAN),'-j1','-M1024',str(path)],folder)
  # These simple diagnostic proofs need no added or classical axioms.
  no_axioms="'recovery_goal' does not depend on any axioms" in result['stdout']
- accepted=result['returncode']==0 and no_axioms and 'sorry' not in result['stdout'].lower()
+ compile_passed=result['returncode']==0 and no_axioms and 'sorry' not in result['stdout'].lower()
  rejected=result['returncode']==1 and 'error:' in result['stdout']
- return {**result,'source_sha256':sha(source.encode()),'accepted':accepted,'axiom_policy':'no axioms','status':'native_checked_proof' if accepted else ('timeout' if result['timeout'] else ('native_rejected' if rejected else 'checker_failure'))}
+ return {**result,'source_sha256':sha(source.encode()),'compile_passed':compile_passed,'accepted':False,'admitted':False,'lake_executed':False,'axiom_policy':'no axioms','status':'native_compile_diagnostic' if compile_passed else ('timeout' if result['timeout'] else ('native_rejected' if rejected else 'checker_failure'))}
 
 def parse_body(content):
  content=content.strip()
@@ -123,10 +125,29 @@ def model_call(endpoint,goal,folder,max_tokens,request_timeout):
    raise ValueError('missing string response content')
   content=message['content']
   body=parse_body(content)
-  check={'status':'abstained','accepted':False} if body is None else check_lean(goal,body,folder)
+  check={'status':'abstained','compile_passed':False,'accepted':False,'admitted':False,'lake_executed':False} if body is None else check_lean(goal,body,folder)
   return {'status':'response_received','response_model':result.get('model'),'usage':result.get('usage'),'finish_reason':result['choices'][0].get('finish_reason'),'wall_seconds':time.monotonic()-start,'checker':check}
  except (OSError,ValueError,KeyError,IndexError,TypeError,AttributeError,urllib.error.URLError) as exc:
-  return {'status':'request_failed','error':type(exc).__name__+': '+str(exc),'wall_seconds':time.monotonic()-start,'checker':{'accepted':False,'status':'not_checked'}}
+  return {'status':'request_failed','error':type(exc).__name__+': '+str(exc),'wall_seconds':time.monotonic()-start,'checker':{'compile_passed':False,'accepted':False,'admitted':False,'lake_executed':False,'status':'not_checked'}}
+
+def summarize_probe(rows, native_pass, scope):
+ """Count raw compiler diagnostics separately from the Lake admission gate."""
+ checker_counts=Counter(r['model']['checker']['status'] for r in rows if 'model' in r)
+ return {'schema':SCHEMA,'completed_at':stamp(),'scope':scope,'final_test_accessed':False,
+         'accepted':False,'admitted':False,'lake_executed':False,
+         'native_control_gate':'raw_Lean_and_solver_diagnostics',
+         'planned_goals':5,'completed_native_goals':len(rows),'native_controls_passed':native_pass,
+         'model_calls':sum('model' in r for r in rows),
+         'model_responses':sum(r.get('model',{}).get('status')=='response_received' for r in rows),
+         'model_compile_passed':sum(r.get('model',{}).get('checker',{}).get('compile_passed',False) for r in rows),
+         'model_native_accepted_proofs':0,
+         'model_abstentions':sum(r.get('model',{}).get('checker',{}).get('status')=='abstained' for r in rows),
+         'native_positive_controls_compile_passed':sum(r['expected_provable'] and r['native_control']['compile_passed'] for r in rows),
+         'native_positive_controls_accepted':0,
+         'native_negative_controls_rejected':sum(not r['expected_provable'] and r['native_control']['status']=='native_rejected' for r in rows),
+         'solver_observations':{r['goal_id']:{n:c['stdout'].strip() for n,c in r['solvers'].items()} for r in rows},
+         'does_not_fill_primary_manuscript_cells':True,'model_checker_statuses':dict(checker_counts),
+         'completed_model_dispositions':sum(checker_counts[s] for s in ['abstained','policy_rejected','native_rejected','native_compile_diagnostic'])}
 
 def main():
  parser=argparse.ArgumentParser(description=__doc__)
@@ -146,7 +167,7 @@ def main():
  hist=HISTORICAL.read_bytes();tree=ast.parse(hist)
  original=next(ast.literal_eval(n.value) for n in tree.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='ASSIST_GOALS' for t in n.targets))
  assert [g['goal_id'] for g in original]==[g['goal_id'] for g in GOALS]
- manifest={'schema':'autoformalization-recovery-constructed-probe/v1','created_at':stamp(),'scope':'five existing constructed assistance goals; runtime qualification only','final_test_accessed':False,'historical_inputs_sha256':sha(hist),'original_goals':original,'fixed_goals':GOALS,'mapping_notes':['The protected-write statement has no policy premise and is a negative control.','The original SMT add/zero are uninterpreted; the Lean goal preserves that fact using arbitrary U, add, zero.','Dependent/higher-order unsupported flags refer to the historical Hammer translator, not Lean.'],'max_tokens':args.max_tokens,'request_timeout_seconds':args.request_timeout,'lean':str(LEAN),'script_sha256':sha(Path(__file__).read_bytes())}
+ manifest={'schema':SCHEMA,'created_at':stamp(),'scope':'five existing constructed assistance goals; raw Lean compile diagnostics only','accepted':False,'admitted':False,'lake_executed':False,'final_test_accessed':False,'historical_inputs_sha256':sha(hist),'original_goals':original,'fixed_goals':GOALS,'mapping_notes':['The protected-write statement has no policy premise and is a negative control.','The original SMT add/zero are uninterpreted; the Lean goal preserves that fact using arbitrary U, add, zero.','Dependent/higher-order unsupported flags refer to the historical Hammer translator, not Lean.'],'max_tokens':args.max_tokens,'request_timeout_seconds':args.request_timeout,'lean':str(LEAN),'script_sha256':sha(Path(__file__).read_bytes())}
  write(args.output/'frozen_manifest.json',manifest)
  versions={'lean':command([str(LEAN),'-j1','--version'],args.output,seconds=5)}
  for name,argv in SOLVERS.items():versions[name]=command([argv[0],'--version'],args.output,seconds=5)
@@ -160,7 +181,7 @@ def main():
    (folder/'goal.smt2').write_text(goal['smt'])
    for name,argv in SOLVERS.items():row['solvers'][name]=command(argv,folder,stdin=goal['smt'],seconds=10)
   write(folder/'result.json',row);rows.append(row)
- native_pass=all(r['native_control']['accepted'] if r['expected_provable'] else r['native_control']['status']=='native_rejected' for r in rows)
+ native_pass=all(r['native_control']['compile_passed'] if r['expected_provable'] else r['native_control']['status']=='native_rejected' for r in rows)
  native_pass=native_pass and all(v['returncode']==0 for v in versions.values())
  native_pass=native_pass and all(c['returncode']==0 and c['stdout'].strip()==g['expected_solver_status'] for g,r in zip(GOALS,rows) for c in r['solvers'].values())
  if not args.native_only and native_pass:
@@ -170,12 +191,9 @@ def main():
    row['model']=model_call(endpoint,goal,model_folder,args.max_tokens,args.request_timeout)
    write(folder/'result.json',row)
    with (args.output/'results.jsonl').open('a') as f:f.write(json.dumps(row,ensure_ascii=False)+'\n')
-   print(json.dumps({'goal_id':goal['goal_id'],'model':row['model']['status'],'model_proof_accepted':row['model']['checker']['accepted']}),flush=True)
+   print(json.dumps({'goal_id':goal['goal_id'],'model':row['model']['status'],'model_compile_passed':row['model']['checker']['compile_passed'],'model_proof_accepted':False,'admitted':False,'lake_executed':False}),flush=True)
    if row['model']['status']=='request_failed':break
- summary={'completed_at':stamp(),'scope':manifest['scope'],'final_test_accessed':False,'planned_goals':5,'completed_native_goals':len(rows),'native_controls_passed':native_pass,'model_calls':sum('model' in r for r in rows),'model_responses':sum(r.get('model',{}).get('status')=='response_received' for r in rows),'model_native_accepted_proofs':sum(r.get('model',{}).get('checker',{}).get('accepted',False) for r in rows),'model_abstentions':sum(r.get('model',{}).get('checker',{}).get('status')=='abstained' for r in rows),'native_positive_controls_accepted':sum(r['expected_provable'] and r['native_control']['accepted'] for r in rows),'native_negative_controls_rejected':sum(not r['expected_provable'] and r['native_control']['status']=='native_rejected' for r in rows),'solver_observations':{r['goal_id']:{n:c['stdout'].strip() for n,c in r['solvers'].items()} for r in rows},'does_not_fill_primary_manuscript_cells':True}
- checker_counts=Counter(r['model']['checker']['status'] for r in rows if 'model' in r)
- summary['model_checker_statuses']=dict(checker_counts)
- summary['completed_model_dispositions']=sum(checker_counts[s] for s in ['abstained','policy_rejected','native_rejected','native_checked_proof'])
+ summary=summarize_probe(rows,native_pass,manifest['scope'])
  write(args.output/'summary.json',summary)
  print(json.dumps(summary,indent=2),flush=True)
  return 0 if native_pass and (args.native_only or summary['model_responses']==5 and summary['completed_model_dispositions']==5) else 1

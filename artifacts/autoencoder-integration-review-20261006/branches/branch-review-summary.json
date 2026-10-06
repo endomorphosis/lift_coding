@@ -1,0 +1,788 @@
+{
+  "schema": "autoencoder-branch-effective-inclusion-review/v1",
+  "origin_main": "5171a632c6b9f0ecb2939d29d2ad74992cbfeb11",
+  "inventory_ref_count": 410,
+  "inventory_worktree_count": 16,
+  "source_evidence": [
+    "focused-commit-source-inclusion.json",
+    "prior-campaign-and-special-ref-inclusion.json",
+    "branch-autoencoder-source-missing-at-main.json",
+    "worktree-autoencoder-status.json",
+    "combined-owned-source-scope.json",
+    "test-receipts.json",
+    "ir-wrapper-test-namespace-closure.json"
+  ],
+  "findings": [
+    {
+      "id": "previous-paraphrase-work-present",
+      "commit": "60f5c2951ac34231f05b54e50f2725296871c5b9",
+      "status": "all10_changed_paths_byte_identical_on_origin_main",
+      "action": "retain; no cherry-pick"
+    },
+    {
+      "id": "source-v2-warm-start-present",
+      "commit": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+      "status": "all4_introduced_source_script_test_paths_byte_identical_on_origin_main",
+      "action": "retain fresh-optimizer continuation identity; no cherry-pick"
+    },
+    {
+      "id": "legal-reconstruction-scorer-present",
+      "commit": "92600cbfc70f935c18e2cffc994d50083cd62993",
+      "status": "all3_introduced_paths_byte_identical_on_origin_main",
+      "action": "retain separate LegalIR versus original-text reconstruction scores"
+    },
+    {
+      "id": "alignment-generated-scalar-work-retained",
+      "commit": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+      "status": "4of6_paths_exact; shared trainer and guide subsequently extended",
+      "action": "retain newer opt-in capabilities; do not replace shared trainer with old branch"
+    },
+    {
+      "id": "source-modality-supervision-retained",
+      "commit": "dca2c054b494",
+      "status": "6of9_paths_exact; remaining helpers/trainer add later architecture/sampler/auxiliary capabilities",
+      "action": "retain current later interfaces; no wholesale old-tree merge"
+    },
+    {
+      "id": "archive-history-was-not-tree-inclusion",
+      "status": "missing modules and APIs despite commits being ancestors of origin/main",
+      "action": "restore exact missing prerequisites and append APIs with source/preimage checks; preserve current functions"
+    },
+    {
+      "id": "active-git-batch-consumer-import-break",
+      "consumer": "ipfs_datasets_py/logic/software_contracts/codebase_git_batch.py",
+      "status": "imports previously missing git_decoder_profile; that profile depended on omitted chunked source; streaming CID API also omitted",
+      "action": "17-path minimal closure restored plus narrow additive current-cache-compatible source hashing function"
+    },
+    {
+      "id": "cached-ir-and-format-interface-omitted",
+      "producer": "73db2c8f3edb9fbdfc5decb0e8f12bb4e86e10f3",
+      "status": "6 optional modules/6 tests and4 public Hub wrapper functions had been removed",
+      "action": "13-path exact/additive restoration with774tests; guide documents explicit cached/native fragment limits"
+    },
+    {
+      "id": "dirty-worktree-worker-policy-already-integrated",
+      "worktree": "/home/barberb/lift_coding/.worktrees/codebase-numerical-replay-20261003",
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+      "status": "dirty auto worker_budget policy already present verbatim on main",
+      "action": "do not duplicate"
+    },
+    {
+      "id": "dirty-ui-codec-is-older-lossy-version",
+      "worktree": "/home/barberb/lift_coding/.worktrees/codebase-numerical-replay-20261003",
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/decoder.py",
+      "status": "dirty implementation drops nested schema fields, coerces scalars, lacks current bounded exact-codec behavior",
+      "action": "preserve dirty worktree for attribution; do not overwrite current complete codec"
+    },
+    {
+      "id": "git-source-boundary-and-cache-evolution",
+      "paths": [
+        "ipfs_datasets_py/logic/software_contracts/semantic_index/snapshot.py",
+        "ipfs_datasets_py/logic/software_contracts/content.py"
+      ],
+      "status": "older branch differs from main beyond omitted stream hash; restoring entire files would alter current behavior",
+      "action": "only stream hash added to content; snapshot not overwritten; broader source-boundary difference needs separate owner review"
+    }
+  ],
+  "canonical_restoration": {
+    "paths": 31,
+    "bytes": 511074,
+    "tests": 928,
+    "skips": 0,
+    "schema_quality_or_model_training_claim": false,
+    "model_load_or_forward_executed": false,
+    "weights_downloaded": false,
+    "lean_admitted": false
+  },
+  "remaining_scope": [
+    "Numerical convergence and source-semantic decoder fidelity are separate next experiments; no checkpoint promotion here.",
+    "Optional cached384 replay is not a new source encoder or generic width-based decoder.",
+    "No full logic-family qualification or Constitution formalization follows from these interface tests.",
+    "Origin/main publication belongs to root; this audit changes no normal Git HEAD/index/refs."
+  ],
+  "focused_source_commits": [
+    {
+      "commit": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+      "subject": "Continue retained source-v2 decoder weights with fresh optimizer",
+      "all_paths_count": 4,
+      "paths": [
+        {
+          "path": "docs/autoencoders/source_checkpoint_continuation.md",
+          "commit_blob": "e2f7307f9bc1fee3cfd79feabbe6432fb6210164",
+          "main_blob": "e2f7307f9bc1fee3cfd79feabbe6432fb6210164",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_checkpoint_continuation_numeric_v1.py",
+          "commit_blob": "7cc0c11c9002296c9ee07cc9c70ca8f79b160bec",
+          "main_blob": "7cc0c11c9002296c9ee07cc9c70ca8f79b160bec",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_checkpoint_continuation_v1.py",
+          "commit_blob": "074c1539760f1f3ef2ccc0e4d751c004d666aa91",
+          "main_blob": "074c1539760f1f3ef2ccc0e4d751c004d666aa91",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/formalization/autoencoder/test_source_checkpoint_continuation_v1.py",
+          "commit_blob": "279ddba5dc30d4825f47c813b9a3787a59f6d301",
+          "main_blob": "279ddba5dc30d4825f47c813b9a3787a59f6d301",
+          "same_at_main": true
+        }
+      ]
+    },
+    {
+      "commit": "dca2c054b49413b18662e0957a093911c31a2d37",
+      "subject": "Add source-modality supervision and strict replay recovery",
+      "all_paths_count": 78,
+      "paths": [
+        {
+          "path": "docs/autoencoders/source_modality_training.md",
+          "commit_blob": "318e5146181dd5cf52acb1b8b0891e752c861008",
+          "main_blob": "318e5146181dd5cf52acb1b8b0891e752c861008",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/contextual_generated_boundary_training.py",
+          "commit_blob": "1df3b36ccffdbb7a32681ebfbbc4db21c6cf3ff8",
+          "main_blob": "1e3347695d11ef96592837a0064f7ddb4f3395d6",
+          "same_at_main": false
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/long_span_source_value_training.py",
+          "commit_blob": "69cd8bc53289b4fc63321fb687fbdb681ef0fabf",
+          "main_blob": "cfbac38773d4778b1044be8bb504b6e52dac4cdb",
+          "same_at_main": false
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_modality_auxiliary_training.py",
+          "commit_blob": "6e30b298a0437f579e2a4747b50ff35ca554a718",
+          "main_blob": "51964beec51b3589c8a3d1431722c1b90e8becba",
+          "same_at_main": false
+        },
+        {
+          "path": "scripts/ops/autoencoder/benchmark_source_modality_training.py",
+          "commit_blob": "85de80b95310e2f932cd5405e5a03eab3f7520d0",
+          "main_blob": "85de80b95310e2f932cd5405e5a03eab3f7520d0",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/formalization/autoencoder/test_contextual_boundary_replay_retry.py",
+          "commit_blob": "10a410f656377859da15e7702cd624b255506dbd",
+          "main_blob": "10a410f656377859da15e7702cd624b255506dbd",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/formalization/autoencoder/test_source_modality_auxiliary_training.py",
+          "commit_blob": "5919a75ee1f3a74a965321af06f8605646ecaef4",
+          "main_blob": "5919a75ee1f3a74a965321af06f8605646ecaef4",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/formalization/autoencoder/test_source_modality_training_integration.py",
+          "commit_blob": "2b5ccdee2f8f7e6cdfbbdf1f0ee3c2890ec13f0e",
+          "main_blob": "2b5ccdee2f8f7e6cdfbbdf1f0ee3c2890ec13f0e",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/formalization/autoencoder/test_source_modality_training_runner.py",
+          "commit_blob": "2498a231ebb5f642c730c9c263586a94cfb71595",
+          "main_blob": "2498a231ebb5f642c730c9c263586a94cfb71595",
+          "same_at_main": true
+        }
+      ]
+    },
+    {
+      "commit": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+      "subject": "Train generated scalar fields with shared boundary replay and strict causal retry",
+      "all_paths_count": 14,
+      "paths": [
+        {
+          "path": "docs/autoencoders/decoder_length_distillation.md",
+          "commit_blob": "caef2d29dff95899133beac6385b7d50cc98ed5c",
+          "main_blob": "69c649f9f0ea2f4ef6ac7261cfc65ef3b392be24",
+          "same_at_main": false
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/generated_field_training.py",
+          "commit_blob": "140a0f3fce6b5411b78cd116c7843ed81004db35",
+          "main_blob": "140a0f3fce6b5411b78cd116c7843ed81004db35",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/long_span_source_value_training.py",
+          "commit_blob": "99085de8b0efd03dcda2030e9223d0e45e0a5e1b",
+          "main_blob": "cfbac38773d4778b1044be8bb504b6e52dac4cdb",
+          "same_at_main": false
+        },
+        {
+          "path": "scripts/ops/autoencoder/benchmark_generated_field_training.py",
+          "commit_blob": "f60e2c8f8a145d87db28b96bbf6e98dcfe065689",
+          "main_blob": "f60e2c8f8a145d87db28b96bbf6e98dcfe065689",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/formalization/autoencoder/test_generated_field_training.py",
+          "commit_blob": "edb2af3641086489286cdb7ed1efe5286675363c",
+          "main_blob": "edb2af3641086489286cdb7ed1efe5286675363c",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/formalization/autoencoder/test_generated_field_training_runner.py",
+          "commit_blob": "c67de0dc16113374bec892511120260c5f6ad1c7",
+          "main_blob": "c67de0dc16113374bec892511120260c5f6ad1c7",
+          "same_at_main": true
+        }
+      ]
+    },
+    {
+      "commit": "92600cbfc70f935c18e2cffc994d50083cd62993",
+      "subject": "Score retained LegalIR and original-text reconstructions separately",
+      "all_paths_count": 3,
+      "paths": [
+        {
+          "path": "docs/autoencoders/legal_original_text_roundtrip.md",
+          "commit_blob": "670a90dd186d25c73c38e5cbd00631ea04082570",
+          "main_blob": "670a90dd186d25c73c38e5cbd00631ea04082570",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/ir_legal_text_roundtrip.py",
+          "commit_blob": "c031d749be9506936e5698b1602a9ccdf4920eea",
+          "main_blob": "c031d749be9506936e5698b1602a9ccdf4920eea",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py",
+          "commit_blob": "e7122fdfdd2a8b84aa2267b8c770e8cdd7a8b99b",
+          "main_blob": "e7122fdfdd2a8b84aa2267b8c770e8cdd7a8b99b",
+          "same_at_main": true
+        }
+      ]
+    },
+    {
+      "commit": "6df6f395498f73095c6c560e44a55367741cdf3f",
+      "subject": "Preserve unpublished source recovered from /tmp/ir-training-publish-a7d6r1v0/datasets",
+      "all_paths_count": 86,
+      "paths": [
+        {
+          "path": "ipfs_datasets_py/logic/backends/tla/compiler.py",
+          "commit_blob": "09486744d57598e5f506a9db35cf99342a09f620",
+          "main_blob": "439f513bc372bbb0288ef88c447813633262ff1e",
+          "same_at_main": false
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/__init__.py",
+          "commit_blob": "94864ddd315dab1b20d0d5ae0f5824be1b4fb95e",
+          "main_blob": "94864ddd315dab1b20d0d5ae0f5824be1b4fb95e",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/family_training.py",
+          "commit_blob": "c9b1a3aaf50b18b4942cba8d3803179db6181e07",
+          "main_blob": "c9b1a3aaf50b18b4942cba8d3803179db6181e07",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/family_training_v2.py",
+          "commit_blob": "ff51884d1ec99a0ec72eb4978f7e21dc5145ee57",
+          "main_blob": "ff51884d1ec99a0ec72eb4978f7e21dc5145ee57",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/__init__.py",
+          "commit_blob": "679f1b708894ed162e7fbc578aa66e61f16f7f4b",
+          "main_blob": "679f1b708894ed162e7fbc578aa66e61f16f7f4b",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/codebase_autoencoder.py",
+          "commit_blob": "27a8afb136ab962852c604d5c98ae40d7d136182",
+          "main_blob": "27a8afb136ab962852c604d5c98ae40d7d136182",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/codebase_autoencoder_security.py",
+          "commit_blob": "37f86ede69c747ac796a6834997f856bb9883b70",
+          "main_blob": "37f86ede69c747ac796a6834997f856bb9883b70",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/codebase_autoencoder_transfer.py",
+          "commit_blob": "c82cf848a7b2971e11b4075e8281e8eafdf54a97",
+          "main_blob": "c82cf848a7b2971e11b4075e8281e8eafdf54a97",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/published_legal_initializer.py",
+          "commit_blob": "f5d49cf86d7b827d48f469ce4e78bb79bb2fa01e",
+          "main_blob": "f5d49cf86d7b827d48f469ce4e78bb79bb2fa01e",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/security_autoencoder_checkpoint.py",
+          "commit_blob": "b32be2b2aa479f59613a19dc685a340679998022",
+          "main_blob": "b32be2b2aa479f59613a19dc685a340679998022",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/security_autoencoder_features.py",
+          "commit_blob": "b4dde49539adb6d626e7aaa00b1369f26a25ba95",
+          "main_blob": "b4dde49539adb6d626e7aaa00b1369f26a25ba95",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/security_cve_canonical_export.py",
+          "commit_blob": "bb57fc65e2b3c4e59f3d22e8f1a4e353a0bd5b74",
+          "main_blob": "bb57fc65e2b3c4e59f3d22e8f1a4e353a0bd5b74",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/security_cve_training_source.py",
+          "commit_blob": "0a3c50885455c70f2ae94452382d8b4c3ed32012",
+          "main_blob": "0a3c50885455c70f2ae94452382d8b4c3ed32012",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/security_formula_curriculum_v2.py",
+          "commit_blob": "9e24c10b12517dced216b88a672df793e090bd93",
+          "main_blob": "9e24c10b12517dced216b88a672df793e090bd93",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/security_formula_decoder.py",
+          "commit_blob": "17e7bfc47a30496af5c6d389c71c9f0ef837215c",
+          "main_blob": "17e7bfc47a30496af5c6d389c71c9f0ef837215c",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/security_formula_decoder_continuation.py",
+          "commit_blob": "f34016ad12ba8179afa33940011523c1e8b9d04e",
+          "main_blob": "f34016ad12ba8179afa33940011523c1e8b9d04e",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/security_formula_decoder_v2.py",
+          "commit_blob": "ef7ac72cf0c1a4ab19986a652d0018dac89fcda8",
+          "main_blob": "ef7ac72cf0c1a4ab19986a652d0018dac89fcda8",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/security_formula_grammar.py",
+          "commit_blob": "d26073cbe6e3d7999d2d94a1d2df54e9a652e064",
+          "main_blob": "d26073cbe6e3d7999d2d94a1d2df54e9a652e064",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/security_formula_grammar_v2.py",
+          "commit_blob": "15c76dbaac21a0bf8bfffd1d127531a49ed13f2b",
+          "main_blob": "15c76dbaac21a0bf8bfffd1d127531a49ed13f2b",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_screening.py",
+          "commit_blob": "58a1adb52840eb7a62ff9ca552a3032dcb227844",
+          "main_blob": "58a1adb52840eb7a62ff9ca552a3032dcb227844",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/ui_native_training_views.py",
+          "commit_blob": "b460d1037acce3844615887ccc390d58611f25f0",
+          "main_blob": "b460d1037acce3844615887ccc390d58611f25f0",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/formalization/typed_slots.py",
+          "commit_blob": "419cb7f3df04c527084680b9a4cac03524dbf650",
+          "main_blob": "419cb7f3df04c527084680b9a4cac03524dbf650",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/alignment_curriculum.py",
+          "commit_blob": "7f3dd32a53ee953613a6d9d73f459e2099ef9395",
+          "main_blob": "7f3dd32a53ee953613a6d9d73f459e2099ef9395",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/alignment_training.py",
+          "commit_blob": "bbe235b86d63e59fe55d5ed420423b9f320342c1",
+          "main_blob": "bbe235b86d63e59fe55d5ed420423b9f320342c1",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/compositional_decoder.py",
+          "commit_blob": "322cfe8ac388684b36566734264e359ee19432f9",
+          "main_blob": "322cfe8ac388684b36566734264e359ee19432f9",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/copy_roundtrip.py",
+          "commit_blob": "9f1bf59c21d4ab06266fc2926a2d9e1152e5590d",
+          "main_blob": "9f1bf59c21d4ab06266fc2926a2d9e1152e5590d",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/coverage_curriculum.py",
+          "commit_blob": "8d5091c8810500d8e1b93c109d41b7240a2aba21",
+          "main_blob": "8d5091c8810500d8e1b93c109d41b7240a2aba21",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/coverage_training.py",
+          "commit_blob": "5a84866831aeebb4e2a58b453620d2072789c6eb",
+          "main_blob": "5a84866831aeebb4e2a58b453620d2072789c6eb",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/extended_projections.py",
+          "commit_blob": "93c0cdb5ffc20329a01a915bdce5383e1b397a60",
+          "main_blob": "93c0cdb5ffc20329a01a915bdce5383e1b397a60",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/guarded_workflow.py",
+          "commit_blob": "25e5514392c41a2a920062b62c907200276c508e",
+          "main_blob": "25e5514392c41a2a920062b62c907200276c508e",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/instruction_scope.py",
+          "commit_blob": "25d3e214267c3b79bd3b8c687d9773f9a51c7548",
+          "main_blob": "25d3e214267c3b79bd3b8c687d9773f9a51c7548",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/lean_projection.py",
+          "commit_blob": "eca75ecf633d3208a93797e37dc7acbfa5453b1f",
+          "main_blob": "eca75ecf633d3208a93797e37dc7acbfa5453b1f",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/modal_projections.py",
+          "commit_blob": "ed043a96be267fb18f78f7f454f320e08ab0fe8a",
+          "main_blob": "ed043a96be267fb18f78f7f454f320e08ab0fe8a",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/projection_contracts.py",
+          "commit_blob": "b0eb49b27878fbe276b1d010629e3bf9ee994b0c",
+          "main_blob": "b0eb49b27878fbe276b1d010629e3bf9ee994b0c",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/projection_request.py",
+          "commit_blob": "875ff1906c03df0465166967cd4c5d5b080add80",
+          "main_blob": "875ff1906c03df0465166967cd4c5d5b080add80",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/rich_aligned_decoder.py",
+          "commit_blob": "28b1a533e589cd324c5ca805f788f4b97646afae",
+          "main_blob": "28b1a533e589cd324c5ca805f788f4b97646afae",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/rich_decoder.py",
+          "commit_blob": "92b1252b4f0ede854a10fdf17c812baabe04552a",
+          "main_blob": "92b1252b4f0ede854a10fdf17c812baabe04552a",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/rich_grammar.py",
+          "commit_blob": "18b61e862ca56d5dc162aa90486eda3f5bf13de9",
+          "main_blob": "18b61e862ca56d5dc162aa90486eda3f5bf13de9",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/rich_inverse_codec.py",
+          "commit_blob": "f929a4a669d9658f398cb19e949fc03103ce4ca8",
+          "main_blob": "f929a4a669d9658f398cb19e949fc03103ce4ca8",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/rich_inverse_recovery.py",
+          "commit_blob": "7e78d38b39448d9b5c384b8399f57559b0f43c30",
+          "main_blob": "7e78d38b39448d9b5c384b8399f57559b0f43c30",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/rich_logic.py",
+          "commit_blob": "2f64ad227c0ceb0bfe38a423c2f128fefe81b150",
+          "main_blob": "2f64ad227c0ceb0bfe38a423c2f128fefe81b150",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/rich_search_decoder.py",
+          "commit_blob": "9e5c8889ba1ff0bf05a8e699b5744b0ad3b06c34",
+          "main_blob": "9e5c8889ba1ff0bf05a8e699b5744b0ad3b06c34",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/rich_search_policy.py",
+          "commit_blob": "e280ed81608fcbc04bb47f74d40871d42a7ffbc4",
+          "main_blob": "e280ed81608fcbc04bb47f74d40871d42a7ffbc4",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/rich_training.py",
+          "commit_blob": "712e7136f2f60b762f491ec1652f4a55f89cbeec",
+          "main_blob": "712e7136f2f60b762f491ec1652f4a55f89cbeec",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/roundtrip.py",
+          "commit_blob": "0a90debd5df4d909a0f4f9da9963b71657853ba0",
+          "main_blob": "0a90debd5df4d909a0f4f9da9963b71657853ba0",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/state_projections.py",
+          "commit_blob": "ea672c0e9264a28933b39f37388903bf7afba865",
+          "main_blob": "ea672c0e9264a28933b39f37388903bf7afba865",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/structural_projections.py",
+          "commit_blob": "aba201d4716ce63df0530432a3a639d3c7f83cd9",
+          "main_blob": "aba201d4716ce63df0530432a3a639d3c7f83cd9",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/intent_ir/formalize/workflow_state.py",
+          "commit_blob": "524e0d541109efa0df7a2258c755b4bf92ab493c",
+          "main_blob": "524e0d541109efa0df7a2258c755b4bf92ab493c",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/security_ir/code_program_derivation.py",
+          "commit_blob": "aceefdc63b2359c9958fded1c7963fa6f4586d94",
+          "main_blob": "aceefdc63b2359c9958fded1c7963fa6f4586d94",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/software_verification/source_adapters.py",
+          "commit_blob": "651d84da41b7327ee79c29ed528dcabb2c39ef92",
+          "main_blob": "693228e46e6559d40be6a0bcd17d3a633e168d72",
+          "same_at_main": false
+        },
+        {
+          "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_copy_alignment.py",
+          "commit_blob": "0ffe965d0eb34a82ac27be597e7936e73f3425e2",
+          "main_blob": "0ffe965d0eb34a82ac27be597e7936e73f3425e2",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_family_training.py",
+          "commit_blob": "5cb1fec66bf0a33ecefc4103e75cc2a938cd97eb",
+          "main_blob": "5cb1fec66bf0a33ecefc4103e75cc2a938cd97eb",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_family_training_v2.py",
+          "commit_blob": "db52e3ba3208a375a11f757a775336de2f289f69",
+          "main_blob": "db52e3ba3208a375a11f757a775336de2f289f69",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_paired_copy.py",
+          "commit_blob": "3a4b19cac9a2230af92bbe03697dd9a8dacdb84f",
+          "main_blob": "3a4b19cac9a2230af92bbe03697dd9a8dacdb84f",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_paired_copy_aligned.py",
+          "commit_blob": "c37dc26c445c03e7dc8f15a6e5da70d41d091685",
+          "main_blob": "c37dc26c445c03e7dc8f15a6e5da70d41d091685",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_paired_copy_continuation.py",
+          "commit_blob": "ce025ba119b1f4faa0d4fb33e0ff43e333f4d7fa",
+          "main_blob": "ce025ba119b1f4faa0d4fb33e0ff43e333f4d7fa",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_paired_copy_grammar_search.py",
+          "commit_blob": "1452abca2a0a3c4ac6b7f881c4423848db2f1085",
+          "main_blob": "1452abca2a0a3c4ac6b7f881c4423848db2f1085",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_paired_text.py",
+          "commit_blob": "849b1bfd820fd507f0338b89f999d93eaa9c3a02",
+          "main_blob": "849b1bfd820fd507f0338b89f999d93eaa9c3a02",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/domain_family_training_v2.py",
+          "commit_blob": "dd2840c5977969a09d134163d47d99908b5b6f4b",
+          "main_blob": "dd2840c5977969a09d134163d47d99908b5b6f4b",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_family_training.py",
+          "commit_blob": "0abee073220f9532409c2fc766dbcff803c7beb1",
+          "main_blob": "0abee073220f9532409c2fc766dbcff803c7beb1",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/security_joint_training.py",
+          "commit_blob": "8156a01ecdcc6d341557b396b216b5f62fb70d9a",
+          "main_blob": "8156a01ecdcc6d341557b396b216b5f62fb70d9a",
+          "same_at_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/ui_family_training.py",
+          "commit_blob": "ee21a2b7ce0d945c1f8068944f04f9d4058f1984",
+          "main_blob": "ee21a2b7ce0d945c1f8068944f04f9d4058f1984",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/formalization/autoencoder/__init__.py",
+          "commit_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "main_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/formalization/autoencoder/family_native_fixtures.py",
+          "commit_blob": "72a850ee23a82406c33fb8dd2a994e5208190c44",
+          "main_blob": "72a850ee23a82406c33fb8dd2a994e5208190c44",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/formalization/autoencoder/test_domain_family_training_v2.py",
+          "commit_blob": "eeaa8e6aa4af2c6e6a6ac0a1b7cc3a83fc50d9f0",
+          "main_blob": "eeaa8e6aa4af2c6e6a6ac0a1b7cc3a83fc50d9f0",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/formalization/autoencoder/test_family_training.py",
+          "commit_blob": "967012422fea3da588f97c0571b71ad4a70329ac",
+          "main_blob": "967012422fea3da588f97c0571b71ad4a70329ac",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/formalization/autoencoder/test_family_training_v2.py",
+          "commit_blob": "71fc6414b6cd3705556ba4694fc8180bb8d256a9",
+          "main_blob": "71fc6414b6cd3705556ba4694fc8180bb8d256a9",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/formalization/autoencoder/test_security_formula_decoder.py",
+          "commit_blob": "ba2fc3d6006f454f103043fff7e6b29c232ec4ca",
+          "main_blob": "ba2fc3d6006f454f103043fff7e6b29c232ec4ca",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/formalization/autoencoder/test_security_formula_decoder_continuation.py",
+          "commit_blob": "8e893511acd25e3bb6b41c35c48e32c780cb3ee1",
+          "main_blob": "8e893511acd25e3bb6b41c35c48e32c780cb3ee1",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/formalization/autoencoder/test_security_formula_decoder_v2.py",
+          "commit_blob": "b7caa1966ca159e54f2a6966225473aa8ce917e1",
+          "main_blob": "b7caa1966ca159e54f2a6966225473aa8ce917e1",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/formalization/autoencoder/test_security_joint_training.py",
+          "commit_blob": "d1fd3298f04ee0570b8964ea71d11018994eb50b",
+          "main_blob": "d1fd3298f04ee0570b8964ea71d11018994eb50b",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/intent_ir/formalize/test_alignment_curriculum.py",
+          "commit_blob": "8ec8209dfaa4869134bc5e91020bd62567815427",
+          "main_blob": "8ec8209dfaa4869134bc5e91020bd62567815427",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/intent_ir/formalize/test_alignment_training.py",
+          "commit_blob": "3c95af0cbdb5e44314e8e570f480b69ec836b358",
+          "main_blob": "3c95af0cbdb5e44314e8e570f480b69ec836b358",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/intent_ir/formalize/test_coverage_curriculum.py",
+          "commit_blob": "05618933ae7385fd7582dc8764d1c883d4c5c4c5",
+          "main_blob": "05618933ae7385fd7582dc8764d1c883d4c5c4c5",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/intent_ir/formalize/test_coverage_training.py",
+          "commit_blob": "5c11c98a3662638119a11cb57d12e2f27d575c3f",
+          "main_blob": "5c11c98a3662638119a11cb57d12e2f27d575c3f",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/intent_ir/formalize/test_rich_aligned_decoder.py",
+          "commit_blob": "ede8c8c3a13fbd4d225644ef4671a433769fcbc8",
+          "main_blob": "ede8c8c3a13fbd4d225644ef4671a433769fcbc8",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/intent_ir/formalize/test_rich_inverse_codec.py",
+          "commit_blob": "722a3a701849ccbacde8a21f5aec05c80afaf5e5",
+          "main_blob": "722a3a701849ccbacde8a21f5aec05c80afaf5e5",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/intent_ir/formalize/test_rich_inverse_recovery.py",
+          "commit_blob": "5ce9753548f21c0557e55948b1593d887a27c598",
+          "main_blob": "5ce9753548f21c0557e55948b1593d887a27c598",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/intent_ir/formalize/test_rich_search_decoder.py",
+          "commit_blob": "3c47838f578c66a4e861c937018f1e10db563d75",
+          "main_blob": "3c47838f578c66a4e861c937018f1e10db563d75",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/logic/security_ir/test_code_program_derivation.py",
+          "commit_blob": "176f95dd81a140cbdb0e6c8bb566ee9aa58559d8",
+          "main_blob": "176f95dd81a140cbdb0e6c8bb566ee9aa58559d8",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_family_training.py",
+          "commit_blob": "a6fbafa9db8b184637b97c502305dfad31691e8a",
+          "main_blob": "a6fbafa9db8b184637b97c502305dfad31691e8a",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_family_training_v2.py",
+          "commit_blob": "97ed11267cba93a8311c8c2e81c71edd658e3be0",
+          "main_blob": "97ed11267cba93a8311c8c2e81c71edd658e3be0",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_paired_copy_aligned.py",
+          "commit_blob": "48d43cdcf995d0646d90ccf07eeebf06ca355734",
+          "main_blob": "48d43cdcf995d0646d90ccf07eeebf06ca355734",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_paired_copy_continuation.py",
+          "commit_blob": "7f9847307e132e1db564c05a6170949dfcbfac57",
+          "main_blob": "7f9847307e132e1db564c05a6170949dfcbfac57",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_family_training.py",
+          "commit_blob": "a8971981ac1c55426d646305146f18dd7357a9e1",
+          "main_blob": "a8971981ac1c55426d646305146f18dd7357a9e1",
+          "same_at_main": true
+        },
+        {
+          "path": "tests/unit/optimizers/logic_theorem_optimizer/test_ui_family_training.py",
+          "commit_blob": "a94199cd17546f25a669787794ea77ce3207b674",
+          "main_blob": "a94199cd17546f25a669787794ea77ce3207b674",
+          "same_at_main": true
+        }
+      ]
+    }
+  ]
+}

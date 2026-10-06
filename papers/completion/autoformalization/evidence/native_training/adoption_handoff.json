@@ -1,0 +1,68 @@
+{
+  "automatic_completion_available": false,
+  "checkpoint_gate": {
+    "actual_success_cleanup_and_exact_input_binding_verified": true,
+    "checker_execution_admission": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/checker_lifetime_candidate_v1/root_execution_admission.private.json",
+      "sha256": "64ef36acbbeb18843eb7e53c787047c538c3725d585bd602c8673e5e5d58c304"
+    },
+    "checker_result": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/checker_lifetime_candidate_v1/post_run_host_v1/result.private.json",
+      "sha256": "d56b40c86cd963b602c5d58e9a8e9df24655997a5a643a71bed47a39e49ef3aa"
+    },
+    "checker_source_package": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/checker_lifetime_candidate_v1/source_invocation_package.private.json",
+      "sha256": "e5c3ceeca2ff51d621433ff250904e2065e44a31538596124141a7605e0ba973"
+    },
+    "frozen_original_inventory": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/frozen_original_inventory_v1/inventory.private.json",
+      "sha256": "9847969c466222f8589143e8ba99abebfb0da64bc2d000eb90dad922f2162b78"
+    }
+  },
+  "criterion_6_scope": "Historical AF028-human-review wording is superseded by the structural scope policy. No outside reviewer scheduling requirement; human fidelity/agreement remain unmeasured.",
+  "delivery_admission": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/checkpoint_chunk_transport_v1/delivery_admission_v1/root_actual_admission.private.json",
+    "sha256": "e898d58e685a3b7cf785d380adf4f0720735b19a3d4df45092939aadac21d0bc"
+  },
+  "delivery_manifest": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/checkpoint_chunk_transport_v1/actual_delivery_v1/delivery_manifest.private.json",
+    "sha256": "5a10d5e48a30a961193c0a32001d74576ad7997c3cdb991c7798aa3bbf7b6265"
+  },
+  "delivery_result": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/checkpoint_chunk_transport_v1/actual_delivery_v1/result.private.json",
+    "sha256": "a9807ac0470b94da00ad4990b4027a4de32ae0989e08ff2d3208576433c9f603"
+  },
+  "later_AF013": "Use the existing operator container pattern and an explicit read-only exact delivered checkpoint mount. Perform actual native load/canary/activation/rollback. Do not rerun training or whole-data checking.",
+  "metric_notice": "Perfect T2 cosine/zero MSE measures target-assisted projection: the native evaluation helper can return the supplied target embedding. It does not establish learned source-free reconstruction, generalization or semantic fidelity. T2 family cross-entropy is unchanged from T0. T1 training reconstruction is a memory diagnostic. T3 used 256 admitted feedback records per seed and supplies no new fidelity aggregate. Human/expert fidelity and agreement remain unmeasured; optional author feedback is not independent gold.",
+  "metric_scope": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/independent_run_observations/reconstruction_metric_scope.private.json",
+    "sha256": "2ad345cb396119a0c902b9e6cdb465ad0c52670ba19742a834d48d715144ab61"
+  },
+  "native_mutation_available": false,
+  "native_validator": "Unchanged ordinary source/artifact validation after coordinating-assistant evidence/criterion review of this pending receipt; no external human prerequisite.",
+  "original_container_outcome": "training subprocess completed; original checker OOM; original container failed",
+  "original_inventory": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/frozen_original_inventory_v1/inventory.private.json",
+    "sha256": "9847969c466222f8589143e8ba99abebfb0da64bc2d000eb90dad922f2162b78"
+  },
+  "preserve_original_receipts": [
+    "AF-011",
+    "AF-012",
+    "AF-020",
+    "AF-028",
+    "all prior AF-029 attempts"
+  ],
+  "promotion": {
+    "activation_performed": false,
+    "config_sha256": "0d6a0a42bc7514ee663aa8f2e070e1f0e06291a2a810dffd437812bac98aff22",
+    "e_locked": true,
+    "executor_unconditionally_refuses_E": true,
+    "generic_file_or_reference_presence_grants_activation": false,
+    "later_AF013_required": "actual native read-only checkpoint load, fixed canary, activation and rollback",
+    "pipeline_sha256": "c758e91551b22436fc088f96e7289e447df0caa702f3f63a2a4fde220d2c6e92"
+  },
+  "recovered_checker_scope": "Separately validates retained completed training bytes; never rewrites the original outcome.",
+  "schema": "af029-compact-native-adoption-handoff/v1",
+  "task_cid": "baguqeerafyvhtvwm3po2bdu24kszez755vbclnm7qifekfxdlnfeqa74sj5a",
+  "task_contract_sha256": "422e74b9f3d6326979e6fa50ded8a1f9c81c40783335eb67c2516c5eb686d30c"
+}

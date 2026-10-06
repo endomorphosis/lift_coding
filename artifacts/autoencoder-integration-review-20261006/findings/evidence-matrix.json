@@ -1,0 +1,392 @@
+{
+  "schema": "autoencoder-findings-integration-review/v1",
+  "date": "2026-10-06",
+  "reviewed_remote_heads": {
+    "/home/barberb/lift_coding": "3b0162bebe0b7a09727081cb8c5f5c15378caba1",
+    "/home/barberb/lift_coding/external/ipfs_datasets": "5171a632c6b9f0ecb2939d29d2ad74992cbfeb11"
+  },
+  "model_execution": false,
+  "encoder_execution": false,
+  "weights_downloaded": false,
+  "canonical_files_changed": false,
+  "entries": [
+    {
+      "id": "preserved-8d-linguistic-teacher",
+      "source": {
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "commit": "0ced2e533c9090d21aba602c3550c5ff5ecd45eb",
+        "path": "docs/autoencoders/legacy_linguistic_validation_20261001.md",
+        "bytes": 6239,
+        "sha256": "8636b914d225b62704575cf6914a19eca966ff514574a481a660a368a5b9b05a",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "historical-runtime-preservation",
+      "scope": "Historical 8D sparse residual model and deterministic linguistic codec",
+      "findings": [
+        "The original linguistic codec, sparse training and resume path are preserved separately from learned formula sidecars.",
+        "Target-aware vector reconstruction and provenance-based text decompilation can be exact despite semantic errors. The historical prohibition becomes obligation O; explicit numeric duration structure is incomplete."
+      ],
+      "limitations": [
+        "The linguistic formulas are deterministic compiler outputs, not learned latent-to-formula generation.",
+        "This replay establishes operational compatibility, not a qualified semantic teacher; bridge-off timing has zero legal-IR targets."
+      ],
+      "next_gap": "Distill independently reviewed semantic targets while preserving the immutable teacher and its runtime identity."
+    },
+    {
+      "id": "four-width-initial-head-comparison",
+      "source": {
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "commit": "dce8ab819331a5f5bddac86c851710fa4377c1d4",
+        "path": "docs/implementation/reports/evidence/decoder-four-width-20261004/results.json",
+        "bytes": 389091,
+        "sha256": "bf46e66c8e2763550b89dfaee5b6b81a9244021bc962e7560877327e723b8d0b",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "restricted-authored-formula-training",
+      "scope": "Initial 8D/384D/768D authored formula sidecar comparison with frozen encoders",
+      "findings": [
+        "Six fits completed 340 updates each. Final development exact counts changed 1\u21921, 47\u219248, and 46\u219244 out of 48 for 8D, 384D and 768D. Exposed R6 exact counts changed 0\u21920, 30\u219228, and 47\u219248."
+      ],
+      "limitations": [
+        "Representations have different source producers, so this is not a pure width ablation.",
+        "Final attempts and selected states differ. The 8D sidecar is distinct from the preserved linguistic teacher. The initial 4096D readiness gap was later partially resolved."
+      ],
+      "next_gap": "Use later selected 384D/768D parents and preserve the original controls; evaluate 8D object and cue fidelity separately."
+    },
+    {
+      "id": "native4096-and-field-rates",
+      "source": {
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "commit": "d466db01a32c419a765e5cef046991ddedc3c279",
+        "path": "docs/implementation/reports/evidence/decoder-conditioning-20261004/results.json",
+        "bytes": 27951,
+        "sha256": "e32d1e0cdad4b652e2b50f8b92eed9faccea2d99e4d8bfe741fea47591d6e285",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "restricted-authored-formula-training",
+      "scope": "Matched native 4096D source conditioning and 8D field-head learning rates",
+      "findings": [
+        "The study completed 940 head updates: three 4096D fits of 200 updates and two 8D fits of 170 updates.",
+        "Scaled 4096D conditioning reconstructed 2/2 TRAIN clauses with CE 0.015291 versus 0.018791 unscaled. Prior freezing worsened the result.",
+        "The lower 8D rate reduced development CE 0.16349\u21920.14803, while exact remained 1/48 and correct objects fell 97\u219288/180."
+      ],
+      "limitations": [
+        "The two 4096D permission clauses differ only in object and supply no held-out or broad-family evidence.",
+        "The 8D candidate was rejected and its original parent retained; no encoder training or Lake execution occurred."
+      ],
+      "next_gap": "Establish broader source fidelity before scaling capacity or making optimizer convergence claims."
+    },
+    {
+      "id": "broader4096-and-8d-geometry",
+      "source": {
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "commit": "fd89d2a48aa0de771dd22ec8fd079af10732051f",
+        "path": "docs/implementation/reports/evidence/decoder-generalization-20261004/results.json",
+        "bytes": 26924,
+        "sha256": "2cca4ec7083e0719f8d71540849a9267e79d75c8db4b76c5665049f1b70b57f7",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "restricted-authored-formula-training",
+      "scope": "Corrected 8D diagnostic geometry and broader 4096D authored development experiment",
+      "findings": [
+        "740 head updates completed. The 8D covariance candidate worsened development CE 0.163492\u21920.168503 and correct objects 97\u219293/180.",
+        "The broader 4096D experiment used 12 TRAIN and 12 exposed development clauses. TRAIN exact was 7/12 unscaled and 1/12 scaled; both development exact counts were 0/12.",
+        "The study also prepared 216 unique verified native source inputs per 384D/768D encoder in 8.679/26.969 seconds."
+      ],
+      "limitations": [
+        "TRAIN-input scaling was not adopted. The earlier 8D omission affected diagnostic normalization, not training or selection.",
+        "This is exposed authored development data, with no Lake or promotion."
+      ],
+      "next_gap": "Improve 4096D decoder generalization beyond two-row fitting."
+    },
+    {
+      "id": "train-paraphrase-mixture",
+      "source": {
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "commit": "aa586a9b91b583a2ac5d867bd107ba0c5a4762d5",
+        "path": "docs/implementation/reports/evidence/decoder-training-mixture-20261004/results.json",
+        "bytes": 3049472,
+        "sha256": "faf44e25cf2fea5ffce229b617314f185314747b3606da2e45b80d5ad2e0ebac",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "restricted-authored-formula-training",
+      "scope": "Original-only versus half-paraphrase TRAIN exposure at 384D and 768D",
+      "findings": [
+        "Four 170-update fits completed 680 updates; all original development endpoints were 48/48 exact.",
+        "Exposed v3 exact changed 20\u219218/48 at 384D and stayed 46/48 at 768D. Fit calls were 38.389/38.103 seconds at 384D and 50.626/50.639 seconds at 768D."
+      ],
+      "limitations": [
+        "The exposed v3 panel is regression data, not a fresh holdout. The encoder did not execute and cached vectors were warm.",
+        "The changed mixture did not improve exact reconstruction."
+      ],
+      "next_gap": "Preserve ordinary decoder batches while testing additional semantic supervision."
+    },
+    {
+      "id": "train-paraphrase-modality",
+      "source": {
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "commit": "60f5c2951ac34231f05b54e50f2725296871c5b9",
+        "path": "docs/implementation/reports/evidence/decoder-paraphrase-modality-20261004/results.json",
+        "bytes": 3547468,
+        "sha256": "9c90c25559dcec91afaa62d4f153d952f123643fadbf85e14490a6531c7c2a4d",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "restricted-authored-formula-training",
+      "scope": "Independent balanced R4 modality auxiliary loss, weight zero versus 0.05, at 384D/768D",
+      "findings": [
+        "Four fits completed 680 updates and 232 focused tests passed. The zero arm replayed ordinary historical training exactly.",
+        "Original development remained 48/48. Exposed v3 exact changed 20\u219219/48 at 384D and stayed 46/48 at 768D; CE fell 0.030589255\u21920.028552217 and 0.003361466\u21920.003004750.",
+        "Fit calls changed 40.964\u219242.164 and 50.002\u219250.582 seconds. The full 180-clause TRAIN modality readout was already 180/180 before training."
+      ],
+      "limitations": [
+        "Lower CE supplied no exact reconstruction gain or promotion. Positive supervision adds explicit work; the arms do not have equal FLOPs.",
+        "No Lake build, bridge evaluate or convergence measurement occurred."
+      ],
+      "next_gap": "Investigate recurrent contributions and wording-specific modality errors before increasing the saturated auxiliary weight."
+    },
+    {
+      "id": "source-margin-two-seed-study",
+      "source": {
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "commit": "1b6461e65f15635b89d04609dae01a4196cd3ea5",
+        "path": "docs/implementation/reports/evidence/decoder-source-margin-20261004/README.md",
+        "bytes": 6276,
+        "sha256": "e70a1ea684e5f4a89fb709f6c3941295bb4b2fbafdca06fc1204aef2d925f918",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "restricted-authored-formula-training",
+      "scope": "18 restricted authored fits of 340 updates each, two seeds, R6 wording observation",
+      "findings": [
+        "The positive 768D final attempts achieved 96/96 exact with 12.6% lower CE than the execution control. Both were rejected by the unchanged development extra-rule gate; selected positive 768D states scored 0/96.",
+        "384D final exact was 61/96, matching the original path but with 2.6% worse CE than the zero control; the 8D sidecar remained 0/96 exact."
+      ],
+      "limitations": [
+        "48 sources observed under two seeds are 96 predictions, not 96 independent examples.",
+        "R6 is now exposed, and a rejected final attempt is not a qualified or promoted head."
+      ],
+      "next_gap": "Improve modality and whole-rule fidelity under the unchanged selection policy."
+    },
+    {
+      "id": "intent-ui-composition-ridge",
+      "source": {
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "commit": "6589f788791f8991a8b856fbc3fc5fa396d17229",
+        "path": "docs/implementation/reports/evidence/intent-ui-coverage-20261002/results.json",
+        "bytes": 647843,
+        "sha256": "39435863a6425a050849e11c475caf9b77f6f3e8596adc4c83fa6021ef0b97b1",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "source-to-typed-candidate-training",
+      "scope": "384D fixed-schema Intent/UI reconstruction of 24 sealed test compositions per domain",
+      "findings": [
+        "The deterministic ridge head reconstructed 24/24 in each domain. GRU Intent counts were 3/24 and 8/24; UI counts were 3/24 and 2/24.",
+        "Ridge public fitting took about 0.140 seconds, with warm common-validation readout of 0.226 ms per Intent span and 0.326 ms per UI span.",
+        "The follow-up ran 14 actual successful builds: five IntentIR and nine UIUXIR. Four wrong Intent predictions were blocked before Lake."
+      ],
+      "limitations": [
+        "The test uses known TRAIN vocabulary and a fixed shape. Every built report is partial: Intent has 10/40 routes and UI 2/40.",
+        "Six wrong UI GRU candidates also passed Lake, demonstrating the separate requirement for source fidelity."
+      ],
+      "next_gap": "Add complete source-bound document fidelity and richer targets while keeping this fixed-schema head separate from GRU experiments."
+    },
+    {
+      "id": "complete-intent-ui-feature-loss",
+      "source": {
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "commit": "df732e8aaf5b4eec7373f1581e7193d7c0a91134",
+        "path": "docs/autoencoders/complete_features_and_ui_fidelity.md",
+        "bytes": 24229,
+        "sha256": "f5d10ecc2a3ae860bc2840b08ba9612a10a86793233ca9627b92524abbc5a517",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "compiler-target-feature-reconstruction",
+      "scope": "Native family feature reconstruction, complete support versus a 4,096-atom cap, 12 fits",
+      "findings": [
+        "The comparison ran 20 actual IntentIR/UIUXIR Lake builds and 390 projection checks.",
+        "Common-support held-out loss fell 0.026985\u21920.001958 for Intent and 0.008037\u21920.002575 for UI. Known atom coverage rose 15.108\u219299.651% and 56.543\u219297.876%.",
+        "Complete support retained 26,986 Intent atoms and 7,329 UI atoms; numerical refinement consumed 7.55 of 315.04 seconds of full fitting."
+      ],
+      "limitations": [
+        "The gain mainly restores support and individual family regressions remain. The adaptive schedule shows no broad win; fixed remains default.",
+        "Compiler-target feature reconstruction is distinct from independent source-to-formula fidelity."
+      ],
+      "next_gap": "Reuse full-support metrics and guarded native checks while resolving family regressions and decoder grammar gaps."
+    },
+    {
+      "id": "ui-temporal-dcec-floor",
+      "source": {
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "commit": "ea275ae32779db01c7dc59dc62ce12bcd9841ae2",
+        "path": "docs/implementation/reports/evidence/ui-modal-coverage-20261002/results.json",
+        "bytes": 307406,
+        "sha256": "1a0e0f61648c8b22e338d06ee075849117ec5108e498227937affa6e4e617f95",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "authored-native-projection-validation",
+      "scope": "23 authored declared UI projection fixtures; no neural inference or optimizer",
+      "findings": [
+        "Nine actual lake build UIUXIR executions passed; all 12 new modal projection occurrences passed parser, lowering and Lake checks.",
+        "The seven-entry UI minimum floor is satisfied, with seven of 40 families validated somewhere in the fixture union.",
+        "Every strict training gate remains closed. Compound targets contain 575\u2013759 tokens, exceeding the unchanged 64-token codec and its grammar."
+      ],
+      "limitations": [
+        "Declared norms, beliefs and traces are interpretations, not truths or observed runtime behavior.",
+        "Prepared authored targets are not learned decoder outputs."
+      ],
+      "next_gap": "Develop a lossless supported target representation and source-specific family reviews without truncation or increasing the encoder context."
+    },
+    {
+      "id": "security-production-head",
+      "source": {
+        "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+        "commit": "2d93857e78ceedc7f055637c887afeaa40653993",
+        "path": "docs/security_formula_decoder.md",
+        "bytes": 8596,
+        "sha256": "49ff05e3c08d85a55959080512db88eb38ecd14108ae42bf65f46d92beca3398",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "bounded-source-production-decoder",
+      "scope": "Bounded parser-scaffolded source production decoder with a separate learned grammar head",
+      "findings": [
+        "Learned production choices form candidate ASTs; an independently reparsed comparison rejects incorrect predictions.",
+        "Complete-function source and byte-map adapters retain unsupported coverage; model-off controls cannot obtain deterministic production fallback.",
+        "The supervisor consumes source-bound candidates and native proof-work plans through ModelManager and DuckLake."
+      ],
+      "limitations": [
+        "This is not arbitrary software formalization or a learned security specification.",
+        "The advisory Security-CVE checkpoint still has 44 AST features and no formula head. Authored contracts and solver diagnostics do not establish source qualification."
+      ],
+      "next_gap": "Preserve separate advisory and formula-head identities and expand independently reviewed grammar and function coverage."
+    },
+    {
+      "id": "source-ae-frozen-control",
+      "source": {
+        "repository": "/home/barberb/lift_coding",
+        "commit": "e44254d4dd9e9a873d1b7a257f53286f35860e01",
+        "path": "artifacts/autoformalization-publication-20261004/evaluation/frozen-development-summary-01.json",
+        "bytes": 66071,
+        "sha256": "bd16fdcfaf14f914912e1a4f93dabd0a84f783c1b2ebfe2fcd39e5aa85f63c83",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "source-vector-reconstruction-and-retrieval",
+      "scope": "Nine source-only 8D/384D/768D neural reconstruction models, TRAIN16 and authored development",
+      "findings": [
+        "All neural models beat TRAIN mean-vector MSE, but all trail TRAIN-only PCA.",
+        "Mean latent authored-facet nDCG was 0.96408 versus raw 0.96190 at 384D and 0.95623 versus raw 0.98384 at 768D."
+      ],
+      "limitations": [
+        "There is no formal-target or proof supervision; relevance is authored development evidence.",
+        "Dense centered TRAIN rank is 15, below the 32/64 bottlenecks. These MLPs are distinct from sparse legal runtimes and formula sidecars."
+      ],
+      "next_gap": "Keep raw, mean and PCA controls and define formal-target alignment separately."
+    },
+    {
+      "id": "source-ae-authored32-expansion",
+      "source": {
+        "repository": "/home/barberb/lift_coding",
+        "commit": "67bd5f1a3d6ff1540bd594e1205d753eb44f03ef",
+        "path": "artifacts/autoformalization-publication-20261004/expansion/expanded-summary-01.json",
+        "bytes": 102630,
+        "sha256": "299b81d9d3796f79e14286e0d974fe971fec8f47d24b5da26439e038ae7e70a5",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "source-vector-reconstruction-training",
+      "scope": "64 authored sources, TRAIN32/DEV32, nine MLP fits with widths 8\u219216\u21924, 384\u2192128\u219232 and 768\u2192128\u219264",
+      "findings": [
+        "1,827 actual updates include private resume checks; the nine selected models have 1,800 updates, 200 per model.",
+        "Mean DEV MSE improved 82.36%, 80.94% and 77.03% against the older same-seed models, but every new model remains worse than TRAIN-only PCA.",
+        "Models and Adam state were published to immutable Publicus/legal-ir-autoencoder revision d624057cf58e0090a0db9a3ad25857aaa91357de."
+      ],
+      "limitations": [
+        "All five semantic, decoder, contrastive, proof and fidelity masks remain zero.",
+        "Changing TRAIN cohorts measures adaptation rather than an isolated sample-size benefit. TRAIN rank 31 limits capacity interpretation."
+      ],
+      "next_gap": "Admit richer paired source/formal targets and compare matched decoders before choosing capacity by vector MSE."
+    },
+    {
+      "id": "frozen-law-conditioner-interventions",
+      "source": {
+        "repository": "/home/barberb/lift_coding",
+        "commit": "b48ec0fb6aa1b45a46c1239f50f645d03ab74808",
+        "path": "artifacts/autoformalization-publication-20261004/downstream/summary-01.json",
+        "bytes": 139006,
+        "sha256": "3ae53521e20ce690c0cf1372779e111c644d310ec6d39fd41e0a7be524a5f48a",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "frozen-native768-source-span-decoder-inference",
+      "scope": "64 sources \u00d7 three native 768D source-span decoders \u00d7 six conditioning controls, 1,152 forwards",
+      "findings": [
+        "Raw, PCA-reconstructed, AE-reconstructed and rotated raw inputs generate identical IR/status/reason for all 64 sources per seed.",
+        "Raw proposal counts are 1/64, 1/64 and 8/64; the other 182 paired occurrences abstain for overlapping copied spans.",
+        "Zero and disabled conditioning each change three paired outcomes; internal conditioning scores are active."
+      ],
+      "limitations": [
+        "Full 768D inverse reconstructions perturb a raw-trained decoder; this is neither matched conditioner training nor compression.",
+        "Every output remains a proposal, with no independent fidelity label or proof."
+      ],
+      "next_gap": "Resolve source-span assignments, symbol binding and optional presence before representation capacity selection."
+    },
+    {
+      "id": "bounded-joint-span-policy",
+      "source": {
+        "repository": "/home/barberb/lift_coding",
+        "commit": "ec4302acd75f0dbb0d744586db35fef9d23980ac",
+        "path": "artifacts/autoformalization-publication-20261004/joint_span/results-02/summary-01.json",
+        "bytes": 32394,
+        "sha256": "f11bcc1e2aea45bef4fb780de39e78300febe6fe8ce9e5913bb86e0c788cac42",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "frozen-native768-policy-diagnostic",
+      "scope": "192 shared native 768D forwards and 384 greedy/joint policy outcomes",
+      "findings": [
+        "Proposals rose from 10 to 183/192, preserving all ten previous proposals. 173 former overlap abstentions yielded new unaccepted proposals.",
+        "Top-16 span candidates and beam size 64 leave nine retained-search abstentions.",
+        "Worker wall time was 8.462 seconds, parent time 10.271 seconds and maximum worker RSS 724,032 KiB, excluding source encoding and training."
+      ],
+      "limitations": [
+        "The single copied deontic rule can still have wrong actor, modality or qualifier binding.",
+        "Every search pruned candidates or beam states, so neither full-space infeasibility nor a global optimum is established. Structural coverage is not semantic accuracy."
+      ],
+      "next_gap": "Retain a diagnostic proposal policy and independently review role, attachment and presence fidelity before using outputs as targets."
+    },
+    {
+      "id": "joint-span-six-condition-control",
+      "source": {
+        "repository": "/home/barberb/lift_coding",
+        "commit": "3b39519d9bc9021a5e6a0bb183f6c57cb780bc5a",
+        "path": "artifacts/autoformalization-publication-20261004/joint_conditioning/results-01/summary-01.json",
+        "bytes": 392135,
+        "sha256": "87a05b6e014e725758710261f7b16d5d9cc57c5620dd24861c000f94eef7e851",
+        "reachable_from_reviewed_origin_main": true
+      },
+      "kind": "frozen-native768-policy-diagnostic",
+      "scope": "1,152 native forwards and 2,304 policy outcomes, three seeds and six conditioners",
+      "findings": [
+        "Raw, PCA and AE joint IR/status/reason match on every one of 192 paired occurrences; each produces 183 proposals.",
+        "Rotation changes one joint modality record, while zero and disabled conditioning change 26 and 31 joint IR/status/reason records.",
+        "Across controls, joint selection produces 1,099 proposals versus 61 greedy proposals, preserving all 61. Worker wall time was 20.665 seconds, parent time 22.443 seconds and maximum worker RSS 774,896 KiB."
+      ],
+      "limitations": [
+        "Independent review and broad-family semantic masks remain zero. This repeats the same 64 sources and checkpoints, so it is not another independent confirmation cohort.",
+        "Enabled zero conditioning retains FiLM biases, while disabling the gate removes its residual."
+      ],
+      "next_gap": "Review source roles, modality, negation, attachment and presence pairs, then compare matched raw/PCA/AE/source-only decoder training."
+    }
+  ],
+  "non_aggregation_rules": [
+    "Repeated observations of 48 sources under different seeds are not independent holdouts.",
+    "Source-vector MSE, formula token CE and Lake counts measure different objectives.",
+    "Do not merge tensors or sparse updates across runtime, decoder grammar or embedding profiles.",
+    "The new source-only 8\u219216\u21924 MLP is distinct from the protected historical 8D linguistic teacher.",
+    "A final attempt rejected by an unchanged gate cannot be promoted from its diagnostic score."
+  ],
+  "next_priorities": [
+    "Unify evidence by lineage, encoder profile, decoder grammar, source generation and formal/proof scope.",
+    "Integrate reviewed owners into main while preserving frozen replay sources and existing checkpoint pins.",
+    "Admit independently reviewed source/formal pairs for modality, negation, source anchors, qualifier scope/presence and multiple rules.",
+    "Compare matched raw/PCA/AE and source-only decoders after target grammar compatibility and TRAIN-pair admission.",
+    "Reuse full atom/family accounting and actual Lake builds while testing source fidelity separately; do not truncate unsupported targets.",
+    "Preserve the historical 8D teacher; repair semantic defects in separately versioned profiles or independently reviewed teacher targets.",
+    "Broader 4096D development remains 0/12 exact and needs decoder generalization before a larger campaign."
+  ]
+}

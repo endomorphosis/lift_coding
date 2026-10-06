@@ -1,0 +1,54 @@
+{
+  "e_locked": true,
+  "ordered_index": {
+    "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/checkpoint_chunk_transport_v1/actual_delivery_v1/shard06/store-work/consumer-input/ordered_index.json",
+    "sha256": "d1a25ebacc6358b341b480a0d2af3c0b80d18d0e3f367262df8664e9c9b82480"
+  },
+  "provenance": {
+    "checkpoint_gate": {
+      "actual_success_cleanup_and_exact_input_binding_verified": true,
+      "checker_execution_admission": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/checker_lifetime_candidate_v1/root_execution_admission.private.json",
+        "sha256": "64ef36acbbeb18843eb7e53c787047c538c3725d585bd602c8673e5e5d58c304"
+      },
+      "checker_result": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/checker_lifetime_candidate_v1/post_run_host_v1/result.private.json",
+        "sha256": "d56b40c86cd963b602c5d58e9a8e9df24655997a5a643a71bed47a39e49ef3aa"
+      },
+      "checker_source_package": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/checker_lifetime_candidate_v1/source_invocation_package.private.json",
+        "sha256": "e5c3ceeca2ff51d621433ff250904e2065e44a31538596124141a7605e0ba973"
+      },
+      "frozen_original_inventory": {
+        "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/frozen_original_inventory_v1/inventory.private.json",
+        "sha256": "9847969c466222f8589143e8ba99abebfb0da64bc2d000eb90dad922f2162b78"
+      }
+    },
+    "delivery_admission": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/checkpoint_chunk_transport_v1/delivery_admission_v1/root_actual_admission.private.json",
+      "sha256": "e898d58e685a3b7cf785d380adf4f0720735b19a3d4df45092939aadac21d0bc"
+    },
+    "delivery_manifest": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/checkpoint_chunk_transport_v1/actual_delivery_v1/delivery_manifest.private.json",
+      "sha256": "5a10d5e48a30a961193c0a32001d74576ad7997c3cdb991c7798aa3bbf7b6265"
+    },
+    "delivery_result": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/checkpoint_chunk_transport_v1/actual_delivery_v1/result.private.json",
+      "sha256": "a9807ac0470b94da00ad4990b4027a4de32ae0989e08ff2d3208576433c9f603"
+    },
+    "original_inventory": {
+      "path": "/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/af029_recovery/memory_lifetime_recovery/resource_amendment_v1/frozen_original_inventory_v1/inventory.private.json",
+      "sha256": "9847969c466222f8589143e8ba99abebfb0da64bc2d000eb90dad922f2162b78"
+    }
+  },
+  "raw_member": {
+    "bytes": 6122792,
+    "mode": 420,
+    "path": "data/native_training_teacher_manifest.json",
+    "sha256": "97cf9da4711c4ae45431425f2b1b668df294e4c3fde6119f7aa9e97630607470",
+    "shard_ordinal": 6
+  },
+  "representation": "reference-not-raw-payload",
+  "schema": "af029-native-delivered-artifact-reference/v1",
+  "scientific_completion_admitted": false
+}

@@ -1,0 +1,21 @@
+% AF-021 regenerated Table 13. Constructed/automatic-label diagnostics are labeled as such.
+% Natural held-out Table 13 cells remain unrun or unavailable.
+\begin{table}[t]
+\centering
+\small
+\caption{Retrieval, planning, and proof-assistance comparisons. Constructed automatic-label diagnostics do not fill natural held-out cells. Unavailable native checkers are not measured zeros.}
+\label{tab:assistance-results}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{p{0.18\linewidth}p{0.22\linewidth}p{0.22\linewidth}p{0.32\linewidth}}
+\hline
+Comparison & Controlled variable & Required outcome & Audited result / status \\
+\hline
+Lexical / vector / graph & Same constructed corpus, queries, target interpretation and budget & Independently judged relevant context and accepted-premise yield & constructed 34 docs x 12 queries; FAISS/MiniLM unavailable; automatic citation labels; does not fill natural cells \\
+Baseline / graph selector & Same goal and candidate corpus & Recall against stated labels; proxy status; actual useful proof coverage & hand-authored weights trained=false; proxy import-overlap is a separate metric; useful native-proof coverage unavailable \\
+Unguided / guided plan & Same admitted sources and route budget & Deterministic replay, subgoal coverage, abstention and total cost & 72 constructed planning observations; executed\_proofs=0; LLM nomination unavailable \\
+Hammer / Leanstral assistance & Same source goal, native checker and resource envelope & Candidate rate, reconstruction acceptance, unsupported and timeout rates & sealed-PATH Lean, Z3, CVC5, Vampire, E, Coq, Isabelle unavailable; native\_checked\_proofs=0; sorry/admit rejected before any kernel claim \\
+Proof heads off / on & Same representation checkpoint and isolated update policy & Calibration, route value, protected-objective invariance & T3 applied 256 structural-feedback updates per seed; held-out calibration and route benefit unrun \\
+Guidance off / promoted & Same compiler profile and frozen source families & Actual consumer activation, independent source fidelity, regressions & T4 unactivated/unavailable; e\_locked; matching ingestion digest is not applied learning \\
+\hline
+\end{tabular}}
+\end{table}

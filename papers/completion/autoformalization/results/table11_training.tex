@@ -1,0 +1,21 @@
+% AF-021 regenerated Table 11. All 24 original placeholder cells replaced.
+% Held-out fidelity remains unmeasured. Teacher cosine/reconstruction do not fill that column.
+\begin{table}[t]
+\centering
+\small
+\caption{T0--T5 learning comparisons. Split counts are frozen inventory. Held-out independent fidelity is unmeasured. Proof/route benefit and final-test cost remain unrun or unavailable.}
+\label{tab:training-results}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lp{0.22\linewidth}p{0.24\linewidth}p{0.24\linewidth}p{0.22\linewidth}}
+\hline
+Arm & Source/split counts & Held-out fidelity & Proof/route benefit & Total cost \\
+\hline
+T0 & train 69 / selection 15 / canary 38 / final-test 1913 locked & unmeasured (independent gold absent; teacher cosine is not this cell) & unrun on 1913 final-test units; teacher diagnostics are not route benefit & unrun on 1913 final-test units (AF-011/AF-020/AF-029 costs are not this cell) \\
+T1 & train 69 / selection 15 / canary 38 / final-test 1913 locked & unmeasured (independent gold absent; teacher cosine is not this cell) & unrun on 1913; T1 is a memorization diagnostic, not proof/route benefit & unrun on 1913 final-test units (AF-011/AF-020/AF-029 costs are not this cell) \\
+T2 & train 69 / selection 15 / canary 38 / final-test 1913 locked & unmeasured (independent gold absent; teacher cosine is not this cell) & unrun on 1913; no shared-learner native-proof gain is admitted & unrun on 1913 final-test units (AF-011/AF-020/AF-029 costs are not this cell) \\
+T3 & train 69 / selection 15 / canary 38 / final-test 1913 locked & unmeasured (independent gold absent; teacher cosine is not this cell) & unrun on 1913; 256 structural-feedback updates per seed are not final route benefit & unrun on 1913 final-test units (AF-011/AF-020/AF-029 costs are not this cell) \\
+T4 & train 69 / selection 15 / canary 38 / final-test 1913 locked & unmeasured (independent gold absent; teacher cosine is not this cell) & unavailable (T4 unactivated; consumer load is not applied learning) & unrun on 1913 final-test units (AF-011/AF-020/AF-029 costs are not this cell) \\
+T5 & train 69 / selection 15 / canary 38 / final-test 1913 locked & unmeasured (independent gold absent; teacher cosine is not this cell) & unrun (no measured held-out improvement; constructed compile is not this cell) & unrun on 1913 final-test units (AF-011/AF-020/AF-029 costs are not this cell) \\
+\hline
+\end{tabular}}
+\end{table}

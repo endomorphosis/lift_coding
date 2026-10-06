@@ -1,0 +1,128 @@
+{
+  "frozen": {
+    "source": {
+      "repository": "/home/barberb/lift_coding",
+      "commit": "3b0162bebe0b7a09727081cb8c5f5c15378caba1",
+      "path": "artifacts/autoformalization-publication-20261004/evaluation/frozen-development-summary-01.json",
+      "bytes": 66071,
+      "sha256": "bd16fdcfaf14f914912e1a4f93dabd0a84f783c1b2ebfe2fcd39e5aa85f63c83",
+      "reachable_from_reviewed_origin_main": true
+    },
+    "lanes": {
+      "legacy8": {
+        "all_neural_seeds_better_than_train_mean_mse": true,
+        "all_neural_seeds_worse_than_train_pca_mse": true,
+        "pca_effective_rank": 8,
+        "pca_retained_axes": 4,
+        "development_raw_coordinate_mse": {
+          "mean_reconstructed": 0.02233925089240074,
+          "pca_reconstructed": 0.009430017322301865,
+          "raw_identity": 0.0,
+          "reconstructed": 0.015881289417545002
+        },
+        "authored_positive_mean_graded_facet_ndcg_at_5": {
+          "latent": 0.8988738817720873,
+          "mean_reconstructed": 0.5821912519330625,
+          "pca_latent": 0.9122989099619124,
+          "pca_reconstructed": 0.9163141654700396,
+          "raw_source": 0.9063527830841718,
+          "reconstructed": 0.9096007383488004
+        }
+      },
+      "native384": {
+        "all_neural_seeds_better_than_train_mean_mse": true,
+        "all_neural_seeds_worse_than_train_pca_mse": true,
+        "pca_effective_rank": 15,
+        "pca_retained_axes": 15,
+        "development_raw_coordinate_mse": {
+          "mean_reconstructed": 0.0003498245496302843,
+          "pca_reconstructed": 0.00018401439592707902,
+          "raw_identity": 0.0,
+          "reconstructed": 0.0002453786776944374
+        },
+        "authored_positive_mean_graded_facet_ndcg_at_5": {
+          "latent": 0.9640768020936221,
+          "mean_reconstructed": 0.5821912519330625,
+          "pca_latent": 0.9745794343916657,
+          "pca_reconstructed": 0.9630312496040091,
+          "raw_source": 0.9618966579623486,
+          "reconstructed": 0.967429337613862
+        }
+      },
+      "native768": {
+        "all_neural_seeds_better_than_train_mean_mse": true,
+        "all_neural_seeds_worse_than_train_pca_mse": true,
+        "pca_effective_rank": 15,
+        "pca_retained_axes": 15,
+        "development_raw_coordinate_mse": {
+          "mean_reconstructed": 0.0004970413283444941,
+          "pca_reconstructed": 0.00029257521964609623,
+          "raw_identity": 0.0,
+          "reconstructed": 0.0003715346974786371
+        },
+        "authored_positive_mean_graded_facet_ndcg_at_5": {
+          "latent": 0.9562315685456905,
+          "mean_reconstructed": 0.5821912519330625,
+          "pca_latent": 0.984934104745733,
+          "pca_reconstructed": 0.9838375773719245,
+          "raw_source": 0.9838375773719245,
+          "reconstructed": 0.9731556463337198
+        }
+      }
+    }
+  },
+  "expanded": {
+    "source": {
+      "repository": "/home/barberb/lift_coding",
+      "commit": "3b0162bebe0b7a09727081cb8c5f5c15378caba1",
+      "path": "artifacts/autoformalization-publication-20261004/expansion/expanded-summary-01.json",
+      "bytes": 102630,
+      "sha256": "299b81d9d3796f79e14286e0d974fe971fec8f47d24b5da26439e038ae7e70a5",
+      "reachable_from_reviewed_origin_main": true
+    },
+    "lanes": {
+      "legacy8": {
+        "all_new_seeds_better_than_old_same_seed_mse": true,
+        "all_new_seeds_worse_than_train_pca_mse": true,
+        "new_mean_mse_reduction_fraction_against_old_models": 0.8235932494971503,
+        "pca_effective_rank": 8,
+        "pca_retained_axes": 4,
+        "development_mse": {
+          "mean_reconstructed": 0.009657063521444798,
+          "new_reconstructed": 0.0009421546516629556,
+          "old_reconstructed": 0.005340808381636937,
+          "pca_reconstructed": 0.00030299846548587084,
+          "raw_identity": 0.0
+        }
+      },
+      "native384": {
+        "all_new_seeds_better_than_old_same_seed_mse": true,
+        "all_new_seeds_worse_than_train_pca_mse": true,
+        "new_mean_mse_reduction_fraction_against_old_models": 0.8093873690799149,
+        "pca_effective_rank": 31,
+        "pca_retained_axes": 31,
+        "development_mse": {
+          "mean_reconstructed": 0.0002531697100494057,
+          "new_reconstructed": 3.311533570619455e-05,
+          "old_reconstructed": 0.00017373106675222516,
+          "pca_reconstructed": 4.073324362252606e-06,
+          "raw_identity": 0.0
+        }
+      },
+      "native768": {
+        "all_new_seeds_better_than_old_same_seed_mse": true,
+        "all_new_seeds_worse_than_train_pca_mse": true,
+        "new_mean_mse_reduction_fraction_against_old_models": 0.7703478478071942,
+        "pca_effective_rank": 31,
+        "pca_retained_axes": 31,
+        "development_mse": {
+          "mean_reconstructed": 0.0003170558193232864,
+          "new_reconstructed": 5.328020294352124e-05,
+          "old_reconstructed": 0.00023200393479783088,
+          "pca_reconstructed": 3.13067880597373e-06,
+          "raw_identity": 0.0
+        }
+      }
+    }
+  }
+}
