@@ -1,0 +1,9 @@
+# Final parallel autoencoder integration
+
+The parent merge preserves the [eighteen-study extension](../autoencoder-progress-reconciliation-20261006/README.md), the independently published [twenty-study reconciliation](../autoencoder-progress-reconcile-20261006/README.md), and the [grouped decoder consolidation](../autoencoder-consolidation-20261006-02/scientific-integration-findings.md). These have overlapping studies and different snapshot scopes; their metric counts are not combined.
+
+The [integration receipt](concurrent-integration.json) records exact incoming and component commits. The final datasets pin includes both the provenance correction and the grouped experimental runtime. The supervisor pin preserves the newly published coding-reply and native-failure-settlement contribution. The original 75 retained review files remain byte-identical.
+
+The updated working-copy auditor passes 29 tests; the unchanged contextual runtime contracts pass 163. The original nine auditor cases are included in the updated suite. These checks establish the integration scope, not learned semantic fidelity or proof admission. GitHub benchmark/CodeQL startup failures for the earlier datasets commits are recorded separately because of the account billing lock.
+
+The next model observation remains exposed-v3 retention of the four newest normative selected states, with frozen references and resource budgets, before additional fitting. Reviewed source/formal targets, richer family/schema/task decoders, latent-conditioned comparisons, 8D/384D-to-768D transfer and current-code proof-index/planner contracts remain distinct gates. ModelManager/Hub candidate availability observations retain their original explicit catalog/repository snapshots; no new checkpoint is registered or uploaded by this review.

@@ -1,0 +1,22 @@
+{
+  "schema": "autoencoder-reconciliation-final-concurrent-integration/v1",
+  "initial_review_commit": "61497399a66f98430988f22f30def7bbbfc46ca3",
+  "incoming_parent_main": "c454ee48ff43b41946482c888c039f084e371d0d",
+  "parallel_parent_review": "505a7c3811ff2b7647af19d07e1dbab445eb7a02",
+  "final_component_gitlinks": {
+    "external/ipfs_datasets": "b1a37b973fa670f18badda527ee5370ee825f84e",
+    "external/ipfs_accelerate": "45803f0dca3365982b6058bf7e7c9c94a95aefcf",
+    "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0"
+  },
+  "catalogues": "The original 16-study review, our 18-study extension and the parallel 20-study catalogue retain their distinct snapshots and overlapping studies; counts and metrics are not added.",
+  "source_review": "Datasets b1 is a descendant of the reviewed grouped merge 0f; it adds a reconciliation document and changes two renderer boundary tests, with no numerical producer changes. Supervisor458 is a descendant of initiald5, adding ordinary coding-reply contracts and native post-decode failure settlement. These were already published by their owners and are preserved without another model experiment.",
+  "controls": {
+    "new_working_copy_auditor_tests": 29,
+    "runtime_metadata_adversarial_tests": 163,
+    "initial_auditor9_cases_overlap_updated29_and_are_not_added_again": true,
+    "updated_auditor_xml_sha256": "04967548a8f40c72bf619477ffdbaad7c4b2e0f7d60c87e36f030bde290211b5"
+  },
+  "historical_receipts_and_original75_curated_blobs_rewritten": false,
+  "model_training_or_inference_or_embedding_or_Hub_or_ModelManager_mutation": false,
+  "merge_recovery": "The shared remote-tracking ref advanced from505 to c454 during merge. A prepublication check identified an older supervisor pin; the final correction preserves the exactc454 component pins. All existing private child working trees are retained."
+}
