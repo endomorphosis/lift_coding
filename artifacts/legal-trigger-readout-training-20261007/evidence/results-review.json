@@ -1,0 +1,1783 @@
+{
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/corpus-builder.py": {
+      "bytes": 25522,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/corpus-builder.py",
+      "sha256": "881abc31455551c953ebe23f2a24bb6bde5df09a85e1c6455945a1a5ffd56e74"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/corpus-manifest.json": {
+      "bytes": 40566,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/corpus-manifest.json",
+      "sha256": "22a551395a410e4b3fe79155f554a2ee05c7b2eec6631d7836079d7ec9c0a7d1"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/corpus-protocol.json": {
+      "bytes": 12225,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/corpus-protocol.json",
+      "sha256": "7d83f26ec816e4c83d66de15b81ef52be35f0142c713093dd94787ea1cf31b03"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py": {
+      "bytes": 29545,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py",
+      "sha256": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py": {
+      "bytes": 7804,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py",
+      "sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_trigger_readout.py": {
+      "bytes": 27145,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_trigger_readout.py",
+      "sha256": "983b69b8e293aa6211fd8322f9ba6bfe6fa5b8cb853c2d4d0cace1e7e5046344"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py": {
+      "bytes": 29993,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py",
+      "sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/tests/unit/logic/test_legal_scope_trigger_readout.py": {
+      "bytes": 16772,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/tests/unit/logic/test_legal_scope_trigger_readout.py",
+      "sha256": "337c18f643eb7ec5aa276ad693cc83a5ad595e71a3e98fbe1acc43e177616a9d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/experiment-plan.json": {
+      "bytes": 5538,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/experiment-plan.json",
+      "sha256": "0246fec8a0026ca38dcc46bc903ec655cfde8f474f39c142641d3a39f49a1881"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/final-inputs.json": {
+      "bytes": 62673,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/final-inputs.json",
+      "sha256": "066bc0a734292d45da468583c55677d9851e244f5a7949aedcc857796a14cb67"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/final-references.json": {
+      "bytes": 138097,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/final-references.json",
+      "sha256": "069a43b1295823c3ecaaab958a6402494d1dbd00679af97da05d7e466ef53209"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/model-source-review.json": {
+      "bytes": 5129,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/model-source-review.json",
+      "sha256": "8ebc789bc3783b32fa26838db5e2f81d8d7e31e12acb40c5ce3a0cf645f0aa06"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/run_trigger_experiment.py": {
+      "bytes": 19834,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/run_trigger_experiment.py",
+      "sha256": "8db24c4c0e39ebb106a72031fa53aa9f153fed94f1ddaf1b58ba7ef9ad093f00"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/runner-peer-review.json": {
+      "bytes": 11113,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/runner-peer-review.json",
+      "sha256": "a11b2e870977a10d5af46acbad6ea7c5690d568bd3c275b803e768e8e10f3ed0"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/selection-inputs.json": {
+      "bytes": 63326,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/selection-inputs.json",
+      "sha256": "b2ceeddfffdd03d24f4647797fcf1cd1a75067d51957c4a093601cbef9c8e0b4"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/selection-references.json": {
+      "bytes": 138104,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/selection-references.json",
+      "sha256": "9a7e504b8e88bd2973ee6ccbdbc70212f2dbd9f850bef9c493590f32ad348c30"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/train-inputs.json": {
+      "bytes": 507191,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/train-inputs.json",
+      "sha256": "698a12e8df507b6ffe81b3d6e9dc4cd61cf8865f34e178be6a98cdddca222cfa"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/train-references.json": {
+      "bytes": 1104803,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/train-references.json",
+      "sha256": "adbc5a2a9245eafa7a4316b54535a1fd42b6b2c3d1509cb41f954daabfe53a8d"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/checkpoint-240.json": {
+      "bytes": 2202556,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/checkpoint-240.json",
+      "sha256": "9809ec3fd092536f8c4effb74d8a401dc5db9ff9a031952a1e3f92f9c7292c6e"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/all-final-predictions-before-references.json": {
+      "bytes": 951,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/all-final-predictions-before-references.json",
+      "sha256": "b689213ddd641fea5c08d612dce6bd08ac12f7908f90c5942e9b4c3957d34924"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/both-selected-before-final.json": {
+      "bytes": 51682,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/both-selected-before-final.json",
+      "sha256": "2339e395f12b54e881eba131fb14c6121ec8928c3903f84419ec5ed6bde058aa"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/donor-final-predictions.json": {
+      "bytes": 804729,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/donor-final-predictions.json",
+      "sha256": "3980b48a5b8d0f2518b25d3574bf69ce762fafbf508486d10149f425b610d3e8"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/donor-selection-predictions.json": {
+      "bytes": 786342,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/donor-selection-predictions.json",
+      "sha256": "83a27ff50d54259c0f6367d2ec026b54ebf7bb8ca57dd988f201399c3bf3221f"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/checkpoint-0.json": {
+      "bytes": 2402072,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/checkpoint-0.json",
+      "sha256": "bf4cd32b77931af71711cff73b75b8efed16a52a75de455e9a9316725f806641"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/checkpoint-120.json": {
+      "bytes": 2717024,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/checkpoint-120.json",
+      "sha256": "b9ce4e8e3fca1284060905d1892fc89cb15a36925436af528eae787cccbc6f9c"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/checkpoint-240.json": {
+      "bytes": 2716297,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/checkpoint-240.json",
+      "sha256": "ee8c8afebd43a7223b9e1ef2d0486f286dee54acfcd17ac0cfde8021d4f7434c"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/final-predictions.json": {
+      "bytes": 839314,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/final-predictions.json",
+      "sha256": "e81ac2ede89e1d6fada5ff0ca56e3881ba13e71520a09e620095fdeafd65d700"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/last-TRAIN-predictions.json": {
+      "bytes": 7151403,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/last-TRAIN-predictions.json",
+      "sha256": "594a486ebae4b226fc3ff0986e090b82825a3a7f0117b4dd8a8822cb787c5ffd"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/losses.json": {
+      "bytes": 56985,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/losses.json",
+      "sha256": "73294910d4ab4ea2c2dfbe97b8ea856afdd211b9d48b3d57b173600b458796b2"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/selected.json": {
+      "bytes": 4060,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/selected.json",
+      "sha256": "ca40c228d33a96907a340e89cceb37c52f701ca5a5a67f462b43043c71922b63"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/selection-predictions-0.json": {
+      "bytes": 821004,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/selection-predictions-0.json",
+      "sha256": "6f0948efa315d5121a994f42f64e9d5000ca19c442e93bd9268fb82616401645"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/selection-predictions-120.json": {
+      "bytes": 820916,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/selection-predictions-120.json",
+      "sha256": "e7f3cce71016562c6ba07c87cdccbd9b5f9546a438848b9f118e7aab5195e7d7"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/selection-predictions-240.json": {
+      "bytes": 820814,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/selection-predictions-240.json",
+      "sha256": "45e0610ff8d301e77aa6cd0c011db780a5a48e1771c29ad1109977ab57106e2f"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/initial-donor-predictions.json": {
+      "bytes": 88477,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/initial-donor-predictions.json",
+      "sha256": "34074e8c9fbb78485745a1b8bd159d6a4dc40de4495331c9611d314a20bee4ec"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/initial-global-predictions.json": {
+      "bytes": 92812,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/initial-global-predictions.json",
+      "sha256": "5295e06cdfec34d5e6cdf55b87e4bdb194a15b95b6e8054316f5a15a0b83f29b"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/initial-predicted_trigger-predictions.json": {
+      "bytes": 92988,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/initial-predicted_trigger-predictions.json",
+      "sha256": "3416cdd85e365cb5b22be30d971671caa7652693b396868b03c2ed7ade2d4d4a"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/matched-initialization.json": {
+      "bytes": 1337,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/matched-initialization.json",
+      "sha256": "469ad6f0710658e3ec2fdf6d860a8df4bb0093dc502d53457948817f3f2d37d6"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-0.json": {
+      "bytes": 2402094,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-0.json",
+      "sha256": "297c280524514ee165ee28d7ca48dbd2a342eb435cc66641e8ff9e016627ead2"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-120.json": {
+      "bytes": 2714696,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-120.json",
+      "sha256": "9d9c78d58134381720997c60e70fa0e797320153d7d5bda45ee59d70975f9d63"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-240.json": {
+      "bytes": 2714198,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-240.json",
+      "sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/final-predictions.json": {
+      "bytes": 839902,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/final-predictions.json",
+      "sha256": "bb0256230a1291775a6bdd4a433301e6815cfdd47053980d2ded91df958a4489"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/last-TRAIN-predictions.json": {
+      "bytes": 7157755,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/last-TRAIN-predictions.json",
+      "sha256": "22689e42146e8a4712b80a56ba9a9382b4c7452d64324663ff8d0e70ba13dbda"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/losses.json": {
+      "bytes": 56903,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/losses.json",
+      "sha256": "a098af6218e5a68f9c4fe8cc3ec6dcdbcf2d5dc6aae543443a23461ed6740fe3"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/selected.json": {
+      "bytes": 4084,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/selected.json",
+      "sha256": "a62454d5f098a759e3c3e0652ef12ff96d3e714414ac71f9791b6c686655b50b"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/selection-predictions-0.json": {
+      "bytes": 822412,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/selection-predictions-0.json",
+      "sha256": "1a095ba51b82a200c666b56cd887a5e2408fea274b0a006745b2d4a1467c1fc4"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/selection-predictions-120.json": {
+      "bytes": 821788,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/selection-predictions-120.json",
+      "sha256": "597dcf8e3103a4c50d0343a4cabc359852b229f0dff23a58b12acd5c7b4a4763"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/selection-predictions-240.json": {
+      "bytes": 821522,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/selection-predictions-240.json",
+      "sha256": "b47a3a2dc70a023e18ca6f58c97db24802d503f706ce52cafbf909cbf038fd18"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/summary.json": {
+      "bytes": 11512,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/summary.json",
+      "sha256": "a9a743f11ec8d04bdb67cdc957a95eafac2044212c7486da9f6806c16e1b3872"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/training-results.json": {
+      "bytes": 69574,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/training-results.json",
+      "sha256": "8bb4d85371ce1fca3c7f4f6f0eeef33e43469bfb1122206cde2d83c4c7d97705"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/training-schedule.json": {
+      "bytes": 305283,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/training-schedule.json",
+      "sha256": "8e361045ae177eee0cbce8d21b99051100b9f05eb4bc7884cffb32c496618efa"
+    }
+  },
+  "checked": {
+    "actual_optimizer_updates": 480,
+    "all_final_128_rows_per_arm_frozen_against_donor": true,
+    "all_frozen_selection_panels_equal_donor_and_each_other": true,
+    "all_six_embedded_donors_exact_original_bytes": true,
+    "checkpoint_seals_and_dense_adapter_progress": 6,
+    "donor_selection_panels": 1,
+    "durable_selected_and_final_panel_barriers": "Saved pins plus mtime ordering and unchanged runner control flow verified; timestamps do not independently observe label-read events.",
+    "encoded_positive_presentations": 3840,
+    "final_emitted_proposals_revalidated": 147,
+    "final_panels": 3,
+    "ignored_negative_records": 3840,
+    "initial_16_full_core_and_logits_per_arm_equal_donor": true,
+    "initial_adapter_tensor_values_equal": true,
+    "initial_final_projection_zero": true,
+    "input_records": 7680,
+    "last_TRAIN_1024_rows_frozen_across_arms": true,
+    "last_TRAIN_panels": 2,
+    "model_and_full_Adam_reload": "Runtime strict restore/resave assertions recorded in frozen runner/results; file review independently checks all serialized seals, source recipes, donor bytes, finite adapter/moment shapes, variance and every exact per-parameter update count. No new neural restore/replay.",
+    "recorded_summaries_exactly_rescored": 12,
+    "selection_panels": 6,
+    "source_only_inference": "Frozen runner guards and saved closed input/result schemas/raw logits; all target/proof/semantic flags false; existing owner masks all0/formal_output null."
+  },
+  "checkpoint_selection_ledger": {
+    "global": [
+      {
+        "all_adapter_Adam_counts": 0,
+        "class_CE": 1.0900823012459242,
+        "class_exact": 25,
+        "embedded_donor_exact": true,
+        "external_checkpoint": {
+          "bytes": 2402072,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/checkpoint-0.json",
+          "sha256": "bf4cd32b77931af71711cff73b75b8efed16a52a75de455e9a9316725f806641"
+        },
+        "step": 0,
+        "wire_exact": 16
+      },
+      {
+        "all_adapter_Adam_counts": 120,
+        "class_CE": 1.0791817302797153,
+        "class_exact": 30,
+        "embedded_donor_exact": true,
+        "external_checkpoint": {
+          "bytes": 2717024,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/checkpoint-120.json",
+          "sha256": "b9ce4e8e3fca1284060905d1892fc89cb15a36925436af528eae787cccbc6f9c"
+        },
+        "step": 120,
+        "wire_exact": 15
+      },
+      {
+        "all_adapter_Adam_counts": 240,
+        "class_CE": 1.0745119059855894,
+        "class_exact": 28,
+        "embedded_donor_exact": true,
+        "external_checkpoint": {
+          "bytes": 2716297,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/checkpoint-240.json",
+          "sha256": "ee8c8afebd43a7223b9e1ef2d0486f286dee54acfcd17ac0cfde8021d4f7434c"
+        },
+        "step": 240,
+        "wire_exact": 15
+      }
+    ],
+    "predicted_trigger": [
+      {
+        "all_adapter_Adam_counts": 0,
+        "class_CE": 1.0900823012459242,
+        "class_exact": 25,
+        "embedded_donor_exact": true,
+        "external_checkpoint": {
+          "bytes": 2402094,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-0.json",
+          "sha256": "297c280524514ee165ee28d7ca48dbd2a342eb435cc66641e8ff9e016627ead2"
+        },
+        "step": 0,
+        "wire_exact": 16
+      },
+      {
+        "all_adapter_Adam_counts": 120,
+        "class_CE": 0.8342328135927227,
+        "class_exact": 42,
+        "embedded_donor_exact": true,
+        "external_checkpoint": {
+          "bytes": 2714696,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-120.json",
+          "sha256": "9d9c78d58134381720997c60e70fa0e797320153d7d5bda45ee59d70975f9d63"
+        },
+        "step": 120,
+        "wire_exact": 21
+      },
+      {
+        "all_adapter_Adam_counts": 240,
+        "class_CE": 0.6412712355498564,
+        "class_exact": 47,
+        "embedded_donor_exact": true,
+        "external_checkpoint": {
+          "bytes": 2714198,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-240.json",
+          "sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f"
+        },
+        "step": 240,
+        "wire_exact": 24
+      }
+    ]
+  },
+  "final_reference_access_now_authorized": true,
+  "findings": [],
+  "fits_launched": 0,
+  "fresh_final_scores": {
+    "donor": {
+      "admission_masks": "all five zero",
+      "caller_attachment_learned": false,
+      "case_count": 128,
+      "class_confusion": {
+        "F": {
+          "F": 13,
+          "O": 8,
+          "P": 0
+        },
+        "O": {
+          "F": 16,
+          "O": 6,
+          "P": 0
+        },
+        "P": {
+          "F": 13,
+          "O": 8,
+          "P": 0
+        }
+      },
+      "legal_gold": false,
+      "negative_categories": {
+        "extra_exception": {
+          "count": 16,
+          "emitted": 0,
+          "incidental_block": 0,
+          "learned_refusal": 16
+        },
+        "modal_deletion": {
+          "count": 16,
+          "emitted": 0,
+          "incidental_block": 2,
+          "learned_refusal": 14
+        },
+        "modal_misspelling": {
+          "count": 16,
+          "emitted": 6,
+          "incidental_block": 3,
+          "learned_refusal": 7
+        },
+        "second_rule": {
+          "count": 16,
+          "emitted": 0,
+          "incidental_block": 0,
+          "learned_refusal": 16
+        }
+      },
+      "negative_count": 64,
+      "negative_emitted_proposal_count": 6,
+      "negative_incidental_block_count": 5,
+      "negative_learned_refusal_count": 53,
+      "nonempty_condition_count": 32,
+      "nonempty_condition_exact_count": 4,
+      "positive_class_CE": 1.0937223267990455,
+      "positive_count": 64,
+      "positive_emitted_proposal_count": 43,
+      "positive_exact_count": 11,
+      "positive_learned_refusal_count": 19,
+      "positive_raw_all_spans_exact": 49,
+      "positive_raw_facet_span_exact": {
+        "action": {
+          "count": 64,
+          "exact": 54,
+          "nonempty_count": 64,
+          "nonempty_exact": 54
+        },
+        "actor": {
+          "count": 64,
+          "exact": 61,
+          "nonempty_count": 64,
+          "nonempty_exact": 61
+        },
+        "condition": {
+          "count": 64,
+          "exact": 63,
+          "nonempty_count": 32,
+          "nonempty_exact": 31
+        },
+        "modality": {
+          "count": 64,
+          "exact": 64,
+          "nonempty_count": 64,
+          "nonempty_exact": 64
+        },
+        "object": {
+          "count": 64,
+          "exact": 61,
+          "nonempty_count": 32,
+          "nonempty_exact": 29
+        }
+      },
+      "positive_raw_modality_exact": 19,
+      "positive_structural_block_count": 2,
+      "positive_templates": {
+        "actor_condition_modal_action_object": {
+          "class_exact": 3,
+          "count": 8,
+          "proposal_exact": 3
+        },
+        "actor_modal_action_object_condition": {
+          "class_exact": 3,
+          "count": 8,
+          "proposal_exact": 1
+        },
+        "actor_possessive_gerund_object_modal_condition": {
+          "class_exact": 1,
+          "count": 8,
+          "proposal_exact": 0
+        },
+        "condition_actor_modal_action_object": {
+          "class_exact": 3,
+          "count": 8,
+          "proposal_exact": 1
+        },
+        "condition_actor_possessive_gerund_object_modal": {
+          "class_exact": 3,
+          "count": 8,
+          "proposal_exact": 3
+        },
+        "condition_modal_actor_action_object": {
+          "class_exact": 1,
+          "count": 8,
+          "proposal_exact": 1
+        },
+        "gerund_object_agent_modal_condition": {
+          "class_exact": 3,
+          "count": 8,
+          "proposal_exact": 0
+        },
+        "modal_actor_action_object_condition": {
+          "class_exact": 2,
+          "count": 8,
+          "proposal_exact": 2
+        }
+      },
+      "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+      "source_parent_groups": 64
+    },
+    "global": {
+      "admission_masks": "all five zero",
+      "caller_attachment_learned": false,
+      "case_count": 128,
+      "class_confusion": {
+        "F": {
+          "F": 8,
+          "O": 5,
+          "P": 8
+        },
+        "O": {
+          "F": 4,
+          "O": 9,
+          "P": 9
+        },
+        "P": {
+          "F": 3,
+          "O": 6,
+          "P": 12
+        }
+      },
+      "legal_gold": false,
+      "negative_categories": {
+        "extra_exception": {
+          "count": 16,
+          "emitted": 0,
+          "incidental_block": 0,
+          "learned_refusal": 16
+        },
+        "modal_deletion": {
+          "count": 16,
+          "emitted": 0,
+          "incidental_block": 2,
+          "learned_refusal": 14
+        },
+        "modal_misspelling": {
+          "count": 16,
+          "emitted": 6,
+          "incidental_block": 3,
+          "learned_refusal": 7
+        },
+        "second_rule": {
+          "count": 16,
+          "emitted": 0,
+          "incidental_block": 0,
+          "learned_refusal": 16
+        }
+      },
+      "negative_count": 64,
+      "negative_emitted_proposal_count": 6,
+      "negative_incidental_block_count": 5,
+      "negative_learned_refusal_count": 53,
+      "nonempty_condition_count": 32,
+      "nonempty_condition_exact_count": 7,
+      "positive_class_CE": 1.0830032690009783,
+      "positive_count": 64,
+      "positive_emitted_proposal_count": 43,
+      "positive_exact_count": 17,
+      "positive_learned_refusal_count": 19,
+      "positive_raw_all_spans_exact": 49,
+      "positive_raw_facet_span_exact": {
+        "action": {
+          "count": 64,
+          "exact": 54,
+          "nonempty_count": 64,
+          "nonempty_exact": 54
+        },
+        "actor": {
+          "count": 64,
+          "exact": 61,
+          "nonempty_count": 64,
+          "nonempty_exact": 61
+        },
+        "condition": {
+          "count": 64,
+          "exact": 63,
+          "nonempty_count": 32,
+          "nonempty_exact": 31
+        },
+        "modality": {
+          "count": 64,
+          "exact": 64,
+          "nonempty_count": 64,
+          "nonempty_exact": 64
+        },
+        "object": {
+          "count": 64,
+          "exact": 61,
+          "nonempty_count": 32,
+          "nonempty_exact": 29
+        }
+      },
+      "positive_raw_modality_exact": 29,
+      "positive_structural_block_count": 2,
+      "positive_templates": {
+        "actor_condition_modal_action_object": {
+          "class_exact": 5,
+          "count": 8,
+          "proposal_exact": 4
+        },
+        "actor_modal_action_object_condition": {
+          "class_exact": 5,
+          "count": 8,
+          "proposal_exact": 3
+        },
+        "actor_possessive_gerund_object_modal_condition": {
+          "class_exact": 3,
+          "count": 8,
+          "proposal_exact": 1
+        },
+        "condition_actor_modal_action_object": {
+          "class_exact": 4,
+          "count": 8,
+          "proposal_exact": 1
+        },
+        "condition_actor_possessive_gerund_object_modal": {
+          "class_exact": 2,
+          "count": 8,
+          "proposal_exact": 2
+        },
+        "condition_modal_actor_action_object": {
+          "class_exact": 3,
+          "count": 8,
+          "proposal_exact": 3
+        },
+        "gerund_object_agent_modal_condition": {
+          "class_exact": 3,
+          "count": 8,
+          "proposal_exact": 0
+        },
+        "modal_actor_action_object_condition": {
+          "class_exact": 4,
+          "count": 8,
+          "proposal_exact": 3
+        }
+      },
+      "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+      "source_parent_groups": 64
+    },
+    "predicted_trigger": {
+      "admission_masks": "all five zero",
+      "caller_attachment_learned": false,
+      "case_count": 128,
+      "class_confusion": {
+        "F": {
+          "F": 17,
+          "O": 2,
+          "P": 2
+        },
+        "O": {
+          "F": 7,
+          "O": 13,
+          "P": 2
+        },
+        "P": {
+          "F": 2,
+          "O": 2,
+          "P": 17
+        }
+      },
+      "legal_gold": false,
+      "negative_categories": {
+        "extra_exception": {
+          "count": 16,
+          "emitted": 0,
+          "incidental_block": 0,
+          "learned_refusal": 16
+        },
+        "modal_deletion": {
+          "count": 16,
+          "emitted": 0,
+          "incidental_block": 2,
+          "learned_refusal": 14
+        },
+        "modal_misspelling": {
+          "count": 16,
+          "emitted": 6,
+          "incidental_block": 3,
+          "learned_refusal": 7
+        },
+        "second_rule": {
+          "count": 16,
+          "emitted": 0,
+          "incidental_block": 0,
+          "learned_refusal": 16
+        }
+      },
+      "negative_count": 64,
+      "negative_emitted_proposal_count": 6,
+      "negative_incidental_block_count": 5,
+      "negative_learned_refusal_count": 53,
+      "nonempty_condition_count": 32,
+      "nonempty_condition_exact_count": 12,
+      "positive_class_CE": 0.6538583129617402,
+      "positive_count": 64,
+      "positive_emitted_proposal_count": 43,
+      "positive_exact_count": 30,
+      "positive_learned_refusal_count": 19,
+      "positive_raw_all_spans_exact": 49,
+      "positive_raw_facet_span_exact": {
+        "action": {
+          "count": 64,
+          "exact": 54,
+          "nonempty_count": 64,
+          "nonempty_exact": 54
+        },
+        "actor": {
+          "count": 64,
+          "exact": 61,
+          "nonempty_count": 64,
+          "nonempty_exact": 61
+        },
+        "condition": {
+          "count": 64,
+          "exact": 63,
+          "nonempty_count": 32,
+          "nonempty_exact": 31
+        },
+        "modality": {
+          "count": 64,
+          "exact": 64,
+          "nonempty_count": 64,
+          "nonempty_exact": 64
+        },
+        "object": {
+          "count": 64,
+          "exact": 61,
+          "nonempty_count": 32,
+          "nonempty_exact": 29
+        }
+      },
+      "positive_raw_modality_exact": 47,
+      "positive_structural_block_count": 2,
+      "positive_templates": {
+        "actor_condition_modal_action_object": {
+          "class_exact": 5,
+          "count": 8,
+          "proposal_exact": 4
+        },
+        "actor_modal_action_object_condition": {
+          "class_exact": 7,
+          "count": 8,
+          "proposal_exact": 4
+        },
+        "actor_possessive_gerund_object_modal_condition": {
+          "class_exact": 6,
+          "count": 8,
+          "proposal_exact": 3
+        },
+        "condition_actor_modal_action_object": {
+          "class_exact": 5,
+          "count": 8,
+          "proposal_exact": 3
+        },
+        "condition_actor_possessive_gerund_object_modal": {
+          "class_exact": 8,
+          "count": 8,
+          "proposal_exact": 7
+        },
+        "condition_modal_actor_action_object": {
+          "class_exact": 6,
+          "count": 8,
+          "proposal_exact": 6
+        },
+        "gerund_object_agent_modal_condition": {
+          "class_exact": 5,
+          "count": 8,
+          "proposal_exact": 0
+        },
+        "modal_actor_action_object_condition": {
+          "class_exact": 5,
+          "count": 8,
+          "proposal_exact": 3
+        }
+      },
+      "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+      "source_parent_groups": 64
+    }
+  },
+  "interpretation": {
+    "condition_output": "31/32 nonempty condition spans copied correctly, but only12/32 nonempty-condition whole proposals exact. Opaque condition text and explicit caller attachment remain unreviewed engineering declarations, not learned implication/scoping or statutory semantics.",
+    "donor_baseline": "Fresh cohort donor raw class19/64, whole11/64, CE1.093722; this is a new cohort and is not directly comparable to old pilot12/64.",
+    "frozen_ceiling": "Only38/64 positives both emit and have all five spans correct.49 have raw all-span correctness but11 of these are refused.26 rows remain obstructed by frozen nonclass behavior:19 learned refusals,2 structural blocks,5 emitted wrong-span proposals. Trigger reaches30/38 available whole-correct rows;8 class errors remain within that ceiling (O5,P1,F2).17 other trigger class-correct rows cannot become whole exact with this frozen donor.",
+    "gerund_agent": "0/8 whole exact despite5/8 trigger class correct: all8 have raw span errors;6 are refused and2 emit wrong spans. This localizes the residual failure to frozen structure/gate, not only residual class fitting.",
+    "matched_readout_result": "On this64-positive authored fresh-group cohort, predicted-trigger versus selected global readout improves raw class47 versus29, whole exact30 versus17, and CE0.653858 versus1.083003. Both completed240 adapter updates with4355 trainable parameters/identical initialization, but selection chose trigger240/global120. Frozen nonclass signatures are equal. This supports a source-predicted local readout benefit within this control; it does not prove a universal causal explanation for earlier pooled-head failures.",
+    "negative_behavior": "Unchanged53/64 learned refusals,5 incidental blocks and6 emitted negative proposals. All6 emissions are modal-misspelling profile violations; this class-only adapter did not improve source support.",
+    "remaining_class_bottleneck": "Trigger O13/22 remains weaker than P17/21 and F17/21; O-to-F7 is the largest true-class confusion cell. Eight template slices each have8 rows, so per-template differences are descriptive only."
+  },
+  "limitations": [
+    "Authored engineering targets only; no independent legal gold, fidelity admission, proof authority or Lake execution.",
+    "One seed, one matched schedule and small selection/final panels; no confidence or broad law/syntax generalization claim.",
+    "Operator alias vocabulary and eight rendering templates shared with donor corpus; fresh sources/facet lexemes do not imply unseen grammar.",
+    "Independent endpoint marginals form normalized predicted coverage, not a supervised or joint true interval model.",
+    "All negatives excluded from class gradients; frozen source gate and optional/endpoint heads constrain whole output.",
+    "Only supplied thread2 CPU runtime is evidenced; this review did no model replay and makes no cross-thread bitwise equality claim.",
+    "Final labels/results are now exposed; no next fit authorized or performed by this review."
+  ],
+  "loss_ledger": {
+    "global": {
+      "first": {
+        "gradient_norm": 0.30648940801620483,
+        "loss": 1.0527373552322388,
+        "modality_loss": 1.0527373552322388,
+        "optimizer_step_executed": true,
+        "supported_examples": 8,
+        "unsupported_examples": 8,
+        "update": 1
+      },
+      "last": {
+        "gradient_norm": 0.6856552958488464,
+        "loss": 0.9271721243858337,
+        "modality_loss": 0.9271721243858337,
+        "optimizer_step_executed": true,
+        "supported_examples": 8,
+        "unsupported_examples": 8,
+        "update": 240
+      },
+      "last20_mean_class_CE": 1.07837053835392,
+      "updates": 240
+    },
+    "predicted_trigger": {
+      "first": {
+        "gradient_norm": 0.39073944091796875,
+        "loss": 1.0527373552322388,
+        "modality_loss": 1.0527373552322388,
+        "optimizer_step_executed": true,
+        "supported_examples": 8,
+        "unsupported_examples": 8,
+        "update": 1
+      },
+      "last": {
+        "gradient_norm": 1.5377907752990723,
+        "loss": 0.5507290959358215,
+        "modality_loss": 0.5507290959358215,
+        "optimizer_step_executed": true,
+        "supported_examples": 8,
+        "unsupported_examples": 8,
+        "update": 240
+      },
+      "last20_mean_class_CE": 0.7758709251880646,
+      "updates": 240
+    }
+  },
+  "model_calls_in_this_review": 0,
+  "next_fit_in_this_turn": false,
+  "optimizer_steps_in_this_review": 0,
+  "passed": true,
+  "physical_results_root": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results",
+  "posthoc_failure_decomposition": {
+    "donor": {
+      "by_nonempty_condition": {
+        "False": {
+          "abstained": 7,
+          "class_error_among_emission_ready_spans": 17,
+          "count": 32,
+          "emission_ready_all_spans_correct": 24,
+          "exact_emitted": 7,
+          "frozen_nonclass_obstruction": 8,
+          "predicted": 25,
+          "raw_all_spans_correct": 26,
+          "raw_class_correct": 9
+        },
+        "True": {
+          "abstained": 12,
+          "blocked": 2,
+          "class_error_among_emission_ready_spans": 10,
+          "count": 32,
+          "emission_ready_all_spans_correct": 14,
+          "exact_emitted": 4,
+          "frozen_nonclass_obstruction": 18,
+          "predicted": 18,
+          "raw_all_spans_correct": 23,
+          "raw_class_correct": 10
+        }
+      },
+      "by_template": {
+        "actor_condition_modal_action_object": {
+          "blocked": 1,
+          "class_error_among_emission_ready_spans": 3,
+          "count": 8,
+          "emission_ready_all_spans_correct": 6,
+          "exact_emitted": 3,
+          "frozen_nonclass_obstruction": 2,
+          "predicted": 7,
+          "raw_all_spans_correct": 6,
+          "raw_class_correct": 3
+        },
+        "actor_modal_action_object_condition": {
+          "abstained": 3,
+          "class_error_among_emission_ready_spans": 4,
+          "count": 8,
+          "emission_ready_all_spans_correct": 5,
+          "exact_emitted": 1,
+          "frozen_nonclass_obstruction": 3,
+          "predicted": 5,
+          "raw_all_spans_correct": 7,
+          "raw_class_correct": 3
+        },
+        "actor_possessive_gerund_object_modal_condition": {
+          "abstained": 5,
+          "class_error_among_emission_ready_spans": 3,
+          "count": 8,
+          "emission_ready_all_spans_correct": 3,
+          "frozen_nonclass_obstruction": 5,
+          "predicted": 3,
+          "raw_all_spans_correct": 8,
+          "raw_class_correct": 1
+        },
+        "condition_actor_modal_action_object": {
+          "abstained": 3,
+          "class_error_among_emission_ready_spans": 3,
+          "count": 8,
+          "emission_ready_all_spans_correct": 4,
+          "exact_emitted": 1,
+          "frozen_nonclass_obstruction": 4,
+          "predicted": 5,
+          "raw_all_spans_correct": 7,
+          "raw_class_correct": 3
+        },
+        "condition_actor_possessive_gerund_object_modal": {
+          "class_error_among_emission_ready_spans": 4,
+          "count": 8,
+          "emission_ready_all_spans_correct": 7,
+          "exact_emitted": 3,
+          "frozen_nonclass_obstruction": 1,
+          "predicted": 8,
+          "raw_all_spans_correct": 7,
+          "raw_class_correct": 3
+        },
+        "condition_modal_actor_action_object": {
+          "blocked": 1,
+          "class_error_among_emission_ready_spans": 6,
+          "count": 8,
+          "emission_ready_all_spans_correct": 7,
+          "exact_emitted": 1,
+          "frozen_nonclass_obstruction": 1,
+          "predicted": 7,
+          "raw_all_spans_correct": 7,
+          "raw_class_correct": 1
+        },
+        "gerund_object_agent_modal_condition": {
+          "abstained": 6,
+          "count": 8,
+          "emission_ready_all_spans_correct": 0,
+          "frozen_nonclass_obstruction": 8,
+          "predicted": 2,
+          "raw_all_spans_correct": 0,
+          "raw_class_correct": 3
+        },
+        "modal_actor_action_object_condition": {
+          "abstained": 2,
+          "class_error_among_emission_ready_spans": 4,
+          "count": 8,
+          "emission_ready_all_spans_correct": 6,
+          "exact_emitted": 2,
+          "frozen_nonclass_obstruction": 2,
+          "predicted": 6,
+          "raw_all_spans_correct": 7,
+          "raw_class_correct": 2
+        }
+      },
+      "by_true_class": {
+        "F": {
+          "abstained": 7,
+          "blocked": 1,
+          "class_error_among_emission_ready_spans": 4,
+          "count": 21,
+          "emission_ready_all_spans_correct": 11,
+          "exact_emitted": 7,
+          "frozen_nonclass_obstruction": 10,
+          "predicted": 13,
+          "raw_all_spans_correct": 16,
+          "raw_class_correct": 13
+        },
+        "O": {
+          "abstained": 6,
+          "class_error_among_emission_ready_spans": 10,
+          "count": 22,
+          "emission_ready_all_spans_correct": 14,
+          "exact_emitted": 4,
+          "frozen_nonclass_obstruction": 8,
+          "predicted": 16,
+          "raw_all_spans_correct": 17,
+          "raw_class_correct": 6
+        },
+        "P": {
+          "abstained": 6,
+          "blocked": 1,
+          "class_error_among_emission_ready_spans": 13,
+          "count": 21,
+          "emission_ready_all_spans_correct": 13,
+          "frozen_nonclass_obstruction": 8,
+          "predicted": 14,
+          "raw_all_spans_correct": 16,
+          "raw_class_correct": 0
+        }
+      },
+      "counts": {
+        "class_correct_outside_emission_ready_ceiling": 8,
+        "class_error_among_emission_ready_spans": 27,
+        "emission_ready_all_spans_correct": 38,
+        "emitted_span_incorrect": 5,
+        "exact_emitted": 11,
+        "frozen_nonclass_obstruction": 26,
+        "learned_refusal": 19,
+        "raw_all_spans_correct": 49,
+        "raw_class_correct": 19,
+        "spans_correct_but_not_emitted": 11,
+        "structural_block": 2
+      },
+      "emission_ready_exact_span_ids": [
+        "source:079e1d82d60cddbee3ee1cd3f48a15c0f5c1da3972d43b1224bb9f5d9493c9d0",
+        "source:cc604832fd592ff86d65193425caeba3a9936e64c870dcd74cf156a540929a01",
+        "source:ecd5bbbdcfa03540d8c5ca835b7934e92c5c7caee3522e2349ce15ed2a75bc7e",
+        "source:12000a64577481d03ee20b6d7479d5eda18e3642f177c6c96fd8ef50a71e91f1",
+        "source:02bc12fb281cba9000a0e33d1ce21766435759c1ee79ee29f878fa4714555487",
+        "source:9029dff9e68c28a2ebb23d7046acd31a672718fd7a33e682f4a43ce2ec066a07",
+        "source:702e7c77fd246319e2c8c1ff8366fe0397a9d4aa7013c2e92f0eae6abb006784",
+        "source:159f43ea6c039a5c2f71b39020bd63eaa2f7d7b6659b955e0de5f948fa7bc745",
+        "source:e0502c557f460113e4f7c692ba90e21b676d9163bcf3a23437aad5803758d4e2",
+        "source:82c71c38348a0eec3ebe2f59df0835eba726d1fe62153773ce34f5c7ab4cad71",
+        "source:6e4aeabe1a7779936e6dd11c163a91e89749b24547cdb248d4266ab0a907cd23",
+        "source:82efd2949e5e42c2c40909a75e8d0f4e53073e7698c279be010cb56d22093009",
+        "source:d1b924d37eeb0d1da1a2ddf9325fdc12b682c19b4511a9fa1632dcd9bea724e3",
+        "source:45525df2e327b8784a9cd220e5df4f4b0b6bc4db05ca3df3c05a0512fdb81256",
+        "source:97e94fe4569807156ba8431c2dd4d53ae5a29240ab90b340e5bca5165c8c9323",
+        "source:cd7ae60793a59f235f77c9ab2f8e092b2ff4aac034f416576665b2f92fadbc2f",
+        "source:704271c092441006fb5b29e696daeb1e531407f1f5819e17243b1f2a962ab88c",
+        "source:2eaee2ab705253ef42a4ccea115fb986dd131576c1e99aa302935c93672ff236",
+        "source:ad7e79965482b3739a566246b62de8eb90abc079d69ac3061a1b2187847d5885",
+        "source:4d9c524e3f29ccfce0cc96dcd4d18a917622775cce2646e717991c421ac8092c",
+        "source:8fb0e5c5369b489aefe70a23fb682f590fc904bc3ae08de481767fb2e99017b0",
+        "source:8f17104c6b0b9d0656b90f2f78438ccd7fbfe42261c3238c933ac118861644b6",
+        "source:6eb263f29ef90bf7022864c7c7f17651cf5999d4b9ab1076a9e2428ce13f9de8",
+        "source:a52293d5262753c946a40e8f9f189c3f2633097c6e64fb8c877693491316e1ac",
+        "source:7447f8c1ada84aa669844b01da3ec29051f1897c8b457b42ef6a79b30b517aee",
+        "source:8a204a003a2c34733e0d6666e3b750d4f4d504fc9cb7092f0a5713d56a36c535",
+        "source:ea8c11b37548b9457b7df43b769a4b16913b08da366216c884ce28e65660f16a",
+        "source:219a3eb6463f0e01c670d0056b75fc3283a3750c312dfd6986eaa313eae061a6",
+        "source:f57dcfa3b45eac8d61ffc48adee879fa4e6f1b546e54c649c2858fda560368f1",
+        "source:6d0eae2f49573a949cc35256a18c8eb22b8e029f3b6ba98c627da772d9c5165a",
+        "source:cb536da4e6f4c22b0c90027a1aed964c1229aab76696404aca765827ed3324d1",
+        "source:26ca525d917b0d3aed659a6ad2e62d1c1c7383fcbe0ab039a8370be8fba37ed4",
+        "source:bb92045e553a3b7612c3abe3bb9b1f18b1ed699fad28127e3eef4ba2b892bc3d",
+        "source:404c68cb222d20431325303f0584ed541b9ecbc6e9a81fb1d544770abb6477a9",
+        "source:aadf998e68d9a967499587339577f79b6b17737698ad93c5de90b2cc0a0a1448",
+        "source:22f05208d3964c94849c34baa887f530d99ea0ba39901ee6d0dc5ff1c9dbc74d",
+        "source:f17a00931dad50c42ee4e4850178b9da5824a15340cb6b22ac7d7af71eb8b253",
+        "source:a88bd8132396500508cd4961eab26c143007aeea0b8115d8005e9d52240b444a"
+      ],
+      "gerund_agent_cases": [
+        {
+          "class_correct": false,
+          "facet_matches": {
+            "action": false,
+            "actor": true,
+            "condition": true,
+            "modality": true,
+            "object": true
+          },
+          "id": "source:0470b688225d2b0bea5298cc7e64e5ae733991db34aa432e6cdd4c08d6a9dbce",
+          "status": "abstained"
+        },
+        {
+          "class_correct": false,
+          "facet_matches": {
+            "action": false,
+            "actor": true,
+            "condition": true,
+            "modality": true,
+            "object": true
+          },
+          "id": "source:3279c29c9a2b66cb47e487277d6112a165538aa23a628e3231de1098c959136b",
+          "status": "abstained"
+        },
+        {
+          "class_correct": true,
+          "facet_matches": {
+            "action": false,
+            "actor": true,
+            "condition": true,
+            "modality": true,
+            "object": true
+          },
+          "id": "source:01fa00d885b02e1853adfc21c5b49285589d4d54c7245039fe14e6cc1143b4c8",
+          "status": "abstained"
+        },
+        {
+          "class_correct": false,
+          "facet_matches": {
+            "action": false,
+            "actor": true,
+            "condition": true,
+            "modality": true,
+            "object": false
+          },
+          "id": "source:8a10bedab475ce1ebc3c78d249647f1c0f9107e4dea3fd4ea6a989fb33fc7a33",
+          "status": "abstained"
+        },
+        {
+          "class_correct": true,
+          "facet_matches": {
+            "action": false,
+            "actor": true,
+            "condition": true,
+            "modality": true,
+            "object": true
+          },
+          "id": "source:ee9d347b3b858f495a0ccecf15f3c92b3c00566a8ccd64feaad340be33c0ba7c",
+          "status": "predicted"
+        },
+        {
+          "class_correct": false,
+          "facet_matches": {
+            "action": false,
+            "actor": true,
+            "condition": true,
+            "modality": true,
+            "object": true
+          },
+          "id": "source:e023ac5fda78fd095c519afafe2ba3e46910c1a8f16b40312ef90469f6b30a76",
+          "status": "abstained"
+        },
+        {
+          "class_correct": true,
+          "facet_matches": {
+            "action": false,
+            "actor": true,
+            "condition": true,
+            "modality": true,
+            "object": true
+          },
+          "id": "source:7a8cb185050402bca66b9cd3459af7c33571e58fb0a70b1e323ae9ddb34764b0",
+          "status": "abstained"
+        },
+        {
+          "class_correct": false,
+          "facet_matches": {
+            "action": false,
+            "actor": true,
+            "condition": true,
+            "modality": true,
+            "object": true
+          },
+          "id": "source:a9a5da75644bf1c559719ee0396f2cbee8911665027b19a81255cd239feb0efd",
+          "status": "predicted"
+        }
+      ],
+      "raw_facet_error_counts": {
+        "action": 10,
+        "actor": 3,
+        "condition": 1,
+        "modality": 0,
+        "object": 3
+      }
+    },
+    "global": {
+      "by_nonempty_condition": {
+        "False": {
+          "abstained": 7,
+          "class_error_among_emission_ready_spans": 14,
+          "count": 32,
+          "emission_ready_all_spans_correct": 24,
+          "exact_emitted": 10,
+          "frozen_nonclass_obstruction": 8,
+          "predicted": 25,
+          "raw_all_spans_correct": 26,
+          "raw_class_correct": 14
+        },
+        "True": {
+          "abstained": 12,
+          "blocked": 2,
+          "class_error_among_emission_ready_spans": 7,
+          "count": 32,
+          "emission_ready_all_spans_correct": 14,
+          "exact_emitted": 7,
+          "frozen_nonclass_obstruction": 18,
+          "predicted": 18,
+          "raw_all_spans_correct": 23,
+          "raw_class_correct": 15
+        }
+      },
+      "by_template": {
+        "actor_condition_modal_action_object": {
+          "blocked": 1,
+          "class_error_among_emission_ready_spans": 2,
+          "count": 8,
+          "emission_ready_all_spans_correct": 6,
+          "exact_emitted": 4,
+          "frozen_nonclass_obstruction": 2,
+          "predicted": 7,
+          "raw_all_spans_correct": 6,
+          "raw_class_correct": 5
+        },
+        "actor_modal_action_object_condition": {
+          "abstained": 3,
+          "class_error_among_emission_ready_spans": 2,
+          "count": 8,
+          "emission_ready_all_spans_correct": 5,
+          "exact_emitted": 3,
+          "frozen_nonclass_obstruction": 3,
+          "predicted": 5,
+          "raw_all_spans_correct": 7,
+          "raw_class_correct": 5
+        },
+        "actor_possessive_gerund_object_modal_condition": {
+          "abstained": 5,
+          "class_error_among_emission_ready_spans": 2,
+          "count": 8,
+          "emission_ready_all_spans_correct": 3,
+          "exact_emitted": 1,
+          "frozen_nonclass_obstruction": 5,
+          "predicted": 3,
+          "raw_all_spans_correct": 8,
+          "raw_class_correct": 3
+        },
+        "condition_actor_modal_action_object": {
+          "abstained": 3,
+          "class_error_among_emission_ready_spans": 3,
+          "count": 8,
+          "emission_ready_all_spans_correct": 4,
+          "exact_emitted": 1,
+          "frozen_nonclass_obstruction": 4,
+          "predicted": 5,
+          "raw_all_spans_correct": 7,
+          "raw_class_correct": 4
+        },
+        "condition_actor_possessive_gerund_object_modal": {
+          "class_error_among_emission_ready_spans": 5,
+          "count": 8,
+          "emission_ready_all_spans_correct": 7,
+          "exact_emitted": 2,
+          "frozen_nonclass_obstruction": 1,
+          "predicted": 8,
+          "raw_all_spans_correct": 7,
+          "raw_class_correct": 2
+        },
+        "condition_modal_actor_action_object": {
+          "blocked": 1,
+          "class_error_among_emission_ready_spans": 4,
+          "count": 8,
+          "emission_ready_all_spans_correct": 7,
+          "exact_emitted": 3,
+          "frozen_nonclass_obstruction": 1,
+          "predicted": 7,
+          "raw_all_spans_correct": 7,
+          "raw_class_correct": 3
+        },
+        "gerund_object_agent_modal_condition": {
+          "abstained": 6,
+          "count": 8,
+          "emission_ready_all_spans_correct": 0,
+          "frozen_nonclass_obstruction": 8,
+          "predicted": 2,
+          "raw_all_spans_correct": 0,
+          "raw_class_correct": 3
+        },
+        "modal_actor_action_object_condition": {
+          "abstained": 2,
+          "class_error_among_emission_ready_spans": 3,
+          "count": 8,
+          "emission_ready_all_spans_correct": 6,
+          "exact_emitted": 3,
+          "frozen_nonclass_obstruction": 2,
+          "predicted": 6,
+          "raw_all_spans_correct": 7,
+          "raw_class_correct": 4
+        }
+      },
+      "by_true_class": {
+        "F": {
+          "abstained": 7,
+          "blocked": 1,
+          "class_error_among_emission_ready_spans": 7,
+          "count": 21,
+          "emission_ready_all_spans_correct": 11,
+          "exact_emitted": 4,
+          "frozen_nonclass_obstruction": 10,
+          "predicted": 13,
+          "raw_all_spans_correct": 16,
+          "raw_class_correct": 8
+        },
+        "O": {
+          "abstained": 6,
+          "class_error_among_emission_ready_spans": 9,
+          "count": 22,
+          "emission_ready_all_spans_correct": 14,
+          "exact_emitted": 5,
+          "frozen_nonclass_obstruction": 8,
+          "predicted": 16,
+          "raw_all_spans_correct": 17,
+          "raw_class_correct": 9
+        },
+        "P": {
+          "abstained": 6,
+          "blocked": 1,
+          "class_error_among_emission_ready_spans": 5,
+          "count": 21,
+          "emission_ready_all_spans_correct": 13,
+          "exact_emitted": 8,
+          "frozen_nonclass_obstruction": 8,
+          "predicted": 14,
+          "raw_all_spans_correct": 16,
+          "raw_class_correct": 12
+        }
+      },
+      "counts": {
+        "class_correct_outside_emission_ready_ceiling": 12,
+        "class_error_among_emission_ready_spans": 21,
+        "emission_ready_all_spans_correct": 38,
+        "emitted_span_incorrect": 5,
+        "exact_emitted": 17,
+        "frozen_nonclass_obstruction": 26,
+        "learned_refusal": 19,
+        "raw_all_spans_correct": 49,
+        "raw_class_correct": 29,
+        "spans_correct_but_not_emitted": 11,
+        "structural_block": 2
+      },
+      "emission_ready_exact_span_ids": [
+        "source:079e1d82d60cddbee3ee1cd3f48a15c0f5c1da3972d43b1224bb9f5d9493c9d0",
+        "source:cc604832fd592ff86d65193425caeba3a9936e64c870dcd74cf156a540929a01",
+        "source:ecd5bbbdcfa03540d8c5ca835b7934e92c5c7caee3522e2349ce15ed2a75bc7e",
+        "source:12000a64577481d03ee20b6d7479d5eda18e3642f177c6c96fd8ef50a71e91f1",
+        "source:02bc12fb281cba9000a0e33d1ce21766435759c1ee79ee29f878fa4714555487",
+        "source:9029dff9e68c28a2ebb23d7046acd31a672718fd7a33e682f4a43ce2ec066a07",
+        "source:702e7c77fd246319e2c8c1ff8366fe0397a9d4aa7013c2e92f0eae6abb006784",
+        "source:159f43ea6c039a5c2f71b39020bd63eaa2f7d7b6659b955e0de5f948fa7bc745",
+        "source:e0502c557f460113e4f7c692ba90e21b676d9163bcf3a23437aad5803758d4e2",
+        "source:82c71c38348a0eec3ebe2f59df0835eba726d1fe62153773ce34f5c7ab4cad71",
+        "source:6e4aeabe1a7779936e6dd11c163a91e89749b24547cdb248d4266ab0a907cd23",
+        "source:82efd2949e5e42c2c40909a75e8d0f4e53073e7698c279be010cb56d22093009",
+        "source:d1b924d37eeb0d1da1a2ddf9325fdc12b682c19b4511a9fa1632dcd9bea724e3",
+        "source:45525df2e327b8784a9cd220e5df4f4b0b6bc4db05ca3df3c05a0512fdb81256",
+        "source:97e94fe4569807156ba8431c2dd4d53ae5a29240ab90b340e5bca5165c8c9323",
+        "source:cd7ae60793a59f235f77c9ab2f8e092b2ff4aac034f416576665b2f92fadbc2f",
+        "source:704271c092441006fb5b29e696daeb1e531407f1f5819e17243b1f2a962ab88c",
+        "source:2eaee2ab705253ef42a4ccea115fb986dd131576c1e99aa302935c93672ff236",
+        "source:ad7e79965482b3739a566246b62de8eb90abc079d69ac3061a1b2187847d5885",
+        "source:4d9c524e3f29ccfce0cc96dcd4d18a917622775cce2646e717991c421ac8092c",
+        "source:8fb0e5c5369b489aefe70a23fb682f590fc904bc3ae08de481767fb2e99017b0",
+        "source:8f17104c6b0b9d0656b90f2f78438ccd7fbfe42261c3238c933ac118861644b6",
+        "source:6eb263f29ef90bf7022864c7c7f17651cf5999d4b9ab1076a9e2428ce13f9de8",
+        "source:a52293d5262753c946a40e8f9f189c3f2633097c6e64fb8c877693491316e1ac",
+        "source:7447f8c1ada84aa669844b01da3ec29051f1897c8b457b42ef6a79b30b517aee",
+        "source:8a204a003a2c34733e0d6666e3b750d4f4d504fc9cb7092f0a5713d56a36c535",
+        "source:ea8c11b37548b9457b7df43b769a4b16913b08da366216c884ce28e65660f16a",
+        "source:219a3eb6463f0e01c670d0056b75fc3283a3750c312dfd6986eaa313eae061a6",
+        "source:f57dcfa3b45eac8d61ffc48adee879fa4e6f1b546e54c649c2858fda560368f1",
+        "source:6d0eae2f49573a949cc35256a18c8eb22b8e029f3b6ba98c627da772d9c5165a",
+        "source:cb536da4e6f4c22b0c90027a1aed964c1229aab76696404aca765827ed3324d1",
+        "source:26ca525d917b0d3aed659a6ad2e62d1c1c7383fcbe0ab039a8370be8fba37ed4",
+        "source:bb92045e553a3b7612c3abe3bb9b1f18b1ed699fad28127e3eef4ba2b892bc3d",
+        "source:404c68cb222d20431325303f0584ed541b9ecbc6e9a81fb1d544770abb6477a9",
+        "source:aadf998e68d9a967499587339577f79b6b17737698ad93c5de90b2cc0a0a1448",
+        "source:22f05208d3964c94849c34baa887f530d99ea0ba39901ee6d0dc5ff1c9dbc74d",
+        "source:f17a00931dad50c42ee4e4850178b9da5824a15340cb6b22ac7d7af71eb8b253",
+        "source:a88bd8132396500508cd4961eab26c143007aeea0b8115d8005e9d52240b444a"
+      ],
+      "gerund_agent_cases": [
+        {
+          "class_correct": false,
+          "facet_matches": {
+            "action": false,
+            "actor": true,
+            "condition": true,
+            "modality": true,
+            "object": true
+          },
+          "id": "source:0470b688225d2b0bea5298cc7e64e5ae733991db34aa432e6cdd4c08d6a9dbce",
+          "status": "abstained"
+        },
+        {
+          "class_correct": false,
+          "facet_matches": {
+            "action": false,
+            "actor": true,
+            "condition": true,
+            "modality": true,
+            "object": true
+          },
+          "id": "source:3279c29c9a2b66cb47e487277d6112a165538aa23a628e3231de1098c959136b",
+          "status": "abstained"
+        },
+        {
+          "class_correct": false,
+          "facet_matches": {
+            "action": false,
+            "actor": true,
+            "condition": true,
+            "modality": true,
+            "object": true
+          },
+          "id": "source:01fa00d885b02e1853adfc21c5b49285589d4d54c7245039fe14e6cc1143b4c8",
+          "status": "abstained"
+        },
+        {
+          "class_correct": true,
+          "facet_matches": {
+            "action": false,
+            "actor": true,
+            "condition": true,
+            "modality": true,
+            "object": false
+          },
+          "id": "source:8a10bedab475ce1ebc3c78d249647f1c0f9107e4dea3fd4ea6a989fb33fc7a33",
+          "status": "abstained"
+        },
+        {
+          "class_correct": true,
+          "facet_matches": {
+            "action": false,
+            "actor": true,
+            "condition": true,
+            "modality": true,
+            "object": true
+          },
+          "id": "source:ee9d347b3b858f495a0ccecf15f3c92b3c00566a8ccd64feaad340be33c0ba7c",
+          "status": "predicted"
+        },
+        {
+          "class_correct": false,
+          "facet_matches": {
+            "action": false,
+            "actor": true,
+            "condition": true,
+            "modality": true,
+            "object": true
+          },
+          "id": "source:e023ac5fda78fd095c519afafe2ba3e46910c1a8f16b40312ef90469f6b30a76",
+          "status": "abstained"
+        },
+        {
+          "class_correct": true,
+          "facet_matches": {
+            "action": false,
+            "actor": true,
+            "condition": true,
+            "modality": true,
+            "object": true
+          },
+          "id": "source:7a8cb185050402bca66b9cd3459af7c33571e58fb0a70b1e323ae9ddb34764b0",
+          "status": "abstained"
+        },
+        {
+          "class_correct": false,
+          "facet_matches": {
+            "action": false,
+            "actor": true,
+            "condition": true,
+            "modality": true,
+            "object": true
+          },
+          "id": "source:a9a5da75644bf1c559719ee0396f2cbee8911665027b19a81255cd239feb0efd",
+          "status": "predicted"
+        }
+      ],
+      "raw_facet_error_counts": {
+        "action": 10,
+        "actor": 3,
+        "condition": 1,
+        "modality": 0,
+        "object": 3
+      }
+    },
+    "predicted_trigger": {
+      "by_nonempty_condition": {
+        "False": {
+          "abstained": 7,
+          "class_error_among_emission_ready_spans": 6,
+          "count": 32,
+          "emission_ready_all_spans_correct": 24,
+          "exact_emitted": 18,
+          "frozen_nonclass_obstruction": 8,
+          "predicted": 25,
+          "raw_all_spans_correct": 26,
+          "raw_class_correct": 24
+        },
+        "True": {
+          "abstained": 12,
+          "blocked": 2,
+          "class_error_among_emission_ready_spans": 2,
+          "count": 32,
+          "emission_ready_all_spans_correct": 14,
+          "exact_emitted": 12,
+          "frozen_nonclass_obstruction": 18,
+          "predicted": 18,
+          "raw_all_spans_correct": 23,
+          "raw_class_correct": 23
+        }
+      },
+      "by_template": {
+        "actor_condition_modal_action_object": {
+          "blocked": 1,
+          "class_error_among_emission_ready_spans": 2,
+          "count": 8,
+          "emission_ready_all_spans_correct": 6,
+          "exact_emitted": 4,
+          "frozen_nonclass_obstruction": 2,
+          "predicted": 7,
+          "raw_all_spans_correct": 6,
+          "raw_class_correct": 5
+        },
+        "actor_modal_action_object_condition": {
+          "abstained": 3,
+          "class_error_among_emission_ready_spans": 1,
+          "count": 8,
+          "emission_ready_all_spans_correct": 5,
+          "exact_emitted": 4,
+          "frozen_nonclass_obstruction": 3,
+          "predicted": 5,
+          "raw_all_spans_correct": 7,
+          "raw_class_correct": 7
+        },
+        "actor_possessive_gerund_object_modal_condition": {
+          "abstained": 5,
+          "count": 8,
+          "emission_ready_all_spans_correct": 3,
+          "exact_emitted": 3,
+          "frozen_nonclass_obstruction": 5,
+          "predicted": 3,
+          "raw_all_spans_correct": 8,
+          "raw_class_correct": 6
+        },
+        "condition_actor_modal_action_object": {
+          "abstained": 3,
+          "class_error_among_emission_ready_spans": 1,
+          "count": 8,
+          "emission_ready_all_spans_correct": 4,
+          "exact_emitted": 3,
+          "frozen_nonclass_obstruction": 4,
+          "predicted": 5,
+          "raw_all_spans_correct": 7,
+          "raw_class_correct": 5
+        },
+        "condition_actor_possessive_gerund_object_modal": {
+          "count": 8,
+          "emission_ready_all_spans_correct": 7,
+          "exact_emitted": 7,
+          "frozen_nonclass_obstruction": 1,
+          "predicted": 8,
+          "raw_all_spans_correct": 7,
+          "raw_class_correct": 8
+        },
+        "condition_modal_actor_action_object": {
+          "blocked": 1,
+          "class_error_among_emission_ready_spans": 1,
+          "count": 8,
+          "emission_ready_all_spans_correct": 7,
+          "exact_emitted": 6,
+          "frozen_nonclass_obstruction": 1,
+          "predicted": 7,
+          "raw_all_spans_correct": 7,
+          "raw_class_correct": 6
+        },
+        "gerund_object_agent_modal_condition": {
+          "abstained": 6,
+          "count": 8,
+          "emission_ready_all_spans_correct": 0,
+          "frozen_nonclass_obstruction": 8,
+          "predicted": 2,
+          "raw_all_spans_correct": 0,
+          "raw_class_correct": 5
+        },
+        "modal_actor_action_object_condition": {
+          "abstained": 2,
+          "class_error_among_emission_ready_spans": 3,
+          "count": 8,
+          "emission_ready_all_spans_correct": 6,
+          "exact_emitted": 3,
+          "frozen_nonclass_obstruction": 2,
+          "predicted": 6,
+          "raw_all_spans_correct": 7,
+          "raw_class_correct": 5
+        }
+      },
+      "by_true_class": {
+        "F": {
+          "abstained": 7,
+          "blocked": 1,
+          "class_error_among_emission_ready_spans": 2,
+          "count": 21,
+          "emission_ready_all_spans_correct": 11,
+          "exact_emitted": 9,
+          "frozen_nonclass_obstruction": 10,
+          "predicted": 13,
+          "raw_all_spans_correct": 16,
+          "raw_class_correct": 17
+        },
+        "O": {
+          "abstained": 6,
+          "class_error_among_emission_ready_spans": 5,
+          "count": 22,
+          "emission_ready_all_spans_correct": 14,
+          "exact_emitted": 9,
+          "frozen_nonclass_obstruction": 8,
+          "predicted": 16,
+          "raw_all_spans_correct": 17,
+          "raw_class_correct": 13
+        },
+        "P": {
+          "abstained": 6,
+          "blocked": 1,
+          "class_error_among_emission_ready_spans": 1,
+          "count": 21,
+          "emission_ready_all_spans_correct": 13,
+          "exact_emitted": 12,
+          "frozen_nonclass_obstruction": 8,
+          "predicted": 14,
+          "raw_all_spans_correct": 16,
+          "raw_class_correct": 17
+        }
+      },
+      "counts": {
+        "class_correct_outside_emission_ready_ceiling": 17,
+        "class_error_among_emission_ready_spans": 8,
+        "emission_ready_all_spans_correct": 38,
+        "emitted_span_incorrect": 5,
+        "exact_emitted": 30,
+        "frozen_nonclass_obstruction": 26,
+        "learned_refusal": 19,
+        "raw_all_spans_correct": 49,
+        "raw_class_correct": 47,
+        "spans_correct_but_not_emitted": 11,
+        "structural_block": 2
+      },
+      "emission_ready_exact_span_ids": [
+        "source:079e1d82d60cddbee3ee1cd3f48a15c0f5c1da3972d43b1224bb9f5d9493c9d0",
+        "source:cc604832fd592ff86d65193425caeba3a9936e64c870dcd74cf156a540929a01",
+        "source:ecd5bbbdcfa03540d8c5ca835b7934e92c5c7caee3522e2349ce15ed2a75bc7e",
+        "source:12000a64577481d03ee20b6d7479d5eda18e3642f177c6c96fd8ef50a71e91f1",
+        "source:02bc12fb281cba9000a0e33d1ce21766435759c1ee79ee29f878fa4714555487",
+        "source:9029dff9e68c28a2ebb23d7046acd31a672718fd7a33e682f4a43ce2ec066a07",
+        "source:702e7c77fd246319e2c8c1ff8366fe0397a9d4aa7013c2e92f0eae6abb006784",
+        "source:159f43ea6c039a5c2f71b39020bd63eaa2f7d7b6659b955e0de5f948fa7bc745",
+        "source:e0502c557f460113e4f7c692ba90e21b676d9163bcf3a23437aad5803758d4e2",
+        "source:82c71c38348a0eec3ebe2f59df0835eba726d1fe62153773ce34f5c7ab4cad71",
+        "source:6e4aeabe1a7779936e6dd11c163a91e89749b24547cdb248d4266ab0a907cd23",
+        "source:82efd2949e5e42c2c40909a75e8d0f4e53073e7698c279be010cb56d22093009",
+        "source:d1b924d37eeb0d1da1a2ddf9325fdc12b682c19b4511a9fa1632dcd9bea724e3",
+        "source:45525df2e327b8784a9cd220e5df4f4b0b6bc4db05ca3df3c05a0512fdb81256",
+        "source:97e94fe4569807156ba8431c2dd4d53ae5a29240ab90b340e5bca5165c8c9323",
+        "source:cd7ae60793a59f235f77c9ab2f8e092b2ff4aac034f416576665b2f92fadbc2f",
+        "source:704271c092441006fb5b29e696daeb1e531407f1f5819e17243b1f2a962ab88c",
+        "source:2eaee2ab705253ef42a4ccea115fb986dd131576c1e99aa302935c93672ff236",
+        "source:ad7e79965482b3739a566246b62de8eb90abc079d69ac3061a1b2187847d5885",
+        "source:4d9c524e3f29ccfce0cc96dcd4d18a917622775cce2646e717991c421ac8092c",
+        "source:8fb0e5c5369b489aefe70a23fb682f590fc904bc3ae08de481767fb2e99017b0",
+        "source:8f17104c6b0b9d0656b90f2f78438ccd7fbfe42261c3238c933ac118861644b6",
+        "source:6eb263f29ef90bf7022864c7c7f17651cf5999d4b9ab1076a9e2428ce13f9de8",
+        "source:a52293d5262753c946a40e8f9f189c3f2633097c6e64fb8c877693491316e1ac",
+        "source:7447f8c1ada84aa669844b01da3ec29051f1897c8b457b42ef6a79b30b517aee",
+        "source:8a204a003a2c34733e0d6666e3b750d4f4d504fc9cb7092f0a5713d56a36c535",
+        "source:ea8c11b37548b9457b7df43b769a4b16913b08da366216c884ce28e65660f16a",
+        "source:219a3eb6463f0e01c670d0056b75fc3283a3750c312dfd6986eaa313eae061a6",
+        "source:f57dcfa3b45eac8d61ffc48adee879fa4e6f1b546e54c649c2858fda560368f1",
+        "source:6d0eae2f49573a949cc35256a18c8eb22b8e029f3b6ba98c627da772d9c5165a",
+        "source:cb536da4e6f4c22b0c90027a1aed964c1229aab76696404aca765827ed3324d1",
+        "source:26ca525d917b0d3aed659a6ad2e62d1c1c7383fcbe0ab039a8370be8fba37ed4",
+        "source:bb92045e553a3b7612c3abe3bb9b1f18b1ed699fad28127e3eef4ba2b892bc3d",
+        "source:404c68cb222d20431325303f0584ed541b9ecbc6e9a81fb1d544770abb6477a9",
+        "source:aadf998e68d9a967499587339577f79b6b17737698ad93c5de90b2cc0a0a1448",
+        "source:22f05208d3964c94849c34baa887f530d99ea0ba39901ee6d0dc5ff1c9dbc74d",
+        "source:f17a00931dad50c42ee4e4850178b9da5824a15340cb6b22ac7d7af71eb8b253",
+        "source:a88bd8132396500508cd4961eab26c143007aeea0b8115d8005e9d52240b444a"
+      ],
+      "gerund_agent_cases": [
+        {
+          "class_correct": false,
+          "facet_matches": {
+            "action": false,
+            "actor": true,
+            "condition": true,
+            "modality": true,
+            "object": true
+          },
+          "id": "source:0470b688225d2b0bea5298cc7e64e5ae733991db34aa432e6cdd4c08d6a9dbce",
+          "status": "abstained"
+        },
+        {
+          "class_correct": true,
+          "facet_matches": {
+            "action": false,
+            "actor": true,
+            "condition": true,
+            "modality": true,
+            "object": true
+          },
+          "id": "source:3279c29c9a2b66cb47e487277d6112a165538aa23a628e3231de1098c959136b",
+          "status": "abstained"
+        },
+        {
+          "class_correct": true,
+          "facet_matches": {
+            "action": false,
+            "actor": true,
+            "condition": true,
+            "modality": true,
+            "object": true
+          },
+          "id": "source:01fa00d885b02e1853adfc21c5b49285589d4d54c7245039fe14e6cc1143b4c8",
+          "status": "abstained"
+        },
+        {
+          "class_correct": false,
+          "facet_matches": {
+            "action": false,
+            "actor": true,
+            "condition": true,
+            "modality": true,
+            "object": false
+          },
+          "id": "source:8a10bedab475ce1ebc3c78d249647f1c0f9107e4dea3fd4ea6a989fb33fc7a33",
+          "status": "abstained"
+        },
+        {
+          "class_correct": true,
+          "facet_matches": {
+            "action": false,
+            "actor": true,
+            "condition": true,
+            "modality": true,
+            "object": true
+          },
+          "id": "source:ee9d347b3b858f495a0ccecf15f3c92b3c00566a8ccd64feaad340be33c0ba7c",
+          "status": "predicted"
+        },
+        {
+          "class_correct": false,
+          "facet_matches": {
+            "action": false,
+            "actor": true,
+            "condition": true,
+            "modality": true,
+            "object": true
+          },
+          "id": "source:e023ac5fda78fd095c519afafe2ba3e46910c1a8f16b40312ef90469f6b30a76",
+          "status": "abstained"
+        },
+        {
+          "class_correct": true,
+          "facet_matches": {
+            "action": false,
+            "actor": true,
+            "condition": true,
+            "modality": true,
+            "object": true
+          },
+          "id": "source:7a8cb185050402bca66b9cd3459af7c33571e58fb0a70b1e323ae9ddb34764b0",
+          "status": "abstained"
+        },
+        {
+          "class_correct": true,
+          "facet_matches": {
+            "action": false,
+            "actor": true,
+            "condition": true,
+            "modality": true,
+            "object": true
+          },
+          "id": "source:a9a5da75644bf1c559719ee0396f2cbee8911665027b19a81255cd239feb0efd",
+          "status": "predicted"
+        }
+      ],
+      "raw_facet_error_counts": {
+        "action": 10,
+        "actor": 3,
+        "condition": 1,
+        "modality": 0,
+        "object": 3
+      }
+    }
+  },
+  "review_kind": "Independent saved-file scoring/checkpoint/control-flow audit plus unchanged pure proposal owner validation; no model calls",
+  "schema": "frozen-trigger-readout-independent-results-review/v1",
+  "selected_steps": {
+    "global": 120,
+    "predicted_trigger": 240
+  }
+}

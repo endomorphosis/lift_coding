@@ -1,0 +1,340 @@
+{
+  "access": {
+    "access_phase": "posthoc after durable final outputs and successful training completion",
+    "canonical_source_or_index_edits": false,
+    "fresh_final_reference_body_parsed_now": true,
+    "new_model_calls": 0,
+    "new_optimizer_steps": 0,
+    "replay_execution_by_reviewer": false,
+    "shared_claim_mutations": false,
+    "source_or_runner_or_guardian_edits": false,
+    "tests_run_by_reviewer": 0
+  },
+  "actual_donor_control_metrics": {
+    "donor": {
+      "negative_count": 64,
+      "negative_emitted_proposal_count": 6,
+      "negative_incidental_block_count": 5,
+      "negative_learned_refusal_count": 53,
+      "positive_class_CE": 1.0937223267990455,
+      "positive_count": 64,
+      "positive_exact_count": 11,
+      "positive_raw_all_spans_exact": 49,
+      "positive_raw_modality_exact": 19
+    },
+    "global": {
+      "negative_count": 64,
+      "negative_emitted_proposal_count": 6,
+      "negative_incidental_block_count": 5,
+      "negative_learned_refusal_count": 53,
+      "positive_class_CE": 1.0830032690009783,
+      "positive_count": 64,
+      "positive_exact_count": 17,
+      "positive_raw_all_spans_exact": 49,
+      "positive_raw_modality_exact": 29,
+      "selected_steps": 120
+    },
+    "predicted_trigger": {
+      "negative_count": 64,
+      "negative_emitted_proposal_count": 6,
+      "negative_incidental_block_count": 5,
+      "negative_learned_refusal_count": 53,
+      "positive_class_CE": 0.6538583129617402,
+      "positive_count": 64,
+      "positive_exact_count": 30,
+      "positive_raw_all_spans_exact": 49,
+      "positive_raw_modality_exact": 47,
+      "selected_steps": 240
+    }
+  },
+  "actual_run_donor_custody": {
+    "adapter_counter_inventories": "Four Adam parameters all0empty/120/240steps exactly; no donor step continuation",
+    "checkpoint_count": 6,
+    "checkpoints": [
+      {
+        "adapter_steps": 0,
+        "bytes": 2402072,
+        "exact_original_donor_bytes": true,
+        "full_original_donor_Adam_equal": true,
+        "mode": "global",
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/checkpoint-0.json",
+        "sha256": "bf4cd32b77931af71711cff73b75b8efed16a52a75de455e9a9316725f806641"
+      },
+      {
+        "adapter_steps": 120,
+        "bytes": 2717024,
+        "exact_original_donor_bytes": true,
+        "full_original_donor_Adam_equal": true,
+        "mode": "global",
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/checkpoint-120.json",
+        "sha256": "b9ce4e8e3fca1284060905d1892fc89cb15a36925436af528eae787cccbc6f9c"
+      },
+      {
+        "adapter_steps": 240,
+        "bytes": 2716297,
+        "exact_original_donor_bytes": true,
+        "full_original_donor_Adam_equal": true,
+        "mode": "global",
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/checkpoint-240.json",
+        "sha256": "ee8c8afebd43a7223b9e1ef2d0486f286dee54acfcd17ac0cfde8021d4f7434c"
+      },
+      {
+        "adapter_steps": 0,
+        "bytes": 2402094,
+        "exact_original_donor_bytes": true,
+        "full_original_donor_Adam_equal": true,
+        "mode": "predicted_trigger",
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-0.json",
+        "sha256": "297c280524514ee165ee28d7ca48dbd2a342eb435cc66641e8ff9e016627ead2"
+      },
+      {
+        "adapter_steps": 120,
+        "bytes": 2714696,
+        "exact_original_donor_bytes": true,
+        "full_original_donor_Adam_equal": true,
+        "mode": "predicted_trigger",
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-120.json",
+        "sha256": "9d9c78d58134381720997c60e70fa0e797320153d7d5bda45ee59d70975f9d63"
+      },
+      {
+        "adapter_steps": 240,
+        "bytes": 2714198,
+        "exact_original_donor_bytes": true,
+        "full_original_donor_Adam_equal": true,
+        "mode": "predicted_trigger",
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-240.json",
+        "sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f"
+      }
+    ],
+    "exact_original_donor_full_Adam_equal_in_all_six": true,
+    "original_donor_external_sha256": "9809ec3fd092536f8c4effb74d8a401dc5db9ff9a031952a1e3f92f9c7292c6e"
+  },
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py": {
+      "bytes": 29545,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py",
+      "sha256": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py": {
+      "bytes": 7804,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py",
+      "sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_trigger_readout.py": {
+      "bytes": 27145,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_trigger_readout.py",
+      "sha256": "983b69b8e293aa6211fd8322f9ba6bfe6fa5b8cb853c2d4d0cace1e7e5046344"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py": {
+      "bytes": 29993,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py",
+      "sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/experiment-plan.json": {
+      "bytes": 5538,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/experiment-plan.json",
+      "sha256": "0246fec8a0026ca38dcc46bc903ec655cfde8f474f39c142641d3a39f49a1881"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/final-inputs.json": {
+      "bytes": 62673,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/final-inputs.json",
+      "sha256": "066bc0a734292d45da468583c55677d9851e244f5a7949aedcc857796a14cb67"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/final-references.json": {
+      "bytes": 138097,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/final-references.json",
+      "sha256": "069a43b1295823c3ecaaab958a6402494d1dbd00679af97da05d7e466ef53209"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/initial-replay-source-binding.json": {
+      "bytes": 433,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/initial-replay-source-binding.json",
+      "sha256": "7601d5bc376576d9d4ad02292b908698775484ddb118b29c2591df8277ccf483"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/model-source-review.json": {
+      "bytes": 5129,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/model-source-review.json",
+      "sha256": "8ebc789bc3783b32fa26838db5e2f81d8d7e31e12acb40c5ce3a0cf645f0aa06"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/protocol-review.json": {
+      "bytes": 23579,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/protocol-review.json",
+      "sha256": "09dac9a689afc85824bec0f29ca6fe0131ac54fd29e0e2dc6cabc326ee8b339c"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/replay_readouts.py": {
+      "bytes": 4509,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/replay_readouts.py",
+      "sha256": "fd11bcc7de69b22071a98d85e47d4df9980603562b9ff7a3d1b3f90f6c50e642"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/replay_readouts_initial.py": {
+      "bytes": 4028,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/replay_readouts_initial.py",
+      "sha256": "5ab0b3c665c6d8797c2239f42eda4b3ffa3caaf90e4db07e4ee7a2147cf6fea5"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/run_trigger_experiment.py": {
+      "bytes": 19834,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/run_trigger_experiment.py",
+      "sha256": "8db24c4c0e39ebb106a72031fa53aa9f153fed94f1ddaf1b58ba7ef9ad093f00"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/selected-checkpoint-replay.json": {
+      "bytes": 1623,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/selected-checkpoint-replay.json",
+      "sha256": "9995964cdf0af0b35485b11b07bfe4c05bd61476a820a5ab640eab60a58cccd9"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/selection-inputs.json": {
+      "bytes": 63326,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/selection-inputs.json",
+      "sha256": "b2ceeddfffdd03d24f4647797fcf1cd1a75067d51957c4a093601cbef9c8e0b4"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/selection-references.json": {
+      "bytes": 138104,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/selection-references.json",
+      "sha256": "9a7e504b8e88bd2973ee6ccbdbc70212f2dbd9f850bef9c493590f32ad348c30"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/checkpoint-240.json": {
+      "bytes": 2202556,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/checkpoint-240.json",
+      "sha256": "9809ec3fd092536f8c4effb74d8a401dc5db9ff9a031952a1e3f92f9c7292c6e"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/donor-final-predictions.json": {
+      "bytes": 804729,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/donor-final-predictions.json",
+      "sha256": "3980b48a5b8d0f2518b25d3574bf69ce762fafbf508486d10149f425b610d3e8"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/donor-selection-predictions.json": {
+      "bytes": 786342,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/donor-selection-predictions.json",
+      "sha256": "83a27ff50d54259c0f6367d2ec026b54ebf7bb8ca57dd988f201399c3bf3221f"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/checkpoint-0.json": {
+      "bytes": 2402072,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/checkpoint-0.json",
+      "sha256": "bf4cd32b77931af71711cff73b75b8efed16a52a75de455e9a9316725f806641"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/checkpoint-120.json": {
+      "bytes": 2717024,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/checkpoint-120.json",
+      "sha256": "b9ce4e8e3fca1284060905d1892fc89cb15a36925436af528eae787cccbc6f9c"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/checkpoint-240.json": {
+      "bytes": 2716297,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/checkpoint-240.json",
+      "sha256": "ee8c8afebd43a7223b9e1ef2d0486f286dee54acfcd17ac0cfde8021d4f7434c"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/final-predictions.json": {
+      "bytes": 839314,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/final-predictions.json",
+      "sha256": "e81ac2ede89e1d6fada5ff0ca56e3881ba13e71520a09e620095fdeafd65d700"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/selected.json": {
+      "bytes": 4060,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/selected.json",
+      "sha256": "ca40c228d33a96907a340e89cceb37c52f701ca5a5a67f462b43043c71922b63"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/selection-predictions-0.json": {
+      "bytes": 821004,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/selection-predictions-0.json",
+      "sha256": "6f0948efa315d5121a994f42f64e9d5000ca19c442e93bd9268fb82616401645"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/selection-predictions-120.json": {
+      "bytes": 820916,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/selection-predictions-120.json",
+      "sha256": "e7f3cce71016562c6ba07c87cdccbd9b5f9546a438848b9f118e7aab5195e7d7"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/selection-predictions-240.json": {
+      "bytes": 820814,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/selection-predictions-240.json",
+      "sha256": "45e0610ff8d301e77aa6cd0c011db780a5a48e1771c29ad1109977ab57106e2f"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-0.json": {
+      "bytes": 2402094,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-0.json",
+      "sha256": "297c280524514ee165ee28d7ca48dbd2a342eb435cc66641e8ff9e016627ead2"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-120.json": {
+      "bytes": 2714696,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-120.json",
+      "sha256": "9d9c78d58134381720997c60e70fa0e797320153d7d5bda45ee59d70975f9d63"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-240.json": {
+      "bytes": 2714198,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-240.json",
+      "sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/final-predictions.json": {
+      "bytes": 839902,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/final-predictions.json",
+      "sha256": "bb0256230a1291775a6bdd4a433301e6815cfdd47053980d2ded91df958a4489"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/selected.json": {
+      "bytes": 4084,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/selected.json",
+      "sha256": "a62454d5f098a759e3c3e0652ef12ff96d3e714414ac71f9791b6c686655b50b"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/selection-predictions-0.json": {
+      "bytes": 822412,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/selection-predictions-0.json",
+      "sha256": "1a095ba51b82a200c666b56cd887a5e2408fea274b0a006745b2d4a1467c1fc4"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/selection-predictions-120.json": {
+      "bytes": 821788,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/selection-predictions-120.json",
+      "sha256": "597dcf8e3103a4c50d0343a4cabc359852b229f0dff23a58b12acd5c7b4a4763"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/selection-predictions-240.json": {
+      "bytes": 821522,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/selection-predictions-240.json",
+      "sha256": "b47a3a2dc70a023e18ca6f58c97db24802d503f706ce52cafbf909cbf038fd18"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/training-results.json": {
+      "bytes": 69574,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/training-results.json",
+      "sha256": "8bb4d85371ce1fca3c7f4f6f0eeef33e43469bfb1122206cde2d83c4c7d97705"
+    }
+  },
+  "findings": [],
+  "frozen_nonclass_exact_row_comparisons": 1024,
+  "initial_replay": {
+    "external_binding": {
+      "bytes": 433,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/initial-replay-source-binding.json",
+      "sha256": "7601d5bc376576d9d4ad02292b908698775484ddb118b29c2591df8277ccf483"
+    },
+    "limitations": [
+      "Initial receipt had no embedded source/input/expected-panel artifact bindings and no explicitfsync; exact initial source and receipt bytes are preserved and externally bound separately",
+      "Current strengthened source has not been executed by this reviewer; root upcoming Hub readback must produce its own current hash-bound durable receipt"
+    ],
+    "receipt": {
+      "bytes": 1623,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/selected-checkpoint-replay.json",
+      "sha256": "9995964cdf0af0b35485b11b07bfe4c05bd61476a820a5ab640eab60a58cccd9"
+    },
+    "root_reported_status": "passed256outputs",
+    "source": {
+      "bytes": 4028,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/replay_readouts_initial.py",
+      "sha256": "5ab0b3c665c6d8797c2239f42eda4b3ffa3caaf90e4db07e4ee7a2147cf6fea5"
+    }
+  },
+  "limits": [
+    "Control metric recomputation consumes existing saved predictions; it does not execute or certify new predictions",
+    "Exact output replay checks reproducibility and checkpoint custody, not statutory semantics or reviewed legal gold",
+    "Model remains experimental source-only zero-authority occurrence proposal with caller attachment premise"
+  ],
+  "metric_checks": "Pure scorer extracted without model import reproduced all donor/arm final and donor/all6 arm selection metrics; correct selected120global/240trigger; each initial0snapshot identical donor class/core; all1024selection+final donor/nonclass comparisons exact",
+  "passed": true,
+  "replay_source": {
+    "bytes": 4509,
+    "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/replay_readouts.py",
+    "sha256": "fd11bcc7de69b22071a98d85e47d4df9980603562b9ff7a3d1b3f90f6c50e642"
+  },
+  "review_kind": "Independent static current replay source plus pure posthoc artifact, metric and exact donor-custody checks; no model invocation",
+  "schema": "frozen-trigger-readout-replay-source-review/v1",
+  "source_checks": {
+    "RNG_and_modes": "CPU RNG is cloned before restore and compared immediately after restore and after all predictions. Strict resave before/after predictions includes wrapper mode, original donor text and adapter+full Adam; prediction API restores modes in finally while donor submodule modes remain frozen.",
+    "checkpoint_custody": "Selected exact raw SHA must match before parse; original strict full adapter+Adam restore validates closed schema, finite shapes/moments/progress/source recipe and embedded exact donor; immediately resaved checkpoint must exactly equal original.",
+    "current_receipt_binding_and_durability": "Successful current receipt includes replay source/input/checkpoint/expected-panel hashes and producer pins; exclusive output file is flushed/fsynced and parent directory fsynced before completion. Optional downloaded checkpointroot must still match original selected raw hash.",
+    "full_output_equality": "Exactly128complete records perarm are compared with stored final panels, including IDs/groups/source digests, class logits and every prediction field/proposal. Actual source SHA is checked by predictor before execution. Equality verifies256stored source-only outputs, not target-law semantics.",
+    "read_only_forward": "Typed TRAIN constructors, adapter/donor training steps, donor label adapter, three semantic parser helpers and optimizer.step patched denied during all predictions. No new fit or donor optimizer continuation; CPU2 deterministic algorithms, no initializedCUDA, no training lease claim.",
+    "zero_authority": "Each output requires null formal_output and false semantic/accept/qualified/formal/proof/target-access flags; every proposed admission mask must be zero."
+  }
+}

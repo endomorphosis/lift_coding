@@ -1,0 +1,394 @@
+{
+  "admission_masks": {
+    "contrastive_supervision": 0,
+    "fidelity_evaluation": 0,
+    "proof_supervision": 0,
+    "strong_semantic_fit": 0,
+    "weak_decoder_fit": 0
+  },
+  "anagrams": "Change one preannotated operator word; TRAIN rotateleft1, selection rotateleft2, finalreverse. Preserve token order/spaces/UTF8length/per-tokenbyte multiset. Distinct permutations by split. Unsupported means outside authored profile, not legally false.",
+  "balance": "512TRAINpositives:64/template and16/nullablecell/template; finite aliases and negative categories16/template.64evaluationpositives:8/template,2/nullablecell/template; finite aliases and negative categories2/template. O/P/F as close as integer counts permit. Complete joint count ledgers retained in manifest.",
+  "batch_size": 16,
+  "caller_attachment": "Explicit rule|statement caller premise inherited by each positive/negative pair, never learned. Copy to output only when a predicted condition is present; otherwise null.",
+  "comparison_owner": "Root numerical runner defines the separately reviewed matched global versus learned-trigger readout; no model initialized or owner selected by corpus construction.",
+  "final_reference_barrier": "Author construction and mechanical transport validation use all640 positive references. The root numerical runner must durably freeze both selections/checkpoints before parsing fresh final-references.json, and durably save both final prediction panels before scoring. This is not an authors-blind final-label claim.",
+  "finite_modal_aliases": {
+    "F": [
+      "must not",
+      "shall not",
+      "is forbidden to",
+      "is prohibited from"
+    ],
+    "O": [
+      "shall",
+      "must",
+      "is required to",
+      "has a duty to"
+    ],
+    "P": [
+      "may",
+      "is permitted to",
+      "is authorized to",
+      "has permission to"
+    ]
+  },
+  "fresh_declared_lexicons": {
+    "final": {
+      "actions": [
+        [
+          "authorize",
+          "authorizing"
+        ],
+        [
+          "withdraw",
+          "withdrawing"
+        ],
+        [
+          "reject",
+          "rejecting"
+        ],
+        [
+          "amend",
+          "amending"
+        ],
+        [
+          "cancel",
+          "canceling"
+        ],
+        [
+          "visibly mark",
+          "visibly marking"
+        ],
+        [
+          "firmly endorse",
+          "firmly endorsing"
+        ],
+        [
+          "directly summarize",
+          "directly summarizing"
+        ]
+      ],
+      "actors": [
+        "pimento professor",
+        "sienna lecturer",
+        "vervain tutor",
+        "nutmeg pedagogue",
+        "hops instructor",
+        "clover educator",
+        "nettle trainer",
+        "sorrel dean",
+        "fennel principal",
+        "oregano rector",
+        "thyme provost",
+        "rosemary chancellor",
+        "marjoram fellow",
+        "bay sage",
+        "sumac docent",
+        "étoile scholar"
+      ],
+      "conditions": [
+        "petition matures",
+        "validation completes",
+        "audience assembles",
+        "sanction lapses",
+        "appeal concludes",
+        "dispatch ceases",
+        "succès emerges",
+        "consensus develops"
+      ],
+      "exception": "additional exemption applies",
+      "objects": [
+        "aubergine digest",
+        "chartreuse thesis",
+        "ferruginous study",
+        "mauve audit",
+        "olive finding",
+        "khaki assessment",
+        "magenta judgment",
+        "burgundy opinion",
+        "tawny testimony",
+        "scarlet evidence",
+        "russet exhibit",
+        "ecru syllabus",
+        "viridian curriculum",
+        "tansy lesson",
+        "amaranth evaluation",
+        "étoile decision"
+      ]
+    },
+    "selection": {
+      "actions": [
+        [
+          "forward",
+          "forwarding"
+        ],
+        [
+          "collect",
+          "collecting"
+        ],
+        [
+          "resolve",
+          "resolving"
+        ],
+        [
+          "record",
+          "recording"
+        ],
+        [
+          "approve",
+          "approving"
+        ],
+        [
+          "thoroughly screen",
+          "thoroughly screening"
+        ],
+        [
+          "politely acknowledge",
+          "politely acknowledging"
+        ],
+        [
+          "evenly distribute",
+          "evenly distributing"
+        ]
+      ],
+      "actors": [
+        "dolomite mechanic",
+        "fluorite carpenter",
+        "garnet musician",
+        "zircon photographer",
+        "spinel illustrator",
+        "pyrite designer",
+        "selenite artisan",
+        "chalk physician",
+        "basalt nurse",
+        "limestone dentist",
+        "mica hygienist",
+        "andesite therapist",
+        "calcite nutritionist",
+        "pumice radiologist",
+        "serpentine paramedic",
+        "éphémère anesthetist"
+      ],
+      "conditions": [
+        "eligibility continues",
+        "payment succeeds",
+        "authorization ends",
+        "registration renews",
+        "notice returns",
+        "objection subsides",
+        "vérité holds",
+        "mandate activates"
+      ],
+      "exception": "auxiliary dispensation applies",
+      "objects": [
+        "dolomite log",
+        "fluorite tally",
+        "garnet inventory",
+        "zircon catalogue",
+        "spinel checklist",
+        "pyrite directory",
+        "selenite database",
+        "chalk file",
+        "basalt document",
+        "limestone dossier",
+        "mica archive",
+        "andesite analysis",
+        "calcite survey",
+        "pumice specification",
+        "serpentine blueprint",
+        "éphémère protocol"
+      ]
+    },
+    "train": {
+      "actions": [
+        [
+          "assess",
+          "assessing"
+        ],
+        [
+          "dispatch",
+          "dispatching"
+        ],
+        [
+          "verify",
+          "verifying"
+        ],
+        [
+          "retain",
+          "retaining"
+        ],
+        [
+          "release",
+          "releasing"
+        ],
+        [
+          "systematically measure",
+          "systematically measuring"
+        ],
+        [
+          "promptly transmit",
+          "promptly transmitting"
+        ],
+        [
+          "deliberately revise",
+          "deliberately revising"
+        ]
+      ],
+      "actors": [
+        "juniper librarian",
+        "acacia dispatcher",
+        "cypress accountant",
+        "larch botanist",
+        "sequoia geologist",
+        "spruce pharmacist",
+        "palm chemist",
+        "beech optician",
+        "poplar architect",
+        "ginkgo historian",
+        "mulberry translator",
+        "sycamore engineer",
+        "chestnut researcher",
+        "baobab statistician",
+        "tamarind technician",
+        "églantier editor"
+      ],
+      "conditions": [
+        "approval arrives",
+        "consent persists",
+        "funding clears",
+        "signature matches",
+        "quota suffices",
+        "licence expires",
+        "échéance approaches",
+        "coverage extends"
+      ],
+      "exception": "supplementary authorization applies",
+      "objects": [
+        "mulberry application",
+        "juniper agenda",
+        "cypress account",
+        "larch budget",
+        "sequoia invoice",
+        "spruce license",
+        "palm permit",
+        "beech allocation",
+        "poplar report",
+        "ginkgo statement",
+        "sycamore resolution",
+        "chestnut amendment",
+        "baobab proposal",
+        "tamarind request",
+        "acacia contract",
+        "églantier agreement"
+      ]
+    }
+  },
+  "fresh_exclusion": "All1280 earlier source strings and640groups, all observed earlier facet strings and full declared earlier facet vocabularies, plus semantic-role/object/action/condition-head vocabulary are excluded. New splits also have disjoint normalized facet values and declared semantic heads; no prefix-only replacement of an old identity.",
+  "gerund_modal_aliases": {
+    "F": "is prohibited",
+    "O": "is required",
+    "P": "is permitted"
+  },
+  "independent_legal_review": false,
+  "infinitive_modal_aliases": {
+    "F": "is forbidden",
+    "O": "is obligatory",
+    "P": "is permissible"
+  },
+  "law_source_semantics_verified": false,
+  "legal_gold": false,
+  "negative_categories": [
+    "modal_deletion",
+    "modal_misspelling",
+    "extra_exception",
+    "second_rule"
+  ],
+  "negative_per_batch": 8,
+  "numerical_model_encoder_optimizer_prover_calls": 0,
+  "old_source_bindings": [
+    {
+      "bytes": 30999,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/corpus-builder.py",
+      "sha256": "ef654d25b51ea5addc5e91448664aee9c1c470335f7a7097c5d464747d2d6631"
+    },
+    {
+      "bytes": 489421,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/train-inputs.json",
+      "sha256": "0df9ab64e794f606a3d9ab87002c78bc49e58bdc24969bf3bc62a7fabb44b3bc"
+    },
+    {
+      "bytes": 1090392,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/train-references.json",
+      "sha256": "63140b0b8daae2260f911dde653e604d1fb758416cf3721da3b81cf4c53c6789"
+    },
+    {
+      "bytes": 61364,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/selection-inputs.json",
+      "sha256": "48f891f5ada515e7b1511e6395c107ee8c7ecfcede3618da417376383eca1518"
+    },
+    {
+      "bytes": 136304,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/selection-references.json",
+      "sha256": "ea5762e4c35ba452c60286ee01b4ec21df7a12e0a6c6f50780bfb1822a6dcddd"
+    },
+    {
+      "bytes": 61725,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-inputs.json",
+      "sha256": "1af9757054e2ae6344dcbd2e3834c21808cbe998e79ace9b9ff34383d3020b55"
+    },
+    {
+      "bytes": 136311,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-references.json",
+      "sha256": "9ff98c26fd03fc695b76b46de63b621a02765e981e43eca867cf01f51104abc9"
+    }
+  ],
+  "optimizer_steps_per_arm": 240,
+  "output_profile": "Single-rule predicted source-occurrence structure; no autoregressive formula-token output or512-token decoding budget.",
+  "positive_per_batch": 8,
+  "row_presentations_per_arm": 3840,
+  "schema": "fresh-trigger-readout-authored-corpus-protocol/v1",
+  "scope": "Fresh raw-source single-rule five-facet engineering copy targets; no statutory semantic gold.",
+  "seed": 24603,
+  "selection_score_descending": [
+    "positive_raw_modality_exact",
+    "positive_exact_count",
+    "-completed_updates"
+  ],
+  "selection_steps": [
+    0,
+    120,
+    240
+  ],
+  "shared_grammar": "All eight templates, O/P/F classes, operator alias vocabulary and rendering semantics deliberately shared with earlier pilot; new source strings/facet identities do not establish new syntax or reviewed-law generalization.",
+  "source_builder": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/corpus-builder.py",
+    "sha256": "881abc31455551c953ebe23f2a24bb6bde5df09a85e1c6455945a1a5ffd56e74"
+  },
+  "source_chars_max": 8192,
+  "source_features": "Raw source UTF8 only. Inputid/group/template/digest/callermetadata and reference labels are never learned byte/token features. No parser, source search, anchor repair, truncation or target lookup.",
+  "source_tokens_max": 96,
+  "split_supported_counts": {
+    "final": 64,
+    "selection": 64,
+    "train": 512
+  },
+  "split_unsupported_counts": {
+    "final": 64,
+    "selection": 64,
+    "train": 512
+  },
+  "support_threshold": 0.5,
+  "templates": [
+    "actor_modal_action_object_condition",
+    "condition_actor_modal_action_object",
+    "actor_condition_modal_action_object",
+    "modal_actor_action_object_condition",
+    "condition_modal_actor_action_object",
+    "actor_possessive_gerund_object_modal_condition",
+    "condition_actor_possessive_gerund_object_modal",
+    "gerund_object_agent_modal_condition"
+  ],
+  "token_UTF8_bytes_max": 64,
+  "training_schedule_sha256": "6cc290c68ba66495748d5162ad5b6cfcdccac7cbd07d293de0d35a9e70881d9d",
+  "unsupported_reference_contract": "supported=false,prediction=null; no negative modality/class/span/optional-presence target."
+}

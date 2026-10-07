@@ -1,0 +1,31 @@
+{
+  "global_claims_mutated": false,
+  "ledger": {
+    "bytes": 6084787,
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/federal-corpus-audits/owned-daemon-resource-control/disk-reservations.json",
+    "sha256": "ed94ce64ce12a1950de745619692d11967c3691673c438f8ff22cb5b6794c96d"
+  },
+  "observation_scope": "current bound JSON snapshots only; no continuous coverage or global before/after immutability claim",
+  "other_reservation_count": 488,
+  "other_reservation_rows_sha256": "4f93db7dfbef04fed789b6ba16f5d8ea8108eb421fc1feb4fd0106cd44d64e1f",
+  "own_lease_absent": true,
+  "own_reservation_matches_receipt": true,
+  "own_reservation_status": "released",
+  "own_storage_bytes": 200000000,
+  "prior_failed_scope_attempt_match_count": 1,
+  "prior_failed_scope_claim": [
+    {
+      "attempt_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-01",
+      "owner_pid": 3877584,
+      "status": "retained",
+      "storage_bytes": 200000000
+    }
+  ],
+  "read_only": true,
+  "state": {
+    "bytes": 1719,
+    "path": "/tmp/ipfs-datasets-resource-scheduler-1000.json",
+    "sha256": "247f6d1351c5d32a4c593aae4e0574ef554225438be21d695ae0de72d3cf700d"
+  },
+  "state_config_sha256": "76d10cc42015c9e4cbdad0fabd6a64f706320e14a8fb507f16262d42dd1d5856"
+}

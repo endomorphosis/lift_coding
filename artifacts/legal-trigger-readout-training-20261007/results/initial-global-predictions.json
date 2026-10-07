@@ -1,0 +1,2713 @@
+{
+  "schema": "trigger-readout-source-only-panel/v1",
+  "rows": [
+    {
+      "id": "source:2f83fcd308d2bf1a8d72f54b4f0604bf6deaaf1f45a74e064f6e6e102e4ed4d8",
+      "source_group": "trigger-group:b6d91162431505b44bc42f9d7fe50cc753f5e0eac2305edfdac4185d425fa330",
+      "source_sha256": "2f83fcd308d2bf1a8d72f54b4f0604bf6deaaf1f45a74e064f6e6e102e4ed4d8",
+      "class_logits": [
+        -0.02285096049308777,
+        -0.19312232732772827,
+        0.05814194306731224
+      ],
+      "prediction": {
+        "schema": "legal-scope-trigger-readout-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              5,
+              6
+            ],
+            "actor": [
+              9,
+              10
+            ],
+            "action": [
+              13,
+              13
+            ],
+            "object": [
+              15,
+              16
+            ],
+            "condition": [
+              1,
+              2
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          -0.02285096049308777,
+          -0.19312232732772827,
+          0.05814194306731224
+        ],
+        "donor_sha256": "9809ec3fd092536f8c4effb74d8a401dc5db9ff9a031952a1e3f92f9c7292c6e",
+        "adapter_feature_mode": "global",
+        "support_probability": 0.46981117129325867,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:505ebb052b95ccee6c670636c3dadfdbf800928c1f8cd06c1c7e05067deed80f",
+      "source_group": "trigger-group:ca9e2f87a643ff3cf72ab9fd54abdafa2d953ffe6a0a7601b5ef937935041e53",
+      "source_sha256": "505ebb052b95ccee6c670636c3dadfdbf800928c1f8cd06c1c7e05067deed80f",
+      "class_logits": [
+        -0.024107467383146286,
+        -0.21683438122272491,
+        -0.08408531546592712
+      ],
+      "prediction": {
+        "schema": "legal-scope-trigger-readout-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "O",
+          "spans": {
+            "modality": [
+              64,
+              75
+            ],
+            "actor": [
+              44,
+              63
+            ],
+            "action": [
+              0,
+              11
+            ],
+            "object": [
+              16,
+              36
+            ],
+            "condition": null
+          },
+          "condition_attachment": null
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "505ebb052b95ccee6c670636c3dadfdbf800928c1f8cd06c1c7e05067deed80f",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "dispatching the mulberry application by the mulberry translator is required.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "c65ed98e0a3b497694fcaa90c8655447f165c29ed86506a19822322bc90df75c",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-64-75",
+                "facet": "modality",
+                "canonical_symbol": "O",
+                "anchor": {
+                  "origin": "source",
+                  "start": 64,
+                  "end": 75,
+                  "text": "is required",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-44-63",
+                "facet": "actor",
+                "canonical_symbol": "mulberry translator",
+                "anchor": {
+                  "origin": "source",
+                  "start": 44,
+                  "end": 63,
+                  "text": "mulberry translator",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-0-11",
+                "facet": "action",
+                "canonical_symbol": "dispatching",
+                "anchor": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 11,
+                  "text": "dispatching",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-object-16-36",
+                "facet": "object",
+                "canonical_symbol": "mulberry application",
+                "anchor": {
+                  "origin": "source",
+                  "start": 16,
+                  "end": 36,
+                  "text": "mulberry application",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-64-75",
+                  "actor": "occ-actor-44-63",
+                  "action": "occ-action-0-11",
+                  "object": "occ-object-16-36"
+                },
+                "qualifiers": {
+                  "conditions": null,
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "rule",
+              "rule_id": "rule-0"
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 76,
+                  "text": "dispatching the mulberry application by the mulberry translator is required.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "3c2e8d38552bae362dcc5317e1f711a0ea64166ca2d7c7282494ba05c0ffac28"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "c65ed98e0a3b497694fcaa90c8655447f165c29ed86506a19822322bc90df75c",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "3c2e8d38552bae362dcc5317e1f711a0ea64166ca2d7c7282494ba05c0ffac28",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "dispatching the mulberry application by the mulberry translator is required.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "c65ed98e0a3b497694fcaa90c8655447f165c29ed86506a19822322bc90df75c",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-64-75",
+                  "facet": "modality",
+                  "canonical_symbol": "O",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 64,
+                    "end": 75,
+                    "text": "is required",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-44-63",
+                  "facet": "actor",
+                  "canonical_symbol": "mulberry translator",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 44,
+                    "end": 63,
+                    "text": "mulberry translator",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-0-11",
+                  "facet": "action",
+                  "canonical_symbol": "dispatching",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 11,
+                    "text": "dispatching",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-object-16-36",
+                  "facet": "object",
+                  "canonical_symbol": "mulberry application",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 16,
+                    "end": 36,
+                    "text": "mulberry application",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-64-75",
+                    "actor": "occ-actor-44-63",
+                    "action": "occ-action-0-11",
+                    "object": "occ-object-16-36"
+                  },
+                  "qualifiers": {
+                    "conditions": null,
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 76,
+                    "text": "dispatching the mulberry application by the mulberry translator is required.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "3c2e8d38552bae362dcc5317e1f711a0ea64166ca2d7c7282494ba05c0ffac28"
+            },
+            "occurrence_count": 4,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "cf48f7adbc31919b41e3dc770c0d908d556165bb7f584d67426df546ea39d4d2"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "O",
+          "presence": {
+            "object": true,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              8,
+              9
+            ],
+            "actor": [
+              6,
+              7
+            ],
+            "action": [
+              0,
+              0
+            ],
+            "object": [
+              2,
+              3
+            ],
+            "condition": [
+              6,
+              7
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          -0.024107467383146286,
+          -0.21683438122272491,
+          -0.08408531546592712
+        ],
+        "donor_sha256": "9809ec3fd092536f8c4effb74d8a401dc5db9ff9a031952a1e3f92f9c7292c6e",
+        "adapter_feature_mode": "global",
+        "support_probability": 0.8890852928161621,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:37740f66cb923c05ee9f2efd2321e1e130528df8ecc514dc5f8ae0aafc4edba5",
+      "source_group": "trigger-group:d86752e9ba0f129fa4068d351e8221983fbb2997fd6c0e9d6c922b67482ba4c3",
+      "source_sha256": "37740f66cb923c05ee9f2efd2321e1e130528df8ecc514dc5f8ae0aafc4edba5",
+      "class_logits": [
+        0.07631392776966095,
+        -0.20311033725738525,
+        0.17138171195983887
+      ],
+      "prediction": {
+        "schema": "legal-scope-trigger-readout-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": false,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              1,
+              7
+            ],
+            "actor": [
+              6,
+              7
+            ],
+            "action": [
+              8,
+              8
+            ],
+            "object": [
+              6,
+              8
+            ],
+            "condition": [
+              7,
+              3
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.07631392776966095,
+          -0.20311033725738525,
+          0.17138171195983887
+        ],
+        "donor_sha256": "9809ec3fd092536f8c4effb74d8a401dc5db9ff9a031952a1e3f92f9c7292c6e",
+        "adapter_feature_mode": "global",
+        "support_probability": 0.13091710209846497,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:d9588b353bff60301007e195b2347efec9c633b3732fb83ed876637f04ced80b",
+      "source_group": "trigger-group:57b4d8c24001dbc2ee3db3c023748d9fd6ced37824cb1bb059a5c1f0366ddc2e",
+      "source_sha256": "d9588b353bff60301007e195b2347efec9c633b3732fb83ed876637f04ced80b",
+      "class_logits": [
+        -0.22255097329616547,
+        -0.015932034701108932,
+        0.3137841820716858
+      ],
+      "prediction": {
+        "schema": "legal-scope-trigger-readout-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "F",
+          "spans": {
+            "modality": [
+              24,
+              42
+            ],
+            "actor": [
+              4,
+              23
+            ],
+            "action": [
+              43,
+              54
+            ],
+            "object": null,
+            "condition": [
+              58,
+              75
+            ]
+          },
+          "condition_attachment": "statement"
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "d9588b353bff60301007e195b2347efec9c633b3732fb83ed876637f04ced80b",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "the baobab statistician is prohibited from dispatching if signature matches.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "8cf5695132a727add88cafda1590da29b47e8c9319ec46ad1ccffd88406e6c4c",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-24-42",
+                "facet": "modality",
+                "canonical_symbol": "F",
+                "anchor": {
+                  "origin": "source",
+                  "start": 24,
+                  "end": 42,
+                  "text": "is prohibited from",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-4-23",
+                "facet": "actor",
+                "canonical_symbol": "baobab statistician",
+                "anchor": {
+                  "origin": "source",
+                  "start": 4,
+                  "end": 23,
+                  "text": "baobab statistician",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-43-54",
+                "facet": "action",
+                "canonical_symbol": "dispatching",
+                "anchor": {
+                  "origin": "source",
+                  "start": 43,
+                  "end": 54,
+                  "text": "dispatching",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-condition-58-75",
+                "facet": "conditions",
+                "canonical_symbol": "signature matches",
+                "anchor": {
+                  "origin": "source",
+                  "start": 58,
+                  "end": 75,
+                  "text": "signature matches",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-24-42",
+                  "actor": "occ-actor-4-23",
+                  "action": "occ-action-43-54",
+                  "object": null
+                },
+                "qualifiers": {
+                  "conditions": null,
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "attach",
+              "body": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "qualifiers": {
+                "conditions": {
+                  "op": "leaf",
+                  "occurrence_id": "occ-condition-58-75"
+                },
+                "exceptions": null,
+                "temporal": null
+              }
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 76,
+                  "text": "the baobab statistician is prohibited from dispatching if signature matches.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "b58d3082ff087fb1b3271b378d773e05e6858742a2fe9b34a56f3a30da631fc3"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "8cf5695132a727add88cafda1590da29b47e8c9319ec46ad1ccffd88406e6c4c",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "b58d3082ff087fb1b3271b378d773e05e6858742a2fe9b34a56f3a30da631fc3",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "the baobab statistician is prohibited from dispatching if signature matches.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "8cf5695132a727add88cafda1590da29b47e8c9319ec46ad1ccffd88406e6c4c",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-24-42",
+                  "facet": "modality",
+                  "canonical_symbol": "F",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 24,
+                    "end": 42,
+                    "text": "is prohibited from",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-4-23",
+                  "facet": "actor",
+                  "canonical_symbol": "baobab statistician",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 4,
+                    "end": 23,
+                    "text": "baobab statistician",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-43-54",
+                  "facet": "action",
+                  "canonical_symbol": "dispatching",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 43,
+                    "end": 54,
+                    "text": "dispatching",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-condition-58-75",
+                  "facet": "conditions",
+                  "canonical_symbol": "signature matches",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 58,
+                    "end": 75,
+                    "text": "signature matches",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-24-42",
+                    "actor": "occ-actor-4-23",
+                    "action": "occ-action-43-54",
+                    "object": null
+                  },
+                  "qualifiers": {
+                    "conditions": null,
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "attach",
+                "body": {
+                  "op": "rule",
+                  "rule_id": "rule-0"
+                },
+                "qualifiers": {
+                  "conditions": {
+                    "op": "leaf",
+                    "occurrence_id": "occ-condition-58-75"
+                  },
+                  "exceptions": null,
+                  "temporal": null
+                }
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 76,
+                    "text": "the baobab statistician is prohibited from dispatching if signature matches.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "b58d3082ff087fb1b3271b378d773e05e6858742a2fe9b34a56f3a30da631fc3"
+            },
+            "occurrence_count": 4,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "74c53253815666fb73963c41aa4019589535f91d70677ca3dfb1275a5b793d9f"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": false,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              3,
+              5
+            ],
+            "actor": [
+              1,
+              2
+            ],
+            "action": [
+              6,
+              6
+            ],
+            "object": [
+              8,
+              6
+            ],
+            "condition": [
+              8,
+              9
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          -0.22255097329616547,
+          -0.015932034701108932,
+          0.3137841820716858
+        ],
+        "donor_sha256": "9809ec3fd092536f8c4effb74d8a401dc5db9ff9a031952a1e3f92f9c7292c6e",
+        "adapter_feature_mode": "global",
+        "support_probability": 0.8063762784004211,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:9c59e352aacc594c94058a86483780f1f07be8fc3b6f884170abff68740cb411",
+      "source_group": "trigger-group:6a8be3efe346e896400281163628875c703da19bb97fab873627df70e5430c35",
+      "source_sha256": "9c59e352aacc594c94058a86483780f1f07be8fc3b6f884170abff68740cb411",
+      "class_logits": [
+        0.1860947161912918,
+        -0.2227083444595337,
+        0.13058866560459137
+      ],
+      "prediction": {
+        "schema": "legal-scope-trigger-readout-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "O",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              9,
+              9
+            ],
+            "actor": [
+              7,
+              8
+            ],
+            "action": [
+              10,
+              10
+            ],
+            "object": [
+              12,
+              13
+            ],
+            "condition": [
+              1,
+              2
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.1860947161912918,
+          -0.2227083444595337,
+          0.13058866560459137
+        ],
+        "donor_sha256": "9809ec3fd092536f8c4effb74d8a401dc5db9ff9a031952a1e3f92f9c7292c6e",
+        "adapter_feature_mode": "global",
+        "support_probability": 0.048645470291376114,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:3cb04756624dfd0368c4fc0204e001715dfff2a68997bb63ae6ced349a3ebab0",
+      "source_group": "trigger-group:05bbce2115c2a66f246640fa1a1e23cada8003fd56b982326adce1ea9cbd9ed8",
+      "source_sha256": "3cb04756624dfd0368c4fc0204e001715dfff2a68997bb63ae6ced349a3ebab0",
+      "class_logits": [
+        -0.13570109009742737,
+        0.03234623745083809,
+        0.31216704845428467
+      ],
+      "prediction": {
+        "schema": "legal-scope-trigger-readout-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": false,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              1,
+              2
+            ],
+            "actor": [
+              5,
+              6
+            ],
+            "action": [
+              8,
+              9
+            ],
+            "object": [
+              8,
+              9
+            ],
+            "condition": [
+              2,
+              9
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          -0.13570109009742737,
+          0.03234623745083809,
+          0.31216704845428467
+        ],
+        "donor_sha256": "9809ec3fd092536f8c4effb74d8a401dc5db9ff9a031952a1e3f92f9c7292c6e",
+        "adapter_feature_mode": "global",
+        "support_probability": 0.18854954838752747,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:1f96d1624618b6484e4dddf35fbecd7245b411150b3cee6b007a1fbe0c85ac6a",
+      "source_group": "trigger-group:8a08350b02cc3cd14bbaf1ba783243ed08922966b4a8e0e541943b9618c1fa17",
+      "source_sha256": "1f96d1624618b6484e4dddf35fbecd7245b411150b3cee6b007a1fbe0c85ac6a",
+      "class_logits": [
+        -0.0936184674501419,
+        -0.11679509282112122,
+        0.23124614357948303
+      ],
+      "prediction": {
+        "schema": "legal-scope-trigger-readout-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "F",
+          "spans": {
+            "modality": [
+              70,
+              84
+            ],
+            "actor": [
+              31,
+              47
+            ],
+            "action": [
+              85,
+              92
+            ],
+            "object": null,
+            "condition": [
+              52,
+              68
+            ]
+          },
+          "condition_attachment": "statement"
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "1f96d1624618b6484e4dddf35fbecd7245b411150b3cee6b007a1fbe0c85ac6a",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "For the declared workflow, the ginkgo historian, if coverage extends, is required to release.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "24b20756b311f32c558c1475e82daaf6fe28063cb91e4a63c3712f956bfc8407",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-70-84",
+                "facet": "modality",
+                "canonical_symbol": "F",
+                "anchor": {
+                  "origin": "source",
+                  "start": 70,
+                  "end": 84,
+                  "text": "is required to",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-31-47",
+                "facet": "actor",
+                "canonical_symbol": "ginkgo historian",
+                "anchor": {
+                  "origin": "source",
+                  "start": 31,
+                  "end": 47,
+                  "text": "ginkgo historian",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-85-92",
+                "facet": "action",
+                "canonical_symbol": "release",
+                "anchor": {
+                  "origin": "source",
+                  "start": 85,
+                  "end": 92,
+                  "text": "release",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-condition-52-68",
+                "facet": "conditions",
+                "canonical_symbol": "coverage extends",
+                "anchor": {
+                  "origin": "source",
+                  "start": 52,
+                  "end": 68,
+                  "text": "coverage extends",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-70-84",
+                  "actor": "occ-actor-31-47",
+                  "action": "occ-action-85-92",
+                  "object": null
+                },
+                "qualifiers": {
+                  "conditions": null,
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "attach",
+              "body": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "qualifiers": {
+                "conditions": {
+                  "op": "leaf",
+                  "occurrence_id": "occ-condition-52-68"
+                },
+                "exceptions": null,
+                "temporal": null
+              }
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 93,
+                  "text": "For the declared workflow, the ginkgo historian, if coverage extends, is required to release.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "e5223ece61c1966428cb0859ebd01190d9bc2fc164a94e515657cd094ee37fee"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "24b20756b311f32c558c1475e82daaf6fe28063cb91e4a63c3712f956bfc8407",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "e5223ece61c1966428cb0859ebd01190d9bc2fc164a94e515657cd094ee37fee",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "For the declared workflow, the ginkgo historian, if coverage extends, is required to release.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "24b20756b311f32c558c1475e82daaf6fe28063cb91e4a63c3712f956bfc8407",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-70-84",
+                  "facet": "modality",
+                  "canonical_symbol": "F",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 70,
+                    "end": 84,
+                    "text": "is required to",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-31-47",
+                  "facet": "actor",
+                  "canonical_symbol": "ginkgo historian",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 31,
+                    "end": 47,
+                    "text": "ginkgo historian",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-85-92",
+                  "facet": "action",
+                  "canonical_symbol": "release",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 85,
+                    "end": 92,
+                    "text": "release",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-condition-52-68",
+                  "facet": "conditions",
+                  "canonical_symbol": "coverage extends",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 52,
+                    "end": 68,
+                    "text": "coverage extends",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-70-84",
+                    "actor": "occ-actor-31-47",
+                    "action": "occ-action-85-92",
+                    "object": null
+                  },
+                  "qualifiers": {
+                    "conditions": null,
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "attach",
+                "body": {
+                  "op": "rule",
+                  "rule_id": "rule-0"
+                },
+                "qualifiers": {
+                  "conditions": {
+                    "op": "leaf",
+                    "occurrence_id": "occ-condition-52-68"
+                  },
+                  "exceptions": null,
+                  "temporal": null
+                }
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 93,
+                    "text": "For the declared workflow, the ginkgo historian, if coverage extends, is required to release.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "e5223ece61c1966428cb0859ebd01190d9bc2fc164a94e515657cd094ee37fee"
+            },
+            "occurrence_count": 4,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "53558250172f5fce2ae2c733eb83ea834d7841060765a4d93dacf6740ab95c17"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": false,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              13,
+              15
+            ],
+            "actor": [
+              6,
+              7
+            ],
+            "action": [
+              16,
+              16
+            ],
+            "object": [
+              6,
+              16
+            ],
+            "condition": [
+              10,
+              11
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          -0.0936184674501419,
+          -0.11679509282112122,
+          0.23124614357948303
+        ],
+        "donor_sha256": "9809ec3fd092536f8c4effb74d8a401dc5db9ff9a031952a1e3f92f9c7292c6e",
+        "adapter_feature_mode": "global",
+        "support_probability": 0.7096083760261536,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:c2c0c29c3c7d0f7d1986bdde74ba7f59fce865be66a1f39222ef83fc3d936ab3",
+      "source_group": "trigger-group:12757c25d94b63e60993b0efbe32b6e22a21d82a7feb2a1210ce3f7401e36a4c",
+      "source_sha256": "c2c0c29c3c7d0f7d1986bdde74ba7f59fce865be66a1f39222ef83fc3d936ab3",
+      "class_logits": [
+        -0.013290315866470337,
+        -0.18588407337665558,
+        0.016168832778930664
+      ],
+      "prediction": {
+        "schema": "legal-scope-trigger-readout-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              1,
+              2
+            ],
+            "actor": [
+              5,
+              6
+            ],
+            "action": [
+              8,
+              9
+            ],
+            "object": [
+              11,
+              12
+            ],
+            "condition": [
+              11,
+              12
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          -0.013290315866470337,
+          -0.18588407337665558,
+          0.016168832778930664
+        ],
+        "donor_sha256": "9809ec3fd092536f8c4effb74d8a401dc5db9ff9a031952a1e3f92f9c7292c6e",
+        "adapter_feature_mode": "global",
+        "support_probability": 0.30120378732681274,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:c5ad93f4f6f531b3ce01bc30d8383cadd938895379547ff9a1412ff3a35e3de2",
+      "source_group": "trigger-group:4b69a6dde8fea3372dc234533cd59b8c1c1ff9a33bf1a6f4c4909d5500223590",
+      "source_sha256": "c5ad93f4f6f531b3ce01bc30d8383cadd938895379547ff9a1412ff3a35e3de2",
+      "class_logits": [
+        -0.11018132418394089,
+        -0.12657517194747925,
+        0.10855244100093842
+      ],
+      "prediction": {
+        "schema": "legal-scope-trigger-readout-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "F",
+          "spans": {
+            "modality": [
+              25,
+              37
+            ],
+            "actor": [
+              46,
+              63
+            ],
+            "action": [
+              67,
+              74
+            ],
+            "object": null,
+            "condition": [
+              3,
+              20
+            ]
+          },
+          "condition_attachment": "statement"
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "c5ad93f4f6f531b3ce01bc30d8383cadd938895379547ff9a1412ff3a35e3de2",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "If signature matches, it is forbidden for the spruce pharmacist to release.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "b0508f1ea2da80d41a72f19e8779b6a41f05eb971e8d7c6e558c62f4355f4b1a",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-25-37",
+                "facet": "modality",
+                "canonical_symbol": "F",
+                "anchor": {
+                  "origin": "source",
+                  "start": 25,
+                  "end": 37,
+                  "text": "is forbidden",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-46-63",
+                "facet": "actor",
+                "canonical_symbol": "spruce pharmacist",
+                "anchor": {
+                  "origin": "source",
+                  "start": 46,
+                  "end": 63,
+                  "text": "spruce pharmacist",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-67-74",
+                "facet": "action",
+                "canonical_symbol": "release",
+                "anchor": {
+                  "origin": "source",
+                  "start": 67,
+                  "end": 74,
+                  "text": "release",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-condition-3-20",
+                "facet": "conditions",
+                "canonical_symbol": "signature matches",
+                "anchor": {
+                  "origin": "source",
+                  "start": 3,
+                  "end": 20,
+                  "text": "signature matches",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-25-37",
+                  "actor": "occ-actor-46-63",
+                  "action": "occ-action-67-74",
+                  "object": null
+                },
+                "qualifiers": {
+                  "conditions": null,
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "attach",
+              "body": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "qualifiers": {
+                "conditions": {
+                  "op": "leaf",
+                  "occurrence_id": "occ-condition-3-20"
+                },
+                "exceptions": null,
+                "temporal": null
+              }
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 75,
+                  "text": "If signature matches, it is forbidden for the spruce pharmacist to release.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "da1eda058f9bc984f99728bf947bf80ee80f388e1bc1111671535f5c1ddbc107"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "b0508f1ea2da80d41a72f19e8779b6a41f05eb971e8d7c6e558c62f4355f4b1a",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "da1eda058f9bc984f99728bf947bf80ee80f388e1bc1111671535f5c1ddbc107",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "If signature matches, it is forbidden for the spruce pharmacist to release.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "b0508f1ea2da80d41a72f19e8779b6a41f05eb971e8d7c6e558c62f4355f4b1a",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-25-37",
+                  "facet": "modality",
+                  "canonical_symbol": "F",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 25,
+                    "end": 37,
+                    "text": "is forbidden",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-46-63",
+                  "facet": "actor",
+                  "canonical_symbol": "spruce pharmacist",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 46,
+                    "end": 63,
+                    "text": "spruce pharmacist",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-67-74",
+                  "facet": "action",
+                  "canonical_symbol": "release",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 67,
+                    "end": 74,
+                    "text": "release",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-condition-3-20",
+                  "facet": "conditions",
+                  "canonical_symbol": "signature matches",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 3,
+                    "end": 20,
+                    "text": "signature matches",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-25-37",
+                    "actor": "occ-actor-46-63",
+                    "action": "occ-action-67-74",
+                    "object": null
+                  },
+                  "qualifiers": {
+                    "conditions": null,
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "attach",
+                "body": {
+                  "op": "rule",
+                  "rule_id": "rule-0"
+                },
+                "qualifiers": {
+                  "conditions": {
+                    "op": "leaf",
+                    "occurrence_id": "occ-condition-3-20"
+                  },
+                  "exceptions": null,
+                  "temporal": null
+                }
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 75,
+                    "text": "If signature matches, it is forbidden for the spruce pharmacist to release.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "da1eda058f9bc984f99728bf947bf80ee80f388e1bc1111671535f5c1ddbc107"
+            },
+            "occurrence_count": 4,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "54941e8b2cca3ea727920f39356cb9ceaa143a1bfff9bc9cfdcbc04a0cf46682"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": false,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              5,
+              6
+            ],
+            "actor": [
+              9,
+              10
+            ],
+            "action": [
+              12,
+              12
+            ],
+            "object": [
+              11,
+              12
+            ],
+            "condition": [
+              1,
+              2
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          -0.11018132418394089,
+          -0.12657517194747925,
+          0.10855244100093842
+        ],
+        "donor_sha256": "9809ec3fd092536f8c4effb74d8a401dc5db9ff9a031952a1e3f92f9c7292c6e",
+        "adapter_feature_mode": "global",
+        "support_probability": 0.8395730257034302,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:1f6cfb11348d0a2582d929ed3a37c63d58b3014311da7995aa51d2092e5925c0",
+      "source_group": "trigger-group:c190ceac004df39e01f6b7b5e531f12a134b9ad953c2c3855aca0a5022cc783c",
+      "source_sha256": "1f6cfb11348d0a2582d929ed3a37c63d58b3014311da7995aa51d2092e5925c0",
+      "class_logits": [
+        -0.09320241957902908,
+        0.08258230984210968,
+        0.40181246399879456
+      ],
+      "prediction": {
+        "schema": "legal-scope-trigger-readout-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": false,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              7,
+              8
+            ],
+            "actor": [
+              1,
+              2
+            ],
+            "action": [
+              5,
+              6
+            ],
+            "object": [
+              16,
+              17
+            ],
+            "condition": [
+              8,
+              17
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          -0.09320241957902908,
+          0.08258230984210968,
+          0.40181246399879456
+        ],
+        "donor_sha256": "9809ec3fd092536f8c4effb74d8a401dc5db9ff9a031952a1e3f92f9c7292c6e",
+        "adapter_feature_mode": "global",
+        "support_probability": 0.014149260707199574,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:83bd1f416ae7be6cda6c0380b8b195502e9f8294e081e3e3cb525b8061654bb2",
+      "source_group": "trigger-group:2245fe08491aeaf327ba7f372aff11cafb866e3048fab9c8fe946a3bb88d4d3c",
+      "source_sha256": "83bd1f416ae7be6cda6c0380b8b195502e9f8294e081e3e3cb525b8061654bb2",
+      "class_logits": [
+        -0.06600481271743774,
+        -0.029142135754227638,
+        0.2731053829193115
+      ],
+      "prediction": {
+        "schema": "legal-scope-trigger-readout-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": false,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              7,
+              15
+            ],
+            "actor": [
+              5,
+              6
+            ],
+            "action": [
+              16,
+              10
+            ],
+            "object": [
+              8,
+              10
+            ],
+            "condition": [
+              5,
+              10
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          -0.06600481271743774,
+          -0.029142135754227638,
+          0.2731053829193115
+        ],
+        "donor_sha256": "9809ec3fd092536f8c4effb74d8a401dc5db9ff9a031952a1e3f92f9c7292c6e",
+        "adapter_feature_mode": "global",
+        "support_probability": 0.11650348454713821,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:a91963777a35b72d33c263073a5d1059b610b4d91c9c59fffee9c9be59bfcd17",
+      "source_group": "trigger-group:58446a84f5bbbdd8af4c6bbd2bf533f090e88f29aad4ea69d70c454eea8a80df",
+      "source_sha256": "a91963777a35b72d33c263073a5d1059b610b4d91c9c59fffee9c9be59bfcd17",
+      "class_logits": [
+        0.011895276606082916,
+        -0.13035570085048676,
+        0.22707752883434296
+      ],
+      "prediction": {
+        "schema": "legal-scope-trigger-readout-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": false,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              9,
+              9
+            ],
+            "actor": [
+              6,
+              7
+            ],
+            "action": [
+              10,
+              10
+            ],
+            "object": [
+              2,
+              10
+            ],
+            "condition": [
+              2,
+              0
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.011895276606082916,
+          -0.13035570085048676,
+          0.22707752883434296
+        ],
+        "donor_sha256": "9809ec3fd092536f8c4effb74d8a401dc5db9ff9a031952a1e3f92f9c7292c6e",
+        "adapter_feature_mode": "global",
+        "support_probability": 0.08856399357318878,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:97597e45eb9faeda1f43db05139d84b23666c251162eae2945470b875ced7d78",
+      "source_group": "trigger-group:9c407c46068e0b649be47a0f0dd3e52426a73a4b321dbc8a56548fd071599776",
+      "source_sha256": "97597e45eb9faeda1f43db05139d84b23666c251162eae2945470b875ced7d78",
+      "class_logits": [
+        0.0037595555186271667,
+        -0.01617087423801422,
+        0.28373628854751587
+      ],
+      "prediction": {
+        "schema": "legal-scope-trigger-readout-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": false,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              7,
+              9
+            ],
+            "actor": [
+              5,
+              6
+            ],
+            "action": [
+              13,
+              14
+            ],
+            "object": [
+              13,
+              14
+            ],
+            "condition": [
+              5,
+              14
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.0037595555186271667,
+          -0.01617087423801422,
+          0.28373628854751587
+        ],
+        "donor_sha256": "9809ec3fd092536f8c4effb74d8a401dc5db9ff9a031952a1e3f92f9c7292c6e",
+        "adapter_feature_mode": "global",
+        "support_probability": 0.026817189529538155,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:6117fbc7a97af157b0af3d1a3ffbcc2837d44c10a6fd555e5c66522ca9155ca6",
+      "source_group": "trigger-group:e3c60c74331d0532f5afc8a7c0dd658785d98b4bce34c87822aa50618510ec39",
+      "source_sha256": "6117fbc7a97af157b0af3d1a3ffbcc2837d44c10a6fd555e5c66522ca9155ca6",
+      "class_logits": [
+        0.006251692771911621,
+        -0.32881253957748413,
+        -0.23342138528823853
+      ],
+      "prediction": {
+        "schema": "legal-scope-trigger-readout-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "O",
+          "spans": {
+            "modality": [
+              36,
+              40
+            ],
+            "actor": [
+              23,
+              35
+            ],
+            "action": [
+              41,
+              47
+            ],
+            "object": null,
+            "condition": null
+          },
+          "condition_attachment": null
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "6117fbc7a97af157b0af3d1a3ffbcc2837d44c10a6fd555e5c66522ca9155ca6",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "In this procedure, the palm chemist must verify the mulberry application.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "6e9fb7c823aa65971a9d96419102dedc22ff9c8378093ed142fbeadd74f20a55",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-36-40",
+                "facet": "modality",
+                "canonical_symbol": "O",
+                "anchor": {
+                  "origin": "source",
+                  "start": 36,
+                  "end": 40,
+                  "text": "must",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-23-35",
+                "facet": "actor",
+                "canonical_symbol": "palm chemist",
+                "anchor": {
+                  "origin": "source",
+                  "start": 23,
+                  "end": 35,
+                  "text": "palm chemist",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-41-47",
+                "facet": "action",
+                "canonical_symbol": "verify",
+                "anchor": {
+                  "origin": "source",
+                  "start": 41,
+                  "end": 47,
+                  "text": "verify",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-36-40",
+                  "actor": "occ-actor-23-35",
+                  "action": "occ-action-41-47",
+                  "object": null
+                },
+                "qualifiers": {
+                  "conditions": null,
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "rule",
+              "rule_id": "rule-0"
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 73,
+                  "text": "In this procedure, the palm chemist must verify the mulberry application.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "f87b238e7a4bbc74e74804165552546f1650c6250faeea32deca3838731f01bb"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "6e9fb7c823aa65971a9d96419102dedc22ff9c8378093ed142fbeadd74f20a55",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "f87b238e7a4bbc74e74804165552546f1650c6250faeea32deca3838731f01bb",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "In this procedure, the palm chemist must verify the mulberry application.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "6e9fb7c823aa65971a9d96419102dedc22ff9c8378093ed142fbeadd74f20a55",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-36-40",
+                  "facet": "modality",
+                  "canonical_symbol": "O",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 36,
+                    "end": 40,
+                    "text": "must",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-23-35",
+                  "facet": "actor",
+                  "canonical_symbol": "palm chemist",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 23,
+                    "end": 35,
+                    "text": "palm chemist",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-41-47",
+                  "facet": "action",
+                  "canonical_symbol": "verify",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 41,
+                    "end": 47,
+                    "text": "verify",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-36-40",
+                    "actor": "occ-actor-23-35",
+                    "action": "occ-action-41-47",
+                    "object": null
+                  },
+                  "qualifiers": {
+                    "conditions": null,
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 73,
+                    "text": "In this procedure, the palm chemist must verify the mulberry application.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "f87b238e7a4bbc74e74804165552546f1650c6250faeea32deca3838731f01bb"
+            },
+            "occurrence_count": 3,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "06608a818d4b9679dec0c5eeb1e514d61e16b13de8e85b8526cb10fd3a6e1fae"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "O",
+          "presence": {
+            "object": false,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              7,
+              7
+            ],
+            "actor": [
+              5,
+              6
+            ],
+            "action": [
+              8,
+              8
+            ],
+            "object": [
+              10,
+              11
+            ],
+            "condition": [
+              10,
+              11
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.006251692771911621,
+          -0.32881253957748413,
+          -0.23342138528823853
+        ],
+        "donor_sha256": "9809ec3fd092536f8c4effb74d8a401dc5db9ff9a031952a1e3f92f9c7292c6e",
+        "adapter_feature_mode": "global",
+        "support_probability": 0.9829052686691284,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:7b9bd2aabeebcee72e25749cbbed55a78ac938b45d26820c10750b9b1354c4fd",
+      "source_group": "trigger-group:e3d5208b0a767d36b49db73969c163ba79a78456567e9173f206a1024bc38f5a",
+      "source_sha256": "7b9bd2aabeebcee72e25749cbbed55a78ac938b45d26820c10750b9b1354c4fd",
+      "class_logits": [
+        0.02664153277873993,
+        -0.1795312613248825,
+        -0.040774911642074585
+      ],
+      "prediction": {
+        "schema": "legal-scope-trigger-readout-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "O",
+          "presence": {
+            "object": true,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              1,
+              2
+            ],
+            "actor": [
+              5,
+              6
+            ],
+            "action": [
+              8,
+              8
+            ],
+            "object": [
+              10,
+              11
+            ],
+            "condition": [
+              10,
+              11
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.02664153277873993,
+          -0.1795312613248825,
+          -0.040774911642074585
+        ],
+        "donor_sha256": "9809ec3fd092536f8c4effb74d8a401dc5db9ff9a031952a1e3f92f9c7292c6e",
+        "adapter_feature_mode": "global",
+        "support_probability": 0.32579606771469116,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:bcb34e134057530add034222bfce788e4d7a7a0529ddc2f8068f9f5da71880ee",
+      "source_group": "trigger-group:838ea86c2bf25f458023fdc388dbb85b50b2c328c620b14de1a550ca5dd6f56c",
+      "source_sha256": "bcb34e134057530add034222bfce788e4d7a7a0529ddc2f8068f9f5da71880ee",
+      "class_logits": [
+        0.002716854214668274,
+        -0.04043310880661011,
+        0.31767815351486206
+      ],
+      "prediction": {
+        "schema": "legal-scope-trigger-readout-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": false,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              8,
+              9
+            ],
+            "actor": [
+              6,
+              7
+            ],
+            "action": [
+              14,
+              15
+            ],
+            "object": [
+              14,
+              15
+            ],
+            "condition": [
+              2,
+              3
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.002716854214668274,
+          -0.04043310880661011,
+          0.31767815351486206
+        ],
+        "donor_sha256": "9809ec3fd092536f8c4effb74d8a401dc5db9ff9a031952a1e3f92f9c7292c6e",
+        "adapter_feature_mode": "global",
+        "support_probability": 0.02518206089735031,
+        "support_threshold": 0.5
+      }
+    }
+  ],
+  "references_accessed_by_inference": false
+}

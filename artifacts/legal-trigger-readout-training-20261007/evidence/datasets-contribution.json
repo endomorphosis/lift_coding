@@ -1,0 +1,252 @@
+{
+  "schema": "trigger-readout-datasets-contribution/v1",
+  "passed": true,
+  "observed_at_utc": "2026-10-07T06:53:08.961680+00:00",
+  "pr": {
+    "headRefOid": "e35aef47ef6d67f7d07793be487e2be04ec6c7d6",
+    "mergeCommit": {
+      "oid": "89e485b4e26203c40b930cd9bb5ed71d8eda5207"
+    },
+    "mergedAt": "2026-10-07T06:51:51Z",
+    "number": 1276,
+    "state": "MERGED",
+    "url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1276"
+  },
+  "submitted_head": "e35aef47ef6d67f7d07793be487e2be04ec6c7d6",
+  "reviewed_base": "b6abb32636e336536fc1cfc0f78bba2dc04703c5",
+  "actual_merge_first_parent": "aed87b0d980422c2ca9efaa26cf92df30c51d768",
+  "live_main": "89e485b4e26203c40b930cd9bb5ed71d8eda5207",
+  "own_files": [
+    {
+      "path": "docs/autoencoders/progress_integration.md",
+      "bytes": 18257,
+      "sha256": "7e511b24c0b6faff15b1ebabe574d110b43c6eca8c061e9ed0e6f58bb93ac721",
+      "live_byte_exact": true
+    },
+    {
+      "path": "docs/implementation/legal_scope_trigger_readout_pilot_20261007.md",
+      "bytes": 12483,
+      "sha256": "0742a19ed6bd25063e3d06b0360f465ea5f3fadf4b2f14dbad8ca2d7b729e133",
+      "live_byte_exact": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_trigger_readout.py",
+      "bytes": 27145,
+      "sha256": "983b69b8e293aa6211fd8322f9ba6bfe6fa5b8cb853c2d4d0cace1e7e5046344",
+      "live_byte_exact": true
+    },
+    {
+      "path": "tests/unit/logic/test_legal_scope_trigger_readout.py",
+      "bytes": 16772,
+      "sha256": "337c18f643eb7ec5aa276ad693cc83a5ad595e71a3e98fbe1acc43e177616a9d",
+      "live_byte_exact": true
+    }
+  ],
+  "all_other_actual_parent_tree_entries_preserved": true,
+  "actual_parent_tree_entry_count": 28845,
+  "initial_incoming_files": [
+    {
+      "path": "docs/autoencoders/balanced_wording_continuation_20261007.md",
+      "initial_sha256": "c2daca5895be24b4e1630cb54e759568616d225939351cf1dfc1bc7fb2820919",
+      "actual_parent_sha256": "7de96a604788efef0f5582ad3bb8c269f7a8adcb5ae71bbd36062372f6591fa7",
+      "live_sha256": "7de96a604788efef0f5582ad3bb8c269f7a8adcb5ae71bbd36062372f6591fa7",
+      "unchanged_from_actual_merge_parent": true,
+      "original_bytes_equal": false,
+      "original_prefix_preserved": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/balanced-wording-20261007/candidate-review.json",
+      "initial_sha256": "2899d2b5a0b302af0c1cbb797087ffc2c3a25ae82843f47b115ef209fc205d53",
+      "actual_parent_sha256": "2899d2b5a0b302af0c1cbb797087ffc2c3a25ae82843f47b115ef209fc205d53",
+      "live_sha256": "2899d2b5a0b302af0c1cbb797087ffc2c3a25ae82843f47b115ef209fc205d53",
+      "unchanged_from_actual_merge_parent": true,
+      "original_bytes_equal": true,
+      "original_prefix_preserved": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/balanced-wording-20261007/comparison-protocol.json",
+      "initial_sha256": "3ba0029bfe86d7ca45948bc4da7d8c847b21e97f0e10ac3e14a7163e8a7e4b8f",
+      "actual_parent_sha256": "3ba0029bfe86d7ca45948bc4da7d8c847b21e97f0e10ac3e14a7163e8a7e4b8f",
+      "live_sha256": "3ba0029bfe86d7ca45948bc4da7d8c847b21e97f0e10ac3e14a7163e8a7e4b8f",
+      "unchanged_from_actual_merge_parent": true,
+      "original_bytes_equal": true,
+      "original_prefix_preserved": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/balanced-wording-20261007/evaluation-compact.json",
+      "initial_sha256": "d8a68018f193c3e1511e9f2d695c427195be7f6e892bb5dcf1254d6fec8ef75f",
+      "actual_parent_sha256": "d8a68018f193c3e1511e9f2d695c427195be7f6e892bb5dcf1254d6fec8ef75f",
+      "live_sha256": "d8a68018f193c3e1511e9f2d695c427195be7f6e892bb5dcf1254d6fec8ef75f",
+      "unchanged_from_actual_merge_parent": true,
+      "original_bytes_equal": true,
+      "original_prefix_preserved": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/balanced-wording-20261007/evidence-index.json",
+      "initial_sha256": "cc6009a67e88b84352e3d1edbe1518a75970d861fdb61291381adcb466aa7d69",
+      "actual_parent_sha256": "cc6009a67e88b84352e3d1edbe1518a75970d861fdb61291381adcb466aa7d69",
+      "live_sha256": "cc6009a67e88b84352e3d1edbe1518a75970d861fdb61291381adcb466aa7d69",
+      "unchanged_from_actual_merge_parent": true,
+      "original_bytes_equal": true,
+      "original_prefix_preserved": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/balanced-wording-20261007/native-preparation-review.json",
+      "initial_sha256": "85e7f4c8bf4cec3fa5707e8a41da36b5b2d54e968c52419a9dcbcbdf50e5df7c",
+      "actual_parent_sha256": "85e7f4c8bf4cec3fa5707e8a41da36b5b2d54e968c52419a9dcbcbdf50e5df7c",
+      "live_sha256": "85e7f4c8bf4cec3fa5707e8a41da36b5b2d54e968c52419a9dcbcbdf50e5df7c",
+      "unchanged_from_actual_merge_parent": true,
+      "original_bytes_equal": true,
+      "original_prefix_preserved": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/balanced-wording-20261007/parent-comparison.json",
+      "initial_sha256": "2543cfa503edc1f8dab67667b9c6d91e78f8795937cfddeb7e956af9b4bbe52e",
+      "actual_parent_sha256": "2543cfa503edc1f8dab67667b9c6d91e78f8795937cfddeb7e956af9b4bbe52e",
+      "live_sha256": "2543cfa503edc1f8dab67667b9c6d91e78f8795937cfddeb7e956af9b4bbe52e",
+      "unchanged_from_actual_merge_parent": true,
+      "original_bytes_equal": true,
+      "original_prefix_preserved": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/balanced-wording-20261007/preflight-compact.json",
+      "initial_sha256": "55edf668acf5d1ae7cee7dceb10ac30b33c02f7f8f4d30eef6cfaec8a8e2bfb6",
+      "actual_parent_sha256": "55edf668acf5d1ae7cee7dceb10ac30b33c02f7f8f4d30eef6cfaec8a8e2bfb6",
+      "live_sha256": "55edf668acf5d1ae7cee7dceb10ac30b33c02f7f8f4d30eef6cfaec8a8e2bfb6",
+      "unchanged_from_actual_merge_parent": true,
+      "original_bytes_equal": true,
+      "original_prefix_preserved": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/balanced-wording-20261007/reconstruction-decision.json",
+      "initial_sha256": "40f7098d844e50f98c9918692d0c7df4a98d4a59d6c2b951c7c811bcae7267ff",
+      "actual_parent_sha256": "40f7098d844e50f98c9918692d0c7df4a98d4a59d6c2b951c7c811bcae7267ff",
+      "live_sha256": "40f7098d844e50f98c9918692d0c7df4a98d4a59d6c2b951c7c811bcae7267ff",
+      "unchanged_from_actual_merge_parent": true,
+      "original_bytes_equal": true,
+      "original_prefix_preserved": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/balanced-wording-20261007/replay-contract.json",
+      "initial_sha256": "05e1d875d44c08287c69fa009fdf31ec0b59e8d5cb426cf4eefa3166bfe92f1c",
+      "actual_parent_sha256": "05e1d875d44c08287c69fa009fdf31ec0b59e8d5cb426cf4eefa3166bfe92f1c",
+      "live_sha256": "05e1d875d44c08287c69fa009fdf31ec0b59e8d5cb426cf4eefa3166bfe92f1c",
+      "unchanged_from_actual_merge_parent": true,
+      "original_bytes_equal": true,
+      "original_prefix_preserved": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/balanced-wording-20261007/replay-coverage.json",
+      "initial_sha256": "c08f96a09541ed50b4b10fafd03001b8f5c5df09423edfc01a0aab312b1e52b9",
+      "actual_parent_sha256": "c08f96a09541ed50b4b10fafd03001b8f5c5df09423edfc01a0aab312b1e52b9",
+      "live_sha256": "c08f96a09541ed50b4b10fafd03001b8f5c5df09423edfc01a0aab312b1e52b9",
+      "unchanged_from_actual_merge_parent": true,
+      "original_bytes_equal": true,
+      "original_prefix_preserved": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/balanced-wording-20261007/sampled-outputs.json",
+      "initial_sha256": "08d554e627b0c0bad6ce705c8f14b2dcbc8a3d98e13aebade0694997e6892372",
+      "actual_parent_sha256": "08d554e627b0c0bad6ce705c8f14b2dcbc8a3d98e13aebade0694997e6892372",
+      "live_sha256": "08d554e627b0c0bad6ce705c8f14b2dcbc8a3d98e13aebade0694997e6892372",
+      "unchanged_from_actual_merge_parent": true,
+      "original_bytes_equal": true,
+      "original_prefix_preserved": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/balanced-wording-20261007/training-compact.json",
+      "initial_sha256": "24d9456d2d86b472d3a1907d8fee2635c33717198e10fab8d6077e725a8ec7a1",
+      "actual_parent_sha256": "24d9456d2d86b472d3a1907d8fee2635c33717198e10fab8d6077e725a8ec7a1",
+      "live_sha256": "24d9456d2d86b472d3a1907d8fee2635c33717198e10fab8d6077e725a8ec7a1",
+      "unchanged_from_actual_merge_parent": true,
+      "original_bytes_equal": true,
+      "original_prefix_preserved": true
+    },
+    {
+      "path": "scripts/ops/autoencoder/dual_bank_wording_replay/dual_bank_retention.py",
+      "initial_sha256": "15accfcf8bbc4e578e32ca7842ac338be2b563458c4c90a85fbe18429da000f1",
+      "actual_parent_sha256": "15accfcf8bbc4e578e32ca7842ac338be2b563458c4c90a85fbe18429da000f1",
+      "live_sha256": "15accfcf8bbc4e578e32ca7842ac338be2b563458c4c90a85fbe18429da000f1",
+      "unchanged_from_actual_merge_parent": true,
+      "original_bytes_equal": true,
+      "original_prefix_preserved": true
+    },
+    {
+      "path": "scripts/ops/autoencoder/dual_bank_wording_replay/test_dual_bank_retention.py",
+      "initial_sha256": "9161ee5cd16bc08db76e4635ec2b6d1d15b3199fb7b686fd846f47c1188bc589",
+      "actual_parent_sha256": "9161ee5cd16bc08db76e4635ec2b6d1d15b3199fb7b686fd846f47c1188bc589",
+      "live_sha256": "9161ee5cd16bc08db76e4635ec2b6d1d15b3199fb7b686fd846f47c1188bc589",
+      "unchanged_from_actual_merge_parent": true,
+      "original_bytes_equal": true,
+      "original_prefix_preserved": true
+    }
+  ],
+  "parallel_main_advance": {
+    "commit": "aed87b0d980422c2ca9efaa26cf92df30c51d768",
+    "title": "Add private dual-bank wording replay with truthful per-bank training receipts",
+    "initial_check": "After successful merge, the assertion expecting all15 b6 files byte-identical detected the other agent's five-line findings append. Verified preservation against actual merge parent instead; original findings prefix remains exact.",
+    "our_contribution_conflicts_or_overwrites": false
+  },
+  "frozen_numeric_producers_unchanged": true,
+  "hosted_ci": {
+    "availability": "unavailable_account_billing_lock",
+    "claim_passed": false,
+    "observed_head": "e35aef47ef6d67f7d07793be487e2be04ec6c7d6",
+    "annotations": {
+      "112669315897": [
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/e35aef47ef6d67f7d07793be487e2be04ec6c7d6/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "The job was not started because your account is locked due to a billing issue.",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/e35aef47ef6d67f7d07793be487e2be04ec6c7d6/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "notice",
+          "title": "",
+          "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+          "raw_details": ""
+        }
+      ],
+      "112669313217": [
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/e35aef47ef6d67f7d07793be487e2be04ec6c7d6/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "The job was not started because your account is locked due to a billing issue.",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/e35aef47ef6d67f7d07793be487e2be04ec6c7d6/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "notice",
+          "title": "",
+          "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+          "raw_details": ""
+        }
+      ]
+    },
+    "local_validation": "93 decoder/donor/proposal tests +23 pure guardian tests passed"
+  },
+  "preserved_non_owned_parent_entry_count": 28844
+}

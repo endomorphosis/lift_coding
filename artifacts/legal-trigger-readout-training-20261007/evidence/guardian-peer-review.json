@@ -1,0 +1,191 @@
+{
+  "baseline_guardian": {
+    "bytes": 25017,
+    "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/run_scope_guardian.py",
+    "sha256": "ab2b82419764ae0d9b8cda24f9d9fe3e7a755e3b6e204be6554e15c2581a10bf"
+  },
+  "checks": [
+    {
+      "check": "frozen_source_and_test_pins",
+      "detail": "Guardian and test raw byte SHA256 match the supplied frozen pins.",
+      "passed": true
+    },
+    {
+      "check": "bounded_delta_and_historical_closure",
+      "detail": "Only existing execute() and RUN_ROOT change in the AST; all other existing functions/classes/constants retain identical AST. Added sampler/error/canonical JSON helpers and threading import. All ten historical closure byte pins verified.",
+      "passed": true
+    },
+    {
+      "check": "review_barrier_before_admission",
+      "detail": "Existing exact plan/runner/guardian/complete artifact bindings and finite unique-key JSON checks remain unchanged; closure/configuration checks precede attempt creation or reservation.",
+      "passed": true
+    },
+    {
+      "check": "custody_before_monitor_setup",
+      "detail": "Direct-child isolated-group PID and birth are captured; owner cached child custody and durable owned-row update precede fallible identity receipt, watchdog, and sampler setup.",
+      "passed": true
+    },
+    {
+      "check": "monitor_before_gated_initial_census",
+      "detail": "Watchdog starts and sampler performs its gated sample and starts the independent thread before initial owner.check_usage(). Model exec requires the subsequent one-byte pipe permit after both cached health checks.",
+      "passed": true
+    },
+    {
+      "check": "sample_timing_phase_and_log",
+      "detail": "Default one-second poll wait is independent of twenty-second global censuses. Collection mutex serializes poll and phase-edge observations. Gated/model/post-model samples, actual gap, collection duration, phase-change flag, timestamps, counts and peaks are logged with finite canonical JSON and fsync.",
+      "passed": true
+    },
+    {
+      "check": "finite_bounded_sampling_state",
+      "detail": "Exact positive integer envelope, finite polling in (0,1] seconds, nonnegative integer RSS/live counts and at most 1024 accepted observations. Summary retains constant-sized counters/current failure rather than an unbounded observation list; observed over-envelope or invalid sample triggers failure.",
+      "passed": true
+    },
+    {
+      "check": "only_captured_owned_group_may_be_signalled",
+      "detail": "Sampler uses captured PID/birth only, pinned group helper checks leader birth and bounded /proc census, and the interrupt path revalidates the group before SIGINT. Unknown/reused identities are refused. Existing cleanup remains unchanged.",
+      "passed": true
+    },
+    {
+      "check": "failure_custody_and_owned_release",
+      "detail": "Failure closes an unopened permit, stops monitors, attempts verified owned-group cleanup before owner context exit, and retains failure disk claim. CPU lease fallback is only the captured owner lease after no child or verified zero live group. No scheduler reset/replacement lease/foreign claim mutations were added.",
+      "passed": true
+    },
+    {
+      "check": "durable_success_release",
+      "detail": "After leader reap and owned-group cleanup, sampler stop/health/post-cleanup observation and durable RSS summary precede owned finalization. Final receipts explicitly describe later accounting scope and sampled-only memory.",
+      "passed": true
+    },
+    {
+      "check": "pure_mock_tests",
+      "detail": "Independent run: 23 passed in 0.31s. Admission, review mutation, PID ownership, failure custody, gated slow census, phase summaries, independent polling, over-envelope owned SIGINT and reused-group refusal are exercised without real child/lease/reservation.",
+      "passed": true
+    }
+  ],
+  "compatibility_receipt": {
+    "bytes": 6800,
+    "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/resource-compatibility.json",
+    "sha256": "26c9a7d31cd7aad7b246b65063d77d9bb6eaeadddc4ba54b702388265f7c4737"
+  },
+  "execution": {
+    "guardian_check_reexecuted": false,
+    "lease_acquired": false,
+    "model_called": false,
+    "real_child_created": false,
+    "reservation_acquired": false,
+    "scheduler_client_constructed": false,
+    "shared_claims_mutated": false
+  },
+  "findings": [],
+  "guardian": {
+    "bytes": 38281,
+    "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/run_scope_guardian.py",
+    "sha256": "10c7c7350a7dbb564ab0fb1299c905020f874c212765afb86d3c1752105184ed"
+  },
+  "historical_resource_closure": [
+    {
+      "bytes": 56829,
+      "expected_sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9",
+      "matched": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/__init__.py",
+      "sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9"
+    },
+    {
+      "bytes": 957,
+      "expected_sha256": "a12bab3724da07be67b447719ace42fc1f480cb5635581f320a99a372f02f450",
+      "matched": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/optimizers/__init__.py",
+      "sha256": "a12bab3724da07be67b447719ace42fc1f480cb5635581f320a99a372f02f450"
+    },
+    {
+      "bytes": 69336,
+      "expected_sha256": "9d693fa576f00dc36899faad75ef3044c437e2bfec5c62306f7031236725bb0e",
+      "matched": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/optimizers/logic_theorem_optimizer/__init__.py",
+      "sha256": "9d693fa576f00dc36899faad75ef3044c437e2bfec5c62306f7031236725bb0e"
+    },
+    {
+      "bytes": 82754,
+      "expected_sha256": "a418e84f70ed8509ba0518feea69e7a8c27865139f83b6c81349eefdfd5893a4",
+      "matched": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+      "sha256": "a418e84f70ed8509ba0518feea69e7a8c27865139f83b6c81349eefdfd5893a4"
+    },
+    {
+      "bytes": 4534,
+      "expected_sha256": "23569b40b44d9130c30c62be564d58908a509fb1f40c6377e89f2fc1e3c799c5",
+      "matched": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_resource_safety.py",
+      "sha256": "23569b40b44d9130c30c62be564d58908a509fb1f40c6377e89f2fc1e3c799c5"
+    },
+    {
+      "bytes": 53075,
+      "expected_sha256": "542f705867b93fcb138a117e1f5c97a144ad6635dc92c37bc5034eee5065ef63",
+      "matched": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/optimizers/logic_theorem_optimizer/runtime_telemetry.py",
+      "sha256": "542f705867b93fcb138a117e1f5c97a144ad6635dc92c37bc5034eee5065ef63"
+    },
+    {
+      "bytes": 36724,
+      "expected_sha256": "b00d2752ba852fe73760bba4fbd51b0e845742c3527642606a2a77ed9f8f5e2c",
+      "matched": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/native4096-four-width-20261004/resource-cap/autoencoder_daemon_resources.py",
+      "sha256": "b00d2752ba852fe73760bba4fbd51b0e845742c3527642606a2a77ed9f8f5e2c"
+    },
+    {
+      "bytes": 11206,
+      "expected_sha256": "4956baa1e41abe53fc83a2d4ae7709b3be13ebc1c775b44571a33903b8f70b1f",
+      "matched": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/adopt_shared_scheduler.py",
+      "sha256": "4956baa1e41abe53fc83a2d4ae7709b3be13ebc1c775b44571a33903b8f70b1f"
+    },
+    {
+      "bytes": 1345,
+      "expected_sha256": "42f31d8da1eb5b44274ca0b8c8180cd78bc083dfd0e93438e61f38223929d84a",
+      "matched": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/lazy_scheduler_adoption.py",
+      "sha256": "42f31d8da1eb5b44274ca0b8c8180cd78bc083dfd0e93438e61f38223929d84a"
+    },
+    {
+      "bytes": 20712,
+      "expected_sha256": "f1b9f71e375cf5ed4004e023bbef2d6f7f61e1ecb588078a1094d7b1982609b3",
+      "matched": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/owned_lease_watchdog.py",
+      "sha256": "f1b9f71e375cf5ed4004e023bbef2d6f7f61e1ecb588078a1094d7b1982609b3"
+    }
+  ],
+  "limits": {
+    "actual_model_resource_envelope_measured": false,
+    "corpus_revalidated": false,
+    "model_source_reviewed": false,
+    "source_or_tests_modified": false,
+    "training_protocol_reviewed": false
+  },
+  "measurement_caveats": [
+    "One-second polling is a requested wait between completed samples, not a guaranteed observation interval. /proc collection and fsync duration add latency; actual gaps and collection durations are retained.",
+    "RSS is sampled summed process-group resident pages from a non-atomic /proc census. Brief peaks can be missed and shared resident pages can be counted across processes. No absolute peak, kernel memory cap or continuous coverage is claimed.",
+    "Model phase begins immediately after pipe permission and ends at observed leader reap. It includes import and guardian polling, excludes gated census, and is not isolated optimizer time. The tiny gate-write-to-phase-mark interval and phase changes during a census are not claimed as perfectly isolated boundaries.",
+    "Pure mocks validate logic and requested sequencing; they do not demonstrate real process scheduling, actual model RSS, admission availability or future successful resource release."
+  ],
+  "passed": true,
+  "producer_validation": {
+    "bytes": 3177,
+    "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/guardian-validation.json",
+    "sha256": "c61611aad4a12bd165209753bd1512a60f0b380a765668bb2d733f14840eb3c5"
+  },
+  "pure_test_run": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python -m pytest test_scope_guardian.py -q -p no:cacheprovider --confcutdir . --basetemp guardian-peer-pytest -o addopts=''",
+    "cwd": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01",
+    "failed": 0,
+    "output": "23 passed in 0.31s",
+    "passed": 23,
+    "reported_seconds": 0.31,
+    "returncode": 0
+  },
+  "schema": "legal-trigger-guardian-peer-review/v1",
+  "scope": "Bounded independent source/test review of the new owned-group RSS sampler and its custody integration; no model, real child, lease, reservation, scheduler client or numerical fit.",
+  "tests": {
+    "bytes": 18962,
+    "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/test_scope_guardian.py",
+    "sha256": "fb1eacd8ade3a8c283e939729fd1c412c8bba7ee35a490b48ebe2a3e194c1b4c"
+  }
+}

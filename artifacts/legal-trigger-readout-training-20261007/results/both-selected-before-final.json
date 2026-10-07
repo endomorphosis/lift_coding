@@ -1,0 +1,1539 @@
+{
+  "schema": "trigger-readout-final-reference-barrier/v1",
+  "arms": {
+    "global": {
+      "selected": {
+        "completed_updates": 120,
+        "summary": {
+          "positive_count": 64,
+          "positive_exact_count": 15,
+          "positive_learned_refusal_count": 11,
+          "positive_structural_block_count": 12,
+          "positive_emitted_proposal_count": 41,
+          "negative_count": 64,
+          "negative_learned_refusal_count": 53,
+          "negative_incidental_block_count": 5,
+          "negative_emitted_proposal_count": 6,
+          "positive_raw_modality_exact": 30,
+          "positive_raw_all_spans_exact": 39,
+          "nonempty_condition_count": 32,
+          "nonempty_condition_exact_count": 7,
+          "case_count": 128,
+          "source_parent_groups": 64,
+          "positive_class_CE": 1.0791817302797153,
+          "class_confusion": {
+            "O": {
+              "O": 5,
+              "P": 13,
+              "F": 4
+            },
+            "P": {
+              "O": 2,
+              "P": 16,
+              "F": 3
+            },
+            "F": {
+              "O": 3,
+              "P": 9,
+              "F": 9
+            }
+          },
+          "positive_raw_facet_span_exact": {
+            "modality": {
+              "count": 64,
+              "exact": 64,
+              "nonempty_count": 64,
+              "nonempty_exact": 64
+            },
+            "actor": {
+              "count": 64,
+              "exact": 64,
+              "nonempty_count": 64,
+              "nonempty_exact": 64
+            },
+            "action": {
+              "count": 64,
+              "exact": 42,
+              "nonempty_count": 64,
+              "nonempty_exact": 42
+            },
+            "object": {
+              "count": 64,
+              "exact": 61,
+              "nonempty_count": 32,
+              "nonempty_exact": 29
+            },
+            "condition": {
+              "count": 64,
+              "exact": 62,
+              "nonempty_count": 32,
+              "nonempty_exact": 30
+            }
+          },
+          "negative_categories": {
+            "second_rule": {
+              "count": 16,
+              "learned_refusal": 16,
+              "emitted": 0,
+              "incidental_block": 0
+            },
+            "extra_exception": {
+              "count": 16,
+              "learned_refusal": 16,
+              "emitted": 0,
+              "incidental_block": 0
+            },
+            "modal_misspelling": {
+              "count": 16,
+              "learned_refusal": 5,
+              "emitted": 6,
+              "incidental_block": 5
+            },
+            "modal_deletion": {
+              "count": 16,
+              "learned_refusal": 16,
+              "emitted": 0,
+              "incidental_block": 0
+            }
+          },
+          "positive_templates": {
+            "condition_actor_possessive_gerund_object_modal": {
+              "count": 8,
+              "class_exact": 3,
+              "proposal_exact": 3
+            },
+            "condition_actor_modal_action_object": {
+              "count": 8,
+              "class_exact": 4,
+              "proposal_exact": 1
+            },
+            "modal_actor_action_object_condition": {
+              "count": 8,
+              "class_exact": 5,
+              "proposal_exact": 2
+            },
+            "actor_modal_action_object_condition": {
+              "count": 8,
+              "class_exact": 5,
+              "proposal_exact": 2
+            },
+            "condition_modal_actor_action_object": {
+              "count": 8,
+              "class_exact": 1,
+              "proposal_exact": 0
+            },
+            "gerund_object_agent_modal_condition": {
+              "count": 8,
+              "class_exact": 4,
+              "proposal_exact": 3
+            },
+            "actor_possessive_gerund_object_modal_condition": {
+              "count": 8,
+              "class_exact": 3,
+              "proposal_exact": 0
+            },
+            "actor_condition_modal_action_object": {
+              "count": 8,
+              "class_exact": 5,
+              "proposal_exact": 4
+            }
+          },
+          "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+          "caller_attachment_learned": false,
+          "legal_gold": false,
+          "admission_masks": "all five zero"
+        },
+        "checkpoint": {
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/checkpoint-120.json",
+          "bytes": 2717024,
+          "sha256": "b9ce4e8e3fca1284060905d1892fc89cb15a36925436af528eae787cccbc6f9c"
+        },
+        "predictions": {
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/selection-predictions-120.json",
+          "bytes": 820916,
+          "sha256": "e7f3cce71016562c6ba07c87cdccbd9b5f9546a438848b9f118e7aab5195e7d7"
+        }
+      },
+      "selection_candidates": [
+        {
+          "completed_updates": 0,
+          "summary": {
+            "positive_count": 64,
+            "positive_exact_count": 16,
+            "positive_learned_refusal_count": 11,
+            "positive_structural_block_count": 12,
+            "positive_emitted_proposal_count": 41,
+            "negative_count": 64,
+            "negative_learned_refusal_count": 53,
+            "negative_incidental_block_count": 5,
+            "negative_emitted_proposal_count": 6,
+            "positive_raw_modality_exact": 25,
+            "positive_raw_all_spans_exact": 39,
+            "nonempty_condition_count": 32,
+            "nonempty_condition_exact_count": 10,
+            "case_count": 128,
+            "source_parent_groups": 64,
+            "positive_class_CE": 1.0900823012459242,
+            "class_confusion": {
+              "O": {
+                "O": 8,
+                "P": 0,
+                "F": 14
+              },
+              "P": {
+                "O": 5,
+                "P": 0,
+                "F": 16
+              },
+              "F": {
+                "O": 4,
+                "P": 0,
+                "F": 17
+              }
+            },
+            "positive_raw_facet_span_exact": {
+              "modality": {
+                "count": 64,
+                "exact": 64,
+                "nonempty_count": 64,
+                "nonempty_exact": 64
+              },
+              "actor": {
+                "count": 64,
+                "exact": 64,
+                "nonempty_count": 64,
+                "nonempty_exact": 64
+              },
+              "action": {
+                "count": 64,
+                "exact": 42,
+                "nonempty_count": 64,
+                "nonempty_exact": 42
+              },
+              "object": {
+                "count": 64,
+                "exact": 61,
+                "nonempty_count": 32,
+                "nonempty_exact": 29
+              },
+              "condition": {
+                "count": 64,
+                "exact": 62,
+                "nonempty_count": 32,
+                "nonempty_exact": 30
+              }
+            },
+            "negative_categories": {
+              "second_rule": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              },
+              "extra_exception": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              },
+              "modal_misspelling": {
+                "count": 16,
+                "learned_refusal": 5,
+                "emitted": 6,
+                "incidental_block": 5
+              },
+              "modal_deletion": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              }
+            },
+            "positive_templates": {
+              "condition_actor_possessive_gerund_object_modal": {
+                "count": 8,
+                "class_exact": 4,
+                "proposal_exact": 4
+              },
+              "condition_actor_modal_action_object": {
+                "count": 8,
+                "class_exact": 3,
+                "proposal_exact": 1
+              },
+              "modal_actor_action_object_condition": {
+                "count": 8,
+                "class_exact": 3,
+                "proposal_exact": 2
+              },
+              "actor_modal_action_object_condition": {
+                "count": 8,
+                "class_exact": 3,
+                "proposal_exact": 1
+              },
+              "condition_modal_actor_action_object": {
+                "count": 8,
+                "class_exact": 2,
+                "proposal_exact": 1
+              },
+              "gerund_object_agent_modal_condition": {
+                "count": 8,
+                "class_exact": 4,
+                "proposal_exact": 4
+              },
+              "actor_possessive_gerund_object_modal_condition": {
+                "count": 8,
+                "class_exact": 3,
+                "proposal_exact": 0
+              },
+              "actor_condition_modal_action_object": {
+                "count": 8,
+                "class_exact": 3,
+                "proposal_exact": 3
+              }
+            },
+            "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+            "caller_attachment_learned": false,
+            "legal_gold": false,
+            "admission_masks": "all five zero"
+          },
+          "checkpoint": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/checkpoint-0.json",
+            "bytes": 2402072,
+            "sha256": "bf4cd32b77931af71711cff73b75b8efed16a52a75de455e9a9316725f806641"
+          },
+          "predictions": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/selection-predictions-0.json",
+            "bytes": 821004,
+            "sha256": "6f0948efa315d5121a994f42f64e9d5000ca19c442e93bd9268fb82616401645"
+          }
+        },
+        {
+          "completed_updates": 120,
+          "summary": {
+            "positive_count": 64,
+            "positive_exact_count": 15,
+            "positive_learned_refusal_count": 11,
+            "positive_structural_block_count": 12,
+            "positive_emitted_proposal_count": 41,
+            "negative_count": 64,
+            "negative_learned_refusal_count": 53,
+            "negative_incidental_block_count": 5,
+            "negative_emitted_proposal_count": 6,
+            "positive_raw_modality_exact": 30,
+            "positive_raw_all_spans_exact": 39,
+            "nonempty_condition_count": 32,
+            "nonempty_condition_exact_count": 7,
+            "case_count": 128,
+            "source_parent_groups": 64,
+            "positive_class_CE": 1.0791817302797153,
+            "class_confusion": {
+              "O": {
+                "O": 5,
+                "P": 13,
+                "F": 4
+              },
+              "P": {
+                "O": 2,
+                "P": 16,
+                "F": 3
+              },
+              "F": {
+                "O": 3,
+                "P": 9,
+                "F": 9
+              }
+            },
+            "positive_raw_facet_span_exact": {
+              "modality": {
+                "count": 64,
+                "exact": 64,
+                "nonempty_count": 64,
+                "nonempty_exact": 64
+              },
+              "actor": {
+                "count": 64,
+                "exact": 64,
+                "nonempty_count": 64,
+                "nonempty_exact": 64
+              },
+              "action": {
+                "count": 64,
+                "exact": 42,
+                "nonempty_count": 64,
+                "nonempty_exact": 42
+              },
+              "object": {
+                "count": 64,
+                "exact": 61,
+                "nonempty_count": 32,
+                "nonempty_exact": 29
+              },
+              "condition": {
+                "count": 64,
+                "exact": 62,
+                "nonempty_count": 32,
+                "nonempty_exact": 30
+              }
+            },
+            "negative_categories": {
+              "second_rule": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              },
+              "extra_exception": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              },
+              "modal_misspelling": {
+                "count": 16,
+                "learned_refusal": 5,
+                "emitted": 6,
+                "incidental_block": 5
+              },
+              "modal_deletion": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              }
+            },
+            "positive_templates": {
+              "condition_actor_possessive_gerund_object_modal": {
+                "count": 8,
+                "class_exact": 3,
+                "proposal_exact": 3
+              },
+              "condition_actor_modal_action_object": {
+                "count": 8,
+                "class_exact": 4,
+                "proposal_exact": 1
+              },
+              "modal_actor_action_object_condition": {
+                "count": 8,
+                "class_exact": 5,
+                "proposal_exact": 2
+              },
+              "actor_modal_action_object_condition": {
+                "count": 8,
+                "class_exact": 5,
+                "proposal_exact": 2
+              },
+              "condition_modal_actor_action_object": {
+                "count": 8,
+                "class_exact": 1,
+                "proposal_exact": 0
+              },
+              "gerund_object_agent_modal_condition": {
+                "count": 8,
+                "class_exact": 4,
+                "proposal_exact": 3
+              },
+              "actor_possessive_gerund_object_modal_condition": {
+                "count": 8,
+                "class_exact": 3,
+                "proposal_exact": 0
+              },
+              "actor_condition_modal_action_object": {
+                "count": 8,
+                "class_exact": 5,
+                "proposal_exact": 4
+              }
+            },
+            "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+            "caller_attachment_learned": false,
+            "legal_gold": false,
+            "admission_masks": "all five zero"
+          },
+          "checkpoint": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/checkpoint-120.json",
+            "bytes": 2717024,
+            "sha256": "b9ce4e8e3fca1284060905d1892fc89cb15a36925436af528eae787cccbc6f9c"
+          },
+          "predictions": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/selection-predictions-120.json",
+            "bytes": 820916,
+            "sha256": "e7f3cce71016562c6ba07c87cdccbd9b5f9546a438848b9f118e7aab5195e7d7"
+          }
+        },
+        {
+          "completed_updates": 240,
+          "summary": {
+            "positive_count": 64,
+            "positive_exact_count": 15,
+            "positive_learned_refusal_count": 11,
+            "positive_structural_block_count": 12,
+            "positive_emitted_proposal_count": 41,
+            "negative_count": 64,
+            "negative_learned_refusal_count": 53,
+            "negative_incidental_block_count": 5,
+            "negative_emitted_proposal_count": 6,
+            "positive_raw_modality_exact": 28,
+            "positive_raw_all_spans_exact": 39,
+            "nonempty_condition_count": 32,
+            "nonempty_condition_exact_count": 8,
+            "case_count": 128,
+            "source_parent_groups": 64,
+            "positive_class_CE": 1.0745119059855894,
+            "class_confusion": {
+              "O": {
+                "O": 13,
+                "P": 6,
+                "F": 3
+              },
+              "P": {
+                "O": 10,
+                "P": 2,
+                "F": 9
+              },
+              "F": {
+                "O": 8,
+                "P": 0,
+                "F": 13
+              }
+            },
+            "positive_raw_facet_span_exact": {
+              "modality": {
+                "count": 64,
+                "exact": 64,
+                "nonempty_count": 64,
+                "nonempty_exact": 64
+              },
+              "actor": {
+                "count": 64,
+                "exact": 64,
+                "nonempty_count": 64,
+                "nonempty_exact": 64
+              },
+              "action": {
+                "count": 64,
+                "exact": 42,
+                "nonempty_count": 64,
+                "nonempty_exact": 42
+              },
+              "object": {
+                "count": 64,
+                "exact": 61,
+                "nonempty_count": 32,
+                "nonempty_exact": 29
+              },
+              "condition": {
+                "count": 64,
+                "exact": 62,
+                "nonempty_count": 32,
+                "nonempty_exact": 30
+              }
+            },
+            "negative_categories": {
+              "second_rule": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              },
+              "extra_exception": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              },
+              "modal_misspelling": {
+                "count": 16,
+                "learned_refusal": 5,
+                "emitted": 6,
+                "incidental_block": 5
+              },
+              "modal_deletion": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              }
+            },
+            "positive_templates": {
+              "condition_actor_possessive_gerund_object_modal": {
+                "count": 8,
+                "class_exact": 3,
+                "proposal_exact": 3
+              },
+              "condition_actor_modal_action_object": {
+                "count": 8,
+                "class_exact": 3,
+                "proposal_exact": 0
+              },
+              "modal_actor_action_object_condition": {
+                "count": 8,
+                "class_exact": 3,
+                "proposal_exact": 2
+              },
+              "actor_modal_action_object_condition": {
+                "count": 8,
+                "class_exact": 4,
+                "proposal_exact": 1
+              },
+              "condition_modal_actor_action_object": {
+                "count": 8,
+                "class_exact": 4,
+                "proposal_exact": 3
+              },
+              "gerund_object_agent_modal_condition": {
+                "count": 8,
+                "class_exact": 4,
+                "proposal_exact": 3
+              },
+              "actor_possessive_gerund_object_modal_condition": {
+                "count": 8,
+                "class_exact": 3,
+                "proposal_exact": 0
+              },
+              "actor_condition_modal_action_object": {
+                "count": 8,
+                "class_exact": 4,
+                "proposal_exact": 3
+              }
+            },
+            "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+            "caller_attachment_learned": false,
+            "legal_gold": false,
+            "admission_masks": "all five zero"
+          },
+          "checkpoint": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/checkpoint-240.json",
+            "bytes": 2716297,
+            "sha256": "ee8c8afebd43a7223b9e1ef2d0486f286dee54acfcd17ac0cfde8021d4f7434c"
+          },
+          "predictions": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/selection-predictions-240.json",
+            "bytes": 820814,
+            "sha256": "45e0610ff8d301e77aa6cd0c011db780a5a48e1771c29ad1109977ab57106e2f"
+          }
+        }
+      ],
+      "completed_updates": 240,
+      "training_input_records": 3840,
+      "encoded_optimizer_source_presentations": 1920,
+      "positive_training_records": 1920,
+      "ignored_negative_training_records": 1920,
+      "last_TRAIN": {
+        "positive_count": 512,
+        "positive_exact_count": 116,
+        "positive_learned_refusal_count": 139,
+        "positive_structural_block_count": 17,
+        "positive_emitted_proposal_count": 356,
+        "negative_count": 512,
+        "negative_learned_refusal_count": 420,
+        "negative_incidental_block_count": 24,
+        "negative_emitted_proposal_count": 68,
+        "positive_raw_modality_exact": 215,
+        "positive_raw_all_spans_exact": 402,
+        "nonempty_condition_count": 256,
+        "nonempty_condition_exact_count": 51,
+        "case_count": 1024,
+        "source_parent_groups": 512,
+        "positive_class_CE": 1.0581183123303415,
+        "class_confusion": {
+          "O": {
+            "O": 95,
+            "P": 16,
+            "F": 60
+          },
+          "P": {
+            "O": 67,
+            "P": 34,
+            "F": 69
+          },
+          "F": {
+            "O": 71,
+            "P": 14,
+            "F": 86
+          }
+        },
+        "positive_raw_facet_span_exact": {
+          "modality": {
+            "count": 512,
+            "exact": 502,
+            "nonempty_count": 512,
+            "nonempty_exact": 502
+          },
+          "actor": {
+            "count": 512,
+            "exact": 512,
+            "nonempty_count": 512,
+            "nonempty_exact": 512
+          },
+          "action": {
+            "count": 512,
+            "exact": 432,
+            "nonempty_count": 512,
+            "nonempty_exact": 432
+          },
+          "object": {
+            "count": 512,
+            "exact": 494,
+            "nonempty_count": 256,
+            "nonempty_exact": 238
+          },
+          "condition": {
+            "count": 512,
+            "exact": 500,
+            "nonempty_count": 256,
+            "nonempty_exact": 244
+          }
+        },
+        "negative_categories": {
+          "extra_exception": {
+            "count": 128,
+            "learned_refusal": 128,
+            "emitted": 0,
+            "incidental_block": 0
+          },
+          "modal_misspelling": {
+            "count": 128,
+            "learned_refusal": 59,
+            "emitted": 68,
+            "incidental_block": 1
+          },
+          "modal_deletion": {
+            "count": 128,
+            "learned_refusal": 105,
+            "emitted": 0,
+            "incidental_block": 23
+          },
+          "second_rule": {
+            "count": 128,
+            "learned_refusal": 128,
+            "emitted": 0,
+            "incidental_block": 0
+          }
+        },
+        "positive_templates": {
+          "modal_actor_action_object_condition": {
+            "count": 64,
+            "class_exact": 24,
+            "proposal_exact": 11
+          },
+          "condition_modal_actor_action_object": {
+            "count": 64,
+            "class_exact": 23,
+            "proposal_exact": 12
+          },
+          "gerund_object_agent_modal_condition": {
+            "count": 64,
+            "class_exact": 23,
+            "proposal_exact": 16
+          },
+          "condition_actor_possessive_gerund_object_modal": {
+            "count": 64,
+            "class_exact": 27,
+            "proposal_exact": 16
+          },
+          "actor_possessive_gerund_object_modal_condition": {
+            "count": 64,
+            "class_exact": 30,
+            "proposal_exact": 11
+          },
+          "condition_actor_modal_action_object": {
+            "count": 64,
+            "class_exact": 30,
+            "proposal_exact": 16
+          },
+          "actor_modal_action_object_condition": {
+            "count": 64,
+            "class_exact": 32,
+            "proposal_exact": 20
+          },
+          "actor_condition_modal_action_object": {
+            "count": 64,
+            "class_exact": 26,
+            "proposal_exact": 14
+          }
+        },
+        "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+        "caller_attachment_learned": false,
+        "legal_gold": false,
+        "admission_masks": "all five zero"
+      },
+      "last_TRAIN_predictions": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/last-TRAIN-predictions.json",
+        "bytes": 7151403,
+        "sha256": "594a486ebae4b226fc3ff0986e090b82825a3a7f0117b4dd8a8822cb787c5ffd"
+      }
+    },
+    "predicted_trigger": {
+      "selected": {
+        "completed_updates": 240,
+        "summary": {
+          "positive_count": 64,
+          "positive_exact_count": 24,
+          "positive_learned_refusal_count": 11,
+          "positive_structural_block_count": 12,
+          "positive_emitted_proposal_count": 41,
+          "negative_count": 64,
+          "negative_learned_refusal_count": 53,
+          "negative_incidental_block_count": 5,
+          "negative_emitted_proposal_count": 6,
+          "positive_raw_modality_exact": 47,
+          "positive_raw_all_spans_exact": 39,
+          "nonempty_condition_count": 32,
+          "nonempty_condition_exact_count": 15,
+          "case_count": 128,
+          "source_parent_groups": 64,
+          "positive_class_CE": 0.6412712355498564,
+          "class_confusion": {
+            "O": {
+              "O": 15,
+              "P": 2,
+              "F": 5
+            },
+            "P": {
+              "O": 2,
+              "P": 15,
+              "F": 4
+            },
+            "F": {
+              "O": 1,
+              "P": 3,
+              "F": 17
+            }
+          },
+          "positive_raw_facet_span_exact": {
+            "modality": {
+              "count": 64,
+              "exact": 64,
+              "nonempty_count": 64,
+              "nonempty_exact": 64
+            },
+            "actor": {
+              "count": 64,
+              "exact": 64,
+              "nonempty_count": 64,
+              "nonempty_exact": 64
+            },
+            "action": {
+              "count": 64,
+              "exact": 42,
+              "nonempty_count": 64,
+              "nonempty_exact": 42
+            },
+            "object": {
+              "count": 64,
+              "exact": 61,
+              "nonempty_count": 32,
+              "nonempty_exact": 29
+            },
+            "condition": {
+              "count": 64,
+              "exact": 62,
+              "nonempty_count": 32,
+              "nonempty_exact": 30
+            }
+          },
+          "negative_categories": {
+            "second_rule": {
+              "count": 16,
+              "learned_refusal": 16,
+              "emitted": 0,
+              "incidental_block": 0
+            },
+            "extra_exception": {
+              "count": 16,
+              "learned_refusal": 16,
+              "emitted": 0,
+              "incidental_block": 0
+            },
+            "modal_misspelling": {
+              "count": 16,
+              "learned_refusal": 5,
+              "emitted": 6,
+              "incidental_block": 5
+            },
+            "modal_deletion": {
+              "count": 16,
+              "learned_refusal": 16,
+              "emitted": 0,
+              "incidental_block": 0
+            }
+          },
+          "positive_templates": {
+            "condition_actor_possessive_gerund_object_modal": {
+              "count": 8,
+              "class_exact": 8,
+              "proposal_exact": 8
+            },
+            "condition_actor_modal_action_object": {
+              "count": 8,
+              "class_exact": 4,
+              "proposal_exact": 0
+            },
+            "modal_actor_action_object_condition": {
+              "count": 8,
+              "class_exact": 5,
+              "proposal_exact": 1
+            },
+            "actor_modal_action_object_condition": {
+              "count": 8,
+              "class_exact": 5,
+              "proposal_exact": 2
+            },
+            "condition_modal_actor_action_object": {
+              "count": 8,
+              "class_exact": 6,
+              "proposal_exact": 4
+            },
+            "gerund_object_agent_modal_condition": {
+              "count": 8,
+              "class_exact": 8,
+              "proposal_exact": 6
+            },
+            "actor_possessive_gerund_object_modal_condition": {
+              "count": 8,
+              "class_exact": 7,
+              "proposal_exact": 0
+            },
+            "actor_condition_modal_action_object": {
+              "count": 8,
+              "class_exact": 4,
+              "proposal_exact": 3
+            }
+          },
+          "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+          "caller_attachment_learned": false,
+          "legal_gold": false,
+          "admission_masks": "all five zero"
+        },
+        "checkpoint": {
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-240.json",
+          "bytes": 2714198,
+          "sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f"
+        },
+        "predictions": {
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/selection-predictions-240.json",
+          "bytes": 821522,
+          "sha256": "b47a3a2dc70a023e18ca6f58c97db24802d503f706ce52cafbf909cbf038fd18"
+        }
+      },
+      "selection_candidates": [
+        {
+          "completed_updates": 0,
+          "summary": {
+            "positive_count": 64,
+            "positive_exact_count": 16,
+            "positive_learned_refusal_count": 11,
+            "positive_structural_block_count": 12,
+            "positive_emitted_proposal_count": 41,
+            "negative_count": 64,
+            "negative_learned_refusal_count": 53,
+            "negative_incidental_block_count": 5,
+            "negative_emitted_proposal_count": 6,
+            "positive_raw_modality_exact": 25,
+            "positive_raw_all_spans_exact": 39,
+            "nonempty_condition_count": 32,
+            "nonempty_condition_exact_count": 10,
+            "case_count": 128,
+            "source_parent_groups": 64,
+            "positive_class_CE": 1.0900823012459242,
+            "class_confusion": {
+              "O": {
+                "O": 8,
+                "P": 0,
+                "F": 14
+              },
+              "P": {
+                "O": 5,
+                "P": 0,
+                "F": 16
+              },
+              "F": {
+                "O": 4,
+                "P": 0,
+                "F": 17
+              }
+            },
+            "positive_raw_facet_span_exact": {
+              "modality": {
+                "count": 64,
+                "exact": 64,
+                "nonempty_count": 64,
+                "nonempty_exact": 64
+              },
+              "actor": {
+                "count": 64,
+                "exact": 64,
+                "nonempty_count": 64,
+                "nonempty_exact": 64
+              },
+              "action": {
+                "count": 64,
+                "exact": 42,
+                "nonempty_count": 64,
+                "nonempty_exact": 42
+              },
+              "object": {
+                "count": 64,
+                "exact": 61,
+                "nonempty_count": 32,
+                "nonempty_exact": 29
+              },
+              "condition": {
+                "count": 64,
+                "exact": 62,
+                "nonempty_count": 32,
+                "nonempty_exact": 30
+              }
+            },
+            "negative_categories": {
+              "second_rule": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              },
+              "extra_exception": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              },
+              "modal_misspelling": {
+                "count": 16,
+                "learned_refusal": 5,
+                "emitted": 6,
+                "incidental_block": 5
+              },
+              "modal_deletion": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              }
+            },
+            "positive_templates": {
+              "condition_actor_possessive_gerund_object_modal": {
+                "count": 8,
+                "class_exact": 4,
+                "proposal_exact": 4
+              },
+              "condition_actor_modal_action_object": {
+                "count": 8,
+                "class_exact": 3,
+                "proposal_exact": 1
+              },
+              "modal_actor_action_object_condition": {
+                "count": 8,
+                "class_exact": 3,
+                "proposal_exact": 2
+              },
+              "actor_modal_action_object_condition": {
+                "count": 8,
+                "class_exact": 3,
+                "proposal_exact": 1
+              },
+              "condition_modal_actor_action_object": {
+                "count": 8,
+                "class_exact": 2,
+                "proposal_exact": 1
+              },
+              "gerund_object_agent_modal_condition": {
+                "count": 8,
+                "class_exact": 4,
+                "proposal_exact": 4
+              },
+              "actor_possessive_gerund_object_modal_condition": {
+                "count": 8,
+                "class_exact": 3,
+                "proposal_exact": 0
+              },
+              "actor_condition_modal_action_object": {
+                "count": 8,
+                "class_exact": 3,
+                "proposal_exact": 3
+              }
+            },
+            "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+            "caller_attachment_learned": false,
+            "legal_gold": false,
+            "admission_masks": "all five zero"
+          },
+          "checkpoint": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-0.json",
+            "bytes": 2402094,
+            "sha256": "297c280524514ee165ee28d7ca48dbd2a342eb435cc66641e8ff9e016627ead2"
+          },
+          "predictions": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/selection-predictions-0.json",
+            "bytes": 822412,
+            "sha256": "1a095ba51b82a200c666b56cd887a5e2408fea274b0a006745b2d4a1467c1fc4"
+          }
+        },
+        {
+          "completed_updates": 120,
+          "summary": {
+            "positive_count": 64,
+            "positive_exact_count": 21,
+            "positive_learned_refusal_count": 11,
+            "positive_structural_block_count": 12,
+            "positive_emitted_proposal_count": 41,
+            "negative_count": 64,
+            "negative_learned_refusal_count": 53,
+            "negative_incidental_block_count": 5,
+            "negative_emitted_proposal_count": 6,
+            "positive_raw_modality_exact": 42,
+            "positive_raw_all_spans_exact": 39,
+            "nonempty_condition_count": 32,
+            "nonempty_condition_exact_count": 12,
+            "case_count": 128,
+            "source_parent_groups": 64,
+            "positive_class_CE": 0.8342328135927227,
+            "class_confusion": {
+              "O": {
+                "O": 9,
+                "P": 3,
+                "F": 10
+              },
+              "P": {
+                "O": 2,
+                "P": 16,
+                "F": 3
+              },
+              "F": {
+                "O": 0,
+                "P": 4,
+                "F": 17
+              }
+            },
+            "positive_raw_facet_span_exact": {
+              "modality": {
+                "count": 64,
+                "exact": 64,
+                "nonempty_count": 64,
+                "nonempty_exact": 64
+              },
+              "actor": {
+                "count": 64,
+                "exact": 64,
+                "nonempty_count": 64,
+                "nonempty_exact": 64
+              },
+              "action": {
+                "count": 64,
+                "exact": 42,
+                "nonempty_count": 64,
+                "nonempty_exact": 42
+              },
+              "object": {
+                "count": 64,
+                "exact": 61,
+                "nonempty_count": 32,
+                "nonempty_exact": 29
+              },
+              "condition": {
+                "count": 64,
+                "exact": 62,
+                "nonempty_count": 32,
+                "nonempty_exact": 30
+              }
+            },
+            "negative_categories": {
+              "second_rule": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              },
+              "extra_exception": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              },
+              "modal_misspelling": {
+                "count": 16,
+                "learned_refusal": 5,
+                "emitted": 6,
+                "incidental_block": 5
+              },
+              "modal_deletion": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              }
+            },
+            "positive_templates": {
+              "condition_actor_possessive_gerund_object_modal": {
+                "count": 8,
+                "class_exact": 7,
+                "proposal_exact": 7
+              },
+              "condition_actor_modal_action_object": {
+                "count": 8,
+                "class_exact": 4,
+                "proposal_exact": 0
+              },
+              "modal_actor_action_object_condition": {
+                "count": 8,
+                "class_exact": 5,
+                "proposal_exact": 1
+              },
+              "actor_modal_action_object_condition": {
+                "count": 8,
+                "class_exact": 3,
+                "proposal_exact": 2
+              },
+              "condition_modal_actor_action_object": {
+                "count": 8,
+                "class_exact": 6,
+                "proposal_exact": 3
+              },
+              "gerund_object_agent_modal_condition": {
+                "count": 8,
+                "class_exact": 6,
+                "proposal_exact": 4
+              },
+              "actor_possessive_gerund_object_modal_condition": {
+                "count": 8,
+                "class_exact": 6,
+                "proposal_exact": 0
+              },
+              "actor_condition_modal_action_object": {
+                "count": 8,
+                "class_exact": 5,
+                "proposal_exact": 4
+              }
+            },
+            "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+            "caller_attachment_learned": false,
+            "legal_gold": false,
+            "admission_masks": "all five zero"
+          },
+          "checkpoint": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-120.json",
+            "bytes": 2714696,
+            "sha256": "9d9c78d58134381720997c60e70fa0e797320153d7d5bda45ee59d70975f9d63"
+          },
+          "predictions": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/selection-predictions-120.json",
+            "bytes": 821788,
+            "sha256": "597dcf8e3103a4c50d0343a4cabc359852b229f0dff23a58b12acd5c7b4a4763"
+          }
+        },
+        {
+          "completed_updates": 240,
+          "summary": {
+            "positive_count": 64,
+            "positive_exact_count": 24,
+            "positive_learned_refusal_count": 11,
+            "positive_structural_block_count": 12,
+            "positive_emitted_proposal_count": 41,
+            "negative_count": 64,
+            "negative_learned_refusal_count": 53,
+            "negative_incidental_block_count": 5,
+            "negative_emitted_proposal_count": 6,
+            "positive_raw_modality_exact": 47,
+            "positive_raw_all_spans_exact": 39,
+            "nonempty_condition_count": 32,
+            "nonempty_condition_exact_count": 15,
+            "case_count": 128,
+            "source_parent_groups": 64,
+            "positive_class_CE": 0.6412712355498564,
+            "class_confusion": {
+              "O": {
+                "O": 15,
+                "P": 2,
+                "F": 5
+              },
+              "P": {
+                "O": 2,
+                "P": 15,
+                "F": 4
+              },
+              "F": {
+                "O": 1,
+                "P": 3,
+                "F": 17
+              }
+            },
+            "positive_raw_facet_span_exact": {
+              "modality": {
+                "count": 64,
+                "exact": 64,
+                "nonempty_count": 64,
+                "nonempty_exact": 64
+              },
+              "actor": {
+                "count": 64,
+                "exact": 64,
+                "nonempty_count": 64,
+                "nonempty_exact": 64
+              },
+              "action": {
+                "count": 64,
+                "exact": 42,
+                "nonempty_count": 64,
+                "nonempty_exact": 42
+              },
+              "object": {
+                "count": 64,
+                "exact": 61,
+                "nonempty_count": 32,
+                "nonempty_exact": 29
+              },
+              "condition": {
+                "count": 64,
+                "exact": 62,
+                "nonempty_count": 32,
+                "nonempty_exact": 30
+              }
+            },
+            "negative_categories": {
+              "second_rule": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              },
+              "extra_exception": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              },
+              "modal_misspelling": {
+                "count": 16,
+                "learned_refusal": 5,
+                "emitted": 6,
+                "incidental_block": 5
+              },
+              "modal_deletion": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              }
+            },
+            "positive_templates": {
+              "condition_actor_possessive_gerund_object_modal": {
+                "count": 8,
+                "class_exact": 8,
+                "proposal_exact": 8
+              },
+              "condition_actor_modal_action_object": {
+                "count": 8,
+                "class_exact": 4,
+                "proposal_exact": 0
+              },
+              "modal_actor_action_object_condition": {
+                "count": 8,
+                "class_exact": 5,
+                "proposal_exact": 1
+              },
+              "actor_modal_action_object_condition": {
+                "count": 8,
+                "class_exact": 5,
+                "proposal_exact": 2
+              },
+              "condition_modal_actor_action_object": {
+                "count": 8,
+                "class_exact": 6,
+                "proposal_exact": 4
+              },
+              "gerund_object_agent_modal_condition": {
+                "count": 8,
+                "class_exact": 8,
+                "proposal_exact": 6
+              },
+              "actor_possessive_gerund_object_modal_condition": {
+                "count": 8,
+                "class_exact": 7,
+                "proposal_exact": 0
+              },
+              "actor_condition_modal_action_object": {
+                "count": 8,
+                "class_exact": 4,
+                "proposal_exact": 3
+              }
+            },
+            "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+            "caller_attachment_learned": false,
+            "legal_gold": false,
+            "admission_masks": "all five zero"
+          },
+          "checkpoint": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-240.json",
+            "bytes": 2714198,
+            "sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f"
+          },
+          "predictions": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/selection-predictions-240.json",
+            "bytes": 821522,
+            "sha256": "b47a3a2dc70a023e18ca6f58c97db24802d503f706ce52cafbf909cbf038fd18"
+          }
+        }
+      ],
+      "completed_updates": 240,
+      "training_input_records": 3840,
+      "encoded_optimizer_source_presentations": 1920,
+      "positive_training_records": 1920,
+      "ignored_negative_training_records": 1920,
+      "last_TRAIN": {
+        "positive_count": 512,
+        "positive_exact_count": 223,
+        "positive_learned_refusal_count": 139,
+        "positive_structural_block_count": 17,
+        "positive_emitted_proposal_count": 356,
+        "negative_count": 512,
+        "negative_learned_refusal_count": 420,
+        "negative_incidental_block_count": 24,
+        "negative_emitted_proposal_count": 68,
+        "positive_raw_modality_exact": 395,
+        "positive_raw_all_spans_exact": 402,
+        "nonempty_condition_count": 256,
+        "nonempty_condition_exact_count": 93,
+        "case_count": 1024,
+        "source_parent_groups": 512,
+        "positive_class_CE": 0.6178737537333422,
+        "class_confusion": {
+          "O": {
+            "O": 108,
+            "P": 22,
+            "F": 41
+          },
+          "P": {
+            "O": 4,
+            "P": 149,
+            "F": 17
+          },
+          "F": {
+            "O": 12,
+            "P": 21,
+            "F": 138
+          }
+        },
+        "positive_raw_facet_span_exact": {
+          "modality": {
+            "count": 512,
+            "exact": 502,
+            "nonempty_count": 512,
+            "nonempty_exact": 502
+          },
+          "actor": {
+            "count": 512,
+            "exact": 512,
+            "nonempty_count": 512,
+            "nonempty_exact": 512
+          },
+          "action": {
+            "count": 512,
+            "exact": 432,
+            "nonempty_count": 512,
+            "nonempty_exact": 432
+          },
+          "object": {
+            "count": 512,
+            "exact": 494,
+            "nonempty_count": 256,
+            "nonempty_exact": 238
+          },
+          "condition": {
+            "count": 512,
+            "exact": 500,
+            "nonempty_count": 256,
+            "nonempty_exact": 244
+          }
+        },
+        "negative_categories": {
+          "extra_exception": {
+            "count": 128,
+            "learned_refusal": 128,
+            "emitted": 0,
+            "incidental_block": 0
+          },
+          "modal_misspelling": {
+            "count": 128,
+            "learned_refusal": 59,
+            "emitted": 68,
+            "incidental_block": 1
+          },
+          "modal_deletion": {
+            "count": 128,
+            "learned_refusal": 105,
+            "emitted": 0,
+            "incidental_block": 23
+          },
+          "second_rule": {
+            "count": 128,
+            "learned_refusal": 128,
+            "emitted": 0,
+            "incidental_block": 0
+          }
+        },
+        "positive_templates": {
+          "modal_actor_action_object_condition": {
+            "count": 64,
+            "class_exact": 42,
+            "proposal_exact": 18
+          },
+          "condition_modal_actor_action_object": {
+            "count": 64,
+            "class_exact": 44,
+            "proposal_exact": 23
+          },
+          "gerund_object_agent_modal_condition": {
+            "count": 64,
+            "class_exact": 63,
+            "proposal_exact": 46
+          },
+          "condition_actor_possessive_gerund_object_modal": {
+            "count": 64,
+            "class_exact": 63,
+            "proposal_exact": 43
+          },
+          "actor_possessive_gerund_object_modal_condition": {
+            "count": 64,
+            "class_exact": 58,
+            "proposal_exact": 25
+          },
+          "condition_actor_modal_action_object": {
+            "count": 64,
+            "class_exact": 43,
+            "proposal_exact": 26
+          },
+          "actor_modal_action_object_condition": {
+            "count": 64,
+            "class_exact": 45,
+            "proposal_exact": 22
+          },
+          "actor_condition_modal_action_object": {
+            "count": 64,
+            "class_exact": 37,
+            "proposal_exact": 20
+          }
+        },
+        "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+        "caller_attachment_learned": false,
+        "legal_gold": false,
+        "admission_masks": "all five zero"
+      },
+      "last_TRAIN_predictions": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/last-TRAIN-predictions.json",
+        "bytes": 7157755,
+        "sha256": "22689e42146e8a4712b80a56ba9a9382b4c7452d64324663ff8d0e70ba13dbda"
+      }
+    }
+  },
+  "final_references_parsed": false,
+  "updates_completed": 480,
+  "runner": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/run_trigger_experiment.py",
+    "bytes": 19834,
+    "sha256": "8db24c4c0e39ebb106a72031fa53aa9f153fed94f1ddaf1b58ba7ef9ad093f00"
+  },
+  "plan": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/experiment-plan.json",
+    "bytes": 5538,
+    "sha256": "0246fec8a0026ca38dcc46bc903ec655cfde8f474f39c142641d3a39f49a1881"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "baseline_guardian": {
+    "bytes": 25017,
+    "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/run_scope_guardian.py",
+    "sha256": "ab2b82419764ae0d9b8cda24f9d9fe3e7a755e3b6e204be6554e15c2581a10bf"
+  },
+  "baseline_tests": {
+    "bytes": 13634,
+    "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/test_scope_guardian.py",
+    "sha256": "89dbabde77b51d1e45628244b91964044bb67858ab582023dcd56acdcb3966df"
+  },
+  "change_scope": [
+    "new physical run root only; exact resource owner/scheduler/helper closure unchanged",
+    "independent cheap process-group RSS sampler starts after lease monitor and before slow initial usage census while child gate remains closed",
+    "~1s sampled model-phase RSS peak/count/gaps and gate-through-reap wall timing receipts",
+    "sampled envelope violation interrupts only captured birth-checked group; no claim/scheduler mutation",
+    "success and failure observation receipts preserved; failed disk claims retained and CPU leases released only after dead-group evidence"
+  ],
+  "compatibility_receipt": {
+    "bytes": 6800,
+    "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/resource-compatibility.json",
+    "sha256": "26c9a7d31cd7aad7b246b65063d77d9bb6eaeadddc4ba54b702388265f7c4737"
+  },
+  "execution": {
+    "canonical_source_or_index_edited": false,
+    "other_claims_modified": false,
+    "reservation_acquired": false,
+    "scheduler_client_constructed_by_check": false,
+    "training_launched": false
+  },
+  "findings": [],
+  "guardian": {
+    "bytes": 38281,
+    "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/run_scope_guardian.py",
+    "sha256": "10c7c7350a7dbb564ab0fb1299c905020f874c212765afb86d3c1752105184ed"
+  },
+  "limits": {
+    "admission_timeout_seconds": 120,
+    "child_deadline_seconds": 300,
+    "child_process_slots": 1,
+    "cpu_slots": 2,
+    "ledger_lock_timeout_seconds": 60,
+    "memory_mb": 1536,
+    "storage_bytes": 200000000
+  },
+  "measurement_caveats": {
+    "absolute_peak_measured": false,
+    "continuous_coverage_claimed": false,
+    "fit_only_time_measured": false,
+    "global_census_poll_seconds": 20,
+    "kernel_memory_cap": false,
+    "lease_max_gap_seconds": 5.0,
+    "lease_poll_seconds": 1.0,
+    "rss_poll_seconds": 1.0,
+    "sampled_peak_only": true,
+    "timing_scope": "gate permission through leader reap including imports and guardian polling"
+  },
+  "passed": true,
+  "pure_test_run": {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/test_scope_guardian.py"
+    ],
+    "exit_code": 0,
+    "leases_acquired": 0,
+    "models_called": 0,
+    "observed_output": "23 passed in 0.42s",
+    "passed_count": 23,
+    "real_children_started": 0,
+    "reported_seconds": 0.42
+  },
+  "schema": "trigger-readout-guardian-validation/v1",
+  "tests": {
+    "bytes": 18962,
+    "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/test_scope_guardian.py",
+    "sha256": "fb1eacd8ade3a8c283e939729fd1c412c8bba7ee35a490b48ebe2a3e194c1b4c"
+  }
+}

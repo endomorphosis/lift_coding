@@ -1,0 +1,34 @@
+{
+  "parameter_counts": {
+    "global": {
+      "total": 26685,
+      "trainable": 4355
+    },
+    "predicted_trigger": {
+      "total": 26685,
+      "trainable": 4355
+    }
+  },
+  "all_initial_tensor_values_exact": true,
+  "initial_donor_full_core_and_logits_parity": 16,
+  "donor_prediction": {
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/initial-donor-predictions.json",
+    "bytes": 88477,
+    "sha256": "34074e8c9fbb78485745a1b8bd159d6a4dc40de4495331c9611d314a20bee4ec"
+  },
+  "readout_predictions": {
+    "global": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/initial-global-predictions.json",
+      "bytes": 92812,
+      "sha256": "5295e06cdfec34d5e6cdf55b87e4bdb194a15b95b6e8054316f5a15a0b83f29b"
+    },
+    "predicted_trigger": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/initial-predicted_trigger-predictions.json",
+      "bytes": 92988,
+      "sha256": "3416cdd85e365cb5b22be30d971671caa7652693b396868b03c2ed7ade2d4d4a"
+    }
+  },
+  "donor_steps": 240,
+  "adapter_Adam_fresh": true,
+  "donor_Adam_continuation_claimed": false
+}
