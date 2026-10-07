@@ -59,11 +59,19 @@ Original-text reconstruction remains a separate task from canonical IR exactness
 
 ## Next engineering gates
 
+The October 7 [selected normative runtime completion](62-normative-decoder-runtime-2026-10-07.md)
+adds a reviewed opt-in original-cache replay path and separately resolves the
+four selected bindings in the genuine catalog. It preserves the other agents'
+newer reconciliation and data recommendations. Native runtime/teacher/proof
+qualification remains false; the historical availability receipts below are
+unchanged.
+
 1. Reuse the new immutable asset bindings and the retained parent/cached-vector
-   identities in fresh task contexts. Before dispatch, add a separately reviewed
-   normative runtime contract with strict recipe, role, codec, source and input
-   checks. Keep original contextual replay and grouped raw-text/caller-scope
-   decoders as their own profiles.
+   identities in fresh task contexts. The selected normative cached runtime now
+   checks exact recipe, role, codec, source and original inputs. Add the distinct
+   fresh-source IO and applicable qualification contracts before broader dispatch.
+   Keep original contextual replay and grouped raw-text/caller-scope decoders as
+   their own profiles.
 2. Preserve the completed four-state retention study. Review the remaining 384D
    modality/action cases and compare source/combined readouts under matched
    architecture, initialization, updates, targets and output budgets. Keep both

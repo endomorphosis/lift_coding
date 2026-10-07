@@ -1,0 +1,145 @@
+{
+  "schema": "normative-original-cached-runtime-replay/v1",
+  "completed": true,
+  "observed_at_utc": "2026-10-07T04:18:40.163142+00:00",
+  "script_pin": {
+    "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/replay_original_assets.py",
+    "bytes": 8924,
+    "sha256": "38426c3352d74c9722193f28ab4515d6365d1a93b5deeee5ee5a2cc0500f75cf"
+  },
+  "independent_review_pin": {
+    "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/independent-review.json",
+    "bytes": 7716,
+    "sha256": "2ffcc58086580c85a4e5c95768ee6004af5724c08f68a0359e4d340d6d2786bf"
+  },
+  "preflight_pin": {
+    "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/preflight-final/original-assets-preflight.json",
+    "bytes": 7931,
+    "sha256": "a2825acf33b8f80d2bc3ee95354a9117e358cb2a7cdd6b4b24d10b228a272029"
+  },
+  "lanes": [
+    {
+      "dimension": 384,
+      "arm": "normative-wording-zero",
+      "candidate_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/generation-final/384-normative-wording-zero-candidate-report.json",
+        "bytes": 143831,
+        "sha256": "b74c7d95075d13ea46497382b51068e2b0b21a04e47f8ffa7155a6fc32c5008c"
+      },
+      "model_tensor_sha256": "e918a196684aa2f7d4021c210908eaba2517542e14523d98c4f72419c23ae3b3",
+      "row_count": 48,
+      "eos_reached": 48,
+      "elapsed_seconds": 2.4059942989842966
+    },
+    {
+      "dimension": 384,
+      "arm": "normative-wording-ce",
+      "candidate_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/generation-final/384-normative-wording-ce-candidate-report.json",
+        "bytes": 143824,
+        "sha256": "ca278c2518a8fb800306cfda6c56f656f1f9bc6c7296699c973d0f75720f7ca6"
+      },
+      "model_tensor_sha256": "0b3c7c3b1a5581cd393d9bb8db1d24b87fe2cb9dff0be268aa2b5ed1f88b6594",
+      "row_count": 48,
+      "eos_reached": 48,
+      "elapsed_seconds": 2.4019492259831168
+    },
+    {
+      "dimension": 768,
+      "arm": "normative-wording-zero",
+      "candidate_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/generation-final/768-normative-wording-zero-candidate-report.json",
+        "bytes": 143832,
+        "sha256": "ddcb222aac2c16579dfb9d39091a15138ac69029eb78fcf32aa972442b4d6053"
+      },
+      "model_tensor_sha256": "991f9a1abdf01b72ac5f827adde5ef7be5af28fc0dc3a3db8e4e6e2d8816f379",
+      "row_count": 48,
+      "eos_reached": 48,
+      "elapsed_seconds": 4.159263573994394
+    },
+    {
+      "dimension": 768,
+      "arm": "normative-wording-ce",
+      "candidate_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/generation-final/768-normative-wording-ce-candidate-report.json",
+        "bytes": 143825,
+        "sha256": "bd837e59f9dced1a1bc0fbaff7ed474901e33db21b45aeef72eca34884ed358e"
+      },
+      "model_tensor_sha256": "3fe21b42657bf33f5d0d129d538b72dbb5808f9cc491a3822abd902b13a74b6d",
+      "row_count": 48,
+      "eos_reached": 48,
+      "elapsed_seconds": 4.120514235983137
+    }
+  ],
+  "original_input_pins": [
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-zero/selected-state.json",
+      "bytes": 2798242,
+      "sha256": "82f326a83a2d00cc1628ff2e9baf3096aa887348bd07e49883ed3e7c0234014e"
+    },
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/preprocessing.json",
+      "bytes": 1510086,
+      "sha256": "de96c5f0a90a1472e346f3732ace42f0b4af4b3915026695fb705ae809663d8f"
+    },
+    {
+      "bytes": 614534,
+      "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/raw_ce-1729-checkpoint.json",
+      "sha256": "6e3f4d731d798aa2732afc37bd74fec34da3267a323844975d2dab78f59f9c61"
+    },
+    {
+      "bytes": 532522,
+      "path": "/home/barberb/lift_coding/artifacts/ir-semantic-reconstruction-replay-20261004/contextual384-768-v1/384-source-only-inputs.json",
+      "sha256": "722f9909868d545b54d5a1fe5a19880ccefa8e21d1d7f9b6fd1548d78494e7da"
+    },
+    {
+      "bytes": 2295925,
+      "path": "/home/barberb/lift_coding/artifacts/ir-semantic-reconstruction-replay-20261004/contextual384-768-v1/384-source-only-contexts.json",
+      "sha256": "3f124ce3210c68207d8405311742e5d5bedb43eab4f7c93cbf833aa7f5a223a2"
+    },
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-ce/selected-state.json",
+      "bytes": 2797392,
+      "sha256": "6cab6fe31ef7c98db1508001bc64926b7ff176ef2a9bd385473d8e05f5f8c266"
+    },
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-zero/selected-state.json",
+      "bytes": 4778674,
+      "sha256": "c8beca3ef5ea2d477ebc9a1564c8922404b245098a0b56083197cd6185c3083f"
+    },
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/preprocessing.json",
+      "bytes": 2864122,
+      "sha256": "f4acb7b6b20a38c226a509e331d638fa667c929bd5b8970be44048d549f072ae"
+    },
+    {
+      "bytes": 1051554,
+      "path": "/home/barberb/lift_coding/artifacts/ir-semantic-reconstruction-replay-20261004/contextual384-768-v1/768-source-only-inputs.json",
+      "sha256": "e44720b13acb52306bb951ff500aa067a3c4ebe4a060139367e1d465e6511bd4"
+    },
+    {
+      "bytes": 4520563,
+      "path": "/home/barberb/lift_coding/artifacts/ir-semantic-reconstruction-replay-20261004/contextual384-768-v1/768-source-only-contexts.json",
+      "sha256": "a8353fe8311702f4adeb1aa483cdda218a48cc1327309737b5f0680d2a8b2529"
+    },
+    {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-ce/selected-state.json",
+      "bytes": 4779949,
+      "sha256": "aa2f75cad0ade34a3965a4f0b71bdc2fe962f5b863b38133927978ea2673aeb3"
+    }
+  ],
+  "original_bytes_unchanged": true,
+  "model_tensor_and_rng_unchanged": true,
+  "total_elapsed_seconds": 13.135649322008248,
+  "source_only_generation": true,
+  "original_targets_opened": false,
+  "previous_candidates_opened": false,
+  "encoder_executed": false,
+  "fitting_or_optimizer_executed": false,
+  "network_or_database_executed": false,
+  "runtime_admitted": false,
+  "teacher_qualified": false,
+  "proof_authority": false,
+  "legal_prose_reconstruction_measured": false,
+  "fresh_holdout": false
+}

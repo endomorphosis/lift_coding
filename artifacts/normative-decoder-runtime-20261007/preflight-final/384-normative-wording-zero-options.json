@@ -1,0 +1,164 @@
+{
+  "request": {
+    "ir_family_id": "legal_ir",
+    "dimension": 384,
+    "dimension_role": "input_embedding",
+    "task_id": "semantic_IR_reconstruction",
+    "checkpoint_sha256": "82f326a83a2d00cc1628ff2e9baf3096aa887348bd07e49883ed3e7c0234014e",
+    "decoder_contract_id": "normative-selected-cached-legal-ir/v1",
+    "training_recipe_name": "normative-wording-zero"
+  },
+  "checkpoint_pin": {
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-zero/selected-state.json",
+    "bytes": 2798242,
+    "sha256": "82f326a83a2d00cc1628ff2e9baf3096aa887348bd07e49883ed3e7c0234014e"
+  },
+  "preprocessing_pin": {
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/preprocessing.json",
+    "bytes": 1510086,
+    "sha256": "de96c5f0a90a1472e346f3732ace42f0b4af4b3915026695fb705ae809663d8f"
+  },
+  "donor_checkpoint_pin": {
+    "bytes": 614534,
+    "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/raw_ce-1729-checkpoint.json",
+    "sha256": "6e3f4d731d798aa2732afc37bd74fec34da3267a323844975d2dab78f59f9c61"
+  },
+  "source_inputs_pin": {
+    "bytes": 532522,
+    "path": "/home/barberb/lift_coding/artifacts/ir-semantic-reconstruction-replay-20261004/contextual384-768-v1/384-source-only-inputs.json",
+    "sha256": "722f9909868d545b54d5a1fe5a19880ccefa8e21d1d7f9b6fd1548d78494e7da"
+  },
+  "source_contexts_pin": {
+    "bytes": 2295925,
+    "path": "/home/barberb/lift_coding/artifacts/ir-semantic-reconstruction-replay-20261004/contextual384-768-v1/384-source-only-contexts.json",
+    "sha256": "3f124ce3210c68207d8405311742e5d5bedb43eab4f7c93cbf833aa7f5a223a2"
+  },
+  "source_owner_pins": {
+    "contextual_legal_ir_runtime": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py",
+      "bytes": 36929,
+      "sha256": "3aaa92143de29d34b9ad07503f4ee12111e5d407f1f3f6fe6244c61fddf98c1f"
+    },
+    "contextual_legal_ir_numeric": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_numeric.py",
+      "bytes": 15840,
+      "sha256": "097719a4ba5d70f21572c741166d4e09962cc5c1e108964a88ee24b5c8879f30"
+    },
+    "dimension_native_decoder_experiment": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/dimension_native_decoder_experiment.py",
+      "bytes": 11090,
+      "sha256": "477e09a731880cf4d93f322f81c3cd084f6d9be875eac5c3b912255cb0876874"
+    },
+    "decoder_distillation_experiment_v2": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/decoder_distillation_experiment_v2.py",
+      "bytes": 13794,
+      "sha256": "0352c392a518c9ea6ff215c32e5ddd6345d776e2bb32f22fd137b5e34d93c6c6"
+    },
+    "projected_source_decoder_experiment": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/projected_source_decoder_experiment.py",
+      "bytes": 25942,
+      "sha256": "ce4354a96324285bff08277c3fac43e9885a75e84a50337414f7dea8501af3ee"
+    },
+    "clause_source_decoder_experiment": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/clause_source_decoder_experiment.py",
+      "bytes": 21833,
+      "sha256": "004d432d16a2819eb46a95743d58c26443cc32737311ea8553c5019127f97603"
+    },
+    "action_factorized_clause_decoder_experiment": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/action_factorized_clause_decoder_experiment.py",
+      "bytes": 19729,
+      "sha256": "81145f156594f28a0fc5ccec2d078a6188bb4af0a6fed826a69074116e1aa43e"
+    },
+    "ordered_clause_recurrent_decoder_experiment": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/ordered_clause_recurrent_decoder_experiment.py",
+      "bytes": 26392,
+      "sha256": "56392a6f37f528350f18b68b56a016aad170530e93e95e660b6898f1c4cef3da"
+    },
+    "decoder_distillation_experiment": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/decoder_distillation_experiment.py",
+      "bytes": 37989,
+      "sha256": "76252ad397492762d4fc41915afd1051a93a11b74994655326fe56fa722e3b61"
+    },
+    "decoder_cardinality_experiment": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/decoder_cardinality_experiment.py",
+      "bytes": 14873,
+      "sha256": "44f1d91edb8f8cc8bafdc517ab450a003fece945d2e9a25bba933da2e9e12ac1"
+    },
+    "shared_slot_source_decoder_experiment": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/shared_slot_source_decoder_experiment.py",
+      "bytes": 20524,
+      "sha256": "4a2fec44a1d8756c212a2e64cad774919aed1f8c12b3741c6608e2dd35c7f0d1"
+    },
+    "source_value_decoder_experiment": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/source_value_decoder_experiment.py",
+      "bytes": 14958,
+      "sha256": "df72b5331c1dc5b98d11974748bb05ba31504db7e7f69854327d080118eeb61e"
+    },
+    "clause_source_context": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/clause_source_context.py",
+      "bytes": 14249,
+      "sha256": "583422dbb63cdba96182090f5f76ef74698a69ab84fd42dc9e53bc4e09cbf5f6"
+    },
+    "normative_legal_ir_runtime": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/normative_legal_ir_runtime.py",
+      "bytes": 8956,
+      "sha256": "0873cf30118c71aaa51db3068e8e8be3d12f60bdc49fbe0634b1d157e2ab3213"
+    },
+    "ir_model_manager_import": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/ir_model_manager_import.py",
+      "bytes": 29300,
+      "sha256": "5d50f879d6e1e80fc68a29060680fcac9e234f62a3732f7c697f31360ca9506b"
+    }
+  },
+  "row_ids": [
+    "authored-paragraph:validation:1:a06861d00057e7c87e59b07f0ffae619addc655c0c1aeee2b079993e1c101173",
+    "authored-paragraph:validation:1:4775114d32519d112f3e33dc6e2b787d42ac9c3011efadb455049b4c0419dbb2",
+    "authored-paragraph:validation:1:2bea29e0336598cbe3c1f7dfa79a2cf8457ef2f47af51d9947bd5d82841f76c9",
+    "authored-paragraph:validation:1:fbcf4156631fcea25a147e7949ab4e5e70831fd02c6ca4472ed41457af7a5bdd",
+    "authored-paragraph:validation:1:aee524aa64ac0524f933d3d32d03b3888077df3cf60ecb4d0ca5cce0164cede1",
+    "authored-paragraph:validation:1:20ad60b640b4178a22c2b5da7c2c38d160748301c3be4249c793a3db560de6c6",
+    "authored-paragraph:validation:1:909edd803468e704b77418ca07c00cae007e847ff4ed5f8fee891824b699116d",
+    "authored-paragraph:validation:1:68eb8a5c5a56de26110419fb404def8c6ec823697c4d22f9660ffcae9b715f4a",
+    "authored-paragraph:validation:1:06837a558ae4bb895fe20fccf0afdea6906806d115e29708295399def4f199cc",
+    "authored-paragraph:validation:1:36dcc0df724cf71c5a3c33e771abae1a18e4c55b1642112804f6a8ccb036a70f",
+    "authored-paragraph:validation:1:96301de6bf69c72818dc6e42e114a7fce95303618c62fbd61f52a1421374746b",
+    "authored-paragraph:validation:1:dbece175c37efa3dcebcbb30c7cd5f9996314b9a2808db488c5411c022f9be23",
+    "authored-paragraph:validation:2:f264507e4e49a7ea7c18fb42e280bd08b57c069d5ebf1fddf564ed29da9dca8d",
+    "authored-paragraph:validation:2:ac7a920087e8046617293d747e4a95cf55ba4fe6e19ac9f655d79f3e7a33f69a",
+    "authored-paragraph:validation:2:6b42904f2d123d5d7279479f0eb84f0c74d63669008294ecd9b2cc2419b67fca",
+    "authored-paragraph:validation:2:c0a0cf726d91dab0168ce53bd95301433ab51f12ff917bc660985e1004bb7554",
+    "authored-paragraph:validation:2:041ee5db1ee120f54229bc58bbd1ad00a42fb4cc8d6d02b3f11d8f57e617f907",
+    "authored-paragraph:validation:2:e05492475a9f1275ea6ca2eb37d12a9d8229399671f9d6307b13137bc4c2e5a3",
+    "authored-paragraph:validation:2:8b158951ab9ea9b3f8e8f19bb56aef0a93d4e1095dfc970a969a281dd12b9ead",
+    "authored-paragraph:validation:2:4086cf947baa096073903dd50dbfea333aace8c64bb772675b91078066c48f2d",
+    "authored-paragraph:validation:2:99e018098ab8c0988cf5bf98370e241f04416885c1f33ded2eac0025e8fde078",
+    "authored-paragraph:validation:2:023c8dada4cbab593da3882620178b2f8831699a84177a1c25f0e68522d93aca",
+    "authored-paragraph:validation:2:be56747cc70844f811cceebfe023e67bdb9976f5b40c58af5bd097f7ba0bf1bf",
+    "authored-paragraph:validation:2:a31a73f97f2066e6c10b704a1fdafec864bdae47861fb9bec776a9af11d570f7",
+    "authored-paragraph:validation:4:1901345179643e6062fabbd4091a74259915125a25d8d582629fe8e3c0c95aea",
+    "authored-paragraph:validation:4:c319ce29602e013cdae8d5da123e19184e18312316c8eb516cb6c84a5ee82127",
+    "authored-paragraph:validation:4:3fa77ac1ed9cd15f2114a420b87c871e7a9921f95732253acfccf45c3c071577",
+    "authored-paragraph:validation:4:c12be89acb5df6554b745ea5fbbd65c1ce06a2a55693cc5288a3a5c7be41d564",
+    "authored-paragraph:validation:4:5e77668d967077694f50f9f9c3754d500701771c2fd106cc17dfe78af1eda7e9",
+    "authored-paragraph:validation:4:dc7a808c00832b27d04f8e2874213c0ca55b02f46edee4b4f70ae4fa0687aad5",
+    "authored-paragraph:validation:4:4d1f7951368a9cb3bf1d13555936d7ac491a45dd81bb508182bce73d6f10b06f",
+    "authored-paragraph:validation:4:7e2d44674b9c5d11f7a9740bfb9157065be85157dc18ee43b5406e7e1ce73fdf",
+    "authored-paragraph:validation:4:198aade608e0b45554c174d3c344de3cc80284e99160fe81a765db6eff9f4963",
+    "authored-paragraph:validation:4:7b0712286ec10a51e0889d8eccfd170604a0b826777791a8859f50c2a040db00",
+    "authored-paragraph:validation:4:f024ba383f4583a22d01a131f33cbeead237451d91361328c768e8b7540d5cff",
+    "authored-paragraph:validation:4:836322e623a324a67e4d0a0fe501a67ce5988fef488aae955a6f002def473b3e",
+    "authored-paragraph:validation:8:dfd6d9b3624d2af4802618a322db1e62e9517c3cfdde701a4acfd7c888f0a035",
+    "authored-paragraph:validation:8:1b75dc3b8b395a1dd3f3bc44847434d9a3e458c0928934296674152d568850c2",
+    "authored-paragraph:validation:8:03efd114ed43e2057aaf75b61cc6d5ccf63fb81fd9309386c92725cfb5e1532a",
+    "authored-paragraph:validation:8:3fe9d39a0caeb80b1742220b64b15d2c8a8329c7be81b4a5fc4eb01c2819d9c8",
+    "authored-paragraph:validation:8:5cdd890b2a4cadb70751406c5e063e7209a3731524bb34c4d77a129942d025cc",
+    "authored-paragraph:validation:8:609032e1105427e7e8ca1640a0d89019e764dd0800c1f9fb879d45b20c7f50d6",
+    "authored-paragraph:validation:8:a7d949a743ef90b6022e3528ec7b22cb0ef06cf8db858c173ea3c55db739fcaf",
+    "authored-paragraph:validation:8:b54348b9e7b7a05e9d5f8e14945408435816d5c79d2c299dc2434834609a6b60",
+    "authored-paragraph:validation:8:d96fc947d7f73ff96d6d70ac6741433aa7f762f73c38af6394170654f9af10f5",
+    "authored-paragraph:validation:8:edf806e1c72cea54180b003cb64a91877947add81920042f43f1018af104f4e7",
+    "authored-paragraph:validation:8:f986c3596b9fd9284d191bdd8ae0f8f7bb859367649d915714e20b981d8f6ba2",
+    "authored-paragraph:validation:8:55be710187f78a848422afc0237f58e80cc43046b50222364c585a60691cd5e5"
+  ],
+  "deadline_seconds": 120
+}

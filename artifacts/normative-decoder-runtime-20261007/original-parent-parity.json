@@ -1,0 +1,86 @@
+{
+  "schema": "normative-original-cached-parent-prediction-parity/v1",
+  "completed": true,
+  "script_pin": {
+    "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/replay_original_assets.py",
+    "bytes": 8924,
+    "sha256": "38426c3352d74c9722193f28ab4515d6365d1a93b5deeee5ee5a2cc0500f75cf"
+  },
+  "lanes": [
+    {
+      "dimension": 384,
+      "arm": "normative-wording-zero",
+      "rows": 48,
+      "original_parent_prediction_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/contextual-legal-runtime-20261006/384-fresh-source-only-candidates.json",
+        "bytes": 141231,
+        "sha256": "1c59f99df7453841818b2d2f43524c36fa9030e0aa068f376bd80241c8f4edf3"
+      },
+      "candidate_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/generation-final/384-normative-wording-zero-candidate-report.json",
+        "bytes": 143831,
+        "sha256": "b74c7d95075d13ea46497382b51068e2b0b21a04e47f8ffa7155a6fc32c5008c"
+      },
+      "exact_token_status_EOS_parent_parity": 48,
+      "mismatches": 0
+    },
+    {
+      "dimension": 384,
+      "arm": "normative-wording-ce",
+      "rows": 48,
+      "original_parent_prediction_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/contextual-legal-runtime-20261006/384-fresh-source-only-candidates.json",
+        "bytes": 141231,
+        "sha256": "1c59f99df7453841818b2d2f43524c36fa9030e0aa068f376bd80241c8f4edf3"
+      },
+      "candidate_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/generation-final/384-normative-wording-ce-candidate-report.json",
+        "bytes": 143824,
+        "sha256": "ca278c2518a8fb800306cfda6c56f656f1f9bc6c7296699c973d0f75720f7ca6"
+      },
+      "exact_token_status_EOS_parent_parity": 48,
+      "mismatches": 0
+    },
+    {
+      "dimension": 768,
+      "arm": "normative-wording-zero",
+      "rows": 48,
+      "original_parent_prediction_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/contextual-legal-runtime-20261006/768-fresh-source-only-candidates.json",
+        "bytes": 141232,
+        "sha256": "9dfcade8a446865a56960ae36562a25ac4289f471b70aa5ed3cfb6f3607cf046"
+      },
+      "candidate_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/generation-final/768-normative-wording-zero-candidate-report.json",
+        "bytes": 143832,
+        "sha256": "ddcb222aac2c16579dfb9d39091a15138ac69029eb78fcf32aa972442b4d6053"
+      },
+      "exact_token_status_EOS_parent_parity": 48,
+      "mismatches": 0
+    },
+    {
+      "dimension": 768,
+      "arm": "normative-wording-ce",
+      "rows": 48,
+      "original_parent_prediction_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/contextual-legal-runtime-20261006/768-fresh-source-only-candidates.json",
+        "bytes": 141232,
+        "sha256": "9dfcade8a446865a56960ae36562a25ac4289f471b70aa5ed3cfb6f3607cf046"
+      },
+      "candidate_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/generation-final/768-normative-wording-ce-candidate-report.json",
+        "bytes": 143825,
+        "sha256": "bd837e59f9dced1a1bc0fbaff7ed474901e33db21b45aeef72eca34884ed358e"
+      },
+      "exact_token_status_EOS_parent_parity": 48,
+      "mismatches": 0
+    }
+  ],
+  "separate_comparison_process": true,
+  "references_or_gold_scored": false,
+  "model_or_encoder_executed": false,
+  "fresh_semantic_reconstruction_quality_measured": false,
+  "runtime_admitted": false,
+  "teacher_qualified": false,
+  "proof_authority": false
+}

@@ -1,0 +1,247 @@
+{
+  "schema": "normative-cached-runtime-real-registered-selector-resolution/v1",
+  "completed": true,
+  "observed_at_utc": "2026-10-07T04:17:30.676791+00:00",
+  "script_pin": {
+    "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/resolve_registered_selectors.py",
+    "bytes": 3254,
+    "sha256": "89c908871ddffbe89735ef7bb56e2ec29890e11d31ca7b2333184a137ebce556"
+  },
+  "preflight_pin": {
+    "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/preflight-final/original-assets-preflight.json",
+    "bytes": 7931,
+    "sha256": "a2825acf33b8f80d2bc3ee95354a9117e358cb2a7cdd6b4b24d10b228a272029"
+  },
+  "reader_pin": {
+    "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-accelerate-20261006/ipfs_accelerate_py/model_catalog/sources/ir_persistent.py",
+    "bytes": 19952,
+    "sha256": "2cfdb2ad61c9bb1f2fe1c64cf6c70ca45c932d0ec53ccdd08640600d5730beed"
+  },
+  "reader_source_matches_current_parent_component": true,
+  "selected_store": "/home/barberb/lift_coding/external/ipfs_accelerate/model_manager.duckdb",
+  "catalog_revision": "bafkreialaqkjixflrumdblcpl6b5u2yf2uyfymfi5twamlx32mnz5y5jnu",
+  "binding_snapshot_revision": "db61115def69e9d1b339362ed1ce94876d7b2a1fda2de78a59f9b60db7cdc728",
+  "exact_resolutions": [
+    {
+      "schema": "ir-persisted-binding-resolution/v1",
+      "storage_path": "/home/barberb/lift_coding/external/ipfs_accelerate/model_manager.duckdb",
+      "binding_snapshot_revision": "db61115def69e9d1b339362ed1ce94876d7b2a1fda2de78a59f9b60db7cdc728",
+      "catalog_revision": "bafkreialaqkjixflrumdblcpl6b5u2yf2uyfymfi5twamlx32mnz5y5jnu",
+      "selected_binding": {
+        "catalog_model_id": "model_4a2d7cd9a6afad32edf9859ecb3f6b29a918b7c5821611af8c172daa119b65d7",
+        "checkpoint_sha256": "82f326a83a2d00cc1628ff2e9baf3096aa887348bd07e49883ed3e7c0234014e",
+        "declaration": {
+          "dimension": 384,
+          "dimension_role": "input_embedding",
+          "donor": null,
+          "format_id": null,
+          "initialization_only": false,
+          "ir_family_id": "legal_ir",
+          "original_checkpoint_pin": {
+            "bytes": 2798242,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-zero/selected-state.json",
+            "sha256": "82f326a83a2d00cc1628ff2e9baf3096aa887348bd07e49883ed3e7c0234014e"
+          },
+          "profile_id": null,
+          "proof_authority": false,
+          "record_id": "ir-model-asset-binding/v1:0ea60eed1f606e655940a8e45c5db151d9686fcb8bb532b94866e6f8947262c8",
+          "role": "normative_wording_zero_selected_semantic_decoder_state",
+          "runtime_ready": false,
+          "schema_version": null,
+          "task_id": "semantic_IR_reconstruction",
+          "teacher_qualified": false,
+          "trained": true
+        },
+        "dimension": 384,
+        "dimension_role": "input_embedding",
+        "format_id": null,
+        "ir_family_id": "legal_ir",
+        "original_checkpoint_bytes_verified": false,
+        "profile_id": null,
+        "record_id": "ir-model-asset-binding/v1:0ea60eed1f606e655940a8e45c5db151d9686fcb8bb532b94866e6f8947262c8",
+        "role": "normative_wording_zero_selected_semantic_decoder_state",
+        "runtime_observation_performed": false,
+        "schema_version": null,
+        "task_id": "semantic_IR_reconstruction"
+      },
+      "authority": {
+        "model_manager_constructed": false,
+        "model_loaded": false,
+        "inference_executed": false,
+        "training_executed": false,
+        "runtime_admitted": false,
+        "teacher_qualified": false,
+        "proof_authority": false,
+        "checkpoint_bytes_authenticated": false
+      }
+    },
+    {
+      "schema": "ir-persisted-binding-resolution/v1",
+      "storage_path": "/home/barberb/lift_coding/external/ipfs_accelerate/model_manager.duckdb",
+      "binding_snapshot_revision": "db61115def69e9d1b339362ed1ce94876d7b2a1fda2de78a59f9b60db7cdc728",
+      "catalog_revision": "bafkreialaqkjixflrumdblcpl6b5u2yf2uyfymfi5twamlx32mnz5y5jnu",
+      "selected_binding": {
+        "catalog_model_id": "model_08594db52569e584cbc0889ead52e61a764230937fa111714f30ddd86707668e",
+        "checkpoint_sha256": "6cab6fe31ef7c98db1508001bc64926b7ff176ef2a9bd385473d8e05f5f8c266",
+        "declaration": {
+          "dimension": 384,
+          "dimension_role": "input_embedding",
+          "donor": null,
+          "format_id": null,
+          "initialization_only": false,
+          "ir_family_id": "legal_ir",
+          "original_checkpoint_pin": {
+            "bytes": 2797392,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-ce/selected-state.json",
+            "sha256": "6cab6fe31ef7c98db1508001bc64926b7ff176ef2a9bd385473d8e05f5f8c266"
+          },
+          "profile_id": null,
+          "proof_authority": false,
+          "record_id": "ir-model-asset-binding/v1:aa588d1669769d996f9626d2693ff5866ce402ca3372574e18e290342c7e4435",
+          "role": "normative_wording_ce_selected_semantic_decoder_state",
+          "runtime_ready": false,
+          "schema_version": null,
+          "task_id": "semantic_IR_reconstruction",
+          "teacher_qualified": false,
+          "trained": true
+        },
+        "dimension": 384,
+        "dimension_role": "input_embedding",
+        "format_id": null,
+        "ir_family_id": "legal_ir",
+        "original_checkpoint_bytes_verified": false,
+        "profile_id": null,
+        "record_id": "ir-model-asset-binding/v1:aa588d1669769d996f9626d2693ff5866ce402ca3372574e18e290342c7e4435",
+        "role": "normative_wording_ce_selected_semantic_decoder_state",
+        "runtime_observation_performed": false,
+        "schema_version": null,
+        "task_id": "semantic_IR_reconstruction"
+      },
+      "authority": {
+        "model_manager_constructed": false,
+        "model_loaded": false,
+        "inference_executed": false,
+        "training_executed": false,
+        "runtime_admitted": false,
+        "teacher_qualified": false,
+        "proof_authority": false,
+        "checkpoint_bytes_authenticated": false
+      }
+    },
+    {
+      "schema": "ir-persisted-binding-resolution/v1",
+      "storage_path": "/home/barberb/lift_coding/external/ipfs_accelerate/model_manager.duckdb",
+      "binding_snapshot_revision": "db61115def69e9d1b339362ed1ce94876d7b2a1fda2de78a59f9b60db7cdc728",
+      "catalog_revision": "bafkreialaqkjixflrumdblcpl6b5u2yf2uyfymfi5twamlx32mnz5y5jnu",
+      "selected_binding": {
+        "catalog_model_id": "model_ff44342900187ef0e3afc53e06da1f0d59b58e3ac207a6950667bc692bc98f39",
+        "checkpoint_sha256": "c8beca3ef5ea2d477ebc9a1564c8922404b245098a0b56083197cd6185c3083f",
+        "declaration": {
+          "dimension": 768,
+          "dimension_role": "input_embedding",
+          "donor": null,
+          "format_id": null,
+          "initialization_only": false,
+          "ir_family_id": "legal_ir",
+          "original_checkpoint_pin": {
+            "bytes": 4778674,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-zero/selected-state.json",
+            "sha256": "c8beca3ef5ea2d477ebc9a1564c8922404b245098a0b56083197cd6185c3083f"
+          },
+          "profile_id": null,
+          "proof_authority": false,
+          "record_id": "ir-model-asset-binding/v1:958f84ca889bf8c19e39f293e015b5bc54b23f49e751c25304020ab217912b6d",
+          "role": "normative_wording_zero_selected_semantic_decoder_state",
+          "runtime_ready": false,
+          "schema_version": null,
+          "task_id": "semantic_IR_reconstruction",
+          "teacher_qualified": false,
+          "trained": true
+        },
+        "dimension": 768,
+        "dimension_role": "input_embedding",
+        "format_id": null,
+        "ir_family_id": "legal_ir",
+        "original_checkpoint_bytes_verified": false,
+        "profile_id": null,
+        "record_id": "ir-model-asset-binding/v1:958f84ca889bf8c19e39f293e015b5bc54b23f49e751c25304020ab217912b6d",
+        "role": "normative_wording_zero_selected_semantic_decoder_state",
+        "runtime_observation_performed": false,
+        "schema_version": null,
+        "task_id": "semantic_IR_reconstruction"
+      },
+      "authority": {
+        "model_manager_constructed": false,
+        "model_loaded": false,
+        "inference_executed": false,
+        "training_executed": false,
+        "runtime_admitted": false,
+        "teacher_qualified": false,
+        "proof_authority": false,
+        "checkpoint_bytes_authenticated": false
+      }
+    },
+    {
+      "schema": "ir-persisted-binding-resolution/v1",
+      "storage_path": "/home/barberb/lift_coding/external/ipfs_accelerate/model_manager.duckdb",
+      "binding_snapshot_revision": "db61115def69e9d1b339362ed1ce94876d7b2a1fda2de78a59f9b60db7cdc728",
+      "catalog_revision": "bafkreialaqkjixflrumdblcpl6b5u2yf2uyfymfi5twamlx32mnz5y5jnu",
+      "selected_binding": {
+        "catalog_model_id": "model_28a4bb4e550d14a9eda1e0beedb9aabdc8c3a804dfc08962151b1bac0867126a",
+        "checkpoint_sha256": "aa2f75cad0ade34a3965a4f0b71bdc2fe962f5b863b38133927978ea2673aeb3",
+        "declaration": {
+          "dimension": 768,
+          "dimension_role": "input_embedding",
+          "donor": null,
+          "format_id": null,
+          "initialization_only": false,
+          "ir_family_id": "legal_ir",
+          "original_checkpoint_pin": {
+            "bytes": 4779949,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-ce/selected-state.json",
+            "sha256": "aa2f75cad0ade34a3965a4f0b71bdc2fe962f5b863b38133927978ea2673aeb3"
+          },
+          "profile_id": null,
+          "proof_authority": false,
+          "record_id": "ir-model-asset-binding/v1:d537d0366d6e846dfb9610ea6b237ccde8ec0389e33ead2c51b511f49cdcaa7a",
+          "role": "normative_wording_ce_selected_semantic_decoder_state",
+          "runtime_ready": false,
+          "schema_version": null,
+          "task_id": "semantic_IR_reconstruction",
+          "teacher_qualified": false,
+          "trained": true
+        },
+        "dimension": 768,
+        "dimension_role": "input_embedding",
+        "format_id": null,
+        "ir_family_id": "legal_ir",
+        "original_checkpoint_bytes_verified": false,
+        "profile_id": null,
+        "record_id": "ir-model-asset-binding/v1:d537d0366d6e846dfb9610ea6b237ccde8ec0389e33ead2c51b511f49cdcaa7a",
+        "role": "normative_wording_ce_selected_semantic_decoder_state",
+        "runtime_observation_performed": false,
+        "schema_version": null,
+        "task_id": "semantic_IR_reconstruction"
+      },
+      "authority": {
+        "model_manager_constructed": false,
+        "model_loaded": false,
+        "inference_executed": false,
+        "training_executed": false,
+        "runtime_admitted": false,
+        "teacher_qualified": false,
+        "proof_authority": false,
+        "checkpoint_bytes_authenticated": false
+      }
+    }
+  ],
+  "database_file_witness_unchanged": true,
+  "model_manager_constructed": false,
+  "model_loaded": false,
+  "database_writes": false,
+  "source_bytes_or_Hub_authentication_performed": false,
+  "runtime_admitted": false,
+  "teacher_qualified": false,
+  "proof_authority": false,
+  "external_running_service_refreshed": false
+}

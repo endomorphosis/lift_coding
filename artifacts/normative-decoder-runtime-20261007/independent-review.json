@@ -1,0 +1,124 @@
+{
+  "schema": "normative-selected-runtime-independent-code-review/v1",
+  "reviewed_utc": "2026-10-07T04:18:11.451926+00:00",
+  "approved": true,
+  "findings": [],
+  "source_file_pins": [
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py",
+      "bytes": 36929,
+      "sha256": "3aaa92143de29d34b9ad07503f4ee12111e5d407f1f3f6fe6244c61fddf98c1f"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/normative_legal_ir_runtime.py",
+      "bytes": 8956,
+      "sha256": "0873cf30118c71aaa51db3068e8e8be3d12f60bdc49fbe0634b1d157e2ab3213"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/checkpoint_hub.py",
+      "bytes": 16942,
+      "sha256": "afb659af856780cbd9a36ac171139bbf42fad25e10f368568a964c6b11b8a790"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-datasets-20261007/tests/unit/logic/formalization/autoencoder/test_normative_legal_ir_runtime.py",
+      "bytes": 10788,
+      "sha256": "04bd5e60d16da66fcfc652b8ab40a520fab45104873ef39efd34e4478ef0e2e6"
+    }
+  ],
+  "base_commit": "497362d8aa117a210769423ec6a14d8010d4588c",
+  "repository": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-datasets-20261007",
+  "review_scope": "Independent read-only source/diff/test review of the opt-in cached-original-split runtime. No production files modified, test/model/inference/training/database/network operations performed by reviewer. XML receipts inspected without rerunning controls.",
+  "ready_for_bounded_original_cached_source_replay": true,
+  "resolved_prior_findings": [
+    {
+      "id": "loaded-registration-owner-before-selector-derivation",
+      "problem": "Initial normative metadata preparation authenticated the current helper file but used the loaded registration helper before checking its module origin.",
+      "resolution": "Current normative _prepare verifies all loaded pinned owner origins before ir_model_asset_record_id, then repeats origin validation after the final metadata file fence.",
+      "controls": [
+        "test_foreign_loaded_registry_origin_refuses_before_identity_helper",
+        "test_identity_helper_origin_change_is_caught_at_metadata_closing_fence"
+      ],
+      "status": "resolved in reviewed source; both controls included in final31-pass receipt"
+    }
+  ],
+  "reviewed_contract": {
+    "public_request_fields": 7,
+    "source_owner_files": 15,
+    "selection": "Only selected=True plus role=selected; last-attempt aliases remain refused even when their selected header isTrue.",
+    "recipes": [
+      {
+        "name": "normative-wording-zero",
+        "weight": 0.0
+      },
+      {
+        "name": "normative-wording-ce",
+        "weight": 0.05
+      }
+    ],
+    "recipe_validation": "Exact canonical JSON comparison; integer/bool zero, alternate weights, extra keys, continuation recipe and wrong named recipe refuse.",
+    "separation": "LegalIR input_embedding384/768 only;8D,786D,other families,latent role and legal-text reconstruction task refuse. Frozen original32 lexical codec and ordering are independently checked.",
+    "shared_preflight": "Complete32 selected tensors,13 raw donor tensors,typed buffer geometry,weights/tensor digests,donor lineage,zero/frozen projection joins,saved TRAIN transforms,normalization and count-prior receipts remain unchanged.",
+    "cached_inputs": "Original saved preprocessing source split and complete source-context digest/order joins only. Source rows/context fields stay closed and target-free. Paragraph vectors remain caller-pinned bytes with saved producer authenticationFalse.",
+    "repeated_custody": "Private preparation callback retains the normative recipe/contract during every handle recheck. Shared strict canonical single-link file checks,closing-all-file witnesses,loaded-owner checks and post-load/pre/post-inference refusals remain active for all15 owners.",
+    "telemetry": "No metadata load claim. Lazy-open and inherited inference errors retain actual started/returned flags and serializable candidate report after a completed call followed by refusal.",
+    "original_api": "Original five-field API/default exact continuation recipe,13-owner closure,plan schema and public signatures retain their behavior; additions are private engine hooks and lazy opt-in Hub gateways.",
+    "candidate_registry_selector": "Native record-ID helper emits the exact10 selector fields with known selected role and checkpoint SHA; nullable native fields remainNone and model_manager_binding_resolved=False. It does not query the store or authenticate persisted availability.",
+    "native_ir_schema_version": null,
+    "decoder_profile_id": null,
+    "decoder_format_id": null,
+    "qualification_and_proof_authority": "All existing false flags retained; execution-contract ID is not a native profile/schema/format identity."
+  },
+  "unchanged_reused_source_pins": [
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_numeric.py",
+      "bytes": 15840,
+      "sha256": "097719a4ba5d70f21572c741166d4e09962cc5c1e108964a88ee24b5c8879f30",
+      "matches_captured_base_git_blob": true
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/ir_model_manager_import.py",
+      "bytes": 29300,
+      "sha256": "5d50f879d6e1e80fc68a29060680fcac9e234f62a3732f7c697f31360ca9506b",
+      "matches_captured_base_git_blob": true
+    }
+  ],
+  "retained_control_receipts": [
+    {
+      "file_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/runtime-controls.xml",
+        "bytes": 40659,
+        "sha256": "eeb055e817cac48ae9eac45eb40e2443265f1f95027566ec74cbc0b6e9bcbb0d"
+      },
+      "counts": {
+        "tests": 191,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "run_by": "root; receipt inspected only by independent reviewer"
+    },
+    {
+      "file_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/normative-controls-final.xml",
+        "bytes": 6344,
+        "sha256": "dcb72c2d71aded6a2a47d2e4851a7cbf0f453ef3b0bf716fa9181a371843ee6d"
+      },
+      "counts": {
+        "tests": 31,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "run_by": "root; receipt inspected only by independent reviewer"
+    }
+  ],
+  "retained_distinct_cases": 194,
+  "overlapping_old_normative_cases_not_added_again": 28,
+  "limits": [
+    "This is code/boundary review, not a numerical replay result or semantic/teacher/proof/runtime qualification.",
+    "Use freshly regenerated15-owner option/plan pins for this reviewed source generation; earlier pre-fix metadata plans remain historical and must not have source pins edited to pass.",
+    "The wrapper supports only the original cached split; it does not admit new normative cohorts,free text,nonempty qualifiers,an encoder forward or8192-token execution.",
+    "Inherited encoder_experiment_tokens512 is an experiment setting; this wrapper does not newly authenticate encoder provenance. Original historical768 encoder8192 provenance remains separate.",
+    "Root will independently resolve emitted selectors against the real read-only catalog; this review opened no live database."
+  ]
+}

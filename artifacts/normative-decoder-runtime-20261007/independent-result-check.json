@@ -1,0 +1,202 @@
+{
+  "schema": "normative-original-cache-independent-result-check/v1",
+  "checked_utc": "2026-10-07T04:25:51.236572+00:00",
+  "approved": true,
+  "findings": [],
+  "scope": "Independent stdlib read-only validation of durable result/preflight/candidate/parity/catalog receipts, source scripts and exact byte pins. No model, inference, training, test rerun, live database or network operation by reviewer.",
+  "generation_result_pin": {
+    "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/generation-final/generation-result.json",
+    "bytes": 6811,
+    "sha256": "a76e610965f42ec53e880a317c434754cc71596e49fe2712f035a3f43a1e5a50"
+  },
+  "parent_parity_pin": {
+    "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/original-parent-parity.json",
+    "bytes": 3614,
+    "sha256": "f3909e36ab5707cc7bcc13ebbfca5505a86bc1952e2ec301adf3bbe67069b59e"
+  },
+  "registered_selector_resolution_pin": {
+    "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/registered-selector-resolution.json",
+    "bytes": 11655,
+    "sha256": "aa349bf388783e71ad36487291694a87a3f6d9f5e03e376abacb9d3173195c31"
+  },
+  "preflight_pin": {
+    "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/preflight-final/original-assets-preflight.json",
+    "bytes": 7931,
+    "sha256": "a2825acf33b8f80d2bc3ee95354a9117e358cb2a7cdd6b4b24d10b228a272029"
+  },
+  "independent_source_review_pin": {
+    "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/independent-review.json",
+    "bytes": 7716,
+    "sha256": "2ffcc58086580c85a4e5c95768ee6004af5724c08f68a0359e4d340d6d2786bf"
+  },
+  "lanes": [
+    {
+      "dimension": 384,
+      "arm": "normative-wording-ce",
+      "rows": 48,
+      "typed_prediction_records": 48,
+      "EOS_reached": 48,
+      "token_status_EOS_parent_parity": 48,
+      "candidate_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/generation-final/384-normative-wording-ce-candidate-report.json",
+        "bytes": 143824,
+        "sha256": "ca278c2518a8fb800306cfda6c56f656f1f9bc6c7296699c973d0f75720f7ca6"
+      },
+      "metadata_plan_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/preflight-final/384-normative-wording-ce-metadata-plan.json",
+        "bytes": 45348,
+        "sha256": "f1a0ef78f5b4c1695445572c3a52b0b31d8a60aea6c8fba7b6a0f6fe3d361cec"
+      },
+      "options_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/preflight-final/384-normative-wording-ce-options.json",
+        "bytes": 11920,
+        "sha256": "c16122ad7a07920af0610d1d7727a41f2064d59fb73f31fe1997f1399c600da3"
+      },
+      "parent_prediction_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/contextual-legal-runtime-20261006/384-fresh-source-only-candidates.json",
+        "bytes": 141231,
+        "sha256": "1c59f99df7453841818b2d2f43524c36fa9030e0aa068f376bd80241c8f4edf3"
+      },
+      "model_tensor_sha256": "0b3c7c3b1a5581cd393d9bb8db1d24b87fe2cb9dff0be268aa2b5ed1f88b6594",
+      "source_inputs_digest": "522377593df7bf0023339ee6e09d858083a8b906c8c752b489e441a204abf3aa",
+      "source_contexts_digest": "3724b11eba3c9428f2754949b183f17943d91249ab0532a1a77d0bf75877bb89",
+      "resolved_record_id": "ir-model-asset-binding/v1:aa588d1669769d996f9626d2693ff5866ce402ca3372574e18e290342c7e4435",
+      "all_original_source_row_and_byte_joins_verified": true
+    },
+    {
+      "dimension": 384,
+      "arm": "normative-wording-zero",
+      "rows": 48,
+      "typed_prediction_records": 48,
+      "EOS_reached": 48,
+      "token_status_EOS_parent_parity": 48,
+      "candidate_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/generation-final/384-normative-wording-zero-candidate-report.json",
+        "bytes": 143831,
+        "sha256": "b74c7d95075d13ea46497382b51068e2b0b21a04e47f8ffa7155a6fc32c5008c"
+      },
+      "metadata_plan_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/preflight-final/384-normative-wording-zero-metadata-plan.json",
+        "bytes": 45355,
+        "sha256": "0a4eaebdb8585b56f485597b5890184deae398d9446b3b70c465d4daf3b8664f"
+      },
+      "options_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/preflight-final/384-normative-wording-zero-options.json",
+        "bytes": 11924,
+        "sha256": "8675ec23499fac4e3d70cd9dbce5869eb81a1341f5505ca103f0fa48de10fe0e"
+      },
+      "parent_prediction_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/contextual-legal-runtime-20261006/384-fresh-source-only-candidates.json",
+        "bytes": 141231,
+        "sha256": "1c59f99df7453841818b2d2f43524c36fa9030e0aa068f376bd80241c8f4edf3"
+      },
+      "model_tensor_sha256": "e918a196684aa2f7d4021c210908eaba2517542e14523d98c4f72419c23ae3b3",
+      "source_inputs_digest": "522377593df7bf0023339ee6e09d858083a8b906c8c752b489e441a204abf3aa",
+      "source_contexts_digest": "3724b11eba3c9428f2754949b183f17943d91249ab0532a1a77d0bf75877bb89",
+      "resolved_record_id": "ir-model-asset-binding/v1:0ea60eed1f606e655940a8e45c5db151d9686fcb8bb532b94866e6f8947262c8",
+      "all_original_source_row_and_byte_joins_verified": true
+    },
+    {
+      "dimension": 768,
+      "arm": "normative-wording-ce",
+      "rows": 48,
+      "typed_prediction_records": 48,
+      "EOS_reached": 48,
+      "token_status_EOS_parent_parity": 48,
+      "candidate_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/generation-final/768-normative-wording-ce-candidate-report.json",
+        "bytes": 143825,
+        "sha256": "bd837e59f9dced1a1bc0fbaff7ed474901e33db21b45aeef72eca34884ed358e"
+      },
+      "metadata_plan_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/preflight-final/768-normative-wording-ce-metadata-plan.json",
+        "bytes": 45349,
+        "sha256": "665acb9974760f5d6ecc6c603eb6df78fa8451dc426293b522487568b1327873"
+      },
+      "options_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/preflight-final/768-normative-wording-ce-options.json",
+        "bytes": 11921,
+        "sha256": "4933a362ede1c8002fc0370be4f549f27c04760e9d8e8eab7ab5631d2795734b"
+      },
+      "parent_prediction_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/contextual-legal-runtime-20261006/768-fresh-source-only-candidates.json",
+        "bytes": 141232,
+        "sha256": "9dfcade8a446865a56960ae36562a25ac4289f471b70aa5ed3cfb6f3607cf046"
+      },
+      "model_tensor_sha256": "3fe21b42657bf33f5d0d129d538b72dbb5808f9cc491a3822abd902b13a74b6d",
+      "source_inputs_digest": "bd0b7d47f1bcfa2744fed81f307d378c2055da8fd0c04e6bb823d79f7327f45a",
+      "source_contexts_digest": "c9f44fe597b094fad86b603dc0e7ab0ea7f5902b8a845a56d97ae726245ca6cd",
+      "resolved_record_id": "ir-model-asset-binding/v1:d537d0366d6e846dfb9610ea6b237ccde8ec0389e33ead2c51b511f49cdcaa7a",
+      "all_original_source_row_and_byte_joins_verified": true
+    },
+    {
+      "dimension": 768,
+      "arm": "normative-wording-zero",
+      "rows": 48,
+      "typed_prediction_records": 48,
+      "EOS_reached": 48,
+      "token_status_EOS_parent_parity": 48,
+      "candidate_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/generation-final/768-normative-wording-zero-candidate-report.json",
+        "bytes": 143832,
+        "sha256": "ddcb222aac2c16579dfb9d39091a15138ac69029eb78fcf32aa972442b4d6053"
+      },
+      "metadata_plan_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/preflight-final/768-normative-wording-zero-metadata-plan.json",
+        "bytes": 45356,
+        "sha256": "ead0c350032d51edb317bac392988218ed9fa179ee53578473c777b49fd52647"
+      },
+      "options_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-decoder-runtime-20261007/preflight-final/768-normative-wording-zero-options.json",
+        "bytes": 11925,
+        "sha256": "1f2f4ff29def6b87c96529df71b40831491db3645063bd3ec7666d8c760e2a16"
+      },
+      "parent_prediction_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/contextual-legal-runtime-20261006/768-fresh-source-only-candidates.json",
+        "bytes": 141232,
+        "sha256": "9dfcade8a446865a56960ae36562a25ac4289f471b70aa5ed3cfb6f3607cf046"
+      },
+      "model_tensor_sha256": "991f9a1abdf01b72ac5f827adde5ef7be5af28fc0dc3a3db8e4e6e2d8816f379",
+      "source_inputs_digest": "bd0b7d47f1bcfa2744fed81f307d378c2055da8fd0c04e6bb823d79f7327f45a",
+      "source_contexts_digest": "c9f44fe597b094fad86b603dc0e7ab0ea7f5902b8a845a56d97ae726245ca6cd",
+      "resolved_record_id": "ir-model-asset-binding/v1:958f84ca889bf8c19e39f293e015b5bc54b23f49e751c25304020ab217912b6d",
+      "all_original_source_row_and_byte_joins_verified": true
+    }
+  ],
+  "total_prediction_records": 192,
+  "correctly_typed_nonempty_token_records": 192,
+  "EOS_count": 192,
+  "exact_original_parent_token_status_EOS_matches": 192,
+  "token_sequence_lengths": {
+    "minimum": 38,
+    "maximum": 269,
+    "output_cap": 512
+  },
+  "current_file_pins_checked": 53,
+  "closing_all_file_bytes_and_identity_fences_passed": true,
+  "verified": {
+    "four_unique_selected_arm_widths": true,
+    "all_row_order_and48_denominators": true,
+    "no_bool_token_indices_or_missing_prediction_fields": true,
+    "actual_source_packet_digests_and_row_receipts": true,
+    "recorded_model_tensor_before_after_authentication_joins": true,
+    "raw_original11_input_asset_byte_pins": true,
+    "all15_current_source_owner_pins": true,
+    "genuine_reader_driver_source_and_pinned_metadata_receipt": true,
+    "four_exact_ten_field_selector_to_registered_original_pin_joins": true,
+    "all_native_profile_schema_format_unknown_preserved": true,
+    "all_runtime_teacher_proof_quality_flags_false": true
+  },
+  "honest_limits": [
+    "Parity is only to archived original-parent candidate token/status/EOS outputs on the same48 cached original validation rows per lane; it is not a new semantic/gold evaluation, held-out generalization, convergence or legal-prose reconstruction result.",
+    "Model/tensor/RNG immutability is checked through pinned genuine numerical source and recorded before/after digest observations; the reviewer did not reload tensors or repeat numerical inference.",
+    "Persisted availability resolution is verified from its independently captured genuine-read-only receipt and source; the reviewer did not reopen the live database or claim a new current catalog snapshot.",
+    "EOS is an explicit typed generation observation; token_ids use the existing representation excluding the terminator and are compared unchanged with the archived representation.",
+    "Paragraph-vector producer authentication remainsFalse; encoder512 experiment declaration and historical768/8192 provenance are not upgraded by this wrapper."
+  ],
+  "runtime_admitted": false,
+  "teacher_qualified": false,
+  "proof_authority": false,
+  "fresh_semantic_quality_qualified": false,
+  "legal_prose_reconstruction_measured": false
+}
