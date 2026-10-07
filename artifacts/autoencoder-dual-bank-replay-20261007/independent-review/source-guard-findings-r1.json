@@ -1,0 +1,51 @@
+{
+  "admitted": false,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/experiment-source/dual_bank_runtime_adapter.py": {
+      "bytes": 17771,
+      "sha256": "05f353e058e830eadb86e14d955f5c2e6b2627bdc17f922d50f2032092556df9"
+    }
+  },
+  "author_pure_suites_independently_passed": {
+    "evaluation": 16,
+    "runtime_interface": 15
+  },
+  "execution_readiness_granted": false,
+  "findings": [
+    {
+      "detail": "check_bank accepts a resealed descriptor with unsupported qualification/dimension/bank-count/fake-bank metadata because only digest/schedule/row identities are checked. Driver currently creates supported internal descriptors, but public private-helper guards do not enforce the claimed boundary.",
+      "id": "descriptor_metadata_not_closed",
+      "reproduced_synthetic_cases": [
+        {
+          "accepted_by_estimate_training_work_bytes": true,
+          "field": "qualified",
+          "value": true
+        },
+        {
+          "accepted_by_estimate_training_work_bytes": true,
+          "field": "dimension",
+          "value": 768
+        },
+        {
+          "accepted_by_estimate_training_work_bytes": true,
+          "field": "bank_count",
+          "value": 3
+        },
+        {
+          "accepted_by_estimate_training_work_bytes": true,
+          "field": "fake_360_row_bank",
+          "value": true
+        }
+      ],
+      "required_resolution": "Exact supported descriptor metadata/false flags and bank-receipt closure; independently resealed mutation cases must be refused.",
+      "severity": "source_contract"
+    }
+  ],
+  "model_forward_or_backward_executed": false,
+  "models_executed": false,
+  "passed": false,
+  "qualified": false,
+  "resource_actions_performed": false,
+  "schema": "dual-bank-replay-independent-source-review-findings/v1",
+  "synthetic_only": true
+}

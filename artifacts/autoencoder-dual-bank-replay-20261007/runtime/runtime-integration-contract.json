@@ -1,0 +1,82 @@
+{
+  "admitted": false,
+  "arm": "dual-bank-retention-ce",
+  "cache_ownership": "two authentic detached caches for one inherited working model; validated tensor/fixed/version handles retained; no extra model/tensor copy",
+  "checkpoint_promoted": false,
+  "cli": [
+    "--phase preflight|training",
+    "--dependency-root",
+    "--extension-root",
+    "--manifest",
+    "--plan",
+    "--output",
+    "--dimension 384"
+  ],
+  "driver": "scripts/ops/autoencoder/benchmark_dual_bank_replay.py",
+  "dual_auxiliary": {
+    "first_bank": "control",
+    "full_vocabulary_size": 32,
+    "rows": 1020,
+    "rows_per_actual_template": 255,
+    "rows_per_bank": 510,
+    "updates_per_bank": 85,
+    "weight": 0.05
+  },
+  "encoder_executed": false,
+  "endpoint_summary_contract": [
+    "arm",
+    "dimension",
+    "budget_completed",
+    "states.initial",
+    "states.selected",
+    "states.last-attempt",
+    "training_ref",
+    "inherited_training_ref",
+    "postfit.9_original_panels_per_role",
+    "full180_postfit_readouts.selected.control",
+    "full180_postfit_readouts.selected.balanced",
+    "full180_postfit_readouts.last-attempt.control",
+    "full180_postfit_readouts.last-attempt.balanced",
+    "source_inventory_sha256_by_role",
+    "dual_source_schedule",
+    "fresh_optimizer",
+    "fresh_scheduler",
+    "exact_optimizer_resume"
+  ],
+  "execution_readiness_granted": false,
+  "guarded_phase_inputs_required": [
+    "complete immutable E initializer owner closure and recursive saved-reference artifacts",
+    "E selected parent state plus parent training report and validation panel",
+    "both authentic source inventories and native384 producer closures",
+    "original90-rule census and reviewed candidate renderer",
+    "root predeclared comparison protocol",
+    "new extension source pins and source freeze",
+    "strict phase profiles and independent execution readiness",
+    "existing owned scheduler/resource configuration; no foreign lease resets"
+  ],
+  "lake_executed": false,
+  "loss_dispatch": "even global t -> control, odd -> balanced; bank-local floor(t/2); exactly one authentic six-row full32 mean modality CE per update",
+  "manifest_schema": "dual-bank-replay-manifest/v1",
+  "metadata_reconciliation": "save untouched training-inherited.json first; unchanged original stream validator; replay actual 170 dual commits and preserve inapplicable old template counters",
+  "models_executed": false,
+  "optimizer_steps": 0,
+  "original_streams": {
+    "count_rows": 1220,
+    "decoder_rows": 1220,
+    "source_values": 12800,
+    "steps": 170,
+    "target_tokens": 112920,
+    "used113_auxiliary_rows": 1020
+  },
+  "phase_profiles_path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/phase-profiles.json",
+  "plan_schema": "dual-bank-replay-plan/v1",
+  "qualified": false,
+  "real_trainer_wired_in_new_private_source": true,
+  "receipt_ownership": "authentic nested local receipt preserved; new global/bank/schedule wrapper; retries have no cursor",
+  "schema": "dual-bank-replay-private-runtime-interface/v1",
+  "scope": "authored empty-qualifier32-token numerical diagnostic; current canonical compiler/parser/decompiler/Lean gate not executed; original paragraph-vector producer limitations preserved",
+  "source_freeze": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/source-freeze.json",
+    "sha256": "b0665e581bbd9edf011a41069bc613afaed0a7eb0e07cda0f92ee2ccc66af97d"
+  }
+}

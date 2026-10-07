@@ -1,0 +1,60 @@
+{
+  "actual_panel_ms": [
+    {
+      "cohort": "original_train48",
+      "ms_per_paragraph": 9.319959458177133,
+      "role": "selected"
+    },
+    {
+      "cohort": "normative_train48",
+      "ms_per_paragraph": 9.983533207559958,
+      "role": "selected"
+    },
+    {
+      "cohort": "new_balanced_train48",
+      "ms_per_paragraph": 9.987566229635073,
+      "role": "selected"
+    },
+    {
+      "cohort": "exposed_v3_48",
+      "ms_per_paragraph": 10.537031083610296,
+      "role": "selected"
+    },
+    {
+      "cohort": "original_train48",
+      "ms_per_paragraph": 9.733051167131634,
+      "role": "last-attempt"
+    },
+    {
+      "cohort": "normative_train48",
+      "ms_per_paragraph": 10.491784583185412,
+      "role": "last-attempt"
+    },
+    {
+      "cohort": "new_balanced_train48",
+      "ms_per_paragraph": 11.569757749384735,
+      "role": "last-attempt"
+    },
+    {
+      "cohort": "exposed_v3_48",
+      "ms_per_paragraph": 10.684306290689468,
+      "role": "last-attempt"
+    }
+  ],
+  "admitted": false,
+  "all8_max_ms": 11.569757749384735,
+  "all8_min_ms": 9.319959458177133,
+  "archived_README_unchanged": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/README.md",
+    "sha256": "086444196cf5056cc076a35c93065d823f145e94535c29889e8afcb73f42c457"
+  },
+  "canonical_corrected_guide": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/dual_bank_replay_results_20261007.md",
+  "canonical_guide_preimage_sha256": "4bb18759f4f872ce14963fc90366a060779daf383c8bc4af4883f2b253cedc63",
+  "canonical_guide_sha256": "6862160d284e380751754cfee58607c09de69910aaa2beddb6649e9d9c19ac86",
+  "correction": "Use approximately9\u201312ms/paragraph for all8physicalpanels; selected-only9.32\u201310.54.",
+  "finding": "Immutable archived README approximate9\u201311ms summary omits one last-attempt11.5697577494ms panel.",
+  "numerical_outputs_and_archive_members_changed": false,
+  "proof_authority": false,
+  "qualified": false,
+  "schema": "dual-bank-replay-post-archive-documentation-amendment/v1"
+}

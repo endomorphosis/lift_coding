@@ -1,0 +1,25 @@
+{
+  "admitted": false,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/evaluation/source/evaluate_dual_bank_replay.py": {
+      "bytes": 28064,
+      "sha256": "bd2862167fa61ba4451b79436e79609e5ff6d8280151256aab459ba9df1837f5"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/evaluation/tests/test_dual_bank_evaluation.py": {
+      "bytes": 17982,
+      "sha256": "eb8bb5af599997887156d7b6d75371939e564052b1a30759dee01d9c8311eb43"
+    }
+  },
+  "findings": [],
+  "lake_executed": false,
+  "model_or_encoder_executed": false,
+  "output_tokens": 512,
+  "passed": true,
+  "physical_panels": 8,
+  "qualified": false,
+  "schema": "dual-bank-replay-postfit-evaluator-source-freeze/v1",
+  "source_context_tokens": 512,
+  "temperature": 0,
+  "tests": 16,
+  "training_executed": false
+}

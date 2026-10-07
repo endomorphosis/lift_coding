@@ -1,0 +1,29 @@
+{
+  "extensions": {
+    "balanced_wording_candidates.py": "802bf91d12e2ce5dc4d7103af0c0081dd9ab56eade31094caea768212d8d07a4",
+    "balanced_wording_runtime_adapter.py": "334506648a870f0b68bc3a8935f23ed4c8fc71ed3a50a12df285eb21801e0fe6",
+    "dual_bank_retention.py": "15accfcf8bbc4e578e32ca7842ac338be2b563458c4c90a85fbe18429da000f1",
+    "dual_bank_runtime_adapter.py": "6c1b8d86ba05b46f1b8883d873718d7eeccc3edf638e04900c8c17e57745bb6a",
+    "scripts/ops/autoencoder/benchmark_dual_bank_replay.py": "bde90325cc251fa6b88a3da3482bad7f637ec36569c677495db65b3d64fabf5a",
+    "scripts/ops/autoencoder/evaluate_dual_bank_replay.py": "bd2862167fa61ba4451b79436e79609e5ff6d8280151256aab459ba9df1837f5"
+  },
+  "files": {
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-manifest.json": {
+      "bytes": 328680,
+      "sha256": "bdb3a58baa70dfcdf462a19f0db7d0789a1e70ff276546b6e29b336f9e7f85ba"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-plan.json": {
+      "bytes": 327420,
+      "sha256": "07c4c859779608e20d3b89cd4e71cee39698e618bb267391b434cf7adb9652d9"
+    }
+  },
+  "findings": [],
+  "inputs": 1325,
+  "logical_panels": 8,
+  "models_executed": false,
+  "passed": true,
+  "physical_panels": 8,
+  "qualified": false,
+  "reservation_acquired": false,
+  "schema": "dual-bank-replay-actual-evaluation-preparation/v1"
+}

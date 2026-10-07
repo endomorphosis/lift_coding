@@ -1,0 +1,1339 @@
+{
+  "Constitution_formalized": false,
+  "actual_evaluation_pending": true,
+  "actual_preflight_pending": true,
+  "actual_training_pending": true,
+  "admitted": false,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/candidates/source/build_balanced_wording_candidates.py": {
+      "bytes": 43288,
+      "sha256": "802bf91d12e2ce5dc4d7103af0c0081dd9ab56eade31094caea768212d8d07a4"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/design.md": {
+      "bytes": 9201,
+      "sha256": "79498e8419bf2864c9717eafc248ffded3aaf77ad42ed43d374b2a015ad5244c"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/dual_bank_retention.py": {
+      "bytes": 26660,
+      "sha256": "15accfcf8bbc4e578e32ca7842ac338be2b563458c4c90a85fbe18429da000f1"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/proposed-dual-bank-schedule.json": {
+      "bytes": 443751,
+      "sha256": "11a9c660f5101dbcf2981cfa0d451d13c6a81ebbc75b7ad2699e07d37106e2e1"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/source-results-freeze.json": {
+      "bytes": 2835,
+      "sha256": "e3af37a3d650dccf0199c78619961c66d427f33d683a0e203643548e70ffa55d"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/runtime/experiment-source/balanced_wording_runtime_adapter.py": {
+      "bytes": 20710,
+      "sha256": "334506648a870f0b68bc3a8935f23ed4c8fc71ed3a50a12df285eb21801e0fe6"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/runtime-author-interface-tests-r2.log": {
+      "bytes": 3337,
+      "sha256": "21d219d79fcc9743a1665d747a46cbaa8c83a1eff1d812d8473a6600fb1719ca"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/runtime-independent-mutations-r2.log": {
+      "bytes": 1633,
+      "sha256": "8ac68a77516fc33618cc05ff5e57a900a4cd8271f6032cf2994c8ea17a5af059"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/source-guard-findings-r1.json": {
+      "bytes": 1878,
+      "sha256": "4943fa13ba9d0d2bc99f164d59bdf9cb6ec2bc4e8859f5c6fa9fec980c35af13"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/test_independent_source_guards.py": {
+      "bytes": 2661,
+      "sha256": "933d46b9314913911ccbb8a82a8ea45f13afe64b3ee2dd93b5463035db992c34"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/predeclared-protocol.json": {
+      "bytes": 6692,
+      "sha256": "75d4d01893578265c2be3bcc53ed96ca661fdb03781704a074b9df56e6bf30d2"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/experiment-source/balanced_wording_candidates.py": {
+      "bytes": 43288,
+      "sha256": "802bf91d12e2ce5dc4d7103af0c0081dd9ab56eade31094caea768212d8d07a4"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/experiment-source/balanced_wording_runtime_adapter.py": {
+      "bytes": 20710,
+      "sha256": "334506648a870f0b68bc3a8935f23ed4c8fc71ed3a50a12df285eb21801e0fe6"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/experiment-source/dual_bank_retention.py": {
+      "bytes": 26660,
+      "sha256": "15accfcf8bbc4e578e32ca7842ac338be2b563458c4c90a85fbe18429da000f1"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/experiment-source/dual_bank_runtime_adapter.py": {
+      "bytes": 18962,
+      "sha256": "6c1b8d86ba05b46f1b8883d873718d7eeccc3edf638e04900c8c17e57745bb6a"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/experiment-source/scripts/ops/autoencoder/benchmark_dual_bank_replay.py": {
+      "bytes": 28655,
+      "sha256": "bde90325cc251fa6b88a3da3482bad7f637ec36569c677495db65b3d64fabf5a"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/phase-profiles.json": {
+      "bytes": 4828,
+      "sha256": "9942465438acc88f9411265d8fa1ed9d1a7101ecf7851720eeb147dbbc8a320a"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/pure-tests-validation.log": {
+      "bytes": 3337,
+      "sha256": "f849d732cdc9b354ae22d694426613eeb357edb7c4fd492365d7fe7525d9a9e7"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/ruff-validation.log": {
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/source-freeze.json": {
+      "bytes": 2859,
+      "sha256": "b0665e581bbd9edf011a41069bc613afaed0a7eb0e07cda0f92ee2ccc66af97d"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/tests/test_dual_bank_runtime.py": {
+      "bytes": 20636,
+      "sha256": "bae259e83502944637e51c2bbf80135f022fc453b75edb32624a1f3200111a16"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/experiment-source/ipfs_datasets_py/logic/formalization/autoencoder/long_span_source_value_training.py": {
+      "bytes": 105415,
+      "sha256": "c1663820492a6879b14ab89dfd9b052105cf16378bb015fea08c3220d83456e0"
+    }
+  },
+  "check_count": 302,
+  "checks": [
+    {
+      "name": "frozen-runtime-byte-pin-balanced_wording_candidates.py",
+      "passed": true
+    },
+    {
+      "name": "frozen-runtime-byte-pin-balanced_wording_runtime_adapter.py",
+      "passed": true
+    },
+    {
+      "name": "frozen-runtime-byte-pin-dual_bank_retention.py",
+      "passed": true
+    },
+    {
+      "name": "frozen-runtime-byte-pin-dual_bank_runtime_adapter.py",
+      "passed": true
+    },
+    {
+      "name": "frozen-runtime-byte-pin-benchmark_dual_bank_replay.py",
+      "passed": true
+    },
+    {
+      "name": "frozen-runtime-byte-pin-phase-profiles.json",
+      "passed": true
+    },
+    {
+      "name": "frozen-runtime-byte-pin-pure-tests-validation.log",
+      "passed": true
+    },
+    {
+      "name": "frozen-runtime-byte-pin-ruff-validation.log",
+      "passed": true
+    },
+    {
+      "name": "frozen-runtime-byte-pin-test_dual_bank_runtime.py",
+      "passed": true
+    },
+    {
+      "name": "independent-new-descriptor-mutation-tests10-pass",
+      "passed": true
+    },
+    {
+      "name": "refreshed-author-interface-tests17-independently-pass",
+      "passed": true
+    },
+    {
+      "name": "preserved-entire-r1-before-guard-correction",
+      "passed": true
+    },
+    {
+      "name": "descriptor-exact-keys-fixed384-two-bank360-and-all-false-guards",
+      "passed": true
+    },
+    {
+      "name": "authentic-bank-metadata-and-source-body-closure",
+      "passed": true
+    },
+    {
+      "name": "control13-and-balanced16-exclusion-profiles-retained",
+      "passed": true
+    },
+    {
+      "name": "two-authentic-bank-validation-calls",
+      "passed": true
+    },
+    {
+      "name": "immutable-distinct-cache-pair-shares-one-working-model",
+      "passed": true
+    },
+    {
+      "name": "old-cache-handle-adoption-validator-unchanged",
+      "passed": true
+    },
+    {
+      "name": "reviewed-candidate-builder-unchanged",
+      "passed": true
+    },
+    {
+      "name": "reviewed-pure-retention-owner-unchanged",
+      "passed": true
+    },
+    {
+      "name": "global-step-dispatch-to-authentic-local-step-with-no-cursor",
+      "passed": true
+    },
+    {
+      "name": "loss-untouched-one-forward-full32-6row-source-only",
+      "passed": true
+    },
+    {
+      "name": "nested-local-receipts-not-relabelled",
+      "passed": true
+    },
+    {
+      "name": "full32-stable-CE-argmax-arithmetic-crosscheck",
+      "passed": true
+    },
+    {
+      "name": "one-positive-point05-loss-term-at-each-global-step",
+      "passed": true
+    },
+    {
+      "name": "actual-configure-trainer-import-interception-no-canonical-module-mutation",
+      "passed": true
+    },
+    {
+      "name": "one-fit-fresh-parent-model-optimizer-scheduler-unchanged-selection",
+      "passed": true
+    },
+    {
+      "name": "one-fit-archived-control-chronology-caveat",
+      "passed": true
+    },
+    {
+      "name": "all-original-budgets-fixed",
+      "passed": true
+    },
+    {
+      "name": "inherited-report-durably-saved-before-reconciliation",
+      "passed": true
+    },
+    {
+      "name": "original-E-stream-validator-still-called",
+      "passed": true
+    },
+    {
+      "name": "four-template-counters-derived-from-actual-commits",
+      "passed": true
+    },
+    {
+      "name": "original-nine-panels-both-roles-physically-retained",
+      "passed": true
+    },
+    {
+      "name": "both-endpoint-state-tensor-hashes-and-all-bank-source-readouts",
+      "passed": true
+    },
+    {
+      "name": "detached-parent-cache-preflight-two-recorded-forwards",
+      "passed": true
+    },
+    {
+      "name": "historical-parent-validation-parity-assertion-only-explicit-later-audit-limit",
+      "passed": true
+    },
+    {
+      "name": "protocol-hard-SHA-bound",
+      "passed": true
+    },
+    {
+      "name": "no-encoder-forward-download-canonical-compiler-proof-claim",
+      "passed": true
+    },
+    {
+      "name": "published-preparation-schedule-byte-binding",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-0",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-1",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-1",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-2",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-3",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-3",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-4",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-5",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-5",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-6",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-7",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-7",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-8",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-9",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-9",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-10",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-11",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-11",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-12",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-13",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-13",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-14",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-15",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-15",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-16",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-17",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-17",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-18",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-19",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-19",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-20",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-21",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-21",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-22",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-23",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-23",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-24",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-25",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-25",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-26",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-27",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-27",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-28",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-29",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-29",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-30",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-31",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-31",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-32",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-33",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-33",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-34",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-35",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-35",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-36",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-37",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-37",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-38",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-39",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-39",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-40",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-41",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-41",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-42",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-43",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-43",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-44",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-45",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-45",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-46",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-47",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-47",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-48",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-49",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-49",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-50",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-51",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-51",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-52",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-53",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-53",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-54",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-55",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-55",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-56",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-57",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-57",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-58",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-59",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-59",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-60",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-61",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-61",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-62",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-63",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-63",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-64",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-65",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-65",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-66",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-67",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-67",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-68",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-69",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-69",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-70",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-71",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-71",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-72",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-73",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-73",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-74",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-75",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-75",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-76",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-77",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-77",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-78",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-79",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-79",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-80",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-81",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-81",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-82",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-83",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-83",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-84",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-85",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-85",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-86",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-87",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-87",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-88",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-89",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-89",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-90",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-91",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-91",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-92",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-93",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-93",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-94",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-95",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-95",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-96",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-97",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-97",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-98",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-99",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-99",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-100",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-101",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-101",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-102",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-103",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-103",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-104",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-105",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-105",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-106",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-107",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-107",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-108",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-109",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-109",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-110",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-111",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-111",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-112",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-113",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-113",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-114",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-115",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-115",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-116",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-117",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-117",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-118",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-119",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-119",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-120",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-121",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-121",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-122",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-123",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-123",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-124",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-125",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-125",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-126",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-127",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-127",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-128",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-129",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-129",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-130",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-131",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-131",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-132",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-133",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-133",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-134",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-135",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-135",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-136",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-137",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-137",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-138",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-139",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-139",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-140",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-141",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-141",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-142",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-143",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-143",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-144",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-145",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-145",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-146",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-147",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-147",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-148",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-149",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-149",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-150",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-151",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-151",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-152",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-153",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-153",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-154",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-155",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-155",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-156",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-157",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-157",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-158",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-159",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-159",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-160",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-161",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-161",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-162",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-163",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-163",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-164",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-165",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-165",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-166",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-167",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-167",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-168",
+      "passed": true
+    },
+    {
+      "name": "actual-schedule-position-169",
+      "passed": true
+    },
+    {
+      "name": "adjacent-authentic-meaning-template-pair-169",
+      "passed": true
+    },
+    {
+      "name": "exact-170-updates-1020-presentations-85-and510-per-bank",
+      "passed": true
+    },
+    {
+      "name": "all180-members-two-or-three-times-each-bank",
+      "passed": true
+    },
+    {
+      "name": "all-four-actual-template255-and-three-modalities340",
+      "passed": true
+    },
+    {
+      "name": "schedule-1020-budget-not-doubled",
+      "passed": true
+    },
+    {
+      "name": "inherited-attempts-vs-commits-kept-separate",
+      "passed": true
+    },
+    {
+      "name": "global-step-advances-only-after-optimizer-commit",
+      "passed": true
+    },
+    {
+      "name": "timeout-aborts-incomplete-does-not-add-new-optimizer-resume-policy",
+      "passed": true
+    },
+    {
+      "name": "original-shared-clipping-gradient-scope-not-causally-isolated",
+      "passed": true
+    }
+  ],
+  "execution_readiness_granted": false,
+  "final_run_manifest_and_guardian_admission_review_pending": true,
+  "findings": [],
+  "formalized": false,
+  "independent_author_interface_tests_passed": 17,
+  "independently_authored_descriptor_mutation_tests_passed": 10,
+  "limits": [
+    "Source and synthetic interface review only; no numerical execution, cache allocation, optimizer, encoder, checkpoint loading or resources by reviewer.",
+    "Pure author interface suite invokes the authentic frozen normative configure_trainer definition on synthetic module code; it does not invoke numerical training functions. Gradient tests are synthetic flag checks, not autograd measurements.",
+    "The two authentic caches share the inherited trainer working model; this adapter adds no model/tensor copy. Existing trainer working-copy/snapshot behavior is unchanged.",
+    "Stateless repeat/abort dispatch reuses the same global/bank-local draw. Real inherited timeout paths terminate incomplete; no new automatic retry or optimizer-resume policy is created. Actual attempts/observations/commits must be audited independently.",
+    "Parent validation parity uses an exact runtime equality assertion but saves only its boolean. Independent replay token comparison is not available unless a body is separately persisted.",
+    "One new fit compares archived parent/control, not a fresh matched control. Both bank mixing and auxiliary chronology change; no isolated causal attribution or historical speedup claim.",
+    "All9 original panels for both roles and all8 separate cohort panels remain mandatory. Selected/last aliases are disclosed, not independent replications.",
+    "Known TRAIN meanings and previously exposed v3 are not fresh holdouts. Frozen historical schema owners are not current canonical compiler/family/Lake execution or proof authority."
+  ],
+  "models_or_encoders_executed_by_review": false,
+  "numerical_gradient_or_autograd_tests_executed": false,
+  "passed": true,
+  "proof_authority": false,
+  "qualified": false,
+  "real_declared_schedule_presentations_checked": 1020,
+  "real_declared_schedule_rows_checked": 170,
+  "resolved_prior_finding": {
+    "id": "descriptor_metadata_not_closed",
+    "report": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/source-guard-findings-r1.json",
+    "resolution": "r2 exact descriptor keys/scalars/types/false flags plus authentic metadata digest; every independently resealed mutation now refused. r1 source/history preserved."
+  },
+  "runtime_resources_or_foreign_scheduler_actions": false,
+  "schema": "dual-bank-replay-runtime-source-independent-review/v1",
+  "torch_or_tensor_libraries_imported_by_review": false
+}

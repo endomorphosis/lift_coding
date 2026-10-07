@@ -1,0 +1,33 @@
+{
+  "actual_checks_passed": 8971,
+  "admitted": false,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/actual-preflight-384-r1-independent-review.json": {
+      "bytes": 1381833,
+      "sha256": "4b559a178d5c9265be9b5dcbb7c935b82a61f992c2bdb2ebb41f7ee14a0e9019"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/audit_dual_preflight-r1.py": {
+      "bytes": 48272,
+      "sha256": "d7e6969e651988cc34b4574e881561845de36a0d15f85cea5daf5b947151e8cc"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/audit_dual_preflight.py": {
+      "bytes": 48325,
+      "sha256": "9952f27aeed3065988c4ed7ccaca53ad1dcef89f40e4a1f4e2425d9dcede8983"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/preflight-auditor-r1-invocation.json": {
+      "bytes": 601,
+      "sha256": "edef93e7277071af8359e5e967db02833d9bb97c2fcda1a08982e094618bba52"
+    }
+  },
+  "auditor_only_scope_correction_preserved": true,
+  "basic_pure_audit_controls_passed": 4,
+  "completed_root_attempt": "preflight-384-r1",
+  "correction_scope": "Do not override historical producer encoder_executed=true while requiring the phase wrapper and detached-cache/loss flags false. Exact inherited inventory equality remains checked.",
+  "findings": [],
+  "models_or_encoders_rerun": false,
+  "numerical_outputs_changed": false,
+  "passed": true,
+  "proof_authority": false,
+  "qualified": false,
+  "schema": "dual-bank-replay-preflight-auditor-source-results-freeze/v1"
+}

@@ -1,0 +1,53 @@
+{
+  "admitted": false,
+  "checkpoint_promoted": false,
+  "encoder_executed": false,
+  "execution_readiness_granted": false,
+  "files": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/experiment-source/balanced_wording_candidates.py": {
+      "bytes": 43288,
+      "sha256": "802bf91d12e2ce5dc4d7103af0c0081dd9ab56eade31094caea768212d8d07a4"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/experiment-source/balanced_wording_runtime_adapter.py": {
+      "bytes": 20710,
+      "sha256": "334506648a870f0b68bc3a8935f23ed4c8fc71ed3a50a12df285eb21801e0fe6"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/experiment-source/dual_bank_retention.py": {
+      "bytes": 26660,
+      "sha256": "15accfcf8bbc4e578e32ca7842ac338be2b563458c4c90a85fbe18429da000f1"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/experiment-source/dual_bank_runtime_adapter.py": {
+      "bytes": 17771,
+      "sha256": "05f353e058e830eadb86e14d955f5c2e6b2627bdc17f922d50f2032092556df9"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/experiment-source/scripts/ops/autoencoder/benchmark_dual_bank_replay.py": {
+      "bytes": 28655,
+      "sha256": "bde90325cc251fa6b88a3da3482bad7f637ec36569c677495db65b3d64fabf5a"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/phase-profiles.json": {
+      "bytes": 4828,
+      "sha256": "9942465438acc88f9411265d8fa1ed9d1a7101ecf7851720eeb147dbbc8a320a"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/pure-tests-validation.log": {
+      "bytes": 2951,
+      "sha256": "c16f07a93d74d803245beeb7ffec0f6d91c0ce26b08f37f42a1b1e92ddadf4f1"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/ruff-validation.log": {
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/tests/test_dual_bank_runtime.py": {
+      "bytes": 19356,
+      "sha256": "f21255d1a25b7d7ce91ebcd85c4051e553a5be2cf13897d46d1a4a7ebc2e6fbc"
+    }
+  },
+  "lake_executed": false,
+  "models_executed": false,
+  "optimizer_steps": 0,
+  "output_tokens": 512,
+  "pure_interface_tests_passed": 15,
+  "qualified": false,
+  "schema": "dual-bank-replay-private-source-freeze/v1",
+  "source_context_tokens": 512,
+  "temperature": 0
+}

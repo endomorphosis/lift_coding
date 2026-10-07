@@ -1,0 +1,820 @@
+{
+  "concurrent_working_tree_edits_excluded": true,
+  "findings": [],
+  "passed": true,
+  "preservation_policy": "Build reviewed exact whitelist on freshly fetched remote main; preserve every unselected entry and ordinary indexes/HEADs. Later verify retained reviewed tip ancestry and these blob bytes.",
+  "repositories": {
+    "datasets": {
+      "changed_entries": {
+        "docs/autoencoders/README.md": {
+          "mode": "100644",
+          "oid": "c4bb9f5fe76eceeb6794cf0c02e5d7244420db64",
+          "sha256": "d21cc28157bf736ab6183de4a67adb0f52bbc12d71a753ef657a1e07d96e7830",
+          "type": "blob"
+        },
+        "docs/autoencoders/balanced_wording_continuation_20261007.md": {
+          "mode": "100644",
+          "oid": "94f2f12480ccba8ec74638e67bbfb3dbff144c1d",
+          "sha256": "7de96a604788efef0f5582ad3bb8c269f7a8adcb5ae71bbd36062372f6591fa7",
+          "type": "blob"
+        },
+        "docs/autoencoders/dual_bank_wording_training_adapter.md": {
+          "mode": "100644",
+          "oid": "c0ea297cf71fd3edf6896896b8af6eb55ef6a091",
+          "sha256": "824d7d5a716a6fdda658d4a893c0991405293522d509426a8a4ffa17bc05152f",
+          "type": "blob"
+        },
+        "docs/autoencoders/progress_integration.md": {
+          "mode": "100644",
+          "oid": "3fce5ca19aefda0c08586111c3c506deb7ecfa3d",
+          "sha256": "7e511b24c0b6faff15b1ebabe574d110b43c6eca8c061e9ed0e6f58bb93ac721",
+          "type": "blob"
+        },
+        "docs/implementation/legal_scope_trigger_readout_pilot_20261007.md": {
+          "mode": "100644",
+          "oid": "7d6e16bc72e3c161f8ab038cc1bd53b906fff7d5",
+          "sha256": "0742a19ed6bd25063e3d06b0360f465ea5f3fadf4b2f14dbad8ca2d7b729e133",
+          "type": "blob"
+        },
+        "docs/software_contracts/finite_interval_schedule.md": {
+          "mode": "100644",
+          "oid": "015d2e14e4cb5866ff64403a157a1c69edabd897",
+          "sha256": "d41672d24e4212f5a537387b72d651ae55018fb4fea8a831bbacffd15a42a2c1",
+          "type": "blob"
+        },
+        "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_trigger_readout.py": {
+          "mode": "100644",
+          "oid": "aa718b6f3a813a3cd01947640f0a405d377e529b",
+          "sha256": "983b69b8e293aa6211fd8322f9ba6bfe6fa5b8cb853c2d4d0cace1e7e5046344",
+          "type": "blob"
+        },
+        "ipfs_datasets_py/logic/software_contracts/finite_interval_schedule.py": {
+          "mode": "100644",
+          "oid": "2bf6a9c5672428e3259602069de0a618c638a89e",
+          "sha256": "88d4bd5ada266f7fa2807280bcca56fc3695547b8e11ee4bb178ead040a339a6",
+          "type": "blob"
+        },
+        "scripts/ops/autoencoder/dual_bank_wording_replay/dual_bank_training_adapter.py": {
+          "mode": "100644",
+          "oid": "cf7716dc96233496b0d5754229295b5e27896784",
+          "sha256": "433f80f4cca80678d5b8d2976687cf20650a5339a3b670b80139658ef300c4af",
+          "type": "blob"
+        },
+        "scripts/ops/autoencoder/dual_bank_wording_replay/test_dual_bank_training_adapter.py": {
+          "mode": "100644",
+          "oid": "758e9b3f19f5c5d919b0041649f194249a48d3cc",
+          "sha256": "cef2a6dd1140d1d422dd33f2f3bdbfbaca7f907568a789f190cd5a9f684afbac",
+          "type": "blob"
+        },
+        "tests/unit/logic/software_contracts/test_finite_interval_schedule.py": {
+          "mode": "100644",
+          "oid": "c15522f791822f0162c69b72f87f7230f18263d5",
+          "sha256": "d1a83b56e82cc31013e1a9e9effa06d252e203bef8dc770409a018e34040df3c",
+          "type": "blob"
+        },
+        "tests/unit/logic/test_legal_scope_trigger_readout.py": {
+          "mode": "100644",
+          "oid": "fc96b11d808c72d4e8af7dbfd89303c3337b3551",
+          "sha256": "337c18f643eb7ec5aa276ad693cc83a5ad595e71a3e98fbe1acc43e177616a9d",
+          "type": "blob"
+        }
+      },
+      "new_commits": [
+        "271ad796288e17039f036af6a0d003a4628da6ed Add admitted finite interval schedule synthesis and independent checks",
+        "89e485b4e26203c40b930cd9bb5ed71d8eda5207 Merge pull request #1276 from endomorphosis/codex/legal-trigger-readout-model-20261007-01",
+        "e35aef47ef6d67f7d07793be487e2be04ec6c7d6 Add frozen predicted-trigger modality readout experiment",
+        "aed87b0d980422c2ca9efaa26cf92df30c51d768 Add private dual-bank wording replay with truthful per-bank training receipts"
+      ],
+      "parent_publication": "b6abb32636e336536fc1cfc0f78bba2dc04703c5",
+      "reviewed_tip": "271ad796288e17039f036af6a0d003a4628da6ed"
+    },
+    "workspace": {
+      "changed_entries": {
+        "artifacts/dual-bank-wording-adapter-20261007/README.md": {
+          "mode": "100644",
+          "oid": "ff1b757ec89b77bbd4cc05d37a3cf993860ccd6c",
+          "sha256": "d115bd06430a1fab12649d5e53bc1fdc1656a7591d295a2872f10aa674ab4d3d",
+          "type": "blob"
+        },
+        "artifacts/dual-bank-wording-adapter-20261007/cross-agent-integration.json": {
+          "mode": "100644",
+          "oid": "7311c062409ebc6c7f260dbc1df625d6ea4631f1",
+          "sha256": "c7df93f14e778d6cb552b6a9d85378be83768647a14cd8d0c93bff4280e74814",
+          "type": "blob"
+        },
+        "artifacts/dual-bank-wording-adapter-20261007/dual-bank-controls.xml": {
+          "mode": "100644",
+          "oid": "855d6b6c8af4b49ae7bf07edd7961a8c76f16204",
+          "sha256": "5ca7deb99fdc641b33c535afb3712fa505f2127a9f353579c3d9ac5fb33281fc",
+          "type": "blob"
+        },
+        "artifacts/dual-bank-wording-adapter-20261007/independent-result-check.json": {
+          "mode": "100644",
+          "oid": "85c1fe36bf6e6bd53ae26d8113a0be9859278373",
+          "sha256": "bf345cf13ac7589cec18ea972359da2697f97242c83afa6389908409d2bdd7cf",
+          "type": "blob"
+        },
+        "artifacts/dual-bank-wording-adapter-20261007/independent-review.json": {
+          "mode": "100644",
+          "oid": "32e8d2c8f1c93d14fb0edc78feec8c5c37285e59",
+          "sha256": "ed66f7ad266cd36a2fd1f364dfd8591d15d513d5e4f48e525530d0ee9d263644",
+          "type": "blob"
+        },
+        "artifacts/dual-bank-wording-adapter-20261007/legacy-owner-controls.xml": {
+          "mode": "100644",
+          "oid": "3d71bd3b4c58daafb1e45b5fb0ebbc5bda206747",
+          "sha256": "7efecab235f838b0e6df82b16375e0ea3d1e4f2084abed8ca2b5c57129974466",
+          "type": "blob"
+        },
+        "artifacts/dual-bank-wording-adapter-20261007/probe_retained_banks.py": {
+          "mode": "100644",
+          "oid": "7499cf49b35b387b33f44ef9e377fd9ff8392e57",
+          "sha256": "384580801d784a952bd02c13d2f06860ea20492f3d8ab079dc62b94f32897d36",
+          "type": "blob"
+        },
+        "artifacts/dual-bank-wording-adapter-20261007/retain_evidence.py": {
+          "mode": "100644",
+          "oid": "3bb28f552c5a67f28a951971f493757c0e7cd616",
+          "sha256": "0dd3b0e76c9a0e0a0c8d3d620de795d57b96fe0823230b43c54661f560f25cd8",
+          "type": "blob"
+        },
+        "artifacts/dual-bank-wording-adapter-20261007/retained-bank-forward-observations.json": {
+          "mode": "100644",
+          "oid": "ea6eedb0329eebd2a736b8cb372f04c469c4fb19",
+          "sha256": "836dd084f9d503ebe641f986abce3d23e2af38a1ab012b346d02612fc85666c4",
+          "type": "blob"
+        },
+        "artifacts/dual-bank-wording-adapter-20261007/retained-bank-preparation.json": {
+          "mode": "100644",
+          "oid": "b0a35936b93537bc96f14d6122519620683c34ea",
+          "sha256": "2d2d047cc1aa9b77ce8f3e268b7cdc630bf1f0bceb7c06c90989c3240eefbd66",
+          "type": "blob"
+        },
+        "artifacts/dual-bank-wording-adapter-20261007/retention-manifest.json": {
+          "mode": "100644",
+          "oid": "40103054b1e82550f546fa86105a34ebdc910a12",
+          "sha256": "5d9c4c9855aba7405053c72c9359baecb13ca733e738078c1e6a92abdd8cd6c6",
+          "type": "blob"
+        },
+        "artifacts/dual-bank-wording-adapter-20261007/source-github-byte-readback.json": {
+          "mode": "100644",
+          "oid": "2bdf38ecb32379e0cebdf7f64006ab01943f21fe",
+          "sha256": "90f52c6fdef375c76f5a55c3a2510d74b119c9515a701e8af69ce78a70f4a430",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/README.md": {
+          "mode": "100644",
+          "oid": "cf0148e07924e421ced8457cab07932ffb139a8a",
+          "sha256": "ef35ae9592c3c94085d4ca5ff56c4e24b14fc7de641cb0c63408b56a2e4a9f60",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/canonical-preservation-review.json": {
+          "mode": "100644",
+          "oid": "5b337f4aba2194016ad56dbfb20eeb445b269677",
+          "sha256": "60e34c151d61f77e059777caba32d65742c315befb5a4592f898929c32205908",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/combined-tests.xml": {
+          "mode": "100644",
+          "oid": "b326fa4e55183b2417f9ef1dc87a9e622c8e93a0",
+          "sha256": "c24d1b3684690a6e7d068cef42e0a73627d60bc596e5ce3c6b845a270899ff40",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/combined-validation.json": {
+          "mode": "100644",
+          "oid": "3ee734c5003315f32b5fb5386371d65b760e1816",
+          "sha256": "2f14086d0e8364329d741dbd31d598d204aa7e0fb87d02b12e072009d072a3ae",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/contribution-docs-final-review.json": {
+          "mode": "100644",
+          "oid": "0d2fbf07ca4874214ea84f82bfd79f7a8659f26b",
+          "sha256": "84f37bbe64d336745ecf20d8c1437d26cd4a1384e8636979e12267c73239bb63",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/contribution-source-review.json": {
+          "mode": "100644",
+          "oid": "aff3270a4d04f6b8e8bc71e2ced1652a9a937a55",
+          "sha256": "40a8b02b521d7e6c05db4730aef2a9bd317dd5eaf7cf5b7303e4714a53dc0f02",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/corpus-builder.py": {
+          "mode": "100644",
+          "oid": "403166d923a11bef7d5c818e894cd370138b2f9b",
+          "sha256": "881abc31455551c953ebe23f2a24bb6bde5df09a85e1c6455945a1a5ffd56e74",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/corpus-manifest.json": {
+          "mode": "100644",
+          "oid": "6c7ae58e6de0314d83f5c4112c4b7aa5fdf83c91",
+          "sha256": "22a551395a410e4b3fe79155f554a2ee05c7b2eec6631d7836079d7ec9c0a7d1",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/corpus-protocol.json": {
+          "mode": "100644",
+          "oid": "fde59a2b338e778c48e3c6c68848d1445be0b59c",
+          "sha256": "7d83f26ec816e4c83d66de15b81ef52be35f0142c713093dd94787ea1cf31b03",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/datasets-contribution.json": {
+          "mode": "100644",
+          "oid": "4a32a1a8975fd49d816aacb2256ba2755ac8628b",
+          "sha256": "0ad9d62c2be5fc0ec736451ea78208d4009d16a782f8e0b48dd35fa7548c4fdd",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/datasets-live-parent-review.json": {
+          "mode": "100644",
+          "oid": "7dea342d2e4dba235649e571587cd64f546b82c3",
+          "sha256": "f33c86123ca8aaaf3038749ba5a686f2e5530184c3dccf2031163603f6c5ea2e",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/experiment-plan.json": {
+          "mode": "100644",
+          "oid": "2b176d6f07a97b554eef23d652081ef4427b91a8",
+          "sha256": "0246fec8a0026ca38dcc46bc903ec655cfde8f474f39c142641d3a39f49a1881",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/final-inputs.json": {
+          "mode": "100644",
+          "oid": "a23d01e81c5e928fbda5f65e1b16e75beb190b26",
+          "sha256": "066bc0a734292d45da468583c55677d9851e244f5a7949aedcc857796a14cb67",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/final-references.json": {
+          "mode": "100644",
+          "oid": "32e9f94ab7933fccd6b2a2be4b71896b6167a39e",
+          "sha256": "069a43b1295823c3ecaaab958a6402494d1dbd00679af97da05d7e466ef53209",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/final-source-pilot.md": {
+          "mode": "100644",
+          "oid": "7d6e16bc72e3c161f8ab038cc1bd53b906fff7d5",
+          "sha256": "0742a19ed6bd25063e3d06b0360f465ea5f3fadf4b2f14dbad8ca2d7b729e133",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/final-source-progress.md": {
+          "mode": "100644",
+          "oid": "3fce5ca19aefda0c08586111c3c506deb7ecfa3d",
+          "sha256": "7e511b24c0b6faff15b1ebabe574d110b43c6eca8c061e9ed0e6f58bb93ac721",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/guardian-peer-review.json": {
+          "mode": "100644",
+          "oid": "d0824396ca14592b1f986703c917404bf8f504ad",
+          "sha256": "8d0ca079d56bbf128d24b292bd6ac10e4926dc7441665cfb8d6fd3cb7f46fbdb",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/guardian-validation.json": {
+          "mode": "100644",
+          "oid": "21b1dbf63a39c115486bad8917db6138b2f28e0e",
+          "sha256": "c61611aad4a12bd165209753bd1512a60f0b380a765668bb2d733f14840eb3c5",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/hub-checkpoint-replay.json": {
+          "mode": "100644",
+          "oid": "6f907c8aa24ad8c6978f660a30a8e109975a7c1b",
+          "sha256": "398469212ee99877a75b09ce73310aa6709209549f9dc274d657536c2f74ef9c",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/hub-readback-verification.json": {
+          "mode": "100644",
+          "oid": "ef5cdf5f38d5bc5983c6fae50aa437cd412c4170",
+          "sha256": "ac4f32782e7a61a37ff001507531881647139f84d1fd37a284d4da6167526f23",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/hub-upload-commit.json": {
+          "mode": "100644",
+          "oid": "5ac3931de82f40c0cedde862e00f16efe66b35a5",
+          "sha256": "842f8d82b7e31a5f0ed39993ea0acb01f1c594a9b11d29c30dd7e8a0006f991f",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/hub-upload-parent.json": {
+          "mode": "100644",
+          "oid": "2b59d8f3dac4f85f47b8744e3e6c737242288691",
+          "sha256": "cbf0049a327431155f12be6b854e399a238f1e3a7fe4a048f655d714bb64359b",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/independent-corpus-review.json": {
+          "mode": "100644",
+          "oid": "acbcb0b2324d9602bef8baae834bbf74cdd1bebc",
+          "sha256": "98bf1da49efc359d099369f170678bb0e19c3887e578a6a6a19d572c2712d313",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/initial-replay-source-binding.json": {
+          "mode": "100644",
+          "oid": "af9c07ea0d5e8e2ff2a15717a44872fc17a34269",
+          "sha256": "7601d5bc376576d9d4ad02292b908698775484ddb118b29c2591df8277ccf483",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/model-source-review.json": {
+          "mode": "100644",
+          "oid": "29520f19b9d0e2cfd20bf08cd3e4ff94a6f7870a",
+          "sha256": "8ebc789bc3783b32fa26838db5e2f81d8d7e31e12acb40c5ce3a0cf645f0aa06",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/parent-integration-baseline.json": {
+          "mode": "100644",
+          "oid": "c625da459174a0d0b8bffb2c65dd12c4b305a58a",
+          "sha256": "b9b5398b127d98bbe07b37516461fd7929dc787f7102c7608cd6e41ff5565acb",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/protocol-review.json": {
+          "mode": "100644",
+          "oid": "18efdc4f76b9443f7829b1e7b86f12d8d3c71b24",
+          "sha256": "09dac9a689afc85824bec0f29ca6fe0131ac54fd29e0e2dc6cabc326ee8b339c",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/release-review.json": {
+          "mode": "100644",
+          "oid": "a1e0e413c9a275737d56245de3f9702be8e2680d",
+          "sha256": "a2ff49f42610cc8420d1da8ecf0d9e51fa8d1db0d39c2320cbe692b80d064008",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/replay-source-review.json": {
+          "mode": "100644",
+          "oid": "0f46449aa82834e82e8b28862acbf2829445ae6f",
+          "sha256": "31a79b41846f005ed6c7d6c7b31c7794e4335765724ff9522a06b8297493b84e",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/replay_readouts.py": {
+          "mode": "100644",
+          "oid": "a9908e0b142ae34e178b37c2e6d8c78f875957a5",
+          "sha256": "fd11bcc7de69b22071a98d85e47d4df9980603562b9ff7a3d1b3f90f6c50e642",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/replay_readouts_initial.py": {
+          "mode": "100644",
+          "oid": "05f3df5fef031d0b524ebafa4feff0b33930498c",
+          "sha256": "5ab0b3c665c6d8797c2239f42eda4b3ffa3caaf90e4db07e4ee7a2147cf6fea5",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/resource-compatibility.json": {
+          "mode": "100644",
+          "oid": "77b705e9d6cbb61bae2d0454ad924a4fd487d693",
+          "sha256": "26c9a7d31cd7aad7b246b65063d77d9bb6eaeadddc4ba54b702388265f7c4737",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/resource-current-observation.json": {
+          "mode": "100644",
+          "oid": "a63d65f9263755653ca887af9e929a90d802172d",
+          "sha256": "2f7f5e59ceada5e0906e0ced22453bc5da39f95fdf049fe18b5121cf1be59ca5",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/resource-results-review.json": {
+          "mode": "100644",
+          "oid": "f9a28f135e6ffb98efe90d2ce230d2e378ac76d9",
+          "sha256": "f749c6be0f62d25c5e69f373bbabb0375b3957f0c343cac5c8a6b7b38cfc4642",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/results-review.json": {
+          "mode": "100644",
+          "oid": "4694ddcc8d4239721fcaf2baa8cfe52616d32b1c",
+          "sha256": "3afe8955e140d195421151734946ba59ed51d892eb0625ebb351dc32195edf2a",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/retention-hub-readback.json": {
+          "mode": "100644",
+          "oid": "5a40d3d6e56015762badb7912efecfd23d1d4e27",
+          "sha256": "d8be84f630bd82cab5acf61578e013d260e2945a07e930220607a24e2e8d815f",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/run_scope_guardian.py": {
+          "mode": "100644",
+          "oid": "0e50d33d05c35a6d2c3f4bbf301b2cddc3802a8a",
+          "sha256": "10c7c7350a7dbb564ab0fb1299c905020f874c212765afb86d3c1752105184ed",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/run_trigger_experiment.py": {
+          "mode": "100644",
+          "oid": "4bcdf176568acbf1d6206ee9b4e95a9de600d359",
+          "sha256": "8db24c4c0e39ebb106a72031fa53aa9f153fed94f1ddaf1b58ba7ef9ad093f00",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/runner-peer-review.json": {
+          "mode": "100644",
+          "oid": "d8841bdf02f22437037139c56d1e2b45929830f6",
+          "sha256": "a11b2e870977a10d5af46acbad6ea7c5690d568bd3c275b803e768e8e10f3ed0",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/selected-checkpoint-replay.json": {
+          "mode": "100644",
+          "oid": "32881db11e43cbe1e86b51fb082fd11439fc8cd2",
+          "sha256": "9995964cdf0af0b35485b11b07bfe4c05bd61476a820a5ab640eab60a58cccd9",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/selection-inputs.json": {
+          "mode": "100644",
+          "oid": "01493af1e4b8b87a411abbdddc966708a1f00e14",
+          "sha256": "b2ceeddfffdd03d24f4647797fcf1cd1a75067d51957c4a093601cbef9c8e0b4",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/selection-references.json": {
+          "mode": "100644",
+          "oid": "48c94fe6605a4a7522042b4251809c1a298639a4",
+          "sha256": "9a7e504b8e88bd2973ee6ccbdbc70212f2dbd9f850bef9c493590f32ad348c30",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/test_scope_guardian.py": {
+          "mode": "100644",
+          "oid": "a2936aa77d0811bef24f2951573caa58d3441b9b",
+          "sha256": "fb1eacd8ade3a8c283e939729fd1c412c8bba7ee35a490b48ebe2a3e194c1b4c",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/train-inputs.json": {
+          "mode": "100644",
+          "oid": "ca83091e56bab6a0aae61f9ccd5545d040e31abb",
+          "sha256": "698a12e8df507b6ffe81b3d6e9dc4cd61cf8865f34e178be6a98cdddca222cfa",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/train-references.json": {
+          "mode": "100644",
+          "oid": "1c1ad40300d3138919810df88e0c7e32175de8f6",
+          "sha256": "adbc5a2a9245eafa7a4316b54535a1fd42b6b2c3d1509cb41f954daabfe53a8d",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/evidence/workspace-report-review.json": {
+          "mode": "100644",
+          "oid": "c66a7bcaccb4fd20ef5173aa0a2e210dd199834a",
+          "sha256": "fca3e2424a84ad754ad49a25af7bc8ce74daf2efbf2e05534f061d1403c2df18",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/guardian/attempt-01/child-exit.json": {
+          "mode": "100644",
+          "oid": "19929d9c9d5f1bcc5a56b2aa38e7b7a4aa6ce2d6",
+          "sha256": "4164f63b8d4038f935fbe838848b573d256fc6154e0bdb7ecfdb35e39a3d9abf",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/guardian/attempt-01/child-identity.json": {
+          "mode": "100644",
+          "oid": "87830f3162d038c908c3d86d63668b50aa107a8f",
+          "sha256": "348a8d7a83a44f83f3e705c935eb47182b5963df81b759f7709e3c9b26c3967e",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/guardian/attempt-01/child.log": {
+          "mode": "100644",
+          "oid": "988714018f1b2c4b2a53d6ccb021f06a7e6c90e6",
+          "sha256": "9d5e2cde2ed19a210d9102736e6b9683377b5794ddeb3147d8b54fd83b5da012",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/guardian/attempt-01/command.json": {
+          "mode": "100644",
+          "oid": "511e684a5ca6c2009ea164cdd2ebb15932203975",
+          "sha256": "80502272f3843c909d297a41e1ac5eee656963078abfedb1223830051f6ca4ec",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/guardian/attempt-01/group-rss-observations.jsonl": {
+          "mode": "100644",
+          "oid": "cc9f73418bbc318cfc69b798c4cb91aa920cfb5a",
+          "sha256": "e7df12a79bcefb0413c00cbbba3e8990c9fd0329297507d6227dc79161c40251",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/guardian/attempt-01/group-rss-summary.json": {
+          "mode": "100644",
+          "oid": "97f3987b0197755da8d1fffca74d2cadaace7a2f",
+          "sha256": "6b9df904bba683ab5ed3d48baa192a8713f0b6b77ccb20e36aa676dc663817f5",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/guardian/attempt-01/guardian-exit.json": {
+          "mode": "100644",
+          "oid": "cde5b78ecf160f917efeb54032c70b5fcd84d634",
+          "sha256": "d6b719b12321c9a0057ac6dfd672d0832c8c07b50a10c2edc6dcaeb81afb13cd",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/guardian/attempt-01/lease-binding.json": {
+          "mode": "100644",
+          "oid": "34ed5884ac1c4c70fb32e47711dbd71297eab0ba",
+          "sha256": "cfde269d301cec1e240f9089a7aeb2f3febf1fc254874fd4d1133592440c676e",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/guardian/attempt-01/lease-observations.jsonl": {
+          "mode": "100644",
+          "oid": "6a4703aa99fa6038d133a0616243c68fb13f5812",
+          "sha256": "245f28e850108b485b47a0bedcbab6fd8469cd640430fc5623857edfa74298fc",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/guardian/attempt-01/owned-group-final.json": {
+          "mode": "100644",
+          "oid": "1b5e6714595705d4c814c155a174a6d173686699",
+          "sha256": "498fe8832482c956674678f8c117d07c81fa4c3bb6166f1447e7d3f7e437d0ad",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/guardian/attempt-01/pre-admission.json": {
+          "mode": "100644",
+          "oid": "3ec44b39e68b15a2ac5b80b9ec28e44ef8cf4237",
+          "sha256": "4490971119e7841e55fb9414941795ccaab61a30b2e174a029e7dfd478a1f819",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/guardian/attempt-01/resource-observations.json": {
+          "mode": "100644",
+          "oid": "0e12e9033afc4f3ecbc02dd808273d7c2a87c113",
+          "sha256": "ae7e079ff13a7db0652aa7eb59dbd0bfa2a8677717c5249a0fe4f53709d11875",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/guardian/attempt-01/resources-final.json": {
+          "mode": "100644",
+          "oid": "31b537eea5db6f7e4cb77e4a5cbba4738469e721",
+          "sha256": "007f9f4090496ede745365f7345aaa085f501ba727b35b99bfbfe357f3438273",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/guardian/attempt-01/resources-start.json": {
+          "mode": "100644",
+          "oid": "087bd765fe0a3a27a480f4804ab4639e34f65cad",
+          "sha256": "e61ce381e069a235d69734fb310e24a3bf2e346d2faa3d2aa439f0bee3e480a6",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/guardian/attempt-01/scheduler-adoption.json": {
+          "mode": "100644",
+          "oid": "b224e8e1cfdd4d26ff80794ca0b6bd017dd0a528",
+          "sha256": "b4673772e08c188c820cb6371879616c379041aa0a42886198f426fcb58ac5fa",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/published-README.md": {
+          "mode": "100644",
+          "oid": "19c70ed4cb3483aaead45b0f37ba8375db97dea8",
+          "sha256": "d1d789c2fbf4506ceb0895795a9232d68f2dfc1269653f5cf1cb8663f58de7c4",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/release-manifest.json": {
+          "mode": "100644",
+          "oid": "a935a004d6ed422308482f4d8eede51f8b36b843",
+          "sha256": "0042290eb98dbd6d6fbc65ebad92328132efeabf97d9566709bc677211639fbd",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/results/all-final-predictions-before-references.json": {
+          "mode": "100644",
+          "oid": "de59643caa36d6b293477a53d9f0ee3d838634c0",
+          "sha256": "b689213ddd641fea5c08d612dce6bd08ac12f7908f90c5942e9b4c3957d34924",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/results/both-selected-before-final.json": {
+          "mode": "100644",
+          "oid": "2e60e135241b5688587964a12de9f7ad44dfa6a3",
+          "sha256": "2339e395f12b54e881eba131fb14c6121ec8928c3903f84419ec5ed6bde058aa",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/results/donor-final-predictions.json": {
+          "mode": "100644",
+          "oid": "3e4e40dc8fd5fceaeb2e903785ff552657f65c26",
+          "sha256": "3980b48a5b8d0f2518b25d3574bf69ce762fafbf508486d10149f425b610d3e8",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/results/donor-selection-predictions.json": {
+          "mode": "100644",
+          "oid": "37f529c3e10ce70f090116e842dce9f90d5b0779",
+          "sha256": "83a27ff50d54259c0f6367d2ec026b54ebf7bb8ca57dd988f201399c3bf3221f",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/results/global/final-predictions.json": {
+          "mode": "100644",
+          "oid": "cb830454ea5494479d47f80e073a8cbb2f50a3fd",
+          "sha256": "e81ac2ede89e1d6fada5ff0ca56e3881ba13e71520a09e620095fdeafd65d700",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/results/global/losses.json": {
+          "mode": "100644",
+          "oid": "be251be77215730604e4778f09735c26ef62e4a7",
+          "sha256": "73294910d4ab4ea2c2dfbe97b8ea856afdd211b9d48b3d57b173600b458796b2",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/results/global/selected.json": {
+          "mode": "100644",
+          "oid": "bbdd16e161295d6ee8434218b7a880aafa681769",
+          "sha256": "ca40c228d33a96907a340e89cceb37c52f701ca5a5a67f462b43043c71922b63",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/results/global/selection-predictions-0.json": {
+          "mode": "100644",
+          "oid": "eac32af641f8f49c6b8a00fc9498d5cd91cd6aa5",
+          "sha256": "6f0948efa315d5121a994f42f64e9d5000ca19c442e93bd9268fb82616401645",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/results/global/selection-predictions-120.json": {
+          "mode": "100644",
+          "oid": "ef4153602f81828159e6bc3eae7d5b4946d5faec",
+          "sha256": "e7f3cce71016562c6ba07c87cdccbd9b5f9546a438848b9f118e7aab5195e7d7",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/results/global/selection-predictions-240.json": {
+          "mode": "100644",
+          "oid": "4a78ea4d2b5b16e191dda7bf118156c694399c02",
+          "sha256": "45e0610ff8d301e77aa6cd0c011db780a5a48e1771c29ad1109977ab57106e2f",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/results/initial-donor-predictions.json": {
+          "mode": "100644",
+          "oid": "ccc2a1d156e017e5d36be91385f207c813f37a00",
+          "sha256": "34074e8c9fbb78485745a1b8bd159d6a4dc40de4495331c9611d314a20bee4ec",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/results/initial-global-predictions.json": {
+          "mode": "100644",
+          "oid": "c86aa5d3b0f94cb759fe3794ea6204873f203d65",
+          "sha256": "5295e06cdfec34d5e6cdf55b87e4bdb194a15b95b6e8054316f5a15a0b83f29b",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/results/initial-predicted_trigger-predictions.json": {
+          "mode": "100644",
+          "oid": "13f2b40f3c56ad28a6eba1d69e1cc9c1067386b1",
+          "sha256": "3416cdd85e365cb5b22be30d971671caa7652693b396868b03c2ed7ade2d4d4a",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/results/matched-initialization.json": {
+          "mode": "100644",
+          "oid": "c638da86e7a6bcd7cd48a84da1abc6330907c650",
+          "sha256": "469ad6f0710658e3ec2fdf6d860a8df4bb0093dc502d53457948817f3f2d37d6",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/results/predicted_trigger/final-predictions.json": {
+          "mode": "100644",
+          "oid": "199ca4f5ed8997fdf4a56eefb018aab1af098187",
+          "sha256": "bb0256230a1291775a6bdd4a433301e6815cfdd47053980d2ded91df958a4489",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/results/predicted_trigger/losses.json": {
+          "mode": "100644",
+          "oid": "c8615b26cad981157268ae9f074e8714744e30f9",
+          "sha256": "a098af6218e5a68f9c4fe8cc3ec6dcdbcf2d5dc6aae543443a23461ed6740fe3",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/results/predicted_trigger/selected.json": {
+          "mode": "100644",
+          "oid": "5c8880cd807793f3b12f12229e82a2bfe6cc9a72",
+          "sha256": "a62454d5f098a759e3c3e0652ef12ff96d3e714414ac71f9791b6c686655b50b",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/results/predicted_trigger/selection-predictions-0.json": {
+          "mode": "100644",
+          "oid": "ee6cb61d15433fe6f757afd6d2d471a39f757d0b",
+          "sha256": "1a095ba51b82a200c666b56cd887a5e2408fea274b0a006745b2d4a1467c1fc4",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/results/predicted_trigger/selection-predictions-120.json": {
+          "mode": "100644",
+          "oid": "6c4afb109a1de314f7fae67788bf3a71094f7d3d",
+          "sha256": "597dcf8e3103a4c50d0343a4cabc359852b229f0dff23a58b12acd5c7b4a4763",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/results/predicted_trigger/selection-predictions-240.json": {
+          "mode": "100644",
+          "oid": "0e61fc4914d363d22d25b004e56714b45645a478",
+          "sha256": "b47a3a2dc70a023e18ca6f58c97db24802d503f706ce52cafbf909cbf038fd18",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/results/summary.json": {
+          "mode": "100644",
+          "oid": "d682f96fca3c143aee2a8740557bb0096dd24c1e",
+          "sha256": "a9a743f11ec8d04bdb67cdc957a95eafac2044212c7486da9f6806c16e1b3872",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/results/training-results.json": {
+          "mode": "100644",
+          "oid": "5332d7ff2b2e4ebaa845e7f5af4d6ec821e0a48c",
+          "sha256": "8bb4d85371ce1fca3c7f4f6f0eeef33e43469bfb1122206cde2d83c4c7d97705",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/results/training-schedule.json": {
+          "mode": "100644",
+          "oid": "0dd2c36f015a0918af90bda9cace8794846e6363",
+          "sha256": "8e361045ae177eee0cbce8d21b99051100b9f05eb4bc7884cffb32c496618efa",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/retention-manifest.json": {
+          "mode": "100644",
+          "oid": "ce70a3ce174b63534c442598d7bd01f259a5a93f",
+          "sha256": "108030f5e6f031cf6a844ac30c8634132a85c754da3b5cedf80dcca4503f8d82",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/retention/README.md": {
+          "mode": "100644",
+          "oid": "c34208b4e3bdfc7a76f475ef15815bc1c0f9a967",
+          "sha256": "1284cd52b829b373346d8fc978e053800411c2fda81939361a8bd8dd0e0c93a5",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/retention/all-predictions-before-reference-join.json": {
+          "mode": "100644",
+          "oid": "22655adfb725a8e71e1f42eda743bde61a47bb38",
+          "sha256": "cbfae097a8741e92350f5e86b787d01038a6863d37a2a9b11be0f8f0d3025987",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/retention/check_prior_retention.py": {
+          "mode": "100644",
+          "oid": "2c682352c98e7c91e1d7da4edab03af79d5d08bb",
+          "sha256": "96012e61149ece8247fee044a9ff438a01f631d5477b939716ba2e26c8f4eeec",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/retention/donor-predictions.json": {
+          "mode": "100644",
+          "oid": "ab889b166b2d99f524f43b1cdf52b8ce622d951f",
+          "sha256": "c653f4ccd80c73e6013ee7f975aa0b746b29e9592de7e2a31387aa0f5a925d95",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/retention/global-predictions.json": {
+          "mode": "100644",
+          "oid": "d86d94ff09b848ae16cdb32d355722367f093091",
+          "sha256": "828dfe344124b391dab0fe78594d91cb464394cc5186fd83a8635b19a8ad61ba",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/retention/predicted_trigger-predictions.json": {
+          "mode": "100644",
+          "oid": "935f633237b5119d6e62211091c97ffab4fd61ee",
+          "sha256": "7745ecb3f56e4544807c9b8466b8a02dd9bade9d5c5bd9b996d134e10e69f730",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/retention/prior-retention-review.json": {
+          "mode": "100644",
+          "oid": "5de95d1833855b7b32c488b4cfcbde9d9cc92020",
+          "sha256": "749d5995348765852afca30d7f88700f63584edfbb0812cfa663c6557f1deb3a",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/retention/retention-results.json": {
+          "mode": "100644",
+          "oid": "038012451a8cd9814e0e70484ac864b6954865be",
+          "sha256": "ca235d2ede63180c5f5e05e4f3865f5472538d06ca3dbf2f4c2ce1441e623385",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/retention/supplement-manifest.json": {
+          "mode": "100644",
+          "oid": "48eb022a0417b234344ab5afdd87217938372f21",
+          "sha256": "8565506d4a7d0c5166e66f267d92c5157a9f54b23bbbcd7c8ebaecb4612e5a78",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/source/docs/implementation/legal_scope_trigger_readout_pilot_20261007.md": {
+          "mode": "100644",
+          "oid": "900ba22c09fce5502543cac97fd26a546a819905",
+          "sha256": "bf602c6d98344cff69ed6611fc819c3b2345f61c44c449a140fa80ce3882b2a3",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/source/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py": {
+          "mode": "100644",
+          "oid": "1cf73eaa43c081eb2f181547a7aae725353c26d9",
+          "sha256": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/source/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py": {
+          "mode": "100644",
+          "oid": "aa1039c978b8d80667e3bde417a61954deefcd48",
+          "sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/source/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_trigger_readout.py": {
+          "mode": "100644",
+          "oid": "aa718b6f3a813a3cd01947640f0a405d377e529b",
+          "sha256": "983b69b8e293aa6211fd8322f9ba6bfe6fa5b8cb853c2d4d0cace1e7e5046344",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/source/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py": {
+          "mode": "100644",
+          "oid": "18783070b45c280067552f110bc48748a210e53e",
+          "sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a",
+          "type": "blob"
+        },
+        "artifacts/legal-trigger-readout-training-20261007/source/tests/unit/logic/test_legal_scope_trigger_readout.py": {
+          "mode": "100644",
+          "oid": "fc96b11d808c72d4e8af7dbfd89303c3337b3551",
+          "sha256": "337c18f643eb7ec5aa276ad693cc83a5ad595e71a3e98fbe1acc43e177616a9d",
+          "type": "blob"
+        },
+        "external/ipfs_accelerate": {
+          "mode": "160000",
+          "oid": "c733fa1240e3e31c5172ebc35e53f65da4b93891",
+          "type": "commit"
+        },
+        "external/ipfs_datasets": {
+          "mode": "160000",
+          "oid": "271ad796288e17039f036af6a0d003a4628da6ed",
+          "type": "commit"
+        },
+        "implementation_plan/docs/63-retained-native-decoder-inputs-2026-10-07.md": {
+          "mode": "100644",
+          "oid": "799e0628ffa07c427bf84c87974d33cf5a4f212d",
+          "sha256": "578fba4ec67cd3d7cb777c124783ec67cfabbf7aec4eea3c57e44e14ba9ef456",
+          "type": "blob"
+        },
+        "implementation_plan/docs/65-dual-bank-wording-retention-adapter-2026-10-07.md": {
+          "mode": "100644",
+          "oid": "2cd0ed9469ae445acbaba177139d680b1686a890",
+          "sha256": "2bf4231dde74bc8b192af05a3738d308cd813a79f6b57500eabe6f7362c7dc53",
+          "type": "blob"
+        },
+        "implementation_plan/docs/65-trigger-modality-readout-2026-10-07.md": {
+          "mode": "100644",
+          "oid": "4d7062a8003c8dbfef1f7ea31a1a0d723fd39754",
+          "sha256": "5ffa9044751216c742eca1ef35d792a080872c79f6f773d0ba5b158afd0ba383",
+          "type": "blob"
+        }
+      },
+      "new_commits": [
+        "30e61092341b47b4e49eb30df443fd607536333a Merge commit '4ddb120b85fcd47f6ed01d830c9f3b402585cb3b' into agent/dual-bank-wording-adapter-root-20261007",
+        "5363b408b603b08dd7a85a46136bec5542033112 Preserve parallel trigger-readout findings and latest formal-logic source pin",
+        "4ddb120b85fcd47f6ed01d830c9f3b402585cb3b Pin qualified finite scheduling supervisor and shared logic",
+        "f5ae4e08c6f136ac02d35b6c3e8252b0c9e0a045 Merge pull request #542 from endomorphosis/codex/legal-trigger-readout-results-20261007-01",
+        "8e5da94bd0ac33b1378ae44e4801f3496e96a02c Merge parallel dual-bank adapter evidence into trigger-readout contribution",
+        "f3fdf62d2726740e1cfd58addfec1e54143b2945 Contribute trigger-readout training results and retained evidence",
+        "3fe93fb1cdd3b9b95c041bd699072de640096006 Integrate dual-bank retention adapter and original-checkpoint probe evidence"
+      ],
+      "parent_publication": "d3a45505848dcff60d0293ac9a3c7eb49293d8ef",
+      "reviewed_tip": "30e61092341b47b4e49eb30df443fd607536333a"
+    }
+  },
+  "schema": "dual-bank-replay-concurrent-main-progress/v1"
+}

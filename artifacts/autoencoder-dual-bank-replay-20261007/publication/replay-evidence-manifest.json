@@ -1,0 +1,3012 @@
+{
+  "Constitution_formalized": false,
+  "admitted": false,
+  "all_phase_outputs_complete": true,
+  "archive": {
+    "bytes": 62752730,
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/publication/replay-evidence.tar.gz",
+    "sha256": "0b732781a178533a918cf3174759c09a98de92781d77ae63d7166bd0de65220f"
+  },
+  "checkpoint_promoted": false,
+  "excluded_checkpoint_bodies": [
+    {
+      "bytes": 2797394,
+      "member": "owned-run/training-384-r1/results/dual-bank-retention-ce/initial-state.json",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/initial-state.json",
+      "reason": "checkpoint tensor body remains a local immutable reference; no promotion or upload",
+      "sha256": "5b70bb9ca4f7e45aebcd664518f47e669db7b7bf6374046194db11f72bee9ee4"
+    },
+    {
+      "bytes": 2797168,
+      "member": "owned-run/training-384-r1/results/dual-bank-retention-ce/last-attempt-state.json",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/last-attempt-state.json",
+      "reason": "checkpoint tensor body remains a local immutable reference; no promotion or upload",
+      "sha256": "4269e6d957f9a31d2d9b09b0d90f345f5da00a003c0c898a59d7fcb3220ff61f"
+    },
+    {
+      "bytes": 2797164,
+      "member": "owned-run/training-384-r1/results/dual-bank-retention-ce/selected-state.json",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/selected-state.json",
+      "reason": "checkpoint tensor body remains a local immutable reference; no promotion or upload",
+      "sha256": "c51cbb51150cb16de2e4617f7c1d03b53cf5f65d430ebadc0923ba199284405e"
+    }
+  ],
+  "historical_numerical_sources_and_caches": "Referenced by complete immutable manifests; earlier balanced-wording archive/main publication preserves their evidence. This archive retains the new owned phases and reviews only.",
+  "limits": {
+    "compressed_bytes": 100000000,
+    "members": 4096,
+    "source_bytes": 512000000
+  },
+  "member_count": 247,
+  "members": {
+    "owned-run/adopt_shared_scheduler.py": {
+      "bytes": 11206,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/adopt_shared_scheduler.py",
+      "sha256": "4956baa1e41abe53fc83a2d4ae7709b3be13ebc1c775b44571a33903b8f70b1f",
+      "source_identity": [
+        66306,
+        74367767,
+        11206,
+        1791374614779317078,
+        1791374614779317078
+      ]
+    },
+    "owned-run/evaluation-manifest.json": {
+      "bytes": 328680,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-manifest.json",
+      "sha256": "bdb3a58baa70dfcdf462a19f0db7d0789a1e70ff276546b6e29b336f9e7f85ba",
+      "source_identity": [
+        66306,
+        74368013,
+        328680,
+        1791376719848942967,
+        1791376719848942967
+      ]
+    },
+    "owned-run/evaluation-plan.json": {
+      "bytes": 327420,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-plan.json",
+      "sha256": "07c4c859779608e20d3b89cd4e71cee39698e618bb267391b434cf7adb9652d9",
+      "source_identity": [
+        66306,
+        74368012,
+        327420,
+        1791376719846957729,
+        1791376719846957729
+      ]
+    },
+    "owned-run/evaluation-r1-guardian-exit.json": {
+      "bytes": 62,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1-guardian-exit.json",
+      "sha256": "a7a77fe8949efdbd9efafe67c3bcb9fc463a4361a7594e2b81db39f52f086513",
+      "source_identity": [
+        66306,
+        74368021,
+        62,
+        1791377061716676275,
+        1791377061716676275
+      ]
+    },
+    "owned-run/evaluation-r1-guardian.log": {
+      "bytes": 5103,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1-guardian.log",
+      "sha256": "4ae8712a5d5b16c3c632e697f2c41a626d112d7821b2008868ee0fcbe927d15b",
+      "source_identity": [
+        66306,
+        74368018,
+        5103,
+        1791377061703676137,
+        1791377061703676137
+      ]
+    },
+    "owned-run/evaluation-r1-lease-observations.jsonl": {
+      "bytes": 38748,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1-lease-observations.jsonl",
+      "sha256": "2ccfe2bf5d137436fe61739ad40f8c4e1d87b78391d83bd8381731f5fb16fa42",
+      "source_identity": [
+        66306,
+        74368020,
+        38748,
+        1791377061634675404,
+        1791377061634675404
+      ]
+    },
+    "owned-run/evaluation-r1-scheduler-adoption.json": {
+      "bytes": 4646,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1-scheduler-adoption.json",
+      "sha256": "b185161c6ce7b19cdeb8a5f8e47b838dd19e3d3bfd1564cc0c9fea57c2dc059a",
+      "source_identity": [
+        66306,
+        74368019,
+        4646,
+        1791377012422525783,
+        1791377012422525783
+      ]
+    },
+    "owned-run/evaluation-r1/child-exit.json": {
+      "bytes": 324,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/child-exit.json",
+      "sha256": "6d71fc526ba697d8e3b66d0a608ac4cd8f4c7485f6467b5a82a07d8c11fb4fde",
+      "source_identity": [
+        66306,
+        74499120,
+        324,
+        1791377046966223738,
+        1791377046966223738
+      ]
+    },
+    "owned-run/evaluation-r1/child-identity.json": {
+      "bytes": 44,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/child-identity.json",
+      "sha256": "80ac32405614b9c3b44753c84a5d898cf5944bb498d1a00ba3e57e1e37bb8e25",
+      "source_identity": [
+        66306,
+        74499111,
+        44,
+        1791377012513180145,
+        1791377012513180145
+      ]
+    },
+    "owned-run/evaluation-r1/child.log": {
+      "bytes": 1674,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/child.log",
+      "sha256": "80633b4fc45621a5a5c2203d00ea83a4412b2d1b0366cfea5b07cd2749289302",
+      "source_identity": [
+        66306,
+        74499110,
+        1674,
+        1791377041594462068,
+        1791377041594462068
+      ]
+    },
+    "owned-run/evaluation-r1/command.json": {
+      "bytes": 6401,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/command.json",
+      "sha256": "96b3375cfa01b92f50a14bd7daf03208c3bafefd0a19667b5d400ad982fb7c1f",
+      "source_identity": [
+        66306,
+        74499108,
+        6401,
+        1791377012497586763,
+        1791377012497586763
+      ]
+    },
+    "owned-run/evaluation-r1/lease-binding.json": {
+      "bytes": 694,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/lease-binding.json",
+      "sha256": "93b339bc916feea2e95d4195218088a574f10b82bd3a525834a4715faf7a577a",
+      "source_identity": [
+        66306,
+        74499109,
+        694,
+        1791377012508368190,
+        1791377012508368190
+      ]
+    },
+    "owned-run/evaluation-r1/resource-observations.json": {
+      "bytes": 1746,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/resource-observations.json",
+      "sha256": "c33c6fcffed69724d07d6461de6059910539ef090f4dd5a50b8c121561f4f6dc",
+      "source_identity": [
+        66306,
+        74499119,
+        1746,
+        1791377046959539267,
+        1791377046959539267
+      ]
+    },
+    "owned-run/evaluation-r1/resources-final.json": {
+      "bytes": 5829,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/resources-final.json",
+      "sha256": "47343ec442d780ede644f6da83c0902c740a5a62a6a326246709ee1591b59d7a",
+      "source_identity": [
+        66306,
+        74499121,
+        5829,
+        1791377061639520607,
+        1791377061639520607
+      ]
+    },
+    "owned-run/evaluation-r1/resources-start.json": {
+      "bytes": 3177,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/resources-start.json",
+      "sha256": "7071f93c1ad75f57ece494e11723da37f0854e7fb82ddbbef3c0ece584f08db1",
+      "source_identity": [
+        66306,
+        74499112,
+        3177,
+        1791377027265084994,
+        1791377027265084994
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/last-attempt/exposed_v3_48/actual-formula-fidelity.json": {
+      "bytes": 156558,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/last-attempt/exposed_v3_48/actual-formula-fidelity.json",
+      "sha256": "21e8aa71235b2485bd305e82b2b2b5ae385aa1351e3556037721d129a9cc24df",
+      "source_identity": [
+        66306,
+        75023485,
+        156558,
+        1791377040045445555,
+        1791377040045445555
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/last-attempt/exposed_v3_48/actual-predictions.json": {
+      "bytes": 25862,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/last-attempt/exposed_v3_48/actual-predictions.json",
+      "sha256": "14a121d4a380e32465e9177f027dba30af7a0632f2dafe6863c309590a71bee7",
+      "source_identity": [
+        66306,
+        75023477,
+        25862,
+        1791377036869411688,
+        1791377036869411688
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/last-attempt/exposed_v3_48/posthoc-scalar-score.json": {
+      "bytes": 597371,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/last-attempt/exposed_v3_48/posthoc-scalar-score.json",
+      "sha256": "ea8de953bd97ad84ddd77e5ee0b2138a2e9d0264b5cb46b5be56cbe71ba5c31f",
+      "source_identity": [
+        66306,
+        75023484,
+        597371,
+        1791377040036445459,
+        1791377040036445459
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/last-attempt/exposed_v3_48/scalar-formula-join.json": {
+      "bytes": 723259,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/last-attempt/exposed_v3_48/scalar-formula-join.json",
+      "sha256": "12067e5eb0ba0097a3040acbd623493e13d22f832a1c4d92f91e546cb72da296",
+      "source_identity": [
+        66306,
+        75023486,
+        723259,
+        1791377040053445640,
+        1791377040053445640
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/last-attempt/exposed_v3_48/source-head-trace.json": {
+      "bytes": 1665829,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/last-attempt/exposed_v3_48/source-head-trace.json",
+      "sha256": "51ac927313455c0358cdd7e12f1f7910f67d4cf05c062a0a8f944a12c713f436",
+      "source_identity": [
+        66306,
+        75023476,
+        1665829,
+        1791377036853411517,
+        1791377036853411517
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/last-attempt/new_balanced_train48/actual-formula-fidelity.json": {
+      "bytes": 156830,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/last-attempt/new_balanced_train48/actual-formula-fidelity.json",
+      "sha256": "c6f99fce278dbb3a9fc4b5dd2c969a59f07296dab5610e713c65e6933843f87d",
+      "source_identity": [
+        66306,
+        75023482,
+        156830,
+        1791377039555440331,
+        1791377039555440331
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/last-attempt/new_balanced_train48/actual-predictions.json": {
+      "bytes": 26006,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/last-attempt/new_balanced_train48/actual-predictions.json",
+      "sha256": "7300986f6cd721f992983580807e285146a64ba8b6c02f2ba0c5c155db4e422b",
+      "source_identity": [
+        66306,
+        75023474,
+        26006,
+        1791377036258405170,
+        1791377036258405170
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/last-attempt/new_balanced_train48/posthoc-scalar-score.json": {
+      "bytes": 598933,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/last-attempt/new_balanced_train48/posthoc-scalar-score.json",
+      "sha256": "af81519957df3f4f66c11188b3c5e9339885c392d097f8a104c478dedcbd31ef",
+      "source_identity": [
+        66306,
+        75023481,
+        598933,
+        1791377039548440256,
+        1791377039548440256
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/last-attempt/new_balanced_train48/scalar-formula-join.json": {
+      "bytes": 725327,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/last-attempt/new_balanced_train48/scalar-formula-join.json",
+      "sha256": "25bef057ad3d5bb8e4e8708ff143b4bddf9c8da14452e90de9153a36f2869fea",
+      "source_identity": [
+        66306,
+        75023483,
+        725327,
+        1791377039562440406,
+        1791377039562440406
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/last-attempt/new_balanced_train48/source-head-trace.json": {
+      "bytes": 1665208,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/last-attempt/new_balanced_train48/source-head-trace.json",
+      "sha256": "e66e323d7a8b65b0efe8f869da0e99f584f2a301fb8d8461e8d3c7215a47a832",
+      "source_identity": [
+        66306,
+        75023473,
+        1665208,
+        1791377036248405064,
+        1791377036248405064
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/last-attempt/normative_train48/actual-formula-fidelity.json": {
+      "bytes": 159962,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/last-attempt/normative_train48/actual-formula-fidelity.json",
+      "sha256": "2c6e6958212644aa43c945932ca4c6383491132ae3be8c8586fa72bbed653f99",
+      "source_identity": [
+        66306,
+        75023479,
+        159962,
+        1791377039175436279,
+        1791377039175436279
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/last-attempt/normative_train48/actual-predictions.json": {
+      "bytes": 26054,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/last-attempt/normative_train48/actual-predictions.json",
+      "sha256": "8e8e209f21f1862f5a4792c85ac84cde59b25ef4d8212032fd65a690be2612ea",
+      "source_identity": [
+        66306,
+        75023471,
+        26054,
+        1791377035612767883,
+        1791377035612767883
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/last-attempt/normative_train48/posthoc-scalar-score.json": {
+      "bytes": 599264,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/last-attempt/normative_train48/posthoc-scalar-score.json",
+      "sha256": "80eee48c0ac59912f2dbb2d73cca36f801acb340a6155c9fd1183ff053b2c725",
+      "source_identity": [
+        66306,
+        75023478,
+        599264,
+        1791377039170436226,
+        1791377039170436226
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/last-attempt/normative_train48/scalar-formula-join.json": {
+      "bytes": 725840,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/last-attempt/normative_train48/scalar-formula-join.json",
+      "sha256": "aa72b868bf4aa5635acf74fa6bea6f94f6dc40b6da9ee0068ba4927829f195ba",
+      "source_identity": [
+        66306,
+        75023480,
+        725840,
+        1791377039186436397,
+        1791377039186436397
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/last-attempt/normative_train48/source-head-trace.json": {
+      "bytes": 1664462,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/last-attempt/normative_train48/source-head-trace.json",
+      "sha256": "67d427949c37d16d1039f636653ea14bd2b3136bf0bc712091127b908d33b321",
+      "source_identity": [
+        66306,
+        75023470,
+        1664462,
+        1791377035595398098,
+        1791377035595398098
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/last-attempt/original_train48/actual-formula-fidelity.json": {
+      "bytes": 155878,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/last-attempt/original_train48/actual-formula-fidelity.json",
+      "sha256": "25489442f7a655112b6258e052e3324bd5a335b70e558b9a2cb1a001f0820f86",
+      "source_identity": [
+        66306,
+        74892429,
+        155878,
+        1791377038791432185,
+        1791377038791432185
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/last-attempt/original_train48/actual-predictions.json": {
+      "bytes": 26295,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/last-attempt/original_train48/actual-predictions.json",
+      "sha256": "d8ce044165dc5e95a4436b4e7e0e83ed68f6f86c3adb6633f7d11fc65d74af0e",
+      "source_identity": [
+        66306,
+        74892415,
+        26295,
+        1791377035006591161,
+        1791377035006591161
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/last-attempt/original_train48/posthoc-scalar-score.json": {
+      "bytes": 603458,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/last-attempt/original_train48/posthoc-scalar-score.json",
+      "sha256": "5c88bdd3400805197c7ced5128d9faf338ad0634cd602da96842d7efcd58c547",
+      "source_identity": [
+        66306,
+        74892428,
+        603458,
+        1791377038780432067,
+        1791377038780432067
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/last-attempt/original_train48/scalar-formula-join.json": {
+      "bytes": 730936,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/last-attempt/original_train48/scalar-formula-join.json",
+      "sha256": "59dee6a4ff48b7c877e4ecd52b3c60af9716abd25c52ec4701310c9a23bd7120",
+      "source_identity": [
+        66306,
+        74892430,
+        730936,
+        1791377038804432323,
+        1791377038804432323
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/last-attempt/original_train48/source-head-trace.json": {
+      "bytes": 1665981,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/last-attempt/original_train48/source-head-trace.json",
+      "sha256": "4e37cfb1b51a0e7375d247ca427fe90c62038761cdfe2f7dd369e73a5b2a4f8d",
+      "source_identity": [
+        66306,
+        74892414,
+        1665981,
+        1791377034994391687,
+        1791377034994391687
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/selected/exposed_v3_48/actual-formula-fidelity.json": {
+      "bytes": 156558,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/selected/exposed_v3_48/actual-formula-fidelity.json",
+      "sha256": "21e8aa71235b2485bd305e82b2b2b5ae385aa1351e3556037721d129a9cc24df",
+      "source_identity": [
+        66306,
+        74892426,
+        156558,
+        1791377038408428100,
+        1791377038408428100
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/selected/exposed_v3_48/actual-predictions.json": {
+      "bytes": 25862,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/selected/exposed_v3_48/actual-predictions.json",
+      "sha256": "43986f1e67b2eefe9e2dec768d7cdf34c1a4b8ab3f4c22de9bb049488ee72c37",
+      "source_identity": [
+        66306,
+        74892411,
+        25862,
+        1791377034355384869,
+        1791377034355384869
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/selected/exposed_v3_48/posthoc-scalar-score.json": {
+      "bytes": 597371,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/selected/exposed_v3_48/posthoc-scalar-score.json",
+      "sha256": "57685ba50537bf9fd53165a4a84e37d0775053d62d779750d6a8eb00edc5df91",
+      "source_identity": [
+        66306,
+        74892425,
+        597371,
+        1791377038399428005,
+        1791377038399428005
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/selected/exposed_v3_48/scalar-formula-join.json": {
+      "bytes": 723259,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/selected/exposed_v3_48/scalar-formula-join.json",
+      "sha256": "12067e5eb0ba0097a3040acbd623493e13d22f832a1c4d92f91e546cb72da296",
+      "source_identity": [
+        66306,
+        74892427,
+        723259,
+        1791377038419428218,
+        1791377038419428218
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/selected/exposed_v3_48/source-head-trace.json": {
+      "bytes": 1665829,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/selected/exposed_v3_48/source-head-trace.json",
+      "sha256": "10ea2d8fd39ff47b53dcad9d175496ef069f6c4b4cb3092481168204cd9c70f0",
+      "source_identity": [
+        66306,
+        74892410,
+        1665829,
+        1791377034347384784,
+        1791377034347384784
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/selected/new_balanced_train48/actual-formula-fidelity.json": {
+      "bytes": 156830,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/selected/new_balanced_train48/actual-formula-fidelity.json",
+      "sha256": "c6f99fce278dbb3a9fc4b5dd2c969a59f07296dab5610e713c65e6933843f87d",
+      "source_identity": [
+        66306,
+        74892423,
+        156830,
+        1791377038026424027,
+        1791377038026424027
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/selected/new_balanced_train48/actual-predictions.json": {
+      "bytes": 26006,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/selected/new_balanced_train48/actual-predictions.json",
+      "sha256": "b91785a6ddd9f67ada128fe6733dc6d4ccc9d67fe350c322ec19cf753ce76006",
+      "source_identity": [
+        66306,
+        74892408,
+        26006,
+        1791377033755733015,
+        1791377033755733015
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/selected/new_balanced_train48/posthoc-scalar-score.json": {
+      "bytes": 598933,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/selected/new_balanced_train48/posthoc-scalar-score.json",
+      "sha256": "c0daa8f22bb3f80035219a5c1cc42d46222f4082a2d95de1355ebd94618b6cf2",
+      "source_identity": [
+        66306,
+        74892422,
+        598933,
+        1791377038020423963,
+        1791377038020423963
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/selected/new_balanced_train48/scalar-formula-join.json": {
+      "bytes": 725327,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/selected/new_balanced_train48/scalar-formula-join.json",
+      "sha256": "25bef057ad3d5bb8e4e8708ff143b4bddf9c8da14452e90de9153a36f2869fea",
+      "source_identity": [
+        66306,
+        74892424,
+        725327,
+        1791377038037424144,
+        1791377038037424144
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/selected/new_balanced_train48/source-head-trace.json": {
+      "bytes": 1665208,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/selected/new_balanced_train48/source-head-trace.json",
+      "sha256": "bf7c2cf8a10a3c719a0fa60ce53e385ec48f0419ff61e55a95c62f34f18057e4",
+      "source_identity": [
+        66306,
+        74892407,
+        1665208,
+        1791377033745378361,
+        1791377033745378361
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/selected/normative_train48/actual-formula-fidelity.json": {
+      "bytes": 159962,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/selected/normative_train48/actual-formula-fidelity.json",
+      "sha256": "2c6e6958212644aa43c945932ca4c6383491132ae3be8c8586fa72bbed653f99",
+      "source_identity": [
+        66306,
+        74892420,
+        159962,
+        1791377037646419975,
+        1791377037646419975
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/selected/normative_train48/actual-predictions.json": {
+      "bytes": 26054,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/selected/normative_train48/actual-predictions.json",
+      "sha256": "3dba8fdd0a6eb53ec24bdb5a5cd8ffee06dc3fa987da99108061d78fbddcb6dc",
+      "source_identity": [
+        66306,
+        74892405,
+        26054,
+        1791377033181372342,
+        1791377033181372342
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/selected/normative_train48/posthoc-scalar-score.json": {
+      "bytes": 599264,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/selected/normative_train48/posthoc-scalar-score.json",
+      "sha256": "74f00d00d17031f165d88b16957ca1a77a24cc84b459d91ba776715b51b3ab1a",
+      "source_identity": [
+        66306,
+        74892419,
+        599264,
+        1791377037637419879,
+        1791377037637419879
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/selected/normative_train48/scalar-formula-join.json": {
+      "bytes": 725840,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/selected/normative_train48/scalar-formula-join.json",
+      "sha256": "aa72b868bf4aa5635acf74fa6bea6f94f6dc40b6da9ee0068ba4927829f195ba",
+      "source_identity": [
+        66306,
+        74892421,
+        725840,
+        1791377037657420092,
+        1791377037657420092
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/selected/normative_train48/source-head-trace.json": {
+      "bytes": 1664461,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/selected/normative_train48/source-head-trace.json",
+      "sha256": "5cfc79b2418af90ae836d8cadacf75be436679383cf046e630016f9cab77446f",
+      "source_identity": [
+        66306,
+        74892404,
+        1664461,
+        1791377033173372257,
+        1791377033173372257
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/selected/original_train48/actual-formula-fidelity.json": {
+      "bytes": 155878,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/selected/original_train48/actual-formula-fidelity.json",
+      "sha256": "25489442f7a655112b6258e052e3324bd5a335b70e558b9a2cb1a001f0820f86",
+      "source_identity": [
+        66306,
+        74892417,
+        155878,
+        1791377037267415933,
+        1791377037267415933
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/selected/original_train48/actual-predictions.json": {
+      "bytes": 26295,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/selected/original_train48/actual-predictions.json",
+      "sha256": "9d2b3128392b61e4cfb6cc065d6c6558ac3ae5e018efcf6e2353f2b143669dee",
+      "source_identity": [
+        66306,
+        74892402,
+        26295,
+        1791377032615109692,
+        1791377032615109692
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/selected/original_train48/posthoc-scalar-score.json": {
+      "bytes": 603458,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/selected/original_train48/posthoc-scalar-score.json",
+      "sha256": "36bd0ac9a50f489b253a79d722be02effafe30ca8a625c98a4029081e74bd8ca",
+      "source_identity": [
+        66306,
+        74892416,
+        603458,
+        1791377037261415868,
+        1791377037261415868
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/selected/original_train48/scalar-formula-join.json": {
+      "bytes": 730936,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/selected/original_train48/scalar-formula-join.json",
+      "sha256": "59dee6a4ff48b7c877e4ecd52b3c60af9716abd25c52ec4701310c9a23bd7120",
+      "source_identity": [
+        66306,
+        74892418,
+        730936,
+        1791377037276416028,
+        1791377037276416028
+      ]
+    },
+    "owned-run/evaluation-r1/results/dual-bank-retention-ce/selected/original_train48/source-head-trace.json": {
+      "bytes": 1665980,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/dual-bank-retention-ce/selected/original_train48/source-head-trace.json",
+      "sha256": "94f4097afc65e11e7d221687ce8b307afa803cc06b2f4e4e693a31225bb1a2ed",
+      "source_identity": [
+        66306,
+        74892401,
+        1665980,
+        1791377032607366217,
+        1791377032607366217
+      ]
+    },
+    "owned-run/evaluation-r1/results/predictions-complete.json": {
+      "bytes": 10352,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/predictions-complete.json",
+      "sha256": "27338c8dc1e19c365e61734d525602be022bb2beee1d94f80a4ed78332d43fa6",
+      "source_identity": [
+        66306,
+        74499117,
+        10352,
+        1791377036885499427,
+        1791377036885499427
+      ]
+    },
+    "owned-run/evaluation-r1/results/sealed-recipe.json": {
+      "bytes": 640264,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/sealed-recipe.json",
+      "sha256": "bb91d433f7d0148505575ee9df20957cb86062c526a763829a42554b6818d730",
+      "source_identity": [
+        66306,
+        74499114,
+        640264,
+        1791377031970359419,
+        1791377031970359419
+      ]
+    },
+    "owned-run/evaluation-r1/results/summary.json": {
+      "bytes": 63968,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/evaluation-r1/results/summary.json",
+      "sha256": "0e088d052f9726727a021e63d7e470d36f22dc6ece4384cca72fa715ba69bc1d",
+      "source_identity": [
+        66306,
+        74499118,
+        63968,
+        1791377041589039994,
+        1791377041589039994
+      ]
+    },
+    "owned-run/experiment-source/balanced_wording_candidates.py": {
+      "bytes": 43288,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/experiment-source/balanced_wording_candidates.py",
+      "sha256": "802bf91d12e2ce5dc4d7103af0c0081dd9ab56eade31094caea768212d8d07a4",
+      "source_identity": [
+        66306,
+        74367793,
+        43288,
+        1791375739995776617,
+        1791375739995776617
+      ]
+    },
+    "owned-run/experiment-source/balanced_wording_runtime_adapter.py": {
+      "bytes": 20710,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/experiment-source/balanced_wording_runtime_adapter.py",
+      "sha256": "334506648a870f0b68bc3a8935f23ed4c8fc71ed3a50a12df285eb21801e0fe6",
+      "source_identity": [
+        66306,
+        74367794,
+        20710,
+        1791375739995922443,
+        1791375739995922443
+      ]
+    },
+    "owned-run/experiment-source/dual_bank_retention.py": {
+      "bytes": 26660,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/experiment-source/dual_bank_retention.py",
+      "sha256": "15accfcf8bbc4e578e32ca7842ac338be2b563458c4c90a85fbe18429da000f1",
+      "source_identity": [
+        66306,
+        74367795,
+        26660,
+        1791375739996028972,
+        1791375739996028972
+      ]
+    },
+    "owned-run/experiment-source/dual_bank_runtime_adapter.py": {
+      "bytes": 18962,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/experiment-source/dual_bank_runtime_adapter.py",
+      "sha256": "6c1b8d86ba05b46f1b8883d873718d7eeccc3edf638e04900c8c17e57745bb6a",
+      "source_identity": [
+        66306,
+        74367796,
+        18962,
+        1791375739996138348,
+        1791375739996138348
+      ]
+    },
+    "owned-run/experiment-source/scripts/ops/autoencoder/benchmark_dual_bank_replay.py": {
+      "bytes": 28655,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/experiment-source/scripts/ops/autoencoder/benchmark_dual_bank_replay.py",
+      "sha256": "bde90325cc251fa6b88a3da3482bad7f637ec36569c677495db65b3d64fabf5a",
+      "source_identity": [
+        66306,
+        74367800,
+        28655,
+        1791375739996302750,
+        1791375739996302750
+      ]
+    },
+    "owned-run/experiment-source/scripts/ops/autoencoder/evaluate_dual_bank_replay.py": {
+      "bytes": 28064,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/experiment-source/scripts/ops/autoencoder/evaluate_dual_bank_replay.py",
+      "sha256": "bd2862167fa61ba4451b79436e79609e5ff6d8280151256aab459ba9df1837f5",
+      "source_identity": [
+        66306,
+        74368011,
+        28064,
+        1791376718358271733,
+        1791376718358271733
+      ]
+    },
+    "owned-run/lazy_scheduler_adoption.py": {
+      "bytes": 1345,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/lazy_scheduler_adoption.py",
+      "sha256": "42f31d8da1eb5b44274ca0b8c8180cd78bc083dfd0e93438e61f38223929d84a",
+      "source_identity": [
+        66306,
+        74367768,
+        1345,
+        1791374614779355430,
+        1791374614779355430
+      ]
+    },
+    "owned-run/owned_lease_watchdog.py": {
+      "bytes": 20712,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/owned_lease_watchdog.py",
+      "sha256": "f1b9f71e375cf5ed4004e023bbef2d6f7f61e1ecb588078a1094d7b1982609b3",
+      "source_identity": [
+        66306,
+        74367769,
+        20712,
+        1791374614779396757,
+        1791374614779396757
+      ]
+    },
+    "owned-run/preflight-384-r1-guardian-exit.json": {
+      "bytes": 62,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1-guardian-exit.json",
+      "sha256": "56da406ba1ac047556514f6956473e0c8eb199a8614ff1ec11e500255639974f",
+      "source_identity": [
+        66306,
+        74367847,
+        62,
+        1791376189804231204,
+        1791376189804231204
+      ]
+    },
+    "owned-run/preflight-384-r1-guardian.log": {
+      "bytes": 5110,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1-guardian.log",
+      "sha256": "a107505c00de51e3fd39c5e09e62cc0c9fafe3ee97fea5100cc2de9529605d04",
+      "source_identity": [
+        66306,
+        74367805,
+        5110,
+        1791376189789231066,
+        1791376189789231066
+      ]
+    },
+    "owned-run/preflight-384-r1-lease-observations.jsonl": {
+      "bytes": 37754,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1-lease-observations.jsonl",
+      "sha256": "77bc6b3204abb6ead58cc6b2e56dc382500ef283c297bff2dadf5bf05113bd17",
+      "source_identity": [
+        66306,
+        74367819,
+        37754,
+        1791376189773230920,
+        1791376189773230920
+      ]
+    },
+    "owned-run/preflight-384-r1-scheduler-adoption.json": {
+      "bytes": 4646,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1-scheduler-adoption.json",
+      "sha256": "7d49e62a4b1918bb9b5d4c55049496281e803e116998c83312b46afd255a466f",
+      "source_identity": [
+        66306,
+        74367808,
+        4646,
+        1791376140867931269,
+        1791376140867931269
+      ]
+    },
+    "owned-run/preflight-384-r1/child-exit.json": {
+      "bytes": 324,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/child-exit.json",
+      "sha256": "d1c4636f73fe9cc7ab9edcc68113a4a5e719ae6b4ddb7081965f0613fd80a973",
+      "source_identity": [
+        66306,
+        74367845,
+        324,
+        1791376175159725868,
+        1791376175159725868
+      ]
+    },
+    "owned-run/preflight-384-r1/child-identity.json": {
+      "bytes": 44,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/child-identity.json",
+      "sha256": "deb280bf50493cfb9ee45d92c4115696753579adb8847756dc1f828e8c49f251",
+      "source_identity": [
+        66306,
+        74367822,
+        44,
+        1791376140973862090,
+        1791376140973862090
+      ]
+    },
+    "owned-run/preflight-384-r1/child.log": {
+      "bytes": 1674,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/child.log",
+      "sha256": "80633b4fc45621a5a5c2203d00ea83a4412b2d1b0366cfea5b07cd2749289302",
+      "source_identity": [
+        66306,
+        74367821,
+        1674,
+        1791376173685847602,
+        1791376173685847602
+      ]
+    },
+    "owned-run/preflight-384-r1/command.json": {
+      "bytes": 6430,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/command.json",
+      "sha256": "5ad5049a67beb68fd6a8ba94f18460b586bea20cf091d4818ea9c39be22d6fbf",
+      "source_identity": [
+        66306,
+        74367818,
+        6430,
+        1791376140951726624,
+        1791376140951726624
+      ]
+    },
+    "owned-run/preflight-384-r1/lease-binding.json": {
+      "bytes": 694,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/lease-binding.json",
+      "sha256": "c46f979f6cd3edc8e929a15895f86737c92b0cc069a4fd539ffaebe111460c4a",
+      "source_identity": [
+        66306,
+        74367820,
+        694,
+        1791376140966784906,
+        1791376140966784906
+      ]
+    },
+    "owned-run/preflight-384-r1/resource-observations.json": {
+      "bytes": 1743,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/resource-observations.json",
+      "sha256": "ac39e859d3f459b3ee76efa23c52975f190aa4cd33dd990e958c8577e48329cc",
+      "source_identity": [
+        66306,
+        74367844,
+        1743,
+        1791376175152490057,
+        1791376175152490057
+      ]
+    },
+    "owned-run/preflight-384-r1/resources-final.json": {
+      "bytes": 5835,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/resources-final.json",
+      "sha256": "35732f7e84a62d641e1bff99fe22230b5d094d967979125d4c3a08c65ed5f948",
+      "source_identity": [
+        66306,
+        74367846,
+        5835,
+        1791376189778577529,
+        1791376189778577529
+      ]
+    },
+    "owned-run/preflight-384-r1/resources-start.json": {
+      "bytes": 3180,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/resources-start.json",
+      "sha256": "2928d6738946336158f30f11fece87342091b05a5a127dd5c978032ae73c8dc1",
+      "source_identity": [
+        66306,
+        74367823,
+        3180,
+        1791376155610604240,
+        1791376155610604240
+      ]
+    },
+    "owned-run/preflight-384-r1/results/balanced-bank.json": {
+      "bytes": 1852008,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/results/balanced-bank.json",
+      "sha256": "3d1c0fe819c4f328483ceb8b2e71d28a0573724a8aef4d13445f2c797d82a15e",
+      "source_identity": [
+        66306,
+        74367837,
+        1852008,
+        1791376171222061117,
+        1791376171222061117
+      ]
+    },
+    "owned-run/preflight-384-r1/results/balanced-paired-cache-receipt.json": {
+      "bytes": 77360,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/results/balanced-paired-cache-receipt.json",
+      "sha256": "5a382297483bd2c476d07e7dd597da07261125b039dfd470542392432e38c372",
+      "source_identity": [
+        66306,
+        74367838,
+        77360,
+        1791376171224061135,
+        1791376171224061135
+      ]
+    },
+    "owned-run/preflight-384-r1/results/balanced-parent-source-readout.json": {
+      "bytes": 775958,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/results/balanced-parent-source-readout.json",
+      "sha256": "3af559bbb1bdfb7ade26ff334fac27f54cf9b20c790908c0fada34f536406428",
+      "source_identity": [
+        66306,
+        74367836,
+        775958,
+        1791376171203060943,
+        1791376171203060943
+      ]
+    },
+    "owned-run/preflight-384-r1/results/balanced48-parent-actual-predictions.json": {
+      "bytes": 25952,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/results/balanced48-parent-actual-predictions.json",
+      "sha256": "d253bc3a6d1600b4176ba1a23bc920aaf5b5f962172a669608de4a43e81859d9",
+      "source_identity": [
+        66306,
+        74367840,
+        25952,
+        1791376171964067902,
+        1791376171964067902
+      ]
+    },
+    "owned-run/preflight-384-r1/results/balanced48-parent-greedy-trace.json": {
+      "bytes": 1664591,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/results/balanced48-parent-greedy-trace.json",
+      "sha256": "77c5a832c2be47f16971c82395040c6a13cccddace63d060bf584620c53af9ab",
+      "source_identity": [
+        66306,
+        74367839,
+        1664591,
+        1791376171962067884,
+        1791376171962067884
+      ]
+    },
+    "owned-run/preflight-384-r1/results/balanced48-parent-posthoc-formula-fidelity.json": {
+      "bytes": 156830,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/results/balanced48-parent-posthoc-formula-fidelity.json",
+      "sha256": "c6f99fce278dbb3a9fc4b5dd2c969a59f07296dab5610e713c65e6933843f87d",
+      "source_identity": [
+        66306,
+        74367842,
+        156830,
+        1791376172263070637,
+        1791376172263070637
+      ]
+    },
+    "owned-run/preflight-384-r1/results/balanced48-parent-posthoc-scalar-scores.json": {
+      "bytes": 598938,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/results/balanced48-parent-posthoc-scalar-scores.json",
+      "sha256": "373ab8abd7dffe612a1dc0e58190c8b501dd9d141bd211f622e63e712952da90",
+      "source_identity": [
+        66306,
+        74367841,
+        598938,
+        1791376172181069887,
+        1791376172181069887
+      ]
+    },
+    "owned-run/preflight-384-r1/results/control-bank.json": {
+      "bytes": 1853154,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/results/control-bank.json",
+      "sha256": "c4c31efe3bdff193472ccbafe5e0ad3ab939285e485a16a5f2a480cbab05e9e9",
+      "source_identity": [
+        66306,
+        74367834,
+        1853154,
+        1791376170908058246,
+        1791376170908058246
+      ]
+    },
+    "owned-run/preflight-384-r1/results/control-paired-cache-receipt.json": {
+      "bytes": 75499,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/results/control-paired-cache-receipt.json",
+      "sha256": "e656fed68b991e920415535c14a7b1989f44782bf04fdc2bfe134a789335bb18",
+      "source_identity": [
+        66306,
+        74367835,
+        75499,
+        1791376170910945056,
+        1791376170910945056
+      ]
+    },
+    "owned-run/preflight-384-r1/results/control-parent-source-readout.json": {
+      "bytes": 771651,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/results/control-parent-source-readout.json",
+      "sha256": "f8be0df834f6b39b75208d02767101a104f4da29262fb06ad97b4194e2507e0e",
+      "source_identity": [
+        66306,
+        74367833,
+        771651,
+        1791376170889058072,
+        1791376170889058072
+      ]
+    },
+    "owned-run/preflight-384-r1/results/dual-source-inventory.json": {
+      "bytes": 28562566,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/results/dual-source-inventory.json",
+      "sha256": "7759f8d71e828f431779a3ccc8c5bc198ce47becf6f017fe5910066fcc3e1ac6",
+      "source_identity": [
+        66306,
+        74367828,
+        28562566,
+        1791376164235997258,
+        1791376164235997258
+      ]
+    },
+    "owned-run/preflight-384-r1/results/dual-source-schedule.json": {
+      "bytes": 339536,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/results/dual-source-schedule.json",
+      "sha256": "b6d953ec31947a2a37ac6aad895958860403c7dec1e0ce37a546b56b9760143b",
+      "source_identity": [
+        66306,
+        74367827,
+        339536,
+        1791376163944994599,
+        1791376163944994599
+      ]
+    },
+    "owned-run/preflight-384-r1/results/paired-source-schedule.json": {
+      "bytes": 215055,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/results/paired-source-schedule.json",
+      "sha256": "786125add0636e47bfbe7d8468cc57d6665b32bd1199459c84f3b28a724c2350",
+      "source_identity": [
+        66306,
+        74367826,
+        215055,
+        1791376163943994590,
+        1791376163943994590
+      ]
+    },
+    "owned-run/preflight-384-r1/results/parent-dual-cache-receipt.json": {
+      "bytes": 153627,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/results/parent-dual-cache-receipt.json",
+      "sha256": "f335f8611e60cab08ed808bc7ae1c2544260b44ec10cc6b89641303215afbf07",
+      "source_identity": [
+        66306,
+        74367829,
+        153627,
+        1791376169669046917,
+        1791376169669046917
+      ]
+    },
+    "owned-run/preflight-384-r1/results/parent-dual-detached-loss-0.json": {
+      "bytes": 6811,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/results/parent-dual-detached-loss-0.json",
+      "sha256": "35898e4d9b565cb9a817d6f8cd8f415030fee8eac490e2fb11c57d8b0691201c",
+      "source_identity": [
+        66306,
+        74367830,
+        6811,
+        1791376169672046944,
+        1791376169672046944
+      ]
+    },
+    "owned-run/preflight-384-r1/results/parent-dual-detached-loss-1.json": {
+      "bytes": 6858,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/results/parent-dual-detached-loss-1.json",
+      "sha256": "99713b578251a02da9eb90081bcec187b3ed0cc2ff0842f849154b067af52968",
+      "source_identity": [
+        66306,
+        74367831,
+        6858,
+        1791376169673238667,
+        1791376169673238667
+      ]
+    },
+    "owned-run/preflight-384-r1/results/parent-validation-parity.json": {
+      "bytes": 289,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/results/parent-validation-parity.json",
+      "sha256": "ae3b2eddc8bc48e1724e6628dcc3cc7abbad937c52e366a0b2108c5ba70da7d6",
+      "source_identity": [
+        66306,
+        74367832,
+        289,
+        1791376170598253605,
+        1791376170598253605
+      ]
+    },
+    "owned-run/preflight-384-r1/results/sealed-recipe.json": {
+      "bytes": 611728,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/results/sealed-recipe.json",
+      "sha256": "6d5cf9ba5dd33ec152a225bb48961e2cc5600039ef82322b74a035cd96ddd4cc",
+      "source_identity": [
+        66306,
+        74367825,
+        611728,
+        1791376163941994572,
+        1791376163941994572
+      ]
+    },
+    "owned-run/preflight-384-r1/results/summary.json": {
+      "bytes": 36683,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/preflight-384-r1/results/summary.json",
+      "sha256": "dcbd3fd1ea1a7a618c0800ac85d991ba5145cecc0577d564b051295c48238c52",
+      "source_identity": [
+        66306,
+        74367843,
+        36683,
+        1791376173685847602,
+        1791376173685847602
+      ]
+    },
+    "owned-run/run_guardian.py": {
+      "bytes": 2522,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/run_guardian.py",
+      "sha256": "25a1254e785ccd656c9e50fceba0d6a70e8c0345b0abf6633748b880ab1e151e",
+      "source_identity": [
+        66306,
+        74367765,
+        2522,
+        1791374614778892966,
+        1791374614778892966
+      ]
+    },
+    "owned-run/run_reserved.py": {
+      "bytes": 17162,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/run_reserved.py",
+      "sha256": "5e58662308870ca9082e6f5b0b026f04ec6555ab886c111f68383aa3b6c46a90",
+      "source_identity": [
+        66306,
+        74367766,
+        17162,
+        1791374614779258486,
+        1791374614779258486
+      ]
+    },
+    "owned-run/staged-not-executed-r1/experiment-source/balanced_wording_candidates.py": {
+      "bytes": 43288,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/staged-not-executed-r1/experiment-source/balanced_wording_candidates.py",
+      "sha256": "802bf91d12e2ce5dc4d7103af0c0081dd9ab56eade31094caea768212d8d07a4",
+      "source_identity": [
+        66306,
+        74367779,
+        43288,
+        1791375421637489695,
+        1791375421637489695
+      ]
+    },
+    "owned-run/staged-not-executed-r1/experiment-source/balanced_wording_runtime_adapter.py": {
+      "bytes": 20710,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/staged-not-executed-r1/experiment-source/balanced_wording_runtime_adapter.py",
+      "sha256": "334506648a870f0b68bc3a8935f23ed4c8fc71ed3a50a12df285eb21801e0fe6",
+      "source_identity": [
+        66306,
+        74367780,
+        20710,
+        1791375421637632800,
+        1791375421637632800
+      ]
+    },
+    "owned-run/staged-not-executed-r1/experiment-source/dual_bank_retention.py": {
+      "bytes": 26660,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/staged-not-executed-r1/experiment-source/dual_bank_retention.py",
+      "sha256": "15accfcf8bbc4e578e32ca7842ac338be2b563458c4c90a85fbe18429da000f1",
+      "source_identity": [
+        66306,
+        74367781,
+        26660,
+        1791375421637730657,
+        1791375421637730657
+      ]
+    },
+    "owned-run/staged-not-executed-r1/experiment-source/dual_bank_runtime_adapter.py": {
+      "bytes": 17771,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/staged-not-executed-r1/experiment-source/dual_bank_runtime_adapter.py",
+      "sha256": "05f353e058e830eadb86e14d955f5c2e6b2627bdc17f922d50f2032092556df9",
+      "source_identity": [
+        66306,
+        74367782,
+        17771,
+        1791375421637821505,
+        1791375421637821505
+      ]
+    },
+    "owned-run/staged-not-executed-r1/experiment-source/scripts/ops/autoencoder/benchmark_dual_bank_replay.py": {
+      "bytes": 28655,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/staged-not-executed-r1/experiment-source/scripts/ops/autoencoder/benchmark_dual_bank_replay.py",
+      "sha256": "bde90325cc251fa6b88a3da3482bad7f637ec36569c677495db65b3d64fabf5a",
+      "source_identity": [
+        66306,
+        74367786,
+        28655,
+        1791375421637971986,
+        1791375421637971986
+      ]
+    },
+    "owned-run/staged-not-executed-r1/training-manifest.json": {
+      "bytes": 312764,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/staged-not-executed-r1/training-manifest.json",
+      "sha256": "74b740e707c49f67e94056f6e4e981f47e75fdeb9b85bcd693d56c46d05dfb46",
+      "source_identity": [
+        66306,
+        74367788,
+        312764,
+        1791375421640694135,
+        1791375537207571331
+      ]
+    },
+    "owned-run/staged-not-executed-r1/training-plan.json": {
+      "bytes": 314965,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/staged-not-executed-r1/training-plan.json",
+      "sha256": "aa87ef1a6e7b215e5516c27b0d36b13b682e140d0b8091aa4a2cb1f84f2bd170",
+      "source_identity": [
+        66306,
+        74367787,
+        314965,
+        1791375421639679215,
+        1791375537206571323
+      ]
+    },
+    "owned-run/training-384-r1-guardian-exit.json": {
+      "bytes": 63,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1-guardian-exit.json",
+      "sha256": "c082efa550ecefcf9ddb137ade50ff36ba75fd121205cc6226a1aa3485e5e325",
+      "source_identity": [
+        66306,
+        74368010,
+        63,
+        1791376691533502663,
+        1791376691533502663
+      ]
+    },
+    "owned-run/training-384-r1-guardian.log": {
+      "bytes": 5110,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1-guardian.log",
+      "sha256": "675a889259ca6685064b6a41f2b72e65d8cdf077cee7786db33f90ae74b7ed56",
+      "source_identity": [
+        66306,
+        74368007,
+        5110,
+        1791376691518622318,
+        1791376691518622318
+      ]
+    },
+    "owned-run/training-384-r1-lease-observations.jsonl": {
+      "bytes": 116266,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1-lease-observations.jsonl",
+      "sha256": "6bfa66bdd21781b1096a5979989637de4d8f2ad629859ebd617c72cd8f452b40",
+      "source_identity": [
+        66306,
+        74368009,
+        116266,
+        1791376691480621886,
+        1791376691480621886
+      ]
+    },
+    "owned-run/training-384-r1-scheduler-adoption.json": {
+      "bytes": 4644,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1-scheduler-adoption.json",
+      "sha256": "50f5ae32992d358d387dbd506ab2593023c0ee5e3d1f6d0d01372a4543456d46",
+      "source_identity": [
+        66306,
+        74368008,
+        4644,
+        1791376564130772255,
+        1791376564130772255
+      ]
+    },
+    "owned-run/training-384-r1/child-exit.json": {
+      "bytes": 324,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/child-exit.json",
+      "sha256": "45e18208439d44511a69431711a8717eab018fda59c9c84c712d1cb238e4fbd9",
+      "source_identity": [
+        66306,
+        81400688,
+        324,
+        1791376676723291463,
+        1791376676723291463
+      ]
+    },
+    "owned-run/training-384-r1/child-identity.json": {
+      "bytes": 44,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/child-identity.json",
+      "sha256": "7b3b81ec25d8db97ea617c24f7b75944c09df57fb49daf601d89513ecce30f9b",
+      "source_identity": [
+        66306,
+        81400634,
+        44,
+        1791376564216152347,
+        1791376564216152347
+      ]
+    },
+    "owned-run/training-384-r1/child.log": {
+      "bytes": 1674,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/child.log",
+      "sha256": "80633b4fc45621a5a5c2203d00ea83a4412b2d1b0366cfea5b07cd2749289302",
+      "source_identity": [
+        66306,
+        81400633,
+        1674,
+        1791376666538337757,
+        1791376666538337757
+      ]
+    },
+    "owned-run/training-384-r1/command.json": {
+      "bytes": 6426,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/command.json",
+      "sha256": "6418cb8b6db440e032b68bdb468f8c4c6c4241127f0ee6e67d5fcefe88563a41",
+      "source_identity": [
+        66306,
+        81400631,
+        6426,
+        1791376564201152171,
+        1791376564201152171
+      ]
+    },
+    "owned-run/training-384-r1/lease-binding.json": {
+      "bytes": 693,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/lease-binding.json",
+      "sha256": "e2da40f9dedef8d6af078b89f5bbbe8d575b1cf65e01eed7eae341f4889968c4",
+      "source_identity": [
+        66306,
+        81400632,
+        693,
+        1791376564212152300,
+        1791376564212152300
+      ]
+    },
+    "owned-run/training-384-r1/resource-observations.json": {
+      "bytes": 5261,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/resource-observations.json",
+      "sha256": "4964ad9fbd31af36b22da1ed2bca049e189e0ad3f88d281acc4398ad0ecec7ac",
+      "source_identity": [
+        66306,
+        81400657,
+        5261,
+        1791376676716453913,
+        1791376676716453913
+      ]
+    },
+    "owned-run/training-384-r1/resources-final.json": {
+      "bytes": 5835,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/resources-final.json",
+      "sha256": "48f962903b4a59752f438fbf9b020e9e4c1ba1f32d48f3dc22292381e25a420c",
+      "source_identity": [
+        66306,
+        81400689,
+        5835,
+        1791376691485641047,
+        1791376691485641047
+      ]
+    },
+    "owned-run/training-384-r1/resources-start.json": {
+      "bytes": 3175,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/resources-start.json",
+      "sha256": "37abbd5b8c9c1c4494a016114fa09a5c45ce8d4b33fc9bacea8727695556213a",
+      "source_identity": [
+        66306,
+        81400635,
+        3175,
+        1791376578744876318,
+        1791376578744876318
+      ]
+    },
+    "owned-run/training-384-r1/results/balanced-bank.json": {
+      "bytes": 1852008,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/balanced-bank.json",
+      "sha256": "3d1c0fe819c4f328483ceb8b2e71d28a0573724a8aef4d13445f2c797d82a15e",
+      "source_identity": [
+        66306,
+        81400649,
+        1852008,
+        1791376594470506377,
+        1791376594470506377
+      ]
+    },
+    "owned-run/training-384-r1/results/balanced-paired-cache-receipt.json": {
+      "bytes": 77360,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/balanced-paired-cache-receipt.json",
+      "sha256": "d1a09b696964bc5bdce77c9a6f4af5abca8a9a6c7f0f3472a0a7a11510bcbd62",
+      "source_identity": [
+        66306,
+        81400650,
+        77360,
+        1791376594473506412,
+        1791376594473506412
+      ]
+    },
+    "owned-run/training-384-r1/results/balanced-parent-source-readout.json": {
+      "bytes": 775959,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/balanced-parent-source-readout.json",
+      "sha256": "13fd6a32849f97f9398ca9a986cabb4a153f6ed481fcac2dd34e32ed5644e278",
+      "source_identity": [
+        66306,
+        81400648,
+        775959,
+        1791376594451506155,
+        1791376594451506155
+      ]
+    },
+    "owned-run/training-384-r1/results/balanced48-parent-actual-predictions.json": {
+      "bytes": 25952,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/balanced48-parent-actual-predictions.json",
+      "sha256": "b6f2ad7cda48c084ab970f19a44643a08a72bf170af58fce374a35a2f62d1053",
+      "source_identity": [
+        66306,
+        81400652,
+        25952,
+        1791376595229041581,
+        1791376595229041581
+      ]
+    },
+    "owned-run/training-384-r1/results/balanced48-parent-greedy-trace.json": {
+      "bytes": 1664592,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/balanced48-parent-greedy-trace.json",
+      "sha256": "2db09d0b4e8b50a14be69179e8522751fa95144052866c074b3b6a4b71f4b0c4",
+      "source_identity": [
+        66306,
+        81400651,
+        1664592,
+        1791376595226515184,
+        1791376595226515184
+      ]
+    },
+    "owned-run/training-384-r1/results/balanced48-parent-posthoc-formula-fidelity.json": {
+      "bytes": 156830,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/balanced48-parent-posthoc-formula-fidelity.json",
+      "sha256": "c6f99fce278dbb3a9fc4b5dd2c969a59f07296dab5610e713c65e6933843f87d",
+      "source_identity": [
+        66306,
+        81400654,
+        156830,
+        1791376595530518725,
+        1791376595530518725
+      ]
+    },
+    "owned-run/training-384-r1/results/balanced48-parent-posthoc-scalar-scores.json": {
+      "bytes": 598938,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/balanced48-parent-posthoc-scalar-scores.json",
+      "sha256": "dae63309410403baa53e8b8322315dde2b0a8a5c618a12eda2fc559aecd57bd1",
+      "source_identity": [
+        66306,
+        81400653,
+        598938,
+        1791376595448517770,
+        1791376595448517770
+      ]
+    },
+    "owned-run/training-384-r1/results/control-bank.json": {
+      "bytes": 1853154,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/control-bank.json",
+      "sha256": "c4c31efe3bdff193472ccbafe5e0ad3ab939285e485a16a5f2a480cbab05e9e9",
+      "source_identity": [
+        66306,
+        81400646,
+        1853154,
+        1791376594130502416,
+        1791376594130502416
+      ]
+    },
+    "owned-run/training-384-r1/results/control-paired-cache-receipt.json": {
+      "bytes": 75499,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/control-paired-cache-receipt.json",
+      "sha256": "393e2231f1bbf714e2ff9620ef958a54b6ddd04e0882cff7379d0b5db7fdaae0",
+      "source_identity": [
+        66306,
+        81400647,
+        75499,
+        1791376594133662789,
+        1791376594133662789
+      ]
+    },
+    "owned-run/training-384-r1/results/control-parent-source-readout.json": {
+      "bytes": 771651,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/control-parent-source-readout.json",
+      "sha256": "db517fd3668a75740a4739a02f4bc09b325b18c4944a8c5d77691f826e2a60d0",
+      "source_identity": [
+        66306,
+        81400645,
+        771651,
+        1791376594111423249,
+        1791376594111423249
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-bank-retention-ce/last-attempt/balanced-source-bank-readout.json": {
+      "bytes": 775641,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/last-attempt/balanced-source-bank-readout.json",
+      "sha256": "7ff2b948f9ef9672b9fd1c3a2d89c52f922c7f699a5f265dd8cef65c739278a4",
+      "source_identity": [
+        66306,
+        81400685,
+        775641,
+        1791376664969319825,
+        1791376664969319825
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-bank-retention-ce/last-attempt/control-source-bank-readout.json": {
+      "bytes": 771117,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/last-attempt/control-source-bank-readout.json",
+      "sha256": "4748f815519d8648cd1b38e60a62f07ac9cb2ec354bea856854f7b93a6955eeb",
+      "source_identity": [
+        66306,
+        81400684,
+        771117,
+        1791376664664316338,
+        1791376664664316338
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-bank-retention-ce/last-attempt/evaluation-context-only-shuffle.json": {
+      "bytes": 2075316,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/last-attempt/evaluation-context-only-shuffle.json",
+      "sha256": "24c8fa00b3d92c9d501bccc83df1c30bbe87ad27d9592c1e860c2253b712ce80",
+      "source_identity": [
+        66306,
+        81400680,
+        2075316,
+        1791376660411267689,
+        1791376660411267689
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-bank-retention-ce/last-attempt/evaluation-context-reverse.json": {
+      "bytes": 2075352,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/last-attempt/evaluation-context-reverse.json",
+      "sha256": "9505c2e06b54686d8d490e86e44e524d37b382d345332154f3ce8dd6c0a8af87",
+      "source_identity": [
+        66306,
+        81400681,
+        2075352,
+        1791376661719282656,
+        1791376661719282656
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-bank-retention-ce/last-attempt/evaluation-context-rotate.json": {
+      "bytes": 2075320,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/last-attempt/evaluation-context-rotate.json",
+      "sha256": "245eaadf1b909e8d35b3c31df673c81ca4e43c6556047e38f96136d08fe041e2",
+      "source_identity": [
+        66306,
+        81400682,
+        2075320,
+        1791376663024297585,
+        1791376663024297585
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-bank-retention-ce/last-attempt/evaluation-cross-length-shuffle.json": {
+      "bytes": 2075405,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/last-attempt/evaluation-cross-length-shuffle.json",
+      "sha256": "c6c963d7fffc1700dfe4a5040464a6dfc7f7b5e52d84d6fbc9c3d515ff183799",
+      "source_identity": [
+        66306,
+        81400679,
+        2075405,
+        1791376659104252728,
+        1791376659104252728
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-bank-retention-ce/last-attempt/evaluation-recurrent-residual-off.json": {
+      "bytes": 1986812,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/last-attempt/evaluation-recurrent-residual-off.json",
+      "sha256": "8ce3b60ab23df38d031c006f174874d97dc82b7ba9e7eacc36267f6cbaae4c86",
+      "source_identity": [
+        66306,
+        81400683,
+        1986812,
+        1791376664345312690,
+        1791376664345312690
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-bank-retention-ce/last-attempt/evaluation-source-shuffle.json": {
+      "bytes": 2075243,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/last-attempt/evaluation-source-shuffle.json",
+      "sha256": "8eecff7ac38376402050f4c98e65c2baa7497484521cbcfdb69c1fd9290fc5eb",
+      "source_identity": [
+        66306,
+        81400678,
+        2075243,
+        1791376657777237533,
+        1791376657777237533
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-bank-retention-ce/last-attempt/evaluation-training.json": {
+      "bytes": 2069916,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/last-attempt/evaluation-training.json",
+      "sha256": "fbea92c61acc88c3d3a5fbc1e23ab4e9fa681e78cf1d8eec330b9b7e7fc54c9d",
+      "source_identity": [
+        66306,
+        81400676,
+        2069916,
+        1791376655408210394,
+        1791376655408210394
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-bank-retention-ce/last-attempt/evaluation-validation.json": {
+      "bytes": 2074271,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/last-attempt/evaluation-validation.json",
+      "sha256": "280011bf18362f7bcbda586a4f540b02d43614ea972ba8bc812f036c12ce55ca",
+      "source_identity": [
+        66306,
+        81400675,
+        2074271,
+        1791376654106195471,
+        1791376654106195471
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-bank-retention-ce/last-attempt/evaluation-zero-condition.json": {
+      "bytes": 2784823,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/last-attempt/evaluation-zero-condition.json",
+      "sha256": "39bb7f9a740aae24c32cccd66c097b48f44d8940c5242c2797a2e29af232b2cc",
+      "source_identity": [
+        66306,
+        81400677,
+        2784823,
+        1791376656467222528,
+        1791376656467222528
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-bank-retention-ce/selected/balanced-source-bank-readout.json": {
+      "bytes": 775638,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/selected/balanced-source-bank-readout.json",
+      "sha256": "74b9a43721f8584e26d939cda654ba2ea3765a85c0a63d6818a3aa9be312febc",
+      "source_identity": [
+        66306,
+        81400672,
+        775638,
+        1791376652677179086,
+        1791376652677179086
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-bank-retention-ce/selected/control-source-bank-readout.json": {
+      "bytes": 771117,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/selected/control-source-bank-readout.json",
+      "sha256": "8eca12e7880d247bfea5c5cbee3323f46f0dfb72aa351ffc0d425cbf67be3839",
+      "source_identity": [
+        66306,
+        81400671,
+        771117,
+        1791376652379175669,
+        1791376652379175669
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-bank-retention-ce/selected/evaluation-context-only-shuffle.json": {
+      "bytes": 2075320,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/selected/evaluation-context-only-shuffle.json",
+      "sha256": "acf2c71ccb59a94624a27dd2e8bdd32e998c1c7878c49fd227b2bc254c3024ca",
+      "source_identity": [
+        66306,
+        81400667,
+        2075320,
+        1791376648401130024,
+        1791376648401130024
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-bank-retention-ce/selected/evaluation-context-reverse.json": {
+      "bytes": 2075353,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/selected/evaluation-context-reverse.json",
+      "sha256": "df71d4594644e5dbbc9190af729080ad8eacf380e532bfcdbcf5d0e9da07a066",
+      "source_identity": [
+        66306,
+        81400668,
+        2075353,
+        1791376649705144992,
+        1791376649705144992
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-bank-retention-ce/selected/evaluation-context-rotate.json": {
+      "bytes": 2075318,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/selected/evaluation-context-rotate.json",
+      "sha256": "44fd341bf1ded4f7a8d47eb10158034b177d89cf61debe2821308634a4aefe59",
+      "source_identity": [
+        66306,
+        81400669,
+        2075318,
+        1791376651014160012,
+        1791376651014160012
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-bank-retention-ce/selected/evaluation-cross-length-shuffle.json": {
+      "bytes": 2075402,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/selected/evaluation-cross-length-shuffle.json",
+      "sha256": "76790e0d79a43171cc748080083e0437ee327f965932f0746b9a7ac9f0cfd042",
+      "source_identity": [
+        66306,
+        81400666,
+        2075402,
+        1791376647096115039,
+        1791376647096115039
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-bank-retention-ce/selected/evaluation-recurrent-residual-off.json": {
+      "bytes": 1986815,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/selected/evaluation-recurrent-residual-off.json",
+      "sha256": "c843c5ec9dabb5ed8e181c78d5979460547a2904ad613a2fde12b6edcca6bc3b",
+      "source_identity": [
+        66306,
+        81400670,
+        1986815,
+        1791376652068172102,
+        1791376652068172102
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-bank-retention-ce/selected/evaluation-source-shuffle.json": {
+      "bytes": 2075244,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/selected/evaluation-source-shuffle.json",
+      "sha256": "6288f9820ffbb30e50352fb4e7fe614fa05368c348269594c6636be99d9df07c",
+      "source_identity": [
+        66306,
+        81400665,
+        2075244,
+        1791376645769099797,
+        1791376645769099797
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-bank-retention-ce/selected/evaluation-training.json": {
+      "bytes": 2069919,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/selected/evaluation-training.json",
+      "sha256": "c7a06a7565ef1fb2e962d1917655ecfd6fed33b78e0895694476658087ee8edf",
+      "source_identity": [
+        66306,
+        81400663,
+        2069919,
+        1791376643181070055,
+        1791376643181070055
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-bank-retention-ce/selected/evaluation-validation.json": {
+      "bytes": 2074271,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/selected/evaluation-validation.json",
+      "sha256": "65e78ecfa1ca0cbec8c792d9a0ae40d8805de903d250126829e91cb99767514e",
+      "source_identity": [
+        66306,
+        81400662,
+        2074271,
+        1791376641872055004,
+        1791376641872055004
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-bank-retention-ce/selected/evaluation-zero-condition.json": {
+      "bytes": 2784821,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/selected/evaluation-zero-condition.json",
+      "sha256": "db3fbc72867d227d325001ce307fb07b0eec23a3885c7555a0af8f6b8d839f2a",
+      "source_identity": [
+        66306,
+        81400664,
+        2784821,
+        1791376644459084745,
+        1791376644459084745
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-bank-retention-ce/summary.json": {
+      "bytes": 318318,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/summary.json",
+      "sha256": "d13a61cab057416aad6627fa74e846f1c19560344415ce12828b8e1473c38e05",
+      "source_identity": [
+        66306,
+        81400686,
+        318318,
+        1791376664972319859,
+        1791376664972319859
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-bank-retention-ce/training-inherited.json": {
+      "bytes": 21563489,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/training-inherited.json",
+      "sha256": "3485f13cf991e0eb0592ac1bc0ff8d3db56dad356f48178926b32dab8653fd47",
+      "source_identity": [
+        66306,
+        81400658,
+        21563489,
+        1791376639711030146,
+        1791376639711030146
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-bank-retention-ce/training.json": {
+      "bytes": 21592452,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-bank-retention-ce/training.json",
+      "sha256": "524badf1988c42fc9f2bd91e984d6bba2d9f2e46040abdcd8b4fa543668606d8",
+      "source_identity": [
+        66306,
+        81400659,
+        21592452,
+        1791376640395038015,
+        1791376640395038015
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-source-inventory.json": {
+      "bytes": 28562566,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-source-inventory.json",
+      "sha256": "7759f8d71e828f431779a3ccc8c5bc198ce47becf6f017fe5910066fcc3e1ac6",
+      "source_identity": [
+        66306,
+        81400640,
+        28562566,
+        1791376587465424682,
+        1791376587465424682
+      ]
+    },
+    "owned-run/training-384-r1/results/dual-source-schedule.json": {
+      "bytes": 339536,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/dual-source-schedule.json",
+      "sha256": "b6d953ec31947a2a37ac6aad895958860403c7dec1e0ce37a546b56b9760143b",
+      "source_identity": [
+        66306,
+        81400639,
+        339536,
+        1791376587175421297,
+        1791376587175421297
+      ]
+    },
+    "owned-run/training-384-r1/results/paired-source-schedule.json": {
+      "bytes": 215055,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/paired-source-schedule.json",
+      "sha256": "786125add0636e47bfbe7d8468cc57d6665b32bd1199459c84f3b28a724c2350",
+      "source_identity": [
+        66306,
+        81400638,
+        215055,
+        1791376587173421274,
+        1791376587173421274
+      ]
+    },
+    "owned-run/training-384-r1/results/parent-dual-cache-receipt.json": {
+      "bytes": 153627,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/parent-dual-cache-receipt.json",
+      "sha256": "52ab7694662b06f337005829786e75249462ee21d7a6ff783a8171cf163f85db",
+      "source_identity": [
+        66306,
+        81400641,
+        153627,
+        1791376592881487860,
+        1791376592881487860
+      ]
+    },
+    "owned-run/training-384-r1/results/parent-dual-detached-loss-0.json": {
+      "bytes": 6810,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/parent-dual-detached-loss-0.json",
+      "sha256": "a0a52acabafcfa53aa64860e460f54d0155dc715f89caa86ac823fa7e0b16c2e",
+      "source_identity": [
+        66306,
+        81400642,
+        6810,
+        1791376592885668837,
+        1791376592885668837
+      ]
+    },
+    "owned-run/training-384-r1/results/parent-dual-detached-loss-1.json": {
+      "bytes": 6859,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/parent-dual-detached-loss-1.json",
+      "sha256": "bb51fed8429258142d13c5921eeb4ec199a8f85f867939e425a290a8174b995c",
+      "source_identity": [
+        66306,
+        81400643,
+        6859,
+        1791376592886862147,
+        1791376592886862147
+      ]
+    },
+    "owned-run/training-384-r1/results/parent-validation-parity.json": {
+      "bytes": 289,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/parent-validation-parity.json",
+      "sha256": "ae3b2eddc8bc48e1724e6628dcc3cc7abbad937c52e366a0b2108c5ba70da7d6",
+      "source_identity": [
+        66306,
+        81400644,
+        289,
+        1791376593816502933,
+        1791376593816502933
+      ]
+    },
+    "owned-run/training-384-r1/results/sealed-recipe.json": {
+      "bytes": 611728,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/sealed-recipe.json",
+      "sha256": "6d5cf9ba5dd33ec152a225bb48961e2cc5600039ef82322b74a035cd96ddd4cc",
+      "source_identity": [
+        66306,
+        81400637,
+        611728,
+        1791376587172421262,
+        1791376587172421262
+      ]
+    },
+    "owned-run/training-384-r1/results/summary.json": {
+      "bytes": 37254,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-384-r1/results/summary.json",
+      "sha256": "6d82009eb298792786a2aa1bda7e609e29decf0e5e43e42d4b7d71ba3c8ea1b2",
+      "source_identity": [
+        66306,
+        81400687,
+        37254,
+        1791376666453634325,
+        1791376666453634325
+      ]
+    },
+    "owned-run/training-manifest.json": {
+      "bytes": 312764,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-manifest.json",
+      "sha256": "40a4be04a2f44b6abe4ddb85dbe38373caf8a0fe55d11d62f2896fb817f0b0e1",
+      "source_identity": [
+        66306,
+        74367802,
+        312764,
+        1791375739999073061,
+        1791375739999073061
+      ]
+    },
+    "owned-run/training-plan.json": {
+      "bytes": 314965,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/training-plan.json",
+      "sha256": "c33925e386d0fefca399e64474041c46b2098d9a6f3ff7e6f4086173e9110d3a",
+      "source_identity": [
+        66306,
+        74367801,
+        314965,
+        1791375739997919228,
+        1791375739997919228
+      ]
+    },
+    "review-and-source/README.md": {
+      "bytes": 8881,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/README.md",
+      "sha256": "086444196cf5056cc076a35c93065d823f145e94535c29889e8afcb73f42c457",
+      "source_identity": [
+        66306,
+        7903371,
+        8881,
+        1791377530208546837,
+        1791377530208546837
+      ]
+    },
+    "review-and-source/analyze_actual_results.py": {
+      "bytes": 10639,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/analyze_actual_results.py",
+      "sha256": "c481f0797d81c91dfe0094c5e5d630ad3ececc44ffb687f53043fef2676e3a6d",
+      "source_identity": [
+        66306,
+        7903252,
+        10639,
+        1791377091428991591,
+        1791377091428991591
+      ]
+    },
+    "review-and-source/build_evidence_archive.py": {
+      "bytes": 7176,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/build_evidence_archive.py",
+      "sha256": "c2c49d40b76363f958cbdedab093128404d859105d8ff0cbc20845bb0ee76430",
+      "source_identity": [
+        66306,
+        7903332,
+        7176,
+        1791377741130692575,
+        1791377741130692575
+      ]
+    },
+    "review-and-source/development-error-census.json": {
+      "bytes": 16125,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/development-error-census.json",
+      "sha256": "335478780679af96a5efc90bc31db73da4aa9e3b2a7c40b160b57af25744b2cb",
+      "source_identity": [
+        66306,
+        7903364,
+        16125,
+        1791377180987742661,
+        1791377180987742661
+      ]
+    },
+    "review-and-source/evaluation/actual-input-preparation.json": {
+      "bytes": 1463,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/evaluation/actual-input-preparation.json",
+      "sha256": "cf88428daec6edfdb72d65f341e1392eefda0960918fc6093f9f2b1cc6caef2e",
+      "source_identity": [
+        66306,
+        7903255,
+        1463,
+        1791376719849643263,
+        1791376719849643263
+      ]
+    },
+    "review-and-source/evaluation/prepare_actual_evaluation.py": {
+      "bytes": 6599,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/evaluation/prepare_actual_evaluation.py",
+      "sha256": "606d98f49f35385b97cf463185140899a18638f1fd20468bc5a9b22c43a10d79",
+      "source_identity": [
+        66306,
+        7903239,
+        6599,
+        1791376274508010433,
+        1791376274508010433
+      ]
+    },
+    "review-and-source/evaluation/source-freeze.json": {
+      "bytes": 862,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/evaluation/source-freeze.json",
+      "sha256": "294fd6d4b33564265d151d802d907caaa510da8b1d0b05f04e03fffcc0c1c601",
+      "source_identity": [
+        66306,
+        7903223,
+        862,
+        1791375537137853434,
+        1791375537137853434
+      ]
+    },
+    "review-and-source/evaluation/source/evaluate_dual_bank_replay.py": {
+      "bytes": 28064,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/evaluation/source/evaluate_dual_bank_replay.py",
+      "sha256": "bd2862167fa61ba4451b79436e79609e5ff6d8280151256aab459ba9df1837f5",
+      "source_identity": [
+        66306,
+        7903202,
+        28064,
+        1791375091413491429,
+        1791375091413491429
+      ]
+    },
+    "review-and-source/evaluation/tests/test_dual_bank_evaluation.py": {
+      "bytes": 17982,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/evaluation/tests/test_dual_bank_evaluation.py",
+      "sha256": "eb8bb5af599997887156d7b6d75371939e564052b1a30759dee01d9c8311eb43",
+      "source_identity": [
+        66306,
+        8569919,
+        17982,
+        1791375091451205222,
+        1791375091451205222
+      ]
+    },
+    "review-and-source/guardian/actual-phase-input-preparation-r2.json": {
+      "bytes": 1318,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/guardian/actual-phase-input-preparation-r2.json",
+      "sha256": "21f098b1e18ba2438025d70da4eb9a669d1cc5a9e80140b6d82303fa2799e039",
+      "source_identity": [
+        66306,
+        8176632,
+        1318,
+        1791375741805254989,
+        1791375741805254989
+      ]
+    },
+    "review-and-source/guardian/build_complete_input_closure.py": {
+      "bytes": 5099,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/guardian/build_complete_input_closure.py",
+      "sha256": "daa631c35b59c7d4e69f33d91a1a63a2849d21f30bc5f6b20ee428d9a7e649e1",
+      "source_identity": [
+        66306,
+        8176618,
+        5099,
+        1791374972333892172,
+        1791374972333892172
+      ]
+    },
+    "review-and-source/guardian/build_input_closure_seed.py": {
+      "bytes": 8865,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/guardian/build_input_closure_seed.py",
+      "sha256": "7e3beb99a3b18495d40c0d24ea8c7110a5c09f439cffe87fd187323b22b632bd",
+      "source_identity": [
+        66306,
+        8176608,
+        8865,
+        1791374834248379742,
+        1791374834248379742
+      ]
+    },
+    "review-and-source/guardian/evaluation-execution-readiness.json": {
+      "bytes": 408312,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/guardian/evaluation-execution-readiness.json",
+      "sha256": "32194225efa8b81962baf1d2cf47c9517056d6590704dd5b3af82609e24994f5",
+      "source_identity": [
+        66306,
+        8176648,
+        408312,
+        1791376971271708897,
+        1791376971271708897
+      ]
+    },
+    "review-and-source/guardian/guardian-adaptation.diff": {
+      "bytes": 1315,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/guardian/guardian-adaptation.diff",
+      "sha256": "cdd230ffe457cf83deda328513886b2ea02eabcead6e936180f4b657e968891c",
+      "source_identity": [
+        66306,
+        8176588,
+        1315,
+        1791374614779466821,
+        1791374614779466821
+      ]
+    },
+    "review-and-source/guardian/guardian-proposal.json": {
+      "bytes": 4189,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/guardian/guardian-proposal.json",
+      "sha256": "82fbdf392105d7d6114a053662de61513db51f14b4565cc62741605ea24b2a82",
+      "source_identity": [
+        66306,
+        8176589,
+        4189,
+        1791374614779551237,
+        1791374614779551237
+      ]
+    },
+    "review-and-source/guardian/input-closure-seed-r2.json": {
+      "bytes": 687447,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/guardian/input-closure-seed-r2.json",
+      "sha256": "07ada819b4ac8c2f09f477ee335c1c404c33afa3aa98fae1121d52af908f10c6",
+      "source_identity": [
+        66306,
+        8176619,
+        687447,
+        1791374974967903994,
+        1791374974967903994
+      ]
+    },
+    "review-and-source/guardian/input-closure-seed.json": {
+      "bytes": 666193,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/guardian/input-closure-seed.json",
+      "sha256": "c05fd1f26845269da07cba96f3cf96965ab0aca321491245452b50c90230580c",
+      "source_identity": [
+        66306,
+        8176609,
+        666193,
+        1791374837033387798,
+        1791374837033387798
+      ]
+    },
+    "review-and-source/guardian/inspect_resource_availability.py": {
+      "bytes": 8462,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/guardian/inspect_resource_availability.py",
+      "sha256": "f0a8b9ef0064dfbe31bca57302a0ec1d74f582c7994bf6398d9b9b5bc3df6703",
+      "source_identity": [
+        66306,
+        8176604,
+        8462,
+        1791374682689112144,
+        1791374682689112144
+      ]
+    },
+    "review-and-source/guardian/mechanical-guardian-source-check.json": {
+      "bytes": 330,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/guardian/mechanical-guardian-source-check.json",
+      "sha256": "7713ad2c974b40e080447e8aa244b67d9244488dd7e0f82a1722fc58d308d4ff",
+      "source_identity": [
+        66306,
+        8176620,
+        330,
+        1791374999256106653,
+        1791374999256106653
+      ]
+    },
+    "review-and-source/guardian/phase-resource-plan.json": {
+      "bytes": 4744,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/guardian/phase-resource-plan.json",
+      "sha256": "0aae21195e19cb38872d6c6f626e5554f3e88db9c7cd4d051ea814908a313935",
+      "source_identity": [
+        66306,
+        8176610,
+        4744,
+        1791374893203595508,
+        1791374893203595508
+      ]
+    },
+    "review-and-source/guardian/preflight-execution-readiness.json": {
+      "bytes": 392318,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/guardian/preflight-execution-readiness.json",
+      "sha256": "e53daa730d80a736e3ec571bb9ca4e1fbf76d60fff83f66e56bafff005a5b864",
+      "source_identity": [
+        66306,
+        8176634,
+        392318,
+        1791376101935429973,
+        1791376101935429973
+      ]
+    },
+    "review-and-source/guardian/resource-availability-readonly-r1.json": {
+      "bytes": 5599,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/guardian/resource-availability-readonly-r1.json",
+      "sha256": "69b4cc558c0c545a7e456cd90a91d402c94f371619f04f288214f5522064ccb8",
+      "source_identity": [
+        66306,
+        8176605,
+        5599,
+        1791374703317293929,
+        1791374703317293929
+      ]
+    },
+    "review-and-source/guardian/review_evaluation_readiness.py": {
+      "bytes": 18031,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/guardian/review_evaluation_readiness.py",
+      "sha256": "2d127ddcca083ad94e5ef5a4bf886378739d7a42258420dcdb9b73cf10df0d8a",
+      "source_identity": [
+        66306,
+        8176647,
+        18031,
+        1791376902724967167,
+        1791376902724967167
+      ]
+    },
+    "review-and-source/guardian/review_preflight_readiness.py": {
+      "bytes": 19438,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/guardian/review_preflight_readiness.py",
+      "sha256": "ae7e4361c140ef4c451fab9ebfbb78214ae5f0ac818f1c00e1c71f9a80d7d0e0",
+      "source_identity": [
+        66306,
+        8176633,
+        19438,
+        1791376098396397872,
+        1791376098396397872
+      ]
+    },
+    "review-and-source/guardian/review_training_readiness.py": {
+      "bytes": 15384,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/guardian/review_training_readiness.py",
+      "sha256": "d033b026046be6dda0865d773a7f1c45f0857bac2b352b042091ee8845d40376",
+      "source_identity": [
+        66306,
+        8176635,
+        15384,
+        1791376510208512203,
+        1791376510208512203
+      ]
+    },
+    "review-and-source/guardian/source-results-freeze-r2.json": {
+      "bytes": 4196,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/guardian/source-results-freeze-r2.json",
+      "sha256": "71df58f5258e1e708c538487bf599e7db94828d655716c35d4735a67d17d6d47",
+      "source_identity": [
+        66306,
+        8176616,
+        4196,
+        1791375018468118746,
+        1791375018468118746
+      ]
+    },
+    "review-and-source/guardian/source-results-freeze.json": {
+      "bytes": 3111,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/guardian/source-results-freeze.json",
+      "sha256": "ea295c164c7e704fb94e536c6d88db10c7521d9cf8a690f190b23a6257aa9f15",
+      "source_identity": [
+        66306,
+        8176611,
+        3111,
+        1791374893204241014,
+        1791374893204241014
+      ]
+    },
+    "review-and-source/guardian/staged-not-executed-r1.json": {
+      "bytes": 695,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/guardian/staged-not-executed-r1.json",
+      "sha256": "297d9c24e04d04bf9ac54be0dceff92fa630b214d7bfb616bfc6893013ebf9db",
+      "source_identity": [
+        66306,
+        8176630,
+        695,
+        1791375537208387481,
+        1791375537208387481
+      ]
+    },
+    "review-and-source/guardian/training-execution-readiness.json": {
+      "bytes": 387349,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/guardian/training-execution-readiness.json",
+      "sha256": "1546f07dd038f8a581e29625f9fdb01e1a1d83d788d7f076210b2db1a1d28805",
+      "source_identity": [
+        66306,
+        8176636,
+        387349,
+        1791376520576635945,
+        1791376520576635945
+      ]
+    },
+    "review-and-source/history/build_evidence_archive-r1.py": {
+      "bytes": 7160,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/history/build_evidence_archive-r1.py",
+      "sha256": "755daa9d0de537faef5e6db062c0ecebf4500a57e4caa2ae46575401d2b69f37",
+      "source_identity": [
+        66306,
+        36488198,
+        7160,
+        1791377741097875635,
+        1791377741097875635
+      ]
+    },
+    "review-and-source/independent-review/actual-evaluation-r1-independent-review.json": {
+      "bytes": 6027292,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/actual-evaluation-r1-independent-review.json",
+      "sha256": "898539453d4ea0e4317d10984ecc4de007557587f0688d03895a410570a335e1",
+      "source_identity": [
+        66306,
+        37536773,
+        6027292,
+        1791377116929261319,
+        1791377116929261319
+      ]
+    },
+    "review-and-source/independent-review/actual-preflight-384-r1-independent-review.json": {
+      "bytes": 1381833,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/actual-preflight-384-r1-independent-review.json",
+      "sha256": "4b559a178d5c9265be9b5dcbb7c935b82a61f992c2bdb2ebb41f7ee14a0e9019",
+      "source_identity": [
+        66306,
+        37536750,
+        1381833,
+        1791376429354532064,
+        1791376429354532064
+      ]
+    },
+    "review-and-source/independent-review/actual-training-384-r1-independent-review.json": {
+      "bytes": 1140771,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/actual-training-384-r1-independent-review.json",
+      "sha256": "09f3ba6bf9fe02c388e411cdb8f7985f841ef38ae7d1e12789d24947ea89765e",
+      "source_identity": [
+        66306,
+        37536764,
+        1140771,
+        1791376815448010204,
+        1791376815448010204
+      ]
+    },
+    "review-and-source/independent-review/audit_compact_results.py": {
+      "bytes": 23712,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/audit_compact_results.py",
+      "sha256": "769197bb5c1d9a653a4db8a314123fbd724cb73dc46ecba47bddf952283131f2",
+      "source_identity": [
+        66306,
+        37536777,
+        23712,
+        1791377641685683316,
+        1791377641685683316
+      ]
+    },
+    "review-and-source/independent-review/audit_dual_evaluation.py": {
+      "bytes": 32515,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/audit_dual_evaluation.py",
+      "sha256": "0cd2309241ceee3c6e5d95d1477a50b807e9a73a2f86a656c4c949d1a7b08d66",
+      "source_identity": [
+        66306,
+        37536736,
+        32515,
+        1791376137046066492,
+        1791376137046066492
+      ]
+    },
+    "review-and-source/independent-review/audit_dual_preflight-r1.py": {
+      "bytes": 48272,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/audit_dual_preflight-r1.py",
+      "sha256": "d7e6969e651988cc34b4574e881561845de36a0d15f85cea5daf5b947151e8cc",
+      "source_identity": [
+        66306,
+        37536748,
+        48272,
+        1791376426035490483,
+        1791376426035490483
+      ]
+    },
+    "review-and-source/independent-review/audit_dual_preflight.py": {
+      "bytes": 48325,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/audit_dual_preflight.py",
+      "sha256": "9952f27aeed3065988c4ed7ccaca53ad1dcef89f40e4a1f4e2425d9dcede8983",
+      "source_identity": [
+        66306,
+        37536746,
+        48325,
+        1791376426035667493,
+        1791376426035667493
+      ]
+    },
+    "review-and-source/independent-review/audit_dual_training.py": {
+      "bytes": 41972,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/audit_dual_training.py",
+      "sha256": "6cb68d5a8602d3f6656e04f6fe89c4f13d0427c1449f1aa89e37b9ecf0819712",
+      "source_identity": [
+        66306,
+        37536755,
+        41972,
+        1791376657555909670,
+        1791376657555909670
+      ]
+    },
+    "review-and-source/independent-review/evaluation-auditor-source-results-freeze.json": {
+      "bytes": 1513,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/evaluation-auditor-source-results-freeze.json",
+      "sha256": "ed9806661801d94186f96ce2fa643681e4956d0152dd0b772d490adccbe055b0",
+      "source_identity": [
+        66306,
+        37536774,
+        1513,
+        1791377158540456187,
+        1791377158540456187
+      ]
+    },
+    "review-and-source/independent-review/evaluation-pure-tests.log": {
+      "bytes": 3067,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/evaluation-pure-tests.log",
+      "sha256": "ebdcc694f4bea674df9dea28207a47ae8c20d116bc78fae516156d3ba1ee5b54",
+      "source_identity": [
+        66306,
+        37532976,
+        3067,
+        1791375624406274689,
+        1791375624406274689
+      ]
+    },
+    "review-and-source/independent-review/evaluation-source-independent-review.json": {
+      "bytes": 5635,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/evaluation-source-independent-review.json",
+      "sha256": "324a82090b861e81e6e7798168062f07bb822bf7b7184620b750c06b661bd927",
+      "source_identity": [
+        66306,
+        37532978,
+        5635,
+        1791375624463684200,
+        1791375624463684200
+      ]
+    },
+    "review-and-source/independent-review/postfit-comparison-independent-review.json": {
+      "bytes": 3220946,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/postfit-comparison-independent-review.json",
+      "sha256": "97a8cd24f6277b0990284afac1e2c7d7514131a2da5be18606f15a8a42536d28",
+      "source_identity": [
+        66306,
+        37536778,
+        3220946,
+        1791377649953767379,
+        1791377649953767379
+      ]
+    },
+    "review-and-source/independent-review/preflight-auditor-r1-invocation.json": {
+      "bytes": 601,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/preflight-auditor-r1-invocation.json",
+      "sha256": "edef93e7277071af8359e5e967db02833d9bb97c2fcda1a08982e094618bba52",
+      "source_identity": [
+        66306,
+        37536749,
+        601,
+        1791376426036092538,
+        1791376426036092538
+      ]
+    },
+    "review-and-source/independent-review/preflight-auditor-source-results-freeze.json": {
+      "bytes": 1651,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/preflight-auditor-source-results-freeze.json",
+      "sha256": "8c015d0aed4221effc4a61f9b28787f43f32dfe292a8c9b2db7704fc53f687f0",
+      "source_identity": [
+        66306,
+        37536751,
+        1651,
+        1791376475873550992,
+        1791376475873550992
+      ]
+    },
+    "review-and-source/independent-review/runtime-author-interface-tests-r2.log": {
+      "bytes": 3337,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/runtime-author-interface-tests-r2.log",
+      "sha256": "21d219d79fcc9743a1665d747a46cbaa8c83a1eff1d812d8473a6600fb1719ca",
+      "source_identity": [
+        66306,
+        37532979,
+        3337,
+        1791375652699507703,
+        1791375652699507703
+      ]
+    },
+    "review-and-source/independent-review/runtime-independent-mutations-r2.log": {
+      "bytes": 1633,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/runtime-independent-mutations-r2.log",
+      "sha256": "8ac68a77516fc33618cc05ff5e57a900a4cd8271f6032cf2994c8ea17a5af059",
+      "source_identity": [
+        66306,
+        37532980,
+        1633,
+        1791375652348504799,
+        1791375652348504799
+      ]
+    },
+    "review-and-source/independent-review/runtime-source-independent-review-r2.json": {
+      "bytes": 34713,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/runtime-source-independent-review-r2.json",
+      "sha256": "cb272c86b4e8f1f973ed89a798ecfec090434f90b4f1e3e8eb9e075875c389c7",
+      "source_identity": [
+        66306,
+        37533044,
+        34713,
+        1791375818134316923,
+        1791375818134316923
+      ]
+    },
+    "review-and-source/independent-review/saved-output-auditor-pure-tests.log": {
+      "bytes": 1755,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/saved-output-auditor-pure-tests.log",
+      "sha256": "3e0fc43348b230be5dea6bdb4ad673064cbda153b787f50b03525c00d216e43e",
+      "source_identity": [
+        66306,
+        37536759,
+        1755,
+        1791376792243753121,
+        1791376792243753121
+      ]
+    },
+    "review-and-source/independent-review/saved-output-auditor-source-freeze.json": {
+      "bytes": 1483,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/saved-output-auditor-source-freeze.json",
+      "sha256": "23c052d0c8a8ba6a53299c1b877f1351582d620754460e02811e0b6e14281d63",
+      "source_identity": [
+        66306,
+        37536763,
+        1483,
+        1791376792305249964,
+        1791376792305249964
+      ]
+    },
+    "review-and-source/independent-review/source-guard-findings-r1.json": {
+      "bytes": 1878,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/source-guard-findings-r1.json",
+      "sha256": "4943fa13ba9d0d2bc99f164d59bdf9cb6ec2bc4e8859f5c6fa9fec980c35af13",
+      "source_identity": [
+        66306,
+        37532858,
+        1878,
+        1791375479156285523,
+        1791375479156285523
+      ]
+    },
+    "review-and-source/independent-review/test_independent_source_guards.py": {
+      "bytes": 2661,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/test_independent_source_guards.py",
+      "sha256": "933d46b9314913911ccbb8a82a8ea45f13afe64b3ee2dd93b5463035db992c34",
+      "source_identity": [
+        66306,
+        37532859,
+        2661,
+        1791375479191117216,
+        1791375479191117216
+      ]
+    },
+    "review-and-source/independent-review/test_saved_output_auditors.py": {
+      "bytes": 4207,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/test_saved_output_auditors.py",
+      "sha256": "a0b30c6f4316afb0db63d51b5469a364752ab02a8fb0e01b779b6ea849c44bb8",
+      "source_identity": [
+        66306,
+        37536758,
+        4207,
+        1791376792171752321,
+        1791376792171752321
+      ]
+    },
+    "review-and-source/independent-review/training-auditor-source-results-freeze.json": {
+      "bytes": 1445,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/training-auditor-source-results-freeze.json",
+      "sha256": "9e93c3464aa4d2cce55d44f31622abae3ed9f435c0b580bfb669e01a1b474350",
+      "source_identity": [
+        66306,
+        37536767,
+        1445,
+        1791376937840922388,
+        1791376937840922388
+      ]
+    },
+    "review-and-source/initial-state.json": {
+      "bytes": 851,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/initial-state.json",
+      "sha256": "33e032b4e388f064fe1c5b7d0def80b2b5c018368ef01ce8b584c45c584bc31d",
+      "source_identity": [
+        66306,
+        7903197,
+        851,
+        1791374838498085246,
+        1791374838498085246
+      ]
+    },
+    "review-and-source/postfit-comparison.json": {
+      "bytes": 141854,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/postfit-comparison.json",
+      "sha256": "29eccba12cb98de4eeea195fb96fc1a9715d9f67aad2585c5885373c8f02e9a5",
+      "source_identity": [
+        66306,
+        7903359,
+        141854,
+        1791377091899996580,
+        1791377091899996580
+      ]
+    },
+    "review-and-source/predeclared-protocol.json": {
+      "bytes": 6692,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/predeclared-protocol.json",
+      "sha256": "75d4d01893578265c2be3bcc53ed96ca661fdb03781704a074b9df56e6bf30d2",
+      "source_identity": [
+        66306,
+        7903196,
+        6692,
+        1791374838482392032,
+        1791374838482392032
+      ]
+    },
+    "review-and-source/publish_integration.py": {
+      "bytes": 8315,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/publish_integration.py",
+      "sha256": "7e1baa297b9fc0dafc5476c392dcd4c6f9b7d7e21d1ba4ade62bd75c10e0c3e1",
+      "source_identity": [
+        66306,
+        7903243,
+        8315,
+        1791376420559544487,
+        1791376420559544487
+      ]
+    },
+    "review-and-source/runtime/README.md": {
+      "bytes": 5660,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/README.md",
+      "sha256": "d401ad03eefc3fc2c88fdaf8f72e47f5b6aea3581a9eb36ad937c57bde3f1ada",
+      "source_identity": [
+        66306,
+        8176628,
+        5660,
+        1791375571304486713,
+        1791375571304486713
+      ]
+    },
+    "review-and-source/runtime/experiment-source/balanced_wording_candidates.py": {
+      "bytes": 43288,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/experiment-source/balanced_wording_candidates.py",
+      "sha256": "802bf91d12e2ce5dc4d7103af0c0081dd9ab56eade31094caea768212d8d07a4",
+      "source_identity": [
+        66306,
+        8176623,
+        43288,
+        1791375133733680293,
+        1791375133733680293
+      ]
+    },
+    "review-and-source/runtime/experiment-source/balanced_wording_runtime_adapter.py": {
+      "bytes": 20710,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/experiment-source/balanced_wording_runtime_adapter.py",
+      "sha256": "334506648a870f0b68bc3a8935f23ed4c8fc71ed3a50a12df285eb21801e0fe6",
+      "source_identity": [
+        66306,
+        8176614,
+        20710,
+        1791375133703630629,
+        1791375133703630629
+      ]
+    },
+    "review-and-source/runtime/experiment-source/dual_bank_retention.py": {
+      "bytes": 26660,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/experiment-source/dual_bank_retention.py",
+      "sha256": "15accfcf8bbc4e578e32ca7842ac338be2b563458c4c90a85fbe18429da000f1",
+      "source_identity": [
+        66306,
+        8176596,
+        26660,
+        1791374620502915579,
+        1791374620502915579
+      ]
+    },
+    "review-and-source/runtime/experiment-source/dual_bank_runtime_adapter.py": {
+      "bytes": 18962,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/experiment-source/dual_bank_runtime_adapter.py",
+      "sha256": "6c1b8d86ba05b46f1b8883d873718d7eeccc3edf638e04900c8c17e57745bb6a",
+      "source_identity": [
+        66306,
+        8176606,
+        18962,
+        1791375543343620041,
+        1791375543343620041
+      ]
+    },
+    "review-and-source/runtime/experiment-source/scripts/ops/autoencoder/benchmark_dual_bank_replay.py": {
+      "bytes": 28655,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/experiment-source/scripts/ops/autoencoder/benchmark_dual_bank_replay.py",
+      "sha256": "bde90325cc251fa6b88a3da3482bad7f637ec36569c677495db65b3d64fabf5a",
+      "source_identity": [
+        66306,
+        8176607,
+        28655,
+        1791375001381958319,
+        1791375001381958319
+      ]
+    },
+    "review-and-source/runtime/history/source-r1/README.md": {
+      "bytes": 5658,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/history/source-r1/README.md",
+      "sha256": "2f01dd824ff29fc7d6cdbc9908aa172f2cffa63b598b417ed457d13b84f7b657",
+      "source_identity": [
+        66306,
+        37532893,
+        5658,
+        1791375506236405775,
+        1791375506236405775
+      ]
+    },
+    "review-and-source/runtime/history/source-r1/experiment-source/balanced_wording_candidates.py": {
+      "bytes": 43288,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/history/source-r1/experiment-source/balanced_wording_candidates.py",
+      "sha256": "802bf91d12e2ce5dc4d7103af0c0081dd9ab56eade31094caea768212d8d07a4",
+      "source_identity": [
+        66306,
+        37532883,
+        43288,
+        1791375133733680293,
+        1791375506162330587
+      ]
+    },
+    "review-and-source/runtime/history/source-r1/experiment-source/balanced_wording_runtime_adapter.py": {
+      "bytes": 20710,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/history/source-r1/experiment-source/balanced_wording_runtime_adapter.py",
+      "sha256": "334506648a870f0b68bc3a8935f23ed4c8fc71ed3a50a12df285eb21801e0fe6",
+      "source_identity": [
+        66306,
+        37532879,
+        20710,
+        1791375133703630629,
+        1791375506162229722
+      ]
+    },
+    "review-and-source/runtime/history/source-r1/experiment-source/dual_bank_retention.py": {
+      "bytes": 26660,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/history/source-r1/experiment-source/dual_bank_retention.py",
+      "sha256": "15accfcf8bbc4e578e32ca7842ac338be2b563458c4c90a85fbe18429da000f1",
+      "source_identity": [
+        66306,
+        37532877,
+        26660,
+        1791374620502915579,
+        1791375506162182986
+      ]
+    },
+    "review-and-source/runtime/history/source-r1/experiment-source/dual_bank_runtime_adapter.py": {
+      "bytes": 17771,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/history/source-r1/experiment-source/dual_bank_runtime_adapter.py",
+      "sha256": "05f353e058e830eadb86e14d955f5c2e6b2627bdc17f922d50f2032092556df9",
+      "source_identity": [
+        66306,
+        37532878,
+        17771,
+        1791375093789504633,
+        1791375506162210026
+      ]
+    },
+    "review-and-source/runtime/history/source-r1/experiment-source/scripts/ops/autoencoder/benchmark_dual_bank_replay.py": {
+      "bytes": 28655,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/history/source-r1/experiment-source/scripts/ops/autoencoder/benchmark_dual_bank_replay.py",
+      "sha256": "bde90325cc251fa6b88a3da3482bad7f637ec36569c677495db65b3d64fabf5a",
+      "source_identity": [
+        66306,
+        37532874,
+        28655,
+        1791375001381958319,
+        1791375506162069241
+      ]
+    },
+    "review-and-source/runtime/history/source-r1/phase-profiles.json": {
+      "bytes": 4828,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/history/source-r1/phase-profiles.json",
+      "sha256": "9942465438acc88f9411265d8fa1ed9d1a7101ecf7851720eeb147dbbc8a320a",
+      "source_identity": [
+        66306,
+        37532889,
+        4828,
+        1791375506236337918,
+        1791375506236337918
+      ]
+    },
+    "review-and-source/runtime/history/source-r1/pure-tests-validation.log": {
+      "bytes": 2951,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/history/source-r1/pure-tests-validation.log",
+      "sha256": "c16f07a93d74d803245beeb7ffec0f6d91c0ce26b08f37f42a1b1e92ddadf4f1",
+      "source_identity": [
+        66306,
+        37532890,
+        2951,
+        1791375506236355694,
+        1791375506236355694
+      ]
+    },
+    "review-and-source/runtime/history/source-r1/pure-validation.json": {
+      "bytes": 1699,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/history/source-r1/pure-validation.json",
+      "sha256": "81079662eac4d8fb0a85793f69451410480aa5e7efa8587f72203c4e402c6b94",
+      "source_identity": [
+        66306,
+        37532892,
+        1699,
+        1791375506236391119,
+        1791375506236391119
+      ]
+    },
+    "review-and-source/runtime/history/source-r1/ruff-validation.log": {
+      "bytes": 19,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/history/source-r1/ruff-validation.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "source_identity": [
+        66306,
+        37532891,
+        19,
+        1791375506236369534,
+        1791375506236369534
+      ]
+    },
+    "review-and-source/runtime/history/source-r1/source-freeze.json": {
+      "bytes": 2595,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/history/source-r1/source-freeze.json",
+      "sha256": "845304596f5fda9b3e3a4e9da8c052e6b847437c3d175dd9d0aae982fe914bdc",
+      "source_identity": [
+        66306,
+        37532888,
+        2595,
+        1791375506236306174,
+        1791375506236306174
+      ]
+    },
+    "review-and-source/runtime/history/source-r1/tests/test_dual_bank_runtime.py": {
+      "bytes": 19356,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/history/source-r1/tests/test_dual_bank_runtime.py",
+      "sha256": "f21255d1a25b7d7ce91ebcd85c4051e553a5be2cf13897d46d1a4a7ebc2e6fbc",
+      "source_identity": [
+        66306,
+        37532885,
+        19356,
+        1791375093806504728,
+        1791375506202085570
+      ]
+    },
+    "review-and-source/runtime/phase-profiles.json": {
+      "bytes": 4828,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/phase-profiles.json",
+      "sha256": "9942465438acc88f9411265d8fa1ed9d1a7101ecf7851720eeb147dbbc8a320a",
+      "source_identity": [
+        66306,
+        8176624,
+        4828,
+        1791375133785338260,
+        1791375133785338260
+      ]
+    },
+    "review-and-source/runtime/pure-tests-validation.log": {
+      "bytes": 3337,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/pure-tests-validation.log",
+      "sha256": "f849d732cdc9b354ae22d694426613eeb357edb7c4fd492365d7fe7525d9a9e7",
+      "source_identity": [
+        66306,
+        8176625,
+        3337,
+        1791375571295372703,
+        1791375571295372703
+      ]
+    },
+    "review-and-source/runtime/pure-validation.json": {
+      "bytes": 1699,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/pure-validation.json",
+      "sha256": "444c3899af39a13f32312d5245a1b86a732d870c74590b15e3250a468d346584",
+      "source_identity": [
+        66306,
+        8176629,
+        1699,
+        1791375571304373496,
+        1791375571304373496
+      ]
+    },
+    "review-and-source/runtime/ruff-validation.log": {
+      "bytes": 19,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/ruff-validation.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "source_identity": [
+        66306,
+        8176626,
+        19,
+        1791375571303337903,
+        1791375571303337903
+      ]
+    },
+    "review-and-source/runtime/runtime-integration-contract.json": {
+      "bytes": 3489,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/runtime-integration-contract.json",
+      "sha256": "9c6cb8c7b95d7038b8ae819886741629a057d2fe1372734d391a403e887bd6e5",
+      "source_identity": [
+        66306,
+        8176621,
+        3489,
+        1791375736593607336,
+        1791375736593607336
+      ]
+    },
+    "review-and-source/runtime/source-freeze.json": {
+      "bytes": 2859,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/source-freeze.json",
+      "sha256": "b0665e581bbd9edf011a41069bc613afaed0a7eb0e07cda0f92ee2ccc66af97d",
+      "source_identity": [
+        66306,
+        8176627,
+        2859,
+        1791375571304176854,
+        1791375571304176854
+      ]
+    },
+    "review-and-source/runtime/tests/test_dual_bank_runtime.py": {
+      "bytes": 20636,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/tests/test_dual_bank_runtime.py",
+      "sha256": "bae259e83502944637e51c2bbf80135f022fc453b75edb32624a1f3200111a16",
+      "source_identity": [
+        66306,
+        8176612,
+        20636,
+        1791375543348620081,
+        1791375543348620081
+      ]
+    },
+    "review-and-source/sampled-model-formulas.json": {
+      "bytes": 55019,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/sampled-model-formulas.json",
+      "sha256": "b2a4d721f0b2399579a473fa6348d84c19b045418ee203ca93a968e020960670",
+      "source_identity": [
+        66306,
+        7903366,
+        55019,
+        1791377253023688566,
+        1791377253023688566
+      ]
+    }
+  },
+  "proof_authority": false,
+  "qualified": false,
+  "retained_vector_policy": "Saved source-bank and scalar/reconstruction observations may contain cached or normalized vectors; the archive is not vector-free.",
+  "schema": "dual-bank-replay-evidence-archive/v1",
+  "source_bytes": 204736335
+}

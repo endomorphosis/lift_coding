@@ -1,0 +1,15 @@
+{
+  "fresh_remote_main_parent_required": true,
+  "large_actual_review_policy": "Full review JSON retained in finalarchive and authenticated per-filegzip copies; use actualplain localimmutable reviews for publication guards.",
+  "no_canonical_source_changes": true,
+  "ordinary_indexes_and_heads_preserved": true,
+  "qualified": false,
+  "raw_checkpoint_bodies_excluded": true,
+  "rejected_archive_r1_policy": "62.749MB firstarchive retainedlocally with exactmanifest/finding/reference; only correctedfinal62.753MB archive body is selected forGithub.",
+  "schema": "dual-bank-replay-publication-pending-scope/v1",
+  "selected_package_prefixes": [
+    "docs/autoencoders/dual_bank_replay_results_20261007.md",
+    "docs/autoencoders/evidence/dual-bank-replay-20261007/"
+  ],
+  "selected_workspace_prefix": "artifacts/autoencoder-dual-bank-replay-20261007/"
+}

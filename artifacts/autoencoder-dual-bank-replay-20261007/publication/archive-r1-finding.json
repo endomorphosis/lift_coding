@@ -1,0 +1,13 @@
+{
+  "artifact": {
+    "bytes": 62749612,
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/publication/replay-evidence-r1.tar.gz",
+    "sha256": "fa902d867ab1765f887fb5d1d5b7468f9e0a2586a1302ef21bee9b9036e476f8"
+  },
+  "finding": "Suffix-only checkpoint exclusion also excluded root initial-state.json,851-byte Git/custody metadata. Actual RUN contains exactly three tensor checkpoint bodies.",
+  "numerical_outputs_changed": false,
+  "prior_archive_retained_locally": true,
+  "qualified": false,
+  "repair": "Exclude only RUN checkpoint bodies and rebuild a fresh archive after preserving r1. Final archive will retain root initial-state custody metadata.",
+  "schema": "dual-bank-replay-archive-r1-finding/v1"
+}

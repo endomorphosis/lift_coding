@@ -1,0 +1,16 @@
+--- /home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/run_reserved.py
++++ /home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/run_reserved.py
+@@ -154,10 +154,10 @@
+              PACKAGE/'docs/implementation/reports/evidence', Path('/tmp/pytest-of-barberb')]
+     ledger = roots[0]/'federal-corpus-audits/owned-daemon-resource-control/disk-reservations.json'
+     script,storage_bytes,memory_mb,outer_seconds = {
+-        'preflight': ('benchmark_balanced_wording_continuation.py',100_000_000,1536,900),
+-        'training': ('benchmark_balanced_wording_continuation.py',400_000_000,1536,1000),
++        'preflight': ('benchmark_dual_bank_replay.py',100_000_000,1536,900),
++        'training': ('benchmark_dual_bank_replay.py',400_000_000,1536,1000),
+         'preparation': ('prepare_balanced_wording_sources.py',100_000_000,4096,1500),
+-        'evaluation': ('evaluate_balanced_wording_continuation.py',100_000_000,1536,900),
++        'evaluation': ('evaluate_dual_bank_replay.py',100_000_000,1536,900),
+     }[args.phase]
+     owner = resources.DaemonResourceReservation(ledger, roots=roots, storage_bytes=storage_bytes,
+         memory_mb=memory_mb, cpu_slots=1, child_process_slots=1, timeout_seconds=600,

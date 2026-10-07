@@ -1,0 +1,163 @@
+{
+  "Lake_executed": false,
+  "accounting_scope": "Named-root apparent pathname bytes; hardlinks count per pathname; full unreleased claims added. Census and unlocked ledger snapshots are not one atomic admission.",
+  "admitted": false,
+  "availability_not_reserved": true,
+  "cap_bytes": 145000000000,
+  "charged_snapshot_bytes": 142040750886,
+  "complete": true,
+  "created_at_unix": 1791374703.3170033,
+  "elapsed_seconds": 15.631979817990214,
+  "exact_AST_readonly_functions": [
+    "_safe_path",
+    "_checked_path",
+    "_root_identity",
+    "_inventory_descendant",
+    "_inventory_entry_disappeared",
+    "_inventory",
+    "_process"
+  ],
+  "execution_readiness_granted": false,
+  "forecast_not_admission": true,
+  "foreign_claims_modified": false,
+  "frozen_owner": {
+    "bytes": 36724,
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/native4096-four-width-20261004/resource-cap/autoencoder_daemon_resources.py",
+    "sha256": "b00d2752ba852fe73760bba4fbd51b0e845742c3527642606a2a77ed9f8f5e2c"
+  },
+  "headroom_snapshot_bytes": 2959249114,
+  "host_memory_snapshot": {
+    "MemAvailable_bytes": 114043359232,
+    "MemTotal_bytes": 130663821312,
+    "SwapFree_bytes": 12771618816,
+    "SwapTotal_bytes": 17179865088
+  },
+  "inventory": {
+    "apparent_bytes": 94275750886,
+    "entry_count": 1358915,
+    "special_file_count": 10,
+    "symlink_count": 694
+  },
+  "inventory_seconds": 15.580843044037465,
+  "lease_owner_pid_observation": {},
+  "ledger_after": {
+    "bytes": 6084787,
+    "device": 66306,
+    "inode": 67027120,
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/federal-corpus-audits/owned-daemon-resource-control/disk-reservations.json",
+    "sha256": "ed94ce64ce12a1950de745619692d11967c3691673c438f8ff22cb5b6794c96d"
+  },
+  "ledger_before": {
+    "bytes": 6084787,
+    "device": 66306,
+    "inode": 67027120,
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/federal-corpus-audits/owned-daemon-resource-control/disk-reservations.json",
+    "sha256": "ed94ce64ce12a1950de745619692d11967c3691673c438f8ff22cb5b6794c96d"
+  },
+  "ledger_bytes_unchanged_during_census": true,
+  "minimum_filesystem_free_bytes": 223680311296,
+  "model_or_encoder_imported": false,
+  "models_executed": false,
+  "observed_apparent_bytes": 94275750886,
+  "outstanding_full_reservations_bytes": 47765000000,
+  "package_or_scheduler_imported": false,
+  "phase_forecast": {
+    "evaluation": {
+      "charged_if_admitted_bytes": 142140750886,
+      "named_root_cap_headroom_after_request_bytes": 2859249114,
+      "requested_child_process_slots": 1,
+      "requested_cpu_slots": 1,
+      "requested_memory_mib": 1536,
+      "requested_storage_bytes": 100000000,
+      "snapshot_storage_forecast_passes": true
+    },
+    "preflight": {
+      "charged_if_admitted_bytes": 142140750886,
+      "named_root_cap_headroom_after_request_bytes": 2859249114,
+      "requested_child_process_slots": 1,
+      "requested_cpu_slots": 1,
+      "requested_memory_mib": 1536,
+      "requested_storage_bytes": 100000000,
+      "snapshot_storage_forecast_passes": true
+    },
+    "training": {
+      "charged_if_admitted_bytes": 142440750886,
+      "named_root_cap_headroom_after_request_bytes": 2559249114,
+      "requested_child_process_slots": 1,
+      "requested_cpu_slots": 1,
+      "requested_memory_mib": 1536,
+      "requested_storage_bytes": 400000000,
+      "snapshot_storage_forecast_passes": true
+    }
+  },
+  "process_cpu_affinity_slots": 20,
+  "qualified": false,
+  "raw_claim_totals": {},
+  "reservation_counts_by_status": {
+    "released": 391,
+    "retained": 98
+  },
+  "resource_lease_or_reservation_acquired": false,
+  "roots": [
+    {
+      "device": 66306,
+      "inode": 66764317,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs"
+    },
+    {
+      "device": 66306,
+      "inode": 58092485,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/todo-queues"
+    },
+    {
+      "device": 66306,
+      "inode": 51016937,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence"
+    },
+    {
+      "device": 66306,
+      "inode": 533856,
+      "path": "/tmp/pytest-of-barberb"
+    }
+  ],
+  "scheduler_binding": {
+    "bytes": 1078,
+    "device": 66306,
+    "inode": 571584,
+    "path": "/tmp/ipfs-datasets-resource-scheduler-1000.json",
+    "sha256": "067a39aaf8b08d1cf1bf2466ec011fdf1fb1d2deb3f028620a0ce0ffd555b1db"
+  },
+  "scheduler_config": {
+    "lane_reservations": {
+      "validation": {
+        "cpu_slots": 1,
+        "memory_mb": 0
+      }
+    },
+    "max_gpu_memory_percent": null,
+    "max_memory_percent": null,
+    "max_swap_percent": null,
+    "max_waiting_requests": 256,
+    "proof_backoff_seconds": 2.0,
+    "proof_cpu_stall_percent": 50.0,
+    "proof_io_stall_percent": 10.0,
+    "proof_memory_headroom_mb": 2458,
+    "proof_memory_stall_percent": 2.0,
+    "proof_safety_enabled": true,
+    "require_known_gpu_for_gpu_work": true,
+    "reserved_gpu_memory_mb": 0,
+    "reserved_memory_mb": 0,
+    "total_child_process_slots": 4,
+    "total_cpu_slots": 4,
+    "total_gpu_memory_mb": null,
+    "total_memory_mb": 9830,
+    "total_unified_memory_mb": null
+  },
+  "scheduler_config_sha256": "76d10cc42015c9e4cbdad0fabd6a64f706320e14a8fb507f16262d42dd1d5856",
+  "scheduler_lease_count": 0,
+  "scheduler_waiter_count": 0,
+  "schema": "dual-bank-read-only-resource-forecast/v1",
+  "shared_config_changed": false,
+  "shared_state_written": false,
+  "stale_lease_recovery_performed": false
+}

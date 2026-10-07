@@ -1,0 +1,673 @@
+{
+  "authority": {
+    "Constitution_formalized": false,
+    "data_and_source_only": true,
+    "new_Lean_admit": false,
+    "new_checkpoint_promoted": false,
+    "one_fit_only": true
+  },
+  "datasets": {
+    "files": {
+      "docs/autoencoders/dual_bank_replay_results_20261007.md": {
+        "bytes": 9707,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "4bb18759f4f872ce14963fc90366a060779daf383c8bc4af4883f2b253cedc63"
+      },
+      "docs/autoencoders/evidence/dual-bank-replay-20261007/comparison-protocol.json": {
+        "bytes": 6692,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "75d4d01893578265c2be3bcc53ed96ca661fdb03781704a074b9df56e6bf30d2"
+      },
+      "docs/autoencoders/evidence/dual-bank-replay-20261007/development-error-census.json": {
+        "bytes": 16125,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "335478780679af96a5efc90bc31db73da4aa9e3b2a7c40b160b57af25744b2cb"
+      },
+      "docs/autoencoders/evidence/dual-bank-replay-20261007/evidence-index.json": {
+        "bytes": 2265,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "c4a9d0bcfc94ff1486ded11f19fac0842a701e266ad6a86f8be0c94a040fb32a"
+      },
+      "docs/autoencoders/evidence/dual-bank-replay-20261007/phase-audits-compact.json": {
+        "bytes": 5170,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "2abadad367ef76da2f93de4be73398e002eceae225f8fb481be9bd262ef4636c"
+      },
+      "docs/autoencoders/evidence/dual-bank-replay-20261007/postfit-comparison.json": {
+        "bytes": 141854,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "29eccba12cb98de4eeea195fb96fc1a9715d9f67aad2585c5885373c8f02e9a5"
+      },
+      "docs/autoencoders/evidence/dual-bank-replay-20261007/sampled-model-formulas.json": {
+        "bytes": 55019,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "b2a4d721f0b2399579a473fa6348d84c19b045418ee203ca93a968e020960670"
+      }
+    },
+    "parent": "271ad796288e17039f036af6a0d003a4628da6ed"
+  },
+  "large_review_sources_retained_full_in_archive_and_gzip": true,
+  "ordinary_indexes_heads_and_concurrent_changes_preserved": true,
+  "passed": true,
+  "rejected_archive_r1_body_retained_local_reference_only": true,
+  "required_reviews": [
+    "independent-review/runtime-source-independent-review-r2.json",
+    "independent-review/evaluation-source-independent-review.json",
+    "independent-review/actual-preflight-384-r1-independent-review.json",
+    "independent-review/actual-training-384-r1-independent-review.json",
+    "independent-review/actual-evaluation-r1-independent-review.json",
+    "independent-review/postfit-comparison-independent-review.json",
+    "pipeline/publisher-mechanics-independent-review-r2.json",
+    "pipeline/actual-archive-independent-review.json",
+    "pipeline/publication-scope-independent-review.json"
+  ],
+  "reviewed": true,
+  "schema": "dual-bank-replay-publication-scope/v1",
+  "unselected_remote_main_entries_preserved": true,
+  "workspace": {
+    "files": {
+      "artifacts/autoencoder-dual-bank-replay-20261007/README.md": {
+        "bytes": 8881,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "086444196cf5056cc076a35c93065d823f145e94535c29889e8afcb73f42c457"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/analyze_actual_results.py": {
+        "bytes": 10639,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "c481f0797d81c91dfe0094c5e5d630ad3ececc44ffb687f53043fef2676e3a6d"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/build_evidence_archive.py": {
+        "bytes": 7176,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "c2c49d40b76363f958cbdedab093128404d859105d8ff0cbc20845bb0ee76430"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/development-error-census.json": {
+        "bytes": 16125,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "335478780679af96a5efc90bc31db73da4aa9e3b2a7c40b160b57af25744b2cb"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/evaluation/actual-input-preparation.json": {
+        "bytes": 1463,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "cf88428daec6edfdb72d65f341e1392eefda0960918fc6093f9f2b1cc6caef2e"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/evaluation/prepare_actual_evaluation.py": {
+        "bytes": 6599,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "606d98f49f35385b97cf463185140899a18638f1fd20468bc5a9b22c43a10d79"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/evaluation/source-freeze.json": {
+        "bytes": 862,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "294fd6d4b33564265d151d802d907caaa510da8b1d0b05f04e03fffcc0c1c601"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/evaluation/source/evaluate_dual_bank_replay.py": {
+        "bytes": 28064,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "bd2862167fa61ba4451b79436e79609e5ff6d8280151256aab459ba9df1837f5"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/evaluation/tests/test_dual_bank_evaluation.py": {
+        "bytes": 17982,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "eb8bb5af599997887156d7b6d75371939e564052b1a30759dee01d9c8311eb43"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/guardian/actual-phase-input-preparation-r2.json": {
+        "bytes": 1318,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "21f098b1e18ba2438025d70da4eb9a669d1cc5a9e80140b6d82303fa2799e039"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/guardian/build_complete_input_closure.py": {
+        "bytes": 5099,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "daa631c35b59c7d4e69f33d91a1a63a2849d21f30bc5f6b20ee428d9a7e649e1"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/guardian/build_input_closure_seed.py": {
+        "bytes": 8865,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "7e3beb99a3b18495d40c0d24ea8c7110a5c09f439cffe87fd187323b22b632bd"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/guardian/evaluation-execution-readiness.json": {
+        "bytes": 408312,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "32194225efa8b81962baf1d2cf47c9517056d6590704dd5b3af82609e24994f5"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/guardian/guardian-adaptation.diff": {
+        "bytes": 1315,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "cdd230ffe457cf83deda328513886b2ea02eabcead6e936180f4b657e968891c"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/guardian/guardian-proposal.json": {
+        "bytes": 4189,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "82fbdf392105d7d6114a053662de61513db51f14b4565cc62741605ea24b2a82"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/guardian/input-closure-seed-r2.json": {
+        "bytes": 687447,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "07ada819b4ac8c2f09f477ee335c1c404c33afa3aa98fae1121d52af908f10c6"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/guardian/input-closure-seed.json": {
+        "bytes": 666193,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "c05fd1f26845269da07cba96f3cf96965ab0aca321491245452b50c90230580c"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/guardian/inspect_resource_availability.py": {
+        "bytes": 8462,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "f0a8b9ef0064dfbe31bca57302a0ec1d74f582c7994bf6398d9b9b5bc3df6703"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/guardian/mechanical-guardian-source-check.json": {
+        "bytes": 330,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "7713ad2c974b40e080447e8aa244b67d9244488dd7e0f82a1722fc58d308d4ff"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/guardian/phase-resource-plan.json": {
+        "bytes": 4744,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "0aae21195e19cb38872d6c6f626e5554f3e88db9c7cd4d051ea814908a313935"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/guardian/preflight-execution-readiness.json": {
+        "bytes": 392318,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "e53daa730d80a736e3ec571bb9ca4e1fbf76d60fff83f66e56bafff005a5b864"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/guardian/resource-availability-readonly-r1.json": {
+        "bytes": 5599,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "69b4cc558c0c545a7e456cd90a91d402c94f371619f04f288214f5522064ccb8"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/guardian/review_evaluation_readiness.py": {
+        "bytes": 18031,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "2d127ddcca083ad94e5ef5a4bf886378739d7a42258420dcdb9b73cf10df0d8a"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/guardian/review_preflight_readiness.py": {
+        "bytes": 19438,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "ae7e4361c140ef4c451fab9ebfbb78214ae5f0ac818f1c00e1c71f9a80d7d0e0"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/guardian/review_training_readiness.py": {
+        "bytes": 15384,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "d033b026046be6dda0865d773a7f1c45f0857bac2b352b042091ee8845d40376"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/guardian/source-results-freeze-r2.json": {
+        "bytes": 4196,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "71df58f5258e1e708c538487bf599e7db94828d655716c35d4735a67d17d6d47"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/guardian/source-results-freeze.json": {
+        "bytes": 3111,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "ea295c164c7e704fb94e536c6d88db10c7521d9cf8a690f190b23a6257aa9f15"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/guardian/staged-not-executed-r1.json": {
+        "bytes": 695,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "297d9c24e04d04bf9ac54be0dceff92fa630b214d7bfb616bfc6893013ebf9db"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/guardian/training-execution-readiness.json": {
+        "bytes": 387349,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "1546f07dd038f8a581e29625f9fdb01e1a1d83d788d7f076210b2db1a1d28805"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/history/build_evidence_archive-r1.py": {
+        "bytes": 7160,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "755daa9d0de537faef5e6db062c0ecebf4500a57e4caa2ae46575401d2b69f37"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/actual-evaluation-r1-independent-review.json.gz": {
+        "bytes": 146741,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "adcef4897b6b83718c61bbc88d77bccbcd665c60253d33189843c7d4127566dd"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/actual-preflight-384-r1-independent-review.json.gz": {
+        "bytes": 120957,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "69909ae779ab3feabc5df91e70b29b7ab2722ea93bbfb3cf0e90728596660e71"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/actual-training-384-r1-independent-review.json.gz": {
+        "bytes": 94584,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "f30f15fc52a8b1c3ddad0abad1e8a39e62fe895a47133fb5c979f8eb9655e708"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/archive-auditor-pure-tests.log": {
+        "bytes": 652,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "262ea0980c1fe55b0d2debdf0dce5ae34427daa446a578a1e089bbfb87603436"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/audit_compact_results.py": {
+        "bytes": 23712,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "769197bb5c1d9a653a4db8a314123fbd724cb73dc46ecba47bddf952283131f2"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/audit_dual_evaluation.py": {
+        "bytes": 32515,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "0cd2309241ceee3c6e5d95d1477a50b807e9a73a2f86a656c4c949d1a7b08d66"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/audit_dual_preflight-r1.py": {
+        "bytes": 48272,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "d7e6969e651988cc34b4574e881561845de36a0d15f85cea5daf5b947151e8cc"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/audit_dual_preflight.py": {
+        "bytes": 48325,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "9952f27aeed3065988c4ed7ccaca53ad1dcef89f40e4a1f4e2425d9dcede8983"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/audit_dual_training.py": {
+        "bytes": 41972,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "6cb68d5a8602d3f6656e04f6fe89c4f13d0427c1449f1aa89e37b9ecf0819712"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/audit_replay_archive.py": {
+        "bytes": 9496,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "b27c51f42bb3e14c8b371f03ba7b10c0d332d1f8c29a80eed28962fe34d828be"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/compact-auditor-source-results-freeze.json": {
+        "bytes": 744,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "67daedeebba41ddc608101068ca84cddbe23bb4cc4b268be79b6d457aba29d5e"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/evaluation-auditor-source-results-freeze.json": {
+        "bytes": 1513,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "ed9806661801d94186f96ce2fa643681e4956d0152dd0b772d490adccbe055b0"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/evaluation-pure-tests.log": {
+        "bytes": 3067,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "ebdcc694f4bea674df9dea28207a47ae8c20d116bc78fae516156d3ba1ee5b54"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/evaluation-source-independent-review.json": {
+        "bytes": 5635,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "324a82090b861e81e6e7798168062f07bb822bf7b7184620b750c06b661bd927"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/postfit-comparison-independent-review.json.gz": {
+        "bytes": 61867,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "75ffc35d389ae1ea6dc96cdad991230749a1d62c659a51f047a65b3f7084a8bc"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/preflight-auditor-r1-invocation.json": {
+        "bytes": 601,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "edef93e7277071af8359e5e967db02833d9bb97c2fcda1a08982e094618bba52"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/preflight-auditor-source-results-freeze.json": {
+        "bytes": 1651,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "8c015d0aed4221effc4a61f9b28787f43f32dfe292a8c9b2db7704fc53f687f0"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/runtime-author-interface-tests-r2.log": {
+        "bytes": 3337,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "21d219d79fcc9743a1665d747a46cbaa8c83a1eff1d812d8473a6600fb1719ca"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/runtime-independent-mutations-r2.log": {
+        "bytes": 1633,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "8ac68a77516fc33618cc05ff5e57a900a4cd8271f6032cf2994c8ea17a5af059"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/runtime-source-independent-review-r2.json": {
+        "bytes": 34713,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "cb272c86b4e8f1f973ed89a798ecfec090434f90b4f1e3e8eb9e075875c389c7"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/saved-output-auditor-pure-tests.log": {
+        "bytes": 1755,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "3e0fc43348b230be5dea6bdb4ad673064cbda153b787f50b03525c00d216e43e"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/saved-output-auditor-source-freeze.json": {
+        "bytes": 1483,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "23c052d0c8a8ba6a53299c1b877f1351582d620754460e02811e0b6e14281d63"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/source-guard-findings-r1.json": {
+        "bytes": 1878,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "4943fa13ba9d0d2bc99f164d59bdf9cb6ec2bc4e8859f5c6fa9fec980c35af13"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/test_archive_auditor_contracts.py": {
+        "bytes": 2139,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "09e4a43b72179292e9fbf0030ee9bc1bc6d4fe3def2fe437b7c6c1560f41a179"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/test_independent_source_guards.py": {
+        "bytes": 2661,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "933d46b9314913911ccbb8a82a8ea45f13afe64b3ee2dd93b5463035db992c34"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/test_saved_output_auditors.py": {
+        "bytes": 4207,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "a0b30c6f4316afb0db63d51b5469a364752ab02a8fb0e01b779b6ea849c44bb8"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/independent-review/training-auditor-source-results-freeze.json": {
+        "bytes": 1445,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "9e93c3464aa4d2cce55d44f31622abae3ed9f435c0b580bfb669e01a1b474350"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/initial-state.json": {
+        "bytes": 851,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "33e032b4e388f064fe1c5b7d0def80b2b5c018368ef01ce8b584c45c584bc31d"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/pipeline/actual-archive-independent-review.json": {
+        "bytes": 243365,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "fb2e47fa490d12ab932fcfec726d09b749b1ccd0063139b8bc5fdf83da9d660a"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/pipeline/concurrent-main-progress.json": {
+        "bytes": 42630,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "39f82d0c932d2b8fbde8491ba001e445747407028c3116b3919d58a8840fcb3d"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/pipeline/publication-proposal.json": {
+        "bytes": 857,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "46b0111693b6f3be801a81d5d8a70394ba440fe2ff6268d66b485bdbb4a1096e"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/pipeline/publisher-adaptation.json": {
+        "bytes": 531,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "5cc466f05e8dc3e47ce35cecdcce556d1148acc839c9588e3b8b3fda81ad39ef"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/pipeline/publisher-mechanics-independent-review-r2.json": {
+        "bytes": 6836,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "9c2bfe35eb196d47b7109a14effc1355ef23a24d54e00515f7ab42fc7854535a"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/pipeline/publisher-mechanics-independent-review.json": {
+        "bytes": 7297,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "660f6f4fa1192f96fac11aa0fb4c8259fdd180b9742c64409634535fc1649e8f"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/pipeline/review_archive_payload.py": {
+        "bytes": 10109,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "00312cd89482c7bc6774f1a7a43a37172f3de5c2bf952dc3da330ae1500750ee"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/postfit-comparison.json": {
+        "bytes": 141854,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "29eccba12cb98de4eeea195fb96fc1a9715d9f67aad2585c5885373c8f02e9a5"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/predeclared-protocol.json": {
+        "bytes": 6692,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "75d4d01893578265c2be3bcc53ed96ca661fdb03781704a074b9df56e6bf30d2"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/publication/archive-r1-finding.json": {
+        "bytes": 751,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "ff01882053e9b45edb5824970b2127f25499ab838e351a99b618e92f8e5ab735"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/publication/compressed-review-bindings.json": {
+        "bytes": 1200,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "84b88ad447e6405bc9d7233d2d138563dd89c03f61f0b01c93c37eda9adb0e2b"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/publication/replay-evidence-manifest-r1.json": {
+        "bytes": 126034,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "1e83e879cf0c42738455850e31119ea3fc5de8e6124c6a55a3ee8cef2e925b50"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/publication/replay-evidence-manifest.json": {
+        "bytes": 126497,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "e97dd13440816abedd7a3869781cd447f2e9e11a24036b890375b23be1a13842"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/publication/replay-evidence.tar.gz": {
+        "bytes": 62752730,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "0b732781a178533a918cf3174759c09a98de92781d77ae63d7166bd0de65220f"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/publish_integration.py": {
+        "bytes": 8315,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "7e1baa297b9fc0dafc5476c392dcd4c6f9b7d7e21d1ba4ade62bd75c10e0c3e1"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/runtime/README.md": {
+        "bytes": 5660,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "d401ad03eefc3fc2c88fdaf8f72e47f5b6aea3581a9eb36ad937c57bde3f1ada"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/runtime/experiment-source/balanced_wording_candidates.py": {
+        "bytes": 43288,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "802bf91d12e2ce5dc4d7103af0c0081dd9ab56eade31094caea768212d8d07a4"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/runtime/experiment-source/balanced_wording_runtime_adapter.py": {
+        "bytes": 20710,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "334506648a870f0b68bc3a8935f23ed4c8fc71ed3a50a12df285eb21801e0fe6"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/runtime/experiment-source/dual_bank_retention.py": {
+        "bytes": 26660,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "15accfcf8bbc4e578e32ca7842ac338be2b563458c4c90a85fbe18429da000f1"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/runtime/experiment-source/dual_bank_runtime_adapter.py": {
+        "bytes": 18962,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "6c1b8d86ba05b46f1b8883d873718d7eeccc3edf638e04900c8c17e57745bb6a"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/runtime/experiment-source/scripts/ops/autoencoder/benchmark_dual_bank_replay.py": {
+        "bytes": 28655,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "bde90325cc251fa6b88a3da3482bad7f637ec36569c677495db65b3d64fabf5a"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/runtime/history/source-r1/README.md": {
+        "bytes": 5658,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "2f01dd824ff29fc7d6cdbc9908aa172f2cffa63b598b417ed457d13b84f7b657"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/runtime/history/source-r1/experiment-source/balanced_wording_candidates.py": {
+        "bytes": 43288,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "802bf91d12e2ce5dc4d7103af0c0081dd9ab56eade31094caea768212d8d07a4"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/runtime/history/source-r1/experiment-source/balanced_wording_runtime_adapter.py": {
+        "bytes": 20710,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "334506648a870f0b68bc3a8935f23ed4c8fc71ed3a50a12df285eb21801e0fe6"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/runtime/history/source-r1/experiment-source/dual_bank_retention.py": {
+        "bytes": 26660,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "15accfcf8bbc4e578e32ca7842ac338be2b563458c4c90a85fbe18429da000f1"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/runtime/history/source-r1/experiment-source/dual_bank_runtime_adapter.py": {
+        "bytes": 17771,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "05f353e058e830eadb86e14d955f5c2e6b2627bdc17f922d50f2032092556df9"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/runtime/history/source-r1/experiment-source/scripts/ops/autoencoder/benchmark_dual_bank_replay.py": {
+        "bytes": 28655,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "bde90325cc251fa6b88a3da3482bad7f637ec36569c677495db65b3d64fabf5a"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/runtime/history/source-r1/phase-profiles.json": {
+        "bytes": 4828,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "9942465438acc88f9411265d8fa1ed9d1a7101ecf7851720eeb147dbbc8a320a"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/runtime/history/source-r1/pure-tests-validation.log": {
+        "bytes": 2951,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "c16f07a93d74d803245beeb7ffec0f6d91c0ce26b08f37f42a1b1e92ddadf4f1"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/runtime/history/source-r1/pure-validation.json": {
+        "bytes": 1699,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "81079662eac4d8fb0a85793f69451410480aa5e7efa8587f72203c4e402c6b94"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/runtime/history/source-r1/ruff-validation.log": {
+        "bytes": 19,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/runtime/history/source-r1/source-freeze.json": {
+        "bytes": 2595,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "845304596f5fda9b3e3a4e9da8c052e6b847437c3d175dd9d0aae982fe914bdc"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/runtime/history/source-r1/tests/test_dual_bank_runtime.py": {
+        "bytes": 19356,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "f21255d1a25b7d7ce91ebcd85c4051e553a5be2cf13897d46d1a4a7ebc2e6fbc"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/runtime/phase-profiles.json": {
+        "bytes": 4828,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "9942465438acc88f9411265d8fa1ed9d1a7101ecf7851720eeb147dbbc8a320a"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/runtime/pure-tests-validation.log": {
+        "bytes": 3337,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "f849d732cdc9b354ae22d694426613eeb357edb7c4fd492365d7fe7525d9a9e7"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/runtime/pure-validation.json": {
+        "bytes": 1699,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "444c3899af39a13f32312d5245a1b86a732d870c74590b15e3250a468d346584"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/runtime/ruff-validation.log": {
+        "bytes": 19,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/runtime/runtime-integration-contract.json": {
+        "bytes": 3489,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "9c6cb8c7b95d7038b8ae819886741629a057d2fe1372734d391a403e887bd6e5"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/runtime/source-freeze.json": {
+        "bytes": 2859,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "b0665e581bbd9edf011a41069bc613afaed0a7eb0e07cda0f92ee2ccc66af97d"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/runtime/tests/test_dual_bank_runtime.py": {
+        "bytes": 20636,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "bae259e83502944637e51c2bbf80135f022fc453b75edb32624a1f3200111a16"
+      },
+      "artifacts/autoencoder-dual-bank-replay-20261007/sampled-model-formulas.json": {
+        "bytes": 55019,
+        "mode": "100644",
+        "parent_sha256": null,
+        "sha256": "b2a4d721f0b2399579a473fa6348d84c19b045418ee203ca93a968e020960670"
+      }
+    },
+    "parent": "19349870e8085e0b687658b35c52f123c4b0ac2f"
+  }
+}

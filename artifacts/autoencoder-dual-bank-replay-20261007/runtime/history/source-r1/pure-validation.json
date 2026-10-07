@@ -1,0 +1,43 @@
+{
+  "admitted": false,
+  "checkpoint_promoted": false,
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/tests",
+        "-v"
+      ],
+      "log": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/pure-tests-validation.log",
+      "passed": 15,
+      "return_code": 0
+    },
+    {
+      "argv": [
+        "ruff",
+        "check",
+        "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/experiment-source/dual_bank_runtime_adapter.py",
+        "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/experiment-source/scripts/ops/autoencoder/benchmark_dual_bank_replay.py",
+        "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/tests"
+      ],
+      "log": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/ruff-validation.log",
+      "return_code": 0
+    }
+  ],
+  "encoder_executed": false,
+  "execution_readiness_granted": false,
+  "lake_executed": false,
+  "models_executed": false,
+  "optimizer_steps": 0,
+  "qualified": false,
+  "schema": "dual-bank-replay-pure-interface-validation/v1",
+  "scope": "stdlib-only synthetic detached handles and full32 logits; authentic stdlib private-import adapter, no neural or tensor-library execution",
+  "source_freeze": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/runtime/source-freeze.json",
+    "sha256": "845304596f5fda9b3e3a4e9da8c052e6b847437c3d175dd9d0aae982fe914bdc"
+  }
+}

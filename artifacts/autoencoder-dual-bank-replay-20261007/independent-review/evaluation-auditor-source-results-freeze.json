@@ -1,0 +1,34 @@
+{
+  "actual_checks_passed": 49248,
+  "actual_root_completed_attempt": "evaluation-r1",
+  "actual_source_recurrent_combined_distributions": 17280,
+  "admitted": false,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/actual-evaluation-r1-independent-review.json": {
+      "bytes": 6027292,
+      "sha256": "898539453d4ea0e4317d10984ecc4de007557587f0688d03895a410570a335e1"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/audit_dual_evaluation.py": {
+      "bytes": 32515,
+      "sha256": "0cd2309241ceee3c6e5d95d1477a50b807e9a73a2f86a656c4c949d1a7b08d66"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/saved-output-auditor-pure-tests.log": {
+      "bytes": 1755,
+      "sha256": "3e0fc43348b230be5dea6bdb4ad673064cbda153b787f50b03525c00d216e43e"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/saved-output-auditor-source-freeze.json": {
+      "bytes": 1483,
+      "sha256": "23c052d0c8a8ba6a53299c1b877f1351582d620754460e02811e0b6e14281d63"
+    }
+  },
+  "findings": [],
+  "models_or_encoders_rerun": false,
+  "numerical_outputs_changed": false,
+  "passed": true,
+  "physical_panels": 8,
+  "proof_authority": false,
+  "pure_tests_passed": 10,
+  "qualified": false,
+  "reference_scalar_sites": 5760,
+  "schema": "dual-bank-replay-evaluation-auditor-source-results-freeze/v1"
+}

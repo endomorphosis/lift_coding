@@ -1,0 +1,116 @@
+{
+  "authenticated_closure": {
+    "actual_new216_native_vectors_already_prepared": true,
+    "extra_nested_parent_refs": {
+      "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/preparation-r1/results/train-source384-artifacts/training-source-texts.txt": "d1e3e1d05913ebaaaeb3991632b5c17b60390c25ceb771db0773e97f0185f0b9"
+    },
+    "immutable_original_parent_tensor_sha256": "0b3c7c3b1a5581cd393d9bb8db1d24b87fe2cb9dff0be268aa2b5ed1f88b6594",
+    "native_vectors_reused": true,
+    "preserved_predecessor_inputs": 1185,
+    "recursive_parent_refs": 33,
+    "seed_inputs": 1203,
+    "seed_path": "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/guardian/input-closure-seed.json",
+    "seed_sha256": "c05fd1f26845269da07cba96f3cf96965ab0aca321491245452b50c90230580c"
+  },
+  "cap_bytes": 145000000000,
+  "dimension": 384,
+  "execution_readiness_granted": false,
+  "guardian_launched": false,
+  "native_encoder_phase_required": false,
+  "numerical_scope": {
+    "Constitution_formalized": false,
+    "admitted": false,
+    "authored_fixture_diagnostic_only": true,
+    "bridges": [],
+    "canonical_workspace_compiler_tree_required_for_separate_admission": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "checkpoint_promoted": false,
+    "context_tokens": 512,
+    "cuda_visible_devices": "",
+    "current_compiler_executed": false,
+    "formalized": false,
+    "historical_frozen_dependency_root": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2",
+    "lake_executed": false,
+    "metric_disk_cache_used": false,
+    "output_tokens": 512,
+    "proof_authority": false,
+    "prover_flag": false,
+    "qualified": false,
+    "schema_callback_is_Lean": false,
+    "schema_callback_is_compiler": false,
+    "temperature": 0,
+    "workers": 1
+  },
+  "pending_evaluation": [
+    "completed own dual training report and recursive physical refs",
+    "new one-arm8-panel evaluator/profile/source freeze",
+    "v3 reference binding restricted to posthoc scoring"
+  ],
+  "pending_inputs": [
+    "new preregistered protocol and physical SHA",
+    "reviewed final dual adapter/driver/helper source freeze and exact extension map",
+    "new phase profiles and exact strict driver constants",
+    "independent source-only review, then completed preflight audit for training readiness"
+  ],
+  "phase_policy": {
+    "evaluation": {
+      "child_slots": 1,
+      "cpu_slots": 1,
+      "driver_seconds": 800,
+      "fits": 0,
+      "generated_paragraphs": 384,
+      "guardian_seconds": 900,
+      "logical_panels": 8,
+      "max_seconds_per_panel": 60,
+      "memory_mib": 1536,
+      "optimizer_steps": 0,
+      "physical_panels": 8,
+      "samples_per_panel": 48,
+      "storage_bytes": 100000000
+    },
+    "preflight": {
+      "child_slots": 1,
+      "cpu_slots": 1,
+      "driver_seconds": 800,
+      "fits": 0,
+      "guardian_seconds": 900,
+      "memory_mib": 1536,
+      "optimizer_steps": 0,
+      "storage_bytes": 100000000
+    },
+    "training": {
+      "arm": "dual-bank-retention-ce",
+      "child_slots": 1,
+      "cpu_slots": 1,
+      "driver_seconds": 900,
+      "fits": 1,
+      "guardian_seconds": 1000,
+      "memory_mib": 1536,
+      "optimizer_steps": 170,
+      "original_panel_seconds": 30,
+      "per_fit_memory_bytes": 1073741824,
+      "per_fit_seconds": 180,
+      "physical_original_panels": 18,
+      "storage_bytes": 400000000
+    }
+  },
+  "phase_routes": {
+    "evaluation": "evaluate_dual_bank_replay.py",
+    "preflight": "benchmark_dual_bank_replay.py",
+    "training": "benchmark_dual_bank_replay.py"
+  },
+  "preparation_route_inherited_but_not_planned": true,
+  "readiness_policy": "No launch with missing phase manifest/source freeze/independent review. Training additionally needs an independently audited successful preflight.",
+  "reservation_acquired": false,
+  "run_root": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007",
+  "schema": "dual-bank-replay-proposed-owned-phase-resource-plan/v1",
+  "shared_resource_policy": {
+    "configured_capacity_changed": false,
+    "foreign_state_or_claims_modified": false,
+    "fresh_locked_admission_still_required": true,
+    "headroom_not_reserved": true,
+    "headroom_snapshot_bytes": 2959249114,
+    "owner_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/native4096-four-width-20261004/resource-cap/autoencoder_daemon_resources.py",
+    "owner_sha256": "b00d2752ba852fe73760bba4fbd51b0e845742c3527642606a2a77ed9f8f5e2c",
+    "scheduler_config_sha256": "76d10cc42015c9e4cbdad0fabd6a64f706320e14a8fb507f16262d42dd1d5856"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "history": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-dual-bank-replay-20261007/staged-not-executed-r1",
+  "independent_source_guard_findings": [
+    "resealed descriptor qualified/dimension/bank_count/fakebank mutations accepted in r1; validdriverconstructedmetadata unaffected"
+  ],
+  "models_executed": false,
+  "newattempts_created": false,
+  "reservations_acquired": false,
+  "root_metadata_validation_error": "SHAutility called str.open during final pincheck; no numerical execution",
+  "schema": "dual-bank-first-source-staging-not-executed/v1",
+  "staged_source_and_phase_inputs_preserved": true,
+  "waiting_for_r2_closed_descriptor_guard": true
+}

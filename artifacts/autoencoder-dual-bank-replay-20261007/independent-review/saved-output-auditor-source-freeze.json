@@ -1,0 +1,31 @@
+{
+  "admitted": false,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/audit_dual_evaluation.py": {
+      "bytes": 32515,
+      "sha256": "0cd2309241ceee3c6e5d95d1477a50b807e9a73a2f86a656c4c949d1a7b08d66"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/audit_dual_training.py": {
+      "bytes": 41972,
+      "sha256": "6cb68d5a8602d3f6656e04f6fe89c4f13d0427c1449f1aa89e37b9ecf0819712"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/saved-output-auditor-pure-tests.log": {
+      "bytes": 1755,
+      "sha256": "3e0fc43348b230be5dea6bdb4ad673064cbda153b787f50b03525c00d216e43e"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-dual-bank-replay-20261007/independent-review/test_saved_output_auditors.py": {
+      "bytes": 4207,
+      "sha256": "a0b30c6f4316afb0db63d51b5469a364752ab02a8fb0e01b779b6ea849c44bb8"
+    }
+  },
+  "evaluation_actual_output_audit_performed": false,
+  "explicit_root_completion_required_before_attempt_reads": true,
+  "findings": [],
+  "passed": true,
+  "proof_authority": false,
+  "pure_tests_passed": 10,
+  "qualified": false,
+  "schema": "dual-bank-replay-saved-output-auditor-source-freeze/v1",
+  "source_only_scope": "Prepared stdlib saved-output arithmetic; no model, encoder, optimizer or resource actions.",
+  "training_actual_output_audit_performed": false
+}
