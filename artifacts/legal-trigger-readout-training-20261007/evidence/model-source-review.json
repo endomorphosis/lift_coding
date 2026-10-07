@@ -1,0 +1,59 @@
+{
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py": {
+      "bytes": 29545,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py",
+      "sha256": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py": {
+      "bytes": 7804,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py",
+      "sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_trigger_readout.py": {
+      "bytes": 27145,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_trigger_readout.py",
+      "sha256": "983b69b8e293aa6211fd8322f9ba6bfe6fa5b8cb853c2d4d0cace1e7e5046344"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py": {
+      "bytes": 29993,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py",
+      "sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/tests/unit/logic/test_legal_scope_trigger_readout.py": {
+      "bytes": 16772,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/tests/unit/logic/test_legal_scope_trigger_readout.py",
+      "sha256": "337c18f643eb7ec5aa276ad693cc83a5ad595e71a3e98fbe1acc43e177616a9d"
+    }
+  },
+  "author_reported_fixture_checks": {
+    "CUDA_hidden": true,
+    "author_reported_only": true,
+    "experiment_fit_performed": false,
+    "focused_passed": 29,
+    "threads1_reported_seconds": 1.85,
+    "threads2_reported_seconds": 1.74
+  },
+  "canonical_edits": false,
+  "findings": [],
+  "limitations": [
+    "feature weighting uses independent predicted start/end marginals and has no joint interval model; it is expected coverage, not a supervised or repaired gold trigger",
+    "fresh alias vocabulary and template syntax remain shared with donor corpus; current experiment cannot establish statutory semantics or new-syntax generalization",
+    "frozen support, spans, optional presence and caller premise cap whole-proposal accuracy even if residual class improves",
+    "fixture optimizer steps are tiny unit fixtures, not experiment training or fidelity evidence"
+  ],
+  "model_calls_in_this_review": 0,
+  "optimizer_steps_in_this_review": 0,
+  "passed": true,
+  "review_kind": "independent static code and test-source review; no numerical model invocation",
+  "reviewed_contracts": {
+    "checkpoint_resume": "Closed finite32MB inherited canonical JSON, exact source recipe+donor pins, adapter tensor shapes, closed AdamW settings/all first/second moments and step counters; strict restore/resave equality; fresh donor Adam excluded",
+    "donor_custody": "External exact byte SHA256 plus bounded ordinary UTF8 JSON and strict original full v1 model+Adam restoration; original donor text embedded exactly in adapter checkpoints; donor moments never continued",
+    "frozen_backbone": "Snapshot tensor inventory/value, config and every submodule mode checked; requires_grad false and grad None; faithful UTF8 ordered byte conv/BiGRU tensor path leaves original forward unchanged",
+    "matched_readout": "Both modes use equal source-only donor feature width and equal seeded linear-tanh-linear adapter; zero final layer preserves initial donor modality logits; only feature differs global mean vs normalized predicted interval coverage",
+    "prediction": "Typed wrapper API, external source SHA before model, caller attachment premise required, bounded generic UTF8 tokens; finite typed CPU logits and predicted spans; invalid output blocks without repairs; existing pure proposal owner returns all masks0/formal_output null/no semantic or proof authority",
+    "training": "Only typed source/support/positive O/P/F labels; negative has no class/span target; all-negative batch has no forward or optimizer step; positive class CE updates adapter-only AdamW; finite clipping and post-update custody enforced",
+    "trigger_feature": "Source-only frozen donor modality-start/end logits; weights normalize P(S<=t)*P(E>=t) over actual tokens; no true span/alias/parser/target lookup; zero/nonfinite coverage blocks with mode restored and no repair"
+  },
+  "schema": "frozen-trigger-readout-independent-model-review/v1"
+}

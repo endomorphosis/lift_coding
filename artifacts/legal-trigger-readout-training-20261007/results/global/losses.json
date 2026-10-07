@@ -1,0 +1,2162 @@
+[
+  {
+    "update": 1,
+    "loss": 1.0527373552322388,
+    "modality_loss": 1.0527373552322388,
+    "gradient_norm": 0.30648940801620483,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 2,
+    "loss": 1.0371726751327515,
+    "modality_loss": 1.0371726751327515,
+    "gradient_norm": 0.3079270124435425,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 3,
+    "loss": 1.1915175914764404,
+    "modality_loss": 1.1915175914764404,
+    "gradient_norm": 0.5553186535835266,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 4,
+    "loss": 1.0981473922729492,
+    "modality_loss": 1.0981473922729492,
+    "gradient_norm": 0.4114348590373993,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 5,
+    "loss": 1.056841254234314,
+    "modality_loss": 1.056841254234314,
+    "gradient_norm": 0.18354308605194092,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 6,
+    "loss": 1.0794579982757568,
+    "modality_loss": 1.0794579982757568,
+    "gradient_norm": 0.21195408701896667,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 7,
+    "loss": 1.0642507076263428,
+    "modality_loss": 1.0642507076263428,
+    "gradient_norm": 0.42728546261787415,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 8,
+    "loss": 1.0749385356903076,
+    "modality_loss": 1.0749385356903076,
+    "gradient_norm": 0.4193791449069977,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 9,
+    "loss": 1.103459119796753,
+    "modality_loss": 1.103459119796753,
+    "gradient_norm": 0.41757822036743164,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 10,
+    "loss": 1.0114166736602783,
+    "modality_loss": 1.0114166736602783,
+    "gradient_norm": 0.6192684769630432,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 11,
+    "loss": 1.1060699224472046,
+    "modality_loss": 1.1060699224472046,
+    "gradient_norm": 0.40657031536102295,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 12,
+    "loss": 1.0587389469146729,
+    "modality_loss": 1.0587389469146729,
+    "gradient_norm": 0.18988756835460663,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 13,
+    "loss": 1.078635811805725,
+    "modality_loss": 1.078635811805725,
+    "gradient_norm": 0.19291171431541443,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 14,
+    "loss": 1.051601529121399,
+    "modality_loss": 1.051601529121399,
+    "gradient_norm": 0.3157302439212799,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 15,
+    "loss": 1.1400346755981445,
+    "modality_loss": 1.1400346755981445,
+    "gradient_norm": 0.3337153494358063,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 16,
+    "loss": 1.1384224891662598,
+    "modality_loss": 1.1384224891662598,
+    "gradient_norm": 0.8756401538848877,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 17,
+    "loss": 1.0335664749145508,
+    "modality_loss": 1.0335664749145508,
+    "gradient_norm": 0.2813655436038971,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 18,
+    "loss": 1.0254685878753662,
+    "modality_loss": 1.0254685878753662,
+    "gradient_norm": 0.46676188707351685,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 19,
+    "loss": 1.1706817150115967,
+    "modality_loss": 1.1706817150115967,
+    "gradient_norm": 0.60781329870224,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 20,
+    "loss": 1.067391276359558,
+    "modality_loss": 1.067391276359558,
+    "gradient_norm": 0.21697908639907837,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 21,
+    "loss": 1.07945716381073,
+    "modality_loss": 1.07945716381073,
+    "gradient_norm": 0.3529248535633087,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 22,
+    "loss": 1.1026110649108887,
+    "modality_loss": 1.1026110649108887,
+    "gradient_norm": 0.2507009208202362,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 23,
+    "loss": 1.1629488468170166,
+    "modality_loss": 1.1629488468170166,
+    "gradient_norm": 0.38710087537765503,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 24,
+    "loss": 1.0667577981948853,
+    "modality_loss": 1.0667577981948853,
+    "gradient_norm": 0.3356225788593292,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 25,
+    "loss": 1.1287282705307007,
+    "modality_loss": 1.1287282705307007,
+    "gradient_norm": 0.3522609770298004,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 26,
+    "loss": 1.1117416620254517,
+    "modality_loss": 1.1117416620254517,
+    "gradient_norm": 0.4383622407913208,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 27,
+    "loss": 1.0878105163574219,
+    "modality_loss": 1.0878105163574219,
+    "gradient_norm": 0.30465230345726013,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 28,
+    "loss": 1.114704966545105,
+    "modality_loss": 1.114704966545105,
+    "gradient_norm": 0.22191289067268372,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 29,
+    "loss": 1.051884412765503,
+    "modality_loss": 1.051884412765503,
+    "gradient_norm": 0.2024356722831726,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 30,
+    "loss": 1.1848750114440918,
+    "modality_loss": 1.1848750114440918,
+    "gradient_norm": 0.40842723846435547,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 31,
+    "loss": 1.1040699481964111,
+    "modality_loss": 1.1040699481964111,
+    "gradient_norm": 0.2746889889240265,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 32,
+    "loss": 1.1348464488983154,
+    "modality_loss": 1.1348464488983154,
+    "gradient_norm": 0.30115821957588196,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 33,
+    "loss": 1.0402010679244995,
+    "modality_loss": 1.0402010679244995,
+    "gradient_norm": 0.5829734802246094,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 34,
+    "loss": 1.1189192533493042,
+    "modality_loss": 1.1189192533493042,
+    "gradient_norm": 0.39679771661758423,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 35,
+    "loss": 1.0914723873138428,
+    "modality_loss": 1.0914723873138428,
+    "gradient_norm": 0.47670599818229675,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 36,
+    "loss": 1.0901213884353638,
+    "modality_loss": 1.0901213884353638,
+    "gradient_norm": 0.5470559000968933,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 37,
+    "loss": 1.1191191673278809,
+    "modality_loss": 1.1191191673278809,
+    "gradient_norm": 0.29546117782592773,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 38,
+    "loss": 1.0496076345443726,
+    "modality_loss": 1.0496076345443726,
+    "gradient_norm": 0.4119429886341095,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 39,
+    "loss": 1.0289411544799805,
+    "modality_loss": 1.0289411544799805,
+    "gradient_norm": 0.6072075963020325,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 40,
+    "loss": 1.1430838108062744,
+    "modality_loss": 1.1430838108062744,
+    "gradient_norm": 0.5557113289833069,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 41,
+    "loss": 1.1165904998779297,
+    "modality_loss": 1.1165904998779297,
+    "gradient_norm": 0.45158278942108154,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 42,
+    "loss": 1.0769097805023193,
+    "modality_loss": 1.0769097805023193,
+    "gradient_norm": 0.6196432113647461,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 43,
+    "loss": 1.068715214729309,
+    "modality_loss": 1.068715214729309,
+    "gradient_norm": 0.5352970957756042,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 44,
+    "loss": 1.0455995798110962,
+    "modality_loss": 1.0455995798110962,
+    "gradient_norm": 0.28248876333236694,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 45,
+    "loss": 1.0965814590454102,
+    "modality_loss": 1.0965814590454102,
+    "gradient_norm": 0.161614790558815,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 46,
+    "loss": 1.1500120162963867,
+    "modality_loss": 1.1500120162963867,
+    "gradient_norm": 0.337158739566803,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 47,
+    "loss": 1.1351016759872437,
+    "modality_loss": 1.1351016759872437,
+    "gradient_norm": 0.6893972754478455,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 48,
+    "loss": 1.1511287689208984,
+    "modality_loss": 1.1511287689208984,
+    "gradient_norm": 0.3839206099510193,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 49,
+    "loss": 1.1890082359313965,
+    "modality_loss": 1.1890082359313965,
+    "gradient_norm": 0.50519198179245,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 50,
+    "loss": 1.0939847230911255,
+    "modality_loss": 1.0939847230911255,
+    "gradient_norm": 0.389924556016922,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 51,
+    "loss": 1.1311602592468262,
+    "modality_loss": 1.1311602592468262,
+    "gradient_norm": 0.323808878660202,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 52,
+    "loss": 1.0830885171890259,
+    "modality_loss": 1.0830885171890259,
+    "gradient_norm": 0.1734355390071869,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 53,
+    "loss": 1.1367805004119873,
+    "modality_loss": 1.1367805004119873,
+    "gradient_norm": 0.21435417234897614,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 54,
+    "loss": 1.0986887216567993,
+    "modality_loss": 1.0986887216567993,
+    "gradient_norm": 0.373902827501297,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 55,
+    "loss": 1.1446468830108643,
+    "modality_loss": 1.1446468830108643,
+    "gradient_norm": 0.8213921785354614,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 56,
+    "loss": 1.0736628770828247,
+    "modality_loss": 1.0736628770828247,
+    "gradient_norm": 0.34962689876556396,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 57,
+    "loss": 1.1352760791778564,
+    "modality_loss": 1.1352760791778564,
+    "gradient_norm": 0.42276689410209656,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 58,
+    "loss": 1.066668152809143,
+    "modality_loss": 1.066668152809143,
+    "gradient_norm": 0.545146644115448,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 59,
+    "loss": 1.1454412937164307,
+    "modality_loss": 1.1454412937164307,
+    "gradient_norm": 0.4131333529949188,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 60,
+    "loss": 1.0666300058364868,
+    "modality_loss": 1.0666300058364868,
+    "gradient_norm": 0.21157050132751465,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 61,
+    "loss": 1.0840431451797485,
+    "modality_loss": 1.0840431451797485,
+    "gradient_norm": 0.4177822470664978,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 62,
+    "loss": 1.0605579614639282,
+    "modality_loss": 1.0605579614639282,
+    "gradient_norm": 0.30748364329338074,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 63,
+    "loss": 1.0962302684783936,
+    "modality_loss": 1.0962302684783936,
+    "gradient_norm": 0.209947407245636,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 64,
+    "loss": 1.0360591411590576,
+    "modality_loss": 1.0360591411590576,
+    "gradient_norm": 0.5708194375038147,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 65,
+    "loss": 1.0855387449264526,
+    "modality_loss": 1.0855387449264526,
+    "gradient_norm": 0.5415751338005066,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 66,
+    "loss": 1.115083932876587,
+    "modality_loss": 1.115083932876587,
+    "gradient_norm": 0.35339266061782837,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 67,
+    "loss": 1.1646974086761475,
+    "modality_loss": 1.1646974086761475,
+    "gradient_norm": 0.3421369791030884,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 68,
+    "loss": 1.092160940170288,
+    "modality_loss": 1.092160940170288,
+    "gradient_norm": 0.15197870135307312,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 69,
+    "loss": 1.005821704864502,
+    "modality_loss": 1.005821704864502,
+    "gradient_norm": 0.274720162153244,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 70,
+    "loss": 1.0589590072631836,
+    "modality_loss": 1.0589590072631836,
+    "gradient_norm": 0.1661185920238495,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 71,
+    "loss": 1.0964617729187012,
+    "modality_loss": 1.0964617729187012,
+    "gradient_norm": 0.37576285004615784,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 72,
+    "loss": 1.0753531455993652,
+    "modality_loss": 1.0753531455993652,
+    "gradient_norm": 0.17536026239395142,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 73,
+    "loss": 1.0645848512649536,
+    "modality_loss": 1.0645848512649536,
+    "gradient_norm": 0.22739244997501373,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 74,
+    "loss": 1.1296486854553223,
+    "modality_loss": 1.1296486854553223,
+    "gradient_norm": 0.43013715744018555,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 75,
+    "loss": 1.0480015277862549,
+    "modality_loss": 1.0480015277862549,
+    "gradient_norm": 0.1478997766971588,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 76,
+    "loss": 1.1404430866241455,
+    "modality_loss": 1.1404430866241455,
+    "gradient_norm": 0.2772769331932068,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 77,
+    "loss": 1.0770962238311768,
+    "modality_loss": 1.0770962238311768,
+    "gradient_norm": 0.20377200841903687,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 78,
+    "loss": 1.1345267295837402,
+    "modality_loss": 1.1345267295837402,
+    "gradient_norm": 0.6333482265472412,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 79,
+    "loss": 1.113818883895874,
+    "modality_loss": 1.113818883895874,
+    "gradient_norm": 0.20631323754787445,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 80,
+    "loss": 1.082815408706665,
+    "modality_loss": 1.082815408706665,
+    "gradient_norm": 0.3325999081134796,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 81,
+    "loss": 1.0496858358383179,
+    "modality_loss": 1.0496858358383179,
+    "gradient_norm": 0.3024528920650482,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 82,
+    "loss": 1.1310497522354126,
+    "modality_loss": 1.1310497522354126,
+    "gradient_norm": 0.25617334246635437,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 83,
+    "loss": 1.1181490421295166,
+    "modality_loss": 1.1181490421295166,
+    "gradient_norm": 0.27352604269981384,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 84,
+    "loss": 1.0489376783370972,
+    "modality_loss": 1.0489376783370972,
+    "gradient_norm": 0.592250645160675,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 85,
+    "loss": 1.1883213520050049,
+    "modality_loss": 1.1883213520050049,
+    "gradient_norm": 0.37151458859443665,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 86,
+    "loss": 1.103868007659912,
+    "modality_loss": 1.103868007659912,
+    "gradient_norm": 0.5629255175590515,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 87,
+    "loss": 1.0810012817382812,
+    "modality_loss": 1.0810012817382812,
+    "gradient_norm": 0.563181459903717,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 88,
+    "loss": 1.1161240339279175,
+    "modality_loss": 1.1161240339279175,
+    "gradient_norm": 0.3537442088127136,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 89,
+    "loss": 1.0669173002243042,
+    "modality_loss": 1.0669173002243042,
+    "gradient_norm": 0.6396111845970154,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 90,
+    "loss": 1.1466306447982788,
+    "modality_loss": 1.1466306447982788,
+    "gradient_norm": 0.24642314016819,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 91,
+    "loss": 1.1508851051330566,
+    "modality_loss": 1.1508851051330566,
+    "gradient_norm": 0.5700926184654236,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 92,
+    "loss": 1.1182265281677246,
+    "modality_loss": 1.1182265281677246,
+    "gradient_norm": 0.42123883962631226,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 93,
+    "loss": 1.0793344974517822,
+    "modality_loss": 1.0793344974517822,
+    "gradient_norm": 0.35168731212615967,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 94,
+    "loss": 1.137050747871399,
+    "modality_loss": 1.137050747871399,
+    "gradient_norm": 0.4909995496273041,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 95,
+    "loss": 1.0662693977355957,
+    "modality_loss": 1.0662693977355957,
+    "gradient_norm": 0.4309298098087311,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 96,
+    "loss": 0.993872344493866,
+    "modality_loss": 0.993872344493866,
+    "gradient_norm": 0.4351485073566437,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 97,
+    "loss": 1.065501093864441,
+    "modality_loss": 1.065501093864441,
+    "gradient_norm": 0.4996459484100342,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 98,
+    "loss": 1.0941553115844727,
+    "modality_loss": 1.0941553115844727,
+    "gradient_norm": 0.30302006006240845,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 99,
+    "loss": 1.1074965000152588,
+    "modality_loss": 1.1074965000152588,
+    "gradient_norm": 0.3699241578578949,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 100,
+    "loss": 1.05968177318573,
+    "modality_loss": 1.05968177318573,
+    "gradient_norm": 0.46259361505508423,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 101,
+    "loss": 1.0899287462234497,
+    "modality_loss": 1.0899287462234497,
+    "gradient_norm": 0.26875782012939453,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 102,
+    "loss": 1.0976170301437378,
+    "modality_loss": 1.0976170301437378,
+    "gradient_norm": 0.23518416285514832,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 103,
+    "loss": 1.1315244436264038,
+    "modality_loss": 1.1315244436264038,
+    "gradient_norm": 0.4233245551586151,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 104,
+    "loss": 1.0974100828170776,
+    "modality_loss": 1.0974100828170776,
+    "gradient_norm": 0.466114342212677,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 105,
+    "loss": 1.076723337173462,
+    "modality_loss": 1.076723337173462,
+    "gradient_norm": 0.3182523846626282,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 106,
+    "loss": 1.062828779220581,
+    "modality_loss": 1.062828779220581,
+    "gradient_norm": 0.3268958330154419,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 107,
+    "loss": 1.0356417894363403,
+    "modality_loss": 1.0356417894363403,
+    "gradient_norm": 0.47378888726234436,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 108,
+    "loss": 1.0628421306610107,
+    "modality_loss": 1.0628421306610107,
+    "gradient_norm": 0.3159528374671936,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 109,
+    "loss": 1.1155880689620972,
+    "modality_loss": 1.1155880689620972,
+    "gradient_norm": 0.7251624464988708,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 110,
+    "loss": 1.0334841012954712,
+    "modality_loss": 1.0334841012954712,
+    "gradient_norm": 0.23767463862895966,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 111,
+    "loss": 1.0932621955871582,
+    "modality_loss": 1.0932621955871582,
+    "gradient_norm": 0.32825663685798645,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 112,
+    "loss": 1.0468213558197021,
+    "modality_loss": 1.0468213558197021,
+    "gradient_norm": 0.3382319211959839,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 113,
+    "loss": 1.1884386539459229,
+    "modality_loss": 1.1884386539459229,
+    "gradient_norm": 0.33911463618278503,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 114,
+    "loss": 1.0654795169830322,
+    "modality_loss": 1.0654795169830322,
+    "gradient_norm": 0.37237489223480225,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 115,
+    "loss": 1.1273350715637207,
+    "modality_loss": 1.1273350715637207,
+    "gradient_norm": 0.3387919068336487,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 116,
+    "loss": 1.0058531761169434,
+    "modality_loss": 1.0058531761169434,
+    "gradient_norm": 0.24144814908504486,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 117,
+    "loss": 1.0694966316223145,
+    "modality_loss": 1.0694966316223145,
+    "gradient_norm": 0.4469064772129059,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 118,
+    "loss": 1.1121103763580322,
+    "modality_loss": 1.1121103763580322,
+    "gradient_norm": 0.25297391414642334,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 119,
+    "loss": 1.0658859014511108,
+    "modality_loss": 1.0658859014511108,
+    "gradient_norm": 0.36216065287590027,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 120,
+    "loss": 1.0045708417892456,
+    "modality_loss": 1.0045708417892456,
+    "gradient_norm": 0.3490070104598999,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 121,
+    "loss": 1.1238524913787842,
+    "modality_loss": 1.1238524913787842,
+    "gradient_norm": 0.6337043046951294,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 122,
+    "loss": 1.0118935108184814,
+    "modality_loss": 1.0118935108184814,
+    "gradient_norm": 0.5849342942237854,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 123,
+    "loss": 1.124297857284546,
+    "modality_loss": 1.124297857284546,
+    "gradient_norm": 0.520267128944397,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 124,
+    "loss": 1.1519957780838013,
+    "modality_loss": 1.1519957780838013,
+    "gradient_norm": 0.46800583600997925,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 125,
+    "loss": 1.04896879196167,
+    "modality_loss": 1.04896879196167,
+    "gradient_norm": 0.23351368308067322,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 126,
+    "loss": 1.0887097120285034,
+    "modality_loss": 1.0887097120285034,
+    "gradient_norm": 0.6234584450721741,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 127,
+    "loss": 1.0848474502563477,
+    "modality_loss": 1.0848474502563477,
+    "gradient_norm": 0.6584876775741577,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 128,
+    "loss": 1.1299792528152466,
+    "modality_loss": 1.1299792528152466,
+    "gradient_norm": 0.40724676847457886,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 129,
+    "loss": 1.0160541534423828,
+    "modality_loss": 1.0160541534423828,
+    "gradient_norm": 0.5716293454170227,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 130,
+    "loss": 1.0653129816055298,
+    "modality_loss": 1.0653129816055298,
+    "gradient_norm": 0.44313520193099976,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 131,
+    "loss": 1.0361496210098267,
+    "modality_loss": 1.0361496210098267,
+    "gradient_norm": 0.3529873788356781,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 132,
+    "loss": 1.1332165002822876,
+    "modality_loss": 1.1332165002822876,
+    "gradient_norm": 0.41819456219673157,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 133,
+    "loss": 1.1253429651260376,
+    "modality_loss": 1.1253429651260376,
+    "gradient_norm": 0.5647366642951965,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 134,
+    "loss": 1.0425260066986084,
+    "modality_loss": 1.0425260066986084,
+    "gradient_norm": 0.38960984349250793,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 135,
+    "loss": 1.099893569946289,
+    "modality_loss": 1.099893569946289,
+    "gradient_norm": 0.4263346493244171,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 136,
+    "loss": 1.079283356666565,
+    "modality_loss": 1.079283356666565,
+    "gradient_norm": 0.3170308768749237,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 137,
+    "loss": 1.118332862854004,
+    "modality_loss": 1.118332862854004,
+    "gradient_norm": 0.5810147523880005,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 138,
+    "loss": 1.0924267768859863,
+    "modality_loss": 1.0924267768859863,
+    "gradient_norm": 0.39323920011520386,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 139,
+    "loss": 1.0230753421783447,
+    "modality_loss": 1.0230753421783447,
+    "gradient_norm": 0.29687705636024475,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 140,
+    "loss": 1.1233229637145996,
+    "modality_loss": 1.1233229637145996,
+    "gradient_norm": 0.32298973202705383,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 141,
+    "loss": 1.0440064668655396,
+    "modality_loss": 1.0440064668655396,
+    "gradient_norm": 0.3651425242424011,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 142,
+    "loss": 1.0948512554168701,
+    "modality_loss": 1.0948512554168701,
+    "gradient_norm": 0.21443864703178406,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 143,
+    "loss": 1.140866994857788,
+    "modality_loss": 1.140866994857788,
+    "gradient_norm": 0.31712663173675537,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 144,
+    "loss": 1.0967403650283813,
+    "modality_loss": 1.0967403650283813,
+    "gradient_norm": 0.3759627342224121,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 145,
+    "loss": 1.0820517539978027,
+    "modality_loss": 1.0820517539978027,
+    "gradient_norm": 0.30934593081474304,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 146,
+    "loss": 1.1316254138946533,
+    "modality_loss": 1.1316254138946533,
+    "gradient_norm": 0.7541193962097168,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 147,
+    "loss": 1.0776634216308594,
+    "modality_loss": 1.0776634216308594,
+    "gradient_norm": 0.6095867156982422,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 148,
+    "loss": 1.0950456857681274,
+    "modality_loss": 1.0950456857681274,
+    "gradient_norm": 0.32484787702560425,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 149,
+    "loss": 1.0808329582214355,
+    "modality_loss": 1.0808329582214355,
+    "gradient_norm": 0.1915925294160843,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 150,
+    "loss": 1.1127665042877197,
+    "modality_loss": 1.1127665042877197,
+    "gradient_norm": 0.3966579735279083,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 151,
+    "loss": 1.1337850093841553,
+    "modality_loss": 1.1337850093841553,
+    "gradient_norm": 0.5227404832839966,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 152,
+    "loss": 1.1125584840774536,
+    "modality_loss": 1.1125584840774536,
+    "gradient_norm": 0.4265497028827667,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 153,
+    "loss": 1.189109444618225,
+    "modality_loss": 1.189109444618225,
+    "gradient_norm": 0.387747585773468,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 154,
+    "loss": 1.1784563064575195,
+    "modality_loss": 1.1784563064575195,
+    "gradient_norm": 0.6538636684417725,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 155,
+    "loss": 1.0435404777526855,
+    "modality_loss": 1.0435404777526855,
+    "gradient_norm": 0.39286646246910095,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 156,
+    "loss": 0.9951313138008118,
+    "modality_loss": 0.9951313138008118,
+    "gradient_norm": 0.4969369173049927,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 157,
+    "loss": 1.1276136636734009,
+    "modality_loss": 1.1276136636734009,
+    "gradient_norm": 0.39018014073371887,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 158,
+    "loss": 1.0982016324996948,
+    "modality_loss": 1.0982016324996948,
+    "gradient_norm": 0.31863972544670105,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 159,
+    "loss": 1.1219706535339355,
+    "modality_loss": 1.1219706535339355,
+    "gradient_norm": 0.3922615349292755,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 160,
+    "loss": 1.088417410850525,
+    "modality_loss": 1.088417410850525,
+    "gradient_norm": 0.38354334235191345,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 161,
+    "loss": 1.0954859256744385,
+    "modality_loss": 1.0954859256744385,
+    "gradient_norm": 0.4689798653125763,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 162,
+    "loss": 1.0360443592071533,
+    "modality_loss": 1.0360443592071533,
+    "gradient_norm": 0.44455114006996155,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 163,
+    "loss": 1.0466830730438232,
+    "modality_loss": 1.0466830730438232,
+    "gradient_norm": 0.269355833530426,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 164,
+    "loss": 1.039608120918274,
+    "modality_loss": 1.039608120918274,
+    "gradient_norm": 0.31291714310646057,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 165,
+    "loss": 1.1918818950653076,
+    "modality_loss": 1.1918818950653076,
+    "gradient_norm": 0.6175317764282227,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 166,
+    "loss": 1.2499876022338867,
+    "modality_loss": 1.2499876022338867,
+    "gradient_norm": 0.9779244661331177,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 167,
+    "loss": 1.1500731706619263,
+    "modality_loss": 1.1500731706619263,
+    "gradient_norm": 0.5220981240272522,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 168,
+    "loss": 1.091500997543335,
+    "modality_loss": 1.091500997543335,
+    "gradient_norm": 0.21529845893383026,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 169,
+    "loss": 1.0272992849349976,
+    "modality_loss": 1.0272992849349976,
+    "gradient_norm": 0.4524470567703247,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 170,
+    "loss": 1.113909363746643,
+    "modality_loss": 1.113909363746643,
+    "gradient_norm": 0.33160480856895447,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 171,
+    "loss": 1.0512326955795288,
+    "modality_loss": 1.0512326955795288,
+    "gradient_norm": 0.2842302620410919,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 172,
+    "loss": 1.1019314527511597,
+    "modality_loss": 1.1019314527511597,
+    "gradient_norm": 0.57951420545578,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 173,
+    "loss": 1.112256646156311,
+    "modality_loss": 1.112256646156311,
+    "gradient_norm": 0.5330733060836792,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 174,
+    "loss": 1.0308771133422852,
+    "modality_loss": 1.0308771133422852,
+    "gradient_norm": 0.38494357466697693,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 175,
+    "loss": 1.0944230556488037,
+    "modality_loss": 1.0944230556488037,
+    "gradient_norm": 0.27781566977500916,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 176,
+    "loss": 1.0868632793426514,
+    "modality_loss": 1.0868632793426514,
+    "gradient_norm": 0.39966854453086853,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 177,
+    "loss": 1.055030107498169,
+    "modality_loss": 1.055030107498169,
+    "gradient_norm": 0.4257773756980896,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 178,
+    "loss": 1.087072730064392,
+    "modality_loss": 1.087072730064392,
+    "gradient_norm": 0.4860779941082001,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 179,
+    "loss": 1.1637662649154663,
+    "modality_loss": 1.1637662649154663,
+    "gradient_norm": 0.4266769289970398,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 180,
+    "loss": 1.098140835762024,
+    "modality_loss": 1.098140835762024,
+    "gradient_norm": 0.2856175899505615,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 181,
+    "loss": 1.0458629131317139,
+    "modality_loss": 1.0458629131317139,
+    "gradient_norm": 0.3348028361797333,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 182,
+    "loss": 1.0478029251098633,
+    "modality_loss": 1.0478029251098633,
+    "gradient_norm": 0.5141574144363403,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 183,
+    "loss": 1.0589332580566406,
+    "modality_loss": 1.0589332580566406,
+    "gradient_norm": 0.5486916303634644,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 184,
+    "loss": 1.0022709369659424,
+    "modality_loss": 1.0022709369659424,
+    "gradient_norm": 0.27671918272972107,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 185,
+    "loss": 1.0545181035995483,
+    "modality_loss": 1.0545181035995483,
+    "gradient_norm": 0.2683885395526886,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 186,
+    "loss": 1.0021464824676514,
+    "modality_loss": 1.0021464824676514,
+    "gradient_norm": 0.3502359986305237,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 187,
+    "loss": 1.0974830389022827,
+    "modality_loss": 1.0974830389022827,
+    "gradient_norm": 0.35364821553230286,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 188,
+    "loss": 1.1622971296310425,
+    "modality_loss": 1.1622971296310425,
+    "gradient_norm": 0.29185399413108826,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 189,
+    "loss": 1.0396130084991455,
+    "modality_loss": 1.0396130084991455,
+    "gradient_norm": 0.4403393566608429,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 190,
+    "loss": 1.0812389850616455,
+    "modality_loss": 1.0812389850616455,
+    "gradient_norm": 0.5691530108451843,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 191,
+    "loss": 1.047329068183899,
+    "modality_loss": 1.047329068183899,
+    "gradient_norm": 0.5045475363731384,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 192,
+    "loss": 1.1233047246932983,
+    "modality_loss": 1.1233047246932983,
+    "gradient_norm": 0.567003607749939,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 193,
+    "loss": 1.0957834720611572,
+    "modality_loss": 1.0957834720611572,
+    "gradient_norm": 0.2682996690273285,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 194,
+    "loss": 1.0140843391418457,
+    "modality_loss": 1.0140843391418457,
+    "gradient_norm": 0.36679908633232117,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 195,
+    "loss": 1.0328912734985352,
+    "modality_loss": 1.0328912734985352,
+    "gradient_norm": 0.30097171664237976,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 196,
+    "loss": 1.1008089780807495,
+    "modality_loss": 1.1008089780807495,
+    "gradient_norm": 0.44100263714790344,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 197,
+    "loss": 1.126015305519104,
+    "modality_loss": 1.126015305519104,
+    "gradient_norm": 0.28336086869239807,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 198,
+    "loss": 1.0346314907073975,
+    "modality_loss": 1.0346314907073975,
+    "gradient_norm": 0.4809700548648834,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 199,
+    "loss": 0.9935293793678284,
+    "modality_loss": 0.9935293793678284,
+    "gradient_norm": 0.74346923828125,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 200,
+    "loss": 1.0390654802322388,
+    "modality_loss": 1.0390654802322388,
+    "gradient_norm": 0.5594371557235718,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 201,
+    "loss": 1.0802357196807861,
+    "modality_loss": 1.0802357196807861,
+    "gradient_norm": 0.30328014492988586,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 202,
+    "loss": 1.0212970972061157,
+    "modality_loss": 1.0212970972061157,
+    "gradient_norm": 0.6142929196357727,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 203,
+    "loss": 1.1021294593811035,
+    "modality_loss": 1.1021294593811035,
+    "gradient_norm": 0.6851497888565063,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 204,
+    "loss": 1.0677372217178345,
+    "modality_loss": 1.0677372217178345,
+    "gradient_norm": 0.7129478454589844,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 205,
+    "loss": 0.9845414161682129,
+    "modality_loss": 0.9845414161682129,
+    "gradient_norm": 0.3252640962600708,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 206,
+    "loss": 1.0206738710403442,
+    "modality_loss": 1.0206738710403442,
+    "gradient_norm": 0.5245227813720703,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 207,
+    "loss": 1.0719316005706787,
+    "modality_loss": 1.0719316005706787,
+    "gradient_norm": 0.3969656229019165,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 208,
+    "loss": 1.1481213569641113,
+    "modality_loss": 1.1481213569641113,
+    "gradient_norm": 0.43704700469970703,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 209,
+    "loss": 1.1031066179275513,
+    "modality_loss": 1.1031066179275513,
+    "gradient_norm": 0.3001325726509094,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 210,
+    "loss": 1.0369523763656616,
+    "modality_loss": 1.0369523763656616,
+    "gradient_norm": 0.2587313950061798,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 211,
+    "loss": 1.0354279279708862,
+    "modality_loss": 1.0354279279708862,
+    "gradient_norm": 0.5326213836669922,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 212,
+    "loss": 1.0539569854736328,
+    "modality_loss": 1.0539569854736328,
+    "gradient_norm": 0.4045700430870056,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 213,
+    "loss": 1.1088831424713135,
+    "modality_loss": 1.1088831424713135,
+    "gradient_norm": 0.6791289448738098,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 214,
+    "loss": 1.1410808563232422,
+    "modality_loss": 1.1410808563232422,
+    "gradient_norm": 0.44486117362976074,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 215,
+    "loss": 1.1195762157440186,
+    "modality_loss": 1.1195762157440186,
+    "gradient_norm": 0.33602315187454224,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 216,
+    "loss": 1.1384187936782837,
+    "modality_loss": 1.1384187936782837,
+    "gradient_norm": 0.4367249608039856,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 217,
+    "loss": 1.079101324081421,
+    "modality_loss": 1.079101324081421,
+    "gradient_norm": 0.344387948513031,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 218,
+    "loss": 0.9796441197395325,
+    "modality_loss": 0.9796441197395325,
+    "gradient_norm": 0.4277416169643402,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 219,
+    "loss": 1.067355751991272,
+    "modality_loss": 1.067355751991272,
+    "gradient_norm": 0.2616439163684845,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 220,
+    "loss": 1.0412039756774902,
+    "modality_loss": 1.0412039756774902,
+    "gradient_norm": 0.3091731071472168,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 221,
+    "loss": 1.1016916036605835,
+    "modality_loss": 1.1016916036605835,
+    "gradient_norm": 0.36997461318969727,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 222,
+    "loss": 1.0736435651779175,
+    "modality_loss": 1.0736435651779175,
+    "gradient_norm": 0.5319209098815918,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 223,
+    "loss": 1.10275399684906,
+    "modality_loss": 1.10275399684906,
+    "gradient_norm": 0.2768639624118805,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 224,
+    "loss": 1.0953001976013184,
+    "modality_loss": 1.0953001976013184,
+    "gradient_norm": 0.1805359423160553,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 225,
+    "loss": 1.0790696144104004,
+    "modality_loss": 1.0790696144104004,
+    "gradient_norm": 0.7304657101631165,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 226,
+    "loss": 1.0198290348052979,
+    "modality_loss": 1.0198290348052979,
+    "gradient_norm": 0.4343899190425873,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 227,
+    "loss": 1.1151375770568848,
+    "modality_loss": 1.1151375770568848,
+    "gradient_norm": 0.45212721824645996,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 228,
+    "loss": 0.9554898738861084,
+    "modality_loss": 0.9554898738861084,
+    "gradient_norm": 0.39120879769325256,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 229,
+    "loss": 1.133280873298645,
+    "modality_loss": 1.133280873298645,
+    "gradient_norm": 0.24281559884548187,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 230,
+    "loss": 1.0365599393844604,
+    "modality_loss": 1.0365599393844604,
+    "gradient_norm": 0.41158097982406616,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 231,
+    "loss": 1.1151033639907837,
+    "modality_loss": 1.1151033639907837,
+    "gradient_norm": 0.5561419129371643,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 232,
+    "loss": 1.0939369201660156,
+    "modality_loss": 1.0939369201660156,
+    "gradient_norm": 0.25920483469963074,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 233,
+    "loss": 1.1324883699417114,
+    "modality_loss": 1.1324883699417114,
+    "gradient_norm": 0.2734556496143341,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 234,
+    "loss": 1.0698131322860718,
+    "modality_loss": 1.0698131322860718,
+    "gradient_norm": 0.4076426327228546,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 235,
+    "loss": 1.149011492729187,
+    "modality_loss": 1.149011492729187,
+    "gradient_norm": 0.4970478415489197,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 236,
+    "loss": 1.0063852071762085,
+    "modality_loss": 1.0063852071762085,
+    "gradient_norm": 0.3155305087566376,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 237,
+    "loss": 1.1191086769104004,
+    "modality_loss": 1.1191086769104004,
+    "gradient_norm": 0.30852773785591125,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 238,
+    "loss": 1.1068878173828125,
+    "modality_loss": 1.1068878173828125,
+    "gradient_norm": 0.6287340521812439,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 239,
+    "loss": 1.1347473859786987,
+    "modality_loss": 1.1347473859786987,
+    "gradient_norm": 0.3782069981098175,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  },
+  {
+    "update": 240,
+    "loss": 0.9271721243858337,
+    "modality_loss": 0.9271721243858337,
+    "gradient_norm": 0.6856552958488464,
+    "supported_examples": 8,
+    "unsupported_examples": 8,
+    "optimizer_step_executed": true
+  }
+]

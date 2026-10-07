@@ -1,0 +1,81 @@
+{
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/corpus-builder.py": {
+      "bytes": 25522,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/corpus-builder.py",
+      "sha256": "881abc31455551c953ebe23f2a24bb6bde5df09a85e1c6455945a1a5ffd56e74"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/corpus-manifest.json": {
+      "bytes": 40566,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/corpus-manifest.json",
+      "sha256": "22a551395a410e4b3fe79155f554a2ee05c7b2eec6631d7836079d7ec9c0a7d1"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/corpus-protocol.json": {
+      "bytes": 12225,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/corpus-protocol.json",
+      "sha256": "7d83f26ec816e4c83d66de15b81ef52be35f0142c713093dd94787ea1cf31b03"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/final-inputs.json": {
+      "bytes": 62673,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/final-inputs.json",
+      "sha256": "066bc0a734292d45da468583c55677d9851e244f5a7949aedcc857796a14cb67"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/final-references.json": {
+      "bytes": 138097,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/final-references.json",
+      "sha256": "069a43b1295823c3ecaaab958a6402494d1dbd00679af97da05d7e466ef53209"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/selection-inputs.json": {
+      "bytes": 63326,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/selection-inputs.json",
+      "sha256": "b2ceeddfffdd03d24f4647797fcf1cd1a75067d51957c4a093601cbef9c8e0b4"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/selection-references.json": {
+      "bytes": 138104,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/selection-references.json",
+      "sha256": "9a7e504b8e88bd2973ee6ccbdbc70212f2dbd9f850bef9c493590f32ad348c30"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/train-inputs.json": {
+      "bytes": 507191,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/train-inputs.json",
+      "sha256": "698a12e8df507b6ffe81b3d6e9dc4cd61cf8865f34e178be6a98cdddca222cfa"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/train-references.json": {
+      "bytes": 1104803,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/train-references.json",
+      "sha256": "adbc5a2a9245eafa7a4316b54535a1fd42b6b2c3d1509cb41f954daabfe53a8d"
+    }
+  },
+  "canonical_edits": false,
+  "final_declared_construction_validation_count": 64,
+  "final_reference_semantic_labels_independently_verified": false,
+  "findings": [],
+  "fresh_final_references_body_parsed": false,
+  "fresh_final_references_hash_authenticated": true,
+  "independent_checks": {
+    "TRAIN_selection_anagram_invariances": 144,
+    "declared_facet_or_head_overlap_earlier": 0,
+    "maximum_chars": 183,
+    "maximum_token_UTF8_bytes": 14,
+    "maximum_tokens": 29,
+    "paired_source_groups": 640,
+    "positive_transport_validations_TRAIN_and_selection": 576,
+    "schedule_digest": "6cc290c68ba66495748d5162ad5b6cfcdccac7cbd07d293de0d35a9e70881d9d",
+    "schedule_updates": 240,
+    "source_and_group_overlap_earlier": 0,
+    "split_declared_facet_or_head_overlap": 0,
+    "unique_sources": 1280
+  },
+  "inspected_reference_bodies": [
+    "TRAIN",
+    "selection"
+  ],
+  "limitations": [
+    "final reference labels remain opaque here; final completeness and transport validation is construction-owned evidence",
+    "shared eight templates and modal vocabulary are deliberate; lexical exclusion does not establish new-syntax or reviewed-law generalization",
+    "all engineering target admission masks zero; pure proposal validation does not grant legal semantic gold"
+  ],
+  "numerical_model_encoder_optimizer_prover_calls": 0,
+  "passed": true,
+  "schema": "fresh-trigger-readout-independent-corpus-review/v1"
+}

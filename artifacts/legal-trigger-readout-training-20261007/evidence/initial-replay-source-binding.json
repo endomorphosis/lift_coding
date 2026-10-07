@@ -1,0 +1,7 @@
+{
+  "schema": "initial-readout-replay-source-binding/v1",
+  "source_sha256": "5ab0b3c665c6d8797c2239f42eda4b3ffa3caaf90e4db07e4ee7a2147cf6fea5",
+  "receipt_sha256": "9995964cdf0af0b35485b11b07bfe4c05bd61476a820a5ab640eab60a58cccd9",
+  "status": "passed256outputs; original receipt written without fsync, later publication pins preserve bytes",
+  "superseded_for_Hub_readback_by": "replay_readouts.py with hash-bound fsync receipt"
+}

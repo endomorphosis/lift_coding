@@ -1,0 +1,209 @@
+{
+  "audit_actions": {
+    "claim_reconciliations": 0,
+    "leases_or_reservations_acquired": 0,
+    "model_calls": 0,
+    "real_children_created": 0,
+    "scheduler_clients_constructed": 0,
+    "shared_state_mutations": 0,
+    "source_or_tests_or_index_edits": 0
+  },
+  "checks": [
+    {
+      "check": "successful_guardian_and_child",
+      "detail": "Both guardian and child exit zero; durable successful receipt retained.",
+      "passed": true
+    },
+    {
+      "check": "owned_identity_reap_and_group_cleanup",
+      "detail": "Captured PID/birth is consistent; leader reaped, zero owned live processes, no cleanup signal required.",
+      "passed": true
+    },
+    {
+      "check": "owned_reservation_release",
+      "detail": "Only the captured 200MB disk claim is reported released after durability and cleanup.",
+      "passed": true
+    },
+    {
+      "check": "owned_lease_release_and_observed_absence",
+      "detail": "Own released lease identity matches the retained healthy post-finalize read-only absence observation.",
+      "passed": true
+    },
+    {
+      "check": "current_own_state_snapshot",
+      "detail": "One bounded current state/ledger read confirms this own lease absent and own released row identical to terminal receipt; no continuous/global absence claim.",
+      "passed": true
+    },
+    {
+      "check": "other_claims_and_prior_failed_claim",
+      "detail": "Other disk rows are hashed without mutation. Earlier failed scope attempt-01 remains charged as a retained 200MB claim; no recovery/reset/release was performed by this audit.",
+      "passed": true
+    },
+    {
+      "check": "full_claim_accounted_before_release",
+      "detail": "One fresh final census checks the full own claim and 39,083,086 attempt bytes before removing exactly 200MB from outstanding reservations; terminal receipts added later are explicitly excluded from final accounting.",
+      "passed": true
+    },
+    {
+      "check": "adoption_preserves_configuration_and_claims",
+      "detail": "Adoption receipts preserve configuration/proof guards and equal before/after claim digests; no leases or reset introduced by adoption.",
+      "passed": true
+    },
+    {
+      "check": "lease_observation_health",
+      "detail": "All retained sampled lease observations are healthy and configuration-matching; exact log hash and terminal absence row bind the final receipt.",
+      "passed": true
+    },
+    {
+      "check": "rss_log_binding_and_phase_counts",
+      "detail": "Exact RSS log/summary hash bindings; 31 owned-identity samples consist of 15 gated, 14 model and two post-model observations.",
+      "passed": true
+    },
+    {
+      "check": "model_sample_peak_and_actual_gap",
+      "detail": "Recomputed sampled model peak is 758,779,904 bytes (723.62890625 MiB), with model-phase maximum observed gap 1.032029427s.",
+      "passed": true
+    },
+    {
+      "check": "sampling_bounds_and_phase_timing",
+      "detail": "Samples are chronological, finite and within the 1,536MiB cooperative envelope; gate-permission-to-leader-reap window is 13.634779670s, with no RSS sampler failure.",
+      "passed": true
+    },
+    {
+      "check": "sampled_only_claims",
+      "detail": "Actual retained evidence explicitly distinguishes sampled peaks from absolute peaks, kernel quotas and continuous lease coverage.",
+      "passed": true
+    }
+  ],
+  "current_observation": {
+    "bytes": 1346,
+    "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/resource-current-observation.json",
+    "sha256": "2f7f5e59ceada5e0906e0ced22453bc5da39f95fdf049fe18b5121cf1be59ca5"
+  },
+  "current_state_summary": {
+    "global_claims_mutated": false,
+    "ledger": {
+      "bytes": 6084787,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/federal-corpus-audits/owned-daemon-resource-control/disk-reservations.json",
+      "sha256": "ed94ce64ce12a1950de745619692d11967c3691673c438f8ff22cb5b6794c96d"
+    },
+    "observation_scope": "current bound JSON snapshots only; no continuous coverage or global before/after immutability claim",
+    "other_reservation_count": 488,
+    "other_reservation_rows_sha256": "4f93db7dfbef04fed789b6ba16f5d8ea8108eb421fc1feb4fd0106cd44d64e1f",
+    "own_lease_absent": true,
+    "own_reservation_matches_receipt": true,
+    "own_reservation_status": "released",
+    "own_storage_bytes": 200000000,
+    "prior_failed_scope_attempt_match_count": 1,
+    "prior_failed_scope_claim": [
+      {
+        "attempt_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-01",
+        "owner_pid": 3877584,
+        "status": "retained",
+        "storage_bytes": 200000000
+      }
+    ],
+    "read_only": true,
+    "state": {
+      "bytes": 1719,
+      "path": "/tmp/ipfs-datasets-resource-scheduler-1000.json",
+      "sha256": "247f6d1351c5d32a4c593aae4e0574ef554225438be21d695ae0de72d3cf700d"
+    },
+    "state_config_sha256": "76d10cc42015c9e4cbdad0fabd6a64f706320e14a8fb507f16262d42dd1d5856"
+  },
+  "findings": [],
+  "immediate_resource_receipts": {
+    "child-exit.json": {
+      "bytes": 105,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/child-exit.json",
+      "sha256": "4164f63b8d4038f935fbe838848b573d256fc6154e0bdb7ecfdb35e39a3d9abf"
+    },
+    "child-identity.json": {
+      "bytes": 43,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/child-identity.json",
+      "sha256": "348a8d7a83a44f83f3e705c935eb47182b5963df81b759f7709e3c9b26c3967e"
+    },
+    "command.json": {
+      "bytes": 1020,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/command.json",
+      "sha256": "80502272f3843c909d297a41e1ac5eee656963078abfedb1223830051f6ca4ec"
+    },
+    "group-rss-observations.jsonl": {
+      "bytes": 15469,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/group-rss-observations.jsonl",
+      "sha256": "e7df12a79bcefb0413c00cbbba3e8990c9fd0329297507d6227dc79161c40251"
+    },
+    "group-rss-summary.json": {
+      "bytes": 1715,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/group-rss-summary.json",
+      "sha256": "6b9df904bba683ab5ed3d48baa192a8713f0b6b77ccb20e36aa676dc663817f5"
+    },
+    "guardian-exit.json": {
+      "bytes": 520,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/guardian-exit.json",
+      "sha256": "d6b719b12321c9a0057ac6dfd672d0832c8c07b50a10c2edc6dcaeb81afb13cd"
+    },
+    "lease-binding.json": {
+      "bytes": 693,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/lease-binding.json",
+      "sha256": "cfde269d301cec1e240f9089a7aeb2f3febf1fc254874fd4d1133592440c676e"
+    },
+    "lease-observations.jsonl": {
+      "bytes": 32706,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/lease-observations.jsonl",
+      "sha256": "245f28e850108b485b47a0bedcbab6fd8469cd640430fc5623857edfa74298fc"
+    },
+    "owned-group-final.json": {
+      "bytes": 189,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/owned-group-final.json",
+      "sha256": "498fe8832482c956674678f8c117d07c81fa4c3bb6166f1447e7d3f7e437d0ad"
+    },
+    "pre-admission.json": {
+      "bytes": 7962,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/pre-admission.json",
+      "sha256": "4490971119e7841e55fb9414941795ccaab61a30b2e174a029e7dfd478a1f819"
+    },
+    "resource-observations.json": {
+      "bytes": 874,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/resource-observations.json",
+      "sha256": "ae7e079ff13a7db0652aa7eb59dbd0bfa2a8677717c5249a0fe4f53709d11875"
+    },
+    "resources-final.json": {
+      "bytes": 6192,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/resources-final.json",
+      "sha256": "007f9f4090496ede745365f7345aaa085f501ba727b35b99bfbfe357f3438273"
+    },
+    "resources-start.json": {
+      "bytes": 2516,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/resources-start.json",
+      "sha256": "e61ce381e069a235d69734fb310e24a3bf2e346d2faa3d2aa439f0bee3e480a6"
+    },
+    "scheduler-adoption.json": {
+      "bytes": 4644,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/scheduler-adoption.json",
+      "sha256": "b4673772e08c188c820cb6371879616c379041aa0a42886198f426fcb58ac5fa"
+    }
+  },
+  "limitations": [
+    "RSS samples are non-atomic summed resident pages for the owned process group; brief peaks can be missed and shared pages may be counted in more than one process.",
+    "Requested one-second waits are augmented by collection and fsync latency. Model phase includes imports and guardian polling; it is not isolated optimizer timing.",
+    "The current own lease absence is a single snapshot. Other rows are hashed and left untouched; this audit does not assert global before/after immutability while other processes may progress.",
+    "Leader reap and zero-group evidence come from bound terminal receipts; no new /proc census or signalling was performed. Final disk accounting excludes later terminal receipts as stated by the guardian."
+  ],
+  "measured": {
+    "absolute_peak_measured": false,
+    "child_launch_through_reap_wall_seconds": 28.630594821006525,
+    "guardian_elapsed_seconds": 57.59270289703272,
+    "kernel_hard_cap": false,
+    "model_gate_through_reap_wall_seconds": 13.63477966998471,
+    "model_phase_RSS_observations": 14,
+    "model_phase_max_observation_gap_seconds": 1.0320294270059094,
+    "sampled": true,
+    "sampled_model_phase_peak_MiB": 723.62890625,
+    "sampled_model_phase_peak_rss_bytes": 758779904
+  },
+  "passed": true,
+  "physical_attempt": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01",
+  "schema": "legal-trigger-resource-results-review/v1",
+  "scope": "Bounded immediate attempt resource receipts and exactly one current bound scheduler-state/disk-ledger snapshot; no model, new child, client, lease, reservation, census, reconciliation or source/index mutation."
+}

@@ -1,0 +1,639 @@
+{
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/completion.json": {
+      "bytes": 4918,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/completion.json",
+      "sha256": "a67aafbf4d4fcd8ad778df91ea7ed2c68610d6c116bfdcbe4ce5b49d48fd9133"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-inputs.json": {
+      "bytes": 61725,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-inputs.json",
+      "sha256": "1af9757054e2ae6344dcbd2e3834c21808cbe998e79ace9b9ff34383d3020b55"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-references.json": {
+      "bytes": 136311,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-references.json",
+      "sha256": "9ff98c26fd03fc695b76b46de63b621a02765e981e43eca867cf01f51104abc9"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/check_prior_retention.py": {
+      "bytes": 3397,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/check_prior_retention.py",
+      "sha256": "96012e61149ece8247fee044a9ff438a01f631d5477b939716ba2e26c8f4eeec"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py": {
+      "bytes": 29545,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py",
+      "sha256": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py": {
+      "bytes": 7804,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py",
+      "sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_trigger_readout.py": {
+      "bytes": 27145,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_trigger_readout.py",
+      "sha256": "983b69b8e293aa6211fd8322f9ba6bfe6fa5b8cb853c2d4d0cace1e7e5046344"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py": {
+      "bytes": 29993,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py",
+      "sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/experiment-plan.json": {
+      "bytes": 5538,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/experiment-plan.json",
+      "sha256": "0246fec8a0026ca38dcc46bc903ec655cfde8f474f39c142641d3a39f49a1881"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/prior-retention/all-predictions-before-reference-join.json": {
+      "bytes": 852,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/prior-retention/all-predictions-before-reference-join.json",
+      "sha256": "cbfae097a8741e92350f5e86b787d01038a6863d37a2a9b11be0f8f0d3025987"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/prior-retention/donor-predictions.json": {
+      "bytes": 761131,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/prior-retention/donor-predictions.json",
+      "sha256": "c653f4ccd80c73e6013ee7f975aa0b746b29e9592de7e2a31387aa0f5a925d95"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/prior-retention/global-predictions.json": {
+      "bytes": 795762,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/prior-retention/global-predictions.json",
+      "sha256": "828dfe344124b391dab0fe78594d91cb464394cc5186fd83a8635b19a8ad61ba"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/prior-retention/predicted_trigger-predictions.json": {
+      "bytes": 796352,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/prior-retention/predicted_trigger-predictions.json",
+      "sha256": "7745ecb3f56e4544807c9b8466b8a02dd9bade9d5c5bd9b996d134e10e69f730"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/prior-retention/retention-results.json": {
+      "bytes": 13916,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/prior-retention/retention-results.json",
+      "sha256": "ca235d2ede63180c5f5e05e4f3865f5472538d06ca3dbf2f4c2ce1441e623385"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/results-review.json": {
+      "bytes": 77293,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/results-review.json",
+      "sha256": "3afe8955e140d195421151734946ba59ed51d892eb0625ebb351dc32195edf2a"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/run_trigger_experiment.py": {
+      "bytes": 19834,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/run_trigger_experiment.py",
+      "sha256": "8db24c4c0e39ebb106a72031fa53aa9f153fed94f1ddaf1b58ba7ef9ad093f00"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/checkpoint-240.json": {
+      "bytes": 2202556,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/checkpoint-240.json",
+      "sha256": "9809ec3fd092536f8c4effb74d8a401dc5db9ff9a031952a1e3f92f9c7292c6e"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/final-predictions.json": {
+      "bytes": 745713,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/final-predictions.json",
+      "sha256": "1dd7d06d3acb79baf716dc7f7c73a612d4ca2c39fc7d973123223848a359b6ad"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/checkpoint-120.json": {
+      "bytes": 2717024,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/checkpoint-120.json",
+      "sha256": "b9ce4e8e3fca1284060905d1892fc89cb15a36925436af528eae787cccbc6f9c"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/selected.json": {
+      "bytes": 4060,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/selected.json",
+      "sha256": "ca40c228d33a96907a340e89cceb37c52f701ca5a5a67f462b43043c71922b63"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-240.json": {
+      "bytes": 2714198,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-240.json",
+      "sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/selected.json": {
+      "bytes": 4084,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/selected.json",
+      "sha256": "a62454d5f098a759e3c3e0652ef12ff96d3e714414ac71f9791b6c686655b50b"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/training-results.json": {
+      "bytes": 69574,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/training-results.json",
+      "sha256": "8bb4d85371ce1fca3c7f4f6f0eeef33e43469bfb1122206cde2d83c4c7d97705"
+    }
+  },
+  "checked": {
+    "adapter_panel_rows": 256,
+    "additional_optimizer_updates_in_original_retention_run": 0,
+    "all128_donor_prediction_dicts_equal_original_archived_panel": true,
+    "all_nonclass_signatures_equal_across_three_panels": true,
+    "all_three_128row_metrics_recomputed_exact": true,
+    "all_three_panels_durable_before_reference_join": "Pinned barrier + unchanged fsync writer and static script order verified; mtime order agrees",
+    "archive_comparison_ignored_fields": "Only new outer class_logits; complete nested prediction dictionaries compared exactly",
+    "donor_panel_rows": 128,
+    "evaluated_panel_rows": 384,
+    "neural_forward_call_breakdown": "256 adapter prediction forwards plus128 donor prediction forwards plus128 extra donor logits forwards in collect(donor=True)",
+    "neural_forward_calls_in_original_retention_run": 512,
+    "no_training_optimizer_or_reselection_call_in_retention_script": true,
+    "original_source_and_checkpoint_pins_unchanged": true,
+    "pure_owner_proposals_revalidated": 135,
+    "selected_Adam_steps_120_240_unchanged": true
+  },
+  "findings": [],
+  "fit_changes": false,
+  "interpretation": "On the earlier exposed128-row cohort, donor/global/trigger raw class25/28/53 of64, whole12/15/29 of64, nonempty-condition whole4/9/13 of32. Aggregate trigger gains coexist with5 lost donor-class-correct cases and2 lost donor-whole-correct cases; source support/presence/occurrences are unchanged and original donor outputs replay exactly. This is descriptive postfit retention, not a fresh final test or selection evidence.",
+  "limitations": [
+    "Earlier final labels and outputs were already exposed; no fresh held-out or blind-label claim.",
+    "Single selected adapter per arm; checkpoints were fixed by fresh selection before retention and no reselection occurred.",
+    "Authored engineering targets only; no reviewed statutory semantics, admission, proof authority or Lake.",
+    "Net aggregate improvements do not imply per-case behavior preservation; paired losses explicitly retained.",
+    "This standalone source readout check does not evaluate native384 balanced-bank replacement retention or the cached default runtime.",
+    "Hosted append-only publication custody is outside this local review; original local selected artifacts/source pins verified unchanged.",
+    "Review performed no model execution or numeric replay; saved donor prediction dictionaries nonetheless exactly equal all128 archived outputs."
+  ],
+  "metrics": {
+    "donor": {
+      "admission_masks": "all five zero",
+      "caller_attachment_learned": false,
+      "case_count": 128,
+      "class_confusion": {
+        "F": {
+          "F": 18,
+          "O": 3,
+          "P": 0
+        },
+        "O": {
+          "F": 14,
+          "O": 7,
+          "P": 0
+        },
+        "P": {
+          "F": 17,
+          "O": 5,
+          "P": 0
+        }
+      },
+      "legal_gold": false,
+      "negative_categories": {
+        "extra_exception": {
+          "count": 16,
+          "emitted": 0,
+          "incidental_block": 0,
+          "learned_refusal": 16
+        },
+        "modal_deletion": {
+          "count": 16,
+          "emitted": 0,
+          "incidental_block": 0,
+          "learned_refusal": 16
+        },
+        "modal_misspelling": {
+          "count": 16,
+          "emitted": 4,
+          "incidental_block": 1,
+          "learned_refusal": 11
+        },
+        "second_rule": {
+          "count": 16,
+          "emitted": 0,
+          "incidental_block": 0,
+          "learned_refusal": 16
+        }
+      },
+      "negative_count": 64,
+      "negative_emitted_proposal_count": 4,
+      "negative_incidental_block_count": 1,
+      "negative_learned_refusal_count": 59,
+      "nonempty_condition_count": 32,
+      "nonempty_condition_exact_count": 4,
+      "positive_class_CE": 1.0977693515372422,
+      "positive_count": 64,
+      "positive_emitted_proposal_count": 41,
+      "positive_exact_count": 12,
+      "positive_learned_refusal_count": 18,
+      "positive_raw_all_spans_exact": 47,
+      "positive_raw_facet_span_exact": {
+        "action": {
+          "count": 64,
+          "exact": 50,
+          "nonempty_count": 64,
+          "nonempty_exact": 50
+        },
+        "actor": {
+          "count": 64,
+          "exact": 64,
+          "nonempty_count": 64,
+          "nonempty_exact": 64
+        },
+        "condition": {
+          "count": 64,
+          "exact": 61,
+          "nonempty_count": 32,
+          "nonempty_exact": 29
+        },
+        "modality": {
+          "count": 64,
+          "exact": 64,
+          "nonempty_count": 64,
+          "nonempty_exact": 64
+        },
+        "object": {
+          "count": 64,
+          "exact": 61,
+          "nonempty_count": 32,
+          "nonempty_exact": 29
+        }
+      },
+      "positive_raw_modality_exact": 25,
+      "positive_structural_block_count": 5,
+      "positive_templates": {
+        "actor_condition_modal_action_object": {
+          "class_exact": 4,
+          "count": 8,
+          "proposal_exact": 3
+        },
+        "actor_modal_action_object_condition": {
+          "class_exact": 2,
+          "count": 8,
+          "proposal_exact": 1
+        },
+        "actor_possessive_gerund_object_modal_condition": {
+          "class_exact": 3,
+          "count": 8,
+          "proposal_exact": 1
+        },
+        "condition_actor_modal_action_object": {
+          "class_exact": 3,
+          "count": 8,
+          "proposal_exact": 2
+        },
+        "condition_actor_possessive_gerund_object_modal": {
+          "class_exact": 3,
+          "count": 8,
+          "proposal_exact": 3
+        },
+        "condition_modal_actor_action_object": {
+          "class_exact": 3,
+          "count": 8,
+          "proposal_exact": 2
+        },
+        "gerund_object_agent_modal_condition": {
+          "class_exact": 3,
+          "count": 8,
+          "proposal_exact": 0
+        },
+        "modal_actor_action_object_condition": {
+          "class_exact": 4,
+          "count": 8,
+          "proposal_exact": 0
+        }
+      },
+      "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+      "source_parent_groups": 64
+    },
+    "global": {
+      "admission_masks": "all five zero",
+      "caller_attachment_learned": false,
+      "case_count": 128,
+      "class_confusion": {
+        "F": {
+          "F": 4,
+          "O": 8,
+          "P": 9
+        },
+        "O": {
+          "F": 4,
+          "O": 8,
+          "P": 9
+        },
+        "P": {
+          "F": 1,
+          "O": 5,
+          "P": 16
+        }
+      },
+      "legal_gold": false,
+      "negative_categories": {
+        "extra_exception": {
+          "count": 16,
+          "emitted": 0,
+          "incidental_block": 0,
+          "learned_refusal": 16
+        },
+        "modal_deletion": {
+          "count": 16,
+          "emitted": 0,
+          "incidental_block": 0,
+          "learned_refusal": 16
+        },
+        "modal_misspelling": {
+          "count": 16,
+          "emitted": 4,
+          "incidental_block": 1,
+          "learned_refusal": 11
+        },
+        "second_rule": {
+          "count": 16,
+          "emitted": 0,
+          "incidental_block": 0,
+          "learned_refusal": 16
+        }
+      },
+      "negative_count": 64,
+      "negative_emitted_proposal_count": 4,
+      "negative_incidental_block_count": 1,
+      "negative_learned_refusal_count": 59,
+      "nonempty_condition_count": 32,
+      "nonempty_condition_exact_count": 9,
+      "positive_class_CE": 1.0776897286068576,
+      "positive_count": 64,
+      "positive_emitted_proposal_count": 41,
+      "positive_exact_count": 15,
+      "positive_learned_refusal_count": 18,
+      "positive_raw_all_spans_exact": 47,
+      "positive_raw_facet_span_exact": {
+        "action": {
+          "count": 64,
+          "exact": 50,
+          "nonempty_count": 64,
+          "nonempty_exact": 50
+        },
+        "actor": {
+          "count": 64,
+          "exact": 64,
+          "nonempty_count": 64,
+          "nonempty_exact": 64
+        },
+        "condition": {
+          "count": 64,
+          "exact": 61,
+          "nonempty_count": 32,
+          "nonempty_exact": 29
+        },
+        "modality": {
+          "count": 64,
+          "exact": 64,
+          "nonempty_count": 64,
+          "nonempty_exact": 64
+        },
+        "object": {
+          "count": 64,
+          "exact": 61,
+          "nonempty_count": 32,
+          "nonempty_exact": 29
+        }
+      },
+      "positive_raw_modality_exact": 28,
+      "positive_structural_block_count": 5,
+      "positive_templates": {
+        "actor_condition_modal_action_object": {
+          "class_exact": 3,
+          "count": 8,
+          "proposal_exact": 2
+        },
+        "actor_modal_action_object_condition": {
+          "class_exact": 4,
+          "count": 8,
+          "proposal_exact": 2
+        },
+        "actor_possessive_gerund_object_modal_condition": {
+          "class_exact": 2,
+          "count": 8,
+          "proposal_exact": 2
+        },
+        "condition_actor_modal_action_object": {
+          "class_exact": 5,
+          "count": 8,
+          "proposal_exact": 4
+        },
+        "condition_actor_possessive_gerund_object_modal": {
+          "class_exact": 3,
+          "count": 8,
+          "proposal_exact": 2
+        },
+        "condition_modal_actor_action_object": {
+          "class_exact": 3,
+          "count": 8,
+          "proposal_exact": 3
+        },
+        "gerund_object_agent_modal_condition": {
+          "class_exact": 5,
+          "count": 8,
+          "proposal_exact": 0
+        },
+        "modal_actor_action_object_condition": {
+          "class_exact": 3,
+          "count": 8,
+          "proposal_exact": 0
+        }
+      },
+      "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+      "source_parent_groups": 64
+    },
+    "predicted_trigger": {
+      "admission_masks": "all five zero",
+      "caller_attachment_learned": false,
+      "case_count": 128,
+      "class_confusion": {
+        "F": {
+          "F": 19,
+          "O": 1,
+          "P": 1
+        },
+        "O": {
+          "F": 5,
+          "O": 13,
+          "P": 3
+        },
+        "P": {
+          "F": 0,
+          "O": 1,
+          "P": 21
+        }
+      },
+      "legal_gold": false,
+      "negative_categories": {
+        "extra_exception": {
+          "count": 16,
+          "emitted": 0,
+          "incidental_block": 0,
+          "learned_refusal": 16
+        },
+        "modal_deletion": {
+          "count": 16,
+          "emitted": 0,
+          "incidental_block": 0,
+          "learned_refusal": 16
+        },
+        "modal_misspelling": {
+          "count": 16,
+          "emitted": 4,
+          "incidental_block": 1,
+          "learned_refusal": 11
+        },
+        "second_rule": {
+          "count": 16,
+          "emitted": 0,
+          "incidental_block": 0,
+          "learned_refusal": 16
+        }
+      },
+      "negative_count": 64,
+      "negative_emitted_proposal_count": 4,
+      "negative_incidental_block_count": 1,
+      "negative_learned_refusal_count": 59,
+      "nonempty_condition_count": 32,
+      "nonempty_condition_exact_count": 13,
+      "positive_class_CE": 0.5569122876524706,
+      "positive_count": 64,
+      "positive_emitted_proposal_count": 41,
+      "positive_exact_count": 29,
+      "positive_learned_refusal_count": 18,
+      "positive_raw_all_spans_exact": 47,
+      "positive_raw_facet_span_exact": {
+        "action": {
+          "count": 64,
+          "exact": 50,
+          "nonempty_count": 64,
+          "nonempty_exact": 50
+        },
+        "actor": {
+          "count": 64,
+          "exact": 64,
+          "nonempty_count": 64,
+          "nonempty_exact": 64
+        },
+        "condition": {
+          "count": 64,
+          "exact": 61,
+          "nonempty_count": 32,
+          "nonempty_exact": 29
+        },
+        "modality": {
+          "count": 64,
+          "exact": 64,
+          "nonempty_count": 64,
+          "nonempty_exact": 64
+        },
+        "object": {
+          "count": 64,
+          "exact": 61,
+          "nonempty_count": 32,
+          "nonempty_exact": 29
+        }
+      },
+      "positive_raw_modality_exact": 53,
+      "positive_structural_block_count": 5,
+      "positive_templates": {
+        "actor_condition_modal_action_object": {
+          "class_exact": 7,
+          "count": 8,
+          "proposal_exact": 5
+        },
+        "actor_modal_action_object_condition": {
+          "class_exact": 6,
+          "count": 8,
+          "proposal_exact": 2
+        },
+        "actor_possessive_gerund_object_modal_condition": {
+          "class_exact": 8,
+          "count": 8,
+          "proposal_exact": 5
+        },
+        "condition_actor_modal_action_object": {
+          "class_exact": 6,
+          "count": 8,
+          "proposal_exact": 4
+        },
+        "condition_actor_possessive_gerund_object_modal": {
+          "class_exact": 8,
+          "count": 8,
+          "proposal_exact": 7
+        },
+        "condition_modal_actor_action_object": {
+          "class_exact": 5,
+          "count": 8,
+          "proposal_exact": 5
+        },
+        "gerund_object_agent_modal_condition": {
+          "class_exact": 8,
+          "count": 8,
+          "proposal_exact": 0
+        },
+        "modal_actor_action_object_condition": {
+          "class_exact": 5,
+          "count": 8,
+          "proposal_exact": 1
+        }
+      },
+      "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+      "source_parent_groups": 64
+    }
+  },
+  "model_calls_in_this_review": 0,
+  "optimizer_steps_in_this_review": 0,
+  "paired_correctness_transitions_vs_donor": {
+    "global": {
+      "class_both_correct": 8,
+      "class_both_wrong": 19,
+      "class_gained": 20,
+      "class_lost": 17,
+      "whole_both_correct": 4,
+      "whole_both_wrong": 41,
+      "whole_gained": 11,
+      "whole_lost": 8
+    },
+    "predicted_trigger": {
+      "class_both_correct": 20,
+      "class_both_wrong": 6,
+      "class_gained": 33,
+      "class_lost": 5,
+      "whole_both_correct": 10,
+      "whole_both_wrong": 33,
+      "whole_gained": 19,
+      "whole_lost": 2
+    }
+  },
+  "passed": true,
+  "posthoc_decomposition": {
+    "donor": {
+      "class_wrong_among_emission_ready": 24,
+      "emission_ready_exact_span_ceiling": 36,
+      "exact_emitted": 12,
+      "frozen_nonclass_obstruction": 28,
+      "raw_all_span_exact": 47
+    },
+    "global": {
+      "class_wrong_among_emission_ready": 21,
+      "emission_ready_exact_span_ceiling": 36,
+      "exact_emitted": 15,
+      "frozen_nonclass_obstruction": 28,
+      "raw_all_span_exact": 47
+    },
+    "predicted_trigger": {
+      "class_wrong_among_emission_ready": 7,
+      "emission_ready_exact_span_ceiling": 36,
+      "exact_emitted": 29,
+      "frozen_nonclass_obstruction": 28,
+      "raw_all_span_exact": 47
+    }
+  },
+  "review_kind": "Independent saved-file/control-flow scoring and source/checkpoint hashes; pure proposal owner checks; no model calls",
+  "schema": "trigger-readout-independent-prior-retention-review/v1",
+  "selected_checkpoints": {
+    "global": {
+      "checkpoint": {
+        "bytes": 2717024,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/global/checkpoint-120.json",
+        "sha256": "b9ce4e8e3fca1284060905d1892fc89cb15a36925436af528eae787cccbc6f9c"
+      },
+      "dense_Adam_progress_unchanged": true,
+      "steps": 120,
+      "unchanged_since_fresh_evaluation": true
+    },
+    "predicted_trigger": {
+      "checkpoint": {
+        "bytes": 2714198,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-240.json",
+        "sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f"
+      },
+      "dense_Adam_progress_unchanged": true,
+      "steps": 240,
+      "unchanged_since_fresh_evaluation": true
+    }
+  }
+}

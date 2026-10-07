@@ -1,0 +1,50 @@
+{
+  "schema": "trigger-retention-hub-readback/v1",
+  "passed": true,
+  "repo": "Publicus/legal-ir-autoencoder",
+  "prefix": "experiments/trigger-readout-20261007/run-01/retention",
+  "revision": "09ac0af19c801b53216f83c3544c8d54b763f091",
+  "parent": "ffa1c076b0d7208565b9f1e6ea9758d0573bd08e",
+  "prior_file_count": 2629,
+  "all_prior_files_preserved": true,
+  "all_added_file_identities_verified": true,
+  "files": {
+    "README.md": {
+      "bytes": 2023,
+      "sha256": "1284cd52b829b373346d8fc978e053800411c2fda81939361a8bd8dd0e0c93a5"
+    },
+    "all-predictions-before-reference-join.json": {
+      "bytes": 852,
+      "sha256": "cbfae097a8741e92350f5e86b787d01038a6863d37a2a9b11be0f8f0d3025987"
+    },
+    "check_prior_retention.py": {
+      "bytes": 3397,
+      "sha256": "96012e61149ece8247fee044a9ff438a01f631d5477b939716ba2e26c8f4eeec"
+    },
+    "donor-predictions.json": {
+      "bytes": 761131,
+      "sha256": "c653f4ccd80c73e6013ee7f975aa0b746b29e9592de7e2a31387aa0f5a925d95"
+    },
+    "global-predictions.json": {
+      "bytes": 795762,
+      "sha256": "828dfe344124b391dab0fe78594d91cb464394cc5186fd83a8635b19a8ad61ba"
+    },
+    "predicted_trigger-predictions.json": {
+      "bytes": 796352,
+      "sha256": "7745ecb3f56e4544807c9b8466b8a02dd9bade9d5c5bd9b996d134e10e69f730"
+    },
+    "prior-retention-review.json": {
+      "bytes": 25159,
+      "sha256": "749d5995348765852afca30d7f88700f63584edfbb0812cfa663c6557f1deb3a"
+    },
+    "retention-results.json": {
+      "bytes": 13916,
+      "sha256": "ca235d2ede63180c5f5e05e4f3865f5472538d06ca3dbf2f4c2ce1441e623385"
+    },
+    "supplement-manifest.json": {
+      "bytes": 1437,
+      "sha256": "8565506d4a7d0c5166e66f267d92c5157a9f54b23bbbcd7c8ebaecb4612e5a78"
+    }
+  },
+  "weights_and_initial80files_unchanged": true
+}

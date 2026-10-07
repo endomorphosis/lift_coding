@@ -1,0 +1,35 @@
+{
+  "canonical": {
+    "datasets": {
+      "head": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+      "head_matches": true,
+      "index_matches": true,
+      "index_path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/index",
+      "index_sha256": "d2a68a76e7a7ed99ef8ba031261cb8e7b66d6fca6c351b0e1e9dd8dc13910175",
+      "intake_head": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+      "intake_index_sha256": "d2a68a76e7a7ed99ef8ba031261cb8e7b66d6fca6c351b0e1e9dd8dc13910175",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets"
+    },
+    "workspace": {
+      "head": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+      "head_matches": true,
+      "index_matches": true,
+      "index_path": "/home/barberb/lift_coding/.git/index",
+      "index_sha256": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4",
+      "intake_head": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+      "intake_index_sha256": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4",
+      "path": "/home/barberb/lift_coding"
+    }
+  },
+  "canonical_mutations_by_this_review": false,
+  "canonical_new_readout": {
+    "exists": false,
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_trigger_readout.py"
+  },
+  "findings": [],
+  "intentional_artifacts": "New isolated sources/reviews under artifact root; physical owned training artifacts will be written only under existing workspace/test-logs root when root launches reviewed run",
+  "other_claim_mutations": false,
+  "passed": true,
+  "schema": "legal-trigger-readout-canonical-preservation-review/v1",
+  "scope": "Targeted HEAD/index equality and canonical readout absence; no whole-tree inventory or working-file byte equality claim"
+}

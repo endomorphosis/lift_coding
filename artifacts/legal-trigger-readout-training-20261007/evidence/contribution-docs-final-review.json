@@ -1,0 +1,143 @@
+{
+  "actions": {
+    "commits": 0,
+    "fits": 0,
+    "index_mutations": 0,
+    "model_calls": 0,
+    "source_or_document_edits": 0,
+    "test_runs": 0
+  },
+  "candidate_root": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets",
+  "checks": [
+    {
+      "check": "previous_core_review_and_base",
+      "detail": "Earlier finalized source review remains untouched; incoming base is b6abb32636e336536fc1cfc0f78bba2dc04703c5.",
+      "passed": true
+    },
+    {
+      "check": "exact_four_staged_paths",
+      "detail": "Exactly four contribution paths are staged, and staged bytes match current files with no unstaged tracked changes.",
+      "passed": true
+    },
+    {
+      "check": "frozen_sources_and_incoming15_retained",
+      "detail": "Frozen983b69 source/test and v1 donor/proposal/scope match previous pins; all15 incoming balanced-wording/helper files remain byte-exact.",
+      "passed": true
+    },
+    {
+      "check": "doc_only_supplement_and_pin",
+      "detail": "203-line doc changes only by19-line postfit retention section and the immutable artifact revision, from reviewed bf602c6d document.",
+      "passed": true
+    },
+    {
+      "check": "retention_metrics",
+      "detail": "Earlier exposed donor/global/trigger panel scores25/28/53 class,12/15/29 whole and4/9/13 nonempty-condition exact agree with independent retained review.",
+      "passed": true
+    },
+    {
+      "check": "paired_regressions_visible",
+      "detail": "Trigger gains33class/19whole coexist with5class/2whole losses; global20/11gains and17/8losses are visible.",
+      "passed": true
+    },
+    {
+      "check": "panel_rows_and_neural_forward_counts",
+      "detail": "384 scored rows versus512 top-level forwards are distinguished, including128 extra donor-logit passes.",
+      "passed": true
+    },
+    {
+      "check": "postfit_retention_no_fit_or_reselection",
+      "detail": "Original donor128 dictionaries/nonclass signatures replay unchanged; selected120/240 steps persist. Exposed-cohort retention supplies no fit, selection, fresh holdout or promotion.",
+      "passed": true
+    },
+    {
+      "check": "progress_prefix_preserved_and_only_new_link_pinned",
+      "detail": "16,764 prior progress bytes and20-line appended entry remain intact; only the new trigger artifact link changes from main to the same immutable revision.",
+      "passed": true
+    },
+    {
+      "check": "immutable_publication_custody",
+      "detail": "Saved hosted readback binds09ac0af19c801b53216f83c3544c8d54b763f091: nine supplemental files, all2629 prior files preserved and original80 files/weights unchanged. Both new documentation citations are pinned.",
+      "passed": true
+    },
+    {
+      "check": "unchanged_results_resources_and_authority_limits",
+      "detail": "Previously reviewed fresh results,38-row ceiling, fitting/encoding denominators, sampled CPU/RSS caveats, zero authority/caller premise remain unchanged; local links and API syntax remain valid.",
+      "passed": true
+    }
+  ],
+  "current_document": {
+    "bytes": 12483,
+    "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/docs/implementation/legal_scope_trigger_readout_pilot_20261007.md",
+    "sha256": "0742a19ed6bd25063e3d06b0360f465ea5f3fadf4b2f14dbad8ca2d7b729e133"
+  },
+  "current_progress": {
+    "bytes": 18257,
+    "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/docs/autoencoders/progress_integration.md",
+    "sha256": "7e511b24c0b6faff15b1ebabe574d110b43c6eca8c061e9ed0e6f58bb93ac721"
+  },
+  "currentdocSHA256": "0742a19ed6bd25063e3d06b0360f465ea5f3fadf4b2f14dbad8ca2d7b729e133",
+  "evidence": {
+    "contribution-source-review.json": {
+      "bytes": 14384,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/contribution-source-review.json",
+      "sha256": "40a8b02b521d7e6c05db4730aef2a9bd317dd5eaf7cf5b7303e4714a53dc0f02"
+    },
+    "prior-retention-review.json": {
+      "bytes": 25159,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/prior-retention-review.json",
+      "sha256": "749d5995348765852afca30d7f88700f63584edfbb0812cfa663c6557f1deb3a"
+    },
+    "retention-hub-readback.json": {
+      "bytes": 1795,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/retention-hub-readback.json",
+      "sha256": "d8be84f630bd82cab5acf61578e013d260e2945a07e930220607a24e2e8d815f"
+    }
+  },
+  "findings": [],
+  "incoming_base": "b6abb32636e336536fc1cfc0f78bba2dc04703c5",
+  "limits": [
+    "File-only review relies on finalized peer saved-file and hosted-readback receipts; no tests, model or network calls.",
+    "Prior cohort was exposed before this postfit check; no fresh-final, legal accuracy, admission, Lake or promotion result is accepted."
+  ],
+  "passed": true,
+  "publication": {
+    "initial_files": 80,
+    "prefix": "experiments/trigger-readout-20261007/run-01",
+    "prior_repo_files_preserved": 2629,
+    "repo": "Publicus/legal-ir-autoencoder",
+    "retention_supplement_files": 9,
+    "revision": "09ac0af19c801b53216f83c3544c8d54b763f091"
+  },
+  "schema": "legal-trigger-contribution-docs-final-review/v1",
+  "scope": "Final documentation supplement and immutable citation review, with staged-byte and unchanged frozen source/incoming-file custody. Earlier finalized reviews remain untouched.",
+  "staged_contribution_files": {
+    "docs/autoencoders/progress_integration.md": {
+      "bytes": 18257,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/docs/autoencoders/progress_integration.md",
+      "sha256": "7e511b24c0b6faff15b1ebabe574d110b43c6eca8c061e9ed0e6f58bb93ac721",
+      "staged_blob_sha1": "3fce5ca19aefda0c08586111c3c506deb7ecfa3d",
+      "staged_bytes_exact": true
+    },
+    "docs/implementation/legal_scope_trigger_readout_pilot_20261007.md": {
+      "bytes": 12483,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/docs/implementation/legal_scope_trigger_readout_pilot_20261007.md",
+      "sha256": "0742a19ed6bd25063e3d06b0360f465ea5f3fadf4b2f14dbad8ca2d7b729e133",
+      "staged_blob_sha1": "7d6e16bc72e3c161f8ab038cc1bd53b906fff7d5",
+      "staged_bytes_exact": true
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_trigger_readout.py": {
+      "bytes": 27145,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_trigger_readout.py",
+      "sha256": "983b69b8e293aa6211fd8322f9ba6bfe6fa5b8cb853c2d4d0cace1e7e5046344",
+      "staged_blob_sha1": "aa718b6f3a813a3cd01947640f0a405d377e529b",
+      "staged_bytes_exact": true
+    },
+    "tests/unit/logic/test_legal_scope_trigger_readout.py": {
+      "bytes": 16772,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/datasets/tests/unit/logic/test_legal_scope_trigger_readout.py",
+      "sha256": "337c18f643eb7ec5aa276ad693cc83a5ad595e71a3e98fbe1acc43e177616a9d",
+      "staged_blob_sha1": "fc96b11d808c72d4e8af7dbfd89303c3337b3551",
+      "staged_bytes_exact": true
+    }
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "completed_updates": 240,
+  "summary": {
+    "positive_count": 64,
+    "positive_exact_count": 24,
+    "positive_learned_refusal_count": 11,
+    "positive_structural_block_count": 12,
+    "positive_emitted_proposal_count": 41,
+    "negative_count": 64,
+    "negative_learned_refusal_count": 53,
+    "negative_incidental_block_count": 5,
+    "negative_emitted_proposal_count": 6,
+    "positive_raw_modality_exact": 47,
+    "positive_raw_all_spans_exact": 39,
+    "nonempty_condition_count": 32,
+    "nonempty_condition_exact_count": 15,
+    "case_count": 128,
+    "source_parent_groups": 64,
+    "positive_class_CE": 0.6412712355498564,
+    "class_confusion": {
+      "O": {
+        "O": 15,
+        "P": 2,
+        "F": 5
+      },
+      "P": {
+        "O": 2,
+        "P": 15,
+        "F": 4
+      },
+      "F": {
+        "O": 1,
+        "P": 3,
+        "F": 17
+      }
+    },
+    "positive_raw_facet_span_exact": {
+      "modality": {
+        "count": 64,
+        "exact": 64,
+        "nonempty_count": 64,
+        "nonempty_exact": 64
+      },
+      "actor": {
+        "count": 64,
+        "exact": 64,
+        "nonempty_count": 64,
+        "nonempty_exact": 64
+      },
+      "action": {
+        "count": 64,
+        "exact": 42,
+        "nonempty_count": 64,
+        "nonempty_exact": 42
+      },
+      "object": {
+        "count": 64,
+        "exact": 61,
+        "nonempty_count": 32,
+        "nonempty_exact": 29
+      },
+      "condition": {
+        "count": 64,
+        "exact": 62,
+        "nonempty_count": 32,
+        "nonempty_exact": 30
+      }
+    },
+    "negative_categories": {
+      "second_rule": {
+        "count": 16,
+        "learned_refusal": 16,
+        "emitted": 0,
+        "incidental_block": 0
+      },
+      "extra_exception": {
+        "count": 16,
+        "learned_refusal": 16,
+        "emitted": 0,
+        "incidental_block": 0
+      },
+      "modal_misspelling": {
+        "count": 16,
+        "learned_refusal": 5,
+        "emitted": 6,
+        "incidental_block": 5
+      },
+      "modal_deletion": {
+        "count": 16,
+        "learned_refusal": 16,
+        "emitted": 0,
+        "incidental_block": 0
+      }
+    },
+    "positive_templates": {
+      "condition_actor_possessive_gerund_object_modal": {
+        "count": 8,
+        "class_exact": 8,
+        "proposal_exact": 8
+      },
+      "condition_actor_modal_action_object": {
+        "count": 8,
+        "class_exact": 4,
+        "proposal_exact": 0
+      },
+      "modal_actor_action_object_condition": {
+        "count": 8,
+        "class_exact": 5,
+        "proposal_exact": 1
+      },
+      "actor_modal_action_object_condition": {
+        "count": 8,
+        "class_exact": 5,
+        "proposal_exact": 2
+      },
+      "condition_modal_actor_action_object": {
+        "count": 8,
+        "class_exact": 6,
+        "proposal_exact": 4
+      },
+      "gerund_object_agent_modal_condition": {
+        "count": 8,
+        "class_exact": 8,
+        "proposal_exact": 6
+      },
+      "actor_possessive_gerund_object_modal_condition": {
+        "count": 8,
+        "class_exact": 7,
+        "proposal_exact": 0
+      },
+      "actor_condition_modal_action_object": {
+        "count": 8,
+        "class_exact": 4,
+        "proposal_exact": 3
+      }
+    },
+    "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+    "caller_attachment_learned": false,
+    "legal_gold": false,
+    "admission_masks": "all five zero"
+  },
+  "checkpoint": {
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/checkpoint-240.json",
+    "bytes": 2714198,
+    "sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f"
+  },
+  "predictions": {
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/attempt-01/results/predicted_trigger/selection-predictions-240.json",
+    "bytes": 821522,
+    "sha256": "b47a3a2dc70a023e18ca6f58c97db24802d503f706ce52cafbf909cbf038fd18"
+  }
+}

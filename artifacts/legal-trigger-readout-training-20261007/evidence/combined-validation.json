@@ -1,0 +1,29 @@
+{
+  "schema": "trigger-readout-combined-validation/v1",
+  "passed": true,
+  "counts": {
+    "tests": 93,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "threads": 2,
+  "device": "cpu",
+  "cuda_hidden": true,
+  "producer_pins": {
+    "implementation_sha256": "983b69b8e293aa6211fd8322f9ba6bfe6fa5b8cb853c2d4d0cace1e7e5046344",
+    "donor_producer": {
+      "implementation_sha256": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15",
+      "proposal_sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65",
+      "scope_sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a",
+      "torch_version": "2.13.0+cu130",
+      "tokenizer_profile": "unicode_word_or_punctuation_utf8_offsets/v1"
+    },
+    "feature_profile": "frozen_encoded_global_or_predicted_interval_coverage/v1"
+  },
+  "junit": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/combined-tests.xml",
+    "bytes": 23440,
+    "sha256": "c24d1b3684690a6e7d068cef42e0a73627d60bc596e5ce3c6b845a270899ff40"
+  }
+}
