@@ -1,0 +1,118 @@
+{
+  "completed_updates": 120,
+  "summary": {
+    "positive_count": 64,
+    "positive_exact_count": 11,
+    "positive_emitted_proposal_count": 37,
+    "positive_learned_refusal_count": 21,
+    "positive_structural_block_count": 6,
+    "negative_count": 64,
+    "negative_learned_refusal_count": 55,
+    "negative_incidental_block_count": 1,
+    "negative_emitted_proposal_count": 8,
+    "case_count": 128,
+    "source_parent_groups": 64,
+    "mixed_exact_count": 66,
+    "mixed_exact_rate": 0.515625,
+    "positive_raw_modality_exact": 23,
+    "positive_raw_facet_span_exact": {
+      "modality": 60,
+      "actor": 63,
+      "action": 54,
+      "object": 62,
+      "condition": 54
+    },
+    "positive_raw_all_spans_exact": 45,
+    "raw_head_denominator": 64,
+    "raw_head_accounting": "All supported examples including abstained/blocked outputs; missing raw fields are incorrect.",
+    "optional_presence_confusion": {
+      "object": {
+        "tp": 30,
+        "fp": 0,
+        "fn": 2,
+        "tn": 32,
+        "unavailable": 0
+      },
+      "condition": {
+        "tp": 30,
+        "fp": 7,
+        "fn": 2,
+        "tn": 25,
+        "unavailable": 0
+      }
+    },
+    "negative_categories": {
+      "second_rule": {
+        "count": 16,
+        "learned_refusal": 16,
+        "emitted": 0,
+        "incidental_block": 0
+      },
+      "modal_deletion": {
+        "count": 16,
+        "learned_refusal": 16,
+        "emitted": 0,
+        "incidental_block": 0
+      },
+      "extra_exception": {
+        "count": 16,
+        "learned_refusal": 16,
+        "emitted": 0,
+        "incidental_block": 0
+      },
+      "modal_misspelling": {
+        "count": 16,
+        "learned_refusal": 7,
+        "emitted": 8,
+        "incidental_block": 1
+      }
+    },
+    "positive_templates": {
+      "actor_modal_action_object_condition": {
+        "count": 8,
+        "exact": 2
+      },
+      "modal_actor_action_object_condition": {
+        "count": 8,
+        "exact": 3
+      },
+      "gerund_object_agent_modal_condition": {
+        "count": 8,
+        "exact": 1
+      },
+      "actor_condition_modal_action_object": {
+        "count": 8,
+        "exact": 1
+      },
+      "condition_modal_actor_action_object": {
+        "count": 8,
+        "exact": 2
+      },
+      "condition_actor_modal_action_object": {
+        "count": 8,
+        "exact": 1
+      },
+      "actor_possessive_gerund_object_modal_condition": {
+        "count": 8,
+        "exact": 1
+      },
+      "condition_actor_possessive_gerund_object_modal": {
+        "count": 8,
+        "exact": 0
+      }
+    },
+    "attachment": "Explicit caller premise, not a learned endpoint.",
+    "semantic_gold": false,
+    "proposal_admission": "all masks zero; source context and meaning remain unresolved"
+  },
+  "checkpoint": {
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel1/checkpoint-120.json",
+    "bytes": 2122373,
+    "sha256": "c803ac62a7ac7d65146b80c2c67d3ed038821355ec7df2532bf150606adab943"
+  },
+  "predictions": {
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel1/selection-predictions-120.json",
+    "bytes": 744128,
+    "sha256": "9a97f95ac1b5662f024206c16a1496097251f3281796d3aef97de8fb25a7248c"
+  }
+}

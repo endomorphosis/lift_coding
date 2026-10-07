@@ -1,0 +1,38 @@
+{
+  "schema": "independent-scope-guardian-peer-review/v1",
+  "passed": true,
+  "findings": [],
+  "guardian_sha256": "90c820be19a0b54153accca704abcd4d6655ce1b6683228c5f126047e4d4f524",
+  "guardian": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/run_scope_guardian.py",
+    "bytes": 24856,
+    "sha256": "90c820be19a0b54153accca704abcd4d6655ce1b6683228c5f126047e4d4f524"
+  },
+  "tests": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/test_scope_guardian.py",
+    "bytes": 8986,
+    "sha256": "7a14ffdda3bbdfb914e5f2e065167a90b10cc7eccd98c731f0d2263ef725c087"
+  },
+  "runner_sha256": "5cdeebfd311028295a7a80d6c7df0aca1ad556a37e83b397f9f7e4389e19ad8c",
+  "plan_sha256": "0d2d866323b72846f64b619222f146155555e80233ac7d566743e6765efed074",
+  "review_scope": "Peer audit of child custody and failure cleanup ordering; resource-owner closure/configuration and17pure guardian tests independently reviewed by guardian owner.",
+  "model_calls": 0,
+  "optimizer_steps": 0,
+  "real_child_launched": false,
+  "resource_lease_acquired": false,
+  "original_finding": "Watchdog setup or identity receipt failure before owner child registration could allow owner's context exit to consider the group absent if cleanup failed.",
+  "resolution": "A pipe-gated fresh Python leader cannot exec runner before verified PID/birth capture, cached entered-owner child custody, durable owner._update(child=identity), check_usage, identity receipt and healthy watchdog. Failure closes gate and performs group cleanup before owner context exit; live bound child remains visible to owner's lease release logic.",
+  "source_reviewed_order": [
+    "Create pipe-gated isolated leader",
+    "Capture and verify own parent/group PID and birth",
+    "Immediately populate only the fresh entered owner's cached child identity",
+    "Persist owner child identity then check usage",
+    "Write identity receipt, bind/start/verify watchdog",
+    "Release one-byte startup permit",
+    "On failure close gate and attempt cleanup before owner context exit"
+  ],
+  "failure_regression": "Guardian owner reports17pure tests passed, including watchdog setup failure plus cleanup failure retaining the live child's lease.",
+  "resolved_completion_mismatch": "Current runner writes summary.json as required.",
+  "continuous_lease_coverage_claimed": false,
+  "semantic_or_proof_authority": false
+}

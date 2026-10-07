@@ -1,0 +1,97 @@
+{
+  "cause": "Initial owner.check_usage performed the full named-root census before watchdog.start; post_spawn gap14.43s exceeded unchanged5s bound. Existing lease/config snapshot was healthy; the monitor correctly refused the late observation.",
+  "child_returncode": -2,
+  "corpus_model_runner_plan_changed_by_repair": false,
+  "created_at_utc": "2026-10-07T05:01:25.617653+00:00",
+  "failure_code": "observation_gap_exceeded",
+  "foreign_lease_or_reservation_edits_by_repair": false,
+  "guarded_model_started": false,
+  "initial_usage_census": {
+    "apparent_bytes": 94179172444,
+    "entry_count": 1360131,
+    "special_file_count": 12,
+    "symlink_count": 740
+  },
+  "initial_usage_group_rss": {
+    "available": true,
+    "live_processes": 1,
+    "rss_bytes": 11804672
+  },
+  "leader_reaped": true,
+  "live_owned_group_processes": 0,
+  "maximum_gap_seconds": 5.0,
+  "model_optimizer_updates": 0,
+  "new_child_model_or_lease_launched_by_auditor": false,
+  "numerical_results_exist": false,
+  "observation_gap_seconds": 14.430758025031537,
+  "own_cpu_lease_locally_released": true,
+  "own_failed_disk_claim_retained": true,
+  "own_reservation_id": "dc5a24634a8f4ab2bb03946fb64e6921",
+  "own_storage_bytes": 200000000,
+  "passed_failure_custody_audit": true,
+  "physical_attempt": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-01",
+  "poll_seconds": 1.0,
+  "post_spawn_observed_at_unix": 1791349068.7579596,
+  "pre_spawn_observed_at_unix": 1791349054.3272018,
+  "previous_evidence_preserved": [
+    {
+      "bytes": 7947,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-01/pre-admission.json",
+      "sha256": "591df851567757dd7614426c5b42c883627047f6d7c318968975705fb4566dbd"
+    },
+    {
+      "bytes": 4646,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-01/scheduler-adoption.json",
+      "sha256": "a8ed5e9e89498f90861a5615dce3b90ce95d2aa34d35bce2dcd72414aee7770e"
+    },
+    {
+      "bytes": 694,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-01/lease-binding.json",
+      "sha256": "c9f83c7a87c79a09449d0070b28cf9e7ee480f4c7c1f27d05b500427409b81f9"
+    },
+    {
+      "bytes": 3139,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-01/lease-observations.jsonl",
+      "sha256": "a5f159eca1793053f57d054cc935718dade81e4eaa91303dd16ae7d965af7204"
+    },
+    {
+      "bytes": 1005,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-01/command.json",
+      "sha256": "7f2b1c1436919a484054c362e8de6d863896489c6c5d0ea3699bc51086e06239"
+    },
+    {
+      "bytes": 44,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-01/child-identity.json",
+      "sha256": "d8650b2545edee0a10ab911a1dde8fe1161fd42749bc2f3abb369bb7d88182f2"
+    },
+    {
+      "bytes": 92,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-01/child.log",
+      "sha256": "6a27f08d9dd454bf9d2e48fbf5819245a91066550ec43615b95cc631163f2b2c"
+    },
+    {
+      "bytes": 3790,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-01/failure-primary.json",
+      "sha256": "8e48ba671b4141b80dd4114cc81a3cf6cafc1376d7efc2847c0e1d1ed3ef33a2"
+    },
+    {
+      "bytes": 73,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-01/child-exit.json",
+      "sha256": "6113f87e47216d66e86bc88c8144bd3eb8d2e1ce21917801e0cdd5a00ddcd41e"
+    },
+    {
+      "bytes": 3039,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-01/resources-final-failure.json",
+      "sha256": "5dd208ec00b38be5bf81f7e4a8f8406f0618bf05f86d1ab21a5d302d8590cc76"
+    },
+    {
+      "bytes": 5376,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-01/guardian-exit.json",
+      "sha256": "7300e779e158948cfc8b5fcb859150388f5cee459ed2b0224835aa4aa46e157f"
+    }
+  ],
+  "repair": "Only move initial check_usage after cached/durable child custody and watchdog.bind_child/start. Keep gated leader waiting; permit exec only after usage passes and watchdog remains healthy.",
+  "retry_requires": "Fresh attempt02 with updated guardian/test hash and independently bound training-phase review. Failed attempt01 and its disk claim remain immutable/retained.",
+  "schema": "scope-pilot-guardian-attempt-failure-audit/v1",
+  "shared_policy_or_watchdog_helper_changed": false
+}

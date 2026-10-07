@@ -1,0 +1,22 @@
+{
+  "schema": "scope-span-decoder-combined-validation/v1",
+  "counts": {
+    "tests": 231,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "new_cases": 28,
+  "test_pins": {
+    "tests/unit/logic/test_legal_scope_span_decoder.py": "6a08301f5167405e45231f94f0ab2a5a47c10d9400cb30481f61b63d5c1181f9",
+    "tests/unit/logic/test_legal_scope_span_proposal.py": "67d3a40c6374d249511cde4c033f11eb7733e684e7adac303511dab907a06a4a",
+    "tests/unit/logic/legal_ir/test_canonical_statement_scope.py": "0e2e272942c41472a4f166319c8212c25ee5901a0d86044c4937719ff80faa18",
+    "tests/unit/logic/legal_ir/test_canonical_statement_scope_bridge.py": "09623ca049a5af6a7912c67f1b74a5cbd1878e75393533d77a4bbf1765d92aea",
+    "tests/unit/logic/legal_ir/test_canonical_qualifier_training_preflight.py": "57563f10077d8f978c66b5f0554cc618d34949b32455a1a1270438693129f913",
+    "tests/unit/logic/legal_ir/test_scope_proposal_preflight_integration.py": "e0fc9a5efeea30c3422a873103863fb01eeacf93c5244931173269817a30c692"
+  },
+  "CPU_only": true,
+  "experiment_optimizer_updates": 0,
+  "unit_optimizer_fixtures_executed": true,
+  "Lake_executed": false
+}

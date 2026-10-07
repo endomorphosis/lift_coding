@@ -1,0 +1,149 @@
+{
+  "Lean_admission_claimed": false,
+  "base_commit": "c4382ae53ab9497245fccdf85855f0e314711fbc",
+  "cached_runtime_preservation": {
+    "all_eight_newer_commit_files_unchanged": true,
+    "existing_progress_text_retained": true,
+    "files": [
+      {
+        "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/docs/autoencoders/README.md",
+        "sha256": "dbb01173cd81282ff5c33087044987a54c56ed7b6f7ad6adf9ac552bd26bc95b",
+        "unchanged_in_index_and_working_tree": true
+      },
+      {
+        "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/docs/autoencoders/normative_cached_legal_ir_runtime.md",
+        "sha256": "3b556f37bd184d61e4786fa914086ca45b7531f309b2b1c531d06cbc7ee23cc9",
+        "unchanged_in_index_and_working_tree": true
+      },
+      {
+        "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/docs/autoencoders/normative_legal_ir_runtime.md",
+        "sha256": "ef1f8d57493c14acf0fe1559760cde6c2663ed347c8692f37aceee211c4e2508",
+        "unchanged_in_index_and_working_tree": true
+      },
+      {
+        "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/checkpoint_hub.py",
+        "sha256": "be1bc90729bc811c8ca0b4d3f77ef10991e29b9df17670a479b955f569f81f3d",
+        "unchanged_in_index_and_working_tree": true
+      },
+      {
+        "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py",
+        "sha256": "57032fb7b824cfc9a39a442ccffa0bd5fb64873baa48a9ab43a94e80f901b430",
+        "unchanged_in_index_and_working_tree": true
+      },
+      {
+        "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/normative_cached_legal_ir_runtime.py",
+        "sha256": "017adb2cd955f84b049bb483100be5b8b3742bac1ddc0084a9d106c9a3d3da07",
+        "unchanged_in_index_and_working_tree": true
+      },
+      {
+        "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/normative_legal_ir_runtime.py",
+        "sha256": "98058fa6479a7be9a4ab599aeffaedef2be764314056d7504a35ca5bafff87d4",
+        "unchanged_in_index_and_working_tree": true
+      },
+      {
+        "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/tests/unit/logic/formalization/autoencoder/test_normative_cached_legal_ir_runtime.py",
+        "sha256": "26a67c41cc4dbfc927ce68eacaee6913b08dbde326c110472f891354934e32a9",
+        "unchanged_in_index_and_working_tree": true
+      }
+    ]
+  },
+  "created_at_utc": "2026-10-07T05:19:12.727009+00:00",
+  "documentation_peer_review": {
+    "agent": "next_decoder_design_20261007",
+    "findings": [],
+    "passed": true,
+    "scope": "Read staged pilot documentation/progress against independently reviewed saved results and reported exact source hashes; no calls/edits."
+  },
+  "findings": [],
+  "legal_gold_claimed": false,
+  "passed": true,
+  "publication_boundary": "Review approves the source contribution and experimental-weight compatibility only. The linked experimental Hub destination/readback and normal PR/merge remain root publication work; no upload, merge, default promotion or publication verification was performed by this reviewer.",
+  "publication_risks_disclosed": [
+    "Positive whole-proposal accuracy remains weak; publication must retain experimental designation and measured denominators.",
+    "The source SHA594df... must stay byte-identical with retained weights; later implementation edits require a distinct producer/version/weight evidence.",
+    "Canonical qualifier preflight remains diagnostic and training/semantic admission false. Authored targets do not qualify reviewed legal gold."
+  ],
+  "repository": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets",
+  "reviewed_contracts": [
+    {
+      "contract": "Explicit source-only bounded inference API",
+      "evidence": "predict_scope_span_decoder accepts model, complete source_text, caller condition_attachment and required external lowercase source SHA256. Generic Unicode tokens/fixed UTF8 alphabet preserve offsets;96tokens/64bytes per token/8192chars bound without truncation. No target parameter, semantic parser import, source teacher, vector encoder, formula lowering or fallback is present."
+    },
+    {
+      "contract": "Learned outputs and authority",
+      "evidence": "Support threshold0.5, O/P/F argmax, optional presence and independent five-facet start/end argmax are the only learned outputs. Attachment is an explicit caller premise, null when condition absent. Invalid/nonfinite/overlapping/reversed predictions block; no repair infers spans. Existing proposal owner receives exact predicted spans and source digest, with all masks0 and every semantic/proof/acceptance/formalization flag false/formal output null."
+    },
+    {
+      "contract": "Absence masking",
+      "evidence": "Support BCE trains on all rows. Modality/presence train only positive rows; endpoint losses only present positive facets. Inactive heads have no loss graph and gradNone, preventing momentum or weight-decay movement on all-negative or absent-optional batches. Tests explicitly compare inactive model values and Adam moments."
+    },
+    {
+      "contract": "Finite closed checkpoint and full Adam resume",
+      "evidence": "Closed32MB JSON schema binds implementation/proposal/scope/Torch/profile/config, float32CPU model values, model mode, global step and complete encountered Adam step/first/second moments. Restore rejects shape/inventory/schema/hash/nonfinite/overflow/negative variance and invalid progress, retains absent optional moments, and requires exact resave. Shared heads count every step; required structural heads share positive-step count; optional endpoint groups carry their own consistent bounded count. No source passages or target labels are serialized."
+    },
+    {
+      "contract": "Numerical step ownership",
+      "evidence": "One actual optimizer.step per train_scope_span_step after finite loss and clipped finite gradient. Model and optimizer state finite checks precede return. Existing caller owns split/selection/counters; tests cover changed tensors, positive and negative rows, exact next-update resume and preserved initialization/restore RNG."
+    },
+    {
+      "contract": "Compatibility and opt-in contribution",
+      "evidence": "Only four additive staged files; existing source-scope/proposal/preflight owners and default registrations are untouched. All eight files introduced/changed by newer c438 cached-runtime commit match HEAD in index and working tree. Experimental custom schema does not replace8D/384D/768D/4096D lineages or native runtime selections."
+    },
+    {
+      "contract": "Documentation and observed results",
+      "evidence": "Staged doc/progress disclose5/64vs12/64 exact positives,57/64vs59/64 learned refusals, raw class25/64 gap and conditional exact1/32vs4/32. Caller attachment, five-facet/opaque-only scope, more Conv3 parameters768, identical measured initial function, shared templates, exposed final panel and absent real-law/Lake/source-semantic authority are explicit. RSS/model-phase isolated throughput remain unmeasured."
+    }
+  ],
+  "saved_initialization_evidence": {
+    "bytes": 1954,
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/matched-initialization.json",
+    "sha256": "08e933fa9167a44d875eec268b132dae46814aec16f2a552d2444fc44a9e07be"
+  },
+  "schema": "legal-scope-pilot-contribution-source-review/v1",
+  "source_semantics_verified": false,
+  "staged_files": [
+    {
+      "bytes": 16764,
+      "lines": 220,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/docs/autoencoders/progress_integration.md",
+      "staged_git_blob": "7a5140d0dcdc5ec2c3a2a79c1a519e02995caeb7",
+      "staged_sha256": "16a3a1b5caf81c05a0a6ecd661c66480d44343bb20d3649cbea5d438f1859af7",
+      "working_equals_staged": true
+    },
+    {
+      "bytes": 10132,
+      "lines": 173,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/docs/implementation/legal_scope_span_decoder_pilot_20261007.md",
+      "staged_git_blob": "2dacb5f4e4ab789303cae2f2b29176e42c649bd2",
+      "staged_sha256": "df06e4d41627052f9d42f3e7accc7abfca30593baed12bbdad84ea16fbb4ab0a",
+      "working_equals_staged": true
+    },
+    {
+      "bytes": 29545,
+      "lines": 510,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py",
+      "staged_git_blob": "1cf73eaa43c081eb2f181547a7aae725353c26d9",
+      "staged_sha256": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15",
+      "working_equals_staged": true
+    },
+    {
+      "bytes": 12978,
+      "lines": 251,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/tests/unit/logic/test_legal_scope_span_decoder.py",
+      "staged_git_blob": "401998dbf25c271a5b3086b0d3c75b50a7b67c0d",
+      "staged_sha256": "6a08301f5167405e45231f94f0ab2a5a47c10d9400cb30481f61b63d5c1181f9",
+      "working_equals_staged": true
+    }
+  ],
+  "test_validation_boundary": {
+    "additional_tests_executed_by_this_review": 0,
+    "evidence": "Read staged tests and source only; parent reports prior231-pass panel. No repeat execution requested or performed.",
+    "model_calls_by_this_review": 0,
+    "new_decoder_case_count": 28,
+    "optimizer_calls_by_this_review": 0,
+    "provided_existing_panel_passed": 231,
+    "source_edits_by_this_review": 0
+  },
+  "trained_producer_preserved": true,
+  "trained_source_sha256": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15"
+}

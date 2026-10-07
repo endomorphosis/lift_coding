@@ -1,0 +1,761 @@
+{
+  "schema": "independent-legal-scope-span-results-review/v1",
+  "phase": "posthoc_results",
+  "passed": true,
+  "findings": [],
+  "qualification": "Weak experimental alpha for authored engineering occurrence copying and outside-profile refusal; low whole-proposal accuracy. No legal gold, semantic admission, proof, default promotion or latent-conditioning qualification.",
+  "physical_results": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results",
+  "artifacts": {
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/summary.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/summary.json",
+      "bytes": 6465,
+      "sha256": "1db7c6dd117f72de9a119d55b65ceeb57ab7ec6c87962bf2034b90ed316e0a32"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/training-results.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/training-results.json",
+      "bytes": 44017,
+      "sha256": "6fadbc6a09d57e28eecd66bc7a0269a6581effc01d006819ed97c2483dcdcfe8"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/training-schedule.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/training-schedule.json",
+      "bytes": 305283,
+      "sha256": "80a08e4bcc89040989e83fa3d77103707da50a86e814d52ebff033d665562688"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/both-selected-before-final.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/both-selected-before-final.json",
+      "bytes": 35090,
+      "sha256": "9b2e320f51f3c08262715dea698586ba92981663f22429cca08fb742aef93931"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/both-final-predictions-before-references.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/both-final-predictions-before-references.json",
+      "bytes": 601,
+      "sha256": "77054b8968ea5a983712c3f17f897704263654a434b73d73fe044a4a3d913afa"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/matched-initialization.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/matched-initialization.json",
+      "bytes": 1954,
+      "sha256": "08e933fa9167a44d875eec268b132dae46814aec16f2a552d2444fc44a9e07be"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/initial-proposal-parity.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/initial-proposal-parity.json",
+      "bytes": 786,
+      "sha256": "9d57564de3411efe87e4498dd129494e545d965cddf7298c1394e5de856a69b9"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/experiment-plan.json": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/experiment-plan.json",
+      "bytes": 4303,
+      "sha256": "0d2d866323b72846f64b619222f146155555e80233ac7d566743e6765efed074"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/run_scope_experiment.py": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/run_scope_experiment.py",
+      "bytes": 17892,
+      "sha256": "5cdeebfd311028295a7a80d6c7df0aca1ad556a37e83b397f9f7e4389e19ad8c"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/corpus-protocol.json": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/corpus-protocol.json",
+      "bytes": 5928,
+      "sha256": "3c3b194f9720fe1c1d624f6d9a9098b53898d69846f6a036ed805755d1b18acb"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/corpus-manifest.json": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/corpus-manifest.json",
+      "bytes": 7771,
+      "sha256": "5c87b0ef62c3fa7846f2000ae99caa3438c85c2cf1e80809380cf97e600d2f32"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py",
+      "bytes": 29545,
+      "sha256": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py",
+      "bytes": 7804,
+      "sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py",
+      "bytes": 29993,
+      "sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/guardian-exit.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/guardian-exit.json",
+      "bytes": 357,
+      "sha256": "1fb9268cc1c9be6c9eaec390898d186882d492f3546074ff91225175e3638e95"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/owned-group-final.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/owned-group-final.json",
+      "bytes": 190,
+      "sha256": "e7c9d20400a755c7a155943e793b81b25df551a9767ca67ed7a3e8910ee08e63"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/resources-final.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/resources-final.json",
+      "bytes": 5895,
+      "sha256": "720ef53d131c57baf9dbfaffd0314125dd6f7798aec7d72331ba814314d36298"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/train-inputs.json": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/train-inputs.json",
+      "bytes": 489421,
+      "sha256": "0df9ab64e794f606a3d9ab87002c78bc49e58bdc24969bf3bc62a7fabb44b3bc"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/selection-inputs.json": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/selection-inputs.json",
+      "bytes": 61364,
+      "sha256": "48f891f5ada515e7b1511e6395c107ee8c7ecfcede3618da417376383eca1518"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-inputs.json": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-inputs.json",
+      "bytes": 61725,
+      "sha256": "1af9757054e2ae6344dcbd2e3834c21808cbe998e79ace9b9ff34383d3020b55"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/train-references.json": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/train-references.json",
+      "bytes": 1090392,
+      "sha256": "63140b0b8daae2260f911dde653e604d1fb758416cf3721da3b81cf4c53c6789"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/selection-references.json": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/selection-references.json",
+      "bytes": 136304,
+      "sha256": "ea5762e4c35ba452c60286ee01b4ec21df7a12e0a6c6f50780bfb1822a6dcddd"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-references.json": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-references.json",
+      "bytes": 136311,
+      "sha256": "9ff98c26fd03fc695b76b46de63b621a02765e981e43eca867cf01f51104abc9"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel1/checkpoint-0.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel1/checkpoint-0.json",
+      "bytes": 643523,
+      "sha256": "933a07a1cd2c4c0fb8bf79bd1b8daad0a33f808dd87ae8cf17a650016a4657eb"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel1/selection-predictions-0.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel1/selection-predictions-0.json",
+      "bytes": 211936,
+      "sha256": "00e81cafc8f9d3cdb86e17069c3c4adff09535fef6c909d35695d0b6c8613dc5"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel1/checkpoint-120.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel1/checkpoint-120.json",
+      "bytes": 2122373,
+      "sha256": "c803ac62a7ac7d65146b80c2c67d3ed038821355ec7df2532bf150606adab943"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel1/selection-predictions-120.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel1/selection-predictions-120.json",
+      "bytes": 744128,
+      "sha256": "9a97f95ac1b5662f024206c16a1496097251f3281796d3aef97de8fb25a7248c"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel1/checkpoint-240.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel1/checkpoint-240.json",
+      "bytes": 2125302,
+      "sha256": "b17d642e58e93cd4ca60f8172c218bdbd6912c8486e552dd0b09e2ee56490c0f"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel1/selection-predictions-240.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel1/selection-predictions-240.json",
+      "bytes": 1028625,
+      "sha256": "56292a1b8f70c2585bb27c14ee6528c95c2511576847468e0c0ea12713ac1e6a"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel1/losses.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel1/losses.json",
+      "bytes": 122238,
+      "sha256": "d5b0b32168431bd7e2f701078dcb795459a8ef7f988334489371b63e6e0753e9"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel1/selected.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel1/selected.json",
+      "bytes": 3377,
+      "sha256": "2d42843d0d4295b5ab59eacbd68e12d31667a820b3caddca5f1a2e78b2e78e29"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel1/final-predictions.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel1/final-predictions.json",
+      "bytes": 680363,
+      "sha256": "e1c4cbd13360ea6c808701309fcd731c1c59e4260e24d61b5789df81ed93aa92"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/checkpoint-0.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/checkpoint-0.json",
+      "bytes": 653507,
+      "sha256": "5c68085c39cb71104ec3b21b384bdb5920e2eb8a4c8364ddf438670dfb534609"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/selection-predictions-0.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/selection-predictions-0.json",
+      "bytes": 211936,
+      "sha256": "00e81cafc8f9d3cdb86e17069c3c4adff09535fef6c909d35695d0b6c8613dc5"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/checkpoint-120.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/checkpoint-120.json",
+      "bytes": 2200298,
+      "sha256": "05a214ce938d94af46844109571f0f83057caf0f7c75aedebc15161a69a28b3b"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/selection-predictions-120.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/selection-predictions-120.json",
+      "bytes": 985367,
+      "sha256": "4145b8c87f673a7f1dbec1d0345c2e348b6be02854f88ebcd72d5f05f7ec7990"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/checkpoint-240.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/checkpoint-240.json",
+      "bytes": 2202556,
+      "sha256": "9809ec3fd092536f8c4effb74d8a401dc5db9ff9a031952a1e3f92f9c7292c6e"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/selection-predictions-240.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/selection-predictions-240.json",
+      "bytes": 905494,
+      "sha256": "ded35ee8dbac28340371419564d07d8c1f4f218fb61cf543f05d45435822b139"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/losses.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/losses.json",
+      "bytes": 122468,
+      "sha256": "9e16777a36dac717f77675f61a44e6fda81e66e0804b286ff8fb5e181ef18ab4"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/selected.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/selected.json",
+      "bytes": 3378,
+      "sha256": "d6597a67a8b832eb474f1b0ef948aeead6bfdb1fe4793b64f5ceadf7ef27710d"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/final-predictions.json": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/bytekernel3/final-predictions.json",
+      "bytes": 745713,
+      "sha256": "1dd7d06d3acb79baf716dc7f7c73a612d4ca2c39fc7d973123223848a359b6ad"
+    }
+  },
+  "experiment": {
+    "actual_optimizer_updates": 480,
+    "row_presentations": 7680,
+    "updates_per_arm": 240,
+    "row_presentations_per_arm": 3840,
+    "positive_presentations_per_arm": 1920,
+    "negative_presentations_per_arm": 1920,
+    "seed": 24602,
+    "support_threshold": 0.5,
+    "device": "cpu",
+    "threads": 2,
+    "selected_steps": {
+      "bytekernel1": 120,
+      "bytekernel3": 240
+    },
+    "checkpoint_parameter_counts": {
+      "bytekernel1": 21562,
+      "bytekernel3": 22330
+    },
+    "extra_kernel3_parameters": 768,
+    "worker_seconds": 12.584246332000475,
+    "guardian_seconds": 57.81385800300632
+  },
+  "checks": {
+    "all_selection_and_final_outputs_recomputed": true,
+    "selection_panels_recomputed": 6,
+    "final_panels_recomputed": 2,
+    "selection": "Both selected snapshots equal the maximum predeclared tuple (mixed exact, fewer negative emissions, positive exact, earlier step); pointwise120 and ordered240. Both arms nevertheless completed240 updates.",
+    "complete_accounting": "Each final panel contains128attempts:64supported,64unsupported,64paired source-parent groups, four16-case negative categories. Blocked/refused raw predictions remain in64-row scalar/span denominators.",
+    "schedule": "Actual240×16 shared schedule matches its canonical pin and uses8positive+8negative rows each update; full loss traces contain all240 updates per arm with finite losses and gradients.",
+    "initialization": "All common step0 model tensors match exactly; Conv3 centers equal Conv1 tensors and both outer positions are exactly0. Recorded initial first16 logit differences are all0 and16/16status/wire/proposal/blocker parity passes.",
+    "checkpoints": "All six step0/120/240 JSON checkpoints have matching file hashes/internal seals, finite CPUfloat32 tensor inventories and shapes, correct producer/config/optimizer settings and nonnegative Adam variance. Every Adam scalar step matches the actual schedule, including optional endpoint counters.",
+    "checkpoint_restore_scope": "The reviewed runner strictly restored both selected model/full Adam states and asserted exact resave before final inference. This reviewer independently checked saved tensors and progress without constructing or rerunning a model.",
+    "final_reference_barrier": "Pinned selections/checkpoints and both-selected-before-final precede final predictions; both-final-predictions-before-references precedes scoring. File modification order agrees with the reviewed fsynced runner source. This is reproducibility/control-flow evidence, not a cryptographic log of every OS read.",
+    "emitted_proposals": "All85final emitted proposals (pointwise40, ordered45, including unsupported emissions) revalidate byte-exactly through the unchanged source-occurrence owner; all masks remain0 and formal outputs remainnull.",
+    "guarded_completion": "Guardian child return0, reaped leader, no live owned group, durable artifact assertion and owned resource release verified.",
+    "source_pin": "Published source candidate remains594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15; no current source change or additional optimizer step by reviewer."
+  },
+  "final_metrics": {
+    "bytekernel1": {
+      "positive_count": 64,
+      "positive_exact_count": 5,
+      "positive_emitted_proposal_count": 35,
+      "positive_learned_refusal_count": 20,
+      "positive_structural_block_count": 9,
+      "negative_count": 64,
+      "negative_learned_refusal_count": 57,
+      "negative_incidental_block_count": 2,
+      "negative_emitted_proposal_count": 5,
+      "case_count": 128,
+      "source_parent_groups": 64,
+      "mixed_exact_count": 62,
+      "mixed_exact_rate": 0.484375,
+      "positive_raw_modality_exact": 22,
+      "positive_raw_facet_span_exact": {
+        "modality": 59,
+        "actor": 63,
+        "action": 48,
+        "object": 56,
+        "condition": 52
+      },
+      "positive_raw_all_spans_exact": 35,
+      "raw_head_denominator": 64,
+      "raw_head_accounting": "All supported examples including abstained/blocked outputs; missing raw fields are incorrect.",
+      "optional_presence_confusion": {
+        "object": {
+          "tp": 29,
+          "fp": 4,
+          "fn": 3,
+          "tn": 28,
+          "unavailable": 0
+        },
+        "condition": {
+          "tp": 26,
+          "fp": 5,
+          "fn": 6,
+          "tn": 27,
+          "unavailable": 0
+        }
+      },
+      "negative_categories": {
+        "modal_deletion": {
+          "count": 16,
+          "learned_refusal": 16,
+          "emitted": 0,
+          "incidental_block": 0
+        },
+        "modal_misspelling": {
+          "count": 16,
+          "learned_refusal": 9,
+          "emitted": 5,
+          "incidental_block": 2
+        },
+        "extra_exception": {
+          "count": 16,
+          "learned_refusal": 16,
+          "emitted": 0,
+          "incidental_block": 0
+        },
+        "second_rule": {
+          "count": 16,
+          "learned_refusal": 16,
+          "emitted": 0,
+          "incidental_block": 0
+        }
+      },
+      "positive_templates": {
+        "condition_actor_possessive_gerund_object_modal": {
+          "count": 8,
+          "exact": 0
+        },
+        "condition_actor_modal_action_object": {
+          "count": 8,
+          "exact": 1
+        },
+        "modal_actor_action_object_condition": {
+          "count": 8,
+          "exact": 0
+        },
+        "actor_modal_action_object_condition": {
+          "count": 8,
+          "exact": 0
+        },
+        "condition_modal_actor_action_object": {
+          "count": 8,
+          "exact": 1
+        },
+        "gerund_object_agent_modal_condition": {
+          "count": 8,
+          "exact": 2
+        },
+        "actor_possessive_gerund_object_modal_condition": {
+          "count": 8,
+          "exact": 0
+        },
+        "actor_condition_modal_action_object": {
+          "count": 8,
+          "exact": 1
+        }
+      },
+      "attachment": "Explicit caller premise, not a learned endpoint.",
+      "semantic_gold": false,
+      "proposal_admission": "all masks zero; source context and meaning remain unresolved"
+    },
+    "bytekernel3": {
+      "positive_count": 64,
+      "positive_exact_count": 12,
+      "positive_emitted_proposal_count": 41,
+      "positive_learned_refusal_count": 18,
+      "positive_structural_block_count": 5,
+      "negative_count": 64,
+      "negative_learned_refusal_count": 59,
+      "negative_incidental_block_count": 1,
+      "negative_emitted_proposal_count": 4,
+      "case_count": 128,
+      "source_parent_groups": 64,
+      "mixed_exact_count": 71,
+      "mixed_exact_rate": 0.5546875,
+      "positive_raw_modality_exact": 25,
+      "positive_raw_facet_span_exact": {
+        "modality": 64,
+        "actor": 64,
+        "action": 50,
+        "object": 61,
+        "condition": 61
+      },
+      "positive_raw_all_spans_exact": 47,
+      "raw_head_denominator": 64,
+      "raw_head_accounting": "All supported examples including abstained/blocked outputs; missing raw fields are incorrect.",
+      "optional_presence_confusion": {
+        "object": {
+          "tp": 29,
+          "fp": 0,
+          "fn": 3,
+          "tn": 32,
+          "unavailable": 0
+        },
+        "condition": {
+          "tp": 30,
+          "fp": 0,
+          "fn": 2,
+          "tn": 32,
+          "unavailable": 0
+        }
+      },
+      "negative_categories": {
+        "modal_deletion": {
+          "count": 16,
+          "learned_refusal": 16,
+          "emitted": 0,
+          "incidental_block": 0
+        },
+        "modal_misspelling": {
+          "count": 16,
+          "learned_refusal": 11,
+          "emitted": 4,
+          "incidental_block": 1
+        },
+        "extra_exception": {
+          "count": 16,
+          "learned_refusal": 16,
+          "emitted": 0,
+          "incidental_block": 0
+        },
+        "second_rule": {
+          "count": 16,
+          "learned_refusal": 16,
+          "emitted": 0,
+          "incidental_block": 0
+        }
+      },
+      "positive_templates": {
+        "condition_actor_possessive_gerund_object_modal": {
+          "count": 8,
+          "exact": 3
+        },
+        "condition_actor_modal_action_object": {
+          "count": 8,
+          "exact": 2
+        },
+        "modal_actor_action_object_condition": {
+          "count": 8,
+          "exact": 0
+        },
+        "actor_modal_action_object_condition": {
+          "count": 8,
+          "exact": 1
+        },
+        "condition_modal_actor_action_object": {
+          "count": 8,
+          "exact": 2
+        },
+        "gerund_object_agent_modal_condition": {
+          "count": 8,
+          "exact": 0
+        },
+        "actor_possessive_gerund_object_modal_condition": {
+          "count": 8,
+          "exact": 1
+        },
+        "actor_condition_modal_action_object": {
+          "count": 8,
+          "exact": 3
+        }
+      },
+      "attachment": "Explicit caller premise, not a learned endpoint.",
+      "semantic_gold": false,
+      "proposal_admission": "all masks zero; source context and meaning remain unresolved"
+    }
+  },
+  "selection_metrics": {
+    "bytekernel1": [
+      {
+        "step": 0,
+        "mixed_exact": 0,
+        "positive_exact": 0,
+        "learned_refusal": 0,
+        "negative_emissions": 0
+      },
+      {
+        "step": 120,
+        "mixed_exact": 66,
+        "positive_exact": 11,
+        "learned_refusal": 55,
+        "negative_emissions": 8
+      },
+      {
+        "step": 240,
+        "mixed_exact": 66,
+        "positive_exact": 16,
+        "learned_refusal": 50,
+        "negative_emissions": 12
+      }
+    ],
+    "bytekernel3": [
+      {
+        "step": 0,
+        "mixed_exact": 0,
+        "positive_exact": 0,
+        "learned_refusal": 0,
+        "negative_emissions": 0
+      },
+      {
+        "step": 120,
+        "mixed_exact": 64,
+        "positive_exact": 13,
+        "learned_refusal": 51,
+        "negative_emissions": 13
+      },
+      {
+        "step": 240,
+        "mixed_exact": 71,
+        "positive_exact": 17,
+        "learned_refusal": 54,
+        "negative_emissions": 8
+      }
+    ]
+  },
+  "checkpoint_inventory": {
+    "bytekernel1": [
+      {
+        "stage": 0,
+        "checkpoint_sha256": "933a07a1cd2c4c0fb8bf79bd1b8daad0a33f808dd87ae8cf17a650016a4657eb",
+        "bytes": 643523,
+        "parameter_count": 21562
+      },
+      {
+        "stage": 120,
+        "checkpoint_sha256": "c803ac62a7ac7d65146b80c2c67d3ed038821355ec7df2532bf150606adab943",
+        "bytes": 2122373,
+        "parameter_count": 21562
+      },
+      {
+        "stage": 240,
+        "checkpoint_sha256": "b17d642e58e93cd4ca60f8172c218bdbd6912c8486e552dd0b09e2ee56490c0f",
+        "bytes": 2125302,
+        "parameter_count": 21562
+      }
+    ],
+    "bytekernel3": [
+      {
+        "stage": 0,
+        "checkpoint_sha256": "5c68085c39cb71104ec3b21b384bdb5920e2eb8a4c8364ddf438670dfb534609",
+        "bytes": 653507,
+        "parameter_count": 22330
+      },
+      {
+        "stage": 120,
+        "checkpoint_sha256": "05a214ce938d94af46844109571f0f83057caf0f7c75aedebc15161a69a28b3b",
+        "bytes": 2200298,
+        "parameter_count": 22330
+      },
+      {
+        "stage": 240,
+        "checkpoint_sha256": "9809ec3fd092536f8c4effb74d8a401dc5db9ff9a031952a1e3f92f9c7292c6e",
+        "bytes": 2202556,
+        "parameter_count": 22330
+      }
+    ]
+  },
+  "posthoc_diagnostics": {
+    "bytekernel1": {
+      "class_confusion": {
+        "O": {
+          "O": 5,
+          "P": 5,
+          "F": 11
+        },
+        "P": {
+          "O": 4,
+          "P": 2,
+          "F": 16
+        },
+        "F": {
+          "O": 2,
+          "P": 4,
+          "F": 15
+        }
+      },
+      "all_spans_exact_but_class_wrong": 25,
+      "class_and_all_spans_exact": 10,
+      "class_and_all_spans_exact_but_not_emitted": 5,
+      "raw_facet_presence_strata": {
+        "object": {
+          "nonnull_correct": 28,
+          "nonnull_total": 32,
+          "null_correct": 28,
+          "null_total": 32
+        },
+        "condition": {
+          "nonnull_correct": 25,
+          "nonnull_total": 32,
+          "null_correct": 27,
+          "null_total": 32
+        }
+      },
+      "whole_exact_with_nonempty_condition": 1,
+      "emitted_valid_proposals": 40
+    },
+    "bytekernel3": {
+      "class_confusion": {
+        "O": {
+          "O": 7,
+          "P": 0,
+          "F": 14
+        },
+        "P": {
+          "O": 5,
+          "P": 0,
+          "F": 17
+        },
+        "F": {
+          "O": 3,
+          "P": 0,
+          "F": 18
+        }
+      },
+      "all_spans_exact_but_class_wrong": 30,
+      "class_and_all_spans_exact": 17,
+      "class_and_all_spans_exact_but_not_emitted": 5,
+      "raw_facet_presence_strata": {
+        "object": {
+          "nonnull_correct": 29,
+          "nonnull_total": 32,
+          "null_correct": 32,
+          "null_total": 32
+        },
+        "condition": {
+          "nonnull_correct": 29,
+          "nonnull_total": 32,
+          "null_correct": 32,
+          "null_total": 32
+        }
+      },
+      "whole_exact_with_nonempty_condition": 4,
+      "emitted_valid_proposals": 45
+    }
+  },
+  "training_loss_diagnostics": {
+    "bytekernel1": {
+      "first20_mean": {
+        "loss": 14.989737272262573,
+        "support_loss": 0.69345463514328,
+        "modality_loss": 1.1164309203624725,
+        "presence_loss": 0.706529688835144,
+        "modality_span_loss": 2.4684903502464293,
+        "actor_span_loss": 2.442748713493347,
+        "action_span_loss": 2.4944289922714233,
+        "object_span_loss": 2.519939589500427,
+        "condition_span_loss": 2.5477142333984375
+      },
+      "last20_mean": {
+        "loss": 1.6413117587566375,
+        "support_loss": 0.4379460483789444,
+        "modality_loss": 1.1095258235931396,
+        "presence_loss": 0.024703036434948443,
+        "modality_span_loss": 0.025521921552717687,
+        "actor_span_loss": 0.010360647994093596,
+        "action_span_loss": 0.014328543422743678,
+        "object_span_loss": 0.00933610264910385,
+        "condition_span_loss": 0.009589637152384967
+      }
+    },
+    "bytekernel3": {
+      "first20_mean": {
+        "loss": 14.892082786560058,
+        "support_loss": 0.6934369415044784,
+        "modality_loss": 1.1168853163719177,
+        "presence_loss": 0.7066428512334824,
+        "modality_span_loss": 2.44639368057251,
+        "actor_span_loss": 2.419967269897461,
+        "action_span_loss": 2.473239982128143,
+        "object_span_loss": 2.5037813067436216,
+        "condition_span_loss": 2.5317354440689086
+      },
+      "last20_mean": {
+        "loss": 1.5411905109882356,
+        "support_loss": 0.3418915405869484,
+        "modality_loss": 1.121968299150467,
+        "presence_loss": 0.018812007503584027,
+        "modality_span_loss": 0.022970780543982983,
+        "actor_span_loss": 0.008562174113467335,
+        "action_span_loss": 0.01163410630542785,
+        "object_span_loss": 0.0075939549249596896,
+        "condition_span_loss": 0.007757673971354961
+      }
+    }
+  },
+  "interpretation": {
+    "observed_comparison": "Pointwise5/64exact positives versus ordered12/64; learned negative refusals57/64versus59/64; unsupported emissions5versus4, all in modal_misspelling. This one-seed matched recipe improves these counts but remains weak.",
+    "endpoints_and_class_distinct": "Ordered modality occurrence and actor spans are64/64, action50/64, object61/64andcondition61/64; all five spans47/64. O/P/Fclass is25/64. Field span accuracy includes null cases; nonempty object and condition spans are29/32each.",
+    "permission_failure": "Ordered class readout predicts no P on any of64positive final cases; gold P22/22are misclassified. Confusion table is retained in posthoc_diagnostics.",
+    "bottleneck_count": "Among47ordered all-span-exact positives,30havewrongclass.17havecorrectclassandallspans;5are not emitted, leaving12whole-exact proposals. Class failures and positive false refusals are separate measured limitations.",
+    "qualifier_output_count": "Whole-exact emitted positives with nonempty conditions are1/32forpointwise and4/32forordered. Raw condition endpoints29/32do not mean29valid whole qualified outputs or reviewed legal rules.",
+    "loss_evidence": "Ordered last20TRAIN updates have mean class CE1.121968 near log(3)=1.098612, while modality-span CE0.022971 and other span CEs0.007594–0.011634. Total mean loss drops14.892083to1.541191 while class CE stays near1.12. The current recipe does not demonstrate class convergence.",
+    "causal_limit": "The modality class uses a projection of globally mean-pooled contextual token states; pointer heads use token-specific states. The data support testing a local predicted-trigger readout. They do not prove global pooling caused the failure or that a replacement repairs it.",
+    "comparison_limits": "Same seed, common initial function, source task, schedule, optimizer/update/selection budgets; kernel3has768extra parameters and selected endpoints have120versus240updates. Shared templates/lexemes and paired parents preclude treating all128cases as independent legal evidence.",
+    "exposure": "Selection and final panels are now exposed diagnostics/retention. Do not tune the present checkpoints or advertise the same final as fresh."
+  },
+  "future_matched_control": {
+    "status": "Precise proposed experiment only; no implementation or fitting executed.",
+    "question": "Does predicted-trigger token evidence improve O/P/Fclass learning compared with global pooled evidence under the same residual-class readout, while preserving occurrence/support behavior?",
+    "parent": {
+      "arm": "bytekernel3",
+      "steps": 240,
+      "checkpoint_sha256": "9809ec3fd092536f8c4effb74d8a401dc5db9ff9a031952a1e3f92f9c7292c6e",
+      "source_sha256": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15"
+    },
+    "ownership": "New private/versioned readout and checkpoint schema; preserve the immutable v1 module, tensors, full Adam donor and default registry. Keep source-only inputs and existing zero-admission proposal owner.",
+    "frozen": "Freeze the entire donor byte/token encoder, support gate, presence and all pointer heads plus original class logits. Add only a class-logit residual module in both arms. This isolates readout evidence and keeps gate/endpoint decisions paired.",
+    "arms": {
+      "global": "Residual readout consumes mean-pooled donor token states.",
+      "predicted_trigger": "The same-shaped residual readout consumes donor token states weighted by source-predicted modality-start/end distributions. Use token weight P(S<=t)*P(E>=t), normalize over real tokens; no target/reference span, parser, keyword list, nearest-anchor or repair."
+    },
+    "initialization": "Both residuals have identical names/shapes/seeded hidden weights and zero final O/P/Fprojection, giving exact initial parent logits, wire, proposal and refusal parity on the same sealed inputs. Parameter counts are identical. Parent Adam is retained as provenance; both new adapters start identical fresh Adam, with no parent-moment-continuation claim.",
+    "objective": "Same supported-row3-class CE only, every O/P/Fstratum included. Unsupported rows carry no class labels. Log actual gradient/moment progress; negative-only batches leave adapter states idle. Parent support/presence/endpoints never receive updates.",
+    "data": "Seal new512supported+512unsupported TRAIN and new64+64selection/final rows, source-parent and facet-lexeme groups disjoint from this exposed study and between splits. Balance modal class/alias, eight declared templates, object/condition cells and repeated/Unicode occurrence cases. Keep paired derivatives and caller premise variants together. This remains authored engineering supervision, with no new legal-review claim.",
+    "budget": {
+      "proposed_seed": 24603,
+      "updates_per_arm": 240,
+      "batch_size": 16,
+      "positive_rows_per_batch": 8,
+      "negative_rows_per_batch": 8,
+      "learning_rate": 0.003,
+      "weight_decay": 0,
+      "gradient_clip": 5,
+      "snapshots": [
+        0,
+        120,
+        240
+      ],
+      "support_threshold": 0.5,
+      "cpu_threads": 2,
+      "row_presentations_per_arm": 3840
+    },
+    "selection": "Predeclare raw class exactness on all64supported selection rows as primary, emitted whole-proposal exactness next and earlier step last. Require frozen endpoint/support/presence parity between arms on each source; retain all failures. No threshold retuning.",
+    "final": "Seal both adapter selections before final labels; collect both actual source-only prediction panels durably before scoring. Score fresh final once, with old exposed panels as named retention only.",
+    "metrics": [
+      "O/P/Fclass confusion and actual full-wire exactness",
+      "raw class CE on complete TRAIN/selection rows",
+      "all five endpoint and optional presence denominators",
+      "learned refusal/incidental block/unsupported emission unchanged-control accounting",
+      "whole-exact nonempty-condition outputs",
+      "caller attachment origin and zero masks",
+      "all parent clusters and actual budgets"
+    ],
+    "success": "Higher fresh raw class and emitted exact counts under frozen field/gate parity; separately report residual permission errors and false refusals. One bounded fit does not establish legal accuracy or global convergence."
+  },
+  "reviewer_actions": {
+    "neural_model_calls": 0,
+    "encoder_calls": 0,
+    "new_optimizer_steps": 0,
+    "prover_calls": 0,
+    "source_edits": 0,
+    "default_changes": 0,
+    "remote_writes": 0
+  },
+  "legal_flags": {
+    "independently_reviewed_legal_gold": false,
+    "source_semantics_verified": false,
+    "qualified": false,
+    "admitted": false,
+    "proof_authority": false,
+    "Lake_executed": false,
+    "latent_conditioned": false
+  }
+}

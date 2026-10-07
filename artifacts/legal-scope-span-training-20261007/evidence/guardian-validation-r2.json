@@ -1,0 +1,45 @@
+{
+  "artifacts": {
+    "guardian-compatibility-check.json": {
+      "bytes": 6795,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/guardian-compatibility-check.json",
+      "sha256": "6299c2fcc22bcdbd9aa7f678526a97f56f51a27e5697786d2d2827ed5bdf74e7"
+    },
+    "run_scope_guardian.py": {
+      "bytes": 24856,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/run_scope_guardian.py",
+      "sha256": "90c820be19a0b54153accca704abcd4d6655ce1b6683228c5f126047e4d4f524"
+    },
+    "test_scope_guardian.py": {
+      "bytes": 8986,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/test_scope_guardian.py",
+      "sha256": "7a14ffdda3bbdfb914e5f2e065167a90b10cc7eccd98c731f0d2263ef725c087"
+    }
+  },
+  "compatibility_check": {
+    "passed": true,
+    "reservation_acquired": false,
+    "scheduler_client_constructed": false,
+    "shared_state_modified": false,
+    "training_calls": 0
+  },
+  "created_at_utc": "2026-10-07T04:52:52.949018+00:00",
+  "custody_hardening": "Gated Python leader cannot exec model before verified PID/birth is cached and durably bound to its entered owner, usage is registered, and lease watchdog is healthy. On setup and cleanup failure, live-child lease remains retained.",
+  "numerical_training_started": false,
+  "physical_run_root": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01",
+  "resource_limits": {
+    "child_deadline_seconds": 300,
+    "child_process_slots": 1,
+    "cpu_slots": 2,
+    "memory_mb": 1536,
+    "storage_bytes": 200000000
+  },
+  "schema": "legal-scope-guardian-validation/v2",
+  "self_review_is_independent_readiness": false,
+  "status": "passed_focused_checks",
+  "tests": {
+    "failures": 0,
+    "passed": 17,
+    "scope": "Pure review/JSON/PID ownership/refusal tests plus mocked admission and watchdog+cleanup failure; no real leases or child/model launches."
+  }
+}

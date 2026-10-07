@@ -1,0 +1,1172 @@
+{
+  "schema": "legal-next-decoder-design-audit/v1",
+  "status": "implemented_additive_interface_for_root_owned_bounded_experiment",
+  "scope": {
+    "canonical_repositories_read_only": true,
+    "owned_new_source_files_only": true,
+    "experiment_fit_executed_by_this_agent": false,
+    "unit_optimizer_step_checks_executed": true,
+    "remote_writes": false,
+    "checkpoint_promotion": false,
+    "legal_accuracy_claimed": false
+  },
+  "references": {
+    "datasets_main": "47d492c697f3e766d107ae9c02d8b8dcd18660b2",
+    "workspace_main": "b7e3550da23c94fe17b591654093c5c0f84ded0c",
+    "canonical_heads_observed": {
+      "workspace": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+      "datasets": "d5238def256d1c352793ee7d977e6b17b6d8cbee"
+    },
+    "isolated_datasets": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets",
+    "existing_owners": [
+      {
+        "repo": "ipfs_datasets",
+        "revision": "47d492c697f3e766d107ae9c02d8b8dcd18660b2",
+        "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py",
+        "git_blob": "b34ca1d3406645e8edf58b651dff3049e583741f",
+        "sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8",
+        "bytes": 33948,
+        "local_exists": true,
+        "local_matches_revision": true,
+        "symbols": [
+          {
+            "name": "def _require",
+            "line": 37
+          },
+          {
+            "name": "def _producer_pins",
+            "line": 42
+          },
+          {
+            "name": "def producer_pins",
+            "line": 52
+          },
+          {
+            "name": "class SpanDecoderConfig:",
+            "line": 58
+          },
+          {
+            "name": "class SourceToken:",
+            "line": 88
+          },
+          {
+            "name": "def tokenize_source",
+            "line": 94
+          },
+          {
+            "name": "def _span",
+            "line": 111
+          },
+          {
+            "name": "class GroupedSpanTarget:",
+            "line": 117
+          },
+          {
+            "name": "class GroupedSpanExample:",
+            "line": 129
+          },
+          {
+            "name": "class GroupedSpanDecoder",
+            "line": 151
+          },
+          {
+            "name": "def _encoded_sources",
+            "line": 236
+          },
+          {
+            "name": "def _labels",
+            "line": 253
+          },
+          {
+            "name": "def make_grouped_span_optimizer",
+            "line": 280
+          },
+          {
+            "name": "def _optimizer_settings",
+            "line": 290
+          },
+          {
+            "name": "def train_grouped_span_step",
+            "line": 307
+          },
+          {
+            "name": "def predict_grouped_span_decoder",
+            "line": 347
+          },
+          {
+            "name": "def _canonical",
+            "line": 425
+          },
+          {
+            "name": "def _tensor_record",
+            "line": 434
+          },
+          {
+            "name": "def _restore_tensor",
+            "line": 440
+          },
+          {
+            "name": "def _validate_optimizer_progress",
+            "line": 452
+          },
+          {
+            "name": "def save_grouped_span_checkpoint",
+            "line": 486
+          },
+          {
+            "name": "def restore_grouped_span_checkpoint",
+            "line": 514
+          }
+        ],
+        "url": "https://github.com/endomorphosis/ipfs_datasets_py/blob/47d492c697f3e766d107ae9c02d8b8dcd18660b2/ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py"
+      },
+      {
+        "repo": "ipfs_datasets",
+        "revision": "47d492c697f3e766d107ae9c02d8b8dcd18660b2",
+        "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py",
+        "git_blob": "aa1039c978b8d80667e3bde417a61954deefcd48",
+        "sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65",
+        "bytes": 7804,
+        "local_exists": false,
+        "local_matches_revision": null,
+        "symbols": [
+          {
+            "name": "def _require",
+            "line": 24
+          },
+          {
+            "name": "def _digest",
+            "line": 29
+          },
+          {
+            "name": "def propose_scope_from_spans",
+            "line": 34
+          }
+        ],
+        "url": "https://github.com/endomorphosis/ipfs_datasets_py/blob/47d492c697f3e766d107ae9c02d8b8dcd18660b2/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py"
+      },
+      {
+        "repo": "ipfs_datasets",
+        "revision": "47d492c697f3e766d107ae9c02d8b8dcd18660b2",
+        "path": "ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py",
+        "git_blob": "18783070b45c280067552f110bc48748a210e53e",
+        "sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a",
+        "bytes": 29993,
+        "local_exists": true,
+        "local_matches_revision": true,
+        "symbols": [
+          {
+            "name": "def _require",
+            "line": 41
+          },
+          {
+            "name": "def _closed",
+            "line": 46
+          },
+          {
+            "name": "def _raw",
+            "line": 50
+          },
+          {
+            "name": "def _digest",
+            "line": 80
+          },
+          {
+            "name": "def _hash",
+            "line": 84
+          },
+          {
+            "name": "def _text",
+            "line": 89
+          },
+          {
+            "name": "def _list",
+            "line": 98
+          },
+          {
+            "name": "def _input",
+            "line": 103
+          },
+          {
+            "name": "def _span",
+            "line": 121
+          },
+          {
+            "name": "def _validate",
+            "line": 132
+          },
+          {
+            "name": "def validate_scope_declaration",
+            "line": 355
+          },
+          {
+            "name": "def assess_flat_profile_compatibility",
+            "line": 372
+          }
+        ],
+        "url": "https://github.com/endomorphosis/ipfs_datasets_py/blob/47d492c697f3e766d107ae9c02d8b8dcd18660b2/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py"
+      },
+      {
+        "repo": "ipfs_datasets",
+        "revision": "47d492c697f3e766d107ae9c02d8b8dcd18660b2",
+        "path": "ipfs_datasets_py/logic/legal_ir/canonical_qualifier_training_preflight.py",
+        "git_blob": "eea80a9cb2726fccc17c6f6719649d5d56d682e1",
+        "sha256": "58ebc41a4ea1f93d3497108ebd54ea3611bc652b5d74284214b13bb74a535489",
+        "bytes": 14908,
+        "local_exists": true,
+        "local_matches_revision": true,
+        "symbols": [
+          {
+            "name": "def _raw",
+            "line": 32
+          },
+          {
+            "name": "def _digest",
+            "line": 61
+          },
+          {
+            "name": "def _context",
+            "line": 65
+          },
+          {
+            "name": "def _scope_matches",
+            "line": 73
+          },
+          {
+            "name": "def _review",
+            "line": 92
+          },
+          {
+            "name": "def preflight_qualifier_cohort",
+            "line": 112
+          }
+        ],
+        "url": "https://github.com/endomorphosis/ipfs_datasets_py/blob/47d492c697f3e766d107ae9c02d8b8dcd18660b2/ipfs_datasets_py/logic/legal_ir/canonical_qualifier_training_preflight.py"
+      },
+      {
+        "repo": "ipfs_datasets",
+        "revision": "47d492c697f3e766d107ae9c02d8b8dcd18660b2",
+        "path": "ipfs_datasets_py/logic/legal_ir/canonical_statement_scope_bridge.py",
+        "git_blob": "fcd144ab4dea928a260634e6a513945db2b53799",
+        "sha256": "7e74f5ea2230549165fd0cb0230b2b8baaa0016cc2352d5a422c70c20f5e4da8",
+        "bytes": 4214,
+        "local_exists": true,
+        "local_matches_revision": true,
+        "symbols": [
+          {
+            "name": "def _view_wire",
+            "line": 18
+          },
+          {
+            "name": "def prepare_scope_bridge_view",
+            "line": 26
+          },
+          {
+            "name": "def validate_scope_bridge_view",
+            "line": 38
+          }
+        ],
+        "url": "https://github.com/endomorphosis/ipfs_datasets_py/blob/47d492c697f3e766d107ae9c02d8b8dcd18660b2/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope_bridge.py"
+      },
+      {
+        "repo": "ipfs_datasets",
+        "revision": "47d492c697f3e766d107ae9c02d8b8dcd18660b2",
+        "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_formula.py",
+        "git_blob": "f138ffb2285f7fc607fe3296f8abe5d6b7b9121a",
+        "sha256": "60e509fc5018584d19530dd6f9b8423f163cb7baec60f5736d849995bca61185",
+        "bytes": 35294,
+        "local_exists": true,
+        "local_matches_revision": true,
+        "symbols": [
+          {
+            "name": "def _require",
+            "line": 43
+          },
+          {
+            "name": "def _raw",
+            "line": 48
+          },
+          {
+            "name": "def checkpoint_digest",
+            "line": 53
+          },
+          {
+            "name": "def _capture_implementation",
+            "line": 57
+          },
+          {
+            "name": "def _implementation",
+            "line": 70
+          },
+          {
+            "name": "def tokenize_source",
+            "line": 76
+          },
+          {
+            "name": "def _vector",
+            "line": 91
+          },
+          {
+            "name": "def _labels",
+            "line": 98
+          },
+          {
+            "name": "def audit_examples",
+            "line": 134
+          },
+          {
+            "name": "def _records",
+            "line": 149
+          },
+          {
+            "name": "def _splits",
+            "line": 168
+          },
+          {
+            "name": "def _config",
+            "line": 175
+          },
+          {
+            "name": "def _model",
+            "line": 198
+          },
+          {
+            "name": "def _batch",
+            "line": 245
+          },
+          {
+            "name": "def _loss",
+            "line": 259
+          },
+          {
+            "name": "def _pack",
+            "line": 282
+          },
+          {
+            "name": "def _tensor",
+            "line": 293
+          },
+          {
+            "name": "def build_checkpoint",
+            "line": 308
+          },
+          {
+            "name": "def _restore",
+            "line": 328
+          },
+          {
+            "name": "def validate_checkpoint",
+            "line": 380
+          },
+          {
+            "name": "def train_decoder",
+            "line": 384
+          },
+          {
+            "name": "def _display",
+            "line": 449
+          },
+          {
+            "name": "class SpanLegalFormulaDecoder:",
+            "line": 454
+          },
+          {
+            "name": "def save_checkpoint",
+            "line": 564
+          },
+          {
+            "name": "def load_checkpoint",
+            "line": 581
+          }
+        ],
+        "url": "https://github.com/endomorphosis/ipfs_datasets_py/blob/47d492c697f3e766d107ae9c02d8b8dcd18660b2/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_formula.py"
+      },
+      {
+        "repo": "ipfs_datasets",
+        "revision": "47d492c697f3e766d107ae9c02d8b8dcd18660b2",
+        "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_grounding.py",
+        "git_blob": "ef781a991198ef4955f9d316f2d7c3c6d2aea176",
+        "sha256": "1fc354f65f0d19dd4414cf44ca0793ca259802eed9061554f11c852330dcf304",
+        "bytes": 31040,
+        "local_exists": true,
+        "local_matches_revision": true,
+        "symbols": [
+          {
+            "name": "def _capture_implementation",
+            "line": 46
+          },
+          {
+            "name": "def _implementation",
+            "line": 54
+          },
+          {
+            "name": "def _source_state",
+            "line": 60
+          },
+          {
+            "name": "def _config",
+            "line": 64
+          },
+          {
+            "name": "def _model",
+            "line": 76
+          },
+          {
+            "name": "def _span_indices",
+            "line": 128
+          },
+          {
+            "name": "def _splits",
+            "line": 137
+          },
+          {
+            "name": "def _loss",
+            "line": 187
+          },
+          {
+            "name": "def _initial_state",
+            "line": 203
+          },
+          {
+            "name": "def build_checkpoint",
+            "line": 214
+          },
+          {
+            "name": "def _restore",
+            "line": 241
+          },
+          {
+            "name": "def validate_checkpoint",
+            "line": 307
+          },
+          {
+            "name": "def initial_model_digest",
+            "line": 311
+          },
+          {
+            "name": "def initial_source_model_digest",
+            "line": 316
+          },
+          {
+            "name": "def optimizer_steps",
+            "line": 321
+          },
+          {
+            "name": "def train_decoder",
+            "line": 326
+          },
+          {
+            "name": "class GroundedSpanDecoder",
+            "line": 404
+          },
+          {
+            "name": "def save_checkpoint",
+            "line": 468
+          },
+          {
+            "name": "def load_checkpoint",
+            "line": 485
+          }
+        ],
+        "url": "https://github.com/endomorphosis/ipfs_datasets_py/blob/47d492c697f3e766d107ae9c02d8b8dcd18660b2/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_grounding.py"
+      },
+      {
+        "repo": "ipfs_datasets",
+        "revision": "47d492c697f3e766d107ae9c02d8b8dcd18660b2",
+        "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_dimensions.py",
+        "git_blob": "05ec4a6e88ea7b84f3a977794cfd97bee52f726d",
+        "sha256": "5ba50db7475c23d7376c0918a02a3740783dc86996e396f532c365f544372b7d",
+        "bytes": 22521,
+        "local_exists": true,
+        "local_matches_revision": true,
+        "symbols": [
+          {
+            "name": "def _capture_implementation",
+            "line": 44
+          },
+          {
+            "name": "def _implementation",
+            "line": 52
+          },
+          {
+            "name": "def _source_state",
+            "line": 58
+          },
+          {
+            "name": "def _config",
+            "line": 63
+          },
+          {
+            "name": "def _context_contract",
+            "line": 73
+          },
+          {
+            "name": "def _initial_state",
+            "line": 89
+          },
+          {
+            "name": "def build_checkpoint",
+            "line": 102
+          },
+          {
+            "name": "def _restore",
+            "line": 138
+          },
+          {
+            "name": "def validate_checkpoint",
+            "line": 212
+          },
+          {
+            "name": "def initial_model_digest",
+            "line": 216
+          },
+          {
+            "name": "def initial_source_model_digest",
+            "line": 221
+          },
+          {
+            "name": "def optimizer_steps",
+            "line": 226
+          },
+          {
+            "name": "def train_decoder",
+            "line": 231
+          },
+          {
+            "name": "class DimensionalSpanDecoder",
+            "line": 299
+          },
+          {
+            "name": "def save_checkpoint",
+            "line": 336
+          },
+          {
+            "name": "def load_checkpoint",
+            "line": 353
+          }
+        ],
+        "url": "https://github.com/endomorphosis/ipfs_datasets_py/blob/47d492c697f3e766d107ae9c02d8b8dcd18660b2/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_dimensions.py"
+      },
+      {
+        "repo": "ipfs_datasets",
+        "revision": "47d492c697f3e766d107ae9c02d8b8dcd18660b2",
+        "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_runtime_registry.py",
+        "git_blob": "f3e844c05792b4cb8facceb0513c736be69afcf6",
+        "sha256": "33c249b72f374f51675cde95aafcf13370f59cb2e248246f72b92095668d1955",
+        "bytes": 64337,
+        "local_exists": true,
+        "local_matches_revision": true,
+        "symbols": [
+          {
+            "name": "class RuntimeVersionError",
+            "line": 34
+          },
+          {
+            "name": "def _require",
+            "line": 38
+          },
+          {
+            "name": "def _copy",
+            "line": 43
+          },
+          {
+            "name": "def _optimizer_root",
+            "line": 47
+          },
+          {
+            "name": "def _source_identity",
+            "line": 51
+          },
+          {
+            "name": "def describe_runtime",
+            "line": 59
+          },
+          {
+            "name": "def list_runtimes",
+            "line": 231
+          },
+          {
+            "name": "def _target_adapter",
+            "line": 245
+          },
+          {
+            "name": "def _source_bound_codebase_adapter",
+            "line": 257
+          },
+          {
+            "name": "def prepare_targets",
+            "line": 262
+          },
+          {
+            "name": "class _NativeAdapter:",
+            "line": 271
+          },
+          {
+            "name": "class NativeRuntime:",
+            "line": 283
+          },
+          {
+            "name": "def _codebase_targets",
+            "line": 390
+          },
+          {
+            "name": "class CodebaseFeatureRuntime:",
+            "line": 402
+          },
+          {
+            "name": "class SourceBoundCodebaseFeatureRuntime",
+            "line": 513
+          },
+          {
+            "name": "def _source_bound_codebase_targets",
+            "line": 557
+          },
+          {
+            "name": "class LegalRuntime:",
+            "line": 566
+          },
+          {
+            "name": "class LearnedFormulaRuntime:",
+            "line": 632
+          },
+          {
+            "name": "class GroupedFormulaRuntime:",
+            "line": 692
+          },
+          {
+            "name": "class NativeFormulaRuntime:",
+            "line": 759
+          },
+          {
+            "name": "def build_native_formula_runtime",
+            "line": 815
+          },
+          {
+            "name": "def open_runtime",
+            "line": 825
+          },
+          {
+            "name": "def build_native_runtime",
+            "line": 847
+          },
+          {
+            "name": "def build_codebase_feature_runtime",
+            "line": 865
+          },
+          {
+            "name": "def build_source_bound_codebase_runtime",
+            "line": 875
+          },
+          {
+            "name": "def _read_candidate",
+            "line": 887
+          },
+          {
+            "name": "def _source_bound_completed_run_metadata",
+            "line": 904
+          },
+          {
+            "name": "def load_version",
+            "line": 934
+          },
+          {
+            "name": "def _missing_head",
+            "line": 1001
+          },
+          {
+            "name": "class StreamedFormalRuntime:",
+            "line": 1009
+          },
+          {
+            "name": "def open_formal_decoder",
+            "line": 1041
+          }
+        ],
+        "url": "https://github.com/endomorphosis/ipfs_datasets_py/blob/47d492c697f3e766d107ae9c02d8b8dcd18660b2/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_runtime_registry.py"
+      },
+      {
+        "repo": "ipfs_datasets",
+        "revision": "47d492c697f3e766d107ae9c02d8b8dcd18660b2",
+        "path": "tests/unit/logic/legal_ir/test_scope_proposal_preflight_integration.py",
+        "git_blob": "42883649a7e0d791163336354413121a79ca5ae9",
+        "sha256": "e0fc9a5efeea30c3422a873103863fb01eeacf93c5244931173269817a30c692",
+        "bytes": 7621,
+        "local_exists": false,
+        "local_matches_revision": null,
+        "symbols": [
+          {
+            "name": "def fixture",
+            "line": 20
+          },
+          {
+            "name": "def transport_control",
+            "line": 50
+          },
+          {
+            "name": "def assert_no_authority",
+            "line": 58
+          },
+          {
+            "name": "def test_occurrence_transport_cannot_supply_context_or_training_authority",
+            "line": 72
+          },
+          {
+            "name": "def test_unresolved_rows_remain_counted_without_contaminating_or_shrinking_train",
+            "line": 97
+          },
+          {
+            "name": "def test_supplied_vocabulary_cannot_admit_unresolved_occurrences",
+            "line": 118
+          },
+          {
+            "name": "def test_omitting_context_cannot_rebind_existing_occurrence_declaration",
+            "line": 129
+          },
+          {
+            "name": "def test_proposal_envelope_cannot_be_used_as_a_cohort_target",
+            "line": 142
+          },
+          {
+            "name": "def test_no_seven_facet_target_is_inferred_from_valid_occurrences",
+            "line": 154
+          }
+        ],
+        "url": "https://github.com/endomorphosis/ipfs_datasets_py/blob/47d492c697f3e766d107ae9c02d8b8dcd18660b2/tests/unit/logic/legal_ir/test_scope_proposal_preflight_integration.py"
+      },
+      {
+        "repo": "ipfs_datasets",
+        "revision": "47d492c697f3e766d107ae9c02d8b8dcd18660b2",
+        "path": "docs/autoencoders/evidence/reconstruction-gap-followup-20261006/next-training-plan.json",
+        "git_blob": "cc38fd673b2334fd22595bffd02790289b184abe",
+        "sha256": "823fc9698ce1b46a32317e9b2fc41896982848d86be0a40eacde5e6184257b6b",
+        "bytes": 6154,
+        "local_exists": true,
+        "local_matches_revision": true,
+        "symbols": [],
+        "url": "https://github.com/endomorphosis/ipfs_datasets_py/blob/47d492c697f3e766d107ae9c02d8b8dcd18660b2/docs/autoencoders/evidence/reconstruction-gap-followup-20261006/next-training-plan.json"
+      }
+    ],
+    "new_implementation": [
+      {
+        "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py",
+        "relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py",
+        "sha256": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15",
+        "bytes": 29545,
+        "symbols": [
+          {
+            "name": "def _require",
+            "line": 42
+          },
+          {
+            "name": "def _producer_pins",
+            "line": 47
+          },
+          {
+            "name": "def producer_pins",
+            "line": 57
+          },
+          {
+            "name": "class ScopeSpanDecoderConfig:",
+            "line": 63
+          },
+          {
+            "name": "class SourceToken:",
+            "line": 90
+          },
+          {
+            "name": "def tokenize_source",
+            "line": 96
+          },
+          {
+            "name": "class ScopeSpanExample:",
+            "line": 112
+          },
+          {
+            "name": "class ScopeSpanDecoder",
+            "line": 124
+          },
+          {
+            "name": "def _encoded_sources",
+            "line": 188
+          },
+          {
+            "name": "def _labels",
+            "line": 203
+          },
+          {
+            "name": "def make_scope_span_optimizer",
+            "line": 227
+          },
+          {
+            "name": "def _optimizer_settings",
+            "line": 236
+          },
+          {
+            "name": "def train_scope_span_step",
+            "line": 250
+          },
+          {
+            "name": "def predict_scope_span_decoder",
+            "line": 295
+          },
+          {
+            "name": "def _canonical",
+            "line": 372
+          },
+          {
+            "name": "def _tensor_record",
+            "line": 382
+          },
+          {
+            "name": "def _restore_tensor",
+            "line": 388
+          },
+          {
+            "name": "def _progress",
+            "line": 400
+          },
+          {
+            "name": "def _profile",
+            "line": 437
+          },
+          {
+            "name": "def save_scope_span_checkpoint",
+            "line": 448
+          },
+          {
+            "name": "def restore_scope_span_checkpoint",
+            "line": 469
+          }
+        ]
+      },
+      {
+        "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/tests/unit/logic/test_legal_scope_span_decoder.py",
+        "relative_path": "tests/unit/logic/test_legal_scope_span_decoder.py",
+        "sha256": "6a08301f5167405e45231f94f0ab2a5a47c10d9400cb30481f61b63d5c1181f9",
+        "bytes": 12978,
+        "symbols": [
+          {
+            "name": "def target",
+            "line": 14
+          },
+          {
+            "name": "def example",
+            "line": 25
+          },
+          {
+            "name": "def model",
+            "line": 29
+          },
+          {
+            "name": "def predict",
+            "line": 34
+          },
+          {
+            "name": "def fake_output",
+            "line": 39
+          },
+          {
+            "name": "def seal",
+            "line": 58
+          },
+          {
+            "name": "def test_generic_unicode_bounds_cpu_and_rng",
+            "line": 65
+          },
+          {
+            "name": "def test_padding_invariance_for_short_source_in_mixed_batch",
+            "line": 81
+          },
+          {
+            "name": "def test_real_gradient_step_exact_resume_and_preserved_reload_mode_rng",
+            "line": 95
+          },
+          {
+            "name": "def test_negative_and_absent_optional_pointer_heads_have_no_gradient_or_moment_updates",
+            "line": 116
+          },
+          {
+            "name": "def test_never_seen_optional_or_all_structural_adam_states_stay_absent",
+            "line": 140
+          },
+          {
+            "name": "def test_only_predicted_occurrences_and_caller_premise_reach_existing_zero_mask_owner",
+            "line": 152
+          },
+          {
+            "name": "def test_caller_premise_and_external_digest_are_required_before_forward",
+            "line": 168
+          },
+          {
+            "name": "def test_refusal_shapes_finite_and_grammar_do_not_repair_predictions",
+            "line": 179
+          },
+          {
+            "name": "def test_train_validates_explicit_occurrences_and_rejects_structural_negatives",
+            "line": 201
+          },
+          {
+            "name": "def test_checkpoint_rejects_corruption_and_invented_progress",
+            "line": 215
+          },
+          {
+            "name": "def test_declared_zero_steps_reject_nonempty_adam_and_boolean_progress",
+            "line": 244
+          }
+        ]
+      }
+    ]
+  },
+  "prior_evidence": {
+    "grouped_boundary": {
+      "evidence": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/completion.json",
+      "hub_revision": "27667843f4a6cfda36f4763b27d08a080cad9fd3",
+      "hub_prefix": "experiments/grouped-boundary-20261006/run-01",
+      "targeted_checkpoint_sha256": "0174d11019a0a4eb894337f7f3d79a9dec7a2e11b0e406832d27312cee05daba",
+      "positive_exact": "55/64",
+      "learned_refusal": "54/64",
+      "unsupported_emissions": 7,
+      "emission_slice": "modal misspellings",
+      "qualification": "authored engineering profile, source plus explicit caller modal scope; no vector conditioning; old final now exposed"
+    },
+    "proposal": {
+      "existing_wire": "legal-scope-span-prediction/v1",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "current_adapter_trained": false,
+      "formula_emitted": false,
+      "admission_masks": "all five zero",
+      "extra_endpoints_absent_from_grouped_v2": [
+        "modality occurrence",
+        "object occurrence/presence",
+        "condition occurrence/presence"
+      ]
+    },
+    "native_wording": {
+      "auxiliary_train_formula_exact": "384D and 768D each 96/96 on original+normative TRAIN",
+      "qualifier_content": "empty",
+      "next_fit_gap": "Same complete TRAIN modality objective would principally change confidence; balanced new independently reviewed wording remains the native-vector follow-up."
+    },
+    "data_audit_message": {
+      "authenticated_new_legal_qualifier_pairs": 0,
+      "pending_review_packets": "retained 64+34 items, zero authenticated reviews/admitted legal targets",
+      "balanced_wording_bank": "artifacts/autoencoder-balanced-wording-20261007 draft-r3: 180 clauses / 48 packs / 216 strings, all 90 known TRAIN meanings and empty qualifiers; independently fixture-reviewed freeze, no genuine vectors or numerical attempt",
+      "source": "parallel data-audit agent report; root should bind its exact artifact before claiming current remote state"
+    }
+  },
+  "alternatives": [
+    {
+      "name": "positive_only_existing_grounded_span_owner",
+      "minimality": "Already learns explicit trigger and six facet spans, optional presence, exact Adam resume; grounding._splits takes explicit occurrence coordinates and supports repeated terms.",
+      "owners": [
+        "legal_span_grounding.py",
+        "legal_span_formula.py",
+        "legal_span_dimensions.py"
+      ],
+      "limitations": [
+        "No learned profile-support gate.",
+        "Current inherited decode returns flat seven-facet IR and display formula, not occurrence-only proposal.",
+        "Condition attachment is absent and cannot be reconstructed from flat output.",
+        "Requires authentic trained zero-dimensional source-parent checkpoint before build_checkpoint.",
+        "Base span formula builder searches unique target strings only during TRAIN; grounded builder instead uses explicit spans."
+      ]
+    },
+    {
+      "name": "new_additive_single_rule_head",
+      "chosen": true,
+      "reason": "Smallest complete closed occurrence-plus-refusal contract while preserving existing checkpoint-bound producers, registry, native heads and proposal admission owner."
+    }
+  ],
+  "implemented_interface": {
+    "module": "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_span_decoder",
+    "public_api": {
+      "config": "ScopeSpanDecoderConfig(seed=0,byte_kernel=3,byte_dim=8,byte_hidden=16,token_dim=32,token_hidden=32,head_hidden=64)",
+      "example": "ScopeSpanExample(source_text,supported:bool,target:dict|None=None)",
+      "model": "ScopeSpanDecoder(config=None)",
+      "optimizer": "make_scope_span_optimizer(model,learning_rate=.003,weight_decay=0.0)",
+      "train": "train_scope_span_step(model,optimizer,examples:list[ScopeSpanExample],gradient_clip=5.0)",
+      "predict": "predict_scope_span_decoder(model,source_text,condition_attachment,*,expected_source_sha256)",
+      "save": "save_scope_span_checkpoint(model,optimizer,*,steps)->dict",
+      "restore": "restore_scope_span_checkpoint(checkpoint)->(model,optimizer,steps)",
+      "identity": "producer_pins()"
+    },
+    "architecture": {
+      "device": "cpu",
+      "dtype": "float32",
+      "raw_input": "source_text only",
+      "attachment_input": "caller premise to proposal transport, never a learned class or model feature",
+      "byte_features": "UTF8 bytes plus 1, zero padding, two Conv(kernel=1|3) layers with GELU and masks after each; real-position mean/max and byte length",
+      "token_encoder": "packed bidirectional GRU",
+      "heads": [
+        "support logit",
+        "O/P/F class",
+        "object/condition presence classes",
+        "separate start/end modules for each modality/actor/action/object/condition occurrence"
+      ],
+      "no_latent_conditioning": true,
+      "no_pretrained_weight_transfer": true,
+      "comparison_limit": "Kernel1 and kernel3 have different parameter counts and seeded initialization shapes; equal source/task/update budgets do not make their capacities identical."
+    },
+    "bounds": {
+      "source_chars": 8192,
+      "tokens": 96,
+      "token_bytes": 64,
+      "batch": 64,
+      "no_truncation": true,
+      "no_context_input": true,
+      "checkpoint_bytes": 32000000
+    },
+    "target": {
+      "schema": "legal-scope-span-prediction/v1",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "O|P|F",
+      "spans": "Closed map {modality,actor,action,object,condition}, explicit half-open Unicode character pairs; nullable object and condition.",
+      "condition_attachment": "rule|statement when target condition exists, otherwise null",
+      "supported_negative_contract": "supported=false requires target=None and supplies no structural labels",
+      "validation": "Existing propose_scope_from_spans validates exact TRAIN target anchors against source and computed training-source digest; no target inference from strings or parsers."
+    },
+    "loss": {
+      "support": "BCE on all rows",
+      "modality": "CE on supported rows",
+      "presence": "CE on supported rows including absent object/condition",
+      "pointers": "Per facet mean start/end CE on supported rows where that facet exists",
+      "inactive": "No graph for structural losses on entirely negative batches; no graph for optional endpoint losses when all supported rows omit that facet. Adam moment/weight decay cannot move those inactive parameters.",
+      "weights": "Unweighted sum of support/class/presence and five per-facet span losses."
+    },
+    "prediction": {
+      "explicit_attachment_required_even_if_condition_absent": true,
+      "external_source_digest_checked_before_forward": true,
+      "threshold": 0.5,
+      "statuses": [
+        "predicted",
+        "abstained",
+        "blocked"
+      ],
+      "learned_abstention": "support probability below 0.5",
+      "grammar_blocks": [
+        "malformed shapes/dtypes/keys",
+        "nonfinite logits",
+        "reversed token endpoints",
+        "overlapping facets or invalid occurrence grammar"
+      ],
+      "decoding": "Independent source-token endpoint argmax, exact Unicode conversion; invalid argmax proposals are blocked, never trimmed/repaired/search-backed.",
+      "output": "result.prediction is the existing closed wire; result.proposal is the existing transported unreviewed envelope. Condition attachment becomes null in the wire when no condition is predicted.",
+      "authority": "No formula, parser, native lowering, proof, coverage or semantic admission. Existing proposal keeps context required_unavailable, review marker and all five masks zero.",
+      "caller_attachment_limit": "Single-rule rule-versus-statement attachment is not identifiable from the requested source profile; paired premise variants test caller transport, not learned source scope."
+    },
+    "checkpoint": {
+      "schema": "legal-scope-span-decoder-checkpoint/v1",
+      "inventory": "Closed config/profile/model_training mode, complete model tensor inventory, AdamW settings and actually present named-parameter-index states, declared steps, producer pins and canonical internal SHA256 seal.",
+      "producer_pins": [
+        "new implementation file",
+        "existing proposal file",
+        "existing canonical_statement_scope file",
+        "Torch version",
+        "tokenizer profile"
+      ],
+      "finite": "All serialized model and Adam tensors finite CPUfloat32; shape, exact parameter inventory, negative variance, invalid scalar progress, overflow and schema/producer/profile/seal mismatch reject.",
+      "progress": "Shared encoder/global/support states advance on every global step. Required structural states advance together on positive batches. Optional start/end states are absent until first use and thereafter carry their own bounded consistent update count.",
+      "resume": "Model and full Adam restored exactly; save-after-restore equals original checkpoint; next identical batch reproduces exact state and losses. RNG and saved model mode preserved.",
+      "not_serialized": [
+        "source text",
+        "training targets",
+        "prediction memory"
+      ],
+      "schema_incompatibility": "New schema cannot load as grouped-v2 or a native-vector head; no fallback or pickle."
+    }
+  },
+  "runnable_recipe": {
+    "status": "Implementation is runnable; root owns corpus sealing, exact budgets, fit and evaluation. Audit did not run the experiment.",
+    "workdir": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets",
+    "environment": {
+      "CUDA_VISIBLE_DEVICES": "",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1"
+    },
+    "fixed_root_request": {
+      "seed": 24602,
+      "byte_kernels": [
+        1,
+        3
+      ],
+      "updates_per_arm": 240,
+      "batch_size": 16,
+      "proposed_learning_rate": 0.003,
+      "weight_decay": 0,
+      "gradient_clip": 5,
+      "snapshots": [
+        0,
+        120,
+        240
+      ],
+      "support_threshold": 0.5,
+      "cpu_threads": 1
+    },
+    "call_sequence": [
+      "Build one ScopeSpanDecoderConfig per byte_kernel using the fixed seed and small defaults; record exact parameter count and initial numerical SHA per arm.",
+      "Build ScopeSpanExample objects from independently authored source-bound targets; use target=None for unsupported rows. Keep occurrence/writer/parent lineage in outer receipts.",
+      "Create fresh make_scope_span_optimizer for each newly initialized arm. Save step0 checkpoint.",
+      "Use the same sealed per-update source row schedule and supervised targets in both arms. Call train_scope_span_step exactly 240 times per arm; retain every loss/update and actual presentation count.",
+      "At 120 and 240 save_scope_span_checkpoint(...,steps=actual_updates); strict restore and resave immediately; predict only source, caller premise and externally supplied source SHA.",
+      "Seal each selected checkpoint reference before loading final target references. Finish every declared fit regardless of the selected snapshot.",
+      "Run final source-only predictions for frozen zero-step/control/candidate endpoints before separate target scoring; score each full denominator once.",
+      "Retain all predicted, learned-refused and incidental-blocked outputs; disclose caller attachment origin and no semantic admission."
+    ],
+    "python_smoke_recipe": [
+      "from ipfs_datasets_py.logic.formalization.autoencoder import legal_scope_span_decoder as d",
+      "model=d.ScopeSpanDecoder(d.ScopeSpanDecoderConfig(seed=24602,byte_kernel=3))",
+      "optimizer=d.make_scope_span_optimizer(model,learning_rate=.003,weight_decay=0)",
+      "rows=[d.ScopeSpanExample(row['source_text'],row['supported'],row.get('target')) for row in sealed_train_rows]",
+      "report=d.train_scope_span_step(model,optimizer,rows)",
+      "checkpoint=d.save_scope_span_checkpoint(model,optimizer,steps=1)",
+      "restored,resumed,steps=d.restore_scope_span_checkpoint(checkpoint)",
+      "result=d.predict_scope_span_decoder(restored,source_only_row['source_text'],source_only_row['condition_attachment'],expected_source_sha256=source_only_row['source_sha256'])"
+    ],
+    "root_runner_requirement": "Do not derive source_sha256, attachment premise or model inputs from final targets; source-only input files must carry externally sealed values. The smoke sequence assumes explicit already-sealed rows, not parser-generated labels.",
+    "minimum_corpus_balance": "O/P/F; object/condition present/absent cells; varied condition placement; repeated equal words with different occurrence coordinates; Unicode actors; absent/present caller premise variants grouped under one source parent; local modality corruption, unsupported multiple rules, nested/shared or context-dependent qualifiers as negative narrow-profile examples.",
+    "negative_meaning": "Outside the declared engineering profile, never legally false.",
+    "separation": "All prior grouped train/selection/final and official probes are exposed retention/control only. Group source parents, all premise variants and corruptions together; seal new selection/final parent groups and targets before fit.",
+    "selection": "Predeclare exact proposal/occurrence scoring and unsupported-emission priority with fixed0.5; retain every rejected row and step; use selection only, never final for tuning.",
+    "metrics": [
+      "exact closed prediction wire",
+      "required/optional occurrence endpoints and copied text",
+      "modality class and modality occurrence separately",
+      "object/condition presence and nonempty endpoint denominators",
+      "caller attachment transport, explicitly not source inference",
+      "learned refusal versus grammar block versus unsupported emission",
+      "parent-cluster and full-case denominators",
+      "model/Adam replay and actual update/presentation counts"
+    ]
+  },
+  "tests": {
+    "command": "CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m pytest tests/unit/logic/test_legal_scope_span_decoder.py -q",
+    "result": "28 passed, 0 failed, 0 skipped",
+    "elapsed_seconds": 1.63,
+    "covered": [
+      "CPUfloat32 and Unicode/bounds",
+      "constructor RNG preservation",
+      "both kernel profiles and padding invariance",
+      "actual gradient update and exact model/Adam next-step replay",
+      "reload mode/RNG",
+      "all-negative structural state idle",
+      "absent optional endpoints idle and never-seen state absence",
+      "caller attachment and digest checked before forward",
+      "no target-label path during inference",
+      "zero-mask existing proposal owner",
+      "support/shape/nonfinite/overlap/reversed-span refusals",
+      "explicit TRAIN anchors",
+      "checkpoint seal/schema/producer/shape/overflow/progress/variance rejection"
+    ],
+    "coverage_limit": "Unit optimizer steps validate implementation; they are not the bounded experiment or evidence of legal generalization. Integration/native and broad owner regression remain root-owned."
+  },
+  "risks": [
+    "Independent facet argmax can produce overlapping or reversed spans; those remain visible grammar blocks instead of hidden repairs.",
+    "Two local byte convolutions with mean/max pooling can collide on long strings sharing local neighborhoods; kernel3 can improve this authored task without proving arbitrary misspelling robustness.",
+    "A learned support gate estimates this finite engineering profile, not truth, legality or reviewed semantic correctness.",
+    "One opaque condition span cannot represent nested, multiple, exceptional, temporal, binder, shared multi-rule or context-dependent meaning.",
+    "Caller attachment is an explicit premise; its correctness must not enter learned source-scope accuracy denominators.",
+    "Source/token/byte bounds do not guarantee every resulting scope payload fits the unchanged scope owner's 65536-byte bridge; rejected outputs remain counted.",
+    "Kernel profiles differ in parameters/initialization; report actual differences and avoid a dimension or controlled capacity claim.",
+    "Native384/768 and grouped_v2 checkpoints are separate historical owners; this from-scratch source-only fit cannot establish latent conditioning, authentic encoder reconstruction or continuity of their Adam state.",
+    "No independently authenticated legal qualifier targets are available; authored engineering fit leaves existing legal review/admission gates untouched."
+  ]
+}

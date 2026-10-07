@@ -1,0 +1,918 @@
+{
+  "schema": "scope-span-target-free-predictions/v1",
+  "rows": [
+    {
+      "id": "source:b1d39ddac4942dd03c60f41222ade26b6feb62d2f55451e34e50ebd338140766",
+      "source_group": "group:abaa30ea373dee6db4236fb8b0fec23e2207c8a2a46ed54b3eb8970e2a872513",
+      "source_sha256": "b1d39ddac4942dd03c60f41222ade26b6feb62d2f55451e34e50ebd338140766",
+      "prediction": {
+        "schema": "legal-scope-span-decoder-result/v1",
+        "status": "blocked",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "predicted_occurrence_proposal_invalid"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              0,
+              15
+            ],
+            "actor": [
+              5,
+              13
+            ],
+            "action": [
+              0,
+              0
+            ],
+            "object": [
+              10,
+              18
+            ],
+            "condition": [
+              18,
+              18
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "support_probability": 0.5144657492637634,
+        "support_threshold": 0.5,
+        "diagnostic": "distinct occurrence facets must not overlap"
+      }
+    },
+    {
+      "id": "source:b0acc3d77678d6a7ddbd1180183690836ed54ab4667610a2f1acdec2b900bb11",
+      "source_group": "group:deb62eb390e9c272a21b97aefe86aacf95ff6cc4b0e81f07baa8bd1cac160418",
+      "source_sha256": "b0acc3d77678d6a7ddbd1180183690836ed54ab4667610a2f1acdec2b900bb11",
+      "prediction": {
+        "schema": "legal-scope-span-decoder-result/v1",
+        "status": "blocked",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "predicted_occurrence_proposal_invalid"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              0,
+              7
+            ],
+            "actor": [
+              1,
+              7
+            ],
+            "action": [
+              0,
+              13
+            ],
+            "object": [
+              0,
+              15
+            ],
+            "condition": [
+              15,
+              15
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "support_probability": 0.5133591890335083,
+        "support_threshold": 0.5,
+        "diagnostic": "distinct occurrence facets must not overlap"
+      }
+    },
+    {
+      "id": "source:ffee078cc89bfd1501baa9cf4eea63b743fbe24d23adb2c7694399d81efdba19",
+      "source_group": "group:b85e9469fc441ff43a13a013ef848254effb2496276ee5cfd2042549e8b2aacd",
+      "source_sha256": "ffee078cc89bfd1501baa9cf4eea63b743fbe24d23adb2c7694399d81efdba19",
+      "prediction": {
+        "schema": "legal-scope-span-decoder-result/v1",
+        "status": "blocked",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "predicted_occurrence_proposal_invalid"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              0,
+              8
+            ],
+            "actor": [
+              1,
+              6
+            ],
+            "action": [
+              0,
+              1
+            ],
+            "object": [
+              0,
+              11
+            ],
+            "condition": [
+              11,
+              11
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "support_probability": 0.5124064087867737,
+        "support_threshold": 0.5,
+        "diagnostic": "distinct occurrence facets must not overlap"
+      }
+    },
+    {
+      "id": "source:07182e66e206a5974952b5a569d898dca81632a0d327b04f289b29e48f9b1317",
+      "source_group": "group:e08fa625606c5fb71e9bf6d0a47ffe5c710b4e275eeb7fefc63024b2323f6ca1",
+      "source_sha256": "07182e66e206a5974952b5a569d898dca81632a0d327b04f289b29e48f9b1317",
+      "prediction": {
+        "schema": "legal-scope-span-decoder-result/v1",
+        "status": "blocked",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "predicted_occurrence_proposal_invalid"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              0,
+              15
+            ],
+            "actor": [
+              1,
+              15
+            ],
+            "action": [
+              0,
+              15
+            ],
+            "object": [
+              0,
+              17
+            ],
+            "condition": [
+              17,
+              17
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "support_probability": 0.5127360820770264,
+        "support_threshold": 0.5,
+        "diagnostic": "distinct occurrence facets must not overlap"
+      }
+    },
+    {
+      "id": "source:92d7f56cf181a98dab8aeb3dd4c577b7afa8483cbd800cd0a8f5c6ef7da83a8c",
+      "source_group": "group:dbd394b677e1ae10526a0fc1dfd7d22300c000fd937b7c006f74299db6c1828f",
+      "source_sha256": "92d7f56cf181a98dab8aeb3dd4c577b7afa8483cbd800cd0a8f5c6ef7da83a8c",
+      "prediction": {
+        "schema": "legal-scope-span-decoder-result/v1",
+        "status": "blocked",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "predicted_occurrence_proposal_invalid"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              0,
+              9
+            ],
+            "actor": [
+              2,
+              6
+            ],
+            "action": [
+              0,
+              0
+            ],
+            "object": [
+              4,
+              11
+            ],
+            "condition": [
+              11,
+              11
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "support_probability": 0.5138149261474609,
+        "support_threshold": 0.5,
+        "diagnostic": "distinct occurrence facets must not overlap"
+      }
+    },
+    {
+      "id": "source:90faf2519d4df93f215b48164a06f7ac1bcf08e08bf85a0b7d64a53648d460eb",
+      "source_group": "group:f363fbda629923922bdabeb8c2e20e66fa5ac782fe7ce8c166ddb73b545b69ac",
+      "source_sha256": "90faf2519d4df93f215b48164a06f7ac1bcf08e08bf85a0b7d64a53648d460eb",
+      "prediction": {
+        "schema": "legal-scope-span-decoder-result/v1",
+        "status": "blocked",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "predicted_occurrence_proposal_invalid"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              0,
+              12
+            ],
+            "actor": [
+              1,
+              11
+            ],
+            "action": [
+              0,
+              1
+            ],
+            "object": [
+              9,
+              15
+            ],
+            "condition": [
+              15,
+              15
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "support_probability": 0.51408451795578,
+        "support_threshold": 0.5,
+        "diagnostic": "distinct occurrence facets must not overlap"
+      }
+    },
+    {
+      "id": "source:3ac5cd27e1ad8e91ece94f1dd1e0493748468a1083f97292ab90dd5e3fc772f2",
+      "source_group": "group:deb62eb390e9c272a21b97aefe86aacf95ff6cc4b0e81f07baa8bd1cac160418",
+      "source_sha256": "3ac5cd27e1ad8e91ece94f1dd1e0493748468a1083f97292ab90dd5e3fc772f2",
+      "prediction": {
+        "schema": "legal-scope-span-decoder-result/v1",
+        "status": "blocked",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "predicted_occurrence_proposal_invalid"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              0,
+              7
+            ],
+            "actor": [
+              1,
+              7
+            ],
+            "action": [
+              0,
+              13
+            ],
+            "object": [
+              0,
+              15
+            ],
+            "condition": [
+              15,
+              15
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "support_probability": 0.5133591890335083,
+        "support_threshold": 0.5,
+        "diagnostic": "distinct occurrence facets must not overlap"
+      }
+    },
+    {
+      "id": "source:59e9802b598be96f7cb00cb7d296b45de0f68cf130b85be6549fec7750062d60",
+      "source_group": "group:4da4e81c52534d764bd914e35acb0cd198e2bfe1497991fa760110b36f9f7d13",
+      "source_sha256": "59e9802b598be96f7cb00cb7d296b45de0f68cf130b85be6549fec7750062d60",
+      "prediction": {
+        "schema": "legal-scope-span-decoder-result/v1",
+        "status": "blocked",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "predicted_occurrence_proposal_invalid"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              2,
+              8
+            ],
+            "actor": [
+              1,
+              6
+            ],
+            "action": [
+              0,
+              0
+            ],
+            "object": [
+              3,
+              9
+            ],
+            "condition": [
+              9,
+              9
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "support_probability": 0.5122317671775818,
+        "support_threshold": 0.5,
+        "diagnostic": "distinct occurrence facets must not overlap"
+      }
+    },
+    {
+      "id": "source:b18d2494b4612c38040606b6adbc2983529a088aed9ef9a13bf12da842b97a2b",
+      "source_group": "group:9299eea94958012404e771fed06550ba94d3b0ca9a80b94154ba7cfec224009b",
+      "source_sha256": "b18d2494b4612c38040606b6adbc2983529a088aed9ef9a13bf12da842b97a2b",
+      "prediction": {
+        "schema": "legal-scope-span-decoder-result/v1",
+        "status": "blocked",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "predicted_occurrence_proposal_invalid"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              0,
+              19
+            ],
+            "actor": [
+              0,
+              8
+            ],
+            "action": [
+              0,
+              0
+            ],
+            "object": [
+              9,
+              22
+            ],
+            "condition": [
+              22,
+              22
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "support_probability": 0.5136500597000122,
+        "support_threshold": 0.5,
+        "diagnostic": "distinct occurrence facets must not overlap"
+      }
+    },
+    {
+      "id": "source:a8b005f3c7e9fe899616a520ca4689c5100d01c9cec5e4a9ee209f62a85c8ef4",
+      "source_group": "group:a5f0259f01b9229d1c85b5f0d813283bdc0c1d6a30257bc544c2c09fc656004d",
+      "source_sha256": "a8b005f3c7e9fe899616a520ca4689c5100d01c9cec5e4a9ee209f62a85c8ef4",
+      "prediction": {
+        "schema": "legal-scope-span-decoder-result/v1",
+        "status": "blocked",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "predicted_occurrence_proposal_invalid"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              1,
+              2
+            ],
+            "actor": [
+              0,
+              3
+            ],
+            "action": [
+              0,
+              0
+            ],
+            "object": [
+              0,
+              8
+            ],
+            "condition": [
+              8,
+              8
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "support_probability": 0.5127996206283569,
+        "support_threshold": 0.5,
+        "diagnostic": "distinct occurrence facets must not overlap"
+      }
+    },
+    {
+      "id": "source:774a71a8f5be6e1834c839a9a262e0b92fbda16b7d5d1345c0e24c2e0f4f2050",
+      "source_group": "group:5f9d18906953d79a87f35aaeebdd1c529049248598fe63f4255d6d6bd9fde47d",
+      "source_sha256": "774a71a8f5be6e1834c839a9a262e0b92fbda16b7d5d1345c0e24c2e0f4f2050",
+      "prediction": {
+        "schema": "legal-scope-span-decoder-result/v1",
+        "status": "blocked",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "predicted_occurrence_proposal_invalid"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              0,
+              16
+            ],
+            "actor": [
+              1,
+              11
+            ],
+            "action": [
+              0,
+              16
+            ],
+            "object": [
+              0,
+              18
+            ],
+            "condition": [
+              18,
+              18
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "support_probability": 0.5131241679191589,
+        "support_threshold": 0.5,
+        "diagnostic": "distinct occurrence facets must not overlap"
+      }
+    },
+    {
+      "id": "source:2cdd73cdbefe6b8b315992073b127810baedb72977d0a2df248b84d0e88ef091",
+      "source_group": "group:5fb14d99365c4d98173e3aad43e6b4d654c7dfb2eb17b7b35d2aca52b0982db2",
+      "source_sha256": "2cdd73cdbefe6b8b315992073b127810baedb72977d0a2df248b84d0e88ef091",
+      "prediction": {
+        "schema": "legal-scope-span-decoder-result/v1",
+        "status": "blocked",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "predicted_occurrence_proposal_invalid"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              0,
+              11
+            ],
+            "actor": [
+              9,
+              11
+            ],
+            "action": [
+              0,
+              0
+            ],
+            "object": [
+              3,
+              14
+            ],
+            "condition": [
+              14,
+              14
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "support_probability": 0.5134499073028564,
+        "support_threshold": 0.5,
+        "diagnostic": "distinct occurrence facets must not overlap"
+      }
+    },
+    {
+      "id": "source:302d0c69f89ae56bc3fad179b233cc9df2701344dec144d60b8b0552f8ae487b",
+      "source_group": "group:f32c3e6c7ac29b300f4a911ba325dc55dd2ef98af0b40809aa589dd70800adcf",
+      "source_sha256": "302d0c69f89ae56bc3fad179b233cc9df2701344dec144d60b8b0552f8ae487b",
+      "prediction": {
+        "schema": "legal-scope-span-decoder-result/v1",
+        "status": "blocked",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "predicted_occurrence_proposal_invalid"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              0,
+              9
+            ],
+            "actor": [
+              3,
+              4
+            ],
+            "action": [
+              0,
+              0
+            ],
+            "object": [
+              0,
+              11
+            ],
+            "condition": [
+              11,
+              11
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "support_probability": 0.5135966539382935,
+        "support_threshold": 0.5,
+        "diagnostic": "distinct occurrence facets must not overlap"
+      }
+    },
+    {
+      "id": "source:8885dbceb4d4f04de2508ed2d68dab7bc02857bdeaa539ce0e6f5861bf62b320",
+      "source_group": "group:d8ae125029e681efab4375ca28b4aa461fb4eacf706df60f7b3fd6b518d32dd5",
+      "source_sha256": "8885dbceb4d4f04de2508ed2d68dab7bc02857bdeaa539ce0e6f5861bf62b320",
+      "prediction": {
+        "schema": "legal-scope-span-decoder-result/v1",
+        "status": "blocked",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "predicted_occurrence_proposal_invalid"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              0,
+              11
+            ],
+            "actor": [
+              9,
+              10
+            ],
+            "action": [
+              0,
+              0
+            ],
+            "object": [
+              3,
+              12
+            ],
+            "condition": [
+              12,
+              12
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "support_probability": 0.5127105116844177,
+        "support_threshold": 0.5,
+        "diagnostic": "distinct occurrence facets must not overlap"
+      }
+    },
+    {
+      "id": "source:933eb859a2ded32101488e86fd674f3201a7037df28ba36780175526d849d9e7",
+      "source_group": "group:228af0a0048fa9b5fbad2ff09d12fe864dca9605c82136525bef53e57fd95112",
+      "source_sha256": "933eb859a2ded32101488e86fd674f3201a7037df28ba36780175526d849d9e7",
+      "prediction": {
+        "schema": "legal-scope-span-decoder-result/v1",
+        "status": "blocked",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "predicted_occurrence_proposal_invalid"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              1,
+              9
+            ],
+            "actor": [
+              4,
+              6
+            ],
+            "action": [
+              0,
+              0
+            ],
+            "object": [
+              8,
+              16
+            ],
+            "condition": [
+              16,
+              16
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "support_probability": 0.5134135484695435,
+        "support_threshold": 0.5,
+        "diagnostic": "distinct occurrence facets must not overlap"
+      }
+    },
+    {
+      "id": "source:af6d5ccfc4558b058305241d5bd98810d6956b4cbb2217afc557aaba6d0f01e0",
+      "source_group": "group:466c77ffb71cd94c77b7a996455e748f1cc6e4bde90dcb2b03bdb1b4dd32c919",
+      "source_sha256": "af6d5ccfc4558b058305241d5bd98810d6956b4cbb2217afc557aaba6d0f01e0",
+      "prediction": {
+        "schema": "legal-scope-span-decoder-result/v1",
+        "status": "blocked",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "predicted_occurrence_proposal_invalid"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              0,
+              7
+            ],
+            "actor": [
+              1,
+              8
+            ],
+            "action": [
+              0,
+              1
+            ],
+            "object": [
+              0,
+              11
+            ],
+            "condition": [
+              11,
+              11
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "support_probability": 0.5129444599151611,
+        "support_threshold": 0.5,
+        "diagnostic": "distinct occurrence facets must not overlap"
+      }
+    }
+  ],
+  "references_accessed_by_inference": false
+}

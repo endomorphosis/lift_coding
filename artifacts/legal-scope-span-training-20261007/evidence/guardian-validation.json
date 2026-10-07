@@ -1,0 +1,56 @@
+{
+  "artifacts": {
+    "guardian-compatibility-check.json": {
+      "bytes": 6795,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/guardian-compatibility-check.json",
+      "sha256": "6299c2fcc22bcdbd9aa7f678526a97f56f51a27e5697786d2d2827ed5bdf74e7"
+    },
+    "run_scope_guardian.py": {
+      "bytes": 23178,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/run_scope_guardian.py",
+      "sha256": "94b1131a72a92f02e8ed20cccc24824702cfdf8a4466b45d7f2b10dc83d3f779"
+    },
+    "test_scope_guardian.py": {
+      "bytes": 5630,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/test_scope_guardian.py",
+      "sha256": "5bd3a3f0ece3fad350f05527e09589de9ac37c80b3a7df39bdb0e3b9d8fd31a3"
+    }
+  },
+  "compatibility_check": {
+    "passed": true,
+    "reservation_acquired": false,
+    "scheduler_client_constructed": false,
+    "shared_state_modified": false,
+    "training_calls": 0
+  },
+  "created_at_utc": "2026-10-07T04:46:55.204826+00:00",
+  "guardians_self_review_is_independent_readiness": false,
+  "independent_runner_corpus_plan_review_still_required": true,
+  "numerical_training_started": false,
+  "physical_run_root": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01",
+  "resource_limits": {
+    "child_deadline_seconds": 300,
+    "child_process_slots": 1,
+    "cpu_slots": 2,
+    "memory_mb": 1536,
+    "storage_bytes": 200000000,
+    "torch_threads_max": 2
+  },
+  "schema": "legal-scope-guardian-validation/v1",
+  "status": "passed_focused_checks",
+  "tests": {
+    "command": [
+      "python",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "artifacts/legal-next-training-20261007-01/test_scope_guardian.py"
+    ],
+    "failures": 0,
+    "passed": 16,
+    "scope": "Pure review/JSON/PID ownership/refusal tests plus mocked failed admission; no real leases or child launches."
+  }
+}
