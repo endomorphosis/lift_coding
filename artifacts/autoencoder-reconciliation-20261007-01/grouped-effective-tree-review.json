@@ -1,0 +1,115 @@
+{
+  "schema": "autoencoder-effective-tree-review/v1",
+  "repository": "/home/barberb/lift_coding/artifacts/autoencoder-reconciliation-20261007-01/datasets",
+  "source_revision": "1c1f91c8010ce058243734f143587e92fab2f0a2",
+  "target_revision": "497362d8aa117a210769423ec6a14d8010d4588c",
+  "source_history_reachable_from_target": true,
+  "paths": [
+    {
+      "path": "docs/autoencoders/grouped_support_boundary_training.md",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "18711562efd5b3a08584db8382823c1917177ce7",
+        "bytes": 5743,
+        "sha256": "0ec8f1dec05890e5733c890cb48e23a7943095cd1461b54894669ecbcdc61bc9"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "18711562efd5b3a08584db8382823c1917177ce7",
+        "bytes": 5743,
+        "sha256": "0ec8f1dec05890e5733c890cb48e23a7943095cd1461b54894669ecbcdc61bc9"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/autoformal/legal_coordination_evaluation.py",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "d125e9108e49dacf8568450cba17c3a49f7193ef",
+        "bytes": 6557,
+        "sha256": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "d125e9108e49dacf8568450cba17c3a49f7193ef",
+        "bytes": 6557,
+        "sha256": "8a8bf1842caa91cef2c5799eb7f1252f9c284ff4317cc2ec5b7f20ab1159b90f"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/deontic/coordination_decoder.py",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "22d8260dd03cc2cf4d262138161adbe6cda31bcb",
+        "bytes": 13298,
+        "sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "22d8260dd03cc2cf4d262138161adbe6cda31bcb",
+        "bytes": 13298,
+        "sha256": "49b01d995d30e20c42576f446c419b337d5d92d89d060390d6624a511415024f"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder.py",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "d262c36eb036ba5b516636f152038ab81ee19d94",
+        "bytes": 29370,
+        "sha256": "d03c343d6130e4cb099468dbd605e524fdb15bd21092bc4f526c35c4167c9d51"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "d262c36eb036ba5b516636f152038ab81ee19d94",
+        "bytes": 29370,
+        "sha256": "d03c343d6130e4cb099468dbd605e524fdb15bd21092bc4f526c35c4167c9d51"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "b34ca1d3406645e8edf58b651dff3049e583741f",
+        "bytes": 33948,
+        "sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "b34ca1d3406645e8edf58b651dff3049e583741f",
+        "bytes": 33948,
+        "sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8"
+      }
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "aa1039c978b8d80667e3bde417a61954deefcd48",
+        "bytes": 7804,
+        "sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "aa1039c978b8d80667e3bde417a61954deefcd48",
+        "bytes": 7804,
+        "sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65"
+      }
+    }
+  ],
+  "counts": {
+    "identical": 6,
+    "modified": 0,
+    "missing": 0
+  },
+  "scope": "Source presence only; modified files require review against later work.",
+  "git_state_mutated": false,
+  "model_executed": false,
+  "semantic_qualification_granted": false,
+  "lean_admission_granted": false
+}

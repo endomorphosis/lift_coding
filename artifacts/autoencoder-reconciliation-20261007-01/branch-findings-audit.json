@@ -1,0 +1,1363 @@
+{
+  "conclusion": "No useful missing scientific finding found on active study branches. Historical root publication snapshots retain intentionally omitted checkpoints/capsules and old recovery code; do not import them. Selected canonical-only sources match prior hash evidence; five temporal tests have prior path inventories without selected prior hash pins, so their exact historical bytes are not asserted.",
+  "observed_utc": "2026-10-07T04:08:27.900274+00:00",
+  "prior_retention": {
+    "archive_all_files_identical": true,
+    "archive_changed_files": [],
+    "archive_file_count": 54,
+    "archive_manifest": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot-manifest.json",
+    "prior_canonical_scope": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconcile-20261006/branches/canonical-uncommitted-scope.json",
+    "prior_full_status_inventory": "/home/barberb/lift_coding/artifacts/autoencoder-integration-review-20261006/datasets-initial-inventory.json",
+    "prior_working_copy_inventory": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/dirty-source-effective-review.json",
+    "source4096_adapter_and_test_unchanged_prior_inventory": true
+  },
+  "prioritization": [
+    {
+      "action": "Use latest merged contextual/normative/grouped support findings and shared owner interfaces; branch labels alone are not evidence of missing work.",
+      "paths": [
+        "docs/autoencoders/grouped_support_boundary_training.md",
+        "docs/autoencoders/reconstruction_gap_followup_20261006.md",
+        "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py"
+      ],
+      "priority": 1,
+      "source_refs": [
+        "021ffee3f6894c4112d6951dad62cb29461cdac1",
+        "497362d8aa117a210769423ec6a14d8010d4588c"
+      ]
+    },
+    {
+      "action": "Add only additive integration checks to the existing owners if root finds a missing joined boundary.",
+      "paths": [
+        "ipfs_datasets_py/logic/deontic/coordination_decoder.py",
+        "ipfs_datasets_py/logic/autoformal/legal_coordination_evaluation.py",
+        "ipfs_datasets_py/logic/formalization/autoencoder/canonical_statement_scope.py",
+        "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_runtime_registry.py"
+      ],
+      "priority": 2
+    },
+    {
+      "action": "Keep deferred coordination/temporal and native4096 verified adapters preserved as exact unintegrated source; no new scientific findings or unpreserved changes found in these selected paths.",
+      "paths": [
+        "artifacts/autoencoder-consolidation-20261006-02/deferred-source-snapshot-manifest.json",
+        "artifacts/autoencoder-progress-reconcile-20261006/branches/canonical-uncommitted-scope.json",
+        "artifacts/autoencoder-progress-reconciliation-20261006/datasets/dirty-source-effective-review.json"
+      ],
+      "priority": 3
+    }
+  ],
+  "ref_scope_selection": {
+    "additional_inclusions": "Local publication/canonical snapshot refs whose tip subject names autoformalization; local recovery/tmp-span snapshots; root and datasets canonical tree status.",
+    "excluded_ref_namespaces": "Synthetic historical audit remotes and unrelated supervisor/parser branches. Actual origin-tracking and live GitHub heads included.",
+    "regex": "autoencoder|normative|legal|grouped|conditioning|gte|latent|autoformal|source[-_/]v|alignment.?decoder|joint.?span|decoder-profile"
+  },
+  "repositories": [
+    {
+      "canonical_HEAD": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+      "initial_live_main": "021ffee3f6894c4112d6951dad62cb29461cdac1",
+      "live_main": "021ffee3f6894c4112d6951dad62cb29461cdac1",
+      "live_relevant_heads": [
+        {
+          "ref": "refs/heads/agent/autoencoder-progress-reconciliation-20261006",
+          "sha": "9e794a4cfdc9cbfacdb63604dcca1605ce2bf1d5"
+        },
+        {
+          "ref": "refs/heads/agent/normative-checkpoint-availability-root-20261006",
+          "sha": "dfc02e62186dc97223a620b074b278f0e1b97115"
+        },
+        {
+          "ref": "refs/heads/codex/grouped-autoencoder-findings-20261006-02",
+          "sha": "1b20f745a1db2a485b97ffc7f0816119881f7f8d"
+        },
+        {
+          "ref": "refs/heads/codex/legal-cross-agent-followthrough-20261006",
+          "sha": "8cd17c705162a5d47c0eb31616d8d5637eea79d2"
+        },
+        {
+          "ref": "refs/heads/codex/legal-decoder-followup-results-20261006-01",
+          "sha": "0ed01fd56db31fe4345f8143a7647a437dcb1118"
+        },
+        {
+          "ref": "refs/heads/main",
+          "sha": "021ffee3f6894c4112d6951dad62cb29461cdac1"
+        }
+      ],
+      "main_stable_during_audit": true,
+      "name": "root",
+      "previous_merge": "2d4f840583ffe916d416f101e4a570a5d4856e37",
+      "previous_merge_is_ancestor_of_live_main": true,
+      "refs": [
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/agent/autoencoder-progress-reconciliation-20261006",
+          "sha": "9e794a4cfdc9cbfacdb63604dcca1605ce2bf1d5",
+          "subject": "Preserve final concurrent supervisor pin and integration evidence"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/agent/normative-checkpoint-availability-root-20261006",
+          "sha": "dfc02e62186dc97223a620b074b278f0e1b97115",
+          "subject": "Merge commit 'd77cc6bc2e80b4f78fae193f0098abac4ecc3451' into agent/normative-checkpoint-availability-root-20261006"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/agent/normative-decoder-runtime-root-20261007",
+          "sha": "021ffee3f6894c4112d6951dad62cb29461cdac1",
+          "subject": "Publish decoder reconstruction-gap evidence and training observation"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/agent/vericodegen-2026-autoformalization",
+          "sha": "091624a773179d24178d12bc1f410864885c10bf",
+          "subject": "Correct final AF evidence including exact final feedback counts"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/codex/autoencoder-reconciliation-20261007-01",
+          "sha": "021ffee3f6894c4112d6951dad62cb29461cdac1",
+          "subject": "Publish decoder reconstruction-gap evidence and training observation"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/codex/grouped-autoencoder-findings-20261006-02",
+          "sha": "1b20f745a1db2a485b97ffc7f0816119881f7f8d",
+          "subject": "Pin merged Legal runtime and combined autoencoder integration evidence"
+        },
+        {
+          "ancestor_of_live_main": false,
+          "behind_ahead": [
+            42,
+            1
+          ],
+          "branch_delta_total_paths": 27,
+          "decision": "already present as identical joint_conditioning artifact bytes through merged successor; old plans lack later additions",
+          "different_absent_lists_bounded_at": 40,
+          "ref": "refs/heads/codex/joint-conditioning-20261005-01",
+          "relevant_branch_delta_absent_live_main": [],
+          "relevant_branch_delta_different_live_main": [
+            "implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+            "implementation_plan/docs/50-autoformalization-alignment-implementation-backlog-2026-10-04.md"
+          ],
+          "relevant_branch_delta_identical_live_main_count": 24,
+          "relevant_branch_delta_paths": 26,
+          "sha": "8c02d655e2d086bd644a9011ea67325060ef87bc",
+          "subject": "Evaluate frozen conditioning controls with joint span selection"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/codex/joint-conditioning-20261005-02",
+          "sha": "3b39519d9bc9021a5e6a0bb183f6c57cb780bc5a",
+          "subject": "Evaluate frozen conditioning controls with joint span selection"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/codex/joint-span-policy-20261005-01",
+          "sha": "ec4302acd75f0dbb0d744586db35fef9d23980ac",
+          "subject": "Compare bounded joint span selection using frozen law decoder outputs"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/codex/legal-cross-agent-followthrough-20261006",
+          "sha": "8cd17c705162a5d47c0eb31616d8d5637eea79d2",
+          "subject": "Link both autoencoder reconciliations and pin combined isolation guards"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/codex/legal-decoder-followup-results-20261006-01",
+          "sha": "0ed01fd56db31fe4345f8143a7647a437dcb1118",
+          "subject": "Preserve matched grouped support training results and pin occurrence interface"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/publication/canonical-current-root-03-20261004/3560d0e1d9383e2100675998",
+          "sha": "b2d6e9d57dab90ad0e61bfdc8251643382e3de76",
+          "subject": "Snapshot canonical source work for autoformalization publication"
+        },
+        {
+          "ancestor_of_live_main": false,
+          "behind_ahead": [
+            16177,
+            1
+          ],
+          "branch_delta_total_paths": 2932,
+          "decision": "superseded snapshot; preserve exact historical identity and inspect only bounded findings, do not merge legacy closure",
+          "different_absent_lists_bounded_at": 40,
+          "ref": "refs/heads/publication/canonical-current-root-20261004/3560d0e1d9383e2100675998",
+          "relevant_branch_delta_absent_live_main": [
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/LICENSE_SCOPE.md",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/README.md",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/cards/decoder-eight-head-rate-20261004.md",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/cards/decoder-eight-source-preconditioning-20261004.md",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/cards/decoder-selected-continuation-20261004.md",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/cards/native4096-balanced-cohort-20261004.md",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/cards/native4096-conditioning-20261004.md",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/cards/native4096-layer-reclaim-pilot-r3-20261004.md",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/checkpoints/decoder-eight-head-rate-20261004/head-rate10-baseline/initial-state.json",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/checkpoints/decoder-eight-head-rate-20261004/head-rate10-baseline/last-attempt-state.json",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/checkpoints/decoder-eight-head-rate-20261004/head-rate10-baseline/selected-state.json",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/checkpoints/decoder-eight-head-rate-20261004/head-rate2-candidate/initial-state.json",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/checkpoints/decoder-eight-head-rate-20261004/head-rate2-candidate/last-attempt-state.json",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/checkpoints/decoder-eight-head-rate-20261004/head-rate2-candidate/selected-state.json",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/checkpoints/decoder-eight-source-preconditioning-20261004/identity-preconditioner/initial-state.json",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/checkpoints/decoder-eight-source-preconditioning-20261004/identity-preconditioner/last-attempt-state.json",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/checkpoints/decoder-eight-source-preconditioning-20261004/identity-preconditioner/selected-state.json",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/checkpoints/decoder-eight-source-preconditioning-20261004/train-covariance-preconditioner/initial-state.json",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/checkpoints/decoder-eight-source-preconditioning-20261004/train-covariance-preconditioner/last-attempt-state.json",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/checkpoints/decoder-eight-source-preconditioning-20261004/train-covariance-preconditioner/selected-state.json",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/checkpoints/decoder-selected-continuation-20261004/384-selected-followup-lr0001-1729/initial-state.json",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/checkpoints/decoder-selected-continuation-20261004/384-selected-followup-lr0001-1729/last-attempt-state.json",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/checkpoints/decoder-selected-continuation-20261004/384-selected-followup-lr0001-1729/selected-state.json",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/checkpoints/decoder-selected-continuation-20261004/768-selected-followup-lr0001-1729/initial-state.json",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/checkpoints/decoder-selected-continuation-20261004/768-selected-followup-lr0001-1729/last-attempt-state.json",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/checkpoints/decoder-selected-continuation-20261004/768-selected-followup-lr0001-1729/selected-state.json",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/checkpoints/native4096-balanced-cohort-20261004/joint_source_scaled/final_attempt-state.json",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/checkpoints/native4096-balanced-cohort-20261004/joint_unscaled/final_attempt-state.json",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/checkpoints/native4096-conditioning-20261004/joint_source_scaled/final_attempt-state.json",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/checkpoints/native4096-conditioning-20261004/joint_unscaled/final_attempt-state.json",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/checkpoints/native4096-conditioning-20261004/staged_source_scaled_plateau/final_attempt-state.json",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/checkpoints/native4096-layer-reclaim-pilot-r3-20261004/two-source-pilot/final_attempt-state.json",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/release_manifest.json",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/source-capsule/004d432d16a2819eb46a95743d58c26443cc32737311ea8553c5019127f97603-clause_source_decoder_experiment.py",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/source-capsule/0352c392a518c9ea6ff215c32e5ddd6345d776e2bb32f22fd137b5e34d93c6c6-decoder_distillation_experiment_v2.py",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/source-capsule/051a5e7a98ef2cf8a63326218cebeabcca2c528f6839a1a3cb11756ee7c1aab9-decoder.py",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/source-capsule/0ad8f7b7e6f38540414c94dc9d6da6aba9665d4dee6283499d8a637a53dfc500-common_types.py",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/source-capsule/0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd-legal_ir_grammar_decoder.py",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/source-capsule/0c56b8663063aeb30c5bbbda045a3f723ab26fffe08e23b14f3c94e866392f09-forward_chaining.py",
+            "artifacts/autoformalization-publication-20261004/huggingface/additional-decoder-cutoff-v1/source-capsule/10d21acd8d0fd6049297a1b36d10db1fcc09146095f1dabfe5a686b887f4b8cf-errors.py"
+          ],
+          "relevant_branch_delta_different_live_main": [
+            "implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+            "implementation_plan/docs/50-autoformalization-alignment-implementation-backlog-2026-10-04.md",
+            "scripts/autoformalization_recovery_probe.py",
+            "tests/test_autoformalization_recovery_probe.py"
+          ],
+          "relevant_branch_delta_identical_live_main_count": 2351,
+          "relevant_branch_delta_paths": 2502,
+          "sha": "ef9c8e4d94d9d427d1bd60168e9bd6d0a15cfe38",
+          "subject": "Snapshot canonical source work for autoformalization publication"
+        },
+        {
+          "ancestor_of_live_main": false,
+          "behind_ahead": [
+            16177,
+            1
+          ],
+          "branch_delta_total_paths": 785,
+          "decision": "superseded snapshot; preserve exact historical identity and inspect only bounded findings, do not merge legacy closure",
+          "different_absent_lists_bounded_at": 40,
+          "ref": "refs/heads/publication/canonical-wip-20261004/3560d0e1d9383e2100675998",
+          "relevant_branch_delta_absent_live_main": [
+            "artifacts/autoformalization-alignment-20261003/projection-01/d384-seed0-neg1.checkpoint.json",
+            "artifacts/autoformalization-alignment-20261003/projection-01/d384-seed0-neg2.checkpoint.json",
+            "artifacts/autoformalization-alignment-20261003/projection-01/d384-seed1-neg1.checkpoint.json",
+            "artifacts/autoformalization-alignment-20261003/projection-01/d384-seed1-neg2.checkpoint.json",
+            "artifacts/autoformalization-alignment-20261003/projection-01/d384-seed2-neg1.checkpoint.json",
+            "artifacts/autoformalization-alignment-20261003/projection-01/d384-seed2-neg2.checkpoint.json",
+            "artifacts/autoformalization-alignment-20261003/projection-01/d512-seed0-neg1.checkpoint.json",
+            "artifacts/autoformalization-alignment-20261003/projection-01/d512-seed0-neg2.checkpoint.json",
+            "artifacts/autoformalization-alignment-20261003/projection-01/d512-seed1-neg1.checkpoint.json",
+            "artifacts/autoformalization-alignment-20261003/projection-01/d512-seed1-neg2.checkpoint.json",
+            "artifacts/autoformalization-alignment-20261003/projection-01/d512-seed2-neg1.checkpoint.json",
+            "artifacts/autoformalization-alignment-20261003/projection-01/d512-seed2-neg2.checkpoint.json",
+            "artifacts/autoformalization-alignment-20261003/span-replay-01/seed1729-constructed-initial-control.json",
+            "artifacts/autoformalization-alignment-20261003/span-replay-01/seed1730-constructed-initial-control.json",
+            "artifacts/autoformalization-alignment-20261003/span-replay-01/seed1731-constructed-initial-control.json",
+            "artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-01/seed1729-anchor-final-checkpoint.json",
+            "artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-01/seed1729-anchor-initial-checkpoint.json",
+            "artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-01/seed1729-source-final-checkpoint.json",
+            "artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-01/seed1729-source-initial-checkpoint.json",
+            "artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-01/seed1730-anchor-final-checkpoint.json",
+            "artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-01/seed1730-anchor-initial-checkpoint.json",
+            "artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-01/seed1730-source-final-checkpoint.json",
+            "artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-01/seed1730-source-initial-checkpoint.json",
+            "artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-01/seed1731-anchor-initial-checkpoint.json",
+            "artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-01/seed1731-source-final-checkpoint.json",
+            "artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-01/seed1731-source-initial-checkpoint.json",
+            "artifacts/autoformalization-alignment-20261003/typed-anchor-decoder-recovery-01/seed1731-anchor-final-checkpoint.json"
+          ],
+          "relevant_branch_delta_different_live_main": [
+            "artifacts/autoformalization-publication-20261004/integrate_main.py",
+            "implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+            "implementation_plan/docs/50-autoformalization-alignment-implementation-backlog-2026-10-04.md",
+            "scripts/autoformalization_recovery_probe.py",
+            "tests/test_autoformalization_recovery_probe.py"
+          ],
+          "relevant_branch_delta_identical_live_main_count": 688,
+          "relevant_branch_delta_paths": 720,
+          "sha": "bc64e1a2d3d3428ae3823fd4754d0051a61d485d",
+          "subject": "Snapshot canonical source work for autoformalization publication"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/remotes/origin/agent/autoencoder-progress-reconciliation-20261006",
+          "sha": "9e794a4cfdc9cbfacdb63604dcca1605ce2bf1d5",
+          "subject": "Preserve final concurrent supervisor pin and integration evidence"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/remotes/origin/agent/normative-checkpoint-availability-root-20261006",
+          "sha": "dfc02e62186dc97223a620b074b278f0e1b97115",
+          "subject": "Merge commit 'd77cc6bc2e80b4f78fae193f0098abac4ecc3451' into agent/normative-checkpoint-availability-root-20261006"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/remotes/origin/codex/grouped-autoencoder-findings-20261006-02",
+          "sha": "1b20f745a1db2a485b97ffc7f0816119881f7f8d",
+          "subject": "Pin merged Legal runtime and combined autoencoder integration evidence"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/remotes/origin/codex/legal-cross-agent-followthrough-20261006",
+          "sha": "8cd17c705162a5d47c0eb31616d8d5637eea79d2",
+          "subject": "Link both autoencoder reconciliations and pin combined isolation guards"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/remotes/origin/codex/legal-decoder-followup-results-20261006-01",
+          "sha": "0ed01fd56db31fe4345f8143a7647a437dcb1118",
+          "subject": "Preserve matched grouped support training results and pin occurrence interface"
+        }
+      ],
+      "relevant_scope_counts": {
+        "canonical_worktrees_audited": 1,
+        "live_GitHub_heads_including_main": 6,
+        "local_branch_refs": 14,
+        "origin_tracking_refs": 5,
+        "refs_ancestor_of_live_main": 16,
+        "refs_not_ancestor_of_live_main": 3,
+        "registered_relevant_worktrees_excluding_canonical": 12
+      },
+      "repository": "/home/barberb/lift_coding",
+      "url": "https://github.com/endomorphosis/lift_coding.git",
+      "worktrees": [
+        {
+          "canonical": true,
+          "path": "/home/barberb/lift_coding",
+          "status_count": 87,
+          "tracked_status": [
+            " M .gitignore",
+            " M .pgir_campaign/runtime/parallel/discovery/2026-08-17-pgir-114-pgir-030-retry-budget.md",
+            " M Mcp-Plus-Plus",
+            " M external/ipfs_accelerate",
+            " M external/ipfs_datasets",
+            " M external/ipfs_kit",
+            " M hallucinate_app"
+          ],
+          "untracked_relevant_status": [
+            "?? artifacts/autoformalization-alignment-20261003/",
+            "?? artifacts/autoformalization-publication-20261004/",
+            "?? implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+            "?? implementation_plan/docs/50-autoformalization-alignment-implementation-backlog-2026-10-04.md",
+            "?? implementation_plan/docs/51-autoformalization-review-evidence-intake-2026-10-04.md",
+            "?? implementation_plan/docs/52-autoformalization-statement-scope-coverage-2026-10-04.md",
+            "?? implementation_plan/docs/53-autoformalization-representation-and-stage-boundaries-2026-10-04.md",
+            "?? implementation_plan/docs/54-autoformalization-pinned-stage-workflows-2026-10-04.md",
+            "?? implementation_plan/docs/55-autoformalization-masked-contrastive-relations-2026-10-04.md",
+            "?? implementation_plan/docs/56-autoformalization-relation-mask-handoff-2026-10-04.md",
+            "?? implementation_plan/docs/57-autoformalization-signed-review-provenance-2026-10-04.md",
+            "?? implementation_plan/docs/58-autoencoder-progress-integration-2026-10-06.md",
+            "?? implementation_plan/docs/59-autoencoder-progress-reconciliation-2026-10-06.md",
+            "?? scripts/autoformalization_recovery_probe.py",
+            "?? scripts/benchmark_autoformal_outputs.py",
+            "?? scripts/review_autoencoder_progress.py",
+            "?? scripts/summarize_autoformal_outputs.py",
+            "?? tests/test_autoformalization_recovery_probe.py",
+            "?? tests/test_review_autoencoder_progress.py"
+          ]
+        },
+        {
+          "branch": "refs/heads/agent/autoencoder-progress-reconciliation-20261006",
+          "head": "9e794a4cfdc9cbfacdb63604dcca1605ce2bf1d5",
+          "locked": false,
+          "path": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-root-20261006",
+          "status_count": 3,
+          "tracked_status": [
+            " M external/ipfs_accelerate",
+            " M external/ipfs_datasets",
+            " M external/ipfs_kit"
+          ],
+          "untracked_relevant_status": []
+        },
+        {
+          "branch": "refs/heads/agent/normative-checkpoint-availability-root-20261006",
+          "head": "dfc02e62186dc97223a620b074b278f0e1b97115",
+          "locked": false,
+          "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-root-20261006",
+          "status_count": 0,
+          "tracked_status": [],
+          "untracked_relevant_status": []
+        },
+        {
+          "branch": "refs/heads/agent/normative-decoder-runtime-root-20261007",
+          "head": "021ffee3f6894c4112d6951dad62cb29461cdac1",
+          "locked": false,
+          "path": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-root-20261007",
+          "status_count": 0,
+          "tracked_status": [],
+          "untracked_relevant_status": []
+        },
+        {
+          "branch": "refs/heads/agent/vericodegen-2026-autoformalization",
+          "head": "091624a773179d24178d12bc1f410864885c10bf",
+          "locked": false,
+          "path": "/home/barberb/lift_coding/.worktrees/vericodegen-autoformalization-2026",
+          "status_count": 0,
+          "tracked_status": [],
+          "untracked_relevant_status": []
+        },
+        {
+          "branch": "refs/heads/codex/legal-cross-agent-followthrough-20261006",
+          "head": "8cd17c705162a5d47c0eb31616d8d5637eea79d2",
+          "locked": false,
+          "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/workspace-followthrough",
+          "status_count": 0,
+          "tracked_status": [],
+          "untracked_relevant_status": []
+        },
+        {
+          "branch": "refs/heads/codex/grouped-autoencoder-findings-20261006-02",
+          "head": "1b20f745a1db2a485b97ffc7f0816119881f7f8d",
+          "locked": false,
+          "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/workspace-integration",
+          "status_count": 0,
+          "tracked_status": [],
+          "untracked_relevant_status": []
+        },
+        {
+          "branch": "refs/heads/codex/autoencoder-reconciliation-20261007-01",
+          "head": "021ffee3f6894c4112d6951dad62cb29461cdac1",
+          "locked": false,
+          "path": "/home/barberb/lift_coding/artifacts/autoencoder-reconciliation-20261007-01/workspace",
+          "status_count": 0,
+          "tracked_status": [],
+          "untracked_relevant_status": []
+        },
+        {
+          "branch": "refs/heads/codex/joint-conditioning-20261005-01",
+          "head": "8c02d655e2d086bd644a9011ea67325060ef87bc",
+          "locked": false,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/current-main-joint-conditioning-01/publication-worktree",
+          "status_count": 0,
+          "tracked_status": [],
+          "untracked_relevant_status": []
+        },
+        {
+          "branch": "refs/heads/codex/joint-conditioning-20261005-02",
+          "head": "3b39519d9bc9021a5e6a0bb183f6c57cb780bc5a",
+          "locked": false,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/current-main-joint-conditioning-02/publication-worktree",
+          "status_count": 0,
+          "tracked_status": [],
+          "untracked_relevant_status": []
+        },
+        {
+          "branch": "refs/heads/codex/joint-span-policy-20261005-01",
+          "head": "ec4302acd75f0dbb0d744586db35fef9d23980ac",
+          "locked": false,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/current-main-joint-span-01/publication-worktree",
+          "status_count": 0,
+          "tracked_status": [],
+          "untracked_relevant_status": []
+        },
+        {
+          "branch": "refs/heads/publication/main-refresh-20261004/root-01",
+          "head": "9d1944b9a9fd95abbb6297b4c7d34a1312809f14",
+          "locked": false,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/git/root-main-refresh-01/publication-worktree",
+          "status_count": 0,
+          "tracked_status": [],
+          "untracked_relevant_status": []
+        },
+        {
+          "branch": "refs/heads/codex/legal-decoder-followup-results-20261006-01",
+          "head": "0ed01fd56db31fe4345f8143a7647a437dcb1118",
+          "locked": false,
+          "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/workspace",
+          "status_count": 0,
+          "tracked_status": [],
+          "untracked_relevant_status": []
+        }
+      ]
+    },
+    {
+      "canonical_HEAD": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+      "canonical_selected_source_review": {
+        "identical_live_main_count": 1551,
+        "nonidentical": [
+          {
+            "bytes": 52229,
+            "classification": "already_retained_unintegrated_source",
+            "identical_prior_54_file_archive": true,
+            "identical_prior_canonical_scope": true,
+            "identical_prior_working_copy_inventory": true,
+            "in_prior_54_file_archive": true,
+            "in_prior_canonical_scope": true,
+            "in_prior_working_copy_inventory": true,
+            "live_comparison": "different_live_main",
+            "path": "docs/autoencoders/inference_and_qualification.md",
+            "path_was_in_prior_october6_status_inventory": true,
+            "prior_saved_diff": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/dirty-diffs/ea5cbdeb4a8a.diff",
+            "sha256": "de591d05db47c02964735f8e294543e278197eee4f64109824485cc3562c5598",
+            "status": " M"
+          },
+          {
+            "bytes": 59595,
+            "classification": "already_retained_unintegrated_source",
+            "identical_prior_54_file_archive": false,
+            "identical_prior_canonical_scope": true,
+            "identical_prior_working_copy_inventory": false,
+            "in_prior_54_file_archive": false,
+            "in_prior_canonical_scope": true,
+            "in_prior_working_copy_inventory": false,
+            "live_comparison": "different_live_main",
+            "path": "ipfs_datasets_py/logic/autoformal/__init__.py",
+            "path_was_in_prior_october6_status_inventory": true,
+            "sha256": "87d7f47f48dc42c5c35902509c71088961e6ec2ffd23e3b6511c5fe81ac08ecd",
+            "status": " M"
+          },
+          {
+            "bytes": 32164,
+            "classification": "already_retained_unintegrated_source",
+            "identical_prior_54_file_archive": false,
+            "identical_prior_canonical_scope": true,
+            "identical_prior_working_copy_inventory": true,
+            "in_prior_54_file_archive": false,
+            "in_prior_canonical_scope": true,
+            "in_prior_working_copy_inventory": true,
+            "live_comparison": "different_live_main",
+            "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_candidate_qualification.py",
+            "path_was_in_prior_october6_status_inventory": true,
+            "prior_saved_diff": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/dirty-diffs/ce1b6aed4794.diff",
+            "sha256": "7ef775f99bb66be537ce4c0b5996ae484b76465dd51ec77f800aeefe8478b133",
+            "status": " M"
+          },
+          {
+            "bytes": 21348,
+            "classification": "already_retained_unintegrated_source",
+            "identical_prior_54_file_archive": true,
+            "identical_prior_canonical_scope": false,
+            "identical_prior_working_copy_inventory": true,
+            "in_prior_54_file_archive": true,
+            "in_prior_canonical_scope": false,
+            "in_prior_working_copy_inventory": true,
+            "live_comparison": "different_live_main",
+            "path": "tests/unit_tests/logic/deontic/test_legal_norm_ir.py",
+            "path_was_in_prior_october6_status_inventory": true,
+            "prior_saved_diff": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/dirty-diffs/6a9f5c128a96.diff",
+            "sha256": "801d82ffef06cd7dbd06754bacbd7806c6a102efb1029ae9fb0f274610e29354",
+            "status": " M"
+          },
+          {
+            "bytes": 9075,
+            "classification": "stale_canonical_document_missing_newer_live_main_sections",
+            "identical_prior_54_file_archive": false,
+            "identical_prior_canonical_scope": false,
+            "identical_prior_working_copy_inventory": false,
+            "in_prior_54_file_archive": false,
+            "in_prior_canonical_scope": false,
+            "in_prior_working_copy_inventory": false,
+            "live_comparison": "different_live_main",
+            "path": "docs/autoencoders/grouped_legal_decoders.md",
+            "path_was_in_prior_october6_status_inventory": false,
+            "sha256": "caea32c25f4713e050d154d0fc33a6f7e1cabbe6234b2f9908b4d90d9e14c84e",
+            "status": "??"
+          },
+          {
+            "bytes": 8586,
+            "classification": "stale_canonical_document_missing_newer_live_main_sections",
+            "identical_prior_54_file_archive": false,
+            "identical_prior_canonical_scope": false,
+            "identical_prior_working_copy_inventory": true,
+            "in_prior_54_file_archive": false,
+            "in_prior_canonical_scope": false,
+            "in_prior_working_copy_inventory": true,
+            "live_comparison": "different_live_main",
+            "path": "docs/autoencoders/progress_integration.md",
+            "path_was_in_prior_october6_status_inventory": false,
+            "sha256": "e06d241532ae8ddaa6be94fc5d2a0406358540651f7ab665afc70082a2be90f7",
+            "status": "??"
+          },
+          {
+            "bytes": 10247,
+            "classification": "already_retained_unintegrated_source",
+            "identical_prior_54_file_archive": true,
+            "identical_prior_canonical_scope": true,
+            "identical_prior_working_copy_inventory": true,
+            "in_prior_54_file_archive": true,
+            "in_prior_canonical_scope": true,
+            "in_prior_working_copy_inventory": true,
+            "live_comparison": "absent_live_main",
+            "path": "ipfs_datasets_py/logic/autoformal/legal_coordination.py",
+            "path_was_in_prior_october6_status_inventory": true,
+            "prior_saved_diff": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/dirty-diffs/671730c9350d.diff",
+            "sha256": "346db8bc54ca9961a7b8b03133972e54d22fa2b218e2b547d832403dbf801205",
+            "status": "??"
+          },
+          {
+            "bytes": 21004,
+            "classification": "already_retained_unintegrated_source",
+            "identical_prior_54_file_archive": false,
+            "identical_prior_canonical_scope": true,
+            "identical_prior_working_copy_inventory": false,
+            "in_prior_54_file_archive": false,
+            "in_prior_canonical_scope": true,
+            "in_prior_working_copy_inventory": false,
+            "live_comparison": "absent_live_main",
+            "path": "ipfs_datasets_py/logic/autoformal/legal_temporal_deadline_interpretation.py",
+            "path_was_in_prior_october6_status_inventory": true,
+            "sha256": "e2fdd30dda994b1842b27dcd46bca1f82a2f1fa921e6e707da1ce86a6ad04d72",
+            "status": "??"
+          },
+          {
+            "bytes": 19268,
+            "classification": "already_retained_unintegrated_source",
+            "identical_prior_54_file_archive": false,
+            "identical_prior_canonical_scope": true,
+            "identical_prior_working_copy_inventory": false,
+            "in_prior_54_file_archive": false,
+            "in_prior_canonical_scope": true,
+            "in_prior_working_copy_inventory": false,
+            "live_comparison": "absent_live_main",
+            "path": "ipfs_datasets_py/logic/autoformal/legal_temporal_event_interpretation.py",
+            "path_was_in_prior_october6_status_inventory": true,
+            "sha256": "96eba826a8c90ba4d2520f6ab254321f93dd8ae7eab9ef939f9b7ab5d34f33c6",
+            "status": "??"
+          },
+          {
+            "bytes": 17794,
+            "classification": "already_retained_unintegrated_source",
+            "identical_prior_54_file_archive": false,
+            "identical_prior_canonical_scope": true,
+            "identical_prior_working_copy_inventory": false,
+            "in_prior_54_file_archive": false,
+            "in_prior_canonical_scope": true,
+            "in_prior_working_copy_inventory": false,
+            "live_comparison": "absent_live_main",
+            "path": "ipfs_datasets_py/logic/autoformal/legal_temporal_occurrence_provenance.py",
+            "path_was_in_prior_october6_status_inventory": true,
+            "sha256": "3c0901c8c90072528f832c177cb716789481214da7df1b47bc0c2f67d4842f6d",
+            "status": "??"
+          },
+          {
+            "bytes": 20531,
+            "classification": "already_retained_unintegrated_source",
+            "identical_prior_54_file_archive": false,
+            "identical_prior_canonical_scope": true,
+            "identical_prior_working_copy_inventory": true,
+            "in_prior_54_file_archive": false,
+            "in_prior_canonical_scope": true,
+            "in_prior_working_copy_inventory": true,
+            "live_comparison": "absent_live_main",
+            "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_4096_verified.py",
+            "path_was_in_prior_october6_status_inventory": true,
+            "prior_saved_diff": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/dirty-diffs/35adac5366c2.diff",
+            "sha256": "ade819fa435ddb0179a4c857027313835d769967ef23d8499e53a85d5b4ff6f4",
+            "status": "??"
+          },
+          {
+            "bytes": 16453,
+            "classification": "already_retained_unintegrated_source",
+            "identical_prior_54_file_archive": false,
+            "identical_prior_canonical_scope": true,
+            "identical_prior_working_copy_inventory": true,
+            "in_prior_54_file_archive": false,
+            "in_prior_canonical_scope": true,
+            "in_prior_working_copy_inventory": true,
+            "live_comparison": "absent_live_main",
+            "path": "tests/unit/logic/formalization/autoencoder/test_source_embeddings_4096_verified.py",
+            "path_was_in_prior_october6_status_inventory": true,
+            "prior_saved_diff": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/dirty-diffs/db938a0ad872.diff",
+            "sha256": "38fceee3d5aff93bfcc64e54078bdc2932ab7f8c9be689987c5b608304bcd355",
+            "status": "??"
+          },
+          {
+            "bytes": 11281,
+            "classification": "previously_inventoried_unintegrated_path; exact prior bytes not established by selected hash inventories",
+            "identical_prior_54_file_archive": false,
+            "identical_prior_canonical_scope": false,
+            "identical_prior_working_copy_inventory": false,
+            "in_prior_54_file_archive": false,
+            "in_prior_canonical_scope": false,
+            "in_prior_working_copy_inventory": false,
+            "live_comparison": "absent_live_main",
+            "path": "tests/unit/logic/test_autoformal_temporal_deadline_session.py",
+            "path_was_in_prior_october6_status_inventory": true,
+            "sha256": "682fbe5a95b4e93cc000380e0ddd8d8335735e8b5f4c3b62603d2812adb10b00",
+            "status": "??"
+          },
+          {
+            "bytes": 13703,
+            "classification": "previously_inventoried_unintegrated_path; exact prior bytes not established by selected hash inventories",
+            "identical_prior_54_file_archive": false,
+            "identical_prior_canonical_scope": false,
+            "identical_prior_working_copy_inventory": false,
+            "in_prior_54_file_archive": false,
+            "in_prior_canonical_scope": false,
+            "in_prior_working_copy_inventory": false,
+            "live_comparison": "absent_live_main",
+            "path": "tests/unit/logic/test_autoformal_temporal_interpretation_session.py",
+            "path_was_in_prior_october6_status_inventory": true,
+            "sha256": "bb7678605bae7e72890bade9443f34d10371b83f6087bbf77aece3aa3c5c3b9e",
+            "status": "??"
+          },
+          {
+            "bytes": 12029,
+            "classification": "already_retained_unintegrated_source",
+            "identical_prior_54_file_archive": true,
+            "identical_prior_canonical_scope": false,
+            "identical_prior_working_copy_inventory": true,
+            "in_prior_54_file_archive": true,
+            "in_prior_canonical_scope": false,
+            "in_prior_working_copy_inventory": true,
+            "live_comparison": "absent_live_main",
+            "path": "tests/unit/logic/test_deontic_grouped_coordination.py",
+            "path_was_in_prior_october6_status_inventory": true,
+            "prior_saved_diff": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/dirty-diffs/174b7daa0ee6.diff",
+            "sha256": "2b4fc660b36fa90200f499505c8e85f5476ead3f4fde18b5c3a52724fcbc2c3a",
+            "status": "??"
+          },
+          {
+            "bytes": 16633,
+            "classification": "already_retained_unintegrated_source",
+            "identical_prior_54_file_archive": true,
+            "identical_prior_canonical_scope": false,
+            "identical_prior_working_copy_inventory": true,
+            "in_prior_54_file_archive": true,
+            "in_prior_canonical_scope": false,
+            "in_prior_working_copy_inventory": true,
+            "live_comparison": "absent_live_main",
+            "path": "tests/unit/logic/test_deontic_grouped_coordination_boundaries.py",
+            "path_was_in_prior_october6_status_inventory": true,
+            "prior_saved_diff": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/dirty-diffs/5dda74f2ac05.diff",
+            "sha256": "5f978dbbb03cab75ac68e0f27792931ea3e00e70f9cfa7323ccfcc783a71ffac",
+            "status": "??"
+          },
+          {
+            "bytes": 4775,
+            "classification": "already_retained_unintegrated_source",
+            "identical_prior_54_file_archive": true,
+            "identical_prior_canonical_scope": false,
+            "identical_prior_working_copy_inventory": true,
+            "in_prior_54_file_archive": true,
+            "in_prior_canonical_scope": false,
+            "in_prior_working_copy_inventory": true,
+            "live_comparison": "absent_live_main",
+            "path": "tests/unit/logic/test_legal_coordination_compiler.py",
+            "path_was_in_prior_october6_status_inventory": true,
+            "prior_saved_diff": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/dirty-diffs/d9e4889df62d.diff",
+            "sha256": "cc04044899a8169feda13dcd6825f01275d4b205663d0ece8f7f391666c77e19",
+            "status": "??"
+          },
+          {
+            "bytes": 5682,
+            "classification": "already_retained_unintegrated_source",
+            "identical_prior_54_file_archive": true,
+            "identical_prior_canonical_scope": false,
+            "identical_prior_working_copy_inventory": true,
+            "in_prior_54_file_archive": true,
+            "in_prior_canonical_scope": false,
+            "in_prior_working_copy_inventory": true,
+            "live_comparison": "absent_live_main",
+            "path": "tests/unit/logic/test_legal_coordination_evaluation.py",
+            "path_was_in_prior_october6_status_inventory": false,
+            "prior_saved_diff": "/home/barberb/lift_coding/artifacts/autoencoder-progress-reconciliation-20261006/datasets/dirty-diffs/022201b2f190.diff",
+            "sha256": "7fe3b08cfceeb3e75106ff5fea751f93a426a959d9f182109a23d72f17b666f0",
+            "status": "??"
+          },
+          {
+            "bytes": 8010,
+            "classification": "already_retained_unintegrated_source",
+            "identical_prior_54_file_archive": true,
+            "identical_prior_canonical_scope": false,
+            "identical_prior_working_copy_inventory": false,
+            "in_prior_54_file_archive": true,
+            "in_prior_canonical_scope": false,
+            "in_prior_working_copy_inventory": false,
+            "live_comparison": "absent_live_main",
+            "path": "tests/unit/logic/test_legal_grouped_coordination_integration.py",
+            "path_was_in_prior_october6_status_inventory": true,
+            "sha256": "3b3bd69982fab615d653207e1835c6e94a4800fcfc83e242414e8916ff85c736",
+            "status": "??"
+          },
+          {
+            "bytes": 9537,
+            "classification": "already_retained_unintegrated_source",
+            "identical_prior_54_file_archive": true,
+            "identical_prior_canonical_scope": true,
+            "identical_prior_working_copy_inventory": false,
+            "in_prior_54_file_archive": true,
+            "in_prior_canonical_scope": true,
+            "in_prior_working_copy_inventory": false,
+            "live_comparison": "absent_live_main",
+            "path": "tests/unit/logic/test_legal_grouped_decoder_integration.py",
+            "path_was_in_prior_october6_status_inventory": false,
+            "sha256": "dff06d0aa119ea8e9540f1140426018436b575f68d22724cc5ced3090ae3dcea",
+            "status": "??"
+          },
+          {
+            "bytes": 11544,
+            "classification": "already_retained_unintegrated_source",
+            "identical_prior_54_file_archive": false,
+            "identical_prior_canonical_scope": true,
+            "identical_prior_working_copy_inventory": false,
+            "in_prior_54_file_archive": false,
+            "in_prior_canonical_scope": true,
+            "in_prior_working_copy_inventory": false,
+            "live_comparison": "different_live_main",
+            "path": "tests/unit/logic/test_legal_grouped_span_decoder_boundaries.py",
+            "path_was_in_prior_october6_status_inventory": false,
+            "sha256": "61a5fe1b430517362e6331ace33c7f34efa282d4987cfe1761b3651a9e97bb4b",
+            "status": "??"
+          },
+          {
+            "bytes": 11246,
+            "classification": "already_retained_unintegrated_source",
+            "identical_prior_54_file_archive": true,
+            "identical_prior_canonical_scope": true,
+            "identical_prior_working_copy_inventory": false,
+            "in_prior_54_file_archive": true,
+            "in_prior_canonical_scope": true,
+            "in_prior_working_copy_inventory": false,
+            "live_comparison": "absent_live_main",
+            "path": "tests/unit/logic/test_legal_grouped_span_decoder_integration.py",
+            "path_was_in_prior_october6_status_inventory": false,
+            "sha256": "628657cadeb058c0772bbcc4a1a48623a15e3f34b98fa7db737fadd5d0b34779",
+            "status": "??"
+          },
+          {
+            "bytes": 15449,
+            "classification": "already_retained_unintegrated_source",
+            "identical_prior_54_file_archive": false,
+            "identical_prior_canonical_scope": true,
+            "identical_prior_working_copy_inventory": false,
+            "in_prior_54_file_archive": false,
+            "in_prior_canonical_scope": true,
+            "in_prior_working_copy_inventory": false,
+            "live_comparison": "different_live_main",
+            "path": "tests/unit/logic/test_legal_grouped_span_decoder_v2_boundaries.py",
+            "path_was_in_prior_october6_status_inventory": false,
+            "sha256": "08ee59189e648e31f1d8f50c881cf24bc91c34f017d32cfac84920d73f7ff0c1",
+            "status": "??"
+          },
+          {
+            "bytes": 11843,
+            "classification": "already_retained_unintegrated_source",
+            "identical_prior_54_file_archive": true,
+            "identical_prior_canonical_scope": true,
+            "identical_prior_working_copy_inventory": false,
+            "in_prior_54_file_archive": true,
+            "in_prior_canonical_scope": true,
+            "in_prior_working_copy_inventory": false,
+            "live_comparison": "absent_live_main",
+            "path": "tests/unit/logic/test_legal_grouped_span_decoder_v2_integration.py",
+            "path_was_in_prior_october6_status_inventory": false,
+            "sha256": "2dec33cccde0709f55db4e1ce27173b09f132abae2d0149b311978befb6c69b9",
+            "status": "??"
+          },
+          {
+            "bytes": 20214,
+            "classification": "previously_inventoried_unintegrated_path; exact prior bytes not established by selected hash inventories",
+            "identical_prior_54_file_archive": false,
+            "identical_prior_canonical_scope": false,
+            "identical_prior_working_copy_inventory": false,
+            "in_prior_54_file_archive": false,
+            "in_prior_canonical_scope": false,
+            "in_prior_working_copy_inventory": false,
+            "live_comparison": "absent_live_main",
+            "path": "tests/unit/logic/test_legal_temporal_deadline_interpretation.py",
+            "path_was_in_prior_october6_status_inventory": true,
+            "sha256": "7a14416cdee25b4bb608b913b60997a83c2026647580fb47ca98a1dbf93c9832",
+            "status": "??"
+          },
+          {
+            "bytes": 15543,
+            "classification": "previously_inventoried_unintegrated_path; exact prior bytes not established by selected hash inventories",
+            "identical_prior_54_file_archive": false,
+            "identical_prior_canonical_scope": false,
+            "identical_prior_working_copy_inventory": false,
+            "in_prior_54_file_archive": false,
+            "in_prior_canonical_scope": false,
+            "in_prior_working_copy_inventory": false,
+            "live_comparison": "absent_live_main",
+            "path": "tests/unit/logic/test_legal_temporal_event_interpretation.py",
+            "path_was_in_prior_october6_status_inventory": true,
+            "sha256": "e85bb63077f9cd32a04485c2f058394fb7372f579950accbe11a99ed6767821d",
+            "status": "??"
+          },
+          {
+            "bytes": 15280,
+            "classification": "previously_inventoried_unintegrated_path; exact prior bytes not established by selected hash inventories",
+            "identical_prior_54_file_archive": false,
+            "identical_prior_canonical_scope": false,
+            "identical_prior_working_copy_inventory": false,
+            "in_prior_54_file_archive": false,
+            "in_prior_canonical_scope": false,
+            "in_prior_working_copy_inventory": false,
+            "live_comparison": "absent_live_main",
+            "path": "tests/unit/logic/test_legal_temporal_occurrence_provenance.py",
+            "path_was_in_prior_october6_status_inventory": true,
+            "sha256": "c0fb8b3fae7151c1185627c863233ab0a5937b407ed137e3bf36d54f9f850071",
+            "status": "??"
+          }
+        ],
+        "nonidentical_count": 27,
+        "scope_exclusions": "No broad parser dependency walk; selected path expression and 2MB maximum."
+      },
+      "initial_live_main": "497362d8aa117a210769423ec6a14d8010d4588c",
+      "live_main": "497362d8aa117a210769423ec6a14d8010d4588c",
+      "live_relevant_heads": [
+        {
+          "ref": "refs/heads/agent/autoencoder-progress-reconciliation-datasets-20261006",
+          "sha": "a3f16f2870a80a7e985b35bed3334512c47d9dc3"
+        },
+        {
+          "ref": "refs/heads/agent/contextual-legal-runtime-20261006",
+          "sha": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d"
+        },
+        {
+          "ref": "refs/heads/codex/legal-cross-agent-guards-20261006",
+          "sha": "575a129f19068d58d66cc8119e85c3d23faa560a"
+        },
+        {
+          "ref": "refs/heads/codex/legal-decoder-followup-20261006-01",
+          "sha": "0f733b621335a3fb95e3f8855f2100cd95ba01b5"
+        },
+        {
+          "ref": "refs/heads/codex/legal-grouped-integration-20261006-02",
+          "sha": "004887f6250b083e0b095d5ac7563bc5bb792491"
+        },
+        {
+          "ref": "refs/heads/codex/legal-original-text-roundtrip-retained-20261004",
+          "sha": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c"
+        },
+        {
+          "ref": "refs/heads/codex/source-v2-warm-start-20261004",
+          "sha": "d1643c2c621f45f0ca0080e017fe6717b093e478"
+        },
+        {
+          "ref": "refs/heads/main",
+          "sha": "497362d8aa117a210769423ec6a14d8010d4588c"
+        }
+      ],
+      "main_stable_during_audit": true,
+      "name": "datasets",
+      "previous_merge": "1c1f91c8010ce058243734f143587e92fab2f0a2",
+      "previous_merge_is_ancestor_of_live_main": true,
+      "refs": [
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/agent/autoencoder-progress-reconciliation-datasets-20261006",
+          "sha": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+          "subject": "Clarify contextual runtime input provenance and completed training status"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/agent/contextual-legal-runtime-20261006",
+          "sha": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "subject": "Document original contextual replay and distinct legal prose reconstruction gaps"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/agent/decoder-profile-recovery-20261006",
+          "sha": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "subject": "Restore bounded decoder dependencies and explicit IR replay interfaces"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/agent/normative-checkpoint-availability-datasets-20261006",
+          "sha": "61c5db04538596ea00091cd4f013500854368397",
+          "subject": "Merge pull request #1272 from endomorphosis/codex/legal-cross-agent-guards-20261006"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/agent/normative-decoder-runtime-datasets-20261007",
+          "sha": "497362d8aa117a210769423ec6a14d8010d4588c",
+          "subject": "Add strict qualifier preflight and diagnose decoder training readouts"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/codex/alignment-decoder-768-20261003",
+          "sha": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "subject": "Train generated scalar fields with shared boundary replay and strict causal retry"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/codex/autoencoder-owner-integration-20261007-01",
+          "sha": "497362d8aa117a210769423ec6a14d8010d4588c",
+          "subject": "Add strict qualifier preflight and diagnose decoder training readouts"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/codex/legal-cross-agent-guards-20261006",
+          "sha": "575a129f19068d58d66cc8119e85c3d23faa560a",
+          "subject": "Combine cross-agent decoder isolation checks and published findings"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/codex/legal-decoder-followup-20261006-01",
+          "sha": "0f733b621335a3fb95e3f8855f2100cd95ba01b5",
+          "subject": "Add source occurrence proposal boundary and matched decoder training findings"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/codex/legal-grouped-integration-20261006-02",
+          "sha": "004887f6250b083e0b095d5ac7563bc5bb792491",
+          "subject": "Integrate experimental grouped Legal decoders and preserved handoffs"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/codex/legal-original-text-roundtrip-retained-20261004",
+          "sha": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "subject": "Merge remote-tracking branch 'origin/main' into codex/legal-original-text-roundtrip-retained-20261004"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/codex/legal-roundtrip-scorer-source-20261004",
+          "sha": "92600cbfc70f935c18e2cffc994d50083cd62993",
+          "subject": "Score retained LegalIR and original-text reconstructions separately"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/codex/source-v2-warm-start-20261004",
+          "sha": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "subject": "Continue retained source-v2 decoder weights with fresh optimizer"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/publication/canonical-datasets-final-20261004/908f50b1afbebe39f161c9d4",
+          "sha": "1d17bfc7ed3db5b675e8f79e0e20e5b2c8ae12bb",
+          "subject": "Snapshot canonical source work for autoformalization publication"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/publication/canonical-recovery-20261004/908f50b1afbebe39f161c9d4",
+          "sha": "5e7f15587898dda5960720a407b9f42fb7b6389a",
+          "subject": "Snapshot canonical source work for autoformalization publication"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/publication/canonical-wip-20261004/908f50b1afbebe39f161c9d4",
+          "sha": "1c84ab2ed3bdca1bab3dde1ed82f4d94e28dd856",
+          "subject": "Snapshot canonical source work for autoformalization publication"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/recovery/tmp-span-parallel-candidate-20261002",
+          "sha": "5b98c9d6a8bd07b86d199891396a462ebb693445",
+          "subject": "Merge commit 'a8dafc66e5d2b62bc86a82415ff7a35c5a4d9ff8' into autoformal-candidate"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/recovery/tmp-span-parallel-joint201-timeout-20261002",
+          "sha": "4bdecbeffc4df42caed0d4ccffa3feca39d18abe",
+          "subject": "AFTD-817b9bac3966fbc1e819: Preserve or replace strict_roundtrip_failed for joint-201-1"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/recovery/tmp-span-parallel-joint203-timeout-20261002",
+          "sha": "7c01d2c4bb700edbf5de34dedd96cf148056c691",
+          "subject": "AFTD-e3b018a00ef13c0c927c: Preserve or replace strict_roundtrip_failed for joint-203-26"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/recovery/tmp-span-router-candidate-20261002",
+          "sha": "060467eeb99d16f96e7be11cb098f8effeb8b17a",
+          "subject": "Local autoformal source snapshot (not a repair)"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/recovery/tmp-span-router-original-attempt-20261002",
+          "sha": "060467eeb99d16f96e7be11cb098f8effeb8b17a",
+          "subject": "Local autoformal source snapshot (not a repair)"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/recovery/tmp-span-router-staged-20261002",
+          "sha": "6e6a28823e0baae5fa32793ebf5a06d84749a19e",
+          "subject": "Archive /tmp span router staged snapshot before cleanup review"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/heads/recovery/tmp-span-router-working-20261002",
+          "sha": "f59b695af2ba24b2f040aa8814a9fe1680c0f509",
+          "subject": "Archive /tmp span router working snapshot before cleanup review"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/remotes/origin/agent/autoencoder-progress-reconciliation-datasets-20261006",
+          "sha": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+          "subject": "Clarify contextual runtime input provenance and completed training status"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/remotes/origin/agent/contextual-legal-runtime-20261006",
+          "sha": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "subject": "Document original contextual replay and distinct legal prose reconstruction gaps"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/remotes/origin/codex/legal-cross-agent-guards-20261006",
+          "sha": "575a129f19068d58d66cc8119e85c3d23faa560a",
+          "subject": "Combine cross-agent decoder isolation checks and published findings"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/remotes/origin/codex/legal-decoder-followup-20261006-01",
+          "sha": "0f733b621335a3fb95e3f8855f2100cd95ba01b5",
+          "subject": "Add source occurrence proposal boundary and matched decoder training findings"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/remotes/origin/codex/legal-grouped-integration-20261006-02",
+          "sha": "004887f6250b083e0b095d5ac7563bc5bb792491",
+          "subject": "Integrate experimental grouped Legal decoders and preserved handoffs"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/remotes/origin/codex/legal-original-text-roundtrip-retained-20261004",
+          "sha": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "subject": "Merge remote-tracking branch 'origin/main' into codex/legal-original-text-roundtrip-retained-20261004"
+        },
+        {
+          "ancestor_of_live_main": true,
+          "ref": "refs/remotes/origin/codex/source-v2-warm-start-20261004",
+          "sha": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "subject": "Continue retained source-v2 decoder weights with fresh optimizer"
+        }
+      ],
+      "relevant_scope_counts": {
+        "canonical_worktrees_audited": 1,
+        "live_GitHub_heads_including_main": 8,
+        "local_branch_refs": 23,
+        "origin_tracking_refs": 7,
+        "refs_ancestor_of_live_main": 30,
+        "refs_not_ancestor_of_live_main": 0,
+        "registered_relevant_worktrees_excluding_canonical": 14
+      },
+      "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "url": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+      "worktrees": [
+        {
+          "canonical": true,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets",
+          "status_count": 2285,
+          "tracked_status": [
+            " M .gitignore",
+            " M .tools/ipfs_kit_py",
+            " M data/logic/conformance/reachable_matrix_v2.json",
+            " M docs/architecture/logic/logic_parser_baseline/capability_matrix.json",
+            " M docs/architecture/logic/logic_parser_v2_baseline/claim_runtime_audit.json",
+            " M docs/autoencoders/README.md",
+            " M docs/autoencoders/control_plane_and_sync.md",
+            " M docs/autoencoders/inference_and_qualification.md",
+            " M docs/autoencoders/multidomain_reconstruction_training.md",
+            " M docs/autoencoders/projection_context_resolution.md",
+            " D docs/implementation/reports/SUPERVISOR_PARALLEL_REPAIR_20260928.md",
+            " M docs/implementation/runbooks/uscode_autoformal_supervisor.md",
+            " D docs/software_contracts/PAGED_RAW_FACTS_V1.md",
+            " M ipfs_accelerate_py",
+            " M ipfs_datasets_py/huggingface/autoformal_span_cache.py",
+            " M ipfs_datasets_py/logic/CEC/native/dcec_integration.py",
+            " M ipfs_datasets_py/logic/autoformal/__init__.py",
+            " M ipfs_datasets_py/logic/autoformal/entity_cache.py",
+            " M ipfs_datasets_py/logic/autoformal/lean_units.py",
+            " M ipfs_datasets_py/logic/autoformal/meta_ontology.py",
+            " M ipfs_datasets_py/logic/autoformal/span_cache.py",
+            " M ipfs_datasets_py/logic/autoformal/worker_budget.py",
+            " M ipfs_datasets_py/logic/backends/atp/adapters.py",
+            " M ipfs_datasets_py/logic/backends/atp/execution_v2.py",
+            " M ipfs_datasets_py/logic/backends/hyperproperties/adapters.py",
+            " M ipfs_datasets_py/logic/backends/hyperproperties/execution_v2.py",
+            " M ipfs_datasets_py/logic/backends/installers/hyperproperty.py",
+            " M ipfs_datasets_py/logic/backends/installers/isabelle.py",
+            " M ipfs_datasets_py/logic/backends/installers/registry.py",
+            " M ipfs_datasets_py/logic/backends/installers/state_model.py",
+            " M ipfs_datasets_py/logic/backends/kernel/isabelle.py",
+            " M ipfs_datasets_py/logic/backends/kernel/lean.py",
+            " M ipfs_datasets_py/logic/backends/kernel/rocq.py",
+            " M ipfs_datasets_py/logic/backends/process.py",
+            " M ipfs_datasets_py/logic/backends/protocol/execution_v2.py",
+            " M ipfs_datasets_py/logic/backends/protocol/proverif.py",
+            " M ipfs_datasets_py/logic/backends/protocol/tamarin.py",
+            " M ipfs_datasets_py/logic/backends/registry.py",
+            " M ipfs_datasets_py/logic/backends/smt/compiler.py",
+            " M ipfs_datasets_py/logic/backends/smt/execution_v2.py"
+          ],
+          "untracked_relevant_status": [
+            "?? benchmarks/audit_legal_published_cuda.py",
+            "?? benchmarks/qualify_legal_published_cuda.py",
+            "?? benchmarks/test_legal_published_cuda_audit.py",
+            "?? configs/autoencoder/",
+            "?? configs/autoencoders/alignment_checkpoint_development_v1.json",
+            "?? configs/autoencoders/alignment_context_development_v1.json",
+            "?? configs/autoencoders/alignment_embedding_development_v1.json",
+            "?? configs/autoencoders/alignment_hybrid_development_v1.json",
+            "?? configs/autoencoders/alignment_joint_development_v1.json",
+            "?? configs/autoencoders/alignment_parser_development_v1.json",
+            "?? configs/autoencoders/alignment_projection_development_v1.json",
+            "?? configs/autoencoders/alignment_retrieval_development_v1.json",
+            "?? configs/autoencoders/alignment_richer_development_v1.json",
+            "?? configs/autoencoders/alignment_structure_development_v1.json",
+            "?? configs/autoencoders/alignment_study_development_v1.json",
+            "?? configs/autoencoders/gte_affine_alignment_preparation_v1.json",
+            "?? configs/autoencoders/gte_aligned_decoder_preparation_v1.json",
+            "?? configs/autoencoders/gte_aligned_interface_training_v1.json",
+            "?? configs/autoencoders/gte_bridge_preparation_v1.json",
+            "?? configs/autoencoders/gte_decoder_interface_training_v1.json",
+            "?? configs/autoencoders/gte_decoder_native_preparation_v1.json",
+            "?? configs/autoencoders/gte_decoder_source_evaluation_v1.json",
+            "?? configs/autoencoders/gte_decoder_transfer_preparation_v1.json",
+            "?? configs/autoencoders/gte_embedding_reuse_v1.json",
+            "?? configs/autoencoders/gte_migration_preparation_20261001_repin.json",
+            "?? configs/autoencoders/gte_migration_preparation_v1.json",
+            "?? configs/autoencoders/gte_multilingual_local_assets_v1.json",
+            "?? configs/autoencoders/gte_parallel_lineages_v1.json",
+            "?? docs/autoencoder_ownership.md",
+            "?? docs/autoencoders/alignment_binding_review_recording.md"
+          ]
+        },
+        {
+          "branch": "refs/heads/codex/alignment-decoder-768-20261003",
+          "head": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+          "locked": true,
+          "path": "/home/barberb/lift_coding/.worktrees/alignment-decoder-768-20261003",
+          "status_count": 0,
+          "tracked_status": [],
+          "untracked_relevant_status": []
+        },
+        {
+          "branch": "refs/heads/agent/autoencoder-progress-reconciliation-datasets-20261006",
+          "head": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+          "locked": false,
+          "path": "/home/barberb/lift_coding/.worktrees/autoencoder-progress-reconciliation-datasets-20261006",
+          "status_count": 0,
+          "tracked_status": [],
+          "untracked_relevant_status": []
+        },
+        {
+          "branch": "refs/heads/agent/contextual-legal-runtime-20261006",
+          "head": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+          "locked": false,
+          "path": "/home/barberb/lift_coding/.worktrees/contextual-legal-runtime-datasets-20261006",
+          "status_count": 0,
+          "tracked_status": [],
+          "untracked_relevant_status": []
+        },
+        {
+          "branch": "refs/heads/agent/decoder-profile-recovery-20261006",
+          "head": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+          "locked": false,
+          "path": "/home/barberb/lift_coding/.worktrees/decoder-profile-recovery-datasets-20261006",
+          "status_count": 0,
+          "tracked_status": [],
+          "untracked_relevant_status": []
+        },
+        {
+          "branch": "refs/heads/codex/legal-original-text-roundtrip-retained-20261004",
+          "head": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+          "locked": true,
+          "path": "/home/barberb/lift_coding/.worktrees/legal-original-text-roundtrip-retained-20261004",
+          "status_count": 0,
+          "tracked_status": [],
+          "untracked_relevant_status": []
+        },
+        {
+          "branch": "refs/heads/agent/normative-checkpoint-availability-datasets-20261006",
+          "head": "61c5db04538596ea00091cd4f013500854368397",
+          "locked": false,
+          "path": "/home/barberb/lift_coding/.worktrees/normative-checkpoint-availability-datasets-20261006",
+          "status_count": 0,
+          "tracked_status": [],
+          "untracked_relevant_status": []
+        },
+        {
+          "branch": "refs/heads/agent/normative-decoder-runtime-datasets-20261007",
+          "head": "497362d8aa117a210769423ec6a14d8010d4588c",
+          "locked": false,
+          "path": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-datasets-20261007",
+          "status_count": 2,
+          "tracked_status": [
+            " M ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py"
+          ],
+          "untracked_relevant_status": [
+            "?? ipfs_datasets_py/logic/formalization/autoencoder/normative_legal_ir_runtime.py"
+          ]
+        },
+        {
+          "branch": "refs/heads/codex/source-v2-warm-start-20261004",
+          "head": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+          "locked": true,
+          "path": "/home/barberb/lift_coding/.worktrees/source-v2-warm-start-20261004",
+          "status_count": 0,
+          "tracked_status": [],
+          "untracked_relevant_status": []
+        },
+        {
+          "branch": "refs/heads/codex/legal-cross-agent-guards-20261006",
+          "head": "575a129f19068d58d66cc8119e85c3d23faa560a",
+          "locked": false,
+          "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-followthrough",
+          "status_count": 0,
+          "tracked_status": [],
+          "untracked_relevant_status": []
+        },
+        {
+          "branch": "refs/heads/codex/legal-grouped-integration-20261006-02",
+          "head": "004887f6250b083e0b095d5ac7563bc5bb792491",
+          "locked": false,
+          "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-integration",
+          "status_count": 0,
+          "tracked_status": [],
+          "untracked_relevant_status": []
+        },
+        {
+          "branch": null,
+          "head": "0f36163a585a9bf514c41d8eabe202936c000705",
+          "locked": false,
+          "path": "/home/barberb/lift_coding/artifacts/autoencoder-consolidation-20261006-02/datasets-merged-main",
+          "status_count": 0,
+          "tracked_status": [],
+          "untracked_relevant_status": []
+        },
+        {
+          "branch": "refs/heads/codex/autoencoder-owner-integration-20261007-01",
+          "head": "497362d8aa117a210769423ec6a14d8010d4588c",
+          "locked": false,
+          "path": "/home/barberb/lift_coding/artifacts/autoencoder-reconciliation-20261007-01/datasets",
+          "status_count": 1,
+          "tracked_status": [],
+          "untracked_relevant_status": [
+            "?? tests/unit/logic/legal_ir/test_scope_proposal_preflight_integration.py"
+          ]
+        },
+        {
+          "branch": "refs/heads/publication/main-refresh-20261004/datasets-01",
+          "head": "23540627b1cf6515df0fd84c9417b4cbdb91234a",
+          "locked": false,
+          "path": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/git/datasets-main-refresh-01/publication-worktree",
+          "status_count": 0,
+          "tracked_status": [],
+          "untracked_relevant_status": []
+        },
+        {
+          "branch": "refs/heads/codex/legal-decoder-followup-20261006-01",
+          "head": "0f733b621335a3fb95e3f8855f2100cd95ba01b5",
+          "locked": false,
+          "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/datasets",
+          "status_count": 0,
+          "tracked_status": [],
+          "untracked_relevant_status": []
+        }
+      ]
+    }
+  ],
+  "schema": "autoencoder-branch-findings-readonly-audit/v1",
+  "scope": "Relevant local and live GitHub heads, registered study worktrees, and bounded canonical-only source comparison; no fetch, checkout, training, runtime import, or publication.",
+  "validation": {
+    "only_written_file": "/home/barberb/lift_coding/artifacts/autoencoder-reconciliation-20261007-01/branch-findings-audit.json",
+    "publication": false,
+    "repo_ref_mutation": false,
+    "runtime_imports": false,
+    "test_execution": false,
+    "training": false
+  }
+}

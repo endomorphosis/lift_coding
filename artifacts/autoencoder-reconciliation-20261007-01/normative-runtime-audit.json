@@ -1,0 +1,249 @@
+{
+  "schema": "normative-decoder-runtime-reconciliation-audit/v1",
+  "observed_at_utc": "2026-10-07T04:06:21.850798+00:00",
+  "scope": "Read-only GitHub/history/working-file audit plus diagnostic-only unit tests; audit artifact is the only workspace write.",
+  "applicable_AGENTS_md_found": [],
+  "root": {
+    "repository": "endomorphosis/lift_coding",
+    "path": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-root-20261007",
+    "branch": "agent/normative-decoder-runtime-root-20261007",
+    "head": "021ffee3f6894c4112d6951dad62cb29461cdac1",
+    "live_github_main": "021ffee3f6894c4112d6951dad62cb29461cdac1",
+    "status_porcelain": "",
+    "head_equals_live_main": true,
+    "datasets_gitlink": "497362d8aa117a210769423ec6a14d8010d4588c",
+    "head_delta": "31 changed paths: retained reconstruction-gap archive/publication evidence and exact datasets gitlink update; no root training runtime change."
+  },
+  "datasets": {
+    "repository": "endomorphosis/ipfs_datasets_py",
+    "path": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-datasets-20261007",
+    "branch": "agent/normative-decoder-runtime-datasets-20261007",
+    "head": "497362d8aa117a210769423ec6a14d8010d4588c",
+    "live_github_main": "497362d8aa117a210769423ec6a14d8010d4588c",
+    "status_porcelain": "",
+    "head_equals_live_main": true,
+    "head_delta": "9 new paths: qualifier representation preflight, its 37-test suite and reconstruction-gap numerical/evidence documentation. No model/checkpoint/codec defaults changed.",
+    "module": "ipfs_datasets_py/logic/legal_ir/canonical_qualifier_training_preflight.py",
+    "tests": "tests/unit/logic/legal_ir/test_canonical_qualifier_training_preflight.py"
+  },
+  "live_verification": {
+    "method": "gh api repos/{owner}/{repo}/branches/main and gh pr view, plus local git merge-base --is-ancestor",
+    "matching_branch_prs": {
+      "root": [],
+      "datasets": []
+    }
+  },
+  "publication_status": "already_on_live_main_in_both_repositories",
+  "useful_unmerged_changes": [],
+  "merge_or_cherry_pick_required": false,
+  "merged_overlap": [
+    {
+      "repository": "endomorphosis/lift_coding",
+      "pr": 539,
+      "url": "https://github.com/endomorphosis/lift_coding/pull/539",
+      "merge_commit": "2d4f840583ffe916d416f101e4a570a5d4856e37",
+      "ancestor_of_runtime_head": true,
+      "role": "matched grouped support continuation findings and root occurrence-adapter gitlink"
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "pr": 1271,
+      "url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1271",
+      "merge_commit": "0f36163a585a9bf514c41d8eabe202936c000705",
+      "ancestor_of_runtime_head": true,
+      "role": "grouped source-only v1/v2 heads, deterministic coordination renderer, opt-in grouped runtime registry"
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "pr": 1272,
+      "url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1272",
+      "merge_commit": "61c5db04538596ea00091cd4f013500854368397",
+      "ancestor_of_runtime_head": true,
+      "role": "cross-agent isolation tests and publication findings"
+    },
+    {
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "pr": 1273,
+      "url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1273",
+      "merge_commit": "1c1f91c8010ce058243734f143587e92fab2f0a2",
+      "ancestor_of_runtime_head": true,
+      "role": "source occurrence proposal boundary and matched grouped support findings"
+    }
+  ],
+  "conflicts": {
+    "active_git_conflicts": false,
+    "duplicate_integration_risk": "Do not replay PR1271/1272/1273 or root PR539 onto current main; they are already ancestors. Do not overwrite merged grouped owners with older source-bound compiler/parser branches.",
+    "population_overlap": "Grouped heads consume raw source plus explicit modal scope and are separate from native 384D/768D normative endpoints. Reused authored panels, selected/last aliases and overlapping tests are not independent replications.",
+    "qualifier_boundary": "The normative lane has a frozen 32-value grammar and empty qualifier targets. The new preflight diagnoses complete seven-facet transport; it cannot extend that lane or admit reviewed labels. Reuse the PR1273 occurrence adapter and existing canonical_statement_scope/review-intake owners for future qualifier preparation."
+  },
+  "verified": {
+    "preflight_unit_tests": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI=0 python3 -m pytest -q -o addopts='' -o cache_dir=/tmp/normative-runtime-audit-20261007-pytest-cache tests/unit/logic/legal_ir/test_canonical_qualifier_training_preflight.py",
+      "cwd": "/home/barberb/lift_coding/.worktrees/normative-decoder-runtime-datasets-20261007",
+      "passed": 37,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 0.44,
+      "model_training_executed": false
+    },
+    "compact_file_checks": [
+      {
+        "path": "docs/autoencoders/evidence/reconstruction-gap-followup-20261006/fixed-prefix-scale-summary.json",
+        "sha256": "2809aef1065847ef50a6e58101563757105ba1c7b273ef5ccc5235a0fd969365",
+        "bytes": 24588,
+        "matches_evidence_index": true
+      },
+      {
+        "path": "docs/autoencoders/evidence/reconstruction-gap-followup-20261006/independent-saved-output-summary-check.json",
+        "sha256": "ac93553bf3943bd493239c5c40eb307703578e62e036af493d4977a21e6d9928",
+        "bytes": 18686,
+        "matches_evidence_index": true
+      },
+      {
+        "path": "docs/autoencoders/evidence/reconstruction-gap-followup-20261006/next-training-plan.json",
+        "sha256": "823fc9698ce1b46a32317e9b2fc41896982848d86be0a40eacde5e6184257b6b",
+        "bytes": 6154,
+        "matches_evidence_index": true
+      },
+      {
+        "path": "docs/autoencoders/evidence/reconstruction-gap-followup-20261006/qualifier-preflight-summary.json",
+        "sha256": "c5099069ed6da68bd4cde54a56023353f06ee2a86cbbb4abcf87ee5b8c42b9d1",
+        "bytes": 3815,
+        "matches_evidence_index": true
+      },
+      {
+        "path": "docs/autoencoders/evidence/reconstruction-gap-followup-20261006/train-observation-summary.json",
+        "sha256": "b98e0607279988805179f3b062b53bd2753d36b4b7074b5892d245c6830849f1",
+        "bytes": 79560,
+        "matches_evidence_index": true
+      },
+      {
+        "path": "docs/autoencoders/reconstruction_gap_followup_20261006.md",
+        "sha256": "81272e0a2afc72a7f61dd2dabc9834702775b08a5134ad72c413eb6cce56470e",
+        "bytes": 11297,
+        "matches_evidence_index": true
+      }
+    ],
+    "archive": {
+      "bytes": 8815502,
+      "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/reconstruction-gap-evidence.tar.gz",
+      "sha256": "b46e285619c42946ee3d33f409b6d335c4a33bb84a98252474e2b77033d036a7",
+      "sha256_matches": true,
+      "bytes_match": true,
+      "entries": 95,
+      "uncompressed_bytes": 38327216,
+      "entries_and_bytes_match": true
+    },
+    "bound_independent_reviews": [
+      {
+        "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/diagnosis/diagnosis-readiness.json",
+        "location": "archive",
+        "matches_evidence_index": true,
+        "passed": true,
+        "findings": []
+      },
+      {
+        "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/guardian/terminal-resource-independent-review.json",
+        "location": "archive",
+        "matches_evidence_index": true,
+        "passed": true,
+        "findings": []
+      },
+      {
+        "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/pipeline/publisher-independent-review.json",
+        "location": "root_tracked_file",
+        "matches_evidence_index": true,
+        "passed": true,
+        "findings": []
+      },
+      {
+        "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/qualifier-review/independent-preflight-review.json",
+        "location": "archive",
+        "matches_evidence_index": true,
+        "passed": true,
+        "findings": []
+      },
+      {
+        "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/train-observation/actual-result-independent-review.json",
+        "location": "archive",
+        "matches_evidence_index": true,
+        "passed": true,
+        "findings": []
+      },
+      {
+        "path": "artifacts/autoencoder-next-reconstruction-gap-20261006/train-observation/independent-runner-readiness.json",
+        "location": "archive",
+        "matches_evidence_index": true,
+        "passed": true,
+        "findings": []
+      }
+    ],
+    "canonical_files": [
+      {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_qualifier_training_preflight.py",
+        "exists": true,
+        "matches_main": true
+      },
+      {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/tests/unit/logic/legal_ir/test_canonical_qualifier_training_preflight.py",
+        "exists": true,
+        "matches_main": true
+      },
+      {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/evidence/reconstruction-gap-followup-20261006/evidence-index.json",
+        "exists": true,
+        "matches_main": true
+      },
+      {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/evidence/reconstruction-gap-followup-20261006/fixed-prefix-scale-summary.json",
+        "exists": true,
+        "matches_main": true
+      },
+      {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/evidence/reconstruction-gap-followup-20261006/independent-saved-output-summary-check.json",
+        "exists": true,
+        "matches_main": true
+      },
+      {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/evidence/reconstruction-gap-followup-20261006/next-training-plan.json",
+        "exists": true,
+        "matches_main": true
+      },
+      {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/evidence/reconstruction-gap-followup-20261006/qualifier-preflight-summary.json",
+        "exists": true,
+        "matches_main": true
+      },
+      {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/evidence/reconstruction-gap-followup-20261006/train-observation-summary.json",
+        "exists": true,
+        "matches_main": true
+      },
+      {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/reconstruction_gap_followup_20261006.md",
+        "exists": true,
+        "matches_main": true
+      }
+    ],
+    "both_audited_worktrees_still_clean": true
+  },
+  "retained_findings": {
+    "native_auxiliary_train_generation": "384D auxiliary and 768D auxiliary each 48/48 original TRAIN and 48/48 normative TRAIN formula-exact; 96/96 per endpoint. Source and combined normative modality are each 180/180.",
+    "native_384_source_only_action": "179/180; approve-for-deliver source-only argmax is corrected by actual combined greedy generation. This is distinct from the exposed-v3 treasurer/publish error.",
+    "exposed_v3_384": "31/48 paragraph exact after auxiliary continuation, with 21 modality errors and one action error; exposed authored development, not untouched legal gold.",
+    "grouped_matched_boundary": "Control final 56/64 exact positives and 21/64 learned refusals; targeted 55/64 positives and 54/64 refusals with seven unsupported requests emitted. Distinct raw-source architecture/cohort.",
+    "qualifier_preflight": "Always false training/admission/semantic/proof authority; retains all rows; complete TRAIN-only vocabulary fitting; no flattening/sorting/deduplication; word source/target limits 64 and explicit byte output cap 512. Public two-condition/two-exception byte fixture needs 579 tokens and refuses. Existing 64-item qualifier review packet has zero authenticated reviews/admitted targets."
+  },
+  "recommendation": {
+    "immediate": "Treat normative runtime worktrees as published references. No contribution remains to merge. Use the existing merged preflight and evidence docs; scoped canonical normative files already match live main. Preserve every dirty owner outside these scoped paths.",
+    "before_more_training": "Prepare and independently review balanced new wording for the unchanged 90 original rule meanings, with source-group leakage checks and complete actor/action/modality strata. Do not repeat same-bank modality CE as a demonstrated reconstruction repair: TRAIN modality and actual formulas are already exact.",
+    "qualifiers": "Keep nonempty qualifier work separate until reviewed pairs, explicit compatible codec lineage, ordered occurrence/scope/context transport and review-to-cohort binding are established. A successful preflight remains representation diagnosis only.",
+    "future_verification": [
+      "Recheck live root/datasets main identities and exact gitlink when creating a clean integration worktree; do not assume current dirty canonical HEAD is the remote head.",
+      "Use new source groups for evaluation; previously observed v3/grouped final sources and selected/last aliases cannot be fresh holdouts.",
+      "Any future authorized continuation needs matched warm start, architecture, updates/objective budgets and zero control, real greedy outputs plus full32 source/recurrent/combined traces, all seven facets and complete missing/extra/invalid/EOS denominators.",
+      "Preserve frozen width-specific cache/producer identities, output/context settings and authority boundaries; formalization or proof admission remains dependent on its applicable existing native/Lake gates."
+    ]
+  },
+  "training_or_publication_performed_by_audit": false
+}

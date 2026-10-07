@@ -1,0 +1,87 @@
+{
+  "schema": "scope-proposal-preflight-independent-owner-review/v1",
+  "observed_at_utc": "2026-10-07T04:08:42.190577+00:00",
+  "status": "passed",
+  "reviewed_repository": "/home/barberb/lift_coding/artifacts/autoencoder-reconciliation-20261007-01/datasets",
+  "reviewed_head": "497362d8aa117a210769423ec6a14d8010d4588c",
+  "reviewed_test": {
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-reconciliation-20261007-01/datasets/tests/unit/logic/legal_ir/test_scope_proposal_preflight_integration.py",
+    "sha256": "e0fc9a5efeea30c3422a873103863fb01eeacf93c5244931173269817a30c692",
+    "bytes": 7621
+  },
+  "unchanged_production_owners": [
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py",
+      "sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65",
+      "matches_HEAD": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_qualifier_training_preflight.py",
+      "sha256": "58ebc41a4ea1f93d3497108ebd54ea3611bc652b5d74284214b13bb74a535489",
+      "matches_HEAD": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py",
+      "sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a",
+      "matches_HEAD": true
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+      "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290",
+      "matches_HEAD": true
+    }
+  ],
+  "verification": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI=0 python3 -m pytest -q -o addopts='' -o cache_dir=/tmp/normative-owner-review-20261007-pytest-cache tests/unit/logic/legal_ir/test_scope_proposal_preflight_integration.py",
+    "passed": 15,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 0.2,
+    "model_training_or_publication_executed": false
+  },
+  "test_count": {
+    "occurrence_modality_attachment_matrix": 9,
+    "failed_TRAIN_and_rejected_tuning_accounting": 2,
+    "supplied_codec_no_admission": 1,
+    "omitted_context_binding": 1,
+    "proposal_envelope_rejection": 1,
+    "missing_seven_facet_target_rejection": 1,
+    "total": 15
+  },
+  "semantics": [
+    "Caller-authored seven-facet transport premises are explicit and separate from proposal output. P/F predictions against shall are retained as unreviewed declarations, without legal-gold claims.",
+    "Required-unavailable context rejects before scope validation/compatibility; scope_transport remains exactly supplied:false. The tests correctly avoid claims that flat scope compatibility was assessed.",
+    "All rows, supplied qualifier counts and row ordering are retained. Failed TRAIN structure blocks complete TRAIN vocabulary fitting without filtering; rejected tuning structure remains reported while it stays outside fitting.",
+    "A separately valid supplied discrete word vocabulary remains serialized but cannot admit unresolved occurrences or grant training/native/proof authority.",
+    "Proposal envelopes and omitted canonical_ir are rejected without inferred seven-facet targets. Input/proposal bytes are retained; authority fields stay false and proposal masks stay zero."
+  ],
+  "claim_limits": [
+    "This is a test-only composition contribution; it provides no trained qualifier decoder or admitted natural-source labels.",
+    "Unavailable context is intentionally not solved. No scope compatibility/semantic authority/native family/proof qualification is established.",
+    "No production API mutation is needed or recommended.",
+    "Prior 37 preflight tests and these 15 tests are regression checks, not independent experimental evidence."
+  ],
+  "reviewer_mutations": "Only this review JSON under the authorized reconciliation artifact directory; no reviewed worktree changes.",
+  "passed": true,
+  "findings": [],
+  "resolved_corrections": [
+    {
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-reconciliation-20261007-01/datasets/tests/unit/logic/legal_ir/test_scope_proposal_preflight_integration.py",
+      "test": "test_omitting_context_cannot_rebind_existing_occurrence_declaration",
+      "current_assertion": "assert report[\"rows\"][0][\"issues\"]",
+      "requested_assertion": "assert report[\"rows\"][0][\"issues\"] == [\"declaration source/context input binding differs\"]",
+      "reason": "The test claims context-binding refusal, so a truthy issue list should not permit an unrelated rejection to satisfy the claim. An independent actual API call confirms the exact binding issue."
+    }
+  ],
+  "required_corrections": [],
+  "correction_verification": {
+    "previous_test_sha256": "e0fc9a5efeea30c3422a873103863fb01eeacf93c5244931173269817a30c692",
+    "final_test_sha256": "e0fc9a5efeea30c3422a873103863fb01eeacf93c5244931173269817a30c692",
+    "exact_binding_issue_assertion_present": true,
+    "command": "PYTHONDONTWRITEBYTECODE=1 IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI=0 python3 -m pytest -q -o addopts='' -o cache_dir=/tmp/normative-owner-correction-review-20261007-pytest-cache tests/unit/logic/legal_ir/test_scope_proposal_preflight_integration.py::test_omitting_context_cannot_rebind_existing_occurrence_declaration",
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 0.21
+  }
+}
