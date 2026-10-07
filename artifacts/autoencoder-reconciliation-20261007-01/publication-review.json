@@ -1,0 +1,160 @@
+{
+  "schema": "autoencoder-reconciliation-publication-review/v1",
+  "observed_at_utc": "2026-10-07T04:12:44.287285+00:00",
+  "passed": true,
+  "status": "passed",
+  "candidate_files": [
+    {
+      "repository": "datasets",
+      "path": "docs/autoencoders/progress_integration.md",
+      "bytes": 15024,
+      "sha256": "83028ebb0b9bbb50f06f3dd3e28eab2baf74555ddb42bd8d85b0242a028f291b"
+    },
+    {
+      "repository": "datasets",
+      "path": "docs/autoencoders/grouped_support_boundary_training.md",
+      "bytes": 6304,
+      "sha256": "3d45eff3a960132a8eaecb5001b1a341d0f3b5fe5e3c7cc831cb098b52b8f7bc"
+    },
+    {
+      "repository": "datasets",
+      "path": "tests/unit/logic/legal_ir/test_scope_proposal_preflight_integration.py",
+      "bytes": 7621,
+      "sha256": "e0fc9a5efeea30c3422a873103863fb01eeacf93c5244931173269817a30c692"
+    },
+    {
+      "repository": "workspace",
+      "path": "implementation_plan/docs/61-autoencoder-reconciliation-2026-10-07.md",
+      "bytes": 7913,
+      "sha256": "6a6d6124d4bd59b9b084362f26b279d2c6122056dc2c01b8faddd118a206f2c5"
+    }
+  ],
+  "supporting_receipts": [
+    {
+      "path": "branch-findings-audit.json",
+      "bytes": 77200,
+      "sha256": "7b7b2f12a827f57957d232eedb4ac7bcf2a4181818c58425f419ba5a18456d1c"
+    },
+    {
+      "path": "training-coverage-audit.json",
+      "bytes": 75018,
+      "sha256": "0572fe775505a03dcd6eb097374784101393729147684bd85eb485b23d7fad34"
+    },
+    {
+      "path": "combined-owner-validation.json",
+      "bytes": 1747,
+      "sha256": "8b36acae5d2654eaed8dabdf9ce1434ae808df8fb38b6208c15ac415b50877cd"
+    },
+    {
+      "path": "normative-runtime-audit.json",
+      "bytes": 13782,
+      "sha256": "2d9c2610ef0e017fe5903bc3ef0e5788460dde36f927d9598e353583ffa431cf"
+    },
+    {
+      "path": "independent-owner-review.json",
+      "bytes": 5294,
+      "sha256": "f7254ed386b1a109512b816ffd75ea6c90e34df1aa7351f70736e7c99be9fdc8"
+    },
+    {
+      "path": "grouped-effective-tree-review.json",
+      "bytes": 4071,
+      "sha256": "a3ba282bd765fd780a6052bd1e0490a69469ae248ab89f84e5ddd8ba0e9d14fa"
+    },
+    {
+      "path": "workspace-effective-tree-review.json",
+      "bytes": 12704,
+      "sha256": "6a1046253a80d78fbf95f9ed6a9b6d1b4286e5ace138b112732e230f0c685bf1"
+    }
+  ],
+  "review_scope": "Read-only review of explicit docs/test candidate paths and bounded primary Git evidence; no test/numerical/model/encoder/training/native/Lake panels rerun. Only this review receipt is written.",
+  "verification": {
+    "29_training_audit_primary_Git_evidence_hashes_match": true,
+    "five_combined_panel_test_pins_match_final_files": true,
+    "test_source_matches_previous_independent_15_case_review": true,
+    "counts": {
+      "root_relevant_refs": 19,
+      "root_relevant_worktrees_including_canonical": 13,
+      "datasets_relevant_refs": 30,
+      "datasets_relevant_worktrees_including_canonical": 15,
+      "prior_deferred_snapshot_files_exact": 54,
+      "canonical_only_temporal_sources_prior_hash_matched": 3,
+      "temporal_test_paths_with_prior_bytes_unverified": 5,
+      "grouped_effective_files_exact": 6,
+      "workspace_effective_files_exact": 21,
+      "new_cases": 15,
+      "affected_panel_cases": 203,
+      "affected_panel_failures": 0,
+      "affected_panel_skips": 0
+    },
+    "grouped_rates_correct": {
+      "control": "77/128 = 60.2%",
+      "targeted": "109/128 = 85.2%"
+    },
+    "native_endpoints_claim_correct": "Each of two distinct widths generates 48/48 original TRAIN and 48/48 normative TRAIN; exposed-v3 auxiliary counts are separately 31/48 at 384D and 48/48 at 768D.",
+    "production_worktree_diff_paths": {
+      "datasets": [
+        "docs/autoencoders/grouped_support_boundary_training.md",
+        "docs/autoencoders/progress_integration.md"
+      ],
+      "workspace": []
+    }
+  },
+  "no_other_required_corrections_found": true,
+  "claim_boundaries_reviewed": [
+    "Native-vector and raw-source grouped architectures/cohorts remain distinct; no causal width benefit or independent semantic holdout is claimed.",
+    "Frozen full-width PCA/AE interventions do not establish matched representation training or reduced-latent inference.",
+    "Unavailable context rejects before scope compatibility assessment; context omission fails exact declaration binding.",
+    "Caller-authored transport premise is separate from predictions; no inferred admitted labels, training authority, default activation or native/proof admission is introduced.",
+    "Inherited source/parser/temporal/4096D candidates remain bounded dependency-port work; unverified prior test bytes are disclosed.",
+    "15 new regression cases and 203 affected-owner cases are reported as validation; final strengthened test revision and prior full-panel revision remain distinguished."
+  ],
+  "intended_publication_scope": {
+    "datasets": [
+      "docs/autoencoders/progress_integration.md",
+      "docs/autoencoders/grouped_support_boundary_training.md",
+      "tests/unit/logic/legal_ir/test_scope_proposal_preflight_integration.py"
+    ],
+    "workspace_report": [
+      "implementation_plan/docs/61-autoencoder-reconciliation-2026-10-07.md"
+    ],
+    "workspace_audits": "Curated explicit reconciliation receipts plus new datasets gitlink after datasets merge; no copied historical checkpoint capsules or prior dirty-source owners."
+  },
+  "findings": [],
+  "resolved_corrections": [
+    {
+      "paths": [
+        "datasets/docs/autoencoders/progress_integration.md",
+        "workspace/implementation_plan/docs/61-autoencoder-reconciliation-2026-10-07.md"
+      ],
+      "claim": "Raw/PCA/AE identical formal outputs / under one raw-trained decoder",
+      "correction": "Use identical IR/status/reason on 192 source/seed pairs with the same frozen raw-trained decoder per seed.",
+      "reason": "The primary study uses 64 sources and three retained seeded native768 decoders, and outputs include unadmitted proposals and abstentions. One decoder is inaccurate and formal outputs implies stronger admission than observed."
+    },
+    {
+      "paths": [
+        "datasets/docs/autoencoders/progress_integration.md",
+        "workspace/implementation_plan/docs/61-autoencoder-reconciliation-2026-10-07.md"
+      ],
+      "claim": "two old plan lines",
+      "correction": "Use two differing plan files.",
+      "reason": "The audit counts two differing plan paths, and a direct branch-to-main diff shows two newer qualification paragraphs; it does not enumerate old plan lines."
+    }
+  ],
+  "required_corrections": [],
+  "correction_verification": [
+    {
+      "path": "datasets/docs/autoencoders/progress_integration.md",
+      "plan_files_claim_corrected": true,
+      "no_old_plan_lines_claim": true,
+      "no_admitted_formal_output_claim": true,
+      "native768_per_seed_comparison_corrected": true
+    },
+    {
+      "path": "workspace/implementation_plan/docs/61-autoencoder-reconciliation-2026-10-07.md",
+      "plan_files_claim_corrected": true,
+      "no_old_plan_lines_claim": true,
+      "no_admitted_formal_output_claim": true,
+      "native768_per_seed_comparison_corrected": true
+    }
+  ]
+}

@@ -1,0 +1,355 @@
+{
+  "schema": "autoencoder-effective-tree-review/v1",
+  "repository": "/home/barberb/lift_coding/artifacts/autoencoder-reconciliation-20261007-01/workspace",
+  "source_revision": "2d4f840583ffe916d416f101e4a570a5d4856e37",
+  "target_revision": "021ffee3f6894c4112d6951dad62cb29461cdac1",
+  "source_history_reachable_from_target": true,
+  "paths": [
+    {
+      "path": "artifacts/legal-decoder-followup-20261006-01/both-selections-durable-before-final.json",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "ebc830a838a4ff1642b24f9fa27d790b3ad6c3a6",
+        "bytes": 13088,
+        "sha256": "2f21ecc754b42c0aed731b9abf2980190456fe3b168b84055bc0bb285f1a87f6"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "ebc830a838a4ff1642b24f9fa27d790b3ad6c3a6",
+        "bytes": 13088,
+        "sha256": "2f21ecc754b42c0aed731b9abf2980190456fe3b168b84055bc0bb285f1a87f6"
+      }
+    },
+    {
+      "path": "artifacts/legal-decoder-followup-20261006-01/build_boundary_experiment.py",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "ea027c95534b166a0dcf64fd3f2dedf816df7227",
+        "bytes": 11748,
+        "sha256": "040991ff1cccb85a623c3acda481f30d23d4e39ca66e8191cc75d7617e75d61c"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "ea027c95534b166a0dcf64fd3f2dedf816df7227",
+        "bytes": 11748,
+        "sha256": "040991ff1cccb85a623c3acda481f30d23d4e39ca66e8191cc75d7617e75d61c"
+      }
+    },
+    {
+      "path": "artifacts/legal-decoder-followup-20261006-01/cache-shape-intake.json",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "3513772c4985c335dffe930b2b34fa681d343968",
+        "bytes": 24656,
+        "sha256": "cccba0fa723bd52bbed1d8f7d6b75e499f0fdfb12a7b2c5db04c1238cf1457de"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "3513772c4985c335dffe930b2b34fa681d343968",
+        "bytes": 24656,
+        "sha256": "cccba0fa723bd52bbed1d8f7d6b75e499f0fdfb12a7b2c5db04c1238cf1457de"
+      }
+    },
+    {
+      "path": "artifacts/legal-decoder-followup-20261006-01/check_retention.py",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "899ae91fbed7f66d4bc796cafab42e43e81a353a",
+        "bytes": 3522,
+        "sha256": "2fae7f45e4327604328a229f79cef7cc1918ae424c59e693b13ff72136f9f158"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "899ae91fbed7f66d4bc796cafab42e43e81a353a",
+        "bytes": 3522,
+        "sha256": "2fae7f45e4327604328a229f79cef7cc1918ae424c59e693b13ff72136f9f158"
+      }
+    },
+    {
+      "path": "artifacts/legal-decoder-followup-20261006-01/checkpoint-replay-native.json",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "5622e2bbc94ec78abcc1f5ace7428db82b9a68ea",
+        "bytes": 16319,
+        "sha256": "63edf3b08a2a7adc509dbfc9524208680e1ae8b62f4fa595c06a9143674cdd82"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "5622e2bbc94ec78abcc1f5ace7428db82b9a68ea",
+        "bytes": 16319,
+        "sha256": "63edf3b08a2a7adc509dbfc9524208680e1ae8b62f4fa595c06a9143674cdd82"
+      }
+    },
+    {
+      "path": "artifacts/legal-decoder-followup-20261006-01/combined-validation.json",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "77ec31f18f76be1678ab0e5bf8774a063bffb891",
+        "bytes": 2384,
+        "sha256": "107233857b5879510e7b96f76e3c121c1fed117eaa2b033d63c41e942d7df9e6"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "77ec31f18f76be1678ab0e5bf8774a063bffb891",
+        "bytes": 2384,
+        "sha256": "107233857b5879510e7b96f76e3c121c1fed117eaa2b033d63c41e942d7df9e6"
+      }
+    },
+    {
+      "path": "artifacts/legal-decoder-followup-20261006-01/dataset-viewer-intake.json",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "fc8ab1b87d68d2ca0c7ec1b16e3a276f53c11b98",
+        "bytes": 3298,
+        "sha256": "23596cf3c19a2aaaa0a52ed9cc15e0bbdb3169b13514634edee195c48a1e939d"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "fc8ab1b87d68d2ca0c7ec1b16e3a276f53c11b98",
+        "bytes": 3298,
+        "sha256": "23596cf3c19a2aaaa0a52ed9cc15e0bbdb3169b13514634edee195c48a1e939d"
+      }
+    },
+    {
+      "path": "artifacts/legal-decoder-followup-20261006-01/downloaded-checkpoints-runtime-verification.json",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "7005b3b4c82f9eb708ca1ab8de497e907df086a3",
+        "bytes": 1010,
+        "sha256": "f3dbecbda8a1c6be8f0d9e14d6c4ed2d80d3eefac6f547afc9e052dbaece7ab5"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "7005b3b4c82f9eb708ca1ab8de497e907df086a3",
+        "bytes": 1010,
+        "sha256": "f3dbecbda8a1c6be8f0d9e14d6c4ed2d80d3eefac6f547afc9e052dbaece7ab5"
+      }
+    },
+    {
+      "path": "artifacts/legal-decoder-followup-20261006-01/experiment-plan.json",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "20296da5e36408e92e30704ac68a1b802a9b52d7",
+        "bytes": 2516,
+        "sha256": "1c7e3639c512d8661fb961a0bb1271bcfc81cbc9b447c8eb1335e763a410651e"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "20296da5e36408e92e30704ac68a1b802a9b52d7",
+        "bytes": 2516,
+        "sha256": "1c7e3639c512d8661fb961a0bb1271bcfc81cbc9b447c8eb1335e763a410651e"
+      }
+    },
+    {
+      "path": "artifacts/legal-decoder-followup-20261006-01/hub-readback.json",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "cf4a28287bf784251e0048d2ec8c1f35700b3600",
+        "bytes": 863,
+        "sha256": "e6da628e1b69f81e53dbef5ae9f1e3498278baeb009eb1bc4e5045a0b4cb2ff2"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "cf4a28287bf784251e0048d2ec8c1f35700b3600",
+        "bytes": 863,
+        "sha256": "e6da628e1b69f81e53dbef5ae9f1e3498278baeb009eb1bc4e5045a0b4cb2ff2"
+      }
+    },
+    {
+      "path": "artifacts/legal-decoder-followup-20261006-01/hub-upload.json",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "eec0f9d7ee16cfb72c760b1920a6ca8732f1d688",
+        "bytes": 387,
+        "sha256": "b90a49e38595bbd53d9a2c5b22f2178c2e80e717ca9ca21e59103a4c9f5d853e"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "eec0f9d7ee16cfb72c760b1920a6ca8732f1d688",
+        "bytes": 387,
+        "sha256": "b90a49e38595bbd53d9a2c5b22f2178c2e80e717ca9ca21e59103a4c9f5d853e"
+      }
+    },
+    {
+      "path": "artifacts/legal-decoder-followup-20261006-01/law-cache-training-intake-observation.json",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "25303af0c3e00f02fa75bbbacd355bc30a5a18a0",
+        "bytes": 3061,
+        "sha256": "239adf4d31f6ddc4cffa7608ed151b2270de0539434f6a75715efaaf7df722d8"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "25303af0c3e00f02fa75bbbacd355bc30a5a18a0",
+        "bytes": 3061,
+        "sha256": "239adf4d31f6ddc4cffa7608ed151b2270de0539434f6a75715efaaf7df722d8"
+      }
+    },
+    {
+      "path": "artifacts/legal-decoder-followup-20261006-01/next-training-audit.json",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "dc82782bb5addd67c352eddf398baf028a9b9dcf",
+        "bytes": 22550,
+        "sha256": "2bed7fb8f92a3bcac83bef51ef9f99939e0f6c864793f67051f5b17f425425e5"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "dc82782bb5addd67c352eddf398baf028a9b9dcf",
+        "bytes": 22550,
+        "sha256": "2bed7fb8f92a3bcac83bef51ef9f99939e0f6c864793f67051f5b17f425425e5"
+      }
+    },
+    {
+      "path": "artifacts/legal-decoder-followup-20261006-01/package-contribution-freeze.json",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "ea83f39fda360a77d9896ee6e733fb5565d0aad4",
+        "bytes": 953,
+        "sha256": "089b5652be6dff7c888d95c2dc9d28b6162f64ec3df1e8149d6def7a3237c195"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "ea83f39fda360a77d9896ee6e733fb5565d0aad4",
+        "bytes": 953,
+        "sha256": "089b5652be6dff7c888d95c2dc9d28b6162f64ec3df1e8149d6def7a3237c195"
+      }
+    },
+    {
+      "path": "artifacts/legal-decoder-followup-20261006-01/package-publication.json",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "8d69ff48b5d5fe3f94ed66365d0e417344b3c24a",
+        "bytes": 551,
+        "sha256": "6775766e665a1ed5513029792eedb9341738f2a3f44cef072822aafe60d85a36"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "8d69ff48b5d5fe3f94ed66365d0e417344b3c24a",
+        "bytes": 551,
+        "sha256": "6775766e665a1ed5513029792eedb9341738f2a3f44cef072822aafe60d85a36"
+      }
+    },
+    {
+      "path": "artifacts/legal-decoder-followup-20261006-01/post-selection-retention.json",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "f85729225add9dc00199d48b989c8095e28b04da",
+        "bytes": 96257,
+        "sha256": "b2159c9352c46f9fd4118d66dd6005e91eb7112728ba71318dab5f402f628a3a"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "f85729225add9dc00199d48b989c8095e28b04da",
+        "bytes": 96257,
+        "sha256": "b2159c9352c46f9fd4118d66dd6005e91eb7112728ba71318dab5f402f628a3a"
+      }
+    },
+    {
+      "path": "artifacts/legal-decoder-followup-20261006-01/run_boundary_experiment.py",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "b258031a2478a1bb6f83d513fb6b363fcc71aaf6",
+        "bytes": 10305,
+        "sha256": "a1f3a902fa4e83e4d0acca1f62512cd61baab08171fb711380cc3c01d3604534"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "b258031a2478a1bb6f83d513fb6b363fcc71aaf6",
+        "bytes": 10305,
+        "sha256": "a1f3a902fa4e83e4d0acca1f62512cd61baab08171fb711380cc3c01d3604534"
+      }
+    },
+    {
+      "path": "artifacts/legal-decoder-followup-20261006-01/training-results.json",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "df931d3bf0ae57b387acafc9f929508bb42b20f8",
+        "bytes": 17832,
+        "sha256": "91f4dacd13c163b0a41b1685c350a675f8ea7d3c4952c22974017d21d0b31821"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "df931d3bf0ae57b387acafc9f929508bb42b20f8",
+        "bytes": 17832,
+        "sha256": "91f4dacd13c163b0a41b1685c350a675f8ea7d3c4952c22974017d21d0b31821"
+      }
+    },
+    {
+      "path": "artifacts/legal-decoder-followup-20261006-01/verify_checkpoints_and_native.py",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "5eae16735599dd18192eac2044f25b82777f254f",
+        "bytes": 4942,
+        "sha256": "d46bfa6fe1cfaf9d4bd8fe0f3cbba72c0e2c4371212c1629e9ba86fde8e43d2e"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "5eae16735599dd18192eac2044f25b82777f254f",
+        "bytes": 4942,
+        "sha256": "d46bfa6fe1cfaf9d4bd8fe0f3cbba72c0e2c4371212c1629e9ba86fde8e43d2e"
+      }
+    },
+    {
+      "path": "artifacts/legal-decoder-followup-20261006-01/verify_hub_readback.py",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "3104fd44b4b1dc4b08f95cc5119c87a667dd3867",
+        "bytes": 2531,
+        "sha256": "83a6c0bc0531221be10a9317dc9ab8b25fa27378e6bf7a41bf8d6001b74ae43c"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "3104fd44b4b1dc4b08f95cc5119c87a667dd3867",
+        "bytes": 2531,
+        "sha256": "83a6c0bc0531221be10a9317dc9ab8b25fa27378e6bf7a41bf8d6001b74ae43c"
+      }
+    },
+    {
+      "path": "implementation_plan/docs/60-grouped-decoder-profile-boundary-training-2026-10-06.md",
+      "status": "identical",
+      "source": {
+        "mode": "100644",
+        "blob": "2bbc6ff1b98cc7c2de84a7c4607589523679cfb1",
+        "bytes": 3832,
+        "sha256": "b1e70666d0127c6c19b994739b8d88625a354c8068988be037572b72f87f932a"
+      },
+      "target": {
+        "mode": "100644",
+        "blob": "2bbc6ff1b98cc7c2de84a7c4607589523679cfb1",
+        "bytes": 3832,
+        "sha256": "b1e70666d0127c6c19b994739b8d88625a354c8068988be037572b72f87f932a"
+      }
+    }
+  ],
+  "counts": {
+    "identical": 21,
+    "modified": 0,
+    "missing": 0
+  },
+  "scope": "Source presence only; modified files require review against later work.",
+  "git_state_mutated": false,
+  "model_executed": false,
+  "semantic_qualification_granted": false,
+  "lean_admission_granted": false
+}
