@@ -46,3 +46,9 @@ Useful records: [source review](independent-review.json),
 [new controls](dual-bank-controls.xml), [existing controls](legacy-owner-controls.xml),
 [GitHub source readback](source-github-byte-readback.json),
 [retention manifest](retention-manifest.json).
+
+The later [cross-agent integration](cross-agent-integration.json) preserves the
+other agent's frozen-donor trigger-readout contribution in the workspace pin.
+It confirms that all 13 reviewed source owners still match their approved byte
+hashes. The nine-file retention manifest remains the original probe evidence;
+this additional receipt covers repository integration only.

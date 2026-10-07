@@ -75,10 +75,28 @@ miss is already repaired in the combined TRAIN formula. Independent nonempty
 qualifier review and genuinely new semantic combinations remain priorities,
 beyond additional confidence on existing empty-qualifier meanings.
 
-The raw source-span pilot remains a different architecture with 12/64 exact
-positive proposals; its findings are preserved and not pooled into native 384D
-paragraph accuracy. Legal prose reconstruction needs a separate decoder/task
-and lexical information contract. Keep the broader
+The earlier raw source-span pilot remains a different architecture with 12/64
+exact positive proposals. The subsequent
+[frozen-donor trigger-readout comparison](https://github.com/endomorphosis/ipfs_datasets_py/blob/89e485b4e26203c40b930cd9bb5ed71d8eda5207/docs/implementation/legal_scope_trigger_readout_pilot_20261007.md)
+measured 11/64 exact emitted positive proposals for its frozen donor, 17/64 for
+the global residual control and 30/64 for the predicted-trigger residual on a
+fresh authored panel. The corresponding class counts are 19/64, 29/64 and 47/64;
+whole-proposal exactness on nonempty-condition cases is 4/32, 7/32 and 12/32.
+These are separate authored construction targets, not reviewed-law references
+or native GTE measurements. The earlier and later panels are distinct. The
+later adapter fits only a residual class readout; source support and endpoint
+heads stay frozen, formal output remains null and admission masks stay zero.
+Its [posthoc earlier-cohort retention check](65-trigger-modality-readout-2026-10-07.md)
+improves aggregate whole-proposal exactness from 12/64 to 29/64 while losing two
+previously exact proposals. Retain those individual regressions; an aggregate
+gain does not satisfy an all-case retention requirement.
+Do not pool either panel into native 384D paragraph accuracy. The
+[integration receipt](../../artifacts/dual-bank-wording-adapter-20261007/cross-agent-integration.json)
+checks that the later datasets commit includes this adapter and preserves all
+13 reviewed source owners byte for byte.
+
+Legal prose reconstruction needs a separate decoder/task and lexical information
+contract. Keep the broader
 [family/width/proof-index plan](63-retained-native-decoder-inputs-2026-10-07.md)
 and each 8D/384D/768D family/schema/task inventory intact. Existing registered,
 publicly uploaded parents remain the assets for these probes; a future fitted

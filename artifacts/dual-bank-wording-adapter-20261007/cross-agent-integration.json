@@ -1,0 +1,159 @@
+{
+  "schema": "dual-bank-wording-cross-agent-integration/v1",
+  "recorded_utc": "2026-10-07T07:05:46.183833+00:00",
+  "repository": "https://github.com/endomorphosis/ipfs_datasets_py",
+  "adapter_commit": "aed87b0d980422c2ca9efaa26cf92df30c51d768",
+  "integrated_commit": "271ad796288e17039f036af6a0d003a4628da6ed",
+  "adapter_is_ancestor": true,
+  "reviewed_source_owners_unchanged": 13,
+  "github_byte_matches": 14,
+  "incoming_contribution": {
+    "pull_request": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1276",
+    "documentation": "https://github.com/endomorphosis/ipfs_datasets_py/blob/89e485b4e26203c40b930cd9bb5ed71d8eda5207/docs/implementation/legal_scope_trigger_readout_pilot_20261007.md",
+    "metrics_documented_by_other_agent": {
+      "arm_order": [
+        "frozen_donor",
+        "global_residual",
+        "predicted_trigger_residual"
+      ],
+      "positive_panel_denominator": 64,
+      "raw_modality_class_exact": [
+        19,
+        29,
+        47
+      ],
+      "exact_emitted_positive_proposals": [
+        11,
+        17,
+        30
+      ],
+      "nonempty_condition_denominator": 32,
+      "exact_proposals_with_nonempty_condition": [
+        4,
+        7,
+        12
+      ]
+    },
+    "scope": "Separate authored raw source-span panel; metrics read from the other agent documentation, not rerun here. No native GTE, reviewed-law, formal admission or proof qualification claim."
+  },
+  "files": [
+    {
+      "path": "scripts/ops/autoencoder/dual_bank_wording_replay/dual_bank_training_adapter.py",
+      "bytes": 26455,
+      "sha256": "433f80f4cca80678d5b8d2976687cf20650a5339a3b670b80139658ef300c4af",
+      "reviewed_owner": true,
+      "github_url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/271ad796288e17039f036af6a0d003a4628da6ed/scripts/ops/autoencoder/dual_bank_wording_replay/dual_bank_training_adapter.py",
+      "github_byte_match": true
+    },
+    {
+      "path": "scripts/ops/autoencoder/dual_bank_wording_replay/dual_bank_retention.py",
+      "bytes": 26660,
+      "sha256": "15accfcf8bbc4e578e32ca7842ac338be2b563458c4c90a85fbe18429da000f1",
+      "reviewed_owner": true,
+      "github_url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/271ad796288e17039f036af6a0d003a4628da6ed/scripts/ops/autoencoder/dual_bank_wording_replay/dual_bank_retention.py",
+      "github_byte_match": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_modality_auxiliary.py",
+      "bytes": 9634,
+      "sha256": "48b7a3b2a0e5b69ae292f2c02dc0e87d92de4ffb4443bfba5ae52695b9a4320a",
+      "reviewed_owner": true,
+      "github_url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/271ad796288e17039f036af6a0d003a4628da6ed/ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_modality_auxiliary.py",
+      "github_byte_match": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/paraphrase_modality_auxiliary_training.py",
+      "bytes": 13994,
+      "sha256": "789f47047badfa30553940547c2db28f08afa1052f1bcc5ace68dbccedc2ccac",
+      "reviewed_owner": true,
+      "github_url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/271ad796288e17039f036af6a0d003a4628da6ed/ipfs_datasets_py/logic/formalization/autoencoder/paraphrase_modality_auxiliary_training.py",
+      "github_byte_match": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/long_span_source_value_training.py",
+      "bytes": 105415,
+      "sha256": "c1663820492a6879b14ab89dfd9b052105cf16378bb015fea08c3220d83456e0",
+      "reviewed_owner": true,
+      "github_url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/271ad796288e17039f036af6a0d003a4628da6ed/ipfs_datasets_py/logic/formalization/autoencoder/long_span_source_value_training.py",
+      "github_byte_match": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/contextual_training_mixture.py",
+      "bytes": 17786,
+      "sha256": "2d7de997e1baff4a1534ddd756f99864ef2270e3c641c0664f6a240f826bfda5",
+      "reviewed_owner": true,
+      "github_url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/271ad796288e17039f036af6a0d003a4628da6ed/ipfs_datasets_py/logic/formalization/autoencoder/contextual_training_mixture.py",
+      "github_byte_match": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_training_sources.py",
+      "bytes": 14474,
+      "sha256": "15458de60d79304d4fb676913ee4b3d4578bdc21b85a5437b998c5503f3fb288",
+      "reviewed_owner": true,
+      "github_url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/271ad796288e17039f036af6a0d003a4628da6ed/ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_training_sources.py",
+      "github_byte_match": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/training_paraphrase_source_inputs.py",
+      "bytes": 9145,
+      "sha256": "5c0d4571b87d4b3b82be3bae11ff08599f2a5d09c4465a8315641a05d1657649",
+      "reviewed_owner": true,
+      "github_url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/271ad796288e17039f036af6a0d003a4628da6ed/ipfs_datasets_py/logic/formalization/autoencoder/training_paraphrase_source_inputs.py",
+      "github_byte_match": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/authored_training_paraphrases.py",
+      "bytes": 9718,
+      "sha256": "9644f86159fecd0d9a1bb8599e06dacfcbba2581db98a990b0e224ebb8de8513",
+      "reviewed_owner": true,
+      "github_url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/271ad796288e17039f036af6a0d003a4628da6ed/ipfs_datasets_py/logic/formalization/autoencoder/authored_training_paraphrases.py",
+      "github_byte_match": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/clause_source_context.py",
+      "bytes": 14249,
+      "sha256": "583422dbb63cdba96182090f5f76ef74698a69ab84fd42dc9e53bc4e09cbf5f6",
+      "reviewed_owner": true,
+      "github_url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/271ad796288e17039f036af6a0d003a4628da6ed/ipfs_datasets_py/logic/formalization/autoencoder/clause_source_context.py",
+      "github_byte_match": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/decoder_distillation_experiment.py",
+      "bytes": 37989,
+      "sha256": "76252ad397492762d4fc41915afd1051a93a11b74994655326fe56fa722e3b61",
+      "reviewed_owner": true,
+      "github_url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/271ad796288e17039f036af6a0d003a4628da6ed/ipfs_datasets_py/logic/formalization/autoencoder/decoder_distillation_experiment.py",
+      "github_byte_match": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/ordered_clause_recurrent_decoder_experiment.py",
+      "bytes": 26392,
+      "sha256": "56392a6f37f528350f18b68b56a016aad170530e93e95e660b6898f1c4cef3da",
+      "reviewed_owner": true,
+      "github_url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/271ad796288e17039f036af6a0d003a4628da6ed/ipfs_datasets_py/logic/formalization/autoencoder/ordered_clause_recurrent_decoder_experiment.py",
+      "github_byte_match": true
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_value_decoder_experiment.py",
+      "bytes": 14958,
+      "sha256": "df72b5331c1dc5b98d11974748bb05ba31504db7e7f69854327d080118eeb61e",
+      "reviewed_owner": true,
+      "github_url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/271ad796288e17039f036af6a0d003a4628da6ed/ipfs_datasets_py/logic/formalization/autoencoder/source_value_decoder_experiment.py",
+      "github_byte_match": true
+    },
+    {
+      "path": "docs/implementation/legal_scope_trigger_readout_pilot_20261007.md",
+      "bytes": 12483,
+      "sha256": "0742a19ed6bd25063e3d06b0360f465ea5f3fadf4b2f14dbad8ca2d7b729e133",
+      "reviewed_owner": false,
+      "github_url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/271ad796288e17039f036af6a0d003a4628da6ed/docs/implementation/legal_scope_trigger_readout_pilot_20261007.md",
+      "github_byte_match": true
+    }
+  ],
+  "scope": "Read-only commit ancestry and source-byte integration verification. No model execution, training, optimizer commits, checkpoint creation or database writes.",
+  "pilot_contribution_commit": "89e485b4e26203c40b930cd9bb5ed71d8eda5207",
+  "additional_parallel_change": {
+    "commit": "271ad796288e17039f036af6a0d003a4628da6ed",
+    "summary": "Separate finite interval software-contract schedule synthesis and independent checks; preserved by advancing the workspace gitlink, not executed or evaluated in this adapter contribution."
+  }
+}
