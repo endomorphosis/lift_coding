@@ -1,0 +1,35 @@
+{
+  "parameter_counts": {
+    "linear": {
+      "total": 26880,
+      "trainable": 195
+    },
+    "mlp": {
+      "total": 33024,
+      "trainable": 6339
+    }
+  },
+  "capacity_matched": false,
+  "data_and_update_budget_matched": true,
+  "initial_parent_full_core_and_logits_parity": 16,
+  "parent": {
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/initial-parent-predictions.json",
+    "bytes": 119549,
+    "sha256": "760c6df64fccd433be9ac7326f5490fa90a7aae96fc0b3f3e44a1401d7d67505"
+  },
+  "candidates": {
+    "linear": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/initial-linear-predictions.json",
+      "bytes": 119341,
+      "sha256": "e58d1a06fae822a9f6397e4145e4b1b8b9f9ca7022e7412aa74e80c9be34f651"
+    },
+    "mlp": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/initial-mlp-predictions.json",
+      "bytes": 119293,
+      "sha256": "1e90009b54860a48746fec97287ce006bdf6193f01fb6eeef3384dc3418694dd"
+    }
+  },
+  "parent_steps": 240,
+  "new_Adam_fresh": true,
+  "parent_Adam_continued": false
+}

@@ -1,0 +1,297 @@
+{
+  "actions": {
+    "git_index_mutations": 0,
+    "model_forward_calls": 0,
+    "model_imports": 0,
+    "network_calls": 0,
+    "optimizer_calls": 0,
+    "source_or_document_edits": 0,
+    "test_calls": 0
+  },
+  "base": "6791fc5d6bb58f4c074063bb01bd56071ab23c2d",
+  "checked": [
+    "Only four intended child paths changed in commit 7b93 relative parent 6791; HEAD/index/worktree equal with no other tracked or untracked delta.",
+    "New module ce7 and tests f55 match frozen numerical producers and finalized source review.",
+    "Existing trigger/v1/proposal/scope bytes match HEAD and immutable producer pins.",
+    "All 18,257 original progress bytes retained exactly with only a 20-line additive entry.",
+    "All seven incoming 6791 replay evidence/document files retained exact HEAD/index/worktree bytes.",
+    "Guide and new progress entry use immutable Hub revision f2e6e9 and have no draft placeholders.",
+    "Fresh raw, exposed retention, action/condition, fixed 43 ceiling, gerund-agent and training/selection accounting match finalized independent raw audit.",
+    "Raw 37/39 whole and 11/12 unsupported emissions kept distinct from posthoc 29/29 whole and 7/7 unsupported emissions.",
+    "All outputs retain zero admission masks and null formal output; caller attachment supplied and conditions opaque; no latent/default/runtime promotion or reviewed statutory/Lake qualification claim.",
+    "Test, replay and sampled resource statements match finalized retained receipts; 35 samples and non-atomic caveat, no absolute peak/kernel cap claim."
+  ],
+  "commit": "7b93b2d97a8985b3f2db29963bd0979749f66163",
+  "committed_paths": [
+    "docs/autoencoders/progress_integration.md",
+    "docs/implementation/legal_scope_support_action_pilot_20261007.md",
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_action.py",
+    "tests/unit/logic/test_legal_scope_support_action.py"
+  ],
+  "findings": [],
+  "hub_documentation_url": "https://huggingface.co/Publicus/legal-ir-autoencoder/tree/f2e6e9ad6b693a605066146dd8985f036fcaa50a/experiments/support-action-20261007/run-01",
+  "hub_revision": "f2e6e9ad6b693a605066146dd8985f036fcaa50a",
+  "incoming_main_preserved_paths": {
+    "docs/autoencoders/dual_bank_replay_results_20261007.md": {
+      "bytes": 9707,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/datasets/docs/autoencoders/dual_bank_replay_results_20261007.md",
+      "sha256": "6862160d284e380751754cfee58607c09de69910aaa2beddb6649e9d9c19ac86"
+    },
+    "docs/autoencoders/evidence/dual-bank-replay-20261007/comparison-protocol.json": {
+      "bytes": 6692,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/datasets/docs/autoencoders/evidence/dual-bank-replay-20261007/comparison-protocol.json",
+      "sha256": "75d4d01893578265c2be3bcc53ed96ca661fdb03781704a074b9df56e6bf30d2"
+    },
+    "docs/autoencoders/evidence/dual-bank-replay-20261007/development-error-census.json": {
+      "bytes": 16125,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/datasets/docs/autoencoders/evidence/dual-bank-replay-20261007/development-error-census.json",
+      "sha256": "335478780679af96a5efc90bc31db73da4aa9e3b2a7c40b160b57af25744b2cb"
+    },
+    "docs/autoencoders/evidence/dual-bank-replay-20261007/evidence-index.json": {
+      "bytes": 2265,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/datasets/docs/autoencoders/evidence/dual-bank-replay-20261007/evidence-index.json",
+      "sha256": "c4a9d0bcfc94ff1486ded11f19fac0842a701e266ad6a86f8be0c94a040fb32a"
+    },
+    "docs/autoencoders/evidence/dual-bank-replay-20261007/phase-audits-compact.json": {
+      "bytes": 5170,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/datasets/docs/autoencoders/evidence/dual-bank-replay-20261007/phase-audits-compact.json",
+      "sha256": "2abadad367ef76da2f93de4be73398e002eceae225f8fb481be9bd262ef4636c"
+    },
+    "docs/autoencoders/evidence/dual-bank-replay-20261007/postfit-comparison.json": {
+      "bytes": 141854,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/datasets/docs/autoencoders/evidence/dual-bank-replay-20261007/postfit-comparison.json",
+      "sha256": "29eccba12cb98de4eeea195fb96fc1a9715d9f67aad2585c5885373c8f02e9a5"
+    },
+    "docs/autoencoders/evidence/dual-bank-replay-20261007/sampled-model-formulas.json": {
+      "bytes": 55019,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/datasets/docs/autoencoders/evidence/dual-bank-replay-20261007/sampled-model-formulas.json",
+      "sha256": "b2a4d721f0b2399579a473fa6348d84c19b045418ee203ca93a968e020960670"
+    }
+  },
+  "index_seals": {
+    "docs/autoencoders/progress_integration.md": {
+      "bytes": 19809,
+      "sha256": "c18e534abd63c6bbad84507ae9621b879d5682ae8338f7abbf0364720a5934d7"
+    },
+    "docs/implementation/legal_scope_support_action_pilot_20261007.md": {
+      "bytes": 11886,
+      "sha256": "564a1fe0c87981c563f2d00992935d151d594121150e00b421a8b8f466410c65"
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_action.py": {
+      "bytes": 25504,
+      "sha256": "ce7abc45032bee6ac950720d79c8f329c03a68961140c0f2ad9ade8ea923988c"
+    },
+    "tests/unit/logic/test_legal_scope_support_action.py": {
+      "bytes": 18593,
+      "sha256": "f55f8f32871000c1b87e6eae5459ee38d30a7592f96d7da8193b6186eadf8c62"
+    }
+  },
+  "initial_base": "271ad796288e17039f036af6a0d003a4628da6ed",
+  "limitations": [
+    "No new tests, numerical inference, training, checkpoint restoration, source edits, staging or network writes were performed.",
+    "Core source behavior, numerical scores, artifact custody and resource admission reuse pinned finalized independent reviews; this review checks contribution bytes and claims rather than rerunning them.",
+    "Root report remains a draft; final report/link audit will follow source PR pins and latest separate dual-bank paragraph.",
+    "Hub publication identity preservation and downloaded checkpoint execution were performed by the root runner; retained downloaded replay receipt confirms 768 exact complete outputs without further updates.",
+    "Authored construction targets and exposed posthoc/retention panels are engineering evidence, not independently reviewed statutory gold or full autoformalization qualification."
+  ],
+  "passed": true,
+  "progress_preservation": {
+    "append_bytes": 1552,
+    "append_lines": 20,
+    "append_sha256": "b26f8329740f8745e4b4f2c76458cb4dfde34bb91af60e026e11ee1edd32cf20",
+    "baseline_bytes": 18257,
+    "baseline_sha256": "7e511b24c0b6faff15b1ebabe574d110b43c6eca8c061e9ed0e6f58bb93ac721",
+    "full_baseline_prefix_preserved": true,
+    "intersection_wording": "stays within parent emission sets"
+  },
+  "raw_metric_ledger": {
+    "earlier_scope": {
+      "linear": {
+        "action": 58,
+        "modality": 53,
+        "nonempty_condition_whole": 18,
+        "unsupported_emit": 7,
+        "whole": 36
+      },
+      "mlp": {
+        "action": 64,
+        "modality": 53,
+        "nonempty_condition_whole": 21,
+        "unsupported_emit": 8,
+        "whole": 40
+      },
+      "parent": {
+        "action": 50,
+        "modality": 53,
+        "nonempty_condition_whole": 13,
+        "unsupported_emit": 4,
+        "whole": 29
+      }
+    },
+    "earlier_trigger": {
+      "linear": {
+        "action": 55,
+        "modality": 47,
+        "nonempty_condition_whole": 17,
+        "unsupported_emit": 12,
+        "whole": 37
+      },
+      "mlp": {
+        "action": 64,
+        "modality": 47,
+        "nonempty_condition_whole": 19,
+        "unsupported_emit": 12,
+        "whole": 39
+      },
+      "parent": {
+        "action": 54,
+        "modality": 47,
+        "nonempty_condition_whole": 12,
+        "unsupported_emit": 6,
+        "whole": 30
+      }
+    },
+    "fresh_final": {
+      "linear": {
+        "action": 58,
+        "modality": 45,
+        "nonempty_condition_whole": 16,
+        "unsupported_emit": 11,
+        "whole": 37
+      },
+      "mlp": {
+        "action": 62,
+        "modality": 45,
+        "nonempty_condition_whole": 17,
+        "unsupported_emit": 12,
+        "whole": 39
+      },
+      "parent": {
+        "action": 48,
+        "modality": 45,
+        "nonempty_condition_whole": 10,
+        "unsupported_emit": 7,
+        "whole": 28
+      }
+    }
+  },
+  "receipts": {
+    "combined-validation.json": {
+      "bytes": 1912,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/combined-validation.json",
+      "sha256": "857715da799dc5b708a804ae6bebf08b21edb9cca7963cafb6c8faca632013e2"
+    },
+    "hub-checkpoint-replay.json": {
+      "bytes": 9568,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/hub-checkpoint-replay.json",
+      "sha256": "275b786d79a68b02bd2743f85031998504aedd2f117638bf548ce24d0350255d"
+    },
+    "independent-corpus-selector-review.json": {
+      "bytes": 14978,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/independent-corpus-selector-review.json",
+      "sha256": "a09b3ab2bf1914e7b60ad9864b1471642b80eebe778a2d60a0158b2ac4a39cd3"
+    },
+    "model-source-review.json": {
+      "bytes": 7632,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/model-source-review.json",
+      "sha256": "4321272d85c106f7510996826c28c2277a81ec307c5fdef65f23cc2b816600d5"
+    },
+    "protocol-review.json": {
+      "bytes": 34021,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/protocol-review.json",
+      "sha256": "9fc9db290749cec945cc74eab6896ea0a7943a15400029c83631cda67f659849"
+    },
+    "release-review.json": {
+      "bytes": 75224,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/release-review.json",
+      "sha256": "65405e62900ca2d4eee60d37ac76f61346002cd5fd5191960a8854f8a9447b5d"
+    },
+    "resource-results-review.json": {
+      "bytes": 15742,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/resource-results-review.json",
+      "sha256": "3a54c4c72a3f68131866b28f58da8ae62a4c2001d68be65e66cb874e27aa7d83"
+    },
+    "results-review.json": {
+      "bytes": 147331,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/results-review.json",
+      "sha256": "475838bce9825f2eb5f01f2b3b939295e285ee3b17c899d16646678f82ec523a"
+    },
+    "retained-boundary-review.json": {
+      "bytes": 46138,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/retained-boundary-review.json",
+      "sha256": "fd81c93a50bb27276a8eda0d5567b5e9f9624ac73d4abd8be75d2eeb4ea82973"
+    },
+    "runner-static-review.json": {
+      "bytes": 16604,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/runner-static-review.json",
+      "sha256": "848f1f287f0a538c27f7fde048824eaa09c2413596e55d48697b0fbddd479119"
+    },
+    "selected-checkpoint-replay.json": {
+      "bytes": 9701,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/selected-checkpoint-replay.json",
+      "sha256": "937bff2d746cfe298fee014c7a3ffb4294da5d9cd2a85c2812af71dfe67f74f6"
+    }
+  },
+  "resolved_wording": [
+    {
+      "final": "posthoc intersection stays within parent emission sets",
+      "path": "docs/autoencoders/progress_integration.md",
+      "prior": "posthoc intersection keeps parent emission sets",
+      "reason": "Composite sets are subsets, not guaranteed identical; fresh MLP emits 43 supported versus parent 44."
+    }
+  ],
+  "review_kind": "independent file-only four-path source contribution review",
+  "root_report_final_review_pending": true,
+  "schema": "support-action-final-contribution-review/v1",
+  "source_contribution_binding": {
+    "bytes": 1685,
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/source-contribution-binding.json",
+    "sha256": "adf2c3a3259e7711e1ca88bdf3ca8b0e15d7f2cab393827b55f63885ca084731"
+  },
+  "source_paths": {
+    "docs/autoencoders/progress_integration.md": {
+      "bytes": 19809,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/datasets/docs/autoencoders/progress_integration.md",
+      "sha256": "c18e534abd63c6bbad84507ae9621b879d5682ae8338f7abbf0364720a5934d7"
+    },
+    "docs/implementation/legal_scope_support_action_pilot_20261007.md": {
+      "bytes": 11886,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/datasets/docs/implementation/legal_scope_support_action_pilot_20261007.md",
+      "sha256": "564a1fe0c87981c563f2d00992935d151d594121150e00b421a8b8f466410c65"
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_action.py": {
+      "bytes": 25504,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_action.py",
+      "sha256": "ce7abc45032bee6ac950720d79c8f329c03a68961140c0f2ad9ade8ea923988c"
+    },
+    "tests/unit/logic/test_legal_scope_support_action.py": {
+      "bytes": 18593,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/datasets/tests/unit/logic/test_legal_scope_support_action.py",
+      "sha256": "f55f8f32871000c1b87e6eae5459ee38d30a7592f96d7da8193b6186eadf8c62"
+    }
+  },
+  "staged_paths": [],
+  "unchanged_frozen_owners": {
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py": {
+      "bytes": 29545,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py",
+      "sha256": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15"
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py": {
+      "bytes": 7804,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py",
+      "sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65"
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_trigger_readout.py": {
+      "bytes": 27145,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_trigger_readout.py",
+      "sha256": "983b69b8e293aa6211fd8322f9ba6bfe6fa5b8cb853c2d4d0cace1e7e5046344"
+    },
+    "ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py": {
+      "bytes": 29993,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py",
+      "sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a"
+    }
+  },
+  "worktree_equals_staged_four_paths": true
+}

@@ -1,0 +1,12 @@
+{
+  "schema": "support-action-incoming-root-main/v1",
+  "before": "30e61092341b47b4e49eb30df443fd607536333a",
+  "latest_main_base": "19349870e8085e0b687658b35c52f123c4b0ac2f",
+  "incoming_paths": [
+    "docs/agent-supervisor-spectral-symbolic-20261007.md",
+    "external/ipfs_accelerate"
+  ],
+  "mode": "fast-forward isolated root before own staging",
+  "own_model_source_changed": false,
+  "upstream_ipfs_accelerate_pin_preserved": "160000 commit 07eed982c7150406480eefdf0c57cdd2f772b671\texternal/ipfs_accelerate"
+}

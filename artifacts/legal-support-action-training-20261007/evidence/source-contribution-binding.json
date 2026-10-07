@@ -1,0 +1,35 @@
+{
+  "schema": "support-action-source-contribution/v1",
+  "base": "6791fc5d6bb58f4c074063bb01bd56071ab23c2d",
+  "paths": {
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_action.py": {
+      "bytes": 25504,
+      "sha256": "ce7abc45032bee6ac950720d79c8f329c03a68961140c0f2ad9ade8ea923988c"
+    },
+    "tests/unit/logic/test_legal_scope_support_action.py": {
+      "bytes": 18593,
+      "sha256": "f55f8f32871000c1b87e6eae5459ee38d30a7592f96d7da8193b6186eadf8c62"
+    },
+    "docs/implementation/legal_scope_support_action_pilot_20261007.md": {
+      "bytes": 11886,
+      "sha256": "564a1fe0c87981c563f2d00992935d151d594121150e00b421a8b8f466410c65"
+    },
+    "docs/autoencoders/progress_integration.md": {
+      "bytes": 19809,
+      "sha256": "c18e534abd63c6bbad84507ae9621b879d5682ae8338f7abbf0364720a5934d7"
+    }
+  },
+  "progress_base_bytes": 18257,
+  "progress_base_sha256": "7e511b24c0b6faff15b1ebabe574d110b43c6eca8c061e9ed0e6f58bb93ac721",
+  "progress_append_only": true,
+  "initial_base": "271ad796288e17039f036af6a0d003a4628da6ed",
+  "incoming_main_preserved_paths": [
+    "docs/autoencoders/dual_bank_replay_results_20261007.md",
+    "docs/autoencoders/evidence/dual-bank-replay-20261007/comparison-protocol.json",
+    "docs/autoencoders/evidence/dual-bank-replay-20261007/development-error-census.json",
+    "docs/autoencoders/evidence/dual-bank-replay-20261007/evidence-index.json",
+    "docs/autoencoders/evidence/dual-bank-replay-20261007/phase-audits-compact.json",
+    "docs/autoencoders/evidence/dual-bank-replay-20261007/postfit-comparison.json",
+    "docs/autoencoders/evidence/dual-bank-replay-20261007/sampled-model-formulas.json"
+  ]
+}

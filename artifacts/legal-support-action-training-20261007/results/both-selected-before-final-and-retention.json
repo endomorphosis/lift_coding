@@ -1,0 +1,2862 @@
+{
+  "schema": "support-action-final-reference-barrier/v1",
+  "arms": {
+    "linear": {
+      "selected": {
+        "completed_updates": 120,
+        "summary": {
+          "positive_count": 64,
+          "positive_exact_count": 40,
+          "positive_learned_refusal_count": 8,
+          "positive_structural_block_count": 3,
+          "positive_emitted_proposal_count": 53,
+          "negative_count": 64,
+          "negative_learned_refusal_count": 53,
+          "negative_incidental_block_count": 2,
+          "negative_emitted_proposal_count": 9,
+          "positive_raw_modality_exact": 50,
+          "positive_raw_all_spans_exact": 54,
+          "nonempty_condition_count": 32,
+          "nonempty_condition_exact_count": 19,
+          "case_count": 128,
+          "source_parent_groups": 64,
+          "positive_class_CE": 0.608147540665739,
+          "class_confusion": {
+            "O": {
+              "O": 14,
+              "P": 4,
+              "F": 4
+            },
+            "P": {
+              "O": 1,
+              "P": 18,
+              "F": 2
+            },
+            "F": {
+              "O": 1,
+              "P": 2,
+              "F": 18
+            }
+          },
+          "positive_raw_facet_span_exact": {
+            "modality": {
+              "count": 64,
+              "exact": 63,
+              "nonempty_count": 64,
+              "nonempty_exact": 63
+            },
+            "actor": {
+              "count": 64,
+              "exact": 64,
+              "nonempty_count": 64,
+              "nonempty_exact": 64
+            },
+            "action": {
+              "count": 64,
+              "exact": 58,
+              "nonempty_count": 64,
+              "nonempty_exact": 58
+            },
+            "object": {
+              "count": 64,
+              "exact": 63,
+              "nonempty_count": 32,
+              "nonempty_exact": 31
+            },
+            "condition": {
+              "count": 64,
+              "exact": 61,
+              "nonempty_count": 32,
+              "nonempty_exact": 29
+            }
+          },
+          "negative_categories": {
+            "modal_misspelling": {
+              "count": 16,
+              "learned_refusal": 5,
+              "emitted": 9,
+              "incidental_block": 2
+            },
+            "second_rule": {
+              "count": 16,
+              "learned_refusal": 16,
+              "emitted": 0,
+              "incidental_block": 0
+            },
+            "extra_exception": {
+              "count": 16,
+              "learned_refusal": 16,
+              "emitted": 0,
+              "incidental_block": 0
+            },
+            "modal_deletion": {
+              "count": 16,
+              "learned_refusal": 16,
+              "emitted": 0,
+              "incidental_block": 0
+            }
+          },
+          "positive_templates": {
+            "condition_actor_possessive_gerund_object_modal": {
+              "count": 8,
+              "class_exact": 8,
+              "proposal_exact": 7,
+              "raw_action_exact": 7
+            },
+            "actor_condition_modal_action_object": {
+              "count": 8,
+              "class_exact": 6,
+              "proposal_exact": 5,
+              "raw_action_exact": 8
+            },
+            "modal_actor_action_object_condition": {
+              "count": 8,
+              "class_exact": 5,
+              "proposal_exact": 4,
+              "raw_action_exact": 8
+            },
+            "actor_modal_action_object_condition": {
+              "count": 8,
+              "class_exact": 6,
+              "proposal_exact": 3,
+              "raw_action_exact": 6
+            },
+            "gerund_object_agent_modal_condition": {
+              "count": 8,
+              "class_exact": 8,
+              "proposal_exact": 7,
+              "raw_action_exact": 8
+            },
+            "condition_actor_modal_action_object": {
+              "count": 8,
+              "class_exact": 3,
+              "proposal_exact": 2,
+              "raw_action_exact": 6
+            },
+            "actor_possessive_gerund_object_modal_condition": {
+              "count": 8,
+              "class_exact": 8,
+              "proposal_exact": 6,
+              "raw_action_exact": 8
+            },
+            "condition_modal_actor_action_object": {
+              "count": 8,
+              "class_exact": 6,
+              "proposal_exact": 6,
+              "raw_action_exact": 7
+            }
+          },
+          "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+          "caller_attachment_learned": false,
+          "legal_gold": false,
+          "admission_masks": "all five zero",
+          "raw_support_confusion": {
+            "true_positive": 56,
+            "false_negative": 8,
+            "false_positive": 11,
+            "true_negative": 53
+          },
+          "raw_support_accuracy": 0.8515625,
+          "support_probability_BCE": 0.39685245094728777,
+          "support_BCE_probability_clip": [
+            1e-12,
+            0.999999999999
+          ],
+          "fixed_class_nonaction_whole_ceiling_count": 47,
+          "fixed_class_nonaction_whole_ceiling_ids": [
+            "source:0bbe701ac9a5fbceef8b7ed7f9c55981503e42eaacb6c1c3d33badb9607d0601",
+            "source:0ad1723cc82d5e50914522c3ffd814da8aeecad8c97f40fc9f95b7b386530712",
+            "source:86f8867377549fc98058ba3abb4154b1fd97891fa553a34bf8277d0c098e4617",
+            "source:32ecde8cdfd4d0fd0ee3e809fbee64caf1702926ba40473fdff9e10d975b0236",
+            "source:2d80204f86b976e7f65cc7bd2ba5c9780f2ef03dab416956b811be5b37d2e51c",
+            "source:f6aa715bd3ba9b7737c0fa0f7570e9974aae12b7766acbc57e1bf7537a806081",
+            "source:7e7750e08375951b6a7d59a4642dd220b9210dbc7e46825d019f91a0f17cf1e8",
+            "source:779c6a8f4dcdfbf2301b7e26c77b5744721a69c4df63d198c6df575a1fde749a",
+            "source:a2deb9718c0e41a573cc268b453d77f685c48dd5ac9c090a7330d6da6881caed",
+            "source:6a5f12e61eb08b655296916fe34dd4b9443a17db8e03996e3b0e50550b45afb9",
+            "source:2d2cbb1207bde9d0dc4c924ec2954a43b7ccfd9742a55c0d878f84324ce363b2",
+            "source:994a37e3620f38cb5fdf68721d9e7ca57a2bbc498424261ef16678b8287a4079",
+            "source:7a3e8df322399f395aa031f3627eced1a5686aaf3abd8047b5609c28e2fc2f7f",
+            "source:659e1a91f3cef879324243628210b714c8af8b30129eb0ac6483aa1347af6c3f",
+            "source:1a59872f27aae3aeef4fec6e89f05d0a9b12c84bf8a0f87522b77ff956347930",
+            "source:a61f3597cecebef6c823188ebe48df1a5273f5a9eaf2fecce8db1f2fce4e2303",
+            "source:95b58de28e626daedf85ffbb57374f3374316a85e9b503ff527091c9fc7c3623",
+            "source:8660f061ac642cff334c9fd190c3f9806cdaf2fc73ea27aab624f330ddb95f8d",
+            "source:b22cabe1173c90d457cce0e365789c232aaf150947d4ed0b9c98e2c5142705ed",
+            "source:598a7ed212471e3269e7e16f21c1dc9001b803fe979e14fdefee5374e6371ea1",
+            "source:0a6e3fcf6110457de8af3cac5a0d4289755234736d7a67e75f4f20f00d716a20",
+            "source:8fdea3dac41e2d50a9f0478083375ebc29a0b72e38480485d1fc0d1b1cf3b4be",
+            "source:9c13775ed701cba5aea7dce86bff74a4e633593454aab05371033633a600c012",
+            "source:1e88cf6d927543791b4c209ff63a12379c683bd8ffcc3fa26d3285f0d4022271",
+            "source:1a2fd60d13d480760f5c1acd5980edb3e0b864cebf2638e13e8d8f4f1ab85877",
+            "source:50cedaa832deafd44f54cdc63ae72ad9dd261220f0786829ed350854c17a4819",
+            "source:2d9d96e4ce64addbdce26a8abcc9ccc08d8917628b989d37c63e7407468a7627",
+            "source:df67387582bdafb2a2f2a30a8301453da2bc8c7ab7d3d51154a112481261284b",
+            "source:fad07ad6200a936f6e39b28f64eec00918a76c81a1d1fe6495f4f00f13fd498c",
+            "source:209834e05be9d5899be793d39590403122d25d9cef6fb7496fd6aa1e88c331f1",
+            "source:06ef110a1ee864e7b7b4eb9e24dbd1a45d030e877ecdf2029c1b378ec2f40688",
+            "source:f51540b71e138765daf2054732128e673bbf78ff249fcf9989f4abd9dd8c4949",
+            "source:7836a3bb0e5098cc854465c5e0de05dcd3f9b51646045a69f4238306b094fd8d",
+            "source:063e6472e06d2b800afbb0753c87b1db3f9d29c9b1d84cb00d0ef6a24511da71",
+            "source:be0e1661ac447897dcc24b82087ed3190c6e0e278125c8dc4774e7d38eff6ed1",
+            "source:6bece657403979f973a5637d7bf2492e394613f110d4a8121d5c2c98b8661e93",
+            "source:ed99abeb0fcbab43dd2a9c765a76265b2a6054415fdffa316850ac02b525f3b7",
+            "source:43b318f71dbad99118fc6a4503541324a5a8683543c712339dcc78213a9cb8f6",
+            "source:6fc72daedafb1c8442d0e6e6a2f627fc78230003f7e92716263f9bae908a97d9",
+            "source:2acce98532f36138618b3c7c3335409d84212b0055c8ba2d5fd6683820e65d11",
+            "source:153a464056ee6d8ce8be08d70eeb9a33030878a49c98f5fa09d7bed0b050d2e5",
+            "source:fa445a6d1a0d6688805c0d3612ba5ae4b35f1b04124f70597ae097d36e9d3e05",
+            "source:2f5b6bf72f9a199ce2cb458414fc811d5964e2faefd652db667d33e03dceb214",
+            "source:3bf6db726a80ab2c3233a1fe0a644b15da9b5dba3492bd27fe84941b49fc1854",
+            "source:00d580b73c23c0ffce188aeafb1801254a16fc1264ae92cce0838c45833be415",
+            "source:750820601295e657e9988560d1ba452173a4036f88de0d6445f0b1a62ee73f0f",
+            "source:5899e27b55bfd65a173a8da8c15a05ebed04f5b98313fe676547314831dc1df8"
+          ]
+        },
+        "checkpoint": {
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/checkpoint-120.json",
+          "bytes": 2826167,
+          "sha256": "741ea06a018d603b268e0acc8efc21d8ae1b9d0e3d1780212746c8a6cfdae2f1"
+        },
+        "predictions": {
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/selection-predictions-120.json",
+          "bytes": 1010697,
+          "sha256": "ebecb7980f1f942ae141274ad586f0a59a27ad8338e49050b496dfade29b976d"
+        },
+        "eligible": true
+      },
+      "selection_candidates": [
+        {
+          "completed_updates": 0,
+          "summary": {
+            "positive_count": 64,
+            "positive_exact_count": 32,
+            "positive_learned_refusal_count": 21,
+            "positive_structural_block_count": 3,
+            "positive_emitted_proposal_count": 40,
+            "negative_count": 64,
+            "negative_learned_refusal_count": 55,
+            "negative_incidental_block_count": 2,
+            "negative_emitted_proposal_count": 7,
+            "positive_raw_modality_exact": 50,
+            "positive_raw_all_spans_exact": 53,
+            "nonempty_condition_count": 32,
+            "nonempty_condition_exact_count": 13,
+            "case_count": 128,
+            "source_parent_groups": 64,
+            "positive_class_CE": 0.608147540665739,
+            "class_confusion": {
+              "O": {
+                "O": 14,
+                "P": 4,
+                "F": 4
+              },
+              "P": {
+                "O": 1,
+                "P": 18,
+                "F": 2
+              },
+              "F": {
+                "O": 1,
+                "P": 2,
+                "F": 18
+              }
+            },
+            "positive_raw_facet_span_exact": {
+              "modality": {
+                "count": 64,
+                "exact": 63,
+                "nonempty_count": 64,
+                "nonempty_exact": 63
+              },
+              "actor": {
+                "count": 64,
+                "exact": 64,
+                "nonempty_count": 64,
+                "nonempty_exact": 64
+              },
+              "action": {
+                "count": 64,
+                "exact": 56,
+                "nonempty_count": 64,
+                "nonempty_exact": 56
+              },
+              "object": {
+                "count": 64,
+                "exact": 63,
+                "nonempty_count": 32,
+                "nonempty_exact": 31
+              },
+              "condition": {
+                "count": 64,
+                "exact": 61,
+                "nonempty_count": 32,
+                "nonempty_exact": 29
+              }
+            },
+            "negative_categories": {
+              "modal_misspelling": {
+                "count": 16,
+                "learned_refusal": 7,
+                "emitted": 7,
+                "incidental_block": 2
+              },
+              "second_rule": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              },
+              "extra_exception": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              },
+              "modal_deletion": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              }
+            },
+            "positive_templates": {
+              "condition_actor_possessive_gerund_object_modal": {
+                "count": 8,
+                "class_exact": 8,
+                "proposal_exact": 7,
+                "raw_action_exact": 7
+              },
+              "actor_condition_modal_action_object": {
+                "count": 8,
+                "class_exact": 6,
+                "proposal_exact": 5,
+                "raw_action_exact": 7
+              },
+              "modal_actor_action_object_condition": {
+                "count": 8,
+                "class_exact": 5,
+                "proposal_exact": 2,
+                "raw_action_exact": 7
+              },
+              "actor_modal_action_object_condition": {
+                "count": 8,
+                "class_exact": 6,
+                "proposal_exact": 2,
+                "raw_action_exact": 6
+              },
+              "gerund_object_agent_modal_condition": {
+                "count": 8,
+                "class_exact": 8,
+                "proposal_exact": 5,
+                "raw_action_exact": 8
+              },
+              "condition_actor_modal_action_object": {
+                "count": 8,
+                "class_exact": 3,
+                "proposal_exact": 2,
+                "raw_action_exact": 7
+              },
+              "actor_possessive_gerund_object_modal_condition": {
+                "count": 8,
+                "class_exact": 8,
+                "proposal_exact": 4,
+                "raw_action_exact": 7
+              },
+              "condition_modal_actor_action_object": {
+                "count": 8,
+                "class_exact": 6,
+                "proposal_exact": 5,
+                "raw_action_exact": 7
+              }
+            },
+            "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+            "caller_attachment_learned": false,
+            "legal_gold": false,
+            "admission_masks": "all five zero",
+            "raw_support_confusion": {
+              "true_positive": 43,
+              "false_negative": 21,
+              "false_positive": 9,
+              "true_negative": 55
+            },
+            "raw_support_accuracy": 0.765625,
+            "support_probability_BCE": 0.45600148851679867,
+            "support_BCE_probability_clip": [
+              1e-12,
+              0.999999999999
+            ],
+            "fixed_class_nonaction_whole_ceiling_count": 47,
+            "fixed_class_nonaction_whole_ceiling_ids": [
+              "source:0bbe701ac9a5fbceef8b7ed7f9c55981503e42eaacb6c1c3d33badb9607d0601",
+              "source:0ad1723cc82d5e50914522c3ffd814da8aeecad8c97f40fc9f95b7b386530712",
+              "source:86f8867377549fc98058ba3abb4154b1fd97891fa553a34bf8277d0c098e4617",
+              "source:32ecde8cdfd4d0fd0ee3e809fbee64caf1702926ba40473fdff9e10d975b0236",
+              "source:2d80204f86b976e7f65cc7bd2ba5c9780f2ef03dab416956b811be5b37d2e51c",
+              "source:f6aa715bd3ba9b7737c0fa0f7570e9974aae12b7766acbc57e1bf7537a806081",
+              "source:7e7750e08375951b6a7d59a4642dd220b9210dbc7e46825d019f91a0f17cf1e8",
+              "source:779c6a8f4dcdfbf2301b7e26c77b5744721a69c4df63d198c6df575a1fde749a",
+              "source:a2deb9718c0e41a573cc268b453d77f685c48dd5ac9c090a7330d6da6881caed",
+              "source:6a5f12e61eb08b655296916fe34dd4b9443a17db8e03996e3b0e50550b45afb9",
+              "source:2d2cbb1207bde9d0dc4c924ec2954a43b7ccfd9742a55c0d878f84324ce363b2",
+              "source:994a37e3620f38cb5fdf68721d9e7ca57a2bbc498424261ef16678b8287a4079",
+              "source:7a3e8df322399f395aa031f3627eced1a5686aaf3abd8047b5609c28e2fc2f7f",
+              "source:659e1a91f3cef879324243628210b714c8af8b30129eb0ac6483aa1347af6c3f",
+              "source:1a59872f27aae3aeef4fec6e89f05d0a9b12c84bf8a0f87522b77ff956347930",
+              "source:a61f3597cecebef6c823188ebe48df1a5273f5a9eaf2fecce8db1f2fce4e2303",
+              "source:95b58de28e626daedf85ffbb57374f3374316a85e9b503ff527091c9fc7c3623",
+              "source:8660f061ac642cff334c9fd190c3f9806cdaf2fc73ea27aab624f330ddb95f8d",
+              "source:b22cabe1173c90d457cce0e365789c232aaf150947d4ed0b9c98e2c5142705ed",
+              "source:598a7ed212471e3269e7e16f21c1dc9001b803fe979e14fdefee5374e6371ea1",
+              "source:0a6e3fcf6110457de8af3cac5a0d4289755234736d7a67e75f4f20f00d716a20",
+              "source:8fdea3dac41e2d50a9f0478083375ebc29a0b72e38480485d1fc0d1b1cf3b4be",
+              "source:9c13775ed701cba5aea7dce86bff74a4e633593454aab05371033633a600c012",
+              "source:1e88cf6d927543791b4c209ff63a12379c683bd8ffcc3fa26d3285f0d4022271",
+              "source:1a2fd60d13d480760f5c1acd5980edb3e0b864cebf2638e13e8d8f4f1ab85877",
+              "source:50cedaa832deafd44f54cdc63ae72ad9dd261220f0786829ed350854c17a4819",
+              "source:2d9d96e4ce64addbdce26a8abcc9ccc08d8917628b989d37c63e7407468a7627",
+              "source:df67387582bdafb2a2f2a30a8301453da2bc8c7ab7d3d51154a112481261284b",
+              "source:fad07ad6200a936f6e39b28f64eec00918a76c81a1d1fe6495f4f00f13fd498c",
+              "source:209834e05be9d5899be793d39590403122d25d9cef6fb7496fd6aa1e88c331f1",
+              "source:06ef110a1ee864e7b7b4eb9e24dbd1a45d030e877ecdf2029c1b378ec2f40688",
+              "source:f51540b71e138765daf2054732128e673bbf78ff249fcf9989f4abd9dd8c4949",
+              "source:7836a3bb0e5098cc854465c5e0de05dcd3f9b51646045a69f4238306b094fd8d",
+              "source:063e6472e06d2b800afbb0753c87b1db3f9d29c9b1d84cb00d0ef6a24511da71",
+              "source:be0e1661ac447897dcc24b82087ed3190c6e0e278125c8dc4774e7d38eff6ed1",
+              "source:6bece657403979f973a5637d7bf2492e394613f110d4a8121d5c2c98b8661e93",
+              "source:ed99abeb0fcbab43dd2a9c765a76265b2a6054415fdffa316850ac02b525f3b7",
+              "source:43b318f71dbad99118fc6a4503541324a5a8683543c712339dcc78213a9cb8f6",
+              "source:6fc72daedafb1c8442d0e6e6a2f627fc78230003f7e92716263f9bae908a97d9",
+              "source:2acce98532f36138618b3c7c3335409d84212b0055c8ba2d5fd6683820e65d11",
+              "source:153a464056ee6d8ce8be08d70eeb9a33030878a49c98f5fa09d7bed0b050d2e5",
+              "source:fa445a6d1a0d6688805c0d3612ba5ae4b35f1b04124f70597ae097d36e9d3e05",
+              "source:2f5b6bf72f9a199ce2cb458414fc811d5964e2faefd652db667d33e03dceb214",
+              "source:3bf6db726a80ab2c3233a1fe0a644b15da9b5dba3492bd27fe84941b49fc1854",
+              "source:00d580b73c23c0ffce188aeafb1801254a16fc1264ae92cce0838c45833be415",
+              "source:750820601295e657e9988560d1ba452173a4036f88de0d6445f0b1a62ee73f0f",
+              "source:5899e27b55bfd65a173a8da8c15a05ebed04f5b98313fe676547314831dc1df8"
+            ]
+          },
+          "checkpoint": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/checkpoint-0.json",
+            "bytes": 2806422,
+            "sha256": "89f594430b68ada8ed9e97b9cbb78b54d10c1fe10ef1a6976cf2a0530d421652"
+          },
+          "predictions": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/selection-predictions-0.json",
+            "bytes": 819677,
+            "sha256": "99734f168bba0a067eefab8b69f7dc32a0f0a19b8df01f50bbf3523de26b5761"
+          },
+          "eligible": true
+        },
+        {
+          "completed_updates": 120,
+          "summary": {
+            "positive_count": 64,
+            "positive_exact_count": 40,
+            "positive_learned_refusal_count": 8,
+            "positive_structural_block_count": 3,
+            "positive_emitted_proposal_count": 53,
+            "negative_count": 64,
+            "negative_learned_refusal_count": 53,
+            "negative_incidental_block_count": 2,
+            "negative_emitted_proposal_count": 9,
+            "positive_raw_modality_exact": 50,
+            "positive_raw_all_spans_exact": 54,
+            "nonempty_condition_count": 32,
+            "nonempty_condition_exact_count": 19,
+            "case_count": 128,
+            "source_parent_groups": 64,
+            "positive_class_CE": 0.608147540665739,
+            "class_confusion": {
+              "O": {
+                "O": 14,
+                "P": 4,
+                "F": 4
+              },
+              "P": {
+                "O": 1,
+                "P": 18,
+                "F": 2
+              },
+              "F": {
+                "O": 1,
+                "P": 2,
+                "F": 18
+              }
+            },
+            "positive_raw_facet_span_exact": {
+              "modality": {
+                "count": 64,
+                "exact": 63,
+                "nonempty_count": 64,
+                "nonempty_exact": 63
+              },
+              "actor": {
+                "count": 64,
+                "exact": 64,
+                "nonempty_count": 64,
+                "nonempty_exact": 64
+              },
+              "action": {
+                "count": 64,
+                "exact": 58,
+                "nonempty_count": 64,
+                "nonempty_exact": 58
+              },
+              "object": {
+                "count": 64,
+                "exact": 63,
+                "nonempty_count": 32,
+                "nonempty_exact": 31
+              },
+              "condition": {
+                "count": 64,
+                "exact": 61,
+                "nonempty_count": 32,
+                "nonempty_exact": 29
+              }
+            },
+            "negative_categories": {
+              "modal_misspelling": {
+                "count": 16,
+                "learned_refusal": 5,
+                "emitted": 9,
+                "incidental_block": 2
+              },
+              "second_rule": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              },
+              "extra_exception": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              },
+              "modal_deletion": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              }
+            },
+            "positive_templates": {
+              "condition_actor_possessive_gerund_object_modal": {
+                "count": 8,
+                "class_exact": 8,
+                "proposal_exact": 7,
+                "raw_action_exact": 7
+              },
+              "actor_condition_modal_action_object": {
+                "count": 8,
+                "class_exact": 6,
+                "proposal_exact": 5,
+                "raw_action_exact": 8
+              },
+              "modal_actor_action_object_condition": {
+                "count": 8,
+                "class_exact": 5,
+                "proposal_exact": 4,
+                "raw_action_exact": 8
+              },
+              "actor_modal_action_object_condition": {
+                "count": 8,
+                "class_exact": 6,
+                "proposal_exact": 3,
+                "raw_action_exact": 6
+              },
+              "gerund_object_agent_modal_condition": {
+                "count": 8,
+                "class_exact": 8,
+                "proposal_exact": 7,
+                "raw_action_exact": 8
+              },
+              "condition_actor_modal_action_object": {
+                "count": 8,
+                "class_exact": 3,
+                "proposal_exact": 2,
+                "raw_action_exact": 6
+              },
+              "actor_possessive_gerund_object_modal_condition": {
+                "count": 8,
+                "class_exact": 8,
+                "proposal_exact": 6,
+                "raw_action_exact": 8
+              },
+              "condition_modal_actor_action_object": {
+                "count": 8,
+                "class_exact": 6,
+                "proposal_exact": 6,
+                "raw_action_exact": 7
+              }
+            },
+            "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+            "caller_attachment_learned": false,
+            "legal_gold": false,
+            "admission_masks": "all five zero",
+            "raw_support_confusion": {
+              "true_positive": 56,
+              "false_negative": 8,
+              "false_positive": 11,
+              "true_negative": 53
+            },
+            "raw_support_accuracy": 0.8515625,
+            "support_probability_BCE": 0.39685245094728777,
+            "support_BCE_probability_clip": [
+              1e-12,
+              0.999999999999
+            ],
+            "fixed_class_nonaction_whole_ceiling_count": 47,
+            "fixed_class_nonaction_whole_ceiling_ids": [
+              "source:0bbe701ac9a5fbceef8b7ed7f9c55981503e42eaacb6c1c3d33badb9607d0601",
+              "source:0ad1723cc82d5e50914522c3ffd814da8aeecad8c97f40fc9f95b7b386530712",
+              "source:86f8867377549fc98058ba3abb4154b1fd97891fa553a34bf8277d0c098e4617",
+              "source:32ecde8cdfd4d0fd0ee3e809fbee64caf1702926ba40473fdff9e10d975b0236",
+              "source:2d80204f86b976e7f65cc7bd2ba5c9780f2ef03dab416956b811be5b37d2e51c",
+              "source:f6aa715bd3ba9b7737c0fa0f7570e9974aae12b7766acbc57e1bf7537a806081",
+              "source:7e7750e08375951b6a7d59a4642dd220b9210dbc7e46825d019f91a0f17cf1e8",
+              "source:779c6a8f4dcdfbf2301b7e26c77b5744721a69c4df63d198c6df575a1fde749a",
+              "source:a2deb9718c0e41a573cc268b453d77f685c48dd5ac9c090a7330d6da6881caed",
+              "source:6a5f12e61eb08b655296916fe34dd4b9443a17db8e03996e3b0e50550b45afb9",
+              "source:2d2cbb1207bde9d0dc4c924ec2954a43b7ccfd9742a55c0d878f84324ce363b2",
+              "source:994a37e3620f38cb5fdf68721d9e7ca57a2bbc498424261ef16678b8287a4079",
+              "source:7a3e8df322399f395aa031f3627eced1a5686aaf3abd8047b5609c28e2fc2f7f",
+              "source:659e1a91f3cef879324243628210b714c8af8b30129eb0ac6483aa1347af6c3f",
+              "source:1a59872f27aae3aeef4fec6e89f05d0a9b12c84bf8a0f87522b77ff956347930",
+              "source:a61f3597cecebef6c823188ebe48df1a5273f5a9eaf2fecce8db1f2fce4e2303",
+              "source:95b58de28e626daedf85ffbb57374f3374316a85e9b503ff527091c9fc7c3623",
+              "source:8660f061ac642cff334c9fd190c3f9806cdaf2fc73ea27aab624f330ddb95f8d",
+              "source:b22cabe1173c90d457cce0e365789c232aaf150947d4ed0b9c98e2c5142705ed",
+              "source:598a7ed212471e3269e7e16f21c1dc9001b803fe979e14fdefee5374e6371ea1",
+              "source:0a6e3fcf6110457de8af3cac5a0d4289755234736d7a67e75f4f20f00d716a20",
+              "source:8fdea3dac41e2d50a9f0478083375ebc29a0b72e38480485d1fc0d1b1cf3b4be",
+              "source:9c13775ed701cba5aea7dce86bff74a4e633593454aab05371033633a600c012",
+              "source:1e88cf6d927543791b4c209ff63a12379c683bd8ffcc3fa26d3285f0d4022271",
+              "source:1a2fd60d13d480760f5c1acd5980edb3e0b864cebf2638e13e8d8f4f1ab85877",
+              "source:50cedaa832deafd44f54cdc63ae72ad9dd261220f0786829ed350854c17a4819",
+              "source:2d9d96e4ce64addbdce26a8abcc9ccc08d8917628b989d37c63e7407468a7627",
+              "source:df67387582bdafb2a2f2a30a8301453da2bc8c7ab7d3d51154a112481261284b",
+              "source:fad07ad6200a936f6e39b28f64eec00918a76c81a1d1fe6495f4f00f13fd498c",
+              "source:209834e05be9d5899be793d39590403122d25d9cef6fb7496fd6aa1e88c331f1",
+              "source:06ef110a1ee864e7b7b4eb9e24dbd1a45d030e877ecdf2029c1b378ec2f40688",
+              "source:f51540b71e138765daf2054732128e673bbf78ff249fcf9989f4abd9dd8c4949",
+              "source:7836a3bb0e5098cc854465c5e0de05dcd3f9b51646045a69f4238306b094fd8d",
+              "source:063e6472e06d2b800afbb0753c87b1db3f9d29c9b1d84cb00d0ef6a24511da71",
+              "source:be0e1661ac447897dcc24b82087ed3190c6e0e278125c8dc4774e7d38eff6ed1",
+              "source:6bece657403979f973a5637d7bf2492e394613f110d4a8121d5c2c98b8661e93",
+              "source:ed99abeb0fcbab43dd2a9c765a76265b2a6054415fdffa316850ac02b525f3b7",
+              "source:43b318f71dbad99118fc6a4503541324a5a8683543c712339dcc78213a9cb8f6",
+              "source:6fc72daedafb1c8442d0e6e6a2f627fc78230003f7e92716263f9bae908a97d9",
+              "source:2acce98532f36138618b3c7c3335409d84212b0055c8ba2d5fd6683820e65d11",
+              "source:153a464056ee6d8ce8be08d70eeb9a33030878a49c98f5fa09d7bed0b050d2e5",
+              "source:fa445a6d1a0d6688805c0d3612ba5ae4b35f1b04124f70597ae097d36e9d3e05",
+              "source:2f5b6bf72f9a199ce2cb458414fc811d5964e2faefd652db667d33e03dceb214",
+              "source:3bf6db726a80ab2c3233a1fe0a644b15da9b5dba3492bd27fe84941b49fc1854",
+              "source:00d580b73c23c0ffce188aeafb1801254a16fc1264ae92cce0838c45833be415",
+              "source:750820601295e657e9988560d1ba452173a4036f88de0d6445f0b1a62ee73f0f",
+              "source:5899e27b55bfd65a173a8da8c15a05ebed04f5b98313fe676547314831dc1df8"
+            ]
+          },
+          "checkpoint": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/checkpoint-120.json",
+            "bytes": 2826167,
+            "sha256": "741ea06a018d603b268e0acc8efc21d8ae1b9d0e3d1780212746c8a6cfdae2f1"
+          },
+          "predictions": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/selection-predictions-120.json",
+            "bytes": 1010697,
+            "sha256": "ebecb7980f1f942ae141274ad586f0a59a27ad8338e49050b496dfade29b976d"
+          },
+          "eligible": true
+        },
+        {
+          "completed_updates": 240,
+          "summary": {
+            "positive_count": 64,
+            "positive_exact_count": 39,
+            "positive_learned_refusal_count": 8,
+            "positive_structural_block_count": 3,
+            "positive_emitted_proposal_count": 53,
+            "negative_count": 64,
+            "negative_learned_refusal_count": 53,
+            "negative_incidental_block_count": 2,
+            "negative_emitted_proposal_count": 9,
+            "positive_raw_modality_exact": 50,
+            "positive_raw_all_spans_exact": 53,
+            "nonempty_condition_count": 32,
+            "nonempty_condition_exact_count": 18,
+            "case_count": 128,
+            "source_parent_groups": 64,
+            "positive_class_CE": 0.608147540665739,
+            "class_confusion": {
+              "O": {
+                "O": 14,
+                "P": 4,
+                "F": 4
+              },
+              "P": {
+                "O": 1,
+                "P": 18,
+                "F": 2
+              },
+              "F": {
+                "O": 1,
+                "P": 2,
+                "F": 18
+              }
+            },
+            "positive_raw_facet_span_exact": {
+              "modality": {
+                "count": 64,
+                "exact": 63,
+                "nonempty_count": 64,
+                "nonempty_exact": 63
+              },
+              "actor": {
+                "count": 64,
+                "exact": 64,
+                "nonempty_count": 64,
+                "nonempty_exact": 64
+              },
+              "action": {
+                "count": 64,
+                "exact": 56,
+                "nonempty_count": 64,
+                "nonempty_exact": 56
+              },
+              "object": {
+                "count": 64,
+                "exact": 63,
+                "nonempty_count": 32,
+                "nonempty_exact": 31
+              },
+              "condition": {
+                "count": 64,
+                "exact": 61,
+                "nonempty_count": 32,
+                "nonempty_exact": 29
+              }
+            },
+            "negative_categories": {
+              "modal_misspelling": {
+                "count": 16,
+                "learned_refusal": 5,
+                "emitted": 9,
+                "incidental_block": 2
+              },
+              "second_rule": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              },
+              "extra_exception": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              },
+              "modal_deletion": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              }
+            },
+            "positive_templates": {
+              "condition_actor_possessive_gerund_object_modal": {
+                "count": 8,
+                "class_exact": 8,
+                "proposal_exact": 7,
+                "raw_action_exact": 7
+              },
+              "actor_condition_modal_action_object": {
+                "count": 8,
+                "class_exact": 6,
+                "proposal_exact": 5,
+                "raw_action_exact": 8
+              },
+              "modal_actor_action_object_condition": {
+                "count": 8,
+                "class_exact": 5,
+                "proposal_exact": 3,
+                "raw_action_exact": 7
+              },
+              "actor_modal_action_object_condition": {
+                "count": 8,
+                "class_exact": 6,
+                "proposal_exact": 3,
+                "raw_action_exact": 6
+              },
+              "gerund_object_agent_modal_condition": {
+                "count": 8,
+                "class_exact": 8,
+                "proposal_exact": 7,
+                "raw_action_exact": 8
+              },
+              "condition_actor_modal_action_object": {
+                "count": 8,
+                "class_exact": 3,
+                "proposal_exact": 2,
+                "raw_action_exact": 6
+              },
+              "actor_possessive_gerund_object_modal_condition": {
+                "count": 8,
+                "class_exact": 8,
+                "proposal_exact": 6,
+                "raw_action_exact": 7
+              },
+              "condition_modal_actor_action_object": {
+                "count": 8,
+                "class_exact": 6,
+                "proposal_exact": 6,
+                "raw_action_exact": 7
+              }
+            },
+            "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+            "caller_attachment_learned": false,
+            "legal_gold": false,
+            "admission_masks": "all five zero",
+            "raw_support_confusion": {
+              "true_positive": 56,
+              "false_negative": 8,
+              "false_positive": 11,
+              "true_negative": 53
+            },
+            "raw_support_accuracy": 0.8515625,
+            "support_probability_BCE": 0.39346264533585695,
+            "support_BCE_probability_clip": [
+              1e-12,
+              0.999999999999
+            ],
+            "fixed_class_nonaction_whole_ceiling_count": 47,
+            "fixed_class_nonaction_whole_ceiling_ids": [
+              "source:0bbe701ac9a5fbceef8b7ed7f9c55981503e42eaacb6c1c3d33badb9607d0601",
+              "source:0ad1723cc82d5e50914522c3ffd814da8aeecad8c97f40fc9f95b7b386530712",
+              "source:86f8867377549fc98058ba3abb4154b1fd97891fa553a34bf8277d0c098e4617",
+              "source:32ecde8cdfd4d0fd0ee3e809fbee64caf1702926ba40473fdff9e10d975b0236",
+              "source:2d80204f86b976e7f65cc7bd2ba5c9780f2ef03dab416956b811be5b37d2e51c",
+              "source:f6aa715bd3ba9b7737c0fa0f7570e9974aae12b7766acbc57e1bf7537a806081",
+              "source:7e7750e08375951b6a7d59a4642dd220b9210dbc7e46825d019f91a0f17cf1e8",
+              "source:779c6a8f4dcdfbf2301b7e26c77b5744721a69c4df63d198c6df575a1fde749a",
+              "source:a2deb9718c0e41a573cc268b453d77f685c48dd5ac9c090a7330d6da6881caed",
+              "source:6a5f12e61eb08b655296916fe34dd4b9443a17db8e03996e3b0e50550b45afb9",
+              "source:2d2cbb1207bde9d0dc4c924ec2954a43b7ccfd9742a55c0d878f84324ce363b2",
+              "source:994a37e3620f38cb5fdf68721d9e7ca57a2bbc498424261ef16678b8287a4079",
+              "source:7a3e8df322399f395aa031f3627eced1a5686aaf3abd8047b5609c28e2fc2f7f",
+              "source:659e1a91f3cef879324243628210b714c8af8b30129eb0ac6483aa1347af6c3f",
+              "source:1a59872f27aae3aeef4fec6e89f05d0a9b12c84bf8a0f87522b77ff956347930",
+              "source:a61f3597cecebef6c823188ebe48df1a5273f5a9eaf2fecce8db1f2fce4e2303",
+              "source:95b58de28e626daedf85ffbb57374f3374316a85e9b503ff527091c9fc7c3623",
+              "source:8660f061ac642cff334c9fd190c3f9806cdaf2fc73ea27aab624f330ddb95f8d",
+              "source:b22cabe1173c90d457cce0e365789c232aaf150947d4ed0b9c98e2c5142705ed",
+              "source:598a7ed212471e3269e7e16f21c1dc9001b803fe979e14fdefee5374e6371ea1",
+              "source:0a6e3fcf6110457de8af3cac5a0d4289755234736d7a67e75f4f20f00d716a20",
+              "source:8fdea3dac41e2d50a9f0478083375ebc29a0b72e38480485d1fc0d1b1cf3b4be",
+              "source:9c13775ed701cba5aea7dce86bff74a4e633593454aab05371033633a600c012",
+              "source:1e88cf6d927543791b4c209ff63a12379c683bd8ffcc3fa26d3285f0d4022271",
+              "source:1a2fd60d13d480760f5c1acd5980edb3e0b864cebf2638e13e8d8f4f1ab85877",
+              "source:50cedaa832deafd44f54cdc63ae72ad9dd261220f0786829ed350854c17a4819",
+              "source:2d9d96e4ce64addbdce26a8abcc9ccc08d8917628b989d37c63e7407468a7627",
+              "source:df67387582bdafb2a2f2a30a8301453da2bc8c7ab7d3d51154a112481261284b",
+              "source:fad07ad6200a936f6e39b28f64eec00918a76c81a1d1fe6495f4f00f13fd498c",
+              "source:209834e05be9d5899be793d39590403122d25d9cef6fb7496fd6aa1e88c331f1",
+              "source:06ef110a1ee864e7b7b4eb9e24dbd1a45d030e877ecdf2029c1b378ec2f40688",
+              "source:f51540b71e138765daf2054732128e673bbf78ff249fcf9989f4abd9dd8c4949",
+              "source:7836a3bb0e5098cc854465c5e0de05dcd3f9b51646045a69f4238306b094fd8d",
+              "source:063e6472e06d2b800afbb0753c87b1db3f9d29c9b1d84cb00d0ef6a24511da71",
+              "source:be0e1661ac447897dcc24b82087ed3190c6e0e278125c8dc4774e7d38eff6ed1",
+              "source:6bece657403979f973a5637d7bf2492e394613f110d4a8121d5c2c98b8661e93",
+              "source:ed99abeb0fcbab43dd2a9c765a76265b2a6054415fdffa316850ac02b525f3b7",
+              "source:43b318f71dbad99118fc6a4503541324a5a8683543c712339dcc78213a9cb8f6",
+              "source:6fc72daedafb1c8442d0e6e6a2f627fc78230003f7e92716263f9bae908a97d9",
+              "source:2acce98532f36138618b3c7c3335409d84212b0055c8ba2d5fd6683820e65d11",
+              "source:153a464056ee6d8ce8be08d70eeb9a33030878a49c98f5fa09d7bed0b050d2e5",
+              "source:fa445a6d1a0d6688805c0d3612ba5ae4b35f1b04124f70597ae097d36e9d3e05",
+              "source:2f5b6bf72f9a199ce2cb458414fc811d5964e2faefd652db667d33e03dceb214",
+              "source:3bf6db726a80ab2c3233a1fe0a644b15da9b5dba3492bd27fe84941b49fc1854",
+              "source:00d580b73c23c0ffce188aeafb1801254a16fc1264ae92cce0838c45833be415",
+              "source:750820601295e657e9988560d1ba452173a4036f88de0d6445f0b1a62ee73f0f",
+              "source:5899e27b55bfd65a173a8da8c15a05ebed04f5b98313fe676547314831dc1df8"
+            ]
+          },
+          "checkpoint": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/checkpoint-240.json",
+            "bytes": 2826187,
+            "sha256": "1f975a1ae72f0685ca32518209112056141f1291006ee470364c14458b68e5a0"
+          },
+          "predictions": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/selection-predictions-240.json",
+            "bytes": 1010663,
+            "sha256": "62a85ad7f6d83d0302fffaf23baf5c3dce78038752bedee47257e55f730a4238"
+          },
+          "eligible": true
+        }
+      ],
+      "completed_support_updates": 240,
+      "completed_action_updates": 240,
+      "training_input_records": 3840,
+      "encoded_optimizer_source_presentations": 3840,
+      "positive_action_presentations": 1920,
+      "negative_support_presentations": 1920,
+      "negative_records_ignored": 0,
+      "last_TRAIN": {
+        "positive_count": 512,
+        "positive_exact_count": 313,
+        "positive_learned_refusal_count": 57,
+        "positive_structural_block_count": 14,
+        "positive_emitted_proposal_count": 441,
+        "negative_count": 512,
+        "negative_learned_refusal_count": 398,
+        "negative_incidental_block_count": 11,
+        "negative_emitted_proposal_count": 103,
+        "positive_raw_modality_exact": 385,
+        "positive_raw_all_spans_exact": 466,
+        "nonempty_condition_count": 256,
+        "nonempty_condition_exact_count": 142,
+        "case_count": 1024,
+        "source_parent_groups": 512,
+        "positive_class_CE": 0.6572840904722281,
+        "class_confusion": {
+          "O": {
+            "O": 100,
+            "P": 24,
+            "F": 47
+          },
+          "P": {
+            "O": 6,
+            "P": 147,
+            "F": 17
+          },
+          "F": {
+            "O": 11,
+            "P": 22,
+            "F": 138
+          }
+        },
+        "positive_raw_facet_span_exact": {
+          "modality": {
+            "count": 512,
+            "exact": 503,
+            "nonempty_count": 512,
+            "nonempty_exact": 503
+          },
+          "actor": {
+            "count": 512,
+            "exact": 493,
+            "nonempty_count": 512,
+            "nonempty_exact": 493
+          },
+          "action": {
+            "count": 512,
+            "exact": 505,
+            "nonempty_count": 512,
+            "nonempty_exact": 505
+          },
+          "object": {
+            "count": 512,
+            "exact": 504,
+            "nonempty_count": 256,
+            "nonempty_exact": 248
+          },
+          "condition": {
+            "count": 512,
+            "exact": 503,
+            "nonempty_count": 256,
+            "nonempty_exact": 247
+          }
+        },
+        "negative_categories": {
+          "second_rule": {
+            "count": 128,
+            "learned_refusal": 128,
+            "emitted": 0,
+            "incidental_block": 0
+          },
+          "modal_misspelling": {
+            "count": 128,
+            "learned_refusal": 25,
+            "emitted": 101,
+            "incidental_block": 2
+          },
+          "extra_exception": {
+            "count": 128,
+            "learned_refusal": 127,
+            "emitted": 1,
+            "incidental_block": 0
+          },
+          "modal_deletion": {
+            "count": 128,
+            "learned_refusal": 118,
+            "emitted": 1,
+            "incidental_block": 9
+          }
+        },
+        "positive_templates": {
+          "gerund_object_agent_modal_condition": {
+            "count": 64,
+            "class_exact": 61,
+            "proposal_exact": 45,
+            "raw_action_exact": 64
+          },
+          "condition_actor_possessive_gerund_object_modal": {
+            "count": 64,
+            "class_exact": 62,
+            "proposal_exact": 62,
+            "raw_action_exact": 64
+          },
+          "modal_actor_action_object_condition": {
+            "count": 64,
+            "class_exact": 42,
+            "proposal_exact": 33,
+            "raw_action_exact": 63
+          },
+          "actor_possessive_gerund_object_modal_condition": {
+            "count": 64,
+            "class_exact": 56,
+            "proposal_exact": 45,
+            "raw_action_exact": 64
+          },
+          "actor_condition_modal_action_object": {
+            "count": 64,
+            "class_exact": 38,
+            "proposal_exact": 23,
+            "raw_action_exact": 60
+          },
+          "actor_modal_action_object_condition": {
+            "count": 64,
+            "class_exact": 42,
+            "proposal_exact": 35,
+            "raw_action_exact": 62
+          },
+          "condition_actor_modal_action_object": {
+            "count": 64,
+            "class_exact": 40,
+            "proposal_exact": 28,
+            "raw_action_exact": 64
+          },
+          "condition_modal_actor_action_object": {
+            "count": 64,
+            "class_exact": 44,
+            "proposal_exact": 42,
+            "raw_action_exact": 64
+          }
+        },
+        "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+        "caller_attachment_learned": false,
+        "legal_gold": false,
+        "admission_masks": "all five zero",
+        "raw_support_confusion": {
+          "true_positive": 455,
+          "false_negative": 57,
+          "false_positive": 114,
+          "true_negative": 398
+        },
+        "raw_support_accuracy": 0.8330078125,
+        "support_probability_BCE": 0.4079236609149924,
+        "support_BCE_probability_clip": [
+          1e-12,
+          0.999999999999
+        ],
+        "fixed_class_nonaction_whole_ceiling_count": 351,
+        "fixed_class_nonaction_whole_ceiling_ids": [
+          "source:0463804064a6d7b3dc20519f1842e6bd77f6186d167e896c6795e37a48c90729",
+          "source:0220d1cbaab4b8029467c3ef9d20845483b344f81041d69bf617c55f9ad9d15e",
+          "source:17167648b2c598b9a300c2aff4d9cd58f5b2dbf0f4403f26c77d46735be2a058",
+          "source:21fac5015be9d543668e1ff9a0cdb7e73430c8d2de670aa6d4204c09274a3806",
+          "source:d636765242cdaeff9aabe8f31cd7c6d7464b01a50639fc4fd334abb3eff83cb8",
+          "source:34a9bf58356b54e5ae80bb029feece5ae3c2b0ba7c5981a4feba617b5ed838e3",
+          "source:21b1e007f4f86048d42a70b8a2d971bce30fa6bc9425a417f4ca4c2f5e0d993d",
+          "source:c15c52ea47dc75a1a0e19acce8ca556d951ba69c6c1839e468f4970cd050cc55",
+          "source:e2ef280954ae3aabbe7e7dd35eed9c1af8ced6ebfdf099bda574edb8b769ed0c",
+          "source:9a74d703cbbffd6d33cbc0577e2650ce7e37d32ed72061820998e8c0a52ae1f0",
+          "source:d1e4bb4b7d56f2fe913ea5277a4e84f1b59352741cc088296f675beccc85f635",
+          "source:d2d6b57a214706f45bf9a4b59725ddd9558293ebe5482b14d7ed78b692e106ae",
+          "source:d587383589dae14ce7c47bff070f1b56b8aef46c1d345c9dfe6a30b10b3ce4a0",
+          "source:03b274265cd999b9586fe02fd00b69fc75886b1adf69207581c4f4c2cbaa7162",
+          "source:52e2f4717e5bbca4a94b8f96a32a9db1b2131f240938775c5335a58b98f90876",
+          "source:16562155d024b7ff6dbe49547bcfc2c5b2e7e30fddac550bb8068126ff5c776b",
+          "source:c5fea9240ae0605fa9aed82fb07624fe4e96b18c22fbf0c0e32f467b87f7c375",
+          "source:e865a58822d5d3298e3265d60fb55a78859e4eb9ce6e961fffb0b2450305f13c",
+          "source:f22919ac94f5081aecf8c1261ee4841b64060851e6915819952ee661f071cd1a",
+          "source:995da3a65a421b1d8b8c0b4ac8de2e3cb1cb5500e2710d5b36718418cb48a188",
+          "source:a6dfb341f0db4d7525dfbb830ca3ef80374b36d371974ac7a1f7088087509186",
+          "source:8d6223c7cecc12910672c22216ca0f084bca681ad761c53e406ed5aebcdef573",
+          "source:5c70db6d33fea9ce473c50d7d225e46ae5954a546501fcda06386ca826a0a4c7",
+          "source:e97589e4cced8355ba989983c593d12fddf0056245e6b238f3d6360aebb1faaf",
+          "source:4070720017b0f7eb8921b0f032ddd584195bd50a5776f5a470a657f37f20b889",
+          "source:f2c3bb7754408df313818ae14ffcd19133959a90ac6bf8b4e391a498c902a6c5",
+          "source:22e11013919438a4444c4841b620833f4424c42c60606c55f93e85ece8fbcf66",
+          "source:3285a27b477e8002397c12ca0a98aa8bd5b3d4ed46f7b8b2ef355f1d43179611",
+          "source:3e9eae0f1f49f885b7fbeaf96cabdf6d6f91ed361d46d316bf6e81541dcce63d",
+          "source:7d16aa13d9a3d131d5dceb2a1b110ce9fe5669b36fa34167cf842d9c346dc7d6",
+          "source:a8cf600065617d2f36938d2cc274342354283f2715b0df0285d300d2c16a8040",
+          "source:b06f0146318a36986378ffc9d6f12e4d1ebdacc44c58f28b6d743064fa689a0f",
+          "source:f43c025212839c4252c2b8f0dcb84ab60ba519bc9d446e5d144dab25020e1ab0",
+          "source:e5523c52518705cfd6c3ce4d4568dbc899b3449b7bbf73f9ce19aa91bfb6b944",
+          "source:a4d8e55acb968d5bf80f95cf1ddbe0ced08d8d06c1e43fcae310da62142eafea",
+          "source:4d8e151c8c9098e002283ce5dff5b8378c09345f1484507f2f32fcc0067f5f55",
+          "source:ac49329515966d1088f800a9fca8e5ae68474fd514d09c08ec90c1466761832d",
+          "source:dc82936b763268ef19d95b579214765db481de2656dbc27ffb4d56441383070d",
+          "source:175492beeecf5b70a121a8c1aff6ab7fdcdb005b4342f7ad047a6bc7696c3b5e",
+          "source:87139f5b2b6b3b593a7127d2d9a643e84da0ac6d9ed3ae04af71cb57a9bc16bc",
+          "source:c103483da17bed500af9c7374ed79e0eb53d5658f147ece3a38aaec6dd2216f9",
+          "source:4474efe48f052ae645c0f403972399042d62b93fdd9901de859553a2a135386a",
+          "source:6a412180e4b9998fa16de940a64856108a71127317e7551a29299bd08e1d25a7",
+          "source:b3de036c15389bcf41c8f8b467696c63578eef5bf428ca4a0e047b7459796c82",
+          "source:696fabeee9f75a6e5ce7a20c8a4546f74054704eb9794dbd55c74bb0af0ca08c",
+          "source:ef1968f2924f54111e702b371ef0b0d02dc87f684845aad77f4d05328f250ebe",
+          "source:bfa8a8a0383ac2c7da863fcbbc2d7d0b48cfedabee60a28e7311efab99ad181c",
+          "source:4676c5ffcc26c1c05c640b603ba2b08425b9141847b95f0816805487035b9562",
+          "source:d4b1abe350d251f7f37111ee452bef824004e406de0cb5f255e516adefe74a3c",
+          "source:69298519cc10b038a2831f62030c151417216e6d0f1e4f8d08487e2f153854c8",
+          "source:caf65bb9295cea457bd146038ac14e6d228863651dba53af283b6274d752a99d",
+          "source:4086de500398d3adad2bd6b0efcf963db1c9f137c248ce09f6636a5b4634afe2",
+          "source:f586ab7de838d65f2b89cd4f0876b24aa260cd85300d7f880727031faeb56b11",
+          "source:c3ef6ab61defb904dc97bf0b2af7144bf7d241286583f07d0687aa10777389ca",
+          "source:e7deab9b920233757cde051319aaef35998855d38ec37b43c89d63c1f5d3dbdf",
+          "source:faf21d98d2a12b2467e5c22fc1b8e0252a1684ead42c8716f46081c3b2f85ee9",
+          "source:ee1b3481ff22dadbb3231dc69bff69206e8fa5ddf53a24df23590546dca45791",
+          "source:7b068a82fb2a5d3b243c13a08876dd71f856a25b303292c795ba09f5077f771c",
+          "source:6372acb716f9cc7b6252b03f856689009db9b6b9471918983de7be830195d995",
+          "source:5b38bba2dfc522a90eff15aaed5f2ded76b6169bb06bd352d75741f37f6580e5",
+          "source:8e1a3975335c77bdb1f689fb7f4ddf6287d50b67b19345d532e4d1da7cd3522d",
+          "source:dff5b63650e1537e546e2fe7d66b823ef634c4a153ffeecbe7a9a392b0bc2042",
+          "source:4230e657cb50afdd3b73d03bc74176f831ed3ba1fb40212c1ae7dd33ceaebc8e",
+          "source:75ce5e7bde729f2ecd08f152cdbd5d7350926f0ae46b591a9cdc14c002c7f61e",
+          "source:7e5b4d17b5277097cfaf5b27a99e42c3e5c0048852b5e23aacbe383a9f3e3b0f",
+          "source:7acccf42bdc5b2e9c3d4c10159b545d75ab3005ec32f7536c1ece2315aae4dac",
+          "source:23b0f353296ee7341c4fc2d06900faa66a70f4a279b8b84a9794e188e7ba944d",
+          "source:7e59e692e2115ce24bac36898f4e9fd1392009479f6e4ed25988d5166c2c1bbc",
+          "source:05fcef4e2d0b8fc050dcca732a3f4ef88faa670ce1dfb93762086ee7c7fbd472",
+          "source:083935084e14b5d1ec036ec06a45b69e69cb8136de51f60866225f8efd57e902",
+          "source:e17eacfd5945ce4d38d9a2d68c32df92cc0f6fef5e9df45e5cf512d81435779d",
+          "source:35e060bb523e0cb59a67b709db6a4bac2010b454b42f6ecf2ca826f05185a01b",
+          "source:b0935dd466cb3b1e75de770426cc5d2e0adaaf38f553d135083d9d0e09321037",
+          "source:68d00b0d201419f4a077ff9a2021fb11eaa7cdc8f2ac46f674f0815e681e221c",
+          "source:84f665b2e811ccbe975778841797b9098bf0ce22af8ff7169d1a3856c858595f",
+          "source:501ae2c4bcc90a6d7c10759b4545bcf63e7dbb52560edf7f709d6c0511b66564",
+          "source:2ce8dedd2284acb7933ca884dac3feb26dff8a76bcd45e7a7462e6393c1c0085",
+          "source:7566a91b08246b32f9121c7746de5d962bcbf961a99fb4580f6ccb70795df06d",
+          "source:997b6f1b9558836c9ca9207b28845ad844b432b021a4a4f19c7a00f943d24610",
+          "source:4189c74bcdb6d76aa30d12f2def33e73d9ae9545dee16795f6fa00b48a8aff32",
+          "source:c6de54969bf5fa9d8fb9f533d3070d62babd2b31425697f8a34ea6dea5e8bfb5",
+          "source:fb8381be1caa04e5dfcae60c2844a6a1acfecab61ead6f20194f528430f5344a",
+          "source:fa954b477e808396bffd70113deeb94417f7eac00ef37654bbfead6300e4dfd1",
+          "source:5f3ac548a1d33cd51de69ca28fcb0a42d12f013aa535355f149a1b2b9dc4c905",
+          "source:ae06436af4bc2029ac5ef785bad7bee4f38f4762f08a2190be894f1a8a29d7bd",
+          "source:222f3998d710a843b2a6c5c3b515e6dfd99746e3bfe0bdf12c20b2351285e475",
+          "source:0cdbae79458de7d6615cb7f41f6991cfaa81f421ef9f27dd424e9f31bc1f9013",
+          "source:d9008ff1e66b8a09cdc288c12c79b770ed5bb95dff4442a4a5545c474a664204",
+          "source:0ea135df1152c63653601a4df1fa5b7360f126274e2196ccdeb84f8999c6c100",
+          "source:529173b148729f10d82c9074dbbf3dc2a954717684990182ae8bb82266c10469",
+          "source:f61a415b6bf74aa645b3bda105cbfe2d4f8e8d84865919a4811d1cb50871652d",
+          "source:a97931c26b470f9e76e2d3372ca5e2094e68e51f3a075dfad2cfb0948c575472",
+          "source:0e1e2ad16a66e80b7b6d3e03e45d89f8e49e8d7357b0f20de09453af1e4fe91b",
+          "source:1c2c55cad8bdd7ca28eacc78a3412a9a3366f312213d7a75563d413186d216a0",
+          "source:3d588684d060059bc9d2cb16b1de1b478a2c3071b5d12917973505e5e2fcfedc",
+          "source:eb26744b1ea152bc40f83b9a8b2eef998efd06bad5cdba5259bd3a3823ad0a81",
+          "source:b773880ae10b5b7532f2f3d93de26ef48ea686965ac331187d2f47edbf8e677e",
+          "source:b336abf1db52fb6cce8cfcbe4c2b66c03791a4ae6346fd2c9943979fe341beb6",
+          "source:8837449de267e9542ffb252297cb5637c52ec1bb6d028edf579c523da80b764a",
+          "source:eec4f3a74afaa15c243225137a7650842cfe9e76c831caad008973419f66fec7",
+          "source:ff4a5f1f1e3eb85f3db3d3734daadfb5b35165d69f3e053154e8382aeb267947",
+          "source:925ca9aae0a602a7811c3706c86dc13c824f4af0ce29349195e3a5a861b4357b",
+          "source:b8062529265efe8d22ddbab00f38be6bf131507623db93dc2d9b3f9f029d5c12",
+          "source:f63625911b28e343f4a638df3a58e1d5204be0ac9dfeca379d3112b88604e381",
+          "source:348e7a3f3fc486506570f4a94665e9b98e66808d9d682c8413234aaef44a7f0d",
+          "source:f4321995a34471c3fd89c8c28820e911cb84fac78393875fba433676cc352fe5",
+          "source:61e4916162d6ce61003ecab884ae49495a25d84d02e0921868b08ce1859567fa",
+          "source:2597c993dd280823e7851cc28ebc0cce5ea0a28fa53ee49d3ae8781f5c9807d0",
+          "source:541fd675fd060c54252c6056bffc697dfc44251d2aa8bca51c2f8dddab1c88a5",
+          "source:03087dffcf2e2aac7e554a7b8be174034ee80c14e731fcccbfede546236cafa2",
+          "source:624da41c687c6e52092f532dbde18fffc14ddc926f92108fd594f83cc7d9e58d",
+          "source:e00500b3afdd8f413e0bddd6af1f59698ca54b92f1aea19aead48bd2534dc6b2",
+          "source:df875c6707f3d2112d00758b9782072197062ed499364ae8103eba48b1115dc1",
+          "source:63a6545d57d315c459164e623f677be2a70aab0513c54d801dcc4724a7dbcfb4",
+          "source:9e06b634d194d245821cb2a1d187021650b91b7e9d82a76c5ac9738013b708fc",
+          "source:4f2fd75a71610910c3d88c5491e1ce4a18d14d997ab9379780b5dec685d02f31",
+          "source:3e099ef1b3b9f58fa356e8ab56c83077a8ae6c3b0d1b795ff2f1bad85f8efef6",
+          "source:189b6990c6a56b4c1621ee7153b6b45c07e4d5111def8b2005ca2e1e24885165",
+          "source:c959be83c38b74f7907c7527070b5b0f719689f252d99921eb4fd456ceba750a",
+          "source:85f16dec153d927bdc1152dcd734b233d043ba1f61b5a272034df6b89d34ce59",
+          "source:f16998e4c6c825392be59ea5ab5b067db2ec7b87a7a8127c9039363af56e8b02",
+          "source:0b8fd2a9d1f328b68e265cdf30deb634983db95f72ac12eea9588f0ce512c324",
+          "source:67df4984e0dc5fd053e36364f9c6a2c69e8f7cc7e2483416313070711f8683c5",
+          "source:40aef5fa98375771b47d7acd4b0543338bc4bc10084ce5cfc66861f6733bea9a",
+          "source:525c3dd2b0ea7affb9febcabef7fb0624a43da1a80b9ade77813cba5e049ea19",
+          "source:e5469b43c8726380b3a3d8c32ca6e60618b6aa1298c795eb9ff4b4caa1c11ae6",
+          "source:6d25d5998defd30310a420ce2a7963c3f34f28d8840c038f0b499e26a1f5183b",
+          "source:1a994ad385fec4e491fd4a0e0cac17f33d6ef0fb488d817ee8d893beb60fcbe5",
+          "source:27fcf1c28ce9b71a789e74541aa95500df62f90d5c430a302602ff274450d5c3",
+          "source:5e9ad0c720f9154fc86d59ba2281232b1d2c5fd0420391874c8e30d8c3584741",
+          "source:9b8e31474b290507623bc53893138eead8fea14c0f6f90ba420b06e3311e47d6",
+          "source:1ab3b8d7524cd566b264d3cf3bb65c7065115770f75bfd1462f9be08c2e95958",
+          "source:cba51e80552eaa89f2adc6fef8949cfe3c6c5a920f78dfe0a7a7f6f8e0fc54ae",
+          "source:57cd10db65d403c4c9d71f77563e26b4d945b2002df20084dd88ff84097f8944",
+          "source:32916a768a09c01ca5435f3c4e189eb6f12142fa51a015e287d07f383b12983c",
+          "source:f85c6ca8088ead44ae43afeedcd7e1f2ab916ac1191a2d85aa4687dcb2f75595",
+          "source:53ea1715a07234af0c457b69327eb5ea678f9c674ebd56110c94a011ee379c23",
+          "source:e1a2b1b8c9de3f73f94330e69f213c0c373b7e81b2c7daba8590cda1b53bbe9b",
+          "source:3c3ba153f6c3b1bc717e0b4440ed08e93ada6e777f4448526ba6b735fd0c07ba",
+          "source:dacbbb8c2c64cf508c892844142a570049d594a1db277c64d85da2b26ab92128",
+          "source:04dacd9e8b49fb06b39788068fa372cd9ab5a5cdde395c4da19ea072f161c896",
+          "source:85d89da978e43969c9d573bad8e5009351f63a9573c04b5b8bf7068c561cb1eb",
+          "source:78f7ec2a77c32c95530c07c374bb34678211ef490ed080b746abd6e27daca9b9",
+          "source:1c657c85df709a398bceccf8ef6702aaf0e9cc4e92a9b911fef5be0d84a041ce",
+          "source:18b0fbeb6772509838de005183300caf29bbbfd3865171c360ab26910031be19",
+          "source:7800d999ca7b674bb8c2279609a29c1dd2434e987440cb8e6a7eb8da384f38d2",
+          "source:3da97fd8a85139c7e8bf1acf8c19942de3e4ad6e02851a70b0fb2507fac185c8",
+          "source:375f31381b571806e1457bf2cfba658ca88619aff60e124e24f43765372b9471",
+          "source:11eb06e52736db97e296b7055c2eb21c70ba13beaa3b2f0a378aaf2c06519b2d",
+          "source:9b823be5d95327f261b2570b5d0c182b5a78a0a02e20f1de49aaafef3ece9c07",
+          "source:06d96792d4f1f271b3ab598b7aa35bad241c2e0bf0ace9ba43eaaca2288cff81",
+          "source:1837da108c118fb9c8cc4968aa5bb134b1aaf13e7dae170dc11a328c87ca70b9",
+          "source:77417a26c8c3bdac7532bd63109b3a102f26318b7fcb73505988ffb854180fcd",
+          "source:cfde21a059966ea2418194b169c5b586ba9a5adbd3c550670a8dcc423f87ee47",
+          "source:b11898b1826bc4042e3fe4fe1ebc87212ebfef0ecb003de0b53f7bf9720f5d8e",
+          "source:01ba366e881d0f7ee72c3b9dea7707c0343d5a3e46ae29eeb2480201258cfee5",
+          "source:3c4c45ad7131049c3eb1376b66cf6a3822df4b821233a4d38d8b0c66dcf0120b",
+          "source:5ecba9a1e2d0164e649f8c954073b16ac1c0b87221d4053ffbc1f35c53cc969b",
+          "source:f74b59f7bbffb8094ba7577e847116ce2fc00aa8d138097cbfdb0c3089edb370",
+          "source:78c31d57140c4363832839f5d55a95a63d97e2c731c709940509aef2c694633e",
+          "source:feb6e8ffdd7f3c8473683a0007027569be33ae59ffc86e65f85d44f6d7476477",
+          "source:fc0cfdd5bc2e57c0241bb403424709e5627f456386c0ffa80a1ec19bc9874d9c",
+          "source:86634800e34e1db95a60ce9e2fbb2889935404cda5589ed160264173ed7d242d",
+          "source:d674433355aacb1c69a26713eb2bfa98e3c24e01433536122fd250f73f6eb965",
+          "source:d7273782a436ae7b7a12525594ca4dbe5d8b0313f2f83be16fb05dd705685d21",
+          "source:d70316f727da9fe83b31a826251d2e1f1fa07c244548b30605763baabda34373",
+          "source:7d5736dd05932a7abcffd5905cfd9117cbe12d3cf5d568c31880e1d7e95981c4",
+          "source:1c8b09ead9f369a65554632a6cb574ce84c6f1d5ea7c00522d53734ee812cc89",
+          "source:7f395ea4ae8aa6084522e7d3415c4ae3f50dee593ed95f2ad0ead506d161a0c0",
+          "source:5af1d219223827a92ee9f63d6d7c80941e5a129e034bcce0e8116e621bc70add",
+          "source:3c1700a55f524008848fbc7e9e0165ed67e02a64e0795ad946155d8a49364849",
+          "source:4809f157e9e048821c01815d81c51be160221f6c9d3f1cd73c7d8535672f8ac7",
+          "source:0d323e55bcc770176a47168dc5d888167e15fcb1a45820226dfa54dbdfc5ff0c",
+          "source:21c52bd515dc7295234bb336f89d39a8e94db01edd9685e98a395021f8b7c4a2",
+          "source:8ac04749379933aa3d68bee5689e89f05534daf50ac108dde1f92768a6319c5a",
+          "source:493504b54628857f7aacc6222a81b7cb206a895aefa3e3039183352f15ba23a4",
+          "source:bf898b755dc63f2beced9a1260727fd11d508097968bb8fce265a049ec52ee24",
+          "source:247f8493197e4d70f563326520c0d687222a7f848fad2cd52759f4bc17a8f6fd",
+          "source:27bb913064fa8b7b5f2cdd473e49d76c3d338f4010bcf5d9bbb45b6342efc202",
+          "source:6a14f2349b03450bd088fd01bd8d9ed2c9f445afb571fcba451a25a96203fa29",
+          "source:a2e8d5a61cbcba7aeea8088166aa2bdca7b44d04ffd36ad25d583459dc1e0fd5",
+          "source:e9f449073fe74c4919564f6e0ec52e0c816aac05b1e1fc7d3b0e6d11768929c5",
+          "source:0d7a30006bc730b69785885016cfb613e5b5f80939b7b625c994332d3fbcaf10",
+          "source:1f2f48cf547c8353c7a8899457c12244040c66857813aa9a494dd04a934d9fc7",
+          "source:bc49233bce74a4e8ad84c76605a3d68f4ae5df83d6ec7d8df1e3976e876aa70f",
+          "source:2117982ca54ca04e35dcdfcdd198846690957faf67956960124fa97839b617ce",
+          "source:a54200838de576f9c6415f6977709e0f62ce4151dec4f196da45ca087aa6b03f",
+          "source:0568ccd8b75f52b43599c7f0c0abdb48db8866fcb12f629406688bc9d35a7a4f",
+          "source:899d9be5b65074432584a3cc05142ff66b15da72f0268d8cf379ff7b31995a12",
+          "source:b42733f2cc293d96fd8e50c74ae08dbc2d2e720fee2921c7914ec9874fd52d8a",
+          "source:9059a08e88e97c75440f2a3c48a9e0f8244b896c350c8aa053e4802896113f53",
+          "source:759987b3314b21ec353325d258aca1f8402511bfacff063c84228af419977437",
+          "source:8f9e782db7da8c0a899253b5a594c30b5fb706e043d0597431506855e345ba55",
+          "source:ccfbbd9eadb312af8c03b97761a182079b1e1d5dca02e73a6872aaf86c63905c",
+          "source:3d5606f3adaf8bd3edb431c368705a7ab5bb4dd2fe38b2153a5203750086e6db",
+          "source:0725d35ff2db19b2f5129f9c833d01a8749410f58a336ed16776151a44b3b1d6",
+          "source:f010219c8c0e84b68bb1798bee15c8be813949a6e1e0c7f5f09e494a82674247",
+          "source:695d7763b997abdba937b974234653de2a6a0a256e6279578e330f5abc259dda",
+          "source:7ce4ffc9aa786ca2265402b33785f41bb7a4c5ff4db0bac3b9d99bd42b4050f9",
+          "source:acf6395eb2de978d8348bf09e211f9632d451afc737a6a8906a2baf6b6fe35d0",
+          "source:e41cce8cee217115654d54a96d3b9b88e2470d47808b80437389d27bf271d532",
+          "source:0bf8aa5ad041b13e07a0174914ef3bf6c272b048f67a5c73f785d6ce127e81d6",
+          "source:a2b31b8f46c2b75d00c40f2a10737908f79146006612bec85ecec8c77934fffc",
+          "source:aa3ad51640173896eb881950d95eb359d1440578c98fe9f00102c94398070f4f",
+          "source:9117963a8874f4031c632b180abcaf13719ec1230d0a33f8819a758443bc278d",
+          "source:0be194acd1c420f0606a167c6dd4f767623139cba44467a61c4935b971103bea",
+          "source:2d3f262cee30279d10224b3dec5504f0aae9f96840700f87c579d1f9b1075c63",
+          "source:825ca4688e553ca66368bcc66cdb42cf6dfa7395567c07aa86feba4ad0497db7",
+          "source:f38269417b812bdae37c420e4ae3cd04ad1b4d20ebdbb31d46ce78860c51a39b",
+          "source:2c452b50b62aa8fa45dc0b9910c208e8c50d7b0760cf05b48c685e4d4a437261",
+          "source:f71c89c5e0806767f3e8dcdad166b5a7d4e1d54bc9e5f77f0362c951ccfec523",
+          "source:ec90573d21ac195f3cdb214a0458a7cb236a1b018dbb2d0810d9383b8e5753d0",
+          "source:7b8d394673200fcb8b804415b9ef6281263819f2679d3c9bee7c195a6226af7b",
+          "source:87c06186984bbcd18bb7a59bded217564afd74374d593b86bed197895a310427",
+          "source:2885ff280bdaaae267039232ab143aab9478e3c9c7a6da23126133e92c0744b3",
+          "source:e4a881e23155e6701c7f6c8ed6dcd2462a009f19db03c9318d9b5e1a8c063901",
+          "source:605f0b79182b5a962b93eb3d794f8ada6355aa3c8d4153ba566151447f5c8f64",
+          "source:fb4b74cffffdbabe4286c3e26d1fcf73a3a9b42b1928b0103616ec958080adbe",
+          "source:064d71306c34509579178257dd80bffbe6c20d4a98585841f7592f41473b9d8e",
+          "source:c4bc98fc929313a25c75a4a80cdbd7064fab35f4e6bcbc5aa75fd1612c1a2d4b",
+          "source:b1d1abce3a99312f71b214e8281c46237269e7e68472f98c8b0bece1b7e48ef9",
+          "source:9a7d393fc2180d1d4679887f199f2489eada7208fae0c75aab2980ad0e3b367d",
+          "source:a5dad5c9ec8f19bdc79834f13185b072e0e93cd59d589e158ec21050cfbc7d23",
+          "source:3a2936714cc56a7154d8d12adff762b1f9deaaeeaa9331e9688601d6f071220b",
+          "source:bf36348cd14fdf9dc2d0f7ad1201d48438262c0864bcd1b6e10c336fb8a3a01b",
+          "source:b8db8d814bab5b87c2636e79be6e3c3dc21242ef9204820ccfbaab9f1577d9f4",
+          "source:553569c739392819cadf029dcc12a46700a4a8d6507066cc363685922953a5d3",
+          "source:56b06095c088a1400a74487b0391405a7472a366c450378b38a2f8331851f3ba",
+          "source:0583f8a4fa4b7d53b06c146fd87d5aa94ff61f123d24c2b9cada4c4394efa3df",
+          "source:d1c49ad7764067201ba297c67d8cbe54cbefe593695d48995525785c6b31b544",
+          "source:3f54e08cc4ae241ee7d6080c90ec05245fe91919887fab35c69463b838a1b1bc",
+          "source:c9d9c04eaa9642e4a1e4ab42c92a77ec76704f20ade4c951ddf47572046a5c13",
+          "source:b699aadeb9bc7c7a4daa6340454aac9158495a2a5015ac6c71d98e11c2fa98f6",
+          "source:9d3ce70fe686f00bf84aa339d59097c072b2e530c03f1025534169d2e0311dd9",
+          "source:a7ae7ffda289a8a7219bdc19d922ecff8d7af64443cd55a6c5b91346e2e71319",
+          "source:3d7444d7babc88ef5c07295834d0c44857d15c6f9097f66c6f8e0eecfa0ed9b5",
+          "source:b4383f0a7cf59d94b4bfbf5af635511df194839010ee66f8c50f893dbc0f8b2a",
+          "source:4cc8cea8f21067aea40b49a4c19721e4bd42ca961f62170dca2bb3719ca03d8c",
+          "source:d06fc3b4e3fb0651139df203a1a56f8ae4563ef202128d0de0217a82ba73442b",
+          "source:f6934fb994acb5d7026743a4440bd12f7f7bf65e7bf133e104c7a19768672c01",
+          "source:bf6f75adea8999439d2bd9ceb0dd7ab49a948bb3832399daaf68839633b7747c",
+          "source:81c547eb1f17954bf1369f3c0c9b88a81523a028950c361a26a2d8a065b122e0",
+          "source:b608962416ab917228a27e31a9e873163d4ab5e4027f6695524a7835ef4e0eed",
+          "source:f8e27eaa1bfc896521542a982fbf3d428e3d2e8212048a0a14eb3be9962ae9d7",
+          "source:917c60f3830fe7f2aa68e5b86a97658246e3feca649b6a2d4a2b7ddf9b35fb14",
+          "source:21da30504f174a2faa4286bc00c1fbc1d5ec7979d3f4159ee314156db392daab",
+          "source:a9d1142490b593f20393244eba3ed7154dd6fb58cdddc53eca66bab33a435ff4",
+          "source:363b9dba8a9abf1c7a3bd3274ae49e406b6c18afd5335a49d4a81f93c8b2a2ca",
+          "source:fe9f4409e536e8761f9eab03489561a948de36f7011fe4e33905c8e65f85c700",
+          "source:a0a0bdd7afb7d0e6152f217bb004af8d4dc8a8ba116f14af683832990a33dc9e",
+          "source:115102828631e402936e93602d168d8d97e2763ca6c68567eb5bcad620ff9a61",
+          "source:27e6af526bb90ca060740c449fd5253309f74068345e3af2e1be180708bd770c",
+          "source:76b431f965af2bb76317b0d5dfa5dcecb5462ad2b6336cc1f5f4f2966cd65781",
+          "source:a23ffa3e9869a000c0cbdb9d64119ea2ce00445de365a6175dcccea4bbaa36ef",
+          "source:29fdab71bd544d185ab72508bf3ebf5ea26b5fdeed2afc7c03e3d23ae033d87c",
+          "source:c7a81178aa1b310084b4fd7084990522e9ebaf1f8b83f913325468cca0404124",
+          "source:b80e97ad1e7d7c5530a2d18ee6a231a87d65fb90822ed861f612175afbde3ac7",
+          "source:8f258c9d4b591a766253d95ed2b5cf58fd1c44eebe82940506ccac15621f2522",
+          "source:851446253caa9206d0726b28a202af4ae37e38554998166abbcf8d4e752e4a02",
+          "source:69fb4be16bbe52171320bdbb3736f47ae6a8f6c9a63665d0c902bbc37329a68d",
+          "source:89fc31b68613f2a406660316b8b1a65c85ecbc6e47a54da5ef66d2357c769eb0",
+          "source:b73767bbff1300c100dd2d80742778cbb5278e8bcb8d029c4e05f8a56baa6ad7",
+          "source:f7652aa08e2989c39f033aedb2746444fda8e475734c4d69c5d6800546dfcbbc",
+          "source:d46a8ac91e18e1e9e28367033db3434438aa9124123cef205b6a9369a0f873cd",
+          "source:38cd1fd052071e2d49cb5e22c6e5d5241d879604a96fa7185ba4892190c773f6",
+          "source:22bdd0a10f546110141e81e8d0e177fb84352f9dcb8b0c7c229bd766e7578182",
+          "source:a08facabcef175144080d71ca7d4edc5f778ae150c38dc16e50667c7b4c47e26",
+          "source:db802d8aef20c5dc104ddf9b4b4a7bc12c2a4102373d956e6da0337dd3fb2d7c",
+          "source:93192618a9eda9357a8b97dd637bd96b52a27b5304b4de8d26a958b45b56df39",
+          "source:07d1d9a24c78488cc34860b4b17526ca69d06de7d94bb6f060cb4482d57cd3d8",
+          "source:72fd690ef9c47881b3193ee53b7ba12855beaea66120e623f1ff9c319733fc5b",
+          "source:ecc2a26fb1498dc3e4872c34bbab911db62b1ec81c91b24aca986d61546bb765",
+          "source:dc612c510e372279263e0a4100fd87b2d7624e8a3f2a41df3dcd51f2116689ff",
+          "source:d96fd1b7bb1c9beb336ad2e9beea9320c44ed752897c30eb793ac311be8d5243",
+          "source:8d4904bb1c39ac5e10409c7b805ee04fdf1d88221b6f3c7e68bd0fb9e95207f3",
+          "source:36fbf0c7dda5a75ae99586e32f23eb32aa9f196fa44e204813f650a9ee2d686d",
+          "source:0d11f59742a8ff4a515414ac564832b6612d4ab8aa37d0755ac91d570949391c",
+          "source:968039730c85ebe7334c0bcbb2d92c645c9ac8618672e0ccbbfeb7a21f72a14a",
+          "source:f6af86c55ffe11f6cb5e8256a0d8c1a471f774b37beebd60fdedb80a78aa9769",
+          "source:ae5cc1c9ca4d4acf1adfde843e7214fc325e48477a654d6c3efc7dee46f4eda9",
+          "source:05b854983a5ebb35e5058d3476a22655ecf68b8102bd4ab974f72e896c17fc79",
+          "source:c1e911a1680cea81124ce13a5c4d82c83da4269e4f4d51ecea3a6e5534b5a07a",
+          "source:cdbf32834f151b080d5e13341dec5275eb6d8887918fdac2cc0b65ff1dc00ac9",
+          "source:da0e24851557a46e7e517f648f75d9d785bf8a9a4df35179cbf412d38e16fdbb",
+          "source:a702a7436a63d7f10fb3d152960d8b3ba2fb46c385c34ef97162c51f9a04beac",
+          "source:a259da9b21e993ee14ce96926a244fb0b3c0d54d638d1e0766e17d947fbc0174",
+          "source:eeab8248e94cb0901a479a498e9e61d088c07b87e2b6c6f42f8b32dbe5e8df25",
+          "source:26511f0221121096198b18b3e31fbd1575d699ef0ecb7bda93c8430c45a7ee6f",
+          "source:47f66ef55e55d382c02c4626ed9896b7156f253dde22b57ed2be6ae9eead3468",
+          "source:504a32cbd165ab1daf00efd790723f2be09d6801b2ac69fde55e99ea7cc2a3bd",
+          "source:b6fb9777980d670f183580b69c3b45bc14191ee3c7af73be934f80311b6dc438",
+          "source:c967091fd849843bd26d471ac6d1d6c71e2e68eae93a93384207b3be5b43eac9",
+          "source:dca56d384b9f85293c0891e6ccb56c3bbf90241f6106bf895066545bc2003e0e",
+          "source:b8b5dc9a17bf6e3e7ea5fd26dfbf8783b694a67a2e6fbdb2d3a13019fb23432d",
+          "source:bb0eac331c23188b7a68410b7c3c55d99606e7967e991d2ae807f9c05de3b723",
+          "source:5b89f4a4f6f44dfd6c0a409bcdfd45ee720ef7be1dc4cd64c805c49c0b62ea2a",
+          "source:66b3f025026be8e1d397aa69442d1f047f2a332a3af0cec6fc3e4324bf1fd3e4",
+          "source:e0ff74cf2e7963d41c7b6c940cf0139040ba967927dcf8aa21a432393d53fd5a",
+          "source:a54450c638f8749725b123a208c06b07265a66cab4df2a1995109220cc6544d9",
+          "source:7b737b1d1bfb355cd9f4c55329792495bde7c5378d268af4a09aeb9dac639060",
+          "source:c378051f8b92ac40df6cf2b5891b7740336ee00f8f7b6cd29ad27c017c509dcb",
+          "source:7a89cfbfb69fc0ae141adad574b1b3e244b832bf2f1f8afc0eb1f6a9dbbf32bb",
+          "source:70bbce0d16fb3ed62408c17ead6ceef495bb423f4ebe6456eb6c9e8199e33966",
+          "source:d8f990594d1e757bd52337594a8d8afda48f0a333cf83e41ea278175d944e0c4",
+          "source:e36613e6902ebb701c44dba45c954bb0e697e6983765b7d17410687e543af0d7",
+          "source:2f4574ce3ab27af0f84b3ab22841ad7a423a1013d655523646eaebe5aae89213",
+          "source:60c2a9046456c6d991abe6f8b9e9cbeac4a9c8407bfc37df12b9cfc4c44b8d69",
+          "source:f8a1e58a2eedb22e1d93d312e7a8cffec8a1a8898dccfa35e51956b7753b5941",
+          "source:129f3356e58b367aeabb4a2c46d2c4e9b9f94b1b56bffa8df6014ea24fbf85ab",
+          "source:2d24eec69b3e94c6ebdb09f2fc935177483cd982ce912d1cf13c1e83a5807b26",
+          "source:6b851d7e4e297e68cf280bac49de0939efefb85c502e77017472439df59f7255",
+          "source:33373815bdb05158687e68efa8c64b687077d189eecacab2ff9f96efc39153da",
+          "source:68279499c836039423dccb9860376db135d0ccf720c8cfc6df539a7fe0d9ae43",
+          "source:e660a3bbe250441a80065a5523608f94a6530caf17a98650ca4d63902523fe41",
+          "source:fd1ac85c51f04aeb7af5757621a4776af46f6abf2e54faba9f336757a2ff5185",
+          "source:6b80c29be47c1691745ace376f91318ae25cc7fa4b3ddeda9ec954e2a9645457",
+          "source:8ec16b27bde8e120f139629839dcb93a8747120bdf6a594757f7c56486fb991a",
+          "source:01313eda26d5293542c0401c3b13949b9cc9d145b6b8c392b029960ad17077b5",
+          "source:ba58e56df1c3f24dac727e24279bea43d7f0cfb04aa346e4284fbd24d1c36fcf",
+          "source:d48e848df8c56890770480340b0c67adf70dbbcb2e599d802d29ac0d12dc7358",
+          "source:6c5abbb4a1cda0b0061a6d12b5951efafd8b54095af2fb96f2594d4dc8b453f9",
+          "source:69b2e3d67b35abb7efdc9e4673420b302fa96ca695c4d1d6f23723d2dd713c7d",
+          "source:9ea0df9ca1a08e399ed7c4b1b35835dbff02b08d45498a42e28728586d1e9558",
+          "source:21d09fdcca07bec8fff67f4ae4cdbf881735268adcb3e995b434a4ded1560d76",
+          "source:03e57cf35530f0bfbc32785d1680ddb5dec4129d1b4d9dcb611dcb4946f2bdd6",
+          "source:447273132ea07c952a014973d0b5a951d94bb0036e317cd03db954dbca7491dc",
+          "source:c7c4ff0a7768e49006cb032d666e0733bb767d81f1629e217e9e18035d9552e7",
+          "source:edda298f7a7687c9545ac7a5642df4274c67b23d3e3b1b83c6156cbb02cfeb25",
+          "source:557e892c4c42ebc3011a1ca1510396d1ef95c54f6db9e23096b6caf1ca2e1ca9",
+          "source:2b5be6464d10fdf8e03ee050039dc1d15a2a229b2d1c84224e0f18bc27738653",
+          "source:42f251d9a56be567c6ca407b30597376220a11252288cb4de0699a6db919f071",
+          "source:00965b5efd341b20b916a8f586e3b0d3e6a5f39eef134b646f344ed03a1657ee",
+          "source:939de22944fc2baaa568feb5be03d2a2fd84f1112bc3ec3b10cae4589acc0133",
+          "source:72e31f1cbedd443b5200f1ed3a528a01893ea1561b4072f7359759cf9232e163",
+          "source:e6a92bdaef1ed963ebd99000bf60326a76656411bd51ac2aaee0ff0ce0738fe2",
+          "source:5344c69ddd0b993320add67d6d5048c8896fdd673b5842c3c494f063f5e42b04",
+          "source:ce7d6f5e2b2e0cc12ccf7f0d299f6c8103dbfd28d849f11a3950da3745505cd9",
+          "source:93602a217ddc6746b066e52c30250c244a884c2eddaa1dfdafbbb291f6337c09",
+          "source:5523106fb87e5b4c5596fe9b9013726c810e3057a6f676cf816bbde8e8291a80",
+          "source:d94fcdf3432b2c3eab2a011fd7b4f6d5e5a4b9411a063180fc88fd2b93aac5bc",
+          "source:14e29e5107ff2b963c3e35d25bd3974c90af05d227224edea91eef3276d5d09c",
+          "source:acdf8995bf48870d032dfde84b7ed75810bb5597f4870d01139bb985e89f2fa0",
+          "source:bee1e9c107d0262b8fe20fa30a48fa0a1c08c4e20f859ac6afcc7b6811563234",
+          "source:966fe6b1ac119646bb001c925c66517a6c8651c94caf73d97d15023b078eb5d3",
+          "source:50036d2cf3e5e311eed70f87c82b57bfc6602a88c6d4643a8860e617537f6c51",
+          "source:467561e88ba0ca42bb60dec5ca6870214311be0f56415863541a16667ac48a60",
+          "source:d4dbd978e2c9aa5ba8db8938e8b02ed1cdcccc16fdf37d642180c8e76ae2af9c",
+          "source:11a28443950564532cb23ba1c4f637e97efb77f90a4e09685352482384a28569",
+          "source:6bd3aa6f328ffbc2589ec0f479b48c2eb39fdaf0263c88e6b487cdec9d5d8e33",
+          "source:78bdde229f7880487af83e5c898ff31ee8b1773d0d0fd483928b72d50c66756b",
+          "source:c2d2c7664d20d298d03b2ec9acce015592d4c3ab0de532ceccd9cc03591e971e"
+        ]
+      },
+      "last_TRAIN_predictions": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/last-TRAIN-predictions.json",
+        "bytes": 8634379,
+        "sha256": "fc17ddca133d371439e4ce682c39efd238f85d257e102ba97967f1712381dea4"
+      }
+    },
+    "mlp": {
+      "selected": {
+        "completed_updates": 120,
+        "summary": {
+          "positive_count": 64,
+          "positive_exact_count": 39,
+          "positive_learned_refusal_count": 8,
+          "positive_structural_block_count": 3,
+          "positive_emitted_proposal_count": 53,
+          "negative_count": 64,
+          "negative_learned_refusal_count": 53,
+          "negative_incidental_block_count": 2,
+          "negative_emitted_proposal_count": 9,
+          "positive_raw_modality_exact": 50,
+          "positive_raw_all_spans_exact": 53,
+          "nonempty_condition_count": 32,
+          "nonempty_condition_exact_count": 18,
+          "case_count": 128,
+          "source_parent_groups": 64,
+          "positive_class_CE": 0.608147540665739,
+          "class_confusion": {
+            "O": {
+              "O": 14,
+              "P": 4,
+              "F": 4
+            },
+            "P": {
+              "O": 1,
+              "P": 18,
+              "F": 2
+            },
+            "F": {
+              "O": 1,
+              "P": 2,
+              "F": 18
+            }
+          },
+          "positive_raw_facet_span_exact": {
+            "modality": {
+              "count": 64,
+              "exact": 63,
+              "nonempty_count": 64,
+              "nonempty_exact": 63
+            },
+            "actor": {
+              "count": 64,
+              "exact": 64,
+              "nonempty_count": 64,
+              "nonempty_exact": 64
+            },
+            "action": {
+              "count": 64,
+              "exact": 57,
+              "nonempty_count": 64,
+              "nonempty_exact": 57
+            },
+            "object": {
+              "count": 64,
+              "exact": 63,
+              "nonempty_count": 32,
+              "nonempty_exact": 31
+            },
+            "condition": {
+              "count": 64,
+              "exact": 61,
+              "nonempty_count": 32,
+              "nonempty_exact": 29
+            }
+          },
+          "negative_categories": {
+            "modal_misspelling": {
+              "count": 16,
+              "learned_refusal": 5,
+              "emitted": 9,
+              "incidental_block": 2
+            },
+            "second_rule": {
+              "count": 16,
+              "learned_refusal": 16,
+              "emitted": 0,
+              "incidental_block": 0
+            },
+            "extra_exception": {
+              "count": 16,
+              "learned_refusal": 16,
+              "emitted": 0,
+              "incidental_block": 0
+            },
+            "modal_deletion": {
+              "count": 16,
+              "learned_refusal": 16,
+              "emitted": 0,
+              "incidental_block": 0
+            }
+          },
+          "positive_templates": {
+            "condition_actor_possessive_gerund_object_modal": {
+              "count": 8,
+              "class_exact": 8,
+              "proposal_exact": 7,
+              "raw_action_exact": 7
+            },
+            "actor_condition_modal_action_object": {
+              "count": 8,
+              "class_exact": 6,
+              "proposal_exact": 5,
+              "raw_action_exact": 8
+            },
+            "modal_actor_action_object_condition": {
+              "count": 8,
+              "class_exact": 5,
+              "proposal_exact": 4,
+              "raw_action_exact": 8
+            },
+            "actor_modal_action_object_condition": {
+              "count": 8,
+              "class_exact": 6,
+              "proposal_exact": 3,
+              "raw_action_exact": 6
+            },
+            "gerund_object_agent_modal_condition": {
+              "count": 8,
+              "class_exact": 8,
+              "proposal_exact": 7,
+              "raw_action_exact": 8
+            },
+            "condition_actor_modal_action_object": {
+              "count": 8,
+              "class_exact": 3,
+              "proposal_exact": 2,
+              "raw_action_exact": 6
+            },
+            "actor_possessive_gerund_object_modal_condition": {
+              "count": 8,
+              "class_exact": 8,
+              "proposal_exact": 6,
+              "raw_action_exact": 8
+            },
+            "condition_modal_actor_action_object": {
+              "count": 8,
+              "class_exact": 6,
+              "proposal_exact": 5,
+              "raw_action_exact": 6
+            }
+          },
+          "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+          "caller_attachment_learned": false,
+          "legal_gold": false,
+          "admission_masks": "all five zero",
+          "raw_support_confusion": {
+            "true_positive": 56,
+            "false_negative": 8,
+            "false_positive": 11,
+            "true_negative": 53
+          },
+          "raw_support_accuracy": 0.8515625,
+          "support_probability_BCE": 0.3885184301269099,
+          "support_BCE_probability_clip": [
+            1e-12,
+            0.999999999999
+          ],
+          "fixed_class_nonaction_whole_ceiling_count": 47,
+          "fixed_class_nonaction_whole_ceiling_ids": [
+            "source:0bbe701ac9a5fbceef8b7ed7f9c55981503e42eaacb6c1c3d33badb9607d0601",
+            "source:0ad1723cc82d5e50914522c3ffd814da8aeecad8c97f40fc9f95b7b386530712",
+            "source:86f8867377549fc98058ba3abb4154b1fd97891fa553a34bf8277d0c098e4617",
+            "source:32ecde8cdfd4d0fd0ee3e809fbee64caf1702926ba40473fdff9e10d975b0236",
+            "source:2d80204f86b976e7f65cc7bd2ba5c9780f2ef03dab416956b811be5b37d2e51c",
+            "source:f6aa715bd3ba9b7737c0fa0f7570e9974aae12b7766acbc57e1bf7537a806081",
+            "source:7e7750e08375951b6a7d59a4642dd220b9210dbc7e46825d019f91a0f17cf1e8",
+            "source:779c6a8f4dcdfbf2301b7e26c77b5744721a69c4df63d198c6df575a1fde749a",
+            "source:a2deb9718c0e41a573cc268b453d77f685c48dd5ac9c090a7330d6da6881caed",
+            "source:6a5f12e61eb08b655296916fe34dd4b9443a17db8e03996e3b0e50550b45afb9",
+            "source:2d2cbb1207bde9d0dc4c924ec2954a43b7ccfd9742a55c0d878f84324ce363b2",
+            "source:994a37e3620f38cb5fdf68721d9e7ca57a2bbc498424261ef16678b8287a4079",
+            "source:7a3e8df322399f395aa031f3627eced1a5686aaf3abd8047b5609c28e2fc2f7f",
+            "source:659e1a91f3cef879324243628210b714c8af8b30129eb0ac6483aa1347af6c3f",
+            "source:1a59872f27aae3aeef4fec6e89f05d0a9b12c84bf8a0f87522b77ff956347930",
+            "source:a61f3597cecebef6c823188ebe48df1a5273f5a9eaf2fecce8db1f2fce4e2303",
+            "source:95b58de28e626daedf85ffbb57374f3374316a85e9b503ff527091c9fc7c3623",
+            "source:8660f061ac642cff334c9fd190c3f9806cdaf2fc73ea27aab624f330ddb95f8d",
+            "source:b22cabe1173c90d457cce0e365789c232aaf150947d4ed0b9c98e2c5142705ed",
+            "source:598a7ed212471e3269e7e16f21c1dc9001b803fe979e14fdefee5374e6371ea1",
+            "source:0a6e3fcf6110457de8af3cac5a0d4289755234736d7a67e75f4f20f00d716a20",
+            "source:8fdea3dac41e2d50a9f0478083375ebc29a0b72e38480485d1fc0d1b1cf3b4be",
+            "source:9c13775ed701cba5aea7dce86bff74a4e633593454aab05371033633a600c012",
+            "source:1e88cf6d927543791b4c209ff63a12379c683bd8ffcc3fa26d3285f0d4022271",
+            "source:1a2fd60d13d480760f5c1acd5980edb3e0b864cebf2638e13e8d8f4f1ab85877",
+            "source:50cedaa832deafd44f54cdc63ae72ad9dd261220f0786829ed350854c17a4819",
+            "source:2d9d96e4ce64addbdce26a8abcc9ccc08d8917628b989d37c63e7407468a7627",
+            "source:df67387582bdafb2a2f2a30a8301453da2bc8c7ab7d3d51154a112481261284b",
+            "source:fad07ad6200a936f6e39b28f64eec00918a76c81a1d1fe6495f4f00f13fd498c",
+            "source:209834e05be9d5899be793d39590403122d25d9cef6fb7496fd6aa1e88c331f1",
+            "source:06ef110a1ee864e7b7b4eb9e24dbd1a45d030e877ecdf2029c1b378ec2f40688",
+            "source:f51540b71e138765daf2054732128e673bbf78ff249fcf9989f4abd9dd8c4949",
+            "source:7836a3bb0e5098cc854465c5e0de05dcd3f9b51646045a69f4238306b094fd8d",
+            "source:063e6472e06d2b800afbb0753c87b1db3f9d29c9b1d84cb00d0ef6a24511da71",
+            "source:be0e1661ac447897dcc24b82087ed3190c6e0e278125c8dc4774e7d38eff6ed1",
+            "source:6bece657403979f973a5637d7bf2492e394613f110d4a8121d5c2c98b8661e93",
+            "source:ed99abeb0fcbab43dd2a9c765a76265b2a6054415fdffa316850ac02b525f3b7",
+            "source:43b318f71dbad99118fc6a4503541324a5a8683543c712339dcc78213a9cb8f6",
+            "source:6fc72daedafb1c8442d0e6e6a2f627fc78230003f7e92716263f9bae908a97d9",
+            "source:2acce98532f36138618b3c7c3335409d84212b0055c8ba2d5fd6683820e65d11",
+            "source:153a464056ee6d8ce8be08d70eeb9a33030878a49c98f5fa09d7bed0b050d2e5",
+            "source:fa445a6d1a0d6688805c0d3612ba5ae4b35f1b04124f70597ae097d36e9d3e05",
+            "source:2f5b6bf72f9a199ce2cb458414fc811d5964e2faefd652db667d33e03dceb214",
+            "source:3bf6db726a80ab2c3233a1fe0a644b15da9b5dba3492bd27fe84941b49fc1854",
+            "source:00d580b73c23c0ffce188aeafb1801254a16fc1264ae92cce0838c45833be415",
+            "source:750820601295e657e9988560d1ba452173a4036f88de0d6445f0b1a62ee73f0f",
+            "source:5899e27b55bfd65a173a8da8c15a05ebed04f5b98313fe676547314831dc1df8"
+          ]
+        },
+        "checkpoint": {
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/checkpoint-120.json",
+          "bytes": 3449806,
+          "sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155"
+        },
+        "predictions": {
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/selection-predictions-120.json",
+          "bytes": 1010312,
+          "sha256": "1152d98e0efe04c64d188fd83625a29d7de6b0a652f70b2c28f3b2e703e79e2d"
+        },
+        "eligible": true
+      },
+      "selection_candidates": [
+        {
+          "completed_updates": 0,
+          "summary": {
+            "positive_count": 64,
+            "positive_exact_count": 32,
+            "positive_learned_refusal_count": 21,
+            "positive_structural_block_count": 3,
+            "positive_emitted_proposal_count": 40,
+            "negative_count": 64,
+            "negative_learned_refusal_count": 55,
+            "negative_incidental_block_count": 2,
+            "negative_emitted_proposal_count": 7,
+            "positive_raw_modality_exact": 50,
+            "positive_raw_all_spans_exact": 53,
+            "nonempty_condition_count": 32,
+            "nonempty_condition_exact_count": 13,
+            "case_count": 128,
+            "source_parent_groups": 64,
+            "positive_class_CE": 0.608147540665739,
+            "class_confusion": {
+              "O": {
+                "O": 14,
+                "P": 4,
+                "F": 4
+              },
+              "P": {
+                "O": 1,
+                "P": 18,
+                "F": 2
+              },
+              "F": {
+                "O": 1,
+                "P": 2,
+                "F": 18
+              }
+            },
+            "positive_raw_facet_span_exact": {
+              "modality": {
+                "count": 64,
+                "exact": 63,
+                "nonempty_count": 64,
+                "nonempty_exact": 63
+              },
+              "actor": {
+                "count": 64,
+                "exact": 64,
+                "nonempty_count": 64,
+                "nonempty_exact": 64
+              },
+              "action": {
+                "count": 64,
+                "exact": 56,
+                "nonempty_count": 64,
+                "nonempty_exact": 56
+              },
+              "object": {
+                "count": 64,
+                "exact": 63,
+                "nonempty_count": 32,
+                "nonempty_exact": 31
+              },
+              "condition": {
+                "count": 64,
+                "exact": 61,
+                "nonempty_count": 32,
+                "nonempty_exact": 29
+              }
+            },
+            "negative_categories": {
+              "modal_misspelling": {
+                "count": 16,
+                "learned_refusal": 7,
+                "emitted": 7,
+                "incidental_block": 2
+              },
+              "second_rule": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              },
+              "extra_exception": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              },
+              "modal_deletion": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              }
+            },
+            "positive_templates": {
+              "condition_actor_possessive_gerund_object_modal": {
+                "count": 8,
+                "class_exact": 8,
+                "proposal_exact": 7,
+                "raw_action_exact": 7
+              },
+              "actor_condition_modal_action_object": {
+                "count": 8,
+                "class_exact": 6,
+                "proposal_exact": 5,
+                "raw_action_exact": 7
+              },
+              "modal_actor_action_object_condition": {
+                "count": 8,
+                "class_exact": 5,
+                "proposal_exact": 2,
+                "raw_action_exact": 7
+              },
+              "actor_modal_action_object_condition": {
+                "count": 8,
+                "class_exact": 6,
+                "proposal_exact": 2,
+                "raw_action_exact": 6
+              },
+              "gerund_object_agent_modal_condition": {
+                "count": 8,
+                "class_exact": 8,
+                "proposal_exact": 5,
+                "raw_action_exact": 8
+              },
+              "condition_actor_modal_action_object": {
+                "count": 8,
+                "class_exact": 3,
+                "proposal_exact": 2,
+                "raw_action_exact": 7
+              },
+              "actor_possessive_gerund_object_modal_condition": {
+                "count": 8,
+                "class_exact": 8,
+                "proposal_exact": 4,
+                "raw_action_exact": 7
+              },
+              "condition_modal_actor_action_object": {
+                "count": 8,
+                "class_exact": 6,
+                "proposal_exact": 5,
+                "raw_action_exact": 7
+              }
+            },
+            "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+            "caller_attachment_learned": false,
+            "legal_gold": false,
+            "admission_masks": "all five zero",
+            "raw_support_confusion": {
+              "true_positive": 43,
+              "false_negative": 21,
+              "false_positive": 9,
+              "true_negative": 55
+            },
+            "raw_support_accuracy": 0.765625,
+            "support_probability_BCE": 0.45600148851679867,
+            "support_BCE_probability_clip": [
+              1e-12,
+              0.999999999999
+            ],
+            "fixed_class_nonaction_whole_ceiling_count": 47,
+            "fixed_class_nonaction_whole_ceiling_ids": [
+              "source:0bbe701ac9a5fbceef8b7ed7f9c55981503e42eaacb6c1c3d33badb9607d0601",
+              "source:0ad1723cc82d5e50914522c3ffd814da8aeecad8c97f40fc9f95b7b386530712",
+              "source:86f8867377549fc98058ba3abb4154b1fd97891fa553a34bf8277d0c098e4617",
+              "source:32ecde8cdfd4d0fd0ee3e809fbee64caf1702926ba40473fdff9e10d975b0236",
+              "source:2d80204f86b976e7f65cc7bd2ba5c9780f2ef03dab416956b811be5b37d2e51c",
+              "source:f6aa715bd3ba9b7737c0fa0f7570e9974aae12b7766acbc57e1bf7537a806081",
+              "source:7e7750e08375951b6a7d59a4642dd220b9210dbc7e46825d019f91a0f17cf1e8",
+              "source:779c6a8f4dcdfbf2301b7e26c77b5744721a69c4df63d198c6df575a1fde749a",
+              "source:a2deb9718c0e41a573cc268b453d77f685c48dd5ac9c090a7330d6da6881caed",
+              "source:6a5f12e61eb08b655296916fe34dd4b9443a17db8e03996e3b0e50550b45afb9",
+              "source:2d2cbb1207bde9d0dc4c924ec2954a43b7ccfd9742a55c0d878f84324ce363b2",
+              "source:994a37e3620f38cb5fdf68721d9e7ca57a2bbc498424261ef16678b8287a4079",
+              "source:7a3e8df322399f395aa031f3627eced1a5686aaf3abd8047b5609c28e2fc2f7f",
+              "source:659e1a91f3cef879324243628210b714c8af8b30129eb0ac6483aa1347af6c3f",
+              "source:1a59872f27aae3aeef4fec6e89f05d0a9b12c84bf8a0f87522b77ff956347930",
+              "source:a61f3597cecebef6c823188ebe48df1a5273f5a9eaf2fecce8db1f2fce4e2303",
+              "source:95b58de28e626daedf85ffbb57374f3374316a85e9b503ff527091c9fc7c3623",
+              "source:8660f061ac642cff334c9fd190c3f9806cdaf2fc73ea27aab624f330ddb95f8d",
+              "source:b22cabe1173c90d457cce0e365789c232aaf150947d4ed0b9c98e2c5142705ed",
+              "source:598a7ed212471e3269e7e16f21c1dc9001b803fe979e14fdefee5374e6371ea1",
+              "source:0a6e3fcf6110457de8af3cac5a0d4289755234736d7a67e75f4f20f00d716a20",
+              "source:8fdea3dac41e2d50a9f0478083375ebc29a0b72e38480485d1fc0d1b1cf3b4be",
+              "source:9c13775ed701cba5aea7dce86bff74a4e633593454aab05371033633a600c012",
+              "source:1e88cf6d927543791b4c209ff63a12379c683bd8ffcc3fa26d3285f0d4022271",
+              "source:1a2fd60d13d480760f5c1acd5980edb3e0b864cebf2638e13e8d8f4f1ab85877",
+              "source:50cedaa832deafd44f54cdc63ae72ad9dd261220f0786829ed350854c17a4819",
+              "source:2d9d96e4ce64addbdce26a8abcc9ccc08d8917628b989d37c63e7407468a7627",
+              "source:df67387582bdafb2a2f2a30a8301453da2bc8c7ab7d3d51154a112481261284b",
+              "source:fad07ad6200a936f6e39b28f64eec00918a76c81a1d1fe6495f4f00f13fd498c",
+              "source:209834e05be9d5899be793d39590403122d25d9cef6fb7496fd6aa1e88c331f1",
+              "source:06ef110a1ee864e7b7b4eb9e24dbd1a45d030e877ecdf2029c1b378ec2f40688",
+              "source:f51540b71e138765daf2054732128e673bbf78ff249fcf9989f4abd9dd8c4949",
+              "source:7836a3bb0e5098cc854465c5e0de05dcd3f9b51646045a69f4238306b094fd8d",
+              "source:063e6472e06d2b800afbb0753c87b1db3f9d29c9b1d84cb00d0ef6a24511da71",
+              "source:be0e1661ac447897dcc24b82087ed3190c6e0e278125c8dc4774e7d38eff6ed1",
+              "source:6bece657403979f973a5637d7bf2492e394613f110d4a8121d5c2c98b8661e93",
+              "source:ed99abeb0fcbab43dd2a9c765a76265b2a6054415fdffa316850ac02b525f3b7",
+              "source:43b318f71dbad99118fc6a4503541324a5a8683543c712339dcc78213a9cb8f6",
+              "source:6fc72daedafb1c8442d0e6e6a2f627fc78230003f7e92716263f9bae908a97d9",
+              "source:2acce98532f36138618b3c7c3335409d84212b0055c8ba2d5fd6683820e65d11",
+              "source:153a464056ee6d8ce8be08d70eeb9a33030878a49c98f5fa09d7bed0b050d2e5",
+              "source:fa445a6d1a0d6688805c0d3612ba5ae4b35f1b04124f70597ae097d36e9d3e05",
+              "source:2f5b6bf72f9a199ce2cb458414fc811d5964e2faefd652db667d33e03dceb214",
+              "source:3bf6db726a80ab2c3233a1fe0a644b15da9b5dba3492bd27fe84941b49fc1854",
+              "source:00d580b73c23c0ffce188aeafb1801254a16fc1264ae92cce0838c45833be415",
+              "source:750820601295e657e9988560d1ba452173a4036f88de0d6445f0b1a62ee73f0f",
+              "source:5899e27b55bfd65a173a8da8c15a05ebed04f5b98313fe676547314831dc1df8"
+            ]
+          },
+          "checkpoint": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/checkpoint-0.json",
+            "bytes": 2991289,
+            "sha256": "27e8456d8196125d7fe00d8a4e2e147cb9af590eb4716204ca5b6f9a1995ee2b"
+          },
+          "predictions": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/selection-predictions-0.json",
+            "bytes": 819293,
+            "sha256": "935dfea9fcea400ed45a15f18318af3b7893b5591b2035a1cd30a2bb2304aba2"
+          },
+          "eligible": true
+        },
+        {
+          "completed_updates": 120,
+          "summary": {
+            "positive_count": 64,
+            "positive_exact_count": 39,
+            "positive_learned_refusal_count": 8,
+            "positive_structural_block_count": 3,
+            "positive_emitted_proposal_count": 53,
+            "negative_count": 64,
+            "negative_learned_refusal_count": 53,
+            "negative_incidental_block_count": 2,
+            "negative_emitted_proposal_count": 9,
+            "positive_raw_modality_exact": 50,
+            "positive_raw_all_spans_exact": 53,
+            "nonempty_condition_count": 32,
+            "nonempty_condition_exact_count": 18,
+            "case_count": 128,
+            "source_parent_groups": 64,
+            "positive_class_CE": 0.608147540665739,
+            "class_confusion": {
+              "O": {
+                "O": 14,
+                "P": 4,
+                "F": 4
+              },
+              "P": {
+                "O": 1,
+                "P": 18,
+                "F": 2
+              },
+              "F": {
+                "O": 1,
+                "P": 2,
+                "F": 18
+              }
+            },
+            "positive_raw_facet_span_exact": {
+              "modality": {
+                "count": 64,
+                "exact": 63,
+                "nonempty_count": 64,
+                "nonempty_exact": 63
+              },
+              "actor": {
+                "count": 64,
+                "exact": 64,
+                "nonempty_count": 64,
+                "nonempty_exact": 64
+              },
+              "action": {
+                "count": 64,
+                "exact": 57,
+                "nonempty_count": 64,
+                "nonempty_exact": 57
+              },
+              "object": {
+                "count": 64,
+                "exact": 63,
+                "nonempty_count": 32,
+                "nonempty_exact": 31
+              },
+              "condition": {
+                "count": 64,
+                "exact": 61,
+                "nonempty_count": 32,
+                "nonempty_exact": 29
+              }
+            },
+            "negative_categories": {
+              "modal_misspelling": {
+                "count": 16,
+                "learned_refusal": 5,
+                "emitted": 9,
+                "incidental_block": 2
+              },
+              "second_rule": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              },
+              "extra_exception": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              },
+              "modal_deletion": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              }
+            },
+            "positive_templates": {
+              "condition_actor_possessive_gerund_object_modal": {
+                "count": 8,
+                "class_exact": 8,
+                "proposal_exact": 7,
+                "raw_action_exact": 7
+              },
+              "actor_condition_modal_action_object": {
+                "count": 8,
+                "class_exact": 6,
+                "proposal_exact": 5,
+                "raw_action_exact": 8
+              },
+              "modal_actor_action_object_condition": {
+                "count": 8,
+                "class_exact": 5,
+                "proposal_exact": 4,
+                "raw_action_exact": 8
+              },
+              "actor_modal_action_object_condition": {
+                "count": 8,
+                "class_exact": 6,
+                "proposal_exact": 3,
+                "raw_action_exact": 6
+              },
+              "gerund_object_agent_modal_condition": {
+                "count": 8,
+                "class_exact": 8,
+                "proposal_exact": 7,
+                "raw_action_exact": 8
+              },
+              "condition_actor_modal_action_object": {
+                "count": 8,
+                "class_exact": 3,
+                "proposal_exact": 2,
+                "raw_action_exact": 6
+              },
+              "actor_possessive_gerund_object_modal_condition": {
+                "count": 8,
+                "class_exact": 8,
+                "proposal_exact": 6,
+                "raw_action_exact": 8
+              },
+              "condition_modal_actor_action_object": {
+                "count": 8,
+                "class_exact": 6,
+                "proposal_exact": 5,
+                "raw_action_exact": 6
+              }
+            },
+            "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+            "caller_attachment_learned": false,
+            "legal_gold": false,
+            "admission_masks": "all five zero",
+            "raw_support_confusion": {
+              "true_positive": 56,
+              "false_negative": 8,
+              "false_positive": 11,
+              "true_negative": 53
+            },
+            "raw_support_accuracy": 0.8515625,
+            "support_probability_BCE": 0.3885184301269099,
+            "support_BCE_probability_clip": [
+              1e-12,
+              0.999999999999
+            ],
+            "fixed_class_nonaction_whole_ceiling_count": 47,
+            "fixed_class_nonaction_whole_ceiling_ids": [
+              "source:0bbe701ac9a5fbceef8b7ed7f9c55981503e42eaacb6c1c3d33badb9607d0601",
+              "source:0ad1723cc82d5e50914522c3ffd814da8aeecad8c97f40fc9f95b7b386530712",
+              "source:86f8867377549fc98058ba3abb4154b1fd97891fa553a34bf8277d0c098e4617",
+              "source:32ecde8cdfd4d0fd0ee3e809fbee64caf1702926ba40473fdff9e10d975b0236",
+              "source:2d80204f86b976e7f65cc7bd2ba5c9780f2ef03dab416956b811be5b37d2e51c",
+              "source:f6aa715bd3ba9b7737c0fa0f7570e9974aae12b7766acbc57e1bf7537a806081",
+              "source:7e7750e08375951b6a7d59a4642dd220b9210dbc7e46825d019f91a0f17cf1e8",
+              "source:779c6a8f4dcdfbf2301b7e26c77b5744721a69c4df63d198c6df575a1fde749a",
+              "source:a2deb9718c0e41a573cc268b453d77f685c48dd5ac9c090a7330d6da6881caed",
+              "source:6a5f12e61eb08b655296916fe34dd4b9443a17db8e03996e3b0e50550b45afb9",
+              "source:2d2cbb1207bde9d0dc4c924ec2954a43b7ccfd9742a55c0d878f84324ce363b2",
+              "source:994a37e3620f38cb5fdf68721d9e7ca57a2bbc498424261ef16678b8287a4079",
+              "source:7a3e8df322399f395aa031f3627eced1a5686aaf3abd8047b5609c28e2fc2f7f",
+              "source:659e1a91f3cef879324243628210b714c8af8b30129eb0ac6483aa1347af6c3f",
+              "source:1a59872f27aae3aeef4fec6e89f05d0a9b12c84bf8a0f87522b77ff956347930",
+              "source:a61f3597cecebef6c823188ebe48df1a5273f5a9eaf2fecce8db1f2fce4e2303",
+              "source:95b58de28e626daedf85ffbb57374f3374316a85e9b503ff527091c9fc7c3623",
+              "source:8660f061ac642cff334c9fd190c3f9806cdaf2fc73ea27aab624f330ddb95f8d",
+              "source:b22cabe1173c90d457cce0e365789c232aaf150947d4ed0b9c98e2c5142705ed",
+              "source:598a7ed212471e3269e7e16f21c1dc9001b803fe979e14fdefee5374e6371ea1",
+              "source:0a6e3fcf6110457de8af3cac5a0d4289755234736d7a67e75f4f20f00d716a20",
+              "source:8fdea3dac41e2d50a9f0478083375ebc29a0b72e38480485d1fc0d1b1cf3b4be",
+              "source:9c13775ed701cba5aea7dce86bff74a4e633593454aab05371033633a600c012",
+              "source:1e88cf6d927543791b4c209ff63a12379c683bd8ffcc3fa26d3285f0d4022271",
+              "source:1a2fd60d13d480760f5c1acd5980edb3e0b864cebf2638e13e8d8f4f1ab85877",
+              "source:50cedaa832deafd44f54cdc63ae72ad9dd261220f0786829ed350854c17a4819",
+              "source:2d9d96e4ce64addbdce26a8abcc9ccc08d8917628b989d37c63e7407468a7627",
+              "source:df67387582bdafb2a2f2a30a8301453da2bc8c7ab7d3d51154a112481261284b",
+              "source:fad07ad6200a936f6e39b28f64eec00918a76c81a1d1fe6495f4f00f13fd498c",
+              "source:209834e05be9d5899be793d39590403122d25d9cef6fb7496fd6aa1e88c331f1",
+              "source:06ef110a1ee864e7b7b4eb9e24dbd1a45d030e877ecdf2029c1b378ec2f40688",
+              "source:f51540b71e138765daf2054732128e673bbf78ff249fcf9989f4abd9dd8c4949",
+              "source:7836a3bb0e5098cc854465c5e0de05dcd3f9b51646045a69f4238306b094fd8d",
+              "source:063e6472e06d2b800afbb0753c87b1db3f9d29c9b1d84cb00d0ef6a24511da71",
+              "source:be0e1661ac447897dcc24b82087ed3190c6e0e278125c8dc4774e7d38eff6ed1",
+              "source:6bece657403979f973a5637d7bf2492e394613f110d4a8121d5c2c98b8661e93",
+              "source:ed99abeb0fcbab43dd2a9c765a76265b2a6054415fdffa316850ac02b525f3b7",
+              "source:43b318f71dbad99118fc6a4503541324a5a8683543c712339dcc78213a9cb8f6",
+              "source:6fc72daedafb1c8442d0e6e6a2f627fc78230003f7e92716263f9bae908a97d9",
+              "source:2acce98532f36138618b3c7c3335409d84212b0055c8ba2d5fd6683820e65d11",
+              "source:153a464056ee6d8ce8be08d70eeb9a33030878a49c98f5fa09d7bed0b050d2e5",
+              "source:fa445a6d1a0d6688805c0d3612ba5ae4b35f1b04124f70597ae097d36e9d3e05",
+              "source:2f5b6bf72f9a199ce2cb458414fc811d5964e2faefd652db667d33e03dceb214",
+              "source:3bf6db726a80ab2c3233a1fe0a644b15da9b5dba3492bd27fe84941b49fc1854",
+              "source:00d580b73c23c0ffce188aeafb1801254a16fc1264ae92cce0838c45833be415",
+              "source:750820601295e657e9988560d1ba452173a4036f88de0d6445f0b1a62ee73f0f",
+              "source:5899e27b55bfd65a173a8da8c15a05ebed04f5b98313fe676547314831dc1df8"
+            ]
+          },
+          "checkpoint": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/checkpoint-120.json",
+            "bytes": 3449806,
+            "sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155"
+          },
+          "predictions": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/selection-predictions-120.json",
+            "bytes": 1010312,
+            "sha256": "1152d98e0efe04c64d188fd83625a29d7de6b0a652f70b2c28f3b2e703e79e2d"
+          },
+          "eligible": true
+        },
+        {
+          "completed_updates": 240,
+          "summary": {
+            "positive_count": 64,
+            "positive_exact_count": 39,
+            "positive_learned_refusal_count": 10,
+            "positive_structural_block_count": 3,
+            "positive_emitted_proposal_count": 51,
+            "negative_count": 64,
+            "negative_learned_refusal_count": 53,
+            "negative_incidental_block_count": 2,
+            "negative_emitted_proposal_count": 9,
+            "positive_raw_modality_exact": 50,
+            "positive_raw_all_spans_exact": 53,
+            "nonempty_condition_count": 32,
+            "nonempty_condition_exact_count": 18,
+            "case_count": 128,
+            "source_parent_groups": 64,
+            "positive_class_CE": 0.608147540665739,
+            "class_confusion": {
+              "O": {
+                "O": 14,
+                "P": 4,
+                "F": 4
+              },
+              "P": {
+                "O": 1,
+                "P": 18,
+                "F": 2
+              },
+              "F": {
+                "O": 1,
+                "P": 2,
+                "F": 18
+              }
+            },
+            "positive_raw_facet_span_exact": {
+              "modality": {
+                "count": 64,
+                "exact": 63,
+                "nonempty_count": 64,
+                "nonempty_exact": 63
+              },
+              "actor": {
+                "count": 64,
+                "exact": 64,
+                "nonempty_count": 64,
+                "nonempty_exact": 64
+              },
+              "action": {
+                "count": 64,
+                "exact": 57,
+                "nonempty_count": 64,
+                "nonempty_exact": 57
+              },
+              "object": {
+                "count": 64,
+                "exact": 63,
+                "nonempty_count": 32,
+                "nonempty_exact": 31
+              },
+              "condition": {
+                "count": 64,
+                "exact": 61,
+                "nonempty_count": 32,
+                "nonempty_exact": 29
+              }
+            },
+            "negative_categories": {
+              "modal_misspelling": {
+                "count": 16,
+                "learned_refusal": 5,
+                "emitted": 9,
+                "incidental_block": 2
+              },
+              "second_rule": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              },
+              "extra_exception": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              },
+              "modal_deletion": {
+                "count": 16,
+                "learned_refusal": 16,
+                "emitted": 0,
+                "incidental_block": 0
+              }
+            },
+            "positive_templates": {
+              "condition_actor_possessive_gerund_object_modal": {
+                "count": 8,
+                "class_exact": 8,
+                "proposal_exact": 7,
+                "raw_action_exact": 7
+              },
+              "actor_condition_modal_action_object": {
+                "count": 8,
+                "class_exact": 6,
+                "proposal_exact": 5,
+                "raw_action_exact": 8
+              },
+              "modal_actor_action_object_condition": {
+                "count": 8,
+                "class_exact": 5,
+                "proposal_exact": 4,
+                "raw_action_exact": 8
+              },
+              "actor_modal_action_object_condition": {
+                "count": 8,
+                "class_exact": 6,
+                "proposal_exact": 3,
+                "raw_action_exact": 6
+              },
+              "gerund_object_agent_modal_condition": {
+                "count": 8,
+                "class_exact": 8,
+                "proposal_exact": 7,
+                "raw_action_exact": 8
+              },
+              "condition_actor_modal_action_object": {
+                "count": 8,
+                "class_exact": 3,
+                "proposal_exact": 2,
+                "raw_action_exact": 6
+              },
+              "actor_possessive_gerund_object_modal_condition": {
+                "count": 8,
+                "class_exact": 8,
+                "proposal_exact": 6,
+                "raw_action_exact": 8
+              },
+              "condition_modal_actor_action_object": {
+                "count": 8,
+                "class_exact": 6,
+                "proposal_exact": 5,
+                "raw_action_exact": 6
+              }
+            },
+            "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+            "caller_attachment_learned": false,
+            "legal_gold": false,
+            "admission_masks": "all five zero",
+            "raw_support_confusion": {
+              "true_positive": 54,
+              "false_negative": 10,
+              "false_positive": 11,
+              "true_negative": 53
+            },
+            "raw_support_accuracy": 0.8359375,
+            "support_probability_BCE": 0.3852842690068415,
+            "support_BCE_probability_clip": [
+              1e-12,
+              0.999999999999
+            ],
+            "fixed_class_nonaction_whole_ceiling_count": 47,
+            "fixed_class_nonaction_whole_ceiling_ids": [
+              "source:0bbe701ac9a5fbceef8b7ed7f9c55981503e42eaacb6c1c3d33badb9607d0601",
+              "source:0ad1723cc82d5e50914522c3ffd814da8aeecad8c97f40fc9f95b7b386530712",
+              "source:86f8867377549fc98058ba3abb4154b1fd97891fa553a34bf8277d0c098e4617",
+              "source:32ecde8cdfd4d0fd0ee3e809fbee64caf1702926ba40473fdff9e10d975b0236",
+              "source:2d80204f86b976e7f65cc7bd2ba5c9780f2ef03dab416956b811be5b37d2e51c",
+              "source:f6aa715bd3ba9b7737c0fa0f7570e9974aae12b7766acbc57e1bf7537a806081",
+              "source:7e7750e08375951b6a7d59a4642dd220b9210dbc7e46825d019f91a0f17cf1e8",
+              "source:779c6a8f4dcdfbf2301b7e26c77b5744721a69c4df63d198c6df575a1fde749a",
+              "source:a2deb9718c0e41a573cc268b453d77f685c48dd5ac9c090a7330d6da6881caed",
+              "source:6a5f12e61eb08b655296916fe34dd4b9443a17db8e03996e3b0e50550b45afb9",
+              "source:2d2cbb1207bde9d0dc4c924ec2954a43b7ccfd9742a55c0d878f84324ce363b2",
+              "source:994a37e3620f38cb5fdf68721d9e7ca57a2bbc498424261ef16678b8287a4079",
+              "source:7a3e8df322399f395aa031f3627eced1a5686aaf3abd8047b5609c28e2fc2f7f",
+              "source:659e1a91f3cef879324243628210b714c8af8b30129eb0ac6483aa1347af6c3f",
+              "source:1a59872f27aae3aeef4fec6e89f05d0a9b12c84bf8a0f87522b77ff956347930",
+              "source:a61f3597cecebef6c823188ebe48df1a5273f5a9eaf2fecce8db1f2fce4e2303",
+              "source:95b58de28e626daedf85ffbb57374f3374316a85e9b503ff527091c9fc7c3623",
+              "source:8660f061ac642cff334c9fd190c3f9806cdaf2fc73ea27aab624f330ddb95f8d",
+              "source:b22cabe1173c90d457cce0e365789c232aaf150947d4ed0b9c98e2c5142705ed",
+              "source:598a7ed212471e3269e7e16f21c1dc9001b803fe979e14fdefee5374e6371ea1",
+              "source:0a6e3fcf6110457de8af3cac5a0d4289755234736d7a67e75f4f20f00d716a20",
+              "source:8fdea3dac41e2d50a9f0478083375ebc29a0b72e38480485d1fc0d1b1cf3b4be",
+              "source:9c13775ed701cba5aea7dce86bff74a4e633593454aab05371033633a600c012",
+              "source:1e88cf6d927543791b4c209ff63a12379c683bd8ffcc3fa26d3285f0d4022271",
+              "source:1a2fd60d13d480760f5c1acd5980edb3e0b864cebf2638e13e8d8f4f1ab85877",
+              "source:50cedaa832deafd44f54cdc63ae72ad9dd261220f0786829ed350854c17a4819",
+              "source:2d9d96e4ce64addbdce26a8abcc9ccc08d8917628b989d37c63e7407468a7627",
+              "source:df67387582bdafb2a2f2a30a8301453da2bc8c7ab7d3d51154a112481261284b",
+              "source:fad07ad6200a936f6e39b28f64eec00918a76c81a1d1fe6495f4f00f13fd498c",
+              "source:209834e05be9d5899be793d39590403122d25d9cef6fb7496fd6aa1e88c331f1",
+              "source:06ef110a1ee864e7b7b4eb9e24dbd1a45d030e877ecdf2029c1b378ec2f40688",
+              "source:f51540b71e138765daf2054732128e673bbf78ff249fcf9989f4abd9dd8c4949",
+              "source:7836a3bb0e5098cc854465c5e0de05dcd3f9b51646045a69f4238306b094fd8d",
+              "source:063e6472e06d2b800afbb0753c87b1db3f9d29c9b1d84cb00d0ef6a24511da71",
+              "source:be0e1661ac447897dcc24b82087ed3190c6e0e278125c8dc4774e7d38eff6ed1",
+              "source:6bece657403979f973a5637d7bf2492e394613f110d4a8121d5c2c98b8661e93",
+              "source:ed99abeb0fcbab43dd2a9c765a76265b2a6054415fdffa316850ac02b525f3b7",
+              "source:43b318f71dbad99118fc6a4503541324a5a8683543c712339dcc78213a9cb8f6",
+              "source:6fc72daedafb1c8442d0e6e6a2f627fc78230003f7e92716263f9bae908a97d9",
+              "source:2acce98532f36138618b3c7c3335409d84212b0055c8ba2d5fd6683820e65d11",
+              "source:153a464056ee6d8ce8be08d70eeb9a33030878a49c98f5fa09d7bed0b050d2e5",
+              "source:fa445a6d1a0d6688805c0d3612ba5ae4b35f1b04124f70597ae097d36e9d3e05",
+              "source:2f5b6bf72f9a199ce2cb458414fc811d5964e2faefd652db667d33e03dceb214",
+              "source:3bf6db726a80ab2c3233a1fe0a644b15da9b5dba3492bd27fe84941b49fc1854",
+              "source:00d580b73c23c0ffce188aeafb1801254a16fc1264ae92cce0838c45833be415",
+              "source:750820601295e657e9988560d1ba452173a4036f88de0d6445f0b1a62ee73f0f",
+              "source:5899e27b55bfd65a173a8da8c15a05ebed04f5b98313fe676547314831dc1df8"
+            ]
+          },
+          "checkpoint": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/checkpoint-240.json",
+            "bytes": 3449524,
+            "sha256": "6ec70e0c16a307a64072dfcc958ae03fb2ecc3cdccf13f6517b18a5849589254"
+          },
+          "predictions": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/selection-predictions-240.json",
+            "bytes": 988178,
+            "sha256": "0f40c883b0c43ba963ce097ae9fc7df3f1b1bb6ecfe7bd915c130a1033bb8ede"
+          },
+          "eligible": true
+        }
+      ],
+      "completed_support_updates": 240,
+      "completed_action_updates": 240,
+      "training_input_records": 3840,
+      "encoded_optimizer_source_presentations": 3840,
+      "positive_action_presentations": 1920,
+      "negative_support_presentations": 1920,
+      "negative_records_ignored": 0,
+      "last_TRAIN": {
+        "positive_count": 512,
+        "positive_exact_count": 323,
+        "positive_learned_refusal_count": 46,
+        "positive_structural_block_count": 16,
+        "positive_emitted_proposal_count": 450,
+        "negative_count": 512,
+        "negative_learned_refusal_count": 393,
+        "negative_incidental_block_count": 12,
+        "negative_emitted_proposal_count": 107,
+        "positive_raw_modality_exact": 385,
+        "positive_raw_all_spans_exact": 468,
+        "nonempty_condition_count": 256,
+        "nonempty_condition_exact_count": 147,
+        "case_count": 1024,
+        "source_parent_groups": 512,
+        "positive_class_CE": 0.6572840904722281,
+        "class_confusion": {
+          "O": {
+            "O": 100,
+            "P": 24,
+            "F": 47
+          },
+          "P": {
+            "O": 6,
+            "P": 147,
+            "F": 17
+          },
+          "F": {
+            "O": 11,
+            "P": 22,
+            "F": 138
+          }
+        },
+        "positive_raw_facet_span_exact": {
+          "modality": {
+            "count": 512,
+            "exact": 503,
+            "nonempty_count": 512,
+            "nonempty_exact": 503
+          },
+          "actor": {
+            "count": 512,
+            "exact": 493,
+            "nonempty_count": 512,
+            "nonempty_exact": 493
+          },
+          "action": {
+            "count": 512,
+            "exact": 512,
+            "nonempty_count": 512,
+            "nonempty_exact": 512
+          },
+          "object": {
+            "count": 512,
+            "exact": 504,
+            "nonempty_count": 256,
+            "nonempty_exact": 248
+          },
+          "condition": {
+            "count": 512,
+            "exact": 503,
+            "nonempty_count": 256,
+            "nonempty_exact": 247
+          }
+        },
+        "negative_categories": {
+          "second_rule": {
+            "count": 128,
+            "learned_refusal": 128,
+            "emitted": 0,
+            "incidental_block": 0
+          },
+          "modal_misspelling": {
+            "count": 128,
+            "learned_refusal": 21,
+            "emitted": 105,
+            "incidental_block": 2
+          },
+          "extra_exception": {
+            "count": 128,
+            "learned_refusal": 127,
+            "emitted": 1,
+            "incidental_block": 0
+          },
+          "modal_deletion": {
+            "count": 128,
+            "learned_refusal": 117,
+            "emitted": 1,
+            "incidental_block": 10
+          }
+        },
+        "positive_templates": {
+          "gerund_object_agent_modal_condition": {
+            "count": 64,
+            "class_exact": 61,
+            "proposal_exact": 49,
+            "raw_action_exact": 64
+          },
+          "condition_actor_possessive_gerund_object_modal": {
+            "count": 64,
+            "class_exact": 62,
+            "proposal_exact": 61,
+            "raw_action_exact": 64
+          },
+          "modal_actor_action_object_condition": {
+            "count": 64,
+            "class_exact": 42,
+            "proposal_exact": 35,
+            "raw_action_exact": 64
+          },
+          "actor_possessive_gerund_object_modal_condition": {
+            "count": 64,
+            "class_exact": 56,
+            "proposal_exact": 46,
+            "raw_action_exact": 64
+          },
+          "actor_condition_modal_action_object": {
+            "count": 64,
+            "class_exact": 38,
+            "proposal_exact": 24,
+            "raw_action_exact": 64
+          },
+          "actor_modal_action_object_condition": {
+            "count": 64,
+            "class_exact": 42,
+            "proposal_exact": 38,
+            "raw_action_exact": 64
+          },
+          "condition_actor_modal_action_object": {
+            "count": 64,
+            "class_exact": 40,
+            "proposal_exact": 28,
+            "raw_action_exact": 64
+          },
+          "condition_modal_actor_action_object": {
+            "count": 64,
+            "class_exact": 44,
+            "proposal_exact": 42,
+            "raw_action_exact": 64
+          }
+        },
+        "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+        "caller_attachment_learned": false,
+        "legal_gold": false,
+        "admission_masks": "all five zero",
+        "raw_support_confusion": {
+          "true_positive": 466,
+          "false_negative": 46,
+          "false_positive": 119,
+          "true_negative": 393
+        },
+        "raw_support_accuracy": 0.8388671875,
+        "support_probability_BCE": 0.3980251173625704,
+        "support_BCE_probability_clip": [
+          1e-12,
+          0.999999999999
+        ],
+        "fixed_class_nonaction_whole_ceiling_count": 351,
+        "fixed_class_nonaction_whole_ceiling_ids": [
+          "source:0463804064a6d7b3dc20519f1842e6bd77f6186d167e896c6795e37a48c90729",
+          "source:0220d1cbaab4b8029467c3ef9d20845483b344f81041d69bf617c55f9ad9d15e",
+          "source:17167648b2c598b9a300c2aff4d9cd58f5b2dbf0f4403f26c77d46735be2a058",
+          "source:21fac5015be9d543668e1ff9a0cdb7e73430c8d2de670aa6d4204c09274a3806",
+          "source:d636765242cdaeff9aabe8f31cd7c6d7464b01a50639fc4fd334abb3eff83cb8",
+          "source:34a9bf58356b54e5ae80bb029feece5ae3c2b0ba7c5981a4feba617b5ed838e3",
+          "source:21b1e007f4f86048d42a70b8a2d971bce30fa6bc9425a417f4ca4c2f5e0d993d",
+          "source:c15c52ea47dc75a1a0e19acce8ca556d951ba69c6c1839e468f4970cd050cc55",
+          "source:e2ef280954ae3aabbe7e7dd35eed9c1af8ced6ebfdf099bda574edb8b769ed0c",
+          "source:9a74d703cbbffd6d33cbc0577e2650ce7e37d32ed72061820998e8c0a52ae1f0",
+          "source:d1e4bb4b7d56f2fe913ea5277a4e84f1b59352741cc088296f675beccc85f635",
+          "source:d2d6b57a214706f45bf9a4b59725ddd9558293ebe5482b14d7ed78b692e106ae",
+          "source:d587383589dae14ce7c47bff070f1b56b8aef46c1d345c9dfe6a30b10b3ce4a0",
+          "source:03b274265cd999b9586fe02fd00b69fc75886b1adf69207581c4f4c2cbaa7162",
+          "source:52e2f4717e5bbca4a94b8f96a32a9db1b2131f240938775c5335a58b98f90876",
+          "source:16562155d024b7ff6dbe49547bcfc2c5b2e7e30fddac550bb8068126ff5c776b",
+          "source:c5fea9240ae0605fa9aed82fb07624fe4e96b18c22fbf0c0e32f467b87f7c375",
+          "source:e865a58822d5d3298e3265d60fb55a78859e4eb9ce6e961fffb0b2450305f13c",
+          "source:f22919ac94f5081aecf8c1261ee4841b64060851e6915819952ee661f071cd1a",
+          "source:995da3a65a421b1d8b8c0b4ac8de2e3cb1cb5500e2710d5b36718418cb48a188",
+          "source:a6dfb341f0db4d7525dfbb830ca3ef80374b36d371974ac7a1f7088087509186",
+          "source:8d6223c7cecc12910672c22216ca0f084bca681ad761c53e406ed5aebcdef573",
+          "source:5c70db6d33fea9ce473c50d7d225e46ae5954a546501fcda06386ca826a0a4c7",
+          "source:e97589e4cced8355ba989983c593d12fddf0056245e6b238f3d6360aebb1faaf",
+          "source:4070720017b0f7eb8921b0f032ddd584195bd50a5776f5a470a657f37f20b889",
+          "source:f2c3bb7754408df313818ae14ffcd19133959a90ac6bf8b4e391a498c902a6c5",
+          "source:22e11013919438a4444c4841b620833f4424c42c60606c55f93e85ece8fbcf66",
+          "source:3285a27b477e8002397c12ca0a98aa8bd5b3d4ed46f7b8b2ef355f1d43179611",
+          "source:3e9eae0f1f49f885b7fbeaf96cabdf6d6f91ed361d46d316bf6e81541dcce63d",
+          "source:7d16aa13d9a3d131d5dceb2a1b110ce9fe5669b36fa34167cf842d9c346dc7d6",
+          "source:a8cf600065617d2f36938d2cc274342354283f2715b0df0285d300d2c16a8040",
+          "source:b06f0146318a36986378ffc9d6f12e4d1ebdacc44c58f28b6d743064fa689a0f",
+          "source:f43c025212839c4252c2b8f0dcb84ab60ba519bc9d446e5d144dab25020e1ab0",
+          "source:e5523c52518705cfd6c3ce4d4568dbc899b3449b7bbf73f9ce19aa91bfb6b944",
+          "source:a4d8e55acb968d5bf80f95cf1ddbe0ced08d8d06c1e43fcae310da62142eafea",
+          "source:4d8e151c8c9098e002283ce5dff5b8378c09345f1484507f2f32fcc0067f5f55",
+          "source:ac49329515966d1088f800a9fca8e5ae68474fd514d09c08ec90c1466761832d",
+          "source:dc82936b763268ef19d95b579214765db481de2656dbc27ffb4d56441383070d",
+          "source:175492beeecf5b70a121a8c1aff6ab7fdcdb005b4342f7ad047a6bc7696c3b5e",
+          "source:87139f5b2b6b3b593a7127d2d9a643e84da0ac6d9ed3ae04af71cb57a9bc16bc",
+          "source:c103483da17bed500af9c7374ed79e0eb53d5658f147ece3a38aaec6dd2216f9",
+          "source:4474efe48f052ae645c0f403972399042d62b93fdd9901de859553a2a135386a",
+          "source:6a412180e4b9998fa16de940a64856108a71127317e7551a29299bd08e1d25a7",
+          "source:b3de036c15389bcf41c8f8b467696c63578eef5bf428ca4a0e047b7459796c82",
+          "source:696fabeee9f75a6e5ce7a20c8a4546f74054704eb9794dbd55c74bb0af0ca08c",
+          "source:ef1968f2924f54111e702b371ef0b0d02dc87f684845aad77f4d05328f250ebe",
+          "source:bfa8a8a0383ac2c7da863fcbbc2d7d0b48cfedabee60a28e7311efab99ad181c",
+          "source:4676c5ffcc26c1c05c640b603ba2b08425b9141847b95f0816805487035b9562",
+          "source:d4b1abe350d251f7f37111ee452bef824004e406de0cb5f255e516adefe74a3c",
+          "source:69298519cc10b038a2831f62030c151417216e6d0f1e4f8d08487e2f153854c8",
+          "source:caf65bb9295cea457bd146038ac14e6d228863651dba53af283b6274d752a99d",
+          "source:4086de500398d3adad2bd6b0efcf963db1c9f137c248ce09f6636a5b4634afe2",
+          "source:f586ab7de838d65f2b89cd4f0876b24aa260cd85300d7f880727031faeb56b11",
+          "source:c3ef6ab61defb904dc97bf0b2af7144bf7d241286583f07d0687aa10777389ca",
+          "source:e7deab9b920233757cde051319aaef35998855d38ec37b43c89d63c1f5d3dbdf",
+          "source:faf21d98d2a12b2467e5c22fc1b8e0252a1684ead42c8716f46081c3b2f85ee9",
+          "source:ee1b3481ff22dadbb3231dc69bff69206e8fa5ddf53a24df23590546dca45791",
+          "source:7b068a82fb2a5d3b243c13a08876dd71f856a25b303292c795ba09f5077f771c",
+          "source:6372acb716f9cc7b6252b03f856689009db9b6b9471918983de7be830195d995",
+          "source:5b38bba2dfc522a90eff15aaed5f2ded76b6169bb06bd352d75741f37f6580e5",
+          "source:8e1a3975335c77bdb1f689fb7f4ddf6287d50b67b19345d532e4d1da7cd3522d",
+          "source:dff5b63650e1537e546e2fe7d66b823ef634c4a153ffeecbe7a9a392b0bc2042",
+          "source:4230e657cb50afdd3b73d03bc74176f831ed3ba1fb40212c1ae7dd33ceaebc8e",
+          "source:75ce5e7bde729f2ecd08f152cdbd5d7350926f0ae46b591a9cdc14c002c7f61e",
+          "source:7e5b4d17b5277097cfaf5b27a99e42c3e5c0048852b5e23aacbe383a9f3e3b0f",
+          "source:7acccf42bdc5b2e9c3d4c10159b545d75ab3005ec32f7536c1ece2315aae4dac",
+          "source:23b0f353296ee7341c4fc2d06900faa66a70f4a279b8b84a9794e188e7ba944d",
+          "source:7e59e692e2115ce24bac36898f4e9fd1392009479f6e4ed25988d5166c2c1bbc",
+          "source:05fcef4e2d0b8fc050dcca732a3f4ef88faa670ce1dfb93762086ee7c7fbd472",
+          "source:083935084e14b5d1ec036ec06a45b69e69cb8136de51f60866225f8efd57e902",
+          "source:e17eacfd5945ce4d38d9a2d68c32df92cc0f6fef5e9df45e5cf512d81435779d",
+          "source:35e060bb523e0cb59a67b709db6a4bac2010b454b42f6ecf2ca826f05185a01b",
+          "source:b0935dd466cb3b1e75de770426cc5d2e0adaaf38f553d135083d9d0e09321037",
+          "source:68d00b0d201419f4a077ff9a2021fb11eaa7cdc8f2ac46f674f0815e681e221c",
+          "source:84f665b2e811ccbe975778841797b9098bf0ce22af8ff7169d1a3856c858595f",
+          "source:501ae2c4bcc90a6d7c10759b4545bcf63e7dbb52560edf7f709d6c0511b66564",
+          "source:2ce8dedd2284acb7933ca884dac3feb26dff8a76bcd45e7a7462e6393c1c0085",
+          "source:7566a91b08246b32f9121c7746de5d962bcbf961a99fb4580f6ccb70795df06d",
+          "source:997b6f1b9558836c9ca9207b28845ad844b432b021a4a4f19c7a00f943d24610",
+          "source:4189c74bcdb6d76aa30d12f2def33e73d9ae9545dee16795f6fa00b48a8aff32",
+          "source:c6de54969bf5fa9d8fb9f533d3070d62babd2b31425697f8a34ea6dea5e8bfb5",
+          "source:fb8381be1caa04e5dfcae60c2844a6a1acfecab61ead6f20194f528430f5344a",
+          "source:fa954b477e808396bffd70113deeb94417f7eac00ef37654bbfead6300e4dfd1",
+          "source:5f3ac548a1d33cd51de69ca28fcb0a42d12f013aa535355f149a1b2b9dc4c905",
+          "source:ae06436af4bc2029ac5ef785bad7bee4f38f4762f08a2190be894f1a8a29d7bd",
+          "source:222f3998d710a843b2a6c5c3b515e6dfd99746e3bfe0bdf12c20b2351285e475",
+          "source:0cdbae79458de7d6615cb7f41f6991cfaa81f421ef9f27dd424e9f31bc1f9013",
+          "source:d9008ff1e66b8a09cdc288c12c79b770ed5bb95dff4442a4a5545c474a664204",
+          "source:0ea135df1152c63653601a4df1fa5b7360f126274e2196ccdeb84f8999c6c100",
+          "source:529173b148729f10d82c9074dbbf3dc2a954717684990182ae8bb82266c10469",
+          "source:f61a415b6bf74aa645b3bda105cbfe2d4f8e8d84865919a4811d1cb50871652d",
+          "source:a97931c26b470f9e76e2d3372ca5e2094e68e51f3a075dfad2cfb0948c575472",
+          "source:0e1e2ad16a66e80b7b6d3e03e45d89f8e49e8d7357b0f20de09453af1e4fe91b",
+          "source:1c2c55cad8bdd7ca28eacc78a3412a9a3366f312213d7a75563d413186d216a0",
+          "source:3d588684d060059bc9d2cb16b1de1b478a2c3071b5d12917973505e5e2fcfedc",
+          "source:eb26744b1ea152bc40f83b9a8b2eef998efd06bad5cdba5259bd3a3823ad0a81",
+          "source:b773880ae10b5b7532f2f3d93de26ef48ea686965ac331187d2f47edbf8e677e",
+          "source:b336abf1db52fb6cce8cfcbe4c2b66c03791a4ae6346fd2c9943979fe341beb6",
+          "source:8837449de267e9542ffb252297cb5637c52ec1bb6d028edf579c523da80b764a",
+          "source:eec4f3a74afaa15c243225137a7650842cfe9e76c831caad008973419f66fec7",
+          "source:ff4a5f1f1e3eb85f3db3d3734daadfb5b35165d69f3e053154e8382aeb267947",
+          "source:925ca9aae0a602a7811c3706c86dc13c824f4af0ce29349195e3a5a861b4357b",
+          "source:b8062529265efe8d22ddbab00f38be6bf131507623db93dc2d9b3f9f029d5c12",
+          "source:f63625911b28e343f4a638df3a58e1d5204be0ac9dfeca379d3112b88604e381",
+          "source:348e7a3f3fc486506570f4a94665e9b98e66808d9d682c8413234aaef44a7f0d",
+          "source:f4321995a34471c3fd89c8c28820e911cb84fac78393875fba433676cc352fe5",
+          "source:61e4916162d6ce61003ecab884ae49495a25d84d02e0921868b08ce1859567fa",
+          "source:2597c993dd280823e7851cc28ebc0cce5ea0a28fa53ee49d3ae8781f5c9807d0",
+          "source:541fd675fd060c54252c6056bffc697dfc44251d2aa8bca51c2f8dddab1c88a5",
+          "source:03087dffcf2e2aac7e554a7b8be174034ee80c14e731fcccbfede546236cafa2",
+          "source:624da41c687c6e52092f532dbde18fffc14ddc926f92108fd594f83cc7d9e58d",
+          "source:e00500b3afdd8f413e0bddd6af1f59698ca54b92f1aea19aead48bd2534dc6b2",
+          "source:df875c6707f3d2112d00758b9782072197062ed499364ae8103eba48b1115dc1",
+          "source:63a6545d57d315c459164e623f677be2a70aab0513c54d801dcc4724a7dbcfb4",
+          "source:9e06b634d194d245821cb2a1d187021650b91b7e9d82a76c5ac9738013b708fc",
+          "source:4f2fd75a71610910c3d88c5491e1ce4a18d14d997ab9379780b5dec685d02f31",
+          "source:3e099ef1b3b9f58fa356e8ab56c83077a8ae6c3b0d1b795ff2f1bad85f8efef6",
+          "source:189b6990c6a56b4c1621ee7153b6b45c07e4d5111def8b2005ca2e1e24885165",
+          "source:c959be83c38b74f7907c7527070b5b0f719689f252d99921eb4fd456ceba750a",
+          "source:85f16dec153d927bdc1152dcd734b233d043ba1f61b5a272034df6b89d34ce59",
+          "source:f16998e4c6c825392be59ea5ab5b067db2ec7b87a7a8127c9039363af56e8b02",
+          "source:0b8fd2a9d1f328b68e265cdf30deb634983db95f72ac12eea9588f0ce512c324",
+          "source:67df4984e0dc5fd053e36364f9c6a2c69e8f7cc7e2483416313070711f8683c5",
+          "source:40aef5fa98375771b47d7acd4b0543338bc4bc10084ce5cfc66861f6733bea9a",
+          "source:525c3dd2b0ea7affb9febcabef7fb0624a43da1a80b9ade77813cba5e049ea19",
+          "source:e5469b43c8726380b3a3d8c32ca6e60618b6aa1298c795eb9ff4b4caa1c11ae6",
+          "source:6d25d5998defd30310a420ce2a7963c3f34f28d8840c038f0b499e26a1f5183b",
+          "source:1a994ad385fec4e491fd4a0e0cac17f33d6ef0fb488d817ee8d893beb60fcbe5",
+          "source:27fcf1c28ce9b71a789e74541aa95500df62f90d5c430a302602ff274450d5c3",
+          "source:5e9ad0c720f9154fc86d59ba2281232b1d2c5fd0420391874c8e30d8c3584741",
+          "source:9b8e31474b290507623bc53893138eead8fea14c0f6f90ba420b06e3311e47d6",
+          "source:1ab3b8d7524cd566b264d3cf3bb65c7065115770f75bfd1462f9be08c2e95958",
+          "source:cba51e80552eaa89f2adc6fef8949cfe3c6c5a920f78dfe0a7a7f6f8e0fc54ae",
+          "source:57cd10db65d403c4c9d71f77563e26b4d945b2002df20084dd88ff84097f8944",
+          "source:32916a768a09c01ca5435f3c4e189eb6f12142fa51a015e287d07f383b12983c",
+          "source:f85c6ca8088ead44ae43afeedcd7e1f2ab916ac1191a2d85aa4687dcb2f75595",
+          "source:53ea1715a07234af0c457b69327eb5ea678f9c674ebd56110c94a011ee379c23",
+          "source:e1a2b1b8c9de3f73f94330e69f213c0c373b7e81b2c7daba8590cda1b53bbe9b",
+          "source:3c3ba153f6c3b1bc717e0b4440ed08e93ada6e777f4448526ba6b735fd0c07ba",
+          "source:dacbbb8c2c64cf508c892844142a570049d594a1db277c64d85da2b26ab92128",
+          "source:04dacd9e8b49fb06b39788068fa372cd9ab5a5cdde395c4da19ea072f161c896",
+          "source:85d89da978e43969c9d573bad8e5009351f63a9573c04b5b8bf7068c561cb1eb",
+          "source:78f7ec2a77c32c95530c07c374bb34678211ef490ed080b746abd6e27daca9b9",
+          "source:1c657c85df709a398bceccf8ef6702aaf0e9cc4e92a9b911fef5be0d84a041ce",
+          "source:18b0fbeb6772509838de005183300caf29bbbfd3865171c360ab26910031be19",
+          "source:7800d999ca7b674bb8c2279609a29c1dd2434e987440cb8e6a7eb8da384f38d2",
+          "source:3da97fd8a85139c7e8bf1acf8c19942de3e4ad6e02851a70b0fb2507fac185c8",
+          "source:375f31381b571806e1457bf2cfba658ca88619aff60e124e24f43765372b9471",
+          "source:11eb06e52736db97e296b7055c2eb21c70ba13beaa3b2f0a378aaf2c06519b2d",
+          "source:9b823be5d95327f261b2570b5d0c182b5a78a0a02e20f1de49aaafef3ece9c07",
+          "source:06d96792d4f1f271b3ab598b7aa35bad241c2e0bf0ace9ba43eaaca2288cff81",
+          "source:1837da108c118fb9c8cc4968aa5bb134b1aaf13e7dae170dc11a328c87ca70b9",
+          "source:77417a26c8c3bdac7532bd63109b3a102f26318b7fcb73505988ffb854180fcd",
+          "source:cfde21a059966ea2418194b169c5b586ba9a5adbd3c550670a8dcc423f87ee47",
+          "source:b11898b1826bc4042e3fe4fe1ebc87212ebfef0ecb003de0b53f7bf9720f5d8e",
+          "source:01ba366e881d0f7ee72c3b9dea7707c0343d5a3e46ae29eeb2480201258cfee5",
+          "source:3c4c45ad7131049c3eb1376b66cf6a3822df4b821233a4d38d8b0c66dcf0120b",
+          "source:5ecba9a1e2d0164e649f8c954073b16ac1c0b87221d4053ffbc1f35c53cc969b",
+          "source:f74b59f7bbffb8094ba7577e847116ce2fc00aa8d138097cbfdb0c3089edb370",
+          "source:78c31d57140c4363832839f5d55a95a63d97e2c731c709940509aef2c694633e",
+          "source:feb6e8ffdd7f3c8473683a0007027569be33ae59ffc86e65f85d44f6d7476477",
+          "source:fc0cfdd5bc2e57c0241bb403424709e5627f456386c0ffa80a1ec19bc9874d9c",
+          "source:86634800e34e1db95a60ce9e2fbb2889935404cda5589ed160264173ed7d242d",
+          "source:d674433355aacb1c69a26713eb2bfa98e3c24e01433536122fd250f73f6eb965",
+          "source:d7273782a436ae7b7a12525594ca4dbe5d8b0313f2f83be16fb05dd705685d21",
+          "source:d70316f727da9fe83b31a826251d2e1f1fa07c244548b30605763baabda34373",
+          "source:7d5736dd05932a7abcffd5905cfd9117cbe12d3cf5d568c31880e1d7e95981c4",
+          "source:1c8b09ead9f369a65554632a6cb574ce84c6f1d5ea7c00522d53734ee812cc89",
+          "source:7f395ea4ae8aa6084522e7d3415c4ae3f50dee593ed95f2ad0ead506d161a0c0",
+          "source:5af1d219223827a92ee9f63d6d7c80941e5a129e034bcce0e8116e621bc70add",
+          "source:3c1700a55f524008848fbc7e9e0165ed67e02a64e0795ad946155d8a49364849",
+          "source:4809f157e9e048821c01815d81c51be160221f6c9d3f1cd73c7d8535672f8ac7",
+          "source:0d323e55bcc770176a47168dc5d888167e15fcb1a45820226dfa54dbdfc5ff0c",
+          "source:21c52bd515dc7295234bb336f89d39a8e94db01edd9685e98a395021f8b7c4a2",
+          "source:8ac04749379933aa3d68bee5689e89f05534daf50ac108dde1f92768a6319c5a",
+          "source:493504b54628857f7aacc6222a81b7cb206a895aefa3e3039183352f15ba23a4",
+          "source:bf898b755dc63f2beced9a1260727fd11d508097968bb8fce265a049ec52ee24",
+          "source:247f8493197e4d70f563326520c0d687222a7f848fad2cd52759f4bc17a8f6fd",
+          "source:27bb913064fa8b7b5f2cdd473e49d76c3d338f4010bcf5d9bbb45b6342efc202",
+          "source:6a14f2349b03450bd088fd01bd8d9ed2c9f445afb571fcba451a25a96203fa29",
+          "source:a2e8d5a61cbcba7aeea8088166aa2bdca7b44d04ffd36ad25d583459dc1e0fd5",
+          "source:e9f449073fe74c4919564f6e0ec52e0c816aac05b1e1fc7d3b0e6d11768929c5",
+          "source:0d7a30006bc730b69785885016cfb613e5b5f80939b7b625c994332d3fbcaf10",
+          "source:1f2f48cf547c8353c7a8899457c12244040c66857813aa9a494dd04a934d9fc7",
+          "source:bc49233bce74a4e8ad84c76605a3d68f4ae5df83d6ec7d8df1e3976e876aa70f",
+          "source:2117982ca54ca04e35dcdfcdd198846690957faf67956960124fa97839b617ce",
+          "source:a54200838de576f9c6415f6977709e0f62ce4151dec4f196da45ca087aa6b03f",
+          "source:0568ccd8b75f52b43599c7f0c0abdb48db8866fcb12f629406688bc9d35a7a4f",
+          "source:899d9be5b65074432584a3cc05142ff66b15da72f0268d8cf379ff7b31995a12",
+          "source:b42733f2cc293d96fd8e50c74ae08dbc2d2e720fee2921c7914ec9874fd52d8a",
+          "source:9059a08e88e97c75440f2a3c48a9e0f8244b896c350c8aa053e4802896113f53",
+          "source:759987b3314b21ec353325d258aca1f8402511bfacff063c84228af419977437",
+          "source:8f9e782db7da8c0a899253b5a594c30b5fb706e043d0597431506855e345ba55",
+          "source:ccfbbd9eadb312af8c03b97761a182079b1e1d5dca02e73a6872aaf86c63905c",
+          "source:3d5606f3adaf8bd3edb431c368705a7ab5bb4dd2fe38b2153a5203750086e6db",
+          "source:0725d35ff2db19b2f5129f9c833d01a8749410f58a336ed16776151a44b3b1d6",
+          "source:f010219c8c0e84b68bb1798bee15c8be813949a6e1e0c7f5f09e494a82674247",
+          "source:695d7763b997abdba937b974234653de2a6a0a256e6279578e330f5abc259dda",
+          "source:7ce4ffc9aa786ca2265402b33785f41bb7a4c5ff4db0bac3b9d99bd42b4050f9",
+          "source:acf6395eb2de978d8348bf09e211f9632d451afc737a6a8906a2baf6b6fe35d0",
+          "source:e41cce8cee217115654d54a96d3b9b88e2470d47808b80437389d27bf271d532",
+          "source:0bf8aa5ad041b13e07a0174914ef3bf6c272b048f67a5c73f785d6ce127e81d6",
+          "source:a2b31b8f46c2b75d00c40f2a10737908f79146006612bec85ecec8c77934fffc",
+          "source:aa3ad51640173896eb881950d95eb359d1440578c98fe9f00102c94398070f4f",
+          "source:9117963a8874f4031c632b180abcaf13719ec1230d0a33f8819a758443bc278d",
+          "source:0be194acd1c420f0606a167c6dd4f767623139cba44467a61c4935b971103bea",
+          "source:2d3f262cee30279d10224b3dec5504f0aae9f96840700f87c579d1f9b1075c63",
+          "source:825ca4688e553ca66368bcc66cdb42cf6dfa7395567c07aa86feba4ad0497db7",
+          "source:f38269417b812bdae37c420e4ae3cd04ad1b4d20ebdbb31d46ce78860c51a39b",
+          "source:2c452b50b62aa8fa45dc0b9910c208e8c50d7b0760cf05b48c685e4d4a437261",
+          "source:f71c89c5e0806767f3e8dcdad166b5a7d4e1d54bc9e5f77f0362c951ccfec523",
+          "source:ec90573d21ac195f3cdb214a0458a7cb236a1b018dbb2d0810d9383b8e5753d0",
+          "source:7b8d394673200fcb8b804415b9ef6281263819f2679d3c9bee7c195a6226af7b",
+          "source:87c06186984bbcd18bb7a59bded217564afd74374d593b86bed197895a310427",
+          "source:2885ff280bdaaae267039232ab143aab9478e3c9c7a6da23126133e92c0744b3",
+          "source:e4a881e23155e6701c7f6c8ed6dcd2462a009f19db03c9318d9b5e1a8c063901",
+          "source:605f0b79182b5a962b93eb3d794f8ada6355aa3c8d4153ba566151447f5c8f64",
+          "source:fb4b74cffffdbabe4286c3e26d1fcf73a3a9b42b1928b0103616ec958080adbe",
+          "source:064d71306c34509579178257dd80bffbe6c20d4a98585841f7592f41473b9d8e",
+          "source:c4bc98fc929313a25c75a4a80cdbd7064fab35f4e6bcbc5aa75fd1612c1a2d4b",
+          "source:b1d1abce3a99312f71b214e8281c46237269e7e68472f98c8b0bece1b7e48ef9",
+          "source:9a7d393fc2180d1d4679887f199f2489eada7208fae0c75aab2980ad0e3b367d",
+          "source:a5dad5c9ec8f19bdc79834f13185b072e0e93cd59d589e158ec21050cfbc7d23",
+          "source:3a2936714cc56a7154d8d12adff762b1f9deaaeeaa9331e9688601d6f071220b",
+          "source:bf36348cd14fdf9dc2d0f7ad1201d48438262c0864bcd1b6e10c336fb8a3a01b",
+          "source:b8db8d814bab5b87c2636e79be6e3c3dc21242ef9204820ccfbaab9f1577d9f4",
+          "source:553569c739392819cadf029dcc12a46700a4a8d6507066cc363685922953a5d3",
+          "source:56b06095c088a1400a74487b0391405a7472a366c450378b38a2f8331851f3ba",
+          "source:0583f8a4fa4b7d53b06c146fd87d5aa94ff61f123d24c2b9cada4c4394efa3df",
+          "source:d1c49ad7764067201ba297c67d8cbe54cbefe593695d48995525785c6b31b544",
+          "source:3f54e08cc4ae241ee7d6080c90ec05245fe91919887fab35c69463b838a1b1bc",
+          "source:c9d9c04eaa9642e4a1e4ab42c92a77ec76704f20ade4c951ddf47572046a5c13",
+          "source:b699aadeb9bc7c7a4daa6340454aac9158495a2a5015ac6c71d98e11c2fa98f6",
+          "source:9d3ce70fe686f00bf84aa339d59097c072b2e530c03f1025534169d2e0311dd9",
+          "source:a7ae7ffda289a8a7219bdc19d922ecff8d7af64443cd55a6c5b91346e2e71319",
+          "source:3d7444d7babc88ef5c07295834d0c44857d15c6f9097f66c6f8e0eecfa0ed9b5",
+          "source:b4383f0a7cf59d94b4bfbf5af635511df194839010ee66f8c50f893dbc0f8b2a",
+          "source:4cc8cea8f21067aea40b49a4c19721e4bd42ca961f62170dca2bb3719ca03d8c",
+          "source:d06fc3b4e3fb0651139df203a1a56f8ae4563ef202128d0de0217a82ba73442b",
+          "source:f6934fb994acb5d7026743a4440bd12f7f7bf65e7bf133e104c7a19768672c01",
+          "source:bf6f75adea8999439d2bd9ceb0dd7ab49a948bb3832399daaf68839633b7747c",
+          "source:81c547eb1f17954bf1369f3c0c9b88a81523a028950c361a26a2d8a065b122e0",
+          "source:b608962416ab917228a27e31a9e873163d4ab5e4027f6695524a7835ef4e0eed",
+          "source:f8e27eaa1bfc896521542a982fbf3d428e3d2e8212048a0a14eb3be9962ae9d7",
+          "source:917c60f3830fe7f2aa68e5b86a97658246e3feca649b6a2d4a2b7ddf9b35fb14",
+          "source:21da30504f174a2faa4286bc00c1fbc1d5ec7979d3f4159ee314156db392daab",
+          "source:a9d1142490b593f20393244eba3ed7154dd6fb58cdddc53eca66bab33a435ff4",
+          "source:363b9dba8a9abf1c7a3bd3274ae49e406b6c18afd5335a49d4a81f93c8b2a2ca",
+          "source:fe9f4409e536e8761f9eab03489561a948de36f7011fe4e33905c8e65f85c700",
+          "source:a0a0bdd7afb7d0e6152f217bb004af8d4dc8a8ba116f14af683832990a33dc9e",
+          "source:115102828631e402936e93602d168d8d97e2763ca6c68567eb5bcad620ff9a61",
+          "source:27e6af526bb90ca060740c449fd5253309f74068345e3af2e1be180708bd770c",
+          "source:76b431f965af2bb76317b0d5dfa5dcecb5462ad2b6336cc1f5f4f2966cd65781",
+          "source:a23ffa3e9869a000c0cbdb9d64119ea2ce00445de365a6175dcccea4bbaa36ef",
+          "source:29fdab71bd544d185ab72508bf3ebf5ea26b5fdeed2afc7c03e3d23ae033d87c",
+          "source:c7a81178aa1b310084b4fd7084990522e9ebaf1f8b83f913325468cca0404124",
+          "source:b80e97ad1e7d7c5530a2d18ee6a231a87d65fb90822ed861f612175afbde3ac7",
+          "source:8f258c9d4b591a766253d95ed2b5cf58fd1c44eebe82940506ccac15621f2522",
+          "source:851446253caa9206d0726b28a202af4ae37e38554998166abbcf8d4e752e4a02",
+          "source:69fb4be16bbe52171320bdbb3736f47ae6a8f6c9a63665d0c902bbc37329a68d",
+          "source:89fc31b68613f2a406660316b8b1a65c85ecbc6e47a54da5ef66d2357c769eb0",
+          "source:b73767bbff1300c100dd2d80742778cbb5278e8bcb8d029c4e05f8a56baa6ad7",
+          "source:f7652aa08e2989c39f033aedb2746444fda8e475734c4d69c5d6800546dfcbbc",
+          "source:d46a8ac91e18e1e9e28367033db3434438aa9124123cef205b6a9369a0f873cd",
+          "source:38cd1fd052071e2d49cb5e22c6e5d5241d879604a96fa7185ba4892190c773f6",
+          "source:22bdd0a10f546110141e81e8d0e177fb84352f9dcb8b0c7c229bd766e7578182",
+          "source:a08facabcef175144080d71ca7d4edc5f778ae150c38dc16e50667c7b4c47e26",
+          "source:db802d8aef20c5dc104ddf9b4b4a7bc12c2a4102373d956e6da0337dd3fb2d7c",
+          "source:93192618a9eda9357a8b97dd637bd96b52a27b5304b4de8d26a958b45b56df39",
+          "source:07d1d9a24c78488cc34860b4b17526ca69d06de7d94bb6f060cb4482d57cd3d8",
+          "source:72fd690ef9c47881b3193ee53b7ba12855beaea66120e623f1ff9c319733fc5b",
+          "source:ecc2a26fb1498dc3e4872c34bbab911db62b1ec81c91b24aca986d61546bb765",
+          "source:dc612c510e372279263e0a4100fd87b2d7624e8a3f2a41df3dcd51f2116689ff",
+          "source:d96fd1b7bb1c9beb336ad2e9beea9320c44ed752897c30eb793ac311be8d5243",
+          "source:8d4904bb1c39ac5e10409c7b805ee04fdf1d88221b6f3c7e68bd0fb9e95207f3",
+          "source:36fbf0c7dda5a75ae99586e32f23eb32aa9f196fa44e204813f650a9ee2d686d",
+          "source:0d11f59742a8ff4a515414ac564832b6612d4ab8aa37d0755ac91d570949391c",
+          "source:968039730c85ebe7334c0bcbb2d92c645c9ac8618672e0ccbbfeb7a21f72a14a",
+          "source:f6af86c55ffe11f6cb5e8256a0d8c1a471f774b37beebd60fdedb80a78aa9769",
+          "source:ae5cc1c9ca4d4acf1adfde843e7214fc325e48477a654d6c3efc7dee46f4eda9",
+          "source:05b854983a5ebb35e5058d3476a22655ecf68b8102bd4ab974f72e896c17fc79",
+          "source:c1e911a1680cea81124ce13a5c4d82c83da4269e4f4d51ecea3a6e5534b5a07a",
+          "source:cdbf32834f151b080d5e13341dec5275eb6d8887918fdac2cc0b65ff1dc00ac9",
+          "source:da0e24851557a46e7e517f648f75d9d785bf8a9a4df35179cbf412d38e16fdbb",
+          "source:a702a7436a63d7f10fb3d152960d8b3ba2fb46c385c34ef97162c51f9a04beac",
+          "source:a259da9b21e993ee14ce96926a244fb0b3c0d54d638d1e0766e17d947fbc0174",
+          "source:eeab8248e94cb0901a479a498e9e61d088c07b87e2b6c6f42f8b32dbe5e8df25",
+          "source:26511f0221121096198b18b3e31fbd1575d699ef0ecb7bda93c8430c45a7ee6f",
+          "source:47f66ef55e55d382c02c4626ed9896b7156f253dde22b57ed2be6ae9eead3468",
+          "source:504a32cbd165ab1daf00efd790723f2be09d6801b2ac69fde55e99ea7cc2a3bd",
+          "source:b6fb9777980d670f183580b69c3b45bc14191ee3c7af73be934f80311b6dc438",
+          "source:c967091fd849843bd26d471ac6d1d6c71e2e68eae93a93384207b3be5b43eac9",
+          "source:dca56d384b9f85293c0891e6ccb56c3bbf90241f6106bf895066545bc2003e0e",
+          "source:b8b5dc9a17bf6e3e7ea5fd26dfbf8783b694a67a2e6fbdb2d3a13019fb23432d",
+          "source:bb0eac331c23188b7a68410b7c3c55d99606e7967e991d2ae807f9c05de3b723",
+          "source:5b89f4a4f6f44dfd6c0a409bcdfd45ee720ef7be1dc4cd64c805c49c0b62ea2a",
+          "source:66b3f025026be8e1d397aa69442d1f047f2a332a3af0cec6fc3e4324bf1fd3e4",
+          "source:e0ff74cf2e7963d41c7b6c940cf0139040ba967927dcf8aa21a432393d53fd5a",
+          "source:a54450c638f8749725b123a208c06b07265a66cab4df2a1995109220cc6544d9",
+          "source:7b737b1d1bfb355cd9f4c55329792495bde7c5378d268af4a09aeb9dac639060",
+          "source:c378051f8b92ac40df6cf2b5891b7740336ee00f8f7b6cd29ad27c017c509dcb",
+          "source:7a89cfbfb69fc0ae141adad574b1b3e244b832bf2f1f8afc0eb1f6a9dbbf32bb",
+          "source:70bbce0d16fb3ed62408c17ead6ceef495bb423f4ebe6456eb6c9e8199e33966",
+          "source:d8f990594d1e757bd52337594a8d8afda48f0a333cf83e41ea278175d944e0c4",
+          "source:e36613e6902ebb701c44dba45c954bb0e697e6983765b7d17410687e543af0d7",
+          "source:2f4574ce3ab27af0f84b3ab22841ad7a423a1013d655523646eaebe5aae89213",
+          "source:60c2a9046456c6d991abe6f8b9e9cbeac4a9c8407bfc37df12b9cfc4c44b8d69",
+          "source:f8a1e58a2eedb22e1d93d312e7a8cffec8a1a8898dccfa35e51956b7753b5941",
+          "source:129f3356e58b367aeabb4a2c46d2c4e9b9f94b1b56bffa8df6014ea24fbf85ab",
+          "source:2d24eec69b3e94c6ebdb09f2fc935177483cd982ce912d1cf13c1e83a5807b26",
+          "source:6b851d7e4e297e68cf280bac49de0939efefb85c502e77017472439df59f7255",
+          "source:33373815bdb05158687e68efa8c64b687077d189eecacab2ff9f96efc39153da",
+          "source:68279499c836039423dccb9860376db135d0ccf720c8cfc6df539a7fe0d9ae43",
+          "source:e660a3bbe250441a80065a5523608f94a6530caf17a98650ca4d63902523fe41",
+          "source:fd1ac85c51f04aeb7af5757621a4776af46f6abf2e54faba9f336757a2ff5185",
+          "source:6b80c29be47c1691745ace376f91318ae25cc7fa4b3ddeda9ec954e2a9645457",
+          "source:8ec16b27bde8e120f139629839dcb93a8747120bdf6a594757f7c56486fb991a",
+          "source:01313eda26d5293542c0401c3b13949b9cc9d145b6b8c392b029960ad17077b5",
+          "source:ba58e56df1c3f24dac727e24279bea43d7f0cfb04aa346e4284fbd24d1c36fcf",
+          "source:d48e848df8c56890770480340b0c67adf70dbbcb2e599d802d29ac0d12dc7358",
+          "source:6c5abbb4a1cda0b0061a6d12b5951efafd8b54095af2fb96f2594d4dc8b453f9",
+          "source:69b2e3d67b35abb7efdc9e4673420b302fa96ca695c4d1d6f23723d2dd713c7d",
+          "source:9ea0df9ca1a08e399ed7c4b1b35835dbff02b08d45498a42e28728586d1e9558",
+          "source:21d09fdcca07bec8fff67f4ae4cdbf881735268adcb3e995b434a4ded1560d76",
+          "source:03e57cf35530f0bfbc32785d1680ddb5dec4129d1b4d9dcb611dcb4946f2bdd6",
+          "source:447273132ea07c952a014973d0b5a951d94bb0036e317cd03db954dbca7491dc",
+          "source:c7c4ff0a7768e49006cb032d666e0733bb767d81f1629e217e9e18035d9552e7",
+          "source:edda298f7a7687c9545ac7a5642df4274c67b23d3e3b1b83c6156cbb02cfeb25",
+          "source:557e892c4c42ebc3011a1ca1510396d1ef95c54f6db9e23096b6caf1ca2e1ca9",
+          "source:2b5be6464d10fdf8e03ee050039dc1d15a2a229b2d1c84224e0f18bc27738653",
+          "source:42f251d9a56be567c6ca407b30597376220a11252288cb4de0699a6db919f071",
+          "source:00965b5efd341b20b916a8f586e3b0d3e6a5f39eef134b646f344ed03a1657ee",
+          "source:939de22944fc2baaa568feb5be03d2a2fd84f1112bc3ec3b10cae4589acc0133",
+          "source:72e31f1cbedd443b5200f1ed3a528a01893ea1561b4072f7359759cf9232e163",
+          "source:e6a92bdaef1ed963ebd99000bf60326a76656411bd51ac2aaee0ff0ce0738fe2",
+          "source:5344c69ddd0b993320add67d6d5048c8896fdd673b5842c3c494f063f5e42b04",
+          "source:ce7d6f5e2b2e0cc12ccf7f0d299f6c8103dbfd28d849f11a3950da3745505cd9",
+          "source:93602a217ddc6746b066e52c30250c244a884c2eddaa1dfdafbbb291f6337c09",
+          "source:5523106fb87e5b4c5596fe9b9013726c810e3057a6f676cf816bbde8e8291a80",
+          "source:d94fcdf3432b2c3eab2a011fd7b4f6d5e5a4b9411a063180fc88fd2b93aac5bc",
+          "source:14e29e5107ff2b963c3e35d25bd3974c90af05d227224edea91eef3276d5d09c",
+          "source:acdf8995bf48870d032dfde84b7ed75810bb5597f4870d01139bb985e89f2fa0",
+          "source:bee1e9c107d0262b8fe20fa30a48fa0a1c08c4e20f859ac6afcc7b6811563234",
+          "source:966fe6b1ac119646bb001c925c66517a6c8651c94caf73d97d15023b078eb5d3",
+          "source:50036d2cf3e5e311eed70f87c82b57bfc6602a88c6d4643a8860e617537f6c51",
+          "source:467561e88ba0ca42bb60dec5ca6870214311be0f56415863541a16667ac48a60",
+          "source:d4dbd978e2c9aa5ba8db8938e8b02ed1cdcccc16fdf37d642180c8e76ae2af9c",
+          "source:11a28443950564532cb23ba1c4f637e97efb77f90a4e09685352482384a28569",
+          "source:6bd3aa6f328ffbc2589ec0f479b48c2eb39fdaf0263c88e6b487cdec9d5d8e33",
+          "source:78bdde229f7880487af83e5c898ff31ee8b1773d0d0fd483928b72d50c66756b",
+          "source:c2d2c7664d20d298d03b2ec9acce015592d4c3ab0de532ceccd9cc03591e971e"
+        ]
+      },
+      "last_TRAIN_predictions": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/last-TRAIN-predictions.json",
+        "bytes": 8796971,
+        "sha256": "3bfe6159f963e8560be1712931053702d205078900aa1efe09684d9978566919"
+      }
+    }
+  },
+  "references_parsed": false,
+  "actual_optimizer_calls": 480,
+  "support_head_updates": 480,
+  "action_head_updates": 480,
+  "head_updates_share_the_same_optimizer_calls": true,
+  "runner": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/run_support_action_experiment.py",
+    "bytes": 21793,
+    "sha256": "26d53986f92aa469f75d91ac4842baab6fa33dcc72a5420b959f5392086e4f8a"
+  },
+  "plan": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/experiment-plan.json",
+    "bytes": 8235,
+    "sha256": "6f749df6d413034752a7badaa74002b5bf6e4fe0d524889b449ce6c595f74a31"
+  }
+}

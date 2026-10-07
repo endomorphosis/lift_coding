@@ -1,0 +1,191 @@
+{
+  "schema": "support-action-equal-update-plan/v1",
+  "seed": 24604,
+  "arms": [
+    "linear",
+    "mlp"
+  ],
+  "hidden": 32,
+  "updates_per_arm": 240,
+  "batch_size": 16,
+  "positive_per_batch": 8,
+  "negative_per_batch": 8,
+  "actual_encoded_batch_size": 16,
+  "learning_rate": 0.003,
+  "weight_decay": 0.0,
+  "gradient_clip": 5.0,
+  "support_threshold": 0.5,
+  "trainable_parameters": {
+    "linear": 195,
+    "mlp": 6339
+  },
+  "capacity_matched": false,
+  "same_data_and_optimizer_call_budget": true,
+  "loss": "BCE_support_all_16+.5*(CE_action_start_positive_8+CE_action_end_positive_8)",
+  "class_loss_or_shared_encoder_updates": false,
+  "selection_steps": [
+    0,
+    120,
+    240
+  ],
+  "selection_eligibility": [
+    "positive_emitted_proposal_count >= measured step0 baseline",
+    "positive_learned_refusal_count <= measured step0 baseline",
+    "positive_exact_count >= measured step0 baseline"
+  ],
+  "baseline_positive_emission_must_be_nonzero_before_fitting": true,
+  "selection_rank": [
+    "positive_exact_count + negative_learned_refusal_count",
+    "-negative_emitted_proposal_count",
+    "positive_exact_count",
+    "-actual_updates"
+  ],
+  "fallback": "measured step0",
+  "negative_emission_hard_monotonicity_claimed": false,
+  "retention_selection_or_fitting": false,
+  "actual_optimizer_calls_across_arms": 480,
+  "support_and_action_counts_share_same_calls": true,
+  "training_input_records_per_arm": 3840,
+  "encoded_optimizer_source_presentations_per_arm": 3840,
+  "positive_action_presentations_per_arm": 1920,
+  "negative_support_presentations_per_arm": 1920,
+  "ignored_negative_records": 0,
+  "parent_checkpoint": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/parent-checkpoint.json",
+    "bytes": 2714198,
+    "sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f"
+  },
+  "parent_Adam_continued": false,
+  "all_parent_tensors_and_modes_and_class_frozen": true,
+  "new_head_Adam_fresh": true,
+  "all_negative_batch": "support updates; action parameters, gradients and moments/counters remain idle",
+  "builder": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/corpus-builder.py",
+    "bytes": 32732,
+    "sha256": "54616dca4e9edc0d5c1f2362544de0da5b87ad57b4b7af75480b4e455be56e7e"
+  },
+  "corpus_protocol": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/corpus-protocol.json",
+    "bytes": 15939,
+    "sha256": "bbc90d43835021dd17730d5787a7789ea7cad61cc1fc5eeac101d94f3707b2b1"
+  },
+  "corpus_manifest": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/corpus-manifest.json",
+    "bytes": 50666,
+    "sha256": "eda62b5e15083adba9184ec5ecdcf01a530df21914344e3bfb7d36ed0cc7cec0"
+  },
+  "runner": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/run_support_action_experiment.py",
+    "bytes": 21793,
+    "sha256": "26d53986f92aa469f75d91ac4842baab6fa33dcc72a5420b959f5392086e4f8a"
+  },
+  "selection_policy": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/selection_policy.py",
+    "bytes": 2519,
+    "sha256": "1636486bd88788ff2e2d6876f1b396cf483a0aeecca43f51c7b9b2f46f7612ef"
+  },
+  "scorer": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/run_trigger_experiment.py",
+    "bytes": 19834,
+    "sha256": "8db24c4c0e39ebb106a72031fa53aa9f153fed94f1ddaf1b58ba7ef9ad093f00"
+  },
+  "producer_pins": {
+    "implementation_sha256": "ce7abc45032bee6ac950720d79c8f329c03a68961140c0f2ad9ade8ea923988c",
+    "trigger_producer": {
+      "implementation_sha256": "983b69b8e293aa6211fd8322f9ba6bfe6fa5b8cb853c2d4d0cace1e7e5046344",
+      "donor_producer": {
+        "implementation_sha256": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15",
+        "proposal_sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65",
+        "scope_sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a",
+        "torch_version": "2.13.0+cu130",
+        "tokenizer_profile": "unicode_word_or_punctuation_utf8_offsets/v1"
+      },
+      "feature_profile": "frozen_encoded_global_or_predicted_interval_coverage/v1"
+    },
+    "feature_profile": "frozen_mean_encoded_support_and_token_action_residual/v1"
+  },
+  "inputs": {
+    "train": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/train-inputs.json",
+      "bytes": 508525,
+      "sha256": "5713989a5a4405d4e553807d4cdbac38c65aa9b8d6b1191b807312a72403a8f2"
+    },
+    "selection": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/selection-inputs.json",
+      "bytes": 63812,
+      "sha256": "8a587ced7850a6e4979545e548c27bd0a58a65b872802cbc4667df95d21d4384"
+    },
+    "final": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/final-inputs.json",
+      "bytes": 63530,
+      "sha256": "5fa44c4a208c71429c61f8c6be648b65583ecd2a01740b412f440e03ef824da0"
+    }
+  },
+  "references": {
+    "train": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/train-references.json",
+      "bytes": 1134002,
+      "sha256": "e08c51ba66e512758350d31edbcf4a41c4b64c9adef9049776b13493a54ff465"
+    },
+    "selection": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/selection-references.json",
+      "bytes": 141813,
+      "sha256": "1560e7a9d2f28ff6278783a91551748f9d621f988ef1a161895ac55660e96584"
+    },
+    "final": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/final-references.json",
+      "bytes": 141839,
+      "sha256": "8dd5cc9ca1afe776dcdeaa9e88dc7e5869269a125b03b648b5c6be79e94a8baa"
+    }
+  },
+  "schedule_canonical_sha256": "62705395bc0099dd2345036eb9a0bac77d2cd88791d577844cf6b316140680ac",
+  "retention": {
+    "earlier_scope": {
+      "inputs": {
+        "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-inputs.json",
+        "bytes": 61725,
+        "sha256": "1af9757054e2ae6344dcbd2e3834c21808cbe998e79ace9b9ff34383d3020b55"
+      },
+      "references": {
+        "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-references.json",
+        "bytes": 136311,
+        "sha256": "9ff98c26fd03fc695b76b46de63b621a02765e981e43eca867cf01f51104abc9"
+      },
+      "archived_parent_predictions": {
+        "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/prior-retention/predicted_trigger-predictions.json",
+        "bytes": 796352,
+        "sha256": "7745ecb3f56e4544807c9b8466b8a02dd9bade9d5c5bd9b996d134e10e69f730"
+      },
+      "role": "exposed postfit retention only"
+    },
+    "earlier_trigger": {
+      "inputs": {
+        "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/final-inputs.json",
+        "bytes": 62673,
+        "sha256": "066bc0a734292d45da468583c55677d9851e244f5a7949aedcc857796a14cb67"
+      },
+      "references": {
+        "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/final-references.json",
+        "bytes": 138097,
+        "sha256": "069a43b1295823c3ecaaab958a6402494d1dbd00679af97da05d7e466ef53209"
+      },
+      "archived_parent_predictions": {
+        "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/release/results/predicted_trigger/final-predictions.json",
+        "bytes": 839902,
+        "sha256": "bb0256230a1291775a6bdd4a433301e6815cfdd47053980d2ded91df958a4489"
+      },
+      "role": "exposed postfit retention only"
+    }
+  },
+  "numerical_barrier": "Both choices and selected checkpoint identities durable before parsing any fresh final/retention references; all9outputpanels durable before joining any of them",
+  "construction_labels_authors_blind": false,
+  "legal_gold": false,
+  "source_only": true,
+  "latent_conditioned": false,
+  "condition_attachment": "caller premise; copied only if predicted condition nonempty",
+  "law_semantics_verified": false,
+  "formal_output": null,
+  "admission_masks": "all five zero",
+  "Lake_or_native_lowering_run": false,
+  "default_promotion": false
+}

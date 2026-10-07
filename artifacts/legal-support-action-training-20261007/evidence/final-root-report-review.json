@@ -1,0 +1,56 @@
+{
+  "actions": {
+    "fit_updates": 0,
+    "git_mutations": 0,
+    "model_calls": 0,
+    "network_calls": 0,
+    "source_edits": 0,
+    "test_calls": 0
+  },
+  "checked": [
+    "Final report has no placeholders; source/HF/PR/native384 links pinned and relative links present.",
+    "Raw, posthoc and exposed retention facts match finalized science reviews and remain distinct; no default or legal/Lake qualification claim.",
+    "New native384 paragraph accurately matches6791 document; fresh optimizer/no fresh matched control, TRAIN retention versus exposed development regression, separate lineage.",
+    "131+8 validation, historical23 guardian, replay768,35 sampled RSS observations and runner/resource limits match finalized receipts.",
+    "CI wording accurately uses5 real billing annotations with15 pending checks, without hosted-pass/all20-completed claim."
+  ],
+  "findings": [],
+  "hosted_CI": {
+    "billing_lock_annotation_count": 5,
+    "check_count": 20,
+    "claim_passed": false,
+    "failure_count": 5,
+    "own_head": "7b93b2d97a8985b3f2db29963bd0979749f66163",
+    "pending_count": 15,
+    "report_uses_observed_annotations_only": true,
+    "snapshot": {
+      "bytes": 12287,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/datasets-hosted-ci.json",
+      "sha256": "37c46a46f80adcfff7d9a3d65b9ca1908686307f31b9b956b9d484da447d9655"
+    }
+  },
+  "immutable_links": {
+    "hub": "https://huggingface.co/Publicus/legal-ir-autoencoder/tree/f2e6e9ad6b693a605066146dd8985f036fcaa50a/experiments/support-action-20261007/run-01",
+    "native384": "https://github.com/endomorphosis/ipfs_datasets_py/blob/6791fc5d6bb58f4c074063bb01bd56071ab23c2d/docs/autoencoders/dual_bank_replay_results_20261007.md",
+    "source_PR": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1277",
+    "source_guide": "https://github.com/endomorphosis/ipfs_datasets_py/blob/d93f1b79fd6f8e413010bbca506473a8f67dbe1e/docs/implementation/legal_scope_support_action_pilot_20261007.md"
+  },
+  "limits": [
+    "Previously sealed numerical/source/resource reviews reused; no executions repeated.",
+    "Native384 facts checked against immutable6791 document, not a new audit of that separate fit.",
+    "Full archive/index/gitlink preservation belongs to the separate integration review."
+  ],
+  "native384_document_sha256": "6862160d284e380751754cfee58607c09de69910aaa2beddb6649e9d9c19ac86",
+  "passed": true,
+  "report": {
+    "bytes": 10154,
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/workspace/implementation_plan/docs/67-support-action-residual-training-2026-10-07.md",
+    "sha256": "9bfdde74ccb146efbf791b6ab95cd4006d4c4e3fc892322889b5924171f63574"
+  },
+  "schema": "support-action-final-root-report-review/v1",
+  "source_merge": {
+    "commit": "d93f1b79fd6f8e413010bbca506473a8f67dbe1e",
+    "parent1": "6791fc5d6bb58f4c074063bb01bd56071ab23c2d",
+    "parent2": "7b93b2d97a8985b3f2db29963bd0979749f66163"
+  }
+}

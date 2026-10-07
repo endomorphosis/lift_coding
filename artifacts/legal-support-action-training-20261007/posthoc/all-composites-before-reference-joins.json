@@ -1,0 +1,46 @@
+{
+  "schema": "posthoc-retained-boundary-reference-barrier/v1",
+  "panels": {
+    "linear/fresh_final": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/retained-boundary/linear/fresh_final-composite-proposals.json",
+      "bytes": 815692,
+      "sha256": "2616e890a3a123fde11317d9af44c1453f10c4a532511e544d630b96b731857c"
+    },
+    "mlp/fresh_final": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/retained-boundary/mlp/fresh_final-composite-proposals.json",
+      "bytes": 804881,
+      "sha256": "f8d1e1b0a7dbcc91a6ab2f0ea07d257bb22cf607b379e8afcbd7c5de5946842b"
+    },
+    "linear/earlier_scope": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/retained-boundary/linear/earlier_scope-composite-proposals.json",
+      "bytes": 740598,
+      "sha256": "f315fd114545b0c158ab4af14360c21dcb05841d839049b2a44fea398fa59bd3"
+    },
+    "mlp/earlier_scope": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/retained-boundary/mlp/earlier_scope-composite-proposals.json",
+      "bytes": 740601,
+      "sha256": "b77f8d738f06176e1f6cc37ad971bf453838ede80e304bdf2959ff59ea133b73"
+    },
+    "linear/earlier_trigger": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/retained-boundary/linear/earlier_trigger-composite-proposals.json",
+      "bytes": 782864,
+      "sha256": "81e18315fa665b5396a74d58ccee2c9e73d0800dc9987029c4f454ddccaed7db"
+    },
+    "mlp/earlier_trigger": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/retained-boundary/mlp/earlier_trigger-composite-proposals.json",
+      "bytes": 782935,
+      "sha256": "518910d44ee2292cd2a1ede082ee1051aa2225ddacc97f2190b3bdea6d5c0afc"
+    }
+  },
+  "references_joined": false,
+  "policy": "emit_candidate_iff_parent_status_predicted_AND_candidate_status_predicted",
+  "policy_developed_after_final_exposure": true,
+  "posthoc_diagnostic_only": true,
+  "model_forward_calls": 0,
+  "optimizer_calls": 0,
+  "selection_changed": false,
+  "learned_probability_model": false,
+  "default_promotion": false,
+  "legal_gold": false,
+  "Lake_executed": false
+}

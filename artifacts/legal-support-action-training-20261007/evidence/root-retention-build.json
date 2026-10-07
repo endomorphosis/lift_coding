@@ -1,0 +1,112 @@
+{
+  "Hub_only_released_files": 11,
+  "actions": {
+    "Git_writes": 0,
+    "Hub_reads": 0,
+    "Hub_writes": 0,
+    "canonical_source_edits": 0,
+    "fits": 0,
+    "index_edits": 0,
+    "model_calls": 0,
+    "owned_archive_file_creation_only": true,
+    "resource_claims": 0,
+    "staging": 0,
+    "test_runs": 0
+  },
+  "additional_postpublication_receipts": {
+    "hub-checkpoint-replay.json": {
+      "bytes": 9568,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/hub-checkpoint-replay.json",
+      "sha256": "275b786d79a68b02bd2743f85031998504aedd2f117638bf548ce24d0350255d"
+    },
+    "hub-readback-verification.json": {
+      "bytes": 21648,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/hub-readback-verification.json",
+      "sha256": "a52f9faad224a2407e7385da69be11ac37819dba1876a138a528c2198d281ee8"
+    },
+    "hub-upload-commit.json": {
+      "bytes": 331,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/hub-upload-commit.json",
+      "sha256": "46ac3031dda5c3418adb9ee087d453d7965e141e8199a69e5f20e374782ea917"
+    },
+    "hub-upload-parent.json": {
+      "bytes": 754660,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/hub-upload-parent.json",
+      "sha256": "f75c2d307af2953d0d97d4bfaef6cad2ceff1c5e8552b0d8616ea468cf001f76"
+    },
+    "incoming-main-integration.json": {
+      "bytes": 518,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/incoming-main-integration.json",
+      "sha256": "851a8eb48f6e61700c9cecbe514581b7e2012f26864b5a5c62cbafdad18539cc"
+    },
+    "release-review.json": {
+      "bytes": 75224,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/release-review.json",
+      "sha256": "65405e62900ca2d4eee60d37ac76f61346002cd5fd5191960a8854f8a9447b5d"
+    },
+    "source-contribution-binding.json": {
+      "bytes": 1685,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/source-contribution-binding.json",
+      "sha256": "adf2c3a3259e7711e1ca88bdf3ca8b0e15d7f2cab393827b55f63885ca084731"
+    }
+  },
+  "archive_README": {
+    "bytes": 3677,
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/workspace/artifacts/legal-support-action-training-20261007/README.md",
+    "sha256": "9d57164c3286bc79424a39310701198434149dcd64147f1940ab91e8e6788e38"
+  },
+  "archive_bytes_including_retention_manifest": 19591090,
+  "archive_files_including_retention_manifest": 95,
+  "archive_root": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/workspace/artifacts/legal-support-action-training-20261007",
+  "boundary": "This build checks existing frozen bytes and saved publication/replay receipts; no new model, test or external verification execution. Parent may append later audit receipts and regenerate manifest; this receipt describes the initial build.",
+  "findings": [],
+  "hub_revision": "f2e6e9ad6b693a605066146dd8985f036fcaa50a",
+  "local_files_excluding_retention_manifest": 94,
+  "local_released_files": 86,
+  "numerical_weights_copied": 0,
+  "omitted_release_paths": [
+    "checkpoints/linear/checkpoint.json",
+    "checkpoints/mlp/checkpoint.json",
+    "results/linear/last-TRAIN-predictions.json",
+    "results/linear/selection-predictions-0.json",
+    "results/linear/selection-predictions-120.json",
+    "results/linear/selection-predictions-240.json",
+    "results/mlp/last-TRAIN-predictions.json",
+    "results/mlp/selection-predictions-0.json",
+    "results/mlp/selection-predictions-120.json",
+    "results/mlp/selection-predictions-240.json",
+    "results/parent-TRAIN-predictions.json"
+  ],
+  "passed": true,
+  "pending_explicit_receipts": [],
+  "published_README": {
+    "bytes": 13659,
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/workspace/artifacts/legal-support-action-training-20261007/published-README.md",
+    "sha256": "f49494610524715137c4d8b16f598851180630439912328bcc8802d02844f852"
+  },
+  "release_file_count": 97,
+  "retention_manifest": {
+    "bytes": 62714,
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/workspace/artifacts/legal-support-action-training-20261007/retention-manifest.json",
+    "sha256": "b5938c5850752e3c463c95d01fc48939bf98edd586c6c2c79b7eddc96ca77ac1"
+  },
+  "schema": "support-action-root-retention-build/v1",
+  "workspace_HEAD_unchanged": true,
+  "workspace_git_after": {
+    "HEAD": "19349870e8085e0b687658b35c52f123c4b0ac2f",
+    "index": {
+      "bytes": 6345497,
+      "path": "/home/barberb/lift_coding/.git/worktrees/workspace4/index",
+      "sha256": "87b0c88d6e1d680c5517397ee510c4b10573cd69add9547fcaa8fc77dc3620b4"
+    }
+  },
+  "workspace_git_before": {
+    "HEAD": "19349870e8085e0b687658b35c52f123c4b0ac2f",
+    "index": {
+      "bytes": 6345497,
+      "path": "/home/barberb/lift_coding/.git/worktrees/workspace4/index",
+      "sha256": "87b0c88d6e1d680c5517397ee510c4b10573cd69add9547fcaa8fc77dc3620b4"
+    }
+  },
+  "workspace_index_bytes_unchanged": true
+}
