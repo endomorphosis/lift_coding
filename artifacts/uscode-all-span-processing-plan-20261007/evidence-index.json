@@ -1,0 +1,51 @@
+{
+  "schema": "uscode-all-span-workspace-plan-retention/v1",
+  "files": [
+    {
+      "path": "PLAN.md",
+      "bytes": 35978,
+      "sha256": "55a3c8e1ceb93e238b9a48fd0ce8296e409fecd1bdd5e18dd9da49cab39708dc"
+    },
+    {
+      "path": "coverage-findings.md",
+      "bytes": 8192,
+      "sha256": "1ef92722cbc493c98746d57eadb72eeb12eadc77a1397c4fc9c7a80e27d01565"
+    },
+    {
+      "path": "pipeline-survey.json",
+      "bytes": 8436,
+      "sha256": "176dd82d0f51c4cde093663dacf2a93666f70a5a30ee1baa2846c773fa435c05"
+    },
+    {
+      "path": "research-survey.json",
+      "bytes": 22308,
+      "sha256": "ccf5b752697277d04419cd84ef6e853eb025f276fe6911d559288ae04bc78bd1"
+    },
+    {
+      "path": "plan-review-amendments.json",
+      "bytes": 1152,
+      "sha256": "77a3ccf5a57e82fb31b1f87e1a54a940e633546d3f43540c4332389b66f5c25f"
+    },
+    {
+      "path": "pipeline-review-final.json",
+      "bytes": 3354,
+      "sha256": "b1daa3d77b90c5f0479bd8d82e1ee1c4c943335a9521d3e9d8c88f31bf1939fb"
+    },
+    {
+      "path": "research-review-final.json",
+      "bytes": 2893,
+      "sha256": "44428bd200dc3f33228065aa70a8776e631bd6f58cd7d928d0cc90efb7342df5"
+    },
+    {
+      "path": "dataset-plan-review.json",
+      "bytes": 4483,
+      "sha256": "1222b7e82a62e65b23376308e53bfd786b0213cbeaac5589ec1560872bbda0fc"
+    }
+  ],
+  "dataset_commit": "911b9f2530b18f246b90a177a98471bffad609e9",
+  "complete_dataset_evidence_url": "https://github.com/endomorphosis/ipfs_datasets_py/tree/911b9f2530b18f246b90a177a98471bffad609e9/docs/autoencoders/evidence/uscode-all-span-plan-20261007",
+  "no_model_execution": true,
+  "no_training": true,
+  "no_database_changes": true,
+  "no_goals_enqueued": true
+}
