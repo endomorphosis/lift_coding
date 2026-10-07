@@ -1,0 +1,111 @@
+{
+  "schema": "dual-bank-source-github-byte-readback/v1",
+  "completed": true,
+  "revision": "aed87b0d980422c2ca9efaa26cf92df30c51d768",
+  "source_files": [
+    {
+      "relative_path": "scripts/ops/autoencoder/dual_bank_wording_replay/dual_bank_training_adapter.py",
+      "bytes": 26455,
+      "sha256": "433f80f4cca80678d5b8d2976687cf20650a5339a3b670b80139658ef300c4af",
+      "url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/aed87b0d980422c2ca9efaa26cf92df30c51d768/scripts/ops/autoencoder/dual_bank_wording_replay/dual_bank_training_adapter.py"
+    },
+    {
+      "relative_path": "scripts/ops/autoencoder/dual_bank_wording_replay/dual_bank_retention.py",
+      "bytes": 26660,
+      "sha256": "15accfcf8bbc4e578e32ca7842ac338be2b563458c4c90a85fbe18429da000f1",
+      "url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/aed87b0d980422c2ca9efaa26cf92df30c51d768/scripts/ops/autoencoder/dual_bank_wording_replay/dual_bank_retention.py"
+    },
+    {
+      "relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_modality_auxiliary.py",
+      "bytes": 9634,
+      "sha256": "48b7a3b2a0e5b69ae292f2c02dc0e87d92de4ffb4443bfba5ae52695b9a4320a",
+      "url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/aed87b0d980422c2ca9efaa26cf92df30c51d768/ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_modality_auxiliary.py"
+    },
+    {
+      "relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/paraphrase_modality_auxiliary_training.py",
+      "bytes": 13994,
+      "sha256": "789f47047badfa30553940547c2db28f08afa1052f1bcc5ace68dbccedc2ccac",
+      "url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/aed87b0d980422c2ca9efaa26cf92df30c51d768/ipfs_datasets_py/logic/formalization/autoencoder/paraphrase_modality_auxiliary_training.py"
+    },
+    {
+      "relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/long_span_source_value_training.py",
+      "bytes": 105415,
+      "sha256": "c1663820492a6879b14ab89dfd9b052105cf16378bb015fea08c3220d83456e0",
+      "url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/aed87b0d980422c2ca9efaa26cf92df30c51d768/ipfs_datasets_py/logic/formalization/autoencoder/long_span_source_value_training.py"
+    },
+    {
+      "relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/contextual_training_mixture.py",
+      "bytes": 17786,
+      "sha256": "2d7de997e1baff4a1534ddd756f99864ef2270e3c641c0664f6a240f826bfda5",
+      "url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/aed87b0d980422c2ca9efaa26cf92df30c51d768/ipfs_datasets_py/logic/formalization/autoencoder/contextual_training_mixture.py"
+    },
+    {
+      "relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_training_sources.py",
+      "bytes": 14474,
+      "sha256": "15458de60d79304d4fb676913ee4b3d4578bdc21b85a5437b998c5503f3fb288",
+      "url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/aed87b0d980422c2ca9efaa26cf92df30c51d768/ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_training_sources.py"
+    },
+    {
+      "relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/training_paraphrase_source_inputs.py",
+      "bytes": 9145,
+      "sha256": "5c0d4571b87d4b3b82be3bae11ff08599f2a5d09c4465a8315641a05d1657649",
+      "url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/aed87b0d980422c2ca9efaa26cf92df30c51d768/ipfs_datasets_py/logic/formalization/autoencoder/training_paraphrase_source_inputs.py"
+    },
+    {
+      "relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/authored_training_paraphrases.py",
+      "bytes": 9718,
+      "sha256": "9644f86159fecd0d9a1bb8599e06dacfcbba2581db98a990b0e224ebb8de8513",
+      "url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/aed87b0d980422c2ca9efaa26cf92df30c51d768/ipfs_datasets_py/logic/formalization/autoencoder/authored_training_paraphrases.py"
+    },
+    {
+      "relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/clause_source_context.py",
+      "bytes": 14249,
+      "sha256": "583422dbb63cdba96182090f5f76ef74698a69ab84fd42dc9e53bc4e09cbf5f6",
+      "url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/aed87b0d980422c2ca9efaa26cf92df30c51d768/ipfs_datasets_py/logic/formalization/autoencoder/clause_source_context.py"
+    },
+    {
+      "relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/decoder_distillation_experiment.py",
+      "bytes": 37989,
+      "sha256": "76252ad397492762d4fc41915afd1051a93a11b74994655326fe56fa722e3b61",
+      "url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/aed87b0d980422c2ca9efaa26cf92df30c51d768/ipfs_datasets_py/logic/formalization/autoencoder/decoder_distillation_experiment.py"
+    },
+    {
+      "relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/ordered_clause_recurrent_decoder_experiment.py",
+      "bytes": 26392,
+      "sha256": "56392a6f37f528350f18b68b56a016aad170530e93e95e660b6898f1c4cef3da",
+      "url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/aed87b0d980422c2ca9efaa26cf92df30c51d768/ipfs_datasets_py/logic/formalization/autoencoder/ordered_clause_recurrent_decoder_experiment.py"
+    },
+    {
+      "relative_path": "ipfs_datasets_py/logic/formalization/autoencoder/source_value_decoder_experiment.py",
+      "bytes": 14958,
+      "sha256": "df72b5331c1dc5b98d11974748bb05ba31504db7e7f69854327d080118eeb61e",
+      "url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/aed87b0d980422c2ca9efaa26cf92df30c51d768/ipfs_datasets_py/logic/formalization/autoencoder/source_value_decoder_experiment.py"
+    },
+    {
+      "relative_path": "scripts/ops/autoencoder/dual_bank_wording_replay/test_dual_bank_training_adapter.py",
+      "bytes": 45805,
+      "sha256": "cef2a6dd1140d1d422dd33f2f3bdbfbaca7f907568a789f190cd5a9f684afbac",
+      "url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/aed87b0d980422c2ca9efaa26cf92df30c51d768/scripts/ops/autoencoder/dual_bank_wording_replay/test_dual_bank_training_adapter.py"
+    },
+    {
+      "relative_path": "docs/autoencoders/README.md",
+      "bytes": 13178,
+      "sha256": "d21cc28157bf736ab6183de4a67adb0f52bbc12d71a753ef657a1e07d96e7830",
+      "url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/aed87b0d980422c2ca9efaa26cf92df30c51d768/docs/autoencoders/README.md"
+    },
+    {
+      "relative_path": "docs/autoencoders/balanced_wording_continuation_20261007.md",
+      "bytes": 12147,
+      "sha256": "7de96a604788efef0f5582ad3bb8c269f7a8adcb5ae71bbd36062372f6591fa7",
+      "url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/aed87b0d980422c2ca9efaa26cf92df30c51d768/docs/autoencoders/balanced_wording_continuation_20261007.md"
+    },
+    {
+      "relative_path": "docs/autoencoders/dual_bank_wording_training_adapter.md",
+      "bytes": 6643,
+      "sha256": "824d7d5a716a6fdda658d4a893c0991405293522d509426a8a4ffa17bc05152f",
+      "url": "https://raw.githubusercontent.com/endomorphosis/ipfs_datasets_py/aed87b0d980422c2ca9efaa26cf92df30c51d768/docs/autoencoders/dual_bank_wording_training_adapter.md"
+    }
+  ],
+  "publication_network_reads_performed": true,
+  "model_or_encoder_or_training_executed": false
+}
