@@ -1,0 +1,68 @@
+{
+  "schema": "support-gate-late-incoming-integration/v1",
+  "passed": true,
+  "isolated_fast_forward": true,
+  "canonical_indexes_not_modified": true,
+  "own_progress_suffix_preserved_sha256": "b9a19e9991dabfa1eac405bfe91756e60649d4557842fc97069d668749002f20",
+  "upstream_progress_prefix": {
+    "prefix_bytes": 21628,
+    "prefix_sha256": "a45d852cebbc30ce003b44544f8cd92dcec44f0d0bb9131305f207ab60988ffe",
+    "initial_prefix_bytes": 19809,
+    "initial_prefix_sha256": "c18e534abd63c6bbad84507ae9621b879d5682ae8338f7abbf0364720a5934d7",
+    "new_upstream_progress_preserved": true,
+    "prior_integrated_prefix": {
+      "prefix_bytes": 20856,
+      "prefix_sha256": "1cc7bf063848d66c6771dc7eaf1bd47edf339fc9c94bc7b48cd4bcf205bc459e",
+      "initial_prefix_bytes": 19809,
+      "initial_prefix_sha256": "c18e534abd63c6bbad84507ae9621b879d5682ae8338f7abbf0364720a5934d7",
+      "new_upstream_progress_preserved": true
+    }
+  },
+  "numerical_producers_and_new_test_exact": true,
+  "repositories": [
+    {
+      "label": "datasets",
+      "before": "75f57f9eeff052a5718fd1f2c6a4b73de3784af8",
+      "after": "911b9f2530b18f246b90a177a98471bffad609e9",
+      "incoming_paths": [
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/coverage-findings.md",
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/dataset-plan-review.json",
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/evidence-index.json",
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/existing-source-parquet-survey.json",
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/manifest-closure-survey.json.gz",
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/metadata-survey.json",
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/original-schema-samples.json",
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/pipeline-review-final.json",
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/pipeline-review.json",
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/pipeline-survey.json",
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/plan-review-amendments.json",
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/progress-record-scope.json",
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/research-review-final.json",
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/research-review.json",
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/research-survey.json",
+        "docs/autoencoders/progress_integration.md",
+        "docs/autoencoders/uscode_all_span_processing_plan_20261007.md"
+      ]
+    },
+    {
+      "label": "workspace",
+      "before": "da212346307e2fc483d7dce6ebfa820d8da5758a",
+      "after": "4bad33cb1d1f63d3f3011c96f1e19f186163dd24",
+      "incoming_paths": [
+        "artifacts/uscode-all-span-processing-plan-20261007/PLAN.md",
+        "artifacts/uscode-all-span-processing-plan-20261007/coverage-findings.md",
+        "artifacts/uscode-all-span-processing-plan-20261007/dataset-plan-review.json",
+        "artifacts/uscode-all-span-processing-plan-20261007/evidence-index.json",
+        "artifacts/uscode-all-span-processing-plan-20261007/pipeline-review-final.json",
+        "artifacts/uscode-all-span-processing-plan-20261007/pipeline-survey.json",
+        "artifacts/uscode-all-span-processing-plan-20261007/plan-review-amendments.json",
+        "artifacts/uscode-all-span-processing-plan-20261007/research-review-final.json",
+        "artifacts/uscode-all-span-processing-plan-20261007/research-survey.json",
+        "docs/agent-supervisor-token-metadata-20261007.md",
+        "external/ipfs_accelerate",
+        "external/ipfs_datasets",
+        "implementation_plan/docs/68-uscode-all-span-processing-plan-2026-10-07.md"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,323 @@
+{
+  "RSS_measurement": {
+    "absolute_peak_measured": false,
+    "all_saved_samples_within_bound": true,
+    "continuous_coverage_claimed": false,
+    "kernel_hard_memory_cap": false,
+    "max_observation_gap_seconds_by_phase": {
+      "gated": 1.0686501050367951,
+      "model": 1.073781055980362,
+      "post_model": 0.31137846800265834
+    },
+    "maximum_sampled_live_processes": 1,
+    "memory_reservation_bytes": 1610612736,
+    "requested_poll_seconds": 1.0,
+    "sample_counts_by_phase": {
+      "gated": 15,
+      "model": 35,
+      "post_model": 2
+    },
+    "sampled_model_phase_peak_RSS_MiB": 779.95703125,
+    "sampled_model_phase_peak_RSS_bytes": 817844224,
+    "sampled_peak_only": true,
+    "sampler_failure": null,
+    "timing_scope": "model gate permission through leader reap; includes model import and guardian polling, not isolated fit time"
+  },
+  "actions": {
+    "Hub_or_network_calls": 0,
+    "census_calls": 0,
+    "foreign_claim_mutations": 0,
+    "git_mutations": 0,
+    "lease_acquisitions_or_releases": 0,
+    "model_imports_or_calls": 0,
+    "process_or_group_queries": 0,
+    "resource_client_imports_or_calls": 0,
+    "test_calls": 0
+  },
+  "attempt_artifacts": {
+    "child-exit.json": {
+      "bytes": 105,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/child-exit.json",
+      "sha256": "549e04415f110157344ce82a1eccfaa258e3df14f0fb2085892b5cd64effe8a7"
+    },
+    "child-identity.json": {
+      "bytes": 44,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/child-identity.json",
+      "sha256": "3a7c6feefd0799ffebde2b9aeccdd2342ca3885db8af5f9d28732fdb2bc0d53f"
+    },
+    "child.log": {
+      "bytes": 77187,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/child.log",
+      "sha256": "0b716c2b1b33ddd4ba00a9d05eb2c7ae874da975e2a6037e98ae2f78c68bbc26"
+    },
+    "command.json": {
+      "bytes": 1027,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/command.json",
+      "sha256": "772054ff9708b07cc005454a3e77d3d2a6c9bffc39df9ee37bf473af6543332a"
+    },
+    "group-rss-observations.jsonl": {
+      "bytes": 25943,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/group-rss-observations.jsonl",
+      "sha256": "18414c76c9164d2761af76cd34237543a0f4f0aea2787fe851725f8310cf5379"
+    },
+    "group-rss-summary.json": {
+      "bytes": 1729,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/group-rss-summary.json",
+      "sha256": "1ccd634cd7faf8955007c392fa043f709d14a754c99334b9443d1794b576b784"
+    },
+    "guardian-exit.json": {
+      "bytes": 519,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/guardian-exit.json",
+      "sha256": "d6c8a716bbcbfae843c01ec3c80fb50465e8d5e3a6515446ea0243af666cbeb1"
+    },
+    "lease-binding.json": {
+      "bytes": 693,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/lease-binding.json",
+      "sha256": "cb37d780c55ab5fb35cb39b4e0bb8dc6124096bfb73588affd37ece97ed6f537"
+    },
+    "lease-observations.jsonl": {
+      "bytes": 53815,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/lease-observations.jsonl",
+      "sha256": "4a9d95d54b218dd1c618357e308409bf9fb71765703a77e240da42f35b76253c"
+    },
+    "owned-group-final.json": {
+      "bytes": 190,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/owned-group-final.json",
+      "sha256": "de5c78b21a4e5b98a35eda9867084eff60e8debb79f203b0a3d450e15741e374"
+    },
+    "pre-admission.json": {
+      "bytes": 7955,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/pre-admission.json",
+      "sha256": "ae5db5e00c7a7440cd4a89387e792beeccb6d4acf5990abfb9e8d794a2e96683"
+    },
+    "resource-observations.json": {
+      "bytes": 1751,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/resource-observations.json",
+      "sha256": "c99ba4eacccd2d09ddc0f432b8e04adf254f22b4fe6d2c413b8626aa7509b3a3"
+    },
+    "resources-final.json": {
+      "bytes": 6234,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/resources-final.json",
+      "sha256": "cbdf3e2726b034f2f6dec5e45ee044c3859ce640cd68e87d919f048ede10b36d"
+    },
+    "resources-start.json": {
+      "bytes": 2528,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/resources-start.json",
+      "sha256": "de5352cbc2c73cc9850f7658049fa500c7cc46b2167f7bcaa6debcf9d163b694"
+    },
+    "scheduler-adoption.json": {
+      "bytes": 4646,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/scheduler-adoption.json",
+      "sha256": "4ddc2eb06db5533fb0f0b0d236256532b4b3de6263db13f16fe476938dfb96e9"
+    }
+  },
+  "compatibility": {
+    "bytes": 6800,
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/resource-compatibility.json",
+    "sha256": "214e7d5b0e283eb2d8fbcea8e30dc6a4a22a4253cdde53e49448e03d9a4c5ffc"
+  },
+  "created_at_utc": "2026-10-07T14:26:18.636830+00:00",
+  "disk_accounting": {
+    "current_direct_ledger_read": {
+      "bytes": 6100888,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/federal-corpus-audits/owned-daemon-resource-control/disk-reservations.json",
+      "scope": "Mutable file snapshot; only two known records inspected, no client or census.",
+      "sha256": "4599e3c53bf8800fd9af343dbb199f90f93c904dcf082a136a2e8eecf9cafd5e"
+    },
+    "final_accounting_excludes_later_terminal_receipts": true,
+    "final_attempt_bytes_before_terminal_receipts": 71071704,
+    "final_locked_charged_bytes": 143059811093,
+    "final_locked_observed_named_root_bytes": 95294811093,
+    "final_locked_outstanding_full_reservations_bytes": 47765000000,
+    "finalization_profile": {
+      "global_accounting_seconds": 14.370084350986872,
+      "global_inventory_count": 1,
+      "ledger_lock_wait_seconds": 0.00025054701836779714,
+      "process_check_seconds": 0.016842367011122406,
+      "schema_version": "daemon-resource-finalization-profile/v1",
+      "scope": "one_fresh_locked_census_with_full_claim_checked_before_release",
+      "strict_attempt_inventory_count": 1,
+      "strict_attempt_inventory_seconds": 0.0004251239588484168
+    },
+    "named_root_limit_bytes": 145000000000,
+    "own_record_matches_retained_final_receipt": true,
+    "released_full_claim_delta_bytes": 200000000,
+    "reservation_bytes": 200000000
+  },
+  "findings": [],
+  "guardian": {
+    "bytes": 38281,
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/run_scope_guardian.py",
+    "sha256": "10c7c7350a7dbb564ab0fb1299c905020f874c212765afb86d3c1752105184ed"
+  },
+  "guardian_tests": {
+    "bytes": 18962,
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/test_scope_guardian.py",
+    "sha256": "fb1eacd8ade3a8c283e939729fd1c412c8bba7ee35a490b48ebe2a3e194c1b4c"
+  },
+  "historical_closure": {
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/adopt_shared_scheduler.py": {
+      "bytes": 11206,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/adopt_shared_scheduler.py",
+      "sha256": "4956baa1e41abe53fc83a2d4ae7709b3be13ebc1c775b44571a33903b8f70b1f"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/lazy_scheduler_adoption.py": {
+      "bytes": 1345,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/lazy_scheduler_adoption.py",
+      "sha256": "42f31d8da1eb5b44274ca0b8c8180cd78bc083dfd0e93438e61f38223929d84a"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/owned_lease_watchdog.py": {
+      "bytes": 20712,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/owned_lease_watchdog.py",
+      "sha256": "f1b9f71e375cf5ed4004e023bbef2d6f7f61e1ecb588078a1094d7b1982609b3"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/native4096-four-width-20261004/resource-cap/autoencoder_daemon_resources.py": {
+      "bytes": 36724,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/native4096-four-width-20261004/resource-cap/autoencoder_daemon_resources.py",
+      "sha256": "b00d2752ba852fe73760bba4fbd51b0e845742c3527642606a2a77ed9f8f5e2c"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/__init__.py": {
+      "bytes": 56829,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/__init__.py",
+      "sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/optimizers/__init__.py": {
+      "bytes": 957,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/optimizers/__init__.py",
+      "sha256": "a12bab3724da07be67b447719ace42fc1f480cb5635581f320a99a372f02f450"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/optimizers/logic_theorem_optimizer/__init__.py": {
+      "bytes": 69336,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/optimizers/logic_theorem_optimizer/__init__.py",
+      "sha256": "9d693fa576f00dc36899faad75ef3044c437e2bfec5c62306f7031236725bb0e"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_resource_safety.py": {
+      "bytes": 4534,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_resource_safety.py",
+      "sha256": "23569b40b44d9130c30c62be564d58908a509fb1f40c6377e89f2fc1e3c799c5"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py": {
+      "bytes": 82754,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+      "sha256": "a418e84f70ed8509ba0518feea69e7a8c27865139f83b6c81349eefdfd5893a4"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/optimizers/logic_theorem_optimizer/runtime_telemetry.py": {
+      "bytes": 53075,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/optimizers/logic_theorem_optimizer/runtime_telemetry.py",
+      "sha256": "542f705867b93fcb138a117e1f5c97a144ad6635dc92c37bc5034eee5065ef63"
+    }
+  },
+  "lease_monitoring": {
+    "all_configuration_identical": true,
+    "all_healthy": true,
+    "all_observations_capability_free": true,
+    "continuous_coverage_claimed": false,
+    "maximum_expected_present_observation_gap_seconds": 1.0149036970105954,
+    "owned_observations": 53,
+    "pre_to_post_finalize_gap_seconds": 14.501686848001555,
+    "terminal_gap_scope": "Watchdog stopped only after child/group reaped; locked final census occurred between pre_finalize and post_finalize snapshots.",
+    "total_log_records": 54
+  },
+  "limits": [
+    "Independent review used receipts and source/hash checks, not a new PID/process census; reap/group-empty and lease absence describe the retained successful terminal observations.",
+    "RSS is a non-atomic sampled owned-group sum and can miss brief peaks; model phase includes import/guardian polling, and numerical runner time is not isolated optimizer-fit time.",
+    "There is no continuous lease/resource coverage or kernel quota claim; the terminal14.5-second lease-observation gap begins after child/group reap.",
+    "Final locked accounting71,071,704 bytes excludes subsequently written resources-final.json, guardian-exit.json and terminal log bytes; no current whole-tree census was repeated.",
+    "Disk accounting covers the four declared named roots, not a machine-wide filesystem quota.",
+    "Artifact durability follows guarded source fsync ordering and retained assertions, not syscall attestation.",
+    "Resource success grants no legal/model promotion authority."
+  ],
+  "passed": true,
+  "physical_attempt": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01",
+  "pre_admission_pins": {
+    "plan": {
+      "bytes": 9694,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/experiment-plan.json",
+      "sha256": "08f05d12c7e9769f51b9bc13f5f49dc8ffe9660507639cf428431f04a74e468f"
+    },
+    "review": {
+      "bytes": 37703,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/protocol-review.json",
+      "sha256": "14c617876b3d6aee9b92572b9f19be4d4ccfae9e921b045134c8d2b30e2aa8bd"
+    },
+    "runner": {
+      "bytes": 22402,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/run_support_gate_experiment.py",
+      "sha256": "991d916394e620b59fafae81c08610d9ff7b8a2f4e94576b949d31dd98ae99b7"
+    }
+  },
+  "preservation_boundary": "Guardian finalization targets its own reservation/lease and its captured PID+birth process group. Adoption before/after claim hashes agree and finalization subtracts exactly its own200 MB. The specifically protected older failed200 MB record remains retained. Concurrent owners may change other shared records; no byte-for-byte preservation of all foreign records across the whole run is asserted.",
+  "prior_failed_claim": {
+    "canonical_record_sha256": "8ca0235630770a4f1914fe327386854aceb6019c3c47063aaf01e57c3306029d",
+    "reconciled_or_released_by_reviewer": false,
+    "released_at": null,
+    "reservation_id": "dc5a24634a8f4ab2bb03946fb64e6921",
+    "status": "retained",
+    "storage_bytes": 200000000
+  },
+  "schema": "support-gate-resource-results-review/v1",
+  "scope": "Retained immediate attempt receipts, ten authenticated historical resource producers, and direct read-only lookup of own plus protected prior failed disk record; no resource clients or census.",
+  "shared_configuration": {
+    "adoption_foreign_claim_hashes_equal": true,
+    "all10_producers_unchanged": true,
+    "config": {
+      "lane_reservations": {
+        "validation": {
+          "cpu_slots": 1,
+          "memory_mb": 0
+        }
+      },
+      "max_gpu_memory_percent": null,
+      "max_memory_percent": null,
+      "max_swap_percent": null,
+      "max_waiting_requests": 256,
+      "proof_backoff_seconds": 2.0,
+      "proof_cpu_stall_percent": 50.0,
+      "proof_io_stall_percent": 10.0,
+      "proof_memory_headroom_mb": 2458,
+      "proof_memory_stall_percent": 2.0,
+      "proof_safety_enabled": true,
+      "require_known_gpu_for_gpu_work": true,
+      "reserved_gpu_memory_mb": 0,
+      "reserved_memory_mb": 0,
+      "total_child_process_slots": 4,
+      "total_cpu_slots": 4,
+      "total_gpu_memory_mb": null,
+      "total_memory_mb": 9830,
+      "total_unified_memory_mb": null
+    },
+    "disk_limit_bytes": 145000000000,
+    "sha256": "76d10cc42015c9e4cbdad0fabd6a64f706320e14a8fb507f16262d42dd1d5856",
+    "shared_capacity_or_proof_guards_changed": false
+  },
+  "successful_attempt": {
+    "artifacts_durable_before_release_asserted": true,
+    "child_exit_code": 0,
+    "child_identity": {
+      "birth": "40018744",
+      "pid": 3417375
+    },
+    "guardian_exit_code": 0,
+    "guardian_wall_seconds": 79.2317512719892,
+    "launch_through_reap_wall_seconds": 50.025870506011415,
+    "leader_reaped": true,
+    "live_group_processes_at_cleanup": 0,
+    "model_gate_through_reap_wall_seconds": 35.03143093601102,
+    "numerical_runner_wall_seconds": 25.824794728017878,
+    "own_disk_record_released": true,
+    "own_lease_id": "b0679ec2fd7d4b108e9fb26cd6a4b24f",
+    "own_lease_released_receipt": true,
+    "own_reservation_id": "ad9e9f3bb68d49fe9ee5bfafad46bf67",
+    "recorded_post_finalize_own_lease_absent": true,
+    "resource_limits": {
+      "admission_timeout_seconds": 120,
+      "child_deadline_seconds": 300,
+      "child_process_slots": 1,
+      "cpu_slots": 2,
+      "ledger_lock_timeout_seconds": 60,
+      "memory_mb": 1536,
+      "storage_bytes": 200000000
+    },
+    "signals": []
+  }
+}

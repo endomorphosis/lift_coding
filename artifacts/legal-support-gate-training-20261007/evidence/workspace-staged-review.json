@@ -1,0 +1,304 @@
+{
+  "schema": "support-gate-workspace-staged-review/v1",
+  "observed_at_utc": "2026-10-07T15:06:07.014Z",
+  "passed": true,
+  "findings": [],
+  "scope": "Independent bounded review of fixed root stage: 115 regular files (114 archive files and report68) plus the datasets gitlink, relative to actual root base 4bad33cb.",
+  "actions": {
+    "model_imports": 0,
+    "model_calls": 0,
+    "optimizer_steps": 0,
+    "tests_executed": 0,
+    "resource_clients_or_claims": 0,
+    "Git_mutations": 0,
+    "Hub_or_network_actions": 0,
+    "files_written": [
+      "workspace-staged-review.json"
+    ]
+  },
+  "base": "4bad33cb1d1f63d3f3011c96f1e19f186163dd24",
+  "datasets_pin": "c7eccb704c603364b1bf5a55a0eec3e8e128a09e",
+  "staged_regular_files": 115,
+  "archive_regular_files": 114,
+  "archive_bytes": 19458480,
+  "staged_paths_total": 116,
+  "owned_whitelist_exact": true,
+  "all_bound_index_mode_blob_working_bytes_exact": true,
+  "all_other_index_entries_equal_HEAD": true,
+  "no_unstaged_tracked_delta": true,
+  "index_sha256": "c62cef168742149f2c1687a2836c70a3137bfc54f68b6e1a5086f91dd8d8838b",
+  "owned_index_identity_digest": "c14da63524b54aa6a0acacfe74c5188957e62780677cdbe529c9ba7633bd6be0",
+  "eight_other_gitlinks": {
+    "JevOps": "9af1ebb6a4245ce2b4e673ac277e4988da4d5caa",
+    "Mcp-Plus-Plus": "628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0",
+    "external/ipfs_accelerate": "1f818293ff7561f1c6de49e89ac87806f7812d19",
+    "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0",
+    "external/meta-wearables-dat-android": "4e56e1864a5e78194bababc3a68775c4196cbed0",
+    "external/meta-wearables-dat-ios": "2b5695d16a710f3d2d7341f88570b86d01723d50",
+    "hallucinate_app": "ffcf5ff3b3389c95ba53e9f1be45f89fa96c5ef6",
+    "swissknife": "4772c7ff648dd5f438af059e21a1a5305d32dbe3"
+  },
+  "released_local_count": 92,
+  "released_Hub_only_count": 17,
+  "local_manifest_identity_count": 113,
+  "all_109_immutable_release_mappings_exact": true,
+  "Hub_only_roles": {
+    "numerical_checkpoints": 8,
+    "complete_TRAIN_panels": 3,
+    "candidate_selection_panels": 6
+  },
+  "numerical_weights_in_archive": false,
+  "published_README_and_source_snapshot_bytes_exact": true,
+  "final_source_docs_and_progress_equal_merged_c7": true,
+  "source_merge_first_parent": "911b9f2530b18f246b90a177a98471bffad609e9",
+  "source_four_identities": {
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_gate.py": {
+      "bytes": 24874,
+      "sha256": "79a9d314ddf597b16c6a06754d7786d568bbf34c87dc71a947ac0b8af12f525b"
+    },
+    "tests/unit/logic/test_legal_scope_support_gate.py": {
+      "bytes": 20171,
+      "sha256": "13917ca96cf5b3795b2e7c4efbd0aadb1e2c723cfe5c96825586e31c141fca90"
+    },
+    "docs/implementation/legal_scope_support_gate_pilot_20261007.md": {
+      "bytes": 10465,
+      "sha256": "30e4e6cf34e26960fca068283feecb4f91e6097803455715e33ac28ffe803a2d"
+    },
+    "docs/autoencoders/progress_integration.md": {
+      "bytes": 23102,
+      "sha256": "0b51f43ac4177c67f40240ec54248a6cd876b7cbcdbe9492ca2d92f1493cb289"
+    }
+  },
+  "source_progress_incoming_prefix_bytes": 21628,
+  "source_progress_prefix_sha256": "a45d852cebbc30ce003b44544f8cd92dcec44f0d0bb9131305f207ab60988ffe",
+  "five_old_producers_unchanged": true,
+  "incoming_entries_preserved": [
+    {
+      "path": "artifacts/uscode-all-span-processing-plan-20261007/PLAN.md",
+      "mode": "100644",
+      "Git_blob_or_gitlink": "4e26cddf129033d76826728deac7e8b569203c47",
+      "lineage": "all-US-Code plan incoming"
+    },
+    {
+      "path": "artifacts/uscode-all-span-processing-plan-20261007/coverage-findings.md",
+      "mode": "100644",
+      "Git_blob_or_gitlink": "2ca04b6b8a12b29172cdb3557790fb48ba07fe93",
+      "lineage": "all-US-Code plan incoming"
+    },
+    {
+      "path": "artifacts/uscode-all-span-processing-plan-20261007/dataset-plan-review.json",
+      "mode": "100644",
+      "Git_blob_or_gitlink": "b00afc52816e7088d19be0e1e36fc98bbd1a48a3",
+      "lineage": "all-US-Code plan incoming"
+    },
+    {
+      "path": "artifacts/uscode-all-span-processing-plan-20261007/evidence-index.json",
+      "mode": "100644",
+      "Git_blob_or_gitlink": "325698b0b631e2c9a90a4461c1625e8731cc9455",
+      "lineage": "all-US-Code plan incoming"
+    },
+    {
+      "path": "artifacts/uscode-all-span-processing-plan-20261007/pipeline-review-final.json",
+      "mode": "100644",
+      "Git_blob_or_gitlink": "7b0493676de03257576432dad1c1f80a58670bf5",
+      "lineage": "all-US-Code plan incoming"
+    },
+    {
+      "path": "artifacts/uscode-all-span-processing-plan-20261007/pipeline-survey.json",
+      "mode": "100644",
+      "Git_blob_or_gitlink": "c6c2ace490d36f6aab52e16d3504c5c4e3b08c6c",
+      "lineage": "all-US-Code plan incoming"
+    },
+    {
+      "path": "artifacts/uscode-all-span-processing-plan-20261007/plan-review-amendments.json",
+      "mode": "100644",
+      "Git_blob_or_gitlink": "14cb84179490054b0618fcfe0cdd1c90a56d5f49",
+      "lineage": "all-US-Code plan incoming"
+    },
+    {
+      "path": "artifacts/uscode-all-span-processing-plan-20261007/research-review-final.json",
+      "mode": "100644",
+      "Git_blob_or_gitlink": "a6a716a528260f8d51be4d2c24aecab075b95064",
+      "lineage": "all-US-Code plan incoming"
+    },
+    {
+      "path": "artifacts/uscode-all-span-processing-plan-20261007/research-survey.json",
+      "mode": "100644",
+      "Git_blob_or_gitlink": "5e62a9cfe4d08343b8527c5324514ef5b502c691",
+      "lineage": "all-US-Code plan incoming"
+    },
+    {
+      "path": "docs/agent-supervisor-token-metadata-20261007.md",
+      "mode": "100644",
+      "Git_blob_or_gitlink": "a8b5ff6cd8d46e91265da90f77017d3926fac689",
+      "lineage": "all-US-Code plan incoming"
+    },
+    {
+      "path": "external/ipfs_accelerate",
+      "mode": "160000",
+      "Git_blob_or_gitlink": "1f818293ff7561f1c6de49e89ac87806f7812d19",
+      "lineage": "all-US-Code plan incoming"
+    },
+    {
+      "path": "implementation_plan/docs/68-uscode-all-span-processing-plan-2026-10-07.md",
+      "mode": "100644",
+      "Git_blob_or_gitlink": "b9e1a5fc3b9acb2c6c0f9191e3d93f0472b9be90",
+      "lineage": "all-US-Code plan incoming"
+    },
+    {
+      "path": "artifacts/autoencoder-dual-bank-fit-20261007/README.md",
+      "bytes": 1545,
+      "sha256": "750762e3f4452290f855d2eca6d055cd6a1b8a010b3dc3b4be1a1d23c1b36411",
+      "lineage": "native384 incoming"
+    },
+    {
+      "path": "artifacts/autoencoder-dual-bank-fit-20261007/evaluation-source/build_retained_parent_reconciliation_manifest.py",
+      "bytes": 8172,
+      "sha256": "c84c14eaa92ee339bb9e528d63ecc2f51c6462e310f6a80c59b2c440aa208ab3",
+      "lineage": "native384 incoming"
+    },
+    {
+      "path": "artifacts/autoencoder-dual-bank-fit-20261007/evaluation-source/evaluate_dual_bank_wording_continuation.py",
+      "bytes": 55863,
+      "sha256": "e57ab90d546a77f0b636a6108b6e1ee0b84eb1486bb033dd6c6e71844e4ab1dc",
+      "lineage": "native384 incoming"
+    },
+    {
+      "path": "artifacts/autoencoder-dual-bank-fit-20261007/evaluation-source/reconcile_retained_dual_bank_outputs.py",
+      "bytes": 24637,
+      "sha256": "9ed9d0b10c817a0cb3ba4ed420676cbf10e466deb972c7c96ed1b69f52c5ca0b",
+      "lineage": "native384 incoming"
+    },
+    {
+      "path": "artifacts/autoencoder-dual-bank-fit-20261007/evaluation-source/test_dual_bank_wording_evaluation.py",
+      "bytes": 24581,
+      "sha256": "230726c7611d26b29da4d7696386c2b2d43f70764a2215b7801d33d8fa684852",
+      "lineage": "native384 incoming"
+    },
+    {
+      "path": "artifacts/autoencoder-dual-bank-fit-20261007/evaluation-source/test_retained_dual_bank_reconciliation.py",
+      "bytes": 15657,
+      "sha256": "ab67d2bef1a2ccecd2d116504bb8b7e1ef1f5e5d9b4beef2e35a562f1f05ee4d",
+      "lineage": "native384 incoming"
+    },
+    {
+      "path": "artifacts/autoencoder-dual-bank-fit-20261007/evidence/checkpoint-availability.json",
+      "bytes": 16223,
+      "sha256": "551ce13fe7a1d1956383a71abb145adab67afaab6d0b96aa316345d0aba20fce",
+      "lineage": "native384 incoming"
+    },
+    {
+      "path": "artifacts/autoencoder-dual-bank-fit-20261007/evidence/integration-validation.json",
+      "bytes": 534,
+      "sha256": "8283d3162002642b3ff67e3dcc62575db2532cfa1f6e7720042cc53b5d58026f",
+      "lineage": "native384 incoming"
+    },
+    {
+      "path": "artifacts/autoencoder-dual-bank-fit-20261007/evidence/model-manager-registration-result-independent-check.json",
+      "bytes": 10081,
+      "sha256": "32cdadd25bd575818121c8fb80c105f45e6d12714a7b637da0811c92ff9ad1c3",
+      "lineage": "native384 incoming"
+    },
+    {
+      "path": "artifacts/autoencoder-dual-bank-fit-20261007/evidence/parallel-support-action-survey.json",
+      "bytes": 3173,
+      "sha256": "57ce10bc07a63c23c9f7a9ab21bab1ae62d68edfb96c55436c3171fd1cd59d1a",
+      "lineage": "native384 incoming"
+    },
+    {
+      "path": "artifacts/autoencoder-dual-bank-fit-20261007/evidence/parent-reconciliation.json",
+      "bytes": 133072,
+      "sha256": "8148235439b2f53e2c7fdbf488166a782b9a471e14112166283f2bdbdd1edcb2",
+      "lineage": "native384 incoming"
+    },
+    {
+      "path": "artifacts/autoencoder-dual-bank-fit-20261007/evidence/parent-replay-independent-check.json",
+      "bytes": 39882,
+      "sha256": "c128b060251635db939a6fc23f6106a6b976e59f8590ea7f133ce084ab8457bc",
+      "lineage": "native384 incoming"
+    },
+    {
+      "path": "artifacts/autoencoder-dual-bank-fit-20261007/evidence/publication-result-independent-check.json",
+      "bytes": 14149,
+      "sha256": "4921ca9a9ef27b035a726ec12ea5b6fa6be5e443e853808755093ed1bfae3d35",
+      "lineage": "native384 incoming"
+    },
+    {
+      "path": "implementation_plan/docs/66-retained-wording-reconciliation-2026-10-07.md",
+      "bytes": 6141,
+      "sha256": "adce0e9f815afdbe9863ad05755437c144167bc75859eea3715fca73ac067ea7",
+      "lineage": "native384 incoming"
+    }
+  ],
+  "postpublication_evidence_count": 20,
+  "hosted_CI": {
+    "observed_checks": 20,
+    "billing_lock_failures": 5,
+    "queued": 15,
+    "pass_claimed": false
+  },
+  "report_negative_study_and_cold_vs_trained_vs_TRAIN_distinctions_honest": true,
+  "late_independent_Hub_review_available_unstaged": true,
+  "future_stage_additions_not_reviewed": [
+    "evidence/hub-publication-review.json",
+    "evidence/workspace-staged-review.json",
+    "refreshed retention-manifest and contribution binding"
+  ],
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/workspace-contribution-binding.json": {
+      "bytes": 24766,
+      "sha256": "47bbf041976ca17d6b159e8a1b96f5b57d38179a5ae2b5cca0f3310cfd7abe4a"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/workspace/artifacts/legal-support-gate-training-20261007/retention-manifest.json": {
+      "bytes": 72518,
+      "sha256": "5befdb997a8a13584107198cf3cfa39f1b8011786096011cdb86bc80dbbf82ca"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/source-contribution-binding.json": {
+      "bytes": 1599,
+      "sha256": "822585becc4c52bf6d140bed615e6e3e2c2c0af9056dc6fd47ff5806da9cdc80"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/source-merged-preservation.json": {
+      "bytes": 1500,
+      "sha256": "e4de3b82365c0e0658fed96009fd4a770317884eaedaa46dfe6dbda561d91778"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/source-staged-review.json": {
+      "bytes": 20729,
+      "sha256": "85c0a41f5c1653e0e4fff445d5eea76ffe73d277cff9f1aed73d9fd15ee45178"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/hub-publication-review.json": {
+      "bytes": 5637,
+      "sha256": "a7f6b22828d11ce10c0ebe4e38d8304577facfa793e5470b84ad80124c816cc2"
+    }
+  },
+  "science_review_reuse": {
+    "no_duplicate_numerical_execution_or_old_panel_rescoring": true,
+    "source_four_bytes_equal_independently_reviewed_merged_c7": true,
+    "raw_negative_study_unchanged": true,
+    "trained_120_240_selection_ineligible_and_not_final_evaluated": true,
+    "both_selected_actual_cold_zero": true,
+    "three_earlier_parent_dictionary_parity": 384,
+    "downloaded_selected_complete_replay": 1024,
+    "test_executions": 170,
+    "pure_selector_fixtures": 23,
+    "guardian_historical_pure_fixtures": 23,
+    "guardian_fixtures_not_rerun": true,
+    "legal_gold": false,
+    "latent_conditioning": false,
+    "default_promotion": false,
+    "formal_output": null,
+    "admission_masks": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "preservation_scope": "Exact staged whitelist proves every other root index entry still equals the 4bad33cb HEAD. Named incoming native384 and all-US-Code entries and all eight other gitlinks were checked independently. This does not assert all canonical working-file bytes are unchanged.",
+  "publication_scope": "Current immutable README/manifest/report distinguish exact published snapshots and historical pending-link receipts from final merged-source documents. The independent anonymous Hub publication receipt is available outside this fixed stage and is not yet copied into its archive.",
+  "limitations": [
+    "This verdict covers the recorded 116-path stage only. Planned addition of two audit receipts and refreshed metadata requires the promised narrow follow-up.",
+    "No hosted CI pass is inferred from the five billing-lock failures and fifteen queued checks.",
+    "No further model execution, replay execution, legal qualification or artifact promotion by this reviewer."
+  ]
+}

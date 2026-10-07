@@ -1,0 +1,557 @@
+{
+  "actions": {
+    "FETCH_HEAD_updates": 0,
+    "HEAD_or_index_or_worktree_updates": 0,
+    "Hub_writes": 0,
+    "fits": 0,
+    "model_imports_or_calls": 0,
+    "network_fetches": 2,
+    "new_owned_audit_refs": 2,
+    "preexisting_ref_updates": 0,
+    "review_artifact_writes": 1,
+    "source_edits": 0,
+    "tests": 0
+  },
+  "findings": [],
+  "late_progress_risk": "Only the shared progress document overlaps an owned tracked contribution. Incoming changes are documentation/evidence plus root gitlink updates; no numerical model implementation conflict is present.",
+  "observed_at_utc": "2026-10-07T14:52:26.334570+00:00",
+  "passed": true,
+  "preservation_obligations": [
+    "Integrate child 911b9f25 and root 4bad33cb in isolated branches without resetting canonical dirty checkouts. Preserve every unrelated new-main tree entry mode/type/oid relative to the eventual actual merge first parent.",
+    "Rebase the owned progress suffix onto the incoming source progress prefix; both sides are append-only from 75f57f9e, so this is routine append integration that retains both contributions.",
+    "Preserve all 17 incoming child paths and all 13 incoming root paths. Root external/ipfs_datasets intentionally advances to the eventual merged gate source; retain incoming 911b9f25 ancestry and complete plan evidence.",
+    "Preserve all eight non-datasets root gitlinks from fetched 4bad33cb, including the legitimate accelerate 1f818293 advancement; never restore the older isolation/canonical pin over it.",
+    "Preserve both distinct 68-prefixed root report filenames: 68-uscode-all-span-processing-plan-2026-10-07.md and 68-support-gate-refusal-training-2026-10-07.md. Exact path links avoid ambiguity; this review requires no rename or overwrite.",
+    "All five old numerical producers have identical tree entries across source 75f57f9e to 911b9f25; own new gate/source/test bytes and the 109-file release remain frozen. Updating source integration references or separately archived final guides must not change numerical source/weights or published snapshot bytes."
+  ],
+  "relevant_incoming": {
+    "datasets": {
+      "gist": "Adds a reviewed full-US-Code span processing plan and bounded survey/review evidence. It separates occurrence inventory/hydration, native-cache routes, learned source/IR/text tasks, per-family/dimension/schema/task checkpoint availability, reviewed meanings and actual proof receipts. The planning contribution explicitly starts no numerical processing, fitting, goal enqueue, upload or database mutation. Its numeric corpus/asset claims belong to its own source reviews, not this preservation audit.",
+      "plan_blob_sha256": "5d031145b0b58070b4f90b59165d50e225e007d7193c129aa754072642bc2748",
+      "plan_path": "docs/autoencoders/uscode_all_span_processing_plan_20261007.md"
+    },
+    "workspace": {
+      "plan_archive_prefix": "artifacts/uscode-all-span-processing-plan-20261007/",
+      "plan_report_path": "implementation_plan/docs/68-uscode-all-span-processing-plan-2026-10-07.md",
+      "plan_report_sha256": "787feaab5a1e0e519301fd951251d0ae738823ac1443bffbd4b32020b5743a73",
+      "supervisor_gist": "Adds the supervisor metadata-token plan/qualification report and advances checked accelerate source to 1f818293. The report preserves an earlier 32.44% total-token regression, reports bounded authored metadata-input controls, and explicitly claims no measured provider-token saving or live benchmark run. Preserve this source/report as separate work.",
+      "supervisor_report_path": "docs/agent-supervisor-token-metadata-20261007.md",
+      "supervisor_report_sha256": "2227d9bfd06302c79fb9b9397a61498ca128e244bc25a0fc3288e43befc2c21a"
+    }
+  },
+  "repositories": {
+    "datasets": {
+      "HEAD_index_worktree_status_FETCH_HEAD_unchanged": true,
+      "all_preexisting_refs_unchanged": true,
+      "base_is_ancestor": true,
+      "changed_path_count": 17,
+      "changed_paths": {
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/coverage-findings.md": {
+          "after": {
+            "mode": "100644",
+            "oid": "2ca04b6b8a12b29172cdb3557790fb48ba07fe93",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 8192,
+          "sha256": "1ef92722cbc493c98746d57eadb72eeb12eadc77a1397c4fc9c7a80e27d01565"
+        },
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/dataset-plan-review.json": {
+          "after": {
+            "mode": "100644",
+            "oid": "b00afc52816e7088d19be0e1e36fc98bbd1a48a3",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 4483,
+          "sha256": "1222b7e82a62e65b23376308e53bfd786b0213cbeaac5589ec1560872bbda0fc"
+        },
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/evidence-index.json": {
+          "after": {
+            "mode": "100644",
+            "oid": "625fbb119c5c89666383c6df0d01703f9b4b880b",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 5082,
+          "sha256": "1f7085bfc1fa7c329cb0d856b1cb6a114ae77568bcb572ad52335787d555d856"
+        },
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/existing-source-parquet-survey.json": {
+          "after": {
+            "mode": "100644",
+            "oid": "2caaf36557217643beaa193d5832e33c97b43d4c",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 1784,
+          "sha256": "bbdb17d20725e2cf6c9348589e988557dfa3a5eb21c51e176b54108c699f2e23"
+        },
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/manifest-closure-survey.json.gz": {
+          "after": {
+            "mode": "100644",
+            "oid": "9f0f36069b910d74f800410b7d2138e3ffb7a8d4",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 226435,
+          "sha256": "0006074d487e39c82fc39ffa9527f3f83c335194537912bc269b740290f53d70"
+        },
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/metadata-survey.json": {
+          "after": {
+            "mode": "100644",
+            "oid": "8e19320f707abb38dd16916ed94f0bb2e06d99a1",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 14576,
+          "sha256": "865414fb0e89619d52e41110b3404dc5563ae17bedfa172e604abb4f8e908110"
+        },
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/original-schema-samples.json": {
+          "after": {
+            "mode": "100644",
+            "oid": "2811ad6842a32e299f45cdde7752584aa4ed7b0c",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 49150,
+          "sha256": "895da05b6feaa09f57fd220829edf24ce54662c0889a36f4c8d8288c833b079a"
+        },
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/pipeline-review-final.json": {
+          "after": {
+            "mode": "100644",
+            "oid": "7b0493676de03257576432dad1c1f80a58670bf5",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 3354,
+          "sha256": "b1daa3d77b90c5f0479bd8d82e1ee1c4c943335a9521d3e9d8c88f31bf1939fb"
+        },
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/pipeline-review.json": {
+          "after": {
+            "mode": "100644",
+            "oid": "ac14f0f69192c5f50bf9aff6a2bd7c1c993c5508",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 6483,
+          "sha256": "1b348cc66ea13a1ffa6b220b059f39792e202d95a8ce21da9249fc369b5a650e"
+        },
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/pipeline-survey.json": {
+          "after": {
+            "mode": "100644",
+            "oid": "c6c2ace490d36f6aab52e16d3504c5c4e3b08c6c",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 8436,
+          "sha256": "176dd82d0f51c4cde093663dacf2a93666f70a5a30ee1baa2846c773fa435c05"
+        },
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/plan-review-amendments.json": {
+          "after": {
+            "mode": "100644",
+            "oid": "14cb84179490054b0618fcfe0cdd1c90a56d5f49",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 1152,
+          "sha256": "77a3ccf5a57e82fb31b1f87e1a54a940e633546d3f43540c4332389b66f5c25f"
+        },
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/progress-record-scope.json": {
+          "after": {
+            "mode": "100644",
+            "oid": "7892ebfab4e482f0d5a47f8b092043d6aa28fe5f",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 8354,
+          "sha256": "b085c9e51f7a1fa8bd5ddba5d70199a6b5a1adbfc778fd8a72498479398c561e"
+        },
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/research-review-final.json": {
+          "after": {
+            "mode": "100644",
+            "oid": "a6a716a528260f8d51be4d2c24aecab075b95064",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 2893,
+          "sha256": "44428bd200dc3f33228065aa70a8776e631bd6f58cd7d928d0cc90efb7342df5"
+        },
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/research-review.json": {
+          "after": {
+            "mode": "100644",
+            "oid": "36404d2a795c119e4be7c623fb7b33b6c482e959",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 6721,
+          "sha256": "ebbbea43c10479928559cba7bbb640cc27c4121a9861bcabb04b07ff0c0264ed"
+        },
+        "docs/autoencoders/evidence/uscode-all-span-plan-20261007/research-survey.json": {
+          "after": {
+            "mode": "100644",
+            "oid": "5e62a9cfe4d08343b8527c5324514ef5b502c691",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 22308,
+          "sha256": "ccf5b752697277d04419cd84ef6e853eb025f276fe6911d559288ae04bc78bd1"
+        },
+        "docs/autoencoders/progress_integration.md": {
+          "after": {
+            "mode": "100644",
+            "oid": "3c7a5f54ff54090a4ef1767cb85cf313fc4cd4a5",
+            "type": "blob"
+          },
+          "before": {
+            "mode": "100644",
+            "oid": "abfedbe555802f63822178af6082aa0071b29bf4",
+            "type": "blob"
+          },
+          "bytes": 21628,
+          "sha256": "a45d852cebbc30ce003b44544f8cd92dcec44f0d0bb9131305f207ab60988ffe"
+        },
+        "docs/autoencoders/uscode_all_span_processing_plan_20261007.md": {
+          "after": {
+            "mode": "100644",
+            "oid": "53af9b772938a77a9efdbf0f37fccae997e5a18d",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 36351,
+          "sha256": "5d031145b0b58070b4f90b59165d50e225e007d7193c129aa754072642bc2748"
+        }
+      },
+      "commits": [
+        "911b9f2530b18f246b90a177a98471bffad609e9 75f57f9eeff052a5718fd1f2c6a4b73de3784af8 Plan complete US Code span processing from pinned cache and learned assets"
+      ],
+      "comparison_base": "75f57f9eeff052a5718fd1f2c6a4b73de3784af8",
+      "fetch_after": {
+        "FETCH_HEAD_sha256": "124a20f8d279d203f328b83499ecf22f81c2c8201d4d9de8d873c6df9a07b436",
+        "existing_ref_count": 464,
+        "head": "75f57f9eeff052a5718fd1f2c6a4b73de3784af8",
+        "index_sha256": "30a8aa7b3f34fb9a0e19a4ad4e1b583bb55a42603603cf27e1f7395970684673",
+        "refs_listing_canonical_sha256": "85cd3abb4a74a96d804402a81d664f37d52d216a093f92de10818007486d66a4",
+        "status_sha256": "49752e9c8b67a324cd47fd891d845795d83ff972e0adbd5a85aa23ae7c75de56"
+      },
+      "fetch_before": {
+        "FETCH_HEAD_sha256": "124a20f8d279d203f328b83499ecf22f81c2c8201d4d9de8d873c6df9a07b436",
+        "existing_ref_count": 463,
+        "head": "75f57f9eeff052a5718fd1f2c6a4b73de3784af8",
+        "index_sha256": "30a8aa7b3f34fb9a0e19a4ad4e1b583bb55a42603603cf27e1f7395970684673",
+        "refs_listing_canonical_sha256": "5e637c147cce85569a477b02654e9f629daf8a3c6a181bb77fb63e0a68ad6adf",
+        "status_sha256": "49752e9c8b67a324cd47fd891d845795d83ff972e0adbd5a85aa23ae7c75de56"
+      },
+      "fetched_main": "911b9f2530b18f246b90a177a98471bffad609e9",
+      "five_numerical_producers_unchanged": {
+        "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py": {
+          "mode": "100644",
+          "oid": "1cf73eaa43c081eb2f181547a7aae725353c26d9",
+          "type": "blob"
+        },
+        "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py": {
+          "mode": "100644",
+          "oid": "aa1039c978b8d80667e3bde417a61954deefcd48",
+          "type": "blob"
+        },
+        "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_action.py": {
+          "mode": "100644",
+          "oid": "c6260376025a7fa389b57fcb580e266af17ad755",
+          "type": "blob"
+        },
+        "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_trigger_readout.py": {
+          "mode": "100644",
+          "oid": "aa718b6f3a813a3cd01947640f0a405d377e529b",
+          "type": "blob"
+        },
+        "ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py": {
+          "mode": "100644",
+          "oid": "18783070b45c280067552f110bc48748a210e53e",
+          "type": "blob"
+        }
+      },
+      "gitlinks_at_fetched_main": {
+        ".tools/ipfs_kit_py": {
+          "mode": "160000",
+          "oid": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+          "type": "commit"
+        },
+        "ipfs_accelerate_py": {
+          "mode": "160000",
+          "oid": "5306d49957bba7444a31639584e26378f3e3fb19",
+          "type": "commit"
+        },
+        "ipfs_datasets_py/logic/CEC/DCEC_Library": {
+          "mode": "160000",
+          "oid": "a4beb5b3280595be6b9221cac3c91dd019e6d371",
+          "type": "commit"
+        },
+        "ipfs_datasets_py/logic/CEC/Eng-DCEC": {
+          "mode": "160000",
+          "oid": "df518c21ef81b8001e6db59f5fd70f10cc04ff6c",
+          "type": "commit"
+        },
+        "ipfs_datasets_py/logic/CEC/ShadowProver": {
+          "mode": "160000",
+          "oid": "3060ede1ac1ec3f8ef9f9c9e41386aed1dbbe7f9",
+          "type": "commit"
+        },
+        "ipfs_datasets_py/logic/CEC/Talos": {
+          "mode": "160000",
+          "oid": "e0b7650d3e3a403924773f8253e924c719748d36",
+          "type": "commit"
+        },
+        "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type": {
+          "mode": "160000",
+          "oid": "d58933631a5362b1e2fdc45254ef620fa231223a",
+          "type": "commit"
+        },
+        "ipfs_datasets_py/multimedia/omni_converter_mk2": {
+          "mode": "160000",
+          "oid": "c1d9b0d517cea022516aab5b5d8fa5e3bc9a65aa",
+          "type": "commit"
+        },
+        "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine": {
+          "mode": "160000",
+          "oid": "0e635cba586e8f6f6ea8126e3b1668b3e675c029",
+          "type": "commit"
+        },
+        "ipfs_kit_py": {
+          "mode": "160000",
+          "oid": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+          "type": "commit"
+        }
+      },
+      "new_owned_audit_ref": "refs/codex-audit/legal-support-gate-20261007-01/late-datasets-20261007T144845Z",
+      "progress_append_merge_obligation": {
+        "expected_combined_bytes": 23874,
+        "incoming_append_only": true,
+        "incoming_suffix_bytes": 772,
+        "new_upstream_prefix_bytes": 21628,
+        "new_upstream_prefix_sha256": "a45d852cebbc30ce003b44544f8cd92dcec44f0d0bb9131305f207ab60988ffe",
+        "old_base_prefix_bytes": 20856,
+        "old_base_prefix_sha256": "1cc7bf063848d66c6771dc7eaf1bd47edf339fc9c94bc7b48cd4bcf205bc459e",
+        "own_suffix_bytes": 2246,
+        "own_suffix_sha256": "8623a4a27b7171a85b2582c162115c4e9b52b3d46b2d1ad7da7cd8e44ebd71f3",
+        "own_working_bytes": 23102,
+        "own_working_sha256": "0b51f43ac4177c67f40240ec54248a6cd876b7cbcdbe9492ca2d92f1493cb289",
+        "recipe": "Retain the exact incoming main prefix at 911b9f25, then append the existing reviewed own suffix captured relative to 75f57f9e. Preserve both suffixes; rebind the final source contribution to the actual new main/merge first parent."
+      },
+      "repo": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets"
+    },
+    "workspace": {
+      "HEAD_index_worktree_status_FETCH_HEAD_unchanged": true,
+      "all_preexisting_refs_unchanged": true,
+      "base_is_ancestor": true,
+      "changed_path_count": 13,
+      "changed_paths": {
+        "artifacts/uscode-all-span-processing-plan-20261007/PLAN.md": {
+          "after": {
+            "mode": "100644",
+            "oid": "4e26cddf129033d76826728deac7e8b569203c47",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 35978,
+          "sha256": "55a3c8e1ceb93e238b9a48fd0ce8296e409fecd1bdd5e18dd9da49cab39708dc"
+        },
+        "artifacts/uscode-all-span-processing-plan-20261007/coverage-findings.md": {
+          "after": {
+            "mode": "100644",
+            "oid": "2ca04b6b8a12b29172cdb3557790fb48ba07fe93",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 8192,
+          "sha256": "1ef92722cbc493c98746d57eadb72eeb12eadc77a1397c4fc9c7a80e27d01565"
+        },
+        "artifacts/uscode-all-span-processing-plan-20261007/dataset-plan-review.json": {
+          "after": {
+            "mode": "100644",
+            "oid": "b00afc52816e7088d19be0e1e36fc98bbd1a48a3",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 4483,
+          "sha256": "1222b7e82a62e65b23376308e53bfd786b0213cbeaac5589ec1560872bbda0fc"
+        },
+        "artifacts/uscode-all-span-processing-plan-20261007/evidence-index.json": {
+          "after": {
+            "mode": "100644",
+            "oid": "325698b0b631e2c9a90a4461c1625e8731cc9455",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 1699,
+          "sha256": "f5dc7540e3028a0e0e5b71087848ae297860f1ce264051be1dddb3820a545c7d"
+        },
+        "artifacts/uscode-all-span-processing-plan-20261007/pipeline-review-final.json": {
+          "after": {
+            "mode": "100644",
+            "oid": "7b0493676de03257576432dad1c1f80a58670bf5",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 3354,
+          "sha256": "b1daa3d77b90c5f0479bd8d82e1ee1c4c943335a9521d3e9d8c88f31bf1939fb"
+        },
+        "artifacts/uscode-all-span-processing-plan-20261007/pipeline-survey.json": {
+          "after": {
+            "mode": "100644",
+            "oid": "c6c2ace490d36f6aab52e16d3504c5c4e3b08c6c",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 8436,
+          "sha256": "176dd82d0f51c4cde093663dacf2a93666f70a5a30ee1baa2846c773fa435c05"
+        },
+        "artifacts/uscode-all-span-processing-plan-20261007/plan-review-amendments.json": {
+          "after": {
+            "mode": "100644",
+            "oid": "14cb84179490054b0618fcfe0cdd1c90a56d5f49",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 1152,
+          "sha256": "77a3ccf5a57e82fb31b1f87e1a54a940e633546d3f43540c4332389b66f5c25f"
+        },
+        "artifacts/uscode-all-span-processing-plan-20261007/research-review-final.json": {
+          "after": {
+            "mode": "100644",
+            "oid": "a6a716a528260f8d51be4d2c24aecab075b95064",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 2893,
+          "sha256": "44428bd200dc3f33228065aa70a8776e631bd6f58cd7d928d0cc90efb7342df5"
+        },
+        "artifacts/uscode-all-span-processing-plan-20261007/research-survey.json": {
+          "after": {
+            "mode": "100644",
+            "oid": "5e62a9cfe4d08343b8527c5324514ef5b502c691",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 22308,
+          "sha256": "ccf5b752697277d04419cd84ef6e853eb025f276fe6911d559288ae04bc78bd1"
+        },
+        "docs/agent-supervisor-token-metadata-20261007.md": {
+          "after": {
+            "mode": "100644",
+            "oid": "a8b5ff6cd8d46e91265da90f77017d3926fac689",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 3582,
+          "sha256": "2227d9bfd06302c79fb9b9397a61498ca128e244bc25a0fc3288e43befc2c21a"
+        },
+        "external/ipfs_accelerate": {
+          "after": {
+            "mode": "160000",
+            "oid": "1f818293ff7561f1c6de49e89ac87806f7812d19",
+            "type": "commit"
+          },
+          "before": {
+            "mode": "160000",
+            "oid": "6665f0a172b6cea6f94ab9c62bc269241bba374d",
+            "type": "commit"
+          }
+        },
+        "external/ipfs_datasets": {
+          "after": {
+            "mode": "160000",
+            "oid": "911b9f2530b18f246b90a177a98471bffad609e9",
+            "type": "commit"
+          },
+          "before": {
+            "mode": "160000",
+            "oid": "75f57f9eeff052a5718fd1f2c6a4b73de3784af8",
+            "type": "commit"
+          }
+        },
+        "implementation_plan/docs/68-uscode-all-span-processing-plan-2026-10-07.md": {
+          "after": {
+            "mode": "100644",
+            "oid": "b9e1a5fc3b9acb2c6c0f9191e3d93f0472b9be90",
+            "type": "blob"
+          },
+          "before": null,
+          "bytes": 3802,
+          "sha256": "787feaab5a1e0e519301fd951251d0ae738823ac1443bffbd4b32020b5743a73"
+        }
+      },
+      "commits": [
+        "4bad33cb1d1f63d3f3011c96f1e19f186163dd24 123f57e0c098e64b2d4afbf9e0d9e1f5bd3f2918 Integrate reviewed all-span processing plan and cache census",
+        "123f57e0c098e64b2d4afbf9e0d9e1f5bd3f2918 da212346307e2fc483d7dce6ebfa820d8da5758a Record supervisor metadata token plan and advance checked source"
+      ],
+      "comparison_base": "da212346307e2fc483d7dce6ebfa820d8da5758a",
+      "fetch_after": {
+        "FETCH_HEAD_sha256": "bba21d6707645f9c1e91bc0e0d3d76e5473a383682b0d57455b0801648a45d24",
+        "existing_ref_count": 393,
+        "head": "da212346307e2fc483d7dce6ebfa820d8da5758a",
+        "index_sha256": "8624327aef09a9922f56a0fa176f676ddf58869c394ff9de71cad2fd49d7368a",
+        "refs_listing_canonical_sha256": "c04b08bfc1d59269d54be56d650ecf4c51fb941dc6b0d524ee88f243650b5acc",
+        "status_sha256": "43fe8ec7f7c32f751a2a474dcc4ab63d2c6bfc8cc8ba01246770ebc2761e021f"
+      },
+      "fetch_before": {
+        "FETCH_HEAD_sha256": "bba21d6707645f9c1e91bc0e0d3d76e5473a383682b0d57455b0801648a45d24",
+        "existing_ref_count": 392,
+        "head": "da212346307e2fc483d7dce6ebfa820d8da5758a",
+        "index_sha256": "8624327aef09a9922f56a0fa176f676ddf58869c394ff9de71cad2fd49d7368a",
+        "refs_listing_canonical_sha256": "dad6b8460e37e833f351c4fa366a69f51f0b124424e2c1190f1150becc6f5aef",
+        "status_sha256": "43fe8ec7f7c32f751a2a474dcc4ab63d2c6bfc8cc8ba01246770ebc2761e021f"
+      },
+      "fetched_main": "4bad33cb1d1f63d3f3011c96f1e19f186163dd24",
+      "gitlinks_at_fetched_main": {
+        "JevOps": {
+          "mode": "160000",
+          "oid": "9af1ebb6a4245ce2b4e673ac277e4988da4d5caa",
+          "type": "commit"
+        },
+        "Mcp-Plus-Plus": {
+          "mode": "160000",
+          "oid": "628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0",
+          "type": "commit"
+        },
+        "external/ipfs_accelerate": {
+          "mode": "160000",
+          "oid": "1f818293ff7561f1c6de49e89ac87806f7812d19",
+          "type": "commit"
+        },
+        "external/ipfs_datasets": {
+          "mode": "160000",
+          "oid": "911b9f2530b18f246b90a177a98471bffad609e9",
+          "type": "commit"
+        },
+        "external/ipfs_kit": {
+          "mode": "160000",
+          "oid": "8ac00bb1974b1378e12091d546d8425af34049e0",
+          "type": "commit"
+        },
+        "external/meta-wearables-dat-android": {
+          "mode": "160000",
+          "oid": "4e56e1864a5e78194bababc3a68775c4196cbed0",
+          "type": "commit"
+        },
+        "external/meta-wearables-dat-ios": {
+          "mode": "160000",
+          "oid": "2b5695d16a710f3d2d7341f88570b86d01723d50",
+          "type": "commit"
+        },
+        "hallucinate_app": {
+          "mode": "160000",
+          "oid": "ffcf5ff3b3389c95ba53e9f1be45f89fa96c5ef6",
+          "type": "commit"
+        },
+        "swissknife": {
+          "mode": "160000",
+          "oid": "4772c7ff648dd5f438af059e21a1a5305d32dbe3",
+          "type": "commit"
+        }
+      },
+      "new_owned_audit_ref": "refs/codex-audit/legal-support-gate-20261007-01/late-workspace-20261007T144845Z",
+      "repo": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/workspace"
+    }
+  },
+  "review_boundary": "Pre-integration frozen observation of fetched main into two newly owned audit refs. No isolated or canonical HEAD/index/worktree/tracking/FETCH_HEAD updates. This receipt is not a claim about future incoming commits.",
+  "schema": "support-gate-late-incoming-review/v1"
+}

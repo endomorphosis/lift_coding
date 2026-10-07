@@ -1,0 +1,393 @@
+{
+  "schema": "support-gate-source-staged-review/v1",
+  "observed_at_utc": "2026-10-07T14:54:33.944Z",
+  "passed": true,
+  "findings": [],
+  "scope": "Independent read-only review of exactly four staged datasets files against refreshed upstream 911b9f, final publication receipts and unchanged trained producer pins.",
+  "actions": {
+    "model_imports": 0,
+    "model_calls": 0,
+    "optimizer_steps": 0,
+    "tests_executed": 0,
+    "resource_clients_or_claims": 0,
+    "Git_or_Hub_writes": 0,
+    "files_written": [
+      "source-staged-review.json"
+    ]
+  },
+  "base": "911b9f2530b18f246b90a177a98471bffad609e9",
+  "staged_paths": {
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_gate.py": {
+      "bytes": 24874,
+      "sha256": "79a9d314ddf597b16c6a06754d7786d568bbf34c87dc71a947ac0b8af12f525b",
+      "mode": "100644",
+      "Git_blob": "59295134480606efac2e122f5c807d81cb3927e3",
+      "index_equals_working": true
+    },
+    "tests/unit/logic/test_legal_scope_support_gate.py": {
+      "bytes": 20171,
+      "sha256": "13917ca96cf5b3795b2e7c4efbd0aadb1e2c723cfe5c96825586e31c141fca90",
+      "mode": "100644",
+      "Git_blob": "c986db440f729083314ff7f3800989da1702854d",
+      "index_equals_working": true
+    },
+    "docs/implementation/legal_scope_support_gate_pilot_20261007.md": {
+      "bytes": 10465,
+      "sha256": "30e4e6cf34e26960fca068283feecb4f91e6097803455715e33ac28ffe803a2d",
+      "mode": "100644",
+      "Git_blob": "94477fc94885f797a5c4ab791b95ec3b0fa0824d",
+      "index_equals_working": true
+    },
+    "docs/autoencoders/progress_integration.md": {
+      "bytes": 23102,
+      "sha256": "0b51f43ac4177c67f40240ec54248a6cd876b7cbcdbe9492ca2d92f1493cb289",
+      "mode": "100644",
+      "Git_blob": "3de97d48df68ca2c54864f02cb4ba4ca36fa8528",
+      "index_equals_working": true
+    }
+  },
+  "staged_name_status": [
+    "M\tdocs/autoencoders/progress_integration.md",
+    "A\tdocs/implementation/legal_scope_support_gate_pilot_20261007.md",
+    "A\tipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_gate.py",
+    "A\ttests/unit/logic/test_legal_scope_support_gate.py"
+  ],
+  "index_scope": {
+    "exact_four_owned_paths": true,
+    "all_other_index_paths_equal_HEAD": true,
+    "no_unstaged_tracked_delta": true
+  },
+  "progress_prefix": {
+    "bytes": 21628,
+    "sha256": "a45d852cebbc30ce003b44544f8cd92dcec44f0d0bb9131305f207ab60988ffe",
+    "prior_20856_byte_prefix_preserved": true,
+    "own_suffix_bytes": 1474,
+    "own_suffix_changed_only_immutable_link_since_prepublication_review": true
+  },
+  "new_upstream_17_paths": [
+    {
+      "path": "docs/autoencoders/evidence/uscode-all-span-plan-20261007/coverage-findings.md",
+      "mode": "100644",
+      "type": "blob",
+      "upstream_blob": "2ca04b6b8a12b29172cdb3557790fb48ba07fe93",
+      "index_and_working_equal_upstream": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/uscode-all-span-plan-20261007/dataset-plan-review.json",
+      "mode": "100644",
+      "type": "blob",
+      "upstream_blob": "b00afc52816e7088d19be0e1e36fc98bbd1a48a3",
+      "index_and_working_equal_upstream": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/uscode-all-span-plan-20261007/evidence-index.json",
+      "mode": "100644",
+      "type": "blob",
+      "upstream_blob": "625fbb119c5c89666383c6df0d01703f9b4b880b",
+      "index_and_working_equal_upstream": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/uscode-all-span-plan-20261007/existing-source-parquet-survey.json",
+      "mode": "100644",
+      "type": "blob",
+      "upstream_blob": "2caaf36557217643beaa193d5832e33c97b43d4c",
+      "index_and_working_equal_upstream": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/uscode-all-span-plan-20261007/manifest-closure-survey.json.gz",
+      "mode": "100644",
+      "type": "blob",
+      "upstream_blob": "9f0f36069b910d74f800410b7d2138e3ffb7a8d4",
+      "index_and_working_equal_upstream": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/uscode-all-span-plan-20261007/metadata-survey.json",
+      "mode": "100644",
+      "type": "blob",
+      "upstream_blob": "8e19320f707abb38dd16916ed94f0bb2e06d99a1",
+      "index_and_working_equal_upstream": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/uscode-all-span-plan-20261007/original-schema-samples.json",
+      "mode": "100644",
+      "type": "blob",
+      "upstream_blob": "2811ad6842a32e299f45cdde7752584aa4ed7b0c",
+      "index_and_working_equal_upstream": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/uscode-all-span-plan-20261007/pipeline-review-final.json",
+      "mode": "100644",
+      "type": "blob",
+      "upstream_blob": "7b0493676de03257576432dad1c1f80a58670bf5",
+      "index_and_working_equal_upstream": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/uscode-all-span-plan-20261007/pipeline-review.json",
+      "mode": "100644",
+      "type": "blob",
+      "upstream_blob": "ac14f0f69192c5f50bf9aff6a2bd7c1c993c5508",
+      "index_and_working_equal_upstream": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/uscode-all-span-plan-20261007/pipeline-survey.json",
+      "mode": "100644",
+      "type": "blob",
+      "upstream_blob": "c6c2ace490d36f6aab52e16d3504c5c4e3b08c6c",
+      "index_and_working_equal_upstream": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/uscode-all-span-plan-20261007/plan-review-amendments.json",
+      "mode": "100644",
+      "type": "blob",
+      "upstream_blob": "14cb84179490054b0618fcfe0cdd1c90a56d5f49",
+      "index_and_working_equal_upstream": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/uscode-all-span-plan-20261007/progress-record-scope.json",
+      "mode": "100644",
+      "type": "blob",
+      "upstream_blob": "7892ebfab4e482f0d5a47f8b092043d6aa28fe5f",
+      "index_and_working_equal_upstream": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/uscode-all-span-plan-20261007/research-review-final.json",
+      "mode": "100644",
+      "type": "blob",
+      "upstream_blob": "a6a716a528260f8d51be4d2c24aecab075b95064",
+      "index_and_working_equal_upstream": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/uscode-all-span-plan-20261007/research-review.json",
+      "mode": "100644",
+      "type": "blob",
+      "upstream_blob": "36404d2a795c119e4be7c623fb7b33b6c482e959",
+      "index_and_working_equal_upstream": true
+    },
+    {
+      "path": "docs/autoencoders/evidence/uscode-all-span-plan-20261007/research-survey.json",
+      "mode": "100644",
+      "type": "blob",
+      "upstream_blob": "5e62a9cfe4d08343b8527c5324514ef5b502c691",
+      "index_and_working_equal_upstream": true
+    },
+    {
+      "path": "docs/autoencoders/progress_integration.md",
+      "mode": "100644",
+      "type": "blob",
+      "upstream_blob": "3c7a5f54ff54090a4ef1767cb85cf313fc4cd4a5",
+      "entire_upstream_bytes_preserved_as_prefix": true
+    },
+    {
+      "path": "docs/autoencoders/uscode_all_span_processing_plan_20261007.md",
+      "mode": "100644",
+      "type": "blob",
+      "upstream_blob": "53af9b772938a77a9efdbf0f37fccae997e5a18d",
+      "index_and_working_equal_upstream": true
+    }
+  ],
+  "all_five_old_numerical_producers_exact": true,
+  "new_model_and_tests_exact_trained_bytes": true,
+  "documentation": {
+    "cold_selected_zero_and_rejected_trained_120_240_distinct": true,
+    "selected_final_and_retention_numbers_unchanged_since_result_audit": true,
+    "parent_archived_dictionary_parity": 384,
+    "original_local_replay_complete_outputs": 1024,
+    "published_snapshot_difference_only_immutable_link_and_publication_paragraph": true,
+    "own_progress_suffix_changed_only_immutable_link": true,
+    "published_README_explains_prepublication_snapshots": true,
+    "main_prefix_snapshot_preserved": true,
+    "immutable_release_revision": "ae5a6b555f66f9ea7cdf3f46a03c689d07485bb5",
+    "zero_admission_and_null_formal_output": true,
+    "no_legal_gold_latent_or_default_qualification": true
+  },
+  "publication": {
+    "release_files_rehashed": 109,
+    "readback_identities_match_all_release_SHA_and_sizes": true,
+    "prior_identity_count_in_retained_producer_receipts": 2747,
+    "prior_identity_preservation_producer_observed": true,
+    "checkpoint_downloads_independently_rehashed": [
+      {
+        "release_path": "checkpoints/global/checkpoint-0.json",
+        "cached_download_path": "/home/barberb/.cache/huggingface/hub/models--Publicus--legal-ir-autoencoder/snapshots/ae5a6b555f66f9ea7cdf3f46a03c689d07485bb5/experiments/support-gate-20261007/run-01/checkpoints/global/checkpoint-0.json",
+        "bytes": 3726149,
+        "sha256": "b77e45332f60fc7ae01b7d281fe44c09ca7a800c53739dd285a22ff51d7ba3b6"
+      },
+      {
+        "release_path": "checkpoints/global/checkpoint-120.json",
+        "cached_download_path": "/home/barberb/.cache/huggingface/hub/models--Publicus--legal-ir-autoencoder/snapshots/ae5a6b555f66f9ea7cdf3f46a03c689d07485bb5/experiments/support-gate-20261007/run-01/checkpoints/global/checkpoint-120.json",
+        "bytes": 3954433,
+        "sha256": "4c3e04033dc71ac5a673a534edf72befb60d4d0657f4666f6f5c4f054bc1f32c"
+      },
+      {
+        "release_path": "checkpoints/global/checkpoint-240.json",
+        "cached_download_path": "/home/barberb/.cache/huggingface/hub/models--Publicus--legal-ir-autoencoder/snapshots/ae5a6b555f66f9ea7cdf3f46a03c689d07485bb5/experiments/support-gate-20261007/run-01/checkpoints/global/checkpoint-240.json",
+        "bytes": 3953962,
+        "sha256": "890ba734488e74aad42b38017b04f3256cbe711555f1627f15b34d40f8b109eb"
+      },
+      {
+        "release_path": "checkpoints/global/checkpoint.json",
+        "cached_download_path": "/home/barberb/.cache/huggingface/hub/models--Publicus--legal-ir-autoencoder/snapshots/ae5a6b555f66f9ea7cdf3f46a03c689d07485bb5/experiments/support-gate-20261007/run-01/checkpoints/global/checkpoint.json",
+        "bytes": 3726149,
+        "sha256": "b77e45332f60fc7ae01b7d281fe44c09ca7a800c53739dd285a22ff51d7ba3b6"
+      },
+      {
+        "release_path": "checkpoints/predicted_trigger/checkpoint-0.json",
+        "cached_download_path": "/home/barberb/.cache/huggingface/hub/models--Publicus--legal-ir-autoencoder/snapshots/ae5a6b555f66f9ea7cdf3f46a03c689d07485bb5/experiments/support-gate-20261007/run-01/checkpoints/predicted_trigger/checkpoint-0.json",
+        "bytes": 3726171,
+        "sha256": "c97d96f2044d6272179f17bf3def528214b7cfb4d434a787dfccd0895b663a5f"
+      },
+      {
+        "release_path": "checkpoints/predicted_trigger/checkpoint-120.json",
+        "cached_download_path": "/home/barberb/.cache/huggingface/hub/models--Publicus--legal-ir-autoencoder/snapshots/ae5a6b555f66f9ea7cdf3f46a03c689d07485bb5/experiments/support-gate-20261007/run-01/checkpoints/predicted_trigger/checkpoint-120.json",
+        "bytes": 3953448,
+        "sha256": "c0135879bc2858bb1827fb423993222d4e3a9a27ff288b85e28781c83e78ebdf"
+      },
+      {
+        "release_path": "checkpoints/predicted_trigger/checkpoint-240.json",
+        "cached_download_path": "/home/barberb/.cache/huggingface/hub/models--Publicus--legal-ir-autoencoder/snapshots/ae5a6b555f66f9ea7cdf3f46a03c689d07485bb5/experiments/support-gate-20261007/run-01/checkpoints/predicted_trigger/checkpoint-240.json",
+        "bytes": 3953652,
+        "sha256": "6b8adff8ecf9e70c5d969a9dac485d4ec0a296789e0e8707d899342b286f0375"
+      },
+      {
+        "release_path": "checkpoints/predicted_trigger/checkpoint.json",
+        "cached_download_path": "/home/barberb/.cache/huggingface/hub/models--Publicus--legal-ir-autoencoder/snapshots/ae5a6b555f66f9ea7cdf3f46a03c689d07485bb5/experiments/support-gate-20261007/run-01/checkpoints/predicted_trigger/checkpoint.json",
+        "bytes": 3726171,
+        "sha256": "c97d96f2044d6272179f17bf3def528214b7cfb4d434a787dfccd0895b663a5f"
+      }
+    ],
+    "six_research_states_two_cold_aliases": true,
+    "downloaded_replay_complete_outputs": 1024,
+    "downloaded_replay_artifact_pin_records_rehashed": 26,
+    "downloaded_replay_additional_optimizer_updates": 0,
+    "downloaded_replay_reference_reads": false,
+    "downloaded_replay_full_Adam_progress_parent_tensors_modes_flags_rng_unchanged_recorded": true
+  },
+  "limitations": [
+    "This reviewer verified retained upload/readback assertions and local immutable cached bytes, with no live Hub queries.",
+    "The preservation of 2,747 prior Hub identities is the pinned producer receipt observation; this reviewer did not independently query the remote tree.",
+    "Recorded downloaded replay was authenticated from its pins and successful receipt; this reviewer performed no forwards or replay execution.",
+    "This approves the current four-file staged candidate, not a future changed commit, hosted CI result or model qualification."
+  ],
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/hub-upload-parent.json": {
+      "bytes": 777534,
+      "sha256": "53dae289d212a7a991c9a520ca59247efd4d96c4664f298ba1a3c9ab8cc829c3"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/hub-upload-commit.json": {
+      "bytes": 329,
+      "sha256": "2e52051ab42d8995034cfc14142544c2af5ee52fa5cff4548b5883ff7732f308"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/hub-readback-verification.json": {
+      "bytes": 24167,
+      "sha256": "5286babe50d72c835f2d0caeb5a80cfda8d7f8aa213fa8dec5a47366f4f9aa89"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/hub-all-checkpoint-downloads.json": {
+      "bytes": 2154,
+      "sha256": "6fa190c02d98b41ec55afd74057810b92c3c14d86b10b9c18ab271a12c89a6b8"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/hub-checkpoint-replay.json": {
+      "bytes": 11446,
+      "sha256": "07ace4b6ce714d349c85140368e55f31935b60537b64b79e4e4c700801891874"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/release-review.json": {
+      "bytes": 8431,
+      "sha256": "29c02a6bd73b66007fd20dfe81e160d6ede4519c24ecac9e722c095b9028f26c"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/release/release-manifest.json": {
+      "bytes": 17886,
+      "sha256": "10655c22afb678b62ba49e7a6941d08742c577eba37ef0ce41f3c691aaf64419"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/release/checkpoint-roles.json": {
+      "bytes": 4182,
+      "sha256": "eb97e6a28c94921caf562c74c09322825b266f09f5616889643e42d5be89f58a"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/release/README.md": {
+      "bytes": 13286,
+      "sha256": "e5a47368008abf572ba20e508ba95df62108e4aea812ad5d685dd94b09ba474f"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/release/source/docs/implementation/legal_scope_support_gate_pilot_20261007.md": {
+      "bytes": 10191,
+      "sha256": "b665d4d4c837b54a897dc47d88d72be6effe1405baa4deba2cdcbe1788f2b9f3"
+    },
+    "/home/barberb/.cache/huggingface/hub/models--Publicus--legal-ir-autoencoder/snapshots/ae5a6b555f66f9ea7cdf3f46a03c689d07485bb5/experiments/support-gate-20261007/run-01/checkpoints/global/checkpoint-0.json": {
+      "bytes": 3726149,
+      "sha256": "b77e45332f60fc7ae01b7d281fe44c09ca7a800c53739dd285a22ff51d7ba3b6"
+    },
+    "/home/barberb/.cache/huggingface/hub/models--Publicus--legal-ir-autoencoder/snapshots/ae5a6b555f66f9ea7cdf3f46a03c689d07485bb5/experiments/support-gate-20261007/run-01/checkpoints/global/checkpoint-120.json": {
+      "bytes": 3954433,
+      "sha256": "4c3e04033dc71ac5a673a534edf72befb60d4d0657f4666f6f5c4f054bc1f32c"
+    },
+    "/home/barberb/.cache/huggingface/hub/models--Publicus--legal-ir-autoencoder/snapshots/ae5a6b555f66f9ea7cdf3f46a03c689d07485bb5/experiments/support-gate-20261007/run-01/checkpoints/global/checkpoint-240.json": {
+      "bytes": 3953962,
+      "sha256": "890ba734488e74aad42b38017b04f3256cbe711555f1627f15b34d40f8b109eb"
+    },
+    "/home/barberb/.cache/huggingface/hub/models--Publicus--legal-ir-autoencoder/snapshots/ae5a6b555f66f9ea7cdf3f46a03c689d07485bb5/experiments/support-gate-20261007/run-01/checkpoints/global/checkpoint.json": {
+      "bytes": 3726149,
+      "sha256": "b77e45332f60fc7ae01b7d281fe44c09ca7a800c53739dd285a22ff51d7ba3b6"
+    },
+    "/home/barberb/.cache/huggingface/hub/models--Publicus--legal-ir-autoencoder/snapshots/ae5a6b555f66f9ea7cdf3f46a03c689d07485bb5/experiments/support-gate-20261007/run-01/checkpoints/predicted_trigger/checkpoint-0.json": {
+      "bytes": 3726171,
+      "sha256": "c97d96f2044d6272179f17bf3def528214b7cfb4d434a787dfccd0895b663a5f"
+    },
+    "/home/barberb/.cache/huggingface/hub/models--Publicus--legal-ir-autoencoder/snapshots/ae5a6b555f66f9ea7cdf3f46a03c689d07485bb5/experiments/support-gate-20261007/run-01/checkpoints/predicted_trigger/checkpoint-120.json": {
+      "bytes": 3953448,
+      "sha256": "c0135879bc2858bb1827fb423993222d4e3a9a27ff288b85e28781c83e78ebdf"
+    },
+    "/home/barberb/.cache/huggingface/hub/models--Publicus--legal-ir-autoencoder/snapshots/ae5a6b555f66f9ea7cdf3f46a03c689d07485bb5/experiments/support-gate-20261007/run-01/checkpoints/predicted_trigger/checkpoint-240.json": {
+      "bytes": 3953652,
+      "sha256": "6b8adff8ecf9e70c5d969a9dac485d4ec0a296789e0e8707d899342b286f0375"
+    },
+    "/home/barberb/.cache/huggingface/hub/models--Publicus--legal-ir-autoencoder/snapshots/ae5a6b555f66f9ea7cdf3f46a03c689d07485bb5/experiments/support-gate-20261007/run-01/checkpoints/predicted_trigger/checkpoint.json": {
+      "bytes": 3726171,
+      "sha256": "c97d96f2044d6272179f17bf3def528214b7cfb4d434a787dfccd0895b663a5f"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/source-contribution-binding.json": {
+      "bytes": 1599,
+      "sha256": "822585becc4c52bf6d140bed615e6e3e2c2c0af9056dc6fd47ff5806da9cdc80"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/final-contribution-review.json": {
+      "bytes": 39954,
+      "sha256": "576416eb2a57e077525668ef6d6d955dcf39f155f95ec33ea1f54688e5cdd43e"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_gate.py": {
+      "bytes": 24874,
+      "sha256": "79a9d314ddf597b16c6a06754d7786d568bbf34c87dc71a947ac0b8af12f525b"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/tests/unit/logic/test_legal_scope_support_gate.py": {
+      "bytes": 20171,
+      "sha256": "13917ca96cf5b3795b2e7c4efbd0aadb1e2c723cfe5c96825586e31c141fca90"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/docs/implementation/legal_scope_support_gate_pilot_20261007.md": {
+      "bytes": 10465,
+      "sha256": "30e4e6cf34e26960fca068283feecb4f91e6097803455715e33ac28ffe803a2d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/docs/autoencoders/progress_integration.md": {
+      "bytes": 23102,
+      "sha256": "0b51f43ac4177c67f40240ec54248a6cd876b7cbcdbe9492ca2d92f1493cb289"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/inherited-producer-binding.json": {
+      "bytes": 1041,
+      "sha256": "b949f74b8f4351759aef212692a3c271b3cb10ec82bb5d484a66231be65287fe"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py": {
+      "bytes": 29545,
+      "sha256": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py": {
+      "bytes": 7804,
+      "sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_trigger_readout.py": {
+      "bytes": 27145,
+      "sha256": "983b69b8e293aa6211fd8322f9ba6bfe6fa5b8cb853c2d4d0cace1e7e5046344"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_action.py": {
+      "bytes": 25504,
+      "sha256": "ce7abc45032bee6ac950720d79c8f329c03a68961140c0f2ad9ade8ea923988c"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py": {
+      "bytes": 29993,
+      "sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a"
+    }
+  }
+}

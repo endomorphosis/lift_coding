@@ -1,0 +1,367 @@
+{
+  "API": {
+    "build_corpus": "build_corpus(datasets_root, seed=24605)",
+    "training_batches": "training_batches(train_inputs, train_references, seed=24605, updates=240)"
+  },
+  "actions": {
+    "encoder_calls": 0,
+    "git_mutations": 0,
+    "model_forward_calls": 0,
+    "model_imports": 0,
+    "network_calls": 0,
+    "optimizer_calls": 0,
+    "prover_calls": 0,
+    "training_updates": 0
+  },
+  "all_admission_masks_zero": true,
+  "authored_construction_checks_passed": true,
+  "coordinates": "Pinned renderer captures halfopen Unicode character anchors while constructing positive text; negative derivatives are applied afterwards and retain no structural/class targets.",
+  "fitting_targets": "Only supported boolean labels supervise new support; positive structural targets and declared_action_lemma are scoring/construction/fairness metadata, never new-head fitting targets.",
+  "formal_output": null,
+  "freshness_overlaps": {
+    "between_split_declared_content_words": 0,
+    "between_split_facets": 0,
+    "between_split_semantic_heads": 0,
+    "declared_content_words": 0,
+    "normalized_sources": 0,
+    "observed_or_declared_facets": 0,
+    "parent_groups": 0,
+    "semantic_heads": 0
+  },
+  "independent_corpus_review": false,
+  "independent_legal_review": false,
+  "legal_gold": false,
+  "limitations": [
+    "This note reports author construction checks, not an independent corpus or legal review.",
+    "Strict lexical/head/source/group exclusions do not make shared syntax or corruption patterns globally unseen.",
+    "Animals/birds/aquatic actors, food/textile/geometric objects and opaque conditions are declared engineering identities, not legal-source gold.",
+    "No model/checkpoint is initialized, restored, evaluated, trained, promoted or replaced by corpus construction."
+  ],
+  "manifest": {
+    "bytes": 52638,
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/corpus-manifest.json",
+    "sha256": "7a841522be4e481be886be65b3bdaf85092e24cd2c2cb0202e7eb91ee5b0c959"
+  },
+  "pattern_fairness": "All eight templates, O/P/F aliases, four nullable cells, four negative categories and TRAIN/selection/final anagram permutation family remain deliberately shared with prior banks. Every action lemma occurs8 times per template inTRAIN and once per template in each evaluation split.",
+  "positive_scope_transport_validations": 640,
+  "prior_union": {
+    "banks": 3,
+    "declared_content_words": 813,
+    "declared_facet_counts": {
+      "action": 144,
+      "actor": 144,
+      "condition": 72,
+      "object": 288
+    },
+    "identity_head_counts": {
+      "action": 144,
+      "actor": 144,
+      "condition": 72,
+      "object": 288
+    },
+    "normalized_sources": 3840,
+    "source_parent_groups": 1920
+  },
+  "protocol": {
+    "bytes": 19264,
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/corpus-protocol.json",
+    "sha256": "fda43e533276cc2d924e36132c9090341b68d0c015d5e038583c9c1f673d8b2d"
+  },
+  "reference_barrier": "Construction author has reviewed all labels. The numerical runner must save both selections and all parent/arm panels for all four evaluation cohorts before opening any final/retention references; not authors-blind.",
+  "retention": "All three earlier128-case panels are declared exposed retention,384cases total; no older labels fit or select.",
+  "schema": "support-gate-authored-corpus-construction-note/v1",
+  "shapes": {
+    "final": {
+      "input_keys": [
+        "condition_attachment",
+        "id",
+        "source_group",
+        "source_sha256",
+        "source_text",
+        "template"
+      ],
+      "inputs": 128,
+      "negative_reference_keys": [
+        "admission_masks",
+        "id",
+        "independent_legal_review",
+        "legally_false_claimed",
+        "natural_source_semantics_verified",
+        "parent_source_id",
+        "prediction",
+        "reference_origin",
+        "source_group",
+        "source_sha256",
+        "supported",
+        "unsupported_category"
+      ],
+      "positive_reference_keys": [
+        "admission_masks",
+        "declared_action_lemma",
+        "id",
+        "independent_legal_review",
+        "natural_source_semantics_verified",
+        "parent_source_id",
+        "prediction",
+        "reference_origin",
+        "repeated_actor_object_occurrences",
+        "source_group",
+        "source_sha256",
+        "supported"
+      ],
+      "references": 128
+    },
+    "selection": {
+      "input_keys": [
+        "condition_attachment",
+        "id",
+        "source_group",
+        "source_sha256",
+        "source_text",
+        "template"
+      ],
+      "inputs": 128,
+      "negative_reference_keys": [
+        "admission_masks",
+        "id",
+        "independent_legal_review",
+        "legally_false_claimed",
+        "natural_source_semantics_verified",
+        "parent_source_id",
+        "prediction",
+        "reference_origin",
+        "source_group",
+        "source_sha256",
+        "supported",
+        "unsupported_category"
+      ],
+      "positive_reference_keys": [
+        "admission_masks",
+        "declared_action_lemma",
+        "id",
+        "independent_legal_review",
+        "natural_source_semantics_verified",
+        "parent_source_id",
+        "prediction",
+        "reference_origin",
+        "repeated_actor_object_occurrences",
+        "source_group",
+        "source_sha256",
+        "supported"
+      ],
+      "references": 128
+    },
+    "train": {
+      "input_keys": [
+        "condition_attachment",
+        "id",
+        "source_group",
+        "source_sha256",
+        "source_text",
+        "template"
+      ],
+      "inputs": 1024,
+      "negative_reference_keys": [
+        "admission_masks",
+        "id",
+        "independent_legal_review",
+        "legally_false_claimed",
+        "natural_source_semantics_verified",
+        "parent_source_id",
+        "prediction",
+        "reference_origin",
+        "source_group",
+        "source_sha256",
+        "supported",
+        "unsupported_category"
+      ],
+      "positive_reference_keys": [
+        "admission_masks",
+        "declared_action_lemma",
+        "id",
+        "independent_legal_review",
+        "natural_source_semantics_verified",
+        "parent_source_id",
+        "prediction",
+        "reference_origin",
+        "repeated_actor_object_occurrences",
+        "source_group",
+        "source_sha256",
+        "supported"
+      ],
+      "references": 1024
+    }
+  },
+  "source_builder": {
+    "bytes": 34669,
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/corpus-builder.py",
+    "sha256": "ae83a8ae139301411ffbe3aeb6f5b2a06e9fab509ca83c6f835919c387cbdf73"
+  },
+  "split_artifacts": {
+    "final-inputs.json": {
+      "bytes": 63652,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/final-inputs.json",
+      "sha256": "b49bea41269cfab18ff58a598ea47d7f85385322701ad070aa761a84b18588ac"
+    },
+    "final-references.json": {
+      "bytes": 141504,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/final-references.json",
+      "sha256": "0ceebf7f5f5b223c56d826386fbcc5d37a36f1ece0551e36945ae0e3aca55b0f"
+    },
+    "selection-inputs.json": {
+      "bytes": 62866,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/selection-inputs.json",
+      "sha256": "8dd31dfa1c3f23e3aee4f834ba0ab242a3d26fe6a991c021faa941ce02d0d6ab"
+    },
+    "selection-references.json": {
+      "bytes": 141415,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/selection-references.json",
+      "sha256": "5883630a1cecdbfb8de6c19605fe91876f54c140df587e0afeb5e21cdf29fa31"
+    },
+    "train-inputs.json": {
+      "bytes": 504469,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/train-inputs.json",
+      "sha256": "84c0e94003a557593c6184d52fe181fd9e30c3a3337d8fed214b6d20f5a23489"
+    },
+    "train-references.json": {
+      "bytes": 1131415,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/train-references.json",
+      "sha256": "59ebff84fd896cb32c482a28dffc23130e6997508df4553465849e6e961e3c4e"
+    }
+  },
+  "statistics": {
+    "final": {
+      "caller_attachments": {
+        "rule": 64,
+        "statement": 64
+      },
+      "maximum_source_UTF8_bytes": 158,
+      "maximum_source_tokens": 27,
+      "maximum_token_UTF8_bytes": 12,
+      "modalities": {
+        "F": 21,
+        "O": 22,
+        "P": 21
+      },
+      "negative_categories": {
+        "extra_exception": 16,
+        "modal_deletion": 16,
+        "modal_misspelling": 16,
+        "second_rule": 16
+      },
+      "negative_rows": 64,
+      "nullable_cells": {
+        "no_object|condition": 16,
+        "no_object|no_condition": 16,
+        "object|condition": 16,
+        "object|no_condition": 16
+      },
+      "positive_rows": 64,
+      "repeated_actor_object_occurrences": 10,
+      "source_groups": 64,
+      "templates": {
+        "actor_condition_modal_action_object": 8,
+        "actor_modal_action_object_condition": 8,
+        "actor_possessive_gerund_object_modal_condition": 8,
+        "condition_actor_modal_action_object": 8,
+        "condition_actor_possessive_gerund_object_modal": 8,
+        "condition_modal_actor_action_object": 8,
+        "gerund_object_agent_modal_condition": 8,
+        "modal_actor_action_object_condition": 8
+      },
+      "unicode_positive_sources": 3
+    },
+    "selection": {
+      "caller_attachments": {
+        "rule": 64,
+        "statement": 64
+      },
+      "maximum_source_UTF8_bytes": 156,
+      "maximum_source_tokens": 27,
+      "maximum_token_UTF8_bytes": 12,
+      "modalities": {
+        "F": 21,
+        "O": 22,
+        "P": 21
+      },
+      "negative_categories": {
+        "extra_exception": 16,
+        "modal_deletion": 16,
+        "modal_misspelling": 16,
+        "second_rule": 16
+      },
+      "negative_rows": 64,
+      "nullable_cells": {
+        "no_object|condition": 16,
+        "no_object|no_condition": 16,
+        "object|condition": 16,
+        "object|no_condition": 16
+      },
+      "positive_rows": 64,
+      "repeated_actor_object_occurrences": 10,
+      "source_groups": 64,
+      "templates": {
+        "actor_condition_modal_action_object": 8,
+        "actor_modal_action_object_condition": 8,
+        "actor_possessive_gerund_object_modal_condition": 8,
+        "condition_actor_modal_action_object": 8,
+        "condition_actor_possessive_gerund_object_modal": 8,
+        "condition_modal_actor_action_object": 8,
+        "gerund_object_agent_modal_condition": 8,
+        "modal_actor_action_object_condition": 8
+      },
+      "unicode_positive_sources": 15
+    },
+    "train": {
+      "caller_attachments": {
+        "rule": 512,
+        "statement": 512
+      },
+      "maximum_source_UTF8_bytes": 183,
+      "maximum_source_tokens": 31,
+      "maximum_token_UTF8_bytes": 12,
+      "modalities": {
+        "F": 171,
+        "O": 171,
+        "P": 170
+      },
+      "negative_categories": {
+        "extra_exception": 128,
+        "modal_deletion": 128,
+        "modal_misspelling": 128,
+        "second_rule": 128
+      },
+      "negative_rows": 512,
+      "nullable_cells": {
+        "no_object|condition": 128,
+        "no_object|no_condition": 128,
+        "object|condition": 128,
+        "object|no_condition": 128
+      },
+      "positive_rows": 512,
+      "repeated_actor_object_occurrences": 86,
+      "source_groups": 512,
+      "templates": {
+        "actor_condition_modal_action_object": 64,
+        "actor_modal_action_object_condition": 64,
+        "actor_possessive_gerund_object_modal_condition": 64,
+        "condition_actor_modal_action_object": 64,
+        "condition_actor_possessive_gerund_object_modal": 64,
+        "condition_modal_actor_action_object": 64,
+        "gerund_object_agent_modal_condition": 64,
+        "modal_actor_action_object_condition": 64
+      },
+      "unicode_positive_sources": 91
+    }
+  },
+  "training_schedule": {
+    "batch_size": 16,
+    "distinct_train_inputs": 1024,
+    "input_presentations_per_arm": 3840,
+    "negative_per_batch": 8,
+    "positive_per_batch": 8,
+    "seed": 24605,
+    "sha256": "f581a59964cedee4095d55d492deea808ea7b08daa3392ac7a49b8ab678abf1c",
+    "updates_per_arm": 240
+  }
+}
