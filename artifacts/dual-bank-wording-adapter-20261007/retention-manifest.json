@@ -1,0 +1,129 @@
+{
+  "schema": "dual-bank-adapter-evidence-retention/v1",
+  "complete": true,
+  "files": [
+    {
+      "relative_path": "independent-review.json",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/dual-bank-wording-adapter-20261007/independent-review.json",
+        "bytes": 13056,
+        "sha256": "ed66f7ad266cd36a2fd1f364dfd8591d15d513d5e4f48e525530d0ee9d263644"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/dual-bank-wording-adapter-root-20261007/artifacts/dual-bank-wording-adapter-20261007/independent-review.json",
+        "bytes": 13056,
+        "sha256": "ed66f7ad266cd36a2fd1f364dfd8591d15d513d5e4f48e525530d0ee9d263644"
+      }
+    },
+    {
+      "relative_path": "independent-result-check.json",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/dual-bank-wording-adapter-20261007/independent-result-check.json",
+        "bytes": 48856,
+        "sha256": "bf345cf13ac7589cec18ea972359da2697f97242c83afa6389908409d2bdd7cf"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/dual-bank-wording-adapter-root-20261007/artifacts/dual-bank-wording-adapter-20261007/independent-result-check.json",
+        "bytes": 48856,
+        "sha256": "bf345cf13ac7589cec18ea972359da2697f97242c83afa6389908409d2bdd7cf"
+      }
+    },
+    {
+      "relative_path": "dual-bank-controls.xml",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/dual-bank-wording-adapter-20261007/dual-bank-controls.xml",
+        "bytes": 16684,
+        "sha256": "5ca7deb99fdc641b33c535afb3712fa505f2127a9f353579c3d9ac5fb33281fc"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/dual-bank-wording-adapter-root-20261007/artifacts/dual-bank-wording-adapter-20261007/dual-bank-controls.xml",
+        "bytes": 16684,
+        "sha256": "5ca7deb99fdc641b33c535afb3712fa505f2127a9f353579c3d9ac5fb33281fc"
+      }
+    },
+    {
+      "relative_path": "legacy-owner-controls.xml",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/dual-bank-wording-adapter-20261007/legacy-owner-controls.xml",
+        "bytes": 10797,
+        "sha256": "7efecab235f838b0e6df82b16375e0ea3d1e4f2084abed8ca2b5c57129974466"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/dual-bank-wording-adapter-root-20261007/artifacts/dual-bank-wording-adapter-20261007/legacy-owner-controls.xml",
+        "bytes": 10797,
+        "sha256": "7efecab235f838b0e6df82b16375e0ea3d1e4f2084abed8ca2b5c57129974466"
+      }
+    },
+    {
+      "relative_path": "retained-bank-preparation.json",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/dual-bank-wording-adapter-20261007/retained-bank-preparation.json",
+        "bytes": 889270,
+        "sha256": "2d2d047cc1aa9b77ce8f3e268b7cdc630bf1f0bceb7c06c90989c3240eefbd66"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/dual-bank-wording-adapter-root-20261007/artifacts/dual-bank-wording-adapter-20261007/retained-bank-preparation.json",
+        "bytes": 889270,
+        "sha256": "2d2d047cc1aa9b77ce8f3e268b7cdc630bf1f0bceb7c06c90989c3240eefbd66"
+      }
+    },
+    {
+      "relative_path": "retained-bank-forward-observations.json",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/dual-bank-wording-adapter-20261007/retained-bank-forward-observations.json",
+        "bytes": 2751227,
+        "sha256": "836dd084f9d503ebe641f986abce3d23e2af38a1ab012b346d02612fc85666c4"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/dual-bank-wording-adapter-root-20261007/artifacts/dual-bank-wording-adapter-20261007/retained-bank-forward-observations.json",
+        "bytes": 2751227,
+        "sha256": "836dd084f9d503ebe641f986abce3d23e2af38a1ab012b346d02612fc85666c4"
+      }
+    },
+    {
+      "relative_path": "probe_retained_banks.py",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/dual-bank-wording-adapter-20261007/probe_retained_banks.py",
+        "bytes": 9692,
+        "sha256": "384580801d784a952bd02c13d2f06860ea20492f3d8ab079dc62b94f32897d36"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/dual-bank-wording-adapter-root-20261007/artifacts/dual-bank-wording-adapter-20261007/probe_retained_banks.py",
+        "bytes": 9692,
+        "sha256": "384580801d784a952bd02c13d2f06860ea20492f3d8ab079dc62b94f32897d36"
+      }
+    },
+    {
+      "relative_path": "source-github-byte-readback.json",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/dual-bank-wording-adapter-20261007/source-github-byte-readback.json",
+        "bytes": 7410,
+        "sha256": "90f52c6fdef375c76f5a55c3a2510d74b119c9515a701e8af69ce78a70f4a430"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/dual-bank-wording-adapter-root-20261007/artifacts/dual-bank-wording-adapter-20261007/source-github-byte-readback.json",
+        "bytes": 7410,
+        "sha256": "90f52c6fdef375c76f5a55c3a2510d74b119c9515a701e8af69ce78a70f4a430"
+      }
+    },
+    {
+      "relative_path": "retain_evidence.py",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/dual-bank-wording-adapter-20261007/retain_evidence.py",
+        "bytes": 2005,
+        "sha256": "0dd3b0e76c9a0e0a0c8d3d620de795d57b96fe0823230b43c54661f560f25cd8"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/dual-bank-wording-adapter-root-20261007/artifacts/dual-bank-wording-adapter-20261007/retain_evidence.py",
+        "bytes": 2005,
+        "sha256": "0dd3b0e76c9a0e0a0c8d3d620de795d57b96fe0823230b43c54661f560f25cd8"
+      }
+    }
+  ],
+  "raw_model_weights_or_embeddings_copied": false,
+  "database_or_secret_copied": false,
+  "optimizer_or_encoder_executed": false,
+  "new_fitted_checkpoint_created": false,
+  "fresh_semantic_holdout_qualified": false,
+  "proof_authority": false
+}

@@ -123,3 +123,9 @@ pinned by workspace main `a9c3f943...`, and the subsequent qualified package
 alias supervisor repairs at `dcb8eb8a...`; none of that work is overwritten by
 this input adapter. Public GitHub integration and byte readback are required before
 reporting the source/evidence contribution as available on main.
+
+The later [dual-bank retention update](65-dual-bank-wording-retention-adapter-2026-10-07.md)
+incorporates the completed balanced-bank regression findings. The parent already
+reconstructs that new TRAIN bank exactly; its replacement harmed retained
+wording. Use separate bank replay and complete retention evaluation for the next
+fit, rather than repeating replacement based only on lower loss.

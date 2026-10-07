@@ -1,0 +1,277 @@
+{
+  "schema": "dual-bank-wording-adapter-independent-review/v1",
+  "reviewed_utc": "2026-10-07T06:42:29.397404+00:00",
+  "approved": true,
+  "findings": [],
+  "base_commit": "b6abb32636e336536fc1cfc0f78bba2dc04703c5",
+  "repository": "/home/barberb/lift_coding/.worktrees/dual-bank-wording-adapter-datasets-20261007",
+  "source_file_pins": [
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/dual-bank-wording-adapter-datasets-20261007/scripts/ops/autoencoder/dual_bank_wording_replay/dual_bank_training_adapter.py",
+      "bytes": 26455,
+      "sha256": "433f80f4cca80678d5b8d2976687cf20650a5339a3b670b80139658ef300c4af"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/dual-bank-wording-adapter-datasets-20261007/scripts/ops/autoencoder/dual_bank_wording_replay/dual_bank_retention.py",
+      "bytes": 26660,
+      "sha256": "15accfcf8bbc4e578e32ca7842ac338be2b563458c4c90a85fbe18429da000f1"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/dual-bank-wording-adapter-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_modality_auxiliary.py",
+      "bytes": 9634,
+      "sha256": "48b7a3b2a0e5b69ae292f2c02dc0e87d92de4ffb4443bfba5ae52695b9a4320a"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/dual-bank-wording-adapter-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/paraphrase_modality_auxiliary_training.py",
+      "bytes": 13994,
+      "sha256": "789f47047badfa30553940547c2db28f08afa1052f1bcc5ace68dbccedc2ccac"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/dual-bank-wording-adapter-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/long_span_source_value_training.py",
+      "bytes": 105415,
+      "sha256": "c1663820492a6879b14ab89dfd9b052105cf16378bb015fea08c3220d83456e0"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/dual-bank-wording-adapter-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/contextual_training_mixture.py",
+      "bytes": 17786,
+      "sha256": "2d7de997e1baff4a1534ddd756f99864ef2270e3c641c0664f6a240f826bfda5"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/dual-bank-wording-adapter-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_training_sources.py",
+      "bytes": 14474,
+      "sha256": "15458de60d79304d4fb676913ee4b3d4578bdc21b85a5437b998c5503f3fb288"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/dual-bank-wording-adapter-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/training_paraphrase_source_inputs.py",
+      "bytes": 9145,
+      "sha256": "5c0d4571b87d4b3b82be3bae11ff08599f2a5d09c4465a8315641a05d1657649"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/dual-bank-wording-adapter-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/authored_training_paraphrases.py",
+      "bytes": 9718,
+      "sha256": "9644f86159fecd0d9a1bb8599e06dacfcbba2581db98a990b0e224ebb8de8513"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/dual-bank-wording-adapter-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/clause_source_context.py",
+      "bytes": 14249,
+      "sha256": "583422dbb63cdba96182090f5f76ef74698a69ab84fd42dc9e53bc4e09cbf5f6"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/dual-bank-wording-adapter-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/decoder_distillation_experiment.py",
+      "bytes": 37989,
+      "sha256": "76252ad397492762d4fc41915afd1051a93a11b74994655326fe56fa722e3b61"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/dual-bank-wording-adapter-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/ordered_clause_recurrent_decoder_experiment.py",
+      "bytes": 26392,
+      "sha256": "56392a6f37f528350f18b68b56a016aad170530e93e95e660b6898f1c4cef3da"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/dual-bank-wording-adapter-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/source_value_decoder_experiment.py",
+      "bytes": 14958,
+      "sha256": "df72b5331c1dc5b98d11974748bb05ba31504db7e7f69854327d080118eeb61e"
+    }
+  ],
+  "fixture_source_pin": {
+    "path": "/home/barberb/lift_coding/.worktrees/dual-bank-wording-adapter-datasets-20261007/scripts/ops/autoencoder/dual_bank_wording_replay/test_dual_bank_retention.py",
+    "bytes": 17284,
+    "sha256": "9161ee5cd16bc08db76e4635ec2b6d1d15b3199fb7b686fd846f47c1188bc589"
+  },
+  "review_scope": "Independent read-only source review and standard-library metadata controls only. Genuine Torch CE/control runs belong to the separate numerical test agent and are not execution by this reviewer.",
+  "resolved_prior_findings": [
+    {
+      "id": "configured_handle_ownership",
+      "resolved": true,
+      "details": "Per-configure identity tokens reject cross-helper Banks/Caches despite shared class and codec."
+    },
+    {
+      "id": "report_bank_lineage_and_authority",
+      "resolved": true,
+      "details": "Cache/schedule/draw/inner/outer bank SHA and role/width joins; typed local/global ordinals; false sampler, commit-observer and qualification claims enforced."
+    },
+    {
+      "id": "inherited_cache_preparation_timeout",
+      "resolved": true,
+      "details": "Exact inherited modality-preparation stop reason preserves zero-cache/zero-commit reports with cache_prepared false; contradictions rejected."
+    },
+    {
+      "id": "loss_schema_weight_gradient_consistency",
+      "resolved": true,
+      "details": "Actual role-specific loss schemas recorded; top/update float weight0/.05 and exact gradient bools joined for zero/positive ablations."
+    }
+  ],
+  "pure_report_positive_controls": [
+    {
+      "first_bank": "control",
+      "weight": 0.0,
+      "declared_synthetic_commits": 170,
+      "source_presentations": 1020,
+      "original_commit_records_unchanged": true,
+      "scope": "Pure report fixtures only; no optimizer commits actually executed"
+    },
+    {
+      "first_bank": "control",
+      "weight": 0.05,
+      "declared_synthetic_commits": 170,
+      "source_presentations": 1020,
+      "original_commit_records_unchanged": true,
+      "scope": "Pure report fixtures only; no optimizer commits actually executed"
+    },
+    {
+      "first_bank": "balanced",
+      "weight": 0.0,
+      "declared_synthetic_commits": 170,
+      "source_presentations": 1020,
+      "original_commit_records_unchanged": true,
+      "scope": "Pure report fixtures only; no optimizer commits actually executed"
+    },
+    {
+      "first_bank": "balanced",
+      "weight": 0.05,
+      "declared_synthetic_commits": 170,
+      "source_presentations": 1020,
+      "original_commit_records_unchanged": true,
+      "scope": "Pure report fixtures only; no optimizer commits actually executed"
+    }
+  ],
+  "pure_report_refusal_controls": [
+    {
+      "case": "cache_and_inner_bank_sha_rebound",
+      "refused": true,
+      "error": "bound original proposed schedule and bank cache receipts required"
+    },
+    {
+      "case": "outer_selected_bank_sha_rebound",
+      "refused": true,
+      "error": "separate bank-local committed receipt differs"
+    },
+    {
+      "case": "auxiliary_used_for_selection",
+      "refused": true,
+      "error": "actual dual tensor cache receipt required"
+    },
+    {
+      "case": "auxiliary_not_training_only",
+      "refused": true,
+      "error": "actual dual tensor cache receipt required"
+    },
+    {
+      "case": "outer_receipt_claims_commit",
+      "refused": true,
+      "error": "actual auxiliary/global commit receipt differs"
+    },
+    {
+      "case": "inner_receipt_qualified",
+      "refused": true,
+      "error": "separate bank-local committed receipt differs"
+    },
+    {
+      "case": "inner_schema_foreign",
+      "refused": true,
+      "error": "separate bank-local committed receipt differs"
+    },
+    {
+      "case": "zero_weight_gradient_enabled",
+      "refused": true,
+      "error": "actual auxiliary/global commit receipt differs"
+    },
+    {
+      "case": "committed_weight_foreign",
+      "refused": true,
+      "error": "actual auxiliary/global commit receipt differs"
+    },
+    {
+      "case": "bank_local_step_global_alias",
+      "refused": true,
+      "error": "separate bank-local committed receipt differs"
+    },
+    {
+      "case": "outer_sampler_advanced",
+      "refused": true,
+      "error": "actual auxiliary/global commit receipt differs"
+    },
+    {
+      "case": "outer_qualified",
+      "refused": true,
+      "error": "actual auxiliary/global commit receipt differs"
+    },
+    {
+      "case": "bool_optimizer_step",
+      "refused": true,
+      "error": "contiguous original optimizer commits required"
+    },
+    {
+      "case": "bool_global_step",
+      "refused": true,
+      "error": "actual auxiliary/global commit receipt differs"
+    },
+    {
+      "case": "cache_dimension_768",
+      "refused": true,
+      "error": "bound original proposed schedule and bank cache receipts required"
+    },
+    {
+      "case": "nonzero_cache_timeout_commit",
+      "refused": true,
+      "error": "only an inherited zero-commit cache preparation timeout can lack caches"
+    },
+    {
+      "case": "wrong_timeout_stop_reason",
+      "refused": true,
+      "error": "only an inherited zero-commit cache preparation timeout can lack caches"
+    }
+  ],
+  "inert_configure_ownership_controls": [
+    {
+      "case": "foreign_configure_bank_estimate",
+      "refused": true,
+      "error": "prepared bank pair and original170 step budget required",
+      "scope": "Explicitly inert helper/cache doubles; no tensor/model callback executed"
+    },
+    {
+      "case": "foreign_configure_bank_tensor_prepare",
+      "refused": true,
+      "error": "exact prepared banks/codec/seed170 cache budget required",
+      "scope": "Explicitly inert helper/cache doubles; no tensor/model callback executed"
+    },
+    {
+      "case": "foreign_configure_cache_loss",
+      "refused": true,
+      "error": "matching private dual cache/model and exact two-bank membership required",
+      "scope": "Explicitly inert helper/cache doubles; no tensor/model callback executed"
+    },
+    {
+      "case": "foreign_configure_cache_readout",
+      "refused": true,
+      "error": "matching private dual cache/model and exact two-bank membership required",
+      "scope": "Explicitly inert helper/cache doubles; no tensor/model callback executed"
+    }
+  ],
+  "genuine_owner_timeout_shape_preserved": true,
+  "review_notes": [
+    "Each renderer profile keeps its authentic independent180-clause bank. Their validators preserve original90-rule targets, exact source/codec/exclusion/context bindings and frozen original preprocessing ownership.",
+    "No merged360-row bank enters original decoder/count streams. The inherited trainer code, optimizer, selector and source projections are unchanged.",
+    "Adopted per-bank caches keep original model/tensor handles and original cache receipts; only paired orders and descriptive receipts are replaced. In-place tensor or frozen-state changes are checked before/after loss/readout.",
+    "Alternating global committed t dispatches one role using local floor(t/2). Retried or abandoned forwards do not advance a sampler or create optimizer commits.",
+    "Inherited trainer records auxiliary receipts after optimizer.step; reconciliation counts only declared committed_updates and preserves their original records. The prior four-template counter is retained and labelled inapplicable.",
+    "Four complete170-step synthetic report controls show255presentations peractualtemplate,510perbank and2\u20133presentations per source; these are fixture report counts, not actual training results.",
+    "Source-vector provenance, native encoder execution, resource/readiness and quality/proof gates remain outside this private adapter. Actual training and all retention panels require separate guarded execution."
+  ],
+  "read_only_review": true,
+  "tensor_libraries_imported": false,
+  "model_or_encoder_executed": false,
+  "optimizer_or_training_executed": false,
+  "network_or_database_accessed": false,
+  "actual_decoder_checkpoints_loaded": false,
+  "actual_embedding_caches_loaded": false,
+  "full_dependency_closure_qualified": false,
+  "execution_readiness_granted": false,
+  "quality_or_proof_admitted": false,
+  "limits": [
+    "This review does not run the inherited full trainer or attest optimizer commits.",
+    "Synthetic report controls and inert helper controls do not authenticate real native assets or semantic quality.",
+    "Separate numerical controls use explicit synthetic encoder receipts and a tiny decoder; they are not production reconstruction or retained-model improvement evidence.",
+    "Adapting dispatch alone does not establish retention across original/normative/new balanced TRAIN panels, exposed development, or untouched holdouts.",
+    "Recorded owner pins identify reviewed files, not a complete transitive execution closure."
+  ]
+}
