@@ -1,0 +1,86 @@
+{
+  "schema": "normative-retained-cache-archived-output-parity/v1",
+  "completed": true,
+  "script_pin": {
+    "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/replay_retained_assets.py",
+    "bytes": 9468,
+    "sha256": "15b1b85c27ae8899ac85a77f79217233ddf0bb92e54ed713877aa2b34f528f13"
+  },
+  "lanes": [
+    {
+      "dimension": 384,
+      "arm": "normative-wording-zero",
+      "rows": 48,
+      "archived_same_state_prediction_pin": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/384-normative-wording-zero/selected-predictions.json",
+        "bytes": 26319,
+        "sha256": "416a83eda637e8dca296bd63f393d3d1db2595726b971efd115e4bb58d522f69"
+      },
+      "candidate_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/generation/384-normative-wording-zero-candidate-report.json",
+        "bytes": 150039,
+        "sha256": "1035dca1dc8c4c4104d9d00324bb823825072b07f5b301091a7026f4a0a417f2"
+      },
+      "exact_token_status_EOS_archived_parity": 48,
+      "mismatches": 0
+    },
+    {
+      "dimension": 384,
+      "arm": "normative-wording-ce",
+      "rows": 48,
+      "archived_same_state_prediction_pin": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/384-normative-wording-ce/selected-predictions.json",
+        "bytes": 26319,
+        "sha256": "3137971457a9ece0ebfbd71bd28cad8ca8ee7634acd8dc334d0cd981c5360208"
+      },
+      "candidate_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/generation/384-normative-wording-ce-candidate-report.json",
+        "bytes": 150032,
+        "sha256": "f09a237f5147219a2afe649682d5f7fe2aed50675ffda906cac63f312e987934"
+      },
+      "exact_token_status_EOS_archived_parity": 48,
+      "mismatches": 0
+    },
+    {
+      "dimension": 768,
+      "arm": "normative-wording-zero",
+      "rows": 48,
+      "archived_same_state_prediction_pin": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/768-normative-wording-zero/selected-predictions.json",
+        "bytes": 26319,
+        "sha256": "91b88260a61f6ef1b99bd68343e25e5e87254f74d585047c62ecf7e80cc22121"
+      },
+      "candidate_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/generation/768-normative-wording-zero-candidate-report.json",
+        "bytes": 150273,
+        "sha256": "0c8972ad5b2e51d56e963344206c3a8f63aefbd54c20eea9a62b4fe412cdec12"
+      },
+      "exact_token_status_EOS_archived_parity": 48,
+      "mismatches": 0
+    },
+    {
+      "dimension": 768,
+      "arm": "normative-wording-ce",
+      "rows": 48,
+      "archived_same_state_prediction_pin": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-retention-20261006/retention-r1/results/768-normative-wording-ce/selected-predictions.json",
+        "bytes": 26319,
+        "sha256": "1eb9263653eefd5263768558fb58f515faf2bb12f30db2aeef091d9da327d776"
+      },
+      "candidate_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/generation/768-normative-wording-ce-candidate-report.json",
+        "bytes": 150266,
+        "sha256": "d452b013e39f33b92357c5105a8c384615a4354f03ca47056efcc43e6dee12d3"
+      },
+      "exact_token_status_EOS_archived_parity": 48,
+      "mismatches": 0
+    }
+  ],
+  "separate_comparison_process": true,
+  "references_or_gold_scored": false,
+  "model_or_encoder_executed": false,
+  "fresh_semantic_reconstruction_quality_measured": false,
+  "runtime_admitted": false,
+  "teacher_qualified": false,
+  "proof_authority": false
+}

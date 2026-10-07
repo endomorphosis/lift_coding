@@ -1,0 +1,465 @@
+{
+  "schema": "normative-retained-cache-evidence-retention/v1",
+  "complete": true,
+  "script_pin": {
+    "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/retain_evidence.py",
+    "bytes": 2611,
+    "sha256": "dbf43b4b88df213ba33cf01861986b3d6e9e72f66b60a9d3347a8eed812eabaf"
+  },
+  "files": [
+    {
+      "relative_path": "prepare_retained_assets.py",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/prepare_retained_assets.py",
+        "bytes": 4391,
+        "sha256": "e61f1e89c9122ec6ffd7b5491108cf52dd54dd42f3469be0b5abb7fee6723b40"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-root-20261007/artifacts/normative-retained-cache-runtime-20261007/prepare_retained_assets.py",
+        "bytes": 4391,
+        "sha256": "e61f1e89c9122ec6ffd7b5491108cf52dd54dd42f3469be0b5abb7fee6723b40"
+      }
+    },
+    {
+      "relative_path": "replay_retained_assets.py",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/replay_retained_assets.py",
+        "bytes": 9468,
+        "sha256": "15b1b85c27ae8899ac85a77f79217233ddf0bb92e54ed713877aa2b34f528f13"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-root-20261007/artifacts/normative-retained-cache-runtime-20261007/replay_retained_assets.py",
+        "bytes": 9468,
+        "sha256": "15b1b85c27ae8899ac85a77f79217233ddf0bb92e54ed713877aa2b34f528f13"
+      }
+    },
+    {
+      "relative_path": "retain_evidence.py",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/retain_evidence.py",
+        "bytes": 2611,
+        "sha256": "dbf43b4b88df213ba33cf01861986b3d6e9e72f66b60a9d3347a8eed812eabaf"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-root-20261007/artifacts/normative-retained-cache-runtime-20261007/retain_evidence.py",
+        "bytes": 2611,
+        "sha256": "dbf43b4b88df213ba33cf01861986b3d6e9e72f66b60a9d3347a8eed812eabaf"
+      }
+    },
+    {
+      "relative_path": "independent-review.json",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/independent-review.json",
+        "bytes": 27863,
+        "sha256": "787ca25e9715ed945d4facbb107168fe5ea7a9522db204339350f2554c552551"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-root-20261007/artifacts/normative-retained-cache-runtime-20261007/independent-review.json",
+        "bytes": 27863,
+        "sha256": "787ca25e9715ed945d4facbb107168fe5ea7a9522db204339350f2554c552551"
+      }
+    },
+    {
+      "relative_path": "independent-result-check.json",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/independent-result-check.json",
+        "bytes": 24178,
+        "sha256": "eae440b309c93bdff2970c6c5a5d46955b2b5471b6e04d07109129c13dd9bd97"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-root-20261007/artifacts/normative-retained-cache-runtime-20261007/independent-result-check.json",
+        "bytes": 24178,
+        "sha256": "eae440b309c93bdff2970c6c5a5d46955b2b5471b6e04d07109129c13dd9bd97"
+      }
+    },
+    {
+      "relative_path": "test-and-source-review.json",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/test-and-source-review.json",
+        "bytes": 5468,
+        "sha256": "e069cc540bd30da3b0b2545a8b5e90ad4de9af619bc9d1fd7d1ddd6933d162a9"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-root-20261007/artifacts/normative-retained-cache-runtime-20261007/test-and-source-review.json",
+        "bytes": 5468,
+        "sha256": "e069cc540bd30da3b0b2545a8b5e90ad4de9af619bc9d1fd7d1ddd6933d162a9"
+      }
+    },
+    {
+      "relative_path": "legacy-runtime-controls.xml",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/legacy-runtime-controls.xml",
+        "bytes": 49905,
+        "sha256": "79a9a5658cc607cc2f91e577aa61a9c9eaab809c855a3f8f6729baf9de714659"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-root-20261007/artifacts/normative-retained-cache-runtime-20261007/legacy-runtime-controls.xml",
+        "bytes": 49905,
+        "sha256": "79a9a5658cc607cc2f91e577aa61a9c9eaab809c855a3f8f6729baf9de714659"
+      }
+    },
+    {
+      "relative_path": "retained-cache-controls.xml",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/retained-cache-controls.xml",
+        "bytes": 22232,
+        "sha256": "23fa4b18d696d11f78eeab8231831fa8f62cb7241bbbb781c46f15bf99e0884a"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-root-20261007/artifacts/normative-retained-cache-runtime-20261007/retained-cache-controls.xml",
+        "bytes": 22232,
+        "sha256": "23fa4b18d696d11f78eeab8231831fa8f62cb7241bbbb781c46f15bf99e0884a"
+      }
+    },
+    {
+      "relative_path": "archived-output-parity.json",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/archived-output-parity.json",
+        "bytes": 3958,
+        "sha256": "48f3398100cecf89e7c758ed8fe74a799b930b4ad1c413b1d09045680f4a09ec"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-root-20261007/artifacts/normative-retained-cache-runtime-20261007/archived-output-parity.json",
+        "bytes": 3958,
+        "sha256": "48f3398100cecf89e7c758ed8fe74a799b930b4ad1c413b1d09045680f4a09ec"
+      }
+    },
+    {
+      "relative_path": "source-github-byte-readback.json",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/source-github-byte-readback.json",
+        "bytes": 12410,
+        "sha256": "9fa0e775bfbd73865d238b7cd42f3f4b9c959d9f180ef70464c34541e86c6b77"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-root-20261007/artifacts/normative-retained-cache-runtime-20261007/source-github-byte-readback.json",
+        "bytes": 12410,
+        "sha256": "9fa0e775bfbd73865d238b7cd42f3f4b9c959d9f180ef70464c34541e86c6b77"
+      }
+    },
+    {
+      "relative_path": "preflight/384-normative-wording-ce-metadata-plan.json",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/preflight/384-normative-wording-ce-metadata-plan.json",
+        "bytes": 51956,
+        "sha256": "7fa8f11b4d06082d55aa0ba61c59dfd1ec9e51acb792b460d5efee9d853661db"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-root-20261007/artifacts/normative-retained-cache-runtime-20261007/preflight/384-normative-wording-ce-metadata-plan.json",
+        "bytes": 51956,
+        "sha256": "7fa8f11b4d06082d55aa0ba61c59dfd1ec9e51acb792b460d5efee9d853661db"
+      }
+    },
+    {
+      "relative_path": "preflight/384-normative-wording-ce-options.json",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/preflight/384-normative-wording-ce-options.json",
+        "bytes": 15436,
+        "sha256": "4c4940fe4fec7884be4de1bb22f61640b021992408983329b83fc5939d5e057f"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-root-20261007/artifacts/normative-retained-cache-runtime-20261007/preflight/384-normative-wording-ce-options.json",
+        "bytes": 15436,
+        "sha256": "4c4940fe4fec7884be4de1bb22f61640b021992408983329b83fc5939d5e057f"
+      }
+    },
+    {
+      "relative_path": "preflight/384-normative-wording-zero-metadata-plan.json",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/preflight/384-normative-wording-zero-metadata-plan.json",
+        "bytes": 51963,
+        "sha256": "ee90089e3a3914ba81fbeb78148660a5e77e5c050291139baf289a18e750444b"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-root-20261007/artifacts/normative-retained-cache-runtime-20261007/preflight/384-normative-wording-zero-metadata-plan.json",
+        "bytes": 51963,
+        "sha256": "ee90089e3a3914ba81fbeb78148660a5e77e5c050291139baf289a18e750444b"
+      }
+    },
+    {
+      "relative_path": "preflight/384-normative-wording-zero-options.json",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/preflight/384-normative-wording-zero-options.json",
+        "bytes": 15440,
+        "sha256": "561281b9b9d7bae3e4d1a39b85094a69208e5328e68d642b01e4c5a0811b94d8"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-root-20261007/artifacts/normative-retained-cache-runtime-20261007/preflight/384-normative-wording-zero-options.json",
+        "bytes": 15440,
+        "sha256": "561281b9b9d7bae3e4d1a39b85094a69208e5328e68d642b01e4c5a0811b94d8"
+      }
+    },
+    {
+      "relative_path": "preflight/768-normative-wording-ce-metadata-plan.json",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/preflight/768-normative-wording-ce-metadata-plan.json",
+        "bytes": 52188,
+        "sha256": "90c17a681b688f8584436c8d905c99f2d5d8649289584ebf2a3b3cd56bf71b48"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-root-20261007/artifacts/normative-retained-cache-runtime-20261007/preflight/768-normative-wording-ce-metadata-plan.json",
+        "bytes": 52188,
+        "sha256": "90c17a681b688f8584436c8d905c99f2d5d8649289584ebf2a3b3cd56bf71b48"
+      }
+    },
+    {
+      "relative_path": "preflight/768-normative-wording-ce-options.json",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/preflight/768-normative-wording-ce-options.json",
+        "bytes": 15436,
+        "sha256": "2caa0aec359ff4bf5c71783f279afcf5dd790f221b7a4acdcc66869f3964ddbd"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-root-20261007/artifacts/normative-retained-cache-runtime-20261007/preflight/768-normative-wording-ce-options.json",
+        "bytes": 15436,
+        "sha256": "2caa0aec359ff4bf5c71783f279afcf5dd790f221b7a4acdcc66869f3964ddbd"
+      }
+    },
+    {
+      "relative_path": "preflight/768-normative-wording-zero-metadata-plan.json",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/preflight/768-normative-wording-zero-metadata-plan.json",
+        "bytes": 52195,
+        "sha256": "ad790144dfd337c4013f4a01292a7bd46c027dcf37b15405cb64cae802e89f50"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-root-20261007/artifacts/normative-retained-cache-runtime-20261007/preflight/768-normative-wording-zero-metadata-plan.json",
+        "bytes": 52195,
+        "sha256": "ad790144dfd337c4013f4a01292a7bd46c027dcf37b15405cb64cae802e89f50"
+      }
+    },
+    {
+      "relative_path": "preflight/768-normative-wording-zero-options.json",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/preflight/768-normative-wording-zero-options.json",
+        "bytes": 15440,
+        "sha256": "d7712507de1cc5a8e4c477ee40a0c8512d604c93261e7c0d06ccf575349ebcf5"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-root-20261007/artifacts/normative-retained-cache-runtime-20261007/preflight/768-normative-wording-zero-options.json",
+        "bytes": 15440,
+        "sha256": "d7712507de1cc5a8e4c477ee40a0c8512d604c93261e7c0d06ccf575349ebcf5"
+      }
+    },
+    {
+      "relative_path": "preflight/retained-assets-preflight.json",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/preflight/retained-assets-preflight.json",
+        "bytes": 7799,
+        "sha256": "6480455ffad424963d241005dee2a33f71f45e1f112b9fa085ccfba2c3b233bb"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-root-20261007/artifacts/normative-retained-cache-runtime-20261007/preflight/retained-assets-preflight.json",
+        "bytes": 7799,
+        "sha256": "6480455ffad424963d241005dee2a33f71f45e1f112b9fa085ccfba2c3b233bb"
+      }
+    },
+    {
+      "relative_path": "generation/384-normative-wording-ce-candidate-report.json",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/generation/384-normative-wording-ce-candidate-report.json",
+        "bytes": 150032,
+        "sha256": "f09a237f5147219a2afe649682d5f7fe2aed50675ffda906cac63f312e987934"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-root-20261007/artifacts/normative-retained-cache-runtime-20261007/generation/384-normative-wording-ce-candidate-report.json",
+        "bytes": 150032,
+        "sha256": "f09a237f5147219a2afe649682d5f7fe2aed50675ffda906cac63f312e987934"
+      }
+    },
+    {
+      "relative_path": "generation/384-normative-wording-zero-candidate-report.json",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/generation/384-normative-wording-zero-candidate-report.json",
+        "bytes": 150039,
+        "sha256": "1035dca1dc8c4c4104d9d00324bb823825072b07f5b301091a7026f4a0a417f2"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-root-20261007/artifacts/normative-retained-cache-runtime-20261007/generation/384-normative-wording-zero-candidate-report.json",
+        "bytes": 150039,
+        "sha256": "1035dca1dc8c4c4104d9d00324bb823825072b07f5b301091a7026f4a0a417f2"
+      }
+    },
+    {
+      "relative_path": "generation/768-normative-wording-ce-candidate-report.json",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/generation/768-normative-wording-ce-candidate-report.json",
+        "bytes": 150266,
+        "sha256": "d452b013e39f33b92357c5105a8c384615a4354f03ca47056efcc43e6dee12d3"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-root-20261007/artifacts/normative-retained-cache-runtime-20261007/generation/768-normative-wording-ce-candidate-report.json",
+        "bytes": 150266,
+        "sha256": "d452b013e39f33b92357c5105a8c384615a4354f03ca47056efcc43e6dee12d3"
+      }
+    },
+    {
+      "relative_path": "generation/768-normative-wording-zero-candidate-report.json",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/generation/768-normative-wording-zero-candidate-report.json",
+        "bytes": 150273,
+        "sha256": "0c8972ad5b2e51d56e963344206c3a8f63aefbd54c20eea9a62b4fe412cdec12"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-root-20261007/artifacts/normative-retained-cache-runtime-20261007/generation/768-normative-wording-zero-candidate-report.json",
+        "bytes": 150273,
+        "sha256": "0c8972ad5b2e51d56e963344206c3a8f63aefbd54c20eea9a62b4fe412cdec12"
+      }
+    },
+    {
+      "relative_path": "generation/generation-result.json",
+      "source_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/generation/generation-result.json",
+        "bytes": 10679,
+        "sha256": "bb9cdd93b03ebbe6d489b03f3af6a80bc9530d6a48a734fe2fc2009376b6abc1"
+      },
+      "publication_pin": {
+        "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-root-20261007/artifacts/normative-retained-cache-runtime-20261007/generation/generation-result.json",
+        "bytes": 10679,
+        "sha256": "bb9cdd93b03ebbe6d489b03f3af6a80bc9530d6a48a734fe2fc2009376b6abc1"
+      }
+    }
+  ],
+  "source_files": [
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py",
+      "bytes": 37249,
+      "sha256": "57032fb7b824cfc9a39a442ccffa0bd5fb64873baa48a9ab43a94e80f901b430"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_numeric.py",
+      "bytes": 15840,
+      "sha256": "097719a4ba5d70f21572c741166d4e09962cc5c1e108964a88ee24b5c8879f30"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/dimension_native_decoder_experiment.py",
+      "bytes": 11090,
+      "sha256": "477e09a731880cf4d93f322f81c3cd084f6d9be875eac5c3b912255cb0876874"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/decoder_distillation_experiment_v2.py",
+      "bytes": 13794,
+      "sha256": "0352c392a518c9ea6ff215c32e5ddd6345d776e2bb32f22fd137b5e34d93c6c6"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/projected_source_decoder_experiment.py",
+      "bytes": 25942,
+      "sha256": "ce4354a96324285bff08277c3fac43e9885a75e84a50337414f7dea8501af3ee"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/clause_source_decoder_experiment.py",
+      "bytes": 21833,
+      "sha256": "004d432d16a2819eb46a95743d58c26443cc32737311ea8553c5019127f97603"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/action_factorized_clause_decoder_experiment.py",
+      "bytes": 19729,
+      "sha256": "81145f156594f28a0fc5ccec2d078a6188bb4af0a6fed826a69074116e1aa43e"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/ordered_clause_recurrent_decoder_experiment.py",
+      "bytes": 26392,
+      "sha256": "56392a6f37f528350f18b68b56a016aad170530e93e95e660b6898f1c4cef3da"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/decoder_distillation_experiment.py",
+      "bytes": 37989,
+      "sha256": "76252ad397492762d4fc41915afd1051a93a11b74994655326fe56fa722e3b61"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/decoder_cardinality_experiment.py",
+      "bytes": 14873,
+      "sha256": "44f1d91edb8f8cc8bafdc517ab450a003fece945d2e9a25bba933da2e9e12ac1"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/shared_slot_source_decoder_experiment.py",
+      "bytes": 20524,
+      "sha256": "4a2fec44a1d8756c212a2e64cad774919aed1f8c12b3741c6608e2dd35c7f0d1"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/source_value_decoder_experiment.py",
+      "bytes": 14958,
+      "sha256": "df72b5331c1dc5b98d11974748bb05ba31504db7e7f69854327d080118eeb61e"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/clause_source_context.py",
+      "bytes": 14249,
+      "sha256": "583422dbb63cdba96182090f5f76ef74698a69ab84fd42dc9e53bc4e09cbf5f6"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/normative_legal_ir_runtime.py",
+      "bytes": 9228,
+      "sha256": "98058fa6479a7be9a4ab599aeffaedef2be764314056d7504a35ca5bafff87d4"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/ir_model_manager_import.py",
+      "bytes": 29300,
+      "sha256": "5d50f879d6e1e80fc68a29060680fcac9e234f62a3732f7c697f31360ca9506b"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/normative_cached_legal_ir_runtime.py",
+      "bytes": 28302,
+      "sha256": "017adb2cd955f84b049bb483100be5b8b3742bac1ddc0084a9d106c9a3d3da07"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/fresh_scalar_source_inputs.py",
+      "bytes": 24418,
+      "sha256": "7014e59ed0561718e082879ed1913d2442d7b4edeec59e26517aae6e1b847189"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/fresh_scalar_source_inputs_single.py",
+      "bytes": 2342,
+      "sha256": "c6616a331f86692ecbc09a85adb4cabb87095e8d49e3bd8a2f2b362ebd3c6b31"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/authored_scalar_holdout.py",
+      "bytes": 18437,
+      "sha256": "ff1a260df1466671a4c4625d396b79a20d6a830ce1050f14ffd7e1f93a522c00"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/dimension_source_inputs.py",
+      "bytes": 28444,
+      "sha256": "c7f396d3323c40b5f4bab1aa42557e693b65cced58435e63c735f875c6d12206"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768.py",
+      "bytes": 13375,
+      "sha256": "cd4b23b87fefe3f80f234a5c85d9e4823139d5040a5507813b88385ee601b4ea"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768_complete.py",
+      "bytes": 9556,
+      "sha256": "6f781849dc87eba1b7f0929d292bb10f5724bb1ca5749989feb988cde243c609"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/gte_multilingual_profile.py",
+      "bytes": 15959,
+      "sha256": "d6d6069c98c7f15bd4c6f8a43bd9ffb72032e04a452419a3ff5d9bd95bb06e8e"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_runtime.py",
+      "bytes": 19364,
+      "sha256": "ce80ed6294009e04580051e6eb06a817d74a8a56f04814ad0a698e3d27dd0d41"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_production.py",
+      "bytes": 26219,
+      "sha256": "735ca0597186e094d736ef58435c82956c4ab805a68fc7a6adbfc0ee21ee889f"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_corpus_manifest.py",
+      "bytes": 27947,
+      "sha256": "b067f05b3cfc28cb213a83519530f7148b2a5fa7d5b25809e87e1f7c286f9a5d"
+    },
+    {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py",
+      "bytes": 100140,
+      "sha256": "bde3bd327df59f2e7557eac8aa2e0989ceb1128bc39918bf8cf46011e7bd9415"
+    }
+  ],
+  "weights_or_raw_vectors_copied": false,
+  "databases_or_secrets_copied": false,
+  "model_training_or_encoder_executed": false,
+  "fresh_holdout_qualified": false,
+  "proof_authority": false
+}

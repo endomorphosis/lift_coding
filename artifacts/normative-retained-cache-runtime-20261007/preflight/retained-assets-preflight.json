@@ -1,0 +1,160 @@
+{
+  "schema": "normative-retained-source-cache-preflight/v1",
+  "completed": true,
+  "script_pin": {
+    "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/prepare_retained_assets.py",
+    "bytes": 4391,
+    "sha256": "e61f1e89c9122ec6ffd7b5491108cf52dd54dd42f3469be0b5abb7fee6723b40"
+  },
+  "state_authentication_pin": {
+    "path": "/home/barberb/lift_coding/artifacts/normative-checkpoint-availability-20261006/authentication/authenticated-states.json",
+    "bytes": 721862,
+    "sha256": "582296018f40698159909d32423e5cc9496cfd3d44790ddfdc82b6b0879e06bd"
+  },
+  "selected_states": [
+    {
+      "dimension": 384,
+      "arm": "normative-wording-zero",
+      "row_count": 48,
+      "model_tensor_sha256": "e918a196684aa2f7d4021c210908eaba2517542e14523d98c4f72419c23ae3b3",
+      "original_checkpoint_pin": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-zero/selected-state.json",
+        "bytes": 2798242,
+        "sha256": "82f326a83a2d00cc1628ff2e9baf3096aa887348bd07e49883ed3e7c0234014e"
+      },
+      "model_manager_selector": {
+        "checkpoint_sha256": "82f326a83a2d00cc1628ff2e9baf3096aa887348bd07e49883ed3e7c0234014e",
+        "dimension": 384,
+        "dimension_role": "input_embedding",
+        "format_id": null,
+        "ir_family_id": "legal_ir",
+        "profile_id": null,
+        "record_id": "ir-model-asset-binding/v1:0ea60eed1f606e655940a8e45c5db151d9686fcb8bb532b94866e6f8947262c8",
+        "role": "normative_wording_zero_selected_semantic_decoder_state",
+        "schema_version": null,
+        "task_id": "semantic_IR_reconstruction"
+      },
+      "plan_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/preflight/384-normative-wording-zero-metadata-plan.json",
+        "bytes": 51963,
+        "sha256": "ee90089e3a3914ba81fbeb78148660a5e77e5c050291139baf289a18e750444b"
+      },
+      "options_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/preflight/384-normative-wording-zero-options.json",
+        "bytes": 15440,
+        "sha256": "561281b9b9d7bae3e4d1a39b85094a69208e5328e68d642b01e4c5a0811b94d8"
+      }
+    },
+    {
+      "dimension": 384,
+      "arm": "normative-wording-ce",
+      "row_count": 48,
+      "model_tensor_sha256": "0b3c7c3b1a5581cd393d9bb8db1d24b87fe2cb9dff0be268aa2b5ed1f88b6594",
+      "original_checkpoint_pin": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-ce/selected-state.json",
+        "bytes": 2797392,
+        "sha256": "6cab6fe31ef7c98db1508001bc64926b7ff176ef2a9bd385473d8e05f5f8c266"
+      },
+      "model_manager_selector": {
+        "checkpoint_sha256": "6cab6fe31ef7c98db1508001bc64926b7ff176ef2a9bd385473d8e05f5f8c266",
+        "dimension": 384,
+        "dimension_role": "input_embedding",
+        "format_id": null,
+        "ir_family_id": "legal_ir",
+        "profile_id": null,
+        "record_id": "ir-model-asset-binding/v1:aa588d1669769d996f9626d2693ff5866ce402ca3372574e18e290342c7e4435",
+        "role": "normative_wording_ce_selected_semantic_decoder_state",
+        "schema_version": null,
+        "task_id": "semantic_IR_reconstruction"
+      },
+      "plan_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/preflight/384-normative-wording-ce-metadata-plan.json",
+        "bytes": 51956,
+        "sha256": "7fa8f11b4d06082d55aa0ba61c59dfd1ec9e51acb792b460d5efee9d853661db"
+      },
+      "options_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/preflight/384-normative-wording-ce-options.json",
+        "bytes": 15436,
+        "sha256": "4c4940fe4fec7884be4de1bb22f61640b021992408983329b83fc5939d5e057f"
+      }
+    },
+    {
+      "dimension": 768,
+      "arm": "normative-wording-zero",
+      "row_count": 48,
+      "model_tensor_sha256": "991f9a1abdf01b72ac5f827adde5ef7be5af28fc0dc3a3db8e4e6e2d8816f379",
+      "original_checkpoint_pin": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-zero/selected-state.json",
+        "bytes": 4778674,
+        "sha256": "c8beca3ef5ea2d477ebc9a1564c8922404b245098a0b56083197cd6185c3083f"
+      },
+      "model_manager_selector": {
+        "checkpoint_sha256": "c8beca3ef5ea2d477ebc9a1564c8922404b245098a0b56083197cd6185c3083f",
+        "dimension": 768,
+        "dimension_role": "input_embedding",
+        "format_id": null,
+        "ir_family_id": "legal_ir",
+        "profile_id": null,
+        "record_id": "ir-model-asset-binding/v1:958f84ca889bf8c19e39f293e015b5bc54b23f49e751c25304020ab217912b6d",
+        "role": "normative_wording_zero_selected_semantic_decoder_state",
+        "schema_version": null,
+        "task_id": "semantic_IR_reconstruction"
+      },
+      "plan_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/preflight/768-normative-wording-zero-metadata-plan.json",
+        "bytes": 52195,
+        "sha256": "ad790144dfd337c4013f4a01292a7bd46c027dcf37b15405cb64cae802e89f50"
+      },
+      "options_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/preflight/768-normative-wording-zero-options.json",
+        "bytes": 15440,
+        "sha256": "d7712507de1cc5a8e4c477ee40a0c8512d604c93261e7c0d06ccf575349ebcf5"
+      }
+    },
+    {
+      "dimension": 768,
+      "arm": "normative-wording-ce",
+      "row_count": 48,
+      "model_tensor_sha256": "3fe21b42657bf33f5d0d129d538b72dbb5808f9cc491a3822abd902b13a74b6d",
+      "original_checkpoint_pin": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-768-r1/results/normative-wording-ce/selected-state.json",
+        "bytes": 4779949,
+        "sha256": "aa2f75cad0ade34a3965a4f0b71bdc2fe962f5b863b38133927978ea2673aeb3"
+      },
+      "model_manager_selector": {
+        "checkpoint_sha256": "aa2f75cad0ade34a3965a4f0b71bdc2fe962f5b863b38133927978ea2673aeb3",
+        "dimension": 768,
+        "dimension_role": "input_embedding",
+        "format_id": null,
+        "ir_family_id": "legal_ir",
+        "profile_id": null,
+        "record_id": "ir-model-asset-binding/v1:d537d0366d6e846dfb9610ea6b237ccde8ec0389e33ead2c51b511f49cdcaa7a",
+        "role": "normative_wording_ce_selected_semantic_decoder_state",
+        "schema_version": null,
+        "task_id": "semantic_IR_reconstruction"
+      },
+      "plan_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/preflight/768-normative-wording-ce-metadata-plan.json",
+        "bytes": 52188,
+        "sha256": "90c17a681b688f8584436c8d905c99f2d5d8649289584ebf2a3b3cd56bf71b48"
+      },
+      "options_pin": {
+        "path": "/home/barberb/lift_coding/artifacts/normative-retained-cache-runtime-20261007/preflight/768-normative-wording-ce-options.json",
+        "bytes": 15436,
+        "sha256": "2caa0aec359ff4bf5c71783f279afcf5dd790f221b7a4acdcc66869f3964ddbd"
+      }
+    }
+  ],
+  "torch_imported": false,
+  "transformers_imported": false,
+  "model_or_manager_loaded": false,
+  "original_targets_accessed": false,
+  "source_only": true,
+  "cached_cohort": "exposed_v3_fresh_modality",
+  "reused_original_embeddings": true,
+  "registered_selector_resolution_performed": false,
+  "runtime_admitted": false,
+  "teacher_qualified": false,
+  "proof_authority": false,
+  "fresh_semantic_holdout": false
+}

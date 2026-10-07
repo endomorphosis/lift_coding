@@ -1,0 +1,229 @@
+{
+  "request": {
+    "ir_family_id": "legal_ir",
+    "dimension": 384,
+    "dimension_role": "input_embedding",
+    "task_id": "semantic_IR_reconstruction",
+    "checkpoint_sha256": "6cab6fe31ef7c98db1508001bc64926b7ff176ef2a9bd385473d8e05f5f8c266",
+    "decoder_contract_id": "normative-retained-source-cache-legal-ir/v1",
+    "training_recipe_name": "normative-wording-ce"
+  },
+  "checkpoint_pin": {
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/normative-wording-ce/selected-state.json",
+    "bytes": 2797392,
+    "sha256": "6cab6fe31ef7c98db1508001bc64926b7ff176ef2a9bd385473d8e05f5f8c266"
+  },
+  "preprocessing_pin": {
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/training-384-r1/results/preprocessing.json",
+    "bytes": 1510086,
+    "sha256": "de96c5f0a90a1472e346f3732ace42f0b4af4b3915026695fb705ae809663d8f"
+  },
+  "donor_checkpoint_pin": {
+    "path": "/home/barberb/lift_coding/artifacts/source-reconstruction-v2-20261001/run-01/legal_ir/raw_ce-1729-checkpoint.json",
+    "bytes": 614534,
+    "sha256": "6e3f4d731d798aa2732afc37bd74fec34da3267a323844975d2dab78f59f9c61"
+  },
+  "source_cache_pin": {
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-fresh-normative-style-r2-20261004/preparation-r1/results/dimension-inputs-384.json",
+    "bytes": 3471450,
+    "sha256": "43e03db69c8f2f99664c3382f402940ddd1874cd2cf785f454bb500e31620c79"
+  },
+  "source_plan_pin": {
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-fresh-normative-style-r2-20261004/preparation-r1/results/source-plan.json",
+    "bytes": 124731,
+    "sha256": "d68a025f15751a06986916e0559125b492d3611ce2e66a7c3b222e35f5511385"
+  },
+  "production_pin": {
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-fresh-normative-style-r2-20261004/preparation-r1/results/production-384.json",
+    "bytes": 2755053,
+    "sha256": "44a99cb3fe34022215cb8f485fc525472df6ce5132e75d0c3591b2b7fc745855"
+  },
+  "source_owner_pins": {
+    "contextual_legal_ir_runtime": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py",
+      "bytes": 37249,
+      "sha256": "57032fb7b824cfc9a39a442ccffa0bd5fb64873baa48a9ab43a94e80f901b430"
+    },
+    "contextual_legal_ir_numeric": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_numeric.py",
+      "bytes": 15840,
+      "sha256": "097719a4ba5d70f21572c741166d4e09962cc5c1e108964a88ee24b5c8879f30"
+    },
+    "dimension_native_decoder_experiment": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/dimension_native_decoder_experiment.py",
+      "bytes": 11090,
+      "sha256": "477e09a731880cf4d93f322f81c3cd084f6d9be875eac5c3b912255cb0876874"
+    },
+    "decoder_distillation_experiment_v2": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/decoder_distillation_experiment_v2.py",
+      "bytes": 13794,
+      "sha256": "0352c392a518c9ea6ff215c32e5ddd6345d776e2bb32f22fd137b5e34d93c6c6"
+    },
+    "projected_source_decoder_experiment": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/projected_source_decoder_experiment.py",
+      "bytes": 25942,
+      "sha256": "ce4354a96324285bff08277c3fac43e9885a75e84a50337414f7dea8501af3ee"
+    },
+    "clause_source_decoder_experiment": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/clause_source_decoder_experiment.py",
+      "bytes": 21833,
+      "sha256": "004d432d16a2819eb46a95743d58c26443cc32737311ea8553c5019127f97603"
+    },
+    "action_factorized_clause_decoder_experiment": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/action_factorized_clause_decoder_experiment.py",
+      "bytes": 19729,
+      "sha256": "81145f156594f28a0fc5ccec2d078a6188bb4af0a6fed826a69074116e1aa43e"
+    },
+    "ordered_clause_recurrent_decoder_experiment": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/ordered_clause_recurrent_decoder_experiment.py",
+      "bytes": 26392,
+      "sha256": "56392a6f37f528350f18b68b56a016aad170530e93e95e660b6898f1c4cef3da"
+    },
+    "decoder_distillation_experiment": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/decoder_distillation_experiment.py",
+      "bytes": 37989,
+      "sha256": "76252ad397492762d4fc41915afd1051a93a11b74994655326fe56fa722e3b61"
+    },
+    "decoder_cardinality_experiment": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/decoder_cardinality_experiment.py",
+      "bytes": 14873,
+      "sha256": "44f1d91edb8f8cc8bafdc517ab450a003fece945d2e9a25bba933da2e9e12ac1"
+    },
+    "shared_slot_source_decoder_experiment": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/shared_slot_source_decoder_experiment.py",
+      "bytes": 20524,
+      "sha256": "4a2fec44a1d8756c212a2e64cad774919aed1f8c12b3741c6608e2dd35c7f0d1"
+    },
+    "source_value_decoder_experiment": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/source_value_decoder_experiment.py",
+      "bytes": 14958,
+      "sha256": "df72b5331c1dc5b98d11974748bb05ba31504db7e7f69854327d080118eeb61e"
+    },
+    "clause_source_context": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/clause_source_context.py",
+      "bytes": 14249,
+      "sha256": "583422dbb63cdba96182090f5f76ef74698a69ab84fd42dc9e53bc4e09cbf5f6"
+    },
+    "normative_legal_ir_runtime": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/normative_legal_ir_runtime.py",
+      "bytes": 9228,
+      "sha256": "98058fa6479a7be9a4ab599aeffaedef2be764314056d7504a35ca5bafff87d4"
+    },
+    "ir_model_manager_import": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/ir_model_manager_import.py",
+      "bytes": 29300,
+      "sha256": "5d50f879d6e1e80fc68a29060680fcac9e234f62a3732f7c697f31360ca9506b"
+    },
+    "normative_cached_legal_ir_runtime": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/normative_cached_legal_ir_runtime.py",
+      "bytes": 28302,
+      "sha256": "017adb2cd955f84b049bb483100be5b8b3742bac1ddc0084a9d106c9a3d3da07"
+    },
+    "fresh_scalar_source_inputs": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/fresh_scalar_source_inputs.py",
+      "bytes": 24418,
+      "sha256": "7014e59ed0561718e082879ed1913d2442d7b4edeec59e26517aae6e1b847189"
+    },
+    "fresh_scalar_source_inputs_single": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/fresh_scalar_source_inputs_single.py",
+      "bytes": 2342,
+      "sha256": "c6616a331f86692ecbc09a85adb4cabb87095e8d49e3bd8a2f2b362ebd3c6b31"
+    },
+    "authored_scalar_holdout": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/authored_scalar_holdout.py",
+      "bytes": 18437,
+      "sha256": "ff1a260df1466671a4c4625d396b79a20d6a830ce1050f14ffd7e1f93a522c00"
+    },
+    "dimension_source_inputs": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/dimension_source_inputs.py",
+      "bytes": 28444,
+      "sha256": "c7f396d3323c40b5f4bab1aa42557e693b65cced58435e63c735f875c6d12206"
+    },
+    "source_embeddings_768": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768.py",
+      "bytes": 13375,
+      "sha256": "cd4b23b87fefe3f80f234a5c85d9e4823139d5040a5507813b88385ee601b4ea"
+    },
+    "source_embeddings_768_complete": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768_complete.py",
+      "bytes": 9556,
+      "sha256": "6f781849dc87eba1b7f0929d292bb10f5724bb1ca5749989feb988cde243c609"
+    },
+    "gte_multilingual_profile": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/gte_multilingual_profile.py",
+      "bytes": 15959,
+      "sha256": "d6d6069c98c7f15bd4c6f8a43bd9ffb72032e04a452419a3ff5d9bd95bb06e8e"
+    },
+    "autoencoder_embedding_runtime": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_runtime.py",
+      "bytes": 19364,
+      "sha256": "ce80ed6294009e04580051e6eb06a817d74a8a56f04814ad0a698e3d27dd0d41"
+    },
+    "autoencoder_embedding_production": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_production.py",
+      "bytes": 26219,
+      "sha256": "735ca0597186e094d736ef58435c82956c4ab805a68fc7a6adbfc0ee21ee889f"
+    },
+    "autoencoder_corpus_manifest": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_corpus_manifest.py",
+      "bytes": 27947,
+      "sha256": "b067f05b3cfc28cb213a83519530f7148b2a5fa7d5b25809e87e1f7c286f9a5d"
+    },
+    "autoencoder_training_worker": {
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py",
+      "bytes": 100140,
+      "sha256": "bde3bd327df59f2e7557eac8aa2e0989ceb1128bc39918bf8cf46011e7bd9415"
+    }
+  },
+  "row_ids": [
+    "fresh-modality-v3:fc5e287da9b1bef21f873f5a6972bfb9378b2bafefcd77d095f035a2d4502c09",
+    "fresh-modality-v3:f7de99dc2faad8a6e0a9bff7e16cc824e59084e4ded8fec66bac21843f5e4e55",
+    "fresh-modality-v3:975e94cc3218d1f07d9a11acbcf2470aa158a7408c0bf91c5287df50495edb26",
+    "fresh-modality-v3:43857cbb8ed01bdd96b90316a698e3d9a8f3c02996b093c14fd7aef36bf80041",
+    "fresh-modality-v3:9dae75a705fbe1215e8d42e41a360eec6d3eb5866457517b93621d6c23cb3d1a",
+    "fresh-modality-v3:077997b75739e100df293a37fda29739aa43f093b0ababec6c46c8cf4fd67699",
+    "fresh-modality-v3:5d5c1194ed14efbe5e307d9a5f75a9c12bff8f22584f782877fb3ed3f4ea474e",
+    "fresh-modality-v3:7e64ecff6fe8ab586ab48a108d60c138383bd224a2f872f73aa0c014074b99de",
+    "fresh-modality-v3:a5a854e4c7081610e7444964bdcf072192d45eb9043688c8a08db2e41f806dfd",
+    "fresh-modality-v3:49b5ff821271d381aeee3016efde2bb39a2b2508c01c867d3d954904322ba6b9",
+    "fresh-modality-v3:e0576ede65563defe20d4606aafe61d1f439aaf81a196add01edc85fefe46d46",
+    "fresh-modality-v3:f5a6f7b0988782a996623bfe9a56a73097dcca7afb00a65477ae76360d57dfd2",
+    "fresh-modality-v3:8835448c9336b1328baa0a581a6d82f71d2495e44c3f9ea4c6d75e0420072352",
+    "fresh-modality-v3:7fbd6bbfd4f98f5438bdb7252fe8b91f4728adc82087dc4d28e1fc95e0c3390d",
+    "fresh-modality-v3:4f5344ca1448f567134964455d2b7e74b20c1cf2be397b4b97fa1795a2674acf",
+    "fresh-modality-v3:03c682c1f16ef204b0276081ea44c3abf9ba937b98d76fd7c593a6ce32d71c37",
+    "fresh-modality-v3:f8914c656bcead6a49b2b238bd155235ea454ab4670eda3e1501d3438792fbd6",
+    "fresh-modality-v3:266a1d3558993c481004f20960fdca33cf58961912e9e746feaab5755aa5b59e",
+    "fresh-modality-v3:0253ea7d7dea64afee958c457d449f3c144a16aa24d3903a85afbc7473cb1b20",
+    "fresh-modality-v3:589c3f9126bb9964d33c18b200be493e2faa5f996a693ee234aa250d5dff7fba",
+    "fresh-modality-v3:85d7009cf2e9985ba4377375d6daae5929bb61fed1a1c9a17973c0e84e656742",
+    "fresh-modality-v3:85903f2285d45c52433dc0eb7f846166d6b08e53813fa7b52eaabdda8dcdda55",
+    "fresh-modality-v3:bcd2b590180a5450e51b60b33d6b54a79a236e912568a1b8151576ad73bb22f7",
+    "fresh-modality-v3:3bf2034030b22d0594ac8f3f167931ce129626a3f11985d46a5ebef591612c78",
+    "fresh-modality-v3:1f7951e5ba6f6e294f297250d1f4e508122d00d60db2b1dbfc37f307ef069afb",
+    "fresh-modality-v3:7f18257efe35fa4da7b55fcf5b0f7c7abef6ca5f24e12f0f35d4e94878449fb8",
+    "fresh-modality-v3:fb1e6010bae60d92bf29b3855b7c233df5f7036a13de94ab3cb74091b2d54539",
+    "fresh-modality-v3:d2714642295aa3a2d655e2ea23756c9322ff2899dc9c5339fc3af211c4cf8063",
+    "fresh-modality-v3:390fdedaf2bb59e2dc4cedf96615f3c648d5a5f4a6874d18b6b803cb4c840bba",
+    "fresh-modality-v3:7c3a24bfd36416427dc9f1d5542137907768d271305ab787203defd16072e7bf",
+    "fresh-modality-v3:0d72010a8b1ef35cb1cda9e59ad7cbc66696cea1c9ca4bc2ab93b45226d5b12c",
+    "fresh-modality-v3:460dce624b7fd202357e2c341667f556a4e8da3f4560827b19b70097f999a410",
+    "fresh-modality-v3:251708140687dd73a0da1dec2423034b52d313fa4d85fd48f4ea37180f53cf19",
+    "fresh-modality-v3:1adaa09029f709f82e40abb52122b1894e4fb0decb40ff2728a59212e8e8a062",
+    "fresh-modality-v3:1bba8303377713c10c33ce24eb3b95b404b38c0546fdad3a9f3ecdd893c4f70e",
+    "fresh-modality-v3:aacc69da52cbd7738833d11be955eac03b60f8cda5234a12f997a182fb50adbb",
+    "fresh-modality-v3:f72e681bed592768f49eec0f765bd7f57b475e31dc4e737cbefb8be41cc71aa7",
+    "fresh-modality-v3:8776f3d85edd34438b4349538360911654b7bd7d24c0f5225a57284debf9cd58",
+    "fresh-modality-v3:efd18b8d9bba7f8c4e55992501306dbbb7ba4fefad52d915791e7d031c8a66b6",
+    "fresh-modality-v3:c7462dcc545a382e59caec3f413da3dbc48d2339f9c6ac96be91b1ecd348a560",
+    "fresh-modality-v3:2113edbf2cd932152c7ba058e29db5270b9e7d1cafe86135ae7321f5af37eed2",
+    "fresh-modality-v3:c6f8c178e1798bdd9d4e7f9e8781e3abd8cdf32b21a76ac968e70c6269635f44",
+    "fresh-modality-v3:9f89bc72d3b05b42dd1cf24f23d932335a9ea919f9cad606feaa108ba3b4fa92",
+    "fresh-modality-v3:7e759680c3ce8cd08b9cbcc103e89f51d1bd939581c7ddd039905fa99175843b",
+    "fresh-modality-v3:73721db26b60fc47791a6164d69080503e77de60e758f2b5ad28a464a7cb3381",
+    "fresh-modality-v3:9b241408b1cbe4745fc784df3c612e34599e773f24b522e27f551dfd692fea1b",
+    "fresh-modality-v3:627be23cc0da96cdeede598e2612c2fc55271822c2de32f7fd1984ebf5a20772",
+    "fresh-modality-v3:91e5a48ee548d0b4045c4772d529f8c7fc6fe58a397ed4c4640decd4edf36063"
+  ],
+  "deadline_seconds": 120
+}

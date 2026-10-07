@@ -1,0 +1,75 @@
+{
+  "approved": true,
+  "datasets_base_commit": "47d492c697f3e766d107ae9c02d8b8dcd18660b2",
+  "findings": [],
+  "limitations": [
+    "Synthetic receipts and inert decoder stand-ins are boundary controls, not encoder execution, neural quality, original-asset replay or proof evidence.",
+    "The contract accepts the distinct retained fresh48 cache schema only; normative TRAIN and60-row prospective cache schemas remain separate.",
+    "Repeated endpoint fences do not establish an atomic multi-file snapshot or continuous custody."
+  ],
+  "numerical_owner_byte_exact_to_base": true,
+  "numerical_owner_pin": {
+    "bytes": 15840,
+    "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_numeric.py",
+    "sha256": "097719a4ba5d70f21572c741166d4e09962cc5c1e108964a88ee24b5c8879f30"
+  },
+  "observed_at_utc": "2026-10-07T05:07:17.088369+00:00",
+  "proof_authority": false,
+  "qualification_granted": false,
+  "real_model_or_encoder_executed": false,
+  "schema": "normative-retained-source-cache-test-and-source-review/v1",
+  "source_file_pins": [
+    {
+      "bytes": 37249,
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py",
+      "sha256": "57032fb7b824cfc9a39a442ccffa0bd5fb64873baa48a9ab43a94e80f901b430"
+    },
+    {
+      "bytes": 9228,
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/normative_legal_ir_runtime.py",
+      "sha256": "98058fa6479a7be9a4ab599aeffaedef2be764314056d7504a35ca5bafff87d4"
+    },
+    {
+      "bytes": 28302,
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/normative_cached_legal_ir_runtime.py",
+      "sha256": "017adb2cd955f84b049bb483100be5b8b3742bac1ddc0084a9d106c9a3d3da07"
+    },
+    {
+      "bytes": 17546,
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/ipfs_datasets_py/logic/formalization/autoencoder/checkpoint_hub.py",
+      "sha256": "be1bc90729bc811c8ca0b4d3f77ef10991e29b9df17670a479b955f569f81f3d"
+    },
+    {
+      "bytes": 33189,
+      "path": "/home/barberb/lift_coding/.worktrees/normative-cache-input-datasets-20261007/tests/unit/logic/formalization/autoencoder/test_normative_cached_legal_ir_runtime.py",
+      "sha256": "26a67c41cc4dbfc927ce68eacaee6913b08dbde326c110472f891354934e32a9"
+    }
+  ],
+  "source_review_scope": "Independent read-only review of parent-authored production changes; the reviewer authored the new test file, which is explicitly included as tested source rather than independently authored evidence.",
+  "teacher_qualified": false,
+  "tests": {
+    "command": "env PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONDONTWRITEBYTECODE=1 python -m pytest --noconftest -o addopts= -p no:cacheprovider tests/unit/logic/formalization/autoencoder/test_normative_cached_legal_ir_runtime.py -x -q --junitxml=/home/barberb/lift_coding/artifacts/normative-cache-input-tests-20261007/control-final-02.xml",
+    "errors": 0,
+    "failures": 0,
+    "seconds": 74.3,
+    "skipped": 0,
+    "tests": 105,
+    "xml_pin": {
+      "bytes": 22232,
+      "path": "/home/barberb/lift_coding/artifacts/normative-cache-input-tests-20261007/control-final-02.xml",
+      "sha256": "23fa4b18d696d11f78eeab8231831fa8f62cb7241bbbb781c46f15bf99e0884a"
+    }
+  },
+  "training_or_database_or_network_executed": false,
+  "validation": [
+    "Four recipe/width metadata positives and four lazy-open positives exercise exact checkpoint/donor/normalization gates and three detached documents; numerical restoration/inference are explicit inert doubles.",
+    "Nonidentity saved mean0.125/scale2 and unchanged raw vectors at the numeric call boundary detect premature transform application; model-stage normalization behavior itself remains unchanged and is not numerically requalified here.",
+    "Forty-eight source rows,216 native vector declarations,180 clause cache rows and literal UTF8 byte/character contexts are reconstructed under the original pure producer validators; only native tensor/encoder binding is explicitly stubbed for synthetic fixtures.",
+    "Typed native768 execution/profile/assets/loading/dense/token/forward records, recursive target exclusion, canonical source-plan/cache joins and distinct Unicode digest conventions refuse rehashed corruption.",
+    "Historical regular hardlinks are explicit bounded metadata witnesses; private hardlink mutation at post-load/pre-inference/post-inference endpoints refuses with truthful call telemetry.",
+    "Actual closing-boundary hooks mutate earlier current checkpoint bytes after the final historical check: metadata closing and pre-inference closing refuse before numerical calls.",
+    "Current optimizer owner origins and the unregistered actual multilingual profile object origin are checked before helper execution.",
+    "Original contextual continuation and original normative saved-validation APIs retain their separate default gates; the new request requires its explicit decoder contract.",
+    "Native schema/profile/format selectors remain null; registry selectors are emitted only, not resolved or written; all quality/runtime/teacher/proof/encoder/database/network authority remains false."
+  ]
+}
