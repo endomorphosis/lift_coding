@@ -1,0 +1,126 @@
+{
+  "actions": {
+    "git_mutations": 0,
+    "model_forward_calls": 0,
+    "model_imports": 0,
+    "network_calls": 0,
+    "optimizer_calls": 0,
+    "reference_files_read": 0,
+    "source_edits": 0,
+    "test_calls": 0,
+    "training_updates": 0
+  },
+  "checked": [
+    "Mirrors require exact selected file SHA/bytes; selected receipt equals completed results, producer pins equal model/results/plan and config/counters equal fixed arm recipe.",
+    "Strict three-value restorer plus full before==checkpoint and after==before checkpoints cover gate tensor bytes, complete Adam moments/settings and progress; parent raw UTF8 matches plan SHA/bytes and stays exact.",
+    "All named model/parent modes, requires_grad flags, null gradients and full state_dict tensors checked before/after predictions; CPU Torch RNG checked across restoration and all predictions.",
+    "Both modes replay all four pinned128-source cohorts: eight complete panels/1024 rows; expected panel path is confined to physical result root and complete saved row dictionaries must match exactly.",
+    "Source inputs contain exactly six keys and authenticated raw UTF8. No reference paths are loaded, no selection policy, scorer, TRAIN-example constructor or fit step is called; plan/result selection metrics are metadata only.",
+    "All old/new TRAIN example/step constructors, old action/span label adapters, three semantic parser entrypoints and AdamW.step denied during prediction scope.",
+    "Every replay output requires executed finite three-class diagnostics, false target/authority flags and null formal output; emitted proposal masks stay zero.",
+    "Source/producer pins rechecked at completion; exclusive receipt file and parent directory fsynced only after all equality checks pass."
+  ],
+  "cohorts": {
+    "earlier_scope": {
+      "input": {
+        "bytes": 61725,
+        "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-inputs.json",
+        "sha256": "1af9757054e2ae6344dcbd2e3834c21808cbe998e79ace9b9ff34383d3020b55"
+      },
+      "rows": 128
+    },
+    "earlier_support_action": {
+      "input": {
+        "bytes": 63530,
+        "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/final-inputs.json",
+        "sha256": "5fa44c4a208c71429c61f8c6be648b65583ecd2a01740b412f440e03ef824da0"
+      },
+      "rows": 128
+    },
+    "earlier_trigger": {
+      "input": {
+        "bytes": 62673,
+        "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/final-inputs.json",
+        "sha256": "066bc0a734292d45da468583c55677d9851e244f5a7949aedcc857796a14cb67"
+      },
+      "rows": 128
+    },
+    "fresh_final": {
+      "input": {
+        "bytes": 63652,
+        "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/final-inputs.json",
+        "sha256": "b49bea41269cfab18ff58a598ea47d7f85385322701ad070aa761a84b18588ac"
+      },
+      "rows": 128
+    }
+  },
+  "denied_prediction_entrypoints": {
+    "action": [
+      "SupportActionExample",
+      "train_support_action_step",
+      "_action_labels"
+    ],
+    "deontic_parser": [
+      "extract_normative_elements",
+      "analyze_normative_sentence",
+      "classify_modal"
+    ],
+    "donor": [
+      "ScopeSpanExample",
+      "train_scope_span_step",
+      "_labels"
+    ],
+    "head": [
+      "SupportGateExample",
+      "train_support_gate_step"
+    ],
+    "torch.optim.AdamW": [
+      "step"
+    ],
+    "trigger": [
+      "TriggerReadoutExample",
+      "train_trigger_readout_step"
+    ]
+  },
+  "findings": [],
+  "limits": [
+    "No replay/checkpoint restore was executed; actual selected weights and result panels do not yet exist for this prefit review. Runtime output parity and state preservation remain to be observed.",
+    "RNG checks cover CPU Torch state after standalone device/thread setup; no CUDA initialization is allowed.",
+    "No reference-file audit hook is installed; no references read is supported by static load paths, source-only predictor contracts and denial guards, not syscall attestation.",
+    "Denial patches enclose predictions; strict restoration/save is outside that patch scope and was statically checked to restore state without fitting."
+  ],
+  "model": {
+    "bytes": 24874,
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_gate.py",
+    "sha256": "79a9d314ddf597b16c6a06754d7786d568bbf34c87dc71a947ac0b8af12f525b"
+  },
+  "parent_checkpoint": {
+    "bytes": 3449806,
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/parent-checkpoint.json",
+    "sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155"
+  },
+  "passed": true,
+  "plan": {
+    "bytes": 9694,
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/experiment-plan.json",
+    "sha256": "08f05d12c7e9769f51b9bc13f5f49dc8ffe9660507639cf428431f04a74e468f"
+  },
+  "planned_complete_outputs": 1024,
+  "previous_helper": {
+    "bytes": 12161,
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/replay_support_action.py",
+    "sha256": "52716cb9df5fb5bab2796eadbbfa1c094abdf6b128548a68894d2dc6769544c8"
+  },
+  "review_kind": "static prefit source review only",
+  "runner": {
+    "bytes": 22402,
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/run_support_gate_experiment.py",
+    "sha256": "991d916394e620b59fafae81c08610d9ff7b8a2f4e94576b949d31dd98ae99b7"
+  },
+  "schema": "support-gate-replay-source-review/v1",
+  "source": {
+    "bytes": 12392,
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/replay_support_gate.py",
+    "sha256": "7ad0e0ccd5123e6b526220d6ca6815782cf819720ca7af8eb22db42651d1f9df"
+  }
+}

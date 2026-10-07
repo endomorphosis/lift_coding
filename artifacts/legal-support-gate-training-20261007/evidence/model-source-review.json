@@ -1,0 +1,144 @@
+{
+  "actions": {
+    "claims": 0,
+    "fits": 0,
+    "model_calls": 0,
+    "model_imports": 0,
+    "model_test_runs": 0,
+    "numerical_scores": 0,
+    "resource_clients": 0,
+    "source_or_index_edits": 0
+  },
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/combined-tests.xml": {
+      "bytes": 27734,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/combined-tests.xml",
+      "sha256": "34102bc8c484491572e18d75cfdbdefaaaf7a07ed05a9a58ee27118d1f44f379"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/combined-validation.json": {
+      "bytes": 1830,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/combined-validation.json",
+      "sha256": "5aa5e3b56c433796d3aa022829be9af64713bf987a9dbb587cd7c41a97ae9037"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py": {
+      "bytes": 29545,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py",
+      "sha256": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py": {
+      "bytes": 7804,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py",
+      "sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_action.py": {
+      "bytes": 25504,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_action.py",
+      "sha256": "ce7abc45032bee6ac950720d79c8f329c03a68961140c0f2ad9ade8ea923988c"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_gate.py": {
+      "bytes": 24874,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_gate.py",
+      "sha256": "79a9d314ddf597b16c6a06754d7786d568bbf34c87dc71a947ac0b8af12f525b"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_trigger_readout.py": {
+      "bytes": 27145,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_trigger_readout.py",
+      "sha256": "983b69b8e293aa6211fd8322f9ba6bfe6fa5b8cb853c2d4d0cace1e7e5046344"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py": {
+      "bytes": 29993,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py",
+      "sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/tests/unit/logic/test_legal_scope_span_decoder.py": {
+      "bytes": 12978,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/tests/unit/logic/test_legal_scope_span_decoder.py",
+      "sha256": "6a08301f5167405e45231f94f0ab2a5a47c10d9400cb30481f61b63d5c1181f9"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/tests/unit/logic/test_legal_scope_span_proposal.py": {
+      "bytes": 7447,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/tests/unit/logic/test_legal_scope_span_proposal.py",
+      "sha256": "67d3a40c6374d249511cde4c033f11eb7733e684e7adac303511dab907a06a4a"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/tests/unit/logic/test_legal_scope_support_action.py": {
+      "bytes": 18593,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/tests/unit/logic/test_legal_scope_support_action.py",
+      "sha256": "f55f8f32871000c1b87e6eae5459ee38d30a7592f96d7da8193b6186eadf8c62"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/tests/unit/logic/test_legal_scope_support_gate.py": {
+      "bytes": 20171,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/tests/unit/logic/test_legal_scope_support_gate.py",
+      "sha256": "13917ca96cf5b3795b2e7c4efbd0aadb1e2c723cfe5c96825586e31c141fca90"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/tests/unit/logic/test_legal_scope_trigger_readout.py": {
+      "bytes": 16772,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/tests/unit/logic/test_legal_scope_trigger_readout.py",
+      "sha256": "337c18f643eb7ec5aa276ad693cc83a5ad595e71a3e98fbe1acc43e177616a9d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/inherited-producer-binding.json": {
+      "bytes": 1041,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/inherited-producer-binding.json",
+      "sha256": "b949f74b8f4351759aef212692a3c271b3cb10ec82bb5d484a66231be65287fe"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/parent-checkpoint.json": {
+      "bytes": 3449806,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/parent-checkpoint.json",
+      "sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/test-collection-qualified.txt": {
+      "bytes": 28735,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/test-collection-qualified.txt",
+      "sha256": "024afee2399be6389f0a053c19c58d9ac2831a6f9d442534aca0a673b95a1118"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/test-collection.txt": {
+      "bytes": 20206,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/test-collection.txt",
+      "sha256": "c0759f0c6a753b1258be5f75aa1d05efa616f1ca2aa34a8b919c925e805ab767"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/test-identity-binding.json": {
+      "bytes": 32553,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/test-identity-binding.json",
+      "sha256": "773323246b166522d2d7720d8dd928ec77b061971bc5f288e0654adcd3a592f1"
+    }
+  },
+  "checked": {
+    "checkpoint": "Closed bounded finitecanonicalJSON+seal/producer/profile/config/inventory; exact parentUTF8 bytes/digest/size and all oldAdam remain embedded unchanged. FullnewAdam requiresdense4states at positive steps, ordinary bounded counters, exact finiteCPUfloat32 tensors/settings and nonnegativevariance. Exact restore/resave; zero-step checkpoint also requires exact seeded cold gate, blocking relabeling trained/tampered tensors as fallback.",
+    "inference": "Typed owner/external source SHA and explicit caller premise before model. Generic bounded UTF8/token offsets only; finite shape/coverage guards and mode restoration, no span repair. Predicted endpoints transported through unchanged pure owner with five masks0/null formal output; all authority and target flagsFalse. Only support gate changes emission; all structural logits/spans/class/presence stay frozen.",
+    "matched_feature_intervention": "Both arms share frozen97D token bundles:64context plus original Conv3 mean/max/log-length33 before token_projection. One arm masked global mean; other normalized predicted modality interval coverage computed from frozen source pointers. No gold interval, lexicon/parser or new byte parameters. SeededTanh32 scalar residual has3169parameters per arm; zero final projection preserves original parent function.",
+    "meaningful_fixtures": "39 focused source-qualified fixtures cover exact parent/fulloutput/RNG parity, identical initial gate tensors and differing97Dpooling, ordered-byte feature parity with originalprojection/padding/anagrams, denial of old frozen contracts, support-only positive/negative updates preserving allstructural/oldmoments, exactnext-step fullAdam resume/mode/RNG, source/caller bounds, label/parser guards, nullable zeroauthority transport, shape/nonfinite/reversed/coverage refusal, seals/recipe/inventory/progress/variance/parent tampering and exact cold0 fallback.",
+    "objective": "Typed rawsource+explicit boolean only, no modality/action/span targets. BCE all encoded records, positive and negative. Fresh AdamW only4newgate parameter tensors, old encoder/class/support/action/presence/pointers excluded; finiteness/clipping/progress and same recipe validated.",
+    "parent_contract": "Strict original full support/action checkpoint restore validates all historical weights/moments before entire33024parameter parent freezes. New snapshot covers every parent tensor, grad flag, None gradient, module mode, nested config and raw artifact metadata. No original frozen parent forward/assert/save called after freeze; repeated original checked tensor math reconstructs frozen support/action/class outputs under no_grad."
+  },
+  "findings": [],
+  "limitations": [
+    "Static source/checkpoint custody and tiny fixtures are not actual learning outcomes or reviewed legal fidelity.",
+    "Ordered-byte feature distinction proves available information, not learned malformed-source refusal.",
+    "New support gating changes statuses and proposal presence. Frozen structural behavior and exact both-emitted wires do not establish per-case retention or semantic qualification."
+  ],
+  "parameter_counts": {
+    "capacity_matched": true,
+    "feature_width": 97,
+    "frozen_parent": 33024,
+    "hidden": 32,
+    "new_gate_each": 3169,
+    "total_each": 36193
+  },
+  "passed": true,
+  "schema": "support-gate-independent-model-source-review/v1",
+  "scope": "Independent static frozen source/test audit and original parent JSON/seal custody; no Torch/model imports, fixture/test execution or numerical scoring by reviewer.",
+  "validation": {
+    "author_focused_cases": 39,
+    "author_reported_CPUthreads": 2,
+    "author_reported_seconds": 5.3,
+    "identity_limitation_and_resolution": "Original JUnit has170successful rows, emptyclass names and164distinct bare identities. Preserved qualified collection gives170unique fullfile nodeids matching every rowname in order and exact unchanged5testfileSHA. Collection only didnotrerun fixtures/tests.",
+    "retained_combined_successful_executions": 170,
+    "source_case_counts": {
+      "test_legal_scope_span_decoder.py": 28,
+      "test_legal_scope_span_proposal.py": 36,
+      "test_legal_scope_support_action.py": 38,
+      "test_legal_scope_support_gate.py": 39,
+      "test_legal_scope_trigger_readout.py": 29
+    },
+    "source_qualified_cases": 170
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "Hub_only_released_files": 17,
+  "actions": {
+    "Git_ref_or_index_mutations": 0,
+    "Hub_reads_or_writes": 0,
+    "fits": 0,
+    "model_imports_or_calls": 0,
+    "optimizer_steps": 0,
+    "owned_archive_creation_only": true,
+    "resource_claims": 0,
+    "source_edits": 0,
+    "tests": 0
+  },
+  "archive_README": {
+    "bytes": 5303,
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/workspace/artifacts/legal-support-gate-training-20261007/README.md",
+    "sha256": "c27ca95c56f363d2b003774aae5bb79188bf0c47e4d9226335f18b911302cc62"
+  },
+  "archive_file_count_including_retention_manifest": 95,
+  "archive_root": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/workspace/artifacts/legal-support-gate-training-20261007",
+  "archive_total_bytes_including_retention_manifest": 18521331,
+  "available_additional_receipts": {
+    "branch-progress-review.json": {
+      "bytes": 11020,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/branch-progress-review.json",
+      "sha256": "c0483aaff51d7c21664709f19b343c7a344ad1b0bbcc958c55a0329a020be102"
+    },
+    "final-contribution-review.json": {
+      "bytes": 39954,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/final-contribution-review.json",
+      "sha256": "576416eb2a57e077525668ef6d6d955dcf39f155f95ec33ea1f54688e5cdd43e"
+    },
+    "incoming-main-integration.json": {
+      "bytes": 3524,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/incoming-main-integration.json",
+      "sha256": "e47c010c93510cec57a00bd2f7e19a15e4907325bf95233097b7b4ebed3ac635"
+    }
+  },
+  "boundary": "Initial unstaged archive construction only. Parent will replace only explicit pending Hub revision fields/links and add later receipts/final-source documentation under separate paths, regenerating manifests. Published release/source snapshots and all numerical producer/checkpoint bytes remain frozen.",
+  "copied_release_manifest": {
+    "bytes": 17886,
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/workspace/artifacts/legal-support-gate-training-20261007/release-manifest.json",
+    "sha256": "10655c22afb678b62ba49e7a6941d08742c577eba37ef0ce41f3c691aaf64419"
+  },
+  "findings": [],
+  "hub_revision": "PENDING_HF_REVISION",
+  "hub_revision_pending": true,
+  "local_files_excluding_retention_manifest": 94,
+  "local_released_files": 92,
+  "numerical_weights_copied": 0,
+  "observed_at_utc": "2026-10-07T14:42:32.352170+00:00",
+  "omitted_release_paths": [
+    "checkpoints/global/checkpoint-0.json",
+    "checkpoints/global/checkpoint-120.json",
+    "checkpoints/global/checkpoint-240.json",
+    "checkpoints/global/checkpoint.json",
+    "checkpoints/predicted_trigger/checkpoint-0.json",
+    "checkpoints/predicted_trigger/checkpoint-120.json",
+    "checkpoints/predicted_trigger/checkpoint-240.json",
+    "checkpoints/predicted_trigger/checkpoint.json",
+    "results/global/last-TRAIN-predictions.json",
+    "results/global/selection-predictions-0.json",
+    "results/global/selection-predictions-120.json",
+    "results/global/selection-predictions-240.json",
+    "results/parent-TRAIN-predictions.json",
+    "results/predicted_trigger/last-TRAIN-predictions.json",
+    "results/predicted_trigger/selection-predictions-0.json",
+    "results/predicted_trigger/selection-predictions-120.json",
+    "results/predicted_trigger/selection-predictions-240.json"
+  ],
+  "passed": true,
+  "pending_receipts": [
+    "release-review.json"
+  ],
+  "published_README": {
+    "bytes": 13286,
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/workspace/artifacts/legal-support-gate-training-20261007/published-README.md",
+    "sha256": "e5a47368008abf572ba20e508ba95df62108e4aea812ad5d685dd94b09ba474f"
+  },
+  "release_file_count": 109,
+  "retention_manifest": {
+    "bytes": 64945,
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/workspace/artifacts/legal-support-gate-training-20261007/retention-manifest.json",
+    "sha256": "7b5f713d076e2ca9c99bdb685a1215ffccf46315c4b42ddf180c5de37a940fdf"
+  },
+  "schema": "support-gate-root-retention-build/v1",
+  "source_weights_modes_and_numerical_producers_edited": false,
+  "workspace_HEAD_and_index_bytes_unchanged": true,
+  "workspace_git_after": {
+    "HEAD": "da212346307e2fc483d7dce6ebfa820d8da5758a",
+    "index": {
+      "bytes": 6382249,
+      "path": "/home/barberb/lift_coding/.git/worktrees/workspace5/index",
+      "sha256": "8624327aef09a9922f56a0fa176f676ddf58869c394ff9de71cad2fd49d7368a"
+    }
+  },
+  "workspace_git_before": {
+    "HEAD": "da212346307e2fc483d7dce6ebfa820d8da5758a",
+    "index": {
+      "bytes": 6382249,
+      "path": "/home/barberb/lift_coding/.git/worktrees/workspace5/index",
+      "sha256": "8624327aef09a9922f56a0fa176f676ddf58869c394ff9de71cad2fd49d7368a"
+    }
+  }
+}

@@ -1,0 +1,867 @@
+{
+  "actions": {
+    "Git_or_Hub_writes": 0,
+    "files_written": [
+      "final-contribution-review.json"
+    ],
+    "model_calls": 0,
+    "model_imports": 0,
+    "optimizer_steps": 0,
+    "resource_clients_or_claims": 0,
+    "tests_executed": 0
+  },
+  "actual_fitting": {
+    "action_head_updates": 0,
+    "actual_optimizer_updates": 480,
+    "capacity_matched": true,
+    "data_and_update_budget_matched": true,
+    "encoded_optimizer_source_presentations": 7680,
+    "negative_records_ignored": 0,
+    "negative_support_presentations": 3840,
+    "positive_support_presentations": 3840,
+    "support_head_updates": 480,
+    "training_input_records": 7680,
+    "wall_seconds": 25.824794728017878
+  },
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/release/results/mlp/earlier_scope-predictions.json": {
+      "bytes": 980454,
+      "sha256": "3cbdda0aeb791c7bb718bc83074c3341e677bad2ef85d0afb04a98b6c11bf0ed"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/release/results/mlp/earlier_trigger-predictions.json": {
+      "bytes": 1078370,
+      "sha256": "a17e2e603b93cfaaa514d223b2ced28ef3fc3a0479aa2227eedf3e21c4168141"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/release/results/mlp/fresh_final-predictions.json": {
+      "bytes": 1068946,
+      "sha256": "222c101a9cd0faacd30dbbbc63d4bbd9fe45a15954dd1ae4e48b3993bb802007"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/combined-tests.xml": {
+      "bytes": 27734,
+      "sha256": "34102bc8c484491572e18d75cfdbdefaaaf7a07ed05a9a58ee27118d1f44f379"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/combined-validation.json": {
+      "bytes": 1830,
+      "sha256": "5aa5e3b56c433796d3aa022829be9af64713bf987a9dbb587cd7c41a97ae9037"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/docs/autoencoders/evidence/retained-wording-20261007/checkpoint-availability.json": {
+      "bytes": 16223,
+      "sha256": "551ce13fe7a1d1956383a71abb145adab67afaab6d0b96aa316345d0aba20fce"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/docs/autoencoders/evidence/retained-wording-20261007/model-manager-registration-result-independent-check.json": {
+      "bytes": 10081,
+      "sha256": "32cdadd25bd575818121c8fb80c105f45e6d12714a7b637da0811c92ff9ad1c3"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/docs/autoencoders/progress_integration.md": {
+      "bytes": 22294,
+      "sha256": "590c8638b425de0a9dea06fff67942da8a9b01c48ffae05b2278dc4224f19334"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/docs/implementation/legal_scope_support_gate_pilot_20261007.md": {
+      "bytes": 10191,
+      "sha256": "b665d4d4c837b54a897dc47d88d72be6effe1405baa4deba2cdcbe1788f2b9f3"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py": {
+      "bytes": 29545,
+      "sha256": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py": {
+      "bytes": 7804,
+      "sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_action.py": {
+      "bytes": 25504,
+      "sha256": "ce7abc45032bee6ac950720d79c8f329c03a68961140c0f2ad9ade8ea923988c"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_gate.py": {
+      "bytes": 24874,
+      "sha256": "79a9d314ddf597b16c6a06754d7786d568bbf34c87dc71a947ac0b8af12f525b"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_trigger_readout.py": {
+      "bytes": 27145,
+      "sha256": "983b69b8e293aa6211fd8322f9ba6bfe6fa5b8cb853c2d4d0cace1e7e5046344"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py": {
+      "bytes": 29993,
+      "sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/tests/unit/logic/test_legal_scope_support_gate.py": {
+      "bytes": 20171,
+      "sha256": "13917ca96cf5b3795b2e7c4efbd0aadb1e2c723cfe5c96825586e31c141fca90"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/incoming-main-integration.json": {
+      "bytes": 3524,
+      "sha256": "e47c010c93510cec57a00bd2f7e19a15e4907325bf95233097b7b4ebed3ac635"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/inherited-producer-binding.json": {
+      "bytes": 1041,
+      "sha256": "b949f74b8f4351759aef212692a3c271b3cb10ec82bb5d484a66231be65287fe"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/model-source-review.json": {
+      "bytes": 11471,
+      "sha256": "9de89a089cfe0b43c2d399a11bd0b496e618c4b3594da234fe1ac6332db0d21e"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/parent-checkpoint.json": {
+      "bytes": 3449806,
+      "sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/progress-base-binding.json": {
+      "bytes": 286,
+      "sha256": "4e396b8ddba71ca61d07da2906c0fb7e234f7d2978649b23e19c0a2ccbf16c24"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/protocol-review.json": {
+      "bytes": 37703,
+      "sha256": "14c617876b3d6aee9b92572b9f19be4d4ccfae9e921b045134c8d2b30e2aa8bd"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/rejection-diagnostics.json": {
+      "bytes": 265226,
+      "sha256": "3bf2cfc1412ac27fc09d90d134f59292b1d24ccb899414349f4e8d7ad41579fd"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/replay-source-review.json": {
+      "bytes": 5835,
+      "sha256": "590773d46cce8514b7a79f929900556e9af7e3ba4e5c7917c913ea478a67329c"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/replay_support_gate.py": {
+      "bytes": 12392,
+      "sha256": "7ad0e0ccd5123e6b526220d6ca6815782cf819720ca7af8eb22db42651d1f9df"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/resource-results-review.json": {
+      "bytes": 18273,
+      "sha256": "5407a62537b448f4c94d98835f69ea7e06073d3c98d8fa88a7157160aead32b4"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/results-review.json": {
+      "bytes": 82905,
+      "sha256": "15c241560195ac8d21b08ac41fe84f14a941f3438e028f00de2215bb781646f6"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/runner-static-review.json": {
+      "bytes": 34978,
+      "sha256": "baabdcaa3693d4208e9e8f20bfc4d99b7b262d8dd1591a77658e5a2b8b49a5f8"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/selected-checkpoint-replay.json": {
+      "bytes": 11575,
+      "sha256": "f6ded72ff564346941c65a003bc223250af7caeb063cd6ae74ee6eca6d9f1862"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/selection-policy-tests.xml": {
+      "bytes": 2747,
+      "sha256": "51d8afec551f5d44d4ef0d50bbbdaacec2fcca005b0c6511dfe18b1dfeb0f048"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/selector-validation.json": {
+      "bytes": 10767,
+      "sha256": "efbb9d4ae7850fb10590f1ce392b0367964fa7ee15634182232876ea36694f9d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/summarize_rejections.py": {
+      "bytes": 3506,
+      "sha256": "7c0eeff42e640353a9bf229d15addfa367efb29908f75e81875cd120d9671afd"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/test-identity-binding.json": {
+      "bytes": 32553,
+      "sha256": "773323246b166522d2d7720d8dd928ec77b061971bc5f288e0654adcd3a592f1"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/workspace/implementation_plan/docs/66-retained-wording-reconciliation-2026-10-07.md": {
+      "bytes": 6141,
+      "sha256": "adce0e9f815afdbe9863ad05755437c144167bc75859eea3715fca73ac067ea7"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/workspace/implementation_plan/docs/68-support-gate-refusal-training-2026-10-07.md": {
+      "bytes": 7739,
+      "sha256": "2fb2d5454c7a8596605f93bce6cfb046c8e8500951fc00f94997242333623e0f"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/global/checkpoint-0.json": {
+      "bytes": 3726149,
+      "sha256": "b77e45332f60fc7ae01b7d281fe44c09ca7a800c53739dd285a22ff51d7ba3b6"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/global/checkpoint-120.json": {
+      "bytes": 3954433,
+      "sha256": "4c3e04033dc71ac5a673a534edf72befb60d4d0657f4666f6f5c4f054bc1f32c"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/global/checkpoint-240.json": {
+      "bytes": 3953962,
+      "sha256": "890ba734488e74aad42b38017b04f3256cbe711555f1627f15b34d40f8b109eb"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/global/earlier_scope-predictions.json": {
+      "bytes": 980452,
+      "sha256": "0ccce28a47f9b5252a215761483e97beaf5e3632bde2307539d119567fb2db38"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/global/earlier_support_action-predictions.json": {
+      "bytes": 1068944,
+      "sha256": "432527896ee72600d1e42761fcf813b2c87d4a2d99c7a17a02ded5b29ef97cfd"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/global/earlier_trigger-predictions.json": {
+      "bytes": 1078368,
+      "sha256": "c6ce4d6eb9b3b29029c39e5b46abd0ca0b85d35213d09fe70553fa11203efd48"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/global/fresh_final-predictions.json": {
+      "bytes": 1079294,
+      "sha256": "acc25c013c2c9a63013386b505753c3e7a3b3ca789bc991149b586ecaa83301f"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/parent-earlier_scope-predictions.json": {
+      "bytes": 980452,
+      "sha256": "0fce6cdf583089a8a817c75f35d22fdb1a929e7ac1977b00b27aa6cb068f6299"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/parent-earlier_support_action-predictions.json": {
+      "bytes": 1068944,
+      "sha256": "af9ea61b9ec2080f024dd153ec5f0f24ab01fb9a350b9c7f5b3ec7a0bcd6b170"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/parent-earlier_trigger-predictions.json": {
+      "bytes": 1078368,
+      "sha256": "88f105fd96badea4d379cdcd115a85053196b65a5d6e16a8a69151ffeacabdaa"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/parent-fresh_final-predictions.json": {
+      "bytes": 1079294,
+      "sha256": "922e62a331f7f555bcb56daa252e281d1f91b96b585dce041a93fbe9d5f6880e"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/predicted_trigger/checkpoint-0.json": {
+      "bytes": 3726171,
+      "sha256": "c97d96f2044d6272179f17bf3def528214b7cfb4d434a787dfccd0895b663a5f"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/predicted_trigger/checkpoint-120.json": {
+      "bytes": 3953448,
+      "sha256": "c0135879bc2858bb1827fb423993222d4e3a9a27ff288b85e28781c83e78ebdf"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/predicted_trigger/checkpoint-240.json": {
+      "bytes": 3953652,
+      "sha256": "6b8adff8ecf9e70c5d969a9dac485d4ec0a296789e0e8707d899342b286f0375"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/predicted_trigger/earlier_scope-predictions.json": {
+      "bytes": 981860,
+      "sha256": "a22f4f75a180d42222960a91faebbb815369a4be805b4f106964f60cdfa62a66"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/predicted_trigger/earlier_support_action-predictions.json": {
+      "bytes": 1070352,
+      "sha256": "b6cd00044d394b818b24a5c640e9f7de65ec0bd9fd87cad0617735db14b843f3"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/predicted_trigger/earlier_trigger-predictions.json": {
+      "bytes": 1079776,
+      "sha256": "8d5afba9ea83bb4647e542ac66016ce7c6b493a67121b77bdfe5e21480d6c102"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/predicted_trigger/fresh_final-predictions.json": {
+      "bytes": 1080702,
+      "sha256": "9265f01c1f5ed5c00284ffad3225994ef80ea1c1c542daa331a095f1abe85240"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/training-results.json": {
+      "bytes": 355678,
+      "sha256": "abe2bf4f469b864733086c45b025d29d6fea790696f035712f1aaf864930e198"
+    }
+  },
+  "authority": {
+    "Lake_executed": false,
+    "all_emitted_masks_zero_and_formal_outputs_null": true,
+    "default_promotion": false,
+    "latent_conditioned": false,
+    "legal_gold": false,
+    "native_family_or_legal_qualification": false
+  },
+  "checkpoint_roles": {
+    "global/0": {
+      "bytes": 3726149,
+      "final_or_retention_evaluated": true,
+      "full_parent_bytes_exact": true,
+      "new_Adam_state_entries": 0,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/global/checkpoint-0.json",
+      "selected": true,
+      "selection_eligible": true,
+      "sha256": "b77e45332f60fc7ae01b7d281fe44c09ca7a800c53739dd285a22ff51d7ba3b6",
+      "steps": 0
+    },
+    "global/120": {
+      "bytes": 3954433,
+      "final_or_retention_evaluated": false,
+      "full_parent_bytes_exact": true,
+      "new_Adam_state_entries": 4,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/global/checkpoint-120.json",
+      "selected": false,
+      "selection_eligible": false,
+      "sha256": "4c3e04033dc71ac5a673a534edf72befb60d4d0657f4666f6f5c4f054bc1f32c",
+      "steps": 120
+    },
+    "global/240": {
+      "bytes": 3953962,
+      "final_or_retention_evaluated": false,
+      "full_parent_bytes_exact": true,
+      "new_Adam_state_entries": 4,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/global/checkpoint-240.json",
+      "selected": false,
+      "selection_eligible": false,
+      "sha256": "890ba734488e74aad42b38017b04f3256cbe711555f1627f15b34d40f8b109eb",
+      "steps": 240
+    },
+    "predicted_trigger/0": {
+      "bytes": 3726171,
+      "final_or_retention_evaluated": true,
+      "full_parent_bytes_exact": true,
+      "new_Adam_state_entries": 0,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/predicted_trigger/checkpoint-0.json",
+      "selected": true,
+      "selection_eligible": true,
+      "sha256": "c97d96f2044d6272179f17bf3def528214b7cfb4d434a787dfccd0895b663a5f",
+      "steps": 0
+    },
+    "predicted_trigger/120": {
+      "bytes": 3953448,
+      "final_or_retention_evaluated": false,
+      "full_parent_bytes_exact": true,
+      "new_Adam_state_entries": 4,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/predicted_trigger/checkpoint-120.json",
+      "selected": false,
+      "selection_eligible": false,
+      "sha256": "c0135879bc2858bb1827fb423993222d4e3a9a27ff288b85e28781c83e78ebdf",
+      "steps": 120
+    },
+    "predicted_trigger/240": {
+      "bytes": 3953652,
+      "final_or_retention_evaluated": false,
+      "full_parent_bytes_exact": true,
+      "new_Adam_state_entries": 4,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/predicted_trigger/checkpoint-240.json",
+      "selected": false,
+      "selection_eligible": false,
+      "sha256": "6b8adff8ecf9e70c5d969a9dac485d4ec0a296789e0e8707d899342b286f0375",
+      "steps": 240
+    }
+  },
+  "findings": [],
+  "incoming_main_preservation": {
+    "datasets": {
+      "HEAD": "75f57f9eeff052a5718fd1f2c6a4b73de3784af8",
+      "entries": [
+        {
+          "blob_or_gitlink": "a99f05c3eb699f1c1d385f47cdaa9a537b5d268f",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "docs/autoencoders/evidence/retained-wording-20261007/checkpoint-availability.json",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "35551e0a4c22ed8424cf39dfdd830fb02576036e",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "docs/autoencoders/evidence/retained-wording-20261007/model-manager-registration-result-independent-check.json",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "e97f25c88f3b4336f535e8eaf52f45fdeb489de2",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "docs/autoencoders/evidence/retained-wording-20261007/parallel-support-action-survey.json",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "339b00fbb5bfc1821af049fe1fd3107f1bf88634",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "docs/autoencoders/evidence/retained-wording-20261007/parent-reconciliation.json",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "672d1b632456a80f03f17ab0f04b877ee2585a2a",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "docs/autoencoders/evidence/retained-wording-20261007/parent-replay-independent-check.json",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "783466fe4a589f88491a02684d80bd09e5de4010",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "docs/autoencoders/evidence/retained-wording-20261007/publication-result-independent-check.json",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "append_bytes": 1438,
+          "blob_or_gitlink": "abfedbe555802f63822178af6082aa0071b29bf4",
+          "incoming_bytes_preserved_as_prefix": true,
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "docs/autoencoders/progress_integration.md",
+          "prefix_bytes": 20856,
+          "prefix_sha256": "1cc7bf063848d66c6771dc7eaf1bd47edf339fc9c94bc7b48cd4bcf205bc459e",
+          "type": "blob"
+        },
+        {
+          "blob_or_gitlink": "be720d04efb62d49364fe2aa6cd83d0a3f07a1ad",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "docs/autoencoders/retained_wording_checkpoint_availability_20261007.md",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "b07749163014598e603ef8e224a6616885bdb367",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "scripts/ops/autoencoder/retained_checkpoint_release/prepare_dual_bank_release.py",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "ad7bbbee21b7def09c38d56d3314ef69380f4f59",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "scripts/ops/autoencoder/retained_checkpoint_release/prepare_retained_parallel_release.py",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "eb9139e0b943dd7ba0daaafc0c1f638007bfd6a8",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "scripts/ops/autoencoder/retained_checkpoint_release/publication_common.py",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "f5da6c5287a31ac2420060906f387ce795c6a35d",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "scripts/ops/autoencoder/retained_checkpoint_release/publish_dual_bank_release.py",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "d97c6241d9a5fc4ce1318743dd5cbdef2d6b80b4",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "scripts/ops/autoencoder/retained_checkpoint_release/register_dual_bank_release.py",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "a59f63c1ff06f10cd77d0178b94b8bce725a9f33",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "scripts/ops/autoencoder/retained_parent_reconciliation/build_retained_parent_reconciliation_manifest.py",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "f54ccb4690af9bcc32b55d590e55f886abcd2063",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "scripts/ops/autoencoder/retained_parent_reconciliation/evaluate_dual_bank_wording_continuation.py",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "06575465efffdbc13520cc34d0e5a07289dee5f7",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "scripts/ops/autoencoder/retained_parent_reconciliation/reconcile_retained_dual_bank_outputs.py",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "509d93e4b7562b0da72809540e69cdb07201ccd3",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "tests/manual/autoencoder/retained_checkpoint_release_controls.py",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        }
+      ],
+      "incoming_paths_checked": 17
+    },
+    "workspace": {
+      "HEAD": "da212346307e2fc483d7dce6ebfa820d8da5758a",
+      "entries": [
+        {
+          "blob_or_gitlink": "be1fdebd722a69c26efefc09faae00775b43b353",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "artifacts/autoencoder-dual-bank-fit-20261007/README.md",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "a59f63c1ff06f10cd77d0178b94b8bce725a9f33",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "artifacts/autoencoder-dual-bank-fit-20261007/evaluation-source/build_retained_parent_reconciliation_manifest.py",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "f54ccb4690af9bcc32b55d590e55f886abcd2063",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "artifacts/autoencoder-dual-bank-fit-20261007/evaluation-source/evaluate_dual_bank_wording_continuation.py",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "06575465efffdbc13520cc34d0e5a07289dee5f7",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "artifacts/autoencoder-dual-bank-fit-20261007/evaluation-source/reconcile_retained_dual_bank_outputs.py",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "7720ccbb39fe99a5ba56540baf67c6bc15caca89",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "artifacts/autoencoder-dual-bank-fit-20261007/evaluation-source/test_dual_bank_wording_evaluation.py",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "82bb8f24cc5a72a7df966cbf8084a219b92224ff",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "artifacts/autoencoder-dual-bank-fit-20261007/evaluation-source/test_retained_dual_bank_reconciliation.py",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "a99f05c3eb699f1c1d385f47cdaa9a537b5d268f",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "artifacts/autoencoder-dual-bank-fit-20261007/evidence/checkpoint-availability.json",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "e86cbd009f29b2ef47377382ee25a74bc5d09fcb",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "artifacts/autoencoder-dual-bank-fit-20261007/evidence/integration-validation.json",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "35551e0a4c22ed8424cf39dfdd830fb02576036e",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "artifacts/autoencoder-dual-bank-fit-20261007/evidence/model-manager-registration-result-independent-check.json",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "e97f25c88f3b4336f535e8eaf52f45fdeb489de2",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "artifacts/autoencoder-dual-bank-fit-20261007/evidence/parallel-support-action-survey.json",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "339b00fbb5bfc1821af049fe1fd3107f1bf88634",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "artifacts/autoencoder-dual-bank-fit-20261007/evidence/parent-reconciliation.json",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "672d1b632456a80f03f17ab0f04b877ee2585a2a",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "artifacts/autoencoder-dual-bank-fit-20261007/evidence/parent-replay-independent-check.json",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "783466fe4a589f88491a02684d80bd09e5de4010",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "artifacts/autoencoder-dual-bank-fit-20261007/evidence/publication-result-independent-check.json",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        },
+        {
+          "blob_or_gitlink": "6665f0a172b6cea6f94ab9c62bc269241bba374d",
+          "index_equals_incoming": true,
+          "mode": "160000",
+          "path": "external/ipfs_accelerate",
+          "type": "commit",
+          "working_bytes_scope": "gitlink index identity only"
+        },
+        {
+          "blob_or_gitlink": "75f57f9eeff052a5718fd1f2c6a4b73de3784af8",
+          "index_equals_incoming": true,
+          "mode": "160000",
+          "path": "external/ipfs_datasets",
+          "type": "commit",
+          "working_bytes_scope": "gitlink index identity only"
+        },
+        {
+          "blob_or_gitlink": "2f319affa22397aa05f3a9d91095027d8eafda90",
+          "index_equals_incoming": true,
+          "mode": "100644",
+          "path": "implementation_plan/docs/66-retained-wording-reconciliation-2026-10-07.md",
+          "type": "blob",
+          "working_bytes_equal_incoming": true
+        }
+      ],
+      "incoming_paths_checked": 16
+    }
+  },
+  "native_bridge": {
+    "distinct_fitted_tensor_endpoints": 3,
+    "fitted_recipe_role_bindings": 6,
+    "native_schema_profile_format_null": true,
+    "public_authentication_and_registration_checked_against_retained_receipts_not_live_endpoints": true,
+    "registration_count_after": 684,
+    "registration_count_before": 678,
+    "report66_preserved": true,
+    "runtime_teacher_proof_false": true,
+    "separate_task_source_denominator_and_no_admission_claim": true
+  },
+  "observed_at_utc": "2026-10-07T14:36:48.113790+00:00",
+  "passed": true,
+  "postfit_TRAIN_diagnostics": {
+    "label_informed_saved_panels_only": true,
+    "metrics": {
+      "global": {
+        "modal_misspelling_emitted_of128": 105,
+        "negative_emitted_of512": 108,
+        "support_probability_BCE": 0.40517460301670016,
+        "whole_exact_of512": 310
+      },
+      "parent": {
+        "modal_misspelling_emitted_of128": 109,
+        "negative_emitted_of512": 112,
+        "support_probability_BCE": 0.42606995548260373,
+        "whole_exact_of512": 322
+      },
+      "predicted_trigger": {
+        "modal_misspelling_emitted_of128": 97,
+        "negative_emitted_of512": 99,
+        "support_probability_BCE": 0.34921938727067975,
+        "whole_exact_of512": 317
+      }
+    },
+    "model_calls": 0,
+    "optimizer_steps": 0,
+    "selection_changes": 0
+  },
+  "publication_limitations": [
+    "Root report retains DATASETS_DOC_URL, HF_RELEASE_URL and DATASETS_PR_URL placeholders for later immutable pins.",
+    "Guide/progress use the planned main release prefix; publication/file coverage and Hub authentication are not established by this source audit.",
+    "All six research checkpoints and two selected aliases are intended release roles; release review is separate.",
+    "The current candidate is unstaged/uncommitted; final index or commit identities require the subsequent contribution audit.",
+    "No model execution, independent replay execution, hosted CI or live endpoint authentication by this reviewer."
+  ],
+  "schema": "support-gate-final-contribution-review/v1",
+  "scope": "Read-only audit of four datasets working-file candidates and root report68 before publication-link resolution. This is not a staged or committed tree approval.",
+  "selected_fallback": {
+    "all_selected_paired_whole_and_negative_gain_loss_counts_zero": true,
+    "both_actual_cold_zero": true,
+    "exact_archived_parent_prediction_dictionaries": 384,
+    "initial_Adam_empty": true,
+    "initial_final_projection_zero": true,
+    "initial_gate_tensors_equal": true,
+    "no_selected_improvement": true,
+    "only_cold_selected_final_or_retention_evaluated": true,
+    "scores": {
+      "earlier_scope": {
+        "all_three_score_dictionaries_exact": true,
+        "fixed_all_structural_whole_ceiling": 50,
+        "negative_emitted": 8,
+        "raw_action_exact": 64,
+        "supported": 64,
+        "unsupported": 64,
+        "whole_exact": 40
+      },
+      "earlier_support_action": {
+        "all_three_score_dictionaries_exact": true,
+        "fixed_all_structural_whole_ceiling": 42,
+        "negative_emitted": 12,
+        "raw_action_exact": 62,
+        "supported": 64,
+        "unsupported": 64,
+        "whole_exact": 39
+      },
+      "earlier_trigger": {
+        "all_three_score_dictionaries_exact": true,
+        "fixed_all_structural_whole_ceiling": 43,
+        "negative_emitted": 12,
+        "raw_action_exact": 64,
+        "supported": 64,
+        "unsupported": 64,
+        "whole_exact": 39
+      },
+      "fresh_final": {
+        "all_three_score_dictionaries_exact": true,
+        "fixed_all_structural_whole_ceiling": 41,
+        "negative_emitted": 13,
+        "raw_action_exact": 61,
+        "supported": 64,
+        "unsupported": 64,
+        "whole_exact": 38
+      }
+    }
+  },
+  "selection": {
+    "global": [
+      {
+        "eligible": true,
+        "floors": {
+          "negative_emitted_no_increase": true,
+          "positive_emission_no_loss": true,
+          "positive_learned_refusal_no_increase": true,
+          "positive_whole_no_loss": true
+        },
+        "negative_emitted": 10,
+        "paired_counts": {
+          "negative_emission_new": 0,
+          "negative_emission_removed": 0,
+          "negative_emission_retained": 10,
+          "whole_gained": 0,
+          "whole_lost": 0,
+          "whole_retained": 32
+        },
+        "positive_emitted": 48,
+        "positive_learned_refusal": 6,
+        "step": 0,
+        "whole_exact": 32
+      },
+      {
+        "eligible": false,
+        "floors": {
+          "negative_emitted_no_increase": true,
+          "positive_emission_no_loss": false,
+          "positive_learned_refusal_no_increase": false,
+          "positive_whole_no_loss": false
+        },
+        "negative_emitted": 9,
+        "paired_counts": {
+          "negative_emission_new": 0,
+          "negative_emission_removed": 1,
+          "negative_emission_retained": 9,
+          "whole_gained": 0,
+          "whole_lost": 2,
+          "whole_retained": 30
+        },
+        "positive_emitted": 44,
+        "positive_learned_refusal": 10,
+        "step": 120,
+        "whole_exact": 30
+      },
+      {
+        "eligible": false,
+        "floors": {
+          "negative_emitted_no_increase": true,
+          "positive_emission_no_loss": false,
+          "positive_learned_refusal_no_increase": false,
+          "positive_whole_no_loss": false
+        },
+        "negative_emitted": 9,
+        "paired_counts": {
+          "negative_emission_new": 0,
+          "negative_emission_removed": 1,
+          "negative_emission_retained": 9,
+          "whole_gained": 0,
+          "whole_lost": 2,
+          "whole_retained": 30
+        },
+        "positive_emitted": 45,
+        "positive_learned_refusal": 9,
+        "step": 240,
+        "whole_exact": 30
+      }
+    ],
+    "predicted_trigger": [
+      {
+        "eligible": true,
+        "floors": {
+          "negative_emitted_no_increase": true,
+          "positive_emission_no_loss": true,
+          "positive_learned_refusal_no_increase": true,
+          "positive_whole_no_loss": true
+        },
+        "negative_emitted": 10,
+        "paired_counts": {
+          "negative_emission_new": 0,
+          "negative_emission_removed": 0,
+          "negative_emission_retained": 10,
+          "whole_gained": 0,
+          "whole_lost": 0,
+          "whole_retained": 32
+        },
+        "positive_emitted": 48,
+        "positive_learned_refusal": 6,
+        "step": 0,
+        "whole_exact": 32
+      },
+      {
+        "eligible": false,
+        "floors": {
+          "negative_emitted_no_increase": false,
+          "positive_emission_no_loss": true,
+          "positive_learned_refusal_no_increase": true,
+          "positive_whole_no_loss": true
+        },
+        "negative_emitted": 11,
+        "paired_counts": {
+          "negative_emission_new": 3,
+          "negative_emission_removed": 2,
+          "negative_emission_retained": 8,
+          "whole_gained": 2,
+          "whole_lost": 1,
+          "whole_retained": 31
+        },
+        "positive_emitted": 49,
+        "positive_learned_refusal": 5,
+        "step": 120,
+        "whole_exact": 33
+      },
+      {
+        "eligible": false,
+        "floors": {
+          "negative_emitted_no_increase": true,
+          "positive_emission_no_loss": false,
+          "positive_learned_refusal_no_increase": false,
+          "positive_whole_no_loss": true
+        },
+        "negative_emitted": 10,
+        "paired_counts": {
+          "negative_emission_new": 2,
+          "negative_emission_removed": 2,
+          "negative_emission_retained": 8,
+          "whole_gained": 2,
+          "whole_lost": 2,
+          "whole_retained": 30
+        },
+        "positive_emitted": 47,
+        "positive_learned_refusal": 8,
+        "step": 240,
+        "whole_exact": 32
+      }
+    ]
+  },
+  "source_candidate": {
+    "all_five_old_numerical_producers_exact": true,
+    "current_candidate_Git_status": {
+      "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/docs/autoencoders/progress_integration.md": " M docs/autoencoders/progress_integration.md",
+      "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/docs/implementation/legal_scope_support_gate_pilot_20261007.md": "?? docs/implementation/legal_scope_support_gate_pilot_20261007.md",
+      "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_gate.py": "?? ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_gate.py",
+      "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/tests/unit/logic/test_legal_scope_support_gate.py": "?? tests/unit/logic/test_legal_scope_support_gate.py",
+      "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/workspace/implementation_plan/docs/68-support-gate-refusal-training-2026-10-07.md": "?? implementation_plan/docs/68-support-gate-refusal-training-2026-10-07.md"
+    },
+    "owned_paths": [
+      "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_gate.py",
+      "tests/unit/logic/test_legal_scope_support_gate.py",
+      "docs/implementation/legal_scope_support_gate_pilot_20261007.md",
+      "docs/autoencoders/progress_integration.md"
+    ],
+    "progress_correction_applied": true,
+    "source_and_test_exact_trained_pins": true
+  },
+  "verification_evidence": {
+    "guardian_pure_tests": 23,
+    "guardian_tests_historical_not_rerun": true,
+    "local_complete_output_replay": 1024,
+    "model_test_executions": 170,
+    "pure_selector_fixtures": 23,
+    "qualified_test_identity_limitation_disclosed": true,
+    "replay_additional_optimizer_updates": 0,
+    "replay_reference_reads": false,
+    "resource_review_passed": true,
+    "results_review_pins_rehashed": 75,
+    "sampled_RSS_only_not_absolute_kernel_or_continuous": true
+  }
+}

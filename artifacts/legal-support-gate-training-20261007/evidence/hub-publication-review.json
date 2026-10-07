@@ -1,0 +1,126 @@
+{
+  "checkpoint_inventory": {
+    "bytes": 4182,
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/release/checkpoint-roles.json",
+    "sha256": "eb97e6a28c94921caf562c74c09322825b266f09f5616889643e42d5be89f58a"
+  },
+  "checkpoint_verification": {
+    "byte_exact_with_physical_originals_and_release": true,
+    "direct_cached_raw_rehashes": 8,
+    "full_seals_and_Adam_state_review": "reused immutable prepublication audit, with all eight raw state hashes independently rechecked",
+    "original_states": 6,
+    "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+    "selected_aliases": {
+      "global": {
+        "bytes": 3726149,
+        "sha256": "b77e45332f60fc7ae01b7d281fe44c09ca7a800c53739dd285a22ff51d7ba3b6"
+      },
+      "predicted_trigger": {
+        "bytes": 3726171,
+        "sha256": "c97d96f2044d6272179f17bf3def528214b7cfb4d434a787dfccd0895b663a5f"
+      }
+    },
+    "selected_zero_aliases": 2,
+    "trained_120_240_research_states": 4,
+    "trained_states_final_or_retention_evaluated": false,
+    "trained_states_selection_eligible": false
+  },
+  "findings": [],
+  "independent_pinned_Hub_observation": {
+    "all_2747_prior_file_identities_exact": true,
+    "all_new_git_or_LFS_identities_match_audited_release": true,
+    "file_count": 2856,
+    "gitattributes": "unchanged; append allowance unused",
+    "http_status": 200,
+    "new_paths": 109,
+    "response_bytes": 774150,
+    "response_sha256": "c780fa3aa16eff2d3efaaa1de463b23696a60a3cb8b3d4fa1fdba88cdec47819",
+    "url": "https://huggingface.co/api/models/Publicus/legal-ir-autoencoder/revision/ae5a6b555f66f9ea7cdf3f46a03c689d07485bb5?blobs=true"
+  },
+  "limits": [
+    "This verifies immutable Hub metadata and local downloaded bytes plus existing replay receipts; no model replay was repeated by this reviewer.",
+    "Eight-state seals/moments and numerical findings remain bound to the already sealed independent release/results reviews; no new score or selection was computed.",
+    "Selected cold-zero gates preserve the trained parent and show no accuracy gain or default promotion. Published trained states are rejected research retention only.",
+    "Parent inventory map is hash-bound and independently compared in memory; no large map copy is retained."
+  ],
+  "parent_revision": "b5915b4ad93579dc2755d5357e20cba94698ad6c",
+  "passed": true,
+  "plan": {
+    "bytes": 9694,
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/experiment-plan.json",
+    "sha256": "08f05d12c7e9769f51b9bc13f5f49dc8ffe9660507639cf428431f04a74e468f"
+  },
+  "prefix": "experiments/support-gate-20261007/run-01",
+  "receipt_pins": {
+    "hub-all-checkpoint-downloads.json": {
+      "bytes": 2154,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/hub-all-checkpoint-downloads.json",
+      "sha256": "6fa190c02d98b41ec55afd74057810b92c3c14d86b10b9c18ab271a12c89a6b8"
+    },
+    "hub-checkpoint-replay.json": {
+      "bytes": 11446,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/hub-checkpoint-replay.json",
+      "sha256": "07ace4b6ce714d349c85140368e55f31935b60537b64b79e4e4c700801891874"
+    },
+    "hub-readback-verification.json": {
+      "bytes": 24167,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/hub-readback-verification.json",
+      "sha256": "5286babe50d72c835f2d0caeb5a80cfda8d7f8aa213fa8dec5a47366f4f9aa89"
+    },
+    "hub-upload-commit.json": {
+      "bytes": 329,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/hub-upload-commit.json",
+      "sha256": "2e52051ab42d8995034cfc14142544c2af5ee52fa5cff4548b5883ff7732f308"
+    },
+    "hub-upload-parent.json": {
+      "bytes": 777534,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/hub-upload-parent.json",
+      "sha256": "53dae289d212a7a991c9a520ca59247efd4d96c4664f298ba1a3c9ab8cc829c3"
+    },
+    "release-review.json": {
+      "bytes": 8431,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/release-review.json",
+      "sha256": "29c02a6bd73b66007fd20dfe81e160d6ede4519c24ecac9e722c095b9028f26c"
+    }
+  },
+  "release": {
+    "bytes": 81661894,
+    "files": 109,
+    "manifest_nonself_bindings": 108,
+    "same_bytes_as_prepublication_review": true
+  },
+  "release_manifest": {
+    "bytes": 17886,
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/release/release-manifest.json",
+    "sha256": "10655c22afb678b62ba49e7a6941d08742c577eba37ef0ce41f3c691aaf64419"
+  },
+  "repo": "Publicus/legal-ir-autoencoder",
+  "reviewed_at_utc": "2026-10-07T15:00:27.509580+00:00",
+  "reviewer_actions": {
+    "anonymous_read_only_Hub_GETs_in_review_session": 2,
+    "checkpoint_restores": 0,
+    "fits": 0,
+    "model_forward_calls": 0,
+    "model_imports": 0,
+    "references_JSON_parsed": 0,
+    "source_Git_or_Hub_mutations": 0,
+    "tests": 0,
+    "written_files": [
+      "hub-publication-review.json"
+    ]
+  },
+  "revision": "ae5a6b555f66f9ea7cdf3f46a03c689d07485bb5",
+  "schema": "support-gate-hub-publication-independent-review/v1",
+  "selected_downloaded_replay": {
+    "additional_optimizer_updates": 0,
+    "all_checkpoint_input_complete_panel_barrier_and_producer_bindings_verified": true,
+    "arms": 2,
+    "complete_outputs_exact": 1024,
+    "device": "cpu",
+    "parent_full_bytes_new_Adam_progress_modes_flags_and_RNG_preserved_receipt": true,
+    "reexecuted_by_reviewer": false,
+    "references_opened": false,
+    "source_cohorts_per_arm": 4,
+    "threads": 2
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "schema": "support-gate-output-barrier/v1",
+  "panels": {
+    "global/fresh_final": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/global/fresh_final-predictions.json",
+      "bytes": 1079294,
+      "sha256": "acc25c013c2c9a63013386b505753c3e7a3b3ca789bc991149b586ecaa83301f"
+    },
+    "global/earlier_scope": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/global/earlier_scope-predictions.json",
+      "bytes": 980452,
+      "sha256": "0ccce28a47f9b5252a215761483e97beaf5e3632bde2307539d119567fb2db38"
+    },
+    "global/earlier_trigger": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/global/earlier_trigger-predictions.json",
+      "bytes": 1078368,
+      "sha256": "c6ce4d6eb9b3b29029c39e5b46abd0ca0b85d35213d09fe70553fa11203efd48"
+    },
+    "global/earlier_support_action": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/global/earlier_support_action-predictions.json",
+      "bytes": 1068944,
+      "sha256": "432527896ee72600d1e42761fcf813b2c87d4a2d99c7a17a02ded5b29ef97cfd"
+    },
+    "predicted_trigger/fresh_final": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/predicted_trigger/fresh_final-predictions.json",
+      "bytes": 1080702,
+      "sha256": "9265f01c1f5ed5c00284ffad3225994ef80ea1c1c542daa331a095f1abe85240"
+    },
+    "predicted_trigger/earlier_scope": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/predicted_trigger/earlier_scope-predictions.json",
+      "bytes": 981860,
+      "sha256": "a22f4f75a180d42222960a91faebbb815369a4be805b4f106964f60cdfa62a66"
+    },
+    "predicted_trigger/earlier_trigger": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/predicted_trigger/earlier_trigger-predictions.json",
+      "bytes": 1079776,
+      "sha256": "8d5afba9ea83bb4647e542ac66016ce7c6b493a67121b77bdfe5e21480d6c102"
+    },
+    "predicted_trigger/earlier_support_action": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/predicted_trigger/earlier_support_action-predictions.json",
+      "bytes": 1070352,
+      "sha256": "b6cd00044d394b818b24a5c640e9f7de65ec0bd9fd87cad0617735db14b843f3"
+    },
+    "parent/fresh_final": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/parent-fresh_final-predictions.json",
+      "bytes": 1079294,
+      "sha256": "922e62a331f7f555bcb56daa252e281d1f91b96b585dce041a93fbe9d5f6880e"
+    },
+    "parent/earlier_scope": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/parent-earlier_scope-predictions.json",
+      "bytes": 980452,
+      "sha256": "0fce6cdf583089a8a817c75f35d22fdb1a929e7ac1977b00b27aa6cb068f6299"
+    },
+    "parent/earlier_trigger": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/parent-earlier_trigger-predictions.json",
+      "bytes": 1078368,
+      "sha256": "88f105fd96badea4d379cdcd115a85053196b65a5d6e16a8a69151ffeacabdaa"
+    },
+    "parent/earlier_support_action": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/parent-earlier_support_action-predictions.json",
+      "bytes": 1068944,
+      "sha256": "af9ea61b9ec2080f024dd153ec5f0f24ab01fb9a350b9c7f5b3ec7a0bcd6b170"
+    }
+  },
+  "evaluation_references_parsed": false
+}

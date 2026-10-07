@@ -1,0 +1,63 @@
+{
+  "schema": "support-gate-all-hub-checkpoints-byte-verification/v1",
+  "passed": true,
+  "repo": "Publicus/legal-ir-autoencoder",
+  "revision": "ae5a6b555f66f9ea7cdf3f46a03c689d07485bb5",
+  "prefix": "experiments/support-gate-20261007/run-01",
+  "checkpoint_files": 8,
+  "selected_aliases": 2,
+  "original_states": 6,
+  "model_restores": 0,
+  "model_forwards": 0,
+  "optimizer_updates": 0,
+  "files": [
+    {
+      "path": "checkpoints/global/checkpoint-0.json",
+      "bytes": 3726149,
+      "sha256": "b77e45332f60fc7ae01b7d281fe44c09ca7a800c53739dd285a22ff51d7ba3b6",
+      "downloaded_bytes_exact": true
+    },
+    {
+      "path": "checkpoints/global/checkpoint-120.json",
+      "bytes": 3954433,
+      "sha256": "4c3e04033dc71ac5a673a534edf72befb60d4d0657f4666f6f5c4f054bc1f32c",
+      "downloaded_bytes_exact": true
+    },
+    {
+      "path": "checkpoints/global/checkpoint-240.json",
+      "bytes": 3953962,
+      "sha256": "890ba734488e74aad42b38017b04f3256cbe711555f1627f15b34d40f8b109eb",
+      "downloaded_bytes_exact": true
+    },
+    {
+      "path": "checkpoints/global/checkpoint.json",
+      "bytes": 3726149,
+      "sha256": "b77e45332f60fc7ae01b7d281fe44c09ca7a800c53739dd285a22ff51d7ba3b6",
+      "downloaded_bytes_exact": true
+    },
+    {
+      "path": "checkpoints/predicted_trigger/checkpoint-0.json",
+      "bytes": 3726171,
+      "sha256": "c97d96f2044d6272179f17bf3def528214b7cfb4d434a787dfccd0895b663a5f",
+      "downloaded_bytes_exact": true
+    },
+    {
+      "path": "checkpoints/predicted_trigger/checkpoint-120.json",
+      "bytes": 3953448,
+      "sha256": "c0135879bc2858bb1827fb423993222d4e3a9a27ff288b85e28781c83e78ebdf",
+      "downloaded_bytes_exact": true
+    },
+    {
+      "path": "checkpoints/predicted_trigger/checkpoint-240.json",
+      "bytes": 3953652,
+      "sha256": "6b8adff8ecf9e70c5d969a9dac485d4ec0a296789e0e8707d899342b286f0375",
+      "downloaded_bytes_exact": true
+    },
+    {
+      "path": "checkpoints/predicted_trigger/checkpoint.json",
+      "bytes": 3726171,
+      "sha256": "c97d96f2044d6272179f17bf3def528214b7cfb4d434a787dfccd0895b663a5f",
+      "downloaded_bytes_exact": true
+    }
+  ]
+}
