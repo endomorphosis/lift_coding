@@ -1,0 +1,4006 @@
+{
+  "schema": "support-gate-source-only-panel/v1",
+  "rows": [
+    {
+      "id": "source:d8cc017d592cea158a800724e02641e3d676a5202845eb0b0bff4c276b5f94d1",
+      "source_group": "support-gate-group:6816461ad770dbdd70de97fa04a95eb94f0a876af57d5affc0e29af392037506",
+      "source_sha256": "d8cc017d592cea158a800724e02641e3d676a5202845eb0b0bff4c276b5f94d1",
+      "class_logits": [
+        0.899641215801239,
+        -2.8643364906311035,
+        1.562020182609558
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-gate-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "F",
+          "spans": {
+            "modality": [
+              53,
+              66
+            ],
+            "actor": [
+              4,
+              20
+            ],
+            "action": [
+              23,
+              31
+            ],
+            "object": [
+              36,
+              52
+            ],
+            "condition": null
+          },
+          "condition_attachment": null
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "d8cc017d592cea158a800724e02641e3d676a5202845eb0b0bff4c276b5f94d1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "the gardenia caracal's steaming the gardenia caracal is rohibitedp.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "a835b7455b45fdca12f1f4be40315647f42e3e27460ec8ac4d67299680e36902",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-53-66",
+                "facet": "modality",
+                "canonical_symbol": "F",
+                "anchor": {
+                  "origin": "source",
+                  "start": 53,
+                  "end": 66,
+                  "text": "is rohibitedp",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-4-20",
+                "facet": "actor",
+                "canonical_symbol": "gardenia caracal",
+                "anchor": {
+                  "origin": "source",
+                  "start": 4,
+                  "end": 20,
+                  "text": "gardenia caracal",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-23-31",
+                "facet": "action",
+                "canonical_symbol": "steaming",
+                "anchor": {
+                  "origin": "source",
+                  "start": 23,
+                  "end": 31,
+                  "text": "steaming",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-object-36-52",
+                "facet": "object",
+                "canonical_symbol": "gardenia caracal",
+                "anchor": {
+                  "origin": "source",
+                  "start": 36,
+                  "end": 52,
+                  "text": "gardenia caracal",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-53-66",
+                  "actor": "occ-actor-4-20",
+                  "action": "occ-action-23-31",
+                  "object": "occ-object-36-52"
+                },
+                "qualifiers": {
+                  "conditions": null,
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "rule",
+              "rule_id": "rule-0"
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 67,
+                  "text": "the gardenia caracal's steaming the gardenia caracal is rohibitedp.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "31a95cbed72b0f028380d3fb3dd29573a2b466c672dd7290c6b29b110f1dad81"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "a835b7455b45fdca12f1f4be40315647f42e3e27460ec8ac4d67299680e36902",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "31a95cbed72b0f028380d3fb3dd29573a2b466c672dd7290c6b29b110f1dad81",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "the gardenia caracal's steaming the gardenia caracal is rohibitedp.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "a835b7455b45fdca12f1f4be40315647f42e3e27460ec8ac4d67299680e36902",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-53-66",
+                  "facet": "modality",
+                  "canonical_symbol": "F",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 53,
+                    "end": 66,
+                    "text": "is rohibitedp",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-4-20",
+                  "facet": "actor",
+                  "canonical_symbol": "gardenia caracal",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 4,
+                    "end": 20,
+                    "text": "gardenia caracal",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-23-31",
+                  "facet": "action",
+                  "canonical_symbol": "steaming",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 23,
+                    "end": 31,
+                    "text": "steaming",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-object-36-52",
+                  "facet": "object",
+                  "canonical_symbol": "gardenia caracal",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 36,
+                    "end": 52,
+                    "text": "gardenia caracal",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-53-66",
+                    "actor": "occ-actor-4-20",
+                    "action": "occ-action-23-31",
+                    "object": "occ-object-36-52"
+                  },
+                  "qualifiers": {
+                    "conditions": null,
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 67,
+                    "text": "the gardenia caracal's steaming the gardenia caracal is rohibitedp.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "31a95cbed72b0f028380d3fb3dd29573a2b466c672dd7290c6b29b110f1dad81"
+            },
+            "occurrence_count": 4,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "186063ae08ec5b479f4e5da6b4a827cdc99de0cc504212ef026f79b0bc4d39bb"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              9,
+              10
+            ],
+            "actor": [
+              1,
+              2
+            ],
+            "action": [
+              5,
+              5
+            ],
+            "object": [
+              7,
+              8
+            ],
+            "condition": [
+              7,
+              8
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.899641215801239,
+          -2.8643364906311035,
+          1.562020182609558
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "support_probability": 0.960660457611084,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:81ca0a1e9bd45d14fdb8fb8f46cbd95b32cb42bc7e8836da9c9adb2f7d7a64ce",
+      "source_group": "support-gate-group:4be22a81fe86fb9432c9c69f5ca36339cd8dabdbb403fa81d32cc578dc0cbc37",
+      "source_sha256": "81ca0a1e9bd45d14fdb8fb8f46cbd95b32cb42bc7e8836da9c9adb2f7d7a64ce",
+      "class_logits": [
+        -0.1557042896747589,
+        -1.798980712890625,
+        1.3830692768096924
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-gate-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "F",
+          "spans": {
+            "modality": [
+              37,
+              45
+            ],
+            "actor": [
+              23,
+              36
+            ],
+            "action": [
+              46,
+              53
+            ],
+            "object": null,
+            "condition": null
+          },
+          "condition_attachment": null
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "81ca0a1e9bd45d14fdb8fb8f46cbd95b32cb42bc7e8836da9c9adb2f7d7a64ce",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "In this procedure, the lantana okapi must not briskly whisk the marigold chutney.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "f11db90727d969b8a5b7fec92aac95ef8023c639e538decc781c9d952285c05b",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-37-45",
+                "facet": "modality",
+                "canonical_symbol": "F",
+                "anchor": {
+                  "origin": "source",
+                  "start": 37,
+                  "end": 45,
+                  "text": "must not",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-23-36",
+                "facet": "actor",
+                "canonical_symbol": "lantana okapi",
+                "anchor": {
+                  "origin": "source",
+                  "start": 23,
+                  "end": 36,
+                  "text": "lantana okapi",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-46-53",
+                "facet": "action",
+                "canonical_symbol": "briskly",
+                "anchor": {
+                  "origin": "source",
+                  "start": 46,
+                  "end": 53,
+                  "text": "briskly",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-37-45",
+                  "actor": "occ-actor-23-36",
+                  "action": "occ-action-46-53",
+                  "object": null
+                },
+                "qualifiers": {
+                  "conditions": null,
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "rule",
+              "rule_id": "rule-0"
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 81,
+                  "text": "In this procedure, the lantana okapi must not briskly whisk the marigold chutney.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "aab350cce3b78de9dfc63015109b4545aebeeb0f801210b593916f8708a608b8"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "f11db90727d969b8a5b7fec92aac95ef8023c639e538decc781c9d952285c05b",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "aab350cce3b78de9dfc63015109b4545aebeeb0f801210b593916f8708a608b8",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "In this procedure, the lantana okapi must not briskly whisk the marigold chutney.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "f11db90727d969b8a5b7fec92aac95ef8023c639e538decc781c9d952285c05b",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-37-45",
+                  "facet": "modality",
+                  "canonical_symbol": "F",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 37,
+                    "end": 45,
+                    "text": "must not",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-23-36",
+                  "facet": "actor",
+                  "canonical_symbol": "lantana okapi",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 23,
+                    "end": 36,
+                    "text": "lantana okapi",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-46-53",
+                  "facet": "action",
+                  "canonical_symbol": "briskly",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 46,
+                    "end": 53,
+                    "text": "briskly",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-37-45",
+                    "actor": "occ-actor-23-36",
+                    "action": "occ-action-46-53",
+                    "object": null
+                  },
+                  "qualifiers": {
+                    "conditions": null,
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 81,
+                    "text": "In this procedure, the lantana okapi must not briskly whisk the marigold chutney.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "aab350cce3b78de9dfc63015109b4545aebeeb0f801210b593916f8708a608b8"
+            },
+            "occurrence_count": 3,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "ba650596fa200772c773355b5edb5a7ba41d82393a6fa24a35c1e582909f30ca"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": false,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              7,
+              8
+            ],
+            "actor": [
+              5,
+              6
+            ],
+            "action": [
+              9,
+              9
+            ],
+            "object": [
+              12,
+              13
+            ],
+            "condition": [
+              12,
+              13
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          -0.1557042896747589,
+          -1.798980712890625,
+          1.3830692768096924
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "support_probability": 0.9933686852455139,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:c65374611e7ded5b987a8901d50b5b8797e69280fc8b54876e1666d79fca6137",
+      "source_group": "support-gate-group:0b038d7f9ed417fc972a2c02495658e3dca869486399a716f41920c9167409a4",
+      "source_sha256": "c65374611e7ded5b987a8901d50b5b8797e69280fc8b54876e1666d79fca6137",
+      "class_logits": [
+        1.034271240234375,
+        -3.146815776824951,
+        1.7884657382965088
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-gate-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "F",
+          "spans": {
+            "modality": [
+              67,
+              80
+            ],
+            "actor": [
+              24,
+              37
+            ],
+            "action": [
+              40,
+              48
+            ],
+            "object": [
+              53,
+              66
+            ],
+            "condition": [
+              3,
+              18
+            ]
+          },
+          "condition_attachment": "rule"
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "c65374611e7ded5b987a8901d50b5b8797e69280fc8b54876e1666d79fca6137",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "If zephyr whistles, the azalea wombat's steaming the azalea wombat is prohibited.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "61ea953920069bcbaddf4a44d4a05c8a611ac8221391cb843dbb519d156df1b8",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-67-80",
+                "facet": "modality",
+                "canonical_symbol": "F",
+                "anchor": {
+                  "origin": "source",
+                  "start": 67,
+                  "end": 80,
+                  "text": "is prohibited",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-24-37",
+                "facet": "actor",
+                "canonical_symbol": "azalea wombat",
+                "anchor": {
+                  "origin": "source",
+                  "start": 24,
+                  "end": 37,
+                  "text": "azalea wombat",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-40-48",
+                "facet": "action",
+                "canonical_symbol": "steaming",
+                "anchor": {
+                  "origin": "source",
+                  "start": 40,
+                  "end": 48,
+                  "text": "steaming",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-object-53-66",
+                "facet": "object",
+                "canonical_symbol": "azalea wombat",
+                "anchor": {
+                  "origin": "source",
+                  "start": 53,
+                  "end": 66,
+                  "text": "azalea wombat",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-condition-3-18",
+                "facet": "conditions",
+                "canonical_symbol": "zephyr whistles",
+                "anchor": {
+                  "origin": "source",
+                  "start": 3,
+                  "end": 18,
+                  "text": "zephyr whistles",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-67-80",
+                  "actor": "occ-actor-24-37",
+                  "action": "occ-action-40-48",
+                  "object": "occ-object-53-66"
+                },
+                "qualifiers": {
+                  "conditions": {
+                    "op": "leaf",
+                    "occurrence_id": "occ-condition-3-18"
+                  },
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "rule",
+              "rule_id": "rule-0"
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 81,
+                  "text": "If zephyr whistles, the azalea wombat's steaming the azalea wombat is prohibited.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "99b59e6ba4f0cdef7a20fc9dc00f2e7910d7c2a227334c46f7b9d0c0e16739a4"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "61ea953920069bcbaddf4a44d4a05c8a611ac8221391cb843dbb519d156df1b8",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "99b59e6ba4f0cdef7a20fc9dc00f2e7910d7c2a227334c46f7b9d0c0e16739a4",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "If zephyr whistles, the azalea wombat's steaming the azalea wombat is prohibited.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "61ea953920069bcbaddf4a44d4a05c8a611ac8221391cb843dbb519d156df1b8",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-67-80",
+                  "facet": "modality",
+                  "canonical_symbol": "F",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 67,
+                    "end": 80,
+                    "text": "is prohibited",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-24-37",
+                  "facet": "actor",
+                  "canonical_symbol": "azalea wombat",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 24,
+                    "end": 37,
+                    "text": "azalea wombat",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-40-48",
+                  "facet": "action",
+                  "canonical_symbol": "steaming",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 40,
+                    "end": 48,
+                    "text": "steaming",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-object-53-66",
+                  "facet": "object",
+                  "canonical_symbol": "azalea wombat",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 53,
+                    "end": 66,
+                    "text": "azalea wombat",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-condition-3-18",
+                  "facet": "conditions",
+                  "canonical_symbol": "zephyr whistles",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 3,
+                    "end": 18,
+                    "text": "zephyr whistles",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-67-80",
+                    "actor": "occ-actor-24-37",
+                    "action": "occ-action-40-48",
+                    "object": "occ-object-53-66"
+                  },
+                  "qualifiers": {
+                    "conditions": {
+                      "op": "leaf",
+                      "occurrence_id": "occ-condition-3-18"
+                    },
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 81,
+                    "text": "If zephyr whistles, the azalea wombat's steaming the azalea wombat is prohibited.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "99b59e6ba4f0cdef7a20fc9dc00f2e7910d7c2a227334c46f7b9d0c0e16739a4"
+            },
+            "occurrence_count": 5,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "a2d67bcd35964218a216fc7968ff1939e1298e67d06eabc2014888289cf7f2c9"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              13,
+              14
+            ],
+            "actor": [
+              5,
+              6
+            ],
+            "action": [
+              9,
+              9
+            ],
+            "object": [
+              11,
+              12
+            ],
+            "condition": [
+              1,
+              2
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          1.034271240234375,
+          -3.146815776824951,
+          1.7884657382965088
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "support_probability": 0.9059985280036926,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:e8c286acf48759eeb044eb73a4d180e862515c1f997d24ed01e941247e536e0a",
+      "source_group": "support-gate-group:3809dc2c3fc363d7b0907cc141f02794b59f397089b70e7f264ae9f18b3b26d5",
+      "source_sha256": "e8c286acf48759eeb044eb73a4d180e862515c1f997d24ed01e941247e536e0a",
+      "class_logits": [
+        1.5006929636001587,
+        -1.4847137928009033,
+        -0.42180460691452026
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-gate-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "O",
+          "spans": {
+            "modality": [
+              37,
+              42
+            ],
+            "actor": [
+              23,
+              36
+            ],
+            "action": [
+              43,
+              48
+            ],
+            "object": [
+              53,
+              69
+            ],
+            "condition": null
+          },
+          "condition_attachment": null
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "e8c286acf48759eeb044eb73a4d180e862515c1f997d24ed01e941247e536e0a",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "In this procedure, the lantana okapi shall roast the marigold chutney.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "23faed6970b464bbe72b93ef73a4637ed7ff237eb238c71607a86247cad4ab09",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-37-42",
+                "facet": "modality",
+                "canonical_symbol": "O",
+                "anchor": {
+                  "origin": "source",
+                  "start": 37,
+                  "end": 42,
+                  "text": "shall",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-23-36",
+                "facet": "actor",
+                "canonical_symbol": "lantana okapi",
+                "anchor": {
+                  "origin": "source",
+                  "start": 23,
+                  "end": 36,
+                  "text": "lantana okapi",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-43-48",
+                "facet": "action",
+                "canonical_symbol": "roast",
+                "anchor": {
+                  "origin": "source",
+                  "start": 43,
+                  "end": 48,
+                  "text": "roast",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-object-53-69",
+                "facet": "object",
+                "canonical_symbol": "marigold chutney",
+                "anchor": {
+                  "origin": "source",
+                  "start": 53,
+                  "end": 69,
+                  "text": "marigold chutney",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-37-42",
+                  "actor": "occ-actor-23-36",
+                  "action": "occ-action-43-48",
+                  "object": "occ-object-53-69"
+                },
+                "qualifiers": {
+                  "conditions": null,
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "rule",
+              "rule_id": "rule-0"
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 70,
+                  "text": "In this procedure, the lantana okapi shall roast the marigold chutney.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "6763a234415bc39906d13a9a60d1631686c1328f05b70473eea1265e41997213"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "23faed6970b464bbe72b93ef73a4637ed7ff237eb238c71607a86247cad4ab09",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "6763a234415bc39906d13a9a60d1631686c1328f05b70473eea1265e41997213",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "In this procedure, the lantana okapi shall roast the marigold chutney.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "23faed6970b464bbe72b93ef73a4637ed7ff237eb238c71607a86247cad4ab09",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-37-42",
+                  "facet": "modality",
+                  "canonical_symbol": "O",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 37,
+                    "end": 42,
+                    "text": "shall",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-23-36",
+                  "facet": "actor",
+                  "canonical_symbol": "lantana okapi",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 23,
+                    "end": 36,
+                    "text": "lantana okapi",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-43-48",
+                  "facet": "action",
+                  "canonical_symbol": "roast",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 43,
+                    "end": 48,
+                    "text": "roast",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-object-53-69",
+                  "facet": "object",
+                  "canonical_symbol": "marigold chutney",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 53,
+                    "end": 69,
+                    "text": "marigold chutney",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-37-42",
+                    "actor": "occ-actor-23-36",
+                    "action": "occ-action-43-48",
+                    "object": "occ-object-53-69"
+                  },
+                  "qualifiers": {
+                    "conditions": null,
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 70,
+                    "text": "In this procedure, the lantana okapi shall roast the marigold chutney.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "6763a234415bc39906d13a9a60d1631686c1328f05b70473eea1265e41997213"
+            },
+            "occurrence_count": 4,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "d851c569956a0ee1a114d4fe7d79ce76461b0d782d110ed235637c5b3ed6657b"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "O",
+          "presence": {
+            "object": true,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              7,
+              7
+            ],
+            "actor": [
+              5,
+              6
+            ],
+            "action": [
+              8,
+              8
+            ],
+            "object": [
+              10,
+              11
+            ],
+            "condition": [
+              10,
+              11
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          1.5006929636001587,
+          -1.4847137928009033,
+          -0.42180460691452026
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "support_probability": 0.8823953866958618,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:54cbc4407c990011f4c5c4728b3f34c85ccbf57279b1e40c5af0872f08a5b7cd",
+      "source_group": "support-gate-group:16e9ab3d9005fcd01216b33e64ec1221cb26c9e5d06c95f2ca0c37c46203880d",
+      "source_sha256": "54cbc4407c990011f4c5c4728b3f34c85ccbf57279b1e40c5af0872f08a5b7cd",
+      "class_logits": [
+        -0.22769121825695038,
+        0.8312427401542664,
+        -0.7908499836921692
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-gate-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "P",
+          "spans": {
+            "modality": [
+              38,
+              52
+            ],
+            "actor": [
+              23,
+              37
+            ],
+            "action": [
+              53,
+              58
+            ],
+            "object": [
+              63,
+              78
+            ],
+            "condition": [
+              3,
+              17
+            ]
+          },
+          "condition_attachment": "statement"
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "54cbc4407c990011f4c5c4728b3f34c85ccbf57279b1e40c5af0872f08a5b7cd",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "If virga descends, the anemone numbat is required to steam the kalmia macaroon.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "2ec6611381bb4a640186047ebe44bb8ca93f5a61a1f9bfdfd1e7f4a444f76cb8",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-38-52",
+                "facet": "modality",
+                "canonical_symbol": "P",
+                "anchor": {
+                  "origin": "source",
+                  "start": 38,
+                  "end": 52,
+                  "text": "is required to",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-23-37",
+                "facet": "actor",
+                "canonical_symbol": "anemone numbat",
+                "anchor": {
+                  "origin": "source",
+                  "start": 23,
+                  "end": 37,
+                  "text": "anemone numbat",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-53-58",
+                "facet": "action",
+                "canonical_symbol": "steam",
+                "anchor": {
+                  "origin": "source",
+                  "start": 53,
+                  "end": 58,
+                  "text": "steam",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-object-63-78",
+                "facet": "object",
+                "canonical_symbol": "kalmia macaroon",
+                "anchor": {
+                  "origin": "source",
+                  "start": 63,
+                  "end": 78,
+                  "text": "kalmia macaroon",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-condition-3-17",
+                "facet": "conditions",
+                "canonical_symbol": "virga descends",
+                "anchor": {
+                  "origin": "source",
+                  "start": 3,
+                  "end": 17,
+                  "text": "virga descends",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-38-52",
+                  "actor": "occ-actor-23-37",
+                  "action": "occ-action-53-58",
+                  "object": "occ-object-63-78"
+                },
+                "qualifiers": {
+                  "conditions": null,
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "attach",
+              "body": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "qualifiers": {
+                "conditions": {
+                  "op": "leaf",
+                  "occurrence_id": "occ-condition-3-17"
+                },
+                "exceptions": null,
+                "temporal": null
+              }
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 79,
+                  "text": "If virga descends, the anemone numbat is required to steam the kalmia macaroon.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "c89d533e7934e757bc68c66f7e48f5791fe1c8871b5fd0bd1085599a9ffc3d2e"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "2ec6611381bb4a640186047ebe44bb8ca93f5a61a1f9bfdfd1e7f4a444f76cb8",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "c89d533e7934e757bc68c66f7e48f5791fe1c8871b5fd0bd1085599a9ffc3d2e",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "If virga descends, the anemone numbat is required to steam the kalmia macaroon.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "2ec6611381bb4a640186047ebe44bb8ca93f5a61a1f9bfdfd1e7f4a444f76cb8",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-38-52",
+                  "facet": "modality",
+                  "canonical_symbol": "P",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 38,
+                    "end": 52,
+                    "text": "is required to",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-23-37",
+                  "facet": "actor",
+                  "canonical_symbol": "anemone numbat",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 23,
+                    "end": 37,
+                    "text": "anemone numbat",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-53-58",
+                  "facet": "action",
+                  "canonical_symbol": "steam",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 53,
+                    "end": 58,
+                    "text": "steam",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-object-63-78",
+                  "facet": "object",
+                  "canonical_symbol": "kalmia macaroon",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 63,
+                    "end": 78,
+                    "text": "kalmia macaroon",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-condition-3-17",
+                  "facet": "conditions",
+                  "canonical_symbol": "virga descends",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 3,
+                    "end": 17,
+                    "text": "virga descends",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-38-52",
+                    "actor": "occ-actor-23-37",
+                    "action": "occ-action-53-58",
+                    "object": "occ-object-63-78"
+                  },
+                  "qualifiers": {
+                    "conditions": null,
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "attach",
+                "body": {
+                  "op": "rule",
+                  "rule_id": "rule-0"
+                },
+                "qualifiers": {
+                  "conditions": {
+                    "op": "leaf",
+                    "occurrence_id": "occ-condition-3-17"
+                  },
+                  "exceptions": null,
+                  "temporal": null
+                }
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 79,
+                    "text": "If virga descends, the anemone numbat is required to steam the kalmia macaroon.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "c89d533e7934e757bc68c66f7e48f5791fe1c8871b5fd0bd1085599a9ffc3d2e"
+            },
+            "occurrence_count": 5,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "e8cb8f431804692f0a0e217f89a2b3a294fbc90561d6fd0ba5b104ae13381576"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "P",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              7,
+              9
+            ],
+            "actor": [
+              5,
+              6
+            ],
+            "action": [
+              10,
+              10
+            ],
+            "object": [
+              12,
+              13
+            ],
+            "condition": [
+              1,
+              2
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          -0.22769121825695038,
+          0.8312427401542664,
+          -0.7908499836921692
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "support_probability": 0.7596219778060913,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:c27e5f4e447146c437b5e0ba2b16249260d2a3197cba47f4557a1260ef7a180e",
+      "source_group": "support-gate-group:b4b67f5b8be6cd3f7e86df6febd1b68d603a8c1c0735a79db0cc9704489a5f14",
+      "source_sha256": "c27e5f4e447146c437b5e0ba2b16249260d2a3197cba47f4557a1260ef7a180e",
+      "class_logits": [
+        0.007291510701179504,
+        1.0242301225662231,
+        -1.2994974851608276
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-gate-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "P",
+          "spans": {
+            "modality": [
+              55,
+              67
+            ],
+            "actor": [
+              4,
+              22
+            ],
+            "action": [
+              25,
+              33
+            ],
+            "object": [
+              38,
+              54
+            ],
+            "condition": [
+              74,
+              89
+            ]
+          },
+          "condition_attachment": "rule"
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "c27e5f4e447146c437b5e0ba2b16249260d2a3197cba47f4557a1260ef7a180e",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "the echinacea pangolin's kneading the oleander falafel is permitted, when zephyr whistles.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "5a84b68050e7c82ad6bfb70523ed03dbd83e718ef88ac0ff41cecdb09c34bdfa",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-55-67",
+                "facet": "modality",
+                "canonical_symbol": "P",
+                "anchor": {
+                  "origin": "source",
+                  "start": 55,
+                  "end": 67,
+                  "text": "is permitted",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-4-22",
+                "facet": "actor",
+                "canonical_symbol": "echinacea pangolin",
+                "anchor": {
+                  "origin": "source",
+                  "start": 4,
+                  "end": 22,
+                  "text": "echinacea pangolin",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-25-33",
+                "facet": "action",
+                "canonical_symbol": "kneading",
+                "anchor": {
+                  "origin": "source",
+                  "start": 25,
+                  "end": 33,
+                  "text": "kneading",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-object-38-54",
+                "facet": "object",
+                "canonical_symbol": "oleander falafel",
+                "anchor": {
+                  "origin": "source",
+                  "start": 38,
+                  "end": 54,
+                  "text": "oleander falafel",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-condition-74-89",
+                "facet": "conditions",
+                "canonical_symbol": "zephyr whistles",
+                "anchor": {
+                  "origin": "source",
+                  "start": 74,
+                  "end": 89,
+                  "text": "zephyr whistles",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-55-67",
+                  "actor": "occ-actor-4-22",
+                  "action": "occ-action-25-33",
+                  "object": "occ-object-38-54"
+                },
+                "qualifiers": {
+                  "conditions": {
+                    "op": "leaf",
+                    "occurrence_id": "occ-condition-74-89"
+                  },
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "rule",
+              "rule_id": "rule-0"
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 90,
+                  "text": "the echinacea pangolin's kneading the oleander falafel is permitted, when zephyr whistles.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "a8c9b4e59faf6563268fa958a7baf0e713bb9bd74b84730de80dc4a3ddf0c678"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "5a84b68050e7c82ad6bfb70523ed03dbd83e718ef88ac0ff41cecdb09c34bdfa",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "a8c9b4e59faf6563268fa958a7baf0e713bb9bd74b84730de80dc4a3ddf0c678",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "the echinacea pangolin's kneading the oleander falafel is permitted, when zephyr whistles.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "5a84b68050e7c82ad6bfb70523ed03dbd83e718ef88ac0ff41cecdb09c34bdfa",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-55-67",
+                  "facet": "modality",
+                  "canonical_symbol": "P",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 55,
+                    "end": 67,
+                    "text": "is permitted",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-4-22",
+                  "facet": "actor",
+                  "canonical_symbol": "echinacea pangolin",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 4,
+                    "end": 22,
+                    "text": "echinacea pangolin",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-25-33",
+                  "facet": "action",
+                  "canonical_symbol": "kneading",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 25,
+                    "end": 33,
+                    "text": "kneading",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-object-38-54",
+                  "facet": "object",
+                  "canonical_symbol": "oleander falafel",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 38,
+                    "end": 54,
+                    "text": "oleander falafel",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-condition-74-89",
+                  "facet": "conditions",
+                  "canonical_symbol": "zephyr whistles",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 74,
+                    "end": 89,
+                    "text": "zephyr whistles",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-55-67",
+                    "actor": "occ-actor-4-22",
+                    "action": "occ-action-25-33",
+                    "object": "occ-object-38-54"
+                  },
+                  "qualifiers": {
+                    "conditions": {
+                      "op": "leaf",
+                      "occurrence_id": "occ-condition-74-89"
+                    },
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 90,
+                    "text": "the echinacea pangolin's kneading the oleander falafel is permitted, when zephyr whistles.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "a8c9b4e59faf6563268fa958a7baf0e713bb9bd74b84730de80dc4a3ddf0c678"
+            },
+            "occurrence_count": 5,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "12ea93ee7c857531c64f0bbcb96caf9302a80477c3ebb9e86e3560829a1a2184"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "P",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              9,
+              10
+            ],
+            "actor": [
+              1,
+              2
+            ],
+            "action": [
+              5,
+              5
+            ],
+            "object": [
+              7,
+              8
+            ],
+            "condition": [
+              13,
+              14
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.007291510701179504,
+          1.0242301225662231,
+          -1.2994974851608276
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "support_probability": 0.8566151857376099,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:c5d5aad0858d904b629e969f095c89d4b99e61679dc8b9e9116a7217c5448365",
+      "source_group": "support-gate-group:99609b869ad95edcd652430a1fa16c49d73a35559f6dd12a1bfef0d1ff979d91",
+      "source_sha256": "c5d5aad0858d904b629e969f095c89d4b99e61679dc8b9e9116a7217c5448365",
+      "class_logits": [
+        0.1298236846923828,
+        -2.0502231121063232,
+        1.6969215869903564
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-gate-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              7,
+              8
+            ],
+            "actor": [
+              5,
+              6
+            ],
+            "action": [
+              9,
+              9
+            ],
+            "object": [
+              11,
+              12
+            ],
+            "condition": [
+              1,
+              2
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.1298236846923828,
+          -2.0502231121063232,
+          1.6969215869903564
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "support_probability": 0.37502098083496094,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:ea5a8a349bd05a36b1bc6c6d58e98eaee2ddda5d25bdaa1203d9864be3b5c9c3",
+      "source_group": "support-gate-group:1faa44128ac811f690e03e3b86a50e4cc0931e9b8a7304e4440ea6421841a017",
+      "source_sha256": "ea5a8a349bd05a36b1bc6c6d58e98eaee2ddda5d25bdaa1203d9864be3b5c9c3",
+      "class_logits": [
+        0.4302749037742615,
+        1.973541259765625,
+        -2.1016461849212646
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-gate-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "P",
+          "presence": {
+            "object": false,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              3,
+              2
+            ],
+            "actor": [
+              1,
+              2
+            ],
+            "action": [
+              3,
+              3
+            ],
+            "object": [
+              2,
+              3
+            ],
+            "condition": [
+              5,
+              6
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.4302749037742615,
+          1.973541259765625,
+          -2.1016461849212646
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "support_probability": 0.13786405324935913,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:435aacbf497fe3a0e00e0d1ef54acf09492e8f1ac0c8b7fcd4a7aa9ce9b9478a",
+      "source_group": "support-gate-group:9109bde178973a9c22ddd48ca41af1e2bf4ce2c5279e95d0e6684885e03058a5",
+      "source_sha256": "435aacbf497fe3a0e00e0d1ef54acf09492e8f1ac0c8b7fcd4a7aa9ce9b9478a",
+      "class_logits": [
+        0.7340834140777588,
+        -1.495104193687439,
+        0.5096762180328369
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-gate-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "O",
+          "spans": {
+            "modality": [
+              64,
+              75
+            ],
+            "actor": [
+              34,
+              52
+            ],
+            "action": [
+              55,
+              63
+            ],
+            "object": null,
+            "condition": null
+          },
+          "condition_attachment": null
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "435aacbf497fe3a0e00e0d1ef54acf09492e8f1ac0c8b7fcd4a7aa9ce9b9478a",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "Under the fixture convention, the lavender binturong's sautéing is required.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "2d82820c04357154490a1a6ef5398771ae29367b425ed287dd23c598738d2dd7",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-64-75",
+                "facet": "modality",
+                "canonical_symbol": "O",
+                "anchor": {
+                  "origin": "source",
+                  "start": 64,
+                  "end": 75,
+                  "text": "is required",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-34-52",
+                "facet": "actor",
+                "canonical_symbol": "lavender binturong",
+                "anchor": {
+                  "origin": "source",
+                  "start": 34,
+                  "end": 52,
+                  "text": "lavender binturong",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-55-63",
+                "facet": "action",
+                "canonical_symbol": "sautéing",
+                "anchor": {
+                  "origin": "source",
+                  "start": 55,
+                  "end": 63,
+                  "text": "sautéing",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-64-75",
+                  "actor": "occ-actor-34-52",
+                  "action": "occ-action-55-63",
+                  "object": null
+                },
+                "qualifiers": {
+                  "conditions": null,
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "rule",
+              "rule_id": "rule-0"
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 76,
+                  "text": "Under the fixture convention, the lavender binturong's sautéing is required.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "704f9797e0572884cd581638d1f0305da41239878e4074b3d641d06cf781cff7"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "2d82820c04357154490a1a6ef5398771ae29367b425ed287dd23c598738d2dd7",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "704f9797e0572884cd581638d1f0305da41239878e4074b3d641d06cf781cff7",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "Under the fixture convention, the lavender binturong's sautéing is required.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "2d82820c04357154490a1a6ef5398771ae29367b425ed287dd23c598738d2dd7",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-64-75",
+                  "facet": "modality",
+                  "canonical_symbol": "O",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 64,
+                    "end": 75,
+                    "text": "is required",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-34-52",
+                  "facet": "actor",
+                  "canonical_symbol": "lavender binturong",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 34,
+                    "end": 52,
+                    "text": "lavender binturong",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-55-63",
+                  "facet": "action",
+                  "canonical_symbol": "sautéing",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 55,
+                    "end": 63,
+                    "text": "sautéing",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-64-75",
+                    "actor": "occ-actor-34-52",
+                    "action": "occ-action-55-63",
+                    "object": null
+                  },
+                  "qualifiers": {
+                    "conditions": null,
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 76,
+                    "text": "Under the fixture convention, the lavender binturong's sautéing is required.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "704f9797e0572884cd581638d1f0305da41239878e4074b3d641d06cf781cff7"
+            },
+            "occurrence_count": 3,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "ee96a25190f98e1d7a74387f35d44cfa6d31688581925b973d00206b26cfb326"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "O",
+          "presence": {
+            "object": false,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              11,
+              12
+            ],
+            "actor": [
+              6,
+              7
+            ],
+            "action": [
+              10,
+              10
+            ],
+            "object": [
+              2,
+              10
+            ],
+            "condition": [
+              2,
+              0
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.7340834140777588,
+          -1.495104193687439,
+          0.5096762180328369
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "support_probability": 0.9056746959686279,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:06b8b2c935bfc065c15ef7555938145298f795b8da983aa50db2ca809f3aecc8",
+      "source_group": "support-gate-group:2750f6729984ff5fcbb161a0c0e524ebec3ffca51fa8662a2ca18aaa3b18dd05",
+      "source_sha256": "06b8b2c935bfc065c15ef7555938145298f795b8da983aa50db2ca809f3aecc8",
+      "class_logits": [
+        -0.13742178678512573,
+        0.2678976058959961,
+        -0.08303382992744446
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-gate-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "P",
+          "presence": {
+            "object": false,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              13,
+              15
+            ],
+            "actor": [
+              24,
+              25
+            ],
+            "action": [
+              16,
+              16
+            ],
+            "object": [
+              18,
+              19
+            ],
+            "condition": [
+              10,
+              11
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          -0.13742178678512573,
+          0.2678976058959961,
+          -0.08303382992744446
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "support_probability": 0.21675394475460052,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:f1c15f546c29333aa60d2a4ce28c636644bbd86ec3a7639f0f19c9bb87e63591",
+      "source_group": "support-gate-group:8f1f02760f54191b6aab934d810f5d5d0c73ff96c1eda75de51190d159e6fdab",
+      "source_sha256": "f1c15f546c29333aa60d2a4ce28c636644bbd86ec3a7639f0f19c9bb87e63591",
+      "class_logits": [
+        -1.081233263015747,
+        -0.5540940165519714,
+        1.575108528137207
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-gate-result/v1",
+        "status": "blocked",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "predicted_occurrence_proposal_invalid"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": false,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              3,
+              5
+            ],
+            "actor": [
+              1,
+              5
+            ],
+            "action": [
+              6,
+              7
+            ],
+            "object": [
+              6,
+              7
+            ],
+            "condition": [
+              9,
+              10
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          -1.081233263015747,
+          -0.5540940165519714,
+          1.575108528137207
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "support_probability": 0.7871143221855164,
+        "support_threshold": 0.5,
+        "diagnostic": "distinct occurrence facets must not overlap"
+      }
+    },
+    {
+      "id": "source:fdc28a84f8502696987410dd2902d4e231db51bd51c3fe9ba8f2441ca35369fa",
+      "source_group": "support-gate-group:602796d17cf6bc4b8ebaf636f82a0fce91b00d15480532dc06d3f09243b557f5",
+      "source_sha256": "fdc28a84f8502696987410dd2902d4e231db51bd51c3fe9ba8f2441ca35369fa",
+      "class_logits": [
+        -1.0301234722137451,
+        4.629369258880615,
+        -3.663891315460205
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-gate-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "P",
+          "presence": {
+            "object": true,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              4,
+              5
+            ],
+            "actor": [
+              1,
+              2
+            ],
+            "action": [
+              5,
+              6
+            ],
+            "object": [
+              8,
+              9
+            ],
+            "condition": [
+              8,
+              9
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          -1.0301234722137451,
+          4.629369258880615,
+          -3.663891315460205
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "support_probability": 0.17295193672180176,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:63079c743f6f62ea960bd3f8546e7ede38bb8cd087df209dd2859fcf5f49bd9c",
+      "source_group": "support-gate-group:86dd5e64f631733f1a9a0bb6294a8d4a2e5ba11b9af9b02b529347312a8c22ce",
+      "source_sha256": "63079c743f6f62ea960bd3f8546e7ede38bb8cd087df209dd2859fcf5f49bd9c",
+      "class_logits": [
+        0.9087414741516113,
+        -2.4338557720184326,
+        1.2799278497695923
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-gate-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "F",
+          "spans": {
+            "modality": [
+              84,
+              97
+            ],
+            "actor": [
+              23,
+              41
+            ],
+            "action": [
+              44,
+              60
+            ],
+            "object": [
+              65,
+              83
+            ],
+            "condition": [
+              3,
+              17
+            ]
+          },
+          "condition_attachment": "rule"
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "63079c743f6f62ea960bd3f8546e7ede38bb8cd087df209dd2859fcf5f49bd9c",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "If virga descends, the echinacea pangolin's briskly whisking the echinacea pangolin is rohibitedp.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "6c04fbefef60286545577621f5276838d44bd77d950bcab94182d2eee8c5e188",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-84-97",
+                "facet": "modality",
+                "canonical_symbol": "F",
+                "anchor": {
+                  "origin": "source",
+                  "start": 84,
+                  "end": 97,
+                  "text": "is rohibitedp",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-23-41",
+                "facet": "actor",
+                "canonical_symbol": "echinacea pangolin",
+                "anchor": {
+                  "origin": "source",
+                  "start": 23,
+                  "end": 41,
+                  "text": "echinacea pangolin",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-44-60",
+                "facet": "action",
+                "canonical_symbol": "briskly whisking",
+                "anchor": {
+                  "origin": "source",
+                  "start": 44,
+                  "end": 60,
+                  "text": "briskly whisking",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-object-65-83",
+                "facet": "object",
+                "canonical_symbol": "echinacea pangolin",
+                "anchor": {
+                  "origin": "source",
+                  "start": 65,
+                  "end": 83,
+                  "text": "echinacea pangolin",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-condition-3-17",
+                "facet": "conditions",
+                "canonical_symbol": "virga descends",
+                "anchor": {
+                  "origin": "source",
+                  "start": 3,
+                  "end": 17,
+                  "text": "virga descends",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-84-97",
+                  "actor": "occ-actor-23-41",
+                  "action": "occ-action-44-60",
+                  "object": "occ-object-65-83"
+                },
+                "qualifiers": {
+                  "conditions": {
+                    "op": "leaf",
+                    "occurrence_id": "occ-condition-3-17"
+                  },
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "rule",
+              "rule_id": "rule-0"
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 98,
+                  "text": "If virga descends, the echinacea pangolin's briskly whisking the echinacea pangolin is rohibitedp.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "6a720bce7fd6e352688c42da54c9349c89cacd9e40a18f8a4596f349f1af3098"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "6c04fbefef60286545577621f5276838d44bd77d950bcab94182d2eee8c5e188",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "6a720bce7fd6e352688c42da54c9349c89cacd9e40a18f8a4596f349f1af3098",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "If virga descends, the echinacea pangolin's briskly whisking the echinacea pangolin is rohibitedp.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "6c04fbefef60286545577621f5276838d44bd77d950bcab94182d2eee8c5e188",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-84-97",
+                  "facet": "modality",
+                  "canonical_symbol": "F",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 84,
+                    "end": 97,
+                    "text": "is rohibitedp",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-23-41",
+                  "facet": "actor",
+                  "canonical_symbol": "echinacea pangolin",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 23,
+                    "end": 41,
+                    "text": "echinacea pangolin",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-44-60",
+                  "facet": "action",
+                  "canonical_symbol": "briskly whisking",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 44,
+                    "end": 60,
+                    "text": "briskly whisking",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-object-65-83",
+                  "facet": "object",
+                  "canonical_symbol": "echinacea pangolin",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 65,
+                    "end": 83,
+                    "text": "echinacea pangolin",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-condition-3-17",
+                  "facet": "conditions",
+                  "canonical_symbol": "virga descends",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 3,
+                    "end": 17,
+                    "text": "virga descends",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-84-97",
+                    "actor": "occ-actor-23-41",
+                    "action": "occ-action-44-60",
+                    "object": "occ-object-65-83"
+                  },
+                  "qualifiers": {
+                    "conditions": {
+                      "op": "leaf",
+                      "occurrence_id": "occ-condition-3-17"
+                    },
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 98,
+                    "text": "If virga descends, the echinacea pangolin's briskly whisking the echinacea pangolin is rohibitedp.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "6a720bce7fd6e352688c42da54c9349c89cacd9e40a18f8a4596f349f1af3098"
+            },
+            "occurrence_count": 5,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "906bc4637f47c9dece3efd1f4ae53f5e3a48f7d56f7b8bf34e9ef5bb4b6b9466"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              14,
+              15
+            ],
+            "actor": [
+              5,
+              6
+            ],
+            "action": [
+              9,
+              10
+            ],
+            "object": [
+              12,
+              13
+            ],
+            "condition": [
+              1,
+              2
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.9087414741516113,
+          -2.4338557720184326,
+          1.2799278497695923
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "support_probability": 0.7437939047813416,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:fd9d776c6320355b4a624c6b07407ef34076455c9de5c4cea6c0877890ed260b",
+      "source_group": "support-gate-group:54704977746708a9178db481bd938577ba68ab96d7596ee50544002552a7557a",
+      "source_sha256": "fd9d776c6320355b4a624c6b07407ef34076455c9de5c4cea6c0877890ed260b",
+      "class_logits": [
+        1.376443862915039,
+        0.7052809000015259,
+        -2.1202504634857178
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-gate-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "O",
+          "presence": {
+            "object": false,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              13,
+              14
+            ],
+            "actor": [
+              6,
+              7
+            ],
+            "action": [
+              15,
+              15
+            ],
+            "object": [
+              17,
+              18
+            ],
+            "condition": [
+              10,
+              11
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          1.376443862915039,
+          0.7052809000015259,
+          -2.1202504634857178
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "support_probability": 0.28659966588020325,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:38f95415e495c11ff7523ae3101c5bf1f24096109e6c1191bbe3bbdb30547688",
+      "source_group": "support-gate-group:fd753648e179ae519b4dff4a74c5c5d4e3ad298879b6dbf6cb73b7faae42812f",
+      "source_sha256": "38f95415e495c11ff7523ae3101c5bf1f24096109e6c1191bbe3bbdb30547688",
+      "class_logits": [
+        -1.3368738889694214,
+        2.440260171890259,
+        -0.6455401182174683
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-gate-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "P",
+          "presence": {
+            "object": false,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              7,
+              8
+            ],
+            "actor": [
+              5,
+              6
+            ],
+            "action": [
+              9,
+              10
+            ],
+            "object": [
+              8,
+              10
+            ],
+            "condition": [
+              1,
+              2
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          -1.3368738889694214,
+          2.440260171890259,
+          -0.6455401182174683
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "support_probability": 0.022118136286735535,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:6d3551c3f562c21c8e22ae8815242e2e3896c596406dab41445bb9bdf49e5c33",
+      "source_group": "support-gate-group:02fca76dd7326ca76dff2ce536f353e5cae1a4a9b6851789af63029a0613c01f",
+      "source_sha256": "6d3551c3f562c21c8e22ae8815242e2e3896c596406dab41445bb9bdf49e5c33",
+      "class_logits": [
+        0.021763920783996582,
+        1.2481974363327026,
+        -1.2122641801834106
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-gate-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "P",
+          "spans": {
+            "modality": [
+              42,
+              54
+            ],
+            "actor": [
+              4,
+              17
+            ],
+            "action": [
+              20,
+              41
+            ],
+            "object": null,
+            "condition": null
+          },
+          "condition_attachment": null
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "6d3551c3f562c21c8e22ae8815242e2e3896c596406dab41445bb9bdf49e5c33",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "the lobelia tapir's rhythmically stirring is permitted.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "1a7ce0aa447d696a7c00b5752edbf5b77578710792450039e7ea15e61564ace4",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-42-54",
+                "facet": "modality",
+                "canonical_symbol": "P",
+                "anchor": {
+                  "origin": "source",
+                  "start": 42,
+                  "end": 54,
+                  "text": "is permitted",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-4-17",
+                "facet": "actor",
+                "canonical_symbol": "lobelia tapir",
+                "anchor": {
+                  "origin": "source",
+                  "start": 4,
+                  "end": 17,
+                  "text": "lobelia tapir",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-20-41",
+                "facet": "action",
+                "canonical_symbol": "rhythmically stirring",
+                "anchor": {
+                  "origin": "source",
+                  "start": 20,
+                  "end": 41,
+                  "text": "rhythmically stirring",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-42-54",
+                  "actor": "occ-actor-4-17",
+                  "action": "occ-action-20-41",
+                  "object": null
+                },
+                "qualifiers": {
+                  "conditions": null,
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "rule",
+              "rule_id": "rule-0"
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 55,
+                  "text": "the lobelia tapir's rhythmically stirring is permitted.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "b707d3340013479ed3d7863e84f90082807d0ff302b3eaefa5a6a5d9e273df75"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "1a7ce0aa447d696a7c00b5752edbf5b77578710792450039e7ea15e61564ace4",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "b707d3340013479ed3d7863e84f90082807d0ff302b3eaefa5a6a5d9e273df75",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "the lobelia tapir's rhythmically stirring is permitted.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "1a7ce0aa447d696a7c00b5752edbf5b77578710792450039e7ea15e61564ace4",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-42-54",
+                  "facet": "modality",
+                  "canonical_symbol": "P",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 42,
+                    "end": 54,
+                    "text": "is permitted",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-4-17",
+                  "facet": "actor",
+                  "canonical_symbol": "lobelia tapir",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 4,
+                    "end": 17,
+                    "text": "lobelia tapir",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-20-41",
+                  "facet": "action",
+                  "canonical_symbol": "rhythmically stirring",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 20,
+                    "end": 41,
+                    "text": "rhythmically stirring",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-42-54",
+                    "actor": "occ-actor-4-17",
+                    "action": "occ-action-20-41",
+                    "object": null
+                  },
+                  "qualifiers": {
+                    "conditions": null,
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 55,
+                    "text": "the lobelia tapir's rhythmically stirring is permitted.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "b707d3340013479ed3d7863e84f90082807d0ff302b3eaefa5a6a5d9e273df75"
+            },
+            "occurrence_count": 3,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "4f3d3fe41225c4f3a0b98bae45180c0cc6653e63d2982f76e8d705b56ce719b1"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "P",
+          "presence": {
+            "object": false,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              7,
+              8
+            ],
+            "actor": [
+              1,
+              2
+            ],
+            "action": [
+              5,
+              6
+            ],
+            "object": [
+              5,
+              6
+            ],
+            "condition": [
+              8,
+              6
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.021763920783996582,
+          1.2481974363327026,
+          -1.2122641801834106
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "support_probability": 0.8202759623527527,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    }
+  ],
+  "references_accessed_by_inference": false
+}

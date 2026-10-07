@@ -1,0 +1,274 @@
+{
+  "read_only": true,
+  "branches": {
+    "workspace": [
+      {
+        "ref": "refs/heads/agent/autoencoder-progress-reconciliation-20261006",
+        "commit": "9e794a4cfdc9cbfacdb63604dcca1605ce2bf1d5",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/heads/agent/dual-bank-wording-adapter-root-20261007",
+        "commit": "b7caefb381e6c3f3896195496c453db43a5e2be6",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/heads/agent/normative-cache-input-root-20261007",
+        "commit": "094c566adc316b1391c58d3d38c4dd19698149ff",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/heads/agent/normative-checkpoint-availability-root-20261006",
+        "commit": "dfc02e62186dc97223a620b074b278f0e1b97115",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/heads/agent/normative-decoder-runtime-root-20261007",
+        "commit": "b7e3550da23c94fe17b591654093c5c0f84ded0c",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/heads/codex/autoencoder-reconciliation-20261007-01",
+        "commit": "aab99b3792e4d13572830f4aa91c7915092b23fe",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/heads/codex/grouped-autoencoder-findings-20261006-02",
+        "commit": "1b20f745a1db2a485b97ffc7f0816119881f7f8d",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/heads/codex/joint-conditioning-20261005-01",
+        "commit": "8c02d655e2d086bd644a9011ea67325060ef87bc",
+        "already_ancestor_of_intake_main": false,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/heads/codex/joint-conditioning-20261005-02",
+        "commit": "3b39519d9bc9021a5e6a0bb183f6c57cb780bc5a",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/heads/codex/joint-span-policy-20261005-01",
+        "commit": "ec4302acd75f0dbb0d744586db35fef9d23980ac",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/heads/codex/legal-decoder-followup-results-20261006-01",
+        "commit": "0ed01fd56db31fe4345f8143a7647a437dcb1118",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/heads/codex/legal-support-action-results-20261007-01",
+        "commit": "43ec348cab85a9eae3aee56a6de79807e3ea57ee",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/heads/codex/legal-support-gate-results-20261007-01",
+        "commit": "a1054e10e3f535360ebcfd844c876690cea7c604",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/heads/codex/legal-trigger-readout-results-20261007-01",
+        "commit": "8e5da94bd0ac33b1378ae44e4801f3496e96a02c",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/remotes/origin/agent/autoencoder-progress-reconciliation-20261006",
+        "commit": "9e794a4cfdc9cbfacdb63604dcca1605ce2bf1d5",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/remotes/origin/agent/dual-bank-wording-adapter-root-20261007",
+        "commit": "30e61092341b47b4e49eb30df443fd607536333a",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/remotes/origin/agent/normative-cache-input-root-20261007",
+        "commit": "094c566adc316b1391c58d3d38c4dd19698149ff",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/remotes/origin/agent/normative-checkpoint-availability-root-20261006",
+        "commit": "dfc02e62186dc97223a620b074b278f0e1b97115",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/remotes/origin/agent/normative-decoder-runtime-root-20261007",
+        "commit": "b7e3550da23c94fe17b591654093c5c0f84ded0c",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/remotes/origin/codex/autoencoder-reconciliation-20261007-01",
+        "commit": "aab99b3792e4d13572830f4aa91c7915092b23fe",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/remotes/origin/codex/grouped-autoencoder-findings-20261006-02",
+        "commit": "1b20f745a1db2a485b97ffc7f0816119881f7f8d",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/remotes/origin/codex/legal-decoder-followup-results-20261006-01",
+        "commit": "0ed01fd56db31fe4345f8143a7647a437dcb1118",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/remotes/origin/codex/legal-support-action-results-20261007-01",
+        "commit": "43ec348cab85a9eae3aee56a6de79807e3ea57ee",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/remotes/origin/codex/legal-trigger-readout-results-20261007-01",
+        "commit": "8e5da94bd0ac33b1378ae44e4801f3496e96a02c",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      }
+    ],
+    "datasets": [
+      {
+        "ref": "refs/heads/agent/autoencoder-progress-reconciliation-datasets-20261006",
+        "commit": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/heads/agent/decoder-profile-recovery-20261006",
+        "commit": "3b3b994407b2fcfef955ce5153afc2eea01e4eff",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/heads/agent/dual-bank-wording-adapter-datasets-20261007",
+        "commit": "271ad796288e17039f036af6a0d003a4628da6ed",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/heads/agent/normative-cache-input-datasets-20261007",
+        "commit": "c4382ae53ab9497245fccdf85855f0e314711fbc",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/heads/agent/normative-checkpoint-availability-datasets-20261006",
+        "commit": "61c5db04538596ea00091cd4f013500854368397",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/heads/agent/normative-decoder-runtime-datasets-20261007",
+        "commit": "47d492c697f3e766d107ae9c02d8b8dcd18660b2",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/heads/codex/alignment-decoder-768-20261003",
+        "commit": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/heads/codex/autoencoder-owner-integration-20261007-01",
+        "commit": "53e87779a527349b65875cb20b59ca9eb48ed70c",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/heads/codex/legal-decoder-followup-20261006-01",
+        "commit": "0f733b621335a3fb95e3f8855f2100cd95ba01b5",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/heads/codex/legal-support-action-model-20261007-01",
+        "commit": "7b93b2d97a8985b3f2db29963bd0979749f66163",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/heads/codex/legal-support-gate-model-20261007-01",
+        "commit": "d93f1b79fd6f8e413010bbca506473a8f67dbe1e",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/heads/codex/legal-trigger-readout-model-20261007-01",
+        "commit": "e35aef47ef6d67f7d07793be487e2be04ec6c7d6",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/remotes/origin/agent/autoencoder-progress-reconciliation-datasets-20261006",
+        "commit": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/remotes/origin/agent/dual-bank-wording-adapter-datasets-20261007",
+        "commit": "aed87b0d980422c2ca9efaa26cf92df30c51d768",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/remotes/origin/agent/normative-cache-input-datasets-20261007",
+        "commit": "c4382ae53ab9497245fccdf85855f0e314711fbc",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/remotes/origin/agent/normative-decoder-runtime-datasets-20261007",
+        "commit": "6a954ecef4fa78a5e58aa4fdb070cc3d1e86fcff",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/remotes/origin/codex/autoencoder-owner-integration-20261007-01",
+        "commit": "53e87779a527349b65875cb20b59ca9eb48ed70c",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/remotes/origin/codex/legal-decoder-followup-20261006-01",
+        "commit": "0f733b621335a3fb95e3f8855f2100cd95ba01b5",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/remotes/origin/codex/legal-support-action-model-20261007-01",
+        "commit": "7b93b2d97a8985b3f2db29963bd0979749f66163",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      },
+      {
+        "ref": "refs/remotes/origin/codex/legal-trigger-readout-model-20261007-01",
+        "commit": "e35aef47ef6d67f7d07793be487e2be04ec6c7d6",
+        "already_ancestor_of_intake_main": true,
+        "relevant_unmerged_paths": []
+      }
+    ]
+  },
+  "note": "Path inventory only; no wholesale merge or model-default promotion. Prior reconciliation receipts remain preserved."
+}

@@ -1,0 +1,37 @@
+{
+  "parameter_counts": {
+    "global": {
+      "total": 36193,
+      "trainable": 3169
+    },
+    "predicted_trigger": {
+      "total": 36193,
+      "trainable": 3169
+    }
+  },
+  "capacity_matched": true,
+  "data_and_update_budget_matched": true,
+  "initial_parent_full_core_and_logits_parity": 16,
+  "matched_seeded_gate_tensors": true,
+  "initial_gate_state_sha256": "2258e85b1df8046c71b5bb2a5c1b1484a1a9584fec001bd8aeffab37e6652cac",
+  "parent": {
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/initial-parent-predictions.json",
+    "bytes": 141789,
+    "sha256": "514ae794662df3b1887f2fcddadaae6dd3c3aafd4ec0955c5857a80bd99055d1"
+  },
+  "candidates": {
+    "global": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/initial-global-predictions.json",
+      "bytes": 141789,
+      "sha256": "ba2bd55042a5e68b47f7f17ea1a972fefc7b5e26047d0a5dca64161b1484eb44"
+    },
+    "predicted_trigger": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-gate-20261007-01/results/initial-predicted_trigger-predictions.json",
+      "bytes": 141965,
+      "sha256": "24c51b7a36abaf103fe013462609b3a1ad77b320af498b47365816ecba2f121f"
+    }
+  },
+  "parent_steps": 120,
+  "new_Adam_fresh": true,
+  "parent_Adam_continued": false
+}

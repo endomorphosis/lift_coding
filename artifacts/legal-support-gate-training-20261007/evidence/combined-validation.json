@@ -1,0 +1,44 @@
+{
+  "schema": "support-gate-combined-validation/v1",
+  "passed": true,
+  "counts": {
+    "tests": 170,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "threads": 2,
+  "device": "cpu",
+  "cuda_hidden": true,
+  "no_remote_model_fetch": true,
+  "junit": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/combined-tests.xml",
+    "bytes": 27734,
+    "sha256": "34102bc8c484491572e18d75cfdbdefaaaf7a07ed05a9a58ee27118d1f44f379"
+  },
+  "new_tests": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/datasets/tests/unit/logic/test_legal_scope_support_gate.py",
+    "bytes": 20171,
+    "sha256": "13917ca96cf5b3795b2e7c4efbd0aadb1e2c723cfe5c96825586e31c141fca90"
+  },
+  "old_producer_binding": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/inherited-producer-binding.json",
+    "bytes": 1041,
+    "sha256": "b949f74b8f4351759aef212692a3c271b3cb10ec82bb5d484a66231be65287fe"
+  },
+  "pure_selector_validation": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/selector-validation.json",
+    "bytes": 10767,
+    "sha256": "efbb9d4ae7850fb10590f1ce392b0367964fa7ee15634182232876ea36694f9d"
+  },
+  "pure_selector_distinct_cases": 23,
+  "guardian_historical_cases": 23,
+  "guardian_rerun_this_iteration": false,
+  "distinct_source_qualified_cases": 170,
+  "identity_binding": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/test-identity-binding.json",
+    "bytes": 32553,
+    "sha256": "773323246b166522d2d7720d8dd928ec77b061971bc5f288e0654adcd3a592f1"
+  },
+  "JUnit_identity_limitation": "Original /dev root flattened filenames and has six name collisions; root-qualified collection names match all170 executed JUnit rows in order with unchanged source bytes."
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "support-gate-source-contribution-binding/v1",
+  "base": "911b9f2530b18f246b90a177a98471bffad609e9",
+  "paths": {
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_gate.py": {
+      "bytes": 24874,
+      "sha256": "79a9d314ddf597b16c6a06754d7786d568bbf34c87dc71a947ac0b8af12f525b"
+    },
+    "tests/unit/logic/test_legal_scope_support_gate.py": {
+      "bytes": 20171,
+      "sha256": "13917ca96cf5b3795b2e7c4efbd0aadb1e2c723cfe5c96825586e31c141fca90"
+    },
+    "docs/implementation/legal_scope_support_gate_pilot_20261007.md": {
+      "bytes": 10465,
+      "sha256": "30e4e6cf34e26960fca068283feecb4f91e6097803455715e33ac28ffe803a2d"
+    },
+    "docs/autoencoders/progress_integration.md": {
+      "bytes": 23102,
+      "sha256": "0b51f43ac4177c67f40240ec54248a6cd876b7cbcdbe9492ca2d92f1493cb289"
+    }
+  },
+  "progress_upstream_prefix": {
+    "prefix_bytes": 21628,
+    "prefix_sha256": "a45d852cebbc30ce003b44544f8cd92dcec44f0d0bb9131305f207ab60988ffe",
+    "initial_prefix_bytes": 19809,
+    "initial_prefix_sha256": "c18e534abd63c6bbad84507ae9621b879d5682ae8338f7abbf0364720a5934d7",
+    "new_upstream_progress_preserved": true,
+    "prior_integrated_prefix": {
+      "prefix_bytes": 20856,
+      "prefix_sha256": "1cc7bf063848d66c6771dc7eaf1bd47edf339fc9c94bc7b48cd4bcf205bc459e",
+      "initial_prefix_bytes": 19809,
+      "initial_prefix_sha256": "c18e534abd63c6bbad84507ae9621b879d5682ae8338f7abbf0364720a5934d7",
+      "new_upstream_progress_preserved": true
+    }
+  },
+  "numerical_sources_unchanged_after_fit": true,
+  "staged_paths_exact": true
+}
