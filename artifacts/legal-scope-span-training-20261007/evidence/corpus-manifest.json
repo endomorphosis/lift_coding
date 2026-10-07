@@ -1,0 +1,200 @@
+{
+  "admission_masks": {
+    "contrastive_supervision": 0,
+    "fidelity_evaluation": 0,
+    "proof_supervision": 0,
+    "strong_semantic_fit": 0,
+    "weak_decoder_fit": 0
+  },
+  "artifacts": {
+    "corpus-protocol.json": {
+      "bytes": 5928,
+      "canonical_sha256": "efb1770770b3620e685e0889f47f23c02c659c16b5cefa31ba18d27451bff875",
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/corpus-protocol.json",
+      "sha256": "3c3b194f9720fe1c1d624f6d9a9098b53898d69846f6a036ed805755d1b18acb"
+    },
+    "final-inputs.json": {
+      "bytes": 61725,
+      "canonical_sha256": "4aa08c3f1d32797f5f899f1e373ed097ed9949fd0a9e085bb1e206a296e37e07",
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-inputs.json",
+      "sha256": "1af9757054e2ae6344dcbd2e3834c21808cbe998e79ace9b9ff34383d3020b55"
+    },
+    "final-references.json": {
+      "bytes": 136311,
+      "canonical_sha256": "d40e559197989956038503baf0aef8e77dd519b02416e3034277db50176eff64",
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-references.json",
+      "sha256": "9ff98c26fd03fc695b76b46de63b621a02765e981e43eca867cf01f51104abc9"
+    },
+    "selection-inputs.json": {
+      "bytes": 61364,
+      "canonical_sha256": "d17719b7247e67387c330009661c2b109f755b6dcf6af50bacd399cbd0f6b2de",
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/selection-inputs.json",
+      "sha256": "48f891f5ada515e7b1511e6395c107ee8c7ecfcede3618da417376383eca1518"
+    },
+    "selection-references.json": {
+      "bytes": 136304,
+      "canonical_sha256": "14022e93800dcd9aec171c64c496b8080c68727033d55f5031abf2b6f6e08b57",
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/selection-references.json",
+      "sha256": "ea5762e4c35ba452c60286ee01b4ec21df7a12e0a6c6f50780bfb1822a6dcddd"
+    },
+    "train-inputs.json": {
+      "bytes": 489421,
+      "canonical_sha256": "c316eab853879c3fcd0381678494a7161f54b3a3b3387c104eea7a5f22b015ea",
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/train-inputs.json",
+      "sha256": "0df9ab64e794f606a3d9ab87002c78bc49e58bdc24969bf3bc62a7fabb44b3bc"
+    },
+    "train-references.json": {
+      "bytes": 1090392,
+      "canonical_sha256": "2ddce16beac6219be8851cdab671da6503c1a9817b68e416cf8acfcf9d284a2c",
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/train-references.json",
+      "sha256": "63140b0b8daae2260f911dde653e604d1fb758416cf3721da3b81cf4c53c6789"
+    }
+  },
+  "complete": true,
+  "construction_seed": 24602,
+  "construction_source": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/corpus-builder.py",
+    "sha256": "ef654d25b51ea5addc5e91448664aee9c1c470335f7a7097c5d464747d2d6631"
+  },
+  "independent_legal_review": false,
+  "normalized_facet_lexemes_and_source_groups_split_disjoint": true,
+  "numerical_model_encoder_optimizer_prover_calls": 0,
+  "qualification_or_training_admission_granted": false,
+  "same_text_duplicated_for_attachment_profiles": false,
+  "schema": "legal-single-rule-authored-corpus-manifest/v1",
+  "scope_owner_bindings": [
+    {
+      "bytes": 7804,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py",
+      "sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65"
+    },
+    {
+      "bytes": 29993,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py",
+      "sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a"
+    }
+  ],
+  "source_semantics_verified": false,
+  "statistics": {
+    "final": {
+      "condition_attachment_caller_inputs": {
+        "rule": 64,
+        "statement": 64
+      },
+      "condition_present": 32,
+      "input_rows": 128,
+      "maximum_source_UTF8_bytes": 172,
+      "maximum_source_characters": 172,
+      "modalities": {
+        "F": 21,
+        "O": 21,
+        "P": 22
+      },
+      "negative_categories": {
+        "extra_exception": 16,
+        "modal_deletion": 16,
+        "modal_misspelling": 16,
+        "second_rule": 16
+      },
+      "negative_rows": 64,
+      "object_present": 32,
+      "positive_rows": 64,
+      "repeated_actor_object_occurrences": 10,
+      "source_groups": 64,
+      "source_scope_transport_validated_positive": 64,
+      "templates_positive": {
+        "actor_condition_modal_action_object": 8,
+        "actor_modal_action_object_condition": 8,
+        "actor_possessive_gerund_object_modal_condition": 8,
+        "condition_actor_modal_action_object": 8,
+        "condition_actor_possessive_gerund_object_modal": 8,
+        "condition_modal_actor_action_object": 8,
+        "gerund_object_agent_modal_condition": 8,
+        "modal_actor_action_object_condition": 8
+      },
+      "unicode_sources": 18,
+      "unique_raw_sources": 128
+    },
+    "selection": {
+      "condition_attachment_caller_inputs": {
+        "rule": 64,
+        "statement": 64
+      },
+      "condition_present": 32,
+      "input_rows": 128,
+      "maximum_source_UTF8_bytes": 177,
+      "maximum_source_characters": 177,
+      "modalities": {
+        "F": 21,
+        "O": 21,
+        "P": 22
+      },
+      "negative_categories": {
+        "extra_exception": 16,
+        "modal_deletion": 16,
+        "modal_misspelling": 16,
+        "second_rule": 16
+      },
+      "negative_rows": 64,
+      "object_present": 32,
+      "positive_rows": 64,
+      "repeated_actor_object_occurrences": 10,
+      "source_groups": 64,
+      "source_scope_transport_validated_positive": 64,
+      "templates_positive": {
+        "actor_condition_modal_action_object": 8,
+        "actor_modal_action_object_condition": 8,
+        "actor_possessive_gerund_object_modal_condition": 8,
+        "condition_actor_modal_action_object": 8,
+        "condition_actor_possessive_gerund_object_modal": 8,
+        "condition_modal_actor_action_object": 8,
+        "gerund_object_agent_modal_condition": 8,
+        "modal_actor_action_object_condition": 8
+      },
+      "unicode_sources": 29,
+      "unique_raw_sources": 128
+    },
+    "train": {
+      "condition_attachment_caller_inputs": {
+        "rule": 512,
+        "statement": 512
+      },
+      "condition_present": 256,
+      "input_rows": 1024,
+      "maximum_source_UTF8_bytes": 171,
+      "maximum_source_characters": 171,
+      "modalities": {
+        "F": 170,
+        "O": 171,
+        "P": 171
+      },
+      "negative_categories": {
+        "extra_exception": 128,
+        "modal_deletion": 128,
+        "modal_misspelling": 128,
+        "second_rule": 128
+      },
+      "negative_rows": 512,
+      "object_present": 256,
+      "positive_rows": 512,
+      "repeated_actor_object_occurrences": 86,
+      "source_groups": 512,
+      "source_scope_transport_validated_positive": 512,
+      "templates_positive": {
+        "actor_condition_modal_action_object": 64,
+        "actor_modal_action_object_condition": 64,
+        "actor_possessive_gerund_object_modal_condition": 64,
+        "condition_actor_modal_action_object": 64,
+        "condition_actor_possessive_gerund_object_modal": 64,
+        "condition_modal_actor_action_object": 64,
+        "gerund_object_agent_modal_condition": 64,
+        "modal_actor_action_object_condition": 64
+      },
+      "unicode_sources": 256,
+      "unique_raw_sources": 1024
+    }
+  },
+  "training_schedule_sha256": "1de580410c631cf500732c7502105e1397dcd1cd19e3b502039a0a5d12cd3881",
+  "training_unique_presented_sources": 1024,
+  "unsupported_rows_have_structural_targets": false
+}

@@ -1,0 +1,104 @@
+{
+  "schema": "independent-scope-guardian-peer-review/v2",
+  "phase": "training",
+  "passed": true,
+  "findings": [],
+  "review_scope": "Narrow attempt02 startup-order repair; no numerical protocol or policy change.",
+  "guardian_sha256": "ab2b82419764ae0d9b8cda24f9d9fe3e7a755e3b6e204be6554e15c2581a10bf",
+  "runner_sha256": "5cdeebfd311028295a7a80d6c7df0aca1ad556a37e83b397f9f7e4389e19ad8c",
+  "plan_sha256": "0d2d866323b72846f64b619222f146155555e80233ac7d566743e6765efed074",
+  "package_root": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets",
+  "run_root": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01",
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/run_scope_guardian.py": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/run_scope_guardian.py",
+      "bytes": 25017,
+      "sha256": "ab2b82419764ae0d9b8cda24f9d9fe3e7a755e3b6e204be6554e15c2581a10bf"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/test_scope_guardian.py": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/test_scope_guardian.py",
+      "bytes": 13634,
+      "sha256": "89dbabde77b51d1e45628244b91964044bb67858ab582023dcd56acdcb3966df"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/guardian-peer-review.json": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/guardian-peer-review.json",
+      "bytes": 2422,
+      "sha256": "8a31c8f8c354e21155e80088a9d4c85e5a081d7045228a921dd33aab6d79bbde"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/run_scope_experiment.py": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/run_scope_experiment.py",
+      "bytes": 17892,
+      "sha256": "5cdeebfd311028295a7a80d6c7df0aca1ad556a37e83b397f9f7e4389e19ad8c"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/experiment-plan.json": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/experiment-plan.json",
+      "bytes": 4303,
+      "sha256": "0d2d866323b72846f64b619222f146155555e80233ac7d566743e6765efed074"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/guardian-validation-r3.json": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/guardian-validation-r3.json",
+      "bytes": 1908,
+      "sha256": "2597b38bf14b932abbaf359edadc999bd7ff0fe5e20ec60aa4610dc31b6a23d8"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/attempt-01-failure-audit.json": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/attempt-01-failure-audit.json",
+      "bytes": 5018,
+      "sha256": "645caecc63b5517e53c6489be490f193f71e0a0ea79cd16b923d530fdb58c677"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/guardian-compatibility-check-r3.json": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/guardian-compatibility-check-r3.json",
+      "bytes": 6795,
+      "sha256": "51eba7845a41b542eac5b325458880b8763d10e3b98e81514d6de0b8e615455b"
+    }
+  },
+  "checks": {
+    "prior_failure": "Attempt01 initial full-root usage census delayed post_spawn by14.430758025s beyond unchanged5s gap. Gated runner did not start and optimizer updates remained0.",
+    "corrected_order": [
+      "Verify owned isolated Python leader PID/birth while its exec gate is closed",
+      "Immediately bind entered owner's cached child identity",
+      "Persist child identity in the authentic owner's ledger",
+      "Write identity receipt",
+      "Bind and start unchanged1s/5s watchdog",
+      "Run required full initial owner.check_usage with watchdog monitoring active and model still gated",
+      "Require watchdog healthy after successful usage",
+      "Release one-byte gate permission, then monitor actual runner"
+    ],
+    "original_custody_hole_remains_closed": true,
+    "admission_and_full_resource_checks_not_skipped": true,
+    "limits_unchanged": {
+      "lease_poll_seconds": 1,
+      "max_observation_gap_seconds": 5,
+      "child_deadline_seconds": 300,
+      "memory_mb": 1536,
+      "storage_bytes": 200000000
+    },
+    "failed_initial_usage_never_permits_model_exec": true,
+    "watchdog_setup_plus_failed_cleanup_keeps_bound_live_child_visible_to_owner": true,
+    "failure_cleanup": "Gate is closed before owned-group cleanup and before owner context exit; original primary failure and retained claim remain recorded.",
+    "helper_or_policy_edits": false,
+    "numerical_model_corpus_runner_and_plan_changed": false,
+    "old_peer_receipt_preserved": true,
+    "attempt01_exact_evidence_pins_verified": 11,
+    "failed_attempt_claim": "The own failed200MBdisk claim remains retained per immutable failure audit; no reservation or foreign state edits by this reviewer."
+  },
+  "tests": {
+    "command": "python -m pytest test_scope_guardian.py -q",
+    "passed": 19,
+    "failed": 0,
+    "skipped": 0,
+    "elapsed_seconds": 0.29,
+    "scope": "Pure/mocked only; synthetic14.43s census verifies watch active and gateclosed, and census refusal verifies no model permission. Earlier live-child failed-cleanup regression retained.",
+    "no_real_child_or_lease": true
+  },
+  "model_calls": 0,
+  "optimizer_steps": 0,
+  "prover_calls": 0,
+  "real_child_launched": false,
+  "resource_lease_acquired": false,
+  "source_or_ledger_changes_by_reviewer": false,
+  "limitations": [
+    "Mocked timing verifies startup ordering rather than real census throughput or uninterrupted sampling.",
+    "The unchanged watchdog remains cooperative; no continuous lease coverage or kernel-enforced resource quota is claimed.",
+    "New attempt02 must still use a fresh independently pinned training-phase approval; this receipt does not rewrite attempt01 or authorize semantic/model promotion."
+  ]
+}

@@ -1,0 +1,226 @@
+{
+  "schema": "scope-span-pilot-completion-summary/v1",
+  "status": "completed",
+  "training_results": {
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/results/training-results.json",
+    "bytes": 44017,
+    "sha256": "6fadbc6a09d57e28eecd66bc7a0269a6581effc01d006819ed97c2483dcdcfe8"
+  },
+  "actual_optimizer_updates": 480,
+  "row_presentations": 7680,
+  "final": {
+    "bytekernel1": {
+      "positive_count": 64,
+      "positive_exact_count": 5,
+      "positive_emitted_proposal_count": 35,
+      "positive_learned_refusal_count": 20,
+      "positive_structural_block_count": 9,
+      "negative_count": 64,
+      "negative_learned_refusal_count": 57,
+      "negative_incidental_block_count": 2,
+      "negative_emitted_proposal_count": 5,
+      "case_count": 128,
+      "source_parent_groups": 64,
+      "mixed_exact_count": 62,
+      "mixed_exact_rate": 0.484375,
+      "positive_raw_modality_exact": 22,
+      "positive_raw_facet_span_exact": {
+        "modality": 59,
+        "actor": 63,
+        "action": 48,
+        "object": 56,
+        "condition": 52
+      },
+      "positive_raw_all_spans_exact": 35,
+      "raw_head_denominator": 64,
+      "raw_head_accounting": "All supported examples including abstained/blocked outputs; missing raw fields are incorrect.",
+      "optional_presence_confusion": {
+        "object": {
+          "tp": 29,
+          "fp": 4,
+          "fn": 3,
+          "tn": 28,
+          "unavailable": 0
+        },
+        "condition": {
+          "tp": 26,
+          "fp": 5,
+          "fn": 6,
+          "tn": 27,
+          "unavailable": 0
+        }
+      },
+      "negative_categories": {
+        "modal_deletion": {
+          "count": 16,
+          "learned_refusal": 16,
+          "emitted": 0,
+          "incidental_block": 0
+        },
+        "modal_misspelling": {
+          "count": 16,
+          "learned_refusal": 9,
+          "emitted": 5,
+          "incidental_block": 2
+        },
+        "extra_exception": {
+          "count": 16,
+          "learned_refusal": 16,
+          "emitted": 0,
+          "incidental_block": 0
+        },
+        "second_rule": {
+          "count": 16,
+          "learned_refusal": 16,
+          "emitted": 0,
+          "incidental_block": 0
+        }
+      },
+      "positive_templates": {
+        "condition_actor_possessive_gerund_object_modal": {
+          "count": 8,
+          "exact": 0
+        },
+        "condition_actor_modal_action_object": {
+          "count": 8,
+          "exact": 1
+        },
+        "modal_actor_action_object_condition": {
+          "count": 8,
+          "exact": 0
+        },
+        "actor_modal_action_object_condition": {
+          "count": 8,
+          "exact": 0
+        },
+        "condition_modal_actor_action_object": {
+          "count": 8,
+          "exact": 1
+        },
+        "gerund_object_agent_modal_condition": {
+          "count": 8,
+          "exact": 2
+        },
+        "actor_possessive_gerund_object_modal_condition": {
+          "count": 8,
+          "exact": 0
+        },
+        "actor_condition_modal_action_object": {
+          "count": 8,
+          "exact": 1
+        }
+      },
+      "attachment": "Explicit caller premise, not a learned endpoint.",
+      "semantic_gold": false,
+      "proposal_admission": "all masks zero; source context and meaning remain unresolved"
+    },
+    "bytekernel3": {
+      "positive_count": 64,
+      "positive_exact_count": 12,
+      "positive_emitted_proposal_count": 41,
+      "positive_learned_refusal_count": 18,
+      "positive_structural_block_count": 5,
+      "negative_count": 64,
+      "negative_learned_refusal_count": 59,
+      "negative_incidental_block_count": 1,
+      "negative_emitted_proposal_count": 4,
+      "case_count": 128,
+      "source_parent_groups": 64,
+      "mixed_exact_count": 71,
+      "mixed_exact_rate": 0.5546875,
+      "positive_raw_modality_exact": 25,
+      "positive_raw_facet_span_exact": {
+        "modality": 64,
+        "actor": 64,
+        "action": 50,
+        "object": 61,
+        "condition": 61
+      },
+      "positive_raw_all_spans_exact": 47,
+      "raw_head_denominator": 64,
+      "raw_head_accounting": "All supported examples including abstained/blocked outputs; missing raw fields are incorrect.",
+      "optional_presence_confusion": {
+        "object": {
+          "tp": 29,
+          "fp": 0,
+          "fn": 3,
+          "tn": 32,
+          "unavailable": 0
+        },
+        "condition": {
+          "tp": 30,
+          "fp": 0,
+          "fn": 2,
+          "tn": 32,
+          "unavailable": 0
+        }
+      },
+      "negative_categories": {
+        "modal_deletion": {
+          "count": 16,
+          "learned_refusal": 16,
+          "emitted": 0,
+          "incidental_block": 0
+        },
+        "modal_misspelling": {
+          "count": 16,
+          "learned_refusal": 11,
+          "emitted": 4,
+          "incidental_block": 1
+        },
+        "extra_exception": {
+          "count": 16,
+          "learned_refusal": 16,
+          "emitted": 0,
+          "incidental_block": 0
+        },
+        "second_rule": {
+          "count": 16,
+          "learned_refusal": 16,
+          "emitted": 0,
+          "incidental_block": 0
+        }
+      },
+      "positive_templates": {
+        "condition_actor_possessive_gerund_object_modal": {
+          "count": 8,
+          "exact": 3
+        },
+        "condition_actor_modal_action_object": {
+          "count": 8,
+          "exact": 2
+        },
+        "modal_actor_action_object_condition": {
+          "count": 8,
+          "exact": 0
+        },
+        "actor_modal_action_object_condition": {
+          "count": 8,
+          "exact": 1
+        },
+        "condition_modal_actor_action_object": {
+          "count": 8,
+          "exact": 2
+        },
+        "gerund_object_agent_modal_condition": {
+          "count": 8,
+          "exact": 0
+        },
+        "actor_possessive_gerund_object_modal_condition": {
+          "count": 8,
+          "exact": 1
+        },
+        "actor_condition_modal_action_object": {
+          "count": 8,
+          "exact": 3
+        }
+      },
+      "attachment": "Explicit caller premise, not a learned endpoint.",
+      "semantic_gold": false,
+      "proposal_admission": "all masks zero; source context and meaning remain unresolved"
+    }
+  },
+  "source_semantics_verified": false,
+  "proof_ready": false,
+  "model_defaults_changed": false
+}

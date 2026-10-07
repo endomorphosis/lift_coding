@@ -1,0 +1,229 @@
+{
+  "RSS_measurement": {
+    "absolute_peak_measured": false,
+    "actual_training_peak_RSS_bytes": null,
+    "kernel_hard_memory_limit_claimed": false,
+    "maximum_observed_group_RSS_bytes": 11800576,
+    "maximum_observed_sample_within_bound": true,
+    "memory_reservation_bytes": 1610612736,
+    "resource_usage_sample_count": 1,
+    "sample_scope": "Pipe-gated pre-model Python leader only; final cleanup reports zero live processes/RSS.",
+    "training_phase_RSS_sample_count": 0
+  },
+  "concerns": [
+    {
+      "blocking_custody_audit": false,
+      "detail": "Only one resource usage/RSS sample exists. It was collected while the leader remained pipe-gated before model execution. Fitting/reap completed before the next20-second usage check. Actual training RSS and absolute peak are unmeasured; do not report11.80MB as model peak or claim that sampled receipts prove the memory ceiling throughout training.",
+      "id": "training-rss-peak-unmeasured",
+      "severity": "measurement_limit"
+    }
+  ],
+  "created_at_utc": "2026-10-07T05:14:07.268067+00:00",
+  "current_read_only_snapshots": {
+    "ledger": {
+      "bytes": 6077913,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/federal-corpus-audits/owned-daemon-resource-control/disk-reservations.json",
+      "sha256": "2a3430ea8b3306f3dca5262d41b5dafbfb3cbc28e524f19c1702cfa1b13ea999"
+    },
+    "other_claims_edited": false,
+    "scheduler_state": {
+      "bytes": 1648,
+      "path": "/tmp/ipfs-datasets-resource-scheduler-1000.json",
+      "sha256": "10726eb5078abfc1bfe2d7593dc5a1810a8b6bdf939f49af28dc2b19191ab065"
+    },
+    "shared_config_sha256": "76d10cc42015c9e4cbdad0fabd6a64f706320e14a8fb507f16262d42dd1d5856"
+  },
+  "evidence": [
+    {
+      "bytes": 105,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/child-exit.json",
+      "sha256": "1b59b71f2b247383b59707d07ee959b9b260066d3c27b3d8eeb68dcb01827364"
+    },
+    {
+      "bytes": 44,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/child-identity.json",
+      "sha256": "9c0f42accb970a1f2a128e9407ae77d49971e806dc615d7a23c8b9dafbba8ad7"
+    },
+    {
+      "bytes": 4177,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/child.log",
+      "sha256": "9b8629abc0ccd03d0afe5a6626fbc4de4ddbded2b394b66162240840e633559d"
+    },
+    {
+      "bytes": 1005,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/command.json",
+      "sha256": "35a7ec7563f9e1f1473295e021e746cd8cab31d918c07db7b2f7d8813ce5606e"
+    },
+    {
+      "bytes": 357,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/guardian-exit.json",
+      "sha256": "1fb9268cc1c9be6c9eaec390898d186882d492f3546074ff91225175e3638e95"
+    },
+    {
+      "bytes": 693,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/lease-binding.json",
+      "sha256": "ba3e1fda9fbc3d8b303c4574890092c5d1107a955a5de28d53e2a87fb92aaed6"
+    },
+    {
+      "bytes": 32655,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/lease-observations.jsonl",
+      "sha256": "608a0b494531b6abb4da5bfe20122f90ae1605654635c3355f3945a88f7970c5"
+    },
+    {
+      "bytes": 190,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/owned-group-final.json",
+      "sha256": "e7c9d20400a755c7a155943e793b81b25df551a9767ca67ed7a3e8910ee08e63"
+    },
+    {
+      "bytes": 7957,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/pre-admission.json",
+      "sha256": "917b35b291735c4c6e9cad954f7aa4b3dccf5e87dab763eb92e864d47f09beae"
+    },
+    {
+      "bytes": 874,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/resource-observations.json",
+      "sha256": "acb9b9e6b486921257c5b588beafc7ab7a27be8ef1460b888e7907e522b44ec0"
+    },
+    {
+      "bytes": 5895,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/resources-final.json",
+      "sha256": "720ef53d131c57baf9dbfaffd0314125dd6f7798aec7d72331ba814314d36298"
+    },
+    {
+      "bytes": 2511,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/resources-start.json",
+      "sha256": "f8acf6acc6412522a92cc317a73de3223b0d7595d548e8d656049c054af98589"
+    },
+    {
+      "bytes": 4646,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02/scheduler-adoption.json",
+      "sha256": "1a0635498700d8b469e1610bb658ecb7a97a137d2578f128bb15b5047877b80f"
+    }
+  ],
+  "findings": [],
+  "lease_monitoring": {
+    "active_monitor_sample_count": 28,
+    "all_saved_observations_healthy_and_same_config": true,
+    "configuration_changed_by_auditor": false,
+    "continuous_lease_coverage_claimed": false,
+    "event_count": 33,
+    "finalization_interval_scope": "Model child already reaped and monitor thread stopped; pre/post samples bracket release, not continuous coverage through the full disk census.",
+    "max_observed_active_gap_seconds": 1.0151949360151775,
+    "maximum_permitted_observation_gap_seconds": 5.0,
+    "poll_seconds": 1.0,
+    "post_finalize_lease_absent": true,
+    "pre_finalize_lease_present": true,
+    "pre_to_post_finalize_observation_interval_seconds": 14.55044404102955,
+    "startup_observation_gap_seconds": 0.07386819599196315
+  },
+  "legal_gold_claimed": false,
+  "passed": true,
+  "preserved_failed_attempt": {
+    "all11failure_evidence_pins_unchanged": true,
+    "child_returncode": -2,
+    "current_child_process_observation": {
+      "pid": 3879964,
+      "proc_present": false,
+      "recorded_birth": "36712773",
+      "same_owned_process": false
+    },
+    "current_own_cpu_lease_absent": true,
+    "current_own_disk_status": "retained",
+    "exact_old_guardian_source_preserved": {
+      "bytes": 24856,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/guardian-attempt01-source.py",
+      "sha256": "90c820be19a0b54153accca704abcd4d6655ce1b6683228c5f126047e4d4f524"
+    },
+    "failed_disk_claim_reconciled_or_released_by_auditor": false,
+    "failure_code": "observation_gap_exceeded",
+    "leader_reaped": true,
+    "live_owned_group_processes_at_cleanup": 0,
+    "model_started": false,
+    "old_phase_and_peer_reviews_preserved": [
+      {
+        "bytes": 15819,
+        "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/protocol-review.json",
+        "sha256": "7f7f728a5e10bafbe053700fbb5a0d3b06aef611381d93850619e3e10d86edcc"
+      },
+      {
+        "bytes": 2422,
+        "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/guardian-peer-review.json",
+        "sha256": "8a31c8f8c354e21155e80088a9d4c85e5a081d7045228a921dd33aab6d79bbde"
+      }
+    ],
+    "optimizer_updates": 0,
+    "own_cpu_lease_released_receipt": true,
+    "own_disk_bytes": 200000000,
+    "own_reservation_id": "dc5a24634a8f4ab2bb03946fb64e6921",
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-01",
+    "results_directory_exists": false
+  },
+  "proof_ready": false,
+  "reviewer_calls": {
+    "Lake": 0,
+    "claim_write": 0,
+    "encoder": 0,
+    "lease_acquire": 0,
+    "model": 0,
+    "optimizer": 0
+  },
+  "schema": "legal-scope-independent-resource-results-review/v1",
+  "scope": "Immediate receipts of the two named physical attempts, direct current records for only their owned claims/leases, point /proc checks for their recorded children. No results recursion or global filesystem/proc inventory. No claims/guardians/models modified.",
+  "source_semantics_verified": false,
+  "successful_attempt": {
+    "approval_receipt": {
+      "bytes": 19959,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/protocol-review-attempt02.json",
+      "sha256": "40b58e33bb8c8ab70865c9c7c13436e640874497a66e5aff93ce2be29f422a6b"
+    },
+    "attempt_exceeded_reservation": false,
+    "child_deadline_seconds": 300,
+    "child_exit_code": 0,
+    "child_identity": {
+      "birth": "36752010",
+      "pid": 4000313
+    },
+    "current_child_process_observation": {
+      "pid": 4000313,
+      "proc_present": false,
+      "recorded_birth": "36752010",
+      "same_owned_process": false
+    },
+    "current_own_disk_status": "released",
+    "current_own_lease_absent": true,
+    "final_reserved_attempt_bytes": 16214074,
+    "final_total_charged_bytes": 16214074,
+    "guardian_exit_code": 0,
+    "guardian_wall_seconds": 57.81385800300632,
+    "launch_through_reap_wall_seconds": 28.700296202034224,
+    "leader_reaped": true,
+    "lease_released_receipt": true,
+    "live_group_processes_at_cleanup": 0,
+    "own_lease_id": "e174eff87a804675aeab5d1edc00c064",
+    "own_reservation_id": "94c8919d3d07411299ebe8767974936d",
+    "owner_pid": 3994654,
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02",
+    "peer_receipt": {
+      "bytes": 6060,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/guardian-peer-review-attempt02.json",
+      "sha256": "b25a5dd6119f05d4af317a1dbf4c77759dc6a7ce4c17833ca048703abd1f3971"
+    },
+    "physical_root_identity": {
+      "device": 66306,
+      "inode": 74367510,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-02"
+    },
+    "resource_envelope": {
+      "admission_timeout_seconds": 120,
+      "child_deadline_seconds": 300,
+      "child_process_slots": 1,
+      "cpu_slots": 2,
+      "ledger_lock_timeout_seconds": 60,
+      "memory_mb": 1536,
+      "storage_bytes": 200000000
+    },
+    "terminal_bytes_note": "Resource census precedes post-finalize lease log append and terminal receipt writes; the immediate resources-final+guardian-exit files add6252bytes, and later log bytes are also excluded. No recursive post-finalization recount was performed.",
+    "terminal_files_after_finalization_census_bytes_at_least": 6252
+  },
+  "verification_boundary": "Root plans separate-process CPU1-thread strict checkpoint restore/forward-only replay. That is verification with no optimizer steps and no claimed reuse of the completed training lease; it does not measure original training peak RSS or source-law fidelity. This auditor ran no model, encoder, optimizer, Lake or resource reservation."
+}

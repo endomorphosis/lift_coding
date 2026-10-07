@@ -1,0 +1,37 @@
+{
+  "schema": "scope-span-read-only-checkpoint-replay/v1",
+  "status": "passed",
+  "arms": {
+    "bytekernel1": {
+      "checkpoint_sha256": "c803ac62a7ac7d65146b80c2c67d3ed038821355ec7df2532bf150606adab943",
+      "selected_steps": 120,
+      "full_output_exact": 128,
+      "cases": 128,
+      "model_and_full_Adam_unchanged": true,
+      "ambient_rng_unchanged": true
+    },
+    "bytekernel3": {
+      "checkpoint_sha256": "9809ec3fd092536f8c4effb74d8a401dc5db9ff9a031952a1e3f92f9c7292c6e",
+      "selected_steps": 240,
+      "full_output_exact": 128,
+      "cases": 128,
+      "model_and_full_Adam_unchanged": true,
+      "ambient_rng_unchanged": true
+    }
+  },
+  "device": "cpu",
+  "threads": 2,
+  "cuda_initialized": false,
+  "additional_optimizer_updates": 0,
+  "references_opened": false,
+  "source_parsers_denied": true,
+  "training_lease_claimed": false,
+  "producer_pins": {
+    "implementation_sha256": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15",
+    "proposal_sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65",
+    "scope_sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a",
+    "torch_version": "2.13.0+cu130",
+    "tokenizer_profile": "unicode_word_or_punctuation_utf8_offsets/v1"
+  },
+  "elapsed_seconds": 1.9643096739891917
+}

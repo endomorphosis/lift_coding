@@ -1,0 +1,195 @@
+{
+  "schema": "independent-scope-corpus-runner-review/v1",
+  "phase": "training",
+  "passed": true,
+  "findings": [],
+  "package_root": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets",
+  "run_root": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01",
+  "plan_sha256": "0d2d866323b72846f64b619222f146155555e80233ac7d566743e6765efed074",
+  "runner_sha256": "5cdeebfd311028295a7a80d6c7df0aca1ad556a37e83b397f9f7e4389e19ad8c",
+  "guardian_sha256": "90c820be19a0b54153accca704abcd4d6655ce1b6683228c5f126047e4d4f524",
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/experiment-plan.json": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/experiment-plan.json",
+      "bytes": 4303,
+      "sha256": "0d2d866323b72846f64b619222f146155555e80233ac7d566743e6765efed074"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/corpus-builder.py": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/corpus-builder.py",
+      "bytes": 30999,
+      "sha256": "ef654d25b51ea5addc5e91448664aee9c1c470335f7a7097c5d464747d2d6631"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/corpus-protocol.json": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/corpus-protocol.json",
+      "bytes": 5928,
+      "sha256": "3c3b194f9720fe1c1d624f6d9a9098b53898d69846f6a036ed805755d1b18acb"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/corpus-manifest.json": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/corpus-manifest.json",
+      "bytes": 7771,
+      "sha256": "5c87b0ef62c3fa7846f2000ae99caa3438c85c2cf1e80809380cf97e600d2f32"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/run_scope_experiment.py": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/run_scope_experiment.py",
+      "bytes": 17892,
+      "sha256": "5cdeebfd311028295a7a80d6c7df0aca1ad556a37e83b397f9f7e4389e19ad8c"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/run_scope_guardian.py": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/run_scope_guardian.py",
+      "bytes": 24856,
+      "sha256": "90c820be19a0b54153accca704abcd4d6655ce1b6683228c5f126047e4d4f524"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/test_scope_guardian.py": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/test_scope_guardian.py",
+      "bytes": 8986,
+      "sha256": "7a14ffdda3bbdfb914e5f2e065167a90b10cc7eccd98c731f0d2263ef725c087"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/train-inputs.json": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/train-inputs.json",
+      "bytes": 489421,
+      "sha256": "0df9ab64e794f606a3d9ab87002c78bc49e58bdc24969bf3bc62a7fabb44b3bc"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/train-references.json": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/train-references.json",
+      "bytes": 1090392,
+      "sha256": "63140b0b8daae2260f911dde653e604d1fb758416cf3721da3b81cf4c53c6789"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/selection-inputs.json": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/selection-inputs.json",
+      "bytes": 61364,
+      "sha256": "48f891f5ada515e7b1511e6395c107ee8c7ecfcede3618da417376383eca1518"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/selection-references.json": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/selection-references.json",
+      "bytes": 136304,
+      "sha256": "ea5762e4c35ba452c60286ee01b4ec21df7a12e0a6c6f50780bfb1822a6dcddd"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-inputs.json": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-inputs.json",
+      "bytes": 61725,
+      "sha256": "1af9757054e2ae6344dcbd2e3834c21808cbe998e79ace9b9ff34383d3020b55"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-references.json": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-references.json",
+      "bytes": 136311,
+      "sha256": "9ff98c26fd03fc695b76b46de63b621a02765e981e43eca867cf01f51104abc9"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py",
+      "bytes": 29545,
+      "sha256": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/tests/unit/logic/test_legal_scope_span_decoder.py": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/tests/unit/logic/test_legal_scope_span_decoder.py",
+      "bytes": 12978,
+      "sha256": "6a08301f5167405e45231f94f0ab2a5a47c10d9400cb30481f61b63d5c1181f9"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py",
+      "bytes": 7804,
+      "sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py",
+      "bytes": 29993,
+      "sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a"
+    }
+  },
+  "scope": "Authored engineering row/schema/protocol/numerical-runner review; no independently reviewed legal gold or semantic admission.",
+  "model_calls": 0,
+  "optimizer_steps": 0,
+  "prover_calls": 0,
+  "real_child_launched": false,
+  "resource_lease_acquired": false,
+  "checks": {
+    "corpus_rebuilt_exactly_from_append_coordinates": true,
+    "all_1280_rows_source_digest_id_and_schema_checked": true,
+    "positive_source_anchors_validated_by_unchanged_scope_owner": 640,
+    "split_source_groups_disjoint": true,
+    "normalized_actor_action_object_condition_lexemes_split_disjoint": true,
+    "raw_sources_globally_unique": true,
+    "split_sizes": {
+      "train": {
+        "positive": 512,
+        "negative": 512,
+        "parent_groups": 512
+      },
+      "selection": {
+        "positive": 64,
+        "negative": 64,
+        "parent_groups": 64
+      },
+      "final": {
+        "positive": 64,
+        "negative": 64,
+        "parent_groups": 64
+      }
+    },
+    "operator_anagram_pairs": {
+      "train": 128,
+      "selection": 16,
+      "final": 16,
+      "checks": "Exactly one generic word token changed, per-token UTF8 byte multisets and full lengths preserved; left1/left2/reverse distinct, nonidentity split corruptions."
+    },
+    "nullable_object_condition_and_repeated_occurrence_transport": true,
+    "attachment": "Explicit rule|statement caller premise required in target-free inputs; null wire when no condition exists; no learned attachment claim.",
+    "negative_classification": "Four outside-profile categories; no structural targets, no legally-false labels.",
+    "zero_authority": "All scope admission masks remain0; no formula, native, proof or semantic admission.",
+    "schedule": {
+      "canonical_sha256": "1de580410c631cf500732c7502105e1397dcd1cd19e3b502039a0a5d12cd3881",
+      "updates_per_arm": 240,
+      "total_updates": 480,
+      "batch": 16,
+      "positive_per_batch": 8,
+      "negative_per_batch": 8,
+      "row_presentations_per_arm": 3840,
+      "total_row_presentations": 7680,
+      "all_1024_train_sources_presented": true,
+      "identical_row_ID_schedule_for_both_arms": true
+    },
+    "matched_initialization": "Copy exact common tensors from kernel1; Conv3 outer positions zero and center from Conv1. Initial first16 logits allclose and actual wire/proposal/status/blocker parity are checked by runner before training; no empirical parity claim made by this no-model review.",
+    "parameter_budget": "Different kernel parameter counts and extra trainable Conv3 neighbors are disclosed; no equal-capacity or vector-dimensionality claim.",
+    "inference": "Only source text, explicit caller attachment and source SHA reach head.predict; TRAIN labels/optimizer/example construction and three source-parser entrypoints guarded against use during prediction.",
+    "reference_barriers": "Final references are raw-hashed before fitting but never parsed by numerical runner before both selections/checkpoints and final prediction artifacts are durable. Builder schedule import declares lexical constants but its executed function uses TRAIN rows only; model receives no final lexicons/reference labels.",
+    "durability": "Every runner artifact fsyncs file and parent directory; created directory links fsync parent chain. Both-selected barrier precedes final input collection and target parsing.",
+    "checkpoint_restore": "Selected checkpoint bytes are pinned, full model/Adam restored, exact resave asserted before final inference.",
+    "score_checks": {
+      "selection": {
+        "complete_supported_denominator": 64,
+        "complete_unsupported_denominator": 64,
+        "parent_groups": 64,
+        "perfect_label_score_check": true,
+        "missing_raw_fields_counted_incorrect": true,
+        "presence_fp_fn_tn_tp_checks": true,
+        "four_negative_category_denominators": 16
+      },
+      "final": {
+        "complete_supported_denominator": 64,
+        "complete_unsupported_denominator": 64,
+        "parent_groups": 64,
+        "perfect_label_score_check": true,
+        "missing_raw_fields_counted_incorrect": true,
+        "presence_fp_fn_tn_tp_checks": true,
+        "four_negative_category_denominators": 16
+      }
+    },
+    "native_denominators": "All128 outputs per panel retained;64 supported and64 unsupported,64 paired parent groups, four16-case negative slices. Raw facets/classes measured over all64 positives including blocks/refusals; unavailable values count incorrect. Presence confusion totals include unavailable sites.",
+    "completion": "Durable training-results.json and summary.json satisfy guardian completion check.",
+    "resolved_findings": [
+      {
+        "finding": "Runner completion filename did not match guardian required summary.json",
+        "resolution": "Runner now writes fsynced summary.json linked to training-results SHA."
+      },
+      {
+        "finding": "Checkpoint/selection/barrier writes only flushed, without crash durability",
+        "resolution": "Runner now fsyncs files/directories and durable directory creation before final reference barrier."
+      }
+    ]
+  },
+  "limitations": [
+    "Templates deliberately recur across splits; this is new authored source/lexeme testing, not untouched legal meaning or template holdout.",
+    "Kernel1 byte pooling is algebraically invariant to operator-word byte permutations; floating reduction order may introduce rounding differences. Kernel3 extra parameter capacity is disclosed.",
+    "This review checked pure construction and scoring with fabricated diagnostic outputs; actual initial parity, training success, checkpoint results and final fidelity remain unexecuted.",
+    "No native family, learned attachment, reviewed law or encoder-vector qualification follows."
+  ]
+}

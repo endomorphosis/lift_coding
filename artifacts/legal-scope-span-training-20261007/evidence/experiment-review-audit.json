@@ -1,0 +1,498 @@
+{
+  "AGENTS": {
+    "applicable_files_found": [],
+    "checked": [
+      "/AGENTS.md",
+      "/home/AGENTS.md",
+      "/home/barberb/AGENTS.md",
+      "/home/barberb/lift_coding/AGENTS.md",
+      "/home/barberb/lift_coding/external/AGENTS.md",
+      "/home/barberb/lift_coding/external/ipfs_datasets/AGENTS.md"
+    ]
+  },
+  "authorization_scope": "Independent audit and this JSON only; no edits to source, no training, no test execution, no publication.",
+  "canonical_status_observations": {
+    "/home/barberb/lift_coding": {
+      "dirty": true,
+      "porcelain_line_count": 87,
+      "status_bytes": 4229,
+      "status_sha256": "082b1ec4c3921012855057489ca7f5552e96ecc1b03f6c8d4df006d8087b6dcc"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets": {
+      "dirty": true,
+      "porcelain_line_count": 2285,
+      "status_bytes": 166312,
+      "status_sha256": "271c7343651a5c73c4177f3d1e65781e3cc91db4f7a6d461224c35ac8400fda1"
+    }
+  },
+  "contracts": [
+    {
+      "contract": "Diagnostic complete-cohort transport only: 1..64 rows, 16MiB input, full seven facets, no silently dropped failed TRAIN row, explicit train/tuning identity and normalized-source disjointness, TRAIN-only vocabulary. Word source/target cap 64 remains distinct from byte output cap 512. Exact source/context anchors and scope declaration are owner-validated; occurrence loss or flat normalization is refused. Every training/semantic/Lean authority flag stays false. Review receipt replay is not training authority; review-to-cohort/family applicability/native floor remain unassessed.",
+      "id": "qualifier-preflight",
+      "lines": [
+        1,
+        19,
+        24,
+        95,
+        114,
+        178,
+        231
+      ],
+      "source": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_qualifier_training_preflight.py"
+    },
+    {
+      "contract": "Pinned summary has no new reviewed TRAIN qualifier pairs, 0 labels/formal targets admitted, 0 authenticated human/independent reviews in review34/review64, and zero supervision masks. Authored engineering targets must retain their distinct provenance.",
+      "id": "reviewed-label-absence",
+      "source": "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/evidence/reconstruction-gap-followup-20261006/qualifier-preflight-summary.json"
+    },
+    {
+      "contract": "V2 receives only source_text plus explicit modal_scope, and emits learned support, 2..8 member count/scope/O-P-F and actor/action pointers. There are no object/conditions/exceptions/temporal heads. Unsupported-source batches update shared/support only; structural moments may be idle. Inference must not call source parser, targets, reference groups or legacy fallback. Current head cannot acquire qualifier coverage through a data-only continuation.",
+      "id": "existing-grouped-head",
+      "lines": [
+        1,
+        25,
+        115,
+        127,
+        307,
+        450,
+        486,
+        514
+      ],
+      "source": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py"
+    },
+    {
+      "contract": "Grouped checkpoint v2 is closed finite CPU float32 JSON, contains producer/torch/tokenizer/profile pins, numerical model+AdamW state and bounded global steps, never sources/targets. Shared/support Adam count proves each declared step; structural parameters have consistent bounded counts including idle all-negative histories. Restore validates shapes/moments/counts/pins and exact resave. Next-update replay is tested. Changed producer rejects old checkpoint; architectural addition requires a new version and explicit initialization/migration.",
+      "id": "checkpoint-exact-resume",
+      "lines": [
+        450,
+        486,
+        514
+      ],
+      "source": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py"
+    },
+    {
+      "contract": "source_checkpoint_continuation_v1 restores prior selected weights but deliberately uses a fresh optimizer: exact_optimizer_resume false, optimizer_state_inherited false, initial optimizer entries zero. It cannot substantiate exact Adam resume.",
+      "id": "source-continuation-is-warm-start",
+      "lines": [
+        208,
+        333,
+        362,
+        413
+      ],
+      "source": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_checkpoint_continuation_v1.py"
+    },
+    {
+      "contract": "Existing numerical owner increments steps only after optimizer.step and finite-state checks, records committed per-step row IDs, target-token/source-value presentations, loss/gradient/LR, and reports initial/selected/final-attempt tensor hashes plus split/reference/codec hashes. This is the usable custody pattern; a requested budget or zero-step adapter is not trained-model evidence.",
+      "id": "actual-update-custody",
+      "lines": [
+        1055,
+        1065,
+        1228
+      ],
+      "source": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/long_span_source_value_training.py"
+    },
+    {
+      "contract": "Current normative wording recipe derives new prose only from original TRAIN rules and hard-refuses nonempty qualifiers. 12 historical source inventories plus separately sealed prospective development exclusions bind the comparison. Native 384D/768D source preparation requires real offline local encoder assets; fake deterministic vectors are not fidelity evidence. The recipe is suitable for a modality wording control, not qualifier learning unless a new explicitly versioned complete-qualifier owner is implemented.",
+      "id": "matched-wording-limit",
+      "lines": [
+        39,
+        127,
+        229
+      ],
+      "source": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_training_sources.py"
+    },
+    {
+      "contract": "Scope owner preserves exact source/context typed occurrences, ordered rule attachment and bounded Boolean/binder declarations, requiring every occurrence to be attached. Structural validation never authenticates meaning; nested/repeated/ordered scopes must not be sorted, deduplicated or flattened for successful training transport.",
+      "id": "occurrence-scope",
+      "lines": [
+        1,
+        146,
+        228,
+        309
+      ],
+      "source": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py"
+    },
+    {
+      "contract": "Complete source-bound caller interpretation declares every condition and exception in original order, exact temporal literal/clock/units, and exception scope (activation waiver or per-tick exemption). These are declared authored premises, not inferred source meanings. Missing interpretation/unsupported duration retains blockers. Family training v7/native Lake v5 and source-bound legal_qualified_lake are existing routes; toy interpretation success grants no source fidelity.",
+      "id": "native-qualifier-verification",
+      "lines": [
+        1,
+        29,
+        101
+      ],
+      "source": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/native_legal_qualified_lean.py"
+    }
+  ],
+  "created_at_utc": "2026-10-07T04:40:40.909623+00:00",
+  "decision": {
+    "broad_legal_fidelity_claim_supported": false,
+    "legal_gold_training_ready": false,
+    "publication_or_default_promotion_recommended": false,
+    "ready_for_bounded_implementation": true,
+    "ready_for_training_now": false,
+    "training_prerequisites": [
+      "New complete qualifier source/output profile and independently checkable authored labels.",
+      "Sealed source/reference group reservations, registered arm/selection/update budgets and fresh output paths.",
+      "Strict versioned checkpoint/resume custody and inference leakage sentinels.",
+      "Resource-compatible frozen guardian/owner closure, exact existing shared config adoption, storage estimate within current root scope, and clean phase readiness."
+    ]
+  },
+  "observed_canonical_heads": {
+    "/home/barberb/lift_coding": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+    "/home/barberb/lift_coding/external/ipfs_datasets": "d5238def256d1c352793ee7d977e6b17b6d8cbee"
+  },
+  "prior_experiment": {
+    "US_probes": {
+      "original_negatives": {
+        "count": 14,
+        "emitted_requests": 0,
+        "learned_refusals": 14
+      },
+      "parent": {
+        "count": 14,
+        "emitted_requests": 0,
+        "learned_refusals": 14
+      },
+      "position_local_negatives": {
+        "count": 14,
+        "emitted_requests": 0,
+        "learned_refusals": 14
+      }
+    },
+    "actual_optimizer_updates": 400,
+    "additional_row_presentations": 6400,
+    "checkpoint_replay": {
+      "actual_lake_build_legal_passed": true,
+      "exact_fresh_prediction_replays": 256,
+      "false_scope_claim_rejected": true,
+      "scope": "Constructed two-world witness from actual eight-member selection outputs."
+    },
+    "device": "cpu",
+    "evidence": [
+      {
+        "bytes": 2516,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/experiment-plan.json",
+        "sha256": "1c7e3639c512d8661fb961a0bb1271bcfc81cbc9b447c8eb1335e763a410651e"
+      },
+      {
+        "bytes": 10305,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/run_boundary_experiment.py",
+        "sha256": "a1f3a902fa4e83e4d0acca1f62512cd61baab08171fb711380cc3c01d3604534"
+      },
+      {
+        "bytes": 17832,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/training-results.json",
+        "sha256": "91f4dacd13c163b0a41b1685c350a675f8ea7d3c4952c22974017d21d0b31821"
+      },
+      {
+        "bytes": 16319,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/checkpoint-replay-native.json",
+        "sha256": "63edf3b08a2a7adc509dbfc9524208680e1ae8b62f4fa595c06a9143674cdd82"
+      },
+      {
+        "bytes": 96257,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-followup-20261006-01/post-selection-retention.json",
+        "sha256": "b2159c9352c46f9fd4118d66dd6005e91eb7112728ba71318dab5f402f628a3a"
+      }
+    ],
+    "legal_gold": false,
+    "new_qualifier_capacity_demonstrated": false,
+    "proof_ready": false,
+    "resource_custody_limit": "The reviewed boundary runner sets CPU threads/CUDA policy, but its source contains no scheduler reservation or guardian invocation. Do not infer resource-lease custody from that run.",
+    "selection": {
+      "original_negatives": {
+        "completed_updates": 200,
+        "fresh_final": {
+          "case_count": 128,
+          "mixed_exact_count": 77,
+          "mixed_exact_rate": 0.6015625,
+          "mixed_safe_exact_count": 97,
+          "negative_count": 64,
+          "negative_emitted_request_count": 23,
+          "negative_incidental_block_count": 20,
+          "negative_learned_refusal_count": 21,
+          "negative_safe_refusal_count": 41,
+          "positive_count": 64,
+          "positive_exact_count": 56,
+          "positive_false_abstention_count": 0,
+          "support_classification_correct": 85,
+          "support_classifier_available": true
+        },
+        "selected_additional_updates": 100,
+        "selected_optimizer_steps": 580
+      },
+      "position_local_negatives": {
+        "completed_updates": 200,
+        "fresh_final": {
+          "case_count": 128,
+          "mixed_exact_count": 109,
+          "mixed_exact_rate": 0.8515625,
+          "mixed_safe_exact_count": 112,
+          "negative_count": 64,
+          "negative_emitted_request_count": 7,
+          "negative_incidental_block_count": 3,
+          "negative_learned_refusal_count": 54,
+          "negative_safe_refusal_count": 57,
+          "positive_count": 64,
+          "positive_exact_count": 55,
+          "positive_false_abstention_count": 2,
+          "support_classification_correct": 116,
+          "support_classifier_available": true
+        },
+        "selected_additional_updates": 200,
+        "selected_optimizer_steps": 680
+      }
+    },
+    "source_semantics_verified": false,
+    "threads": 2,
+    "wall_seconds": 108.2355848979787
+  },
+  "recommended_experiment": {
+    "alternative": "A matched source-wording comparison is feasible for the existing 384D modality task, retaining native offline cache/asset evidence and exact zero replay. For qualifiers, first implement a new authored complete-qualifier source/codec/training profile; the current owner must continue to reject nonempty qualifiers. Do not present the current 32-token grammar or untrained adapter as qualifier fidelity.",
+    "control_design": "Use same architecture/initial seed/optimizer/batch order and bounded update count for two registered arms. Prefer a zero-weight control plus a single qualifier-loss change or no-qualifier auxiliary versus complete qualifier auxiliary; report unsupported/control limitations. Old v2 head is a retention baseline, not a matched qualifier architecture. Freeze support threshold and selection criterion before fitting.",
+    "final_barrier": "After all selections are durably fixed, reference-blind inference persists every prediction before parsing final reference bodies; score once. Do not tune after final results; exposed final becomes retention evidence for any subsequent run.",
+    "fit_custody": "Record successful optimizer-step sequence, batch/source/reference bindings, per-facet losses and nonzero trained-parameter changes; increment steps only after actual finite optimizer.step. Save zero, scheduled, selected and last-attempt endpoints with tensor hashes and real Adam moments. No padded/fabricated counter; zero-step adapter is untrained. Any old-weight initialization with new architecture/fresh optimizer must say warm start, not exact resume.",
+    "labels": "Declare authored generation recipe/meaning premises first, then retain complete canonical or occurrence-aware targets and offsets separately from model inputs. Reserve nonempty conditions, exceptions, temporal and mixed facets across O/P/F. Mark legal_gold false, source_semantics_reviewed false, broad_proof_ready false, and canonical train_eligible unchanged false. A semantic review receipt or source-anchored encoding is not a legal-label gold source.",
+    "preferred": "New opt-in, versioned source-anchored qualifier head over separately authored complete fixtures.",
+    "rationale": "It directly tests learned complete qualifier pointers/type/attachment without relying on unavailable semantic-gold admission or the empty-qualifier normative grammar. Raw UTF-8 source input avoids unnecessary encoder provenance for this first structural experiment.",
+    "schema_before_fit": "Closed source-only inference input; complete output includes modality, actor, action, object, condition/exception/temporal occurrence lists and explicit rule attachments. Use exact half-open Unicode character spans with byte/token mapping checks. Do not silently invent empty fields, normalize qualifier connective/order, or return partially projected success. Unsupported contexts/scopes get explicit support refusal.",
+    "scoring": "Complete exact-case fidelity across all seven facets plus exact occurrence/rule-attachment where applicable, per-facet omission/hallucination, source-span exactness, support confusion and learned refusal versus incidental downstream block. Report every row, rejection and out-of-profile source. Lean validity and source fidelity remain separate metrics.",
+    "source_and_label_reservation": "Seal complete TRAIN, selection, final source groups and reference hashes before fitting. Group parent legal document, literal/normalized text, clause/paragraph aliases, context and paraphrase/meaning ancestry. Exclude all prior named inventories and exposed 14-US-probe/old-regression/final references. Source inventories must stay full, including rejected rows; never discard hard qualifiers. Explain if held-out wording reuses exposed authored meanings. Vocabulary and hyperparameters fit TRAIN/selection only."
+  },
+  "requested_pins": {
+    "datasets": "47d492c697f3e766d107ae9c02d8b8dcd18660b2",
+    "previous_reconciliation_datasets": "90c58048",
+    "previous_reconciliation_root": "9c602b3",
+    "root": "b7e3550da23c94fe17b591654093c5c0f84ded0c"
+  },
+  "resources": {
+    "artifact_scope": "The requested root artifacts folder is outside existing ledger roots. Keep training/checkpoint/child-log custody under a fresh datasets workspace/test-logs attempt covered by the existing exact roots; root artifacts can contain small audit/summary/hash links. Do not silently alter existing root scope or retained reservations.",
+    "compatibility_warning": "Pinned 47d492c resource_scheduler has proof-recovery/profile fields absent in dirty current source and live config. Historical guardian binds scheduler SHA a418e84f70ed8509ba0518feea69e7a8c27865139f83b6c81349eefdfd5893a4, distinct from both. Existing scripts must be adapted/frozen/reviewed for an exact compatible closure; importing current or pinned code and assuming the historical adoption contract is unsafe.",
+    "disk_ledger": {
+      "limit_bytes": 145000000000,
+      "outstanding_full_reservations_bytes": 47065000000,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/federal-corpus-audits/owned-daemon-resource-control/disk-reservations.json",
+      "reservation_status_counts": {
+        "active": 0,
+        "released": 385,
+        "reserved": 0,
+        "retained": 95
+      },
+      "roots": [
+        "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs",
+        "/home/barberb/lift_coding/external/ipfs_datasets/workspace/todo-queues",
+        "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence",
+        "/tmp/pytest-of-barberb"
+      ]
+    },
+    "guardian_contract": "Fresh attempt only, exact frozen plan/inputs/extensions and clean independently bound readiness. Use unchanged existing scheduler configuration under the stable existing lock; monitor own original lease/PID-birth/process-group identity and stop only owned group on changed/missing lease/config. No scheduler reset, policy relaxation, foreign lease action or replacement lease. Retain separate child exit, outer guardian exit, sampled resource/lease events, final accounting, and primary failure before cleanup failures.",
+    "guardian_reference": [
+      {
+        "bytes": 2522,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/run_guardian.py",
+        "sha256": "25a1254e785ccd656c9e50fceba0d6a70e8c0345b0abf6633748b880ab1e151e"
+      },
+      {
+        "bytes": 17042,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/run_reserved.py",
+        "sha256": "44e4ec9655b34cf82f5729e27ee0f9ffa96bb2fafc21e581d3b72fca5030d8db"
+      },
+      {
+        "bytes": 11206,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/adopt_shared_scheduler.py",
+        "sha256": "4956baa1e41abe53fc83a2d4ae7709b3be13ebc1c775b44571a33903b8f70b1f"
+      }
+    ],
+    "owner": {
+      "release_contract": "Stop and reap owned isolated process group, durably fsync artifacts, then finalize(attempt, artifacts_durable=True) or explicit audited release. Context exit retains storage claim; retained claims never auto-expire. Counts/RSS are bounded observations, not kernel-enforced limits.",
+      "scheduler_lane": "hammer_lean",
+      "source": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_resources.py",
+      "storage_cap_bytes": 145000000000,
+      "workload": "canonical_trainer"
+    },
+    "recommended_initial_envelope": {
+      "arms_max": 2,
+      "blas_threads": 1,
+      "child_process_slots": 1,
+      "cpu_slots": 2,
+      "memory_mb": 2048,
+      "note": "Proposed cap for a small source-pointer head, subject to source/config tensor and artifact estimate before admission. Not an acquired lease or prior measured RSS; reduce to one CPU thread if only one slot is admitted. Native semantic encoder preparation is a separate phase with its own measured estimate/reservation.",
+      "optimizer_updates_per_arm_max": 200,
+      "outer_deadline_seconds": 900,
+      "storage_bytes": 1000000000,
+      "torch_threads_max": 2,
+      "total_updates_max": 400
+    },
+    "scheduler": {
+      "config": {
+        "lane_reservations": {
+          "validation": {
+            "cpu_slots": 1,
+            "memory_mb": 0
+          }
+        },
+        "max_gpu_memory_percent": null,
+        "max_memory_percent": null,
+        "max_swap_percent": null,
+        "max_waiting_requests": 256,
+        "proof_backoff_seconds": 2.0,
+        "proof_cpu_stall_percent": 50.0,
+        "proof_io_stall_percent": 10.0,
+        "proof_memory_headroom_mb": 2458,
+        "proof_memory_stall_percent": 2.0,
+        "proof_safety_enabled": true,
+        "require_known_gpu_for_gpu_work": true,
+        "reserved_gpu_memory_mb": 0,
+        "reserved_memory_mb": 0,
+        "total_child_process_slots": 4,
+        "total_cpu_slots": 4,
+        "total_gpu_memory_mb": null,
+        "total_memory_mb": 9830,
+        "total_unified_memory_mb": null
+      },
+      "lease_count": 0,
+      "path": "/tmp/ipfs-datasets-resource-scheduler-1000.json",
+      "schema": "legal-ir-global-resource-scheduler-v1",
+      "waiter_count": 0
+    },
+    "snapshot_scope": "Single read of existing files; no lock held, no admission or available-capacity guarantee."
+  },
+  "schema": "legal-next-training-experiment-review/v1",
+  "source_pins": [
+    {
+      "current_sha256": "58ebc41a4ea1f93d3497108ebd54ea3611bc652b5d74284214b13bb74a535489",
+      "equal": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_qualifier_training_preflight.py",
+      "pinned_bytes": 14908,
+      "pinned_commit": "47d492c697f3e766d107ae9c02d8b8dcd18660b2",
+      "pinned_sha256": "58ebc41a4ea1f93d3497108ebd54ea3611bc652b5d74284214b13bb74a535489"
+    },
+    {
+      "current_sha256": "d9c0415fc112830ec690154e4e939c8b2d071a4381fd831011d92e4946c017e7",
+      "equal": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_explicit_qualifiers.py",
+      "pinned_bytes": 14419,
+      "pinned_commit": "47d492c697f3e766d107ae9c02d8b8dcd18660b2",
+      "pinned_sha256": "d9c0415fc112830ec690154e4e939c8b2d071a4381fd831011d92e4946c017e7"
+    },
+    {
+      "current_sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a",
+      "equal": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py",
+      "pinned_bytes": 29993,
+      "pinned_commit": "47d492c697f3e766d107ae9c02d8b8dcd18660b2",
+      "pinned_sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a"
+    },
+    {
+      "current_sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8",
+      "equal": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_grouped_span_decoder_v2.py",
+      "pinned_bytes": 33948,
+      "pinned_commit": "47d492c697f3e766d107ae9c02d8b8dcd18660b2",
+      "pinned_sha256": "defe782605c99e9954e8ce0c0439af00cced49342c7594379840ea7cf1fc9ce8"
+    },
+    {
+      "current_sha256": "c1663820492a6879b14ab89dfd9b052105cf16378bb015fea08c3220d83456e0",
+      "equal": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/long_span_source_value_training.py",
+      "pinned_bytes": 105415,
+      "pinned_commit": "47d492c697f3e766d107ae9c02d8b8dcd18660b2",
+      "pinned_sha256": "c1663820492a6879b14ab89dfd9b052105cf16378bb015fea08c3220d83456e0"
+    },
+    {
+      "current_sha256": "f51bd50ae082aa6a3b3dcf340e2ebdd34e4e85a2ea5a87999b97b473238f5e80",
+      "equal": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_checkpoint_continuation_v1.py",
+      "pinned_bytes": 29511,
+      "pinned_commit": "47d492c697f3e766d107ae9c02d8b8dcd18660b2",
+      "pinned_sha256": "f51bd50ae082aa6a3b3dcf340e2ebdd34e4e85a2ea5a87999b97b473238f5e80"
+    },
+    {
+      "current_sha256": "b00d2752ba852fe73760bba4fbd51b0e845742c3527642606a2a77ed9f8f5e2c",
+      "equal": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_resources.py",
+      "pinned_bytes": 36724,
+      "pinned_commit": "47d492c697f3e766d107ae9c02d8b8dcd18660b2",
+      "pinned_sha256": "b00d2752ba852fe73760bba4fbd51b0e845742c3527642606a2a77ed9f8f5e2c"
+    },
+    {
+      "current_sha256": "f156511991e33d3b4ba523c3c5080ea30d0a53ad8a4dbcccea0487432679a9aa",
+      "equal": false,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+      "pinned_bytes": 110004,
+      "pinned_commit": "47d492c697f3e766d107ae9c02d8b8dcd18660b2",
+      "pinned_sha256": "2ea92ca7e2fe9732fce515e562b51d7824fc25069772205092439839632c9cc2"
+    },
+    {
+      "current_sha256": "15458de60d79304d4fb676913ee4b3d4578bdc21b85a5437b998c5503f3fb288",
+      "equal": true,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/formalization/autoencoder/normative_wording_training_sources.py",
+      "pinned_bytes": 14474,
+      "pinned_commit": "47d492c697f3e766d107ae9c02d8b8dcd18660b2",
+      "pinned_sha256": "15458de60d79304d4fb676913ee4b3d4578bdc21b85a5437b998c5503f3fb288"
+    }
+  ],
+  "status": "completed_read_only_audit",
+  "verification_plan": [
+    {
+      "checks": [
+        "Closed schemas and finite bounds; full cohort preserved on rejection; 64-word and 512-byte limits remain distinct; Unicode token/byte/character boundaries exact.",
+        "No source/reference/target/legacy/parser access at inference; install throwing sentinels around training-label and fallback helpers.",
+        "Nonempty mixed qualifiers survive unchanged; negation/connective/order/duplicate/attachment/context variations either preserve exact occurrence form or explicitly refuse.",
+        "Unsupported-source batches do not move inactive structural parameters or Adam moments.",
+        "Source/tuning/final overlap, stale source/producer/schema hash, fabricated Adam counters, missing qualifier, partial coverage and renamed false authority fields reject."
+      ],
+      "existing_reference_tests": [
+        "tests/unit/logic/legal_ir/test_canonical_qualifier_training_preflight.py",
+        "tests/unit/logic/legal_ir/test_canonical_byte_codec.py",
+        "tests/unit/logic/legal_ir/test_canonical_statement_scope.py",
+        "tests/unit/logic/test_legal_grouped_span_decoder_v2.py",
+        "tests/unit/logic/test_legal_grouped_span_decoder_v2_boundaries.py"
+      ],
+      "phase": "pure_contracts"
+    },
+    {
+      "checks": [
+        "Frozen exact compatible scheduler/owner/guardian closure and unchanged live-config adoption; fresh bound readiness before any child launch.",
+        "Failure-path tests for stale/missing lease, PID reuse, config drift, owned descendant survival, changed inputs, admission timeout and durable retained accounting.",
+        "Do not launch model work during this audit; live snapshot is not permission/capacity admission."
+      ],
+      "phase": "resource_readiness"
+    },
+    {
+      "checks": [
+        "Tiny actual fit confirms nonzero optimizer work and trainable tensor change, with explicit engineering scope.",
+        "JSON strict restore/resave and exact next-update equality using fixed batch schedule/RNG; separate fresh-process prediction replay on every saved final case.",
+        "Selected/last-attempt/parent endpoints are distinct roles; aliases explicitly marked.",
+        "No final reference body parsed before durable selection/prediction barriers."
+      ],
+      "phase": "real_training_and_resume"
+    },
+    {
+      "checks": [
+        "Use actual selected-head outputs, exact source binding and complete explicit authored interpretation declarations; do not lower a hand-filled ideal target and call it model verification.",
+        "Invoke installed exact hashed Lake/toolchain with fresh workspace and complete root imports and target coverage; retain argv/returncode/stdout/stderr/generated source/module hashes.",
+        "Positive build plus negative false-activation, wrong exception-scope/clock/duration/omitted qualifier claims; ensure the affected module was actually built.",
+        "Native admission attaches only to successfully built declared authored propositions. Preserve source_semantics_verified/legal_gold false and full-family floor blockers."
+      ],
+      "existing_reference_tests": [
+        "tests/unit/logic/formalization/autoencoder/test_native_legal_qualified_lean.py",
+        "tests/unit/logic/test_legal_qualified_lake.py",
+        "tests/unit/logic/formalization/autoencoder/test_family_training_v7.py"
+      ],
+      "phase": "actual_native_Lean",
+      "tool_note": "native_legal_qualified_lean real tests need explicit IPFS_DATASETS_NATIVE_LAKE_TEST_EXECUTABLE; legal_qualified_lake references installed Lean 4.34.1. Skips/process doubles do not count as actual execution."
+    }
+  ],
+  "workspace_preservation": {
+    "Lake_calls": 0,
+    "canonical_full_tree_byte_preservation_audited": false,
+    "lease_acquisitions": 0,
+    "model_execution_calls": 0,
+    "note": "Read only git/file observations. Dirty content was neither reset nor synchronized. Heads differ from requested contribution pins; all model/qualifier sources listed except resource_scheduler match the pinned commit byte for byte.",
+    "publications": 0,
+    "scheduler_mutations": 0,
+    "source_edits": 0,
+    "training_calls": 0
+  }
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "additional_requested_bytes": 0,
+    "attempt_bytes": 17082,
+    "attempt_limit_bytes": 200000000,
+    "charged_bytes": 141753516382,
+    "checked_at": 1791349461.4367297,
+    "external_charged_bytes": 0,
+    "group_rss": {
+      "available": true,
+      "live_processes": 1,
+      "rss_bytes": 11800576
+    },
+    "inventory": {
+      "apparent_bytes": 94188516382,
+      "entry_count": 1359625,
+      "special_file_count": 10,
+      "symlink_count": 714
+    },
+    "limit_bytes": 145000000000,
+    "memory_limit_bytes": 1610612736,
+    "minimum_filesystem_free_bytes": 271797633024,
+    "observed_apparent_bytes": 94188516382,
+    "outstanding_full_reservations_bytes": 47565000000,
+    "process_slot_estimate_exceeded": false,
+    "reserved_child_process_slots": 1,
+    "scope": "named_roots_only_apparent_bytes",
+    "total_attempt_charged_bytes": 17082
+  }
+]

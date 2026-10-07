@@ -1,0 +1,44 @@
+{
+  "artifacts": {
+    "attempt-01-failure-audit.json": {
+      "bytes": 5018,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/attempt-01-failure-audit.json",
+      "sha256": "645caecc63b5517e53c6489be490f193f71e0a0ea79cd16b923d530fdb58c677"
+    },
+    "guardian-compatibility-check-r3.json": {
+      "bytes": 6795,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/guardian-compatibility-check-r3.json",
+      "sha256": "51eba7845a41b542eac5b325458880b8763d10e3b98e81514d6de0b8e615455b"
+    },
+    "run_scope_guardian.py": {
+      "bytes": 25017,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/run_scope_guardian.py",
+      "sha256": "ab2b82419764ae0d9b8cda24f9d9fe3e7a755e3b6e204be6554e15c2581a10bf"
+    },
+    "test_scope_guardian.py": {
+      "bytes": 13634,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/test_scope_guardian.py",
+      "sha256": "89dbabde77b51d1e45628244b91964044bb67858ab582023dcd56acdcb3966df"
+    }
+  },
+  "checks_unchanged": {
+    "child_timeout_seconds": 300,
+    "disk_bytes": 200000000,
+    "lease_poll_seconds": 1.0,
+    "max_observation_gap_seconds": 5.0,
+    "memory_mb": 1536
+  },
+  "historical_helpers_modified": false,
+  "independent_readiness_receipt": false,
+  "model_calls": 0,
+  "ordering": "verified cached and durable custody; bind/start watch; initial usage with monitoring active and child gated; healthy check; permit exec",
+  "real_child_launches": 0,
+  "real_lease_acquisitions": 0,
+  "schema": "legal-scope-guardian-validation/v3",
+  "status": "passed_focused_checks",
+  "tests": {
+    "failed": 0,
+    "passed": 19,
+    "scope": "Pure/mocked only, including14.43s synthetic initial census with monitoring already started, gated model never permitted before successful usage, and failed usage prevents model exec."
+  }
+}

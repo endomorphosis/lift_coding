@@ -1,0 +1,110 @@
+{
+  "schema": "matched-five-facet-scope-span-plan/v1",
+  "seed": 24602,
+  "arms": [
+    "bytekernel1",
+    "bytekernel3"
+  ],
+  "updates_per_arm": 240,
+  "batch_size": 16,
+  "learning_rate": 0.003,
+  "weight_decay": 0.0,
+  "support_threshold": 0.5,
+  "selection_steps": [
+    0,
+    120,
+    240
+  ],
+  "initialization": "Copy common weights from kernel1 into kernel3; center Conv1 weights in Conv3 and zero neighbors. Verify initial functional logits and proposal parity; disclose extra parameters.",
+  "selection_score": [
+    "positive_exact_count+negative_learned_refusal_count",
+    "-negative_emitted_proposal_count",
+    "positive_exact_count",
+    "-steps"
+  ],
+  "builder": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/corpus-builder.py",
+    "bytes": 30999,
+    "sha256": "ef654d25b51ea5addc5e91448664aee9c1c470335f7a7097c5d464747d2d6631"
+  },
+  "corpus_manifest": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/corpus-manifest.json",
+    "bytes": 7771,
+    "sha256": "5c87b0ef62c3fa7846f2000ae99caa3438c85c2cf1e80809380cf97e600d2f32"
+  },
+  "corpus_protocol": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/corpus-protocol.json",
+    "bytes": 5928,
+    "sha256": "3c3b194f9720fe1c1d624f6d9a9098b53898d69846f6a036ed805755d1b18acb"
+  },
+  "runner": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/run_scope_experiment.py",
+    "bytes": 17892,
+    "sha256": "5cdeebfd311028295a7a80d6c7df0aca1ad556a37e83b397f9f7e4389e19ad8c"
+  },
+  "producer_pins": {
+    "implementation_sha256": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15",
+    "proposal_sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65",
+    "scope_sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a",
+    "torch_version": "2.13.0+cu130",
+    "tokenizer_profile": "unicode_word_or_punctuation_utf8_offsets/v1"
+  },
+  "inputs": {
+    "train": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/train-inputs.json",
+      "bytes": 489421,
+      "sha256": "0df9ab64e794f606a3d9ab87002c78bc49e58bdc24969bf3bc62a7fabb44b3bc"
+    },
+    "selection": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/selection-inputs.json",
+      "bytes": 61364,
+      "sha256": "48f891f5ada515e7b1511e6395c107ee8c7ecfcede3618da417376383eca1518"
+    },
+    "final": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-inputs.json",
+      "bytes": 61725,
+      "sha256": "1af9757054e2ae6344dcbd2e3834c21808cbe998e79ace9b9ff34383d3020b55"
+    }
+  },
+  "references": {
+    "train": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/train-references.json",
+      "bytes": 1090392,
+      "sha256": "63140b0b8daae2260f911dde653e604d1fb758416cf3721da3b81cf4c53c6789"
+    },
+    "selection": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/selection-references.json",
+      "bytes": 136304,
+      "sha256": "ea5762e4c35ba452c60286ee01b4ec21df7a12e0a6c6f50780bfb1822a6dcddd"
+    },
+    "final": {
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-references.json",
+      "bytes": 136311,
+      "sha256": "9ff98c26fd03fc695b76b46de63b621a02765e981e43eca867cf01f51104abc9"
+    }
+  },
+  "schedule_canonical_sha256": "1de580410c631cf500732c7502105e1397dcd1cd19e3b502039a0a5d12cd3881",
+  "source_budget_preflight": {
+    "train": {
+      "rows": 1024,
+      "max_tokens": 32,
+      "max_token_UTF8_bytes": 12
+    },
+    "selection": {
+      "rows": 128,
+      "max_tokens": 30,
+      "max_token_UTF8_bytes": 14
+    },
+    "final": {
+      "rows": 128,
+      "max_tokens": 30,
+      "max_token_UTF8_bytes": 13
+    }
+  },
+  "training_scope": "Authored engineering targets only; no legal gold, semantic admission, default promotion or latent input.",
+  "model_source": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py",
+    "bytes": 29545,
+    "sha256": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15"
+  }
+}

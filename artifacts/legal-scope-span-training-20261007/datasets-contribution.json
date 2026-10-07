@@ -1,0 +1,106 @@
+{
+  "schema": "scope-span-datasets-contribution/v1",
+  "pr": 1275,
+  "url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1275",
+  "state": "MERGED",
+  "head": "1530efd07032bac88229c6c97ca5994d498e6216",
+  "base": "c4382ae53ab9497245fccdf85855f0e314711fbc",
+  "merge_commit": "8b1cff7c9a83e8ed04459abc962409c8d2bdb09a",
+  "main_observed": "8b1cff7c9a83e8ed04459abc962409c8d2bdb09a",
+  "changed_paths": [
+    "docs/autoencoders/progress_integration.md",
+    "docs/implementation/legal_scope_span_decoder_pilot_20261007.md",
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py",
+    "tests/unit/logic/test_legal_scope_span_decoder.py"
+  ],
+  "newer_runtime_files_preserved_byte_exact": [
+    "docs/autoencoders/README.md",
+    "docs/autoencoders/normative_cached_legal_ir_runtime.md",
+    "docs/autoencoders/normative_legal_ir_runtime.md",
+    "ipfs_datasets_py/logic/formalization/autoencoder/checkpoint_hub.py",
+    "ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py",
+    "ipfs_datasets_py/logic/formalization/autoencoder/normative_cached_legal_ir_runtime.py",
+    "ipfs_datasets_py/logic/formalization/autoencoder/normative_legal_ir_runtime.py",
+    "tests/unit/logic/formalization/autoencoder/test_normative_cached_legal_ir_runtime.py"
+  ],
+  "numerical_source_pins": {
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15",
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65",
+    "ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a"
+  },
+  "normal_merge": true,
+  "admin_bypass_used": false,
+  "hosted_CI": {
+    "schema": "scope-span-hosted-ci-observation/v1",
+    "repo": "endomorphosis/ipfs_datasets_py",
+    "pr": 1275,
+    "head": "1530efd07032bac88229c6c97ca5994d498e6216",
+    "hosted_CI_passed": false,
+    "hosted_checks_unavailable_due_to_billing": true,
+    "self_hosted_jobs_observed_queued": true,
+    "required_admin_bypass": false,
+    "check_runs": [
+      {
+        "id": 112644559816,
+        "name": "Logic Module Benchmarks/benchmark",
+        "annotations": [
+          {
+            "path": ".github",
+            "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/1530efd07032bac88229c6c97ca5994d498e6216/.github",
+            "start_line": 1,
+            "start_column": null,
+            "end_line": 1,
+            "end_column": null,
+            "annotation_level": "failure",
+            "title": "",
+            "message": "The job was not started because your account is locked due to a billing issue.",
+            "raw_details": ""
+          },
+          {
+            "path": ".github",
+            "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/1530efd07032bac88229c6c97ca5994d498e6216/.github",
+            "start_line": 1,
+            "start_column": null,
+            "end_line": 1,
+            "end_column": null,
+            "annotation_level": "notice",
+            "title": "",
+            "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+            "raw_details": ""
+          }
+        ]
+      },
+      {
+        "id": 112644555905,
+        "name": "CodeQL/Analyze (python)",
+        "annotations": [
+          {
+            "path": ".github",
+            "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/1530efd07032bac88229c6c97ca5994d498e6216/.github",
+            "start_line": 1,
+            "start_column": null,
+            "end_line": 1,
+            "end_column": null,
+            "annotation_level": "failure",
+            "title": "",
+            "message": "The job was not started because your account is locked due to a billing issue.",
+            "raw_details": ""
+          },
+          {
+            "path": ".github",
+            "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/1530efd07032bac88229c6c97ca5994d498e6216/.github",
+            "start_line": 1,
+            "start_column": null,
+            "end_line": 1,
+            "end_column": null,
+            "annotation_level": "notice",
+            "title": "",
+            "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+            "raw_details": ""
+          }
+        ]
+      }
+    ]
+  },
+  "source_review": true
+}

@@ -1,0 +1,112 @@
+{
+  "admission_masks": {
+    "contrastive_supervision": 0,
+    "fidelity_evaluation": 0,
+    "proof_supervision": 0,
+    "strong_semantic_fit": 0,
+    "weak_decoder_fit": 0
+  },
+  "arms": [
+    {
+      "byte_kernel_size": 1,
+      "name": "bytekernel1"
+    },
+    {
+      "byte_kernel_size": 3,
+      "name": "bytekernel3"
+    }
+  ],
+  "authorship": "Independent construction does not establish independent legal review. Every target is an authored engineering premise; no source-law accuracy, proof, qualification, admission or promotion is claimed.",
+  "batch_size": 16,
+  "caller_attachment": "rule|statement is an explicit caller premise, never a learned target or source-semantic claim. Copy it to predicted condition_attachment only when a condition occurrence is present; otherwise null.",
+  "context_tokens_max": 512,
+  "cpu_only": true,
+  "evaluation": "Report whole prediction/source-scope exactness, all five present/null facet spans, modality, presence false positives/negatives, learned negative refusals, unsafe negative emissions, incidental structural blocks, abstentions and invalid proposals with complete denominators. Validate every emitted positive against existing scope owner; all admission masks0.",
+  "existing_8D_384D_768D_4096D_models_modified": false,
+  "final_reference_barrier": "Both arm selections/checkpoints and their hashes must be durable before the numerical runner opens/parses final-references.json. Author construction/validation and raw artifact hashing are not numerical evaluation. Final inputs are separate target-free records.",
+  "formalized": false,
+  "independent_legal_review": false,
+  "initialization": "Initialize kernel1 with seed24602 and kernel3 with the same config/seed. Copy every common-shaped parameter from kernel1 into kernel3; zero both outer Conv3 weight positions and copy Conv1 weights into the center. All biases, embeddings, GRU and heads initially match. Measure functional logit allclose/proposal parity before fitting. Kernel3 extra local weights start0 and their parameter counts are disclosed. Existing frozen models remain intact.",
+  "learned_heads": [
+    "support",
+    "modality_class",
+    "object_presence",
+    "condition_presence",
+    "modality_start",
+    "modality_end",
+    "actor_start",
+    "actor_end",
+    "action_start",
+    "action_end",
+    "object_start",
+    "object_end",
+    "condition_start",
+    "condition_end"
+  ],
+  "learning_rate": 0.003,
+  "modal_anagram_protocol": "Change exactly one preannotated operator word without changing token order/spaces, full-source UTF8 length or per-token UTF8 byte multiset. TRAIN rotates that word left1, selection left2, final reverses it; all three are nonidentity and mutually distinct. These are paired outside-profile fixture controls, not legally false statements. Kernel1 mean/max token-byte pooling is invariant; kernel3 can learn within-token byte order.",
+  "model_inputs": "Full raw UTF8 source bytes only. Caller condition_attachment is copied at proposal assembly; id/group/template/digest metadata and reference labels never enter source features.",
+  "natural_source_semantics_verified": false,
+  "negative_categories": [
+    "modal_deletion",
+    "modal_misspelling",
+    "extra_exception",
+    "second_rule"
+  ],
+  "negative_per_batch": 8,
+  "optimizer": "AdamW",
+  "output_tokens_max": 512,
+  "paired_source_accounting": "One positive and one corrupted negative per source group, kept in the same split; no duplicate raw text. No source-group or normalized facet-lexeme overlap between splits.",
+  "positive_per_batch": 8,
+  "proof_authority": false,
+  "qualified": false,
+  "row_presentations_per_arm": 3840,
+  "schema": "legal-single-rule-occurrence-engineering-protocol/v1",
+  "scope": "Raw-source, single O/P/F norm; modality/actor/action and nullable object/opaque condition occurrences. Only this authored grammar is supported.",
+  "seed": 24602,
+  "selection_reference_use": "Selection only; no fit gradients or posthoc threshold adjustments.",
+  "selection_score_descending": [
+    "exact_positive_count+negative_learned_refusal_count",
+    "-negative_emitted_request_count",
+    "exact_positive_count",
+    "-completed_updates"
+  ],
+  "selection_steps": [
+    0,
+    120,
+    240
+  ],
+  "source_budget": "No truncation, padding-as-content, parser, search, nearest-keyword anchor recovery or cached source teacher. Preserve complete source and reject an over-budget input.",
+  "split_lexicon_sha256": "933d729d301396a96df61f6ad90a4bbe15c7ef8a3e9ee800a27ab885ede7b2b2",
+  "split_supported_counts": {
+    "final": 64,
+    "selection": 64,
+    "train": 512
+  },
+  "split_unsupported_counts": {
+    "final": 64,
+    "selection": 64,
+    "train": 512
+  },
+  "support_loss": "Binary cross entropy on all rows; structural/presence/modality/endpoint losses only on supported TRAIN rows, endpoint losses only for present facets.",
+  "support_threshold": 0.5,
+  "targets": "legal-scope-span-prediction/v1; opaque_condition_attachment/v1; Unicode-character half-open coordinates captured while appending source facets.",
+  "temperature": 0,
+  "template_renderer_sha256": "ef654d25b51ea5addc5e91448664aee9c1c470335f7a7097c5d464747d2d6631",
+  "templates": [
+    "actor_modal_action_object_condition",
+    "condition_actor_modal_action_object",
+    "actor_condition_modal_action_object",
+    "modal_actor_action_object_condition",
+    "condition_modal_actor_action_object",
+    "actor_possessive_gerund_object_modal_condition",
+    "condition_actor_possessive_gerund_object_modal",
+    "gerund_object_agent_modal_condition"
+  ],
+  "training_admission_granted": false,
+  "training_schedule_sha256": "1de580410c631cf500732c7502105e1397dcd1cd19e3b502039a0a5d12cd3881",
+  "unsupported_meaning": "Outside this single-rule engineering grammar, not legally false. Unsupported references contain no structural targets.",
+  "updates_per_arm": 240,
+  "weight_decay": 0.0,
+  "workers": 1
+}
