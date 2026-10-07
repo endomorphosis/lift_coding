@@ -1,0 +1,64 @@
+{
+  "Constitution_formalized": false,
+  "admitted": false,
+  "all_current_completed_RUN_eligible_members_present": true,
+  "all_required_members_present": true,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/archive-review/audit_archive-r2.py": {
+      "bytes": 15874,
+      "sha256": "00f6641e08f3da970b0b12bcb3c88cc1db2c599f7c5e08ac576885f058df620a"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/archive-review/auditor-source-freeze.json": {
+      "bytes": 1119,
+      "sha256": "e967e26ee9e895829eadeef7d8c67629bcf1803a07bcbe296bdc4684300ab8e1"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/balanced-wording-evidence.tar.gz": {
+      "bytes": 57431839,
+      "sha256": "22b23d4b72a8b7c864986289c052b5e0dd64bb500f6a29d9d7e2761b613582bc"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/retain_evidence.py": {
+      "bytes": 6537,
+      "sha256": "68fe6833d1ac483cee78da9fbff7e5d8ee06beba56a57bdfa60da57bd366c717"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/retention-manifest.json": {
+      "bytes": 131821,
+      "sha256": "e989c2e7d2ee8c54d490775fdad23ffc27faee49262fd704e7a93cb40536acd1"
+    }
+  },
+  "checkpoint_bodies_archived": false,
+  "compressed_cap_bytes": 90000000,
+  "current_RUN_eligible_member_count": 283,
+  "current_RUN_excluded_body_count": 13,
+  "findings": [],
+  "lake_executed": false,
+  "limits": [
+    "Every semantic tar member is streamed and hashed without extraction; gzip CRC/padding and compressed physical bytes are verified.",
+    "Each member is matched to its frozen manifest and current source with descriptor/path identity fences.",
+    "Model checkpoint and raw prepared native-cache/bank inventories are excluded; references and inherited vector-valued numerical observations remain.",
+    "Completeness checks bind selected required artifacts and all current eligible completed RUN evidence; the manifest does not attest unrelated external owner trees.",
+    "Archive integrity grants no semantic/proof/runtime admission, replication or fresh-holdout authority."
+  ],
+  "model_execution_performed": false,
+  "numerical_auditors_rerun": false,
+  "passed": true,
+  "proof_authority": false,
+  "qualified": false,
+  "raw_native_source_inventory_bodies_archived": false,
+  "required_member_count": 112,
+  "resource_or_foreign_scheduler_actions_performed": false,
+  "saved_vector_valued_forward_output_observations_retained": true,
+  "schema": "balanced-wording-completed-archive-independent-review/v1",
+  "source_cap_bytes": 300000000,
+  "streamed_archive_result": {
+    "archive": {
+      "bytes": 57431839,
+      "sha256": "22b23d4b72a8b7c864986289c052b5e0dd64bb500f6a29d9d7e2761b613582bc"
+    },
+    "every_member_matches_current_source": true,
+    "every_member_matches_manifest": true,
+    "gzip_footer_crc_and_zero_remaining_padding_verified": true,
+    "member_count": 494,
+    "ordered_member_bindings_sha256": "7c91ae332486fcd9ddb6f5e17f333f06d47e80d042f5075ab335809c7f4b1ebd",
+    "source_bytes": 233307180
+  }
+}

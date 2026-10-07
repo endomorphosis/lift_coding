@@ -1,0 +1,184 @@
+{
+  "actual_model_encoder_optimizer_prover_execution": false,
+  "actual_proposed_schedule_validation": {
+    "admitted": false,
+    "bank_local_ordinals_validated": true,
+    "bank_members_validated": {
+      "balanced": 180,
+      "control": 180
+    },
+    "checkpoint_promoted": false,
+    "complete": true,
+    "encoder_executed": false,
+    "execution_readiness_granted": false,
+    "formalized": false,
+    "fresh_holdout": false,
+    "independent_semantic_holdout": false,
+    "lake_executed": false,
+    "models_executed": false,
+    "native_vectors_revalidated": false,
+    "optimizer_steps": 170,
+    "original_rule_pairs_preserved": true,
+    "proof_authority": false,
+    "qualified": false,
+    "source_presentations": 1020,
+    "source_provenance_authenticated": false,
+    "source_semantics_verified": false,
+    "training_executed": false
+  },
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/design.md": {
+      "bytes": 9201,
+      "sha256": "79498e8419bf2864c9717eafc248ffded3aaf77ad42ed43d374b2a015ad5244c"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/dual_bank_retention.py": {
+      "bytes": 26660,
+      "sha256": "15accfcf8bbc4e578e32ca7842ac338be2b563458c4c90a85fbe18429da000f1"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/implementation-contract.json": {
+      "bytes": 4537,
+      "sha256": "05e1d875d44c08287c69fa009fdf31ec0b59e8d5cb426cf4eefa3166bfe92f1c"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/observed-outcome.json": {
+      "bytes": 14514,
+      "sha256": "d010355165a9c686dbf847bc68af44f0384f167f226e9d352bdcd84d963dfe86"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/proposed-dual-bank-schedule.json": {
+      "bytes": 443751,
+      "sha256": "11a9c660f5101dbcf2981cfa0d451d13c6a81ebbc75b7ad2699e07d37106e2e1"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/source-results-freeze.json": {
+      "bytes": 2835,
+      "sha256": "e3af37a3d650dccf0199c78619961c66d427f33d683a0e203643548e70ffa55d"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/test_dual_bank_retention.py": {
+      "bytes": 17284,
+      "sha256": "9161ee5cd16bc08db76e4635ec2b6d1d15b3199fb7b686fd846f47c1188bc589"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/pipeline/replay-helper-independent-pure-validation.json": {
+      "bytes": 2557,
+      "sha256": "8e18d933a222ed87fa0563b04c138c71b84fefcd3a996296737a691dfebef77d"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/pipeline/replay-publication-copy.json": {
+      "bytes": 951,
+      "sha256": "439e75bf8a696200e9a113335bbfcc6ec865d6c871ba04641e74cf80678ba58f"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/autoencoder/dual_bank_wording_replay/dual_bank_retention.py": {
+      "bytes": 26660,
+      "sha256": "15accfcf8bbc4e578e32ca7842ac338be2b563458c4c90a85fbe18429da000f1"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/autoencoder/dual_bank_wording_replay/test_dual_bank_retention.py": {
+      "bytes": 17284,
+      "sha256": "9161ee5cd16bc08db76e4635ec2b6d1d15b3199fb7b686fd846f47c1188bc589"
+    }
+  },
+  "canonical_existing_source_edits": false,
+  "checks": [
+    {
+      "detail": "Both public paths byte-identical to frozen source/test and root copy receipt; all10 source-freeze artifact bindings rechecked.",
+      "name": "actual_public_sibling_copies_exact",
+      "passed": true
+    },
+    {
+      "detail": "Helper imports only collections/hashlib/json; review/test executes no numerical owner, encoder, tensor library, checkpoint/model or optimizer.",
+      "name": "only_stdlib_no_models",
+      "passed": true
+    },
+    {
+      "detail": "17 exact public-file pure tests pass, including realistic cardinality, all-facet, source-only/regressed-formula, denominator, malformed, order/EOS and holdout refusals.",
+      "name": "actual_public_17_contract_tests_pass",
+      "passed": true
+    },
+    {
+      "detail": "Independently validated actual sealed proposed schedule:170updates/1020presentations,85updates/510perbank, all180 members perbank at2\u20133exposures; no real updates executed.",
+      "name": "actual_sealed_schedule_replayed",
+      "passed": true
+    },
+    {
+      "detail": "Each adjacent old/new draw preserves the authentic original-rule/template identities with distinct source handles; local ordinal prevents naive global-parity omission; six strata/three full32 modality targets conserved.",
+      "name": "paired_identity_and_local_ordinal_integrity",
+      "passed": true
+    },
+    {
+      "detail": "Schedule construction requires90 unique O/P/F-balanced original seven-facet targets with empty qualifier lists, exact384 banks and unchanged hashes/IDs/template census; no natural-source semantic qualification.",
+      "name": "exact_known_empty_qualifier_targets",
+      "passed": true
+    },
+    {
+      "detail": "Gate requires original/normative/new TRAIN48 cohorts, complete positional48 rows/180rules, per-row cardinality and seven facets, summary-to-row conservation, validsyntax/EOS/order/no omissions/extras/duplicates.",
+      "name": "complete_positional_formula_floors",
+      "passed": true
+    },
+    {
+      "detail": "Source-bank full180 denominators/modality floor and all-field nonregression are separate required checks from generated full-formula retention. Perfect source metrics do not hide33/48 formula regression.",
+      "name": "source_only_cannot_pass_regressed_formulas",
+      "passed": true
+    },
+    {
+      "detail": "Every field preserves180 total; visited+unvisited+unavailable and source correct/incorrect conserve denominators. Unavailable/unvisited sites refuse rather than become success.",
+      "name": "unvisited_unavailable_denominators_fail_closed",
+      "passed": true
+    },
+    {
+      "detail": "Exact three TRAIN cohort keys required; exposed-v3/sealed60 cannot be added/substituted as selector; result always reports exposed_v3_used_for_selection false.",
+      "name": "no_v3_or_sealed60_selectors",
+      "passed": true
+    },
+    {
+      "detail": "Caller-supplied hashes/fixture metrics are explicitly data contracts only. Source-provenance/native-revalidation/training-admission/proof/execution masks remainfalse; no body asserts measured improvement.",
+      "name": "provenance_and_semantics_not_conflated",
+      "passed": true
+    },
+    {
+      "detail": "Pure sibling test imports helper explicitly. Read-only source import/reference scan outside new directory has zero callers; implemented_in_real_trainer/execution_readiness_granted/checkpoint_promoted false.",
+      "name": "not_wired_into_real_trainer",
+      "passed": true
+    }
+  ],
+  "current_source_call_scan": {
+    "command": [
+      "rg",
+      "-n",
+      "(from|import).*dual_bank|dual_bank_retention\\.",
+      "ipfs_datasets_py",
+      "scripts/ops/autoencoder",
+      "--glob",
+      "*.py",
+      "--glob",
+      "!**/dual_bank_wording_replay/**"
+    ],
+    "exit_code": 1,
+    "matches": []
+  },
+  "findings": [],
+  "limitations": [
+    "The helper validates declared hashes and consistent metrics, not file custody, token-prefix trace recomputation, model lineage or natural legal semantic targets. Those remain separate frozen owner/review contracts.",
+    "The helper is uncalled by trainers. A future numerical continuation must integrate and review the exact schedule/receipt APIs without changing original selection/presentation streams, then measure all retention/cohort formula panels.",
+    "The TRAIN-only gate uses previously authored/exposed known meanings; successful data-contract validation is not evidence of generalization or a fresh holdout."
+  ],
+  "passed": true,
+  "permission_scope": "Eligibility to propose a bounded authored diagnostic still requires independent source/resource readiness and controlled execution.",
+  "publication_executed": false,
+  "pure_tests": 17,
+  "qualification_masks": {
+    "admitted": false,
+    "checkpoint_promoted": false,
+    "encoder_executed": false,
+    "execution_readiness_granted": false,
+    "formalized": false,
+    "fresh_holdout": false,
+    "independent_semantic_holdout": false,
+    "lake_executed": false,
+    "models_executed": false,
+    "native_vectors_revalidated": false,
+    "proof_authority": false,
+    "qualified": false,
+    "source_provenance_authenticated": false,
+    "source_semantics_verified": false,
+    "training_executed": false
+  },
+  "schema": "standalone-dual-bank-replay-helper-independent-review/v1",
+  "scope": "Standalone planned replay schedule and TRAIN-only numeric data gate at new public sibling paths. Source/test readiness only; not real trainer integration or measured model improvement.",
+  "source_semantics_or_natural_legal_qualification_granted": false,
+  "training_admission_or_resource_readiness_granted": false
+}

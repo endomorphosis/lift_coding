@@ -1,0 +1,108 @@
+{
+  "actual_remote_operations": 0,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/pipeline/publisher-adaptation.diff.gz": {
+      "bytes": 806,
+      "sha256": "09e61e529bf5443919fe73ca899324121ef3fc30ee3245ddfed853c16c1b3e28"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/pipeline/publisher-adaptation.json": {
+      "bytes": 1869,
+      "sha256": "974fff3f83b6bf846430514cbb4860af3037b32a0fcfb457874ebf8bc9c39cb5"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/pipeline/publisher-normal-state-after.json": {
+      "bytes": 524,
+      "sha256": "b077c462aae495481652ed95a3b31a4b2f35226b2870cc2b4973b3a0b9a08c07"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/pipeline/publisher-normal-state-before.json": {
+      "bytes": 524,
+      "sha256": "b077c462aae495481652ed95a3b31a4b2f35226b2870cc2b4973b3a0b9a08c07"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/pipeline/publisher-synthetic-validation.json": {
+      "bytes": 2612,
+      "sha256": "eef2abf882f783d6e6c8d8040ae79bf8c629f53dfd96cc5cf54e0ed39063a999"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/pipeline/publisher-synthetic-validation.log": {
+      "bytes": 253,
+      "sha256": "5d5fcf01515bbbcf95ab8d0775b671b584e6ffe93905f6d38858f9c40220d380"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/publish_integration.py": {
+      "bytes": 8308,
+      "sha256": "3982d7c2494e744914d5935d131f10446486bcd3f54e83dc9cd8b2bf4c1743b4"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/publisher_review_tests.py": {
+      "bytes": 14941,
+      "sha256": "e434faf3660951e93fe16b7c4d9854c079eec646cd48cafc647b21435dcc5926"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/publish_integration.py": {
+      "bytes": 8316,
+      "sha256": "ac3d75d840918118852c57faddd20e60761eb3b01bf4d11642711f3d0d66232a"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/publisher_review_tests.py": {
+      "bytes": 14941,
+      "sha256": "e434faf3660951e93fe16b7c4d9854c079eec646cd48cafc647b21435dcc5926"
+    }
+  },
+  "canonical_source_changed": false,
+  "checks": [
+    {
+      "detail": "All code, workspace-root layout, private-index/preimage guards, input paths, review authentication and nonforce push remain structurally identical.",
+      "name": "only_commit_message_AST_changed",
+      "passed": true
+    },
+    {
+      "detail": "Prior14941-byte test file is copied byte-for-byte, SHAe434faf...; every test runs against this exact new publisher.",
+      "name": "exact_copied_disposable_test_source",
+      "passed": true
+    },
+    {
+      "detail": "Two preserved-state publications and four changed-input refusals plus bounded streaming, descriptor replacement and stable-hardlink cases pass; all remote calls mocked.",
+      "name": "nine_synthetic_cases_pass",
+      "passed": true
+    },
+    {
+      "detail": "Real workspace and datasets HEAD/index hashes are equal before/after tests; only temporary repositories changed.",
+      "name": "ordinary_actual_heads_indexes_preserved",
+      "passed": true
+    },
+    {
+      "detail": "Publisher sits at W/artifacts/autoencoder-balanced-wording-20261007, so unchanged W=R.parents[1] and package root resolve correctly.",
+      "name": "root_experiment_layout_correct",
+      "passed": true
+    },
+    {
+      "detail": "Deterministic gzip diff and its full decoded byte/hash identity match prior/new source bodies.",
+      "name": "gzip_adaptation_exact_authenticated",
+      "passed": true
+    },
+    {
+      "detail": "Fetched-main ancestor, targeted parent-or-postimage SHA guard, exact changed-path bound, nonforce remote compare-and-swap and package-before-workspace gitlink guards remain unchanged.",
+      "name": "all_publication_CAS_guards_preserved",
+      "passed": true
+    },
+    {
+      "detail": "Publisher still requires exact reviewed scope, pipeline/publication-scope-independent-review.json sealing scope bytes and all required current-file hashes; adaptation review grants no scope or publication.",
+      "name": "required_final_scope_review_not_bypassed",
+      "passed": true
+    },
+    {
+      "detail": "Do not list old phase receipts as required current-file reviews if their artifacts name obsolete current plan/manifest/test paths. Keep original bytes historical; seal current/archive bindings in a separate final scope review.",
+      "name": "historical_receipts_must_not_assert_mutated_current_bindings",
+      "passed": true
+    }
+  ],
+  "final_actual_scope_review_required": true,
+  "findings": [],
+  "invocation": {
+    "datasets": "python3 /home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/publish_integration.py datasets --attempt <fresh_alnum_id>",
+    "independent_scope_review": "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/pipeline/publication-scope-independent-review.json",
+    "scope": "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/publication-scope.json",
+    "workspace": "python3 /home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/publish_integration.py workspace --attempt <fresh_alnum_id>"
+  },
+  "normal_git_state_preserved": true,
+  "passed": true,
+  "publication_executed": false,
+  "review_boundary": "Message-only adaptation and disposable tests; root must independently seal new exact P/W whitelist and bounded archive before publishing.",
+  "schema": "scoped-publisher-independent-adaptation-review/v1",
+  "source_or_model_runtime_executed": false,
+  "test_case_count": 9
+}

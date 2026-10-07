@@ -1,0 +1,85 @@
+{
+  "actual_remote_operations": 0,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/publish_integration.py": {
+      "bytes": 8308,
+      "sha256": "3982d7c2494e744914d5935d131f10446486bcd3f54e83dc9cd8b2bf4c1743b4"
+    }
+  },
+  "findings": [],
+  "models_or_source_runtime_executed": false,
+  "passed": true,
+  "results": [
+    {
+      "actual_remote_operations": 0,
+      "case": "datasets_success",
+      "expected_rejection": null,
+      "mocked_pushes": 1,
+      "normal_state_preserved": true,
+      "passed": true
+    },
+    {
+      "actual_remote_operations": 0,
+      "case": "workspace_success",
+      "expected_rejection": null,
+      "mocked_pushes": 1,
+      "normal_state_preserved": true,
+      "passed": true
+    },
+    {
+      "actual_remote_operations": 0,
+      "case": "upstream_preimage_changed",
+      "expected_rejection": "upstream preimage changed; reconcile: selected.py",
+      "mocked_pushes": 0,
+      "normal_state_preserved": true,
+      "passed": true
+    },
+    {
+      "actual_remote_operations": 0,
+      "case": "candidate_changed",
+      "expected_rejection": "candidate changed: selected.py",
+      "mocked_pushes": 0,
+      "normal_state_preserved": true,
+      "passed": true
+    },
+    {
+      "actual_remote_operations": 0,
+      "case": "scope_changed",
+      "expected_rejection": "reviewed artifact changed: /tmp/autoencoder-publisher-review-acaouuzz/review/publication-scope.json",
+      "mocked_pushes": 0,
+      "normal_state_preserved": true,
+      "passed": true
+    },
+    {
+      "actual_remote_operations": 0,
+      "case": "unsafe_path",
+      "expected_rejection": "closed normalized repository-relative path required",
+      "mocked_pushes": 0,
+      "normal_state_preserved": true,
+      "passed": true
+    },
+    {
+      "actual_remote_operations": 0,
+      "asset_bytes": 11010048,
+      "case": "stream_review_artifact_hash",
+      "full_asset_read_bytes_calls": 0,
+      "passed": true
+    },
+    {
+      "actual_remote_operations": 0,
+      "case": "stream_review_opened_replacement_restore",
+      "expected_rejection": "reviewed artifact replaced before hashing: /tmp/autoencoder-publisher-identity-review-r5tvjar4/asset.bin",
+      "passed": true,
+      "pathname_only_four_tuple_unchanged": true,
+      "replacement_restore_exercised": true
+    },
+    {
+      "actual_remote_operations": 0,
+      "artifact_unchanged": true,
+      "case": "stream_review_stable_hardlink",
+      "link_count": 2,
+      "passed": true
+    }
+  ],
+  "schema": "independent-integration-publisher-synthetic-validation/v1"
+}

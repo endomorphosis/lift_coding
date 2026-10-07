@@ -1,0 +1,1181 @@
+{
+  "Constitution_formalized": false,
+  "admitted": false,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/README.md": {
+      "bytes": 5647,
+      "sha256": "a82ae3e66350972b604dd3adfa5aa7703e50bf37546330bc9cb9a63be29caf03"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/RESULTS.md": {
+      "bytes": 10235,
+      "sha256": "ea5b239ed7c395f33a78b62d1e1c6b91e7cb35200391494519d292a15dcaf669"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/documentation-review/review_documentation.py": {
+      "bytes": 15636,
+      "sha256": "842ae41b5664b057406c66da137c577a6d8661d392642516cae67f7c75a38c35"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/documentation/reconstruction-decision.json": {
+      "bytes": 2849,
+      "sha256": "40f7098d844e50f98c9918692d0c7df4a98d4a59d6c2b951c7c811bcae7267ff"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/documentation/sampled-outputs.json": {
+      "bytes": 28295,
+      "sha256": "08d554e627b0c0bad6ce705c8f14b2dcbc8a3d98e13aebade0694997e6892372"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/evaluation-review/actual-evaluation-r1-compact.json": {
+      "bytes": 477360,
+      "sha256": "d8a68018f193c3e1511e9f2d695c427195be7f6e892bb5dcf1254d6fec8ef75f"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/evaluation-review/actual-evaluation-r1-parent-comparison.json": {
+      "bytes": 7432,
+      "sha256": "2543cfa503edc1f8dab67667b9c6d91e78f8795937cfddeb7e956af9b4bbe52e"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/initial-state.json": {
+      "bytes": 858,
+      "sha256": "44c43ca6402f7351cacae73100437c949bf6d9b22e23a2421e7b9e7d3d0b9d8b"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/predeclared-comparison-protocol.json": {
+      "bytes": 4255,
+      "sha256": "3ba0029bfe86d7ca45948bc4da7d8c847b21e97f0e10ac3e14a7163e8a7e4b8f"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/preflight-review/actual-preflight-384-r2-compact.json": {
+      "bytes": 19148,
+      "sha256": "55edf668acf5d1ae7cee7dceb10ac30b33c02f7f8f4d30eef6cfaec8a8e2bfb6"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/preparation-review/actual-preparation-r2-audit.json": {
+      "bytes": 351478,
+      "sha256": "85e7f4c8bf4cec3fa5707e8a41da36b5b2d54e968c52419a9dcbcbdf50e5df7c"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/retain_evidence.py": {
+      "bytes": 6537,
+      "sha256": "68fe6833d1ac483cee78da9fbff7e5d8ee06beba56a57bdfa60da57bd366c717"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/training-review/actual-training-384-r2-compact.json": {
+      "bytes": 112928,
+      "sha256": "24d9456d2d86b472d3a1907d8fee2635c33717198e10fab8d6077e725a8ec7a1"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/exposed_v3_48/actual-formula-fidelity.json": {
+      "bytes": 156558,
+      "sha256": "94ec281ef23e4f1f80b8dffe77c0c5f3e50fe6806ebc75b14ef29679f7364333"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/normative_train48/actual-formula-fidelity.json": {
+      "bytes": 159962,
+      "sha256": "1ae3b4d5608422942d89af8095298ff9a6928e018d6f7ae8a018746a3f462b7e"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/original_train48/actual-formula-fidelity.json": {
+      "bytes": 155878,
+      "sha256": "25489442f7a655112b6258e052e3324bd5a335b70e558b9a2cb1a001f0820f86"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/exposed_v3_48/actual-formula-fidelity.json": {
+      "bytes": 156560,
+      "sha256": "79b8eafc67b8673b501b6a4a5d6563ca2df26c019adb4c89ca9d2676f90e5041"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/normative_train48/actual-formula-fidelity.json": {
+      "bytes": 159962,
+      "sha256": "2c6e6958212644aa43c945932ca4c6383491132ae3be8c8586fa72bbed653f99"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/original_train48/actual-formula-fidelity.json": {
+      "bytes": 155878,
+      "sha256": "25489442f7a655112b6258e052e3324bd5a335b70e558b9a2cb1a001f0820f86"
+    }
+  },
+  "check_count": 166,
+  "checks": [
+    {
+      "name": "balanced-wording-reconstruction-decision/v1-clean",
+      "passed": true
+    },
+    {
+      "name": "balanced-wording-reconstruction-decision/v1-qualified-false",
+      "passed": true
+    },
+    {
+      "name": "balanced-wording-reconstruction-decision/v1-admitted-false",
+      "passed": true
+    },
+    {
+      "name": "balanced-wording-reconstruction-decision/v1-formalized-false",
+      "passed": true
+    },
+    {
+      "name": "balanced-wording-reconstruction-decision/v1-Constitution_formalized-false",
+      "passed": true
+    },
+    {
+      "name": "balanced-wording-reconstruction-decision/v1-lake_executed-false",
+      "passed": true
+    },
+    {
+      "name": "document-dependency-exact-/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/evaluation-review/actual-evaluation-r1-compact.json",
+      "passed": true
+    },
+    {
+      "name": "document-dependency-exact-/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/evaluation-review/actual-evaluation-r1-parent-comparison.json",
+      "passed": true
+    },
+    {
+      "name": "document-dependency-exact-/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/predeclared-comparison-protocol.json",
+      "passed": true
+    },
+    {
+      "name": "document-dependency-exact-/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/training-review/actual-training-384-r2-compact.json",
+      "passed": true
+    },
+    {
+      "name": "balanced-wording-authored-output-samples/v1-clean",
+      "passed": true
+    },
+    {
+      "name": "balanced-wording-authored-output-samples/v1-qualified-false",
+      "passed": true
+    },
+    {
+      "name": "balanced-wording-authored-output-samples/v1-admitted-false",
+      "passed": true
+    },
+    {
+      "name": "balanced-wording-authored-output-samples/v1-formalized-false",
+      "passed": true
+    },
+    {
+      "name": "balanced-wording-authored-output-samples/v1-Constitution_formalized-false",
+      "passed": true
+    },
+    {
+      "name": "balanced-wording-authored-output-samples/v1-lake_executed-false",
+      "passed": true
+    },
+    {
+      "name": "document-dependency-exact-/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/exposed_v3_48/actual-formula-fidelity.json",
+      "passed": true
+    },
+    {
+      "name": "document-dependency-exact-/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/normative_train48/actual-formula-fidelity.json",
+      "passed": true
+    },
+    {
+      "name": "document-dependency-exact-/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/original_train48/actual-formula-fidelity.json",
+      "passed": true
+    },
+    {
+      "name": "document-dependency-exact-/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/exposed_v3_48/actual-formula-fidelity.json",
+      "passed": true
+    },
+    {
+      "name": "document-dependency-exact-/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/normative_train48/actual-formula-fidelity.json",
+      "passed": true
+    },
+    {
+      "name": "document-dependency-exact-/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/original_train48/actual-formula-fidelity.json",
+      "passed": true
+    },
+    {
+      "name": "complete-physical-denominators",
+      "passed": true
+    },
+    {
+      "name": "two-endpoints-not-independent-replicates",
+      "passed": true
+    },
+    {
+      "name": "barrier-and-inherited-metadata-limits",
+      "passed": true
+    },
+    {
+      "name": "decision-denominators",
+      "passed": true
+    },
+    {
+      "name": "decision-formula-balanced-exposed_v3_48",
+      "passed": true
+    },
+    {
+      "name": "decision-formula-balanced-new_balanced_train48",
+      "passed": true
+    },
+    {
+      "name": "decision-formula-balanced-normative_train48",
+      "passed": true
+    },
+    {
+      "name": "decision-formula-balanced-original_train48",
+      "passed": true
+    },
+    {
+      "name": "decision-formula-control-exposed_v3_48",
+      "passed": true
+    },
+    {
+      "name": "decision-formula-control-new_balanced_train48",
+      "passed": true
+    },
+    {
+      "name": "decision-formula-control-normative_train48",
+      "passed": true
+    },
+    {
+      "name": "decision-formula-control-original_train48",
+      "passed": true
+    },
+    {
+      "name": "authenticated-parent-comparison",
+      "passed": true
+    },
+    {
+      "name": "balanced-rejected-control-unpromoted",
+      "passed": true
+    },
+    {
+      "name": "no-retroactive-selection-or-v3-fitting",
+      "passed": true
+    },
+    {
+      "name": "180-rule-cohort-scope",
+      "passed": true
+    },
+    {
+      "name": "persistent-source-action-miss",
+      "passed": true
+    },
+    {
+      "name": "original384-provenance-limit",
+      "passed": true
+    },
+    {
+      "name": "historical-schema-not-canonical-compiler",
+      "passed": true
+    },
+    {
+      "name": "historical-metadata-no-blinding",
+      "passed": true
+    },
+    {
+      "name": "next-helper-not-executed-fit",
+      "passed": true
+    },
+    {
+      "name": "parallel-contributions-not-pooled",
+      "passed": true
+    },
+    {
+      "name": "README-next-fit-unperformed",
+      "passed": true
+    },
+    {
+      "name": "three-illustrations-not-rate-estimate",
+      "passed": true
+    },
+    {
+      "name": "authored-sample-original_train48",
+      "passed": true
+    },
+    {
+      "name": "sample-UTF8-source-sha-original_train48",
+      "passed": true
+    },
+    {
+      "name": "sample-identity-original_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-exact-generated_ir-original_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-exact-generated_token_ids-original_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-exact-counts-original_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-exact-seven_facets-original_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-no-model-execution-original_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-no-admission-original_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-complete-seven-facets-original_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-actor-original_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-action-original_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-object-original_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-modality-original_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-conditions-original_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-exceptions-original_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-temporal-original_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-whole-rule-counts-original_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-declared-row-selection-original_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-identity-original_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-exact-generated_ir-original_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-exact-generated_token_ids-original_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-exact-counts-original_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-exact-seven_facets-original_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-no-model-execution-original_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-no-admission-original_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-complete-seven-facets-original_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-actor-original_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-action-original_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-object-original_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-modality-original_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-conditions-original_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-exceptions-original_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-temporal-original_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-whole-rule-counts-original_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-declared-row-selection-original_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "authored-sample-normative_train48",
+      "passed": true
+    },
+    {
+      "name": "sample-UTF8-source-sha-normative_train48",
+      "passed": true
+    },
+    {
+      "name": "sample-identity-normative_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-exact-generated_ir-normative_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-exact-generated_token_ids-normative_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-exact-counts-normative_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-exact-seven_facets-normative_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-no-model-execution-normative_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-no-admission-normative_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-complete-seven-facets-normative_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-actor-normative_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-action-normative_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-object-normative_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-modality-normative_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-conditions-normative_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-exceptions-normative_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-temporal-normative_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-whole-rule-counts-normative_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-declared-row-selection-normative_train48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-identity-normative_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-exact-generated_ir-normative_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-exact-generated_token_ids-normative_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-exact-counts-normative_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-exact-seven_facets-normative_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-no-model-execution-normative_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-no-admission-normative_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-complete-seven-facets-normative_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-actor-normative_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-action-normative_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-object-normative_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-modality-normative_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-conditions-normative_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-exceptions-normative_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-temporal-normative_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-whole-rule-counts-normative_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-declared-row-selection-normative_train48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "authored-sample-exposed_v3_48",
+      "passed": true
+    },
+    {
+      "name": "sample-UTF8-source-sha-exposed_v3_48",
+      "passed": true
+    },
+    {
+      "name": "sample-identity-exposed_v3_48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-exact-generated_ir-exposed_v3_48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-exact-generated_token_ids-exposed_v3_48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-exact-counts-exposed_v3_48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-exact-seven_facets-exposed_v3_48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-no-model-execution-exposed_v3_48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-no-admission-exposed_v3_48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-complete-seven-facets-exposed_v3_48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-actor-exposed_v3_48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-action-exposed_v3_48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-object-exposed_v3_48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-modality-exposed_v3_48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-conditions-exposed_v3_48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-exceptions-exposed_v3_48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-temporal-exposed_v3_48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-whole-rule-counts-exposed_v3_48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-declared-row-selection-exposed_v3_48-balanced-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-identity-exposed_v3_48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-exact-generated_ir-exposed_v3_48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-exact-generated_token_ids-exposed_v3_48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-exact-counts-exposed_v3_48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-exact-seven_facets-exposed_v3_48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-no-model-execution-exposed_v3_48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-no-admission-exposed_v3_48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-complete-seven-facets-exposed_v3_48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-actor-exposed_v3_48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-action-exposed_v3_48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-object-exposed_v3_48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-modality-exposed_v3_48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-conditions-exposed_v3_48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-exceptions-exposed_v3_48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-facet-temporal-exposed_v3_48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-independent-whole-rule-counts-exposed_v3_48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "sample-declared-row-selection-exposed_v3_48-control-wording-ce",
+      "passed": true
+    },
+    {
+      "name": "retainer-bounds",
+      "passed": true
+    },
+    {
+      "name": "raw-native-inventory-exclusions",
+      "passed": true
+    },
+    {
+      "name": "checkpoint-exclusion-scoped-to-RUN",
+      "passed": true
+    },
+    {
+      "name": "descriptor-path-stream-digest-fences",
+      "passed": true
+    },
+    {
+      "name": "immutable-new-archive-and-manifest",
+      "passed": true
+    },
+    {
+      "name": "retainer-only-stdlib-imports",
+      "passed": true
+    },
+    {
+      "name": "native-exclusion-scope-honest-about-output-observations",
+      "passed": true
+    },
+    {
+      "name": "prospective-source-bytes-within-cap",
+      "passed": true
+    },
+    {
+      "name": "root-initial-metadata-preserved",
+      "passed": true
+    },
+    {
+      "name": "failed-attempts-preserved",
+      "passed": true
+    },
+    {
+      "name": "parallel-cached-runtime-separate-owner-and-parity",
+      "passed": true
+    },
+    {
+      "name": "parallel-span-pilot-separate-denominator-and-limits",
+      "passed": true
+    }
+  ],
+  "findings": [],
+  "lake_executed": false,
+  "model_execution_performed": false,
+  "passed": true,
+  "proof_authority": false,
+  "qualified": false,
+  "resolved_prior_findings": [
+    {
+      "finding": "180-rule wording ambiguously included original interventions",
+      "resolution": "Explicit sixteen-cohort-panel scope and intervention cardinality exception."
+    },
+    {
+      "finding": "Prepared bank bodies contain native384 input vectors",
+      "resolution": "Explicit prepared bank exclusions and retained numerical-observation disclosure."
+    }
+  ],
+  "retention_source_scope": {
+    "actual_archive_audit_pending": true,
+    "archive_executed_by_review": false,
+    "checkpoint_and_prepared_source_inventory_bodies_excluded": true,
+    "compressed_cap_bytes": 90000000,
+    "compressed_cap_is_postcondition": true,
+    "inherited_vector_valued_numerical_outputs_retained": true,
+    "no_claim_all_vector_valued_observations_absent": true,
+    "prospective_member_count_at_review": 474,
+    "prospective_source_bytes_at_review": 232231185,
+    "runtime_helper_may_add_frozen_evidence_before_archive": true,
+    "source_cap_bytes": 300000000
+  },
+  "sample_join_results": [
+    {
+      "arm": "balanced-wording-ce",
+      "cohort": "original_train48",
+      "counts": {
+        "all_rules_preserved": 1,
+        "duplicate_rules": 0,
+        "eos_count": 1,
+        "expected_rules": 1,
+        "generated_rules": 1,
+        "invalid_rows": 0,
+        "invalid_rule_count": 0,
+        "order_mismatch_rows": 0,
+        "ordered_exact": 1,
+        "parsed_documents": 1,
+        "prediction_missing_rows": 0,
+        "rows": 1,
+        "syntax_valid": 1,
+        "unscorable_generation_rows": 0,
+        "valid_generated_rules": 1,
+        "whole_rules_extra": 0,
+        "whole_rules_missing": 0
+      },
+      "expected_rules": 1,
+      "generated_rules": 1,
+      "id": "authored-paragraph:train:1:2781747e520dee4d065cbd179ea0ba1312f691438d25e928a26d8a5c53b71447",
+      "seven_facets": {
+        "action": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        },
+        "actor": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        },
+        "conditions": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        },
+        "exceptions": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        },
+        "modality": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        },
+        "object": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        },
+        "temporal": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        }
+      }
+    },
+    {
+      "arm": "control-wording-ce",
+      "cohort": "original_train48",
+      "counts": {
+        "all_rules_preserved": 1,
+        "duplicate_rules": 0,
+        "eos_count": 1,
+        "expected_rules": 1,
+        "generated_rules": 1,
+        "invalid_rows": 0,
+        "invalid_rule_count": 0,
+        "order_mismatch_rows": 0,
+        "ordered_exact": 1,
+        "parsed_documents": 1,
+        "prediction_missing_rows": 0,
+        "rows": 1,
+        "syntax_valid": 1,
+        "unscorable_generation_rows": 0,
+        "valid_generated_rules": 1,
+        "whole_rules_extra": 0,
+        "whole_rules_missing": 0
+      },
+      "expected_rules": 1,
+      "generated_rules": 1,
+      "id": "authored-paragraph:train:1:2781747e520dee4d065cbd179ea0ba1312f691438d25e928a26d8a5c53b71447",
+      "seven_facets": {
+        "action": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        },
+        "actor": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        },
+        "conditions": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        },
+        "exceptions": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        },
+        "modality": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        },
+        "object": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        },
+        "temporal": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        }
+      }
+    },
+    {
+      "arm": "balanced-wording-ce",
+      "cohort": "normative_train48",
+      "counts": {
+        "all_rules_preserved": 0,
+        "duplicate_rules": 0,
+        "eos_count": 1,
+        "expected_rules": 4,
+        "generated_rules": 4,
+        "invalid_rows": 0,
+        "invalid_rule_count": 0,
+        "order_mismatch_rows": 0,
+        "ordered_exact": 0,
+        "parsed_documents": 1,
+        "prediction_missing_rows": 0,
+        "rows": 1,
+        "syntax_valid": 1,
+        "unscorable_generation_rows": 0,
+        "valid_generated_rules": 4,
+        "whole_rules_extra": 1,
+        "whole_rules_missing": 1
+      },
+      "expected_rules": 4,
+      "generated_rules": 4,
+      "id": "normative-training-v1:6dc6b822739a784739aeb1f38367e569c8ba08a4fe40f42ad7ff11943ecb6713",
+      "seven_facets": {
+        "action": {
+          "correct": 4,
+          "total": 4,
+          "unordered_correct": 4
+        },
+        "actor": {
+          "correct": 4,
+          "total": 4,
+          "unordered_correct": 4
+        },
+        "conditions": {
+          "correct": 4,
+          "total": 4,
+          "unordered_correct": 4
+        },
+        "exceptions": {
+          "correct": 4,
+          "total": 4,
+          "unordered_correct": 4
+        },
+        "modality": {
+          "correct": 3,
+          "total": 4,
+          "unordered_correct": 3
+        },
+        "object": {
+          "correct": 4,
+          "total": 4,
+          "unordered_correct": 4
+        },
+        "temporal": {
+          "correct": 4,
+          "total": 4,
+          "unordered_correct": 4
+        }
+      }
+    },
+    {
+      "arm": "control-wording-ce",
+      "cohort": "normative_train48",
+      "counts": {
+        "all_rules_preserved": 1,
+        "duplicate_rules": 0,
+        "eos_count": 1,
+        "expected_rules": 4,
+        "generated_rules": 4,
+        "invalid_rows": 0,
+        "invalid_rule_count": 0,
+        "order_mismatch_rows": 0,
+        "ordered_exact": 1,
+        "parsed_documents": 1,
+        "prediction_missing_rows": 0,
+        "rows": 1,
+        "syntax_valid": 1,
+        "unscorable_generation_rows": 0,
+        "valid_generated_rules": 4,
+        "whole_rules_extra": 0,
+        "whole_rules_missing": 0
+      },
+      "expected_rules": 4,
+      "generated_rules": 4,
+      "id": "normative-training-v1:6dc6b822739a784739aeb1f38367e569c8ba08a4fe40f42ad7ff11943ecb6713",
+      "seven_facets": {
+        "action": {
+          "correct": 4,
+          "total": 4,
+          "unordered_correct": 4
+        },
+        "actor": {
+          "correct": 4,
+          "total": 4,
+          "unordered_correct": 4
+        },
+        "conditions": {
+          "correct": 4,
+          "total": 4,
+          "unordered_correct": 4
+        },
+        "exceptions": {
+          "correct": 4,
+          "total": 4,
+          "unordered_correct": 4
+        },
+        "modality": {
+          "correct": 4,
+          "total": 4,
+          "unordered_correct": 4
+        },
+        "object": {
+          "correct": 4,
+          "total": 4,
+          "unordered_correct": 4
+        },
+        "temporal": {
+          "correct": 4,
+          "total": 4,
+          "unordered_correct": 4
+        }
+      }
+    },
+    {
+      "arm": "balanced-wording-ce",
+      "cohort": "exposed_v3_48",
+      "counts": {
+        "all_rules_preserved": 0,
+        "duplicate_rules": 0,
+        "eos_count": 1,
+        "expected_rules": 1,
+        "generated_rules": 1,
+        "invalid_rows": 0,
+        "invalid_rule_count": 0,
+        "order_mismatch_rows": 0,
+        "ordered_exact": 0,
+        "parsed_documents": 1,
+        "prediction_missing_rows": 0,
+        "rows": 1,
+        "syntax_valid": 1,
+        "unscorable_generation_rows": 0,
+        "valid_generated_rules": 1,
+        "whole_rules_extra": 1,
+        "whole_rules_missing": 1
+      },
+      "expected_rules": 1,
+      "generated_rules": 1,
+      "id": "fresh-modality-v3:fc5e287da9b1bef21f873f5a6972bfb9378b2bafefcd77d095f035a2d4502c09",
+      "seven_facets": {
+        "action": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        },
+        "actor": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        },
+        "conditions": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        },
+        "exceptions": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        },
+        "modality": {
+          "correct": 0,
+          "total": 1,
+          "unordered_correct": 0
+        },
+        "object": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        },
+        "temporal": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        }
+      }
+    },
+    {
+      "arm": "control-wording-ce",
+      "cohort": "exposed_v3_48",
+      "counts": {
+        "all_rules_preserved": 0,
+        "duplicate_rules": 0,
+        "eos_count": 1,
+        "expected_rules": 1,
+        "generated_rules": 1,
+        "invalid_rows": 0,
+        "invalid_rule_count": 0,
+        "order_mismatch_rows": 0,
+        "ordered_exact": 0,
+        "parsed_documents": 1,
+        "prediction_missing_rows": 0,
+        "rows": 1,
+        "syntax_valid": 1,
+        "unscorable_generation_rows": 0,
+        "valid_generated_rules": 1,
+        "whole_rules_extra": 1,
+        "whole_rules_missing": 1
+      },
+      "expected_rules": 1,
+      "generated_rules": 1,
+      "id": "fresh-modality-v3:fc5e287da9b1bef21f873f5a6972bfb9378b2bafefcd77d095f035a2d4502c09",
+      "seven_facets": {
+        "action": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        },
+        "actor": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        },
+        "conditions": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        },
+        "exceptions": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        },
+        "modality": {
+          "correct": 0,
+          "total": 1,
+          "unordered_correct": 0
+        },
+        "object": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        },
+        "temporal": {
+          "correct": 1,
+          "total": 1,
+          "unordered_correct": 1
+        }
+      }
+    }
+  ],
+  "schema": "balanced-wording-documentation-retention-source-independent-review/v1",
+  "scope_limits": [
+    "Read-only stdlib document/static utility review and six saved sample-output joins; no model reruns/imports, resources, scheduler mutation, Git mutation, downloads or canonical edits.",
+    "Completed preparation/training/evaluation claims bind the already independently audited frozen evidence; numerical auditors and outputs were not changed or rerun.",
+    "Archive member/count/digest/exclusion/coverage audit remains separate until actual immutable archive completion.",
+    "Authored fixtures reuse target meanings; v3 is exposed development. No semantic, proof, compiler-speed, admission or default-checkpoint authority."
+  ],
+  "upstream_primary_git_bindings": [
+    {
+      "bytes": 6916,
+      "commit": "8b1cff7c9a83e8ed04459abc962409c8d2bdb09a",
+      "path": "docs/autoencoders/normative_cached_legal_ir_runtime.md",
+      "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "sha256": "3b556f37bd184d61e4786fa914086ca45b7531f309b2b1c531d06cbc7ee23cc9"
+    },
+    {
+      "bytes": 10168,
+      "commit": "8b1cff7c9a83e8ed04459abc962409c8d2bdb09a",
+      "path": "docs/implementation/legal_scope_span_decoder_pilot_20261007.md",
+      "repository": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "sha256": "b1fa4103f0d58ab3667d2e057ee4203e52714b092a01b9d63beada01263f9089"
+    }
+  ]
+}

@@ -1,0 +1,587 @@
+{
+  "actual_evaluation_complete": true,
+  "endpoint_aliases": {
+    "balanced": true,
+    "control": true
+  },
+  "initial_new_bank_all_four_scalars_correct": true,
+  "initial_source_bank_metrics": {
+    "balanced": {
+      "action": {
+        "correct": 180,
+        "cross_entropy": 0.007968143722384226,
+        "minimum_target_margin": 3.5982800722122192,
+        "total": 180
+      },
+      "actor": {
+        "correct": 180,
+        "cross_entropy": 2.8026317794428558e-06,
+        "minimum_target_margin": 9.965038299560547,
+        "total": 180
+      },
+      "modality": {
+        "correct": 180,
+        "cross_entropy": 0.011557690993329438,
+        "minimum_target_margin": 1.3129775524139404,
+        "total": 180
+      },
+      "object": {
+        "correct": 180,
+        "cross_entropy": 1.463650234592409e-07,
+        "minimum_target_margin": 13.132976531982422,
+        "total": 180
+      }
+    },
+    "control": {
+      "action": {
+        "correct": 179,
+        "cross_entropy": 0.03801324646608211,
+        "minimum_target_margin": -0.262833833694458,
+        "total": 180
+      },
+      "actor": {
+        "correct": 180,
+        "cross_entropy": 1.6440014189081058e-05,
+        "minimum_target_margin": 7.838993430137634,
+        "total": 180
+      },
+      "modality": {
+        "correct": 180,
+        "cross_entropy": 0.020812593865377836,
+        "minimum_target_margin": 1.164494514465332,
+        "total": 180
+      },
+      "object": {
+        "correct": 180,
+        "cross_entropy": 2.4562388966210667e-07,
+        "minimum_target_margin": 11.835426807403564,
+        "total": 180
+      }
+    }
+  },
+  "parent_v3_31_source": "Root and completed independent evaluation audit; previously exposed, not a fresh holdout",
+  "postfit_bank_metrics": {
+    "balanced": {
+      "balanced": {
+        "action": {
+          "correct": 180,
+          "cross_entropy": 0.005403502901494845,
+          "minimum_target_margin": 3.8288819789886475,
+          "total": 180
+        },
+        "actor": {
+          "correct": 180,
+          "cross_entropy": 1.3017765120477205e-06,
+          "minimum_target_margin": 10.637534976005554,
+          "total": 180
+        },
+        "modality": {
+          "correct": 180,
+          "cross_entropy": 9.373866961526447e-05,
+          "minimum_target_margin": 6.50405752658844,
+          "total": 180
+        },
+        "object": {
+          "correct": 180,
+          "cross_entropy": 8.945576007353869e-08,
+          "minimum_target_margin": 13.608804702758789,
+          "total": 180
+        }
+      },
+      "control": {
+        "action": {
+          "correct": 179,
+          "cross_entropy": 0.032691367222705284,
+          "minimum_target_margin": -0.26024413108825684,
+          "total": 180
+        },
+        "actor": {
+          "correct": 180,
+          "cross_entropy": 8.400028109850016e-06,
+          "minimum_target_margin": 8.390342831611633,
+          "total": 180
+        },
+        "modality": {
+          "correct": 170,
+          "cross_entropy": 0.13603972610842302,
+          "minimum_target_margin": -2.1938610076904297,
+          "total": 180
+        },
+        "object": {
+          "correct": 180,
+          "cross_entropy": 1.1481876695837753e-07,
+          "minimum_target_margin": 12.767426013946533,
+          "total": 180
+        }
+      }
+    },
+    "control": {
+      "balanced": {
+        "action": {
+          "correct": 180,
+          "cross_entropy": 0.005401698761459449,
+          "minimum_target_margin": 3.8289002776145935,
+          "total": 180
+        },
+        "actor": {
+          "correct": 180,
+          "cross_entropy": 1.4094992750932376e-06,
+          "minimum_target_margin": 10.59745979309082,
+          "total": 180
+        },
+        "modality": {
+          "correct": 180,
+          "cross_entropy": 0.012869357514513088,
+          "minimum_target_margin": 0.983959436416626,
+          "total": 180
+        },
+        "object": {
+          "correct": 180,
+          "cross_entropy": 9.68171518166293e-08,
+          "minimum_target_margin": 13.887427806854248,
+          "total": 180
+        }
+      },
+      "control": {
+        "action": {
+          "correct": 179,
+          "cross_entropy": 0.03270255404228467,
+          "minimum_target_margin": -0.26044249534606934,
+          "total": 180
+        },
+        "actor": {
+          "correct": 180,
+          "cross_entropy": 8.843467772281757e-06,
+          "minimum_target_margin": 8.304715275764465,
+          "total": 180
+        },
+        "modality": {
+          "correct": 180,
+          "cross_entropy": 0.002990705106857271,
+          "minimum_target_margin": 3.4651923179626465,
+          "total": 180
+        },
+        "object": {
+          "correct": 180,
+          "cross_entropy": 2.2204605194531267e-07,
+          "minimum_target_margin": 11.810139894485474,
+          "total": 180
+        }
+      }
+    }
+  },
+  "proposed_only": true,
+  "qualification_false": true,
+  "schema": "balanced-wording-next-retention-observed-boundaries/v1",
+  "selected_panels": [
+    {
+      "arm": "control-wording-ce",
+      "cohort": "original_train48",
+      "eos": 48,
+      "expected_rules": 180,
+      "generated_rules": 180,
+      "modality_sources": {
+        "reference_sites": 180,
+        "source_correct": 180,
+        "source_correct_formula_wrong": 0,
+        "source_incorrect": 0,
+        "source_wrong_formula_correct": 0,
+        "unavailable": 0,
+        "unvisited": 0,
+        "visited": 180
+      },
+      "ordered_exact": 48,
+      "seven_facets": {
+        "action": {
+          "correct": 180,
+          "total": 180
+        },
+        "actor": {
+          "correct": 180,
+          "total": 180
+        },
+        "conditions": {
+          "correct": 180,
+          "total": 180
+        },
+        "exceptions": {
+          "correct": 180,
+          "total": 180
+        },
+        "modality": {
+          "correct": 180,
+          "total": 180
+        },
+        "object": {
+          "correct": 180,
+          "total": 180
+        },
+        "temporal": {
+          "correct": 180,
+          "total": 180
+        }
+      },
+      "valid_generated_rules": 180,
+      "whole_rules_extra": 0,
+      "whole_rules_missing": 0
+    },
+    {
+      "arm": "control-wording-ce",
+      "cohort": "normative_train48",
+      "eos": 48,
+      "expected_rules": 180,
+      "generated_rules": 180,
+      "modality_sources": {
+        "reference_sites": 180,
+        "source_correct": 180,
+        "source_correct_formula_wrong": 0,
+        "source_incorrect": 0,
+        "source_wrong_formula_correct": 0,
+        "unavailable": 0,
+        "unvisited": 0,
+        "visited": 180
+      },
+      "ordered_exact": 48,
+      "seven_facets": {
+        "action": {
+          "correct": 180,
+          "total": 180
+        },
+        "actor": {
+          "correct": 180,
+          "total": 180
+        },
+        "conditions": {
+          "correct": 180,
+          "total": 180
+        },
+        "exceptions": {
+          "correct": 180,
+          "total": 180
+        },
+        "modality": {
+          "correct": 180,
+          "total": 180
+        },
+        "object": {
+          "correct": 180,
+          "total": 180
+        },
+        "temporal": {
+          "correct": 180,
+          "total": 180
+        }
+      },
+      "valid_generated_rules": 180,
+      "whole_rules_extra": 0,
+      "whole_rules_missing": 0
+    },
+    {
+      "arm": "control-wording-ce",
+      "cohort": "new_balanced_train48",
+      "eos": 48,
+      "expected_rules": 180,
+      "generated_rules": 180,
+      "modality_sources": {
+        "reference_sites": 180,
+        "source_correct": 180,
+        "source_correct_formula_wrong": 0,
+        "source_incorrect": 0,
+        "source_wrong_formula_correct": 0,
+        "unavailable": 0,
+        "unvisited": 0,
+        "visited": 180
+      },
+      "ordered_exact": 48,
+      "seven_facets": {
+        "action": {
+          "correct": 180,
+          "total": 180
+        },
+        "actor": {
+          "correct": 180,
+          "total": 180
+        },
+        "conditions": {
+          "correct": 180,
+          "total": 180
+        },
+        "exceptions": {
+          "correct": 180,
+          "total": 180
+        },
+        "modality": {
+          "correct": 180,
+          "total": 180
+        },
+        "object": {
+          "correct": 180,
+          "total": 180
+        },
+        "temporal": {
+          "correct": 180,
+          "total": 180
+        }
+      },
+      "valid_generated_rules": 180,
+      "whole_rules_extra": 0,
+      "whole_rules_missing": 0
+    },
+    {
+      "arm": "control-wording-ce",
+      "cohort": "exposed_v3_48",
+      "eos": 48,
+      "expected_rules": 180,
+      "generated_rules": 180,
+      "modality_sources": {
+        "reference_sites": 180,
+        "source_correct": 166,
+        "source_correct_formula_wrong": 5,
+        "source_incorrect": 14,
+        "source_wrong_formula_correct": 0,
+        "unavailable": 0,
+        "unvisited": 0,
+        "visited": 180
+      },
+      "ordered_exact": 33,
+      "seven_facets": {
+        "action": {
+          "correct": 179,
+          "total": 180
+        },
+        "actor": {
+          "correct": 180,
+          "total": 180
+        },
+        "conditions": {
+          "correct": 180,
+          "total": 180
+        },
+        "exceptions": {
+          "correct": 180,
+          "total": 180
+        },
+        "modality": {
+          "correct": 161,
+          "total": 180
+        },
+        "object": {
+          "correct": 180,
+          "total": 180
+        },
+        "temporal": {
+          "correct": 180,
+          "total": 180
+        }
+      },
+      "valid_generated_rules": 180,
+      "whole_rules_extra": 20,
+      "whole_rules_missing": 20
+    },
+    {
+      "arm": "balanced-wording-ce",
+      "cohort": "original_train48",
+      "eos": 48,
+      "expected_rules": 180,
+      "generated_rules": 180,
+      "modality_sources": {
+        "reference_sites": 180,
+        "source_correct": 180,
+        "source_correct_formula_wrong": 0,
+        "source_incorrect": 0,
+        "source_wrong_formula_correct": 0,
+        "unavailable": 0,
+        "unvisited": 0,
+        "visited": 180
+      },
+      "ordered_exact": 48,
+      "seven_facets": {
+        "action": {
+          "correct": 180,
+          "total": 180
+        },
+        "actor": {
+          "correct": 180,
+          "total": 180
+        },
+        "conditions": {
+          "correct": 180,
+          "total": 180
+        },
+        "exceptions": {
+          "correct": 180,
+          "total": 180
+        },
+        "modality": {
+          "correct": 180,
+          "total": 180
+        },
+        "object": {
+          "correct": 180,
+          "total": 180
+        },
+        "temporal": {
+          "correct": 180,
+          "total": 180
+        }
+      },
+      "valid_generated_rules": 180,
+      "whole_rules_extra": 0,
+      "whole_rules_missing": 0
+    },
+    {
+      "arm": "balanced-wording-ce",
+      "cohort": "normative_train48",
+      "eos": 48,
+      "expected_rules": 180,
+      "generated_rules": 180,
+      "modality_sources": {
+        "reference_sites": 180,
+        "source_correct": 170,
+        "source_correct_formula_wrong": 9,
+        "source_incorrect": 10,
+        "source_wrong_formula_correct": 0,
+        "unavailable": 0,
+        "unvisited": 0,
+        "visited": 180
+      },
+      "ordered_exact": 33,
+      "seven_facets": {
+        "action": {
+          "correct": 180,
+          "total": 180
+        },
+        "actor": {
+          "correct": 180,
+          "total": 180
+        },
+        "conditions": {
+          "correct": 180,
+          "total": 180
+        },
+        "exceptions": {
+          "correct": 180,
+          "total": 180
+        },
+        "modality": {
+          "correct": 161,
+          "total": 180
+        },
+        "object": {
+          "correct": 180,
+          "total": 180
+        },
+        "temporal": {
+          "correct": 180,
+          "total": 180
+        }
+      },
+      "valid_generated_rules": 180,
+      "whole_rules_extra": 19,
+      "whole_rules_missing": 19
+    },
+    {
+      "arm": "balanced-wording-ce",
+      "cohort": "new_balanced_train48",
+      "eos": 48,
+      "expected_rules": 180,
+      "generated_rules": 180,
+      "modality_sources": {
+        "reference_sites": 180,
+        "source_correct": 180,
+        "source_correct_formula_wrong": 0,
+        "source_incorrect": 0,
+        "source_wrong_formula_correct": 0,
+        "unavailable": 0,
+        "unvisited": 0,
+        "visited": 180
+      },
+      "ordered_exact": 48,
+      "seven_facets": {
+        "action": {
+          "correct": 180,
+          "total": 180
+        },
+        "actor": {
+          "correct": 180,
+          "total": 180
+        },
+        "conditions": {
+          "correct": 180,
+          "total": 180
+        },
+        "exceptions": {
+          "correct": 180,
+          "total": 180
+        },
+        "modality": {
+          "correct": 180,
+          "total": 180
+        },
+        "object": {
+          "correct": 180,
+          "total": 180
+        },
+        "temporal": {
+          "correct": 180,
+          "total": 180
+        }
+      },
+      "valid_generated_rules": 180,
+      "whole_rules_extra": 0,
+      "whole_rules_missing": 0
+    },
+    {
+      "arm": "balanced-wording-ce",
+      "cohort": "exposed_v3_48",
+      "eos": 48,
+      "expected_rules": 180,
+      "generated_rules": 180,
+      "modality_sources": {
+        "reference_sites": 180,
+        "source_correct": 146,
+        "source_correct_formula_wrong": 6,
+        "source_incorrect": 34,
+        "source_wrong_formula_correct": 0,
+        "unavailable": 0,
+        "unvisited": 0,
+        "visited": 180
+      },
+      "ordered_exact": 19,
+      "seven_facets": {
+        "action": {
+          "correct": 179,
+          "total": 180
+        },
+        "actor": {
+          "correct": 180,
+          "total": 180
+        },
+        "conditions": {
+          "correct": 180,
+          "total": 180
+        },
+        "exceptions": {
+          "correct": 180,
+          "total": 180
+        },
+        "modality": {
+          "correct": 140,
+          "total": 180
+        },
+        "object": {
+          "correct": 180,
+          "total": 180
+        },
+        "temporal": {
+          "correct": 180,
+          "total": 180
+        }
+      },
+      "valid_generated_rules": 180,
+      "whole_rules_extra": 41,
+      "whole_rules_missing": 41
+    }
+  ],
+  "v3_selection_allowed": false
+}

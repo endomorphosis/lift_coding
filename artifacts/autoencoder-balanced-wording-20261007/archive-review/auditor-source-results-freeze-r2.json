@@ -1,0 +1,50 @@
+{
+  "actual_archive_audited": true,
+  "admitted": false,
+  "archive_members_independently_hashed": 494,
+  "archive_sha256": "22b23d4b72a8b7c864986289c052b5e0dd64bb500f6a29d9d7e2761b613582bc",
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/archive-review/actual-archive-independent-review.json": {
+      "bytes": 3166,
+      "sha256": "c64d335dbb1e6246e75fe3c7e1c331a5d0b9f18992201989f42280c07b64d898"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/archive-review/audit_archive-r2.py": {
+      "bytes": 15874,
+      "sha256": "00f6641e08f3da970b0b12bcb3c88cc1db2c599f7c5e08ac576885f058df620a"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/archive-review/audit_archive.py": {
+      "bytes": 15830,
+      "sha256": "65d97b8eff70c441e3171f64393d7ec3ef28fce704d61376e046504808fd5ece"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/archive-review/auditor-r1-invocation.json": {
+      "bytes": 560,
+      "sha256": "ca348c6074dda338ca08e0d6d492e9a164fc1ea888faa5c40d0ae8a575636509"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/archive-review/auditor-source-freeze.json": {
+      "bytes": 1119,
+      "sha256": "e967e26ee9e895829eadeef7d8c67629bcf1803a07bcbe296bdc4684300ab8e1"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/archive-review/test_audit_archive-r2.py": {
+      "bytes": 6568,
+      "sha256": "01c6b610e8058980dc83dcae1bc354b9b5e76b37c722b010eba449316a34ad3c"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/archive-review/test_audit_archive.py": {
+      "bytes": 5744,
+      "sha256": "dc8dd5ad504c5dbcbb9994fdb907c7f0f5decd836c5fdf0c59802c9072aa78ec"
+    }
+  },
+  "auditor_r1_archived_source_preserved": true,
+  "compressed_bytes": 57431839,
+  "findings": [],
+  "lake_executed": false,
+  "model_or_encoder_execution_performed": false,
+  "numerical_auditors_rerun": false,
+  "passed": true,
+  "proof_authority": false,
+  "pure_tests_passed": 17,
+  "qualified": false,
+  "r2_postarchive_auditor_only_correction": "PurePosixPath.parts order matches authentic pathlib.Path source order; every member still must match manifest order and source SHA/size.",
+  "resource_or_foreign_scheduler_actions_performed": false,
+  "schema": "balanced-wording-archive-auditor-source-results-freeze-r2/v1",
+  "source_bytes": 233307180
+}

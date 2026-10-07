@@ -1,0 +1,103 @@
+{
+  "fetch_performed": false,
+  "git_mutations": false,
+  "remote_visibility_scope": "Current advertised origin heads/tags only; unreachable commits could remain server objects but that is not asserted.",
+  "repositories": {
+    "datasets": {
+      "advertised_objects_unavailable_locally": [],
+      "advertised_ref_count": 19,
+      "locally_available_advertised_commit_refs": 19,
+      "tip_reachability": [
+        {
+          "github_commit_url_asserted": false,
+          "reachable_from_current_advertised_origin_refs": [],
+          "retained_local_refs": [
+            "refs/heads/publication/main-20261004/datasets"
+          ],
+          "status": "local_retained_tip_only_not_reachable_from_current_advertised_origin_refs",
+          "tip": "5eedd23dd8b8ae4e2cac1716f00f1fcaf19a2801"
+        },
+        {
+          "github_commit_url_asserted": false,
+          "reachable_from_current_advertised_origin_refs": [],
+          "retained_local_refs": [
+            "refs/heads/publication/main-refresh-20261004/datasets-01"
+          ],
+          "status": "local_retained_tip_only_not_reachable_from_current_advertised_origin_refs",
+          "tip": "23540627b1cf6515df0fd84c9417b4cbdb91234a"
+        },
+        {
+          "github_commit_url_asserted": false,
+          "reachable_from_current_advertised_origin_refs": [],
+          "retained_local_refs": [
+            "refs/heads/recovery/local-source-20261004"
+          ],
+          "status": "local_retained_tip_only_not_reachable_from_current_advertised_origin_refs",
+          "tip": "b8a9bb35a8234d1c12204f2bae34d2a0c2635056"
+        }
+      ]
+    },
+    "workspace": {
+      "advertised_objects_unavailable_locally": [],
+      "advertised_ref_count": 60,
+      "locally_available_advertised_commit_refs": 60,
+      "tip_reachability": [
+        {
+          "github_commit_url_asserted": false,
+          "reachable_from_current_advertised_origin_refs": [],
+          "retained_local_refs": [
+            "refs/heads/codex/joint-conditioning-20261005-01"
+          ],
+          "status": "local_retained_tip_only_not_reachable_from_current_advertised_origin_refs",
+          "tip": "8c02d655e2d086bd644a9011ea67325060ef87bc"
+        },
+        {
+          "github_commit_url_asserted": false,
+          "reachable_from_current_advertised_origin_refs": [],
+          "retained_local_refs": [
+            "refs/heads/publication/canonical-current-root-20261004/3560d0e1d9383e2100675998"
+          ],
+          "status": "local_retained_tip_only_not_reachable_from_current_advertised_origin_refs",
+          "tip": "ef9c8e4d94d9d427d1bd60168e9bd6d0a15cfe38"
+        },
+        {
+          "github_commit_url_asserted": false,
+          "reachable_from_current_advertised_origin_refs": [],
+          "retained_local_refs": [
+            "refs/heads/publication/canonical-wip-20261004/3560d0e1d9383e2100675998"
+          ],
+          "status": "local_retained_tip_only_not_reachable_from_current_advertised_origin_refs",
+          "tip": "bc64e1a2d3d3428ae3823fd4754d0051a61d485d"
+        },
+        {
+          "github_commit_url_asserted": false,
+          "reachable_from_current_advertised_origin_refs": [],
+          "retained_local_refs": [
+            "refs/heads/publication/main-20261004/root-02"
+          ],
+          "status": "local_retained_tip_only_not_reachable_from_current_advertised_origin_refs",
+          "tip": "ce3e21da27d23bfa4ac5490be9a5cb44798945f2"
+        },
+        {
+          "github_commit_url_asserted": false,
+          "reachable_from_current_advertised_origin_refs": [],
+          "retained_local_refs": [
+            "refs/heads/publication/main-20261004/root-03"
+          ],
+          "status": "local_retained_tip_only_not_reachable_from_current_advertised_origin_refs",
+          "tip": "57fd19895ce42ad68f87b3d7126fbf19da285bdb"
+        },
+        {
+          "github_commit_url_asserted": false,
+          "reachable_from_current_advertised_origin_refs": [],
+          "retained_local_refs": [
+            "refs/heads/publication/main-refresh-20261004/root-01"
+          ],
+          "status": "local_retained_tip_only_not_reachable_from_current_advertised_origin_refs",
+          "tip": "9d1944b9a9fd95abbb6297b4c7d34a1312809f14"
+        }
+      ]
+    }
+  },
+  "schema": "historical-tip-origin-reachability/v1"
+}

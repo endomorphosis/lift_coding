@@ -1,0 +1,20 @@
+{
+  "copies": {
+    "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/autoencoder/dual_bank_wording_replay/dual_bank_retention.py": {
+      "bytes": 26660,
+      "sha256": "15accfcf8bbc4e578e32ca7842ac338be2b563458c4c90a85fbe18429da000f1",
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/dual_bank_retention.py"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/scripts/ops/autoencoder/dual_bank_wording_replay/test_dual_bank_retention.py": {
+      "bytes": 17284,
+      "sha256": "9161ee5cd16bc08db76e4635ec2b6d1d15b3199fb7b686fd846f47c1188bc589",
+      "source": "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/test_dual_bank_retention.py"
+    }
+  },
+  "findings": [],
+  "model_executed": false,
+  "passed": true,
+  "qualified": false,
+  "schema": "pure-replay-exact-publication-copy/v1",
+  "trainer_wired": false
+}

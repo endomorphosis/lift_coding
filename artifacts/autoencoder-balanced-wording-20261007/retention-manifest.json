@@ -1,0 +1,2509 @@
+{
+  "archive": {
+    "bytes": 57431839,
+    "path": "artifacts/autoencoder-balanced-wording-20261007/balanced-wording-evidence.tar.gz",
+    "sha256": "22b23d4b72a8b7c864986289c052b5e0dd64bb500f6a29d9d7e2761b613582bc"
+  },
+  "checkpoint_bodies_archived": false,
+  "embedding_exclusion_scope": "raw producer output and prepared source/bank inventories",
+  "entries": [
+    {
+      "bytes": 5647,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/README.md",
+      "sha256": "a82ae3e66350972b604dd3adfa5aa7703e50bf37546330bc9cb9a63be29caf03"
+    },
+    {
+      "bytes": 10235,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/RESULTS.md",
+      "sha256": "ea5b239ed7c395f33a78b62d1e1c6b91e7cb35200391494519d292a15dcaf669"
+    },
+    {
+      "bytes": 15830,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/archive-review/audit_archive.py",
+      "sha256": "65d97b8eff70c441e3171f64393d7ec3ef28fce704d61376e046504808fd5ece"
+    },
+    {
+      "bytes": 1119,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/archive-review/auditor-source-freeze.json",
+      "sha256": "e967e26ee9e895829eadeef7d8c67629bcf1803a07bcbe296bdc4684300ab8e1"
+    },
+    {
+      "bytes": 5744,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/archive-review/test_audit_archive.py",
+      "sha256": "dc8dd5ad504c5dbcbb9994fdb907c7f0f5decd836c5fdf0c59802c9072aa78ec"
+    },
+    {
+      "bytes": 4280,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/README.md",
+      "sha256": "8e152654800d869e6e5b2b0e57858ea8e14f0ffd338c4e87b8b6690309dcaa1d"
+    },
+    {
+      "bytes": 4657,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/draft-readiness-r1.json",
+      "sha256": "aba7c2ef12d22d6dc28ea46a095e0093d51861a822d49c12430a82e48e95c3d5"
+    },
+    {
+      "bytes": 4696,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/draft-readiness.json",
+      "sha256": "c6a4dd2dc34c7409b0ba1446ba55057a8087c145fd0190fe462f0c0f822b773f"
+    },
+    {
+      "bytes": 2523,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/pure-contract-tests.log",
+      "sha256": "4c0c55dbe6ee7fc3b5727a75169e34dfcde2ee6b62271f51086f26c8af3be0e3"
+    },
+    {
+      "bytes": 11337,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r1/author-check.json",
+      "sha256": "f228c73399c7c0cce9bf5e9f59f77e8bf087d9b5ce0358c069b7bc0ca639c6f1"
+    },
+    {
+      "bytes": 777089,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r1/candidate-bank.json",
+      "sha256": "6f685e61ec236216a1a1b171a3dc3ed30f5740d6248c8becba9255bceabe3698"
+    },
+    {
+      "bytes": 169450,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r1/original90-target-identities.json",
+      "sha256": "9ab31f749988e5966845ce99864e8d9a61dce57de953bc6949bcc2a97a44c96b"
+    },
+    {
+      "bytes": 12908,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r1/overlap-and-exposure.json",
+      "sha256": "f7dce72a3bf5355b7a3db6f2a1ab668f0985444854e53bc9e7840b2789ac290d"
+    },
+    {
+      "bytes": 398906,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r1/rejected-drafts.json",
+      "sha256": "af08528d25de467765f5f286c94705a8cc44bda31a178bebacc69f158fa4a959"
+    },
+    {
+      "bytes": 11992,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r2/author-check.json",
+      "sha256": "a74f5ab3331133e46e299b31be7cc857eee94b18aeeba51c499e347f816c1052"
+    },
+    {
+      "bytes": 777089,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r2/candidate-bank.json",
+      "sha256": "6f685e61ec236216a1a1b171a3dc3ed30f5740d6248c8becba9255bceabe3698"
+    },
+    {
+      "bytes": 633015,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r2/clause-references.json",
+      "sha256": "5fba1bb06aee8436a0acb4ad8aee3b111298db7f86ec9b3e6a9af42ca02b83e3"
+    },
+    {
+      "bytes": 254926,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r2/control-treatment-pairing-census.json",
+      "sha256": "a0a929570fbd50c4da4ea0f0df17c2027debe58f2414d4bfacfddbeaa4b69485"
+    },
+    {
+      "bytes": 169450,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r2/original90-target-identities.json",
+      "sha256": "9ab31f749988e5966845ce99864e8d9a61dce57de953bc6949bcc2a97a44c96b"
+    },
+    {
+      "bytes": 13192,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r2/overlap-and-exposure.json",
+      "sha256": "2a1b9b23ff63b2748da285be8dbf097c8c116671b087060b46b4ae65f162277a"
+    },
+    {
+      "bytes": 149853,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r2/pairing-census.json",
+      "sha256": "59f444ac779e352c62d0734fa2ba79d45dbffa8f2ab902bf392db3b01ca1d8eb"
+    },
+    {
+      "bytes": 231859,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r2/prior-source-inventories.json",
+      "sha256": "c3d4c95c2e60550622a6e38d3521c9ade2764228119bd749c2ecea341c7f1e4b"
+    },
+    {
+      "bytes": 4377,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r2/private-packing-preview-recipe.json",
+      "sha256": "40d5c1566640ceb678e1661aef14f53638d2b27fba090f56d7ae95eeba925e7d"
+    },
+    {
+      "bytes": 373101,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r2/references.json",
+      "sha256": "44f1d766696ca1e84d8b0d73e312562fdc9d3827fbcb067a27967d3d968a9785"
+    },
+    {
+      "bytes": 398906,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r2/rejected-drafts.json",
+      "sha256": "af08528d25de467765f5f286c94705a8cc44bda31a178bebacc69f158fa4a959"
+    },
+    {
+      "bytes": 7914,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r2/source-receipt.json",
+      "sha256": "53c3602e4c02ff11e87cbc84a4164bafefab4c73355287a305d2d265387dc75a"
+    },
+    {
+      "bytes": 16353,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r2/source-rows.json",
+      "sha256": "18a33db236de3465b7793cb667f7438f8cc71a9e2311c14c59a182c5586ffd5e"
+    },
+    {
+      "bytes": 11992,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r3/author-check.json",
+      "sha256": "a74f5ab3331133e46e299b31be7cc857eee94b18aeeba51c499e347f816c1052"
+    },
+    {
+      "bytes": 777089,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r3/candidate-bank.json",
+      "sha256": "6f685e61ec236216a1a1b171a3dc3ed30f5740d6248c8becba9255bceabe3698"
+    },
+    {
+      "bytes": 633015,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r3/clause-references.json",
+      "sha256": "5fba1bb06aee8436a0acb4ad8aee3b111298db7f86ec9b3e6a9af42ca02b83e3"
+    },
+    {
+      "bytes": 254926,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r3/control-treatment-pairing-census.json",
+      "sha256": "a0a929570fbd50c4da4ea0f0df17c2027debe58f2414d4bfacfddbeaa4b69485"
+    },
+    {
+      "bytes": 169450,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r3/original90-target-identities.json",
+      "sha256": "9ab31f749988e5966845ce99864e8d9a61dce57de953bc6949bcc2a97a44c96b"
+    },
+    {
+      "bytes": 13452,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r3/overlap-and-exposure.json",
+      "sha256": "0740c4c0ff50cfa860f36b8077a79250685c3899ac80660104779ae9f2bb644b"
+    },
+    {
+      "bytes": 149853,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r3/pairing-census.json",
+      "sha256": "59f444ac779e352c62d0734fa2ba79d45dbffa8f2ab902bf392db3b01ca1d8eb"
+    },
+    {
+      "bytes": 231859,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r3/prior-source-inventories.json",
+      "sha256": "c3d4c95c2e60550622a6e38d3521c9ade2764228119bd749c2ecea341c7f1e4b"
+    },
+    {
+      "bytes": 4377,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r3/private-packing-preview-recipe.json",
+      "sha256": "5657b8bca7a491ad68f0bcaed327221808a070742b44fb0cc9573f4f17eb8e66"
+    },
+    {
+      "bytes": 373101,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r3/references.json",
+      "sha256": "44f1d766696ca1e84d8b0d73e312562fdc9d3827fbcb067a27967d3d968a9785"
+    },
+    {
+      "bytes": 398906,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r3/rejected-drafts.json",
+      "sha256": "af08528d25de467765f5f286c94705a8cc44bda31a178bebacc69f158fa4a959"
+    },
+    {
+      "bytes": 7914,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r3/source-receipt.json",
+      "sha256": "53c28df5a3bada9dd5671272d4b3961d0e153f28ddae927b8e0ddcf1060d7dd0"
+    },
+    {
+      "bytes": 16353,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/results/draft-r3/source-rows.json",
+      "sha256": "18a33db236de3465b7793cb667f7438f8cc71a9e2311c14c59a182c5586ffd5e"
+    },
+    {
+      "bytes": 43288,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/source/build_balanced_wording_candidates.py",
+      "sha256": "802bf91d12e2ce5dc4d7103af0c0081dd9ab56eade31094caea768212d8d07a4"
+    },
+    {
+      "bytes": 11143,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/source-results-freeze.json",
+      "sha256": "e408d5f67f5ab5d6e39b363753fe76ca2cab7f4641435ce0e1642667210fe52a"
+    },
+    {
+      "bytes": 8686,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/candidates/tests/test_candidate_contracts.py",
+      "sha256": "fe0241eb60389663342748160ff7cf12e6ee10bed4b9ef084d47e5f1425decf8"
+    },
+    {
+      "bytes": 2849,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/documentation/reconstruction-decision.json",
+      "sha256": "40f7098d844e50f98c9918692d0c7df4a98d4a59d6c2b951c7c811bcae7267ff"
+    },
+    {
+      "bytes": 28295,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/documentation/sampled-outputs.json",
+      "sha256": "08d554e627b0c0bad6ce705c8f14b2dcbc8a3d98e13aebade0694997e6892372"
+    },
+    {
+      "bytes": 36648,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/documentation-review/evidence-documentation-and-retention-source-review.json",
+      "sha256": "78c2d49a23b137102a9e52728f5a78dba19c3909a21f68fe981cf36e24e1b58f"
+    },
+    {
+      "bytes": 15636,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/documentation-review/review_documentation.py",
+      "sha256": "842ae41b5664b057406c66da137c577a6d8661d392642516cae67f7c75a38c35"
+    },
+    {
+      "bytes": 477360,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/evaluation-review/actual-evaluation-r1-compact.json",
+      "sha256": "d8a68018f193c3e1511e9f2d695c427195be7f6e892bb5dcf1254d6fec8ef75f"
+    },
+    {
+      "bytes": 12012856,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/evaluation-review/actual-evaluation-r1-independent-review.json",
+      "sha256": "e44fa8400b4d80408b0bf78e4b60003356dfe44b1fb97e35051ee3c8368ba089"
+    },
+    {
+      "bytes": 7432,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/evaluation-review/actual-evaluation-r1-parent-comparison.json",
+      "sha256": "2543cfa503edc1f8dab67667b9c6d91e78f8795937cfddeb7e956af9b4bbe52e"
+    },
+    {
+      "bytes": 30563,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/evaluation-review/audit_evaluation-r2.py",
+      "sha256": "b94da41603bbc77989d834d2ecb98abb5c6d105efed6c5eacc93d12d649abd81"
+    },
+    {
+      "bytes": 30349,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/evaluation-review/audit_evaluation.py",
+      "sha256": "452d6aa95a9bc3f8ebef395323437e92337019399976d4accc6f758dc4a4a626"
+    },
+    {
+      "bytes": 2132,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/evaluation-review/auditor-source-freeze.json",
+      "sha256": "502e91a7c4a9157612596cea7a1c76db5be46584a1b6c20163b6c363a0ce0e8f"
+    },
+    {
+      "bytes": 2818,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/evaluation-review/auditor-source-results-freeze-r2.json",
+      "sha256": "5f75c5b9d99387afa0b1de0ec5847f82100ef0a3c711726bbc8db29afdc500fc"
+    },
+    {
+      "bytes": 4148,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/evaluation-review/test_audit_evaluation-r2.py",
+      "sha256": "18d5ac6c76b8a57d71247793adec9d0ba5bc9a9b3dca9dea86c12643bd8a362b"
+    },
+    {
+      "bytes": 3671,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/evaluation-review/test_audit_evaluation.py",
+      "sha256": "173f81792322f8b0d16de2864ad14cea9aaef76b376f1d4d2e508010df7adcec"
+    },
+    {
+      "bytes": 561,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/continuation-stage-r1-rejected-before-execution.json",
+      "sha256": "7b92bd18eee4c596f873811ce4a9db58014b829ad3b88b5110de9b057dd33c98"
+    },
+    {
+      "bytes": 382889,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/evaluation-execution-readiness.json",
+      "sha256": "5757a5db01aec90bc3be8eda5a3bd5933dead6780c43dccbe3061d20378ab298"
+    },
+    {
+      "bytes": 1778,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/guardian-adaptation.diff",
+      "sha256": "6ac6916cfbc9e36a34b492432b3dc158748fe77471f96cbe634ddb0ec0694d6c"
+    },
+    {
+      "bytes": 15827,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/guardian-proposal-independent-review-r1.json",
+      "sha256": "93ea1e7256a3535c032c68810203f047e5f94b0bff0380ff4d08e62fb17975d2"
+    },
+    {
+      "bytes": 16818,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/guardian-proposal-independent-review.json",
+      "sha256": "e0871d277176ef1a0736f4cb6260a3004a9c4da55af6ee20217d9887978adb5d"
+    },
+    {
+      "bytes": 2705,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/guardian-proposal.json",
+      "sha256": "175e0e7675f907e31976239bc2beb1c4e28be14071b1bc076cd159598e8d4e45"
+    },
+    {
+      "bytes": 2567,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/local384-asset-inspection.json",
+      "sha256": "589f11fa50ef0f2131ebd90a89045621f6795ba0dbefdf1c92de01e58fea6021"
+    },
+    {
+      "bytes": 90830,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/native384-producer-closure.json",
+      "sha256": "47cfc8792e9e266c0b89d9cdf61b263ae5ebeef15cf1822208e1f91125efa684"
+    },
+    {
+      "bytes": 8009,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/parent-input-closure-delta.json",
+      "sha256": "ae8b091f2b6208448c683e08baa0b2fec41c74fb0b3d72fc2d01b86c4db54d4e"
+    },
+    {
+      "bytes": 552,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/preflight-384-r1-child-error-binding.json",
+      "sha256": "846b0b55a20f4b9ac45b29529850239a986654a6713a0c99a8957bf1ecee96f6"
+    },
+    {
+      "bytes": 1646,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/preflight-384-r1-failure-source-binding.json",
+      "sha256": "eda36892c96568e0eebdd0ff98b039935eeaf6c74bee799ce631f5f2481f26cd"
+    },
+    {
+      "bytes": 847,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/preflight-384-r1-owned-post-failure-absence.json",
+      "sha256": "b6eec1579ba7be93ece7e896b5af80c465c03507d5b6d0b47c0d52280a4c0e6a"
+    },
+    {
+      "bytes": 358316,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/preflight-execution-readiness-r2.json",
+      "sha256": "a6d5720f2be40eebcf472dcff34ca53219c0d8bdcbc7d3df569db9f42ca6309c"
+    },
+    {
+      "bytes": 357133,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/preflight-execution-readiness.json",
+      "sha256": "3578158d07b8c4ce57b3f4b3280cad2e2869c8409b47b0ba1a5374eab2e81d7f"
+    },
+    {
+      "bytes": 28227,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/preparation-execution-readiness-r1.json",
+      "sha256": "330b2faaff01a64df8aff6d01c7f7f37bb7f3202d6ee8a3acf7db0984a6c5b35"
+    },
+    {
+      "bytes": 32591,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/preparation-execution-readiness-r2.json",
+      "sha256": "d48fd05fb3d62d2bbb0d6c06d1c810171ec8b76f4ce8428d4469f1e28baf957a"
+    },
+    {
+      "bytes": 28227,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/preparation-execution-readiness.json",
+      "sha256": "330b2faaff01a64df8aff6d01c7f7f37bb7f3202d6ee8a3acf7db0984a6c5b35"
+    },
+    {
+      "bytes": 1012,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/preparation-launch-aborted-before-admission.json",
+      "sha256": "a6bf35187a136811a9df4d2ba6ffd419f46ff7bab7c3c4aa4006a916b2046ad8"
+    },
+    {
+      "bytes": 785,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/preparation-seal-instructions.json",
+      "sha256": "e2d77ceeff72579076548d1d1544a9a96dd79de7ff0364c834a50d1277a913b0"
+    },
+    {
+      "bytes": 8743,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/preparation-tests/preparation_source_snapshot.py",
+      "sha256": "09f5f20c1804556f997a5d166b42af52e8d2538797c5ec4a4e639e24e62f7a38"
+    },
+    {
+      "bytes": 1831,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/preparation-tests/pure-tests-receipt.json",
+      "sha256": "19fa907a630474ce50f8c7d72bc3e413ff4c5d199ebec47db0376b84b8df0b0e"
+    },
+    {
+      "bytes": 1157,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/preparation-tests/pure-tests.log",
+      "sha256": "9d2be6e65963c8a3eb84abbb9f200348ac93997b173d128801fbd92d7f92bcf6"
+    },
+    {
+      "bytes": 6395,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/preparation-tests/test_preparation_namespace.py",
+      "sha256": "9b8e1226104905f851111628329ab017dbaf43eb18286986039c54a7b06cfea1"
+    },
+    {
+      "bytes": 12525,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/review_evaluation_readiness.py",
+      "sha256": "f0a34058407fbb75c30173c5901b02846b848311ed3ee4c86f79683b7df06dd3"
+    },
+    {
+      "bytes": 17743,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/review_preparation_readiness.py",
+      "sha256": "a2095941dd41f9a84399dc16318b065e34f7df15f7685a490aaac1ce134b43de"
+    },
+    {
+      "bytes": 21502,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/review_preparation_readiness_r2.py",
+      "sha256": "6b94faba4fcbbf278a5b8bc05c6b8f48048bc4a33d204194687d37e9c7158261"
+    },
+    {
+      "bytes": 10158,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/review_training_readiness.py",
+      "sha256": "008244c2ee2bc7593e4e183de7b0961cc3ff8d89a748702b30e647437918374f"
+    },
+    {
+      "bytes": 19007,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/review_training_readiness_input_r2.py",
+      "sha256": "b0ee74ae025c52e9ceb7cca4dd214a49d5b365262d8cb89151e8b32842a59a5b"
+    },
+    {
+      "bytes": 14684,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/review_training_readiness_r3.py",
+      "sha256": "dbd3786564c1c89b54f220034e2f8fe04327d2279b3a70892213bc6b922767c0"
+    },
+    {
+      "bytes": 684,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/training-384-r1-child-error-binding.json",
+      "sha256": "18a27639c60b04e63b2d0f18a822a08d2f9aebb98df2ebf1c86611cd7a72e472"
+    },
+    {
+      "bytes": 728,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/training-384-r1-owned-post-failure-absence.json",
+      "sha256": "89f8d5fc87de7ee17e7ac78020cc0d61785754c6d581e5772e3cbf1d8703d89d"
+    },
+    {
+      "bytes": 380962,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/training-execution-readiness-r2.json",
+      "sha256": "261573d97b513677b7d712aa990a8e485e6c93c6931f09e1b692c98b9bf301ba"
+    },
+    {
+      "bytes": 369029,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/guardian/training-execution-readiness.json",
+      "sha256": "b2ef1defad6581ab0be458c9e2d6c3118eaaae5c5f03b3a2c498ba14a3474b48"
+    },
+    {
+      "bytes": 858,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/initial-state.json",
+      "sha256": "44c43ca6402f7351cacae73100437c949bf6d9b22e23a2421e7b9e7d3d0b9d8b"
+    },
+    {
+      "bytes": 9201,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/design.md",
+      "sha256": "79498e8419bf2864c9717eafc248ffded3aaf77ad42ed43d374b2a015ad5244c"
+    },
+    {
+      "bytes": 26660,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/dual_bank_retention.py",
+      "sha256": "15accfcf8bbc4e578e32ca7842ac338be2b563458c4c90a85fbe18429da000f1"
+    },
+    {
+      "bytes": 4537,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/implementation-contract.json",
+      "sha256": "05e1d875d44c08287c69fa009fdf31ec0b59e8d5cb426cf4eefa3166bfe92f1c"
+    },
+    {
+      "bytes": 14514,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/observed-outcome.json",
+      "sha256": "d010355165a9c686dbf847bc68af44f0384f167f226e9d352bdcd84d963dfe86"
+    },
+    {
+      "bytes": 443751,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/proposed-dual-bank-schedule.json",
+      "sha256": "11a9c660f5101dbcf2981cfa0d451d13c6a81ebbc75b7ad2699e07d37106e2e1"
+    },
+    {
+      "bytes": 3242,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/pure-tests-validation.log",
+      "sha256": "9737535a4408f1f97d261affd61cbd4c6ee13c049822044920a4cb2467d1eb4b"
+    },
+    {
+      "bytes": 1737,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/pure-validation.json",
+      "sha256": "ef19728a2824525c7d534bce194c0a37e2f5dec85d40d71a26ca151849e3e438"
+    },
+    {
+      "bytes": 19,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/ruff-validation.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "bytes": 2139,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/schedule-census-proof.json",
+      "sha256": "c08f96a09541ed50b4b10fafd03001b8f5c5df09423edfc01a0aab312b1e52b9"
+    },
+    {
+      "bytes": 2835,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/source-results-freeze.json",
+      "sha256": "e3af37a3d650dccf0199c78619961c66d427f33d683a0e203643548e70ffa55d"
+    },
+    {
+      "bytes": 17284,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/test_dual_bank_retention.py",
+      "sha256": "9161ee5cd16bc08db76e4635ec2b6d1d15b3199fb7b686fd846f47c1188bc589"
+    },
+    {
+      "bytes": 4255,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/predeclared-comparison-protocol.json",
+      "sha256": "3ba0029bfe86d7ca45948bc4da7d8c847b21e97f0e10ac3e14a7163e8a7e4b8f"
+    },
+    {
+      "bytes": 19148,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/preflight-review/actual-preflight-384-r2-compact.json",
+      "sha256": "55edf668acf5d1ae7cee7dceb10ac30b33c02f7f8f4d30eef6cfaec8a8e2bfb6"
+    },
+    {
+      "bytes": 1324224,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/preflight-review/actual-preflight-384-r2-independent-review.json",
+      "sha256": "5a8879a30675b6a7ad9e8b950fe1522b4eeffffd3580941ef8af62e9cf1eef80"
+    },
+    {
+      "bytes": 4488,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/preflight-review/actual-preflight-384-r2-log-supplement.json",
+      "sha256": "448521a20a0807f898d62495e56b19daba0a85e6b9807f4ac74352f61b3a69fd"
+    },
+    {
+      "bytes": 12882,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/preflight-review/audit_failed_preflight.py",
+      "sha256": "132709b5671dd6de1e9fc4bba2b50f4701d7fccff344ceb5b1d64929dc7ae7b2"
+    },
+    {
+      "bytes": 40150,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/preflight-review/audit_preflight-r2.py",
+      "sha256": "260a51b7526003b199b627a7e1a3f7e9e9e96ad85b4fe37d2acc7779890861d6"
+    },
+    {
+      "bytes": 38803,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/preflight-review/audit_preflight.py",
+      "sha256": "1171096628e0cbb49d616f0e242c058dbed4751d52b76a65b056d0fd4b3e0932"
+    },
+    {
+      "bytes": 1850,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/preflight-review/auditor-source-freeze.json",
+      "sha256": "b5aa9265661a9524e1eea3604a3d53ed211cfed55879659d8ebb6c5a404e635d"
+    },
+    {
+      "bytes": 2221,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/preflight-review/auditor-source-results-freeze-r2.json",
+      "sha256": "fb96d92a1dbf0bd22c20d3e6015f700039e30f1dca92df475fa62e40216414e2"
+    },
+    {
+      "bytes": 13405,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/preflight-review/failed-preflight-384-r1-independent-review.json",
+      "sha256": "83a896afa318ce7fd164fec66a8169ef3810081aa1f32effe0570d6a2fb84da1"
+    },
+    {
+      "bytes": 4591,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/preflight-review/test_audit_preflight-r2.py",
+      "sha256": "cc9a7045d4319b91925ca8421fe76c52513815f78bffd702f62a41fbdcf918d7"
+    },
+    {
+      "bytes": 4588,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/preflight-review/test_audit_preflight.py",
+      "sha256": "e671101c7ae6ecc903f5435b11bad59fd848965d7cef5789a65ea8ae9be98cfb"
+    },
+    {
+      "bytes": 351478,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/preparation-review/actual-preparation-r2-audit.json",
+      "sha256": "85e7f4c8bf4cec3fa5707e8a41da36b5b2d54e968c52419a9dcbcbdf50e5df7c"
+    },
+    {
+      "bytes": 19600,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/preparation-review/audit_preparation-r1.py",
+      "sha256": "2f0527b835607063bb7e7361e4a539445af0830b84b7158d6e25cea49759071a"
+    },
+    {
+      "bytes": 21682,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/preparation-review/audit_preparation.py",
+      "sha256": "ce3fd514b87264945af3d22a876f218cb67ee2d0195210d595095016765150df"
+    },
+    {
+      "bytes": 12093,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/publication/advertised-origin-refs.json",
+      "sha256": "e357a59f7ce0dfa665592504443f290612cbe7e9358a487ce088967bcce6245e"
+    },
+    {
+      "bytes": 209694,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/publication/final-main-worktree-inventory.json",
+      "sha256": "7e549e885479efa0493996f3c217677e84d8fa791de23e6bf97dcfb69a431e3b"
+    },
+    {
+      "bytes": 26660,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/publication/final-main-worktree-reconciliation-r1.json",
+      "sha256": "c9243b438f9e0896fc438360cd1fe55a3a2470aaecfae445cd9942255186cb12"
+    },
+    {
+      "bytes": 3646,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/publication/final-main-worktree-reconciliation-r1.md",
+      "sha256": "005c6d9c05cf9190a6b481a8932250b1cb71e4706def7641c45b6996aee8f0e5"
+    },
+    {
+      "bytes": 29877,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/publication/final-main-worktree-reconciliation.json",
+      "sha256": "d7582493d1f604731a37d444f6a9d4463bcc657c157bd4a9c06f518631ef2fcf"
+    },
+    {
+      "bytes": 4468,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/publication/final-main-worktree-reconciliation.md",
+      "sha256": "121e6b1b4b4b2e94c7ed07ddf3d4ca21f735a8e6d3951b70ac3fc72c2e657e4c"
+    },
+    {
+      "bytes": 460669,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/publication/historical-autoencoder-intake.json",
+      "sha256": "55381aed20631825002d22ed0af7ea68c873ae7188e2279c697ddc868607c6f0"
+    },
+    {
+      "bytes": 7115248,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/publication/historical-divergent-delta-audit.json",
+      "sha256": "563027ea2826ff913fbe9bb687128dd9e082b5f92f490107551e71d0c26060c1"
+    },
+    {
+      "bytes": 4321,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/publication/historical-tip-origin-reachability.json",
+      "sha256": "14ef23f0eb2126a877bf8b7556de6fd3916e39224b78d2fd12d733c24593fabd"
+    },
+    {
+      "bytes": 15251,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/publication/published-owner-bindings.json",
+      "sha256": "d261b197fef9bef2af559d5959902bbbd4d982b8d141e8342e37196ebce9e8fb"
+    },
+    {
+      "bytes": 2146,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/publication/reconciliation-source-results-freeze.json",
+      "sha256": "af3dbed9156593c4c358167359dcaa94157a13d55e30baf09dcee83f1f36c177"
+    },
+    {
+      "bytes": 6537,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/retain_evidence.py",
+      "sha256": "68fe6833d1ac483cee78da9fbff7e5d8ee06beba56a57bdfa60da57bd366c717"
+    },
+    {
+      "bytes": 1973,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/README.md",
+      "sha256": "cef2755aa7d19fc5c0180d6bd2ccb9d3c8b725a2a560dacad91881351989da18"
+    },
+    {
+      "bytes": 22259,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/audit_candidate_bank.py",
+      "sha256": "856e9396268dfdf0b4e81b833257abd5c7492fbb76641d8e5cbda3705855a972"
+    },
+    {
+      "bytes": 25848,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/audit_continuation_readiness.py",
+      "sha256": "1dfc3a2ffb068937ca3bd4dac0c607b2bf4e1184e8a38ef829ad0ecfdc2f13b9"
+    },
+    {
+      "bytes": 27445,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/audit_continuation_readiness_r3.py",
+      "sha256": "daec14079eef6e0acb693df52c185cbeed3986863372593b002bd4622afdbe83"
+    },
+    {
+      "bytes": 16103,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/audit_evaluation_source.py",
+      "sha256": "4fab7c41cb1d0f3eb5e740d2dd7d0677ca0b2632dabdcfcbf8efeede138c3120"
+    },
+    {
+      "bytes": 1031,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/candidate-audit-pure-tests-receipt.json",
+      "sha256": "d1835ee6fb63cef6ff400fc8b0f7c42e441f5364cb915d553f4d318fb9e9c036"
+    },
+    {
+      "bytes": 1815,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/candidate-audit-pure-tests.log",
+      "sha256": "7aadc28b51357d74cb937efbfbff46caf2c8c844cc14e8bf8e3359ea6fa34058"
+    },
+    {
+      "bytes": 23749,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/candidate-pair-independent-review-draft-r3.json",
+      "sha256": "2899d2b5a0b302af0c1cbb797087ffc2c3a25ae82843f47b115ef209fc205d53"
+    },
+    {
+      "bytes": 125502,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/candidate-pair-review-rows-draft-r3.jsonl",
+      "sha256": "cb1fc08e3e0b538a4882c2b6216ec2042a44150d09e2b1c66497b39d526a4544"
+    },
+    {
+      "bytes": 128,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/continuation-independent-pure-tests-r1.log",
+      "sha256": "510e74d282722862b19f83ce9340be079cb382a08a81da3cb2910a7009d36ec8"
+    },
+    {
+      "bytes": 128,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/continuation-independent-pure-tests.log",
+      "sha256": "510e74d282722862b19f83ce9340be079cb382a08a81da3cb2910a7009d36ec8"
+    },
+    {
+      "bytes": 358726,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/continuation-source-independent-review-r3.json",
+      "sha256": "e9b186f864194a33ecede7e0326243c258d5e7c1d8c5eda4b68e9e78433281cf"
+    },
+    {
+      "bytes": 357119,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/continuation-source-independent-review.json",
+      "sha256": "09cc5b76f628375733f89979084cfc260fc410459dea06e2c4d6520325d0789e"
+    },
+    {
+      "bytes": 10405,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/continuation-source-r2/experiment-source/assemble_balanced_wording_inputs.py",
+      "sha256": "20daab84c1c98f9cc1e5f84a8442c0cb5e71d295fa0076d38c731ab2065e02c3"
+    },
+    {
+      "bytes": 19873,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/continuation-source-r2/experiment-source/balanced_wording_runtime_adapter.py",
+      "sha256": "7c0962bdfe03bed5ad39d2eb8e7e1a698b1c8da96fdccc1d9104339fc856dd87"
+    },
+    {
+      "bytes": 25561,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/continuation-source-r2/experiment-source/scripts/ops/autoencoder/benchmark_balanced_wording_continuation.py",
+      "sha256": "577d3346b9231f17f9ec095c512ce140ce0743616507cbafe367893c65a722c8"
+    },
+    {
+      "bytes": 8743,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/continuation-source-r2/experiment-source/scripts/ops/autoencoder/prepare_balanced_wording_sources.py",
+      "sha256": "09f5f20c1804556f997a5d166b42af52e8d2538797c5ec4a4e639e24e62f7a38"
+    },
+    {
+      "bytes": 129,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/continuation-source-r2/pure-tests.log",
+      "sha256": "589eb5c6dd45c001ca088d015235bdffaee08b9894d199435ecc4c86e0b97fc7"
+    },
+    {
+      "bytes": 32919,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/continuation-source-r2/tests/test_balanced_wording_runtime_adapter.py",
+      "sha256": "320a1cfb29c7e75783c752654efffad1d83b554bc950e59aee18de46b4d7f85e"
+    },
+    {
+      "bytes": 10405,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/continuation-source-r3/experiment-source/assemble_balanced_wording_inputs.py",
+      "sha256": "20daab84c1c98f9cc1e5f84a8442c0cb5e71d295fa0076d38c731ab2065e02c3"
+    },
+    {
+      "bytes": 20710,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/continuation-source-r3/experiment-source/balanced_wording_runtime_adapter.py",
+      "sha256": "334506648a870f0b68bc3a8935f23ed4c8fc71ed3a50a12df285eb21801e0fe6"
+    },
+    {
+      "bytes": 25582,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/continuation-source-r3/experiment-source/scripts/ops/autoencoder/benchmark_balanced_wording_continuation.py",
+      "sha256": "a7efdb15f8a0de45226a15ea919859ab87d827831a6293aa307bab01da34ef4e"
+    },
+    {
+      "bytes": 8743,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/continuation-source-r3/experiment-source/scripts/ops/autoencoder/prepare_balanced_wording_sources.py",
+      "sha256": "09f5f20c1804556f997a5d166b42af52e8d2538797c5ec4a4e639e24e62f7a38"
+    },
+    {
+      "bytes": 131,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/continuation-source-r3/pure-tests.log",
+      "sha256": "da1ad2ab3af8e146b9d234b6875554e3d8f45b5cd5136a44d37ec4df3afc89ec"
+    },
+    {
+      "bytes": 36495,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/continuation-source-r3/tests/test_balanced_wording_runtime_adapter.py",
+      "sha256": "eeef8b75b84767f2ccd92ebe7f9dac8ac49fb102c5eba0fc1a992372953c9acc"
+    },
+    {
+      "bytes": 98067,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/current-main-worktree-inventory.json",
+      "sha256": "1b3881e25b482d77888c9dea2199dbf5d2b5d5e1c1b00abc91e64422fb6d1c39"
+    },
+    {
+      "bytes": 12218,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/evaluation-source-independent-review.json",
+      "sha256": "27ac1214b6b56784f5a8d2b514ee12ec9a2f8237c769a9a47a5c8b9530fe6572"
+    },
+    {
+      "bytes": 16062,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/evaluation-source-r1/evaluation-tests/test_balanced_wording_evaluation.py",
+      "sha256": "c422f05e520cca4e705ac3104b8f8fe58808dbf9c38bc8237df2e840d2901bee"
+    },
+    {
+      "bytes": 27769,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/evaluation-source-r1/experiment-source/scripts/ops/autoencoder/evaluate_balanced_wording_continuation.py",
+      "sha256": "abe2003aa60507403265ae964993ed767c57da4462dc5b207cfe88006c821722"
+    },
+    {
+      "bytes": 113,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/evaluation-source-r1/pure-tests.log",
+      "sha256": "a5c25525e34b87e235e41637d1d7e32c3fee1db0bcfdc6d0dd518a13c7e8a27f"
+    },
+    {
+      "bytes": 5382,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/gate-owner-main-bindings.json",
+      "sha256": "2f4389a2125dd06defd314765a7b31065490c38e2564adb40affaba42f4a0a62"
+    },
+    {
+      "bytes": 3056,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/inherited-renderer-interface-census.json",
+      "sha256": "099b6af10a04a7ca2fe7e02515694326b931ef144db1936aae92e5520322c640"
+    },
+    {
+      "bytes": 17071,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/label-gates-and-next-protocol-review.json",
+      "sha256": "e5f8d41664f4e9285baea3a04715a91ba18cfae59d4770f4dbedc4f435b4bbb3"
+    },
+    {
+      "bytes": 114,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/runtime-adapter-independent-pure-tests.log",
+      "sha256": "103ca5c98f761d34ed2892cc40592dad797212f6a9906e7b77ba8c201f84446d"
+    },
+    {
+      "bytes": 10381,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/runtime-adapter-independent-review.json",
+      "sha256": "2c4d0fe5d59e48e274077aa9b9d4df3812e61dab5ca093dc138ad525793b468d"
+    },
+    {
+      "bytes": 5880,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/review/test_candidate_audit_contracts.py",
+      "sha256": "beb7f3cd1c8d95275dc69e226d66b7d639a2259171fcecc406d8d6fa7e28ca3b"
+    },
+    {
+      "bytes": 5351,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/README.md",
+      "sha256": "7f89771a326c00134fc7a3d21c2e8dc3b9e8261ca6b522f53c37f1384109abcb"
+    },
+    {
+      "bytes": 1481,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/assembly-receipt-r1.json",
+      "sha256": "5423d46b983dcffb85f1267ca2bdbc5d622efcf73e83da8237d0219471c5520b"
+    },
+    {
+      "bytes": 4449,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/continuation-profiles.json",
+      "sha256": "aafbe5fd76c30b0445597eff8365dd9d1ffa9874723c995271f66d5dc0828e3e"
+    },
+    {
+      "bytes": 3481,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/continuation-source-freeze.json",
+      "sha256": "aa964fc063f8628b19fbf2b706e2d6bd83036c88c91ddd3348d70fc149cce202"
+    },
+    {
+      "bytes": 3829,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/evaluation-README.md",
+      "sha256": "e5d2ec59b7850ac20ee61b7aebcd2686ffa669ebdf2aed4566d2d1fa53abb5d7"
+    },
+    {
+      "bytes": 1651,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/evaluation-profile.json",
+      "sha256": "87dfa4644885d56819a3474f1afe78079b68f17f51287a126c228e7a3cf5ef4c"
+    },
+    {
+      "bytes": 2789,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/evaluation-pure-tests-validation.log",
+      "sha256": "f85815f473cbf8ac2b821f40125fcb88440ccce2e2d9c4575fc8bed953eef88f"
+    },
+    {
+      "bytes": 3347,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/evaluation-pure-validation.json",
+      "sha256": "89ef6d1d805bbfacb76ab71630446bd9caf90fa7016cf510df70f5dc87f63198"
+    },
+    {
+      "bytes": 19,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/evaluation-ruff-validation.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "bytes": 2874,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/evaluation-source-freeze.json",
+      "sha256": "aa89d555a63bb3a8577bb7fe3119a9df26361e71a421dddff66ec2322063ca20"
+    },
+    {
+      "bytes": 16062,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/evaluation-tests/test_balanced_wording_evaluation.py",
+      "sha256": "c422f05e520cca4e705ac3104b8f8fe58808dbf9c38bc8237df2e840d2901bee"
+    },
+    {
+      "bytes": 10405,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/experiment-source/assemble_balanced_wording_inputs.py",
+      "sha256": "20daab84c1c98f9cc1e5f84a8442c0cb5e71d295fa0076d38c731ab2065e02c3"
+    },
+    {
+      "bytes": 20710,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/experiment-source/balanced_wording_runtime_adapter.py",
+      "sha256": "334506648a870f0b68bc3a8935f23ed4c8fc71ed3a50a12df285eb21801e0fe6"
+    },
+    {
+      "bytes": 25582,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/experiment-source/scripts/ops/autoencoder/benchmark_balanced_wording_continuation.py",
+      "sha256": "a7efdb15f8a0de45226a15ea919859ab87d827831a6293aa307bab01da34ef4e"
+    },
+    {
+      "bytes": 27769,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/experiment-source/scripts/ops/autoencoder/evaluate_balanced_wording_continuation.py",
+      "sha256": "abe2003aa60507403265ae964993ed767c57da4462dc5b207cfe88006c821722"
+    },
+    {
+      "bytes": 8743,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/experiment-source/scripts/ops/autoencoder/prepare_balanced_wording_sources.py",
+      "sha256": "09f5f20c1804556f997a5d166b42af52e8d2538797c5ec4a4e639e24e62f7a38"
+    },
+    {
+      "bytes": 544,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/exposed-v3-reference-binding.json",
+      "sha256": "138f236a6418bd7a484be502484e1a9b914c61dff2a4c7ec7b72c83c456035b2"
+    },
+    {
+      "bytes": 25551,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/history/continuation-source-r1/benchmark_balanced_wording_continuation.py",
+      "sha256": "e59490c31a79db1e0f839dfb8dbd03ccff17216b2093750969e6a9dc1d0b19a4"
+    },
+    {
+      "bytes": 2892,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/history/continuation-source-r1/continuation-source-freeze.json",
+      "sha256": "a0bcb55106514152ce49f6178b60c47a0bcf8de35197cc5a9880104cc860a3c0"
+    },
+    {
+      "bytes": 5360,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/history/continuation-source-r1/pure-tests-validation.log",
+      "sha256": "fb492c2980c864bcf7e85f0c6c0fc0f3c26cdd3c94718a62f601945c4000d275"
+    },
+    {
+      "bytes": 2934,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/history/continuation-source-r1/pure-validation.json",
+      "sha256": "f81979bcaa8d4b2dd88012ada610b97b87395b4965188d233f33cea5fe62e2e4"
+    },
+    {
+      "bytes": 19,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/history/continuation-source-r1/ruff-validation.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "bytes": 31678,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/history/continuation-source-r1/test_balanced_wording_runtime_adapter.py",
+      "sha256": "d8e34158abbab0935a2a755066e8baf439da307038598eb7343cf6bf6558b2c2"
+    },
+    {
+      "bytes": 5351,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/history/continuation-source-r2/README.md",
+      "sha256": "7f89771a326c00134fc7a3d21c2e8dc3b9e8261ca6b522f53c37f1384109abcb"
+    },
+    {
+      "bytes": 4449,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/history/continuation-source-r2/continuation-profiles.json",
+      "sha256": "aafbe5fd76c30b0445597eff8365dd9d1ffa9874723c995271f66d5dc0828e3e"
+    },
+    {
+      "bytes": 3377,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/history/continuation-source-r2/continuation-source-freeze.json",
+      "sha256": "fe5d70c00952764629fa8ed6c69740b37fd4587b12eb89d08768535692e341f0"
+    },
+    {
+      "bytes": 10405,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/history/continuation-source-r2/experiment-source/assemble_balanced_wording_inputs.py",
+      "sha256": "20daab84c1c98f9cc1e5f84a8442c0cb5e71d295fa0076d38c731ab2065e02c3"
+    },
+    {
+      "bytes": 19873,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/history/continuation-source-r2/experiment-source/balanced_wording_runtime_adapter.py",
+      "sha256": "7c0962bdfe03bed5ad39d2eb8e7e1a698b1c8da96fdccc1d9104339fc856dd87"
+    },
+    {
+      "bytes": 25561,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/history/continuation-source-r2/experiment-source/scripts/ops/autoencoder/benchmark_balanced_wording_continuation.py",
+      "sha256": "577d3346b9231f17f9ec095c512ce140ce0743616507cbafe367893c65a722c8"
+    },
+    {
+      "bytes": 5549,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/history/continuation-source-r2/pure-tests-validation.log",
+      "sha256": "b924b4e5ed62677ade2a04c69bccdcdffb908d46bfaada53b12117a6839c5195"
+    },
+    {
+      "bytes": 2934,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/history/continuation-source-r2/pure-validation.json",
+      "sha256": "7d23a886f1014486d278bfe60ebc3193e10ee1698f1d6b05e452382b172a045b"
+    },
+    {
+      "bytes": 19,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/history/continuation-source-r2/ruff-validation.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "bytes": 8050,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/history/continuation-source-r2/runtime-control-design.json",
+      "sha256": "49f3816cdcd80aa78400c7b7ed02ce49ff7ebd62ac7d488a748b98d614e60eee"
+    },
+    {
+      "bytes": 32919,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/history/continuation-source-r2/tests/test_balanced_wording_runtime_adapter.py",
+      "sha256": "320a1cfb29c7e75783c752654efffad1d83b554bc950e59aee18de46b4d7f85e"
+    },
+    {
+      "bytes": 6023,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/pure-tests-validation.log",
+      "sha256": "68c51993757876ffc2ec231a6f8ec5fae1f44ba5279c1016cad6794d3e28532e"
+    },
+    {
+      "bytes": 3395,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/pure-validation.json",
+      "sha256": "5ce1e073bde2fd579bda065e1e2d3fd6e9075786b91dcdcea8236c0b9f9a7d8b"
+    },
+    {
+      "bytes": 19,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/ruff-validation.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "bytes": 8194,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/runtime-control-design.json",
+      "sha256": "2853f5bce99f160cc5a75b36083294b2837386f2cea8ef898bbf93ea6053b2b8"
+    },
+    {
+      "bytes": 36495,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/runtime/tests/test_balanced_wording_runtime_adapter.py",
+      "sha256": "eeef8b75b84767f2ccd92ebe7f9dac8ac49fb102c5eba0fc1a992372953c9acc"
+    },
+    {
+      "bytes": 112928,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/training-review/actual-training-384-r2-compact.json",
+      "sha256": "24d9456d2d86b472d3a1907d8fee2635c33717198e10fab8d6077e725a8ec7a1"
+    },
+    {
+      "bytes": 1792210,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/training-review/actual-training-384-r2-independent-review.json",
+      "sha256": "06f86ffc2ac7863b9770aee63f305f1b1f487ce89104da9b62f1fc59e771e107"
+    },
+    {
+      "bytes": 9659,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/training-review/audit_failed_training.py",
+      "sha256": "4bb07574533c7900641f13b267979267cfad1d7e8c14393a81d70891824baed1"
+    },
+    {
+      "bytes": 37626,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/training-review/audit_training.py",
+      "sha256": "cd8bd76cac229cf1d914286905f61d87d784544f06809e35f862eda4d2848976"
+    },
+    {
+      "bytes": 2758,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/training-review/auditor-source-freeze.json",
+      "sha256": "c3d1688683cc39161395dc3e283b8570e15becf63e3f200f6ba5a1aa8f2f2f9d"
+    },
+    {
+      "bytes": 2069,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/training-review/auditor-source-results-freeze.json",
+      "sha256": "feff558ffa4b58bf942f811711290f814de7e9019274ed3c5c53cd149e1f0fd7"
+    },
+    {
+      "bytes": 363609,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/training-review/failed-training-384-r1-independent-review.json",
+      "sha256": "635399521618c901d289346672f9375f4f3763edf5e50ff428f07d560b9a7449"
+    },
+    {
+      "bytes": 6316,
+      "path": "artifacts/autoencoder-balanced-wording-20261007/training-review/test_audit_training.py",
+      "sha256": "12eade5b5a7f1cf3d64ca1d94c9cc73c78164fe8fa35acb5664e7b73078e1227"
+    },
+    {
+      "bytes": 11206,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/adopt_shared_scheduler.py",
+      "sha256": "4956baa1e41abe53fc83a2d4ae7709b3be13ebc1c775b44571a33903b8f70b1f"
+    },
+    {
+      "bytes": 141,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/asset-config-384.json",
+      "sha256": "5c3dbfc2b303153b2ce2d6e40a00b94abae33c6694b0225018c14b630093ed93"
+    },
+    {
+      "bytes": 314037,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-manifest.json",
+      "sha256": "aafa47d268393c243a4358be26bddcc118c7575e85b143ea7f490d964eafa26e"
+    },
+    {
+      "bytes": 312856,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-plan.json",
+      "sha256": "ae7ff4d0f664947d6e9207e6b38d0cb1d124ebca6d18e36e0279880dbe63b278"
+    },
+    {
+      "bytes": 323,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/child-exit.json",
+      "sha256": "00eae9c8f6fd6e8bb9a62a08ed046b8eded3fa4512b445acd2f5d6a619a2b06a"
+    },
+    {
+      "bytes": 43,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/child-identity.json",
+      "sha256": "6047620a958b8ab12faf05a05d1b9584749d79daa22e9d59b677eb24b0623836"
+    },
+    {
+      "bytes": 1674,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/child.log",
+      "sha256": "80633b4fc45621a5a5c2203d00ea83a4412b2d1b0366cfea5b07cd2749289302"
+    },
+    {
+      "bytes": 6413,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/command.json",
+      "sha256": "5ca8732f294f053553ef9fd8280a96122746b3646999a9e54feefa3a8f2f1a44"
+    },
+    {
+      "bytes": 693,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/lease-binding.json",
+      "sha256": "f4b7b3e871e7b370619a00a653cd6f6f1b5d219056a284ab4c3d05bc8e0e4b0b"
+    },
+    {
+      "bytes": 1745,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/resource-observations.json",
+      "sha256": "4dfc2b10404a03fea20ff2272ced48d27f412677eb7be8703680f45f5bd2cade"
+    },
+    {
+      "bytes": 5825,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/resources-final.json",
+      "sha256": "88e42177bd173e5396515e1904906814faea89827263131b6727578e16714002"
+    },
+    {
+      "bytes": 3174,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/resources-start.json",
+      "sha256": "e4c9ad86e169b82fc97c3aef0763cdece1a6f3e64654987eec1f541a4631ca0c"
+    },
+    {
+      "bytes": 156558,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/last-attempt/exposed_v3_48/actual-formula-fidelity.json",
+      "sha256": "94ec281ef23e4f1f80b8dffe77c0c5f3e50fe6806ebc75b14ef29679f7364333"
+    },
+    {
+      "bytes": 25862,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/last-attempt/exposed_v3_48/actual-predictions.json",
+      "sha256": "1883c528c36fc813f388078ee241782ea40243e70a53808035a6e3051e225ea6"
+    },
+    {
+      "bytes": 598216,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/last-attempt/exposed_v3_48/posthoc-scalar-score.json",
+      "sha256": "8234c682ae3aeea7c2844c860918aba57d69af1f3cc50b0dd4be0bab49f349b0"
+    },
+    {
+      "bytes": 724137,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/last-attempt/exposed_v3_48/scalar-formula-join.json",
+      "sha256": "03fc0750cb4c1a88b9db30d06fd07ee3bac91d2cd301b1063126bc4319e096a6"
+    },
+    {
+      "bytes": 1665823,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/last-attempt/exposed_v3_48/source-head-trace.json",
+      "sha256": "a023a44ff3e1a1f797f8b63ff8cfa5419e25332b73db2ac30b685dfacb7f5c2d"
+    },
+    {
+      "bytes": 156830,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/last-attempt/new_balanced_train48/actual-formula-fidelity.json",
+      "sha256": "c6f99fce278dbb3a9fc4b5dd2c969a59f07296dab5610e713c65e6933843f87d"
+    },
+    {
+      "bytes": 26006,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/last-attempt/new_balanced_train48/actual-predictions.json",
+      "sha256": "5ed4b0abdcbf13817e577d0548a2a459aea98e325fd464daf36896a76c213107"
+    },
+    {
+      "bytes": 599003,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/last-attempt/new_balanced_train48/posthoc-scalar-score.json",
+      "sha256": "e7307f4eff455f7246710d30fec3ce5b02d72eaf53486d27f73c4b8d918e4b74"
+    },
+    {
+      "bytes": 725397,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/last-attempt/new_balanced_train48/scalar-formula-join.json",
+      "sha256": "ab1ff3bdd1593088eb9f3ce556665b32189ed1ddcaf0172ae22f4c231e01d98e"
+    },
+    {
+      "bytes": 1665601,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/last-attempt/new_balanced_train48/source-head-trace.json",
+      "sha256": "2c182d6488f174ed576db0df6625d1c4095d281b4c915cd6602341ad0a10a4b3"
+    },
+    {
+      "bytes": 159962,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/last-attempt/normative_train48/actual-formula-fidelity.json",
+      "sha256": "1ae3b4d5608422942d89af8095298ff9a6928e018d6f7ae8a018746a3f462b7e"
+    },
+    {
+      "bytes": 26054,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/last-attempt/normative_train48/actual-predictions.json",
+      "sha256": "8cd5e5c804459f71e8851c9678f338e48c63b0ce7cc4799adf0211ccdb03b759"
+    },
+    {
+      "bytes": 600209,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/last-attempt/normative_train48/posthoc-scalar-score.json",
+      "sha256": "2a0443d0860d39bb487461f15d6c326a5f5c89966a45e52d4e9f1f5119431c4c"
+    },
+    {
+      "bytes": 726815,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/last-attempt/normative_train48/scalar-formula-join.json",
+      "sha256": "b12d7fbb678fed90f020e9a96a4899925791e5ba7214e56203c8d20b323d0484"
+    },
+    {
+      "bytes": 1664919,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/last-attempt/normative_train48/source-head-trace.json",
+      "sha256": "b308935bd51c9dbddb55d7fdccfe7c7735e5ebbb4678095cea456a59338ecc2b"
+    },
+    {
+      "bytes": 155878,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/last-attempt/original_train48/actual-formula-fidelity.json",
+      "sha256": "25489442f7a655112b6258e052e3324bd5a335b70e558b9a2cb1a001f0820f86"
+    },
+    {
+      "bytes": 26295,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/last-attempt/original_train48/actual-predictions.json",
+      "sha256": "8dbb7e6b3360a33b1a3a810f92c4883fbd528bafaab0afc2194f82e7dcde2c6b"
+    },
+    {
+      "bytes": 603468,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/last-attempt/original_train48/posthoc-scalar-score.json",
+      "sha256": "0fdea0b4376d2b701ef71e884c88e537395e13d6da7e1beafaf01c828ed00c1c"
+    },
+    {
+      "bytes": 730946,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/last-attempt/original_train48/scalar-formula-join.json",
+      "sha256": "aa2d48ee3eff1ad84c6ead89fa6eb8ac79ded77b4559663d53dc064509d164f5"
+    },
+    {
+      "bytes": 1666238,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/last-attempt/original_train48/source-head-trace.json",
+      "sha256": "762160f265666a51ce3ea9ef03688ea854f2b2bb3b42612607143b7faaa7e70c"
+    },
+    {
+      "bytes": 156558,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/exposed_v3_48/actual-formula-fidelity.json",
+      "sha256": "94ec281ef23e4f1f80b8dffe77c0c5f3e50fe6806ebc75b14ef29679f7364333"
+    },
+    {
+      "bytes": 25862,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/exposed_v3_48/actual-predictions.json",
+      "sha256": "d6130dfe81d03e0c13af64e7d5d9f7db6dfd322f50e7e1a735600705a8c3692d"
+    },
+    {
+      "bytes": 598216,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/exposed_v3_48/posthoc-scalar-score.json",
+      "sha256": "b40414c3668b1add84456a3efd48ee4c41e6be48eb6462f76885acbdeced7999"
+    },
+    {
+      "bytes": 724137,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/exposed_v3_48/scalar-formula-join.json",
+      "sha256": "03fc0750cb4c1a88b9db30d06fd07ee3bac91d2cd301b1063126bc4319e096a6"
+    },
+    {
+      "bytes": 1665823,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/exposed_v3_48/source-head-trace.json",
+      "sha256": "fe780f032c89200590ee33fb27d83f3a49df428522221bd8a2b4e4fecd1686eb"
+    },
+    {
+      "bytes": 156830,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/new_balanced_train48/actual-formula-fidelity.json",
+      "sha256": "c6f99fce278dbb3a9fc4b5dd2c969a59f07296dab5610e713c65e6933843f87d"
+    },
+    {
+      "bytes": 26006,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/new_balanced_train48/actual-predictions.json",
+      "sha256": "71ff78d00b30daee68c9c5761140d148abf16fb45bfb56d9212afb2037d92cfc"
+    },
+    {
+      "bytes": 599003,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/new_balanced_train48/posthoc-scalar-score.json",
+      "sha256": "9192b1e3fd817b30984e23e653779d531af95cc7be6afe3ea2cccb935719c802"
+    },
+    {
+      "bytes": 725397,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/new_balanced_train48/scalar-formula-join.json",
+      "sha256": "ab1ff3bdd1593088eb9f3ce556665b32189ed1ddcaf0172ae22f4c231e01d98e"
+    },
+    {
+      "bytes": 1665601,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/new_balanced_train48/source-head-trace.json",
+      "sha256": "3ef842b5bab0bc30a572516d801bbd2c51a3b6320f8626e518c3157692991491"
+    },
+    {
+      "bytes": 159962,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/normative_train48/actual-formula-fidelity.json",
+      "sha256": "1ae3b4d5608422942d89af8095298ff9a6928e018d6f7ae8a018746a3f462b7e"
+    },
+    {
+      "bytes": 26054,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/normative_train48/actual-predictions.json",
+      "sha256": "cd0d0fc7ba4c34b6ab820ec57ca8153fe7a5a0d7bbe61d7c61fe938362dd12b0"
+    },
+    {
+      "bytes": 600209,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/normative_train48/posthoc-scalar-score.json",
+      "sha256": "1539b0d976fa1e22042b06c4e3160e3dd46571b0efccd0927783ab0ceb55f347"
+    },
+    {
+      "bytes": 726815,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/normative_train48/scalar-formula-join.json",
+      "sha256": "b12d7fbb678fed90f020e9a96a4899925791e5ba7214e56203c8d20b323d0484"
+    },
+    {
+      "bytes": 1664919,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/normative_train48/source-head-trace.json",
+      "sha256": "a5e2bbe2bb16a64db4c871641307dfa8dbb88fa3c7736420eac48b1d27691bb7"
+    },
+    {
+      "bytes": 155878,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/original_train48/actual-formula-fidelity.json",
+      "sha256": "25489442f7a655112b6258e052e3324bd5a335b70e558b9a2cb1a001f0820f86"
+    },
+    {
+      "bytes": 26295,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/original_train48/actual-predictions.json",
+      "sha256": "4d4323f07214e765ec669623f06839682887684c40510378d13befedaa0e323a"
+    },
+    {
+      "bytes": 603468,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/original_train48/posthoc-scalar-score.json",
+      "sha256": "9a7eb5c63537f1e451565e5e29feee86901ae7dc4d7aa7a97fb47bb264d65ca6"
+    },
+    {
+      "bytes": 730946,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/original_train48/scalar-formula-join.json",
+      "sha256": "aa2d48ee3eff1ad84c6ead89fa6eb8ac79ded77b4559663d53dc064509d164f5"
+    },
+    {
+      "bytes": 1666236,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/balanced-wording-ce/selected/original_train48/source-head-trace.json",
+      "sha256": "e0c0550aefed627ba869900e4911b57ca17d1ecd3f2c0a946db6e0f73f750b44"
+    },
+    {
+      "bytes": 156560,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/last-attempt/exposed_v3_48/actual-formula-fidelity.json",
+      "sha256": "79b8eafc67b8673b501b6a4a5d6563ca2df26c019adb4c89ca9d2676f90e5041"
+    },
+    {
+      "bytes": 25862,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/last-attempt/exposed_v3_48/actual-predictions.json",
+      "sha256": "a73ebb04aa0db547ad923dc98645532e671c08da7734b5d236c1b8f2a1d63c01"
+    },
+    {
+      "bytes": 597386,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/last-attempt/exposed_v3_48/posthoc-scalar-score.json",
+      "sha256": "1c2ef9a89fbb8c2b4402ce25ad88dc11a3e159edcaefaf9e0c9d948227a0dc32"
+    },
+    {
+      "bytes": 723266,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/last-attempt/exposed_v3_48/scalar-formula-join.json",
+      "sha256": "4251fda229c699de9a66f5dc1eb081390adffaf85f5f5e888d32ca488d55afa3"
+    },
+    {
+      "bytes": 1665874,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/last-attempt/exposed_v3_48/source-head-trace.json",
+      "sha256": "f211a831d060235827812f7736a0a0b75557dbea4cc047be543cc5025917264c"
+    },
+    {
+      "bytes": 156830,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/last-attempt/new_balanced_train48/actual-formula-fidelity.json",
+      "sha256": "c6f99fce278dbb3a9fc4b5dd2c969a59f07296dab5610e713c65e6933843f87d"
+    },
+    {
+      "bytes": 26006,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/last-attempt/new_balanced_train48/actual-predictions.json",
+      "sha256": "0fa374ff74c83d1da028146c8c1a748f063b3414184ff3145388d3e78810c14d"
+    },
+    {
+      "bytes": 598775,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/last-attempt/new_balanced_train48/posthoc-scalar-score.json",
+      "sha256": "88dcb15cba64f30a4cccf81bdd6c25fc98d66b5881fa240362e0f2756b853195"
+    },
+    {
+      "bytes": 725169,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/last-attempt/new_balanced_train48/scalar-formula-join.json",
+      "sha256": "241b5aed267a4573ce1c79b011a76ba3f322f1d5058657194c0d3a6355fa08d2"
+    },
+    {
+      "bytes": 1665425,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/last-attempt/new_balanced_train48/source-head-trace.json",
+      "sha256": "5ca876a30a20d3d31bc2354ea1b3994979d8172b309c280cd112fff6677a4976"
+    },
+    {
+      "bytes": 159962,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/last-attempt/normative_train48/actual-formula-fidelity.json",
+      "sha256": "2c6e6958212644aa43c945932ca4c6383491132ae3be8c8586fa72bbed653f99"
+    },
+    {
+      "bytes": 26054,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/last-attempt/normative_train48/actual-predictions.json",
+      "sha256": "e79ea774ad8520ef4a0ff6c0d62aaf5978b108800a697cb100e2722961c5f723"
+    },
+    {
+      "bytes": 599355,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/last-attempt/normative_train48/posthoc-scalar-score.json",
+      "sha256": "7174b6aded4a69bf85098e534bea622421f7b3e37de3b9ea64ab9933ee40d927"
+    },
+    {
+      "bytes": 725931,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/last-attempt/normative_train48/scalar-formula-join.json",
+      "sha256": "3d594c266038c169fb9f8226d73c2d7e2cca0b68ef91df174c7d081d9dd125ec"
+    },
+    {
+      "bytes": 1664406,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/last-attempt/normative_train48/source-head-trace.json",
+      "sha256": "ddc63bbc2214dd32cfa50ea9609ef938855f9796d297e26a154830b5f651809f"
+    },
+    {
+      "bytes": 155878,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/last-attempt/original_train48/actual-formula-fidelity.json",
+      "sha256": "25489442f7a655112b6258e052e3324bd5a335b70e558b9a2cb1a001f0820f86"
+    },
+    {
+      "bytes": 26295,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/last-attempt/original_train48/actual-predictions.json",
+      "sha256": "4881c0ff1990ed05c6468d5e375686f835697cf043ee9d43718bf7aa6611ec10"
+    },
+    {
+      "bytes": 603363,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/last-attempt/original_train48/posthoc-scalar-score.json",
+      "sha256": "1f726d9f7d2781b4b282b5bc1ba60ddf520cf45091b0b7bea4a344f3b8b9e401"
+    },
+    {
+      "bytes": 730841,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/last-attempt/original_train48/scalar-formula-join.json",
+      "sha256": "2d7b82f1a02d44c76dd489a97c06d9be93124f846c38c9f997d6f48bbf20e896"
+    },
+    {
+      "bytes": 1665928,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/last-attempt/original_train48/source-head-trace.json",
+      "sha256": "09e3626979d44311f698f2df96b15c29860ae50ed1bc62737713ac6e2664eb32"
+    },
+    {
+      "bytes": 156560,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/exposed_v3_48/actual-formula-fidelity.json",
+      "sha256": "79b8eafc67b8673b501b6a4a5d6563ca2df26c019adb4c89ca9d2676f90e5041"
+    },
+    {
+      "bytes": 25862,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/exposed_v3_48/actual-predictions.json",
+      "sha256": "475db01271a14705083eea35541635b3ad0f4644d2e1623382d9453f3b25661c"
+    },
+    {
+      "bytes": 597386,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/exposed_v3_48/posthoc-scalar-score.json",
+      "sha256": "60df03d8a1675c1bfb2d2773254b4cb83f860ccbc7e87211c83b60f0f3eb43d3"
+    },
+    {
+      "bytes": 723266,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/exposed_v3_48/scalar-formula-join.json",
+      "sha256": "4251fda229c699de9a66f5dc1eb081390adffaf85f5f5e888d32ca488d55afa3"
+    },
+    {
+      "bytes": 1665874,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/exposed_v3_48/source-head-trace.json",
+      "sha256": "a928d89d93bebe5bd7d0c8befa68a23f499267e27801354728236d2727324ab8"
+    },
+    {
+      "bytes": 156830,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/new_balanced_train48/actual-formula-fidelity.json",
+      "sha256": "c6f99fce278dbb3a9fc4b5dd2c969a59f07296dab5610e713c65e6933843f87d"
+    },
+    {
+      "bytes": 26006,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/new_balanced_train48/actual-predictions.json",
+      "sha256": "ae28e49810a0b1b104b7f00cfadc828b16e3559e6b95bd1461b2cbd9eddd5db1"
+    },
+    {
+      "bytes": 598775,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/new_balanced_train48/posthoc-scalar-score.json",
+      "sha256": "deda3ff8d023559e0dcb4578d8b6078901db31511c3b1ae5495066148de927c7"
+    },
+    {
+      "bytes": 725169,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/new_balanced_train48/scalar-formula-join.json",
+      "sha256": "241b5aed267a4573ce1c79b011a76ba3f322f1d5058657194c0d3a6355fa08d2"
+    },
+    {
+      "bytes": 1665425,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/new_balanced_train48/source-head-trace.json",
+      "sha256": "5647cef3bda215d2d064a64f8b59abb9339e91fd0ca66f580b1f47bb2b1c205a"
+    },
+    {
+      "bytes": 159962,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/normative_train48/actual-formula-fidelity.json",
+      "sha256": "2c6e6958212644aa43c945932ca4c6383491132ae3be8c8586fa72bbed653f99"
+    },
+    {
+      "bytes": 26054,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/normative_train48/actual-predictions.json",
+      "sha256": "577ff2a33095dc4e480812967b0f02af6d831af1ae5d839203162cfa9bdce7f5"
+    },
+    {
+      "bytes": 599355,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/normative_train48/posthoc-scalar-score.json",
+      "sha256": "2e5b53d9914e79f83cd6140ef1bd4396118ecfcdb411375d1d606939b9d0e7bd"
+    },
+    {
+      "bytes": 725931,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/normative_train48/scalar-formula-join.json",
+      "sha256": "3d594c266038c169fb9f8226d73c2d7e2cca0b68ef91df174c7d081d9dd125ec"
+    },
+    {
+      "bytes": 1664407,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/normative_train48/source-head-trace.json",
+      "sha256": "83900764189f395cec0e4fc2083fbcb8ba44086988021845494df95e03870c9a"
+    },
+    {
+      "bytes": 155878,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/original_train48/actual-formula-fidelity.json",
+      "sha256": "25489442f7a655112b6258e052e3324bd5a335b70e558b9a2cb1a001f0820f86"
+    },
+    {
+      "bytes": 26295,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/original_train48/actual-predictions.json",
+      "sha256": "3a9f8829f821225fbb8a62cfbdf4d8196d0c519d8e9d6c812eb0a42dab0785f0"
+    },
+    {
+      "bytes": 603363,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/original_train48/posthoc-scalar-score.json",
+      "sha256": "04150286097d52c0fce24066f9424163252bf1da4bf1be36afab77291ed9865d"
+    },
+    {
+      "bytes": 730841,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/original_train48/scalar-formula-join.json",
+      "sha256": "2d7b82f1a02d44c76dd489a97c06d9be93124f846c38c9f997d6f48bbf20e896"
+    },
+    {
+      "bytes": 1665926,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/control-wording-ce/selected/original_train48/source-head-trace.json",
+      "sha256": "16177775a6430403998e87a1ea325a6b7db2224864616e04610c2cdb9794a155"
+    },
+    {
+      "bytes": 19863,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/predictions-complete.json",
+      "sha256": "d84bfbbd7ea71c85768bda594c3d282d0b948958b1c78c92c865009bf1d38307"
+    },
+    {
+      "bytes": 611874,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/sealed-recipe.json",
+      "sha256": "9e0d1f2d636a29ca050cedc9f5cac3e10a85afa9ee03cc5baa183099ef040d32"
+    },
+    {
+      "bytes": 96894,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1/results/summary.json",
+      "sha256": "bf82fc26aad348a01404c88428f70ab4f105e5eb8e4eb45c7886a417cd74fec8"
+    },
+    {
+      "bytes": 62,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1-guardian-exit.json",
+      "sha256": "a072680ab8edb5c98b1d9e836f1e92e32516030639e1306beb0a46cfd1d1d53f"
+    },
+    {
+      "bytes": 5099,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1-guardian.log",
+      "sha256": "6eac8eec62f54b590a9bc8b259f5c55c443051eec28b02206fa87aa27d3ec515"
+    },
+    {
+      "bytes": 42765,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1-lease-observations.jsonl",
+      "sha256": "8afa7aee838ad72fcc62409ec4b3f1f8c6a5357c3e576ef370f52a81e9684310"
+    },
+    {
+      "bytes": 4645,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/evaluation-r1-scheduler-adoption.json",
+      "sha256": "3976a7c3091033536c1a1bbe2c6d1bca6a2e9d152d0b339272d96d9fae3f04c4"
+    },
+    {
+      "bytes": 19873,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/execution-source-history/preflight-384-r1/experiment-source/balanced_wording_runtime_adapter.py",
+      "sha256": "7c0962bdfe03bed5ad39d2eb8e7e1a698b1c8da96fdccc1d9104339fc856dd87"
+    },
+    {
+      "bytes": 25561,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/execution-source-history/preflight-384-r1/experiment-source/scripts/ops/autoencoder/benchmark_balanced_wording_continuation.py",
+      "sha256": "577d3346b9231f17f9ec095c512ce140ce0743616507cbafe367893c65a722c8"
+    },
+    {
+      "bytes": 288402,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/execution-source-history/preflight-384-r1/training-manifest.json",
+      "sha256": "3db223fbdae1b9e0a8903da3c3c112dca0820eb13a67a32adc047f18a1353df4"
+    },
+    {
+      "bytes": 290319,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/execution-source-history/preflight-384-r1/training-plan.json",
+      "sha256": "8574184e22a61d9ac26ff0cfefdb1a7bbdf49faeade6f8a80668c58c63b9cef5"
+    },
+    {
+      "bytes": 10405,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/experiment-source/assemble_balanced_wording_inputs.py",
+      "sha256": "20daab84c1c98f9cc1e5f84a8442c0cb5e71d295fa0076d38c731ab2065e02c3"
+    },
+    {
+      "bytes": 43288,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/experiment-source/balanced_wording_candidates.py",
+      "sha256": "802bf91d12e2ce5dc4d7103af0c0081dd9ab56eade31094caea768212d8d07a4"
+    },
+    {
+      "bytes": 20710,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/experiment-source/balanced_wording_runtime_adapter.py",
+      "sha256": "334506648a870f0b68bc3a8935f23ed4c8fc71ed3a50a12df285eb21801e0fe6"
+    },
+    {
+      "bytes": 18437,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/experiment-source/ipfs_datasets_py/logic/formalization/autoencoder/authored_scalar_holdout.py",
+      "sha256": "ff1a260df1466671a4c4625d396b79a20d6a830ce1050f14ffd7e1f93a522c00"
+    },
+    {
+      "bytes": 14249,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/experiment-source/ipfs_datasets_py/logic/formalization/autoencoder/clause_source_context.py",
+      "sha256": "583422dbb63cdba96182090f5f76ef74698a69ab84fd42dc9e53bc4e09cbf5f6"
+    },
+    {
+      "bytes": 37989,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/experiment-source/ipfs_datasets_py/logic/formalization/autoencoder/decoder_distillation_experiment.py",
+      "sha256": "76252ad397492762d4fc41915afd1051a93a11b74994655326fe56fa722e3b61"
+    },
+    {
+      "bytes": 28444,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/experiment-source/ipfs_datasets_py/logic/formalization/autoencoder/dimension_source_inputs.py",
+      "sha256": "c7f396d3323c40b5f4bab1aa42557e693b65cced58435e63c735f875c6d12206"
+    },
+    {
+      "bytes": 24418,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/experiment-source/ipfs_datasets_py/logic/formalization/autoencoder/fresh_scalar_source_inputs.py",
+      "sha256": "7014e59ed0561718e082879ed1913d2442d7b4edeec59e26517aae6e1b847189"
+    },
+    {
+      "bytes": 15959,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/experiment-source/ipfs_datasets_py/logic/formalization/autoencoder/gte_multilingual_profile.py",
+      "sha256": "d6d6069c98c7f15bd4c6f8a43bd9ffb72032e04a452419a3ff5d9bd95bb06e8e"
+    },
+    {
+      "bytes": 13375,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/experiment-source/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768.py",
+      "sha256": "cd4b23b87fefe3f80f234a5c85d9e4823139d5040a5507813b88385ee601b4ea"
+    },
+    {
+      "bytes": 9556,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/experiment-source/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768_complete.py",
+      "sha256": "6f781849dc87eba1b7f0929d292bb10f5724bb1ca5749989feb988cde243c609"
+    },
+    {
+      "bytes": 9145,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/experiment-source/ipfs_datasets_py/logic/formalization/autoencoder/training_paraphrase_source_inputs.py",
+      "sha256": "5c0d4571b87d4b3b82be3bae11ff08599f2a5d09c4465a8315641a05d1657649"
+    },
+    {
+      "bytes": 27947,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/experiment-source/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_corpus_manifest.py",
+      "sha256": "b067f05b3cfc28cb213a83519530f7148b2a5fa7d5b25809e87e1f7c286f9a5d"
+    },
+    {
+      "bytes": 26219,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/experiment-source/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_production.py",
+      "sha256": "735ca0597186e094d736ef58435c82956c4ab805a68fc7a6adbfc0ee21ee889f"
+    },
+    {
+      "bytes": 19364,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/experiment-source/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_runtime.py",
+      "sha256": "ce80ed6294009e04580051e6eb06a817d74a8a56f04814ad0a698e3d27dd0d41"
+    },
+    {
+      "bytes": 7896,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/experiment-source/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_native_pool.py",
+      "sha256": "04f29da03f937dfee7ecfcb621980240c014754abe55f71a2c1ef8338ba715bb"
+    },
+    {
+      "bytes": 100140,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/experiment-source/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py",
+      "sha256": "bde3bd327df59f2e7557eac8aa2e0989ceb1128bc39918bf8cf46011e7bd9415"
+    },
+    {
+      "bytes": 21228,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/experiment-source/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_adaptive_optimizer.py",
+      "sha256": "dcd3a885820e7985ebec458a80325fe00d4d50656cf5827a828dd9cb45eb2524"
+    },
+    {
+      "bytes": 25582,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/experiment-source/scripts/ops/autoencoder/benchmark_balanced_wording_continuation.py",
+      "sha256": "a7efdb15f8a0de45226a15ea919859ab87d827831a6293aa307bab01da34ef4e"
+    },
+    {
+      "bytes": 27769,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/experiment-source/scripts/ops/autoencoder/evaluate_balanced_wording_continuation.py",
+      "sha256": "abe2003aa60507403265ae964993ed767c57da4462dc5b207cfe88006c821722"
+    },
+    {
+      "bytes": 8743,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/experiment-source/scripts/ops/autoencoder/prepare_balanced_wording_sources.py",
+      "sha256": "09f5f20c1804556f997a5d166b42af52e8d2538797c5ec4a4e639e24e62f7a38"
+    },
+    {
+      "bytes": 1345,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/lazy_scheduler_adoption.py",
+      "sha256": "42f31d8da1eb5b44274ca0b8c8180cd78bc083dfd0e93438e61f38223929d84a"
+    },
+    {
+      "bytes": 20712,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/owned_lease_watchdog.py",
+      "sha256": "f1b9f71e375cf5ed4004e023bbef2d6f7f61e1ecb588078a1094d7b1982609b3"
+    },
+    {
+      "bytes": 288402,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/phase-input-history/training-384-r1/training-manifest.json",
+      "sha256": "69c55c8702a05eb6698fbb2871854eda684b8bbc1e63be3365855539586b9c55"
+    },
+    {
+      "bytes": 290319,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/phase-input-history/training-384-r1/training-plan.json",
+      "sha256": "50472109c268051879582848409cf80b129bf1ceaaf14cbcab82c0e674666de1"
+    },
+    {
+      "bytes": 323,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r1/child-exit.json",
+      "sha256": "d78e1eede775eb4faada85d09ace60a8088cd99b9ea7a251ccde93384bbce373"
+    },
+    {
+      "bytes": 44,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r1/child-identity.json",
+      "sha256": "240522ccc11ff73a2c0fc29686aaba8819dc5c138c906afa65cac3f49587119c"
+    },
+    {
+      "bytes": 4152,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r1/child.log",
+      "sha256": "394bff7065b9dbb752f675581e92cdca58bf21b2e8d81036bcccfee1f0353f84"
+    },
+    {
+      "bytes": 6442,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r1/command.json",
+      "sha256": "76fefe2e8ee6add85d285f44fe308545a693aed848c4e2a5aa6b9f165e834071"
+    },
+    {
+      "bytes": 3162,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r1/failure-primary.json",
+      "sha256": "71fb45566a435e568f70eb8c1ff00b039fe112649f578f8247a9a92edc6b1ee7"
+    },
+    {
+      "bytes": 4132,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r1/failure.json",
+      "sha256": "079de3bac02717b57aa19cf78bf4eab262f4bdd39db2d16521ea3a9fe9133cd3"
+    },
+    {
+      "bytes": 694,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r1/lease-binding.json",
+      "sha256": "1942ba88e642abde5af1ff50b9b43c744bfaf8589d5eec05258a88783addc59f"
+    },
+    {
+      "bytes": 1744,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r1/resource-observations.json",
+      "sha256": "e6d2350d129e3e64ad5c70469ac627421aa1f5d87a84fd4751f1b94200f13952"
+    },
+    {
+      "bytes": 3180,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r1/resources-start.json",
+      "sha256": "18fffca0fe7b653a27f53cf07df73e0e7c6cc33f5d4c0ff870eb2db09178f557"
+    },
+    {
+      "bytes": 62,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r1-guardian-exit.json",
+      "sha256": "17a17f59bb9bbce8b38a970b02785142373b9d01a5d5424c1338d129096653d6"
+    },
+    {
+      "bytes": 463,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r1-guardian.log",
+      "sha256": "c9efbee6420419989ba9b469fc3bd625335be6fb3d066b01d7cae997b481d2b3"
+    },
+    {
+      "bytes": 36007,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r1-lease-observations.jsonl",
+      "sha256": "a590f92a1f69ea37a24abf2683290f997e8e06c96d321ce3c8b4959d88522ed1"
+    },
+    {
+      "bytes": 4645,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r1-scheduler-adoption.json",
+      "sha256": "528faefc692d8198a6c6d217f9da2f9de4cc54fd1d706eea82fb7f53e2d604ff"
+    },
+    {
+      "bytes": 325,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2/child-exit.json",
+      "sha256": "444d97b13cf1f0ebfc24f5848bc0f3716cd2ccb87aebfaca51d0d57843005799"
+    },
+    {
+      "bytes": 44,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2/child-identity.json",
+      "sha256": "0e8b379ed5c208a9b5e43f7adea8fe19ef4908b552e25fe0bcbe911bcdfb103e"
+    },
+    {
+      "bytes": 1674,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2/child.log",
+      "sha256": "80633b4fc45621a5a5c2203d00ea83a4412b2d1b0366cfea5b07cd2749289302"
+    },
+    {
+      "bytes": 6443,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2/command.json",
+      "sha256": "64e1205193f66fe9352975d42cb3031ddb4e66a1281cb0a47f4bf38825a57ebf"
+    },
+    {
+      "bytes": 694,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2/lease-binding.json",
+      "sha256": "33a7e3cbd635e08c3b7d8781b6567be747e8d1ae3b06af52a517e1d3a5ba35f7"
+    },
+    {
+      "bytes": 1743,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2/resource-observations.json",
+      "sha256": "5583edff33dea1ca911a6b781621ba7e4be0a2c7e582727e39a9863d35161e25"
+    },
+    {
+      "bytes": 5832,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2/resources-final.json",
+      "sha256": "6a3bf067bb96c9cbc422d0f5df41423c0169a64e6d5f30867bc7c61ed4e55c18"
+    },
+    {
+      "bytes": 3180,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2/resources-start.json",
+      "sha256": "e6faeaf2493e22424e042e25705bb52dd891438388e7dc8169ef2319bcb5d296"
+    },
+    {
+      "bytes": 77359,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2/results/balanced-paired-cache-receipt.json",
+      "sha256": "790fda5385978d071251a04b0f97427aba24ada1790c470af8cbca52224b342a"
+    },
+    {
+      "bytes": 775959,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2/results/balanced-parent-source-readout.json",
+      "sha256": "a0afe0808c85443682a1b7f89dab0d9b773876c66f6187fa141ef059edb14eb8"
+    },
+    {
+      "bytes": 25952,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2/results/balanced48-parent-actual-predictions.json",
+      "sha256": "ece6a95227dff6823715cd44ec65043f9eb1ca1801073e707ec5bb26f8090147"
+    },
+    {
+      "bytes": 1664590,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2/results/balanced48-parent-greedy-trace.json",
+      "sha256": "9071b8e65e64f3e33574c0b1ab3ebd0ef9970e70693d2897013ca2d319c9a3a1"
+    },
+    {
+      "bytes": 156830,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2/results/balanced48-parent-posthoc-formula-fidelity.json",
+      "sha256": "c6f99fce278dbb3a9fc4b5dd2c969a59f07296dab5610e713c65e6933843f87d"
+    },
+    {
+      "bytes": 598938,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2/results/balanced48-parent-posthoc-scalar-scores.json",
+      "sha256": "46ae51b2889d2df3db357756a155d6d8cc4cfc9e39071fbf9b2fb5290eb3e9f9"
+    },
+    {
+      "bytes": 75499,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2/results/control-paired-cache-receipt.json",
+      "sha256": "3defcaef43ebb9c8146de4b0776ac661c73d44d253907785e5f9c9315e6e3b17"
+    },
+    {
+      "bytes": 771651,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2/results/control-parent-source-readout.json",
+      "sha256": "f6cd850630dd47c174854f0d2912e617baa77bda8dd8cc0c32d82735064007ab"
+    },
+    {
+      "bytes": 215055,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2/results/paired-source-schedule.json",
+      "sha256": "786125add0636e47bfbe7d8468cc57d6665b32bd1199459c84f3b28a724c2350"
+    },
+    {
+      "bytes": 289,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2/results/parent-validation-parity.json",
+      "sha256": "ae3b2eddc8bc48e1724e6628dcc3cc7abbad937c52e366a0b2108c5ba70da7d6"
+    },
+    {
+      "bytes": 564010,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2/results/sealed-recipe.json",
+      "sha256": "4bb371c15e91bf65d0e2a7eca6cb781c1b33b502ff1ecb2f6aa5bc007c503497"
+    },
+    {
+      "bytes": 35141,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2/results/summary.json",
+      "sha256": "497119d3dbe7bd4097e87ec914937cbf240047489c9da44a819de613ec1419e2"
+    },
+    {
+      "bytes": 62,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2-guardian-exit.json",
+      "sha256": "4b100bc1313a2182976b4db71492f7a227bd9e94969baf2c2fc113bc049464a9"
+    },
+    {
+      "bytes": 5106,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2-guardian.log",
+      "sha256": "9503a2174619e7bd4d95917f8a95bf76c802ff8657654f644404e496f46c34f4"
+    },
+    {
+      "bytes": 37749,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2-lease-observations.jsonl",
+      "sha256": "b452e92fadbb58335d3243efc37360e72166357f9ce43c851d4d2db6833ea116"
+    },
+    {
+      "bytes": 4646,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2-scheduler-adoption.json",
+      "sha256": "812ba0c8c78ce0b7edc7a19ac41b178c013f862c9e091a662509c5b647d211ed"
+    },
+    {
+      "bytes": 17154,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preparation-manifest.json",
+      "sha256": "cd2f876e5a1bd3e5ed951d9d635ec07b8086b6189cc18a9b5037ed7d80cfc0a4"
+    },
+    {
+      "bytes": 12510,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preparation-plan.json",
+      "sha256": "a3aad6a7d4ffca5b6d9ec83ed823dbffcd0579dc04704ccfc1c818da869ad55b"
+    },
+    {
+      "bytes": 324,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preparation-r2/child-exit.json",
+      "sha256": "f7125e9229a117318f68eb88580b4699b25e23c50c07f8daf24f7fd7d668cc6c"
+    },
+    {
+      "bytes": 44,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preparation-r2/child-identity.json",
+      "sha256": "8afff7637e5e8e49d365fca2b00fbef94d39db7f2b0d84e8aa991d6ca7e59c0e"
+    },
+    {
+      "bytes": 443,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preparation-r2/child.log",
+      "sha256": "662c3d5f4d861de51823e91d92c31d28b9d716e4e5593559891ab70c14db4d77"
+    },
+    {
+      "bytes": 6412,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preparation-r2/command.json",
+      "sha256": "ccbab1932df80ac2192b9b82ef8666fbf2208ac424123ff30d499d3478ad5fc3"
+    },
+    {
+      "bytes": 693,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preparation-r2/lease-binding.json",
+      "sha256": "a622c0b4f21def1ac6edb65aef0174682717c59ef4ad19df20de3d149f6dbed2"
+    },
+    {
+      "bytes": 5828,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preparation-r2/resources-final.json",
+      "sha256": "10f412f1de4cc105e4c255a9a8173b6cdc89eb9ef6ca6104806dc1fefb259872"
+    },
+    {
+      "bytes": 3177,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preparation-r2/resources-start.json",
+      "sha256": "c5fe0c1ec8f24e42fb89e493257212f98e534838023bd162534a70ff64c52303"
+    },
+    {
+      "bytes": 309,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preparation-r2/results/pre-native-source-seal.json",
+      "sha256": "a1a2d1893435c93ae058ef6881b7f3c7e6714a86b19454db99af6dd821220fbb"
+    },
+    {
+      "bytes": 149720,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preparation-r2/results/source-plan.json",
+      "sha256": "22e61939328fcbdc798b1334ea6d6fe90a68938a17b84ca1fd2cccfc57af3893"
+    },
+    {
+      "bytes": 1852,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preparation-r2/results/summary.json",
+      "sha256": "df5fd8b4ef777c42188170be221f5ab177e8f2202bb76cd2310aa31c41887100"
+    },
+    {
+      "bytes": 19215,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preparation-r2/results/train-source384-artifacts/training-source-texts.txt",
+      "sha256": "ad19bba611d001eb5597d8744bbc41de1df2444683a71c51d9bddcb508897d00"
+    },
+    {
+      "bytes": 62,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preparation-r2-guardian-exit.json",
+      "sha256": "15be18019caee11b4ebf41f3ee17ace206245a2516db215107f02a881f6e6d5b"
+    },
+    {
+      "bytes": 5102,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preparation-r2-guardian.log",
+      "sha256": "b11b40475978ed2d5c1617b4ef5c0ed4dbdeefe1d9cd77b287248baf6649e762"
+    },
+    {
+      "bytes": 18574,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preparation-r2-lease-observations.jsonl",
+      "sha256": "aaaec811daec8989a58881ec545ca510fe4422ce1c3c2dc0683cc7ae0273cd6d"
+    },
+    {
+      "bytes": 4646,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preparation-r2-scheduler-adoption.json",
+      "sha256": "1cd981613dd7d2b55d11fdfafd124224e2aeb216dff46dd8672ec1c72a8e97d3"
+    },
+    {
+      "bytes": 2522,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/run_guardian.py",
+      "sha256": "25a1254e785ccd656c9e50fceba0d6a70e8c0345b0abf6633748b880ab1e151e"
+    },
+    {
+      "bytes": 17201,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/run_reserved.py",
+      "sha256": "212efa27d290fd2a0b14906560c6bc5a989ce5a8edc1e166b0b3bf83dec7bd78"
+    },
+    {
+      "bytes": 25551,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/staged-not-executed-v1/scripts/ops/autoencoder/benchmark_balanced_wording_continuation.py",
+      "sha256": "e59490c31a79db1e0f839dfb8dbd03ccff17216b2093750969e6a9dc1d0b19a4"
+    },
+    {
+      "bytes": 325,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1/child-exit.json",
+      "sha256": "8ca5c414c40e97c29010d30fd4cbcec82271cc6d75fc2b736fbf97f9fd2f269f"
+    },
+    {
+      "bytes": 44,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1/child-identity.json",
+      "sha256": "d656c92d3b789f329cb3e64eb67aad43aae820c6ab09b9be3d84238d63da5767"
+    },
+    {
+      "bytes": 3102,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1/child.log",
+      "sha256": "6cd4a626e4ae7fd1f0a969a52a8ebcc27e8fc1a0e2f9083e9dfcb91de5d50fe3"
+    },
+    {
+      "bytes": 6441,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1/command.json",
+      "sha256": "88246caa2cd4ddc39deba4e832706d924731452f765ac10dd35b0b99e06e0bc5"
+    },
+    {
+      "bytes": 3161,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1/failure-primary.json",
+      "sha256": "f27c9ca39366d3e6e9639a2566e87f1138e68b78f9bb77e22dc64ba0c58fc7ce"
+    },
+    {
+      "bytes": 4131,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1/failure.json",
+      "sha256": "88fdfb72771e92862725bec7302eef6e9fa97f3741e5a04cd4e77ea8d9d46e2f"
+    },
+    {
+      "bytes": 694,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1/lease-binding.json",
+      "sha256": "99f4653d00daf2c94c99069fd189d49dd2455243496ff55a27fea13f3dd6b498"
+    },
+    {
+      "bytes": 1744,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1/resource-observations.json",
+      "sha256": "88c55ad28074df53c2a331fd9d8f9fe92933db3cbacda8f347e8af8ada081232"
+    },
+    {
+      "bytes": 3179,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1/resources-start.json",
+      "sha256": "b835bae19dba49258b4e1aa2cb8f71b32989f27dbdaf16f4c0b9dc5b38382a9e"
+    },
+    {
+      "bytes": 77360,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1/results/balanced-paired-cache-receipt.json",
+      "sha256": "57f1b79fbec8650146795bfec322f77b032585cdf0027bd7b454a0fa5484799f"
+    },
+    {
+      "bytes": 775959,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1/results/balanced-parent-source-readout.json",
+      "sha256": "fe0ee20fa57de98f17bfe2f7d20221cde68737a64da2f64c1d8a85640494d47f"
+    },
+    {
+      "bytes": 25952,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1/results/balanced48-parent-actual-predictions.json",
+      "sha256": "d99934e90f409484d46616903f3961e3e9e750586a7d6ba7ed13aa20ea6c2151"
+    },
+    {
+      "bytes": 1664591,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1/results/balanced48-parent-greedy-trace.json",
+      "sha256": "94f66d55e17d90ac21da0f9ed74519b6f2c40e155789890bd3eb48fb73142dec"
+    },
+    {
+      "bytes": 156830,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1/results/balanced48-parent-posthoc-formula-fidelity.json",
+      "sha256": "c6f99fce278dbb3a9fc4b5dd2c969a59f07296dab5610e713c65e6933843f87d"
+    },
+    {
+      "bytes": 598938,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1/results/balanced48-parent-posthoc-scalar-scores.json",
+      "sha256": "6bc4d8956be979598138d1caa5a5309d060919c1e928f515a0a17529eb6ce6a3"
+    },
+    {
+      "bytes": 75499,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1/results/control-paired-cache-receipt.json",
+      "sha256": "1eecf485fd77e2dae62906022c50eedc1f6202e0b37d1eae3d2b441efa283868"
+    },
+    {
+      "bytes": 771650,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1/results/control-parent-source-readout.json",
+      "sha256": "c66d9eab61a24b50bf84d96a37330f8ffb8595146e13da35f5da376195c179f3"
+    },
+    {
+      "bytes": 215055,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1/results/paired-source-schedule.json",
+      "sha256": "786125add0636e47bfbe7d8468cc57d6665b32bd1199459c84f3b28a724c2350"
+    },
+    {
+      "bytes": 289,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1/results/parent-validation-parity.json",
+      "sha256": "ae3b2eddc8bc48e1724e6628dcc3cc7abbad937c52e366a0b2108c5ba70da7d6"
+    },
+    {
+      "bytes": 564010,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1/results/sealed-recipe.json",
+      "sha256": "4bb371c15e91bf65d0e2a7eca6cb781c1b33b502ff1ecb2f6aa5bc007c503497"
+    },
+    {
+      "bytes": 63,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1-guardian-exit.json",
+      "sha256": "e16fd0b94d07a1fdc9679bdaec53fb4997c9652694d79ce96828cb6755ab37da"
+    },
+    {
+      "bytes": 463,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1-guardian.log",
+      "sha256": "c9efbee6420419989ba9b469fc3bd625335be6fb3d066b01d7cae997b481d2b3"
+    },
+    {
+      "bytes": 36006,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1-lease-observations.jsonl",
+      "sha256": "2c95eef2d8a2046f2bb7f517958c90b04391a26ebadc9d883841726accc366f7"
+    },
+    {
+      "bytes": 4646,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1-scheduler-adoption.json",
+      "sha256": "1db74f4f1653b2d5a932bcf188b89806141d8a9ef2779f2a548dc5b44bb5c9b5"
+    },
+    {
+      "bytes": 325,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/child-exit.json",
+      "sha256": "5ce0a52e115392f1e00ec81026722246baf530041809c657993f1ac43e5029db"
+    },
+    {
+      "bytes": 42,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/child-identity.json",
+      "sha256": "6a593c21239e4f55801c938fb3fa8ae1effd68d93e48e13b7f7d5775d994fcd0"
+    },
+    {
+      "bytes": 1674,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/child.log",
+      "sha256": "80633b4fc45621a5a5c2203d00ea83a4412b2d1b0366cfea5b07cd2749289302"
+    },
+    {
+      "bytes": 6438,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/command.json",
+      "sha256": "c5dc0c8bfc04946d45a5b58c073ba2458e5770230daee5e550b29c75c0b7f431"
+    },
+    {
+      "bytes": 691,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/lease-binding.json",
+      "sha256": "c06fcf6d42a7518da4b28b6cf43132b09901307932946f717034d4a96d957f66"
+    },
+    {
+      "bytes": 7017,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/resource-observations.json",
+      "sha256": "56894014da0b6743ff6d5d8b8f419571cb6a40bf4866ada48253bd6f75eef88f"
+    },
+    {
+      "bytes": 5830,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/resources-final.json",
+      "sha256": "6553ed3aafe8a623e63cf7c2c48a4543e79e9d44af16631150d7e664470ee959"
+    },
+    {
+      "bytes": 3170,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/resources-start.json",
+      "sha256": "66b2bbf290b89b234cfe0fadba360aeaea2e8e983d980cd5f640461f5d9a435b"
+    },
+    {
+      "bytes": 77360,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-paired-cache-receipt.json",
+      "sha256": "cf9f34412d31dfe53bd91b72c830c2ca7cdc0bb0cd152376f4dc837cf2edc7e9"
+    },
+    {
+      "bytes": 775959,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-parent-source-readout.json",
+      "sha256": "1e7fe69ed4c51eee85bf93603e1acf27792e2fa8ae81c280a26ae7fa03d6c207"
+    },
+    {
+      "bytes": 776111,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/last-attempt/balanced-source-bank-readout.json",
+      "sha256": "20e10f08707a3bf60144fe8fe283f5ef3c4a20b4e13e6545852888436f5b46ed"
+    },
+    {
+      "bytes": 771390,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/last-attempt/control-source-bank-readout.json",
+      "sha256": "6aaef3354fef1c2685dad0dc512878b378c757019c8b274b06c1d5547ea43a7a"
+    },
+    {
+      "bytes": 2075568,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/last-attempt/evaluation-context-only-shuffle.json",
+      "sha256": "adf246f3928ae644e0ac816ceca9c1d0f687d1f08e72d8c4952f0501e48983bc"
+    },
+    {
+      "bytes": 2075609,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/last-attempt/evaluation-context-reverse.json",
+      "sha256": "101dec2ca664bf54696dbde946a91504bdd99e78afe3575196493b5cd748d24f"
+    },
+    {
+      "bytes": 2075571,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/last-attempt/evaluation-context-rotate.json",
+      "sha256": "1b2542a28bdd0c35d2b36b0442e15262fdba2cec782e96a79c2a707d9481ad80"
+    },
+    {
+      "bytes": 2075652,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/last-attempt/evaluation-cross-length-shuffle.json",
+      "sha256": "69fe19c551f3287b9fcae9070fe3317f7964ec18c52742ee28942fb854ea531c"
+    },
+    {
+      "bytes": 1987026,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/last-attempt/evaluation-recurrent-residual-off.json",
+      "sha256": "51d3c7d09f7934bead0af6047e129cc9d3084601cb00f5f90982a24e2f40643c"
+    },
+    {
+      "bytes": 2075497,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/last-attempt/evaluation-source-shuffle.json",
+      "sha256": "8ce8b6a269b9e9911dbe71637395a99ddcc78937a0fdd0121e2cf9490f5053cf"
+    },
+    {
+      "bytes": 2069935,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/last-attempt/evaluation-training.json",
+      "sha256": "a72de8afde91edcc1fc0a67c700d4743de137c259419773f4bbacd069c70b1c7"
+    },
+    {
+      "bytes": 2074524,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/last-attempt/evaluation-validation.json",
+      "sha256": "109a866137fc4d0b1ed373c96928c0ab99774b219a5a86d96994e518fb5c8b80"
+    },
+    {
+      "bytes": 2784966,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/last-attempt/evaluation-zero-condition.json",
+      "sha256": "20bf09e75438efb07815705f9a069ef758e6f50d2edd5a5fd5b11ce82cd4ddaf"
+    },
+    {
+      "bytes": 776111,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/selected/balanced-source-bank-readout.json",
+      "sha256": "832e1faa97c51854aa6024f8e63546f5503b4d1c736b30ee34c4e97cef4cc2b6"
+    },
+    {
+      "bytes": 771391,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/selected/control-source-bank-readout.json",
+      "sha256": "800808ff1157b8dc8a5015f5895f8e0c1496ac385a02bb2066c28ed85403246c"
+    },
+    {
+      "bytes": 2075567,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/selected/evaluation-context-only-shuffle.json",
+      "sha256": "b57330819d589e91f5cbf4247122d9761c48b2a83f9f0590b8db1958c5cecc73"
+    },
+    {
+      "bytes": 2075609,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/selected/evaluation-context-reverse.json",
+      "sha256": "9d2fc7c03819d69abd61b95569b4fcebb4889812bd6086047ea7a4eed850ea5f"
+    },
+    {
+      "bytes": 2075572,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/selected/evaluation-context-rotate.json",
+      "sha256": "319103ef26c4d14bb748d4d90b7a2b26cd38099b9085df36aa3a91eae971c8d8"
+    },
+    {
+      "bytes": 2075656,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/selected/evaluation-cross-length-shuffle.json",
+      "sha256": "8a38f5e2b08e4961f9953695ef850e8aaa5fd322b1674c9f37af2d3c7758a68c"
+    },
+    {
+      "bytes": 1987028,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/selected/evaluation-recurrent-residual-off.json",
+      "sha256": "091c188c5e1234ec09ac4030bd39045c9c000b188738732ffb655cbfbd8042ac"
+    },
+    {
+      "bytes": 2075496,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/selected/evaluation-source-shuffle.json",
+      "sha256": "e465a2773732c420203bd993a7aa13aeb33a3e6bba2ed222da35602670bffc11"
+    },
+    {
+      "bytes": 2069932,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/selected/evaluation-training.json",
+      "sha256": "35df75267fefe3f472951324bdae415ee0399a60df84c6e86a1aeec74667481a"
+    },
+    {
+      "bytes": 2074525,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/selected/evaluation-validation.json",
+      "sha256": "b45a8d86a90308baf1921b93d962dfcae48a704e2d8a55d50135049834fc2535"
+    },
+    {
+      "bytes": 2784968,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/selected/evaluation-zero-condition.json",
+      "sha256": "33a9524d4a2a555136a58abaddb0468bdaeda5bd61e787ac963bcd7a954462d8"
+    },
+    {
+      "bytes": 317374,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/summary.json",
+      "sha256": "a0ae024480aeebd789301e8f6d9ee07e69edd29657bffd24581bafe06223435d"
+    },
+    {
+      "bytes": 21212967,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/training.json",
+      "sha256": "466fd130089ba2aee3babf083e763766f0c3607e0fa5f0581fd3320e3bb49c61"
+    },
+    {
+      "bytes": 25952,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced48-parent-actual-predictions.json",
+      "sha256": "c4239b52ab5ac35fcb2538c404e846e6f1586aad22e27bc631f4c23c2ebf2a4a"
+    },
+    {
+      "bytes": 1664591,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced48-parent-greedy-trace.json",
+      "sha256": "e176f083253874e742c4d41725c37ae8d67fce6e520b9b3bf537e9aad8afecfe"
+    },
+    {
+      "bytes": 156830,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced48-parent-posthoc-formula-fidelity.json",
+      "sha256": "c6f99fce278dbb3a9fc4b5dd2c969a59f07296dab5610e713c65e6933843f87d"
+    },
+    {
+      "bytes": 598938,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced48-parent-posthoc-scalar-scores.json",
+      "sha256": "c575709c7f88e91e3411950ddc2e95a35343abf133dc2181ac15c234d21afeba"
+    },
+    {
+      "bytes": 75499,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-paired-cache-receipt.json",
+      "sha256": "3f37c45589a70f4fd1085f0af50465aa3a5a941a182970fe0b758bd2d4432f4d"
+    },
+    {
+      "bytes": 771651,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-parent-source-readout.json",
+      "sha256": "3a376fff1e147b912eca8bb712abeca1c9626d7f9c478ee79427a7f817b7fb3e"
+    },
+    {
+      "bytes": 775264,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/last-attempt/balanced-source-bank-readout.json",
+      "sha256": "82f5ffe6b90a82060bb898686a8da4071d3b920b8af414c23f4a6eb2c7494a71"
+    },
+    {
+      "bytes": 771177,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/last-attempt/control-source-bank-readout.json",
+      "sha256": "a3d71125ee30a8f0c7c098ac473603d4cb2a33b8b005d3bbc28f7dc9fc5955a0"
+    },
+    {
+      "bytes": 2075900,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/last-attempt/evaluation-context-only-shuffle.json",
+      "sha256": "7879fb4f677c30843384da750ec334a9e2e949142004a76f3d486b8f85a0ab3a"
+    },
+    {
+      "bytes": 2075935,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/last-attempt/evaluation-context-reverse.json",
+      "sha256": "53d68ae1061b02c85deff4f87ea9d1b0beecf6396b1173af352bcc99d474f7ce"
+    },
+    {
+      "bytes": 2075902,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/last-attempt/evaluation-context-rotate.json",
+      "sha256": "8c705df374353890effdcdfd8dd6e09c1e6eef97f19c1c06f35a9fcb7fb19b3a"
+    },
+    {
+      "bytes": 2075980,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/last-attempt/evaluation-cross-length-shuffle.json",
+      "sha256": "28c220839a8c04be81a6f528b7cab6749cf4df81cc3cbf6154db4dbcdcc64bcb"
+    },
+    {
+      "bytes": 1987415,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/last-attempt/evaluation-recurrent-residual-off.json",
+      "sha256": "43e531f2bff520611bce1b570e2ff7eb127076f82076bbfe678b674a8ba3635e"
+    },
+    {
+      "bytes": 2075827,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/last-attempt/evaluation-source-shuffle.json",
+      "sha256": "bd0d40a4aa130d0575d37b8706a8d2900f61b7c23fc8893976af6d43988c2311"
+    },
+    {
+      "bytes": 2070131,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/last-attempt/evaluation-training.json",
+      "sha256": "d1587ce079342469e8864cb8c65718bc61abcc46ba1ebffa4c15716e79071534"
+    },
+    {
+      "bytes": 2074854,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/last-attempt/evaluation-validation.json",
+      "sha256": "0260dcfddd5c9c224fb67e0701b8789c560f534865241fe528de024d18021200"
+    },
+    {
+      "bytes": 2784901,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/last-attempt/evaluation-zero-condition.json",
+      "sha256": "5528aafeca527a1247a90718352564bfacc05d5e0b1fefd08e10306515fd4dbb"
+    },
+    {
+      "bytes": 775265,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/selected/balanced-source-bank-readout.json",
+      "sha256": "65b2f115ce686b7a670d429491643c36696ddbac872a9c9573de470605252c0f"
+    },
+    {
+      "bytes": 771177,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/selected/control-source-bank-readout.json",
+      "sha256": "a23d91b79be9221f9720a33aa676aabd817bb0e543daf509c17324c63d33e579"
+    },
+    {
+      "bytes": 2075901,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/selected/evaluation-context-only-shuffle.json",
+      "sha256": "2332f88e010f5655feba4f5ccc9aaee6e96d509d3663b2fe88f2c2f35c0f183c"
+    },
+    {
+      "bytes": 2075935,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/selected/evaluation-context-reverse.json",
+      "sha256": "084e4e2d9d9ac4d2e5bdbfecc5d1f72f2a2b7f5aa5faa03fcbbb99b656607ce6"
+    },
+    {
+      "bytes": 2075900,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/selected/evaluation-context-rotate.json",
+      "sha256": "95d73f7756cce0d2a516d4c39e434d942b5832384bc9ed7197d3453b9c4e0670"
+    },
+    {
+      "bytes": 2075981,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/selected/evaluation-cross-length-shuffle.json",
+      "sha256": "4350d2454cdfb39f053f0052f2883ad603e3a682d349ea0ec3fd2ad4ce50b320"
+    },
+    {
+      "bytes": 1987418,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/selected/evaluation-recurrent-residual-off.json",
+      "sha256": "336ff013314ad5ec685437876e2b96fe83740953c062134cc8e36c8b19e072be"
+    },
+    {
+      "bytes": 2075822,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/selected/evaluation-source-shuffle.json",
+      "sha256": "10b2e9aa0b7809a5d3c884d8d7810a0bc976773a78790e59ec8046c5daf3a62c"
+    },
+    {
+      "bytes": 2070136,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/selected/evaluation-training.json",
+      "sha256": "a5af25e000fba094239365f71b4ee9378214ea633023c160a0ba57f6ed8bc889"
+    },
+    {
+      "bytes": 2074857,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/selected/evaluation-validation.json",
+      "sha256": "460ae6050ff303a32f30ea96f94119235f935a68a1a2d6a159300181d216e681"
+    },
+    {
+      "bytes": 2784901,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/selected/evaluation-zero-condition.json",
+      "sha256": "191f435f9fd2ff9df59e5b8fe87a8a7af9a4a8d39ab1464e39e6394711bce79d"
+    },
+    {
+      "bytes": 317346,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/summary.json",
+      "sha256": "5c12f56b8862d3f7322e01229b3f3733243925f6afe98af34caee6a3c3ccd909"
+    },
+    {
+      "bytes": 21197786,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/training.json",
+      "sha256": "3ba941f44c473723c82c1e329b1d0dffa4bc6c620ecb77a9951df92c7fb84506"
+    },
+    {
+      "bytes": 215055,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/paired-source-schedule.json",
+      "sha256": "786125add0636e47bfbe7d8468cc57d6665b32bd1199459c84f3b28a724c2350"
+    },
+    {
+      "bytes": 289,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/parent-validation-parity.json",
+      "sha256": "ae3b2eddc8bc48e1724e6628dcc3cc7abbad937c52e366a0b2108c5ba70da7d6"
+    },
+    {
+      "bytes": 578358,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/sealed-recipe.json",
+      "sha256": "5d9b9cdf6f02bd154e55ce653c506748cc0c67557dfe8486765b888245895497"
+    },
+    {
+      "bytes": 35974,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/summary.json",
+      "sha256": "946da863698dc6118a3a8158c2b72c77b5b45b1fa933363f9954303b392898d8"
+    },
+    {
+      "bytes": 62,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2-guardian-exit.json",
+      "sha256": "c45960aac18a9f5fc21dd50740ac8d8b14a97888bdee135774ab71899165cff0"
+    },
+    {
+      "bytes": 5104,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2-guardian.log",
+      "sha256": "fb3e76f11e5579eca8947da05af4b5f2b7efd0ac03aa8ad44c91e3fde68b0be7"
+    },
+    {
+      "bytes": 160612,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2-lease-observations.jsonl",
+      "sha256": "a93adbd055e4c17b53f66b55e7d88900fa33da342972ed3b20fb284cb4a4d750"
+    },
+    {
+      "bytes": 4643,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2-scheduler-adoption.json",
+      "sha256": "c50969426b24eabdcfe0c15f67160b945b4ecfa557dcd76efd963d7ae30fbf77"
+    },
+    {
+      "bytes": 295744,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-manifest.json",
+      "sha256": "3dbbc5490293010cf8e045d7a7062ddb3d00308435ddcdd1e63c54ffceafdf57"
+    },
+    {
+      "bytes": 297661,
+      "path": "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-plan.json",
+      "sha256": "11793c40d1d896029c1cce0eef1b2bcfdc32020321052981f69a4c641e7cefd5"
+    }
+  ],
+  "excluded_local_bodies": [
+    "artifacts/autoencoder-balanced-wording-20261007/root-progress-state.json",
+    "artifacts/autoencoder-balanced-wording-20261007/runtime/assembled-inputs-r1/balanced-native384-inputs.json",
+    "artifacts/autoencoder-balanced-wording-20261007/runtime/assembled-inputs-r1/balanced-source-inventory.json",
+    "artifacts/autoencoder-balanced-wording-20261007/runtime/assembled-inputs-r1/control-source-inventory.json",
+    "artifacts/autoencoder-balanced-wording-20261007/runtime/assembled-inputs-r1/original90-rules.json",
+    "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2/results/balanced-bank.json",
+    "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preflight-384-r2/results/control-bank.json",
+    "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/preparation-r2/results/production-384.json",
+    "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1/results/balanced-bank.json",
+    "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r1/results/control-bank.json",
+    "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-bank.json",
+    "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/initial-state.json",
+    "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/last-attempt-state.json",
+    "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/balanced-wording-ce/selected-state.json",
+    "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-bank.json",
+    "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/initial-state.json",
+    "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/last-attempt-state.json",
+    "external/ipfs_datasets/workspace/test-logs/decoder-balanced-wording-20261007/training-384-r2/results/control-wording-ce/selected-state.json"
+  ],
+  "findings": [],
+  "model_execution_performed": false,
+  "passed": true,
+  "prepared_embedding_bodies_archived": false,
+  "qualification_granted": false,
+  "retained_vector_observations": "inherited reconstructed_input outputs and normalized training feature observations",
+  "schema": "balanced-wording-evidence-retention/v1",
+  "source_bytes": 233307180
+}

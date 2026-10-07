@@ -1,0 +1,46 @@
+{
+  "commands": [
+    {
+      "argv": [
+        ".venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan",
+        "-p",
+        "test_dual_bank_retention.py",
+        "-v"
+      ],
+      "elapsed_seconds": 1.0291758340317756,
+      "exit_code": 0,
+      "label": "pure-tests",
+      "log": "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/pure-tests-validation.log",
+      "sha256": "9737535a4408f1f97d261affd61cbd4c6ee13c049822044920a4cb2467d1eb4b"
+    },
+    {
+      "argv": [
+        ".venv/bin/ruff",
+        "check",
+        "--select",
+        "F",
+        "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/dual_bank_retention.py",
+        "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/test_dual_bank_retention.py"
+      ],
+      "elapsed_seconds": 0.007614956994075328,
+      "exit_code": 0,
+      "label": "ruff",
+      "log": "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/ruff-validation.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    }
+  ],
+  "helper_sha256": "15accfcf8bbc4e578e32ca7842ac338be2b563458c4c90a85fbe18429da000f1",
+  "models_or_encoders_imported_or_executed": false,
+  "no_frozen_owner_changes": true,
+  "numerical_owners_imported": false,
+  "passed": true,
+  "real_trainer_wired": false,
+  "schema": "dual-bank-retention-pure-validation/v1",
+  "test_sha256": "9161ee5cd16bc08db76e4635ec2b6d1d15b3199fb7b686fd846f47c1188bc589",
+  "tests": 17
+}

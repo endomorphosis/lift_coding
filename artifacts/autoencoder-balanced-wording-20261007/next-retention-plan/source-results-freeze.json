@@ -1,0 +1,58 @@
+{
+  "admitted": false,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/design.md": {
+      "bytes": 9201,
+      "sha256": "79498e8419bf2864c9717eafc248ffded3aaf77ad42ed43d374b2a015ad5244c"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/dual_bank_retention.py": {
+      "bytes": 26660,
+      "sha256": "15accfcf8bbc4e578e32ca7842ac338be2b563458c4c90a85fbe18429da000f1"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/implementation-contract.json": {
+      "bytes": 4537,
+      "sha256": "05e1d875d44c08287c69fa009fdf31ec0b59e8d5cb426cf4eefa3166bfe92f1c"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/observed-outcome.json": {
+      "bytes": 14514,
+      "sha256": "d010355165a9c686dbf847bc68af44f0384f167f226e9d352bdcd84d963dfe86"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/proposed-dual-bank-schedule.json": {
+      "bytes": 443751,
+      "sha256": "11a9c660f5101dbcf2981cfa0d451d13c6a81ebbc75b7ad2699e07d37106e2e1"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/pure-tests-validation.log": {
+      "bytes": 3242,
+      "sha256": "9737535a4408f1f97d261affd61cbd4c6ee13c049822044920a4cb2467d1eb4b"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/pure-validation.json": {
+      "bytes": 1737,
+      "sha256": "ef19728a2824525c7d534bce194c0a37e2f5dec85d40d71a26ca151849e3e438"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/ruff-validation.log": {
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/schedule-census-proof.json": {
+      "bytes": 2139,
+      "sha256": "c08f96a09541ed50b4b10fafd03001b8f5c5df09423edfc01a0aab312b1e52b9"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/next-retention-plan/test_dual_bank_retention.py": {
+      "bytes": 17284,
+      "sha256": "9161ee5cd16bc08db76e4635ec2b6d1d15b3199fb7b686fd846f47c1188bc589"
+    }
+  },
+  "complete": true,
+  "execution_ready": false,
+  "formalized": false,
+  "frozen_experiment_modified": false,
+  "model_or_encoder_execution": false,
+  "no_improvement_claim": true,
+  "passed": true,
+  "proof_authority": false,
+  "qualified": false,
+  "real_trainer_wired": false,
+  "schema": "dual-bank-retention-plan-source-results-freeze/v1",
+  "semantic_training_admission_granted": false,
+  "tests": 17
+}

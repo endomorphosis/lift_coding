@@ -1,0 +1,510 @@
+{
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/candidates/source-results-freeze.json": {
+      "bytes": 11143,
+      "sha256": "e408d5f67f5ab5d6e39b363753fe76ca2cab7f4641435ce0e1642667210fe52a"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/evaluation-review/actual-evaluation-r1-compact.json": {
+      "bytes": 477360,
+      "sha256": "d8a68018f193c3e1511e9f2d695c427195be7f6e892bb5dcf1254d6fec8ef75f"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/evaluation-review/actual-evaluation-r1-independent-review.json": {
+      "bytes": 12012856,
+      "sha256": "e44fa8400b4d80408b0bf78e4b60003356dfe44b1fb97e35051ee3c8368ba089"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/evaluation-review/actual-evaluation-r1-parent-comparison.json": {
+      "bytes": 7432,
+      "sha256": "2543cfa503edc1f8dab67667b9c6d91e78f8795937cfddeb7e956af9b4bbe52e"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/pipeline/publisher-adaptation.diff.gz": {
+      "bytes": 806,
+      "sha256": "09e61e529bf5443919fe73ca899324121ef3fc30ee3245ddfed853c16c1b3e28"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/pipeline/publisher-adaptation.json": {
+      "bytes": 1869,
+      "sha256": "974fff3f83b6bf846430514cbb4860af3037b32a0fcfb457874ebf8bc9c39cb5"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/pipeline/publisher-independent-review.json": {
+      "bytes": 5838,
+      "sha256": "341f1a696637854447807b445d6ff16b901fc326b71798cc131770e0e1811302"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/pipeline/publisher-normal-state-after.json": {
+      "bytes": 524,
+      "sha256": "b077c462aae495481652ed95a3b31a4b2f35226b2870cc2b4973b3a0b9a08c07"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/pipeline/publisher-normal-state-before.json": {
+      "bytes": 524,
+      "sha256": "b077c462aae495481652ed95a3b31a4b2f35226b2870cc2b4973b3a0b9a08c07"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/predeclared-comparison-protocol.json": {
+      "bytes": 4255,
+      "sha256": "3ba0029bfe86d7ca45948bc4da7d8c847b21e97f0e10ac3e14a7163e8a7e4b8f"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/publication/advertised-origin-refs.json": {
+      "bytes": 12093,
+      "sha256": "e357a59f7ce0dfa665592504443f290612cbe7e9358a487ce088967bcce6245e"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/publication/final-main-worktree-inventory.json": {
+      "bytes": 209694,
+      "sha256": "7e549e885479efa0493996f3c217677e84d8fa791de23e6bf97dcfb69a431e3b"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/publication/historical-autoencoder-intake.json": {
+      "bytes": 460669,
+      "sha256": "55381aed20631825002d22ed0af7ea68c873ae7188e2279c697ddc868607c6f0"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/publication/historical-divergent-delta-audit.json.gz": {
+      "bytes": 498920,
+      "sha256": "2811e4434766a3c9053d65f6e6d52b2238d00ce05140228f851c9c17eeda5fee"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/publication/historical-tip-origin-reachability.json": {
+      "bytes": 4321,
+      "sha256": "14ef23f0eb2126a877bf8b7556de6fd3916e39224b78d2fd12d733c24593fabd"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/publication/published-owner-bindings.json": {
+      "bytes": 15251,
+      "sha256": "d261b197fef9bef2af559d5959902bbbd4d982b8d141e8342e37196ebce9e8fb"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/publish_integration.py": {
+      "bytes": 8308,
+      "sha256": "3982d7c2494e744914d5935d131f10446486bcd3f54e83dc9cd8b2bf4c1743b4"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/publisher_review_tests.py": {
+      "bytes": 14941,
+      "sha256": "e434faf3660951e93fe16b7c4d9854c079eec646cd48cafc647b21435dcc5926"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/training-review/actual-training-384-r2-compact.json": {
+      "bytes": 112928,
+      "sha256": "24d9456d2d86b472d3a1907d8fee2635c33717198e10fab8d6077e725a8ec7a1"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/training-review/actual-training-384-r2-independent-review.json": {
+      "bytes": 1792210,
+      "sha256": "06f86ffc2ac7863b9770aee63f305f1b1f487ce89104da9b62f1fc59e771e107"
+    }
+  },
+  "checks": [
+    {
+      "detail": "All 47 workspace and 29 package registered worktrees and 103 workspace/57 package refs inventoried, including detached/unobvious names; missing registrations explicitly recorded.",
+      "name": "complete_registered_inventory",
+      "passed": true
+    },
+    {
+      "detail": "Read-only ls-remote verifies pinned workspace e2bb41f9/package 8b1cff7c equal current remote main; no fetch/ref mutation.",
+      "name": "latest_main_equal_remote",
+      "passed": true
+    },
+    {
+      "detail": "Both ordinary HEAD and physical index SHA equal inventory and publisher test preimages.",
+      "name": "ordinary_heads_indexes_unchanged",
+      "passed": true
+    },
+    {
+      "detail": "Normative selected-cached, retained-native-cache, source-span pilot and owner-reconciliation contributions are ancestors/present on pinned main, with immutable blob bindings.",
+      "name": "october7_current_contributions_already_main",
+      "passed": true
+    },
+    {
+      "detail": "Ten of thirteen selected main owner/guide/plan files absent shared cwd and three differ; published main is authoritative. No main-owned materialization is proposed.",
+      "name": "published_missing_live_separate_from_not_merged",
+      "passed": true
+    },
+    {
+      "detail": "Per-tip merge-base change census records exact, different, absent and deleted postimages, with current-main alternate-blob locations; retained refs untouched.",
+      "name": "all_nine_historical_divergent_tips_explicit",
+      "passed": true
+    },
+    {
+      "detail": "174 historical workspace paths absent at same main path; 101 exact blobs exist elsewhere on two main trees, 73 do not. Compressed members/external releases are not searched or rejected by this audit.",
+      "name": "historical_gaps_not_claimed_merged",
+      "passed": true
+    },
+    {
+      "detail": "All 24 added experiment artifacts exact on main; two older plan postimages differ and are not restored.",
+      "name": "joint_conditioning_experiment_already_represented",
+      "passed": true
+    },
+    {
+      "detail": "Codebase replay worktree worker-budget change and canonical dirty parser/compiler/scheduler/runtime/model work remain outside scope and untouched.",
+      "name": "uncommitted_active_code_preserved",
+      "passed": true
+    },
+    {
+      "detail": "Sixteen evaluation panels, 11520 scored scalar sites/34560 raw full32 distributions, parent31 authentication and both-arm metrics bound to completed independent audits.",
+      "name": "actual_negative_transfer_bound",
+      "passed": true
+    },
+    {
+      "detail": "Private retention/feature experiment is not wired into current main runtime owners or source-span task; no compatibility or pooled-score claim.",
+      "name": "published_owners_not_replaced",
+      "passed": true
+    },
+    {
+      "detail": "Exact reused publisher has only two commit-message edits; nine disposable tests pass, no actual remote publication; final scope review remains required.",
+      "name": "private_index_publisher_guards_preserved",
+      "passed": true
+    },
+    {
+      "detail": "All174 bodies streamed and SHA/bytes/mode/blob/retained-tip identities sealed (133682935B):27 alignment paths plus147 release paths.99 source capsules,one release document andone manifest already exact elsewhere; remaining14capsules/eight cards-docs/51checkpoint-control paths prioritized for review.",
+      "name": "complete_historical_174_path_intake",
+      "passed": true
+    },
+    {
+      "detail": "All60workspace and19package advertised origin heads/tags have known commit graphs; none of9divergent retained tips is an ancestor of a currently advertised ref. No GitHub old-tip URL or remote publication is claimed.",
+      "name": "old_tip_origin_visibility_not_invented",
+      "passed": true
+    }
+  ],
+  "completed_experiment": {
+    "balanced_exposed_v3_ordered_exact": 19,
+    "balanced_new_balanced_ordered_exact": 48,
+    "balanced_old_normative_ordered_exact": 33,
+    "balanced_original_train_and_validation": 48,
+    "control_exposed_v3_ordered_exact": 33,
+    "control_new_balanced_ordered_exact": 48,
+    "control_old_normative_ordered_exact": 48,
+    "control_original_train_and_validation": 48,
+    "decision": "Do not promote balanced replacement; preserve original 170-update streams and evaluate controlled TRAIN-only dual-bank retention under a separately frozen protocol. No measured dual-bank improvement exists yet.",
+    "full32_distributions": 34560,
+    "limitations": [
+      "Known 90 meanings and all cohort exposure retained; v3 is diagnostic, not a fresh selector.",
+      "Four endpoint-role evaluations represent two distinct tensors with selected/last aliases, not four independent replicates.",
+      "Same-pass source/recurrent decomposition is descriptive at actual prefixes; source-conditioned history prevents isolated causal claims.",
+      "All codec qualifiers empty; no nonempty qualifier-learning claim.",
+      "Archived original parent replay was equality assertion only in preflight; evaluator endpoint/parent archive comparisons authenticate required token/status/EOS, not unsaved preflight replay bodies.",
+      "Historical schema callback/import logs are not current canonical compiler/Lean runs or speed claims."
+    ],
+    "logical_panels": 16,
+    "paragraphs": 768,
+    "parent_exposed_v3_ordered_exact": 31,
+    "physical_panels": 16,
+    "reference_rules": 2880,
+    "reference_scalar_sites": 11520
+  },
+  "coverage_limits": [
+    "Inventory covers all registered local refs/worktrees and path-scoped deltas, not every historical Git object or remote branch absent from local refs. Remote main is directly verified.",
+    "Missing registered worktree directories retain their HEAD/locked metadata but their dirty filesystem state cannot be inspected.",
+    "Package main worktree registration reports its common Git directory; ordinary canonical source directory is /home/barberb/lift_coding/external/ipfs_datasets.",
+    "Old snapshot postimages differing from main are unreviewed port candidates; immutable metadata review does not establish compiler/runtime equivalence.",
+    "Loose-blob search across both full current main trees does not inspect compressed archive members or external model-store releases."
+  ],
+  "findings": [],
+  "followups": [
+    {
+      "detail": "73 historical path postimages have no exact loose blob in either full current main tree (27 alignment checkpoint/control JSON paths;46 additional-decoder release documentation/checkpoint/source-capsule paths). Authenticate compressed/external release membership and license/provenance before deciding on a small archival gap port; never treat them as new tensor results.",
+      "name": "historical_archive_custody",
+      "status": "retained_not_ported"
+    },
+    {
+      "detail": "23 unique package changed/deleted paths and5 workspace different tool/plan/test paths are explicitly bound. One package source blob already exists as preserved evidence elsewhere; remaining postimages require semantic/API/resource compatibility review before source restoration. No wholesale old snapshot merge.",
+      "name": "historical_different_source_and_documents",
+      "status": "retained_unreviewed"
+    },
+    {
+      "detail": "Independently review and measure the codebase replay worker-budget patch in its owning worktree; excluded from this numerical publication.",
+      "name": "active_worker_budget_patch",
+      "status": "uncommitted_preserved"
+    }
+  ],
+  "freeze_note": "Final reconciliation/intake source and metadata frozen. Later helper/scope reviews are separate pipeline artifacts; this final report is not revised to assert publication completion.",
+  "git_mutations": false,
+  "git_optional_locks": false,
+  "historical_intake": {
+    "bytes": 460669,
+    "path": "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/publication/historical-autoencoder-intake.json",
+    "sha256": "55381aed20631825002d22ed0af7ea68c873ae7188e2279c697ddc868607c6f0"
+  },
+  "historical_remote_reachability": {
+    "all_advertised_commit_graphs_available_locally": true,
+    "current_advertised_package_refs": 19,
+    "current_advertised_workspace_refs": 60,
+    "divergent_tips_origin_advertised_reachable": 0,
+    "github_old_tip_links_asserted": false,
+    "local_refs_preserved": true
+  },
+  "historical_tip_dispositions": [
+    {
+      "disposition": "Most changed postimages exact on main. Every remaining different/deleted postimage or absent loose path is retained in historical tip and explicitly unreviewed for source restoration/archive port; no wholesale cherry-pick.",
+      "merge_base": "d2e43dd82d98903f539aed5f9b3b1b2b2480efa4",
+      "path_counts": {
+        "already_exact_main_postimage": 76,
+        "historical_postimage_differs_main_unreviewed": 6
+      },
+      "refs": [
+        "refs/heads/publication/main-20261004/datasets"
+      ],
+      "repository": "datasets",
+      "tip": "5eedd23dd8b8ae4e2cac1716f00f1fcaf19a2801"
+    },
+    {
+      "disposition": "Most changed postimages exact on main. Every remaining different/deleted postimage or absent loose path is retained in historical tip and explicitly unreviewed for source restoration/archive port; no wholesale cherry-pick.",
+      "merge_base": "aa586a9b91b583a2ac5d867bd107ba0c5a4762d5",
+      "path_counts": {
+        "already_exact_main_postimage": 72,
+        "historical_postimage_differs_main_unreviewed": 8
+      },
+      "refs": [
+        "refs/heads/publication/main-refresh-20261004/datasets-01"
+      ],
+      "repository": "datasets",
+      "tip": "23540627b1cf6515df0fd84c9417b4cbdb91234a"
+    },
+    {
+      "disposition": "Most changed postimages exact on main. Every remaining different/deleted postimage or absent loose path is retained in historical tip and explicitly unreviewed for source restoration/archive port; no wholesale cherry-pick.",
+      "merge_base": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+      "path_counts": {
+        "already_exact_main_postimage": 919,
+        "historical_postimage_differs_main_unreviewed": 20,
+        "tip_delete_not_auto_integrated": 1
+      },
+      "refs": [
+        "refs/heads/recovery/local-source-20261004"
+      ],
+      "repository": "datasets",
+      "tip": "b8a9bb35a8234d1c12204f2bae34d2a0c2635056"
+    },
+    {
+      "disposition": "24 experiment artifacts exact on main; two older plan postimages retained but not restored.",
+      "merge_base": "3bbe3fa3039c2d837e4f54e785d6772600b77fb9",
+      "path_counts": {
+        "already_exact_main_postimage": 24,
+        "historical_postimage_differs_main_unreviewed": 2
+      },
+      "refs": [
+        "refs/heads/codex/joint-conditioning-20261005-01"
+      ],
+      "repository": "workspace",
+      "tip": "8c02d655e2d086bd644a9011ea67325060ef87bc"
+    },
+    {
+      "disposition": "Most changed postimages exact on main. Every remaining different/deleted postimage or absent loose path is retained in historical tip and explicitly unreviewed for source restoration/archive port; no wholesale cherry-pick.",
+      "merge_base": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+      "path_counts": {
+        "already_exact_main_postimage": 2362,
+        "historical_postimage_absent_main_unreviewed": 147,
+        "historical_postimage_differs_main_unreviewed": 3
+      },
+      "refs": [
+        "refs/heads/publication/canonical-current-root-20261004/3560d0e1d9383e2100675998"
+      ],
+      "repository": "workspace",
+      "tip": "ef9c8e4d94d9d427d1bd60168e9bd6d0a15cfe38"
+    },
+    {
+      "disposition": "Most changed postimages exact on main. Every remaining different/deleted postimage or absent loose path is retained in historical tip and explicitly unreviewed for source restoration/archive port; no wholesale cherry-pick.",
+      "merge_base": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+      "path_counts": {
+        "already_exact_main_postimage": 699,
+        "historical_postimage_absent_main_unreviewed": 27,
+        "historical_postimage_differs_main_unreviewed": 4
+      },
+      "refs": [
+        "refs/heads/publication/canonical-wip-20261004/3560d0e1d9383e2100675998"
+      ],
+      "repository": "workspace",
+      "tip": "bc64e1a2d3d3428ae3823fd4754d0051a61d485d"
+    },
+    {
+      "disposition": "Most changed postimages exact on main. Every remaining different/deleted postimage or absent loose path is retained in historical tip and explicitly unreviewed for source restoration/archive port; no wholesale cherry-pick.",
+      "merge_base": "cc5d5bf9fa40bd9a8834d8fb61a03a4724033297",
+      "path_counts": {
+        "already_exact_main_postimage": 2356,
+        "historical_postimage_absent_main_unreviewed": 174,
+        "historical_postimage_differs_main_unreviewed": 2
+      },
+      "refs": [
+        "refs/heads/publication/main-20261004/root-02"
+      ],
+      "repository": "workspace",
+      "tip": "ce3e21da27d23bfa4ac5490be9a5cb44798945f2"
+    },
+    {
+      "disposition": "Most changed postimages exact on main. Every remaining different/deleted postimage or absent loose path is retained in historical tip and explicitly unreviewed for source restoration/archive port; no wholesale cherry-pick.",
+      "merge_base": "1be6270220cba85d09a64556b30f47916efa2982",
+      "path_counts": {
+        "already_exact_main_postimage": 2397,
+        "historical_postimage_differs_main_unreviewed": 3
+      },
+      "refs": [
+        "refs/heads/publication/main-20261004/root-03"
+      ],
+      "repository": "workspace",
+      "tip": "57fd19895ce42ad68f87b3d7126fbf19da285bdb"
+    },
+    {
+      "disposition": "Most changed postimages exact on main. Every remaining different/deleted postimage or absent loose path is retained in historical tip and explicitly unreviewed for source restoration/archive port; no wholesale cherry-pick.",
+      "merge_base": "e8994ea6003fdd1f1fe061550bb190c70ba011dc",
+      "path_counts": {
+        "already_exact_main_postimage": 2390,
+        "historical_postimage_differs_main_unreviewed": 1
+      },
+      "refs": [
+        "refs/heads/publication/main-refresh-20261004/root-01"
+      ],
+      "repository": "workspace",
+      "tip": "9d1944b9a9fd95abbb6297b4c7d34a1312809f14"
+    }
+  ],
+  "historical_unique_delta_summary": {
+    "datasets": {
+      "absent_current_main_paths": 0,
+      "absent_path_blob_not_found_in_two_main_trees": 0,
+      "absent_path_same_blob_elsewhere_on_two_main_trees": 0,
+      "different_or_deleted_paths": [
+        "docs/autoencoders/README.md",
+        "ipfs_datasets_py/logic/formalization/autoencoder/checkpoint_hub.py",
+        "ipfs_datasets_py/logic/formalization/autoencoder/security/security_formalization_evaluation.py",
+        "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_runtime.py",
+        "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_resource_safety.py",
+        "ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+        "docs/autoencoders/four_width_training.md",
+        "ipfs_datasets_py/logic/formalization/autoencoder/long_span_source_value_training.py",
+        "docs/autoencoders/codebase_ir_repository_pipeline_improvement_plan.md",
+        "docs/autoencoders/codebase_ir_repository_pipeline_plan.json",
+        "docs/autoencoders/source_margin_training.md",
+        "docs/implementation/reports/SUPERVISOR_PARALLEL_REPAIR_20260928.md",
+        "docs/implementation/reports/evidence/decoder-action-binding-20261003/evidence.tar.xz",
+        "docs/implementation/reports/evidence/decoder-action-consistency-20261003/evidence.tar.xz",
+        "docs/implementation/reports/evidence/decoder-context-boundary-training-20261003/evidence.tar.xz",
+        "docs/implementation/reports/evidence/decoder-generated-field-training-r2-20261003/evidence.tar.xz",
+        "docs/implementation/runbooks/resource_aware_proving.md",
+        "ipfs_datasets_py/logic/formalization/autoencoder/action_contrastive_decoder_training.py",
+        "ipfs_datasets_py/logic/formalization/autoencoder/alignment_capabilities.py",
+        "ipfs_datasets_py/logic/formalization/autoencoder/contextual_generated_boundary_training.py",
+        "ipfs_datasets_py/logic/formalization/autoencoder/source_value_decoder_experiment.py",
+        "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_resources.py",
+        "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_runtime_registry.py"
+      ],
+      "unique_nonexact_paths": 23
+    },
+    "workspace": {
+      "absent_current_main_paths": 174,
+      "absent_path_blob_not_found_in_two_main_trees": 73,
+      "absent_path_same_blob_elsewhere_on_two_main_trees": 101,
+      "different_or_deleted_paths": [
+        "implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+        "implementation_plan/docs/50-autoformalization-alignment-implementation-backlog-2026-10-04.md",
+        "tests/test_autoformalization_recovery_probe.py",
+        "artifacts/autoformalization-publication-20261004/integrate_main.py",
+        "artifacts/autoformalization-publication-20261004/git/prepare_datasets_hf_history_recovery.py"
+      ],
+      "unique_nonexact_paths": 179
+    }
+  },
+  "inventory_coverage": {
+    "datasets": {
+      "baseline_main": "497362d8aa117a210769423ec6a14d8010d4588c",
+      "pinned_origin_main": "8b1cff7c9a83e8ed04459abc962409c8d2bdb09a",
+      "ref_count": 57,
+      "scope_ahead_refs": 3,
+      "scope_ahead_worktrees": 2,
+      "scope_dirty_worktrees": 2,
+      "worktree_count": 29
+    },
+    "workspace": {
+      "baseline_main": "021ffee3f6894c4112d6951dad62cb29461cdac1",
+      "pinned_origin_main": "e2bb41f98362c29aa5a86c348c9ff2c5fab6028b",
+      "ref_count": 103,
+      "scope_ahead_refs": 6,
+      "scope_ahead_worktrees": 4,
+      "scope_dirty_worktrees": 1,
+      "worktree_count": 47
+    }
+  },
+  "main_owned_interfaces": [
+    {
+      "guide": "docs/autoencoders/normative_legal_ir_runtime.md",
+      "module": "ipfs_datasets_py/logic/formalization/autoencoder/normative_legal_ir_runtime.py",
+      "published_commit": "742074629174327ae954610d2655befa0f6dee82",
+      "scope": "Opt-in original selected zero/CE 384/768 saved-validation cached replay; 4x48 archived token/status/EOS parity. Source paragraph vectors remain caller-byte custody, not encoder-producer authentication. Prepare is stdlib/source-only, model loading explicit; no fresh semantic/fit claim."
+    },
+    {
+      "guide": "docs/autoencoders/normative_cached_legal_ir_runtime.md",
+      "module": "ipfs_datasets_py/logic/formalization/autoencoder/normative_cached_legal_ir_runtime.py",
+      "published_commit": "c4382ae53ab9497245fccdf85855f0e314711fbc",
+      "scope": "Opt-in retained fresh-scalar-source-inputs-single/v1 production/source plan, 48 paragraphs/180 clauses/216 vectors; 4x48 archived exposed-v3 cached token/status/EOS parity. Does not admit TRAIN augmentation, prospective DEV60, arbitrary fresh sources or our new private bank format; any new adapter/version needs separate review."
+    },
+    {
+      "guide": "docs/implementation/legal_scope_span_decoder_pilot_20261007.md",
+      "module": "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py",
+      "published_commit": "1530efd07032bac88229c6c97ca5994d498e6216",
+      "scope": "Raw UTF-8 single-rule source support/modality/span head, separate from latent paragraph decoder. Matched kernel1/kernel3 pilot emitted-positive exact5/64 to12/64, raw five spans35/64 to47/64, O/P/F22/64 to25/64. Authored groups and caller-premise conditions only, no natural legal qualification; scores cannot be pooled with this paragraph task."
+    }
+  ],
+  "model_encoder_or_prover_executions": false,
+  "normal_git_state": {
+    "datasets": {
+      "head": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+      "index": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/index",
+      "index_sha256": "d2a68a76e7a7ed99ef8ba031261cb8e7b66d6fca6c351b0e1e9dd8dc13910175",
+      "remote_main": "8b1cff7c9a83e8ed04459abc962409c8d2bdb09a"
+    },
+    "workspace": {
+      "head": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+      "index": "/home/barberb/lift_coding/.git/index",
+      "index_sha256": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4",
+      "remote_main": "e2bb41f98362c29aa5a86c348c9ff2c5fab6028b"
+    }
+  },
+  "passed": true,
+  "preserved_uncommitted_change": {
+    "change": "_legal_ir_parallel_worker_count delegates missing/auto override to worker_budget(kind=\"compiler\") instead of default one; uncommitted historical worktree change, no measured runtime review.",
+    "path": "/home/barberb/lift_coding/.worktrees/codebase-numerical-replay-20261003/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+    "publication_included": false
+  },
+  "publisher_contract": {
+    "final_scope_granted": false,
+    "guards": "Private GIT_INDEX_FILE/read-tree current fetched main, target parent-preimage-or-selected-postimage SHA guard, exact changed paths, ancestor + remote-parent compare-and-swap, nonforce push, package-before-workspace gitlink, ordinary HEAD/index byte-preservation checks.",
+    "invocations": [
+      "python3 /home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/publish_integration.py datasets --attempt <fresh_alphanumeric_attempt>",
+      "python3 /home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/publish_integration.py workspace --attempt <fresh_alphanumeric_attempt>"
+    ],
+    "risks": [
+      "Unrelated new main descendants are preserved; any targeted upstream path change requires merge/reseal, not overwrite.",
+      "Old phase/source review artifacts referencing obsolete current plan/manifests/tests must remain historical and must not be required current-file reviews; bind their preserved preimages and current frozen files in a new final scope seal.",
+      "Failure can retain private index/objects/prepared receipt; retry with a fresh attempt. Package main changes between its publication and workspace require a new reviewed gitlink receipt."
+    ],
+    "scope_file": "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/publication-scope.json",
+    "scope_seal_artifact_value": "Exact physical scope SHA string, as required by publisher verify_scope_review; all other review artifacts bind SHA and optional bytes.",
+    "scope_seal_review": "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/pipeline/publication-scope-independent-review.json"
+  },
+  "qualification_masks": {
+    "Constitution_formalized": false,
+    "admitted": false,
+    "checkpoint_promoted": false,
+    "formalized": false,
+    "fresh_semantic_holdout": false,
+    "proof_authority": false,
+    "qualified": false,
+    "roundtrip_ok": false,
+    "source_semantics_verified": false
+  },
+  "recommended_publication": {
+    "datasets_helper_status": "Exact source/destination copies are frozen; independent17 pure public-file tests pass. Separate pipeline helper source/test review is being sealed; standalone planned helper, no trainer wiring or measured improvement.",
+    "datasets_new_paths": [
+      "docs/autoencoders/balanced_wording_continuation_20261007.md",
+      "docs/autoencoders/evidence/<new exact compact evidence directory>",
+      "scripts/ops/autoencoder/dual_bank_wording_replay/dual_bank_retention.py",
+      "scripts/ops/autoencoder/dual_bank_wording_replay/test_dual_bank_retention.py"
+    ],
+    "final_scope_review_required": true,
+    "preserve_existing_paths": [
+      "docs/autoencoders/progress_integration.md",
+      "docs/autoencoders/README.md",
+      "all main normative/contextual/checkpoint/source-span runtime owners",
+      "all ordinary shared source/HEAD/index",
+      "all old branch/worktree refs and frozen October6 artifacts"
+    ],
+    "publication_executed": false,
+    "workspace": "Only exact new experiment-root archive/source/docs/audit/publication paths and package gitlink; do not stage broad dirty trees.",
+    "workspace_exact_reconciliation_evidence": [
+      "artifacts/autoencoder-balanced-wording-20261007/publication/final-main-worktree-reconciliation.json",
+      "artifacts/autoencoder-balanced-wording-20261007/publication/final-main-worktree-reconciliation.md",
+      "artifacts/autoencoder-balanced-wording-20261007/publication/historical-autoencoder-intake.json",
+      "artifacts/autoencoder-balanced-wording-20261007/publication/historical-divergent-delta-audit.json.gz",
+      "artifacts/autoencoder-balanced-wording-20261007/publication/historical-tip-origin-reachability.json",
+      "artifacts/autoencoder-balanced-wording-20261007/publication/advertised-origin-refs.json",
+      "artifacts/autoencoder-balanced-wording-20261007/publication/final-main-worktree-inventory.json",
+      "artifacts/autoencoder-balanced-wording-20261007/publication/published-owner-bindings.json"
+    ]
+  },
+  "schema": "autoencoder-balanced-wording-final-main-worktree-reconciliation/v1"
+}

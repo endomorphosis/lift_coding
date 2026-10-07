@@ -1,0 +1,36 @@
+{
+  "adaptation_diff_uncompressed_bytes": 1791,
+  "adaptation_diff_uncompressed_sha256": "7cbc23e27a484dbce5047d5f912844e7706e6189f0acba8f73b0c57acdba776c",
+  "artifact_root": "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007",
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/pipeline/publisher-adaptation.diff.gz": {
+      "bytes": 806,
+      "sha256": "09e61e529bf5443919fe73ca899324121ef3fc30ee3245ddfed853c16c1b3e28"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/pipeline/publisher-normal-state-before.json": {
+      "bytes": 524,
+      "sha256": "b077c462aae495481652ed95a3b31a4b2f35226b2870cc2b4973b3a0b9a08c07"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/publish_integration.py": {
+      "bytes": 8308,
+      "sha256": "3982d7c2494e744914d5935d131f10446486bcd3f54e83dc9cd8b2bf4c1743b4"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/publisher_review_tests.py": {
+      "bytes": 14941,
+      "sha256": "e434faf3660951e93fe16b7c4d9854c079eec646cd48cafc647b21435dcc5926"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/publish_integration.py": {
+      "bytes": 8316,
+      "sha256": "ac3d75d840918118852c57faddd20e60761eb3b01bf4d11642711f3d0d66232a"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-next-reconstruction-gap-20261006/publisher_review_tests.py": {
+      "bytes": 14941,
+      "sha256": "e434faf3660951e93fe16b7c4d9854c079eec646cd48cafc647b21435dcc5926"
+    }
+  },
+  "only_commit_message_strings_changed": true,
+  "real_remote_operations": 0,
+  "schema": "balanced-wording-publisher-message-only-reuse/v1",
+  "source_or_model_runtime_executed": false,
+  "workspace_root": "/home/barberb/lift_coding"
+}

@@ -1,0 +1,439 @@
+{
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/publication/advertised-origin-refs.json": {
+      "bytes": 12093,
+      "sha256": "e357a59f7ce0dfa665592504443f290612cbe7e9358a487ce088967bcce6245e"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/publication/final-main-worktree-inventory.json": {
+      "bytes": 209694,
+      "sha256": "7e549e885479efa0493996f3c217677e84d8fa791de23e6bf97dcfb69a431e3b"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/publication/reconciliation-source-results-freeze.json": {
+      "bytes": 2146,
+      "sha256": "af3dbed9156593c4c358167359dcaa94157a13d55e30baf09dcee83f1f36c177"
+    }
+  },
+  "checks": [
+    {
+      "detail": "The frozen160 inventory records branch/remotetracking refs. Cached tags were not included in that count; this supplement binds all24 cached tags separately.",
+      "name": "precise_original_inventory_scope",
+      "passed": true
+    },
+    {
+      "detail": "All48workspace/17package current origin branch heads exactly match local/cached inventory entries; no unseen current branch head or fetching needed.",
+      "name": "current_advertised_branch_heads_exact",
+      "passed": true
+    },
+    {
+      "detail": "All23workspace/1package cached tags pinned object SHA/bytes/type/peeled commit and main ancestry/path scopes. No absent autoencoder-specific paths; historical general tool/test changes remain unreviewed outside this experiment.",
+      "name": "all_cached_tags_retained_explicit",
+      "passed": true
+    }
+  ],
+  "coverage_count_interpretation": "160 branch/remote refs plus24 cached tag refs =184 cached refs covered. Current ls-remote rows include peeled annotated-tag pseudoentries; they are advertisements, not additional distinct tag refs.",
+  "fetch_performed": false,
+  "findings": [],
+  "frozen_october7_archive_or_reports_modified": false,
+  "models_or_encoders_or_provers_executed": false,
+  "passed": true,
+  "qualification_or_source_port_granted": false,
+  "repositories": {
+    "datasets": {
+      "all_current_advertised_branch_heads_exact_in_frozen_160_inventory": true,
+      "cached_tag_count": 1,
+      "cached_tags": [
+        {
+          "ancestor_of_current_main": true,
+          "autoencoder_specific_scoped_paths_absent_main": [],
+          "coverage_scoped_commits_absent_main": [],
+          "coverage_scoped_paths_absent_main": [],
+          "disposition": "already_reachable_on_current_main",
+          "object_bytes": 424,
+          "object_oid": "db44ba12a0634447ab7cfa6f23ebefe486ba2ca7",
+          "object_sha256": "fe3d6d51eb6de841ee2e9df1f9b61e5ad98171201e9449ba5d54833a34b8e503",
+          "object_type": "tag",
+          "peeled_commit": "ddf6b79467b68159650df81befc288c8553df664",
+          "ref": "refs/tags/autoencoder/legacy-v1-ddf6b794"
+        }
+      ],
+      "current_advertised_branch_heads": 17,
+      "pinned_origin_main": "8b1cff7c9a83e8ed04459abc962409c8d2bdb09a"
+    },
+    "workspace": {
+      "all_current_advertised_branch_heads_exact_in_frozen_160_inventory": true,
+      "cached_tag_count": 23,
+      "cached_tags": [
+        {
+          "ancestor_of_current_main": true,
+          "autoencoder_specific_scoped_paths_absent_main": [],
+          "coverage_scoped_commits_absent_main": [],
+          "coverage_scoped_paths_absent_main": [],
+          "disposition": "already_reachable_on_current_main",
+          "object_bytes": 343,
+          "object_oid": "8001bc63aba5d4b37b3f452ac3a8532547c3e373",
+          "object_sha256": "08eaaac9deb85a6dab9916f4944f32a67399e31f1ba4f7fbcd1c89eab116274c",
+          "object_type": "tag",
+          "peeled_commit": "4abf94c9b43bcd9b83f3071633588145f9e3f36d",
+          "ref": "refs/tags/archive/dcr-supervisor-20260808-full"
+        },
+        {
+          "ancestor_of_current_main": false,
+          "autoencoder_specific_scoped_paths_absent_main": [],
+          "coverage_scoped_commits_absent_main": [],
+          "coverage_scoped_paths_absent_main": [],
+          "disposition": "historical_archived_tag_retained_no_scoped_changes",
+          "object_bytes": 295,
+          "object_oid": "3a68e2a7ec0549677f7b327e0ea6706de332a722",
+          "object_sha256": "33b914c1ac23453032bb413ed9bbd045496256f6f49bef9c7e946534361e8beb",
+          "object_type": "commit",
+          "peeled_commit": "3a68e2a7ec0549677f7b327e0ea6706de332a722",
+          "ref": "refs/tags/archive/unmerged/copilot_sub-pr-110"
+        },
+        {
+          "ancestor_of_current_main": false,
+          "autoencoder_specific_scoped_paths_absent_main": [],
+          "coverage_scoped_commits_absent_main": [
+            "e3a30f0f53f2524bec18284a890390e893de3df5 Merge branch 'draft/pr-003-db-migrations-and-models' into copilot/sub-pr-4-again",
+            "ebe0b0e58adfd5806de2d6771eae065319a9edd2 Implement DuckDB migrations and persistence primitives for PR-003"
+          ],
+          "coverage_scoped_paths_absent_main": [
+            "tests/persistence/conftest.py",
+            "tests/persistence/test_action_logs.py",
+            "tests/persistence/test_commands.py",
+            "tests/persistence/test_migrations.py",
+            "tests/persistence/test_pending_actions.py",
+            "tests/persistence/test_webhook_events.py"
+          ],
+          "disposition": "historical_general_tool_or_test_changes_not_autoencoder_delta_unreviewed",
+          "object_bytes": 1170,
+          "object_oid": "e3a30f0f53f2524bec18284a890390e893de3df5",
+          "object_sha256": "809c1d3e08e85409bea8593e92751fffbc2f53a11e640d0a72a684fc344a4da5",
+          "object_type": "commit",
+          "peeled_commit": "e3a30f0f53f2524bec18284a890390e893de3df5",
+          "ref": "refs/tags/archive/unmerged/copilot_sub-pr-4-again"
+        },
+        {
+          "ancestor_of_current_main": false,
+          "autoencoder_specific_scoped_paths_absent_main": [],
+          "coverage_scoped_commits_absent_main": [
+            "e3a30f0f53f2524bec18284a890390e893de3df5 Merge branch 'draft/pr-003-db-migrations-and-models' into copilot/sub-pr-4-again",
+            "ebe0b0e58adfd5806de2d6771eae065319a9edd2 Implement DuckDB migrations and persistence primitives for PR-003"
+          ],
+          "coverage_scoped_paths_absent_main": [
+            "tests/persistence/conftest.py",
+            "tests/persistence/test_action_logs.py",
+            "tests/persistence/test_commands.py",
+            "tests/persistence/test_migrations.py",
+            "tests/persistence/test_pending_actions.py",
+            "tests/persistence/test_webhook_events.py"
+          ],
+          "disposition": "historical_general_tool_or_test_changes_not_autoencoder_delta_unreviewed",
+          "object_bytes": 1210,
+          "object_oid": "b1f8fb3df36522dc55acd1b3b674d7a51f9b24e4",
+          "object_sha256": "1751b3084896139cd1d1d370610d83cb48a572838428fd863cafb8201f5f08d2",
+          "object_type": "commit",
+          "peeled_commit": "b1f8fb3df36522dc55acd1b3b674d7a51f9b24e4",
+          "ref": "refs/tags/archive/unmerged/draft_pr-003-db-migrations-and-models"
+        },
+        {
+          "ancestor_of_current_main": true,
+          "autoencoder_specific_scoped_paths_absent_main": [],
+          "coverage_scoped_commits_absent_main": [],
+          "coverage_scoped_paths_absent_main": [],
+          "disposition": "already_reachable_on_current_main",
+          "object_bytes": 284,
+          "object_oid": "86dff751a7372c9dab8d15aada6acf4862f2a4b0",
+          "object_sha256": "b4769f02b2e818392d70f7d3bca098f654e367377642b077eae6df1994c03fdd",
+          "object_type": "commit",
+          "peeled_commit": "86dff751a7372c9dab8d15aada6acf4862f2a4b0",
+          "ref": "refs/tags/archive/unmerged/pr-002-backend-api-skeleton"
+        },
+        {
+          "ancestor_of_current_main": true,
+          "autoencoder_specific_scoped_paths_absent_main": [],
+          "coverage_scoped_commits_absent_main": [],
+          "coverage_scoped_paths_absent_main": [],
+          "disposition": "already_reachable_on_current_main",
+          "object_bytes": 288,
+          "object_oid": "ee016aadd6d530a57ff53cd3b21fa5955f1d3be5",
+          "object_sha256": "d15debf7f63a542a98bf752d6f2c69434f60db2cc4ce75eb90025b2e017beeb0",
+          "object_type": "commit",
+          "peeled_commit": "ee016aadd6d530a57ff53cd3b21fa5955f1d3be5",
+          "ref": "refs/tags/archive/unmerged/pr-003-db-migrations-and-models"
+        },
+        {
+          "ancestor_of_current_main": true,
+          "autoencoder_specific_scoped_paths_absent_main": [],
+          "coverage_scoped_commits_absent_main": [],
+          "coverage_scoped_paths_absent_main": [],
+          "disposition": "already_reachable_on_current_main",
+          "object_bytes": 296,
+          "object_oid": "434ef789e4d835431b402a4690bfd1635d2fd923",
+          "object_sha256": "cf5538101dceb39c7bacf599b4727ac6b47449b7420df236c06921bcb997a8d9",
+          "object_type": "commit",
+          "peeled_commit": "434ef789e4d835431b402a4690bfd1635d2fd923",
+          "ref": "refs/tags/archive/unmerged/pr-004-command-router-and-confirmations"
+        },
+        {
+          "ancestor_of_current_main": true,
+          "autoencoder_specific_scoped_paths_absent_main": [],
+          "coverage_scoped_commits_absent_main": [],
+          "coverage_scoped_paths_absent_main": [],
+          "disposition": "already_reachable_on_current_main",
+          "object_bytes": 297,
+          "object_oid": "cf698c586261e135fe763a246337fc70d699aa53",
+          "object_sha256": "85b540a541cf21ef4e5db4ab846bb03bebc6b408f40576effe46374c2d641557",
+          "object_type": "commit",
+          "peeled_commit": "cf698c586261e135fe763a246337fc70d699aa53",
+          "ref": "refs/tags/archive/unmerged/pr-005-github-readonly-inbox-and-summary"
+        },
+        {
+          "ancestor_of_current_main": true,
+          "autoencoder_specific_scoped_paths_absent_main": [],
+          "coverage_scoped_commits_absent_main": [],
+          "coverage_scoped_paths_absent_main": [],
+          "disposition": "already_reachable_on_current_main",
+          "object_bytes": 299,
+          "object_oid": "9c79eb8c83ffdb64ddf27ee4ea36299945001743",
+          "object_sha256": "0e71524cdab4091d738bfd802a13ac084cd954a8828be71cfa870dac02871d04",
+          "object_type": "commit",
+          "peeled_commit": "9c79eb8c83ffdb64ddf27ee4ea36299945001743",
+          "ref": "refs/tags/archive/unmerged/pr-006-github-webhook-ingestion-and-replay"
+        },
+        {
+          "ancestor_of_current_main": true,
+          "autoencoder_specific_scoped_paths_absent_main": [],
+          "coverage_scoped_commits_absent_main": [],
+          "coverage_scoped_paths_absent_main": [],
+          "disposition": "already_reachable_on_current_main",
+          "object_bytes": 293,
+          "object_oid": "f7934c7926c5be8428de47da23803446150b4c68",
+          "object_sha256": "aa6ff7426e909e927d46a7d338c3f7d81ff4718c6913323338c32814d1f76286",
+          "object_type": "commit",
+          "peeled_commit": "f7934c7926c5be8428de47da23803446150b4c68",
+          "ref": "refs/tags/archive/unmerged/pr-007-policy-engine-and-safe-action"
+        },
+        {
+          "ancestor_of_current_main": true,
+          "autoencoder_specific_scoped_paths_absent_main": [],
+          "coverage_scoped_commits_absent_main": [],
+          "coverage_scoped_paths_absent_main": [],
+          "disposition": "already_reachable_on_current_main",
+          "object_bytes": 288,
+          "object_oid": "b2c59cd5c5250b96d4890ed34d3708d88778d052",
+          "object_sha256": "d7c901a776e8426c3ccf77d327eefc8ec6433c43413fbf54af2a5a753a9fc983",
+          "object_type": "commit",
+          "peeled_commit": "b2c59cd5c5250b96d4890ed34d3708d88778d052",
+          "ref": "refs/tags/archive/unmerged/pr-008-agent-orchestration-stub"
+        },
+        {
+          "ancestor_of_current_main": false,
+          "autoencoder_specific_scoped_paths_absent_main": [],
+          "coverage_scoped_commits_absent_main": [
+            "515831cf3661c28a1415877a624573f93fd9350f HAO-724: Close objective gap: Hallucinate App MCP dashboard capability catalog"
+          ],
+          "coverage_scoped_paths_absent_main": [
+            "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md",
+            "tests/test_hallucinate_multimodal_control_todo_queue.py",
+            "tests/test_virtual_ai_os_todo_queue.py"
+          ],
+          "disposition": "historical_general_tool_or_test_changes_not_autoencoder_delta_unreviewed",
+          "object_bytes": 361,
+          "object_oid": "515831cf3661c28a1415877a624573f93fd9350f",
+          "object_sha256": "ab6d3e20d00cbca659ff1acf73f57366a2d8210dbcfd04c7358411ceb43bce98",
+          "object_type": "commit",
+          "peeled_commit": "515831cf3661c28a1415877a624573f93fd9350f",
+          "ref": "refs/tags/backup/20260628-230507/implementation__hao-724-attempt-4-1782683530"
+        },
+        {
+          "ancestor_of_current_main": false,
+          "autoencoder_specific_scoped_paths_absent_main": [],
+          "coverage_scoped_commits_absent_main": [
+            "dfb71e429812617872816ea829e556ab9c349169 HAO-725: Close objective gap: Hallucinate App daemon launch orchestration"
+          ],
+          "coverage_scoped_paths_absent_main": [
+            "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
+            "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md",
+            "tests/test_hallucinate_multimodal_control_todo_queue.py",
+            "tests/test_virtual_ai_os_todo_queue.py"
+          ],
+          "disposition": "historical_general_tool_or_test_changes_not_autoencoder_delta_unreviewed",
+          "object_bytes": 356,
+          "object_oid": "dfb71e429812617872816ea829e556ab9c349169",
+          "object_sha256": "da482800d2261fd63f3cb2e408a603a1e4daea794cda0a0709e31ac93bd494bf",
+          "object_type": "commit",
+          "peeled_commit": "dfb71e429812617872816ea829e556ab9c349169",
+          "ref": "refs/tags/backup/20260628-230507/implementation__hao-725-attempt-4-1782681450"
+        },
+        {
+          "ancestor_of_current_main": false,
+          "autoencoder_specific_scoped_paths_absent_main": [],
+          "coverage_scoped_commits_absent_main": [
+            "9ac855540545a1c376a24b6afad70ec4d7bffa8a HAO-726: Resolve merge retry-budget failure for HAO-724"
+          ],
+          "coverage_scoped_paths_absent_main": [
+            "tests/test_hallucinate_multimodal_control_todo_queue.py",
+            "tests/test_virtual_ai_os_todo_queue.py"
+          ],
+          "disposition": "historical_general_tool_or_test_changes_not_autoencoder_delta_unreviewed",
+          "object_bytes": 338,
+          "object_oid": "9ac855540545a1c376a24b6afad70ec4d7bffa8a",
+          "object_sha256": "5d81a61bf5f230f8eec6a796b15c6fd3950ed0003b0c94da9fd4f46026eb3e70",
+          "object_type": "commit",
+          "peeled_commit": "9ac855540545a1c376a24b6afad70ec4d7bffa8a",
+          "ref": "refs/tags/backup/20260628-230507/implementation__hao-726-attempt-1-1782684404"
+        },
+        {
+          "ancestor_of_current_main": false,
+          "autoencoder_specific_scoped_paths_absent_main": [],
+          "coverage_scoped_commits_absent_main": [
+            "e2c84f5f10bab3a2e201e7a0dc549b6310e57c2c HAO-727: Close objective gap: Hallucinate MCP dashboard interoperability console"
+          ],
+          "coverage_scoped_paths_absent_main": [
+            "tests/test_hallucinate_multimodal_control_todo_queue.py",
+            "tests/test_virtual_ai_os_todo_queue.py"
+          ],
+          "disposition": "historical_general_tool_or_test_changes_not_autoencoder_delta_unreviewed",
+          "object_bytes": 363,
+          "object_oid": "e2c84f5f10bab3a2e201e7a0dc549b6310e57c2c",
+          "object_sha256": "bb06a34d531e05faddb47155cfb4e44c3f8c3c4813b6febeddfbb75045f1af40",
+          "object_type": "commit",
+          "peeled_commit": "e2c84f5f10bab3a2e201e7a0dc549b6310e57c2c",
+          "ref": "refs/tags/backup/20260628-230507/implementation__hao-727-attempt-2-1782682481"
+        },
+        {
+          "ancestor_of_current_main": false,
+          "autoencoder_specific_scoped_paths_absent_main": [],
+          "coverage_scoped_commits_absent_main": [
+            "fafabc1b1fb88c6f3bfdfe1dc7b70cce39ea8f87 MGW-547: Close objective gap: Hallucinate MCP dashboard interoperability console"
+          ],
+          "coverage_scoped_paths_absent_main": [
+            "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
+            "tests/test_hallucinate_multimodal_control_todo_queue.py",
+            "tests/test_virtual_ai_os_todo_queue.py"
+          ],
+          "disposition": "historical_general_tool_or_test_changes_not_autoencoder_delta_unreviewed",
+          "object_bytes": 363,
+          "object_oid": "fafabc1b1fb88c6f3bfdfe1dc7b70cce39ea8f87",
+          "object_sha256": "5448c7cfed24998f41821a4f507465d80c10c5046d71d16c26f986b4bfea8361",
+          "object_type": "commit",
+          "peeled_commit": "fafabc1b1fb88c6f3bfdfe1dc7b70cce39ea8f87",
+          "ref": "refs/tags/backup/20260628-230507/implementation__mgw-547-attempt-3-1782682290"
+        },
+        {
+          "ancestor_of_current_main": false,
+          "autoencoder_specific_scoped_paths_absent_main": [],
+          "coverage_scoped_commits_absent_main": [
+            "935834992d91b39c7df20be9e1c7197c60ec7de1 MGW-555: Close objective gap: Hallucinate App MCP dashboard capability catalog"
+          ],
+          "coverage_scoped_paths_absent_main": [
+            "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md",
+            "tests/test_hallucinate_multimodal_control_todo_queue.py",
+            "tests/test_virtual_ai_os_todo_queue.py"
+          ],
+          "disposition": "historical_general_tool_or_test_changes_not_autoencoder_delta_unreviewed",
+          "object_bytes": 361,
+          "object_oid": "935834992d91b39c7df20be9e1c7197c60ec7de1",
+          "object_sha256": "b73d746b81824e94e29c15c267023f57aab923fc58780bf4661e31e5c3369fca",
+          "object_type": "commit",
+          "peeled_commit": "935834992d91b39c7df20be9e1c7197c60ec7de1",
+          "ref": "refs/tags/backup/20260628-230507/implementation__mgw-555-attempt-2-1782683433"
+        },
+        {
+          "ancestor_of_current_main": false,
+          "autoencoder_specific_scoped_paths_absent_main": [],
+          "coverage_scoped_commits_absent_main": [
+            "0bad37168f498e9bc35dcfc015bed3a5d9984dda MGW-556: Close objective gap: Hallucinate App daemon launch orchestration"
+          ],
+          "coverage_scoped_paths_absent_main": [
+            "implementation_plan/docs/19-virtual-ai-os-submodule-integration.todo.md",
+            "tests/test_hallucinate_multimodal_control_todo_queue.py",
+            "tests/test_virtual_ai_os_todo_queue.py"
+          ],
+          "disposition": "historical_general_tool_or_test_changes_not_autoencoder_delta_unreviewed",
+          "object_bytes": 356,
+          "object_oid": "0bad37168f498e9bc35dcfc015bed3a5d9984dda",
+          "object_sha256": "e39ac5046b7249ba8bf067c41f14aa0abb84a02f314835265f32ac735cf0bc86",
+          "object_type": "commit",
+          "peeled_commit": "0bad37168f498e9bc35dcfc015bed3a5d9984dda",
+          "ref": "refs/tags/backup/20260628-230507/implementation__mgw-556-attempt-3-1782681366"
+        },
+        {
+          "ancestor_of_current_main": false,
+          "autoencoder_specific_scoped_paths_absent_main": [],
+          "coverage_scoped_commits_absent_main": [
+            "9d1723d8eb1aa1fb22418f85ca6afa3a2021a098 VAI-539: Close objective gap: Hallucinate App MCP dashboard capability catalog"
+          ],
+          "coverage_scoped_paths_absent_main": [
+            "implementation_plan/docs/23-virtual-ai-os-objective-goal-heap.md",
+            "tests/test_hallucinate_multimodal_control_todo_queue.py",
+            "tests/test_virtual_ai_os_todo_queue.py"
+          ],
+          "disposition": "historical_general_tool_or_test_changes_not_autoencoder_delta_unreviewed",
+          "object_bytes": 361,
+          "object_oid": "9d1723d8eb1aa1fb22418f85ca6afa3a2021a098",
+          "object_sha256": "fb04dbeccff5842d404e9a8ba01727fd75de2b0557d52f3c78ed3eef57247bb5",
+          "object_type": "commit",
+          "peeled_commit": "9d1723d8eb1aa1fb22418f85ca6afa3a2021a098",
+          "ref": "refs/tags/backup/20260628-230507/implementation__vai-539-attempt-3-1782683235"
+        },
+        {
+          "ancestor_of_current_main": true,
+          "autoencoder_specific_scoped_paths_absent_main": [],
+          "coverage_scoped_commits_absent_main": [],
+          "coverage_scoped_paths_absent_main": [],
+          "disposition": "already_reachable_on_current_main",
+          "object_bytes": 363,
+          "object_oid": "1838d63a18f6e97dd0eac8531c78c52b6661998a",
+          "object_sha256": "1ddd8bed82856a51fd507c0f6a71dd9b0bc9ca5bd2ddbceabb03db5ad867301e",
+          "object_type": "commit",
+          "peeled_commit": "1838d63a18f6e97dd0eac8531c78c52b6661998a",
+          "ref": "refs/tags/backup/20260628-230507/implementation__vai-542-attempt-3-1782681365"
+        },
+        {
+          "ancestor_of_current_main": true,
+          "autoencoder_specific_scoped_paths_absent_main": [],
+          "coverage_scoped_commits_absent_main": [],
+          "coverage_scoped_paths_absent_main": [],
+          "disposition": "already_reachable_on_current_main",
+          "object_bytes": 363,
+          "object_oid": "d6fa46d6e1299c396383def003fb73f07bc3e071",
+          "object_sha256": "d19c0cc53a842b97983838f9e5b5d4e4aa869233422d41658ce346a4907fe0cb",
+          "object_type": "commit",
+          "peeled_commit": "d6fa46d6e1299c396383def003fb73f07bc3e071",
+          "ref": "refs/tags/backup/20260628-230507/implementation__vai-543-attempt-3-1782682261"
+        },
+        {
+          "ancestor_of_current_main": true,
+          "autoencoder_specific_scoped_paths_absent_main": [],
+          "coverage_scoped_commits_absent_main": [],
+          "coverage_scoped_paths_absent_main": [],
+          "disposition": "already_reachable_on_current_main",
+          "object_bytes": 331,
+          "object_oid": "8a9616dd678f742119c0f125c0a44da9045a51d4",
+          "object_sha256": "5c52931d589562e93e3bb33c9d5312dae178a46161b36a22a67b751b9ea34f54",
+          "object_type": "commit",
+          "peeled_commit": "8a9616dd678f742119c0f125c0a44da9045a51d4",
+          "ref": "refs/tags/backup/local-main-20260727-202941"
+        },
+        {
+          "ancestor_of_current_main": true,
+          "autoencoder_specific_scoped_paths_absent_main": [],
+          "coverage_scoped_commits_absent_main": [],
+          "coverage_scoped_paths_absent_main": [],
+          "disposition": "already_reachable_on_current_main",
+          "object_bytes": 296,
+          "object_oid": "a64d6fadcbf1fd1c8a377fdf9863e7d1d1254075",
+          "object_sha256": "f0e23c0895af35dc9bcc00f38c3f2f8abd63f5ece14169a57d48e3f198fa3cbf",
+          "object_type": "commit",
+          "peeled_commit": "a64d6fadcbf1fd1c8a377fdf9863e7d1d1254075",
+          "ref": "refs/tags/backup/mgw-574-20260727-202941"
+        }
+      ],
+      "current_advertised_branch_heads": 48,
+      "pinned_origin_main": "e2bb41f98362c29aa5a86c348c9ff2c5fab6028b"
+    }
+  },
+  "schema": "final-ref-inventory-tag-coverage-supplement/v1",
+  "tag_or_ref_mutations": false
+}

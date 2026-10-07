@@ -1,0 +1,41 @@
+{
+  "archive_rebuild_sha256": "141496f4845338519013490dafc56c41fa056644ae56d18892e598d6dd2f73e7",
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/historical-source-retention/extract_historical_source.py": {
+      "bytes": 12500,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/historical-source-retention/extract_historical_source.py",
+      "sha256": "d0333e08ce20c6c63cfb0defa340bf45c6ad9539841e5fb882e605144eb91dce"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/historical-source-retention/historical-source-evidence.tar.gz": {
+      "bytes": 219425,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/historical-source-retention/historical-source-evidence.tar.gz",
+      "sha256": "141496f4845338519013490dafc56c41fa056644ae56d18892e598d6dd2f73e7"
+    },
+    "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/historical-source-retention/manifest.json": {
+      "bytes": 181307,
+      "path": "/home/barberb/lift_coding/artifacts/autoencoder-balanced-wording-20261007/historical-source-retention/manifest.json",
+      "sha256": "184bbf98d48ba677764d0de45b6f145d14504840dd30b3df366bcfe3a33b394c"
+    }
+  },
+  "capsule_code_executed": false,
+  "checks": [
+    "exact22 sorted logical regular members",
+    "member original modes and zero deterministic metadata",
+    "every member streamed byte count and SHA256 equals manifest",
+    "no undeclared members",
+    "all51 checkpoint/control declarations remain reference-only",
+    "zero excluded source capsules",
+    "zero gzip mtime and filename",
+    "deterministic rebuild exact archive SHA256",
+    "gzip archive below10MB"
+  ],
+  "findings": [],
+  "independent_review": false,
+  "members": 22,
+  "models_imported": false,
+  "passed": true,
+  "references_only": 51,
+  "schema": "historical-source-retention-producer-verification/v1",
+  "semantic_review_or_qualification": false,
+  "uncompressed_bytes": 1271504
+}
