@@ -1,0 +1,3015 @@
+{
+  "actions": {
+    "Torch_imported": false,
+    "model_calls": 0,
+    "model_imports": 0,
+    "new_fits": 0,
+    "optimizer_steps": 0,
+    "source_or_index_mutations": 0,
+    "test_runs": 0
+  },
+  "actual_saved_rows_rescored": 5120,
+  "all_evaluation_scores": {
+    "earlier_scope": {
+      "linear": {
+        "admission_masks": "all five zero",
+        "caller_attachment_learned": false,
+        "case_count": 128,
+        "class_confusion": {
+          "F": {
+            "F": 19,
+            "O": 1,
+            "P": 1
+          },
+          "O": {
+            "F": 5,
+            "O": 13,
+            "P": 3
+          },
+          "P": {
+            "F": 0,
+            "O": 1,
+            "P": 21
+          }
+        },
+        "fixed_class_nonaction_whole_ceiling_count": 50,
+        "fixed_class_nonaction_whole_ceiling_ids": [
+          "source:84798e7c1ff75011007f975719c9e3d46193fe07bc7b97e2152cee17a3263dcc",
+          "source:b6f8facf22363d89fee8856cc2b6f25dfda04d57b37582e800c7d7083eee98c1",
+          "source:3c567e24184c0062edd70a3270cdeaa05b3e398c8287d4142d4a77c5c5eee714",
+          "source:1071ce37fa74f414262a14894bc1b0b3181b69ef7e43c1e97fa18ba128785018",
+          "source:5618a2ceb18fcd69477da6930cd96867b403aadbd89af89219f6de8ccfd4e4ca",
+          "source:acb6ee982faa071e43dd76847a902141447b7c96c01eba27de4c5ec7195ef0f4",
+          "source:5d43a56a876e24c4983799599f89637e888910d40aea9ad19766885545e7d1a3",
+          "source:6d61b094f8c443eb63d8596faacb5cd0ad895d899e33dfe2de32b38752f4125e",
+          "source:7c23cc3f2ac43daeb6ceea2f86995313a1b2fc8c1c3e8b86dd0f3cb67d49533a",
+          "source:7ed57d7f259c3d0da91ad89272ed819eafd2a6346bb3735d7ce05f3834e9fad2",
+          "source:a18d2795fd8d3da6c7c71e71f46a870f599c340d7529789412ee2be2eeb106a4",
+          "source:ca8999e34fa4b2a953cb311336198245af58a92dcab5c15295ba0b700dd0223f",
+          "source:b5567e6c47c982963a0f6dfc5446cd92ec14bf7c1f5056ed9241aab8d6be069a",
+          "source:7adec3b872ce28894d4ac5b4c6725739707fb5c22e3ed62066d6e52518567b07",
+          "source:ba6475e8e16a60a5e7af70c15ece2be973eb66811ddb0494aa200a635d81940b",
+          "source:d32837ec6da28014543229ddb9d0d56c4c4d1c010b39b0f7a0cbd72ea979fb4c",
+          "source:13ceda216784a9c4cd61e6bb7d84ce6bce4c40ce987130486b86cbefbee7d320",
+          "source:8ef2ac1c46068176e9eebbb1a02e48aaeff6084a1ba9490bb5009d78b3503b39",
+          "source:46a28d2c6b8e4b5d122f00b7ae2b09a12b567f1c03febe864a0d67c98f5b5e8e",
+          "source:84a03fa6574edb6afea181fa230defcfe125b027b8b03a37d712a4fe80d13869",
+          "source:10163cac0e380d476d34f0fddd064416e2db700876c38feb9440b0e294408203",
+          "source:3330b3e5932e242375609bc38d4d4d3361fa2c39f40c9ff6d59a2c1ff1655afc",
+          "source:50b3ea2740a628b49966866705e3ffe465779c3a7f1da00bfe2c5fdf621a14d5",
+          "source:c63d075cf9fa5324ee0e30aa94fa98ea563beda997a736fdb6015430b446f1d2",
+          "source:d786f3495573808f7936670327e9b8ce2a711eba55a2dc8d3d69984bc85a95cf",
+          "source:ac0539ec7f7eace5c76f615013af94f7fb46cce6287b7791b4b026131d24e739",
+          "source:7d7ad0100faf7db1663d45b576239a6b2f58fbf8fac893f9387e8f3771f7d903",
+          "source:f760b50c48f64f8e60ec14ca8284138b3fe6cbc9a6915db31221c902970d49e9",
+          "source:47420992507efd911fa34fed400c1787785c02103a081b91da8d36d9a13e7a1c",
+          "source:3e5697e8875344f20bb3e4f497900cccde8a5ba03768025f18622282e701878b",
+          "source:48a2e5f450ee4bc45e908ae8d32e2485d4de4b80c9cba00863fab0696b6d5b5c",
+          "source:1182812aaece1b426e0c5839e8d69baf1766f2cd0cd0e9221832ab9214c00759",
+          "source:b91c811e6d913c92a243a9410fd4fcbff2626d8ca3ce9698eb971255444836fe",
+          "source:500d54bc986c70eb42328a4339cc43e32343c6acd4045c759e8ab5b0f2f92a44",
+          "source:d5b80145af2d3c26d1f43f9476545352d6d46975c07baa93ff7e51b7a20226fe",
+          "source:19ccacc46854720b2df93ac21fc7913b63ff666ccd01b1a29d8d009c0184ddda",
+          "source:e076a18a1c836db6e326c752c4d40b2e1627afef5cbb7126248fced21faa3edb",
+          "source:91cfa2bd14fa59e6378fbf0f48b222fff692a9ce6c36656b2a647756806096e2",
+          "source:bb4a6348a320eb1df489230dfe114dc5a8e9cd11426e22b4f5a40d4d2c7d8982",
+          "source:aa1ef9b601ec9346b0ffacc4fabe31e73dee8b2089991697132671ac99b17e67",
+          "source:d5574e1dc725a740a21f536ff044d8fbf525fd3c22edd0417a8c8488807e3752",
+          "source:bba0f4036f60f5f0bef5f56215a957a2986135867e6c12ac5b53daaf2a22b9a4",
+          "source:cccda092bbf8945374298526298a1625e6a8ecf3ea455120e7dd417fa51e7cb6",
+          "source:c54eb1f0de3e4c37974d3822f5ce469cbec1c2e68ce247d055dd256af5931882",
+          "source:0449946de3fd8bd1605e1efaa6b0342e3601310bbf077ad1160481a6f627f4ac",
+          "source:84297c0d3627220cc2bb4c49d2ccdcab4f87506029e06845c1719c73a2209fc2",
+          "source:69f6f2ccdce35ab0e99f11df7a2c912c4e0e992fa8a4422d4a504adb7b1056d5",
+          "source:198de138dffa102afcd6a1eff375a78c3e237e84e01a00412fa1387c066b0048",
+          "source:057473b6fde283531e6962ab1a988ad051a296432c436e7e57731c43dbd70b5b",
+          "source:2a0c864c5836bb18c85e24735eb36b25350747f813e9e47bbc1951694edddf40"
+        ],
+        "legal_gold": false,
+        "negative_categories": {
+          "extra_exception": {
+            "count": 16,
+            "emitted": 0,
+            "incidental_block": 0,
+            "learned_refusal": 16
+          },
+          "modal_deletion": {
+            "count": 16,
+            "emitted": 0,
+            "incidental_block": 0,
+            "learned_refusal": 16
+          },
+          "modal_misspelling": {
+            "count": 16,
+            "emitted": 7,
+            "incidental_block": 1,
+            "learned_refusal": 8
+          },
+          "second_rule": {
+            "count": 16,
+            "emitted": 0,
+            "incidental_block": 0,
+            "learned_refusal": 16
+          }
+        },
+        "negative_count": 64,
+        "negative_emitted_proposal_count": 7,
+        "negative_incidental_block_count": 1,
+        "negative_learned_refusal_count": 56,
+        "nonempty_condition_count": 32,
+        "nonempty_condition_exact_count": 18,
+        "positive_class_CE": 0.5569122876524706,
+        "positive_count": 64,
+        "positive_emitted_proposal_count": 47,
+        "positive_exact_count": 36,
+        "positive_learned_refusal_count": 15,
+        "positive_raw_all_spans_exact": 55,
+        "positive_raw_facet_span_exact": {
+          "action": {
+            "count": 64,
+            "exact": 58,
+            "nonempty_count": 64,
+            "nonempty_exact": 58
+          },
+          "actor": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 64,
+            "nonempty_exact": 64
+          },
+          "condition": {
+            "count": 64,
+            "exact": 61,
+            "nonempty_count": 32,
+            "nonempty_exact": 29
+          },
+          "modality": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 64,
+            "nonempty_exact": 64
+          },
+          "object": {
+            "count": 64,
+            "exact": 61,
+            "nonempty_count": 32,
+            "nonempty_exact": 29
+          }
+        },
+        "positive_raw_modality_exact": 53,
+        "positive_structural_block_count": 2,
+        "positive_templates": {
+          "actor_condition_modal_action_object": {
+            "class_exact": 7,
+            "count": 8,
+            "proposal_exact": 5,
+            "raw_action_exact": 8
+          },
+          "actor_modal_action_object_condition": {
+            "class_exact": 6,
+            "count": 8,
+            "proposal_exact": 4,
+            "raw_action_exact": 8
+          },
+          "actor_possessive_gerund_object_modal_condition": {
+            "class_exact": 8,
+            "count": 8,
+            "proposal_exact": 5,
+            "raw_action_exact": 8
+          },
+          "condition_actor_modal_action_object": {
+            "class_exact": 6,
+            "count": 8,
+            "proposal_exact": 4,
+            "raw_action_exact": 8
+          },
+          "condition_actor_possessive_gerund_object_modal": {
+            "class_exact": 8,
+            "count": 8,
+            "proposal_exact": 7,
+            "raw_action_exact": 8
+          },
+          "condition_modal_actor_action_object": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 5,
+            "raw_action_exact": 8
+          },
+          "gerund_object_agent_modal_condition": {
+            "class_exact": 8,
+            "count": 8,
+            "proposal_exact": 2,
+            "raw_action_exact": 4
+          },
+          "modal_actor_action_object_condition": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 4,
+            "raw_action_exact": 6
+          }
+        },
+        "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+        "raw_support_accuracy": 0.8203125,
+        "raw_support_confusion": {
+          "false_negative": 15,
+          "false_positive": 8,
+          "true_negative": 56,
+          "true_positive": 49
+        },
+        "source_parent_groups": 64,
+        "support_BCE_probability_clip": [
+          1e-12,
+          0.999999999999
+        ],
+        "support_probability_BCE": 0.36601978109919875
+      },
+      "mlp": {
+        "admission_masks": "all five zero",
+        "caller_attachment_learned": false,
+        "case_count": 128,
+        "class_confusion": {
+          "F": {
+            "F": 19,
+            "O": 1,
+            "P": 1
+          },
+          "O": {
+            "F": 5,
+            "O": 13,
+            "P": 3
+          },
+          "P": {
+            "F": 0,
+            "O": 1,
+            "P": 21
+          }
+        },
+        "fixed_class_nonaction_whole_ceiling_count": 50,
+        "fixed_class_nonaction_whole_ceiling_ids": [
+          "source:84798e7c1ff75011007f975719c9e3d46193fe07bc7b97e2152cee17a3263dcc",
+          "source:b6f8facf22363d89fee8856cc2b6f25dfda04d57b37582e800c7d7083eee98c1",
+          "source:3c567e24184c0062edd70a3270cdeaa05b3e398c8287d4142d4a77c5c5eee714",
+          "source:1071ce37fa74f414262a14894bc1b0b3181b69ef7e43c1e97fa18ba128785018",
+          "source:5618a2ceb18fcd69477da6930cd96867b403aadbd89af89219f6de8ccfd4e4ca",
+          "source:acb6ee982faa071e43dd76847a902141447b7c96c01eba27de4c5ec7195ef0f4",
+          "source:5d43a56a876e24c4983799599f89637e888910d40aea9ad19766885545e7d1a3",
+          "source:6d61b094f8c443eb63d8596faacb5cd0ad895d899e33dfe2de32b38752f4125e",
+          "source:7c23cc3f2ac43daeb6ceea2f86995313a1b2fc8c1c3e8b86dd0f3cb67d49533a",
+          "source:7ed57d7f259c3d0da91ad89272ed819eafd2a6346bb3735d7ce05f3834e9fad2",
+          "source:a18d2795fd8d3da6c7c71e71f46a870f599c340d7529789412ee2be2eeb106a4",
+          "source:ca8999e34fa4b2a953cb311336198245af58a92dcab5c15295ba0b700dd0223f",
+          "source:b5567e6c47c982963a0f6dfc5446cd92ec14bf7c1f5056ed9241aab8d6be069a",
+          "source:7adec3b872ce28894d4ac5b4c6725739707fb5c22e3ed62066d6e52518567b07",
+          "source:ba6475e8e16a60a5e7af70c15ece2be973eb66811ddb0494aa200a635d81940b",
+          "source:d32837ec6da28014543229ddb9d0d56c4c4d1c010b39b0f7a0cbd72ea979fb4c",
+          "source:13ceda216784a9c4cd61e6bb7d84ce6bce4c40ce987130486b86cbefbee7d320",
+          "source:8ef2ac1c46068176e9eebbb1a02e48aaeff6084a1ba9490bb5009d78b3503b39",
+          "source:46a28d2c6b8e4b5d122f00b7ae2b09a12b567f1c03febe864a0d67c98f5b5e8e",
+          "source:84a03fa6574edb6afea181fa230defcfe125b027b8b03a37d712a4fe80d13869",
+          "source:10163cac0e380d476d34f0fddd064416e2db700876c38feb9440b0e294408203",
+          "source:3330b3e5932e242375609bc38d4d4d3361fa2c39f40c9ff6d59a2c1ff1655afc",
+          "source:50b3ea2740a628b49966866705e3ffe465779c3a7f1da00bfe2c5fdf621a14d5",
+          "source:c63d075cf9fa5324ee0e30aa94fa98ea563beda997a736fdb6015430b446f1d2",
+          "source:d786f3495573808f7936670327e9b8ce2a711eba55a2dc8d3d69984bc85a95cf",
+          "source:ac0539ec7f7eace5c76f615013af94f7fb46cce6287b7791b4b026131d24e739",
+          "source:7d7ad0100faf7db1663d45b576239a6b2f58fbf8fac893f9387e8f3771f7d903",
+          "source:f760b50c48f64f8e60ec14ca8284138b3fe6cbc9a6915db31221c902970d49e9",
+          "source:47420992507efd911fa34fed400c1787785c02103a081b91da8d36d9a13e7a1c",
+          "source:3e5697e8875344f20bb3e4f497900cccde8a5ba03768025f18622282e701878b",
+          "source:48a2e5f450ee4bc45e908ae8d32e2485d4de4b80c9cba00863fab0696b6d5b5c",
+          "source:1182812aaece1b426e0c5839e8d69baf1766f2cd0cd0e9221832ab9214c00759",
+          "source:b91c811e6d913c92a243a9410fd4fcbff2626d8ca3ce9698eb971255444836fe",
+          "source:500d54bc986c70eb42328a4339cc43e32343c6acd4045c759e8ab5b0f2f92a44",
+          "source:d5b80145af2d3c26d1f43f9476545352d6d46975c07baa93ff7e51b7a20226fe",
+          "source:19ccacc46854720b2df93ac21fc7913b63ff666ccd01b1a29d8d009c0184ddda",
+          "source:e076a18a1c836db6e326c752c4d40b2e1627afef5cbb7126248fced21faa3edb",
+          "source:91cfa2bd14fa59e6378fbf0f48b222fff692a9ce6c36656b2a647756806096e2",
+          "source:bb4a6348a320eb1df489230dfe114dc5a8e9cd11426e22b4f5a40d4d2c7d8982",
+          "source:aa1ef9b601ec9346b0ffacc4fabe31e73dee8b2089991697132671ac99b17e67",
+          "source:d5574e1dc725a740a21f536ff044d8fbf525fd3c22edd0417a8c8488807e3752",
+          "source:bba0f4036f60f5f0bef5f56215a957a2986135867e6c12ac5b53daaf2a22b9a4",
+          "source:cccda092bbf8945374298526298a1625e6a8ecf3ea455120e7dd417fa51e7cb6",
+          "source:c54eb1f0de3e4c37974d3822f5ce469cbec1c2e68ce247d055dd256af5931882",
+          "source:0449946de3fd8bd1605e1efaa6b0342e3601310bbf077ad1160481a6f627f4ac",
+          "source:84297c0d3627220cc2bb4c49d2ccdcab4f87506029e06845c1719c73a2209fc2",
+          "source:69f6f2ccdce35ab0e99f11df7a2c912c4e0e992fa8a4422d4a504adb7b1056d5",
+          "source:198de138dffa102afcd6a1eff375a78c3e237e84e01a00412fa1387c066b0048",
+          "source:057473b6fde283531e6962ab1a988ad051a296432c436e7e57731c43dbd70b5b",
+          "source:2a0c864c5836bb18c85e24735eb36b25350747f813e9e47bbc1951694edddf40"
+        ],
+        "legal_gold": false,
+        "negative_categories": {
+          "extra_exception": {
+            "count": 16,
+            "emitted": 0,
+            "incidental_block": 0,
+            "learned_refusal": 16
+          },
+          "modal_deletion": {
+            "count": 16,
+            "emitted": 0,
+            "incidental_block": 0,
+            "learned_refusal": 16
+          },
+          "modal_misspelling": {
+            "count": 16,
+            "emitted": 8,
+            "incidental_block": 0,
+            "learned_refusal": 8
+          },
+          "second_rule": {
+            "count": 16,
+            "emitted": 0,
+            "incidental_block": 0,
+            "learned_refusal": 16
+          }
+        },
+        "negative_count": 64,
+        "negative_emitted_proposal_count": 8,
+        "negative_incidental_block_count": 0,
+        "negative_learned_refusal_count": 56,
+        "nonempty_condition_count": 32,
+        "nonempty_condition_exact_count": 21,
+        "positive_class_CE": 0.5569122876524706,
+        "positive_count": 64,
+        "positive_emitted_proposal_count": 52,
+        "positive_exact_count": 40,
+        "positive_learned_refusal_count": 12,
+        "positive_raw_all_spans_exact": 59,
+        "positive_raw_facet_span_exact": {
+          "action": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 64,
+            "nonempty_exact": 64
+          },
+          "actor": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 64,
+            "nonempty_exact": 64
+          },
+          "condition": {
+            "count": 64,
+            "exact": 61,
+            "nonempty_count": 32,
+            "nonempty_exact": 29
+          },
+          "modality": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 64,
+            "nonempty_exact": 64
+          },
+          "object": {
+            "count": 64,
+            "exact": 61,
+            "nonempty_count": 32,
+            "nonempty_exact": 29
+          }
+        },
+        "positive_raw_modality_exact": 53,
+        "positive_structural_block_count": 0,
+        "positive_templates": {
+          "actor_condition_modal_action_object": {
+            "class_exact": 7,
+            "count": 8,
+            "proposal_exact": 5,
+            "raw_action_exact": 8
+          },
+          "actor_modal_action_object_condition": {
+            "class_exact": 6,
+            "count": 8,
+            "proposal_exact": 5,
+            "raw_action_exact": 8
+          },
+          "actor_possessive_gerund_object_modal_condition": {
+            "class_exact": 8,
+            "count": 8,
+            "proposal_exact": 6,
+            "raw_action_exact": 8
+          },
+          "condition_actor_modal_action_object": {
+            "class_exact": 6,
+            "count": 8,
+            "proposal_exact": 4,
+            "raw_action_exact": 8
+          },
+          "condition_actor_possessive_gerund_object_modal": {
+            "class_exact": 8,
+            "count": 8,
+            "proposal_exact": 8,
+            "raw_action_exact": 8
+          },
+          "condition_modal_actor_action_object": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 5,
+            "raw_action_exact": 8
+          },
+          "gerund_object_agent_modal_condition": {
+            "class_exact": 8,
+            "count": 8,
+            "proposal_exact": 2,
+            "raw_action_exact": 8
+          },
+          "modal_actor_action_object_condition": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 5,
+            "raw_action_exact": 8
+          }
+        },
+        "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+        "raw_support_accuracy": 0.84375,
+        "raw_support_confusion": {
+          "false_negative": 12,
+          "false_positive": 8,
+          "true_negative": 56,
+          "true_positive": 52
+        },
+        "source_parent_groups": 64,
+        "support_BCE_probability_clip": [
+          1e-12,
+          0.999999999999
+        ],
+        "support_probability_BCE": 0.3564113484229585
+      },
+      "parent": {
+        "admission_masks": "all five zero",
+        "caller_attachment_learned": false,
+        "case_count": 128,
+        "class_confusion": {
+          "F": {
+            "F": 19,
+            "O": 1,
+            "P": 1
+          },
+          "O": {
+            "F": 5,
+            "O": 13,
+            "P": 3
+          },
+          "P": {
+            "F": 0,
+            "O": 1,
+            "P": 21
+          }
+        },
+        "fixed_class_nonaction_whole_ceiling_count": 50,
+        "fixed_class_nonaction_whole_ceiling_ids": [
+          "source:84798e7c1ff75011007f975719c9e3d46193fe07bc7b97e2152cee17a3263dcc",
+          "source:b6f8facf22363d89fee8856cc2b6f25dfda04d57b37582e800c7d7083eee98c1",
+          "source:3c567e24184c0062edd70a3270cdeaa05b3e398c8287d4142d4a77c5c5eee714",
+          "source:1071ce37fa74f414262a14894bc1b0b3181b69ef7e43c1e97fa18ba128785018",
+          "source:5618a2ceb18fcd69477da6930cd96867b403aadbd89af89219f6de8ccfd4e4ca",
+          "source:acb6ee982faa071e43dd76847a902141447b7c96c01eba27de4c5ec7195ef0f4",
+          "source:5d43a56a876e24c4983799599f89637e888910d40aea9ad19766885545e7d1a3",
+          "source:6d61b094f8c443eb63d8596faacb5cd0ad895d899e33dfe2de32b38752f4125e",
+          "source:7c23cc3f2ac43daeb6ceea2f86995313a1b2fc8c1c3e8b86dd0f3cb67d49533a",
+          "source:7ed57d7f259c3d0da91ad89272ed819eafd2a6346bb3735d7ce05f3834e9fad2",
+          "source:a18d2795fd8d3da6c7c71e71f46a870f599c340d7529789412ee2be2eeb106a4",
+          "source:ca8999e34fa4b2a953cb311336198245af58a92dcab5c15295ba0b700dd0223f",
+          "source:b5567e6c47c982963a0f6dfc5446cd92ec14bf7c1f5056ed9241aab8d6be069a",
+          "source:7adec3b872ce28894d4ac5b4c6725739707fb5c22e3ed62066d6e52518567b07",
+          "source:ba6475e8e16a60a5e7af70c15ece2be973eb66811ddb0494aa200a635d81940b",
+          "source:d32837ec6da28014543229ddb9d0d56c4c4d1c010b39b0f7a0cbd72ea979fb4c",
+          "source:13ceda216784a9c4cd61e6bb7d84ce6bce4c40ce987130486b86cbefbee7d320",
+          "source:8ef2ac1c46068176e9eebbb1a02e48aaeff6084a1ba9490bb5009d78b3503b39",
+          "source:46a28d2c6b8e4b5d122f00b7ae2b09a12b567f1c03febe864a0d67c98f5b5e8e",
+          "source:84a03fa6574edb6afea181fa230defcfe125b027b8b03a37d712a4fe80d13869",
+          "source:10163cac0e380d476d34f0fddd064416e2db700876c38feb9440b0e294408203",
+          "source:3330b3e5932e242375609bc38d4d4d3361fa2c39f40c9ff6d59a2c1ff1655afc",
+          "source:50b3ea2740a628b49966866705e3ffe465779c3a7f1da00bfe2c5fdf621a14d5",
+          "source:c63d075cf9fa5324ee0e30aa94fa98ea563beda997a736fdb6015430b446f1d2",
+          "source:d786f3495573808f7936670327e9b8ce2a711eba55a2dc8d3d69984bc85a95cf",
+          "source:ac0539ec7f7eace5c76f615013af94f7fb46cce6287b7791b4b026131d24e739",
+          "source:7d7ad0100faf7db1663d45b576239a6b2f58fbf8fac893f9387e8f3771f7d903",
+          "source:f760b50c48f64f8e60ec14ca8284138b3fe6cbc9a6915db31221c902970d49e9",
+          "source:47420992507efd911fa34fed400c1787785c02103a081b91da8d36d9a13e7a1c",
+          "source:3e5697e8875344f20bb3e4f497900cccde8a5ba03768025f18622282e701878b",
+          "source:48a2e5f450ee4bc45e908ae8d32e2485d4de4b80c9cba00863fab0696b6d5b5c",
+          "source:1182812aaece1b426e0c5839e8d69baf1766f2cd0cd0e9221832ab9214c00759",
+          "source:b91c811e6d913c92a243a9410fd4fcbff2626d8ca3ce9698eb971255444836fe",
+          "source:500d54bc986c70eb42328a4339cc43e32343c6acd4045c759e8ab5b0f2f92a44",
+          "source:d5b80145af2d3c26d1f43f9476545352d6d46975c07baa93ff7e51b7a20226fe",
+          "source:19ccacc46854720b2df93ac21fc7913b63ff666ccd01b1a29d8d009c0184ddda",
+          "source:e076a18a1c836db6e326c752c4d40b2e1627afef5cbb7126248fced21faa3edb",
+          "source:91cfa2bd14fa59e6378fbf0f48b222fff692a9ce6c36656b2a647756806096e2",
+          "source:bb4a6348a320eb1df489230dfe114dc5a8e9cd11426e22b4f5a40d4d2c7d8982",
+          "source:aa1ef9b601ec9346b0ffacc4fabe31e73dee8b2089991697132671ac99b17e67",
+          "source:d5574e1dc725a740a21f536ff044d8fbf525fd3c22edd0417a8c8488807e3752",
+          "source:bba0f4036f60f5f0bef5f56215a957a2986135867e6c12ac5b53daaf2a22b9a4",
+          "source:cccda092bbf8945374298526298a1625e6a8ecf3ea455120e7dd417fa51e7cb6",
+          "source:c54eb1f0de3e4c37974d3822f5ce469cbec1c2e68ce247d055dd256af5931882",
+          "source:0449946de3fd8bd1605e1efaa6b0342e3601310bbf077ad1160481a6f627f4ac",
+          "source:84297c0d3627220cc2bb4c49d2ccdcab4f87506029e06845c1719c73a2209fc2",
+          "source:69f6f2ccdce35ab0e99f11df7a2c912c4e0e992fa8a4422d4a504adb7b1056d5",
+          "source:198de138dffa102afcd6a1eff375a78c3e237e84e01a00412fa1387c066b0048",
+          "source:057473b6fde283531e6962ab1a988ad051a296432c436e7e57731c43dbd70b5b",
+          "source:2a0c864c5836bb18c85e24735eb36b25350747f813e9e47bbc1951694edddf40"
+        ],
+        "legal_gold": false,
+        "negative_categories": {
+          "extra_exception": {
+            "count": 16,
+            "emitted": 0,
+            "incidental_block": 0,
+            "learned_refusal": 16
+          },
+          "modal_deletion": {
+            "count": 16,
+            "emitted": 0,
+            "incidental_block": 0,
+            "learned_refusal": 16
+          },
+          "modal_misspelling": {
+            "count": 16,
+            "emitted": 4,
+            "incidental_block": 1,
+            "learned_refusal": 11
+          },
+          "second_rule": {
+            "count": 16,
+            "emitted": 0,
+            "incidental_block": 0,
+            "learned_refusal": 16
+          }
+        },
+        "negative_count": 64,
+        "negative_emitted_proposal_count": 4,
+        "negative_incidental_block_count": 1,
+        "negative_learned_refusal_count": 59,
+        "nonempty_condition_count": 32,
+        "nonempty_condition_exact_count": 13,
+        "positive_class_CE": 0.5569122876524706,
+        "positive_count": 64,
+        "positive_emitted_proposal_count": 41,
+        "positive_exact_count": 29,
+        "positive_learned_refusal_count": 18,
+        "positive_raw_all_spans_exact": 47,
+        "positive_raw_facet_span_exact": {
+          "action": {
+            "count": 64,
+            "exact": 50,
+            "nonempty_count": 64,
+            "nonempty_exact": 50
+          },
+          "actor": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 64,
+            "nonempty_exact": 64
+          },
+          "condition": {
+            "count": 64,
+            "exact": 61,
+            "nonempty_count": 32,
+            "nonempty_exact": 29
+          },
+          "modality": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 64,
+            "nonempty_exact": 64
+          },
+          "object": {
+            "count": 64,
+            "exact": 61,
+            "nonempty_count": 32,
+            "nonempty_exact": 29
+          }
+        },
+        "positive_raw_modality_exact": 53,
+        "positive_structural_block_count": 5,
+        "positive_templates": {
+          "actor_condition_modal_action_object": {
+            "class_exact": 7,
+            "count": 8,
+            "proposal_exact": 5,
+            "raw_action_exact": 8
+          },
+          "actor_modal_action_object_condition": {
+            "class_exact": 6,
+            "count": 8,
+            "proposal_exact": 2,
+            "raw_action_exact": 8
+          },
+          "actor_possessive_gerund_object_modal_condition": {
+            "class_exact": 8,
+            "count": 8,
+            "proposal_exact": 5,
+            "raw_action_exact": 8
+          },
+          "condition_actor_modal_action_object": {
+            "class_exact": 6,
+            "count": 8,
+            "proposal_exact": 4,
+            "raw_action_exact": 8
+          },
+          "condition_actor_possessive_gerund_object_modal": {
+            "class_exact": 8,
+            "count": 8,
+            "proposal_exact": 7,
+            "raw_action_exact": 8
+          },
+          "condition_modal_actor_action_object": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 5,
+            "raw_action_exact": 8
+          },
+          "gerund_object_agent_modal_condition": {
+            "class_exact": 8,
+            "count": 8,
+            "proposal_exact": 0,
+            "raw_action_exact": 0
+          },
+          "modal_actor_action_object_condition": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 1,
+            "raw_action_exact": 2
+          }
+        },
+        "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+        "raw_support_accuracy": 0.8203125,
+        "raw_support_confusion": {
+          "false_negative": 18,
+          "false_positive": 5,
+          "true_negative": 59,
+          "true_positive": 46
+        },
+        "source_parent_groups": 64,
+        "support_BCE_probability_clip": [
+          1e-12,
+          0.999999999999
+        ],
+        "support_probability_BCE": 0.4232792963986053
+      }
+    },
+    "earlier_trigger": {
+      "linear": {
+        "admission_masks": "all five zero",
+        "caller_attachment_learned": false,
+        "case_count": 128,
+        "class_confusion": {
+          "F": {
+            "F": 17,
+            "O": 2,
+            "P": 2
+          },
+          "O": {
+            "F": 7,
+            "O": 13,
+            "P": 2
+          },
+          "P": {
+            "F": 2,
+            "O": 2,
+            "P": 17
+          }
+        },
+        "fixed_class_nonaction_whole_ceiling_count": 43,
+        "fixed_class_nonaction_whole_ceiling_ids": [
+          "source:079e1d82d60cddbee3ee1cd3f48a15c0f5c1da3972d43b1224bb9f5d9493c9d0",
+          "source:cc604832fd592ff86d65193425caeba3a9936e64c870dcd74cf156a540929a01",
+          "source:ecd5bbbdcfa03540d8c5ca835b7934e92c5c7caee3522e2349ce15ed2a75bc7e",
+          "source:12000a64577481d03ee20b6d7479d5eda18e3642f177c6c96fd8ef50a71e91f1",
+          "source:02bc12fb281cba9000a0e33d1ce21766435759c1ee79ee29f878fa4714555487",
+          "source:15aacd790ca84fbc9eb78cfa9400dc9a6161fb5092c859b5a06b7a380e6acde8",
+          "source:a37b4d30c0c27f625ce7aa410ab9da00065955ad7ca5215201083795dea25454",
+          "source:9029dff9e68c28a2ebb23d7046acd31a672718fd7a33e682f4a43ce2ec066a07",
+          "source:063dc3e88d3ab754c481a19ef4503111ce5745fb156e53de8c56533b9aabb03a",
+          "source:3279c29c9a2b66cb47e487277d6112a165538aa23a628e3231de1098c959136b",
+          "source:702e7c77fd246319e2c8c1ff8366fe0397a9d4aa7013c2e92f0eae6abb006784",
+          "source:e3afea8969b4b423c82c63dd7de51dbe619c05230b1415dd0b1f1cff246c024f",
+          "source:159f43ea6c039a5c2f71b39020bd63eaa2f7d7b6659b955e0de5f948fa7bc745",
+          "source:e0502c557f460113e4f7c692ba90e21b676d9163bcf3a23437aad5803758d4e2",
+          "source:256c0ac221d0d663d57860c3f24abb1f4e462265d917ad9d4c9e2182cd80333c",
+          "source:82efd2949e5e42c2c40909a75e8d0f4e53073e7698c279be010cb56d22093009",
+          "source:d1b924d37eeb0d1da1a2ddf9325fdc12b682c19b4511a9fa1632dcd9bea724e3",
+          "source:01fa00d885b02e1853adfc21c5b49285589d4d54c7245039fe14e6cc1143b4c8",
+          "source:45525df2e327b8784a9cd220e5df4f4b0b6bc4db05ca3df3c05a0512fdb81256",
+          "source:cd7ae60793a59f235f77c9ab2f8e092b2ff4aac034f416576665b2f92fadbc2f",
+          "source:704271c092441006fb5b29e696daeb1e531407f1f5819e17243b1f2a962ab88c",
+          "source:ee9d347b3b858f495a0ccecf15f3c92b3c00566a8ccd64feaad340be33c0ba7c",
+          "source:ad7e79965482b3739a566246b62de8eb90abc079d69ac3061a1b2187847d5885",
+          "source:4d9c524e3f29ccfce0cc96dcd4d18a917622775cce2646e717991c421ac8092c",
+          "source:a4e3d398545d903359d6b61f6ff020f55153e2cd2312fe5c02ba520d5b3abdf7",
+          "source:8f17104c6b0b9d0656b90f2f78438ccd7fbfe42261c3238c933ac118861644b6",
+          "source:6eb263f29ef90bf7022864c7c7f17651cf5999d4b9ab1076a9e2428ce13f9de8",
+          "source:fb06bd0a0dc326e57b791060ee5d281b458ae1da84d979b824d6487e99d2c39a",
+          "source:7a8cb185050402bca66b9cd3459af7c33571e58fb0a70b1e323ae9ddb34764b0",
+          "source:a52293d5262753c946a40e8f9f189c3f2633097c6e64fb8c877693491316e1ac",
+          "source:7447f8c1ada84aa669844b01da3ec29051f1897c8b457b42ef6a79b30b517aee",
+          "source:9fb647fd5739be9d24e61129d276d152281c17857c2cc4e7817f9ec58fea34ce",
+          "source:8a204a003a2c34733e0d6666e3b750d4f4d504fc9cb7092f0a5713d56a36c535",
+          "source:ea8c11b37548b9457b7df43b769a4b16913b08da366216c884ce28e65660f16a",
+          "source:219a3eb6463f0e01c670d0056b75fc3283a3750c312dfd6986eaa313eae061a6",
+          "source:f57dcfa3b45eac8d61ffc48adee879fa4e6f1b546e54c649c2858fda560368f1",
+          "source:a9a5da75644bf1c559719ee0396f2cbee8911665027b19a81255cd239feb0efd",
+          "source:6d0eae2f49573a949cc35256a18c8eb22b8e029f3b6ba98c627da772d9c5165a",
+          "source:cb536da4e6f4c22b0c90027a1aed964c1229aab76696404aca765827ed3324d1",
+          "source:26ca525d917b0d3aed659a6ad2e62d1c1c7383fcbe0ab039a8370be8fba37ed4",
+          "source:22f05208d3964c94849c34baa887f530d99ea0ba39901ee6d0dc5ff1c9dbc74d",
+          "source:f17a00931dad50c42ee4e4850178b9da5824a15340cb6b22ac7d7af71eb8b253",
+          "source:a88bd8132396500508cd4961eab26c143007aeea0b8115d8005e9d52240b444a"
+        ],
+        "legal_gold": false,
+        "negative_categories": {
+          "extra_exception": {
+            "count": 16,
+            "emitted": 0,
+            "incidental_block": 0,
+            "learned_refusal": 16
+          },
+          "modal_deletion": {
+            "count": 16,
+            "emitted": 0,
+            "incidental_block": 2,
+            "learned_refusal": 14
+          },
+          "modal_misspelling": {
+            "count": 16,
+            "emitted": 12,
+            "incidental_block": 1,
+            "learned_refusal": 3
+          },
+          "second_rule": {
+            "count": 16,
+            "emitted": 0,
+            "incidental_block": 0,
+            "learned_refusal": 16
+          }
+        },
+        "negative_count": 64,
+        "negative_emitted_proposal_count": 12,
+        "negative_incidental_block_count": 3,
+        "negative_learned_refusal_count": 49,
+        "nonempty_condition_count": 32,
+        "nonempty_condition_exact_count": 17,
+        "positive_class_CE": 0.6538583129617402,
+        "positive_count": 64,
+        "positive_emitted_proposal_count": 55,
+        "positive_exact_count": 37,
+        "positive_learned_refusal_count": 7,
+        "positive_raw_all_spans_exact": 50,
+        "positive_raw_facet_span_exact": {
+          "action": {
+            "count": 64,
+            "exact": 55,
+            "nonempty_count": 64,
+            "nonempty_exact": 55
+          },
+          "actor": {
+            "count": 64,
+            "exact": 61,
+            "nonempty_count": 64,
+            "nonempty_exact": 61
+          },
+          "condition": {
+            "count": 64,
+            "exact": 63,
+            "nonempty_count": 32,
+            "nonempty_exact": 31
+          },
+          "modality": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 64,
+            "nonempty_exact": 64
+          },
+          "object": {
+            "count": 64,
+            "exact": 61,
+            "nonempty_count": 32,
+            "nonempty_exact": 29
+          }
+        },
+        "positive_raw_modality_exact": 47,
+        "positive_structural_block_count": 2,
+        "positive_templates": {
+          "actor_condition_modal_action_object": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 4,
+            "raw_action_exact": 8
+          },
+          "actor_modal_action_object_condition": {
+            "class_exact": 7,
+            "count": 8,
+            "proposal_exact": 7,
+            "raw_action_exact": 8
+          },
+          "actor_possessive_gerund_object_modal_condition": {
+            "class_exact": 6,
+            "count": 8,
+            "proposal_exact": 6,
+            "raw_action_exact": 8
+          },
+          "condition_actor_modal_action_object": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 3,
+            "raw_action_exact": 8
+          },
+          "condition_actor_possessive_gerund_object_modal": {
+            "class_exact": 8,
+            "count": 8,
+            "proposal_exact": 7,
+            "raw_action_exact": 8
+          },
+          "condition_modal_actor_action_object": {
+            "class_exact": 6,
+            "count": 8,
+            "proposal_exact": 6,
+            "raw_action_exact": 7
+          },
+          "gerund_object_agent_modal_condition": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 0,
+            "raw_action_exact": 0
+          },
+          "modal_actor_action_object_condition": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 4,
+            "raw_action_exact": 8
+          }
+        },
+        "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+        "raw_support_accuracy": 0.828125,
+        "raw_support_confusion": {
+          "false_negative": 7,
+          "false_positive": 15,
+          "true_negative": 49,
+          "true_positive": 57
+        },
+        "source_parent_groups": 64,
+        "support_BCE_probability_clip": [
+          1e-12,
+          0.999999999999
+        ],
+        "support_probability_BCE": 0.37831704342597355
+      },
+      "mlp": {
+        "admission_masks": "all five zero",
+        "caller_attachment_learned": false,
+        "case_count": 128,
+        "class_confusion": {
+          "F": {
+            "F": 17,
+            "O": 2,
+            "P": 2
+          },
+          "O": {
+            "F": 7,
+            "O": 13,
+            "P": 2
+          },
+          "P": {
+            "F": 2,
+            "O": 2,
+            "P": 17
+          }
+        },
+        "fixed_class_nonaction_whole_ceiling_count": 43,
+        "fixed_class_nonaction_whole_ceiling_ids": [
+          "source:079e1d82d60cddbee3ee1cd3f48a15c0f5c1da3972d43b1224bb9f5d9493c9d0",
+          "source:cc604832fd592ff86d65193425caeba3a9936e64c870dcd74cf156a540929a01",
+          "source:ecd5bbbdcfa03540d8c5ca835b7934e92c5c7caee3522e2349ce15ed2a75bc7e",
+          "source:12000a64577481d03ee20b6d7479d5eda18e3642f177c6c96fd8ef50a71e91f1",
+          "source:02bc12fb281cba9000a0e33d1ce21766435759c1ee79ee29f878fa4714555487",
+          "source:15aacd790ca84fbc9eb78cfa9400dc9a6161fb5092c859b5a06b7a380e6acde8",
+          "source:a37b4d30c0c27f625ce7aa410ab9da00065955ad7ca5215201083795dea25454",
+          "source:9029dff9e68c28a2ebb23d7046acd31a672718fd7a33e682f4a43ce2ec066a07",
+          "source:063dc3e88d3ab754c481a19ef4503111ce5745fb156e53de8c56533b9aabb03a",
+          "source:3279c29c9a2b66cb47e487277d6112a165538aa23a628e3231de1098c959136b",
+          "source:702e7c77fd246319e2c8c1ff8366fe0397a9d4aa7013c2e92f0eae6abb006784",
+          "source:e3afea8969b4b423c82c63dd7de51dbe619c05230b1415dd0b1f1cff246c024f",
+          "source:159f43ea6c039a5c2f71b39020bd63eaa2f7d7b6659b955e0de5f948fa7bc745",
+          "source:e0502c557f460113e4f7c692ba90e21b676d9163bcf3a23437aad5803758d4e2",
+          "source:256c0ac221d0d663d57860c3f24abb1f4e462265d917ad9d4c9e2182cd80333c",
+          "source:82efd2949e5e42c2c40909a75e8d0f4e53073e7698c279be010cb56d22093009",
+          "source:d1b924d37eeb0d1da1a2ddf9325fdc12b682c19b4511a9fa1632dcd9bea724e3",
+          "source:01fa00d885b02e1853adfc21c5b49285589d4d54c7245039fe14e6cc1143b4c8",
+          "source:45525df2e327b8784a9cd220e5df4f4b0b6bc4db05ca3df3c05a0512fdb81256",
+          "source:cd7ae60793a59f235f77c9ab2f8e092b2ff4aac034f416576665b2f92fadbc2f",
+          "source:704271c092441006fb5b29e696daeb1e531407f1f5819e17243b1f2a962ab88c",
+          "source:ee9d347b3b858f495a0ccecf15f3c92b3c00566a8ccd64feaad340be33c0ba7c",
+          "source:ad7e79965482b3739a566246b62de8eb90abc079d69ac3061a1b2187847d5885",
+          "source:4d9c524e3f29ccfce0cc96dcd4d18a917622775cce2646e717991c421ac8092c",
+          "source:a4e3d398545d903359d6b61f6ff020f55153e2cd2312fe5c02ba520d5b3abdf7",
+          "source:8f17104c6b0b9d0656b90f2f78438ccd7fbfe42261c3238c933ac118861644b6",
+          "source:6eb263f29ef90bf7022864c7c7f17651cf5999d4b9ab1076a9e2428ce13f9de8",
+          "source:fb06bd0a0dc326e57b791060ee5d281b458ae1da84d979b824d6487e99d2c39a",
+          "source:7a8cb185050402bca66b9cd3459af7c33571e58fb0a70b1e323ae9ddb34764b0",
+          "source:a52293d5262753c946a40e8f9f189c3f2633097c6e64fb8c877693491316e1ac",
+          "source:7447f8c1ada84aa669844b01da3ec29051f1897c8b457b42ef6a79b30b517aee",
+          "source:9fb647fd5739be9d24e61129d276d152281c17857c2cc4e7817f9ec58fea34ce",
+          "source:8a204a003a2c34733e0d6666e3b750d4f4d504fc9cb7092f0a5713d56a36c535",
+          "source:ea8c11b37548b9457b7df43b769a4b16913b08da366216c884ce28e65660f16a",
+          "source:219a3eb6463f0e01c670d0056b75fc3283a3750c312dfd6986eaa313eae061a6",
+          "source:f57dcfa3b45eac8d61ffc48adee879fa4e6f1b546e54c649c2858fda560368f1",
+          "source:a9a5da75644bf1c559719ee0396f2cbee8911665027b19a81255cd239feb0efd",
+          "source:6d0eae2f49573a949cc35256a18c8eb22b8e029f3b6ba98c627da772d9c5165a",
+          "source:cb536da4e6f4c22b0c90027a1aed964c1229aab76696404aca765827ed3324d1",
+          "source:26ca525d917b0d3aed659a6ad2e62d1c1c7383fcbe0ab039a8370be8fba37ed4",
+          "source:22f05208d3964c94849c34baa887f530d99ea0ba39901ee6d0dc5ff1c9dbc74d",
+          "source:f17a00931dad50c42ee4e4850178b9da5824a15340cb6b22ac7d7af71eb8b253",
+          "source:a88bd8132396500508cd4961eab26c143007aeea0b8115d8005e9d52240b444a"
+        ],
+        "legal_gold": false,
+        "negative_categories": {
+          "extra_exception": {
+            "count": 16,
+            "emitted": 0,
+            "incidental_block": 0,
+            "learned_refusal": 16
+          },
+          "modal_deletion": {
+            "count": 16,
+            "emitted": 0,
+            "incidental_block": 2,
+            "learned_refusal": 14
+          },
+          "modal_misspelling": {
+            "count": 16,
+            "emitted": 12,
+            "incidental_block": 1,
+            "learned_refusal": 3
+          },
+          "second_rule": {
+            "count": 16,
+            "emitted": 0,
+            "incidental_block": 0,
+            "learned_refusal": 16
+          }
+        },
+        "negative_count": 64,
+        "negative_emitted_proposal_count": 12,
+        "negative_incidental_block_count": 3,
+        "negative_learned_refusal_count": 49,
+        "nonempty_condition_count": 32,
+        "nonempty_condition_exact_count": 19,
+        "positive_class_CE": 0.6538583129617402,
+        "positive_count": 64,
+        "positive_emitted_proposal_count": 56,
+        "positive_exact_count": 39,
+        "positive_learned_refusal_count": 7,
+        "positive_raw_all_spans_exact": 58,
+        "positive_raw_facet_span_exact": {
+          "action": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 64,
+            "nonempty_exact": 64
+          },
+          "actor": {
+            "count": 64,
+            "exact": 61,
+            "nonempty_count": 64,
+            "nonempty_exact": 61
+          },
+          "condition": {
+            "count": 64,
+            "exact": 63,
+            "nonempty_count": 32,
+            "nonempty_exact": 31
+          },
+          "modality": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 64,
+            "nonempty_exact": 64
+          },
+          "object": {
+            "count": 64,
+            "exact": 61,
+            "nonempty_count": 32,
+            "nonempty_exact": 29
+          }
+        },
+        "positive_raw_modality_exact": 47,
+        "positive_structural_block_count": 1,
+        "positive_templates": {
+          "actor_condition_modal_action_object": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 4,
+            "raw_action_exact": 8
+          },
+          "actor_modal_action_object_condition": {
+            "class_exact": 7,
+            "count": 8,
+            "proposal_exact": 7,
+            "raw_action_exact": 8
+          },
+          "actor_possessive_gerund_object_modal_condition": {
+            "class_exact": 6,
+            "count": 8,
+            "proposal_exact": 6,
+            "raw_action_exact": 8
+          },
+          "condition_actor_modal_action_object": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 3,
+            "raw_action_exact": 8
+          },
+          "condition_actor_possessive_gerund_object_modal": {
+            "class_exact": 8,
+            "count": 8,
+            "proposal_exact": 7,
+            "raw_action_exact": 8
+          },
+          "condition_modal_actor_action_object": {
+            "class_exact": 6,
+            "count": 8,
+            "proposal_exact": 6,
+            "raw_action_exact": 8
+          },
+          "gerund_object_agent_modal_condition": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 2,
+            "raw_action_exact": 8
+          },
+          "modal_actor_action_object_condition": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 4,
+            "raw_action_exact": 8
+          }
+        },
+        "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+        "raw_support_accuracy": 0.828125,
+        "raw_support_confusion": {
+          "false_negative": 7,
+          "false_positive": 15,
+          "true_negative": 49,
+          "true_positive": 57
+        },
+        "source_parent_groups": 64,
+        "support_BCE_probability_clip": [
+          1e-12,
+          0.999999999999
+        ],
+        "support_probability_BCE": 0.3717360483659823
+      },
+      "parent": {
+        "admission_masks": "all five zero",
+        "caller_attachment_learned": false,
+        "case_count": 128,
+        "class_confusion": {
+          "F": {
+            "F": 17,
+            "O": 2,
+            "P": 2
+          },
+          "O": {
+            "F": 7,
+            "O": 13,
+            "P": 2
+          },
+          "P": {
+            "F": 2,
+            "O": 2,
+            "P": 17
+          }
+        },
+        "fixed_class_nonaction_whole_ceiling_count": 43,
+        "fixed_class_nonaction_whole_ceiling_ids": [
+          "source:079e1d82d60cddbee3ee1cd3f48a15c0f5c1da3972d43b1224bb9f5d9493c9d0",
+          "source:cc604832fd592ff86d65193425caeba3a9936e64c870dcd74cf156a540929a01",
+          "source:ecd5bbbdcfa03540d8c5ca835b7934e92c5c7caee3522e2349ce15ed2a75bc7e",
+          "source:12000a64577481d03ee20b6d7479d5eda18e3642f177c6c96fd8ef50a71e91f1",
+          "source:02bc12fb281cba9000a0e33d1ce21766435759c1ee79ee29f878fa4714555487",
+          "source:15aacd790ca84fbc9eb78cfa9400dc9a6161fb5092c859b5a06b7a380e6acde8",
+          "source:a37b4d30c0c27f625ce7aa410ab9da00065955ad7ca5215201083795dea25454",
+          "source:9029dff9e68c28a2ebb23d7046acd31a672718fd7a33e682f4a43ce2ec066a07",
+          "source:063dc3e88d3ab754c481a19ef4503111ce5745fb156e53de8c56533b9aabb03a",
+          "source:3279c29c9a2b66cb47e487277d6112a165538aa23a628e3231de1098c959136b",
+          "source:702e7c77fd246319e2c8c1ff8366fe0397a9d4aa7013c2e92f0eae6abb006784",
+          "source:e3afea8969b4b423c82c63dd7de51dbe619c05230b1415dd0b1f1cff246c024f",
+          "source:159f43ea6c039a5c2f71b39020bd63eaa2f7d7b6659b955e0de5f948fa7bc745",
+          "source:e0502c557f460113e4f7c692ba90e21b676d9163bcf3a23437aad5803758d4e2",
+          "source:256c0ac221d0d663d57860c3f24abb1f4e462265d917ad9d4c9e2182cd80333c",
+          "source:82efd2949e5e42c2c40909a75e8d0f4e53073e7698c279be010cb56d22093009",
+          "source:d1b924d37eeb0d1da1a2ddf9325fdc12b682c19b4511a9fa1632dcd9bea724e3",
+          "source:01fa00d885b02e1853adfc21c5b49285589d4d54c7245039fe14e6cc1143b4c8",
+          "source:45525df2e327b8784a9cd220e5df4f4b0b6bc4db05ca3df3c05a0512fdb81256",
+          "source:cd7ae60793a59f235f77c9ab2f8e092b2ff4aac034f416576665b2f92fadbc2f",
+          "source:704271c092441006fb5b29e696daeb1e531407f1f5819e17243b1f2a962ab88c",
+          "source:ee9d347b3b858f495a0ccecf15f3c92b3c00566a8ccd64feaad340be33c0ba7c",
+          "source:ad7e79965482b3739a566246b62de8eb90abc079d69ac3061a1b2187847d5885",
+          "source:4d9c524e3f29ccfce0cc96dcd4d18a917622775cce2646e717991c421ac8092c",
+          "source:a4e3d398545d903359d6b61f6ff020f55153e2cd2312fe5c02ba520d5b3abdf7",
+          "source:8f17104c6b0b9d0656b90f2f78438ccd7fbfe42261c3238c933ac118861644b6",
+          "source:6eb263f29ef90bf7022864c7c7f17651cf5999d4b9ab1076a9e2428ce13f9de8",
+          "source:fb06bd0a0dc326e57b791060ee5d281b458ae1da84d979b824d6487e99d2c39a",
+          "source:7a8cb185050402bca66b9cd3459af7c33571e58fb0a70b1e323ae9ddb34764b0",
+          "source:a52293d5262753c946a40e8f9f189c3f2633097c6e64fb8c877693491316e1ac",
+          "source:7447f8c1ada84aa669844b01da3ec29051f1897c8b457b42ef6a79b30b517aee",
+          "source:9fb647fd5739be9d24e61129d276d152281c17857c2cc4e7817f9ec58fea34ce",
+          "source:8a204a003a2c34733e0d6666e3b750d4f4d504fc9cb7092f0a5713d56a36c535",
+          "source:ea8c11b37548b9457b7df43b769a4b16913b08da366216c884ce28e65660f16a",
+          "source:219a3eb6463f0e01c670d0056b75fc3283a3750c312dfd6986eaa313eae061a6",
+          "source:f57dcfa3b45eac8d61ffc48adee879fa4e6f1b546e54c649c2858fda560368f1",
+          "source:a9a5da75644bf1c559719ee0396f2cbee8911665027b19a81255cd239feb0efd",
+          "source:6d0eae2f49573a949cc35256a18c8eb22b8e029f3b6ba98c627da772d9c5165a",
+          "source:cb536da4e6f4c22b0c90027a1aed964c1229aab76696404aca765827ed3324d1",
+          "source:26ca525d917b0d3aed659a6ad2e62d1c1c7383fcbe0ab039a8370be8fba37ed4",
+          "source:22f05208d3964c94849c34baa887f530d99ea0ba39901ee6d0dc5ff1c9dbc74d",
+          "source:f17a00931dad50c42ee4e4850178b9da5824a15340cb6b22ac7d7af71eb8b253",
+          "source:a88bd8132396500508cd4961eab26c143007aeea0b8115d8005e9d52240b444a"
+        ],
+        "legal_gold": false,
+        "negative_categories": {
+          "extra_exception": {
+            "count": 16,
+            "emitted": 0,
+            "incidental_block": 0,
+            "learned_refusal": 16
+          },
+          "modal_deletion": {
+            "count": 16,
+            "emitted": 0,
+            "incidental_block": 2,
+            "learned_refusal": 14
+          },
+          "modal_misspelling": {
+            "count": 16,
+            "emitted": 6,
+            "incidental_block": 3,
+            "learned_refusal": 7
+          },
+          "second_rule": {
+            "count": 16,
+            "emitted": 0,
+            "incidental_block": 0,
+            "learned_refusal": 16
+          }
+        },
+        "negative_count": 64,
+        "negative_emitted_proposal_count": 6,
+        "negative_incidental_block_count": 5,
+        "negative_learned_refusal_count": 53,
+        "nonempty_condition_count": 32,
+        "nonempty_condition_exact_count": 12,
+        "positive_class_CE": 0.6538583129617402,
+        "positive_count": 64,
+        "positive_emitted_proposal_count": 43,
+        "positive_exact_count": 30,
+        "positive_learned_refusal_count": 19,
+        "positive_raw_all_spans_exact": 49,
+        "positive_raw_facet_span_exact": {
+          "action": {
+            "count": 64,
+            "exact": 54,
+            "nonempty_count": 64,
+            "nonempty_exact": 54
+          },
+          "actor": {
+            "count": 64,
+            "exact": 61,
+            "nonempty_count": 64,
+            "nonempty_exact": 61
+          },
+          "condition": {
+            "count": 64,
+            "exact": 63,
+            "nonempty_count": 32,
+            "nonempty_exact": 31
+          },
+          "modality": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 64,
+            "nonempty_exact": 64
+          },
+          "object": {
+            "count": 64,
+            "exact": 61,
+            "nonempty_count": 32,
+            "nonempty_exact": 29
+          }
+        },
+        "positive_raw_modality_exact": 47,
+        "positive_structural_block_count": 2,
+        "positive_templates": {
+          "actor_condition_modal_action_object": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 4,
+            "raw_action_exact": 8
+          },
+          "actor_modal_action_object_condition": {
+            "class_exact": 7,
+            "count": 8,
+            "proposal_exact": 4,
+            "raw_action_exact": 7
+          },
+          "actor_possessive_gerund_object_modal_condition": {
+            "class_exact": 6,
+            "count": 8,
+            "proposal_exact": 3,
+            "raw_action_exact": 8
+          },
+          "condition_actor_modal_action_object": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 3,
+            "raw_action_exact": 8
+          },
+          "condition_actor_possessive_gerund_object_modal": {
+            "class_exact": 8,
+            "count": 8,
+            "proposal_exact": 7,
+            "raw_action_exact": 8
+          },
+          "condition_modal_actor_action_object": {
+            "class_exact": 6,
+            "count": 8,
+            "proposal_exact": 6,
+            "raw_action_exact": 7
+          },
+          "gerund_object_agent_modal_condition": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 0,
+            "raw_action_exact": 0
+          },
+          "modal_actor_action_object_condition": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 3,
+            "raw_action_exact": 8
+          }
+        },
+        "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+        "raw_support_accuracy": 0.765625,
+        "raw_support_confusion": {
+          "false_negative": 19,
+          "false_positive": 11,
+          "true_negative": 53,
+          "true_positive": 45
+        },
+        "source_parent_groups": 64,
+        "support_BCE_probability_clip": [
+          1e-12,
+          0.999999999999
+        ],
+        "support_probability_BCE": 0.4146934623023124
+      }
+    },
+    "fresh_final": {
+      "linear": {
+        "admission_masks": "all five zero",
+        "caller_attachment_learned": false,
+        "case_count": 128,
+        "class_confusion": {
+          "F": {
+            "F": 16,
+            "O": 2,
+            "P": 3
+          },
+          "O": {
+            "F": 7,
+            "O": 11,
+            "P": 4
+          },
+          "P": {
+            "F": 2,
+            "O": 1,
+            "P": 18
+          }
+        },
+        "fixed_class_nonaction_whole_ceiling_count": 43,
+        "fixed_class_nonaction_whole_ceiling_ids": [
+          "source:ba806ba1bf2baeed6e88b18cb78bbfe25e3cc757017fee9bac268323dae7f53c",
+          "source:23c4a93fa35ca83128cdfcabb4eb8b9c45b0f572cb9eec3c7933d656ae371126",
+          "source:2e23a687859efdb7d48b62a7844708e34eb7c0020aef9f0f82f63d3f6a847c48",
+          "source:4d8a5c9bd44edb4460042ef62a245d87216dde6d20f1882943d8e1d654c083ea",
+          "source:15de60786ea79a56cebf248af292d66b66b10f0d6fb9dc8d126c98bdf5239512",
+          "source:90c262fa82654b801019a7fb570a73a4739bc404717a7a20403ed353b8ebb519",
+          "source:9f4fbe3463c33bec29a0421a882c696ea0fee82055eb2dc3adfed85b811767a7",
+          "source:80ee5af05bb9d5537a78539cc5f861a692bc25e010ed13f01b1428409867ee51",
+          "source:d1cadd06c359c06d86419076c9d775fee3bda0e776872eeaab0211f4aee313a5",
+          "source:8425c81dc9274ba564d3e18827418ac9cc7c7fe8f2aeb22cfc889a7db7670f43",
+          "source:4bac04ca0a6a544d461124aeb425fbc470d5ec95bb4ffeb91caf78ec7502e319",
+          "source:69e222a18d35c4e6133d935ed7c9cad40512fe95f5610e7da807f0cca3ff73a2",
+          "source:427d6fbf04b50461cb9b993de854649ae400af256596cb366076b356a5a40a74",
+          "source:6dc406cdb8130191182044e14442e1c91650134438319664268fae0032dea79b",
+          "source:5e5dcf29601849482f265b0fd10b846f673c8a8aa397817cbe47e23f9c07f208",
+          "source:747e852e57bde394221f5ff36093880f6485ce647a706a1ce99e7c9111a07f7b",
+          "source:067fe57c2f7e77c94021f5e9551055579acdd0bdca93874a2b2beeefd37b976d",
+          "source:2c9c2c7e8beef2791f0681d5c716330f225a986ae095510bc55669eaf97aadb1",
+          "source:3bcf1d8219b3e89817071ac842c078e2da1807a1fef235732ececcbd08385f84",
+          "source:9a90d2fc02c29f8d5892911150b24bbb4177b3b55054b0eada820a487795fdb3",
+          "source:c1dbce060b9c861ade8a8ee9ac20a9bdaa853d1c6e733922bc1d0f1814d214c6",
+          "source:66a96dd983e13ffa7e4c62f33437ead571b3308e3e393f321e1a8f577ca73cb9",
+          "source:15ca86463debfa50b56db57c23328a2cbea3036c3476884fd691f944f5dc1998",
+          "source:b3e53a56c1486a0a27ec798f1ed12fb2f57bf94443b8093be20d97c88553ab01",
+          "source:b89c0b04587f9b77539e5a41852c474c97dcb72e1a95d440a70c092664d413ce",
+          "source:d697122084358c4e8b4c4f65bbfac02d2a4b36c7a35314251219210cf64ad845",
+          "source:cbd06d495c232ef800e6c0bfcb1703579d339095949936a938f376ba9dc1e2a1",
+          "source:b269907d61b82617d2459648a67612c5ecff57c2938134b36891db62bb42d788",
+          "source:9d8cdf468aec9be8cb5cec71cbf13ae92dfeef229d07281ef8e7d47caa02f404",
+          "source:bb910a3a38856aea444a8b34c46156cddc3dfd0e1b714b904b2467f1a1521da2",
+          "source:e0942dfdfa5e862e2b704b8e2b536cd1829ad3da1f40f3e2504447e19d1f8cb6",
+          "source:e6eab9c2bc1a8232b61df0b4a7130995519bdc15f3e810ad8c814a1ab9504ead",
+          "source:fcdc317d89ac42a43837a3ed23e27a3d279f4c56fbcce239e0da9e33388873cf",
+          "source:2e29e6c6dfbf137968aca85b76c000fc8ce5ce4eb0ed28d03cb702603bca6bbc",
+          "source:b1eff060b9945e4c074fc4dcbf770bbd96e4e3f1fc62f4beaaa078367dd99247",
+          "source:77dc90fb9f727459bedde2341311d7abbdb4a1f77069eab302aba11cce6bf74c",
+          "source:a34d6e3ea9eef6dd28f780749d590327da78ceab2b2a6466674449482fe62646",
+          "source:d52cc5202f87a505596ec5f115e4e56e4f3a326837acf5fbd4bb5343f3ba777f",
+          "source:c43e493573452990136aba641eccd60dcc36ee98544bc6f0cd0bebd064708262",
+          "source:e2bfa8082dbbafcb92626db9d32447409f10107740965f11d228d2e726c6022d",
+          "source:8fb499e9045005345ecb9cee99c0cb42b3014df16a790a69c7e809345c11e046",
+          "source:56e3668d84d20d4c73bc641ed97f24375c145edd751d1f5e1d212e071205d65e",
+          "source:527e4e3ab87ded53c9c2b22e485d92ca2a741058e7dc70bc7e5e073491112ab3"
+        ],
+        "legal_gold": false,
+        "negative_categories": {
+          "extra_exception": {
+            "count": 16,
+            "emitted": 1,
+            "incidental_block": 0,
+            "learned_refusal": 15
+          },
+          "modal_deletion": {
+            "count": 16,
+            "emitted": 0,
+            "incidental_block": 0,
+            "learned_refusal": 16
+          },
+          "modal_misspelling": {
+            "count": 16,
+            "emitted": 10,
+            "incidental_block": 2,
+            "learned_refusal": 4
+          },
+          "second_rule": {
+            "count": 16,
+            "emitted": 0,
+            "incidental_block": 0,
+            "learned_refusal": 16
+          }
+        },
+        "negative_count": 64,
+        "negative_emitted_proposal_count": 11,
+        "negative_incidental_block_count": 2,
+        "negative_learned_refusal_count": 51,
+        "nonempty_condition_count": 32,
+        "nonempty_condition_exact_count": 16,
+        "positive_class_CE": 0.656645295435269,
+        "positive_count": 64,
+        "positive_emitted_proposal_count": 55,
+        "positive_exact_count": 37,
+        "positive_learned_refusal_count": 7,
+        "positive_raw_all_spans_exact": 56,
+        "positive_raw_facet_span_exact": {
+          "action": {
+            "count": 64,
+            "exact": 58,
+            "nonempty_count": 64,
+            "nonempty_exact": 58
+          },
+          "actor": {
+            "count": 64,
+            "exact": 63,
+            "nonempty_count": 64,
+            "nonempty_exact": 63
+          },
+          "condition": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 32,
+            "nonempty_exact": 32
+          },
+          "modality": {
+            "count": 64,
+            "exact": 60,
+            "nonempty_count": 64,
+            "nonempty_exact": 60
+          },
+          "object": {
+            "count": 64,
+            "exact": 63,
+            "nonempty_count": 32,
+            "nonempty_exact": 31
+          }
+        },
+        "positive_raw_modality_exact": 45,
+        "positive_structural_block_count": 2,
+        "positive_templates": {
+          "actor_condition_modal_action_object": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 3,
+            "raw_action_exact": 6
+          },
+          "actor_modal_action_object_condition": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 4,
+            "raw_action_exact": 7
+          },
+          "actor_possessive_gerund_object_modal_condition": {
+            "class_exact": 7,
+            "count": 8,
+            "proposal_exact": 6,
+            "raw_action_exact": 8
+          },
+          "condition_actor_modal_action_object": {
+            "class_exact": 3,
+            "count": 8,
+            "proposal_exact": 2,
+            "raw_action_exact": 7
+          },
+          "condition_actor_possessive_gerund_object_modal": {
+            "class_exact": 7,
+            "count": 8,
+            "proposal_exact": 7,
+            "raw_action_exact": 8
+          },
+          "condition_modal_actor_action_object": {
+            "class_exact": 6,
+            "count": 8,
+            "proposal_exact": 6,
+            "raw_action_exact": 8
+          },
+          "gerund_object_agent_modal_condition": {
+            "class_exact": 7,
+            "count": 8,
+            "proposal_exact": 5,
+            "raw_action_exact": 7
+          },
+          "modal_actor_action_object_condition": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 4,
+            "raw_action_exact": 7
+          }
+        },
+        "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+        "raw_support_accuracy": 0.84375,
+        "raw_support_confusion": {
+          "false_negative": 7,
+          "false_positive": 13,
+          "true_negative": 51,
+          "true_positive": 57
+        },
+        "source_parent_groups": 64,
+        "support_BCE_probability_clip": [
+          1e-12,
+          0.999999999999
+        ],
+        "support_probability_BCE": 0.3830870089019142
+      },
+      "mlp": {
+        "admission_masks": "all five zero",
+        "caller_attachment_learned": false,
+        "case_count": 128,
+        "class_confusion": {
+          "F": {
+            "F": 16,
+            "O": 2,
+            "P": 3
+          },
+          "O": {
+            "F": 7,
+            "O": 11,
+            "P": 4
+          },
+          "P": {
+            "F": 2,
+            "O": 1,
+            "P": 18
+          }
+        },
+        "fixed_class_nonaction_whole_ceiling_count": 43,
+        "fixed_class_nonaction_whole_ceiling_ids": [
+          "source:ba806ba1bf2baeed6e88b18cb78bbfe25e3cc757017fee9bac268323dae7f53c",
+          "source:23c4a93fa35ca83128cdfcabb4eb8b9c45b0f572cb9eec3c7933d656ae371126",
+          "source:2e23a687859efdb7d48b62a7844708e34eb7c0020aef9f0f82f63d3f6a847c48",
+          "source:4d8a5c9bd44edb4460042ef62a245d87216dde6d20f1882943d8e1d654c083ea",
+          "source:15de60786ea79a56cebf248af292d66b66b10f0d6fb9dc8d126c98bdf5239512",
+          "source:90c262fa82654b801019a7fb570a73a4739bc404717a7a20403ed353b8ebb519",
+          "source:9f4fbe3463c33bec29a0421a882c696ea0fee82055eb2dc3adfed85b811767a7",
+          "source:80ee5af05bb9d5537a78539cc5f861a692bc25e010ed13f01b1428409867ee51",
+          "source:d1cadd06c359c06d86419076c9d775fee3bda0e776872eeaab0211f4aee313a5",
+          "source:8425c81dc9274ba564d3e18827418ac9cc7c7fe8f2aeb22cfc889a7db7670f43",
+          "source:4bac04ca0a6a544d461124aeb425fbc470d5ec95bb4ffeb91caf78ec7502e319",
+          "source:69e222a18d35c4e6133d935ed7c9cad40512fe95f5610e7da807f0cca3ff73a2",
+          "source:427d6fbf04b50461cb9b993de854649ae400af256596cb366076b356a5a40a74",
+          "source:6dc406cdb8130191182044e14442e1c91650134438319664268fae0032dea79b",
+          "source:5e5dcf29601849482f265b0fd10b846f673c8a8aa397817cbe47e23f9c07f208",
+          "source:747e852e57bde394221f5ff36093880f6485ce647a706a1ce99e7c9111a07f7b",
+          "source:067fe57c2f7e77c94021f5e9551055579acdd0bdca93874a2b2beeefd37b976d",
+          "source:2c9c2c7e8beef2791f0681d5c716330f225a986ae095510bc55669eaf97aadb1",
+          "source:3bcf1d8219b3e89817071ac842c078e2da1807a1fef235732ececcbd08385f84",
+          "source:9a90d2fc02c29f8d5892911150b24bbb4177b3b55054b0eada820a487795fdb3",
+          "source:c1dbce060b9c861ade8a8ee9ac20a9bdaa853d1c6e733922bc1d0f1814d214c6",
+          "source:66a96dd983e13ffa7e4c62f33437ead571b3308e3e393f321e1a8f577ca73cb9",
+          "source:15ca86463debfa50b56db57c23328a2cbea3036c3476884fd691f944f5dc1998",
+          "source:b3e53a56c1486a0a27ec798f1ed12fb2f57bf94443b8093be20d97c88553ab01",
+          "source:b89c0b04587f9b77539e5a41852c474c97dcb72e1a95d440a70c092664d413ce",
+          "source:d697122084358c4e8b4c4f65bbfac02d2a4b36c7a35314251219210cf64ad845",
+          "source:cbd06d495c232ef800e6c0bfcb1703579d339095949936a938f376ba9dc1e2a1",
+          "source:b269907d61b82617d2459648a67612c5ecff57c2938134b36891db62bb42d788",
+          "source:9d8cdf468aec9be8cb5cec71cbf13ae92dfeef229d07281ef8e7d47caa02f404",
+          "source:bb910a3a38856aea444a8b34c46156cddc3dfd0e1b714b904b2467f1a1521da2",
+          "source:e0942dfdfa5e862e2b704b8e2b536cd1829ad3da1f40f3e2504447e19d1f8cb6",
+          "source:e6eab9c2bc1a8232b61df0b4a7130995519bdc15f3e810ad8c814a1ab9504ead",
+          "source:fcdc317d89ac42a43837a3ed23e27a3d279f4c56fbcce239e0da9e33388873cf",
+          "source:2e29e6c6dfbf137968aca85b76c000fc8ce5ce4eb0ed28d03cb702603bca6bbc",
+          "source:b1eff060b9945e4c074fc4dcbf770bbd96e4e3f1fc62f4beaaa078367dd99247",
+          "source:77dc90fb9f727459bedde2341311d7abbdb4a1f77069eab302aba11cce6bf74c",
+          "source:a34d6e3ea9eef6dd28f780749d590327da78ceab2b2a6466674449482fe62646",
+          "source:d52cc5202f87a505596ec5f115e4e56e4f3a326837acf5fbd4bb5343f3ba777f",
+          "source:c43e493573452990136aba641eccd60dcc36ee98544bc6f0cd0bebd064708262",
+          "source:e2bfa8082dbbafcb92626db9d32447409f10107740965f11d228d2e726c6022d",
+          "source:8fb499e9045005345ecb9cee99c0cb42b3014df16a790a69c7e809345c11e046",
+          "source:56e3668d84d20d4c73bc641ed97f24375c145edd751d1f5e1d212e071205d65e",
+          "source:527e4e3ab87ded53c9c2b22e485d92ca2a741058e7dc70bc7e5e073491112ab3"
+        ],
+        "legal_gold": false,
+        "negative_categories": {
+          "extra_exception": {
+            "count": 16,
+            "emitted": 1,
+            "incidental_block": 0,
+            "learned_refusal": 15
+          },
+          "modal_deletion": {
+            "count": 16,
+            "emitted": 0,
+            "incidental_block": 0,
+            "learned_refusal": 16
+          },
+          "modal_misspelling": {
+            "count": 16,
+            "emitted": 11,
+            "incidental_block": 2,
+            "learned_refusal": 3
+          },
+          "second_rule": {
+            "count": 16,
+            "emitted": 0,
+            "incidental_block": 0,
+            "learned_refusal": 16
+          }
+        },
+        "negative_count": 64,
+        "negative_emitted_proposal_count": 12,
+        "negative_incidental_block_count": 2,
+        "negative_learned_refusal_count": 50,
+        "nonempty_condition_count": 32,
+        "nonempty_condition_exact_count": 17,
+        "positive_class_CE": 0.656645295435269,
+        "positive_count": 64,
+        "positive_emitted_proposal_count": 55,
+        "positive_exact_count": 39,
+        "positive_learned_refusal_count": 6,
+        "positive_raw_all_spans_exact": 58,
+        "positive_raw_facet_span_exact": {
+          "action": {
+            "count": 64,
+            "exact": 62,
+            "nonempty_count": 64,
+            "nonempty_exact": 62
+          },
+          "actor": {
+            "count": 64,
+            "exact": 63,
+            "nonempty_count": 64,
+            "nonempty_exact": 63
+          },
+          "condition": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 32,
+            "nonempty_exact": 32
+          },
+          "modality": {
+            "count": 64,
+            "exact": 60,
+            "nonempty_count": 64,
+            "nonempty_exact": 60
+          },
+          "object": {
+            "count": 64,
+            "exact": 63,
+            "nonempty_count": 32,
+            "nonempty_exact": 31
+          }
+        },
+        "positive_raw_modality_exact": 45,
+        "positive_structural_block_count": 3,
+        "positive_templates": {
+          "actor_condition_modal_action_object": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 3,
+            "raw_action_exact": 8
+          },
+          "actor_modal_action_object_condition": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 4,
+            "raw_action_exact": 7
+          },
+          "actor_possessive_gerund_object_modal_condition": {
+            "class_exact": 7,
+            "count": 8,
+            "proposal_exact": 7,
+            "raw_action_exact": 8
+          },
+          "condition_actor_modal_action_object": {
+            "class_exact": 3,
+            "count": 8,
+            "proposal_exact": 2,
+            "raw_action_exact": 7
+          },
+          "condition_actor_possessive_gerund_object_modal": {
+            "class_exact": 7,
+            "count": 8,
+            "proposal_exact": 7,
+            "raw_action_exact": 8
+          },
+          "condition_modal_actor_action_object": {
+            "class_exact": 6,
+            "count": 8,
+            "proposal_exact": 6,
+            "raw_action_exact": 8
+          },
+          "gerund_object_agent_modal_condition": {
+            "class_exact": 7,
+            "count": 8,
+            "proposal_exact": 6,
+            "raw_action_exact": 8
+          },
+          "modal_actor_action_object_condition": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 4,
+            "raw_action_exact": 8
+          }
+        },
+        "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+        "raw_support_accuracy": 0.84375,
+        "raw_support_confusion": {
+          "false_negative": 6,
+          "false_positive": 14,
+          "true_negative": 50,
+          "true_positive": 58
+        },
+        "source_parent_groups": 64,
+        "support_BCE_probability_clip": [
+          1e-12,
+          0.999999999999
+        ],
+        "support_probability_BCE": 0.38432090376731537
+      },
+      "parent": {
+        "admission_masks": "all five zero",
+        "caller_attachment_learned": false,
+        "case_count": 128,
+        "class_confusion": {
+          "F": {
+            "F": 16,
+            "O": 2,
+            "P": 3
+          },
+          "O": {
+            "F": 7,
+            "O": 11,
+            "P": 4
+          },
+          "P": {
+            "F": 2,
+            "O": 1,
+            "P": 18
+          }
+        },
+        "fixed_class_nonaction_whole_ceiling_count": 43,
+        "fixed_class_nonaction_whole_ceiling_ids": [
+          "source:ba806ba1bf2baeed6e88b18cb78bbfe25e3cc757017fee9bac268323dae7f53c",
+          "source:23c4a93fa35ca83128cdfcabb4eb8b9c45b0f572cb9eec3c7933d656ae371126",
+          "source:2e23a687859efdb7d48b62a7844708e34eb7c0020aef9f0f82f63d3f6a847c48",
+          "source:4d8a5c9bd44edb4460042ef62a245d87216dde6d20f1882943d8e1d654c083ea",
+          "source:15de60786ea79a56cebf248af292d66b66b10f0d6fb9dc8d126c98bdf5239512",
+          "source:90c262fa82654b801019a7fb570a73a4739bc404717a7a20403ed353b8ebb519",
+          "source:9f4fbe3463c33bec29a0421a882c696ea0fee82055eb2dc3adfed85b811767a7",
+          "source:80ee5af05bb9d5537a78539cc5f861a692bc25e010ed13f01b1428409867ee51",
+          "source:d1cadd06c359c06d86419076c9d775fee3bda0e776872eeaab0211f4aee313a5",
+          "source:8425c81dc9274ba564d3e18827418ac9cc7c7fe8f2aeb22cfc889a7db7670f43",
+          "source:4bac04ca0a6a544d461124aeb425fbc470d5ec95bb4ffeb91caf78ec7502e319",
+          "source:69e222a18d35c4e6133d935ed7c9cad40512fe95f5610e7da807f0cca3ff73a2",
+          "source:427d6fbf04b50461cb9b993de854649ae400af256596cb366076b356a5a40a74",
+          "source:6dc406cdb8130191182044e14442e1c91650134438319664268fae0032dea79b",
+          "source:5e5dcf29601849482f265b0fd10b846f673c8a8aa397817cbe47e23f9c07f208",
+          "source:747e852e57bde394221f5ff36093880f6485ce647a706a1ce99e7c9111a07f7b",
+          "source:067fe57c2f7e77c94021f5e9551055579acdd0bdca93874a2b2beeefd37b976d",
+          "source:2c9c2c7e8beef2791f0681d5c716330f225a986ae095510bc55669eaf97aadb1",
+          "source:3bcf1d8219b3e89817071ac842c078e2da1807a1fef235732ececcbd08385f84",
+          "source:9a90d2fc02c29f8d5892911150b24bbb4177b3b55054b0eada820a487795fdb3",
+          "source:c1dbce060b9c861ade8a8ee9ac20a9bdaa853d1c6e733922bc1d0f1814d214c6",
+          "source:66a96dd983e13ffa7e4c62f33437ead571b3308e3e393f321e1a8f577ca73cb9",
+          "source:15ca86463debfa50b56db57c23328a2cbea3036c3476884fd691f944f5dc1998",
+          "source:b3e53a56c1486a0a27ec798f1ed12fb2f57bf94443b8093be20d97c88553ab01",
+          "source:b89c0b04587f9b77539e5a41852c474c97dcb72e1a95d440a70c092664d413ce",
+          "source:d697122084358c4e8b4c4f65bbfac02d2a4b36c7a35314251219210cf64ad845",
+          "source:cbd06d495c232ef800e6c0bfcb1703579d339095949936a938f376ba9dc1e2a1",
+          "source:b269907d61b82617d2459648a67612c5ecff57c2938134b36891db62bb42d788",
+          "source:9d8cdf468aec9be8cb5cec71cbf13ae92dfeef229d07281ef8e7d47caa02f404",
+          "source:bb910a3a38856aea444a8b34c46156cddc3dfd0e1b714b904b2467f1a1521da2",
+          "source:e0942dfdfa5e862e2b704b8e2b536cd1829ad3da1f40f3e2504447e19d1f8cb6",
+          "source:e6eab9c2bc1a8232b61df0b4a7130995519bdc15f3e810ad8c814a1ab9504ead",
+          "source:fcdc317d89ac42a43837a3ed23e27a3d279f4c56fbcce239e0da9e33388873cf",
+          "source:2e29e6c6dfbf137968aca85b76c000fc8ce5ce4eb0ed28d03cb702603bca6bbc",
+          "source:b1eff060b9945e4c074fc4dcbf770bbd96e4e3f1fc62f4beaaa078367dd99247",
+          "source:77dc90fb9f727459bedde2341311d7abbdb4a1f77069eab302aba11cce6bf74c",
+          "source:a34d6e3ea9eef6dd28f780749d590327da78ceab2b2a6466674449482fe62646",
+          "source:d52cc5202f87a505596ec5f115e4e56e4f3a326837acf5fbd4bb5343f3ba777f",
+          "source:c43e493573452990136aba641eccd60dcc36ee98544bc6f0cd0bebd064708262",
+          "source:e2bfa8082dbbafcb92626db9d32447409f10107740965f11d228d2e726c6022d",
+          "source:8fb499e9045005345ecb9cee99c0cb42b3014df16a790a69c7e809345c11e046",
+          "source:56e3668d84d20d4c73bc641ed97f24375c145edd751d1f5e1d212e071205d65e",
+          "source:527e4e3ab87ded53c9c2b22e485d92ca2a741058e7dc70bc7e5e073491112ab3"
+        ],
+        "legal_gold": false,
+        "negative_categories": {
+          "extra_exception": {
+            "count": 16,
+            "emitted": 0,
+            "incidental_block": 0,
+            "learned_refusal": 16
+          },
+          "modal_deletion": {
+            "count": 16,
+            "emitted": 0,
+            "incidental_block": 0,
+            "learned_refusal": 16
+          },
+          "modal_misspelling": {
+            "count": 16,
+            "emitted": 7,
+            "incidental_block": 1,
+            "learned_refusal": 8
+          },
+          "second_rule": {
+            "count": 16,
+            "emitted": 0,
+            "incidental_block": 0,
+            "learned_refusal": 16
+          }
+        },
+        "negative_count": 64,
+        "negative_emitted_proposal_count": 7,
+        "negative_incidental_block_count": 1,
+        "negative_learned_refusal_count": 56,
+        "nonempty_condition_count": 32,
+        "nonempty_condition_exact_count": 10,
+        "positive_class_CE": 0.656645295435269,
+        "positive_count": 64,
+        "positive_emitted_proposal_count": 44,
+        "positive_exact_count": 28,
+        "positive_learned_refusal_count": 16,
+        "positive_raw_all_spans_exact": 47,
+        "positive_raw_facet_span_exact": {
+          "action": {
+            "count": 64,
+            "exact": 48,
+            "nonempty_count": 64,
+            "nonempty_exact": 48
+          },
+          "actor": {
+            "count": 64,
+            "exact": 63,
+            "nonempty_count": 64,
+            "nonempty_exact": 63
+          },
+          "condition": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 32,
+            "nonempty_exact": 32
+          },
+          "modality": {
+            "count": 64,
+            "exact": 60,
+            "nonempty_count": 64,
+            "nonempty_exact": 60
+          },
+          "object": {
+            "count": 64,
+            "exact": 63,
+            "nonempty_count": 32,
+            "nonempty_exact": 31
+          }
+        },
+        "positive_raw_modality_exact": 45,
+        "positive_structural_block_count": 4,
+        "positive_templates": {
+          "actor_condition_modal_action_object": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 2,
+            "raw_action_exact": 6
+          },
+          "actor_modal_action_object_condition": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 2,
+            "raw_action_exact": 5
+          },
+          "actor_possessive_gerund_object_modal_condition": {
+            "class_exact": 7,
+            "count": 8,
+            "proposal_exact": 6,
+            "raw_action_exact": 7
+          },
+          "condition_actor_modal_action_object": {
+            "class_exact": 3,
+            "count": 8,
+            "proposal_exact": 2,
+            "raw_action_exact": 5
+          },
+          "condition_actor_possessive_gerund_object_modal": {
+            "class_exact": 7,
+            "count": 8,
+            "proposal_exact": 6,
+            "raw_action_exact": 7
+          },
+          "condition_modal_actor_action_object": {
+            "class_exact": 6,
+            "count": 8,
+            "proposal_exact": 4,
+            "raw_action_exact": 6
+          },
+          "gerund_object_agent_modal_condition": {
+            "class_exact": 7,
+            "count": 8,
+            "proposal_exact": 4,
+            "raw_action_exact": 6
+          },
+          "modal_actor_action_object_condition": {
+            "class_exact": 5,
+            "count": 8,
+            "proposal_exact": 2,
+            "raw_action_exact": 6
+          }
+        },
+        "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+        "raw_support_accuracy": 0.8125,
+        "raw_support_confusion": {
+          "false_negative": 16,
+          "false_positive": 8,
+          "true_negative": 56,
+          "true_positive": 48
+        },
+        "source_parent_groups": 64,
+        "support_BCE_probability_clip": [
+          1e-12,
+          0.999999999999
+        ],
+        "support_probability_BCE": 0.4128417297695208
+      }
+    }
+  },
+  "archived_fullparent_prediction_parity": {
+    "earlier_scope": 128,
+    "earlier_trigger": 128
+  },
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-inputs.json": {
+      "bytes": 61725,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-inputs.json",
+      "sha256": "1af9757054e2ae6344dcbd2e3834c21808cbe998e79ace9b9ff34383d3020b55"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-references.json": {
+      "bytes": 136311,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-references.json",
+      "sha256": "9ff98c26fd03fc695b76b46de63b621a02765e981e43eca867cf01f51104abc9"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/combined-validation.json": {
+      "bytes": 1912,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/combined-validation.json",
+      "sha256": "857715da799dc5b708a804ae6bebf08b21edb9cca7963cafb6c8faca632013e2"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/experiment-plan.json": {
+      "bytes": 8235,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/experiment-plan.json",
+      "sha256": "6f749df6d413034752a7badaa74002b5bf6e4fe0d524889b449ce6c595f74a31"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/final-inputs.json": {
+      "bytes": 63530,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/final-inputs.json",
+      "sha256": "5fa44c4a208c71429c61f8c6be648b65583ecd2a01740b412f440e03ef824da0"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/final-references.json": {
+      "bytes": 141839,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/final-references.json",
+      "sha256": "8dd5cc9ca1afe776dcdeaa9e88dc7e5869269a125b03b648b5c6be79e94a8baa"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/independent-corpus-selector-review.json": {
+      "bytes": 14978,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/independent-corpus-selector-review.json",
+      "sha256": "a09b3ab2bf1914e7b60ad9864b1471642b80eebe778a2d60a0158b2ac4a39cd3"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/model-source-review.json": {
+      "bytes": 7632,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/model-source-review.json",
+      "sha256": "4321272d85c106f7510996826c28c2277a81ec307c5fdef65f23cc2b816600d5"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/run_support_action_experiment.py": {
+      "bytes": 21793,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/run_support_action_experiment.py",
+      "sha256": "26d53986f92aa469f75d91ac4842baab6fa33dcc72a5420b959f5392086e4f8a"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/runner-static-review.json": {
+      "bytes": 16604,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/runner-static-review.json",
+      "sha256": "848f1f287f0a538c27f7fde048824eaa09c2413596e55d48697b0fbddd479119"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/selection-inputs.json": {
+      "bytes": 63812,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/selection-inputs.json",
+      "sha256": "8a587ced7850a6e4979545e548c27bd0a58a65b872802cbc4667df95d21d4384"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/selection-references.json": {
+      "bytes": 141813,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/selection-references.json",
+      "sha256": "1560e7a9d2f28ff6278783a91551748f9d621f988ef1a161895ac55660e96584"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/train-inputs.json": {
+      "bytes": 508525,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/train-inputs.json",
+      "sha256": "5713989a5a4405d4e553807d4cdbac38c65aa9b8d6b1191b807312a72403a8f2"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/train-references.json": {
+      "bytes": 1134002,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/train-references.json",
+      "sha256": "e08c51ba66e512758350d31edbcf4a41c4b64c9adef9049776b13493a54ff465"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/final-inputs.json": {
+      "bytes": 62673,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/final-inputs.json",
+      "sha256": "066bc0a734292d45da468583c55677d9851e244f5a7949aedcc857796a14cb67"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/final-references.json": {
+      "bytes": 138097,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/final-references.json",
+      "sha256": "069a43b1295823c3ecaaab958a6402494d1dbd00679af97da05d7e466ef53209"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/prior-retention/predicted_trigger-predictions.json": {
+      "bytes": 796352,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/prior-retention/predicted_trigger-predictions.json",
+      "sha256": "7745ecb3f56e4544807c9b8466b8a02dd9bade9d5c5bd9b996d134e10e69f730"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/release/results/predicted_trigger/final-predictions.json": {
+      "bytes": 839902,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/release/results/predicted_trigger/final-predictions.json",
+      "sha256": "bb0256230a1291775a6bdd4a433301e6815cfdd47053980d2ded91df958a4489"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/all-final-and-retention-predictions-before-reference-joins.json": {
+      "bytes": 3174,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/all-final-and-retention-predictions-before-reference-joins.json",
+      "sha256": "05cc48cb0c6bc8b4bbaaf57ee415dbccc58149743a0a998591c9f9329df3e79d"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/both-selected-before-final-and-retention.json": {
+      "bytes": 153589,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/both-selected-before-final-and-retention.json",
+      "sha256": "49ccd1ac2ffb6aed85c2c00479cf48de5fa46aaaf9eca09baf2bdcf029ba8d60"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/initial-linear-predictions.json": {
+      "bytes": 119341,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/initial-linear-predictions.json",
+      "sha256": "e58d1a06fae822a9f6397e4145e4b1b8b9f9ca7022e7412aa74e80c9be34f651"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/initial-mlp-predictions.json": {
+      "bytes": 119293,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/initial-mlp-predictions.json",
+      "sha256": "1e90009b54860a48746fec97287ce006bdf6193f01fb6eeef3384dc3418694dd"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/initial-parent-predictions.json": {
+      "bytes": 119549,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/initial-parent-predictions.json",
+      "sha256": "760c6df64fccd433be9ac7326f5490fa90a7aae96fc0b3f3e44a1401d7d67505"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/initialization.json": {
+      "bytes": 1343,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/initialization.json",
+      "sha256": "816d8f9a71921292327936e90ae035232790f9ef927de82f4f108ea8ba2773fa"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/checkpoint-0.json": {
+      "bytes": 2806422,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/checkpoint-0.json",
+      "sha256": "89f594430b68ada8ed9e97b9cbb78b54d10c1fe10ef1a6976cf2a0530d421652"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/checkpoint-120.json": {
+      "bytes": 2826167,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/checkpoint-120.json",
+      "sha256": "741ea06a018d603b268e0acc8efc21d8ae1b9d0e3d1780212746c8a6cfdae2f1"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/checkpoint-240.json": {
+      "bytes": 2826187,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/checkpoint-240.json",
+      "sha256": "1f975a1ae72f0685ca32518209112056141f1291006ee470364c14458b68e5a0"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/earlier_scope-predictions.json": {
+      "bytes": 905804,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/earlier_scope-predictions.json",
+      "sha256": "ef482f921443682ad74feaea6dd6a218339f683ca63c18dc4d4c55620a8c8deb"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/earlier_trigger-predictions.json": {
+      "bytes": 1065592,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/earlier_trigger-predictions.json",
+      "sha256": "738ab92d9760f635a2198743d06d45232305b8c9fa20d1a7a25f19e5635a0dd0"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/fresh_final-predictions.json": {
+      "bytes": 1054931,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/fresh_final-predictions.json",
+      "sha256": "0a156869a11dd832c0cc59a877dd582c2f6a7e8f85b684792e48a29afffc8c48"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/last-TRAIN-predictions.json": {
+      "bytes": 8634379,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/last-TRAIN-predictions.json",
+      "sha256": "fc17ddca133d371439e4ce682c39efd238f85d257e102ba97967f1712381dea4"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/losses.json": {
+      "bytes": 83934,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/losses.json",
+      "sha256": "b467e7976a8a947e599ac3fd80ead1037eafcfce3b324bdfcd986b23a94ef27a"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/selected.json": {
+      "bytes": 8591,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/selected.json",
+      "sha256": "a380daddd14785415bfdbba997fe7498a1fddeadeab09163db1f344dc83282a9"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/selection-predictions-0.json": {
+      "bytes": 819677,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/selection-predictions-0.json",
+      "sha256": "99734f168bba0a067eefab8b69f7dc32a0f0a19b8df01f50bbf3523de26b5761"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/selection-predictions-120.json": {
+      "bytes": 1010697,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/selection-predictions-120.json",
+      "sha256": "ebecb7980f1f942ae141274ad586f0a59a27ad8338e49050b496dfade29b976d"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/selection-predictions-240.json": {
+      "bytes": 1010663,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/selection-predictions-240.json",
+      "sha256": "62a85ad7f6d83d0302fffaf23baf5c3dce78038752bedee47257e55f730a4238"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/checkpoint-0.json": {
+      "bytes": 2991289,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/checkpoint-0.json",
+      "sha256": "27e8456d8196125d7fe00d8a4e2e147cb9af590eb4716204ca5b6f9a1995ee2b"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/checkpoint-120.json": {
+      "bytes": 3449806,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/checkpoint-120.json",
+      "sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/checkpoint-240.json": {
+      "bytes": 3449524,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/checkpoint-240.json",
+      "sha256": "6ec70e0c16a307a64072dfcc958ae03fb2ecc3cdccf13f6517b18a5849589254"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/earlier_scope-predictions.json": {
+      "bytes": 980454,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/earlier_scope-predictions.json",
+      "sha256": "3cbdda0aeb791c7bb718bc83074c3341e677bad2ef85d0afb04a98b6c11bf0ed"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/earlier_trigger-predictions.json": {
+      "bytes": 1078370,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/earlier_trigger-predictions.json",
+      "sha256": "a17e2e603b93cfaaa514d223b2ced28ef3fc3a0479aa2227eedf3e21c4168141"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/fresh_final-predictions.json": {
+      "bytes": 1068946,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/fresh_final-predictions.json",
+      "sha256": "222c101a9cd0faacd30dbbbc63d4bbd9fe45a15954dd1ae4e48b3993bb802007"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/last-TRAIN-predictions.json": {
+      "bytes": 8796971,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/last-TRAIN-predictions.json",
+      "sha256": "3bfe6159f963e8560be1712931053702d205078900aa1efe09684d9978566919"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/losses.json": {
+      "bytes": 84085,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/losses.json",
+      "sha256": "7644c515cdd0cd591972c5dcd3816e451f5a79aede5767c63805cff4a0b213ba"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/selected.json": {
+      "bytes": 8584,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/selected.json",
+      "sha256": "395107bb5bc6966a50d137993ab496bdac5319a05893b2b4ec862d2a06717207"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/selection-predictions-0.json": {
+      "bytes": 819293,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/selection-predictions-0.json",
+      "sha256": "935dfea9fcea400ed45a15f18318af3b7893b5591b2035a1cd30a2bb2304aba2"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/selection-predictions-120.json": {
+      "bytes": 1010312,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/selection-predictions-120.json",
+      "sha256": "1152d98e0efe04c64d188fd83625a29d7de6b0a652f70b2c28f3b2e703e79e2d"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/selection-predictions-240.json": {
+      "bytes": 988178,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/selection-predictions-240.json",
+      "sha256": "0f40c883b0c43ba963ce097ae9fc7df3f1b1bb6ecfe7bd915c130a1033bb8ede"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/parent-TRAIN-predictions.json": {
+      "bytes": 7488503,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/parent-TRAIN-predictions.json",
+      "sha256": "181cd979fe2b7dd96a21343e3d3b02b86653e49fd051d6f7b26ae666bd0132ed"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/parent-earlier_scope-predictions.json": {
+      "bytes": 796351,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/parent-earlier_scope-predictions.json",
+      "sha256": "f6f1a0e396e93e4fc30e3b7d7b156191af05795a11714992e3cc71b46ea650cd"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/parent-earlier_trigger-predictions.json": {
+      "bytes": 839901,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/parent-earlier_trigger-predictions.json",
+      "sha256": "eade16318349720d6b98988431d2cfda254e15b3b41b0ca5b10299291ff99d71"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/parent-fresh_final-predictions.json": {
+      "bytes": 872972,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/parent-fresh_final-predictions.json",
+      "sha256": "46c6fa4d8d1d894571471038bd1ced6d1e8f9745c4f73043fa5e745cd47e314d"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/parent-selection-predictions.json": {
+      "bytes": 821341,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/parent-selection-predictions.json",
+      "sha256": "40cc26a764d5571abaebb06350adc721b8031c744be9ab00b2cb914ac0fd7af6"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/selection-baseline-floors.json": {
+      "bytes": 8354,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/selection-baseline-floors.json",
+      "sha256": "b866a437a381521b6f3878a5a5d0136f1b650eb619759e497758857fc65fb099"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/summary.json": {
+      "bytes": 79463,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/summary.json",
+      "sha256": "33b3b7eb82c48e0e0001ee7e7de6495c58391e26bd95b6c04427e320ee66a7f4"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/training-results.json": {
+      "bytes": 314211,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/training-results.json",
+      "sha256": "c4c3f4ec899ae86b2cfad60af36280ef0fad73ee05058b9f6f2cc271bea88d07"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/training-schedule.json": {
+      "bytes": 305283,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/training-schedule.json",
+      "sha256": "2d456ea7b2b33c8a1a6779e7640a2c2f7e9abc5e9b4e6e634ecbd03a20abcc76"
+    }
+  },
+  "checked": [
+    {
+      "check": "completed_frozen_480_joint_calls",
+      "detail": "Frozen plan/runner/producer bindings verify;480 real optimizer calls jointly supply480 support/action head counts, not960.",
+      "passed": true
+    },
+    {
+      "check": "all640_targets_rerender_pure_transport",
+      "detail": "All1280 fresh inputs and640 positive targets rerender exactly and pass pure transport with zero masks/null formal output. No statutory semantic review is inferred.",
+      "passed": true
+    },
+    {
+      "check": "six_seals_tensor_shapes_and_fullparent_Adam",
+      "detail": "All0/120/240 checkpoints have valid seals, exact parent6e bytes, expected195/6339 finite exact float32 head tensors and full perparameter Adam moment inventories/counts. No numerical restore performed.",
+      "passed": true
+    },
+    {
+      "check": "selector_and_lastTRAIN_recomputed",
+      "detail": "All6 selector panels/positive floors/step0 fallback/eligible utility reproduce chosen120 for both. Both lastTRAIN panels are final240 states and score exactly; class/nonaction signatures remain parent-exact.",
+      "passed": true
+    },
+    {
+      "check": "nine_final_retention_scores_and_fullparent_archive",
+      "detail": "All9 panels independently rescore exact raw metrics/probability BCE/confusion/action pertemplate/class-nonaction ceilings. Both exposed128-parent prediction dictionaries equal archived panels; all768 candidate frozen signatures match.",
+      "passed": true
+    },
+    {
+      "check": "paired_case_ids_and_unsafe_tradeoff",
+      "detail": "Independent set algebra confirms every whole retained/lost/gained and old/new/removed unsupported emission ID. Exact-positive gains coexist with new unsafe emissions and no whole losses; unsafe monotonicity/default promotion are not claimed.",
+      "passed": true
+    },
+    {
+      "check": "barrier_bindings_writer_and_access_order",
+      "detail": "Exact barrier hashes bind bothchoices and all9 durable panels; mtime ordering agrees with frozen source fsync(file/directory) and reference joins after output barrier. Mtime is not syscall attestation.",
+      "passed": true
+    },
+    {
+      "check": "480_losses_7680_allencoded",
+      "detail": "Both240 loss ledgers are finite and conserve480 calls/7680 encoded rows/3840 positive-action and3840 negative-support presentations, with no ignored negatives.",
+      "passed": true
+    },
+    {
+      "check": "16row_initial_parent_fullcore_parity",
+      "detail": "Both new arms reproduce16 initial fullcore/logit outputs;195 versus6339 trainable parameters are an explicit capacity difference.",
+      "passed": true
+    },
+    {
+      "check": "all128_retention_gold_transport_targets",
+      "detail": "Both earlier exposed panels each have64 positive gold predictions revalidated through the unchanged pure proposal owner with zero masks/null formal output. Negative references remain targetless.",
+      "passed": true
+    }
+  ],
+  "compact_scores": {
+    "earlier_scope": {
+      "linear": {
+        "fixed_class_nonaction_whole_ceiling_count": 50,
+        "negative_emitted_proposal_count": 7,
+        "negative_learned_refusal_count": 56,
+        "nonempty_condition_exact_count": 18,
+        "positive_exact_count": 36,
+        "positive_learned_refusal_count": 15,
+        "positive_raw_modality_exact": 53,
+        "raw_action_exact": 58,
+        "raw_support_confusion": {
+          "false_negative": 15,
+          "false_positive": 8,
+          "true_negative": 56,
+          "true_positive": 49
+        },
+        "support_probability_BCE": 0.36601978109919875
+      },
+      "mlp": {
+        "fixed_class_nonaction_whole_ceiling_count": 50,
+        "negative_emitted_proposal_count": 8,
+        "negative_learned_refusal_count": 56,
+        "nonempty_condition_exact_count": 21,
+        "positive_exact_count": 40,
+        "positive_learned_refusal_count": 12,
+        "positive_raw_modality_exact": 53,
+        "raw_action_exact": 64,
+        "raw_support_confusion": {
+          "false_negative": 12,
+          "false_positive": 8,
+          "true_negative": 56,
+          "true_positive": 52
+        },
+        "support_probability_BCE": 0.3564113484229585
+      },
+      "parent": {
+        "fixed_class_nonaction_whole_ceiling_count": 50,
+        "negative_emitted_proposal_count": 4,
+        "negative_learned_refusal_count": 59,
+        "nonempty_condition_exact_count": 13,
+        "positive_exact_count": 29,
+        "positive_learned_refusal_count": 18,
+        "positive_raw_modality_exact": 53,
+        "raw_action_exact": 50,
+        "raw_support_confusion": {
+          "false_negative": 18,
+          "false_positive": 5,
+          "true_negative": 59,
+          "true_positive": 46
+        },
+        "support_probability_BCE": 0.4232792963986053
+      }
+    },
+    "earlier_trigger": {
+      "linear": {
+        "fixed_class_nonaction_whole_ceiling_count": 43,
+        "negative_emitted_proposal_count": 12,
+        "negative_learned_refusal_count": 49,
+        "nonempty_condition_exact_count": 17,
+        "positive_exact_count": 37,
+        "positive_learned_refusal_count": 7,
+        "positive_raw_modality_exact": 47,
+        "raw_action_exact": 55,
+        "raw_support_confusion": {
+          "false_negative": 7,
+          "false_positive": 15,
+          "true_negative": 49,
+          "true_positive": 57
+        },
+        "support_probability_BCE": 0.37831704342597355
+      },
+      "mlp": {
+        "fixed_class_nonaction_whole_ceiling_count": 43,
+        "negative_emitted_proposal_count": 12,
+        "negative_learned_refusal_count": 49,
+        "nonempty_condition_exact_count": 19,
+        "positive_exact_count": 39,
+        "positive_learned_refusal_count": 7,
+        "positive_raw_modality_exact": 47,
+        "raw_action_exact": 64,
+        "raw_support_confusion": {
+          "false_negative": 7,
+          "false_positive": 15,
+          "true_negative": 49,
+          "true_positive": 57
+        },
+        "support_probability_BCE": 0.3717360483659823
+      },
+      "parent": {
+        "fixed_class_nonaction_whole_ceiling_count": 43,
+        "negative_emitted_proposal_count": 6,
+        "negative_learned_refusal_count": 53,
+        "nonempty_condition_exact_count": 12,
+        "positive_exact_count": 30,
+        "positive_learned_refusal_count": 19,
+        "positive_raw_modality_exact": 47,
+        "raw_action_exact": 54,
+        "raw_support_confusion": {
+          "false_negative": 19,
+          "false_positive": 11,
+          "true_negative": 53,
+          "true_positive": 45
+        },
+        "support_probability_BCE": 0.4146934623023124
+      }
+    },
+    "fresh_final": {
+      "linear": {
+        "fixed_class_nonaction_whole_ceiling_count": 43,
+        "negative_emitted_proposal_count": 11,
+        "negative_learned_refusal_count": 51,
+        "nonempty_condition_exact_count": 16,
+        "positive_exact_count": 37,
+        "positive_learned_refusal_count": 7,
+        "positive_raw_modality_exact": 45,
+        "raw_action_exact": 58,
+        "raw_support_confusion": {
+          "false_negative": 7,
+          "false_positive": 13,
+          "true_negative": 51,
+          "true_positive": 57
+        },
+        "support_probability_BCE": 0.3830870089019142
+      },
+      "mlp": {
+        "fixed_class_nonaction_whole_ceiling_count": 43,
+        "negative_emitted_proposal_count": 12,
+        "negative_learned_refusal_count": 50,
+        "nonempty_condition_exact_count": 17,
+        "positive_exact_count": 39,
+        "positive_learned_refusal_count": 6,
+        "positive_raw_modality_exact": 45,
+        "raw_action_exact": 62,
+        "raw_support_confusion": {
+          "false_negative": 6,
+          "false_positive": 14,
+          "true_negative": 50,
+          "true_positive": 58
+        },
+        "support_probability_BCE": 0.38432090376731537
+      },
+      "parent": {
+        "fixed_class_nonaction_whole_ceiling_count": 43,
+        "negative_emitted_proposal_count": 7,
+        "negative_learned_refusal_count": 56,
+        "nonempty_condition_exact_count": 10,
+        "positive_exact_count": 28,
+        "positive_learned_refusal_count": 16,
+        "positive_raw_modality_exact": 45,
+        "raw_action_exact": 48,
+        "raw_support_confusion": {
+          "false_negative": 16,
+          "false_positive": 8,
+          "true_negative": 56,
+          "true_positive": 48
+        },
+        "support_probability_BCE": 0.4128417297695208
+      }
+    }
+  },
+  "findings": [],
+  "interpretation": "Bothselected120 after240 realupdates. Fresh whole28/37/39 and rawaction48/58/62 improve, while unsupported emissions7/11/12 increase. Prior panels also gain whole exactness with zero whole losses but new unsafe emissions. This is an authored engineering tradeoff, not default promotion or monotonic unsafe-emission protection.",
+  "limitations": [
+    "Pinned scorer/component AST executes only pure saved-data math with stdlib token boundaries; independent whole/action/confusion/set checks and pure transport also verify outputs. No numerical model restore/replay was performed.",
+    "Seals, float32 tensor records, fullparent bytes and perhead Adam counters verify custody/consistency; they do not independently attest execution of each optimizer syscall.",
+    "Barrier hashes/source writer and mtimes support declared fsync and access ordering; no stronger syscall/durability claim is made.",
+    "Mechanically authored construction targets are not authors-blind or independently reviewed statutory gold; all masks stayzero/formaloutputnull.",
+    "Both earlier panels are exposed postfit retention, not training or selection inputs.",
+    "Any later conservative emission-intersection policy is a separate posthoc diagnostic and cannot replace these raw scores/new-unsafe cases."
+  ],
+  "loss_ledger": {
+    "linear": {
+      "completed_action_updates": 240,
+      "completed_support_updates": 240,
+      "encoded_presentations": 3840,
+      "negative_support_presentations": 1920,
+      "optimizer_calls": 240,
+      "positive_action_presentations": 1920
+    },
+    "mlp": {
+      "completed_action_updates": 240,
+      "completed_support_updates": 240,
+      "encoded_presentations": 3840,
+      "negative_support_presentations": 1920,
+      "optimizer_calls": 240,
+      "positive_action_presentations": 1920
+    }
+  },
+  "paired_transitions": {
+    "earlier_scope": {
+      "linear": {
+        "case_ids": {
+          "negative_emission_new": [
+            "source:8f00a322b8e8a0a597867cfb1c0c3d04e465fe4d2b3015112411482ace5a5072",
+            "source:68acbbadd9c4ef86a0df46cbfd58a0b6362aaa7a89f1b34c0add1a42db6376ba",
+            "source:35ee1568b518eb81217fa4c5c69c6f657d247b5eb9d5e1a97abf40830a39ad99"
+          ],
+          "negative_emission_removed": [],
+          "negative_emission_retained": [
+            "source:28c3fa345c595dbe62330e456e46d32eedf478ff33f7fd7d23161d5f2cb5b2c6",
+            "source:6a7ec8762be082635606c5c92cb29a84bd3d3a776d5716bba574900546e89783",
+            "source:79de443b2b805f7982e20d20de5cc2d9f791b6f4cede6fd7ab7eef6842865a84",
+            "source:a253ca62f21d2d3448d114a34e6a140361a53c44b370a4f965039583d23c9b89"
+          ],
+          "whole_gained": [
+            "source:1071ce37fa74f414262a14894bc1b0b3181b69ef7e43c1e97fa18ba128785018",
+            "source:ba6475e8e16a60a5e7af70c15ece2be973eb66811ddb0494aa200a635d81940b",
+            "source:7d7ad0100faf7db1663d45b576239a6b2f58fbf8fac893f9387e8f3771f7d903",
+            "source:19ccacc46854720b2df93ac21fc7913b63ff666ccd01b1a29d8d009c0184ddda",
+            "source:e076a18a1c836db6e326c752c4d40b2e1627afef5cbb7126248fced21faa3edb",
+            "source:198de138dffa102afcd6a1eff375a78c3e237e84e01a00412fa1387c066b0048",
+            "source:2a0c864c5836bb18c85e24735eb36b25350747f813e9e47bbc1951694edddf40"
+          ],
+          "whole_lost": [],
+          "whole_retained": [
+            "source:84798e7c1ff75011007f975719c9e3d46193fe07bc7b97e2152cee17a3263dcc",
+            "source:3c567e24184c0062edd70a3270cdeaa05b3e398c8287d4142d4a77c5c5eee714",
+            "source:5618a2ceb18fcd69477da6930cd96867b403aadbd89af89219f6de8ccfd4e4ca",
+            "source:acb6ee982faa071e43dd76847a902141447b7c96c01eba27de4c5ec7195ef0f4",
+            "source:6d61b094f8c443eb63d8596faacb5cd0ad895d899e33dfe2de32b38752f4125e",
+            "source:7c23cc3f2ac43daeb6ceea2f86995313a1b2fc8c1c3e8b86dd0f3cb67d49533a",
+            "source:7ed57d7f259c3d0da91ad89272ed819eafd2a6346bb3735d7ce05f3834e9fad2",
+            "source:a18d2795fd8d3da6c7c71e71f46a870f599c340d7529789412ee2be2eeb106a4",
+            "source:b5567e6c47c982963a0f6dfc5446cd92ec14bf7c1f5056ed9241aab8d6be069a",
+            "source:7adec3b872ce28894d4ac5b4c6725739707fb5c22e3ed62066d6e52518567b07",
+            "source:d32837ec6da28014543229ddb9d0d56c4c4d1c010b39b0f7a0cbd72ea979fb4c",
+            "source:13ceda216784a9c4cd61e6bb7d84ce6bce4c40ce987130486b86cbefbee7d320",
+            "source:8ef2ac1c46068176e9eebbb1a02e48aaeff6084a1ba9490bb5009d78b3503b39",
+            "source:84a03fa6574edb6afea181fa230defcfe125b027b8b03a37d712a4fe80d13869",
+            "source:3330b3e5932e242375609bc38d4d4d3361fa2c39f40c9ff6d59a2c1ff1655afc",
+            "source:50b3ea2740a628b49966866705e3ffe465779c3a7f1da00bfe2c5fdf621a14d5",
+            "source:d786f3495573808f7936670327e9b8ce2a711eba55a2dc8d3d69984bc85a95cf",
+            "source:47420992507efd911fa34fed400c1787785c02103a081b91da8d36d9a13e7a1c",
+            "source:3e5697e8875344f20bb3e4f497900cccde8a5ba03768025f18622282e701878b",
+            "source:48a2e5f450ee4bc45e908ae8d32e2485d4de4b80c9cba00863fab0696b6d5b5c",
+            "source:1182812aaece1b426e0c5839e8d69baf1766f2cd0cd0e9221832ab9214c00759",
+            "source:b91c811e6d913c92a243a9410fd4fcbff2626d8ca3ce9698eb971255444836fe",
+            "source:500d54bc986c70eb42328a4339cc43e32343c6acd4045c759e8ab5b0f2f92a44",
+            "source:d5b80145af2d3c26d1f43f9476545352d6d46975c07baa93ff7e51b7a20226fe",
+            "source:aa1ef9b601ec9346b0ffacc4fabe31e73dee8b2089991697132671ac99b17e67",
+            "source:c54eb1f0de3e4c37974d3822f5ce469cbec1c2e68ce247d055dd256af5931882",
+            "source:84297c0d3627220cc2bb4c49d2ccdcab4f87506029e06845c1719c73a2209fc2",
+            "source:69f6f2ccdce35ab0e99f11df7a2c912c4e0e992fa8a4422d4a504adb7b1056d5",
+            "source:057473b6fde283531e6962ab1a988ad051a296432c436e7e57731c43dbd70b5b"
+          ]
+        },
+        "counts": {
+          "negative_emission_new": 3,
+          "negative_emission_removed": 0,
+          "negative_emission_retained": 4,
+          "whole_gained": 7,
+          "whole_lost": 0,
+          "whole_retained": 29
+        }
+      },
+      "mlp": {
+        "case_ids": {
+          "negative_emission_new": [
+            "source:8f00a322b8e8a0a597867cfb1c0c3d04e465fe4d2b3015112411482ace5a5072",
+            "source:68acbbadd9c4ef86a0df46cbfd58a0b6362aaa7a89f1b34c0add1a42db6376ba",
+            "source:24ab2e44b0e11a7ca2e18c9cf4a6f80e741a1f70e38430c293862d51adeb564e",
+            "source:35ee1568b518eb81217fa4c5c69c6f657d247b5eb9d5e1a97abf40830a39ad99"
+          ],
+          "negative_emission_removed": [],
+          "negative_emission_retained": [
+            "source:28c3fa345c595dbe62330e456e46d32eedf478ff33f7fd7d23161d5f2cb5b2c6",
+            "source:6a7ec8762be082635606c5c92cb29a84bd3d3a776d5716bba574900546e89783",
+            "source:79de443b2b805f7982e20d20de5cc2d9f791b6f4cede6fd7ab7eef6842865a84",
+            "source:a253ca62f21d2d3448d114a34e6a140361a53c44b370a4f965039583d23c9b89"
+          ],
+          "whole_gained": [
+            "source:b6f8facf22363d89fee8856cc2b6f25dfda04d57b37582e800c7d7083eee98c1",
+            "source:1071ce37fa74f414262a14894bc1b0b3181b69ef7e43c1e97fa18ba128785018",
+            "source:ba6475e8e16a60a5e7af70c15ece2be973eb66811ddb0494aa200a635d81940b",
+            "source:ac0539ec7f7eace5c76f615013af94f7fb46cce6287b7791b4b026131d24e739",
+            "source:7d7ad0100faf7db1663d45b576239a6b2f58fbf8fac893f9387e8f3771f7d903",
+            "source:19ccacc46854720b2df93ac21fc7913b63ff666ccd01b1a29d8d009c0184ddda",
+            "source:e076a18a1c836db6e326c752c4d40b2e1627afef5cbb7126248fced21faa3edb",
+            "source:cccda092bbf8945374298526298a1625e6a8ecf3ea455120e7dd417fa51e7cb6",
+            "source:0449946de3fd8bd1605e1efaa6b0342e3601310bbf077ad1160481a6f627f4ac",
+            "source:198de138dffa102afcd6a1eff375a78c3e237e84e01a00412fa1387c066b0048",
+            "source:2a0c864c5836bb18c85e24735eb36b25350747f813e9e47bbc1951694edddf40"
+          ],
+          "whole_lost": [],
+          "whole_retained": [
+            "source:84798e7c1ff75011007f975719c9e3d46193fe07bc7b97e2152cee17a3263dcc",
+            "source:3c567e24184c0062edd70a3270cdeaa05b3e398c8287d4142d4a77c5c5eee714",
+            "source:5618a2ceb18fcd69477da6930cd96867b403aadbd89af89219f6de8ccfd4e4ca",
+            "source:acb6ee982faa071e43dd76847a902141447b7c96c01eba27de4c5ec7195ef0f4",
+            "source:6d61b094f8c443eb63d8596faacb5cd0ad895d899e33dfe2de32b38752f4125e",
+            "source:7c23cc3f2ac43daeb6ceea2f86995313a1b2fc8c1c3e8b86dd0f3cb67d49533a",
+            "source:7ed57d7f259c3d0da91ad89272ed819eafd2a6346bb3735d7ce05f3834e9fad2",
+            "source:a18d2795fd8d3da6c7c71e71f46a870f599c340d7529789412ee2be2eeb106a4",
+            "source:b5567e6c47c982963a0f6dfc5446cd92ec14bf7c1f5056ed9241aab8d6be069a",
+            "source:7adec3b872ce28894d4ac5b4c6725739707fb5c22e3ed62066d6e52518567b07",
+            "source:d32837ec6da28014543229ddb9d0d56c4c4d1c010b39b0f7a0cbd72ea979fb4c",
+            "source:13ceda216784a9c4cd61e6bb7d84ce6bce4c40ce987130486b86cbefbee7d320",
+            "source:8ef2ac1c46068176e9eebbb1a02e48aaeff6084a1ba9490bb5009d78b3503b39",
+            "source:84a03fa6574edb6afea181fa230defcfe125b027b8b03a37d712a4fe80d13869",
+            "source:3330b3e5932e242375609bc38d4d4d3361fa2c39f40c9ff6d59a2c1ff1655afc",
+            "source:50b3ea2740a628b49966866705e3ffe465779c3a7f1da00bfe2c5fdf621a14d5",
+            "source:d786f3495573808f7936670327e9b8ce2a711eba55a2dc8d3d69984bc85a95cf",
+            "source:47420992507efd911fa34fed400c1787785c02103a081b91da8d36d9a13e7a1c",
+            "source:3e5697e8875344f20bb3e4f497900cccde8a5ba03768025f18622282e701878b",
+            "source:48a2e5f450ee4bc45e908ae8d32e2485d4de4b80c9cba00863fab0696b6d5b5c",
+            "source:1182812aaece1b426e0c5839e8d69baf1766f2cd0cd0e9221832ab9214c00759",
+            "source:b91c811e6d913c92a243a9410fd4fcbff2626d8ca3ce9698eb971255444836fe",
+            "source:500d54bc986c70eb42328a4339cc43e32343c6acd4045c759e8ab5b0f2f92a44",
+            "source:d5b80145af2d3c26d1f43f9476545352d6d46975c07baa93ff7e51b7a20226fe",
+            "source:aa1ef9b601ec9346b0ffacc4fabe31e73dee8b2089991697132671ac99b17e67",
+            "source:c54eb1f0de3e4c37974d3822f5ce469cbec1c2e68ce247d055dd256af5931882",
+            "source:84297c0d3627220cc2bb4c49d2ccdcab4f87506029e06845c1719c73a2209fc2",
+            "source:69f6f2ccdce35ab0e99f11df7a2c912c4e0e992fa8a4422d4a504adb7b1056d5",
+            "source:057473b6fde283531e6962ab1a988ad051a296432c436e7e57731c43dbd70b5b"
+          ]
+        },
+        "counts": {
+          "negative_emission_new": 4,
+          "negative_emission_removed": 0,
+          "negative_emission_retained": 4,
+          "whole_gained": 11,
+          "whole_lost": 0,
+          "whole_retained": 29
+        }
+      }
+    },
+    "earlier_trigger": {
+      "linear": {
+        "case_ids": {
+          "negative_emission_new": [
+            "source:286868fea15eb814077f802707c1cb0508fc0cdcdbfc140f9ba307352d1f0040",
+            "source:4d88c1040c508c337402db6659029c50ecde3ab12bed931a066087fe87f6ca2d",
+            "source:170e19a36720ec4eeb12c44968266edc2363dfb84a25e0757121a793fbb6afa5",
+            "source:57ea24c1afce863316638f4252f2f747ea8eb877f4309756b4410d96b53fbcf1",
+            "source:9d3b3f594e2d448376d359bd7ce813afcc1394a6266b5eb769c35a3f7c17d0c4",
+            "source:5f001b7b8e46bc619a7b18807053229b018973cc2466145ddf9587f8820553f9"
+          ],
+          "negative_emission_removed": [],
+          "negative_emission_retained": [
+            "source:7938f160afe44977667fc3ba2fd1d9536df6d25857b601b8140dfb90f7d27720",
+            "source:e7453f80803c3e985cf7b127fdec97fece80ace138b697d53ef2bab6f0ea3419",
+            "source:5d6151f482345f7386e95671f8a2c106b366d4b2e3f3ccfc152ab39ec5ebc1cc",
+            "source:5179dc107992f7e4fbca2e42062158dbcadb6f0c32f5eba876f542a7bbfb6c05",
+            "source:3c37fe63061de8ef3cbb28d5602f5b69fcf083f2a988672e8c639d85a3849a61",
+            "source:e91ff290487a0c076016bfe626153798043b910a8d145dcaf8caf6436efe945c"
+          ],
+          "whole_gained": [
+            "source:a37b4d30c0c27f625ce7aa410ab9da00065955ad7ca5215201083795dea25454",
+            "source:063dc3e88d3ab754c481a19ef4503111ce5745fb156e53de8c56533b9aabb03a",
+            "source:e3afea8969b4b423c82c63dd7de51dbe619c05230b1415dd0b1f1cff246c024f",
+            "source:256c0ac221d0d663d57860c3f24abb1f4e462265d917ad9d4c9e2182cd80333c",
+            "source:a4e3d398545d903359d6b61f6ff020f55153e2cd2312fe5c02ba520d5b3abdf7",
+            "source:fb06bd0a0dc326e57b791060ee5d281b458ae1da84d979b824d6487e99d2c39a",
+            "source:9fb647fd5739be9d24e61129d276d152281c17857c2cc4e7817f9ec58fea34ce"
+          ],
+          "whole_lost": [],
+          "whole_retained": [
+            "source:079e1d82d60cddbee3ee1cd3f48a15c0f5c1da3972d43b1224bb9f5d9493c9d0",
+            "source:cc604832fd592ff86d65193425caeba3a9936e64c870dcd74cf156a540929a01",
+            "source:ecd5bbbdcfa03540d8c5ca835b7934e92c5c7caee3522e2349ce15ed2a75bc7e",
+            "source:12000a64577481d03ee20b6d7479d5eda18e3642f177c6c96fd8ef50a71e91f1",
+            "source:02bc12fb281cba9000a0e33d1ce21766435759c1ee79ee29f878fa4714555487",
+            "source:9029dff9e68c28a2ebb23d7046acd31a672718fd7a33e682f4a43ce2ec066a07",
+            "source:702e7c77fd246319e2c8c1ff8366fe0397a9d4aa7013c2e92f0eae6abb006784",
+            "source:159f43ea6c039a5c2f71b39020bd63eaa2f7d7b6659b955e0de5f948fa7bc745",
+            "source:e0502c557f460113e4f7c692ba90e21b676d9163bcf3a23437aad5803758d4e2",
+            "source:82efd2949e5e42c2c40909a75e8d0f4e53073e7698c279be010cb56d22093009",
+            "source:d1b924d37eeb0d1da1a2ddf9325fdc12b682c19b4511a9fa1632dcd9bea724e3",
+            "source:45525df2e327b8784a9cd220e5df4f4b0b6bc4db05ca3df3c05a0512fdb81256",
+            "source:cd7ae60793a59f235f77c9ab2f8e092b2ff4aac034f416576665b2f92fadbc2f",
+            "source:704271c092441006fb5b29e696daeb1e531407f1f5819e17243b1f2a962ab88c",
+            "source:ad7e79965482b3739a566246b62de8eb90abc079d69ac3061a1b2187847d5885",
+            "source:4d9c524e3f29ccfce0cc96dcd4d18a917622775cce2646e717991c421ac8092c",
+            "source:8f17104c6b0b9d0656b90f2f78438ccd7fbfe42261c3238c933ac118861644b6",
+            "source:6eb263f29ef90bf7022864c7c7f17651cf5999d4b9ab1076a9e2428ce13f9de8",
+            "source:a52293d5262753c946a40e8f9f189c3f2633097c6e64fb8c877693491316e1ac",
+            "source:7447f8c1ada84aa669844b01da3ec29051f1897c8b457b42ef6a79b30b517aee",
+            "source:8a204a003a2c34733e0d6666e3b750d4f4d504fc9cb7092f0a5713d56a36c535",
+            "source:ea8c11b37548b9457b7df43b769a4b16913b08da366216c884ce28e65660f16a",
+            "source:219a3eb6463f0e01c670d0056b75fc3283a3750c312dfd6986eaa313eae061a6",
+            "source:f57dcfa3b45eac8d61ffc48adee879fa4e6f1b546e54c649c2858fda560368f1",
+            "source:6d0eae2f49573a949cc35256a18c8eb22b8e029f3b6ba98c627da772d9c5165a",
+            "source:cb536da4e6f4c22b0c90027a1aed964c1229aab76696404aca765827ed3324d1",
+            "source:26ca525d917b0d3aed659a6ad2e62d1c1c7383fcbe0ab039a8370be8fba37ed4",
+            "source:22f05208d3964c94849c34baa887f530d99ea0ba39901ee6d0dc5ff1c9dbc74d",
+            "source:f17a00931dad50c42ee4e4850178b9da5824a15340cb6b22ac7d7af71eb8b253",
+            "source:a88bd8132396500508cd4961eab26c143007aeea0b8115d8005e9d52240b444a"
+          ]
+        },
+        "counts": {
+          "negative_emission_new": 6,
+          "negative_emission_removed": 0,
+          "negative_emission_retained": 6,
+          "whole_gained": 7,
+          "whole_lost": 0,
+          "whole_retained": 30
+        }
+      },
+      "mlp": {
+        "case_ids": {
+          "negative_emission_new": [
+            "source:286868fea15eb814077f802707c1cb0508fc0cdcdbfc140f9ba307352d1f0040",
+            "source:4d88c1040c508c337402db6659029c50ecde3ab12bed931a066087fe87f6ca2d",
+            "source:170e19a36720ec4eeb12c44968266edc2363dfb84a25e0757121a793fbb6afa5",
+            "source:57ea24c1afce863316638f4252f2f747ea8eb877f4309756b4410d96b53fbcf1",
+            "source:9d3b3f594e2d448376d359bd7ce813afcc1394a6266b5eb769c35a3f7c17d0c4",
+            "source:5f001b7b8e46bc619a7b18807053229b018973cc2466145ddf9587f8820553f9"
+          ],
+          "negative_emission_removed": [],
+          "negative_emission_retained": [
+            "source:7938f160afe44977667fc3ba2fd1d9536df6d25857b601b8140dfb90f7d27720",
+            "source:e7453f80803c3e985cf7b127fdec97fece80ace138b697d53ef2bab6f0ea3419",
+            "source:5d6151f482345f7386e95671f8a2c106b366d4b2e3f3ccfc152ab39ec5ebc1cc",
+            "source:5179dc107992f7e4fbca2e42062158dbcadb6f0c32f5eba876f542a7bbfb6c05",
+            "source:3c37fe63061de8ef3cbb28d5602f5b69fcf083f2a988672e8c639d85a3849a61",
+            "source:e91ff290487a0c076016bfe626153798043b910a8d145dcaf8caf6436efe945c"
+          ],
+          "whole_gained": [
+            "source:a37b4d30c0c27f625ce7aa410ab9da00065955ad7ca5215201083795dea25454",
+            "source:063dc3e88d3ab754c481a19ef4503111ce5745fb156e53de8c56533b9aabb03a",
+            "source:e3afea8969b4b423c82c63dd7de51dbe619c05230b1415dd0b1f1cff246c024f",
+            "source:256c0ac221d0d663d57860c3f24abb1f4e462265d917ad9d4c9e2182cd80333c",
+            "source:ee9d347b3b858f495a0ccecf15f3c92b3c00566a8ccd64feaad340be33c0ba7c",
+            "source:a4e3d398545d903359d6b61f6ff020f55153e2cd2312fe5c02ba520d5b3abdf7",
+            "source:fb06bd0a0dc326e57b791060ee5d281b458ae1da84d979b824d6487e99d2c39a",
+            "source:9fb647fd5739be9d24e61129d276d152281c17857c2cc4e7817f9ec58fea34ce",
+            "source:a9a5da75644bf1c559719ee0396f2cbee8911665027b19a81255cd239feb0efd"
+          ],
+          "whole_lost": [],
+          "whole_retained": [
+            "source:079e1d82d60cddbee3ee1cd3f48a15c0f5c1da3972d43b1224bb9f5d9493c9d0",
+            "source:cc604832fd592ff86d65193425caeba3a9936e64c870dcd74cf156a540929a01",
+            "source:ecd5bbbdcfa03540d8c5ca835b7934e92c5c7caee3522e2349ce15ed2a75bc7e",
+            "source:12000a64577481d03ee20b6d7479d5eda18e3642f177c6c96fd8ef50a71e91f1",
+            "source:02bc12fb281cba9000a0e33d1ce21766435759c1ee79ee29f878fa4714555487",
+            "source:9029dff9e68c28a2ebb23d7046acd31a672718fd7a33e682f4a43ce2ec066a07",
+            "source:702e7c77fd246319e2c8c1ff8366fe0397a9d4aa7013c2e92f0eae6abb006784",
+            "source:159f43ea6c039a5c2f71b39020bd63eaa2f7d7b6659b955e0de5f948fa7bc745",
+            "source:e0502c557f460113e4f7c692ba90e21b676d9163bcf3a23437aad5803758d4e2",
+            "source:82efd2949e5e42c2c40909a75e8d0f4e53073e7698c279be010cb56d22093009",
+            "source:d1b924d37eeb0d1da1a2ddf9325fdc12b682c19b4511a9fa1632dcd9bea724e3",
+            "source:45525df2e327b8784a9cd220e5df4f4b0b6bc4db05ca3df3c05a0512fdb81256",
+            "source:cd7ae60793a59f235f77c9ab2f8e092b2ff4aac034f416576665b2f92fadbc2f",
+            "source:704271c092441006fb5b29e696daeb1e531407f1f5819e17243b1f2a962ab88c",
+            "source:ad7e79965482b3739a566246b62de8eb90abc079d69ac3061a1b2187847d5885",
+            "source:4d9c524e3f29ccfce0cc96dcd4d18a917622775cce2646e717991c421ac8092c",
+            "source:8f17104c6b0b9d0656b90f2f78438ccd7fbfe42261c3238c933ac118861644b6",
+            "source:6eb263f29ef90bf7022864c7c7f17651cf5999d4b9ab1076a9e2428ce13f9de8",
+            "source:a52293d5262753c946a40e8f9f189c3f2633097c6e64fb8c877693491316e1ac",
+            "source:7447f8c1ada84aa669844b01da3ec29051f1897c8b457b42ef6a79b30b517aee",
+            "source:8a204a003a2c34733e0d6666e3b750d4f4d504fc9cb7092f0a5713d56a36c535",
+            "source:ea8c11b37548b9457b7df43b769a4b16913b08da366216c884ce28e65660f16a",
+            "source:219a3eb6463f0e01c670d0056b75fc3283a3750c312dfd6986eaa313eae061a6",
+            "source:f57dcfa3b45eac8d61ffc48adee879fa4e6f1b546e54c649c2858fda560368f1",
+            "source:6d0eae2f49573a949cc35256a18c8eb22b8e029f3b6ba98c627da772d9c5165a",
+            "source:cb536da4e6f4c22b0c90027a1aed964c1229aab76696404aca765827ed3324d1",
+            "source:26ca525d917b0d3aed659a6ad2e62d1c1c7383fcbe0ab039a8370be8fba37ed4",
+            "source:22f05208d3964c94849c34baa887f530d99ea0ba39901ee6d0dc5ff1c9dbc74d",
+            "source:f17a00931dad50c42ee4e4850178b9da5824a15340cb6b22ac7d7af71eb8b253",
+            "source:a88bd8132396500508cd4961eab26c143007aeea0b8115d8005e9d52240b444a"
+          ]
+        },
+        "counts": {
+          "negative_emission_new": 6,
+          "negative_emission_removed": 0,
+          "negative_emission_retained": 6,
+          "whole_gained": 9,
+          "whole_lost": 0,
+          "whole_retained": 30
+        }
+      }
+    },
+    "fresh_final": {
+      "linear": {
+        "case_ids": {
+          "negative_emission_new": [
+            "source:0cb14b1024c3cf0502937c30b14a190ea2b1362f3f1ca7507d1b4d804b23c44f",
+            "source:f7a8824313d8d9c0a1ea078ee41e80d8c228196bd598817eef7030a8cd9a08d5",
+            "source:ecdc6381246065c0fcbd32e7d54e6348c242c1c4e4f7e94ceeba3ebeafde8e48",
+            "source:b00fb146ca5740f508d86da3e0b30d2999db2f79cc8f9d342ad2510f03e8f064"
+          ],
+          "negative_emission_removed": [],
+          "negative_emission_retained": [
+            "source:738c814909e4946e77b2f0c9c2aef40d03244b65db7947b3d768988854f07646",
+            "source:95f598cd7d2fee58e416d066b5f24fa2b8571d020aeea36e118d78193417c8b8",
+            "source:84021874f362dc44ccac2c9bef2b0e68404f908624521c4f9111809446a627da",
+            "source:d84646040656d68dc4a80fd61cf747ef979ad6f386027b8a8a131fb86be537d1",
+            "source:7425e248be6ec116351f44c3bb00f4db2f0ab3faed5eb87e95b83adaad2a81c8",
+            "source:0af03921c939da32ab804e1a6e6903ef7be56cbc8c236b19d851d4efd290cf7f",
+            "source:265e055aa1eeaa761e41381e70798a9421d262de9f90c6ea5118c437275f4d25"
+          ],
+          "whole_gained": [
+            "source:d1cadd06c359c06d86419076c9d775fee3bda0e776872eeaab0211f4aee313a5",
+            "source:427d6fbf04b50461cb9b993de854649ae400af256596cb366076b356a5a40a74",
+            "source:067fe57c2f7e77c94021f5e9551055579acdd0bdca93874a2b2beeefd37b976d",
+            "source:66a96dd983e13ffa7e4c62f33437ead571b3308e3e393f321e1a8f577ca73cb9",
+            "source:b89c0b04587f9b77539e5a41852c474c97dcb72e1a95d440a70c092664d413ce",
+            "source:e6eab9c2bc1a8232b61df0b4a7130995519bdc15f3e810ad8c814a1ab9504ead",
+            "source:c43e493573452990136aba641eccd60dcc36ee98544bc6f0cd0bebd064708262",
+            "source:e2bfa8082dbbafcb92626db9d32447409f10107740965f11d228d2e726c6022d",
+            "source:527e4e3ab87ded53c9c2b22e485d92ca2a741058e7dc70bc7e5e073491112ab3"
+          ],
+          "whole_lost": [],
+          "whole_retained": [
+            "source:ba806ba1bf2baeed6e88b18cb78bbfe25e3cc757017fee9bac268323dae7f53c",
+            "source:23c4a93fa35ca83128cdfcabb4eb8b9c45b0f572cb9eec3c7933d656ae371126",
+            "source:2e23a687859efdb7d48b62a7844708e34eb7c0020aef9f0f82f63d3f6a847c48",
+            "source:4d8a5c9bd44edb4460042ef62a245d87216dde6d20f1882943d8e1d654c083ea",
+            "source:15de60786ea79a56cebf248af292d66b66b10f0d6fb9dc8d126c98bdf5239512",
+            "source:9f4fbe3463c33bec29a0421a882c696ea0fee82055eb2dc3adfed85b811767a7",
+            "source:8425c81dc9274ba564d3e18827418ac9cc7c7fe8f2aeb22cfc889a7db7670f43",
+            "source:4bac04ca0a6a544d461124aeb425fbc470d5ec95bb4ffeb91caf78ec7502e319",
+            "source:69e222a18d35c4e6133d935ed7c9cad40512fe95f5610e7da807f0cca3ff73a2",
+            "source:6dc406cdb8130191182044e14442e1c91650134438319664268fae0032dea79b",
+            "source:747e852e57bde394221f5ff36093880f6485ce647a706a1ce99e7c9111a07f7b",
+            "source:3bcf1d8219b3e89817071ac842c078e2da1807a1fef235732ececcbd08385f84",
+            "source:9a90d2fc02c29f8d5892911150b24bbb4177b3b55054b0eada820a487795fdb3",
+            "source:c1dbce060b9c861ade8a8ee9ac20a9bdaa853d1c6e733922bc1d0f1814d214c6",
+            "source:15ca86463debfa50b56db57c23328a2cbea3036c3476884fd691f944f5dc1998",
+            "source:d697122084358c4e8b4c4f65bbfac02d2a4b36c7a35314251219210cf64ad845",
+            "source:cbd06d495c232ef800e6c0bfcb1703579d339095949936a938f376ba9dc1e2a1",
+            "source:b269907d61b82617d2459648a67612c5ecff57c2938134b36891db62bb42d788",
+            "source:9d8cdf468aec9be8cb5cec71cbf13ae92dfeef229d07281ef8e7d47caa02f404",
+            "source:bb910a3a38856aea444a8b34c46156cddc3dfd0e1b714b904b2467f1a1521da2",
+            "source:e0942dfdfa5e862e2b704b8e2b536cd1829ad3da1f40f3e2504447e19d1f8cb6",
+            "source:fcdc317d89ac42a43837a3ed23e27a3d279f4c56fbcce239e0da9e33388873cf",
+            "source:2e29e6c6dfbf137968aca85b76c000fc8ce5ce4eb0ed28d03cb702603bca6bbc",
+            "source:b1eff060b9945e4c074fc4dcbf770bbd96e4e3f1fc62f4beaaa078367dd99247",
+            "source:77dc90fb9f727459bedde2341311d7abbdb4a1f77069eab302aba11cce6bf74c",
+            "source:a34d6e3ea9eef6dd28f780749d590327da78ceab2b2a6466674449482fe62646",
+            "source:d52cc5202f87a505596ec5f115e4e56e4f3a326837acf5fbd4bb5343f3ba777f",
+            "source:8fb499e9045005345ecb9cee99c0cb42b3014df16a790a69c7e809345c11e046"
+          ]
+        },
+        "counts": {
+          "negative_emission_new": 4,
+          "negative_emission_removed": 0,
+          "negative_emission_retained": 7,
+          "whole_gained": 9,
+          "whole_lost": 0,
+          "whole_retained": 28
+        }
+      },
+      "mlp": {
+        "case_ids": {
+          "negative_emission_new": [
+            "source:810ea5e1c97b8c6bc1cae2c50faf1a49bb5ce36a944ffc6aaa93aa566d99db7e",
+            "source:0cb14b1024c3cf0502937c30b14a190ea2b1362f3f1ca7507d1b4d804b23c44f",
+            "source:f7a8824313d8d9c0a1ea078ee41e80d8c228196bd598817eef7030a8cd9a08d5",
+            "source:ecdc6381246065c0fcbd32e7d54e6348c242c1c4e4f7e94ceeba3ebeafde8e48",
+            "source:b00fb146ca5740f508d86da3e0b30d2999db2f79cc8f9d342ad2510f03e8f064"
+          ],
+          "negative_emission_removed": [],
+          "negative_emission_retained": [
+            "source:738c814909e4946e77b2f0c9c2aef40d03244b65db7947b3d768988854f07646",
+            "source:95f598cd7d2fee58e416d066b5f24fa2b8571d020aeea36e118d78193417c8b8",
+            "source:84021874f362dc44ccac2c9bef2b0e68404f908624521c4f9111809446a627da",
+            "source:d84646040656d68dc4a80fd61cf747ef979ad6f386027b8a8a131fb86be537d1",
+            "source:7425e248be6ec116351f44c3bb00f4db2f0ab3faed5eb87e95b83adaad2a81c8",
+            "source:0af03921c939da32ab804e1a6e6903ef7be56cbc8c236b19d851d4efd290cf7f",
+            "source:265e055aa1eeaa761e41381e70798a9421d262de9f90c6ea5118c437275f4d25"
+          ],
+          "whole_gained": [
+            "source:d1cadd06c359c06d86419076c9d775fee3bda0e776872eeaab0211f4aee313a5",
+            "source:427d6fbf04b50461cb9b993de854649ae400af256596cb366076b356a5a40a74",
+            "source:067fe57c2f7e77c94021f5e9551055579acdd0bdca93874a2b2beeefd37b976d",
+            "source:2c9c2c7e8beef2791f0681d5c716330f225a986ae095510bc55669eaf97aadb1",
+            "source:66a96dd983e13ffa7e4c62f33437ead571b3308e3e393f321e1a8f577ca73cb9",
+            "source:b89c0b04587f9b77539e5a41852c474c97dcb72e1a95d440a70c092664d413ce",
+            "source:e6eab9c2bc1a8232b61df0b4a7130995519bdc15f3e810ad8c814a1ab9504ead",
+            "source:c43e493573452990136aba641eccd60dcc36ee98544bc6f0cd0bebd064708262",
+            "source:e2bfa8082dbbafcb92626db9d32447409f10107740965f11d228d2e726c6022d",
+            "source:56e3668d84d20d4c73bc641ed97f24375c145edd751d1f5e1d212e071205d65e",
+            "source:527e4e3ab87ded53c9c2b22e485d92ca2a741058e7dc70bc7e5e073491112ab3"
+          ],
+          "whole_lost": [],
+          "whole_retained": [
+            "source:ba806ba1bf2baeed6e88b18cb78bbfe25e3cc757017fee9bac268323dae7f53c",
+            "source:23c4a93fa35ca83128cdfcabb4eb8b9c45b0f572cb9eec3c7933d656ae371126",
+            "source:2e23a687859efdb7d48b62a7844708e34eb7c0020aef9f0f82f63d3f6a847c48",
+            "source:4d8a5c9bd44edb4460042ef62a245d87216dde6d20f1882943d8e1d654c083ea",
+            "source:15de60786ea79a56cebf248af292d66b66b10f0d6fb9dc8d126c98bdf5239512",
+            "source:9f4fbe3463c33bec29a0421a882c696ea0fee82055eb2dc3adfed85b811767a7",
+            "source:8425c81dc9274ba564d3e18827418ac9cc7c7fe8f2aeb22cfc889a7db7670f43",
+            "source:4bac04ca0a6a544d461124aeb425fbc470d5ec95bb4ffeb91caf78ec7502e319",
+            "source:69e222a18d35c4e6133d935ed7c9cad40512fe95f5610e7da807f0cca3ff73a2",
+            "source:6dc406cdb8130191182044e14442e1c91650134438319664268fae0032dea79b",
+            "source:747e852e57bde394221f5ff36093880f6485ce647a706a1ce99e7c9111a07f7b",
+            "source:3bcf1d8219b3e89817071ac842c078e2da1807a1fef235732ececcbd08385f84",
+            "source:9a90d2fc02c29f8d5892911150b24bbb4177b3b55054b0eada820a487795fdb3",
+            "source:c1dbce060b9c861ade8a8ee9ac20a9bdaa853d1c6e733922bc1d0f1814d214c6",
+            "source:15ca86463debfa50b56db57c23328a2cbea3036c3476884fd691f944f5dc1998",
+            "source:d697122084358c4e8b4c4f65bbfac02d2a4b36c7a35314251219210cf64ad845",
+            "source:cbd06d495c232ef800e6c0bfcb1703579d339095949936a938f376ba9dc1e2a1",
+            "source:b269907d61b82617d2459648a67612c5ecff57c2938134b36891db62bb42d788",
+            "source:9d8cdf468aec9be8cb5cec71cbf13ae92dfeef229d07281ef8e7d47caa02f404",
+            "source:bb910a3a38856aea444a8b34c46156cddc3dfd0e1b714b904b2467f1a1521da2",
+            "source:e0942dfdfa5e862e2b704b8e2b536cd1829ad3da1f40f3e2504447e19d1f8cb6",
+            "source:fcdc317d89ac42a43837a3ed23e27a3d279f4c56fbcce239e0da9e33388873cf",
+            "source:2e29e6c6dfbf137968aca85b76c000fc8ce5ce4eb0ed28d03cb702603bca6bbc",
+            "source:b1eff060b9945e4c074fc4dcbf770bbd96e4e3f1fc62f4beaaa078367dd99247",
+            "source:77dc90fb9f727459bedde2341311d7abbdb4a1f77069eab302aba11cce6bf74c",
+            "source:a34d6e3ea9eef6dd28f780749d590327da78ceab2b2a6466674449482fe62646",
+            "source:d52cc5202f87a505596ec5f115e4e56e4f3a326837acf5fbd4bb5343f3ba777f",
+            "source:8fb499e9045005345ecb9cee99c0cb42b3014df16a790a69c7e809345c11e046"
+          ]
+        },
+        "counts": {
+          "negative_emission_new": 5,
+          "negative_emission_removed": 0,
+          "negative_emission_retained": 7,
+          "whole_gained": 11,
+          "whole_lost": 0,
+          "whole_retained": 28
+        }
+      }
+    }
+  },
+  "passed": true,
+  "physical_results_root": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results",
+  "pure_emitted_proposals_revalidated": 2466,
+  "retention_gold_transport_validations": {
+    "earlier_scope": 64,
+    "earlier_trigger": 64
+  },
+  "review_kind": "Saved JSON/canonical seal audit, pinned pure scorer AST and independent span/probability/confusion/whole/unsafe set checks; no model import/forward/fit or numerical restore.",
+  "schema": "support-action-independent-results-review/v1",
+  "selection_ledger": {
+    "linear": {
+      "candidates": [
+        {
+          "eligible": true,
+          "rank": [
+            87,
+            -7,
+            32,
+            0
+          ],
+          "step": 0
+        },
+        {
+          "eligible": true,
+          "rank": [
+            93,
+            -9,
+            40,
+            -120
+          ],
+          "step": 120
+        },
+        {
+          "eligible": true,
+          "rank": [
+            92,
+            -9,
+            39,
+            -240
+          ],
+          "step": 240
+        }
+      ],
+      "selected_step": 120
+    },
+    "mlp": {
+      "candidates": [
+        {
+          "eligible": true,
+          "rank": [
+            87,
+            -7,
+            32,
+            0
+          ],
+          "step": 0
+        },
+        {
+          "eligible": true,
+          "rank": [
+            92,
+            -9,
+            39,
+            -120
+          ],
+          "step": 120
+        },
+        {
+          "eligible": true,
+          "rank": [
+            92,
+            -9,
+            39,
+            -240
+          ],
+          "step": 240
+        }
+      ],
+      "selected_step": 120
+    }
+  },
+  "six_checkpoints": [
+    {
+      "Adam_parameter_states": 0,
+      "arm": "linear",
+      "checkpoint": {
+        "bytes": 2806422,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/checkpoint-0.json",
+        "sha256": "89f594430b68ada8ed9e97b9cbb78b54d10c1fe10ef1a6976cf2a0530d421652"
+      },
+      "every_Adam_step": 0,
+      "head_parameter_elements": 195,
+      "parent_byte_exact": true,
+      "seal": "37ff21c6ebca711496552066cd4d816a3d66de44d7b9c62fd420d19badb1be63",
+      "step": 0
+    },
+    {
+      "Adam_parameter_states": 6,
+      "arm": "linear",
+      "checkpoint": {
+        "bytes": 2826167,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/checkpoint-120.json",
+        "sha256": "741ea06a018d603b268e0acc8efc21d8ae1b9d0e3d1780212746c8a6cfdae2f1"
+      },
+      "every_Adam_step": 120,
+      "head_parameter_elements": 195,
+      "parent_byte_exact": true,
+      "seal": "6ca11d358241d2a957cd34d026d92d0400a242444b06f05feba9defb22b4b1e9",
+      "step": 120
+    },
+    {
+      "Adam_parameter_states": 6,
+      "arm": "linear",
+      "checkpoint": {
+        "bytes": 2826187,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/linear/checkpoint-240.json",
+        "sha256": "1f975a1ae72f0685ca32518209112056141f1291006ee470364c14458b68e5a0"
+      },
+      "every_Adam_step": 240,
+      "head_parameter_elements": 195,
+      "parent_byte_exact": true,
+      "seal": "984be3e60b540287e9cbf3738f3f353e88bc3eaaf405557938c5a5627cbd6201",
+      "step": 240
+    },
+    {
+      "Adam_parameter_states": 0,
+      "arm": "mlp",
+      "checkpoint": {
+        "bytes": 2991289,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/checkpoint-0.json",
+        "sha256": "27e8456d8196125d7fe00d8a4e2e147cb9af590eb4716204ca5b6f9a1995ee2b"
+      },
+      "every_Adam_step": 0,
+      "head_parameter_elements": 6339,
+      "parent_byte_exact": true,
+      "seal": "7b1a2309d6737df0f2e835a0495f4f772697f14fc3f83c2fcc65966b5b2f1c6f",
+      "step": 0
+    },
+    {
+      "Adam_parameter_states": 12,
+      "arm": "mlp",
+      "checkpoint": {
+        "bytes": 3449806,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/checkpoint-120.json",
+        "sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155"
+      },
+      "every_Adam_step": 120,
+      "head_parameter_elements": 6339,
+      "parent_byte_exact": true,
+      "seal": "58cc083a7ba29968d13a9ed007f5af14337f684900346e3de2a210deb58f6484",
+      "step": 120
+    },
+    {
+      "Adam_parameter_states": 12,
+      "arm": "mlp",
+      "checkpoint": {
+        "bytes": 3449524,
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/mlp/checkpoint-240.json",
+        "sha256": "6ec70e0c16a307a64072dfcc958ae03fb2ecc3cdccf13f6517b18a5849589254"
+      },
+      "every_Adam_step": 240,
+      "head_parameter_elements": 6339,
+      "parent_byte_exact": true,
+      "seal": "a92b73cdbc8042de780a135ed85cb749bd18978d02fa18a1a67484393d70aed8",
+      "step": 240
+    }
+  ]
+}

@@ -1,0 +1,1943 @@
+{
+  "schema": "support-action-pilot-completion/v1",
+  "status": "completed",
+  "training_results": {
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-action-20261007-01/results/training-results.json",
+    "bytes": 314211,
+    "sha256": "c4c3f4ec899ae86b2cfad60af36280ef0fad73ee05058b9f6f2cc271bea88d07"
+  },
+  "actual_optimizer_updates": 480,
+  "scores": {
+    "fresh_final": {
+      "parent": {
+        "positive_count": 64,
+        "positive_exact_count": 28,
+        "positive_learned_refusal_count": 16,
+        "positive_structural_block_count": 4,
+        "positive_emitted_proposal_count": 44,
+        "negative_count": 64,
+        "negative_learned_refusal_count": 56,
+        "negative_incidental_block_count": 1,
+        "negative_emitted_proposal_count": 7,
+        "positive_raw_modality_exact": 45,
+        "positive_raw_all_spans_exact": 47,
+        "nonempty_condition_count": 32,
+        "nonempty_condition_exact_count": 10,
+        "case_count": 128,
+        "source_parent_groups": 64,
+        "positive_class_CE": 0.656645295435269,
+        "class_confusion": {
+          "O": {
+            "O": 11,
+            "P": 4,
+            "F": 7
+          },
+          "P": {
+            "O": 1,
+            "P": 18,
+            "F": 2
+          },
+          "F": {
+            "O": 2,
+            "P": 3,
+            "F": 16
+          }
+        },
+        "positive_raw_facet_span_exact": {
+          "modality": {
+            "count": 64,
+            "exact": 60,
+            "nonempty_count": 64,
+            "nonempty_exact": 60
+          },
+          "actor": {
+            "count": 64,
+            "exact": 63,
+            "nonempty_count": 64,
+            "nonempty_exact": 63
+          },
+          "action": {
+            "count": 64,
+            "exact": 48,
+            "nonempty_count": 64,
+            "nonempty_exact": 48
+          },
+          "object": {
+            "count": 64,
+            "exact": 63,
+            "nonempty_count": 32,
+            "nonempty_exact": 31
+          },
+          "condition": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 32,
+            "nonempty_exact": 32
+          }
+        },
+        "negative_categories": {
+          "modal_deletion": {
+            "count": 16,
+            "learned_refusal": 16,
+            "emitted": 0,
+            "incidental_block": 0
+          },
+          "second_rule": {
+            "count": 16,
+            "learned_refusal": 16,
+            "emitted": 0,
+            "incidental_block": 0
+          },
+          "modal_misspelling": {
+            "count": 16,
+            "learned_refusal": 8,
+            "emitted": 7,
+            "incidental_block": 1
+          },
+          "extra_exception": {
+            "count": 16,
+            "learned_refusal": 16,
+            "emitted": 0,
+            "incidental_block": 0
+          }
+        },
+        "positive_templates": {
+          "actor_condition_modal_action_object": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 2,
+            "raw_action_exact": 6
+          },
+          "gerund_object_agent_modal_condition": {
+            "count": 8,
+            "class_exact": 7,
+            "proposal_exact": 4,
+            "raw_action_exact": 6
+          },
+          "actor_possessive_gerund_object_modal_condition": {
+            "count": 8,
+            "class_exact": 7,
+            "proposal_exact": 6,
+            "raw_action_exact": 7
+          },
+          "actor_modal_action_object_condition": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 2,
+            "raw_action_exact": 5
+          },
+          "condition_actor_modal_action_object": {
+            "count": 8,
+            "class_exact": 3,
+            "proposal_exact": 2,
+            "raw_action_exact": 5
+          },
+          "condition_modal_actor_action_object": {
+            "count": 8,
+            "class_exact": 6,
+            "proposal_exact": 4,
+            "raw_action_exact": 6
+          },
+          "condition_actor_possessive_gerund_object_modal": {
+            "count": 8,
+            "class_exact": 7,
+            "proposal_exact": 6,
+            "raw_action_exact": 7
+          },
+          "modal_actor_action_object_condition": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 2,
+            "raw_action_exact": 6
+          }
+        },
+        "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+        "caller_attachment_learned": false,
+        "legal_gold": false,
+        "admission_masks": "all five zero",
+        "raw_support_confusion": {
+          "true_positive": 48,
+          "false_negative": 16,
+          "false_positive": 8,
+          "true_negative": 56
+        },
+        "raw_support_accuracy": 0.8125,
+        "support_probability_BCE": 0.4128417297695208,
+        "support_BCE_probability_clip": [
+          1e-12,
+          0.999999999999
+        ],
+        "fixed_class_nonaction_whole_ceiling_count": 43,
+        "fixed_class_nonaction_whole_ceiling_ids": [
+          "source:ba806ba1bf2baeed6e88b18cb78bbfe25e3cc757017fee9bac268323dae7f53c",
+          "source:23c4a93fa35ca83128cdfcabb4eb8b9c45b0f572cb9eec3c7933d656ae371126",
+          "source:2e23a687859efdb7d48b62a7844708e34eb7c0020aef9f0f82f63d3f6a847c48",
+          "source:4d8a5c9bd44edb4460042ef62a245d87216dde6d20f1882943d8e1d654c083ea",
+          "source:15de60786ea79a56cebf248af292d66b66b10f0d6fb9dc8d126c98bdf5239512",
+          "source:90c262fa82654b801019a7fb570a73a4739bc404717a7a20403ed353b8ebb519",
+          "source:9f4fbe3463c33bec29a0421a882c696ea0fee82055eb2dc3adfed85b811767a7",
+          "source:80ee5af05bb9d5537a78539cc5f861a692bc25e010ed13f01b1428409867ee51",
+          "source:d1cadd06c359c06d86419076c9d775fee3bda0e776872eeaab0211f4aee313a5",
+          "source:8425c81dc9274ba564d3e18827418ac9cc7c7fe8f2aeb22cfc889a7db7670f43",
+          "source:4bac04ca0a6a544d461124aeb425fbc470d5ec95bb4ffeb91caf78ec7502e319",
+          "source:69e222a18d35c4e6133d935ed7c9cad40512fe95f5610e7da807f0cca3ff73a2",
+          "source:427d6fbf04b50461cb9b993de854649ae400af256596cb366076b356a5a40a74",
+          "source:6dc406cdb8130191182044e14442e1c91650134438319664268fae0032dea79b",
+          "source:5e5dcf29601849482f265b0fd10b846f673c8a8aa397817cbe47e23f9c07f208",
+          "source:747e852e57bde394221f5ff36093880f6485ce647a706a1ce99e7c9111a07f7b",
+          "source:067fe57c2f7e77c94021f5e9551055579acdd0bdca93874a2b2beeefd37b976d",
+          "source:2c9c2c7e8beef2791f0681d5c716330f225a986ae095510bc55669eaf97aadb1",
+          "source:3bcf1d8219b3e89817071ac842c078e2da1807a1fef235732ececcbd08385f84",
+          "source:9a90d2fc02c29f8d5892911150b24bbb4177b3b55054b0eada820a487795fdb3",
+          "source:c1dbce060b9c861ade8a8ee9ac20a9bdaa853d1c6e733922bc1d0f1814d214c6",
+          "source:66a96dd983e13ffa7e4c62f33437ead571b3308e3e393f321e1a8f577ca73cb9",
+          "source:15ca86463debfa50b56db57c23328a2cbea3036c3476884fd691f944f5dc1998",
+          "source:b3e53a56c1486a0a27ec798f1ed12fb2f57bf94443b8093be20d97c88553ab01",
+          "source:b89c0b04587f9b77539e5a41852c474c97dcb72e1a95d440a70c092664d413ce",
+          "source:d697122084358c4e8b4c4f65bbfac02d2a4b36c7a35314251219210cf64ad845",
+          "source:cbd06d495c232ef800e6c0bfcb1703579d339095949936a938f376ba9dc1e2a1",
+          "source:b269907d61b82617d2459648a67612c5ecff57c2938134b36891db62bb42d788",
+          "source:9d8cdf468aec9be8cb5cec71cbf13ae92dfeef229d07281ef8e7d47caa02f404",
+          "source:bb910a3a38856aea444a8b34c46156cddc3dfd0e1b714b904b2467f1a1521da2",
+          "source:e0942dfdfa5e862e2b704b8e2b536cd1829ad3da1f40f3e2504447e19d1f8cb6",
+          "source:e6eab9c2bc1a8232b61df0b4a7130995519bdc15f3e810ad8c814a1ab9504ead",
+          "source:fcdc317d89ac42a43837a3ed23e27a3d279f4c56fbcce239e0da9e33388873cf",
+          "source:2e29e6c6dfbf137968aca85b76c000fc8ce5ce4eb0ed28d03cb702603bca6bbc",
+          "source:b1eff060b9945e4c074fc4dcbf770bbd96e4e3f1fc62f4beaaa078367dd99247",
+          "source:77dc90fb9f727459bedde2341311d7abbdb4a1f77069eab302aba11cce6bf74c",
+          "source:a34d6e3ea9eef6dd28f780749d590327da78ceab2b2a6466674449482fe62646",
+          "source:d52cc5202f87a505596ec5f115e4e56e4f3a326837acf5fbd4bb5343f3ba777f",
+          "source:c43e493573452990136aba641eccd60dcc36ee98544bc6f0cd0bebd064708262",
+          "source:e2bfa8082dbbafcb92626db9d32447409f10107740965f11d228d2e726c6022d",
+          "source:8fb499e9045005345ecb9cee99c0cb42b3014df16a790a69c7e809345c11e046",
+          "source:56e3668d84d20d4c73bc641ed97f24375c145edd751d1f5e1d212e071205d65e",
+          "source:527e4e3ab87ded53c9c2b22e485d92ca2a741058e7dc70bc7e5e073491112ab3"
+        ]
+      },
+      "linear": {
+        "positive_count": 64,
+        "positive_exact_count": 37,
+        "positive_learned_refusal_count": 7,
+        "positive_structural_block_count": 2,
+        "positive_emitted_proposal_count": 55,
+        "negative_count": 64,
+        "negative_learned_refusal_count": 51,
+        "negative_incidental_block_count": 2,
+        "negative_emitted_proposal_count": 11,
+        "positive_raw_modality_exact": 45,
+        "positive_raw_all_spans_exact": 56,
+        "nonempty_condition_count": 32,
+        "nonempty_condition_exact_count": 16,
+        "case_count": 128,
+        "source_parent_groups": 64,
+        "positive_class_CE": 0.656645295435269,
+        "class_confusion": {
+          "O": {
+            "O": 11,
+            "P": 4,
+            "F": 7
+          },
+          "P": {
+            "O": 1,
+            "P": 18,
+            "F": 2
+          },
+          "F": {
+            "O": 2,
+            "P": 3,
+            "F": 16
+          }
+        },
+        "positive_raw_facet_span_exact": {
+          "modality": {
+            "count": 64,
+            "exact": 60,
+            "nonempty_count": 64,
+            "nonempty_exact": 60
+          },
+          "actor": {
+            "count": 64,
+            "exact": 63,
+            "nonempty_count": 64,
+            "nonempty_exact": 63
+          },
+          "action": {
+            "count": 64,
+            "exact": 58,
+            "nonempty_count": 64,
+            "nonempty_exact": 58
+          },
+          "object": {
+            "count": 64,
+            "exact": 63,
+            "nonempty_count": 32,
+            "nonempty_exact": 31
+          },
+          "condition": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 32,
+            "nonempty_exact": 32
+          }
+        },
+        "negative_categories": {
+          "modal_deletion": {
+            "count": 16,
+            "learned_refusal": 16,
+            "emitted": 0,
+            "incidental_block": 0
+          },
+          "second_rule": {
+            "count": 16,
+            "learned_refusal": 16,
+            "emitted": 0,
+            "incidental_block": 0
+          },
+          "modal_misspelling": {
+            "count": 16,
+            "learned_refusal": 4,
+            "emitted": 10,
+            "incidental_block": 2
+          },
+          "extra_exception": {
+            "count": 16,
+            "learned_refusal": 15,
+            "emitted": 1,
+            "incidental_block": 0
+          }
+        },
+        "positive_templates": {
+          "actor_condition_modal_action_object": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 3,
+            "raw_action_exact": 6
+          },
+          "gerund_object_agent_modal_condition": {
+            "count": 8,
+            "class_exact": 7,
+            "proposal_exact": 5,
+            "raw_action_exact": 7
+          },
+          "actor_possessive_gerund_object_modal_condition": {
+            "count": 8,
+            "class_exact": 7,
+            "proposal_exact": 6,
+            "raw_action_exact": 8
+          },
+          "actor_modal_action_object_condition": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 4,
+            "raw_action_exact": 7
+          },
+          "condition_actor_modal_action_object": {
+            "count": 8,
+            "class_exact": 3,
+            "proposal_exact": 2,
+            "raw_action_exact": 7
+          },
+          "condition_modal_actor_action_object": {
+            "count": 8,
+            "class_exact": 6,
+            "proposal_exact": 6,
+            "raw_action_exact": 8
+          },
+          "condition_actor_possessive_gerund_object_modal": {
+            "count": 8,
+            "class_exact": 7,
+            "proposal_exact": 7,
+            "raw_action_exact": 8
+          },
+          "modal_actor_action_object_condition": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 4,
+            "raw_action_exact": 7
+          }
+        },
+        "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+        "caller_attachment_learned": false,
+        "legal_gold": false,
+        "admission_masks": "all five zero",
+        "raw_support_confusion": {
+          "true_positive": 57,
+          "false_negative": 7,
+          "false_positive": 13,
+          "true_negative": 51
+        },
+        "raw_support_accuracy": 0.84375,
+        "support_probability_BCE": 0.3830870089019142,
+        "support_BCE_probability_clip": [
+          1e-12,
+          0.999999999999
+        ],
+        "fixed_class_nonaction_whole_ceiling_count": 43,
+        "fixed_class_nonaction_whole_ceiling_ids": [
+          "source:ba806ba1bf2baeed6e88b18cb78bbfe25e3cc757017fee9bac268323dae7f53c",
+          "source:23c4a93fa35ca83128cdfcabb4eb8b9c45b0f572cb9eec3c7933d656ae371126",
+          "source:2e23a687859efdb7d48b62a7844708e34eb7c0020aef9f0f82f63d3f6a847c48",
+          "source:4d8a5c9bd44edb4460042ef62a245d87216dde6d20f1882943d8e1d654c083ea",
+          "source:15de60786ea79a56cebf248af292d66b66b10f0d6fb9dc8d126c98bdf5239512",
+          "source:90c262fa82654b801019a7fb570a73a4739bc404717a7a20403ed353b8ebb519",
+          "source:9f4fbe3463c33bec29a0421a882c696ea0fee82055eb2dc3adfed85b811767a7",
+          "source:80ee5af05bb9d5537a78539cc5f861a692bc25e010ed13f01b1428409867ee51",
+          "source:d1cadd06c359c06d86419076c9d775fee3bda0e776872eeaab0211f4aee313a5",
+          "source:8425c81dc9274ba564d3e18827418ac9cc7c7fe8f2aeb22cfc889a7db7670f43",
+          "source:4bac04ca0a6a544d461124aeb425fbc470d5ec95bb4ffeb91caf78ec7502e319",
+          "source:69e222a18d35c4e6133d935ed7c9cad40512fe95f5610e7da807f0cca3ff73a2",
+          "source:427d6fbf04b50461cb9b993de854649ae400af256596cb366076b356a5a40a74",
+          "source:6dc406cdb8130191182044e14442e1c91650134438319664268fae0032dea79b",
+          "source:5e5dcf29601849482f265b0fd10b846f673c8a8aa397817cbe47e23f9c07f208",
+          "source:747e852e57bde394221f5ff36093880f6485ce647a706a1ce99e7c9111a07f7b",
+          "source:067fe57c2f7e77c94021f5e9551055579acdd0bdca93874a2b2beeefd37b976d",
+          "source:2c9c2c7e8beef2791f0681d5c716330f225a986ae095510bc55669eaf97aadb1",
+          "source:3bcf1d8219b3e89817071ac842c078e2da1807a1fef235732ececcbd08385f84",
+          "source:9a90d2fc02c29f8d5892911150b24bbb4177b3b55054b0eada820a487795fdb3",
+          "source:c1dbce060b9c861ade8a8ee9ac20a9bdaa853d1c6e733922bc1d0f1814d214c6",
+          "source:66a96dd983e13ffa7e4c62f33437ead571b3308e3e393f321e1a8f577ca73cb9",
+          "source:15ca86463debfa50b56db57c23328a2cbea3036c3476884fd691f944f5dc1998",
+          "source:b3e53a56c1486a0a27ec798f1ed12fb2f57bf94443b8093be20d97c88553ab01",
+          "source:b89c0b04587f9b77539e5a41852c474c97dcb72e1a95d440a70c092664d413ce",
+          "source:d697122084358c4e8b4c4f65bbfac02d2a4b36c7a35314251219210cf64ad845",
+          "source:cbd06d495c232ef800e6c0bfcb1703579d339095949936a938f376ba9dc1e2a1",
+          "source:b269907d61b82617d2459648a67612c5ecff57c2938134b36891db62bb42d788",
+          "source:9d8cdf468aec9be8cb5cec71cbf13ae92dfeef229d07281ef8e7d47caa02f404",
+          "source:bb910a3a38856aea444a8b34c46156cddc3dfd0e1b714b904b2467f1a1521da2",
+          "source:e0942dfdfa5e862e2b704b8e2b536cd1829ad3da1f40f3e2504447e19d1f8cb6",
+          "source:e6eab9c2bc1a8232b61df0b4a7130995519bdc15f3e810ad8c814a1ab9504ead",
+          "source:fcdc317d89ac42a43837a3ed23e27a3d279f4c56fbcce239e0da9e33388873cf",
+          "source:2e29e6c6dfbf137968aca85b76c000fc8ce5ce4eb0ed28d03cb702603bca6bbc",
+          "source:b1eff060b9945e4c074fc4dcbf770bbd96e4e3f1fc62f4beaaa078367dd99247",
+          "source:77dc90fb9f727459bedde2341311d7abbdb4a1f77069eab302aba11cce6bf74c",
+          "source:a34d6e3ea9eef6dd28f780749d590327da78ceab2b2a6466674449482fe62646",
+          "source:d52cc5202f87a505596ec5f115e4e56e4f3a326837acf5fbd4bb5343f3ba777f",
+          "source:c43e493573452990136aba641eccd60dcc36ee98544bc6f0cd0bebd064708262",
+          "source:e2bfa8082dbbafcb92626db9d32447409f10107740965f11d228d2e726c6022d",
+          "source:8fb499e9045005345ecb9cee99c0cb42b3014df16a790a69c7e809345c11e046",
+          "source:56e3668d84d20d4c73bc641ed97f24375c145edd751d1f5e1d212e071205d65e",
+          "source:527e4e3ab87ded53c9c2b22e485d92ca2a741058e7dc70bc7e5e073491112ab3"
+        ]
+      },
+      "mlp": {
+        "positive_count": 64,
+        "positive_exact_count": 39,
+        "positive_learned_refusal_count": 6,
+        "positive_structural_block_count": 3,
+        "positive_emitted_proposal_count": 55,
+        "negative_count": 64,
+        "negative_learned_refusal_count": 50,
+        "negative_incidental_block_count": 2,
+        "negative_emitted_proposal_count": 12,
+        "positive_raw_modality_exact": 45,
+        "positive_raw_all_spans_exact": 58,
+        "nonempty_condition_count": 32,
+        "nonempty_condition_exact_count": 17,
+        "case_count": 128,
+        "source_parent_groups": 64,
+        "positive_class_CE": 0.656645295435269,
+        "class_confusion": {
+          "O": {
+            "O": 11,
+            "P": 4,
+            "F": 7
+          },
+          "P": {
+            "O": 1,
+            "P": 18,
+            "F": 2
+          },
+          "F": {
+            "O": 2,
+            "P": 3,
+            "F": 16
+          }
+        },
+        "positive_raw_facet_span_exact": {
+          "modality": {
+            "count": 64,
+            "exact": 60,
+            "nonempty_count": 64,
+            "nonempty_exact": 60
+          },
+          "actor": {
+            "count": 64,
+            "exact": 63,
+            "nonempty_count": 64,
+            "nonempty_exact": 63
+          },
+          "action": {
+            "count": 64,
+            "exact": 62,
+            "nonempty_count": 64,
+            "nonempty_exact": 62
+          },
+          "object": {
+            "count": 64,
+            "exact": 63,
+            "nonempty_count": 32,
+            "nonempty_exact": 31
+          },
+          "condition": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 32,
+            "nonempty_exact": 32
+          }
+        },
+        "negative_categories": {
+          "modal_deletion": {
+            "count": 16,
+            "learned_refusal": 16,
+            "emitted": 0,
+            "incidental_block": 0
+          },
+          "second_rule": {
+            "count": 16,
+            "learned_refusal": 16,
+            "emitted": 0,
+            "incidental_block": 0
+          },
+          "modal_misspelling": {
+            "count": 16,
+            "learned_refusal": 3,
+            "emitted": 11,
+            "incidental_block": 2
+          },
+          "extra_exception": {
+            "count": 16,
+            "learned_refusal": 15,
+            "emitted": 1,
+            "incidental_block": 0
+          }
+        },
+        "positive_templates": {
+          "actor_condition_modal_action_object": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 3,
+            "raw_action_exact": 8
+          },
+          "gerund_object_agent_modal_condition": {
+            "count": 8,
+            "class_exact": 7,
+            "proposal_exact": 6,
+            "raw_action_exact": 8
+          },
+          "actor_possessive_gerund_object_modal_condition": {
+            "count": 8,
+            "class_exact": 7,
+            "proposal_exact": 7,
+            "raw_action_exact": 8
+          },
+          "actor_modal_action_object_condition": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 4,
+            "raw_action_exact": 7
+          },
+          "condition_actor_modal_action_object": {
+            "count": 8,
+            "class_exact": 3,
+            "proposal_exact": 2,
+            "raw_action_exact": 7
+          },
+          "condition_modal_actor_action_object": {
+            "count": 8,
+            "class_exact": 6,
+            "proposal_exact": 6,
+            "raw_action_exact": 8
+          },
+          "condition_actor_possessive_gerund_object_modal": {
+            "count": 8,
+            "class_exact": 7,
+            "proposal_exact": 7,
+            "raw_action_exact": 8
+          },
+          "modal_actor_action_object_condition": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 4,
+            "raw_action_exact": 8
+          }
+        },
+        "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+        "caller_attachment_learned": false,
+        "legal_gold": false,
+        "admission_masks": "all five zero",
+        "raw_support_confusion": {
+          "true_positive": 58,
+          "false_negative": 6,
+          "false_positive": 14,
+          "true_negative": 50
+        },
+        "raw_support_accuracy": 0.84375,
+        "support_probability_BCE": 0.38432090376731537,
+        "support_BCE_probability_clip": [
+          1e-12,
+          0.999999999999
+        ],
+        "fixed_class_nonaction_whole_ceiling_count": 43,
+        "fixed_class_nonaction_whole_ceiling_ids": [
+          "source:ba806ba1bf2baeed6e88b18cb78bbfe25e3cc757017fee9bac268323dae7f53c",
+          "source:23c4a93fa35ca83128cdfcabb4eb8b9c45b0f572cb9eec3c7933d656ae371126",
+          "source:2e23a687859efdb7d48b62a7844708e34eb7c0020aef9f0f82f63d3f6a847c48",
+          "source:4d8a5c9bd44edb4460042ef62a245d87216dde6d20f1882943d8e1d654c083ea",
+          "source:15de60786ea79a56cebf248af292d66b66b10f0d6fb9dc8d126c98bdf5239512",
+          "source:90c262fa82654b801019a7fb570a73a4739bc404717a7a20403ed353b8ebb519",
+          "source:9f4fbe3463c33bec29a0421a882c696ea0fee82055eb2dc3adfed85b811767a7",
+          "source:80ee5af05bb9d5537a78539cc5f861a692bc25e010ed13f01b1428409867ee51",
+          "source:d1cadd06c359c06d86419076c9d775fee3bda0e776872eeaab0211f4aee313a5",
+          "source:8425c81dc9274ba564d3e18827418ac9cc7c7fe8f2aeb22cfc889a7db7670f43",
+          "source:4bac04ca0a6a544d461124aeb425fbc470d5ec95bb4ffeb91caf78ec7502e319",
+          "source:69e222a18d35c4e6133d935ed7c9cad40512fe95f5610e7da807f0cca3ff73a2",
+          "source:427d6fbf04b50461cb9b993de854649ae400af256596cb366076b356a5a40a74",
+          "source:6dc406cdb8130191182044e14442e1c91650134438319664268fae0032dea79b",
+          "source:5e5dcf29601849482f265b0fd10b846f673c8a8aa397817cbe47e23f9c07f208",
+          "source:747e852e57bde394221f5ff36093880f6485ce647a706a1ce99e7c9111a07f7b",
+          "source:067fe57c2f7e77c94021f5e9551055579acdd0bdca93874a2b2beeefd37b976d",
+          "source:2c9c2c7e8beef2791f0681d5c716330f225a986ae095510bc55669eaf97aadb1",
+          "source:3bcf1d8219b3e89817071ac842c078e2da1807a1fef235732ececcbd08385f84",
+          "source:9a90d2fc02c29f8d5892911150b24bbb4177b3b55054b0eada820a487795fdb3",
+          "source:c1dbce060b9c861ade8a8ee9ac20a9bdaa853d1c6e733922bc1d0f1814d214c6",
+          "source:66a96dd983e13ffa7e4c62f33437ead571b3308e3e393f321e1a8f577ca73cb9",
+          "source:15ca86463debfa50b56db57c23328a2cbea3036c3476884fd691f944f5dc1998",
+          "source:b3e53a56c1486a0a27ec798f1ed12fb2f57bf94443b8093be20d97c88553ab01",
+          "source:b89c0b04587f9b77539e5a41852c474c97dcb72e1a95d440a70c092664d413ce",
+          "source:d697122084358c4e8b4c4f65bbfac02d2a4b36c7a35314251219210cf64ad845",
+          "source:cbd06d495c232ef800e6c0bfcb1703579d339095949936a938f376ba9dc1e2a1",
+          "source:b269907d61b82617d2459648a67612c5ecff57c2938134b36891db62bb42d788",
+          "source:9d8cdf468aec9be8cb5cec71cbf13ae92dfeef229d07281ef8e7d47caa02f404",
+          "source:bb910a3a38856aea444a8b34c46156cddc3dfd0e1b714b904b2467f1a1521da2",
+          "source:e0942dfdfa5e862e2b704b8e2b536cd1829ad3da1f40f3e2504447e19d1f8cb6",
+          "source:e6eab9c2bc1a8232b61df0b4a7130995519bdc15f3e810ad8c814a1ab9504ead",
+          "source:fcdc317d89ac42a43837a3ed23e27a3d279f4c56fbcce239e0da9e33388873cf",
+          "source:2e29e6c6dfbf137968aca85b76c000fc8ce5ce4eb0ed28d03cb702603bca6bbc",
+          "source:b1eff060b9945e4c074fc4dcbf770bbd96e4e3f1fc62f4beaaa078367dd99247",
+          "source:77dc90fb9f727459bedde2341311d7abbdb4a1f77069eab302aba11cce6bf74c",
+          "source:a34d6e3ea9eef6dd28f780749d590327da78ceab2b2a6466674449482fe62646",
+          "source:d52cc5202f87a505596ec5f115e4e56e4f3a326837acf5fbd4bb5343f3ba777f",
+          "source:c43e493573452990136aba641eccd60dcc36ee98544bc6f0cd0bebd064708262",
+          "source:e2bfa8082dbbafcb92626db9d32447409f10107740965f11d228d2e726c6022d",
+          "source:8fb499e9045005345ecb9cee99c0cb42b3014df16a790a69c7e809345c11e046",
+          "source:56e3668d84d20d4c73bc641ed97f24375c145edd751d1f5e1d212e071205d65e",
+          "source:527e4e3ab87ded53c9c2b22e485d92ca2a741058e7dc70bc7e5e073491112ab3"
+        ]
+      }
+    },
+    "earlier_scope": {
+      "parent": {
+        "positive_count": 64,
+        "positive_exact_count": 29,
+        "positive_learned_refusal_count": 18,
+        "positive_structural_block_count": 5,
+        "positive_emitted_proposal_count": 41,
+        "negative_count": 64,
+        "negative_learned_refusal_count": 59,
+        "negative_incidental_block_count": 1,
+        "negative_emitted_proposal_count": 4,
+        "positive_raw_modality_exact": 53,
+        "positive_raw_all_spans_exact": 47,
+        "nonempty_condition_count": 32,
+        "nonempty_condition_exact_count": 13,
+        "case_count": 128,
+        "source_parent_groups": 64,
+        "positive_class_CE": 0.5569122876524706,
+        "class_confusion": {
+          "O": {
+            "O": 13,
+            "P": 3,
+            "F": 5
+          },
+          "P": {
+            "O": 1,
+            "P": 21,
+            "F": 0
+          },
+          "F": {
+            "O": 1,
+            "P": 1,
+            "F": 19
+          }
+        },
+        "positive_raw_facet_span_exact": {
+          "modality": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 64,
+            "nonempty_exact": 64
+          },
+          "actor": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 64,
+            "nonempty_exact": 64
+          },
+          "action": {
+            "count": 64,
+            "exact": 50,
+            "nonempty_count": 64,
+            "nonempty_exact": 50
+          },
+          "object": {
+            "count": 64,
+            "exact": 61,
+            "nonempty_count": 32,
+            "nonempty_exact": 29
+          },
+          "condition": {
+            "count": 64,
+            "exact": 61,
+            "nonempty_count": 32,
+            "nonempty_exact": 29
+          }
+        },
+        "negative_categories": {
+          "modal_deletion": {
+            "count": 16,
+            "learned_refusal": 16,
+            "emitted": 0,
+            "incidental_block": 0
+          },
+          "modal_misspelling": {
+            "count": 16,
+            "learned_refusal": 11,
+            "emitted": 4,
+            "incidental_block": 1
+          },
+          "extra_exception": {
+            "count": 16,
+            "learned_refusal": 16,
+            "emitted": 0,
+            "incidental_block": 0
+          },
+          "second_rule": {
+            "count": 16,
+            "learned_refusal": 16,
+            "emitted": 0,
+            "incidental_block": 0
+          }
+        },
+        "positive_templates": {
+          "condition_actor_possessive_gerund_object_modal": {
+            "count": 8,
+            "class_exact": 8,
+            "proposal_exact": 7,
+            "raw_action_exact": 8
+          },
+          "condition_actor_modal_action_object": {
+            "count": 8,
+            "class_exact": 6,
+            "proposal_exact": 4,
+            "raw_action_exact": 8
+          },
+          "modal_actor_action_object_condition": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 1,
+            "raw_action_exact": 2
+          },
+          "actor_modal_action_object_condition": {
+            "count": 8,
+            "class_exact": 6,
+            "proposal_exact": 2,
+            "raw_action_exact": 8
+          },
+          "condition_modal_actor_action_object": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 5,
+            "raw_action_exact": 8
+          },
+          "gerund_object_agent_modal_condition": {
+            "count": 8,
+            "class_exact": 8,
+            "proposal_exact": 0,
+            "raw_action_exact": 0
+          },
+          "actor_possessive_gerund_object_modal_condition": {
+            "count": 8,
+            "class_exact": 8,
+            "proposal_exact": 5,
+            "raw_action_exact": 8
+          },
+          "actor_condition_modal_action_object": {
+            "count": 8,
+            "class_exact": 7,
+            "proposal_exact": 5,
+            "raw_action_exact": 8
+          }
+        },
+        "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+        "caller_attachment_learned": false,
+        "legal_gold": false,
+        "admission_masks": "all five zero",
+        "raw_support_confusion": {
+          "true_positive": 46,
+          "false_negative": 18,
+          "false_positive": 5,
+          "true_negative": 59
+        },
+        "raw_support_accuracy": 0.8203125,
+        "support_probability_BCE": 0.4232792963986053,
+        "support_BCE_probability_clip": [
+          1e-12,
+          0.999999999999
+        ],
+        "fixed_class_nonaction_whole_ceiling_count": 50,
+        "fixed_class_nonaction_whole_ceiling_ids": [
+          "source:84798e7c1ff75011007f975719c9e3d46193fe07bc7b97e2152cee17a3263dcc",
+          "source:b6f8facf22363d89fee8856cc2b6f25dfda04d57b37582e800c7d7083eee98c1",
+          "source:3c567e24184c0062edd70a3270cdeaa05b3e398c8287d4142d4a77c5c5eee714",
+          "source:1071ce37fa74f414262a14894bc1b0b3181b69ef7e43c1e97fa18ba128785018",
+          "source:5618a2ceb18fcd69477da6930cd96867b403aadbd89af89219f6de8ccfd4e4ca",
+          "source:acb6ee982faa071e43dd76847a902141447b7c96c01eba27de4c5ec7195ef0f4",
+          "source:5d43a56a876e24c4983799599f89637e888910d40aea9ad19766885545e7d1a3",
+          "source:6d61b094f8c443eb63d8596faacb5cd0ad895d899e33dfe2de32b38752f4125e",
+          "source:7c23cc3f2ac43daeb6ceea2f86995313a1b2fc8c1c3e8b86dd0f3cb67d49533a",
+          "source:7ed57d7f259c3d0da91ad89272ed819eafd2a6346bb3735d7ce05f3834e9fad2",
+          "source:a18d2795fd8d3da6c7c71e71f46a870f599c340d7529789412ee2be2eeb106a4",
+          "source:ca8999e34fa4b2a953cb311336198245af58a92dcab5c15295ba0b700dd0223f",
+          "source:b5567e6c47c982963a0f6dfc5446cd92ec14bf7c1f5056ed9241aab8d6be069a",
+          "source:7adec3b872ce28894d4ac5b4c6725739707fb5c22e3ed62066d6e52518567b07",
+          "source:ba6475e8e16a60a5e7af70c15ece2be973eb66811ddb0494aa200a635d81940b",
+          "source:d32837ec6da28014543229ddb9d0d56c4c4d1c010b39b0f7a0cbd72ea979fb4c",
+          "source:13ceda216784a9c4cd61e6bb7d84ce6bce4c40ce987130486b86cbefbee7d320",
+          "source:8ef2ac1c46068176e9eebbb1a02e48aaeff6084a1ba9490bb5009d78b3503b39",
+          "source:46a28d2c6b8e4b5d122f00b7ae2b09a12b567f1c03febe864a0d67c98f5b5e8e",
+          "source:84a03fa6574edb6afea181fa230defcfe125b027b8b03a37d712a4fe80d13869",
+          "source:10163cac0e380d476d34f0fddd064416e2db700876c38feb9440b0e294408203",
+          "source:3330b3e5932e242375609bc38d4d4d3361fa2c39f40c9ff6d59a2c1ff1655afc",
+          "source:50b3ea2740a628b49966866705e3ffe465779c3a7f1da00bfe2c5fdf621a14d5",
+          "source:c63d075cf9fa5324ee0e30aa94fa98ea563beda997a736fdb6015430b446f1d2",
+          "source:d786f3495573808f7936670327e9b8ce2a711eba55a2dc8d3d69984bc85a95cf",
+          "source:ac0539ec7f7eace5c76f615013af94f7fb46cce6287b7791b4b026131d24e739",
+          "source:7d7ad0100faf7db1663d45b576239a6b2f58fbf8fac893f9387e8f3771f7d903",
+          "source:f760b50c48f64f8e60ec14ca8284138b3fe6cbc9a6915db31221c902970d49e9",
+          "source:47420992507efd911fa34fed400c1787785c02103a081b91da8d36d9a13e7a1c",
+          "source:3e5697e8875344f20bb3e4f497900cccde8a5ba03768025f18622282e701878b",
+          "source:48a2e5f450ee4bc45e908ae8d32e2485d4de4b80c9cba00863fab0696b6d5b5c",
+          "source:1182812aaece1b426e0c5839e8d69baf1766f2cd0cd0e9221832ab9214c00759",
+          "source:b91c811e6d913c92a243a9410fd4fcbff2626d8ca3ce9698eb971255444836fe",
+          "source:500d54bc986c70eb42328a4339cc43e32343c6acd4045c759e8ab5b0f2f92a44",
+          "source:d5b80145af2d3c26d1f43f9476545352d6d46975c07baa93ff7e51b7a20226fe",
+          "source:19ccacc46854720b2df93ac21fc7913b63ff666ccd01b1a29d8d009c0184ddda",
+          "source:e076a18a1c836db6e326c752c4d40b2e1627afef5cbb7126248fced21faa3edb",
+          "source:91cfa2bd14fa59e6378fbf0f48b222fff692a9ce6c36656b2a647756806096e2",
+          "source:bb4a6348a320eb1df489230dfe114dc5a8e9cd11426e22b4f5a40d4d2c7d8982",
+          "source:aa1ef9b601ec9346b0ffacc4fabe31e73dee8b2089991697132671ac99b17e67",
+          "source:d5574e1dc725a740a21f536ff044d8fbf525fd3c22edd0417a8c8488807e3752",
+          "source:bba0f4036f60f5f0bef5f56215a957a2986135867e6c12ac5b53daaf2a22b9a4",
+          "source:cccda092bbf8945374298526298a1625e6a8ecf3ea455120e7dd417fa51e7cb6",
+          "source:c54eb1f0de3e4c37974d3822f5ce469cbec1c2e68ce247d055dd256af5931882",
+          "source:0449946de3fd8bd1605e1efaa6b0342e3601310bbf077ad1160481a6f627f4ac",
+          "source:84297c0d3627220cc2bb4c49d2ccdcab4f87506029e06845c1719c73a2209fc2",
+          "source:69f6f2ccdce35ab0e99f11df7a2c912c4e0e992fa8a4422d4a504adb7b1056d5",
+          "source:198de138dffa102afcd6a1eff375a78c3e237e84e01a00412fa1387c066b0048",
+          "source:057473b6fde283531e6962ab1a988ad051a296432c436e7e57731c43dbd70b5b",
+          "source:2a0c864c5836bb18c85e24735eb36b25350747f813e9e47bbc1951694edddf40"
+        ]
+      },
+      "linear": {
+        "positive_count": 64,
+        "positive_exact_count": 36,
+        "positive_learned_refusal_count": 15,
+        "positive_structural_block_count": 2,
+        "positive_emitted_proposal_count": 47,
+        "negative_count": 64,
+        "negative_learned_refusal_count": 56,
+        "negative_incidental_block_count": 1,
+        "negative_emitted_proposal_count": 7,
+        "positive_raw_modality_exact": 53,
+        "positive_raw_all_spans_exact": 55,
+        "nonempty_condition_count": 32,
+        "nonempty_condition_exact_count": 18,
+        "case_count": 128,
+        "source_parent_groups": 64,
+        "positive_class_CE": 0.5569122876524706,
+        "class_confusion": {
+          "O": {
+            "O": 13,
+            "P": 3,
+            "F": 5
+          },
+          "P": {
+            "O": 1,
+            "P": 21,
+            "F": 0
+          },
+          "F": {
+            "O": 1,
+            "P": 1,
+            "F": 19
+          }
+        },
+        "positive_raw_facet_span_exact": {
+          "modality": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 64,
+            "nonempty_exact": 64
+          },
+          "actor": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 64,
+            "nonempty_exact": 64
+          },
+          "action": {
+            "count": 64,
+            "exact": 58,
+            "nonempty_count": 64,
+            "nonempty_exact": 58
+          },
+          "object": {
+            "count": 64,
+            "exact": 61,
+            "nonempty_count": 32,
+            "nonempty_exact": 29
+          },
+          "condition": {
+            "count": 64,
+            "exact": 61,
+            "nonempty_count": 32,
+            "nonempty_exact": 29
+          }
+        },
+        "negative_categories": {
+          "modal_deletion": {
+            "count": 16,
+            "learned_refusal": 16,
+            "emitted": 0,
+            "incidental_block": 0
+          },
+          "modal_misspelling": {
+            "count": 16,
+            "learned_refusal": 8,
+            "emitted": 7,
+            "incidental_block": 1
+          },
+          "extra_exception": {
+            "count": 16,
+            "learned_refusal": 16,
+            "emitted": 0,
+            "incidental_block": 0
+          },
+          "second_rule": {
+            "count": 16,
+            "learned_refusal": 16,
+            "emitted": 0,
+            "incidental_block": 0
+          }
+        },
+        "positive_templates": {
+          "condition_actor_possessive_gerund_object_modal": {
+            "count": 8,
+            "class_exact": 8,
+            "proposal_exact": 7,
+            "raw_action_exact": 8
+          },
+          "condition_actor_modal_action_object": {
+            "count": 8,
+            "class_exact": 6,
+            "proposal_exact": 4,
+            "raw_action_exact": 8
+          },
+          "modal_actor_action_object_condition": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 4,
+            "raw_action_exact": 6
+          },
+          "actor_modal_action_object_condition": {
+            "count": 8,
+            "class_exact": 6,
+            "proposal_exact": 4,
+            "raw_action_exact": 8
+          },
+          "condition_modal_actor_action_object": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 5,
+            "raw_action_exact": 8
+          },
+          "gerund_object_agent_modal_condition": {
+            "count": 8,
+            "class_exact": 8,
+            "proposal_exact": 2,
+            "raw_action_exact": 4
+          },
+          "actor_possessive_gerund_object_modal_condition": {
+            "count": 8,
+            "class_exact": 8,
+            "proposal_exact": 5,
+            "raw_action_exact": 8
+          },
+          "actor_condition_modal_action_object": {
+            "count": 8,
+            "class_exact": 7,
+            "proposal_exact": 5,
+            "raw_action_exact": 8
+          }
+        },
+        "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+        "caller_attachment_learned": false,
+        "legal_gold": false,
+        "admission_masks": "all five zero",
+        "raw_support_confusion": {
+          "true_positive": 49,
+          "false_negative": 15,
+          "false_positive": 8,
+          "true_negative": 56
+        },
+        "raw_support_accuracy": 0.8203125,
+        "support_probability_BCE": 0.36601978109919875,
+        "support_BCE_probability_clip": [
+          1e-12,
+          0.999999999999
+        ],
+        "fixed_class_nonaction_whole_ceiling_count": 50,
+        "fixed_class_nonaction_whole_ceiling_ids": [
+          "source:84798e7c1ff75011007f975719c9e3d46193fe07bc7b97e2152cee17a3263dcc",
+          "source:b6f8facf22363d89fee8856cc2b6f25dfda04d57b37582e800c7d7083eee98c1",
+          "source:3c567e24184c0062edd70a3270cdeaa05b3e398c8287d4142d4a77c5c5eee714",
+          "source:1071ce37fa74f414262a14894bc1b0b3181b69ef7e43c1e97fa18ba128785018",
+          "source:5618a2ceb18fcd69477da6930cd96867b403aadbd89af89219f6de8ccfd4e4ca",
+          "source:acb6ee982faa071e43dd76847a902141447b7c96c01eba27de4c5ec7195ef0f4",
+          "source:5d43a56a876e24c4983799599f89637e888910d40aea9ad19766885545e7d1a3",
+          "source:6d61b094f8c443eb63d8596faacb5cd0ad895d899e33dfe2de32b38752f4125e",
+          "source:7c23cc3f2ac43daeb6ceea2f86995313a1b2fc8c1c3e8b86dd0f3cb67d49533a",
+          "source:7ed57d7f259c3d0da91ad89272ed819eafd2a6346bb3735d7ce05f3834e9fad2",
+          "source:a18d2795fd8d3da6c7c71e71f46a870f599c340d7529789412ee2be2eeb106a4",
+          "source:ca8999e34fa4b2a953cb311336198245af58a92dcab5c15295ba0b700dd0223f",
+          "source:b5567e6c47c982963a0f6dfc5446cd92ec14bf7c1f5056ed9241aab8d6be069a",
+          "source:7adec3b872ce28894d4ac5b4c6725739707fb5c22e3ed62066d6e52518567b07",
+          "source:ba6475e8e16a60a5e7af70c15ece2be973eb66811ddb0494aa200a635d81940b",
+          "source:d32837ec6da28014543229ddb9d0d56c4c4d1c010b39b0f7a0cbd72ea979fb4c",
+          "source:13ceda216784a9c4cd61e6bb7d84ce6bce4c40ce987130486b86cbefbee7d320",
+          "source:8ef2ac1c46068176e9eebbb1a02e48aaeff6084a1ba9490bb5009d78b3503b39",
+          "source:46a28d2c6b8e4b5d122f00b7ae2b09a12b567f1c03febe864a0d67c98f5b5e8e",
+          "source:84a03fa6574edb6afea181fa230defcfe125b027b8b03a37d712a4fe80d13869",
+          "source:10163cac0e380d476d34f0fddd064416e2db700876c38feb9440b0e294408203",
+          "source:3330b3e5932e242375609bc38d4d4d3361fa2c39f40c9ff6d59a2c1ff1655afc",
+          "source:50b3ea2740a628b49966866705e3ffe465779c3a7f1da00bfe2c5fdf621a14d5",
+          "source:c63d075cf9fa5324ee0e30aa94fa98ea563beda997a736fdb6015430b446f1d2",
+          "source:d786f3495573808f7936670327e9b8ce2a711eba55a2dc8d3d69984bc85a95cf",
+          "source:ac0539ec7f7eace5c76f615013af94f7fb46cce6287b7791b4b026131d24e739",
+          "source:7d7ad0100faf7db1663d45b576239a6b2f58fbf8fac893f9387e8f3771f7d903",
+          "source:f760b50c48f64f8e60ec14ca8284138b3fe6cbc9a6915db31221c902970d49e9",
+          "source:47420992507efd911fa34fed400c1787785c02103a081b91da8d36d9a13e7a1c",
+          "source:3e5697e8875344f20bb3e4f497900cccde8a5ba03768025f18622282e701878b",
+          "source:48a2e5f450ee4bc45e908ae8d32e2485d4de4b80c9cba00863fab0696b6d5b5c",
+          "source:1182812aaece1b426e0c5839e8d69baf1766f2cd0cd0e9221832ab9214c00759",
+          "source:b91c811e6d913c92a243a9410fd4fcbff2626d8ca3ce9698eb971255444836fe",
+          "source:500d54bc986c70eb42328a4339cc43e32343c6acd4045c759e8ab5b0f2f92a44",
+          "source:d5b80145af2d3c26d1f43f9476545352d6d46975c07baa93ff7e51b7a20226fe",
+          "source:19ccacc46854720b2df93ac21fc7913b63ff666ccd01b1a29d8d009c0184ddda",
+          "source:e076a18a1c836db6e326c752c4d40b2e1627afef5cbb7126248fced21faa3edb",
+          "source:91cfa2bd14fa59e6378fbf0f48b222fff692a9ce6c36656b2a647756806096e2",
+          "source:bb4a6348a320eb1df489230dfe114dc5a8e9cd11426e22b4f5a40d4d2c7d8982",
+          "source:aa1ef9b601ec9346b0ffacc4fabe31e73dee8b2089991697132671ac99b17e67",
+          "source:d5574e1dc725a740a21f536ff044d8fbf525fd3c22edd0417a8c8488807e3752",
+          "source:bba0f4036f60f5f0bef5f56215a957a2986135867e6c12ac5b53daaf2a22b9a4",
+          "source:cccda092bbf8945374298526298a1625e6a8ecf3ea455120e7dd417fa51e7cb6",
+          "source:c54eb1f0de3e4c37974d3822f5ce469cbec1c2e68ce247d055dd256af5931882",
+          "source:0449946de3fd8bd1605e1efaa6b0342e3601310bbf077ad1160481a6f627f4ac",
+          "source:84297c0d3627220cc2bb4c49d2ccdcab4f87506029e06845c1719c73a2209fc2",
+          "source:69f6f2ccdce35ab0e99f11df7a2c912c4e0e992fa8a4422d4a504adb7b1056d5",
+          "source:198de138dffa102afcd6a1eff375a78c3e237e84e01a00412fa1387c066b0048",
+          "source:057473b6fde283531e6962ab1a988ad051a296432c436e7e57731c43dbd70b5b",
+          "source:2a0c864c5836bb18c85e24735eb36b25350747f813e9e47bbc1951694edddf40"
+        ]
+      },
+      "mlp": {
+        "positive_count": 64,
+        "positive_exact_count": 40,
+        "positive_learned_refusal_count": 12,
+        "positive_structural_block_count": 0,
+        "positive_emitted_proposal_count": 52,
+        "negative_count": 64,
+        "negative_learned_refusal_count": 56,
+        "negative_incidental_block_count": 0,
+        "negative_emitted_proposal_count": 8,
+        "positive_raw_modality_exact": 53,
+        "positive_raw_all_spans_exact": 59,
+        "nonempty_condition_count": 32,
+        "nonempty_condition_exact_count": 21,
+        "case_count": 128,
+        "source_parent_groups": 64,
+        "positive_class_CE": 0.5569122876524706,
+        "class_confusion": {
+          "O": {
+            "O": 13,
+            "P": 3,
+            "F": 5
+          },
+          "P": {
+            "O": 1,
+            "P": 21,
+            "F": 0
+          },
+          "F": {
+            "O": 1,
+            "P": 1,
+            "F": 19
+          }
+        },
+        "positive_raw_facet_span_exact": {
+          "modality": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 64,
+            "nonempty_exact": 64
+          },
+          "actor": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 64,
+            "nonempty_exact": 64
+          },
+          "action": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 64,
+            "nonempty_exact": 64
+          },
+          "object": {
+            "count": 64,
+            "exact": 61,
+            "nonempty_count": 32,
+            "nonempty_exact": 29
+          },
+          "condition": {
+            "count": 64,
+            "exact": 61,
+            "nonempty_count": 32,
+            "nonempty_exact": 29
+          }
+        },
+        "negative_categories": {
+          "modal_deletion": {
+            "count": 16,
+            "learned_refusal": 16,
+            "emitted": 0,
+            "incidental_block": 0
+          },
+          "modal_misspelling": {
+            "count": 16,
+            "learned_refusal": 8,
+            "emitted": 8,
+            "incidental_block": 0
+          },
+          "extra_exception": {
+            "count": 16,
+            "learned_refusal": 16,
+            "emitted": 0,
+            "incidental_block": 0
+          },
+          "second_rule": {
+            "count": 16,
+            "learned_refusal": 16,
+            "emitted": 0,
+            "incidental_block": 0
+          }
+        },
+        "positive_templates": {
+          "condition_actor_possessive_gerund_object_modal": {
+            "count": 8,
+            "class_exact": 8,
+            "proposal_exact": 8,
+            "raw_action_exact": 8
+          },
+          "condition_actor_modal_action_object": {
+            "count": 8,
+            "class_exact": 6,
+            "proposal_exact": 4,
+            "raw_action_exact": 8
+          },
+          "modal_actor_action_object_condition": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 5,
+            "raw_action_exact": 8
+          },
+          "actor_modal_action_object_condition": {
+            "count": 8,
+            "class_exact": 6,
+            "proposal_exact": 5,
+            "raw_action_exact": 8
+          },
+          "condition_modal_actor_action_object": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 5,
+            "raw_action_exact": 8
+          },
+          "gerund_object_agent_modal_condition": {
+            "count": 8,
+            "class_exact": 8,
+            "proposal_exact": 2,
+            "raw_action_exact": 8
+          },
+          "actor_possessive_gerund_object_modal_condition": {
+            "count": 8,
+            "class_exact": 8,
+            "proposal_exact": 6,
+            "raw_action_exact": 8
+          },
+          "actor_condition_modal_action_object": {
+            "count": 8,
+            "class_exact": 7,
+            "proposal_exact": 5,
+            "raw_action_exact": 8
+          }
+        },
+        "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+        "caller_attachment_learned": false,
+        "legal_gold": false,
+        "admission_masks": "all five zero",
+        "raw_support_confusion": {
+          "true_positive": 52,
+          "false_negative": 12,
+          "false_positive": 8,
+          "true_negative": 56
+        },
+        "raw_support_accuracy": 0.84375,
+        "support_probability_BCE": 0.3564113484229585,
+        "support_BCE_probability_clip": [
+          1e-12,
+          0.999999999999
+        ],
+        "fixed_class_nonaction_whole_ceiling_count": 50,
+        "fixed_class_nonaction_whole_ceiling_ids": [
+          "source:84798e7c1ff75011007f975719c9e3d46193fe07bc7b97e2152cee17a3263dcc",
+          "source:b6f8facf22363d89fee8856cc2b6f25dfda04d57b37582e800c7d7083eee98c1",
+          "source:3c567e24184c0062edd70a3270cdeaa05b3e398c8287d4142d4a77c5c5eee714",
+          "source:1071ce37fa74f414262a14894bc1b0b3181b69ef7e43c1e97fa18ba128785018",
+          "source:5618a2ceb18fcd69477da6930cd96867b403aadbd89af89219f6de8ccfd4e4ca",
+          "source:acb6ee982faa071e43dd76847a902141447b7c96c01eba27de4c5ec7195ef0f4",
+          "source:5d43a56a876e24c4983799599f89637e888910d40aea9ad19766885545e7d1a3",
+          "source:6d61b094f8c443eb63d8596faacb5cd0ad895d899e33dfe2de32b38752f4125e",
+          "source:7c23cc3f2ac43daeb6ceea2f86995313a1b2fc8c1c3e8b86dd0f3cb67d49533a",
+          "source:7ed57d7f259c3d0da91ad89272ed819eafd2a6346bb3735d7ce05f3834e9fad2",
+          "source:a18d2795fd8d3da6c7c71e71f46a870f599c340d7529789412ee2be2eeb106a4",
+          "source:ca8999e34fa4b2a953cb311336198245af58a92dcab5c15295ba0b700dd0223f",
+          "source:b5567e6c47c982963a0f6dfc5446cd92ec14bf7c1f5056ed9241aab8d6be069a",
+          "source:7adec3b872ce28894d4ac5b4c6725739707fb5c22e3ed62066d6e52518567b07",
+          "source:ba6475e8e16a60a5e7af70c15ece2be973eb66811ddb0494aa200a635d81940b",
+          "source:d32837ec6da28014543229ddb9d0d56c4c4d1c010b39b0f7a0cbd72ea979fb4c",
+          "source:13ceda216784a9c4cd61e6bb7d84ce6bce4c40ce987130486b86cbefbee7d320",
+          "source:8ef2ac1c46068176e9eebbb1a02e48aaeff6084a1ba9490bb5009d78b3503b39",
+          "source:46a28d2c6b8e4b5d122f00b7ae2b09a12b567f1c03febe864a0d67c98f5b5e8e",
+          "source:84a03fa6574edb6afea181fa230defcfe125b027b8b03a37d712a4fe80d13869",
+          "source:10163cac0e380d476d34f0fddd064416e2db700876c38feb9440b0e294408203",
+          "source:3330b3e5932e242375609bc38d4d4d3361fa2c39f40c9ff6d59a2c1ff1655afc",
+          "source:50b3ea2740a628b49966866705e3ffe465779c3a7f1da00bfe2c5fdf621a14d5",
+          "source:c63d075cf9fa5324ee0e30aa94fa98ea563beda997a736fdb6015430b446f1d2",
+          "source:d786f3495573808f7936670327e9b8ce2a711eba55a2dc8d3d69984bc85a95cf",
+          "source:ac0539ec7f7eace5c76f615013af94f7fb46cce6287b7791b4b026131d24e739",
+          "source:7d7ad0100faf7db1663d45b576239a6b2f58fbf8fac893f9387e8f3771f7d903",
+          "source:f760b50c48f64f8e60ec14ca8284138b3fe6cbc9a6915db31221c902970d49e9",
+          "source:47420992507efd911fa34fed400c1787785c02103a081b91da8d36d9a13e7a1c",
+          "source:3e5697e8875344f20bb3e4f497900cccde8a5ba03768025f18622282e701878b",
+          "source:48a2e5f450ee4bc45e908ae8d32e2485d4de4b80c9cba00863fab0696b6d5b5c",
+          "source:1182812aaece1b426e0c5839e8d69baf1766f2cd0cd0e9221832ab9214c00759",
+          "source:b91c811e6d913c92a243a9410fd4fcbff2626d8ca3ce9698eb971255444836fe",
+          "source:500d54bc986c70eb42328a4339cc43e32343c6acd4045c759e8ab5b0f2f92a44",
+          "source:d5b80145af2d3c26d1f43f9476545352d6d46975c07baa93ff7e51b7a20226fe",
+          "source:19ccacc46854720b2df93ac21fc7913b63ff666ccd01b1a29d8d009c0184ddda",
+          "source:e076a18a1c836db6e326c752c4d40b2e1627afef5cbb7126248fced21faa3edb",
+          "source:91cfa2bd14fa59e6378fbf0f48b222fff692a9ce6c36656b2a647756806096e2",
+          "source:bb4a6348a320eb1df489230dfe114dc5a8e9cd11426e22b4f5a40d4d2c7d8982",
+          "source:aa1ef9b601ec9346b0ffacc4fabe31e73dee8b2089991697132671ac99b17e67",
+          "source:d5574e1dc725a740a21f536ff044d8fbf525fd3c22edd0417a8c8488807e3752",
+          "source:bba0f4036f60f5f0bef5f56215a957a2986135867e6c12ac5b53daaf2a22b9a4",
+          "source:cccda092bbf8945374298526298a1625e6a8ecf3ea455120e7dd417fa51e7cb6",
+          "source:c54eb1f0de3e4c37974d3822f5ce469cbec1c2e68ce247d055dd256af5931882",
+          "source:0449946de3fd8bd1605e1efaa6b0342e3601310bbf077ad1160481a6f627f4ac",
+          "source:84297c0d3627220cc2bb4c49d2ccdcab4f87506029e06845c1719c73a2209fc2",
+          "source:69f6f2ccdce35ab0e99f11df7a2c912c4e0e992fa8a4422d4a504adb7b1056d5",
+          "source:198de138dffa102afcd6a1eff375a78c3e237e84e01a00412fa1387c066b0048",
+          "source:057473b6fde283531e6962ab1a988ad051a296432c436e7e57731c43dbd70b5b",
+          "source:2a0c864c5836bb18c85e24735eb36b25350747f813e9e47bbc1951694edddf40"
+        ]
+      }
+    },
+    "earlier_trigger": {
+      "parent": {
+        "positive_count": 64,
+        "positive_exact_count": 30,
+        "positive_learned_refusal_count": 19,
+        "positive_structural_block_count": 2,
+        "positive_emitted_proposal_count": 43,
+        "negative_count": 64,
+        "negative_learned_refusal_count": 53,
+        "negative_incidental_block_count": 5,
+        "negative_emitted_proposal_count": 6,
+        "positive_raw_modality_exact": 47,
+        "positive_raw_all_spans_exact": 49,
+        "nonempty_condition_count": 32,
+        "nonempty_condition_exact_count": 12,
+        "case_count": 128,
+        "source_parent_groups": 64,
+        "positive_class_CE": 0.6538583129617402,
+        "class_confusion": {
+          "O": {
+            "O": 13,
+            "P": 2,
+            "F": 7
+          },
+          "P": {
+            "O": 2,
+            "P": 17,
+            "F": 2
+          },
+          "F": {
+            "O": 2,
+            "P": 2,
+            "F": 17
+          }
+        },
+        "positive_raw_facet_span_exact": {
+          "modality": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 64,
+            "nonempty_exact": 64
+          },
+          "actor": {
+            "count": 64,
+            "exact": 61,
+            "nonempty_count": 64,
+            "nonempty_exact": 61
+          },
+          "action": {
+            "count": 64,
+            "exact": 54,
+            "nonempty_count": 64,
+            "nonempty_exact": 54
+          },
+          "object": {
+            "count": 64,
+            "exact": 61,
+            "nonempty_count": 32,
+            "nonempty_exact": 29
+          },
+          "condition": {
+            "count": 64,
+            "exact": 63,
+            "nonempty_count": 32,
+            "nonempty_exact": 31
+          }
+        },
+        "negative_categories": {
+          "modal_misspelling": {
+            "count": 16,
+            "learned_refusal": 7,
+            "emitted": 6,
+            "incidental_block": 3
+          },
+          "second_rule": {
+            "count": 16,
+            "learned_refusal": 16,
+            "emitted": 0,
+            "incidental_block": 0
+          },
+          "extra_exception": {
+            "count": 16,
+            "learned_refusal": 16,
+            "emitted": 0,
+            "incidental_block": 0
+          },
+          "modal_deletion": {
+            "count": 16,
+            "learned_refusal": 14,
+            "emitted": 0,
+            "incidental_block": 2
+          }
+        },
+        "positive_templates": {
+          "condition_actor_possessive_gerund_object_modal": {
+            "count": 8,
+            "class_exact": 8,
+            "proposal_exact": 7,
+            "raw_action_exact": 8
+          },
+          "actor_condition_modal_action_object": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 4,
+            "raw_action_exact": 8
+          },
+          "modal_actor_action_object_condition": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 3,
+            "raw_action_exact": 8
+          },
+          "actor_modal_action_object_condition": {
+            "count": 8,
+            "class_exact": 7,
+            "proposal_exact": 4,
+            "raw_action_exact": 7
+          },
+          "gerund_object_agent_modal_condition": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 0,
+            "raw_action_exact": 0
+          },
+          "condition_actor_modal_action_object": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 3,
+            "raw_action_exact": 8
+          },
+          "actor_possessive_gerund_object_modal_condition": {
+            "count": 8,
+            "class_exact": 6,
+            "proposal_exact": 3,
+            "raw_action_exact": 8
+          },
+          "condition_modal_actor_action_object": {
+            "count": 8,
+            "class_exact": 6,
+            "proposal_exact": 6,
+            "raw_action_exact": 7
+          }
+        },
+        "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+        "caller_attachment_learned": false,
+        "legal_gold": false,
+        "admission_masks": "all five zero",
+        "raw_support_confusion": {
+          "true_positive": 45,
+          "false_negative": 19,
+          "false_positive": 11,
+          "true_negative": 53
+        },
+        "raw_support_accuracy": 0.765625,
+        "support_probability_BCE": 0.4146934623023124,
+        "support_BCE_probability_clip": [
+          1e-12,
+          0.999999999999
+        ],
+        "fixed_class_nonaction_whole_ceiling_count": 43,
+        "fixed_class_nonaction_whole_ceiling_ids": [
+          "source:079e1d82d60cddbee3ee1cd3f48a15c0f5c1da3972d43b1224bb9f5d9493c9d0",
+          "source:cc604832fd592ff86d65193425caeba3a9936e64c870dcd74cf156a540929a01",
+          "source:ecd5bbbdcfa03540d8c5ca835b7934e92c5c7caee3522e2349ce15ed2a75bc7e",
+          "source:12000a64577481d03ee20b6d7479d5eda18e3642f177c6c96fd8ef50a71e91f1",
+          "source:02bc12fb281cba9000a0e33d1ce21766435759c1ee79ee29f878fa4714555487",
+          "source:15aacd790ca84fbc9eb78cfa9400dc9a6161fb5092c859b5a06b7a380e6acde8",
+          "source:a37b4d30c0c27f625ce7aa410ab9da00065955ad7ca5215201083795dea25454",
+          "source:9029dff9e68c28a2ebb23d7046acd31a672718fd7a33e682f4a43ce2ec066a07",
+          "source:063dc3e88d3ab754c481a19ef4503111ce5745fb156e53de8c56533b9aabb03a",
+          "source:3279c29c9a2b66cb47e487277d6112a165538aa23a628e3231de1098c959136b",
+          "source:702e7c77fd246319e2c8c1ff8366fe0397a9d4aa7013c2e92f0eae6abb006784",
+          "source:e3afea8969b4b423c82c63dd7de51dbe619c05230b1415dd0b1f1cff246c024f",
+          "source:159f43ea6c039a5c2f71b39020bd63eaa2f7d7b6659b955e0de5f948fa7bc745",
+          "source:e0502c557f460113e4f7c692ba90e21b676d9163bcf3a23437aad5803758d4e2",
+          "source:256c0ac221d0d663d57860c3f24abb1f4e462265d917ad9d4c9e2182cd80333c",
+          "source:82efd2949e5e42c2c40909a75e8d0f4e53073e7698c279be010cb56d22093009",
+          "source:d1b924d37eeb0d1da1a2ddf9325fdc12b682c19b4511a9fa1632dcd9bea724e3",
+          "source:01fa00d885b02e1853adfc21c5b49285589d4d54c7245039fe14e6cc1143b4c8",
+          "source:45525df2e327b8784a9cd220e5df4f4b0b6bc4db05ca3df3c05a0512fdb81256",
+          "source:cd7ae60793a59f235f77c9ab2f8e092b2ff4aac034f416576665b2f92fadbc2f",
+          "source:704271c092441006fb5b29e696daeb1e531407f1f5819e17243b1f2a962ab88c",
+          "source:ee9d347b3b858f495a0ccecf15f3c92b3c00566a8ccd64feaad340be33c0ba7c",
+          "source:ad7e79965482b3739a566246b62de8eb90abc079d69ac3061a1b2187847d5885",
+          "source:4d9c524e3f29ccfce0cc96dcd4d18a917622775cce2646e717991c421ac8092c",
+          "source:a4e3d398545d903359d6b61f6ff020f55153e2cd2312fe5c02ba520d5b3abdf7",
+          "source:8f17104c6b0b9d0656b90f2f78438ccd7fbfe42261c3238c933ac118861644b6",
+          "source:6eb263f29ef90bf7022864c7c7f17651cf5999d4b9ab1076a9e2428ce13f9de8",
+          "source:fb06bd0a0dc326e57b791060ee5d281b458ae1da84d979b824d6487e99d2c39a",
+          "source:7a8cb185050402bca66b9cd3459af7c33571e58fb0a70b1e323ae9ddb34764b0",
+          "source:a52293d5262753c946a40e8f9f189c3f2633097c6e64fb8c877693491316e1ac",
+          "source:7447f8c1ada84aa669844b01da3ec29051f1897c8b457b42ef6a79b30b517aee",
+          "source:9fb647fd5739be9d24e61129d276d152281c17857c2cc4e7817f9ec58fea34ce",
+          "source:8a204a003a2c34733e0d6666e3b750d4f4d504fc9cb7092f0a5713d56a36c535",
+          "source:ea8c11b37548b9457b7df43b769a4b16913b08da366216c884ce28e65660f16a",
+          "source:219a3eb6463f0e01c670d0056b75fc3283a3750c312dfd6986eaa313eae061a6",
+          "source:f57dcfa3b45eac8d61ffc48adee879fa4e6f1b546e54c649c2858fda560368f1",
+          "source:a9a5da75644bf1c559719ee0396f2cbee8911665027b19a81255cd239feb0efd",
+          "source:6d0eae2f49573a949cc35256a18c8eb22b8e029f3b6ba98c627da772d9c5165a",
+          "source:cb536da4e6f4c22b0c90027a1aed964c1229aab76696404aca765827ed3324d1",
+          "source:26ca525d917b0d3aed659a6ad2e62d1c1c7383fcbe0ab039a8370be8fba37ed4",
+          "source:22f05208d3964c94849c34baa887f530d99ea0ba39901ee6d0dc5ff1c9dbc74d",
+          "source:f17a00931dad50c42ee4e4850178b9da5824a15340cb6b22ac7d7af71eb8b253",
+          "source:a88bd8132396500508cd4961eab26c143007aeea0b8115d8005e9d52240b444a"
+        ]
+      },
+      "linear": {
+        "positive_count": 64,
+        "positive_exact_count": 37,
+        "positive_learned_refusal_count": 7,
+        "positive_structural_block_count": 2,
+        "positive_emitted_proposal_count": 55,
+        "negative_count": 64,
+        "negative_learned_refusal_count": 49,
+        "negative_incidental_block_count": 3,
+        "negative_emitted_proposal_count": 12,
+        "positive_raw_modality_exact": 47,
+        "positive_raw_all_spans_exact": 50,
+        "nonempty_condition_count": 32,
+        "nonempty_condition_exact_count": 17,
+        "case_count": 128,
+        "source_parent_groups": 64,
+        "positive_class_CE": 0.6538583129617402,
+        "class_confusion": {
+          "O": {
+            "O": 13,
+            "P": 2,
+            "F": 7
+          },
+          "P": {
+            "O": 2,
+            "P": 17,
+            "F": 2
+          },
+          "F": {
+            "O": 2,
+            "P": 2,
+            "F": 17
+          }
+        },
+        "positive_raw_facet_span_exact": {
+          "modality": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 64,
+            "nonempty_exact": 64
+          },
+          "actor": {
+            "count": 64,
+            "exact": 61,
+            "nonempty_count": 64,
+            "nonempty_exact": 61
+          },
+          "action": {
+            "count": 64,
+            "exact": 55,
+            "nonempty_count": 64,
+            "nonempty_exact": 55
+          },
+          "object": {
+            "count": 64,
+            "exact": 61,
+            "nonempty_count": 32,
+            "nonempty_exact": 29
+          },
+          "condition": {
+            "count": 64,
+            "exact": 63,
+            "nonempty_count": 32,
+            "nonempty_exact": 31
+          }
+        },
+        "negative_categories": {
+          "modal_misspelling": {
+            "count": 16,
+            "learned_refusal": 3,
+            "emitted": 12,
+            "incidental_block": 1
+          },
+          "second_rule": {
+            "count": 16,
+            "learned_refusal": 16,
+            "emitted": 0,
+            "incidental_block": 0
+          },
+          "extra_exception": {
+            "count": 16,
+            "learned_refusal": 16,
+            "emitted": 0,
+            "incidental_block": 0
+          },
+          "modal_deletion": {
+            "count": 16,
+            "learned_refusal": 14,
+            "emitted": 0,
+            "incidental_block": 2
+          }
+        },
+        "positive_templates": {
+          "condition_actor_possessive_gerund_object_modal": {
+            "count": 8,
+            "class_exact": 8,
+            "proposal_exact": 7,
+            "raw_action_exact": 8
+          },
+          "actor_condition_modal_action_object": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 4,
+            "raw_action_exact": 8
+          },
+          "modal_actor_action_object_condition": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 4,
+            "raw_action_exact": 8
+          },
+          "actor_modal_action_object_condition": {
+            "count": 8,
+            "class_exact": 7,
+            "proposal_exact": 7,
+            "raw_action_exact": 8
+          },
+          "gerund_object_agent_modal_condition": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 0,
+            "raw_action_exact": 0
+          },
+          "condition_actor_modal_action_object": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 3,
+            "raw_action_exact": 8
+          },
+          "actor_possessive_gerund_object_modal_condition": {
+            "count": 8,
+            "class_exact": 6,
+            "proposal_exact": 6,
+            "raw_action_exact": 8
+          },
+          "condition_modal_actor_action_object": {
+            "count": 8,
+            "class_exact": 6,
+            "proposal_exact": 6,
+            "raw_action_exact": 7
+          }
+        },
+        "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+        "caller_attachment_learned": false,
+        "legal_gold": false,
+        "admission_masks": "all five zero",
+        "raw_support_confusion": {
+          "true_positive": 57,
+          "false_negative": 7,
+          "false_positive": 15,
+          "true_negative": 49
+        },
+        "raw_support_accuracy": 0.828125,
+        "support_probability_BCE": 0.37831704342597355,
+        "support_BCE_probability_clip": [
+          1e-12,
+          0.999999999999
+        ],
+        "fixed_class_nonaction_whole_ceiling_count": 43,
+        "fixed_class_nonaction_whole_ceiling_ids": [
+          "source:079e1d82d60cddbee3ee1cd3f48a15c0f5c1da3972d43b1224bb9f5d9493c9d0",
+          "source:cc604832fd592ff86d65193425caeba3a9936e64c870dcd74cf156a540929a01",
+          "source:ecd5bbbdcfa03540d8c5ca835b7934e92c5c7caee3522e2349ce15ed2a75bc7e",
+          "source:12000a64577481d03ee20b6d7479d5eda18e3642f177c6c96fd8ef50a71e91f1",
+          "source:02bc12fb281cba9000a0e33d1ce21766435759c1ee79ee29f878fa4714555487",
+          "source:15aacd790ca84fbc9eb78cfa9400dc9a6161fb5092c859b5a06b7a380e6acde8",
+          "source:a37b4d30c0c27f625ce7aa410ab9da00065955ad7ca5215201083795dea25454",
+          "source:9029dff9e68c28a2ebb23d7046acd31a672718fd7a33e682f4a43ce2ec066a07",
+          "source:063dc3e88d3ab754c481a19ef4503111ce5745fb156e53de8c56533b9aabb03a",
+          "source:3279c29c9a2b66cb47e487277d6112a165538aa23a628e3231de1098c959136b",
+          "source:702e7c77fd246319e2c8c1ff8366fe0397a9d4aa7013c2e92f0eae6abb006784",
+          "source:e3afea8969b4b423c82c63dd7de51dbe619c05230b1415dd0b1f1cff246c024f",
+          "source:159f43ea6c039a5c2f71b39020bd63eaa2f7d7b6659b955e0de5f948fa7bc745",
+          "source:e0502c557f460113e4f7c692ba90e21b676d9163bcf3a23437aad5803758d4e2",
+          "source:256c0ac221d0d663d57860c3f24abb1f4e462265d917ad9d4c9e2182cd80333c",
+          "source:82efd2949e5e42c2c40909a75e8d0f4e53073e7698c279be010cb56d22093009",
+          "source:d1b924d37eeb0d1da1a2ddf9325fdc12b682c19b4511a9fa1632dcd9bea724e3",
+          "source:01fa00d885b02e1853adfc21c5b49285589d4d54c7245039fe14e6cc1143b4c8",
+          "source:45525df2e327b8784a9cd220e5df4f4b0b6bc4db05ca3df3c05a0512fdb81256",
+          "source:cd7ae60793a59f235f77c9ab2f8e092b2ff4aac034f416576665b2f92fadbc2f",
+          "source:704271c092441006fb5b29e696daeb1e531407f1f5819e17243b1f2a962ab88c",
+          "source:ee9d347b3b858f495a0ccecf15f3c92b3c00566a8ccd64feaad340be33c0ba7c",
+          "source:ad7e79965482b3739a566246b62de8eb90abc079d69ac3061a1b2187847d5885",
+          "source:4d9c524e3f29ccfce0cc96dcd4d18a917622775cce2646e717991c421ac8092c",
+          "source:a4e3d398545d903359d6b61f6ff020f55153e2cd2312fe5c02ba520d5b3abdf7",
+          "source:8f17104c6b0b9d0656b90f2f78438ccd7fbfe42261c3238c933ac118861644b6",
+          "source:6eb263f29ef90bf7022864c7c7f17651cf5999d4b9ab1076a9e2428ce13f9de8",
+          "source:fb06bd0a0dc326e57b791060ee5d281b458ae1da84d979b824d6487e99d2c39a",
+          "source:7a8cb185050402bca66b9cd3459af7c33571e58fb0a70b1e323ae9ddb34764b0",
+          "source:a52293d5262753c946a40e8f9f189c3f2633097c6e64fb8c877693491316e1ac",
+          "source:7447f8c1ada84aa669844b01da3ec29051f1897c8b457b42ef6a79b30b517aee",
+          "source:9fb647fd5739be9d24e61129d276d152281c17857c2cc4e7817f9ec58fea34ce",
+          "source:8a204a003a2c34733e0d6666e3b750d4f4d504fc9cb7092f0a5713d56a36c535",
+          "source:ea8c11b37548b9457b7df43b769a4b16913b08da366216c884ce28e65660f16a",
+          "source:219a3eb6463f0e01c670d0056b75fc3283a3750c312dfd6986eaa313eae061a6",
+          "source:f57dcfa3b45eac8d61ffc48adee879fa4e6f1b546e54c649c2858fda560368f1",
+          "source:a9a5da75644bf1c559719ee0396f2cbee8911665027b19a81255cd239feb0efd",
+          "source:6d0eae2f49573a949cc35256a18c8eb22b8e029f3b6ba98c627da772d9c5165a",
+          "source:cb536da4e6f4c22b0c90027a1aed964c1229aab76696404aca765827ed3324d1",
+          "source:26ca525d917b0d3aed659a6ad2e62d1c1c7383fcbe0ab039a8370be8fba37ed4",
+          "source:22f05208d3964c94849c34baa887f530d99ea0ba39901ee6d0dc5ff1c9dbc74d",
+          "source:f17a00931dad50c42ee4e4850178b9da5824a15340cb6b22ac7d7af71eb8b253",
+          "source:a88bd8132396500508cd4961eab26c143007aeea0b8115d8005e9d52240b444a"
+        ]
+      },
+      "mlp": {
+        "positive_count": 64,
+        "positive_exact_count": 39,
+        "positive_learned_refusal_count": 7,
+        "positive_structural_block_count": 1,
+        "positive_emitted_proposal_count": 56,
+        "negative_count": 64,
+        "negative_learned_refusal_count": 49,
+        "negative_incidental_block_count": 3,
+        "negative_emitted_proposal_count": 12,
+        "positive_raw_modality_exact": 47,
+        "positive_raw_all_spans_exact": 58,
+        "nonempty_condition_count": 32,
+        "nonempty_condition_exact_count": 19,
+        "case_count": 128,
+        "source_parent_groups": 64,
+        "positive_class_CE": 0.6538583129617402,
+        "class_confusion": {
+          "O": {
+            "O": 13,
+            "P": 2,
+            "F": 7
+          },
+          "P": {
+            "O": 2,
+            "P": 17,
+            "F": 2
+          },
+          "F": {
+            "O": 2,
+            "P": 2,
+            "F": 17
+          }
+        },
+        "positive_raw_facet_span_exact": {
+          "modality": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 64,
+            "nonempty_exact": 64
+          },
+          "actor": {
+            "count": 64,
+            "exact": 61,
+            "nonempty_count": 64,
+            "nonempty_exact": 61
+          },
+          "action": {
+            "count": 64,
+            "exact": 64,
+            "nonempty_count": 64,
+            "nonempty_exact": 64
+          },
+          "object": {
+            "count": 64,
+            "exact": 61,
+            "nonempty_count": 32,
+            "nonempty_exact": 29
+          },
+          "condition": {
+            "count": 64,
+            "exact": 63,
+            "nonempty_count": 32,
+            "nonempty_exact": 31
+          }
+        },
+        "negative_categories": {
+          "modal_misspelling": {
+            "count": 16,
+            "learned_refusal": 3,
+            "emitted": 12,
+            "incidental_block": 1
+          },
+          "second_rule": {
+            "count": 16,
+            "learned_refusal": 16,
+            "emitted": 0,
+            "incidental_block": 0
+          },
+          "extra_exception": {
+            "count": 16,
+            "learned_refusal": 16,
+            "emitted": 0,
+            "incidental_block": 0
+          },
+          "modal_deletion": {
+            "count": 16,
+            "learned_refusal": 14,
+            "emitted": 0,
+            "incidental_block": 2
+          }
+        },
+        "positive_templates": {
+          "condition_actor_possessive_gerund_object_modal": {
+            "count": 8,
+            "class_exact": 8,
+            "proposal_exact": 7,
+            "raw_action_exact": 8
+          },
+          "actor_condition_modal_action_object": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 4,
+            "raw_action_exact": 8
+          },
+          "modal_actor_action_object_condition": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 4,
+            "raw_action_exact": 8
+          },
+          "actor_modal_action_object_condition": {
+            "count": 8,
+            "class_exact": 7,
+            "proposal_exact": 7,
+            "raw_action_exact": 8
+          },
+          "gerund_object_agent_modal_condition": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 2,
+            "raw_action_exact": 8
+          },
+          "condition_actor_modal_action_object": {
+            "count": 8,
+            "class_exact": 5,
+            "proposal_exact": 3,
+            "raw_action_exact": 8
+          },
+          "actor_possessive_gerund_object_modal_condition": {
+            "count": 8,
+            "class_exact": 6,
+            "proposal_exact": 6,
+            "raw_action_exact": 8
+          },
+          "condition_modal_actor_action_object": {
+            "count": 8,
+            "class_exact": 6,
+            "proposal_exact": 6,
+            "raw_action_exact": 8
+          }
+        },
+        "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+        "caller_attachment_learned": false,
+        "legal_gold": false,
+        "admission_masks": "all five zero",
+        "raw_support_confusion": {
+          "true_positive": 57,
+          "false_negative": 7,
+          "false_positive": 15,
+          "true_negative": 49
+        },
+        "raw_support_accuracy": 0.828125,
+        "support_probability_BCE": 0.3717360483659823,
+        "support_BCE_probability_clip": [
+          1e-12,
+          0.999999999999
+        ],
+        "fixed_class_nonaction_whole_ceiling_count": 43,
+        "fixed_class_nonaction_whole_ceiling_ids": [
+          "source:079e1d82d60cddbee3ee1cd3f48a15c0f5c1da3972d43b1224bb9f5d9493c9d0",
+          "source:cc604832fd592ff86d65193425caeba3a9936e64c870dcd74cf156a540929a01",
+          "source:ecd5bbbdcfa03540d8c5ca835b7934e92c5c7caee3522e2349ce15ed2a75bc7e",
+          "source:12000a64577481d03ee20b6d7479d5eda18e3642f177c6c96fd8ef50a71e91f1",
+          "source:02bc12fb281cba9000a0e33d1ce21766435759c1ee79ee29f878fa4714555487",
+          "source:15aacd790ca84fbc9eb78cfa9400dc9a6161fb5092c859b5a06b7a380e6acde8",
+          "source:a37b4d30c0c27f625ce7aa410ab9da00065955ad7ca5215201083795dea25454",
+          "source:9029dff9e68c28a2ebb23d7046acd31a672718fd7a33e682f4a43ce2ec066a07",
+          "source:063dc3e88d3ab754c481a19ef4503111ce5745fb156e53de8c56533b9aabb03a",
+          "source:3279c29c9a2b66cb47e487277d6112a165538aa23a628e3231de1098c959136b",
+          "source:702e7c77fd246319e2c8c1ff8366fe0397a9d4aa7013c2e92f0eae6abb006784",
+          "source:e3afea8969b4b423c82c63dd7de51dbe619c05230b1415dd0b1f1cff246c024f",
+          "source:159f43ea6c039a5c2f71b39020bd63eaa2f7d7b6659b955e0de5f948fa7bc745",
+          "source:e0502c557f460113e4f7c692ba90e21b676d9163bcf3a23437aad5803758d4e2",
+          "source:256c0ac221d0d663d57860c3f24abb1f4e462265d917ad9d4c9e2182cd80333c",
+          "source:82efd2949e5e42c2c40909a75e8d0f4e53073e7698c279be010cb56d22093009",
+          "source:d1b924d37eeb0d1da1a2ddf9325fdc12b682c19b4511a9fa1632dcd9bea724e3",
+          "source:01fa00d885b02e1853adfc21c5b49285589d4d54c7245039fe14e6cc1143b4c8",
+          "source:45525df2e327b8784a9cd220e5df4f4b0b6bc4db05ca3df3c05a0512fdb81256",
+          "source:cd7ae60793a59f235f77c9ab2f8e092b2ff4aac034f416576665b2f92fadbc2f",
+          "source:704271c092441006fb5b29e696daeb1e531407f1f5819e17243b1f2a962ab88c",
+          "source:ee9d347b3b858f495a0ccecf15f3c92b3c00566a8ccd64feaad340be33c0ba7c",
+          "source:ad7e79965482b3739a566246b62de8eb90abc079d69ac3061a1b2187847d5885",
+          "source:4d9c524e3f29ccfce0cc96dcd4d18a917622775cce2646e717991c421ac8092c",
+          "source:a4e3d398545d903359d6b61f6ff020f55153e2cd2312fe5c02ba520d5b3abdf7",
+          "source:8f17104c6b0b9d0656b90f2f78438ccd7fbfe42261c3238c933ac118861644b6",
+          "source:6eb263f29ef90bf7022864c7c7f17651cf5999d4b9ab1076a9e2428ce13f9de8",
+          "source:fb06bd0a0dc326e57b791060ee5d281b458ae1da84d979b824d6487e99d2c39a",
+          "source:7a8cb185050402bca66b9cd3459af7c33571e58fb0a70b1e323ae9ddb34764b0",
+          "source:a52293d5262753c946a40e8f9f189c3f2633097c6e64fb8c877693491316e1ac",
+          "source:7447f8c1ada84aa669844b01da3ec29051f1897c8b457b42ef6a79b30b517aee",
+          "source:9fb647fd5739be9d24e61129d276d152281c17857c2cc4e7817f9ec58fea34ce",
+          "source:8a204a003a2c34733e0d6666e3b750d4f4d504fc9cb7092f0a5713d56a36c535",
+          "source:ea8c11b37548b9457b7df43b769a4b16913b08da366216c884ce28e65660f16a",
+          "source:219a3eb6463f0e01c670d0056b75fc3283a3750c312dfd6986eaa313eae061a6",
+          "source:f57dcfa3b45eac8d61ffc48adee879fa4e6f1b546e54c649c2858fda560368f1",
+          "source:a9a5da75644bf1c559719ee0396f2cbee8911665027b19a81255cd239feb0efd",
+          "source:6d0eae2f49573a949cc35256a18c8eb22b8e029f3b6ba98c627da772d9c5165a",
+          "source:cb536da4e6f4c22b0c90027a1aed964c1229aab76696404aca765827ed3324d1",
+          "source:26ca525d917b0d3aed659a6ad2e62d1c1c7383fcbe0ab039a8370be8fba37ed4",
+          "source:22f05208d3964c94849c34baa887f530d99ea0ba39901ee6d0dc5ff1c9dbc74d",
+          "source:f17a00931dad50c42ee4e4850178b9da5824a15340cb6b22ac7d7af71eb8b253",
+          "source:a88bd8132396500508cd4961eab26c143007aeea0b8115d8005e9d52240b444a"
+        ]
+      }
+    }
+  },
+  "paired_transition_counts": {
+    "fresh_final": {
+      "linear": {
+        "whole_retained": 28,
+        "whole_lost": 0,
+        "whole_gained": 9,
+        "negative_emission_retained": 7,
+        "negative_emission_removed": 0,
+        "negative_emission_new": 4
+      },
+      "mlp": {
+        "whole_retained": 28,
+        "whole_lost": 0,
+        "whole_gained": 11,
+        "negative_emission_retained": 7,
+        "negative_emission_removed": 0,
+        "negative_emission_new": 5
+      }
+    },
+    "earlier_scope": {
+      "linear": {
+        "whole_retained": 29,
+        "whole_lost": 0,
+        "whole_gained": 7,
+        "negative_emission_retained": 4,
+        "negative_emission_removed": 0,
+        "negative_emission_new": 3
+      },
+      "mlp": {
+        "whole_retained": 29,
+        "whole_lost": 0,
+        "whole_gained": 11,
+        "negative_emission_retained": 4,
+        "negative_emission_removed": 0,
+        "negative_emission_new": 4
+      }
+    },
+    "earlier_trigger": {
+      "linear": {
+        "whole_retained": 30,
+        "whole_lost": 0,
+        "whole_gained": 7,
+        "negative_emission_retained": 6,
+        "negative_emission_removed": 0,
+        "negative_emission_new": 6
+      },
+      "mlp": {
+        "whole_retained": 30,
+        "whole_lost": 0,
+        "whole_gained": 9,
+        "negative_emission_retained": 6,
+        "negative_emission_removed": 0,
+        "negative_emission_new": 6
+      }
+    }
+  },
+  "proof_ready": false,
+  "source_semantics_verified": false,
+  "model_defaults_changed": false
+}

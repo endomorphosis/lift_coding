@@ -1,0 +1,3411 @@
+{
+  "schema": "support-action-source-only-panel/v1",
+  "rows": [
+    {
+      "id": "source:c57a33d85cacdd4384f4e7ea8bb3238b6aab023c8c19e265618f360203d9222a",
+      "source_group": "support-action-group:e8bd3f8c3564a8afb56c583f93129817fdc4d7638f92ff65adeff1f655cbc294",
+      "source_sha256": "c57a33d85cacdd4384f4e7ea8bb3238b6aab023c8c19e265618f360203d9222a",
+      "class_logits": [
+        -0.3424427807331085,
+        0.43955081701278687,
+        -0.10972771048545837
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-action-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "P",
+          "spans": {
+            "modality": [
+              46,
+              60
+            ],
+            "actor": [
+              24,
+              45
+            ],
+            "action": [
+              61,
+              67
+            ],
+            "object": null,
+            "condition": [
+              3,
+              18
+            ]
+          },
+          "condition_attachment": "rule"
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "c57a33d85cacdd4384f4e7ea8bb3238b6aab023c8c19e265618f360203d9222a",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "If rivulet freezes, the delphinus electrician is required to polish.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "af9b7a55b76770fd8c0610af0d72bbdfdc6fc84f23658f4db2f5a707f63ee9ce",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-46-60",
+                "facet": "modality",
+                "canonical_symbol": "P",
+                "anchor": {
+                  "origin": "source",
+                  "start": 46,
+                  "end": 60,
+                  "text": "is required to",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-24-45",
+                "facet": "actor",
+                "canonical_symbol": "delphinus electrician",
+                "anchor": {
+                  "origin": "source",
+                  "start": 24,
+                  "end": 45,
+                  "text": "delphinus electrician",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-61-67",
+                "facet": "action",
+                "canonical_symbol": "polish",
+                "anchor": {
+                  "origin": "source",
+                  "start": 61,
+                  "end": 67,
+                  "text": "polish",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-condition-3-18",
+                "facet": "conditions",
+                "canonical_symbol": "rivulet freezes",
+                "anchor": {
+                  "origin": "source",
+                  "start": 3,
+                  "end": 18,
+                  "text": "rivulet freezes",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-46-60",
+                  "actor": "occ-actor-24-45",
+                  "action": "occ-action-61-67",
+                  "object": null
+                },
+                "qualifiers": {
+                  "conditions": {
+                    "op": "leaf",
+                    "occurrence_id": "occ-condition-3-18"
+                  },
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "rule",
+              "rule_id": "rule-0"
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 68,
+                  "text": "If rivulet freezes, the delphinus electrician is required to polish.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "89ae9031bd48a160ae8d663d84d91bf44d6aaa7e7d0c16aee210a2282fde631b"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "af9b7a55b76770fd8c0610af0d72bbdfdc6fc84f23658f4db2f5a707f63ee9ce",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "89ae9031bd48a160ae8d663d84d91bf44d6aaa7e7d0c16aee210a2282fde631b",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "If rivulet freezes, the delphinus electrician is required to polish.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "af9b7a55b76770fd8c0610af0d72bbdfdc6fc84f23658f4db2f5a707f63ee9ce",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-46-60",
+                  "facet": "modality",
+                  "canonical_symbol": "P",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 46,
+                    "end": 60,
+                    "text": "is required to",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-24-45",
+                  "facet": "actor",
+                  "canonical_symbol": "delphinus electrician",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 24,
+                    "end": 45,
+                    "text": "delphinus electrician",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-61-67",
+                  "facet": "action",
+                  "canonical_symbol": "polish",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 61,
+                    "end": 67,
+                    "text": "polish",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-condition-3-18",
+                  "facet": "conditions",
+                  "canonical_symbol": "rivulet freezes",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 3,
+                    "end": 18,
+                    "text": "rivulet freezes",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-46-60",
+                    "actor": "occ-actor-24-45",
+                    "action": "occ-action-61-67",
+                    "object": null
+                  },
+                  "qualifiers": {
+                    "conditions": {
+                      "op": "leaf",
+                      "occurrence_id": "occ-condition-3-18"
+                    },
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 68,
+                    "text": "If rivulet freezes, the delphinus electrician is required to polish.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "89ae9031bd48a160ae8d663d84d91bf44d6aaa7e7d0c16aee210a2282fde631b"
+            },
+            "occurrence_count": 4,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "083da07d1a9adca94ba2b19d7a9595e87bd61eed33f8ea17aa62d273079c55b8"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "P",
+          "presence": {
+            "object": false,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              7,
+              9
+            ],
+            "actor": [
+              5,
+              6
+            ],
+            "action": [
+              10,
+              10
+            ],
+            "object": [
+              9,
+              10
+            ],
+            "condition": [
+              1,
+              2
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          -0.3424427807331085,
+          0.43955081701278687,
+          -0.10972771048545837
+        ],
+        "parent_sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f",
+        "residual_head_kind": "linear",
+        "support_probability": 0.7735292911529541,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:e6a92bdaef1ed963ebd99000bf60326a76656411bd51ac2aaee0ff0ce0738fe2",
+      "source_group": "support-action-group:16803354ff55210179efd751dd069e3b00364db02610295ed8f277af2333e131",
+      "source_sha256": "e6a92bdaef1ed963ebd99000bf60326a76656411bd51ac2aaee0ff0ce0738fe2",
+      "class_logits": [
+        0.2627784013748169,
+        0.6462107300758362,
+        -1.247450828552246
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-action-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "P",
+          "spans": {
+            "modality": [
+              95,
+              107
+            ],
+            "actor": [
+              34,
+              52
+            ],
+            "action": [
+              55,
+              71
+            ],
+            "object": [
+              76,
+              94
+            ],
+            "condition": null
+          },
+          "condition_attachment": null
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "e6a92bdaef1ed963ebd99000bf60326a76656411bd51ac2aaee0ff0ce0738fe2",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "Under the fixture convention, the antares watchmaker's artfully carving the betelgeuse ferrule is permitted.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "3bf8edf08ffbfbdaa7fa45716c79dbfa0b8c074567163717d0b0a13556ec4b67",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-95-107",
+                "facet": "modality",
+                "canonical_symbol": "P",
+                "anchor": {
+                  "origin": "source",
+                  "start": 95,
+                  "end": 107,
+                  "text": "is permitted",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-34-52",
+                "facet": "actor",
+                "canonical_symbol": "antares watchmaker",
+                "anchor": {
+                  "origin": "source",
+                  "start": 34,
+                  "end": 52,
+                  "text": "antares watchmaker",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-55-71",
+                "facet": "action",
+                "canonical_symbol": "artfully carving",
+                "anchor": {
+                  "origin": "source",
+                  "start": 55,
+                  "end": 71,
+                  "text": "artfully carving",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-object-76-94",
+                "facet": "object",
+                "canonical_symbol": "betelgeuse ferrule",
+                "anchor": {
+                  "origin": "source",
+                  "start": 76,
+                  "end": 94,
+                  "text": "betelgeuse ferrule",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-95-107",
+                  "actor": "occ-actor-34-52",
+                  "action": "occ-action-55-71",
+                  "object": "occ-object-76-94"
+                },
+                "qualifiers": {
+                  "conditions": null,
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "rule",
+              "rule_id": "rule-0"
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 108,
+                  "text": "Under the fixture convention, the antares watchmaker's artfully carving the betelgeuse ferrule is permitted.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "67e03a07784f1282d028d9ee2b4c9b9f3a5092c1d08b278c915bec4c5e16b70e"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "3bf8edf08ffbfbdaa7fa45716c79dbfa0b8c074567163717d0b0a13556ec4b67",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "67e03a07784f1282d028d9ee2b4c9b9f3a5092c1d08b278c915bec4c5e16b70e",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "Under the fixture convention, the antares watchmaker's artfully carving the betelgeuse ferrule is permitted.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "3bf8edf08ffbfbdaa7fa45716c79dbfa0b8c074567163717d0b0a13556ec4b67",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-95-107",
+                  "facet": "modality",
+                  "canonical_symbol": "P",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 95,
+                    "end": 107,
+                    "text": "is permitted",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-34-52",
+                  "facet": "actor",
+                  "canonical_symbol": "antares watchmaker",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 34,
+                    "end": 52,
+                    "text": "antares watchmaker",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-55-71",
+                  "facet": "action",
+                  "canonical_symbol": "artfully carving",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 55,
+                    "end": 71,
+                    "text": "artfully carving",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-object-76-94",
+                  "facet": "object",
+                  "canonical_symbol": "betelgeuse ferrule",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 76,
+                    "end": 94,
+                    "text": "betelgeuse ferrule",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-95-107",
+                    "actor": "occ-actor-34-52",
+                    "action": "occ-action-55-71",
+                    "object": "occ-object-76-94"
+                  },
+                  "qualifiers": {
+                    "conditions": null,
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 108,
+                    "text": "Under the fixture convention, the antares watchmaker's artfully carving the betelgeuse ferrule is permitted.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "67e03a07784f1282d028d9ee2b4c9b9f3a5092c1d08b278c915bec4c5e16b70e"
+            },
+            "occurrence_count": 4,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "fa80cf5eb05ee053f9825c2f985b29d59fd9aba1912b65b8f4518ee16341a8c3"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "P",
+          "presence": {
+            "object": true,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              15,
+              16
+            ],
+            "actor": [
+              6,
+              7
+            ],
+            "action": [
+              10,
+              11
+            ],
+            "object": [
+              13,
+              14
+            ],
+            "condition": [
+              2,
+              0
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.2627784013748169,
+          0.6462107300758362,
+          -1.247450828552246
+        ],
+        "parent_sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f",
+        "residual_head_kind": "linear",
+        "support_probability": 0.6631735563278198,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:8ac04749379933aa3d68bee5689e89f05534daf50ac108dde1f92768a6319c5a",
+      "source_group": "support-action-group:22517af907d1cb81a71fbaf392613de888c1961eb01ee4301546c181412e51d6",
+      "source_sha256": "8ac04749379933aa3d68bee5689e89f05534daf50ac108dde1f92768a6319c5a",
+      "class_logits": [
+        0.8916434049606323,
+        -1.7754285335540771,
+        0.510479211807251
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-action-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "O",
+          "spans": {
+            "modality": [
+              95,
+              106
+            ],
+            "actor": [
+              34,
+              52
+            ],
+            "action": [
+              55,
+              71
+            ],
+            "object": [
+              76,
+              94
+            ],
+            "condition": null
+          },
+          "condition_attachment": null
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "8ac04749379933aa3d68bee5689e89f05534daf50ac108dde1f92768a6319c5a",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "Under the fixture convention, the betelgeuse saddler's artfully carving the betelgeuse saddler is required.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "05eb8e62ff50360a835469d5a58a465fb6f6a7d3d16260169e73948252836d7f",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-95-106",
+                "facet": "modality",
+                "canonical_symbol": "O",
+                "anchor": {
+                  "origin": "source",
+                  "start": 95,
+                  "end": 106,
+                  "text": "is required",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-34-52",
+                "facet": "actor",
+                "canonical_symbol": "betelgeuse saddler",
+                "anchor": {
+                  "origin": "source",
+                  "start": 34,
+                  "end": 52,
+                  "text": "betelgeuse saddler",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-55-71",
+                "facet": "action",
+                "canonical_symbol": "artfully carving",
+                "anchor": {
+                  "origin": "source",
+                  "start": 55,
+                  "end": 71,
+                  "text": "artfully carving",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-object-76-94",
+                "facet": "object",
+                "canonical_symbol": "betelgeuse saddler",
+                "anchor": {
+                  "origin": "source",
+                  "start": 76,
+                  "end": 94,
+                  "text": "betelgeuse saddler",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-95-106",
+                  "actor": "occ-actor-34-52",
+                  "action": "occ-action-55-71",
+                  "object": "occ-object-76-94"
+                },
+                "qualifiers": {
+                  "conditions": null,
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "rule",
+              "rule_id": "rule-0"
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 107,
+                  "text": "Under the fixture convention, the betelgeuse saddler's artfully carving the betelgeuse saddler is required.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "3ca3617d5e877423d8a9bbdd59f038e52f62d69561ab12179622fc14f2994df8"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "05eb8e62ff50360a835469d5a58a465fb6f6a7d3d16260169e73948252836d7f",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "3ca3617d5e877423d8a9bbdd59f038e52f62d69561ab12179622fc14f2994df8",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "Under the fixture convention, the betelgeuse saddler's artfully carving the betelgeuse saddler is required.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "05eb8e62ff50360a835469d5a58a465fb6f6a7d3d16260169e73948252836d7f",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-95-106",
+                  "facet": "modality",
+                  "canonical_symbol": "O",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 95,
+                    "end": 106,
+                    "text": "is required",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-34-52",
+                  "facet": "actor",
+                  "canonical_symbol": "betelgeuse saddler",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 34,
+                    "end": 52,
+                    "text": "betelgeuse saddler",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-55-71",
+                  "facet": "action",
+                  "canonical_symbol": "artfully carving",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 55,
+                    "end": 71,
+                    "text": "artfully carving",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-object-76-94",
+                  "facet": "object",
+                  "canonical_symbol": "betelgeuse saddler",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 76,
+                    "end": 94,
+                    "text": "betelgeuse saddler",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-95-106",
+                    "actor": "occ-actor-34-52",
+                    "action": "occ-action-55-71",
+                    "object": "occ-object-76-94"
+                  },
+                  "qualifiers": {
+                    "conditions": null,
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 107,
+                    "text": "Under the fixture convention, the betelgeuse saddler's artfully carving the betelgeuse saddler is required.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "3ca3617d5e877423d8a9bbdd59f038e52f62d69561ab12179622fc14f2994df8"
+            },
+            "occurrence_count": 4,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "4e72f4907cf3031d591802df275054898246d0731cd1bf4170efd299b7566210"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "O",
+          "presence": {
+            "object": true,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              15,
+              16
+            ],
+            "actor": [
+              6,
+              7
+            ],
+            "action": [
+              10,
+              11
+            ],
+            "object": [
+              13,
+              14
+            ],
+            "condition": [
+              2,
+              0
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.8916434049606323,
+          -1.7754285335540771,
+          0.510479211807251
+        ],
+        "parent_sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f",
+        "residual_head_kind": "linear",
+        "support_probability": 0.6795623898506165,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:befb906ae1570ea85b1c715ee507a6e1a89c562656c56019a19af8be84ab00f4",
+      "source_group": "support-action-group:87ecd1ea503bf18c779ac2c4498cd3f9baf53c9b9470c59bc52806811b10cbf6",
+      "source_sha256": "befb906ae1570ea85b1c715ee507a6e1a89c562656c56019a19af8be84ab00f4",
+      "class_logits": [
+        -0.9307542443275452,
+        1.4976115226745605,
+        -0.44216668605804443
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-action-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "P",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              13,
+              15
+            ],
+            "actor": [
+              5,
+              6
+            ],
+            "action": [
+              16,
+              9
+            ],
+            "object": [
+              11,
+              17
+            ],
+            "condition": [
+              1,
+              2
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          -0.9307542443275452,
+          1.4976115226745605,
+          -0.44216668605804443
+        ],
+        "parent_sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f",
+        "residual_head_kind": "linear",
+        "support_probability": 0.05452587455511093,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:b14072f6029ef2b3d7f9be166956c02c3c962af4c55e961f4f095a490fe05f04",
+      "source_group": "support-action-group:2cfd28fde04c0a290949d1966052294e954c4cd554a827ec360e3cb3e8daaa94",
+      "source_sha256": "b14072f6029ef2b3d7f9be166956c02c3c962af4c55e961f4f095a490fe05f04",
+      "class_logits": [
+        0.022982198745012283,
+        1.294851303100586,
+        -1.2384676933288574
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-action-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "P",
+          "presence": {
+            "object": false,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              6,
+              7
+            ],
+            "actor": [
+              10,
+              11
+            ],
+            "action": [
+              15,
+              16
+            ],
+            "object": [
+              14,
+              16
+            ],
+            "condition": [
+              2,
+              3
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.022982198745012283,
+          1.294851303100586,
+          -1.2384676933288574
+        ],
+        "parent_sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f",
+        "residual_head_kind": "linear",
+        "support_probability": 0.11691288650035858,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:557e892c4c42ebc3011a1ca1510396d1ef95c54f6db9e23096b6caf1ca2e1ca9",
+      "source_group": "support-action-group:abf20623376b90a197f1633f97478c9ec9ba2f32f8e420ce54b0abcee474ee04",
+      "source_sha256": "557e892c4c42ebc3011a1ca1510396d1ef95c54f6db9e23096b6caf1ca2e1ca9",
+      "class_logits": [
+        0.26605847477912903,
+        1.379439353942871,
+        -1.70736563205719
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-action-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "P",
+          "spans": {
+            "modality": [
+              23,
+              37
+            ],
+            "actor": [
+              46,
+              67
+            ],
+            "action": [
+              71,
+              77
+            ],
+            "object": null,
+            "condition": [
+              3,
+              18
+            ]
+          },
+          "condition_attachment": "statement"
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "557e892c4c42ebc3011a1ca1510396d1ef95c54f6db9e23096b6caf1ca2e1ca9",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "If vapor condenses, it is permissible for the aldebaran glassblower to polish.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "8b1f828445ec7d32e60825d5ec89d27e9afb5cbe1d0639cd558fe2aedb8e3c14",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-23-37",
+                "facet": "modality",
+                "canonical_symbol": "P",
+                "anchor": {
+                  "origin": "source",
+                  "start": 23,
+                  "end": 37,
+                  "text": "is permissible",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-46-67",
+                "facet": "actor",
+                "canonical_symbol": "aldebaran glassblower",
+                "anchor": {
+                  "origin": "source",
+                  "start": 46,
+                  "end": 67,
+                  "text": "aldebaran glassblower",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-71-77",
+                "facet": "action",
+                "canonical_symbol": "polish",
+                "anchor": {
+                  "origin": "source",
+                  "start": 71,
+                  "end": 77,
+                  "text": "polish",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-condition-3-18",
+                "facet": "conditions",
+                "canonical_symbol": "vapor condenses",
+                "anchor": {
+                  "origin": "source",
+                  "start": 3,
+                  "end": 18,
+                  "text": "vapor condenses",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-23-37",
+                  "actor": "occ-actor-46-67",
+                  "action": "occ-action-71-77",
+                  "object": null
+                },
+                "qualifiers": {
+                  "conditions": null,
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "attach",
+              "body": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "qualifiers": {
+                "conditions": {
+                  "op": "leaf",
+                  "occurrence_id": "occ-condition-3-18"
+                },
+                "exceptions": null,
+                "temporal": null
+              }
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 78,
+                  "text": "If vapor condenses, it is permissible for the aldebaran glassblower to polish.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "5d41be0d0561990c3172fc7de9d10ea7f5e912e057ebc94807c776e6c3a3c1d1"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "8b1f828445ec7d32e60825d5ec89d27e9afb5cbe1d0639cd558fe2aedb8e3c14",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "5d41be0d0561990c3172fc7de9d10ea7f5e912e057ebc94807c776e6c3a3c1d1",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "If vapor condenses, it is permissible for the aldebaran glassblower to polish.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "8b1f828445ec7d32e60825d5ec89d27e9afb5cbe1d0639cd558fe2aedb8e3c14",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-23-37",
+                  "facet": "modality",
+                  "canonical_symbol": "P",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 23,
+                    "end": 37,
+                    "text": "is permissible",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-46-67",
+                  "facet": "actor",
+                  "canonical_symbol": "aldebaran glassblower",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 46,
+                    "end": 67,
+                    "text": "aldebaran glassblower",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-71-77",
+                  "facet": "action",
+                  "canonical_symbol": "polish",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 71,
+                    "end": 77,
+                    "text": "polish",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-condition-3-18",
+                  "facet": "conditions",
+                  "canonical_symbol": "vapor condenses",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 3,
+                    "end": 18,
+                    "text": "vapor condenses",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-23-37",
+                    "actor": "occ-actor-46-67",
+                    "action": "occ-action-71-77",
+                    "object": null
+                  },
+                  "qualifiers": {
+                    "conditions": null,
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "attach",
+                "body": {
+                  "op": "rule",
+                  "rule_id": "rule-0"
+                },
+                "qualifiers": {
+                  "conditions": {
+                    "op": "leaf",
+                    "occurrence_id": "occ-condition-3-18"
+                  },
+                  "exceptions": null,
+                  "temporal": null
+                }
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 78,
+                    "text": "If vapor condenses, it is permissible for the aldebaran glassblower to polish.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "5d41be0d0561990c3172fc7de9d10ea7f5e912e057ebc94807c776e6c3a3c1d1"
+            },
+            "occurrence_count": 4,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "741245aaccd5e024ba8c7770902af7dd51cae1934b814784ae888e5d5105564d"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "P",
+          "presence": {
+            "object": false,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              5,
+              6
+            ],
+            "actor": [
+              9,
+              10
+            ],
+            "action": [
+              12,
+              12
+            ],
+            "object": [
+              9,
+              12
+            ],
+            "condition": [
+              1,
+              2
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.26605847477912903,
+          1.379439353942871,
+          -1.70736563205719
+        ],
+        "parent_sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f",
+        "residual_head_kind": "linear",
+        "support_probability": 0.7877616882324219,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:36e017b6a843f4a1c3de0c960ae8c953c0da89df3662eb857835d226ef42de42",
+      "source_group": "support-action-group:a0524e07719af43706bcdec47181f59074d3ea8f9a4586b5db9c04febeabb1cf",
+      "source_sha256": "36e017b6a843f4a1c3de0c960ae8c953c0da89df3662eb857835d226ef42de42",
+      "class_logits": [
+        0.5435137748718262,
+        -1.1996142864227295,
+        0.5925788283348083
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-action-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "F",
+          "spans": {
+            "modality": [
+              56,
+              67
+            ],
+            "actor": [
+              29,
+              43
+            ],
+            "action": [
+              46,
+              55
+            ],
+            "object": null,
+            "condition": [
+              3,
+              23
+            ]
+          },
+          "condition_attachment": "statement"
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "36e017b6a843f4a1c3de0c960ae8c953c0da89df3662eb857835d226ef42de42",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "If metronome oscillates, the capella tailor's engraving is required.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "37ea484d5872b64210daafc52d13e8de87d0008ca59e5d8c207fa53047607b3e",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-56-67",
+                "facet": "modality",
+                "canonical_symbol": "F",
+                "anchor": {
+                  "origin": "source",
+                  "start": 56,
+                  "end": 67,
+                  "text": "is required",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-29-43",
+                "facet": "actor",
+                "canonical_symbol": "capella tailor",
+                "anchor": {
+                  "origin": "source",
+                  "start": 29,
+                  "end": 43,
+                  "text": "capella tailor",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-46-55",
+                "facet": "action",
+                "canonical_symbol": "engraving",
+                "anchor": {
+                  "origin": "source",
+                  "start": 46,
+                  "end": 55,
+                  "text": "engraving",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-condition-3-23",
+                "facet": "conditions",
+                "canonical_symbol": "metronome oscillates",
+                "anchor": {
+                  "origin": "source",
+                  "start": 3,
+                  "end": 23,
+                  "text": "metronome oscillates",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-56-67",
+                  "actor": "occ-actor-29-43",
+                  "action": "occ-action-46-55",
+                  "object": null
+                },
+                "qualifiers": {
+                  "conditions": null,
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "attach",
+              "body": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "qualifiers": {
+                "conditions": {
+                  "op": "leaf",
+                  "occurrence_id": "occ-condition-3-23"
+                },
+                "exceptions": null,
+                "temporal": null
+              }
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 68,
+                  "text": "If metronome oscillates, the capella tailor's engraving is required.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "0b28a67ad461a3facf0aafc03c7ffb3a99e9524d14a9ea5ca4c1cfbd9c51b2ce"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "37ea484d5872b64210daafc52d13e8de87d0008ca59e5d8c207fa53047607b3e",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "0b28a67ad461a3facf0aafc03c7ffb3a99e9524d14a9ea5ca4c1cfbd9c51b2ce",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "If metronome oscillates, the capella tailor's engraving is required.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "37ea484d5872b64210daafc52d13e8de87d0008ca59e5d8c207fa53047607b3e",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-56-67",
+                  "facet": "modality",
+                  "canonical_symbol": "F",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 56,
+                    "end": 67,
+                    "text": "is required",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-29-43",
+                  "facet": "actor",
+                  "canonical_symbol": "capella tailor",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 29,
+                    "end": 43,
+                    "text": "capella tailor",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-46-55",
+                  "facet": "action",
+                  "canonical_symbol": "engraving",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 46,
+                    "end": 55,
+                    "text": "engraving",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-condition-3-23",
+                  "facet": "conditions",
+                  "canonical_symbol": "metronome oscillates",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 3,
+                    "end": 23,
+                    "text": "metronome oscillates",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-56-67",
+                    "actor": "occ-actor-29-43",
+                    "action": "occ-action-46-55",
+                    "object": null
+                  },
+                  "qualifiers": {
+                    "conditions": null,
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "attach",
+                "body": {
+                  "op": "rule",
+                  "rule_id": "rule-0"
+                },
+                "qualifiers": {
+                  "conditions": {
+                    "op": "leaf",
+                    "occurrence_id": "occ-condition-3-23"
+                  },
+                  "exceptions": null,
+                  "temporal": null
+                }
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 68,
+                    "text": "If metronome oscillates, the capella tailor's engraving is required.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "0b28a67ad461a3facf0aafc03c7ffb3a99e9524d14a9ea5ca4c1cfbd9c51b2ce"
+            },
+            "occurrence_count": 4,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "8bd5e19fb2ce3a44cc696cc212b39bd7cb868340af192a14982a16cac1393883"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": false,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              10,
+              11
+            ],
+            "actor": [
+              5,
+              6
+            ],
+            "action": [
+              9,
+              9
+            ],
+            "object": [
+              1,
+              9
+            ],
+            "condition": [
+              1,
+              2
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.5435137748718262,
+          -1.1996142864227295,
+          0.5925788283348083
+        ],
+        "parent_sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f",
+        "residual_head_kind": "linear",
+        "support_probability": 0.8831040263175964,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:0cce3569e390df0a7dd4d48ec8ef2caddb8a60ce8fb132a47f13a7483686464f",
+      "source_group": "support-action-group:9c20be563bb13ca6d878c89ef4ee691ed68d74e2b04963a3d6761e23b68404cd",
+      "source_sha256": "0cce3569e390df0a7dd4d48ec8ef2caddb8a60ce8fb132a47f13a7483686464f",
+      "class_logits": [
+        0.2367866337299347,
+        1.0261629819869995,
+        -1.042041540145874
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-action-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "P",
+          "presence": {
+            "object": false,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              5,
+              6
+            ],
+            "actor": [
+              9,
+              10
+            ],
+            "action": [
+              12,
+              14
+            ],
+            "object": [
+              1,
+              13
+            ],
+            "condition": [
+              1,
+              2
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.2367866337299347,
+          1.0261629819869995,
+          -1.042041540145874
+        ],
+        "parent_sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f",
+        "residual_head_kind": "linear",
+        "support_probability": 0.0847308561205864,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:f4541d0d6331b346d642b6558e3d19d1892194a8a3bfb2e7155c6f6e87eb5c32",
+      "source_group": "support-action-group:77d179c27e77b2fad22bd3a59c2d3aedfcc2ef16ff1c3a0b65825c3ae9ab3e5c",
+      "source_sha256": "f4541d0d6331b346d642b6558e3d19d1892194a8a3bfb2e7155c6f6e87eb5c32",
+      "class_logits": [
+        0.42088618874549866,
+        2.629530191421509,
+        -2.742241144180298
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-action-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "P",
+          "presence": {
+            "object": false,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              5,
+              5
+            ],
+            "actor": [
+              3,
+              4
+            ],
+            "action": [
+              6,
+              6
+            ],
+            "object": [
+              10,
+              6
+            ],
+            "condition": [
+              10,
+              11
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.42088618874549866,
+          2.629530191421509,
+          -2.742241144180298
+        ],
+        "parent_sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f",
+        "residual_head_kind": "linear",
+        "support_probability": 0.10884272307157516,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:7c1c76772b0dc79a120fd0f49af2bd9200e3096a26c3675082c57051e0fdea47",
+      "source_group": "support-action-group:3bf6da42319b4528fc5b1becce16542a8fbba328c65a674a463367ad3279042d",
+      "source_sha256": "7c1c76772b0dc79a120fd0f49af2bd9200e3096a26c3675082c57051e0fdea47",
+      "class_logits": [
+        0.7918963432312012,
+        -1.4998936653137207,
+        0.3836050033569336
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-action-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "O",
+          "spans": {
+            "modality": [
+              22,
+              34
+            ],
+            "actor": [
+              43,
+              60
+            ],
+            "action": [
+              64,
+              70
+            ],
+            "object": [
+              75,
+              88
+            ],
+            "condition": [
+              3,
+              17
+            ]
+          },
+          "condition_attachment": "rule"
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "7c1c76772b0dc79a120fd0f49af2bd9200e3096a26c3675082c57051e0fdea47",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "If hearth awakens, it is forbidden for the vulpecula jeweler to polish the corvus socket.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "a1f462a05d71d0659e76856f56862d9c8861078d987da0aa45d07366af617d3d",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-22-34",
+                "facet": "modality",
+                "canonical_symbol": "O",
+                "anchor": {
+                  "origin": "source",
+                  "start": 22,
+                  "end": 34,
+                  "text": "is forbidden",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-43-60",
+                "facet": "actor",
+                "canonical_symbol": "vulpecula jeweler",
+                "anchor": {
+                  "origin": "source",
+                  "start": 43,
+                  "end": 60,
+                  "text": "vulpecula jeweler",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-64-70",
+                "facet": "action",
+                "canonical_symbol": "polish",
+                "anchor": {
+                  "origin": "source",
+                  "start": 64,
+                  "end": 70,
+                  "text": "polish",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-object-75-88",
+                "facet": "object",
+                "canonical_symbol": "corvus socket",
+                "anchor": {
+                  "origin": "source",
+                  "start": 75,
+                  "end": 88,
+                  "text": "corvus socket",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-condition-3-17",
+                "facet": "conditions",
+                "canonical_symbol": "hearth awakens",
+                "anchor": {
+                  "origin": "source",
+                  "start": 3,
+                  "end": 17,
+                  "text": "hearth awakens",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-22-34",
+                  "actor": "occ-actor-43-60",
+                  "action": "occ-action-64-70",
+                  "object": "occ-object-75-88"
+                },
+                "qualifiers": {
+                  "conditions": {
+                    "op": "leaf",
+                    "occurrence_id": "occ-condition-3-17"
+                  },
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "rule",
+              "rule_id": "rule-0"
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 89,
+                  "text": "If hearth awakens, it is forbidden for the vulpecula jeweler to polish the corvus socket.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "8e9938d3630d9ff016b7c968190029ad686f8efcfc1f2ddd52844339a58e27ea"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "a1f462a05d71d0659e76856f56862d9c8861078d987da0aa45d07366af617d3d",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "8e9938d3630d9ff016b7c968190029ad686f8efcfc1f2ddd52844339a58e27ea",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "If hearth awakens, it is forbidden for the vulpecula jeweler to polish the corvus socket.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "a1f462a05d71d0659e76856f56862d9c8861078d987da0aa45d07366af617d3d",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-22-34",
+                  "facet": "modality",
+                  "canonical_symbol": "O",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 22,
+                    "end": 34,
+                    "text": "is forbidden",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-43-60",
+                  "facet": "actor",
+                  "canonical_symbol": "vulpecula jeweler",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 43,
+                    "end": 60,
+                    "text": "vulpecula jeweler",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-64-70",
+                  "facet": "action",
+                  "canonical_symbol": "polish",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 64,
+                    "end": 70,
+                    "text": "polish",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-object-75-88",
+                  "facet": "object",
+                  "canonical_symbol": "corvus socket",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 75,
+                    "end": 88,
+                    "text": "corvus socket",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-condition-3-17",
+                  "facet": "conditions",
+                  "canonical_symbol": "hearth awakens",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 3,
+                    "end": 17,
+                    "text": "hearth awakens",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-22-34",
+                    "actor": "occ-actor-43-60",
+                    "action": "occ-action-64-70",
+                    "object": "occ-object-75-88"
+                  },
+                  "qualifiers": {
+                    "conditions": {
+                      "op": "leaf",
+                      "occurrence_id": "occ-condition-3-17"
+                    },
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 89,
+                    "text": "If hearth awakens, it is forbidden for the vulpecula jeweler to polish the corvus socket.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "8e9938d3630d9ff016b7c968190029ad686f8efcfc1f2ddd52844339a58e27ea"
+            },
+            "occurrence_count": 5,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "ffce0a0947de060624ae88a707e6378f4ff35d0797ed7e75b1e0973e672b8470"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "O",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              5,
+              6
+            ],
+            "actor": [
+              9,
+              10
+            ],
+            "action": [
+              12,
+              12
+            ],
+            "object": [
+              14,
+              15
+            ],
+            "condition": [
+              1,
+              2
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.7918963432312012,
+          -1.4998936653137207,
+          0.3836050033569336
+        ],
+        "parent_sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f",
+        "residual_head_kind": "linear",
+        "support_probability": 0.7087332606315613,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:7b068a82fb2a5d3b243c13a08876dd71f856a25b303292c795ba09f5077f771c",
+      "source_group": "support-action-group:f12cb5ad6a2f35fc89b556985bb093b29587f39aaae9c28436b9a27a313e50f0",
+      "source_sha256": "7b068a82fb2a5d3b243c13a08876dd71f856a25b303292c795ba09f5077f771c",
+      "class_logits": [
+        0.976576566696167,
+        -2.9054102897644043,
+        1.7186236381530762
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-action-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              10,
+              11
+            ],
+            "actor": [
+              1,
+              2
+            ],
+            "action": [
+              6,
+              6
+            ],
+            "object": [
+              8,
+              9
+            ],
+            "condition": [
+              8,
+              9
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.976576566696167,
+          -2.9054102897644043,
+          1.7186236381530762
+        ],
+        "parent_sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f",
+        "residual_head_kind": "linear",
+        "support_probability": 0.3973748981952667,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:56053078469b2bfbac7c1d9206015644378f2705d5ab5133400645b0ef1843e6",
+      "source_group": "support-action-group:ec4c1cfe350d59e6f03625d3825bcf01640ee04421afc9afb2469c4e9eae70d0",
+      "source_sha256": "56053078469b2bfbac7c1d9206015644378f2705d5ab5133400645b0ef1843e6",
+      "class_logits": [
+        0.37637823820114136,
+        -0.8958084583282471,
+        0.5221704244613647
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-action-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              14,
+              15
+            ],
+            "actor": [
+              6,
+              7
+            ],
+            "action": [
+              10,
+              10
+            ],
+            "object": [
+              12,
+              13
+            ],
+            "condition": [
+              2,
+              0
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.37637823820114136,
+          -0.8958084583282471,
+          0.5221704244613647
+        ],
+        "parent_sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f",
+        "residual_head_kind": "linear",
+        "support_probability": 0.11235743761062622,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:357c89953f45bd895c4b553cd70aeb0f96078b3eb0ebde80f458cff3ccd1eacb",
+      "source_group": "support-action-group:fc3bc3b79ccc2f15e52417b0bf4e04c860afdb68e5e63e28bd78afbe04bcb97c",
+      "source_sha256": "357c89953f45bd895c4b553cd70aeb0f96078b3eb0ebde80f458cff3ccd1eacb",
+      "class_logits": [
+        0.17591381072998047,
+        2.1275410652160645,
+        -2.1509413719177246
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-action-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "P",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              9,
+              9
+            ],
+            "actor": [
+              7,
+              8
+            ],
+            "action": [
+              10,
+              11
+            ],
+            "object": [
+              13,
+              14
+            ],
+            "condition": [
+              1,
+              2
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.17591381072998047,
+          2.1275410652160645,
+          -2.1509413719177246
+        ],
+        "parent_sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f",
+        "residual_head_kind": "linear",
+        "support_probability": 0.03283406421542168,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:fc7de168b604cd10dd1b6e41382a047fa8d4c58290d30e40bb4e393f66edbd80",
+      "source_group": "support-action-group:a15a1d83983ab6fde16b17b002138ceecdb1e329ad8cd7f6654e31f6b01dd7ee",
+      "source_sha256": "fc7de168b604cd10dd1b6e41382a047fa8d4c58290d30e40bb4e393f66edbd80",
+      "class_logits": [
+        0.1788473278284073,
+        -1.0106667280197144,
+        0.9038037061691284
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-action-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": false,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              7,
+              8
+            ],
+            "actor": [
+              5,
+              6
+            ],
+            "action": [
+              10,
+              10
+            ],
+            "object": [
+              8,
+              10
+            ],
+            "condition": [
+              5,
+              10
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.1788473278284073,
+          -1.0106667280197144,
+          0.9038037061691284
+        ],
+        "parent_sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f",
+        "residual_head_kind": "linear",
+        "support_probability": 0.13990069925785065,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:7ca48597d6aee4b48708e1b44931219f02bff5e0db53f5541e8679108ded2cb8",
+      "source_group": "support-action-group:5fd2998689ef4e5cbb5e6ccdad7a43584f6d9c69aba760f5efc5887f1624802a",
+      "source_sha256": "7ca48597d6aee4b48708e1b44931219f02bff5e0db53f5541e8679108ded2cb8",
+      "class_logits": [
+        -0.878777801990509,
+        1.2078408002853394,
+        -0.2496042251586914
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-action-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "P",
+          "spans": {
+            "modality": [
+              26,
+              44
+            ],
+            "actor": [
+              4,
+              25
+            ],
+            "action": [
+              45,
+              54
+            ],
+            "object": null,
+            "condition": [
+              58,
+              73
+            ]
+          },
+          "condition_attachment": "statement"
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "7ca48597d6aee4b48708e1b44931219f02bff5e0db53f5541e8679108ded2cb8",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "the aldebaran glassblower is rohibitedp from engraving if vapor condenses.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "c3a2675780db34379d1b117331ca536e65fdddcf107dd7bf8ae8d9972266dbee",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-26-44",
+                "facet": "modality",
+                "canonical_symbol": "P",
+                "anchor": {
+                  "origin": "source",
+                  "start": 26,
+                  "end": 44,
+                  "text": "is rohibitedp from",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-4-25",
+                "facet": "actor",
+                "canonical_symbol": "aldebaran glassblower",
+                "anchor": {
+                  "origin": "source",
+                  "start": 4,
+                  "end": 25,
+                  "text": "aldebaran glassblower",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-45-54",
+                "facet": "action",
+                "canonical_symbol": "engraving",
+                "anchor": {
+                  "origin": "source",
+                  "start": 45,
+                  "end": 54,
+                  "text": "engraving",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-condition-58-73",
+                "facet": "conditions",
+                "canonical_symbol": "vapor condenses",
+                "anchor": {
+                  "origin": "source",
+                  "start": 58,
+                  "end": 73,
+                  "text": "vapor condenses",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-26-44",
+                  "actor": "occ-actor-4-25",
+                  "action": "occ-action-45-54",
+                  "object": null
+                },
+                "qualifiers": {
+                  "conditions": null,
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "attach",
+              "body": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "qualifiers": {
+                "conditions": {
+                  "op": "leaf",
+                  "occurrence_id": "occ-condition-58-73"
+                },
+                "exceptions": null,
+                "temporal": null
+              }
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 74,
+                  "text": "the aldebaran glassblower is rohibitedp from engraving if vapor condenses.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "13e0e3fe028c8620a903de2926d20c00e80bba35164e38d0a32e1305182a2283"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "c3a2675780db34379d1b117331ca536e65fdddcf107dd7bf8ae8d9972266dbee",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "13e0e3fe028c8620a903de2926d20c00e80bba35164e38d0a32e1305182a2283",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "the aldebaran glassblower is rohibitedp from engraving if vapor condenses.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "c3a2675780db34379d1b117331ca536e65fdddcf107dd7bf8ae8d9972266dbee",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-26-44",
+                  "facet": "modality",
+                  "canonical_symbol": "P",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 26,
+                    "end": 44,
+                    "text": "is rohibitedp from",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-4-25",
+                  "facet": "actor",
+                  "canonical_symbol": "aldebaran glassblower",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 4,
+                    "end": 25,
+                    "text": "aldebaran glassblower",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-45-54",
+                  "facet": "action",
+                  "canonical_symbol": "engraving",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 45,
+                    "end": 54,
+                    "text": "engraving",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-condition-58-73",
+                  "facet": "conditions",
+                  "canonical_symbol": "vapor condenses",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 58,
+                    "end": 73,
+                    "text": "vapor condenses",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-26-44",
+                    "actor": "occ-actor-4-25",
+                    "action": "occ-action-45-54",
+                    "object": null
+                  },
+                  "qualifiers": {
+                    "conditions": null,
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "attach",
+                "body": {
+                  "op": "rule",
+                  "rule_id": "rule-0"
+                },
+                "qualifiers": {
+                  "conditions": {
+                    "op": "leaf",
+                    "occurrence_id": "occ-condition-58-73"
+                  },
+                  "exceptions": null,
+                  "temporal": null
+                }
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 74,
+                    "text": "the aldebaran glassblower is rohibitedp from engraving if vapor condenses.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "13e0e3fe028c8620a903de2926d20c00e80bba35164e38d0a32e1305182a2283"
+            },
+            "occurrence_count": 4,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "02cc501239a62827b1b00057c2f7785c461dfe0cc6e81a990c1293334a927690"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "P",
+          "presence": {
+            "object": false,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              3,
+              5
+            ],
+            "actor": [
+              1,
+              2
+            ],
+            "action": [
+              6,
+              6
+            ],
+            "object": [
+              5,
+              6
+            ],
+            "condition": [
+              8,
+              9
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          -0.878777801990509,
+          1.2078408002853394,
+          -0.2496042251586914
+        ],
+        "parent_sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f",
+        "residual_head_kind": "linear",
+        "support_probability": 0.7853377461433411,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:11eb06e52736db97e296b7055c2eb21c70ba13beaa3b2f0a378aaf2c06519b2d",
+      "source_group": "support-action-group:52e8c39a9a0715333b82e1d8ba24493733ffe81f7e44f95061b85dcf6852427f",
+      "source_sha256": "11eb06e52736db97e296b7055c2eb21c70ba13beaa3b2f0a378aaf2c06519b2d",
+      "class_logits": [
+        0.5311115384101868,
+        2.894841194152832,
+        -3.245445489883423
+      ],
+      "prediction": {
+        "schema": "legal-scope-support-action-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "P",
+          "presence": {
+            "object": false,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              3,
+              3
+            ],
+            "actor": [
+              1,
+              2
+            ],
+            "action": [
+              4,
+              4
+            ],
+            "object": [
+              6,
+              7
+            ],
+            "condition": [
+              6,
+              7
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.5311115384101868,
+          2.894841194152832,
+          -3.245445489883423
+        ],
+        "parent_sha256": "6e4be3abad5eafa47cc8a496bea561a8b0ea4ccb54db27273278e82e88facd4f",
+        "residual_head_kind": "linear",
+        "support_probability": 0.33602258563041687,
+        "support_threshold": 0.5
+      }
+    }
+  ],
+  "references_accessed_by_inference": false
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "support-action-source-merged-preservation/v1",
+  "passed": true,
+  "base": "6791fc5d6bb58f4c074063bb01bd56071ab23c2d",
+  "merge_parent": "6791fc5d6bb58f4c074063bb01bd56071ab23c2d",
+  "contributed_merge": "d93f1b79fd6f8e413010bbca506473a8f67dbe1e",
+  "live_main": "d93f1b79fd6f8e413010bbca506473a8f67dbe1e",
+  "contributed_merge_is_live_ancestor": true,
+  "changed_paths_from_base": [
+    "docs/autoencoders/progress_integration.md",
+    "docs/implementation/legal_scope_support_action_pilot_20261007.md",
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_action.py",
+    "tests/unit/logic/test_legal_scope_support_action.py"
+  ],
+  "nonowned_tree_entries_preserved_at_merge": true,
+  "all_four_contributions_exact_on_live_main": true,
+  "paths": {
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_action.py": {
+      "bytes": 25504,
+      "sha256": "ce7abc45032bee6ac950720d79c8f329c03a68961140c0f2ad9ade8ea923988c"
+    },
+    "tests/unit/logic/test_legal_scope_support_action.py": {
+      "bytes": 18593,
+      "sha256": "f55f8f32871000c1b87e6eae5459ee38d30a7592f96d7da8193b6186eadf8c62"
+    },
+    "docs/implementation/legal_scope_support_action_pilot_20261007.md": {
+      "bytes": 11886,
+      "sha256": "564a1fe0c87981c563f2d00992935d151d594121150e00b421a8b8f466410c65"
+    },
+    "docs/autoencoders/progress_integration.md": {
+      "bytes": 19809,
+      "sha256": "c18e534abd63c6bbad84507ae9621b879d5682ae8338f7abbf0364720a5934d7"
+    }
+  }
+}

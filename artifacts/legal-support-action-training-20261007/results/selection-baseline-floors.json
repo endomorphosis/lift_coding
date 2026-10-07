@@ -1,0 +1,221 @@
+{
+  "summary": {
+    "positive_count": 64,
+    "positive_exact_count": 32,
+    "positive_learned_refusal_count": 21,
+    "positive_structural_block_count": 3,
+    "positive_emitted_proposal_count": 40,
+    "negative_count": 64,
+    "negative_learned_refusal_count": 55,
+    "negative_incidental_block_count": 2,
+    "negative_emitted_proposal_count": 7,
+    "positive_raw_modality_exact": 50,
+    "positive_raw_all_spans_exact": 53,
+    "nonempty_condition_count": 32,
+    "nonempty_condition_exact_count": 13,
+    "case_count": 128,
+    "source_parent_groups": 64,
+    "positive_class_CE": 0.608147540665739,
+    "class_confusion": {
+      "O": {
+        "O": 14,
+        "P": 4,
+        "F": 4
+      },
+      "P": {
+        "O": 1,
+        "P": 18,
+        "F": 2
+      },
+      "F": {
+        "O": 1,
+        "P": 2,
+        "F": 18
+      }
+    },
+    "positive_raw_facet_span_exact": {
+      "modality": {
+        "count": 64,
+        "exact": 63,
+        "nonempty_count": 64,
+        "nonempty_exact": 63
+      },
+      "actor": {
+        "count": 64,
+        "exact": 64,
+        "nonempty_count": 64,
+        "nonempty_exact": 64
+      },
+      "action": {
+        "count": 64,
+        "exact": 56,
+        "nonempty_count": 64,
+        "nonempty_exact": 56
+      },
+      "object": {
+        "count": 64,
+        "exact": 63,
+        "nonempty_count": 32,
+        "nonempty_exact": 31
+      },
+      "condition": {
+        "count": 64,
+        "exact": 61,
+        "nonempty_count": 32,
+        "nonempty_exact": 29
+      }
+    },
+    "negative_categories": {
+      "modal_misspelling": {
+        "count": 16,
+        "learned_refusal": 7,
+        "emitted": 7,
+        "incidental_block": 2
+      },
+      "second_rule": {
+        "count": 16,
+        "learned_refusal": 16,
+        "emitted": 0,
+        "incidental_block": 0
+      },
+      "extra_exception": {
+        "count": 16,
+        "learned_refusal": 16,
+        "emitted": 0,
+        "incidental_block": 0
+      },
+      "modal_deletion": {
+        "count": 16,
+        "learned_refusal": 16,
+        "emitted": 0,
+        "incidental_block": 0
+      }
+    },
+    "positive_templates": {
+      "condition_actor_possessive_gerund_object_modal": {
+        "count": 8,
+        "class_exact": 8,
+        "proposal_exact": 7,
+        "raw_action_exact": 7
+      },
+      "actor_condition_modal_action_object": {
+        "count": 8,
+        "class_exact": 6,
+        "proposal_exact": 5,
+        "raw_action_exact": 7
+      },
+      "modal_actor_action_object_condition": {
+        "count": 8,
+        "class_exact": 5,
+        "proposal_exact": 2,
+        "raw_action_exact": 7
+      },
+      "actor_modal_action_object_condition": {
+        "count": 8,
+        "class_exact": 6,
+        "proposal_exact": 2,
+        "raw_action_exact": 6
+      },
+      "gerund_object_agent_modal_condition": {
+        "count": 8,
+        "class_exact": 8,
+        "proposal_exact": 5,
+        "raw_action_exact": 8
+      },
+      "condition_actor_modal_action_object": {
+        "count": 8,
+        "class_exact": 3,
+        "proposal_exact": 2,
+        "raw_action_exact": 7
+      },
+      "actor_possessive_gerund_object_modal_condition": {
+        "count": 8,
+        "class_exact": 8,
+        "proposal_exact": 4,
+        "raw_action_exact": 7
+      },
+      "condition_modal_actor_action_object": {
+        "count": 8,
+        "class_exact": 6,
+        "proposal_exact": 5,
+        "raw_action_exact": 7
+      }
+    },
+    "raw_head_denominator": "all supported rows, including refusals and structural blocks",
+    "caller_attachment_learned": false,
+    "legal_gold": false,
+    "admission_masks": "all five zero",
+    "raw_support_confusion": {
+      "true_positive": 43,
+      "false_negative": 21,
+      "false_positive": 9,
+      "true_negative": 55
+    },
+    "raw_support_accuracy": 0.765625,
+    "support_probability_BCE": 0.45600148851679867,
+    "support_BCE_probability_clip": [
+      1e-12,
+      0.999999999999
+    ],
+    "fixed_class_nonaction_whole_ceiling_count": 47,
+    "fixed_class_nonaction_whole_ceiling_ids": [
+      "source:0bbe701ac9a5fbceef8b7ed7f9c55981503e42eaacb6c1c3d33badb9607d0601",
+      "source:0ad1723cc82d5e50914522c3ffd814da8aeecad8c97f40fc9f95b7b386530712",
+      "source:86f8867377549fc98058ba3abb4154b1fd97891fa553a34bf8277d0c098e4617",
+      "source:32ecde8cdfd4d0fd0ee3e809fbee64caf1702926ba40473fdff9e10d975b0236",
+      "source:2d80204f86b976e7f65cc7bd2ba5c9780f2ef03dab416956b811be5b37d2e51c",
+      "source:f6aa715bd3ba9b7737c0fa0f7570e9974aae12b7766acbc57e1bf7537a806081",
+      "source:7e7750e08375951b6a7d59a4642dd220b9210dbc7e46825d019f91a0f17cf1e8",
+      "source:779c6a8f4dcdfbf2301b7e26c77b5744721a69c4df63d198c6df575a1fde749a",
+      "source:a2deb9718c0e41a573cc268b453d77f685c48dd5ac9c090a7330d6da6881caed",
+      "source:6a5f12e61eb08b655296916fe34dd4b9443a17db8e03996e3b0e50550b45afb9",
+      "source:2d2cbb1207bde9d0dc4c924ec2954a43b7ccfd9742a55c0d878f84324ce363b2",
+      "source:994a37e3620f38cb5fdf68721d9e7ca57a2bbc498424261ef16678b8287a4079",
+      "source:7a3e8df322399f395aa031f3627eced1a5686aaf3abd8047b5609c28e2fc2f7f",
+      "source:659e1a91f3cef879324243628210b714c8af8b30129eb0ac6483aa1347af6c3f",
+      "source:1a59872f27aae3aeef4fec6e89f05d0a9b12c84bf8a0f87522b77ff956347930",
+      "source:a61f3597cecebef6c823188ebe48df1a5273f5a9eaf2fecce8db1f2fce4e2303",
+      "source:95b58de28e626daedf85ffbb57374f3374316a85e9b503ff527091c9fc7c3623",
+      "source:8660f061ac642cff334c9fd190c3f9806cdaf2fc73ea27aab624f330ddb95f8d",
+      "source:b22cabe1173c90d457cce0e365789c232aaf150947d4ed0b9c98e2c5142705ed",
+      "source:598a7ed212471e3269e7e16f21c1dc9001b803fe979e14fdefee5374e6371ea1",
+      "source:0a6e3fcf6110457de8af3cac5a0d4289755234736d7a67e75f4f20f00d716a20",
+      "source:8fdea3dac41e2d50a9f0478083375ebc29a0b72e38480485d1fc0d1b1cf3b4be",
+      "source:9c13775ed701cba5aea7dce86bff74a4e633593454aab05371033633a600c012",
+      "source:1e88cf6d927543791b4c209ff63a12379c683bd8ffcc3fa26d3285f0d4022271",
+      "source:1a2fd60d13d480760f5c1acd5980edb3e0b864cebf2638e13e8d8f4f1ab85877",
+      "source:50cedaa832deafd44f54cdc63ae72ad9dd261220f0786829ed350854c17a4819",
+      "source:2d9d96e4ce64addbdce26a8abcc9ccc08d8917628b989d37c63e7407468a7627",
+      "source:df67387582bdafb2a2f2a30a8301453da2bc8c7ab7d3d51154a112481261284b",
+      "source:fad07ad6200a936f6e39b28f64eec00918a76c81a1d1fe6495f4f00f13fd498c",
+      "source:209834e05be9d5899be793d39590403122d25d9cef6fb7496fd6aa1e88c331f1",
+      "source:06ef110a1ee864e7b7b4eb9e24dbd1a45d030e877ecdf2029c1b378ec2f40688",
+      "source:f51540b71e138765daf2054732128e673bbf78ff249fcf9989f4abd9dd8c4949",
+      "source:7836a3bb0e5098cc854465c5e0de05dcd3f9b51646045a69f4238306b094fd8d",
+      "source:063e6472e06d2b800afbb0753c87b1db3f9d29c9b1d84cb00d0ef6a24511da71",
+      "source:be0e1661ac447897dcc24b82087ed3190c6e0e278125c8dc4774e7d38eff6ed1",
+      "source:6bece657403979f973a5637d7bf2492e394613f110d4a8121d5c2c98b8661e93",
+      "source:ed99abeb0fcbab43dd2a9c765a76265b2a6054415fdffa316850ac02b525f3b7",
+      "source:43b318f71dbad99118fc6a4503541324a5a8683543c712339dcc78213a9cb8f6",
+      "source:6fc72daedafb1c8442d0e6e6a2f627fc78230003f7e92716263f9bae908a97d9",
+      "source:2acce98532f36138618b3c7c3335409d84212b0055c8ba2d5fd6683820e65d11",
+      "source:153a464056ee6d8ce8be08d70eeb9a33030878a49c98f5fa09d7bed0b050d2e5",
+      "source:fa445a6d1a0d6688805c0d3612ba5ae4b35f1b04124f70597ae097d36e9d3e05",
+      "source:2f5b6bf72f9a199ce2cb458414fc811d5964e2faefd652db667d33e03dceb214",
+      "source:3bf6db726a80ab2c3233a1fe0a644b15da9b5dba3492bd27fe84941b49fc1854",
+      "source:00d580b73c23c0ffce188aeafb1801254a16fc1264ae92cce0838c45833be415",
+      "source:750820601295e657e9988560d1ba452173a4036f88de0d6445f0b1a62ee73f0f",
+      "source:5899e27b55bfd65a173a8da8c15a05ebed04f5b98313fe676547314831dc1df8"
+    ]
+  },
+  "eligibility_rule": [
+    "positive_emitted_proposal_count >= measured step0 baseline",
+    "positive_learned_refusal_count <= measured step0 baseline",
+    "positive_exact_count >= measured step0 baseline"
+  ],
+  "selection_policy": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/selection_policy.py",
+    "bytes": 2519,
+    "sha256": "1636486bd88788ff2e2d6876f1b396cf483a0aeecca43f51c7b9b2f46f7612ef"
+  }
+}
