@@ -53,3 +53,6 @@ The original 443,904-row three-width float32 floor is 2,059,714,560 bytes. For t
 This contribution completes the first intake implementation and a bounded recovery demonstration. It reports no all-source census completion, semantic reconstruction improvement, training completion or formal proof completion.
 
 [Compact implementation and diagnostic evidence](../../artifacts/uscode-all-span-intake-20261007/index.json).
+
+
+The [October 11 identity-recovery implementation and pending continuation](73-uscode-identity-recovery-2026-10-11.md) preserves the completed parent scan and all 378,935 unresolved archive IDs. Its memory fix passes archive-sized synthetic controls, while the genuine retry was refused before any child by fresh storage admission. Recorded legal-ID/hash matches remain diagnostic evidence, with no measured alternate full-ID result, alias promotion or new reconstruction score. The pending evidence and plan preserve original source/model assets, exact task/profile separation and the remaining source/context, semantic reconstruction and proof gates.
