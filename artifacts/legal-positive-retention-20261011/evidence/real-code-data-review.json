@@ -1,0 +1,271 @@
+{
+  "schema": "legal-real-code-data-progress-review/v1",
+  "reviewed_at_utc": "2026-10-11",
+  "datasets_source_commit": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a",
+  "scope": "Read-only current-main source and compact receipt audit; no corpus job, models, tests, fitting, Hub writes, index/worktree mutation, or canonical-root modification.",
+  "milestones": {
+    "M0": {
+      "status": "implemented_bounded_demonstration_incomplete_inventory",
+      "source_sections": 128,
+      "source_total_physical_records": 60077,
+      "source_occurrences": 18342,
+      "exact_archived_joins": 2165,
+      "unlisted_regenerated_occurrences": 16177,
+      "archived_span_ids": 443904,
+      "archived_pending_source_scan": 441739,
+      "complete_source_scan": false,
+      "token_counts_measured": false,
+      "evidence": "docs/autoencoders/evidence/uscode-span-intake-20261007/bounded-census-report.json",
+      "remaining": [
+        "Finish source/export reconciliation under measured resource bounds or declare an archived-target scope.",
+        "Validate paired-v1 table bodies and exact source identities; the earlier 611-manifest closure is descriptor-only.",
+        "Freeze leakage-equivalence components and prior-exposure ledger before fitting; the census itself does not create training/evaluation splits."
+      ],
+      "identity_notes": [
+        "Historical 64-valid-document ordinal groups are independent of runtime batch size.",
+        "Unlisted source occurrence does not establish missing work, new text, duplicate, or identity drift.",
+        "Conditional 3,842,642 inventory estimate is not an authenticated denominator."
+      ]
+    },
+    "M1": {
+      "status": "paired_transport_and_nontruncating_new_writes_integrated",
+      "paired_schemas": [
+        "v1",
+        "v2"
+      ],
+      "source_lossless": true,
+      "ready_transaction_before_delivery": true,
+      "historical_records_rewritten": false,
+      "field_utf8_byte_limit": 1048576,
+      "batch_text_byte_limit": 67108864,
+      "batch_row_limit": 4096,
+      "checks_are_archived_not_rerun": {
+        "validation/integrated-controls.xml": {
+          "tests": 335,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "validation/scheduler-integration-controls.xml": {
+          "tests": 61,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "evidence_index_all_pins_match": true,
+      "remaining_scope": [
+        "Durable feed acknowledgement proves downstream retention only.",
+        "This does not finish the full census, arbitrary native-cache reader, corpus scheduling, or semantic/proof admission."
+      ]
+    }
+  },
+  "dataset_authority": [
+    {
+      "repository": "justicedao/uscode-autoformal-span-cache",
+      "observed_main_revision": "765176c6db79ba65c1697c21dead43666350b730",
+      "file_count": 6016,
+      "url": "https://huggingface.co/datasets/justicedao/uscode-autoformal-span-cache/blob/765176c6db79ba65c1697c21dead43666350b730/README.md",
+      "role": "source/diagnostic observations and repair evidence",
+      "independently_reviewed_semantic_gold_established": false,
+      "notes": [
+        "The train split is a storage label.",
+        "Existing paired data uses legacy mock:stable-sha256/8 diagnostic vectors and source guided/direct compiler formulas, with no learned legacy formula decoder.",
+        "Paired-v2 support exists in current implementation; no paired-v2 artifacts existed in this pinned snapshot.",
+        "The fixed 56-observation formula audit retains 372 repeated formula occurrences, 328 fallback occurrences, 11 unavailable source documents, and no semantic-gold/Lake admission."
+      ]
+    },
+    {
+      "repository": "justicedao/open-us-law-span-cache",
+      "observed_main_revision": "3bdc4d526ec7d83f870c9f481c9c80f43c20adf7",
+      "url": "https://huggingface.co/datasets/justicedao/open-us-law-span-cache/tree/3bdc4d526ec7d83f870c9f481c9c80f43c20adf7",
+      "only_data_file": "autoformal/statutes/state-span-manifest.parquet",
+      "bytes": 3113,
+      "sha256": "f3a8046d621a3c173d1a01cb129b90d1355733c149229a1f9aa8d62dd991f6d2",
+      "manifest_rows": 51,
+      "columns": [
+        "admitted",
+        "documents",
+        "formalized",
+        "jurisdiction",
+        "pending",
+        "sealed",
+        "spans"
+      ],
+      "all_manifest_rows": {
+        "admitted": false,
+        "formalized": false,
+        "sealed": 0,
+        "pending_equals_spans": true
+      },
+      "has_readme_or_card": false,
+      "role": "jurisdiction inventory reference",
+      "contains_source_text_formulas_embeddings_reviews": false,
+      "independently_reviewed_semantic_gold_established": false,
+      "observed_by": "Bounded Hub API metadata plus 3,113-byte metadata manifest read in memory and exact LFS SHA256 check; no corpus downloaded."
+    }
+  ],
+  "target_classification": [
+    {
+      "slice": "Real archived US Code spans/paired/modal/compiler audit",
+      "classification": "source-bound diagnostic/compiler proposal; source text may be genuine, meaning targets remain unreviewed",
+      "eligible_as_semantic_gold": false
+    },
+    {
+      "slice": "Retained contextual/native 48 paragraphs, 180 clauses, 216 vectors and wording continuations",
+      "classification": "authored constructed/exposed development and retention controls; useful task-specific regression",
+      "eligible_as_new_statutory_confirmation": false
+    },
+    {
+      "slice": "Learned 8D/384D teacher formula outputs",
+      "classification": "checkpoint- and conditioning-bound learned observations; not independent legal truth",
+      "eligible_as_semantic_gold_by_agreement": false
+    },
+    {
+      "slice": "legal_review_admission external submissions",
+      "classification": "structural intake only; two declared reviewer roles plus adjudication/context hash bindings do not authenticate identity, independence, source authority, or semantics",
+      "created_gold_targets": 0,
+      "training_qualified": false
+    },
+    {
+      "slice": "ir384-reviewed-source-pairs/v1 importer",
+      "classification": "accepts exact declared source/native target review bindings and group joins; does not authenticate review or certify legal gold",
+      "semantic_gold_certified_by_import": false
+    }
+  ],
+  "genuine_source_semantic_review_finding": {
+    "established_reviewed_real_statute_gold_in_audited_evidence": 0,
+    "scope_limitation": "No global claim that no human legal reviews exist elsewhere; current files/cards/receipts inspected do not establish such a slice. Code or result peer review is not review of each law-to-IR meaning."
+  },
+  "native_and_family_boundaries": {
+    "existing_cached_native_contract": "normative-retained-source-cache-legal-ir/v1",
+    "existing_scope": {
+      "paragraphs": 48,
+      "clauses": 180,
+      "vectors": 216,
+      "dimensions": [
+        384,
+        768
+      ],
+      "arbitrary_new_source_inputs_supported": false,
+      "receipt_count_hardcoded": 216,
+      "historical_batch_size_hardcoded": 4
+    },
+    "target_representation": "Existing lexical32/eight-clause prototypes cannot express arbitrary statutory actors/actions/qualifiers/documents merely through wider native embeddings.",
+    "eight_family_floor": "Schema capability floor is FOL, deontic FOL, temporal FOL, TDFOL, CEC, DCEC, frame logic and propositional; per-span applicability and actual operator semantics remain separate.",
+    "syntax_gate": "family_qualification verifies exact exported syntax, not source meaning, equivalence or proof; all eight syntax checks can pass with coverage false.",
+    "source_family_bridge": "Explicit caller interpretation only: ground null-context deontic/TDFOL subset, DCEC restricted to qualifier-free ground O/P/F. Temporal/calendar context is refused instead of silently opaque.",
+    "lake": "Actual pinned source-regenerated lake build <Lib> checks declared structures/interpretations at their named profile; current explicit legal Lake owners retain source_semantics_verified=false and proof_authority=false. A build does not adjudicate statute meaning.",
+    "declarations_are_not_live_admission": "Saved JSON/native family receipts and declared reviews are insufficient to reopen live qualification. Feature fitting with explicit gaps does not confer legal admission."
+  },
+  "recommended_bounded_next_gap": {
+    "priority": "New versioned arbitrary source-only native-cache preparation adapter plus an eight-source real-statute eligibility/review pilot inventory.",
+    "reason": "M1 feed/intake no longer blocks transport. The retained-cache decoder remains closed to newly inventoried real spans, and current sources do not provide authenticated statutory targets. This bounded interface makes native input provenance and task representability measurable before a meaningful real-source fit.",
+    "contract": [
+      "Keep the retained 216-vector contract/checkpoints/regression assay unchanged.",
+      "New source-only rows bind exact source generation/physical occurrence, assembled context, span byte/character offsets, ordered clauses and producer token records to authentic vectors.",
+      "Key routing by IR family, native width, schema/version, decoder task, encoder/tokenizer revision, context profile, and exact checkpoint; do not pad mock or foreign-width vectors into native lanes.",
+      "Validate full tokenizer lengths against actual 512-token production limit separately from base-model 8,192 capability; preserve explicit unsupported/overflow/context-required dispositions.",
+      "Keep reference IR, teacher predictions and compiler proposals outside encoder/runtime inputs; attach evaluation and review only after durable generation.",
+      "Preserve separate exact source UTF-8 retrieval, learned semantic IR, learned prose, strict family syntax and actual source-bound Lake outcomes."
+    ],
+    "real_training_preconditions": [
+      "Independently source/context-bound target interpretation with explicit review scope and authority evidence.",
+      "Lossless target representability or explicit abstention before fitting.",
+      "Connected source/version/overlap/duplicate split groups and frozen unexposed confirmation.",
+      "Authentic native embedding provenance and task-compatible selected checkpoint."
+    ],
+    "can_train_now_honestly": "Additional fitting on existing authored TRAIN cohorts may be reported as task-scoped synthetic/retention training; it must not be described as real-statute semantic progress.",
+    "secondary_gap": "Continue source census with one-section bounded batches and measured peak RSS/storage; account for oversized-section pending dispositions without clipping."
+  },
+  "evidence_pin_verification": {
+    "checked_files": 18,
+    "failures": []
+  },
+  "source_file_pins": [
+    {
+      "path": "docs/autoencoders/uscode_span_intake_progress_20261007.md",
+      "bytes": 7660,
+      "sha256": "7a2e69115f60e7453d609822d44e2d4005f5312b291ca495a0f3dc0b7c335ca1"
+    },
+    {
+      "path": "docs/autoencoders/uscode_all_span_processing_plan_20261007.md",
+      "bytes": 36351,
+      "sha256": "5d031145b0b58070b4f90b59165d50e225e007d7193c129aa754072642bc2748"
+    },
+    {
+      "path": "docs/autoencoders/normative_cached_legal_ir_runtime.md",
+      "bytes": 6916,
+      "sha256": "3b556f37bd184d61e4786fa914086ca45b7531f309b2b1c531d06cbc7ee23cc9"
+    },
+    {
+      "path": "docs/autoencoders/formal_logic_visibility_audit.md",
+      "bytes": 5844,
+      "sha256": "4a15f9056e2bfd62d6d771b5c6d1881b3bcdd93544ee2179f4b4c67b92bb2c78"
+    },
+    {
+      "path": "docs/autoencoders/logic_output_requirements.md",
+      "bytes": 13166,
+      "sha256": "0a948378713e3533c7468751ad31e39817f17b17fe433073cac5a0a732a513bf"
+    },
+    {
+      "path": "docs/autoencoders/reviewed_384_pair_exports.md",
+      "bytes": 6455,
+      "sha256": "5e7c291abd8b621019f672c0cf6b450a4d8527ad09d67cc14f9efc20c406759d"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/autoformal/span_cache.py",
+      "bytes": 77906,
+      "sha256": "5d390725291aa966d34f3e48d0ee58148626eb8281cd3079e153a2d9018e05d0"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/autoformal/span_cache_feed.py",
+      "bytes": 40532,
+      "sha256": "97e6a59859fb9ca59b069a85ca9d569beddbe20eb1e10b62d1d128ad0162ec47"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/autoformal/legal_review_admission.py",
+      "bytes": 24249,
+      "sha256": "8cbef743f73fac6c25d6d697ccc02bc10dbf71624ad61f5f31223f7afa30f9ec"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/autoformal/legal_source_family_bridge.py",
+      "bytes": 21178,
+      "sha256": "660601ed20971eb972c3a9c6c0ededf5fceeaf734260074a7e64333739b97212"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/autoformal/legal_source_family_lake.py",
+      "bytes": 11880,
+      "sha256": "8658477c4ec1c7f76c2def3ca226eab7600d0d380a3ef873434ba8c6464a8c94"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/autoformal/family_qualification.py",
+      "bytes": 37698,
+      "sha256": "4db56c904cce8a030e5889b5d14687f01e9348842093480dd699649ad96dc1a8"
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/uscode_source_census.py",
+      "bytes": 24447,
+      "sha256": "3698dfbc2bd685cdb6dccc9d096126ad1de2e95b65c79da3e621c6119be0aae1"
+    },
+    {
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_logic_requirements.py",
+      "bytes": 11622,
+      "sha256": "b75b67d5201a377a55d53aa7f0dbe09d31f2ec903446718bc01c8fd1efc1e4f0"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/normative_cached_legal_ir_runtime.py",
+      "bytes": 28302,
+      "sha256": "017adb2cd955f84b049bb483100be5b8b3742bac1ddc0084a9d106c9a3d3da07"
+    }
+  ],
+  "execution": {
+    "model_calls": 0,
+    "tests_rerun": 0,
+    "fits": 0,
+    "hub_writes": 0,
+    "git_mutations": 0,
+    "canonical_root_changes": 0,
+    "only_written_artifact": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/real-code-data-review.json"
+  }
+}

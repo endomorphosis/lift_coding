@@ -1,0 +1,425 @@
+{
+  "archive_run_resource_receipts": {
+    "DuckDB_memory_setting_MB": 768,
+    "additional_terminal_bytes": 5165,
+    "child_returncode": 0,
+    "cooperative_not_kernel_quota": true,
+    "disk_claim_bytes": 256000000,
+    "finalized_attempt_bytes": 4009757,
+    "foreign_record_preservation": "Bound28-check peer receipt reports exact foreign-ledger equality; this limited progress review authenticates that receipt and does not repeat its live-resource observations.",
+    "kernel_maxrss_bytes": 864636928,
+    "kernel_maxrss_scope": "process-lifetime RUSAGE_SELF high-water across seeded/fresh interpreter execution; not isolated phase/process group peak",
+    "outer_memory_mb": 1536,
+    "output_cap_bytes": 240000000,
+    "own_reservation_status": "released",
+    "owned_group_stopped": true,
+    "peer_independently_counted_after_terminal_receipts_bytes": 4014922
+  },
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/PROGRESS.md": {
+      "bytes": 12822,
+      "sha256": "f98432f4b52e0e931b539d317d3cf7c529879f9df5d038cb1d5b99efa59d6f67"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/archive-arguments.json": {
+      "bytes": 1024,
+      "sha256": "e73abff8462af695d72d35794e86abbf75301ed81393555cae8b926e84bee2e9"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/archive-command.json": {
+      "bytes": 398,
+      "sha256": "d134c3fbebfc235c514d993a4e6736af04d8b81facd50389c59fa0165ec02fae"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/guard-reuse.json": {
+      "bytes": 724,
+      "sha256": "e69fd124d6266b9b3a364e38fb0c580145db83e502d4274bd2a9e525477696c5"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/index.json": {
+      "bytes": 6823,
+      "sha256": "a52c8ab485e47f714a986f3f578dead2e7081d6f741037808716634f3a93d9e0"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/measured-run/child-exit.json": {
+      "bytes": 515,
+      "sha256": "805ff6a48c540efc2789e5b7f5cff5b872d642548a1d80b6343533d887068f1f"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/measured-run/child-identity.json": {
+      "bytes": 44,
+      "sha256": "96a641b7a0742b3f0bd2ff86b1f522f41a6fc3be05a09890ccfc7815452ea2f3"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/measured-run/command.json": {
+      "bytes": 5741,
+      "sha256": "3a86529bf3bc414ae72c31e82b8df2bced2ac04490ef7ab4efee9afda5bd7d77"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/measured-run/lease-binding.json": {
+      "bytes": 693,
+      "sha256": "e6cfe3990f6d87f631164f735ba9b310f21d22cb6541b8e5c55ea74fc7d46231"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/measured-run/lease-observations.jsonl": {
+      "bytes": 20576,
+      "sha256": "a8013e730d26a88527997b7d396675b54795194f77fc3da8c8c75c013e9df4d7"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/measured-run/resources-final.json": {
+      "bytes": 4388,
+      "sha256": "695fe3a12767b54252dfd71850a675a9b54d65b8f6db36b6538f87f30034f4a1"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/measured-run/results/manifest.json": {
+      "bytes": 3079,
+      "sha256": "8e7be4a16b3202c9e3a93c3d77cb6845e1e10488588c48eb351740e1370e0044"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/measured-run/results/report.json": {
+      "bytes": 12024,
+      "sha256": "e07a58085abd67ff74db7fbfcfcfaeff526d80a594c2be68c778d50ac2a4df05"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/measured-run/results/seed-and-first-page-report.json": {
+      "bytes": 12024,
+      "sha256": "4fcdfbced75652de562c589ffc710abd65e9df6c4210ae34f337b8efc1c7a436"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/new-source-pins.json": {
+      "bytes": 387,
+      "sha256": "c842b6e0d4c73883f1007dd260f0b02758c0f217d3f347653a96260cf2b157fe"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/operator-source-pins.json": {
+      "bytes": 457,
+      "sha256": "ba900301e325f9786680eca5bf725a0395ed25ba7d057857a600cab6965c5e3e"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/operator-source/package_evidence.py": {
+      "bytes": 3401,
+      "sha256": "a86524a8065de75d518cde912f15300f6b7c41793a24138bf4456438133c45fd"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/operator-source/run_guarded_reconciliation.py": {
+      "bytes": 7199,
+      "sha256": "58b9d37b2a76c31ff303cbd6ec0a39a3c544153364687fe38c0927072e2aae03"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/operator-source/seed_then_resume_archive.py": {
+      "bytes": 1850,
+      "sha256": "12486da67b0bfcce2715ae9fba04ca6d90ec5b6badea15a5a6372084e0d96275"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/operator-source/verify_publication.py": {
+      "bytes": 2281,
+      "sha256": "14dd36ff99d0ad6a3a8bab4b37625b05ac19743e480434f5fe1aa6c630ca8c45"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/review/archive-reconciliation-controls.xml": {
+      "bytes": 14468,
+      "sha256": "768f9a7b1fa85f3638558a6a02c8a608381463ecefe39ca6d5c32b5e5825cc51"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/review/archive-reconciliation-final-controls.xml": {
+      "bytes": 3725,
+      "sha256": "691e8495af15cc070ad90416bbcf886b38bc8bd6bed926e6cbc826f33adccd1b"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/review/census-contract-survey.json": {
+      "bytes": 10318,
+      "sha256": "51012f4567c72528c6370fba1f8c6bf3dadf3004f106ae08fc9259aa98a7e4e6"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/review/design-review.json": {
+      "bytes": 9695,
+      "sha256": "ad1bb306a2649c1a11db2ae5a44fbfeb70304250c30b3e6386a679f13740f7a8"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/review/implementation-review.json": {
+      "bytes": 13302,
+      "sha256": "d4778e0afb653863e770132c66b11e7e930ae341b33100daab2969ed9a06da23"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/review/parallel-research-survey.json": {
+      "bytes": 32235,
+      "sha256": "e317961cb0aa484e0951eda72fb5963937b0eec18750a2cd86921f89480c216b"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/review/progress-document-review.json": {
+      "bytes": 8297,
+      "sha256": "7eea720ae4eac7dc04e4b0aabf345ed7b33c4df16809f8d7969a318466c06140"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/review/resource-recovery-survey.json": {
+      "bytes": 12095,
+      "sha256": "1ca2c1a719dad509e4c8f336ee99b2f2df713aa9f68949bec369d5db367f4c27"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/review/results-review.json": {
+      "bytes": 29412,
+      "sha256": "a51dff39b62eeb9f7d71568ea07e8a9fa9903efee7b812841a43fb880015c660"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/review/upstream-revision-observation.json": {
+      "bytes": 426,
+      "sha256": "5e1ab5418706abf940daa3a3a72de5810566b7c559312ec4fe87dd330a0d4bcc"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/source-lineage.json": {
+      "bytes": 1460,
+      "sha256": "25cac3c8eab90ac26f25ce7d6bb96e6263c925cbdacad106c2421a044611b39f"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/validation/incoming-source384-controls-receipt.json": {
+      "bytes": 6331,
+      "sha256": "662726a3d26ba21d9498591a9f0ef205b7acd452c820b71eef6faae9e76c9f00"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/validation/incoming-source384-controls.log": {
+      "bytes": 99,
+      "sha256": "5171faa645ca0369eb0fec7edf54ab4a0b75d7edc574baced3789acc507ef597"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/validation/incoming-source384-controls.xml": {
+      "bytes": 16519,
+      "sha256": "1f526372795a8676367551136196184e208fcefa197b657a6063b548ccec82db"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/validation/integrated-controls-attempt-01.log": {
+      "bytes": 1710,
+      "sha256": "4fee34ce0f9a188453bcf225aae9e7bfeb8281d0c0d57a6650c224607c2111cc"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/validation/integrated-controls-command-attempt-01.json": {
+      "bytes": 1893,
+      "sha256": "e762f8412cb6a006c25fc6e5b3a42915900ab8afeb5b583d8a98d42631dd9310"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/validation/integrated-controls-command.json": {
+      "bytes": 2005,
+      "sha256": "356c0f6f9796f46ad14c15d329203c1cb1f32d8301951c472769a99f16a43f80"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/validation/integrated-controls-receipt-attempt-01.json": {
+      "bytes": 7915,
+      "sha256": "d89b183c29e257569dcc575445e58dc42e2050707bf10c37fbb9f4b3d37d093d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/validation/integrated-controls-receipt.json": {
+      "bytes": 12322,
+      "sha256": "2ebcb1ee22788e54060a1267f172ade1c3fe103ba7b3004711b6633b11efa68b"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/validation/integrated-controls.log": {
+      "bytes": 511,
+      "sha256": "eb2b9f46ef5b6ede8f60f4f156d470da0353ea2da97f38dbb15b53f2a18a0c89"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/evidence/uscode-span-continuation-20261011/validation/integrated-controls.xml": {
+      "bytes": 60768,
+      "sha256": "641743ed66555a6b3c70e6db60e56cc121dfdc013388aab0a25b2a0916cb28ef"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/uscode_span_continuation_20261011.md": {
+      "bytes": 12822,
+      "sha256": "f98432f4b52e0e931b539d317d3cf7c529879f9df5d038cb1d5b99efa59d6f67"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/autoformal/constitution_inventory.py": {
+      "bytes": 11156,
+      "sha256": "d71e77a88276a5ea5d6db1e7ce09add2784ae53ea6586f9aa51ceeae8a538095"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/autoformal/uscode_ingest.py": {
+      "bytes": 10156,
+      "sha256": "d51102f02c37f36fcc669cf3c7b0d38dd5cd40e92a5b304e0ef86991f5183471"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/source_program_binding_384.py": {
+      "bytes": 17554,
+      "sha256": "3bf9f897b0260ac5dd8a4ea671cdce3bcbf7f7201b7dcdf23b82b1890b513d19"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legacy_span_intake.py": {
+      "bytes": 23320,
+      "sha256": "1f524bd85b33f97b4855c448a0653637d39fd80aeda4146910998fd18671e418"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legacy_span_pages.py": {
+      "bytes": 13440,
+      "sha256": "d62189ec28e8dfff38dc1aa592bc45d5f8d7cf53f988963205a98269228de4c5"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/uscode_archive_reconciliation.py": {
+      "bytes": 26696,
+      "sha256": "deeb3dc351d05712f0ba5f318e67abfab38c233a5c0f0ed4ee6fe0dfef6b543b"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/uscode_dataset.py": {
+      "bytes": 8703,
+      "sha256": "1d8be585f34c49a29c7b5c3b2b1d245ab7f56b904edcef458ca347d56065aa18"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/uscode_source_census.py": {
+      "bytes": 24447,
+      "sha256": "3698dfbc2bd685cdb6dccc9d096126ad1de2e95b65c79da3e621c6119be0aae1"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/tests/unit/logic/formalization/autoencoder/test_security_source_program_binding_384.py": {
+      "bytes": 13391,
+      "sha256": "1524389f385bdb725f4d58a8f878c82d9b5328720fb796eaa34693afbe611392"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/incoming-main-integration.json": {
+      "bytes": 393,
+      "sha256": "c3a566b4d0e3b368db1dd7cf4b5933f08ab861f78ad395b1932e30b687f65e1a"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/protocol-artifact-bindings.json": {
+      "bytes": 23901,
+      "sha256": "19f58225630f8db280fd9ddd9b8b91786098bc3719f1f5f3dca93d44236d1452"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/protocol-review.json": {
+      "bytes": 36623,
+      "sha256": "8debd5f9d35b63f4cfe52c684961afee71cf409da423eb2873391b67e8ba41ad"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/workspace/implementation_plan/docs/70-uscode-archived-target-reconciliation-2026-10-11.md": {
+      "bytes": 12822,
+      "sha256": "f98432f4b52e0e931b539d317d3cf7c529879f9df5d038cb1d5b99efa59d6f67"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/uscode-all-span-intake-20261007/source-census-resume-02/results/census.duckdb": {
+      "bytes": 8663040,
+      "sha256": "3f6f722de861d0b6cd10ca20648d6beebf33caf18ea17f2e3218b54b35c32e4f"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/uscode-all-span-intake-20261007/source-census-resume-02/results/manifest.json": {
+      "bytes": 1711,
+      "sha256": "34c8dd3eef9d025f3c76f51a79a9b2042399540d1682ab5a5cac0726ac3ca8b2"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/uscode-all-span-intake-20261007/source-census-resume-02/results/report.json": {
+      "bytes": 6427,
+      "sha256": "bf291513575a72d3145248e4b3d2e9e1bf7a31def5b7a7b679b1aa36e0c14c70"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/uscode-span-continuation-20261011/archived-reconciliation-01/child-exit.json": {
+      "bytes": 515,
+      "sha256": "805ff6a48c540efc2789e5b7f5cff5b872d642548a1d80b6343533d887068f1f"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/uscode-span-continuation-20261011/archived-reconciliation-01/child-identity.json": {
+      "bytes": 44,
+      "sha256": "96a641b7a0742b3f0bd2ff86b1f522f41a6fc3be05a09890ccfc7815452ea2f3"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/uscode-span-continuation-20261011/archived-reconciliation-01/child.log": {
+      "bytes": 11390,
+      "sha256": "b458e3fb4ee9d1568fc5b8bed1be4d983b15ca6248151d3eca1a35d972a73e3a"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/uscode-span-continuation-20261011/archived-reconciliation-01/command.json": {
+      "bytes": 5741,
+      "sha256": "3a86529bf3bc414ae72c31e82b8df2bced2ac04490ef7ab4efee9afda5bd7d77"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/uscode-span-continuation-20261011/archived-reconciliation-01/lease-binding.json": {
+      "bytes": 693,
+      "sha256": "e6cfe3990f6d87f631164f735ba9b310f21d22cb6541b8e5c55ea74fc7d46231"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/uscode-span-continuation-20261011/archived-reconciliation-01/lease-observations.jsonl": {
+      "bytes": 20576,
+      "sha256": "a8013e730d26a88527997b7d396675b54795194f77fc3da8c8c75c013e9df4d7"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/uscode-span-continuation-20261011/archived-reconciliation-01/resources-final.json": {
+      "bytes": 4388,
+      "sha256": "695fe3a12767b54252dfd71850a675a9b54d65b8f6db36b6538f87f30034f4a1"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/uscode-span-continuation-20261011/archived-reconciliation-01/results/manifest.json": {
+      "bytes": 3079,
+      "sha256": "8e7be4a16b3202c9e3a93c3d77cb6845e1e10488588c48eb351740e1370e0044"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/uscode-span-continuation-20261011/archived-reconciliation-01/results/reconciliation.duckdb": {
+      "bytes": 3944448,
+      "sha256": "e30cf49fecc0efb7135662c4313b610659638f794076453859749d5d9799998f"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/uscode-span-continuation-20261011/archived-reconciliation-01/results/report.json": {
+      "bytes": 12024,
+      "sha256": "e07a58085abd67ff74db7fbfcfcfaeff526d80a594c2be68c778d50ac2a4df05"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/uscode-span-continuation-20261011/archived-reconciliation-01/results/seed-and-first-page-report.json": {
+      "bytes": 12024,
+      "sha256": "4fcdfbced75652de562c589ffc710abd65e9df6c4210ae34f337b8efc1c7a436"
+    }
+  },
+  "current_inventory": {
+    "all_occurrence_digest": "6698f1075e0325788724a9d13a423c6f88333ac661da2ef05316d07eeff1616f",
+    "archived_rows_plus_metadata": 443905,
+    "complete_all_source_occurrence_inventory": false,
+    "complete_source_scan": false,
+    "distinct_archived_ids": 443904,
+    "exact_matched_archived_target_ids_and_occurrences": 2806,
+    "full_outside_target_identities_persisted": false,
+    "kind": "archived-target reconciliation with aggregate-only outsiders",
+    "next_section": 199,
+    "next_span": 64,
+    "normalized_source_text_origins": 24191,
+    "observed_source_occurrences": 24191,
+    "outside_target_digest": "13539588c4693fa9efa4af9001a73ef5616eb1a33be7ef88f62aa52f295e9b7f",
+    "outside_target_occurrences": 21385,
+    "pending_archived_ids": 441098
+  },
+  "findings": [],
+  "incoming_scientific_dependency_closure": {
+    "all_rehashed_unchanged": true,
+    "artifact_count": 103,
+    "binding_list": {
+      "bytes": 23901,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/protocol-artifact-bindings.json",
+      "sha256": "19f58225630f8db280fd9ddd9b8b91786098bc3719f1f5f3dca93d44236d1452"
+    },
+    "protocol_review": {
+      "bytes": 36623,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/protocol-review.json",
+      "sha256": "8debd5f9d35b63f4cfe52c684961afee71cf409da423eb2873391b67e8ba41ad"
+    }
+  },
+  "measured_increment": {
+    "additional_archived_joins": 641,
+    "additional_outside_occurrences": 5208,
+    "additional_source_occurrences": 5849,
+    "fresh_interpreter_resume_os_process_count": 1,
+    "fresh_interpreter_resume_pages_reported": 128,
+    "new_committed_pages_reported": 129
+  },
+  "observed_at_utc": "2026-10-11T00:42:18.651643+00:00",
+  "passed": true,
+  "preserved_seed": {
+    "distinct_from_new_archived_inventory": true,
+    "old_all_source_census_observed_occurrences": 18342,
+    "old_exact_archived_joins": 2165,
+    "old_outside_occurrences": 16177,
+    "old_prefix_cursor": [
+      128,
+      0
+    ],
+    "old_report_current_bytes_pin": {
+      "bytes": 6427,
+      "sha256": "bf291513575a72d3145248e4b3d2e9e1bf7a31def5b7a7b679b1aa36e0c14c70"
+    },
+    "three_small_seed_artifacts_rehashed_exact": true
+  },
+  "published_evidence_checks": {
+    "all7current_runtime_owner_hashes_equal_actual_run_closure": true,
+    "all_index_files_rehashed": 40,
+    "bound_test_receipts": {
+      "review/archive-reconciliation-controls.xml": {
+        "cases": 78,
+        "errors": 0,
+        "executed_by_this_reviewer": false,
+        "failures": 0,
+        "skips": 0
+      },
+      "review/archive-reconciliation-final-controls.xml": {
+        "cases": 19,
+        "errors": 0,
+        "executed_by_this_reviewer": false,
+        "failures": 0,
+        "skips": 0
+      },
+      "validation/incoming-source384-controls.xml": {
+        "cases": 70,
+        "errors": 0,
+        "executed_by_this_reviewer": false,
+        "failures": 0,
+        "skips": 0
+      },
+      "validation/integrated-controls.xml": {
+        "cases": 375,
+        "errors": 0,
+        "executed_by_this_reviewer": false,
+        "failures": 0,
+        "skips": 0
+      }
+    },
+    "control_counts_not_pooled_as_unique_tests": true,
+    "published_peer_results_review": {
+      "checks": 28,
+      "descriptor_replay_rerun_by_this_reviewer": false,
+      "findings": [],
+      "independent_descriptor_and_digest_replay_observed_in_receipt": true,
+      "passed": true
+    },
+    "source_and_root_progress_documents_byte_exact": true
+  },
+  "review_execution": {
+    "DuckDB_imported_or_opened": false,
+    "models_imports_forwards_fits_tests_jobs_resource_mutations_Git_mutations": 0,
+    "only_write": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/incoming-progress-review.json",
+    "read_only_Git_HEAD_queries": 2,
+    "source_Parquet_or_archive_Parquet_reread": false
+  },
+  "schema": "legal-decoder-incoming-progress-receipt-review/v1",
+  "scope_limits": [
+    "This is a bounded receipt/progress qualification. It rehashes published compact evidence, current owner bytes and small stopped DB/seed files; it does not replay source descriptors, import DuckDB, inspect full source Parquet or rerun any published test.",
+    "128:0/18342 remains the immutable old all-source census seed.199:64/24191 belongs to the new archived-target controller; do not describe the old census as advanced or confuse its pending denominator with443904archived IDs.",
+    "Outside-target means absent from the archived ID inventory. These observations are not automatically new legal work, distinct text, duplicates or unprocessed statutory targets.",
+    "Lossless original UTF8 custody and historical normalized sentence hashes are separate. Native512token/32value/eightclause/outputcodec constraints and per-family routes still require qualification; no training/reconstruction/proof/nativecache widening was measured by this archival run.",
+    "No source-semantic, human-reviewed legalgold, latent-interface, formal-output, proof or default promotion is supplied by the incoming archive or Source384 Unicode fix."
+  ],
+  "source384_unicode_fix": {
+    "accepted_unicode_scope": "Genuine Python comments only; executable tokens/identifiers/strings remain ASCII. CR/CRLF normalization is used only for lexical guard; original text is parsed, hashed and byte provenance retained.",
+    "authority": "Typed conservative source candidate agreement only; adapter does not repair model output, execute source, call models/solvers or grant source semantics/proof authority.",
+    "current_implementation_sha256": "3bf9f897b0260ac5dd8a4ea671cdce3bcbf7f7201b7dcdf23b82b1890b513d19",
+    "current_owner_and_tests_equal_bound70case_receipt": true,
+    "legal_corpus_or_legal_training_contract_changed": false
+  },
+  "source_head_observed_readonly": "9e5df0d19b62268cdda356077754fad43bdf65fa",
+  "updated_next_bounded_gaps": [
+    "Continue archived-target generation from199:64 in a fresh independently admitted clone with immutable source/code/seed/paging bindings; retain current frozen results.",
+    "A complete all-source occurrence inventory still requires bounded outside-target identity shards; aggregate-only24191archive observations do not supply that inventory.",
+    "Source mapping is not a human reviewed semantic target. Real statutory training still needs qualified representable source/target pairs, task/codec/span limits and genuinely aligned learned embeddings/teacher outputs."
+  ],
+  "workspace_head_observed_readonly": "c976b4f8a725f37207fc0f0119fbb60f0b552efd"
+}

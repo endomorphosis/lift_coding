@@ -1,0 +1,85 @@
+{
+  "schema": "support-retention-workspace-archiver-source-review/v1",
+  "passed": true,
+  "findings": [],
+  "reviewer": "root; independent of helper author",
+  "helper": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/prepare_workspace_archive.py",
+    "bytes": 42653,
+    "sha256": "46503c475cc38846aed9e5ee51fe7e3f313c8b937765131ed023cf531192c10c"
+  },
+  "manifest_sha256": "17f4b9bd7fa2bb34365c19ba10bdf6b0014f14c7a2512f96ed9729cd25418c61",
+  "guard_nonweight_payloads_accepted": 302,
+  "guard_raw_containers_denied": 9,
+  "supplementary_guard_payloads_accepted": 48,
+  "manifest_self_separately_bound": true,
+  "metadata_only_schema_not_treated_as_rawweights": true,
+  "recovered_error_authenticated": {
+    "original_error_preserved_and_resolved": true,
+    "original_parent": "ae5a6b555f66f9ea7cdf3f46a03c689d07485bb5",
+    "final_revision": "eb1890f255b096ef81a8a2364bd28fef296bbfd8",
+    "batch_count": 30,
+    "event_count": 60,
+    "evidence": {
+      "hub-upload-error.json": {
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-upload-error.json",
+        "bytes": 434,
+        "sha256": "4664dadf56215dafae0d593ec2e2a4deda9011b970d03818adeaf04bd542f8f9"
+      },
+      "hub-upload-reconciliation.json": {
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-upload-reconciliation.json",
+        "bytes": 840,
+        "sha256": "777f0d2609484f7cc5d9ef79f5b43930ae09a9a18640646e0db8a10c0134ea4b"
+      },
+      "hub-upload-batch-proposal.json": {
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-upload-batch-proposal.json",
+        "bytes": 73899,
+        "sha256": "53003de3d40ad698a2b72306a9f93561454c225e55da78b9f9deb7458eae2bb8"
+      },
+      "hub-upload-batch-events.jsonl": {
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-upload-batch-events.jsonl",
+        "bytes": 42741,
+        "sha256": "6ee3dc467f86f3eb49b87ee0b02f1dbb7be4ce18cef9d2aee893da6373031892"
+      },
+      "hub-upload-batch-recovery.json": {
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-upload-batch-recovery.json",
+        "bytes": 25687,
+        "sha256": "31d2147e4f63f3c493fd8c4cf1e912abcc10199f3798c74c90806216fb918a10"
+      },
+      "recover_hub_upload.py": {
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/recover_hub_upload.py",
+        "bytes": 8785,
+        "sha256": "70988e758a34ae5058b89b5df0dd84bdf65a649da28fca627649553e70affca8"
+      },
+      "hub-recovery-source-review.json": {
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-recovery-source-review.json",
+        "bytes": 178628,
+        "sha256": "4e6677fe17f5a3ff6abafb1ad67e070904fdfeff2de1832128d08d2b904057f6"
+      },
+      "hub-upload-parent.json": {
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-upload-parent.json",
+        "bytes": 799852,
+        "sha256": "9d7202bfd2a75797747f02145747f6e50c1278607c0c15d55d0075a643353057"
+      },
+      "hub-upload-proposal.json": {
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-upload-proposal.json",
+        "bytes": 54642,
+        "sha256": "d5c904a527f2a5c0f9757da5b57fe0fec925401fe48c41d952f42565e57c90d2"
+      }
+    }
+  },
+  "controls": [
+    "all311 published files fully mapped",
+    "9 raw containers Hub only;302 nonweights local",
+    "results/resource/preflight/publication/local+Hub1280 replay required",
+    "all original/release/Hub byte bindings",
+    "safe isolated bounded paths, symlink/credential/privateledger denial",
+    "supplement authentication before new archive creation",
+    "no Git/Hub/numerical calls",
+    "completed30commit60event recovery and original failure byte-bound to independent actual publication review"
+  ],
+  "helper_imported_for_data_only_copy_guard": true,
+  "archiver_prepare_or_main_executed": false,
+  "models_or_tests_or_Git_or_Hub_executed_by_reviewer": false,
+  "archive_execution_pending": true
+}

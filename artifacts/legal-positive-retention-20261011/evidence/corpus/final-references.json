@@ -1,0 +1,4098 @@
+[
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:2be4dc2125441591d2eaa66a15ee047272fc1ab7c8dcb0b586e068dcbfd8faa9",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:7427a26ee230124cfd39f2ad7b132ad0734877577baea1dc1d39fdd696af3c8e",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:e11c7e48415a15013005fe3e807ba547abc6dbcfc619aab8a045fb2398663ea7",
+    "source_sha256": "2be4dc2125441591d2eaa66a15ee047272fc1ab7c8dcb0b586e068dcbfd8faa9",
+    "supported": false,
+    "unsupported_category": "modal_deletion"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:52569ccbf545e92ff5c5e6d6d29d3661a060a15914ddc37354598c66462faf8e",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:fd7976febd3214ede3a3d27764c4dd5086c64c03b336bbf5bb6c0e010eb42eb2",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:481845fa415342fd2955a8136f583174b5e383628b2b262ec9082a4d3169037b",
+    "source_sha256": "52569ccbf545e92ff5c5e6d6d29d3661a060a15914ddc37354598c66462faf8e",
+    "supported": false,
+    "unsupported_category": "second_rule"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:aa2ed5f1c3ebe3d5666c1c9bbfdd984ee6c6edda8fd24f2de685df8bbada79e2",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:b328f1ec2e2ed9f8fa9823581bf4c949bcef391cc74b6c09ccce5ef17fe885df",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:e66ad938e276806051d6395c39022b7116eb0a534b276b279d4b0a1dee995858",
+    "source_sha256": "aa2ed5f1c3ebe3d5666c1c9bbfdd984ee6c6edda8fd24f2de685df8bbada79e2",
+    "supported": false,
+    "unsupported_category": "modal_misspelling"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:3e254abcc17af8cd96e7ceb01d15c54b0d3767ef2423a8b4f230a00680895e5b",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:52d32ad78ce8093d1cc616c4dfd79f96df5e55f07e5c52ef0825a8632585a8de",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:4b2544e61989de1578c8b4291d8739ef7a0ca69007aee6a0d270a1ba5b595c7b",
+    "source_sha256": "3e254abcc17af8cd96e7ceb01d15c54b0d3767ef2423a8b4f230a00680895e5b",
+    "supported": false,
+    "unsupported_category": "second_rule"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "baste",
+    "id": "source:74802d7c15ebefba641f792c1699018d115fce5185c522a8176112898959e3b6",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:74802d7c15ebefba641f792c1699018d115fce5185c522a8176112898959e3b6",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "O",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          68,
+          73
+        ],
+        "actor": [
+          52,
+          64
+        ],
+        "condition": null,
+        "modality": [
+          30,
+          43
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:45189bba387720ae9a7522827e6ea6c6ee442544aed35e4cd7e5543b1731c1ee",
+    "source_sha256": "74802d7c15ebefba641f792c1699018d115fce5185c522a8176112898959e3b6",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "zip",
+    "id": "source:0840c2d4f9ed733b8de16cf572149ea2d144e530d90f75b8765e5f804e0f0827",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:0840c2d4f9ed733b8de16cf572149ea2d144e530d90f75b8765e5f804e0f0827",
+    "prediction": {
+      "condition_attachment": "statement",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "F",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          19,
+          26
+        ],
+        "actor": [
+          4,
+          16
+        ],
+        "condition": [
+          68,
+          83
+        ],
+        "modality": [
+          48,
+          61
+        ],
+        "object": [
+          31,
+          47
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:d3027fd1aaf04ee7556a04aeefeeffb8373da55690a2dd3bd3f35d7efbf9e43a",
+    "source_sha256": "0840c2d4f9ed733b8de16cf572149ea2d144e530d90f75b8765e5f804e0f0827",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "stylishly fringe",
+    "id": "source:07d9ca7348f31e5efff0173fb69fb93c72c79a9e0e53bb05a2ca4167ffb0d817",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:07d9ca7348f31e5efff0173fb69fb93c72c79a9e0e53bb05a2ca4167ffb0d817",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "F",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          38,
+          54
+        ],
+        "actor": [
+          4,
+          21
+        ],
+        "condition": null,
+        "modality": [
+          22,
+          37
+        ],
+        "object": [
+          59,
+          76
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": true,
+    "source_group": "support-retention-group:eea2fef2459dda6a09539b44bf62544c4ebb1e7a6e95adce257a2ed60d99127f",
+    "source_sha256": "07d9ca7348f31e5efff0173fb69fb93c72c79a9e0e53bb05a2ca4167ffb0d817",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:79c798ec5db0c3b986c21b7b3bfbbc0a1f84570387ab2e16b3b0ef14f066526f",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:8955332b7dd486a753d730022fd9765312b9583ae5482add8a565841b6ad7232",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:813ff9a5b753f80afa58da0d78addb122c8965ff4c475ce9268f90163fedf861",
+    "source_sha256": "79c798ec5db0c3b986c21b7b3bfbbc0a1f84570387ab2e16b3b0ef14f066526f",
+    "supported": false,
+    "unsupported_category": "modal_deletion"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:071b586f75eeac6cbdd2c971ffeda5237d3a78a13340b806e866de245ced478b",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:4d551ad5989307ea29e51aafe540994a4f07928a778e4972507e8f8d05745697",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:ffdeaadec8870064fd10bad8fdce59b2eff6cc0bd0e9589fe779ffe7798ad6a2",
+    "source_sha256": "071b586f75eeac6cbdd2c971ffeda5237d3a78a13340b806e866de245ced478b",
+    "supported": false,
+    "unsupported_category": "extra_exception"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "ruffle",
+    "id": "source:ff9817fa718b0f02435c6922dd6d553037875a56c1331445e1a17a3062fc85f7",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:ff9817fa718b0f02435c6922dd6d553037875a56c1331445e1a17a3062fc85f7",
+    "prediction": {
+      "condition_attachment": "statement",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "F",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          0,
+          8
+        ],
+        "actor": [
+          16,
+          34
+        ],
+        "condition": [
+          53,
+          63
+        ],
+        "modality": [
+          35,
+          48
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:3c160d921f5bec4d8d82a271d780e8a52cff8c601eacf96d9dc51b78cda6ee87",
+    "source_sha256": "ff9817fa718b0f02435c6922dd6d553037875a56c1331445e1a17a3062fc85f7",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:2f5ed34f2f8750b77461552b2526ccdb6b2c8c04b19b03e062f48237fec9e943",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:9e84b587535afe87529c84c3b09854d7c5c174ed99c1cb2a826023af755e26d7",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:b3857a7b64bb8e15c3138699c9a01e8bf1d63cf5f0950fbd3c4f60fd045ce334",
+    "source_sha256": "2f5ed34f2f8750b77461552b2526ccdb6b2c8c04b19b03e062f48237fec9e943",
+    "supported": false,
+    "unsupported_category": "extra_exception"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:62b059899c23249a8477d878e9311d75067c2fa6f63cd90c69369f6eb972275f",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:41911327a03eaec5b9606f16bfdfc5d0aaeb0e70fb00bd4677cf1ed71fe7d49f",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:c28f9f13836b979666aff52dcfdeb17210a8a28d8708e6ac33807abfd468f675",
+    "source_sha256": "62b059899c23249a8477d878e9311d75067c2fa6f63cd90c69369f6eb972275f",
+    "supported": false,
+    "unsupported_category": "modal_misspelling"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "elegantly smock",
+    "id": "source:a3b78825d06eaa1bcb70577f674efd573ecb138bee97c4a40b004429fae07f3f",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:a3b78825d06eaa1bcb70577f674efd573ecb138bee97c4a40b004429fae07f3f",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "O",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          20,
+          38
+        ],
+        "actor": [
+          4,
+          17
+        ],
+        "condition": null,
+        "modality": [
+          39,
+          50
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:45e238d4b417a5b1e1a3ec1b92ce82a34aba74bc18e6dd2d6d3aded2ef9a7b11",
+    "source_sha256": "a3b78825d06eaa1bcb70577f674efd573ecb138bee97c4a40b004429fae07f3f",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:cfe8541502879f2016e3cc95cd904e51b3a52ed9843d19e6fd77164122693e6c",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:ea578bd47b47bcaa7db3910d141ac1f1ec19fd3e66c2828906df80e72a6b56d7",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:03977f444299bea9aaf948c9393f22f7c61ee28fcc09b785aa46ffd38309611a",
+    "source_sha256": "cfe8541502879f2016e3cc95cd904e51b3a52ed9843d19e6fd77164122693e6c",
+    "supported": false,
+    "unsupported_category": "second_rule"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:42752c8b563bb0e1377e593df88d732c2bdbd3c4f0d519f2c8b15630dd1cf709",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:ff9817fa718b0f02435c6922dd6d553037875a56c1331445e1a17a3062fc85f7",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:3c160d921f5bec4d8d82a271d780e8a52cff8c601eacf96d9dc51b78cda6ee87",
+    "source_sha256": "42752c8b563bb0e1377e593df88d732c2bdbd3c4f0d519f2c8b15630dd1cf709",
+    "supported": false,
+    "unsupported_category": "extra_exception"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:09548e6d30d68ea6cc33e1625fd55d399a46ceca7106d989688db4db4bff30e9",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:07d9ca7348f31e5efff0173fb69fb93c72c79a9e0e53bb05a2ca4167ffb0d817",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:eea2fef2459dda6a09539b44bf62544c4ebb1e7a6e95adce257a2ed60d99127f",
+    "source_sha256": "09548e6d30d68ea6cc33e1625fd55d399a46ceca7106d989688db4db4bff30e9",
+    "supported": false,
+    "unsupported_category": "modal_misspelling"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "stylishly fringe",
+    "id": "source:3297fccc13d8ddcc842f0f007914857753cb2bc684112dba6acdd6461a2ed72b",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:3297fccc13d8ddcc842f0f007914857753cb2bc684112dba6acdd6461a2ed72b",
+    "prediction": {
+      "condition_attachment": "rule",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "O",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          20,
+          38
+        ],
+        "actor": [
+          4,
+          17
+        ],
+        "condition": [
+          75,
+          86
+        ],
+        "modality": [
+          57,
+          68
+        ],
+        "object": [
+          43,
+          56
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": true,
+    "source_group": "support-retention-group:ed9337566cea30002aa4ed2b369970a0d5d209d666fd4a2b453ef5eafbcd6990",
+    "source_sha256": "3297fccc13d8ddcc842f0f007914857753cb2bc684112dba6acdd6461a2ed72b",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "lace",
+    "id": "source:78cf9f61047024d582355260666835bb8e0d5b0b65c312406f618db99e1a6cf0",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:78cf9f61047024d582355260666835bb8e0d5b0b65c312406f618db99e1a6cf0",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "P",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          18,
+          24
+        ],
+        "actor": [
+          4,
+          15
+        ],
+        "condition": null,
+        "modality": [
+          25,
+          37
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:24b89e590f31240ddaa63e28fc35049b232613a8ee26c87e0ebc71661090fafe",
+    "source_sha256": "78cf9f61047024d582355260666835bb8e0d5b0b65c312406f618db99e1a6cf0",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:e23e74be9264c79d01fa89a9121d49f7b32d3c98212dfaf2f63938a762e52f24",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:4fbc509db1cc0f21b3bf58a391f6c6e5c16ef29e00e38cd9e26a929810790f0b",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:6fa6c5f9583acae0d970467981cfe0b46980db5baa05231b02db7fe8547051eb",
+    "source_sha256": "e23e74be9264c79d01fa89a9121d49f7b32d3c98212dfaf2f63938a762e52f24",
+    "supported": false,
+    "unsupported_category": "modal_misspelling"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:e74dc7ef8fa41821367e68866a530bb64614c2d937f87c4b4db24d55d844c186",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:cd90190ba0c45cf0ec28e9b35f13645801ff0cb20e6592c7e9cba9180b244f92",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:59ff55c9207170287939b1b3c530bfd828b6242212c6d7d3e2f4b5a873830572",
+    "source_sha256": "e74dc7ef8fa41821367e68866a530bb64614c2d937f87c4b4db24d55d844c186",
+    "supported": false,
+    "unsupported_category": "modal_deletion"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "baste",
+    "id": "source:5f3fda13dad850078e175b19d4b72620065d4d15f3516b76aec56493b6d590c5",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:5f3fda13dad850078e175b19d4b72620065d4d15f3516b76aec56493b6d590c5",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "F",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          58,
+          65
+        ],
+        "actor": [
+          23,
+          38
+        ],
+        "condition": null,
+        "modality": [
+          39,
+          57
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:7a92e506ec2427a9d6346f545151ad12f2b0e7ddbed11b8a0d4b66826bab6a70",
+    "source_sha256": "5f3fda13dad850078e175b19d4b72620065d4d15f3516b76aec56493b6d590c5",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "lace",
+    "id": "source:4991260b271e32927bdee579a1d597457f7a418d5dd06564ffeb76ecbfc01dd6",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:4991260b271e32927bdee579a1d597457f7a418d5dd06564ffeb76ecbfc01dd6",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "O",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          54,
+          60
+        ],
+        "actor": [
+          34,
+          51
+        ],
+        "condition": null,
+        "modality": [
+          83,
+          94
+        ],
+        "object": [
+          65,
+          82
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": true,
+    "source_group": "support-retention-group:ee8e5413c802cfeaaa2753de20d800c53a8981f36f70b3dc5c135d5a909064dd",
+    "source_sha256": "4991260b271e32927bdee579a1d597457f7a418d5dd06564ffeb76ecbfc01dd6",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "button",
+    "id": "source:ea578bd47b47bcaa7db3910d141ac1f1ec19fd3e66c2828906df80e72a6b56d7",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:ea578bd47b47bcaa7db3910d141ac1f1ec19fd3e66c2828906df80e72a6b56d7",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "F",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          72,
+          78
+        ],
+        "actor": [
+          51,
+          68
+        ],
+        "condition": null,
+        "modality": [
+          30,
+          42
+        ],
+        "object": [
+          83,
+          101
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:03977f444299bea9aaf948c9393f22f7c61ee28fcc09b785aa46ffd38309611a",
+    "source_sha256": "ea578bd47b47bcaa7db3910d141ac1f1ec19fd3e66c2828906df80e72a6b56d7",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "ruffle",
+    "id": "source:791654e5cfd90a4f11e8657a6d5ec56f7d7cf3451274a6ce99f52327269a148c",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:791654e5cfd90a4f11e8657a6d5ec56f7d7cf3451274a6ce99f52327269a148c",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "P",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          49,
+          57
+        ],
+        "actor": [
+          34,
+          46
+        ],
+        "condition": null,
+        "modality": [
+          58,
+          70
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:bc2e4298220dc0cdc7de20e330cb83a4e5631bda297d0b83502b89c7304e72f4",
+    "source_sha256": "791654e5cfd90a4f11e8657a6d5ec56f7d7cf3451274a6ce99f52327269a148c",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "button",
+    "id": "source:2e0f45c870cbf392cfcb7ce6a4832436122a091323bc97eb2b6dc69ee6c31f80",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:2e0f45c870cbf392cfcb7ce6a4832436122a091323bc97eb2b6dc69ee6c31f80",
+    "prediction": {
+      "condition_attachment": "rule",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "F",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          80,
+          86
+        ],
+        "actor": [
+          31,
+          48
+        ],
+        "condition": [
+          53,
+          68
+        ],
+        "modality": [
+          70,
+          79
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:f0f208e85a8a869c173d68340f518861955f16ba9a0d2d0c758b103030e47820",
+    "source_sha256": "2e0f45c870cbf392cfcb7ce6a4832436122a091323bc97eb2b6dc69ee6c31f80",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:a8880588bcd8eadd904977da2a3a26ebca78fd3837eb9d977d053b76f3e8deb0",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:74802d7c15ebefba641f792c1699018d115fce5185c522a8176112898959e3b6",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:45189bba387720ae9a7522827e6ea6c6ee442544aed35e4cd7e5543b1731c1ee",
+    "source_sha256": "a8880588bcd8eadd904977da2a3a26ebca78fd3837eb9d977d053b76f3e8deb0",
+    "supported": false,
+    "unsupported_category": "second_rule"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:9873182443e3c40b573b0072c576642b25a4f06b41129568c65717d112febbfe",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:6622105f5d00ad37af70543dc8d037bbd2c95e42e5403b4f2ea64e41eb965e7f",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:923610fd66d2f23da5fd8d3d2f21ee2b99831e4efe061f598071c4ac3035b851",
+    "source_sha256": "9873182443e3c40b573b0072c576642b25a4f06b41129568c65717d112febbfe",
+    "supported": false,
+    "unsupported_category": "modal_misspelling"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "stylishly fringe",
+    "id": "source:25b15d56ad1e451272e26990036a1364a6af5f67c5211f335ee37e04eae04f3f",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:25b15d56ad1e451272e26990036a1364a6af5f67c5211f335ee37e04eae04f3f",
+    "prediction": {
+      "condition_attachment": "rule",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "F",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          65,
+          81
+        ],
+        "actor": [
+          44,
+          61
+        ],
+        "condition": [
+          3,
+          18
+        ],
+        "modality": [
+          23,
+          35
+        ],
+        "object": [
+          86,
+          100
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:0496d083954f9ade9c217d834fdfee1af387e7cb1fd5da992188c5d4b8715e1a",
+    "source_sha256": "25b15d56ad1e451272e26990036a1364a6af5f67c5211f335ee37e04eae04f3f",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "zip",
+    "id": "source:90545c5f6f64dedc6fe30284d6092c8ec18b12c3a256c032d49ffa5ed65c314f",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:90545c5f6f64dedc6fe30284d6092c8ec18b12c3a256c032d49ffa5ed65c314f",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "F",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          46,
+          49
+        ],
+        "actor": [
+          23,
+          36
+        ],
+        "condition": null,
+        "modality": [
+          37,
+          45
+        ],
+        "object": [
+          54,
+          70
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:843dbbf9e92107e9ba381bd8db070cac305364778591028d9ace55438b26a8c3",
+    "source_sha256": "90545c5f6f64dedc6fe30284d6092c8ec18b12c3a256c032d49ffa5ed65c314f",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:21e24b813ab62c56a3fe7a67bec3a294bac5d1e772dc26ed275bd5b02cbd8c36",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:7e44c63703ca9f5d64fc40163537997af29143dd81021359c56f173129139bf7",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:063dca3cf733af016d2da0c1be8d4353244e11a0c5421e44e7b55c8ce22e8530",
+    "source_sha256": "21e24b813ab62c56a3fe7a67bec3a294bac5d1e772dc26ed275bd5b02cbd8c36",
+    "supported": false,
+    "unsupported_category": "extra_exception"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "baste",
+    "id": "source:fd7976febd3214ede3a3d27764c4dd5086c64c03b336bbf5bb6c0e010eb42eb2",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:fd7976febd3214ede3a3d27764c4dd5086c64c03b336bbf5bb6c0e010eb42eb2",
+    "prediction": {
+      "condition_attachment": "rule",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "F",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          19,
+          26
+        ],
+        "actor": [
+          4,
+          16
+        ],
+        "condition": [
+          47,
+          57
+        ],
+        "modality": [
+          27,
+          40
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:481845fa415342fd2955a8136f583174b5e383628b2b262ec9082a4d3169037b",
+    "source_sha256": "fd7976febd3214ede3a3d27764c4dd5086c64c03b336bbf5bb6c0e010eb42eb2",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "zip",
+    "id": "source:6769eca30b08e18ae0171ae8ac0271114748fa167c5cc68e6b218ed1b077d4f8",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:6769eca30b08e18ae0171ae8ac0271114748fa167c5cc68e6b218ed1b077d4f8",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "O",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          33,
+          36
+        ],
+        "actor": [
+          4,
+          17
+        ],
+        "condition": null,
+        "modality": [
+          18,
+          32
+        ],
+        "object": [
+          41,
+          56
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:4beb4f5e5e9cc3265eef9cb58bfaff61a319f522d5cf6c8c25a36339dac99b85",
+    "source_sha256": "6769eca30b08e18ae0171ae8ac0271114748fa167c5cc68e6b218ed1b077d4f8",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "zip",
+    "id": "source:4d551ad5989307ea29e51aafe540994a4f07928a778e4972507e8f8d05745697",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:4d551ad5989307ea29e51aafe540994a4f07928a778e4972507e8f8d05745697",
+    "prediction": {
+      "condition_attachment": "statement",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "O",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          57,
+          60
+        ],
+        "actor": [
+          41,
+          53
+        ],
+        "condition": [
+          3,
+          14
+        ],
+        "modality": [
+          19,
+          32
+        ],
+        "object": [
+          65,
+          79
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:ffdeaadec8870064fd10bad8fdce59b2eff6cc0bd0e9589fe779ffe7798ad6a2",
+    "source_sha256": "4d551ad5989307ea29e51aafe540994a4f07928a778e4972507e8f8d05745697",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "elegantly smock",
+    "id": "source:cd90190ba0c45cf0ec28e9b35f13645801ff0cb20e6592c7e9cba9180b244f92",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:cd90190ba0c45cf0ec28e9b35f13645801ff0cb20e6592c7e9cba9180b244f92",
+    "prediction": {
+      "condition_attachment": "rule",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "O",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          46,
+          61
+        ],
+        "actor": [
+          25,
+          42
+        ],
+        "condition": [
+          99,
+          110
+        ],
+        "modality": [
+          3,
+          16
+        ],
+        "object": [
+          66,
+          83
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": true,
+    "source_group": "support-retention-group:59ff55c9207170287939b1b3c530bfd828b6242212c6d7d3e2f4b5a873830572",
+    "source_sha256": "cd90190ba0c45cf0ec28e9b35f13645801ff0cb20e6592c7e9cba9180b244f92",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:044c5c3daaaf1ab493e935473a005b8a7bad200c9977936d40e3bf2089532678",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:dfed39df8fae93cee558b82b740895c97ffff995c6c3ca7d8a73df9978985985",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:7df3bf86deff932ac850392340d71ea85cdc57346b11ff890e381b8746d6fc31",
+    "source_sha256": "044c5c3daaaf1ab493e935473a005b8a7bad200c9977936d40e3bf2089532678",
+    "supported": false,
+    "unsupported_category": "extra_exception"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "baste",
+    "id": "source:ce6a72ac7a4f7e69a4aea91d1601f7ce5f57a57649df729250260bc64a5fa179",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:ce6a72ac7a4f7e69a4aea91d1601f7ce5f57a57649df729250260bc64a5fa179",
+    "prediction": {
+      "condition_attachment": "rule",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "P",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          34,
+          39
+        ],
+        "actor": [
+          4,
+          17
+        ],
+        "condition": [
+          43,
+          58
+        ],
+        "modality": [
+          18,
+          33
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:3c23385baaec346245301f5e95fd746b10dfa67d8cda0c9416762801d39b5f64",
+    "source_sha256": "ce6a72ac7a4f7e69a4aea91d1601f7ce5f57a57649df729250260bc64a5fa179",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:14cb3432313fbe152455a717503209ebfb54fdcd24bef30761e15e9aca110647",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:1df3f034b959b588cb58418d7556500c2940607ec7ef625b17a0160b541af3f3",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:bd46bb894ebbbc756458823a025daf7cc84c526e94a8ae8c52561d25cd90e08a",
+    "source_sha256": "14cb3432313fbe152455a717503209ebfb54fdcd24bef30761e15e9aca110647",
+    "supported": false,
+    "unsupported_category": "modal_deletion"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "zip",
+    "id": "source:cdeb4a36901535b84db75afb93a757a7a6351c467303f2adbe681fd7738311dc",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:cdeb4a36901535b84db75afb93a757a7a6351c467303f2adbe681fd7738311dc",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "F",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          0,
+          7
+        ],
+        "actor": [
+          15,
+          26
+        ],
+        "condition": null,
+        "modality": [
+          27,
+          40
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:e438e0a59c96d80eee2f268b23292f3af4228ae269474c4a9446124eeb5f79b3",
+    "source_sha256": "cdeb4a36901535b84db75afb93a757a7a6351c467303f2adbe681fd7738311dc",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "tastefully emboss",
+    "id": "source:2cf8b036ffe121d860448f1f8bc12bfcf093261e358ceb90488fc08f3e88c497",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:2cf8b036ffe121d860448f1f8bc12bfcf093261e358ceb90488fc08f3e88c497",
+    "prediction": {
+      "condition_attachment": "statement",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "O",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          0,
+          20
+        ],
+        "actor": [
+          49,
+          66
+        ],
+        "condition": [
+          83,
+          94
+        ],
+        "modality": [
+          67,
+          78
+        ],
+        "object": [
+          25,
+          41
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:761b4c7a621a5806c1a8cd438c9da32d478aa8e6e9d05cd3a233a7d1f157797a",
+    "source_sha256": "2cf8b036ffe121d860448f1f8bc12bfcf093261e358ceb90488fc08f3e88c497",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:d83088598064380bb9700b6940107f99b7bb95064590a6868b4f61036cf02b58",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:e326e20f2c70182b6966850930016d60b88d950db16379e478f9dc5d5b9d3ac2",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:50580fa259000c2938546344c6fc82e12275cfa57bbbd21fc591e318877613e0",
+    "source_sha256": "d83088598064380bb9700b6940107f99b7bb95064590a6868b4f61036cf02b58",
+    "supported": false,
+    "unsupported_category": "second_rule"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "tastefully emboss",
+    "id": "source:dfed39df8fae93cee558b82b740895c97ffff995c6c3ca7d8a73df9978985985",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:dfed39df8fae93cee558b82b740895c97ffff995c6c3ca7d8a73df9978985985",
+    "prediction": {
+      "condition_attachment": "statement",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "F",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          26,
+          43
+        ],
+        "actor": [
+          4,
+          15
+        ],
+        "condition": [
+          47,
+          62
+        ],
+        "modality": [
+          16,
+          25
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:7df3bf86deff932ac850392340d71ea85cdc57346b11ff890e381b8746d6fc31",
+    "source_sha256": "dfed39df8fae93cee558b82b740895c97ffff995c6c3ca7d8a73df9978985985",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:b0fec0d65762199587a1eafa9cdbff70e8b326bf6c5aa82d05f3298eb789d33a",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:b0946adc70e812588ca354cac6b38dfcc710f7e52e2a48f6e1e8d3964d469e8f",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:787f87b936e7b3751c2610472c5ffcb9b511345ebe0855b7d1e4a17a627bedc9",
+    "source_sha256": "b0fec0d65762199587a1eafa9cdbff70e8b326bf6c5aa82d05f3298eb789d33a",
+    "supported": false,
+    "unsupported_category": "extra_exception"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "ruffle",
+    "id": "source:b27fedd1d67b7ca95f577d446677daa5d3fa2c7ce5d7d1a097df986becab656c",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:b27fedd1d67b7ca95f577d446677daa5d3fa2c7ce5d7d1a097df986becab656c",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "O",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          44,
+          50
+        ],
+        "actor": [
+          25,
+          40
+        ],
+        "condition": null,
+        "modality": [
+          3,
+          16
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:14aa7aee2fb074d9698a958b30885799c24f1f83ba8811086ebee5c3c6a67994",
+    "source_sha256": "b27fedd1d67b7ca95f577d446677daa5d3fa2c7ce5d7d1a097df986becab656c",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "stylishly fringe",
+    "id": "source:1df3f034b959b588cb58418d7556500c2940607ec7ef625b17a0160b541af3f3",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:1df3f034b959b588cb58418d7556500c2940607ec7ef625b17a0160b541af3f3",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "O",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          46,
+          62
+        ],
+        "actor": [
+          23,
+          39
+        ],
+        "condition": null,
+        "modality": [
+          40,
+          45
+        ],
+        "object": [
+          67,
+          81
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:bd46bb894ebbbc756458823a025daf7cc84c526e94a8ae8c52561d25cd90e08a",
+    "source_sha256": "1df3f034b959b588cb58418d7556500c2940607ec7ef625b17a0160b541af3f3",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:e1bd249064021c6070fad95fdcdb6981631c833e82e5dc3e376734ae6f97eb49",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:4eaba13c3623494c9a6cf4f435e57d2d6c762903393a20cec8b19c68488b8826",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:8a5e6b2fa89f0b5f902dd4773dbb86e8c8508aef933a37273eff311b2f059594",
+    "source_sha256": "e1bd249064021c6070fad95fdcdb6981631c833e82e5dc3e376734ae6f97eb49",
+    "supported": false,
+    "unsupported_category": "modal_misspelling"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "lace",
+    "id": "source:4fbc509db1cc0f21b3bf58a391f6c6e5c16ef29e00e38cd9e26a929810790f0b",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:4fbc509db1cc0f21b3bf58a391f6c6e5c16ef29e00e38cd9e26a929810790f0b",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "P",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          0,
+          6
+        ],
+        "actor": [
+          35,
+          51
+        ],
+        "condition": null,
+        "modality": [
+          52,
+          64
+        ],
+        "object": [
+          11,
+          27
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:6fa6c5f9583acae0d970467981cfe0b46980db5baa05231b02db7fe8547051eb",
+    "source_sha256": "4fbc509db1cc0f21b3bf58a391f6c6e5c16ef29e00e38cd9e26a929810790f0b",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "lace",
+    "id": "source:c547296b13745a82fc836262026b06b64ffe178409ca3374cb0d0581b7e949dd",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:c547296b13745a82fc836262026b06b64ffe178409ca3374cb0d0581b7e949dd",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "O",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          31,
+          35
+        ],
+        "actor": [
+          4,
+          16
+        ],
+        "condition": null,
+        "modality": [
+          17,
+          30
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:9b543ceacbfb0b9d9b1902623cb2c28b6b6df0cb3d17aa970ad8518a1ede1649",
+    "source_sha256": "c547296b13745a82fc836262026b06b64ffe178409ca3374cb0d0581b7e949dd",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:8ec744a949d159cd570c84cc603f06a395bb2d3cfd16ad010787d8d69af7b65e",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:2860b0f3619b193b99b50e1ed69fc563955ac703a3ac402a3c39a535a4fa5a53",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:b3442212321f7ee8df228a04eea5ea760e5f318718a23370863af827ce51e49e",
+    "source_sha256": "8ec744a949d159cd570c84cc603f06a395bb2d3cfd16ad010787d8d69af7b65e",
+    "supported": false,
+    "unsupported_category": "extra_exception"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:2d7b87130670703606b08889a151312079d33f19b399b2bfa9211ceb03142606",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:2c7c5df0d07fc5b60da7faed57211ded18f6c0c70229b84534242d9866f5adb7",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:0bc918adc9a60fb3190303450100a2bcfffecae1d3246c08f0d540d32afc7026",
+    "source_sha256": "2d7b87130670703606b08889a151312079d33f19b399b2bfa9211ceb03142606",
+    "supported": false,
+    "unsupported_category": "modal_misspelling"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "baste",
+    "id": "source:2840e129a3084ee9d70d5199a8fb0a225c770c9f975a49f5e1097e41444bc063",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:2840e129a3084ee9d70d5199a8fb0a225c770c9f975a49f5e1097e41444bc063",
+    "prediction": {
+      "condition_attachment": "rule",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "O",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          36,
+          43
+        ],
+        "actor": [
+          20,
+          33
+        ],
+        "condition": [
+          3,
+          14
+        ],
+        "modality": [
+          63,
+          74
+        ],
+        "object": [
+          48,
+          62
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:3e609b583f28c97b6d8e0498b35151ae2dc67182209b61789b848d0f0b851c70",
+    "source_sha256": "2840e129a3084ee9d70d5199a8fb0a225c770c9f975a49f5e1097e41444bc063",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:cf8a5215cea59f59f8dfb76fda88886211fdeee74435e56e1f9cec388e54c17d",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:bd27fc5c0164e9ddee756de258f9f75404b7f937fe2e20747650ee8a68f11025",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:95ae5d037de6227f7a1b3e853dcc38f0cefd229bf1a2f32987fc937e0f3e7e61",
+    "source_sha256": "cf8a5215cea59f59f8dfb76fda88886211fdeee74435e56e1f9cec388e54c17d",
+    "supported": false,
+    "unsupported_category": "modal_deletion"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "button",
+    "id": "source:f7e611f02d0f2c9f7a0ca3769dc393b286cf2909e0cad433701670e2d3df1b70",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:f7e611f02d0f2c9f7a0ca3769dc393b286cf2909e0cad433701670e2d3df1b70",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "P",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          47,
+          53
+        ],
+        "actor": [
+          26,
+          43
+        ],
+        "condition": null,
+        "modality": [
+          3,
+          17
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:cc017e93eade4d052fb375075baa8aae0e7c537728e4e3b2e267369fa221ba09",
+    "source_sha256": "f7e611f02d0f2c9f7a0ca3769dc393b286cf2909e0cad433701670e2d3df1b70",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:a591ceedd7afec005091a8ad4ea06e82537854d608bd65d5272c4078bf4e8aa4",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:791654e5cfd90a4f11e8657a6d5ec56f7d7cf3451274a6ce99f52327269a148c",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:bc2e4298220dc0cdc7de20e330cb83a4e5631bda297d0b83502b89c7304e72f4",
+    "source_sha256": "a591ceedd7afec005091a8ad4ea06e82537854d608bd65d5272c4078bf4e8aa4",
+    "supported": false,
+    "unsupported_category": "extra_exception"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "lace",
+    "id": "source:2860b0f3619b193b99b50e1ed69fc563955ac703a3ac402a3c39a535a4fa5a53",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:2860b0f3619b193b99b50e1ed69fc563955ac703a3ac402a3c39a535a4fa5a53",
+    "prediction": {
+      "condition_attachment": "statement",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "P",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          42,
+          46
+        ],
+        "actor": [
+          26,
+          38
+        ],
+        "condition": [
+          81,
+          96
+        ],
+        "modality": [
+          3,
+          17
+        ],
+        "object": [
+          51,
+          65
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:b3442212321f7ee8df228a04eea5ea760e5f318718a23370863af827ce51e49e",
+    "source_sha256": "2860b0f3619b193b99b50e1ed69fc563955ac703a3ac402a3c39a535a4fa5a53",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:01b5f29c4c9a5908f25d7f7a5b3381b703468bb88735143abd593b44bb12f42b",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:78cf9f61047024d582355260666835bb8e0d5b0b65c312406f618db99e1a6cf0",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:24b89e590f31240ddaa63e28fc35049b232613a8ee26c87e0ebc71661090fafe",
+    "source_sha256": "01b5f29c4c9a5908f25d7f7a5b3381b703468bb88735143abd593b44bb12f42b",
+    "supported": false,
+    "unsupported_category": "modal_deletion"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "tastefully emboss",
+    "id": "source:803a5e11bbb37f53d8e2046b5841b4691189f0fa6351b4dbce2830162b2474f8",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:803a5e11bbb37f53d8e2046b5841b4691189f0fa6351b4dbce2830162b2474f8",
+    "prediction": {
+      "condition_attachment": "statement",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "P",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          20,
+          40
+        ],
+        "actor": [
+          4,
+          17
+        ],
+        "condition": [
+          60,
+          74
+        ],
+        "modality": [
+          41,
+          53
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:d63722d38532186e6aec1c68aa24d1f431d17fe7df5be1cac96a28a31e2c897d",
+    "source_sha256": "803a5e11bbb37f53d8e2046b5841b4691189f0fa6351b4dbce2830162b2474f8",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:703ebcd7740ab2d51b41d993c8e4acd607c85b8977e4c5764b1e861719985787",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:f0697536161151cd8d29361349196febed0955ded96b9af883b4412e4c5be04a",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:0967e1d3c0be7b4bc86514b9884f29dcece66ef5c0828e558ddc10a7973cc362",
+    "source_sha256": "703ebcd7740ab2d51b41d993c8e4acd607c85b8977e4c5764b1e861719985787",
+    "supported": false,
+    "unsupported_category": "second_rule"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:2e9768c9375b149cf0d1e36a0be7da2c53f78b10e5cdf7bd1f32cbaf22768c57",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:dd4d8ca4a49468ab1148c414a3364e0e00f5b7d6177b1c1b1f63d86eafc686c5",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:685422ec8b32f82d6a7566ecc3d137e60fd3ff0e78331d6a98476be10e08c770",
+    "source_sha256": "2e9768c9375b149cf0d1e36a0be7da2c53f78b10e5cdf7bd1f32cbaf22768c57",
+    "supported": false,
+    "unsupported_category": "extra_exception"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:1d4954240e5e17590304ab15d19afa45df9ca7ea1b61c288104d79c636142165",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:8687181b80ef5e95121c28a504e3f1baf744d094f7c06d64d3eb4f2dc771bff1",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:75d4f9bf0015966dc803dce4e0c1217fa9aafa311bc7209ffb5b7b9038964b54",
+    "source_sha256": "1d4954240e5e17590304ab15d19afa45df9ca7ea1b61c288104d79c636142165",
+    "supported": false,
+    "unsupported_category": "second_rule"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "elegantly smock",
+    "id": "source:52d32ad78ce8093d1cc616c4dfd79f96df5e55f07e5c52ef0825a8632585a8de",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:52d32ad78ce8093d1cc616c4dfd79f96df5e55f07e5c52ef0825a8632585a8de",
+    "prediction": {
+      "condition_attachment": "rule",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "O",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          41,
+          56
+        ],
+        "actor": [
+          23,
+          35
+        ],
+        "condition": [
+          3,
+          17
+        ],
+        "modality": [
+          36,
+          40
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:4b2544e61989de1578c8b4291d8739ef7a0ca69007aee6a0d270a1ba5b595c7b",
+    "source_sha256": "52d32ad78ce8093d1cc616c4dfd79f96df5e55f07e5c52ef0825a8632585a8de",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:5d43433c0896372228c7bfae3e6752f3ac94d6482bee219fd84561b65c3da7de",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:d6395453abe6bb87063ee7963d6160db5cd1428b0589d22cb43d8bd6e5e7936a",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:7ea2d44216788d36151e34e96b0cfbbc236bdb2320fd46b15876edb23fb86355",
+    "source_sha256": "5d43433c0896372228c7bfae3e6752f3ac94d6482bee219fd84561b65c3da7de",
+    "supported": false,
+    "unsupported_category": "extra_exception"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "ruffle",
+    "id": "source:dd4d8ca4a49468ab1148c414a3364e0e00f5b7d6177b1c1b1f63d86eafc686c5",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:dd4d8ca4a49468ab1148c414a3364e0e00f5b7d6177b1c1b1f63d86eafc686c5",
+    "prediction": {
+      "condition_attachment": "statement",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "P",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          22,
+          28
+        ],
+        "actor": [
+          4,
+          17
+        ],
+        "condition": [
+          51,
+          66
+        ],
+        "modality": [
+          18,
+          21
+        ],
+        "object": [
+          33,
+          47
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:685422ec8b32f82d6a7566ecc3d137e60fd3ff0e78331d6a98476be10e08c770",
+    "source_sha256": "dd4d8ca4a49468ab1148c414a3364e0e00f5b7d6177b1c1b1f63d86eafc686c5",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "stylishly fringe",
+    "id": "source:9e84b587535afe87529c84c3b09854d7c5c174ed99c1cb2a826023af755e26d7",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:9e84b587535afe87529c84c3b09854d7c5c174ed99c1cb2a826023af755e26d7",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "F",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          63,
+          81
+        ],
+        "actor": [
+          31,
+          43
+        ],
+        "condition": null,
+        "modality": [
+          44,
+          62
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:b3857a7b64bb8e15c3138699c9a01e8bf1d63cf5f0950fbd3c4f60fd045ce334",
+    "source_sha256": "9e84b587535afe87529c84c3b09854d7c5c174ed99c1cb2a826023af755e26d7",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:cbb30218f8e080d527bb5d8e90357dc6e083ede3880fcb895a49e931878c6002",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:ce6a72ac7a4f7e69a4aea91d1601f7ce5f57a57649df729250260bc64a5fa179",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:3c23385baaec346245301f5e95fd746b10dfa67d8cda0c9416762801d39b5f64",
+    "source_sha256": "cbb30218f8e080d527bb5d8e90357dc6e083ede3880fcb895a49e931878c6002",
+    "supported": false,
+    "unsupported_category": "modal_deletion"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:ab1d2813300d577c9c9f33db9174b8d8b4a68b9c15667e6b3e2c932503341771",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:c860fc34607fb3a250f877c9ef239a123c19a9fa41c572cea87847018747de6a",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:172a6597d366292d008e0de84fb516a91aa05d1d6cb1ac7d336eb6053af176e5",
+    "source_sha256": "ab1d2813300d577c9c9f33db9174b8d8b4a68b9c15667e6b3e2c932503341771",
+    "supported": false,
+    "unsupported_category": "modal_deletion"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "stylishly fringe",
+    "id": "source:4eaba13c3623494c9a6cf4f435e57d2d6c762903393a20cec8b19c68488b8826",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:4eaba13c3623494c9a6cf4f435e57d2d6c762903393a20cec8b19c68488b8826",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "O",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          0,
+          18
+        ],
+        "actor": [
+          26,
+          41
+        ],
+        "condition": null,
+        "modality": [
+          42,
+          53
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:8a5e6b2fa89f0b5f902dd4773dbb86e8c8508aef933a37273eff311b2f059594",
+    "source_sha256": "4eaba13c3623494c9a6cf4f435e57d2d6c762903393a20cec8b19c68488b8826",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:76f701b61f66b67cdc9e331ce1b03b5afb72637cf726d5dec20efe420b0ba237",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:b27fedd1d67b7ca95f577d446677daa5d3fa2c7ce5d7d1a097df986becab656c",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:14aa7aee2fb074d9698a958b30885799c24f1f83ba8811086ebee5c3c6a67994",
+    "source_sha256": "76f701b61f66b67cdc9e331ce1b03b5afb72637cf726d5dec20efe420b0ba237",
+    "supported": false,
+    "unsupported_category": "second_rule"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "tastefully emboss",
+    "id": "source:51688a048963cd6a71fdbce095fcdb02b984216410af2986a62b79c015a3e2d7",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:51688a048963cd6a71fdbce095fcdb02b984216410af2986a62b79c015a3e2d7",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "P",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          46,
+          63
+        ],
+        "actor": [
+          26,
+          42
+        ],
+        "condition": null,
+        "modality": [
+          3,
+          17
+        ],
+        "object": [
+          68,
+          84
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": true,
+    "source_group": "support-retention-group:cfe6c86188166dca12a1620a951b6f210dcfe471038f5b39e030eb7f73548fda",
+    "source_sha256": "51688a048963cd6a71fdbce095fcdb02b984216410af2986a62b79c015a3e2d7",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:4d78518323bf8324b99b0aeb5b2bfd117ca9428c03e51b50c373feab93447e3f",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:f56b8af1f8a155e6f8fad83a9f1030c06cf5bace079a859ce9bc6fc828cea369",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:f7504be080e4e4b7af8b6b572059cf619707ff17be4bea8e8535e1f51b182391",
+    "source_sha256": "4d78518323bf8324b99b0aeb5b2bfd117ca9428c03e51b50c373feab93447e3f",
+    "supported": false,
+    "unsupported_category": "extra_exception"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:619809d0a0c5079f3e8c2a2a980e24fdd55727e3d96b3301f7f7c4d203b3ce5b",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:eff977a9a290b7d21912242d9ed27160ea50ef0362136d71140800d5203f3b9e",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:6adfc00032704a1cd5469c2c370cecf576dec3ec516a68df361a1ddc8861c0f4",
+    "source_sha256": "619809d0a0c5079f3e8c2a2a980e24fdd55727e3d96b3301f7f7c4d203b3ce5b",
+    "supported": false,
+    "unsupported_category": "modal_deletion"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:1890b3f5d60cbcbbd3122990e3c1566f9c91e62a153ed918e6a35ccb12e996d1",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:6769eca30b08e18ae0171ae8ac0271114748fa167c5cc68e6b218ed1b077d4f8",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:4beb4f5e5e9cc3265eef9cb58bfaff61a319f522d5cf6c8c25a36339dac99b85",
+    "source_sha256": "1890b3f5d60cbcbbd3122990e3c1566f9c91e62a153ed918e6a35ccb12e996d1",
+    "supported": false,
+    "unsupported_category": "second_rule"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "elegantly smock",
+    "id": "source:2c7c5df0d07fc5b60da7faed57211ded18f6c0c70229b84534242d9866f5adb7",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:2c7c5df0d07fc5b60da7faed57211ded18f6c0c70229b84534242d9866f5adb7",
+    "prediction": {
+      "condition_attachment": "rule",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "P",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          74,
+          89
+        ],
+        "actor": [
+          31,
+          48
+        ],
+        "condition": [
+          53,
+          68
+        ],
+        "modality": [
+          70,
+          73
+        ],
+        "object": [
+          94,
+          111
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": true,
+    "source_group": "support-retention-group:0bc918adc9a60fb3190303450100a2bcfffecae1d3246c08f0d540d32afc7026",
+    "source_sha256": "2c7c5df0d07fc5b60da7faed57211ded18f6c0c70229b84534242d9866f5adb7",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:282559f140d0376fbf3f34d3a4e8401b2f5df10d41be4fd4eb7f3fc525174713",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:cdeb4a36901535b84db75afb93a757a7a6351c467303f2adbe681fd7738311dc",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:e438e0a59c96d80eee2f268b23292f3af4228ae269474c4a9446124eeb5f79b3",
+    "source_sha256": "282559f140d0376fbf3f34d3a4e8401b2f5df10d41be4fd4eb7f3fc525174713",
+    "supported": false,
+    "unsupported_category": "second_rule"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:6c8c645d8b65b6970e15cf045e2609689c734e6ec5559ce22ab30a35b02aecd6",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:0840c2d4f9ed733b8de16cf572149ea2d144e530d90f75b8765e5f804e0f0827",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:d3027fd1aaf04ee7556a04aeefeeffb8373da55690a2dd3bd3f35d7efbf9e43a",
+    "source_sha256": "6c8c645d8b65b6970e15cf045e2609689c734e6ec5559ce22ab30a35b02aecd6",
+    "supported": false,
+    "unsupported_category": "modal_misspelling"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:058a3fe0dc00ea327855ca720cb60fd85fe6c95b26f2bf2cc9db8e2eb1dadbb7",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:eb2556d43e65b746d6c71e3b64b51049dba333918f7ba8d8a47ae17d7438276c",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:1d53979cbe9045488ed86b1d5de223836aea7423c37a3859de02de5f08894def",
+    "source_sha256": "058a3fe0dc00ea327855ca720cb60fd85fe6c95b26f2bf2cc9db8e2eb1dadbb7",
+    "supported": false,
+    "unsupported_category": "second_rule"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "zip",
+    "id": "source:eb2556d43e65b746d6c71e3b64b51049dba333918f7ba8d8a47ae17d7438276c",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:eb2556d43e65b746d6c71e3b64b51049dba333918f7ba8d8a47ae17d7438276c",
+    "prediction": {
+      "condition_attachment": "statement",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "O",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          38,
+          45
+        ],
+        "actor": [
+          24,
+          35
+        ],
+        "condition": [
+          3,
+          18
+        ],
+        "modality": [
+          46,
+          57
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:1d53979cbe9045488ed86b1d5de223836aea7423c37a3859de02de5f08894def",
+    "source_sha256": "eb2556d43e65b746d6c71e3b64b51049dba333918f7ba8d8a47ae17d7438276c",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "lace",
+    "id": "source:6622105f5d00ad37af70543dc8d037bbd2c95e42e5403b4f2ea64e41eb965e7f",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:6622105f5d00ad37af70543dc8d037bbd2c95e42e5403b4f2ea64e41eb965e7f",
+    "prediction": {
+      "condition_attachment": "statement",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "F",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          42,
+          46
+        ],
+        "actor": [
+          19,
+          31
+        ],
+        "condition": [
+          3,
+          13
+        ],
+        "modality": [
+          32,
+          41
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:923610fd66d2f23da5fd8d3d2f21ee2b99831e4efe061f598071c4ac3035b851",
+    "source_sha256": "6622105f5d00ad37af70543dc8d037bbd2c95e42e5403b4f2ea64e41eb965e7f",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "button",
+    "id": "source:f56b8af1f8a155e6f8fad83a9f1030c06cf5bace079a859ce9bc6fc828cea369",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:f56b8af1f8a155e6f8fad83a9f1030c06cf5bace079a859ce9bc6fc828cea369",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "P",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          24,
+          33
+        ],
+        "actor": [
+          4,
+          21
+        ],
+        "condition": null,
+        "modality": [
+          53,
+          65
+        ],
+        "object": [
+          38,
+          52
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:f7504be080e4e4b7af8b6b572059cf619707ff17be4bea8e8535e1f51b182391",
+    "source_sha256": "f56b8af1f8a155e6f8fad83a9f1030c06cf5bace079a859ce9bc6fc828cea369",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "lace",
+    "id": "source:f0697536161151cd8d29361349196febed0955ded96b9af883b4412e4c5be04a",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:f0697536161151cd8d29361349196febed0955ded96b9af883b4412e4c5be04a",
+    "prediction": {
+      "condition_attachment": "rule",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "O",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          68,
+          72
+        ],
+        "actor": [
+          31,
+          44
+        ],
+        "condition": [
+          49,
+          60
+        ],
+        "modality": [
+          62,
+          67
+        ],
+        "object": [
+          77,
+          93
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:0967e1d3c0be7b4bc86514b9884f29dcece66ef5c0828e558ddc10a7973cc362",
+    "source_sha256": "f0697536161151cd8d29361349196febed0955ded96b9af883b4412e4c5be04a",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "stylishly fringe",
+    "id": "source:8811c40b5d4b5ffd1cbf445cd0e8c8da5dc3bc9df8891ff932be66e9643c3b1a",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:8811c40b5d4b5ffd1cbf445cd0e8c8da5dc3bc9df8891ff932be66e9643c3b1a",
+    "prediction": {
+      "condition_attachment": "statement",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "O",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          42,
+          58
+        ],
+        "actor": [
+          25,
+          38
+        ],
+        "condition": [
+          74,
+          88
+        ],
+        "modality": [
+          3,
+          16
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:5be47a634a095d4ac117a446604b22ddb430b9d5d4867087c6678c5f1e7b95c9",
+    "source_sha256": "8811c40b5d4b5ffd1cbf445cd0e8c8da5dc3bc9df8891ff932be66e9643c3b1a",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "ruffle",
+    "id": "source:41911327a03eaec5b9606f16bfdfc5d0aaeb0e70fb00bd4677cf1ed71fe7d49f",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:41911327a03eaec5b9606f16bfdfc5d0aaeb0e70fb00bd4677cf1ed71fe7d49f",
+    "prediction": {
+      "condition_attachment": "statement",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "O",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          49,
+          55
+        ],
+        "actor": [
+          20,
+          33
+        ],
+        "condition": [
+          3,
+          14
+        ],
+        "modality": [
+          34,
+          48
+        ],
+        "object": [
+          60,
+          74
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:c28f9f13836b979666aff52dcfdeb17210a8a28d8708e6ac33807abfd468f675",
+    "source_sha256": "41911327a03eaec5b9606f16bfdfc5d0aaeb0e70fb00bd4677cf1ed71fe7d49f",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:4be895415341b2263d279f70996da32bc1a965a6e6e772eb6ad2ea6f8ec60e75",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:4991260b271e32927bdee579a1d597457f7a418d5dd06564ffeb76ecbfc01dd6",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:ee8e5413c802cfeaaa2753de20d800c53a8981f36f70b3dc5c135d5a909064dd",
+    "source_sha256": "4be895415341b2263d279f70996da32bc1a965a6e6e772eb6ad2ea6f8ec60e75",
+    "supported": false,
+    "unsupported_category": "extra_exception"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "tastefully emboss",
+    "id": "source:2979561e37d3ae14cfc15338b5d559d84c0215e3b61e3d0662372e8603228c6d",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:2979561e37d3ae14cfc15338b5d559d84c0215e3b61e3d0662372e8603228c6d",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "F",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          64,
+          81
+        ],
+        "actor": [
+          31,
+          47
+        ],
+        "condition": null,
+        "modality": [
+          48,
+          63
+        ],
+        "object": [
+          86,
+          102
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": true,
+    "source_group": "support-retention-group:07a4b1ee3908141ec1b4b2f81550891a88aeb53e94ce4e5905446578b74c210b",
+    "source_sha256": "2979561e37d3ae14cfc15338b5d559d84c0215e3b61e3d0662372e8603228c6d",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:9dd288d6f329bbec5a81e00e2db9059cdbe1ed76355e47caab5cd7878424d899",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:8af9c052245698127e3633c475ef08cdd09f0a2236894328044d2958adb5f2a6",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:a283161d2e167d71c9810d91d254a639be6bc3e5abdf955d5d0c44fdc6fa3a20",
+    "source_sha256": "9dd288d6f329bbec5a81e00e2db9059cdbe1ed76355e47caab5cd7878424d899",
+    "supported": false,
+    "unsupported_category": "modal_deletion"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "elegantly smock",
+    "id": "source:e78059b641158610ac48ab5742ba58bca8a57988de1c9bdad47ca93d47556067",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:e78059b641158610ac48ab5742ba58bca8a57988de1c9bdad47ca93d47556067",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "P",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          35,
+          50
+        ],
+        "actor": [
+          4,
+          16
+        ],
+        "condition": null,
+        "modality": [
+          17,
+          34
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:a421e0f5f919236b67a8aa867abe687f7fb3b6d345e354ffa92373fb655684a4",
+    "source_sha256": "e78059b641158610ac48ab5742ba58bca8a57988de1c9bdad47ca93d47556067",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "zip",
+    "id": "source:6b83536c6019748bf4e61ece288d1e3a9c931c5ca895edc2ac4ac498c862b1d2",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:6b83536c6019748bf4e61ece288d1e3a9c931c5ca895edc2ac4ac498c862b1d2",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "O",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          64,
+          67
+        ],
+        "actor": [
+          31,
+          49
+        ],
+        "condition": null,
+        "modality": [
+          50,
+          63
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:15198b4a77e2978e2edf9490f2d25f62de384a155039770e778ef0ca3b1fc7c3",
+    "source_sha256": "6b83536c6019748bf4e61ece288d1e3a9c931c5ca895edc2ac4ac498c862b1d2",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "lace",
+    "id": "source:8af9c052245698127e3633c475ef08cdd09f0a2236894328044d2958adb5f2a6",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:8af9c052245698127e3633c475ef08cdd09f0a2236894328044d2958adb5f2a6",
+    "prediction": {
+      "condition_attachment": "rule",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "O",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          66,
+          70
+        ],
+        "actor": [
+          45,
+          62
+        ],
+        "condition": [
+          3,
+          18
+        ],
+        "modality": [
+          23,
+          36
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:a283161d2e167d71c9810d91d254a639be6bc3e5abdf955d5d0c44fdc6fa3a20",
+    "source_sha256": "8af9c052245698127e3633c475ef08cdd09f0a2236894328044d2958adb5f2a6",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:cac56ed6fcf1ed529e2bf8ac267b45ec11ebc52be1c63e19215cf6949f693818",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:c547296b13745a82fc836262026b06b64ffe178409ca3374cb0d0581b7e949dd",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:9b543ceacbfb0b9d9b1902623cb2c28b6b6df0cb3d17aa970ad8518a1ede1649",
+    "source_sha256": "cac56ed6fcf1ed529e2bf8ac267b45ec11ebc52be1c63e19215cf6949f693818",
+    "supported": false,
+    "unsupported_category": "modal_misspelling"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:0747ebc888fcb6e6782a19ba1688f5074b24a72a78e07a9c1e1d8960fa60e864",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:2e0f45c870cbf392cfcb7ce6a4832436122a091323bc97eb2b6dc69ee6c31f80",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:f0f208e85a8a869c173d68340f518861955f16ba9a0d2d0c758b103030e47820",
+    "source_sha256": "0747ebc888fcb6e6782a19ba1688f5074b24a72a78e07a9c1e1d8960fa60e864",
+    "supported": false,
+    "unsupported_category": "modal_misspelling"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:2dccc306f3f36672e56b8ac0a6a49aa9dad5432063451aa95aab7ce118daf96f",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:51688a048963cd6a71fdbce095fcdb02b984216410af2986a62b79c015a3e2d7",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:cfe6c86188166dca12a1620a951b6f210dcfe471038f5b39e030eb7f73548fda",
+    "source_sha256": "2dccc306f3f36672e56b8ac0a6a49aa9dad5432063451aa95aab7ce118daf96f",
+    "supported": false,
+    "unsupported_category": "second_rule"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "button",
+    "id": "source:1720fee80cca771f309188d3140bd4a0712abfae9be3e47a4117970ca2ec0337",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:1720fee80cca771f309188d3140bd4a0712abfae9be3e47a4117970ca2ec0337",
+    "prediction": {
+      "condition_attachment": "rule",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "P",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          55,
+          61
+        ],
+        "actor": [
+          24,
+          37
+        ],
+        "condition": [
+          3,
+          18
+        ],
+        "modality": [
+          38,
+          54
+        ],
+        "object": [
+          66,
+          82
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:8ed7f4863816ba63edff97ee855b0c84c3c5f0fd4096c038ccaf7d1a0e21b9a5",
+    "source_sha256": "1720fee80cca771f309188d3140bd4a0712abfae9be3e47a4117970ca2ec0337",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:2ab1898e0f0d645e58b105c6d57124ecc69de443de4bcc5201f5adbe81c6e8c4",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:e78059b641158610ac48ab5742ba58bca8a57988de1c9bdad47ca93d47556067",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:a421e0f5f919236b67a8aa867abe687f7fb3b6d345e354ffa92373fb655684a4",
+    "source_sha256": "2ab1898e0f0d645e58b105c6d57124ecc69de443de4bcc5201f5adbe81c6e8c4",
+    "supported": false,
+    "unsupported_category": "second_rule"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "button",
+    "id": "source:d9209686833834e4ba51fdf2520c50f663ca61d195c4b899f1529cd61fabc542",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:d9209686833834e4ba51fdf2520c50f663ca61d195c4b899f1529cd61fabc542",
+    "prediction": {
+      "condition_attachment": "rule",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "O",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          23,
+          29
+        ],
+        "actor": [
+          4,
+          16
+        ],
+        "condition": [
+          50,
+          61
+        ],
+        "modality": [
+          17,
+          22
+        ],
+        "object": [
+          34,
+          46
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": true,
+    "source_group": "support-retention-group:faafd823a983596755d5ce3c5ecce874cdd79387f6d099766e5450e5754c7892",
+    "source_sha256": "d9209686833834e4ba51fdf2520c50f663ca61d195c4b899f1529cd61fabc542",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "ruffle",
+    "id": "source:8687181b80ef5e95121c28a504e3f1baf744d094f7c06d64d3eb4f2dc771bff1",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:8687181b80ef5e95121c28a504e3f1baf744d094f7c06d64d3eb4f2dc771bff1",
+    "prediction": {
+      "condition_attachment": "statement",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "P",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          84,
+          90
+        ],
+        "actor": [
+          31,
+          46
+        ],
+        "condition": [
+          51,
+          66
+        ],
+        "modality": [
+          68,
+          83
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:75d4f9bf0015966dc803dce4e0c1217fa9aafa311bc7209ffb5b7b9038964b54",
+    "source_sha256": "8687181b80ef5e95121c28a504e3f1baf744d094f7c06d64d3eb4f2dc771bff1",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:0523ee6101badd023934914b03f2e446ecb2b9b79523fefb65ebfd7abbdbb2e3",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:f7e611f02d0f2c9f7a0ca3769dc393b286cf2909e0cad433701670e2d3df1b70",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:cc017e93eade4d052fb375075baa8aae0e7c537728e4e3b2e267369fa221ba09",
+    "source_sha256": "0523ee6101badd023934914b03f2e446ecb2b9b79523fefb65ebfd7abbdbb2e3",
+    "supported": false,
+    "unsupported_category": "modal_misspelling"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "baste",
+    "id": "source:bd27fc5c0164e9ddee756de258f9f75404b7f937fe2e20747650ee8a68f11025",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:bd27fc5c0164e9ddee756de258f9f75404b7f937fe2e20747650ee8a68f11025",
+    "prediction": {
+      "condition_attachment": "rule",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "F",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          0,
+          7
+        ],
+        "actor": [
+          34,
+          47
+        ],
+        "condition": [
+          66,
+          81
+        ],
+        "modality": [
+          48,
+          61
+        ],
+        "object": [
+          12,
+          26
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:95ae5d037de6227f7a1b3e853dcc38f0cefd229bf1a2f32987fc937e0f3e7e61",
+    "source_sha256": "bd27fc5c0164e9ddee756de258f9f75404b7f937fe2e20747650ee8a68f11025",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:9d09242ac6bb245a28ba091b5fd5a89540c0617b789163a6ff2f097d0ff7cd47",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:3297fccc13d8ddcc842f0f007914857753cb2bc684112dba6acdd6461a2ed72b",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:ed9337566cea30002aa4ed2b369970a0d5d209d666fd4a2b453ef5eafbcd6990",
+    "source_sha256": "9d09242ac6bb245a28ba091b5fd5a89540c0617b789163a6ff2f097d0ff7cd47",
+    "supported": false,
+    "unsupported_category": "second_rule"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:c807219b11c723c15228939dbbcff64ad424e5b87aac5b42d4bd9addf4e671da",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:2979561e37d3ae14cfc15338b5d559d84c0215e3b61e3d0662372e8603228c6d",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:07a4b1ee3908141ec1b4b2f81550891a88aeb53e94ce4e5905446578b74c210b",
+    "source_sha256": "c807219b11c723c15228939dbbcff64ad424e5b87aac5b42d4bd9addf4e671da",
+    "supported": false,
+    "unsupported_category": "modal_deletion"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "zip",
+    "id": "source:7427a26ee230124cfd39f2ad7b132ad0734877577baea1dc1d39fdd696af3c8e",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:7427a26ee230124cfd39f2ad7b132ad0734877577baea1dc1d39fdd696af3c8e",
+    "prediction": {
+      "condition_attachment": "statement",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "F",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          46,
+          49
+        ],
+        "actor": [
+          24,
+          42
+        ],
+        "condition": [
+          65,
+          75
+        ],
+        "modality": [
+          3,
+          15
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:e11c7e48415a15013005fe3e807ba547abc6dbcfc619aab8a045fb2398663ea7",
+    "source_sha256": "7427a26ee230124cfd39f2ad7b132ad0734877577baea1dc1d39fdd696af3c8e",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:09c649af8da194f31bd20cf0ee98e9b1f1a17ecf8fdce70609141cfae16b1c3d",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:a1a49464c863038594d422e8de3f62c5cd6a1d3637d51baace043564417c24cf",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:80d962557164857a849a32d937ca74f7bdf50e52943f6d6782b370343fdf8eae",
+    "source_sha256": "09c649af8da194f31bd20cf0ee98e9b1f1a17ecf8fdce70609141cfae16b1c3d",
+    "supported": false,
+    "unsupported_category": "modal_misspelling"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:4a49f9e6d5d623ed331fe091477b5cc55c6fca8a0d1c4b4390618ef53146933f",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:1720fee80cca771f309188d3140bd4a0712abfae9be3e47a4117970ca2ec0337",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:8ed7f4863816ba63edff97ee855b0c84c3c5f0fd4096c038ccaf7d1a0e21b9a5",
+    "source_sha256": "4a49f9e6d5d623ed331fe091477b5cc55c6fca8a0d1c4b4390618ef53146933f",
+    "supported": false,
+    "unsupported_category": "second_rule"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "stylishly fringe",
+    "id": "source:a1a49464c863038594d422e8de3f62c5cd6a1d3637d51baace043564417c24cf",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:a1a49464c863038594d422e8de3f62c5cd6a1d3637d51baace043564417c24cf",
+    "prediction": {
+      "condition_attachment": "rule",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "P",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          42,
+          60
+        ],
+        "actor": [
+          24,
+          39
+        ],
+        "condition": [
+          3,
+          18
+        ],
+        "modality": [
+          61,
+          73
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:80d962557164857a849a32d937ca74f7bdf50e52943f6d6782b370343fdf8eae",
+    "source_sha256": "a1a49464c863038594d422e8de3f62c5cd6a1d3637d51baace043564417c24cf",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "tastefully emboss",
+    "id": "source:cd675edc63d6a7da8317a74ab49b7e28f23b9d0c11c08d60cec7e2077a41cb4d",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:cd675edc63d6a7da8317a74ab49b7e28f23b9d0c11c08d60cec7e2077a41cb4d",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "F",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          68,
+          85
+        ],
+        "actor": [
+          51,
+          64
+        ],
+        "condition": null,
+        "modality": [
+          30,
+          42
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:417e7ef7354303b3591873610dd7328c53c75efe437f9ddfb675b420b16e07dd",
+    "source_sha256": "cd675edc63d6a7da8317a74ab49b7e28f23b9d0c11c08d60cec7e2077a41cb4d",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "ruffle",
+    "id": "source:8955332b7dd486a753d730022fd9765312b9583ae5482add8a565841b6ad7232",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:8955332b7dd486a753d730022fd9765312b9583ae5482add8a565841b6ad7232",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "F",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          20,
+          28
+        ],
+        "actor": [
+          4,
+          17
+        ],
+        "condition": null,
+        "modality": [
+          47,
+          60
+        ],
+        "object": [
+          33,
+          46
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": true,
+    "source_group": "support-retention-group:813ff9a5b753f80afa58da0d78addb122c8965ff4c475ce9268f90163fedf861",
+    "source_sha256": "8955332b7dd486a753d730022fd9765312b9583ae5482add8a565841b6ad7232",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "elegantly smock",
+    "id": "source:e326e20f2c70182b6966850930016d60b88d950db16379e478f9dc5d5b9d3ac2",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:e326e20f2c70182b6966850930016d60b88d950db16379e478f9dc5d5b9d3ac2",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "O",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          0,
+          18
+        ],
+        "actor": [
+          47,
+          60
+        ],
+        "condition": null,
+        "modality": [
+          61,
+          72
+        ],
+        "object": [
+          23,
+          39
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:50580fa259000c2938546344c6fc82e12275cfa57bbbd21fc591e318877613e0",
+    "source_sha256": "e326e20f2c70182b6966850930016d60b88d950db16379e478f9dc5d5b9d3ac2",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "ruffle",
+    "id": "source:cd20582c0002a03d7616fad96cc15f3b256b6489eede1da41c647d5e48f5df41",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:cd20582c0002a03d7616fad96cc15f3b256b6489eede1da41c647d5e48f5df41",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "P",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          73,
+          79
+        ],
+        "actor": [
+          53,
+          69
+        ],
+        "condition": null,
+        "modality": [
+          30,
+          44
+        ],
+        "object": [
+          84,
+          99
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:640f30da12ec7b7d199753c304c7e2f5faa182b401b000648f6812d01c9d1172",
+    "source_sha256": "cd20582c0002a03d7616fad96cc15f3b256b6489eede1da41c647d5e48f5df41",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:3f3226e96da28670bc9655274d0e4e577e2b154a87f27277197834a686dcaf26",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:cd675edc63d6a7da8317a74ab49b7e28f23b9d0c11c08d60cec7e2077a41cb4d",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:417e7ef7354303b3591873610dd7328c53c75efe437f9ddfb675b420b16e07dd",
+    "source_sha256": "3f3226e96da28670bc9655274d0e4e577e2b154a87f27277197834a686dcaf26",
+    "supported": false,
+    "unsupported_category": "modal_misspelling"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "elegantly smock",
+    "id": "source:eff977a9a290b7d21912242d9ed27160ea50ef0362136d71140800d5203f3b9e",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:eff977a9a290b7d21912242d9ed27160ea50ef0362136d71140800d5203f3b9e",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "P",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          50,
+          68
+        ],
+        "actor": [
+          34,
+          47
+        ],
+        "condition": null,
+        "modality": [
+          90,
+          102
+        ],
+        "object": [
+          73,
+          89
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:6adfc00032704a1cd5469c2c370cecf576dec3ec516a68df361a1ddc8861c0f4",
+    "source_sha256": "eff977a9a290b7d21912242d9ed27160ea50ef0362136d71140800d5203f3b9e",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:970e5400e09a47d6f012a96aaafd7d3f20329ecbcd447971c7b86f31d757d2c3",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:c4941ca36673e53137c5a99a1d25ce839644989686df762ce7542c71566623f6",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:cf1307de9afab99e90b8fa57d6960a0f1e62601a556c54e2c6352c5842077c11",
+    "source_sha256": "970e5400e09a47d6f012a96aaafd7d3f20329ecbcd447971c7b86f31d757d2c3",
+    "supported": false,
+    "unsupported_category": "modal_deletion"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:b118e3635a83489fc0ecc58aa4341d935808a3952c64015cb40581a23334695a",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:cd20582c0002a03d7616fad96cc15f3b256b6489eede1da41c647d5e48f5df41",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:640f30da12ec7b7d199753c304c7e2f5faa182b401b000648f6812d01c9d1172",
+    "source_sha256": "b118e3635a83489fc0ecc58aa4341d935808a3952c64015cb40581a23334695a",
+    "supported": false,
+    "unsupported_category": "modal_misspelling"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "baste",
+    "id": "source:b328f1ec2e2ed9f8fa9823581bf4c949bcef391cc74b6c09ccce5ef17fe885df",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:b328f1ec2e2ed9f8fa9823581bf4c949bcef391cc74b6c09ccce5ef17fe885df",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "F",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          44,
+          49
+        ],
+        "actor": [
+          24,
+          40
+        ],
+        "condition": null,
+        "modality": [
+          3,
+          15
+        ],
+        "object": [
+          54,
+          70
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:e66ad938e276806051d6395c39022b7116eb0a534b276b279d4b0a1dee995858",
+    "source_sha256": "b328f1ec2e2ed9f8fa9823581bf4c949bcef391cc74b6c09ccce5ef17fe885df",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:5eb759ac3c83c0d9f73b4c092b29307fefb32ae5d1dcbec4f698870a9baa0c18",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:3886ff9a759ccfe8d8558cd8580ff71d81ce02786b69db85b3663dfee938bbea",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:5268f4b5e77091f4165c52ac5b94d7e3daa4ff26926d2ba895b36ede1a516e77",
+    "source_sha256": "5eb759ac3c83c0d9f73b4c092b29307fefb32ae5d1dcbec4f698870a9baa0c18",
+    "supported": false,
+    "unsupported_category": "second_rule"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:6684d3fa4d5d1df477d29ae3c40d29e11741f449ad3aac1ac9fca7c91f7f3a86",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:5f3fda13dad850078e175b19d4b72620065d4d15f3516b76aec56493b6d590c5",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:7a92e506ec2427a9d6346f545151ad12f2b0e7ddbed11b8a0d4b66826bab6a70",
+    "source_sha256": "6684d3fa4d5d1df477d29ae3c40d29e11741f449ad3aac1ac9fca7c91f7f3a86",
+    "supported": false,
+    "unsupported_category": "modal_deletion"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:095d67bdfb61d5d4ba5fc2ff4b2897b3716948d66ed50cb19522e8f9e55de588",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:2840e129a3084ee9d70d5199a8fb0a225c770c9f975a49f5e1097e41444bc063",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:3e609b583f28c97b6d8e0498b35151ae2dc67182209b61789b848d0f0b851c70",
+    "source_sha256": "095d67bdfb61d5d4ba5fc2ff4b2897b3716948d66ed50cb19522e8f9e55de588",
+    "supported": false,
+    "unsupported_category": "modal_misspelling"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:d1e4f26cd0b60b08fae5a9f3777d63adce37dc9337a546bf04f4ad3773f52216",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:90545c5f6f64dedc6fe30284d6092c8ec18b12c3a256c032d49ffa5ed65c314f",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:843dbbf9e92107e9ba381bd8db070cac305364778591028d9ace55438b26a8c3",
+    "source_sha256": "d1e4f26cd0b60b08fae5a9f3777d63adce37dc9337a546bf04f4ad3773f52216",
+    "supported": false,
+    "unsupported_category": "extra_exception"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "elegantly smock",
+    "id": "source:b0946adc70e812588ca354cac6b38dfcc710f7e52e2a48f6e1e8d3964d469e8f",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:b0946adc70e812588ca354cac6b38dfcc710f7e52e2a48f6e1e8d3964d469e8f",
+    "prediction": {
+      "condition_attachment": "statement",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "P",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          63,
+          78
+        ],
+        "actor": [
+          46,
+          59
+        ],
+        "condition": [
+          3,
+          18
+        ],
+        "modality": [
+          23,
+          37
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:787f87b936e7b3751c2610472c5ffcb9b511345ebe0855b7d1e4a17a627bedc9",
+    "source_sha256": "b0946adc70e812588ca354cac6b38dfcc710f7e52e2a48f6e1e8d3964d469e8f",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:40a6197c6bf9f654a93f2d56aa89cfd8285d412c646a5e0088728d40eb8a9a04",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:803a5e11bbb37f53d8e2046b5841b4691189f0fa6351b4dbce2830162b2474f8",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:d63722d38532186e6aec1c68aa24d1f431d17fe7df5be1cac96a28a31e2c897d",
+    "source_sha256": "40a6197c6bf9f654a93f2d56aa89cfd8285d412c646a5e0088728d40eb8a9a04",
+    "supported": false,
+    "unsupported_category": "modal_misspelling"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "button",
+    "id": "source:c4941ca36673e53137c5a99a1d25ce839644989686df762ce7542c71566623f6",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:c4941ca36673e53137c5a99a1d25ce839644989686df762ce7542c71566623f6",
+    "prediction": {
+      "condition_attachment": "statement",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "P",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          0,
+          9
+        ],
+        "actor": [
+          17,
+          29
+        ],
+        "condition": [
+          47,
+          61
+        ],
+        "modality": [
+          30,
+          42
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:cf1307de9afab99e90b8fa57d6960a0f1e62601a556c54e2c6352c5842077c11",
+    "source_sha256": "c4941ca36673e53137c5a99a1d25ce839644989686df762ce7542c71566623f6",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "tastefully emboss",
+    "id": "source:3886ff9a759ccfe8d8558cd8580ff71d81ce02786b69db85b3663dfee938bbea",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:3886ff9a759ccfe8d8558cd8580ff71d81ce02786b69db85b3663dfee938bbea",
+    "prediction": {
+      "condition_attachment": "rule",
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "F",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          40,
+          60
+        ],
+        "actor": [
+          24,
+          37
+        ],
+        "condition": [
+          3,
+          18
+        ],
+        "modality": [
+          79,
+          92
+        ],
+        "object": [
+          65,
+          78
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": true,
+    "source_group": "support-retention-group:5268f4b5e77091f4165c52ac5b94d7e3daa4ff26926d2ba895b36ede1a516e77",
+    "source_sha256": "3886ff9a759ccfe8d8558cd8580ff71d81ce02786b69db85b3663dfee938bbea",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:4a732d1fa875e9609e61987c24aed067503803fc158f2b3b04681dab382b2188",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:2cf8b036ffe121d860448f1f8bc12bfcf093261e358ceb90488fc08f3e88c497",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:761b4c7a621a5806c1a8cd438c9da32d478aa8e6e9d05cd3a233a7d1f157797a",
+    "source_sha256": "4a732d1fa875e9609e61987c24aed067503803fc158f2b3b04681dab382b2188",
+    "supported": false,
+    "unsupported_category": "extra_exception"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:bdbf4375c6b030125990e0567859e06a36f97e1660696f162d09615d6c73532c",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:25b15d56ad1e451272e26990036a1364a6af5f67c5211f335ee37e04eae04f3f",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:0496d083954f9ade9c217d834fdfee1af387e7cb1fd5da992188c5d4b8715e1a",
+    "source_sha256": "bdbf4375c6b030125990e0567859e06a36f97e1660696f162d09615d6c73532c",
+    "supported": false,
+    "unsupported_category": "modal_deletion"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:153f3e7c92bc9479f87f62442ab0ba2743433b4cdb9fb0d0bebd763efa71851e",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:6b83536c6019748bf4e61ece288d1e3a9c931c5ca895edc2ac4ac498c862b1d2",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:15198b4a77e2978e2edf9490f2d25f62de384a155039770e778ef0ca3b1fc7c3",
+    "source_sha256": "153f3e7c92bc9479f87f62442ab0ba2743433b4cdb9fb0d0bebd763efa71851e",
+    "supported": false,
+    "unsupported_category": "modal_deletion"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "baste",
+    "id": "source:7e44c63703ca9f5d64fc40163537997af29143dd81021359c56f173129139bf7",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:7e44c63703ca9f5d64fc40163537997af29143dd81021359c56f173129139bf7",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "P",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          62,
+          67
+        ],
+        "actor": [
+          31,
+          44
+        ],
+        "condition": null,
+        "modality": [
+          45,
+          61
+        ],
+        "object": [
+          72,
+          90
+        ]
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:063dca3cf733af016d2da0c1be8d4353244e11a0c5421e44e7b55c8ce22e8530",
+    "source_sha256": "7e44c63703ca9f5d64fc40163537997af29143dd81021359c56f173129139bf7",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:075ec5ec06e0351ab14f0329c0479bc5188daf5b74c2fea05ef2aa589f9f6ead",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:d9209686833834e4ba51fdf2520c50f663ca61d195c4b899f1529cd61fabc542",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:faafd823a983596755d5ce3c5ecce874cdd79387f6d099766e5450e5754c7892",
+    "source_sha256": "075ec5ec06e0351ab14f0329c0479bc5188daf5b74c2fea05ef2aa589f9f6ead",
+    "supported": false,
+    "unsupported_category": "modal_deletion"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:c8bf2cfa84bd1486acfa6f477690fa99e6c395883c90b5e5c9aebf227dbdd521",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:a3b78825d06eaa1bcb70577f674efd573ecb138bee97c4a40b004429fae07f3f",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:45e238d4b417a5b1e1a3ec1b92ce82a34aba74bc18e6dd2d6d3aded2ef9a7b11",
+    "source_sha256": "c8bf2cfa84bd1486acfa6f477690fa99e6c395883c90b5e5c9aebf227dbdd521",
+    "supported": false,
+    "unsupported_category": "extra_exception"
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "tastefully emboss",
+    "id": "source:d6395453abe6bb87063ee7963d6160db5cd1428b0589d22cb43d8bd6e5e7936a",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:d6395453abe6bb87063ee7963d6160db5cd1428b0589d22cb43d8bd6e5e7936a",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "P",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          53,
+          70
+        ],
+        "actor": [
+          23,
+          34
+        ],
+        "condition": null,
+        "modality": [
+          35,
+          52
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:7ea2d44216788d36151e34e96b0cfbbc236bdb2320fd46b15876edb23fb86355",
+    "source_sha256": "d6395453abe6bb87063ee7963d6160db5cd1428b0589d22cb43d8bd6e5e7936a",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "declared_action_lemma": "button",
+    "id": "source:c860fc34607fb3a250f877c9ef239a123c19a9fa41c572cea87847018747de6a",
+    "independent_legal_review": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:c860fc34607fb3a250f877c9ef239a123c19a9fa41c572cea87847018747de6a",
+    "prediction": {
+      "condition_attachment": null,
+      "interpretation_profile": "opaque_condition_attachment/v1",
+      "modality": "F",
+      "schema": "legal-scope-span-prediction/v1",
+      "spans": {
+        "action": [
+          49,
+          58
+        ],
+        "actor": [
+          34,
+          46
+        ],
+        "condition": null,
+        "modality": [
+          59,
+          72
+        ],
+        "object": null
+      }
+    },
+    "reference_origin": "fresh_authored_engineering_construction",
+    "repeated_actor_object_occurrences": false,
+    "source_group": "support-retention-group:172a6597d366292d008e0de84fb516a91aa05d1d6cb1ac7d336eb6053af176e5",
+    "source_sha256": "c860fc34607fb3a250f877c9ef239a123c19a9fa41c572cea87847018747de6a",
+    "supported": true
+  },
+  {
+    "admission_masks": {
+      "contrastive_supervision": 0,
+      "fidelity_evaluation": 0,
+      "proof_supervision": 0,
+      "strong_semantic_fit": 0,
+      "weak_decoder_fit": 0
+    },
+    "id": "source:00259e18355073397d257c8412f81e72468ce6f0b80c0ffff41ec3efb760fa51",
+    "independent_legal_review": false,
+    "legally_false_claimed": false,
+    "natural_source_semantics_verified": false,
+    "parent_source_id": "source:8811c40b5d4b5ffd1cbf445cd0e8c8da5dc3bc9df8891ff932be66e9643c3b1a",
+    "prediction": null,
+    "reference_origin": "fresh_authored_outside_single_rule_engineering_profile",
+    "source_group": "support-retention-group:5be47a634a095d4ac117a446604b22ddb430b9d5d4867087c6678c5f1e7b95c9",
+    "source_sha256": "00259e18355073397d257c8412f81e72468ce6f0b80c0ffff41ec3efb760fa51",
+    "supported": false,
+    "unsupported_category": "extra_exception"
+  }
+]

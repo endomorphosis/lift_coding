@@ -1,0 +1,100 @@
+{
+  "builder_actions": {
+    "Git_mutations": 0,
+    "Hub_mutations": 0,
+    "existing_source_runner_plan_or_corpus_edits": 0,
+    "model_forwards": 0,
+    "numerical_imports": 0,
+    "optimizer_steps": 0,
+    "replays": 0,
+    "resource_leases": 0,
+    "static_AST_parse": 1,
+    "stdlib_source_reads_and_hashes_only": true,
+    "tests": 0
+  },
+  "command_arguments": {
+    "defaults": "Plan and datasets package root resolve beside the helper. Local checkpoints resolve from original selected-step filenames inside the supplied results tree.",
+    "mirror_constraints": "Supply both explicit checkpoint paths or one checkpoints-root, never both layouts. All mirrored containers must match selected byte size and SHA, not only tensors.",
+    "optional": [
+      "--plan EXACT_PLAN_FILE",
+      "--package-root EXACT_PRODUCER_SOURCE_TREE",
+      "--checkpoints-root ROOT_WITH_ARM/checkpoint.json",
+      "--bce-checkpoint EXACT_DOWNLOADED_BCE_FILE --positive-margin-checkpoint EXACT_DOWNLOADED_RETENTION_FILE"
+    ],
+    "required": [
+      "--results COMPLETED_RUNNER_RESULT_TREE",
+      "--output NEW_RECEIPT_FILE"
+    ],
+    "result_relocation": "Selection/barrier/panel receipts may reside in the supplied result tree while their unchanged historical metadata paths remain authenticated. Source cohort files must still resolve at their exact pinned paths."
+  },
+  "expected_outputs": {
+    "arms": [
+      "bce",
+      "positive_margin"
+    ],
+    "cohorts": [
+      "fresh_final",
+      "earlier_scope",
+      "earlier_trigger",
+      "earlier_support_action",
+      "earlier_support_gate"
+    ],
+    "comparison": "exact complete saved dictionaries including objective metadata, logits, raw pointers/status/wires/proposals",
+    "complete_outputs_each_arm": 640,
+    "complete_outputs_total": 1280,
+    "source_rows_each": 128
+  },
+  "helper": {
+    "bytes": 21449,
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/replay_retention_gate.py",
+    "sha256": "d73df6edffd342820acb6e69736cbccad2576a32b18deb1cbca9d888cb0dff7a"
+  },
+  "limitations": [
+    "Preparation is not a passing replay; root must review and execute under its existing resource owner. No reservation,resource admission,hardware quota or measured RSS is supplied by this helper.",
+    "Python socket guards and offline flags are process-level controls,not a kernel network namespace or whole-process syscall sandbox.",
+    "Exact HF mirror use still requires original local plan/result/source-input/expected-output assets and matching producer/Torch pins; this is not a self-contained Hub runtime.",
+    "Replay authenticates saved identities and runtime reproducibility,not fresh evaluation,reviewed law semantics,native latent conditioning,logic/Lake admission,checkpoint default promotion or original barrier chronology."
+  ],
+  "observed_at_utc": "2026-10-11T00:33:27.576222+00:00",
+  "prepared_against": [
+    {
+      "bytes": 12392,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/replay_support_gate.py",
+      "sha256": "7ad0e0ccd5123e6b526220d6ca6815782cf819720ca7af8eb22db42651d1f9df"
+    },
+    {
+      "bytes": 26809,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/run_retention_experiment.py",
+      "sha256": "41736ba82b5491a4b8bcf32f974d98306f5d037e341dc79daa16236a00f8789e"
+    },
+    {
+      "bytes": 13757,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/experiment-plan.json",
+      "sha256": "12b715274d467b03093fe7eb021643b1e045dc9b964112849b86a433a7561e26"
+    },
+    {
+      "bytes": 31614,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_retention_gate.py",
+      "sha256": "3212fed287375d338bcc8fc02f9d4a37a8b08e7ba734af9d61f587a20788a06b"
+    },
+    {
+      "bytes": 14328,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_retention_selection.py",
+      "sha256": "9af005eba03d129bd56920b5274c4189962092dc9bf2d7da6f0e0004b0a7f0a5"
+    }
+  ],
+  "reference_access": "Plan/result/selection metadata and full saved output panels are read. No TRAIN/selection/final/retention target-reference JSON files are opened, no scoring or reselection occurs.",
+  "required_transport": "Checkpoint configuration/profile checks and original zero-authority occurrence transport validation remain available; they are required to restore and reproduce the saved proposals and confer no semantic authority.",
+  "runtime_guards": [
+    "CPU only,CUDA visibility empty,Torch2threads/one interop thread,deterministic algorithms",
+    "standard HF/Transformers/datasets offline environment; Python socket connect/datagram and DNS entrypoints denied before numerical imports",
+    "restore CPU RNG preserved; exact new gate/fullAdam/counters roundtrip before and after prediction",
+    "all model/parent tensors,modes,parameter flags,empty gradients,complete nested parent artifact bytes and CPU RNG unchanged",
+    "TRAIN example/label/fit/optimizer helpers,online teacher and hinge functions,selection schema/reselection helpers and all semantic parser module callables denied during prediction",
+    "backward/autograd and AdamW step/zero_grad denied during prediction; CUDA transfer/init entrypoints denied",
+    "every row source digest checked; source input,selected receipt/container,expected panel,barrier,results/plan/helper and producer identities checked for drift",
+    "exclusive receipt creation with file and parent-directory fsync; no weight/result-panel writes"
+  ],
+  "schema": "support-retention-replay-helper-build/v1",
+  "status": "helper_prepared_static_AST_valid_no_replay_executed"
+}

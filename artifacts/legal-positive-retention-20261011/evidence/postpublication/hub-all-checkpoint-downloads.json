@@ -1,0 +1,71 @@
+{
+  "checkpoint_files": 8,
+  "files": [
+    {
+      "bytes": 3727869,
+      "checkpoint_role": "selected_cold_initial",
+      "downloaded_bytes_exact": true,
+      "path": "checkpoints/bce/checkpoint-0.json",
+      "sha256": "951c6492cb179548c21a4db0f9ff915294d89792dbb82c10e6f6f400adef1c06"
+    },
+    {
+      "bytes": 3955327,
+      "checkpoint_role": "trained_selection_ineligible_research",
+      "downloaded_bytes_exact": true,
+      "path": "checkpoints/bce/checkpoint-120.json",
+      "sha256": "5e40b660c7d5df9fb0815efb34ec7bdd4b1330abd26455341ae9063465ddcbc4"
+    },
+    {
+      "bytes": 3955021,
+      "checkpoint_role": "trained_selection_ineligible_research",
+      "downloaded_bytes_exact": true,
+      "path": "checkpoints/bce/checkpoint-240.json",
+      "sha256": "ebab71cdc41aa3453aac18fb188d6adc210907c01a23cceedbec3a7b7a0397cd"
+    },
+    {
+      "bytes": 3727869,
+      "checkpoint_role": "selected_cold_fallback_alias",
+      "downloaded_bytes_exact": true,
+      "path": "checkpoints/bce/checkpoint.json",
+      "sha256": "951c6492cb179548c21a4db0f9ff915294d89792dbb82c10e6f6f400adef1c06"
+    },
+    {
+      "bytes": 3727941,
+      "checkpoint_role": "selected_cold_initial",
+      "downloaded_bytes_exact": true,
+      "path": "checkpoints/positive_margin/checkpoint-0.json",
+      "sha256": "2d87ed447e89061620711f5d76ea014da6f54c7e21b539c9a7ad2e92499a9baf"
+    },
+    {
+      "bytes": 3955253,
+      "checkpoint_role": "trained_selection_ineligible_research",
+      "downloaded_bytes_exact": true,
+      "path": "checkpoints/positive_margin/checkpoint-120.json",
+      "sha256": "4a0b2c834bf125e25b6c9be9762fba173a1ea95967cb72cff3904db1cbb11a92"
+    },
+    {
+      "bytes": 3955461,
+      "checkpoint_role": "trained_selection_ineligible_research",
+      "downloaded_bytes_exact": true,
+      "path": "checkpoints/positive_margin/checkpoint-240.json",
+      "sha256": "707225f521cbb2e2b4a13cd0f37c734f3bcb3a529c33de3f569736b796a4ebf1"
+    },
+    {
+      "bytes": 3727941,
+      "checkpoint_role": "selected_cold_fallback_alias",
+      "downloaded_bytes_exact": true,
+      "path": "checkpoints/positive_margin/checkpoint.json",
+      "sha256": "2d87ed447e89061620711f5d76ea014da6f54c7e21b539c9a7ad2e92499a9baf"
+    }
+  ],
+  "model_forwards": 0,
+  "model_restores": 0,
+  "optimizer_updates": 0,
+  "original_states": 6,
+  "passed": true,
+  "prefix": "experiments/positive-retention-20261011/run-01",
+  "repo": "Publicus/legal-ir-autoencoder",
+  "revision": "eb1890f255b096ef81a8a2364bd28fef296bbfd8",
+  "schema": "positive-retention-all-Hub-checkpoints/v1",
+  "selected_aliases": 2
+}

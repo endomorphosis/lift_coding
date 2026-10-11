@@ -1,0 +1,992 @@
+{
+  "all_nine_true_raw_containers_denied": true,
+  "current_build_note": {
+    "bytes": 16195,
+    "sha256": "c6b5b2b498aa2cbb6e6573ffc6f644e205a0697b1f88370c2344e436f890551c"
+  },
+  "existing_planned_supplement_JSON_checked": 34,
+  "existing_planned_supplement_files_checked": 43,
+  "helper": {
+    "bytes": 42653,
+    "sha256": "46503c475cc38846aed9e5ee51fe7e3f313c8b937765131ed023cf531192c10c"
+  },
+  "independent_root_archive_review_still_required": true,
+  "passed": true,
+  "pending_planned_supplements": [],
+  "preflight_self_pin_excluded": true,
+  "raw_checkpoint_JSON_checked": 9,
+  "raw_checkpoint_scanned_JSON": {
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/checkpoints/bce/checkpoint-0.json": {
+      "bytes": 3727869,
+      "raw_payload_detected": true,
+      "sha256": "951c6492cb179548c21a4db0f9ff915294d89792dbb82c10e6f6f400adef1c06"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/checkpoints/bce/checkpoint-120.json": {
+      "bytes": 3955327,
+      "raw_payload_detected": true,
+      "sha256": "5e40b660c7d5df9fb0815efb34ec7bdd4b1330abd26455341ae9063465ddcbc4"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/checkpoints/bce/checkpoint-240.json": {
+      "bytes": 3955021,
+      "raw_payload_detected": true,
+      "sha256": "ebab71cdc41aa3453aac18fb188d6adc210907c01a23cceedbec3a7b7a0397cd"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/checkpoints/bce/checkpoint.json": {
+      "bytes": 3727869,
+      "raw_payload_detected": true,
+      "sha256": "951c6492cb179548c21a4db0f9ff915294d89792dbb82c10e6f6f400adef1c06"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/checkpoints/positive_margin/checkpoint-0.json": {
+      "bytes": 3727941,
+      "raw_payload_detected": true,
+      "sha256": "2d87ed447e89061620711f5d76ea014da6f54c7e21b539c9a7ad2e92499a9baf"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/checkpoints/positive_margin/checkpoint-120.json": {
+      "bytes": 3955253,
+      "raw_payload_detected": true,
+      "sha256": "4a0b2c834bf125e25b6c9be9762fba173a1ea95967cb72cff3904db1cbb11a92"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/checkpoints/positive_margin/checkpoint-240.json": {
+      "bytes": 3955461,
+      "raw_payload_detected": true,
+      "sha256": "707225f521cbb2e2b4a13cd0f37c734f3bcb3a529c33de3f569736b796a4ebf1"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/checkpoints/positive_margin/checkpoint.json": {
+      "bytes": 3727941,
+      "raw_payload_detected": true,
+      "sha256": "2d87ed447e89061620711f5d76ea014da6f54c7e21b539c9a7ad2e92499a9baf"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/inputs/parent-checkpoint.json": {
+      "bytes": 3449806,
+      "raw_payload_detected": true,
+      "sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155"
+    }
+  },
+  "release_known_secret_matches": [],
+  "release_manifest": {
+    "bytes": 110352,
+    "sha256": "17f4b9bd7fa2bb34365c19ba10bdf6b0014f14c7a2512f96ed9729cd25418c61"
+  },
+  "release_nonweight_JSONL_rows_checked": 106,
+  "release_nonweight_JSON_checked": 145,
+  "release_nonweight_files_checked": 302,
+  "release_raw_payload_matches": [],
+  "release_scanned_JSON": {
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/checkpoint-roles.json": {
+      "bytes": 6658,
+      "raw_payload_detected": false,
+      "sha256": "9f7042793da31612ccf5021370535379f0e48c805636596d6b1f6ec6b2e74506"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/corpus-author-review-draft-01.json": {
+      "bytes": 17309,
+      "raw_payload_detected": false,
+      "sha256": "79fd169ae9ee18557503fa59131b40e2fee4f2e1363ca7607866c94fa2497977"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/corpus-author-review.json": {
+      "bytes": 21824,
+      "raw_payload_detected": false,
+      "sha256": "c3ca32152c05e5bad8172567420e69ab8cb0d4fbc7e05b9aec3cad8624a7fb5d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/corpus-draft-01/corpus-manifest.json": {
+      "bytes": 58282,
+      "raw_payload_detected": false,
+      "sha256": "a6f88deefc47a0aabb8ab04ddb498d2cd270e2f6374e0904305fe9d2112719fa"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/corpus-draft-01/corpus-protocol.json": {
+      "bytes": 22588,
+      "raw_payload_detected": false,
+      "sha256": "7a305fe0b5f3dfd45daf4727fd7ed5673ca8a877165e9d77ed97d91b84521ee9"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/corpus-draft-01/final-inputs.json": {
+      "bytes": 63400,
+      "raw_payload_detected": false,
+      "sha256": "be59c75607db202595a484c7bcd50360bb104a868025e7388e456d84007f716a"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/corpus-draft-01/final-references.json": {
+      "bytes": 142062,
+      "raw_payload_detected": false,
+      "sha256": "9e07c209944a20305808d4791b56ff0898d12d4a899ee47d7af09fe81b92bd3d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/corpus-draft-01/selection-inputs.json": {
+      "bytes": 63828,
+      "raw_payload_detected": false,
+      "sha256": "92b86f7a6d83a6542c5d87597fd128c7b1a645006b99d1e0cc48e7a61d5a1953"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/corpus-draft-01/selection-references.json": {
+      "bytes": 142130,
+      "raw_payload_detected": false,
+      "sha256": "7d6e2d02ad439289178d7d186d8770cce85b762a4ccc3cf660f56b4d0f47b3cd"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/corpus-draft-01/train-inputs.json": {
+      "bytes": 508927,
+      "raw_payload_detected": false,
+      "sha256": "61e189b6a4e623184a4132694a86316a61aa3e9da7294632a5534e857f5f5f11"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/corpus-draft-01/train-references.json": {
+      "bytes": 1136345,
+      "raw_payload_detected": false,
+      "sha256": "51a565a1edcaade3e4aa29f80e0e173a7a280f2384bf8f9efe2862f167f37634"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/corpus-draft-01/training-schedule.json": {
+      "bytes": 711504,
+      "raw_payload_detected": false,
+      "sha256": "286169b872a2e1974dc6b502006954e6330c8be56105a98e7e7e86bbee10c3d6"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/corpus/corpus-manifest.json": {
+      "bytes": 58282,
+      "raw_payload_detected": false,
+      "sha256": "4d2a13686e77e65b858a45b091658407d52bfc305a67220f641f3b39911fcd35"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/corpus/corpus-protocol.json": {
+      "bytes": 22591,
+      "raw_payload_detected": false,
+      "sha256": "9e7ae0ddac59d60aceab132583ca24252ec13bc064093986d44e68a7e278d880"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/corpus/final-inputs.json": {
+      "bytes": 63400,
+      "raw_payload_detected": false,
+      "sha256": "be59c75607db202595a484c7bcd50360bb104a868025e7388e456d84007f716a"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/corpus/final-references.json": {
+      "bytes": 142062,
+      "raw_payload_detected": false,
+      "sha256": "9e07c209944a20305808d4791b56ff0898d12d4a899ee47d7af09fe81b92bd3d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/corpus/selection-inputs.json": {
+      "bytes": 63828,
+      "raw_payload_detected": false,
+      "sha256": "92b86f7a6d83a6542c5d87597fd128c7b1a645006b99d1e0cc48e7a61d5a1953"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/corpus/selection-references.json": {
+      "bytes": 142130,
+      "raw_payload_detected": false,
+      "sha256": "7d6e2d02ad439289178d7d186d8770cce85b762a4ccc3cf660f56b4d0f47b3cd"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/corpus/train-inputs.json": {
+      "bytes": 508927,
+      "raw_payload_detected": false,
+      "sha256": "61e189b6a4e623184a4132694a86316a61aa3e9da7294632a5534e857f5f5f11"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/corpus/train-references.json": {
+      "bytes": 1136345,
+      "raw_payload_detected": false,
+      "sha256": "51a565a1edcaade3e4aa29f80e0e173a7a280f2384bf8f9efe2862f167f37634"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/corpus/training-schedule.json": {
+      "bytes": 711504,
+      "raw_payload_detected": false,
+      "sha256": "286169b872a2e1974dc6b502006954e6330c8be56105a98e7e7e86bbee10c3d6"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/experiment-plan.json": {
+      "bytes": 13757,
+      "raw_payload_detected": false,
+      "sha256": "12b715274d467b03093fe7eb021643b1e045dc9b964112849b86a433a7561e26"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/extra/publication-draft-review.json": {
+      "bytes": 3586,
+      "raw_payload_detected": false,
+      "sha256": "b2f3037fcbaeb23178e885dd3f644dbeca6c19ae38fe1b45f86749c4a0f35093"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/extra/release-helper-build-draft-01.json": {
+      "bytes": 18437,
+      "raw_payload_detected": false,
+      "sha256": "20f27ac3e2bbcbfd15158f548119bb574fdfeecba8e52d600cda7ea673e69897"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/extra/resource-observation-phase-correction.json": {
+      "bytes": 6871,
+      "raw_payload_detected": false,
+      "sha256": "300a543cc9d336797e85a4794e2d0ccdad58a29b3e2dfdd2667265e47c864a31"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/incoming-main-integration.json": {
+      "bytes": 393,
+      "raw_payload_detected": false,
+      "sha256": "c3a566b4d0e3b368db1dd7cf4b5933f08ab861f78ad395b1932e30b687f65e1a"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/independent-corpus-review.json": {
+      "bytes": 37871,
+      "raw_payload_detected": false,
+      "sha256": "c7dcd2f0abb5d63df05ebe2c3498a76c10d7ad6b4f338412abb22bb9517c7636"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/intake.json": {
+      "bytes": 604,
+      "raw_payload_detected": false,
+      "sha256": "0eb6307b1750e3348747ba8e721c4989aa3e26a058a00f86d1b37fdf3583c428"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/model-selector-review.json": {
+      "bytes": 15070,
+      "raw_payload_detected": false,
+      "sha256": "dd0ad8d1b3b23d3b2e378fc7dede3af065e1359829ee8be825109bfa61dcceea"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/progress-review.json": {
+      "bytes": 16106,
+      "raw_payload_detected": false,
+      "sha256": "272241b8018c1a9288315dcc8643c8a68964ef645db5e017bf67296242f02c24"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/protocol-artifact-bindings.json": {
+      "bytes": 23901,
+      "raw_payload_detected": false,
+      "sha256": "19f58225630f8db280fd9ddd9b8b91786098bc3719f1f5f3dca93d44236d1452"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/protocol-review.json": {
+      "bytes": 36623,
+      "raw_payload_detected": false,
+      "sha256": "8debd5f9d35b63f4cfe52c684961afee71cf409da423eb2873391b67e8ba41ad"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/real-code-data-review.json": {
+      "bytes": 14084,
+      "raw_payload_detected": false,
+      "sha256": "e0ad6d0377e5e41fa2c4d8a39cabf6e51f5b7471d4a896294277e5f64b1cd1c6"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/release-helper-build.json": {
+      "bytes": 20932,
+      "raw_payload_detected": false,
+      "sha256": "86878f6b83562c651bff5f34065f2d21d2a258b6a78cf949926ca9c7e7019f8a"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/remote-intake.json": {
+      "bytes": 211,
+      "raw_payload_detected": false,
+      "sha256": "b4b73d0942a2e606eb690aa462dfe4a16e4948c7a423b22138f3e006ccf0c029"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/replay-helper-build.json": {
+      "bytes": 5842,
+      "raw_payload_detected": false,
+      "sha256": "a179a180382caba3aa0e6aeccd435e01f82c5825ea0fa68d656e414b11e6b678"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/replay-source-review.json": {
+      "bytes": 1192,
+      "raw_payload_detected": false,
+      "sha256": "bb1fe8b810c4bacea7ab4e69eb9d6cebc6c74ffc3c79441124b3cc0057577e65"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/resource-compatibility.json": {
+      "bytes": 6800,
+      "raw_payload_detected": false,
+      "sha256": "03a7cbb5ae281a04053b79eba6b977ea20e96ebfc9bbc0dcc387ed88e4d45488"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/retention-module-build.json": {
+      "bytes": 10471,
+      "raw_payload_detected": false,
+      "sha256": "424871c96248995c656d88a54f9c93e48ab96f9f9aa79bb75c749b132c6f7160"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/selected-checkpoint-replay.json": {
+      "bytes": 41482,
+      "raw_payload_detected": false,
+      "sha256": "3fb09f025e432c8dfb073f3b7464e3762494d2d58cc71b605cfd47285f67e09f"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/selector-build.json": {
+      "bytes": 4893,
+      "raw_payload_detected": false,
+      "sha256": "eb6eb79cfd382050639bf782a4604ad1d3238dd7b8ea7caf78694e11a5733db4"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/training-design-review.json": {
+      "bytes": 14899,
+      "raw_payload_detected": false,
+      "sha256": "669ebcf2fbebb1c2dc16d01b9b22a5194f2da98b70ea84af2a74f892e8995cc4"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/trial-artifact-audit.json": {
+      "bytes": 245644,
+      "raw_payload_detected": false,
+      "sha256": "76440343442447e29e3bfd6487cb5691f28b54fe8627d4b6cc42ff76abbd05df"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/evidence/validation.json": {
+      "bytes": 35643,
+      "raw_payload_detected": false,
+      "sha256": "9c72ba0b1b6a77ab8abc07c88a3bf65d74d5f12db5984da0005a13daa3b2b43b"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/guardian/child-exit.json": {
+      "bytes": 104,
+      "raw_payload_detected": false,
+      "sha256": "d88216f814ffcc183ea9fa6f70ececd29a416685a35d3037babc44fd832ff554"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/guardian/child-identity.json": {
+      "bytes": 44,
+      "raw_payload_detected": false,
+      "sha256": "06e7eb396544d0fa00626648b82e43cc2542c17d36afd171089a77dcc24109ee"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/guardian/command.json": {
+      "bytes": 1045,
+      "raw_payload_detected": false,
+      "sha256": "f179aad6c25ea659066765a409159c9ba36620668c663e96f5a90753d56caf77"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/guardian/full-resource-artifact-pins.json": {
+      "bytes": 935,
+      "raw_payload_detected": false,
+      "sha256": "a87ca4eab84d51313c35a34e1bf165b474886967166ff079cf54fff16524d9c8"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/guardian/group-rss-observations.jsonl": {
+      "bytes": 25494,
+      "raw_payload_detected": false,
+      "sha256": "90b5b9e95980082fb6c992baeb5af265589f3619843c7f470b2379320dde2520"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/guardian/group-rss-summary.json": {
+      "bytes": 1734,
+      "raw_payload_detected": false,
+      "sha256": "7331f6ad7b3cd8e5fc38036198c3892761a15eff4d7eb7965eb6fb2160a5f7b7"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/guardian/guardian-exit.json": {
+      "bytes": 520,
+      "raw_payload_detected": false,
+      "sha256": "2b5e60ca73e0b4e1fa0b03506f3c77d54c17f57bc40c4f46b27c3a8debb7acb4"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/guardian/lease-binding.json": {
+      "bytes": 694,
+      "raw_payload_detected": false,
+      "sha256": "a29bc3f513d310727548ef1db531e47ec31237e320cb43edb851a7fd2f7d7e7b"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/guardian/lease-observations.jsonl": {
+      "bytes": 54914,
+      "raw_payload_detected": false,
+      "sha256": "3dbcadbd38502742de661bd80dcad59676fc6f174d3f3995966182a55ece674a"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/guardian/owned-group-final.json": {
+      "bytes": 190,
+      "raw_payload_detected": false,
+      "sha256": "24097b0b8dfefa0853b1a8e6d0d1d4d37669f8ddeb06990120abde2c392773e5"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/guardian/pre-admission.json": {
+      "bytes": 7969,
+      "raw_payload_detected": false,
+      "sha256": "880d195669c77d2bad859e98d1b2a0742ecae25215bcf8dd0f4a418161d95c7e"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/guardian/resource-observations.json": {
+      "bytes": 1752,
+      "raw_payload_detected": false,
+      "sha256": "d28b087f548f26745f1cf7a235e49ae5b484e2dd2187b2ec96d94466168c97d8"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/guardian/resource-preservation-projection.json": {
+      "bytes": 7294,
+      "raw_payload_detected": false,
+      "sha256": "7908c995fea9a490da7629b45d023d378ae5934bf5eb5a73932aa05c592952b7"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/guardian/resources-final.json": {
+      "bytes": 6255,
+      "raw_payload_detected": false,
+      "sha256": "56a37946ec6135e8d2f51f998909b6e7034ca9b92033c9d99859be6b5619d844"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/guardian/resources-start.json": {
+      "bytes": 2537,
+      "raw_payload_detected": false,
+      "sha256": "8953b65ae793731b831ba193a7d0f103eec23889cc01cda2b0bb3b488864dce4"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/guardian/scheduler-adoption.json": {
+      "bytes": 4646,
+      "raw_payload_detected": false,
+      "sha256": "817a06ece2ee8e177ac7e033a4ba27643ad99d4b3f626824ba07d5c9d11b3f21"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-next-training-20261007-01/corpus-manifest.json": {
+      "bytes": 7771,
+      "raw_payload_detected": false,
+      "sha256": "5c87b0ef62c3fa7846f2000ae99caa3438c85c2cf1e80809380cf97e600d2f32"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-next-training-20261007-01/corpus-protocol.json": {
+      "bytes": 5928,
+      "raw_payload_detected": false,
+      "sha256": "3c3b194f9720fe1c1d624f6d9a9098b53898d69846f6a036ed805755d1b18acb"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-next-training-20261007-01/final-inputs.json": {
+      "bytes": 61725,
+      "raw_payload_detected": false,
+      "sha256": "1af9757054e2ae6344dcbd2e3834c21808cbe998e79ace9b9ff34383d3020b55"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-next-training-20261007-01/final-references.json": {
+      "bytes": 136311,
+      "raw_payload_detected": false,
+      "sha256": "9ff98c26fd03fc695b76b46de63b621a02765e981e43eca867cf01f51104abc9"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-next-training-20261007-01/independent-corpus-review.json": {
+      "bytes": 1473,
+      "raw_payload_detected": false,
+      "sha256": "78e0a4128980a1d5caacb1e648ef36054de178aa86847bd71187deea6c3514ee"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-next-training-20261007-01/selection-inputs.json": {
+      "bytes": 61364,
+      "raw_payload_detected": false,
+      "sha256": "48f891f5ada515e7b1511e6395c107ee8c7ecfcede3618da417376383eca1518"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-next-training-20261007-01/selection-references.json": {
+      "bytes": 136304,
+      "raw_payload_detected": false,
+      "sha256": "ea5762e4c35ba452c60286ee01b4ec21df7a12e0a6c6f50780bfb1822a6dcddd"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-next-training-20261007-01/train-inputs.json": {
+      "bytes": 489421,
+      "raw_payload_detected": false,
+      "sha256": "0df9ab64e794f606a3d9ab87002c78bc49e58bdc24969bf3bc62a7fabb44b3bc"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-next-training-20261007-01/train-references.json": {
+      "bytes": 1090392,
+      "raw_payload_detected": false,
+      "sha256": "63140b0b8daae2260f911dde653e604d1fb758416cf3721da3b81cf4c53c6789"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-support-action-20261007-01/corpus-manifest.json": {
+      "bytes": 50666,
+      "raw_payload_detected": false,
+      "sha256": "eda62b5e15083adba9184ec5ecdcf01a530df21914344e3bfb7d36ed0cc7cec0"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-support-action-20261007-01/corpus-protocol.json": {
+      "bytes": 15939,
+      "raw_payload_detected": false,
+      "sha256": "bbc90d43835021dd17730d5787a7789ea7cad61cc1fc5eeac101d94f3707b2b1"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-support-action-20261007-01/final-inputs.json": {
+      "bytes": 63530,
+      "raw_payload_detected": false,
+      "sha256": "5fa44c4a208c71429c61f8c6be648b65583ecd2a01740b412f440e03ef824da0"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-support-action-20261007-01/final-references.json": {
+      "bytes": 141839,
+      "raw_payload_detected": false,
+      "sha256": "8dd5cc9ca1afe776dcdeaa9e88dc7e5869269a125b03b648b5c6be79e94a8baa"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-support-action-20261007-01/independent-corpus-selector-review.json": {
+      "bytes": 14978,
+      "raw_payload_detected": false,
+      "sha256": "a09b3ab2bf1914e7b60ad9864b1471642b80eebe778a2d60a0158b2ac4a39cd3"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-support-action-20261007-01/selection-inputs.json": {
+      "bytes": 63812,
+      "raw_payload_detected": false,
+      "sha256": "8a587ced7850a6e4979545e548c27bd0a58a65b872802cbc4667df95d21d4384"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-support-action-20261007-01/selection-references.json": {
+      "bytes": 141813,
+      "raw_payload_detected": false,
+      "sha256": "1560e7a9d2f28ff6278783a91551748f9d621f988ef1a161895ac55660e96584"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-support-action-20261007-01/train-inputs.json": {
+      "bytes": 508525,
+      "raw_payload_detected": false,
+      "sha256": "5713989a5a4405d4e553807d4cdbac38c65aa9b8d6b1191b807312a72403a8f2"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-support-action-20261007-01/train-references.json": {
+      "bytes": 1134002,
+      "raw_payload_detected": false,
+      "sha256": "e08c51ba66e512758350d31edbcf4a41c4b64c9adef9049776b13493a54ff465"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-support-gate-20261007-01/corpus-manifest.json": {
+      "bytes": 52638,
+      "raw_payload_detected": false,
+      "sha256": "7a841522be4e481be886be65b3bdaf85092e24cd2c2cb0202e7eb91ee5b0c959"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-support-gate-20261007-01/corpus-protocol.json": {
+      "bytes": 19264,
+      "raw_payload_detected": false,
+      "sha256": "fda43e533276cc2d924e36132c9090341b68d0c015d5e038583c9c1f673d8b2d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-support-gate-20261007-01/final-inputs.json": {
+      "bytes": 63652,
+      "raw_payload_detected": false,
+      "sha256": "b49bea41269cfab18ff58a598ea47d7f85385322701ad070aa761a84b18588ac"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-support-gate-20261007-01/final-references.json": {
+      "bytes": 141504,
+      "raw_payload_detected": false,
+      "sha256": "0ceebf7f5f5b223c56d826386fbcc5d37a36f1ece0551e36945ae0e3aca55b0f"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-support-gate-20261007-01/independent-corpus-review.json": {
+      "bytes": 24428,
+      "raw_payload_detected": false,
+      "sha256": "c380647f4138c80eff838209dd3e0a3384f498eb4faf0ba667bdff46002697c2"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-support-gate-20261007-01/selection-inputs.json": {
+      "bytes": 62866,
+      "raw_payload_detected": false,
+      "sha256": "8dd31dfa1c3f23e3aee4f834ba0ab242a3d26fe6a991c021faa941ce02d0d6ab"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-support-gate-20261007-01/selection-references.json": {
+      "bytes": 141415,
+      "raw_payload_detected": false,
+      "sha256": "5883630a1cecdbfb8de6c19605fe91876f54c140df587e0afeb5e21cdf29fa31"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-support-gate-20261007-01/train-inputs.json": {
+      "bytes": 504469,
+      "raw_payload_detected": false,
+      "sha256": "84c0e94003a557593c6184d52fe181fd9e30c3a3337d8fed214b6d20f5a23489"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-support-gate-20261007-01/train-references.json": {
+      "bytes": 1131415,
+      "raw_payload_detected": false,
+      "sha256": "59ebff84fd896cb32c482a28dffc23130e6997508df4553465849e6e961e3c4e"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-trigger-readout-20261007-01/corpus-manifest.json": {
+      "bytes": 40566,
+      "raw_payload_detected": false,
+      "sha256": "22a551395a410e4b3fe79155f554a2ee05c7b2eec6631d7836079d7ec9c0a7d1"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-trigger-readout-20261007-01/corpus-protocol.json": {
+      "bytes": 12225,
+      "raw_payload_detected": false,
+      "sha256": "7d83f26ec816e4c83d66de15b81ef52be35f0142c713093dd94787ea1cf31b03"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-trigger-readout-20261007-01/final-inputs.json": {
+      "bytes": 62673,
+      "raw_payload_detected": false,
+      "sha256": "066bc0a734292d45da468583c55677d9851e244f5a7949aedcc857796a14cb67"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-trigger-readout-20261007-01/final-references.json": {
+      "bytes": 138097,
+      "raw_payload_detected": false,
+      "sha256": "069a43b1295823c3ecaaab958a6402494d1dbd00679af97da05d7e466ef53209"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-trigger-readout-20261007-01/independent-corpus-review.json": {
+      "bytes": 4336,
+      "raw_payload_detected": false,
+      "sha256": "98bf1da49efc359d099369f170678bb0e19c3887e578a6a6a19d572c2712d313"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-trigger-readout-20261007-01/selection-inputs.json": {
+      "bytes": 63326,
+      "raw_payload_detected": false,
+      "sha256": "b2ceeddfffdd03d24f4647797fcf1cd1a75067d51957c4a093601cbef9c8e0b4"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-trigger-readout-20261007-01/selection-references.json": {
+      "bytes": 138104,
+      "raw_payload_detected": false,
+      "sha256": "9a7e504b8e88bd2973ee6ccbdbc70212f2dbd9f850bef9c493590f32ad348c30"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-trigger-readout-20261007-01/train-inputs.json": {
+      "bytes": 507191,
+      "raw_payload_detected": false,
+      "sha256": "698a12e8df507b6ffe81b3d6e9dc4cd61cf8865f34e178be6a98cdddca222cfa"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/corpus/legal-trigger-readout-20261007-01/train-references.json": {
+      "bytes": 1104803,
+      "raw_payload_detected": false,
+      "sha256": "adbc5a2a9245eafa7a4316b54535a1fd42b6b2c3d1509cb41f954daabfe53a8d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/retention/earlier_scope/archived_parent_predictions.json": {
+      "bytes": 980454,
+      "raw_payload_detected": false,
+      "sha256": "3cbdda0aeb791c7bb718bc83074c3341e677bad2ef85d0afb04a98b6c11bf0ed"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/retention/earlier_support_action/archived_parent_predictions.json": {
+      "bytes": 1068946,
+      "raw_payload_detected": false,
+      "sha256": "222c101a9cd0faacd30dbbbc63d4bbd9fe45a15954dd1ae4e48b3993bb802007"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/retention/earlier_support_gate/archived_parent_predictions.json": {
+      "bytes": 1079294,
+      "raw_payload_detected": false,
+      "sha256": "922e62a331f7f555bcb56daa252e281d1f91b96b585dce041a93fbe9d5f6880e"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/historical/retention/earlier_trigger/archived_parent_predictions.json": {
+      "bytes": 1078370,
+      "raw_payload_detected": false,
+      "sha256": "a17e2e603b93cfaaa514d223b2ced28ef3fc3a0479aa2227eedf3e21c4168141"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/original-artifacts-map.json": {
+      "bytes": 106350,
+      "raw_payload_detected": false,
+      "sha256": "482d92cb45fd1fe26b1d2baddf661968777ee4db0947416b27d4a82502d59afe"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/release-manifest.json": {
+      "bytes": 110352,
+      "raw_payload_detected": false,
+      "sha256": "17f4b9bd7fa2bb34365c19ba10bdf6b0014f14c7a2512f96ed9729cd25418c61"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/replay-source-closure.json": {
+      "bytes": 36236,
+      "raw_payload_detected": false,
+      "sha256": "c86a1d70bc470ee3867b18ad387b5099ee73dacdfa150d0ab1495506462f7b3f"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/all-final-and-retention-predictions-before-reference-joins.json": {
+      "bytes": 5453,
+      "raw_payload_detected": false,
+      "sha256": "133af0c86238ad8b276b6d4c8e856c3dea0d720a457d358f4e4de5a5c7d93e62"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/bce/earlier_scope-predictions.json": {
+      "bytes": 989929,
+      "raw_payload_detected": false,
+      "sha256": "cafee9547957cc040396aaa54040fef565dc996dc7b06717c924e4edd2822d2d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/bce/earlier_support_action-predictions.json": {
+      "bytes": 1078421,
+      "raw_payload_detected": false,
+      "sha256": "b10b74296b9282a1d9fd07ea9fa5ba043dc22688a4f550fd21f74d2952fe6652"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/bce/earlier_support_gate-predictions.json": {
+      "bytes": 1088771,
+      "raw_payload_detected": false,
+      "sha256": "d88310889a0f3a67ac6f6f86fde79d2f449e7d764726898b7f834ffb298a2b71"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/bce/earlier_trigger-predictions.json": {
+      "bytes": 1087845,
+      "raw_payload_detected": false,
+      "sha256": "a75eb0371ba71d7f7d8bb2f3be7cc48328e10ec6f7dd2626e9b2df39cb8ab1f5"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/bce/fresh_final-predictions.json": {
+      "bytes": 971548,
+      "raw_payload_detected": false,
+      "sha256": "88077b0eb34e066365cdac8e737e6ddfa2ea3be427f99d47fbacaa98c20ff27d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/bce/last-TRAIN-predictions.json": {
+      "bytes": 8085027,
+      "raw_payload_detected": false,
+      "sha256": "aad6caccd20ba5a636f6d7b022946f0d1544c7a1f9b291ba6831632d0e349435"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/bce/losses.json": {
+      "bytes": 273387,
+      "raw_payload_detected": false,
+      "sha256": "2475c458475932f58a67d08ea6019f76e826c5dabc3dde04fd138cee3c2797cb"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/bce/selected.json": {
+      "bytes": 121811,
+      "raw_payload_detected": false,
+      "sha256": "8ea04a9a739ec208f9f5889f57567181a3c197c1a9af4c09bdc94f9d95868452"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/bce/selection-decision.json": {
+      "bytes": 32437,
+      "raw_payload_detected": false,
+      "sha256": "dec864d40e7ac6366831ae4fdec90156a93b0a881b9bcb75e3c1fea1d2bf5555"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/bce/selection-predictions-0.json": {
+      "bytes": 1045854,
+      "raw_payload_detected": false,
+      "sha256": "b60257e881c72a2fbb76a283575d4d1f9e43ce16e93fa7a5327c6d34133667ec"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/bce/selection-predictions-120.json": {
+      "bytes": 1069676,
+      "raw_payload_detected": false,
+      "sha256": "780cb17c5109eb8151fbde10296fdb6a8fc69eb4e5e530c0199e3a025d428196"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/bce/selection-predictions-240.json": {
+      "bytes": 1094245,
+      "raw_payload_detected": false,
+      "sha256": "bd8c35dc005fcdaada07552628ee2c112e3a3f5be571f7a629fec7b0a1e7346e"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/both-selected-before-final-and-retention.json": {
+      "bytes": 1254002,
+      "raw_payload_detected": false,
+      "sha256": "c522bef7a4d1eca4884c26d1cf00481ded1f3a981344f5b36d8a5292e37f09db"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/initial-bce-predictions.json": {
+      "bytes": 128898,
+      "raw_payload_detected": false,
+      "sha256": "1fe4f9a93b301cdad83d4eb9696de9e7e5804081a5b8cec4b8d9917bf9d2c415"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/initial-parent-predictions.json": {
+      "bytes": 127714,
+      "raw_payload_detected": false,
+      "sha256": "0468568354f49d159be3f1c396dfe2c105cf781562222dbd64b8a760bb76281a"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/initial-positive_margin-predictions.json": {
+      "bytes": 129090,
+      "raw_payload_detected": false,
+      "sha256": "0da9012fef1bfc6b2b9618875f837025329289bb7b52d5b60fe856bdab7e3d0d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/initialization.json": {
+      "bytes": 1517,
+      "raw_payload_detected": false,
+      "sha256": "9a70523b3723919fd2d0f87bd3558b5bd5e2bb49fb945a060b4ab5f5a9fbdb2d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/parent-TRAIN-predictions.json": {
+      "bytes": 7906302,
+      "raw_payload_detected": false,
+      "sha256": "e834e2ea47ba491b1cc50ba0d9c9b268efa4ecd6f942df708b79c9fa507dddac"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/parent-TRAIN-score.json": {
+      "bytes": 27316,
+      "raw_payload_detected": false,
+      "sha256": "8e45db67251ff91041c9a5c610e7cbecbb491546dc79cf91b996cecd55368918"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/parent-earlier_scope-predictions.json": {
+      "bytes": 980457,
+      "raw_payload_detected": false,
+      "sha256": "eaae8816f8d46170abaf01de7197c38cd0314ee4e525e1930d0e03c368e11177"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/parent-earlier_support_action-predictions.json": {
+      "bytes": 1068949,
+      "raw_payload_detected": false,
+      "sha256": "8351b2a4a6817a931b2599aef964c674c9c90335647c2a482742d2320a3e6214"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/parent-earlier_support_gate-predictions.json": {
+      "bytes": 1079299,
+      "raw_payload_detected": false,
+      "sha256": "8789c9841215c90fa919e980ef1296a85a86a7f57fb023c681f4053fc47680ab"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/parent-earlier_trigger-predictions.json": {
+      "bytes": 1078373,
+      "raw_payload_detected": false,
+      "sha256": "8684ffe66c81002ccdfd20a22ca0da53712811296097bf4339ff48298d465e8d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/parent-fresh_final-predictions.json": {
+      "bytes": 962076,
+      "raw_payload_detected": false,
+      "sha256": "2db41eb383753550421667b03e6b12a1132349a08638082925f54a112fc52b6e"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/parent-selection-predictions.json": {
+      "bytes": 1036382,
+      "raw_payload_detected": false,
+      "sha256": "927cf34ed132b35bb9013d8be0e2cc6abcb20b886ca917d35ececd4d814d57c9"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/positive_margin/earlier_scope-predictions.json": {
+      "bytes": 991465,
+      "raw_payload_detected": false,
+      "sha256": "430483cfcdcda1dc9604fb015813a3f5d0c72371015d60d6b9c216b6828ebb9d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/positive_margin/earlier_support_action-predictions.json": {
+      "bytes": 1079957,
+      "raw_payload_detected": false,
+      "sha256": "a9a2572678a690807869b0a84bb11f39f4e504a1a50a52d0b88a26af3d33bd4d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/positive_margin/earlier_support_gate-predictions.json": {
+      "bytes": 1090307,
+      "raw_payload_detected": false,
+      "sha256": "cb606aad484ad4ff1e3d0a181fbbaaa6ce4c281ef7d609dee75e7cd89563fd26"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/positive_margin/earlier_trigger-predictions.json": {
+      "bytes": 1089381,
+      "raw_payload_detected": false,
+      "sha256": "a0f99f5f652b55a7d34da89e74b0c8fc0ad1f0d957690d94b4338ed6fb0e9127"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/positive_margin/fresh_final-predictions.json": {
+      "bytes": 973084,
+      "raw_payload_detected": false,
+      "sha256": "0a5f21aeff21e7cef11aed36a7e101c59667d97421103898a79d63fbca04948b"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/positive_margin/last-TRAIN-predictions.json": {
+      "bytes": 8155157,
+      "raw_payload_detected": false,
+      "sha256": "4aec63098abe8cea53d042529371de09417f6ecab483c37b4ee5cafb0436476f"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/positive_margin/losses.json": {
+      "bytes": 276527,
+      "raw_payload_detected": false,
+      "sha256": "b54b9cf6fa3c09e17e6b2cff01f579333d7453970063d63af229d9b38c3bb02d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/positive_margin/selected.json": {
+      "bytes": 121835,
+      "raw_payload_detected": false,
+      "sha256": "77f9518fd1a73dbd83aab375d835e209181a95995e21f16ea86cb84bdbdc0907"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/positive_margin/selection-decision.json": {
+      "bytes": 32649,
+      "raw_payload_detected": false,
+      "sha256": "b15097463a65a16cecda90497c42716610771e65b743f909ab52976e442bd261"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/positive_margin/selection-predictions-0.json": {
+      "bytes": 1047390,
+      "raw_payload_detected": false,
+      "sha256": "8963d54025f146476453fe208c4ad73c53df1f20313404f2fda08c8d66c970a3"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/positive_margin/selection-predictions-120.json": {
+      "bytes": 1133057,
+      "raw_payload_detected": false,
+      "sha256": "e9483f6695eec7f018ca84b25394b2bcf0c6ed95fb8f351dbc3caba7d25917ab"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/positive_margin/selection-predictions-240.json": {
+      "bytes": 1095720,
+      "raw_payload_detected": false,
+      "sha256": "50d1ebf8dff1b6d20e2fc5e7874e78747bc087e05d834238cecf257c2bdf6570"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/selection-baseline-floors.json": {
+      "bytes": 112137,
+      "raw_payload_detected": false,
+      "sha256": "4f3f234c9176eb967854278a2d13bb04b12c5edd32bfa0649b5d7e1d27fec20e"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/summary.json": {
+      "bytes": 130211,
+      "raw_payload_detected": false,
+      "sha256": "f7379a9b1f1e8cfdb60c43354ae798cc2061c1c824fba686297215f90fe7ff1e"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/training-results.json": {
+      "bytes": 1546821,
+      "raw_payload_detected": false,
+      "sha256": "80db0f69627ce72f663740cb80b3b2ee3d0adaa04867a26003f8aba542be3fb6"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/results/training-schedule.json": {
+      "bytes": 305283,
+      "raw_payload_detected": false,
+      "sha256": "b204c5b8796666c0245a70187fd2b34a54c198360440e086a570e86aa27d7c0d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/reviews/02-results-resource-review.json": {
+      "bytes": 539438,
+      "raw_payload_detected": false,
+      "sha256": "c003750c87f9ae3a40e41c09c452038273a32fa1105b967d768d5a896b752ed8"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release/reviews/05-incoming-progress-review.json": {
+      "bytes": 27125,
+      "raw_payload_detected": false,
+      "sha256": "c7e7f93563f4f95bbe7b03b2ae56083d323b0bd436d934eac559bb94567df5ab"
+    }
+  },
+  "schema": "positive-retention-archive-raw-payload-guard-preflight/v1",
+  "scope": "AST-extracted data-only raw payload and known secret-pattern checks. No archiver module import, prepare/main invocation, copy, numerical/model/test-suite, network or Git execution.",
+  "supplement_JSONL_rows_checked": 60,
+  "supplement_known_secret_matches": [],
+  "supplement_raw_payload_matches": [],
+  "supplement_scanned_JSON": {
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/archive-guard-preflight.json": {
+      "raw_payload_detected": false,
+      "self_pin_excluded": true
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/archive-helper-build-draft-01.json": {
+      "bytes": 10504,
+      "raw_payload_detected": false,
+      "sha256": "d6872997b8c8796705737b9693acd4719029b0eb80cec9518aa464bd72655fad"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/archive-helper-build-draft-02.json": {
+      "bytes": 12529,
+      "raw_payload_detected": false,
+      "sha256": "c228ec7667de4bc9712e7d34c5b184876169cf32ce96d4a7a16cfce1c91b09ff"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/archive-helper-build.json": {
+      "bytes": 16195,
+      "raw_payload_detected": false,
+      "sha256": "c6b5b2b498aa2cbb6e6573ffc6f644e205a0697b1f88370c2344e436f890551c"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/archive-recovery-preflight.json": {
+      "bytes": 3847,
+      "raw_payload_detected": false,
+      "sha256": "045076ee68c33f0c80b2b1d177aa1521d95505f078185ee4329dd00cec323b35"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets-hosted-ci.json": {
+      "bytes": 12290,
+      "raw_payload_detected": false,
+      "sha256": "0209ec790caaeb044a232dab2e6e0506bafdcb76420a46f2d63291b69a5a7cc6"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets-merged-preservation.json": {
+      "bytes": 1640,
+      "raw_payload_detected": false,
+      "sha256": "0449803ce48dca6ab708f0a5a8c19f7c27830fd21248529c27a881389098f18b"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets-pr-merged.json": {
+      "bytes": 290,
+      "raw_payload_detected": false,
+      "sha256": "3c1acf4e831e39e3a837870989344a6a08edc23a5ee2de0973ec1c7681745639"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-all-checkpoint-downloads.json": {
+      "bytes": 2606,
+      "raw_payload_detected": false,
+      "sha256": "52f35553fb850c7b83a0bcbe5b7dc6cca7aad8efb73a70855807eeaf45fe5c9b"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-checkpoint-replay.json": {
+      "bytes": 41352,
+      "raw_payload_detected": false,
+      "sha256": "cf7885b4448f3be563e6cd119ec58e0e4c6139dc39d356f85ccdab73612ba467"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-publication-review.json": {
+      "bytes": 317448,
+      "raw_payload_detected": false,
+      "sha256": "8f6fce65ef06614cf1088eb27d51f76ba8ef41f6a514bfca3b0c97764827d666"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-readback-verification.json": {
+      "bytes": 87295,
+      "raw_payload_detected": false,
+      "sha256": "bbd9a45d0df085d8f672c3684fcd2064de4b39778089568af0ff976f15910135"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-recovery-source-review.json": {
+      "bytes": 178628,
+      "raw_payload_detected": false,
+      "sha256": "4e6677fe17f5a3ff6abafb1ad67e070904fdfeff2de1832128d08d2b904057f6"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-upload-batch-events.jsonl": {
+      "bytes": 42741,
+      "raw_payload_detected": false,
+      "sha256": "6ee3dc467f86f3eb49b87ee0b02f1dbb7be4ce18cef9d2aee893da6373031892"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-upload-batch-proposal.json": {
+      "bytes": 73899,
+      "raw_payload_detected": false,
+      "sha256": "53003de3d40ad698a2b72306a9f93561454c225e55da78b9f9deb7458eae2bb8"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-upload-batch-recovery.json": {
+      "bytes": 25687,
+      "raw_payload_detected": false,
+      "sha256": "31d2147e4f63f3c493fd8c4cf1e912abcc10199f3798c74c90806216fb918a10"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-upload-commit.json": {
+      "bytes": 25352,
+      "raw_payload_detected": false,
+      "sha256": "b6b8e0302c1a47e9321acb120d94ea67f95576daa634b20896754a7ec5030a38"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-upload-error.json": {
+      "bytes": 434,
+      "raw_payload_detected": false,
+      "sha256": "4664dadf56215dafae0d593ec2e2a4deda9011b970d03818adeaf04bd542f8f9"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-upload-parent.json": {
+      "bytes": 799852,
+      "raw_payload_detected": false,
+      "sha256": "9d7202bfd2a75797747f02145747f6e50c1278607c0c15d55d0075a643353057"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-upload-proposal.json": {
+      "bytes": 54642,
+      "raw_payload_detected": false,
+      "sha256": "d5c904a527f2a5c0f9757da5b57fe0fec925401fe48c41d952f42565e57c90d2"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-upload-reconciliation.json": {
+      "bytes": 840,
+      "raw_payload_detected": false,
+      "sha256": "777f0d2609484f7cc5d9ef79f5b43930ae09a9a18640646e0db8a10c0134ea4b"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/incoming-main-integration.json": {
+      "bytes": 393,
+      "raw_payload_detected": false,
+      "sha256": "c3a566b4d0e3b368db1dd7cf4b5933f08ab861f78ad395b1932e30b687f65e1a"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/incoming-progress-review.json": {
+      "bytes": 27125,
+      "raw_payload_detected": false,
+      "sha256": "c7e7f93563f4f95bbe7b03b2ae56083d323b0bd436d934eac559bb94567df5ab"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/protocol-review.json": {
+      "bytes": 36623,
+      "raw_payload_detected": false,
+      "sha256": "8debd5f9d35b63f4cfe52c684961afee71cf409da423eb2873391b67e8ba41ad"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/publication-preflight-review.json": {
+      "bytes": 224144,
+      "raw_payload_detected": false,
+      "sha256": "74dd8bd64077525940010159a12196dfc42b61906608c28f857c5aba9f493a38"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release-preparation.json": {
+      "bytes": 564,
+      "raw_payload_detected": false,
+      "sha256": "68fd4dd7d7e0aac02cbdc246d64db97732c31e6efa9513fb1099a7b17c0bbc58"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/replay-helper-build.json": {
+      "bytes": 5842,
+      "raw_payload_detected": false,
+      "sha256": "a179a180382caba3aa0e6aeccd435e01f82c5825ea0fa68d656e414b11e6b678"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/replay-source-review.json": {
+      "bytes": 1192,
+      "raw_payload_detected": false,
+      "sha256": "bb1fe8b810c4bacea7ab4e69eb9d6cebc6c74ffc3c79441124b3cc0057577e65"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/report-generator-review.json": {
+      "bytes": 16034,
+      "raw_payload_detected": false,
+      "sha256": "51bc30a660eea69a9d249d5ce340ce0aa0c44cb647a0d9bd0c7aaa5b5a734aca"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/resource-observation-phase-correction.json": {
+      "bytes": 6871,
+      "raw_payload_detected": false,
+      "sha256": "300a543cc9d336797e85a4794e2d0ccdad58a29b3e2dfdd2667265e47c864a31"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/resource-preservation-projection.json": {
+      "bytes": 7294,
+      "raw_payload_detected": false,
+      "sha256": "7908c995fea9a490da7629b45d023d378ae5934bf5eb5a73932aa05c592952b7"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/results-resource-review.json": {
+      "bytes": 539438,
+      "raw_payload_detected": false,
+      "sha256": "c003750c87f9ae3a40e41c09c452038273a32fa1105b967d768d5a896b752ed8"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/selected-checkpoint-replay.json": {
+      "bytes": 41482,
+      "raw_payload_detected": false,
+      "sha256": "3fb09f025e432c8dfb073f3b7464e3762494d2d58cc71b605cfd47285f67e09f"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/trial-artifact-audit.json": {
+      "bytes": 245644,
+      "raw_payload_detected": false,
+      "sha256": "76440343442447e29e3bfd6487cb5691f28b54fe8627d4b6cc42ff76abbd05df"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/workspace-latest-integration.json": {
+      "bytes": 553,
+      "raw_payload_detected": false,
+      "sha256": "e4b83dff92784b8c0d93e8e28b952229de4ad4a5a748d376ef92ae5d7b4a1408"
+    }
+  }
+}

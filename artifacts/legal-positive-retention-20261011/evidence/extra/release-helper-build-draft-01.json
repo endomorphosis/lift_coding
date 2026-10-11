@@ -1,0 +1,366 @@
+{
+  "actual_result_input": {
+    "bytes": 1546821,
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/training-results.json",
+    "sha256": "80db0f69627ce72f663740cb80b3b2ee3d0adaa04867a26003f8aba542be3fb6"
+  },
+  "author_role": "Self-authored release helper build and static binding; not independent release approval.",
+  "build_contract": {
+    "checkpoint_truth": "Full parent/new-gate/Adam/progress JSON, canonical seal and exact embedded parent checked; aliases byte-exact to actual selected originals.",
+    "claim_boundary": {
+      "all_admission_masks_zero": true,
+      "default_or_ModelManager_promotion": false,
+      "formal_output": null,
+      "latent_conditioned": false,
+      "legal_gold": false,
+      "native_runtime_qualified": false,
+      "source_only": true
+    },
+    "corpus_generations": "Both nine-file corrected corpus and preserved nine-file draft, both builders and both author reviews retained byte-exact.",
+    "default_artifacts_root": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01",
+    "default_evidence_files": [
+      "corpus-builder.py",
+      "corpus-author-review.json",
+      "corpus-builder-draft-01.py",
+      "corpus-author-review-draft-01.json",
+      "run_retention_experiment.py",
+      "prepare_plan.py",
+      "experiment-plan.json",
+      "protocol-artifact-bindings.json",
+      "model-selector-review.json",
+      "independent-corpus-review.json",
+      "training-design-review.json",
+      "real-code-data-review.json",
+      "progress-review.json",
+      "intake.json",
+      "remote-intake.json",
+      "retention-module-build.json",
+      "selector-build.json",
+      "validation.json",
+      "model-tests.xml",
+      "selection-tests.xml",
+      "resource-compatibility.json",
+      "run_scope_guardian.py",
+      "test_scope_guardian.py",
+      "trial-artifact-audit.json",
+      "replay_retention_gate.py",
+      "protocol-review.json",
+      "replay-source-review.json",
+      "replay-helper-build.json",
+      "selected-checkpoint-replay.json",
+      "audit_trial.py",
+      "write_reports.py",
+      "incoming-main-integration.json",
+      "prepare_release.py",
+      "publish_release.py",
+      "release-helper-build.json"
+    ],
+    "default_output": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release",
+    "default_source_root": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets",
+    "eight_checkpoint_files": {
+      "six_original_states": [
+        "checkpoints/bce/checkpoint-0.json",
+        "checkpoints/bce/checkpoint-120.json",
+        "checkpoints/bce/checkpoint-240.json",
+        "checkpoints/positive_margin/checkpoint-0.json",
+        "checkpoints/positive_margin/checkpoint-120.json",
+        "checkpoints/positive_margin/checkpoint-240.json"
+      ],
+      "two_selected_aliases": [
+        "checkpoints/bce/checkpoint.json",
+        "checkpoints/positive_margin/checkpoint.json"
+      ]
+    },
+    "entry_point": "prepare_release.prepare(argparse.Namespace) or the guarded CLI main()",
+    "evaluation_cohorts": [
+      "fresh_final",
+      "earlier_scope",
+      "earlier_trigger",
+      "earlier_support_action",
+      "earlier_support_gate"
+    ],
+    "evaluation_roles": "Every original state selection-evaluated; only the actual selected original or alias final/old-retention evaluated; cold controls and rejected trained states labelled from actual eligibility and selections.",
+    "existing_files_overwritten": false,
+    "explicit_extra_evidence": [
+      {
+        "bytes": 6871,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/resource-observation-phase-correction.json",
+        "sha256": "300a543cc9d336797e85a4794e2d0ccdad58a29b3e2dfdd2667265e47c864a31"
+      }
+    ],
+    "explicit_resource_projection": {
+      "bytes": 7294,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/resource-preservation-projection.json",
+      "sha256": "7908c995fea9a490da7629b45d023d378ae5934bf5eb5a73932aa05c592952b7"
+    },
+    "explicit_review_arguments": [
+      "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/protocol-review.json",
+      "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/model-selector-review.json",
+      "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/results-resource-review.json"
+    ],
+    "fresh_output_only": true,
+    "further_explicit_extra_evidence": "Pass final incoming-progress-review.json with --evidence when available; no helper change required.",
+    "manifest_files_record": "files[relative_path] = {bytes,sha256,original,derived}; every staged file except release-manifest.json itself covered.",
+    "manifest_schema": "positive-retention-release-manifest/v1",
+    "original_map_record": "originals[absolute-original-or-Git/derived-origin] = {release_paths,sha256,bytes}; aliases retain one original with multiple release_paths.",
+    "original_map_schema": "positive-retention-original-artifact-map/v1",
+    "path_portability": "Original absolute paths remain historical provenance; replay requires explicit checked rebinding through the original map.",
+    "required_inputs": {
+      "attempt": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01",
+      "results": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results",
+      "review": "At least three distinct actual machine-readable review files; no approval inferred."
+    },
+    "retained_result_artifacts": "All owned shallow result files and two arm directories, including losses, decisions, selection cases, pre-reference barriers and predictions.",
+    "retained_source": "Eight frozen scientific source files, parser denial leaf, all eager minimal package initialization dependencies bounded to 256 files, and all three relevant test files. No irrelevant old worktree traversal.",
+    "saved_parent_and_selected_prediction_panels": 15,
+    "versioned_historical_inputs": "All corpus-manifest old-bank bindings, historical scorer, four old input/reference/archived-parent panels and standalone exact frozen parent."
+  },
+  "current_package_import_source_main": "9e5df0d19b62268cdda356077754fad43bdf65fa",
+  "executed_now": {
+    "download": false,
+    "packaging": false,
+    "publisher": false,
+    "upload": false
+  },
+  "findings": [],
+  "helper_pins": {
+    "prepare_release.py": {
+      "bytes": 35641,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/prepare_release.py",
+      "sha256": "c214293d2b83eed743a4827f3f67d3651b0c7f11837db9cfc4e5292221a654d7"
+    },
+    "publish_release.py": {
+      "bytes": 13174,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/publish_release.py",
+      "sha256": "74a56756d0dfa48a000a972e645b4970cb2ef05b8dda27a6e4ed3f4596be8424"
+    }
+  },
+  "historical_pattern_pins": [
+    {
+      "bytes": 7727,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/build_release.py",
+      "sha256": "23e9022b9da9fadf28402500a67e81f5e63e39aeffe54fc0438724a84fb4343c"
+    },
+    {
+      "bytes": 3632,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/publish_release.py",
+      "sha256": "391b88d76c4cafd282a930c4c44dbd5945e5e3cd94ab944bf26c4daa3f41c814"
+    },
+    {
+      "bytes": 1265,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/verify_all_hub_checkpoints.py",
+      "sha256": "2fd23576050e8896e8210662a5f83f679e741d63dcb19c180d8fe293eef2392a"
+    }
+  ],
+  "observed_actual_outcome_for_orientation": {
+    "actual_updates": 480,
+    "interpretation": "Both arms selected cold 0; every trained 120/240 state was ineligible. Positive-margin partial retention is a rejected-state diagnostic, not a selected accuracy gain.",
+    "selected_fitted_gain": {
+      "bce": false,
+      "positive_margin": false
+    },
+    "selected_updates": {
+      "bce": 0,
+      "positive_margin": 0
+    },
+    "source_presentations": 7680
+  },
+  "observed_at_utc": "2026-10-11T00:43:32.786059+00:00",
+  "prefix": "experiments/positive-retention-20261011/run-01",
+  "publication_contract": {
+    "all_eight_checkpoint_files_downloaded_at_immutable_revision_and_byte_compared": true,
+    "all_new_file_git_or_LFS_identities_verified_at_immutable_upload_revision": true,
+    "all_original_and_alias_mirrors_under": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-readback/all-checkpoints",
+    "default_or_ModelManager_promotion": false,
+    "durable_receipts": [
+      "hub-upload-parent.json",
+      "hub-upload-proposal.json",
+      "hub-upload-commit.json",
+      "hub-upload-error.json",
+      "hub-readback-verification.json",
+      "hub-all-checkpoint-downloads.json"
+    ],
+    "entry_point": "publish_release.publish(argparse.Namespace) or the guarded CLI main()",
+    "fresh_parent_observed_in_upload_invocation": true,
+    "local_bytes_checked_again_immediately_before_upload": true,
+    "local_manifest_exhaustive_checked_before_upload": true,
+    "new_fixed_prefix_must_be_absent": true,
+    "only_prefix_additions": true,
+    "parent_commit_guard": true,
+    "prior_file_identity_preservation": "Every observed prior Git blob, LFS content and size identity must remain exact; .gitattributes may only retain the complete prior byte prefix and append.",
+    "selected_aliases_mirrored_to": [
+      "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-readback/bce/checkpoint.json",
+      "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-readback/positive_margin/checkpoint.json"
+    ],
+    "uncertain_outcome_policy": "Persist proposal and error type; do not retry automatically or bypass existing receipts/prefix. Reconcile actual remote prefix/commit before an explicit next publication action."
+  },
+  "ready_for_root_static_review_and_fresh_packaging": true,
+  "repo": "Publicus/legal-ir-autoencoder",
+  "resource_publication_boundary": {
+    "compact_projection_pin": {
+      "bytes": 7294,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/resource-preservation-projection.json",
+      "sha256": "7908c995fea9a490da7629b45d023d378ae5934bf5eb5a73932aa05c592952b7"
+    },
+    "continuous_peak_claimed": false,
+    "foreign_body_comparison_scope": "Terminal post-reap interval only; no independently verified full-fitting or admission-interval preservation claim.",
+    "full_shared_ledger_snapshots_retained_locally_and_pinned": [
+      {
+        "bytes": 8734563,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/resource-admission-observation.json",
+        "sha256": "fb61590b6fa32588fd50c9484dcbf868297b1cacc0cbd85ec2ba8bb27934c126"
+      },
+      {
+        "bytes": 8735132,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/resource-postfinal-observation.json",
+        "sha256": "dabb7c44cbad6142ab56087ffc454f089b46c0d8cb7352b7f942311b261f3308"
+      }
+    ],
+    "generated_public_pins_file": "guardian/full-resource-artifact-pins.json",
+    "guardian_omissions_requested": [],
+    "phase_correction_pin": {
+      "bytes": 6871,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/resource-observation-phase-correction.json",
+      "sha256": "300a543cc9d336797e85a4794e2d0ccdad58a29b3e2dfdd2667265e47c864a31"
+    },
+    "public_projection_file": "guardian/resource-preservation-projection.json",
+    "raw_cross_agent_state_uploaded_by_default": false,
+    "resource_observation_timing": "First full snapshot is after child reaped and pre_finalize despite preserved original admission phase label."
+  },
+  "schema": "positive-retention-release-helper-build/v1",
+  "scope": "Prepare append-only publication helpers for the completed trial, without executing either helper.",
+  "source_generation": {
+    "historical_trial_base_preserved": true,
+    "incoming_integration_receipt": {
+      "bytes": 393,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/incoming-main-integration.json",
+      "sha256": "c3a566b4d0e3b368db1dd7cf4b5933f08ab861f78ad395b1932e30b687f65e1a"
+    },
+    "package_HEAD_checked_again_before_closure_completion": true,
+    "package_initialization_closure_read_statically_at_current_HEAD": true,
+    "scientific_source_and_tests_pinned_individually": true
+  },
+  "source_pins": [
+    {
+      "bytes": 31614,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_retention_gate.py",
+      "sha256": "3212fed287375d338bcc8fc02f9d4a37a8b08e7ba734af9d61f587a20788a06b"
+    },
+    {
+      "bytes": 14328,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_retention_selection.py",
+      "sha256": "9af005eba03d129bd56920b5274c4189962092dc9bf2d7da6f0e0004b0a7f0a5"
+    },
+    {
+      "bytes": 29545,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py",
+      "sha256": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15"
+    },
+    {
+      "bytes": 7804,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py",
+      "sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65"
+    },
+    {
+      "bytes": 27145,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_trigger_readout.py",
+      "sha256": "983b69b8e293aa6211fd8322f9ba6bfe6fa5b8cb853c2d4d0cace1e7e5046344"
+    },
+    {
+      "bytes": 25504,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_action.py",
+      "sha256": "ce7abc45032bee6ac950720d79c8f329c03a68961140c0f2ad9ade8ea923988c"
+    },
+    {
+      "bytes": 24874,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_gate.py",
+      "sha256": "79a9d314ddf597b16c6a06754d7786d568bbf34c87dc71a947ac0b8af12f525b"
+    },
+    {
+      "bytes": 29993,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py",
+      "sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a"
+    },
+    {
+      "bytes": 300668,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/deontic/utils/deontic_parser.py",
+      "sha256": "9d957c6ffbc3ac011fee0ee56f14c31ed36fc28f44c3ab468e208711cb7e0d59"
+    },
+    {
+      "bytes": 27244,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/tests/unit/logic/test_legal_scope_retention_gate.py",
+      "sha256": "a219c787d40c1bc5ca35994196d407f66212b97a9ee18d70d6c3497fb0b495f4"
+    },
+    {
+      "bytes": 13697,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/tests/unit/logic/test_legal_scope_retention_selection.py",
+      "sha256": "32a4c8477075dd6119e6384da43b36ae22cedf309bd53e51d93d983b3020e8cf"
+    },
+    {
+      "bytes": 20171,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/tests/unit/logic/test_legal_scope_support_gate.py",
+      "sha256": "13917ca96cf5b3795b2e7c4efbd0aadb1e2c723cfe5c96825586e31c141fca90"
+    }
+  ],
+  "static_validation": {
+    "Git_index_or_checkout_mutations": 0,
+    "Hub_SDK_import_inside_explicit_publish_call_only": true,
+    "Hub_reads_or_writes": 0,
+    "authored_helpers_imported_or_executed": false,
+    "both_helpers_AST_parsed": true,
+    "independent_review_approval_inferred": false,
+    "model_forwards": 0,
+    "model_or_Torch_imports": 0,
+    "only_standard_library_imports_at_module_scope": true,
+    "optimizer_updates": 0,
+    "result_claims_derived_during_future_build_from_actual_completed_receipts": true,
+    "runtime_packaging_validation": "Pending root execution and inspection of the fresh prepared directory; no helper runtime execution is claimed here.",
+    "test_executions": 0,
+    "top_level_imports": {
+      "prepare_release.py": [
+        "from __future__ import annotations",
+        "import argparse",
+        "import ast",
+        "from hashlib import sha256",
+        "import json",
+        "import os",
+        "from pathlib import Path, PurePosixPath",
+        "import subprocess",
+        "import xml.etree.ElementTree as ET"
+      ],
+      "publish_release.py": [
+        "from __future__ import annotations",
+        "import argparse",
+        "from hashlib import sha1, sha256",
+        "import json",
+        "import os",
+        "from pathlib import Path, PurePosixPath",
+        "import re"
+      ]
+    }
+  },
+  "test_receipt_bindings": [
+    {
+      "bytes": 13054,
+      "errors": 0,
+      "failures": 0,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/model-tests.xml",
+      "rerun_by_this_author": false,
+      "sha256": "6e1e0c5750c8180dccfe8d53d587546077971cc900f4bb2e69c1aafe178eaaf3",
+      "skips": 0,
+      "source_qualified_unique_case_count": 78
+    },
+    {
+      "bytes": 18044,
+      "errors": 0,
+      "failures": 0,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/selection-tests.xml",
+      "rerun_by_this_author": false,
+      "sha256": "151b5bed4c585946bd6eb5811e8db824229a178765485448f9d7c69a3c11696e",
+      "skips": 0,
+      "source_qualified_unique_case_count": 101
+    }
+  ],
+  "total_preexisting_current_test_executions": 179,
+  "training_source_main": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a"
+}

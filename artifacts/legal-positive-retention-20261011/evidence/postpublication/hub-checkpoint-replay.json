@@ -1,0 +1,605 @@
+{
+  "schema": "support-retention-read-only-complete-replay/v1",
+  "status": "passed",
+  "arms": {
+    "bce": {
+      "checkpoint": {
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-readback/bce/checkpoint.json",
+        "bytes": 3727869,
+        "sha256": "951c6492cb179548c21a4db0f9ff915294d89792dbb82c10e6f6f400adef1c06"
+      },
+      "original_selected_checkpoint": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/bce/checkpoint-0.json",
+        "bytes": 3727869,
+        "sha256": "951c6492cb179548c21a4db0f9ff915294d89792dbb82c10e6f6f400adef1c06"
+      },
+      "selected_receipt": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/bce/selected.json",
+        "bytes": 121811,
+        "sha256": "8ea04a9a739ec208f9f5889f57567181a3c197c1a9af4c09bdc94f9d95868452"
+      },
+      "objective": "bce",
+      "retention_lambda": 0.0,
+      "support_steps": 0,
+      "new_action_updates": 0,
+      "parent_action_steps": 120,
+      "cohorts": {
+        "fresh_final": {
+          "cases": 128,
+          "full_output_exact": 128,
+          "inputs": {
+            "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus/final-inputs.json",
+            "bytes": 63400,
+            "sha256": "be59c75607db202595a484c7bcd50360bb104a868025e7388e456d84007f716a"
+          },
+          "original_expected_complete_panel": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/bce/fresh_final-predictions.json",
+            "bytes": 971548,
+            "sha256": "88077b0eb34e066365cdac8e737e6ddfa2ea3be427f99d47fbacaa98c20ff27d"
+          },
+          "read_complete_panel": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/bce/fresh_final-predictions.json",
+            "bytes": 971548,
+            "sha256": "88077b0eb34e066365cdac8e737e6ddfa2ea3be427f99d47fbacaa98c20ff27d"
+          }
+        },
+        "earlier_scope": {
+          "cases": 128,
+          "full_output_exact": 128,
+          "inputs": {
+            "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-inputs.json",
+            "bytes": 61725,
+            "sha256": "1af9757054e2ae6344dcbd2e3834c21808cbe998e79ace9b9ff34383d3020b55"
+          },
+          "original_expected_complete_panel": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/bce/earlier_scope-predictions.json",
+            "bytes": 989929,
+            "sha256": "cafee9547957cc040396aaa54040fef565dc996dc7b06717c924e4edd2822d2d"
+          },
+          "read_complete_panel": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/bce/earlier_scope-predictions.json",
+            "bytes": 989929,
+            "sha256": "cafee9547957cc040396aaa54040fef565dc996dc7b06717c924e4edd2822d2d"
+          }
+        },
+        "earlier_trigger": {
+          "cases": 128,
+          "full_output_exact": 128,
+          "inputs": {
+            "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/final-inputs.json",
+            "bytes": 62673,
+            "sha256": "066bc0a734292d45da468583c55677d9851e244f5a7949aedcc857796a14cb67"
+          },
+          "original_expected_complete_panel": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/bce/earlier_trigger-predictions.json",
+            "bytes": 1087845,
+            "sha256": "a75eb0371ba71d7f7d8bb2f3be7cc48328e10ec6f7dd2626e9b2df39cb8ab1f5"
+          },
+          "read_complete_panel": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/bce/earlier_trigger-predictions.json",
+            "bytes": 1087845,
+            "sha256": "a75eb0371ba71d7f7d8bb2f3be7cc48328e10ec6f7dd2626e9b2df39cb8ab1f5"
+          }
+        },
+        "earlier_support_action": {
+          "cases": 128,
+          "full_output_exact": 128,
+          "inputs": {
+            "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/final-inputs.json",
+            "bytes": 63530,
+            "sha256": "5fa44c4a208c71429c61f8c6be648b65583ecd2a01740b412f440e03ef824da0"
+          },
+          "original_expected_complete_panel": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/bce/earlier_support_action-predictions.json",
+            "bytes": 1078421,
+            "sha256": "b10b74296b9282a1d9fd07ea9fa5ba043dc22688a4f550fd21f74d2952fe6652"
+          },
+          "read_complete_panel": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/bce/earlier_support_action-predictions.json",
+            "bytes": 1078421,
+            "sha256": "b10b74296b9282a1d9fd07ea9fa5ba043dc22688a4f550fd21f74d2952fe6652"
+          }
+        },
+        "earlier_support_gate": {
+          "cases": 128,
+          "full_output_exact": 128,
+          "inputs": {
+            "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/final-inputs.json",
+            "bytes": 63652,
+            "sha256": "b49bea41269cfab18ff58a598ea47d7f85385322701ad070aa761a84b18588ac"
+          },
+          "original_expected_complete_panel": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/bce/earlier_support_gate-predictions.json",
+            "bytes": 1088771,
+            "sha256": "d88310889a0f3a67ac6f6f86fde79d2f449e7d764726898b7f834ffb298a2b71"
+          },
+          "read_complete_panel": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/bce/earlier_support_gate-predictions.json",
+            "bytes": 1088771,
+            "sha256": "d88310889a0f3a67ac6f6f86fde79d2f449e7d764726898b7f834ffb298a2b71"
+          }
+        }
+      },
+      "complete_output_exact": 640,
+      "new_gate_full_Adam_and_counters_unchanged": true,
+      "parent_full_checkpoint_bytes_unchanged": true,
+      "model_parent_tensors_modes_flags_and_rng_unchanged": true,
+      "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155"
+    },
+    "positive_margin": {
+      "checkpoint": {
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-readback/positive_margin/checkpoint.json",
+        "bytes": 3727941,
+        "sha256": "2d87ed447e89061620711f5d76ea014da6f54c7e21b539c9a7ad2e92499a9baf"
+      },
+      "original_selected_checkpoint": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/positive_margin/checkpoint-0.json",
+        "bytes": 3727941,
+        "sha256": "2d87ed447e89061620711f5d76ea014da6f54c7e21b539c9a7ad2e92499a9baf"
+      },
+      "selected_receipt": {
+        "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/positive_margin/selected.json",
+        "bytes": 121835,
+        "sha256": "77f9518fd1a73dbd83aab375d835e209181a95995e21f16ea86cb84bdbdc0907"
+      },
+      "objective": "positive_margin",
+      "retention_lambda": 1.0,
+      "support_steps": 0,
+      "new_action_updates": 0,
+      "parent_action_steps": 120,
+      "cohorts": {
+        "fresh_final": {
+          "cases": 128,
+          "full_output_exact": 128,
+          "inputs": {
+            "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus/final-inputs.json",
+            "bytes": 63400,
+            "sha256": "be59c75607db202595a484c7bcd50360bb104a868025e7388e456d84007f716a"
+          },
+          "original_expected_complete_panel": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/positive_margin/fresh_final-predictions.json",
+            "bytes": 973084,
+            "sha256": "0a5f21aeff21e7cef11aed36a7e101c59667d97421103898a79d63fbca04948b"
+          },
+          "read_complete_panel": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/positive_margin/fresh_final-predictions.json",
+            "bytes": 973084,
+            "sha256": "0a5f21aeff21e7cef11aed36a7e101c59667d97421103898a79d63fbca04948b"
+          }
+        },
+        "earlier_scope": {
+          "cases": 128,
+          "full_output_exact": 128,
+          "inputs": {
+            "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-inputs.json",
+            "bytes": 61725,
+            "sha256": "1af9757054e2ae6344dcbd2e3834c21808cbe998e79ace9b9ff34383d3020b55"
+          },
+          "original_expected_complete_panel": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/positive_margin/earlier_scope-predictions.json",
+            "bytes": 991465,
+            "sha256": "430483cfcdcda1dc9604fb015813a3f5d0c72371015d60d6b9c216b6828ebb9d"
+          },
+          "read_complete_panel": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/positive_margin/earlier_scope-predictions.json",
+            "bytes": 991465,
+            "sha256": "430483cfcdcda1dc9604fb015813a3f5d0c72371015d60d6b9c216b6828ebb9d"
+          }
+        },
+        "earlier_trigger": {
+          "cases": 128,
+          "full_output_exact": 128,
+          "inputs": {
+            "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/final-inputs.json",
+            "bytes": 62673,
+            "sha256": "066bc0a734292d45da468583c55677d9851e244f5a7949aedcc857796a14cb67"
+          },
+          "original_expected_complete_panel": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/positive_margin/earlier_trigger-predictions.json",
+            "bytes": 1089381,
+            "sha256": "a0f99f5f652b55a7d34da89e74b0c8fc0ad1f0d957690d94b4338ed6fb0e9127"
+          },
+          "read_complete_panel": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/positive_margin/earlier_trigger-predictions.json",
+            "bytes": 1089381,
+            "sha256": "a0f99f5f652b55a7d34da89e74b0c8fc0ad1f0d957690d94b4338ed6fb0e9127"
+          }
+        },
+        "earlier_support_action": {
+          "cases": 128,
+          "full_output_exact": 128,
+          "inputs": {
+            "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/final-inputs.json",
+            "bytes": 63530,
+            "sha256": "5fa44c4a208c71429c61f8c6be648b65583ecd2a01740b412f440e03ef824da0"
+          },
+          "original_expected_complete_panel": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/positive_margin/earlier_support_action-predictions.json",
+            "bytes": 1079957,
+            "sha256": "a9a2572678a690807869b0a84bb11f39f4e504a1a50a52d0b88a26af3d33bd4d"
+          },
+          "read_complete_panel": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/positive_margin/earlier_support_action-predictions.json",
+            "bytes": 1079957,
+            "sha256": "a9a2572678a690807869b0a84bb11f39f4e504a1a50a52d0b88a26af3d33bd4d"
+          }
+        },
+        "earlier_support_gate": {
+          "cases": 128,
+          "full_output_exact": 128,
+          "inputs": {
+            "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/final-inputs.json",
+            "bytes": 63652,
+            "sha256": "b49bea41269cfab18ff58a598ea47d7f85385322701ad070aa761a84b18588ac"
+          },
+          "original_expected_complete_panel": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/positive_margin/earlier_support_gate-predictions.json",
+            "bytes": 1090307,
+            "sha256": "cb606aad484ad4ff1e3d0a181fbbaaa6ce4c281ef7d609dee75e7cd89563fd26"
+          },
+          "read_complete_panel": {
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/positive_margin/earlier_support_gate-predictions.json",
+            "bytes": 1090307,
+            "sha256": "cb606aad484ad4ff1e3d0a181fbbaaa6ce4c281ef7d609dee75e7cd89563fd26"
+          }
+        }
+      },
+      "complete_output_exact": 640,
+      "new_gate_full_Adam_and_counters_unchanged": true,
+      "parent_full_checkpoint_bytes_unchanged": true,
+      "model_parent_tensors_modes_flags_and_rng_unchanged": true,
+      "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155"
+    }
+  },
+  "complete_outputs_exact": 1280,
+  "cohorts_per_arm": 5,
+  "rows_per_cohort": 128,
+  "additional_optimizer_updates": 0,
+  "target_reference_files_opened": false,
+  "training_targets_denied": true,
+  "TRAIN_teacher_and_hinge_denied": true,
+  "selection_schema_and_reselection_denied": true,
+  "semantic_parser_callables_denied": true,
+  "gradient_and_optimizer_updates_denied": true,
+  "socket_connections_and_datagrams_denied": true,
+  "offline_environment": true,
+  "training_lease_claimed": false,
+  "threads": 2,
+  "interop_threads": 1,
+  "device": "cpu",
+  "cuda_initialized": false,
+  "producer_pins": {
+    "implementation_sha256": "3212fed287375d338bcc8fc02f9d4a37a8b08e7ba734af9d61f587a20788a06b",
+    "support_action_producer": {
+      "implementation_sha256": "ce7abc45032bee6ac950720d79c8f329c03a68961140c0f2ad9ade8ea923988c",
+      "trigger_producer": {
+        "implementation_sha256": "983b69b8e293aa6211fd8322f9ba6bfe6fa5b8cb853c2d4d0cace1e7e5046344",
+        "donor_producer": {
+          "implementation_sha256": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15",
+          "proposal_sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65",
+          "scope_sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a",
+          "torch_version": "2.13.0+cu130",
+          "tokenizer_profile": "unicode_word_or_punctuation_utf8_offsets/v1"
+        },
+        "feature_profile": "frozen_encoded_global_or_predicted_interval_coverage/v1"
+      },
+      "feature_profile": "frozen_mean_encoded_support_and_token_action_residual/v1"
+    },
+    "support_gate_reference": {
+      "implementation_sha256": "79a9d314ddf597b16c6a06754d7786d568bbf34c87dc71a947ac0b8af12f525b",
+      "support_action_producer": {
+        "implementation_sha256": "ce7abc45032bee6ac950720d79c8f329c03a68961140c0f2ad9ade8ea923988c",
+        "trigger_producer": {
+          "implementation_sha256": "983b69b8e293aa6211fd8322f9ba6bfe6fa5b8cb853c2d4d0cace1e7e5046344",
+          "donor_producer": {
+            "implementation_sha256": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15",
+            "proposal_sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65",
+            "scope_sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a",
+            "torch_version": "2.13.0+cu130",
+            "tokenizer_profile": "unicode_word_or_punctuation_utf8_offsets/v1"
+          },
+          "feature_profile": "frozen_encoded_global_or_predicted_interval_coverage/v1"
+        },
+        "feature_profile": "frozen_mean_encoded_support_and_token_action_residual/v1"
+      },
+      "feature_profile": "frozen_context64_ordered_byte33_support_pooling/v1"
+    },
+    "feature_profile": "frozen_context64_ordered_byte33_retention_support/v1"
+  },
+  "denied_prediction_entrypoints": [
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_retention_gate.RetentionGateExample",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_retention_gate.train_retention_gate_step",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_retention_gate.make_retention_gate_optimizer",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_retention_gate._parent_emission_mask",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_retention_gate._positive_margin_penalty",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_support_gate.SupportGateExample",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_support_gate.train_support_gate_step",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_support_gate.make_support_gate_optimizer",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_support_action.SupportActionExample",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_support_action.train_support_action_step",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_support_action.make_support_action_optimizer",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_support_action._action_labels",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_trigger_readout.TriggerReadoutExample",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_trigger_readout.train_trigger_readout_step",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_trigger_readout.make_trigger_readout_optimizer",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_span_decoder.ScopeSpanExample",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_span_decoder.train_scope_span_step",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_span_decoder.make_scope_span_optimizer",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_span_decoder._labels",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_retention_selection.SelectionConfig",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_retention_selection.summarize_cases",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_retention_selection.make_panel",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_retention_selection.validate_panel",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_retention_selection.retention_report",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_retention_selection.eligible",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_retention_selection.rank",
+    "ipfs_datasets_py.logic.formalization.autoencoder.legal_scope_retention_selection.select",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.Path",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.Any",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.Dict",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.List",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.Optional",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_normative_elements",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._apply_same_document_reference_repair_clearance",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._has_resolved_same_document_reference_exception",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._mark_same_document_reference_resolutions",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._same_document_reference_values",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._same_document_reference_display_text",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._apply_local_applicability_repair_clearance",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._is_local_applicability_element",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._local_applicability_reference_records",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._apply_local_scope_condition_repair_clearance",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._is_local_scope_condition_element",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._local_scope_condition_scopes",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._apply_local_scope_exception_repair_clearance",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._is_local_scope_exception_element",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._local_scope_exception_scopes",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._apply_formula_resolved_repair_clearance",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._apply_active_repair_status",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._precedence_override_reference_records",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.expand_enumerated_norms",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._build_enumerated_child_element",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._split_legal_sentences",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.segment_legal_text",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._citation_context_from_sentence",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._clean_citation_heading",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._sentence_has_normative_cue",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._hierarchy_path_replaced_by",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._hierarchy_detail_replaced_by",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._looks_like_section_header",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._is_citation_parenthetical",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._split_segment_fragments",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.analyze_normative_sentence",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._extract_section_status_lifecycle_elements",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._is_superseded_editorial_status_heading",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._section_status_should_short_circuit",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._build_section_status_lifecycle_element",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._build_savings_preservation_element",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._savings_preserved_actor_text",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._savings_preserved_object_text",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._section_status_detail",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._section_status_instrument_from_context",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._strip_leading_enumeration_label",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._strip_leading_authorized_action_prefix",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._build_element",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._complete_field_spans",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._find_span",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._definition_body_span",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._impersonal_field_spans",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._finalize_element",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._apply_definition_context",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_canonical_citation",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_source_id",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_formal_terms",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.normalize_symbol",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._definition_applies_to_element",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._same_hierarchy_scope",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._hierarchy_value",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._apply_cross_reference_context",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._build_section_index",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.resolve_cross_references",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._hierarchy_reference_target",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._resolve_section_range",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._section_sort_key",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._relative_reference_target",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._is_relative_reference",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._normalize_section_ref",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._unresolved_cross_references",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._apply_document_penalty_context",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._apply_enforcement_context",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._apply_conflict_context",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._build_section_violation_index",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_enforcement_links",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._enforcement_target_sections",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.validate_parser_element",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.migrate_parser_element",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._legacy_clause_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._legacy_cross_reference_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._legacy_temporal_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._deterministic_ir_repair_resolution",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_llm_repair_payload",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._inactive_deterministic_repair_payload",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_logic_frame",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_export_readiness",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.infer_definition_scope",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_ontology_terms",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.merge_ontology_terms",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._enrich_legal_frame",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.classify_legal_frame",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_monetary_amounts",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_monetary_amount_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_penalty_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.classify_sanction_class",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.classify_sanction_modality",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._penalty_bound",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_penalty_recurrence",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_imprisonment_duration",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_procedure_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_procedure_event_mentions",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_procedure_event_relations",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._infer_trigger_event",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._infer_terminal_event",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._events_from_phrase",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._infer_event_from_phrase",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_kg_relationship_hints",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_kg_triples",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_legal_instrument_target",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.classify_modal",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._clean_phrase",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._has_leading_negated_subject",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._clean_negated_subject_phrase",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._trim_embedded_heading_subject",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._span_pair",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._element_span",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._overlaps",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._mostly_inside",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._manner_shall",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._detail_governs",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._scope_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._drop_shalls_inside_conditions",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._dedupe_slot_surfaces",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._contained_by_other",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._split_inverted_action",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._with_condition",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._effect_before_approval_elements",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._subject_without_except",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._skip_subject",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._occupied",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._modal_already_covered",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._outer_comma_subject",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._enumerated_power_before",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._keep_inhabitant_clause",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._coordinated_no_head",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._manner_phrase",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._grant_without",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._drop_grant_without_exceptions",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._keep_without_phrase",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._colon_object",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._append_elliptical_nor",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._clause_lead",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._restore_otherwise",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._flatten_relative_shall",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._as_follows_tail",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._restore_provided_that",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._expand_infinitive_subject",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._attach_leading_case",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._restore_interrupted_action",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._clean_action",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._first_verb",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._action_object",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._mental_state",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._action_without_mental_state",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._split_leading_complex_mental_state",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._normalize_passive_clause",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.classify_legal_entity",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_action_recipient",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._clean_passive_benefit_recipient",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_definition_body",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.score_scaffold_quality",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_legal_subject",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_legal_action",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_conditions",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._is_qualification_when",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_condition_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_override_clauses",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_override_clause_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_cross_references",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_cross_reference_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._is_definition_scope_marker",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_enumerated_items",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_temporal_constraints",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_temporal_constraint_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.normalize_temporal_value",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_exceptions",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.extract_exception_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._extract_clause_details",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_formal_logic_record",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_procedure_event_records",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_proof_obligation_record",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_clause_records",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_reference_records",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_sanction_records",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_ontology_entity_records",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_repair_queue_record",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_export_record_bundle",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_document_export_tables",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_document_export_manifest",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.validate_document_export_tables",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.get_export_table_specs",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.serialize_export_tables_for_parquet",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.write_document_export_parquet",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._parquet_cell",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.build_deontic_formula",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.normalize_predicate_name",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.parser_elements_with_deterministic_ir_readiness",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.identify_obligations",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser.detect_normative_conflicts",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._check_conflict_pair",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._actions_similar",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._first_text",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._subjects_similar",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._check_temporal_conflict",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._check_conditional_conflict",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._extract_normative_elements_without_substantive_exception_projection",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._normalize_authorized_and_directed_obligation",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._normalize_instruction_order_obligation",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._normalize_express_duty_obligation",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._clear_subject_to_duty_condition_noise",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._normalize_authority_grant_permission",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._clear_standard_substantive_exception_active_repair",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._clear_local_applicability_active_repair",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._clear_pure_precedence_override_active_repair",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._single_parser_exception_record",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._parser_slot_first_text",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._parser_slot_text",
+    "ipfs_datasets_py.logic.deontic.utils.deontic_parser._substantive_exception_requires_external_resolution",
+    "AdamW.step",
+    "AdamW.zero_grad",
+    "Tensor.backward",
+    "Tensor.cuda",
+    "torch.autograd.backward",
+    "torch.autograd.grad",
+    "Module.cuda",
+    "torch.cuda.init",
+    "torch.cuda.set_device"
+  ],
+  "source": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/replay_retention_gate.py",
+    "bytes": 21449,
+    "sha256": "d73df6edffd342820acb6e69736cbccad2576a32b18deb1cbca9d888cb0dff7a"
+  },
+  "plan": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/experiment-plan.json",
+    "bytes": 13757,
+    "sha256": "12b715274d467b03093fe7eb021643b1e045dc9b964112849b86a433a7561e26"
+  },
+  "training_results": {
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/training-results.json",
+    "bytes": 1546821,
+    "sha256": "80db0f69627ce72f663740cb80b3b2ee3d0adaa04867a26003f8aba542be3fb6"
+  },
+  "original_selection_barrier": {
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/both-selected-before-final-and-retention.json",
+    "bytes": 1254002,
+    "sha256": "c522bef7a4d1eca4884c26d1cf00481ded1f3a981344f5b36d8a5292e37f09db"
+  },
+  "read_selection_barrier": {
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/both-selected-before-final-and-retention.json",
+    "bytes": 1254002,
+    "sha256": "c522bef7a4d1eca4884c26d1cf00481ded1f3a981344f5b36d8a5292e37f09db"
+  },
+  "original_prediction_barrier": {
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/all-final-and-retention-predictions-before-reference-joins.json",
+    "bytes": 5453,
+    "sha256": "133af0c86238ad8b276b6d4c8e856c3dea0d720a457d358f4e4de5a5c7d93e62"
+  },
+  "read_prediction_barrier": {
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/all-final-and-retention-predictions-before-reference-joins.json",
+    "bytes": 5453,
+    "sha256": "133af0c86238ad8b276b6d4c8e856c3dea0d720a457d358f4e4de5a5c7d93e62"
+  },
+  "source_only_replay_qualifies_legal_semantics": false,
+  "default_promotion": false,
+  "elapsed_seconds": 6.566765584982932,
+  "receipt_file_and_parent_directory_fsync": true
+}

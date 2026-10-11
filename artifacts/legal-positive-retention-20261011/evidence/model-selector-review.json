@@ -1,0 +1,259 @@
+{
+  "all_six_old_producers_byte_exact": true,
+  "bound_primary_test_receipts": [
+    {
+      "bytes": 13054,
+      "case_classname_counts": {
+        "tests.unit.logic.test_legal_scope_retention_gate": 39,
+        "tests.unit.logic.test_legal_scope_support_gate": 39
+      },
+      "errors": 0,
+      "execution_owner": "root; reviewer only read and parsed existing XML",
+      "failures": 0,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/model-tests.xml",
+      "qualification_uses_full_pytest_module_classname": true,
+      "reviewer_reran_tests": false,
+      "sha256": "6e1e0c5750c8180dccfe8d53d587546077971cc900f4bb2e69c1aafe178eaaf3",
+      "skips": 0,
+      "source_file_attribute_present": false,
+      "testcase_count": 78,
+      "unique_source_module_classname_plus_case_ids": 78
+    },
+    {
+      "bytes": 18044,
+      "case_classname_counts": {
+        "tests.unit.logic.test_legal_scope_retention_selection": 101
+      },
+      "errors": 0,
+      "execution_owner": "root; reviewer only read and parsed existing XML",
+      "failures": 0,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/selection-tests.xml",
+      "qualification_uses_full_pytest_module_classname": true,
+      "reviewer_reran_tests": false,
+      "sha256": "151b5bed4c585946bd6eb5811e8db824229a178765485448f9d7c69a3c11696e",
+      "skips": 0,
+      "source_file_attribute_present": false,
+      "testcase_count": 101,
+      "unique_source_module_classname_plus_case_ids": 101
+    }
+  ],
+  "findings": [],
+  "independence": {
+    "author_objective_wording_correction_was_self_authored": true,
+    "reviewer_authored_corpus": true,
+    "reviewer_authored_model_selector_or_tests": false,
+    "this_is_not_independent_corpus_approval": true
+  },
+  "observed_at_utc": "2026-10-11T00:22:55.701147+00:00",
+  "old_producer_pins": [
+    {
+      "bytes": 29545,
+      "main_commit": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a",
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py",
+      "same_as_pinned_main": true,
+      "sha256": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15"
+    },
+    {
+      "bytes": 7804,
+      "main_commit": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a",
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py",
+      "same_as_pinned_main": true,
+      "sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65"
+    },
+    {
+      "bytes": 27145,
+      "main_commit": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a",
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_trigger_readout.py",
+      "same_as_pinned_main": true,
+      "sha256": "983b69b8e293aa6211fd8322f9ba6bfe6fa5b8cb853c2d4d0cace1e7e5046344"
+    },
+    {
+      "bytes": 25504,
+      "main_commit": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a",
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_action.py",
+      "same_as_pinned_main": true,
+      "sha256": "ce7abc45032bee6ac950720d79c8f329c03a68961140c0f2ad9ade8ea923988c"
+    },
+    {
+      "bytes": 24874,
+      "main_commit": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a",
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_gate.py",
+      "same_as_pinned_main": true,
+      "sha256": "79a9d314ddf597b16c6a06754d7786d568bbf34c87dc71a947ac0b8af12f525b"
+    },
+    {
+      "bytes": 29993,
+      "main_commit": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a",
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py",
+      "same_as_pinned_main": true,
+      "sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a"
+    }
+  ],
+  "resolved_findings": [
+    {
+      "corrected_author_review": {
+        "bytes": 21824,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus-author-review.json",
+        "sha256": "c3ca32152c05e5bad8172567420e69ab8cb0d4fbc7e05b9aec3cad8624a7fb5d"
+      },
+      "corrected_protocol": {
+        "bytes": 22591,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus/corpus-protocol.json",
+        "sha256": "9e7ae0ddac59d60aceab132583ca24252ec13bc064093986d44e68a7e278d880"
+      },
+      "finding": "Draft corpus objective formula omitted the square while model/profile/tests/design use squared hinge.",
+      "independent_corpus_approval": false,
+      "resolution": "Root confirmed intended squared hinge. Author preserved all9draftJSONfiles plus exact draftbuilder/note, corrected author spelling, and rebuilt protocol/manifest. All6source/reference files and training-schedule are unchanged."
+    }
+  ],
+  "review_execution": {
+    "Git_source_Hub_resource_mutations": 0,
+    "model_loads_or_forwards": 0,
+    "only_write": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/model-selector-review.json",
+    "optimizer_calls": 0,
+    "target_module_imports": 0,
+    "tests_executed_by_reviewer": 0
+  },
+  "schema": "legal-scope-retention-model-selector-static-review/v1",
+  "scope_limits": [
+    "Reviewer imported/executed none of the targetmodel/selector/test modules and ran no tests. Test passes here come from bound primary XML, not reruns.",
+    "The model training API enforces supported-only anchors; actual TRAINmembership/cohortbarriers/paired scheduling and complete phase accounting are separate rootrunner/protocol review obligations.",
+    "Pure selector validates recorded identity/sets, not actual source bytes, checkpoint tensors or prediction execution; those require the bound runner and strict modelrestore.",
+    "This review covers static model/selector and primary helper tests. No matched trial has run; numerical experimentplan/runner/guardian protocol are separately reviewed before fitting.",
+    "Authored profile success supplies no independent lawgold, latentconditioning, nativefamily or proof qualification."
+  ],
+  "source_main_commit": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a",
+  "source_pins": {
+    "model": {
+      "bytes": 31614,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_retention_gate.py",
+      "sha256": "3212fed287375d338bcc8fc02f9d4a37a8b08e7ba734af9d61f587a20788a06b"
+    },
+    "model_test_final_snapshot": {
+      "bytes": 27244,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/tests/unit/logic/test_legal_scope_retention_gate.py",
+      "sha256": "a219c787d40c1bc5ca35994196d407f66212b97a9ee18d70d6c3497fb0b495f4"
+    },
+    "selector": {
+      "bytes": 14328,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_retention_selection.py",
+      "sha256": "9af005eba03d129bd56920b5274c4189962092dc9bf2d7da6f0e0004b0a7f0a5"
+    },
+    "selector_build": {
+      "bytes": 4893,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/selector-build.json",
+      "sha256": "eb6eb79cfd382050639bf782a4604ad1d3238dd7b8ea7caf78694e11a5733db4"
+    },
+    "selector_test": {
+      "bytes": 13697,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/tests/unit/logic/test_legal_scope_retention_selection.py",
+      "sha256": "32a4c8477075dd6119e6384da43b36ae22cedf309bd53e51d93d983b3020e8cf"
+    },
+    "unchanged_old_support_gate_test": {
+      "bytes": 20171,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/tests/unit/logic/test_legal_scope_support_gate.py",
+      "same_as_pinned_main": true,
+      "sha256": "13917ca96cf5b3795b2e7c4efbd0aadb1e2c723cfe5c96825586e31c141fca90"
+    }
+  },
+  "static_checks": {
+    "matched_numeric_design": {
+      "cold_graph": "same seeded gate and zero final projection; objective does not alter initialization or numeric features",
+      "feature_components": [
+        64,
+        33
+      ],
+      "feature_width": 97,
+      "gate_layers": "Linear97->32,Tanh,Linear32->1",
+      "ordered_byte_feature_function_AST_identical_to_old_reference": true,
+      "passed": true,
+      "pooling": "same predicted-modality coverage over unchanged frozen endpoint logits; global mode refused",
+      "trainable_parameters": 3169
+    },
+    "objective_truth": {
+      "anchored_reduction": "mean over eligible rows only, not batchmean",
+      "bounded_teacher": "detached finiteCPUfloat32 parent logit vector with exact candidate shape; typed boolean anchor mask",
+      "control": "BCE all batch supportbooleans; objective=bce,lambda=0",
+      "control_gradient_graph": "loss=bce exactly, without adding a zero-weight teacher term",
+      "empty_anchor": "exact CPUfloat32 scalar0 with no teacher-only gradient",
+      "passed": true,
+      "retention": "BCE plus mean(relu(clamp(detached_parent_support_logit,0,1)-candidate_support_logit)^2) over anchors; objective=positive_margin,lambda=1"
+    },
+    "online_parent_emission": {
+      "caller_attachment": "explicit TRAIN rule|statement premise; no goldspan/class/presence input to loss",
+      "extra_parent_model_forwards": 0,
+      "extra_teacher_decode_accounting": "teacher_source_rows_checked and parent_emitted_proposal_mask reported perbatch",
+      "parent_logit_captured": "clone before adding new support gate residual",
+      "passed": true,
+      "structural_logits": "same frozen donor+trigger+action tensor pass; unchanged class/presence/allfivepointers",
+      "teacher_mask": "training example supportedboolean AND status=predicted from actual same-pass source-only parent proposal transport; support threshold and structural invalidity both count"
+    },
+    "parent_custody": {
+      "initial_restoration": "strict support/action restoration validates full nested weights and historical Adam before freezing; old optimizer not continued",
+      "live_snapshot": "all parent state_dict tensors, module modes, parameter flags/Nonegrad, every nested config and exact serialized nested artifacts are guarded",
+      "optimizer": "one checked AdamW group with exact newgate parameter identity, fixed supported backend settings and finite moments",
+      "parent_artifact": "exact UTF8 bytes/hash/length plus old integer progress and defensive parse retained",
+      "passed": true,
+      "train_mode": "only wrapper+newgate modes change; old module modes remain unchanged"
+    },
+    "selector_complete_sets": {
+      "closed_cases": "exact ID/hash/group/support/emission/whole/refusal fields; ordinarybool observations",
+      "default_denominators": [
+        64,
+        64,
+        64
+      ],
+      "membership": "unique source:SHA identities; onepositive/onenegative perdeclared group; full candidate/baseline ID/hash/group/support identity equality",
+      "passed": true,
+      "semantic_consistency": "whole_exact requires emittedpositive; emission/refusal disjoint",
+      "source_profile": "fresh-support-retention-20261011/v1",
+      "summary": "all counts, sorted unique IDsets, status partitions and group membership recomputed from complete cases; bool/float counters refused"
+    },
+    "selector_fallback_and_gain": {
+      "admission": "finalretentionguaranteed/source semantics/proof/trainingadmission allfalse",
+      "fallback": "actual originalcold candidate returned when all fittedstates fail or tie",
+      "fittedgainflag": "eligible selectedstep>0 plus actual removed baseline negativeemission or gained positivewhole; refusal-only rankgains and ties have flagfalse",
+      "passed": true,
+      "ranking": "fewernegativeemissions,morewholeexact,morenegativelearnedrefusals,earlierstep",
+      "steps": "ordinaryint0/120/240 only, distinctincreasing; firstactual0panel equals measuredbaseline; partial completed schedules explicitly allowed"
+    },
+    "selector_retention_floors": {
+      "new_case_floors": [
+        "no lost baseline exactpositive IDs",
+        "no lost baseline emittedpositive IDs",
+        "no new negativeemission IDs"
+      ],
+      "old_aggregate_floors": [
+        "nonzero baseline whole/emission beforefit",
+        "no lower positivewhole",
+        "no lower positiveemission",
+        "no greater positivelearnedrefusal",
+        "no greater negativeemission"
+      ],
+      "passed": true,
+      "swaps": "same aggregate totals cannot hide exact/emission swaps or negative-ID substitutions"
+    },
+    "source_only_prediction": {
+      "authority": "accepted/qualified/formalized/proof/source-semantic flagsfalse, formaloutputnull; successful transport masks checked all0",
+      "output_validation": "closed logits/facets inventory; CPUfloat32 exact shapes and finite values; sourcepointerbounds validated by pinned transport",
+      "passed": true,
+      "reference_access_at_inference": false,
+      "source_binding": "external lowercaseSHA64 verified against UTF8 bytes before model; bounded source and explicit callerattachment required",
+      "teacher_loss_at_inference": false
+    },
+    "strict_checkpoint": {
+      "closed_recipe": "typed seed/mode/hidden/objective and exact full profile; objective/lambda/loss must agree",
+      "cold_step0": "empty Adam and every seeded cold gate tensor must be exact; trained/reinitialized noncold cannot claim0",
+      "passed": true,
+      "producer_seal": "currentproducer pins plus canonical checkpointSHA; exact parentSHA/bytecount/closedJSON",
+      "resume": "complete gateweight inventory, full Adam first/second moments, nonnegative variance, exact integerprogress, mode restoration and save-after-restore dictionary equality",
+      "schema": "legal-scope-retention-gate-checkpoint/v1"
+    }
+  },
+  "test_source_review": {
+    "final_file_notice_received": true,
+    "nonempty_helper_fixture": "test_nonempty_online_retention_train_changes_gradients_and_exactly_resumes is present and statically reviewed; checked numeric boundary is injected, actual TRAIN helpers/teacherdecode/squaredhinge/Adam/resume run in primary owner tests. Fixture discloses synthetic loss/Adam purpose and is not a learned-parent corpus claim.",
+    "other_controls": "closedconfig,oldpredicted-gate parity,lambda0 fullAdam parity,hinge clamp/mask/empty/gradient,online emissionfloat32edge,parent snapshot,strictrelabel/fullAdam/cold rejection,source-only inference; pureselector swaps/coverage/type/fallback/realgain/ties."
+  },
+  "verdict": "pass_static_model_and_selector_review_with_bound_primary_test_receipts"
+}

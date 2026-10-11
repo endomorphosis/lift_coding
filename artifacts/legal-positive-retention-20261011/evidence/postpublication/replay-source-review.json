@@ -1,0 +1,30 @@
+{
+  "schema": "support-retention-replay-static-review/v1",
+  "passed": true,
+  "findings": [],
+  "reviewer": "root; independent of helper author",
+  "helper": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/replay_retention_gate.py",
+    "bytes": 21449,
+    "sha256": "d73df6edffd342820acb6e69736cbccad2576a32b18deb1cbca9d888cb0dff7a"
+  },
+  "expected_complete_outputs": 1280,
+  "checkpoint_modes": [
+    "local selected states",
+    "exact immutable Hub selected mirrors"
+  ],
+  "controls": [
+    "closed source rows+source SHA",
+    "all fifteen saved barriers pinned",
+    "two objective recipes explicit",
+    "TRAIN teacher/hinge/selection/parser/gradient and optimizer denied",
+    "full tensors/modes/flags/RNG/Adam/progress unchanged",
+    "CPU2 offline socketguards; no resource reservation claimed",
+    "no reference files loaded; saved selection/result metadata may include prior scoring"
+  ],
+  "limitations": [
+    "Runtime check still pending. Patches do not provide a syscall-level file or network sandbox.",
+    "Read-only replay does not qualify legal meaning, native latent decoding or Lake."
+  ],
+  "models_executed_by_reviewer": 0
+}

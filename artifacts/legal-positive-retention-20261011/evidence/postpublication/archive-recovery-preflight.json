@@ -1,0 +1,77 @@
+{
+  "AST_reparsed_after_required_evidence_list_finalization": true,
+  "actual_recovered_chain": {
+    "batch_count": 30,
+    "event_count": 60,
+    "evidence": {
+      "hub-recovery-source-review.json": {
+        "bytes": 178628,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-recovery-source-review.json",
+        "sha256": "4e6677fe17f5a3ff6abafb1ad67e070904fdfeff2de1832128d08d2b904057f6"
+      },
+      "hub-upload-batch-events.jsonl": {
+        "bytes": 42741,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-upload-batch-events.jsonl",
+        "sha256": "6ee3dc467f86f3eb49b87ee0b02f1dbb7be4ce18cef9d2aee893da6373031892"
+      },
+      "hub-upload-batch-proposal.json": {
+        "bytes": 73899,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-upload-batch-proposal.json",
+        "sha256": "53003de3d40ad698a2b72306a9f93561454c225e55da78b9f9deb7458eae2bb8"
+      },
+      "hub-upload-batch-recovery.json": {
+        "bytes": 25687,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-upload-batch-recovery.json",
+        "sha256": "31d2147e4f63f3c493fd8c4cf1e912abcc10199f3798c74c90806216fb918a10"
+      },
+      "hub-upload-error.json": {
+        "bytes": 434,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-upload-error.json",
+        "sha256": "4664dadf56215dafae0d593ec2e2a4deda9011b970d03818adeaf04bd542f8f9"
+      },
+      "hub-upload-parent.json": {
+        "bytes": 799852,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-upload-parent.json",
+        "sha256": "9d7202bfd2a75797747f02145747f6e50c1278607c0c15d55d0075a643353057"
+      },
+      "hub-upload-proposal.json": {
+        "bytes": 54642,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-upload-proposal.json",
+        "sha256": "d5c904a527f2a5c0f9757da5b57fe0fec925401fe48c41d952f42565e57c90d2"
+      },
+      "hub-upload-reconciliation.json": {
+        "bytes": 840,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-upload-reconciliation.json",
+        "sha256": "777f0d2609484f7cc5d9ef79f5b43930ae09a9a18640646e0db8a10c0134ea4b"
+      },
+      "recover_hub_upload.py": {
+        "bytes": 8785,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/recover_hub_upload.py",
+        "sha256": "70988e758a34ae5058b89b5df0dd84bdf65a649da28fca627649553e70affca8"
+      }
+    },
+    "final_revision": "eb1890f255b096ef81a8a2364bd28fef296bbfd8",
+    "original_error_preserved_and_resolved": true,
+    "original_parent": "ae5a6b555f66f9ea7cdf3f46a03c689d07485bb5"
+  },
+  "helper": {
+    "bytes": 42653,
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/prepare_workspace_archive.py",
+    "sha256": "46503c475cc38846aed9e5ee51fe7e3f313c8b937765131ed023cf531192c10c"
+  },
+  "passed": true,
+  "publication_review": {
+    "bytes": 317448,
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-publication-review.json",
+    "sha256": "8f6fce65ef06614cf1088eb27d51f76ba8ef41f6a514bfca3b0c97764827d666"
+  },
+  "schema": "positive-retention-archive-recovery-guard-preflight/v1",
+  "scope": "AST-extracted data-only recovery receipt checks and in-memory tampering checks; no archiver module import or prepare/main invocation, archive copy, numerical execution, Git or network action.",
+  "tampered_receipts_denied": {
+    "broken_parent_chain_denied": true,
+    "failed_publication_review_denied": true,
+    "unbound_error_proposal_denied": true,
+    "unbound_original_error_denied": true,
+    "unproved_reconciliation_denied": true
+  }
+}

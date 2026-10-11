@@ -1,0 +1,531 @@
+{
+  "batch_commits": [
+    {
+      "batch": 0,
+      "parent": "ae5a6b555f66f9ea7cdf3f46a03c689d07485bb5",
+      "paths": [
+        "README.md",
+        "checkpoint-roles.json",
+        "checkpoints/bce/checkpoint-0.json"
+      ],
+      "revision": "05175f139c8dc07ba8640299e3180716cc523853"
+    },
+    {
+      "batch": 1,
+      "parent": "05175f139c8dc07ba8640299e3180716cc523853",
+      "paths": [
+        "checkpoints/bce/checkpoint-120.json"
+      ],
+      "revision": "21f22a5e10acb1e16d92eebb53819c77afb45922"
+    },
+    {
+      "batch": 2,
+      "parent": "21f22a5e10acb1e16d92eebb53819c77afb45922",
+      "paths": [
+        "checkpoints/bce/checkpoint-240.json"
+      ],
+      "revision": "91b51eee26578a8093e99072d9fb045e1ab87cd2"
+    },
+    {
+      "batch": 3,
+      "parent": "91b51eee26578a8093e99072d9fb045e1ab87cd2",
+      "paths": [
+        "checkpoints/bce/checkpoint.json"
+      ],
+      "revision": "c1abbb6d0d6bfd1d9a2ab400a52b7704ac2a699e"
+    },
+    {
+      "batch": 4,
+      "parent": "c1abbb6d0d6bfd1d9a2ab400a52b7704ac2a699e",
+      "paths": [
+        "checkpoints/positive_margin/checkpoint-0.json"
+      ],
+      "revision": "7ee39e5e02a6a5b83f616300203b3fb5fc98bbd1"
+    },
+    {
+      "batch": 5,
+      "parent": "7ee39e5e02a6a5b83f616300203b3fb5fc98bbd1",
+      "paths": [
+        "checkpoints/positive_margin/checkpoint-120.json"
+      ],
+      "revision": "d728f6dc88a8d632551e9241059ed5fbf59bbc5d"
+    },
+    {
+      "batch": 6,
+      "parent": "d728f6dc88a8d632551e9241059ed5fbf59bbc5d",
+      "paths": [
+        "checkpoints/positive_margin/checkpoint-240.json"
+      ],
+      "revision": "7e51012ec72073d2dd9924c84237dbfb287b75d9"
+    },
+    {
+      "batch": 7,
+      "parent": "7e51012ec72073d2dd9924c84237dbfb287b75d9",
+      "paths": [
+        "checkpoints/positive_margin/checkpoint.json",
+        "evidence/audit_trial.py",
+        "evidence/corpus-author-review-draft-01.json",
+        "evidence/corpus-author-review.json",
+        "evidence/corpus-builder-draft-01.py",
+        "evidence/corpus-builder.py",
+        "evidence/corpus-draft-01/corpus-manifest.json",
+        "evidence/corpus-draft-01/corpus-protocol.json"
+      ],
+      "revision": "e9a0ef350170d76a72983dc5efc0f7ca3c0f085d"
+    },
+    {
+      "batch": 8,
+      "parent": "e9a0ef350170d76a72983dc5efc0f7ca3c0f085d",
+      "paths": [
+        "evidence/corpus-draft-01/final-inputs.json",
+        "evidence/corpus-draft-01/final-references.json",
+        "evidence/corpus-draft-01/selection-inputs.json",
+        "evidence/corpus-draft-01/selection-references.json",
+        "evidence/corpus-draft-01/train-inputs.json",
+        "evidence/corpus-draft-01/train-references.json",
+        "evidence/corpus-draft-01/training-schedule.json",
+        "evidence/corpus/corpus-manifest.json",
+        "evidence/corpus/corpus-protocol.json",
+        "evidence/corpus/final-inputs.json",
+        "evidence/corpus/final-references.json",
+        "evidence/corpus/selection-inputs.json",
+        "evidence/corpus/selection-references.json",
+        "evidence/corpus/train-inputs.json"
+      ],
+      "revision": "837065f56b3bac7f9407d683ba5c9f43dfda0cdf"
+    },
+    {
+      "batch": 9,
+      "parent": "837065f56b3bac7f9407d683ba5c9f43dfda0cdf",
+      "paths": [
+        "evidence/corpus/train-references.json",
+        "evidence/corpus/training-schedule.json",
+        "evidence/experiment-plan.json",
+        "evidence/extra/prepare_release-draft-01.py",
+        "evidence/extra/publication-draft-review.json",
+        "evidence/extra/release-helper-build-draft-01.json",
+        "evidence/extra/resource-observation-phase-correction.json",
+        "evidence/incoming-main-integration.json",
+        "evidence/independent-corpus-review.json",
+        "evidence/intake.json",
+        "evidence/model-selector-review.json",
+        "evidence/model-tests.xml",
+        "evidence/prepare_plan.py",
+        "evidence/prepare_release.py",
+        "evidence/progress-review.json",
+        "evidence/protocol-artifact-bindings.json",
+        "evidence/protocol-review.json",
+        "evidence/publish_release.py",
+        "evidence/real-code-data-review.json",
+        "evidence/release-helper-build.json",
+        "evidence/remote-intake.json",
+        "evidence/replay-helper-build.json",
+        "evidence/replay-source-review.json",
+        "evidence/replay_retention_gate.py",
+        "evidence/resource-compatibility.json",
+        "evidence/retention-module-build.json",
+        "evidence/run_retention_experiment.py",
+        "evidence/run_scope_guardian.py",
+        "evidence/selected-checkpoint-replay.json",
+        "evidence/selection-tests.xml",
+        "evidence/selector-build.json",
+        "evidence/test_scope_guardian.py",
+        "evidence/training-design-review.json",
+        "evidence/trial-artifact-audit.json",
+        "evidence/validation.json",
+        "evidence/write_reports.py",
+        "guardian/child-exit.json",
+        "guardian/child-identity.json",
+        "guardian/child.log",
+        "guardian/command.json",
+        "guardian/full-resource-artifact-pins.json",
+        "guardian/group-rss-observations.jsonl",
+        "guardian/group-rss-summary.json",
+        "guardian/guardian-exit.json",
+        "guardian/lease-binding.json",
+        "guardian/lease-observations.jsonl",
+        "guardian/owned-group-final.json",
+        "guardian/pre-admission.json",
+        "guardian/resource-observations.json",
+        "guardian/resource-preservation-projection.json",
+        "guardian/resources-final.json",
+        "guardian/resources-start.json",
+        "guardian/scheduler-adoption.json",
+        "historical/corpus/legal-next-training-20261007-01/corpus-builder.py",
+        "historical/corpus/legal-next-training-20261007-01/corpus-manifest.json",
+        "historical/corpus/legal-next-training-20261007-01/corpus-protocol.json",
+        "historical/corpus/legal-next-training-20261007-01/final-inputs.json",
+        "historical/corpus/legal-next-training-20261007-01/final-references.json",
+        "historical/corpus/legal-next-training-20261007-01/independent-corpus-review.json",
+        "historical/corpus/legal-next-training-20261007-01/selection-inputs.json",
+        "historical/corpus/legal-next-training-20261007-01/selection-references.json",
+        "historical/corpus/legal-next-training-20261007-01/train-inputs.json"
+      ],
+      "revision": "c8c12287043dd617e85292d06f46e31e6226dcc5"
+    },
+    {
+      "batch": 10,
+      "parent": "c8c12287043dd617e85292d06f46e31e6226dcc5",
+      "paths": [
+        "historical/corpus/legal-next-training-20261007-01/train-references.json",
+        "historical/corpus/legal-support-action-20261007-01/corpus-builder.py",
+        "historical/corpus/legal-support-action-20261007-01/corpus-manifest.json",
+        "historical/corpus/legal-support-action-20261007-01/corpus-protocol.json",
+        "historical/corpus/legal-support-action-20261007-01/final-inputs.json",
+        "historical/corpus/legal-support-action-20261007-01/final-references.json",
+        "historical/corpus/legal-support-action-20261007-01/independent-corpus-selector-review.json",
+        "historical/corpus/legal-support-action-20261007-01/selection-inputs.json",
+        "historical/corpus/legal-support-action-20261007-01/selection-references.json",
+        "historical/corpus/legal-support-action-20261007-01/train-inputs.json",
+        "historical/corpus/legal-support-action-20261007-01/train-references.json",
+        "historical/corpus/legal-support-gate-20261007-01/corpus-builder.py",
+        "historical/corpus/legal-support-gate-20261007-01/corpus-manifest.json",
+        "historical/corpus/legal-support-gate-20261007-01/corpus-protocol.json",
+        "historical/corpus/legal-support-gate-20261007-01/final-inputs.json",
+        "historical/corpus/legal-support-gate-20261007-01/final-references.json",
+        "historical/corpus/legal-support-gate-20261007-01/independent-corpus-review.json",
+        "historical/corpus/legal-support-gate-20261007-01/selection-inputs.json",
+        "historical/corpus/legal-support-gate-20261007-01/selection-references.json"
+      ],
+      "revision": "bdeeeb1cf6aef3dd8d84c6dfa434bc47eb02ebce"
+    },
+    {
+      "batch": 11,
+      "parent": "bdeeeb1cf6aef3dd8d84c6dfa434bc47eb02ebce",
+      "paths": [
+        "historical/corpus/legal-support-gate-20261007-01/train-inputs.json",
+        "historical/corpus/legal-support-gate-20261007-01/train-references.json",
+        "historical/corpus/legal-trigger-readout-20261007-01/corpus-builder.py",
+        "historical/corpus/legal-trigger-readout-20261007-01/corpus-manifest.json",
+        "historical/corpus/legal-trigger-readout-20261007-01/corpus-protocol.json",
+        "historical/corpus/legal-trigger-readout-20261007-01/final-inputs.json",
+        "historical/corpus/legal-trigger-readout-20261007-01/final-references.json",
+        "historical/corpus/legal-trigger-readout-20261007-01/independent-corpus-review.json",
+        "historical/corpus/legal-trigger-readout-20261007-01/selection-inputs.json",
+        "historical/corpus/legal-trigger-readout-20261007-01/selection-references.json",
+        "historical/corpus/legal-trigger-readout-20261007-01/train-inputs.json",
+        "historical/corpus/legal-trigger-readout-20261007-01/train-references.json"
+      ],
+      "revision": "17a3da30751d6278534cca38196a551f2b00f3be"
+    },
+    {
+      "batch": 12,
+      "parent": "17a3da30751d6278534cca38196a551f2b00f3be",
+      "paths": [
+        "historical/retention/earlier_scope/archived_parent_predictions.json",
+        "historical/retention/earlier_support_action/archived_parent_predictions.json",
+        "historical/retention/earlier_support_gate/archived_parent_predictions.json"
+      ],
+      "revision": "e28106c8c16a7a1456bc9b74a6a7f4d106ce3124"
+    },
+    {
+      "batch": 13,
+      "parent": "e28106c8c16a7a1456bc9b74a6a7f4d106ce3124",
+      "paths": [
+        "historical/retention/earlier_trigger/archived_parent_predictions.json",
+        "historical/scorer/run_trigger_experiment.py"
+      ],
+      "revision": "6c330695c73811b4ba2c18d8830ac1840cd1d87e"
+    },
+    {
+      "batch": 14,
+      "parent": "6c330695c73811b4ba2c18d8830ac1840cd1d87e",
+      "paths": [
+        "inputs/parent-checkpoint.json",
+        "original-artifacts-map.json",
+        "replay-source-closure.json",
+        "results/all-final-and-retention-predictions-before-reference-joins.json"
+      ],
+      "revision": "455cc8ee2ef8c2f2518dafa893f44b850ae6ac18"
+    },
+    {
+      "batch": 15,
+      "parent": "455cc8ee2ef8c2f2518dafa893f44b850ae6ac18",
+      "paths": [
+        "results/bce/earlier_scope-predictions.json",
+        "results/bce/earlier_support_action-predictions.json",
+        "results/bce/earlier_support_gate-predictions.json"
+      ],
+      "revision": "19028c725214bcea867441373970406543771d4c"
+    },
+    {
+      "batch": 16,
+      "parent": "19028c725214bcea867441373970406543771d4c",
+      "paths": [
+        "results/bce/earlier_trigger-predictions.json",
+        "results/bce/fresh_final-predictions.json"
+      ],
+      "revision": "c62f774585b5d257bc94638a300fbba1dcd3699e"
+    },
+    {
+      "batch": 17,
+      "parent": "c62f774585b5d257bc94638a300fbba1dcd3699e",
+      "paths": [
+        "results/bce/last-TRAIN-predictions.json"
+      ],
+      "revision": "0e93ed819effdc8b6626099e602bebbc601450a8"
+    },
+    {
+      "batch": 18,
+      "parent": "0e93ed819effdc8b6626099e602bebbc601450a8",
+      "paths": [
+        "results/bce/losses.json",
+        "results/bce/selected.json",
+        "results/bce/selection-decision.json",
+        "results/bce/selection-predictions-0.json",
+        "results/bce/selection-predictions-120.json",
+        "results/bce/selection-predictions-240.json"
+      ],
+      "revision": "945937d8a748a5d31756177f6d34dfedc101b603"
+    },
+    {
+      "batch": 19,
+      "parent": "945937d8a748a5d31756177f6d34dfedc101b603",
+      "paths": [
+        "results/both-selected-before-final-and-retention.json",
+        "results/initial-bce-predictions.json",
+        "results/initial-parent-predictions.json",
+        "results/initial-positive_margin-predictions.json",
+        "results/initialization.json"
+      ],
+      "revision": "c8e037606c5c7e0c24821af51facb2617dabcec2"
+    },
+    {
+      "batch": 20,
+      "parent": "c8e037606c5c7e0c24821af51facb2617dabcec2",
+      "paths": [
+        "results/parent-TRAIN-predictions.json"
+      ],
+      "revision": "859666f3fd11bda90e5b98ae69f6d817ca1a0a88"
+    },
+    {
+      "batch": 21,
+      "parent": "859666f3fd11bda90e5b98ae69f6d817ca1a0a88",
+      "paths": [
+        "results/parent-TRAIN-score.json",
+        "results/parent-earlier_scope-predictions.json",
+        "results/parent-earlier_support_action-predictions.json",
+        "results/parent-earlier_support_gate-predictions.json"
+      ],
+      "revision": "6a30f8f265a739bba512e27617dbcbfd22bd594f"
+    },
+    {
+      "batch": 22,
+      "parent": "6a30f8f265a739bba512e27617dbcbfd22bd594f",
+      "paths": [
+        "results/parent-earlier_trigger-predictions.json",
+        "results/parent-fresh_final-predictions.json",
+        "results/parent-selection-predictions.json"
+      ],
+      "revision": "25438a01523d1f8de8a98d32b3726421382abe0c"
+    },
+    {
+      "batch": 23,
+      "parent": "25438a01523d1f8de8a98d32b3726421382abe0c",
+      "paths": [
+        "results/positive_margin/earlier_scope-predictions.json",
+        "results/positive_margin/earlier_support_action-predictions.json",
+        "results/positive_margin/earlier_support_gate-predictions.json"
+      ],
+      "revision": "e5140ae5c16a828eef06b83955ea161a306cf8ca"
+    },
+    {
+      "batch": 24,
+      "parent": "e5140ae5c16a828eef06b83955ea161a306cf8ca",
+      "paths": [
+        "results/positive_margin/earlier_trigger-predictions.json",
+        "results/positive_margin/fresh_final-predictions.json"
+      ],
+      "revision": "4a0d6607515b33bf55bd1ce782c4ea963562c7bf"
+    },
+    {
+      "batch": 25,
+      "parent": "4a0d6607515b33bf55bd1ce782c4ea963562c7bf",
+      "paths": [
+        "results/positive_margin/last-TRAIN-predictions.json"
+      ],
+      "revision": "bc4ccae10aff3f96d0a1b9d263ff4528436b9d84"
+    },
+    {
+      "batch": 26,
+      "parent": "bc4ccae10aff3f96d0a1b9d263ff4528436b9d84",
+      "paths": [
+        "results/positive_margin/losses.json",
+        "results/positive_margin/selected.json",
+        "results/positive_margin/selection-decision.json",
+        "results/positive_margin/selection-predictions-0.json",
+        "results/positive_margin/selection-predictions-120.json",
+        "results/positive_margin/selection-predictions-240.json",
+        "results/selection-baseline-floors.json",
+        "results/summary.json"
+      ],
+      "revision": "47f1451fe00199bbccac7786b797f317f3888c81"
+    },
+    {
+      "batch": 27,
+      "parent": "47f1451fe00199bbccac7786b797f317f3888c81",
+      "paths": [
+        "results/training-results.json",
+        "results/training-schedule.json",
+        "reviews/02-results-resource-review.json",
+        "reviews/05-incoming-progress-review.json",
+        "source/ipfs_datasets_py/__init__.py",
+        "source/ipfs_datasets_py/_router_alias.py",
+        "source/ipfs_datasets_py/llm_router.py",
+        "source/ipfs_datasets_py/logic/CEC/__init__.py",
+        "source/ipfs_datasets_py/logic/CEC/cec_framework.py",
+        "source/ipfs_datasets_py/logic/CEC/dcec_wrapper.py",
+        "source/ipfs_datasets_py/logic/CEC/eng_dcec_wrapper.py",
+        "source/ipfs_datasets_py/logic/CEC/native/__init__.py",
+        "source/ipfs_datasets_py/logic/CEC/native/cec_proof_cache.py",
+        "source/ipfs_datasets_py/logic/CEC/native/cec_zkp_integration.py",
+        "source/ipfs_datasets_py/logic/CEC/native/dcec_cleaning.py",
+        "source/ipfs_datasets_py/logic/CEC/native/dcec_core.py",
+        "source/ipfs_datasets_py/logic/CEC/native/dcec_english_grammar.py",
+        "source/ipfs_datasets_py/logic/CEC/native/dcec_integration.py",
+        "source/ipfs_datasets_py/logic/CEC/native/dcec_namespace.py",
+        "source/ipfs_datasets_py/logic/CEC/native/dcec_parsing.py",
+        "source/ipfs_datasets_py/logic/CEC/native/dcec_prototypes.py",
+        "source/ipfs_datasets_py/logic/CEC/native/exceptions.py",
+        "source/ipfs_datasets_py/logic/CEC/native/grammar_engine.py",
+        "source/ipfs_datasets_py/logic/CEC/native/inference_rules/__init__.py",
+        "source/ipfs_datasets_py/logic/CEC/native/inference_rules/base.py",
+        "source/ipfs_datasets_py/logic/CEC/native/inference_rules/cognitive.py",
+        "source/ipfs_datasets_py/logic/CEC/native/inference_rules/deontic.py",
+        "source/ipfs_datasets_py/logic/CEC/native/inference_rules/modal.py",
+        "source/ipfs_datasets_py/logic/CEC/native/inference_rules/propositional.py",
+        "source/ipfs_datasets_py/logic/CEC/native/inference_rules/resolution.py",
+        "source/ipfs_datasets_py/logic/CEC/native/inference_rules/specialized.py",
+        "source/ipfs_datasets_py/logic/CEC/native/inference_rules/temporal.py",
+        "source/ipfs_datasets_py/logic/CEC/native/legal_ir_lifecycle.py",
+        "source/ipfs_datasets_py/logic/CEC/native/modal_tableaux.py",
+        "source/ipfs_datasets_py/logic/CEC/native/nl_converter.py",
+        "source/ipfs_datasets_py/logic/CEC/native/problem_parser.py",
+        "source/ipfs_datasets_py/logic/CEC/native/prover_core.py",
+        "source/ipfs_datasets_py/logic/CEC/native/prover_core_extended_rules.py",
+        "source/ipfs_datasets_py/logic/CEC/native/shadow_prover.py",
+        "source/ipfs_datasets_py/logic/CEC/shadow_prover_wrapper.py",
+        "source/ipfs_datasets_py/logic/CEC/talos_wrapper.py",
+        "source/ipfs_datasets_py/logic/TDFOL/__init__.py",
+        "source/ipfs_datasets_py/logic/TDFOL/compiler_repairs.py",
+        "source/ipfs_datasets_py/logic/TDFOL/countermodel_visualizer.py",
+        "source/ipfs_datasets_py/logic/TDFOL/countermodels.py",
+        "source/ipfs_datasets_py/logic/TDFOL/exceptions.py",
+        "source/ipfs_datasets_py/logic/TDFOL/formula_dependency_graph.py",
+        "source/ipfs_datasets_py/logic/TDFOL/inference_rules/__init__.py",
+        "source/ipfs_datasets_py/logic/TDFOL/inference_rules/base.py",
+        "source/ipfs_datasets_py/logic/TDFOL/inference_rules/deontic.py",
+        "source/ipfs_datasets_py/logic/TDFOL/inference_rules/first_order.py",
+        "source/ipfs_datasets_py/logic/TDFOL/inference_rules/propositional.py",
+        "source/ipfs_datasets_py/logic/TDFOL/inference_rules/temporal.py",
+        "source/ipfs_datasets_py/logic/TDFOL/inference_rules/temporal_deontic.py",
+        "source/ipfs_datasets_py/logic/TDFOL/modal_tableaux.py",
+        "source/ipfs_datasets_py/logic/TDFOL/nl/__init__.py",
+        "source/ipfs_datasets_py/logic/TDFOL/nl/llm.py",
+        "source/ipfs_datasets_py/logic/TDFOL/nl/tdfol_nl_api.py",
+        "source/ipfs_datasets_py/logic/TDFOL/nl/tdfol_nl_context.py",
+        "source/ipfs_datasets_py/logic/TDFOL/nl/tdfol_nl_generator.py",
+        "source/ipfs_datasets_py/logic/TDFOL/nl/tdfol_nl_patterns.py",
+        "source/ipfs_datasets_py/logic/TDFOL/nl/tdfol_nl_preprocessor.py",
+        "source/ipfs_datasets_py/logic/TDFOL/nl/utils.py",
+        "source/ipfs_datasets_py/logic/TDFOL/performance_dashboard.py",
+        "source/ipfs_datasets_py/logic/TDFOL/performance_metrics.py",
+        "source/ipfs_datasets_py/logic/TDFOL/proof_tree_visualizer.py",
+        "source/ipfs_datasets_py/logic/TDFOL/security_validator.py",
+        "source/ipfs_datasets_py/logic/TDFOL/strategies/__init__.py",
+        "source/ipfs_datasets_py/logic/TDFOL/strategies/base.py",
+        "source/ipfs_datasets_py/logic/TDFOL/strategies/cec_delegate.py",
+        "source/ipfs_datasets_py/logic/TDFOL/strategies/forward_chaining.py",
+        "source/ipfs_datasets_py/logic/TDFOL/strategies/modal_tableaux.py",
+        "source/ipfs_datasets_py/logic/TDFOL/strategies/strategy_selector.py",
+        "source/ipfs_datasets_py/logic/TDFOL/tdfol_core.py",
+        "source/ipfs_datasets_py/logic/TDFOL/tdfol_dcec_parser.py",
+        "source/ipfs_datasets_py/logic/TDFOL/tdfol_parser.py",
+        "source/ipfs_datasets_py/logic/TDFOL/tdfol_proof_cache.py",
+        "source/ipfs_datasets_py/logic/TDFOL/tdfol_prover.py",
+        "source/ipfs_datasets_py/logic/__init__.py",
+        "source/ipfs_datasets_py/logic/common/__init__.py",
+        "source/ipfs_datasets_py/logic/common/bounded_cache.py",
+        "source/ipfs_datasets_py/logic/common/converters.py",
+        "source/ipfs_datasets_py/logic/common/errors.py",
+        "source/ipfs_datasets_py/logic/common/feature_detection.py",
+        "source/ipfs_datasets_py/logic/common/proof_cache.py",
+        "source/ipfs_datasets_py/logic/common/utility_monitor.py",
+        "source/ipfs_datasets_py/logic/common/validators.py",
+        "source/ipfs_datasets_py/logic/deontic/__init__.py",
+        "source/ipfs_datasets_py/logic/deontic/analyzer.py",
+        "source/ipfs_datasets_py/logic/deontic/compiler_repairs.py",
+        "source/ipfs_datasets_py/logic/deontic/converter.py",
+        "source/ipfs_datasets_py/logic/deontic/decoder.py"
+      ],
+      "revision": "6c0d7894f43ccdbd639bbc81025cda3ee22e917b"
+    },
+    {
+      "batch": 28,
+      "parent": "6c0d7894f43ccdbd639bbc81025cda3ee22e917b",
+      "paths": [
+        "source/ipfs_datasets_py/logic/deontic/exports.py",
+        "source/ipfs_datasets_py/logic/deontic/formula_builder.py",
+        "source/ipfs_datasets_py/logic/deontic/graph.py",
+        "source/ipfs_datasets_py/logic/deontic/ir.py",
+        "source/ipfs_datasets_py/logic/deontic/knowledge_base.py",
+        "source/ipfs_datasets_py/logic/deontic/legal_text_to_deontic.py",
+        "source/ipfs_datasets_py/logic/deontic/metrics.py",
+        "source/ipfs_datasets_py/logic/deontic/prover_syntax.py",
+        "source/ipfs_datasets_py/logic/deontic/support_map.py",
+        "source/ipfs_datasets_py/logic/deontic/utils/__init__.py",
+        "source/ipfs_datasets_py/logic/deontic/utils/deontic_parser.py",
+        "source/ipfs_datasets_py/logic/formalization/__init__.py",
+        "source/ipfs_datasets_py/logic/formalization/autoencoder/__init__.py",
+        "source/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_retention_gate.py",
+        "source/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_retention_selection.py",
+        "source/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py",
+        "source/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py",
+        "source/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_action.py",
+        "source/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_gate.py",
+        "source/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_trigger_readout.py",
+        "source/ipfs_datasets_py/logic/integration/__init__.py",
+        "source/ipfs_datasets_py/logic/integration/bridges/__init__.py",
+        "source/ipfs_datasets_py/logic/integration/bridges/base_prover_bridge.py",
+        "source/ipfs_datasets_py/logic/integration/bridges/symbolic_fol_bridge.py",
+        "source/ipfs_datasets_py/logic/integration/bridges/tdfol_cec_bridge.py",
+        "source/ipfs_datasets_py/logic/integration/bridges/tdfol_grammar_bridge.py",
+        "source/ipfs_datasets_py/logic/integration/bridges/tdfol_shadowprover_bridge.py",
+        "source/ipfs_datasets_py/logic/integration/tdfol_shadowprover_bridge.py",
+        "source/ipfs_datasets_py/logic/legal_ir/__init__.py",
+        "source/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py",
+        "source/ipfs_datasets_py/logic/types/__init__.py",
+        "source/ipfs_datasets_py/logic/types/bridge_types.py",
+        "source/ipfs_datasets_py/logic/types/common_types.py",
+        "source/ipfs_datasets_py/logic/types/deontic_types.py",
+        "source/ipfs_datasets_py/logic/types/fol_types.py",
+        "source/ipfs_datasets_py/logic/types/proof_types.py",
+        "source/ipfs_datasets_py/logic/types/translation_types.py",
+        "source/ipfs_datasets_py/logic/zkp/__init__.py",
+        "source/ipfs_datasets_py/router_deps.py",
+        "source/ipfs_datasets_py/utils/__init__.py",
+        "source/ipfs_datasets_py/utils/anyio_compat.py",
+        "source/ipfs_datasets_py/utils/cid_utils.py",
+        "source/ipfs_datasets_py/utils/symai_config.py",
+        "source/tests/unit/logic/test_legal_scope_retention_gate.py",
+        "source/tests/unit/logic/test_legal_scope_retention_selection.py",
+        "source/tests/unit/logic/test_legal_scope_support_gate.py"
+      ],
+      "revision": "4c2579b2e6de59b4fea0a06675caf34d7c1f004c"
+    },
+    {
+      "batch": 29,
+      "parent": "4c2579b2e6de59b4fea0a06675caf34d7c1f004c",
+      "paths": [
+        "release-manifest.json"
+      ],
+      "revision": "eb1890f255b096ef81a8a2364bd28fef296bbfd8"
+    }
+  ],
+  "parent": "ae5a6b555f66f9ea7cdf3f46a03c689d07485bb5",
+  "prefix": "experiments/positive-retention-20261011/run-01",
+  "publication_transport": "parent-guarded small batches after reconciled no-change TLS failure",
+  "repo": "Publicus/legal-ir-autoencoder",
+  "revision": "eb1890f255b096ef81a8a2364bd28fef296bbfd8",
+  "url": "https://huggingface.co/Publicus/legal-ir-autoencoder/commit/eb1890f255b096ef81a8a2364bd28fef296bbfd8"
+}

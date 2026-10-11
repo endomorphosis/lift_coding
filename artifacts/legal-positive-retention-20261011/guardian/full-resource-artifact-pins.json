@@ -1,0 +1,20 @@
+{
+  "approval_inferred_by_builder": false,
+  "compact_projection": "guardian/resource-preservation-projection.json",
+  "foreign_state_rewrite_or_release": false,
+  "full_artifact_pins": {
+    "artifacts-root/resource-admission-observation.json": {
+      "bytes": 8734563,
+      "full_body_retained_locally": true,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/resource-admission-observation.json",
+      "sha256": "fb61590b6fa32588fd50c9484dcbf868297b1cacc0cbd85ec2ba8bb27934c126"
+    },
+    "artifacts-root/resource-postfinal-observation.json": {
+      "bytes": 8735132,
+      "full_body_retained_locally": true,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/resource-postfinal-observation.json",
+      "sha256": "dabb7c44cbad6142ab56087ffc454f089b46c0d8cb7352b7f942311b261f3308"
+    }
+  },
+  "schema": "positive-retention-resource-local-retention/v1"
+}

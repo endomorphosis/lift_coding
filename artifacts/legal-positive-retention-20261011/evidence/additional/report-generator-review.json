@@ -1,0 +1,368 @@
+{
+  "TRAIN_aggregate": {
+    "bce": {
+      "negative_emitted_proposal_count": 87,
+      "positive_emitted_proposal_count": 407,
+      "positive_exact_count": 290,
+      "support_probability_BCE": 0.35029600809981826
+    },
+    "positive_margin": {
+      "negative_emitted_proposal_count": 94,
+      "positive_emitted_proposal_count": 405,
+      "positive_exact_count": 285,
+      "support_probability_BCE": 0.3753512714523582
+    }
+  },
+  "TRAIN_paired_transition_counts": {
+    "bce": {
+      "negative_emission_new": 4,
+      "negative_emission_removed": 11,
+      "negative_emission_retained": 83,
+      "positive_emission_gained": 23,
+      "positive_emission_lost": 7,
+      "positive_emission_retained": 384,
+      "whole_gained": 19,
+      "whole_lost": 1,
+      "whole_retained": 271
+    },
+    "positive_margin": {
+      "negative_emission_new": 4,
+      "negative_emission_removed": 4,
+      "negative_emission_retained": 90,
+      "positive_emission_gained": 17,
+      "positive_emission_lost": 3,
+      "positive_emission_retained": 388,
+      "whole_gained": 13,
+      "whole_lost": 0,
+      "whole_retained": 272
+    }
+  },
+  "checks": {
+    "2806exact21385outside_cursor199_64_pending441098_and_incomplete_inventory_match": true,
+    "480_updates7680_sources3840_supported3840_unsupported_no_additional_parent_forwards": true,
+    "512_old_archived_parent_full_prediction_dictionaries_exact": true,
+    "75_379_178B_finalization_and7552B_later_receipts_scope_match": true,
+    "BCE120_aggregate_pass_removed2_added2_is_not_casewise_retention": true,
+    "BCE_lambda0_vs_squared_hinge_lambda1_same_parent_tensor_pass_supported_emission_mask_matches_prior_model_review": true,
+    "TRAIN_aggregate_margin_weaker_than_control_whole_negatives_BCE": true,
+    "TRAIN_soft_retention_loss_difference_not_unseen_or_selected_gain": true,
+    "actual_cold0_both_arms_no_selected_fitted_gain": true,
+    "all1280source640group_exclusions5120source2560groups1068words_and_shared_patterns_match_separate_corpus_review": true,
+    "all_checkpoint_roles_source_only_formal_null_zero_masks_no_native_Lake_or_default_authority": true,
+    "all_five_selected_and_parent_full_summaries_equal": true,
+    "all_four_trained_states_casewise_ineligible_due_new_negative_IDs": true,
+    "all_trained_baseline_whole38_and_emitted52_selection_IDs_retained": true,
+    "anchor1468_per_arm_and_hinge_nonzero143_control76_treatment_matches_audit": true,
+    "barrier_dict_references_have_exact_pins_and_qualification_is_not_syscall_sandbox_claim": true,
+    "current179XML_tests_not_pooled_with_historical_guardian23_or_incoming375plus70": true,
+    "draft_squared_hinge_wording_history_precedes_fit_and7payloads_unchanged": true,
+    "foreign500_body_equality_limited_to_saved_post_reap_interval": true,
+    "fresh_final36whole8negative_not_old_support_gate38whole13negative": true,
+    "fresh_final_status_confusion_class_span_ceiling_and_modal_misspelling_claims_match": true,
+    "incoming9e5_nonnumerical_no_new_fit_proof_or_semantic_admission": true,
+    "latent8D384D768D_and_family_routing_kept_open_separate_lineages": true,
+    "legal_unsupported_means_authored_profile_not_legally_false": true,
+    "local1280_full_output_replay_evidence_valid_and_downloaded1280_receipt_explicitly_required": true,
+    "old18342census_distinct_from_current24191_archive_target_reconciliation": true,
+    "original_admission_label_correction_after_pre_finalize_and_no_fullfit_guarantee_explicit": true,
+    "resource34samples820355072bytes1_191s_gap_sampled_not_absolute": true,
+    "runner33_22_sampler35_54_guardian81_40_times_keep_distinct_scopes": true,
+    "six_old_numerical_producers_exact_source_only97features3169parameters": true,
+    "two_selection_choices_before_final_reference_parse_all15_panels_before_joins": true
+  },
+  "current_XML_bindings": [
+    {
+      "bytes": 13054,
+      "cases": 78,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/model-tests.xml",
+      "sha256": "6e1e0c5750c8180dccfe8d53d587546077971cc900f4bb2e69c1aafe178eaaf3",
+      "source_qualified_unique": true,
+      "zero_failure_error_skip": true
+    },
+    {
+      "bytes": 18044,
+      "cases": 101,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/selection-tests.xml",
+      "sha256": "151b5bed4c585946bd6eb5811e8db824229a178765485448f9d7c69a3c11696e",
+      "source_qualified_unique": true,
+      "zero_failure_error_skip": true
+    }
+  ],
+  "execution": {
+    "forwards": 0,
+    "generator_executed": false,
+    "generator_imported": false,
+    "models_or_Torch_imported": false,
+    "only_owned_review_file_written": true,
+    "optimizer_updates": 0,
+    "source_or_Git_or_Hub_mutations": false,
+    "tests_run": 0
+  },
+  "findings": [],
+  "independence": "Reviewer authored corpus and release helper but did not author this root-owned report generator; numerical/model-selector and corpus-author reviews remain separately attributed.",
+  "local_replay_pin": {
+    "bytes": 41482,
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/selected-checkpoint-replay.json",
+    "sha256": "3fb09f025e432c8dfb073f3b7464e3762494d2d58cc71b605cfd47285f67e09f"
+  },
+  "observed_at_utc": "2026-10-11T00:49:44.518263+00:00",
+  "passed": true,
+  "primary_bindings": [
+    {
+      "bytes": 539438,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/results-resource-review.json",
+      "sha256": "c003750c87f9ae3a40e41c09c452038273a32fa1105b967d768d5a896b752ed8"
+    },
+    {
+      "bytes": 27125,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/incoming-progress-review.json",
+      "sha256": "c7e7f93563f4f95bbe7b03b2ae56083d323b0bd436d934eac559bb94567df5ab"
+    },
+    {
+      "bytes": 393,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/incoming-main-integration.json",
+      "sha256": "c3a566b4d0e3b368db1dd7cf4b5933f08ab861f78ad395b1932e30b687f65e1a"
+    },
+    {
+      "bytes": 6871,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/resource-observation-phase-correction.json",
+      "sha256": "300a543cc9d336797e85a4794e2d0ccdad58a29b3e2dfdd2667265e47c864a31"
+    },
+    {
+      "bytes": 7294,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/resource-preservation-projection.json",
+      "sha256": "7908c995fea9a490da7629b45d023d378ae5934bf5eb5a73932aa05c592952b7"
+    },
+    {
+      "bytes": 41482,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/selected-checkpoint-replay.json",
+      "sha256": "3fb09f025e432c8dfb073f3b7464e3762494d2d58cc71b605cfd47285f67e09f"
+    },
+    {
+      "bytes": 1192,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/replay-source-review.json",
+      "sha256": "bb1fe8b810c4bacea7ab4e69eb9d6cebc6c74ffc3c79441124b3cc0057577e65"
+    },
+    {
+      "bytes": 5842,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/replay-helper-build.json",
+      "sha256": "a179a180382caba3aa0e6aeccd435e01f82c5825ea0fa68d656e414b11e6b678"
+    },
+    {
+      "bytes": 36623,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/protocol-review.json",
+      "sha256": "8debd5f9d35b63f4cfe52c684961afee71cf409da423eb2873391b67e8ba41ad"
+    },
+    {
+      "bytes": 23901,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/protocol-artifact-bindings.json",
+      "sha256": "19f58225630f8db280fd9ddd9b8b91786098bc3719f1f5f3dca93d44236d1452"
+    },
+    {
+      "bytes": 245644,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/trial-artifact-audit.json",
+      "sha256": "76440343442447e29e3bfd6487cb5691f28b54fe8627d4b6cc42ff76abbd05df"
+    },
+    {
+      "bytes": 13757,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/experiment-plan.json",
+      "sha256": "12b715274d467b03093fe7eb021643b1e045dc9b964112849b86a433a7561e26"
+    },
+    {
+      "bytes": 15070,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/model-selector-review.json",
+      "sha256": "dd0ad8d1b3b23d3b2e378fc7dede3af065e1359829ee8be825109bfa61dcceea"
+    },
+    {
+      "bytes": 37871,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/independent-corpus-review.json",
+      "sha256": "c7dcd2f0abb5d63df05ebe2c3498a76c10d7ad6b4f338412abb22bb9517c7636"
+    },
+    {
+      "bytes": 14899,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/training-design-review.json",
+      "sha256": "669ebcf2fbebb1c2dc16d01b9b22a5194f2da98b70ea84af2a74f892e8995cc4"
+    },
+    {
+      "bytes": 16106,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/progress-review.json",
+      "sha256": "272241b8018c1a9288315dcc8643c8a68964ef645db5e017bf67296242f02c24"
+    },
+    {
+      "bytes": 14084,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/real-code-data-review.json",
+      "sha256": "e0ad6d0377e5e41fa2c4d8a39cabf6e51f5b7471d4a896294277e5f64b1cd1c6"
+    },
+    {
+      "bytes": 1546821,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/training-results.json",
+      "sha256": "80db0f69627ce72f663740cb80b3b2ee3d0adaa04867a26003f8aba542be3fb6"
+    }
+  ],
+  "required_later_receipts_before_execution": {
+    "datasets-pr-merged.json": {
+      "present_at_review": false,
+      "purpose": "Merged source PR URL and immutable mergeCommit.oid.",
+      "workspace_phase_only": true
+    },
+    "hub-checkpoint-replay.json": {
+      "explicit_generator_assertion": "complete_outputs_exact == 1280",
+      "present_at_review": false,
+      "purpose": "Qualify downloaded selected-checkpoint replay claim before either phase writes."
+    },
+    "hub-readback-verification.json": {
+      "present_at_review": false,
+      "root_execution_requirement": "Passed all prior identities preserved and all eight checkpoints download exact, as asserted by the separately reviewed publisher."
+    },
+    "hub-upload-commit.json": {
+      "present_at_review": false,
+      "purpose": "Actual immutable published repo/revision/prefix links."
+    }
+  },
+  "schema": "positive-retention-report-generator-static-review/v1",
+  "scope_limits": [
+    "This is a static report-generator review, not numerical replay, independent legal gold or a publication execution receipt.",
+    "The generator checks the required downloaded replay count; full downloaded replay and append-only Hub receipt qualification remain root execution prerequisites.",
+    "The content contains experiment-specific factual constants; changing primary result/resource/intake bindings requires renewed content review.",
+    "The source-phase progress write appends bytes and records its prior-prefix hash; the later contribution audit must verify that recorded prefix and exact staged file set."
+  ],
+  "script_pin": {
+    "bytes": 15745,
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/write_reports.py",
+    "sha256": "4f50afd512266c77c56e43097bbacaab2693264c73efe9b7520dc303bd345cbe"
+  },
+  "selection_rows_bound": [
+    {
+      "arm": "bce",
+      "eligible": true,
+      "negative_emitted": 13,
+      "paired_counts": {
+        "negative_emission_gained": 0,
+        "negative_emission_lost": 0,
+        "negative_emission_retained": 13,
+        "positive_emission_gained": 0,
+        "positive_emission_lost": 0,
+        "positive_emission_retained": 52,
+        "whole_gained": 0,
+        "whole_lost": 0,
+        "whole_retained": 38
+      },
+      "positive_emitted": 52,
+      "positive_learned_refusal": 9,
+      "update": 0,
+      "whole_exact": 38
+    },
+    {
+      "arm": "bce",
+      "eligible": false,
+      "negative_emitted": 13,
+      "paired_counts": {
+        "negative_emission_gained": 2,
+        "negative_emission_lost": 2,
+        "negative_emission_retained": 11,
+        "positive_emission_gained": 2,
+        "positive_emission_lost": 0,
+        "positive_emission_retained": 52,
+        "whole_gained": 2,
+        "whole_lost": 0,
+        "whole_retained": 38
+      },
+      "positive_emitted": 54,
+      "positive_learned_refusal": 7,
+      "update": 120,
+      "whole_exact": 40
+    },
+    {
+      "arm": "bce",
+      "eligible": false,
+      "negative_emitted": 14,
+      "paired_counts": {
+        "negative_emission_gained": 3,
+        "negative_emission_lost": 2,
+        "negative_emission_retained": 11,
+        "positive_emission_gained": 3,
+        "positive_emission_lost": 0,
+        "positive_emission_retained": 52,
+        "whole_gained": 2,
+        "whole_lost": 0,
+        "whole_retained": 38
+      },
+      "positive_emitted": 55,
+      "positive_learned_refusal": 5,
+      "update": 240,
+      "whole_exact": 40
+    },
+    {
+      "arm": "positive_margin",
+      "eligible": true,
+      "negative_emitted": 13,
+      "paired_counts": {
+        "negative_emission_gained": 0,
+        "negative_emission_lost": 0,
+        "negative_emission_retained": 13,
+        "positive_emission_gained": 0,
+        "positive_emission_lost": 0,
+        "positive_emission_retained": 52,
+        "whole_gained": 0,
+        "whole_lost": 0,
+        "whole_retained": 38
+      },
+      "positive_emitted": 52,
+      "positive_learned_refusal": 9,
+      "update": 0,
+      "whole_exact": 38
+    },
+    {
+      "arm": "positive_margin",
+      "eligible": false,
+      "negative_emitted": 17,
+      "paired_counts": {
+        "negative_emission_gained": 4,
+        "negative_emission_lost": 0,
+        "negative_emission_retained": 13,
+        "positive_emission_gained": 3,
+        "positive_emission_lost": 0,
+        "positive_emission_retained": 52,
+        "whole_gained": 1,
+        "whole_lost": 0,
+        "whole_retained": 38
+      },
+      "positive_emitted": 55,
+      "positive_learned_refusal": 6,
+      "update": 120,
+      "whole_exact": 39
+    },
+    {
+      "arm": "positive_margin",
+      "eligible": false,
+      "negative_emitted": 14,
+      "paired_counts": {
+        "negative_emission_gained": 3,
+        "negative_emission_lost": 2,
+        "negative_emission_retained": 11,
+        "positive_emission_gained": 3,
+        "positive_emission_lost": 0,
+        "positive_emission_retained": 52,
+        "whole_gained": 2,
+        "whole_lost": 0,
+        "whole_retained": 38
+      },
+      "positive_emitted": 55,
+      "positive_learned_refusal": 6,
+      "update": 240,
+      "whole_exact": 40
+    }
+  ],
+  "static_write_scope": {
+    "model_imports_or_inference_or_training_or_publication_calls": false,
+    "new_reports_exclusive_create": true,
+    "progress_original_prefix_preserved_by_bytes_append": true,
+    "source_phase_after_Hub_commit_and_downloaded_replay_files_read": true,
+    "source_phase_append_file": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/autoencoders/progress_integration.md",
+    "source_phase_new_file": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/docs/implementation/legal_scope_retention_gate_pilot_20261011.md",
+    "source_phase_prefix_receipt": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/progress-prefix-binding.json",
+    "workspace_phase_new_file": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/workspace/implementation_plan/docs/71-positive-retention-objective-training-2026-10-11.md",
+    "workspace_phase_requires_merged_source_PR_receipt_before_writing": true
+  },
+  "verdict": "Static content and write scope pass at the bound script and primary evidence bytes; publication-dependent receipts remain mandatory before executing the generator."
+}

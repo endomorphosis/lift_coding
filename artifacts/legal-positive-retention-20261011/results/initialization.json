@@ -1,0 +1,37 @@
+{
+  "parameter_counts": {
+    "bce": {
+      "total": 36193,
+      "trainable": 3169
+    },
+    "positive_margin": {
+      "total": 36193,
+      "trainable": 3169
+    }
+  },
+  "capacity_matched": true,
+  "data_and_update_budget_matched": true,
+  "initial_parent_full_core_and_logits_parity": 16,
+  "matched_seeded_gate_tensors": true,
+  "initial_gate_state_sha256": "33c43fdc5ce00d44092b6357a2af5d89a3db496df1ddb374c9ffc6f3c65cfcec",
+  "parent": {
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/initial-parent-predictions.json",
+    "bytes": 127714,
+    "sha256": "0468568354f49d159be3f1c396dfe2c105cf781562222dbd64b8a760bb76281a"
+  },
+  "candidates": {
+    "bce": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/initial-bce-predictions.json",
+      "bytes": 128898,
+      "sha256": "1fe4f9a93b301cdad83d4eb9696de9e7e5804081a5b8cec4b8d9917bf9d2c415"
+    },
+    "positive_margin": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/initial-positive_margin-predictions.json",
+      "bytes": 129090,
+      "sha256": "0da9012fef1bfc6b2b9618875f837025329289bb7b52d5b60fe856bdab7e3d0d"
+    }
+  },
+  "parent_steps": 120,
+  "new_Adam_fresh": true,
+  "parent_Adam_continued": false
+}

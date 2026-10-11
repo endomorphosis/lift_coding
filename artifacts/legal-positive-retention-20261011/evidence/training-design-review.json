@@ -1,0 +1,222 @@
+{
+  "audit_actions": {
+    "Git_mutations": 0,
+    "Hub_mutations": 0,
+    "fits": 0,
+    "model_calls": 0,
+    "model_imports": 0,
+    "optimizer_updates": 0,
+    "resource_leases": 0,
+    "review_artifact_writes": 1,
+    "source_edits": 0,
+    "source_reads": true,
+    "stdlib_json_and_hashing_only": true,
+    "tests": 0
+  },
+  "completed_work_to_reuse": {
+    "native384_completed_recipes": [
+      "control-wording-ce",
+      "balanced-wording-ce",
+      "dual-bank-retention-ce"
+    ],
+    "native384_prepared_campaign": "decoder-dual-bank-wording-20261007 remains zero optimizer commits; its wrappers/preflight are not a fourth completed fit",
+    "native384_retention_evidence": "Original/control/dual retain three48-paragraph TRAIN cohorts; balanced-only loses15 retained paragraphs. Exposed v3 parent/control/dual whole31/33/30 out of48, separate from source-only proposal track.",
+    "newer_main": "US Code census/lossless/cache/feed integration supplies source identity and durable intake, with no new trained model or reviewed semantic targets.",
+    "support_action_parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+    "support_gate_fresh_final": {
+      "frozen_structural_whole_ceiling": 41,
+      "negative_count": 64,
+      "negative_emitted": 13,
+      "positive_count": 64,
+      "positive_whole_exact": 38
+    },
+    "support_gate_selected_actual_updates": {
+      "global": 0,
+      "predicted_trigger": 0
+    }
+  },
+  "decision": "First run one objective-only paired-positive retention ablation on the existing frozen-feature support gate; defer trainable ordered-byte representation until this simpler hypothesis is measured.",
+  "deferred_hypotheses": {
+    "latent_conditioning": "Requires authenticated same-source native8/384/768 vectors joined to exact bytes/token anchors and frozen64-wide token features; a global embedding cannot substitute for pointer features.",
+    "native384_reconstruction": "Use authenticated existing embeddings/transform/codec and an equal-budget chronology-controlled objective ablation; do not rerun the three completed recipes or call zero-commit metadata preparation a completed fit.",
+    "real_uscode": "Intake/census/compiler observations need independently reviewed, grouped semantic targets before a legal generalization trial; feed acknowledgement and compiler artifacts are not training/teacher qualification.",
+    "trainable_ordered_byte_branch": "Reasonable later test from the current guide, but no capacity diagnosis is established. If the objective-only trial still rejects trained states, predeclare a separate same-input/objective comparison differing only in byte-branch trainability and disclose unequal trainable counts. No final retuning."
+  },
+  "evidence_pins": [
+    {
+      "bytes": 10465,
+      "path": "docs/implementation/legal_scope_support_gate_pilot_20261007.md",
+      "sha256": "30e4e6cf34e26960fca068283feecb4f91e6097803455715e33ac28ffe803a2d",
+      "source_ref": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a"
+    },
+    {
+      "bytes": 15608,
+      "path": "docs/autoencoders/retained_wording_checkpoint_availability_20261007.md",
+      "sha256": "8de2a30d462efddc89c6503d16913bb9a25bddfe80ddf1059248a65adeb328ad",
+      "source_ref": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a"
+    },
+    {
+      "bytes": 9707,
+      "path": "docs/autoencoders/dual_bank_replay_results_20261007.md",
+      "sha256": "6862160d284e380751754cfee58607c09de69910aaa2beddb6649e9d9c19ac86",
+      "source_ref": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a"
+    },
+    {
+      "bytes": 12147,
+      "path": "docs/autoencoders/balanced_wording_continuation_20261007.md",
+      "sha256": "7de96a604788efef0f5582ad3bb8c269f7a8adcb5ae71bbd36062372f6591fa7",
+      "source_ref": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a"
+    },
+    {
+      "bytes": 7660,
+      "path": "docs/autoencoders/uscode_span_intake_progress_20261007.md",
+      "sha256": "7a2e69115f60e7453d609822d44e2d4005f5312b291ca495a0f3dc0b7c335ca1",
+      "source_ref": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a"
+    },
+    {
+      "bytes": 4236,
+      "path": "docs/autoencoders/uscode_paired_feed_compatibility_20261007.md",
+      "sha256": "9b72678265bdf7529dac16d6e680f1ec62975134d00be1181943a3373577d345",
+      "source_ref": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a"
+    },
+    {
+      "bytes": 24874,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_gate.py",
+      "sha256": "79a9d314ddf597b16c6a06754d7786d568bbf34c87dc71a947ac0b8af12f525b",
+      "source_ref": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a"
+    },
+    {
+      "bytes": 26455,
+      "path": "scripts/ops/autoencoder/dual_bank_wording_replay/dual_bank_training_adapter.py",
+      "sha256": "433f80f4cca80678d5b8d2976687cf20650a5339a3b670b80139658ef300c4af",
+      "source_ref": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a"
+    },
+    {
+      "bytes": 9694,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/experiment-plan.json",
+      "sha256": "08f05d12c7e9769f51b9bc13f5f49dc8ffe9660507639cf428431f04a74e468f"
+    },
+    {
+      "bytes": 82905,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/results-review.json",
+      "sha256": "15c241560195ac8d21b08ac41fe84f14a941f3438e028f00de2215bb781646f6"
+    },
+    {
+      "bytes": 265226,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/rejection-diagnostics.json",
+      "sha256": "3bf2cfc1412ac27fc09d90d134f59292b1d24ccb899414349f4e8d7ad41579fd"
+    },
+    {
+      "bytes": 3530,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/completion.json",
+      "sha256": "e88780999a7c15e44dc4b42186538f02421dc61a8d36ab62c5ddedf245666fc0"
+    }
+  ],
+  "isolated_source": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets",
+    "ref": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a"
+  },
+  "observed_at_utc": "2026-10-11T00:05:56.332289+00:00",
+  "reasoning": [
+    "The completed matched study changed pooling while retaining identical 97-wide frozen contextual64 plus ordered-byte33 features and 3,169 trainable gate parameters. Every trained checkpoint failed the frozen eligibility floors; both selected actual cold step zero.",
+    "Global removed one negative emission while losing two previously exact positives. Local step120 gained two/lost one exact positive but removed two/introduced three negative emissions; local240 gained two/lost two and removed two/introduced two negative emissions. Aggregate equality can conceal case substitutions.",
+    "TRAIN local BCE improved .426070 to .349219 and negative emissions112 to99/512 while positive whole exact declined322 to317/512. This supports testing an objective that explicitly penalizes positive margin loss, but proves neither an encoder-capacity bottleneck nor that a new byte branch will help.",
+    "The donor already encodes byte order. Keeping representation, architecture, pairing, schedule and optimizer identical across arms isolates the retention objective before introducing representation trainability."
+  ],
+  "schema": "legal-next-training-design-review/v1",
+  "semantic_and_logic_limits": {
+    "Lake_run": false,
+    "admission_masks": "all five zero",
+    "default_promotion": false,
+    "description": "Quantification, multi-rule scope, native logic-family projection and actual lake build legal receipts remain separate open requirements. Exact authored proposal JSON supplies no proof authority.",
+    "formal_output": null,
+    "latent_conditioned": false,
+    "legal_gold": false,
+    "native_logic_lowering_run": false,
+    "source_semantics_verified": false
+  },
+  "single_bounded_experiment": {
+    "arms": {
+      "control": "mean support BCE over all16 paired sources",
+      "retention": "same mean support BCE plus lambda1.0 times mean squared positive logit-floor hinge over parent-emitted TRAIN positives"
+    },
+    "budget": {
+      "accounting": "TRAIN teacher/cold prefit forwards, checkpoint evaluations, actual optimizer commits, retries and inference panels get separate counters; no timing from old study claimed for this trial",
+      "actual_optimizer_calls_total": 480,
+      "batch": "eight parent groups, each contributing its supported source and one paired unsupported mutation; exactly8+8 sources",
+      "encoded_source_presentations_total": 7680,
+      "optimizer": "fresh AdamW, lr.003, weight_decay0, clip5; no parent Adam continuation",
+      "schedule": "same hashed paired order and full TRAIN-group exposure ledger in both arms; balanced four negative categories including malformed-modal contrasts",
+      "seed": 24606,
+      "selection_steps": [
+        0,
+        120,
+        240
+      ],
+      "updates_each_arm": 240
+    },
+    "corpus": {
+      "barrier": "Lock both choices/checkpoint hashes before numerically loading final/retention references; write all parent/selected source-only outputs before joining labels. No final-driven objective, threshold, floor, seed or checkpoint tuning.",
+      "coverage": "Retain eight templates, action-lemma cross-cell balance, four negative categories, null-facet cells, Unicode and repeated occurrences. Define unsupported as outside the declared single-rule engineering profile.",
+      "exclusions": "All four earlier source-span banks including support-gate: normalized full sources, paired-parent groups, declared and observed facets/content words; all prior final/retention cohorts remain exposed. Authenticate observed uniqueness and actual counts rather than assuming them.",
+      "labels": "Construction labels and TRAIN references are allowed; no independently reviewed legal gold or authors-blind claim.",
+      "reuse": "Reuse existing corpus construction and scoring interfaces, not an exposed bank as a new final.",
+      "sizes": "512supported+512unsupported TRAIN;64+64 selection;64+64 excluded final"
+    },
+    "evaluation": {
+      "ceiling": "Measure train/selection structural ceiling before fitting; measure final ceiling only after locked outputs/reference barrier. The prior final ceiling41/64 limits support-only gains there to three positive whole cases; it is not the ceiling of a new corpus.",
+      "claim": "A one-seed small authored study is preliminary evidence. Report refusal/retention and paired treatment-versus-control deltas; do not translate it into reviewed-law, latent-reconstruction or production accuracy.",
+      "report": [
+        "positive whole exact and emitted/refusal/structural partitions",
+        "paired whole gained/lost/retained IDs",
+        "paired negative removed/new/retained emission IDs",
+        "raw support confusion and BCE",
+        "all frozen raw facet/presence/class equality",
+        "malformed-modal and other negative-category denominators",
+        "per-template coverage and all-support frozen structural ceiling"
+      ],
+      "selected_only": "Run parent and both selected states on excluded final and exposed historical retention; rejected trained states remain TRAIN/selection research evidence."
+    },
+    "hypothesis": "A TRAIN-only positive margin-retention term can reduce malformed-modal unsupported emissions without sacrificing previously emitted/exact positive proposals, with the same frozen features and capacity.",
+    "implementation_required_before_fit": [
+      "Add an opt-in objective/checkpoint owner with a closed retention profile; the existing gate _profile hard-codes BCE_support_all and cannot truthfully label a retention-trained state.",
+      "Bind parent byte SHA, gate architecture, objective lambda/floor, paired schedule, TRAIN teacher-logit/source IDs, optimizer moments and integer actual progress. Keep the existing model/protocol owner and old checkpoints intact.",
+      "Add meaningful tests for empty retention masks, finite teacher/logit shapes, teacher mask/source binding and the float32 sigmoid threshold edge, gradient isolation, cold function identity, strict retention-checkpoint roundtrip and selector case substitutions hidden by aggregate equality.",
+      "Review the new corpus and source-only barrier before any fit; execute the already established guardian/resource owner and record actual cleanup rather than treating this design as admission."
+    ],
+    "model": {
+      "features": "same frozen contextual64+orderedConv3-byte33",
+      "frozen_outputs": "class, optional presence, all five pointer heads, and caller-premise condition attachment",
+      "gate": "same97->32->1 Tanh residual with identical seeded tensors and zero final projection",
+      "parent": "exact existing selected support/action MLP parent; preserve entire opaque checkpoint bytes and nested optimizer states",
+      "pooling": "predicted_trigger only in both arms; no second global-vs-local comparison",
+      "threshold": 0.5,
+      "trainable_parameters_each": 3169,
+      "updated_parameters": "new residual gate only"
+    },
+    "objective_definition": {
+      "floor": "min(max(s0,0.0),1.0); mask uses actual parent emission status, and explicit clamp handles float32 sigmoid rounding near the0.5 threshold",
+      "lambda": 1.0,
+      "mask": "explicitly supported TRAIN rows whose frozen parent emits a proposal",
+      "retention_term": "mean(max(0,floor-s)^2 over masked rows); exactly0 when mask empty",
+      "s": "candidate parent-plus-residual support logit",
+      "s0": "frozen parent support logit; authenticated on TRAIN only before fitting",
+      "warning": "This is a soft loss and cannot guarantee case retention; it creates no inference-time teacher, reference lookup, modal list or validator."
+    },
+    "selection": {
+      "additional_paired_floors": [
+        "zero loss of baseline exact positive case IDs",
+        "zero loss of baseline emitted positive case IDs",
+        "zero new unsupported emitted case IDs"
+      ],
+      "baseline": "actual cold checkpoint measured on new selection; require nonzero emitted positives and positive whole exact before fitting",
+      "candidate_gain": "An eligible trained state must remove at least one baseline unsupported emission or gain a positive whole success to be described as a measured improvement.",
+      "fallback": "actual cold stepzero if no trained state passes; never relax floors after observing results",
+      "limits": "Selection case floors bind this selection panel only; they do not guarantee fresh-final or historical-cohort retention.",
+      "preserve_existing_aggregate_floors": true,
+      "ranking": "minimize negative emissions, maximize positive whole exact, maximize learned negative refusals, prefer earlier actual updates"
+    },
+    "task": "authored source_text -> support-gated single-rule occurrence proposal; source-only, not native latent reconstruction"
+  },
+  "status": "read_only_design_complete_no_experiment_executed"
+}
