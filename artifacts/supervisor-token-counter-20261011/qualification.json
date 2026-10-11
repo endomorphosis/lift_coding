@@ -1,0 +1,92 @@
+{
+  "checkpoint_changed": false,
+  "ci": {
+    "job_id": 114430003889,
+    "job_steps": [],
+    "local_workflow_equivalent_checks_passed": true,
+    "reason": "The job was not started because your account is locked due to a billing issue.",
+    "reported_conclusion": "failure",
+    "run_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38125872954",
+    "status": "not_started",
+    "workflow": "Documentation Gates"
+  },
+  "complete_run_token_savings_claimed": false,
+  "counter_identity_caller_supplied": true,
+  "datasets_revision": "cdae06198a229760ca139d48f9e311e80d0df8c6",
+  "datasets_source_read_only": true,
+  "date": "2026-10-11",
+  "default_selection_receipt_schema": "supervisor-semantic-metadata-selection@1",
+  "docs_checks": [
+    "primary supervisor vocabulary gate passed",
+    "46 maintained documentation files passed relative-link and anchor checks",
+    "packaging version pins and closeout markers passed",
+    "changed token plan relative links and anchors passed",
+    "git diff --check passed"
+  ],
+  "huggingface_upload_performed": false,
+  "injected_counter_selection_receipt_schema": "supervisor-semantic-metadata-selection@2",
+  "integration_commit": "23ef2ae65be36973956771e59574bb9e80f1c33d",
+  "isolated_test_seal_database_used": true,
+  "live_benchmark_reward": null,
+  "live_provider_calls": 0,
+  "logs": {
+    "tests-harbor-tail.log": {
+      "bytes": 1546,
+      "sha256": "181bffcc34109609476b05c453df39babce4f65e40c0bef4d9683d5ff5b30559"
+    },
+    "tests-initial.log": {
+      "bytes": 4336,
+      "sha256": "ded4fae98ac83116d6ebeb65d6878d1ce6623b8bf1eb31eb7f2a600325d85a34"
+    }
+  },
+  "measurement_scope": "complete-rendered-prompt-text@1",
+  "new_database_owner": false,
+  "new_embeddings_generated": 0,
+  "new_training_runs": 0,
+  "normal_pytest_ast_sealing_enabled": true,
+  "parallel_formalization_preserved": true,
+  "parent_before": "cddba3466eef19ef9f0c0b8e0fd11081b7327a8b",
+  "preflight_counts_charge_native_usage_ledger": false,
+  "provider_added_cli_scaffolding_measured": false,
+  "python_bytecode_writes_disabled": true,
+  "qualification_attempts": [
+    {
+      "failed": 1,
+      "failure": "default Python environment lacks existing Harbor dependency",
+      "failure_resolved": true,
+      "log": "tests-initial.log",
+      "passed": 301,
+      "unexecuted": 5
+    },
+    {
+      "deselected": 49,
+      "environment": "existing Harbor 0.23.0 site-packages added for the six remaining controls",
+      "failed": 0,
+      "log": "tests-harbor-tail.log",
+      "passed": 6
+    }
+  ],
+  "remaining": [
+    "accepted formal-status owner and receipt coverage inventory",
+    "reviewed provider/model/tokenizer/revision factory and deterministic replay",
+    "qualified current-owner capsule/source lookup exposed to coding CLI",
+    "new runtime archive qualification before matched live trial"
+  ],
+  "schema": "supervisor-token-counter-publication@1",
+  "selector_commit": "2f9f29251a277a7aeb095e02b5f5e0ad1ac5888a",
+  "source_sha256": {
+    "benchmarks/agent_supervisor/container_coding/benchmark_comparison.py": "5744fb7c50bab80a68ad5f619bf59623e29290cb70d46acfa471699040e17d2f",
+    "benchmarks/agent_supervisor/container_coding/terminal_context_audit.py": "68f4568218fc191f3a4924b3ab1b747d1fcb4a645d5cfcdb25774229ee730bb6",
+    "docs/agent_supervisor/terminal_token_metadata_plan.md": "71b773ad23a5d88ffd2140d373ab1596741846b1802d5c07792314cbdfe007a9",
+    "ipfs_accelerate_py/agent_supervisor/runtime/router_implementation_runner.py": "535e7f9748422d7de2a394db937e27cd9b90f353dc48bda4194205f07c67f6a9",
+    "ipfs_accelerate_py/agent_supervisor/runtime/semantic_metadata_census.py": "9bcc88760fd5ed3af97199bfe3e6cf10c7148b73468515fd894c8cba24c9189b",
+    "ipfs_accelerate_py/agent_supervisor/runtime/semantic_metadata_view.py": "d26cb7e80b54bbbd52b64ff6097320f4b47ee619f02395df1d51f4a38b24be4d"
+  },
+  "subprocess_counter_replay_qualified": false,
+  "supervisor_before": "dedf13a42c2b2c32131b4b10f659dd51830a6083",
+  "supervisor_revision": "575227d831fd6c4bd53948cab75b63a5b486dda7",
+  "test_skips": 0,
+  "tokenizer_compatibility_verified": false,
+  "unique_tests_passed": 307,
+  "working_tree_policy": "isolated integration worktrees; canonical dirty trees and retained model assets preserved"
+}

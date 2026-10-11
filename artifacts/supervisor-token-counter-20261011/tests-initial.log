@@ -1,0 +1,46 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: /home/barberb/lift_coding/.worktrees/token-selector-accelerate-20261011
+configfile: pytest.ini
+plugins: mock-3.15.1, xdist-3.8.0, benchmark-5.2.3, cov-7.1.0, base-url-2.1.0, asyncio-1.3.0, trio-0.8.0, typeguard-4.5.2, env-1.7.0, hypothesis-6.152.1, playwright-0.8.0, timeout-2.4.0, anyio-4.14.2
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 307 items
+
+test/api/test_semantic_metadata_view.py ................................ [ 10%]
+.............................................                            [ 25%]
+test/api/test_semantic_metadata_census.py .............................. [ 34%]
+...                                                                      [ 35%]
+test/api/test_semantic_metadata_dispatch.py ..............               [ 40%]
+test/api/test_semantic_metadata_census_dispatch.py ..............        [ 44%]
+test/api/test_semantic_metadata_token_audit.py ......................... [ 53%]
+...........                                                              [ 56%]
+benchmarks/agent_supervisor/container_coding/test_benchmark_comparison.py . [ 57%]
+..........................................................               [ 75%]
+benchmarks/agent_supervisor/container_coding/test_terminal_context_audit.py . [ 76%]
+..................                                                       [ 82%]
+benchmarks/agent_supervisor/container_coding/test_terminal_semantic_metadata_policy.py . [ 82%]
+................................................F
+
+=================================== FAILURES ===================================
+___________ test_prepare_freezes_selection_and_default_receipt_shape ___________
+benchmarks/agent_supervisor/container_coding/test_terminal_semantic_metadata_policy.py:139: in test_prepare_freezes_selection_and_default_receipt_shape
+    selected = benchmark.prepare(dataset=dataset, output=tmp_path / "selected", archive=archive,
+benchmarks/agent_supervisor/container_coding/full_supervisor_benchmark.py:256: in prepare
+    from harbor.models.job.config import JobConfig
+E   ModuleNotFoundError: No module named 'harbor'
+============================= slowest 10 durations =============================
+2.71s setup    test/api/test_semantic_metadata_census.py::test_counter_census_is_closed_preflight_and_not_provider_usage[estimate]
+0.90s setup    test/api/test_semantic_metadata_view.py::test_real_producer_full_transport_and_native_prompt_round_trip
+0.87s setup    test/api/test_semantic_metadata_token_audit.py::test_token_receipt_refuses_status_usage_and_selected_arithmetic_tampering[mutation0]
+0.87s setup    test/api/test_semantic_metadata_view.py::test_receipt_mutation_or_foreign_binding_refuses_restore[native_suffix_sha256]
+0.83s call     test/api/test_semantic_metadata_dispatch.py::test_actual_audit_subprocess_retains_metadata_and_both_reply_layers
+0.80s setup    test/api/test_semantic_metadata_token_audit.py::test_trusted_replay_refuses_different_counter_or_coherent_measurement_tampering[counts]
+0.79s setup    test/api/test_semantic_metadata_view.py::test_invalid_counter_identity_falls_back_before_any_count[change1]
+0.75s setup    test/api/test_semantic_metadata_view.py::test_actual_allowlist_and_every_value_remain_inline
+0.75s setup    test/api/test_semantic_metadata_view.py::test_receipt_mutation_or_foreign_binding_refuses_restore[source_manifest_sha256]
+0.74s setup    test/api/test_semantic_metadata_view.py::test_receipt_mutation_or_foreign_binding_refuses_restore[original_translated_semantic_sha256]
+=========================== short test summary info ============================
+FAILED benchmarks/agent_supervisor/container_coding/test_terminal_semantic_metadata_policy.py::test_prepare_freezes_selection_and_default_receipt_shape - ModuleNotFoundError: No module named 'harbor'
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+================== 1 failed, 301 passed in 181.31s (0:03:01) ===================
