@@ -1,0 +1,355 @@
+{
+  "schema": "reviewed-storage-recovery-summary/v1",
+  "observed_at_utc": "2026-10-11T06:49:23.906923+00:00",
+  "scope": "Merge already published stale histories, remove verified duplicate checkouts and stale branch refs, inspect system/rootless Docker, preserve trained assets and active work.",
+  "github_main_at_summary": {
+    "root": "3ce843f3ffa634b6e35c50fe66adc223137406b4",
+    "datasets": "d24e15ee73659a5d4cff20e8f1cbf1c5ab92a234",
+    "accelerate": "6691119e75d96888b106c52ac495e7dccf0dbae4"
+  },
+  "current_child_tree_ids": {
+    "datasets": "4062a0d86834feff26cb3a053f29b48f99298de1",
+    "accelerate": "82b675552f03f7a1375439cc0e1d1b41ebeef5ab"
+  },
+  "history_reconciliation": {
+    "root_joint_conditioning": {
+      "original_tip": "8c02d655e2d086bd644a9011ea67325060ef87bc",
+      "merge_commit": "e933a86c208349e26d90babf78eb631fe0718243",
+      "source_tree_unchanged": true
+    },
+    "datasets": {
+      "original_study_tips_reconciled": 7,
+      "reconciled_head": "ed4341d94295270f0be97b6d757cdfa0466c2fea",
+      "source_tree_unchanged_by_history_merges": true,
+      "merged_by_concurrent_session": true,
+      "later_source_unit_provenance_contribution_preserved": "d24e15ee73659a5d4cff20e8f1cbf1c5ab92a234"
+    },
+    "accelerate": {
+      "original_grok_tips_reconciled": 8,
+      "reconciled_head": "164b57564d00874bcb979e0e0268ac9e6b0bb34f",
+      "source_tree_unchanged_by_history_merges": true,
+      "merged_by_concurrent_session": true
+    }
+  },
+  "attributable_cleanup": {
+    "removed_worktrees": 34,
+    "deleted_local_branches": 32,
+    "deleted_remote_branches": 16,
+    "removed_checkout_commits": [
+      {
+        "repository": "root",
+        "path": ".worktrees/alias-parent-20261007",
+        "commit": "dcb8eb8a6d1bec1d47ed44ca82c8c3d6e0c5553c",
+        "branch": "refs/heads/codex/alias-parent-20261007"
+      },
+      {
+        "repository": "root",
+        "path": ".worktrees/grok-recovery-parent-20261006",
+        "commit": "d77cc6bc2e80b4f78fae193f0098abac4ecc3451",
+        "branch": "refs/heads/codex/grok-recovery-parent-20261006"
+      },
+      {
+        "repository": "root",
+        "path": ".worktrees/normative-cache-input-root-20261007",
+        "commit": "094c566adc316b1391c58d3d38c4dd19698149ff",
+        "branch": "refs/heads/agent/normative-cache-input-root-20261007"
+      },
+      {
+        "repository": "root",
+        "path": ".worktrees/normative-checkpoint-availability-root-20261006",
+        "commit": "dfc02e62186dc97223a620b074b278f0e1b97115",
+        "branch": "refs/heads/agent/normative-checkpoint-availability-root-20261006"
+      },
+      {
+        "repository": "root",
+        "path": ".worktrees/normative-decoder-runtime-root-20261007",
+        "commit": "b7e3550da23c94fe17b591654093c5c0f84ded0c",
+        "branch": "refs/heads/agent/normative-decoder-runtime-root-20261007"
+      },
+      {
+        "repository": "root",
+        "path": ".worktrees/schedule-parent-20261007",
+        "commit": "4ddb120b85fcd47f6ed01d830c9f3b402585cb3b",
+        "branch": "refs/heads/codex/schedule-parent-20261007"
+      },
+      {
+        "repository": "root",
+        "path": ".worktrees/supervisor-cleanup-parent-20261007b",
+        "commit": "19349870e8085e0b687658b35c52f123c4b0ac2f",
+        "branch": "refs/heads/codex/supervisor-cleanup-parent-20261007b"
+      },
+      {
+        "repository": "root",
+        "path": ".worktrees/supervisor-recovery-publication-20261007",
+        "commit": "70ab3beef2cd466c1da50241dd5ec99077847327",
+        "branch": "refs/heads/codex/supervisor-recovery-publication-20261007"
+      },
+      {
+        "repository": "root",
+        "path": ".worktrees/supervisor-stop-parent-20261007",
+        "commit": "da212346307e2fc483d7dce6ebfa820d8da5758a",
+        "branch": "refs/heads/codex/supervisor-stop-parent-20261007"
+      },
+      {
+        "repository": "root",
+        "path": ".worktrees/symbolic-data-parent-20261007",
+        "commit": "8845d1fb78078b57ba7fb50eed93bfabeeb9a5c8",
+        "branch": "refs/heads/codex/symbolic-data-parent-20261007"
+      },
+      {
+        "repository": "root",
+        "path": "artifacts/autoencoder-consolidation-20261006-02/workspace-followthrough",
+        "commit": "8cd17c705162a5d47c0eb31616d8d5637eea79d2",
+        "branch": "refs/heads/codex/legal-cross-agent-followthrough-20261006"
+      },
+      {
+        "repository": "root",
+        "path": "artifacts/autoencoder-consolidation-20261006-02/workspace-integration",
+        "commit": "1b20f745a1db2a485b97ffc7f0816119881f7f8d",
+        "branch": "refs/heads/codex/grouped-autoencoder-findings-20261006-02"
+      },
+      {
+        "repository": "root",
+        "path": "artifacts/autoformalization-publication-20261004/current-main-joint-conditioning-02/publication-worktree",
+        "commit": "3b39519d9bc9021a5e6a0bb183f6c57cb780bc5a",
+        "branch": "refs/heads/codex/joint-conditioning-20261005-02"
+      },
+      {
+        "repository": "root",
+        "path": "artifacts/autoformalization-publication-20261004/current-main-joint-span-01/publication-worktree",
+        "commit": "ec4302acd75f0dbb0d744586db35fef9d23980ac",
+        "branch": "refs/heads/codex/joint-span-policy-20261005-01"
+      },
+      {
+        "repository": "root",
+        "path": "artifacts/legal-decoder-followup-20261006-01/workspace",
+        "commit": "0ed01fd56db31fe4345f8143a7647a437dcb1118",
+        "branch": "refs/heads/codex/legal-decoder-followup-results-20261006-01"
+      },
+      {
+        "repository": "root",
+        "path": "artifacts/legal-next-training-20261007-01/workspace",
+        "commit": "7e582ad8951d6fed6235c98526ee49c08dbce218",
+        "branch": "refs/heads/codex/legal-scope-span-results-20261007-01"
+      },
+      {
+        "repository": "root",
+        "path": "artifacts/legal-support-action-20261007-01/workspace",
+        "commit": "43ec348cab85a9eae3aee56a6de79807e3ea57ee",
+        "branch": "refs/heads/codex/legal-support-action-results-20261007-01"
+      },
+      {
+        "repository": "root",
+        "path": "artifacts/legal-support-gate-20261007-01/workspace",
+        "commit": "b60d71fbd131c7d0a61f8f481348a1027769af92",
+        "branch": "refs/heads/codex/legal-support-gate-results-20261007-01"
+      },
+      {
+        "repository": "root",
+        "path": "artifacts/legal-trigger-readout-20261007-01/workspace",
+        "commit": "8e5da94bd0ac33b1378ae44e4801f3496e96a02c",
+        "branch": "refs/heads/codex/legal-trigger-readout-results-20261007-01"
+      },
+      {
+        "repository": "root",
+        "path": "/home/barberb/lift_coding_worktrees/supervisor-lifecycle-root-20261005",
+        "commit": "c454ee48ff43b41946482c888c039f084e371d0d",
+        "branch": "refs/heads/codex/terminal-reply-contract-root-20261006"
+      },
+      {
+        "repository": "root",
+        "path": "/home/barberb/lift_coding_worktrees/terminal-metadata-census-root-20261007",
+        "commit": "037edf58a0dbe2ed663750f7aa45fb0b361e52fe",
+        "branch": "refs/heads/codex/terminal-metadata-census-root-20261007"
+      },
+      {
+        "repository": "root",
+        "path": "/home/barberb/lift_coding_worktrees/terminal-reply-contract-results-root-20261007",
+        "commit": "a9c3f943c14c5335bdf0f423f987ba649394f75f",
+        "branch": "refs/heads/codex/terminal-reply-contract-results-root-20261007"
+      },
+      {
+        "repository": "root",
+        "path": "/home/barberb/lift_coding_worktrees/terminal-spectral-symbolic-root-20261007",
+        "commit": "47114b031dfbebbd66a5cdb2778b72cc88497628",
+        "branch": "refs/heads/codex/terminal-spectral-symbolic-root-20261007"
+      },
+      {
+        "repository": "root",
+        "path": "/home/barberb/lift_coding_worktrees/terminal-token-metadata-root-20261007",
+        "commit": "123f57e0c098e64b2d4afbf9e0d9e1f5bd3f2918",
+        "branch": "refs/heads/codex/terminal-token-metadata-root-20261007"
+      },
+      {
+        "repository": "root",
+        "path": "artifacts/autoformalization-publication-20261004/current-main-joint-conditioning-01/publication-worktree",
+        "commit": "8c02d655e2d086bd644a9011ea67325060ef87bc",
+        "branch": "refs/heads/codex/joint-conditioning-20261005-01"
+      },
+      {
+        "repository": "root",
+        "path": ".worktrees/pctdd-native-entry-1789010527",
+        "commit": "738cdc6afa62ddc0636a9fef93dfd31bfabfdacd",
+        "branch": "refs/heads/repair/pctdd-native-entry-1789010527"
+      },
+      {
+        "repository": "datasets",
+        "path": "/home/barberb/lift_coding/.worktrees/supervisor-merged-datasets-20261011",
+        "commit": "9e5df0d19b62268cdda356077754fad43bdf65fa"
+      },
+      {
+        "repository": "datasets",
+        "path": "/home/barberb/lift_coding/.worktrees/schedule-datasets-20261007",
+        "commit": "5c69724316a3365bdb22023ba5608fced96d568a"
+      },
+      {
+        "repository": "datasets",
+        "path": "/home/barberb/lift_coding_worktrees/formal-status-datasets-20261011",
+        "commit": "9e5df0d19b62268cdda356077754fad43bdf65fa"
+      },
+      {
+        "repository": "accelerate",
+        "path": "/home/barberb/lift_coding/.worktrees/grok-catalog-preamble-20261011",
+        "commit": "980b506fac1990e73eb0322ccd5a19d2c2417172",
+        "branch": "refs/heads/codex/grok-catalog-preamble-20261011"
+      },
+      {
+        "repository": "accelerate",
+        "path": "/home/barberb/lift_coding/.worktrees/supervisor-long-pilot-20261011",
+        "commit": "f9dcf5f80121ce659fd8e91feee83eb988dda997",
+        "branch": "refs/heads/codex/supervisor-long-pilot-20261011"
+      },
+      {
+        "repository": "accelerate",
+        "path": "/home/barberb/lift_coding/.worktrees/supervisor-output-observation-20261011",
+        "commit": "a22e795a5d604451442d38697e59bcd456ed3a25",
+        "branch": "refs/heads/codex/supervisor-output-observation-20261011"
+      },
+      {
+        "repository": "accelerate",
+        "path": "/home/barberb/lift_coding/.worktrees/supervisor-progress-enum-20261011",
+        "commit": "212c23ec987c3c096f20f87a26a1320e71ff31ed",
+        "branch": "refs/heads/codex/supervisor-progress-enum-20261011"
+      },
+      {
+        "repository": "accelerate",
+        "path": "/home/barberb/lift_coding/.worktrees/supervisor-progress-publication-20261011",
+        "commit": "daea0547cae0ef64e5b78c67030916648138bcda",
+        "branch": "refs/heads/codex/supervisor-progress-publication-20261011"
+      }
+    ],
+    "force_worktree_removals": 0,
+    "canonical_user_checkout_resets": 0,
+    "branch_deletion_rule": "Only removed checkout refs at the exact observed head with main ancestry; remote deletions use expected-head leases."
+  },
+  "capacity": {
+    "initial_available_bytes": 37059063808,
+    "available_bytes_at_summary": 240921280512,
+    "required_available_bytes": 48198554432,
+    "margin_bytes": 192722726080,
+    "attribution": "Filesystem availability includes other concurrent cleanup and process IO; do not attribute the full growth to this campaign.",
+    "fresh_guardian_admission_still_required": true,
+    "training_or_guardian_launched": false
+  },
+  "docker": {
+    "system_and_user_daemons_inspected": true,
+    "stale_containers_at_audit": 0,
+    "active_benchmark_container_preserved_until_owner_normal_completion": true,
+    "rootless_unused_build_cache_prune_filter": "until=24h, without -a",
+    "reported_reclaimed_bytes": 0,
+    "images_and_all_volumes_preserved": true
+  },
+  "preservation": {
+    "original_retained_asset_sha256_checks": 18,
+    "all_original_retained_asset_hashes_match": true,
+    "retained_dataset_input_sha256_checks": 5,
+    "all_retained_dataset_input_hashes_match": true,
+    "reconciliation_database_unchanged_no_WAL": true,
+    "shared_disk_records_and_scheduler_preserved": true,
+    "frozen_donor_source_restored_exact_commit": "271ad796288e17039f036af6a0d003a4628da6ed",
+    "frozen_donor_original_path": ".worktrees/dual-bank-wording-adapter-datasets-20261007",
+    "pending_diagnostic_source_commit": "03d0dac7397bea25b3c7363ff07a7299df3dd4ad",
+    "both_frozen_worktrees_locked_with_custody_reasons": true,
+    "models_initialized_trained_or_regenerated": false
+  },
+  "remaining_protected_work": [
+    "Active process/runtime workspaces and nested Git registrations",
+    "Dirty user work and unknown ignored/model/data/proof payloads",
+    "Original raw historical snapshots with already published sanitized counterparts",
+    "Initialized-submodule copies refused by non-force Git removal",
+    "Frozen replay and pending diagnostic sources"
+  ],
+  "concurrent_cleanup_exception": {
+    "donor_source_was_removed_by_another_session": true,
+    "exact_tracked_source_restored_and_verified": true,
+    "ignored_path": ".worktrees/dual-bank-wording-adapter-datasets-20261007/.benchmarks",
+    "ignored_payload_recovered_or_regenerated": false,
+    "qualification": "Ignored benchmark content was not in Git and its original contents were not authenticated by this campaign; record it as an external recovery exception, not restored data."
+  },
+  "local_detailed_receipt_sha256": {
+    "root-worktree-cleanup-results-02.json": {
+      "bytes": 72458,
+      "sha256": "cb23d84308a1a50a1093511fc7a12750ee40be4674908a49359b8cf4a1196104"
+    },
+    "additional-worktree-cleanup-results.json": {
+      "bytes": 12962,
+      "sha256": "12856d4bad8d1eb3f71ae687e6bed68e9c0b17073ad142ee1570d55f4851a318"
+    },
+    "root-cache-only-worktree-cleanup-results.json": {
+      "bytes": 14185,
+      "sha256": "744f9054ac2f8ae4320b83306102b04e441bbb979dbe7da02da9961161096870"
+    },
+    "root-remote-branch-cleanup-results.json": {
+      "bytes": 19323,
+      "sha256": "aa58890562ac14d8f6d1d8b2da4b633e66c84a2e2db0ae41907cf52760ce5ac3"
+    },
+    "root-cache-branch-remote-cleanup.json": {
+      "bytes": 5649,
+      "sha256": "8fea1746a5d6b05596d000ba0ac706387d63609e08b4319f84b6182e2d86c6c6"
+    },
+    "child-remote-branch-cleanup-results.json": {
+      "bytes": 16447,
+      "sha256": "09ca9c749a43d01fad3764ee9581ee0bb0c15a5f93e237524fa2e63138817a19"
+    },
+    "root-joint-conditioning-history-merge.json": {
+      "bytes": 4001,
+      "sha256": "d92f835e62644097fbc5bb28aa48b4f7794c856df7da0ceae96596324dbfc580"
+    },
+    "git-datasets-maintenance-completion.json": {
+      "bytes": 16903,
+      "sha256": "6615cedf266a65d18389d19fda7e47a5ed113f38b97d5a9649dfa0f958175d48"
+    },
+    "accelerate-removal-after.json": {
+      "bytes": 4896,
+      "sha256": "e6aa5b91f5330abf6c16cf653298cc1591f16ca266b64988ed4e71672bff3955"
+    },
+    "accelerate-concurrent-ancestry-closure.json": {
+      "bytes": 5854,
+      "sha256": "b2c30fc37abaa4239f4a84a1031a0f5beddb9be10f5f280bca055dab8495a2ec"
+    },
+    "docker-build-cache-cleanup-02.json": {
+      "bytes": 177907,
+      "sha256": "3deb45ebead1b22dbe3776c49f42afafe1c0d7b6767192e6d2418e27c0aebec2"
+    },
+    "final-preservation-capacity.json": {
+      "bytes": 98784,
+      "sha256": "17fae5b23dfbf1fdb3897724c808bedab2e74fbc81a3684e3b77463aad25f62e"
+    },
+    "frozen-donor-source-restoration.json": {
+      "bytes": 21778,
+      "sha256": "4824230c8e8e94c174261b107f30c37ceb1d825047a9e982656075a31f7f1514"
+    },
+    "frozen-donor-asset-hash-and-lock-closure.json": {
+      "bytes": 20565,
+      "sha256": "de4023cf92f7f42435ae5dba9e05d2e9fc3c063379ae7587d5809db99a55ed91"
+    },
+    "historical-sanitized-custody.json": {
+      "bytes": 763,
+      "sha256": "7ce6626fd6a5dce73f518beb24b1311a43790e62b1dc50214d76573062f8ec78"
+    },
+    "concurrent-main-history-reconciliation-verification.json": {
+      "bytes": 1225,
+      "sha256": "18d3a7eda9f456e27c7b4a0c6123e27137b36074ec0e08dd480619a3b54095a2"
+    }
+  }
+}
