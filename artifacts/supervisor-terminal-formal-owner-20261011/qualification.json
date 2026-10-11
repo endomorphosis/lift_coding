@@ -1,0 +1,149 @@
+{
+  "actual_repeated_formal_status_population": null,
+  "actual_terminal_accepted_receipts": null,
+  "atomic_owner_snapshot_qualified": false,
+  "automatic_owner_discovery_qualified": false,
+  "checkpoint_changed_by_this_work": false,
+  "ci": {
+    "job_id": 114593538903,
+    "local_workflow_equivalent_checks_passed": true,
+    "reason": "The job was not started because your account is locked due to a billing issue.",
+    "reported_conclusion": "failure",
+    "run_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38181067358",
+    "status": "not_started",
+    "steps": [],
+    "workflow": "Documentation Gates"
+  },
+  "complete_run_token_savings_claimed": false,
+  "datasets_source_revision": "7fc3f57a94108030be3cceca7368920754754a94",
+  "date": "2026-10-11",
+  "docs_checks": [
+    "primary supervisor vocabulary gate passed",
+    "46 maintained documentation relative links and anchors passed",
+    "changed guide and plan links passed",
+    "packaging version pins and navigation markers passed",
+    "git diff --check passed"
+  ],
+  "eligibility_at_return_verified": false,
+  "embeddings_recomputed_by_this_work": false,
+  "explicit_host_binding_implemented": true,
+  "final_unresolved_test_failures": 0,
+  "harbor_for_adapter_checks": "0.23.0",
+  "huggingface_upload_performed": false,
+  "immutable_datasets_source_snapshot": true,
+  "isolated_test_seal_and_orchestration_storage": true,
+  "key_semantic_preimages_and_proof_profiles": "explicitly host admitted; logical IDs and returned hashes do not authenticate custody",
+  "live_benchmark_reward": null,
+  "live_proof_kernel_calls": 0,
+  "live_provider_calls": 0,
+  "logs": {
+    "tests-archive-harbor.log": {
+      "bytes": 1632,
+      "sha256": "72b7fd556ce7a3467880695484ede4cebde002b8e15b28f568dc2eae3599a458"
+    },
+    "tests-driver.log": {
+      "bytes": 1781,
+      "sha256": "e44d1ce2dfcc21f039a803f9fff3bb92656ef398468501d89d608d81c769977f"
+    },
+    "tests-owner-continuity.log": {
+      "bytes": 2702,
+      "sha256": "4b3ddb9cd6159cb7c261cf755bb9c82513349fcfae3319a151f39f177ce2210f"
+    },
+    "tests-owner-initial.log": {
+      "bytes": 3069,
+      "sha256": "c20cd00fcf8260926a2a51567217fb5be3d311e4c95fef38b0f28f8b2bd10bd4"
+    },
+    "tests-owner-selection.log": {
+      "bytes": 1469,
+      "sha256": "2ddc59dbb4ff9db0985041650e6a3edf4daee89acb38df0f4943424790f40e96"
+    },
+    "tests-regression-initial.log": {
+      "bytes": 5432,
+      "sha256": "0f9157cad2c99565c606babcbd1561f87a3f81899df7e541a2360bd1766d6d9b"
+    }
+  },
+  "model_callable_lookup_qualified": false,
+  "native_gate_bookkeeping_may_write_existing_owner": true,
+  "new_production_database_owner": false,
+  "new_training_runs": 0,
+  "normal_pytest_ast_sealing_enabled": true,
+  "parallel_dataset_changes_scope": "LegalIR scope/native views, their tests, documentation and retained evidence",
+  "parent_before": "0a9329b4498acd8c1f5f7e163e87eb6809f25678",
+  "preserved_datasets_revision": "4b9e96753eb3e5f4951cc3f7c39b09b778d3d6b8",
+  "production_complete_native_key_producer_available": false,
+  "production_formal_owner_calls": 0,
+  "pytest": "9.1.1",
+  "python_bytecode_writes_disabled_during_tests": true,
+  "qualification_attempts": [
+    {
+      "failed": 0,
+      "log": "tests-owner-initial.log",
+      "passed": 21,
+      "scope": "authored native-owner/source-scope/receipt/revocation/privacy/custody controls",
+      "source_note": "initial host implementation; later strong-reference owner continuity patch qualified below"
+    },
+    {
+      "failed": 0,
+      "log": "tests-owner-selection.log",
+      "overlapping_tests": 2,
+      "passed": 2,
+      "scope": "strengthened exact typed-owner disabled selection and foreign-type refusal"
+    },
+    {
+      "failed": 0,
+      "log": "tests-owner-continuity.log",
+      "new_tests": 1,
+      "overlapping_tests": 3,
+      "passed": 4,
+      "scope": "final strong-reference continuity, substituted native cache object, same escaped nested dict, operation totals and hit/miss/empty"
+    },
+    {
+      "failed": 0,
+      "log": "tests-driver.log",
+      "passed": 40,
+      "scope": "host forwarding, unchanged worker argv/stdin and publication after helper exit"
+    },
+    {
+      "failed": 1,
+      "failure": "ModuleNotFoundError: harbor in first adapter preparation check",
+      "failure_kind": "environment_dependency",
+      "log": "tests-regression-initial.log",
+      "passed": 103,
+      "resolution_log": "tests-archive-harbor.log",
+      "scope": "15 unbound Terminal, 38 existing Terminal and 50 archive controls passed"
+    },
+    {
+      "failed": 0,
+      "log": "tests-archive-harbor.log",
+      "passed": 6,
+      "scope": "all six remaining adapter preparation/driver/collection/CLI controls with installed Harbor site packages; resolves initial dependency failure"
+    }
+  ],
+  "real_theorem_established_by_fixture_tests": false,
+  "remaining": [
+    "reviewed production full-key/proof-profile custody producer and restart-safe native owner admission",
+    "actual accepted coverage and exact repeated-status census",
+    "dependency-complete replacement and complete input/lookup cost measurement",
+    "bounded model-facing source/receipt expansion",
+    "new qualified archive and matched live trial before a token-savings claim"
+  ],
+  "schema": "supervisor-terminal-formal-owner-publication@1",
+  "security_codebase_intent_sources_unchanged_in_parallel_dataset_update": true,
+  "signed_terminal_scope_independently_reconstructed": true,
+  "source_review": "independent native owner producer audit, Terminal producer audit, and host source/owner custody review; no unresolved blocking findings",
+  "source_sha256": {
+    "benchmarks/agent_supervisor/container_coding/terminal_container_supervisor.py": "5252ce6300e55f8ecd88a223960911092d17d23700ff652054d3710d3c5b4a79",
+    "benchmarks/agent_supervisor/container_coding/terminal_live_metadata_census.py": "f5b58230a880fc6542f6ceab780edf11a2fd83e8c7be1c03c0f6d94f1573bbaf",
+    "benchmarks/agent_supervisor/container_coding/test_terminal_formal_owner_census.py": "cc77ff68cae92feaca4b712c769a052d776db7650111eb229669545365b1ec6c",
+    "benchmarks/agent_supervisor/container_coding/test_terminal_live_census_driver.py": "13d0826dd8b95d63af8fcb45d4c9e960c3362946a4174d26ad870c7c1bcf15b1",
+    "docs/agent_supervisor/terminal_formal_status_census.md": "f336d21d4533729b193f119eed6f3d24807231bbc2e09b6fa9e36d2a2fe5c545",
+    "docs/agent_supervisor/terminal_token_metadata_plan.md": "149b0076c1dd36ea7667049f49719d676e0c922541279ad60d5c191f1d1668e4"
+  },
+  "storage_read_only_lane_claimed": false,
+  "supervisor_before": "2773d8264e459a0cf0ee198505c930e3225c3d68",
+  "supervisor_revision": "25c47a6ed4c521269c11cfbc6d42fa5b31a89620",
+  "system_python": "3.12.3",
+  "temporary_native_proof_receipts_are_authored": true,
+  "unique_tests_passed": 171,
+  "working_tree_policy": "owned integration checkouts; preserve dirty canonical trees, other agents work, frozen models and embeddings"
+}
