@@ -1,0 +1,100 @@
+{
+  "actual_repeated_formal_status_population": null,
+  "actual_terminal_accepted_receipts": null,
+  "atomic_owner_snapshot_qualified": false,
+  "checkpoint_changed_by_this_work": false,
+  "ci": {
+    "job_id": 114559797253,
+    "local_workflow_equivalent_checks_passed": true,
+    "reason": "The job was not started because your account is locked due to a billing issue.",
+    "reported_conclusion": "failure",
+    "run_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38169789141",
+    "status": "not_started",
+    "steps": [],
+    "workflow": "Documentation Gates"
+  },
+  "complete_run_token_savings_claimed": false,
+  "datasets_revision": "7fc3f57a94108030be3cceca7368920754754a94",
+  "date": "2026-10-11",
+  "default_terminal_report_schema": "terminal-live-metadata-census-context@1",
+  "docs_checks": [
+    "primary supervisor vocabulary gate passed",
+    "46 maintained documentation files passed relative-link and anchor checks",
+    "changed formal-status guide and token plan links passed",
+    "packaging version pins and navigation markers passed",
+    "git diff --check passed"
+  ],
+  "eligibility_at_return_verified": false,
+  "embeddings_recomputed_by_this_work": false,
+  "feature_commit": "65e10c9c4806fa7cb08e19f8f9ad9da43e57161b",
+  "helper_and_native_proof_owner_source_unchanged_by_parallel_merge": true,
+  "huggingface_upload_performed": false,
+  "immutable_datasets_source_snapshot": true,
+  "isolated_test_seal_and_orchestration_storage": true,
+  "live_benchmark_reward": null,
+  "live_proof_kernel_calls": 0,
+  "live_provider_calls": 0,
+  "logs": {
+    "tests-final.log": {
+      "bytes": 3279,
+      "sha256": "e40cc436a7b4ffe6d4a6fab03e03ac957a485eaf5fe0dc6196b1ae4785cd6d4d"
+    },
+    "tests-merged.log": {
+      "bytes": 2366,
+      "sha256": "e530f9b0bb8dc05362f27ee5cad7fb085b9669c3e389bb7f06608b7a03ff1c36"
+    }
+  },
+  "model_callable_lookup_qualified": false,
+  "native_gate_bookkeeping_may_write_existing_owner": true,
+  "native_owner_factory_qualified": false,
+  "new_production_database_owner": false,
+  "new_training_runs": 0,
+  "normal_pytest_ast_sealing_enabled": true,
+  "opt_in_terminal_report_schema": "terminal-live-metadata-census-context@2",
+  "parallel_supervisor_before": "b90b3755b51b1ff1b1a461faa96c671344be8762",
+  "parent_before": "8e8cdfea8d1c9a0969d06e6967d2796017c471bf",
+  "production_formal_owner_calls": 0,
+  "programmatic_lane_scope": "explicit admitted native Doctor key set; sequential per-key lookup/render observations; caller-admitted binding and current probe",
+  "python_bytecode_writes_disabled": true,
+  "qualification_attempts": [
+    {
+      "failed": 0,
+      "log": "tests-final.log",
+      "passed": 146,
+      "scope": "37 native-owner, 15 new Terminal, 38 existing Terminal and 56 archive controls",
+      "source_revision": "65e10c9c4806fa7cb08e19f8f9ad9da43e57161b"
+    },
+    {
+      "failed": 0,
+      "log": "tests-merged.log",
+      "overlaps_initial_qualification": true,
+      "passed": 58,
+      "scope": "archive controls and both affected default/opt-in context seams after preserving parallel successor/audit changes",
+      "source_revision": "2773d8264e459a0cf0ee198505c930e3225c3d68"
+    }
+  ],
+  "remaining": [
+    "reviewed current-owner/full-key producer in actual Terminal host",
+    "real accepted receipt and repeated-status coverage census",
+    "current dependency-complete formal-status replacement and complete input/lookup cost measurement",
+    "bounded model-facing capsule/source expansion",
+    "new qualified archive and matched live trial before savings claim"
+  ],
+  "schema": "supervisor-formal-status-census-publication@1",
+  "source_sha256": {
+    ".gitignore": "ee360c126fece13c7f33d95c403ef89114b06e7fc394badd6eb6788816f01343",
+    "benchmarks/agent_supervisor/container_coding/terminal_live_metadata_census.py": "7a916b3e727eb23d96e836c5c2b63449bbd5a5334e82b8c5832809ccf3963e56",
+    "benchmarks/agent_supervisor/container_coding/terminal_semantic_metadata_policy.py": "1447bdf27fc00abc24bd97ff4f8d4a840cd18f44b02719c19d08f1bc4c1bb1a8",
+    "benchmarks/agent_supervisor/container_coding/test_terminal_formal_status_census.py": "213b61cc56a81a3cb378f46575e0eefbb8893fa074d9a357be652ce7177507ad",
+    "docs/agent_supervisor/terminal_formal_status_census.md": "8684be58c46e5e5a3bf8cd5c4141cf6e17ddb7b906d6b7e6a527e258c3fa49b4",
+    "docs/agent_supervisor/terminal_token_metadata_plan.md": "5b88b1d37221219540e444db73b4e4fc372c57bcf9e117d58ec1a2b1a79bdfa1",
+    "ipfs_accelerate_py/agent_supervisor/runtime/formal_status_census.py": "a1f0ae404b72da0af64c2ce24571393705231f5ba354af20e5a582fac6b9a49a",
+    "test/api/test_formal_status_census.py": "bcdb664b0fda1f1fefc3a5bd987fac8b8ca7ba724be62f193aa982f476b8c979"
+  },
+  "storage_read_only_lane_claimed": false,
+  "supervisor_revision": "2773d8264e459a0cf0ee198505c930e3225c3d68",
+  "temporary_native_proof_receipts_are_authored": true,
+  "test_skips": 0,
+  "unique_tests_passed": 146,
+  "working_tree_policy": "isolated integration; preserve dirty canonical trees, other agents\u2019 new LegalIR work and retained model assets"
+}
