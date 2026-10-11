@@ -21,6 +21,15 @@
   "local_documentation_checks_passed": true,
   "remote_ci_claimed_green": false,
   "supervisor_push_observation": "Push to origin/main succeeded; GitHub reported the required documentation-gates check as expected and a bypassed branch rule. Local documentation gates passed; this is not a remote CI pass.",
+  "remote_ci_observation": {
+    "documentation_check_run": 114557974172,
+    "serving_check_run": 114557974677,
+    "documentation_workflow_run": 38169180927,
+    "serving_workflow_run": 38169181040,
+    "conclusion": "failure",
+    "job_started": false,
+    "annotation": "The job was not started because your account is locked due to a billing issue."
+  },
   "cached_source384_inference_executed": true,
   "source384_checkpoint_sha256": "2ca38dfcc05536315fc3e2c0647b710b930ef4066b474061a7b4e5bfb9a258c5",
   "experimental_numpy_checkpoint_enabled": false,
