@@ -1,0 +1,33 @@
+"""Copy exact source evidence and later integration receipts into the root worktree."""
+from pathlib import Path
+from hashlib import sha256
+import json,os,shutil
+F=Path(__file__).resolve().parent;D=F/'datasets';W=F/'workspace';E=D/'docs/autoencoders/evidence/arbitrary-native-cache-20261011-01';A=W/'artifacts/legal-arbitrary-native-cache-20261011'
+REPORT='implementation_plan/docs/72-arbitrary-native-legal-input-cache-2026-10-11.md'
+SUPPLEMENTS=['publication-source-review.json','source-staged-review.json','source-contribution-binding.json','source-evidence-build.json','datasets-pr-merged.json','datasets-merged-preservation.json','datasets-hosted-ci.json','datasets-pr-body.md','incoming-main-integration.json']
+def load(p):return json.loads(Path(p).read_bytes())
+def pin(p):
+ b=Path(p).read_bytes();return {'bytes':len(b),'sha256':sha256(b).hexdigest()}
+def write(p,v):
+ with p.open('x') as f:json.dump(v,f,sort_keys=True,indent=2);f.write('\n');f.flush();os.fsync(f.fileno())
+source=load(F/'datasets-pr-merged.json');assert source['state']=='MERGED'
+assert not A.exists();assert not (W/REPORT).exists()
+man=load(E/'manifest.json')
+for rel,expected in man['files'].items():assert pin(E/rel)=={k:expected[k] for k in ('bytes','sha256')}
+shutil.copytree(E,A/'evidence')
+origins={}
+for name in SUPPLEMENTS:
+ p=F/name;assert p.is_file() and not p.is_symlink() and p.stat().st_size<=2*1024**2
+ target=A/'integration-receipts'/name;target.parent.mkdir(parents=True,exist_ok=True)
+ with target.open('xb') as f:f.write(p.read_bytes());f.flush();os.fsync(f.fileno())
+ assert pin(target)==pin(p);origins[str(target.relative_to(A))]={'origin':str(p),**pin(p)}
+helper=A/'integration-receipts/prepare_workspace_evidence.py.txt';helper.write_bytes(Path(__file__).read_bytes());origins[str(helper.relative_to(A))]={'origin':str(Path(__file__).resolve()),**pin(helper)}
+text=(D/'docs/autoencoders/arbitrary_native_legal_input_cache_20261011.md').read_text()
+text=text.replace('](evidence/arbitrary-native-cache-20261011-01/','](../../artifacts/legal-arbitrary-native-cache-20261011/evidence/')
+prefix=f'''# Native source cache integrated with the shared legal effort\n\n[Source contribution]({source['url']}) merges the opt-in native-source cache,\npreparation CLI and frozen normative decoder runtime. The workspace advances\nonly the datasets gitlink to actual source merge{source['mergeCommit']['oid']}.\nThe other eight gitlinks and incoming numerical-source progress are preserved.\n\nThe bounded archive preserves exact source views/native records,16 raw outputs,\n233 current controls and scoped independent reviews. No weights are copied to\nGit. The admitted review's exact bytes remain missing; historical custody is\nexplicitly unqualified. Scientific/resource checks pass within their stated\nscope, with no legal/proof/training accuracy qualification.\n\n'''
+(W/REPORT).parent.mkdir(parents=True,exist_ok=True)
+with (W/REPORT).open('x') as f:f.write(prefix+text);f.flush();os.fsync(f.fileno())
+files={str(p.relative_to(A)):pin(p) for p in sorted(A.rglob('*')) if p.is_file()}
+write(A/'integration-manifest.json',{'schema':'arbitrary-native-cache-workspace-integration/v1','source_PR':source['url'],'source_merge':source['mergeCommit']['oid'],'source_evidence_manifest':pin(E/'manifest.json'),'source_evidence_files':len(man['files'])+1,'files':files,'file_count':len(files),'supplement_origins':origins,'raw_weights_copied':0,'parent_Parquet_DB_copied':False,'full_foreign_bodies_copied':False,'historical_review_byte_custody_complete':False,'semantic_qualification':False,'actual_optimizer_updates':0,'relative_evidence_links_rebound':True})
+write(F/'workspace-evidence-build.json',{'schema':'arbitrary-native-workspace-evidence-build/v1','archive':str(A),'file_count':len(files)+1,'raw_weights_copied':0,'report':REPORT,'relative_evidence_links_rebound':True,'manifest':pin(A/'integration-manifest.json')})
+print(json.dumps({'files':len(files)+1,'report':REPORT,'raw_weights':0}))

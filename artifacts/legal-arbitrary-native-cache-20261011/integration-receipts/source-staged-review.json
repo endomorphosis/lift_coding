@@ -1,0 +1,1000 @@
+{
+  "base": "db432c5a93a207436f9a4279d888fddee931e390",
+  "custody_qualification": {
+    "full_evidence_custody_clean": false,
+    "gap_declared_in_report_progress_manifest_actual_review": true,
+    "historical_admitted_review_exact_bytes_available": false,
+    "historical_custody_qualification_passed": false,
+    "scientific_resource_checks_passed": true,
+    "separate_substantive_reconstruction_not_byte_identical": true
+  },
+  "evidence": {
+    "all99_index_worktree_origin_bytes_equal": true,
+    "closed_archive_path_set": true,
+    "copied_manifest_records": 99,
+    "copied_original_bytes": 2308360,
+    "current_copy_payload_max2MiB": true,
+    "evidence_staged_paths_including_manifest": 100,
+    "full_foreign_ledger_bodies_copied": false,
+    "independent_actual_result_review_pin": {
+      "bytes": 84588,
+      "sha256": "5634d4d0fc1f307c312b041e0e243ced9eada53b43cca282d8d40217c7bb1f4a"
+    },
+    "manifest_path": "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/manifest.json",
+    "manifest_pin": {
+      "bytes": 38009,
+      "sha256": "789319de306b69934efaa0d844e6c5e80ca3f87e08a8c6ba9731948ce41be3ba"
+    },
+    "new_code_test_paths": [
+      "ipfs_datasets_py/logic/formalization/autoencoder/arbitrary_native_legal_ir_runtime.py",
+      "ipfs_datasets_py/logic/formalization/autoencoder/arbitrary_native_source_cache.py",
+      "scripts/ops/legal_ir/prepare_arbitrary_native_legal_sources.py",
+      "tests/unit/logic/formalization/autoencoder/test_arbitrary_native_legal_ir_runtime.py",
+      "tests/unit/logic/formalization/autoencoder/test_arbitrary_native_source_cache.py",
+      "tests/unit/logic/test_prepare_arbitrary_native_legal_sources.py"
+    ],
+    "parent_Parquet_DB_copied": false,
+    "raw_weights_copied": 0,
+    "snapshot_full_bodies_metadata_pins_only": true
+  },
+  "executions": {
+    "Git_mutations": false,
+    "helpers": false,
+    "models": false,
+    "tests": false
+  },
+  "findings": [],
+  "index_after": {
+    "bytes": 4750159,
+    "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/worktrees/datasets8/index",
+    "sha256": "4b46421a073da9b2fcb50d1be2ef575dd5ac07484594758ac935a8bad3220892"
+  },
+  "index_before": {
+    "bytes": 4750159,
+    "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/worktrees/datasets8/index",
+    "sha256": "4b46421a073da9b2fcb50d1be2ef575dd5ac07484594758ac935a8bad3220892"
+  },
+  "index_unchanged_during_review": true,
+  "passed": true,
+  "preservation": {
+    "conflicts_absent": true,
+    "old_tracked_source_owners_unchanged": {
+      "ipfs_datasets_py/logic/formalization/autoencoder/action_factorized_clause_decoder_experiment.py": {
+        "base_blob_oid": "0b799eb139f499e7be724674e552bdc771105043",
+        "bytes": 19729,
+        "sha256": "81145f156594f28a0fc5ccec2d078a6188bb4af0a6fed826a69074116e1aa43e"
+      },
+      "ipfs_datasets_py/logic/formalization/autoencoder/clause_source_context.py": {
+        "base_blob_oid": "04e8237a468e2483e398a0eaf0d69fe582208720",
+        "bytes": 14249,
+        "sha256": "583422dbb63cdba96182090f5f76ef74698a69ab84fd42dc9e53bc4e09cbf5f6"
+      },
+      "ipfs_datasets_py/logic/formalization/autoencoder/clause_source_decoder_experiment.py": {
+        "base_blob_oid": "d5b11b856ce6763797a98d5d6cf1f635e2e02e91",
+        "bytes": 21833,
+        "sha256": "004d432d16a2819eb46a95743d58c26443cc32737311ea8553c5019127f97603"
+      },
+      "ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_numeric.py": {
+        "base_blob_oid": "50e331a8a76abef452967c9a5c5021df77b90879",
+        "bytes": 15840,
+        "sha256": "097719a4ba5d70f21572c741166d4e09962cc5c1e108964a88ee24b5c8879f30"
+      },
+      "ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py": {
+        "base_blob_oid": "fa542082edd89b213843c9d3f8d3c2312ef1d04a",
+        "bytes": 37249,
+        "sha256": "57032fb7b824cfc9a39a442ccffa0bd5fb64873baa48a9ab43a94e80f901b430"
+      },
+      "ipfs_datasets_py/logic/formalization/autoencoder/decoder_cardinality_experiment.py": {
+        "base_blob_oid": "e6e5aa2d82d938317ffc1805f019316c6d87324a",
+        "bytes": 14873,
+        "sha256": "44f1d91edb8f8cc8bafdc517ab450a003fece945d2e9a25bba933da2e9e12ac1"
+      },
+      "ipfs_datasets_py/logic/formalization/autoencoder/decoder_distillation_experiment.py": {
+        "base_blob_oid": "b34e432149831f6db9050cd70f5a27a1823842fa",
+        "bytes": 37989,
+        "sha256": "76252ad397492762d4fc41915afd1051a93a11b74994655326fe56fa722e3b61"
+      },
+      "ipfs_datasets_py/logic/formalization/autoencoder/decoder_distillation_experiment_v2.py": {
+        "base_blob_oid": "f467a99696f0f367f32166ba3045eac801813c26",
+        "bytes": 13794,
+        "sha256": "0352c392a518c9ea6ff215c32e5ddd6345d776e2bb32f22fd137b5e34d93c6c6"
+      },
+      "ipfs_datasets_py/logic/formalization/autoencoder/dimension_native_decoder_experiment.py": {
+        "base_blob_oid": "dfb6c1886cfc365906ac7bfbb7b7a13659361d1c",
+        "bytes": 11090,
+        "sha256": "477e09a731880cf4d93f322f81c3cd084f6d9be875eac5c3b912255cb0876874"
+      },
+      "ipfs_datasets_py/logic/formalization/autoencoder/dimension_source_inputs.py": {
+        "base_blob_oid": "f1c9efbae82ee2d639ec84cc5ba3578c00c9238a",
+        "bytes": 28444,
+        "sha256": "c7f396d3323c40b5f4bab1aa42557e693b65cced58435e63c735f875c6d12206"
+      },
+      "ipfs_datasets_py/logic/formalization/autoencoder/gte_multilingual_profile.py": {
+        "base_blob_oid": "6a326c6188bfa05383e143c2339603758576ca69",
+        "bytes": 15959,
+        "sha256": "d6d6069c98c7f15bd4c6f8a43bd9ffb72032e04a452419a3ff5d9bd95bb06e8e"
+      },
+      "ipfs_datasets_py/logic/formalization/autoencoder/ir_model_manager_import.py": {
+        "base_blob_oid": "1ab6ba6a523137ca25ffbcc32e44a630e058569e",
+        "bytes": 29300,
+        "sha256": "5d50f879d6e1e80fc68a29060680fcac9e234f62a3732f7c697f31360ca9506b"
+      },
+      "ipfs_datasets_py/logic/formalization/autoencoder/legal_native_conditioning.py": {
+        "base_blob_oid": "c74aed1afce161e349f512f36b6bcfd8db402d48",
+        "bytes": 24439,
+        "sha256": "48709fa4a521046ad753c87afe2732d17968e33d51ab2f43e4c4fefe2182059f"
+      },
+      "ipfs_datasets_py/logic/formalization/autoencoder/normative_legal_ir_runtime.py": {
+        "base_blob_oid": "db3b0bfa87a1a21c8a07a2e28e437575c3e03a5b",
+        "bytes": 9228,
+        "sha256": "98058fa6479a7be9a4ab599aeffaedef2be764314056d7504a35ca5bafff87d4"
+      },
+      "ipfs_datasets_py/logic/formalization/autoencoder/ordered_clause_recurrent_decoder_experiment.py": {
+        "base_blob_oid": "62b291df1c338bd3bc6937f59e84de38517e84a9",
+        "bytes": 26392,
+        "sha256": "56392a6f37f528350f18b68b56a016aad170530e93e95e660b6898f1c4cef3da"
+      },
+      "ipfs_datasets_py/logic/formalization/autoencoder/projected_source_decoder_experiment.py": {
+        "base_blob_oid": "f5ff6cca91eb81c839ae1f135bbbc7127d55ac38",
+        "bytes": 25942,
+        "sha256": "ce4354a96324285bff08277c3fac43e9885a75e84a50337414f7dea8501af3ee"
+      },
+      "ipfs_datasets_py/logic/formalization/autoencoder/shared_slot_source_decoder_experiment.py": {
+        "base_blob_oid": "c57883345648b5d60e453cf3ca0b3c6601167d63",
+        "bytes": 20524,
+        "sha256": "4a2fec44a1d8756c212a2e64cad774919aed1f8c12b3741c6608e2dd35c7f0d1"
+      },
+      "ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768.py": {
+        "base_blob_oid": "66fac7cce3155d0eaf515e63ff3ff46aba11ff5f",
+        "bytes": 13375,
+        "sha256": "cd4b23b87fefe3f80f234a5c85d9e4823139d5040a5507813b88385ee601b4ea"
+      },
+      "ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768_complete.py": {
+        "base_blob_oid": "c67a8c7857ab3123038e849ce7a6ae7018037718",
+        "bytes": 9556,
+        "sha256": "6f781849dc87eba1b7f0929d292bb10f5724bb1ca5749989feb988cde243c609"
+      },
+      "ipfs_datasets_py/logic/formalization/autoencoder/source_value_decoder_experiment.py": {
+        "base_blob_oid": "807db7726e21c6e687e1318324a60f0b22eb650a",
+        "bytes": 14958,
+        "sha256": "df72b5331c1dc5b98d11974748bb05ba31504db7e7f69854327d080118eeb61e"
+      },
+      "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_corpus_manifest.py": {
+        "base_blob_oid": "d4fda5e81f5393b3cd99266e03ea9a75612bb35f",
+        "bytes": 27947,
+        "sha256": "b067f05b3cfc28cb213a83519530f7148b2a5fa7d5b25809e87e1f7c286f9a5d"
+      },
+      "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_production.py": {
+        "base_blob_oid": "3a56d4c2c31e60779ae4a41d6586934609cfc5f3",
+        "bytes": 26219,
+        "sha256": "735ca0597186e094d736ef58435c82956c4ab805a68fc7a6adbfc0ee21ee889f"
+      },
+      "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_runtime.py": {
+        "base_blob_oid": "85eff000585407ffa7b689c574713df824c596a1",
+        "bytes": 19364,
+        "sha256": "ce80ed6294009e04580051e6eb06a817d74a8a56f04814ad0a698e3d27dd0d41"
+      },
+      "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py": {
+        "base_blob_oid": "b00afcd281ba189b86e07de75854bb83f1a75e99",
+        "bytes": 100140,
+        "sha256": "bde3bd327df59f2e7557eac8aa2e0989ceb1128bc39918bf8cf46011e7bd9415"
+      }
+    },
+    "only_one_append_block": true,
+    "progress_append_pin": {
+      "bytes": 1015,
+      "sha256": "a211579c72176f1071ef358399e5674e8bdcba84c7313bc5e3065d033902dc99"
+    },
+    "progress_original_prefix_exact": true,
+    "progress_prefix_pin": {
+      "bytes": 25492,
+      "sha256": "0b113ca4983523d8c376fc809b7ce0b79a8b68565a6efc4e33f1f2dbc52ffc56"
+    },
+    "unstaged_tracked_diff_empty": true,
+    "whitespace_clean": true
+  },
+  "proof_authority": false,
+  "qualified": false,
+  "review_input_pins": {
+    "protocol-supplement-attempt02.json": {
+      "bytes": 3567,
+      "path": "/home/barberb/lift_coding/artifacts/legal-native-cache-20261011-01/protocol-supplement-attempt02.json",
+      "sha256": "ce5097c8cf85856b11cb2ed3c97e167164f10224a36893c54db6491774c1d689"
+    },
+    "publication-source-review.json": {
+      "bytes": 57558,
+      "path": "/home/barberb/lift_coding/artifacts/legal-native-cache-20261011-01/publication-source-review.json",
+      "sha256": "36452741fc80091ab2624836506397b127dc07f0d6dbd270d27ffc120dde66c8"
+    },
+    "source-evidence-build.json": {
+      "bytes": 404,
+      "path": "/home/barberb/lift_coding/artifacts/legal-native-cache-20261011-01/source-evidence-build.json",
+      "sha256": "a683485c903ad12b0748a049ddae3e2678a52ac2786db31ca1f663f899cafeaa"
+    }
+  },
+  "schema": "arbitrary-native-source-staged-independent-review/v1",
+  "scientific_claims": {
+    "Lake_executed": false,
+    "actual_optimizer_updates": 0,
+    "current_unique_passed_tests": 233,
+    "family_bridge_admitted": false,
+    "frozen_candidates": 16,
+    "full_section_context_not_encoded": true,
+    "historical8_linguistic_features_explicit": true,
+    "native384_inputs": 8,
+    "native768_execution_untested": true,
+    "no_field_specific_codec_vocabulary_enforcement_claimed": true,
+    "no_semantic_accuracy_or_fidelity_gain_claimed": true,
+    "paragraph_clause_aliases": 16,
+    "per_lane_EOS_and_canonical_structure": 8,
+    "proof_authority": false,
+    "qualified": false,
+    "source_spans_single_literal_clause": true,
+    "two_existing_Hub_weights_metadata_readback_only": true
+  },
+  "scope": "Read-only exact Git index/blob/worktree binding, closed path whitelist, archive manifest/original byte comparison, old tracked owner preservation, append-only integration progress and actual generated report claims. Own CLI and pure diagnostic implementations excluded from self-qualification; independent protocol/runtime/result reviews supply their evidence.",
+  "source_binding_pin": {
+    "bytes": 25818,
+    "path": "/home/barberb/lift_coding/artifacts/legal-native-cache-20261011-01/source-contribution-binding.json",
+    "sha256": "8ee3e78ef579d4ec333b10e7083c5b8bcd2aa1b7d0ae9e53e2b736a44f00037a"
+  },
+  "staged_path_count": 108,
+  "staged_paths": {
+    "docs/autoencoders/arbitrary_native_legal_input_cache_20261011.md": {
+      "blob_oid": "fbbbb56774e58f2fc48d4f4b6ffd7bfabfc42f21",
+      "bytes": 11620,
+      "mode": "100644",
+      "sha256": "ca9993b486f026234f9824985e77daadbbcf6279de968b1b61d43b4a2a92d7af",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-01/child-exit.json": {
+      "blob_oid": "cbd992c685c2ceb10b692e95aefa142322a607cf",
+      "bytes": 72,
+      "mode": "100644",
+      "sha256": "efe6e5323a6f07ccb773801a858afa7f20cd6eff3e30a2809490523838c0e9b9",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-01/child-identity.json": {
+      "blob_oid": "66cc2096fbfad063e26f6803de5266b4a5244cd6",
+      "bytes": 43,
+      "mode": "100644",
+      "sha256": "c7217d38ab9bb61173bd97891f36d945e5eedfa6ba45e0b4abebbe26f9ecc327",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-01/child.log": {
+      "blob_oid": "408641fbb2d7f328f88fe31343552386810ea7f4",
+      "bytes": 6196,
+      "mode": "100644",
+      "sha256": "6784e317fcf892fe0fa16d3b408b4a98b3e24560b3bbab1956a6bcf23372832f",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-01/command.json": {
+      "blob_oid": "66156da9b8bda0e05e7d9a4363f64def066e7ba2",
+      "bytes": 1032,
+      "mode": "100644",
+      "sha256": "3a279e0f9d4e31ddc196a4a9d9407bfbc3d28cb05f4c3da6a6faecc3ced55bf8",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-01/failure-primary.json": {
+      "blob_oid": "f280df244a741f87afffed7d53cb96438f3bd044",
+      "bytes": 4839,
+      "mode": "100644",
+      "sha256": "3e76dcc336142abbecaff4e839b3bd0ae95269d8ce3d885b33c0023e29c2f50a",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-01/group-rss-observations.jsonl": {
+      "blob_oid": "58ceca8cb11294bba754c603630d8f3d03bf67b7",
+      "bytes": 17460,
+      "mode": "100644",
+      "sha256": "5b912cac561417ce1990dc0d863c78e932f8173ca85f702ea814927f35187521",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-01/group-rss-summary.json": {
+      "blob_oid": "833df9c20da9d35c54468cea6886d6adfe58200d",
+      "bytes": 1734,
+      "mode": "100644",
+      "sha256": "e5303d341b492f18d83d544b945c68dbabeec27b12369f8a56d9ca0963dafb49",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-01/guardian-exit.json": {
+      "blob_oid": "21c5b023f80359d875f4e27a174e609e2c1f4826",
+      "bytes": 4360,
+      "mode": "100644",
+      "sha256": "3c00422cd549276dd1517979f2db99a3fbd54e36fb3d1c03da3f9d7100ec593d",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-01/lease-binding.json": {
+      "blob_oid": "06d30fe91782a122c4e0819fe686850fc00ed725",
+      "bytes": 693,
+      "mode": "100644",
+      "sha256": "de0883b2cc04df20e94aa7a74430d28b089b64b8e072a58674c198447243947c",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-01/lease-observations.jsonl": {
+      "blob_oid": "2d8c0acf167bba747cf23d9d8367b90549249a8a",
+      "bytes": 34990,
+      "mode": "100644",
+      "sha256": "7cf6b5a67e85ad6dc243c1b1527a24dc1f0e62980c871df1aeaa8b9ad64bcee9",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-01/pre-admission.json": {
+      "blob_oid": "ded7836f29f48927d24f712d4fc8d76b71402130",
+      "bytes": 7950,
+      "mode": "100644",
+      "sha256": "da616ceed286aa9b7ff12d0d6217f3f50dfeec9fc37c862d6add0456592be060",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-01/resources-final-failure.json": {
+      "blob_oid": "228f23e3863f1c4f8fcb4a9069a313a1e8033e8f",
+      "bytes": 4595,
+      "mode": "100644",
+      "sha256": "0ad53e97a5ebdeb3c89b7db1367e70a6d7e3d15eadcab7d91e11f95c6e7f5a06",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-01/resources-start.json": {
+      "blob_oid": "52f423b9e4e8524aacd0b150d2280f790fc7d17b",
+      "bytes": 2536,
+      "mode": "100644",
+      "sha256": "793afc3e414e58add5dbbe2ba967ae56f4299ddc00ed853b35a0d43ebb2885e5",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-01/results/source-production/failure-summary.json": {
+      "blob_oid": "594213f63e28b0faf068575754d389181c8f4775",
+      "bytes": 755,
+      "mode": "100644",
+      "sha256": "f4ba6297018602d49c118ba17cecd1a46516963c968cf9735210948f5f829a68",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-01/scheduler-adoption.json": {
+      "blob_oid": "9166f6e2d0d168df5fa33ffe23c03cf2aa1586ff",
+      "bytes": 4645,
+      "mode": "100644",
+      "sha256": "4879c724255fd2aa9bdb216ec70523a1fb5295fcbd5e97414bee4271ae50ba15",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-02/child-exit.json": {
+      "blob_oid": "fe06144b1e1e24e617c3ee545d9dae2a0f5b7678",
+      "bytes": 105,
+      "mode": "100644",
+      "sha256": "cebecdfb128a5f13d293b224883a2ff50330762cc8f8d0692acdcc2fa19ecfd3",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-02/child-identity.json": {
+      "blob_oid": "c1204276ec5157585ebc6d74a551c14144c05e63",
+      "bytes": 43,
+      "mode": "100644",
+      "sha256": "00cfeff523e438dc0edb51985dbe70cb9a02433b9068345395fa1272d10a62d5",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-02/child.log": {
+      "blob_oid": "cd11dded54789341f2c0acc7467f4eb607757120",
+      "bytes": 2203,
+      "mode": "100644",
+      "sha256": "d0e1547d0f92918c4ac1c451a5b61c9e2385cc3370f5966b40479a3380f5b9e7",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-02/command.json": {
+      "blob_oid": "559ad586009fb4d7ffdc1a6987c104f21d8c288e",
+      "bytes": 1032,
+      "mode": "100644",
+      "sha256": "9b0f0ebbf217346d7af3b17ca00bf710e757d73ca722a3d8460ffb357e09d28f",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-02/group-rss-observations.jsonl": {
+      "blob_oid": "58fbd9d4f0eda842efd56ef3effb05d12b8e5ac4",
+      "bytes": 12982,
+      "mode": "100644",
+      "sha256": "498dffa80a7bc14545973a670c7f5195e3f2d664ae76c574b23ae6310d322fb5",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-02/group-rss-summary.json": {
+      "blob_oid": "7edda4849a723103e8e935b8e4c2bfba4042a818",
+      "bytes": 1735,
+      "mode": "100644",
+      "sha256": "a4a6f1ae3aebfc4c985953520c4bd448c829619f222128d79cf08c4033a89b5b",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-02/guardian-exit.json": {
+      "blob_oid": "351bf18e1817d84f2fe0ff5ffb76847b809bf9ed",
+      "bytes": 518,
+      "mode": "100644",
+      "sha256": "b94c3a83418d6ea7e00496b6e02c9b60e793b6d34a808c4ce07f596828908e2d",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-02/lease-binding.json": {
+      "blob_oid": "e9cb697353a413d1e397d4b9c10b55d24617c79d",
+      "bytes": 692,
+      "mode": "100644",
+      "sha256": "654e7c66cb467deec78921dfb84fcb363f2eee904211b99066f010c480206ecd",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-02/lease-observations.jsonl": {
+      "blob_oid": "12a2313cb146dd684085408acdd6df5ac52b6bd3",
+      "bytes": 27628,
+      "mode": "100644",
+      "sha256": "1ec543cad03bb4dc2485e0ed9fe7abe0fab9f0c37ea49dcb65dc32fe82e9f8ea",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-02/owned-group-final.json": {
+      "blob_oid": "e39f72caf313ee1b8cacef6f07b9a2a66c8255ec",
+      "bytes": 189,
+      "mode": "100644",
+      "sha256": "c3d47e2a0139a60e88dac8fdb8af84a4df726f3116d14a24827761c8dbb90c3f",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-02/pre-admission.json": {
+      "blob_oid": "5a043a0bd5a04164bb62527f5ff62f9b000612c3",
+      "bytes": 7950,
+      "mode": "100644",
+      "sha256": "a2015679ea53d9cff4c295a0af334fd1ebebd6c207a11b031475b21c23a4b9d5",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-02/resource-observations.json": {
+      "blob_oid": "578c19f56d8d3e4b3c1325d66b4e721858b08853",
+      "bytes": 872,
+      "mode": "100644",
+      "sha256": "cfc858c7822ebd85448dcbcb5aa2fc29641b1ccd30a09a7440b689ad4e1a2e35",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-02/resources-final.json": {
+      "blob_oid": "5a122feddd34eb08f12dd3bd099ff6a8ae894554",
+      "bytes": 6258,
+      "mode": "100644",
+      "sha256": "f71e85f6418c0dee0863bf61ab4ee6ca1311079649bc259b18379856a27c24b4",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-02/resources-start.json": {
+      "blob_oid": "ba31e5202152e9b10860703fb4a78849f028337e",
+      "bytes": 2536,
+      "mode": "100644",
+      "sha256": "6240659a873ae852d966edebd542ec985ed5a7d508d0162a604ed18dd147ca18",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-02/results/both-decoder-plans-before-generation.json": {
+      "blob_oid": "e9c4d4500beb8325819a3333e713d2fbef550243",
+      "bytes": 516656,
+      "mode": "100644",
+      "sha256": "2a49802f97189b0cc300cf24d0cf4264c032cf81ebc315f26779e620b08357fc",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-02/results/normative-wording-ce-candidates.json": {
+      "blob_oid": "ce78d0a94f9b8629310196fb4279521eb87a4367",
+      "bytes": 32794,
+      "mode": "100644",
+      "sha256": "44c1636c020ba7d64afe71c101877fc7dc9b10fc95678076e400677f0f519b0d",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-02/results/normative-wording-zero-candidates.json": {
+      "blob_oid": "1ace2ff0d2974315cded695d430382e9dbdd2070",
+      "bytes": 32801,
+      "mode": "100644",
+      "sha256": "d0dc2b5f078f1f9a6257fc883002a812203a183e154c8f1ccd90fb57bb1a3c51",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-02/results/source-production/native384-receipt-001.json": {
+      "blob_oid": "13e3b7ed0940ed55742bd447bbb339bb8bd5e33f",
+      "bytes": 38209,
+      "mode": "100644",
+      "sha256": "f35d2d17ffb2269bff0f3f7f69cc01e00c36867c4e81ab63255077cfc5f0b989",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-02/results/source-production/source-cache.json": {
+      "blob_oid": "7cb29f0cb90fe964320568ea9ee682cb7e981cd1",
+      "bytes": 330754,
+      "mode": "100644",
+      "sha256": "0502113e21c97cd49a26bb1a70bf571dbae35f4a23e4f0f899fd886c44bf9760",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-02/results/source-production/summary.json": {
+      "blob_oid": "7a4f13960bd648b819ec22c80bd31f9c82c18110",
+      "bytes": 17510,
+      "mode": "100644",
+      "sha256": "6465ea0d0320a647ed447c6fc373119bd97ddf487d7a192fa73c58ac5e76a4df",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-02/results/summary.json": {
+      "blob_oid": "1cff5de6fb7cd326efbac675057746fc036927a0",
+      "bytes": 25649,
+      "mode": "100644",
+      "sha256": "14e8c67beb96c883125264de0c9bf8526e6ee4f1dfa7e9b00cda539e1c33382d",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/attempts/arbitrary-native-cache-20261011-02/scheduler-adoption.json": {
+      "blob_oid": "0003541d4268267d495965b4e742e5c4f107678c",
+      "bytes": 4645,
+      "mode": "100644",
+      "sha256": "c0b9ec36022b944be3c07c783a39f4c240a8d82bd85b2785b85280c42e534e21",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/helpers/analyze_native_pilot-draft-01.py.txt": {
+      "blob_oid": "9fc07b7e3072f63d2c8018f1ad101eb050f0cf41",
+      "bytes": 22504,
+      "mode": "100644",
+      "sha256": "f34f6d33241e150bcc7273aa424428d6129183a80ac69261a92b6da411c56e44",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/helpers/analyze_native_pilot-draft-02.py.txt": {
+      "blob_oid": "a1f50d69715d732ecafad77773e468e2c5a38112",
+      "bytes": 23740,
+      "mode": "100644",
+      "sha256": "fd2fbf51c3efd15281729a5770d566cf9314c0364325d664379f2b437513980c",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/helpers/analyze_native_pilot.py.txt": {
+      "blob_oid": "f3e60b0fc5190a3d97681fb7cca5fa2883752613",
+      "bytes": 24600,
+      "mode": "100644",
+      "sha256": "7d3c4620298ca5a0abe21a8e67de1e5b017c471c8ee8b5565617b19566bbe18a",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/helpers/capture_resource_snapshot.py.txt": {
+      "blob_oid": "1ff34edc0424aa7b82d6584810c7704c6bace653",
+      "bytes": 1269,
+      "mode": "100644",
+      "sha256": "239aefad5b31b0e07868e2ff124ec0db03fd1b2538fa668e4cfa6bc77da5b099",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/helpers/capture_validation.py.txt": {
+      "blob_oid": "d22ca30c1d1c2151e98f4079c2d9029ed2f51481",
+      "bytes": 2390,
+      "mode": "100644",
+      "sha256": "72f853c4075fc324e9157d32ef01e1aeb28741a47e9fd9721f7092d2a2fd46d1",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/helpers/prepare_contribution.py.txt": {
+      "blob_oid": "d99ef62f17dad87cc3e57036e6403da6dfda748a",
+      "bytes": 20287,
+      "mode": "100644",
+      "sha256": "6d4c117d431524e537fcd884b24c90a5ef727c9d44123ebca2dfc75156385b7a",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/helpers/prepare_native_plan.py.txt": {
+      "blob_oid": "4fff1c41dad32108a284152b1229102823632e77",
+      "bytes": 3759,
+      "mode": "100644",
+      "sha256": "6c4e0c14efd86276ae789995fb4d255b2f41d0246d7a9b9a3884bc03a0d2a46c",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/helpers/run_native_cache_pilot-draft-01.py.txt": {
+      "blob_oid": "e0d4b83d862a51ad8c53b528fa58b3f34d1e2f7c",
+      "bytes": 8874,
+      "mode": "100644",
+      "sha256": "a31ba1f025df084c85697ca9d4c65e190bc7120be22adc55053400b66c910211",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/helpers/run_native_cache_pilot.py.txt": {
+      "blob_oid": "8f8b35df60140cc7801489f7ac58ea68ff57ef10",
+      "bytes": 9284,
+      "mode": "100644",
+      "sha256": "3a00cf6e9ce8120c62c0fe74310ac919f27bc267aa9030bc6dea50d15608824a",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/helpers/run_scope_guardian.py.txt": {
+      "blob_oid": "0e50d33d05c35a6d2c3f4bbf301b2cddc3802a8a",
+      "bytes": 38281,
+      "mode": "100644",
+      "sha256": "10c7c7350a7dbb564ab0fb1299c905020f874c212765afb86d3c1752105184ed",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/helpers/verify_existing_hub_weights.py.txt": {
+      "blob_oid": "113029a480d11143f78e635c989b938c25eb46bd",
+      "bytes": 2048,
+      "mode": "100644",
+      "sha256": "618c3a45e148e066b4c208dcfe7091c5eb916e2dfb76e3fca9e2f14718cff7a3",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/manifest.json": {
+      "blob_oid": "ac34dfb432c02c38dde533563570a47342bf6fff",
+      "bytes": 38009,
+      "mode": "100644",
+      "sha256": "789319de306b69934efaa0d844e6c5e80ca3f87e08a8c6ba9731948ce41be3ba",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/adapter-contract-review.json": {
+      "blob_oid": "11123e5857c97aaeeee3e2f11813b1b3d070640e",
+      "bytes": 26651,
+      "mode": "100644",
+      "sha256": "15d1bf1e2f85f2701096071af8e318a14e9f8ec9c38e646fc428168e3c6c2f85",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/adapter-tests-draft-01.xml": {
+      "blob_oid": "b326390d46d194540eaba69ba3ff4c7e6d3c6104",
+      "bytes": 40686,
+      "mode": "100644",
+      "sha256": "c91fb58c8801060ecfc4c66f71dc38dccddba2a65a67921b287452d1f6ffc72a",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/cache-module-build.json": {
+      "blob_oid": "5cc96d0833187fbd74ddd0c88225597958dc5df7",
+      "bytes": 6362,
+      "mode": "100644",
+      "sha256": "fed39546835a4f03598ac25c942899896fe5eb69582b449ac3f113676af71eb7",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/corrected-adapter-tests.xml": {
+      "blob_oid": "302f65619169fa380586020e0a90ebcd498f4bec",
+      "bytes": 11426,
+      "mode": "100644",
+      "sha256": "a68107f1b51971564d87fc06d49bf14e1d86921e1ad72f5ef4576dc93491f5a9",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/diagnostic-attempt-01-failure.json": {
+      "blob_oid": "f700b4f748f285bd075ce5033d46caef4bad0bcc",
+      "bytes": 1165,
+      "mode": "100644",
+      "sha256": "9ba74667cd01fac2ba015419eb54c9cdf461a54a31d4663904a0d69c9ad30b48",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/diagnostic-attempt-02.log": {
+      "blob_oid": "e4c5f06e2deeabea871e8cf5cd7ca912806084d6",
+      "bytes": 724,
+      "mode": "100644",
+      "sha256": "dbe8daa505f1947f32a2a4684c6637d4d17bc5a1caaedaa3f59d1551b02f7694",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/diagnostic-helper-build-draft-01.json": {
+      "blob_oid": "c61d02da9d0f7eba6a62dec815a376f6523b9098",
+      "bytes": 1350,
+      "mode": "100644",
+      "sha256": "0b8be423f6cdec6951cc4fceac4bc6568fa8fa453977364bc18e99f22423ab89",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/diagnostic-helper-build-draft-02.json": {
+      "blob_oid": "6ed31b74259fc60e9e2f348bd11a9188ba0baed2",
+      "bytes": 1924,
+      "mode": "100644",
+      "sha256": "706e350fad032294954ade423f4ccc8d545ed7416b7f144924e30aba85942628",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/diagnostic-helper-build.json": {
+      "blob_oid": "d3134747af90f42baec42243cc181ee8c420f6c8",
+      "bytes": 2630,
+      "mode": "100644",
+      "sha256": "721122fc2481e3db76aecb3dd5d5d4ae4d1577af7bf44e568fc570bb5827e5d0",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/diagnostic-helper-retry-review.json": {
+      "blob_oid": "cea257cd73c4eccdab20f2d395ba34e14fd7ce92",
+      "bytes": 9408,
+      "mode": "100644",
+      "sha256": "3f1af2d3a8e46a02a09377180a069b1b42e8f6447502ec9b152e8d5d61ec6152",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/diagnostic-helper-review-draft-01.json": {
+      "blob_oid": "7c3a604606de486fffd61c89bbf05ee5de5b1adf",
+      "bytes": 1712,
+      "mode": "100644",
+      "sha256": "136aff3453327efceedbded55c33005369042f8d42c69e95c85ff11163c4faf1",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/diagnostic-helper-review.json": {
+      "blob_oid": "77021d9a797c753e4293ee3f7d4751b92a465c0e",
+      "bytes": 10678,
+      "mode": "100644",
+      "sha256": "5f6b94d3c68e66eac4cf6f61ae96dd2b9dd36f6efe1ccadf334df0dd50a9fe41",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/existing-weight-hub-readback.json": {
+      "blob_oid": "94d6594f5af19f3dbbf9ab588f7643a0d9ad087f",
+      "bytes": 2662,
+      "mode": "100644",
+      "sha256": "295ae342916cdc94d7fb224b126ecb9971ed52619256988235e82f9718628bdc",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/experiment-plan-draft-01.json": {
+      "blob_oid": "2b7547ece59742a8d9736933afa281ba073241bf",
+      "bytes": 20901,
+      "mode": "100644",
+      "sha256": "a674dedae06b1dbc8028a3f83907ab5c745506ba04da08bedcd376c3ebc184b9",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/experiment-plan-draft-02.json": {
+      "blob_oid": "aaa93bbbbf3ba60b4c2304e4c07d01243dfe5eac",
+      "bytes": 20901,
+      "mode": "100644",
+      "sha256": "b51412b7a42f0e04815776555c7282c5e68bb42004281296d08628ae67149da9",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/experiment-plan-draft-03.json": {
+      "blob_oid": "61c34907953524492f6239b91230655cf3763e55",
+      "bytes": 20901,
+      "mode": "100644",
+      "sha256": "4880887b7e05708660ec9772605b8898526ff39a7800aec7c105f782abdad79e",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/experiment-plan.json": {
+      "blob_oid": "85b613eb9c1e2699769a64347d2b81f48301c28e",
+      "bytes": 20901,
+      "mode": "100644",
+      "sha256": "69b367fa26cc3223f1957293a924853e7ca669c035b54dd0634052854d218a1f",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/guardian-console-attempt-01.jsonl": {
+      "blob_oid": "204d631a28d41810b0040c630fc155627df9adb7",
+      "bytes": 216,
+      "mode": "100644",
+      "sha256": "efa04faecce7815d5c15828f887b3427b628c74c77fc4a6e1c180177fb10b43b",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/guardian-console-attempt-02.jsonl": {
+      "blob_oid": "56cca70818fde311c2326b5555dbf4cf804317a0",
+      "bytes": 208,
+      "mode": "100644",
+      "sha256": "07fdddb805a744a09b29c3f603ff96554375a964603934c327636b06fb62da05",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/incoming-main-integration.json": {
+      "blob_oid": "acef3b1d3c2a14c9af1a16da940112f3ea76925f",
+      "bytes": 1040,
+      "mode": "100644",
+      "sha256": "1a98ddb12a67dcf7b5585ee82ee7df482910b20c55dc47df05ba27b20e0cd99c",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/intake.json": {
+      "blob_oid": "169a8d9382c6a442a9d9ebba426e1cba8e8f360f",
+      "bytes": 646,
+      "mode": "100644",
+      "sha256": "b38b600f59af2ad012f7e2d1d1bb4d5f3a644435e567432d822f13a15c4d4075",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/native-producer-review.json": {
+      "blob_oid": "26955db45ec68e7563fb13c30b2d43368e364b89",
+      "bytes": 22252,
+      "mode": "100644",
+      "sha256": "ad46422a6b56480ae2ebe439afc18ac7a1342b2c650157d980783a0123ab8967",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/post-generation-diagnostics.json": {
+      "blob_oid": "eca1f7d68b64e2a2bfbf977b2a867e7706ad381a",
+      "bytes": 111344,
+      "mode": "100644",
+      "sha256": "379bd82de67952b4cd4959619839d258546ac97aad42ba8e108581b02add3d33",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/preparation-cli-tests.xml": {
+      "blob_oid": "ffb95f86e98fdddaaa0931e0f57d35236045a39a",
+      "bytes": 22387,
+      "mode": "100644",
+      "sha256": "822bc38905714b24ab48ac50b48e17c822c49112d32d6f0c101dc57f87161194",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/preparation-helper-build.json": {
+      "blob_oid": "ce5cb42f818bbc1b69b9991143740fe31453cc12",
+      "bytes": 7765,
+      "mode": "100644",
+      "sha256": "fe53f702a6ae7ad7a4fcdc52e3bb21e4776b6e85eaf65d71d6e232f0e40a765e",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/protocol-review-admitted-reconstruction.json": {
+      "blob_oid": "74dd0ab1b7518c778e1d45084191427a6e008367",
+      "bytes": 56631,
+      "mode": "100644",
+      "sha256": "f1a4cc72a0e6d99fda0c1e0aeb57d76abe6472586c67d773f0026870895ef945",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/protocol-review-draft-01.json": {
+      "blob_oid": "83a35aad41a802a4aff3b615b82e68c80385c1e5",
+      "bytes": 40091,
+      "mode": "100644",
+      "sha256": "9ce3b3bedc6796b1d57760edd4730ef06791dfa2dd2a1f0b0caa18ee126cafa1",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/protocol-review.json": {
+      "blob_oid": "4dbbe3b2347590e0c4ebbb1e99c62d5fba121e43",
+      "bytes": 54197,
+      "mode": "100644",
+      "sha256": "45c862b2db26bfebd9a57c9df6f77c03f8a157d06041d0e1a38e0f9291ef141c",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/protocol-supplement-attempt02.json": {
+      "blob_oid": "4fe917657cf29f1233f2533709c81aef1edeb930",
+      "bytes": 3567,
+      "mode": "100644",
+      "sha256": "ce5097c8cf85856b11cb2ed3c97e167164f10224a36893c54db6491774c1d689",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/real-law-source-pilot.json": {
+      "blob_oid": "a4aeeccc7cd0f38e20ba35aa8783e52ce2d5f28f",
+      "bytes": 31436,
+      "mode": "100644",
+      "sha256": "f3f6cf1e2b59443889cb491cdb4bb1dd8a78db12fdf4613b483681e0812770a5",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/resource-compatibility-attempt-02.json": {
+      "blob_oid": "e6edf85ad8e68d9e435d64c947ade77bfa549446",
+      "bytes": 6800,
+      "mode": "100644",
+      "sha256": "a5f2a94a5d4e5d7269db38b76a6110ee06d9d8c75fa41fb4e6e5bea9cafc123a",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/resource-compatibility.json": {
+      "blob_oid": "6fb18c4996c1e03a20bda16dd4f7d952a80100ab",
+      "bytes": 6800,
+      "mode": "100644",
+      "sha256": "f3044ebad392d13f9c6018ed421638e70c639738e0c8a5f0b708d5dfbb40f4d5",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/results-resource-review.json": {
+      "blob_oid": "a0ad01b3491e50f52f95ff0e992587239fb89139",
+      "bytes": 84588,
+      "mode": "100644",
+      "sha256": "5634d4d0fc1f307c312b041e0e243ced9eada53b43cca282d8d40217c7bb1f4a",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/runtime-final-tests.xml": {
+      "blob_oid": "91011e7a3150193a374fa31b3cc460a5cd1367b8",
+      "bytes": 6042,
+      "mode": "100644",
+      "sha256": "e808bdeb010781760df99a78340193e7ff24b3933403a42c0882b93da57e1953",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/runtime-frozen-tests.xml": {
+      "blob_oid": "57391a74a541031067a9c15194f54a871d83cfd6",
+      "bytes": 6233,
+      "mode": "100644",
+      "sha256": "fa954ca443d4c2242ae05146e83ddf092172baf40e8cedcf0f8df53fd4d313ac",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/runtime-pilot-review.json": {
+      "blob_oid": "5997f5c2c1bea2be754d667be6f2f1fd510d67d5",
+      "bytes": 23406,
+      "mode": "100644",
+      "sha256": "15aa3a1eab7b94f5cafcb9d4dd1697df8bcc9d8872c89d24a4244da0d7acc0d8",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/runtime-retry-review.json": {
+      "blob_oid": "ef6027523e8aa06c5bc58be1fe3adc3e62278628",
+      "bytes": 24317,
+      "mode": "100644",
+      "sha256": "34d9b7b4317c06ef8865101eb85571ff187b50225378db29b55df8f3421c76c6",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/runtime-review.json": {
+      "blob_oid": "e72849afe9b1a72bb74a249284e236638f8f78e9",
+      "bytes": 48638,
+      "mode": "100644",
+      "sha256": "a8a607368f0730a921b5a77d18806be198c2ca3290b745ea0dc4a0d21f50ea82",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/source-artifact-pins.json": {
+      "blob_oid": "a4980e7f7d56ea97cab07290e03953093d5db894",
+      "bytes": 2765,
+      "mode": "100644",
+      "sha256": "d8418735b0cb7847fb95f259ac07fd0e26f9de888f931a5176e0df4f41277677",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/source-family-intake-review.json": {
+      "blob_oid": "850287923952e4547251f5d25fbd667cc4d34b15",
+      "bytes": 42303,
+      "mode": "100644",
+      "sha256": "6921bd6ee7ceb7ea1184be8dc57772fc5e670ac7e909c0caa3c02d5fe9e9e48e",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/source-requests.json": {
+      "blob_oid": "804002bb493cb213bdcbc720c9b8e286e65ce985",
+      "bytes": 6328,
+      "mode": "100644",
+      "sha256": "47ff87852d84bec775fc0da4f2da88d0f445da087fbf4d14c18b952ec3dd1032",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/source-view-provenance.json": {
+      "blob_oid": "fc255e5d6c091a526ef2f5ffb90275d478813eff",
+      "bytes": 30901,
+      "mode": "100644",
+      "sha256": "67087dbc315148137447af9264898c7eb0b5dba746766c4056bdea95b9c51b6a",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/receipts/validation.json": {
+      "blob_oid": "fd093f66a54aa28760a6dea09dd545315852edcf",
+      "bytes": 4849,
+      "mode": "100644",
+      "sha256": "60790a02d6ef3724eccb34e582e397ef1a407428c0fee9d60a09a97ed7e28b88",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/source-documents/28de7a02af3c295d51081957fa907b814fb2eb0150b2a5ba365a819e4d685294.txt": {
+      "blob_oid": "bf994ed1713164bd2d6ae63bb23fd8036db8608c",
+      "bytes": 9770,
+      "mode": "100644",
+      "sha256": "a45ae8405c2f676e9cff8228e4a6ac55d5bf218a38fce6bd5997aab57198e973",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/source-documents/2fa487fba6561dba31007630eb12dba307a803ac601cefcfb0aff28df2b1506f.txt": {
+      "blob_oid": "4908cb535838c633a5c0a237ce5b94793f83b9f1",
+      "bytes": 7137,
+      "mode": "100644",
+      "sha256": "4eb71a041ad27372b4c59da960ec4f92d16ed643f9179f3c8cfdbde889f3c3c3",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/source-documents/36ab7a68520103d9d69962985ebfd7d5ac3a32fa309e91a28a4917c4bdb4afc5.txt": {
+      "blob_oid": "f4affa052213a75780d66647511474c6118ff520",
+      "bytes": 21457,
+      "mode": "100644",
+      "sha256": "553203ab2805137223f5c535b076c98e24e2a15475f42fd1b06c95476cd71523",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/source-documents/42a53dc741c30d44d330d3ab508f93ab775fdc9661f1f66f76e4e03ebf461bbb.txt": {
+      "blob_oid": "50dce0e74438f970161e2dc09a221afb67116660",
+      "bytes": 459,
+      "mode": "100644",
+      "sha256": "d20b3757a5f14ffe82f331a9fd21fb507f090c023c3e118e1dfa2e330e58bec2",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/source-documents/54ff2826f41f12e142657daf8ef1964b7edd65cf11e43565d2f6256857e46549.txt": {
+      "blob_oid": "31a6e711542d7ddb28b59b26d568139f06c8341a",
+      "bytes": 72690,
+      "mode": "100644",
+      "sha256": "b948413763e0cbe53c89a0b275530e047eed17e67ca877b65ccf7f29ef3cc330",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/source-documents/670d8e5072fa96625038365d0e94dd1d2215c72d37e90f50f8ba71c201623874.txt": {
+      "blob_oid": "1cbc5311c79b6074362286868f935d5967375afa",
+      "bytes": 28742,
+      "mode": "100644",
+      "sha256": "8d4daf7bbf58755c4b85543bfbcc5f7cabd017022375fd780cf0d7b18007f160",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/source-documents/a1b7c26910597caa7b473936e06014c1455fc853a0c71599529503033efb90ee.txt": {
+      "blob_oid": "e41ecfb7890c7040a35085591ac17536ba9fb64f",
+      "bytes": 6364,
+      "mode": "100644",
+      "sha256": "9237dbe672abc81115bad4e732bc57b02db3010fd064f185ac3184a6e7f9e961",
+      "stage": 0
+    },
+    "docs/autoencoders/evidence/arbitrary-native-cache-20261011-01/source-documents/c6eb14c5710480da2cce2a08ae4ea58f8503cb708febe9d33ffe60d4fcbf4864.txt": {
+      "blob_oid": "5a310b5b2416eac060e8ad2618c751c11b125ef8",
+      "bytes": 2312,
+      "mode": "100644",
+      "sha256": "0a154f0a44dcabf61fb7462f580464108566dad7fde5db534253d1679eaef4c5",
+      "stage": 0
+    },
+    "docs/autoencoders/progress_integration.md": {
+      "blob_oid": "c86a1822bea3edf1e28765a28db86999bc04129b",
+      "bytes": 26507,
+      "mode": "100644",
+      "sha256": "e20d62dbc4a4cfd4ef76563a3f649eb7ef5d032f54511e2629955973038a20b9",
+      "stage": 0
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/arbitrary_native_legal_ir_runtime.py": {
+      "blob_oid": "916256765c81df71ed48f599ee5346ccfe0a3f47",
+      "bytes": 13334,
+      "mode": "100644",
+      "sha256": "b450bec7518c3528a34c15c9119aefa791273176f871c27c9f4f77acd14df113",
+      "stage": 0
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/arbitrary_native_source_cache.py": {
+      "blob_oid": "82978c03d34ac25327538fd9714b7074b946bfb6",
+      "bytes": 29148,
+      "mode": "100644",
+      "sha256": "af9c9944cfd9c2c926911bca94a7d407af25019a1ab833655a9511deea4f4594",
+      "stage": 0
+    },
+    "scripts/ops/legal_ir/prepare_arbitrary_native_legal_sources.py": {
+      "blob_oid": "334555901350828bd00797cf76b8d6b2605928eb",
+      "bytes": 16041,
+      "mode": "100644",
+      "sha256": "e2e87fe9e2d69a6d75c0ce61ec6141bc29f2d059d27b83139bd1df1817179378",
+      "stage": 0
+    },
+    "tests/unit/logic/formalization/autoencoder/test_arbitrary_native_legal_ir_runtime.py": {
+      "blob_oid": "f5cb2302af964265347aa05d08f7db86de6e08df",
+      "bytes": 13044,
+      "mode": "100644",
+      "sha256": "13a0eef50ca26dc4e5fa61f6bf83400b182a8b9153dd52f9d1a902c9015f4c60",
+      "stage": 0
+    },
+    "tests/unit/logic/formalization/autoencoder/test_arbitrary_native_source_cache.py": {
+      "blob_oid": "b825e6290022a781990572279cbd1733a47bb0ea",
+      "bytes": 22672,
+      "mode": "100644",
+      "sha256": "1810e73e5751b0406a0ac9dfb67a631e7312354186832fb79934f99447c8d632",
+      "stage": 0
+    },
+    "tests/unit/logic/test_prepare_arbitrary_native_legal_sources.py": {
+      "blob_oid": "13141933d9114cdebf6cb5143c9b8f8a1e1624a8",
+      "bytes": 19509,
+      "mode": "100644",
+      "sha256": "e9c5ed0728e065c90438d9b203915ca22791432a31564ca4aab8c616ede5d18c",
+      "stage": 0
+    }
+  }
+}
