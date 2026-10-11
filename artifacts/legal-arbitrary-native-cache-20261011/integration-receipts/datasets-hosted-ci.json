@@ -1,0 +1,315 @@
+{
+  "schema": "arbitrary-native-cache-own-hosted-ci/v1",
+  "observed_at_utc": "2026-10-11T02:53:29.893770+00:00",
+  "repo": "endomorphosis/ipfs_datasets_py",
+  "head": "f3901341cdde9b4485315327d5ef06abd1485b11",
+  "availability": "unavailable_account_billing_lock",
+  "claim_passed": false,
+  "checks": [
+    {
+      "id": 114373202353,
+      "name": "build-multi-arch",
+      "head_sha": "f3901341cdde9b4485315327d5ef06abd1485b11",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38106551659/job/114373202353",
+      "annotations": []
+    },
+    {
+      "id": 114373202305,
+      "name": "test-docker-compose",
+      "head_sha": "f3901341cdde9b4485315327d5ef06abd1485b11",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38106551659/job/114373202305",
+      "annotations": []
+    },
+    {
+      "id": 114373202278,
+      "name": "discover-tool-categories",
+      "head_sha": "f3901341cdde9b4485315327d5ef06abd1485b11",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38106551668/job/114373202278",
+      "annotations": []
+    },
+    {
+      "id": 114373202223,
+      "name": "build-and-test (Dockerfile.mcp-minimal, linux/amd64)",
+      "head_sha": "f3901341cdde9b4485315327d5ef06abd1485b11",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38106551659/job/114373202223",
+      "annotations": []
+    },
+    {
+      "id": 114373202203,
+      "name": "setup",
+      "head_sha": "f3901341cdde9b4485315327d5ef06abd1485b11",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38106551626/job/114373202203",
+      "annotations": []
+    },
+    {
+      "id": 114373202200,
+      "name": "Setup Cache Infrastructure",
+      "head_sha": "f3901341cdde9b4485315327d5ef06abd1485b11",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38106551644/job/114373202200",
+      "annotations": []
+    },
+    {
+      "id": 114373202197,
+      "name": "sdk-static-analysis",
+      "head_sha": "f3901341cdde9b4485315327d5ef06abd1485b11",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38106551628/job/114373202197",
+      "annotations": []
+    },
+    {
+      "id": 114373202177,
+      "name": "build-and-test (docker/Dockerfile.test, linux/amd64)",
+      "head_sha": "f3901341cdde9b4485315327d5ef06abd1485b11",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38106551659/job/114373202177",
+      "annotations": []
+    },
+    {
+      "id": 114373202159,
+      "name": "enhanced-pr-monitor",
+      "head_sha": "f3901341cdde9b4485315327d5ef06abd1485b11",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38106551618/job/114373202159",
+      "annotations": []
+    },
+    {
+      "id": 114373202061,
+      "name": "arm64-system-info",
+      "head_sha": "f3901341cdde9b4485315327d5ef06abd1485b11",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38106551579/job/114373202061",
+      "annotations": []
+    },
+    {
+      "id": 114373202021,
+      "name": "cli-smoke-tests",
+      "head_sha": "f3901341cdde9b4485315327d5ef06abd1485b11",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38106551615/job/114373202021",
+      "annotations": []
+    },
+    {
+      "id": 114373201959,
+      "name": "benchmark",
+      "head_sha": "f3901341cdde9b4485315327d5ef06abd1485b11",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38106551593/job/114373201959",
+      "annotations": [
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/f3901341cdde9b4485315327d5ef06abd1485b11/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "The job was not started because your account is locked due to a billing issue.",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/f3901341cdde9b4485315327d5ef06abd1485b11/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "notice",
+          "title": "",
+          "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+          "raw_details": ""
+        }
+      ]
+    },
+    {
+      "id": 114373201944,
+      "name": "dashboard-smoke-tests (3.12)",
+      "head_sha": "f3901341cdde9b4485315327d5ef06abd1485b11",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38106551591/job/114373201944",
+      "annotations": []
+    },
+    {
+      "id": 114373201925,
+      "name": "analyze-and-assign-copilot",
+      "head_sha": "f3901341cdde9b4485315327d5ef06abd1485b11",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38106551599/job/114373201925",
+      "annotations": []
+    },
+    {
+      "id": 114373201893,
+      "name": "check-pr-completion",
+      "head_sha": "f3901341cdde9b4485315327d5ef06abd1485b11",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38106551620/job/114373201893",
+      "annotations": []
+    },
+    {
+      "id": 114373201618,
+      "name": "Build distribution \ud83d\udce6",
+      "head_sha": "f3901341cdde9b4485315327d5ef06abd1485b11",
+      "status": "queued",
+      "conclusion": null,
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38106551477/job/114373201618",
+      "annotations": []
+    },
+    {
+      "id": 114373199857,
+      "name": "Analyze (javascript-typescript)",
+      "head_sha": "f3901341cdde9b4485315327d5ef06abd1485b11",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38106550341/job/114373199857",
+      "annotations": [
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/f3901341cdde9b4485315327d5ef06abd1485b11/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "The job was not started because your account is locked due to a billing issue.",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/f3901341cdde9b4485315327d5ef06abd1485b11/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "notice",
+          "title": "",
+          "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+          "raw_details": ""
+        }
+      ]
+    },
+    {
+      "id": 114373199801,
+      "name": "Analyze (actions)",
+      "head_sha": "f3901341cdde9b4485315327d5ef06abd1485b11",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38106550341/job/114373199801",
+      "annotations": [
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/f3901341cdde9b4485315327d5ef06abd1485b11/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "The job was not started because your account is locked due to a billing issue.",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/f3901341cdde9b4485315327d5ef06abd1485b11/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "notice",
+          "title": "",
+          "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+          "raw_details": ""
+        }
+      ]
+    },
+    {
+      "id": 114373199795,
+      "name": "Analyze (rust)",
+      "head_sha": "f3901341cdde9b4485315327d5ef06abd1485b11",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38106550341/job/114373199795",
+      "annotations": [
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/f3901341cdde9b4485315327d5ef06abd1485b11/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "The job was not started because your account is locked due to a billing issue.",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/f3901341cdde9b4485315327d5ef06abd1485b11/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "notice",
+          "title": "",
+          "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+          "raw_details": ""
+        }
+      ]
+    },
+    {
+      "id": 114373199547,
+      "name": "Analyze (python)",
+      "head_sha": "f3901341cdde9b4485315327d5ef06abd1485b11",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38106550341/job/114373199547",
+      "annotations": [
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/f3901341cdde9b4485315327d5ef06abd1485b11/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "The job was not started because your account is locked due to a billing issue.",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/f3901341cdde9b4485315327d5ef06abd1485b11/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "notice",
+          "title": "",
+          "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+          "raw_details": ""
+        }
+      ]
+    }
+  ]
+}
