@@ -1,0 +1,860 @@
+{
+  "closed_evidence_bytes": 12003042,
+  "closed_evidence_files": 135,
+  "closed_evidence_inventory": {
+    "bytes": 12003042,
+    "count": 135,
+    "entries": {
+      "local/audit_git_integration.py": {
+        "bytes": 4029,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/audit_git_integration.py",
+        "sha256": "933d78e99c2c84046ea72ec8181b29cafa6b2e814c429e81126723752fede158"
+      },
+      "local/authored-development-cue-declarations-v02.json": {
+        "bytes": 9753,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/authored-development-cue-declarations-v02.json",
+        "sha256": "67b80ed4224b3d04f636d980dd66b323ca6c1786fc058407782b8f13a7170756"
+      },
+      "local/authored-development-cue-declarations.json": {
+        "bytes": 1465,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/authored-development-cue-declarations.json",
+        "sha256": "100531fadfae9431f2484fb882f0d723e12c44fd063dcf66cf55d84b4fe282ad"
+      },
+      "local/authored-development-source-only-v02.json": {
+        "bytes": 4968,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/authored-development-source-only-v02.json",
+        "sha256": "34fe6b7255c89292c148e79070f657104ba8a7855f44d936168309246bd31e5d"
+      },
+      "local/authored-development-source-only.json": {
+        "bytes": 1843,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/authored-development-source-only.json",
+        "sha256": "b9cec5f2a8593f67f42218f93b9b8fb701cfd9569a8933ffdf8a522ec3756338"
+      },
+      "local/baseline-heads.json": {
+        "bytes": 120,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/baseline-heads.json",
+        "sha256": "b9629913298f83ea05ff8bf77923f48fa1e22452b0f2e58fcfc26191798fd23c"
+      },
+      "local/bootstrap_inert.py": {
+        "bytes": 1208,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/bootstrap_inert.py",
+        "sha256": "030ac4f55adf5bf305bab0fcef9e33daa27c8fd083ddd474eac623e754246da1"
+      },
+      "local/canonical-intake.json": {
+        "bytes": 643,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/canonical-intake.json",
+        "sha256": "302eb7af14e55cb2e2b7a28c70729aeec31b62d9caa7949f387604d6689b3e63"
+      },
+      "local/compiler-execution-protocol-v01.json": {
+        "bytes": 49610,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/compiler-execution-protocol-v01.json",
+        "sha256": "71d1232d1c4cc58caa45a1f64b36947296d7f5874d8ccaa736a3f030da2d0f8f"
+      },
+      "local/compiler-protocol-independent-review-v01.json": {
+        "bytes": 66369,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/compiler-protocol-independent-review-v01.json",
+        "sha256": "2cf850b816e612d806b4c792412a51e8f38541edf3c21db372a4cde4195799ad"
+      },
+      "local/contribution.md": {
+        "bytes": 3009,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/contribution.md",
+        "sha256": "d7274720ec0ac779d78b75202b0c12dbbdf4f5597c8159f96234181df8c540bc"
+      },
+      "local/contribution_draft_v01.md": {
+        "bytes": 2991,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/contribution_draft_v01.md",
+        "sha256": "d3d787e8f463eb2da33909507aa6ee6c03e0150eae33f179a7a7d0ae776a12bf"
+      },
+      "local/copy_contribution.py": {
+        "bytes": 2169,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/copy_contribution.py",
+        "sha256": "bf1d758886f3ea4f27dd7dd228ef69c387804c4faa95cdd5dbef4326f534636f"
+      },
+      "local/development-fixture-independent-review-v02.json": {
+        "bytes": 14838,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/development-fixture-independent-review-v02.json",
+        "sha256": "931eaaa37e8ed147f1cd7b3bbf4bf4bc7f37a6d0ca797ac09187eb1acddf66e3"
+      },
+      "local/family-adapter-independent-review-v01.json": {
+        "bytes": 17730,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/family-adapter-independent-review-v01.json",
+        "sha256": "f26414e062bb48ce7be48df2022f3bb39c182ffa5a0091637069fa0f8e36c894"
+      },
+      "local/inert-test-harness-independent-review-v01.json": {
+        "bytes": 30679,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/inert-test-harness-independent-review-v01.json",
+        "sha256": "acccbd467e24b39265d6c667bde3d80b3617b0c782c21660c89b710e18ee6291"
+      },
+      "local/inert-tests-v01.log": {
+        "bytes": 6283,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/inert-tests-v01.log",
+        "sha256": "4711f69d46772a30f724fbce555ec96189851eec3500ed8e3e7616a1e98a8706"
+      },
+      "local/inert-tests-v01.xml": {
+        "bytes": 6413,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/inert-tests-v01.xml",
+        "sha256": "3ec62de32c8adc75acce502185b306dbb3fb98f14ef75e3d2801aa80a6fbf29d"
+      },
+      "local/inert-tests-v02.log": {
+        "bytes": 1198,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/inert-tests-v02.log",
+        "sha256": "56f6596f6a09290a6e48840f6ace13e42c7e6585d3209f6084503f2f4bed5125"
+      },
+      "local/inert-tests-v02.xml": {
+        "bytes": 1181,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/inert-tests-v02.xml",
+        "sha256": "53e7780a5fce9c052a0d340511e44d7cec7515ac4ebdb0a50dc48d090092734e"
+      },
+      "local/inert-tests-v03.log": {
+        "bytes": 6517,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/inert-tests-v03.log",
+        "sha256": "ebfdce696d651bf9ffa6243ca06f7e0887b11184bbbad6522aa78dcd785e5d6d"
+      },
+      "local/inert-tests-v03.xml": {
+        "bytes": 126477,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/inert-tests-v03.xml",
+        "sha256": "e2f42d0e5273e91290a75e6f199934fc83f65c8e2053c9207bd26edb290fd202"
+      },
+      "local/inert-tests-v04.log": {
+        "bytes": 7617,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/inert-tests-v04.log",
+        "sha256": "ca324b06686ffa60380cc55f22ae78183efcb890f594b141f447bf28485ec10f"
+      },
+      "local/inert-tests-v04.xml": {
+        "bytes": 133443,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/inert-tests-v04.xml",
+        "sha256": "95b60420bd19b52a13acac320f96aaded75660f02909a061aa795127a18e905b"
+      },
+      "local/inert-tests-v05.log": {
+        "bytes": 511,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/inert-tests-v05.log",
+        "sha256": "a2ef441d3b7ee52fe4f2fe09c2ff3a7565feef6efc80380a38d742f26950b076"
+      },
+      "local/inert-tests-v05.xml": {
+        "bytes": 120833,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/inert-tests-v05.xml",
+        "sha256": "7166f6b26ebea090abbbea8916ae28ee2134e8e68a99580f4f2aff3dee67bec9"
+      },
+      "local/intake-independent-review-v01.json": {
+        "bytes": 25477,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/intake-independent-review-v01.json",
+        "sha256": "c22eb0d7f90956508091c1d4aae2cee7fa2cd580ee162ed23f1385ad246e1a99"
+      },
+      "local/integration-helper-independent-review-v01.json": {
+        "bytes": 59147,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/integration-helper-independent-review-v01.json",
+        "sha256": "22000edb9b56e208086fb5b39dd60a31f55a3b8d0fdfabefca2ca3f2962c45ab"
+      },
+      "local/main-progress-review.json": {
+        "bytes": 48397,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/main-progress-review.json",
+        "sha256": "b0a3433e64ece7bad6ff7062979edf57d8e196f6d5d3754f89422ba0ded8cf4d"
+      },
+      "local/native-build-execution-v01.log": {
+        "bytes": 154,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/native-build-execution-v01.log",
+        "sha256": "97a2a94057df722a233ddd0019ec6365f3c9155ddd1a8b134edbf988c3eecce1"
+      },
+      "local/native-build-result-v01.json": {
+        "bytes": 6762,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/native-build-result-v01.json",
+        "sha256": "68013a41276201a07fd6d71a7206899125ceff2fda878bf5937b53e4a94fe64d"
+      },
+      "local/native-result-independent-review-v01.json": {
+        "bytes": 40856,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/native-result-independent-review-v01.json",
+        "sha256": "4096897c0691a12285fe33a7795117e905758d9c1467693a370275122ce707dd"
+      },
+      "local/native-result-independent-review-v02.json": {
+        "bytes": 49031,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/native-result-independent-review-v02.json",
+        "sha256": "75a561c89b3e4fd743b3cbb79aa915c82398aa4cacdf3e8ef28d619b22f3a3d9"
+      },
+      "local/preparation-execution-v01.log": {
+        "bytes": 124,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/preparation-execution-v01.log",
+        "sha256": "5cb2886421ce355963abcbc3e29e4126df5d7266bf9668a0cd64fa8a2c5cbfef"
+      },
+      "local/preparation-observation-v01.json": {
+        "bytes": 22150,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/preparation-observation-v01.json",
+        "sha256": "c394c54cf73b496896a28a5b065dd5dd02468916b78670c2944244ef071cf2f0"
+      },
+      "local/preparation-result-independent-review-v01.json": {
+        "bytes": 74878,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/preparation-result-independent-review-v01.json",
+        "sha256": "c9610e244401b1e8ac767e1e15a46921515b493cefa2d585b176412b1bc0652c"
+      },
+      "local/prepare_compiler_protocol.py": {
+        "bytes": 4669,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepare_compiler_protocol.py",
+        "sha256": "0463026e5f2c66d93f8fd749703d7d03edc147cbb78b47337f410b3050f3c6c3"
+      },
+      "local/prepare_contribution_inventory.py": {
+        "bytes": 3902,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepare_contribution_inventory.py",
+        "sha256": "de33e40ee6339927aa78781453de226c0c7107533d41b340e25d7e464c771b3d"
+      },
+      "local/prepare_development_inputs.py": {
+        "bytes": 3625,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepare_development_inputs.py",
+        "sha256": "d83e6f4d2565670ddc2f687bd9d0f152212c7e62150896142300d91ad1ea7f53"
+      },
+      "local/prepare_development_inputs_draft_v01.py": {
+        "bytes": 3431,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepare_development_inputs_draft_v01.py",
+        "sha256": "65baef3fbf5bd4d58fb41ec1a1d7fd33ec633eb81869d1566026070f7efb0594"
+      },
+      "local/prepare_development_inputs_v02.py": {
+        "bytes": 5558,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepare_development_inputs_v02.py",
+        "sha256": "2aeaa94326d35b3eea9de0a2ba9bbee78c25b2f2405f40876fde287462173ef6"
+      },
+      "local/prepare_formal_output_pilot.py": {
+        "bytes": 12110,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepare_formal_output_pilot.py",
+        "sha256": "2f21d5f5b1a7e9c339b121fa1c00cc91b138ea4c31c284d1b9f42520160a3b32"
+      },
+      "local/prepare_formal_output_pilot_draft_v01.py": {
+        "bytes": 12067,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepare_formal_output_pilot_draft_v01.py",
+        "sha256": "1c5406afdf75b30ebedc13db3d93e08e7c06de63e4a7cee657be54882b95a968"
+      },
+      "local/prepare_formal_output_pilot_draft_v02.py": {
+        "bytes": 12072,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepare_formal_output_pilot_draft_v02.py",
+        "sha256": "6483c2fc09caea602438ba980aa5065598695386ecea56204f72db0af673fdc6"
+      },
+      "local/record_github_checks.py": {
+        "bytes": 2376,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/record_github_checks.py",
+        "sha256": "2c192ed59848e3433fe58cb928483eef96337598562d8fb6d4a019d703ead62b"
+      },
+      "local/record_staged_map.py": {
+        "bytes": 5873,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/record_staged_map.py",
+        "sha256": "367539f0fb1bfdaf9d538b6d6ee98990243297f26b50254a5ad6507d59dacc47"
+      },
+      "local/record_staged_map_draft_v01.py": {
+        "bytes": 5066,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/record_staged_map_draft_v01.py",
+        "sha256": "565888f438e89313fc03d12906582f5d70ca12080b07fb0909c0505833cc276f"
+      },
+      "local/record_staged_map_draft_v02.py": {
+        "bytes": 5504,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/record_staged_map_draft_v02.py",
+        "sha256": "137c6b42d31c096add3bcaec0edd1cd6a2eb124f04fda693fb7ef47d77771816"
+      },
+      "local/retained-owner-pins.json": {
+        "bytes": 19233,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/retained-owner-pins.json",
+        "sha256": "331302c6dedeb21980062be387e92e2cac9c88bd7b8f78b4a8f7250e49af6305"
+      },
+      "local/review_main_progress.py": {
+        "bytes": 3169,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/review_main_progress.py",
+        "sha256": "f3e5204951f6d07f9a56ffdfa8e502fe6046ecd99e95b5d5c9816eea96ab9fff"
+      },
+      "local/run_inert_tests.py": {
+        "bytes": 4569,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/run_inert_tests.py",
+        "sha256": "024475419c8c632510d0560ddbbb659b616f13bb55e1e991bea7a61b603a4c30"
+      },
+      "local/run_inert_tests_draft_v01.py": {
+        "bytes": 1748,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/run_inert_tests_draft_v01.py",
+        "sha256": "fc9bcd6b70e2f368093f5f98a7fdf640fb258ad70fb810b6d4cb5c3f3b211293"
+      },
+      "local/run_inert_tests_draft_v02.py": {
+        "bytes": 1959,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/run_inert_tests_draft_v02.py",
+        "sha256": "d96a074da3efe2d5288deffb5cb335b6d9ae185af762b5da1df265446f8ff18a"
+      },
+      "local/run_native_build.py": {
+        "bytes": 4645,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/run_native_build.py",
+        "sha256": "3af389a06f11f18b347a94fd025b93b9e5b4e09c4d146691d3ccb851ece583b4"
+      },
+      "local/saved-span-family-adapter-build-v01.json": {
+        "bytes": 6531,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/saved-span-family-adapter-build-v01.json",
+        "sha256": "5bc2046d9e55b3bd479e17b8e646ed0d2bf15b9f61b5f35158f9c7cd9e06bfbc"
+      },
+      "local/selected-inert-tests-observation-v01.json": {
+        "bytes": 8647,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/selected-inert-tests-observation-v01.json",
+        "sha256": "624aeb1d111e62bce848cb3f048eccc80d1d5fc1a347fb6a74fa75945fc59d7e"
+      },
+      "local/source-code-stage-v01.json": {
+        "bytes": 1869,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/source-code-stage-v01.json",
+        "sha256": "df382597122b7d46e504c499e4d15496219a151f8917f902b175fbff439c6a75"
+      },
+      "local/source-code-stage-v02.json": {
+        "bytes": 1869,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/source-code-stage-v02.json",
+        "sha256": "f2656ee0a0b45cbdf089acaf5f09ddbec2bf4b0585b90bdb8c9a0d18edd7fc65"
+      },
+      "local/source-guide_draft_v01.md": {
+        "bytes": 8359,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/source-guide_draft_v01.md",
+        "sha256": "7db43f963c28536982ae17225a43261853a1c1499bc7359fe86e339b871e59db"
+      },
+      "local/statutory-declaration-preflight-build-v01.json": {
+        "bytes": 7708,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/statutory-declaration-preflight-build-v01.json",
+        "sha256": "7590b92a847605f3277d992f7ac7d89ccda618de24c8b3520706cec361caff53"
+      },
+      "local/statutory-preflight-independent-review-v01.json": {
+        "bytes": 12066,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/statutory-preflight-independent-review-v01.json",
+        "sha256": "1add3d27fbc421b4e7c7b4dacb4bff0aa4cdf1d11d874c6e72de014075e9abd0"
+      },
+      "local/statutory-source-only-inputs.json": {
+        "bytes": 4311,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/statutory-source-only-inputs.json",
+        "sha256": "8e32b64579eb67b604d7ba7cd907d17da7c8934e354b0641cd344b6522049fc3"
+      },
+      "native-build/LegalSourceFamily.lean": {
+        "bytes": 351,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/native-build-v01/LegalSourceFamily.lean",
+        "sha256": "42690e1370e125540725bcd4949150266b658723853033235e3a9f0f3e62d941"
+      },
+      "native-build/LegalSourceFamily/Candidate0000.lean": {
+        "bytes": 539,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/native-build-v01/LegalSourceFamily/Candidate0000.lean",
+        "sha256": "5ea88c69f307e7832190e2d24ed3fb46d78944a12686a11ebd15dd4dc914aab6"
+      },
+      "native-build/LegalSourceFamily/Candidate0001.lean": {
+        "bytes": 539,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/native-build-v01/LegalSourceFamily/Candidate0001.lean",
+        "sha256": "8d910075eff2e7bf625e873cd2fedf7caf658d2605f035a9d43b4e7823853776"
+      },
+      "native-build/LegalSourceFamily/Candidate0002.lean": {
+        "bytes": 539,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/native-build-v01/LegalSourceFamily/Candidate0002.lean",
+        "sha256": "50abe43d13f41f1bf27419dc495f309036bedac556b8b340183d7757f214dffb"
+      },
+      "native-build/LegalSourceFamily/Candidate0003.lean": {
+        "bytes": 739,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/native-build-v01/LegalSourceFamily/Candidate0003.lean",
+        "sha256": "f586633e57cc22c2f8c2d53354765ca769f1ccd5d5ca9ab1070d805ae4d9d558"
+      },
+      "native-build/LegalSourceFamily/Candidate0004.lean": {
+        "bytes": 739,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/native-build-v01/LegalSourceFamily/Candidate0004.lean",
+        "sha256": "f6d170f0bc96db5c69098a5efd1003080e86b03cf625f7a918fb251b8ca7a889"
+      },
+      "native-build/LegalSourceFamily/Candidate0005.lean": {
+        "bytes": 739,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/native-build-v01/LegalSourceFamily/Candidate0005.lean",
+        "sha256": "a58d81844f3bc5e9afb8a5be3a96ff6e7ebc00ab2aad36d671d2710bd534b560"
+      },
+      "native-build/LegalSourceFamily/Candidate0006.lean": {
+        "bytes": 757,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/native-build-v01/LegalSourceFamily/Candidate0006.lean",
+        "sha256": "7850c05217cbcaa84c740c4b50ff629a9c1caa302908229dd1c6f5dc00d813c6"
+      },
+      "native-build/LegalSourceFamily/Candidate0007.lean": {
+        "bytes": 757,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/native-build-v01/LegalSourceFamily/Candidate0007.lean",
+        "sha256": "011b40f6588f478af619fcaf2a155c53f02fed5100ace33ed857ca9f217c8c79"
+      },
+      "native-build/LegalSourceFamily/Candidate0008.lean": {
+        "bytes": 757,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/native-build-v01/LegalSourceFamily/Candidate0008.lean",
+        "sha256": "9d261ecb62eb7c18234d1598824641f8bdb0242a3513e446d188d5836f70e5e0"
+      },
+      "native-build/LegalSourceFamily/Prelude.lean": {
+        "bytes": 1270,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/native-build-v01/LegalSourceFamily/Prelude.lean",
+        "sha256": "e9272074805daf3e7329058cc1e10f59deece713e4f8ad04e9d123c37d3537ce"
+      },
+      "native-build/lakefile.toml": {
+        "bytes": 106,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/native-build-v01/lakefile.toml",
+        "sha256": "357e3b2caacf63a7e9dafe4b0536b2ab68240327fdd7f20297ba2ae2fc6131c0"
+      },
+      "native-build/lean-toolchain": {
+        "bytes": 25,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/native-build-v01/lean-toolchain",
+        "sha256": "d5edba4e4b8faad9c1baeadb265716d20d03be4d1a2647dc5e35b0c0325bea7b"
+      },
+      "native-build/source-family-inputs.json": {
+        "bytes": 20195,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/native-build-v01/source-family-inputs.json",
+        "sha256": "efe934eee73f696ed5bb8bfc0f5339eedd558ee47392db7aa6f3da18cde2905a"
+      },
+      "native-build/source-family-manifest.json": {
+        "bytes": 14886,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/native-build-v01/source-family-manifest.json",
+        "sha256": "98bc058ec8da09a3a74b59698c64f7cfebed48fb7684296e3dd00ccffbbb91bc"
+      },
+      "native-build/source-family-receipt.json": {
+        "bytes": 19613,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/native-build-v01/source-family-receipt.json",
+        "sha256": "526df7f4b6a9e55cd8e6872c6c205a1756c04a1e716af46faee0d018023da14e"
+      },
+      "prepared/actual-statutory-preflight-replay.json": {
+        "bytes": 1997,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/actual-statutory-preflight-replay.json",
+        "sha256": "018196a7576181f78a9891b122e299fc1059a1723d121156dcef259126775644"
+      },
+      "prepared/actual-statutory-preflight.json": {
+        "bytes": 47619,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/actual-statutory-preflight.json",
+        "sha256": "d7488d74d6418d61992e840bf26bc4ec9140ba704eb39e244e45761b8775a1fd"
+      },
+      "prepared/all_or_none_unsupported_batch.json": {
+        "bytes": 15760,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/all_or_none_unsupported_batch.json",
+        "sha256": "b8abbd8526ad119aa92e5a3fe903413e0d825b5b335d51be70d7b299e90e92e7"
+      },
+      "prepared/development/00-declaration.json": {
+        "bytes": 1325,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/00-declaration.json",
+        "sha256": "72d7485018c8d34c227041eedf7ac110d7d83c630ca5decd200744326937b4b2"
+      },
+      "prepared/development/00-native-output.json": {
+        "bytes": 25464,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/00-native-output.json",
+        "sha256": "0ce2c8ad44929c858362a83081f1adbaec869829f6f128a294dd9a53d78b4b9f"
+      },
+      "prepared/development/00-pending.json": {
+        "bytes": 934260,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/00-pending.json",
+        "sha256": "273ffdefae7a56bb4dd18b37780e57274efc04818970746d8dea31a95e6c84c2"
+      },
+      "prepared/development/01-declaration.json": {
+        "bytes": 1321,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/01-declaration.json",
+        "sha256": "3fad4be103f9925f35f07f0074467d26b82eece0571042583d78a0837839561e"
+      },
+      "prepared/development/01-native-output.json": {
+        "bytes": 25454,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/01-native-output.json",
+        "sha256": "6abae35bafb3c83683a2d6d4854fea6616083427005cb77663bdbc6f4cea0f5b"
+      },
+      "prepared/development/01-pending.json": {
+        "bytes": 934256,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/01-pending.json",
+        "sha256": "5557517bc22f86a8513cf4b58431bc09d5d77a922dc53e47b71c603db51abbbf"
+      },
+      "prepared/development/02-declaration.json": {
+        "bytes": 1333,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/02-declaration.json",
+        "sha256": "c5d227326e7c245c080f1bd9bc750a765eb0f66f20fa9c3a7c21dd30cec6f836"
+      },
+      "prepared/development/02-native-output.json": {
+        "bytes": 25484,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/02-native-output.json",
+        "sha256": "a069acd267cb2408cbcdf3285ea4f7e94c6cdd0a3ee1931720013c71ca816a70"
+      },
+      "prepared/development/02-pending.json": {
+        "bytes": 934268,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/02-pending.json",
+        "sha256": "f43ee8efe0119d296fc21ecdc0635ce4d0da89b83505504694363daa84121d6b"
+      },
+      "prepared/development/03-declaration.json": {
+        "bytes": 1746,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/03-declaration.json",
+        "sha256": "4e66f8a5c113950b4dfe7e4f4787d9eb3a7a53e274d7c21fb616ca3919451bc2"
+      },
+      "prepared/development/03-native-output.json": {
+        "bytes": 30416,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/03-native-output.json",
+        "sha256": "99cea2f0d4f4534c1e5620f0d633b1aa4e3e01bc6c2abcdf03e0e34fd69ce03b"
+      },
+      "prepared/development/03-pending.json": {
+        "bytes": 934780,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/03-pending.json",
+        "sha256": "c4b381a9e719dcc1a490f0ab81141aa99f2f8f17e7e47d5d6d09cca19b9590da"
+      },
+      "prepared/development/04-declaration.json": {
+        "bytes": 1764,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/04-declaration.json",
+        "sha256": "683033d9e501d5fb2f2bab9592427bcd4151f58ead7a739662571ae22f61734f"
+      },
+      "prepared/development/04-native-output.json": {
+        "bytes": 30461,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/04-native-output.json",
+        "sha256": "7ea4b02a753bafbf2d28338be3c090a791404eb579f69e5540c980f39b2d31e5"
+      },
+      "prepared/development/04-pending.json": {
+        "bytes": 934799,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/04-pending.json",
+        "sha256": "bc6badd5071910f298b6159a52c22b120313a850749f1e85f5e61c5c27d60c10"
+      },
+      "prepared/development/05-declaration.json": {
+        "bytes": 1754,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/05-declaration.json",
+        "sha256": "593b03fbee841370dd383b9ea0f37bf4a120ce6296b71c8c4eae0c4a50b768ed"
+      },
+      "prepared/development/05-native-output.json": {
+        "bytes": 30436,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/05-native-output.json",
+        "sha256": "8ef8382d7438c9f3d6d4fae400fc33d76556c5a6a0adacbbd01a9b7cff54d702"
+      },
+      "prepared/development/05-pending.json": {
+        "bytes": 934788,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/05-pending.json",
+        "sha256": "cf33a17b35d9457751383dd7312e9ec7ad3e548ae3d4569951fe839c6f002002"
+      },
+      "prepared/development/06-declaration.json": {
+        "bytes": 1788,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/06-declaration.json",
+        "sha256": "b6bbf2ac7b13fe4886dc84e15fcfbced10e27807894eb0b065147244bfa26517"
+      },
+      "prepared/development/06-native-output.json": {
+        "bytes": 31095,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/06-native-output.json",
+        "sha256": "ff9868e20f9ed1af436b6871db47e478e9dcb0798992f1840797427710f65b30"
+      },
+      "prepared/development/06-pending.json": {
+        "bytes": 934837,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/06-pending.json",
+        "sha256": "807363fd072fcb117133764eedda5bbeeeca4bc73229ec0551e2befca1f51ace"
+      },
+      "prepared/development/07-declaration.json": {
+        "bytes": 1796,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/07-declaration.json",
+        "sha256": "417f6d37dd614f5157c4426b516958ead9b1a89892e3521c2f6ebb7b6e28b74a"
+      },
+      "prepared/development/07-native-output.json": {
+        "bytes": 31115,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/07-native-output.json",
+        "sha256": "c7a804536b672e6a7cc76ae40985bce82f64bbffa4cb23b69ad5b324430306f9"
+      },
+      "prepared/development/07-pending.json": {
+        "bytes": 934845,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/07-pending.json",
+        "sha256": "d6a484831efe64a45cd682b677fcf81fe554301f9afe54de82747ab3be196832"
+      },
+      "prepared/development/08-declaration.json": {
+        "bytes": 1792,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/08-declaration.json",
+        "sha256": "4b46342749a57f10067aa69e7fb23707b57feb41bdae0e90fab4fd778fb01c58"
+      },
+      "prepared/development/08-native-output.json": {
+        "bytes": 31105,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/08-native-output.json",
+        "sha256": "a171654b70b687227cda72fb95cbe1817206cca258aaf595ff6b4e9cb1966d30"
+      },
+      "prepared/development/08-pending.json": {
+        "bytes": 934841,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/development/08-pending.json",
+        "sha256": "087306623e6841ec92a2225e3c200f7489688477e975aa24e17d2b872ea4b211"
+      },
+      "prepared/native-preparation-manifest.json": {
+        "bytes": 16344,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/native-preparation-manifest.json",
+        "sha256": "116024441dc30f8bf0fb72bf784a623170f227ba95b1b8405702d861a65c7468"
+      },
+      "prepared/native-prepared/LegalSourceFamily.lean": {
+        "bytes": 351,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/native-prepared/LegalSourceFamily.lean",
+        "sha256": "42690e1370e125540725bcd4949150266b658723853033235e3a9f0f3e62d941"
+      },
+      "prepared/native-prepared/LegalSourceFamily/Candidate0000.lean": {
+        "bytes": 539,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/native-prepared/LegalSourceFamily/Candidate0000.lean",
+        "sha256": "5ea88c69f307e7832190e2d24ed3fb46d78944a12686a11ebd15dd4dc914aab6"
+      },
+      "prepared/native-prepared/LegalSourceFamily/Candidate0001.lean": {
+        "bytes": 539,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/native-prepared/LegalSourceFamily/Candidate0001.lean",
+        "sha256": "8d910075eff2e7bf625e873cd2fedf7caf658d2605f035a9d43b4e7823853776"
+      },
+      "prepared/native-prepared/LegalSourceFamily/Candidate0002.lean": {
+        "bytes": 539,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/native-prepared/LegalSourceFamily/Candidate0002.lean",
+        "sha256": "50abe43d13f41f1bf27419dc495f309036bedac556b8b340183d7757f214dffb"
+      },
+      "prepared/native-prepared/LegalSourceFamily/Candidate0003.lean": {
+        "bytes": 739,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/native-prepared/LegalSourceFamily/Candidate0003.lean",
+        "sha256": "f586633e57cc22c2f8c2d53354765ca769f1ccd5d5ca9ab1070d805ae4d9d558"
+      },
+      "prepared/native-prepared/LegalSourceFamily/Candidate0004.lean": {
+        "bytes": 739,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/native-prepared/LegalSourceFamily/Candidate0004.lean",
+        "sha256": "f6d170f0bc96db5c69098a5efd1003080e86b03cf625f7a918fb251b8ca7a889"
+      },
+      "prepared/native-prepared/LegalSourceFamily/Candidate0005.lean": {
+        "bytes": 739,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/native-prepared/LegalSourceFamily/Candidate0005.lean",
+        "sha256": "a58d81844f3bc5e9afb8a5be3a96ff6e7ebc00ab2aad36d671d2710bd534b560"
+      },
+      "prepared/native-prepared/LegalSourceFamily/Candidate0006.lean": {
+        "bytes": 757,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/native-prepared/LegalSourceFamily/Candidate0006.lean",
+        "sha256": "7850c05217cbcaa84c740c4b50ff629a9c1caa302908229dd1c6f5dc00d813c6"
+      },
+      "prepared/native-prepared/LegalSourceFamily/Candidate0007.lean": {
+        "bytes": 757,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/native-prepared/LegalSourceFamily/Candidate0007.lean",
+        "sha256": "011b40f6588f478af619fcaf2a155c53f02fed5100ace33ed857ca9f217c8c79"
+      },
+      "prepared/native-prepared/LegalSourceFamily/Candidate0008.lean": {
+        "bytes": 757,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/native-prepared/LegalSourceFamily/Candidate0008.lean",
+        "sha256": "9d261ecb62eb7c18234d1598824641f8bdb0242a3513e446d188d5836f70e5e0"
+      },
+      "prepared/native-prepared/LegalSourceFamily/Prelude.lean": {
+        "bytes": 1270,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/native-prepared/LegalSourceFamily/Prelude.lean",
+        "sha256": "e9272074805daf3e7329058cc1e10f59deece713e4f8ad04e9d123c37d3537ce"
+      },
+      "prepared/native-prepared/lakefile.toml": {
+        "bytes": 106,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/native-prepared/lakefile.toml",
+        "sha256": "357e3b2caacf63a7e9dafe4b0536b2ab68240327fdd7f20297ba2ae2fc6131c0"
+      },
+      "prepared/native-prepared/lean-toolchain": {
+        "bytes": 25,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/native-prepared/lean-toolchain",
+        "sha256": "d5edba4e4b8faad9c1baeadb265716d20d03be4d1a2647dc5e35b0c0325bea7b"
+      },
+      "prepared/native-prepared/source-family-inputs.json": {
+        "bytes": 20195,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/native-prepared/source-family-inputs.json",
+        "sha256": "efe934eee73f696ed5bb8bfc0f5339eedd558ee47392db7aa6f3da18cde2905a"
+      },
+      "prepared/native-requests.json": {
+        "bytes": 29463,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/native-requests.json",
+        "sha256": "5e511981e4a26228492f576053fee9524eebc1fc86243a25afe6498148025f79"
+      },
+      "prepared/preparation-summary.json": {
+        "bytes": 64357,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/preparation-summary.json",
+        "sha256": "82fcae238ba6e87d6eb44f97ee0b0da91ead6c1ba35367b7a695b2d7d99f879b"
+      },
+      "prepared/statutory/joint-00-blank-declaration.json": {
+        "bytes": 1392,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/statutory/joint-00-blank-declaration.json",
+        "sha256": "5f7c6d79befd5a21a8468be9a96d226b87bae453ff2843e7091bddef23de340e"
+      },
+      "prepared/statutory/joint-00-pending.json": {
+        "bytes": 408036,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/statutory/joint-00-pending.json",
+        "sha256": "019cec63449dadc23004c312b1da3fdc5d65b758656751a39ee17edd5a91a607"
+      },
+      "prepared/statutory/joint-01-blank-declaration.json": {
+        "bytes": 1288,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/statutory/joint-01-blank-declaration.json",
+        "sha256": "0847c2770690909415130e3ffb4709a832e436c7443b4b82777a41fddaba31d2"
+      },
+      "prepared/statutory/joint-01-pending.json": {
+        "bytes": 407913,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/statutory/joint-01-pending.json",
+        "sha256": "3a8af984e70ef22d93a456fc89ec433380f6aed77322b6aae26788cd5df5b345"
+      },
+      "prepared/statutory/joint-02-blank-declaration.json": {
+        "bytes": 1262,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/statutory/joint-02-blank-declaration.json",
+        "sha256": "e0a77f1f4449f8bf189343738cdc6f259b57a8818b3cb15e38d64981873cab26"
+      },
+      "prepared/statutory/joint-02-pending.json": {
+        "bytes": 407835,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/statutory/joint-02-pending.json",
+        "sha256": "b2df6ed4e111c58825edf1efb410ba2f4b92215637ea4fc57d6c061040319968"
+      },
+      "prepared/statutory/joint-05-blank-declaration.json": {
+        "bytes": 1440,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/statutory/joint-05-blank-declaration.json",
+        "sha256": "0a0fe3c935c8cade32a3b1d11e5a5b32cbc7536ee090c4e77c1981c077aa73f3"
+      },
+      "prepared/statutory/joint-05-pending.json": {
+        "bytes": 408495,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/statutory/joint-05-pending.json",
+        "sha256": "418578986e9370696bfdf54694e7cacab4b112872615ee9a813ad502f2e09f8d"
+      },
+      "prepared/statutory/raw-01-blank-declaration.json": {
+        "bytes": 1288,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/statutory/raw-01-blank-declaration.json",
+        "sha256": "b7afa935e79d55aba4f1321115a8fc84ca183001dde9f6e408029fb3b2d1e130"
+      },
+      "prepared/statutory/raw-01-pending.json": {
+        "bytes": 298818,
+        "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/prepared-pilot-v01/statutory/raw-01-pending.json",
+        "sha256": "94632a56d4d3c90ff5f43a37aebd895e50e0e0c3883fb5d4934c07d2ad956020"
+      }
+    },
+    "failed_attempts_and_correction_drafts_retained": true,
+    "findings": [],
+    "full_foreign_ledgers_excluded": true,
+    "full_training_archive_excluded": true,
+    "inventory_itself_excluded_to_avoid_self_digest": true,
+    "later_staged_review_and_publication_observations_remain_separate": true,
+    "new_semantic_labels": 0,
+    "passed": true,
+    "prepared_directories": [
+      "prepared-pilot-v01",
+      "native-build-v01"
+    ],
+    "schema": "formal-output-contribution-copy-inventory/v1",
+    "selected_top_level_names": [
+      "audit_git_integration.py",
+      "authored-development-cue-declarations-v02.json",
+      "authored-development-cue-declarations.json",
+      "authored-development-source-only-v02.json",
+      "authored-development-source-only.json",
+      "baseline-heads.json",
+      "bootstrap_inert.py",
+      "canonical-intake.json",
+      "compiler-execution-protocol-v01.json",
+      "compiler-protocol-independent-review-v01.json",
+      "contribution.md",
+      "contribution_draft_v01.md",
+      "copy_contribution.py",
+      "development-fixture-independent-review-v02.json",
+      "family-adapter-independent-review-v01.json",
+      "inert-test-harness-independent-review-v01.json",
+      "integration-helper-independent-review-v01.json",
+      "inert-tests-v01.log",
+      "inert-tests-v01.xml",
+      "inert-tests-v02.log",
+      "inert-tests-v02.xml",
+      "inert-tests-v03.log",
+      "inert-tests-v03.xml",
+      "inert-tests-v04.log",
+      "inert-tests-v04.xml",
+      "inert-tests-v05.log",
+      "inert-tests-v05.xml",
+      "intake-independent-review-v01.json",
+      "main-progress-review.json",
+      "native-build-execution-v01.log",
+      "native-build-result-v01.json",
+      "native-result-independent-review-v01.json",
+      "native-result-independent-review-v02.json",
+      "preparation-execution-v01.log",
+      "preparation-observation-v01.json",
+      "preparation-result-independent-review-v01.json",
+      "prepare_compiler_protocol.py",
+      "prepare_contribution_inventory.py",
+      "prepare_development_inputs.py",
+      "prepare_development_inputs_draft_v01.py",
+      "prepare_development_inputs_v02.py",
+      "prepare_formal_output_pilot.py",
+      "prepare_formal_output_pilot_draft_v01.py",
+      "prepare_formal_output_pilot_draft_v02.py",
+      "record_github_checks.py",
+      "record_staged_map.py",
+      "record_staged_map_draft_v01.py",
+      "record_staged_map_draft_v02.py",
+      "retained-owner-pins.json",
+      "review_main_progress.py",
+      "run_inert_tests.py",
+      "run_inert_tests_draft_v01.py",
+      "run_inert_tests_draft_v02.py",
+      "run_native_build.py",
+      "saved-span-family-adapter-build-v01.json",
+      "selected-inert-tests-observation-v01.json",
+      "source-code-stage-v01.json",
+      "source-code-stage-v02.json",
+      "source-guide_draft_v01.md",
+      "statutory-declaration-preflight-build-v01.json",
+      "statutory-preflight-independent-review-v01.json",
+      "statutory-source-only-inputs.json"
+    ],
+    "weight_bodies_excluded": true
+  },
+  "default_promotion": false,
+  "existing_weight_release": {
+    "commit": "a2c8aa64d8c363eb796438b385c14058e607a5ec",
+    "new_weights_in_this_contribution": false,
+    "path": "releases/20261011-structured-span-probability-v1",
+    "repo_id": "Publicus/legal-ir-autoencoder",
+    "url": "https://huggingface.co/Publicus/legal-ir-autoencoder/tree/a2c8aa64d8c363eb796438b385c14058e607a5ec/releases/20261011-structured-span-probability-v1"
+  },
+  "other_workspace_gitlinks_update_authorized": false,
+  "receipt_pins": [
+    {
+      "bytes": 222,
+      "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/source-pr-merged-v01.json",
+      "sha256": "aee00455e86760ecd3318ffb03aef1798552d63e8a49209a6500cb8293f4a46d"
+    },
+    {
+      "bytes": 11077,
+      "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/source-git-integration-audit-v01.json",
+      "sha256": "4ebab6281251cca83426c828bf054b9f1265db495e239d4fa6f58a3c6d5aa96c"
+    },
+    {
+      "bytes": 87137,
+      "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/source-stage-independent-review-v01.json",
+      "sha256": "a84c7a8e3c2cd7066b95005c76fd0d5aed77b7813c6258dff02820d2131611f2"
+    },
+    {
+      "bytes": 118934,
+      "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/source-github-checks-v01.json",
+      "sha256": "38b660f5ed9fb677b4559653e125fee162e6e6b562506f551a98a614fc6d109f"
+    },
+    {
+      "bytes": 42106,
+      "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/contribution-copy-inputs-v01.json",
+      "sha256": "9d3b86b7a277f5f72d325bd089f8ed722a96443503628e3f9895acf6ee88ede3"
+    },
+    {
+      "bytes": 108827,
+      "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/contribution-inventory-independent-review-v01.json",
+      "sha256": "ba203698567d89a4590e0f45d98b514130f4e2d29845340662016fb00778799c"
+    },
+    {
+      "bytes": 6762,
+      "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/native-build-result-v01.json",
+      "sha256": "68013a41276201a07fd6d71a7206899125ceff2fda878bf5937b53e4a94fe64d"
+    },
+    {
+      "bytes": 49031,
+      "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/native-result-independent-review-v02.json",
+      "sha256": "75a561c89b3e4fd743b3cbb79aa915c82398aa4cacdf3e8ef28d619b22f3a3d9"
+    },
+    {
+      "bytes": 736,
+      "path": "/home/barberb/lift_coding/artifacts/legal-formal-output-20261011-01/canonical-before-publication-v01.json",
+      "sha256": "5879a98f9cadbf71799152004adc64e5833e256b2e728884afda206371cbe61e"
+    }
+  ],
+  "root_merge_audit_pending": true,
+  "schema": "legal-formal-output-workspace-publication/v1",
+  "source_additions": 140,
+  "source_base": "4af461728329cdad4bfb910ab878d016ce279e54",
+  "source_git_integration_passed": true,
+  "source_merge": "7fc3f57a94108030be3cceca7368920754754a94",
+  "source_own": "cea94ddd9962f3e9e7926fa741e752ac112131fc",
+  "source_pr": {
+    "headRefOid": "cea94ddd9962f3e9e7926fa741e752ac112131fc",
+    "mergeCommit": {
+      "oid": "7fc3f57a94108030be3cceca7368920754754a94"
+    },
+    "number": 1284,
+    "state": "MERGED",
+    "url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1284"
+  },
+  "validation": {
+    "actual_human_submissions": 0,
+    "actual_native_command": "lake build legal",
+    "admitted": false,
+    "compiled_actual_modules": 11,
+    "compiled_expected_modules": 11,
+    "full_logic_family_support": false,
+    "hosted_ci_note": "Observed optional jobs blocked by account billing lock; other optional jobs queued at snapshot. Local tests and dedicated native build passed.",
+    "hosted_ci_passed": false,
+    "model_calls": 0,
+    "native_requests": 9,
+    "optimizer_updates": 0,
+    "returncode": 0,
+    "selected_native_optin_skipped": 2,
+    "selected_tests_passed": 417,
+    "semantic_accuracy": null,
+    "semantic_labels": 0,
+    "source_only_dimension": 384,
+    "source_only_latent_enabled": false,
+    "statutory_pending_blank_declarations": 5,
+    "statutory_proposals_refused": 11,
+    "statutory_saved_dispositions": 16,
+    "temporal_refusals": 3
+  },
+  "workspace_base": "0213bb5e0a2d5a736e9555fb9112411d6a1313d6"
+}
