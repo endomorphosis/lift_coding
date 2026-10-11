@@ -1,0 +1,2758 @@
+{
+  "canonical_intake": {
+    "identity": {
+      "bytes": 643,
+      "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/canonical-intake.json",
+      "sha256": "302eb7af14e55cb2e2b7a28c70729aeec31b62d9caa7949f387604d6689b3e63"
+    },
+    "receipt": {
+      "datasets": {
+        "head": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+        "index": {
+          "bytes": 3799757,
+          "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/index",
+          "sha256": "d2a68a76e7a7ed99ef8ba031261cb8e7b66d6fca6c351b0e1e9dd8dc13910175"
+        },
+        "symbolic_head": "refs/heads/main"
+      },
+      "root": {
+        "head": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+        "index": {
+          "bytes": 692628,
+          "path": "/home/barberb/lift_coding/.git/index",
+          "sha256": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4"
+        },
+        "symbolic_head": "refs/heads/chore/fmt-check-main"
+      }
+    }
+  },
+  "copied_evidence": {
+    "bytes": 8775254,
+    "files": 54,
+    "no_weights": true
+  },
+  "copied_inventory": {
+    "identity": {
+      "bytes": 15147,
+      "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/contribution-copy-inputs-v01.json",
+      "sha256": "a2d437a0922aff5a484b49fc348070028791f56f50f524dcfd6ee47b41fd822e"
+    },
+    "receipt": {
+      "actual_model_calls": 0,
+      "actual_updates": 0,
+      "file_count": 54,
+      "files": {
+        "admission-failure-independent-review-v01.json": {
+          "bytes": 36051,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/admission-failure-independent-review-v01.json",
+          "sha256": "3718d0c462e5de7297f2b8ad9365788c037926c7196f8c9d1a1bfd3eaf384524"
+        },
+        "authored-temporal-contrast-corpus-v01.json": {
+          "bytes": 1672663,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/authored-temporal-contrast-corpus-v01.json",
+          "sha256": "47cc9d72fc3678c01962e08d6c61a71c1078bc89ef510e23586e4adfd814c280"
+        },
+        "bootstrap_inert.py": {
+          "bytes": 1208,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/bootstrap_inert.py",
+          "sha256": "030ac4f55adf5bf305bab0fcef9e33daa27c8fd083ddd474eac623e754246da1"
+        },
+        "canonical-intake.json": {
+          "bytes": 643,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/canonical-intake.json",
+          "sha256": "302eb7af14e55cb2e2b7a28c70729aeec31b62d9caa7949f387604d6689b3e63"
+        },
+        "contribution-draft-v01.md": {
+          "bytes": 7328,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/contribution-draft-v01.md",
+          "sha256": "e073be1d332489bf19c4303c59f5120c767c6fa7d8a0cc979007a7a70ed48b2e"
+        },
+        "contribution-guide-independent-review-v01.json": {
+          "bytes": 7177,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/contribution-guide-independent-review-v01.json",
+          "sha256": "818ec6711f90c48c35ff41c7ff863f86326d129e6e2a9d7f5fa64157943b43ba"
+        },
+        "contribution.md": {
+          "bytes": 7528,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/contribution.md",
+          "sha256": "409ef94a34ae0478ee52412baa69b2d8a966b7c25905c852947f5e0f4079440b"
+        },
+        "copy_contribution.py": {
+          "bytes": 4857,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/copy_contribution.py",
+          "sha256": "2d49fdf90c1f2ced1bd4c4d2036c5b99aa0aa8c84206cd8289fc1b949db7de46"
+        },
+        "corpus-draft-v01.py": {
+          "bytes": 15257,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/corpus-draft-v01.py",
+          "sha256": "64cecf8bb7d03e7831fbdd06d52151ed11db7f804005f21dc8b420c4d2bad71c"
+        },
+        "corpus-independent-review-v01.json": {
+          "bytes": 7657,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/corpus-independent-review-v01.json",
+          "sha256": "1c060270b7bd057b07d3b203e22785f8c2d30e20fe24fef6afee0883dc42f958"
+        },
+        "corpus-independent-review-v02.json": {
+          "bytes": 12700,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/corpus-independent-review-v02.json",
+          "sha256": "423d775253dc04ec4b182f3db0ae800215d8acde6a30f53a2eee27b78089b0b5"
+        },
+        "corpus-tests-draft-v01.py": {
+          "bytes": 16843,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/corpus-tests-draft-v01.py",
+          "sha256": "93b166b82f47bddaefd0a8c479cc9635b39f3f704cc296120fb13e4291192e32"
+        },
+        "experiment-plan-v01.json": {
+          "bytes": 37329,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/experiment-plan-v01.json",
+          "sha256": "03974404c4476a395a18667bb52da9a2f741c7a9ba3331f6518b2549f441f794"
+        },
+        "failed-attempt/child-exit.json": {
+          "bytes": 76,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/temporal-role-contrast-20261011-01/child-exit.json",
+          "sha256": "bbb5902ca8ad8fb95b029bf43a4c84e550850660cf478cd6669e175be794b803"
+        },
+        "failed-attempt/failure-primary.json": {
+          "bytes": 1366,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/temporal-role-contrast-20261011-01/failure-primary.json",
+          "sha256": "1c78826718d0498bf7498dd3183a9b24c612d73dfa13316def22d894dafe1605"
+        },
+        "failed-attempt/guardian-exit.json": {
+          "bytes": 1763,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/temporal-role-contrast-20261011-01/guardian-exit.json",
+          "sha256": "f5f233dfb6d9732fac2f7976b553bd62ae270229c31557fa08d299197e36582b"
+        },
+        "failed-attempt/pre-admission.json": {
+          "bytes": 8005,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/temporal-role-contrast-20261011-01/pre-admission.json",
+          "sha256": "cbd0614f02d3774266bf29a0f15ab1b39678a79722863fba6615edeabe0637b5"
+        },
+        "failed-attempt/resources-final-failure.json": {
+          "bytes": 718,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/temporal-role-contrast-20261011-01/resources-final-failure.json",
+          "sha256": "8db4574d3f969060b3af6eecb5f64719a8b0b90679cb5ab74e5c9dbaa99011cf"
+        },
+        "guardian-execution-v01.log": {
+          "bytes": 225,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/guardian-execution-v01.log",
+          "sha256": "9e1492dca5ff89ee7e2b72799bf7c1742683c34103b8b80a7a83e29ab2738289"
+        },
+        "hf-before-file-identities-v01.json": {
+          "bytes": 1019575,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/hf-before-file-identities-v01.json",
+          "sha256": "0af93941ce0d20596561ec38e18fa3c64553bf8c61bfcc67c432787c4fa9fd06"
+        },
+        "hf-helper-static-review-v01.json": {
+          "bytes": 7934,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/hf-helper-static-review-v01.json",
+          "sha256": "4e466a4081371c082752750f314ec218b30155afb8e6259b08c17fee4cc9a951"
+        },
+        "hf-helper-static-review-v02.json": {
+          "bytes": 9125,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/hf-helper-static-review-v02.json",
+          "sha256": "16055554c4c991c5bc710da9ffddeed4193219d305e345c8d6a10a86fd6dafe7"
+        },
+        "hf-intake-v01.json": {
+          "bytes": 445304,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/hf-intake-v01.json",
+          "sha256": "ab063898b5995eb03a9cbab687e43b1fb3b9e089968d5ea589141de2069f97ea"
+        },
+        "inert-ambiguity-audit-v01.json": {
+          "bytes": 62331,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/inert-ambiguity-audit-v01.json",
+          "sha256": "fe40c5e16b77f1dfa7b55af35de1536a9e690a3534a501c3de1f07967ec19e8e"
+        },
+        "inert-corpus-tests-v02.log": {
+          "bytes": 99,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/inert-corpus-tests-v02.log",
+          "sha256": "138ccb73b20385d00228f882f28042933aea8c5e4deb5e66b070c4e1f0fdfbc5"
+        },
+        "inert-corpus-tests-v02.xml": {
+          "bytes": 14680,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/inert-corpus-tests-v02.xml",
+          "sha256": "9223a7b4830a192bf4c30a62916192417ff09a29df4d47880e9e85a0a866ff07"
+        },
+        "inert-recipe-tests-v01.log": {
+          "bytes": 99,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/inert-recipe-tests-v01.log",
+          "sha256": "a1774e81f8df96725bc0376e7c1d1e257d01fe39e1cae834328957f83f00d5f1"
+        },
+        "inert-recipe-tests-v01.xml": {
+          "bytes": 12260,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/inert-recipe-tests-v01.xml",
+          "sha256": "3352d4cbd492589d365ab276c2714b4d9ede8bb92e33bde27ba60234d936599f"
+        },
+        "inert-test-observation-v01.json": {
+          "bytes": 1065,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/inert-test-observation-v01.json",
+          "sha256": "339ff1885da531520c2940ea2797950ba2d15a4136d792a2ece669cdb5f62b0f"
+        },
+        "inert-test-observation-v02.json": {
+          "bytes": 2134,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/inert-test-observation-v02.json",
+          "sha256": "648ecaf6faa5c7a81fab8c681a48bdc4a8751fd90e733f48833f935c07829ddd"
+        },
+        "inert-tests-v01.log": {
+          "bytes": 260,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/inert-tests-v01.log",
+          "sha256": "73c7ddf188c28228dba92fd7b3ab44343a513df8ac2487a5dee325e67789986a"
+        },
+        "inert-tests-v01.xml": {
+          "bytes": 67805,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/inert-tests-v01.xml",
+          "sha256": "008b94e75e51d006d71bd4c660525317b1987a3d3c090571ae991f6772e28236"
+        },
+        "intake.json": {
+          "bytes": 291,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/intake.json",
+          "sha256": "7927724d03618cb644dc9779c6b2a2f71bf1a62c3f30ff147a7bd24155e59209"
+        },
+        "main-progress-review-v01.json": {
+          "bytes": 702,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/main-progress-review-v01.json",
+          "sha256": "77d3364181090885ae7dd7017e657cfad4e5956ea7ed6647b338049c1cbd0a54"
+        },
+        "preparation-execution-v01.log": {
+          "bytes": 203,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/preparation-execution-v01.log",
+          "sha256": "120d9775cae0a4c57f1291f93fd4bb64d645f2d08beb05fa0e381a1b027a305f"
+        },
+        "prepare_hf_release-draft-v01.py": {
+          "bytes": 4291,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/prepare_hf_release-draft-v01.py",
+          "sha256": "c37de0120fef0b471b663a2db8d857ee0610f62efb512484699c414ae41286f3"
+        },
+        "prepare_hf_release-draft-v02.py": {
+          "bytes": 5036,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/prepare_hf_release-draft-v02.py",
+          "sha256": "502e43660ce6f519236b3550c47d1c9620ade2e680c2efd4f675defcf4ff6929"
+        },
+        "prepare_hf_release.py": {
+          "bytes": 6249,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/prepare_hf_release.py",
+          "sha256": "bac6db1eeb0f1746cf3ba924b70c68dd8e39882ca4bb63e0132a0dee651bbef0"
+        },
+        "prepare_temporal_contrast_pilot.py": {
+          "bytes": 10203,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/prepare_temporal_contrast_pilot.py",
+          "sha256": "acf9cd3ef8bbfed855cc1b49886145e0a8fb7ab2c365901e57c041c4ecc2da83"
+        },
+        "publish_hf_release-draft-v01.py": {
+          "bytes": 5602,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/publish_hf_release-draft-v01.py",
+          "sha256": "c689b7bfbc9971ff65629fe6f01684780012755f8235ebfbbf1efa2ee76e34b9"
+        },
+        "publish_hf_release-draft-v02.py": {
+          "bytes": 5807,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/publish_hf_release-draft-v02.py",
+          "sha256": "0876c7133395264b89f0ca2c6380e595c90220891661be2f8b3560a0799e7388"
+        },
+        "publish_hf_release.py": {
+          "bytes": 8179,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/publish_hf_release.py",
+          "sha256": "ad121bc72a11bbae5abd476ec79d5cbbc21c8250d5417ebfa6d47bce6923e5f6"
+        },
+        "recipe-preflight-v01.json": {
+          "bytes": 626,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/recipe-preflight-v01.json",
+          "sha256": "d25031fbe7650af5d939053ca616280a35a6aee62d60e3ccc131faeaf7bdc8bd"
+        },
+        "resource-compatibility-v01.json": {
+          "bytes": 6800,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/resource-compatibility-v01.json",
+          "sha256": "ccaadc83e48a5aae69f6b97339a6ba1bcc647925502ae8059ed4b00cbad289af"
+        },
+        "resource-ledger-intake-v01.json": {
+          "bytes": 55606,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/resource-ledger-intake-v01.json",
+          "sha256": "c64319b51ee7a1f6d524c3036c64475d96c229afa528c5e93654fa0242711eff"
+        },
+        "run_inert_tests.py": {
+          "bytes": 4569,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/run_inert_tests.py",
+          "sha256": "024475419c8c632510d0560ddbbb659b616f13bb55e1e991bea7a61b603a4c30"
+        },
+        "run_scope_guardian.py": {
+          "bytes": 38281,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/run_scope_guardian.py",
+          "sha256": "10c7c7350a7dbb564ab0fb1299c905020f874c212765afb86d3c1752105184ed"
+        },
+        "run_temporal_contrast_pilot.py": {
+          "bytes": 42637,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/run_temporal_contrast_pilot.py",
+          "sha256": "0ae80b9554c45ec104430b7f1a482ad834a33e5f41f5f031fdd203634374fa05"
+        },
+        "runner-draft-v01.py": {
+          "bytes": 38473,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/runner-draft-v01.py",
+          "sha256": "1ecaa25ef4245d72b6d6974a84c1c78add814cdd217a32b3891ad018bfc1f225"
+        },
+        "storage-admission-diagnosis-v01.json": {
+          "bytes": 1114,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/storage-admission-diagnosis-v01.json",
+          "sha256": "feed4b28686d35fd59c61ecbc208f196d9efee4a7b76f168fce738e1d8895edb"
+        },
+        "temporal-recovery-review-v01.json": {
+          "bytes": 21267,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/temporal-recovery-review-v01.json",
+          "sha256": "b462bff702e9d86d98e0ea5f6b850e5e3853d2d0de023e983eb51e8857208cd5"
+        },
+        "tests/test_temporal_contrast_recipe.py": {
+          "bytes": 21225,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/tests/test_temporal_contrast_recipe.py",
+          "sha256": "4735379fc6f8e26e5ead9655f48ad5199178d3e2cb49d17daa052046955aa5a7"
+        },
+        "training-export-v01.json": {
+          "bytes": 4972708,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/training-export-v01.json",
+          "sha256": "1992f1c3a3b67d3a3b6d1b01122183e24b537357fc45e928ff5bd747d60825bd"
+        },
+        "training-protocol-independent-review-v01.json": {
+          "bytes": 43320,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/training-protocol-independent-review-v01.json",
+          "sha256": "6b2f95c2d1827690324ffc42161c92eb4f43de1d9b6fbc6a456becb34bd3c115"
+        }
+      },
+      "guardian_attempt_created": true,
+      "inventory_scope": "owned corrected inputs, tests, protocols, preserved drafts and pre-admission refusal",
+      "no_weights": true,
+      "numerical_child_started": false,
+      "schema": "temporal-contrast-contribution-inventory/v1",
+      "total_bytes": 8775254
+    }
+  },
+  "copy_and_stage_review": {
+    "identity": {
+      "bytes": 69539,
+      "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/contribution-copy-stage-independent-review-v01.json",
+      "sha256": "9ad23063eb367d32821d4f9fab672b9f2e63ea5b4e195e30c3c01ac119cbcb0c"
+    },
+    "receipt": {
+      "artifacts": {
+        "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/contribution-copy-inputs-v01.json": {
+          "bytes": 15147,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/contribution-copy-inputs-v01.json",
+          "sha256": "a2d437a0922aff5a484b49fc348070028791f56f50f524dcfd6ee47b41fd822e"
+        },
+        "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/contribution-copy-receipt-v01.json": {
+          "bytes": 788,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/contribution-copy-receipt-v01.json",
+          "sha256": "28f7f51f697b823af0e79b5ef56dd05bc94da075c7edce4e3d799cfe8ba1b976"
+        },
+        "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/copy_contribution.py": {
+          "bytes": 4857,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/copy_contribution.py",
+          "sha256": "2d49fdf90c1f2ced1bd4c4d2036c5b99aa0aa8c84206cd8289fc1b949db7de46"
+        },
+        "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/datasets-staged-objects-v01.json": {
+          "bytes": 18406,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/datasets-staged-objects-v01.json",
+          "sha256": "e958c75d5c803e40903c03ef7cae54aa77ab1d6369bdd00cdfa48667fe2a6b57"
+        },
+        "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/record_source_publication.py": {
+          "bytes": 3201,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/record_source_publication.py",
+          "sha256": "c2670a132834cbc442c3545bcbd09f2e7bbe4464f0bd5362ba1776e8619e7e70"
+        },
+        "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/stage_contribution.py": {
+          "bytes": 3975,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/stage_contribution.py",
+          "sha256": "5ba4a1d8520fc56680366244940195d919a6366205ad2e977234fd1ee70fd79b"
+        },
+        "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/workspace-staged-objects-v01.json": {
+          "bytes": 17298,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/workspace-staged-objects-v01.json",
+          "sha256": "329afabbadc083cad3da864eab2110e0f383ee0cf75491a7cff232ce177e7551"
+        }
+      },
+      "copy_helper_static_review": {
+        "closed_literal_relative_name_selection": true,
+        "exclusive_writes": true,
+        "exhaustive_copies_checked": true,
+        "no_execution_claim": "The helper was read; reviewer did not execute it.",
+        "opening_and_closing_original_sha256_checks": true
+      },
+      "copy_verification": {
+        "all_original_and_copy_bytes_compared": true,
+        "allowed_origins": "49 exact owned F files plus 5 exact failed-attempt A files",
+        "bytes_per_root": 8775254,
+        "copy_receipt_and_inventory_deliberately_not_recursively_copied": true,
+        "exact_exhaustive_regular_files": true,
+        "failed_attempt_exactly_five_regular_files": true,
+        "files_per_root": 54,
+        "includes_foreign_ledger_body": false,
+        "includes_weights": false,
+        "no_symlinks": true,
+        "opening_and_closing_body_bindings_unchanged": true,
+        "original_sha256_and_length_recomputed": true,
+        "roots": [
+          {
+            "byte_exact": true,
+            "files": 54,
+            "root": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/datasets/workspace/test-logs/legal-temporal-contrast-20261011-01/evidence"
+          },
+          {
+            "byte_exact": true,
+            "files": 54,
+            "root": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/workspace/artifacts/legal-temporal-contrast-20261011-01/evidence"
+          }
+        ]
+      },
+      "execution": {
+        "checkpoint_json_parsed": false,
+        "compiler_executed": false,
+        "git_or_ref_mutations": false,
+        "ledger_or_claim_mutations": false,
+        "models_imported": false,
+        "network_or_HF_access": false,
+        "only_mutation": "exclusive frozen creation of this reviewer receipt",
+        "subject_execution": false,
+        "tests_reexecuted": false,
+        "training_or_inference": false
+      },
+      "findings": [],
+      "hooks": {
+        "datasets": {
+          "active_hooks": [],
+          "effective_override_absent": true,
+          "entries": {
+            "applypatch-msg.sample": {
+              "bytes": 478,
+              "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/hooks/applypatch-msg.sample",
+              "sha256": "0223497a0b8b033aa58a3a521b8629869386cf7ab0e2f101963d328aa62193f7"
+            },
+            "commit-msg.sample": {
+              "bytes": 896,
+              "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/hooks/commit-msg.sample",
+              "sha256": "1f74d5e9292979b573ebd59741d46cb93ff391acdd083d340b94370753d92437"
+            },
+            "fsmonitor-watchman.sample": {
+              "bytes": 4726,
+              "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/hooks/fsmonitor-watchman.sample",
+              "sha256": "e0549964e93897b519bd8e333c037e51fff0f88ba13e086a331592bf801fa1d0"
+            },
+            "post-update.sample": {
+              "bytes": 189,
+              "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/hooks/post-update.sample",
+              "sha256": "81765af2daef323061dcbc5e61fc16481cb74b3bac9ad8a174b186523586f6c5"
+            },
+            "pre-applypatch.sample": {
+              "bytes": 424,
+              "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/hooks/pre-applypatch.sample",
+              "sha256": "e15c5b469ea3e0a695bea6f2c82bcf8e62821074939ddd85b77e0007ff165475"
+            },
+            "pre-commit.sample": {
+              "bytes": 1643,
+              "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/hooks/pre-commit.sample",
+              "sha256": "f9af7d95eb1231ecf2eba9770fedfa8d4797a12b02d7240e98d568201251244a"
+            },
+            "pre-merge-commit.sample": {
+              "bytes": 416,
+              "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/hooks/pre-merge-commit.sample",
+              "sha256": "d3825a70337940ebbd0a5c072984e13245920cdf8898bd225c8d27a6dfc9cb53"
+            },
+            "pre-push.sample": {
+              "bytes": 1374,
+              "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/hooks/pre-push.sample",
+              "sha256": "ecce9c7e04d3f5dd9d8ada81753dd1d549a9634b26770042b58dda00217d086a"
+            },
+            "pre-rebase.sample": {
+              "bytes": 4898,
+              "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/hooks/pre-rebase.sample",
+              "sha256": "4febce867790052338076f4e66cc47efb14879d18097d1d61c8261859eaaa7b3"
+            },
+            "pre-receive.sample": {
+              "bytes": 544,
+              "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/hooks/pre-receive.sample",
+              "sha256": "a4c3d2b9c7bb3fd8d1441c31bd4ee71a595d66b44fcf49ddb310252320169989"
+            },
+            "prepare-commit-msg.sample": {
+              "bytes": 1492,
+              "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/hooks/prepare-commit-msg.sample",
+              "sha256": "e9ddcaa4189fddd25ed97fc8c789eca7b6ca16390b2392ae3276f0c8e1aa4619"
+            },
+            "push-to-checkout.sample": {
+              "bytes": 2783,
+              "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/hooks/push-to-checkout.sample",
+              "sha256": "a53d0741798b287c6dd7afa64aee473f305e65d3f49463bb9d7408ec3b12bf5f"
+            },
+            "sendemail-validate.sample": {
+              "bytes": 2308,
+              "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/hooks/sendemail-validate.sample",
+              "sha256": "44ebfc923dc5466bc009602f0ecf067b9c65459abfe8868ddc49b78e6ced7a92"
+            },
+            "update.sample": {
+              "bytes": 3650,
+              "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/hooks/update.sample",
+              "sha256": "8d5f2fa83e103cf08b57eaa67521df9194f45cbdbcb37da52ad586097a14d106"
+            }
+          },
+          "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/hooks"
+        },
+        "workspace": {
+          "active_hooks": [],
+          "effective_override_absent": true,
+          "entries": {
+            "applypatch-msg.sample": {
+              "bytes": 478,
+              "path": "/home/barberb/lift_coding/.git/hooks/applypatch-msg.sample",
+              "sha256": "0223497a0b8b033aa58a3a521b8629869386cf7ab0e2f101963d328aa62193f7"
+            },
+            "commit-msg.sample": {
+              "bytes": 896,
+              "path": "/home/barberb/lift_coding/.git/hooks/commit-msg.sample",
+              "sha256": "1f74d5e9292979b573ebd59741d46cb93ff391acdd083d340b94370753d92437"
+            },
+            "fsmonitor-watchman.sample": {
+              "bytes": 4726,
+              "path": "/home/barberb/lift_coding/.git/hooks/fsmonitor-watchman.sample",
+              "sha256": "e0549964e93897b519bd8e333c037e51fff0f88ba13e086a331592bf801fa1d0"
+            },
+            "post-update.sample": {
+              "bytes": 189,
+              "path": "/home/barberb/lift_coding/.git/hooks/post-update.sample",
+              "sha256": "81765af2daef323061dcbc5e61fc16481cb74b3bac9ad8a174b186523586f6c5"
+            },
+            "pre-applypatch.sample": {
+              "bytes": 424,
+              "path": "/home/barberb/lift_coding/.git/hooks/pre-applypatch.sample",
+              "sha256": "e15c5b469ea3e0a695bea6f2c82bcf8e62821074939ddd85b77e0007ff165475"
+            },
+            "pre-commit.sample": {
+              "bytes": 1643,
+              "path": "/home/barberb/lift_coding/.git/hooks/pre-commit.sample",
+              "sha256": "f9af7d95eb1231ecf2eba9770fedfa8d4797a12b02d7240e98d568201251244a"
+            },
+            "pre-merge-commit.sample": {
+              "bytes": 416,
+              "path": "/home/barberb/lift_coding/.git/hooks/pre-merge-commit.sample",
+              "sha256": "d3825a70337940ebbd0a5c072984e13245920cdf8898bd225c8d27a6dfc9cb53"
+            },
+            "pre-push.sample": {
+              "bytes": 1374,
+              "path": "/home/barberb/lift_coding/.git/hooks/pre-push.sample",
+              "sha256": "ecce9c7e04d3f5dd9d8ada81753dd1d549a9634b26770042b58dda00217d086a"
+            },
+            "pre-rebase.sample": {
+              "bytes": 4898,
+              "path": "/home/barberb/lift_coding/.git/hooks/pre-rebase.sample",
+              "sha256": "4febce867790052338076f4e66cc47efb14879d18097d1d61c8261859eaaa7b3"
+            },
+            "pre-receive.sample": {
+              "bytes": 544,
+              "path": "/home/barberb/lift_coding/.git/hooks/pre-receive.sample",
+              "sha256": "a4c3d2b9c7bb3fd8d1441c31bd4ee71a595d66b44fcf49ddb310252320169989"
+            },
+            "prepare-commit-msg.sample": {
+              "bytes": 1492,
+              "path": "/home/barberb/lift_coding/.git/hooks/prepare-commit-msg.sample",
+              "sha256": "e9ddcaa4189fddd25ed97fc8c789eca7b6ca16390b2392ae3276f0c8e1aa4619"
+            },
+            "push-to-checkout.sample": {
+              "bytes": 2783,
+              "path": "/home/barberb/lift_coding/.git/hooks/push-to-checkout.sample",
+              "sha256": "a53d0741798b287c6dd7afa64aee473f305e65d3f49463bb9d7408ec3b12bf5f"
+            },
+            "sendemail-validate.sample": {
+              "bytes": 2308,
+              "path": "/home/barberb/lift_coding/.git/hooks/sendemail-validate.sample",
+              "sha256": "44ebfc923dc5466bc009602f0ecf067b9c65459abfe8868ddc49b78e6ced7a92"
+            },
+            "update.sample": {
+              "bytes": 3650,
+              "path": "/home/barberb/lift_coding/.git/hooks/update.sample",
+              "sha256": "8d5f2fa83e103cf08b57eaa67521df9194f45cbdbcb37da52ad586097a14d106"
+            }
+          },
+          "path": "/home/barberb/lift_coding/.git/hooks"
+        }
+      },
+      "observed_utc": "2026-10-11T23:07:10.233679+00:00",
+      "original_inventory": {
+        "actual_model_calls": 0,
+        "actual_updates": 0,
+        "file_count": 54,
+        "files": {
+          "admission-failure-independent-review-v01.json": {
+            "bytes": 36051,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/admission-failure-independent-review-v01.json",
+            "sha256": "3718d0c462e5de7297f2b8ad9365788c037926c7196f8c9d1a1bfd3eaf384524"
+          },
+          "authored-temporal-contrast-corpus-v01.json": {
+            "bytes": 1672663,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/authored-temporal-contrast-corpus-v01.json",
+            "sha256": "47cc9d72fc3678c01962e08d6c61a71c1078bc89ef510e23586e4adfd814c280"
+          },
+          "bootstrap_inert.py": {
+            "bytes": 1208,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/bootstrap_inert.py",
+            "sha256": "030ac4f55adf5bf305bab0fcef9e33daa27c8fd083ddd474eac623e754246da1"
+          },
+          "canonical-intake.json": {
+            "bytes": 643,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/canonical-intake.json",
+            "sha256": "302eb7af14e55cb2e2b7a28c70729aeec31b62d9caa7949f387604d6689b3e63"
+          },
+          "contribution-draft-v01.md": {
+            "bytes": 7328,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/contribution-draft-v01.md",
+            "sha256": "e073be1d332489bf19c4303c59f5120c767c6fa7d8a0cc979007a7a70ed48b2e"
+          },
+          "contribution-guide-independent-review-v01.json": {
+            "bytes": 7177,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/contribution-guide-independent-review-v01.json",
+            "sha256": "818ec6711f90c48c35ff41c7ff863f86326d129e6e2a9d7f5fa64157943b43ba"
+          },
+          "contribution.md": {
+            "bytes": 7528,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/contribution.md",
+            "sha256": "409ef94a34ae0478ee52412baa69b2d8a966b7c25905c852947f5e0f4079440b"
+          },
+          "copy_contribution.py": {
+            "bytes": 4857,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/copy_contribution.py",
+            "sha256": "2d49fdf90c1f2ced1bd4c4d2036c5b99aa0aa8c84206cd8289fc1b949db7de46"
+          },
+          "corpus-draft-v01.py": {
+            "bytes": 15257,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/corpus-draft-v01.py",
+            "sha256": "64cecf8bb7d03e7831fbdd06d52151ed11db7f804005f21dc8b420c4d2bad71c"
+          },
+          "corpus-independent-review-v01.json": {
+            "bytes": 7657,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/corpus-independent-review-v01.json",
+            "sha256": "1c060270b7bd057b07d3b203e22785f8c2d30e20fe24fef6afee0883dc42f958"
+          },
+          "corpus-independent-review-v02.json": {
+            "bytes": 12700,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/corpus-independent-review-v02.json",
+            "sha256": "423d775253dc04ec4b182f3db0ae800215d8acde6a30f53a2eee27b78089b0b5"
+          },
+          "corpus-tests-draft-v01.py": {
+            "bytes": 16843,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/corpus-tests-draft-v01.py",
+            "sha256": "93b166b82f47bddaefd0a8c479cc9635b39f3f704cc296120fb13e4291192e32"
+          },
+          "experiment-plan-v01.json": {
+            "bytes": 37329,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/experiment-plan-v01.json",
+            "sha256": "03974404c4476a395a18667bb52da9a2f741c7a9ba3331f6518b2549f441f794"
+          },
+          "failed-attempt/child-exit.json": {
+            "bytes": 76,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/temporal-role-contrast-20261011-01/child-exit.json",
+            "sha256": "bbb5902ca8ad8fb95b029bf43a4c84e550850660cf478cd6669e175be794b803"
+          },
+          "failed-attempt/failure-primary.json": {
+            "bytes": 1366,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/temporal-role-contrast-20261011-01/failure-primary.json",
+            "sha256": "1c78826718d0498bf7498dd3183a9b24c612d73dfa13316def22d894dafe1605"
+          },
+          "failed-attempt/guardian-exit.json": {
+            "bytes": 1763,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/temporal-role-contrast-20261011-01/guardian-exit.json",
+            "sha256": "f5f233dfb6d9732fac2f7976b553bd62ae270229c31557fa08d299197e36582b"
+          },
+          "failed-attempt/pre-admission.json": {
+            "bytes": 8005,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/temporal-role-contrast-20261011-01/pre-admission.json",
+            "sha256": "cbd0614f02d3774266bf29a0f15ab1b39678a79722863fba6615edeabe0637b5"
+          },
+          "failed-attempt/resources-final-failure.json": {
+            "bytes": 718,
+            "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/temporal-role-contrast-20261011-01/resources-final-failure.json",
+            "sha256": "8db4574d3f969060b3af6eecb5f64719a8b0b90679cb5ab74e5c9dbaa99011cf"
+          },
+          "guardian-execution-v01.log": {
+            "bytes": 225,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/guardian-execution-v01.log",
+            "sha256": "9e1492dca5ff89ee7e2b72799bf7c1742683c34103b8b80a7a83e29ab2738289"
+          },
+          "hf-before-file-identities-v01.json": {
+            "bytes": 1019575,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/hf-before-file-identities-v01.json",
+            "sha256": "0af93941ce0d20596561ec38e18fa3c64553bf8c61bfcc67c432787c4fa9fd06"
+          },
+          "hf-helper-static-review-v01.json": {
+            "bytes": 7934,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/hf-helper-static-review-v01.json",
+            "sha256": "4e466a4081371c082752750f314ec218b30155afb8e6259b08c17fee4cc9a951"
+          },
+          "hf-helper-static-review-v02.json": {
+            "bytes": 9125,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/hf-helper-static-review-v02.json",
+            "sha256": "16055554c4c991c5bc710da9ffddeed4193219d305e345c8d6a10a86fd6dafe7"
+          },
+          "hf-intake-v01.json": {
+            "bytes": 445304,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/hf-intake-v01.json",
+            "sha256": "ab063898b5995eb03a9cbab687e43b1fb3b9e089968d5ea589141de2069f97ea"
+          },
+          "inert-ambiguity-audit-v01.json": {
+            "bytes": 62331,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/inert-ambiguity-audit-v01.json",
+            "sha256": "fe40c5e16b77f1dfa7b55af35de1536a9e690a3534a501c3de1f07967ec19e8e"
+          },
+          "inert-corpus-tests-v02.log": {
+            "bytes": 99,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/inert-corpus-tests-v02.log",
+            "sha256": "138ccb73b20385d00228f882f28042933aea8c5e4deb5e66b070c4e1f0fdfbc5"
+          },
+          "inert-corpus-tests-v02.xml": {
+            "bytes": 14680,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/inert-corpus-tests-v02.xml",
+            "sha256": "9223a7b4830a192bf4c30a62916192417ff09a29df4d47880e9e85a0a866ff07"
+          },
+          "inert-recipe-tests-v01.log": {
+            "bytes": 99,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/inert-recipe-tests-v01.log",
+            "sha256": "a1774e81f8df96725bc0376e7c1d1e257d01fe39e1cae834328957f83f00d5f1"
+          },
+          "inert-recipe-tests-v01.xml": {
+            "bytes": 12260,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/inert-recipe-tests-v01.xml",
+            "sha256": "3352d4cbd492589d365ab276c2714b4d9ede8bb92e33bde27ba60234d936599f"
+          },
+          "inert-test-observation-v01.json": {
+            "bytes": 1065,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/inert-test-observation-v01.json",
+            "sha256": "339ff1885da531520c2940ea2797950ba2d15a4136d792a2ece669cdb5f62b0f"
+          },
+          "inert-test-observation-v02.json": {
+            "bytes": 2134,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/inert-test-observation-v02.json",
+            "sha256": "648ecaf6faa5c7a81fab8c681a48bdc4a8751fd90e733f48833f935c07829ddd"
+          },
+          "inert-tests-v01.log": {
+            "bytes": 260,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/inert-tests-v01.log",
+            "sha256": "73c7ddf188c28228dba92fd7b3ab44343a513df8ac2487a5dee325e67789986a"
+          },
+          "inert-tests-v01.xml": {
+            "bytes": 67805,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/inert-tests-v01.xml",
+            "sha256": "008b94e75e51d006d71bd4c660525317b1987a3d3c090571ae991f6772e28236"
+          },
+          "intake.json": {
+            "bytes": 291,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/intake.json",
+            "sha256": "7927724d03618cb644dc9779c6b2a2f71bf1a62c3f30ff147a7bd24155e59209"
+          },
+          "main-progress-review-v01.json": {
+            "bytes": 702,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/main-progress-review-v01.json",
+            "sha256": "77d3364181090885ae7dd7017e657cfad4e5956ea7ed6647b338049c1cbd0a54"
+          },
+          "preparation-execution-v01.log": {
+            "bytes": 203,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/preparation-execution-v01.log",
+            "sha256": "120d9775cae0a4c57f1291f93fd4bb64d645f2d08beb05fa0e381a1b027a305f"
+          },
+          "prepare_hf_release-draft-v01.py": {
+            "bytes": 4291,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/prepare_hf_release-draft-v01.py",
+            "sha256": "c37de0120fef0b471b663a2db8d857ee0610f62efb512484699c414ae41286f3"
+          },
+          "prepare_hf_release-draft-v02.py": {
+            "bytes": 5036,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/prepare_hf_release-draft-v02.py",
+            "sha256": "502e43660ce6f519236b3550c47d1c9620ade2e680c2efd4f675defcf4ff6929"
+          },
+          "prepare_hf_release.py": {
+            "bytes": 6249,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/prepare_hf_release.py",
+            "sha256": "bac6db1eeb0f1746cf3ba924b70c68dd8e39882ca4bb63e0132a0dee651bbef0"
+          },
+          "prepare_temporal_contrast_pilot.py": {
+            "bytes": 10203,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/prepare_temporal_contrast_pilot.py",
+            "sha256": "acf9cd3ef8bbfed855cc1b49886145e0a8fb7ab2c365901e57c041c4ecc2da83"
+          },
+          "publish_hf_release-draft-v01.py": {
+            "bytes": 5602,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/publish_hf_release-draft-v01.py",
+            "sha256": "c689b7bfbc9971ff65629fe6f01684780012755f8235ebfbbf1efa2ee76e34b9"
+          },
+          "publish_hf_release-draft-v02.py": {
+            "bytes": 5807,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/publish_hf_release-draft-v02.py",
+            "sha256": "0876c7133395264b89f0ca2c6380e595c90220891661be2f8b3560a0799e7388"
+          },
+          "publish_hf_release.py": {
+            "bytes": 8179,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/publish_hf_release.py",
+            "sha256": "ad121bc72a11bbae5abd476ec79d5cbbc21c8250d5417ebfa6d47bce6923e5f6"
+          },
+          "recipe-preflight-v01.json": {
+            "bytes": 626,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/recipe-preflight-v01.json",
+            "sha256": "d25031fbe7650af5d939053ca616280a35a6aee62d60e3ccc131faeaf7bdc8bd"
+          },
+          "resource-compatibility-v01.json": {
+            "bytes": 6800,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/resource-compatibility-v01.json",
+            "sha256": "ccaadc83e48a5aae69f6b97339a6ba1bcc647925502ae8059ed4b00cbad289af"
+          },
+          "resource-ledger-intake-v01.json": {
+            "bytes": 55606,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/resource-ledger-intake-v01.json",
+            "sha256": "c64319b51ee7a1f6d524c3036c64475d96c229afa528c5e93654fa0242711eff"
+          },
+          "run_inert_tests.py": {
+            "bytes": 4569,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/run_inert_tests.py",
+            "sha256": "024475419c8c632510d0560ddbbb659b616f13bb55e1e991bea7a61b603a4c30"
+          },
+          "run_scope_guardian.py": {
+            "bytes": 38281,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/run_scope_guardian.py",
+            "sha256": "10c7c7350a7dbb564ab0fb1299c905020f874c212765afb86d3c1752105184ed"
+          },
+          "run_temporal_contrast_pilot.py": {
+            "bytes": 42637,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/run_temporal_contrast_pilot.py",
+            "sha256": "0ae80b9554c45ec104430b7f1a482ad834a33e5f41f5f031fdd203634374fa05"
+          },
+          "runner-draft-v01.py": {
+            "bytes": 38473,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/runner-draft-v01.py",
+            "sha256": "1ecaa25ef4245d72b6d6974a84c1c78add814cdd217a32b3891ad018bfc1f225"
+          },
+          "storage-admission-diagnosis-v01.json": {
+            "bytes": 1114,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/storage-admission-diagnosis-v01.json",
+            "sha256": "feed4b28686d35fd59c61ecbc208f196d9efee4a7b76f168fce738e1d8895edb"
+          },
+          "temporal-recovery-review-v01.json": {
+            "bytes": 21267,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/temporal-recovery-review-v01.json",
+            "sha256": "b462bff702e9d86d98e0ea5f6b850e5e3853d2d0de023e983eb51e8857208cd5"
+          },
+          "tests/test_temporal_contrast_recipe.py": {
+            "bytes": 21225,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/tests/test_temporal_contrast_recipe.py",
+            "sha256": "4735379fc6f8e26e5ead9655f48ad5199178d3e2cb49d17daa052046955aa5a7"
+          },
+          "training-export-v01.json": {
+            "bytes": 4972708,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/training-export-v01.json",
+            "sha256": "1992f1c3a3b67d3a3b6d1b01122183e24b537357fc45e928ff5bd747d60825bd"
+          },
+          "training-protocol-independent-review-v01.json": {
+            "bytes": 43320,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/training-protocol-independent-review-v01.json",
+            "sha256": "6b2f95c2d1827690324ffc42161c92eb4f43de1d9b6fbc6a456becb34bd3c115"
+          }
+        },
+        "guardian_attempt_created": true,
+        "inventory_scope": "owned corrected inputs, tests, protocols, preserved drafts and pre-admission refusal",
+        "no_weights": true,
+        "numerical_child_started": false,
+        "schema": "temporal-contrast-contribution-inventory/v1",
+        "total_bytes": 8775254
+      },
+      "passed": true,
+      "prospective_root_integration": {
+        "actual_final_merge_requires_separate_object_verification": true,
+        "expected_final_diff_against_new_main": "56 A ordinary paths plus 1 M source gitlink = 57 paths",
+        "initial_owned_root_additions": 55,
+        "later_source_gitlink_and_publication_json": true,
+        "normal_owned_root_commit_then_merge_fetched_main": "9036a6... as reported by root; not yet object-closure-qualified here",
+        "parallel_other_gitlinks_to_preserve": 8,
+        "status": "planned_not_completed"
+      },
+      "reviewer": "/root/temporal_recovery_review",
+      "schema": "temporal-contrast-contribution-copy-stage-independent-review/v1",
+      "scientific_claim_boundary": {
+        "active8D_or768D_qualification": false,
+        "actual_model_calls": 0,
+        "actual_updates": 0,
+        "current_hf_mutation": false,
+        "current_lake_build": false,
+        "distinct_final_inert_tests": 258,
+        "global_remote_all_weights_audit": false,
+        "new_weights": false,
+        "planned_train_rows": {
+          "contrast": 168,
+          "control": 108
+        },
+        "planned_updates_per_arm": 32,
+        "source_only384_dormant": true,
+        "trainable_authored_rows": 144,
+        "training_status": "charged_storage_capacity_refused_before_child",
+        "unsupported_inert_refusal_candidates": 6
+      },
+      "scope": "Read-only current closed evidence copies, corrected source/doc bytes and exact current index stage objects; source/root publication helper static review only.",
+      "source_publication_helper_static_review": {
+        "actual_first_parent_exact57_added_paths_required": true,
+        "ancestry_required": [
+          "68374b51032b7a9fa795a79829e4d8eb2f2a5ca4",
+          "4b9e96753eb3e5f4951cc3f7c39b09b778d3d6b8",
+          "current_owned_source_HEAD"
+        ],
+        "exclusive_receipt_write": true,
+        "merged_gh_pr_required": true,
+        "normal_two_parent_merge_with_owned_second_parent_required": true,
+        "pin": {
+          "bytes": 3201,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/record_source_publication.py",
+          "sha256": "c2670a132834cbc442c3545bcbd09f2e7bbe4464f0bd5362ba1776e8619e7e70"
+        },
+        "pr_head_equals_own_head": true,
+        "publication_not_yet_qualified": true,
+        "stage_modes_blobs_sha256_and_lengths_required": true,
+        "status": "future_unexecuted_by_reviewer"
+      },
+      "staged_verification": {
+        "actual_index_matches_maps": true,
+        "all54_evidence_blobs_equal_across_two_repositories": true,
+        "all_blob_object_bytes_equal_physical_and_reviewed_source": true,
+        "all_changes_additions": true,
+        "all_modes": "100644",
+        "all_stage_slots_zero": true,
+        "datasets": {
+          "base": "4b9e96753eb3e5f4951cc3f7c39b09b778d3d6b8",
+          "findings": [],
+          "passed": true,
+          "path_count": 57,
+          "paths": {
+            "docs/autoencoders/legal_temporal_role_contrast_20261011.md": {
+              "bytes": 7528,
+              "mode": "100644",
+              "object": "b7bdb29fe8a856e23157bdc145bf745417cb1d00",
+              "sha256": "409ef94a34ae0478ee52412baa69b2d8a966b7c25905c852947f5e0f4079440b",
+              "status": "A"
+            },
+            "ipfs_datasets_py/logic/legal_ir/temporal_role_contrast_corpus.py": {
+              "bytes": 15813,
+              "mode": "100644",
+              "object": "8c0296e65af3bccc72ffcbb281ea6c65c6518dd3",
+              "sha256": "acbae8463f6f1a347272fc83a71246a55110580a1e7221dc2f4b95e10c6bcddd",
+              "status": "A"
+            },
+            "tests/unit/logic/legal_ir/test_temporal_role_contrast_corpus.py": {
+              "bytes": 18610,
+              "mode": "100644",
+              "object": "3e005d3c4e1aa2b428867e8c7a3dc887dee3be43",
+              "sha256": "8d3fe298725ad628a43f6edda0df27ada922fc3d8216afa6faa1123312971bd2",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/admission-failure-independent-review-v01.json": {
+              "bytes": 36051,
+              "mode": "100644",
+              "object": "bf2fb7e632c90bb147b79b66f8b8fe169268817c",
+              "sha256": "3718d0c462e5de7297f2b8ad9365788c037926c7196f8c9d1a1bfd3eaf384524",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/authored-temporal-contrast-corpus-v01.json": {
+              "bytes": 1672663,
+              "mode": "100644",
+              "object": "87f002101219875f79ed08d03db879151e468bd1",
+              "sha256": "47cc9d72fc3678c01962e08d6c61a71c1078bc89ef510e23586e4adfd814c280",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/bootstrap_inert.py": {
+              "bytes": 1208,
+              "mode": "100644",
+              "object": "26ec4cbd6b5290e1f36201781854928e52d42006",
+              "sha256": "030ac4f55adf5bf305bab0fcef9e33daa27c8fd083ddd474eac623e754246da1",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/canonical-intake.json": {
+              "bytes": 643,
+              "mode": "100644",
+              "object": "41dfc5776a17291287a5f2cc948e7fc309b9f8bf",
+              "sha256": "302eb7af14e55cb2e2b7a28c70729aeec31b62d9caa7949f387604d6689b3e63",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/contribution-draft-v01.md": {
+              "bytes": 7328,
+              "mode": "100644",
+              "object": "d2d75e2ae1f7494969c7c80d23d745b902df2bc1",
+              "sha256": "e073be1d332489bf19c4303c59f5120c767c6fa7d8a0cc979007a7a70ed48b2e",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/contribution-guide-independent-review-v01.json": {
+              "bytes": 7177,
+              "mode": "100644",
+              "object": "c5bdb6b9d0a5e8ab5157c11e0357c5591a515009",
+              "sha256": "818ec6711f90c48c35ff41c7ff863f86326d129e6e2a9d7f5fa64157943b43ba",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/contribution.md": {
+              "bytes": 7528,
+              "mode": "100644",
+              "object": "b7bdb29fe8a856e23157bdc145bf745417cb1d00",
+              "sha256": "409ef94a34ae0478ee52412baa69b2d8a966b7c25905c852947f5e0f4079440b",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/copy_contribution.py": {
+              "bytes": 4857,
+              "mode": "100644",
+              "object": "bd8b519ca04607bd7f9d77c5efeaf7a09c725428",
+              "sha256": "2d49fdf90c1f2ced1bd4c4d2036c5b99aa0aa8c84206cd8289fc1b949db7de46",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/corpus-draft-v01.py": {
+              "bytes": 15257,
+              "mode": "100644",
+              "object": "649537df3f44218ee3a5afa91cc648e28d384da0",
+              "sha256": "64cecf8bb7d03e7831fbdd06d52151ed11db7f804005f21dc8b420c4d2bad71c",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/corpus-independent-review-v01.json": {
+              "bytes": 7657,
+              "mode": "100644",
+              "object": "da47ee55f7518ec58b24ad9af709b02eaef090fe",
+              "sha256": "1c060270b7bd057b07d3b203e22785f8c2d30e20fe24fef6afee0883dc42f958",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/corpus-independent-review-v02.json": {
+              "bytes": 12700,
+              "mode": "100644",
+              "object": "7dd3ddce55462093c83f6762684fd24b899ca807",
+              "sha256": "423d775253dc04ec4b182f3db0ae800215d8acde6a30f53a2eee27b78089b0b5",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/corpus-tests-draft-v01.py": {
+              "bytes": 16843,
+              "mode": "100644",
+              "object": "81280714e32f174097bc30c899a14a45e3cf1a7d",
+              "sha256": "93b166b82f47bddaefd0a8c479cc9635b39f3f704cc296120fb13e4291192e32",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/experiment-plan-v01.json": {
+              "bytes": 37329,
+              "mode": "100644",
+              "object": "fcbe45343b0339ae195e603fa47f03714579033c",
+              "sha256": "03974404c4476a395a18667bb52da9a2f741c7a9ba3331f6518b2549f441f794",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/failed-attempt/child-exit.json": {
+              "bytes": 76,
+              "mode": "100644",
+              "object": "fc84658076dbdd87b3cd6025c8aff357f82deb62",
+              "sha256": "bbb5902ca8ad8fb95b029bf43a4c84e550850660cf478cd6669e175be794b803",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/failed-attempt/failure-primary.json": {
+              "bytes": 1366,
+              "mode": "100644",
+              "object": "99a26f1094d816d87fad1c9d00d3ed984002a9c2",
+              "sha256": "1c78826718d0498bf7498dd3183a9b24c612d73dfa13316def22d894dafe1605",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/failed-attempt/guardian-exit.json": {
+              "bytes": 1763,
+              "mode": "100644",
+              "object": "e5a82851bb256264b4d47f445f17d18cde591668",
+              "sha256": "f5f233dfb6d9732fac2f7976b553bd62ae270229c31557fa08d299197e36582b",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/failed-attempt/pre-admission.json": {
+              "bytes": 8005,
+              "mode": "100644",
+              "object": "8150a5a71f8250948bb36eb807c89eef39713bf8",
+              "sha256": "cbd0614f02d3774266bf29a0f15ab1b39678a79722863fba6615edeabe0637b5",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/failed-attempt/resources-final-failure.json": {
+              "bytes": 718,
+              "mode": "100644",
+              "object": "f5dfa7b7d0c6fa2d7125a93dca1927849ea25718",
+              "sha256": "8db4574d3f969060b3af6eecb5f64719a8b0b90679cb5ab74e5c9dbaa99011cf",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/guardian-execution-v01.log": {
+              "bytes": 225,
+              "mode": "100644",
+              "object": "842b11a9eba1efd3c8dbe7307b508d18471302e2",
+              "sha256": "9e1492dca5ff89ee7e2b72799bf7c1742683c34103b8b80a7a83e29ab2738289",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/hf-before-file-identities-v01.json": {
+              "bytes": 1019575,
+              "mode": "100644",
+              "object": "3ff50a3137746e62ff69be1e426463dbd263bc58",
+              "sha256": "0af93941ce0d20596561ec38e18fa3c64553bf8c61bfcc67c432787c4fa9fd06",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/hf-helper-static-review-v01.json": {
+              "bytes": 7934,
+              "mode": "100644",
+              "object": "2430cd68afbf849ee6286bc741f3ca01eda0a85d",
+              "sha256": "4e466a4081371c082752750f314ec218b30155afb8e6259b08c17fee4cc9a951",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/hf-helper-static-review-v02.json": {
+              "bytes": 9125,
+              "mode": "100644",
+              "object": "f7188f69b204f27c8a80ba25a89121e26ddc5479",
+              "sha256": "16055554c4c991c5bc710da9ffddeed4193219d305e345c8d6a10a86fd6dafe7",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/hf-intake-v01.json": {
+              "bytes": 445304,
+              "mode": "100644",
+              "object": "f20d773a5731f54ad5c6f16436c0e93fa6ad9846",
+              "sha256": "ab063898b5995eb03a9cbab687e43b1fb3b9e089968d5ea589141de2069f97ea",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/inert-ambiguity-audit-v01.json": {
+              "bytes": 62331,
+              "mode": "100644",
+              "object": "b2c6013bf002801e43d6ac0914c56d4318dbe04a",
+              "sha256": "fe40c5e16b77f1dfa7b55af35de1536a9e690a3534a501c3de1f07967ec19e8e",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/inert-corpus-tests-v02.log": {
+              "bytes": 99,
+              "mode": "100644",
+              "object": "ce0d85a89730bc9aca61e4cb358bc1eeb7cf2f5b",
+              "sha256": "138ccb73b20385d00228f882f28042933aea8c5e4deb5e66b070c4e1f0fdfbc5",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/inert-corpus-tests-v02.xml": {
+              "bytes": 14680,
+              "mode": "100644",
+              "object": "0ac0aa65d2acfa04ba45841ee625e3bfb36dcef6",
+              "sha256": "9223a7b4830a192bf4c30a62916192417ff09a29df4d47880e9e85a0a866ff07",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/inert-recipe-tests-v01.log": {
+              "bytes": 99,
+              "mode": "100644",
+              "object": "9044fa647bb4787b30af6466d2705629e09dfe66",
+              "sha256": "a1774e81f8df96725bc0376e7c1d1e257d01fe39e1cae834328957f83f00d5f1",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/inert-recipe-tests-v01.xml": {
+              "bytes": 12260,
+              "mode": "100644",
+              "object": "a7829989015b2d6d6faa4c266ee7f0e9a5c83676",
+              "sha256": "3352d4cbd492589d365ab276c2714b4d9ede8bb92e33bde27ba60234d936599f",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/inert-test-observation-v01.json": {
+              "bytes": 1065,
+              "mode": "100644",
+              "object": "3464e1d02945a14e34181b680101ac9e8fe0b36e",
+              "sha256": "339ff1885da531520c2940ea2797950ba2d15a4136d792a2ece669cdb5f62b0f",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/inert-test-observation-v02.json": {
+              "bytes": 2134,
+              "mode": "100644",
+              "object": "fb2ef25c1363795485c6aa175325b36d15c08f0e",
+              "sha256": "648ecaf6faa5c7a81fab8c681a48bdc4a8751fd90e733f48833f935c07829ddd",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/inert-tests-v01.log": {
+              "bytes": 260,
+              "mode": "100644",
+              "object": "be3748a6094a1877ad51dbc93ec9a898b342e9cc",
+              "sha256": "73c7ddf188c28228dba92fd7b3ab44343a513df8ac2487a5dee325e67789986a",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/inert-tests-v01.xml": {
+              "bytes": 67805,
+              "mode": "100644",
+              "object": "a19690c373b3eeee6724881050a06fba6b0e9b67",
+              "sha256": "008b94e75e51d006d71bd4c660525317b1987a3d3c090571ae991f6772e28236",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/intake.json": {
+              "bytes": 291,
+              "mode": "100644",
+              "object": "2d20160d3613f340a771203fd9cc1f7246ae1ea2",
+              "sha256": "7927724d03618cb644dc9779c6b2a2f71bf1a62c3f30ff147a7bd24155e59209",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/main-progress-review-v01.json": {
+              "bytes": 702,
+              "mode": "100644",
+              "object": "93f09576265a645e46f4d040727e82e2b0d34490",
+              "sha256": "77d3364181090885ae7dd7017e657cfad4e5956ea7ed6647b338049c1cbd0a54",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/preparation-execution-v01.log": {
+              "bytes": 203,
+              "mode": "100644",
+              "object": "0529ac814576ebd48e78f932066f23370688e37b",
+              "sha256": "120d9775cae0a4c57f1291f93fd4bb64d645f2d08beb05fa0e381a1b027a305f",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/prepare_hf_release-draft-v01.py": {
+              "bytes": 4291,
+              "mode": "100644",
+              "object": "f4f5c4e70b496f353504f0839e74465daeeba6bd",
+              "sha256": "c37de0120fef0b471b663a2db8d857ee0610f62efb512484699c414ae41286f3",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/prepare_hf_release-draft-v02.py": {
+              "bytes": 5036,
+              "mode": "100644",
+              "object": "19f7817f48fbc231ab9e40fc503f154a61e14ee1",
+              "sha256": "502e43660ce6f519236b3550c47d1c9620ade2e680c2efd4f675defcf4ff6929",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/prepare_hf_release.py": {
+              "bytes": 6249,
+              "mode": "100644",
+              "object": "48beb608d211968be88b626b05a176b97ab152b9",
+              "sha256": "bac6db1eeb0f1746cf3ba924b70c68dd8e39882ca4bb63e0132a0dee651bbef0",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/prepare_temporal_contrast_pilot.py": {
+              "bytes": 10203,
+              "mode": "100644",
+              "object": "6eb4650083919e44af86c7fc6f2f23d49750eca9",
+              "sha256": "acf9cd3ef8bbfed855cc1b49886145e0a8fb7ab2c365901e57c041c4ecc2da83",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/publish_hf_release-draft-v01.py": {
+              "bytes": 5602,
+              "mode": "100644",
+              "object": "3b6365c5ba007f77951742559e6e227f440028ca",
+              "sha256": "c689b7bfbc9971ff65629fe6f01684780012755f8235ebfbbf1efa2ee76e34b9",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/publish_hf_release-draft-v02.py": {
+              "bytes": 5807,
+              "mode": "100644",
+              "object": "08d976dc8657abc646d28e36a38cd99bde2836e7",
+              "sha256": "0876c7133395264b89f0ca2c6380e595c90220891661be2f8b3560a0799e7388",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/publish_hf_release.py": {
+              "bytes": 8179,
+              "mode": "100644",
+              "object": "33f5552611df5151dab1afdefbf280e8f5e6df95",
+              "sha256": "ad121bc72a11bbae5abd476ec79d5cbbc21c8250d5417ebfa6d47bce6923e5f6",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/recipe-preflight-v01.json": {
+              "bytes": 626,
+              "mode": "100644",
+              "object": "9544befee2e5a929f3494bd23405bbf8dfbcd945",
+              "sha256": "d25031fbe7650af5d939053ca616280a35a6aee62d60e3ccc131faeaf7bdc8bd",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/resource-compatibility-v01.json": {
+              "bytes": 6800,
+              "mode": "100644",
+              "object": "98449dca9eb0fbfbbf1d4a1d8b03dd29204ab6da",
+              "sha256": "ccaadc83e48a5aae69f6b97339a6ba1bcc647925502ae8059ed4b00cbad289af",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/resource-ledger-intake-v01.json": {
+              "bytes": 55606,
+              "mode": "100644",
+              "object": "9c001a4848282c15676ee688ef9e0c6c9cbd8fad",
+              "sha256": "c64319b51ee7a1f6d524c3036c64475d96c229afa528c5e93654fa0242711eff",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/run_inert_tests.py": {
+              "bytes": 4569,
+              "mode": "100644",
+              "object": "0caf57d000b76c3d0d084c806fd7cb7af1cbf89d",
+              "sha256": "024475419c8c632510d0560ddbbb659b616f13bb55e1e991bea7a61b603a4c30",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/run_scope_guardian.py": {
+              "bytes": 38281,
+              "mode": "100644",
+              "object": "0e50d33d05c35a6d2c3f4bbf301b2cddc3802a8a",
+              "sha256": "10c7c7350a7dbb564ab0fb1299c905020f874c212765afb86d3c1752105184ed",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/run_temporal_contrast_pilot.py": {
+              "bytes": 42637,
+              "mode": "100644",
+              "object": "57ddf27df11fac51317eb8414d389ec66d44c116",
+              "sha256": "0ae80b9554c45ec104430b7f1a482ad834a33e5f41f5f031fdd203634374fa05",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/runner-draft-v01.py": {
+              "bytes": 38473,
+              "mode": "100644",
+              "object": "de4b71b07d942fb1ecd0583b3bc608132a2f4d74",
+              "sha256": "1ecaa25ef4245d72b6d6974a84c1c78add814cdd217a32b3891ad018bfc1f225",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/storage-admission-diagnosis-v01.json": {
+              "bytes": 1114,
+              "mode": "100644",
+              "object": "28c8e4a623db68a411e36a401bd70d53571a984f",
+              "sha256": "feed4b28686d35fd59c61ecbc208f196d9efee4a7b76f168fce738e1d8895edb",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/temporal-recovery-review-v01.json": {
+              "bytes": 21267,
+              "mode": "100644",
+              "object": "bba3367f9e06d551afdbed3ec160870cc26e5950",
+              "sha256": "b462bff702e9d86d98e0ea5f6b850e5e3853d2d0de023e983eb51e8857208cd5",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/tests/test_temporal_contrast_recipe.py": {
+              "bytes": 21225,
+              "mode": "100644",
+              "object": "412229f47c168c2cd1ed0d58f77800ab764de859",
+              "sha256": "4735379fc6f8e26e5ead9655f48ad5199178d3e2cb49d17daa052046955aa5a7",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/training-export-v01.json": {
+              "bytes": 4972708,
+              "mode": "100644",
+              "object": "dbb31b5d8adbf72d71bcee018c52a51356176daa",
+              "sha256": "1992f1c3a3b67d3a3b6d1b01122183e24b537357fc45e928ff5bd747d60825bd",
+              "status": "A"
+            },
+            "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence/training-protocol-independent-review-v01.json": {
+              "bytes": 43320,
+              "mode": "100644",
+              "object": "ea9d84dddd0a3a491d6ccff857478f8078214a18",
+              "sha256": "6b2f95c2d1827690324ffc42161c92eb4f43de1d9b6fbc6a456becb34bd3c115",
+              "status": "A"
+            }
+          },
+          "root": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/datasets",
+          "schema": "temporal-contrast-staged-objects/v1"
+        },
+        "datasets_file_bytes": 8817205,
+        "independently_recomputed_blob_git_sha1": true,
+        "workspace": {
+          "base": "0a9329b4498acd8c1f5f7e163e87eb6809f25678",
+          "findings": [],
+          "passed": true,
+          "path_count": 55,
+          "paths": {
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/admission-failure-independent-review-v01.json": {
+              "bytes": 36051,
+              "mode": "100644",
+              "object": "bf2fb7e632c90bb147b79b66f8b8fe169268817c",
+              "sha256": "3718d0c462e5de7297f2b8ad9365788c037926c7196f8c9d1a1bfd3eaf384524",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/authored-temporal-contrast-corpus-v01.json": {
+              "bytes": 1672663,
+              "mode": "100644",
+              "object": "87f002101219875f79ed08d03db879151e468bd1",
+              "sha256": "47cc9d72fc3678c01962e08d6c61a71c1078bc89ef510e23586e4adfd814c280",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/bootstrap_inert.py": {
+              "bytes": 1208,
+              "mode": "100644",
+              "object": "26ec4cbd6b5290e1f36201781854928e52d42006",
+              "sha256": "030ac4f55adf5bf305bab0fcef9e33daa27c8fd083ddd474eac623e754246da1",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/canonical-intake.json": {
+              "bytes": 643,
+              "mode": "100644",
+              "object": "41dfc5776a17291287a5f2cc948e7fc309b9f8bf",
+              "sha256": "302eb7af14e55cb2e2b7a28c70729aeec31b62d9caa7949f387604d6689b3e63",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/contribution-draft-v01.md": {
+              "bytes": 7328,
+              "mode": "100644",
+              "object": "d2d75e2ae1f7494969c7c80d23d745b902df2bc1",
+              "sha256": "e073be1d332489bf19c4303c59f5120c767c6fa7d8a0cc979007a7a70ed48b2e",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/contribution-guide-independent-review-v01.json": {
+              "bytes": 7177,
+              "mode": "100644",
+              "object": "c5bdb6b9d0a5e8ab5157c11e0357c5591a515009",
+              "sha256": "818ec6711f90c48c35ff41c7ff863f86326d129e6e2a9d7f5fa64157943b43ba",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/contribution.md": {
+              "bytes": 7528,
+              "mode": "100644",
+              "object": "b7bdb29fe8a856e23157bdc145bf745417cb1d00",
+              "sha256": "409ef94a34ae0478ee52412baa69b2d8a966b7c25905c852947f5e0f4079440b",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/copy_contribution.py": {
+              "bytes": 4857,
+              "mode": "100644",
+              "object": "bd8b519ca04607bd7f9d77c5efeaf7a09c725428",
+              "sha256": "2d49fdf90c1f2ced1bd4c4d2036c5b99aa0aa8c84206cd8289fc1b949db7de46",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/corpus-draft-v01.py": {
+              "bytes": 15257,
+              "mode": "100644",
+              "object": "649537df3f44218ee3a5afa91cc648e28d384da0",
+              "sha256": "64cecf8bb7d03e7831fbdd06d52151ed11db7f804005f21dc8b420c4d2bad71c",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/corpus-independent-review-v01.json": {
+              "bytes": 7657,
+              "mode": "100644",
+              "object": "da47ee55f7518ec58b24ad9af709b02eaef090fe",
+              "sha256": "1c060270b7bd057b07d3b203e22785f8c2d30e20fe24fef6afee0883dc42f958",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/corpus-independent-review-v02.json": {
+              "bytes": 12700,
+              "mode": "100644",
+              "object": "7dd3ddce55462093c83f6762684fd24b899ca807",
+              "sha256": "423d775253dc04ec4b182f3db0ae800215d8acde6a30f53a2eee27b78089b0b5",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/corpus-tests-draft-v01.py": {
+              "bytes": 16843,
+              "mode": "100644",
+              "object": "81280714e32f174097bc30c899a14a45e3cf1a7d",
+              "sha256": "93b166b82f47bddaefd0a8c479cc9635b39f3f704cc296120fb13e4291192e32",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/experiment-plan-v01.json": {
+              "bytes": 37329,
+              "mode": "100644",
+              "object": "fcbe45343b0339ae195e603fa47f03714579033c",
+              "sha256": "03974404c4476a395a18667bb52da9a2f741c7a9ba3331f6518b2549f441f794",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/failed-attempt/child-exit.json": {
+              "bytes": 76,
+              "mode": "100644",
+              "object": "fc84658076dbdd87b3cd6025c8aff357f82deb62",
+              "sha256": "bbb5902ca8ad8fb95b029bf43a4c84e550850660cf478cd6669e175be794b803",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/failed-attempt/failure-primary.json": {
+              "bytes": 1366,
+              "mode": "100644",
+              "object": "99a26f1094d816d87fad1c9d00d3ed984002a9c2",
+              "sha256": "1c78826718d0498bf7498dd3183a9b24c612d73dfa13316def22d894dafe1605",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/failed-attempt/guardian-exit.json": {
+              "bytes": 1763,
+              "mode": "100644",
+              "object": "e5a82851bb256264b4d47f445f17d18cde591668",
+              "sha256": "f5f233dfb6d9732fac2f7976b553bd62ae270229c31557fa08d299197e36582b",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/failed-attempt/pre-admission.json": {
+              "bytes": 8005,
+              "mode": "100644",
+              "object": "8150a5a71f8250948bb36eb807c89eef39713bf8",
+              "sha256": "cbd0614f02d3774266bf29a0f15ab1b39678a79722863fba6615edeabe0637b5",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/failed-attempt/resources-final-failure.json": {
+              "bytes": 718,
+              "mode": "100644",
+              "object": "f5dfa7b7d0c6fa2d7125a93dca1927849ea25718",
+              "sha256": "8db4574d3f969060b3af6eecb5f64719a8b0b90679cb5ab74e5c9dbaa99011cf",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/guardian-execution-v01.log": {
+              "bytes": 225,
+              "mode": "100644",
+              "object": "842b11a9eba1efd3c8dbe7307b508d18471302e2",
+              "sha256": "9e1492dca5ff89ee7e2b72799bf7c1742683c34103b8b80a7a83e29ab2738289",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/hf-before-file-identities-v01.json": {
+              "bytes": 1019575,
+              "mode": "100644",
+              "object": "3ff50a3137746e62ff69be1e426463dbd263bc58",
+              "sha256": "0af93941ce0d20596561ec38e18fa3c64553bf8c61bfcc67c432787c4fa9fd06",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/hf-helper-static-review-v01.json": {
+              "bytes": 7934,
+              "mode": "100644",
+              "object": "2430cd68afbf849ee6286bc741f3ca01eda0a85d",
+              "sha256": "4e466a4081371c082752750f314ec218b30155afb8e6259b08c17fee4cc9a951",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/hf-helper-static-review-v02.json": {
+              "bytes": 9125,
+              "mode": "100644",
+              "object": "f7188f69b204f27c8a80ba25a89121e26ddc5479",
+              "sha256": "16055554c4c991c5bc710da9ffddeed4193219d305e345c8d6a10a86fd6dafe7",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/hf-intake-v01.json": {
+              "bytes": 445304,
+              "mode": "100644",
+              "object": "f20d773a5731f54ad5c6f16436c0e93fa6ad9846",
+              "sha256": "ab063898b5995eb03a9cbab687e43b1fb3b9e089968d5ea589141de2069f97ea",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/inert-ambiguity-audit-v01.json": {
+              "bytes": 62331,
+              "mode": "100644",
+              "object": "b2c6013bf002801e43d6ac0914c56d4318dbe04a",
+              "sha256": "fe40c5e16b77f1dfa7b55af35de1536a9e690a3534a501c3de1f07967ec19e8e",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/inert-corpus-tests-v02.log": {
+              "bytes": 99,
+              "mode": "100644",
+              "object": "ce0d85a89730bc9aca61e4cb358bc1eeb7cf2f5b",
+              "sha256": "138ccb73b20385d00228f882f28042933aea8c5e4deb5e66b070c4e1f0fdfbc5",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/inert-corpus-tests-v02.xml": {
+              "bytes": 14680,
+              "mode": "100644",
+              "object": "0ac0aa65d2acfa04ba45841ee625e3bfb36dcef6",
+              "sha256": "9223a7b4830a192bf4c30a62916192417ff09a29df4d47880e9e85a0a866ff07",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/inert-recipe-tests-v01.log": {
+              "bytes": 99,
+              "mode": "100644",
+              "object": "9044fa647bb4787b30af6466d2705629e09dfe66",
+              "sha256": "a1774e81f8df96725bc0376e7c1d1e257d01fe39e1cae834328957f83f00d5f1",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/inert-recipe-tests-v01.xml": {
+              "bytes": 12260,
+              "mode": "100644",
+              "object": "a7829989015b2d6d6faa4c266ee7f0e9a5c83676",
+              "sha256": "3352d4cbd492589d365ab276c2714b4d9ede8bb92e33bde27ba60234d936599f",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/inert-test-observation-v01.json": {
+              "bytes": 1065,
+              "mode": "100644",
+              "object": "3464e1d02945a14e34181b680101ac9e8fe0b36e",
+              "sha256": "339ff1885da531520c2940ea2797950ba2d15a4136d792a2ece669cdb5f62b0f",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/inert-test-observation-v02.json": {
+              "bytes": 2134,
+              "mode": "100644",
+              "object": "fb2ef25c1363795485c6aa175325b36d15c08f0e",
+              "sha256": "648ecaf6faa5c7a81fab8c681a48bdc4a8751fd90e733f48833f935c07829ddd",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/inert-tests-v01.log": {
+              "bytes": 260,
+              "mode": "100644",
+              "object": "be3748a6094a1877ad51dbc93ec9a898b342e9cc",
+              "sha256": "73c7ddf188c28228dba92fd7b3ab44343a513df8ac2487a5dee325e67789986a",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/inert-tests-v01.xml": {
+              "bytes": 67805,
+              "mode": "100644",
+              "object": "a19690c373b3eeee6724881050a06fba6b0e9b67",
+              "sha256": "008b94e75e51d006d71bd4c660525317b1987a3d3c090571ae991f6772e28236",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/intake.json": {
+              "bytes": 291,
+              "mode": "100644",
+              "object": "2d20160d3613f340a771203fd9cc1f7246ae1ea2",
+              "sha256": "7927724d03618cb644dc9779c6b2a2f71bf1a62c3f30ff147a7bd24155e59209",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/main-progress-review-v01.json": {
+              "bytes": 702,
+              "mode": "100644",
+              "object": "93f09576265a645e46f4d040727e82e2b0d34490",
+              "sha256": "77d3364181090885ae7dd7017e657cfad4e5956ea7ed6647b338049c1cbd0a54",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/preparation-execution-v01.log": {
+              "bytes": 203,
+              "mode": "100644",
+              "object": "0529ac814576ebd48e78f932066f23370688e37b",
+              "sha256": "120d9775cae0a4c57f1291f93fd4bb64d645f2d08beb05fa0e381a1b027a305f",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/prepare_hf_release-draft-v01.py": {
+              "bytes": 4291,
+              "mode": "100644",
+              "object": "f4f5c4e70b496f353504f0839e74465daeeba6bd",
+              "sha256": "c37de0120fef0b471b663a2db8d857ee0610f62efb512484699c414ae41286f3",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/prepare_hf_release-draft-v02.py": {
+              "bytes": 5036,
+              "mode": "100644",
+              "object": "19f7817f48fbc231ab9e40fc503f154a61e14ee1",
+              "sha256": "502e43660ce6f519236b3550c47d1c9620ade2e680c2efd4f675defcf4ff6929",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/prepare_hf_release.py": {
+              "bytes": 6249,
+              "mode": "100644",
+              "object": "48beb608d211968be88b626b05a176b97ab152b9",
+              "sha256": "bac6db1eeb0f1746cf3ba924b70c68dd8e39882ca4bb63e0132a0dee651bbef0",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/prepare_temporal_contrast_pilot.py": {
+              "bytes": 10203,
+              "mode": "100644",
+              "object": "6eb4650083919e44af86c7fc6f2f23d49750eca9",
+              "sha256": "acf9cd3ef8bbfed855cc1b49886145e0a8fb7ab2c365901e57c041c4ecc2da83",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/publish_hf_release-draft-v01.py": {
+              "bytes": 5602,
+              "mode": "100644",
+              "object": "3b6365c5ba007f77951742559e6e227f440028ca",
+              "sha256": "c689b7bfbc9971ff65629fe6f01684780012755f8235ebfbbf1efa2ee76e34b9",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/publish_hf_release-draft-v02.py": {
+              "bytes": 5807,
+              "mode": "100644",
+              "object": "08d976dc8657abc646d28e36a38cd99bde2836e7",
+              "sha256": "0876c7133395264b89f0ca2c6380e595c90220891661be2f8b3560a0799e7388",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/publish_hf_release.py": {
+              "bytes": 8179,
+              "mode": "100644",
+              "object": "33f5552611df5151dab1afdefbf280e8f5e6df95",
+              "sha256": "ad121bc72a11bbae5abd476ec79d5cbbc21c8250d5417ebfa6d47bce6923e5f6",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/recipe-preflight-v01.json": {
+              "bytes": 626,
+              "mode": "100644",
+              "object": "9544befee2e5a929f3494bd23405bbf8dfbcd945",
+              "sha256": "d25031fbe7650af5d939053ca616280a35a6aee62d60e3ccc131faeaf7bdc8bd",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/resource-compatibility-v01.json": {
+              "bytes": 6800,
+              "mode": "100644",
+              "object": "98449dca9eb0fbfbbf1d4a1d8b03dd29204ab6da",
+              "sha256": "ccaadc83e48a5aae69f6b97339a6ba1bcc647925502ae8059ed4b00cbad289af",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/resource-ledger-intake-v01.json": {
+              "bytes": 55606,
+              "mode": "100644",
+              "object": "9c001a4848282c15676ee688ef9e0c6c9cbd8fad",
+              "sha256": "c64319b51ee7a1f6d524c3036c64475d96c229afa528c5e93654fa0242711eff",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/run_inert_tests.py": {
+              "bytes": 4569,
+              "mode": "100644",
+              "object": "0caf57d000b76c3d0d084c806fd7cb7af1cbf89d",
+              "sha256": "024475419c8c632510d0560ddbbb659b616f13bb55e1e991bea7a61b603a4c30",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/run_scope_guardian.py": {
+              "bytes": 38281,
+              "mode": "100644",
+              "object": "0e50d33d05c35a6d2c3f4bbf301b2cddc3802a8a",
+              "sha256": "10c7c7350a7dbb564ab0fb1299c905020f874c212765afb86d3c1752105184ed",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/run_temporal_contrast_pilot.py": {
+              "bytes": 42637,
+              "mode": "100644",
+              "object": "57ddf27df11fac51317eb8414d389ec66d44c116",
+              "sha256": "0ae80b9554c45ec104430b7f1a482ad834a33e5f41f5f031fdd203634374fa05",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/runner-draft-v01.py": {
+              "bytes": 38473,
+              "mode": "100644",
+              "object": "de4b71b07d942fb1ecd0583b3bc608132a2f4d74",
+              "sha256": "1ecaa25ef4245d72b6d6974a84c1c78add814cdd217a32b3891ad018bfc1f225",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/storage-admission-diagnosis-v01.json": {
+              "bytes": 1114,
+              "mode": "100644",
+              "object": "28c8e4a623db68a411e36a401bd70d53571a984f",
+              "sha256": "feed4b28686d35fd59c61ecbc208f196d9efee4a7b76f168fce738e1d8895edb",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/temporal-recovery-review-v01.json": {
+              "bytes": 21267,
+              "mode": "100644",
+              "object": "bba3367f9e06d551afdbed3ec160870cc26e5950",
+              "sha256": "b462bff702e9d86d98e0ea5f6b850e5e3853d2d0de023e983eb51e8857208cd5",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/tests/test_temporal_contrast_recipe.py": {
+              "bytes": 21225,
+              "mode": "100644",
+              "object": "412229f47c168c2cd1ed0d58f77800ab764de859",
+              "sha256": "4735379fc6f8e26e5ead9655f48ad5199178d3e2cb49d17daa052046955aa5a7",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/training-export-v01.json": {
+              "bytes": 4972708,
+              "mode": "100644",
+              "object": "dbb31b5d8adbf72d71bcee018c52a51356176daa",
+              "sha256": "1992f1c3a3b67d3a3b6d1b01122183e24b537357fc45e928ff5bd747d60825bd",
+              "status": "A"
+            },
+            "artifacts/legal-temporal-contrast-20261011-01/evidence/training-protocol-independent-review-v01.json": {
+              "bytes": 43320,
+              "mode": "100644",
+              "object": "ea9d84dddd0a3a491d6ccff857478f8078214a18",
+              "sha256": "6b2f95c2d1827690324ffc42161c92eb4f43de1d9b6fbc6a456becb34bd3c115",
+              "status": "A"
+            },
+            "implementation_plan/docs/78-legal-temporal-role-contrast-2026-10-11.md": {
+              "bytes": 7528,
+              "mode": "100644",
+              "object": "b7bdb29fe8a856e23157bdc145bf745417cb1d00",
+              "sha256": "409ef94a34ae0478ee52412baa69b2d8a966b7c25905c852947f5e0f4079440b",
+              "status": "A"
+            }
+          },
+          "root": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/workspace",
+          "schema": "temporal-contrast-staged-objects/v1"
+        },
+        "workspace_file_bytes": 8782782
+      },
+      "staging_helper_static_review": {
+        "explicit_owned_source_paths": true,
+        "fixed_corrected_module_test_and_doc_sha256s": true,
+        "force_add_only_owned_evidence_prefix": true,
+        "initial_index_empty_guard": true,
+        "inventory_exact54_and_no_weights_flag": true,
+        "no_execution_claim": "Read and AST parsed only by reviewer; current indexes independently checked with read-only Git.",
+        "post_stage_exact_paths_and_blob_parity": true
+      }
+    }
+  },
+  "hugging_face": {
+    "mutations": 0,
+    "new_weights_published": false,
+    "observation_scope": "read-only intake metadata; no closing all-weight audit",
+    "observed_revision": "a2c8aa64d8c363eb796438b385c14058e607a5ec"
+  },
+  "parallel_main_review": {
+    "identity": {
+      "bytes": 30274,
+      "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/parallel-main-review-v01.json",
+      "sha256": "519a0dfae72e8d2100f7cce0ed74dd768d70598074d5fcb6b97de59523ff06f9"
+    },
+    "receipt": {
+      "custody": "commit objects/tree blobs and closing fetched-ref/owned-file endpoints verified; not current remote state or continuous checkout custody",
+      "execution": {
+        "canonical_index_touched": false,
+        "compiler_executed": false,
+        "foreign_working_files_or_ledgers_read": false,
+        "inference_executed": false,
+        "models_loaded": false,
+        "network_accessed": false,
+        "refs_mutated": false,
+        "source_edits": false,
+        "tests_rerun": false,
+        "training_executed": false
+      },
+      "findings": [],
+      "gitlinks": {
+        "base_all9": {
+          "JevOps": "9af1ebb6a4245ce2b4e673ac277e4988da4d5caa",
+          "Mcp-Plus-Plus": "628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0",
+          "external/ipfs_accelerate": "2773d8264e459a0cf0ee198505c930e3225c3d68",
+          "external/ipfs_datasets": "4b9e96753eb3e5f4951cc3f7c39b09b778d3d6b8",
+          "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0",
+          "external/meta-wearables-dat-android": "4e56e1864a5e78194bababc3a68775c4196cbed0",
+          "external/meta-wearables-dat-ios": "2b5695d16a710f3d2d7341f88570b86d01723d50",
+          "hallucinate_app": "ffcf5ff3b3389c95ba53e9f1be45f89fa96c5ef6",
+          "swissknife": "4772c7ff648dd5f438af059e21a1a5305d32dbe3"
+        },
+        "changed_links": {
+          "external/ipfs_accelerate": {
+            "after": "7d67f14dc275237d815cb843c8772d95a7e2c8d1",
+            "before": "2773d8264e459a0cf0ee198505c930e3225c3d68"
+          },
+          "external/ipfs_datasets": {
+            "after": "68374b51032b7a9fa795a79829e4d8eb2f2a5ca4",
+            "before": "4b9e96753eb3e5f4951cc3f7c39b09b778d3d6b8"
+          }
+        },
+        "other7_links_unchanged_from_intake_base": true,
+        "required_final_audit": "After contribution merge preserve all8 non-owned gitlinks against the actual root first parent, including latest accelerator; advance only datasets to the actual merged source commit.",
+        "reviewed_root_main_all9": {
+          "JevOps": "9af1ebb6a4245ce2b4e673ac277e4988da4d5caa",
+          "Mcp-Plus-Plus": "628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0",
+          "external/ipfs_accelerate": "7d67f14dc275237d815cb843c8772d95a7e2c8d1",
+          "external/ipfs_datasets": "68374b51032b7a9fa795a79829e4d8eb2f2a5ca4",
+          "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0",
+          "external/meta-wearables-dat-android": "4e56e1864a5e78194bababc3a68775c4196cbed0",
+          "external/meta-wearables-dat-ios": "2b5695d16a710f3d2d7341f88570b86d01723d50",
+          "hallucinate_app": "ffcf5ff3b3389c95ba53e9f1be45f89fa96c5ef6",
+          "swissknife": "4772c7ff648dd5f438af059e21a1a5305d32dbe3"
+        },
+        "root_datasets_matches_reviewed_source_main": true,
+        "terminal_intermediate_accelerator": "25c47a6ed4c521269c11cfbc6d42fa5b31a89620"
+      },
+      "owned_collision_checks": {
+        "chapter_number_is_not_path_collision": true,
+        "local_owned_file_pins": [
+          {
+            "bytes": 15813,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/datasets/ipfs_datasets_py/logic/legal_ir/temporal_role_contrast_corpus.py",
+            "sha256": "acbae8463f6f1a347272fc83a71246a55110580a1e7221dc2f4b95e10c6bcddd"
+          },
+          {
+            "bytes": 18610,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/datasets/tests/unit/logic/legal_ir/test_temporal_role_contrast_corpus.py",
+            "sha256": "8d3fe298725ad628a43f6edda0df27ada922fc3d8216afa6faa1123312971bd2"
+          },
+          {
+            "bytes": 7528,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/datasets/docs/autoencoders/legal_temporal_role_contrast_20261011.md",
+            "sha256": "409ef94a34ae0478ee52412baa69b2d8a966b7c25905c852947f5e0f4079440b"
+          },
+          {
+            "bytes": 7528,
+            "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/workspace/implementation_plan/docs/78-legal-temporal-role-contrast-2026-10-11.md",
+            "sha256": "409ef94a34ae0478ee52412baa69b2d8a966b7c25905c852947f5e0f4079440b"
+          }
+        ],
+        "parallel_chapter78_document": "implementation_plan/docs/78-supervisor-terminal-formal-owner-2026-10-11.md",
+        "root_document_absent_from_base_and_reviewed_main": true,
+        "root_document_path": "implementation_plan/docs/78-legal-temporal-role-contrast-2026-10-11.md",
+        "root_evidence_prefix": "artifacts/legal-temporal-contrast-20261011-01",
+        "root_evidence_prefix_absent_from_reviewed_main": true,
+        "source_evidence_prefix": "workspace/test-logs/legal-temporal-contrast-20261011-01/evidence",
+        "source_evidence_prefix_absent_from_reviewed_main": true,
+        "source_paths": [
+          "ipfs_datasets_py/logic/legal_ir/temporal_role_contrast_corpus.py",
+          "tests/unit/logic/legal_ir/test_temporal_role_contrast_corpus.py",
+          "docs/autoencoders/legal_temporal_role_contrast_20261011.md"
+        ],
+        "source_paths_absent_from_base_and_reviewed_main": true
+      },
+      "parallel_work_summary": [
+        {
+          "commit": "68374b51032b7a9fa795a79829e4d8eb2f2a5ca4",
+          "qualification_boundary": "Committed documentation reports bounded CPU tests; this review did not run them. It does not establish statutory fidelity, proof discharge, task completion, new LegalIR training or compatibility of this profile with our dormant384 span state.",
+          "work": "Shared captured-source NumPy-selection inference owner, isolated CPU worker, integration tests and ownership documentation; explicit development CALL-fragment profile consumes an existing Legal-parent384-derived head with pinned GTE assets, current-source fences and cold registry replay."
+        },
+        {
+          "commit": "e3a014fe5f6915230e6e7857a219de2c58f13d73",
+          "qualification_boundary": "Committed receipt reports171 distinct checks and no new inference/training/Hub upload; these are read source claims, not independently rerun validation.",
+          "work": "Root pins Terminal formal-status host integration and qualification receipt plus six retained logs; explicit source/native-owner custody and remaining complete-key producer gap are retained."
+        },
+        {
+          "commit": "9036a6d4ff06f7c56e681001a18c4130037f1917",
+          "qualification_boundary": "Committed guide preserves provenance/fail-open/unsupported/currentness limitations, missing container dependencies and successor refresh qualification, with billing-blocked hosted checks. No legal accuracy, live benchmark or token-efficiency result is inferred.",
+          "work": "Root advances shared datasets NumPy owner and accelerator consumer pins, adds supervisor learned numerical consumer guide, preserving the prior Terminal integration."
+        }
+      ],
+      "passed": true,
+      "publication_authorized_by_this_review": false,
+      "required_preservation": [
+        "Retain all5 changed source paths byte-for-byte from reviewed source main; source contribution adds3 distinct paths and its owned evidence prefix.",
+        "Retain all7 Terminal evidence files, the78-supervisor-terminal guide and79-supervisor-learned-numerical guide from reviewed root main.",
+        "Retain accelerator7d67f14dc275237d815cb843c8772d95a7e2c8d1 and all other7 non-datasets gitlinks from the actual root merge first parent; keep concurrent later main advances if they occur.",
+        "The datasets pointer must target an actual source merge retaining68374b51032b7a9fa795a79829e4d8eb2f2a5ca4 ancestry, not the old4b9 baseline.",
+        "Our differently named chapter78 guide may coexist with the supervisor chapter78 guide; do not overwrite or rename the other owner path.",
+        "Do not conflate the shared NumPy numerical384 profile, its software checkpoint/Hub repository and resource profile with the unexecuted LegalIR temporal contrast curriculum or8D/768D legal fidelity."
+      ],
+      "retained_training_owner_bytes": {
+        "experiment_plan_pin": {
+          "bytes": 37329,
+          "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/experiment-plan-v01.json",
+          "sha256": "03974404c4476a395a18667bb52da9a2f741c7a9ba3331f6518b2549f441f794"
+        },
+        "new_owned_modules_not_in_remote_main": [
+          {
+            "module": "ipfs_datasets_py.logic.legal_ir.temporal_role_contrast_corpus",
+            "not_present_in_reviewed_remote_main": true,
+            "path": "ipfs_datasets_py/logic/legal_ir/temporal_role_contrast_corpus.py"
+          }
+        ],
+        "scope": "selected pinned LegalIR/decoder producers only, not full dependency or model runtime qualification",
+        "unchanged_committed_owner_count": 26,
+        "unchanged_owners": [
+          {
+            "bytes": 29148,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.logic.formalization.autoencoder.arbitrary_native_source_cache",
+            "object": "82978c03d34ac25327538fd9714b7074b946bfb6",
+            "path": "ipfs_datasets_py/logic/formalization/autoencoder/arbitrary_native_source_cache.py",
+            "sha256": "af9c9944cfd9c2c926911bca94a7d407af25019a1ab833655a9511deea4f4594"
+          },
+          {
+            "bytes": 28040,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.logic.formalization.autoencoder.arbitrary_native_span_runtime",
+            "object": "373c4207568b97be1932d778d71a32d07dc71e3d",
+            "path": "ipfs_datasets_py/logic/formalization/autoencoder/arbitrary_native_span_runtime.py",
+            "sha256": "dedf1598196e902269f6b82a9249b9d7bf41274df87da65c0b393fbd2547a50a"
+          },
+          {
+            "bytes": 37249,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.logic.formalization.autoencoder.contextual_legal_ir_runtime",
+            "object": "fa542082edd89b213843c9d3f8d3c2312ef1d04a",
+            "path": "ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py",
+            "sha256": "57032fb7b824cfc9a39a442ccffa0bd5fb64873baa48a9ab43a94e80f901b430"
+          },
+          {
+            "bytes": 28444,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.logic.formalization.autoencoder.dimension_source_inputs",
+            "object": "f1c9efbae82ee2d639ec84cc5ba3578c00c9238a",
+            "path": "ipfs_datasets_py/logic/formalization/autoencoder/dimension_source_inputs.py",
+            "sha256": "c7f396d3323c40b5f4bab1aa42557e693b65cced58435e63c735f875c6d12206"
+          },
+          {
+            "bytes": 15959,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.logic.formalization.autoencoder.gte_multilingual_profile",
+            "object": "6a326c6188bfa05383e143c2339603758576ca69",
+            "path": "ipfs_datasets_py/logic/formalization/autoencoder/gte_multilingual_profile.py",
+            "sha256": "d6d6069c98c7f15bd4c6f8a43bd9ffb72032e04a452419a3ff5d9bd95bb06e8e"
+          },
+          {
+            "bytes": 24439,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.logic.formalization.autoencoder.legal_native_conditioning",
+            "object": "c74aed1afce161e349f512f36b6bcfd8db402d48",
+            "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_native_conditioning.py",
+            "sha256": "48709fa4a521046ad753c87afe2732d17968e33d51ab2f43e4c4fefe2182059f"
+          },
+          {
+            "bytes": 17966,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.logic.formalization.autoencoder.retained_span_score_capture",
+            "object": "bae499db41a6cf10e8dc5636bf587a32845e2155",
+            "path": "ipfs_datasets_py/logic/formalization/autoencoder/retained_span_score_capture.py",
+            "sha256": "e11329b8de6876642c500ee6cf2c4f261c6bb3b26556806a1b4caaea625b4909"
+          },
+          {
+            "bytes": 13375,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.logic.formalization.autoencoder.source_embeddings_768",
+            "object": "66fac7cce3155d0eaf515e63ff3ff46aba11ff5f",
+            "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768.py",
+            "sha256": "cd4b23b87fefe3f80f234a5c85d9e4823139d5040a5507813b88385ee601b4ea"
+          },
+          {
+            "bytes": 9556,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.logic.formalization.autoencoder.source_embeddings_768_complete",
+            "object": "c67a8c7857ab3123038e849ce7a6ae7018037718",
+            "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768_complete.py",
+            "sha256": "6f781849dc87eba1b7f0929d292bb10f5724bb1ca5749989feb988cde243c609"
+          },
+          {
+            "bytes": 109257,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.logic.legal_ir.canonical_contracts",
+            "object": "1bf4da481ff84ccb3554ae0dd1126dfc4cbffb6b",
+            "path": "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+            "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+          },
+          {
+            "bytes": 9794,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.logic.legal_ir.canonical_decoder_preflight",
+            "object": "b863e55c257d6dcb24c721ba1981be8b69e3a284",
+            "path": "ipfs_datasets_py/logic/legal_ir/canonical_decoder_preflight.py",
+            "sha256": "a656d5e692623043f24d670a193a449d43af742de20ccd68c4b7e744d7e3b276"
+          },
+          {
+            "bytes": 6017,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.logic.legal_ir.canonical_source_guards",
+            "object": "af799a9fcf5699636e3e1dffce96dc1d3e2932ed",
+            "path": "ipfs_datasets_py/logic/legal_ir/canonical_source_guards.py",
+            "sha256": "a1b2fc2fe7fdf23b8caa46e43c5341287a35a94deaa70f291fb351e58505b32b"
+          },
+          {
+            "bytes": 21764,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.logic.legal_ir.canonical_span_decoder",
+            "object": "7ce3ed18ec40071f0c8b24457f74fdfb248ad93e",
+            "path": "ipfs_datasets_py/logic/legal_ir/canonical_span_decoder.py",
+            "sha256": "c25044aeb63d66b73feac95de0ca6d49339774edb7611b1b956cf6307db438ec"
+          },
+          {
+            "bytes": 16730,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.logic.legal_ir.joint_span_selection",
+            "object": "7b2e23b540f01ee952ff94057d7987257c33cdeb",
+            "path": "ipfs_datasets_py/logic/legal_ir/joint_span_selection.py",
+            "sha256": "791c283f625ae7d8841e7afa697b34cbfa5c74361d0c0129b66af31fb5e13679"
+          },
+          {
+            "bytes": 27947,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_corpus_manifest",
+            "object": "d4fda5e81f5393b3cd99266e03ea9a75612bb35f",
+            "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_corpus_manifest.py",
+            "sha256": "b067f05b3cfc28cb213a83519530f7148b2a5fa7d5b25809e87e1f7c286f9a5d"
+          },
+          {
+            "bytes": 26219,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_embedding_production",
+            "object": "3a56d4c2c31e60779ae4a41d6586934609cfc5f3",
+            "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_production.py",
+            "sha256": "735ca0597186e094d736ef58435c82956c4ab805a68fc7a6adbfc0ee21ee889f"
+          },
+          {
+            "bytes": 19364,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_embedding_runtime",
+            "object": "85eff000585407ffa7b689c574713df824c596a1",
+            "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_runtime.py",
+            "sha256": "ce80ed6294009e04580051e6eb06a817d74a8a56f04814ad0a698e3d27dd0d41"
+          },
+          {
+            "bytes": 7896,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_native_pool",
+            "object": "6eb9b3a5f5a5f56c3f2466aa7ae06b3ef24189ee",
+            "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_native_pool.py",
+            "sha256": "04f29da03f937dfee7ecfcb621980240c014754abe55f71a2c1ef8338ba715bb"
+          },
+          {
+            "bytes": 100140,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_training_worker",
+            "object": "b00afcd281ba189b86e07de75854bb83f1a75e99",
+            "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py",
+            "sha256": "bde3bd327df59f2e7557eac8aa2e0989ceb1128bc39918bf8cf46011e7bd9415"
+          },
+          {
+            "bytes": 14622,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_formula_codec",
+            "object": "0e96d544c72999d1fe9bc4c03e2585addb4a331c",
+            "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+            "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+          },
+          {
+            "bytes": 42137,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_family_evaluator",
+            "object": "53d7123051e1a1b9737edeb8928dfe57a579286c",
+            "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py",
+            "sha256": "3b6cd3a6fade78fed275a478f010329e5d030a250b914c4b46ab0f0d77b9d5ab"
+          },
+          {
+            "bytes": 146870,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_grammar_decoder",
+            "object": "446ea6eb734d8586a060f64fc56bf198e312aabe",
+            "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+            "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+          },
+          {
+            "bytes": 14165,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_span_continuation",
+            "object": "5c548f8f28085d2a86a9fdf3b4d6bf21ed94e8fe",
+            "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_continuation.py",
+            "sha256": "3f13a711906103270a5e75f0f3c3411461ad2900537a640371fe10cc4042c79c"
+          },
+          {
+            "bytes": 35294,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_span_formula",
+            "object": "f138ffb2285f7fc607fe3296f8abe5d6b7b9121a",
+            "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_formula.py",
+            "sha256": "60e509fc5018584d19530dd6f9b8423f163cb7baec60f5736d849995bca61185"
+          },
+          {
+            "bytes": 21228,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder_adaptive_optimizer",
+            "object": "9192b908d3afed67bf8fcec679b05613a1034e61",
+            "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_adaptive_optimizer.py",
+            "sha256": "dcd3a885820e7985ebec458a80325fe00d4d50656cf5827a828dd9cb45eb2524"
+          },
+          {
+            "bytes": 4428,
+            "kind": "blob",
+            "mode": "100644",
+            "module": "ipfs_datasets_py.utils.cid_utils",
+            "object": "36944fb73c85e541b0b9c47531ebfd7b79791534",
+            "path": "ipfs_datasets_py/utils/cid_utils.py",
+            "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+          }
+        ]
+      },
+      "root": {
+        "base": "0a9329b4498acd8c1f5f7e163e87eb6809f25678",
+        "base_is_ancestor": true,
+        "changed_paths": [
+          {
+            "after": {
+              "bytes": 6993,
+              "kind": "blob",
+              "mode": "100644",
+              "object": "cf61795cbef0f69fc97ee2e644850e2abe60fd2c",
+              "path": "artifacts/supervisor-terminal-formal-owner-20261011/qualification.json",
+              "sha256": "3225e2b37a49f87432a09789e4cd935fc91ed6cbf9c349835563a30e63cc8362"
+            },
+            "before": null,
+            "change": "added",
+            "path": "artifacts/supervisor-terminal-formal-owner-20261011/qualification.json"
+          },
+          {
+            "after": {
+              "bytes": 1632,
+              "kind": "blob",
+              "mode": "100644",
+              "object": "49eb036f3a3d40001f04bdf164b2ef853634cd73",
+              "path": "artifacts/supervisor-terminal-formal-owner-20261011/tests-archive-harbor.log",
+              "sha256": "72b7fd556ce7a3467880695484ede4cebde002b8e15b28f568dc2eae3599a458"
+            },
+            "before": null,
+            "change": "added",
+            "path": "artifacts/supervisor-terminal-formal-owner-20261011/tests-archive-harbor.log"
+          },
+          {
+            "after": {
+              "bytes": 1781,
+              "kind": "blob",
+              "mode": "100644",
+              "object": "ba35a500300d6f9f2df54bc4d42b1882bff1165c",
+              "path": "artifacts/supervisor-terminal-formal-owner-20261011/tests-driver.log",
+              "sha256": "e44d1ce2dfcc21f039a803f9fff3bb92656ef398468501d89d608d81c769977f"
+            },
+            "before": null,
+            "change": "added",
+            "path": "artifacts/supervisor-terminal-formal-owner-20261011/tests-driver.log"
+          },
+          {
+            "after": {
+              "bytes": 2702,
+              "kind": "blob",
+              "mode": "100644",
+              "object": "70899a269959c299fa04c4039994a48eaa420488",
+              "path": "artifacts/supervisor-terminal-formal-owner-20261011/tests-owner-continuity.log",
+              "sha256": "4b3ddb9cd6159cb7c261cf755bb9c82513349fcfae3319a151f39f177ce2210f"
+            },
+            "before": null,
+            "change": "added",
+            "path": "artifacts/supervisor-terminal-formal-owner-20261011/tests-owner-continuity.log"
+          },
+          {
+            "after": {
+              "bytes": 3069,
+              "kind": "blob",
+              "mode": "100644",
+              "object": "93960eef0e6909cda1a71cca5582da3ddde3035f",
+              "path": "artifacts/supervisor-terminal-formal-owner-20261011/tests-owner-initial.log",
+              "sha256": "c20cd00fcf8260926a2a51567217fb5be3d311e4c95fef38b0f28f8b2bd10bd4"
+            },
+            "before": null,
+            "change": "added",
+            "path": "artifacts/supervisor-terminal-formal-owner-20261011/tests-owner-initial.log"
+          },
+          {
+            "after": {
+              "bytes": 1469,
+              "kind": "blob",
+              "mode": "100644",
+              "object": "d2c01415b8bea011d6142184661a7c2ada16e293",
+              "path": "artifacts/supervisor-terminal-formal-owner-20261011/tests-owner-selection.log",
+              "sha256": "2ddc59dbb4ff9db0985041650e6a3edf4daee89acb38df0f4943424790f40e96"
+            },
+            "before": null,
+            "change": "added",
+            "path": "artifacts/supervisor-terminal-formal-owner-20261011/tests-owner-selection.log"
+          },
+          {
+            "after": {
+              "bytes": 5432,
+              "kind": "blob",
+              "mode": "100644",
+              "object": "0b5fc34a729a673d9386bf3f47d31911446bdc3c",
+              "path": "artifacts/supervisor-terminal-formal-owner-20261011/tests-regression-initial.log",
+              "sha256": "0f9157cad2c99565c606babcbd1561f87a3f81899df7e541a2360bd1766d6d9b"
+            },
+            "before": null,
+            "change": "added",
+            "path": "artifacts/supervisor-terminal-formal-owner-20261011/tests-regression-initial.log"
+          },
+          {
+            "after": {
+              "kind": "commit",
+              "mode": "160000",
+              "object": "7d67f14dc275237d815cb843c8772d95a7e2c8d1",
+              "path": "external/ipfs_accelerate"
+            },
+            "before": {
+              "kind": "commit",
+              "mode": "160000",
+              "object": "2773d8264e459a0cf0ee198505c930e3225c3d68",
+              "path": "external/ipfs_accelerate"
+            },
+            "change": "modified",
+            "path": "external/ipfs_accelerate"
+          },
+          {
+            "after": {
+              "kind": "commit",
+              "mode": "160000",
+              "object": "68374b51032b7a9fa795a79829e4d8eb2f2a5ca4",
+              "path": "external/ipfs_datasets"
+            },
+            "before": {
+              "kind": "commit",
+              "mode": "160000",
+              "object": "4b9e96753eb3e5f4951cc3f7c39b09b778d3d6b8",
+              "path": "external/ipfs_datasets"
+            },
+            "change": "modified",
+            "path": "external/ipfs_datasets"
+          },
+          {
+            "after": {
+              "bytes": 5022,
+              "kind": "blob",
+              "mode": "100644",
+              "object": "49db4e5cbeb1c7bcea7675d7e1222451eea116c7",
+              "path": "implementation_plan/docs/78-supervisor-terminal-formal-owner-2026-10-11.md",
+              "sha256": "9e5cc2b2af78f4669b7855dd61912dd336ba61fc34c717b4b5732109b91ebaf0"
+            },
+            "before": null,
+            "change": "added",
+            "path": "implementation_plan/docs/78-supervisor-terminal-formal-owner-2026-10-11.md"
+          },
+          {
+            "after": {
+              "bytes": 3509,
+              "kind": "blob",
+              "mode": "100644",
+              "object": "ba33f34f6a8d19c39cba0720498fa9b66c3b7fee",
+              "path": "implementation_plan/docs/79-supervisor-learned-numerical-consumer-2026-10-11.md",
+              "sha256": "06f75663b6cb6cd806a6a8b54a632b92489c1db80f1cc01c56977988b99b0c2b"
+            },
+            "before": null,
+            "change": "added",
+            "path": "implementation_plan/docs/79-supervisor-learned-numerical-consumer-2026-10-11.md"
+          }
+        ],
+        "commits": [
+          {
+            "author": "benjamin barber",
+            "author_date": "2026-10-11T22:37:47+00:00",
+            "commit_content_sha256": "9679fedd8bec312c1ecdb5d73663f1c1121b336ffe00d81c328472a21062a04d",
+            "object_bytes": 296,
+            "parents": [
+              "0a9329b4498acd8c1f5f7e163e87eb6809f25678"
+            ],
+            "sha": "e3a014fe5f6915230e6e7857a219de2c58f13d73",
+            "subject": "Pin Terminal formal-owner integration and retain qualification evidence"
+          },
+          {
+            "author": "benjamin barber",
+            "author_date": "2026-10-11T22:49:24+00:00",
+            "commit_content_sha256": "112fc309915deb69eea3e0b056d4f78c43d30c4403d88239d05b7b46397ee83f",
+            "object_bytes": 289,
+            "parents": [
+              "e3a014fe5f6915230e6e7857a219de2c58f13d73"
+            ],
+            "sha": "9036a6d4ff06f7c56e681001a18c4130037f1917",
+            "subject": "Pin qualified shared numerical inference and supervisor consumer"
+          }
+        ],
+        "fetched_ref": "refs/remotes/legal-temporal-contrast-20261011-01/main",
+        "reviewed_main": "9036a6d4ff06f7c56e681001a18c4130037f1917",
+        "worktree": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/workspace"
+      },
+      "schema": "legal-temporal-contrast-parallel-main-review/v1",
+      "scope": "immutable local fetched commit/tree/blob review; no network fetch, runtime execution, models or foreign mutable work inspected",
+      "source": {
+        "base": "4b9e96753eb3e5f4951cc3f7c39b09b778d3d6b8",
+        "base_is_ancestor": true,
+        "changed_paths": [
+          {
+            "after": {
+              "bytes": 10952,
+              "kind": "blob",
+              "mode": "100644",
+              "object": "6aaa67c5aef905a9a2349b829b38b091af3deadd",
+              "path": "docs/autoencoder_ownership.md",
+              "sha256": "16225c17e79966d4e5c333e8c1e8cec4710c5af714fc54c754cc960545ecf872"
+            },
+            "before": {
+              "bytes": 10558,
+              "kind": "blob",
+              "mode": "100644",
+              "object": "38747598b14c18a74775f28e4078a0d0257e87f5",
+              "path": "docs/autoencoder_ownership.md",
+              "sha256": "631bfd60221002fb39499f3710f5c5e4212aa47f829b7f6ebaaffce6c123b859"
+            },
+            "change": "modified",
+            "path": "docs/autoencoder_ownership.md"
+          },
+          {
+            "after": {
+              "bytes": 6809,
+              "kind": "blob",
+              "mode": "100644",
+              "object": "ac8a183eba86e843b40f1a6aa15559493d586f2f",
+              "path": "docs/software_contracts/numerical_selection_384.md",
+              "sha256": "679fe04e0c9a7321490574b2fef48b38a56216face5577f0eff14ac780bd5d4c"
+            },
+            "before": null,
+            "change": "added",
+            "path": "docs/software_contracts/numerical_selection_384.md"
+          },
+          {
+            "after": {
+              "bytes": 29584,
+              "kind": "blob",
+              "mode": "100644",
+              "object": "cf8c333fb20ca7e106669b68edd7b8eb4525ad4a",
+              "path": "ipfs_datasets_py/logic/software_contracts/codebase_numerical_selection_384.py",
+              "sha256": "3bb7decd669b6baf5cc10e02eaad502f21806502d35e9b1ccbdd29caa4d49e48"
+            },
+            "before": null,
+            "change": "added",
+            "path": "ipfs_datasets_py/logic/software_contracts/codebase_numerical_selection_384.py"
+          },
+          {
+            "after": {
+              "bytes": 4564,
+              "kind": "blob",
+              "mode": "100644",
+              "object": "6bb3acd860885e38cd2f8c12367713c3be77db12",
+              "path": "ipfs_datasets_py/logic/software_contracts/codebase_numerical_selection_384_worker.py",
+              "sha256": "1cdf03271b28c2a6055660152085a847dde03ba6d467ea54ae0bcc1abbc10d89"
+            },
+            "before": null,
+            "change": "added",
+            "path": "ipfs_datasets_py/logic/software_contracts/codebase_numerical_selection_384_worker.py"
+          },
+          {
+            "after": {
+              "bytes": 16529,
+              "kind": "blob",
+              "mode": "100644",
+              "object": "6b59194e5ae1b59ee181521b1c228ddbfa2bc165",
+              "path": "tests/integration/logic/software_contracts/test_codebase_numerical_selection_384.py",
+              "sha256": "1d1a634ddfb72509d9120ea6c062be5d2705fb953c12c80671625c45e6379b8f"
+            },
+            "before": null,
+            "change": "added",
+            "path": "tests/integration/logic/software_contracts/test_codebase_numerical_selection_384.py"
+          }
+        ],
+        "commits": [
+          {
+            "author": "benjamin barber",
+            "author_date": "2026-10-11T22:41:01+00:00",
+            "commit_content_sha256": "9ac7dbd9a526ecc892a7a205659ba45ff68eb1be01f40569e625ca01eb8294f4",
+            "object_bytes": 298,
+            "parents": [
+              "4b9e96753eb3e5f4951cc3f7c39b09b778d3d6b8"
+            ],
+            "sha": "68374b51032b7a9fa795a79829e4d8eb2f2a5ca4",
+            "subject": "Consume pinned numerical checkpoint through shared source inference owner"
+          }
+        ],
+        "fetched_ref": "refs/remotes/legal-temporal-contrast-20261011-01/main",
+        "reviewed_main": "68374b51032b7a9fa795a79829e4d8eb2f2a5ca4",
+        "worktree": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/datasets"
+      }
+    }
+  },
+  "root_integration": {
+    "intended_base": "9036a6d4ff06f7c56e681001a18c4130037f1917",
+    "intended_gitlinks": {
+      "JevOps": "9af1ebb6a4245ce2b4e673ac277e4988da4d5caa",
+      "Mcp-Plus-Plus": "628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0",
+      "external/ipfs_accelerate": "7d67f14dc275237d815cb843c8772d95a7e2c8d1",
+      "external/ipfs_datasets": "2a1794e388e88389c48966fb78a1b74c26a0c832",
+      "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0",
+      "external/meta-wearables-dat-android": "4e56e1864a5e78194bababc3a68775c4196cbed0",
+      "external/meta-wearables-dat-ios": "2b5695d16a710f3d2d7341f88570b86d01723d50",
+      "hallucinate_app": "ffcf5ff3b3389c95ba53e9f1be45f89fa96c5ef6",
+      "swissknife": "4772c7ff648dd5f438af059e21a1a5305d32dbe3"
+    },
+    "merged_baseline_head": "644dadcbaa71fd642335519696b1daa26c961dad",
+    "owned_branch": "codex/legal-temporal-contrast-workspace-20261011-01",
+    "preserved_other_gitlinks": 8,
+    "status": "pending_at_record_creation"
+  },
+  "schema": "temporal-contrast-workspace-publication/v1",
+  "scope": "actual merged source and closed evidence; root integration pending at record creation",
+  "source_ci_observation": {
+    "identity": {
+      "bytes": 10818,
+      "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/source-ci-observation-v01.json",
+      "sha256": "c9c2f10ccc584224cb00912b639b527eb623ee9bf496f0ed8988615b3f7462ce"
+    },
+    "receipt": {
+      "annotations": {
+        "114599643413": [
+          {
+            "annotation_level": "failure",
+            "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/3555a2153f299e3ff84945a0a51d275efa324831/.github",
+            "end_column": null,
+            "end_line": 1,
+            "message": "The job was not started because your account is locked due to a billing issue.",
+            "path": ".github",
+            "raw_details": "",
+            "start_column": null,
+            "start_line": 1,
+            "title": ""
+          },
+          {
+            "annotation_level": "notice",
+            "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/3555a2153f299e3ff84945a0a51d275efa324831/.github",
+            "end_column": null,
+            "end_line": 1,
+            "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+            "path": ".github",
+            "raw_details": "",
+            "start_column": null,
+            "start_line": 1,
+            "title": ""
+          }
+        ],
+        "114599646473": [
+          {
+            "annotation_level": "failure",
+            "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/3555a2153f299e3ff84945a0a51d275efa324831/.github",
+            "end_column": null,
+            "end_line": 1,
+            "message": "The job was not started because your account is locked due to a billing issue.",
+            "path": ".github",
+            "raw_details": "",
+            "start_column": null,
+            "start_line": 1,
+            "title": ""
+          },
+          {
+            "annotation_level": "notice",
+            "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/3555a2153f299e3ff84945a0a51d275efa324831/.github",
+            "end_column": null,
+            "end_line": 1,
+            "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+            "path": ".github",
+            "raw_details": "",
+            "start_column": null,
+            "start_line": 1,
+            "title": ""
+          }
+        ]
+      },
+      "ci_pass_claimed": false,
+      "pull_request": {
+        "headRefOid": "3555a2153f299e3ff84945a0a51d275efa324831",
+        "mergeStateStatus": "UNSTABLE",
+        "mergeable": "MERGEABLE",
+        "state": "OPEN",
+        "statusCheckRollup": [
+          {
+            "__typename": "CheckRun",
+            "completedAt": "2026-10-11T23:07:48Z",
+            "conclusion": "FAILURE",
+            "detailsUrl": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38183100092/job/114599643428",
+            "name": "Analyze (actions)",
+            "startedAt": "2026-10-11T23:07:45Z",
+            "status": "COMPLETED",
+            "workflowName": "CodeQL"
+          },
+          {
+            "__typename": "CheckRun",
+            "completedAt": "2026-10-11T23:07:49Z",
+            "conclusion": "FAILURE",
+            "detailsUrl": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38183101859/job/114599646473",
+            "name": "benchmark",
+            "startedAt": "2026-10-11T23:07:46Z",
+            "status": "COMPLETED",
+            "workflowName": "Logic Module Benchmarks"
+          },
+          {
+            "__typename": "CheckRun",
+            "completedAt": "0001-01-01T00:00:00Z",
+            "conclusion": "",
+            "detailsUrl": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38183101871/job/114599646419",
+            "name": "arm64-system-info",
+            "startedAt": "2026-10-11T23:07:46Z",
+            "status": "QUEUED",
+            "workflowName": "ARM64 Self-Hosted Runner"
+          },
+          {
+            "__typename": "CheckRun",
+            "completedAt": "0001-01-01T00:00:00Z",
+            "conclusion": "",
+            "detailsUrl": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38183101879/job/114599646310",
+            "name": "analyze-and-assign-copilot",
+            "startedAt": "2026-10-11T23:07:46Z",
+            "status": "QUEUED",
+            "workflowName": "Automated PR Review and Copilot Assignment"
+          },
+          {
+            "__typename": "CheckRun",
+            "completedAt": "0001-01-01T00:00:00Z",
+            "conclusion": "",
+            "detailsUrl": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38183101885/job/114599646429",
+            "name": "cli-smoke-tests",
+            "startedAt": "2026-10-11T23:07:46Z",
+            "status": "QUEUED",
+            "workflowName": "CLI Tools Error Monitoring"
+          },
+          {
+            "__typename": "CheckRun",
+            "completedAt": "0001-01-01T00:00:00Z",
+            "conclusion": "",
+            "detailsUrl": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38183101850/job/114599646650",
+            "name": "build-and-test (docker/Dockerfile.test, linux/amd64)",
+            "startedAt": "2026-10-11T23:07:46Z",
+            "status": "QUEUED",
+            "workflowName": "Docker Build and Test"
+          },
+          {
+            "__typename": "CheckRun",
+            "completedAt": "0001-01-01T00:00:00Z",
+            "conclusion": "",
+            "detailsUrl": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38183101907/job/114599646569",
+            "name": "enhanced-pr-monitor",
+            "startedAt": "2026-10-11T23:07:46Z",
+            "status": "QUEUED",
+            "workflowName": "Enhanced PR Completion Monitor with Progressive Copilot Assignment"
+          },
+          {
+            "__typename": "CheckRun",
+            "completedAt": "0001-01-01T00:00:00Z",
+            "conclusion": "",
+            "detailsUrl": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38183101881/job/114599646337",
+            "name": "Setup Cache Infrastructure",
+            "startedAt": "2026-10-11T23:07:46Z",
+            "status": "QUEUED",
+            "workflowName": "Example Cached Workflow"
+          },
+          {
+            "__typename": "CheckRun",
+            "completedAt": "0001-01-01T00:00:00Z",
+            "conclusion": "",
+            "detailsUrl": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38183101854/job/114599646134",
+            "name": "sdk-static-analysis",
+            "startedAt": "2026-10-11T23:07:46Z",
+            "status": "QUEUED",
+            "workflowName": "JavaScript SDK Error Monitoring"
+          },
+          {
+            "__typename": "CheckRun",
+            "completedAt": "0001-01-01T00:00:00Z",
+            "conclusion": "",
+            "detailsUrl": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38183101957/job/114599646674",
+            "name": "dashboard-smoke-tests (3.12)",
+            "startedAt": "2026-10-11T23:07:46Z",
+            "status": "QUEUED",
+            "workflowName": "MCP Dashboard Automated Tests"
+          },
+          {
+            "__typename": "CheckRun",
+            "completedAt": "0001-01-01T00:00:00Z",
+            "conclusion": "",
+            "detailsUrl": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38183101894/job/114599646504",
+            "name": "discover-tool-categories",
+            "startedAt": "2026-10-11T23:07:46Z",
+            "status": "QUEUED",
+            "workflowName": "MCP Tools Error Monitoring"
+          },
+          {
+            "__typename": "CheckRun",
+            "completedAt": "0001-01-01T00:00:00Z",
+            "conclusion": "",
+            "detailsUrl": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38183101911/job/114599646460",
+            "name": "check-pr-completion",
+            "startedAt": "2026-10-11T23:07:46Z",
+            "status": "QUEUED",
+            "workflowName": "PR Completion Monitor with Copilot Auto-Fix"
+          },
+          {
+            "__typename": "CheckRun",
+            "completedAt": "0001-01-01T00:00:00Z",
+            "conclusion": "",
+            "detailsUrl": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38183101872/job/114599646251",
+            "name": "Build distribution \ud83d\udce6",
+            "startedAt": "2026-10-11T23:07:46Z",
+            "status": "QUEUED",
+            "workflowName": "Publish Python Package"
+          },
+          {
+            "__typename": "CheckRun",
+            "completedAt": "0001-01-01T00:00:00Z",
+            "conclusion": "",
+            "detailsUrl": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38183101845/job/114599646293",
+            "name": "setup",
+            "startedAt": "2026-10-11T23:07:46Z",
+            "status": "QUEUED",
+            "workflowName": "Scraper Validation and Testing"
+          },
+          {
+            "__typename": "CheckRun",
+            "completedAt": "2026-10-11T23:07:49Z",
+            "conclusion": "FAILURE",
+            "detailsUrl": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38183100092/job/114599643372",
+            "name": "Analyze (javascript-typescript)",
+            "startedAt": "2026-10-11T23:07:45Z",
+            "status": "COMPLETED",
+            "workflowName": "CodeQL"
+          },
+          {
+            "__typename": "CheckRun",
+            "completedAt": "0001-01-01T00:00:00Z",
+            "conclusion": "",
+            "detailsUrl": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38183101850/job/114599646617",
+            "name": "build-and-test (Dockerfile.mcp-minimal, linux/amd64)",
+            "startedAt": "2026-10-11T23:07:46Z",
+            "status": "QUEUED",
+            "workflowName": "Docker Build and Test"
+          },
+          {
+            "__typename": "CheckRun",
+            "completedAt": "2026-10-11T23:07:49Z",
+            "conclusion": "FAILURE",
+            "detailsUrl": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38183100092/job/114599643413",
+            "name": "Analyze (python)",
+            "startedAt": "2026-10-11T23:07:45Z",
+            "status": "COMPLETED",
+            "workflowName": "CodeQL"
+          },
+          {
+            "__typename": "CheckRun",
+            "completedAt": "2026-10-11T23:07:48Z",
+            "conclusion": "FAILURE",
+            "detailsUrl": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38183100092/job/114599643212",
+            "name": "Analyze (rust)",
+            "startedAt": "2026-10-11T23:07:45Z",
+            "status": "COMPLETED",
+            "workflowName": "CodeQL"
+          },
+          {
+            "__typename": "CheckRun",
+            "completedAt": "0001-01-01T00:00:00Z",
+            "conclusion": "",
+            "detailsUrl": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38183101850/job/114599646579",
+            "name": "test-docker-compose",
+            "startedAt": "2026-10-11T23:07:46Z",
+            "status": "QUEUED",
+            "workflowName": "Docker Build and Test"
+          },
+          {
+            "__typename": "CheckRun",
+            "completedAt": "0001-01-01T00:00:00Z",
+            "conclusion": "",
+            "detailsUrl": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38183101850/job/114599646778",
+            "name": "build-multi-arch",
+            "startedAt": "2026-10-11T23:07:46Z",
+            "status": "QUEUED",
+            "workflowName": "Docker Build and Test"
+          }
+        ],
+        "url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1286"
+      },
+      "required_checks_overridden": false,
+      "schema": "temporal-contrast-source-ci-observation/v1",
+      "scope": "two independently read failed check annotations; remaining status snapshot"
+    }
+  },
+  "source_publication": {
+    "identity": {
+      "bytes": 1613,
+      "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/source-publication-v01.json",
+      "sha256": "2f15af74dafc307918bcedbcd5a447c390de480bd669a8d53991447d2bb3be67"
+    },
+    "receipt": {
+      "actual_first_parent": "68374b51032b7a9fa795a79829e4d8eb2f2a5ca4",
+      "actual_merge": "2a1794e388e88389c48966fb78a1b74c26a0c832",
+      "contribution_head": "3555a2153f299e3ff84945a0a51d275efa324831",
+      "copied_inventory": {
+        "bytes": 15147,
+        "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/contribution-copy-inputs-v01.json",
+        "sha256": "a2d437a0922aff5a484b49fc348070028791f56f50f524dcfd6ee47b41fd822e"
+      },
+      "findings": [],
+      "first_parent_changes_exactly_owned_additions": true,
+      "hugging_face_mutations": 0,
+      "passed": true,
+      "preserved_parallel_source": "68374b51032b7a9fa795a79829e4d8eb2f2a5ca4",
+      "pull_request": {
+        "headRefOid": "3555a2153f299e3ff84945a0a51d275efa324831",
+        "mergeCommit": {
+          "oid": "2a1794e388e88389c48966fb78a1b74c26a0c832"
+        },
+        "mergedAt": "2026-10-11T23:08:28Z",
+        "state": "MERGED",
+        "url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1286"
+      },
+      "repository": "endomorphosis/ipfs_datasets_py",
+      "schema": "temporal-contrast-source-publication/v1",
+      "source_paths": 57,
+      "staged_objects": {
+        "bytes": 18406,
+        "path": "/home/barberb/lift_coding/artifacts/legal-temporal-contrast-20261011-01/datasets-staged-objects-v01.json",
+        "sha256": "e958c75d5c803e40903c03ef7cae54aa77ab1d6369bdd00cdfa48667fe2a6b57"
+      },
+      "tests": {
+        "distinct_current_passed": 258,
+        "new_lake_build_executed": false,
+        "numerical_runtime_executed": false
+      },
+      "training": {
+        "actual_updates": 0,
+        "model_calls": 0,
+        "new_weights": false,
+        "status": "storage_admission_refused_before_child"
+      }
+    }
+  },
+  "training": {
+    "accounting_cap_bytes": 145000000000,
+    "actual_updates": 0,
+    "historical_reservation_records_unchanged": 511,
+    "model_calls": 0,
+    "new_weights": false,
+    "observed_charged_bytes": 146186818736,
+    "observed_overage_bytes": 1186818736,
+    "status": "storage_admission_refused_before_child"
+  },
+  "validation": {
+    "broader_family_qualification": false,
+    "dimensional_decoder_comparison": false,
+    "distinct_current_cases_passed": 258,
+    "independent_statutory_gold": false,
+    "new_lake_build": false,
+    "numerical_training": false
+  }
+}
