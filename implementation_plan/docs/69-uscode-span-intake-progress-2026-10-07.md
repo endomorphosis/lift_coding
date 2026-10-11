@@ -1,6 +1,6 @@
 # US Code span intake: implementation and measured progress
 
-Latest measured continuation: [October 11 reconciliation progress](70-uscode-archived-target-reconciliation-2026-10-11.md). The historical results below retain their original scope.
+Latest measured continuation: [completed October 11 source reconciliation and remaining plan](72-uscode-archive-reconciliation-rollout-2026-10-11.md). The historical results below retain their original scope.
 
 This implements the first intake slice of the [all-span processing plan](68-uscode-all-span-processing-plan-2026-10-07.md), reusing immutable original sources and archived assets. It adds no trained model, replacement embedding or proof claim.
 

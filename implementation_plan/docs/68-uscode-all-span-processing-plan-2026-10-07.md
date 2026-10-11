@@ -1,6 +1,6 @@
 # Processing every US Code span
 
-Latest measured continuation: [October 11 reconciliation progress](70-uscode-archived-target-reconciliation-2026-10-11.md). The historical results below retain their original scope.
+Latest measured continuation: [completed October 11 source reconciliation and remaining plan](72-uscode-archive-reconciliation-rollout-2026-10-11.md). The historical results below retain their original scope.
 
 The [complete processing plan](https://github.com/endomorphosis/ipfs_datasets_py/blob/911b9f2530b18f246b90a177a98471bffad609e9/docs/autoencoders/uscode_all_span_processing_plan_20261007.md) combines the retained native decoder, source-span, trigger/support/action and corpus infrastructure findings. It covers the immutable cache `765176c6db79ba65c1697c21dead43666350b730` and is backed by a bounded dataset/source survey and independent dataset, pipeline and research reviews.
 
