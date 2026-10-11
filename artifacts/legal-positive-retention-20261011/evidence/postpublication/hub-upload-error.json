@@ -1,0 +1,9 @@
+{
+  "automatic_retry": false,
+  "error_type": "SSLError",
+  "parent_commit": "ae5a6b555f66f9ea7cdf3f46a03c689d07485bb5",
+  "prefix": "experiments/positive-retention-20261011/run-01",
+  "repo": "Publicus/legal-ir-autoencoder",
+  "required_next_action": "Reconcile actual remote prefix/commit against the durable proposal before any retry; do not rerun this helper blindly.",
+  "schema": "positive-retention-Hub-uncertain-outcome/v1"
+}

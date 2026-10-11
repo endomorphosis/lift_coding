@@ -1,0 +1,3646 @@
+{
+  "schema": "support-retention-source-only-panel/v1",
+  "rows": [
+    {
+      "id": "source:ed17ab142b89adf6196043173882f605e40128002c199b4a106dec754416ed96",
+      "source_group": "support-retention-group:1fdb70f189cd13e4299962ae0ba8f616f58844f67c8994c5b67a8ece071a427e",
+      "source_sha256": "ed17ab142b89adf6196043173882f605e40128002c199b4a106dec754416ed96",
+      "class_logits": [
+        -0.015525341033935547,
+        1.39572274684906,
+        -1.336307168006897
+      ],
+      "prediction": {
+        "schema": "legal-scope-retention-gate-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "P",
+          "spans": {
+            "modality": [
+              39,
+              51
+            ],
+            "actor": [
+              4,
+              16
+            ],
+            "action": [
+              19,
+              38
+            ],
+            "object": null,
+            "condition": null
+          },
+          "condition_attachment": null
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "ed17ab142b89adf6196043173882f605e40128002c199b4a106dec754416ed96",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "the peridot moth's rigorously abrading is permitted.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "4771315df87cdb9a3bcb2f8212dec430e531e54b133e5db8f0b0c82874b1dbb3",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-39-51",
+                "facet": "modality",
+                "canonical_symbol": "P",
+                "anchor": {
+                  "origin": "source",
+                  "start": 39,
+                  "end": 51,
+                  "text": "is permitted",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-4-16",
+                "facet": "actor",
+                "canonical_symbol": "peridot moth",
+                "anchor": {
+                  "origin": "source",
+                  "start": 4,
+                  "end": 16,
+                  "text": "peridot moth",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-19-38",
+                "facet": "action",
+                "canonical_symbol": "rigorously abrading",
+                "anchor": {
+                  "origin": "source",
+                  "start": 19,
+                  "end": 38,
+                  "text": "rigorously abrading",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-39-51",
+                  "actor": "occ-actor-4-16",
+                  "action": "occ-action-19-38",
+                  "object": null
+                },
+                "qualifiers": {
+                  "conditions": null,
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "rule",
+              "rule_id": "rule-0"
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 52,
+                  "text": "the peridot moth's rigorously abrading is permitted.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "a675c7315b3ce076f5d3a96ad2b91fe558a5b71ba6133693ce3ddedc6b0bcb46"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "4771315df87cdb9a3bcb2f8212dec430e531e54b133e5db8f0b0c82874b1dbb3",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "a675c7315b3ce076f5d3a96ad2b91fe558a5b71ba6133693ce3ddedc6b0bcb46",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "the peridot moth's rigorously abrading is permitted.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "4771315df87cdb9a3bcb2f8212dec430e531e54b133e5db8f0b0c82874b1dbb3",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-39-51",
+                  "facet": "modality",
+                  "canonical_symbol": "P",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 39,
+                    "end": 51,
+                    "text": "is permitted",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-4-16",
+                  "facet": "actor",
+                  "canonical_symbol": "peridot moth",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 4,
+                    "end": 16,
+                    "text": "peridot moth",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-19-38",
+                  "facet": "action",
+                  "canonical_symbol": "rigorously abrading",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 19,
+                    "end": 38,
+                    "text": "rigorously abrading",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-39-51",
+                    "actor": "occ-actor-4-16",
+                    "action": "occ-action-19-38",
+                    "object": null
+                  },
+                  "qualifiers": {
+                    "conditions": null,
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 52,
+                    "text": "the peridot moth's rigorously abrading is permitted.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "a675c7315b3ce076f5d3a96ad2b91fe558a5b71ba6133693ce3ddedc6b0bcb46"
+            },
+            "occurrence_count": 3,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "52d20434d70e8f2cb496303ce696ed9258d05890c2fb32eab09cf3772c84e046"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "P",
+          "presence": {
+            "object": false,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              7,
+              8
+            ],
+            "actor": [
+              1,
+              2
+            ],
+            "action": [
+              5,
+              6
+            ],
+            "object": [
+              5,
+              6
+            ],
+            "condition": [
+              8,
+              6
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          -0.015525341033935547,
+          1.39572274684906,
+          -1.336307168006897
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "objective": "positive_margin",
+        "retention_lambda": 1.0,
+        "support_probability": 0.8653519749641418,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:00bb3a189a29d2c36ec277b639d44e91b9b4597c180c2327309936117e50d2ea",
+      "source_group": "support-retention-group:1fdb70f189cd13e4299962ae0ba8f616f58844f67c8994c5b67a8ece071a427e",
+      "source_sha256": "00bb3a189a29d2c36ec277b639d44e91b9b4597c180c2327309936117e50d2ea",
+      "class_logits": [
+        -1.0571582317352295,
+        2.2504286766052246,
+        -0.8511921167373657
+      ],
+      "prediction": {
+        "schema": "legal-scope-retention-gate-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "P",
+          "presence": {
+            "object": false,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              4,
+              5
+            ],
+            "actor": [
+              1,
+              2
+            ],
+            "action": [
+              5,
+              6
+            ],
+            "object": [
+              5,
+              6
+            ],
+            "condition": [
+              1,
+              6
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          -1.0571582317352295,
+          2.2504286766052246,
+          -0.8511921167373657
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "objective": "positive_margin",
+        "retention_lambda": 1.0,
+        "support_probability": 0.029552293941378593,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:9b52dbb27f75fcf2d7401baa46e13eb4794189b4195b826da6a142067159281c",
+      "source_group": "support-retention-group:a92b7d6bb1a5a59109e4f87598bd3736d267c9255747cd2804941d7f9ae1ead1",
+      "source_sha256": "9b52dbb27f75fcf2d7401baa46e13eb4794189b4195b826da6a142067159281c",
+      "class_logits": [
+        1.3358039855957031,
+        -1.0937079191207886,
+        -0.512406051158905
+      ],
+      "prediction": {
+        "schema": "legal-scope-retention-gate-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "O",
+          "spans": {
+            "modality": [
+              39,
+              63
+            ],
+            "actor": [
+              22,
+              38
+            ],
+            "action": [
+              64,
+              70
+            ],
+            "object": [
+              75,
+              91
+            ],
+            "condition": [
+              3,
+              16
+            ]
+          },
+          "condition_attachment": "statement"
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "9b52dbb27f75fcf2d7401baa46e13eb4794189b4195b826da6a142067159281c",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "If geyser gushes, the larimar ladybird has a duty to rigorously abrade the sunstone alembic.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "b140b852c0287b27989295d619c8ccb9cc1de8ddbe22e4db79670716047ea478",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-39-63",
+                "facet": "modality",
+                "canonical_symbol": "O",
+                "anchor": {
+                  "origin": "source",
+                  "start": 39,
+                  "end": 63,
+                  "text": "has a duty to rigorously",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-22-38",
+                "facet": "actor",
+                "canonical_symbol": "larimar ladybird",
+                "anchor": {
+                  "origin": "source",
+                  "start": 22,
+                  "end": 38,
+                  "text": "larimar ladybird",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-64-70",
+                "facet": "action",
+                "canonical_symbol": "abrade",
+                "anchor": {
+                  "origin": "source",
+                  "start": 64,
+                  "end": 70,
+                  "text": "abrade",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-object-75-91",
+                "facet": "object",
+                "canonical_symbol": "sunstone alembic",
+                "anchor": {
+                  "origin": "source",
+                  "start": 75,
+                  "end": 91,
+                  "text": "sunstone alembic",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-condition-3-16",
+                "facet": "conditions",
+                "canonical_symbol": "geyser gushes",
+                "anchor": {
+                  "origin": "source",
+                  "start": 3,
+                  "end": 16,
+                  "text": "geyser gushes",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-39-63",
+                  "actor": "occ-actor-22-38",
+                  "action": "occ-action-64-70",
+                  "object": "occ-object-75-91"
+                },
+                "qualifiers": {
+                  "conditions": null,
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "attach",
+              "body": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "qualifiers": {
+                "conditions": {
+                  "op": "leaf",
+                  "occurrence_id": "occ-condition-3-16"
+                },
+                "exceptions": null,
+                "temporal": null
+              }
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 92,
+                  "text": "If geyser gushes, the larimar ladybird has a duty to rigorously abrade the sunstone alembic.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "99bb5e266d2da93fce16d94f9b3e0afc516af9101696e02a5ebb72e3b75958f4"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "b140b852c0287b27989295d619c8ccb9cc1de8ddbe22e4db79670716047ea478",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "99bb5e266d2da93fce16d94f9b3e0afc516af9101696e02a5ebb72e3b75958f4",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "If geyser gushes, the larimar ladybird has a duty to rigorously abrade the sunstone alembic.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "b140b852c0287b27989295d619c8ccb9cc1de8ddbe22e4db79670716047ea478",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-39-63",
+                  "facet": "modality",
+                  "canonical_symbol": "O",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 39,
+                    "end": 63,
+                    "text": "has a duty to rigorously",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-22-38",
+                  "facet": "actor",
+                  "canonical_symbol": "larimar ladybird",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 22,
+                    "end": 38,
+                    "text": "larimar ladybird",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-64-70",
+                  "facet": "action",
+                  "canonical_symbol": "abrade",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 64,
+                    "end": 70,
+                    "text": "abrade",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-object-75-91",
+                  "facet": "object",
+                  "canonical_symbol": "sunstone alembic",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 75,
+                    "end": 91,
+                    "text": "sunstone alembic",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-condition-3-16",
+                  "facet": "conditions",
+                  "canonical_symbol": "geyser gushes",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 3,
+                    "end": 16,
+                    "text": "geyser gushes",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-39-63",
+                    "actor": "occ-actor-22-38",
+                    "action": "occ-action-64-70",
+                    "object": "occ-object-75-91"
+                  },
+                  "qualifiers": {
+                    "conditions": null,
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "attach",
+                "body": {
+                  "op": "rule",
+                  "rule_id": "rule-0"
+                },
+                "qualifiers": {
+                  "conditions": {
+                    "op": "leaf",
+                    "occurrence_id": "occ-condition-3-16"
+                  },
+                  "exceptions": null,
+                  "temporal": null
+                }
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 92,
+                    "text": "If geyser gushes, the larimar ladybird has a duty to rigorously abrade the sunstone alembic.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "99bb5e266d2da93fce16d94f9b3e0afc516af9101696e02a5ebb72e3b75958f4"
+            },
+            "occurrence_count": 5,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "f6e4cc04e273f377a115f8eeae1960ebb2f3bed5ad13e17bc1e5717b31e2ce04"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "O",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              7,
+              11
+            ],
+            "actor": [
+              5,
+              6
+            ],
+            "action": [
+              12,
+              12
+            ],
+            "object": [
+              14,
+              15
+            ],
+            "condition": [
+              1,
+              2
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          1.3358039855957031,
+          -1.0937079191207886,
+          -0.512406051158905
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "objective": "positive_margin",
+        "retention_lambda": 1.0,
+        "support_probability": 0.5408214926719666,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:b375781cf31986db1d8a1110188ca38a730780a24540b857cf67fa94fa840ad0",
+      "source_group": "support-retention-group:a92b7d6bb1a5a59109e4f87598bd3736d267c9255747cd2804941d7f9ae1ead1",
+      "source_sha256": "b375781cf31986db1d8a1110188ca38a730780a24540b857cf67fa94fa840ad0",
+      "class_logits": [
+        0.9669466018676758,
+        -0.008130773901939392,
+        -0.8517479300498962
+      ],
+      "prediction": {
+        "schema": "legal-scope-retention-gate-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "O",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              7,
+              11
+            ],
+            "actor": [
+              5,
+              6
+            ],
+            "action": [
+              17,
+              12
+            ],
+            "object": [
+              14,
+              17
+            ],
+            "condition": [
+              1,
+              2
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.9669466018676758,
+          -0.008130773901939392,
+          -0.8517479300498962
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "objective": "positive_margin",
+        "retention_lambda": 1.0,
+        "support_probability": 0.04156949743628502,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:b2ed7029b6aebfed0024813e0b7b554ff1f90d7886af2521bb6bf1e91e9d06f6",
+      "source_group": "support-retention-group:4e6e372f27e066c5c5d71ff0de2d1bee98aeb37197b01860c449f919a004f1c0",
+      "source_sha256": "b2ed7029b6aebfed0024813e0b7b554ff1f90d7886af2521bb6bf1e91e9d06f6",
+      "class_logits": [
+        0.7644560933113098,
+        -3.5408291816711426,
+        2.353499412536621
+      ],
+      "prediction": {
+        "schema": "legal-scope-retention-gate-result/v1",
+        "status": "blocked",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "predicted_occurrence_proposal_invalid"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": false,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              8,
+              9
+            ],
+            "actor": [
+              6,
+              7
+            ],
+            "action": [
+              6,
+              11
+            ],
+            "object": [
+              14,
+              15
+            ],
+            "condition": [
+              14,
+              15
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.7644560933113098,
+          -3.5408291816711426,
+          2.353499412536621
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "objective": "positive_margin",
+        "retention_lambda": 1.0,
+        "support_probability": 0.9495254158973694,
+        "support_threshold": 0.5,
+        "diagnostic": "distinct occurrence facets must not overlap"
+      }
+    },
+    {
+      "id": "source:93541f1a467aec59433d1c284d637beeaafbf1f5dc0e99508bf2fa3be151b873",
+      "source_group": "support-retention-group:4e6e372f27e066c5c5d71ff0de2d1bee98aeb37197b01860c449f919a004f1c0",
+      "source_sha256": "93541f1a467aec59433d1c284d637beeaafbf1f5dc0e99508bf2fa3be151b873",
+      "class_logits": [
+        0.9098738431930542,
+        -3.0896711349487305,
+        2.1187541484832764
+      ],
+      "prediction": {
+        "schema": "legal-scope-retention-gate-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": false,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              8,
+              9
+            ],
+            "actor": [
+              14,
+              15
+            ],
+            "action": [
+              17,
+              17
+            ],
+            "object": [
+              20,
+              21
+            ],
+            "condition": [
+              20,
+              3
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.9098738431930542,
+          -3.0896711349487305,
+          2.1187541484832764
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "objective": "positive_margin",
+        "retention_lambda": 1.0,
+        "support_probability": 0.32225826382637024,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:6db1781fe3c61bf8f78394a31cdf2571559770a3f03caaae11440e2f6f6e7c24",
+      "source_group": "support-retention-group:cd8906daaa4c14dc10f6b223729628eb388fd73cd2da646289748c35131a89f4",
+      "source_sha256": "6db1781fe3c61bf8f78394a31cdf2571559770a3f03caaae11440e2f6f6e7c24",
+      "class_logits": [
+        0.0874602273106575,
+        1.3003956079483032,
+        -1.4721486568450928
+      ],
+      "prediction": {
+        "schema": "legal-scope-retention-gate-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "P",
+          "spans": {
+            "modality": [
+              74,
+              86
+            ],
+            "actor": [
+              34,
+              51
+            ],
+            "action": [
+              54,
+              73
+            ],
+            "object": null,
+            "condition": null
+          },
+          "condition_attachment": null
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "6db1781fe3c61bf8f78394a31cdf2571559770a3f03caaae11440e2f6f6e7c24",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "Under the fixture convention, the héliotrope earwig's rigorously abrading is permitted.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "d8bcc3b65275c3d26f3c4d4463ff06e13a60aea953bec3e31a0524b16eb0d974",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-74-86",
+                "facet": "modality",
+                "canonical_symbol": "P",
+                "anchor": {
+                  "origin": "source",
+                  "start": 74,
+                  "end": 86,
+                  "text": "is permitted",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-34-51",
+                "facet": "actor",
+                "canonical_symbol": "héliotrope earwig",
+                "anchor": {
+                  "origin": "source",
+                  "start": 34,
+                  "end": 51,
+                  "text": "héliotrope earwig",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-54-73",
+                "facet": "action",
+                "canonical_symbol": "rigorously abrading",
+                "anchor": {
+                  "origin": "source",
+                  "start": 54,
+                  "end": 73,
+                  "text": "rigorously abrading",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-74-86",
+                  "actor": "occ-actor-34-51",
+                  "action": "occ-action-54-73",
+                  "object": null
+                },
+                "qualifiers": {
+                  "conditions": null,
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "rule",
+              "rule_id": "rule-0"
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 87,
+                  "text": "Under the fixture convention, the héliotrope earwig's rigorously abrading is permitted.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "a16b677ce70ab9b008e78a89d1c0b3c903a31eacd34a72ea8e7d7a9edfc18b4a"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "d8bcc3b65275c3d26f3c4d4463ff06e13a60aea953bec3e31a0524b16eb0d974",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "a16b677ce70ab9b008e78a89d1c0b3c903a31eacd34a72ea8e7d7a9edfc18b4a",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "Under the fixture convention, the héliotrope earwig's rigorously abrading is permitted.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "d8bcc3b65275c3d26f3c4d4463ff06e13a60aea953bec3e31a0524b16eb0d974",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-74-86",
+                  "facet": "modality",
+                  "canonical_symbol": "P",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 74,
+                    "end": 86,
+                    "text": "is permitted",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-34-51",
+                  "facet": "actor",
+                  "canonical_symbol": "héliotrope earwig",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 34,
+                    "end": 51,
+                    "text": "héliotrope earwig",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-54-73",
+                  "facet": "action",
+                  "canonical_symbol": "rigorously abrading",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 54,
+                    "end": 73,
+                    "text": "rigorously abrading",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-74-86",
+                    "actor": "occ-actor-34-51",
+                    "action": "occ-action-54-73",
+                    "object": null
+                  },
+                  "qualifiers": {
+                    "conditions": null,
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 87,
+                    "text": "Under the fixture convention, the héliotrope earwig's rigorously abrading is permitted.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "a16b677ce70ab9b008e78a89d1c0b3c903a31eacd34a72ea8e7d7a9edfc18b4a"
+            },
+            "occurrence_count": 3,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "cff6d86d169ad177ce7c2f16d02542597496e5ace8a3c5476b6d4586cf9bcdcd"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "P",
+          "presence": {
+            "object": false,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              12,
+              13
+            ],
+            "actor": [
+              6,
+              7
+            ],
+            "action": [
+              10,
+              11
+            ],
+            "object": [
+              10,
+              11
+            ],
+            "condition": [
+              2,
+              0
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.0874602273106575,
+          1.3003956079483032,
+          -1.4721486568450928
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "objective": "positive_margin",
+        "retention_lambda": 1.0,
+        "support_probability": 0.7330970168113708,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:05a3121920c9b579346411f252a9693212af473ce6fe437e89779e86ccc43bee",
+      "source_group": "support-retention-group:cd8906daaa4c14dc10f6b223729628eb388fd73cd2da646289748c35131a89f4",
+      "source_sha256": "05a3121920c9b579346411f252a9693212af473ce6fe437e89779e86ccc43bee",
+      "class_logits": [
+        -0.18100383877754211,
+        2.4170665740966797,
+        -2.2985754013061523
+      ],
+      "prediction": {
+        "schema": "legal-scope-retention-gate-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "P",
+          "spans": {
+            "modality": [
+              74,
+              86
+            ],
+            "actor": [
+              34,
+              51
+            ],
+            "action": [
+              54,
+              73
+            ],
+            "object": null,
+            "condition": null
+          },
+          "condition_attachment": null
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "05a3121920c9b579346411f252a9693212af473ce6fe437e89779e86ccc43bee",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "Under the fixture convention, the héliotrope earwig's rigorously abrading is ermittedp.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "56ff060944bffbba45cb2aa2a562a185a433c4c85865076534e297c71613fb04",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-74-86",
+                "facet": "modality",
+                "canonical_symbol": "P",
+                "anchor": {
+                  "origin": "source",
+                  "start": 74,
+                  "end": 86,
+                  "text": "is ermittedp",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-34-51",
+                "facet": "actor",
+                "canonical_symbol": "héliotrope earwig",
+                "anchor": {
+                  "origin": "source",
+                  "start": 34,
+                  "end": 51,
+                  "text": "héliotrope earwig",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-54-73",
+                "facet": "action",
+                "canonical_symbol": "rigorously abrading",
+                "anchor": {
+                  "origin": "source",
+                  "start": 54,
+                  "end": 73,
+                  "text": "rigorously abrading",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-74-86",
+                  "actor": "occ-actor-34-51",
+                  "action": "occ-action-54-73",
+                  "object": null
+                },
+                "qualifiers": {
+                  "conditions": null,
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "rule",
+              "rule_id": "rule-0"
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 87,
+                  "text": "Under the fixture convention, the héliotrope earwig's rigorously abrading is ermittedp.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "d69e34ff31110f0a5012288ba563d259b066116cfcd14c9d4f07d84d191a334b"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "56ff060944bffbba45cb2aa2a562a185a433c4c85865076534e297c71613fb04",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "d69e34ff31110f0a5012288ba563d259b066116cfcd14c9d4f07d84d191a334b",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "Under the fixture convention, the héliotrope earwig's rigorously abrading is ermittedp.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "56ff060944bffbba45cb2aa2a562a185a433c4c85865076534e297c71613fb04",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-74-86",
+                  "facet": "modality",
+                  "canonical_symbol": "P",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 74,
+                    "end": 86,
+                    "text": "is ermittedp",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-34-51",
+                  "facet": "actor",
+                  "canonical_symbol": "héliotrope earwig",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 34,
+                    "end": 51,
+                    "text": "héliotrope earwig",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-54-73",
+                  "facet": "action",
+                  "canonical_symbol": "rigorously abrading",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 54,
+                    "end": 73,
+                    "text": "rigorously abrading",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-74-86",
+                    "actor": "occ-actor-34-51",
+                    "action": "occ-action-54-73",
+                    "object": null
+                  },
+                  "qualifiers": {
+                    "conditions": null,
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 87,
+                    "text": "Under the fixture convention, the héliotrope earwig's rigorously abrading is ermittedp.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "d69e34ff31110f0a5012288ba563d259b066116cfcd14c9d4f07d84d191a334b"
+            },
+            "occurrence_count": 3,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "f62ea99f69aa5c191766ea55090d06f8bf4c0d20b7fdf713e0763c6291a884f6"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "P",
+          "presence": {
+            "object": false,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              12,
+              13
+            ],
+            "actor": [
+              6,
+              7
+            ],
+            "action": [
+              10,
+              11
+            ],
+            "object": [
+              10,
+              11
+            ],
+            "condition": [
+              2,
+              0
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          -0.18100383877754211,
+          2.4170665740966797,
+          -2.2985754013061523
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "objective": "positive_margin",
+        "retention_lambda": 1.0,
+        "support_probability": 0.7140066623687744,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:0203e9f27b2fb18a1177562591c7ddc604bd8b2a11e8173f1042c5bda23ef82b",
+      "source_group": "support-retention-group:2b0d9787ca3a739a63fba5b9296b232946fb22999e784de55d559347e0ca57c6",
+      "source_sha256": "0203e9f27b2fb18a1177562591c7ddc604bd8b2a11e8173f1042c5bda23ef82b",
+      "class_logits": [
+        0.3953532874584198,
+        -2.5191779136657715,
+        1.6905444860458374
+      ],
+      "prediction": {
+        "schema": "legal-scope-retention-gate-result/v1",
+        "status": "blocked",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "predicted_occurrence_proposal_invalid"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              8,
+              9
+            ],
+            "actor": [
+              6,
+              7
+            ],
+            "action": [
+              0,
+              0
+            ],
+            "object": [
+              2,
+              3
+            ],
+            "condition": [
+              12,
+              3
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.3953532874584198,
+          -2.5191779136657715,
+          1.6905444860458374
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "objective": "positive_margin",
+        "retention_lambda": 1.0,
+        "support_probability": 0.9537019729614258,
+        "support_threshold": 0.5,
+        "diagnostic": "predicted span order/bounds invalid"
+      }
+    },
+    {
+      "id": "source:97caee57ce2ee85685a3240600021be28f9d68eff6f228b64695443d4ad06ba0",
+      "source_group": "support-retention-group:2b0d9787ca3a739a63fba5b9296b232946fb22999e784de55d559347e0ca57c6",
+      "source_sha256": "97caee57ce2ee85685a3240600021be28f9d68eff6f228b64695443d4ad06ba0",
+      "class_logits": [
+        0.577593207359314,
+        -1.7898145914077759,
+        1.253920555114746
+      ],
+      "prediction": {
+        "schema": "legal-scope-retention-gate-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": false,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              8,
+              9
+            ],
+            "actor": [
+              18,
+              19
+            ],
+            "action": [
+              21,
+              0
+            ],
+            "object": [
+              2,
+              3
+            ],
+            "condition": [
+              12,
+              15
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.577593207359314,
+          -1.7898145914077759,
+          1.253920555114746
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "objective": "positive_margin",
+        "retention_lambda": 1.0,
+        "support_probability": 0.43312186002731323,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:0e65d2b9f5abb260583a090b390cad162cc9343919a682590804634781b9c688",
+      "source_group": "support-retention-group:54f9055c3656f9535132ed447fc8b33cb0c37f081fea786c85ba1b96c0ed4629",
+      "source_sha256": "0e65d2b9f5abb260583a090b390cad162cc9343919a682590804634781b9c688",
+      "class_logits": [
+        0.5950402617454529,
+        -1.8374475240707397,
+        0.9152229428291321
+      ],
+      "prediction": {
+        "schema": "legal-scope-retention-gate-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "F",
+          "spans": {
+            "modality": [
+              30,
+              42
+            ],
+            "actor": [
+              51,
+              67
+            ],
+            "action": [
+              71,
+              86
+            ],
+            "object": [
+              91,
+              107
+            ],
+            "condition": null
+          },
+          "condition_attachment": null
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "0e65d2b9f5abb260583a090b390cad162cc9343919a682590804634781b9c688",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "For the authored protocol, it is forbidden for the sunstone cricket to delicately etch the sunstone alembic.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "4bb16ec5c20d5cfbdd9e54215dcdf8efa9c4e52faa1e5bd8725c69d3b4ca8ec6",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-30-42",
+                "facet": "modality",
+                "canonical_symbol": "F",
+                "anchor": {
+                  "origin": "source",
+                  "start": 30,
+                  "end": 42,
+                  "text": "is forbidden",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-51-67",
+                "facet": "actor",
+                "canonical_symbol": "sunstone cricket",
+                "anchor": {
+                  "origin": "source",
+                  "start": 51,
+                  "end": 67,
+                  "text": "sunstone cricket",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-71-86",
+                "facet": "action",
+                "canonical_symbol": "delicately etch",
+                "anchor": {
+                  "origin": "source",
+                  "start": 71,
+                  "end": 86,
+                  "text": "delicately etch",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-object-91-107",
+                "facet": "object",
+                "canonical_symbol": "sunstone alembic",
+                "anchor": {
+                  "origin": "source",
+                  "start": 91,
+                  "end": 107,
+                  "text": "sunstone alembic",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-30-42",
+                  "actor": "occ-actor-51-67",
+                  "action": "occ-action-71-86",
+                  "object": "occ-object-91-107"
+                },
+                "qualifiers": {
+                  "conditions": null,
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "rule",
+              "rule_id": "rule-0"
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 108,
+                  "text": "For the authored protocol, it is forbidden for the sunstone cricket to delicately etch the sunstone alembic.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "e0dfff37285bc0338613afa652e60ec237b486736d4898766d8a91616b0a6239"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "4bb16ec5c20d5cfbdd9e54215dcdf8efa9c4e52faa1e5bd8725c69d3b4ca8ec6",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "e0dfff37285bc0338613afa652e60ec237b486736d4898766d8a91616b0a6239",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "For the authored protocol, it is forbidden for the sunstone cricket to delicately etch the sunstone alembic.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "4bb16ec5c20d5cfbdd9e54215dcdf8efa9c4e52faa1e5bd8725c69d3b4ca8ec6",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-30-42",
+                  "facet": "modality",
+                  "canonical_symbol": "F",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 30,
+                    "end": 42,
+                    "text": "is forbidden",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-51-67",
+                  "facet": "actor",
+                  "canonical_symbol": "sunstone cricket",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 51,
+                    "end": 67,
+                    "text": "sunstone cricket",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-71-86",
+                  "facet": "action",
+                  "canonical_symbol": "delicately etch",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 71,
+                    "end": 86,
+                    "text": "delicately etch",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-object-91-107",
+                  "facet": "object",
+                  "canonical_symbol": "sunstone alembic",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 91,
+                    "end": 107,
+                    "text": "sunstone alembic",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-30-42",
+                    "actor": "occ-actor-51-67",
+                    "action": "occ-action-71-86",
+                    "object": "occ-object-91-107"
+                  },
+                  "qualifiers": {
+                    "conditions": null,
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 108,
+                    "text": "For the authored protocol, it is forbidden for the sunstone cricket to delicately etch the sunstone alembic.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "e0dfff37285bc0338613afa652e60ec237b486736d4898766d8a91616b0a6239"
+            },
+            "occurrence_count": 4,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "25e3a74dadaa167c7a278777c468c59640e907ea7c9047251ce64ab32e700fc7"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "F",
+          "presence": {
+            "object": true,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              6,
+              7
+            ],
+            "actor": [
+              10,
+              11
+            ],
+            "action": [
+              13,
+              14
+            ],
+            "object": [
+              16,
+              17
+            ],
+            "condition": [
+              2,
+              3
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.5950402617454529,
+          -1.8374475240707397,
+          0.9152229428291321
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "objective": "positive_margin",
+        "retention_lambda": 1.0,
+        "support_probability": 0.7846896052360535,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:2a05501fb5bd7f95ef6f5244b7566a956a15986d9b60e690878fd83bd47c0050",
+      "source_group": "support-retention-group:54f9055c3656f9535132ed447fc8b33cb0c37f081fea786c85ba1b96c0ed4629",
+      "source_sha256": "2a05501fb5bd7f95ef6f5244b7566a956a15986d9b60e690878fd83bd47c0050",
+      "class_logits": [
+        -0.09168657660484314,
+        0.8527734279632568,
+        -1.0777840614318848
+      ],
+      "prediction": {
+        "schema": "legal-scope-retention-gate-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "P",
+          "spans": {
+            "modality": [
+              30,
+              42
+            ],
+            "actor": [
+              51,
+              67
+            ],
+            "action": [
+              71,
+              86
+            ],
+            "object": [
+              91,
+              107
+            ],
+            "condition": null
+          },
+          "condition_attachment": null
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "2a05501fb5bd7f95ef6f5244b7566a956a15986d9b60e690878fd83bd47c0050",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "For the authored protocol, it is orbiddenf for the sunstone cricket to delicately etch the sunstone alembic.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "a100a73e57b35491f280095f6f57eb6c81fce752c6267267f6bb5b1eb134ca11",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-30-42",
+                "facet": "modality",
+                "canonical_symbol": "P",
+                "anchor": {
+                  "origin": "source",
+                  "start": 30,
+                  "end": 42,
+                  "text": "is orbiddenf",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-51-67",
+                "facet": "actor",
+                "canonical_symbol": "sunstone cricket",
+                "anchor": {
+                  "origin": "source",
+                  "start": 51,
+                  "end": 67,
+                  "text": "sunstone cricket",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-71-86",
+                "facet": "action",
+                "canonical_symbol": "delicately etch",
+                "anchor": {
+                  "origin": "source",
+                  "start": 71,
+                  "end": 86,
+                  "text": "delicately etch",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-object-91-107",
+                "facet": "object",
+                "canonical_symbol": "sunstone alembic",
+                "anchor": {
+                  "origin": "source",
+                  "start": 91,
+                  "end": 107,
+                  "text": "sunstone alembic",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-30-42",
+                  "actor": "occ-actor-51-67",
+                  "action": "occ-action-71-86",
+                  "object": "occ-object-91-107"
+                },
+                "qualifiers": {
+                  "conditions": null,
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "rule",
+              "rule_id": "rule-0"
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 108,
+                  "text": "For the authored protocol, it is orbiddenf for the sunstone cricket to delicately etch the sunstone alembic.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "47795b33e420a7095a25eb0960fe15b3a97059fde2ace3e1cf34a84d33c25a09"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "a100a73e57b35491f280095f6f57eb6c81fce752c6267267f6bb5b1eb134ca11",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "47795b33e420a7095a25eb0960fe15b3a97059fde2ace3e1cf34a84d33c25a09",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "For the authored protocol, it is orbiddenf for the sunstone cricket to delicately etch the sunstone alembic.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "a100a73e57b35491f280095f6f57eb6c81fce752c6267267f6bb5b1eb134ca11",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-30-42",
+                  "facet": "modality",
+                  "canonical_symbol": "P",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 30,
+                    "end": 42,
+                    "text": "is orbiddenf",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-51-67",
+                  "facet": "actor",
+                  "canonical_symbol": "sunstone cricket",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 51,
+                    "end": 67,
+                    "text": "sunstone cricket",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-71-86",
+                  "facet": "action",
+                  "canonical_symbol": "delicately etch",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 71,
+                    "end": 86,
+                    "text": "delicately etch",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-object-91-107",
+                  "facet": "object",
+                  "canonical_symbol": "sunstone alembic",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 91,
+                    "end": 107,
+                    "text": "sunstone alembic",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-30-42",
+                    "actor": "occ-actor-51-67",
+                    "action": "occ-action-71-86",
+                    "object": "occ-object-91-107"
+                  },
+                  "qualifiers": {
+                    "conditions": null,
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 108,
+                    "text": "For the authored protocol, it is orbiddenf for the sunstone cricket to delicately etch the sunstone alembic.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "47795b33e420a7095a25eb0960fe15b3a97059fde2ace3e1cf34a84d33c25a09"
+            },
+            "occurrence_count": 4,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "32632ad3e5f1969bbe049cccb6481dce6ba32169a3227a41562e4ba1d356b722"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "P",
+          "presence": {
+            "object": true,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              6,
+              7
+            ],
+            "actor": [
+              10,
+              11
+            ],
+            "action": [
+              13,
+              14
+            ],
+            "object": [
+              16,
+              17
+            ],
+            "condition": [
+              2,
+              3
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          -0.09168657660484314,
+          0.8527734279632568,
+          -1.0777840614318848
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "objective": "positive_margin",
+        "retention_lambda": 1.0,
+        "support_probability": 0.762462317943573,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:731551f0628f6316e36f5501815e9bc10b5bb4f4996bb4c433d20558e4f0b3a5",
+      "source_group": "support-retention-group:0de6db2685944c82fda8755b68c699a84449b641e904af58f6cfc5fd4f68a7e0",
+      "source_sha256": "731551f0628f6316e36f5501815e9bc10b5bb4f4996bb4c433d20558e4f0b3a5",
+      "class_logits": [
+        0.7272433638572693,
+        -1.4102015495300293,
+        0.6888227462768555
+      ],
+      "prediction": {
+        "schema": "legal-scope-retention-gate-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "O",
+          "spans": {
+            "modality": [
+              51,
+              62
+            ],
+            "actor": [
+              20,
+              38
+            ],
+            "action": [
+              41,
+              50
+            ],
+            "object": null,
+            "condition": [
+              3,
+              14
+            ]
+          },
+          "condition_attachment": "statement"
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "731551f0628f6316e36f5501815e9bc10b5bb4f4996bb4c433d20558e4f0b3a5",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "If fjord foams, the aventurine termite's tempering is required.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "254ea104a615c861798c1f04a50a14226b8190a03b8a4b80733c9403ca54aae9",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-51-62",
+                "facet": "modality",
+                "canonical_symbol": "O",
+                "anchor": {
+                  "origin": "source",
+                  "start": 51,
+                  "end": 62,
+                  "text": "is required",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-20-38",
+                "facet": "actor",
+                "canonical_symbol": "aventurine termite",
+                "anchor": {
+                  "origin": "source",
+                  "start": 20,
+                  "end": 38,
+                  "text": "aventurine termite",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-41-50",
+                "facet": "action",
+                "canonical_symbol": "tempering",
+                "anchor": {
+                  "origin": "source",
+                  "start": 41,
+                  "end": 50,
+                  "text": "tempering",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-condition-3-14",
+                "facet": "conditions",
+                "canonical_symbol": "fjord foams",
+                "anchor": {
+                  "origin": "source",
+                  "start": 3,
+                  "end": 14,
+                  "text": "fjord foams",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-51-62",
+                  "actor": "occ-actor-20-38",
+                  "action": "occ-action-41-50",
+                  "object": null
+                },
+                "qualifiers": {
+                  "conditions": null,
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "attach",
+              "body": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "qualifiers": {
+                "conditions": {
+                  "op": "leaf",
+                  "occurrence_id": "occ-condition-3-14"
+                },
+                "exceptions": null,
+                "temporal": null
+              }
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 63,
+                  "text": "If fjord foams, the aventurine termite's tempering is required.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "7ab39773e61cf92d30e27b8fbf20314924d2655bb7a799b2887859151a7efab0"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "254ea104a615c861798c1f04a50a14226b8190a03b8a4b80733c9403ca54aae9",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "7ab39773e61cf92d30e27b8fbf20314924d2655bb7a799b2887859151a7efab0",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "If fjord foams, the aventurine termite's tempering is required.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "254ea104a615c861798c1f04a50a14226b8190a03b8a4b80733c9403ca54aae9",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-51-62",
+                  "facet": "modality",
+                  "canonical_symbol": "O",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 51,
+                    "end": 62,
+                    "text": "is required",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-20-38",
+                  "facet": "actor",
+                  "canonical_symbol": "aventurine termite",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 20,
+                    "end": 38,
+                    "text": "aventurine termite",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-41-50",
+                  "facet": "action",
+                  "canonical_symbol": "tempering",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 41,
+                    "end": 50,
+                    "text": "tempering",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-condition-3-14",
+                  "facet": "conditions",
+                  "canonical_symbol": "fjord foams",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 3,
+                    "end": 14,
+                    "text": "fjord foams",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-51-62",
+                    "actor": "occ-actor-20-38",
+                    "action": "occ-action-41-50",
+                    "object": null
+                  },
+                  "qualifiers": {
+                    "conditions": null,
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "attach",
+                "body": {
+                  "op": "rule",
+                  "rule_id": "rule-0"
+                },
+                "qualifiers": {
+                  "conditions": {
+                    "op": "leaf",
+                    "occurrence_id": "occ-condition-3-14"
+                  },
+                  "exceptions": null,
+                  "temporal": null
+                }
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 63,
+                    "text": "If fjord foams, the aventurine termite's tempering is required.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "7ab39773e61cf92d30e27b8fbf20314924d2655bb7a799b2887859151a7efab0"
+            },
+            "occurrence_count": 4,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "6e51e579fd216778e117dcef778f8f93add6c055a544bb65ad019161e3d9de6b"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "O",
+          "presence": {
+            "object": false,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              10,
+              11
+            ],
+            "actor": [
+              5,
+              6
+            ],
+            "action": [
+              9,
+              9
+            ],
+            "object": [
+              11,
+              9
+            ],
+            "condition": [
+              1,
+              2
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          0.7272433638572693,
+          -1.4102015495300293,
+          0.6888227462768555
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "objective": "positive_margin",
+        "retention_lambda": 1.0,
+        "support_probability": 0.7989500761032104,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:560afb1a0e2fca5cc60f3f726d797bb48d8def0336f5a956247052e99a3114cb",
+      "source_group": "support-retention-group:0de6db2685944c82fda8755b68c699a84449b641e904af58f6cfc5fd4f68a7e0",
+      "source_sha256": "560afb1a0e2fca5cc60f3f726d797bb48d8def0336f5a956247052e99a3114cb",
+      "class_logits": [
+        -0.34838932752609253,
+        1.6465957164764404,
+        -0.9513427019119263
+      ],
+      "prediction": {
+        "schema": "legal-scope-retention-gate-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "P",
+          "presence": {
+            "object": false,
+            "condition": true
+          },
+          "token_spans": {
+            "modality": [
+              8,
+              8
+            ],
+            "actor": [
+              5,
+              6
+            ],
+            "action": [
+              9,
+              9
+            ],
+            "object": [
+              8,
+              9
+            ],
+            "condition": [
+              1,
+              2
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          -0.34838932752609253,
+          1.6465957164764404,
+          -0.9513427019119263
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "objective": "positive_margin",
+        "retention_lambda": 1.0,
+        "support_probability": 0.04922929033637047,
+        "support_threshold": 0.5
+      }
+    },
+    {
+      "id": "source:a009e957b6bfc2a92c9fbf27e7d7d87c5d7f573decafd00c603a02388ff1fd3d",
+      "source_group": "support-retention-group:e20d607749275da483062cfcb6161e01242a9b4cc05cd1e14755bc22b5f39df5",
+      "source_sha256": "a009e957b6bfc2a92c9fbf27e7d7d87c5d7f573decafd00c603a02388ff1fd3d",
+      "class_logits": [
+        -0.6989968419075012,
+        0.5885777473449707,
+        -0.16750559210777283
+      ],
+      "prediction": {
+        "schema": "legal-scope-retention-gate-result/v1",
+        "status": "predicted",
+        "prediction": {
+          "schema": "legal-scope-span-prediction/v1",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "modality": "P",
+          "spans": {
+            "modality": [
+              40,
+              58
+            ],
+            "actor": [
+              23,
+              39
+            ],
+            "action": [
+              59,
+              73
+            ],
+            "object": [
+              78,
+              93
+            ],
+            "condition": null
+          },
+          "condition_attachment": null
+        },
+        "proposal": {
+          "schema": "legal-scope-span-proposal/v1",
+          "status": "unreviewed_occurrence_proposal",
+          "source_sha256": "a009e957b6bfc2a92c9fbf27e7d7d87c5d7f573decafd00c603a02388ff1fd3d",
+          "interpretation_profile": "opaque_condition_attachment/v1",
+          "declaration": {
+            "schema": "canonical-normative-scope-declaration/v1",
+            "family": "deontic",
+            "profile": "normative-occurrence-scope/v1",
+            "input": {
+              "source_text": "In this procedure, the sunstone cricket is prohibited from lightly honing the sodalite pestle.",
+              "context": {
+                "role": "required_unavailable",
+                "text": "",
+                "bindings": {},
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            "input_sha256": "71e3d2419f81b8220b455f64fa3ecaad852a5dd32f14198e361d98d7e80b3456",
+            "occurrences": [
+              {
+                "occurrence_id": "occ-modality-40-58",
+                "facet": "modality",
+                "canonical_symbol": "P",
+                "anchor": {
+                  "origin": "source",
+                  "start": 40,
+                  "end": 58,
+                  "text": "is prohibited from",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-actor-23-39",
+                "facet": "actor",
+                "canonical_symbol": "sunstone cricket",
+                "anchor": {
+                  "origin": "source",
+                  "start": 23,
+                  "end": 39,
+                  "text": "sunstone cricket",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-action-59-73",
+                "facet": "action",
+                "canonical_symbol": "lightly honing",
+                "anchor": {
+                  "origin": "source",
+                  "start": 59,
+                  "end": 73,
+                  "text": "lightly honing",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              },
+              {
+                "occurrence_id": "occ-object-78-93",
+                "facet": "object",
+                "canonical_symbol": "sodalite pestle",
+                "anchor": {
+                  "origin": "source",
+                  "start": 78,
+                  "end": 93,
+                  "text": "sodalite pestle",
+                  "offset_unit": "unicode_character_half_open"
+                }
+              }
+            ],
+            "rules": [
+              {
+                "rule_id": "rule-0",
+                "body": {
+                  "modality": "occ-modality-40-58",
+                  "actor": "occ-actor-23-39",
+                  "action": "occ-action-59-73",
+                  "object": "occ-object-78-93"
+                },
+                "qualifiers": {
+                  "conditions": null,
+                  "exceptions": null,
+                  "temporal": null
+                }
+              }
+            ],
+            "statement_structure": {
+              "op": "rule",
+              "rule_id": "rule-0"
+            },
+            "binders": [],
+            "coverage": {
+              "declared_status": "unassessed",
+              "segments": []
+            },
+            "unresolved": [
+              {
+                "code": "source_interpretation_and_context_review_required",
+                "span": {
+                  "origin": "source",
+                  "start": 0,
+                  "end": 94,
+                  "text": "In this procedure, the sunstone cricket is prohibited from lightly honing the sodalite pestle.",
+                  "offset_unit": "unicode_character_half_open"
+                },
+                "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+              }
+            ],
+            "content_sha256": "37a34b693cabe540eba8873fb7d9326c0144d72616d8d4aa1fd7138a13e5645e"
+          },
+          "validation": {
+            "schema": "canonical-normative-scope-validation/v1",
+            "status": "validated_scope_transport_only",
+            "input_sha256": "71e3d2419f81b8220b455f64fa3ecaad852a5dd32f14198e361d98d7e80b3456",
+            "input_digest_recipe": "sha256_sorted_compact_utf8_source_text_and_context/v1",
+            "declaration_content_sha256": "37a34b693cabe540eba8873fb7d9326c0144d72616d8d4aa1fd7138a13e5645e",
+            "declaration": {
+              "schema": "canonical-normative-scope-declaration/v1",
+              "family": "deontic",
+              "profile": "normative-occurrence-scope/v1",
+              "input": {
+                "source_text": "In this procedure, the sunstone cricket is prohibited from lightly honing the sodalite pestle.",
+                "context": {
+                  "role": "required_unavailable",
+                  "text": "",
+                  "bindings": {},
+                  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                }
+              },
+              "input_sha256": "71e3d2419f81b8220b455f64fa3ecaad852a5dd32f14198e361d98d7e80b3456",
+              "occurrences": [
+                {
+                  "occurrence_id": "occ-modality-40-58",
+                  "facet": "modality",
+                  "canonical_symbol": "P",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 40,
+                    "end": 58,
+                    "text": "is prohibited from",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-actor-23-39",
+                  "facet": "actor",
+                  "canonical_symbol": "sunstone cricket",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 23,
+                    "end": 39,
+                    "text": "sunstone cricket",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-action-59-73",
+                  "facet": "action",
+                  "canonical_symbol": "lightly honing",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 59,
+                    "end": 73,
+                    "text": "lightly honing",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                },
+                {
+                  "occurrence_id": "occ-object-78-93",
+                  "facet": "object",
+                  "canonical_symbol": "sodalite pestle",
+                  "anchor": {
+                    "origin": "source",
+                    "start": 78,
+                    "end": 93,
+                    "text": "sodalite pestle",
+                    "offset_unit": "unicode_character_half_open"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "rule_id": "rule-0",
+                  "body": {
+                    "modality": "occ-modality-40-58",
+                    "actor": "occ-actor-23-39",
+                    "action": "occ-action-59-73",
+                    "object": "occ-object-78-93"
+                  },
+                  "qualifiers": {
+                    "conditions": null,
+                    "exceptions": null,
+                    "temporal": null
+                  }
+                }
+              ],
+              "statement_structure": {
+                "op": "rule",
+                "rule_id": "rule-0"
+              },
+              "binders": [],
+              "coverage": {
+                "declared_status": "unassessed",
+                "segments": []
+              },
+              "unresolved": [
+                {
+                  "code": "source_interpretation_and_context_review_required",
+                  "span": {
+                    "origin": "source",
+                    "start": 0,
+                    "end": 94,
+                    "text": "In this procedure, the sunstone cricket is prohibited from lightly honing the sodalite pestle.",
+                    "offset_unit": "unicode_character_half_open"
+                  },
+                  "reason": "Predicted occurrences and opaque attachment do not establish legal meaning or source completeness."
+                }
+              ],
+              "content_sha256": "37a34b693cabe540eba8873fb7d9326c0144d72616d8d4aa1fd7138a13e5645e"
+            },
+            "occurrence_count": 4,
+            "rule_count": 1,
+            "binder_count": 0,
+            "declared_coverage_status": "unassessed",
+            "context_resolved": false,
+            "verification_status": "pending",
+            "admission_status": "pending",
+            "masks": {
+              "weak_decoder_fit": 0,
+              "strong_semantic_fit": 0,
+              "contrastive_supervision": 0,
+              "proof_supervision": 0,
+              "fidelity_evaluation": 0
+            },
+            "model_calls": 0,
+            "prover_calls": 0,
+            "source_fidelity_established": false,
+            "source_semantics_verified": false,
+            "qualified": false,
+            "accepted": false,
+            "proof_authority": false,
+            "semantic_equivalence_assessed": false,
+            "semantic_profile_validated": false,
+            "binder_terms_typechecked": false,
+            "normalization_approved": false,
+            "lowering_authorized": false,
+            "training_executed": false,
+            "model_executed": false,
+            "target_access": false,
+            "content_sha256_scope": "summary_excluding_declaration_and_content_sha256",
+            "content_sha256": "3f458d08556ae176b76282da538a291d68c0990cc32cfffc03505e40624f1248"
+          },
+          "masks": {
+            "weak_decoder_fit": 0,
+            "strong_semantic_fit": 0,
+            "contrastive_supervision": 0,
+            "proof_supervision": 0,
+            "fidelity_evaluation": 0
+          },
+          "context_resolved": false,
+          "source_coverage_assessed": false,
+          "source_semantics_verified": false,
+          "source_fidelity_established": false,
+          "semantic_profile_validated": false,
+          "semantic_equivalence_assessed": false,
+          "binder_terms_typechecked": false,
+          "normalization_approved": false,
+          "lowering_authorized": false,
+          "model_executed": false,
+          "training_executed": false,
+          "target_access": false,
+          "qualified": false,
+          "accepted": false,
+          "formalized": false,
+          "proof_ready": false,
+          "proof_authority": false,
+          "model_calls": 0,
+          "prover_calls": 0,
+          "formal_output": null,
+          "blockers": [
+            "source_interpretation_unreviewed",
+            "source_coverage_unassessed",
+            "context_required_unavailable"
+          ]
+        },
+        "blockers": [
+          "source_interpretation_unreviewed",
+          "source_coverage_unassessed",
+          "context_required_unavailable"
+        ],
+        "raw_prediction": {
+          "modality": "P",
+          "presence": {
+            "object": true,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              7,
+              9
+            ],
+            "actor": [
+              5,
+              6
+            ],
+            "action": [
+              10,
+              11
+            ],
+            "object": [
+              13,
+              14
+            ],
+            "condition": [
+              13,
+              14
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          -0.6989968419075012,
+          0.5885777473449707,
+          -0.16750559210777283
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "objective": "positive_margin",
+        "retention_lambda": 1.0,
+        "support_probability": 0.769658088684082,
+        "support_threshold": 0.5,
+        "masks": {
+          "weak_decoder_fit": 0,
+          "strong_semantic_fit": 0,
+          "contrastive_supervision": 0,
+          "proof_supervision": 0,
+          "fidelity_evaluation": 0
+        }
+      }
+    },
+    {
+      "id": "source:617f72eca96c8b7cf5cd92edd844d1ba9f1f1acdabadbf2d0ca8507004edf813",
+      "source_group": "support-retention-group:e20d607749275da483062cfcb6161e01242a9b4cc05cd1e14755bc22b5f39df5",
+      "source_sha256": "617f72eca96c8b7cf5cd92edd844d1ba9f1f1acdabadbf2d0ca8507004edf813",
+      "class_logits": [
+        -0.7808544039726257,
+        1.4351774454116821,
+        -0.49994349479675293
+      ],
+      "prediction": {
+        "schema": "legal-scope-retention-gate-result/v1",
+        "status": "abstained",
+        "prediction": null,
+        "proposal": null,
+        "blockers": [
+          "learned_source_unsupported"
+        ],
+        "raw_prediction": {
+          "modality": "P",
+          "presence": {
+            "object": true,
+            "condition": false
+          },
+          "token_spans": {
+            "modality": [
+              7,
+              9
+            ],
+            "actor": [
+              5,
+              6
+            ],
+            "action": [
+              10,
+              11
+            ],
+            "object": [
+              13,
+              17
+            ],
+            "condition": [
+              5,
+              6
+            ]
+          }
+        },
+        "target_access": false,
+        "targets_used_at_inference": false,
+        "source_semantics_verified": false,
+        "proof_ready": false,
+        "proof_authority": false,
+        "qualified": false,
+        "accepted": false,
+        "formalized": false,
+        "formal_output": null,
+        "condition_attachment_origin": "explicit_caller_premise",
+        "model_executed": true,
+        "modality_logits": [
+          -0.7808544039726257,
+          1.4351774454116821,
+          -0.49994349479675293
+        ],
+        "parent_sha256": "48559399bb22de0fe68908919d225d391880a38f4fab659026d526e19ffc9155",
+        "gate_feature_mode": "predicted_trigger",
+        "objective": "positive_margin",
+        "retention_lambda": 1.0,
+        "support_probability": 0.08265658468008041,
+        "support_threshold": 0.5
+      }
+    }
+  ],
+  "references_accessed_by_inference": false
+}

@@ -1,0 +1,81 @@
+{
+  "schema": "support-retention-output-barrier/v1",
+  "panels": {
+    "bce/fresh_final": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/bce/fresh_final-predictions.json",
+      "bytes": 971548,
+      "sha256": "88077b0eb34e066365cdac8e737e6ddfa2ea3be427f99d47fbacaa98c20ff27d"
+    },
+    "bce/earlier_scope": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/bce/earlier_scope-predictions.json",
+      "bytes": 989929,
+      "sha256": "cafee9547957cc040396aaa54040fef565dc996dc7b06717c924e4edd2822d2d"
+    },
+    "bce/earlier_trigger": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/bce/earlier_trigger-predictions.json",
+      "bytes": 1087845,
+      "sha256": "a75eb0371ba71d7f7d8bb2f3be7cc48328e10ec6f7dd2626e9b2df39cb8ab1f5"
+    },
+    "bce/earlier_support_action": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/bce/earlier_support_action-predictions.json",
+      "bytes": 1078421,
+      "sha256": "b10b74296b9282a1d9fd07ea9fa5ba043dc22688a4f550fd21f74d2952fe6652"
+    },
+    "bce/earlier_support_gate": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/bce/earlier_support_gate-predictions.json",
+      "bytes": 1088771,
+      "sha256": "d88310889a0f3a67ac6f6f86fde79d2f449e7d764726898b7f834ffb298a2b71"
+    },
+    "positive_margin/fresh_final": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/positive_margin/fresh_final-predictions.json",
+      "bytes": 973084,
+      "sha256": "0a5f21aeff21e7cef11aed36a7e101c59667d97421103898a79d63fbca04948b"
+    },
+    "positive_margin/earlier_scope": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/positive_margin/earlier_scope-predictions.json",
+      "bytes": 991465,
+      "sha256": "430483cfcdcda1dc9604fb015813a3f5d0c72371015d60d6b9c216b6828ebb9d"
+    },
+    "positive_margin/earlier_trigger": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/positive_margin/earlier_trigger-predictions.json",
+      "bytes": 1089381,
+      "sha256": "a0f99f5f652b55a7d34da89e74b0c8fc0ad1f0d957690d94b4338ed6fb0e9127"
+    },
+    "positive_margin/earlier_support_action": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/positive_margin/earlier_support_action-predictions.json",
+      "bytes": 1079957,
+      "sha256": "a9a2572678a690807869b0a84bb11f39f4e504a1a50a52d0b88a26af3d33bd4d"
+    },
+    "positive_margin/earlier_support_gate": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/positive_margin/earlier_support_gate-predictions.json",
+      "bytes": 1090307,
+      "sha256": "cb606aad484ad4ff1e3d0a181fbbaaa6ce4c281ef7d609dee75e7cd89563fd26"
+    },
+    "parent/fresh_final": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/parent-fresh_final-predictions.json",
+      "bytes": 962076,
+      "sha256": "2db41eb383753550421667b03e6b12a1132349a08638082925f54a112fc52b6e"
+    },
+    "parent/earlier_scope": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/parent-earlier_scope-predictions.json",
+      "bytes": 980457,
+      "sha256": "eaae8816f8d46170abaf01de7197c38cd0314ee4e525e1930d0e03c368e11177"
+    },
+    "parent/earlier_trigger": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/parent-earlier_trigger-predictions.json",
+      "bytes": 1078373,
+      "sha256": "8684ffe66c81002ccdfd20a22ca0da53712811296097bf4339ff48298d465e8d"
+    },
+    "parent/earlier_support_action": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/parent-earlier_support_action-predictions.json",
+      "bytes": 1068949,
+      "sha256": "8351b2a4a6817a931b2599aef964c674c9c90335647c2a482742d2320a3e6214"
+    },
+    "parent/earlier_support_gate": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/support-retention-20261011-01/results/parent-earlier_support_gate-predictions.json",
+      "bytes": 1079299,
+      "sha256": "8789c9841215c90fa919e980ef1296a85a86a7f57fb023c681f4053fc47680ab"
+    }
+  },
+  "evaluation_references_parsed": false
+}

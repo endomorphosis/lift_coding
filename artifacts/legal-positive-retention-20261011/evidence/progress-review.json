@@ -1,0 +1,355 @@
+{
+  "audit_scope": {
+    "coverage_limit": "Relevant named paths/branches, not an exhaustive audit of every dirty/untracked artifact or remote model body.",
+    "methods": [
+      "Bounded Git logs/show/tree/ref queries",
+      "Selected branch ancestry and delta blob comparisons",
+      "Read-only baseline completion and current guide inspection"
+    ],
+    "no_git_index_or_checkout_mutation": true,
+    "no_hub_or_manager_writes": true,
+    "no_model_forward_or_load": true,
+    "no_tests_or_prover": true,
+    "no_training": true,
+    "only_write": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/progress-review.json"
+  },
+  "baseline": {
+    "completed_at_utc": "2026-10-07T15:20:37.544890+00:00",
+    "completion_path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/completion.json",
+    "completion_sha256": "e88780999a7c15e44dc4b42186538f02421dc61a8d36ab62c5ddedf245666fc0",
+    "result": "Both matched 3169-parameter frozen-feature gates completed240 updates; all trained120/240 states rejected; both selected cold0; fresh authored whole38/64 and unsupported13/64; no selected improvement or default promotion.",
+    "source_merge": "c7eccb704",
+    "source_merge_reachable": true,
+    "source_pr": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1278",
+    "workspace_merge": "316891b761",
+    "workspace_merge_reachable": true,
+    "workspace_pr": "https://github.com/endomorphosis/lift_coding/pull/544"
+  },
+  "branch_review": [
+    {
+      "ancestor_of_main": true,
+      "branch_only_commits": 0,
+      "commit": "271ad796288e17039f036af6a0d003a4628da6ed",
+      "main_only_commits": 16,
+      "ref": "agent/dual-bank-wording-adapter-datasets-20261007"
+    },
+    {
+      "ancestor_of_main": true,
+      "branch_only_commits": 0,
+      "commit": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a",
+      "main_only_commits": 0,
+      "ref": "agent/retained-wording-checkpoint-integration-datasets-20261007"
+    },
+    {
+      "ancestor_of_main": true,
+      "branch_only_commits": 0,
+      "commit": "c4382ae53ab9497245fccdf85855f0e314711fbc",
+      "main_only_commits": 23,
+      "ref": "agent/normative-cache-input-datasets-20261007"
+    },
+    {
+      "ancestor_of_main": true,
+      "branch_only_commits": 0,
+      "commit": "47d492c697f3e766d107ae9c02d8b8dcd18660b2",
+      "main_only_commits": 24,
+      "ref": "agent/normative-decoder-runtime-datasets-20261007"
+    },
+    {
+      "ancestor_of_main": true,
+      "branch_only_commits": 0,
+      "commit": "64bc5734dc82db72e955f2e809b770127e9b6cfc",
+      "main_only_commits": 3695,
+      "ref": "codex/alignment-decoder-768-20261003"
+    },
+    {
+      "ancestor_of_main": true,
+      "branch_only_commits": 0,
+      "commit": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+      "main_only_commits": 434,
+      "ref": "codex/legal-original-text-roundtrip-retained-20261004"
+    },
+    {
+      "ancestor_of_main": true,
+      "branch_only_commits": 0,
+      "commit": "92600cbfc70f935c18e2cffc994d50083cd62993",
+      "main_only_commits": 436,
+      "ref": "codex/legal-roundtrip-scorer-source-20261004"
+    },
+    {
+      "ancestor_of_main": true,
+      "branch_only_commits": 0,
+      "commit": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+      "main_only_commits": 430,
+      "ref": "codex/source-v2-warm-start-20261004"
+    },
+    {
+      "ancestor_of_main": false,
+      "branch_only_commits": 1,
+      "commit": "7a82e32dcaa9664a1a98a6110aa739d07f1eadf3",
+      "delta_effective_tree": [
+        {
+          "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/source_program_binding_384.py",
+          "same_as_main": false
+        },
+        {
+          "path": "tests/integration/logic/software_contracts/test_source384_unicode_comment_lake.py",
+          "same_as_main": false
+        },
+        {
+          "path": "tests/unit/logic/formalization/autoencoder/test_security_source_program_binding_384.py",
+          "same_as_main": false
+        }
+      ],
+      "main_only_commits": 7,
+      "ref": "codex/source384-unicode-comments-20261011"
+    },
+    {
+      "ancestor_of_main": false,
+      "branch_only_commits": 1,
+      "commit": "21987bb5ebc94f5cc1d316b0521b8793e8610be4",
+      "delta_effective_tree": [
+        {
+          "path": "docs/autoencoders/uscode_source_census.md",
+          "same_as_main": false
+        },
+        {
+          "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legacy_span_intake.py",
+          "same_as_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/uscode_source_census.py",
+          "same_as_main": true
+        },
+        {
+          "path": "scripts/ops/legal_ir/census_uscode_sources.py",
+          "same_as_main": true
+        },
+        {
+          "path": "tests/unit/optimizers/logic_theorem_optimizer/test_uscode_source_census.py",
+          "same_as_main": true
+        }
+      ],
+      "main_only_commits": 11,
+      "ref": "agent/uscode-span-source-census-datasets-20261007"
+    },
+    {
+      "ancestor_of_main": false,
+      "branch_only_commits": 3,
+      "commit": "569e256d8c653a243b65922603f1d7d1344e7204",
+      "delta_effective_tree": [
+        {
+          "path": "docs/autoencoders/uscode_paired_feed_compatibility_20261007.md",
+          "same_as_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/autoformal/span_cache.py",
+          "same_as_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/autoformal/span_cache_feed.py",
+          "same_as_main": true
+        },
+        {
+          "path": "tests/unit/logic/test_span_cache.py",
+          "same_as_main": true
+        },
+        {
+          "path": "tests/unit/logic/test_span_cache_paired_feed.py",
+          "same_as_main": true
+        }
+      ],
+      "main_only_commits": 11,
+      "ref": "agent/uscode-span-lossless-datasets-20261007"
+    },
+    {
+      "ancestor_of_main": false,
+      "branch_only_commits": 1,
+      "commit": "1c065689c9c9f129cfbb480535411b3df4b4a5c9",
+      "delta_effective_tree": [
+        {
+          "path": "docs/autoencoders/uscode_paired_feed_compatibility_20261007.md",
+          "same_as_main": true
+        },
+        {
+          "path": "ipfs_datasets_py/logic/autoformal/span_cache_feed.py",
+          "same_as_main": false
+        },
+        {
+          "path": "tests/unit/logic/test_span_cache_paired_feed.py",
+          "same_as_main": false
+        }
+      ],
+      "main_only_commits": 11,
+      "ref": "agent/uscode-span-paired-feed-datasets-20261007"
+    }
+  ],
+  "claim_boundaries": [
+    "Source-only occurrence heads consume no legal8D/384D/768D latent.",
+    "Authored exactness and profile refusal do not establish reviewed US Code source fidelity.",
+    "Native schema/decoder/runtime/teacher/proof admission remain distinct and unqualified where declared; all occurrence masks remain zero with null formal output.",
+    "Reported historical tests are evidence from existing receipts; none were rerun in this audit."
+  ],
+  "completed_work_to_reuse": [
+    {
+      "assessment": "All completed fits, rejected endpoints and selected aliases are already integrated; reuse lineage and emitted-output evidence; do not repeat their frozen-feature objectives.",
+      "lane": "source single-rule scope + trigger readout + support/action + support-gate"
+    },
+    {
+      "actual_independent_fits": 3,
+      "assessment": "Already completed, published and registered. Nine containers comprise three trained initial-parent copies plus selected/last role aliases for three tensor endpoints. Original/control/dual exposed-v3 exact31/33/30 of48; control/dual retain all three TRAIN banks48/48. Balanced replacement loses15 retained cases.",
+      "lane": "native384 retained-wording recipes",
+      "recipes": [
+        "control-wording-ce",
+        "balanced-wording-ce",
+        "dual-bank-retention-ce"
+      ]
+    },
+    {
+      "assessment": "Metadata preflight completed; matched-fit recipe and wrappers remain unexecuted preparation. Do not infer training from preparation or refit the already completed recipes.",
+      "lane": "decoder-dual-bank-wording-20261007 prepared campaign",
+      "optimizer_commits": 0
+    }
+  ],
+  "current_main": {
+    "source": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a",
+    "workspace": "2d6d7acdc0154e8e85351126e1bb1ed59b3b03ca",
+    "workspace_gitlink_matches_source": true
+  },
+  "differing_branch_disposition": {
+    "agent/uscode-span-lossless-datasets-20261007": "All five delta files exact on main; equivalent changes are integrated under other commits.",
+    "agent/uscode-span-paired-feed-datasets-20261007": "Guide exact on main; feed/tests superseded by5626e3dd0 durable-ready ordering and injected failure controls. Do not cherry-pick wholesale.",
+    "agent/uscode-span-source-census-datasets-20261007": "Code/tests exact on main; guide superseded by measured one-section resume guidance."
+  },
+  "effective_source_retention": [
+    {
+      "bytes": 29545,
+      "commit": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a",
+      "git_blob": "1cf73eaa43c081eb2f181547a7aae725353c26d9",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_decoder.py",
+      "same_as_support_gate_contribution": true,
+      "sha256": "594dfb776f0ff440101ffe7a7bf99ffc742d2a9c7e826647786938925cb37d15"
+    },
+    {
+      "bytes": 27145,
+      "commit": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a",
+      "git_blob": "aa718b6f3a813a3cd01947640f0a405d377e529b",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_trigger_readout.py",
+      "same_as_support_gate_contribution": true,
+      "sha256": "983b69b8e293aa6211fd8322f9ba6bfe6fa5b8cb853c2d4d0cace1e7e5046344"
+    },
+    {
+      "bytes": 25504,
+      "commit": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a",
+      "git_blob": "c6260376025a7fa389b57fcb580e266af17ad755",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_action.py",
+      "same_as_support_gate_contribution": true,
+      "sha256": "ce7abc45032bee6ac950720d79c8f329c03a68961140c0f2ad9ade8ea923988c"
+    },
+    {
+      "bytes": 24874,
+      "commit": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a",
+      "git_blob": "59295134480606efac2e122f5c807d81cb3927e3",
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_support_gate.py",
+      "same_as_support_gate_contribution": true,
+      "sha256": "79a9d314ddf597b16c6a06754d7786d568bbf34c87dc71a947ac0b8af12f525b"
+    },
+    {
+      "bytes": 20171,
+      "commit": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a",
+      "git_blob": "c986db440f729083314ff7f3800989da1702854d",
+      "path": "tests/unit/logic/test_legal_scope_support_gate.py",
+      "same_as_support_gate_contribution": true,
+      "sha256": "13917ca96cf5b3795b2e7c4efbd0aadb1e2c723cfe5c96825586e31c141fca90"
+    }
+  ],
+  "latest_fit_assessment": "No later completed fit was found in bounded relevant main logs or current integration guides. The support-gate study remains the latest completed raw-source support experiment; newer intake work does not replace its result.",
+  "newer_integrated_work": [
+    {
+      "measured": "128 sections /18342 occurrences;2165 exact archived joins;441739 archived IDs await further scanning; complete_source_scan=false; tokenizer counts=null",
+      "scientific_scope": "No new model fit, embedding generation, semantic-gold cohort or proof completion.",
+      "scope": "M0/M1 US Code source census, paired-v1/v2 feed, lossless UTF-8 cache writes, durable-ready transaction controls and measured bounded recovery",
+      "source_commits": [
+        "f80dbc0a2",
+        "14df54e25",
+        "b365f61de",
+        "5626e3dd0",
+        "f09dfbcb3",
+        "a1b5c73e5"
+      ],
+      "workspace_commit": "c7a9e8d672"
+    }
+  ],
+  "observed_at_utc": "2026-10-11T00:04:06.041791+00:00",
+  "preservation_concerns": [
+    "Canonical root fe18069df4 and canonical source d5238def2 are deliberately old/dirty; this audit only read them and Git objects. Parent owns preservation hash checks.",
+    "Permanently retain numerical dual-bank source tree271ad796288e17039f036af6a0d003a4628da6ed and frozen dependencies; reachability does not permit fast-forwarding its execution worktree.",
+    "Locked decoder/reconstruction/warm-start/recovery worktrees retain original custody. Keep their weights, unpublished evidence and frozen sources.",
+    "source384-unicode-comments-20261011 is another owned worktree at5c6972431; no tracked software-contract delta was observed in the bounded read. Do not mutate it.",
+    "Historical scanner/parser/temporal/4096D closures remain separately deferred; ancestry or archived evidence does not authorize a wholesale port over newer owners."
+  ],
+  "references": [
+    {
+      "bytes": 8802,
+      "commit": "2d6d7acdc0154e8e85351126e1bb1ed59b3b03ca",
+      "git_blob": "ce1d7e6bcadd6d3d527335d6cf37a69b108275ef",
+      "path": "implementation_plan/docs/68-support-gate-refusal-training-2026-10-07.md",
+      "repository": "workspace",
+      "sha256": "4fd163c4d96177584e28d6c6201042f9f6a3667f678194d8c528aa20352d2160"
+    },
+    {
+      "bytes": 6141,
+      "commit": "2d6d7acdc0154e8e85351126e1bb1ed59b3b03ca",
+      "git_blob": "2f319affa22397aa05f3a9d91095027d8eafda90",
+      "path": "implementation_plan/docs/66-retained-wording-reconciliation-2026-10-07.md",
+      "repository": "workspace",
+      "sha256": "adce0e9f815afdbe9863ad05755437c144167bc75859eea3715fca73ac067ea7"
+    },
+    {
+      "bytes": 7683,
+      "commit": "2d6d7acdc0154e8e85351126e1bb1ed59b3b03ca",
+      "git_blob": "b72b9d6a9cc443651e344c52980dbfe8f09bb423",
+      "path": "implementation_plan/docs/69-uscode-span-intake-progress-2026-10-07.md",
+      "repository": "workspace",
+      "sha256": "47861b1a6c061ca3d26b0ed9f85285749d92870c4bdde1d657288ba99787fcab"
+    },
+    {
+      "bytes": 10465,
+      "commit": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a",
+      "git_blob": "94477fc94885f797a5c4ab791b95ec3b0fa0824d",
+      "path": "docs/implementation/legal_scope_support_gate_pilot_20261007.md",
+      "repository": "source",
+      "sha256": "30e4e6cf34e26960fca068283feecb4f91e6097803455715e33ac28ffe803a2d"
+    },
+    {
+      "bytes": 15608,
+      "commit": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a",
+      "git_blob": "be720d04efb62d49364fe2aa6cd83d0a3f07a1ad",
+      "path": "docs/autoencoders/retained_wording_checkpoint_availability_20261007.md",
+      "repository": "source",
+      "sha256": "8de2a30d462efddc89c6503d16913bb9a25bddfe80ddf1059248a65adeb328ad"
+    },
+    {
+      "bytes": 7660,
+      "commit": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a",
+      "git_blob": "1cdc417423a4d41249db03d3240683c7beeb0d11",
+      "path": "docs/autoencoders/uscode_span_intake_progress_20261007.md",
+      "repository": "source",
+      "sha256": "7a2e69115f60e7453d609822d44e2d4005f5312b291ca495a0f3dc0b7c335ca1"
+    },
+    {
+      "bytes": 24001,
+      "commit": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a",
+      "git_blob": "a1f2e299adf5dd39b916e425cc502131a06d97a3",
+      "path": "docs/autoencoders/progress_integration.md",
+      "repository": "source",
+      "sha256": "d5fe6605495da924c80da0a24ab43cd7863381970dc9f6b347e88411b7348427"
+    }
+  ],
+  "schema": "legal-decoder-readonly-progress-review/v1",
+  "status": "completed_readonly_audit",
+  "superseding_completed_fit": null,
+  "top_next_action": {
+    "statutory_lane": "Finish bounded source/export reconciliation and native-cache task routing, then independently review representable legal source/target pairs before statutory training.",
+    "training_lane": "Predeclare a new matched support-only trial with a trainable ordered-byte branch and TRAIN-only malformed-modal contrast pairs, preserving frozen class/presence/pointers, parent byte/tensor custody, zero-function control and existing rejection policy; construct another excluded final before fitting. Add paired positive retention rather than relying only on aggregate floors. This is a new hypothesis, not an established encoder-capacity diagnosis."
+  }
+}

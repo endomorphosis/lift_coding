@@ -1,0 +1,63 @@
+{
+  "all_309_files_rehashed_against_frozen_manifest": true,
+  "all_eight_trial_checkpoint_files_preserved_in_draft": true,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release-draft-01/evidence/prepare_release.py": {
+      "bytes": 35641,
+      "sha256": "c214293d2b83eed743a4827f3f67d3651b0c7f11837db9cfc4e5292221a654d7"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release-draft-01/evidence/publish_release.py": {
+      "bytes": 13174,
+      "sha256": "74a56756d0dfa48a000a972e645b4970cb2ef05b8dda27a6e4ed3f4596be8424"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release-draft-01/evidence/release-helper-build.json": {
+      "bytes": 18437,
+      "sha256": "20f27ac3e2bbcbfd15158f548119bb574fdfeecba8e52d600cda7ea673e69897"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release-draft-01/original-artifacts-map.json": {
+      "bytes": 105853,
+      "sha256": "c0e87b47bdb485bfe16b657e6875ea0c4b981575925b73f4b4f1de32a24d8540"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release-draft-01/release-manifest.json": {
+      "bytes": 109853,
+      "sha256": "916725913e8783e99c468dd51b3f4b9b250c47fd7646d3a98e1da59989c7003d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release-draft-01/replay-source-closure.json": {
+      "bytes": 36533,
+      "sha256": "8532d1432e8018b265b472c74d4415887b2120f1196ed9bf87ee731cd04941d5"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release-draft-01/source/ipfs_datasets_py/logic/integration/bridges/tdfol_shadowprover_bridge/*.py": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "draft_bytes": 109537370,
+  "draft_file_count": 309,
+  "draft_root": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release-draft-01",
+  "findings": [
+    {
+      "Git_show_returncode": 0,
+      "actual_bytes": 0,
+      "cause": "Wildcard import alias* was queued as a candidate submodule. Git show accepts the glob-like pathspec with successful empty output; the builder incorrectly records that as a source file.",
+      "exact_Git_blob_lookup_returncode": 128,
+      "kind": "Non-authentic sparse Git source entry",
+      "numerical_weights_or_training_affected": false,
+      "publication_started_before_detection": false,
+      "recorded_original": "git:/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets@9e5df0d19b62268cdda356077754fad43bdf65fa:ipfs_datasets_py/logic/integration/bridges/tdfol_shadowprover_bridge/*.py",
+      "release_path": "source/ipfs_datasets_py/logic/integration/bridges/tdfol_shadowprover_bridge/*.py",
+      "requested_resolution": "Skip wildcard alias module candidates and authenticate sparse reads with exact git cat-file blob object lookup before rebuilding a fresh release. Preserve this draft and original helper/buildnote bytes."
+    }
+  ],
+  "observed_at_utc": "2026-10-11T00:48:04.775872+00:00",
+  "passed": false,
+  "review_scope": "Full draft-byte/manifest authentication plus static helper and exact missing Git-object finding; no clean publication approval or complete original-source preflight claimed.",
+  "reviewer_executions": {
+    "Git_mutations": 0,
+    "Hub_reads_writes": 0,
+    "forwards": 0,
+    "models": 0,
+    "tests": 0,
+    "training": 0
+  },
+  "schema": "positive-retention-publication-draft-preflight-review/v1"
+}

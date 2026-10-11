@@ -1,0 +1,37 @@
+{
+  "schema": "support-retention-source-contribution-binding/v1",
+  "base": "9e5df0d19b62268cdda356077754fad43bdf65fa",
+  "paths": {
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_retention_gate.py": {
+      "bytes": 31614,
+      "sha256": "3212fed287375d338bcc8fc02f9d4a37a8b08e7ba734af9d61f587a20788a06b"
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_retention_selection.py": {
+      "bytes": 14328,
+      "sha256": "9af005eba03d129bd56920b5274c4189962092dc9bf2d7da6f0e0004b0a7f0a5"
+    },
+    "tests/unit/logic/test_legal_scope_retention_gate.py": {
+      "bytes": 27244,
+      "sha256": "a219c787d40c1bc5ca35994196d407f66212b97a9ee18d70d6c3497fb0b495f4"
+    },
+    "tests/unit/logic/test_legal_scope_retention_selection.py": {
+      "bytes": 13697,
+      "sha256": "32a4c8477075dd6119e6384da43b36ae22cedf309bd53e51d93d983b3020e8cf"
+    },
+    "docs/implementation/legal_scope_retention_gate_pilot_20261011.md": {
+      "bytes": 11802,
+      "sha256": "013affa149aac3cdf4e3d6359ad26e9c1c8638f277bfb887c01dd0886312326a"
+    },
+    "docs/autoencoders/progress_integration.md": {
+      "bytes": 25492,
+      "sha256": "0b113ca4983523d8c376fc809b7ce0b79a8b68565a6efc4e33f1f2dbc52ffc56"
+    }
+  },
+  "only_six_owned_paths_staged": true,
+  "upstream_progress_prefix_exact": true,
+  "successful_current_tests": 179,
+  "selected_Hub_replay_outputs_exact": 1280,
+  "hub_revision": "eb1890f255b096ef81a8a2364bd28fef296bbfd8",
+  "numeric_old_producers_preserved": true,
+  "checkpoint_weights_in_Git": false
+}

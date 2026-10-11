@@ -1,0 +1,151 @@
+{
+  "schema": "support-retention-resource-observation-phase-correction/v1",
+  "original_preserved": true,
+  "original": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/resource-admission-observation.json",
+    "bytes": 8734563,
+    "sha256": "fb61590b6fa32588fd50c9484dcbf868297b1cacc0cbd85ec2ba8bb27934c126"
+  },
+  "original_phase_label": "guardian_admission_in_progress",
+  "corrected_observed_phase": "after_model_child_reaped_and_pre_finalize; before own claim release",
+  "reason": "Actual snapshot timestamp occurs after guardian pre_finalize; phase label was an operator assumption.",
+  "interval_claim": "All500 foreign full record bodies are equal across this post-reap-to-postfinal observation interval only.",
+  "full_fitting_or_admission_interval_preservation_independently_verified": false,
+  "review_sha256": "c003750c87f9ae3a40e41c09c452038273a32fa1105b967d768d5a896b752ed8",
+  "review_resource_scope": {
+    "RSS_counts_by_phase": {
+      "gated": 15,
+      "model": 34,
+      "post_model": 2
+    },
+    "RSS_max_gaps_seconds_by_phase": {
+      "gated": 1.1119761118898168,
+      "model": 1.1906793740345165,
+      "post_model": 0.9328361370135099
+    },
+    "absolute_peak_measured": false,
+    "admission_claim_coverage_limit": "The first complete foreign-body snapshot was captured at00:34:05.193069UTC, after pre_finalize at00:33:59.767071UTC, before release at00:34:14.537102UTC. Equality with the postfinal snapshot covers only this observed terminal interval. Earlier compatibility hashes/totals cannot prove foreign-body immutability during admission or fitting.",
+    "all_retained_200MB_record_ids_preserved": [
+      "009b71918a2e42118859174b1bb8a693",
+      "7f84b1fdcb834acfbf02d2586014cc0b",
+      "dc5a24634a8f4ab2bb03946fb64e6921",
+      "e76a7eaf115c4780b4fdec07a505d86c"
+    ],
+    "authorized_disk_limit_bytes": 145000000000,
+    "bytes_after_terminal_receipts": 75386730,
+    "bytes_at_guardian_finalization": 75379178,
+    "child_deadline_seconds": 300,
+    "child_group": {
+      "birth": "69686182",
+      "pid": 2523920
+    },
+    "child_process_slots": 1,
+    "child_returncode": 0,
+    "continuous_lease_or_RSS_coverage_claimed": false,
+    "cooperative_not_kernel_quota": true,
+    "cpu_slots": 2,
+    "disk_claim_bytes": 200000000,
+    "first_full_foreign_snapshot_after_pre_finalize_seconds": 5.425998,
+    "first_full_foreign_snapshot_phase": "After child reap, during the fresh finalization census and before own claim/lease release; filename labels this admission observation.",
+    "foreign_full_record_body_equality": true,
+    "foreign_preservation_during_admission_or_fitting_independently_verified": false,
+    "foreign_record_count_preserved_in_observed_interval": 500,
+    "foreign_records_canonical_sha256": "72dfbd2c82128505bda62977615ff54dc8d10cec9a815ea8d980bd00a7599fa1",
+    "fresh_locked_full_claim_finalization": {
+      "global_accounting_seconds": 14.570506234071217,
+      "global_inventory_count": 1,
+      "ledger_lock_wait_seconds": 0.0002523090224713087,
+      "process_check_seconds": 0.025343596935272217,
+      "schema_version": "daemon-resource-finalization-profile/v1",
+      "scope": "one_fresh_locked_census_with_full_claim_checked_before_release",
+      "strict_attempt_inventory_count": 1,
+      "strict_attempt_inventory_seconds": 0.00046564009971916676
+    },
+    "global_named_root_charged_bytes_after_own_release": 144139810645,
+    "global_named_root_charged_bytes_before_own_release": 144339810645,
+    "guardian_returncode": 0,
+    "guardian_wall_seconds": 81.39734133705497,
+    "healthy_absent_lease_observations": 1,
+    "healthy_present_lease_observations": 53,
+    "launch_through_reap_wall_seconds": 51.27996027597692,
+    "leader_reaped": true,
+    "max_active_lease_observation_gap_seconds": 1.0848716620821506,
+    "memory_limit_mb": 1536,
+    "model_RSS_samples": 34,
+    "model_gate_through_reap_wall_seconds": 35.54448500694707,
+    "observation_interval_utc": [
+      "2026-10-11T00:34:05.193069+00:00",
+      "2026-10-11T00:34:49.394499+00:00"
+    ],
+    "outstanding_claim_bytes_first_full_snapshot": 47965000000,
+    "outstanding_claim_bytes_postfinal": 47765000000,
+    "own_CPU_lease_absent": true,
+    "own_disk_claim_released": true,
+    "owned_group_live_processes_at_cleanup": 0,
+    "owned_lease_id": "6435281c7e65442590097c0377e02aac",
+    "owned_reservation_id": "67dc3d43dc754ed0a433abd098b7900f",
+    "prior_failed_200MB_record_preserved": {
+      "record": {
+        "artifacts_durable_asserted": false,
+        "attempt_directory": {
+          "device": 66306,
+          "inode": 74367470,
+          "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-scope-span-pilot-20261007-01/attempt-01"
+        },
+        "child": {
+          "birth": "36712773",
+          "pid": 3879964
+        },
+        "child_process_slots": 1,
+        "cpu_slots": 2,
+        "created_at": 1791349054.2096076,
+        "external_charges": {},
+        "last_usage": {
+          "additional_requested_bytes": 0,
+          "attempt_bytes": 16022,
+          "attempt_limit_bytes": 200000000,
+          "charged_bytes": 141544172444,
+          "checked_at": 1791349068.711621,
+          "external_charged_bytes": 0,
+          "group_rss": {
+            "available": true,
+            "live_processes": 1,
+            "rss_bytes": 11804672
+          },
+          "inventory": {
+            "apparent_bytes": 94179172444,
+            "entry_count": 1360131,
+            "special_file_count": 12,
+            "symlink_count": 740
+          },
+          "limit_bytes": 145000000000,
+          "memory_limit_bytes": 1610612736,
+          "minimum_filesystem_free_bytes": 277842776064,
+          "observed_apparent_bytes": 94179172444,
+          "outstanding_full_reservations_bytes": 47365000000,
+          "process_slot_estimate_exceeded": false,
+          "reserved_child_process_slots": 1,
+          "scope": "named_roots_only_apparent_bytes",
+          "total_attempt_charged_bytes": 16022
+        },
+        "memory_mb": 1536,
+        "owner_pid": 3877584,
+        "prior_children": [],
+        "reservation_id": "dc5a24634a8f4ab2bb03946fb64e6921",
+        "retention_reason": "context_failed",
+        "scheduler_lane": "hammer_lean",
+        "status": "retained",
+        "storage_bytes": 200000000,
+        "workload": "canonical_trainer"
+      },
+      "reservation_id": "dc5a24634a8f4ab2bb03946fb64e6921"
+    },
+    "sampled_model_phase_peak_rss_bytes": 820355072,
+    "sampled_model_phase_peak_rss_mib": 782.3515625,
+    "shared_configuration_and_named_roots_preserved": true,
+    "signals_sent": [],
+    "terminal_gap_contains_model_execution": false,
+    "terminal_pre_finalize_to_absent_observation_gap_seconds": 14.880730094970204,
+    "terminal_receipts_outside_released_accounting_bytes": 7552
+  }
+}

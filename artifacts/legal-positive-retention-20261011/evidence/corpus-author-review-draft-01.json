@@ -1,0 +1,431 @@
+{
+  "AGENTS_review": {
+    "governing_filesystem_AGENTS_files_found": 0,
+    "root_commit": "2d6d7acdc0154e8e85351126e1bb1ed59b3b03ca",
+    "source_commit": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a",
+    "tracked_AGENTS_files_found_in_either_tree": 0
+  },
+  "artifact_bindings": {
+    "corpus-manifest.json": {
+      "bytes": 58282,
+      "sha256": "a6f88deefc47a0aabb8ab04ddb498d2cd270e2f6374e0904305fe9d2112719fa"
+    },
+    "corpus-protocol.json": {
+      "bytes": 22588,
+      "canonical_sha256": "c35a174c0d58ae917d5b12c1150c708f6485de0b70c46f0df40dd6d697c268bb",
+      "sha256": "7a305fe0b5f3dfd45daf4727fd7ed5673ca8a877165e9d77ed97d91b84521ee9"
+    },
+    "final-inputs.json": {
+      "bytes": 63400,
+      "canonical_sha256": "d40f92690047d1b393a7970f371f5dcd9a5eec64fab9c3e91913787d3d1134d5",
+      "sha256": "be59c75607db202595a484c7bcd50360bb104a868025e7388e456d84007f716a"
+    },
+    "final-references.json": {
+      "bytes": 142062,
+      "canonical_sha256": "3d176e7263bf6021da9d98ec88aabe71f4f4b9790de75c63603cb945a80de4fe",
+      "sha256": "9e07c209944a20305808d4791b56ff0898d12d4a899ee47d7af09fe81b92bd3d"
+    },
+    "selection-inputs.json": {
+      "bytes": 63828,
+      "canonical_sha256": "fa7cd67d2fb545e8dfe85f0c571952ad59f763dda0f742c549023d09237d126a",
+      "sha256": "92b86f7a6d83a6542c5d87597fd128c7b1a645006b99d1e0cc48e7a61d5a1953"
+    },
+    "selection-references.json": {
+      "bytes": 142130,
+      "canonical_sha256": "ca47ae67431cd78a9387cd116bf65e8993ee23d9902adc591233ee96e8d15424",
+      "sha256": "7d6e2d02ad439289178d7d186d8770cce85b762a4ccc3cf660f56b4d0f47b3cd"
+    },
+    "train-inputs.json": {
+      "bytes": 508927,
+      "canonical_sha256": "925adcf40d622cf68fe49986ab975be6d9374b0b9b0de54503d13b539f9fd1f7",
+      "sha256": "61e189b6a4e623184a4132694a86316a61aa3e9da7294632a5534e857f5f5f11"
+    },
+    "train-references.json": {
+      "bytes": 1136345,
+      "canonical_sha256": "27647bb15b8b8acc0e297b297783b3d5500bc0c10c2e3ad5d1d3e6e9c1294b08",
+      "sha256": "51a565a1edcaade3e4aa29f80e0e173a7a280f2384bf8f9efe2862f167f37634"
+    },
+    "training-schedule.json": {
+      "bytes": 711504,
+      "canonical_sha256": "3e60522c4ff777adb351dc7923ca19d895569638df0878fbc3d61ed7d36b26ff",
+      "sha256": "286169b872a2e1974dc6b502006954e6330c8be56105a98e7e7e86bbee10c3d6"
+    }
+  },
+  "cli_reexecution_contract": "The saved artifact names are immutable and exclusive-create. Existing output names cause refusal. For another reproduction directory, first use a new owned builder binding/protocol rather than overwrite these outputs.",
+  "construction_source": {
+    "bytes": 43884,
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus-builder.py",
+    "sha256": "961d1828cf3c62d5dc054377b1d968d642df51553dda4e7cb32d7d3fe2206d96"
+  },
+  "counts": {
+    "distinct_train_groups": 512,
+    "distinct_train_sources": 1024,
+    "new_groups": 640,
+    "new_sources": 1280,
+    "positive_scope_transport_validations": 640,
+    "prior_excluded_groups": 2560,
+    "prior_excluded_sources": 5120,
+    "split_counts": {
+      "final": {
+        "actions_per_template": 8,
+        "all_group_pairs_actual_parent": true,
+        "all_labels_boolean": true,
+        "all_masks_zero": true,
+        "all_source_sha_and_ids_match": true,
+        "each_action_presentations_per_template": 1,
+        "groups": 64,
+        "input_rows": 128,
+        "modalities": {
+          "F": 21,
+          "O": 22,
+          "P": 21
+        },
+        "negative_category_count_each": 16,
+        "no_legal_gold": true,
+        "nullable_cell_count_each": 16,
+        "old_group_overlap": 0,
+        "old_observed_declared_facet_overlap": {
+          "action": 0,
+          "actor": 0,
+          "condition": 0,
+          "object": 0
+        },
+        "old_source_overlap": 0,
+        "supported": 64,
+        "templates": {
+          "actor_condition_modal_action_object": 8,
+          "actor_modal_action_object_condition": 8,
+          "actor_possessive_gerund_object_modal_condition": 8,
+          "condition_actor_modal_action_object": 8,
+          "condition_actor_possessive_gerund_object_modal": 8,
+          "condition_modal_actor_action_object": 8,
+          "gerund_object_agent_modal_condition": 8,
+          "modal_actor_action_object_condition": 8
+        },
+        "unsupported": 64
+      },
+      "selection": {
+        "actions_per_template": 8,
+        "all_group_pairs_actual_parent": true,
+        "all_labels_boolean": true,
+        "all_masks_zero": true,
+        "all_source_sha_and_ids_match": true,
+        "each_action_presentations_per_template": 1,
+        "groups": 64,
+        "input_rows": 128,
+        "modalities": {
+          "F": 21,
+          "O": 22,
+          "P": 21
+        },
+        "negative_category_count_each": 16,
+        "no_legal_gold": true,
+        "nullable_cell_count_each": 16,
+        "old_group_overlap": 0,
+        "old_observed_declared_facet_overlap": {
+          "action": 0,
+          "actor": 0,
+          "condition": 0,
+          "object": 0
+        },
+        "old_source_overlap": 0,
+        "supported": 64,
+        "templates": {
+          "actor_condition_modal_action_object": 8,
+          "actor_modal_action_object_condition": 8,
+          "actor_possessive_gerund_object_modal_condition": 8,
+          "condition_actor_modal_action_object": 8,
+          "condition_actor_possessive_gerund_object_modal": 8,
+          "condition_modal_actor_action_object": 8,
+          "gerund_object_agent_modal_condition": 8,
+          "modal_actor_action_object_condition": 8
+        },
+        "unsupported": 64
+      },
+      "train": {
+        "actions_per_template": 8,
+        "all_group_pairs_actual_parent": true,
+        "all_labels_boolean": true,
+        "all_masks_zero": true,
+        "all_source_sha_and_ids_match": true,
+        "each_action_presentations_per_template": 8,
+        "groups": 512,
+        "input_rows": 1024,
+        "modalities": {
+          "F": 171,
+          "O": 171,
+          "P": 170
+        },
+        "negative_category_count_each": 128,
+        "no_legal_gold": true,
+        "nullable_cell_count_each": 128,
+        "old_group_overlap": 0,
+        "old_observed_declared_facet_overlap": {
+          "action": 0,
+          "actor": 0,
+          "condition": 0,
+          "object": 0
+        },
+        "old_source_overlap": 0,
+        "supported": 512,
+        "templates": {
+          "actor_condition_modal_action_object": 64,
+          "actor_modal_action_object_condition": 64,
+          "actor_possessive_gerund_object_modal_condition": 64,
+          "condition_actor_modal_action_object": 64,
+          "condition_actor_possessive_gerund_object_modal": 64,
+          "condition_modal_actor_action_object": 64,
+          "gerund_object_agent_modal_condition": 64,
+          "modal_actor_action_object_condition": 64
+        },
+        "unsupported": 512
+      }
+    }
+  },
+  "default_promotion": false,
+  "exact_cli": "python -B /home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus-builder.py --output /home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus --datasets-root /home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets --seed 24606",
+  "exclusion_contract": {
+    "all_four_bank_input_reference_manifest_protocol_builder_bindings_verified": true,
+    "fresh_split_observed_declared_facets_semantic_heads_content_words_overlap": 0,
+    "normalization": "NFKC -> casefold -> collapse whitespace",
+    "old_banks": [
+      "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01",
+      "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01",
+      "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01",
+      "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01"
+    ],
+    "old_declared_content_word_overlap": 0,
+    "old_declared_semantic_head_overlap": {
+      "action": 0,
+      "actor": 0,
+      "condition": 0,
+      "object": 0
+    },
+    "old_observed_declared_facet_overlap": {
+      "action": 0,
+      "actor": 0,
+      "condition": 0,
+      "object": 0
+    },
+    "semantic_head_definition": "Last word of declared facet string; declared audit vocabulary, not semantic inference."
+  },
+  "exclusion_inventory_counts": {
+    "content_words": 1068,
+    "declared_facets": {
+      "action": 192,
+      "actor": 192,
+      "condition": 96,
+      "object": 384
+    },
+    "groups": 2560,
+    "observed_facets": {
+      "action": 164,
+      "actor": 192,
+      "condition": 78,
+      "object": 208
+    },
+    "semantic_heads": {
+      "action": 192,
+      "actor": 192,
+      "condition": 96,
+      "object": 384
+    },
+    "sources": 5120
+  },
+  "execution_limits": {
+    "Git_index_checkout_mutations": 0,
+    "Hub_manager_resource_mutations": 0,
+    "Torch_not_imported": true,
+    "model_forwards": 0,
+    "models_or_encoders_loaded": 0,
+    "only_authored_files": [
+      "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus-builder.py",
+      "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus/*.json",
+      "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus-author-review.json"
+    ],
+    "optimizer_calls": 0,
+    "prover_calls": 0,
+    "tests_run": 0
+  },
+  "fitting_contract": "Only supportedboolean labels are fitting supervision. All16 sources are encoded; actual frozen-parent TRAIN emission/logit supplies the optional online margin. Positive spans/modality/optionalpresence/actionlemma/negativecategory are construction/scoring/fairness/schedule audit fields, never numerical loss targets.",
+  "mechanical_reference": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/corpus-builder.py",
+    "sha256": "ae83a8ae139301411ffbe3aeb6f5b2a06e9fab509ca83c6f835919c387cbdf73"
+  },
+  "no_independent_current_corpus_audit": true,
+  "no_independent_legal_gold": true,
+  "objective_contract": {
+    "control": "binary support BCE over all16 actual paired source records",
+    "gold_spans_or_modalities_in_fitting": false,
+    "lambda": 1,
+    "margin_floor_logit_clamp": [
+      0,
+      1
+    ],
+    "retention": "same BCE plus lambda1 mean relu(clamp(parent_support_logit,0,1)-candidate_support_logit) over actual frozen-parent-emitted supported TRAIN sources only",
+    "teacher_emission_mask": "Online actual frozen-parent proposal emission, requiring its learned support and structural emission; labels only restrict to supported TRAIN. Reuse the same parent forward/features/logit/pointers; count additional parent decodes separately, with no extra parent forwards."
+  },
+  "observed_at_utc": "2026-10-11T00:15:06.279524+00:00",
+  "python_api": {
+    "build_corpus": "build_corpus(datasets_root: Path, seed=24606) -> {train|selection|final: {inputs: rows, references: rows}}; pure authored rendering and positive transport validation only",
+    "schedule_audit": "schedule_audit(train_inputs, train_references, batches) -> complete source/group/perbatch/checkpoint exposure audit",
+    "training_batches": "training_batches(train_inputs, train_references, seed=24606, updates=240) -> list[240][16] of source IDs; each two adjacent IDs are the actual supported/unsupported pair after group shuffle",
+    "write_corpus": "write_corpus(output: Path, datasets_root: Path, seed=24606) -> corpus-manifest; exclusive new filenames only"
+  },
+  "schedule": {
+    "batch_size": 16,
+    "checkpoints": {
+      "120": {
+        "distinct_groups": 512,
+        "distinct_sources": 1024,
+        "group_exposure_histogram": {
+          "1": 64,
+          "2": 448
+        },
+        "group_presentation_count": 960,
+        "source_exposure_histogram": {
+          "1": 128,
+          "2": 896
+        },
+        "source_presentation_count": 1920
+      },
+      "128": {
+        "distinct_groups": 512,
+        "distinct_sources": 1024,
+        "group_exposure_histogram": {
+          "2": 512
+        },
+        "group_presentation_count": 1024,
+        "source_exposure_histogram": {
+          "2": 1024
+        },
+        "source_presentation_count": 2048
+      },
+      "192": {
+        "distinct_groups": 512,
+        "distinct_sources": 1024,
+        "group_exposure_histogram": {
+          "3": 512
+        },
+        "group_presentation_count": 1536,
+        "source_exposure_histogram": {
+          "3": 1024
+        },
+        "source_presentation_count": 3072
+      },
+      "240": {
+        "distinct_groups": 512,
+        "distinct_sources": 1024,
+        "group_exposure_histogram": {
+          "3": 128,
+          "4": 384
+        },
+        "group_presentation_count": 1920,
+        "source_exposure_histogram": {
+          "3": 256,
+          "4": 768
+        },
+        "source_presentation_count": 3840
+      },
+      "64": {
+        "distinct_groups": 512,
+        "distinct_sources": 1024,
+        "group_exposure_histogram": {
+          "1": 512
+        },
+        "group_presentation_count": 512,
+        "source_exposure_histogram": {
+          "1": 1024
+        },
+        "source_presentation_count": 1024
+      }
+    },
+    "distinct_groups": 512,
+    "distinct_sources": 1024,
+    "each_group_always_has_actual_positive_and_negative": true,
+    "four_category_pools_of_128groups_cycle_after_full_consumption": true,
+    "group_exposure_histogram": {
+      "3": 128,
+      "4": 384
+    },
+    "group_presentation_count": 1920,
+    "schema": "paired-support-retention-schedule-audit/v1",
+    "seed": 24606,
+    "separate_positive_negative_samplers": false,
+    "source_exposure_histogram": {
+      "3": 256,
+      "4": 768
+    },
+    "source_presentation_count": 3840,
+    "source_profile": "fresh-support-retention-20261011/v1",
+    "training_schedule_sha256": "fd8cf0b032ec07a45131358450d49b1b6c09932cad7faaf7cdc2ced5ec82696f",
+    "updates": 240,
+    "valid": true
+  },
+  "schedule_specific_checks": {
+    "each_parent_positive_and_its_negative_share_identical_exposure_counts": true,
+    "eight_distinct_groups_and_sixteen_distinct_sources_per_batch": true,
+    "every_batch_exactly_two_actual_parent_groups_per_each_negative_category": true,
+    "four128_group_category_pools_cycle_after_full_consumption": true,
+    "no_separate_positive_negative_sampler": true,
+    "pure_recomputed_schedule_byte_value_identity": true,
+    "same_full_schedule_for_both_arms": true
+  },
+  "schema": "support-retention-corpus-author-review/v1",
+  "seed": 24606,
+  "selection_and_reference_barriers": {
+    "all_parent_and_both_selected_arms_newfinal_and_fouroldfinal_panels_durable_before_evaluation_joins": true,
+    "author_saw_all640_positive_construction_references": true,
+    "barrier_is_numerical_not_authors_blind_or_independent_gold": true,
+    "both_selections_durable_before_fresh_or_old_final_reference_parsing": true,
+    "selection_rows": "64supported+64unsupported from64pairedgroups; rootselector owns pairedpositive and aggregate floors"
+  },
+  "shared_exposure_limits": [
+    "The8renderer templates, O/P/F classes, modal aliases, nullable constructions and4negative categories are deliberately shared with all4oldbanks.",
+    "TRAIN/selection/final token-local anagram permutations are rotateleft1/rotateleft2/reverse; these patterns appeared in oldbanks and are not globally unseen.",
+    "Newfacet/content/source identities are authored construction novelty; meaning/syntax/legal source fidelity is unverified.",
+    "All4oldfinals are exposed retention,512cases total, and are outside new fitting/selection."
+  ],
+  "source_profile": "fresh-support-retention-20261011/v1",
+  "status": "author_mechanical_review_complete_not_independent_audit",
+  "training_or_proof_admission": false,
+  "transport_validation": {
+    "all_masks_zero": true,
+    "all_sources_within8192chars96tokens64token_UTF8bytes": true,
+    "formal_outputs_null": true,
+    "isolated_source_root": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets",
+    "maximum_lengths_by_split": {
+      "final": {
+        "maximum_source_UTF8_bytes": 150,
+        "maximum_source_tokens": 27,
+        "maximum_token_UTF8_bytes": 12
+      },
+      "selection": {
+        "maximum_source_UTF8_bytes": 153,
+        "maximum_source_tokens": 27,
+        "maximum_token_UTF8_bytes": 12
+      },
+      "train": {
+        "maximum_source_UTF8_bytes": 181,
+        "maximum_source_tokens": 31,
+        "maximum_token_UTF8_bytes": 12
+      }
+    },
+    "owner_bindings": [
+      {
+        "bytes": 7804,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py",
+        "same_as_current_pinned_git_blob": true,
+        "sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65"
+      },
+      {
+        "bytes": 29993,
+        "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py",
+        "same_as_current_pinned_git_blob": true,
+        "sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a"
+      }
+    ],
+    "source_commit": "a1b5c73e5b687d8bd6c3b3051788860fd6e2f07a",
+    "source_semantics_verified_false": true
+  }
+}

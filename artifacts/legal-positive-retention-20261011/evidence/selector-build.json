@@ -1,0 +1,119 @@
+{
+  "schema": "legal-scope-retention-selector-build/v1",
+  "source_profile": "fresh-support-retention-20261011/v1",
+  "default_denominators": {
+    "positive_count": 64,
+    "negative_count": 64,
+    "source_parent_groups": 64,
+    "group_contract": "exactly one positive and one paired negative"
+  },
+  "api": {
+    "SelectionConfig": "SelectionConfig(source_profile=SOURCE_PROFILE, positive_count=64, negative_count=64, source_parent_groups=64), to_dict(), from_dict(value)",
+    "make_panel": "make_panel(cases, config=SelectionConfig()) -> detached closed panel",
+    "validate_panel": "validate_panel(panel, config=SelectionConfig()) -> canonical validated panel",
+    "summarize_cases": "summarize_cases(cases, config=SelectionConfig()) -> complete counters + ID sets + group membership",
+    "retention_report": "retention_report(panel, baseline, config=SelectionConfig()) -> eligibility, all floor reasons, paired ID sets/counts and selection gain",
+    "eligible": "eligible(panel, baseline, config=SelectionConfig()) -> bool",
+    "rank": "rank(panel, steps, config=SelectionConfig()) -> tuple",
+    "select": "select(candidates, baseline, config=SelectionConfig()) -> (original chosen candidate, detached decision)"
+  },
+  "closed_fields": {
+    "case": [
+      "id",
+      "source_group",
+      "source_sha256",
+      "supported",
+      "emitted",
+      "whole_exact",
+      "learned_refusal"
+    ],
+    "panel": [
+      "schema",
+      "source_profile",
+      "cases",
+      "summary"
+    ],
+    "candidate": [
+      "completed_updates",
+      "panel",
+      "checkpoint_sha256"
+    ]
+  },
+  "source_contract": [
+    "id exactly source:<source_sha256>, lowercase hex digest64",
+    "unique source IDs/hashes, each declared pair group accounted exactly",
+    "all candidate source IDs/hashes/support labels/group assignments match baseline",
+    "every summary integer counter and sorted unique ID list is recomputed from complete case records",
+    "source hashes establish recorded identity, not actual model/source execution or semantic correctness"
+  ],
+  "floors": [
+    "baseline positive whole/emitted nonzero",
+    "positive whole/emitted aggregate counts no lower",
+    "positive learned refusals and negative emissions aggregate counts no higher",
+    "zero lost baseline exact-positive IDs",
+    "zero lost baseline emitted-positive IDs",
+    "zero new negative emission IDs"
+  ],
+  "schedule": {
+    "allowed_completed_updates": [
+      0,
+      120,
+      240
+    ],
+    "distinct_increasing": true,
+    "cold_zero_first_equals_measured_baseline": true,
+    "partial_checkpoint_schedules_allowed": true
+  },
+  "ranking": [
+    "fewer negative emissions",
+    "more positive whole exact",
+    "more negative learned refusals",
+    "earlier completed step"
+  ],
+  "gain": "Eligible fitted choice has selected_fitted_gain only for removing a baseline negative emission or gaining positive whole exactness; ties and negative-refusal-only rank changes do not create a declared gain. No final retention guarantee.",
+  "reference_policy": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/selection_policy.py",
+    "bytes": 4654,
+    "sha256": "b0fc45f45e66ff4ea7893ee97cc4fd2873c1e36d47b883833f0d996e4d1f1eeb",
+    "modified": false
+  },
+  "files": [
+    {
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_retention_selection.py",
+      "bytes": 14328,
+      "sha256": "9af005eba03d129bd56920b5274c4189962092dc9bf2d7da6f0e0004b0a7f0a5",
+      "ast_parsed": true,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "re"
+      ],
+      "test_functions": 0
+    },
+    {
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/tests/unit/logic/test_legal_scope_retention_selection.py",
+      "bytes": 13697,
+      "sha256": "32a4c8477075dd6119e6384da43b36ae22cedf309bd53e51d93d983b3020e8cf",
+      "ast_parsed": true,
+      "imports": [
+        "copy",
+        "hashlib",
+        "importlib.util",
+        "pathlib",
+        "subprocess",
+        "sys",
+        "pytest"
+      ],
+      "test_functions": 18
+    }
+  ],
+  "static_notes": [
+    "AST syntax parsed only; no module imports, unit tests, Torch, numerical fitting or corpus/runner execution by this agent.",
+    "Selector module imports only dataclasses, re and future annotations.",
+    "Focused controls include same-count exact/emission swaps, negative substitution, reject-all, zero baseline, complete coverage/count/type failures, real gains, deterministic ties, exact fallback custody and isolated no-model import.",
+    "No source paths beyond the assigned module/test and this artifact were written; no staging or commits."
+  ],
+  "tests_run": false,
+  "numeric_model_imports": false,
+  "git_mutations": false
+}

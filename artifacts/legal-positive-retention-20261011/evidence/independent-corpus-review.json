@@ -1,0 +1,1047 @@
+{
+  "actions": {
+    "corpus_rewritten": false,
+    "fits": 0,
+    "git_mutations": 0,
+    "hub_mutations": 0,
+    "model_calls": 0,
+    "only_written_artifact": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/independent-corpus-review.json",
+    "resource_mutations": 0,
+    "tests": 0,
+    "torch_imported": false
+  },
+  "artifact_pins": [
+    {
+      "bytes": 22591,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus/corpus-protocol.json",
+      "sha256": "9e7ae0ddac59d60aceab132583ca24252ec13bc064093986d44e68a7e278d880"
+    },
+    {
+      "bytes": 58282,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus/corpus-manifest.json",
+      "sha256": "4d2a13686e77e65b858a45b091658407d52bfc305a67220f641f3b39911fcd35"
+    },
+    {
+      "bytes": 21824,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus-author-review.json",
+      "sha256": "c3ca32152c05e5bad8172567420e69ab8cb0d4fbc7e05b9aec3cad8624a7fb5d"
+    },
+    {
+      "bytes": 14899,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/training-design-review.json",
+      "sha256": "669ebcf2fbebb1c2dc16d01b9b22a5194f2da98b70ea84af2a74f892e8995cc4"
+    },
+    {
+      "bytes": 10471,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/retention-module-build.json",
+      "sha256": "424871c96248995c656d88a54f9c93e48ab96f9f9aa79bb75c749b132c6f7160"
+    },
+    {
+      "bytes": 711504,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus/training-schedule.json",
+      "sha256": "286169b872a2e1974dc6b502006954e6330c8be56105a98e7e7e86bbee10c3d6"
+    },
+    {
+      "bytes": 43887,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus-builder.py",
+      "sha256": "5082745fecfe1141246856905bb0e6ee4f9d265a6b7229b6990747f4b2d0beb7"
+    },
+    {
+      "bytes": 63400,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus/final-inputs.json",
+      "sha256": "be59c75607db202595a484c7bcd50360bb104a868025e7388e456d84007f716a"
+    },
+    {
+      "bytes": 142062,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus/final-references.json",
+      "sha256": "9e07c209944a20305808d4791b56ff0898d12d4a899ee47d7af09fe81b92bd3d"
+    },
+    {
+      "bytes": 63828,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus/selection-inputs.json",
+      "sha256": "92b86f7a6d83a6542c5d87597fd128c7b1a645006b99d1e0cc48e7a61d5a1953"
+    },
+    {
+      "bytes": 142130,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus/selection-references.json",
+      "sha256": "7d6e2d02ad439289178d7d186d8770cce85b762a4ccc3cf660f56b4d0f47b3cd"
+    },
+    {
+      "bytes": 508927,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus/train-inputs.json",
+      "sha256": "61e189b6a4e623184a4132694a86316a61aa3e9da7294632a5534e857f5f5f11"
+    },
+    {
+      "bytes": 1136345,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus/train-references.json",
+      "sha256": "51a565a1edcaade3e4aa29f80e0e173a7a280f2384bf8f9efe2862f167f37634"
+    },
+    {
+      "bytes": 30999,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/corpus-builder.py",
+      "sha256": "ef654d25b51ea5addc5e91448664aee9c1c470335f7a7097c5d464747d2d6631"
+    },
+    {
+      "bytes": 7771,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/corpus-manifest.json",
+      "sha256": "5c87b0ef62c3fa7846f2000ae99caa3438c85c2cf1e80809380cf97e600d2f32"
+    },
+    {
+      "bytes": 5928,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/corpus-protocol.json",
+      "sha256": "3c3b194f9720fe1c1d624f6d9a9098b53898d69846f6a036ed805755d1b18acb"
+    },
+    {
+      "bytes": 1473,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/independent-corpus-review.json",
+      "sha256": "78e0a4128980a1d5caacb1e648ef36054de178aa86847bd71187deea6c3514ee"
+    },
+    {
+      "bytes": 489421,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/train-inputs.json",
+      "sha256": "0df9ab64e794f606a3d9ab87002c78bc49e58bdc24969bf3bc62a7fabb44b3bc"
+    },
+    {
+      "bytes": 1090392,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/train-references.json",
+      "sha256": "63140b0b8daae2260f911dde653e604d1fb758416cf3721da3b81cf4c53c6789"
+    },
+    {
+      "bytes": 61364,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/selection-inputs.json",
+      "sha256": "48f891f5ada515e7b1511e6395c107ee8c7ecfcede3618da417376383eca1518"
+    },
+    {
+      "bytes": 136304,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/selection-references.json",
+      "sha256": "ea5762e4c35ba452c60286ee01b4ec21df7a12e0a6c6f50780bfb1822a6dcddd"
+    },
+    {
+      "bytes": 61725,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-inputs.json",
+      "sha256": "1af9757054e2ae6344dcbd2e3834c21808cbe998e79ace9b9ff34383d3020b55"
+    },
+    {
+      "bytes": 136311,
+      "path": "/home/barberb/lift_coding/artifacts/legal-next-training-20261007-01/final-references.json",
+      "sha256": "9ff98c26fd03fc695b76b46de63b621a02765e981e43eca867cf01f51104abc9"
+    },
+    {
+      "bytes": 25522,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/corpus-builder.py",
+      "sha256": "881abc31455551c953ebe23f2a24bb6bde5df09a85e1c6455945a1a5ffd56e74"
+    },
+    {
+      "bytes": 40566,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/corpus-manifest.json",
+      "sha256": "22a551395a410e4b3fe79155f554a2ee05c7b2eec6631d7836079d7ec9c0a7d1"
+    },
+    {
+      "bytes": 12225,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/corpus-protocol.json",
+      "sha256": "7d83f26ec816e4c83d66de15b81ef52be35f0142c713093dd94787ea1cf31b03"
+    },
+    {
+      "bytes": 4336,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/independent-corpus-review.json",
+      "sha256": "98bf1da49efc359d099369f170678bb0e19c3887e578a6a6a19d572c2712d313"
+    },
+    {
+      "bytes": 507191,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/train-inputs.json",
+      "sha256": "698a12e8df507b6ffe81b3d6e9dc4cd61cf8865f34e178be6a98cdddca222cfa"
+    },
+    {
+      "bytes": 1104803,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/train-references.json",
+      "sha256": "adbc5a2a9245eafa7a4316b54535a1fd42b6b2c3d1509cb41f954daabfe53a8d"
+    },
+    {
+      "bytes": 63326,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/selection-inputs.json",
+      "sha256": "b2ceeddfffdd03d24f4647797fcf1cd1a75067d51957c4a093601cbef9c8e0b4"
+    },
+    {
+      "bytes": 138104,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/selection-references.json",
+      "sha256": "9a7e504b8e88bd2973ee6ccbdbc70212f2dbd9f850bef9c493590f32ad348c30"
+    },
+    {
+      "bytes": 62673,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/final-inputs.json",
+      "sha256": "066bc0a734292d45da468583c55677d9851e244f5a7949aedcc857796a14cb67"
+    },
+    {
+      "bytes": 138097,
+      "path": "/home/barberb/lift_coding/artifacts/legal-trigger-readout-20261007-01/final-references.json",
+      "sha256": "069a43b1295823c3ecaaab958a6402494d1dbd00679af97da05d7e466ef53209"
+    },
+    {
+      "bytes": 32732,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/corpus-builder.py",
+      "sha256": "54616dca4e9edc0d5c1f2362544de0da5b87ad57b4b7af75480b4e455be56e7e"
+    },
+    {
+      "bytes": 50666,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/corpus-manifest.json",
+      "sha256": "eda62b5e15083adba9184ec5ecdcf01a530df21914344e3bfb7d36ed0cc7cec0"
+    },
+    {
+      "bytes": 15939,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/corpus-protocol.json",
+      "sha256": "bbc90d43835021dd17730d5787a7789ea7cad61cc1fc5eeac101d94f3707b2b1"
+    },
+    {
+      "bytes": 14978,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/independent-corpus-selector-review.json",
+      "sha256": "a09b3ab2bf1914e7b60ad9864b1471642b80eebe778a2d60a0158b2ac4a39cd3"
+    },
+    {
+      "bytes": 508525,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/train-inputs.json",
+      "sha256": "5713989a5a4405d4e553807d4cdbac38c65aa9b8d6b1191b807312a72403a8f2"
+    },
+    {
+      "bytes": 1134002,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/train-references.json",
+      "sha256": "e08c51ba66e512758350d31edbcf4a41c4b64c9adef9049776b13493a54ff465"
+    },
+    {
+      "bytes": 63812,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/selection-inputs.json",
+      "sha256": "8a587ced7850a6e4979545e548c27bd0a58a65b872802cbc4667df95d21d4384"
+    },
+    {
+      "bytes": 141813,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/selection-references.json",
+      "sha256": "1560e7a9d2f28ff6278783a91551748f9d621f988ef1a161895ac55660e96584"
+    },
+    {
+      "bytes": 63530,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/final-inputs.json",
+      "sha256": "5fa44c4a208c71429c61f8c6be648b65583ecd2a01740b412f440e03ef824da0"
+    },
+    {
+      "bytes": 141839,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-action-20261007-01/final-references.json",
+      "sha256": "8dd5cc9ca1afe776dcdeaa9e88dc7e5869269a125b03b648b5c6be79e94a8baa"
+    },
+    {
+      "bytes": 34669,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/corpus-builder.py",
+      "sha256": "ae83a8ae139301411ffbe3aeb6f5b2a06e9fab509ca83c6f835919c387cbdf73"
+    },
+    {
+      "bytes": 52638,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/corpus-manifest.json",
+      "sha256": "7a841522be4e481be886be65b3bdaf85092e24cd2c2cb0202e7eb91ee5b0c959"
+    },
+    {
+      "bytes": 19264,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/corpus-protocol.json",
+      "sha256": "fda43e533276cc2d924e36132c9090341b68d0c015d5e038583c9c1f673d8b2d"
+    },
+    {
+      "bytes": 24428,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/independent-corpus-review.json",
+      "sha256": "c380647f4138c80eff838209dd3e0a3384f498eb4faf0ba667bdff46002697c2"
+    },
+    {
+      "bytes": 504469,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/train-inputs.json",
+      "sha256": "84c0e94003a557593c6184d52fe181fd9e30c3a3337d8fed214b6d20f5a23489"
+    },
+    {
+      "bytes": 1131415,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/train-references.json",
+      "sha256": "59ebff84fd896cb32c482a28dffc23130e6997508df4553465849e6e961e3c4e"
+    },
+    {
+      "bytes": 62866,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/selection-inputs.json",
+      "sha256": "8dd31dfa1c3f23e3aee4f834ba0ab242a3d26fe6a991c021faa941ce02d0d6ab"
+    },
+    {
+      "bytes": 141415,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/selection-references.json",
+      "sha256": "5883630a1cecdbfb8de6c19605fe91876f54c140df587e0afeb5e21cdf29fa31"
+    },
+    {
+      "bytes": 63652,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/final-inputs.json",
+      "sha256": "b49bea41269cfab18ff58a598ea47d7f85385322701ad070aa761a84b18588ac"
+    },
+    {
+      "bytes": 141504,
+      "path": "/home/barberb/lift_coding/artifacts/legal-support-gate-20261007-01/final-references.json",
+      "sha256": "0ceebf7f5f5b223c56d826386fbcc5d37a36f1ece0551e36945ae0e3aca55b0f"
+    },
+    {
+      "bytes": 29993,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py",
+      "sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a"
+    },
+    {
+      "bytes": 7804,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_scope_span_proposal.py",
+      "sha256": "8491ff3b855f10f5474f3c924401157c010d0c9fa997737cec058be171dc8f65"
+    },
+    {
+      "bytes": 508927,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus-draft-01/train-inputs.json",
+      "sha256": "61e189b6a4e623184a4132694a86316a61aa3e9da7294632a5534e857f5f5f11"
+    },
+    {
+      "bytes": 1136345,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus-draft-01/train-references.json",
+      "sha256": "51a565a1edcaade3e4aa29f80e0e173a7a280f2384bf8f9efe2862f167f37634"
+    },
+    {
+      "bytes": 63828,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus-draft-01/selection-inputs.json",
+      "sha256": "92b86f7a6d83a6542c5d87597fd128c7b1a645006b99d1e0cc48e7a61d5a1953"
+    },
+    {
+      "bytes": 142130,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus-draft-01/selection-references.json",
+      "sha256": "7d6e2d02ad439289178d7d186d8770cce85b762a4ccc3cf660f56b4d0f47b3cd"
+    },
+    {
+      "bytes": 63400,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus-draft-01/final-inputs.json",
+      "sha256": "be59c75607db202595a484c7bcd50360bb104a868025e7388e456d84007f716a"
+    },
+    {
+      "bytes": 142062,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus-draft-01/final-references.json",
+      "sha256": "9e07c209944a20305808d4791b56ff0898d12d4a899ee47d7af09fe81b92bd3d"
+    },
+    {
+      "bytes": 711504,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus-draft-01/training-schedule.json",
+      "sha256": "286169b872a2e1974dc6b502006954e6330c8be56105a98e7e7e86bbee10c3d6"
+    },
+    {
+      "bytes": 43884,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus-builder-draft-01.py",
+      "sha256": "961d1828cf3c62d5dc054377b1d968d642df51553dda4e7cb32d7d3fe2206d96"
+    },
+    {
+      "bytes": 17309,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus-author-review-draft-01.json",
+      "sha256": "79fd169ae9ee18557503fa59131b40e2fee4f2e1363ca7607866c94fa2497977"
+    },
+    {
+      "bytes": 22588,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus-draft-01/corpus-protocol.json",
+      "sha256": "7a305fe0b5f3dfd45daf4727fd7ed5673ca8a877165e9d77ed97d91b84521ee9"
+    },
+    {
+      "bytes": 58282,
+      "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/corpus-draft-01/corpus-manifest.json",
+      "sha256": "a6f88deefc47a0aabb8ab04ddb498d2cd270e2f6374e0904305fe9d2112719fa"
+    }
+  ],
+  "checks": [
+    {
+      "check": "fresh declared lexicons exactly match pinned builder literals",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "manifest and protocol builder pins match actual bytes",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "all current manifest and author artifact byte/canonical pins authenticate",
+      "evidence": {
+        "checks": 17
+      },
+      "passed": true
+    },
+    {
+      "check": "all four prior bank builder/manifest/protocol/review/split pins match",
+      "evidence": {
+        "pins": 40
+      },
+      "passed": true
+    },
+    {
+      "check": "protocol and manifest prior binding ledgers agree",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "prior actual unique source/hash/reference joins for all twelve splits",
+      "evidence": {
+        "splits": 12
+      },
+      "passed": true
+    },
+    {
+      "check": "independently recomputed four-bank exclusion unions",
+      "evidence": {
+        "content_words": 1068,
+        "declared_facets": {
+          "action": 192,
+          "actor": 192,
+          "condition": 96,
+          "object": 384
+        },
+        "groups": 2560,
+        "observed_facets": {
+          "action": 164,
+          "actor": 192,
+          "condition": 78,
+          "object": 208
+        },
+        "semantic_heads": {
+          "action": 192,
+          "actor": 192,
+          "condition": 96,
+          "object": 384
+        },
+        "sources": 5120
+      },
+      "passed": true
+    },
+    {
+      "check": "protocol templates and modal aliases preserve explicit shared grammar",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "all old banks actual inputs share the declared eight template inventory",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "pure transport owner pins match declared custody",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "train complete unique input/reference IDs",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "train every saved statistics ledger recomputes exactly",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "train eight template/action/null/category marginal balance",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "train per-template null cells and category balance",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "train raw source transport length bounds",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "train old source/group/facet/head/content-word exclusions",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "selection complete unique input/reference IDs",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "selection every saved statistics ledger recomputes exactly",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "selection eight template/action/null/category marginal balance",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "selection per-template null cells and category balance",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "selection raw source transport length bounds",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "selection old source/group/facet/head/content-word exclusions",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "final complete unique input/reference IDs",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "final every saved statistics ledger recomputes exactly",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "final eight template/action/null/category marginal balance",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "final per-template null cells and category balance",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "final raw source transport length bounds",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "final old source/group/facet/head/content-word exclusions",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "all 1280 sources/640 groups unique with exact recorded bindings",
+      "evidence": {
+        "groups": 640,
+        "record_errors": [],
+        "sources": 1280
+      },
+      "passed": true
+    },
+    {
+      "check": "640 independent positive pure transport validations keep all masks zero/no formal output",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "train/selection source/group/facet/head/content-word split exclusion",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "train/final source/group/facet/head/content-word split exclusion",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "selection/final source/group/facet/head/content-word split exclusion",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "240x16 true-parent batches, eight positives/eight negatives, two/category",
+      "evidence": {
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "check": "all TRAIN sources exactly three/four times and actual pairs have equal exposure",
+      "evidence": {
+        "group_histogram": {
+          "3": 128,
+          "4": 384
+        },
+        "source_histogram": {
+          "3": 256,
+          "4": 768
+        }
+      },
+      "passed": true
+    },
+    {
+      "check": "saved complete per-source/per-group/per-batch/checkpoint ledgers match",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "four category pools cycle only after complete 128-group consumption",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "seed24606 independently reproduces exact paired schedule",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "canonical schedule digest agrees in protocol/manifest/schedule/author",
+      "evidence": {
+        "sha256": "fd8cf0b032ec07a45131358450d49b1b6c09932cad7faaf7cdc2ced5ec82696f"
+      },
+      "passed": true
+    },
+    {
+      "check": "protocol policies pin identical objective-independent pairing and selection budget",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "corpus authority declarations remain false with ordinary zero masks",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "objective declarations all agree on intended squared hinge",
+      "evidence": {
+        "corpus_retention": "same BCE plus lambda1 mean(relu(clamp(parent_support_logit,0,1)-candidate_support_logit)^2) over actual frozen-parent-emitted supported TRAIN sources only",
+        "design_retention": "mean(max(0,floor-s)^2 over masked rows); exactly0 when mask empty",
+        "model_retention": "lambda1.0; BCEall rows plus mean relu(clamp(detached_parent_logit,0,1)-candidate_logit)^2 over supported TRAIN rows whose actual frozen parent output emits a valid proposal"
+      },
+      "passed": true
+    },
+    {
+      "check": "all reviewed endpoint input bytes remain unchanged during audit",
+      "evidence": {
+        "changed_paths": []
+      },
+      "passed": true
+    },
+    {
+      "check": "audit loaded no Torch/numeric models",
+      "evidence": null,
+      "passed": true
+    },
+    {
+      "check": "correction preserves all seven source/reference/schedule payload files byte for byte",
+      "evidence": [
+        {
+          "byte_identical": true,
+          "bytes": 508927,
+          "file": "train-inputs.json",
+          "sha256": "61e189b6a4e623184a4132694a86316a61aa3e9da7294632a5534e857f5f5f11"
+        },
+        {
+          "byte_identical": true,
+          "bytes": 1136345,
+          "file": "train-references.json",
+          "sha256": "51a565a1edcaade3e4aa29f80e0e173a7a280f2384bf8f9efe2862f167f37634"
+        },
+        {
+          "byte_identical": true,
+          "bytes": 63828,
+          "file": "selection-inputs.json",
+          "sha256": "92b86f7a6d83a6542c5d87597fd128c7b1a645006b99d1e0cc48e7a61d5a1953"
+        },
+        {
+          "byte_identical": true,
+          "bytes": 142130,
+          "file": "selection-references.json",
+          "sha256": "7d6e2d02ad439289178d7d186d8770cce85b762a4ccc3cf660f56b4d0f47b3cd"
+        },
+        {
+          "byte_identical": true,
+          "bytes": 63400,
+          "file": "final-inputs.json",
+          "sha256": "be59c75607db202595a484c7bcd50360bb104a868025e7388e456d84007f716a"
+        },
+        {
+          "byte_identical": true,
+          "bytes": 142062,
+          "file": "final-references.json",
+          "sha256": "9e07c209944a20305808d4791b56ff0898d12d4a899ee47d7af09fe81b92bd3d"
+        },
+        {
+          "byte_identical": true,
+          "bytes": 711504,
+          "file": "training-schedule.json",
+          "sha256": "286169b872a2e1974dc6b502006954e6330c8be56105a98e7e7e86bbee10c3d6"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "check": "final builder/protocol/manifest/author note bind the corrected squared-hinge generation",
+      "evidence": [
+        {
+          "file": "corpus-builder.py",
+          "matches_corrected_generation": true,
+          "sha256": "5082745fecfe1141246856905bb0e6ee4f9d265a6b7229b6990747f4b2d0beb7"
+        },
+        {
+          "file": "corpus/corpus-protocol.json",
+          "matches_corrected_generation": true,
+          "sha256": "9e7ae0ddac59d60aceab132583ca24252ec13bc064093986d44e68a7e278d880"
+        },
+        {
+          "file": "corpus/corpus-manifest.json",
+          "matches_corrected_generation": true,
+          "sha256": "4d2a13686e77e65b858a45b091658407d52bfc305a67220f641f3b39911fcd35"
+        },
+        {
+          "file": "corpus-author-review.json",
+          "matches_corrected_generation": true,
+          "sha256": "c3ca32152c05e5bad8172567420e69ab8cb0d4fbc7e05b9aec3cad8624a7fb5d"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "check": "corpus comparison/objective/policies agree with squared-hinge design",
+      "evidence": {
+        "clamp": [
+          0,
+          1
+        ],
+        "control": "binary support BCE over all16 actual paired source records",
+        "corrected_retention": "same BCE plus lambda1 mean(relu(clamp(parent_support_logit,0,1)-candidate_support_logit)^2) over actual frozen-parent-emitted supported TRAIN sources only",
+        "lambda": 1,
+        "source_features": "Raw source UTF8 only; no ID/group/template/category/reference/declaredlemma metadata enters numerical features. No parser, lexical oracle, source search, anchor repair, target lookup or truncation."
+      },
+      "passed": true
+    },
+    {
+      "check": "both selection and all source-only evaluation barrier declarations agree",
+      "evidence": "Declared future numerical barrier only; actual runner execution reviewed separately.",
+      "passed": true
+    }
+  ],
+  "correction_review": {
+    "authority": "This review approves the corpus integrity and corrected declaration agreement only; it supplies neither runner validation nor resource/training authorization.",
+    "draft_preserved": true,
+    "final_updated_protocol_fields": [
+      "objectives",
+      "source_builder"
+    ],
+    "historical_draft_mismatch": "Draft omitted the square from hinge formula; squared-hinge model/design and intended policy were already separate. No fit occurred against this draft.",
+    "historical_draft_retention": "same BCE plus lambda1 mean relu(clamp(parent_support_logit,0,1)-candidate_support_logit) over actual frozen-parent-emitted supported TRAIN sources only",
+    "same_seven_numerical_payloads": true
+  },
+  "counts": {
+    "new_groups": 640,
+    "new_sources": 1280,
+    "positive_pure_transport_validations": 640,
+    "prior_exclusions": {
+      "content_words": 1068,
+      "declared_facets": {
+        "action": 192,
+        "actor": 192,
+        "condition": 96,
+        "object": 384
+      },
+      "groups": 2560,
+      "observed_facets": {
+        "action": 164,
+        "actor": 192,
+        "condition": 78,
+        "object": 208
+      },
+      "semantic_heads": {
+        "action": 192,
+        "actor": 192,
+        "condition": 96,
+        "object": 384
+      },
+      "sources": 5120
+    },
+    "train_group_presentations": 1920,
+    "train_source_presentations": 3840
+  },
+  "findings": [],
+  "observed_at_utc": "2026-10-11T00:21:35.243976+00:00",
+  "passed": true,
+  "pin_count": 66,
+  "reference_barrier": {
+    "actual_execution_verified": false,
+    "declared_correct": true,
+    "not_a_fitting_authorization": true,
+    "policy": "Both choices/checkpoint hashes durable before numerical final/old-final reference parsing; all parent/both selected source-only panels for new final and all four exposed old finals durable before evaluation joins. Author/auditor see construction references; no authors-blind label claim.",
+    "retention_cases": 512
+  },
+  "schedule": {
+    "checkpoints": {
+      "120": {
+        "distinct_groups": 512,
+        "distinct_sources": 1024,
+        "group_exposure_histogram": {
+          "1": 64,
+          "2": 448
+        },
+        "group_presentation_count": 960,
+        "source_exposure_histogram": {
+          "1": 128,
+          "2": 896
+        },
+        "source_presentation_count": 1920
+      },
+      "128": {
+        "distinct_groups": 512,
+        "distinct_sources": 1024,
+        "group_exposure_histogram": {
+          "2": 512
+        },
+        "group_presentation_count": 1024,
+        "source_exposure_histogram": {
+          "2": 1024
+        },
+        "source_presentation_count": 2048
+      },
+      "192": {
+        "distinct_groups": 512,
+        "distinct_sources": 1024,
+        "group_exposure_histogram": {
+          "3": 512
+        },
+        "group_presentation_count": 1536,
+        "source_exposure_histogram": {
+          "3": 1024
+        },
+        "source_presentation_count": 3072
+      },
+      "240": {
+        "distinct_groups": 512,
+        "distinct_sources": 1024,
+        "group_exposure_histogram": {
+          "3": 128,
+          "4": 384
+        },
+        "group_presentation_count": 1920,
+        "source_exposure_histogram": {
+          "3": 256,
+          "4": 768
+        },
+        "source_presentation_count": 3840
+      },
+      "64": {
+        "distinct_groups": 512,
+        "distinct_sources": 1024,
+        "group_exposure_histogram": {
+          "1": 512
+        },
+        "group_presentation_count": 512,
+        "source_exposure_histogram": {
+          "1": 1024
+        },
+        "source_presentation_count": 1024
+      }
+    },
+    "group_exposure_histogram": {
+      "3": 128,
+      "4": 384
+    },
+    "sha256": "fd8cf0b032ec07a45131358450d49b1b6c09932cad7faaf7cdc2ced5ec82696f",
+    "source_exposure_histogram": {
+      "3": 256,
+      "4": 768
+    },
+    "updates": 240
+  },
+  "schema": "independent-fresh-support-retention-corpus-review/v1",
+  "scope": "Independent actual-byte/source/reference/exclusion/schedule audit with stdlib and two pinned pure transport leaves; no corpus rendering/rewrite, model, tests, fitting, Git/Hub/resource mutations. Runner execution and actual prediction/reference barriers remain parent-owned.",
+  "semantic_limits": [
+    "Engineering construction references; no legal gold or independent statutory semantic review.",
+    "All eight templates/modal aliases/negative categories are deliberately shared with four exposed prior banks; no new syntax/general law claim.",
+    "Token-local rotateleft1/rotateleft2/reverse corruptions are split-specific within this bank but previously exposed patterns.",
+    "Declared semantic heads are last-word identity exclusions, not inferred legal semantic equivalence.",
+    "Caller rule/statement condition attachment is explicit premise, not learned output.",
+    "Metadata pins and pure structural transport validate integrity, not actual inference, learning or legal meaning.",
+    "Finite alias balancing is a renderer-design property on finite-modal templates; infinitive/gerund templates retain their named fixed alias families. Saved actual emitted-alias joint ledgers are reported exactly, with no universal four-alias coverage claim for every surface template."
+  ],
+  "split_ledgers": {
+    "final": {
+      "caller_attachments": {
+        "rule": 64,
+        "statement": 64
+      },
+      "input_rows": 128,
+      "maximum_source_UTF8_bytes": 150,
+      "maximum_source_tokens": 27,
+      "maximum_token_UTF8_bytes": 12,
+      "modal_trigger_aliases": {
+        "has a duty to": 2,
+        "has permission to": 2,
+        "is authorized to": 2,
+        "is forbidden": 5,
+        "is forbidden to": 2,
+        "is obligatory": 6,
+        "is permissible": 5,
+        "is permitted": 8,
+        "is permitted to": 2,
+        "is prohibited": 8,
+        "is prohibited from": 2,
+        "is required": 8,
+        "is required to": 2,
+        "may": 2,
+        "must": 1,
+        "must not": 1,
+        "shall": 3,
+        "shall not": 3
+      },
+      "modalities": {
+        "F": 21,
+        "O": 22,
+        "P": 21
+      },
+      "negative_categories": {
+        "extra_exception": 16,
+        "modal_deletion": 16,
+        "modal_misspelling": 16,
+        "second_rule": 16
+      },
+      "negative_rows": 64,
+      "nullable_cells": {
+        "no_object|condition": 16,
+        "no_object|no_condition": 16,
+        "object|condition": 16,
+        "object|no_condition": 16
+      },
+      "positive_rows": 64,
+      "positive_scope_transport_validations": 64,
+      "repeated_actor_object_occurrences": 10,
+      "source_groups": 64,
+      "templates": {
+        "actor_condition_modal_action_object": 8,
+        "actor_modal_action_object_condition": 8,
+        "actor_possessive_gerund_object_modal_condition": 8,
+        "condition_actor_modal_action_object": 8,
+        "condition_actor_possessive_gerund_object_modal": 8,
+        "condition_modal_actor_action_object": 8,
+        "gerund_object_agent_modal_condition": 8,
+        "modal_actor_action_object_condition": 8
+      },
+      "unicode_positive_sources": 3,
+      "unique_normalized_sources": 128
+    },
+    "selection": {
+      "caller_attachments": {
+        "rule": 64,
+        "statement": 64
+      },
+      "input_rows": 128,
+      "maximum_source_UTF8_bytes": 153,
+      "maximum_source_tokens": 27,
+      "maximum_token_UTF8_bytes": 12,
+      "modal_trigger_aliases": {
+        "has a duty to": 2,
+        "has permission to": 2,
+        "is authorized to": 2,
+        "is forbidden": 5,
+        "is forbidden to": 2,
+        "is obligatory": 6,
+        "is permissible": 5,
+        "is permitted": 8,
+        "is permitted to": 2,
+        "is prohibited": 8,
+        "is prohibited from": 2,
+        "is required": 8,
+        "is required to": 2,
+        "may": 2,
+        "must": 1,
+        "must not": 1,
+        "shall": 3,
+        "shall not": 3
+      },
+      "modalities": {
+        "F": 21,
+        "O": 22,
+        "P": 21
+      },
+      "negative_categories": {
+        "extra_exception": 16,
+        "modal_deletion": 16,
+        "modal_misspelling": 16,
+        "second_rule": 16
+      },
+      "negative_rows": 64,
+      "nullable_cells": {
+        "no_object|condition": 16,
+        "no_object|no_condition": 16,
+        "object|condition": 16,
+        "object|no_condition": 16
+      },
+      "positive_rows": 64,
+      "positive_scope_transport_validations": 64,
+      "repeated_actor_object_occurrences": 10,
+      "source_groups": 64,
+      "templates": {
+        "actor_condition_modal_action_object": 8,
+        "actor_modal_action_object_condition": 8,
+        "actor_possessive_gerund_object_modal_condition": 8,
+        "condition_actor_modal_action_object": 8,
+        "condition_actor_possessive_gerund_object_modal": 8,
+        "condition_modal_actor_action_object": 8,
+        "gerund_object_agent_modal_condition": 8,
+        "modal_actor_action_object_condition": 8
+      },
+      "unicode_positive_sources": 3,
+      "unique_normalized_sources": 128
+    },
+    "train": {
+      "caller_attachments": {
+        "rule": 512,
+        "statement": 512
+      },
+      "input_rows": 1024,
+      "maximum_source_UTF8_bytes": 181,
+      "maximum_source_tokens": 31,
+      "maximum_token_UTF8_bytes": 12,
+      "modal_trigger_aliases": {
+        "has a duty to": 16,
+        "has permission to": 16,
+        "is authorized to": 16,
+        "is forbidden": 43,
+        "is forbidden to": 16,
+        "is obligatory": 43,
+        "is permissible": 42,
+        "is permitted": 64,
+        "is permitted to": 17,
+        "is prohibited": 64,
+        "is prohibited from": 16,
+        "is required": 64,
+        "is required to": 16,
+        "may": 15,
+        "must": 15,
+        "must not": 16,
+        "shall": 17,
+        "shall not": 16
+      },
+      "modalities": {
+        "F": 171,
+        "O": 171,
+        "P": 170
+      },
+      "negative_categories": {
+        "extra_exception": 128,
+        "modal_deletion": 128,
+        "modal_misspelling": 128,
+        "second_rule": 128
+      },
+      "negative_rows": 512,
+      "nullable_cells": {
+        "no_object|condition": 128,
+        "no_object|no_condition": 128,
+        "object|condition": 128,
+        "object|no_condition": 128
+      },
+      "positive_rows": 512,
+      "positive_scope_transport_validations": 512,
+      "repeated_actor_object_occurrences": 86,
+      "source_groups": 512,
+      "templates": {
+        "actor_condition_modal_action_object": 64,
+        "actor_modal_action_object_condition": 64,
+        "actor_possessive_gerund_object_modal_condition": 64,
+        "condition_actor_modal_action_object": 64,
+        "condition_actor_possessive_gerund_object_modal": 64,
+        "condition_modal_actor_action_object": 64,
+        "gerund_object_agent_modal_condition": 64,
+        "modal_actor_action_object_condition": 64
+      },
+      "unicode_positive_sources": 32,
+      "unique_normalized_sources": 1024
+    }
+  },
+  "status": "corrected_corpus_and_schedule_review_passed_runner_review_separate"
+}

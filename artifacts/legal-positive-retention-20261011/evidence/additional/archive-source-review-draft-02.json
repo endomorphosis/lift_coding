@@ -1,0 +1,29 @@
+{
+  "schema": "support-retention-workspace-archiver-source-review/v1",
+  "passed": true,
+  "findings": [],
+  "reviewer": "root; independent of helper author",
+  "helper": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/prepare_workspace_archive.py",
+    "bytes": 33905,
+    "sha256": "7a5e58482b282e2d192c767825a772510c55929593d66398f09a5be6385338f7"
+  },
+  "manifest_sha256": "17f4b9bd7fa2bb34365c19ba10bdf6b0014f14c7a2512f96ed9729cd25418c61",
+  "guard_nonweight_payloads_accepted": 301,
+  "guard_raw_containers_denied": 9,
+  "manifest_self_separately_bound": true,
+  "metadata_only_schema_not_treated_as_rawweights": true,
+  "controls": [
+    "all311 published files fully mapped",
+    "9 raw containers Hub only;302 nonweights local",
+    "results/resource/preflight/publication/local+Hub1280 replay required",
+    "all original/release/Hub byte bindings",
+    "safe isolated bounded paths, symlink/credential/privateledger denial",
+    "supplement authentication before new archive creation",
+    "no Git/Hub/numerical calls"
+  ],
+  "helper_imported_for_data_only_copy_guard": true,
+  "archiver_prepare_or_main_executed": false,
+  "models_or_tests_or_Git_or_Hub_executed_by_reviewer": false,
+  "archive_execution_pending": true
+}

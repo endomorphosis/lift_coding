@@ -1,0 +1,752 @@
+{
+  "schema": "support-retention-focused-validation/v1",
+  "passed": true,
+  "total_successful_executions": 179,
+  "suites": {
+    "selection-tests.xml": {
+      "executions": 101,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "source_qualified_execution_ids": [
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_same_whole_count_cannot_replace_a_baseline_exact_positive"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_same_emission_count_cannot_replace_a_baseline_emitted_positive"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_negative_id_substitution_fails_even_with_same_aggregate_count"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_reject_all_has_best_negative_rank_but_is_ineligible"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_baseline_needs_nonzero_whole_and_emission_before_fit[False]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_baseline_needs_nonzero_whole_and_emission_before_fit[True]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_all_original_aggregate_floors_remain[change0-positive_whole_count_retained]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_all_original_aggregate_floors_remain[change1-positive_emission_count_retained]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_all_original_aggregate_floors_remain[change2-positive_learned_refusal_count_not_increased]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_all_original_aggregate_floors_remain[change3-negative_emission_count_not_increased]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_a_genuine_paired_gain_can_select_a_fitted_state[gain0]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_a_genuine_paired_gain_can_select_a_fitted_state[gain1]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_fewer_negatives_outrank_more_whole_exact_positives"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_learned_negative_refusal_rank_gain_is_not_declared_whole_or_negative_gain"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_ties_are_deterministic_and_the_actual_cold_zero_is_preserved"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_case_order_can_change_but_source_membership_cannot"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_group_reassignment_and_positive_negative_relabeling_are_rejected"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_malformed_complete_coverage_is_refused[missing]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_malformed_complete_coverage_is_refused[duplicate]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_malformed_complete_coverage_is_refused[mismatched_id_hash]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_malformed_complete_coverage_is_refused[duplicate_hash]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_malformed_complete_coverage_is_refused[unpaired_group]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_malformed_complete_coverage_is_refused[group_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_malformed_complete_coverage_is_refused[nonboolean]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_malformed_complete_coverage_is_refused[whole_on_negative]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_malformed_complete_coverage_is_refused[whole_on_refusal]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_malformed_complete_coverage_is_refused[emission_and_refusal]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_malformed_complete_coverage_is_refused[target_field]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_malformed_complete_coverage_is_refused[unknown_panel_field]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_malformed_complete_coverage_is_refused[unknown_summary_field]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_malformed_complete_coverage_is_refused[source_group_ledger]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_malformed_complete_coverage_is_refused[id_set_substitution]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_malformed_complete_coverage_is_refused[id_set_duplicate]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_malformed_complete_coverage_is_refused[count_drift]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_malformed_complete_coverage_is_refused[profile]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[True-case_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[True-source_parent_groups]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[True-positive_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[True-negative_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[True-positive_exact_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[True-positive_emitted_proposal_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[True-positive_learned_refusal_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[True-positive_structural_block_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[True-negative_emitted_proposal_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[True-negative_learned_refusal_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[True-negative_incidental_block_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[1.0-case_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[1.0-source_parent_groups]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[1.0-positive_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[1.0-negative_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[1.0-positive_exact_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[1.0-positive_emitted_proposal_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[1.0-positive_learned_refusal_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[1.0-positive_structural_block_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[1.0-negative_emitted_proposal_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[1.0-negative_learned_refusal_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[1.0-negative_incidental_block_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[-1-case_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[-1-source_parent_groups]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[-1-positive_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[-1-negative_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[-1-positive_exact_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[-1-positive_emitted_proposal_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[-1-positive_learned_refusal_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[-1-positive_structural_block_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[-1-negative_emitted_proposal_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[-1-negative_learned_refusal_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[-1-negative_incidental_block_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[1-case_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[1-source_parent_groups]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[1-positive_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[1-negative_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[1-positive_exact_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[1-positive_emitted_proposal_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[1-positive_learned_refusal_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[1-positive_structural_block_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[1-negative_emitted_proposal_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[1-negative_learned_refusal_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[1-negative_incidental_block_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[None-case_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[None-source_parent_groups]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[None-positive_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[None-negative_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[None-positive_exact_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[None-positive_emitted_proposal_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[None-positive_learned_refusal_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[None-positive_structural_block_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[None-negative_emitted_proposal_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[None-negative_learned_refusal_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_every_counter_requires_an_ordinary_nonnegative_integer[None-negative_incidental_block_count]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_only_the_three_actual_checkpoint_steps_are_ranked[-1]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_only_the_three_actual_checkpoint_steps_are_ranked[True]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_only_the_three_actual_checkpoint_steps_are_ranked[0.0]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_only_the_three_actual_checkpoint_steps_are_ranked[1]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_only_the_three_actual_checkpoint_steps_are_ranked[119]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_only_the_three_actual_checkpoint_steps_are_ranked[121]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_only_the_three_actual_checkpoint_steps_are_ranked[241]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_only_the_three_actual_checkpoint_steps_are_ranked[10000001]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_cold_baseline_and_strictly_increasing_actual_checkpoints_are_required"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_configuration_is_closed_and_requires_one_positive_negative_pair_per_group"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_selection",
+          "name": "test_selector_imports_no_numeric_models_in_an_isolated_process"
+        }
+      ],
+      "xml": {
+        "bytes": 18044,
+        "sha256": "151b5bed4c585946bd6eb5811e8db824229a178765485448f9d7c69a3c11696e"
+      }
+    },
+    "model-tests.xml": {
+      "executions": 78,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "source_qualified_execution_ids": [
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_closed_objective_fixed_pooling_and_explicit_train_attachment"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_cold_both_objectives_match_parent_and_original_local_gate"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_lambda_zero_exact_old_bce_step_and_full_optimizer_parity"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_margin_hinge_clamping_mask_reduction_and_gradient"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_margin_hinge_rejects_untrusted_teacher_shapes_and_values[parent_grad]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_margin_hinge_rejects_untrusted_teacher_shapes_and_values[parent_nan]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_margin_hinge_rejects_untrusted_teacher_shapes_and_values[candidate_nan]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_margin_hinge_rejects_untrusted_teacher_shapes_and_values[shape]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_margin_hinge_rejects_untrusted_teacher_shapes_and_values[mask_type]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_actual_parent_emission_mask_uses_supported_and_structural_transport_with_float32_edge"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_train_updates_preserve_entire_parent_and_frozen_structural_outputs"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_nonempty_online_retention_train_changes_gradients_and_exactly_resumes"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_exact_full_adam_resume_next_step_modes_and_rng[bce]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_exact_full_adam_resume_next_step_modes_and_rng[positive_margin]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_source_only_prediction_has_no_teacher_or_train_label_access"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_source_digest_and_caller_attachment_precede_model"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_strict_checkpoint_rejects_recipe_relabel_full_adam_and_seal_mutation[extra]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_strict_checkpoint_rejects_recipe_relabel_full_adam_and_seal_mutation[seal]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_strict_checkpoint_rejects_recipe_relabel_full_adam_and_seal_mutation[objective]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_strict_checkpoint_rejects_recipe_relabel_full_adam_and_seal_mutation[lambda]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_strict_checkpoint_rejects_recipe_relabel_full_adam_and_seal_mutation[pure_bce_profile]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_strict_checkpoint_rejects_recipe_relabel_full_adam_and_seal_mutation[parent_sha]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_strict_checkpoint_rejects_recipe_relabel_full_adam_and_seal_mutation[parent_bytes]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_strict_checkpoint_rejects_recipe_relabel_full_adam_and_seal_mutation[old_adam]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_strict_checkpoint_rejects_recipe_relabel_full_adam_and_seal_mutation[gate_shape]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_strict_checkpoint_rejects_recipe_relabel_full_adam_and_seal_mutation[adam_step]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_strict_checkpoint_rejects_recipe_relabel_full_adam_and_seal_mutation[missing_state]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_strict_checkpoint_rejects_recipe_relabel_full_adam_and_seal_mutation[variance]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_strict_checkpoint_rejects_recipe_relabel_full_adam_and_seal_mutation[steps_bool]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_strict_checkpoint_rejects_recipe_relabel_full_adam_and_seal_mutation[nonfinite]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_complete_parent_and_objective_snapshot_refuses_mutation[action_weight]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_complete_parent_and_objective_snapshot_refuses_mutation[class_weight]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_complete_parent_and_objective_snapshot_refuses_mutation[gradflag]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_complete_parent_and_objective_snapshot_refuses_mutation[mode]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_complete_parent_and_objective_snapshot_refuses_mutation[config]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_complete_parent_and_objective_snapshot_refuses_mutation[nestedartifact]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_complete_parent_and_objective_snapshot_refuses_mutation[rawprovenance]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_complete_parent_and_objective_snapshot_refuses_mutation[objective]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_retention_gate",
+          "name": "test_cold_zero_cannot_relabel_trained_or_changed_initial_gate"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_zero_gate_matches_whole_parent_function_and_full_output_custody[global]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_zero_gate_matches_whole_parent_function_and_full_output_custody[predicted_trigger]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_matched_arm_initialization_and_only_pooling_differs"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_orthography_features_match_original_projection_input_and_pad_to_finite_zero"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_does_not_invoke_old_parent_forward_assertion_or_saver[global]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_does_not_invoke_old_parent_forward_assertion_or_saver[predicted_trigger]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_support_updates_leave_action_class_all_spans_and_old_moments_frozen[global]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_support_updates_leave_action_class_all_spans_and_old_moments_frozen[predicted_trigger]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_exact_resume_next_update_full_Adam_parent_bytes_modes_and_rng[global]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_exact_resume_next_update_full_Adam_parent_bytes_modes_and_rng[predicted_trigger]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_padding_invariance_after_training[global]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_padding_invariance_after_training[predicted_trigger]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_support_only_labels_no_parser_targets_at_fit_or_inference"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_wrong_source_digest_and_missing_caller_precede_model"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_prediction_transport_nullable_caller_and_zero_authority"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_invalid_predictions_block_without_repair_and_restore_mode[reversed]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_invalid_predictions_block_without_repair_and_restore_mode[shape]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_invalid_predictions_block_without_repair_and_restore_mode[nonfinite]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_invalid_predictions_block_without_repair_and_restore_mode[coverage]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_strict_checkpoint_rejects_tampering_full_Adam_and_progress[extra]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_strict_checkpoint_rejects_tampering_full_Adam_and_progress[seal]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_strict_checkpoint_rejects_tampering_full_Adam_and_progress[parent_sha]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_strict_checkpoint_rejects_tampering_full_Adam_and_progress[parent_bytes]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_strict_checkpoint_rejects_tampering_full_Adam_and_progress[gate_shape]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_strict_checkpoint_rejects_tampering_full_Adam_and_progress[adam_step]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_strict_checkpoint_rejects_tampering_full_Adam_and_progress[missing_state]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_strict_checkpoint_rejects_tampering_full_Adam_and_progress[variance]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_strict_checkpoint_rejects_tampering_full_Adam_and_progress[steps_bool]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_strict_checkpoint_rejects_tampering_full_Adam_and_progress[recipe]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_strict_checkpoint_rejects_tampering_full_Adam_and_progress[nonfinite]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_whole_parent_snapshot_rejects_mutation[action_weight]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_whole_parent_snapshot_rejects_mutation[class_weight]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_whole_parent_snapshot_rejects_mutation[gradflag]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_whole_parent_snapshot_rejects_mutation[mode]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_whole_parent_snapshot_rejects_mutation[config]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_whole_parent_snapshot_rejects_mutation[nestedartifact]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_whole_parent_snapshot_rejects_mutation[rawprovenance]"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_wrong_parent_digest_typed_owner_and_source_bounds"
+        },
+        {
+          "classname": "tests.unit.logic.test_legal_scope_support_gate",
+          "name": "test_zero_progress_cannot_relabel_trained_or_tampered_gate_as_cold"
+        }
+      ],
+      "xml": {
+        "bytes": 13054,
+        "sha256": "6e1e0c5750c8180dccfe8d53d587546077971cc900f4bb2e69c1aafe178eaaf3"
+      }
+    }
+  },
+  "threads": 2,
+  "CUDA_visible_devices": "",
+  "scientific_trial_updates_executed": 0,
+  "test_only_fixture_updates_distinct_from_experiment": true,
+  "guardian_historical_tests_rerun": false
+}

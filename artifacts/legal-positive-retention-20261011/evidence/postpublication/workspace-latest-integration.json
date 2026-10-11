@@ -1,0 +1,17 @@
+{
+  "schema": "support-retention-final-workspace-integration/v1",
+  "passed": true,
+  "old": "c976b4f8a725f37207fc0f0119fbb60f0b552efd",
+  "new": "33a27b1a6196c6b50849a59e8939698803c515d8",
+  "changed_paths": [
+    "docs/agent-supervisor-live-census-20261011.md",
+    "external/ipfs_accelerate"
+  ],
+  "retained_current_supervisor_and_accelerate_progress": true,
+  "report_pins": {
+    "docs/agent-supervisor-live-census-20261011.md": {
+      "bytes": 5485,
+      "sha256": "9e38c3ed381a2004081b11cf090e9e89f482af5957345f759121113148a0eca9"
+    }
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "schema": "positive-retention-workspace-archive-helper-build/v1",
+  "status": "prepared_frozen_not_executed",
+  "helper": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/prepare_workspace_archive.py",
+    "bytes": 33413,
+    "sha256": "e2282f440a49d364a8d3591443e8ce1f81af87ba723a4c7f39a9f60cbaabf7f8"
+  },
+  "static_validation": {
+    "AST_parse_passed": true,
+    "stdlib_imports_only": true,
+    "helper_imported": false,
+    "helper_executed": false,
+    "models_imported": false,
+    "model_forwards": 0,
+    "tests_executed": 0,
+    "optimizer_updates": 0,
+    "network_operations": 0,
+    "Git_operations": 0,
+    "resource_leases": 0,
+    "existing_source_runner_plan_corpus_edits": 0,
+    "archive_created": false,
+    "scope": "AST and bounded explicit artifact metadata reads only. Root independently reviews and executes the helper after publication and exact Hub replay."
+  },
+  "corrected_release_observed": {
+    "path": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release",
+    "manifest": {
+      "bytes": 110352,
+      "sha256": "17f4b9bd7fa2bb34365c19ba10bdf6b0014f14c7a2512f96ed9729cd25418c61"
+    },
+    "total_published_files_including_manifest": 311,
+    "total_published_bytes": 109598337,
+    "local_published_files": 302,
+    "local_published_bytes": 75415849,
+    "Hub_only_raw_checkpoint_containers": 9,
+    "trial_original_states": 6,
+    "trial_selected_aliases": 2,
+    "frozen_historical_parent_containers": 1,
+    "all_counts_recomputed_from_current_manifest": true,
+    "former_309_file_manifest_not_used_as_publication_target": true,
+    "correction_evidence_retained_by_corrected_release": [
+      "evidence/extra/prepare_release-draft-01.py",
+      "evidence/extra/publication-draft-review.json",
+      "evidence/extra/release-helper-build-draft-01.json"
+    ]
+  },
+  "current_release_helpers": {
+    "prepare_release.py": {
+      "bytes": 35670,
+      "sha256": "86de743491c4f9be39dd961d4b0658b3f9a934320a1c9eb752c79bd34a4bac65"
+    },
+    "publish_release.py": {
+      "bytes": 13174,
+      "sha256": "74a56756d0dfa48a000a972e645b4970cb2ef05b8dda27a6e4ed3f4596be8424"
+    },
+    "release-helper-build.json": {
+      "bytes": 20932,
+      "sha256": "86878f6b83562c651bff5f34065f2d21d2a258b6a78cf949926ca9c7e7019f8a"
+    }
+  },
+  "archive_contract": {
+    "destination": "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/workspace/artifacts/legal-positive-retention-20261011",
+    "fresh_destination_required": true,
+    "manifest_schema": "positive-retention-workspace-retention-manifest/v1",
+    "every_published_file_mapped": true,
+    "local_mapping": "Exact bytes and SHA-256 with local_path; every nonweight released artifact is copied. Release README is retained as published-README.md; archive README is generated from actual negative outcomes.",
+    "Hub_mapping": "Exact bytes and SHA-256 with immutable /resolve/<revision>/ URL for all published files; only the six original trial states, two selected aliases and inputs/parent-checkpoint.json remain Hub-only.",
+    "no_raw_weights_in_root_Git": true,
+    "manifest_self_excluded_from_local_files": true,
+    "all_nonweight_release_closure_retained": [
+      "Standalone new and old numerical owners, source import closure, parser and tests",
+      "Final and draft objective/corpus history",
+      "Saved validation XML and independent reviews",
+      "Full TRAIN, selection, five-cohort selected and parent panels",
+      "Losses, checkpoint roles, case-level decisions, summaries and durable barriers",
+      "Old source inputs/references and archived parent panels",
+      "Sampled guardian observations, exit and RSS scope receipts",
+      "Release builders, publisher, replay helper and correction history"
+    ],
+    "postpublication_supplements": [
+      "Exact local selected replay and replay helper/build/review",
+      "Actual result/resource review and trial artifact audit",
+      "Corrected release-preparation and passing publication preflight",
+      "Upload parent/proposal/commit, complete immutable readback and all-eight download receipts",
+      "Exact immutable Hub selected replay and passing independent publication review",
+      "Incoming progress/main integration, resource phase correction and preservation projection",
+      "Archiver source and this frozen build note",
+      "Any explicit --evidence paths, including later source-merge/report receipts"
+    ],
+    "private_cross_agent_resource_bodies": "Never copied. Public exact artifact pins and preservation projection remain retained. Both declared release files and supplementary files are checked against protected private full-ledger identities.",
+    "manual_source_staging_required_by_helper": false,
+    "helper_Git_staging_or_commits": false,
+    "helper_Hub_download_upload_or_publication": false
+  },
+  "runtime_admission_requires_actual_receipts": {
+    "passing_result_review_bound_to_completed_results": true,
+    "passing_resource_review_bound_to_guardian_exit_or_RSS": true,
+    "passing_release_review_bound_to_current_manifest": true,
+    "passing_publication_review_bound_to_exact_readback_or_revision": true,
+    "all_published_311_file_identities_verified_at_immutable_revision": true,
+    "all_eight_trial_checkpoint_downloads_exact": true,
+    "local_selected_replay_complete_outputs_exact": 1280,
+    "immutable_Hub_selected_replay_complete_outputs_exact": 1280,
+    "replay_full_Adam_progress_parent_tensors_modes_flags_RNG_preserved": true,
+    "replay_target_reference_files_opened": false,
+    "both_selected_actual_cold_update": 0,
+    "selected_fitted_gain": false,
+    "default_or_ModelManager_promotion": false,
+    "uncertain_upload_error_refused": true,
+    "passing_reviews_not_inferred_from_helper_preparation": true
+  },
+  "example_command_argv_after_root_admission": [
+    "python",
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/prepare_workspace_archive.py",
+    "--workspace-root",
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/workspace",
+    "--release",
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/release",
+    "--results-review",
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/results-resource-review.json",
+    "--resource-review",
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/results-resource-review.json",
+    "--release-review",
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/publication-preflight-review.json",
+    "--publication-review",
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-publication-review.json",
+    "--hub-replay",
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/hub-checkpoint-replay.json",
+    "--receipt",
+    "/home/barberb/lift_coding/artifacts/legal-decoder-progress-20261011-01/workspace-archive-build.json"
+  ],
+  "optional_cli": {
+    "--artifacts-root": "Defaults to the helper directory; controls required supplementary receipt lookup.",
+    "--local-replay": "Defaults to selected-checkpoint-replay.json in the helper directory.",
+    "--hub-commit": "Defaults to hub-upload-commit.json in the helper directory.",
+    "--hub-readback": "Defaults to hub-readback-verification.json in the helper directory.",
+    "--hub-downloads": "Defaults to hub-all-checkpoint-downloads.json in the helper directory.",
+    "--evidence": "Repeat explicit ordinary existing file paths for later report/source-contribution/independent-review receipts. Destinations use evidence/additional/<basename>; duplicates are refused.",
+    "--receipt": "Optional fresh external build receipt. It must be outside the archive and must not already exist."
+  },
+  "byte_and_path_guards": [
+    "All release paths are bounded ordinary relative paths; symlinks, traversal, wildcard/glob filenames and undeclared tree entries are refused.",
+    "Only directories derived from release manifest paths are listed; no recursive worktree traversal occurs.",
+    "Release bytes, original-to-release mapping coverage, Hub identities and local copies are checked exactly.",
+    "All nonweight bytes are checked before creating the fresh archive and again while copied; source drift is refused.",
+    "Exclusive fsynced writes avoid overwriting existing archive content.",
+    "Known credential filenames, binary weight suffixes, token/private-key patterns and embedded raw checkpoint containers are refused.",
+    "No promotion, semantic admission, native runtime qualification or latent-conditioning claim is permitted."
+  ],
+  "truthful_readme": {
+    "outcome": "Both actual cold update 0 selections; no selected fitted improvement or default replacement.",
+    "fresh_final_parent_and_both_arms": "36/64 whole exact positives; 8/64 unsupported emissions.",
+    "authority": "Engineered authored source occurrence proposals; all five admission masks zero, formal_output null.",
+    "genuine_8D_384D_768D_latent_decoding_and_conditioning": "open",
+    "reviewed_US_Code_semantic_targets_and_coverage": "open",
+    "native_logic_family_lowering_and_actual_Lake_qualification": "open",
+    "prior_native384_lineage": "Retained separately; this trial does not rerun or promote those completed recipes.",
+    "resource_claim": "Sampled group RSS only; no absolute peak, continuous coverage or kernel hard-cap assertion."
+  },
+  "limits": [
+    "Prepared helper and AST inspection do not establish runtime archive completion or approval. Root must independently review and run it only after final publication and Hub replay receipts exist.",
+    "Narrow reconcile-agent receipt/path cross-check found no obvious schema mismatch; it is not a full independent archiver approval.",
+    "Known-pattern secret checks do not prove absence of every possible unknown secret; the declared release and supplements remain subject to independent review.",
+    "Historical absolute paths are provenance. Manifest mappings support checked path rebinding but do not claim a generic portable training runtime.",
+    "If a later copy or drift check fails, the helper leaves the newly owned partial archive for explicit inspection; it never deletes or rewrites existing workspace artifacts.",
+    "Later source merge/report receipts are retained only if supplied explicitly before archive creation. The helper does not stage or commit source, archive or reports."
+  ]
+}
