@@ -1,0 +1,79 @@
+{
+  "blockers": [],
+  "bytes": 2675526,
+  "checkpoint_sha256": "26ccc7cf8420e0ed6cbbe22603e09be0e3572fb32a1e489e877fc5081f506e03",
+  "checks": {
+    "all_72_source_modules_reviewed_as_authored_direct_calls_without_literals": true,
+    "checkpoint_manifest_matches_corpus": true,
+    "corpus_canonical_digest_verified": true,
+    "cross_split_source_clone_group_disjoint": true,
+    "exact_manifest_inventory_and_file_hashes": true,
+    "fit_48_and_holdout_24_embedding_source_order_bound": true,
+    "four_lake_receipts_join_matching_candidate_sources_and_lean_input_hashes": true,
+    "known_credential_material_pattern_hits": 0,
+    "known_home_path_pattern_hits": 0,
+    "lake_export_only_normalizes_executable_path": true,
+    "no_candidate_replacements_or_mismatch_projection_refs": true,
+    "release_files_regular_and_no_symlinks": true,
+    "source_candidate_match_flags_equal_original_neural_candidate_comparison": true
+  },
+  "code": {
+    "implementation_commit": "36ed9376a35373b20554198bf13aaa3627338ecb",
+    "implementation_is_ancestor": true,
+    "profile_source_sha256_verified": "54a5a95769f7ee205226daf03b48f4698acb4c79dbe4c9f667e5a875f77e5855",
+    "published_revision": "ae70f1e1401217f18e964df11a4b908198d4ad93"
+  },
+  "evidence": {
+    "local-release-replay.log": "080791fae0e3101f1b00f468feabd1a7360b82d9702fbf234d97e02e764b40bf",
+    "prepare_release.py": "f3e023edf9093f0820a8b393b59445cf32477cd3a0e4341251d2c7291e2d65bf",
+    "release/README.md": "063c3c2ce7e6c874d1ce84631b1ba4d069efb4ef79a459dc0412097f57cffd2c",
+    "release/lake-public.json": "6dc203de459d55d1c2da134c9688513f0cf7155e955b128e5df1193a089e4ebb",
+    "release/replay.py": "2fe9f172bc77d18a05259256c0822386299cefc374258c7b86dfb73a74a04925",
+    "release/summary.json": "285faaa427574442ee44c89354dbdd0edd05d7aad285b966f60c9a2a484a94ed",
+    "run_experiment.py": "0ea2cf23408cb4f703b94bccec61abf9b4bd327094ad4c56abf588946ab690fe",
+    "training-exit.json": "6a69760dc3d2ad83526230f0686b0f80f76b8acc4b90a307c75d158b0aad3971"
+  },
+  "files": 17,
+  "manifest_sha256": "65980daba116f496019a8004a5980cf365761510dd143879106bd66775be6574",
+  "measured_results": {
+    "cyclic_shuffle_source_aligned": 17,
+    "holdout_rows": 24,
+    "lake_compiled": 4,
+    "normal_source_aligned": 17,
+    "normal_valid_candidates": 24,
+    "post_hoc_opposite_callee_source_aligned": 1,
+    "source_obligations_discharged": 0,
+    "zero_head_source_aligned": 6,
+    "zero_residual_projection_source_aligned": 8
+  },
+  "prefix": "releases/20261011-numpy-unary-selection-384-development-v1",
+  "proof_authority": false,
+  "provenance_scope": {
+    "authorship": "caller_declared_independently_authored; concrete simple source strings reviewed",
+    "fit_split": "24 arity2 train and24 arity3 validation;24 arity4 holdout embedded after checkpoint freeze in reviewed runner",
+    "hidden_benchmark_or_private_repository_content_read_by_reviewer": false,
+    "inherited_weight_new_license_grant": false,
+    "legal_parent_sha256": "969461ab82a2806e54ad33ba242a1eb62d032fa1b3cfc808b77c66dcc965aa62",
+    "lexical_styles_reused": true,
+    "license_conclusion": "Existing inherited-weight provenance/terms preserved; this review makes no new ownership or license grant.",
+    "profile_motivated_by_prior_benchmark_gap": true,
+    "same_parent_in_existing_public_development_release": true,
+    "semantic_groups_per_split": 4
+  },
+  "publication_performed": false,
+  "registered_default_changed": false,
+  "repository": "Publicus/security-ir-autoencoder",
+  "review_mode": "read_only_bundle_code_metadata_and_authored_source_inspection; no training_or_inference_or_upload",
+  "reviewed_at_utc": "2026-10-11T07:11:21.611148+00:00",
+  "schema": "numpy-selection-release-independent-review@1",
+  "scope_limits": [
+    "Narrow canonical unary NumPy CALL and parameter-position reconstruction, not whole-function generalization.",
+    "Cyclic shuffle is a weak control; opposite-callee mismatch is explicitly post hoc and did not select/refit checkpoint.",
+    "Lake compilation checks deterministic projected definitions; no Python/NumPy proof or discharged obligations.",
+    "Saved-vector replay evidence was retained by root; reviewer did not rerun model inference.",
+    "No registered default, supervisor integration, benchmark score, Hub upload or remote availability is established by this review.",
+    "Pattern screening and concrete source inspection are not a universal secret detector or external authorship attestation."
+  ],
+  "status": "no_blocker_for_additive_public_development_release",
+  "supervisor_profile_enabled": false
+}

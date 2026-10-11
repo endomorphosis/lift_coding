@@ -1,0 +1,29 @@
+{
+  "schema": "additive-hub-release-metadata-check@1",
+  "repository": "Publicus/security-ir-autoencoder",
+  "before": "6819cc3976f82da575dda04e517115693af48fbe",
+  "after": "38666f43e998d55b5f4259e354286f5929027ba1",
+  "existing_files_unchanged": 68,
+  "changed_existing_files": [],
+  "removed_files": [],
+  "added_files": [
+    "releases/20261011-numpy-unary-selection-384-development-v1/README.md",
+    "releases/20261011-numpy-unary-selection-384-development-v1/authored-inputs.json",
+    "releases/20261011-numpy-unary-selection-384-development-v1/authored-rows.json",
+    "releases/20261011-numpy-unary-selection-384-development-v1/checkpoint.json",
+    "releases/20261011-numpy-unary-selection-384-development-v1/corpus.json",
+    "releases/20261011-numpy-unary-selection-384-development-v1/fit-embeddings.json",
+    "releases/20261011-numpy-unary-selection-384-development-v1/holdout-embeddings.json",
+    "releases/20261011-numpy-unary-selection-384-development-v1/lake-public.json",
+    "releases/20261011-numpy-unary-selection-384-development-v1/manifest.json",
+    "releases/20261011-numpy-unary-selection-384-development-v1/normal-evaluation.json",
+    "releases/20261011-numpy-unary-selection-384-development-v1/opposite-callee-diagnostic.json",
+    "releases/20261011-numpy-unary-selection-384-development-v1/replay.py",
+    "releases/20261011-numpy-unary-selection-384-development-v1/shuffle_embeddings-evaluation.json",
+    "releases/20261011-numpy-unary-selection-384-development-v1/summary.json",
+    "releases/20261011-numpy-unary-selection-384-development-v1/training-metrics.json",
+    "releases/20261011-numpy-unary-selection-384-development-v1/zero_head-evaluation.json",
+    "releases/20261011-numpy-unary-selection-384-development-v1/zero_projection-evaluation.json"
+  ],
+  "only_new_prefix_changed": true
+}

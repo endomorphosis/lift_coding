@@ -1,0 +1,87 @@
+{
+  "schema": "supervisor-numerical-development-publication@1",
+  "datasets_revision": "cdae06198a229760ca139d48f9e311e80d0df8c6",
+  "supervisor_revision": "088dc16b9f3e6553d6de0a5e80ffbca865e32374",
+  "hub_repository": "Publicus/security-ir-autoencoder",
+  "hub_revision": "38666f43e998d55b5f4259e354286f5929027ba1",
+  "hub_prefix": "releases/20261011-numpy-unary-selection-384-development-v1",
+  "checkpoint_sha256": "26ccc7cf8420e0ed6cbbe22603e09be0e3572fb32a1e489e877fc5081f506e03",
+  "manifest_sha256": "65980daba116f496019a8004a5980cf365761510dd143879106bd66775be6574",
+  "publication_complete": true,
+  "fresh_download_replay_passed": true,
+  "registered_default_changed": false,
+  "supervisor_profile_enabled": false,
+  "holdout_scope": "24 authored arity4 direct argmax/min CALL fragments, after arity2 train and arity3 validation; lexical variants reused; not whole-function or benchmark reconstruction",
+  "holdout_scores": {
+    "normal": 17,
+    "zero_head": 6,
+    "zero_projection": 8,
+    "shuffle_embeddings": 17
+  },
+  "post_hoc_opposite_callee_diagnostic": {
+    "matched": 1,
+    "total": 24,
+    "used_for_training_or_selection": false
+  },
+  "tests": {
+    "datasets_profile_and_shared": 84,
+    "supervisor_isolated": 15,
+    "supervisor_real_existing_checkpoint": 2,
+    "skipped": 0
+  },
+  "lake": {
+    "definition_modules_passed": 4,
+    "source_obligations_discharged": 0,
+    "numpy_correctness_proven": false
+  },
+  "supervisor_change": "Bounded planner candidate summary prioritizes guarded source-aligned candidates; exact candidate IR preserved",
+  "benchmark": {
+    "new_score": null,
+    "new_token_efficiency": null,
+    "blocker": "Fresh isolated Grok metadata probe authentication_refused; zero text generation calls",
+    "probe_sha256": "446edb5df8251edcf79d3769a6b62c0ccd32130699b11a7124d07411cc61afb1"
+  },
+  "ci": {
+    "local_documentation_gates": "passed",
+    "github_full_ci_qualified": false,
+    "supervisor_documentation_run": 38120506928,
+    "supervisor_annotation": "The job was not started because your account is locked due to a billing issue.",
+    "datasets_docker_workflow_run": 38120583975,
+    "datasets_docker_workflow_status": "failure; gh reports likely workflow file issue; not investigated in this change"
+  },
+  "remaining_gaps": [
+    "Explicit opt-in supervisor adapter/registration for the separate numerical envelope",
+    "Task-bound worker candidate IR and numerical-link propagation/currentness contract",
+    "Learned nested calls, indexing, tuple/eigenpair and assertion grammar",
+    "Source unit preselection remains first128",
+    "Broader grouped holdouts and actual source-semantic proofs"
+  ],
+  "proof_authority": false,
+  "evidence": [
+    {
+      "path": "cold-replay.json",
+      "sha256": "e9c8bc4f76920ad6b6652d2e300271766e561e0374a145236a421e957d2f04e0",
+      "bytes": 468
+    },
+    {
+      "path": "hub-additive-check.json",
+      "sha256": "e59fd676eaf760711aed0f25e51be4fcef39fde80be4a57ba38b75202c26df26",
+      "bytes": 1834
+    },
+    {
+      "path": "profile-tests.json",
+      "sha256": "66509188c8baf98433db552290e1b33b836ff6bdee3808b4ab027451aa2be54c",
+      "bytes": 3351
+    },
+    {
+      "path": "release-manifest.json",
+      "sha256": "65980daba116f496019a8004a5980cf365761510dd143879106bd66775be6574",
+      "bytes": 7834
+    },
+    {
+      "path": "release-provenance-review.json",
+      "sha256": "032d78186669eb76293a6cf7da6ec86b1a8f82edbe15c63a18844172bf1aa077",
+      "bytes": 4604
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "checkpoint_schema": "numerical-selection-384-checkpoint@1",
+  "checkpoint_sha256": "26ccc7cf8420e0ed6cbbe22603e09be0e3572fb32a1e489e877fc5081f506e03",
+  "code_repository": "https://github.com/endomorphosis/ipfs_datasets_py",
+  "code_revision": "ae70f1e1401217f18e964df11a4b908198d4ad93",
+  "data_provenance": {
+    "benchmark_hidden_tests_used": false,
+    "benchmark_source_used": false,
+    "independently_authored_modules": 72,
+    "lexical_styles_reused_across_splits": true,
+    "private_repository_source_used": false,
+    "profile_motivated_by_previously_observed_benchmark_gap": true,
+    "selection_used_holdout": false,
+    "semantic_groups_per_split": 4,
+    "split": "24 arity-2 train; 24 arity-3 validation; 24 arity-4 holdout"
+  },
+  "files": [
+    {
+      "bytes": 4919,
+      "path": "README.md",
+      "sha256": "063c3c2ce7e6c874d1ce84631b1ba4d069efb4ef79a459dc0412097f57cffd2c"
+    },
+    {
+      "bytes": 21798,
+      "path": "authored-inputs.json",
+      "sha256": "fbccbb31adf2d2233caf556f89cb5fff6816c3f29685b9334d2a6fefb5862ab4"
+    },
+    {
+      "bytes": 19880,
+      "path": "authored-rows.json",
+      "sha256": "413d81c458589f801bb97ed64121d18d46d1d7e09c39e49ce0402e21ee3ad59c"
+    },
+    {
+      "bytes": 281905,
+      "path": "checkpoint.json",
+      "sha256": "26ccc7cf8420e0ed6cbbe22603e09be0e3572fb32a1e489e877fc5081f506e03"
+    },
+    {
+      "bytes": 334974,
+      "path": "corpus.json",
+      "sha256": "edb5927abc51d5c1db1af8e8018d59d7bcd066869425e0f4af9876288b3ea3d4"
+    },
+    {
+      "bytes": 410784,
+      "path": "fit-embeddings.json",
+      "sha256": "802e6513358df7a28a8ae99277b7e8c62d1712ef2e5396d684f09f3b2617a795"
+    },
+    {
+      "bytes": 205995,
+      "path": "holdout-embeddings.json",
+      "sha256": "8a7792f1f64c4934b53ca14b8a15fe21f528300a643df6e68112a7880fb4ba0a"
+    },
+    {
+      "bytes": 5854,
+      "path": "lake-public.json",
+      "sha256": "6dc203de459d55d1c2da134c9688513f0cf7155e955b128e5df1193a089e4ebb"
+    },
+    {
+      "bytes": 285866,
+      "path": "normal-evaluation.json",
+      "sha256": "4300ce94e4ed02061da0926a4c5619b5249c15e644f3ca2b062e7d81dde466b9"
+    },
+    {
+      "bytes": 260363,
+      "path": "opposite-callee-diagnostic.json",
+      "sha256": "2b9056129e1fd08356092dd0c12b41181b2d19631f8c1072325e33dc888ad327"
+    },
+    {
+      "bytes": 1922,
+      "path": "replay.py",
+      "sha256": "2fe9f172bc77d18a05259256c0822386299cefc374258c7b86dfb73a74a04925"
+    },
+    {
+      "bytes": 286266,
+      "path": "shuffle_embeddings-evaluation.json",
+      "sha256": "506138c8a84e9991c1fd46154f4772b3aa8dc8fb0bd10aa5fc6edf20d060cae9"
+    },
+    {
+      "bytes": 8044,
+      "path": "summary.json",
+      "sha256": "285faaa427574442ee44c89354dbdd0edd05d7aad285b966f60c9a2a484a94ed"
+    },
+    {
+      "bytes": 2621,
+      "path": "training-metrics.json",
+      "sha256": "bd6291af93b6678d73c6507d19c08a4ee3fd16020b06bc630ecfd0f11093af6b"
+    },
+    {
+      "bytes": 264642,
+      "path": "zero_head-evaluation.json",
+      "sha256": "33a102e40c2ac68a1c9693a96192f7c181fd9879a81dc79c197ca12208f992c7"
+    },
+    {
+      "bytes": 271859,
+      "path": "zero_projection-evaluation.json",
+      "sha256": "f7ee46dc7ffcb1bf7453c877ee71974d2bf51e498a238e730bc16d3b8a5ccbae"
+    }
+  ],
+  "implementation_commit": "36ed9376a35373b20554198bf13aaa3627338ecb",
+  "legal_parent": {
+    "binding": {
+      "core_sha256": "bec522e21c4efcfa763b965f655e86cc5afca80c8e1449be7d9b8fac144c646c",
+      "dimension": 384,
+      "domain": "legal_ir",
+      "lineage_id": "current_legal_v2",
+      "runtime_profile": "modal-latent-joint-formula/v1"
+    },
+    "existing_security_release_checkpoint_sha256": "855b3d6d85bb59e165930785bd49711df0fcc8fbc8e11329e2f4b65125520441",
+    "existing_security_release_with_same_parent_revision": "f690dc079ff0d87f96d9e779f25b82b182ce8383",
+    "new_license_grant": false,
+    "sha256": "969461ab82a2806e54ad33ba242a1eb62d032fa1b3cfc808b77c66dcc965aa62",
+    "source_modified": false,
+    "transfer": "Frozen residual projection only; new ridge head fitted on authored Python"
+  },
+  "prefix": "releases/20261011-numpy-unary-selection-384-development-v1",
+  "producer": {
+    "extraction": {
+      "security_formalization_evaluation.py": "ced8f0caadf26e81d3079305d93c8309d9fe7751a280709553d6017fc53104a9",
+      "security_formula_corpus.py": "3f7f9443be1cf122d019f5936f0650b13da185686cbbc205d98e61098f9fca1c",
+      "source_function_units.py": "01dd6ecf58e9e5956a4b1b6a3cdff8835bcd1db1c469c1361d24b2088470d86e",
+      "source_screening.py": "f53a59b989274d7944628017a3baae2ebd66dc432855a7aa92033774d7c41eab"
+    },
+    "links": {
+      "numerical_logic.py": "1cc68c30efd6719cc3baad17e196c9f9fc43e3f6161604a75e8029c8e53ed822",
+      "numerical_source.py": "966243b52d57033ee2545142792688af6d2b32c8f6eac6f9f6efd157f03bd3f5",
+      "source_function_units.py": "01dd6ecf58e9e5956a4b1b6a3cdff8835bcd1db1c469c1361d24b2088470d86e",
+      "source_program_binding_384.py": "3bf9f897b0260ac5dd8a4ea671cdce3bcbf7f7201b7dcdf23b82b1890b513d19",
+      "source_unit_numerical_links.py": "70d2b3caa3089a65dd17c97e2e4904f3c392a94a0b18db5217588427f3333bb0"
+    },
+    "profile": "54a5a95769f7ee205226daf03b48f4698acb4c79dbe4c9f667e5a875f77e5855",
+    "shared": {
+      "runtime_sha256": "3f9ca9ce7b4cf2a2d10d6aeb1fae78543c468133d2fa0df9fcb32f63f89e90f7",
+      "shared_runtime": {
+        "legal_codec_sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290",
+        "native": {
+          "dependencies": {
+            "ipfs_datasets_py.logic.intent_ir.decoder": "7bab5781c07e00b54b0283d3a2962926f75935caedc80eceb23264cb388be257",
+            "ipfs_datasets_py.logic.intent_ir.formalize.rich_grammar": "6c40ac99d7e339651b6029764f94b12430ca515d4c5f7426770b013499efe92b",
+            "ipfs_datasets_py.logic.intent_ir.schema": "93d38e4724c5f34aab7f39f050742e98ef0c8d80e2ff70459d2401541505fc56",
+            "ipfs_datasets_py.logic.security_ir.model": "abc3aea9c2f4d1ce513ee2c9fc4c304d8bd387ded18e0d646247417422225d39",
+            "ipfs_datasets_py.logic.software_verification.program": "f051f42d64c5f993451972924953cc7eaa6d17df097235ddabfd5d791d406f91",
+            "ipfs_datasets_py.logic.ui_ux_ir.decoder": "21e8315b0054f7755512212d610d4e3f5f4ac86387f3b27edb9632fa8ca68bc3",
+            "ipfs_datasets_py.logic.ui_ux_ir.schema": "8a7b0cc90151043514d263b1a2655d6d41a2835dacd6b56018ba5c0c89961855",
+            "ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_latent_formula": "ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36"
+          },
+          "runtime": "66c5ee320f9c7aacd3b246d0666c7fc3ee928e4679892e1e90c838e1b291dbc6",
+          "scope": "listed_numerical_and_native_validator_modules_only"
+        },
+        "numerical": {
+          "files": {
+            "canonical_contracts.py": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b",
+            "legal_formula_codec.py": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290",
+            "legal_ir_grammar_decoder.py": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd",
+            "modal_latent_formula.py": "ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36",
+            "tree_pin.py": "587165942fb06ea9effc836b555e0ac0606c5876b013a374a1e76d25ee069e4d"
+          },
+          "scope": "listed_latent_decoder_and_grammar_sources_only"
+        },
+        "runtime_sha256": "8de8096e895de9df08ccf5352dfd704806823296821d98b5badf08bb553a52e4"
+      }
+    }
+  },
+  "profile": "numpy-unary-selection-384@1",
+  "proof_authority": false,
+  "registered_default_changed": false,
+  "repository": "Publicus/security-ir-autoencoder",
+  "repository_type": "model",
+  "schema": "numpy-selection-development-release@1",
+  "source_obligations_discharged": 0,
+  "supervisor_profile_enabled": false
+}

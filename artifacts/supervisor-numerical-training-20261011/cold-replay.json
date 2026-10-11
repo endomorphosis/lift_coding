@@ -1,0 +1,17 @@
+{
+  "schema": "numpy-selection-cold-replay@1",
+  "checkpoint_sha256": "26ccc7cf8420e0ed6cbbe22603e09be0e3572fb32a1e489e877fc5081f506e03",
+  "scores": {
+    "normal": 17,
+    "zero_head": 6,
+    "zero_projection": 8,
+    "shuffle_embeddings": 17
+  },
+  "holdout_count": 24,
+  "all_file_hashes_verified": true,
+  "saved_embeddings_reused": true,
+  "cuda_executed": false,
+  "training_executed": false,
+  "proof_authority": false,
+  "supervisor_profile_enabled": false
+}

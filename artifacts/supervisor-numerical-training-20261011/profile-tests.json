@@ -1,0 +1,57 @@
+{
+  "benchmark_training_performed": false,
+  "earlier_iteration": {
+    "passed": 37,
+    "receipt": "authored-01-qualification.json",
+    "tests": 37,
+    "unique_count_addition": 0
+  },
+  "final_counts": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 84
+  },
+  "final_receipt": "authored-02-qualification.json",
+  "final_receipt_sha256": "299df1dad99a96df125d679d787cc13634449a82b4138645d1e5c78480b071b5",
+  "provider_calls": 0,
+  "real_checkpoint_experiment": "separate root-owned artifact",
+  "review": {
+    "agent": "pilot_resume",
+    "mode": "read_only",
+    "result": "no_remaining_blocker",
+    "source_sha256": "54a5a95769f7ee205226daf03b48f4698acb4c79dbe4c9f667e5a875f77e5855",
+    "test_sha256": "3aaf70d39059e8655610ef9f6c6accfb636e549bbb24347296b1e516d12023dd"
+  },
+  "scalar_framework_files_changed": false,
+  "schema": "numerical-selection-profile-qualification@1",
+  "scope": "Authored tiny trained Legal parent and synthetic384 vectors exercise actual shared ridge/head/ablation contracts; not GTE accuracy or benchmark proof.",
+  "source_after": {
+    "files": {
+      "ipfs_datasets_py/logic/formalization/autoencoder/numerical_selection_384.py": "54a5a95769f7ee205226daf03b48f4698acb4c79dbe4c9f667e5a875f77e5855",
+      "ipfs_datasets_py/logic/formalization/autoencoder/security/source_program_binding_384.py": "3bf9f897b0260ac5dd8a4ea671cdce3bcbf7f7201b7dcdf23b82b1890b513d19",
+      "ipfs_datasets_py/logic/formalization/autoencoder/structured_source_384.py": "3f9ca9ce7b4cf2a2d10d6aeb1fae78543c468133d2fa0df9fcb32f63f89e90f7",
+      "ipfs_datasets_py/logic/software_contracts/source_unit_numerical_links.py": "70d2b3caa3089a65dd17c97e2e4904f3c392a94a0b18db5217588427f3333bb0",
+      "ipfs_datasets_py/logic/software_verification/numerical_logic.py": "1cc68c30efd6719cc3baad17e196c9f9fc43e3f6161604a75e8029c8e53ed822",
+      "tests/unit/logic/formalization/autoencoder/test_numerical_selection_384.py": "3aaf70d39059e8655610ef9f6c6accfb636e549bbb24347296b1e516d12023dd"
+    },
+    "head": "d24e15ee73659a5d4cff20e8f1cbf1c5ab92a234"
+  },
+  "source_before": {
+    "files": {
+      "ipfs_datasets_py/logic/formalization/autoencoder/numerical_selection_384.py": "54a5a95769f7ee205226daf03b48f4698acb4c79dbe4c9f667e5a875f77e5855",
+      "ipfs_datasets_py/logic/formalization/autoencoder/security/source_program_binding_384.py": "3bf9f897b0260ac5dd8a4ea671cdce3bcbf7f7201b7dcdf23b82b1890b513d19",
+      "ipfs_datasets_py/logic/formalization/autoencoder/structured_source_384.py": "3f9ca9ce7b4cf2a2d10d6aeb1fae78543c468133d2fa0df9fcb32f63f89e90f7",
+      "ipfs_datasets_py/logic/software_contracts/source_unit_numerical_links.py": "70d2b3caa3089a65dd17c97e2e4904f3c392a94a0b18db5217588427f3333bb0",
+      "ipfs_datasets_py/logic/software_verification/numerical_logic.py": "1cc68c30efd6719cc3baad17e196c9f9fc43e3f6161604a75e8029c8e53ed822",
+      "tests/unit/logic/formalization/autoencoder/test_numerical_selection_384.py": "3aaf70d39059e8655610ef9f6c6accfb636e549bbb24347296b1e516d12023dd"
+    },
+    "head": "d24e15ee73659a5d4cff20e8f1cbf1c5ab92a234"
+  },
+  "source_obligations_discharged": 0,
+  "source_unchanged": true,
+  "test_groups": {
+    "tests.unit.logic.formalization.autoencoder.test_numerical_selection_384": 45,
+    "tests.unit.logic.formalization.autoencoder.test_structured_source_384": 39
+  }
+}
