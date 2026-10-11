@@ -77,3 +77,10 @@ The published supervisor commit is
 [`b800b86a504072ddf2db77f33e65a40cb5908b94`](https://github.com/endomorphosis/ipfs_accelerate_py/commit/b800b86a504072ddf2db77f33e65a40cb5908b94).
 This parent change pins `external/ipfs_accelerate` to that commit. Publication
 references remain separate from the actual-run freeze.
+
+The live run and 218 postmerge checks used datasets `5c6972431`. This parent
+preserves the concurrent datasets pin `9e5df0d19`; its changed Source384 source
+binding has 70 passing unit controls with matching source hashes in the retained
+archive-reconciliation evidence. Those controls cover the changed byte-span
+boundary. They do not establish a native-Lake integration or live Terminal
+replay on `9e`; a future pilot must qualify that newly frozen runtime separately.
