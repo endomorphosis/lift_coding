@@ -1,0 +1,260 @@
+{
+  "hugging_face": {
+    "all_3208_prior_file_identities_unchanged": false,
+    "attributes_change": "Exact previous 2110 bytes retained as prefix plus one 120-byte release-local LFS rule; no second remote mutation",
+    "default_promotion": false,
+    "new_download_verified_files": 103,
+    "original_weights_and_model_card_preserved": true,
+    "parent_revision": "8279ea69452c0c72560211a1eda505ff1b1b5713",
+    "prior_payload_identities_preserved": 3207,
+    "release_prefix": "releases/20261011-structured-span-probability-v1",
+    "repo": "Publicus/legal-ir-autoencoder",
+    "revision": "a2c8aa64d8c363eb796438b385c14058e607a5ec",
+    "url": "https://huggingface.co/Publicus/legal-ir-autoencoder/tree/a2c8aa64d8c363eb796438b385c14058e607a5ec/releases/20261011-structured-span-probability-v1"
+  },
+  "local_finalization_receipt_pins": [
+    {
+      "bytes": 58463,
+      "receipt_body_location": "local finalization unless already mirrored in evidence",
+      "receipt_name": "source-staged-map-v01.json",
+      "sha256": "6d05b99aad497b9473f008efc25a1dd69d96b6d1597677e42f03fd4f8ef1b7e4"
+    },
+    {
+      "bytes": 157293,
+      "receipt_body_location": "local finalization unless already mirrored in evidence",
+      "receipt_name": "source-stage-independent-review-v01.json",
+      "sha256": "03786cac50662339f829fbf50d64414bf136f03280fef92124d09ad76e02ad2f"
+    },
+    {
+      "bytes": 6534,
+      "receipt_body_location": "local finalization unless already mirrored in evidence",
+      "receipt_name": "source-git-object-audit-v01.json",
+      "sha256": "e0d53c34e1ef19aacd87edf1493112c630e61c8a762054e6f6e094d87b5691c3"
+    },
+    {
+      "bytes": 117956,
+      "receipt_body_location": "local finalization unless already mirrored in evidence",
+      "receipt_name": "source-pr-checks-v01.json",
+      "sha256": "cbe9a8b8c286186967620eefea2199628c6c62744cca29cb4322bdd7471959b4"
+    },
+    {
+      "bytes": 103895,
+      "receipt_body_location": "local finalization unless already mirrored in evidence",
+      "receipt_name": "final-custody-independent-review-v01.json",
+      "sha256": "c4358fe0352cf9675d42af869ae57a8f7bb44072375bffede9468b3e849be2c1"
+    },
+    {
+      "bytes": 47741,
+      "receipt_body_location": "local finalization unless already mirrored in evidence",
+      "receipt_name": "hf-publication-verification.json",
+      "sha256": "3ecb5c4f724e71d155e676b830f186c9711438d288f464706bdca78610d3cde2"
+    },
+    {
+      "bytes": 79474,
+      "receipt_body_location": "local finalization unless already mirrored in evidence",
+      "receipt_name": "hf-publication-independent-review-v01.json",
+      "sha256": "0dfbbf830086c804cd4e3de8f4f7f33d2d68de3f270ec55406d3f0b7ae43b8d4"
+    }
+  ],
+  "preservation": {
+    "canonical_dirty_HEAD_and_index_endpoints_unchanged_in_independent_custody_audit": true,
+    "foreign_resource_record_body_comparison_endpoints_only": true,
+    "full_foreign_ledger_and_Hub_identity_caches_excluded_from_Git": true,
+    "old_failed_claims_preserved": true,
+    "original_checkpoint_bytes_preserved": true,
+    "own_claim_released_and_group_reaped": true,
+    "source_and_root_own_work_in_isolated_worktrees": true,
+    "weights_and_authored_training_export_excluded_from_Git": true
+  },
+  "quality": {
+    "Lake_executed": false,
+    "authored_TUNE_denominator": 96,
+    "authored_TUNE_exact_matches": 96,
+    "authored_TUNE_previously_exposed": true,
+    "compatible_greedy_proposals_per_lane": 1,
+    "compatible_joint_proposals_per_lane": 6,
+    "default_promotion": false,
+    "exposed_US_Code_cases": 8,
+    "higher_exact_match_established": false,
+    "independent_semantic_holdout": false,
+    "logic_family_admission": false,
+    "overlap_above_original_parents": true,
+    "semantic_accuracy": null,
+    "structured_losses_slightly_better_than_equal_step_CE": true,
+    "structured_vs_CE_law_outputs_identical": true
+  },
+  "remaining_gates": [
+    "independently reviewed statutory semantic labels and unseen evaluation",
+    "8D and 768D controlled training comparisons",
+    "separately qualified logic-family bridges",
+    "semantic and compiler validation with lake build legal"
+  ],
+  "root_baseline_before_own_commit": "3994f5c22517482b5d7c06cdeba61d9777c12b18",
+  "root_expected_contribution": {
+    "added_regular_files": 160,
+    "final_root_merge_not_yet_observed": true,
+    "modified_gitlinks": {
+      "external/ipfs_datasets": "4af461728329cdad4bfb910ab878d016ce279e54"
+    },
+    "other_eight_gitlinks_preserved_against_actual_merge_first_parent": true
+  },
+  "schema": "legal-structured-training-publication/v1",
+  "source": {
+    "headRefOid": "7c90b27d9fd193e768e8ecdca0bb5055145f1b78",
+    "mergeCommit": {
+      "oid": "4af461728329cdad4bfb910ab878d016ce279e54"
+    },
+    "mergedAt": "2026-10-11T09:25:08Z",
+    "number": 1283,
+    "state": "MERGED",
+    "url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1283"
+  },
+  "source_git_object_audit": {
+    "findings": [],
+    "passed": true,
+    "schema": "structured-git-object-integration-audit/v1",
+    "source": {
+      "all_existing_first_parent_paths_preserved_except_source_gitlink": true,
+      "all_expected_objects_exact": true,
+      "base": "cdae06198a229760ca139d48f9e311e80d0df8c6",
+      "expected_changed_paths": 165,
+      "gitlinks": {
+        ".tools/ipfs_kit_py": {
+          "changed": false,
+          "first_parent": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+          "merged": "a9b98beac1ef14278b4adf4f2289cd509530fb86"
+        },
+        "ipfs_accelerate_py": {
+          "changed": false,
+          "first_parent": "5306d49957bba7444a31639584e26378f3e3fb19",
+          "merged": "5306d49957bba7444a31639584e26378f3e3fb19"
+        },
+        "ipfs_datasets_py/logic/CEC/DCEC_Library": {
+          "changed": false,
+          "first_parent": "a4beb5b3280595be6b9221cac3c91dd019e6d371",
+          "merged": "a4beb5b3280595be6b9221cac3c91dd019e6d371"
+        },
+        "ipfs_datasets_py/logic/CEC/Eng-DCEC": {
+          "changed": false,
+          "first_parent": "df518c21ef81b8001e6db59f5fd70f10cc04ff6c",
+          "merged": "df518c21ef81b8001e6db59f5fd70f10cc04ff6c"
+        },
+        "ipfs_datasets_py/logic/CEC/ShadowProver": {
+          "changed": false,
+          "first_parent": "3060ede1ac1ec3f8ef9f9c9e41386aed1dbbe7f9",
+          "merged": "3060ede1ac1ec3f8ef9f9c9e41386aed1dbbe7f9"
+        },
+        "ipfs_datasets_py/logic/CEC/Talos": {
+          "changed": false,
+          "first_parent": "e0b7650d3e3a403924773f8253e924c719748d36",
+          "merged": "e0b7650d3e3a403924773f8253e924c719748d36"
+        },
+        "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type": {
+          "changed": false,
+          "first_parent": "d58933631a5362b1e2fdc45254ef620fa231223a",
+          "merged": "d58933631a5362b1e2fdc45254ef620fa231223a"
+        },
+        "ipfs_datasets_py/multimedia/omni_converter_mk2": {
+          "changed": false,
+          "first_parent": "c1d9b0d517cea022516aab5b5d8fa5e3bc9a65aa",
+          "merged": "c1d9b0d517cea022516aab5b5d8fa5e3bc9a65aa"
+        },
+        "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine": {
+          "changed": false,
+          "first_parent": "0e635cba586e8f6f6ea8126e3b1668b3e675c029",
+          "merged": "0e635cba586e8f6f6ea8126e3b1668b3e675c029"
+        },
+        "ipfs_kit_py": {
+          "changed": false,
+          "first_parent": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+          "merged": "a9b98beac1ef14278b4adf4f2289cd509530fb86"
+        }
+      },
+      "kind": "datasets",
+      "merge_commit": "4af461728329cdad4bfb910ab878d016ce279e54",
+      "merge_parents": [
+        "cdae06198a229760ca139d48f9e311e80d0df8c6",
+        "7c90b27d9fd193e768e8ecdca0bb5055145f1b78"
+      ],
+      "own_commit": "7c90b27d9fd193e768e8ecdca0bb5055145f1b78",
+      "retained_source_owners": {
+        "ipfs_datasets_py/logic/formalization/autoencoder/arbitrary_native_source_cache.py": "af9c9944cfd9c2c926911bca94a7d407af25019a1ab833655a9511deea4f4594",
+        "ipfs_datasets_py/logic/formalization/autoencoder/arbitrary_native_span_runtime.py": "dedf1598196e902269f6b82a9249b9d7bf41274df87da65c0b393fbd2547a50a",
+        "ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py": "57032fb7b824cfc9a39a442ccffa0bd5fb64873baa48a9ab43a94e80f901b430",
+        "ipfs_datasets_py/logic/formalization/autoencoder/dimension_source_inputs.py": "c7f396d3323c40b5f4bab1aa42557e693b65cced58435e63c735f875c6d12206",
+        "ipfs_datasets_py/logic/formalization/autoencoder/gte_multilingual_profile.py": "d6d6069c98c7f15bd4c6f8a43bd9ffb72032e04a452419a3ff5d9bd95bb06e8e",
+        "ipfs_datasets_py/logic/formalization/autoencoder/legal_native_conditioning.py": "48709fa4a521046ad753c87afe2732d17968e33d51ab2f43e4c4fefe2182059f",
+        "ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768.py": "cd4b23b87fefe3f80f234a5c85d9e4823139d5040a5507813b88385ee601b4ea",
+        "ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768_complete.py": "6f781849dc87eba1b7f0929d292bb10f5724bb1ca5749989feb988cde243c609",
+        "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b",
+        "ipfs_datasets_py/logic/legal_ir/canonical_decoder_preflight.py": "a656d5e692623043f24d670a193a449d43af742de20ccd68c4b7e744d7e3b276",
+        "ipfs_datasets_py/logic/legal_ir/canonical_source_guards.py": "a1b2fc2fe7fdf23b8caa46e43c5341287a35a94deaa70f291fb351e58505b32b",
+        "ipfs_datasets_py/logic/legal_ir/canonical_span_decoder.py": "c25044aeb63d66b73feac95de0ca6d49339774edb7611b1b956cf6307db438ec",
+        "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_corpus_manifest.py": "b067f05b3cfc28cb213a83519530f7148b2a5fa7d5b25809e87e1f7c286f9a5d",
+        "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_production.py": "735ca0597186e094d736ef58435c82956c4ab805a68fc7a6adbfc0ee21ee889f",
+        "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_runtime.py": "ce80ed6294009e04580051e6eb06a817d74a8a56f04814ad0a698e3d27dd0d41",
+        "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_native_pool.py": "04f29da03f937dfee7ecfcb621980240c014754abe55f71a2c1ef8338ba715bb",
+        "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py": "bde3bd327df59f2e7557eac8aa2e0989ceb1128bc39918bf8cf46011e7bd9415",
+        "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290",
+        "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py": "3b6cd3a6fade78fed275a478f010329e5d030a250b914c4b46ab0f0d77b9d5ab",
+        "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd",
+        "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_continuation.py": "3f13a711906103270a5e75f0f3c3411461ad2900537a640371fe10cc4042c79c",
+        "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_formula.py": "60e509fc5018584d19530dd6f9b8423f163cb7baec60f5736d849995bca61185",
+        "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_adaptive_optimizer.py": "dcd3a885820e7985ebec458a80325fe00d4d50656cf5827a828dd9cb45eb2524",
+        "ipfs_datasets_py/utils/cid_utils.py": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+      },
+      "staged_map_sha256": "6d05b99aad497b9473f008efc25a1dd69d96b6d1597677e42f03fd4f8ef1b7e4"
+    }
+  },
+  "statutory_review": {
+    "actual_semantic_labels": 0,
+    "actual_submissions": 0,
+    "all_admission_masks_zero": true,
+    "packet_items": 8,
+    "reviewer_authentication_established": false
+  },
+  "training": {
+    "actual_TRAIN_row_visits": 1536,
+    "actual_new_updates": 128,
+    "all_four_completed_full_optimizer_states_on_Hub": true,
+    "arms": 4,
+    "final_Adam_steps": 432,
+    "final_cursor": 576,
+    "final_epoch": 4,
+    "inherited_Adam_steps": 400,
+    "initial_cursor": 192,
+    "initial_epoch": 4,
+    "latent_conditioning_lanes": [
+      "raw384",
+      "source_only"
+    ],
+    "new_8D_or_768D_fit": false,
+    "new_encoder_calls": 0,
+    "new_updates_per_arm": 32,
+    "objective_weights": [
+      0.0,
+      0.1
+    ],
+    "seed": 1729
+  },
+  "validation": {
+    "clean_full_687_pass_rerun": false,
+    "distinct_verified_cases": 687,
+    "full_selected_suite_cases": 687,
+    "full_selected_suite_failures": 1,
+    "full_selected_suite_passes": 686,
+    "hosted_CI": {
+      "all_observed_optional": true,
+      "failed_jobs_billing_lock": true,
+      "head": "7c90b27d9fd193e768e8ecdca0bb5055145f1b78",
+      "normal_merge_no_admin_or_force": true,
+      "observed_checks": 20,
+      "other_jobs_queued_at_observation": true,
+      "passed": false
+    },
+    "initial_fixture_failure_and_corrections_preserved": true,
+    "new_continuation_worker_cases_passed": 88,
+    "numerical_probes_passed": true,
+    "separate_cwd_dependent_import_recheck_passes": 1
+  }
+}
