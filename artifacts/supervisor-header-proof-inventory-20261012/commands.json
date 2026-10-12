@@ -1,0 +1,74 @@
+{
+  "common_environment": {
+    "IPFS_ACCELERATE_AGENT_ORCHESTRATION_DIR": "independent temporary orchestration per process/test",
+    "IPFS_ACCELERATE_PYTEST_SEAL_DUCKDB": "unique normal AST-seal DB per process",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "owned accelerator and immutable datasets source; Harbor appended for Terminal/archive checks",
+    "PYTHONUNBUFFERED": "1",
+    "normal_ast_seal": "enabled"
+  },
+  "cwd": "/home/barberb/lift_coding/.worktrees/token-selector-accelerate-20261011",
+  "datasets_revision": "050e08d67db70817903dce750ee76b6ba839c41e",
+  "datasets_snapshot": "/home/barberb/lift_coding/.worktrees/terminal-header-source-datasets-20261012",
+  "docs": {
+    "additional_checks": "manual check_file(check_anchors=True) on five changed/related guides and parent milestone note",
+    "hosted_setup_actions_executed_locally": false,
+    "run_steps": "all four exact YAML run blocks",
+    "shell": [
+      "/bin/bash",
+      "--noprofile",
+      "--norc",
+      "-e",
+      "-o",
+      "pipefail",
+      "-c"
+    ],
+    "workflow": ".github/workflows/documentation-gates.yml"
+  },
+  "parallel_new_inventory_tests": {
+    "authored_processes": 3,
+    "independent_seals_and_orchestration": true,
+    "real_prover_processes": 1,
+    "shared_xdist_seal": false
+  },
+  "pytest_common_args": [
+    "python",
+    "-m",
+    "pytest",
+    "-c",
+    "pytest.ini",
+    "--maxfail=1",
+    "-q",
+    "-o",
+    "log_cli=false",
+    "--tb=short"
+  ],
+  "runtime_source_closure_count": 39,
+  "schema": "supervisor-header-proof-inventory-commands@1",
+  "suites": {
+    "tests-bridge-regression.log": [
+      "test/api/test_doctor_header_cache_bridge.py",
+      "-k",
+      "real_lean_z3 or native_custody_replay_admits or repeat_native_replay or final_tombstone"
+    ],
+    "tests-census-and-archive.log": [
+      "test/api/test_formal_status_census.py",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_semantic_metadata_policy.py"
+    ],
+    "tests-inventory-authored-group1.log": {
+      "explicit_disjoint_node_ids": "inventory-test-nodeids.json /authored_groups/0"
+    },
+    "tests-inventory-authored-group2.log": {
+      "explicit_disjoint_node_ids": "inventory-test-nodeids.json /authored_groups/1"
+    },
+    "tests-inventory-authored-group3.log": {
+      "explicit_disjoint_node_ids": "inventory-test-nodeids.json /authored_groups/2"
+    },
+    "tests-inventory-real.log": [
+      "test/api/test_doctor_header_proof_inventory.py::test_real_lean_z3_inventory_cold_restore_runs_one_actual_kernel_and_preserves_local_scope"
+    ],
+    "tests-terminal-regression.log": [
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_bound_header_observation_two_passes_preserve_native_prompt_and_worker_input"
+    ]
+  }
+}

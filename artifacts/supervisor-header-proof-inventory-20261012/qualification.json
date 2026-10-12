@@ -1,0 +1,197 @@
+{
+  "accelerate_base_commit": "648d911be1047378afb032c48ecaf5a8fdcc330b",
+  "accelerate_integrated_commit": "1f6d998a92db4024f35b57bbdb183a6626a7fa31",
+  "accelerate_product_commit": "1f6d998a92db4024f35b57bbdb183a6626a7fa31",
+  "ci": {
+    "five_guide_links_and_anchors_passed": true,
+    "job_id": 114649563403,
+    "local_exact_workflow_run_steps_passed": true,
+    "parent_note_links_and_anchors_passed": true,
+    "reason": "The job was not started because your account is locked due to a billing issue.",
+    "reported_conclusion": "failure",
+    "reported_status": "completed",
+    "run_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38199513793",
+    "status": "not_started",
+    "steps": [],
+    "workflow": "Documentation Gates"
+  },
+  "command_inventory": "commands.json",
+  "datasets_revision": "050e08d67db70817903dce750ee76b6ba839c41e",
+  "distinct_passing_tests": 144,
+  "distinct_test_breakdown": {
+    "bridge_regressions_including_actual_local_lean_z3": 6,
+    "generic_census_and_archive_regressions": 112,
+    "new_inventory_actual_lean_z3_restart": 1,
+    "new_inventory_authored_controls": 24,
+    "terminal_two_pass_positive_regression": 1
+  },
+  "external_ci_observations": {
+    "github-docs-annotations.json": {
+      "bytes": 789,
+      "sha256": "b1e33f614e8df233f470276dc85733a37b26db43ea18ccf7c7114d293634ec3a"
+    },
+    "github-docs-jobs.json": {
+      "bytes": 935,
+      "sha256": "4b1ee4231b427a45d2852892a0987bda5b86bdfc06604b266d07a3efe9a1d83e"
+    },
+    "github-docs-runs.json": {
+      "bytes": 211,
+      "sha256": "e3817cecfee0619398992c0e1cfe79310a8187214b64750102527988668a8dee"
+    }
+  },
+  "final_unresolved_test_failures": 0,
+  "implemented": {
+    "both_independently_admitted_owner_path_digests": true,
+    "bridge_codec_and_inventory_implementation_byte_pins": true,
+    "closed_bounded_same_owner_inventory": true,
+    "complete_current_owner_source_and_prepared_population_fences": true,
+    "exact_typed_inventory_ref_and_independent_expected_cid": true,
+    "expected_generic_receipt_id_checked_before_that_entry_put": true,
+    "explicit_empty_inventory_no_kernel": true,
+    "fresh_actual_kernel_import_per_entry_on_restart": true,
+    "independent_complete_key_and_generic_receipt_population": true,
+    "numerical_readiness_audit_and_staged_plan": true,
+    "original_custody_refs_without_full_prep_copies": true,
+    "runtime_source_inventory_updated": true,
+    "signed_task_repository_and_scope_joins": true,
+    "whole_source_key_custody_version_preflight_before_first_kernel": true
+  },
+  "independent_numerical_source_audit": {
+    "bytes": 11979,
+    "file": "numerical-readiness-source-audit.json",
+    "sha256": "0399ff3edd6154e2ff02c223d18496d06d97a4e1273c4abfbede21259cd1e720"
+  },
+  "logs": {
+    "docs-gates.log": {
+      "bytes": 2897,
+      "reported_summary": null,
+      "sha256": "a0e0e2c7cdcd6c669a94435c1aa0dd62fa7b09ecf2bcb6a6cf29805d9670eb30"
+    },
+    "docs-parent-links.log": {
+      "bytes": 136,
+      "reported_summary": null,
+      "sha256": "84d74d6d5688b21f8a3d22e1a26e747d5f78714820c8bdba9132ca4bb9564f82"
+    },
+    "tests-bridge-regression.log": {
+      "bytes": 2591,
+      "reported_summary": "6 passed, 25 deselected in 165.78s (0:02:45)",
+      "sha256": "8ce990113c1ea74b1413ac0139712d50d28313d9c40101f484ce192668dbc17c"
+    },
+    "tests-census-and-archive.log": {
+      "bytes": 3620,
+      "reported_summary": "112 passed in 36.51s",
+      "sha256": "f97049b6529657a742ae32ba62d753fa51e9f2d9b5f45edef9b7dbd4d23431d3"
+    },
+    "tests-inventory-authored-group1.log": {
+      "bytes": 2616,
+      "reported_summary": "8 passed in 311.41s (0:05:11)",
+      "sha256": "f1115a4dcbb2a45c497a3ff61efc8e1f308401b8a24cec8e91713037bc45ac76"
+    },
+    "tests-inventory-authored-group2.log": {
+      "bytes": 2694,
+      "reported_summary": "8 passed in 325.65s (0:05:25)",
+      "sha256": "5ca6047737f6f88ee4f34d772460195ce01d0c21e81a2ff08133e2aeee7f020b"
+    },
+    "tests-inventory-authored-group3.log": {
+      "bytes": 2628,
+      "reported_summary": "8 passed in 230.29s (0:03:50)",
+      "sha256": "c55108fea71d904537fad8353dee1bcada98a56ea8fd6603174f91e90f0ed35c"
+    },
+    "tests-inventory-real.log": {
+      "bytes": 1461,
+      "reported_summary": "1 passed in 102.48s (0:01:42)",
+      "sha256": "1325a10bd21c1367a01a21ed6282f77cf1fc95a9db4edc354079709c9a377ee2"
+    },
+    "tests-terminal-regression.log": {
+      "bytes": 1537,
+      "reported_summary": "1 passed in 113.86s (0:01:53)",
+      "sha256": "3fdb7369f3b6a736e11531ab82d0afd20dba265b3bc3de6145fb9829ce8cd38a"
+    }
+  },
+  "measurements": {
+    "actual_dependency_complete_repeated_status_population": null,
+    "actual_live_accepted_receipt_population": null,
+    "complete_run_token_savings": null,
+    "decoder_checkpoint_changed_by_this_phase": false,
+    "embeddings_recomputed": false,
+    "huggingface_upload_performed": false,
+    "live_benchmark_reward": null,
+    "live_proof_kernel_calls": 0,
+    "live_provider_calls": 0,
+    "model_inference_calls": 0,
+    "token_savings_claimed": false,
+    "training_steps": 0
+  },
+  "numerical_readiness": {
+    "complete_native_doctor_key_present": false,
+    "conditional_smt_checks": 13,
+    "finite_target_fixtures": 22,
+    "independent_kernel_receipt_and_sealed_proof_lineage_present": false,
+    "native_reviewed_theorem_and_exact_lowering_present": false,
+    "next_stage": "typed non-authoritative qualification record with exact problem/probe evidence for planning/retrieval",
+    "official_target_speed_qualified": false,
+    "plan": "docs/agent_supervisor/numerical_proof_admission_readiness.md",
+    "python_source_to_formal_correspondence_proved": false,
+    "source_audit": "numerical-readiness-source-audit.json"
+  },
+  "overlapping_reruns_increase_distinct_count": false,
+  "parent_base_commit": "ea85e32c47c66f2672b772612a5a1dc7f7099a74",
+  "qualification_date": "2026-10-12",
+  "raw_log_bytes_preserved": true,
+  "remaining_qualifications": [
+    "Admit actual matching task proof populations from independently retained records and current original owners",
+    "Retain typed spectral qualification record and exact numeric/problem/probe evidence before accepted numerical proof work",
+    "Review theorem/lowering/source adapter then independent kernel/full key/sealed lineage for numerical recipe",
+    "Qualify explicit spectral or producer-aware Terminal lane rather than header-handle reuse",
+    "Measure complete native lookup/lineage cost and dependency-complete repeated status",
+    "Qualify bounded expansion/current runtime archive and complete coding input before matched native total tokens/reward trial"
+  ],
+  "runtime_source_closure_count": 39,
+  "schema": "supervisor-header-proof-inventory-qualification@1",
+  "semantics_and_limits": {
+    "all_later_wrong_valid_generic_cids_detected_before_first_replay": false,
+    "atomic_owner_lease": false,
+    "earlier_valid_imports_may_remain_on_later_failure": true,
+    "inventory_authority_flags_false": true,
+    "inventory_seal_is_not_mathematical_attestation": true,
+    "native_denial_bookkeeping_may_write": true,
+    "new_storage_owners_created_by_adapter": 0,
+    "no_accepted_population_after_any_failed_final_check": true,
+    "numerical_kernel_admission_supported": false,
+    "owner_discovery_or_latest_row_selection": false,
+    "persist_runs_kernel": false,
+    "persist_writes_generic_positive_cache": false,
+    "record_byte_bound_covers_native_lineage_prefix_work": false,
+    "requested_resource_enforcement_verified": false,
+    "rollback_earlier_writes": false,
+    "store_identity_authenticates_full_owner_path": false
+  },
+  "source_manifest": "source-manifest.json",
+  "status": "qualified_native_sealed_header_inventory_and_restart",
+  "test_evidence": {
+    "additional_kernel_calls_at_render_commit": 0,
+    "authored_transcripts_are_not_real_proof_evidence": true,
+    "harbor_for_archive_checks": "0.23.0",
+    "isolated_per_process_seals_and_orchestration": true,
+    "kernel_calls_on_real_inventory_restore": 1,
+    "later_profile_poison_preflight_case": {
+      "fresh_kernel_calls": 0,
+      "generic_put_calls": 0
+    },
+    "new_inventory_authored_tests_use_real_native_sqlite_hmac_and_duckdb_owners": true,
+    "node_ids_disjoint": true,
+    "node_inventory": "inventory-test-nodeids.json",
+    "normal_ast_seal_enabled": true,
+    "partial_later_valid_but_wrong_generic_cid_case": {
+      "accepted_handle_tuple_returned": false,
+      "fresh_kernel_calls": 2,
+      "generic_put_calls": 1,
+      "later_entry_put": false,
+      "later_entry_quarantine": false
+    },
+    "python": "3.12.3",
+    "real_case_executes_installed_lean_z3_on_authored_source": true,
+    "real_restart_uses_delegating_actual_executor_spy": true,
+    "unexpected_test_failures": 0
+  }
+}

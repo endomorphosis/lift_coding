@@ -1,0 +1,235 @@
+{
+  "accelerator": {
+    "base_revision": "648d911be1047378afb032c48ecaf5a8fdcc330b",
+    "current_branch": "agent/header-proof-inventory-20261012",
+    "current_head": "648d911be1047378afb032c48ecaf5a8fdcc330b",
+    "four_spectral_files_match_base_and_retained_evidence": true,
+    "frozen_inventory_and_bridge_review_uses_current_worktree_bytes": true,
+    "inventory_and_bridge_hashes_do_not_claim_committed_at_base": true,
+    "worktree": "/home/barberb/lift_coding/.worktrees/token-selector-accelerate-20261011"
+  },
+  "audit_kind": "read_only_source_and_documentation_review",
+  "audit_operations": {
+    "actual_solver_or_kernel_runs": 0,
+    "benchmark_runs": 0,
+    "documentation_log": {
+      "path": "/tmp/header-inventory-docs-gates-20261012.log",
+      "sha256": "a0e0e2c7cdcd6c669a94435c1aa0dd62fa7b09ecf2bcb6a6cf29805d9670eb30"
+    },
+    "hosted_ci_executed": false,
+    "local_documentation_run_steps": 4,
+    "manual_guides_checked_for_links_and_anchors": 5,
+    "model_downloads": 0,
+    "model_or_provider_calls": 0,
+    "numerical_probe_runs": 0,
+    "product_tests_run_for_this_source_audit": 0,
+    "scope": "This numerical source audit and frozen inventory/bridge read-only review; excludes separate earlier header proof qualifications and parent/other-agent runs.",
+    "training_runs": 0
+  },
+  "audit_owner": "/root/native_owner_audit",
+  "audited_spectral_sources": [
+    {
+      "accelerator_base_sha256": "119c8556e291bd179627f12d0b36950382b624ee5e6f400d35903d1d29c3ae3c",
+      "bytes": 14021,
+      "matches_accelerator_base": true,
+      "matches_retained_spectral_source": true,
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/doctor_spectral_contract.py",
+      "retained_20261007_sha256": "119c8556e291bd179627f12d0b36950382b624ee5e6f400d35903d1d29c3ae3c",
+      "sha256": "119c8556e291bd179627f12d0b36950382b624ee5e6f400d35903d1d29c3ae3c"
+    },
+    {
+      "accelerator_base_sha256": "b0516c2f0db2d8f12f3d5d06fc788c299881e67bd120fe631b82b7d8e826dabe",
+      "bytes": 8904,
+      "matches_accelerator_base": true,
+      "matches_retained_spectral_source": true,
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/spectral_target_qualification.py",
+      "retained_20261007_sha256": "b0516c2f0db2d8f12f3d5d06fc788c299881e67bd120fe631b82b7d8e826dabe",
+      "sha256": "b0516c2f0db2d8f12f3d5d06fc788c299881e67bd120fe631b82b7d8e826dabe"
+    },
+    {
+      "accelerator_base_sha256": "529835978f49d57bd7234925c1dbe2da159c49ebf3edeca9ebbe8326ded11a32",
+      "bytes": 3817,
+      "matches_accelerator_base": true,
+      "matches_retained_spectral_source": true,
+      "path": "ipfs_accelerate_py/agent_supervisor/analysis/spectral_kernel_proof.py",
+      "retained_20261007_sha256": "529835978f49d57bd7234925c1dbe2da159c49ebf3edeca9ebbe8326ded11a32",
+      "sha256": "529835978f49d57bd7234925c1dbe2da159c49ebf3edeca9ebbe8326ded11a32"
+    },
+    {
+      "accelerator_base_sha256": "a63e2b74a1923ea26493e2cc26d45c1c08da1c2f1423f141fd2933585b257105",
+      "bytes": 16687,
+      "matches_accelerator_base": true,
+      "matches_retained_spectral_source": true,
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/spectral_eigen_kernel.py",
+      "retained_20261007_sha256": "a63e2b74a1923ea26493e2cc26d45c1c08da1c2f1423f141fd2933585b257105",
+      "sha256": "a63e2b74a1923ea26493e2cc26d45c1c08da1c2f1423f141fd2933585b257105"
+    }
+  ],
+  "completion_authority": false,
+  "created_at_utc": "2026-10-12T03:22:26.023954+00:00",
+  "current_dispatch": {
+    "benchmark_route_promoted": false,
+    "candidate_ready_reason": "spectral_performance_unqualified",
+    "performance_qualified": false,
+    "profile": "dominant-eigenpair-f64-small@1",
+    "route": "model_router",
+    "scope": "Source inspection of the explicit spectral-profile branch; no dispatch invocation or benchmark run by this audit.",
+    "source": {
+      "bytes": 18872,
+      "matches_retained_20261007_source": false,
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_doctor_dispatch.py",
+      "retained_20261007_sha256": "ca6a7c83ec7f843f06f254ee63341f85ce6117886085579e87bd8abe7ed9d57a",
+      "sha256": "50c2a9469c21cb7bbf164056835a249e48f76842f3ded293122a530fba3b4b98"
+    },
+    "status": "residual"
+  },
+  "datasets_snapshot": {
+    "read_only": true,
+    "revision": "050e08d67db70817903dce750ee76b6ba839c41e",
+    "worktree": "/home/barberb/lift_coding/.worktrees/terminal-header-source-datasets-20261012"
+  },
+  "evidence_classes": [
+    {
+      "canonical_smt_preimages_retained_by_current_workflow": false,
+      "independent_kernel_accepted": false,
+      "kernel_checkable_proof_objects_retained_by_current_workflow": false,
+      "kind": "conditional_ideal_algebra_smt_checks",
+      "reference": {
+        "bytes": 4383,
+        "path": "docs/agent_supervisor/evidence/terminal-spectral-symbolic-20261007/conditional-spectral-algebra-01.json",
+        "sha256": "e355f1f53d8759ea0c830d30cc1507b007db4e5d6661d201c9507b8d0da7ae33"
+      },
+      "retained_count": 13,
+      "scope": "Two packed complex-vector sign relations, one nonzero relation under normalized-norm assumptions, and ten bounded computed-magnitude maximum relations."
+    },
+    {
+      "all_matrix_correctness_proved": false,
+      "exact_spectral_certificate": false,
+      "kind": "finite_numerical_target_fixtures",
+      "performance_qualified": false,
+      "reference": {
+        "bytes": 800,
+        "path": "docs/agent_supervisor/evidence/terminal-spectral-symbolic-20261007/isolated-spectral-target-01.json",
+        "sha256": "47cc5657d05b0540e3230a2a8805f6f3db3b30d79a7dc5c211effb4bc499b813"
+      },
+      "retained_count": 22,
+      "scope": "Fixed finite numerical fixtures in the selected interpreter; observed eigenpair/residual/spectrum behavior."
+    }
+  ],
+  "execution_authority": false,
+  "independent_header_inventory_bridge_review": {
+    "entire_preflight": "Current source/preparation/full-key/custody/population/implementation versions are checked before the first fresh kernel replay. Loading historical native proof records constructs no generic KERNEL evidence.",
+    "generic_receipt_identity_ordering": "A syntactically valid but wrong host-pinned generic receipt CID may fail only after that entry has freshly replayed the native kernel and before that entry Gate.put. Earlier valid entries may already have been imported, and native bookkeeping/executable effects can remain. Failure returns no accepted tuple; no atomic lease or rollback is claimed.",
+    "guide": {
+      "bytes": 6244,
+      "path": "docs/agent_supervisor/header_proof_inventory.md",
+      "sha256": "5b785f41fe3aa3aeb5004a536986dc955623d8d25d1d7d90bcde995044efe0b6"
+    },
+    "review_is_kernel_or_benchmark_qualification": false,
+    "review_result": "no_concrete_blocker_found",
+    "reviewed_controls": [
+      "Original native/cache/state object and canonical-path/device/inode fences",
+      "Original private seal-key continuity",
+      "Signed roots and requested bounds",
+      "Original pin-registry identity plus exact per-preparation pins",
+      "Whole-population retained canonical-body and current-source rechecks after owner consultations",
+      "Independent expected generic identity before positive write",
+      "Closed non-authoritative inventory schema and explicit empty population"
+    ],
+    "scope": "Reviewed header producer only; not numerical admission.",
+    "sources": [
+      {
+        "bytes": 25364,
+        "path": "ipfs_accelerate_py/agent_supervisor/runtime/doctor_header_proof_inventory.py",
+        "sha256": "55f3c56965449d875a9095c485ebe764dd8bc6690ed556812e01e3633cdeba56"
+      },
+      {
+        "bytes": 30612,
+        "path": "ipfs_accelerate_py/agent_supervisor/runtime/doctor_header_cache_bridge.py",
+        "sha256": "87adb172ae17846005279be00e4d67234b51e0b48ecd80e21e6b44b82a4d1562"
+      }
+    ]
+  },
+  "mutation_authority": false,
+  "planned_next_step": {
+    "guide": {
+      "bytes": 19040,
+      "path": "docs/agent_supervisor/numerical_proof_admission_readiness.md",
+      "sha256": "0c25f91db184f8d347ca27bcf36cb8e442f6471d107ab610ff7ae104a0bfe054"
+    },
+    "implemented": false,
+    "ir_inventory_separation": "LegalIR, SecurityIR, CodebaseIR and IntentIR; parallel 8D/384D/768D; separate family/schema/version/decoder-task inventories.",
+    "kernel_authority": false,
+    "kind": "bounded_closed_versioned_non_authoritative_numerical_qualification_record",
+    "later_prerequisites": [
+      "Reviewed conditional theorem/lowering/source adapter",
+      "Actual independent kernel/full native key and sealed lineage",
+      "Scoped receipt preserving assumptions/residuals",
+      "Explicit future numerical or producer-aware Terminal binding",
+      "Actual population/lookup cost/repeated closure, then matched native total tokens and reward"
+    ],
+    "original_embeddings_and_checkpoints_reused": true,
+    "purpose": [
+      "planning",
+      "retrieval",
+      "capability_nomination"
+    ],
+    "required_retained_inputs": [
+      "Signed task/revision/specification/source scope and exact candidate preimages.",
+      "Canonical SMT problem preimages, assumptions, actual solver/executable/dependency identities, requested limits and exact results/artifacts.",
+      "Exact target probe/fixture population, interpreter/numerical dependency pins and bounded actual process/result observations.",
+      "Distinct conditional, finite-numerical and performance statuses with original residual/frontier provenance."
+    ],
+    "source_replacement_authority": false,
+    "stage": 1,
+    "task_completion_authority": false,
+    "training_planned_in_next_phase": false
+  },
+  "prior_evidence": {
+    "created_at_utc": "2026-10-07T12:44:49.100392+00:00",
+    "historical_fresh_tests": {
+      "errors": 0,
+      "failures": 0,
+      "seconds": 77.05,
+      "skipped": 0,
+      "tests": 113
+    },
+    "historical_suite_qualifies_a_new_target_environment": false,
+    "historical_suite_qualifies_all_current_integration_files": false,
+    "historical_tests_rerun_by_this_audit": false,
+    "matched_hashes_scope": "Exactly the four audited spectral source files; current dispatch differs from its retained hash.",
+    "qualification": {
+      "bytes": 7094,
+      "path": "docs/agent_supervisor/evidence/terminal-spectral-symbolic-20261007/qualification.json",
+      "sha256": "eda39825ee2d6e571b57c6ae51418c25ff80f9cf50630a29514c8d6dffc11a4d"
+    },
+    "reference_guide": {
+      "bytes": 2861,
+      "path": "docs/agent_supervisor/evidence/terminal-spectral-symbolic-20261007/README.md",
+      "sha256": "4865b896fe5ef5ddae11a8e9f14c12c4f2b2f18f3bd4b23a3a212c2f6a753e5f"
+    },
+    "source_base_revision": "c733fa1240e3e31c5172ebc35e53f65da4b93891"
+  },
+  "proof_authority": false,
+  "publication_authority": false,
+  "qualification_record": false,
+  "schema": "ipfs_accelerate_py/agent-supervisor/numerical-readiness-source-audit@1",
+  "spectral_admission_readiness": {
+    "accepted_independent_kernel_proof_present": false,
+    "assumptions_and_residuals": [
+      "Backend supplies a complete numerical spectrum.",
+      "Packed backend columns satisfy ideal eigenvector equations.",
+      "Selector inputs are finite nonnegative computed magnitudes.",
+      "Floating-point normalization, Python/backend correspondence, LAPACK/IEEE behavior, all-matrix correctness and target speed remain separate unresolved boundaries."
+    ],
+    "authoritative_sealed_proof_lineage_present": false,
+    "complete_native_doctor_proof_cache_key_present": false,
+    "kernel_verified_generic_receipt_supported_now": false,
+    "legacy_candidate_proof_receipt_id_is_observational_check_binding": true,
+    "numpy_scipy_lapack_binary_custody_complete": false,
+    "reviewed_native_theorem_and_exact_lowering_present": false,
+    "source_digest_does_not_establish_semantic_correspondence": true,
+    "source_to_formal_correspondence_proved_or_replayed": false
+  },
+  "whole_program_proved": false
+}
