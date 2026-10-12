@@ -1,0 +1,45 @@
+{
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/record_merged_publication.py": {
+      "bytes": 6055,
+      "sha256": "e6427ee0eb721a27943f7d89660d7fc1ef298529d296e24b96384141189bff35"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-targeted-loss-20261012-01/record_merged_publication.py": {
+      "bytes": 6052,
+      "sha256": "2a752fa11527befb426380c00c06da63aaea32e6677bd5f92a00a3a8d71a41ef"
+    }
+  },
+  "checks": {
+    "AST_readonly_Git_verbs": [
+      "cat-file",
+      "ls-tree",
+      "rev-list",
+      "rev-parse"
+    ],
+    "GitHub_PR_view_readonly": true,
+    "all_merged_blob_bytes_checked": true,
+    "byte_identical_prior_except_receipt_schema": true,
+    "closed_map_SHA_and_byte_bound": true,
+    "exact_PR_head_and_ordinary_merge_parent": true,
+    "first_parent_change_set_exact": true,
+    "models_resources_compiler_and_writes_to_Git_absent": true,
+    "other8_root_gitlinks_preserved": true,
+    "owned_exclusive_output": true
+  },
+  "findings": [],
+  "helper": {
+    "bytes": 6052,
+    "path": "/home/barberb/lift_coding/artifacts/legal-targeted-loss-20261012-01/record_merged_publication.py",
+    "sha256": "2a752fa11527befb426380c00c06da63aaea32e6677bd5f92a00a3a8d71a41ef"
+  },
+  "limitations": [
+    "Actual merged publication remains unobserved by this source-only review. The concrete map and immutable merged tree need later independent binding.",
+    "The helper attests immutable commit objects and sampled GitHub metadata, not CI execution, legal accuracy, model qualification, live branch custody or continuous index custody.",
+    "The map is SHA-bound at opening; no closing map reread is performed. Later concrete review must bind the exact map receipt and commit tree."
+  ],
+  "observed_at_utc": "2026-10-12T22:55:14.655186+00:00",
+  "passed": true,
+  "reviewer": "/root/targeted_analysis_review",
+  "schema": "targeted-loss-merged-publication-helper-independent-review/v1",
+  "scope": "Complete source read and exact byte/AST comparison only; no helper main, Git or GitHub call executed."
+}

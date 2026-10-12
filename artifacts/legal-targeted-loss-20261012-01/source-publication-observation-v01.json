@@ -1,0 +1,51 @@
+{
+  "actual_first_parent": "e39fe996bd9e786a84f739fda9dde9a6c70546da",
+  "actual_merge": "12b2de0f1c949b793772ce29edad84355978b9b7",
+  "after_gitlinks": {
+    ".tools/ipfs_kit_py": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+    "ipfs_accelerate_py": "5306d49957bba7444a31639584e26378f3e3fb19",
+    "ipfs_datasets_py/logic/CEC/DCEC_Library": "a4beb5b3280595be6b9221cac3c91dd019e6d371",
+    "ipfs_datasets_py/logic/CEC/Eng-DCEC": "df518c21ef81b8001e6db59f5fd70f10cc04ff6c",
+    "ipfs_datasets_py/logic/CEC/ShadowProver": "3060ede1ac1ec3f8ef9f9c9e41386aed1dbbe7f9",
+    "ipfs_datasets_py/logic/CEC/Talos": "e0b7650d3e3a403924773f8253e924c719748d36",
+    "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type": "d58933631a5362b1e2fdc45254ef620fa231223a",
+    "ipfs_datasets_py/multimedia/omni_converter_mk2": "c1d9b0d517cea022516aab5b5d8fa5e3bc9a65aa",
+    "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine": "0e635cba586e8f6f6ea8126e3b1668b3e675c029",
+    "ipfs_kit_py": "a9b98beac1ef14278b4adf4f2289cd509530fb86"
+  },
+  "before_gitlinks": {
+    ".tools/ipfs_kit_py": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+    "ipfs_accelerate_py": "5306d49957bba7444a31639584e26378f3e3fb19",
+    "ipfs_datasets_py/logic/CEC/DCEC_Library": "a4beb5b3280595be6b9221cac3c91dd019e6d371",
+    "ipfs_datasets_py/logic/CEC/Eng-DCEC": "df518c21ef81b8001e6db59f5fd70f10cc04ff6c",
+    "ipfs_datasets_py/logic/CEC/ShadowProver": "3060ede1ac1ec3f8ef9f9c9e41386aed1dbbe7f9",
+    "ipfs_datasets_py/logic/CEC/Talos": "e0b7650d3e3a403924773f8253e924c719748d36",
+    "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type": "d58933631a5362b1e2fdc45254ef620fa231223a",
+    "ipfs_datasets_py/multimedia/omni_converter_mk2": "c1d9b0d517cea022516aab5b5d8fa5e3bc9a65aa",
+    "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine": "0e635cba586e8f6f6ea8126e3b1668b3e675c029",
+    "ipfs_kit_py": "a9b98beac1ef14278b4adf4f2289cd509530fb86"
+  },
+  "closed_objects": {
+    "bytes": 44646,
+    "path": "/home/barberb/lift_coding/artifacts/legal-targeted-loss-20261012-01/source-object-map-v01.json",
+    "sha256": "dca203bf4b336d31a719811231ce1a85a2586e914d963ea5bcff41754c5106a2"
+  },
+  "contribution_head": "52a54e4f66dd686ffecb4d356b7ac36179734607",
+  "findings": [],
+  "first_parent_changes_exactly_owned": true,
+  "nonowned_first_parent_objects_preserved": true,
+  "passed": true,
+  "paths": 146,
+  "pull_request": {
+    "headRefOid": "52a54e4f66dd686ffecb4d356b7ac36179734607",
+    "mergeCommit": {
+      "oid": "12b2de0f1c949b793772ce29edad84355978b9b7"
+    },
+    "mergedAt": "2026-10-12T22:59:24Z",
+    "state": "MERGED",
+    "url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1291"
+  },
+  "repository": "endomorphosis/ipfs_datasets_py",
+  "schema": "targeted-loss-actual-merged-publication/v1",
+  "scope": "Actual Git objects and metadata; no CI, runtime, legal or continuous custody qualification"
+}
