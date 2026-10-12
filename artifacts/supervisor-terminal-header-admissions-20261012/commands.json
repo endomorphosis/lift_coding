@@ -1,0 +1,179 @@
+{
+  "common_environment": {
+    "IPFS_ACCELERATE_AGENT_ORCHESTRATION_DIR": "independent temporary orchestration storage per process/test",
+    "IPFS_ACCELERATE_PYTEST_SEAL_DUCKDB": "independent normal AST-seal DuckDB per pytest process",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "owned accelerator, stated immutable datasets snapshot, Harbor site-packages for Terminal/archive tests",
+    "PYTHONUNBUFFERED": "1",
+    "normal_ast_seal": "enabled",
+    "scope": "root/native/test setup defaults; exact Terminal regression overrides below"
+  },
+  "cwd": "/home/barberb/lift_coding/.worktrees/token-selector-accelerate-20261011",
+  "datasets_snapshots": {
+    "all_other_suites": "/home/barberb/lift_coding/.worktrees/formal-key-merged-datasets-20261012",
+    "final_parent_pin_compatibility": "/home/barberb/lift_coding/.worktrees/terminal-header-source-datasets-20261012",
+    "initial_terminal_positive": "/home/barberb/lift_coding/.worktrees/formal-key-source-datasets-20261011"
+  },
+  "docs": {
+    "additional_checks": "five changed guides and parent milestone note relative links/anchors via check_current_docs_links.check_file; git diff --check",
+    "hosted_actions_executed_locally": false,
+    "shell": [
+      "/bin/bash",
+      "--noprofile",
+      "--norc",
+      "-e",
+      "-o",
+      "pipefail",
+      "-c"
+    ],
+    "steps": "all four exact YAML run blocks",
+    "workflow": ".github/workflows/documentation-gates.yml"
+  },
+  "exact_terminal_regression_environment": {
+    "IPFS_ACCELERATE_AGENT_ORCHESTRATION_DIR": "unique corresponding /tmp/<suite>-orchestration-20261012",
+    "IPFS_ACCELERATE_PYTEST_SEAL_DUCKDB": "unique corresponding /tmp/<suite>-seal-20261012.duckdb",
+    "PYTHONPATH": "/home/barberb/lift_coding/.worktrees/formal-key-merged-datasets-20261012:/home/barberb/lift_coding/.venvs/terminal-bench-harbor/lib/python3.12/site-packages",
+    "cwd": "owned accelerator worktree"
+  },
+  "exact_terminal_regression_invocations": {
+    "tests-existing-terminal-host.log": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_formal_owner_census.py",
+      "--junitxml=/tmp/terminal-header-owner-regression-20261012.xml"
+    ],
+    "tests-existing-terminal-lifecycle.log": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_formal_status_census.py",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_live_metadata_census.py",
+      "--junitxml=/tmp/terminal-header-host-regression-20261012.xml"
+    ],
+    "tests-merged-terminal-lifecycle-group1.log": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_live_metadata_census.py",
+      "--junitxml=/tmp/terminal-header-merged-lifecycle-group1-tests-20261012.xml"
+    ],
+    "tests-merged-terminal-lifecycle-group2.log": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_formal_status_census.py",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_formal_owner_census.py",
+      "--junitxml=/tmp/terminal-header-merged-lifecycle-group2-tests-20261012.xml"
+    ]
+  },
+  "harbor_site_packages": "/home/barberb/lift_coding/.venvs/terminal-bench-harbor/lib/python3.12/site-packages",
+  "parallel_terminal_tests": {
+    "node_ids_disjoint": true,
+    "normal_seal_files": "independent",
+    "orchestration_storage": "independent",
+    "processes": 3,
+    "shared_xdist_seal": false
+  },
+  "pytest_common_args": [
+    "python",
+    "-m",
+    "pytest",
+    "-c",
+    "pytest.ini",
+    "--maxfail=1",
+    "-q",
+    "-o",
+    "log_cli=false",
+    "--tb=short"
+  ],
+  "pytest_common_args_scope": "root/native suites; Terminal regression exact invocations below",
+  "schema": "supervisor-terminal-header-admissions-commands@1",
+  "suites": {
+    "tests-current-datasets-native.log": [
+      "test/api/test_header_admission_census.py",
+      "test/api/test_doctor_header_cache_bridge.py",
+      "-k",
+      "bound_census_retains_expected_receipt_identity or real_lean_z3"
+    ],
+    "tests-current-datasets-terminal.log": [
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_bound_header_observation_two_passes_preserve_native_prompt_and_worker_input"
+    ],
+    "tests-existing-census-and-archive.log": [
+      "test/api/test_formal_status_census.py",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_semantic_metadata_policy.py"
+    ],
+    "tests-existing-terminal-host.log": [
+      "benchmarks/agent_supervisor/container_coding/test_terminal_formal_owner_census.py"
+    ],
+    "tests-existing-terminal-lifecycle.log": [
+      "benchmarks/agent_supervisor/container_coding/test_terminal_formal_status_census.py",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_live_metadata_census.py"
+    ],
+    "tests-merged-census-and-archive.log": [
+      "test/api/test_formal_status_census.py",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_semantic_metadata_policy.py"
+    ],
+    "tests-merged-native.log": [
+      "test/api/test_header_admission_census.py",
+      "test/api/test_doctor_header_cache_bridge.py",
+      "-k",
+      "bound_census_retains_expected_receipt_identity or real_lean_z3"
+    ],
+    "tests-merged-terminal-lifecycle-group1.log": [
+      "benchmarks/agent_supervisor/container_coding/test_terminal_live_metadata_census.py"
+    ],
+    "tests-merged-terminal-lifecycle-group2.log": [
+      "benchmarks/agent_supervisor/container_coding/test_terminal_formal_status_census.py",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_formal_owner_census.py"
+    ],
+    "tests-native-bridge-regression.log": [
+      "test/api/test_doctor_header_cache_bridge.py",
+      "-k",
+      "real_lean_z3 or native_custody_replay_admits or repeat_native_replay or final_tombstone"
+    ],
+    "tests-new-census-finalguard.log": [
+      "test/api/test_header_admission_census.py",
+      "-k",
+      "required_binding_refuses or require_bound_scoped_selection or bound_census_retains_expected_receipt_identity"
+    ],
+    "tests-new-census.log": [
+      "test/api/test_header_admission_census.py"
+    ],
+    "tests-terminal-bound-final-restoration-group1.log": [
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_public_status_flags_cannot_skip_private_exit_revalidation"
+    ],
+    "tests-terminal-bound-final-restoration-group2.log": [
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_nested_report_replacement_cannot_retain_an_escaped_positive"
+    ],
+    "tests-terminal-bound-final-restoration-group3.log": [
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_cleanup_refusal_invalidates_private_observation_despite_public_flag_tampering"
+    ],
+    "tests-terminal-bound-group1.log": {
+      "explicit_disjoint_node_ids": "terminal-test-nodeids.json /groups/0"
+    },
+    "tests-terminal-bound-group2.log": {
+      "explicit_disjoint_node_ids": "terminal-test-nodeids.json /groups/1"
+    },
+    "tests-terminal-bound-group3.log": {
+      "explicit_disjoint_node_ids": "terminal-test-nodeids.json /groups/2"
+    },
+    "tests-terminal-bound-merged-group1.log": [
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_bound_header_observation_two_passes_preserve_native_prompt_and_worker_input",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_nested_report_replacement_cannot_retain_an_escaped_positive"
+    ],
+    "tests-terminal-bound-merged-group2.log": [
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_public_status_flags_cannot_skip_private_exit_revalidation",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_cleanup_refusal_invalidates_private_observation_despite_public_flag_tampering"
+    ],
+    "tests-terminal-positive-initial.log": [
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py",
+      "-k",
+      "two_passes"
+    ]
+  }
+}

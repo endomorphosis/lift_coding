@@ -1,0 +1,42 @@
+{
+  "total": 31,
+  "groups": [
+    [
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_bound_header_observation_two_passes_preserve_native_prompt_and_worker_input",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_invalid_header_population_refuses_before_native_gate_observation[empty-admissions]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_invalid_header_population_refuses_before_native_gate_observation[duplicate-expected]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_invalid_header_population_refuses_before_native_gate_observation[foreign-handle]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_exit_revalidation_clears_escaped_acceptance_after_proof_binding_drift[source]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_exit_revalidation_clears_escaped_acceptance_after_proof_binding_drift[profile]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_exit_revalidation_clears_escaped_acceptance_after_proof_binding_drift[native-object]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_exit_revalidation_clears_escaped_acceptance_after_proof_binding_drift[quarantine]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_exit_revalidation_clears_escaped_acceptance_after_proof_binding_drift[generic-cache]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_public_status_flags_cannot_skip_private_exit_revalidation",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_raw_terminal_owner_cannot_count_scoped_receipt_without_bound_header_handle"
+    ],
+    [
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_invalid_header_population_refuses_before_native_gate_observation[missing-receipts]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_invalid_header_population_refuses_before_native_gate_observation[missing-key]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_invalid_header_population_refuses_before_native_gate_observation[wrong-receipt]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_invalid_header_population_refuses_before_native_gate_observation[foreign-gate]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_exit_revalidation_clears_escaped_acceptance_after_proof_binding_drift[task]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_exit_revalidation_clears_escaped_acceptance_after_proof_binding_drift[native-seal]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_exit_revalidation_clears_escaped_acceptance_after_proof_binding_drift[emitter]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_exit_revalidation_clears_escaped_acceptance_after_proof_binding_drift[generic-state]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_consistently_wrong_generic_receipt_is_refused_despite_complete_key_matches",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_nested_report_replacement_cannot_retain_an_escaped_positive"
+    ],
+    [
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_invalid_header_population_refuses_before_native_gate_observation[missing-admissions]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_invalid_header_population_refuses_before_native_gate_observation[duplicate-admission]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_invalid_header_population_refuses_before_native_gate_observation[wrong-key]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_invalid_header_population_refuses_before_native_gate_observation[foreign-scope]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_exit_revalidation_clears_escaped_acceptance_after_proof_binding_drift[executable]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_exit_revalidation_clears_escaped_acceptance_after_proof_binding_drift[native-inode]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_exit_revalidation_clears_escaped_acceptance_after_proof_binding_drift[codec]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_exit_revalidation_clears_escaped_acceptance_after_proof_binding_drift[generic-state-cache]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_quarantine_appearing_after_a_positive_lookup_cannot_escape_observation",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_header_proof_admissions.py::test_cleanup_refusal_invalidates_private_observation_despite_public_flag_tampering"
+    ]
+  ]
+}

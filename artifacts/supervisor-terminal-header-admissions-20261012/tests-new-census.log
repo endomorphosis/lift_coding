@@ -1,0 +1,23 @@
+[1m============================= test session starts ==============================[0m
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: /home/barberb/lift_coding/.worktrees/token-selector-accelerate-20261011
+configfile: pytest.ini
+plugins: mock-3.15.1, xdist-3.8.0, benchmark-5.2.3, cov-7.1.0, base-url-2.1.0, asyncio-1.3.0, trio-0.8.0, typeguard-4.5.2, env-1.7.0, hypothesis-6.152.1, playwright-0.8.0, timeout-2.4.0, anyio-4.14.2
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 28 items
+
+test/api/test_header_admission_census.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m    [100%][0m
+
+============================= slowest 10 durations =============================
+15.21s call     test/api/test_header_admission_census.py::test_recursive_public_current_or_render_callback_refuses_and_guard_recovers
+12.93s setup    test/api/test_header_admission_census.py::test_bound_census_rechecks_native_inputs_beyond_unchanged_context_hashes[profile]
+12.81s setup    test/api/test_header_admission_census.py::test_bound_census_rechecks_native_inputs_beyond_unchanged_context_hashes[pins]
+12.68s setup    test/api/test_header_admission_census.py::test_bound_census_retains_expected_receipt_identity_and_closed_local_counts
+12.67s setup    test/api/test_header_admission_census.py::test_bound_census_rechecks_native_inputs_beyond_unchanged_context_hashes[native-owner]
+12.61s setup    test/api/test_header_admission_census.py::test_bound_census_rechecks_native_inputs_beyond_unchanged_context_hashes[bounds]
+12.59s setup    test/api/test_header_admission_census.py::test_malformed_bound_population_refuses_before_storage_or_callbacks[receipt-wrong]
+12.56s setup    test/api/test_header_admission_census.py::test_consistent_wrong_receipt_return_cannot_satisfy_independent_expected_identity
+12.50s setup    test/api/test_header_admission_census.py::test_bound_census_rechecks_native_inputs_beyond_unchanged_context_hashes[source]
+12.46s setup    test/api/test_header_admission_census.py::test_bound_census_rechecks_native_inputs_beyond_unchanged_context_hashes[state-owner]
+[32m======================== [32m[1m28 passed[0m[32m in 381.77s (0:06:21)[0m[32m ========================[0m

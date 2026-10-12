@@ -1,0 +1,298 @@
+{
+  "accelerate_base_commit": "ab2938bbae44106df268b1d074c8ff90ad3dbb71",
+  "accelerate_integrated_commit": "648d911be1047378afb032c48ecaf5a8fdcc330b",
+  "accelerate_product_commit": "7e701560e4b3b9d42b2b8722982461f58403be44",
+  "all_other_qualification_datasets_revision": "fd4be4da2a3976a8e40f47d7337cebb6332c95f3",
+  "ci": {
+    "five_changed_guide_links_and_anchors_passed": true,
+    "job_id": 114636362448,
+    "local_exact_workflow_run_steps_passed": true,
+    "parent_note_links_and_anchors_passed": true,
+    "reason": "The job was not started because your account is locked due to a billing issue.",
+    "reported_conclusion": "failure",
+    "reported_status": "completed",
+    "run_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38195251677",
+    "status": "not_started",
+    "steps": [],
+    "workflow": "Documentation Gates"
+  },
+  "command_inventory": "commands.json",
+  "completed_preintegration_distinct_cases": 247,
+  "distinct_passing_tests": 255,
+  "distinct_test_breakdown": {
+    "generic_census_and_archive_regressions": 111,
+    "legacy_terminal_lifecycle_and_host_regressions": 77,
+    "native_bridge_regressions_including_real_lean_z3": 6,
+    "new_terminal_bound_admission_controls": 31,
+    "new_typed_generic_census_and_binding_controls": 30
+  },
+  "external_ci_observations": {
+    "github-docs-annotations.json": {
+      "bytes": 789,
+      "sha256": "bec2aa87d9e7c726ea16dd1a8e1f1338a76c8a23de70f46e6801ebd14085548f"
+    },
+    "github-docs-jobs.json": {
+      "bytes": 935,
+      "sha256": "41134dc663d41a4ec35a3c2e9f98229aa3cdb2792f199ebb85e10c27120edb3a"
+    },
+    "github-docs-runs.json": {
+      "bytes": 211,
+      "sha256": "4823bebed8d3c6f7169d46dae6b3d30e9c4de42a8c63f0b4bdbbf4a3eeb0f8de"
+    }
+  },
+  "final_datasets_compatibility_status": "passed_two_native_cases_and_one_terminal_two_pass_positive",
+  "final_unresolved_test_failures": 0,
+  "implemented": {
+    "bound_handle_used_for_render": true,
+    "caller_authority_flags_and_extra_fields_removed_on_canonical_refusal": true,
+    "canonical_refusal_snapshot_restored_before_invalidation": true,
+    "closed_structural_validation_before_proof_owner_observation": true,
+    "combined_native_denial_and_source_checks_after_last_generic_consultation": true,
+    "exact_expected_receipt_identity_checked_on_lookup_and_render": true,
+    "exact_native_gate_analysis_object_and_full_key_joins": true,
+    "independently_expected_full_key_receipt_population": true,
+    "legacy_binding_payload_and_digest_preserved_when_optional_field_absent": true,
+    "legacy_worker_prompt_and_arguments_preserved_by_this_change": true,
+    "native_custody_implementation_profile_executable_and_bounds_checked": true,
+    "original_escaped_nested_reference_retained": true,
+    "original_handle_population_retained_across_context": true,
+    "parallel_instruction_and_retrieval_work_preserved": true,
+    "private_initial_observation_control": true,
+    "public_status_edits_cannot_skip_exit_revalidation": true,
+    "raw_terminal_scoped_receipts_require_bound_admission": true,
+    "same_handle_recursive_checks_refuse": true,
+    "typed_terminal_header_admission_input": true
+  },
+  "initial_terminal_positive_datasets_revision": "2a1794e388e88389c48966fb78a1b74c26a0c832",
+  "integrated_datasets_revision": "050e08d67db70817903dce750ee76b6ba839c41e",
+  "integrated_datasets_source_diff": {
+    "current": "050e08d67db70817903dce750ee76b6ba839c41e",
+    "existing_package_source_modified": false,
+    "previous": "fd4be4da2a3976a8e40f47d7337cebb6332c95f3",
+    "source_changes": [
+      {
+        "path": "ipfs_datasets_py/logic/legal_ir/duration_bound_qualified.py",
+        "status": "A"
+      },
+      {
+        "path": "ipfs_datasets_py/logic/legal_ir/temporal_bindings.py",
+        "status": "A"
+      }
+    ]
+  },
+  "integration_additional_distinct_cases": {
+    "archive_instruction_view_and_source_inventory": 6,
+    "terminal_instruction_view": 2
+  },
+  "logs": {
+    "docs-gates.log": {
+      "bytes": 748,
+      "reported_summary": null,
+      "sha256": "ca77a0607e8a867bf3af547bec8d73b88dc03f7e846debd677b00fe172118d28"
+    },
+    "docs-merged-gates.log": {
+      "bytes": 755,
+      "reported_summary": null,
+      "sha256": "058ab45d55e5892c4eb6e644f92cebf8289a4640f22b7a3534a8dc9c44f0558a"
+    },
+    "docs-parent-final-links.log": {
+      "bytes": 145,
+      "reported_summary": null,
+      "sha256": "dee4829c368b787b0bb494350761cf8199deeae046cdd885f795b64f8737629f"
+    },
+    "tests-current-datasets-native.log": {
+      "bytes": 1820,
+      "reported_summary": "2 passed, 59 deselected in 90.49s (0:01:30)",
+      "sha256": "cd21d58dac22c2939f3cf32588873bba59748e6c81dc8727c455cedbf7a866c0"
+    },
+    "tests-current-datasets-terminal.log": {
+      "bytes": 1537,
+      "reported_summary": "1 passed in 103.00s (0:01:42)",
+      "sha256": "a21431cd080e8f7cea18da46eeb1d041d1fe79b147356f6e1e47d98fe94230fa"
+    },
+    "tests-existing-census-and-archive.log": {
+      "bytes": 3445,
+      "reported_summary": "105 passed in 34.43s",
+      "sha256": "8e66a7c0381ec5c3fefe79ae1a25503975592fbd3bf10a8e2a8af15f66c952bb"
+    },
+    "tests-existing-terminal-host.log": {
+      "bytes": 368194,
+      "reported_summary": "22 passed in 153.20s (0:02:33)",
+      "sha256": "d70af12669f903f3e4535eb58c64fe0baf586d8f1f84829dc52ed8ff71986222"
+    },
+    "tests-existing-terminal-lifecycle.log": {
+      "bytes": 387245,
+      "reported_summary": "53 passed in 269.57s (0:04:29)",
+      "sha256": "0fb0b096b3fc83e8a58a27be3307dfbaf2841b7ecc2acfe6dfbefec7be666514"
+    },
+    "tests-merged-census-and-archive.log": {
+      "bytes": 3518,
+      "reported_summary": "111 passed in 34.13s",
+      "sha256": "944502791798bd14f46192e2f436ff77e01b70a66f791edd4fca60d4cc117279"
+    },
+    "tests-merged-native.log": {
+      "bytes": 1820,
+      "reported_summary": "2 passed, 59 deselected in 91.46s (0:01:31)",
+      "sha256": "7b08349bae5e5e2d8df07dfdd9f7be2460155d7522e0acf09d04059f87afd7c5"
+    },
+    "tests-merged-terminal-lifecycle-group1.log": {
+      "bytes": 302574,
+      "reported_summary": "40 passed in 223.10s (0:03:43)",
+      "sha256": "6c0aa037076feb6304937ff623029e35df2d7d3c873f9f16ffed0bd3585912e6"
+    },
+    "tests-merged-terminal-lifecycle-group2.log": {
+      "bytes": 478328,
+      "reported_summary": "37 passed in 218.27s (0:03:38)",
+      "sha256": "3d998530e62eec46e1068dfc1c47551bc39c1d14faff6d609ebc21e132c20d0a"
+    },
+    "tests-native-bridge-regression.log": {
+      "bytes": 2591,
+      "reported_summary": "6 passed, 25 deselected in 159.57s (0:02:39)",
+      "sha256": "3975d8f7b679b706e55109d8375f2f2f4a579accd447cb66743148a0ec02a42a"
+    },
+    "tests-new-census-finalguard.log": {
+      "bytes": 1891,
+      "reported_summary": "3 passed, 27 deselected in 66.25s (0:01:06)",
+      "sha256": "bcda2a951fd6d361c7e00183023126a374060f1cebc3ca1f8f74847101232e29"
+    },
+    "tests-new-census.log": {
+      "bytes": 2705,
+      "reported_summary": "28 passed in 381.77s (0:06:21)",
+      "sha256": "d94136b1ed4a584efb62a5ed556d9400ba747bf48332d0c268a57e5432cf5dce"
+    },
+    "tests-terminal-bound-final-restoration-group1.log": {
+      "bytes": 1480,
+      "reported_summary": "1 passed in 80.88s (0:01:20)",
+      "sha256": "f90cc0b6e91d19ecff0c94edf5c85ee04980b728e6dbf47b00c93ea7b6d7b9f2"
+    },
+    "tests-terminal-bound-final-restoration-group2.log": {
+      "bytes": 1484,
+      "reported_summary": "1 passed in 79.71s (0:01:19)",
+      "sha256": "12c0f0d7c28d4ec052572165064f4cf8a1029168e0151e0b054d3c1c4a9e42e4"
+    },
+    "tests-terminal-bound-final-restoration-group3.log": {
+      "bytes": 1520,
+      "reported_summary": "1 passed in 105.40s (0:01:45)",
+      "sha256": "5d77ba829c77d5f164a25f468f185a59c78fc8bd2a1ae1a9b63e47aefbd50e70"
+    },
+    "tests-terminal-bound-group1.log": {
+      "bytes": 3136,
+      "reported_summary": "11 passed in 595.52s (0:09:55)",
+      "sha256": "22bdd38f86aad39a2ef5ef45b607403ba8b80227a7c689b35f2773bf6e75d32b"
+    },
+    "tests-terminal-bound-group2.log": {
+      "bytes": 3106,
+      "reported_summary": "10 passed in 480.23s (0:08:00)",
+      "sha256": "4a749ea008b289357ef652d44d831c842c968b8e54e0023fc7818916a0bdf56c"
+    },
+    "tests-terminal-bound-group3.log": {
+      "bytes": 3162,
+      "reported_summary": "10 passed in 512.40s (0:08:32)",
+      "sha256": "4e742bc165f3f7f731b251c86f46304c0216c23ffa0cc47dfb7e43f14ed66c34"
+    },
+    "tests-terminal-bound-merged-group1.log": {
+      "bytes": 1951,
+      "reported_summary": "2 passed in 162.86s (0:02:42)",
+      "sha256": "188299b742a1b728dce04f395846d7805e77c5adfcb889a171aff43b616b0437"
+    },
+    "tests-terminal-bound-merged-group2.log": {
+      "bytes": 1951,
+      "reported_summary": "2 passed in 163.16s (0:02:43)",
+      "sha256": "6177811aecabf3922ee1053c1698db2ad99e0e6c62e79fd2317467df8ac19431"
+    },
+    "tests-terminal-positive-initial.log": {
+      "bytes": 1556,
+      "reported_summary": "1 passed, 26 deselected in 104.91s (0:01:44)",
+      "sha256": "cdbd1924e3e9e6d8f611d55961044c418c3a48d387462cf9898103d8222e3c1a"
+    }
+  },
+  "measurements": {
+    "actual_dependency_complete_repeated_status_population": null,
+    "actual_live_terminal_accepted_receipt_population": null,
+    "complete_run_token_savings": null,
+    "decoder_checkpoint_changed_by_this_phase": false,
+    "embeddings_recomputed": false,
+    "huggingface_upload_performed": false,
+    "live_benchmark_reward": null,
+    "live_proof_kernel_calls": 0,
+    "live_provider_calls": 0,
+    "model_inference_calls": 0,
+    "token_savings_claimed": false,
+    "training_steps": 0
+  },
+  "overlapping_reruns": {
+    "current_datasets_native_and_terminal_compatibility": 3,
+    "final_canonical_report_restoration_controls": 3,
+    "generic_positive_after_raw_binding_guard": 1,
+    "initial_terminal_positive": 1,
+    "merged_existing_census_and_archive": 105,
+    "merged_existing_terminal_lifecycle_and_host": 75,
+    "merged_generic_positive_and_actual_native_bridge": 2,
+    "merged_terminal_positive_and_report_restoration": 4
+  },
+  "overlapping_reruns_increase_distinct_count": false,
+  "parent_base_commit": "afed9ed3a81147225c95d5441beb22be28cc0d58",
+  "preserved_accelerate_parallel_commit": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+  "preserved_legal_ir_parent_commit": "31950f236a8c3c1156a8efd5e5a71f592152ef94",
+  "preserved_parallel_parent_commit": "2df573af49b14db42948dd382f9f377e1e116754",
+  "qualification_date": "2026-10-12",
+  "raw_log_bytes_preserved": true,
+  "raw_log_whitespace_attribute_scope": "this artifact directory only; source and documentation whitespace checks retained",
+  "remaining_qualifications": [
+    "Admit actual current task proof inventory from eligible reviewed producers; numerical task needs separate numerical admission",
+    "Reconnect original owners and version key/profile migration when emitter codec changes",
+    "Measure actual accepted receipts and dependency-complete repeated status",
+    "Measure complete native source/lineage/SQL lookup costs beyond census API counters",
+    "Qualify bounded source/receipt expansion before required-fact omission",
+    "Rebuild and qualify current merged runtime archive before live trial",
+    "Census complete coding input then compare matched total native planning/coding/lookup/repair tokens and official reward"
+  ],
+  "runtime_source_inventory_paths": 38,
+  "schema": "supervisor-terminal-header-admissions-qualification@1",
+  "semantics_and_limits": {
+    "assumptions_and_residual_obligations_discharged": false,
+    "atomic_owner_snapshot": false,
+    "authority_flags_false": true,
+    "canonical_error_invalidation_counters_scope": "retained initial nested observation; outer totals may contain later completed passes",
+    "direct_census_counters_enumerate_all_native_operations": false,
+    "eligibility_at_return_verified": false,
+    "emitter_upgrades_require_separately_admitted_key_profile_migration": true,
+    "existing_native_bookkeeping_may_write": true,
+    "header_admission_covers_largest_eigenval_task": false,
+    "historical_archives_cover_current_merged_source": false,
+    "kernel_calls_by_terminal_census": 0,
+    "largest_eigenval_accepted_proof_coverage_established": false,
+    "local_kernel_assurance_is_not_task_completion": true,
+    "new_storage_owners_created_by_census": 0,
+    "outer_terminal_context_and_nested_proof_currentness_distinct": true,
+    "receipt_caps_bound_lineage_prefix_work": false,
+    "requested_resource_enforcement_verified": false
+  },
+  "source_manifest": "source-manifest.json",
+  "status": "qualified_typed_terminal_header_admission_census",
+  "test_evidence": {
+    "actual_kernel_invocation_delegating_spy_preserved": true,
+    "actual_lean_z3_bridge_case_runs_installed_local_tools_on_authored_source": true,
+    "authored_router_proposal_used_only_during_terminal_fixture_setup": true,
+    "authored_transcripts_are_not_real_proof_evidence": true,
+    "harbor_for_adapter_checks": "0.23.0",
+    "isolated_per_process_seals_and_orchestration": true,
+    "new_generic_and_terminal_tests_use_authored_prover_transcripts": true,
+    "no_xdist_shared_seal": true,
+    "normal_ast_seal_enabled": true,
+    "parallel_terminal_node_sets_disjoint": true,
+    "python": "3.12.3",
+    "real_temporary_native_sqlite_hmac_and_duckdb_owners": true,
+    "terminal_node_inventory": "terminal-test-nodeids.json",
+    "terminal_prover_execution_and_new_proof_owner_constructors_forbidden": true,
+    "unexpected_test_failures": 0
+  },
+  "worktree_housekeeping": {
+    "active_accelerate_integration_and_current_datasets_snapshot_locked": true,
+    "foreign_worktrees_and_canonical_dirty_checkouts_preserved": true,
+    "merged_owned_previous_local_branches_deleted": [
+      "agent/scoped-header-cache-bridge-20261012",
+      "agent/header-proof-key-custody-publication-20261011"
+    ]
+  }
+}
