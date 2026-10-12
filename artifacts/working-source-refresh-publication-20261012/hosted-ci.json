@@ -1,0 +1,41 @@
+{
+  "accelerator_commit": "17a1e73fa725effd795aa06dd0fd7257c63345b5",
+  "annotations": [
+    {
+      "annotation_level": "failure",
+      "message": "The job was not started because your account is locked due to a billing issue."
+    },
+    {
+      "annotation_level": "notice",
+      "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\""
+    }
+  ],
+  "billing_block_observed": true,
+  "hosted_documentation_tests_started": false,
+  "initial_run_failed": 1,
+  "initial_run_passed": 1164,
+  "jobs": [
+    {
+      "completed_at": "2026-10-12T18:21:53Z",
+      "conclusion": "failure",
+      "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38290391891/job/114948804466",
+      "id": 114948804466,
+      "name": "documentation-gates",
+      "started_at": "2026-10-12T18:21:49Z",
+      "status": "completed"
+    }
+  ],
+  "local_documentation_gates_passed": true,
+  "local_unique_passing_cases": 1165,
+  "pinned_prover_exact_rerun_passed": 1,
+  "schema": "working-source-refresh-hosted-ci-observation@1",
+  "single_combined_green_run": false,
+  "workflow": {
+    "conclusion": "failure",
+    "head_sha": "17a1e73fa725effd795aa06dd0fd7257c63345b5",
+    "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38290391891",
+    "id": 38290391891,
+    "name": "Documentation Gates",
+    "status": "completed"
+  }
+}
