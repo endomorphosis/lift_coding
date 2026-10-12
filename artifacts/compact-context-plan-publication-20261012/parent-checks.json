@@ -1,0 +1,17 @@
+{
+  "schema": "supervisor-compact-context-plan-parent-checks@1",
+  "parent_base_revision": "ad3ffd2b9a253e5119b00b4dadfc2297111a3bcd",
+  "checker": "/home/barberb/lift_coding/.worktrees/token-selector-accelerate-20261011/scripts/docs/check_current_docs_links.py",
+  "checker_sha256": "596a0038b18d592f2e605643890afc85e457558f7b887932a474557d7586819e",
+  "note": "implementation_plan/docs/100-supervisor-compact-context-displacement-plan-2026-10-12.md",
+  "note_sha256": "0be24ecaef1d1808ad1832ce921dee6700bafe0604ab92a5d434f2b40b6473a3",
+  "errors": [],
+  "check_anchors": true,
+  "status": "pass",
+  "staged_pins": {
+    "external/ipfs_accelerate": "1ec233249317bc4c3772fc4847de27b106eee323",
+    "external/ipfs_datasets": "12b2de0f1c949b793772ce29edad84355978b9b7",
+    "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0"
+  },
+  "scope": "Documentation note links and intended Gitlinks only; no product test or whole-parent regression."
+}
