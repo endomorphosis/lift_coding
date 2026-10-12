@@ -1,0 +1,588 @@
+{
+  "checks": {
+    "check_runs": [
+      {
+        "completed_at": "2026-10-12T02:07:12Z",
+        "conclusion": "skipped",
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534635/job/114634209443",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534635/job/114634209443",
+        "id": 114634209443,
+        "name": "performance-benchmark",
+        "output": {
+          "annotations_count": 0,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634209443/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:13Z",
+        "status": "completed"
+      },
+      {
+        "completed_at": "2026-10-12T02:07:12Z",
+        "conclusion": "skipped",
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534635/job/114634208940",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534635/job/114634208940",
+        "id": 114634208940,
+        "name": "test-docker-compose",
+        "output": {
+          "annotations_count": 0,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634208940/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:13Z",
+        "status": "completed"
+      },
+      {
+        "completed_at": "2026-10-12T02:07:12Z",
+        "conclusion": "skipped",
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534635/job/114634208884",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534635/job/114634208884",
+        "id": 114634208884,
+        "name": "security-scan",
+        "output": {
+          "annotations_count": 0,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634208884/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:13Z",
+        "status": "completed"
+      },
+      {
+        "completed_at": "2026-10-12T02:07:12Z",
+        "conclusion": "skipped",
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534561/job/114634208655",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534561/job/114634208655",
+        "id": 114634208655,
+        "name": "test-multiarch-build",
+        "output": {
+          "annotations_count": 0,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634208655/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:13Z",
+        "status": "completed"
+      },
+      {
+        "completed_at": "2026-10-12T02:07:12Z",
+        "conclusion": "skipped",
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534561/job/114634208565",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534561/job/114634208565",
+        "id": 114634208565,
+        "name": "test-gpu-support",
+        "output": {
+          "annotations_count": 0,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634208565/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:13Z",
+        "status": "completed"
+      },
+      {
+        "completed_at": "2026-10-12T02:07:12Z",
+        "conclusion": "skipped",
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534561/job/114634208559",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534561/job/114634208559",
+        "id": 114634208559,
+        "name": "test-integration",
+        "output": {
+          "annotations_count": 0,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634208559/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:13Z",
+        "status": "completed"
+      },
+      {
+        "completed_at": "2026-10-12T02:07:16Z",
+        "conclusion": "failure",
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534635/job/114634208400",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534635/job/114634208400",
+        "id": 114634208400,
+        "name": "multiarch-summary",
+        "output": {
+          "annotations_count": 2,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634208400/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:13Z",
+        "status": "completed"
+      },
+      {
+        "completed_at": "2026-10-12T02:07:12Z",
+        "conclusion": "skipped",
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534635/job/114634208326",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534635/job/114634208326",
+        "id": 114634208326,
+        "name": "test-gpu-acceleration",
+        "output": {
+          "annotations_count": 0,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634208326/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:13Z",
+        "status": "completed"
+      },
+      {
+        "completed_at": "2026-10-12T02:07:12Z",
+        "conclusion": "skipped",
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534635/job/114634208308",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534635/job/114634208308",
+        "id": 114634208308,
+        "name": "test-multiarch-build",
+        "output": {
+          "annotations_count": 0,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634208308/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:13Z",
+        "status": "completed"
+      },
+      {
+        "completed_at": "2026-10-12T02:07:12Z",
+        "conclusion": "skipped",
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534635/job/114634208077",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534635/job/114634208077",
+        "id": 114634208077,
+        "name": "test-docker",
+        "output": {
+          "annotations_count": 0,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634208077/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:12Z",
+        "status": "completed"
+      },
+      {
+        "completed_at": "2026-10-12T02:07:12Z",
+        "conclusion": "skipped",
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534561/job/114634208074",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534561/job/114634208074",
+        "id": 114634208074,
+        "name": "performance-baseline",
+        "output": {
+          "annotations_count": 0,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634208074/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:12Z",
+        "status": "completed"
+      },
+      {
+        "completed_at": "2026-10-12T02:07:12Z",
+        "conclusion": "skipped",
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534561/job/114634207923",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534561/job/114634207923",
+        "id": 114634207923,
+        "name": "test-amd64-docker",
+        "output": {
+          "annotations_count": 0,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634207923/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:12Z",
+        "status": "completed"
+      },
+      {
+        "completed_at": "2026-10-12T02:07:12Z",
+        "conclusion": "skipped",
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534635/job/114634207842",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534635/job/114634207842",
+        "id": 114634207842,
+        "name": "test-native",
+        "output": {
+          "annotations_count": 0,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634207842/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:12Z",
+        "status": "completed"
+      },
+      {
+        "completed_at": "2026-10-12T02:07:12Z",
+        "conclusion": "skipped",
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534561/job/114634207829",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534561/job/114634207829",
+        "id": 114634207829,
+        "name": "test-docker-compose",
+        "output": {
+          "annotations_count": 0,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634207829/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:12Z",
+        "status": "completed"
+      },
+      {
+        "completed_at": "2026-10-12T02:07:15Z",
+        "conclusion": "failure",
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534561/job/114634207543",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534561/job/114634207543",
+        "id": 114634207543,
+        "name": "amd64-summary",
+        "output": {
+          "annotations_count": 2,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634207543/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:12Z",
+        "status": "completed"
+      },
+      {
+        "completed_at": "2026-10-12T02:07:12Z",
+        "conclusion": "skipped",
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534576/job/114634207129",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534576/job/114634207129",
+        "id": 114634207129,
+        "name": "arm64-full-tests",
+        "output": {
+          "annotations_count": 0,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634207129/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:12Z",
+        "status": "completed"
+      },
+      {
+        "completed_at": "2026-10-12T02:07:12Z",
+        "conclusion": "skipped",
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534576/job/114634206522",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534576/job/114634206522",
+        "id": 114634206522,
+        "name": "arm64-docker-tests",
+        "output": {
+          "annotations_count": 0,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634206522/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:12Z",
+        "status": "completed"
+      },
+      {
+        "completed_at": "2026-10-12T02:07:12Z",
+        "conclusion": "failure",
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534665/job/114634195224",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534665/job/114634195224",
+        "id": 114634195224,
+        "name": "documentation-gates",
+        "output": {
+          "annotations_count": 2,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634195224/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:09Z",
+        "status": "completed"
+      },
+      {
+        "completed_at": "2026-10-12T02:07:12Z",
+        "conclusion": "failure",
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534602/job/114634195077",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534602/job/114634195077",
+        "id": 114634195077,
+        "name": "qualification",
+        "output": {
+          "annotations_count": 2,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634195077/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:09Z",
+        "status": "completed"
+      },
+      {
+        "completed_at": "2026-10-12T02:07:12Z",
+        "conclusion": "failure",
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534695/job/114634194858",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534695/job/114634194858",
+        "id": 114634194858,
+        "name": "serving-contract-gates",
+        "output": {
+          "annotations_count": 2,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634194858/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:09Z",
+        "status": "completed"
+      },
+      {
+        "completed_at": "2026-10-12T02:07:12Z",
+        "conclusion": "failure",
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534576/job/114634194726",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534576/job/114634194726",
+        "id": 114634194726,
+        "name": "security-audit",
+        "output": {
+          "annotations_count": 2,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634194726/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:09Z",
+        "status": "completed"
+      },
+      {
+        "completed_at": "2026-10-12T02:07:12Z",
+        "conclusion": "failure",
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534635/job/114634194711",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534635/job/114634194711",
+        "id": 114634194711,
+        "name": "detect-platforms",
+        "output": {
+          "annotations_count": 2,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634194711/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:09Z",
+        "status": "completed"
+      },
+      {
+        "completed_at": "2026-10-12T02:07:12Z",
+        "conclusion": "failure",
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534575/job/114634194648",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534575/job/114634194648",
+        "id": 114634194648,
+        "name": "build-and-push",
+        "output": {
+          "annotations_count": 2,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634194648/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:09Z",
+        "status": "completed"
+      },
+      {
+        "completed_at": null,
+        "conclusion": null,
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534592/job/114634194588",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534592/job/114634194588",
+        "id": 114634194588,
+        "name": "Setup Cache Infrastructure",
+        "output": {
+          "annotations_count": 0,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634194588/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:09Z",
+        "status": "queued"
+      },
+      {
+        "completed_at": "2026-10-12T02:07:12Z",
+        "conclusion": "failure",
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534561/job/114634194399",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534561/job/114634194399",
+        "id": 114634194399,
+        "name": "test-amd64-containerized",
+        "output": {
+          "annotations_count": 2,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634194399/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:09Z",
+        "status": "completed"
+      },
+      {
+        "completed_at": "2026-10-12T02:07:12Z",
+        "conclusion": "failure",
+        "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534576/job/114634194331",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534576/job/114634194331",
+        "id": 114634194331,
+        "name": "arm64-containerized-tests",
+        "output": {
+          "annotations_count": 2,
+          "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/114634194331/annotations",
+          "summary": null,
+          "title": null
+        },
+        "started_at": "2026-10-12T02:07:09Z",
+        "status": "completed"
+      }
+    ],
+    "total_count": 26
+  },
+  "endpoints": {
+    "checks": "repos/endomorphosis/ipfs_accelerate_py/commits/7a00a0875b3d887183f77d2db5b819e7db7fd96d/check-runs?per_page=100",
+    "runs": "repos/endomorphosis/ipfs_accelerate_py/actions/runs?head_sha=7a00a0875b3d887183f77d2db5b819e7db7fd96d&per_page=100",
+    "statuses": "repos/endomorphosis/ipfs_accelerate_py/commits/7a00a0875b3d887183f77d2db5b819e7db7fd96d/status?per_page=100"
+  },
+  "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+  "observed_utc": "2026-10-12T02:08:00Z",
+  "repository": "endomorphosis/ipfs_accelerate_py",
+  "runs": {
+    "total_count": 11,
+    "workflow_runs": [
+      {
+        "conclusion": null,
+        "created_at": "2026-10-12T02:07:08Z",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534592",
+        "id": 38194534592,
+        "name": "Example Cached Workflow",
+        "run_attempt": 1,
+        "status": "queued",
+        "updated_at": "2026-10-12T02:07:08Z"
+      },
+      {
+        "conclusion": "failure",
+        "created_at": "2026-10-12T02:07:08Z",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534695",
+        "id": 38194534695,
+        "name": "Serving Contract Gates",
+        "run_attempt": 1,
+        "status": "completed",
+        "updated_at": "2026-10-12T02:07:13Z"
+      },
+      {
+        "conclusion": "failure",
+        "created_at": "2026-10-12T02:07:08Z",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534575",
+        "id": 38194534575,
+        "name": "Build Multi-Arch Docker Images",
+        "run_attempt": 1,
+        "status": "completed",
+        "updated_at": "2026-10-12T02:07:13Z"
+      },
+      {
+        "conclusion": "failure",
+        "created_at": "2026-10-12T02:07:08Z",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534576",
+        "id": 38194534576,
+        "name": "ARM64 CI/CD Pipeline",
+        "run_attempt": 1,
+        "status": "completed",
+        "updated_at": "2026-10-12T02:07:12Z"
+      },
+      {
+        "conclusion": "failure",
+        "created_at": "2026-10-12T02:07:08Z",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534602",
+        "id": 38194534602,
+        "name": "external-agent-fabric",
+        "run_attempt": 1,
+        "status": "completed",
+        "updated_at": "2026-10-12T02:07:12Z"
+      },
+      {
+        "conclusion": "failure",
+        "created_at": "2026-10-12T02:07:08Z",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534665",
+        "id": 38194534665,
+        "name": "Documentation Gates",
+        "run_attempt": 1,
+        "status": "completed",
+        "updated_at": "2026-10-12T02:07:13Z"
+      },
+      {
+        "conclusion": "failure",
+        "created_at": "2026-10-12T02:07:08Z",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534635",
+        "id": 38194534635,
+        "name": "Multi-Architecture CI/CD Pipeline",
+        "run_attempt": 1,
+        "status": "completed",
+        "updated_at": "2026-10-12T02:07:16Z"
+      },
+      {
+        "conclusion": "failure",
+        "created_at": "2026-10-12T02:07:08Z",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194534561",
+        "id": 38194534561,
+        "name": "AMD64 CI/CD Pipeline",
+        "run_attempt": 1,
+        "status": "completed",
+        "updated_at": "2026-10-12T02:07:16Z"
+      },
+      {
+        "conclusion": "failure",
+        "created_at": "2026-10-12T02:07:07Z",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194533527",
+        "id": 38194533527,
+        "name": ".github/workflows/auto-heal-failures.yml",
+        "run_attempt": 1,
+        "status": "completed",
+        "updated_at": "2026-10-12T02:07:07Z"
+      },
+      {
+        "conclusion": "failure",
+        "created_at": "2026-10-12T02:07:07Z",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194532740",
+        "id": 38194532740,
+        "name": ".github/workflows/proof-context-clean-install.yml",
+        "run_attempt": 1,
+        "status": "completed",
+        "updated_at": "2026-10-12T02:07:07Z"
+      },
+      {
+        "conclusion": "failure",
+        "created_at": "2026-10-12T02:07:06Z",
+        "head_sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38194531986",
+        "id": 38194531986,
+        "name": ".github/workflows/proof-context-v0.1.yml",
+        "run_attempt": 1,
+        "status": "completed",
+        "updated_at": "2026-10-12T02:07:06Z"
+      }
+    ]
+  },
+  "statuses": {
+    "sha": "7a00a0875b3d887183f77d2db5b819e7db7fd96d",
+    "state": "pending",
+    "statuses": []
+  }
+}
