@@ -1,0 +1,42 @@
+{
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-storage-closeout-20261012-02/source-check-114680486453-annotations-v01.json": {
+      "bytes": 919,
+      "sha256": "1c6e028fa189d8e5c548001284b0c6bba51e4b57e5e71ab3676b5b28a21d49ce"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-storage-closeout-20261012-02/source-check-114680486591-annotations-v01.json": {
+      "bytes": 919,
+      "sha256": "1c6e028fa189d8e5c548001284b0c6bba51e4b57e5e71ab3676b5b28a21d49ce"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-storage-closeout-20261012-02/source-check-114680486603-annotations-v01.json": {
+      "bytes": 919,
+      "sha256": "1c6e028fa189d8e5c548001284b0c6bba51e4b57e5e71ab3676b5b28a21d49ce"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-storage-closeout-20261012-02/source-check-114680486689-annotations-v01.json": {
+      "bytes": 919,
+      "sha256": "1c6e028fa189d8e5c548001284b0c6bba51e4b57e5e71ab3676b5b28a21d49ce"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-storage-closeout-20261012-02/source-hosted-jobs-v01.json": {
+      "bytes": 4501,
+      "sha256": "866a329335e29e1066c98b5d748b1bc7ce915f1b9b2a0a1e3566c11c1fd75d96"
+    }
+  },
+  "failure_messages": [
+    "The job was not started because your account is locked due to a billing issue.",
+    "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+    "The job was not started because your account is locked due to a billing issue.",
+    "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+    "The job was not started because your account is locked due to a billing issue.",
+    "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+    "The job was not started because your account is locked due to a billing issue.",
+    "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\""
+  ],
+  "head": "75c55ba38284482f969bde56b6399de37e2b3457",
+  "hosted_CI_passed": false,
+  "hosted_jobs": 4,
+  "hosted_jobs_no_runner_and_no_steps": true,
+  "local_validation_scope": "Recorded actual training/closeout/runtime/result reviews; nine syntax compiles and cached whitespace check. Hosted checks not executed; other workflows not qualified.",
+  "other_queued_checks": 15,
+  "repository": "endomorphosis/ipfs_datasets_py",
+  "schema": "legal-storage-training-hosted-CI-observation/v1"
+}

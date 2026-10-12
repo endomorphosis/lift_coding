@@ -1,0 +1,51 @@
+{
+  "actual_first_parent": "c18390b350c7ab40f5bd342578204a03dc34fe05",
+  "actual_merge": "bc25cb4c78bf848a7a3fe5aab7dbefb7e290f261",
+  "after_gitlinks": {
+    ".tools/ipfs_kit_py": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+    "ipfs_accelerate_py": "5306d49957bba7444a31639584e26378f3e3fb19",
+    "ipfs_datasets_py/logic/CEC/DCEC_Library": "a4beb5b3280595be6b9221cac3c91dd019e6d371",
+    "ipfs_datasets_py/logic/CEC/Eng-DCEC": "df518c21ef81b8001e6db59f5fd70f10cc04ff6c",
+    "ipfs_datasets_py/logic/CEC/ShadowProver": "3060ede1ac1ec3f8ef9f9c9e41386aed1dbbe7f9",
+    "ipfs_datasets_py/logic/CEC/Talos": "e0b7650d3e3a403924773f8253e924c719748d36",
+    "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type": "d58933631a5362b1e2fdc45254ef620fa231223a",
+    "ipfs_datasets_py/multimedia/omni_converter_mk2": "c1d9b0d517cea022516aab5b5d8fa5e3bc9a65aa",
+    "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine": "0e635cba586e8f6f6ea8126e3b1668b3e675c029",
+    "ipfs_kit_py": "a9b98beac1ef14278b4adf4f2289cd509530fb86"
+  },
+  "before_gitlinks": {
+    ".tools/ipfs_kit_py": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+    "ipfs_accelerate_py": "5306d49957bba7444a31639584e26378f3e3fb19",
+    "ipfs_datasets_py/logic/CEC/DCEC_Library": "a4beb5b3280595be6b9221cac3c91dd019e6d371",
+    "ipfs_datasets_py/logic/CEC/Eng-DCEC": "df518c21ef81b8001e6db59f5fd70f10cc04ff6c",
+    "ipfs_datasets_py/logic/CEC/ShadowProver": "3060ede1ac1ec3f8ef9f9c9e41386aed1dbbe7f9",
+    "ipfs_datasets_py/logic/CEC/Talos": "e0b7650d3e3a403924773f8253e924c719748d36",
+    "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type": "d58933631a5362b1e2fdc45254ef620fa231223a",
+    "ipfs_datasets_py/multimedia/omni_converter_mk2": "c1d9b0d517cea022516aab5b5d8fa5e3bc9a65aa",
+    "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine": "0e635cba586e8f6f6ea8126e3b1668b3e675c029",
+    "ipfs_kit_py": "a9b98beac1ef14278b4adf4f2289cd509530fb86"
+  },
+  "closed_objects": {
+    "bytes": 20586,
+    "path": "/home/barberb/lift_coding/artifacts/legal-storage-closeout-20261012-02/source-closed-objects-v01.json",
+    "sha256": "98b1d9ece6c3f0b88b5f3fc4f82668816b40f47007ed7b260ef0e15156b48071"
+  },
+  "contribution_head": "75c55ba38284482f969bde56b6399de37e2b3457",
+  "findings": [],
+  "first_parent_changes_exactly_owned": true,
+  "nonowned_first_parent_objects_preserved": true,
+  "passed": true,
+  "paths": 69,
+  "pull_request": {
+    "headRefOid": "75c55ba38284482f969bde56b6399de37e2b3457",
+    "mergeCommit": {
+      "oid": "bc25cb4c78bf848a7a3fe5aab7dbefb7e290f261"
+    },
+    "mergedAt": "2026-10-12T05:50:56Z",
+    "state": "MERGED",
+    "url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1289"
+  },
+  "repository": "endomorphosis/ipfs_datasets_py",
+  "schema": "temporal-binding-actual-merged-publication/v1",
+  "scope": "Actual Git objects and metadata; no CI, runtime, legal or continuous custody qualification"
+}
