@@ -1,0 +1,1227 @@
+{
+  "copies": {
+    "docs/autoencoders/matched_temporal_curriculum_20261012.md": {
+      "bytes": 5891,
+      "sha256": "dcbaf0a4d5d2efd1912c578f1eae3ee470f764d5a484dadeaed6153b3e776597",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/README.md"
+    },
+    "docs/autoencoders/matched_temporal_training_gaps_20261012.md": {
+      "bytes": 3397,
+      "sha256": "35ee6f8a37378f82a26230059cc312a5f7e5ea4e51f758cdb0add3de9657db6a",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/remaining-training-gaps-v01.md"
+    },
+    "ipfs_datasets_py/logic/legal_ir/matched_temporal_curriculum.py": {
+      "bytes": 39619,
+      "sha256": "a64fa4f79e949593744768c8ab4896f349d93d2885ebbc36a13d0854e6185a71",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/source/ipfs_datasets_py/logic/legal_ir/matched_temporal_curriculum.py"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_curriculum.py": {
+      "bytes": 27004,
+      "sha256": "311c39aa7e57c63838ee017e47b87411ffadaabd4d84c0b63b9f4d35103cd283",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/source/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_curriculum.py"
+    },
+    "tests/unit/logic/legal_ir/test_matched_temporal_curriculum.py": {
+      "bytes": 16173,
+      "sha256": "b1cecde739051c18a276023d5e09521a7949c171da21a8a1e3ca8716773f80e2",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/source/tests/unit/logic/legal_ir/test_matched_temporal_curriculum.py"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_curriculum_contracts.py": {
+      "bytes": 33707,
+      "sha256": "177096d9c145a17190e407f1a9664e9a941833132122842f0761062539b03af6",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/source/tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_curriculum_contracts.py"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/plan.json": {
+      "bytes": 49520,
+      "sha256": "2b1ff445abc72b2876b94e028b65cc6fc2c0fcdb65777000df9d6f138fe7e980",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/plan.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/baseline-authored_dev-score.json": {
+      "bytes": 105390,
+      "sha256": "1e8e8e6d51ac21166e72e3920e3605e0ab76318f394f2c94bf2edf4a72509c6c",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/results/baseline-authored_dev-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/baseline-fresh_challenge-score.json": {
+      "bytes": 53748,
+      "sha256": "89a2ef512280abf58718cd33cebc06b0603e9fd4445ae39dbecad18b8b3f61c9",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/results/baseline-fresh_challenge-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/baseline-fresh_tune-score.json": {
+      "bytes": 53408,
+      "sha256": "0c4926e285700c1717cd7faff68766ea2547628f764cd392d64eee498ee944c2",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/results/baseline-fresh_tune-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/baseline-old_tune-score.json": {
+      "bytes": 101532,
+      "sha256": "a721d6226d373ad4ca060a822fe19c700537514b355990a4ce9b20d54f6fba92",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/results/baseline-old_tune-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/cell-training.json": {
+      "bytes": 47977,
+      "sha256": "4d94ef0a9875000102241d99d160b15edf75bbcae6b32fe471933784923046b5",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/results/cell-training.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/data-schedule-before-models.json": {
+      "bytes": 26725,
+      "sha256": "cd3e306d055b8e079252c99f2e20cac1a9f632cf5465b5e6ef19d8a13ec147c9",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/results/data-schedule-before-models.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/initial-parity.json": {
+      "bytes": 2131,
+      "sha256": "f2a91ab06dafe4138681d09e52414507b2c15a095c02560839798327d24c2f26",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/results/initial-parity.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/summary.json": {
+      "bytes": 49796,
+      "sha256": "a7e9468974f573213a730610b6943b05479ae27ebc804400dd258aa5b59c735c",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/results/summary.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/trained-authored_dev-score.json": {
+      "bytes": 105157,
+      "sha256": "53b9b9e42c800bba2bdd94f1957d59e61956767214bb8b0631f1960bf3a97777",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/results/trained-authored_dev-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/trained-fresh_challenge-score.json": {
+      "bytes": 53556,
+      "sha256": "37b48f3060479e6a1762edbeae9d12abeaf5a1fafaee5eaed27f87d2d8123b49",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/results/trained-fresh_challenge-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/trained-fresh_tune-score.json": {
+      "bytes": 53314,
+      "sha256": "8bf2b01a29201b08bdacb17ccfab71d932792c0445a27a7a3dc4b33c81389063",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/results/trained-fresh_tune-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/trained-old_tune-score.json": {
+      "bytes": 101548,
+      "sha256": "22c7510b2fc5b1eaa1b1f5f9d7184293e7559d4c317d52262fe24b573ab07d3e",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/results/trained-old_tune-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/trained-parity.json": {
+      "bytes": 2131,
+      "sha256": "53064b50ff4d29314effa2370aae76cdc5a51f9f38c02da4945cf9ffe9fabbb8",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/results/trained-parity.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/child-exit.json": {
+      "bytes": 104,
+      "sha256": "9ecd362f784764d1d5149b4ad59a73889a5835c500b4c6d130d06262b301d5ec",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/runtime/child-exit.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/child-identity.json": {
+      "bytes": 44,
+      "sha256": "d3be0c55294952a3315b1508376c4a73b4fead85e8b8d374220af1e9cdcb166b",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/runtime/child-identity.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/child.log": {
+      "bytes": 74,
+      "sha256": "e816ebde03f534150e98e6406ffe084d852a2bcc1f86dd1cc41ce57f08603a94",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/runtime/child.log"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/command.json": {
+      "bytes": 1076,
+      "sha256": "606006b816aa946ef0e16ad9ce4c9b3c486fdf18a7004d7f7310b94ca5426d91",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/runtime/command.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/group-rss-observations.jsonl": {
+      "bytes": 15014,
+      "sha256": "e0ed640e81f2635c60b8498cade30ddd82e531a9f8a1b75fed38fcc554fbd39b",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/runtime/group-rss-observations.jsonl"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/group-rss-summary.json": {
+      "bytes": 1758,
+      "sha256": "bc101bec82cf0c6f0b5a56dc39c794bf88d1a61848242b3edcb6465e004e0f43",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/runtime/group-rss-summary.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/guardian-exit.json": {
+      "bytes": 521,
+      "sha256": "01e3d8135e8feee438296e0940f0230e92167d3b31eb63f588558bb9cbdd2082",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/runtime/guardian-exit.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/lease-binding.json": {
+      "bytes": 694,
+      "sha256": "a2140c691f8e1d898d383074dbd433e3d326eb9242664d541307418120cf2fd6",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/runtime/lease-binding.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/lease-observations.jsonl": {
+      "bytes": 32717,
+      "sha256": "ab789145e85affed6c17753ee7236bd8c58cf42c5d8be3e5a015a328d99b46cf",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/runtime/lease-observations.jsonl"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/owned-group-final.json": {
+      "bytes": 190,
+      "sha256": "8bf53f9fe4ba78cec5971a9d944fe5abf56b7a5295f204da10be888629dcdbc1",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/runtime/owned-group-final.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/pre-admission.json": {
+      "bytes": 8024,
+      "sha256": "6890c464f6d0bb324ef9f1b9d4ca2e719b9689101ad4d5f06519944a1d730850",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/runtime/pre-admission.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/resource-observations.json": {
+      "bytes": 874,
+      "sha256": "c0a986a95e996c0c6d405df32b97fa916dffded40fbcf12a851d20967bbb603e",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/runtime/resource-observations.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/scheduler-adoption.json": {
+      "bytes": 4646,
+      "sha256": "4677a1c0d7e3ba406756228351813379bb1a6190a63f3154b00e357101715de9",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/runtime/scheduler-adoption.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/training-protocol-review.json": {
+      "bytes": 104209,
+      "sha256": "fe60bae52be4d280ee8f373f6ccef1b6b10b96285216b9b25edc505afc1f71b5",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality0/training-protocol-review.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/plan.json": {
+      "bytes": 56352,
+      "sha256": "a4a789824b330b109e7f49f057986978e81877ed610375aa22d552188badb775",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality1/plan.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/results/cell-training.json": {
+      "bytes": 47985,
+      "sha256": "d3abe32938149bba74f22d58f81ddedc0fab356b72c3254a8befb81c519000af",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality1/results/cell-training.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/results/data-schedule-before-models.json": {
+      "bytes": 26725,
+      "sha256": "cd3e306d055b8e079252c99f2e20cac1a9f632cf5465b5e6ef19d8a13ec147c9",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality1/results/data-schedule-before-models.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/results/initial-parity.json": {
+      "bytes": 2131,
+      "sha256": "fd32590c1464d198765dc894067069b9fb2b9bfe837268c3ea215c5a6abce551",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality1/results/initial-parity.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/results/summary.json": {
+      "bytes": 50095,
+      "sha256": "e55c2b791c178a8a781e8de7dafae62f2fa19c17f70388e2df295ea59d779011",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality1/results/summary.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/results/trained-authored_dev-score.json": {
+      "bytes": 105106,
+      "sha256": "222639d913bf29df94a3b3bd98a8be79e9347ddedd346e9462edf322c21a519e",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality1/results/trained-authored_dev-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/results/trained-fresh_challenge-score.json": {
+      "bytes": 53550,
+      "sha256": "e7d2fd74ab01f66b066c975c60f4bdda77d69bc2fd04de3637701a3fa9fdb3ef",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality1/results/trained-fresh_challenge-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/results/trained-fresh_tune-score.json": {
+      "bytes": 53309,
+      "sha256": "49ee3b0123070694335b5588ddb735eac9333ca13f886a2d404f1d31c4218ea0",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality1/results/trained-fresh_tune-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/results/trained-old_tune-score.json": {
+      "bytes": 101544,
+      "sha256": "61520c0162527619eea031bc964a5d2d88f6a3e7e4ac922492cd552ecb46dcb2",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality1/results/trained-old_tune-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/results/trained-parity.json": {
+      "bytes": 2131,
+      "sha256": "132230ce717de582481ce22b9574084f21483870178b437e6a25f45bbfe1e716",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality1/results/trained-parity.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/child-exit.json": {
+      "bytes": 104,
+      "sha256": "3641b4d6e330f09d65f41c62015ebbd027753ed1187c28f9f466f5abbb856912",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality1/runtime/child-exit.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/child-identity.json": {
+      "bytes": 44,
+      "sha256": "8c1a2d89b6f92f76f3772bd948fbda760031af09a77c8c779e52058cdbaa86d0",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality1/runtime/child-identity.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/child.log": {
+      "bytes": 74,
+      "sha256": "0e6d3882d41740c6191de9a9155f6ba9868c327446525504fa47b88657235789",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality1/runtime/child.log"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/command.json": {
+      "bytes": 1076,
+      "sha256": "f5929383668629da57aff535e7881b31dfdbafcf2104479593342061d462b27a",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality1/runtime/command.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/group-rss-observations.jsonl": {
+      "bytes": 14012,
+      "sha256": "92e09c379cab6b7ab45d10e854d258c52c0e1c3f772abc4df1627ffb0fae569b",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality1/runtime/group-rss-observations.jsonl"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/group-rss-summary.json": {
+      "bytes": 1757,
+      "sha256": "743b1e28443926ef08c2f742c65907d4e3372e52603e8aae4b7b8d22876e9817",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality1/runtime/group-rss-summary.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/guardian-exit.json": {
+      "bytes": 521,
+      "sha256": "eb561ca4e0bf99800ec08226dfe85b4f6abe8fde43e26cd889d9c8d8fbe94f5b",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality1/runtime/guardian-exit.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/lease-binding.json": {
+      "bytes": 694,
+      "sha256": "e31f99930debe6a27e0e0a98ffee75633cbb1b7864bf5ab2229f81fd67d882d7",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality1/runtime/lease-binding.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/lease-observations.jsonl": {
+      "bytes": 28688,
+      "sha256": "f31ef56fb315349b132fadd138f0b271c11754be9538aa498b7abc80ab892106",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality1/runtime/lease-observations.jsonl"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/owned-group-final.json": {
+      "bytes": 190,
+      "sha256": "645f965b88767d683b5bd468d8adc1411d7ab9d35475c9d2133f63490cee3c68",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality1/runtime/owned-group-final.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/pre-admission.json": {
+      "bytes": 8042,
+      "sha256": "8a44399f4a7f32ec428887bb86674ba17ee97c706b774e6e6a7e44db88d5f4bd",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality1/runtime/pre-admission.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/resource-observations.json": {
+      "bytes": 874,
+      "sha256": "7cb5d3201b8d8567f920833a29e8068230b32c60d6fd0994ea0894d7d056bcbf",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality1/runtime/resource-observations.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/scheduler-adoption.json": {
+      "bytes": 4646,
+      "sha256": "ee20170c45fe8fcafec2dfaffa385f378d7f86f06cd7e11497379a8c95b64d02",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality1/runtime/scheduler-adoption.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/training-protocol-review.json": {
+      "bytes": 133957,
+      "sha256": "5f4f7ad199360cab4e1155fb71f0263735d9ddb87a963315df502d183921f00a",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope0-modality1/training-protocol-review.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/plan.json": {
+      "bytes": 56352,
+      "sha256": "ea0206c6fe49648daf6c8b45e91e6b8bdc78e8ecec68347440b463350aa77a26",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality0/plan.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/results/cell-training.json": {
+      "bytes": 47980,
+      "sha256": "798bfaa382143dd40838df3e664336356640e78d00db9ca7d338de3ec2c5ba9e",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality0/results/cell-training.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/results/data-schedule-before-models.json": {
+      "bytes": 26725,
+      "sha256": "cd3e306d055b8e079252c99f2e20cac1a9f632cf5465b5e6ef19d8a13ec147c9",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality0/results/data-schedule-before-models.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/results/initial-parity.json": {
+      "bytes": 2131,
+      "sha256": "482899edec9ee5d82dec997ceef3d63a0a19cb913382471b3499dc605810624c",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality0/results/initial-parity.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/results/summary.json": {
+      "bytes": 50096,
+      "sha256": "10682bcea2c4142069f379a453f3a200740f047acea4d08f7c2ab82da2d2794b",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality0/results/summary.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/results/trained-authored_dev-score.json": {
+      "bytes": 105077,
+      "sha256": "443a3ed4f9912640b5254426a3aa9b80a3d173592b764c709dc44a200865f8f9",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality0/results/trained-authored_dev-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/results/trained-fresh_challenge-score.json": {
+      "bytes": 53538,
+      "sha256": "5e909861698839f2a26ca1093be339832cacde2ff6ea978a9f00f94b855743cc",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality0/results/trained-fresh_challenge-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/results/trained-fresh_tune-score.json": {
+      "bytes": 53305,
+      "sha256": "20f9de9944331eb0ea475315b531aab11bd30e3701cf5096905dd86b87e088be",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality0/results/trained-fresh_tune-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/results/trained-old_tune-score.json": {
+      "bytes": 101541,
+      "sha256": "af0b2f8eb97b2c6671888182766adec8bfc50f92469a0e5c54318264fb0f0fb1",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality0/results/trained-old_tune-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/results/trained-parity.json": {
+      "bytes": 2131,
+      "sha256": "eaf31c1ef045f6132c585b7df5feae3194042f579eb9acfc6129a70883e85fb3",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality0/results/trained-parity.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/child-exit.json": {
+      "bytes": 104,
+      "sha256": "971ddb857875085978e30a6ac7108c6810c989063043d99c584bbb6ea41a2b84",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality0/runtime/child-exit.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/child-identity.json": {
+      "bytes": 44,
+      "sha256": "c98e9c607ebe63e2f2c36b2bdc8447dfd0d0fee3f7fbd071f22c6881fda93b79",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality0/runtime/child-identity.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/child.log": {
+      "bytes": 74,
+      "sha256": "38f19f405a932ababf32c8abfcbdc6d6b23ec83d13faeb59c4236751abdc97c0",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality0/runtime/child.log"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/command.json": {
+      "bytes": 1076,
+      "sha256": "3b471b5eb6ebf5a4ef495f9fb9fc06b75ebcd18b99cf1310cd366c333b0b5233",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality0/runtime/command.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/group-rss-observations.jsonl": {
+      "bytes": 14513,
+      "sha256": "3e033b97db1a0062d5e83ea5cdeaccde400d129483d183078fb5bccc5f2a9123",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality0/runtime/group-rss-observations.jsonl"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/group-rss-summary.json": {
+      "bytes": 1759,
+      "sha256": "e24cda9846cadc7318aa0a0906b8845121fd0226ae33e903ccd159346b18d807",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality0/runtime/group-rss-summary.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/guardian-exit.json": {
+      "bytes": 520,
+      "sha256": "df67ee4360bbbd38ec36c91506705a4a7adbd1f007858354af14f143910b9b2b",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality0/runtime/guardian-exit.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/lease-binding.json": {
+      "bytes": 694,
+      "sha256": "e8ce87ecd9f0b53d60971dd455defff81f1fa57106d92d24e048ed67769cbc9d",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality0/runtime/lease-binding.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/lease-observations.jsonl": {
+      "bytes": 30713,
+      "sha256": "51848b4eb100a680e77468308a105cb91b6eb4a82752e524f010cddb9c3e8566",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality0/runtime/lease-observations.jsonl"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/owned-group-final.json": {
+      "bytes": 190,
+      "sha256": "b15bb18b8e8bc776ba6faa10c2ba67cff21b58b4cf0ebc31bd46bf50d94e29ea",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality0/runtime/owned-group-final.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/pre-admission.json": {
+      "bytes": 8042,
+      "sha256": "6f532ceea6feda7fdaa1cd64f464c9b6939fd6d8e4c58268096aa9d1929e206a",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality0/runtime/pre-admission.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/resource-observations.json": {
+      "bytes": 874,
+      "sha256": "a8271e54fb1fac77e3b7b53bbed83177c70b1605395cfe793881bdddce7b20c0",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality0/runtime/resource-observations.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/scheduler-adoption.json": {
+      "bytes": 4646,
+      "sha256": "ce5459bb19e32acf0e2af462a3624c6f1fc31cf1b3a42e42183a74ca884a95de",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality0/runtime/scheduler-adoption.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/training-protocol-review.json": {
+      "bytes": 134067,
+      "sha256": "96be10ceb791577bd34dfc6d7347f8873a89b6d9c8cd2f333ab8116127f3abef",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality0/training-protocol-review.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/plan.json": {
+      "bytes": 56352,
+      "sha256": "095ca035935263b4b3a9342a469fa4260f2a6578c3b02c861ef38b8275ff9910",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality1/plan.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/results/cell-training.json": {
+      "bytes": 47989,
+      "sha256": "c6511aa780078e8e7015c6e44383169e766e0f8e7c2b177656ebf826737d4806",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality1/results/cell-training.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/results/data-schedule-before-models.json": {
+      "bytes": 26725,
+      "sha256": "cd3e306d055b8e079252c99f2e20cac1a9f632cf5465b5e6ef19d8a13ec147c9",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality1/results/data-schedule-before-models.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/results/initial-parity.json": {
+      "bytes": 2131,
+      "sha256": "8315a2bdaa277bc839c36312b2a529d050a76c57ae55260ce108b5ee064bbdb1",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality1/results/initial-parity.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/results/summary.json": {
+      "bytes": 50096,
+      "sha256": "7b23a7051e66e19590f437f4dc367d1a4215504ec94db3a3bf03e833b3be9204",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality1/results/summary.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/results/trained-authored_dev-score.json": {
+      "bytes": 105054,
+      "sha256": "673a4a8ba73b2a0e6f2cfcfabf69395113ac0de5f0798fde984f07b08f7652aa",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality1/results/trained-authored_dev-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/results/trained-fresh_challenge-score.json": {
+      "bytes": 53533,
+      "sha256": "cab7781304255aef8aef16ab78463528961b7e480c892f340d6ba1f897d666fd",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality1/results/trained-fresh_challenge-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/results/trained-fresh_tune-score.json": {
+      "bytes": 53289,
+      "sha256": "224e1175e60b1d975a106271d569205493a5b27ac48874bfaf1f17306cb78e74",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality1/results/trained-fresh_tune-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/results/trained-old_tune-score.json": {
+      "bytes": 101541,
+      "sha256": "af0b2f8eb97b2c6671888182766adec8bfc50f92469a0e5c54318264fb0f0fb1",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality1/results/trained-old_tune-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/results/trained-parity.json": {
+      "bytes": 2131,
+      "sha256": "c0b6ea1b4432f8d6c0ff604e2071e9088a722e5e6161e6b2cab4f98543ce89aa",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality1/results/trained-parity.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/child-exit.json": {
+      "bytes": 104,
+      "sha256": "dd071d4e5706f8e3bb7ce1d130bd590725dce2e53750b307e532d757b6a634ff",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality1/runtime/child-exit.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/child-identity.json": {
+      "bytes": 44,
+      "sha256": "9481ccfbe901a5da7a41fd5823d5aa83c01465864c7a64c369e161193da7055f",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality1/runtime/child-identity.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/child.log": {
+      "bytes": 74,
+      "sha256": "3df35f9b238c8e012c94813469304397664c99b21f36dfbed50ee6ccad9a52a8",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality1/runtime/child.log"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/command.json": {
+      "bytes": 1076,
+      "sha256": "3b7b560f33206af4fe5d0c5c6668ec08083f0d9f91c3e1a2b33ccab2b0e7d188",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality1/runtime/command.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/group-rss-observations.jsonl": {
+      "bytes": 14009,
+      "sha256": "1a61950b530286f266237ffe5dab5a17077cd4a7a60a0fc86120c1a0e006e8c6",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality1/runtime/group-rss-observations.jsonl"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/group-rss-summary.json": {
+      "bytes": 1758,
+      "sha256": "45c9c7d92be1d5de04015a17b7d096b824d4c4dda159612249dad027cc182e62",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality1/runtime/group-rss-summary.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/guardian-exit.json": {
+      "bytes": 520,
+      "sha256": "95294001ea6e02baae810648d67c12d0648fade70db03622778831f16d263e8b",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality1/runtime/guardian-exit.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/lease-binding.json": {
+      "bytes": 694,
+      "sha256": "f4db6b10776f22b209e04ea3808a0eb5269698c9b5f0a5da1438e1cc393d3e03",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality1/runtime/lease-binding.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/lease-observations.jsonl": {
+      "bytes": 29684,
+      "sha256": "f0e3e6465e829f29dc7d97932d5f274084a721413ac6ebd39a75cb07fd0d7c25",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality1/runtime/lease-observations.jsonl"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/owned-group-final.json": {
+      "bytes": 190,
+      "sha256": "78b5c4950bdc7f3ea027954c718e0eb57935277ce5bc56818451641cbccc750b",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality1/runtime/owned-group-final.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/pre-admission.json": {
+      "bytes": 8042,
+      "sha256": "189480f42474a73935bd06a3c20051d81c53ee8e0899097e64bcf23668ed08ee",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality1/runtime/pre-admission.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/resource-observations.json": {
+      "bytes": 874,
+      "sha256": "4f64baa648a26b5cb6aa6f24cce7d051e3c67201b86c99f01c70b7b01d46c924",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality1/runtime/resource-observations.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/scheduler-adoption.json": {
+      "bytes": 4646,
+      "sha256": "8f5ac1f208eb061ca65cff37430edbcd50d9dc60b54f2536f887a2e39e1720d3",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality1/runtime/scheduler-adoption.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/training-protocol-review.json": {
+      "bytes": 134177,
+      "sha256": "81472a088ac450fa926bf5dee0927a465d68e7fd436c9ef35d035c2a9c8539d2",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor0-scope1-modality1/training-protocol-review.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/plan.json": {
+      "bytes": 56352,
+      "sha256": "c37e528ee1494d2776abe5dad6dd58188169beef08cff436814b3e801888cd66",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality0/plan.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/results/cell-training.json": {
+      "bytes": 47995,
+      "sha256": "757a17fb03dc0d7cd4f9e15ff4e79bfdb33a8d5906d8b4d605b87dca4cbe20ef",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality0/results/cell-training.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/results/data-schedule-before-models.json": {
+      "bytes": 26725,
+      "sha256": "cd3e306d055b8e079252c99f2e20cac1a9f632cf5465b5e6ef19d8a13ec147c9",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality0/results/data-schedule-before-models.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/results/initial-parity.json": {
+      "bytes": 2131,
+      "sha256": "b80510162f23dfce3fa657eb06057f23103fd1e0966015a12a13dfa3ff4036c3",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality0/results/initial-parity.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/results/summary.json": {
+      "bytes": 50096,
+      "sha256": "1a507c335d249aaddcf46631bd80faa02ad91e563d4a04a0e0b6cd914a35337f",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality0/results/summary.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/results/trained-authored_dev-score.json": {
+      "bytes": 105150,
+      "sha256": "5a6b72b472351ea4716c884c2237754b5cac4cee8982570a645492cf8cc509ad",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality0/results/trained-authored_dev-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/results/trained-fresh_challenge-score.json": {
+      "bytes": 53551,
+      "sha256": "9afb27c6839d688f337ad511cc677d2e9221ac39980ae4ce6e7d6bc36af327cf",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality0/results/trained-fresh_challenge-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/results/trained-fresh_tune-score.json": {
+      "bytes": 53311,
+      "sha256": "485130285b570fabf28509216bd19746ffd8ca75917f6b0cfbde1715189655c0",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality0/results/trained-fresh_tune-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/results/trained-old_tune-score.json": {
+      "bytes": 101562,
+      "sha256": "1495996110a73d1e9f6fa5e5eb8db13a4652528a540ef8997fe0a47cb0689c6c",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality0/results/trained-old_tune-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/results/trained-parity.json": {
+      "bytes": 2131,
+      "sha256": "981e3358209344c7c36824e7fe019b2d548192a47ee95932c517ce1531bcb874",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality0/results/trained-parity.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/child-exit.json": {
+      "bytes": 104,
+      "sha256": "2f7fa08c80e7fc58391e049d534451d12cfc0a3eade3e8fbe2de463c69529c91",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality0/runtime/child-exit.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/child-identity.json": {
+      "bytes": 44,
+      "sha256": "ac4b1fb700c5a094940f8db6941d609a63249fe402c779339d46275ba98b6854",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality0/runtime/child-identity.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/child.log": {
+      "bytes": 74,
+      "sha256": "3f8909c145149d0fec9cf3a6591847b02aa01fbfb3fca8c60818eb8273f6ea3e",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality0/runtime/child.log"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/command.json": {
+      "bytes": 1076,
+      "sha256": "1f36597f4a6318de38f0d38b33149bdb47d3377f9e53d7b7f27a018093a96481",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality0/runtime/command.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/group-rss-observations.jsonl": {
+      "bytes": 13997,
+      "sha256": "7f6fdeef35156b2ef32e08c3c5fe170c51bb81c80038a593fefb41edee9ba959",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality0/runtime/group-rss-observations.jsonl"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/group-rss-summary.json": {
+      "bytes": 1756,
+      "sha256": "a4f8e028ab005117b7697f85119e0b61c7fc95f5b57731f67c97eaf69d4488f0",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality0/runtime/group-rss-summary.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/guardian-exit.json": {
+      "bytes": 520,
+      "sha256": "f5f866301d5f7abf1ea0baa617cf815183a3701040b6c6d28086b7d2a9b60edd",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality0/runtime/guardian-exit.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/lease-binding.json": {
+      "bytes": 692,
+      "sha256": "945b0ba21306f2edaccd243e499ba790ddfd4139a49afa2fed2f44907f457d0f",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality0/runtime/lease-binding.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/lease-observations.jsonl": {
+      "bytes": 28575,
+      "sha256": "0c02a881bc907a4b1a3cd941d1b720b8f427d04a4ef42d73e1b4e264ebe682e4",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality0/runtime/lease-observations.jsonl"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/owned-group-final.json": {
+      "bytes": 190,
+      "sha256": "e48c0855671bd6462f02b7fd07ce1a9ee77a48a0ce8185e12c30ab0c516af36e",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality0/runtime/owned-group-final.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/pre-admission.json": {
+      "bytes": 8042,
+      "sha256": "40ed0e23aba7b95a5b6bab16a3e5c33f3f55d1059de2458dffd71acd2aec2f8c",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality0/runtime/pre-admission.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/resource-observations.json": {
+      "bytes": 874,
+      "sha256": "a2ae2cfd0e45e9572bf494f426401777cc958a90df65b3bde4ab13c11c34f373",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality0/runtime/resource-observations.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/scheduler-adoption.json": {
+      "bytes": 4646,
+      "sha256": "adb761e61ccecc4fc7c2451201ef3da9eb0ba185c02dcfdcff6ebd79498dcc32",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality0/runtime/scheduler-adoption.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/training-protocol-review.json": {
+      "bytes": 134287,
+      "sha256": "7387095295e86551e501dd154aa9cc2ce0bb35feacf1a264b40caa2fa6abd714",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality0/training-protocol-review.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/plan.json": {
+      "bytes": 56352,
+      "sha256": "0732e616eaafa90eea45d41609242cb8f3597aca974f3e14df2f8546686a8635",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality1/plan.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/results/cell-training.json": {
+      "bytes": 47986,
+      "sha256": "0f9f6e25e240baa45434875cc1930a8dfdb237c5aae4f3a8d9bae56ace4758f4",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality1/results/cell-training.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/results/data-schedule-before-models.json": {
+      "bytes": 26725,
+      "sha256": "cd3e306d055b8e079252c99f2e20cac1a9f632cf5465b5e6ef19d8a13ec147c9",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality1/results/data-schedule-before-models.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/results/initial-parity.json": {
+      "bytes": 2131,
+      "sha256": "609499cc923396241125b839a367dc1a06d535f1ed0fdcdaa8a1d0edd8f3f3b2",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality1/results/initial-parity.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/results/summary.json": {
+      "bytes": 50097,
+      "sha256": "5900f97dcf77a01fa2936e15c857bee1aa9d345a61629721e001af389b07e5c1",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality1/results/summary.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/results/trained-authored_dev-score.json": {
+      "bytes": 105104,
+      "sha256": "39bd7b97d0ed1fd4f6dcc47069995b3decb324164f0af18251961776babd4192",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality1/results/trained-authored_dev-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/results/trained-fresh_challenge-score.json": {
+      "bytes": 53547,
+      "sha256": "39d31c3aa07250fe54e531176669623231d88a6512365b05f9eb366d6f87f028",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality1/results/trained-fresh_challenge-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/results/trained-fresh_tune-score.json": {
+      "bytes": 53298,
+      "sha256": "ee994755de8afcfbeaec2f0185a08fa969e8211b664cba51a6d04876df08e8f9",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality1/results/trained-fresh_tune-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/results/trained-old_tune-score.json": {
+      "bytes": 101546,
+      "sha256": "4b81b280a9948565879032f1c2d7ffc551a6a2c5bed2fbb6d88ab50fdc0fcb7b",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality1/results/trained-old_tune-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/results/trained-parity.json": {
+      "bytes": 2131,
+      "sha256": "2709177539287d2a5600726c229efd787ab3e412b63cd674bf420c49f0e03f30",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality1/results/trained-parity.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/child-exit.json": {
+      "bytes": 104,
+      "sha256": "785bd1cecfba10e26191496a9ac06acaffcf5acf14bab466e42363b4610707b6",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality1/runtime/child-exit.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/child-identity.json": {
+      "bytes": 44,
+      "sha256": "560c1926605716fc44a555a474e8b26570e55a927550772ebc23e49dc3ab47db",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality1/runtime/child-identity.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/child.log": {
+      "bytes": 74,
+      "sha256": "de2b464432e1d981ff23a64ea2b99d172f03d262e679108d8952fa98641e8095",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality1/runtime/child.log"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/command.json": {
+      "bytes": 1076,
+      "sha256": "c6bc4baea148e1099a56011e4398679211c890d7965f171ab23feb8bb878d542",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality1/runtime/command.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/group-rss-observations.jsonl": {
+      "bytes": 14015,
+      "sha256": "81a1a10e43fea10bf1c87b7ba9c07808b398621050ddf263bb4ab573cbb9f066",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality1/runtime/group-rss-observations.jsonl"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/group-rss-summary.json": {
+      "bytes": 1758,
+      "sha256": "0e0ddd7fcb2bc93adb02565dc957a9440745801d148383f2e98ea99b4fa04e8a",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality1/runtime/group-rss-summary.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/guardian-exit.json": {
+      "bytes": 520,
+      "sha256": "9c5333b59e4ff14f32ae270322d028071344fade292c79ad1795cbd725e82717",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality1/runtime/guardian-exit.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/lease-binding.json": {
+      "bytes": 693,
+      "sha256": "d1769f1a54f38291287f7f389ff247415c821adfba6e0fb9f322b719a0376f4f",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality1/runtime/lease-binding.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/lease-observations.jsonl": {
+      "bytes": 29638,
+      "sha256": "7df8d2d0708e796ffb862b161499616894dfafc2f66e30a3b633c6c850096951",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality1/runtime/lease-observations.jsonl"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/owned-group-final.json": {
+      "bytes": 190,
+      "sha256": "af91ea89a29a0f664c8029fdf08f10c5cd9ca7c68303cc6f9ad2e877da93a567",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality1/runtime/owned-group-final.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/pre-admission.json": {
+      "bytes": 8042,
+      "sha256": "ffbad3ade6c31aa27d87f3cd2a78954c06955cde0eee32bb1535a28ef847bbb3",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality1/runtime/pre-admission.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/resource-observations.json": {
+      "bytes": 874,
+      "sha256": "c415ee6abbe8bbe1744c6b4b722daff782ff6726355e3951e4dbee58a048e89f",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality1/runtime/resource-observations.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/scheduler-adoption.json": {
+      "bytes": 4646,
+      "sha256": "1b58643fdc6749f0b23c79234e8fb042eb35e8b51d09af6df758265aebdf77f9",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality1/runtime/scheduler-adoption.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/training-protocol-review.json": {
+      "bytes": 134397,
+      "sha256": "763a454f3a4ca15c17cdd9a47cfbb3fe9d239cd97dfb40a728aa86972f8b2815",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope0-modality1/training-protocol-review.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/plan.json": {
+      "bytes": 56352,
+      "sha256": "264c74a7517e58be3ed9a6453a99b81b4e4eba58fcef8ef803d12177585ae066",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality0/plan.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/results/cell-training.json": {
+      "bytes": 47982,
+      "sha256": "2ce59f8b28bce3cd8590e24e305278c2e61ae7d16ba3bc8422c79c3ce362142c",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality0/results/cell-training.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/results/data-schedule-before-models.json": {
+      "bytes": 26725,
+      "sha256": "cd3e306d055b8e079252c99f2e20cac1a9f632cf5465b5e6ef19d8a13ec147c9",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality0/results/data-schedule-before-models.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/results/initial-parity.json": {
+      "bytes": 2131,
+      "sha256": "324bb40a28cf239323875b6883b183249639c5af79675b93db5d02935be79a56",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality0/results/initial-parity.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/results/summary.json": {
+      "bytes": 50096,
+      "sha256": "946ac2066c1452118e6590cbd3759ea66eeb72c858314c3346186af297fd5aa7",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality0/results/summary.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/results/trained-authored_dev-score.json": {
+      "bytes": 105066,
+      "sha256": "78eb94250287341f140f8d6fc3dddacd68409f570f3f7bcc4b384129fd00347a",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality0/results/trained-authored_dev-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/results/trained-fresh_challenge-score.json": {
+      "bytes": 53525,
+      "sha256": "01f1fb3dd2127bb4ec80e179381c7c8b0a585de28e09469392effd94cee9de69",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality0/results/trained-fresh_challenge-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/results/trained-fresh_tune-score.json": {
+      "bytes": 53274,
+      "sha256": "edc1b9bd021c89b0f18e6fd42157c2ae90f5425f656fa28c5ee384983b4fef5d",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality0/results/trained-fresh_tune-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/results/trained-old_tune-score.json": {
+      "bytes": 101549,
+      "sha256": "5b1e1c6082a842dec7a84e166fd21e4ca241cc8ec500bb2ce3338f4698d25e6c",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality0/results/trained-old_tune-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/results/trained-parity.json": {
+      "bytes": 2131,
+      "sha256": "6bd870415e86d9a695c3b75d137666c66dbe86fd0656228598636b14cfb2393e",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality0/results/trained-parity.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/child-exit.json": {
+      "bytes": 105,
+      "sha256": "a569747e4ae83ade3c87e68269690f1e57b9ff58a1009b2c6e0fb807a0e696a7",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality0/runtime/child-exit.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/child-identity.json": {
+      "bytes": 44,
+      "sha256": "e31b43f175dc1584962d404b0fd70b7281700f17a170e16cbb9f66a07f9dc51b",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality0/runtime/child-identity.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/child.log": {
+      "bytes": 74,
+      "sha256": "a3cff564f2eae26eb3770fe80d0d9b0ece0d20b0143857b49537981f49a53f2b",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality0/runtime/child.log"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/command.json": {
+      "bytes": 1076,
+      "sha256": "a08e4c96944cc0491435752edc7aab417bd70dfe6e0fa6ac339867337b1f1924",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality0/runtime/command.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/group-rss-observations.jsonl": {
+      "bytes": 14004,
+      "sha256": "53fb9c1201d9f050b847b93512a84a24955deff893a11d1882c150500b501651",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality0/runtime/group-rss-observations.jsonl"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/group-rss-summary.json": {
+      "bytes": 1757,
+      "sha256": "e53030ddf0897debfd6fa840039d6df69b1686de649353a8b3e4078fe8cdbb44",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality0/runtime/group-rss-summary.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/guardian-exit.json": {
+      "bytes": 520,
+      "sha256": "346e84296c1ae8daa8be2750f09786523f23806a6410efa771ff5de4ee33bcf6",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality0/runtime/guardian-exit.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/lease-binding.json": {
+      "bytes": 694,
+      "sha256": "9b70c7c473516c39cb5a71043919adb1d7673abb5d2f0c2d90eecbe8c52b2b08",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality0/runtime/lease-binding.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/lease-observations.jsonl": {
+      "bytes": 29694,
+      "sha256": "8a9975a2877b1678ba9bb70d86af1812d8e6b5e0e9be70e20e98dc0af8edbd29",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality0/runtime/lease-observations.jsonl"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/owned-group-final.json": {
+      "bytes": 190,
+      "sha256": "5a6fae066f3a1f20d017e742ed6a95147d1825f8e5c7921db1dafe89e0dae1d7",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality0/runtime/owned-group-final.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/pre-admission.json": {
+      "bytes": 8042,
+      "sha256": "4a68369cc900fb9ba95a9359c604c7d6a33b92b2a416527d2624942176aeec4d",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality0/runtime/pre-admission.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/resource-observations.json": {
+      "bytes": 874,
+      "sha256": "04b822ea2212ba4d68ea7e15329f5f5e4066b1c54ecc2fe24b9ef3ab98b402fe",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality0/runtime/resource-observations.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/scheduler-adoption.json": {
+      "bytes": 4645,
+      "sha256": "7769dab597e9eadfcbd203b69bbb608b96fb39f060ed497bca5a2023a56fdabc",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality0/runtime/scheduler-adoption.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/training-protocol-review.json": {
+      "bytes": 134507,
+      "sha256": "fd9d16f930f42a0b8e4b5597bfaec56fa9c7ba94791a95482093794c03e74ffe",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality0/training-protocol-review.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/plan.json": {
+      "bytes": 56352,
+      "sha256": "3dd07ad3175addb60aa692dcae47a5e2f8d6d6a25eaf1d983894013c4e002916",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality1/plan.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/results/cell-training.json": {
+      "bytes": 47975,
+      "sha256": "bc11224884585bcc7ce8035a8186de4e4395c24606fd6adf762163dd26d346f8",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality1/results/cell-training.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/results/data-schedule-before-models.json": {
+      "bytes": 26725,
+      "sha256": "cd3e306d055b8e079252c99f2e20cac1a9f632cf5465b5e6ef19d8a13ec147c9",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality1/results/data-schedule-before-models.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/results/initial-parity.json": {
+      "bytes": 2131,
+      "sha256": "1f24f88eccb5779e5da1c22fd8d2d434dc71eeac00c3b5d521c1892cd2e3da9c",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality1/results/initial-parity.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/results/summary.json": {
+      "bytes": 50096,
+      "sha256": "9dd8c585510dd3ba1e7ec109d576747bba65cbdbbbf7da42c151c5618fce50dc",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality1/results/summary.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/results/trained-authored_dev-score.json": {
+      "bytes": 105081,
+      "sha256": "d060bfdae9a99a58c7b6ddd86506c320d91ed63f8913c83024373488124bc54a",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality1/results/trained-authored_dev-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/results/trained-fresh_challenge-score.json": {
+      "bytes": 53524,
+      "sha256": "1ba219503b22d8e37b9e8f332140c29cd17d60f1fc9bc4e8c9a5bf2cb9fed366",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality1/results/trained-fresh_challenge-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/results/trained-fresh_tune-score.json": {
+      "bytes": 53284,
+      "sha256": "06a79b60795e782ef33c416c9d8e43a8e660142ef0f448336bce66dff6aad348",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality1/results/trained-fresh_tune-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/results/trained-old_tune-score.json": {
+      "bytes": 101540,
+      "sha256": "56f74c9260db97cc4b813c11fab69e3177a50664788a9a8e16d5c5a73f1412a4",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality1/results/trained-old_tune-score.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/results/trained-parity.json": {
+      "bytes": 2131,
+      "sha256": "af53d3dfc571a3a71322c3d77d5cb6adb23d2a19d143dfc170c596cbd9cab2da",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality1/results/trained-parity.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/child-exit.json": {
+      "bytes": 105,
+      "sha256": "b6d19f391ee2b90e2f772ab3862fa3c20d73c1c1cd899b7165c53dff3799d204",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality1/runtime/child-exit.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/child-identity.json": {
+      "bytes": 44,
+      "sha256": "7681ba95ca09b0a4872d997c3ad9cc11ab722824877220592703db271f0c6a78",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality1/runtime/child-identity.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/child.log": {
+      "bytes": 74,
+      "sha256": "3750214276a8457cbf58d416db06575d84238f4663500a74e2919aa2dba1001a",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality1/runtime/child.log"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/command.json": {
+      "bytes": 1076,
+      "sha256": "064fd38137d443e6f16cbd040f1aa2fc927a86f460bf2743111d813d210458f0",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality1/runtime/command.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/group-rss-observations.jsonl": {
+      "bytes": 14018,
+      "sha256": "aaf753d7f4b6613ded938bb45c2d53fbb46cf987d2ee0b34b625a8f057cddf2f",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality1/runtime/group-rss-observations.jsonl"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/group-rss-summary.json": {
+      "bytes": 1758,
+      "sha256": "d6c7275d717b13c128b144a47f7a03073be0c0a2e34e31a296fbfa8c53346bcc",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality1/runtime/group-rss-summary.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/guardian-exit.json": {
+      "bytes": 520,
+      "sha256": "c1eb71084fef0b4fd06a0d563a5e5e5f1906ef1fb2f0b346962148f2868d5a61",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality1/runtime/guardian-exit.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/lease-binding.json": {
+      "bytes": 694,
+      "sha256": "1a017b412e894e75302d4b55fff4ec7645aceb23b425ab077acaca74b256bdfc",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality1/runtime/lease-binding.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/lease-observations.jsonl": {
+      "bytes": 29679,
+      "sha256": "829ac10dff2082dc84dbe04b7e067f35e7fd8180bed554d43e1ea73f7058b711",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality1/runtime/lease-observations.jsonl"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/owned-group-final.json": {
+      "bytes": 190,
+      "sha256": "68b20c4ec5d1641b4b5619fa72b0ee0b2fd6f703575b24ec15612010b69672b4",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality1/runtime/owned-group-final.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/pre-admission.json": {
+      "bytes": 8042,
+      "sha256": "acdbf0261898ad443b056401a89603b3a60d98d9c34c80e9086784e1cfbdb308",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality1/runtime/pre-admission.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/resource-observations.json": {
+      "bytes": 873,
+      "sha256": "4d3adb0cb07fdd5c943f28cf5dba98c83677f8af2e44f051c3ea0662051a7f42",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality1/runtime/resource-observations.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/scheduler-adoption.json": {
+      "bytes": 4646,
+      "sha256": "a22373feb85d448f200caf2cd244aff4db675890472d3c940ec8aacefe290ff8",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality1/runtime/scheduler-adoption.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/training-protocol-review.json": {
+      "bytes": 134617,
+      "sha256": "9006d12b77ebf5b3f7aa40cce81a1953f266115bda9ac06f656954a9a1299699",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/cells/actor1-scope1-modality1/training-protocol-review.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/completion-manifest.json": {
+      "bytes": 48258,
+      "sha256": "7be69cdb36388e0dde5547f19024d1142a0260560260d2a11f9140777a4f8f43",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-completion-extras-v03/releases/20261012-matched-curriculum-v1/completion-manifest.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/combined-pure-tests-v03.xml": {
+      "bytes": 8789,
+      "sha256": "a095c23e0bd9eb581e1138cde84213263c03548ee38dd1333fbe678bf5b1ae61",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/evidence/combined-pure-tests-v03.xml"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/corpus-source-independent-review-v01.json": {
+      "bytes": 2386,
+      "sha256": "c2f0f31d894cd3212b2861dc4e14a17f4a3114e5a61bfa7c5cbd153b1617c3fe",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/evidence/corpus-source-independent-review-v01.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/eight-cell-output-freeze-v01.json": {
+      "bytes": 99398,
+      "sha256": "ba4f5ddb00e35a9ae9271611097a503e3d058a9335a0c42a66a395024348e3fd",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/evidence/eight-cell-output-freeze-v01.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/failed-publication-execution-v01.log": {
+      "bytes": 7480,
+      "sha256": "4ba0f9488df7632207f44e247ed38a34302c1b8a8042a02049ddc1bd9fef9c3c",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/evidence/failed-publication-execution-v01.log"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/hf-completion-helper-source-independent-review-v01.json": {
+      "bytes": 3782,
+      "sha256": "1632b4e701d8374fc090168e69fbfc7272ac8cad40cb7b6d87027fe27c340f79",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-completion-extras-v03/releases/20261012-matched-curriculum-v1/evidence/hf-completion-helper-source-independent-review-v01.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/hf-failed-attempt-reconciliation-v01.json": {
+      "bytes": 802,
+      "sha256": "9b05f69df6c96838b8136f6657360e5cec6116312b64bf1ede8732a9cd91905f",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/evidence/hf-failed-attempt-reconciliation-v01.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/hf-partial-publication-reconciliation-v01.json": {
+      "bytes": 1135006,
+      "sha256": "85878cf226c8d693f4b2947dc8a1f68765deb730af92187d7d28ab893dbf6cfe",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-completion-extras-v03/releases/20261012-matched-curriculum-v1/evidence/hf-partial-publication-reconciliation-v01.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/hf-recovery-helper-source-independent-review-v01.json": {
+      "bytes": 4360,
+      "sha256": "f16aef6aafd68d53142afb9ba4bcce1ca73effc10bd5485b0b01b8591533ecc3",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/evidence/hf-recovery-helper-source-independent-review-v01.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/matched-result-analysis-v01.json": {
+      "bytes": 1947470,
+      "sha256": "1bf9fba1678a73eaf7c9fa1d8bb3f13ec2e4d94ad5b013bf98da1277dd1f68f4",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/evidence/matched-result-analysis-v01.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/registration-v01.json": {
+      "bytes": 49475,
+      "sha256": "73ec44610213d23ab27faa215565d6c10fe501fbf6212949f3e976ae0e29725e",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/evidence/registration-v01.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/result-independent-review-v01.json": {
+      "bytes": 128603,
+      "sha256": "c80280c16b1dc790d1c01863917d52d1b0c035a9493c6c1b45a8fbb02a30e5ab",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/evidence/result-independent-review-v01.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/root-gitattributes-after.txt": {
+      "bytes": 2350,
+      "sha256": "d8b99b7ff67dd690617b4285ba90b0e84c5feeff481a1d568dc13ee667c2b892",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-completion-extras-v03/releases/20261012-matched-curriculum-v1/evidence/root-gitattributes-after.txt"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/root-gitattributes-before.txt": {
+      "bytes": 2230,
+      "sha256": "88ff4d857c849ce3e11fea7c2f70d648550968cf546ab9cbc4d690e1b6543036",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-completion-extras-v03/releases/20261012-matched-curriculum-v1/evidence/root-gitattributes-before.txt"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/root-science-source-independent-review-v01.json": {
+      "bytes": 41638,
+      "sha256": "757840f4eb03a3d5c05b34115c4303b581e338f93721601fc863fbf3aa5b9000",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/evidence/root-science-source-independent-review-v01.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/runtime-independent-review-v01.json": {
+      "bytes": 68420,
+      "sha256": "f521e2591d1b23fab0ca663a91778b6f2855dc4b2104bac40e9b891c7c9cfeb0",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/evidence/runtime-independent-review-v01.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/trainer-source-independent-review-v01.json": {
+      "bytes": 5830,
+      "sha256": "2806338355394df1b6bc383ebcb03b56f481669b38733672ac353a90a1385ac4",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/evidence/trainer-source-independent-review-v01.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/analyzer-source-independent-review-v01.json": {
+      "bytes": 4935,
+      "sha256": "5ac76e0a6fb924302e69c0be53a31aa8db7d61a62f80e62caa4e63bfbef7004a",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/analyzer-source-independent-review-v01.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/hf-before-file-identities-v01.json": {
+      "bytes": 1048733,
+      "sha256": "fad9a61b1e41000ae38ae8cf47e292cc0f57eea8e4dc1efaf530e16cba8c5c0f",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-before-file-identities-v01.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/hf-commit-created-v03.json": {
+      "bytes": 466,
+      "sha256": "ee91d0423aae1d5381cb25898e6bbc2d9ad95812342428522c5de0cb64c8d86d",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-commit-created-v03.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/hf-completion-helper-source-independent-review-v01.json": {
+      "bytes": 3782,
+      "sha256": "1632b4e701d8374fc090168e69fbfc7272ac8cad40cb7b6d87027fe27c340f79",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-completion-helper-source-independent-review-v01.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/hf-failed-attempt-reconciliation-v01.json": {
+      "bytes": 802,
+      "sha256": "9b05f69df6c96838b8136f6657360e5cec6116312b64bf1ede8732a9cd91905f",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-failed-attempt-reconciliation-v01.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/hf-helper-source-independent-review-v01.json": {
+      "bytes": 4353,
+      "sha256": "9667c056b360441e5e989e9314e012a0396b5be4534d7e41e02fa044d4d0339c",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-helper-source-independent-review-v01.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/hf-partial-publication-reconciliation-v01.json": {
+      "bytes": 1135006,
+      "sha256": "85878cf226c8d693f4b2947dc8a1f68765deb730af92187d7d28ab893dbf6cfe",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-partial-publication-reconciliation-v01.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/hf-preparation-receipt-v03.json": {
+      "bytes": 234842,
+      "sha256": "3b692eec01a8ebbe560b0d327104ac1484c68e2a01b16b8b5b39b7e5f402d542",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-preparation-receipt-v03.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/hf-publication-independent-review-v03.json": {
+      "bytes": 134330,
+      "sha256": "601d7bd1eac7bc0101624e57dac77180a7e70105c2843a1856d73aa9b57512f2",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-publication-independent-review-v03.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/hf-publication-verification-v03.json": {
+      "bytes": 185224,
+      "sha256": "a31eef60439bbd5f9eebb2b414fc107486ebd5d7d4d019a50562fdafcc9c4e78",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-publication-verification-v03.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/hf-recovery-helper-source-independent-review-v01.json": {
+      "bytes": 4360,
+      "sha256": "f16aef6aafd68d53142afb9ba4bcce1ca73effc10bd5485b0b01b8591533ecc3",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-recovery-helper-source-independent-review-v01.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/matched-terminal-auditor-source-independent-review-v01.json": {
+      "bytes": 6440,
+      "sha256": "11f9f827cf09600ee8c63577f3424b91480815d8406cdaa868eb383fd1cf24b0",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/matched-terminal-auditor-source-independent-review-v01.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/remaining-error-candidate-audit-v01.json": {
+      "bytes": 360412,
+      "sha256": "950ddb231a29ccd4ce5ae80f900181a10df746f180053bc3b20370ad718828cf",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/remaining-error-candidate-audit-v01.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/remaining-error-candidate-independent-review-v01.json": {
+      "bytes": 6062,
+      "sha256": "b045d3eec55d2041bf3471074334e3f33988ee708e6c7fb335f402afad043451",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/remaining-error-candidate-independent-review-v01.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/recipe/analyze_matched_results_v01.py": {
+      "bytes": 52199,
+      "sha256": "17b2996a51d278a03eed46316945ca92afd1663abccda335d998404e00f4fa03",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/recipe/analyze_matched_results_v01.py"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/recipe/complete_hf_release_v03.py": {
+      "bytes": 21457,
+      "sha256": "817d4faa2217ee77a15811545f3b75b8d297c04b69b665a2b9b300d4dff98785",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-completion-extras-v03/releases/20261012-matched-curriculum-v1/recipe/complete_hf_release_v03.py"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/recipe/prepare_hf_release_v01.py": {
+      "bytes": 12559,
+      "sha256": "a69bd030068632af0ebe1967abb1f111ace18cace41d44e8c098715b295da4ae",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/recipe/prepare_hf_release_v01.py"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/recipe/prepare_hf_release_v02.py": {
+      "bytes": 4190,
+      "sha256": "cb620c08048c312d42b5c70e22bf6805e58bf03628f18ff15d972d023587fac2",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/recipe/prepare_hf_release_v02.py"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/recipe/prepare_matched_curriculum.py": {
+      "bytes": 11208,
+      "sha256": "ab14e212f4078f0b2b1f43b455fa0a62d2dd3126c27f4019b0b7fe0d4693243e",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/recipe/prepare_matched_curriculum.py"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/recipe/publish_hf_release_v01.py": {
+      "bytes": 10259,
+      "sha256": "0e67f96e9aa4512d298b91f2ee3d31c08354bd5c9cad924ba1613d78efb1b3a0",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/recipe/publish_hf_release_v01.py"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/recipe/publish_hf_release_v02.py": {
+      "bytes": 10698,
+      "sha256": "8f7e1a9c8ac4ad172994ccfdafe974b9188486f76c99ba19a3dc724357cd5477",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/recipe/publish_hf_release_v02.py"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/recipe/run_matched_curriculum.py": {
+      "bytes": 34990,
+      "sha256": "a08e12b9aba758df9fc363185bf77675f284c740bb10f3e1ca95a3dea1855373",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/recipe/run_matched_curriculum.py"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/recipe/run_scope_guardian.py": {
+      "bytes": 38281,
+      "sha256": "10c7c7350a7dbb564ab0fb1299c905020f874c212765afb86d3c1752105184ed",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/recipe/run_scope_guardian.py"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/recovery-manifest.json": {
+      "bytes": 175266,
+      "sha256": "1e792cd108829256cfb8eba2f2c68784c8f3dc921a267086c95e037660915f98",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/recovery-manifest.json"
+    },
+    "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/release-manifest.json": {
+      "bytes": 172571,
+      "sha256": "fc01b7ab91210eb928c1dba927446709b236f7e497c5b3d0d31ce50d4b4cc157",
+      "source": "/home/barberb/lift_coding/artifacts/legal-matched-curriculum-20261012-01/hf-upload-v02/releases/20261012-matched-curriculum-v1/release-manifest.json"
+    }
+  },
+  "private_resource_bodies_in_Git": false,
+  "schema": "matched-curriculum-finite-source-evidence-copies/v1",
+  "weights_in_Git": false
+}

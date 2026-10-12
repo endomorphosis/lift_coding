@@ -1,0 +1,1466 @@
+{
+  "docs/autoencoders/matched_temporal_curriculum_20261012.md": {
+    "bytes": 5891,
+    "mode": "100644",
+    "object_id": "809ee466614f78879f99b6b5361cc0525ac14e66",
+    "sha256": "dcbaf0a4d5d2efd1912c578f1eae3ee470f764d5a484dadeaed6153b3e776597"
+  },
+  "docs/autoencoders/matched_temporal_training_gaps_20261012.md": {
+    "bytes": 3397,
+    "mode": "100644",
+    "object_id": "225deed44283641ae22023076182719e9d4e70a2",
+    "sha256": "35ee6f8a37378f82a26230059cc312a5f7e5ea4e51f758cdb0add3de9657db6a"
+  },
+  "ipfs_datasets_py/logic/legal_ir/matched_temporal_curriculum.py": {
+    "bytes": 39619,
+    "mode": "100644",
+    "object_id": "363d638395d12240d5b403d80b69eb735b911c2e",
+    "sha256": "a64fa4f79e949593744768c8ab4896f349d93d2885ebbc36a13d0854e6185a71"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_curriculum.py": {
+    "bytes": 27004,
+    "mode": "100644",
+    "object_id": "73bca2e2ddc08888a31d15098ffef8b5321517b5",
+    "sha256": "311c39aa7e57c63838ee017e47b87411ffadaabd4d84c0b63b9f4d35103cd283"
+  },
+  "tests/unit/logic/legal_ir/test_matched_temporal_curriculum.py": {
+    "bytes": 16173,
+    "mode": "100644",
+    "object_id": "6178939546c9cf340e8cbafc1e13c12285c743fe",
+    "sha256": "b1cecde739051c18a276023d5e09521a7949c171da21a8a1e3ca8716773f80e2"
+  },
+  "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_curriculum_contracts.py": {
+    "bytes": 33707,
+    "mode": "100644",
+    "object_id": "86afad838e0cbc9f9f23653c0f4aaad4ae6b8e65",
+    "sha256": "177096d9c145a17190e407f1a9664e9a941833132122842f0761062539b03af6"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/plan.json": {
+    "bytes": 49520,
+    "mode": "100644",
+    "object_id": "de7d3bcc1a3c2c14b848d90e7ddb26299cd505ae",
+    "sha256": "2b1ff445abc72b2876b94e028b65cc6fc2c0fcdb65777000df9d6f138fe7e980"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/baseline-authored_dev-score.json": {
+    "bytes": 105390,
+    "mode": "100644",
+    "object_id": "81d78abed72cb0f8b678ac547e90f4bf220dfa12",
+    "sha256": "1e8e8e6d51ac21166e72e3920e3605e0ab76318f394f2c94bf2edf4a72509c6c"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/baseline-fresh_challenge-score.json": {
+    "bytes": 53748,
+    "mode": "100644",
+    "object_id": "886354c8c0cab1069b7d6535adb380370beb4f17",
+    "sha256": "89a2ef512280abf58718cd33cebc06b0603e9fd4445ae39dbecad18b8b3f61c9"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/baseline-fresh_tune-score.json": {
+    "bytes": 53408,
+    "mode": "100644",
+    "object_id": "9a55049719085bcf85e10af131684491cdec3304",
+    "sha256": "0c4926e285700c1717cd7faff68766ea2547628f764cd392d64eee498ee944c2"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/baseline-old_tune-score.json": {
+    "bytes": 101532,
+    "mode": "100644",
+    "object_id": "b61f0e58e6192cbe1e21458400f7471fe67014f5",
+    "sha256": "a721d6226d373ad4ca060a822fe19c700537514b355990a4ce9b20d54f6fba92"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/cell-training.json": {
+    "bytes": 47977,
+    "mode": "100644",
+    "object_id": "8877f247914f811ddcfc866f0248de13d512505f",
+    "sha256": "4d94ef0a9875000102241d99d160b15edf75bbcae6b32fe471933784923046b5"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/data-schedule-before-models.json": {
+    "bytes": 26725,
+    "mode": "100644",
+    "object_id": "36f14e2367dff6f9c29fcac121529c5668a162ae",
+    "sha256": "cd3e306d055b8e079252c99f2e20cac1a9f632cf5465b5e6ef19d8a13ec147c9"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/initial-parity.json": {
+    "bytes": 2131,
+    "mode": "100644",
+    "object_id": "360f35f5591c522b950eb0a324dbcedfd34cd8c5",
+    "sha256": "f2a91ab06dafe4138681d09e52414507b2c15a095c02560839798327d24c2f26"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/summary.json": {
+    "bytes": 49796,
+    "mode": "100644",
+    "object_id": "7abdc303817ab3861deea1e796fac5d1fe9260d1",
+    "sha256": "a7e9468974f573213a730610b6943b05479ae27ebc804400dd258aa5b59c735c"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/trained-authored_dev-score.json": {
+    "bytes": 105157,
+    "mode": "100644",
+    "object_id": "722ba6a12e5d437856eed5b128ebba24b5b05be1",
+    "sha256": "53b9b9e42c800bba2bdd94f1957d59e61956767214bb8b0631f1960bf3a97777"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/trained-fresh_challenge-score.json": {
+    "bytes": 53556,
+    "mode": "100644",
+    "object_id": "fc2227d7c49cf0ecdb89498d4d666f9f39d2baef",
+    "sha256": "37b48f3060479e6a1762edbeae9d12abeaf5a1fafaee5eaed27f87d2d8123b49"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/trained-fresh_tune-score.json": {
+    "bytes": 53314,
+    "mode": "100644",
+    "object_id": "36a7a2cfa756a2e39c4acd3964969f1a7bb16fe9",
+    "sha256": "8bf2b01a29201b08bdacb17ccfab71d932792c0445a27a7a3dc4b33c81389063"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/trained-old_tune-score.json": {
+    "bytes": 101548,
+    "mode": "100644",
+    "object_id": "42c2ed7fcc77517fdc59f4f3ccd82510a163637d",
+    "sha256": "22c7510b2fc5b1eaa1b1f5f9d7184293e7559d4c317d52262fe24b573ab07d3e"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/results/trained-parity.json": {
+    "bytes": 2131,
+    "mode": "100644",
+    "object_id": "7ccc00481adebe223b8c24beabdd5c9602bef22a",
+    "sha256": "53064b50ff4d29314effa2370aae76cdc5a51f9f38c02da4945cf9ffe9fabbb8"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/child-exit.json": {
+    "bytes": 104,
+    "mode": "100644",
+    "object_id": "98b789f0160a0264b93c448d3425301a3b0746a4",
+    "sha256": "9ecd362f784764d1d5149b4ad59a73889a5835c500b4c6d130d06262b301d5ec"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/child-identity.json": {
+    "bytes": 44,
+    "mode": "100644",
+    "object_id": "65af42fe5294fbdb6347994e88507b2f318d5c4e",
+    "sha256": "d3be0c55294952a3315b1508376c4a73b4fead85e8b8d374220af1e9cdcb166b"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/child.log": {
+    "bytes": 74,
+    "mode": "100644",
+    "object_id": "2dab11b9e402e361f13795ac273356a1c7fd3b17",
+    "sha256": "e816ebde03f534150e98e6406ffe084d852a2bcc1f86dd1cc41ce57f08603a94"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/command.json": {
+    "bytes": 1076,
+    "mode": "100644",
+    "object_id": "bf91248792ea5558e6cf8009b938c84d17bf2604",
+    "sha256": "606006b816aa946ef0e16ad9ce4c9b3c486fdf18a7004d7f7310b94ca5426d91"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/group-rss-observations.jsonl": {
+    "bytes": 15014,
+    "mode": "100644",
+    "object_id": "95f9d3a9d70dad80fbff722291b3dd26da23c199",
+    "sha256": "e0ed640e81f2635c60b8498cade30ddd82e531a9f8a1b75fed38fcc554fbd39b"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/group-rss-summary.json": {
+    "bytes": 1758,
+    "mode": "100644",
+    "object_id": "ba7b478c6f3b1a897a0a81b25c358646f9ae7c20",
+    "sha256": "bc101bec82cf0c6f0b5a56dc39c794bf88d1a61848242b3edcb6465e004e0f43"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/guardian-exit.json": {
+    "bytes": 521,
+    "mode": "100644",
+    "object_id": "cf3002455a0a09124ead3b9b9f54b0cd170ed3e1",
+    "sha256": "01e3d8135e8feee438296e0940f0230e92167d3b31eb63f588558bb9cbdd2082"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/lease-binding.json": {
+    "bytes": 694,
+    "mode": "100644",
+    "object_id": "5ee788fd411dadb2e67d06e2a3e615ed8a9f6887",
+    "sha256": "a2140c691f8e1d898d383074dbd433e3d326eb9242664d541307418120cf2fd6"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/lease-observations.jsonl": {
+    "bytes": 32717,
+    "mode": "100644",
+    "object_id": "61bd91296def9ceacc279ede602ca797f9aad1ec",
+    "sha256": "ab789145e85affed6c17753ee7236bd8c58cf42c5d8be3e5a015a328d99b46cf"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/owned-group-final.json": {
+    "bytes": 190,
+    "mode": "100644",
+    "object_id": "bd296811a4b393c929e7bca0a8f4137dbaea9803",
+    "sha256": "8bf53f9fe4ba78cec5971a9d944fe5abf56b7a5295f204da10be888629dcdbc1"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/pre-admission.json": {
+    "bytes": 8024,
+    "mode": "100644",
+    "object_id": "0ff3d9a08642be8a6970ac4035438e5a3e499a7a",
+    "sha256": "6890c464f6d0bb324ef9f1b9d4ca2e719b9689101ad4d5f06519944a1d730850"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/resource-observations.json": {
+    "bytes": 874,
+    "mode": "100644",
+    "object_id": "f52e5b31194a7a71df30bbcde1b4d09d4a889e49",
+    "sha256": "c0a986a95e996c0c6d405df32b97fa916dffded40fbcf12a851d20967bbb603e"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/runtime/scheduler-adoption.json": {
+    "bytes": 4646,
+    "mode": "100644",
+    "object_id": "ccda06fa4766057059143aa6687f98ad34a5a417",
+    "sha256": "4677a1c0d7e3ba406756228351813379bb1a6190a63f3154b00e357101715de9"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality0/training-protocol-review.json": {
+    "bytes": 104209,
+    "mode": "100644",
+    "object_id": "10a6339a9a1eeac3cbdc34459d618192324b550a",
+    "sha256": "fe60bae52be4d280ee8f373f6ccef1b6b10b96285216b9b25edc505afc1f71b5"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/plan.json": {
+    "bytes": 56352,
+    "mode": "100644",
+    "object_id": "4b6409598e18f317244d034868b461dd5791a760",
+    "sha256": "a4a789824b330b109e7f49f057986978e81877ed610375aa22d552188badb775"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/results/cell-training.json": {
+    "bytes": 47985,
+    "mode": "100644",
+    "object_id": "bd4c464c623e6559c0c4e21159fb4d57c55b8107",
+    "sha256": "d3abe32938149bba74f22d58f81ddedc0fab356b72c3254a8befb81c519000af"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/results/data-schedule-before-models.json": {
+    "bytes": 26725,
+    "mode": "100644",
+    "object_id": "36f14e2367dff6f9c29fcac121529c5668a162ae",
+    "sha256": "cd3e306d055b8e079252c99f2e20cac1a9f632cf5465b5e6ef19d8a13ec147c9"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/results/initial-parity.json": {
+    "bytes": 2131,
+    "mode": "100644",
+    "object_id": "7cae45401ab4ac8b9145b72d17ca081e9b2b867f",
+    "sha256": "fd32590c1464d198765dc894067069b9fb2b9bfe837268c3ea215c5a6abce551"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/results/summary.json": {
+    "bytes": 50095,
+    "mode": "100644",
+    "object_id": "c58cc281e9f6231962601d5ba40dc193451aab46",
+    "sha256": "e55c2b791c178a8a781e8de7dafae62f2fa19c17f70388e2df295ea59d779011"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/results/trained-authored_dev-score.json": {
+    "bytes": 105106,
+    "mode": "100644",
+    "object_id": "70d2830ff09705f77b906320696c9c8b97822595",
+    "sha256": "222639d913bf29df94a3b3bd98a8be79e9347ddedd346e9462edf322c21a519e"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/results/trained-fresh_challenge-score.json": {
+    "bytes": 53550,
+    "mode": "100644",
+    "object_id": "d43ecb8404857b64d6560b1fe8a5e7731707f014",
+    "sha256": "e7d2fd74ab01f66b066c975c60f4bdda77d69bc2fd04de3637701a3fa9fdb3ef"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/results/trained-fresh_tune-score.json": {
+    "bytes": 53309,
+    "mode": "100644",
+    "object_id": "732ad1ff5b6e9ac4a5e1e3da3258f8bef3562684",
+    "sha256": "49ee3b0123070694335b5588ddb735eac9333ca13f886a2d404f1d31c4218ea0"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/results/trained-old_tune-score.json": {
+    "bytes": 101544,
+    "mode": "100644",
+    "object_id": "52279ce8880cc70d078850ba69aed63e9af0ad66",
+    "sha256": "61520c0162527619eea031bc964a5d2d88f6a3e7e4ac922492cd552ecb46dcb2"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/results/trained-parity.json": {
+    "bytes": 2131,
+    "mode": "100644",
+    "object_id": "34974721951698229e815b159892a17f1f8ccec4",
+    "sha256": "132230ce717de582481ce22b9574084f21483870178b437e6a25f45bbfe1e716"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/child-exit.json": {
+    "bytes": 104,
+    "mode": "100644",
+    "object_id": "a7754881fb4b3641509246a73e69086e34625a52",
+    "sha256": "3641b4d6e330f09d65f41c62015ebbd027753ed1187c28f9f466f5abbb856912"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/child-identity.json": {
+    "bytes": 44,
+    "mode": "100644",
+    "object_id": "e12d5ef8191d23c5fdd4ba9f70583f7759ea6053",
+    "sha256": "8c1a2d89b6f92f76f3772bd948fbda760031af09a77c8c779e52058cdbaa86d0"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/child.log": {
+    "bytes": 74,
+    "mode": "100644",
+    "object_id": "f60d54b5b612d77f6e284bd4f2ab3c7ad5c43a0d",
+    "sha256": "0e6d3882d41740c6191de9a9155f6ba9868c327446525504fa47b88657235789"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/command.json": {
+    "bytes": 1076,
+    "mode": "100644",
+    "object_id": "66d05cf11cc5850bf3c95859af156fae2acf56e5",
+    "sha256": "f5929383668629da57aff535e7881b31dfdbafcf2104479593342061d462b27a"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/group-rss-observations.jsonl": {
+    "bytes": 14012,
+    "mode": "100644",
+    "object_id": "c9da4cd125f544a7a58a052c5e29b75ff7443173",
+    "sha256": "92e09c379cab6b7ab45d10e854d258c52c0e1c3f772abc4df1627ffb0fae569b"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/group-rss-summary.json": {
+    "bytes": 1757,
+    "mode": "100644",
+    "object_id": "10479f0ddb1d45075b47905657f59ee23e6498b5",
+    "sha256": "743b1e28443926ef08c2f742c65907d4e3372e52603e8aae4b7b8d22876e9817"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/guardian-exit.json": {
+    "bytes": 521,
+    "mode": "100644",
+    "object_id": "be5b1e2f58881b47cd8e2b1976aed5be391f267d",
+    "sha256": "eb561ca4e0bf99800ec08226dfe85b4f6abe8fde43e26cd889d9c8d8fbe94f5b"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/lease-binding.json": {
+    "bytes": 694,
+    "mode": "100644",
+    "object_id": "d004ece2095d2394cf546d3203c8ab5b8ecc9a7c",
+    "sha256": "e31f99930debe6a27e0e0a98ffee75633cbb1b7864bf5ab2229f81fd67d882d7"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/lease-observations.jsonl": {
+    "bytes": 28688,
+    "mode": "100644",
+    "object_id": "d3d28def55dc05e8f0cbad141991d7d848bf6a73",
+    "sha256": "f31ef56fb315349b132fadd138f0b271c11754be9538aa498b7abc80ab892106"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/owned-group-final.json": {
+    "bytes": 190,
+    "mode": "100644",
+    "object_id": "713d16dca9a6c09d4079f3c69f7d9c152f96c48e",
+    "sha256": "645f965b88767d683b5bd468d8adc1411d7ab9d35475c9d2133f63490cee3c68"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/pre-admission.json": {
+    "bytes": 8042,
+    "mode": "100644",
+    "object_id": "abdbf73457d42e7070ccd3b60662cc9c9c936866",
+    "sha256": "8a44399f4a7f32ec428887bb86674ba17ee97c706b774e6e6a7e44db88d5f4bd"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/resource-observations.json": {
+    "bytes": 874,
+    "mode": "100644",
+    "object_id": "d12c7be8a81b38f5f9745182a3da8b2b4dfd611d",
+    "sha256": "7cb5d3201b8d8567f920833a29e8068230b32c60d6fd0994ea0894d7d056bcbf"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/runtime/scheduler-adoption.json": {
+    "bytes": 4646,
+    "mode": "100644",
+    "object_id": "34f4e4cae23c11688b389b073771ae80da619e62",
+    "sha256": "ee20170c45fe8fcafec2dfaffa385f378d7f86f06cd7e11497379a8c95b64d02"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope0-modality1/training-protocol-review.json": {
+    "bytes": 133957,
+    "mode": "100644",
+    "object_id": "ab03d9823b6f905483be967a0318369545013c44",
+    "sha256": "5f4f7ad199360cab4e1155fb71f0263735d9ddb87a963315df502d183921f00a"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/plan.json": {
+    "bytes": 56352,
+    "mode": "100644",
+    "object_id": "dd737d8f8125a56c7cd7c66ad0a904b392d3656f",
+    "sha256": "ea0206c6fe49648daf6c8b45e91e6b8bdc78e8ecec68347440b463350aa77a26"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/results/cell-training.json": {
+    "bytes": 47980,
+    "mode": "100644",
+    "object_id": "20f2c3ff63e73f73684860e205660b8339b3865e",
+    "sha256": "798bfaa382143dd40838df3e664336356640e78d00db9ca7d338de3ec2c5ba9e"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/results/data-schedule-before-models.json": {
+    "bytes": 26725,
+    "mode": "100644",
+    "object_id": "36f14e2367dff6f9c29fcac121529c5668a162ae",
+    "sha256": "cd3e306d055b8e079252c99f2e20cac1a9f632cf5465b5e6ef19d8a13ec147c9"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/results/initial-parity.json": {
+    "bytes": 2131,
+    "mode": "100644",
+    "object_id": "4f75b63003617460327de78d311b1ab948312814",
+    "sha256": "482899edec9ee5d82dec997ceef3d63a0a19cb913382471b3499dc605810624c"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/results/summary.json": {
+    "bytes": 50096,
+    "mode": "100644",
+    "object_id": "017e442cb275a77e3990b71f08cbe7ef189f6ee7",
+    "sha256": "10682bcea2c4142069f379a453f3a200740f047acea4d08f7c2ab82da2d2794b"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/results/trained-authored_dev-score.json": {
+    "bytes": 105077,
+    "mode": "100644",
+    "object_id": "f8a9829ce4902a3c747a1cd5fd74c8aeb1cdbde5",
+    "sha256": "443a3ed4f9912640b5254426a3aa9b80a3d173592b764c709dc44a200865f8f9"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/results/trained-fresh_challenge-score.json": {
+    "bytes": 53538,
+    "mode": "100644",
+    "object_id": "3d84eaf5ab5dd8859fc44227d5b566f85b0fabfb",
+    "sha256": "5e909861698839f2a26ca1093be339832cacde2ff6ea978a9f00f94b855743cc"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/results/trained-fresh_tune-score.json": {
+    "bytes": 53305,
+    "mode": "100644",
+    "object_id": "afcb4cde861e662c0c6b28b1daf66b2d844559c6",
+    "sha256": "20f9de9944331eb0ea475315b531aab11bd30e3701cf5096905dd86b87e088be"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/results/trained-old_tune-score.json": {
+    "bytes": 101541,
+    "mode": "100644",
+    "object_id": "9c52b14b0b2a49d9a54ff4f3347c169e45bf11fd",
+    "sha256": "af0b2f8eb97b2c6671888182766adec8bfc50f92469a0e5c54318264fb0f0fb1"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/results/trained-parity.json": {
+    "bytes": 2131,
+    "mode": "100644",
+    "object_id": "ebd327462b9bbb5a06aad19309a211b29b86a2df",
+    "sha256": "eaf31c1ef045f6132c585b7df5feae3194042f579eb9acfc6129a70883e85fb3"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/child-exit.json": {
+    "bytes": 104,
+    "mode": "100644",
+    "object_id": "b6b2e0b16d93cfb0bab31a70979139091647b247",
+    "sha256": "971ddb857875085978e30a6ac7108c6810c989063043d99c584bbb6ea41a2b84"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/child-identity.json": {
+    "bytes": 44,
+    "mode": "100644",
+    "object_id": "25b6d92f5486cb80243fd72c9b3a26a98c7ab021",
+    "sha256": "c98e9c607ebe63e2f2c36b2bdc8447dfd0d0fee3f7fbd071f22c6881fda93b79"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/child.log": {
+    "bytes": 74,
+    "mode": "100644",
+    "object_id": "00c8c1c64148374995dd6d63d8cd2721594adb0e",
+    "sha256": "38f19f405a932ababf32c8abfcbdc6d6b23ec83d13faeb59c4236751abdc97c0"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/command.json": {
+    "bytes": 1076,
+    "mode": "100644",
+    "object_id": "4f0a6ed1a43412814d0e8de18bac53d6ab28ae4d",
+    "sha256": "3b471b5eb6ebf5a4ef495f9fb9fc06b75ebcd18b99cf1310cd366c333b0b5233"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/group-rss-observations.jsonl": {
+    "bytes": 14513,
+    "mode": "100644",
+    "object_id": "8a14f105de256f13b133a0ecce8a143d454b0497",
+    "sha256": "3e033b97db1a0062d5e83ea5cdeaccde400d129483d183078fb5bccc5f2a9123"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/group-rss-summary.json": {
+    "bytes": 1759,
+    "mode": "100644",
+    "object_id": "651d86f7cbe403e787a597ddbaacf331fd323839",
+    "sha256": "e24cda9846cadc7318aa0a0906b8845121fd0226ae33e903ccd159346b18d807"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/guardian-exit.json": {
+    "bytes": 520,
+    "mode": "100644",
+    "object_id": "eda2fda005f7230b118df118365841ea19517b21",
+    "sha256": "df67ee4360bbbd38ec36c91506705a4a7adbd1f007858354af14f143910b9b2b"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/lease-binding.json": {
+    "bytes": 694,
+    "mode": "100644",
+    "object_id": "49675de1f505322904bf08a4106d55198e69c2ad",
+    "sha256": "e8ce87ecd9f0b53d60971dd455defff81f1fa57106d92d24e048ed67769cbc9d"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/lease-observations.jsonl": {
+    "bytes": 30713,
+    "mode": "100644",
+    "object_id": "6ed5d8e3d5613a170aff67752c7d61d1c6e977d9",
+    "sha256": "51848b4eb100a680e77468308a105cb91b6eb4a82752e524f010cddb9c3e8566"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/owned-group-final.json": {
+    "bytes": 190,
+    "mode": "100644",
+    "object_id": "8eb98c972c97b212650883b56176a2fe1dd70d7d",
+    "sha256": "b15bb18b8e8bc776ba6faa10c2ba67cff21b58b4cf0ebc31bd46bf50d94e29ea"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/pre-admission.json": {
+    "bytes": 8042,
+    "mode": "100644",
+    "object_id": "37736441a1745f908dacbe9524f4a9e65fc33fb5",
+    "sha256": "6f532ceea6feda7fdaa1cd64f464c9b6939fd6d8e4c58268096aa9d1929e206a"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/resource-observations.json": {
+    "bytes": 874,
+    "mode": "100644",
+    "object_id": "247d8fc397619bbb9691d524bf00aef29a80d30f",
+    "sha256": "a8271e54fb1fac77e3b7b53bbed83177c70b1605395cfe793881bdddce7b20c0"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/runtime/scheduler-adoption.json": {
+    "bytes": 4646,
+    "mode": "100644",
+    "object_id": "189ecba05f4a3f789f7e195dd0b675e851ceb5b3",
+    "sha256": "ce5459bb19e32acf0e2af462a3624c6f1fc31cf1b3a42e42183a74ca884a95de"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality0/training-protocol-review.json": {
+    "bytes": 134067,
+    "mode": "100644",
+    "object_id": "48fddb3bac36ca7f979070105039f1f7eb1983e6",
+    "sha256": "96be10ceb791577bd34dfc6d7347f8873a89b6d9c8cd2f333ab8116127f3abef"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/plan.json": {
+    "bytes": 56352,
+    "mode": "100644",
+    "object_id": "7b0c16b9102bcd073d5d2d3880524ff3a6ed1085",
+    "sha256": "095ca035935263b4b3a9342a469fa4260f2a6578c3b02c861ef38b8275ff9910"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/results/cell-training.json": {
+    "bytes": 47989,
+    "mode": "100644",
+    "object_id": "108abeee59e8ee3a8e107d072a7f3fbcc6175854",
+    "sha256": "c6511aa780078e8e7015c6e44383169e766e0f8e7c2b177656ebf826737d4806"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/results/data-schedule-before-models.json": {
+    "bytes": 26725,
+    "mode": "100644",
+    "object_id": "36f14e2367dff6f9c29fcac121529c5668a162ae",
+    "sha256": "cd3e306d055b8e079252c99f2e20cac1a9f632cf5465b5e6ef19d8a13ec147c9"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/results/initial-parity.json": {
+    "bytes": 2131,
+    "mode": "100644",
+    "object_id": "9ff4c339b54118d2bffa657fa14a312c71a369f2",
+    "sha256": "8315a2bdaa277bc839c36312b2a529d050a76c57ae55260ce108b5ee064bbdb1"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/results/summary.json": {
+    "bytes": 50096,
+    "mode": "100644",
+    "object_id": "2dccbb2501b04f8910eeb95ec444c5abec764ac6",
+    "sha256": "7b23a7051e66e19590f437f4dc367d1a4215504ec94db3a3bf03e833b3be9204"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/results/trained-authored_dev-score.json": {
+    "bytes": 105054,
+    "mode": "100644",
+    "object_id": "cf06bf1d1dae1ec1c45217e5ed44c3277b050a35",
+    "sha256": "673a4a8ba73b2a0e6f2cfcfabf69395113ac0de5f0798fde984f07b08f7652aa"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/results/trained-fresh_challenge-score.json": {
+    "bytes": 53533,
+    "mode": "100644",
+    "object_id": "bd8806df4baf7f5a372f8c1e83eda1bbcbfa7bc8",
+    "sha256": "cab7781304255aef8aef16ab78463528961b7e480c892f340d6ba1f897d666fd"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/results/trained-fresh_tune-score.json": {
+    "bytes": 53289,
+    "mode": "100644",
+    "object_id": "929bd883beb927dbd95f18a4b56b64466c3f2462",
+    "sha256": "224e1175e60b1d975a106271d569205493a5b27ac48874bfaf1f17306cb78e74"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/results/trained-old_tune-score.json": {
+    "bytes": 101541,
+    "mode": "100644",
+    "object_id": "9c52b14b0b2a49d9a54ff4f3347c169e45bf11fd",
+    "sha256": "af0b2f8eb97b2c6671888182766adec8bfc50f92469a0e5c54318264fb0f0fb1"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/results/trained-parity.json": {
+    "bytes": 2131,
+    "mode": "100644",
+    "object_id": "98eda04e9c1c4d35167a3e167924760e09b3f4ab",
+    "sha256": "c0b6ea1b4432f8d6c0ff604e2071e9088a722e5e6161e6b2cab4f98543ce89aa"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/child-exit.json": {
+    "bytes": 104,
+    "mode": "100644",
+    "object_id": "92e96667f257d2e6518d00b742db6e6b99a54ec8",
+    "sha256": "dd071d4e5706f8e3bb7ce1d130bd590725dce2e53750b307e532d757b6a634ff"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/child-identity.json": {
+    "bytes": 44,
+    "mode": "100644",
+    "object_id": "ed22c28667ee34326e5ff822f626a866c1bee63b",
+    "sha256": "9481ccfbe901a5da7a41fd5823d5aa83c01465864c7a64c369e161193da7055f"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/child.log": {
+    "bytes": 74,
+    "mode": "100644",
+    "object_id": "d3ee909904bea45b4a894affb7f83b2d158c29be",
+    "sha256": "3df35f9b238c8e012c94813469304397664c99b21f36dfbed50ee6ccad9a52a8"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/command.json": {
+    "bytes": 1076,
+    "mode": "100644",
+    "object_id": "70414dd144266d12aac6ddd28ea8ed481b036c0f",
+    "sha256": "3b7b560f33206af4fe5d0c5c6668ec08083f0d9f91c3e1a2b33ccab2b0e7d188"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/group-rss-observations.jsonl": {
+    "bytes": 14009,
+    "mode": "100644",
+    "object_id": "0f990ba97606adeb0f0f101f754500e7059c7243",
+    "sha256": "1a61950b530286f266237ffe5dab5a17077cd4a7a60a0fc86120c1a0e006e8c6"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/group-rss-summary.json": {
+    "bytes": 1758,
+    "mode": "100644",
+    "object_id": "018ad4464dfb2e7af740fca169c59ee093ba7b9f",
+    "sha256": "45c9c7d92be1d5de04015a17b7d096b824d4c4dda159612249dad027cc182e62"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/guardian-exit.json": {
+    "bytes": 520,
+    "mode": "100644",
+    "object_id": "553f46998cace3dfe9d28204260370a5072bffb8",
+    "sha256": "95294001ea6e02baae810648d67c12d0648fade70db03622778831f16d263e8b"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/lease-binding.json": {
+    "bytes": 694,
+    "mode": "100644",
+    "object_id": "9faf99af5a2599a8dbd759421ba2d162569ebe49",
+    "sha256": "f4db6b10776f22b209e04ea3808a0eb5269698c9b5f0a5da1438e1cc393d3e03"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/lease-observations.jsonl": {
+    "bytes": 29684,
+    "mode": "100644",
+    "object_id": "132b078c917c5d7469855b9921ce4cfb85d7f7f1",
+    "sha256": "f0e3e6465e829f29dc7d97932d5f274084a721413ac6ebd39a75cb07fd0d7c25"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/owned-group-final.json": {
+    "bytes": 190,
+    "mode": "100644",
+    "object_id": "d21d13e0a1639779a16c7a15f8cd1db44202d3cc",
+    "sha256": "78b5c4950bdc7f3ea027954c718e0eb57935277ce5bc56818451641cbccc750b"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/pre-admission.json": {
+    "bytes": 8042,
+    "mode": "100644",
+    "object_id": "e21e26ffbd9c424ce7107f2d7d854e3cf8cdee41",
+    "sha256": "189480f42474a73935bd06a3c20051d81c53ee8e0899097e64bcf23668ed08ee"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/resource-observations.json": {
+    "bytes": 874,
+    "mode": "100644",
+    "object_id": "e3d24da8ddb4ce02b609d9257372adb0096017fa",
+    "sha256": "4f64baa648a26b5cb6aa6f24cce7d051e3c67201b86c99f01c70b7b01d46c924"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/runtime/scheduler-adoption.json": {
+    "bytes": 4646,
+    "mode": "100644",
+    "object_id": "31a74c47c7ca75592b6d0a4c1e109f7e7628ab12",
+    "sha256": "8f5ac1f208eb061ca65cff37430edbcd50d9dc60b54f2536f887a2e39e1720d3"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor0-scope1-modality1/training-protocol-review.json": {
+    "bytes": 134177,
+    "mode": "100644",
+    "object_id": "53e6f804673b8a9f1631871f83f5e4671843932f",
+    "sha256": "81472a088ac450fa926bf5dee0927a465d68e7fd436c9ef35d035c2a9c8539d2"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/plan.json": {
+    "bytes": 56352,
+    "mode": "100644",
+    "object_id": "4aabb7d3295a618f7eadf79b2a0384aa2ccb8c34",
+    "sha256": "c37e528ee1494d2776abe5dad6dd58188169beef08cff436814b3e801888cd66"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/results/cell-training.json": {
+    "bytes": 47995,
+    "mode": "100644",
+    "object_id": "e8f593939fa44b20422e54a0bf76e10168254038",
+    "sha256": "757a17fb03dc0d7cd4f9e15ff4e79bfdb33a8d5906d8b4d605b87dca4cbe20ef"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/results/data-schedule-before-models.json": {
+    "bytes": 26725,
+    "mode": "100644",
+    "object_id": "36f14e2367dff6f9c29fcac121529c5668a162ae",
+    "sha256": "cd3e306d055b8e079252c99f2e20cac1a9f632cf5465b5e6ef19d8a13ec147c9"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/results/initial-parity.json": {
+    "bytes": 2131,
+    "mode": "100644",
+    "object_id": "83958ddc10afcc7efc1f90ddebc92f06f49e4236",
+    "sha256": "b80510162f23dfce3fa657eb06057f23103fd1e0966015a12a13dfa3ff4036c3"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/results/summary.json": {
+    "bytes": 50096,
+    "mode": "100644",
+    "object_id": "49cc5e3e9c4555adc8315061241b7819b987a110",
+    "sha256": "1a507c335d249aaddcf46631bd80faa02ad91e563d4a04a0e0b6cd914a35337f"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/results/trained-authored_dev-score.json": {
+    "bytes": 105150,
+    "mode": "100644",
+    "object_id": "232516056f1dc22c17e8a752bb39eaf8b85c3b3e",
+    "sha256": "5a6b72b472351ea4716c884c2237754b5cac4cee8982570a645492cf8cc509ad"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/results/trained-fresh_challenge-score.json": {
+    "bytes": 53551,
+    "mode": "100644",
+    "object_id": "81fa73fa9f0fd07aa000a007767f956fe26b26df",
+    "sha256": "9afb27c6839d688f337ad511cc677d2e9221ac39980ae4ce6e7d6bc36af327cf"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/results/trained-fresh_tune-score.json": {
+    "bytes": 53311,
+    "mode": "100644",
+    "object_id": "c01afb411f4ee5d0785f587c5f64546d63433727",
+    "sha256": "485130285b570fabf28509216bd19746ffd8ca75917f6b0cfbde1715189655c0"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/results/trained-old_tune-score.json": {
+    "bytes": 101562,
+    "mode": "100644",
+    "object_id": "b22529273a989f35516c1dda1a8935d6d0614bda",
+    "sha256": "1495996110a73d1e9f6fa5e5eb8db13a4652528a540ef8997fe0a47cb0689c6c"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/results/trained-parity.json": {
+    "bytes": 2131,
+    "mode": "100644",
+    "object_id": "7531ace527d548c5316f645d1db2de9d6bc8d464",
+    "sha256": "981e3358209344c7c36824e7fe019b2d548192a47ee95932c517ce1531bcb874"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/child-exit.json": {
+    "bytes": 104,
+    "mode": "100644",
+    "object_id": "7c05a221c6a90c59b1968ce950c5dbfdc3bbb0d8",
+    "sha256": "2f7fa08c80e7fc58391e049d534451d12cfc0a3eade3e8fbe2de463c69529c91"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/child-identity.json": {
+    "bytes": 44,
+    "mode": "100644",
+    "object_id": "0cb3beacbad9a460714587c6a8a36222e666ba67",
+    "sha256": "ac4b1fb700c5a094940f8db6941d609a63249fe402c779339d46275ba98b6854"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/child.log": {
+    "bytes": 74,
+    "mode": "100644",
+    "object_id": "84d6d8f399819d0365e84b670dd84b8d84586954",
+    "sha256": "3f8909c145149d0fec9cf3a6591847b02aa01fbfb3fca8c60818eb8273f6ea3e"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/command.json": {
+    "bytes": 1076,
+    "mode": "100644",
+    "object_id": "38d1d00249553a03a809439fd48b34cd3324e050",
+    "sha256": "1f36597f4a6318de38f0d38b33149bdb47d3377f9e53d7b7f27a018093a96481"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/group-rss-observations.jsonl": {
+    "bytes": 13997,
+    "mode": "100644",
+    "object_id": "e1db9330e593314c339469b6c727b65227058a0c",
+    "sha256": "7f6fdeef35156b2ef32e08c3c5fe170c51bb81c80038a593fefb41edee9ba959"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/group-rss-summary.json": {
+    "bytes": 1756,
+    "mode": "100644",
+    "object_id": "39b62feb5f06074d99edc2ecf200910b9d6310c3",
+    "sha256": "a4f8e028ab005117b7697f85119e0b61c7fc95f5b57731f67c97eaf69d4488f0"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/guardian-exit.json": {
+    "bytes": 520,
+    "mode": "100644",
+    "object_id": "a08d2ab41b9e3f723ad99e70d504efb3b92b8f13",
+    "sha256": "f5f866301d5f7abf1ea0baa617cf815183a3701040b6c6d28086b7d2a9b60edd"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/lease-binding.json": {
+    "bytes": 692,
+    "mode": "100644",
+    "object_id": "2d7df2d1cbc07082c1b1ef7fe9866273c05c27b9",
+    "sha256": "945b0ba21306f2edaccd243e499ba790ddfd4139a49afa2fed2f44907f457d0f"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/lease-observations.jsonl": {
+    "bytes": 28575,
+    "mode": "100644",
+    "object_id": "554de94305f8ee6bdd8556268aae5f42f338ea2c",
+    "sha256": "0c02a881bc907a4b1a3cd941d1b720b8f427d04a4ef42d73e1b4e264ebe682e4"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/owned-group-final.json": {
+    "bytes": 190,
+    "mode": "100644",
+    "object_id": "cbef1df05e8717ade4710bc6b0beffa08aada25c",
+    "sha256": "e48c0855671bd6462f02b7fd07ce1a9ee77a48a0ce8185e12c30ab0c516af36e"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/pre-admission.json": {
+    "bytes": 8042,
+    "mode": "100644",
+    "object_id": "ef2569991e2eee64f1907dc527c028b86ec6fa37",
+    "sha256": "40ed0e23aba7b95a5b6bab16a3e5c33f3f55d1059de2458dffd71acd2aec2f8c"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/resource-observations.json": {
+    "bytes": 874,
+    "mode": "100644",
+    "object_id": "d0dea94d107903f3a660114aa2034a438ef97d28",
+    "sha256": "a2ae2cfd0e45e9572bf494f426401777cc958a90df65b3bde4ab13c11c34f373"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/runtime/scheduler-adoption.json": {
+    "bytes": 4646,
+    "mode": "100644",
+    "object_id": "01e21d91a5cc00b20345c6ed857c08e89d253e3a",
+    "sha256": "adb761e61ccecc4fc7c2451201ef3da9eb0ba185c02dcfdcff6ebd79498dcc32"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality0/training-protocol-review.json": {
+    "bytes": 134287,
+    "mode": "100644",
+    "object_id": "5364bfea470864f3103c809a3aa6a07d9428305b",
+    "sha256": "7387095295e86551e501dd154aa9cc2ce0bb35feacf1a264b40caa2fa6abd714"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/plan.json": {
+    "bytes": 56352,
+    "mode": "100644",
+    "object_id": "1d45fca6e67174e342a7479e3433bbbaed3f5051",
+    "sha256": "0732e616eaafa90eea45d41609242cb8f3597aca974f3e14df2f8546686a8635"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/results/cell-training.json": {
+    "bytes": 47986,
+    "mode": "100644",
+    "object_id": "a2f888802e5426a8c95f7c4474cb2cc3e359bf6a",
+    "sha256": "0f9f6e25e240baa45434875cc1930a8dfdb237c5aae4f3a8d9bae56ace4758f4"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/results/data-schedule-before-models.json": {
+    "bytes": 26725,
+    "mode": "100644",
+    "object_id": "36f14e2367dff6f9c29fcac121529c5668a162ae",
+    "sha256": "cd3e306d055b8e079252c99f2e20cac1a9f632cf5465b5e6ef19d8a13ec147c9"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/results/initial-parity.json": {
+    "bytes": 2131,
+    "mode": "100644",
+    "object_id": "2fc0b9e4b61b71116f66d9e488ae741ef023abdc",
+    "sha256": "609499cc923396241125b839a367dc1a06d535f1ed0fdcdaa8a1d0edd8f3f3b2"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/results/summary.json": {
+    "bytes": 50097,
+    "mode": "100644",
+    "object_id": "280b8b06810b62542cea7c1269b55e6d25de591f",
+    "sha256": "5900f97dcf77a01fa2936e15c857bee1aa9d345a61629721e001af389b07e5c1"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/results/trained-authored_dev-score.json": {
+    "bytes": 105104,
+    "mode": "100644",
+    "object_id": "41f77867f86742432dddcc7eed7a783cf05e6626",
+    "sha256": "39bd7b97d0ed1fd4f6dcc47069995b3decb324164f0af18251961776babd4192"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/results/trained-fresh_challenge-score.json": {
+    "bytes": 53547,
+    "mode": "100644",
+    "object_id": "54fb4ac2c1eac11cc3a3f1eb4b57bf38aa4d07ce",
+    "sha256": "39d31c3aa07250fe54e531176669623231d88a6512365b05f9eb366d6f87f028"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/results/trained-fresh_tune-score.json": {
+    "bytes": 53298,
+    "mode": "100644",
+    "object_id": "f6fa4c167aca81ecb08e652ca5b5849dcb1d91f2",
+    "sha256": "ee994755de8afcfbeaec2f0185a08fa969e8211b664cba51a6d04876df08e8f9"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/results/trained-old_tune-score.json": {
+    "bytes": 101546,
+    "mode": "100644",
+    "object_id": "b64bcc38f4ca97d0905267d654b561957875f1ad",
+    "sha256": "4b81b280a9948565879032f1c2d7ffc551a6a2c5bed2fbb6d88ab50fdc0fcb7b"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/results/trained-parity.json": {
+    "bytes": 2131,
+    "mode": "100644",
+    "object_id": "f63d55f24e310d99b5e8d8f526c6b7d0c34a613f",
+    "sha256": "2709177539287d2a5600726c229efd787ab3e412b63cd674bf420c49f0e03f30"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/child-exit.json": {
+    "bytes": 104,
+    "mode": "100644",
+    "object_id": "0c1acff81dc66bbc7a2a5e76de6753a4928290a1",
+    "sha256": "785bd1cecfba10e26191496a9ac06acaffcf5acf14bab466e42363b4610707b6"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/child-identity.json": {
+    "bytes": 44,
+    "mode": "100644",
+    "object_id": "06341d602fa2c6b0ac3a42f6eb8af6b966a381aa",
+    "sha256": "560c1926605716fc44a555a474e8b26570e55a927550772ebc23e49dc3ab47db"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/child.log": {
+    "bytes": 74,
+    "mode": "100644",
+    "object_id": "e97c741e54bc4c59c9421bcd1cceca79be6ecb9c",
+    "sha256": "de2b464432e1d981ff23a64ea2b99d172f03d262e679108d8952fa98641e8095"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/command.json": {
+    "bytes": 1076,
+    "mode": "100644",
+    "object_id": "32b79e0fe8eb3760f4d25d2b627ef3d27f498751",
+    "sha256": "c6bc4baea148e1099a56011e4398679211c890d7965f171ab23feb8bb878d542"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/group-rss-observations.jsonl": {
+    "bytes": 14015,
+    "mode": "100644",
+    "object_id": "c3111c51cd3869be7845b0d4b06b99aa0e5838f9",
+    "sha256": "81a1a10e43fea10bf1c87b7ba9c07808b398621050ddf263bb4ab573cbb9f066"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/group-rss-summary.json": {
+    "bytes": 1758,
+    "mode": "100644",
+    "object_id": "15af7581ce32bd85720f850442b611715a4181e6",
+    "sha256": "0e0ddd7fcb2bc93adb02565dc957a9440745801d148383f2e98ea99b4fa04e8a"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/guardian-exit.json": {
+    "bytes": 520,
+    "mode": "100644",
+    "object_id": "1629da56304d797a2676c065f5865ae09f62502b",
+    "sha256": "9c5333b59e4ff14f32ae270322d028071344fade292c79ad1795cbd725e82717"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/lease-binding.json": {
+    "bytes": 693,
+    "mode": "100644",
+    "object_id": "751cc454d981f4c4c7d86c4005381eabf0d187aa",
+    "sha256": "d1769f1a54f38291287f7f389ff247415c821adfba6e0fb9f322b719a0376f4f"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/lease-observations.jsonl": {
+    "bytes": 29638,
+    "mode": "100644",
+    "object_id": "5d3983610fdd49c149df321398fb8eeab8b263c3",
+    "sha256": "7df8d2d0708e796ffb862b161499616894dfafc2f66e30a3b633c6c850096951"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/owned-group-final.json": {
+    "bytes": 190,
+    "mode": "100644",
+    "object_id": "9e484ab8986d5f1a67fe3f5c30ec84d358e0b9e2",
+    "sha256": "af91ea89a29a0f664c8029fdf08f10c5cd9ca7c68303cc6f9ad2e877da93a567"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/pre-admission.json": {
+    "bytes": 8042,
+    "mode": "100644",
+    "object_id": "8aa9fce2787dbd15c79d2c4b28cd3dc5705bcf0f",
+    "sha256": "ffbad3ade6c31aa27d87f3cd2a78954c06955cde0eee32bb1535a28ef847bbb3"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/resource-observations.json": {
+    "bytes": 874,
+    "mode": "100644",
+    "object_id": "e083fa8764bd7a102b34ed4afb0a307a30d46f05",
+    "sha256": "c415ee6abbe8bbe1744c6b4b722daff782ff6726355e3951e4dbee58a048e89f"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/runtime/scheduler-adoption.json": {
+    "bytes": 4646,
+    "mode": "100644",
+    "object_id": "624ddd21838b93bf7af3d5be896cd64b9877b7bc",
+    "sha256": "1b58643fdc6749f0b23c79234e8fb042eb35e8b51d09af6df758265aebdf77f9"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope0-modality1/training-protocol-review.json": {
+    "bytes": 134397,
+    "mode": "100644",
+    "object_id": "4100c9694fcc93eabaae7ab9647d233bf2d12efd",
+    "sha256": "763a454f3a4ca15c17cdd9a47cfbb3fe9d239cd97dfb40a728aa86972f8b2815"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/plan.json": {
+    "bytes": 56352,
+    "mode": "100644",
+    "object_id": "3ef525011329ea0f0fdc28f406299aa1220f9f0e",
+    "sha256": "264c74a7517e58be3ed9a6453a99b81b4e4eba58fcef8ef803d12177585ae066"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/results/cell-training.json": {
+    "bytes": 47982,
+    "mode": "100644",
+    "object_id": "c7e3552822ed5f02c08f8ad6515eec71a2321fe4",
+    "sha256": "2ce59f8b28bce3cd8590e24e305278c2e61ae7d16ba3bc8422c79c3ce362142c"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/results/data-schedule-before-models.json": {
+    "bytes": 26725,
+    "mode": "100644",
+    "object_id": "36f14e2367dff6f9c29fcac121529c5668a162ae",
+    "sha256": "cd3e306d055b8e079252c99f2e20cac1a9f632cf5465b5e6ef19d8a13ec147c9"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/results/initial-parity.json": {
+    "bytes": 2131,
+    "mode": "100644",
+    "object_id": "0590fae919511168d66570f9a0e2dd36e861802a",
+    "sha256": "324bb40a28cf239323875b6883b183249639c5af79675b93db5d02935be79a56"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/results/summary.json": {
+    "bytes": 50096,
+    "mode": "100644",
+    "object_id": "5fa52d3e2076977d828e340bd8260f60f4570c5f",
+    "sha256": "946ac2066c1452118e6590cbd3759ea66eeb72c858314c3346186af297fd5aa7"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/results/trained-authored_dev-score.json": {
+    "bytes": 105066,
+    "mode": "100644",
+    "object_id": "63f6c5a96a8da9b52d874717ccfd947e2cd6d93e",
+    "sha256": "78eb94250287341f140f8d6fc3dddacd68409f570f3f7bcc4b384129fd00347a"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/results/trained-fresh_challenge-score.json": {
+    "bytes": 53525,
+    "mode": "100644",
+    "object_id": "d38b38c952e91974f024bd21947dc9f9a93bb72d",
+    "sha256": "01f1fb3dd2127bb4ec80e179381c7c8b0a585de28e09469392effd94cee9de69"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/results/trained-fresh_tune-score.json": {
+    "bytes": 53274,
+    "mode": "100644",
+    "object_id": "5d95c883a523f2c304fd500f46dd12d12a8fc8a6",
+    "sha256": "edc1b9bd021c89b0f18e6fd42157c2ae90f5425f656fa28c5ee384983b4fef5d"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/results/trained-old_tune-score.json": {
+    "bytes": 101549,
+    "mode": "100644",
+    "object_id": "94cb2f80b3e355a60e0e1198b7b9141f6aba64e4",
+    "sha256": "5b1e1c6082a842dec7a84e166fd21e4ca241cc8ec500bb2ce3338f4698d25e6c"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/results/trained-parity.json": {
+    "bytes": 2131,
+    "mode": "100644",
+    "object_id": "758724590d6d59933bba637c220b2297e2a9e3cc",
+    "sha256": "6bd870415e86d9a695c3b75d137666c66dbe86fd0656228598636b14cfb2393e"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/child-exit.json": {
+    "bytes": 105,
+    "mode": "100644",
+    "object_id": "c164cf413ef1ed08a364e33995d36aaee8e109da",
+    "sha256": "a569747e4ae83ade3c87e68269690f1e57b9ff58a1009b2c6e0fb807a0e696a7"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/child-identity.json": {
+    "bytes": 44,
+    "mode": "100644",
+    "object_id": "de0f1e441746822ec7f7c3a7d741b5a8ad6e9d47",
+    "sha256": "e31b43f175dc1584962d404b0fd70b7281700f17a170e16cbb9f66a07f9dc51b"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/child.log": {
+    "bytes": 74,
+    "mode": "100644",
+    "object_id": "dac2d951985cdf7183c40a1016210c06714b2c99",
+    "sha256": "a3cff564f2eae26eb3770fe80d0d9b0ece0d20b0143857b49537981f49a53f2b"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/command.json": {
+    "bytes": 1076,
+    "mode": "100644",
+    "object_id": "f0bc1c8fe87fd32593d2bf3038ca978e059f6a5d",
+    "sha256": "a08e4c96944cc0491435752edc7aab417bd70dfe6e0fa6ac339867337b1f1924"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/group-rss-observations.jsonl": {
+    "bytes": 14004,
+    "mode": "100644",
+    "object_id": "e40bf5a7bf5b7d46269acf777c02be7efb1a8bd9",
+    "sha256": "53fb9c1201d9f050b847b93512a84a24955deff893a11d1882c150500b501651"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/group-rss-summary.json": {
+    "bytes": 1757,
+    "mode": "100644",
+    "object_id": "71eef5f40020b2e9ccb4253c1aeb299dcff46f48",
+    "sha256": "e53030ddf0897debfd6fa840039d6df69b1686de649353a8b3e4078fe8cdbb44"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/guardian-exit.json": {
+    "bytes": 520,
+    "mode": "100644",
+    "object_id": "28111d63ffd16dd76dc744fb54a601cef50c56fd",
+    "sha256": "346e84296c1ae8daa8be2750f09786523f23806a6410efa771ff5de4ee33bcf6"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/lease-binding.json": {
+    "bytes": 694,
+    "mode": "100644",
+    "object_id": "63c946c3843e6db2684dfb366c8b9a6750e1ac4b",
+    "sha256": "9b70c7c473516c39cb5a71043919adb1d7673abb5d2f0c2d90eecbe8c52b2b08"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/lease-observations.jsonl": {
+    "bytes": 29694,
+    "mode": "100644",
+    "object_id": "11ee7db4ddbdf07ba8abbb2a260cf66ba83dab6e",
+    "sha256": "8a9975a2877b1678ba9bb70d86af1812d8e6b5e0e9be70e20e98dc0af8edbd29"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/owned-group-final.json": {
+    "bytes": 190,
+    "mode": "100644",
+    "object_id": "3a2fbfc7e6a31f26d33947bbccd3bb48e42afbb0",
+    "sha256": "5a6fae066f3a1f20d017e742ed6a95147d1825f8e5c7921db1dafe89e0dae1d7"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/pre-admission.json": {
+    "bytes": 8042,
+    "mode": "100644",
+    "object_id": "ab281f31c9cdc0f6748f78b9f7eca43452a757e3",
+    "sha256": "4a68369cc900fb9ba95a9359c604c7d6a33b92b2a416527d2624942176aeec4d"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/resource-observations.json": {
+    "bytes": 874,
+    "mode": "100644",
+    "object_id": "9fb02468771d5e6bcef146db4ee2eeaa76a3744c",
+    "sha256": "04b822ea2212ba4d68ea7e15329f5f5e4066b1c54ecc2fe24b9ef3ab98b402fe"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/runtime/scheduler-adoption.json": {
+    "bytes": 4645,
+    "mode": "100644",
+    "object_id": "4084c8cf65aadd5344d42d3755974d5f268e6a0d",
+    "sha256": "7769dab597e9eadfcbd203b69bbb608b96fb39f060ed497bca5a2023a56fdabc"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality0/training-protocol-review.json": {
+    "bytes": 134507,
+    "mode": "100644",
+    "object_id": "17853d727168d849dbcd1d1f678bfadaaac693d2",
+    "sha256": "fd9d16f930f42a0b8e4b5597bfaec56fa9c7ba94791a95482093794c03e74ffe"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/plan.json": {
+    "bytes": 56352,
+    "mode": "100644",
+    "object_id": "7585ea39cb2e44ae9b2929ba4c7c15fee2a35e8b",
+    "sha256": "3dd07ad3175addb60aa692dcae47a5e2f8d6d6a25eaf1d983894013c4e002916"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/results/cell-training.json": {
+    "bytes": 47975,
+    "mode": "100644",
+    "object_id": "4f7e50c8c4e8b2ea09d5899f94370cdab591caa4",
+    "sha256": "bc11224884585bcc7ce8035a8186de4e4395c24606fd6adf762163dd26d346f8"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/results/data-schedule-before-models.json": {
+    "bytes": 26725,
+    "mode": "100644",
+    "object_id": "36f14e2367dff6f9c29fcac121529c5668a162ae",
+    "sha256": "cd3e306d055b8e079252c99f2e20cac1a9f632cf5465b5e6ef19d8a13ec147c9"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/results/initial-parity.json": {
+    "bytes": 2131,
+    "mode": "100644",
+    "object_id": "f85b125e303e5dd4a40f0a6b5132131b8a0e2d0f",
+    "sha256": "1f24f88eccb5779e5da1c22fd8d2d434dc71eeac00c3b5d521c1892cd2e3da9c"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/results/summary.json": {
+    "bytes": 50096,
+    "mode": "100644",
+    "object_id": "d519ca562485d82e2c2cc790467a382b160c05ac",
+    "sha256": "9dd8c585510dd3ba1e7ec109d576747bba65cbdbbbf7da42c151c5618fce50dc"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/results/trained-authored_dev-score.json": {
+    "bytes": 105081,
+    "mode": "100644",
+    "object_id": "95cb3eb5e0e5c44317f1046e6e6fa7a0f47014ed",
+    "sha256": "d060bfdae9a99a58c7b6ddd86506c320d91ed63f8913c83024373488124bc54a"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/results/trained-fresh_challenge-score.json": {
+    "bytes": 53524,
+    "mode": "100644",
+    "object_id": "d1269843151cfe753ba1ee415b89181faabc6a42",
+    "sha256": "1ba219503b22d8e37b9e8f332140c29cd17d60f1fc9bc4e8c9a5bf2cb9fed366"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/results/trained-fresh_tune-score.json": {
+    "bytes": 53284,
+    "mode": "100644",
+    "object_id": "31c65783e845aff95e7f1d27aac7f4d75480d3b9",
+    "sha256": "06a79b60795e782ef33c416c9d8e43a8e660142ef0f448336bce66dff6aad348"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/results/trained-old_tune-score.json": {
+    "bytes": 101540,
+    "mode": "100644",
+    "object_id": "74b9e240800d30896af219c5f1f8eea287d94d24",
+    "sha256": "56f74c9260db97cc4b813c11fab69e3177a50664788a9a8e16d5c5a73f1412a4"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/results/trained-parity.json": {
+    "bytes": 2131,
+    "mode": "100644",
+    "object_id": "8998812ee33df94f258a4b2e7e6c86bc8b43fb54",
+    "sha256": "af53d3dfc571a3a71322c3d77d5cb6adb23d2a19d143dfc170c596cbd9cab2da"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/child-exit.json": {
+    "bytes": 105,
+    "mode": "100644",
+    "object_id": "e56660cfaa9098026142a70c1dd592028853cf54",
+    "sha256": "b6d19f391ee2b90e2f772ab3862fa3c20d73c1c1cd899b7165c53dff3799d204"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/child-identity.json": {
+    "bytes": 44,
+    "mode": "100644",
+    "object_id": "cd2d81543fca53aad30530b950e565ed45fcd8fa",
+    "sha256": "7681ba95ca09b0a4872d997c3ad9cc11ab722824877220592703db271f0c6a78"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/child.log": {
+    "bytes": 74,
+    "mode": "100644",
+    "object_id": "139a7c11467b305e30ab5c572f5c58f1556f67b2",
+    "sha256": "3750214276a8457cbf58d416db06575d84238f4663500a74e2919aa2dba1001a"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/command.json": {
+    "bytes": 1076,
+    "mode": "100644",
+    "object_id": "02d20b592d3c0505ebebce023949d1b93df81d2b",
+    "sha256": "064fd38137d443e6f16cbd040f1aa2fc927a86f460bf2743111d813d210458f0"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/group-rss-observations.jsonl": {
+    "bytes": 14018,
+    "mode": "100644",
+    "object_id": "2e023fa3b620fee8bc1afd2416fa13cd737a2ca8",
+    "sha256": "aaf753d7f4b6613ded938bb45c2d53fbb46cf987d2ee0b34b625a8f057cddf2f"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/group-rss-summary.json": {
+    "bytes": 1758,
+    "mode": "100644",
+    "object_id": "9fd82633ee039f7b89ba728401cb4fd594ae8fb8",
+    "sha256": "d6c7275d717b13c128b144a47f7a03073be0c0a2e34e31a296fbfa8c53346bcc"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/guardian-exit.json": {
+    "bytes": 520,
+    "mode": "100644",
+    "object_id": "c42d0afc2f6a272cd69dd8b30e7abdc322bd3dae",
+    "sha256": "c1eb71084fef0b4fd06a0d563a5e5e5f1906ef1fb2f0b346962148f2868d5a61"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/lease-binding.json": {
+    "bytes": 694,
+    "mode": "100644",
+    "object_id": "6c7016a02e14d468801fee8601aacca6e9e8c771",
+    "sha256": "1a017b412e894e75302d4b55fff4ec7645aceb23b425ab077acaca74b256bdfc"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/lease-observations.jsonl": {
+    "bytes": 29679,
+    "mode": "100644",
+    "object_id": "32e52f6647e6d4b5fbf2ef815d30f8c7c53f6aa1",
+    "sha256": "829ac10dff2082dc84dbe04b7e067f35e7fd8180bed554d43e1ea73f7058b711"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/owned-group-final.json": {
+    "bytes": 190,
+    "mode": "100644",
+    "object_id": "fafaf82202bd80f93db7dbb2c0071fec004c944e",
+    "sha256": "68b20c4ec5d1641b4b5619fa72b0ee0b2fd6f703575b24ec15612010b69672b4"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/pre-admission.json": {
+    "bytes": 8042,
+    "mode": "100644",
+    "object_id": "5f209ef0bbc0ca74a6dd93b0081093de9218003d",
+    "sha256": "acdbf0261898ad443b056401a89603b3a60d98d9c34c80e9086784e1cfbdb308"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/resource-observations.json": {
+    "bytes": 873,
+    "mode": "100644",
+    "object_id": "77455b738086ef08bd961cc2a8ae34290cfbaee5",
+    "sha256": "4d3adb0cb07fdd5c943f28cf5dba98c83677f8af2e44f051c3ea0662051a7f42"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/runtime/scheduler-adoption.json": {
+    "bytes": 4646,
+    "mode": "100644",
+    "object_id": "2de635229feb4d564f059d7af9fb5be835b3c1b1",
+    "sha256": "a22373feb85d448f200caf2cd244aff4db675890472d3c940ec8aacefe290ff8"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/cells/actor1-scope1-modality1/training-protocol-review.json": {
+    "bytes": 134617,
+    "mode": "100644",
+    "object_id": "afea1f9a212ef0d2f972bdd067cedf20a51af97a",
+    "sha256": "9006d12b77ebf5b3f7aa40cce81a1953f266115bda9ac06f656954a9a1299699"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/completion-manifest.json": {
+    "bytes": 48258,
+    "mode": "100644",
+    "object_id": "3a7db2cdf5cb8f927ea878a150ff7f243885e5d5",
+    "sha256": "7be69cdb36388e0dde5547f19024d1142a0260560260d2a11f9140777a4f8f43"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/combined-pure-tests-v03.xml": {
+    "bytes": 8789,
+    "mode": "100644",
+    "object_id": "36eeace3097bd13a27b99eb1532767759c95a0d2",
+    "sha256": "a095c23e0bd9eb581e1138cde84213263c03548ee38dd1333fbe678bf5b1ae61"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/corpus-source-independent-review-v01.json": {
+    "bytes": 2386,
+    "mode": "100644",
+    "object_id": "09f86e2fc8f92648c2cd4b69cc08c3555c68ad06",
+    "sha256": "c2f0f31d894cd3212b2861dc4e14a17f4a3114e5a61bfa7c5cbd153b1617c3fe"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/eight-cell-output-freeze-v01.json": {
+    "bytes": 99398,
+    "mode": "100644",
+    "object_id": "493c164d0de5b58a011a3fef172323adc651ebdd",
+    "sha256": "ba4f5ddb00e35a9ae9271611097a503e3d058a9335a0c42a66a395024348e3fd"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/failed-publication-execution-v01.log": {
+    "bytes": 7480,
+    "mode": "100644",
+    "object_id": "0c9b08ff557c0bcde121d1c84e874646beb7a7df",
+    "sha256": "4ba0f9488df7632207f44e247ed38a34302c1b8a8042a02049ddc1bd9fef9c3c"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/hf-completion-helper-source-independent-review-v01.json": {
+    "bytes": 3782,
+    "mode": "100644",
+    "object_id": "0b4d2ecfd9a4237b6b9785ecb51594c16a84ab45",
+    "sha256": "1632b4e701d8374fc090168e69fbfc7272ac8cad40cb7b6d87027fe27c340f79"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/hf-failed-attempt-reconciliation-v01.json": {
+    "bytes": 802,
+    "mode": "100644",
+    "object_id": "c0def6832a3bafda8485f5b08b9cd18a9cd68f93",
+    "sha256": "9b05f69df6c96838b8136f6657360e5cec6116312b64bf1ede8732a9cd91905f"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/hf-partial-publication-reconciliation-v01.json": {
+    "bytes": 1135006,
+    "mode": "100644",
+    "object_id": "f9061108870df1695cf5bb324cf98c6599c9c75c",
+    "sha256": "85878cf226c8d693f4b2947dc8a1f68765deb730af92187d7d28ab893dbf6cfe"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/hf-recovery-helper-source-independent-review-v01.json": {
+    "bytes": 4360,
+    "mode": "100644",
+    "object_id": "1eee1192ebfebb465fed7f30310be6a64c7c617c",
+    "sha256": "f16aef6aafd68d53142afb9ba4bcce1ca73effc10bd5485b0b01b8591533ecc3"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/matched-result-analysis-v01.json": {
+    "bytes": 1947470,
+    "mode": "100644",
+    "object_id": "21ff4a3d536c3a6f185e8b4f8c1ac6c3cae76e42",
+    "sha256": "1bf9fba1678a73eaf7c9fa1d8bb3f13ec2e4d94ad5b013bf98da1277dd1f68f4"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/registration-v01.json": {
+    "bytes": 49475,
+    "mode": "100644",
+    "object_id": "69058350629b13fd2be0e8b9c66459440d3b075f",
+    "sha256": "73ec44610213d23ab27faa215565d6c10fe501fbf6212949f3e976ae0e29725e"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/result-independent-review-v01.json": {
+    "bytes": 128603,
+    "mode": "100644",
+    "object_id": "ac4d7e6635009092b80b1ebfc24876a72258abe5",
+    "sha256": "c80280c16b1dc790d1c01863917d52d1b0c035a9493c6c1b45a8fbb02a30e5ab"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/root-gitattributes-after.txt": {
+    "bytes": 2350,
+    "mode": "100644",
+    "object_id": "b078765a31db281f2e5e30b7791a1d08832a30d2",
+    "sha256": "d8b99b7ff67dd690617b4285ba90b0e84c5feeff481a1d568dc13ee667c2b892"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/root-gitattributes-before.txt": {
+    "bytes": 2230,
+    "mode": "100644",
+    "object_id": "1cf99f89f95ce8f39b630d8df37126fc628047de",
+    "sha256": "88ff4d857c849ce3e11fea7c2f70d648550968cf546ab9cbc4d690e1b6543036"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/root-science-source-independent-review-v01.json": {
+    "bytes": 41638,
+    "mode": "100644",
+    "object_id": "de5397b19ce97ac337c56e2d4ba21a8485d6900f",
+    "sha256": "757840f4eb03a3d5c05b34115c4303b581e338f93721601fc863fbf3aa5b9000"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/runtime-independent-review-v01.json": {
+    "bytes": 68420,
+    "mode": "100644",
+    "object_id": "c74f3b256f07f6ed2dbe138334b600e810c987c2",
+    "sha256": "f521e2591d1b23fab0ca663a91778b6f2855dc4b2104bac40e9b891c7c9cfeb0"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/evidence/trainer-source-independent-review-v01.json": {
+    "bytes": 5830,
+    "mode": "100644",
+    "object_id": "cf09bbda2eb8fa36f3a1b3f2d30c8a6e4ce3310e",
+    "sha256": "2806338355394df1b6bc383ebcb03b56f481669b38733672ac353a90a1385ac4"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/analyzer-source-independent-review-v01.json": {
+    "bytes": 4935,
+    "mode": "100644",
+    "object_id": "ebfd21e94c6c66de8974f8fde90cc6201c9edbf6",
+    "sha256": "5ac76e0a6fb924302e69c0be53a31aa8db7d61a62f80e62caa4e63bfbef7004a"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/hf-before-file-identities-v01.json": {
+    "bytes": 1048733,
+    "mode": "100644",
+    "object_id": "f4da7bad7849d4b716ba82c35178d493dd6e1598",
+    "sha256": "fad9a61b1e41000ae38ae8cf47e292cc0f57eea8e4dc1efaf530e16cba8c5c0f"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/hf-commit-created-v03.json": {
+    "bytes": 466,
+    "mode": "100644",
+    "object_id": "92c26cb3ab0aa9a57030c1c874c90c278fe2d391",
+    "sha256": "ee91d0423aae1d5381cb25898e6bbc2d9ad95812342428522c5de0cb64c8d86d"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/hf-completion-helper-source-independent-review-v01.json": {
+    "bytes": 3782,
+    "mode": "100644",
+    "object_id": "0b4d2ecfd9a4237b6b9785ecb51594c16a84ab45",
+    "sha256": "1632b4e701d8374fc090168e69fbfc7272ac8cad40cb7b6d87027fe27c340f79"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/hf-failed-attempt-reconciliation-v01.json": {
+    "bytes": 802,
+    "mode": "100644",
+    "object_id": "c0def6832a3bafda8485f5b08b9cd18a9cd68f93",
+    "sha256": "9b05f69df6c96838b8136f6657360e5cec6116312b64bf1ede8732a9cd91905f"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/hf-helper-source-independent-review-v01.json": {
+    "bytes": 4353,
+    "mode": "100644",
+    "object_id": "783b6af092edcdcd1c7cb2b53804268a02405822",
+    "sha256": "9667c056b360441e5e989e9314e012a0396b5be4534d7e41e02fa044d4d0339c"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/hf-partial-publication-reconciliation-v01.json": {
+    "bytes": 1135006,
+    "mode": "100644",
+    "object_id": "f9061108870df1695cf5bb324cf98c6599c9c75c",
+    "sha256": "85878cf226c8d693f4b2947dc8a1f68765deb730af92187d7d28ab893dbf6cfe"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/hf-preparation-receipt-v03.json": {
+    "bytes": 234842,
+    "mode": "100644",
+    "object_id": "c1e37a0d6f89831585134ab5465d57e3cc6c68dd",
+    "sha256": "3b692eec01a8ebbe560b0d327104ac1484c68e2a01b16b8b5b39b7e5f402d542"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/hf-publication-independent-review-v03.json": {
+    "bytes": 134330,
+    "mode": "100644",
+    "object_id": "73986cebb28ab75ab15f518fa6eb7b69fe78e1b4",
+    "sha256": "601d7bd1eac7bc0101624e57dac77180a7e70105c2843a1856d73aa9b57512f2"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/hf-publication-verification-v03.json": {
+    "bytes": 185224,
+    "mode": "100644",
+    "object_id": "49ea35cbd858df4ecfc2e9addf4f94d8e8f23a36",
+    "sha256": "a31eef60439bbd5f9eebb2b414fc107486ebd5d7d4d019a50562fdafcc9c4e78"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/hf-recovery-helper-source-independent-review-v01.json": {
+    "bytes": 4360,
+    "mode": "100644",
+    "object_id": "1eee1192ebfebb465fed7f30310be6a64c7c617c",
+    "sha256": "f16aef6aafd68d53142afb9ba4bcce1ca73effc10bd5485b0b01b8591533ecc3"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/matched-terminal-auditor-source-independent-review-v01.json": {
+    "bytes": 6440,
+    "mode": "100644",
+    "object_id": "e83906da59d638b4e33b5d6f3198706eb24c09c7",
+    "sha256": "11f9f827cf09600ee8c63577f3424b91480815d8406cdaa868eb383fd1cf24b0"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/remaining-error-candidate-audit-v01.json": {
+    "bytes": 360412,
+    "mode": "100644",
+    "object_id": "dd38cb8d52ed3ab5c1943ff3f0c4c871b4656c0f",
+    "sha256": "950ddb231a29ccd4ce5ae80f900181a10df746f180053bc3b20370ad718828cf"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/publication/remaining-error-candidate-independent-review-v01.json": {
+    "bytes": 6062,
+    "mode": "100644",
+    "object_id": "2c2579fd2bd2d558acf3d28862453e4cfa2f33c0",
+    "sha256": "b045d3eec55d2041bf3471074334e3f33988ee708e6c7fb335f402afad043451"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/recipe/analyze_matched_results_v01.py": {
+    "bytes": 52199,
+    "mode": "100644",
+    "object_id": "1a1f6324d6aaee8a1471f9a4687d8c983eddb8fa",
+    "sha256": "17b2996a51d278a03eed46316945ca92afd1663abccda335d998404e00f4fa03"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/recipe/complete_hf_release_v03.py": {
+    "bytes": 21457,
+    "mode": "100644",
+    "object_id": "208bdd1284bff8689d0480019c86cb20dba0b271",
+    "sha256": "817d4faa2217ee77a15811545f3b75b8d297c04b69b665a2b9b300d4dff98785"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/recipe/prepare_hf_release_v01.py": {
+    "bytes": 12559,
+    "mode": "100644",
+    "object_id": "fd2438051486a7d31679b6feaea514501d333f0c",
+    "sha256": "a69bd030068632af0ebe1967abb1f111ace18cace41d44e8c098715b295da4ae"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/recipe/prepare_hf_release_v02.py": {
+    "bytes": 4190,
+    "mode": "100644",
+    "object_id": "92564bd7af4232791ea4b2fbf0f48f62b3daaf61",
+    "sha256": "cb620c08048c312d42b5c70e22bf6805e58bf03628f18ff15d972d023587fac2"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/recipe/prepare_matched_curriculum.py": {
+    "bytes": 11208,
+    "mode": "100644",
+    "object_id": "173f92acbe121b0ef9f04d236f7993249733aa77",
+    "sha256": "ab14e212f4078f0b2b1f43b455fa0a62d2dd3126c27f4019b0b7fe0d4693243e"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/recipe/publish_hf_release_v01.py": {
+    "bytes": 10259,
+    "mode": "100644",
+    "object_id": "0434b6363a74a156f8196f0ee3026d1a2191c809",
+    "sha256": "0e67f96e9aa4512d298b91f2ee3d31c08354bd5c9cad924ba1613d78efb1b3a0"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/recipe/publish_hf_release_v02.py": {
+    "bytes": 10698,
+    "mode": "100644",
+    "object_id": "e8756b3e88bef8564459e45b575a608da2d70d9e",
+    "sha256": "8f7e1a9c8ac4ad172994ccfdafe974b9188486f76c99ba19a3dc724357cd5477"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/recipe/run_matched_curriculum.py": {
+    "bytes": 34990,
+    "mode": "100644",
+    "object_id": "0060ae60664aa6e97db3dc0f99702b66f18309c3",
+    "sha256": "a08e12b9aba758df9fc363185bf77675f284c740bb10f3e1ca95a3dea1855373"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/recipe/run_scope_guardian.py": {
+    "bytes": 38281,
+    "mode": "100644",
+    "object_id": "0e50d33d05c35a6d2c3f4bbf301b2cddc3802a8a",
+    "sha256": "10c7c7350a7dbb564ab0fb1299c905020f874c212765afb86d3c1752105184ed"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/recovery-manifest.json": {
+    "bytes": 175266,
+    "mode": "100644",
+    "object_id": "2e3d0dd9aa16b5b7145dd90e7785ba599700e423",
+    "sha256": "1e792cd108829256cfb8eba2f2c68784c8f3dc921a267086c95e037660915f98"
+  },
+  "workspace/test-logs/legal-matched-curriculum-20261012-01/evidence/release-manifest.json": {
+    "bytes": 172571,
+    "mode": "100644",
+    "object_id": "a12e1882c6e83f9a796db4f095cf022f2a150e63",
+    "sha256": "fc01b7ab91210eb928c1dba927446709b236f7e497c5b3d0d31ce50d4b4cc157"
+  }
+}
