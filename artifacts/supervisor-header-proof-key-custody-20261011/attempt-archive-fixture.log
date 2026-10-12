@@ -1,0 +1,71 @@
+[1m============================= test session starts ==============================[0m
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: /home/barberb/lift_coding/.worktrees/token-selector-accelerate-20261011
+configfile: pytest.ini
+plugins: platformdirs-4.12.1, anyio-4.15.1, mock-3.15.1, xdist-3.8.0, benchmark-5.2.3, cov-7.1.0, base-url-2.1.0, asyncio-1.3.0, trio-0.8.0, typeguard-4.5.2, env-1.7.0, hypothesis-6.152.1, playwright-0.8.0, timeout-2.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 74 items
+
+benchmarks/agent_supervisor/container_coding/test_terminal_semantic_metadata_policy.py [32m.[0m[32m [  1%]
+[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m
+
+=================================== FAILURES ===================================
+[31m[1m___________ test_prepare_freezes_selection_and_default_receipt_shape ___________[0m
+[1m[31m/usr/lib/python3.12/tarfile.py[0m:1930: in gzopen
+    [0mt = [96mcls[39;49;00m.taropen(name, mode, fileobj, **kwargs)[90m[39;49;00m
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31m/usr/lib/python3.12/tarfile.py[0m:1907: in taropen
+    [0m[94mreturn[39;49;00m [96mcls[39;49;00m(name, mode, fileobj, **kwargs)[90m[39;49;00m
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31m/usr/lib/python3.12/tarfile.py[0m:1765: in __init__
+    [0m[96mself[39;49;00m.firstmember = [96mself[39;49;00m.next()[90m[39;49;00m
+                       ^^^^^^^^^^^[90m[39;49;00m
+[1m[31m/usr/lib/python3.12/tarfile.py[0m:2768: in next
+    [0m[94mraise[39;49;00m e[90m[39;49;00m
+[1m[31m/usr/lib/python3.12/tarfile.py[0m:2741: in next
+    [0mtarinfo = [96mself[39;49;00m.tarinfo.fromtarfile([96mself[39;49;00m)[90m[39;49;00m
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31m/usr/lib/python3.12/tarfile.py[0m:1314: in fromtarfile
+    [0mbuf = tarfile.fileobj.read(BLOCKSIZE)[90m[39;49;00m
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31m/usr/lib/python3.12/gzip.py[0m:324: in read
+    [0m[94mreturn[39;49;00m [96mself[39;49;00m._buffer.read(size)[90m[39;49;00m
+           ^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31m/usr/lib/python3.12/_compression.py[0m:68: in readinto
+    [0mdata = [96mself[39;49;00m.read([96mlen[39;49;00m(byte_view))[90m[39;49;00m
+           ^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31m/usr/lib/python3.12/gzip.py[0m:527: in read
+    [0m[94mif[39;49;00m [95mnot[39;49;00m [96mself[39;49;00m._read_gzip_header():[90m[39;49;00m
+           ^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31m/usr/lib/python3.12/gzip.py[0m:496: in _read_gzip_header
+    [0mlast_mtime = _read_gzip_header([96mself[39;49;00m._fp)[90m[39;49;00m
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31m/usr/lib/python3.12/gzip.py[0m:456: in _read_gzip_header
+    [0m[94mraise[39;49;00m BadGzipFile([33m'[39;49;00m[33mNot a gzipped file ([39;49;00m[33m%r[39;49;00m[33m)[39;49;00m[33m'[39;49;00m % magic)[90m[39;49;00m
+[1m[31mE   gzip.BadGzipFile: Not a gzipped file (b'AU')[0m
+
+[33mThe above exception was the direct cause of the following exception:[0m
+[1m[31mbenchmarks/agent_supervisor/container_coding/test_terminal_semantic_metadata_policy.py[0m:139: in test_prepare_freezes_selection_and_default_receipt_shape
+    [0mselected = benchmark.prepare(dataset=dataset, output=tmp_path / [33m"[39;49;00m[33mselected[39;49;00m[33m"[39;49;00m, archive=archive,[90m[39;49;00m
+[1m[31mbenchmarks/agent_supervisor/container_coding/full_supervisor_benchmark.py[0m:290: in prepare
+    [0mselected_numerical = verify_numerical_selection_archive(archive / [33m"[39;49;00m[33mruntime.tar.gz[39;49;00m[33m"[39;49;00m, manifest)[90m[39;49;00m
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31mbenchmarks/agent_supervisor/container_coding/terminal_numerical_selection_deployment.py[0m:205: in verify_numerical_selection_archive
+    [0m[94mwith[39;49;00m tarfile.open(archive, [33m"[39;49;00m[33mr:gz[39;49;00m[33m"[39;49;00m) [94mas[39;49;00m bundle:[90m[39;49;00m
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31m/usr/lib/python3.12/tarfile.py[0m:1875: in open
+    [0m[94mreturn[39;49;00m func(name, filemode, fileobj, **kwargs)[90m[39;49;00m
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[90m[39;49;00m
+[1m[31m/usr/lib/python3.12/tarfile.py[0m:1934: in gzopen
+    [0m[94mraise[39;49;00m ReadError([33m"[39;49;00m[33mnot a gzip file[39;49;00m[33m"[39;49;00m) [94mfrom[39;49;00m[90m [39;49;00m[04m[96me[39;49;00m[90m[39;49;00m
+[1m[31mE   tarfile.ReadError: not a gzip file[0m
+============================= slowest 10 durations =============================
+0.09s call     benchmarks/agent_supervisor/container_coding/test_terminal_semantic_metadata_policy.py::test_prepare_freezes_selection_and_default_receipt_shape
+0.01s call     benchmarks/agent_supervisor/container_coding/test_terminal_semantic_metadata_policy.py::test_each_opt_in_helper_requires_its_exact_current_archive_body[benchmarks/agent_supervisor/container_coding/terminal_semantic_metadata_policy.py]
+
+(8 durations < 0.005s hidden.  Use -vv to show these durations.)
+[36m[1m=========================== short test summary info ============================[0m
+[31mFAILED[0m benchmarks/agent_supervisor/container_coding/test_terminal_semantic_metadata_policy.py::[1mtest_prepare_freezes_selection_and_default_receipt_shape[0m - tarfile.ReadError: not a gzip file
+[31m!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!![0m
+[31m======================== [31m[1m1 failed[0m, [32m53 passed[0m[31m in 25.09s[0m[31m =========================[0m

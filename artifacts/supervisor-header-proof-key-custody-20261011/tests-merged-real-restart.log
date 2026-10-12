@@ -1,0 +1,19 @@
+[1m============================= test session starts ==============================[0m
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: /home/barberb/lift_coding/.worktrees/token-selector-accelerate-20261011
+configfile: pytest.ini
+plugins: mock-3.15.1, xdist-3.8.0, benchmark-5.2.3, cov-7.1.0, base-url-2.1.0, asyncio-1.3.0, trio-0.8.0, typeguard-4.5.2, env-1.7.0, hypothesis-6.152.1, playwright-0.8.0, timeout-2.4.0, anyio-4.14.2
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 26 items / 24 deselected / 2 selected
+
+test/api/test_doctor_contract_proof.py [32m.[0m[32m.[0m[32m                                [100%][0m
+
+============================= slowest 10 durations =============================
+10.07s call     test/api/test_doctor_contract_proof.py::test_real_scoped_proof_retains_complete_key_and_replays_after_restart[True]
+6.77s call     test/api/test_doctor_contract_proof.py::test_real_scoped_proof_retains_complete_key_and_replays_after_restart[False]
+0.52s setup    test/api/test_doctor_contract_proof.py::test_real_scoped_proof_retains_complete_key_and_replays_after_restart[False]
+0.43s setup    test/api/test_doctor_contract_proof.py::test_real_scoped_proof_retains_complete_key_and_replays_after_restart[True]
+
+(2 durations < 0.005s hidden.  Use -vv to show these durations.)
+[32m====================== [32m[1m2 passed[0m, [33m24 deselected[0m[32m in 33.55s[0m[32m =======================[0m

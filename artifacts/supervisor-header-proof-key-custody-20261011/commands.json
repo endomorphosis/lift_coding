@@ -1,0 +1,53 @@
+{
+  "adapter_dependency_site_packages": "/home/barberb/lift_coding/.venvs/terminal-bench-harbor/lib/python3.12/site-packages",
+  "common_environment": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONUNBUFFERED": "1",
+    "normal_ast_seal": "enabled",
+    "seal_and_orchestration_paths": "distinct per test process"
+  },
+  "cwd": "/home/barberb/lift_coding/.worktrees/token-selector-accelerate-20261011",
+  "datasets_snapshots": {
+    "full_suite": "/home/barberb/lift_coding/.worktrees/formal-key-source-datasets-20261011",
+    "post_merge": "/home/barberb/lift_coding/.worktrees/formal-key-merged-datasets-20261012"
+  },
+  "docs": "All run steps in .github/workflows/documentation-gates.yml under Bash; changed-guide relative paths/anchors additionally checked",
+  "pytest_common_args": [
+    "python",
+    "-m",
+    "pytest",
+    "-c",
+    "pytest.ini",
+    "--maxfail=1",
+    "-q",
+    "-o",
+    "log_cli=false",
+    "--tb=short"
+  ],
+  "schema": "supervisor-header-proof-key-custody-commands@1",
+  "suites": {
+    "tests-custody-final.log": [
+      "test/api/test_doctor_contract_proof_custody.py"
+    ],
+    "tests-merged-archive.log": [
+      "benchmarks/agent_supervisor/container_coding/test_terminal_semantic_metadata_policy.py",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_formal_status_census.py"
+    ],
+    "tests-merged-real-restart.log": [
+      "test/api/test_doctor_contract_proof.py",
+      "-k",
+      "real_scoped"
+    ],
+    "tests-pure-final.log": [
+      "test/api/test_doctor_contract_key_custody.py"
+    ],
+    "tests-recipe-final.log": [
+      "test/api/test_doctor_header_key_recipe_guards.py"
+    ],
+    "tests-regression-final.log": [
+      "test/api/test_doctor_contract_proof.py",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_semantic_metadata_policy.py",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_formal_status_census.py"
+    ]
+  }
+}

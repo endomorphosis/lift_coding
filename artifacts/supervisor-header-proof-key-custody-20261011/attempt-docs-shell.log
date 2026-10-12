@@ -1,0 +1,18 @@
+Supervisor primary-doc vocabulary
+OK: primary agent-supervisor docs are free of board-prefix ticket IDs
+Maintained-surface relative links
+OK: 46 allowlisted documentation files have resolvable relative links (anchors checked)
+Packaging version pin alignment
+OK: packaging pins aligned at 0.0.45
+Closeout navigation markers
+/bin/sh: 1: set: Illegal option -o pipefail
+Traceback (most recent call last):
+  File "<stdin>", line 9, in <module>
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command 'set -euo pipefail
+grep -q 'Documentation baseline' docs/INDEX.md
+grep -q 'Last verified' docs/development/DOCUMENTATION_CURRENT_STATE.md
+test -f docs/development/DOCUMENTATION_VALIDATION_2026_08.md
+echo "OK: closeout navigation markers present"
+' returned non-zero exit status 2.
