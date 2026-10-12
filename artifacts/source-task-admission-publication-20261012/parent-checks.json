@@ -1,0 +1,18 @@
+{
+  "schema": "supervisor-source-task-admission-parent-link-check@1",
+  "cwd": "/home/barberb/lift_coding/.worktrees/header-proof-key-custody-root-20261011",
+  "parent_base_revision": "a9aef05c5605ef11f5fba0c84f3ca45eeb548295",
+  "checker": "/home/barberb/lift_coding/.worktrees/token-selector-accelerate-20261011/scripts/docs/check_current_docs_links.py",
+  "checker_sha256": "596a0038b18d592f2e605643890afc85e457558f7b887932a474557d7586819e",
+  "note": "implementation_plan/docs/97-supervisor-native-source-task-admission-2026-10-12.md",
+  "note_sha256": "8d2ecd07efe87869b1c7dd57a14b9fddd217f693d3728ce38dc02766969e14aa",
+  "check_anchors": true,
+  "errors": [],
+  "status": "pass",
+  "staged_pins": {
+    "external/ipfs_accelerate": "c7e16b122fd931b9a6d385c920eca9abe0f32a5e",
+    "external/ipfs_datasets": "e39fe996bd9e786a84f739fda9dde9a6c70546da",
+    "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0"
+  },
+  "scope": "New parent note local links and intended Git pins; no whole-parent test or remote URL-content check."
+}
