@@ -1,0 +1,26 @@
+{
+  "schema": "supervisor-representation-displacement-parent-checks@1",
+  "parent_base_revision": "e5ef0af3f2acdd17cc376f662e5a845ba12f1dbd",
+  "checker": "/home/barberb/lift_coding/.worktrees/token-selector-accelerate-20261011/scripts/docs/check_current_docs_links.py",
+  "checker_sha256": "596a0038b18d592f2e605643890afc85e457558f7b887932a474557d7586819e",
+  "note": "implementation_plan/docs/101-supervisor-prepared-representation-displacement-2026-10-12.md",
+  "note_sha256": "99db32bdcb711c1d55f1a541cc8da4a36f3559a8a885198a4eddc3abf28c2a0c",
+  "errors": [],
+  "check_anchors": true,
+  "status": "pass",
+  "staged_pins": {
+    "external/ipfs_accelerate": "f86f955eb4bb63613a2c3aaffa968e87382044f1",
+    "external/ipfs_datasets": "12b2de0f1c949b793772ce29edad84355978b9b7",
+    "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0"
+  },
+  "hosted_ci_path": "artifacts/representation-displacement-publication-20261012/hosted-ci.json",
+  "hosted_ci_sha256": "5f63d42e6e7d0d73b5c9c9f83b2e3a060da0c0659c53576c39469163cf05fbbd",
+  "hosted_child_run_id": 38324013919,
+  "hosted_child_job_id": 115058409735,
+  "hosted_ci_runner_started": false,
+  "hosted_ci_steps_started": false,
+  "hosted_ci_account_billing_block": true,
+  "child_qualification_distinct_tests": 553,
+  "child_qualification_source_bindings": 40,
+  "scope": "Parent note links/anchors, intended Gitlinks and retained exact-child CI observation only; no whole-parent regression or production deployment."
+}
