@@ -1,0 +1,43 @@
+{
+  "schema": "exact-commit-hosted-documentation-observation@1",
+  "repository": "endomorphosis/ipfs_accelerate_py",
+  "head_sha": "514d1d21102284b6787b6ff6752ee1a60660411b",
+  "run_id": 38287993694,
+  "check_run_id": 114940875083,
+  "job": {
+    "id": 114940875083,
+    "head_sha": "514d1d21102284b6787b6ff6752ee1a60660411b",
+    "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38287993694/job/114940875083",
+    "status": "completed",
+    "conclusion": "failure",
+    "steps": [],
+    "runner_id": 0,
+    "runner_name": "",
+    "created_at": "2026-10-12T18:00:21Z",
+    "started_at": "2026-10-12T18:00:21Z",
+    "completed_at": "2026-10-12T18:00:25Z"
+  },
+  "failure_annotations": [
+    {
+      "path": ".github",
+      "blob_href": "https://github.com/endomorphosis/ipfs_accelerate_py/blob/514d1d21102284b6787b6ff6752ee1a60660411b/.github",
+      "start_line": 1,
+      "start_column": null,
+      "end_line": 1,
+      "end_column": null,
+      "annotation_level": "failure",
+      "title": "",
+      "message": "The job was not started because your account is locked due to a billing issue.",
+      "raw_details": ""
+    }
+  ],
+  "local_documentation_workflow": "All four exact run blocks passed after merge",
+  "local_tests": {
+    "distinct": 537,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "hosted_validation_passed": false,
+  "reason": "Account billing lock prevented job execution"
+}
