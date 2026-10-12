@@ -1,0 +1,416 @@
+{
+  "docs/autoencoders/legal_storage_temporal_training_20261012.md": {
+    "bytes": 5755,
+    "mode": "100644",
+    "object_id": "82e214ae66a1823db6702ce51a9a7c5af2b1762d",
+    "sha256": "df0d3c55728e7af22e2c6cf32f67dc02cb275c4bec188ad52640641a993a8269"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/actual-run/child-exit.json": {
+    "bytes": 105,
+    "mode": "100644",
+    "object_id": "f524bdbd455b54684c6adaa851526bfa5c7cc747",
+    "sha256": "5c72df50f92bf8fc9d8e688bc9013c16e3032faa3dd585e6814713f9c70ffc38"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/actual-run/child-identity.json": {
+    "bytes": 44,
+    "mode": "100644",
+    "object_id": "9a41f7d78747c4ad6aa0a95b49cb2332cb34452d",
+    "sha256": "2ba6eadd89d323dd88f035fdf97e6ed9f3f23ee3b686f1216c1703bd8cf0e5d4"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/actual-run/child.log": {
+    "bytes": 77,
+    "mode": "100644",
+    "object_id": "2d9c68bc115e5258390892758b68e5e47b3c5597",
+    "sha256": "ade81fac92547757de6055080dcfbe12fddd10e0bcbb3ea4f5473f34a2f0f023"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/actual-run/command.json": {
+    "bytes": 1042,
+    "mode": "100644",
+    "object_id": "3a39169382796d678f48ea1f5970089fce4784ca",
+    "sha256": "2bc9b7ef10bc215c1888a464959cfb40d66407d8e11e3749957c9c4cf30d19f5"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/actual-run/group-rss-observations.jsonl": {
+    "bytes": 16503,
+    "mode": "100644",
+    "object_id": "12665d20ecde497dc71c22942f585b87e0e1409a",
+    "sha256": "9a2d65f3b86b01aa2f00401003ebd0186a3edcc5b55739221e761a47f9b2d40a"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/actual-run/group-rss-summary.json": {
+    "bytes": 1737,
+    "mode": "100644",
+    "object_id": "f5990e47e2f109b2fc3b7337531101f949aab85b",
+    "sha256": "2d244e7ad33a8a08893440b0b80e1633881897472ec444982d870db7b78d9aa3"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/actual-run/guardian-exit.json": {
+    "bytes": 521,
+    "mode": "100644",
+    "object_id": "f2aac9d0d8cf63d73593d63dea51dafcdfb35458",
+    "sha256": "88ea7a68b13c825c3ff6618e9f4a2941e8a94d6f466c6f3cd3d60a74914a65fc"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/actual-run/lease-binding.json": {
+    "bytes": 694,
+    "mode": "100644",
+    "object_id": "d52fe4059ed203611ce098969f3d6ebc16e48710",
+    "sha256": "2466614e3cdb3a40cc7c62ae235538d97f875da6a2d843154a07c298de2fcec4"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/actual-run/lease-observations.jsonl": {
+    "bytes": 34722,
+    "mode": "100644",
+    "object_id": "24997e75ab94c150abab32deb5f9bfc4bead2742",
+    "sha256": "e533b83a75e2ac84743291ac59e634ec47ccea2006bcf0219fa57e1b548f1169"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/actual-run/owned-group-final.json": {
+    "bytes": 190,
+    "mode": "100644",
+    "object_id": "b19c9ccc1ba5860ff3ffc21f8e940a5974792621",
+    "sha256": "d7aa75431db2af04df5a26ed2252a0eab6bba484ec7126cc7e27b57717767bf9"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/actual-run/pre-admission.json": {
+    "bytes": 8001,
+    "mode": "100644",
+    "object_id": "020ab976a5c3b458be8477dacbb3118990bf9ca0",
+    "sha256": "ddd1753267d4d814d67d3949f2fa9e754309c819fb2f80aa764f5380d653571c"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/actual-run/resource-observations.json": {
+    "bytes": 873,
+    "mode": "100644",
+    "object_id": "0496a483cf80ee329902153bde4bd0c543ea0a13",
+    "sha256": "543184d9ba7604bd067ed919c4a24181d7b95f1dad9a8a66ad946ef869b51600"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/actual-run/scheduler-adoption.json": {
+    "bytes": 4646,
+    "mode": "100644",
+    "object_id": "7a655bffaab9006341a22fdd95180a14596ea9e8",
+    "sha256": "f8969533e1a8ba27ec5bff56c40869e730483b2a3f4e0e85161d9fc695379fa2"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/audit_training_runtime_resources.py": {
+    "bytes": 26121,
+    "mode": "100644",
+    "object_id": "9035fee4e86955eabe8901063bd8f7330a2c9c96",
+    "sha256": "a6b90d6b7080da73f988b183510642e7702d50f68c739a4cfe5bf6f3c49a27e4"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/canonical-intake-v01.json": {
+    "bytes": 641,
+    "mode": "100644",
+    "object_id": "c35ec67ea3feec76d2473330f5ae711396d8fcdc",
+    "sha256": "9764c9908c2fccb96c5312ae2e3e04ebc12b463ee8ceae9418b20b980d46f377"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/generated-field-4gb-administrative-closeout-independent-review-v01.json": {
+    "bytes": 84714,
+    "mode": "100644",
+    "object_id": "61e70947fe44339af8937c14f501c2bf70a155c1",
+    "sha256": "567028eacf289289852a8b9f125dede8ca96d8807568fe8ce8aceaeb16675e2a"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/generated-field-4gb-administrative-closeout-protocol-v01.json": {
+    "bytes": 169318,
+    "mode": "100644",
+    "object_id": "51613366d0a6dd9800b015e50305862a6bbc59fe",
+    "sha256": "f3c79aeb53be19ad37e72074151685ab0fb1893f25ee842aca82d6e415e1a4b4"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/generated-field-4gb-applicator-handoff-v02.json": {
+    "bytes": 6998,
+    "mode": "100644",
+    "object_id": "7694aaae52e9c2077010bea35ed0334d5bf462b4",
+    "sha256": "7393cbf3a8f75da3c01f1b4e24bd074b8107374c991bb5005cb26cd4c44e9a0a"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/generated-field-4gb-applicator-source-independent-review-v01.json": {
+    "bytes": 9867,
+    "mode": "100644",
+    "object_id": "b0dbfc0de039654240b09b06833d592c65325b39",
+    "sha256": "58e1a9af448b63fe48f68dbe868f82eb81f6ed63c149d421edb7083869fe4aa2"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/generated-field-4gb-closeout-inventory-v01.json": {
+    "bytes": 172420,
+    "mode": "100644",
+    "object_id": "513e247aec551e21c7d965624f78c8beafb9847b",
+    "sha256": "b5b350c81e9d9a770e78c5f8e9839bc559b1833fdcc6d6ef999535b8fbf66489"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/generated-field-4gb-postclosure-independent-review-v01.json": {
+    "bytes": 88005,
+    "mode": "100644",
+    "object_id": "065812151516c073096f6c6379e8ad54428a92de",
+    "sha256": "772d20bb1f305d767a3a59be66c6d5607189cc2e2403253dc843aa554837dff2"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/git-contribution-prefinal-independent-review-v01.json": {
+    "bytes": 79856,
+    "mode": "100644",
+    "object_id": "2b696c72936a8c9578873380752a4f84cfabc1de",
+    "sha256": "ffe900a1286bd4fa47045d3dd4632e0b8e16a2a15da8f129c534bf1e80af7c2a"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/hf-actual-publication-independent-review-v01.json": {
+    "bytes": 130107,
+    "mode": "100644",
+    "object_id": "e623d6edf6d4a8998915d529cad716f48551d041",
+    "sha256": "0446a77e23ed95899cc6e7a432f9d10a5aa015764c086afa713c5810b83b5685"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/hf-after-file-identities-v03.json": {
+    "bytes": 1048733,
+    "mode": "100644",
+    "object_id": "f4da7bad7849d4b716ba82c35178d493dd6e1598",
+    "sha256": "fad9a61b1e41000ae38ae8cf47e292cc0f57eea8e4dc1efaf530e16cba8c5c0f"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/hf-before-file-identities-v01.json": {
+    "bytes": 1019501,
+    "mode": "100644",
+    "object_id": "3143b5d8623ede16cb82b51adf70fa0aa95bc2a4",
+    "sha256": "e2557123ffb21a10288fba743b2d7306d07c98bf9533df453140dcc3ea11d976"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/hf-commit-created-v03.json": {
+    "bytes": 406,
+    "mode": "100644",
+    "object_id": "622c43db7dd4d4f179ec4a4882f22bb32464f441",
+    "sha256": "7fb66eaf70c5c545f33850329dacbd6d86c3095b81eaba85d67094aece3f71cf"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/hf-helper-source-independent-review-v04.json": {
+    "bytes": 13837,
+    "mode": "100644",
+    "object_id": "93d0addf5481c8398b62f5ccf021477a9946ba2d",
+    "sha256": "de57b48ecb92de372d379ae4ea17e1b1b710d2f090389858c7de530fb171719c"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/hf-preparation-receipt-v03.json": {
+    "bytes": 58194,
+    "mode": "100644",
+    "object_id": "b77b31c94fb6f0642154ce299f2a7bf9b0cac1c5",
+    "sha256": "8585520b3d4d7c2d4e540ccf27b71f1f983c54bd008be20ccd34221708eaab59"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/hf-publication-independent-review-v04.json": {
+    "bytes": 84765,
+    "mode": "100644",
+    "object_id": "f9e81e44ed44ded5b7050b41b06c9c4160da45c7",
+    "sha256": "d3f9caf788d6a7d0bbb5af0db7c5fe1a8c93e890069251842c5a163d1dcf97ca"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/hf-publication-verification-v03.json": {
+    "bytes": 59394,
+    "mode": "100644",
+    "object_id": "221eae2df3207d0e5542ebba95e51f56943cfc72",
+    "sha256": "3f8f43e17e5d03a875d7d3516bfe3bbe1d931633ed83cb2b780aa421ef4b82a2"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/historical-4gb-closeout/completion.json": {
+    "bytes": 5854,
+    "mode": "100644",
+    "object_id": "de452de9dcd75d689eb679cde9563df42da967d0",
+    "sha256": "76161bf258d425fdec21522835e57cd634f696a1af0885e54391e823b234db53"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/next-training-recommendations-v01.json": {
+    "bytes": 24363,
+    "mode": "100644",
+    "object_id": "d1e32b28ad0c87c1ef8138ea013d5c1e2c069d22",
+    "sha256": "9158cb70239f2092870018443071d91ea6608339dbc44dfa3c183f6f0a26b427"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/prepare_generated_field_4gb_inventory.py": {
+    "bytes": 18677,
+    "mode": "100644",
+    "object_id": "f8f654bb9c9b439e3b7a3efbfae1735e0d929fee",
+    "sha256": "5bed9d10e0e466cb3de810d7950100f657f33ea30c5e487f28e13fcdb4658205"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/prepare_hf_release_v04.py": {
+    "bytes": 25858,
+    "mode": "100644",
+    "object_id": "30cf1b12608d6c99bb6b5372b31cfb4ba229f8a4",
+    "sha256": "8ccb3d0df1a53945882122300e4a46ba6d3c3c3f857ca73e8edd7037cb4f13b0"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/publish_hf_release_v04.py": {
+    "bytes": 9781,
+    "mode": "100644",
+    "object_id": "7df906262296cfa4950affadeabcca18f83d6d0c",
+    "sha256": "c4cefe959933d061be37e002284c9ae77253181199d9f537fa18e30e2be89805"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/reconcile_generated_field_4gb_v02.py": {
+    "bytes": 30662,
+    "mode": "100644",
+    "object_id": "78423b7b444628ce36c7c9994c100ba7a15f9d0f",
+    "sha256": "30edc6fd4e466464892aabdd4d895ff3d15403bc17ee501ee418986b478e8ed0"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/resource-compatibility-v01.json": {
+    "bytes": 6800,
+    "mode": "100644",
+    "object_id": "264b011d4dff0641a6b2941e0a5b27bf248d9aa6",
+    "sha256": "5783f5bddc064b1e4f3a135c2b4255d550c14ddf9892b7afc8cea9e57a1ae4ed"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/result-independent-review-v01.json": {
+    "bytes": 18994,
+    "mode": "100644",
+    "object_id": "277446391555f5a80bf3721d07b35fad1d094154",
+    "sha256": "738ba284093283f3dafb095309812eaa829d2096eabd5d75b5d272ae34ac50a3"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/results/all-data-schedules-before-models.json": {
+    "bytes": 43835,
+    "mode": "100644",
+    "object_id": "ba81e79cfa5ef4078f8866b787e18a550ccb6556",
+    "sha256": "bbdd3c3c6c956d36055c546842b1b9a90f74a9bbf57ece5669df60ea02b55415"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/results/baseline-fresh_challenge-score.json": {
+    "bytes": 53748,
+    "mode": "100644",
+    "object_id": "886354c8c0cab1069b7d6535adb380370beb4f17",
+    "sha256": "89a2ef512280abf58718cd33cebc06b0603e9fd4445ae39dbecad18b8b3f61c9"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/results/baseline-fresh_tune-score.json": {
+    "bytes": 53408,
+    "mode": "100644",
+    "object_id": "9a55049719085bcf85e10af131684491cdec3304",
+    "sha256": "0c4926e285700c1717cd7faff68766ea2547628f764cd392d64eee498ee944c2"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/results/baseline-old_tune-score.json": {
+    "bytes": 101532,
+    "mode": "100644",
+    "object_id": "b61f0e58e6192cbe1e21458400f7471fe67014f5",
+    "sha256": "a721d6226d373ad4ca060a822fe19c700537514b355990a4ce9b20d54f6fba92"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/results/baseline-parity.json": {
+    "bytes": 2063,
+    "mode": "100644",
+    "object_id": "72e0506c3769a46343a5937cea603ae256687dd2",
+    "sha256": "fc1798bafe1958e352d58b41d390993d03cb486b90610d51e011fc4fe25a4ac0"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/results/contrast-fresh_challenge-score.json": {
+    "bytes": 53514,
+    "mode": "100644",
+    "object_id": "7c2f155eca69c55ee21b1ba6d611b7f1ae4b059f",
+    "sha256": "38b289e7d20a073490291513c5bec27aee1f9e62487ba4a48fc970ba0156b9d5"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/results/contrast-fresh_tune-score.json": {
+    "bytes": 53263,
+    "mode": "100644",
+    "object_id": "c5c02fcaebb1bd6f4451b161112dfeb7265f0404",
+    "sha256": "067e9e07da4b4e33936cf3446ba2030b5df151cacf4813c7ed8d8f955127309e"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/results/contrast-old_tune-score.json": {
+    "bytes": 101549,
+    "mode": "100644",
+    "object_id": "9d8d4e42b2bdd0ef43715b4c61f6e7f2458b8c53",
+    "sha256": "c97f550e8249a0cd21155aca1937af8d67fac5f0cef779e5a72c66c0e306dcf7"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/results/contrast-parity.json": {
+    "bytes": 2063,
+    "mode": "100644",
+    "object_id": "02802367c091d6ef5b58d33b4f2712e44ae73a4d",
+    "sha256": "a733891a1eb24161001e1e7fad50115e5be9543886e10ab5f2da7823883f22e6"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/results/contrast-training.json": {
+    "bytes": 3116,
+    "mode": "100644",
+    "object_id": "e61e55716906468573b58844482b13ccbefcb42d",
+    "sha256": "c52330aab2400bd26f2bd9d75843235062e0790e5dcdb238ace494b4a56e126a"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/results/control-fresh_challenge-score.json": {
+    "bytes": 53700,
+    "mode": "100644",
+    "object_id": "520ed43e0c1ac5e79832a447d2d7726b84ae63ee",
+    "sha256": "309baac3ad8d32c91512544107542db10003cec0aa8d2cca3a96114a199a2d93"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/results/control-fresh_tune-score.json": {
+    "bytes": 53352,
+    "mode": "100644",
+    "object_id": "91e865174614fc7219bee9d8f817561acf819345",
+    "sha256": "df37928c56583d1f5603987ca09170cdaf622fbe450c400b7c3d0c5c957962b3"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/results/control-old_tune-score.json": {
+    "bytes": 101532,
+    "mode": "100644",
+    "object_id": "b61f0e58e6192cbe1e21458400f7471fe67014f5",
+    "sha256": "a721d6226d373ad4ca060a822fe19c700537514b355990a4ce9b20d54f6fba92"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/results/control-parity.json": {
+    "bytes": 2059,
+    "mode": "100644",
+    "object_id": "849eb2cfb2fbad80c700252cc6eb8fd3cad28f80",
+    "sha256": "82aa243b82783f3476057eff65a8e23709910bd4f5b8665a8c8e983c51d3df3f"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/results/control-training.json": {
+    "bytes": 3153,
+    "mode": "100644",
+    "object_id": "34db3c097337e6c3c7b475ea301e6838687fbe04",
+    "sha256": "72fa4d2512aafc4f67f9de51f7bda05b4e5578a6eecbe94e8d227e10619f99ed"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/results/summary.json": {
+    "bytes": 63633,
+    "mode": "100644",
+    "object_id": "a38bc0ab0b0fbd37afd93bfc6a0ab0c9cb507fc8",
+    "sha256": "44ff3637dc4a057c4825d805a47e0021b32c0a0e7b6f31a57874d17d2ec8dfea"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/review_generated_field_4gb_operation.py": {
+    "bytes": 13968,
+    "mode": "100644",
+    "object_id": "bbd71464a50fe016e0c5f07f30b760067eabe020",
+    "sha256": "b1394c3576d413412939369a335057f51a7a25e65d000c1a532f26fc46ff49a7"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/review_generated_field_4gb_postclosure.py": {
+    "bytes": 14908,
+    "mode": "100644",
+    "object_id": "69859335bfb29cdd05ab7298b2c4f50c103b50d5",
+    "sha256": "f4db78073f9f8e1ced12ff6b15bd8a6fdb326a9d292f39a522406a42899ba4c4"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/review_saved_training_results.py": {
+    "bytes": 33571,
+    "mode": "100644",
+    "object_id": "c8cf6ca3276414ecad64cecf6fee611ce5c6eacf",
+    "sha256": "d53fe82b13e563754b37b82083dd134775fc02e05d77182728e7836ec9e9d43f"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/review_training_runtime_resource.py": {
+    "bytes": 17445,
+    "mode": "100644",
+    "object_id": "edc121f73d65d58afacb5b545de8db0548d6334b",
+    "sha256": "e4ff7f908fabbbd78ac0a7e0bca7727a6b7024d438a8d7141e1f8c5aa982fa0b"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/training-auditor-baseline-controls-v01.json": {
+    "bytes": 1215,
+    "mode": "100644",
+    "object_id": "6ddcdf4c3722814051da35aa1bba5b044921a95f",
+    "sha256": "6429d97076a9b2a65482465c6998660db0fe3a03090ba66467c20b8b40cbe04f"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/training-protocol-independent-review-v01.json": {
+    "bytes": 54420,
+    "mode": "100644",
+    "object_id": "6a3dc9bceda6c5c496b068b87b811053a39bddc7",
+    "sha256": "e5fa23010ac138ecb874e54355e734b3c5752dc050e52724f84c5614a702cf63"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/training-recipe-custody-prefinal-v01.json": {
+    "bytes": 23657,
+    "mode": "100644",
+    "object_id": "51b0d73ccaa2b4b150cb9434189b01d074c0939e",
+    "sha256": "4795425826cd30f63dc5530211fab29b41aeb751a2235e4732992926de6fecf6"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/training-result-analysis-v01.json": {
+    "bytes": 57456,
+    "mode": "100644",
+    "object_id": "0760629b54aa748bca507450a5b5d340253be0be",
+    "sha256": "e444dafeacd8206bfb5614d3942b89a3c53fff02719181c28e832cb040d46181"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/training-runtime-auditor-source-independent-review-v01.json": {
+    "bytes": 5410,
+    "mode": "100644",
+    "object_id": "0564f40db2683ae78a021cbdd39a26cc24b3ee8c",
+    "sha256": "29cc46c86bc1207e93613b41735ccb60060aef2a1073a1366985c849b3066a29"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/training-runtime-procedure-independent-review-v01.json": {
+    "bytes": 71974,
+    "mode": "100644",
+    "object_id": "7b5aef468164495a5c79418041a8990e6c47232a",
+    "sha256": "d699e1807d07f8aa904b8a42716e0858b2f9f45d2917c7a3d6c8a35a3882050d"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/training-runtime-resource-audit-procedure-v01.json": {
+    "bytes": 127798,
+    "mode": "100644",
+    "object_id": "dc391162349df14fffe44c2b9f3500d43504e9e2",
+    "sha256": "3255a5ee1a813480016f601e75e6a429f91eb6a7db9c286c78bdfd8746ca063e"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/training-runtime-resource-audit-v01.json": {
+    "bytes": 40834,
+    "mode": "100644",
+    "object_id": "91ff27356a41343f7e4766dd13b9b20d87c49246",
+    "sha256": "cc4589649cbbd721eb2d01e529d4851c96f322028d2ac3723f386e9990e2d6c9"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/training-runtime-resource-independent-review-v02.json": {
+    "bytes": 88381,
+    "mode": "100644",
+    "object_id": "7ea79bdcf65e780f83184e1f5d4f4d9b95d6f61a",
+    "sha256": "1d9b5b222505d0d5ceed4ff48216fa3bb034b9dd750776441778386b2358f49a"
+  },
+  "workspace/test-logs/legal-storage-closeout-20261012-02/evidence/training-science-source-prefinal-independent-review-v01.json": {
+    "bytes": 12748,
+    "mode": "100644",
+    "object_id": "41b159bd7713ba59166fa9b346fb3c7a81b1f131",
+    "sha256": "af78976dc54ca97972ed2e1bd2dc138e6ef166699ca378bc15b7d69231ff6838"
+  }
+}
