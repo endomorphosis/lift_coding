@@ -1,0 +1,63 @@
+{
+  "schema": "supervisor-source-worktree-admission-hosted-documentation-observation@1",
+  "observed_utc": "2026-10-12T23:01:13.227111+00:00",
+  "repository": "endomorphosis/ipfs_accelerate_py",
+  "head_sha": "48f442b4ca468b8cf2e858bca72a676812344302",
+  "run": {
+    "id": 38319835171,
+    "name": "Documentation Gates",
+    "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38319835171",
+    "status": "completed",
+    "conclusion": "failure",
+    "created_at": "2026-10-12T23:00:33Z",
+    "updated_at": "2026-10-12T23:00:39Z"
+  },
+  "job": {
+    "id": 115045003943,
+    "name": "documentation-gates",
+    "head_sha": "48f442b4ca468b8cf2e858bca72a676812344302",
+    "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38319835171/job/115045003943",
+    "status": "completed",
+    "conclusion": "failure",
+    "runner_id": 0,
+    "runner_name": "",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/115045003943"
+  },
+  "annotations": [
+    {
+      "path": ".github",
+      "blob_href": "https://github.com/endomorphosis/ipfs_accelerate_py/blob/48f442b4ca468b8cf2e858bca72a676812344302/.github",
+      "start_line": 1,
+      "start_column": null,
+      "end_line": 1,
+      "end_column": null,
+      "annotation_level": "failure",
+      "title": "",
+      "message": "The job was not started because your account is locked due to a billing issue.",
+      "raw_details": ""
+    },
+    {
+      "path": ".github",
+      "blob_href": "https://github.com/endomorphosis/ipfs_accelerate_py/blob/48f442b4ca468b8cf2e858bca72a676812344302/.github",
+      "start_line": 1,
+      "start_column": null,
+      "end_line": 1,
+      "end_column": null,
+      "annotation_level": "notice",
+      "title": "",
+      "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+      "raw_details": ""
+    }
+  ],
+  "hosted_documentation_execution_qualified": false,
+  "reason": "account_billing_lock_before_runner_or_steps",
+  "local_documentation_four_workflow_blocks_passed": true,
+  "local_host_tests": {
+    "tests": 118,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "claim_scope": "Exact documentation job only; other workflows are not certified by this observation."
+}
