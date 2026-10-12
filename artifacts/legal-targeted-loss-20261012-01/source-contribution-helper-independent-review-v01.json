@@ -1,0 +1,61 @@
+{
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-targeted-loss-20261012-01/prepare_source_contribution_v02.py": {
+      "bytes": 7800,
+      "sha256": "e87dbbd296399bb2168fc6aa7e76f1cb74c72f5a1c2f1fb076b3c3078855dc0b"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-targeted-loss-20261012-01/record_closed_stage.py": {
+      "bytes": 4841,
+      "sha256": "8d6ed5ba537b8f26cdb1d1b282d6bdce0dd2cdff65ef97c67675f146b95e6741"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-targeted-loss-20261012-01/review_source_contribution_controls_v01.py": {
+      "bytes": 10947,
+      "sha256": "0ef80f84cbe1f9107f37db940ce13d8f5a5f2c1fb765b5bace935ae3baa762ba"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-targeted-loss-20261012-01/source-contribution-helper-independent-controls-v01.json": {
+      "bytes": 2137,
+      "sha256": "61891bab12e48a6b5d6df4f5fde8c137726f4176a8976f2e7d95f005d9405d01"
+    }
+  },
+  "closed_stage_observer": {
+    "bytes": 4841,
+    "path": "/home/barberb/lift_coding/artifacts/legal-targeted-loss-20261012-01/record_closed_stage.py",
+    "sha256": "8d6ed5ba537b8f26cdb1d1b282d6bdce0dd2cdff65ef97c67675f146b95e6741"
+  },
+  "contribution_helper": {
+    "bytes": 7800,
+    "path": "/home/barberb/lift_coding/artifacts/legal-targeted-loss-20261012-01/prepare_source_contribution_v02.py",
+    "sha256": "e87dbbd296399bb2168fc6aa7e76f1cb74c72f5a1c2f1fb076b3c3078855dc0b"
+  },
+  "counts": {
+    "positive": 8,
+    "refused_negative": 12
+  },
+  "findings": [],
+  "independent_source_approved": true,
+  "limitations": [
+    "Source-only approval; neither helper main nor actual Git commands, publication, stage or merge was executed.",
+    "Stage observer attests the finite observed staged blob map; it has no closing index/HEAD/map snapshot fence. It does not establish continuous/stable index custody. Later review must bind the immutable committed tree.",
+    "Source helper relies on the exact independently approved additive-release input inventory. Private/model filename exclusion is checked before final manifests, and does not independently certify arbitrary unreviewed input payloads.",
+    "Existing reused target files are not rewritten; later staged/commit blob review must bind final bytes. No legal semantics, training, Lake or latent qualification is conferred."
+  ],
+  "observed_at_utc": "2026-10-12T22:51:57.399533+00:00",
+  "observed_properties": {
+    "additive_Hub_proof_required": true,
+    "all_copied_sources_independently_bound": true,
+    "all_other_destination_creations_exclusive": true,
+    "fixed_own_expected_map_and_copy_manifest": true,
+    "helper_performs_no_Git_mutation": true,
+    "only4_existing_science_sources_plus_gapdoc_reusable_exactly": true,
+    "raw_copy_matches_opening_pin_before_write_and_sources_rechecked_at_close": true,
+    "stage_observer_reads_closed_finite_index_blobs_with_no_optional_locks": true,
+    "weights_and_head_readouts_not_selected": true
+  },
+  "passed": true,
+  "required_concrete_followups": [
+    "Actual completed HF publication review must bind every copied source, proof and new gap document before helper execution.",
+    "Independently review produced finite expected map/copy manifest, staged objects and eventual immutable commit tree before integration."
+  ],
+  "reviewer": "/root/targeted_analysis_review",
+  "schema": "targeted-loss-source-contribution-helper-independent-review/v1"
+}
