@@ -1,0 +1,45 @@
+[1m============================= test session starts ==============================[0m
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.6.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: /home/barberb/lift_coding/.worktrees/token-selector-accelerate-20261011
+configfile: pytest.ini
+plugins: mock-3.15.1, xdist-3.8.0, benchmark-5.2.3, cov-7.1.0, base-url-2.1.0, asyncio-1.3.0, trio-0.8.0, typeguard-4.5.2, env-1.7.0, hypothesis-6.152.1, playwright-0.8.0, timeout-2.4.0, anyio-4.14.2
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 198 items
+
+test/api/test_agent_supervisor_proof_goal_completion.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m [  8%]
+[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m                                                                  [ 11%][0m
+test/api/test_agent_supervisor_formal_claim_adapter.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m [ 20%]
+[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m                                            [ 34%][0m
+test/api/test_agent_supervisor_formal_verification_policy.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m [ 40%]
+[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m                                                              [ 45%][0m
+test/api/test_agent_supervisor_formal_plan_proof_preconditions.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m [ 48%]
+[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m                                                                   [ 52%][0m
+test/api/test_agent_supervisor_code_proof_scopes.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m   [ 61%][0m
+test/api/test_agent_supervisor_doctor_proof_cache.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m   [ 69%][0m
+test/api/test_agent_supervisor_formal_verification_cache.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m [ 75%]
+[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[33m                                                               [ 80%][0m
+test/api/test_formal_status_census.py [32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[33m [ 97%]
+[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[33m                                                                     [100%][0m
+
+[33m=============================== warnings summary ===============================[0m
+test/api/test_agent_supervisor_formal_verification_cache.py::test_single_flight_deduplicates_processes
+test/api/test_agent_supervisor_formal_verification_cache.py::test_single_flight_deduplicates_processes
+test/api/test_agent_supervisor_formal_verification_cache.py::test_single_flight_deduplicates_processes
+test/api/test_agent_supervisor_formal_verification_cache.py::test_single_flight_deduplicates_processes
+  /usr/lib/python3.12/multiprocessing/popen_fork.py:66: DeprecationWarning: This process (pid=3717880) is multi-threaded, use of fork() may lead to deadlocks in the child.
+    self.pid = os.fork()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+============================= slowest 10 durations =============================
+2.13s call     test/api/test_agent_supervisor_formal_verification_cache.py::test_single_flight_heartbeats_long_running_leader
+0.78s call     test/api/test_agent_supervisor_doctor_proof_cache.py::test_manual_quarantine
+0.76s call     test/api/test_agent_supervisor_formal_verification_cache.py::test_single_flight_deduplicates_processes
+0.64s call     test/api/test_formal_status_census.py::test_later_key_probe_revoking_earlier_key_refuses_whole_census
+0.63s call     test/api/test_agent_supervisor_doctor_proof_cache.py::test_semantic_root_change_invalidates_descendants_and_tombstones
+0.60s call     test/api/test_formal_status_census.py::test_scoped_positive_receipt_is_counted_without_task_completion_authority
+0.59s call     test/api/test_agent_supervisor_doctor_proof_cache.py::test_warm_exact_hit_revalidates_before_render_and_commit
+0.59s call     test/api/test_agent_supervisor_formal_verification_cache.py::test_draft_single_flight_rejects_authority_before_publishing
+0.59s setup    test/api/test_formal_status_census.py::test_forged_native_result_is_refused[key]
+0.58s call     test/api/test_agent_supervisor_doctor_proof_cache.py::test_equivocation_quarantines
+[33m================= [32m198 passed[0m, [33m[1m4 warnings[0m[33m in 116.08s (0:01:56)[0m[33m ==================[0m

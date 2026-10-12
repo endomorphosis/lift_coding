@@ -1,0 +1,214 @@
+{
+  "accelerate_base_commit": "58d040065dd16acc5f44eae54c56ac533090b5ae",
+  "accelerate_integrated_commit": "ab2938bbae44106df268b1d074c8ff90ad3dbb71",
+  "accelerate_product_commit": "ab2938bbae44106df268b1d074c8ff90ad3dbb71",
+  "ci": {
+    "changed_guide_links_and_anchors_passed": true,
+    "job_id": 114620440407,
+    "local_exact_run_steps_passed": true,
+    "parent_note_links_and_anchors_passed": true,
+    "reason": "The job was not started because your account is locked due to a billing issue.",
+    "reported_conclusion": "failure",
+    "reported_status": "completed",
+    "run_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38189980987",
+    "status": "not_started",
+    "steps": [],
+    "workflow": "Documentation Gates"
+  },
+  "command_inventory": "commands.json",
+  "distinct_passing_tests": 385,
+  "distinct_test_breakdown": {
+    "actual_lean_z3_bridge_and_restart": 1,
+    "authored_bridge_transcript_controls": 30,
+    "existing_proof_cache_completion_census_regressions": 198,
+    "legacy_codeclaim_contracts": 17,
+    "scope_controls_and_legacy_contracts": 57,
+    "terminal_and_archive_controls": 82
+  },
+  "external_ci_observations": {
+    "github-docs-annotations.json": {
+      "bytes": 789,
+      "sha256": "c2a5f1886162811122bdb09585b0df2ed24a2120ed17d714550e70c9b91fc74f"
+    },
+    "github-docs-jobs.json": {
+      "bytes": 935,
+      "sha256": "d777561b277846275b32ad79829a8b3669bd71da89c841a836519903dd912f7c"
+    }
+  },
+  "final_datasets_revision": "fd4be4da2a3976a8e40f47d7337cebb6332c95f3",
+  "final_unresolved_test_failures": 0,
+  "implemented": {
+    "bound_render_and_commit_checks": true,
+    "combined_native_denial_state_check": true,
+    "current_emitter_and_codec_byte_pins": true,
+    "deterministic_receipt_identity_for_duplicate_custody_body": true,
+    "exact_native_request_output_and_transcript_joins": true,
+    "existing_native_owners_only": true,
+    "final_source_and_owner_checks_after_native_consultation": true,
+    "flat_claim_policy_planning_implementation_codeclaim_scope_loss_refused": true,
+    "fresh_actual_pinned_kernel_before_admission": true,
+    "legacy_v1_canonical_bytes_preserved": true,
+    "native_kernel_namespaces_explicitly_reviewed": true,
+    "original_custody_and_sealed_lineage_verified": true,
+    "original_source_premise_cid_and_exact_inverse_preserved": true,
+    "scoped_receipt_preserved_by_census": true,
+    "task_completion_denied": true,
+    "typed_closed_local_scope": true,
+    "typed_original_assumptions_and_actual_security_ir_residual_ids": true,
+    "updated_runtime_source_inventory": true,
+    "versioned_scoped_receipt_codec": true
+  },
+  "initial_datasets_revision": "2a1794e388e88389c48966fb78a1b74c26a0c832",
+  "logs": {
+    "attempt-bridge-plan-identity.log": {
+      "bytes": 10403,
+      "reported_summary": "1 failed, 1 deselected in 25.03s",
+      "sha256": "44ced7e33a377e4a15ba62731dbbc7bac37688f06e04bdc098f47052e0284270"
+    },
+    "attempt-scope-reason.log": {
+      "bytes": 3015,
+      "reported_summary": "1 failed, 37 passed in 19.33s",
+      "sha256": "39a82db670292c680ffe13b58286588243c3313e8b479395f9167dd590011897"
+    },
+    "docs-final-links.log": {
+      "bytes": 391,
+      "reported_summary": null,
+      "sha256": "5f8af73917a5f98e8916a40056565bd5a6b1e57bb82ed195ad6488f1d255d1bb"
+    },
+    "docs-gates.log": {
+      "bytes": 2971,
+      "reported_summary": null,
+      "sha256": "0a02bc784a7aa91eafd21d5368e4e63a7a425569b81a530952545697a8e83cb2"
+    },
+    "tests-archive-before-final-inventory.log": {
+      "bytes": 3902,
+      "reported_summary": "81 passed in 100.10s (0:01:40)",
+      "sha256": "4843f2ba391b06206e39613c38c6a818d0d8a8827eb19d7901907d0df6a7bc1e"
+    },
+    "tests-archive-final.log": {
+      "bytes": 3911,
+      "reported_summary": "82 passed in 94.20s (0:01:34)",
+      "sha256": "598ee772389f06aa134173ebe76004206255128889a651330babe6af7cbc2f00"
+    },
+    "tests-bridge-authored.log": {
+      "bytes": 2741,
+      "reported_summary": "23 passed, 1 deselected in 311.22s (0:05:11)",
+      "sha256": "35d166d101cf726fd3a7f225862ce18d635954a5704cd3942fa9448e41146acf"
+    },
+    "tests-bridge-controls-final.log": {
+      "bytes": 2588,
+      "reported_summary": "8 passed, 23 deselected in 162.32s (0:02:42)",
+      "sha256": "eb9e894636c249fdb8114b18b63fa5d5195d0f42597b0442bd58b0984e4e79e3"
+    },
+    "tests-bridge-real-final.log": {
+      "bytes": 1454,
+      "reported_summary": "1 passed, 30 deselected in 78.63s (0:01:18)",
+      "sha256": "f88d4cd1e6e3e43854a40233015d7c6ee37205c97e477f96e00183480329ec8a"
+    },
+    "tests-bridge-real-initial.log": {
+      "bytes": 1454,
+      "reported_summary": "1 passed, 23 deselected in 75.06s (0:01:15)",
+      "sha256": "0dcdaf9ee07b464a47aa0f04ed0e8d2b993b0f1ae63154b6de27699f530be587"
+    },
+    "tests-bridge-real-spy.log": {
+      "bytes": 1454,
+      "reported_summary": "1 passed, 30 deselected in 55.78s",
+      "sha256": "f2a040c2c202f56c58d3111968314edce91a05ce7e259bbfffff65202dbd4a11"
+    },
+    "tests-codeclaim-legacy.log": {
+      "bytes": 1369,
+      "reported_summary": "17 passed in 23.25s",
+      "sha256": "f9ef85e58a8c2d8a8d65281a86d32cc0c6a1f746bcbbe5bf13c47d0d5d227fe8"
+    },
+    "tests-existing-regressions.log": {
+      "bytes": 5954,
+      "reported_summary": "198 passed, 4 warnings in 116.08s (0:01:56)",
+      "sha256": "dea9b2a5c358b277e5a7dab4e7575ceacf4f72cb4fd59a40023f7f2796a881b3"
+    },
+    "tests-scope-and-legacy.log": {
+      "bytes": 2688,
+      "reported_summary": "55 passed in 25.33s",
+      "sha256": "b20a988528560b603afd2b70108cd1c3e53a8528047957fe0bb3910d5815753c"
+    },
+    "tests-scope-codeclaim.log": {
+      "bytes": 1429,
+      "reported_summary": "2 passed, 43 deselected in 20.87s",
+      "sha256": "f6bfd9702a76b0a170cec3dd7fde54c4319455a1ca48e2d13b3068b01a63c614"
+    }
+  },
+  "measurements": {
+    "actual_terminal_accepted_receipt_population": null,
+    "checkpoint_changed_by_this_phase": false,
+    "complete_run_token_savings": null,
+    "dependency_complete_repeated_status_population": null,
+    "embeddings_recomputed": false,
+    "huggingface_upload_performed": false,
+    "live_benchmark_reward": null,
+    "live_proof_kernel_calls": 0,
+    "live_provider_calls": 0,
+    "model_inference_calls": 0,
+    "token_savings_claimed": false,
+    "training_steps": 0
+  },
+  "overlapping_reruns": {
+    "archive_before_final_inventory": 81,
+    "positive_admission_after_denial_fix": 1,
+    "real_bridge_after_denial_fix_against_fd4": 1,
+    "real_bridge_with_delegating_actual_kernel_spy_against_fd4": 1
+  },
+  "overlapping_reruns_increase_distinct_count": false,
+  "preserved_parent_main": "e059c70b6826398030e3ab43461e658e615574f4",
+  "production_defaults": {
+    "model_callable_proof_tool_added": false,
+    "new_owner_factory_added": false,
+    "terminal_bound_bridge_activated": false,
+    "worker_prompt_or_argv_changed_by_this_phase": false
+  },
+  "qualification_date": "2026-10-12",
+  "remaining_qualifications": [
+    "Wire typed bound bridge admission and independently expected generic receipt identity through Terminal host with current native custody/profile/executable/implementation checks",
+    "Census actual accepted Terminal receipts and dependency-complete repeated status",
+    "Qualify bounded source/receipt expansion and native lineage-prefix lookup cost",
+    "Census complete coding input then compare matched total native planning/coding/lookup/repair tokens and reward"
+  ],
+  "schema": "supervisor-scoped-header-cache-bridge-qualification@1",
+  "semantics_and_limits": {
+    "assumptions_discharged": false,
+    "assurance": "KERNEL_VERIFIED",
+    "atomic_owner_snapshot": false,
+    "attested": false,
+    "emitter_codec_upgrade_needs_separately_admitted_versioned_key_profile": true,
+    "execution_authority": false,
+    "existing_native_gate_bookkeeping_may_write": true,
+    "historical_handle_accepted_stored_not_current_eligibility": true,
+    "mutation_authority": false,
+    "native_lineage_prefix_work_bounded_by_receipt_cap": false,
+    "new_storage_owners_created_by_adapter": 0,
+    "profile_and_path_hashes_are_authentication": false,
+    "requested_resource_enforcement_verified": false,
+    "rollback_of_earlier_writes_on_refusal": false,
+    "security_ir_obligations_discharged": false,
+    "task_completion_authority": false,
+    "whole_program_proved": false
+  },
+  "source_manifest": "source-manifest.json",
+  "status": "qualified_scoped_native_header_to_generic_cache_bridge",
+  "test_evidence": {
+    "actual_owner_reopen_and_stable_receipt_identity_verified": true,
+    "actual_prover_case_delegating_spy_calls_original_native_executor": true,
+    "actual_prover_case_executes_installed_lean_and_z3_on_authored_source": true,
+    "additional_kernel_calls_at_render_or_commit": 0,
+    "authored_bridge_tests_execute_real_temporary_native_sqlite_hmac_and_duckdb_owners": true,
+    "authored_transcripts_are_not_real_proof_evidence": true,
+    "four_warnings_in_existing_regression": "existing multiprocessing fork in multithreaded process deprecation",
+    "harbor_for_terminal_archive_checks": "0.23.0",
+    "initial_failures_retained": {
+      "attempt-bridge-plan-identity.log": "unavailable dict content_id corrected to actual canonical typed tactician plan content_id",
+      "attempt-scope-reason.log": "public completion reason was missing; corrected explicit conditional refusal"
+    },
+    "kernel_calls_required_per_import": 1,
+    "normal_ast_seal_enabled": true,
+    "python": "3.12.3",
+    "unique_per_process_seal_and_orchestration_storage": true
+  }
+}

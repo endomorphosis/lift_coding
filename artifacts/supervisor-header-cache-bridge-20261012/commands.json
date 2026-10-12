@@ -1,0 +1,134 @@
+{
+  "adapter_dependency_site_packages": "/home/barberb/lift_coding/.venvs/terminal-bench-harbor/lib/python3.12/site-packages",
+  "common_environment": {
+    "IPFS_ACCELERATE_AGENT_ORCHESTRATION_DIR": "independent unique per-process temporary path",
+    "IPFS_ACCELERATE_PYTEST_SEAL_DUCKDB": "independent unique per-process temporary DuckDB path",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "owned accelerator plus stated immutable datasets snapshot; Harbor site-packages for Terminal/archive checks",
+    "PYTHONUNBUFFERED": "1",
+    "normal_ast_seal": "enabled"
+  },
+  "cwd": "/home/barberb/lift_coding/.worktrees/token-selector-accelerate-20261011",
+  "docs": {
+    "additional_checks": "check_current_docs_links.check_file(check_anchors=True) on four changed guides and parent milestone note; git diff --check",
+    "hosted_actions_executed_locally": false,
+    "run_steps": "all four exact YAML run blocks",
+    "shell": [
+      "/bin/bash",
+      "--noprofile",
+      "--norc",
+      "-e",
+      "-o",
+      "pipefail",
+      "-c"
+    ],
+    "workflow": ".github/workflows/documentation-gates.yml"
+  },
+  "initial_failures": {
+    "attempt-bridge-plan-identity.log": "native plan to_dict omits content_id; bridge now decodes actual typed tactician plan and uses its canonical content_id",
+    "attempt-scope-reason.log": "expected explicit conditional completion reason was missing; public evaluator now records that reason"
+  },
+  "pytest_common_args": [
+    "python",
+    "-m",
+    "pytest",
+    "-c",
+    "pytest.ini",
+    "--maxfail=1",
+    "-q",
+    "-o",
+    "log_cli=false",
+    "--tb=short"
+  ],
+  "schema": "supervisor-scoped-header-cache-bridge-commands@1",
+  "suites": {
+    "tests-archive-before-final-inventory.log": {
+      "args": [
+        "benchmarks/agent_supervisor/container_coding/test_terminal_semantic_metadata_policy.py",
+        "benchmarks/agent_supervisor/container_coding/test_terminal_formal_status_census.py"
+      ],
+      "dataset_snapshot": "/home/barberb/lift_coding/.worktrees/formal-key-merged-datasets-20261012"
+    },
+    "tests-archive-final.log": {
+      "args": [
+        "benchmarks/agent_supervisor/container_coding/test_terminal_semantic_metadata_policy.py",
+        "benchmarks/agent_supervisor/container_coding/test_terminal_formal_status_census.py"
+      ],
+      "dataset_snapshot": "/home/barberb/lift_coding/.worktrees/formal-key-merged-datasets-20261012"
+    },
+    "tests-bridge-authored.log": {
+      "args": [
+        "test/api/test_doctor_header_cache_bridge.py",
+        "-k",
+        "not real_lean_z3"
+      ],
+      "dataset_snapshot": "/home/barberb/lift_coding/.worktrees/formal-key-source-datasets-20261011"
+    },
+    "tests-bridge-controls-final.log": {
+      "args": [
+        "test/api/test_doctor_header_cache_bridge.py",
+        "-k",
+        "duplicate_custody or public_admission or receipt_implementation or final_tombstone or native_custody_replay_admits"
+      ],
+      "dataset_snapshot": "/home/barberb/lift_coding/.worktrees/formal-key-merged-datasets-20261012"
+    },
+    "tests-bridge-real-final.log": {
+      "args": [
+        "test/api/test_doctor_header_cache_bridge.py",
+        "-k",
+        "real_lean_z3"
+      ],
+      "dataset_snapshot": "/home/barberb/lift_coding/.worktrees/formal-key-merged-datasets-20261012"
+    },
+    "tests-bridge-real-initial.log": {
+      "args": [
+        "test/api/test_doctor_header_cache_bridge.py",
+        "-k",
+        "real_lean_z3"
+      ],
+      "dataset_snapshot": "/home/barberb/lift_coding/.worktrees/formal-key-source-datasets-20261011"
+    },
+    "tests-bridge-real-spy.log": {
+      "args": [
+        "test/api/test_doctor_header_cache_bridge.py",
+        "-k",
+        "real_lean_z3"
+      ],
+      "dataset_snapshot": "/home/barberb/lift_coding/.worktrees/formal-key-merged-datasets-20261012"
+    },
+    "tests-codeclaim-legacy.log": {
+      "args": [
+        "test/api/test_agent_supervisor_code_claim_evidence_contract.py"
+      ],
+      "dataset_snapshot": "/home/barberb/lift_coding/.worktrees/formal-key-merged-datasets-20261012"
+    },
+    "tests-existing-regressions.log": {
+      "args": [
+        "test/api/test_agent_supervisor_proof_goal_completion.py",
+        "test/api/test_agent_supervisor_formal_claim_adapter.py",
+        "test/api/test_agent_supervisor_formal_verification_policy.py",
+        "test/api/test_agent_supervisor_formal_plan_proof_preconditions.py",
+        "test/api/test_agent_supervisor_code_proof_scopes.py",
+        "test/api/test_agent_supervisor_doctor_proof_cache.py",
+        "test/api/test_agent_supervisor_formal_verification_cache.py",
+        "test/api/test_formal_status_census.py"
+      ],
+      "dataset_snapshot": "/home/barberb/lift_coding/.worktrees/formal-key-merged-datasets-20261012"
+    },
+    "tests-scope-and-legacy.log": {
+      "args": [
+        "test/api/test_local_scope_proof_receipts.py",
+        "test/api/test_agent_supervisor_formal_verification_contracts.py"
+      ],
+      "dataset_snapshot": "/home/barberb/lift_coding/.worktrees/formal-key-source-datasets-20261011"
+    },
+    "tests-scope-codeclaim.log": {
+      "args": [
+        "test/api/test_local_scope_proof_receipts.py",
+        "-k",
+        "code_claim"
+      ],
+      "dataset_snapshot": "/home/barberb/lift_coding/.worktrees/formal-key-source-datasets-20261011"
+    }
+  }
+}
