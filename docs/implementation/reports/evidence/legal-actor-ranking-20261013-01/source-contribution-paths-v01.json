@@ -1,0 +1,203 @@
+{
+  "all_additions": true,
+  "base_commit": "c9d0f016a9fcfa327346e056e38e2ffa3b25ffa0",
+  "path_count": 39,
+  "paths": {
+    "docs/guides/legal_actor_ranking_training_20261013.md": {
+      "bytes": 6122,
+      "git_blob": "185afea04c7fd41a53e9318e4df54fb7ad30ef95",
+      "sha256": "5d861bdcbfee3c4fececc80945bca4248b0a61fafb85c00b1c0ef11aeca4aafa"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/actor-ranking-hinge-plan-v01.json": {
+      "bytes": 44409,
+      "git_blob": "8dc91d8b65cac024bc7c2996ed37c85b1819a6b9",
+      "sha256": "0fb9d290844529ef1638e9c0f00d57c8d78ba6f9e487b2cb59a262cc1fc64897"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/actor-ranking-hinge-runtime-review-v01.json": {
+      "bytes": 73408,
+      "git_blob": "d767a78846692f1121f2c1cce354de7f0d23e080",
+      "sha256": "07ad84665af922aff8162b92f4d023a63538e2077162209b880489e588b1fe31"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/actor-ranking-hinge-terminal-resource-audit-v01.json": {
+      "bytes": 26276,
+      "git_blob": "4f92700652a9efe89b0cc3372421018c17d8dc58",
+      "sha256": "436484f60ffed0a2da517d82470bd67329900c72f702846eb9fd42f540e0b582"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/actor-ranking-hinge-training-review-v01.json": {
+      "bytes": 22902,
+      "git_blob": "0f4117e5645d55b13798f65f3295b83c15b90307",
+      "sha256": "45b500ac7d0a02e44b1ac8742ae6c23865df691c392aab62e3501dfe2484108a"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/actor-ranking-independent-recount-v01.json": {
+      "bytes": 635205,
+      "git_blob": "b8c244fdf8910eb02385e27e62c23c203aae65e2",
+      "sha256": "d9ecc4f8f1a825b12e41be29ee6614181a1233fd5f5f18cb1711bb79e6336188"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/actor-ranking-output-freeze-v01.json": {
+      "bytes": 21251,
+      "git_blob": "04edfccfc866f60fd47a8ea9fdeee4ecfe8c85d5",
+      "sha256": "7560a0b6b47dcbd8f8a10d472a87cd2f6f27653bab1e4cb0f4b0a35d870fa4ca"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/actor-ranking-result-analysis-v01.json": {
+      "bytes": 1031559,
+      "git_blob": "d99abfc82f2905f1b17ffe64d30179c352170ffd",
+      "sha256": "9cd76b43bccbef9fa12cfff26f885217b79128920fe7c6dfd1986a5489102c50"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/adopt_shared_scheduler_actor_ranking_v02.py": {
+      "bytes": 15101,
+      "git_blob": "40b61ac11a7e1f7270768177887f0cea1ee015dc",
+      "sha256": "526aa9fa55d955eb92dba37053af2dfdf01f7dd8335cd309cb36770988bab0b7"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/analyze_actor_ranking_v03.py": {
+      "bytes": 76309,
+      "git_blob": "5fa454192a2345efb92a2d26f3f67b2b3a368c20",
+      "sha256": "618e509c00d16fdc6993815f1272c8782ca152deb005624ccdb4e180d3d26edf"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/analyzer-source-independent-review-v03.json": {
+      "bytes": 35426,
+      "git_blob": "b6ca1e870c52d6a2633927796f578474d49eba10",
+      "sha256": "d59ad3f3089f5d814533741fdde6700edf883dd1e3267433d7f6659555b0b7d7"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/archive_actor_ranking_hf_v01.py": {
+      "bytes": 19141,
+      "git_blob": "10655b3deabb6d36a8719d181eac6c243805c184",
+      "sha256": "9060175f98335ec2adf51a3927428f2521d3689113ef3b23d8e40a0af17dcded"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/audit_actor_ranking_terminal_resources_v01.py": {
+      "bytes": 45242,
+      "git_blob": "f3b603a483bc7c8276bc636d655ab47cd298b599",
+      "sha256": "c60e18fe5cd9ce6365eec89e5fa3e5dbfbf6412fc0642bac7e1e25486bc72fb3"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/canonical-raw-preservation-midrun-v01.json": {
+      "bytes": 1013,
+      "git_blob": "1f1a600b8170b8af4a3d991bcdaf1ca200f75a24",
+      "sha256": "30a8524e797fa4dad30330f3be885b477d50f4d961b9c98295fe575646c8a614"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/evaluation-contract-v02.json": {
+      "bytes": 16689,
+      "git_blob": "f26849502de67a9e914575c536dc1d03a46d6ff0",
+      "sha256": "cdb22f6cf6e6d8fdb42a6bcaf5b7330c6c2f16e4d570785df5c446debd225bcb"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/freeze_actor_ranking_outputs_v03.py": {
+      "bytes": 17662,
+      "git_blob": "d264d49ddfdb658ce1cd61a4720e54cd6f6a4286",
+      "sha256": "ec9870d6cd670792b8b14e161a18fde1dbed47041a7ae9f5bbca8f91dd3a465b"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/hf-publication-actual-independent-review-v01.json": {
+      "bytes": 119034,
+      "git_blob": "c725171b693a53ee10c9a2144841a6f110bf64e8",
+      "sha256": "0b385ffbf455239a9c5e6aa7457d68bffed91a07ec797bb1628d5be5096807e8"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/hf-publication-verification-v01.json": {
+      "bytes": 72819,
+      "git_blob": "782146b20deec7747ea14c56ee96e400f03839d6",
+      "sha256": "1a400983a2cff494cdf4a64eb4e5163cd5f9e2111a123e59953fb9cbd246c86f"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/history-preintegration-independent-review-v01.json": {
+      "bytes": 46960,
+      "git_blob": "19f6389404e73e6297eca4038e14ba89351f2307",
+      "sha256": "8b45bf78c495bc81cba3e52ee6c550dda8169318d5da0863a26ad656d2e9b4e5"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/next-experiment-gaps-v01.json": {
+      "bytes": 3019,
+      "git_blob": "caad70b668a59b1ebd8ab008a875c61223fde0f5",
+      "sha256": "34610eba41868272a97c40fbf6d6a7dbfd85301f26e704deac14e5d9b99ce91a"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/owned_lease_watchdog_actor_ranking_v02.py": {
+      "bytes": 24435,
+      "git_blob": "b9b17b0315624d328e8779755d90d7b0a43620a7",
+      "sha256": "6355884b6737c5b0e5cd1a128ad70a09fcf304f27bbf32492a15d8dbe070b032"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/phase-intake-v01.json": {
+      "bytes": 1526,
+      "git_blob": "d7960befc3bdae9ff1d9ed89755779d6de15b944",
+      "sha256": "b6d9781d0070b9f21b51e52c752f991e457d29ec12e6afce072d867cb6cfb0ba"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/prepare_actor_ranking_v03.py": {
+      "bytes": 12165,
+      "git_blob": "7f1060327728a4bfa26a68c1b014e5658b6884f5",
+      "sha256": "347e3cd6e8f4341bdc7c8ce18a2557112f9432fcd03d70e63207955cd4b5d69e"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/public-result-summary-v01.json": {
+      "bytes": 8979,
+      "git_blob": "bb26775d749648729cd059a4c83f2d7ca1cc4689",
+      "sha256": "37fcf051dec62319baeb3e4470b2f224b3fc013d52c93ac579be418ad73a9134"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/release-manifest-v01.json": {
+      "bytes": 73847,
+      "git_blob": "e43cbf6812cb62bbd90985358a4121f077a2428a",
+      "sha256": "4289329622b5f45124d747bc6e0a4f88f5200fe9a6176b8aeca49dbc4f7529a9"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/resource-baseline-v03.json": {
+      "bytes": 77832,
+      "git_blob": "18a48e1823920089b7da913879eb278a83d281fb",
+      "sha256": "b309272084cbbc6206b91d8ae5dcfcd843ab8a386153b81bae554ebcb6932d19"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/resource-bridge-source-independent-review-v02.json": {
+      "bytes": 2577,
+      "git_blob": "4eca1d044b769590ca526286e176b03a822e6471",
+      "sha256": "8a3d1d1cc6a3503c0da75fb2a596d68c01380f20cb4c4119876cb3c0fd5cb69b"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/result-independent-review-v01.json": {
+      "bytes": 66176,
+      "git_blob": "98dc5c17bd2e619083ba568f4cfb160ee717ae45",
+      "sha256": "cbdb152024208bc621827207e34a9fd90c4a4ed20ff43cfab078b4d60888d2a0"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/result-recount-source-independent-review-v01.json": {
+      "bytes": 8833,
+      "git_blob": "fac0dc69706c5115e0d43cf2711ef8d002913285",
+      "sha256": "cf5e9be253288986274a5530addb447407cd39f44b67a49e00014d1ee4cdc133"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/review_actor_ranking_resource_baseline_v03.py": {
+      "bytes": 25477,
+      "git_blob": "3ba5b3523d7364140cd1bd588ae87d31c550a516",
+      "sha256": "824af98c583d66ac378f9acc47ba6a6888ea37f91d993cdd30956dc62ea6973c"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/review_actor_ranking_result_recount_v01.py": {
+      "bytes": 39120,
+      "git_blob": "ba29200ce50e1b92822a257532ed6b441e231120",
+      "sha256": "9f01a4e10de9c1cf6c83ab2edfbcd089bb74c1e6fe765cae7142143336f78c82"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/run_actor_ranking_v02.py": {
+      "bytes": 32023,
+      "git_blob": "2396fceb94b13295bae8834b94d7a0a4aa5b28cb",
+      "sha256": "c4f9b70b466a71ac10742cbf8c4a9bc4a5170f40d6897852ffe9d31683472ed9"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/run_scope_guardian_v02.py": {
+      "bytes": 38449,
+      "git_blob": "e81d65929cf3b4de51f65f82fd5a731c05995899",
+      "sha256": "b4811b7b24f584d5cb0f7c921451a234a3e0d84b2d7507e015426e258134c2db"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/runner-preparer-source-independent-review-v03.json": {
+      "bytes": 32817,
+      "git_blob": "fcfc97a308c5eec8c297312284b8a808539bbba8",
+      "sha256": "fac84080b3cad7c0eb978a17ca79cf7120bd847e0d6759e19789609e2f75b425"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/sample_actor_ranking_private_resources_v01.py": {
+      "bytes": 6660,
+      "git_blob": "dddd140ed1da79ba0e2c34c2e44dc060f0f2855c",
+      "sha256": "6f179fd822b4ebf2caabec4c6d07f6c06e37391406f1ccf38ef841f6bb269a2c"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/trainer-source-independent-review-v01.json": {
+      "bytes": 36932,
+      "git_blob": "8596a408c421c4834a045d033a96e286be0c14f6",
+      "sha256": "71cf487750dd9d0c44608b468a62be8b0fd79f351b7b439b811c1aa690255bf6"
+    },
+    "docs/implementation/reports/evidence/legal-actor-ranking-20261013-01/training-design-v01.json": {
+      "bytes": 10872,
+      "git_blob": "d42d451c78af35c13b438deb3ae783873b6d2474",
+      "sha256": "941622f144d730afbafdeddbd9f5db21569420e6c4e3efa8d314267236894b9b"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_ranking.py": {
+      "bytes": 50602,
+      "git_blob": "0d4d7d8ed5670585d034f6bee17b453ea07e8d37",
+      "sha256": "83553976f2f09e1cf31d0e3130742befc68355bf271fd4c5eca3a076c6140538"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_actor_ranking_contracts.py": {
+      "bytes": 31640,
+      "git_blob": "fc3009ef431b588320e7d678c012c215a2f06aa9",
+      "sha256": "ccd620770cc38155b2c484a68d454bf2de90e2fe9f96742909ba4c4a89bb58bd"
+    }
+  },
+  "schema": "actor-ranking-source-contribution-paths/v1"
+}
