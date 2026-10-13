@@ -1,0 +1,22 @@
+{
+  "explicit_link_errors": [],
+  "git_diff_checks_passed": true,
+  "hosted_billing_lock_observed": true,
+  "hosted_ci_observation_sha256": "11c477f0799d3c1b4911f774536e5623fa95cc74c0b2963579f95b8c988b144a",
+  "hosted_documentation_gates_passed": false,
+  "local_documentation_gates_passed": true,
+  "manifest_sha256": "37ce3fcd0f696b8b5fbe4d08e42e5675266ed251b0772d69046d515d04157900",
+  "parent_base": "9d1301c800e575afc5ddd026d0a71c9c761cacda",
+  "passed": true,
+  "preserved_kit": "8ac00bb1974b1378e12091d546d8425af34049e0",
+  "report_sha256": "d742b7bc1d02facf66b242b80a4ff3626b898b30eb2808ed3eb8ba8ce1c555c6",
+  "schema": "numerical-guarded-parent-publication-checks@1",
+  "sealed_evidence_file_count": 84,
+  "skipped_checkpoint_tests": 2,
+  "staged_gitlinks": {
+    "external/ipfs_accelerate": "d13c68ce80dba65478c87f24ada0669ddfb36a1b",
+    "external/ipfs_datasets": "9eb06b73658d8203628a697db6199f14ecf479e4",
+    "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0"
+  },
+  "unique_passing_tests": 947
+}

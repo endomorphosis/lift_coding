@@ -1,0 +1,161 @@
+{
+  "blockers": [],
+  "checks": [
+    {
+      "check": "exact 84-file manifest inventory",
+      "files": 84,
+      "passed": true
+    },
+    {
+      "check": "no symlinks in evidence",
+      "passed": true
+    },
+    {
+      "check": "all manifest lengths and SHA256 digests match",
+      "passed": true
+    },
+    {
+      "check": "all copied execution artifacts retain original bytes",
+      "passed": true
+    },
+    {
+      "check": "Docker publication inventory exactly matches independent allowlist",
+      "passed": true
+    },
+    {
+      "check": "private runtime paths excluded",
+      "passed": true
+    },
+    {
+      "check": "raw private broker session ID absent from every published file",
+      "passed": true
+    },
+    {
+      "check": "no raw broker descriptor or populated credential fields in JSON",
+      "credential_field_matches": 0,
+      "descriptor_matches": 0,
+      "passed": true
+    },
+    {
+      "check": "datasets-final-01 XML bound to ledger",
+      "passed": true
+    },
+    {
+      "check": "accelerator-final-01 XML bound to ledger",
+      "passed": true
+    },
+    {
+      "check": "947 distinct passing tests recomputed from final JUnit only",
+      "counts": {
+        "accelerator": 609,
+        "datasets": 338
+      },
+      "passed": true
+    },
+    {
+      "check": "passing node ledger exact",
+      "passed": true
+    },
+    {
+      "check": "both explicit checkpoint skips match exact retained reasons",
+      "passed": true
+    },
+    {
+      "check": "six selected optional native Lake tests actually passed",
+      "passed": true
+    },
+    {
+      "check": "44 current qualified source files match frozen Docker release",
+      "passed": true
+    },
+    {
+      "check": "all additional reviewed source/test pins match current worktrees",
+      "passed": true,
+      "unique_additional": 10
+    },
+    {
+      "check": "three runner snapshot pins remain exact",
+      "passed": true
+    },
+    {
+      "check": "current datasets commit matches publication pin",
+      "passed": true
+    },
+    {
+      "check": "concurrent upstream commit preserved",
+      "passed": true
+    },
+    {
+      "check": "public qualification has 3/4 complete and 75 pending zero discharged",
+      "passed": true
+    },
+    {
+      "check": "prior 59-check public audit bound without modification",
+      "passed": true
+    },
+    {
+      "check": "all local guide README and old-readiness links resolve",
+      "checked_links": 26,
+      "errors": [],
+      "passed": true
+    },
+    {
+      "check": "both pinned datasets source links resolve at published commit",
+      "passed": true
+    },
+    {
+      "check": "old readiness guide points to new qualification",
+      "passed": true
+    },
+    {
+      "check": "frozen documentation bytes match passed documentation gate",
+      "passed": true
+    },
+    {
+      "check": "all 84 curated files present in Git index",
+      "indexed_count": 84,
+      "passed": true
+    },
+    {
+      "check": "Git indexed evidence bytes equal immutable working bundle",
+      "passed": true
+    }
+  ],
+  "claim_review": {
+    "actual_lake_is_compilation_not_source_truth": true,
+    "all_75_obligations_explicitly_pending": true,
+    "authored_router_callbacks_explicit": true,
+    "loops_and_checkpoint_quality_gaps_explicit": true,
+    "no_official_score_or_live_token_savings_claimed": true,
+    "structural_coverage_is_not_learned_decoder_coverage": true
+  },
+  "counts": {
+    "accelerator_passes": 609,
+    "bundle_files": 84,
+    "checkpoint_skips": 2,
+    "complete_functions": 3,
+    "datasets_passes": 338,
+    "manifest_entries": 83,
+    "optional_native_lake_tests_passed": 6,
+    "pending_obligations": 75,
+    "qualified_source_bindings": 44,
+    "regression_passes": 947,
+    "source_obligations_discharged": 0,
+    "total_functions": 4
+  },
+  "datasets_commit": "9eb06b73658d8203628a697db6199f14ecf479e4",
+  "document_sha256": {
+    "docs/agent_supervisor/evidence/numerical-guarded-20261013/README.md": "abd031d23a31a54ed461858f1df8989c8476cb2a292cae700bada6b323a6ad2f",
+    "docs/agent_supervisor/indexed_coverage_readiness.md": "2fbc46cb1c242634a2c38815c320637416d7a316b5984967f30cc3d0619de8a3",
+    "docs/agent_supervisor/numerical_guarded_coverage.md": "1b28b1a9560d462f557940a66af47dffd0818087b26691e9fd852a0104452574"
+  },
+  "limitations": [
+    "Only the final 338+609 distinct pass inventories count toward947; historical development runs are retained but not added.",
+    "Two explicitly unconfigured learned-checkpoint tests remain skipped.",
+    "No production code, publication bundle, or private runtime state was mutated by this audit; no new provider calls or benchmark runs were made."
+  ],
+  "manifest_sha256": "37ce3fcd0f696b8b5fbe4d08e42e5675266ed251b0772d69046d515d04157900",
+  "privacy_scope": "Exact independently approved Docker allowlist, absence of excluded runtime paths and raw broker session ID/descriptors, and populated credential-field scan; path references and hashes remain content-free audit evidence.",
+  "schema": "numerical-guarded-publication-independent-audit@1",
+  "status": "passed"
+}
