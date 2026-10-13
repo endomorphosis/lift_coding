@@ -1,0 +1,3852 @@
+{
+  "actual_merge": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/observe_split_ci_v02.py": {
+      "bytes": 13536,
+      "path": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/observe_split_ci_v02.py",
+      "sha256": "facdbc12bc214149e420d541a658ab6c22916510134acf72ce4612229efdac2c"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/source-commit-independent-review-v01.json": {
+      "bytes": 80110,
+      "path": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/source-commit-independent-review-v01.json",
+      "sha256": "48a9c2c614145d1f81b72e1d6f78f4feaf9c54ecc5b84429e35b4e5f7e13a1f8"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/source-publication-v01.json": {
+      "bytes": 1399,
+      "path": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/source-publication-v01.json",
+      "sha256": "2d74389ae05cfa7d687290b45e1ef5787b3c64cdc5d0c7815cbbadfa13bd4acb"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/source-stage-independent-review-v01.json": {
+      "bytes": 105881,
+      "path": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/source-stage-independent-review-v01.json",
+      "sha256": "13d50d6e31212f121e2e310ac68bf35f5d2f03d53e5c4cfbff5dbde134ce7da4"
+    }
+  },
+  "billing_or_settings_changes": false,
+  "closing_pr": {
+    "base": {
+      "ref": "main",
+      "sha": "b95938c2a816075466f8dc84f339cf622414030d"
+    },
+    "draft": false,
+    "head": {
+      "ref": "codex/legal-split-feature-20261013-01",
+      "sha": "64e93527bed84ecadaab70a570d82a177a859967"
+    },
+    "merge_commit_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "merged": true,
+    "merged_at": "2026-10-13T01:31:21Z",
+    "number": 1293,
+    "state": "closed",
+    "url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1293"
+  },
+  "gh_pr_view": {
+    "baseRefName": "main",
+    "headRefName": "codex/legal-split-feature-20261013-01",
+    "headRefOid": "64e93527bed84ecadaab70a570d82a177a859967",
+    "isDraft": false,
+    "mergeCommit": {
+      "oid": "cc94dafaf39123bb24b8eb2a043168d9255ff92d"
+    },
+    "mergedAt": "2026-10-13T01:31:21Z",
+    "number": 1293,
+    "state": "MERGED",
+    "url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1293"
+  },
+  "head": "64e93527bed84ecadaab70a570d82a177a859967",
+  "heads": [
+    {
+      "checks": [
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857357381
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504514/job/115085189592",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504514/job/115085189592",
+          "id": 115085189592,
+          "name": "setup",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085189592/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:04Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857357311
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504488/job/115085189524",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504488/job/115085189524",
+          "id": 115085189524,
+          "name": "Build distribution \ud83d\udce6",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085189524/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:03Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857357257
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504472/job/115085189465",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504472/job/115085189465",
+          "id": 115085189465,
+          "name": "build-and-test (docker/Dockerfile.test, linux/amd64)",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085189465/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:03Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857357472
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504551/job/115085189464",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504551/job/115085189464",
+          "id": 115085189464,
+          "name": "enhanced-pr-monitor",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085189464/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:03Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857357470
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504543/job/115085189432",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504543/job/115085189432",
+          "id": 115085189432,
+          "name": "sdk-static-analysis",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085189432/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:03Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857357257
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504472/job/115085189328",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504472/job/115085189328",
+          "id": 115085189328,
+          "name": "build-and-test (Dockerfile.mcp-minimal, linux/amd64)",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085189328/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:03Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857357257
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504472/job/115085189300",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504472/job/115085189300",
+          "id": 115085189300,
+          "name": "test-docker-compose",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085189300/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:03Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857357294
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504480/job/115085189290",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504480/job/115085189290",
+          "id": 115085189290,
+          "name": "check-pr-completion",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085189290/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:03Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857357408
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504523/job/115085189217",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504523/job/115085189217",
+          "id": 115085189217,
+          "name": "Setup Cache Infrastructure",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085189217/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:03Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857357284
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504474/job/115085189176",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504474/job/115085189176",
+          "id": 115085189176,
+          "name": "discover-tool-categories",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085189176/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:03Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857357257
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504472/job/115085189147",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504472/job/115085189147",
+          "id": 115085189147,
+          "name": "build-multi-arch",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085189147/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:03Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857357317
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504491/job/115085189007",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504491/job/115085189007",
+          "id": 115085189007,
+          "name": "analyze-and-assign-copilot",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085189007/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:03Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857357189
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504445/job/115085188969",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504445/job/115085188969",
+          "id": 115085188969,
+          "name": "dashboard-smoke-tests (3.12)",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085188969/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:03Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857357219
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504453/job/115085188947",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504453/job/115085188947",
+          "id": 115085188947,
+          "name": "arm64-system-info",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085188947/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:03Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857357256
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504466/job/115085188897",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504466/job/115085188897",
+          "id": 115085188897,
+          "name": "cli-smoke-tests",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085188897/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:03Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [
+            {
+              "annotation_level": "failure",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/64e93527bed84ecadaab70a570d82a177a859967/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "The job was not started because your account is locked due to a billing issue.",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            },
+            {
+              "annotation_level": "notice",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/64e93527bed84ecadaab70a570d82a177a859967/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            }
+          ],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857354017
+          },
+          "completed_at": "2026-10-13T01:31:08Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332503272/job/115085188261",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332503272/job/115085188261",
+          "id": 115085188261,
+          "name": "Analyze (actions)",
+          "output": {
+            "annotations_count": 2,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085188261/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:03Z",
+          "status": "completed"
+        },
+        {
+          "annotations": [
+            {
+              "annotation_level": "failure",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/64e93527bed84ecadaab70a570d82a177a859967/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "The job was not started because your account is locked due to a billing issue.",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            },
+            {
+              "annotation_level": "notice",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/64e93527bed84ecadaab70a570d82a177a859967/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            }
+          ],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857354017
+          },
+          "completed_at": "2026-10-13T01:31:07Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332503272/job/115085188104",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332503272/job/115085188104",
+          "id": 115085188104,
+          "name": "Analyze (rust)",
+          "output": {
+            "annotations_count": 2,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085188104/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:03Z",
+          "status": "completed"
+        },
+        {
+          "annotations": [
+            {
+              "annotation_level": "failure",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/64e93527bed84ecadaab70a570d82a177a859967/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "The job was not started because your account is locked due to a billing issue.",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            },
+            {
+              "annotation_level": "notice",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/64e93527bed84ecadaab70a570d82a177a859967/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            }
+          ],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857354017
+          },
+          "completed_at": "2026-10-13T01:31:07Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332503272/job/115085188080",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332503272/job/115085188080",
+          "id": 115085188080,
+          "name": "Analyze (python)",
+          "output": {
+            "annotations_count": 2,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085188080/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:03Z",
+          "status": "completed"
+        },
+        {
+          "annotations": [
+            {
+              "annotation_level": "failure",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/64e93527bed84ecadaab70a570d82a177a859967/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "The job was not started because your account is locked due to a billing issue.",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            },
+            {
+              "annotation_level": "notice",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/64e93527bed84ecadaab70a570d82a177a859967/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            }
+          ],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857354017
+          },
+          "completed_at": "2026-10-13T01:31:07Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332503272/job/115085187936",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332503272/job/115085187936",
+          "id": 115085187936,
+          "name": "Analyze (javascript-typescript)",
+          "output": {
+            "annotations_count": 2,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085187936/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:03Z",
+          "status": "completed"
+        }
+      ],
+      "commit_statuses": [],
+      "head": "64e93527bed84ecadaab70a570d82a177a859967",
+      "role": "contribution_head",
+      "workflow_runs": [
+        {
+          "check_suite_id": 103857357189,
+          "conclusion": null,
+          "created_at": "2026-10-13T01:31:03Z",
+          "event": "pull_request",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504445",
+          "id": 38332504445,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085188969",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T01:31:03Z",
+              "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504445/job/115085188969",
+              "id": 115085188969,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "dashboard-smoke-tests (3.12)",
+              "run_attempt": 1,
+              "run_id": 38332504445,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T01:31:03Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "MCP Dashboard Automated Tests",
+          "path": ".github/workflows/mcp-dashboard-tests.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:03Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T01:31:03Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504445"
+        },
+        {
+          "check_suite_id": 103857357219,
+          "conclusion": null,
+          "created_at": "2026-10-13T01:31:03Z",
+          "event": "pull_request",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504453",
+          "id": 38332504453,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085188947",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T01:31:03Z",
+              "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504453/job/115085188947",
+              "id": 115085188947,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "arm64"
+              ],
+              "name": "arm64-system-info",
+              "run_attempt": 1,
+              "run_id": 38332504453,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T01:31:03Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "ARM64 Self-Hosted Runner",
+          "path": ".github/workflows/arm64-runner.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:03Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T01:31:03Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504453"
+        },
+        {
+          "check_suite_id": 103857357284,
+          "conclusion": null,
+          "created_at": "2026-10-13T01:31:03Z",
+          "event": "pull_request",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504474",
+          "id": 38332504474,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085189176",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T01:31:03Z",
+              "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504474/job/115085189176",
+              "id": 115085189176,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "discover-tool-categories",
+              "run_attempt": 1,
+              "run_id": 38332504474,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T01:31:03Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "MCP Tools Error Monitoring",
+          "path": ".github/workflows/mcp-tools-monitoring.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:03Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T01:31:03Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504474"
+        },
+        {
+          "check_suite_id": 103857357294,
+          "conclusion": null,
+          "created_at": "2026-10-13T01:31:03Z",
+          "event": "pull_request",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504480",
+          "id": 38332504480,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085189290",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T01:31:03Z",
+              "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504480/job/115085189290",
+              "id": 115085189290,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "check-pr-completion",
+              "run_attempt": 1,
+              "run_id": 38332504480,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T01:31:03Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "PR Completion Monitor with Copilot Auto-Fix",
+          "path": ".github/workflows/pr-completion-monitor.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:03Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T01:31:03Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504480"
+        },
+        {
+          "check_suite_id": 103857357257,
+          "conclusion": null,
+          "created_at": "2026-10-13T01:31:03Z",
+          "event": "pull_request",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504472",
+          "id": 38332504472,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085189147",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T01:31:03Z",
+              "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504472/job/115085189147",
+              "id": 115085189147,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "build-multi-arch",
+              "run_attempt": 1,
+              "run_id": 38332504472,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T01:31:03Z",
+              "status": "queued",
+              "steps": []
+            },
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085189300",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T01:31:03Z",
+              "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504472/job/115085189300",
+              "id": 115085189300,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "test-docker-compose",
+              "run_attempt": 1,
+              "run_id": 38332504472,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T01:31:03Z",
+              "status": "queued",
+              "steps": []
+            },
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085189328",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T01:31:03Z",
+              "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504472/job/115085189328",
+              "id": 115085189328,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "build-and-test (Dockerfile.mcp-minimal, linux/amd64)",
+              "run_attempt": 1,
+              "run_id": 38332504472,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T01:31:03Z",
+              "status": "queued",
+              "steps": []
+            },
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085189465",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T01:31:03Z",
+              "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504472/job/115085189465",
+              "id": 115085189465,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "build-and-test (docker/Dockerfile.test, linux/amd64)",
+              "run_attempt": 1,
+              "run_id": 38332504472,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T01:31:03Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "Docker Build and Test",
+          "path": ".github/workflows/docker-ci.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:03Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T01:31:03Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504472"
+        },
+        {
+          "check_suite_id": 103857357311,
+          "conclusion": null,
+          "created_at": "2026-10-13T01:31:03Z",
+          "event": "pull_request",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504488",
+          "id": 38332504488,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085189524",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T01:31:03Z",
+              "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504488/job/115085189524",
+              "id": 115085189524,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "Build distribution \ud83d\udce6",
+              "run_attempt": 1,
+              "run_id": 38332504488,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T01:31:03Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "Publish Python Package",
+          "path": ".github/workflows/publish_to_pipy.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:03Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T01:31:03Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504488"
+        },
+        {
+          "check_suite_id": 103857357256,
+          "conclusion": null,
+          "created_at": "2026-10-13T01:31:03Z",
+          "event": "pull_request",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504466",
+          "id": 38332504466,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085188897",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T01:31:03Z",
+              "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504466/job/115085188897",
+              "id": 115085188897,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "cli-smoke-tests",
+              "run_attempt": 1,
+              "run_id": 38332504466,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T01:31:03Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "CLI Tools Error Monitoring",
+          "path": ".github/workflows/cli-error-monitoring.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:03Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T01:31:03Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504466"
+        },
+        {
+          "check_suite_id": 103857357470,
+          "conclusion": null,
+          "created_at": "2026-10-13T01:31:03Z",
+          "event": "pull_request",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504543",
+          "id": 38332504543,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085189432",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T01:31:03Z",
+              "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504543/job/115085189432",
+              "id": 115085189432,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "sdk-static-analysis",
+              "run_attempt": 1,
+              "run_id": 38332504543,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T01:31:03Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "JavaScript SDK Error Monitoring",
+          "path": ".github/workflows/javascript-sdk-monitoring.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:03Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T01:31:03Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504543"
+        },
+        {
+          "check_suite_id": 103857357472,
+          "conclusion": null,
+          "created_at": "2026-10-13T01:31:03Z",
+          "event": "pull_request",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504551",
+          "id": 38332504551,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085189464",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T01:31:03Z",
+              "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504551/job/115085189464",
+              "id": 115085189464,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "enhanced-pr-monitor",
+              "run_attempt": 1,
+              "run_id": 38332504551,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T01:31:03Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "Enhanced PR Completion Monitor with Progressive Copilot Assignment",
+          "path": ".github/workflows/enhanced-pr-completion-monitor.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:03Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T01:31:03Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504551"
+        },
+        {
+          "check_suite_id": 103857357408,
+          "conclusion": null,
+          "created_at": "2026-10-13T01:31:03Z",
+          "event": "pull_request",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504523",
+          "id": 38332504523,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085189217",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T01:31:03Z",
+              "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504523/job/115085189217",
+              "id": 115085189217,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "Setup Cache Infrastructure",
+              "run_attempt": 1,
+              "run_id": 38332504523,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T01:31:03Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "Example Cached Workflow",
+          "path": ".github/workflows/example-cached-workflow.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:03Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T01:31:03Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504523"
+        },
+        {
+          "check_suite_id": 103857357381,
+          "conclusion": null,
+          "created_at": "2026-10-13T01:31:03Z",
+          "event": "pull_request",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504514",
+          "id": 38332504514,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085189592",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T01:31:04Z",
+              "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504514/job/115085189592",
+              "id": 115085189592,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "setup",
+              "run_attempt": 1,
+              "run_id": 38332504514,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T01:31:04Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "Scraper Validation and Testing",
+          "path": ".github/workflows/scraper-validation.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:03Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T01:31:03Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504514"
+        },
+        {
+          "check_suite_id": 103857357317,
+          "conclusion": null,
+          "created_at": "2026-10-13T01:31:03Z",
+          "event": "pull_request",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504491",
+          "id": 38332504491,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085189007",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T01:31:03Z",
+              "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332504491/job/115085189007",
+              "id": 115085189007,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "analyze-and-assign-copilot",
+              "run_attempt": 1,
+              "run_id": 38332504491,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T01:31:03Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "Automated PR Review and Copilot Assignment",
+          "path": ".github/workflows/pr-copilot-reviewer.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:03Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T01:31:03Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504491"
+        },
+        {
+          "check_suite_id": 103857354017,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:31:02Z",
+          "event": "dynamic",
+          "head_branch": "refs/pull/1293/head",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332503272",
+          "id": 38332503272,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085187936",
+              "completed_at": "2026-10-13T01:31:07Z",
+              "conclusion": "failure",
+              "created_at": "2026-10-13T01:31:03Z",
+              "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332503272/job/115085187936",
+              "id": 115085187936,
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "name": "Analyze (javascript-typescript)",
+              "run_attempt": 1,
+              "run_id": 38332503272,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T01:31:03Z",
+              "status": "completed",
+              "steps": []
+            },
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085188080",
+              "completed_at": "2026-10-13T01:31:07Z",
+              "conclusion": "failure",
+              "created_at": "2026-10-13T01:31:03Z",
+              "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332503272/job/115085188080",
+              "id": 115085188080,
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "name": "Analyze (python)",
+              "run_attempt": 1,
+              "run_id": 38332503272,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T01:31:03Z",
+              "status": "completed",
+              "steps": []
+            },
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085188104",
+              "completed_at": "2026-10-13T01:31:07Z",
+              "conclusion": "failure",
+              "created_at": "2026-10-13T01:31:03Z",
+              "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332503272/job/115085188104",
+              "id": 115085188104,
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "name": "Analyze (rust)",
+              "run_attempt": 1,
+              "run_id": 38332503272,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T01:31:03Z",
+              "status": "completed",
+              "steps": []
+            },
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085188261",
+              "completed_at": "2026-10-13T01:31:08Z",
+              "conclusion": "failure",
+              "created_at": "2026-10-13T01:31:03Z",
+              "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332503272/job/115085188261",
+              "id": 115085188261,
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "name": "Analyze (actions)",
+              "run_attempt": 1,
+              "run_id": 38332503272,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T01:31:03Z",
+              "status": "completed",
+              "steps": []
+            }
+          ],
+          "name": "PR #1293",
+          "path": "dynamic/github-code-scanning/codeql",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:02Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:31:08Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332503272"
+        },
+        {
+          "check_suite_id": 103857336495,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:30:57Z",
+          "event": "push",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332496639",
+          "id": 38332496639,
+          "jobs": [],
+          "name": ".github/workflows/pr-completion-monitor-unified.yml",
+          "path": ".github/workflows/pr-completion-monitor-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:30:57Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:30:57Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332496639"
+        },
+        {
+          "check_suite_id": 103857334152,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:30:56Z",
+          "event": "push",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332495750",
+          "id": 38332495750,
+          "jobs": [],
+          "name": ".github/workflows/cli-error-monitoring-unified.yml",
+          "path": ".github/workflows/cli-error-monitoring-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:30:56Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:30:56Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332495750"
+        },
+        {
+          "check_suite_id": 103857329393,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:30:55Z",
+          "event": "push",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332494001",
+          "id": 38332494001,
+          "jobs": [],
+          "name": ".github/workflows/legal-v2-reasoner-ci.yml",
+          "path": ".github/workflows/legal-v2-reasoner-ci.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:30:55Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:30:55Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332494001"
+        },
+        {
+          "check_suite_id": 103857331771,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:30:55Z",
+          "event": "push",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332494914",
+          "id": 38332494914,
+          "jobs": [],
+          "name": ".github/workflows/docker-build-test.yml",
+          "path": ".github/workflows/docker-build-test.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:30:55Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:30:55Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332494914"
+        },
+        {
+          "check_suite_id": 103857326819,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:30:54Z",
+          "event": "push",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332493036",
+          "id": 38332493036,
+          "jobs": [],
+          "name": ".github/workflows/graphrag-production-ci.yml",
+          "path": ".github/workflows/graphrag-production-ci.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:30:54Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:30:54Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332493036"
+        },
+        {
+          "check_suite_id": 103857321688,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:30:53Z",
+          "event": "push",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332491093",
+          "id": 38332491093,
+          "jobs": [],
+          "name": ".github/workflows/mcp-integration-tests.yml",
+          "path": ".github/workflows/mcp-integration-tests.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:30:53Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:30:53Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332491093"
+        },
+        {
+          "check_suite_id": 103857324480,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:30:53Z",
+          "event": "push",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332492159",
+          "id": 38332492159,
+          "jobs": [],
+          "name": ".github/workflows/pr-draft-creation-unified.yml",
+          "path": ".github/workflows/pr-draft-creation-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:30:53Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:30:53Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332492159"
+        },
+        {
+          "check_suite_id": 103857318892,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:30:52Z",
+          "event": "push",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332490074",
+          "id": 38332490074,
+          "jobs": [],
+          "name": ".github/workflows/javascript-sdk-monitoring-unified.yml",
+          "path": ".github/workflows/javascript-sdk-monitoring-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:30:52Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:30:52Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332490074"
+        },
+        {
+          "check_suite_id": 103857316383,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:30:51Z",
+          "event": "push",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332489145",
+          "id": 38332489145,
+          "jobs": [],
+          "name": ".github/workflows/pr-progressive-monitor-unified.yml",
+          "path": ".github/workflows/pr-progressive-monitor-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:30:51Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:30:51Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332489145"
+        },
+        {
+          "check_suite_id": 103857314278,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:30:50Z",
+          "event": "push",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332488290",
+          "id": 38332488290,
+          "jobs": [],
+          "name": ".github/workflows/mcp-tools-monitoring-unified.yml",
+          "path": ".github/workflows/mcp-tools-monitoring-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:30:50Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:30:50Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332488290"
+        },
+        {
+          "check_suite_id": 103857312095,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:30:50Z",
+          "event": "push",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332487535",
+          "id": 38332487535,
+          "jobs": [],
+          "name": ".github/workflows/runner-validation-unified.yml",
+          "path": ".github/workflows/runner-validation-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:30:50Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:30:50Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332487535"
+        },
+        {
+          "check_suite_id": 103857307499,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:30:49Z",
+          "event": "push",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332485811",
+          "id": 38332485811,
+          "jobs": [],
+          "name": ".github/workflows/pdf_processing_ci.yml",
+          "path": ".github/workflows/pdf_processing_ci.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:30:49Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:30:49Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332485811"
+        },
+        {
+          "check_suite_id": 103857309974,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:30:49Z",
+          "event": "push",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332486720",
+          "id": 38332486720,
+          "jobs": [],
+          "name": ".github/workflows/gpu-tests.yml",
+          "path": ".github/workflows/gpu-tests.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:30:49Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:30:49Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332486720"
+        },
+        {
+          "check_suite_id": 103857304629,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:30:48Z",
+          "event": "push",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332484674",
+          "id": 38332484674,
+          "jobs": [],
+          "name": ".github/workflows/approve-optimization.yml",
+          "path": ".github/workflows/approve-optimization.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:30:48Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:30:48Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332484674"
+        },
+        {
+          "check_suite_id": 103857301965,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:30:47Z",
+          "event": "push",
+          "head_branch": "codex/legal-split-feature-20261013-01",
+          "head_sha": "64e93527bed84ecadaab70a570d82a177a859967",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332483779",
+          "id": 38332483779,
+          "jobs": [],
+          "name": ".github/workflows/gpu-tests-gated.yml",
+          "path": ".github/workflows/gpu-tests-gated.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:30:47Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:30:47Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332483779"
+        }
+      ]
+    },
+    {
+      "checks": [
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857475995
+          },
+          "completed_at": "2026-10-13T01:31:38Z",
+          "conclusion": "skipped",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332548989/job/115085363570",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332548989/job/115085363570",
+          "id": 115085363570,
+          "name": "autofix-with-copilot-agent",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085363570/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:46Z",
+          "status": "completed"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857475683
+          },
+          "completed_at": "2026-10-13T01:31:38Z",
+          "conclusion": "skipped",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332548885/job/115085356119",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332548885/job/115085356119",
+          "id": 115085356119,
+          "name": "autofix-with-copilot-agent",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085356119/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:44Z",
+          "status": "completed"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857476632
+          },
+          "completed_at": "2026-10-13T01:31:38Z",
+          "conclusion": "skipped",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332549213/job/115085331699",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332549213/job/115085331699",
+          "id": 115085331699,
+          "name": "autofix-with-copilot-agent",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085331699/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:38Z",
+          "status": "completed"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857466492
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332545374/job/115085320301",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332545374/job/115085320301",
+          "id": 115085320301,
+          "name": "Build distribution \ud83d\udce6",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085320301/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:35Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [
+            {
+              "annotation_level": "failure",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/cc94dafaf39123bb24b8eb2a043168d9255ff92d/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "The job was not started because your account is locked due to a billing issue.",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            },
+            {
+              "annotation_level": "notice",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/cc94dafaf39123bb24b8eb2a043168d9255ff92d/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            }
+          ],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857429234
+          },
+          "completed_at": "2026-10-13T01:31:29Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332531591/job/115085276990",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332531591/job/115085276990",
+          "id": 115085276990,
+          "name": "Analyze (actions)",
+          "output": {
+            "annotations_count": 2,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085276990/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:25Z",
+          "status": "completed"
+        },
+        {
+          "annotations": [
+            {
+              "annotation_level": "failure",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/cc94dafaf39123bb24b8eb2a043168d9255ff92d/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "The job was not started because your account is locked due to a billing issue.",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            },
+            {
+              "annotation_level": "notice",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/cc94dafaf39123bb24b8eb2a043168d9255ff92d/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            }
+          ],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857429234
+          },
+          "completed_at": "2026-10-13T01:31:29Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332531591/job/115085276897",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332531591/job/115085276897",
+          "id": 115085276897,
+          "name": "Analyze (javascript-typescript)",
+          "output": {
+            "annotations_count": 2,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085276897/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:25Z",
+          "status": "completed"
+        },
+        {
+          "annotations": [
+            {
+              "annotation_level": "failure",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/cc94dafaf39123bb24b8eb2a043168d9255ff92d/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "The job was not started because your account is locked due to a billing issue.",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            },
+            {
+              "annotation_level": "notice",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/cc94dafaf39123bb24b8eb2a043168d9255ff92d/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            }
+          ],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857429234
+          },
+          "completed_at": "2026-10-13T01:31:28Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332531591/job/115085276860",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332531591/job/115085276860",
+          "id": 115085276860,
+          "name": "Analyze (rust)",
+          "output": {
+            "annotations_count": 2,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085276860/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:25Z",
+          "status": "completed"
+        },
+        {
+          "annotations": [
+            {
+              "annotation_level": "failure",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/cc94dafaf39123bb24b8eb2a043168d9255ff92d/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "The job was not started because your account is locked due to a billing issue.",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            },
+            {
+              "annotation_level": "notice",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/cc94dafaf39123bb24b8eb2a043168d9255ff92d/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            }
+          ],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103857429234
+          },
+          "completed_at": "2026-10-13T01:31:28Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332531591/job/115085276725",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332531591/job/115085276725",
+          "id": 115085276725,
+          "name": "Analyze (python)",
+          "output": {
+            "annotations_count": 2,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085276725/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T01:31:25Z",
+          "status": "completed"
+        }
+      ],
+      "commit_statuses": [],
+      "head": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+      "role": "actual_merge_head",
+      "workflow_runs": [
+        {
+          "check_suite_id": 103857476632,
+          "conclusion": "skipped",
+          "created_at": "2026-10-13T01:31:37Z",
+          "event": "workflow_run",
+          "head_branch": "main",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332549213",
+          "id": 38332549213,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085331699",
+              "completed_at": "2026-10-13T01:31:38Z",
+              "conclusion": "skipped",
+              "created_at": "2026-10-13T01:31:38Z",
+              "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332549213/job/115085331699",
+              "id": 115085331699,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "autofix-with-copilot-agent",
+              "run_attempt": 1,
+              "run_id": 38332549213,
+              "runner_id": null,
+              "runner_name": null,
+              "started_at": "2026-10-13T01:31:38Z",
+              "status": "completed",
+              "steps": []
+            }
+          ],
+          "name": "Copilot Agent Auto-Healing",
+          "path": ".github/workflows/copilot-agent-autofix.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:37Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:31:38Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332549213"
+        },
+        {
+          "check_suite_id": 103857475683,
+          "conclusion": "skipped",
+          "created_at": "2026-10-13T01:31:37Z",
+          "event": "workflow_run",
+          "head_branch": "main",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332548885",
+          "id": 38332548885,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085356119",
+              "completed_at": "2026-10-13T01:31:38Z",
+              "conclusion": "skipped",
+              "created_at": "2026-10-13T01:31:44Z",
+              "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332548885/job/115085356119",
+              "id": 115085356119,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "autofix-with-copilot-agent",
+              "run_attempt": 1,
+              "run_id": 38332548885,
+              "runner_id": null,
+              "runner_name": null,
+              "started_at": "2026-10-13T01:31:44Z",
+              "status": "completed",
+              "steps": []
+            }
+          ],
+          "name": "Copilot Agent Auto-Healing",
+          "path": ".github/workflows/copilot-agent-autofix.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:37Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:31:38Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332548885"
+        },
+        {
+          "check_suite_id": 103857475995,
+          "conclusion": "skipped",
+          "created_at": "2026-10-13T01:31:37Z",
+          "event": "workflow_run",
+          "head_branch": "main",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332548989",
+          "id": 38332548989,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085363570",
+              "completed_at": "2026-10-13T01:31:38Z",
+              "conclusion": "skipped",
+              "created_at": "2026-10-13T01:31:46Z",
+              "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332548989/job/115085363570",
+              "id": 115085363570,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "autofix-with-copilot-agent",
+              "run_attempt": 1,
+              "run_id": 38332548989,
+              "runner_id": null,
+              "runner_name": null,
+              "started_at": "2026-10-13T01:31:46Z",
+              "status": "completed",
+              "steps": []
+            }
+          ],
+          "name": "Copilot Agent Auto-Healing",
+          "path": ".github/workflows/copilot-agent-autofix.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:37Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:31:38Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332548989"
+        },
+        {
+          "check_suite_id": 103857466081,
+          "conclusion": null,
+          "created_at": "2026-10-13T01:31:34Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332545210",
+          "id": 38332545210,
+          "jobs": [],
+          "name": "Example Cached Workflow",
+          "path": ".github/workflows/example-cached-workflow.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:34Z",
+          "status": "pending",
+          "updated_at": "2026-10-13T01:31:35Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332545210"
+        },
+        {
+          "check_suite_id": 103857466276,
+          "conclusion": null,
+          "created_at": "2026-10-13T01:31:34Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332545296",
+          "id": 38332545296,
+          "jobs": [],
+          "name": "Docker Build and Test",
+          "path": ".github/workflows/docker-ci.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:34Z",
+          "status": "pending",
+          "updated_at": "2026-10-13T01:31:35Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332545296"
+        },
+        {
+          "check_suite_id": 103857466492,
+          "conclusion": null,
+          "created_at": "2026-10-13T01:31:34Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332545374",
+          "id": 38332545374,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085320301",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T01:31:35Z",
+              "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332545374/job/115085320301",
+              "id": 115085320301,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "Build distribution \ud83d\udce6",
+              "run_attempt": 1,
+              "run_id": 38332545374,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T01:31:35Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "Publish Python Package",
+          "path": ".github/workflows/publish_to_pipy.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:34Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T01:31:35Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332545374"
+        },
+        {
+          "check_suite_id": 103857466588,
+          "conclusion": null,
+          "created_at": "2026-10-13T01:31:34Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332545416",
+          "id": 38332545416,
+          "jobs": [],
+          "name": "ARM64 Self-Hosted Runner",
+          "path": ".github/workflows/arm64-runner.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:34Z",
+          "status": "pending",
+          "updated_at": "2026-10-13T01:31:35Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332545416"
+        },
+        {
+          "check_suite_id": 103857467006,
+          "conclusion": null,
+          "created_at": "2026-10-13T01:31:34Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332545585",
+          "id": 38332545585,
+          "jobs": [],
+          "name": "Continuous PR and Issue Queue Management",
+          "path": ".github/workflows/continuous-queue-management.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:34Z",
+          "status": "pending",
+          "updated_at": "2026-10-13T01:31:35Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332545585"
+        },
+        {
+          "check_suite_id": 103857462993,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:31:33Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332544024",
+          "id": 38332544024,
+          "jobs": [],
+          "name": ".github/workflows/runner-validation-unified.yml",
+          "path": ".github/workflows/runner-validation-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:33Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:31:33Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332544024"
+        },
+        {
+          "check_suite_id": 103857457840,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:31:32Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332542020",
+          "id": 38332542020,
+          "jobs": [],
+          "name": ".github/workflows/cli-error-monitoring-unified.yml",
+          "path": ".github/workflows/cli-error-monitoring-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:32Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:31:32Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332542020"
+        },
+        {
+          "check_suite_id": 103857460263,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:31:32Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332542954",
+          "id": 38332542954,
+          "jobs": [],
+          "name": ".github/workflows/pr-progressive-monitor-unified.yml",
+          "path": ".github/workflows/pr-progressive-monitor-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:32Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:31:32Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332542954"
+        },
+        {
+          "check_suite_id": 103857455621,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:31:31Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332541287",
+          "id": 38332541287,
+          "jobs": [],
+          "name": ".github/workflows/graphrag-production-ci.yml",
+          "path": ".github/workflows/graphrag-production-ci.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:31Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:31:31Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332541287"
+        },
+        {
+          "check_suite_id": 103857452698,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:31:30Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332540264",
+          "id": 38332540264,
+          "jobs": [],
+          "name": ".github/workflows/gpu-tests.yml",
+          "path": ".github/workflows/gpu-tests.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:30Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:31:30Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332540264"
+        },
+        {
+          "check_suite_id": 103857449964,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:31:29Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332539282",
+          "id": 38332539282,
+          "jobs": [],
+          "name": ".github/workflows/gpu-tests-gated.yml",
+          "path": ".github/workflows/gpu-tests-gated.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:29Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:31:29Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332539282"
+        },
+        {
+          "check_suite_id": 103857447520,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:31:29Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332538406",
+          "id": 38332538406,
+          "jobs": [],
+          "name": ".github/workflows/pdf_processing_ci.yml",
+          "path": ".github/workflows/pdf_processing_ci.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:29Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:31:29Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332538406"
+        },
+        {
+          "check_suite_id": 103857445070,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:31:28Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332537458",
+          "id": 38332537458,
+          "jobs": [],
+          "name": ".github/workflows/approve-optimization.yml",
+          "path": ".github/workflows/approve-optimization.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:28Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:31:28Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332537458"
+        },
+        {
+          "check_suite_id": 103857443293,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:31:27Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332536798",
+          "id": 38332536798,
+          "jobs": [],
+          "name": ".github/workflows/mcp-tools-monitoring-unified.yml",
+          "path": ".github/workflows/mcp-tools-monitoring-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:27Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:31:27Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332536798"
+        },
+        {
+          "check_suite_id": 103857440976,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:31:27Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332535854",
+          "id": 38332535854,
+          "jobs": [],
+          "name": ".github/workflows/docker-build-test.yml",
+          "path": ".github/workflows/docker-build-test.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:27Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:31:27Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332535854"
+        },
+        {
+          "check_suite_id": 103857436515,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:31:26Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332534180",
+          "id": 38332534180,
+          "jobs": [],
+          "name": ".github/workflows/pr-completion-monitor-unified.yml",
+          "path": ".github/workflows/pr-completion-monitor-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:26Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:31:26Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332534180"
+        },
+        {
+          "check_suite_id": 103857438802,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:31:26Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332535023",
+          "id": 38332535023,
+          "jobs": [],
+          "name": ".github/workflows/pr-draft-creation-unified.yml",
+          "path": ".github/workflows/pr-draft-creation-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:26Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:31:26Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332535023"
+        },
+        {
+          "check_suite_id": 103857434610,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:31:25Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332533565",
+          "id": 38332533565,
+          "jobs": [],
+          "name": ".github/workflows/mcp-integration-tests.yml",
+          "path": ".github/workflows/mcp-integration-tests.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:25Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:31:25Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332533565"
+        },
+        {
+          "check_suite_id": 103857432381,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:31:24Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332532712",
+          "id": 38332532712,
+          "jobs": [],
+          "name": ".github/workflows/legal-v2-reasoner-ci.yml",
+          "path": ".github/workflows/legal-v2-reasoner-ci.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:24Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:31:24Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332532712"
+        },
+        {
+          "check_suite_id": 103857429858,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:31:24Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332531834",
+          "id": 38332531834,
+          "jobs": [],
+          "name": ".github/workflows/javascript-sdk-monitoring-unified.yml",
+          "path": ".github/workflows/javascript-sdk-monitoring-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:24Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:31:24Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332531834"
+        },
+        {
+          "check_suite_id": 103857429234,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T01:31:23Z",
+          "event": "dynamic",
+          "head_branch": "main",
+          "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332531591",
+          "id": 38332531591,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085276725",
+              "completed_at": "2026-10-13T01:31:28Z",
+              "conclusion": "failure",
+              "created_at": "2026-10-13T01:31:25Z",
+              "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332531591/job/115085276725",
+              "id": 115085276725,
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "name": "Analyze (python)",
+              "run_attempt": 1,
+              "run_id": 38332531591,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T01:31:25Z",
+              "status": "completed",
+              "steps": []
+            },
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085276860",
+              "completed_at": "2026-10-13T01:31:28Z",
+              "conclusion": "failure",
+              "created_at": "2026-10-13T01:31:25Z",
+              "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332531591/job/115085276860",
+              "id": 115085276860,
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "name": "Analyze (rust)",
+              "run_attempt": 1,
+              "run_id": 38332531591,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T01:31:25Z",
+              "status": "completed",
+              "steps": []
+            },
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085276897",
+              "completed_at": "2026-10-13T01:31:29Z",
+              "conclusion": "failure",
+              "created_at": "2026-10-13T01:31:25Z",
+              "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332531591/job/115085276897",
+              "id": 115085276897,
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "name": "Analyze (javascript-typescript)",
+              "run_attempt": 1,
+              "run_id": 38332531591,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T01:31:25Z",
+              "status": "completed",
+              "steps": []
+            },
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085276990",
+              "completed_at": "2026-10-13T01:31:29Z",
+              "conclusion": "failure",
+              "created_at": "2026-10-13T01:31:25Z",
+              "head_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38332531591/job/115085276990",
+              "id": 115085276990,
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "name": "Analyze (actions)",
+              "run_attempt": 1,
+              "run_id": 38332531591,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T01:31:25Z",
+              "status": "completed",
+              "steps": []
+            }
+          ],
+          "name": "Push on main",
+          "path": "dynamic/github-code-scanning/codeql",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T01:31:23Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T01:31:30Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332531591"
+        }
+      ]
+    }
+  ],
+  "hosted_success_claimed": false,
+  "independent_git_reviews": {
+    "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/source-commit-independent-review-v01.json": {
+      "bytes": 80110,
+      "path": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/source-commit-independent-review-v01.json",
+      "sha256": "48a9c2c614145d1f81b72e1d6f78f4feaf9c54ecc5b84429e35b4e5f7e13a1f8"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/source-stage-independent-review-v01.json": {
+      "bytes": 105881,
+      "path": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/source-stage-independent-review-v01.json",
+      "sha256": "13d50d6e31212f121e2e310ac68bf35f5d2f03d53e5c4cfbff5dbde134ce7da4"
+    }
+  },
+  "limitations": [
+    "These are point-in-time API observations; pending/queued jobs may change after capture.",
+    "No earlier billing failure is used as current evidence; only annotations captured for these exact heads are summarized.",
+    "Hosted success is not claimed. Workflow failures, queued jobs, skipped checks and workflow-definition errors remain explicit."
+  ],
+  "observed_at_utc": "2026-10-13T01:32:52.292184+00:00",
+  "observer_reruns_or_dispatches": false,
+  "observer_source": {
+    "bytes": 13536,
+    "path": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/observe_split_ci_v02.py",
+    "sha256": "facdbc12bc214149e420d541a658ab6c22916510134acf72ce4612229efdac2c"
+  },
+  "observer_started_runners_or_jobs": false,
+  "opening_pr": {
+    "base": {
+      "ref": "main",
+      "sha": "b95938c2a816075466f8dc84f339cf622414030d"
+    },
+    "draft": false,
+    "head": {
+      "ref": "codex/legal-split-feature-20261013-01",
+      "sha": "64e93527bed84ecadaab70a570d82a177a859967"
+    },
+    "merge_commit_sha": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "merged": true,
+    "merged_at": "2026-10-13T01:31:21Z",
+    "number": 1293,
+    "state": "closed",
+    "url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1293"
+  },
+  "pr_number": 1293,
+  "pr_url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1293",
+  "publication_review": {
+    "bytes": 1399,
+    "path": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/source-publication-v01.json",
+    "sha256": "2d74389ae05cfa7d687290b45e1ef5787b3c64cdc5d0c7815cbbadfa13bd4acb"
+  },
+  "queries": [
+    {
+      "command": [
+        "gh",
+        "pr",
+        "view",
+        "1293",
+        "--repo",
+        "endomorphosis/ipfs_datasets_py",
+        "--json",
+        "number,url,state,headRefOid,headRefName,baseRefName,mergeCommit,mergedAt,isDraft"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:28.356825+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": null,
+      "method": "gh pr view read-only GraphQL",
+      "response_bytes": 347,
+      "response_sha256": "740b1a9b750938bfe16e57499bc7af1ff662a6f6b462f5ee2e60f20d0498ed36",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:27.831303+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/pulls/1293"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:28.920904+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/pulls/1293",
+      "method": "GET",
+      "response_bytes": 19592,
+      "response_sha256": "019855ae05517dfd5929938569063fe0073e7491a2cced242e1744da52d4a506",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:28.356859+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs?head_sha=64e93527bed84ecadaab70a570d82a177a859967&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:29.765233+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs?head_sha=64e93527bed84ecadaab70a570d82a177a859967&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 375867,
+      "response_sha256": "fc5f95a35f12bf3a45bdea4f19409b9dcf928050170e2bcea03fb925f09520bc",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:28.920982+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/commits/64e93527bed84ecadaab70a570d82a177a859967/check-runs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:30.226825+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/commits/64e93527bed84ecadaab70a570d82a177a859967/check-runs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 58810,
+      "response_sha256": "ead6027a8afba50ff4c4952efdd1736d44b58fb350584986a04ac852f6dcace0",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:29.765485+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/commits/64e93527bed84ecadaab70a570d82a177a859967/statuses?per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:30.562729+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/commits/64e93527bed84ecadaab70a570d82a177a859967/statuses?per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 2,
+      "response_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:30.226883+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504445/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:30.862834+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504445/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 965,
+      "response_sha256": "42409ce4007dd3dbaf345daf6a0cb85ed45d73e7e63de0afb0f319a3412cdee5",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:30.562784+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504453/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:31.168753+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504453/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 951,
+      "response_sha256": "45f0f06a443f5f2d77a5cabe80a4cdc706917ef05a350fa13398ba4db8284e1e",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:30.862878+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504474/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:31.468188+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504474/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 958,
+      "response_sha256": "79ff20c56f8f2d7acf0917a0a1aa1701e3b841d2f9b183d304aeb4820e2cc1b2",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:31.168800+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504480/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:31.770615+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504480/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 970,
+      "response_sha256": "8ed50025ff6e8a145038cf184861ea5906946be9d6954f9bb86b845b9b131405",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:31.468234+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504472/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:32.075527+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504472/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 3777,
+      "response_sha256": "ec0c9edfddf94cad44c32a831d6eedd9c8e662438eefb274c906099832ffbb47",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:31.770657+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504488/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:32.434223+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504488/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 953,
+      "response_sha256": "ebf6282a76fa60acb56a73c7154c1af4ceec32021535469271cf8ce75cc04b61",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:32.075578+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504466/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:32.716202+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504466/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 949,
+      "response_sha256": "1b3a307ed3b0c50f9e79212ed05baf81e9b5d056bfa11ca96f51dfe720409b23",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:32.434275+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504543/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:33.005719+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504543/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 958,
+      "response_sha256": "4f4a4a55f6ca44a021c1cbc14841a9ee63c8143b5940c87429e0d8b73caa23f3",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:32.716258+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504551/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:33.315373+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504551/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 993,
+      "response_sha256": "d95a3ddf94a226266945668cefc880a988414df17b3f9845627bd285f4e0881a",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:33.005773+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504523/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:33.635230+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504523/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 957,
+      "response_sha256": "1fdfae9cc4b6cb30afddd703014eea60bfff0ecfe393c72886ddc8f3d6375eb3",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:33.315428+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504514/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:33.940223+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504514/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 943,
+      "response_sha256": "9cdf95e80928797a273219f4219225806bea3b37387676d5f9091fb6da0b79b5",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:33.635286+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504491/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:34.410898+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332504491/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 976,
+      "response_sha256": "95dd4692b3bb309ffc81cb95a5a72e27d5ce5186a754fc981fa130d25cf16ee7",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:33.940277+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332503272/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:35.079540+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332503272/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 3648,
+      "response_sha256": "c0ba0fef818890db331d083f0af89321a767c46623caf9d644805114b8c72d8d",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:34.410947+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332496639/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:35.413183+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332496639/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:35.079598+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332495750/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:35.754528+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332495750/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:35.413247+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332494001/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:36.036066+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332494001/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:35.754582+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332494914/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:36.347051+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332494914/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:36.036109+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332493036/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:36.655190+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332493036/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:36.347109+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332491093/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:36.957373+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332491093/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:36.655237+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332492159/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:37.255272+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332492159/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:36.957430+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332490074/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:37.550100+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332490074/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:37.255325+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332489145/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:37.850645+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332489145/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:37.550155+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332488290/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:38.174646+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332488290/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:37.850704+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332487535/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:38.732039+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332487535/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:38.174694+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332485811/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:39.003774+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332485811/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:38.732101+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332486720/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:39.309957+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332486720/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:39.003829+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332484674/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:39.581472+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332484674/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:39.310011+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332483779/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:39.866451+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332483779/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:39.581526+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/check-runs/115085188261/annotations?per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:40.163303+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085188261/annotations?per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 785,
+      "response_sha256": "a927bdc8ce64ac0d61059ae7cce82cd763bc93c0e6e7f6007aed1629672b9cbe",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:39.866726+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/check-runs/115085188104/annotations?per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:40.656264+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085188104/annotations?per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 785,
+      "response_sha256": "a927bdc8ce64ac0d61059ae7cce82cd763bc93c0e6e7f6007aed1629672b9cbe",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:40.163352+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/check-runs/115085188080/annotations?per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:40.924889+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085188080/annotations?per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 785,
+      "response_sha256": "a927bdc8ce64ac0d61059ae7cce82cd763bc93c0e6e7f6007aed1629672b9cbe",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:40.656304+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/check-runs/115085187936/annotations?per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:41.216236+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085187936/annotations?per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 785,
+      "response_sha256": "a927bdc8ce64ac0d61059ae7cce82cd763bc93c0e6e7f6007aed1629672b9cbe",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:40.924937+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs?head_sha=cc94dafaf39123bb24b8eb2a043168d9255ff92d&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:41.842166+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs?head_sha=cc94dafaf39123bb24b8eb2a043168d9255ff92d&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 323422,
+      "response_sha256": "289a9d1501801f4975f0f06bfd8d21fddca45cef436e3e093e089d81a2584eb4",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:41.216288+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/commits/cc94dafaf39123bb24b8eb2a043168d9255ff92d/check-runs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:42.361853+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/commits/cc94dafaf39123bb24b8eb2a043168d9255ff92d/check-runs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 24913,
+      "response_sha256": "ed4c66c0537df2073818c49225bbacbf360293989d34e3227e4f9c3ddf8ccddc",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:41.842609+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/commits/cc94dafaf39123bb24b8eb2a043168d9255ff92d/statuses?per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:42.660732+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/commits/cc94dafaf39123bb24b8eb2a043168d9255ff92d/statuses?per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 2,
+      "response_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:42.361932+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332549213/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:43.088440+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332549213/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 963,
+      "response_sha256": "886f11558f05c7915b21aafdd9a7dafa740be5ed564bdaea8f81e40a6d23913c",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:42.660793+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332548885/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:43.371636+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332548885/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 963,
+      "response_sha256": "eafe90f6de0b8af14da814821516dd987c156c40a629f015b3276595c6151109",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:43.088486+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332548989/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:43.671352+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332548989/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 963,
+      "response_sha256": "b03465064afe70bab77a45fe4256aa147dc65f03407b7f06224189c4cbbb136c",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:43.371697+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332545210/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:44.007652+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332545210/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:43.671419+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332545296/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:44.269525+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332545296/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:44.007713+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332545374/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:44.561340+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332545374/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 920,
+      "response_sha256": "d3c6eb65fe6780acde6031a4ff2e1661282c483d752acf456650fe2531ed207a",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:44.269576+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332545416/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:44.841265+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332545416/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:44.561401+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332545585/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:45.124014+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332545585/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:44.841330+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332544024/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:45.526639+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332544024/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:45.124067+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332542020/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:45.849723+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332542020/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:45.526696+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332542954/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:46.226427+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332542954/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:45.849781+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332541287/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:46.518942+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332541287/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:46.226483+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332540264/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:46.816887+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332540264/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:46.518991+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332539282/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:47.128195+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332539282/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:46.816946+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332538406/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:47.417433+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332538406/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:47.128248+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332537458/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:47.744760+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332537458/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:47.417489+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332536798/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:48.109252+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332536798/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:47.744817+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332535854/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:48.438604+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332535854/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:48.109306+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332534180/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:48.715353+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332534180/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:48.438661+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332535023/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:48.990075+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332535023/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:48.715414+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332533565/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:49.294685+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332533565/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:48.990120+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332532712/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:49.599528+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332532712/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:49.294746+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332531834/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:49.886608+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332531834/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:49.599588+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38332531591/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:50.719423+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38332531591/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 3604,
+      "response_sha256": "29709c4ecde8ca2798462d0d56a6c91230f66cc3221af5059c1143d0e31efca3",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:49.886651+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/check-runs/115085276990/annotations?per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:51.016313+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085276990/annotations?per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 785,
+      "response_sha256": "907e5a9eaf3b84d4bd3238715a28875beedc77ea0dea6b8ea64f71deee7c141b",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:50.719494+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/check-runs/115085276897/annotations?per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:51.278797+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085276897/annotations?per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 785,
+      "response_sha256": "907e5a9eaf3b84d4bd3238715a28875beedc77ea0dea6b8ea64f71deee7c141b",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:51.016354+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/check-runs/115085276860/annotations?per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:51.519160+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085276860/annotations?per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 785,
+      "response_sha256": "907e5a9eaf3b84d4bd3238715a28875beedc77ea0dea6b8ea64f71deee7c141b",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:51.278833+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/check-runs/115085276725/annotations?per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:51.808616+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115085276725/annotations?per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 785,
+      "response_sha256": "907e5a9eaf3b84d4bd3238715a28875beedc77ea0dea6b8ea64f71deee7c141b",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:51.519210+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/pulls/1293"
+      ],
+      "completed_at_utc": "2026-10-13T01:32:52.292008+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/pulls/1293",
+      "method": "GET",
+      "response_bytes": 19592,
+      "response_sha256": "019855ae05517dfd5929938569063fe0073e7491a2cced242e1744da52d4a506",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T01:32:51.808640+00:00"
+    }
+  ],
+  "repository": "endomorphosis/ipfs_datasets_py",
+  "schema": "split-feature-source-hosted-ci-observation/v1",
+  "scope": "Current finite exact-head metadata for the actual contribution and observed PR merge heads, with matching run IDs/jobs/checks and captured annotations; local tests and training are separate.",
+  "summary": {
+    "check_conclusion_counts": {
+      "None": 16,
+      "failure": 8,
+      "skipped": 3
+    },
+    "check_count": 27,
+    "check_status_counts": {
+      "completed": 11,
+      "queued": 16
+    },
+    "current_captured_billing_block_annotations": 8,
+    "distinct_current_billing_messages": [
+      "The job was not started because your account is locked due to a billing issue."
+    ],
+    "workflow_conclusion_counts": {
+      "None": 17,
+      "failure": 32,
+      "skipped": 3
+    },
+    "workflow_run_count": 52,
+    "workflow_status_counts": {
+      "completed": 35,
+      "pending": 4,
+      "queued": 13
+    }
+  }
+}

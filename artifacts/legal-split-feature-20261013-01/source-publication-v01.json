@@ -1,0 +1,38 @@
+{
+  "actual_first_parent": "b95938c2a816075466f8dc84f339cf622414030d",
+  "actual_merge": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+  "branch_retained": true,
+  "canonical_checkout_performed": false,
+  "commit_review": {
+    "bytes": 80110,
+    "path": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/source-commit-independent-review-v01.json",
+    "sha256": "48a9c2c614145d1f81b72e1d6f78f4feaf9c54ecc5b84429e35b4e5f7e13a1f8"
+  },
+  "contribution_head": "64e93527bed84ecadaab70a570d82a177a859967",
+  "findings": [],
+  "merge_parents": [
+    "b95938c2a816075466f8dc84f339cf622414030d",
+    "64e93527bed84ecadaab70a570d82a177a859967"
+  ],
+  "observed_fetched_main": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+  "passed": true,
+  "pr": {
+    "baseRefName": "main",
+    "headRefName": "codex/legal-split-feature-20261013-01",
+    "headRefOid": "64e93527bed84ecadaab70a570d82a177a859967",
+    "isDraft": false,
+    "mergeCommit": {
+      "oid": "cc94dafaf39123bb24b8eb2a043168d9255ff92d"
+    },
+    "mergedAt": "2026-10-13T01:31:21Z",
+    "number": 1293,
+    "state": "MERGED",
+    "url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1293"
+  },
+  "pr_response": {
+    "bytes": 347,
+    "sha256": "740b1a9b750938bfe16e57499bc7af1ff662a6f6b462f5ee2e60f20d0498ed36"
+  },
+  "repository": "endomorphosis/ipfs_datasets_py",
+  "schema": "split-feature-source-publication/v1"
+}

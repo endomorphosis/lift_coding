@@ -1,0 +1,380 @@
+{
+  "all_other_whitespace_check_passed": true,
+  "base": "b95938c2a816075466f8dc84f339cf622414030d",
+  "branch": "codex/legal-split-feature-20261013-01",
+  "bytes": 5225701,
+  "copy_manifest": {
+    "bytes": 62294,
+    "path": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/source-contribution-copy-manifest-v01.json",
+    "sha256": "e2cdf077a9fdf36b42d65c2a1e23a33df3d150484631a3a568a1fe08a13afa24"
+  },
+  "default_whitespace_check": {
+    "observation": "workspace/test-logs/legal-split-feature-20261013-01/independent_split_result_review_v03.py:505: new blank line at EOF.\n",
+    "returncode": 2
+  },
+  "files": 51,
+  "findings": [],
+  "objects": {
+    "docs/autoencoders/legal_split_feature_training_20261013_v02.md": {
+      "bytes": 4627,
+      "mode": "100644",
+      "object": "29336e489aceeea4da8375ed3a0b750e4c79da5b",
+      "sha256": "62f90e2926cdae086c76578ac2ee0b6150dd0f167c77826c550872da6dbbb639",
+      "type": "blob"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_split_features.py": {
+      "bytes": 52067,
+      "mode": "100644",
+      "object": "b041195072f94cd75031ef729300b7c34d8e36f4",
+      "sha256": "886a0cde9924dceb5f5a4b655a995eb60a8f3fb954408d991fe4b4eb23ade0cd",
+      "type": "blob"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_split_features_contracts.py": {
+      "bytes": 20011,
+      "mode": "100644",
+      "object": "b33087a4e16798b5896cbcdcaf604d1679d1b7ea",
+      "sha256": "a66720be2df8fa991cfe2d1690115bad2a4b5d814ca818e9f295ea7bcf4988f0",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/analyze_saved_score_hybrid_v02.py": {
+      "bytes": 34453,
+      "mode": "100644",
+      "object": "9e57e78a6547fa99a340da1ca9a2b6db0f752570",
+      "sha256": "bb1cf7a857e6aff04bfb1567256689257956f7c597201d570820d278e0a724a4",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/analyze_split_feature_results_v04.py": {
+      "bytes": 75056,
+      "mode": "100644",
+      "object": "712712eebe2dec59b34a5df99a0b1e4793097387",
+      "sha256": "64214a1983af4057da658b7339afb55c4ce5562ff4b517f3d74547939c283306",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/audit_split_terminal_v01.py": {
+      "bytes": 84271,
+      "mode": "100644",
+      "object": "6cb112c58ee82fed97f301dfb01da177edea51fc",
+      "sha256": "ecbc5b7e5590873b88279dd573ce15ad397460c9d785003f518863b19138a1fe",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/bootstrap_inert.py": {
+      "bytes": 1208,
+      "mode": "100644",
+      "object": "26ec4cbd6b5290e1f36201781854928e52d42006",
+      "sha256": "030ac4f55adf5bf305bab0fcef9e33daa27c8fd083ddd474eac623e754246da1",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/capture_split_terminal_v01.py": {
+      "bytes": 2735,
+      "mode": "100644",
+      "object": "b3ad918f7a095bf5947ceb16cb7cb388dfd6c9f9",
+      "sha256": "2b02d8333d52beeb7a9c0a0c095a58688a177eaa5e1a58391c39a6bff08b9803",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/cell-review-helper-independent-review-v02.json": {
+      "bytes": 2291,
+      "mode": "100644",
+      "object": "09d202e6e3818f36d4b491bba803102db2845096",
+      "sha256": "a397cfdd9bc8ea84bf77fa14c1949073403149282ec274d398f4f7c38c7e3b94",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/combined-pure-tests-observation-v01.json": {
+      "bytes": 3151,
+      "mode": "100644",
+      "object": "1c46cd6a24e9dc3323c07f5c7a0f0f54f8df7458",
+      "sha256": "d4a60976f12548f34777eaa32c289756e06176e9f80ac996fe896982f3979c77",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/combined-pure-tests-v01.log": {
+      "bytes": 635,
+      "mode": "100644",
+      "object": "a4f342e931a43e741e16af84aaaf5ee6f642fe8e",
+      "sha256": "740d2a752a6a68103aa2634a5114bd21353d5622411da303c0a1e1e111d08015",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/combined-pure-tests-v01.xml": {
+      "bytes": 25026,
+      "mode": "100644",
+      "object": "ac71ff6e6d9c2a20ae7da9472bb935588b53fbce",
+      "sha256": "c7ccde722ca625060d56b3c2e37456764be6ca8aa7e6cedd00705041e396c8de",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/experiment-design-v01.json": {
+      "bytes": 3794,
+      "mode": "100644",
+      "object": "71bc8faf06a1f5036933d2347f9c1394f7dc0e6c",
+      "sha256": "d4185fe7e02df4bc8629c536bf27c8be375b1609fc871276d68a0a7e662ffc50",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/freeze_split_outputs_v02.py": {
+      "bytes": 5841,
+      "mode": "100644",
+      "object": "d1bc57c681e59ca48a7184962fb809880a13bbc1",
+      "sha256": "cd9fcaf43603dc182a7f89a9660d2a53b6b749f4286c45e0a6884166e23ea3ce",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/git-opening-preservation-independent-review-v01.json": {
+      "bytes": 117137,
+      "mode": "100644",
+      "object": "5961017da30151ec45032b50d292ee717a956a66",
+      "sha256": "55cb7975979ff3c11f4bcbf1fdd1b4dca72296cd1f61b104f091d7ffdbb69a0d",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/hf-actual-observer-source-independent-review-v01.json": {
+      "bytes": 2084,
+      "mode": "100644",
+      "object": "d71bd0ba9b56838aae5665d78712033e020002be",
+      "sha256": "e55b1a68809a91b332161a1a4819be9c5175e4b76314818e4da18db34ef49999",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/hf-actual-publication-independent-review-v01.json": {
+      "bytes": 191754,
+      "mode": "100644",
+      "object": "71388cab7305161bd7410e2e6464392767353614",
+      "sha256": "885c366d78e9549f899f9cec037109da9a369d65b04dc339de694dfb97c63b3e",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/hf-helper-source-independent-review-v02.json": {
+      "bytes": 16152,
+      "mode": "100644",
+      "object": "c7de9249755e021a69b82108ac8ebb51ff8f0b18",
+      "sha256": "aecdc13454862a556d5607e39b610ef4d2813a9e48b5617d12b8145de328bc54",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/hf-payload-observer-source-independent-review-v01.json": {
+      "bytes": 1560,
+      "mode": "100644",
+      "object": "95f0923dc8fbcf9fe5841d5b3deefa75da6d15e5",
+      "sha256": "413cdc12a0ee7476040bd89c1c7fbf9fbe3a10de362db713572e79eefbca5697",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/hf-preparation-refusal-v01.json": {
+      "bytes": 3460,
+      "mode": "100644",
+      "object": "cf4f69b395d0b9f766b474a74fee551b5caa6e27",
+      "sha256": "6ec4651d9e12d21c878f0f0c2bff39d92b457817f57c08abafa3482f5d517ab8",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/hf-publication-independent-review-v01.json": {
+      "bytes": 168003,
+      "mode": "100644",
+      "object": "0137408ac83f19d67a1be38f1dc680fe04d6ca24",
+      "sha256": "f2fccde5f4e522ef35e629d98336d7f241142e7c1e03d6828ab5993d3bfd2e51",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/hf-publication-verification-v01.json": {
+      "bytes": 42488,
+      "mode": "100644",
+      "object": "359ed195984532045a34e29a48dca56a6551dd5f",
+      "sha256": "c01e9dd171c44d72d701f25ff0e707cb8384da58d1155e392033c50c14d10e25",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/independent_split_result_review_v03.py": {
+      "bytes": 39653,
+      "mode": "100644",
+      "object": "4846a7b3173f25c24922ae3963e4f719ad8eafa2",
+      "sha256": "ac6b30f3c61596f7e662b63f8aeea50fa938a4a7a72a9047ecee6e246ad2b9a7",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/model-card-gap-independent-review-v01.json": {
+      "bytes": 5112,
+      "mode": "100644",
+      "object": "5c252b9e2e78785eec770ebe5b5874590fe3f97d",
+      "sha256": "76b93e5b6740daca9656131cdccbe679b1ce886a43254816ddbd5d3c316374eb",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/prepare_hf_split_feature_release_v04.py": {
+      "bytes": 20415,
+      "mode": "100644",
+      "object": "910c9e4683e020da18ca50c2049a0dc7da804a5a",
+      "sha256": "22f569d15f4c8005aa4a340c1632b8f3c5f2e76b1942e2f0853422f149d62377",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/prepare_split_features.py": {
+      "bytes": 11887,
+      "mode": "100644",
+      "object": "576e17fbd485e87ed70f468e5059975394e3f119",
+      "sha256": "52e589dfe1a63b6310f54abc1b4cc511cf8fcc0e75a5be0242820bfc99255d3b",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/publish_hf_split_feature_release_v04.py": {
+      "bytes": 17268,
+      "mode": "100644",
+      "object": "03c07ebfc047c7ea0be65bcb1df04d4b92aadd52",
+      "sha256": "5e4ccb14bbd8a3f37fc2a7baea4d66798247d2154fa5936f147d35e19cb2852e",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/registration-v01.json": {
+      "bytes": 78040,
+      "mode": "100644",
+      "object": "d4dd40719d5e7edcbcf96e76c70abfed2b58e078",
+      "sha256": "dd61fa85c1b6f74ae6680e202a7f93715a30e8f92e4275d053ef95c1d6821c47",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/result-independent-review-v01.json": {
+      "bytes": 515593,
+      "mode": "100644",
+      "object": "a302d8a9da8b6111af0cbfe655b6fa9978d68995",
+      "sha256": "fb87afc1f852015c4ab28fd48f6322c49c8aba693ee0e2bef36a89d90a1a8e37",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/result-observer-source-independent-review-v01.json": {
+      "bytes": 2613,
+      "mode": "100644",
+      "object": "281c024dd39b47707b165d4c91d725a39c341080",
+      "sha256": "6651c4ce5a2ef5deadb886ee4ab347dc906f372b6a3dd24e4e08944c4cfd7ea5",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/review_hf_split_actual_v01.py": {
+      "bytes": 22024,
+      "mode": "100644",
+      "object": "00079e1effd1994aea0de77673130e040e8f4bab",
+      "sha256": "a6b1fd86bbd641afda3812b3bc4214202cfc940ce2d2d6ff8bc8fdbc712ac813",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/review_hf_split_payload_v01.py": {
+      "bytes": 23554,
+      "mode": "100644",
+      "object": "afa21b31700ac94fdc2bc5179b6ae3ea4f07be38",
+      "sha256": "fef225eade0d15fddb209b6b2fbed9a024077996f5f9d9ece72b8c000a342e76",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/review_split_cell_v03.py": {
+      "bytes": 25548,
+      "mode": "100644",
+      "object": "e52b7c0b8c63cbdc0805faa3ff865817d8205bbc",
+      "sha256": "71fd7b3f416029cc0d8622a28686780ee3e59e0696ffb5beb795833782210090",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/root-science-source-independent-review-v01.json": {
+      "bytes": 4600,
+      "mode": "100644",
+      "object": "779b91bb5f1188f17f3d15d42a75327e88ff66a9",
+      "sha256": "b4da413e726b42270d1dee025c5be9fed65c9c8d57d91f55af12fbaa970d3ab9",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/run_inert_tests.py": {
+      "bytes": 4569,
+      "mode": "100644",
+      "object": "0caf57d000b76c3d0d084c806fd7cb7af1cbf89d",
+      "sha256": "024475419c8c632510d0560ddbbb659b616f13bb55e1e991bea7a61b603a4c30",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/run_scope_guardian.py": {
+      "bytes": 38281,
+      "mode": "100644",
+      "object": "0e50d33d05c35a6d2c3f4bbf301b2cddc3802a8a",
+      "sha256": "10c7c7350a7dbb564ab0fb1299c905020f874c212765afb86d3c1752105184ed",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/run_split_features.py": {
+      "bytes": 38053,
+      "mode": "100644",
+      "object": "597e1369f9004fe3e64c305c1ca8dbb3e0c79438",
+      "sha256": "abedfe1505c3c554deac3b79d6516062a0d8b4589510522f812ebee07ce2d19a",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/runtime-independent-review-v01.json": {
+      "bytes": 92760,
+      "mode": "100644",
+      "object": "c6a2235b39bbb041bd4d7b770aa24a61fc061e9b",
+      "sha256": "455b0962c661d38c53ef6866940a9633d2aafdc6e6e9ef23da0cf2dc454b85f7",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/saved-score-hybrid-source-independent-review-v02.json": {
+      "bytes": 3464,
+      "mode": "100644",
+      "object": "833f91a6ab33a9fcd55844d76b994641e55f189a",
+      "sha256": "b06f1914c11589395f92ba8a6934d397696db6f1f5c0d787ec254c2164da2032",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/source-contribution-copy-manifest-v01.json": {
+      "bytes": 62294,
+      "mode": "100644",
+      "object": "840da6729636cb543b284eda8102ed939b0e63d9",
+      "sha256": "e2cdf077a9fdf36b42d65c2a1e23a33df3d150484631a3a568a1fe08a13afa24",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/split-feature-analyzer-source-independent-review-v02.json": {
+      "bytes": 13205,
+      "mode": "100644",
+      "object": "4b430715c20492b6f47e3f758bc704c4bea9a2fb",
+      "sha256": "88d16d9d3aae166d80fcee563aa669bff6c9b7f9cd30140f5ffa2a2017dc8f16",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/split-feature-evaluation-contract-v01.json": {
+      "bytes": 9047,
+      "mode": "100644",
+      "object": "5bcb51b48add304e746518fc256482c392c6d0b3",
+      "sha256": "2e9f213f87fd755b3bb22658e08516b12f8e43a0c5b42e5c345dacdd1a8559c0",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/split-feature-gaps-v01.md": {
+      "bytes": 5893,
+      "mode": "100644",
+      "object": "262a41387bdda05f14a61bbfa7a7faac69c65677",
+      "sha256": "e277e134da68e0ea2d295fb3d7d497baaa1a5d87fd740c6952ca52d53fb6acdd",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/split-feature-model-card-v01.md": {
+      "bytes": 5955,
+      "mode": "100644",
+      "object": "07aea76fc87d4a4ccbff8298b33595858d67fdb9",
+      "sha256": "c43f1924f327e6cd95bcbd1ef6923ea91bfa704788dd35f512c7e452bd007c4a",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/split-feature-output-freeze-v01.json": {
+      "bytes": 20150,
+      "mode": "100644",
+      "object": "f004a21a00849bf665145dc1f390bb2b9f670cde",
+      "sha256": "bcefd26d2b7ec9d96fd28d46ee3b6e69728d49a4cf13ababe50036a1d648c33b",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/split-feature-result-analysis-v01.json": {
+      "bytes": 3104129,
+      "mode": "100644",
+      "object": "b7e4012e8411fe25dd940797724021f8de002278",
+      "sha256": "5231142d39114f032f06ab17d1ebdbf9735601ab173c5b70220758dbebd076d3",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/split-feature-terminal-audit-v01.json": {
+      "bytes": 33171,
+      "mode": "100644",
+      "object": "b76d527d44a10ce60f5d9a984b387285944dca84",
+      "sha256": "f74c6fbd3fcc74e71ded9c0e9dbfa3f221675e30f5a9445cb06e1dbe70ea7eef",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/split-features-training-protocol-independent-review-v01.json": {
+      "bytes": 158972,
+      "mode": "100644",
+      "object": "5bec0a9b0f5407bfb738aba5b2f1f97038a0d76d",
+      "sha256": "8ef9a3a011f7a242318cab40691f281e6c094ba3a4d3faed1127ed2110a075e7",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/terminal-auditor-source-independent-review-v01.json": {
+      "bytes": 1776,
+      "mode": "100644",
+      "object": "12a2eb32f527ed76f528b017ce5950ccf0185418",
+      "sha256": "4c9734cd64cb7a6e9ef118d4e71516a1ca06f2a1ecd589f2f01151941cb8b1a3",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/terminal-copy-freeze-source-independent-review-v02.json": {
+      "bytes": 4970,
+      "mode": "100644",
+      "object": "ab417b125ae33e7202ef7a5cda81af48953cdd37",
+      "sha256": "2c1caba2c13c6c71eb9009eee1b66f996763ea57f950b40b7b7dac4a0ff09489",
+      "type": "blob"
+    },
+    "workspace/test-logs/legal-split-feature-20261013-01/trainer-source-independent-review-v01.json": {
+      "bytes": 4901,
+      "mode": "100644",
+      "object": "07d25f9c30d7d1623ee238ad2ea854e59b500a85",
+      "sha256": "a3af6e3a87cb5a6741d8538fbeabe0575d277d6ce54126b5f9e18ea5cb52cf62",
+      "type": "blob"
+    }
+  },
+  "passed": true,
+  "qualified_artifact_byte_preservation_exception": "One extra EOF blank line in frozen observer recipe retained byte-for-byte",
+  "schema": "split-feature-source-staged-object-map/v1",
+  "worktree": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets"
+}
