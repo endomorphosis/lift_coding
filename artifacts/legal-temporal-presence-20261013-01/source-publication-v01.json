@@ -1,0 +1,96 @@
+{
+  "actual_parents": [
+    "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+    "eec41e0d6af448250b6e24f1f0fc1deb5967b264"
+  ],
+  "all12_objects_exact": true,
+  "approved_stage": {
+    "base": "cc94dafaf39123bb24b8eb2a043168d9255ff92d",
+    "blob_bytes": 628534,
+    "objects": [
+      {
+        "bytes": 21835,
+        "git_oid": "90f1d2a38d5c7dfb4dd2293c3fa918fc9b543cb2",
+        "path": "docs/autoencoders/evidence/temporal-presence-routing-20261013/analyze_presence_routing.py",
+        "sha256": "9a6cfdecafa3f4df584e8f80ed04045ccd8c3718bc66ebc9f42010f37329480e"
+      },
+      {
+        "bytes": 18203,
+        "git_oid": "70eeff09fbb92cc57b330c3272a5ec239bb142e3",
+        "path": "docs/autoencoders/evidence/temporal-presence-routing-20261013/code-and-plan-independent-review-v01.json",
+        "sha256": "cc6c8728020b58d46c07d46e766b2fb951d7a63f5f72838001df6a15f95f10e6"
+      },
+      {
+        "bytes": 2306,
+        "git_oid": "a5dff82dd4ec4790f0ecaf4b0bda729a4b76666d",
+        "path": "docs/autoencoders/evidence/temporal-presence-routing-20261013/diagnostic-plan-v01.json",
+        "sha256": "b870c9aa48354c9b71b2f98eb051a1ce5ed5c3116b7ad3be7b38c207557c07a1"
+      },
+      {
+        "bytes": 1612,
+        "git_oid": "544e06b30efc148fdc5bac0b6a5bf79ee94ce13f",
+        "path": "docs/autoencoders/evidence/temporal-presence-routing-20261013/evidence-copy-manifest-v01.json",
+        "sha256": "608f68453fe06e0e092076002184e30adb215107856faeaf020668bb3d919bf0"
+      },
+      {
+        "bytes": 102106,
+        "git_oid": "0bd432fdffb58af8ab505903586acaba6c4e2453",
+        "path": "docs/autoencoders/evidence/temporal-presence-routing-20261013/presence-routing-independent-review-v01.json",
+        "sha256": "6d05160aa9cc3ab19fd49a22ea91fb5f94f89ec6117a3685731ee33bdea4bf66"
+      },
+      {
+        "bytes": 427659,
+        "git_oid": "e192a7436ecb8f5061c30ced744b7bfc92836c78",
+        "path": "docs/autoencoders/evidence/temporal-presence-routing-20261013/presence-routing-summary-v01.json",
+        "sha256": "20ad1a1ff78e0146085c1273548a94d480e3e337ecb97b560c6ebf3c7cbdf852"
+      },
+      {
+        "bytes": 16524,
+        "git_oid": "79c1dcb4facd68f3cf1bfb4c1009f14f73477556",
+        "path": "docs/autoencoders/evidence/temporal-presence-routing-20261013/review_presence_code_and_plan_v01.py",
+        "sha256": "608375d3fafcc47d87435429faa95189db47a80d5008e4d49ac0ec60f224dede"
+      },
+      {
+        "bytes": 10585,
+        "git_oid": "7735e27ba89c9ba525c166d7719b2fdf44bea9cf",
+        "path": "docs/autoencoders/evidence/temporal-presence-routing-20261013/temporal-presence-training-proposal-v02.md",
+        "sha256": "138b962c85519be7a9a364a2e2ac3d9ce01d04fdfc571f1b2dc3fa81ca1adce8"
+      },
+      {
+        "bytes": 2456,
+        "git_oid": "5a3b2a6b0ddb0bd8b105a54384904a1d2da17883",
+        "path": "docs/autoencoders/evidence/temporal-presence-routing-20261013/test-observation-v01.json",
+        "sha256": "473d090b4ea86bd459b9df1ea0575180ae07ad6d3686250e4a319ac49e6fc11d"
+      },
+      {
+        "bytes": 4432,
+        "git_oid": "d4220c4faf586df9c8a907b1bf7537f666442bc7",
+        "path": "docs/autoencoders/legal_temporal_presence_routing_20261013.md",
+        "sha256": "49f4f31a10937deadcaf06885dc1837f3c58ece8d3656764e7538df78fe1d6c1"
+      },
+      {
+        "bytes": 5564,
+        "git_oid": "af4c44e50a021dc31324929f78c6e0e0c098f4e9",
+        "path": "ipfs_datasets_py/logic/legal_ir/presence_routing.py",
+        "sha256": "e443aa7e960f70da75665a08b7f699cf41828e35e6274e2bb5b62203865f2297"
+      },
+      {
+        "bytes": 15252,
+        "git_oid": "d60bcfe7f1b2b841793eef76f6ff38c20fb7e09f",
+        "path": "tests/unit/logic/legal_ir/test_presence_routing.py",
+        "sha256": "7141544d69df89d275e4a98e2e48d049c139554061bd5f0869ced321982b0f4c"
+      }
+    ],
+    "only_new_paths": true,
+    "path_count": 12,
+    "schema": "legal-temporal-presence-source-stage/v1",
+    "whitespace_check_passed": true
+  },
+  "every_nonowned_first_parent_path_preserved": true,
+  "head": "eec41e0d6af448250b6e24f1f0fc1deb5967b264",
+  "merge": "5723a541c5d575b88f01532e4d241dc95a1f3e99",
+  "schema": "legal-temporal-presence-source-publication/v1",
+  "source_pr": 1294,
+  "state": "MERGED",
+  "url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1294"
+}
