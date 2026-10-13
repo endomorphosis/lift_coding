@@ -1,0 +1,48 @@
+{
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/contribution_helpers_author_controls_v02.py": {
+      "bytes": 19434,
+      "sha256": "fcc6e70f9320edb76d2ee682ea20fce75540f5938e96c88db7ba9cc736943f0f"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/prepare_root_contribution_v02.py": {
+      "bytes": 6063,
+      "sha256": "e2e6428d9ae1d3151de0d96e251027f4fea54146af82526aa8d23cdbdbde3ea3"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/prepare_source_contribution_v02.py": {
+      "bytes": 8765,
+      "sha256": "1ba871181680b9afc15e21cc69f8d2a61b795c0709449950cb9e0ae64b2ee806"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/record_closed_stage.py": {
+      "bytes": 5295,
+      "sha256": "e2a5488917735341626a208d474503c2cd9c97ce3e233caf60e679812e41a0d7"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/record_merged_publication.py": {
+      "bytes": 6382,
+      "sha256": "c19ee8109284c177ccb48938a507e2384ad71c149645a6d15388f5171659269a"
+    }
+  },
+  "findings": [],
+  "independent_detached_checks": [
+    "prepare_source_contribution_v02.py: valid finite unique metadata",
+    "prepare_source_contribution_v02.py: refused {\"a\":1,\"a\":2}",
+    "prepare_source_contribution_v02.py: refused {\"x\":NaN}",
+    "prepare_source_contribution_v02.py: refused {\"x\":1e999}",
+    "prepare_source_contribution_v02.py: refused repeated stable replacement",
+    "prepare_root_contribution_v02.py: valid finite unique metadata",
+    "prepare_root_contribution_v02.py: refused {\"a\":1,\"a\":2}",
+    "prepare_root_contribution_v02.py: refused {\"x\":NaN}",
+    "prepare_root_contribution_v02.py: refused {\"x\":1e999}",
+    "prepare_root_contribution_v02.py: refused repeated stable replacement"
+  ],
+  "passed": true,
+  "reviewer": "/root",
+  "schema": "permission-retention-source-contribution-helper-independent-review/v1",
+  "scope": "Source and detached read controls only; no actual preparation or Git mutation executed by this review.",
+  "source_review": [
+    "Read both v02 preparation helpers in full and the unchanged stage/actual-merge observers.",
+    "Metadata is parsed from captured bytes; the source actual review, preparation receipt and immutable verification are joined to approved pins.",
+    "Every copied source is read as exact approved bytes. Every parsed and approved artifact is fenced before exclusive map receipts.",
+    "Root auxiliary review bytes must equal the copied identities and all parsed inputs are fenced.",
+    "No model parsing, shared ledger mutation or canonical index refresh; later stage/commit/merge observations remain mandatory."
+  ]
+}

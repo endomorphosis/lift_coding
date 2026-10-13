@@ -1,0 +1,41 @@
+{
+  "Git_mutations_by_review": false,
+  "actual_preparation_executed": false,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/contribution_helpers_author_controls_v01.py": {
+      "bytes": 13669,
+      "sha256": "6f2b5120f251b927d6ca7ecd360e476362e00fd35ea729df689fd22f047d6635"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/prepare_root_contribution_v01.py": {
+      "bytes": 5589,
+      "sha256": "abcd496f01e57907df9bddd483cf5d5d5208777072f101ed614ae8c4b70ea6f4"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/prepare_source_contribution_v01.py": {
+      "bytes": 8055,
+      "sha256": "43bdf5bc2c4209a1dba84bd21c81c3ff34189649a1f83a6cf164f46e766e60ec"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/record_closed_stage.py": {
+      "bytes": 5295,
+      "sha256": "e2a5488917735341626a208d474503c2cd9c97ce3e233caf60e679812e41a0d7"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/record_merged_publication.py": {
+      "bytes": 6382,
+      "sha256": "c19ee8109284c177ccb48938a507e2384ad71c149645a6d15388f5171659269a"
+    }
+  },
+  "checkpoint_JSON_parses": 0,
+  "findings": [],
+  "numerical_imports": 0,
+  "passed": true,
+  "resource_API_calls": 0,
+  "reviewer": "root independent of helper author",
+  "schema": "permission-retention-merged-publication-helper-independent-review/v1",
+  "scope": "Finite stage and actual ordinary two-parent merge observations use exact bytes/object IDs, closing staged-table/HEAD/map checks and all nine root pointers. No staging, committing or merging.",
+  "source_findings": [
+    "Metadata readers bind exact raw bytes to stable opening pins and reject duplicate/nonfinite JSON.",
+    "Copy operations use exclusive new targets and verify raw copied bytes against approved records, with closing source fences.",
+    "Source reuse is restricted to exact existing owned source/test/gap files. No canonical checkout/index operations, resource APIs or model state parsing.",
+    "Stage observer checks the complete staged changed-path set and each blob/gitlink against the finite expected map; actual merge observer checks exact PR head and first-parent closed changes, preserving every nonowned object.",
+    "Author pure controls9positive34negative support boundary behavior; actual prepared copies, stages and merges still require independent concrete verification."
+  ]
+}
