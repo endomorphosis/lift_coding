@@ -1,0 +1,131 @@
+{
+  "accelerator_publication": "f7cf87104e079d1159226c137449e29bf98bfd40",
+  "billing_lock_observed": true,
+  "checked_at_utc": "2026-10-13T09:37:11.014958+00:00",
+  "checker": {
+    "api": "check_file(path, check_anchors=True)",
+    "path": "/home/barberb/lift_coding/.worktrees/token-selector-accelerate-20261011/scripts/docs/check_current_docs_links.py",
+    "root_override": "/home/barberb/lift_coding/.worktrees/header-proof-key-custody-root-20261011",
+    "sha256": "596a0038b18d592f2e605643890afc85e457558f7b887932a474557d7586819e"
+  },
+  "dependencies": [
+    {
+      "head": "f7cf87104e079d1159226c137449e29bf98bfd40",
+      "observed_origin_main": "f7cf87104e079d1159226c137449e29bf98bfd40",
+      "path": "/home/barberb/lift_coding/.worktrees/token-selector-accelerate-20261011",
+      "published_ancestor": true
+    },
+    {
+      "head": "28b9ef1f0b9da51e87b1e68ee565b43681397109",
+      "observed_origin_main": "28b9ef1f0b9da51e87b1e68ee565b43681397109",
+      "path": "/home/barberb/lift_coding/.worktrees/repository-source-scope-datasets-20261013",
+      "published_ancestor": true
+    },
+    {
+      "head": "8ac00bb1974b1378e12091d546d8425af34049e0",
+      "observed_origin_main": "8ac00bb1974b1378e12091d546d8425af34049e0",
+      "path": "/home/barberb/lift_coding/.worktrees/publication-main-20261004/kit",
+      "published_ancestor": true
+    }
+  ],
+  "hosted_steps_executed": false,
+  "local_doc_anchors": 6,
+  "local_doc_gates_on_qualified_leaf": 4,
+  "local_doc_relative_links": 66,
+  "model_provider_solver_docker_calls": 0,
+  "parent_base": "c65c4001e558e183a82c8d659abaec0cb1c67d16",
+  "published_child_objects": [
+    {
+      "bytes": 7772,
+      "fragment": "nominate-an-explicit-subset",
+      "path": "docs/agent_supervisor/repository_source_scope.md",
+      "sha256": "a665f7315fb0eb1c1d5c645a44ab969442126a967cb6f6d4eb4772f65d8e1597",
+      "status": "pass"
+    },
+    {
+      "bytes": 4963,
+      "fragment": null,
+      "path": "docs/agent_supervisor/evidence/repository-source-scope-20261013/README.md",
+      "sha256": "9c5f1779fa53fd079b41be28187f714b5b6c949b66cd472b10fee807f3bbf408",
+      "status": "pass"
+    },
+    {
+      "bytes": 53211,
+      "fragment": null,
+      "path": "docs/agent_supervisor/reversible_codebase_views_plan.md",
+      "sha256": "b56eb137243fe94ded71d69f59aa7735fb4a1571ab72f319b88b46892dc234ba",
+      "status": "pass"
+    },
+    {
+      "bytes": 4422,
+      "fragment": null,
+      "path": "docs/agent_supervisor/evidence/repository-source-scope-20261013/parallel-work-survey.json",
+      "sha256": "1359db3aebe8795697db9fa110c7f1023ab81cfe049b2bf9e9816e6b581e24b7",
+      "status": "pass"
+    }
+  ],
+  "qualified_child_paths_unchanged": 20,
+  "qualified_leaf": "460d45933e0e8a6e1fab11338f6947fe0a98b956",
+  "qualified_source_git_objects_match": true,
+  "read_guards_after": [
+    {
+      "bytes": 6975,
+      "path": "implementation_plan/docs/113-supervisor-repository-source-scope-2026-10-13.md",
+      "sha256": "adbf17c09de3e50c4eb9f3e1f1389c857afcdaf99250a4c0eb61002da5b72d54"
+    },
+    {
+      "bytes": 23917,
+      "path": "artifacts/repository-source-scope-publication-20261013/hosted-ci.json",
+      "sha256": "56db438bc4ca52d6d7fd8bdfcee4544b902a1bd55bc181a37e4ceb33a9beb120"
+    },
+    {
+      "bytes": 88870,
+      "path": "artifacts/repository-source-scope-publication-20261013/merge-compatibility.json",
+      "sha256": "8bc6db641017d9ed52921435ca7b6fa7f24c9e905ce5d42f529f22d9402b5412"
+    },
+    {
+      "bytes": 10775,
+      "path": "artifacts/repository-source-scope-publication-20261013/publication_check_runner.py",
+      "sha256": "bfecc9482d77abe5ca445f13d7b051e98f44a8942f57bd65e9385745bd14b437"
+    }
+  ],
+  "read_guards_before": [
+    {
+      "bytes": 6975,
+      "path": "implementation_plan/docs/113-supervisor-repository-source-scope-2026-10-13.md",
+      "sha256": "adbf17c09de3e50c4eb9f3e1f1389c857afcdaf99250a4c0eb61002da5b72d54"
+    },
+    {
+      "bytes": 23917,
+      "path": "artifacts/repository-source-scope-publication-20261013/hosted-ci.json",
+      "sha256": "56db438bc4ca52d6d7fd8bdfcee4544b902a1bd55bc181a37e4ceb33a9beb120"
+    },
+    {
+      "bytes": 88870,
+      "path": "artifacts/repository-source-scope-publication-20261013/merge-compatibility.json",
+      "sha256": "8bc6db641017d9ed52921435ca7b6fa7f24c9e905ce5d42f529f22d9402b5412"
+    },
+    {
+      "bytes": 10775,
+      "path": "artifacts/repository-source-scope-publication-20261013/publication_check_runner.py",
+      "sha256": "bfecc9482d77abe5ca445f13d7b051e98f44a8942f57bd65e9385745bd14b437"
+    }
+  ],
+  "read_guards_unchanged": true,
+  "relative_anchor_count": 0,
+  "relative_link_count": 3,
+  "relative_links_passed": true,
+  "retained_new_cases": 56,
+  "retained_source_bindings": 188,
+  "retained_suites": 6,
+  "retained_tests": 219,
+  "schema": "repository-source-scope-parent-checks@1",
+  "staged_gitlinks": [
+    "160000 f7cf87104e079d1159226c137449e29bf98bfd40 0\texternal/ipfs_accelerate",
+    "160000 28b9ef1f0b9da51e87b1e68ee565b43681397109 0\texternal/ipfs_datasets",
+    "160000 8ac00bb1974b1378e12091d546d8425af34049e0 0\texternal/ipfs_kit"
+  ],
+  "status": "pass",
+  "tests_or_workflow_rerun": false,
+  "total_session_token_savings_established": false
+}
