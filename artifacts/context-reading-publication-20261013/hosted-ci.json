@@ -1,0 +1,143 @@
+{
+  "schema": "supervisor-hosted-documentation-ci-observation@1",
+  "observed_at_utc": "2026-10-13 00:33:56 UTC",
+  "repository": "endomorphosis/ipfs_accelerate_py",
+  "exact_child_commit": "32e79ae431df12b47c410927f5e0a12ec5b9084f",
+  "workflow_file": ".github/workflows/documentation-gates.yml",
+  "observation_method": "Read-only gh run list and GitHub Actions run/jobs/check-run/annotations APIs; no workflow dispatch, rerun, cancellation or modification.",
+  "workflow_triggered_by_reviewer": false,
+  "baseline_commit_result_reused": false,
+  "initial_observation": {
+    "head_sha": "32e79ae431df12b47c410927f5e0a12ec5b9084f",
+    "run_id": 38327742439,
+    "job_id": 115070233407,
+    "workflow_status": "queued",
+    "job_status": "queued",
+    "workflow_conclusion": null,
+    "job_conclusion": null,
+    "runner_id": null,
+    "runner_name": null,
+    "steps": [],
+    "annotations_count": 0,
+    "annotations": [],
+    "observation_time_not_separately_retained": true
+  },
+  "final_run": {
+    "check_suite_id": 103844759445,
+    "conclusion": "failure",
+    "created_at": "2026-10-13T00:32:23Z",
+    "event": "push",
+    "head_branch": "main",
+    "head_sha": "32e79ae431df12b47c410927f5e0a12ec5b9084f",
+    "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38327742439",
+    "id": 38327742439,
+    "name": "Documentation Gates",
+    "path": ".github/workflows/documentation-gates.yml",
+    "run_attempt": 1,
+    "run_number": 1241,
+    "run_started_at": "2026-10-13T00:32:23Z",
+    "status": "completed",
+    "updated_at": "2026-10-13T00:33:10Z",
+    "workflow_id": 326606761
+  },
+  "final_jobs": {
+    "total_count": 1,
+    "jobs": [
+      {
+        "id": 115070233407,
+        "run_id": 38327742439,
+        "workflow_name": "Documentation Gates",
+        "head_branch": "main",
+        "run_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/actions/runs/38327742439",
+        "run_attempt": 1,
+        "node_id": "CR_kwDOL9PEDs8AAAAayrhrPw",
+        "head_sha": "32e79ae431df12b47c410927f5e0a12ec5b9084f",
+        "url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/actions/jobs/115070233407",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38327742439/job/115070233407",
+        "status": "completed",
+        "conclusion": "failure",
+        "created_at": "2026-10-13T00:32:23Z",
+        "started_at": "2026-10-13T00:32:23Z",
+        "completed_at": "2026-10-13T00:33:10Z",
+        "name": "documentation-gates",
+        "steps": [],
+        "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/115070233407",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": 0,
+        "runner_name": "",
+        "runner_group_id": 0,
+        "runner_group_name": ""
+      }
+    ]
+  },
+  "final_check": {
+    "check_suite_id": 103844759445,
+    "completed_at": "2026-10-13T00:33:10Z",
+    "conclusion": "failure",
+    "details_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38327742439/job/115070233407",
+    "head_sha": "32e79ae431df12b47c410927f5e0a12ec5b9084f",
+    "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38327742439/job/115070233407",
+    "id": 115070233407,
+    "name": "documentation-gates",
+    "output": {
+      "annotations_count": 2,
+      "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/115070233407/annotations",
+      "summary": null,
+      "text": null,
+      "title": null
+    },
+    "started_at": "2026-10-13T00:32:23Z",
+    "status": "completed"
+  },
+  "final_annotations": [
+    {
+      "path": ".github",
+      "blob_href": "https://github.com/endomorphosis/ipfs_accelerate_py/blob/32e79ae431df12b47c410927f5e0a12ec5b9084f/.github",
+      "start_line": 1,
+      "start_column": null,
+      "end_line": 1,
+      "end_column": null,
+      "annotation_level": "failure",
+      "title": "",
+      "message": "The job was not started because your account is locked due to a billing issue.",
+      "raw_details": ""
+    },
+    {
+      "path": ".github",
+      "blob_href": "https://github.com/endomorphosis/ipfs_accelerate_py/blob/32e79ae431df12b47c410927f5e0a12ec5b9084f/.github",
+      "start_line": 1,
+      "start_column": null,
+      "end_line": 1,
+      "end_column": null,
+      "annotation_level": "notice",
+      "title": "",
+      "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+      "raw_details": ""
+    }
+  ],
+  "interpretation": {
+    "workflow_terminal": true,
+    "workflow_conclusion": "failure",
+    "account_billing_lock_observed": true,
+    "failure_annotation": "The job was not started because your account is locked due to a billing issue.",
+    "hosted_runner_assigned": false,
+    "hosted_job_execution_observed": false,
+    "executed_steps_count": 0,
+    "documentation_checks_executed": false,
+    "documentation_checks_passed": null,
+    "documentation_code_failure_established": false,
+    "scheduler_started_at_is_not_runner_execution_evidence": true,
+    "statement": "The exact published child's Documentation Gates run failed before any runner or workflow steps started. GitHub explicitly reports an account billing lock. This is not evidence that documentation checks passed or failed on their contents.",
+    "unrelated_notice": "The second annotation reports the future ubuntu-latest image migration; it is retained separately from the billing-lock failure."
+  },
+  "read_only_queries": [
+    "gh run list --repo endomorphosis/ipfs_accelerate_py --commit 32e79ae431df12b47c410927f5e0a12ec5b9084f --workflow documentation-gates.yml --limit 10",
+    "gh api repos/endomorphosis/ipfs_accelerate_py/actions/runs/38327742439",
+    "gh api repos/endomorphosis/ipfs_accelerate_py/actions/runs/38327742439/jobs?per_page=100",
+    "gh api repos/endomorphosis/ipfs_accelerate_py/check-runs/115070233407",
+    "gh api repos/endomorphosis/ipfs_accelerate_py/check-runs/115070233407/annotations?per_page=100"
+  ],
+  "local_changes_scope": "Only artifacts/context-reading-publication-20261013/hosted-ci.json in the parent worktree."
+}

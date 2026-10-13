@@ -1,0 +1,23 @@
+{
+  "check_anchors": true,
+  "checker_sha256": "596a0038b18d592f2e605643890afc85e457558f7b887932a474557d7586819e",
+  "child_documentation_gate_blocks_passed": 4,
+  "child_manifest_entries_verified": 7,
+  "child_manifest_sha256": "ada309351a69bff754021423ac97c7c1691a81f540360eaa78b273021bb3ec49",
+  "child_new_pytest_run": false,
+  "child_new_training_or_provider_run": false,
+  "child_source_binding_rows_verified": 64,
+  "errors": [],
+  "hosted_ci_sha256": "30dd188be23a4db1f2bc8699932fe2498b5b37b0731063cc4cf48a3977ea7591",
+  "note": "implementation_plan/docs/103-supervisor-context-reading-plan-2026-10-13.md",
+  "note_sha256": "04aa4eb3c31100179b390d77e7bbde6a37bc2763ae1046b12552900b76d02df9",
+  "observed_utc": "2026-10-13T00:35:20.877932+00:00",
+  "parent_base_revision": "203f482ddb691f2196a27c5c17b99a00c17bdeeb",
+  "schema": "context-reading-parent-checks@1",
+  "scope": "Parent note links/anchors, intended Gitlinks and published child manifest/evidence only; no whole-parent regression or live deployment.",
+  "staged_pins": {
+    "external/ipfs_accelerate": "32e79ae431df12b47c410927f5e0a12ec5b9084f",
+    "external/ipfs_datasets": "b95938c2a816075466f8dc84f339cf622414030d",
+    "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0"
+  }
+}
