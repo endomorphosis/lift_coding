@@ -118,6 +118,15 @@ export const SWISSKNIFE_MOBILE_INTEROP_DESCRIPTOR = {
       'data/virtual_ai_os/discovery/2026-07-08-vai-661-validation-repair.md',
     attempt_validation_repair_ref:
       'data/virtual_ai_os/discovery/2026-07-08-vai-661-attempt-1-1783554118-objective-validation-repair.md',
+    active_task_id: 'HAO-730',
+    active_attempt: 2,
+    active_task_board: 'hallucinate_multimodal_control',
+    active_objective_gap_ref:
+      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-730-objective-gap-d33307f93408.md',
+    active_validation_confirmation_ref:
+      'data/hallucinate_multimodal_control/discovery/2026-07-08-hao-730-attempt-2-validation-confirmation.md',
+    active_validation_repair_ref:
+      'data/hallucinate_multimodal_control/discovery/2026-07-09-hao-730-attempt-2-objective-validation-repair.md',
     objective_goals: [
       'VAIOS-G700',
       'VAIOS-G701',

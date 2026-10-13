@@ -7,22 +7,22 @@ VAIOS-G706.
 
 The repaired `interface contract swissknife external/ipfs_datasets` path is:
 
-- `external/ipfs_datasets/.tools/ipfs_kit_py/data/deprecations_report.schema.json`
-  defines the JSON Schema for the nested `ipfs_kit_py` deprecations report,
+- `external/ipfs_kit/data/deprecations_report.schema.json`
+  defines the JSON Schema for the `ipfs_kit_py` deprecations report,
   requiring `report_version`, `generated_at`, `deprecated`, `summary`,
   `policy`, and `raw` top-level keys that SwissKnife validates before
   consuming API-deprecation data.
-- `external/ipfs_datasets/.tools/ipfs_kit_py/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md`
+- `external/ipfs_kit/docs/implementation/BUCKET_VFS_INTERFACES_COMPLETE.md`
   documents the Bucket VFS CLI/MCP interface, including the `bucket_create`,
   `bucket_list`, `bucket_delete`, `bucket_add_file`, `bucket_export_car`,
   `bucket_cross_query`, `bucket_get_info`, and `bucket_status` MCP tools that
   SwissKnife's bucket-vfs control surface can route to.
-- `external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_bucket_vfs_interfaces.py`
+- `external/ipfs_kit/examples/demo_bucket_vfs_interfaces.py`
   is a dependency-light demo that exposes the same CLI commands and MCP tool
   names as parseable Python constants, plus `demo_cli_interface()`,
   `demo_mcp_api()`, and `build_demo_report()` evidence for S3-like bucket
   semantics, CAR export, and cross-bucket SQL queries.
-- `external/ipfs_datasets/.tools/ipfs_kit_py/examples/demo_unified_bucket_interface.py`
+- `external/ipfs_kit/examples/demo_unified_bucket_interface.py`
   demonstrates the `UnifiedBucketInterface`, `BackendType`, `BucketType`, and
   `VFSStructureType` imports used for multi-backend buckets. The static
   contract verifies the demo uses `initialize()`, `create_backend_bucket()`,
