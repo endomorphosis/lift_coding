@@ -1,0 +1,131 @@
+{
+  "accelerator_publication": "7147fb5b2afcde9f6a2bb8abb35794d03755d862",
+  "billing_lock_observed": true,
+  "checked_at_utc": "2026-10-13T21:19:14.004300+00:00",
+  "checker": {
+    "api": "check_file(path, check_anchors=True)",
+    "path": "/home/barberb/lift_coding/.worktrees/token-selector-accelerate-20261011/scripts/docs/check_current_docs_links.py",
+    "root_override": "/home/barberb/lift_coding/.worktrees/header-proof-key-custody-root-20261011",
+    "sha256": "596a0038b18d592f2e605643890afc85e457558f7b887932a474557d7586819e"
+  },
+  "dependencies": [
+    {
+      "head": "7147fb5b2afcde9f6a2bb8abb35794d03755d862",
+      "observed_origin_main": "7147fb5b2afcde9f6a2bb8abb35794d03755d862",
+      "path": "/home/barberb/lift_coding/.worktrees/token-selector-accelerate-20261011",
+      "published_ancestor": true
+    },
+    {
+      "head": "7e60814a93fb81604092a0e0627fbc1996e644b7",
+      "observed_origin_main": "c9d0f016a9fcfa327346e056e38e2ffa3b25ffa0",
+      "path": "/home/barberb/lift_coding/.worktrees/native-nominated-scope-datasets-20261013",
+      "published_ancestor": true
+    },
+    {
+      "head": "8ac00bb1974b1378e12091d546d8425af34049e0",
+      "observed_origin_main": "8ac00bb1974b1378e12091d546d8425af34049e0",
+      "path": "/home/barberb/lift_coding/.worktrees/publication-main-20261004/kit",
+      "published_ancestor": true
+    }
+  ],
+  "hosted_steps_executed": false,
+  "local_doc_anchors": 9,
+  "local_doc_gates_on_qualified_leaf": 4,
+  "local_doc_relative_links": 70,
+  "model_provider_solver_docker_calls": 0,
+  "parent_base": "4586d7e1068c0f2758a430ebc54461525d5eb11e",
+  "published_child_objects": [
+    {
+      "bytes": 16354,
+      "fragment": "bind-a-pinned-historical-nomination",
+      "path": "docs/agent_supervisor/current_source_task_admission.md",
+      "sha256": "82fbcbbf119b005a608e3bc64c308686e39227a3f7e4c620fcff103dbfe8dd59",
+      "status": "pass"
+    },
+    {
+      "bytes": 7042,
+      "fragment": null,
+      "path": "docs/agent_supervisor/evidence/native-nominated-source-scope-20261013/README.md",
+      "sha256": "eacde6b8d097689a517da49d2addea93fad367bffa0f0e8a0c76a3835f5c1895",
+      "status": "pass"
+    },
+    {
+      "bytes": 8373,
+      "fragment": null,
+      "path": "docs/agent_supervisor/repository_source_scope.md",
+      "sha256": "1c744b8f571863205d31d4860fcb5aad969d358d296c9b989cdb01fbbd2301a8",
+      "status": "pass"
+    },
+    {
+      "bytes": 57047,
+      "fragment": null,
+      "path": "docs/agent_supervisor/reversible_codebase_views_plan.md",
+      "sha256": "c4962de1dd22bdcf3ed28bd7d2de8c0c98bdf8f49e2d3482f2af0d4022e0364a",
+      "status": "pass"
+    }
+  ],
+  "qualified_child_paths_unchanged": 29,
+  "qualified_leaf": "9caa792f5a927d74847f259a57cdcfd8ec90cfbd",
+  "qualified_source_git_objects_match": true,
+  "read_guards_after": [
+    {
+      "bytes": 8466,
+      "path": "implementation_plan/docs/115-supervisor-native-nominated-source-scope-2026-10-13.md",
+      "sha256": "fb5be6994237db99e99ce831d13d708afe4cec5d2493d56bd076bc888ddc3bf7"
+    },
+    {
+      "bytes": 23073,
+      "path": "artifacts/native-nominated-source-scope-publication-20261013/hosted-ci.json",
+      "sha256": "02c33cc6a93ffc56a0d85ff60569ba268bcc757fec2f9da2893e503c6e00e9c0"
+    },
+    {
+      "bytes": 39563,
+      "path": "artifacts/native-nominated-source-scope-publication-20261013/merge-compatibility.json",
+      "sha256": "3b56d387955733aadf523bdacb1fcb1dc9766b785c56686257f6f908b6a23774"
+    },
+    {
+      "bytes": 11120,
+      "path": "artifacts/native-nominated-source-scope-publication-20261013/publication_check_runner.py",
+      "sha256": "285e392451a9235e190f3e2125c9db649c49db0b82ea07d3d38ee8b95d5c66b0"
+    }
+  ],
+  "read_guards_before": [
+    {
+      "bytes": 8466,
+      "path": "implementation_plan/docs/115-supervisor-native-nominated-source-scope-2026-10-13.md",
+      "sha256": "fb5be6994237db99e99ce831d13d708afe4cec5d2493d56bd076bc888ddc3bf7"
+    },
+    {
+      "bytes": 23073,
+      "path": "artifacts/native-nominated-source-scope-publication-20261013/hosted-ci.json",
+      "sha256": "02c33cc6a93ffc56a0d85ff60569ba268bcc757fec2f9da2893e503c6e00e9c0"
+    },
+    {
+      "bytes": 39563,
+      "path": "artifacts/native-nominated-source-scope-publication-20261013/merge-compatibility.json",
+      "sha256": "3b56d387955733aadf523bdacb1fcb1dc9766b785c56686257f6f908b6a23774"
+    },
+    {
+      "bytes": 11120,
+      "path": "artifacts/native-nominated-source-scope-publication-20261013/publication_check_runner.py",
+      "sha256": "285e392451a9235e190f3e2125c9db649c49db0b82ea07d3d38ee8b95d5c66b0"
+    }
+  ],
+  "read_guards_unchanged": true,
+  "relative_anchor_count": 0,
+  "relative_link_count": 3,
+  "relative_links_passed": true,
+  "retained_new_cases": 22,
+  "retained_source_bindings": 194,
+  "retained_suites": 6,
+  "retained_tests": 168,
+  "schema": "native-nominated-source-scope-parent-checks@1",
+  "staged_gitlinks": [
+    "160000 7147fb5b2afcde9f6a2bb8abb35794d03755d862 0\texternal/ipfs_accelerate",
+    "160000 c9d0f016a9fcfa327346e056e38e2ffa3b25ffa0 0\texternal/ipfs_datasets",
+    "160000 8ac00bb1974b1378e12091d546d8425af34049e0 0\texternal/ipfs_kit"
+  ],
+  "status": "pass",
+  "tests_or_workflow_rerun": false,
+  "total_session_token_savings_established": false
+}

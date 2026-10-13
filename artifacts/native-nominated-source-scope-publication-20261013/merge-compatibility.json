@@ -1,0 +1,824 @@
+{
+  "additional_documentation_workflow_run": false,
+  "additional_pytest_run": false,
+  "changed_source_bindings": [
+    {
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_output_observation.py",
+      "publication_sha256": "f841c4de28e87a8871ee634449cd3c1c2094fb744a1f413f4c99f12660642648",
+      "qualified_sha256": "6c2a62a62b6b0baabce78fc6eb61c776937026652a147ce412ac03661418330a"
+    }
+  ],
+  "conflict_resolution_required": false,
+  "documentation_gates_executed_on_qualified_leaf": true,
+  "incoming_file_bindings": [
+    {
+      "matches_incoming_object": true,
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_output_observation.py",
+      "sha256": "f841c4de28e87a8871ee634449cd3c1c2094fb744a1f413f4c99f12660642648"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_output_queued_observation.py",
+      "sha256": "dad8b82f806615cd8f1caefb2b75f507d419e836b9a8c4ab85d8879940ce78e7"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/.gitattributes",
+      "sha256": "4878f9f363f0cab41d88f53e58da48d6a0989fafeb43413e9050cbf2b9bf5ceb"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/README.md",
+      "sha256": "f9dfd40af7f9209481ff949e69e078f496eb4b98df615b9834fa11249e1580e6"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/allocation-event-contract-diagnosis.json",
+      "sha256": "a319b326f9afff5579f35b50fe2f1e97d9b4f0f2c6884d4559472df30b1beb25"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/collect_pair.py",
+      "sha256": "ee1f9d55f256b9002494875e5e6de6fd57b85855ae5b8e88a88cfb54a8835137"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/collect_three_arms.py",
+      "sha256": "e9d738a40a6285c292f18510a02370eac952b0f130c2d7ac9fec98e7d7875b68"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/collector-independent-review.json",
+      "sha256": "89ab914795268d927e55fb7cd85c35bf2b399643d290987de32adfc38313b28e"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/collector-qualification.json",
+      "sha256": "7f00c870a97493cfe2b191ec86dd536132e0ecd075cb89670c4dd6c1c0e93828"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/collector-tests-01/exit.json",
+      "sha256": "7bdecaac897887398624951200e3aeccea9e2d483165bb969b8f1624ea210fc3"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/collector-tests-04/command.json",
+      "sha256": "d116b3d3b7640e3006ee35f3ddf93dd1946aaf4b5fda9e8ee5acb7821b655319"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/collector-tests-04/exit.json",
+      "sha256": "5cd82f1f429573a23f38b5636c535a98c619b02b65446ca1a3c643a23d4963a7"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/collector-tests-04/stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/environment.json",
+      "sha256": "fc6807ac1ccec68576a5ab367b5259edb35f2944b93a8e1b2d56f077b5c9e313"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/final-lock-independent-review.json",
+      "sha256": "4fefe320bc229ce2b2326ba0a3fdfbc3209408403ae97102205ef6a21e23e2af"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/full-pair-independent-review.json",
+      "sha256": "7afa2ca1d7bef3fc48b77a1cb542399e85e5b22dd63976e63ffd0ed400ea0085"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/historical-recipe-erratum.json",
+      "sha256": "43b1691f23a8ba493e518a5414de00b48090f13253ef3aa5da4f8eb9617fc000"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/launch-recipe-candidates.json",
+      "sha256": "339abef483a4032d7e2f43428084d45f5127af8f6a0dc37a7705f563bf6cbd32"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/live-preparation/bundle-result.json",
+      "sha256": "18c4c35cdcf259a157d63fd2d2c2e7014699894a5aa6b129cc3a94eaafa9358d"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/live-preparation/verification-result.json",
+      "sha256": "d5222c12231a180bd228e8080f2aba3d6926148ce2cbfc8cf137b6d28c3a3264"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/live-trials/codex-full-01/launch-result.json",
+      "sha256": "13f802f8175913e8e2701e1f9668d7551787e5244fbcbf22a9f406dc6f1fa451"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/live-trials/codex-full-01/launch-start.json",
+      "sha256": "b066494f75fbbd566a05c8d87f313da803b7f314c21d52ed3c383c5f686a63ec"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/live-trials/codex-no-index-01/launch-result.json",
+      "sha256": "09ced7fc69224bbf77cc72af505e88859c67a512bf1e89d2aa0557533ea16705"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/live-trials/codex-no-index-01/launch-start.json",
+      "sha256": "f895f295a8c4a79c6814e014962c41935b0a519569d34f08d2b808e5ae13f0aa"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/manifest.json",
+      "sha256": "0d2db4998a0cd2e8f62628f43790594257dc11a772a48611dfdf78ffc085d9b0"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/next-native-baseline/environment-notes.json",
+      "sha256": "33a26913222e597c098117cdde6ad003554df1f4410793e9356d7563ed4d0b33"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/next-native-baseline/environment.json",
+      "sha256": "b6a7a52e51c2de6fb8e3bd18a217dc278ae33a363c1fd501aa2678f6850f4697"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/next-native-baseline/execution-lock.json",
+      "sha256": "7ad2337dcf58c59973da41c43c8a8d847355a2972950fd8194a562e5e631812f"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/next-native-baseline/host-cli-receipt.json",
+      "sha256": "847908e68193e3053f4fe4856a39e8d8a7062bab744b66cf60a3c1f32f983fec"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/next-native-baseline/native-codex-01/launch-result.json",
+      "sha256": "e3590fddfee8ad2d84473778a348d4e7d0da5ca10da3df6b5a46d7b9c897894c"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/next-native-baseline/native-codex-01/launch-start.json",
+      "sha256": "7c2dad88f239aecc11d3d8ad20bbb4039bca2fb8116b56e3712b79c96d8f5a6c"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/next-native-baseline/native-lock-independent-review.json",
+      "sha256": "86814fb37049356d64bf61c66e5b20f7fa8b493aead9fb03a9fcdbdb364d9046"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/next-native-baseline/native-preparation-independent-review.json",
+      "sha256": "e46f956c610a4fd8ef761cf3c9d925c206193a1c1592d7e21a67a89c65b3bcba"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/next-native-baseline/recipe.json",
+      "sha256": "a9ea5bc417335152a43071b51d4a318adaa513d8883726d36f08ebe5fa4f6228"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/next-native-baseline/release.json",
+      "sha256": "4e484852b01c7bcad53d380939131249933c5e0881fe45c043ac93a86c8656a5"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/next-native-baseline/run_native.py",
+      "sha256": "d5e7f495972c0e092e93dd559f1c86f8d48a880111caba963958d647e47674e6"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/next-native-baseline/source-pins.json",
+      "sha256": "a16083d2aefb0aa94349a3de41f0bd11bf847319e840d888c8872557f79c0c7a"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/no-index-result-review.json",
+      "sha256": "97fa59955805c716a34618d438a281cc74f2a7c86454b94e5baed7ebf826e400"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/output-observer-queued-postmerge-qualification.json",
+      "sha256": "4e4bd30d6ae7c4ba8635a3d39345ed2c9bdc0dd9036ecc6b135d6ab73ddc1edb"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/output-observer-queued-qualification.json",
+      "sha256": "137d0225a0b456e6794bbaeaaeb79d7340a0634713c9acd0c6ebe81926105227"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/output-observer-queued-tests-01/exit.json",
+      "sha256": "798dac0fb02a85c6a16c73d834bfd4dbd220a2b85f707e00685fa29fd663ce41"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/output-observer-queued-tests-03/command.json",
+      "sha256": "027a4c2fdebd19fa680a7ff52925dc18b65aeead90eb9b8800d0b16ba7f7476a"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/output-observer-queued-tests-03/exit.json",
+      "sha256": "c937a72a65c95dd188dd0bad2d5498b2a1217461152259aa18f5ae325955aaa4"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/output-observer-queued-tests-03/junit.xml",
+      "sha256": "16bd05c9c436f166fe2627ca43ced0e67dadf6ee1dceec2ddc2361e25dc32e75"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/pair-design.json",
+      "sha256": "a4e9d8a4bfb8049103b8b7f13f9521e73268ece00f6d17bde1323c8215a280bf"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/pair-lock.json",
+      "sha256": "10f0884d233c833d85fb216411eede7477320a0e098f53382876ad98bc13550d"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/pair-observation-final.json",
+      "sha256": "fb61fbb85ee1c322dac4923b24c77639cddbff5f391ee53d65f7379e7682384e"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/preparation-independent-audit.json",
+      "sha256": "1b7f5087ec394fac915a55db461758380996edfd009824c488d59f3aadbc78f4"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/provider-readiness/grok-metadata-precheck-01.json",
+      "sha256": "c318d6d7212f4e7b394a15300668bf35e4f44fa7fbd7084650b9c224606d89da"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/provider-readiness/grok-metadata-precheck.json",
+      "sha256": "1fe5ae0f7ee12ee401424069d51bde479e6c8ac8125610699955c1e14e5f4b66"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/provider-readiness/public-provider-assets.json",
+      "sha256": "94261b093d6a85578b1f14c2dcaa082025b3e5eeb1492bcc0f27844a5be3fa8f"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/provider-readiness/route-audit.json",
+      "sha256": "79477e8e8291f06f7e1c6a451666cb86b4d199f7c827e10f69edc80d91239168"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/queued-output-observer-independent-review.json",
+      "sha256": "7e2bbc3303d3af7e39710c8d647b7bf941ff1bd6e5c27487c14a4f82237b2ad3"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/retained-assets-inspection.json",
+      "sha256": "61f3c13912223945fce7645069cc7e505b1cc9b6db39a54d5a7b249169722d04"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/run_trial.py",
+      "sha256": "d1582a7c38d74a8fccc4d020317ab1c20c93c346df00b225e64c7fc13a7865b6"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/runtime-preparation-independent-review.json",
+      "sha256": "2886e2579ba682f519df1d273f6aab044285eca0275afcbe6992e7174d422291"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/seal_publication.py",
+      "sha256": "c4e5b1293fe8c11f5810d604e455ac428f12f67c735cb1d46c303cbecf5e57ae"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/test_collect_pair.py",
+      "sha256": "975aa66214fd99274c7ced55cc0a07efa10accb158b2b6b2fb2a838ff3af9cb1"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/test_collect_three_arms.py",
+      "sha256": "c9c0700d883a7b9f88dfce579890fa20e294bbaad2771e3c7c62e6a2ed50b844"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/three-arm-collector-tests-04/command.json",
+      "sha256": "6fe98ee275289bddd2b5d0edff08c21e05361187d5171c71ff36fbef35d46933"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/three-arm-collector-tests-04/pytest.xml",
+      "sha256": "bd0d46be04c0258891c60fc5b91596a67fe59093528c9fbea2a8f1781bb545eb"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/three-arm-collector-tests-04/result.json",
+      "sha256": "6c5ccee241c070bcbeefb81dc0c1444a8b16f3af8b5b327d1017d61895cd6f3d"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/three-arm-independent-review.json",
+      "sha256": "7c6f586c08173a4a1ff67cee617cc89ec8410e15b90797321d40dc8d08d4bc99"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/three-arm-observation-final.json",
+      "sha256": "9930cd612df5f0d6bab9e3f30e20b0cdd7cb819766190e6c6e520861555b84a3"
+    },
+    {
+      "matches_incoming_object": true,
+      "path": "docs/agent_supervisor/live_indexed_baseline.md",
+      "sha256": "0bd84d1960c21c2818829b553a5f9b4030cb8a18b2e8920347438e3f4b95603b"
+    }
+  ],
+  "incoming_files_preserved": 65,
+  "incoming_revision": "4ea2271709bf697f175a198d3df02ac1e1a38205",
+  "independent_read_only_merge_review": {
+    "blockers": [],
+    "checks": [
+      "All29 qualified paths and65 incoming paths match respective Git objects; zero overlap.",
+      "All143 accelerator qualification bindings compared; sole change is terminal_output_observation.py.",
+      "No static reference to output observer found in six executed suites, reused fixtures/conftests or native scope/admission/allocation/lookup/broker modules.",
+      "Incoming evidence separately reports132 observer passes; not rerun here."
+    ],
+    "delivery": "collaboration message preserved by root",
+    "functional_rerun_justified": false,
+    "reviewer": "/root/parallel_scope_reuse_review",
+    "separate_reviewer_authored_receipt": false,
+    "tests_product_imports_or_edits": false
+  },
+  "merge_parents": [
+    "9caa792f5a927d74847f259a57cdcfd8ec90cfbd",
+    "4ea2271709bf697f175a198d3df02ac1e1a38205"
+  ],
+  "models_or_embeddings_changed": false,
+  "native_worker_adoption_established": false,
+  "new_cases": 22,
+  "observed_at_utc": "2026-10-13T21:13:34.267854+00:00",
+  "preserved_late_datasets_publication": {
+    "actual_execution_revision": "7e60814a93fb81604092a0e0627fbc1996e644b7",
+    "all51_listed_objects_match_qualification": true,
+    "incoming_code_paths": [
+      "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_boundary.py"
+    ],
+    "interpretation": "Preserve parallel LegalIR actor-boundary publication without changing immutable execution checkout or relabeling it as tested.",
+    "listed_object_checks": [
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/__init__.py",
+        "sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/autoformal/tree_pin.py",
+        "sha256": "ec43fd9379f3c9198451e8d62d98db53826dcf115e6858039a73c3da7d72a1c2"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/backends/smt/compiler.py",
+        "sha256": "9b14183c071fb9eaed29a18e0bdd6483f71e152a82c88732bc0ae0a6d2321be5"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/families/registry.py",
+        "sha256": "669c4d90dbbac1014bd3dced401027be0391d304477b904f9da04d5a2d6c0450"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/formalization/autoencoder/intent_action_checkpoint_384.py",
+        "sha256": "467b5e00df9e6960618a36064255d2680f2b369e3f27bf1901b6260a132b5eab"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_384.py",
+        "sha256": "fb3a5aa8ec005e98a2c62dc1d7e3e807a75820fedc156a8080c1f18063d17da7"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_training_v2.py",
+        "sha256": "8de8096e895de9df08ccf5352dfd704806823296821d98b5badf08bb553a52e4"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/formalization/autoencoder/structured_source_384.py",
+        "sha256": "3f9ca9ce7b4cf2a2d10d6aeb1fae78543c468133d2fa0df9fcb32f63f89e90f7"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/intent_ir/decoder.py",
+        "sha256": "7bab5781c07e00b54b0283d3a2962926f75935caedc80eceb23264cb388be257"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/intent_ir/formalize/action_contracts.py",
+        "sha256": "694e490c8f62bf8abed4cea0f60f161888436ee5886b1e814784ff77da811cc7"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/intent_ir/formalize/rich_grammar.py",
+        "sha256": "6c40ac99d7e339651b6029764f94b12430ca515d4c5f7426770b013499efe92b"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/intent_ir/schema.py",
+        "sha256": "93d38e4724c5f34aab7f39f050742e98ef0c8d80e2ff70459d2401541505fc56"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/ir_core/canonical.py",
+        "sha256": "339b5778581c19525a7685edf432aaf124cd12e02d37cd0eca88cb25ab86c0d0"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/ir_core/schema_registry.py",
+        "sha256": "1b214ea190a41c6a451377a03bc71ea84f6703314293ef78c5f269082eee4fbe"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+        "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/security_ir/model.py",
+        "sha256": "abc3aea9c2f4d1ce513ee2c9fc4c304d8bd387ded18e0d646247417422225d39"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/software_contracts/cache.py",
+        "sha256": "d708bb536860334a43a97244652765bf926d949286207cc25ff68788bf85751f"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/software_contracts/content.py",
+        "sha256": "c27c4e3cd4a5ee12ff5c3967a7f57e421ea1bb26ff36b66c7547e9d1e3cde2df"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/software_contracts/python_frontend.py",
+        "sha256": "baf1c1ec5e6a5f83a0eb640b988850264d35311cdcedc87d22cff610d05308df"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/chunked_snapshot.py",
+        "sha256": "2a187d7ed7b228d4179302405bed47536754a7e789b5623f59a11e76cbe27f9d"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/committed_snapshot.py",
+        "sha256": "4700a72c4463f0398b6b68e3df4b694b030dfe88a24db006772322f0cee26a15"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/identity.py",
+        "sha256": "373f6f4e99923b58487256b956ebdfd66248485713a91483eca4e6783b59e102"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/models.py",
+        "sha256": "4b061c97838929a4cdc055998ce71aa854234c7e75d3fbee12595fa1bafa8a75"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/paged_snapshot.py",
+        "sha256": "6f4419e85df97097d2dc20c8253ae2cabb2175f1ea69abcf365f18bf98f00b68"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/pytest_analysis.py",
+        "sha256": "45a0ab3fae08e91db2971540e5d933c8e82c47e7f65b3e5ec88912dbedc67ab4"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/python_analysis.py",
+        "sha256": "744c5d1699403239d3eb5e9588a38a38cbc0cc56799c2884d8821f1a4e1bdd76"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/scanner.py",
+        "sha256": "002957f910a0bc1ff29de1ed72aca9c2464218ac5f65478be34a7c8f04e166a1"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/snapshot.py",
+        "sha256": "5135e623a0a3f970252da63dce049be167e8bb73db5355f6c3116316b70aafa6"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/symbol_graph.py",
+        "sha256": "4e269d1e2f39ea27582e98f240996696d61b0fe0b1358e363ff2376baa7972e3"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/software_contracts/semantic_state/api.py",
+        "sha256": "e172654ef7f51901f003de2fbe85573e38e0c6544941b36a003fc9392d8e4f51"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/software_contracts/semantic_state/bindings.py",
+        "sha256": "268ff6aab60e3a8a2e5e9719b637edfd1efb7bc50a4310bd4b1f2660b04cdfcc"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/software_contracts/semantic_state/capsules.py",
+        "sha256": "6f2581e84606f718e9b3d610d5b01434f386ea74459cafb44d9eb5edb8e6869d"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/software_contracts/semantic_state/merkle.py",
+        "sha256": "526b8d427247e11a4d3cf9fd568304c8448c4358c0772a28b5637e887d2512e0"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/software_contracts/semantic_state/models.py",
+        "sha256": "488fa256322807b895a3f7e277fef5b4d5dc6ac1f3619696a6c288340aae0586"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/software_verification/numerical_logic.py",
+        "sha256": "1cc68c30efd6719cc3baad17e196c9f9fc43e3f6161604a75e8029c8e53ed822"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/software_verification/numerical_obligation_retrieval.py",
+        "sha256": "8a044dae64a12cccee904929d60b8a7c0aec51d0266592394e237ca4bbe90e85"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/software_verification/numerical_source.py",
+        "sha256": "966243b52d57033ee2545142792688af6d2b32c8f6eac6f9f6efd157f03bd3f5"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/software_verification/program.py",
+        "sha256": "f051f42d64c5f993451972924953cc7eaa6d17df097235ddabfd5d791d406f91"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/software_verification/source_adapters.py",
+        "sha256": "aef42730598f74d35e232f460637560be71b55ddc459d555df9105d17fcfc003"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/software_verification/syntax_bridge.py",
+        "sha256": "cc46f305dede1cadb358a524f30dbb894b84ab062f0c083c3138c7e43f271116"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/syntax_core/ast.py",
+        "sha256": "4709513f18ab270858fe9595d88a847ddc52092606c52c7802947abed1ab9ac4"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/syntax_core/signatures.py",
+        "sha256": "49dd4fb0096661a05a15f056eb57248349e2b4e0b02e83239f36db36788c75bf"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/ui_ux_ir/decoder.py",
+        "sha256": "21e8315b0054f7755512212d610d4e3f5f4ac86387f3b27edb9632fa8ca68bc3"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/logic/ui_ux_ir/schema.py",
+        "sha256": "8a7b0cc90151043514d263b1a2655d6d41a2835dacd6b56018ba5c0c89961855"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_production.py",
+        "sha256": "735ca0597186e094d736ef58435c82956c4ab805a68fc7a6adbfc0ee21ee889f"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_runtime.py",
+        "sha256": "ce80ed6294009e04580051e6eb06a817d74a8a56f04814ad0a698e3d27dd0d41"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/domain_384_autoencoder.py",
+        "sha256": "66c5ee320f9c7aacd3b246d0666c7fc3ee928e4679892e1e90c838e1b291dbc6"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+        "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py",
+        "sha256": "3b6cd3a6fade78fed275a478f010329e5d030a250b914c4b46ab0f0d77b9d5ab"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+        "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+      },
+      {
+        "matches_qualified_git_object": true,
+        "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+        "sha256": "ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36"
+      }
+    ],
+    "parent_base": "4586d7e1068c0f2758a430ebc54461525d5eb11e",
+    "preserved_parent_pin": "c9d0f016a9fcfa327346e056e38e2ffa3b25ffa0",
+    "qualification_executed_on_preserved_parent_pin": false
+  },
+  "publication_revision": "7147fb5b2afcde9f6a2bb8abb35794d03755d862",
+  "qualification_executed_on_publication_revision": false,
+  "qualification_tests": 168,
+  "qualified_file_bindings": [
+    {
+      "bytes": 25857,
+      "matches_qualified_leaf": true,
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/current_source_task_admission.py",
+      "sha256": "eece603dcd9f72d28d9aa572934fd23785f87602ecb36d8c0c2e2d97e0712df5"
+    },
+    {
+      "bytes": 22616,
+      "matches_qualified_leaf": true,
+      "path": "test/api/test_current_source_task_admission.py",
+      "sha256": "1ff08889ada83fe92f45db800406834dfc7bc053a7ebc477c0a0e8fcdbe5b6f6"
+    },
+    {
+      "bytes": 14894,
+      "matches_qualified_leaf": true,
+      "path": "test/api/test_native_nominated_source_scope.py",
+      "sha256": "ecd7b48d1a42ade0d401d3f622b17c36352c4f81595da700245a9232789a2d1d"
+    },
+    {
+      "bytes": 16354,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/current_source_task_admission.md",
+      "sha256": "82fbcbbf119b005a608e3bc64c308686e39227a3f7e4c620fcff103dbfe8dd59"
+    },
+    {
+      "bytes": 8373,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/repository_source_scope.md",
+      "sha256": "1c744b8f571863205d31d4860fcb5aad969d358d296c9b989cdb01fbbd2301a8"
+    },
+    {
+      "bytes": 57047,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/reversible_codebase_views_plan.md",
+      "sha256": "c4962de1dd22bdcf3ed28bd7d2de8c0c98bdf8f49e2d3482f2af0d4022e0364a"
+    },
+    {
+      "bytes": 63,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/evidence/native-nominated-source-scope-20261013/.gitattributes",
+      "sha256": "4bd43f02cc20beb96409dd4ff2550287edc5b8f59cf4a6e6f367f877bc616f1d"
+    },
+    {
+      "bytes": 7042,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/evidence/native-nominated-source-scope-20261013/README.md",
+      "sha256": "eacde6b8d097689a517da49d2addea93fad367bffa0f0e8a0c76a3835f5c1895"
+    },
+    {
+      "bytes": 145508,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/evidence/native-nominated-source-scope-20261013/documentation-checks.json",
+      "sha256": "fc686567277ef57b6fdf2a89d569f23e7fca99316c460f5f75df4547ed21e87d"
+    },
+    {
+      "bytes": 435,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/evidence/native-nominated-source-scope-20261013/documentation-workflow.log",
+      "sha256": "007d47e19ec10a99772d770bfde907fd57c3ef7d4059cebb00d6dd7ceb432a39"
+    },
+    {
+      "bytes": 16585,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/evidence/native-nominated-source-scope-20261013/documentation_runner.py",
+      "sha256": "d428b10e0ebe0bf358350372ca6e4c0b60dbf953d441949f07960b0a066a9eb0"
+    },
+    {
+      "bytes": 1191,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/evidence/native-nominated-source-scope-20261013/fixture-correction.json",
+      "sha256": "9874291349fc810cf36f77732093970a82c369194f6fc83079b59219656fde6a"
+    },
+    {
+      "bytes": 102986,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/evidence/native-nominated-source-scope-20261013/qualification-01/commands.json",
+      "sha256": "a95b7e3fd90327f3c53adcfaaeab51ef1d719921d44047d78243900103b169e9"
+    },
+    {
+      "bytes": 28288,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/evidence/native-nominated-source-scope-20261013/qualification-01/junit.xml",
+      "sha256": "2f7422f98be465321c9ca22ca53918fa518279bc089c7b3ca1906c10c593687e"
+    },
+    {
+      "bytes": 25857,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/evidence/native-nominated-source-scope-20261013/qualification-01/source-snapshot/ipfs_accelerate_py/agent_supervisor/runtime/current_source_task_admission.py.snapshot.txt",
+      "sha256": "eece603dcd9f72d28d9aa572934fd23785f87602ecb36d8c0c2e2d97e0712df5"
+    },
+    {
+      "bytes": 22616,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/evidence/native-nominated-source-scope-20261013/qualification-01/source-snapshot/test/api/test_current_source_task_admission.py.snapshot.txt",
+      "sha256": "1ff08889ada83fe92f45db800406834dfc7bc053a7ebc477c0a0e8fcdbe5b6f6"
+    },
+    {
+      "bytes": 14894,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/evidence/native-nominated-source-scope-20261013/qualification-01/source-snapshot/test/api/test_native_nominated_source_scope.py.snapshot.txt",
+      "sha256": "9e5e2d398e702f44fe928da06df3991786ead23b5479548479c503249bb8f5ed"
+    },
+    {
+      "bytes": 0,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/evidence/native-nominated-source-scope-20261013/qualification-01/tests.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 43913,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/evidence/native-nominated-source-scope-20261013/qualification-01/tests.stdout.log",
+      "sha256": "f7eb9b94c1e706f75eae6bc89d4c47c12a3277aa199c7d83f0538fbafd7e0ecf"
+    },
+    {
+      "bytes": 102986,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/evidence/native-nominated-source-scope-20261013/qualification-02/commands.json",
+      "sha256": "e872480e1ce3e152875ab7d178fe771a11bd7b01a6929f8dca9635ba056093f3"
+    },
+    {
+      "bytes": 27136,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/evidence/native-nominated-source-scope-20261013/qualification-02/junit.xml",
+      "sha256": "a67be87ea92b4f1ff61e1def91ddd397818d37eed4fc20562712f79a605e54b8"
+    },
+    {
+      "bytes": 25857,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/evidence/native-nominated-source-scope-20261013/qualification-02/source-snapshot/ipfs_accelerate_py/agent_supervisor/runtime/current_source_task_admission.py.snapshot.txt",
+      "sha256": "eece603dcd9f72d28d9aa572934fd23785f87602ecb36d8c0c2e2d97e0712df5"
+    },
+    {
+      "bytes": 22616,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/evidence/native-nominated-source-scope-20261013/qualification-02/source-snapshot/test/api/test_current_source_task_admission.py.snapshot.txt",
+      "sha256": "1ff08889ada83fe92f45db800406834dfc7bc053a7ebc477c0a0e8fcdbe5b6f6"
+    },
+    {
+      "bytes": 14894,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/evidence/native-nominated-source-scope-20261013/qualification-02/source-snapshot/test/api/test_native_nominated_source_scope.py.snapshot.txt",
+      "sha256": "ecd7b48d1a42ade0d401d3f622b17c36352c4f81595da700245a9232789a2d1d"
+    },
+    {
+      "bytes": 0,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/evidence/native-nominated-source-scope-20261013/qualification-02/tests.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 24612,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/evidence/native-nominated-source-scope-20261013/qualification-02/tests.stdout.log",
+      "sha256": "14ac22d1c5fa752ca3406d7bada64ffa6e7ffb371066016784960677f82038ce"
+    },
+    {
+      "bytes": 9947,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/evidence/native-nominated-source-scope-20261013/qualification_runner.py",
+      "sha256": "e8a51cfcaa9f0039d33430fc817297c33d09bf92619f275959542988c0f7b1c2"
+    },
+    {
+      "bytes": 4595,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/evidence/native-nominated-source-scope-20261013/review-observations.json",
+      "sha256": "104830f1ba9df289b01ba01fbd6bb7176059ec3f014494c4315ed614828a9cdb"
+    },
+    {
+      "bytes": 7994,
+      "matches_qualified_leaf": true,
+      "path": "docs/agent_supervisor/evidence/native-nominated-source-scope-20261013/manifest.json",
+      "sha256": "dba479f3656431f054fa2932ec138f5af40cab5a3b45afc5d6204c12b05dd449"
+    }
+  ],
+  "qualified_files_preserved": 29,
+  "qualified_leaf": "9caa792f5a927d74847f259a57cdcfd8ec90cfbd",
+  "schema": "native-nominated-source-scope-merge-compatibility@1",
+  "source_base": "f7cf87104e079d1159226c137449e29bf98bfd40",
+  "source_binding_count": 194,
+  "static_review_notes": [
+    "Incoming production change is queued-completion output observation; no nomination/task-admission/source-reader/allocator/claim API is changed.",
+    "The six qualified suites and native source handoff files remain byte-identical.",
+    "All qualified paths and all incoming changed paths match their own immutable Git objects.",
+    "Retained168passes belong to qualified leaf; no postmerge test execution is claimed."
+  ],
+  "total_session_token_savings_for_this_handoff_established": false,
+  "unchanged_source_binding_count": 193
+}
