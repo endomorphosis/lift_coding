@@ -1,0 +1,24 @@
+{
+  "collector_subtests_separate": 32,
+  "collector_test_nodes": 47,
+  "frozen_native_lock_sha256": "7ad2337dcf58c59973da41c43c8a8d847355a2972950fd8194a562e5e631812f",
+  "frozen_pair_lock_sha256": "10f0884d233c833d85fb216411eede7477320a0e098f53382876ad98bc13550d",
+  "frozen_runtime_accelerate": "a8f57366ff4110a87f1f13d1e60992f83f689821",
+  "frozen_runtime_archive_sha256": "488ae75f90bd9c4c9cc88b520d4db68157984625ea8bbef3874f63da48b5f94a",
+  "frozen_runtime_datasets": "28b9ef1f0b9da51e87b1e68ee565b43681397109",
+  "live_trials": 3,
+  "official_passes": 3,
+  "preserved_parent_datasets": "7e60814a93fb81604092a0e0627fbc1996e644b7",
+  "preserved_parent_kit": "8ac00bb1974b1378e12091d546d8425af34049e0",
+  "published_accelerate": "4ea2271709bf697f175a198d3df02ac1e1a38205",
+  "published_evidence_file_count": 62,
+  "published_evidence_manifest_sha256": "0d2db4998a0cd2e8f62628f43790594257dc11a772a48611dfdf78ffc085d9b0",
+  "published_observer_fix_used_in_trials": false,
+  "schema": "numerical-live-publication-bindings@1",
+  "token_totals": {
+    "full": 333973,
+    "native-codex": 113883,
+    "no-index": 358492
+  },
+  "unique_observer_tests_passed": 132
+}

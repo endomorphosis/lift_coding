@@ -1,0 +1,100 @@
+{
+  "additional_model_calls": 0,
+  "additional_tests_run": false,
+  "documents": {
+    "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/README.md": "f9dfd40af7f9209481ff949e69e078f496eb4b98df615b9834fa11249e1580e6",
+    "docs/agent_supervisor/live_indexed_baseline.md": "0bd84d1960c21c2818829b553a5f9b4030cb8a18b2e8920347438e3f4b95603b"
+  },
+  "explicit_links": [
+    {
+      "document": "docs/agent_supervisor/live_indexed_baseline.md",
+      "exists": true,
+      "target": "evidence/numerical-live-comparison-20261013/README.md"
+    },
+    {
+      "document": "docs/agent_supervisor/live_indexed_baseline.md",
+      "exists": true,
+      "target": "../../benchmarks/agent_supervisor/container_coding/terminal_output_observation.py"
+    },
+    {
+      "document": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/README.md",
+      "exists": true,
+      "target": "three-arm-observation-final.json"
+    },
+    {
+      "document": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/README.md",
+      "exists": true,
+      "target": "preparation-independent-audit.json"
+    },
+    {
+      "document": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/README.md",
+      "exists": true,
+      "target": "next-native-baseline/release.json"
+    },
+    {
+      "document": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/README.md",
+      "exists": true,
+      "target": "next-native-baseline/native-preparation-independent-review.json"
+    },
+    {
+      "document": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/README.md",
+      "exists": true,
+      "target": "provider-readiness/route-audit.json"
+    },
+    {
+      "document": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/README.md",
+      "exists": true,
+      "target": "pair-observation-final.json"
+    },
+    {
+      "document": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/README.md",
+      "exists": true,
+      "target": "full-pair-independent-review.json"
+    },
+    {
+      "document": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/README.md",
+      "exists": true,
+      "target": "output-observer-queued-tests-03/junit.xml"
+    },
+    {
+      "document": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/README.md",
+      "exists": true,
+      "target": "historical-recipe-erratum.json"
+    },
+    {
+      "document": "docs/agent_supervisor/evidence/numerical-live-comparison-20261013/README.md",
+      "exists": true,
+      "target": "three-arm-independent-review.json"
+    }
+  ],
+  "passed": true,
+  "schema": "numerical-live-documentation-checks@1",
+  "seconds": 0.16630357794929296,
+  "steps": [
+    {
+      "name": "Supervisor primary-doc vocabulary",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "OK: primary agent-supervisor docs are free of board-prefix ticket IDs\n"
+    },
+    {
+      "name": "Maintained-surface relative links",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "OK: 46 allowlisted documentation files have resolvable relative links (anchors checked)\n"
+    },
+    {
+      "name": "Packaging version pin alignment",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "OK: packaging pins aligned at 0.0.45\n"
+    },
+    {
+      "name": "Closeout navigation markers",
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "OK: closeout navigation markers present\n"
+    }
+  ],
+  "workflow_sha256": "0a46fa5b8905600cb9f74adaaec8b8aeb5f89878612a43fb7a847e586bde3763"
+}

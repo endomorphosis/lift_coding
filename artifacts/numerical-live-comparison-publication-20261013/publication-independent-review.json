@@ -1,0 +1,1583 @@
+{
+  "check_count": 388,
+  "checks": [
+    {
+      "name": "manifest_hash_matches_seal_result",
+      "passed": true
+    },
+    {
+      "name": "62_files_exact",
+      "passed": true
+    },
+    {
+      "name": "file:.gitattributes",
+      "passed": true
+    },
+    {
+      "name": "file:README.md",
+      "passed": true
+    },
+    {
+      "name": "file:allocation-event-contract-diagnosis.json",
+      "passed": true
+    },
+    {
+      "name": "file:collect_pair.py",
+      "passed": true
+    },
+    {
+      "name": "file:collect_three_arms.py",
+      "passed": true
+    },
+    {
+      "name": "file:collector-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "file:collector-qualification.json",
+      "passed": true
+    },
+    {
+      "name": "file:collector-tests-01/exit.json",
+      "passed": true
+    },
+    {
+      "name": "file:collector-tests-04/command.json",
+      "passed": true
+    },
+    {
+      "name": "file:collector-tests-04/exit.json",
+      "passed": true
+    },
+    {
+      "name": "file:collector-tests-04/stdout",
+      "passed": true
+    },
+    {
+      "name": "file:environment.json",
+      "passed": true
+    },
+    {
+      "name": "file:final-lock-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "file:full-pair-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "file:historical-recipe-erratum.json",
+      "passed": true
+    },
+    {
+      "name": "file:launch-recipe-candidates.json",
+      "passed": true
+    },
+    {
+      "name": "file:live-preparation/bundle-result.json",
+      "passed": true
+    },
+    {
+      "name": "file:live-preparation/verification-result.json",
+      "passed": true
+    },
+    {
+      "name": "file:live-trials/codex-full-01/launch-result.json",
+      "passed": true
+    },
+    {
+      "name": "file:live-trials/codex-full-01/launch-start.json",
+      "passed": true
+    },
+    {
+      "name": "file:live-trials/codex-no-index-01/launch-result.json",
+      "passed": true
+    },
+    {
+      "name": "file:live-trials/codex-no-index-01/launch-start.json",
+      "passed": true
+    },
+    {
+      "name": "file:next-native-baseline/environment-notes.json",
+      "passed": true
+    },
+    {
+      "name": "file:next-native-baseline/environment.json",
+      "passed": true
+    },
+    {
+      "name": "file:next-native-baseline/execution-lock.json",
+      "passed": true
+    },
+    {
+      "name": "file:next-native-baseline/host-cli-receipt.json",
+      "passed": true
+    },
+    {
+      "name": "file:next-native-baseline/native-codex-01/launch-result.json",
+      "passed": true
+    },
+    {
+      "name": "file:next-native-baseline/native-codex-01/launch-start.json",
+      "passed": true
+    },
+    {
+      "name": "file:next-native-baseline/native-lock-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "file:next-native-baseline/native-preparation-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "file:next-native-baseline/recipe.json",
+      "passed": true
+    },
+    {
+      "name": "file:next-native-baseline/release.json",
+      "passed": true
+    },
+    {
+      "name": "file:next-native-baseline/run_native.py",
+      "passed": true
+    },
+    {
+      "name": "file:next-native-baseline/source-pins.json",
+      "passed": true
+    },
+    {
+      "name": "file:no-index-result-review.json",
+      "passed": true
+    },
+    {
+      "name": "file:output-observer-queued-postmerge-qualification.json",
+      "passed": true
+    },
+    {
+      "name": "file:output-observer-queued-qualification.json",
+      "passed": true
+    },
+    {
+      "name": "file:output-observer-queued-tests-01/exit.json",
+      "passed": true
+    },
+    {
+      "name": "file:output-observer-queued-tests-03/command.json",
+      "passed": true
+    },
+    {
+      "name": "file:output-observer-queued-tests-03/exit.json",
+      "passed": true
+    },
+    {
+      "name": "file:output-observer-queued-tests-03/junit.xml",
+      "passed": true
+    },
+    {
+      "name": "file:pair-design.json",
+      "passed": true
+    },
+    {
+      "name": "file:pair-lock.json",
+      "passed": true
+    },
+    {
+      "name": "file:pair-observation-final.json",
+      "passed": true
+    },
+    {
+      "name": "file:preparation-independent-audit.json",
+      "passed": true
+    },
+    {
+      "name": "file:provider-readiness/grok-metadata-precheck-01.json",
+      "passed": true
+    },
+    {
+      "name": "file:provider-readiness/grok-metadata-precheck.json",
+      "passed": true
+    },
+    {
+      "name": "file:provider-readiness/public-provider-assets.json",
+      "passed": true
+    },
+    {
+      "name": "file:provider-readiness/route-audit.json",
+      "passed": true
+    },
+    {
+      "name": "file:queued-output-observer-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "file:retained-assets-inspection.json",
+      "passed": true
+    },
+    {
+      "name": "file:run_trial.py",
+      "passed": true
+    },
+    {
+      "name": "file:runtime-preparation-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "file:seal_publication.py",
+      "passed": true
+    },
+    {
+      "name": "file:test_collect_pair.py",
+      "passed": true
+    },
+    {
+      "name": "file:test_collect_three_arms.py",
+      "passed": true
+    },
+    {
+      "name": "file:three-arm-collector-tests-04/command.json",
+      "passed": true
+    },
+    {
+      "name": "file:three-arm-collector-tests-04/pytest.xml",
+      "passed": true
+    },
+    {
+      "name": "file:three-arm-collector-tests-04/result.json",
+      "passed": true
+    },
+    {
+      "name": "file:three-arm-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "file:three-arm-observation-final.json",
+      "passed": true
+    },
+    {
+      "name": "explicit_allowlist_exact",
+      "passed": true
+    },
+    {
+      "name": "original_binding:pair-design.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:historical-recipe-erratum.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:pair-lock.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:pair-observation-final.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:three-arm-observation-final.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:environment.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:launch-recipe-candidates.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:run_trial.py",
+      "passed": true
+    },
+    {
+      "name": "original_binding:collect_pair.py",
+      "passed": true
+    },
+    {
+      "name": "original_binding:test_collect_pair.py",
+      "passed": true
+    },
+    {
+      "name": "original_binding:collect_three_arms.py",
+      "passed": true
+    },
+    {
+      "name": "original_binding:test_collect_three_arms.py",
+      "passed": true
+    },
+    {
+      "name": "original_binding:collector-qualification.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:collector-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:preparation-independent-audit.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:runtime-preparation-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:final-lock-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:full-pair-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:three-arm-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:no-index-result-review.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:retained-assets-inspection.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:allocation-event-contract-diagnosis.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:output-observer-queued-qualification.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:output-observer-queued-postmerge-qualification.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:queued-output-observer-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:live-preparation/bundle-result.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:live-preparation/verification-result.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:provider-readiness/route-audit.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:provider-readiness/grok-metadata-precheck-01.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:provider-readiness/grok-metadata-precheck.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:provider-readiness/public-provider-assets.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:collector-tests-01/exit.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:collector-tests-04/exit.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:collector-tests-04/command.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:collector-tests-04/stdout",
+      "passed": true
+    },
+    {
+      "name": "original_binding:three-arm-collector-tests-04/result.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:three-arm-collector-tests-04/command.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:three-arm-collector-tests-04/pytest.xml",
+      "passed": true
+    },
+    {
+      "name": "original_binding:output-observer-queued-tests-01/exit.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:output-observer-queued-tests-03/exit.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:output-observer-queued-tests-03/command.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:output-observer-queued-tests-03/junit.xml",
+      "passed": true
+    },
+    {
+      "name": "original_binding:live-trials/codex-full-01/launch-start.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:live-trials/codex-full-01/launch-result.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:live-trials/codex-no-index-01/launch-start.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:live-trials/codex-no-index-01/launch-result.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:next-native-baseline/execution-lock.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:next-native-baseline/release.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:next-native-baseline/source-pins.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:next-native-baseline/environment.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:next-native-baseline/environment-notes.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:next-native-baseline/recipe.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:next-native-baseline/run_native.py",
+      "passed": true
+    },
+    {
+      "name": "original_binding:next-native-baseline/host-cli-receipt.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:next-native-baseline/native-preparation-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:next-native-baseline/native-lock-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:next-native-baseline/native-codex-01/launch-start.json",
+      "passed": true
+    },
+    {
+      "name": "original_binding:next-native-baseline/native-codex-01/launch-result.json",
+      "passed": true
+    },
+    {
+      "name": "sealer_source_identical",
+      "passed": true
+    },
+    {
+      "name": "readme_derived_from_reviewed_report",
+      "passed": true
+    },
+    {
+      "name": "fix_source:benchmarks/agent_supervisor/container_coding/terminal_output_observation.py",
+      "passed": true
+    },
+    {
+      "name": "fix_source:benchmarks/agent_supervisor/container_coding/test_terminal_output_queued_observation.py",
+      "passed": true
+    },
+    {
+      "name": "fixed_observer_pin",
+      "passed": true
+    },
+    {
+      "name": "fixed_test_pin",
+      "passed": true
+    },
+    {
+      "name": "runtime_and_publication_pins_distinct",
+      "passed": true
+    },
+    {
+      "name": "link:docs/agent_supervisor/live_indexed_baseline.md:evidence/numerical-live-comparison-20261013/README.md",
+      "passed": true
+    },
+    {
+      "name": "link:docs/agent_supervisor/live_indexed_baseline.md:../../benchmarks/agent_supervisor/container_coding/terminal_output_observation.py",
+      "passed": true
+    },
+    {
+      "name": "link:docs/agent_supervisor/evidence/numerical-live-comparison-20261013/README.md:three-arm-observation-final.json",
+      "passed": true
+    },
+    {
+      "name": "link:docs/agent_supervisor/evidence/numerical-live-comparison-20261013/README.md:preparation-independent-audit.json",
+      "passed": true
+    },
+    {
+      "name": "link:docs/agent_supervisor/evidence/numerical-live-comparison-20261013/README.md:next-native-baseline/release.json",
+      "passed": true
+    },
+    {
+      "name": "link:docs/agent_supervisor/evidence/numerical-live-comparison-20261013/README.md:next-native-baseline/native-preparation-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "link:docs/agent_supervisor/evidence/numerical-live-comparison-20261013/README.md:provider-readiness/route-audit.json",
+      "passed": true
+    },
+    {
+      "name": "link:docs/agent_supervisor/evidence/numerical-live-comparison-20261013/README.md:pair-observation-final.json",
+      "passed": true
+    },
+    {
+      "name": "link:docs/agent_supervisor/evidence/numerical-live-comparison-20261013/README.md:full-pair-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "link:docs/agent_supervisor/evidence/numerical-live-comparison-20261013/README.md:output-observer-queued-tests-03/junit.xml",
+      "passed": true
+    },
+    {
+      "name": "link:docs/agent_supervisor/evidence/numerical-live-comparison-20261013/README.md:historical-recipe-erratum.json",
+      "passed": true
+    },
+    {
+      "name": "link:docs/agent_supervisor/evidence/numerical-live-comparison-20261013/README.md:three-arm-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:collect_three_arms.py",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:collect_three_arms.py",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:collect_three_arms.py",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:environment.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:environment.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:environment.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:environment.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:pair-design.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:pair-design.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:pair-design.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:pair-design.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:launch-recipe-candidates.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:launch-recipe-candidates.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:launch-recipe-candidates.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:launch-recipe-candidates.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:three-arm-collector-tests-04/command.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:three-arm-collector-tests-04/command.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:three-arm-collector-tests-04/command.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:three-arm-collector-tests-04/command.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:collector-tests-04/stdout",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:collector-tests-04/stdout",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:collector-tests-04/stdout",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:three-arm-collector-tests-04/pytest.xml",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:three-arm-collector-tests-04/pytest.xml",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:three-arm-collector-tests-04/pytest.xml",
+      "passed": true
+    },
+    {
+      "name": "junit_has_no_output_bodies:three-arm-collector-tests-04/pytest.xml",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:no-index-result-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:no-index-result-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:no-index-result-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:no-index-result-review.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:collector-qualification.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:collector-qualification.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:collector-qualification.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:collector-qualification.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:preparation-independent-audit.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:preparation-independent-audit.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:preparation-independent-audit.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:preparation-independent-audit.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:provider-readiness/grok-metadata-precheck-01.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:provider-readiness/grok-metadata-precheck-01.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:provider-readiness/grok-metadata-precheck-01.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:provider-readiness/grok-metadata-precheck-01.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:live-trials/codex-no-index-01/launch-start.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:live-trials/codex-no-index-01/launch-start.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:live-trials/codex-no-index-01/launch-start.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:live-trials/codex-no-index-01/launch-start.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:manifest.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:manifest.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:manifest.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:manifest.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:next-native-baseline/native-preparation-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:next-native-baseline/native-preparation-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:next-native-baseline/native-preparation-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:next-native-baseline/native-preparation-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:seal_publication.py",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:seal_publication.py",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:seal_publication.py",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:three-arm-observation-final.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:three-arm-observation-final.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:three-arm-observation-final.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:three-arm-observation-final.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:queued-output-observer-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:queued-output-observer-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:queued-output-observer-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:queued-output-observer-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:historical-recipe-erratum.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:historical-recipe-erratum.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:historical-recipe-erratum.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:historical-recipe-erratum.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:full-pair-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:full-pair-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:full-pair-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:full-pair-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:collector-tests-04/command.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:collector-tests-04/command.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:collector-tests-04/command.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:collector-tests-04/command.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:next-native-baseline/recipe.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:next-native-baseline/recipe.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:next-native-baseline/recipe.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:next-native-baseline/recipe.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:next-native-baseline/native-codex-01/launch-result.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:next-native-baseline/native-codex-01/launch-result.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:next-native-baseline/native-codex-01/launch-result.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:next-native-baseline/native-codex-01/launch-result.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:pair-lock.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:pair-lock.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:pair-lock.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:pair-lock.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:pair-observation-final.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:pair-observation-final.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:pair-observation-final.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:pair-observation-final.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:output-observer-queued-tests-03/junit.xml",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:output-observer-queued-tests-03/junit.xml",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:output-observer-queued-tests-03/junit.xml",
+      "passed": true
+    },
+    {
+      "name": "junit_has_no_output_bodies:output-observer-queued-tests-03/junit.xml",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:live-trials/codex-no-index-01/launch-result.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:live-trials/codex-no-index-01/launch-result.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:live-trials/codex-no-index-01/launch-result.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:live-trials/codex-no-index-01/launch-result.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:output-observer-queued-tests-03/exit.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:output-observer-queued-tests-03/exit.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:output-observer-queued-tests-03/exit.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:output-observer-queued-tests-03/exit.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:live-preparation/bundle-result.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:live-preparation/bundle-result.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:live-preparation/bundle-result.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:live-preparation/bundle-result.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:next-native-baseline/run_native.py",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:next-native-baseline/run_native.py",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:next-native-baseline/run_native.py",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:final-lock-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:final-lock-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:final-lock-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:final-lock-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:output-observer-queued-tests-03/command.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:output-observer-queued-tests-03/command.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:output-observer-queued-tests-03/command.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:output-observer-queued-tests-03/command.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:test_collect_three_arms.py",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:test_collect_three_arms.py",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:test_collect_three_arms.py",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:allocation-event-contract-diagnosis.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:allocation-event-contract-diagnosis.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:allocation-event-contract-diagnosis.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:allocation-event-contract-diagnosis.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:next-native-baseline/host-cli-receipt.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:next-native-baseline/host-cli-receipt.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:next-native-baseline/host-cli-receipt.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:next-native-baseline/host-cli-receipt.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:.gitattributes",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:.gitattributes",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:.gitattributes",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:live-trials/codex-full-01/launch-result.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:live-trials/codex-full-01/launch-result.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:live-trials/codex-full-01/launch-result.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:live-trials/codex-full-01/launch-result.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:runtime-preparation-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:runtime-preparation-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:runtime-preparation-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:runtime-preparation-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:output-observer-queued-postmerge-qualification.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:output-observer-queued-postmerge-qualification.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:output-observer-queued-postmerge-qualification.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:output-observer-queued-postmerge-qualification.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:live-preparation/verification-result.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:live-preparation/verification-result.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:live-preparation/verification-result.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:live-preparation/verification-result.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:live-trials/codex-full-01/launch-start.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:live-trials/codex-full-01/launch-start.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:live-trials/codex-full-01/launch-start.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:live-trials/codex-full-01/launch-start.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:provider-readiness/route-audit.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:provider-readiness/route-audit.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:provider-readiness/route-audit.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:provider-readiness/route-audit.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:run_trial.py",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:run_trial.py",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:run_trial.py",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:output-observer-queued-qualification.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:output-observer-queued-qualification.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:output-observer-queued-qualification.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:output-observer-queued-qualification.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:next-native-baseline/native-codex-01/launch-start.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:next-native-baseline/native-codex-01/launch-start.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:next-native-baseline/native-codex-01/launch-start.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:next-native-baseline/native-codex-01/launch-start.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:retained-assets-inspection.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:retained-assets-inspection.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:retained-assets-inspection.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:retained-assets-inspection.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:next-native-baseline/execution-lock.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:next-native-baseline/execution-lock.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:next-native-baseline/execution-lock.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:next-native-baseline/execution-lock.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:next-native-baseline/release.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:next-native-baseline/release.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:next-native-baseline/release.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:next-native-baseline/release.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:output-observer-queued-tests-01/exit.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:output-observer-queued-tests-01/exit.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:output-observer-queued-tests-01/exit.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:output-observer-queued-tests-01/exit.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:provider-readiness/public-provider-assets.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:provider-readiness/public-provider-assets.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:provider-readiness/public-provider-assets.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:provider-readiness/public-provider-assets.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:three-arm-collector-tests-04/result.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:three-arm-collector-tests-04/result.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:three-arm-collector-tests-04/result.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:three-arm-collector-tests-04/result.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:next-native-baseline/source-pins.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:next-native-baseline/source-pins.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:next-native-baseline/source-pins.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:next-native-baseline/source-pins.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:collector-tests-01/exit.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:collector-tests-01/exit.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:collector-tests-01/exit.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:collector-tests-01/exit.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:next-native-baseline/native-lock-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:next-native-baseline/native-lock-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:next-native-baseline/native-lock-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:next-native-baseline/native-lock-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:provider-readiness/grok-metadata-precheck.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:provider-readiness/grok-metadata-precheck.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:provider-readiness/grok-metadata-precheck.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:provider-readiness/grok-metadata-precheck.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:collector-tests-04/exit.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:collector-tests-04/exit.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:collector-tests-04/exit.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:collector-tests-04/exit.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:next-native-baseline/environment.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:next-native-baseline/environment.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:next-native-baseline/environment.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:next-native-baseline/environment.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:collector-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:collector-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:collector-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:collector-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:next-native-baseline/environment-notes.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:next-native-baseline/environment-notes.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:next-native-baseline/environment-notes.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:next-native-baseline/environment-notes.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:README.md",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:README.md",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:README.md",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:test_collect_pair.py",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:test_collect_pair.py",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:test_collect_pair.py",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:three-arm-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:three-arm-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:three-arm-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "no_payload_fields:three-arm-independent-review.json",
+      "passed": true
+    },
+    {
+      "name": "allowed_file_type:collect_pair.py",
+      "passed": true
+    },
+    {
+      "name": "no_prohibited_raw_artifact:collect_pair.py",
+      "passed": true
+    },
+    {
+      "name": "no_credential_pattern:collect_pair.py",
+      "passed": true
+    },
+    {
+      "name": "authoritative_metrics",
+      "passed": true
+    },
+    {
+      "name": "report_metrics_and_relative_claims",
+      "passed": true
+    },
+    {
+      "name": "source384_and_intent_gaps_visible",
+      "passed": true
+    },
+    {
+      "name": "final_successors_explicit",
+      "passed": true
+    },
+    {
+      "name": "observer_not_live_qualified_explicit",
+      "passed": true
+    },
+    {
+      "name": "billing_and_auxiliary_scope_explicit",
+      "passed": true
+    },
+    {
+      "name": "strict_comparator_and_budgets_retained",
+      "passed": true
+    },
+    {
+      "name": "132_tests_not_double_counted",
+      "passed": true
+    },
+    {
+      "name": "persistence_scope_honest",
+      "passed": true
+    }
+  ],
+  "claims_bound_to_retained_observations": true,
+  "helper_test_scope": "Authored and historical metadata accounting fixtures; no generation, training or proof claims.",
+  "manifest_sha256": "0d2db4998a0cd2e8f62628f43790594257dc11a772a48611dfdf78ffc085d9b0",
+  "model_calls": 0,
+  "model_or_oracle_payload_fields_found": false,
+  "observed_at_utc": "2026-10-13T19:22:58.967096+00:00",
+  "output_observer_live_requalified": false,
+  "passed": true,
+  "production_files_changed": false,
+  "prohibited_raw_artifacts_found": false,
+  "provider_calls": 0,
+  "public_routing_identity_note": "One numerical broker session identifier is public routing metadata, not provider authentication or a replayable private session descriptor; no socket or authorization material is included.",
+  "publication_base_commit": "f7cf87104e079d1159226c137449e29bf98bfd40",
+  "readme_sha256": "f9dfd40af7f9209481ff949e69e078f496eb4b98df615b9834fa11249e1580e6",
+  "release_blockers": [],
+  "reviewer_sha256": "8774753bf2225d4513e98f2a7ebcfffe02e79710fe929f51542fc6d3ee5b14ce",
+  "runtime_accelerate_commit": "a8f57366ff4110a87f1f13d1e60992f83f689821",
+  "runtime_datasets_commit": "28b9ef1f0b9da51e87b1e68ee565b43681397109",
+  "schema": "numerical-live-publication-independent-review@1",
+  "sealed_files": 62,
+  "secret_pattern_matches": 0,
+  "source_files": {
+    "benchmarks/agent_supervisor/container_coding/terminal_output_observation.py": "f841c4de28e87a8871ee634449cd3c1c2094fb744a1f413f4c99f12660642648",
+    "benchmarks/agent_supervisor/container_coding/test_terminal_output_queued_observation.py": "dad8b82f806615cd8f1caefb2b75f507d419e836b9a8c4ab85d8879940ce78e7"
+  },
+  "top_report_sha256": "0bd84d1960c21c2818829b553a5f9b4030cb8a18b2e8920347438e3f4b95603b"
+}
