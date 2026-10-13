@@ -1,0 +1,72 @@
+{
+  "check_anchors": true,
+  "checker_sha256": "596a0038b18d592f2e605643890afc85e457558f7b887932a474557d7586819e",
+  "child_documentation_receipt_sha256": "195a093d2cfdcd81bf04d24ea776667cbb1b4444100e55c7a0657b2f3c49ab30",
+  "child_manifest_entries_verified": 61,
+  "child_manifest_sha256": "3e3e02b43e8a02f3b5555a4b8572e5b4a77280a8ee608670438cd5033247c908",
+  "child_new_tests": 145,
+  "child_note_links_verified": [
+    {
+      "anchor": "freeze-a-shared-policy-in-a-benchmark-run",
+      "path": "docs/agent_supervisor/worker_source_views.md",
+      "revision": "e1c410bcbd7651c31fca84beb82e3ef2fe9ac836",
+      "sha256": "024a09ce91b85e4fe46ea3b9c43c3715d3b8defa0cd639b69d7c6767a12e19e8"
+    },
+    {
+      "anchor": null,
+      "path": "docs/agent_supervisor/evidence/benchmark-shared-source-policy-20261013/README.md",
+      "revision": "e1c410bcbd7651c31fca84beb82e3ef2fe9ac836",
+      "sha256": "1dac44c925116db1b621975b85191df3f9fd7fa7f10f3807d22c091c5342634c"
+    },
+    {
+      "anchor": null,
+      "path": "docs/agent_supervisor/reversible_codebase_views_plan.md",
+      "revision": "e1c410bcbd7651c31fca84beb82e3ef2fe9ac836",
+      "sha256": "ada820343109140a66c7ac537d8351fa64a5b0ed62d2213fa5292bb1ff22ea4f"
+    }
+  ],
+  "child_owned_files_preserved_in_merge": 62,
+  "child_qualification_command_sha256": "c8067f492b228a19d624421c8ef40164399e48c74566e87eb79d731efa175853",
+  "child_qualified_datasets_execution_revision": "9eb06b73658d8203628a697db6199f14ecf479e4",
+  "child_qualified_distinct_tests": 1030,
+  "child_qualified_documentation_workflow_blocks": 4,
+  "child_qualified_junit": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 1030
+  },
+  "child_qualified_manual_anchors": 9,
+  "child_qualified_manual_links": 72,
+  "child_qualified_source_binding_count": 183,
+  "child_qualified_suites": 23,
+  "child_static_review_sha256": "fc7daa176bde6991be3ccedb9d1560c9c29a271fc3599d430fa0d83d14f1330a",
+  "complete_session_token_savings_established": false,
+  "current_parent_datasets_pin_executed_here": false,
+  "errors": [],
+  "failed_initial_attempt_fixes_test_only": true,
+  "failed_initial_attempt_preserved": true,
+  "hosted_billing_lock_observed": true,
+  "hosted_ci_sha256": "066871f49d652b76c01212e9ddd8c1a19d1f6d00bb13821488223b21526c7b8f",
+  "hosted_gate_execution_observed": false,
+  "hosted_gates_passed": false,
+  "merge_compatibility_sha256": "6cd2325e38bb5517c158aa78852b5cfbbc4b156fc3580bea259a0caabd644d64",
+  "model_assets_modified_in_this_increment": false,
+  "new_training_or_provider_calls": 0,
+  "note": "implementation_plan/docs/110-supervisor-benchmark-shared-source-policy-2026-10-13.md",
+  "note_sha256": "062c02dd2dc07d6acace1f273370380f8d6e4c8c30512de40e7484432aea5341",
+  "observed_at_utc": "2026-10-13T07:36:02.195480+00:00",
+  "parent_base_revision": "142e1cdfab146110e8eedbecd0580a4ddad308b2",
+  "published_child_merge": "e1c410bcbd7651c31fca84beb82e3ef2fe9ac836",
+  "published_merge_full_regression_rerun": false,
+  "qualified_child_leaf": "2b07ed46b67d701e85ec45e8995517118a7958e6",
+  "runtime_databases_published": false,
+  "schema": "benchmark-shared-source-policy-parent-checks@1",
+  "scope": "Parent note links/anchors, exact published child manifest, qualified source custody, merge limits and intended Gitlinks; no full-parent or merged-tree regression.",
+  "staged_pins": {
+    "external/ipfs_accelerate": "e1c410bcbd7651c31fca84beb82e3ef2fe9ac836",
+    "external/ipfs_datasets": "6cfc5a640a4715dfc4da1a8f5d180719b4bc6fbe",
+    "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0"
+  },
+  "status": "pass"
+}
