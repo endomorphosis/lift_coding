@@ -1,0 +1,131 @@
+{
+  "accelerator_publication": "fe8c314449b0da7fbcfa4b8a4341f9bc3b9f9d9f",
+  "billing_lock_observed": true,
+  "checked_at_utc": "2026-10-13T22:55:29.917535+00:00",
+  "checker": {
+    "api": "check_file(path, check_anchors=True)",
+    "path": "/home/barberb/lift_coding/.worktrees/token-selector-accelerate-20261011/scripts/docs/check_current_docs_links.py",
+    "root_override": "/home/barberb/lift_coding/.worktrees/header-proof-key-custody-root-20261011",
+    "sha256": "596a0038b18d592f2e605643890afc85e457558f7b887932a474557d7586819e"
+  },
+  "dependencies": [
+    {
+      "head": "fe8c314449b0da7fbcfa4b8a4341f9bc3b9f9d9f",
+      "observed_origin_main": "fe8c314449b0da7fbcfa4b8a4341f9bc3b9f9d9f",
+      "path": "/home/barberb/lift_coding/.worktrees/token-selector-accelerate-20261011",
+      "published_ancestor": true
+    },
+    {
+      "head": "c9d0f016a9fcfa327346e056e38e2ffa3b25ffa0",
+      "observed_origin_main": "59561dd2979e49fd26aa3fcfed6a5edbca1f718f",
+      "path": "/home/barberb/lift_coding/.worktrees/signed-terminal-scope-datasets-20261013",
+      "published_ancestor": true
+    },
+    {
+      "head": "8ac00bb1974b1378e12091d546d8425af34049e0",
+      "observed_origin_main": "8ac00bb1974b1378e12091d546d8425af34049e0",
+      "path": "/home/barberb/lift_coding/.worktrees/publication-main-20261004/kit",
+      "published_ancestor": true
+    }
+  ],
+  "hosted_steps_executed": false,
+  "local_doc_anchors": 10,
+  "local_doc_gates_on_qualified_leaf": 4,
+  "local_doc_relative_links": 83,
+  "model_provider_solver_docker_calls": 0,
+  "parent_base": "e18ce337cb622d424395448b4d4fe2c666087eb1",
+  "published_child_objects": [
+    {
+      "bytes": 10253,
+      "fragment": "roles-and-bounds",
+      "path": "docs/agent_supervisor/signed_terminal_source_scope.md",
+      "sha256": "94544587240ac63955fb20cd5e69d50d6729039b208c57fc51000a1446cf9da1",
+      "status": "pass"
+    },
+    {
+      "bytes": 117854,
+      "fragment": null,
+      "path": "docs/agent_supervisor/evidence/signed-terminal-source-scope-20261013/qualification-02/commands.json",
+      "sha256": "a2af6f462383adc20dc351cb8a59acd09a37561b8a1e4888e5f252686d602edc",
+      "status": "pass"
+    },
+    {
+      "bytes": 7791,
+      "fragment": null,
+      "path": "docs/agent_supervisor/evidence/signed-terminal-source-scope-20261013/README.md",
+      "sha256": "73c5299d22fbc5b85adfb88cf60a98fe97afae8fdd9af6b0c2db4a4140e45307",
+      "status": "pass"
+    },
+    {
+      "bytes": 60718,
+      "fragment": "signed-terminal-context-selection-2026-10-13",
+      "path": "docs/agent_supervisor/reversible_codebase_views_plan.md",
+      "sha256": "a0ba606d04cb9a4ea6c31d549d85b46b39819bebd902aec9aad059bd4a2e9afa",
+      "status": "pass"
+    }
+  ],
+  "qualified_child_paths_unchanged": 54,
+  "qualified_leaf": "fe8c314449b0da7fbcfa4b8a4341f9bc3b9f9d9f",
+  "qualified_source_git_objects_match": true,
+  "read_guards_after": [
+    {
+      "bytes": 6115,
+      "path": "implementation_plan/docs/116-supervisor-signed-terminal-source-scope-2026-10-13.md",
+      "sha256": "e39f0fc9ed72747ce5ab162386e71c746148e0c12b08966e64d6c467f9903d69"
+    },
+    {
+      "bytes": 23504,
+      "path": "artifacts/signed-terminal-source-scope-publication-20261013/hosted-ci.json",
+      "sha256": "b169f2686d156f57150a4266a95d21f23ba7bf123f86d546ee101fe1c5731624"
+    },
+    {
+      "bytes": 15171,
+      "path": "artifacts/signed-terminal-source-scope-publication-20261013/merge-compatibility.json",
+      "sha256": "f2b21cc31a433cf3d28b255c285371246a035d6a96ecd03531f1485eb0039e6d"
+    },
+    {
+      "bytes": 11116,
+      "path": "artifacts/signed-terminal-source-scope-publication-20261013/publication_check_runner.py",
+      "sha256": "67c92afbd3c8c934e3d7e3aab3bfd7add41e04cbb066810b891b499a35f2e4a5"
+    }
+  ],
+  "read_guards_before": [
+    {
+      "bytes": 6115,
+      "path": "implementation_plan/docs/116-supervisor-signed-terminal-source-scope-2026-10-13.md",
+      "sha256": "e39f0fc9ed72747ce5ab162386e71c746148e0c12b08966e64d6c467f9903d69"
+    },
+    {
+      "bytes": 23504,
+      "path": "artifacts/signed-terminal-source-scope-publication-20261013/hosted-ci.json",
+      "sha256": "b169f2686d156f57150a4266a95d21f23ba7bf123f86d546ee101fe1c5731624"
+    },
+    {
+      "bytes": 15171,
+      "path": "artifacts/signed-terminal-source-scope-publication-20261013/merge-compatibility.json",
+      "sha256": "f2b21cc31a433cf3d28b255c285371246a035d6a96ecd03531f1485eb0039e6d"
+    },
+    {
+      "bytes": 11116,
+      "path": "artifacts/signed-terminal-source-scope-publication-20261013/publication_check_runner.py",
+      "sha256": "67c92afbd3c8c934e3d7e3aab3bfd7add41e04cbb066810b891b499a35f2e4a5"
+    }
+  ],
+  "read_guards_unchanged": true,
+  "relative_anchor_count": 0,
+  "relative_link_count": 3,
+  "relative_links_passed": true,
+  "retained_new_cases": 76,
+  "retained_source_bindings": 214,
+  "retained_suites": 13,
+  "retained_tests": 502,
+  "schema": "signed-terminal-source-scope-parent-checks@1",
+  "staged_gitlinks": [
+    "160000 fe8c314449b0da7fbcfa4b8a4341f9bc3b9f9d9f 0\texternal/ipfs_accelerate",
+    "160000 c9d0f016a9fcfa327346e056e38e2ffa3b25ffa0 0\texternal/ipfs_datasets",
+    "160000 8ac00bb1974b1378e12091d546d8425af34049e0 0\texternal/ipfs_kit"
+  ],
+  "status": "pass",
+  "tests_or_workflow_rerun": false,
+  "total_session_token_savings_established": false
+}
