@@ -31,7 +31,10 @@ supervisor START and official task verification did not run. The authored rename
 is not a benchmark solution. Provider tokens and official reward are unmeasured.
 
 This comparison establishes the read/edit measurement mechanism, not an advantage
-for the full indexed IR system. Required source remains inline. Prioritize
+for the full indexed IR system. The
+[subsequent prompt census](107-supervisor-metadata-projection-pair-2026-10-13.md)
+established that this fixture already deferred both program bodies and retained
+three harness support files inline. Prioritize
 task-relevant source selection, small capsules and actual context substitution,
 then compare repeated native model sessions with all-attempt usage and official
 success. Model-facing compact-edit submission also remains open; these workers

@@ -1,0 +1,30 @@
+{
+  "accelerator_commit": "49b01d2515f338af73f8c14a96bbf235e339e4bd",
+  "accelerator_origin_main": "49b01d2515f338af73f8c14a96bbf235e339e4bd",
+  "evidence_manifest_sha256": "28c79d2c046a1bdede356c045a6b132113ede4e139cd4d82f04a4d3d18b36cab",
+  "explicit_link_errors": [],
+  "git_diff_check_exit_code": 0,
+  "helper_sha256": "12e30682417e1eacd22bda2e907f9a61db1b3add569bc7ad4efa8b7fba5bb6ee",
+  "hosted_billing_lock_observed": true,
+  "hosted_ci_observation_sha256": "08bbfaca230706312dacbc15ca423ee33d117a4d272227b4015c77f959012a12",
+  "hosted_documentation_gates_passed": false,
+  "local_documentation_gates_passed": true,
+  "parent_base": "b26128b1b200ee77bb7f497152c806768312c774",
+  "passed": true,
+  "preserved_gitlinks": {
+    "external/ipfs_datasets": "5723a541c5d575b88f01532e4d241dc95a1f3e99",
+    "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0"
+  },
+  "regression_tests": 289,
+  "report_sha256": {
+    "implementation_plan/docs/104-supervisor-source-view-read-edit-pair-2026-10-13.md": "7223a51c4dd3fd21db30cee2e80fb2462ba4294987a26222b173943e3dd4eb52",
+    "implementation_plan/docs/107-supervisor-metadata-projection-pair-2026-10-13.md": "107e63f162580289501aab53f61fc3e9b8617827cb4178d30e223f5a0928e58c"
+  },
+  "schema": "context-projection-parent-publication-checks@1",
+  "staged_gitlinks": {
+    "external/ipfs_accelerate": "49b01d2515f338af73f8c14a96bbf235e339e4bd",
+    "external/ipfs_datasets": "5723a541c5d575b88f01532e4d241dc95a1f3e99",
+    "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0"
+  },
+  "tested_datasets": "f47161b757190380e9898aff155067c1ad609217"
+}
