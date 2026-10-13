@@ -1,0 +1,30 @@
+{
+  "additional_merge_replay_tests": 295,
+  "explicit_link_errors": [],
+  "git_diff_checks_passed": true,
+  "hosted_billing_lock_observed": true,
+  "hosted_ci_observation_sha256": "bce99f520ee195609a4877571a068ebf99da9f5bc8d6dff0c9d29033b97d0fde",
+  "hosted_documentation_gates_passed": false,
+  "local_documentation_gates_passed": true,
+  "manifest_sha256": "fb8b7d9ebe5e90bb3679ac5294656e15633237ff74cc2a824c62c19504c6e36a",
+  "merge_evidence_manifest_sha256": "ff4c07417b98e693b01d27ba47986e2c699ea4910603f7dd7010144cfb70981a",
+  "observed_remote_heads": {
+    "accelerator": "5ad92f61bb643d4138749d3df16663a2af1c79c1",
+    "datasets": "6cfc5a640a4715dfc4da1a8f5d180719b4bc6fbe"
+  },
+  "parent_base": "bb737776130a9f50f2faf6d042904bb4ddd9afa4",
+  "passed": true,
+  "preserved_kit": "8ac00bb1974b1378e12091d546d8425af34049e0",
+  "qualified_numerical_revision": "65cf6a24650213a4607d935a66513c53b3582a87",
+  "qualified_revisions_published_on_main": true,
+  "report_sha256": "e77d7d5c4afcc875f7471a4235304e1a3c9ce3aa798ff1963fce3f1380d4752d",
+  "schema": "numerical-loop-parent-publication-checks@1",
+  "sealed_evidence_file_count": 93,
+  "skipped_checkpoint_tests": 2,
+  "staged_gitlinks": {
+    "external/ipfs_accelerate": "e1c410bcbd7651c31fca84beb82e3ef2fe9ac836",
+    "external/ipfs_datasets": "6cfc5a640a4715dfc4da1a8f5d180719b4bc6fbe",
+    "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0"
+  },
+  "unique_passing_tests": 1096
+}

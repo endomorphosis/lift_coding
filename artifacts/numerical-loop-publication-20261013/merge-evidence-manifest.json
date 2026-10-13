@@ -1,0 +1,119 @@
+{
+  "files": {
+    "copy_merge_evidence.py": {
+      "bytes": 1450,
+      "sha256": "0b83b8554d9b10adead002fcc1cc52395698523e2492cb080c9346224a77d385"
+    },
+    "docker-04/command.json": {
+      "bytes": 15487,
+      "sha256": "0af3d61575eca612923429091f61248e777ad69b60540e49fed713ac2449d01f"
+    },
+    "docker-04/container-controls.json": {
+      "bytes": 2418,
+      "sha256": "89900a5939d492e338ab20211b1c0d9c2e985c65bbffa50328ea2c9402c46f5b"
+    },
+    "docker-04/owner-command.json": {
+      "bytes": 291,
+      "sha256": "abda101df44f23e90f7b3c2d0d427e2e2f52a557466a123e1e1a71f00f832473"
+    },
+    "docker-04/qualification.json": {
+      "bytes": 4749,
+      "sha256": "893a658f7197335bf1d42fb81b40583c9dde9413697d162f8e3e2886feb2349a"
+    },
+    "docker-04/results/probe-qualification.json": {
+      "bytes": 2373,
+      "sha256": "0f72dd78cf641d5658aaca4643b459900923e9ee25c2a86be3f4b9d009ff7d31"
+    },
+    "docker-04/results/session-observation.json": {
+      "bytes": 2336,
+      "sha256": "bfc4e5d0dddaec1e0fc5d9a27e9f75fc16396a0b834eac27aa81655ee5731b5f"
+    },
+    "docker-04/runner-snapshot/owner_probe.py": {
+      "bytes": 13378,
+      "sha256": "9523abb61d61d70b84fa76db1857b3ad6c1b748b85c380cefe0378e01634d730"
+    },
+    "docker-04/runner-snapshot/run_docker_qualification.py": {
+      "bytes": 11347,
+      "sha256": "03224f54e945b70f45849e4bfbc1f31f5a63fb239d0b834f2b0292c0f648d915"
+    },
+    "docker-04/runner-snapshot/worker_probe.py": {
+      "bytes": 8203,
+      "sha256": "ffad1ba251ce3d15d47f55f1917cbfc74aaa64ce2f866727684f646b0c01bf79"
+    },
+    "docker-release-04.json": {
+      "bytes": 13192,
+      "sha256": "f50979eb3a5161f1d77dd8fccc4ec1572591881393e496d4da7e6212dcde6881"
+    },
+    "merge-custody-01/command.json": {
+      "bytes": 2117,
+      "sha256": "f50b07b721f259d1614eb9eeb4a4fcf58c3ae793be0e3e9914300cb34c5390b4"
+    },
+    "merge-custody-01/exit.json": {
+      "bytes": 55,
+      "sha256": "c6f4681e39c5476b876ec81aed8800010e20366b839ef3fe1e3a81b51d1343ce"
+    },
+    "merge-custody-01/junit.xml": {
+      "bytes": 1101,
+      "sha256": "6f7de4637203b2abcc1113aa045d21689dda1f758e82bf969bb8ca87a183bbde"
+    },
+    "merge-custody-01/stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "merge-custody-01/stdout": {
+      "bytes": 954,
+      "sha256": "76f670952c65aa0d251cd4ae5142aa0640ccff9786f21b32d76d7e877268ed59"
+    },
+    "merge-docker-evidence-audit.json": {
+      "bytes": 17918,
+      "sha256": "6114cce0915001eb93d9eda124581dbdeb192e7328cbabca0fd3e64a4a6e2f27"
+    },
+    "merge-documentation-01/gates.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "merge-documentation-01/gates.stdout": {
+      "bytes": 200,
+      "sha256": "3ee5d7242b0b646a480b60c7ce9d3e9c1052f7d794069acb52919a4e03b93db7"
+    },
+    "merge-documentation-01/result.json": {
+      "bytes": 903,
+      "sha256": "2677114ca4c433fa1414228e6cb49b816ebc5d10e2d88bd9bce2c741fdd00b9f"
+    },
+    "merge-final-independent-review.json": {
+      "bytes": 60280,
+      "sha256": "757c95908c619f528ca6697b60209cebf70bc4ac673567c0d2ff6219f772e78b"
+    },
+    "merge-input-review.json": {
+      "bytes": 8606,
+      "sha256": "0cde30ff290da9d5d1d990ada731e02f8eb4a27602ea6959a766e2ae5bb350cc"
+    },
+    "merge-tests-01/command.json": {
+      "bytes": 2513,
+      "sha256": "31bfd0d21d38f363f98e63d9c84030d9f2a26d4fe47c40271f64b66fa91fe961"
+    },
+    "merge-tests-01/exit.json": {
+      "bytes": 55,
+      "sha256": "2d18b56e0fd3cad46746409666dc04eec3c9dabb48f87915023e81f83c68d1cb"
+    },
+    "merge-tests-01/junit.xml": {
+      "bytes": 59699,
+      "sha256": "c4e26ef2e906f99b13d5d6c291ef84589b2529d452453051e0060f1fe3dc8842"
+    },
+    "merge-tests-01/stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "merge-tests-01/stdout": {
+      "bytes": 96833,
+      "sha256": "78cbfedffb84f51d01465a5d74d28dc58a318251cdc11f2ee17fbf924c00ed26"
+    },
+    "release_merge_docker.py": {
+      "bytes": 1383,
+      "sha256": "bd1d0ffd692cca7454b11405a35b3c1c3c6c59594d761a863193440891c7fff2"
+    }
+  },
+  "private_owner_state_included": false,
+  "raw_bytes_unchanged": true,
+  "schema": "numerical-loop-merge-publication-manifest@1"
+}

@@ -1,0 +1,122 @@
+{
+  "additional_changed_runtime_dependencies": [
+    {
+      "merged_sha256": "2deedabb4cd526625978ace7bbf27436f109afff6ddd6c5cba3d81431d742255",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_doctor_dispatch.py",
+      "qualified_commit_sha256": "18868e63f8600ac6fb79e8368ab4dc0a6d15a5e072226b665da077140ae4f377"
+    },
+    {
+      "merged_sha256": "cc708bb22c56caef6caf928a0a817e39bdf0db7725c716c8f6548013050d8475",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_source_view_observation.py",
+      "qualified_commit_sha256": "aea92b1fd46cd5a1fa96c6a710479e80993c3ff083651d2e015574475fcf431b"
+    },
+    {
+      "merged_sha256": "46e93f671ad340cbbbd97f8a783d45a3738c94869586713e293a90d0ae85145d",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_source_view_policy.py",
+      "qualified_commit_sha256": "1437b8e44eb8a27295d5d54ce4c09567f8b700380d43c6e8d3748aa88ebc633e"
+    },
+    {
+      "merged_sha256": "3545f7db90c225b9eed1969170d5f91c0196afb24e49f7149b3650ad6fb68043",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/source_view_policy.py",
+      "qualified_commit_sha256": "18ac32e0246a8af5985b5b3311a37d08f09786cfd8cb25373b0b92175892b57b"
+    },
+    {
+      "merged_sha256": "3c615c89b98aa475859ae561d4e27995a16674e133f66d056ac8b3330e124d6b",
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/worker_source_broker.py",
+      "qualified_commit_sha256": "1a56f1a615e1a696a6c1ca42020247e695778e2a1b893c38e6c27341aecd475d"
+    }
+  ],
+  "behavior_changes": [
+    "Generated owner launch now unconditionally calls worker_source_argv(handoff argv), which validates and removes an owner-only policy argument before worker execution. Even an absent policy executes the new adapter; no-policy passthrough requires replay.",
+    "Benchmark configuration, preparation, execute/collect currentness and Harbor carry/freeze an optional closed source_view_policy recipe with its implementation binding.",
+    "Driver and doctor argv builders carry the policy to the owner; the source-view observation collector joins policy bindings to owner-issued descriptors.",
+    "The shared policy parser adds bounded strict JSON serialization; the source broker reads the policy and rejects competing or inconsistent selections. No numerical grammar, obligations, summary algorithm or D source was changed by this merge."
+  ],
+  "checkout_changed_by_this_review": false,
+  "current_checkout_head": "e1c410bcbd7651c31fca84beb82e3ef2fe9ac836",
+  "datasets_commit": "6cfc5a640a4715dfc4da1a8f5d180719b4bc6fbe",
+  "evidence_all_byte_identical": true,
+  "evidence_files": 93,
+  "evidence_manifest_sha256": "fb8b7d9ebe5e90bb3679ac5294656e15633237ff74cc2a824c62c19504c6e36a",
+  "frozen_numerical_files_unchanged": {
+    "benchmarks/agent_supervisor/container_coding/terminal_numerical_policy.py": "698c4d474aaedcf7858829df4429e2fae576e8108f8d882957198f82b740d159",
+    "benchmarks/agent_supervisor/container_coding/test_terminal_numerical_control_context.py": "00397e2574a263154cff981a6cbb0728c5122bdf27c808b4dd48ddd92540afb6",
+    "benchmarks/agent_supervisor/container_coding/test_terminal_numerical_policy.py": "bff077f9738d7b2455f9c479ded5f52fa77455317f78a6e47dcb714dae3ccc4d",
+    "ipfs_accelerate_py/agent_supervisor/runtime/numerical_formalization_context.py": "33852987f9c3e3c69a40402f841dbe3725e1b4cd3d16fe64bbcb68ee63739edb"
+  },
+  "historical_qualification_remains_bound_to": "65cf6a24650213a4607d935a66513c53b3582a87",
+  "limitations": [
+    "The parent fast-forwarded the clean worktree during this read-only comparison and is running merge-specific qualification separately. This review does not itself mark the merged runtime qualified.",
+    "Published 65cf evidence must remain immutable and historical; record fresh merge test and Docker results separately rather than rewriting their source pins."
+  ],
+  "merge_tests_executed_by_this_review": false,
+  "merged_accelerator_commit": "e1c410bcbd7651c31fca84beb82e3ef2fe9ac836",
+  "original_qualified_closure_changed": [
+    {
+      "merged_sha256": "f07f97467a8494c0d569308a578d45a2faec7d68cd70a44030dee57bea2522cf",
+      "path": "benchmarks/agent_supervisor/container_coding/benchmark_controls.py",
+      "qualified_sha256": "18b9d45fad438a2b02ad9a9965ef5ea0520989fd233f1bcd3db84bf583acaa19"
+    },
+    {
+      "merged_sha256": "5c37751fedc632968f479fa1d64b6550e986b25ac69c0f14b919da763a9abcb6",
+      "path": "benchmarks/agent_supervisor/container_coding/container_worker_deployment.py",
+      "qualified_sha256": "9afb32bd0237550567b79dc56fc2c4af7e80263a9e17f027f1b6819c95c60a0d"
+    },
+    {
+      "merged_sha256": "3855d95638013da275f1abaa5982be4c0783883b37d0b9c8a919feaa4bd73af9",
+      "path": "benchmarks/agent_supervisor/container_coding/full_supervisor_benchmark.py",
+      "qualified_sha256": "337a9286fab17caa43a659da96160b4641e7571d54ecb663442953fb2b67a02f"
+    },
+    {
+      "merged_sha256": "736ebd6fc74ce6035a60bd8ff488df127416e7341b1bc7596635142c332aba2f",
+      "path": "benchmarks/agent_supervisor/container_coding/full_supervisor_harbor_agent.py",
+      "qualified_sha256": "915854e4b1a6f07dc13aeee831fa4ea7fe987de4129bf7eb03c0351b3be72cdf"
+    },
+    {
+      "merged_sha256": "b05d23a8dfbdfb5c761bf009be07034d15615ccb7e9a739531f95ef683ffcd58",
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_container_supervisor.py",
+      "qualified_sha256": "db8067d39c8b0c7fef09e763aea5ee3a5796062a5a95e79a3bc548d9e8043c48"
+    }
+  ],
+  "original_qualified_closure_count": 47,
+  "original_qualified_closure_unchanged_count": 42,
+  "prior_upstream_source_policy_suite": {
+    "failures": 0,
+    "merged_numerical_qualification": false,
+    "skips": 0,
+    "tests": 1030
+  },
+  "production_files_edited_by_this_review": false,
+  "qualified_accelerator_commit": "65cf6a24650213a4607d935a66513c53b3582a87",
+  "replay_plan": {
+    "provider_free_docker": "Fresh immutable release and output directory on merged commit, same admitted public eigen.py/eval.py sources and authored provider hook; replay all 105 complete rows, 64-request quota, seven negative cases, custody and cleanup. Include five additional changed dependencies in the new source-pin record.",
+    "reason": "The new selection covers changed configuration/owner/helper paths; frozen D grammar and numerical core can retain their exact historical qualification without relabeling the historical Docker result.",
+    "root_eight_file_selection": [
+      "benchmarks/agent_supervisor/container_coding/test_terminal_numerical_control_context.py",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_numerical_policy.py",
+      "benchmarks/agent_supervisor/container_coding/test_numerical_obligation_worker_wiring.py",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_numerical_preflight.py",
+      "benchmarks/agent_supervisor/container_coding/test_benchmark_shared_source_policy.py",
+      "benchmarks/agent_supervisor/container_coding/test_source_policy_observation_join.py",
+      "test/api/test_source_policy_worker_selection.py",
+      "test/api/test_source_view_policy_serialization.py"
+    ],
+    "supplemental_archive_nodes": [
+      "benchmarks/agent_supervisor/container_coding/test_terminal_worker_capability.py::test_builder_binds_exact_installer_template_and_shared_router_cap",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_worker_capability.py::test_output_observation_requires_matching_owner_driver_and_collector[missing-source_view_policy.py]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_worker_capability.py::test_output_observation_requires_matching_owner_driver_and_collector[stale-source_view_policy.py]",
+      "benchmarks/agent_supervisor/container_coding/test_terminal_worker_capability.py::test_output_observation_requires_matching_owner_driver_and_collector[copied-feature-source_view_policy.py]"
+    ],
+    "whole_prior_1096_replay_required": false
+  },
+  "schema": "numerical-loop-upstream-merge-input-review@1",
+  "status": "reviewed_requalification_required",
+  "unchanged_numerical_runtime": [
+    "ipfs_accelerate_py/agent_supervisor/runtime/numerical_formalization_context.py",
+    "ipfs_accelerate_py/agent_supervisor/runtime/numerical_obligation_broker.py",
+    "ipfs_accelerate_py/agent_supervisor/runtime/numerical_obligation_client.py",
+    "ipfs_accelerate_py/agent_supervisor/runtime/published_numerical.py",
+    "ipfs_accelerate_py/agent_supervisor/runtime/router_implementation_runner.py",
+    "benchmarks/agent_supervisor/container_coding/terminal_numerical_policy.py"
+  ]
+}

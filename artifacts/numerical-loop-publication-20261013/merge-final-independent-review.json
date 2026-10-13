@@ -1,0 +1,664 @@
+{
+  "additional_changed_dependencies": 5,
+  "checks": [
+    {
+      "name": "current_merged_accelerator",
+      "passed": true
+    },
+    {
+      "name": "current_published_datasets",
+      "passed": true
+    },
+    {
+      "name": "worktrees_clean_before",
+      "passed": true
+    },
+    {
+      "name": "fresh_docker04_completed",
+      "passed": true
+    },
+    {
+      "name": "fresh_source_runner_unchanged",
+      "passed": true
+    },
+    {
+      "name": "independent_docker_audit_passed",
+      "passed": true
+    },
+    {
+      "name": "fresh_release_exact52_pins",
+      "passed": true
+    },
+    {
+      "name": "published_datasets_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "published_datasets_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "published_datasets_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "published_datasets_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "published_datasets_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "published_datasets_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "published_datasets_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "published_datasets_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "published_datasets_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "published_datasets_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "published_datasets_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "published_datasets_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "published_datasets_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "published_datasets_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "published_datasets_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "published_datasets_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "published_datasets_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "published_datasets_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "published_datasets_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "published_datasets_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "published_datasets_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "merged_accelerator_blob_matches_release",
+      "passed": true
+    },
+    {
+      "name": "all_five_additional_dependencies_pinned",
+      "passed": true
+    },
+    {
+      "name": "same_public_numerical_rows_and_bounds",
+      "passed": true
+    },
+    {
+      "name": "merge-tests-01_zero_exit",
+      "passed": true
+    },
+    {
+      "name": "merge-tests-01_all_passed",
+      "passed": true
+    },
+    {
+      "name": "merge-tests-01_unique_nodes",
+      "passed": true
+    },
+    {
+      "name": "merge-custody-01_zero_exit",
+      "passed": true
+    },
+    {
+      "name": "merge-custody-01_all_passed",
+      "passed": true
+    },
+    {
+      "name": "merge-custody-01_unique_nodes",
+      "passed": true
+    },
+    {
+      "name": "295_distinct_merge_tests",
+      "passed": true
+    },
+    {
+      "name": "all93_historical_published_files_unchanged",
+      "passed": true
+    },
+    {
+      "name": "unchanged_sealed_audit_helper",
+      "passed": true
+    },
+    {
+      "name": "historical_report_remains_bound_to65cf",
+      "passed": true
+    },
+    {
+      "name": "all_frozen_numerical_files_unchanged",
+      "passed": true
+    },
+    {
+      "name": "worktrees_clean_after",
+      "passed": true
+    }
+  ],
+  "claims": [
+    "The final source-policy merge preserves the complete numerical-loop evidence publication, frozen numerical consumer/tests and D grammar bytes.",
+    "Fresh 291-case integration and 4-case archive-custody runs qualify the changed configuration/owner/helper paths without counting the historical 1096 tests again.",
+    "Fresh provider-free Docker04 replays all 105 full numerical rows through the changed generated owner and source-policy adapter, with seven refusal cases, exact request accounting and cleanup.",
+    "Historical Docker03 and the 1096-test ledger remain explicitly bound to 65cf; the merged runtime has its own 295-test and Docker04 qualification."
+  ],
+  "datasets_commit": "6cfc5a640a4715dfc4da1a8f5d180719b4bc6fbe",
+  "docker_audit_check_count": 155,
+  "docker_metrics": {
+    "complete_session_canonical_response_bytes": 385404,
+    "complete_session_requests": 64,
+    "configured_session_request_limit": 64,
+    "configured_session_response_limit_bytes": 524288,
+    "delivered_row_instances_including_repeated_filtered_reads": 107,
+    "docker_filter_selections": 0,
+    "docker_filtered_success_pages": 0,
+    "initial_canonical_response_bytes": 377548,
+    "initial_pages": 56,
+    "live_provider_calls": 0,
+    "max_initial_response_bytes": 8180,
+    "negative_cases": 7,
+    "private_read_denials": 5,
+    "provider_tokens": null,
+    "retained_full_success_response_count": 56,
+    "successful_session_pages": 57,
+    "unique_obligations": 105
+  },
+  "evidence_sha256": {
+    "docker-04/command.json": "0af3d61575eca612923429091f61248e777ad69b60540e49fed713ac2449d01f",
+    "docker-04/qualification.json": "893a658f7197335bf1d42fb81b40583c9dde9413697d162f8e3e2886feb2349a",
+    "docker-04/results/probe-qualification.json": "0f72dd78cf641d5658aaca4643b459900923e9ee25c2a86be3f4b9d009ff7d31",
+    "docker-04/results/session-observation.json": "bfc4e5d0dddaec1e0fc5d9a27e9f75fc16396a0b834eac27aa81655ee5731b5f",
+    "docker-release-04.json": "f50979eb3a5161f1d77dd8fccc4ec1572591881393e496d4da7e6212dcde6881",
+    "merge-custody-01/command.json": "f50b07b721f259d1614eb9eeb4a4fcf58c3ae793be0e3e9914300cb34c5390b4",
+    "merge-custody-01/exit.json": "c6f4681e39c5476b876ec81aed8800010e20366b839ef3fe1e3a81b51d1343ce",
+    "merge-custody-01/junit.xml": "6f7de4637203b2abcc1113aa045d21689dda1f758e82bf969bb8ca87a183bbde",
+    "merge-custody-01/stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "merge-custody-01/stdout": "76f670952c65aa0d251cd4ae5142aa0640ccff9786f21b32d76d7e877268ed59",
+    "merge-docker-evidence-audit.json": "6114cce0915001eb93d9eda124581dbdeb192e7328cbabca0fd3e64a4a6e2f27",
+    "merge-input-review.json": "0cde30ff290da9d5d1d990ada731e02f8eb4a27602ea6959a766e2ae5bb350cc",
+    "merge-tests-01/command.json": "31bfd0d21d38f363f98e63d9c84030d9f2a26d4fe47c40271f64b66fa91fe961",
+    "merge-tests-01/exit.json": "2d18b56e0fd3cad46746409666dc04eec3c9dabb48f87915023e81f83c68d1cb",
+    "merge-tests-01/junit.xml": "c4e26ef2e906f99b13d5d6c291ef84589b2529d452453051e0060f1fe3dc8842",
+    "merge-tests-01/stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "merge-tests-01/stdout": "78cbfedffb84f51d01465a5d74d28dc58a318251cdc11f2ee17fbf924c00ed26"
+  },
+  "historical_closure_changed": 5,
+  "historical_published_files_unchanged": 93,
+  "historical_qualified_commit": "65cf6a24650213a4607d935a66513c53b3582a87",
+  "limitations": [
+    "GitHub CI execution and billing state are reported separately by the parent; this audit does not treat an unstarted workflow as a test pass.",
+    "No live provider, learned inference, benchmark verifier or token-efficiency measurement was run; source obligations, loop semantics and proof applicability remain unresolved."
+  ],
+  "merge_regression_distinct_passes": 295,
+  "merge_test_nodes": [
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_absent_recipe_preserves_legacy_configuration_and_observations[full]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_absent_recipe_preserves_legacy_configuration_and_observations[no-index]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_agent_forwards_one_canonical_recipe_argument_and_records_its_bindings",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_agent_setup_and_run_refuse_changed_policy_before_environment_actions[binding]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_agent_setup_and_run_refuse_changed_policy_before_environment_actions[drop]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_agent_setup_and_run_refuse_changed_policy_before_environment_actions[lines]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_agent_setup_and_run_refuse_changed_policy_before_environment_actions[malformed]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_agent_setup_and_run_refuse_changed_policy_before_environment_actions[profile]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_cli_loader_refuses_unbounded_or_noncanonical_recipe_files[duplicate]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_cli_loader_refuses_unbounded_or_noncanonical_recipe_files[foreign_field]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_cli_loader_refuses_unbounded_or_noncanonical_recipe_files[non_utf8]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_cli_loader_refuses_unbounded_or_noncanonical_recipe_files[oversized]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_cli_loader_refuses_unbounded_or_noncanonical_recipe_files[symlink]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_cli_policy_selection_is_preparation_only_before_opening_file[collect]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_cli_policy_selection_is_preparation_only_before_opening_file[execute]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_cli_preparation_reads_exact_recipe_once_and_passes_detached_object",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_configuration_detaches_recipe_and_control_digest_binds_each_protected_line",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_controls_allow_only_valid_shared_recipe_kwargs[arm]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_controls_allow_only_valid_shared_recipe_kwargs[malformed]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_controls_allow_only_valid_shared_recipe_kwargs[profile_conflict]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_controls_allow_only_valid_shared_recipe_kwargs[profile_missing]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_execute_and_collection_refuse_recipe_or_binding_drift_before_process[binding_digest]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_execute_and_collection_refuse_recipe_or_binding_drift_before_process[config_sha]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_execute_and_collection_refuse_recipe_or_binding_drift_before_process[drop_both_rehashed]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_execute_and_collection_refuse_recipe_or_binding_drift_before_process[drop_config]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_execute_and_collection_refuse_recipe_or_binding_drift_before_process[drop_prepared]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_execute_and_collection_refuse_recipe_or_binding_drift_before_process[edit_config]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_execute_and_collection_refuse_recipe_or_binding_drift_before_process[edit_prepared]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_execute_and_collection_refuse_recipe_or_binding_drift_before_process[malformed_config]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_execute_and_collection_refuse_recipe_or_binding_drift_before_process[malformed_prepared]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_execute_and_collection_refuse_recipe_or_binding_drift_before_process[missing_binding]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_execute_and_collection_refuse_recipe_or_binding_drift_before_process[null_config]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_execute_and_collection_refuse_recipe_or_binding_drift_before_process[null_prepared]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_execute_and_collection_refuse_recipe_or_binding_drift_before_process[recipe_digest]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_execute_and_collection_refuse_recipe_or_binding_drift_before_process[rehashed_config]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_invalid_or_conflicting_recipe_refuses_before_preparation_io[bool_line]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_invalid_or_conflicting_recipe_refuses_before_preparation_io[disabled]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_invalid_or_conflicting_recipe_refuses_before_preparation_io[no-index]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_invalid_or_conflicting_recipe_refuses_before_preparation_io[path]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_invalid_or_conflicting_recipe_refuses_before_preparation_io[profile]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_invalid_or_conflicting_recipe_refuses_before_preparation_io[unknown]",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_prepare_freezes_recipe_and_both_hashes_without_mutating_caller",
+    "benchmarks.agent_supervisor.container_coding.test_benchmark_shared_source_policy::test_unchanged_preparation_can_execute_through_authored_process_seam",
+    "benchmarks.agent_supervisor.container_coding.test_numerical_obligation_worker_wiring::test_owner_monitor_always_retires_numerical_broker[None]",
+    "benchmarks.agent_supervisor.container_coding.test_numerical_obligation_worker_wiring::test_owner_monitor_always_retires_numerical_broker[cleanup]",
+    "benchmarks.agent_supervisor.container_coding.test_numerical_obligation_worker_wiring::test_owner_monitor_always_retires_numerical_broker[guard_abort]",
+    "benchmarks.agent_supervisor.container_coding.test_numerical_obligation_worker_wiring::test_owner_monitor_always_retires_numerical_broker[registration]",
+    "benchmarks.agent_supervisor.container_coding.test_numerical_obligation_worker_wiring::test_owner_monitor_always_retires_numerical_broker[spawn]",
+    "benchmarks.agent_supervisor.container_coding.test_numerical_obligation_worker_wiring::test_owner_monitor_always_retires_numerical_broker[wait]",
+    "benchmarks.agent_supervisor.container_coding.test_numerical_obligation_worker_wiring::test_owner_startup_retires_guards_before_monitor[extend]",
+    "benchmarks.agent_supervisor.container_coding.test_numerical_obligation_worker_wiring::test_owner_startup_retires_guards_before_monitor[extend_and_abort]",
+    "benchmarks.agent_supervisor.container_coding.test_numerical_obligation_worker_wiring::test_owner_startup_retires_guards_before_monitor[factory]",
+    "benchmarks.agent_supervisor.container_coding.test_source_policy_observation_join::test_frozen_policy_or_actual_session_tampering_cannot_report_observed[binding_hash]",
+    "benchmarks.agent_supervisor.container_coding.test_source_policy_observation_join::test_frozen_policy_or_actual_session_tampering_cannot_report_observed[config_hash]",
+    "benchmarks.agent_supervisor.container_coding.test_source_policy_observation_join::test_frozen_policy_or_actual_session_tampering_cannot_report_observed[disabled]",
+    "benchmarks.agent_supervisor.container_coding.test_source_policy_observation_join::test_frozen_policy_or_actual_session_tampering_cannot_report_observed[extra_field]",
+    "benchmarks.agent_supervisor.container_coding.test_source_policy_observation_join::test_frozen_policy_or_actual_session_tampering_cannot_report_observed[foreign_session]",
+    "benchmarks.agent_supervisor.container_coding.test_source_policy_observation_join::test_frozen_policy_or_actual_session_tampering_cannot_report_observed[legacy_downgrade]",
+    "benchmarks.agent_supervisor.container_coding.test_source_policy_observation_join::test_frozen_policy_or_actual_session_tampering_cannot_report_observed[missing_arm]",
+    "benchmarks.agent_supervisor.container_coding.test_source_policy_observation_join::test_frozen_policy_or_actual_session_tampering_cannot_report_observed[missing_binding_hash]",
+    "benchmarks.agent_supervisor.container_coding.test_source_policy_observation_join::test_frozen_policy_or_actual_session_tampering_cannot_report_observed[missing_config_hash]",
+    "benchmarks.agent_supervisor.container_coding.test_source_policy_observation_join::test_frozen_policy_or_actual_session_tampering_cannot_report_observed[missing_recipe]",
+    "benchmarks.agent_supervisor.container_coding.test_source_policy_observation_join::test_frozen_policy_or_actual_session_tampering_cannot_report_observed[nonfull]",
+    "benchmarks.agent_supervisor.container_coding.test_source_policy_observation_join::test_frozen_policy_or_actual_session_tampering_cannot_report_observed[recipe]",
+    "benchmarks.agent_supervisor.container_coding.test_source_policy_observation_join::test_frozen_policy_or_actual_session_tampering_cannot_report_observed[wrong_profile]",
+    "benchmarks.agent_supervisor.container_coding.test_source_policy_observation_join::test_missing_selected_session_remains_unknown_with_frozen_recipe",
+    "benchmarks.agent_supervisor.container_coding.test_source_policy_observation_join::test_selected_recipe_matches_actual_descriptor_and_retains_typed_counts",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_control_context::test_changed_profile_cannot_relabel_control_receipt[None]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_control_context::test_changed_profile_cannot_relabel_control_receipt[True]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_control_context::test_changed_profile_cannot_relabel_control_receipt[python-numerical-control-structure@4]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_control_context::test_changed_profile_cannot_relabel_control_receipt[python-numerical-guarded-structure@2]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_control_context::test_changed_profile_cannot_relabel_control_receipt[python-numerical-structure@1]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_control_context::test_control_advice_reaches_planner_before_goals_then_admitted_indexes",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_control_context::test_control_context_pins_selected_and_reused_implementations[numerical_logic.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_control_context::test_control_context_pins_selected_and_reused_implementations[numerical_logic_v2.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_control_context::test_control_context_pins_selected_and_reused_implementations[numerical_logic_v3.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_control_context::test_control_context_pins_selected_and_reused_implementations[numerical_source.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_control_context::test_control_context_pins_selected_and_reused_implementations[numerical_source_v2.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_control_context::test_control_context_pins_selected_and_reused_implementations[numerical_source_v3.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_control_context::test_control_context_replays_lakes_and_keeps_unresolved_loop_references",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_control_context::test_control_paging_retains_exact_cfg_occurrences_and_iteration_contexts",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_control_context::test_control_profile_cannot_reuse_earlier_tree_or_cursor[python-numerical-guarded-structure@2]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_control_context::test_control_profile_cannot_reuse_earlier_tree_or_cursor[python-numerical-structure@1]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_control_context::test_control_summary_charges_omitted_rows_without_stripping_loop_scope",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_control_context::test_earlier_profile_planning_summary_retains_prior_bytes[python-numerical-guarded-structure@2-8ccc62143c3194ac6bc3d32cc6a5f35b41cb0c8dbfbb1da405ca81f92147956e]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_control_context::test_earlier_profile_planning_summary_retains_prior_bytes[python-numerical-structure@1-46aa10055716290998b1bd3dc0b2b68d9f12b7f37ab40448e6e9e0dc145d4db8]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_adapter_rejects_old_bundle_before_setup_upload_or_run[full]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_adapter_rejects_old_bundle_before_setup_upload_or_run[no-index]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_archive_inventory_cannot_omit_duplicate_or_coerce_producer_metadata[bool_bytes]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_archive_inventory_cannot_omit_duplicate_or_coerce_producer_metadata[duplicate]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_archive_inventory_cannot_omit_duplicate_or_coerce_producer_metadata[missing]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_archive_inventory_cannot_omit_duplicate_or_coerce_producer_metadata[wrong_bytes]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_cli_selection_is_frozen_by_prepare[python-numerical-control-structure@3]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_cli_selection_is_frozen_by_prepare[python-numerical-guarded-structure@2]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_cli_selection_is_frozen_by_prepare[python-numerical-structure@1]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_collect_and_execute_refuse_numerical_selection_drift[python-numerical-control-structure@3]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_collect_and_execute_refuse_numerical_selection_drift[python-numerical-guarded-structure@2]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_collect_and_execute_refuse_numerical_selection_drift[python-numerical-structure@1]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_control_archive_adds_only_selected_modules_and_binds_reused_guarded_bases",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_control_profile_requires_exact_new_producers_but_earlier_profiles_do_not[changed-ipfs_datasets_py/logic/software_verification/numerical_logic_v3.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_control_profile_requires_exact_new_producers_but_earlier_profiles_do_not[changed-ipfs_datasets_py/logic/software_verification/numerical_source_v3.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_control_profile_requires_exact_new_producers_but_earlier_profiles_do_not[missing-ipfs_datasets_py/logic/software_verification/numerical_logic_v3.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_control_profile_requires_exact_new_producers_but_earlier_profiles_do_not[missing-ipfs_datasets_py/logic/software_verification/numerical_source_v3.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_default_preserves_historical_configuration_and_controls[full]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_default_preserves_historical_configuration_and_controls[no-index]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[datasets/ipfs_datasets_py/logic/backends/smt/compiler.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[datasets/ipfs_datasets_py/logic/families/registry.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/security_formalization_evaluation.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/security_formula_corpus.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[datasets/ipfs_datasets_py/logic/formalization/autoencoder/security/source_program_binding_384.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_function_units.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_screening.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[datasets/ipfs_datasets_py/logic/software_contracts/source_unit_numerical_links.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[datasets/ipfs_datasets_py/logic/software_verification/__init__.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[datasets/ipfs_datasets_py/logic/software_verification/numerical_logic.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[datasets/ipfs_datasets_py/logic/software_verification/numerical_obligation_retrieval.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[datasets/ipfs_datasets_py/logic/software_verification/numerical_source.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[datasets/ipfs_datasets_py/logic/software_verification/program.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[datasets/ipfs_datasets_py/logic/software_verification/source_adapters.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[datasets/ipfs_datasets_py/logic/software_verification/syntax_bridge.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[datasets/ipfs_datasets_py/logic/syntax_core/ast.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[datasets/ipfs_datasets_py/logic/syntax_core/signatures.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[source/benchmarks/agent_supervisor/container_coding/benchmark_controls.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[source/benchmarks/agent_supervisor/container_coding/benchmark_resource_profile.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[source/benchmarks/agent_supervisor/container_coding/container_worker_deployment.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[source/benchmarks/agent_supervisor/container_coding/full_supervisor_benchmark.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[source/benchmarks/agent_supervisor/container_coding/full_supervisor_harbor_agent.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[source/benchmarks/agent_supervisor/container_coding/native_usage_accounting.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[source/benchmarks/agent_supervisor/container_coding/terminal_container_supervisor.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[source/benchmarks/agent_supervisor/container_coding/terminal_indexed_preparation.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[source/benchmarks/agent_supervisor/container_coding/terminal_initial_context.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[source/benchmarks/agent_supervisor/container_coding/terminal_native_preflight.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[source/benchmarks/agent_supervisor/container_coding/terminal_native_start_preflight.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[source/benchmarks/agent_supervisor/container_coding/terminal_numerical_observation.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[source/benchmarks/agent_supervisor/container_coding/terminal_numerical_policy.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[source/benchmarks/agent_supervisor/container_coding/terminal_numerical_retrieval_observation.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[source/benchmarks/agent_supervisor/container_coding/terminal_output_observation.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[source/ipfs_accelerate_py/agent_supervisor/entrypoints/admitted_benchmark_runtime.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[source/ipfs_accelerate_py/agent_supervisor/runtime/numerical_formalization_context.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[source/ipfs_accelerate_py/agent_supervisor/runtime/numerical_obligation_broker.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[source/ipfs_accelerate_py/agent_supervisor/runtime/numerical_obligation_client.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[source/ipfs_accelerate_py/agent_supervisor/runtime/published_numerical.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[source/ipfs_accelerate_py/agent_supervisor/runtime/published_task_context.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_every_current_numerical_producer_is_joined_to_archive[source/ipfs_accelerate_py/agent_supervisor/runtime/router_implementation_runner.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_exact_current_inventory_passes_as_compatibility_only",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_function_unit_extractor_producers_are_bound_by_archive_and_consumer",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_guarded_archive_adds_only_selected_modules_and_binds_reused_bases",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_guarded_profile_requires_exact_new_producers_but_v1_does_not[changed-ipfs_datasets_py/logic/software_verification/numerical_logic_v2.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_guarded_profile_requires_exact_new_producers_but_v1_does_not[changed-ipfs_datasets_py/logic/software_verification/numerical_source_v2.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_guarded_profile_requires_exact_new_producers_but_v1_does_not[missing-ipfs_datasets_py/logic/software_verification/numerical_logic_v2.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_guarded_profile_requires_exact_new_producers_but_v1_does_not[missing-ipfs_datasets_py/logic/software_verification/numerical_source_v2.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_harbor_passes_frozen_profile_and_records_no_index_disable[None-full]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_harbor_passes_frozen_profile_and_records_no_index_disable[None-no-index]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_harbor_passes_frozen_profile_and_records_no_index_disable[python-numerical-control-structure@3-full]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_harbor_passes_frozen_profile_and_records_no_index_disable[python-numerical-control-structure@3-no-index]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_harbor_passes_frozen_profile_and_records_no_index_disable[python-numerical-guarded-structure@2-full]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_harbor_passes_frozen_profile_and_records_no_index_disable[python-numerical-guarded-structure@2-no-index]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_harbor_passes_frozen_profile_and_records_no_index_disable[python-numerical-structure@1-full]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_harbor_passes_frozen_profile_and_records_no_index_disable[python-numerical-structure@1-no-index]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_malformed_inventory_fails_closed[None]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_malformed_inventory_fails_closed[True]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_malformed_inventory_fails_closed[manifest2]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_malformed_inventory_fails_closed[manifest3]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_malformed_inventory_fails_closed[manifest4]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_new_control_record_rejects_edited_or_incomplete_experiment[bool]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_new_control_record_rejects_edited_or_incomplete_experiment[digest]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_new_control_record_rejects_edited_or_incomplete_experiment[legacy_schema]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_new_control_record_rejects_edited_or_incomplete_experiment[missing]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_new_control_record_rejects_edited_or_incomplete_experiment[unknown]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_new_controls_compare_selected_profile_across_arms[python-numerical-control-structure@3]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_new_controls_compare_selected_profile_across_arms[python-numerical-guarded-structure@2]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_new_controls_compare_selected_profile_across_arms[python-numerical-structure@1]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_prepare_freezes_same_selection_and_opposite_consumption[python-numerical-control-structure@3-full]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_prepare_freezes_same_selection_and_opposite_consumption[python-numerical-control-structure@3-no-index]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_prepare_freezes_same_selection_and_opposite_consumption[python-numerical-guarded-structure@2-full]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_prepare_freezes_same_selection_and_opposite_consumption[python-numerical-guarded-structure@2-no-index]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_prepare_freezes_same_selection_and_opposite_consumption[python-numerical-structure@1-full]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_prepare_freezes_same_selection_and_opposite_consumption[python-numerical-structure@1-no-index]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_profile_controls_are_distinct_even_with_identical_task_inputs[pair0]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_profile_controls_are_distinct_even_with_identical_task_inputs[pair1]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_profile_controls_are_distinct_even_with_identical_task_inputs[pair2]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_unknown_selection_fails_before_input_reads[1]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_unknown_selection_fails_before_input_reads[True]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_unknown_selection_fails_before_input_reads[]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_unknown_selection_fails_before_input_reads[python-numerical-structure@2]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_policy::test_unknown_selection_fails_before_input_reads[value1]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_preflight::test_cli_forwards_only_explicit_numerical_selection[False-benchmarks.agent_supervisor.container_coding.terminal_native_preflight]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_preflight::test_cli_forwards_only_explicit_numerical_selection[False-benchmarks.agent_supervisor.container_coding.terminal_native_start_preflight]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_preflight::test_cli_forwards_only_explicit_numerical_selection[True-benchmarks.agent_supervisor.container_coding.terminal_native_preflight]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_preflight::test_cli_forwards_only_explicit_numerical_selection[True-benchmarks.agent_supervisor.container_coding.terminal_native_start_preflight]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_preflight::test_legacy_default_does_not_create_or_claim_numerical_evidence",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_preflight::test_native_numerical_selection_requires_full_context_before_side_effects",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_preflight::test_native_start_replays_selected_numerical_context_and_preserves_cleanup[False]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_preflight::test_native_start_replays_selected_numerical_context_and_preserves_cleanup[True]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_preflight::test_selected_numerical_preflight_replays_real_source_and_both_lakes_before_goals",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_preflight::test_stale_numerical_evidence_cannot_qualify_start_observation[admitted]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_preflight::test_stale_numerical_evidence_cannot_qualify_start_observation[lake]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_preflight::test_stale_numerical_evidence_cannot_qualify_start_observation[receipt]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_preflight::test_stale_numerical_evidence_cannot_qualify_start_observation[selection]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_preflight::test_stale_numerical_evidence_cannot_qualify_start_observation[source]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_preflight::test_unsupported_profile_is_refused_before_preparation[True]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_preflight::test_unsupported_profile_is_refused_before_preparation[]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_preflight::test_unsupported_profile_is_refused_before_preparation[profile3]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_numerical_preflight::test_unsupported_profile_is_refused_before_preparation[unknown]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_worker_capability::test_builder_binds_exact_installer_template_and_shared_router_cap",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_worker_capability::test_output_observation_requires_matching_owner_driver_and_collector[copied-feature-source_view_policy.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_worker_capability::test_output_observation_requires_matching_owner_driver_and_collector[missing-source_view_policy.py]",
+    "benchmarks.agent_supervisor.container_coding.test_terminal_worker_capability::test_output_observation_requires_matching_owner_driver_and_collector[stale-source_view_policy.py]",
+    "test.api.test_source_policy_worker_selection::test_ambiguous_or_invalid_owner_configuration_refuses_before_worker[bad_json]",
+    "test.api.test_source_policy_worker_selection::test_ambiguous_or_invalid_owner_configuration_refuses_before_worker[duplicate]",
+    "test.api.test_source_policy_worker_selection::test_ambiguous_or_invalid_owner_configuration_refuses_before_worker[missing]",
+    "test.api.test_source_policy_worker_selection::test_ambiguous_or_invalid_owner_configuration_refuses_before_worker[mixed_duplicate]",
+    "test.api.test_source_policy_worker_selection::test_ambiguous_or_invalid_owner_configuration_refuses_before_worker[oversized]",
+    "test.api.test_source_policy_worker_selection::test_ambiguous_or_invalid_owner_configuration_refuses_before_worker[unknown_schema]",
+    "test.api.test_source_policy_worker_selection::test_dispatch_forwards_exact_policy_once_to_owner",
+    "test.api.test_source_policy_worker_selection::test_driver_cli_decodes_owner_policy_without_changing_legacy_defaults",
+    "test.api.test_source_policy_worker_selection::test_driver_refuses_policy_before_instruction_or_state_io[disabled-full]",
+    "test.api.test_source_policy_worker_selection::test_driver_refuses_policy_before_instruction_or_state_io[identity@1-full]",
+    "test.api.test_source_policy_worker_selection::test_driver_refuses_policy_before_instruction_or_state_io[python-comments@1-no-index]",
+    "test.api.test_source_policy_worker_selection::test_factory_policy_refusal_precedes_sealed_prompt_io[bad_schema]",
+    "test.api.test_source_policy_worker_selection::test_factory_policy_refusal_precedes_sealed_prompt_io[disabled]",
+    "test.api.test_source_policy_worker_selection::test_factory_policy_refusal_precedes_sealed_prompt_io[duplicate_profile]",
+    "test.api.test_source_policy_worker_selection::test_factory_policy_refusal_precedes_sealed_prompt_io[explicit_and_serialized]",
+    "test.api.test_source_policy_worker_selection::test_factory_policy_refusal_precedes_sealed_prompt_io[wrong_profile]",
+    "test.api.test_source_policy_worker_selection::test_generated_owner_uses_frozen_policy_and_launches_descriptor_only[identity@1]",
+    "test.api.test_source_policy_worker_selection::test_generated_owner_uses_frozen_policy_and_launches_descriptor_only[python-comments@1]",
+    "test.api.test_source_policy_worker_selection::test_generated_owner_uses_frozen_policy_and_launches_descriptor_only[python-whitespace@1]",
+    "test.api.test_source_policy_worker_selection::test_owner_configuration_is_removed_from_worker_argv_without_mutating_owner[False]",
+    "test.api.test_source_policy_worker_selection::test_owner_configuration_is_removed_from_worker_argv_without_mutating_owner[True]",
+    "test.api.test_source_policy_worker_selection::test_shared_policy_refuses_nonsemantic_or_candidate_dispatch[None]",
+    "test.api.test_source_policy_worker_selection::test_shared_policy_refuses_nonsemantic_or_candidate_dispatch[doctor_candidate]",
+    "test.api.test_source_policy_worker_selection::test_shared_policy_refuses_nonsemantic_or_candidate_dispatch[doctor_contract_candidate]",
+    "test.api.test_source_view_policy_serialization::test_absent_policy_retains_exact_legacy_configuration_and_observation[disabled]",
+    "test.api.test_source_view_policy_serialization::test_absent_policy_retains_exact_legacy_configuration_and_observation[identity@1]",
+    "test.api.test_source_view_policy_serialization::test_absent_policy_retains_exact_legacy_configuration_and_observation[python-comments@1]",
+    "test.api.test_source_view_policy_serialization::test_absent_policy_retains_exact_legacy_configuration_and_observation[python-whitespace@1]",
+    "test.api.test_source_view_policy_serialization::test_benchmark_policy_field_requires_a_closed_dictionary[False]",
+    "test.api.test_source_view_policy_serialization::test_benchmark_policy_field_requires_a_closed_dictionary[value2]",
+    "test.api.test_source_view_policy_serialization::test_benchmark_policy_field_requires_a_closed_dictionary[value3]",
+    "test.api.test_source_view_policy_serialization::test_benchmark_policy_field_requires_a_closed_dictionary[value4]",
+    "test.api.test_source_view_policy_serialization::test_benchmark_policy_field_requires_a_closed_dictionary[{}]",
+    "test.api.test_source_view_policy_serialization::test_canonical_round_trip_detaches_nested_values_and_keeps_policy_frozen",
+    "test.api.test_source_view_policy_serialization::test_closed_recipe_rejects_unknown_versions_and_invalid_nested_configuration[boolean_line]",
+    "test.api.test_source_view_policy_serialization::test_closed_recipe_rejects_unknown_versions_and_invalid_nested_configuration[duplicate_lines]",
+    "test.api.test_source_view_policy_serialization::test_closed_recipe_rejects_unknown_versions_and_invalid_nested_configuration[empty_lines]",
+    "test.api.test_source_view_policy_serialization::test_closed_recipe_rejects_unknown_versions_and_invalid_nested_configuration[extra]",
+    "test.api.test_source_view_policy_serialization::test_closed_recipe_rejects_unknown_versions_and_invalid_nested_configuration[invalid_hex]",
+    "test.api.test_source_view_policy_serialization::test_closed_recipe_rejects_unknown_versions_and_invalid_nested_configuration[mapping_subclass]",
+    "test.api.test_source_view_policy_serialization::test_closed_recipe_rejects_unknown_versions_and_invalid_nested_configuration[missing]",
+    "test.api.test_source_view_policy_serialization::test_closed_recipe_rejects_unknown_versions_and_invalid_nested_configuration[null_mapping]",
+    "test.api.test_source_view_policy_serialization::test_closed_recipe_rejects_unknown_versions_and_invalid_nested_configuration[profile]",
+    "test.api.test_source_view_policy_serialization::test_closed_recipe_rejects_unknown_versions_and_invalid_nested_configuration[profile_subclass]",
+    "test.api.test_source_view_policy_serialization::test_closed_recipe_rejects_unknown_versions_and_invalid_nested_configuration[schema]",
+    "test.api.test_source_view_policy_serialization::test_closed_recipe_rejects_unknown_versions_and_invalid_nested_configuration[schema_subclass]",
+    "test.api.test_source_view_policy_serialization::test_closed_recipe_rejects_unknown_versions_and_invalid_nested_configuration[unsorted_lines]",
+    "test.api.test_source_view_policy_serialization::test_closed_recipe_rejects_unknown_versions_and_invalid_nested_configuration[uppercase_hex]",
+    "test.api.test_source_view_policy_serialization::test_deep_json_recursion_is_a_configuration_refusal",
+    "test.api.test_source_view_policy_serialization::test_disabled_selection_cannot_drop_a_supplied_policy[source_view_observation]",
+    "test.api.test_source_view_policy_serialization::test_disabled_selection_cannot_drop_a_supplied_policy[source_view_selection]",
+    "test.api.test_source_view_policy_serialization::test_invalid_or_nonfinite_json_has_no_recipe[[]]",
+    "test.api.test_source_view_policy_serialization::test_invalid_or_nonfinite_json_has_no_recipe[\\ud800]",
+    "test.api.test_source_view_policy_serialization::test_invalid_or_nonfinite_json_has_no_recipe[\\ufeff{}]",
+    "test.api.test_source_view_policy_serialization::test_invalid_or_nonfinite_json_has_no_recipe[]",
+    "test.api.test_source_view_policy_serialization::test_invalid_or_nonfinite_json_has_no_recipe[null]",
+    "test.api.test_source_view_policy_serialization::test_invalid_or_nonfinite_json_has_no_recipe[{\"schema\":\"supervisor-source-view-policy@1\",\"profile\":\"python-comments@1\",\"protected_lines\":{\"6d2e7079\":[-Infinity]}}]",
+    "test.api.test_source_view_policy_serialization::test_invalid_or_nonfinite_json_has_no_recipe[{\"schema\":\"supervisor-source-view-policy@1\",\"profile\":\"python-comments@1\",\"protected_lines\":{\"6d2e7079\":[Infinity]}}]",
+    "test.api.test_source_view_policy_serialization::test_invalid_or_nonfinite_json_has_no_recipe[{\"schema\":\"supervisor-source-view-policy@1\",\"profile\":\"python-comments@1\",\"protected_lines\":{\"6d2e7079\":[NaN]}}]",
+    "test.api.test_source_view_policy_serialization::test_invalid_or_nonfinite_json_has_no_recipe[{]",
+    "test.api.test_source_view_policy_serialization::test_invalid_or_nonfinite_json_has_no_recipe[{}{}]",
+    "test.api.test_source_view_policy_serialization::test_json_byte_limit_accepts_exact_boundary_and_refuses_excess_before_parsing",
+    "test.api.test_source_view_policy_serialization::test_json_duplicate_keys_refuse_even_when_the_values_match[{\"schema\":\"supervisor-source-view-policy@1\",\"profile\":\"python-comments@1\",\"protected_lines\":{\"6d2e7079\":[1],\"6d2e7079\":[1]}}]",
+    "test.api.test_source_view_policy_serialization::test_json_duplicate_keys_refuse_even_when_the_values_match[{\"schema\":\"supervisor-source-view-policy@1\",\"profile\":\"python-comments@1\",\"protected_lines\":{},\"protected_lines\":{}}]",
+    "test.api.test_source_view_policy_serialization::test_json_duplicate_keys_refuse_even_when_the_values_match[{\"schema\":\"supervisor-source-view-policy@1\",\"schema\":\"supervisor-source-view-policy@1\",\"profile\":\"python-comments@1\",\"protected_lines\":{}}]",
+    "test.api.test_source_view_policy_serialization::test_json_requires_exact_text[None]",
+    "test.api.test_source_view_policy_serialization::test_json_requires_exact_text[True]",
+    "test.api.test_source_view_policy_serialization::test_json_requires_exact_text[value3]",
+    "test.api.test_source_view_policy_serialization::test_json_requires_exact_text[{}0]",
+    "test.api.test_source_view_policy_serialization::test_json_requires_exact_text[{}1]",
+    "test.api.test_source_view_policy_serialization::test_policy_rejects_disabled_mismatched_or_nonfull_selection[disabled-None]",
+    "test.api.test_source_view_policy_serialization::test_policy_rejects_disabled_mismatched_or_nonfull_selection[python-comments@1-False]",
+    "test.api.test_source_view_policy_serialization::test_policy_rejects_disabled_mismatched_or_nonfull_selection[python-comments@1-no-index]",
+    "test.api.test_source_view_policy_serialization::test_policy_rejects_disabled_mismatched_or_nonfull_selection[python-comments@1-unknown]",
+    "test.api.test_source_view_policy_serialization::test_policy_rejects_disabled_mismatched_or_nonfull_selection[python-whitespace@1-None]",
+    "test.api.test_source_view_policy_serialization::test_recipe_requires_an_exact_dictionary[None]",
+    "test.api.test_source_view_policy_serialization::test_recipe_requires_an_exact_dictionary[True]",
+    "test.api.test_source_view_policy_serialization::test_recipe_requires_an_exact_dictionary[value2]",
+    "test.api.test_source_view_policy_serialization::test_recipe_requires_an_exact_dictionary[value4]",
+    "test.api.test_source_view_policy_serialization::test_recipe_requires_an_exact_dictionary[{}]",
+    "test.api.test_source_view_policy_serialization::test_selected_policy_detaches_configuration_and_binds_recipe_separately_from_implementation[identity@1]",
+    "test.api.test_source_view_policy_serialization::test_selected_policy_detaches_configuration_and_binds_recipe_separately_from_implementation[python-comments@1]",
+    "test.api.test_source_view_policy_serialization::test_selected_policy_detaches_configuration_and_binds_recipe_separately_from_implementation[python-whitespace@1]",
+    "test.api.test_source_view_policy_serialization::test_serialization_factories_refuse_policy_subclasses[from_dict]",
+    "test.api.test_source_view_policy_serialization::test_serialization_factories_refuse_policy_subclasses[from_json]",
+    "test.api.test_source_view_policy_serialization::test_serialized_policy_preserves_protected_comment_projection",
+    "test.api.test_source_view_policy_serialization::test_structurally_valid_but_oversized_recipe_cannot_enter_argv"
+  ],
+  "merge_test_rows": [
+    {
+      "exit": {
+        "returncode": 0,
+        "seconds": 167.87559403805062
+      },
+      "failed": 0,
+      "passed": 291,
+      "path": "merge-tests-01/junit.xml",
+      "sha256": "c4e26ef2e906f99b13d5d6c291ef84589b2529d452453051e0060f1fe3dc8842",
+      "skipped": 0,
+      "tests": 291
+    },
+    {
+      "exit": {
+        "returncode": 0,
+        "seconds": 1.5707680770428851
+      },
+      "failed": 0,
+      "passed": 4,
+      "path": "merge-custody-01/junit.xml",
+      "sha256": "6f7de4637203b2abcc1113aa045d21689dda1f758e82bf969bb8ca87a183bbde",
+      "skipped": 0,
+      "tests": 4
+    }
+  ],
+  "private_results_copied": false,
+  "qualified_merged_commit": "e1c410bcbd7651c31fca84beb82e3ef2fe9ac836",
+  "qualified_source_and_public_input_count": 52,
+  "schema": "numerical-loop-merged-runtime-independent-review@1",
+  "status": "passed",
+  "tracked_files_modified": false
+}

@@ -1,0 +1,810 @@
+{
+  "accelerator_base": "a9bcde965ac8341719069975dc828c54376961a6",
+  "accelerator_commit": "65cf6a24650213a4607d935a66513c53b3582a87",
+  "actual_owner_key_material_published": false,
+  "checked_local_document_links": [
+    "ipfs_accelerate_py/agent_supervisor/runtime/numerical_formalization_context.py",
+    "benchmarks/agent_supervisor/container_coding/terminal_numerical_policy.py",
+    "docs/agent_supervisor/evidence/numerical-loop-20261013/README.md",
+    "docs/agent_supervisor/context_projection_pair.md",
+    "docs/agent_supervisor/numerical_loop_coverage.md",
+    "docs/agent_supervisor/evidence/numerical-loop-20261013/manifest.json",
+    "docs/agent_supervisor/evidence/numerical-loop-20261013/public-02/qualification.json",
+    "docs/agent_supervisor/evidence/numerical-loop-20261013/test-ledger.json",
+    "docs/agent_supervisor/evidence/numerical-loop-20261013/docker-03/qualification.json",
+    "docs/agent_supervisor/evidence/numerical-loop-20261013/docker-evidence-audit.json",
+    "docs/agent_supervisor/evidence/numerical-loop-20261013/docker-fixture-failure-diagnosis.json",
+    "docs/agent_supervisor/evidence/numerical-loop-20261013/frontend-cross-layer-audit.json",
+    "docs/agent_supervisor/evidence/numerical-loop-20261013/logic-independent-review.json",
+    "docs/agent_supervisor/evidence/numerical-loop-20261013/public-evidence-audit.json",
+    "docs/agent_supervisor/evidence/numerical-loop-20261013/authored-loop-protocol-observation.json",
+    "docs/agent_supervisor/evidence/numerical-loop-20261013/consumer-summary-independent-review.json",
+    "docs/agent_supervisor/evidence/numerical-loop-20261013/publication-inputs.json"
+  ],
+  "checks": [
+    {
+      "name": "accelerator_commit",
+      "passed": true
+    },
+    {
+      "name": "datasets_commit",
+      "passed": true
+    },
+    {
+      "name": "both_worktrees_clean",
+      "passed": true
+    },
+    {
+      "name": "accelerator_base_is_ancestor",
+      "passed": true
+    },
+    {
+      "name": "datasets_base_is_ancestor",
+      "passed": true
+    },
+    {
+      "name": "exact_93_file_committed_inventory",
+      "passed": true
+    },
+    {
+      "name": "manifest_declares_raw_private_exclusion",
+      "passed": true
+    },
+    {
+      "name": "all_manifest_size_and_sha256_match",
+      "passed": true
+    },
+    {
+      "name": "working_tree_matches_all_committed_evidence",
+      "passed": true
+    },
+    {
+      "name": "all_90_retained_artifacts_byte_exact",
+      "passed": true
+    },
+    {
+      "name": "raw_blobs_not_lfs_pointers",
+      "passed": true
+    },
+    {
+      "name": "no_private_artifact_paths",
+      "passed": true
+    },
+    {
+      "name": "no_obvious_credential_material",
+      "passed": true
+    },
+    {
+      "name": "retained_actual_owner_key_not_published",
+      "passed": true
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.benchmarks/terminal-bench-2/largest-eigenval/environment/src/eigen.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.benchmarks/terminal-bench-2/largest-eigenval/environment/src/eval.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.benchmarks/terminal-bench-2/largest-eigenval/instruction.md"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/indexed-coverage-datasets-20261013/ipfs_datasets_py/logic/backends/smt/compiler.py"
+    },
+    {
+      "name": "qualified_datasets_committed_hash",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/backends/smt/compiler.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/indexed-coverage-datasets-20261013/ipfs_datasets_py/logic/families/registry.py"
+    },
+    {
+      "name": "qualified_datasets_committed_hash",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/families/registry.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/indexed-coverage-datasets-20261013/ipfs_datasets_py/logic/formalization/autoencoder/security/security_formalization_evaluation.py"
+    },
+    {
+      "name": "qualified_datasets_committed_hash",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/security_formalization_evaluation.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/indexed-coverage-datasets-20261013/ipfs_datasets_py/logic/formalization/autoencoder/security/security_formula_corpus.py"
+    },
+    {
+      "name": "qualified_datasets_committed_hash",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/security_formula_corpus.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/indexed-coverage-datasets-20261013/ipfs_datasets_py/logic/formalization/autoencoder/security/source_program_binding_384.py"
+    },
+    {
+      "name": "qualified_datasets_committed_hash",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/security/source_program_binding_384.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/indexed-coverage-datasets-20261013/ipfs_datasets_py/logic/formalization/autoencoder/source_function_units.py"
+    },
+    {
+      "name": "qualified_datasets_committed_hash",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_function_units.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/indexed-coverage-datasets-20261013/ipfs_datasets_py/logic/formalization/autoencoder/source_screening.py"
+    },
+    {
+      "name": "qualified_datasets_committed_hash",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_screening.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/indexed-coverage-datasets-20261013/ipfs_datasets_py/logic/software_contracts/source_unit_numerical_links.py"
+    },
+    {
+      "name": "qualified_datasets_committed_hash",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/software_contracts/source_unit_numerical_links.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/indexed-coverage-datasets-20261013/ipfs_datasets_py/logic/software_verification/__init__.py"
+    },
+    {
+      "name": "qualified_datasets_committed_hash",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/software_verification/__init__.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/indexed-coverage-datasets-20261013/ipfs_datasets_py/logic/software_verification/numerical_logic.py"
+    },
+    {
+      "name": "qualified_datasets_committed_hash",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/software_verification/numerical_logic.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/indexed-coverage-datasets-20261013/ipfs_datasets_py/logic/software_verification/numerical_logic_v2.py"
+    },
+    {
+      "name": "qualified_datasets_committed_hash",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/software_verification/numerical_logic_v2.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/indexed-coverage-datasets-20261013/ipfs_datasets_py/logic/software_verification/numerical_logic_v3.py"
+    },
+    {
+      "name": "qualified_datasets_committed_hash",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/software_verification/numerical_logic_v3.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/indexed-coverage-datasets-20261013/ipfs_datasets_py/logic/software_verification/numerical_obligation_retrieval.py"
+    },
+    {
+      "name": "qualified_datasets_committed_hash",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/software_verification/numerical_obligation_retrieval.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/indexed-coverage-datasets-20261013/ipfs_datasets_py/logic/software_verification/numerical_source.py"
+    },
+    {
+      "name": "qualified_datasets_committed_hash",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/software_verification/numerical_source.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/indexed-coverage-datasets-20261013/ipfs_datasets_py/logic/software_verification/numerical_source_v2.py"
+    },
+    {
+      "name": "qualified_datasets_committed_hash",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/software_verification/numerical_source_v2.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/indexed-coverage-datasets-20261013/ipfs_datasets_py/logic/software_verification/numerical_source_v3.py"
+    },
+    {
+      "name": "qualified_datasets_committed_hash",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/software_verification/numerical_source_v3.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/indexed-coverage-datasets-20261013/ipfs_datasets_py/logic/software_verification/program.py"
+    },
+    {
+      "name": "qualified_datasets_committed_hash",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/software_verification/program.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/indexed-coverage-datasets-20261013/ipfs_datasets_py/logic/software_verification/source_adapters.py"
+    },
+    {
+      "name": "qualified_datasets_committed_hash",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/software_verification/source_adapters.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/indexed-coverage-datasets-20261013/ipfs_datasets_py/logic/software_verification/syntax_bridge.py"
+    },
+    {
+      "name": "qualified_datasets_committed_hash",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/software_verification/syntax_bridge.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/indexed-coverage-datasets-20261013/ipfs_datasets_py/logic/syntax_core/ast.py"
+    },
+    {
+      "name": "qualified_datasets_committed_hash",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/syntax_core/ast.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/indexed-coverage-datasets-20261013/ipfs_datasets_py/logic/syntax_core/signatures.py"
+    },
+    {
+      "name": "qualified_datasets_committed_hash",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/syntax_core/signatures.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/supervisor-comparison-contracts-20261011/benchmarks/agent_supervisor/container_coding/benchmark_controls.py"
+    },
+    {
+      "name": "qualified_accelerator_committed_hash",
+      "passed": true,
+      "path": "benchmarks/agent_supervisor/container_coding/benchmark_controls.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/supervisor-comparison-contracts-20261011/benchmarks/agent_supervisor/container_coding/benchmark_resource_profile.py"
+    },
+    {
+      "name": "qualified_accelerator_committed_hash",
+      "passed": true,
+      "path": "benchmarks/agent_supervisor/container_coding/benchmark_resource_profile.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/supervisor-comparison-contracts-20261011/benchmarks/agent_supervisor/container_coding/container_worker_deployment.py"
+    },
+    {
+      "name": "qualified_accelerator_committed_hash",
+      "passed": true,
+      "path": "benchmarks/agent_supervisor/container_coding/container_worker_deployment.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/supervisor-comparison-contracts-20261011/benchmarks/agent_supervisor/container_coding/full_supervisor_benchmark.py"
+    },
+    {
+      "name": "qualified_accelerator_committed_hash",
+      "passed": true,
+      "path": "benchmarks/agent_supervisor/container_coding/full_supervisor_benchmark.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/supervisor-comparison-contracts-20261011/benchmarks/agent_supervisor/container_coding/full_supervisor_harbor_agent.py"
+    },
+    {
+      "name": "qualified_accelerator_committed_hash",
+      "passed": true,
+      "path": "benchmarks/agent_supervisor/container_coding/full_supervisor_harbor_agent.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/supervisor-comparison-contracts-20261011/benchmarks/agent_supervisor/container_coding/native_usage_accounting.py"
+    },
+    {
+      "name": "qualified_accelerator_committed_hash",
+      "passed": true,
+      "path": "benchmarks/agent_supervisor/container_coding/native_usage_accounting.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/supervisor-comparison-contracts-20261011/benchmarks/agent_supervisor/container_coding/terminal_container_supervisor.py"
+    },
+    {
+      "name": "qualified_accelerator_committed_hash",
+      "passed": true,
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_container_supervisor.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/supervisor-comparison-contracts-20261011/benchmarks/agent_supervisor/container_coding/terminal_indexed_preparation.py"
+    },
+    {
+      "name": "qualified_accelerator_committed_hash",
+      "passed": true,
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_indexed_preparation.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/supervisor-comparison-contracts-20261011/benchmarks/agent_supervisor/container_coding/terminal_initial_context.py"
+    },
+    {
+      "name": "qualified_accelerator_committed_hash",
+      "passed": true,
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_initial_context.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/supervisor-comparison-contracts-20261011/benchmarks/agent_supervisor/container_coding/terminal_native_preflight.py"
+    },
+    {
+      "name": "qualified_accelerator_committed_hash",
+      "passed": true,
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_native_preflight.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/supervisor-comparison-contracts-20261011/benchmarks/agent_supervisor/container_coding/terminal_native_start_preflight.py"
+    },
+    {
+      "name": "qualified_accelerator_committed_hash",
+      "passed": true,
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_native_start_preflight.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/supervisor-comparison-contracts-20261011/benchmarks/agent_supervisor/container_coding/terminal_numerical_observation.py"
+    },
+    {
+      "name": "qualified_accelerator_committed_hash",
+      "passed": true,
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_numerical_observation.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/supervisor-comparison-contracts-20261011/benchmarks/agent_supervisor/container_coding/terminal_numerical_policy.py"
+    },
+    {
+      "name": "qualified_accelerator_committed_hash",
+      "passed": true,
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_numerical_policy.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/supervisor-comparison-contracts-20261011/benchmarks/agent_supervisor/container_coding/terminal_numerical_retrieval_observation.py"
+    },
+    {
+      "name": "qualified_accelerator_committed_hash",
+      "passed": true,
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_numerical_retrieval_observation.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/supervisor-comparison-contracts-20261011/benchmarks/agent_supervisor/container_coding/terminal_output_observation.py"
+    },
+    {
+      "name": "qualified_accelerator_committed_hash",
+      "passed": true,
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_output_observation.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/supervisor-comparison-contracts-20261011/ipfs_accelerate_py/agent_supervisor/entrypoints/admitted_benchmark_runtime.py"
+    },
+    {
+      "name": "qualified_accelerator_committed_hash",
+      "passed": true,
+      "path": "ipfs_accelerate_py/agent_supervisor/entrypoints/admitted_benchmark_runtime.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/supervisor-comparison-contracts-20261011/ipfs_accelerate_py/agent_supervisor/runtime/numerical_formalization_context.py"
+    },
+    {
+      "name": "qualified_accelerator_committed_hash",
+      "passed": true,
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/numerical_formalization_context.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/supervisor-comparison-contracts-20261011/ipfs_accelerate_py/agent_supervisor/runtime/numerical_obligation_broker.py"
+    },
+    {
+      "name": "qualified_accelerator_committed_hash",
+      "passed": true,
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/numerical_obligation_broker.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/supervisor-comparison-contracts-20261011/ipfs_accelerate_py/agent_supervisor/runtime/numerical_obligation_client.py"
+    },
+    {
+      "name": "qualified_accelerator_committed_hash",
+      "passed": true,
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/numerical_obligation_client.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/supervisor-comparison-contracts-20261011/ipfs_accelerate_py/agent_supervisor/runtime/published_numerical.py"
+    },
+    {
+      "name": "qualified_accelerator_committed_hash",
+      "passed": true,
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/published_numerical.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/supervisor-comparison-contracts-20261011/ipfs_accelerate_py/agent_supervisor/runtime/published_task_context.py"
+    },
+    {
+      "name": "qualified_accelerator_committed_hash",
+      "passed": true,
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/published_task_context.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/.worktrees/supervisor-comparison-contracts-20261011/ipfs_accelerate_py/agent_supervisor/runtime/router_implementation_runner.py"
+    },
+    {
+      "name": "qualified_accelerator_committed_hash",
+      "passed": true,
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/router_implementation_runner.py"
+    },
+    {
+      "name": "qualified_source_current_hash",
+      "passed": true,
+      "path": "/home/barberb/lift_coding/artifacts/terminal-suite-eigenval-pilot-20261004/largest-eigenval-profile.json"
+    },
+    {
+      "name": "qualified_source_and_public_input_count",
+      "passed": true
+    },
+    {
+      "name": "frozen_production_or_test_pin",
+      "passed": true,
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/numerical_formalization_context.py"
+    },
+    {
+      "name": "frozen_production_or_test_pin",
+      "passed": true,
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_numerical_policy.py"
+    },
+    {
+      "name": "frozen_production_or_test_pin",
+      "passed": true,
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_numerical_policy.py"
+    },
+    {
+      "name": "frozen_production_or_test_pin",
+      "passed": true,
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_numerical_control_context.py"
+    },
+    {
+      "name": "frozen_production_or_test_pin",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/software_verification/numerical_source_v3.py"
+    },
+    {
+      "name": "frozen_production_or_test_pin",
+      "passed": true,
+      "path": "tests/unit/logic/software_verification/test_numerical_source_v3.py"
+    },
+    {
+      "name": "frozen_production_or_test_pin",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/software_verification/numerical_source_v2.py"
+    },
+    {
+      "name": "frozen_production_or_test_pin",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/software_verification/numerical_source.py"
+    },
+    {
+      "name": "frozen_production_or_test_pin",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/software_verification/program.py"
+    },
+    {
+      "name": "frozen_production_or_test_pin",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/software_contracts/source_unit_numerical_links.py"
+    },
+    {
+      "name": "frozen_production_or_test_pin",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/software_verification/numerical_logic_v3.py"
+    },
+    {
+      "name": "frozen_production_or_test_pin",
+      "passed": true,
+      "path": "ipfs_datasets_py/logic/software_verification/numerical_obligation_retrieval.py"
+    },
+    {
+      "name": "frozen_production_or_test_pin",
+      "passed": true,
+      "path": "tests/unit/logic/software_verification/test_numerical_logic_v3.py"
+    },
+    {
+      "files": 47,
+      "name": "upstream_discovery_exact",
+      "passed": true
+    },
+    {
+      "name": "upstream_intent_tests_exact",
+      "passed": true
+    },
+    {
+      "module": "ipfs_datasets_py.logic.software_verification.numerical_logic",
+      "name": "historical_producer_pin_unchanged",
+      "passed": true
+    },
+    {
+      "module": "ipfs_datasets_py.logic.software_verification.numerical_logic_v2",
+      "name": "historical_producer_pin_unchanged",
+      "passed": true
+    },
+    {
+      "module": "ipfs_datasets_py.logic.software_verification.numerical_source",
+      "name": "historical_producer_pin_unchanged",
+      "passed": true
+    },
+    {
+      "module": "ipfs_datasets_py.logic.software_verification.numerical_source_v2",
+      "name": "historical_producer_pin_unchanged",
+      "passed": true
+    },
+    {
+      "module": "ipfs_datasets_py.logic.software_verification.program",
+      "name": "historical_producer_pin_unchanged",
+      "passed": true
+    },
+    {
+      "name": "ledger_junit_digest",
+      "passed": true
+    },
+    {
+      "name": "ledger_root_counts",
+      "passed": true
+    },
+    {
+      "name": "root_suite_exit_zero",
+      "passed": true
+    },
+    {
+      "name": "ledger_junit_digest",
+      "passed": true
+    },
+    {
+      "name": "ledger_root_counts",
+      "passed": true
+    },
+    {
+      "name": "root_suite_exit_zero",
+      "passed": true
+    },
+    {
+      "name": "1096_distinct_root_passes",
+      "passed": true
+    },
+    {
+      "name": "two_expected_learned_skips",
+      "passed": true
+    },
+    {
+      "name": "passed_node_file_exact",
+      "passed": true
+    },
+    {
+      "name": "focused_runs_not_double_counted",
+      "passed": true
+    },
+    {
+      "name": "203_focused_passes_are_root_subset",
+      "passed": true
+    },
+    {
+      "name": "six_native_lake_tests_executed",
+      "passed": true
+    },
+    {
+      "name": "actual_summary_limit",
+      "passed": true
+    },
+    {
+      "name": "document_actual_summary_and_pending_counts",
+      "passed": true
+    },
+    {
+      "name": "document_scope_limits",
+      "passed": true
+    },
+    {
+      "name": "pinned_shared_implementation_links",
+      "passed": true
+    },
+    {
+      "name": "committed_local_document_link",
+      "passed": true
+    },
+    {
+      "name": "committed_local_document_link",
+      "passed": true
+    },
+    {
+      "name": "committed_local_document_link",
+      "passed": true
+    },
+    {
+      "name": "committed_local_document_link",
+      "passed": true
+    },
+    {
+      "name": "committed_local_document_link",
+      "passed": true
+    },
+    {
+      "name": "committed_local_document_link",
+      "passed": true
+    },
+    {
+      "name": "committed_local_document_link",
+      "passed": true
+    },
+    {
+      "name": "committed_local_document_link",
+      "passed": true
+    },
+    {
+      "name": "committed_local_document_link",
+      "passed": true
+    },
+    {
+      "name": "committed_local_document_link",
+      "passed": true
+    },
+    {
+      "name": "committed_local_document_link",
+      "passed": true
+    },
+    {
+      "name": "committed_local_document_link",
+      "passed": true
+    },
+    {
+      "name": "committed_local_document_link",
+      "passed": true
+    },
+    {
+      "name": "committed_local_document_link",
+      "passed": true
+    },
+    {
+      "name": "committed_local_document_link",
+      "passed": true
+    },
+    {
+      "name": "committed_local_document_link",
+      "passed": true
+    },
+    {
+      "name": "committed_local_document_link",
+      "passed": true
+    },
+    {
+      "name": "both_worktrees_still_clean",
+      "passed": true
+    }
+  ],
+  "datasets_commit": "6cfc5a640a4715dfc4da1a8f5d180719b4bc6fbe",
+  "evidence_files": 93,
+  "exact_retained_copies": 90,
+  "executed_native_lake_test_nodes": [
+    "datasets:tests.unit.logic.software_verification.test_numerical_logic::test_actual_native_lake_conditional_lemmas_and_false_claim_rejection[False]",
+    "datasets:tests.unit.logic.software_verification.test_numerical_logic::test_actual_native_lake_conditional_lemmas_and_false_claim_rejection[True]",
+    "datasets:tests.unit.logic.software_verification.test_numerical_value_contracts::test_native_lake_conditional_contract_and_zero_vector_refutation[False]",
+    "datasets:tests.unit.logic.software_verification.test_numerical_value_contracts::test_native_lake_conditional_contract_and_zero_vector_refutation[True]",
+    "datasets:tests.unit.logic.software_verification.test_numerical_assertion_requirements::test_native_lake_assertion_polarity_and_false_positive_rejection[False]",
+    "datasets:tests.unit.logic.software_verification.test_numerical_assertion_requirements::test_native_lake_assertion_polarity_and_false_positive_rejection[True]"
+  ],
+  "expected_skips": [
+    "accelerator:benchmarks.agent_supervisor.container_coding.test_terminal_numerical_selection_integration::test_real_numerical_consumer_preserves_mismatch_abstention_and_cached_report",
+    "accelerator:benchmarks.agent_supervisor.container_coding.test_terminal_numerical_selection_integration::test_cached_numerical_checkpoint_reaches_planning_worker_and_historical_audit"
+  ],
+  "focused_duplicate_passes_excluded": 203,
+  "frozen_accelerator_files": 4,
+  "frozen_datasets_files": 9,
+  "inline_pending_rows": 0,
+  "limitations": [
+    "This verifies the exact local committed trees and retained raw evidence; GitHub remote completion and CI are outside this audit.",
+    "Private-material checks use the exact public allowlist, forbidden artifact paths, retained actual owner key representations and bounded credential-pattern scans; this is not a general secret-detection proof.",
+    "The published qualification is deterministic grammar/metadata validation, with pending source obligations and no new learned inference, full supervisor START or benchmark/token score."
+  ],
+  "manifest_members": 92,
+  "manifest_sha256": "fb8b7d9ebe5e90bb3679ac5294656e15633237ff74cc2a824c62c19504c6e36a",
+  "planning_summary_bytes": 7614,
+  "preserved_datasets_upstream": "8f3856ee9967831f55a0d602a645eb143def5eea",
+  "private_artifact_paths_published": false,
+  "qualified_source_and_input_pins": 47,
+  "root_distinct_passes": 1096,
+  "root_pass_counts": {
+    "accelerator": 670,
+    "datasets": 426
+  },
+  "schema": "numerical-loop-publication-independent-audit@1",
+  "status": "passed",
+  "tracked_files_modified": false,
+  "upstream_discovery_files_unchanged": 47
+}
