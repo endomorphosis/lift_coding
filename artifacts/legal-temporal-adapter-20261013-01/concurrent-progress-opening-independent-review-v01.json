@@ -1,0 +1,3759 @@
+{
+  "Git_queries": [
+    {
+      "args": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "5034261a17ec67f4294f8fdcc650b384b14c2badee073459a2fb464d259b6627"
+    },
+    {
+      "args": [
+        "symbolic-ref",
+        "HEAD"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 32,
+      "stdout_sha256": "e48daa9b1522246349c1ac6b6b6dc6ac1e8f4368f193244d93f3b121bb28eef6"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "a7f7f2d685b37022355186c3b9e08c1dd239850dc56fe4fc8173bf971008a52f"
+    },
+    {
+      "args": [
+        "symbolic-ref",
+        "HEAD"
+      ],
+      "cwd": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 16,
+      "stdout_sha256": "599bbcd7b7f94b50d9b83318ba0dd4b8e1ba9e39d1d3ee73d1fbbd70496d0f93"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "5723a541c5d575b88f01532e4d241dc95a1f3e99",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-list",
+        "--parents",
+        "5723a541c5d575b88f01532e4d241dc95a1f3e99..afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 82,
+      "stdout_sha256": "df87c1ca96bbce13a0f67cae6ff01c96d26b9324a6a660c167ccb820575ecd9a"
+    },
+    {
+      "args": [
+        "show",
+        "-s",
+        "--format=%s",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 73,
+      "stdout_sha256": "056cd5356c78be9e90e9b315221bc149064c7214360066af1cb2c45d1a21e19a"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 297,
+      "stdout_sha256": "8cd39a39120fe236392d7aa7e006402f3adacf8f8cf2423559d4335d3c118c6f"
+    },
+    {
+      "args": [
+        "ls-tree",
+        "-r",
+        "-z",
+        "5723a541c5d575b88f01532e4d241dc95a1f3e99"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 4460741,
+      "stdout_sha256": "ac2787a0101d0e0b8e18ab8bc382f1ca031cfdd9e76a0adfac529d2d68516211"
+    },
+    {
+      "args": [
+        "ls-tree",
+        "-r",
+        "-z",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 4461008,
+      "stdout_sha256": "436c1265e500737ef3b88b6ce9d9b6d3c3d638bdd4870db77126af3a10c4386f"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "b26128b1b200ee77bb7f497152c806768312c774",
+        "99c775ecefd9ea19ee0c77c9993a3bc7fe4d398d"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-list",
+        "--parents",
+        "b26128b1b200ee77bb7f497152c806768312c774..99c775ecefd9ea19ee0c77c9993a3bc7fe4d398d"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 82,
+      "stdout_sha256": "722ad070cdee3e799ac2f3dc644cfaa3a05b8942245108e1ac3664d13e2a6dc3"
+    },
+    {
+      "args": [
+        "show",
+        "-s",
+        "--format=%s",
+        "99c775ecefd9ea19ee0c77c9993a3bc7fe4d398d"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 70,
+      "stdout_sha256": "b3780c2421280fc7b47ad66a2aaddd83498fb65e69ce5535784b771f4567987e"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "99c775ecefd9ea19ee0c77c9993a3bc7fe4d398d"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 294,
+      "stdout_sha256": "b31735504ebbb3c77b6b49e86c3583af664ba124947076c2633a8101a914368f"
+    },
+    {
+      "args": [
+        "ls-tree",
+        "-r",
+        "-z",
+        "b26128b1b200ee77bb7f497152c806768312c774"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 6013073,
+      "stdout_sha256": "9e8b2abd12c71e84575533ef434276853a4193441b360bb3efbbebb97e2cad16"
+    },
+    {
+      "args": [
+        "ls-tree",
+        "-r",
+        "-z",
+        "99c775ecefd9ea19ee0c77c9993a3bc7fe4d398d"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 6013455,
+      "stdout_sha256": "4f58dcbb0ed73dbef16b597f426020b2affb0474510b4cda8eb9ec237b37f988"
+    },
+    {
+      "args": [
+        "worktree",
+        "list",
+        "--porcelain",
+        "-z"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 8632,
+      "stdout_sha256": "96f3e105df83dcbe369fe099ac5815da029ea6b89dd15ce5f97f4579d0cb1073"
+    },
+    {
+      "args": [
+        "worktree",
+        "list",
+        "--porcelain",
+        "-z"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 11102,
+      "stdout_sha256": "6ce63fc93315b8263b48fa46f89cce5bc863f12189f01eaeed27427b89dd6fbe"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "9e794a4cfdc9cbfacdb63604dcca1605ce2bf1d5"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 290,
+      "stdout_sha256": "fa48154e7d50d98499c8339edd2edec87e35298c7366e8b7b3ad8f854437181f"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "9e794a4cfdc9cbfacdb63604dcca1605ce2bf1d5",
+        "99c775ecefd9ea19ee0c77c9993a3bc7fe4d398d"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/agent/autoencoder-progress-reconciliation-20261006"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "7e734f860b002355de8282830fe55a850ca0a7c590d26ada1cfeb78e13126d96"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "30e61092341b47b4e49eb30df443fd607536333a"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 379,
+      "stdout_sha256": "55ee6a3c5ac59b9d8cad5b6528a640ab29cd1aa1bd8ac8e2ba101c0496ae2b84"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "30e61092341b47b4e49eb30df443fd607536333a",
+        "99c775ecefd9ea19ee0c77c9993a3bc7fe4d398d"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/agent/dual-bank-wording-adapter-root-20261007"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "cf6b9d0a73661804dc0d9cd992e4812f8277a4d7e022a4bc2788d2bda681417a"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "aab99b3792e4d13572830f4aa91c7915092b23fe"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 302,
+      "stdout_sha256": "9f4a61c7ba152538154c02d978ce66b2352933060e20108898721cb09b89c5c1"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "aab99b3792e4d13572830f4aa91c7915092b23fe",
+        "99c775ecefd9ea19ee0c77c9993a3bc7fe4d398d"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/autoencoder-reconciliation-20261007-01"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "d435ccbef747320bf2d8fe805320ffadfa912b4fa14b98a0e5994ea3931ca39b"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "739e7088a203a4b307d96192e489a88dbf9177b1"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 286,
+      "stdout_sha256": "50fe2b6230bbfb7fecb8ccdb0797ca1313bbe77576ff41023037381ff73d9a01"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "739e7088a203a4b307d96192e489a88dbf9177b1",
+        "99c775ecefd9ea19ee0c77c9993a3bc7fe4d398d"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-joint-readout-workspace-20261011-01"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "720ef84efb3afbc3726d2849bc55da9778c0b7428922c7f393cfe203e5d1e955"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "d90d47016e60c38ef6b32ea0e23d6a3c2ea8cdc9"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 291,
+      "stdout_sha256": "9602e17c94920433fe31fdd89f890317c2c8190ba13055ed638484095a017417"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "d90d47016e60c38ef6b32ea0e23d6a3c2ea8cdc9",
+        "99c775ecefd9ea19ee0c77c9993a3bc7fe4d398d"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-native-cache-workspace-20261011-01"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "b6e28ea12eb5d0ec499244c704997e55b0562f87031da3508b2c0504d9929a71"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "00130686f43e35105e2ee98e5a36428f3aff3538"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 289,
+      "stdout_sha256": "22a467fbc5c810205d5088ff581f82c3ebebd01533bd22aaeb8326473c0c029b"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "00130686f43e35105e2ee98e5a36428f3aff3538",
+        "99c775ecefd9ea19ee0c77c9993a3bc7fe4d398d"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-open-vocabulary-workspace-20261011-01"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "35bcaf675a4bbfd11e849ffbd8ba65f14fde4d556bd13404f04d71fc9e8a1c5a"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "fb8176ab49e063f6d2446b74bbde0cc34e47b9ad"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 292,
+      "stdout_sha256": "e0f17a0015011ec951c3dad8a433a0eeb7d2338d33b0713ec22f63a889767915"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "fb8176ab49e063f6d2446b74bbde0cc34e47b9ad",
+        "99c775ecefd9ea19ee0c77c9993a3bc7fe4d398d"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-retention-objective-20261011-01"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "054f94cfa5d8290dcadb61cf19872547cf576be5fec1c9fe0d4e176d887d0b60"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "fbb194215f19763cf88082bc6ed30eb4bccbbf7f"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 296,
+      "stdout_sha256": "14c1a366a973cba4a23afd4b9bdc732f06b512ff91041cdb6088c2733285308e"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "fbb194215f19763cf88082bc6ed30eb4bccbbf7f",
+        "99c775ecefd9ea19ee0c77c9993a3bc7fe4d398d"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-structured-training-workspace-20261011-01"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "39601b568aeaca6dc34b80f02694cedef4c2d615a059779c0b17bbeb4d1af79e"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "3b0162bebe0b7a09727081cb8c5f5c15378caba1"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 281,
+      "stdout_sha256": "327af7f36ff5227ff5fa7fdcf157ea268a39e8f4074fc17d18b02935b26e1d4d"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "3b0162bebe0b7a09727081cb8c5f5c15378caba1",
+        "99c775ecefd9ea19ee0c77c9993a3bc7fe4d398d"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/supervisor-context-token-economy-root-20261006"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "0213bb5e0a2d5a736e9555fb9112411d6a1313d6"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 1269,
+      "stdout_sha256": "3109212ae1a9a310acad7126572994f15824aa8a7cce461490b86015b85fa67e"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "0213bb5e0a2d5a736e9555fb9112411d6a1313d6",
+        "99c775ecefd9ea19ee0c77c9993a3bc7fe4d398d"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/main"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "c44b5227689aff78b5df43f31815663c7b12b650b5d633a18fc37d401dd0267d"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "a3f16f2870a80a7e985b35bed3334512c47d9dc3"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 298,
+      "stdout_sha256": "2c8019bf1501a72b6ab526f59e66d0b5de4eac984ed77d5222b911e981c19ecc"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/agent/autoencoder-progress-reconciliation-datasets-20261006"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "39f25777d557df1c51b8f98ed0dcd084c35d4d6d"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 305,
+      "stdout_sha256": "e656721486a7761f7079487a74ab993fba7c37374313c21485900ed29b15ed7a"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/agent/contextual-legal-runtime-20261006"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "aed87b0d980422c2ca9efaa26cf92df30c51d768"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 302,
+      "stdout_sha256": "965f9ce2b49843ac9d931d5b9202effa150cbdd9ac1ddf2885bce3515a758369"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "aed87b0d980422c2ca9efaa26cf92df30c51d768",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/agent/dual-bank-wording-adapter-datasets-20261007"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "c4382ae53ab9497245fccdf85855f0e314711fbc"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 297,
+      "stdout_sha256": "f0e1e099b03c01558690791dae11ccfe96069a4f37470b33f30cb4dad3bcb379"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "c4382ae53ab9497245fccdf85855f0e314711fbc",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/agent/normative-cache-input-datasets-20261007"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "6a954ecef4fa78a5e58aa4fdb070cc3d1e86fcff"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 383,
+      "stdout_sha256": "f2faca5600b67e46308792d2aa982fc3a569a60562a3225fec4e82af38b83fa8"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "6a954ecef4fa78a5e58aa4fdb070cc3d1e86fcff",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/agent/normative-decoder-runtime-datasets-20261007"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "53e87779a527349b65875cb20b59ca9eb48ed70c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 301,
+      "stdout_sha256": "af4427ed04d0f7b7118cdb491a5f6c42caec8feb5155ce4df0c4cc5aad27610e"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "53e87779a527349b65875cb20b59ca9eb48ed70c",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/autoencoder-owner-integration-20261007-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "f3164b7cb04c4c2c5647d4b5ffa74a87074ba01b"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 287,
+      "stdout_sha256": "efdddfbe80ac3517d6e68eee77ea1e43ddeab1e058a35c30b9212e650d0af6a0"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "f3164b7cb04c4c2c5647d4b5ffa74a87074ba01b",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/ir-publication-main-integration-20261004"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "575a129f19068d58d66cc8119e85c3d23faa560a"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 292,
+      "stdout_sha256": "7063d8e6e376cc0a12ceb327b2b16394eaf70d3c22619a0d5deee00073f60949"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "575a129f19068d58d66cc8119e85c3d23faa560a",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-cross-agent-guards-20261006"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "0f733b621335a3fb95e3f8855f2100cd95ba01b5"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 302,
+      "stdout_sha256": "73ae6ea662415f2dd84c61d792fb0b6cfc163c6706cd4f3c0542e75fcab131c3"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "0f733b621335a3fb95e3f8855f2100cd95ba01b5",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-decoder-followup-20261006-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "b4002de1e73d295e222cd7258bd07e4784a6b928"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 291,
+      "stdout_sha256": "302cd5c43a36322326a921331308f59633fab273559e36320e283800452e9be4"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "b4002de1e73d295e222cd7258bd07e4784a6b928",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-decoder-progress-20261011-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "a8469c7bc932da713e40f27aaf48b2ce9ea4e1afb32315593e68d24e7af43be8"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "004887f6250b083e0b095d5ac7563bc5bb792491"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 293,
+      "stdout_sha256": "2a25d0ae01364c9cfa0d230f0e24268d76e4d62869fabbac1df67e83e7f5e760"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "004887f6250b083e0b095d5ac7563bc5bb792491",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-grouped-integration-20261006-02"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "146e4c88fea6d0a9ab671af00e1596a9a60ea784"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 281,
+      "stdout_sha256": "0228a4492ae5f46ece72131bf6a4204c89d401f02f5f47b4f1ae7452cd3e84cf"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "146e4c88fea6d0a9ab671af00e1596a9a60ea784",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-joint-readout-20261011-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "14227844d2a24d181096a3927275f81e60fb6b5d9940d85896884ac97ca8c950"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "f3901341cdde9b4485315327d5ef06abd1485b11"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 283,
+      "stdout_sha256": "a509d7008511909b02207ac6eacb5da4aa2c44cf4adb475f4e09bf8501d8b3fc"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "f3901341cdde9b4485315327d5ef06abd1485b11",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-native-cache-20261011-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "d14910f20f007884224d25dc40a2423f1e9ec3a6d47910a2ea14f87f1af64ced"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "fe00dd1d64d0e26e0b396e40cadd094d544efd0c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 283,
+      "stdout_sha256": "3db58de67406ddda7c64d719f7722943f0d5a7b3dd05fffe2421f8776fbcd72e"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "fe00dd1d64d0e26e0b396e40cadd094d544efd0c",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-open-vocabulary-20261011-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "f45f0b061cf6f69caa2d104eb8435e4f620133ef3fc36941844d6c166c28a30c"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "2b87326cb73f4f09d12aff3ccb68e0a6142a686c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 374,
+      "stdout_sha256": "03cb1f302e9b4a92ef1f53e9206e0028606e1915fe507a878d5027651d8213fb"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-original-text-roundtrip-retained-20261004"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "156d53617180f06fa90ebbc3448ba34e5847a93af8242cde63cb48087ae0c6f3"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "1530efd07032bac88229c6c97ca5994d498e6216"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 292,
+      "stdout_sha256": "8828a7760e3b9b50039f9722c099670c8e5808502045d17c2a4eed58058eab49"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "1530efd07032bac88229c6c97ca5994d498e6216",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-scope-span-training-20261007-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "7c90b27d9fd193e768e8ecdca0bb5055145f1b78"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 288,
+      "stdout_sha256": "ab2d4e776c7e7ef8d7395d819da8f341ce159580e4a3696f714fa54352b6b3e5"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "7c90b27d9fd193e768e8ecdca0bb5055145f1b78",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-structured-training-20261011-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "d14c36ce76351dd5d9bcff38fa5b82bb9d5ea60886cba5efb48f20cfa1033397"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "7b93b2d97a8985b3f2db29963bd0979749f66163"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 289,
+      "stdout_sha256": "37921926d780d769aa5b5e4db5ee3d4201161f427425e577b4d38cc87cbe0fe5"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "7b93b2d97a8985b3f2db29963bd0979749f66163",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-support-action-model-20261007-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "8695a31b0b91b73a1cd66abcc8ea0e998e59c9c6"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 287,
+      "stdout_sha256": "a542a3fa3e35f1f2f12da3bc0b74001c3f5c5b1b7ee91a1f97de9e0343a3989c"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "8695a31b0b91b73a1cd66abcc8ea0e998e59c9c6",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-support-gate-model-20261007-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "e35aef47ef6d67f7d07793be487e2be04ec6c7d6"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 281,
+      "stdout_sha256": "b6b21dc181ff9abc11cc47b00e67b1e1bd53c452acbbb652f169ed48adc68022"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "e35aef47ef6d67f7d07793be487e2be04ec6c7d6",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-trigger-readout-model-20261007-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "d1643c2c621f45f0ca0080e017fe6717b093e478"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 289,
+      "stdout_sha256": "d428417eb034e3c8cb16fb7ea90478a682c46adc1119df54abcb110908ae105d"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "d1643c2c621f45f0ca0080e017fe6717b093e478",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/source-v2-warm-start-20261004"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "57fdfe280bd09fd366eb961c11ef41523c4b78d546a0521869d7b5798399a357"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "4af461728329cdad4bfb910ab878d016ce279e54"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 1261,
+      "stdout_sha256": "712a539e190f7ac5f3b6b5645f779f2ef8ba1d35e5603e68071bd1635268e8a9"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "4af461728329cdad4bfb910ab878d016ce279e54",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/main"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "a7f7f2d685b37022355186c3b9e08c1dd239850dc56fe4fc8173bf971008a52f"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "5eedd23dd8b8ae4e2cac1716f00f1fcaf19a2801"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 305,
+      "stdout_sha256": "4b626d869490097398096f3085963115286edde3b6460e79a860849e254c03a5"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "5eedd23dd8b8ae4e2cac1716f00f1fcaf19a2801",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-list",
+        "--count",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c..5eedd23dd8b8ae4e2cac1716f00f1fcaf19a2801"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 3,
+      "stdout_sha256": "654ee9da442fa353f59f11beb688fc7f76c8de62a6c18b2a181fdde2a27cc3ef"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/publication/main-20261004/datasets"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "35a7eeb47788aa884526e0d9ae4c3149f58a2ef96eed39b8561f369c53489df3"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "23540627b1cf6515df0fd84c9417b4cbdb91234a"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 286,
+      "stdout_sha256": "3ce86227267bd735f588c9d6b58dbe16f0783c86d0752a4af4365f60b92c46a5"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "23540627b1cf6515df0fd84c9417b4cbdb91234a",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-list",
+        "--count",
+        "afadfbcf8d33a67568c133bb761c43d42a9a133c..23540627b1cf6515df0fd84c9417b4cbdb91234a"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 3,
+      "stdout_sha256": "7ea9844ae84eccbf55e8330640865e36c43521e45a1baec24233327aab7e6595"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/publication/main-refresh-20261004/datasets-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "959b9db7a821672d8a4fa6d4c4884bafd42585904bd096752b2c378ec439cf9f"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "ce3e21da27d23bfa4ac5490be9a5cb44798945f2"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 435,
+      "stdout_sha256": "bd2969abca46f729a8de91b3e43aa824abcf394c5c4fa24741f0177d9554d661"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "ce3e21da27d23bfa4ac5490be9a5cb44798945f2",
+        "99c775ecefd9ea19ee0c77c9993a3bc7fe4d398d"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-list",
+        "--count",
+        "99c775ecefd9ea19ee0c77c9993a3bc7fe4d398d..ce3e21da27d23bfa4ac5490be9a5cb44798945f2"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 2,
+      "stdout_sha256": "f0b5c2c2211c8d67ed15e75e656c7862d086e9245420892a7de62cd9ec582a06"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/publication/main-20261004/root-02"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "858e0798bea3c67d7b3388f380071af89aafd22143a7b58fe5fca4ed59e06f5d"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "57fd19895ce42ad68f87b3d7126fbf19da285bdb"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 305,
+      "stdout_sha256": "d6cb49b7ff3212486dadea0023a64acd3644bf7fdad0eb1a21547584b508c19b"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "57fd19895ce42ad68f87b3d7126fbf19da285bdb",
+        "99c775ecefd9ea19ee0c77c9993a3bc7fe4d398d"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-list",
+        "--count",
+        "99c775ecefd9ea19ee0c77c9993a3bc7fe4d398d..57fd19895ce42ad68f87b3d7126fbf19da285bdb"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 2,
+      "stdout_sha256": "7de1555df0c2700329e815b93b32c571c3ea54dc967b89e81ab73b9972b72d1d"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/publication/main-20261004/root-03"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "6fcce4fb51c89471128401098520cc6017d83401ac30b6615b1b2a4094ec630a"
+    },
+    {
+      "args": [
+        "cat-file",
+        "commit",
+        "9d1944b9a9fd95abbb6297b4c7d34a1312809f14"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 286,
+      "stdout_sha256": "ecdc24e842db2a02b2ef80f2ca4a2c650afeb78fa70f90e08f674b95742780d5"
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "9d1944b9a9fd95abbb6297b4c7d34a1312809f14",
+        "99c775ecefd9ea19ee0c77c9993a3bc7fe4d398d"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-list",
+        "--count",
+        "99c775ecefd9ea19ee0c77c9993a3bc7fe4d398d..9d1944b9a9fd95abbb6297b4c7d34a1312809f14"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 2,
+      "stdout_sha256": "06e9d52c1720fca412803e3b07c4b228ff113e303f4c7ab94665319d832bbfb7"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/publication/main-refresh-20261004/root-01"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "d98a716c13e6f0ba8bc20e186c18b30723444fb2ad9310dbf80c1a8c3f33bac8"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/supervisor-context-token-economy-root-20261006"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/agent/autoencoder-progress-reconciliation-datasets-20261006"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/agent/contextual-legal-runtime-20261006"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/agent/dual-bank-wording-adapter-datasets-20261007"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/agent/normative-cache-input-datasets-20261007"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/agent/normative-decoder-runtime-datasets-20261007"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/autoencoder-owner-integration-20261007-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/ir-publication-main-integration-20261004"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-cross-agent-guards-20261006"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-decoder-followup-20261006-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-grouped-integration-20261006-02"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-scope-span-training-20261007-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-support-action-model-20261007-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-support-gate-model-20261007-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-trigger-readout-model-20261007-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "worktree",
+        "list",
+        "--porcelain",
+        "-z"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 8632,
+      "stdout_sha256": "96f3e105df83dcbe369fe099ac5815da029ea6b89dd15ce5f97f4579d0cb1073"
+    },
+    {
+      "args": [
+        "worktree",
+        "list",
+        "--porcelain",
+        "-z"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 11102,
+      "stdout_sha256": "6ce63fc93315b8263b48fa46f89cce5bc863f12189f01eaeed27427b89dd6fbe"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/agent/autoencoder-progress-reconciliation-20261006"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "7e734f860b002355de8282830fe55a850ca0a7c590d26ada1cfeb78e13126d96"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/agent/dual-bank-wording-adapter-root-20261007"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "cf6b9d0a73661804dc0d9cd992e4812f8277a4d7e022a4bc2788d2bda681417a"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/autoencoder-reconciliation-20261007-01"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "d435ccbef747320bf2d8fe805320ffadfa912b4fa14b98a0e5994ea3931ca39b"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-joint-readout-workspace-20261011-01"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "720ef84efb3afbc3726d2849bc55da9778c0b7428922c7f393cfe203e5d1e955"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-native-cache-workspace-20261011-01"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "b6e28ea12eb5d0ec499244c704997e55b0562f87031da3508b2c0504d9929a71"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-open-vocabulary-workspace-20261011-01"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "35bcaf675a4bbfd11e849ffbd8ba65f14fde4d556bd13404f04d71fc9e8a1c5a"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-retention-objective-20261011-01"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "054f94cfa5d8290dcadb61cf19872547cf576be5fec1c9fe0d4e176d887d0b60"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-structured-training-workspace-20261011-01"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "39601b568aeaca6dc34b80f02694cedef4c2d615a059779c0b17bbeb4d1af79e"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/supervisor-context-token-economy-root-20261006"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/main"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "c44b5227689aff78b5df43f31815663c7b12b650b5d633a18fc37d401dd0267d"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/agent/autoencoder-progress-reconciliation-datasets-20261006"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/agent/contextual-legal-runtime-20261006"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/agent/dual-bank-wording-adapter-datasets-20261007"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/agent/normative-cache-input-datasets-20261007"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/agent/normative-decoder-runtime-datasets-20261007"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/autoencoder-owner-integration-20261007-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/ir-publication-main-integration-20261004"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-cross-agent-guards-20261006"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-decoder-followup-20261006-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-decoder-progress-20261011-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "a8469c7bc932da713e40f27aaf48b2ce9ea4e1afb32315593e68d24e7af43be8"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-grouped-integration-20261006-02"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-joint-readout-20261011-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "14227844d2a24d181096a3927275f81e60fb6b5d9940d85896884ac97ca8c950"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-native-cache-20261011-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "d14910f20f007884224d25dc40a2423f1e9ec3a6d47910a2ea14f87f1af64ced"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-open-vocabulary-20261011-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "f45f0b061cf6f69caa2d104eb8435e4f620133ef3fc36941844d6c166c28a30c"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-original-text-roundtrip-retained-20261004"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "156d53617180f06fa90ebbc3448ba34e5847a93af8242cde63cb48087ae0c6f3"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-scope-span-training-20261007-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-structured-training-20261011-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "d14c36ce76351dd5d9bcff38fa5b82bb9d5ea60886cba5efb48f20cfa1033397"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-support-action-model-20261007-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-support-gate-model-20261007-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/legal-trigger-readout-model-20261007-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 1,
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/codex/source-v2-warm-start-20261004"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "57fdfe280bd09fd366eb961c11ef41523c4b78d546a0521869d7b5798399a357"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/main"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "a7f7f2d685b37022355186c3b9e08c1dd239850dc56fe4fc8173bf971008a52f"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/publication/main-20261004/datasets"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "35a7eeb47788aa884526e0d9ae4c3149f58a2ef96eed39b8561f369c53489df3"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/publication/main-refresh-20261004/datasets-01"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "959b9db7a821672d8a4fa6d4c4884bafd42585904bd096752b2c378ec439cf9f"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/publication/main-20261004/root-02"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "858e0798bea3c67d7b3388f380071af89aafd22143a7b58fe5fca4ed59e06f5d"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/publication/main-20261004/root-03"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "6fcce4fb51c89471128401098520cc6017d83401ac30b6615b1b2a4094ec630a"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "--quiet",
+        "refs/heads/publication/main-refresh-20261004/root-01"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "d98a716c13e6f0ba8bc20e186c18b30723444fb2ad9310dbf80c1a8c3f33bac8"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "5034261a17ec67f4294f8fdcc650b384b14c2badee073459a2fb464d259b6627"
+    },
+    {
+      "args": [
+        "symbolic-ref",
+        "HEAD"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "repo": "root",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 32,
+      "stdout_sha256": "e48daa9b1522246349c1ac6b6b6dc6ac1e8f4368f193244d93f3b121bb28eef6"
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 41,
+      "stdout_sha256": "a7f7f2d685b37022355186c3b9e08c1dd239850dc56fe4fc8173bf971008a52f"
+    },
+    {
+      "args": [
+        "symbolic-ref",
+        "HEAD"
+      ],
+      "cwd": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "repo": "source",
+      "returncode": 0,
+      "stderr": "",
+      "stdout_bytes": 16,
+      "stdout_sha256": "599bbcd7b7f94b50d9b83318ba0dd4b8e1ba9e39d1d3ee73d1fbbd70496d0f93"
+    }
+  ],
+  "artifacts": {
+    "/home/barberb/lift_coding/.git/HEAD": {
+      "bytes": 37,
+      "path": "/home/barberb/lift_coding/.git/HEAD",
+      "sha256": "32a4e0619657da69ad525c8936b759693db31bc061488a69a547266919aac0c7"
+    },
+    "/home/barberb/lift_coding/.git/index": {
+      "bytes": 692628,
+      "path": "/home/barberb/lift_coding/.git/index",
+      "sha256": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4"
+    },
+    "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/HEAD": {
+      "bytes": 21,
+      "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/HEAD",
+      "sha256": "28d25bf82af4c0e2b72f50959b2beb859e3e60b9630a5e8c603dad4ddb2b6e80"
+    },
+    "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/index": {
+      "bytes": 3799757,
+      "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/index",
+      "sha256": "d2a68a76e7a7ed99ef8ba031261cb8e7b66d6fca6c351b0e1e9dd8dc13910175"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/canonical-resource-intake-v01.json": {
+      "bytes": 2612,
+      "path": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/canonical-resource-intake-v01.json",
+      "sha256": "db2844338d6f693a93e2634719c8eedf64bbff68d0c5bb37d407019cdf322382"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_temporal_adapter.py": {
+      "bytes": 48506,
+      "path": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_temporal_adapter.py",
+      "sha256": "48143e05dc9459f3f7a21b469ef24a6386f7a7645a8bb28ee3bb231b51332d28"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_temporal_adapter_contracts.py": {
+      "bytes": 22757,
+      "path": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_temporal_adapter_contracts.py",
+      "sha256": "6b5e96094f0b24d8524479d227ba42d8bb6bfdd48c4f6def94e80415ed337b13"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/temporal-ce-control-plan-v01.json": {
+      "bytes": 41221,
+      "path": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/temporal-ce-control-plan-v01.json",
+      "sha256": "b1ce884884419ded434c7abe1f24d0348df01104366f3e435684573070a2417d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-temporal-presence-20261013-01/final-integration-independent-review-v01.json": {
+      "bytes": 124591,
+      "path": "/home/barberb/lift_coding/artifacts/legal-temporal-presence-20261013-01/final-integration-independent-review-v01.json",
+      "sha256": "2f3b4cccef03db9b9b136c57af60b8d9bcbb29fffd8035f490bce02dd3e1be41"
+    }
+  },
+  "canonical_closing": {
+    "root": {
+      "head": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+      "raw_HEAD": {
+        "bytes": 37,
+        "path": "/home/barberb/lift_coding/.git/HEAD",
+        "sha256": "32a4e0619657da69ad525c8936b759693db31bc061488a69a547266919aac0c7"
+      },
+      "raw_index": {
+        "bytes": 692628,
+        "path": "/home/barberb/lift_coding/.git/index",
+        "sha256": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4"
+      },
+      "symbolic_head": "refs/heads/chore/fmt-check-main"
+    },
+    "source": {
+      "head": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+      "raw_HEAD": {
+        "bytes": 21,
+        "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/HEAD",
+        "sha256": "28d25bf82af4c0e2b72f50959b2beb859e3e60b9630a5e8c603dad4ddb2b6e80"
+      },
+      "raw_index": {
+        "bytes": 3799757,
+        "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/index",
+        "sha256": "d2a68a76e7a7ed99ef8ba031261cb8e7b66d6fca6c351b0e1e9dd8dc13910175"
+      },
+      "symbolic_head": "refs/heads/main"
+    }
+  },
+  "canonical_endpoints_equal_N5_and_N6_intake": true,
+  "canonical_opening": {
+    "root": {
+      "head": "fe18069df4203da9bddfb77b1ed41748f4d5fb4d",
+      "raw_HEAD": {
+        "bytes": 37,
+        "path": "/home/barberb/lift_coding/.git/HEAD",
+        "sha256": "32a4e0619657da69ad525c8936b759693db31bc061488a69a547266919aac0c7"
+      },
+      "raw_index": {
+        "bytes": 692628,
+        "path": "/home/barberb/lift_coding/.git/index",
+        "sha256": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4"
+      },
+      "symbolic_head": "refs/heads/chore/fmt-check-main"
+    },
+    "source": {
+      "head": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+      "raw_HEAD": {
+        "bytes": 21,
+        "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/HEAD",
+        "sha256": "28d25bf82af4c0e2b72f50959b2beb859e3e60b9630a5e8c603dad4ddb2b6e80"
+      },
+      "raw_index": {
+        "bytes": 3799757,
+        "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/index",
+        "sha256": "d2a68a76e7a7ed99ef8ba031261cb8e7b66d6fca6c351b0e1e9dd8dc13910175"
+      },
+      "symbolic_head": "refs/heads/main"
+    }
+  },
+  "changed_paths": {
+    "root": {
+      "artifacts/context-projection-pair-publication-20261013/hosted-ci.json": {
+        "after": {
+          "mode": "100644",
+          "object_id": "cb31a1628397639830b91565b930ad66d094564e",
+          "type": "blob"
+        },
+        "before": null
+      },
+      "artifacts/context-projection-pair-publication-20261013/parent-checks.json": {
+        "after": {
+          "mode": "100644",
+          "object_id": "bdf0618e84d4fda8ba52e38cdaa78af5dc69b237",
+          "type": "blob"
+        },
+        "before": null
+      },
+      "external/ipfs_accelerate": {
+        "after": {
+          "mode": "160000",
+          "object_id": "49b01d2515f338af73f8c14a96bbf235e339e4bd",
+          "type": "commit"
+        },
+        "before": {
+          "mode": "160000",
+          "object_id": "a3b26502d23d8a267ae64c04715bbf21c6113859",
+          "type": "commit"
+        }
+      },
+      "implementation_plan/docs/104-supervisor-source-view-read-edit-pair-2026-10-13.md": {
+        "after": {
+          "mode": "100644",
+          "object_id": "14ee9fc357565628a9968899c2a73dbdb5dff82e",
+          "type": "blob"
+        },
+        "before": {
+          "mode": "100644",
+          "object_id": "6b5f0c1fa60092d5aa68474aa156e3b307d9adf0",
+          "type": "blob"
+        }
+      },
+      "implementation_plan/docs/107-supervisor-metadata-projection-pair-2026-10-13.md": {
+        "after": {
+          "mode": "100644",
+          "object_id": "cbd277b4356bf1ab9e7826caa4fa908e7316a210",
+          "type": "blob"
+        },
+        "before": null
+      }
+    },
+    "source": {
+      "ipfs_datasets_py/logic/formalization/autoencoder/intent_action_checkpoint_384.py": {
+        "after": {
+          "mode": "100644",
+          "object_id": "93960f28a64392d5d3c6cb3f3475f27f50c26a46",
+          "type": "blob"
+        },
+        "before": null
+      },
+      "ipfs_datasets_py/logic/formalization/autoencoder/intent_action_runtime_384.py": {
+        "after": {
+          "mode": "100644",
+          "object_id": "b1b630ea5164fed637c8ba6178ba4c24c6c16dce",
+          "type": "blob"
+        },
+        "before": {
+          "mode": "100644",
+          "object_id": "9eae25e7891e264502d1f827606653926c9f2d8c",
+          "type": "blob"
+        }
+      },
+      "tests/unit/logic/formalization/autoencoder/test_intent_action_checkpoint_384.py": {
+        "after": {
+          "mode": "100644",
+          "object_id": "5a89d2918d9334919b49a78643efedf0bc5326be",
+          "type": "blob"
+        },
+        "before": null
+      },
+      "tests/unit/logic/formalization/autoencoder/test_intent_action_runtime_384.py": {
+        "after": {
+          "mode": "100644",
+          "object_id": "f698e9dd28050d6f4f7ba3fe90a927a18d677cff",
+          "type": "blob"
+        },
+        "before": {
+          "mode": "100644",
+          "object_id": "d65293550a68872c28402b7741e2b51ad1c414e6",
+          "type": "blob"
+        }
+      },
+      "tests/unit/logic/formalization/autoencoder/test_portable_source_pins.py": {
+        "after": {
+          "mode": "100644",
+          "object_id": "17c3bab40f6977362f146b613d8fdcbe64545dbf",
+          "type": "blob"
+        },
+        "before": {
+          "mode": "100644",
+          "object_id": "ee1d8dbe05a0c739932c3c3a55170ae9aaacfe7c",
+          "type": "blob"
+        }
+      }
+    }
+  },
+  "declared_source_producer_count": 34,
+  "distinct_recoveries": [
+    {
+      "branch_only_commits": 48,
+      "exact_prior_scope_retained": true,
+      "head": "5eedd23dd8b8ae4e2cac1716f00f1fcaf19a2801",
+      "outside_requested_main_ancestry": true,
+      "raw_commit": {
+        "bytes": 305,
+        "object_id": "5eedd23dd8b8ae4e2cac1716f00f1fcaf19a2801",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "4b626d869490097398096f3085963115286edde3b6460e79a860849e254c03a5"
+      },
+      "refs": [
+        {
+          "observed": "5eedd23dd8b8ae4e2cac1716f00f1fcaf19a2801",
+          "ref": "refs/heads/publication/main-20261004/datasets"
+        }
+      ],
+      "registered_worktree_endpoints": [
+        {
+          "HEAD": "5eedd23dd8b8ae4e2cac1716f00f1fcaf19a2801",
+          "branch": "refs/heads/publication/main-20261004/datasets",
+          "worktree": "/home/barberb/lift_coding/.worktrees/publication-main-20261004/datasets"
+        }
+      ],
+      "repo": "source"
+    },
+    {
+      "branch_only_commits": 50,
+      "exact_prior_scope_retained": true,
+      "head": "23540627b1cf6515df0fd84c9417b4cbdb91234a",
+      "outside_requested_main_ancestry": true,
+      "raw_commit": {
+        "bytes": 286,
+        "object_id": "23540627b1cf6515df0fd84c9417b4cbdb91234a",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "3ce86227267bd735f588c9d6b58dbe16f0783c86d0752a4af4365f60b92c46a5"
+      },
+      "refs": [
+        {
+          "observed": "23540627b1cf6515df0fd84c9417b4cbdb91234a",
+          "ref": "refs/heads/publication/main-refresh-20261004/datasets-01"
+        }
+      ],
+      "registered_worktree_endpoints": [
+        {
+          "HEAD": "23540627b1cf6515df0fd84c9417b4cbdb91234a",
+          "branch": "refs/heads/publication/main-refresh-20261004/datasets-01",
+          "worktree": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/git/datasets-main-refresh-01/publication-worktree"
+        }
+      ],
+      "repo": "source"
+    },
+    {
+      "branch_only_commits": 5,
+      "exact_prior_scope_retained": true,
+      "head": "ce3e21da27d23bfa4ac5490be9a5cb44798945f2",
+      "outside_requested_main_ancestry": true,
+      "raw_commit": {
+        "bytes": 435,
+        "object_id": "ce3e21da27d23bfa4ac5490be9a5cb44798945f2",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "bd2969abca46f729a8de91b3e43aa824abcf394c5c4fa24741f0177d9554d661"
+      },
+      "refs": [
+        {
+          "observed": "ce3e21da27d23bfa4ac5490be9a5cb44798945f2",
+          "ref": "refs/heads/publication/main-20261004/root-02"
+        }
+      ],
+      "registered_worktree_endpoints": [
+        {
+          "HEAD": "ce3e21da27d23bfa4ac5490be9a5cb44798945f2",
+          "branch": "refs/heads/publication/main-20261004/root-02",
+          "worktree": "/home/barberb/lift_coding/.worktrees/publication-main-20261004/root-02"
+        }
+      ],
+      "repo": "root"
+    },
+    {
+      "branch_only_commits": 4,
+      "exact_prior_scope_retained": true,
+      "head": "57fd19895ce42ad68f87b3d7126fbf19da285bdb",
+      "outside_requested_main_ancestry": true,
+      "raw_commit": {
+        "bytes": 305,
+        "object_id": "57fd19895ce42ad68f87b3d7126fbf19da285bdb",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "d6cb49b7ff3212486dadea0023a64acd3644bf7fdad0eb1a21547584b508c19b"
+      },
+      "refs": [
+        {
+          "observed": "57fd19895ce42ad68f87b3d7126fbf19da285bdb",
+          "ref": "refs/heads/publication/main-20261004/root-03"
+        }
+      ],
+      "registered_worktree_endpoints": [
+        {
+          "HEAD": "57fd19895ce42ad68f87b3d7126fbf19da285bdb",
+          "branch": "refs/heads/publication/main-20261004/root-03",
+          "worktree": "/home/barberb/lift_coding/.worktrees/publication-main-20261004/root-03"
+        }
+      ],
+      "repo": "root"
+    },
+    {
+      "branch_only_commits": 6,
+      "exact_prior_scope_retained": true,
+      "head": "9d1944b9a9fd95abbb6297b4c7d34a1312809f14",
+      "outside_requested_main_ancestry": true,
+      "raw_commit": {
+        "bytes": 286,
+        "object_id": "9d1944b9a9fd95abbb6297b4c7d34a1312809f14",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "ecdc24e842db2a02b2ef80f2ca4a2c650afeb78fa70f90e08f674b95742780d5"
+      },
+      "refs": [
+        {
+          "observed": "9d1944b9a9fd95abbb6297b4c7d34a1312809f14",
+          "ref": "refs/heads/publication/main-refresh-20261004/root-01"
+        }
+      ],
+      "registered_worktree_endpoints": [
+        {
+          "HEAD": "9d1944b9a9fd95abbb6297b4c7d34a1312809f14",
+          "branch": "refs/heads/publication/main-refresh-20261004/root-01",
+          "worktree": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/git/root-main-refresh-01/publication-worktree"
+        }
+      ],
+      "repo": "root"
+    }
+  ],
+  "findings": [],
+  "gitlinks": {
+    "root": {
+      "base": {
+        "JevOps": "9af1ebb6a4245ce2b4e673ac277e4988da4d5caa",
+        "Mcp-Plus-Plus": "628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0",
+        "external/ipfs_accelerate": "a3b26502d23d8a267ae64c04715bbf21c6113859",
+        "external/ipfs_datasets": "5723a541c5d575b88f01532e4d241dc95a1f3e99",
+        "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0",
+        "external/meta-wearables-dat-android": "4e56e1864a5e78194bababc3a68775c4196cbed0",
+        "external/meta-wearables-dat-ios": "2b5695d16a710f3d2d7341f88570b86d01723d50",
+        "hallucinate_app": "ffcf5ff3b3389c95ba53e9f1be45f89fa96c5ef6",
+        "swissknife": "4772c7ff648dd5f438af059e21a1a5305d32dbe3"
+      },
+      "target": {
+        "JevOps": "9af1ebb6a4245ce2b4e673ac277e4988da4d5caa",
+        "Mcp-Plus-Plus": "628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0",
+        "external/ipfs_accelerate": "49b01d2515f338af73f8c14a96bbf235e339e4bd",
+        "external/ipfs_datasets": "5723a541c5d575b88f01532e4d241dc95a1f3e99",
+        "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0",
+        "external/meta-wearables-dat-android": "4e56e1864a5e78194bababc3a68775c4196cbed0",
+        "external/meta-wearables-dat-ios": "2b5695d16a710f3d2d7341f88570b86d01723d50",
+        "hallucinate_app": "ffcf5ff3b3389c95ba53e9f1be45f89fa96c5ef6",
+        "swissknife": "4772c7ff648dd5f438af059e21a1a5305d32dbe3"
+      }
+    },
+    "source": {
+      "base": {
+        ".tools/ipfs_kit_py": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+        "ipfs_accelerate_py": "5306d49957bba7444a31639584e26378f3e3fb19",
+        "ipfs_datasets_py/logic/CEC/DCEC_Library": "a4beb5b3280595be6b9221cac3c91dd019e6d371",
+        "ipfs_datasets_py/logic/CEC/Eng-DCEC": "df518c21ef81b8001e6db59f5fd70f10cc04ff6c",
+        "ipfs_datasets_py/logic/CEC/ShadowProver": "3060ede1ac1ec3f8ef9f9c9e41386aed1dbbe7f9",
+        "ipfs_datasets_py/logic/CEC/Talos": "e0b7650d3e3a403924773f8253e924c719748d36",
+        "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type": "d58933631a5362b1e2fdc45254ef620fa231223a",
+        "ipfs_datasets_py/multimedia/omni_converter_mk2": "c1d9b0d517cea022516aab5b5d8fa5e3bc9a65aa",
+        "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine": "0e635cba586e8f6f6ea8126e3b1668b3e675c029",
+        "ipfs_kit_py": "a9b98beac1ef14278b4adf4f2289cd509530fb86"
+      },
+      "target": {
+        ".tools/ipfs_kit_py": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+        "ipfs_accelerate_py": "5306d49957bba7444a31639584e26378f3e3fb19",
+        "ipfs_datasets_py/logic/CEC/DCEC_Library": "a4beb5b3280595be6b9221cac3c91dd019e6d371",
+        "ipfs_datasets_py/logic/CEC/Eng-DCEC": "df518c21ef81b8001e6db59f5fd70f10cc04ff6c",
+        "ipfs_datasets_py/logic/CEC/ShadowProver": "3060ede1ac1ec3f8ef9f9c9e41386aed1dbbe7f9",
+        "ipfs_datasets_py/logic/CEC/Talos": "e0b7650d3e3a403924773f8253e924c719748d36",
+        "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type": "d58933631a5362b1e2fdc45254ef620fa231223a",
+        "ipfs_datasets_py/multimedia/omni_converter_mk2": "c1d9b0d517cea022516aab5b5d8fa5e3bc9a65aa",
+        "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine": "0e635cba586e8f6f6ea8126e3b1668b3e675c029",
+        "ipfs_kit_py": "a9b98beac1ef14278b4adf4f2289cd509530fb86"
+      }
+    }
+  },
+  "historically_absent_selected_branch_names": [
+    {
+      "absence_preexisted_N6": true,
+      "prior_ref": "refs/heads/codex/supervisor-context-token-economy-root-20261006",
+      "remains_absent": true,
+      "repo": "root",
+      "selected_commit": "3b0162bebe0b7a09727081cb8c5f5c15378caba1"
+    },
+    {
+      "absence_preexisted_N6": true,
+      "prior_ref": "refs/heads/agent/autoencoder-progress-reconciliation-datasets-20261006",
+      "remains_absent": true,
+      "repo": "source",
+      "selected_commit": "a3f16f2870a80a7e985b35bed3334512c47d9dc3"
+    },
+    {
+      "absence_preexisted_N6": true,
+      "prior_ref": "refs/heads/agent/contextual-legal-runtime-20261006",
+      "remains_absent": true,
+      "repo": "source",
+      "selected_commit": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d"
+    },
+    {
+      "absence_preexisted_N6": true,
+      "prior_ref": "refs/heads/agent/dual-bank-wording-adapter-datasets-20261007",
+      "remains_absent": true,
+      "repo": "source",
+      "selected_commit": "aed87b0d980422c2ca9efaa26cf92df30c51d768"
+    },
+    {
+      "absence_preexisted_N6": true,
+      "prior_ref": "refs/heads/agent/normative-cache-input-datasets-20261007",
+      "remains_absent": true,
+      "repo": "source",
+      "selected_commit": "c4382ae53ab9497245fccdf85855f0e314711fbc"
+    },
+    {
+      "absence_preexisted_N6": true,
+      "prior_ref": "refs/heads/agent/normative-decoder-runtime-datasets-20261007",
+      "remains_absent": true,
+      "repo": "source",
+      "selected_commit": "6a954ecef4fa78a5e58aa4fdb070cc3d1e86fcff"
+    },
+    {
+      "absence_preexisted_N6": true,
+      "prior_ref": "refs/heads/codex/autoencoder-owner-integration-20261007-01",
+      "remains_absent": true,
+      "repo": "source",
+      "selected_commit": "53e87779a527349b65875cb20b59ca9eb48ed70c"
+    },
+    {
+      "absence_preexisted_N6": true,
+      "prior_ref": "refs/heads/codex/ir-publication-main-integration-20261004",
+      "remains_absent": true,
+      "repo": "source",
+      "selected_commit": "f3164b7cb04c4c2c5647d4b5ffa74a87074ba01b"
+    },
+    {
+      "absence_preexisted_N6": true,
+      "prior_ref": "refs/heads/codex/legal-cross-agent-guards-20261006",
+      "remains_absent": true,
+      "repo": "source",
+      "selected_commit": "575a129f19068d58d66cc8119e85c3d23faa560a"
+    },
+    {
+      "absence_preexisted_N6": true,
+      "prior_ref": "refs/heads/codex/legal-decoder-followup-20261006-01",
+      "remains_absent": true,
+      "repo": "source",
+      "selected_commit": "0f733b621335a3fb95e3f8855f2100cd95ba01b5"
+    },
+    {
+      "absence_preexisted_N6": true,
+      "prior_ref": "refs/heads/codex/legal-grouped-integration-20261006-02",
+      "remains_absent": true,
+      "repo": "source",
+      "selected_commit": "004887f6250b083e0b095d5ac7563bc5bb792491"
+    },
+    {
+      "absence_preexisted_N6": true,
+      "prior_ref": "refs/heads/codex/legal-scope-span-training-20261007-01",
+      "remains_absent": true,
+      "repo": "source",
+      "selected_commit": "1530efd07032bac88229c6c97ca5994d498e6216"
+    },
+    {
+      "absence_preexisted_N6": true,
+      "prior_ref": "refs/heads/codex/legal-support-action-model-20261007-01",
+      "remains_absent": true,
+      "repo": "source",
+      "selected_commit": "7b93b2d97a8985b3f2db29963bd0979749f66163"
+    },
+    {
+      "absence_preexisted_N6": true,
+      "prior_ref": "refs/heads/codex/legal-support-gate-model-20261007-01",
+      "remains_absent": true,
+      "repo": "source",
+      "selected_commit": "8695a31b0b91b73a1cd66abcc8ea0e998e59c9c6"
+    },
+    {
+      "absence_preexisted_N6": true,
+      "prior_ref": "refs/heads/codex/legal-trigger-readout-model-20261007-01",
+      "remains_absent": true,
+      "repo": "source",
+      "selected_commit": "e35aef47ef6d67f7d07793be487e2be04ec6c7d6"
+    }
+  ],
+  "intake": {
+    "bytes": 2612,
+    "path": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/canonical-resource-intake-v01.json",
+    "sha256": "db2844338d6f693a93e2634719c8eedf64bbff68d0c5bb37d407019cdf322382"
+  },
+  "limitations": [
+    "Only the32 selected immutable commits, five named recoveries and15 historical absent names are classified; unrelated worktree totals may grow naturally.",
+    "Raw HEAD/index and ref/worktree endpoint equality is not continuous custody or a claim about every foreign working file.",
+    "No integration, model/compiler/resource work or semantic/latent qualification is performed by this intake."
+  ],
+  "new_commits": {
+    "root": {
+      "direct_fast_forward_descendant": true,
+      "parents": [
+        "b26128b1b200ee77bb7f497152c806768312c774"
+      ],
+      "raw_commit": {
+        "bytes": 294,
+        "object_id": "99c775ecefd9ea19ee0c77c9993a3bc7fe4d398d",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "b31735504ebbb3c77b6b49e86c3583af664ba124947076c2633a8101a914368f"
+      },
+      "subject": "Publish supervisor metadata projection token and benchmark comparison"
+    },
+    "source": {
+      "direct_fast_forward_descendant": true,
+      "parents": [
+        "5723a541c5d575b88f01532e4d241dc95a1f3e99"
+      ],
+      "raw_commit": {
+        "bytes": 297,
+        "object_id": "afadfbcf8d33a67568c133bb761c43d42a9a133c",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "8cd39a39120fe236392d7aa7e006402f3adacf8f8cf2423559d4335d3c118c6f"
+      },
+      "subject": "Fix Intent384 compatibility for the exact tree diagnostic pin transition"
+    }
+  },
+  "observed_at_utc": "2026-10-13T04:59:40.555251+00:00",
+  "owned_worktree_metadata": {
+    "root": {
+      "HEAD": "99c775ecefd9ea19ee0c77c9993a3bc7fe4d398d",
+      "branch": "refs/heads/codex/legal-temporal-adapter-root-20261013-01",
+      "worktree": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/workspace"
+    },
+    "source": {
+      "HEAD": "5723a541c5d575b88f01532e4d241dc95a1f3e99",
+      "branch": "refs/heads/codex/legal-temporal-adapter-20261013-01",
+      "worktree": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets"
+    }
+  },
+  "passed": true,
+  "planned_source_doc_candidates_absent": [
+    "docs/autoencoders/legal_temporal_adapter_training_20261013.md",
+    "docs/autoencoders/legal_temporal_presence_adapter_20261013.md"
+  ],
+  "prior_final_review": {
+    "bytes": 124591,
+    "path": "/home/barberb/lift_coding/artifacts/legal-temporal-presence-20261013-01/final-integration-independent-review-v01.json",
+    "sha256": "2f3b4cccef03db9b9b136c57af60b8d9bcbb29fffd8035f490bce02dd3e1be41"
+  },
+  "recommendations": [
+    "Preserve all5 source afad Intent384 compatibility paths; they are disjoint from our2 new files and all34 N6 declared source producers. Keep the immutable numerical worktree at5723 and its exact captured producer pins; do not rewrite old checkpoint pins to adopt the concurrent Intent adapter.",
+    "Commit only declared new adapter/test/doc/evidence paths and merge the new-only source PR into current main, replaying every nonowned actual-first-parent object. No existing source/test/doc needs replacement for this integration.",
+    "Keep owned root at99c775 and preserve its newer104/107 supervisor docs, context-projection receipts and accelerator advancement. Use absent guide108; never overwrite occupied107.",
+    "Advance only the root source gitlink after independently reviewed actual source PR merge; preserve allother8 root links and all10 source links.",
+    "Reobserve remote main before publication; if it advances, use the new actual first-parent preservation comparison. Preserve all named recovery refs/worktree endpoints and canonical rawindexes without claiming unknown histories classified."
+  ],
+  "registered_worktree_counts": {
+    "closing": {
+      "root": 46,
+      "source": 42
+    },
+    "opening": {
+      "root": 46,
+      "source": 42
+    }
+  },
+  "remote_heads_scope": "Exact supplied immutable endpoints, already locally available; no new remote request/fetch",
+  "requested_bases": {
+    "root": "b26128b1b200ee77bb7f497152c806768312c774",
+    "source": "5723a541c5d575b88f01532e4d241dc95a1f3e99"
+  },
+  "requested_remote_heads": {
+    "root": "99c775ecefd9ea19ee0c77c9993a3bc7fe4d398d",
+    "source": "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+  },
+  "reviewer": "/root/permission_training_design",
+  "root_new_guide_candidate_absent": "implementation_plan/docs/108-legal-temporal-adapter-training-2026-10-13.md",
+  "schema": "temporal-adapter-concurrent-progress-opening-independent-review/v1",
+  "scope": {
+    "Git_commits_merges_or_checkouts": 0,
+    "Git_object_fetches": 0,
+    "Git_ref_writes": 0,
+    "Git_worktree_creation": 0,
+    "canonical_status_or_index_refresh_calls": 0,
+    "checkpoint_JSON_parses": 0,
+    "compiler_calls": 0,
+    "foreign_working_file_reads": 0,
+    "network_calls": 0,
+    "numerical_or_model_calls": 0,
+    "private_global_body_reads": 0,
+    "resource_API_calls": 0
+  },
+  "selected_history_retention": [
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": "9e794a4cfdc9cbfacdb63604dcca1605ce2bf1d5",
+      "observed_ref": "9e794a4cfdc9cbfacdb63604dcca1605ce2bf1d5",
+      "prior_ref": "refs/heads/agent/autoencoder-progress-reconciliation-20261006",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 290,
+        "object_id": "9e794a4cfdc9cbfacdb63604dcca1605ce2bf1d5",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "fa48154e7d50d98499c8339edd2edec87e35298c7366e8b7b3ad8f854437181f"
+      },
+      "repo": "root",
+      "selected_commit": "9e794a4cfdc9cbfacdb63604dcca1605ce2bf1d5"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": "3762db604ceb0d2cc6b80dd52a94c3c5e7d225a4",
+      "observed_ref": "3762db604ceb0d2cc6b80dd52a94c3c5e7d225a4",
+      "prior_ref": "refs/heads/agent/dual-bank-wording-adapter-root-20261007",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 379,
+        "object_id": "30e61092341b47b4e49eb30df443fd607536333a",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "55ee6a3c5ac59b9d8cad5b6528a640ab29cd1aa1bd8ac8e2ba101c0496ae2b84"
+      },
+      "repo": "root",
+      "selected_commit": "30e61092341b47b4e49eb30df443fd607536333a"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": "aab99b3792e4d13572830f4aa91c7915092b23fe",
+      "observed_ref": "aab99b3792e4d13572830f4aa91c7915092b23fe",
+      "prior_ref": "refs/heads/codex/autoencoder-reconciliation-20261007-01",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 302,
+        "object_id": "aab99b3792e4d13572830f4aa91c7915092b23fe",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "9f4a61c7ba152538154c02d978ce66b2352933060e20108898721cb09b89c5c1"
+      },
+      "repo": "root",
+      "selected_commit": "aab99b3792e4d13572830f4aa91c7915092b23fe"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": "739e7088a203a4b307d96192e489a88dbf9177b1",
+      "observed_ref": "739e7088a203a4b307d96192e489a88dbf9177b1",
+      "prior_ref": "refs/heads/codex/legal-joint-readout-workspace-20261011-01",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 286,
+        "object_id": "739e7088a203a4b307d96192e489a88dbf9177b1",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "50fe2b6230bbfb7fecb8ccdb0797ca1313bbe77576ff41023037381ff73d9a01"
+      },
+      "repo": "root",
+      "selected_commit": "739e7088a203a4b307d96192e489a88dbf9177b1"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": "d90d47016e60c38ef6b32ea0e23d6a3c2ea8cdc9",
+      "observed_ref": "d90d47016e60c38ef6b32ea0e23d6a3c2ea8cdc9",
+      "prior_ref": "refs/heads/codex/legal-native-cache-workspace-20261011-01",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 291,
+        "object_id": "d90d47016e60c38ef6b32ea0e23d6a3c2ea8cdc9",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "9602e17c94920433fe31fdd89f890317c2c8190ba13055ed638484095a017417"
+      },
+      "repo": "root",
+      "selected_commit": "d90d47016e60c38ef6b32ea0e23d6a3c2ea8cdc9"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": "00130686f43e35105e2ee98e5a36428f3aff3538",
+      "observed_ref": "00130686f43e35105e2ee98e5a36428f3aff3538",
+      "prior_ref": "refs/heads/codex/legal-open-vocabulary-workspace-20261011-01",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 289,
+        "object_id": "00130686f43e35105e2ee98e5a36428f3aff3538",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "22a467fbc5c810205d5088ff581f82c3ebebd01533bd22aaeb8326473c0c029b"
+      },
+      "repo": "root",
+      "selected_commit": "00130686f43e35105e2ee98e5a36428f3aff3538"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": "fb8176ab49e063f6d2446b74bbde0cc34e47b9ad",
+      "observed_ref": "fb8176ab49e063f6d2446b74bbde0cc34e47b9ad",
+      "prior_ref": "refs/heads/codex/legal-retention-objective-20261011-01",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 292,
+        "object_id": "fb8176ab49e063f6d2446b74bbde0cc34e47b9ad",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "e0f17a0015011ec951c3dad8a433a0eeb7d2338d33b0713ec22f63a889767915"
+      },
+      "repo": "root",
+      "selected_commit": "fb8176ab49e063f6d2446b74bbde0cc34e47b9ad"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": "fbb194215f19763cf88082bc6ed30eb4bccbbf7f",
+      "observed_ref": "fbb194215f19763cf88082bc6ed30eb4bccbbf7f",
+      "prior_ref": "refs/heads/codex/legal-structured-training-workspace-20261011-01",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 296,
+        "object_id": "fbb194215f19763cf88082bc6ed30eb4bccbbf7f",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "14c1a366a973cba4a23afd4b9bdc732f06b512ff91041cdb6088c2733285308e"
+      },
+      "repo": "root",
+      "selected_commit": "fbb194215f19763cf88082bc6ed30eb4bccbbf7f"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": null,
+      "observed_ref": null,
+      "prior_ref": "refs/heads/codex/supervisor-context-token-economy-root-20261006",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 281,
+        "object_id": "3b0162bebe0b7a09727081cb8c5f5c15378caba1",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "327af7f36ff5227ff5fa7fdcf157ea268a39e8f4074fc17d18b02935b26e1d4d"
+      },
+      "repo": "root",
+      "selected_commit": "3b0162bebe0b7a09727081cb8c5f5c15378caba1"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": "2fa137229c84f48dd93dccf88f09f9b572c71ea1",
+      "observed_ref": "2fa137229c84f48dd93dccf88f09f9b572c71ea1",
+      "prior_ref": "refs/heads/main",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 1269,
+        "object_id": "0213bb5e0a2d5a736e9555fb9112411d6a1313d6",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "3109212ae1a9a310acad7126572994f15824aa8a7cce461490b86015b85fa67e"
+      },
+      "repo": "root",
+      "selected_commit": "0213bb5e0a2d5a736e9555fb9112411d6a1313d6"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": null,
+      "observed_ref": null,
+      "prior_ref": "refs/heads/agent/autoencoder-progress-reconciliation-datasets-20261006",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 298,
+        "object_id": "a3f16f2870a80a7e985b35bed3334512c47d9dc3",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "2c8019bf1501a72b6ab526f59e66d0b5de4eac984ed77d5222b911e981c19ecc"
+      },
+      "repo": "source",
+      "selected_commit": "a3f16f2870a80a7e985b35bed3334512c47d9dc3"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": null,
+      "observed_ref": null,
+      "prior_ref": "refs/heads/agent/contextual-legal-runtime-20261006",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 305,
+        "object_id": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "e656721486a7761f7079487a74ab993fba7c37374313c21485900ed29b15ed7a"
+      },
+      "repo": "source",
+      "selected_commit": "39f25777d557df1c51b8f98ed0dcd084c35d4d6d"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": null,
+      "observed_ref": null,
+      "prior_ref": "refs/heads/agent/dual-bank-wording-adapter-datasets-20261007",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 302,
+        "object_id": "aed87b0d980422c2ca9efaa26cf92df30c51d768",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "965f9ce2b49843ac9d931d5b9202effa150cbdd9ac1ddf2885bce3515a758369"
+      },
+      "repo": "source",
+      "selected_commit": "aed87b0d980422c2ca9efaa26cf92df30c51d768"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": null,
+      "observed_ref": null,
+      "prior_ref": "refs/heads/agent/normative-cache-input-datasets-20261007",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 297,
+        "object_id": "c4382ae53ab9497245fccdf85855f0e314711fbc",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "f0e1e099b03c01558690791dae11ccfe96069a4f37470b33f30cb4dad3bcb379"
+      },
+      "repo": "source",
+      "selected_commit": "c4382ae53ab9497245fccdf85855f0e314711fbc"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": null,
+      "observed_ref": null,
+      "prior_ref": "refs/heads/agent/normative-decoder-runtime-datasets-20261007",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 383,
+        "object_id": "6a954ecef4fa78a5e58aa4fdb070cc3d1e86fcff",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "f2faca5600b67e46308792d2aa982fc3a569a60562a3225fec4e82af38b83fa8"
+      },
+      "repo": "source",
+      "selected_commit": "6a954ecef4fa78a5e58aa4fdb070cc3d1e86fcff"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": null,
+      "observed_ref": null,
+      "prior_ref": "refs/heads/codex/autoencoder-owner-integration-20261007-01",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 301,
+        "object_id": "53e87779a527349b65875cb20b59ca9eb48ed70c",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "af4427ed04d0f7b7118cdb491a5f6c42caec8feb5155ce4df0c4cc5aad27610e"
+      },
+      "repo": "source",
+      "selected_commit": "53e87779a527349b65875cb20b59ca9eb48ed70c"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": null,
+      "observed_ref": null,
+      "prior_ref": "refs/heads/codex/ir-publication-main-integration-20261004",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 287,
+        "object_id": "f3164b7cb04c4c2c5647d4b5ffa74a87074ba01b",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "efdddfbe80ac3517d6e68eee77ea1e43ddeab1e058a35c30b9212e650d0af6a0"
+      },
+      "repo": "source",
+      "selected_commit": "f3164b7cb04c4c2c5647d4b5ffa74a87074ba01b"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": null,
+      "observed_ref": null,
+      "prior_ref": "refs/heads/codex/legal-cross-agent-guards-20261006",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 292,
+        "object_id": "575a129f19068d58d66cc8119e85c3d23faa560a",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "7063d8e6e376cc0a12ceb327b2b16394eaf70d3c22619a0d5deee00073f60949"
+      },
+      "repo": "source",
+      "selected_commit": "575a129f19068d58d66cc8119e85c3d23faa560a"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": null,
+      "observed_ref": null,
+      "prior_ref": "refs/heads/codex/legal-decoder-followup-20261006-01",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 302,
+        "object_id": "0f733b621335a3fb95e3f8855f2100cd95ba01b5",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "73ae6ea662415f2dd84c61d792fb0b6cfc163c6706cd4f3c0542e75fcab131c3"
+      },
+      "repo": "source",
+      "selected_commit": "0f733b621335a3fb95e3f8855f2100cd95ba01b5"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": "b4002de1e73d295e222cd7258bd07e4784a6b928",
+      "observed_ref": "b4002de1e73d295e222cd7258bd07e4784a6b928",
+      "prior_ref": "refs/heads/codex/legal-decoder-progress-20261011-01",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 291,
+        "object_id": "b4002de1e73d295e222cd7258bd07e4784a6b928",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "302cd5c43a36322326a921331308f59633fab273559e36320e283800452e9be4"
+      },
+      "repo": "source",
+      "selected_commit": "b4002de1e73d295e222cd7258bd07e4784a6b928"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": null,
+      "observed_ref": null,
+      "prior_ref": "refs/heads/codex/legal-grouped-integration-20261006-02",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 293,
+        "object_id": "004887f6250b083e0b095d5ac7563bc5bb792491",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "2a25d0ae01364c9cfa0d230f0e24268d76e4d62869fabbac1df67e83e7f5e760"
+      },
+      "repo": "source",
+      "selected_commit": "004887f6250b083e0b095d5ac7563bc5bb792491"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": "146e4c88fea6d0a9ab671af00e1596a9a60ea784",
+      "observed_ref": "146e4c88fea6d0a9ab671af00e1596a9a60ea784",
+      "prior_ref": "refs/heads/codex/legal-joint-readout-20261011-01",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 281,
+        "object_id": "146e4c88fea6d0a9ab671af00e1596a9a60ea784",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "0228a4492ae5f46ece72131bf6a4204c89d401f02f5f47b4f1ae7452cd3e84cf"
+      },
+      "repo": "source",
+      "selected_commit": "146e4c88fea6d0a9ab671af00e1596a9a60ea784"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": "f3901341cdde9b4485315327d5ef06abd1485b11",
+      "observed_ref": "f3901341cdde9b4485315327d5ef06abd1485b11",
+      "prior_ref": "refs/heads/codex/legal-native-cache-20261011-01",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 283,
+        "object_id": "f3901341cdde9b4485315327d5ef06abd1485b11",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "a509d7008511909b02207ac6eacb5da4aa2c44cf4adb475f4e09bf8501d8b3fc"
+      },
+      "repo": "source",
+      "selected_commit": "f3901341cdde9b4485315327d5ef06abd1485b11"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": "fe00dd1d64d0e26e0b396e40cadd094d544efd0c",
+      "observed_ref": "fe00dd1d64d0e26e0b396e40cadd094d544efd0c",
+      "prior_ref": "refs/heads/codex/legal-open-vocabulary-20261011-01",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 283,
+        "object_id": "fe00dd1d64d0e26e0b396e40cadd094d544efd0c",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "3db58de67406ddda7c64d719f7722943f0d5a7b3dd05fffe2421f8776fbcd72e"
+      },
+      "repo": "source",
+      "selected_commit": "fe00dd1d64d0e26e0b396e40cadd094d544efd0c"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+      "observed_ref": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+      "prior_ref": "refs/heads/codex/legal-original-text-roundtrip-retained-20261004",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 374,
+        "object_id": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "03cb1f302e9b4a92ef1f53e9206e0028606e1915fe507a878d5027651d8213fb"
+      },
+      "repo": "source",
+      "selected_commit": "2b87326cb73f4f09d12aff3ccb68e0a6142a686c"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": null,
+      "observed_ref": null,
+      "prior_ref": "refs/heads/codex/legal-scope-span-training-20261007-01",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 292,
+        "object_id": "1530efd07032bac88229c6c97ca5994d498e6216",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "8828a7760e3b9b50039f9722c099670c8e5808502045d17c2a4eed58058eab49"
+      },
+      "repo": "source",
+      "selected_commit": "1530efd07032bac88229c6c97ca5994d498e6216"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": "7c90b27d9fd193e768e8ecdca0bb5055145f1b78",
+      "observed_ref": "7c90b27d9fd193e768e8ecdca0bb5055145f1b78",
+      "prior_ref": "refs/heads/codex/legal-structured-training-20261011-01",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 288,
+        "object_id": "7c90b27d9fd193e768e8ecdca0bb5055145f1b78",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "ab2d4e776c7e7ef8d7395d819da8f341ce159580e4a3696f714fa54352b6b3e5"
+      },
+      "repo": "source",
+      "selected_commit": "7c90b27d9fd193e768e8ecdca0bb5055145f1b78"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": null,
+      "observed_ref": null,
+      "prior_ref": "refs/heads/codex/legal-support-action-model-20261007-01",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 289,
+        "object_id": "7b93b2d97a8985b3f2db29963bd0979749f66163",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "37921926d780d769aa5b5e4db5ee3d4201161f427425e577b4d38cc87cbe0fe5"
+      },
+      "repo": "source",
+      "selected_commit": "7b93b2d97a8985b3f2db29963bd0979749f66163"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": null,
+      "observed_ref": null,
+      "prior_ref": "refs/heads/codex/legal-support-gate-model-20261007-01",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 287,
+        "object_id": "8695a31b0b91b73a1cd66abcc8ea0e998e59c9c6",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "a542a3fa3e35f1f2f12da3bc0b74001c3f5c5b1b7ee91a1f97de9e0343a3989c"
+      },
+      "repo": "source",
+      "selected_commit": "8695a31b0b91b73a1cd66abcc8ea0e998e59c9c6"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": null,
+      "observed_ref": null,
+      "prior_ref": "refs/heads/codex/legal-trigger-readout-model-20261007-01",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 281,
+        "object_id": "e35aef47ef6d67f7d07793be487e2be04ec6c7d6",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "b6b21dc181ff9abc11cc47b00e67b1e1bd53c452acbbb652f169ed48adc68022"
+      },
+      "repo": "source",
+      "selected_commit": "e35aef47ef6d67f7d07793be487e2be04ec6c7d6"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+      "observed_ref": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+      "prior_ref": "refs/heads/codex/source-v2-warm-start-20261004",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 289,
+        "object_id": "d1643c2c621f45f0ca0080e017fe6717b093e478",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "d428417eb034e3c8cb16fb7ea90478a682c46adc1119df54abcb110908ae105d"
+      },
+      "repo": "source",
+      "selected_commit": "d1643c2c621f45f0ca0080e017fe6717b093e478"
+    },
+    {
+      "ancestor_of_requested_main": true,
+      "expected_ref": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+      "observed_ref": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+      "prior_ref": "refs/heads/main",
+      "prior_ref_endpoint_preserved": true,
+      "raw_commit": {
+        "bytes": 1261,
+        "object_id": "4af461728329cdad4bfb910ab878d016ce279e54",
+        "raw_Git_object_identity_exact": true,
+        "sha256": "712a539e190f7ac5f3b6b5645f779f2ef8ba1d35e5603e68071bd1635268e8a9"
+      },
+      "repo": "source",
+      "selected_commit": "4af461728329cdad4bfb910ab878d016ce279e54"
+    }
+  ],
+  "selected_immutable_commit_count": 32,
+  "selected_refs_and_recovery_endpoints_unchanged": true,
+  "source_declared_artifact_overlap": [],
+  "source_declared_owner_pin_overlap": [],
+  "source_new_path_overlap": [],
+  "source_owned_new_paths": [
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_temporal_adapter.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_temporal_adapter_contracts.py"
+  ],
+  "tree_inventories": {
+    "root": {
+      "base_entries": 36792,
+      "base_inventory": {
+        "bytes": 6013073,
+        "sha256": "9e8b2abd12c71e84575533ef434276853a4193441b360bb3efbbebb97e2cad16"
+      },
+      "target_entries": 36795,
+      "target_inventory": {
+        "bytes": 6013455,
+        "sha256": "4f58dcbb0ed73dbef16b597f426020b2affb0474510b4cda8eb9ec237b37f988"
+      }
+    },
+    "source": {
+      "base_entries": 31002,
+      "base_inventory": {
+        "bytes": 4460741,
+        "sha256": "ac2787a0101d0e0b8e18ab8bc382f1ca031cfdd9e76a0adfac529d2d68516211"
+      },
+      "target_entries": 31004,
+      "target_inventory": {
+        "bytes": 4461008,
+        "sha256": "436c1265e500737ef3b88b6ce9d9b6d3c3d638bdd4870db77126af3a10c4386f"
+      }
+    }
+  },
+  "unknown_unselected_histories_classified": false
+}
