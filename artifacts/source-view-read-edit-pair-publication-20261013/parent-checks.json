@@ -1,0 +1,26 @@
+{
+  "schema": "source-view-read-edit-pair-parent-checks@1",
+  "observed_utc": "2026-10-13T00:55:02.987529+00:00",
+  "parent_base_revision": "7194bd205415a760540ecd95dce13fb23e035ac6",
+  "note": "implementation_plan/docs/104-supervisor-source-view-read-edit-pair-2026-10-13.md",
+  "note_sha256": "fd3d2003326bde1afba7b4b3bb5ec78134dc1607bf124a4e43553857fc78ce19",
+  "check_anchors": true,
+  "checker_sha256": "596a0038b18d592f2e605643890afc85e457558f7b887932a474557d7586819e",
+  "errors": [],
+  "staged_pins": {
+    "external/ipfs_accelerate": "85b21ded006fa9850ab49ee9f33bd320457a79a5",
+    "external/ipfs_datasets": "b95938c2a816075466f8dc84f339cf622414030d",
+    "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0"
+  },
+  "child_manifest_entries_verified": 44,
+  "child_manifest_sha256": "89030807447ef162cd8aa9c5bc1c47ee8fdc851f51c91dc906c5285517b66222",
+  "child_distinct_tests_passed": 97,
+  "child_focused_tests_included": 41,
+  "child_documentation_gate_blocks_passed": 4,
+  "child_new_model_provider_calls": 0,
+  "child_scripted_docker_pair": true,
+  "child_official_reward": null,
+  "child_native_tokens": null,
+  "hosted_ci_sha256": "11f05ff62641e7b35ed36deb931c46398997251851c999383267fc1b74b54b31",
+  "scope": "Parent note links/anchors, intended Gitlinks and published child manifest/evidence only; no whole-parent regression or full supervisor START."
+}
