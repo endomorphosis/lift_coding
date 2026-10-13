@@ -1,0 +1,62 @@
+{
+  "actual_observer_main_executions": 1,
+  "all_qualified_identities_unchanged": true,
+  "checkpoint_or_reference_JSON_parses_by_execution_fence": 0,
+  "closing_artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/hf-actual-observer-source-independent-review-v01.json": {
+      "bytes": 2084,
+      "sha256": "e55b1a68809a91b332161a1a4819be9c5175e4b76314818e4da18db34ef49999"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/hf-split-actual-author-controls-v01.json": {
+      "bytes": 4996,
+      "sha256": "6bcaa30c86619cefa3f3e05207b6ca4e85742be5a2aa3aff14f4902890d4de05"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/hf_split_actual_author_controls_v01.py": {
+      "bytes": 17802,
+      "sha256": "902b02e27b3602877bf6d3f5f1e3fef30fb57f19ad460740293ed25f7c9d56ce"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/review_hf_split_actual_v01.py": {
+      "bytes": 22024,
+      "sha256": "a6b1fd86bbd641afda3812b3bc4214202cfc940ce2d2d6ff8bc8fdbc712ac813"
+    }
+  },
+  "elapsed_seconds": 0.702614,
+  "finished_at_utc": "2026-10-13T01:23:59.138607+00:00",
+  "log": {
+    "bytes": 315,
+    "path": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/hf-actual-observer-execution-v01.log",
+    "sha256": "98e34287d4565485a1ddc5327794274b71e9ddf14637579303026db82b1c8632"
+  },
+  "model_compiler_resource_APIs_by_execution_fence": 0,
+  "network_requests_by_execution_fence": 0,
+  "opening_artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/hf-actual-observer-source-independent-review-v01.json": {
+      "bytes": 2084,
+      "sha256": "e55b1a68809a91b332161a1a4819be9c5175e4b76314818e4da18db34ef49999"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/hf-split-actual-author-controls-v01.json": {
+      "bytes": 4996,
+      "sha256": "6bcaa30c86619cefa3f3e05207b6ca4e85742be5a2aa3aff14f4902890d4de05"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/hf_split_actual_author_controls_v01.py": {
+      "bytes": 17802,
+      "sha256": "902b02e27b3602877bf6d3f5f1e3fef30fb57f19ad460740293ed25f7c9d56ce"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/review_hf_split_actual_v01.py": {
+      "bytes": 22024,
+      "sha256": "a6b1fd86bbd641afda3812b3bc4214202cfc940ce2d2d6ff8bc8fdbc712ac813"
+    }
+  },
+  "private_global_body_reads_by_execution_fence": 0,
+  "qualified_source": {
+    "bytes": 22024,
+    "sha256": "a6b1fd86bbd641afda3812b3bc4214202cfc940ce2d2d6ff8bc8fdbc712ac813"
+  },
+  "qualified_source_approval": {
+    "bytes": 2084,
+    "sha256": "e55b1a68809a91b332161a1a4819be9c5175e4b76314818e4da18db34ef49999"
+  },
+  "returncode": 0,
+  "schema": "split-feature-Hub-actual-observer-execution/v1",
+  "started_at_utc": "2026-10-13T01:23:58.435990+00:00"
+}
