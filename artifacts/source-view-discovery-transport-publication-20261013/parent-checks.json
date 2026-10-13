@@ -1,0 +1,83 @@
+{
+  "check_anchors": true,
+  "checker_sha256": "596a0038b18d592f2e605643890afc85e457558f7b887932a474557d7586819e",
+  "child_manifest_entries_verified": 46,
+  "child_manifest_sha256": "a8c0bda0c29a1e61d98da93b4639c3aca7d9bffd77ad062957a1ac0be0500034",
+  "child_new_collector_cases": 38,
+  "child_new_transport_cases": 79,
+  "child_note_links_verified": [
+    {
+      "anchor": "discover-admitted-sources",
+      "path": "docs/agent_supervisor/worker_source_views.md",
+      "revision": "a9bcde965ac8341719069975dc828c54376961a6",
+      "sha256": "ae0610be7eed370f9f31367d258f1355c2e0aad89e5a2d9095aa9665c56b7325"
+    },
+    {
+      "anchor": null,
+      "path": "docs/agent_supervisor/evidence/source-view-discovery-transport-20261013/README.md",
+      "revision": "a9bcde965ac8341719069975dc828c54376961a6",
+      "sha256": "9852b6ea80bbce02629edf2912d262ded31980b0d410ebc3d72e1b0eac5c7702"
+    },
+    {
+      "anchor": null,
+      "path": "docs/agent_supervisor/reversible_codebase_views_plan.md",
+      "revision": "a9bcde965ac8341719069975dc828c54376961a6",
+      "sha256": "f3030eb647ff830a2d6d8713002443da1650100c456fdb3143c2d20d8585dc36"
+    }
+  ],
+  "child_original_runner_status": "fail",
+  "child_qualified_datasets_execution_revision": "afadfbcf8d33a67568c133bb761c43d42a9a133c",
+  "child_qualified_distinct_tests": 1603,
+  "child_qualified_junit": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 1603
+  },
+  "child_qualified_local_documentation_workflow_blocks": 4,
+  "child_qualified_manual_anchors": 9,
+  "child_qualified_manual_links": 85,
+  "child_qualified_source_bindings": 166,
+  "child_qualified_target_count": 39,
+  "child_separate_reconciliation_status": "pass",
+  "current_parent_datasets_pin_executed_here": false,
+  "errors": [],
+  "hosted_billing_lock_observed": true,
+  "hosted_ci_sha256": "6ca9fa4bb74c0f2d046fa0e7ea1a84127b3222c62be218b00c7d113a06871c94",
+  "hosted_gate_execution_observed": false,
+  "hosted_gates_passed": false,
+  "independent_publication_review_sha256": "0d78ad055fa4d8fe0eaa96150392bc7ffd1316a557961bf41d763d8b4aba4ce8",
+  "merge_compatibility_sha256": "e43e7099829acdff560698cba0328744408e28040c015de802170a4a65ba7e53",
+  "model_assets_modified": false,
+  "new_training_or_provider_calls": 0,
+  "note": "implementation_plan/docs/109-supervisor-source-discovery-transport-2026-10-13.md",
+  "note_sha256": "3e15abf70fa9c9ce335a1c64c8db9fbc9bbaa854fffb31861473c0bb0dbff126",
+  "observed_at_utc": "2026-10-13T06:42:20.708202+00:00",
+  "owned_files_preserved": 47,
+  "parent_base_revision": "ca97e3703c9d734aa36ace32725ca990e85ca28d",
+  "published_merge": "a9bcde965ac8341719069975dc828c54376961a6",
+  "published_merge_full_regression_reexecuted": false,
+  "qualified_bindings_changed_by_late_merge": [
+    {
+      "path": "benchmarks/agent_supervisor/container_coding/test_terminal_numerical_context.py",
+      "published_sha256": "f27f8d4f08fc90e6b795c9b13b1ab5a225aaae187b21addc29f428c2b165ce27",
+      "qualified_sha256": "0462a9b405cda1df787317784996e05a3b484534e1f2f2294266f886c7da5609"
+    },
+    {
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/numerical_formalization_context.py",
+      "published_sha256": "3ace20fa3069c3265979357450973facd66906505e7a3d1b0490a744849f4cbb",
+      "qualified_sha256": "541ab1890a58cf2ebd36456e11ade612a3d6150a19836c03e149655f6b8fd67e"
+    }
+  ],
+  "qualified_leaf": "330e35f848e2ed7e3f78b21aae78b98daef70755",
+  "runtime_databases_published": false,
+  "schema": "source-view-discovery-parent-publication-checks@1",
+  "scope": "Parent note relative links and child commit anchors, exact published evidence, qualified source custody, explicit merge limits and intended Gitlink changes; no full-parent regression.",
+  "staged_pins": {
+    "external/ipfs_accelerate": "a9bcde965ac8341719069975dc828c54376961a6",
+    "external/ipfs_datasets": "9eb06b73658d8203628a697db6199f14ecf479e4",
+    "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0"
+  },
+  "status": "pass",
+  "total_session_token_savings_established": false
+}
