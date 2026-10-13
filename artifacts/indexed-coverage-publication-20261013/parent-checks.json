@@ -1,0 +1,25 @@
+{
+  "explicit_link_errors": [],
+  "git_diff_checks_passed": true,
+  "hosted_billing_lock_observed": true,
+  "hosted_ci_observation_sha256": "4634fec1903bb3ac076c4f7240c3fc44e1666af43b121f9949319e664ab0ad8c",
+  "hosted_documentation_gates_passed": false,
+  "local_documentation_gates_passed": true,
+  "manifest_sha256": "113cf3e0dafe32aecf8067c07805f5bcfaa3dedee09006ff426bef2ba782034d",
+  "origin_main": {
+    "accelerate": "8aafb960fd634d218478376aa18bc83f8b121dce",
+    "datasets": "afadfbcf8d33a67568c133bb761c43d42a9a133c"
+  },
+  "parent_base": "99c775ecefd9ea19ee0c77c9993a3bc7fe4d398d",
+  "passed": true,
+  "preserved_kit": "8ac00bb1974b1378e12091d546d8425af34049e0",
+  "report_sha256": "1f10c2ae21ac49da86fabaa1e73f5d16df44827292a837c96dcf16c28d742453",
+  "schema": "indexed-coverage-parent-publication-checks@1",
+  "sealed_evidence_file_count": 53,
+  "staged_gitlinks": {
+    "external/ipfs_accelerate": "8aafb960fd634d218478376aa18bc83f8b121dce",
+    "external/ipfs_datasets": "afadfbcf8d33a67568c133bb761c43d42a9a133c",
+    "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0"
+  },
+  "unique_passing_tests": 742
+}
