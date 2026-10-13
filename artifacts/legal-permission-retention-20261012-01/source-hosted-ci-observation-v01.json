@@ -1,0 +1,3807 @@
+{
+  "billing_or_settings_changes": false,
+  "closing_pr": {
+    "base": {
+      "ref": "main",
+      "sha": "12b2de0f1c949b793772ce29edad84355978b9b7"
+    },
+    "draft": false,
+    "head": {
+      "ref": "codex/legal-permission-retention-20261012-01",
+      "sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2"
+    },
+    "merge_commit_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "merged": true,
+    "merged_at": "2026-10-13T00:02:18Z",
+    "number": 1292,
+    "state": "closed",
+    "url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1292"
+  },
+  "gh_pr_view": {
+    "baseRefName": "main",
+    "headRefName": "codex/legal-permission-retention-20261012-01",
+    "headRefOid": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+    "isDraft": false,
+    "mergeCommit": {
+      "oid": "b95938c2a816075466f8dc84f339cf622414030d"
+    },
+    "mergedAt": "2026-10-13T00:02:18Z",
+    "number": 1292,
+    "state": "MERGED",
+    "url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1292"
+  },
+  "head": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+  "heads": [
+    {
+      "checks": [
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103837907371
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325188004/job/115062087669",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325188004/job/115062087669",
+          "id": 115062087669,
+          "name": "setup",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062087669/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:01:48Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103837901835
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186011/job/115062082392",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186011/job/115062082392",
+          "id": 115062082392,
+          "name": "build-and-test (Dockerfile.mcp-minimal, linux/amd64)",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062082392/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:01:46Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103837901835
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186011/job/115062082371",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186011/job/115062082371",
+          "id": 115062082371,
+          "name": "test-docker-compose",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062082371/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:01:46Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103837901835
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186011/job/115062082361",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186011/job/115062082361",
+          "id": 115062082361,
+          "name": "build-and-test (docker/Dockerfile.test, linux/amd64)",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062082361/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:01:46Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103837901919
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186039/job/115062082350",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186039/job/115062082350",
+          "id": 115062082350,
+          "name": "enhanced-pr-monitor",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062082350/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:01:46Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103837901995
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186071/job/115062082281",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186071/job/115062082281",
+          "id": 115062082281,
+          "name": "Build distribution \ud83d\udce6",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062082281/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:01:46Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103837901905
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186035/job/115062082280",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186035/job/115062082280",
+          "id": 115062082280,
+          "name": "discover-tool-categories",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062082280/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:01:46Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103837901843
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186013/job/115062082263",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186013/job/115062082263",
+          "id": 115062082263,
+          "name": "check-pr-completion",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062082263/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:01:46Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103837901969
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186059/job/115062082228",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186059/job/115062082228",
+          "id": 115062082228,
+          "name": "arm64-system-info",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062082228/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:01:46Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103837901835
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186011/job/115062082154",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186011/job/115062082154",
+          "id": 115062082154,
+          "name": "build-multi-arch",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062082154/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:01:46Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103837901807
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325185996/job/115062082143",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325185996/job/115062082143",
+          "id": 115062082143,
+          "name": "Setup Cache Infrastructure",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062082143/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:01:46Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103837901805
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325185998/job/115062082098",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325185998/job/115062082098",
+          "id": 115062082098,
+          "name": "dashboard-smoke-tests (3.12)",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062082098/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:01:46Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103837901823
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186004/job/115062082047",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186004/job/115062082047",
+          "id": 115062082047,
+          "name": "sdk-static-analysis",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062082047/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:01:46Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103837901846
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186012/job/115062081924",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186012/job/115062081924",
+          "id": 115062081924,
+          "name": "cli-smoke-tests",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062081924/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:01:46Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103837901830
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186002/job/115062081841",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186002/job/115062081841",
+          "id": 115062081841,
+          "name": "analyze-and-assign-copilot",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062081841/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:01:46Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [
+            {
+              "annotation_level": "failure",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/22aefbb4cbcb3569b94c81fc3071bcffc416d8d2/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "The job was not started because your account is locked due to a billing issue.",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            },
+            {
+              "annotation_level": "notice",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/22aefbb4cbcb3569b94c81fc3071bcffc416d8d2/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            }
+          ],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103837897947
+          },
+          "completed_at": "2026-10-13T00:01:50Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325184607/job/115062080468",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325184607/job/115062080468",
+          "id": 115062080468,
+          "name": "Analyze (actions)",
+          "output": {
+            "annotations_count": 2,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062080468/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:01:46Z",
+          "status": "completed"
+        },
+        {
+          "annotations": [
+            {
+              "annotation_level": "failure",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/22aefbb4cbcb3569b94c81fc3071bcffc416d8d2/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "The job was not started because your account is locked due to a billing issue.",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            },
+            {
+              "annotation_level": "notice",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/22aefbb4cbcb3569b94c81fc3071bcffc416d8d2/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            }
+          ],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103837897947
+          },
+          "completed_at": "2026-10-13T00:01:50Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325184607/job/115062080449",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325184607/job/115062080449",
+          "id": 115062080449,
+          "name": "Analyze (javascript-typescript)",
+          "output": {
+            "annotations_count": 2,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062080449/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:01:46Z",
+          "status": "completed"
+        },
+        {
+          "annotations": [
+            {
+              "annotation_level": "failure",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/22aefbb4cbcb3569b94c81fc3071bcffc416d8d2/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "The job was not started because your account is locked due to a billing issue.",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            },
+            {
+              "annotation_level": "notice",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/22aefbb4cbcb3569b94c81fc3071bcffc416d8d2/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            }
+          ],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103837897947
+          },
+          "completed_at": "2026-10-13T00:01:50Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325184607/job/115062080406",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325184607/job/115062080406",
+          "id": 115062080406,
+          "name": "Analyze (python)",
+          "output": {
+            "annotations_count": 2,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062080406/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:01:46Z",
+          "status": "completed"
+        },
+        {
+          "annotations": [
+            {
+              "annotation_level": "failure",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/22aefbb4cbcb3569b94c81fc3071bcffc416d8d2/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "The job was not started because your account is locked due to a billing issue.",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            },
+            {
+              "annotation_level": "notice",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/22aefbb4cbcb3569b94c81fc3071bcffc416d8d2/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            }
+          ],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103837897947
+          },
+          "completed_at": "2026-10-13T00:01:49Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325184607/job/115062080148",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325184607/job/115062080148",
+          "id": 115062080148,
+          "name": "Analyze (rust)",
+          "output": {
+            "annotations_count": 2,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062080148/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:01:46Z",
+          "status": "completed"
+        }
+      ],
+      "commit_statuses": [],
+      "head": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+      "role": "contribution_head",
+      "workflow_runs": [
+        {
+          "check_suite_id": 103837918229,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:01:50Z",
+          "event": "push",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325192187",
+          "id": 38325192187,
+          "jobs": [],
+          "name": ".github/workflows/gpu-tests.yml",
+          "path": ".github/workflows/gpu-tests.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:50Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:01:50Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325192187"
+        },
+        {
+          "check_suite_id": 103837913870,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:01:49Z",
+          "event": "push",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325190608",
+          "id": 38325190608,
+          "jobs": [],
+          "name": ".github/workflows/mcp-tools-monitoring-unified.yml",
+          "path": ".github/workflows/mcp-tools-monitoring-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:49Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:01:49Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325190608"
+        },
+        {
+          "check_suite_id": 103837916123,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:01:49Z",
+          "event": "push",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325191438",
+          "id": 38325191438,
+          "jobs": [],
+          "name": ".github/workflows/gpu-tests-gated.yml",
+          "path": ".github/workflows/gpu-tests-gated.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:49Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:01:49Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325191438"
+        },
+        {
+          "check_suite_id": 103837911595,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:01:48Z",
+          "event": "push",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325189702",
+          "id": 38325189702,
+          "jobs": [],
+          "name": ".github/workflows/runner-validation-unified.yml",
+          "path": ".github/workflows/runner-validation-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:48Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:01:48Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325189702"
+        },
+        {
+          "check_suite_id": 103837906356,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:01:47Z",
+          "event": "push",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325187673",
+          "id": 38325187673,
+          "jobs": [],
+          "name": ".github/workflows/pdf_processing_ci.yml",
+          "path": ".github/workflows/pdf_processing_ci.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:47Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:01:47Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325187673"
+        },
+        {
+          "check_suite_id": 103837907371,
+          "conclusion": null,
+          "created_at": "2026-10-13T00:01:47Z",
+          "event": "pull_request",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325188004",
+          "id": 38325188004,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062087669",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T00:01:48Z",
+              "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325188004/job/115062087669",
+              "id": 115062087669,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "setup",
+              "run_attempt": 1,
+              "run_id": 38325188004,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T00:01:48Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "Scraper Validation and Testing",
+          "path": ".github/workflows/scraper-validation.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:47Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T00:01:47Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325188004"
+        },
+        {
+          "check_suite_id": 103837908835,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:01:47Z",
+          "event": "push",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325188618",
+          "id": 38325188618,
+          "jobs": [],
+          "name": ".github/workflows/pr-draft-creation-unified.yml",
+          "path": ".github/workflows/pr-draft-creation-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:47Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:01:47Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325188618"
+        },
+        {
+          "check_suite_id": 103837901823,
+          "conclusion": null,
+          "created_at": "2026-10-13T00:01:46Z",
+          "event": "pull_request",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186004",
+          "id": 38325186004,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062082047",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T00:01:46Z",
+              "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186004/job/115062082047",
+              "id": 115062082047,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "sdk-static-analysis",
+              "run_attempt": 1,
+              "run_id": 38325186004,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T00:01:46Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "JavaScript SDK Error Monitoring",
+          "path": ".github/workflows/javascript-sdk-monitoring.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:46Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T00:01:46Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186004"
+        },
+        {
+          "check_suite_id": 103837901835,
+          "conclusion": null,
+          "created_at": "2026-10-13T00:01:46Z",
+          "event": "pull_request",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186011",
+          "id": 38325186011,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062082154",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T00:01:46Z",
+              "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186011/job/115062082154",
+              "id": 115062082154,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "build-multi-arch",
+              "run_attempt": 1,
+              "run_id": 38325186011,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T00:01:46Z",
+              "status": "queued",
+              "steps": []
+            },
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062082361",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T00:01:46Z",
+              "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186011/job/115062082361",
+              "id": 115062082361,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "build-and-test (docker/Dockerfile.test, linux/amd64)",
+              "run_attempt": 1,
+              "run_id": 38325186011,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T00:01:46Z",
+              "status": "queued",
+              "steps": []
+            },
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062082371",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T00:01:46Z",
+              "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186011/job/115062082371",
+              "id": 115062082371,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "test-docker-compose",
+              "run_attempt": 1,
+              "run_id": 38325186011,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T00:01:46Z",
+              "status": "queued",
+              "steps": []
+            },
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062082392",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T00:01:46Z",
+              "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186011/job/115062082392",
+              "id": 115062082392,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "build-and-test (Dockerfile.mcp-minimal, linux/amd64)",
+              "run_attempt": 1,
+              "run_id": 38325186011,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T00:01:46Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "Docker Build and Test",
+          "path": ".github/workflows/docker-ci.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:46Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T00:01:46Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186011"
+        },
+        {
+          "check_suite_id": 103837901846,
+          "conclusion": null,
+          "created_at": "2026-10-13T00:01:46Z",
+          "event": "pull_request",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186012",
+          "id": 38325186012,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062081924",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T00:01:46Z",
+              "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186012/job/115062081924",
+              "id": 115062081924,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "cli-smoke-tests",
+              "run_attempt": 1,
+              "run_id": 38325186012,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T00:01:46Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "CLI Tools Error Monitoring",
+          "path": ".github/workflows/cli-error-monitoring.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:46Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T00:01:46Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186012"
+        },
+        {
+          "check_suite_id": 103837901807,
+          "conclusion": null,
+          "created_at": "2026-10-13T00:01:46Z",
+          "event": "pull_request",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325185996",
+          "id": 38325185996,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062082143",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T00:01:46Z",
+              "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325185996/job/115062082143",
+              "id": 115062082143,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "Setup Cache Infrastructure",
+              "run_attempt": 1,
+              "run_id": 38325185996,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T00:01:46Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "Example Cached Workflow",
+          "path": ".github/workflows/example-cached-workflow.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:46Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T00:01:46Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325185996"
+        },
+        {
+          "check_suite_id": 103837901805,
+          "conclusion": null,
+          "created_at": "2026-10-13T00:01:46Z",
+          "event": "pull_request",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325185998",
+          "id": 38325185998,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062082098",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T00:01:46Z",
+              "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325185998/job/115062082098",
+              "id": 115062082098,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "dashboard-smoke-tests (3.12)",
+              "run_attempt": 1,
+              "run_id": 38325185998,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T00:01:46Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "MCP Dashboard Automated Tests",
+          "path": ".github/workflows/mcp-dashboard-tests.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:46Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T00:01:46Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325185998"
+        },
+        {
+          "check_suite_id": 103837901995,
+          "conclusion": null,
+          "created_at": "2026-10-13T00:01:46Z",
+          "event": "pull_request",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186071",
+          "id": 38325186071,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062082281",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T00:01:46Z",
+              "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186071/job/115062082281",
+              "id": 115062082281,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "Build distribution \ud83d\udce6",
+              "run_attempt": 1,
+              "run_id": 38325186071,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T00:01:46Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "Publish Python Package",
+          "path": ".github/workflows/publish_to_pipy.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:46Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T00:01:46Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186071"
+        },
+        {
+          "check_suite_id": 103837901843,
+          "conclusion": null,
+          "created_at": "2026-10-13T00:01:46Z",
+          "event": "pull_request",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186013",
+          "id": 38325186013,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062082263",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T00:01:46Z",
+              "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186013/job/115062082263",
+              "id": 115062082263,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "check-pr-completion",
+              "run_attempt": 1,
+              "run_id": 38325186013,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T00:01:46Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "PR Completion Monitor with Copilot Auto-Fix",
+          "path": ".github/workflows/pr-completion-monitor.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:46Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T00:01:46Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186013"
+        },
+        {
+          "check_suite_id": 103837901830,
+          "conclusion": null,
+          "created_at": "2026-10-13T00:01:46Z",
+          "event": "pull_request",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186002",
+          "id": 38325186002,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062081841",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T00:01:46Z",
+              "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186002/job/115062081841",
+              "id": 115062081841,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "analyze-and-assign-copilot",
+              "run_attempt": 1,
+              "run_id": 38325186002,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T00:01:46Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "Automated PR Review and Copilot Assignment",
+          "path": ".github/workflows/pr-copilot-reviewer.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:46Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T00:01:46Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186002"
+        },
+        {
+          "check_suite_id": 103837901969,
+          "conclusion": null,
+          "created_at": "2026-10-13T00:01:46Z",
+          "event": "pull_request",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186059",
+          "id": 38325186059,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062082228",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T00:01:46Z",
+              "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186059/job/115062082228",
+              "id": 115062082228,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "arm64"
+              ],
+              "name": "arm64-system-info",
+              "run_attempt": 1,
+              "run_id": 38325186059,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T00:01:46Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "ARM64 Self-Hosted Runner",
+          "path": ".github/workflows/arm64-runner.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:46Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T00:01:46Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186059"
+        },
+        {
+          "check_suite_id": 103837901903,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:01:46Z",
+          "event": "push",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186050",
+          "id": 38325186050,
+          "jobs": [],
+          "name": ".github/workflows/legal-v2-reasoner-ci.yml",
+          "path": ".github/workflows/legal-v2-reasoner-ci.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:46Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:01:46Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186050"
+        },
+        {
+          "check_suite_id": 103837901905,
+          "conclusion": null,
+          "created_at": "2026-10-13T00:01:46Z",
+          "event": "pull_request",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186035",
+          "id": 38325186035,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062082280",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T00:01:46Z",
+              "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186035/job/115062082280",
+              "id": 115062082280,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "discover-tool-categories",
+              "run_attempt": 1,
+              "run_id": 38325186035,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T00:01:46Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "MCP Tools Error Monitoring",
+          "path": ".github/workflows/mcp-tools-monitoring.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:46Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T00:01:46Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186035"
+        },
+        {
+          "check_suite_id": 103837901919,
+          "conclusion": null,
+          "created_at": "2026-10-13T00:01:46Z",
+          "event": "pull_request",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186039",
+          "id": 38325186039,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062082350",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T00:01:46Z",
+              "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186039/job/115062082350",
+              "id": 115062082350,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "enhanced-pr-monitor",
+              "run_attempt": 1,
+              "run_id": 38325186039,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T00:01:46Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "Enhanced PR Completion Monitor with Progressive Copilot Assignment",
+          "path": ".github/workflows/enhanced-pr-completion-monitor.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:46Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T00:01:46Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186039"
+        },
+        {
+          "check_suite_id": 103837903973,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:01:46Z",
+          "event": "push",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325186798",
+          "id": 38325186798,
+          "jobs": [],
+          "name": ".github/workflows/mcp-integration-tests.yml",
+          "path": ".github/workflows/mcp-integration-tests.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:46Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:01:46Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186798"
+        },
+        {
+          "check_suite_id": 103837896787,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:01:45Z",
+          "event": "push",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325184256",
+          "id": 38325184256,
+          "jobs": [],
+          "name": ".github/workflows/pr-completion-monitor-unified.yml",
+          "path": ".github/workflows/pr-completion-monitor-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:45Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:01:45Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325184256"
+        },
+        {
+          "check_suite_id": 103837899534,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:01:45Z",
+          "event": "push",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325185161",
+          "id": 38325185161,
+          "jobs": [],
+          "name": ".github/workflows/cli-error-monitoring-unified.yml",
+          "path": ".github/workflows/cli-error-monitoring-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:45Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:01:45Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325185161"
+        },
+        {
+          "check_suite_id": 103837897947,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:01:45Z",
+          "event": "dynamic",
+          "head_branch": "refs/pull/1292/head",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325184607",
+          "id": 38325184607,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062080148",
+              "completed_at": "2026-10-13T00:01:49Z",
+              "conclusion": "failure",
+              "created_at": "2026-10-13T00:01:46Z",
+              "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325184607/job/115062080148",
+              "id": 115062080148,
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "name": "Analyze (rust)",
+              "run_attempt": 1,
+              "run_id": 38325184607,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T00:01:46Z",
+              "status": "completed",
+              "steps": []
+            },
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062080406",
+              "completed_at": "2026-10-13T00:01:50Z",
+              "conclusion": "failure",
+              "created_at": "2026-10-13T00:01:46Z",
+              "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325184607/job/115062080406",
+              "id": 115062080406,
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "name": "Analyze (python)",
+              "run_attempt": 1,
+              "run_id": 38325184607,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T00:01:46Z",
+              "status": "completed",
+              "steps": []
+            },
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062080449",
+              "completed_at": "2026-10-13T00:01:50Z",
+              "conclusion": "failure",
+              "created_at": "2026-10-13T00:01:46Z",
+              "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325184607/job/115062080449",
+              "id": 115062080449,
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "name": "Analyze (javascript-typescript)",
+              "run_attempt": 1,
+              "run_id": 38325184607,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T00:01:46Z",
+              "status": "completed",
+              "steps": []
+            },
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062080468",
+              "completed_at": "2026-10-13T00:01:50Z",
+              "conclusion": "failure",
+              "created_at": "2026-10-13T00:01:46Z",
+              "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325184607/job/115062080468",
+              "id": 115062080468,
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "name": "Analyze (actions)",
+              "run_attempt": 1,
+              "run_id": 38325184607,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T00:01:46Z",
+              "status": "completed",
+              "steps": []
+            }
+          ],
+          "name": "PR #1292",
+          "path": "dynamic/github-code-scanning/codeql",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:45Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:01:51Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325184607"
+        },
+        {
+          "check_suite_id": 103837894376,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:01:44Z",
+          "event": "push",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325183368",
+          "id": 38325183368,
+          "jobs": [],
+          "name": ".github/workflows/javascript-sdk-monitoring-unified.yml",
+          "path": ".github/workflows/javascript-sdk-monitoring-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:44Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:01:44Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325183368"
+        },
+        {
+          "check_suite_id": 103837892183,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:01:43Z",
+          "event": "push",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325182577",
+          "id": 38325182577,
+          "jobs": [],
+          "name": ".github/workflows/graphrag-production-ci.yml",
+          "path": ".github/workflows/graphrag-production-ci.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:43Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:01:43Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325182577"
+        },
+        {
+          "check_suite_id": 103837890021,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:01:43Z",
+          "event": "push",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325181795",
+          "id": 38325181795,
+          "jobs": [],
+          "name": ".github/workflows/pr-progressive-monitor-unified.yml",
+          "path": ".github/workflows/pr-progressive-monitor-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:43Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:01:43Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325181795"
+        },
+        {
+          "check_suite_id": 103837887630,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:01:42Z",
+          "event": "push",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325180994",
+          "id": 38325180994,
+          "jobs": [],
+          "name": ".github/workflows/docker-build-test.yml",
+          "path": ".github/workflows/docker-build-test.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:42Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:01:42Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325180994"
+        },
+        {
+          "check_suite_id": 103837885626,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:01:42Z",
+          "event": "push",
+          "head_branch": "codex/legal-permission-retention-20261012-01",
+          "head_sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325180282",
+          "id": 38325180282,
+          "jobs": [],
+          "name": ".github/workflows/approve-optimization.yml",
+          "path": ".github/workflows/approve-optimization.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:01:42Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:01:42Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325180282"
+        }
+      ]
+    },
+    {
+      "checks": [
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103838088613
+          },
+          "completed_at": "2026-10-13T00:02:33Z",
+          "conclusion": "skipped",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325254017/job/115062333886",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325254017/job/115062333886",
+          "id": 115062333886,
+          "name": "autofix-with-copilot-agent",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062333886/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:02:41Z",
+          "status": "completed"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103838092035
+          },
+          "completed_at": "2026-10-13T00:02:34Z",
+          "conclusion": "skipped",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325255102/job/115062304638",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325255102/job/115062304638",
+          "id": 115062304638,
+          "name": "autofix-with-copilot-agent",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062304638/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:02:34Z",
+          "status": "completed"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103838089827
+          },
+          "completed_at": "2026-10-13T00:02:33Z",
+          "conclusion": "skipped",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325254393/job/115062302406",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325254393/job/115062302406",
+          "id": 115062302406,
+          "name": "autofix-with-copilot-agent",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062302406/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:02:34Z",
+          "status": "completed"
+        },
+        {
+          "annotations": [],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103838079439
+          },
+          "completed_at": null,
+          "conclusion": null,
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325250860/job/115062292366",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325250860/job/115062292366",
+          "id": 115062292366,
+          "name": "Build distribution \ud83d\udce6",
+          "output": {
+            "annotations_count": 0,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062292366/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:02:31Z",
+          "status": "queued"
+        },
+        {
+          "annotations": [
+            {
+              "annotation_level": "failure",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/b95938c2a816075466f8dc84f339cf622414030d/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "The job was not started because your account is locked due to a billing issue.",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            },
+            {
+              "annotation_level": "notice",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/b95938c2a816075466f8dc84f339cf622414030d/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            }
+          ],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103838041741
+          },
+          "completed_at": "2026-10-13T00:02:26Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325237497/job/115062246797",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325237497/job/115062246797",
+          "id": 115062246797,
+          "name": "Analyze (actions)",
+          "output": {
+            "annotations_count": 2,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062246797/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:02:22Z",
+          "status": "completed"
+        },
+        {
+          "annotations": [
+            {
+              "annotation_level": "failure",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/b95938c2a816075466f8dc84f339cf622414030d/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "The job was not started because your account is locked due to a billing issue.",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            },
+            {
+              "annotation_level": "notice",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/b95938c2a816075466f8dc84f339cf622414030d/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            }
+          ],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103838041741
+          },
+          "completed_at": "2026-10-13T00:02:25Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325237497/job/115062246708",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325237497/job/115062246708",
+          "id": 115062246708,
+          "name": "Analyze (javascript-typescript)",
+          "output": {
+            "annotations_count": 2,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062246708/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:02:22Z",
+          "status": "completed"
+        },
+        {
+          "annotations": [
+            {
+              "annotation_level": "failure",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/b95938c2a816075466f8dc84f339cf622414030d/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "The job was not started because your account is locked due to a billing issue.",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            },
+            {
+              "annotation_level": "notice",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/b95938c2a816075466f8dc84f339cf622414030d/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            }
+          ],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103838041741
+          },
+          "completed_at": "2026-10-13T00:02:25Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325237497/job/115062246702",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325237497/job/115062246702",
+          "id": 115062246702,
+          "name": "Analyze (rust)",
+          "output": {
+            "annotations_count": 2,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062246702/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:02:22Z",
+          "status": "completed"
+        },
+        {
+          "annotations": [
+            {
+              "annotation_level": "failure",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/b95938c2a816075466f8dc84f339cf622414030d/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "The job was not started because your account is locked due to a billing issue.",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            },
+            {
+              "annotation_level": "notice",
+              "blob_href": "https://github.com/endomorphosis/ipfs_datasets_py/blob/b95938c2a816075466f8dc84f339cf622414030d/.github",
+              "end_column": null,
+              "end_line": 1,
+              "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+              "path": ".github",
+              "raw_details": "",
+              "start_column": null,
+              "start_line": 1,
+              "title": ""
+            }
+          ],
+          "app": {
+            "id": 15368,
+            "name": "GitHub Actions",
+            "slug": "github-actions"
+          },
+          "check_suite": {
+            "id": 103838041741
+          },
+          "completed_at": "2026-10-13T00:02:25Z",
+          "conclusion": "failure",
+          "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325237497/job/115062246553",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325237497/job/115062246553",
+          "id": 115062246553,
+          "name": "Analyze (python)",
+          "output": {
+            "annotations_count": 2,
+            "annotations_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062246553/annotations",
+            "summary": null,
+            "text": null,
+            "title": null
+          },
+          "started_at": "2026-10-13T00:02:21Z",
+          "status": "completed"
+        }
+      ],
+      "commit_statuses": [],
+      "head": "b95938c2a816075466f8dc84f339cf622414030d",
+      "role": "PR_merge_commit_at_opening",
+      "workflow_runs": [
+        {
+          "check_suite_id": 103838088613,
+          "conclusion": "skipped",
+          "created_at": "2026-10-13T00:02:33Z",
+          "event": "workflow_run",
+          "head_branch": "main",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325254017",
+          "id": 38325254017,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062333886",
+              "completed_at": "2026-10-13T00:02:33Z",
+              "conclusion": "skipped",
+              "created_at": "2026-10-13T00:02:41Z",
+              "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325254017/job/115062333886",
+              "id": 115062333886,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "autofix-with-copilot-agent",
+              "run_attempt": 1,
+              "run_id": 38325254017,
+              "runner_id": null,
+              "runner_name": null,
+              "started_at": "2026-10-13T00:02:41Z",
+              "status": "completed",
+              "steps": []
+            }
+          ],
+          "name": "Copilot Agent Auto-Healing",
+          "path": ".github/workflows/copilot-agent-autofix.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:02:33Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:02:34Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325254017"
+        },
+        {
+          "check_suite_id": 103838089827,
+          "conclusion": "skipped",
+          "created_at": "2026-10-13T00:02:33Z",
+          "event": "workflow_run",
+          "head_branch": "main",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325254393",
+          "id": 38325254393,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062302406",
+              "completed_at": "2026-10-13T00:02:33Z",
+              "conclusion": "skipped",
+              "created_at": "2026-10-13T00:02:34Z",
+              "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325254393/job/115062302406",
+              "id": 115062302406,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "autofix-with-copilot-agent",
+              "run_attempt": 1,
+              "run_id": 38325254393,
+              "runner_id": null,
+              "runner_name": null,
+              "started_at": "2026-10-13T00:02:34Z",
+              "status": "completed",
+              "steps": []
+            }
+          ],
+          "name": "Copilot Agent Auto-Healing",
+          "path": ".github/workflows/copilot-agent-autofix.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:02:33Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:02:34Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325254393"
+        },
+        {
+          "check_suite_id": 103838092035,
+          "conclusion": "skipped",
+          "created_at": "2026-10-13T00:02:33Z",
+          "event": "workflow_run",
+          "head_branch": "main",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325255102",
+          "id": 38325255102,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062304638",
+              "completed_at": "2026-10-13T00:02:34Z",
+              "conclusion": "skipped",
+              "created_at": "2026-10-13T00:02:34Z",
+              "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325255102/job/115062304638",
+              "id": 115062304638,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "autofix-with-copilot-agent",
+              "run_attempt": 1,
+              "run_id": 38325255102,
+              "runner_id": null,
+              "runner_name": null,
+              "started_at": "2026-10-13T00:02:34Z",
+              "status": "completed",
+              "steps": []
+            }
+          ],
+          "name": "Copilot Agent Auto-Healing",
+          "path": ".github/workflows/copilot-agent-autofix.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:02:33Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:02:43Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325255102"
+        },
+        {
+          "check_suite_id": 103838079439,
+          "conclusion": null,
+          "created_at": "2026-10-13T00:02:30Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325250860",
+          "id": 38325250860,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062292366",
+              "completed_at": null,
+              "conclusion": null,
+              "created_at": "2026-10-13T00:02:31Z",
+              "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325250860/job/115062292366",
+              "id": 115062292366,
+              "labels": [
+                "self-hosted",
+                "linux",
+                "x64"
+              ],
+              "name": "Build distribution \ud83d\udce6",
+              "run_attempt": 1,
+              "run_id": 38325250860,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T00:02:31Z",
+              "status": "queued",
+              "steps": []
+            }
+          ],
+          "name": "Publish Python Package",
+          "path": ".github/workflows/publish_to_pipy.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:02:30Z",
+          "status": "queued",
+          "updated_at": "2026-10-13T00:02:31Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325250860"
+        },
+        {
+          "check_suite_id": 103838079302,
+          "conclusion": null,
+          "created_at": "2026-10-13T00:02:30Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325250817",
+          "id": 38325250817,
+          "jobs": [],
+          "name": "Continuous PR and Issue Queue Management",
+          "path": ".github/workflows/continuous-queue-management.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:02:30Z",
+          "status": "pending",
+          "updated_at": "2026-10-13T00:02:31Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325250817"
+        },
+        {
+          "check_suite_id": 103838079590,
+          "conclusion": null,
+          "created_at": "2026-10-13T00:02:30Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325250924",
+          "id": 38325250924,
+          "jobs": [],
+          "name": "Docker Build and Test",
+          "path": ".github/workflows/docker-ci.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:02:30Z",
+          "status": "pending",
+          "updated_at": "2026-10-13T00:02:31Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325250924"
+        },
+        {
+          "check_suite_id": 103838079182,
+          "conclusion": null,
+          "created_at": "2026-10-13T00:02:30Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325250769",
+          "id": 38325250769,
+          "jobs": [],
+          "name": "Example Cached Workflow",
+          "path": ".github/workflows/example-cached-workflow.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:02:30Z",
+          "status": "pending",
+          "updated_at": "2026-10-13T00:02:31Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325250769"
+        },
+        {
+          "check_suite_id": 103838079494,
+          "conclusion": null,
+          "created_at": "2026-10-13T00:02:30Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325250881",
+          "id": 38325250881,
+          "jobs": [],
+          "name": "ARM64 Self-Hosted Runner",
+          "path": ".github/workflows/arm64-runner.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:02:30Z",
+          "status": "pending",
+          "updated_at": "2026-10-13T00:02:31Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325250881"
+        },
+        {
+          "check_suite_id": 103838076501,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:02:29Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325249920",
+          "id": 38325249920,
+          "jobs": [],
+          "name": ".github/workflows/pr-completion-monitor-unified.yml",
+          "path": ".github/workflows/pr-completion-monitor-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:02:29Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:02:29Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325249920"
+        },
+        {
+          "check_suite_id": 103838074206,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:02:29Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325249097",
+          "id": 38325249097,
+          "jobs": [],
+          "name": ".github/workflows/mcp-tools-monitoring-unified.yml",
+          "path": ".github/workflows/mcp-tools-monitoring-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:02:29Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:02:29Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325249097"
+        },
+        {
+          "check_suite_id": 103838071491,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:02:28Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325248121",
+          "id": 38325248121,
+          "jobs": [],
+          "name": ".github/workflows/approve-optimization.yml",
+          "path": ".github/workflows/approve-optimization.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:02:28Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:02:28Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325248121"
+        },
+        {
+          "check_suite_id": 103838067075,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:02:27Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325246538",
+          "id": 38325246538,
+          "jobs": [],
+          "name": ".github/workflows/docker-build-test.yml",
+          "path": ".github/workflows/docker-build-test.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:02:27Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:02:27Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325246538"
+        },
+        {
+          "check_suite_id": 103838069237,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:02:27Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325247345",
+          "id": 38325247345,
+          "jobs": [],
+          "name": ".github/workflows/pr-draft-creation-unified.yml",
+          "path": ".github/workflows/pr-draft-creation-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:02:27Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:02:27Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325247345"
+        },
+        {
+          "check_suite_id": 103838064395,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:02:26Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325245512",
+          "id": 38325245512,
+          "jobs": [],
+          "name": ".github/workflows/mcp-integration-tests.yml",
+          "path": ".github/workflows/mcp-integration-tests.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:02:26Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:02:26Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325245512"
+        },
+        {
+          "check_suite_id": 103838062307,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:02:26Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325244841",
+          "id": 38325244841,
+          "jobs": [],
+          "name": ".github/workflows/legal-v2-reasoner-ci.yml",
+          "path": ".github/workflows/legal-v2-reasoner-ci.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:02:26Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:02:26Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325244841"
+        },
+        {
+          "check_suite_id": 103838060423,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:02:25Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325244193",
+          "id": 38325244193,
+          "jobs": [],
+          "name": ".github/workflows/javascript-sdk-monitoring-unified.yml",
+          "path": ".github/workflows/javascript-sdk-monitoring-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:02:25Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:02:25Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325244193"
+        },
+        {
+          "check_suite_id": 103838055282,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:02:24Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325242365",
+          "id": 38325242365,
+          "jobs": [],
+          "name": ".github/workflows/gpu-tests.yml",
+          "path": ".github/workflows/gpu-tests.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:02:24Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:02:24Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325242365"
+        },
+        {
+          "check_suite_id": 103838058247,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:02:24Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325243461",
+          "id": 38325243461,
+          "jobs": [],
+          "name": ".github/workflows/graphrag-production-ci.yml",
+          "path": ".github/workflows/graphrag-production-ci.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:02:24Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:02:24Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325243461"
+        },
+        {
+          "check_suite_id": 103838052778,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:02:23Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325241520",
+          "id": 38325241520,
+          "jobs": [],
+          "name": ".github/workflows/cli-error-monitoring-unified.yml",
+          "path": ".github/workflows/cli-error-monitoring-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:02:23Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:02:23Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325241520"
+        },
+        {
+          "check_suite_id": 103838050355,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:02:22Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325240670",
+          "id": 38325240670,
+          "jobs": [],
+          "name": ".github/workflows/runner-validation-unified.yml",
+          "path": ".github/workflows/runner-validation-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:02:22Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:02:22Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325240670"
+        },
+        {
+          "check_suite_id": 103838044333,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:02:21Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325238509",
+          "id": 38325238509,
+          "jobs": [],
+          "name": ".github/workflows/pdf_processing_ci.yml",
+          "path": ".github/workflows/pdf_processing_ci.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:02:21Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:02:21Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325238509"
+        },
+        {
+          "check_suite_id": 103838047122,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:02:21Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325239584",
+          "id": 38325239584,
+          "jobs": [],
+          "name": ".github/workflows/pr-progressive-monitor-unified.yml",
+          "path": ".github/workflows/pr-progressive-monitor-unified.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:02:21Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:02:21Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325239584"
+        },
+        {
+          "check_suite_id": 103838041636,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:02:20Z",
+          "event": "push",
+          "head_branch": "main",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325237509",
+          "id": 38325237509,
+          "jobs": [],
+          "name": ".github/workflows/gpu-tests-gated.yml",
+          "path": ".github/workflows/gpu-tests-gated.yml",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:02:20Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:02:20Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325237509"
+        },
+        {
+          "check_suite_id": 103838041741,
+          "conclusion": "failure",
+          "created_at": "2026-10-13T00:02:20Z",
+          "event": "dynamic",
+          "head_branch": "main",
+          "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+          "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325237497",
+          "id": 38325237497,
+          "jobs": [
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062246553",
+              "completed_at": "2026-10-13T00:02:25Z",
+              "conclusion": "failure",
+              "created_at": "2026-10-13T00:02:21Z",
+              "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325237497/job/115062246553",
+              "id": 115062246553,
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "name": "Analyze (python)",
+              "run_attempt": 1,
+              "run_id": 38325237497,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T00:02:21Z",
+              "status": "completed",
+              "steps": []
+            },
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062246702",
+              "completed_at": "2026-10-13T00:02:25Z",
+              "conclusion": "failure",
+              "created_at": "2026-10-13T00:02:22Z",
+              "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325237497/job/115062246702",
+              "id": 115062246702,
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "name": "Analyze (rust)",
+              "run_attempt": 1,
+              "run_id": 38325237497,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T00:02:22Z",
+              "status": "completed",
+              "steps": []
+            },
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062246708",
+              "completed_at": "2026-10-13T00:02:25Z",
+              "conclusion": "failure",
+              "created_at": "2026-10-13T00:02:22Z",
+              "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325237497/job/115062246708",
+              "id": 115062246708,
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "name": "Analyze (javascript-typescript)",
+              "run_attempt": 1,
+              "run_id": 38325237497,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T00:02:22Z",
+              "status": "completed",
+              "steps": []
+            },
+            {
+              "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062246797",
+              "completed_at": "2026-10-13T00:02:26Z",
+              "conclusion": "failure",
+              "created_at": "2026-10-13T00:02:22Z",
+              "head_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+              "html_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38325237497/job/115062246797",
+              "id": 115062246797,
+              "labels": [
+                "ubuntu-latest"
+              ],
+              "name": "Analyze (actions)",
+              "run_attempt": 1,
+              "run_id": 38325237497,
+              "runner_id": 0,
+              "runner_name": "",
+              "started_at": "2026-10-13T00:02:22Z",
+              "status": "completed",
+              "steps": []
+            }
+          ],
+          "name": "Push on main",
+          "path": "dynamic/github-code-scanning/codeql",
+          "pull_request_numbers": [],
+          "run_attempt": 1,
+          "run_started_at": "2026-10-13T00:02:20Z",
+          "status": "completed",
+          "updated_at": "2026-10-13T00:02:26Z",
+          "url": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325237497"
+        }
+      ]
+    }
+  ],
+  "hosted_success_claimed": false,
+  "limitations": [
+    "These are point-in-time API observations; pending/queued jobs may change after capture.",
+    "No earlier billing failure is used as current evidence; only annotations captured for these exact heads are summarized.",
+    "Hosted success is not claimed. Workflow failures, queued jobs, skipped checks and workflow-definition errors remain explicit."
+  ],
+  "observed_at_utc": "2026-10-13T00:04:08.039905+00:00",
+  "observer_reruns_or_dispatches": false,
+  "observer_started_runners_or_jobs": false,
+  "opening_pr": {
+    "base": {
+      "ref": "main",
+      "sha": "12b2de0f1c949b793772ce29edad84355978b9b7"
+    },
+    "draft": false,
+    "head": {
+      "ref": "codex/legal-permission-retention-20261012-01",
+      "sha": "22aefbb4cbcb3569b94c81fc3071bcffc416d8d2"
+    },
+    "merge_commit_sha": "b95938c2a816075466f8dc84f339cf622414030d",
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "merged": true,
+    "merged_at": "2026-10-13T00:02:18Z",
+    "number": 1292,
+    "state": "closed",
+    "url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1292"
+  },
+  "pr_number": 1292,
+  "pr_url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1292",
+  "queries": [
+    {
+      "command": [
+        "gh",
+        "pr",
+        "view",
+        "1292",
+        "--repo",
+        "endomorphosis/ipfs_datasets_py",
+        "--json",
+        "number,url,state,headRefOid,headRefName,baseRefName,mergeCommit,mergedAt,isDraft"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:43.633152+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": null,
+      "method": "gh pr view read-only GraphQL",
+      "response_bytes": 354,
+      "response_sha256": "4c6d57892b8cf814a441e3623e3caa2e12ed2df1a30df0f4175d9bf81d90b08e",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:43.135255+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/pulls/1292"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:44.201309+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/pulls/1292",
+      "method": "GET",
+      "response_bytes": 19944,
+      "response_sha256": "20c3f3742fbdcc53f90d4e10d26e1cb718497e6b747878164eedb48d6639a72c",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:43.633183+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs?head_sha=22aefbb4cbcb3569b94c81fc3071bcffc416d8d2&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:44.993767+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs?head_sha=22aefbb4cbcb3569b94c81fc3071bcffc416d8d2&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 375626,
+      "response_sha256": "de8e7a8aeb1c85c0f95d813135fad03b3eb540dc237573cae47bfed5f94aad7d",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:44.201369+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/commits/22aefbb4cbcb3569b94c81fc3071bcffc416d8d2/check-runs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:45.619199+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/commits/22aefbb4cbcb3569b94c81fc3071bcffc416d8d2/check-runs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 58810,
+      "response_sha256": "80aad7c028aa26c98601ae70c765641141ae95dd76f22b0b352c6d298bd5d488",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:44.994023+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/commits/22aefbb4cbcb3569b94c81fc3071bcffc416d8d2/statuses?per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:45.932266+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/commits/22aefbb4cbcb3569b94c81fc3071bcffc416d8d2/statuses?per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 2,
+      "response_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:45.619273+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325192187/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:46.328955+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325192187/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:45.932328+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325190608/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:46.624057+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325190608/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:46.329015+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325191438/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:46.916737+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325191438/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:46.624114+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325189702/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:47.207974+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325189702/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:46.916790+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325187673/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:47.520244+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325187673/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:47.208041+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325188004/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:47.842682+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325188004/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 950,
+      "response_sha256": "df535aa4d6f586b87db7895e0a8e16d0548b8f1c0664e6e0ba5d472d5a53a402",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:47.520301+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325188618/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:48.196384+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325188618/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:47.842738+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186004/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:48.545806+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186004/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 965,
+      "response_sha256": "2abdd19609d72f2709008be5170ef7f30915c15fe59be0a24ccc18f851962274",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:48.196435+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186011/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:48.845563+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186011/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 3805,
+      "response_sha256": "8956e6b9d470bfca92309a679dbcfdf932ad04d23a33e015c5ca8af5383dfa1e",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:48.545851+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186012/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:49.172221+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186012/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 956,
+      "response_sha256": "2343dbf97b8870f2b2291b813faa6e232d99f4bbcbe0f93ee2394552ffea8099",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:48.845606+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325185996/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:49.495921+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325185996/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 964,
+      "response_sha256": "d129ce2de27450383e0e57b3e03fbb7639c4d709863a5617a1131a2466e0ce21",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:49.172263+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325185998/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:49.806417+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325185998/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 972,
+      "response_sha256": "6ccf100478d3c4ed377123a040516c4188b1ff41d8332cd2e6fabdb31b567e7c",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:49.495967+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186071/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:50.093829+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186071/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 960,
+      "response_sha256": "4cceb7bb9f205efa93991261f40b783379ff6455f307b4fa541784b55245b400",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:49.806459+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186013/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:50.369678+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186013/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 977,
+      "response_sha256": "a05946b0f333051f59fb8b773c3dba1868dee064dd69bac688cf1c7d530cf6e2",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:50.093873+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186002/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:50.698277+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186002/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 983,
+      "response_sha256": "b7e86be343b03061ffa2d553daa81c1a140a92bc1a5baa3c94ffddfd84bcc9d1",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:50.369730+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186059/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:51.009111+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186059/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 958,
+      "response_sha256": "a3c76ad5be92c38e7397be8f0273e27a0265102753f8dd02caf3338fb667f0c4",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:50.698323+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186050/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:51.288285+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186050/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:51.009162+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186035/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:51.625045+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186035/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 965,
+      "response_sha256": "32abbfda81997acb9019f4360226c79d198c3bf237017abeef1860a4067784e8",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:51.288320+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186039/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:51.953589+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186039/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 1000,
+      "response_sha256": "3bc968bb8e32a3c1d5d1db8f539c2fa7d72f5558e29c15a0cfd855c4f6fc883b",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:51.625097+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186798/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:52.224586+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325186798/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:51.953637+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325184256/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:52.505183+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325184256/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:52.224631+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325185161/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:52.877820+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325185161/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:52.505228+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325184607/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:53.553046+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325184607/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 3648,
+      "response_sha256": "2bb4bdb9893fe43c165bafbfd1f34f39030af855925d4ac168e42f21ce74e9a8",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:52.877858+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325183368/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:53.881513+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325183368/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:53.553085+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325182577/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:54.185785+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325182577/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:53.881553+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325181795/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:54.491737+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325181795/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:54.185832+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325180994/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:54.806300+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325180994/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:54.491775+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325180282/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:55.114382+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325180282/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:54.806352+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/check-runs/115062080468/annotations?per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:55.652826+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062080468/annotations?per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 785,
+      "response_sha256": "df8bc67e4b672a07ebbbd723276824d24d983f22bc199e79e7f1b0f3f2dd44fe",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:55.114493+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/check-runs/115062080449/annotations?per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:55.939847+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062080449/annotations?per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 785,
+      "response_sha256": "df8bc67e4b672a07ebbbd723276824d24d983f22bc199e79e7f1b0f3f2dd44fe",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:55.652881+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/check-runs/115062080406/annotations?per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:56.279059+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062080406/annotations?per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 785,
+      "response_sha256": "df8bc67e4b672a07ebbbd723276824d24d983f22bc199e79e7f1b0f3f2dd44fe",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:55.939892+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/check-runs/115062080148/annotations?per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:56.556622+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062080148/annotations?per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 785,
+      "response_sha256": "df8bc67e4b672a07ebbbd723276824d24d983f22bc199e79e7f1b0f3f2dd44fe",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:56.279106+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs?head_sha=b95938c2a816075466f8dc84f339cf622414030d&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:57.242061+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs?head_sha=b95938c2a816075466f8dc84f339cf622414030d&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 323302,
+      "response_sha256": "4378660cf06d6277a53a9d11493545ab07921349dcb963421065234d236264cb",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:56.556668+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/commits/b95938c2a816075466f8dc84f339cf622414030d/check-runs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:57.643038+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/commits/b95938c2a816075466f8dc84f339cf622414030d/check-runs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 24913,
+      "response_sha256": "d5fb902911720870adb27ab53882013564e03115f614c35b152a60835b06bf07",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:57.242403+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/commits/b95938c2a816075466f8dc84f339cf622414030d/statuses?per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:57.918726+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/commits/b95938c2a816075466f8dc84f339cf622414030d/statuses?per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 2,
+      "response_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:57.643160+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325254017/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:58.244013+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325254017/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 963,
+      "response_sha256": "3d22927e8f812c7138245ba8151ca9ce5c809a610a10c1685121fc0d1fb9fea1",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:57.918797+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325254393/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:58.581457+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325254393/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 963,
+      "response_sha256": "34855a6fe760cd645efbf4ef7987a5dc2a38385cfd830258638737aa398ae5e8",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:58.244069+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325255102/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:58.880464+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325255102/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 963,
+      "response_sha256": "73648c8dcd2f648d12c8bcc2bc07fab884e36b255e0f298b4ae230b8b2079a4b",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:58.581514+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325250860/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:59.164562+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325250860/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 920,
+      "response_sha256": "3825dd51e815ad5ed82000fccea47ef40e16821ff89e76b0226861998bd07bd0",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:58.880504+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325250817/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:59.543393+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325250817/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:59.164620+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325250924/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:03:59.826194+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325250924/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:59.543449+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325250769/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:04:00.119259+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325250769/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:03:59.826242+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325250881/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:04:00.411188+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325250881/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:04:00.119315+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325249920/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:04:00.748918+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325249920/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:04:00.411241+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325249097/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:04:01.009557+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325249097/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:04:00.748974+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325248121/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:04:01.282421+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325248121/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:04:01.009596+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325246538/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:04:01.568801+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325246538/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:04:01.282464+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325247345/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:04:01.839494+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325247345/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:04:01.568853+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325245512/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:04:02.118045+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325245512/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:04:01.839547+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325244841/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:04:02.590739+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325244841/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:04:02.118086+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325244193/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:04:02.951614+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325244193/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:04:02.590784+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325242365/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:04:03.242963+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325242365/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:04:02.951668+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325243461/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:04:03.584404+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325243461/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:04:03.243007+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325241520/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:04:03.936046+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325241520/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:04:03.584446+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325240670/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:04:04.276978+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325240670/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:04:03.936090+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325238509/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:04:04.628296+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325238509/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:04:04.277020+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325239584/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:04:05.087852+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325239584/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:04:04.628348+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325237509/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:04:05.472123+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325237509/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 27,
+      "response_sha256": "b3dab5870ff3a8209160335de7c1077b89e461d875d9041ac9d8b8ed7c1666f6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:04:05.087903+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/actions/runs/38325237497/jobs?filter=all&per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:04:06.201094+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/actions/runs/38325237497/jobs?filter=all&per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 3604,
+      "response_sha256": "df703560bef6cf35c713614a21592877c48e9265b6af3b15bf93a52cc566b478",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:04:05.472169+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/check-runs/115062246797/annotations?per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:04:06.462761+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062246797/annotations?per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 785,
+      "response_sha256": "c30078fcacafa594b67a1631ae0247d30aed371880afb505e25e9c00dc7516e6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:04:06.201177+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/check-runs/115062246708/annotations?per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:04:06.735193+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062246708/annotations?per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 785,
+      "response_sha256": "c30078fcacafa594b67a1631ae0247d30aed371880afb505e25e9c00dc7516e6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:04:06.462795+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/check-runs/115062246702/annotations?per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:04:07.011726+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062246702/annotations?per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 785,
+      "response_sha256": "c30078fcacafa594b67a1631ae0247d30aed371880afb505e25e9c00dc7516e6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:04:06.735230+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/check-runs/115062246553/annotations?per_page=100&page=1"
+      ],
+      "completed_at_utc": "2026-10-13T00:04:07.321555+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/check-runs/115062246553/annotations?per_page=100&page=1",
+      "method": "GET",
+      "response_bytes": 785,
+      "response_sha256": "c30078fcacafa594b67a1631ae0247d30aed371880afb505e25e9c00dc7516e6",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:04:07.011772+00:00"
+    },
+    {
+      "command": [
+        "gh",
+        "api",
+        "--method",
+        "GET",
+        "repos/endomorphosis/ipfs_datasets_py/pulls/1292"
+      ],
+      "completed_at_utc": "2026-10-13T00:04:08.039789+00:00",
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-permission-retention-20261012-01/datasets",
+      "endpoint": "https://api.github.com/repos/endomorphosis/ipfs_datasets_py/pulls/1292",
+      "method": "GET",
+      "response_bytes": 19944,
+      "response_sha256": "20c3f3742fbdcc53f90d4e10d26e1cb718497e6b747878164eedb48d6639a72c",
+      "returned_exit_code": 0,
+      "started_at_utc": "2026-10-13T00:04:07.321584+00:00"
+    }
+  ],
+  "repository": "endomorphosis/ipfs_datasets_py",
+  "schema": "permission-retention-source-hosted-ci-observation/v1",
+  "scope": "Current finite exact-head metadata for the actual contribution and observed PR merge heads, with matching run IDs/jobs/checks and captured annotations; local tests and training are separate.",
+  "summary": {
+    "check_conclusion_counts": {
+      "None": 16,
+      "failure": 8,
+      "skipped": 3
+    },
+    "check_count": 27,
+    "check_status_counts": {
+      "completed": 11,
+      "queued": 16
+    },
+    "current_captured_billing_block_annotations": 8,
+    "distinct_current_billing_messages": [
+      "The job was not started because your account is locked due to a billing issue."
+    ],
+    "workflow_conclusion_counts": {
+      "None": 17,
+      "failure": 32,
+      "skipped": 3
+    },
+    "workflow_run_count": 52,
+    "workflow_status_counts": {
+      "completed": 35,
+      "pending": 4,
+      "queued": 13
+    }
+  }
+}
