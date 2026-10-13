@@ -1,0 +1,66 @@
+{
+  "annotations": [
+    {
+      "annotation_level": "failure",
+      "blob_href": "https://github.com/endomorphosis/ipfs_accelerate_py/blob/a8f57366ff4110a87f1f13d1e60992f83f689821/.github",
+      "end_column": null,
+      "end_line": 1,
+      "message": "The job was not started because your account is locked due to a billing issue.",
+      "path": ".github",
+      "raw_details": "",
+      "start_column": null,
+      "start_line": 1,
+      "title": ""
+    },
+    {
+      "annotation_level": "notice",
+      "blob_href": "https://github.com/endomorphosis/ipfs_accelerate_py/blob/a8f57366ff4110a87f1f13d1e60992f83f689821/.github",
+      "end_column": null,
+      "end_line": 1,
+      "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+      "path": ".github",
+      "raw_details": "",
+      "start_column": null,
+      "start_line": 1,
+      "title": ""
+    }
+  ],
+  "head_sha": "a8f57366ff4110a87f1f13d1e60992f83f689821",
+  "hosted_steps_executed": false,
+  "jobs": {
+    "jobs": [
+      {
+        "check_run_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/check-runs/115213749548",
+        "completed_at": "2026-10-13T08:57:06Z",
+        "conclusion": "failure",
+        "created_at": "2026-10-13T08:57:03Z",
+        "head_branch": "main",
+        "head_sha": "a8f57366ff4110a87f1f13d1e60992f83f689821",
+        "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38372818362/job/115213749548",
+        "id": 115213749548,
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "name": "documentation-gates",
+        "node_id": "CR_kwDOL9PEDs8AAAAa00ZNLA",
+        "run_attempt": 1,
+        "run_id": 38372818362,
+        "run_url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/actions/runs/38372818362",
+        "runner_group_id": 0,
+        "runner_group_name": "",
+        "runner_id": 0,
+        "runner_name": "",
+        "started_at": "2026-10-13T08:57:03Z",
+        "status": "completed",
+        "steps": [],
+        "url": "https://api.github.com/repos/endomorphosis/ipfs_accelerate_py/actions/jobs/115213749548",
+        "workflow_name": "Documentation Gates"
+      }
+    ],
+    "total_count": 1
+  },
+  "local_documentation_gates_passed": true,
+  "run_id": 38372818362,
+  "schema": "exact-revision-hosted-ci-observation@1",
+  "url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38372818362"
+}
