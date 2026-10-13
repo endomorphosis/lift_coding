@@ -1,0 +1,55 @@
+{
+  "check_anchors": true,
+  "checker_sha256": "596a0038b18d592f2e605643890afc85e457558f7b887932a474557d7586819e",
+  "child_collected_and_executed_tests": 798,
+  "child_commit": "a3b26502d23d8a267ae64c04715bbf21c6113859",
+  "child_datasets_execution_revision": "f47161b757190380e9898aff155067c1ad609217",
+  "child_datasets_parent_pin_executed": false,
+  "child_documentation_gate_blocks_passed": 4,
+  "child_junit": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 798
+  },
+  "child_manifest_entries_verified": 23,
+  "child_manifest_sha256": "bf79ece268aa2f44f26ff57cd365b53f793133af0b5858a4822bace0df7f9e75",
+  "child_new_policy_cases": 52,
+  "child_new_training_or_provider_run": false,
+  "child_note_links_verified": [
+    {
+      "anchor": "share-an-explicit-policy-across-owner-apis",
+      "path": "docs/agent_supervisor/reversible_source_views.md",
+      "sha256": "1cd79fcd961d2ba24ca3ac63f9651579793431f743379ec5c897fa23b835a71b"
+    },
+    {
+      "anchor": null,
+      "path": "docs/agent_supervisor/evidence/shared-source-view-policy-20261013/README.md",
+      "sha256": "a28b9985f3bdd2ac65067186adf6ce798fc2288a8e3d3db8fe984bb8e5b49279"
+    },
+    {
+      "anchor": null,
+      "path": "docs/agent_supervisor/reversible_codebase_views_plan.md",
+      "sha256": "c5c040e0f00a594ce7e756ceec0dee4c935b5ece0e92d96ee434472ac9123a71"
+    }
+  ],
+  "child_qualification_command_sha256": "7de27fc57a1db27846527d56e622509bd0a8aec5706b39a1b9cd7a009962c28d",
+  "child_source_binding_rows_unchanged": 103,
+  "errors": [],
+  "hosted_child_ci": "Blocked before steps by the GitHub account billing lock; not a hosted documentation-code result.",
+  "hosted_ci_sha256": "8f17f3491b5c5a77e08346018f576a39b4ae45c54c16aaa792e194d89f5c689a",
+  "note": "implementation_plan/docs/105-supervisor-shared-source-view-policy-2026-10-13.md",
+  "note_sha256": "08281d233235d8195397b4c3fb198a6e1b416ff6a3852cc7a376c6a4ab34cb31",
+  "observed_utc": "2026-10-13T01:39:37.979027+00:00",
+  "parent_base_revision": "3bc997233cb26eeda2d018fca40b747470f61dfb",
+  "provider_token_savings_established": false,
+  "runtime_databases_published": false,
+  "schema": "supervisor-shared-source-view-policy-parent-checks@1",
+  "scope": "Parent note links/anchors, intended Gitlinks and published child manifest/evidence; no whole-parent regression or live deployment.",
+  "staged_pins": {
+    "external/ipfs_accelerate": "a3b26502d23d8a267ae64c04715bbf21c6113859",
+    "external/ipfs_datasets": "b95938c2a816075466f8dc84f339cf622414030d",
+    "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0"
+  },
+  "status": "pass"
+}
