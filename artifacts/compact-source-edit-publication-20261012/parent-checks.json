@@ -1,0 +1,17 @@
+{
+  "schema": "compact-source-edit-parent-checks@1",
+  "parent_base_revision": "4e736779ade0d7e6862fc262321624663da0f787",
+  "checker_sha256": "596a0038b18d592f2e605643890afc85e457558f7b887932a474557d7586819e",
+  "note": "implementation_plan/docs/102-supervisor-compact-source-edit-2026-10-13.md",
+  "note_sha256": "7ad4b0b217c425f245215d9255cfeec40db97e5e734d7371c2fe281dd9c748b5",
+  "errors": [],
+  "check_anchors": true,
+  "staged_pins": {
+    "external/ipfs_accelerate": "cdca08b03c9ca015b7ba8799b9161de6ac20ce4d",
+    "external/ipfs_datasets": "12b2de0f1c949b793772ce29edad84355978b9b7",
+    "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0"
+  },
+  "child_qualification_tests": 729,
+  "hosted_ci_sha256": "19433d4dc41ee19b306ab83d05d1ddd452eb5a64fa9fbf3f7ba08aa1929e0e49",
+  "scope": "Parent note links, retained CI observation and intended Gitlinks only; no whole-parent regression or live deployment."
+}

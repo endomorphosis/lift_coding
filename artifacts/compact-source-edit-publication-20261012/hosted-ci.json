@@ -1,0 +1,92 @@
+{
+  "schema": "compact-source-edit-hosted-ci@1",
+  "observed_utc": "2026-10-13T00:01:23.798418+00:00",
+  "exact_head_sha": "cdca08b03c9ca015b7ba8799b9161de6ac20ce4d",
+  "repository": "endomorphosis/ipfs_accelerate_py",
+  "api_requests": [
+    {
+      "argv": [
+        "gh",
+        "api",
+        "repos/endomorphosis/ipfs_accelerate_py/actions/workflows/documentation-gates.yml/runs?head_sha=cdca08b03c9ca015b7ba8799b9161de6ac20ce4d&per_page=10"
+      ],
+      "exit_code": 0,
+      "response_sha256": "608bc9448178667f7dee7b3a27598e074fbf881fff5b9527f796185b4f53efa5",
+      "response_bytes": 13594,
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "gh",
+        "api",
+        "repos/endomorphosis/ipfs_accelerate_py/actions/runs/38325129478/jobs"
+      ],
+      "exit_code": 0,
+      "response_sha256": "e38ca0b647b993a25d6bf6276e53c031e3d4ee2aaba15ae8d6ca36f11b25bea9",
+      "response_bytes": 935,
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "gh",
+        "api",
+        "repos/endomorphosis/ipfs_accelerate_py/check-runs/115061900636/annotations"
+      ],
+      "exit_code": 0,
+      "response_sha256": "a24fa0034370aa4ce0e33a9abd1281a9a2372f03433f420af06fadad8180e5d0",
+      "response_bytes": 789,
+      "stderr": ""
+    }
+  ],
+  "runs": [
+    {
+      "id": 38325129478,
+      "head_sha": "cdca08b03c9ca015b7ba8799b9161de6ac20ce4d",
+      "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38325129478",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-10-13T00:01:06Z",
+      "updated_at": "2026-10-13T00:01:12Z",
+      "jobs": [
+        {
+          "id": 115061900636,
+          "head_sha": "cdca08b03c9ca015b7ba8799b9161de6ac20ce4d",
+          "html_url": "https://github.com/endomorphosis/ipfs_accelerate_py/actions/runs/38325129478/job/115061900636",
+          "status": "completed",
+          "conclusion": "failure",
+          "runner_id": 0,
+          "runner_name": "",
+          "steps": [],
+          "annotations": [
+            {
+              "path": ".github",
+              "blob_href": "https://github.com/endomorphosis/ipfs_accelerate_py/blob/cdca08b03c9ca015b7ba8799b9161de6ac20ce4d/.github",
+              "start_line": 1,
+              "start_column": null,
+              "end_line": 1,
+              "end_column": null,
+              "annotation_level": "failure",
+              "title": "",
+              "message": "The job was not started because your account is locked due to a billing issue.",
+              "raw_details": ""
+            },
+            {
+              "path": ".github",
+              "blob_href": "https://github.com/endomorphosis/ipfs_accelerate_py/blob/cdca08b03c9ca015b7ba8799b9161de6ac20ce4d/.github",
+              "start_line": 1,
+              "start_column": null,
+              "end_line": 1,
+              "end_column": null,
+              "annotation_level": "notice",
+              "title": "",
+              "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+              "raw_details": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "billing_lock_observed": true,
+  "hosted_documentation_gates_passed": false
+}
