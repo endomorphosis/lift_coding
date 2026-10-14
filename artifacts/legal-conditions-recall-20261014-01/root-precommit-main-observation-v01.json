@@ -1,0 +1,61 @@
+{
+  "canonical_Git_commands": 0,
+  "commits": 0,
+  "fetch_flags": [
+    "--no-write-fetch-head",
+    "--no-tags",
+    "--no-auto-maintenance"
+  ],
+  "findings": [],
+  "fresh_remote_main": "9cb9b6dc482dfb8759bb11a4fbfe3cf0c7119ae2",
+  "gitlinks": {
+    "changed": {},
+    "fresh_remote_main": {
+      "JevOps": "9af1ebb6a4245ce2b4e673ac277e4988da4d5caa",
+      "Mcp-Plus-Plus": "628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0",
+      "external/ipfs_accelerate": "e4b8c4bba2fc7d5b7484b9021cbb9a5bcfc5e7d4",
+      "external/ipfs_datasets": "0897aa1d4252e175477addac5417028241de596a",
+      "external/ipfs_kit": "40c98c71b95be750509ffdb21e7e5494d91b4e79",
+      "external/meta-wearables-dat-android": "4e56e1864a5e78194bababc3a68775c4196cbed0",
+      "external/meta-wearables-dat-ios": "2b5695d16a710f3d2d7341f88570b86d01723d50",
+      "hallucinate_app": "ffcf5ff3b3389c95ba53e9f1be45f89fa96c5ef6",
+      "swissknife": "4772c7ff648dd5f438af059e21a1a5305d32dbe3"
+    },
+    "owned_HEAD": {
+      "JevOps": "9af1ebb6a4245ce2b4e673ac277e4988da4d5caa",
+      "Mcp-Plus-Plus": "628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0",
+      "external/ipfs_accelerate": "e4b8c4bba2fc7d5b7484b9021cbb9a5bcfc5e7d4",
+      "external/ipfs_datasets": "0897aa1d4252e175477addac5417028241de596a",
+      "external/ipfs_kit": "40c98c71b95be750509ffdb21e7e5494d91b4e79",
+      "external/meta-wearables-dat-android": "4e56e1864a5e78194bababc3a68775c4196cbed0",
+      "external/meta-wearables-dat-ios": "2b5695d16a710f3d2d7341f88570b86d01723d50",
+      "hallucinate_app": "ffcf5ff3b3389c95ba53e9f1be45f89fa96c5ef6",
+      "swissknife": "4772c7ff648dd5f438af059e21a1a5305d32dbe3"
+    }
+  },
+  "incoming_change_count": 0,
+  "incoming_changes": [],
+  "index_refreshes": 0,
+  "model_or_resource_calls": 0,
+  "observed_at_utc": "2026-10-14T05:05:48.060004+00:00",
+  "own_pending_paths": [
+    "implementation_plan/docs/122-legal-conditions-balanced-preparation-2026-10-14.md"
+  ],
+  "owned_HEAD": "9cb9b6dc482dfb8759bb11a4fbfe3cf0c7119ae2",
+  "owned_HEAD_ancestor_of_remote_main": true,
+  "owned_HEAD_unchanged": true,
+  "owned_index": {
+    "bytes": 6850971,
+    "path": "/home/barberb/lift_coding/.git/worktrees/root5/index",
+    "sha256": "337f30bede080fb69afd70c063f8c3d53ba40fbec2446f1745c98dd8d8eeec0e"
+  },
+  "owned_index_unchanged": true,
+  "owned_observation_ref": "refs/codex/legal-conditions-recall-20261014-01/root-main-before-commit-v01",
+  "owned_worktree": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/root",
+  "passed": true,
+  "path_conflicts": [],
+  "private_reads": 0,
+  "required_preservation": "Integrate from actual latest root main and preserve every current non-datasets gitlink and unrelated tree path.",
+  "schema": "conditions-balanced-root-precommit-main-observation/v1",
+  "worktree_or_source_mutations": 0
+}
