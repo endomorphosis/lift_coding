@@ -1,0 +1,12 @@
+{
+  "correction": "Derive exclusive output from the current script directory.",
+  "diagnostic": "FileNotFoundError: stale prior-worktree output path",
+  "first_observation_exit_code": 1,
+  "first_observation_output_created": false,
+  "retry": "read-only exact published SHA observation; recorded child-ci-observation.json",
+  "runtime_or_qualified_test_sources_changed": false,
+  "schema": "source-query-ci-observer-correction@1",
+  "source_after_sha256": "faf43f083a2141244fd8a74f028e3abca48f728efaba34538399f14a91e82085",
+  "source_before_sha256": "cc99eb13ddb6e2e1d7cadb6334115cc0cfb7e08219540b020e0213f03cb798f9",
+  "workflow_dispatched_or_rerun": false
+}
