@@ -1,0 +1,185 @@
+{
+  "GitHub_actual_merge_join_passed": true,
+  "GitHub_merge_response": {
+    "bytes": 22323,
+    "path": "/home/barberb/lift_coding/artifacts/legal-balanced-execution-20261014-01/source-github-merge-v01.json",
+    "sha256": "601c7e863976f93d1cefb4ebc247c8fbfe259ce088e1993031368ddc704f65e3"
+  },
+  "Git_mutations": 0,
+  "actual_additions": 141,
+  "actual_incoming": "1e7a783101df8790ed1ebcafc378766db8ae4886",
+  "actual_incoming_gitlinks": {
+    ".tools/ipfs_kit_py": {
+      "mode": "160000",
+      "oid": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "type": "commit"
+    },
+    "ipfs_accelerate_py": {
+      "mode": "160000",
+      "oid": "c82e5774fe2ab97ccbb791416e9d77964c519d85",
+      "type": "commit"
+    },
+    "ipfs_datasets_py/logic/CEC/DCEC_Library": {
+      "mode": "160000",
+      "oid": "a4beb5b3280595be6b9221cac3c91dd019e6d371",
+      "type": "commit"
+    },
+    "ipfs_datasets_py/logic/CEC/Eng-DCEC": {
+      "mode": "160000",
+      "oid": "df518c21ef81b8001e6db59f5fd70f10cc04ff6c",
+      "type": "commit"
+    },
+    "ipfs_datasets_py/logic/CEC/ShadowProver": {
+      "mode": "160000",
+      "oid": "3060ede1ac1ec3f8ef9f9c9e41386aed1dbbe7f9",
+      "type": "commit"
+    },
+    "ipfs_datasets_py/logic/CEC/Talos": {
+      "mode": "160000",
+      "oid": "e0b7650d3e3a403924773f8253e924c719748d36",
+      "type": "commit"
+    },
+    "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type": {
+      "mode": "160000",
+      "oid": "d58933631a5362b1e2fdc45254ef620fa231223a",
+      "type": "commit"
+    },
+    "ipfs_datasets_py/multimedia/omni_converter_mk2": {
+      "mode": "160000",
+      "oid": "c1d9b0d517cea022516aab5b5d8fa5e3bc9a65aa",
+      "type": "commit"
+    },
+    "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine": {
+      "mode": "160000",
+      "oid": "0e635cba586e8f6f6ea8126e3b1668b3e675c029",
+      "type": "commit"
+    },
+    "ipfs_kit_py": {
+      "mode": "160000",
+      "oid": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "type": "commit"
+    }
+  },
+  "actual_incoming_raw_tree": {
+    "all_raw_entry_count": 31480,
+    "mode_counts": {
+      "100644": 31107,
+      "100755": 359,
+      "120000": 4,
+      "160000": 10
+    },
+    "raw_bytes": 4531161,
+    "raw_sha256": "a19267adf98ee93b7f43831d1a78d4b8a28a9f88f49aa2b4f7bba8f3c9d7039d"
+  },
+  "actual_incoming_symlinks": {
+    "Dockerfile": {
+      "mode": "120000",
+      "oid": "93c313e63109b53d8354a76a5feb0d55af5ae033",
+      "type": "blob"
+    },
+    "docker-compose.yml": {
+      "mode": "120000",
+      "oid": "3ccbe9c54fc0917f220e81e75ac108f233425f67",
+      "type": "blob"
+    },
+    "docker-entrypoint.sh": {
+      "mode": "120000",
+      "oid": "53701225067752b1eb310846e6fb9d72fb007c78",
+      "type": "blob"
+    },
+    "ipfs_datasets_py/static/admin/webfonts": {
+      "mode": "120000",
+      "oid": "6bb59df539ec3a1bffeb7156906f49e911d6a441",
+      "type": "blob"
+    }
+  },
+  "actual_merge": "6a1c75771a8eff0ed1fa21387c6c493f3c02cd5d",
+  "actual_merge_raw_tree": {
+    "all_raw_entry_count": 31621,
+    "mode_counts": {
+      "100644": 31248,
+      "100755": 359,
+      "120000": 4,
+      "160000": 10
+    },
+    "raw_bytes": 4554833,
+    "raw_sha256": "1e149ac8e96508ae26ca5d9226b3bff462e98c8a7ee71e78d04ec0a8a6a2ab97"
+  },
+  "actual_parents": [
+    "1e7a783101df8790ed1ebcafc378766db8ae4886",
+    "99c0b7b0340a76d587dd4fdc77f2db28f5fd7ae3"
+  ],
+  "all10_gitlinks_preserved": true,
+  "all141_reviewed_head_blobs_and_manifest_rawpins_exact": true,
+  "all4_symlinks_preserved": true,
+  "all_actual_incoming_entries_exact": true,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-balanced-execution-20261014-01/source-github-merge-v01.json": {
+      "bytes": 22323,
+      "path": "/home/barberb/lift_coding/artifacts/legal-balanced-execution-20261014-01/source-github-merge-v01.json",
+      "sha256": "601c7e863976f93d1cefb4ebc247c8fbfe259ce088e1993031368ddc704f65e3"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-balanced-execution-20261014-01/source-merge-independent-review-v01.json": {
+      "bytes": 5528,
+      "path": "/home/barberb/lift_coding/artifacts/legal-balanced-execution-20261014-01/source-merge-independent-review-v01.json",
+      "sha256": "520471ac311ac69bb480817d9135173f412ce1b5cb19d6a7e57255a62597f84c"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-balanced-execution-20261014-01/source-merge-root-observation-v01.json": {
+      "bytes": 2266,
+      "path": "/home/barberb/lift_coding/artifacts/legal-balanced-execution-20261014-01/source-merge-root-observation-v01.json",
+      "sha256": "7df590f0f91e454b627ef115dfb288fc36124e2799655d8fb9ec58da9a596e49"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-balanced-execution-20261014-01/source-publication-manifest-v01.json": {
+      "bytes": 60039,
+      "path": "/home/barberb/lift_coding/artifacts/legal-balanced-execution-20261014-01/source-publication-manifest-v01.json",
+      "sha256": "48ecd61e12e3fb9370fbd64fd787fa3c53b2c386a5987d733b3510201f8c1441"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-balanced-execution-20261014-01/source-publication-root-review-v01.json": {
+      "bytes": 139395,
+      "path": "/home/barberb/lift_coding/artifacts/legal-balanced-execution-20261014-01/source-publication-root-review-v01.json",
+      "sha256": "bc9ead53d1708e5e95690766f727a6e0bc9208e5e4e86fdc4554357ec706dc38"
+    }
+  },
+  "canonical_Git_commands": 0,
+  "census_calls": 0,
+  "checkpoint_JSON_parses": 0,
+  "correction": "V01 reported31478 incoming/31619 merge entries. Direct repeated raw-z enumeration establishes31480/31621 and supersedes those count/digest fields; no filtering by mode or file type is used. The earlier discrepancy is not causally attributed.",
+  "findings": [],
+  "limits": [
+    "No numerical/model/runtime/hostedCI test is performed or claimed. This compares exact actual incoming tree plus reviewed additions, not stale-base blob identities."
+  ],
+  "manifest": {
+    "bytes": 60039,
+    "path": "/home/barberb/lift_coding/artifacts/legal-balanced-execution-20261014-01/source-publication-manifest-v01.json",
+    "sha256": "48ecd61e12e3fb9370fbd64fd787fa3c53b2c386a5987d733b3510201f8c1441"
+  },
+  "model_calls": 0,
+  "no_model_source_overrides": true,
+  "numerical_imports": 0,
+  "observed_at_utc": "2026-10-14T08:26:11.621425+00:00",
+  "only_declared_regular_ADD_paths": true,
+  "passed": true,
+  "prior_review": {
+    "bytes": 5528,
+    "path": "/home/barberb/lift_coding/artifacts/legal-balanced-execution-20261014-01/source-merge-independent-review-v01.json",
+    "sha256": "520471ac311ac69bb480817d9135173f412ce1b5cb19d6a7e57255a62597f84c"
+  },
+  "private_body_reads": 0,
+  "resource_API_calls": 0,
+  "reviewed_base": "b114fc385a9eff043cae01cdd47c4d25d189d934",
+  "reviewed_head": "99c0b7b0340a76d587dd4fdc77f2db28f5fd7ae3",
+  "root_strict_observation": {
+    "bytes": 2266,
+    "path": "/home/barberb/lift_coding/artifacts/legal-balanced-execution-20261014-01/source-merge-root-observation-v01.json",
+    "sha256": "7df590f0f91e454b627ef115dfb288fc36124e2799655d8fb9ec58da9a596e49"
+  },
+  "schema": "conditions-balanced-source-merge-independent-review/v2",
+  "selected_base_ancestor_incoming_and_merge": true,
+  "source_publication_review": {
+    "bytes": 139395,
+    "path": "/home/barberb/lift_coding/artifacts/legal-balanced-execution-20261014-01/source-publication-root-review-v01.json",
+    "sha256": "bc9ead53d1708e5e95690766f727a6e0bc9208e5e4e86fdc4554357ec706dc38"
+  },
+  "source_repo": "/home/barberb/lift_coding/artifacts/legal-balanced-execution-20261014-01/datasets",
+  "supersedes_V01_tree_counts_and_digests": true
+}
