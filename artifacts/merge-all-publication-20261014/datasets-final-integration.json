@@ -1,0 +1,61 @@
+{
+  "timestamp": "2026-10-14T04:05:05.196998+00:00",
+  "base": "1f9fac75490660b24a475f7b1ef472595ce8e1ec",
+  "head": "0897aa1d4252e175477addac5417028241de596a",
+  "worktree": "/home/barberb/lift_coding_worktrees/merge-all-datasets-20261014",
+  "frozen_source_heads": [
+    "50c2ac8076c93d249bde97678d91d4907f43b15e",
+    "929647b4db11314e619d4bdd87725a1a2e8703cb"
+  ],
+  "merges": [
+    {
+      "input": "50c2ac8076c93d249bde97678d91d4907f43b15e",
+      "output": "ab458446363b91f90505b6a50f508d55fc496327",
+      "conflicts": [],
+      "tree_changed": false,
+      "review": "History-only source merge: source tree equals earlier already-integrated 0976629b tree e7e4f44e626ac66c7866d31d99d6fbab9e275766."
+    },
+    {
+      "input": "929647b4db11314e619d4bdd87725a1a2e8703cb",
+      "output": "0897aa1d4252e175477addac5417028241de596a",
+      "conflicts": [],
+      "tree_changed": true,
+      "review": "Explicit opt-in fenced claims facade reuses the existing native SpanCache owner connection; queued scoped loopback Quack gateway does not activate a production service or migrate legacy writers."
+    }
+  ],
+  "changed_paths": [
+    "docs/autoencoders/control_plane_and_sync.md",
+    "docs/autoencoders/full_logic_reports.md",
+    "ipfs_datasets_py/duckdb_control/span_cache_claims_quack.py",
+    "ipfs_datasets_py/logic/autoformal/span_cache.py",
+    "ipfs_datasets_py/logic/autoformal/span_cache_claims.py",
+    "tests/unit/duckdb_control/test_span_cache_claims_quack.py",
+    "tests/unit/logic/autoformal/test_span_cache_claims.py"
+  ],
+  "required_authored_local_tests": [
+    "tests/unit/logic/autoformal/test_span_cache_claims.py",
+    "tests/unit/duckdb_control/test_span_cache_claims_quack.py",
+    "tests/unit/logic/test_span_cache.py",
+    "tests/unit/logic/test_span_cache_quack.py"
+  ],
+  "native_test_requirements": {
+    "IPFS_DATASETS_RUN_NATIVE_STORAGE_PROBE": "1 enables three new private loopback endpoint cases",
+    "installed_extensions": "Existing pinned DuckDB/Quack/HTTPFS; no downloads",
+    "legacy_regression": "test_span_cache_quack.py already uses a private native loopback endpoint without this opt-in marker",
+    "resource_policy": "Use isolated resource store, one CPU slot and thread counts; synthetic temporary catalogs only."
+  },
+  "known_contract_limits": [
+    "Explicit prototype opt-in; legacy helpers do not acquire new fencing guarantees.",
+    "Scope authorization is an owner-supplied contract; bearer holders can read their endpoint reply table.",
+    "Native MVCC guard relies on plain UPDATE affected-row count semantics, covered by actual overlapping-owner transaction tests.",
+    "Bounded oversized evidence is refused; no immutable data-plane exporter or production ingestion switch is introduced."
+  ],
+  "source_review_path": "/home/barberb/lift_coding/maintenance/merge-all-20261014-01/datasets-late-source-review.json",
+  "max_changed_file_bytes": 79343,
+  "credential_marker_matches": 0,
+  "syntax_errors": 0,
+  "diff_check_passed": true,
+  "worktree_status": "",
+  "tests_executed": false,
+  "push_executed": false
+}

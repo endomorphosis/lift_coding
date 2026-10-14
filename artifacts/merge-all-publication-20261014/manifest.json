@@ -1,0 +1,157 @@
+{
+  "schema": "reviewed-branch-integration-publication@1",
+  "created_at": "2026-10-14T04:53:45.319042+00:00",
+  "scope": "Frozen local branch/worktree committed heads, reviewed IPFS Kit working-tree patch, and concurrent published main changes. Original dirty checkouts and all branch/worktree refs are preserved.",
+  "all_raw_branches_merged": false,
+  "publication_policy": "Normal fast-forward pushes only; remote main changes merged without force pushes. Oversized raw historical ancestry and unresolved source snapshots remain preserved.",
+  "root_base_before_publication": "0c5daa25f4d979acc8bd14c4c798d741e035400d",
+  "published_children": {
+    "ipfs_accelerate_py": "e4b8c4bba2fc7d5b7484b9021cbb9a5bcfc5e7d4",
+    "ipfs_datasets_py": "0897aa1d4252e175477addac5417028241de596a",
+    "ipfs_kit_py": "40c98c71b95be750509ffdb21e7e5494d91b4e79"
+  },
+  "integration_repairs": {
+    "57ca07844e": "Observe indexed candidate snapshots with closed bindings.",
+    "fbe656d483": "Preserve provider identity during policy checks; use real local archive fixtures.",
+    "e1480e395f": "Align stale retry tests with preserved validation obligations.",
+    "91310e065e": "Drop unused translated component census when native input wins.",
+    "8a1d26c6a8": "Drop orphaned metadata displacement only when the final selector rejects metadata."
+  },
+  "validation": {
+    "results": "test-results.json",
+    "benchmark": "1942 passed after merge repairs",
+    "provider_context": "2647 passed and two intentional skips in initial broad run; all12 initial failures resolved by focused reruns; final expanded nine-module run210 passed.",
+    "legal": "791 passed plus4 subtests in corrected full run; remaining dependency isolation module11 passed, resolving all9 setup errors.",
+    "datasets": "1168 passed plus22 subtests;9 additional adapter tests passed;206 final cache/claims tests passed with native loopback probes enabled.",
+    "kit": "132 passed",
+    "concurrent_main": "10 acceptance-binding tests passed after merge of03ac037734",
+    "limits": "Local/authored integration tests, mocked provider traffic, and installed local Lean/Z3 fixtures; no paid live provider campaign or full solver stress campaign run for this publication.",
+    "resource_policy": "Serial pytest processes, one resource CPU slot, BLAS/OpenMP threads=1, isolated admission/seal paths.",
+    "environment_repairs": [
+      "Disable inherited sparse checkout only in integration worktree.",
+      "Use module pytest entrypoint for multiprocessing.",
+      "Use existing venv with Arrow for isolated children; disable user site and bytecode writes with an empty temporary bytecode prefix.",
+      "Pin existing Lean4.34.1 executable for Doctor composition tests."
+    ],
+    "static_audits": [
+      "final-static-audit.json",
+      "final-static-delta-audit.json"
+    ],
+    "inherited_whitespace": "Nine pre-existing whitespace findings in three generated evidence/plan files retained byte-for-byte. New source changes pass diff checks.",
+    "hosted_ci": "GitHub accepted the authorized main push. documentation-gates and qualification jobs could not start because GitHub reports the account is locked due to a billing issue. Local validation passed; hosted CI has not qualified this revision. See hosted-ci.json."
+  },
+  "preserved_exceptions": [
+    "exceptions.json",
+    "nested-exceptions.json"
+  ],
+  "evidence": {
+    "accelerate-benchmark-rerun-tests.xml": {
+      "bytes": 439199,
+      "sha256": "d98be94d81e999b27decb814e3d07755ea27704981ba14ac25ee2a14c22dbe41"
+    },
+    "accelerate-benchmark-tests.txt": {
+      "bytes": 3034,
+      "sha256": "607aac9ce5e8ada60ba59a6b5d9928b0914c802ab0d5c09fcfbc462d7b39a0f9"
+    },
+    "accelerate-concurrent-tests.txt": {
+      "bytes": 54,
+      "sha256": "deed2b2cb93e0453b548f089cccc984e5b51f11970f81ea813ea47a03e242d31"
+    },
+    "accelerate-concurrent-tests.xml": {
+      "bytes": 1867,
+      "sha256": "20849bd51e12d9def76f1d3ccf27893e9e269289e2f100d5f2ce9dbdd226faf6"
+    },
+    "accelerate-legal-dependency-tests.txt": {
+      "bytes": 62,
+      "sha256": "05fb455a8381d0da47d598f6b3e7f4d574f57375b15aff87b303b5a3ad557038"
+    },
+    "accelerate-legal-dependency-tests.xml": {
+      "bytes": 1938,
+      "sha256": "a60ae5bef29ef522b73b726f831db0676e33d2b0403b12960570a476813a917d"
+    },
+    "accelerate-legal-tests.txt": {
+      "bytes": 1011,
+      "sha256": "45434cca8a7cac1eeed5d754222395d666feecd66ace6fe59488c80f7a104c0c"
+    },
+    "accelerate-provider-context-tests.txt": {
+      "bytes": 3763,
+      "sha256": "71824a613787e6b1a6de934da30421079753232e3d1c3598eef75549064ddb2e"
+    },
+    "accelerate-provider-final-tests.txt": {
+      "bytes": 403,
+      "sha256": "62b8c053f77133bed32b809376dd7f5e5ea100e3dc72f10fb75f6e79ae5a879d"
+    },
+    "accelerate-provider-final-tests.xml": {
+      "bytes": 34847,
+      "sha256": "fd1ec23c122c8933cbf07f549ea144c7c3510ee011d1adc0b8f6eca2dd0e9803"
+    },
+    "accelerate-provider-rerun-tests.txt": {
+      "bytes": 267,
+      "sha256": "0ecad81c69ce3b274e7108b855dc6123d305f2af9d08d484906e522621a7c1b7"
+    },
+    "benchmark-merge-decisions.json": {
+      "bytes": 14388,
+      "sha256": "be3e8a952b1fcf52971f5a9a365f4d15d738f34dbfd061d9a25f4b80d2186c5f"
+    },
+    "datasets-additional-tests.txt": {
+      "bytes": 95,
+      "sha256": "de7d761c6ffdba3c0cbe649a4ca905f0c2cb08f86f078c6f5b4ddd6b6a8efd4a"
+    },
+    "datasets-additional-tests.xml": {
+      "bytes": 2128,
+      "sha256": "0a9c5ae45ee7be4b99046492ce276239093ae3d8025ce38a13a366b966908830"
+    },
+    "datasets-final-integration.json": {
+      "bytes": 3081,
+      "sha256": "2420515b2dd99d48b7a1b266288e6b7dd2391294fb738caaf5f433dc26cd675b"
+    },
+    "datasets-final-tests.txt": {
+      "bytes": 190,
+      "sha256": "f90f58761b39e20c528fdfc82fa886044e51b62c2b32bda6678a42f7ae2d028c"
+    },
+    "datasets-final-tests.xml": {
+      "bytes": 32683,
+      "sha256": "05d135272fc83891f16441d69fa5bb5817beebd8d94abd9340386a1ca74a2622"
+    },
+    "datasets-focused-tests.txt": {
+      "bytes": 1824,
+      "sha256": "56b08ec10a7cdb42b258ab0bc4ffeb6ec31d5208b6d409991ca26b8beaa0ab32"
+    },
+    "datasets-tests.xml": {
+      "bytes": 214451,
+      "sha256": "a672f89a8060b423fccef2868883d79f4ef216ebbc266801c6a0dd032519d93e"
+    },
+    "exceptions.json": {
+      "bytes": 18009,
+      "sha256": "298bf81e275421837997cccdae429a1ae6dcea3408064681631a8ded852e4330"
+    },
+    "final-static-audit.json": {
+      "bytes": 10482,
+      "sha256": "42cda03ca8120db866846a0f02113b364a0cb3baf21b97f708b24276512aefeb"
+    },
+    "final-static-delta-audit.json": {
+      "bytes": 742,
+      "sha256": "1188d80c585ad2cd038cb1429c2d0f017fe247909f513965f7f153ccf246f348"
+    },
+    "kit-tests.xml": {
+      "bytes": 21533,
+      "sha256": "3e5adfcfe7f4ba0825a1d6f5822a80a490ef6d9c3cd47041b42d696c9a3a0fb3"
+    },
+    "nested-exceptions.json": {
+      "bytes": 21832,
+      "sha256": "40e1408fa76a93ddbcf35cd405169b4fb771a0e3f8d7d2e0c1d18d56cf07f863"
+    },
+    "runtime-merge-audit.json": {
+      "bytes": 8443,
+      "sha256": "5be9928e1af2f6a3e4ad8145d8a4fed31141a18aa3a9758d9d056537318beee5"
+    },
+    "test-results.json": {
+      "bytes": 58318,
+      "sha256": "f76f32d774da8010c97d38e9f7778f2e5bca36759e0c83d9f13fddc9d318948f"
+    },
+    "hosted-ci.json": {
+      "bytes": 8508,
+      "sha256": "fa62f9f55b5d98934aa8fa2f3a67ce88bc4ea6fc766575d84c52b9f20b08acd4"
+    }
+  }
+}
