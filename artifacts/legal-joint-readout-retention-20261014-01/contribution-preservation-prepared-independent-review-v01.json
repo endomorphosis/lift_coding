@@ -1,0 +1,417 @@
+{
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/hf-publication-attribute-policy-plan-v01.json": {
+      "bytes": 28844,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/hf-publication-attribute-policy-plan-v01.json",
+      "sha256": "ebf2fff457e190df4abf9142ce8d8704d34a61e644ff03854f5706c4ec4b2782"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/root-checkout-intake-v01.json": {
+      "bytes": 3258,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/root-checkout-intake-v01.json",
+      "sha256": "c3900375e6a16fc1d9c599ee220bebc9ee290ef7f72bc4c26fa52d03a776bac6"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-draft-contribution-v01.json": {
+      "bytes": 3114,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-draft-contribution-v01.json",
+      "sha256": "c23d1fb24afc911ad29a348fce1a3fa0b0ea474911c862ef88d3fe3d1a4ba550"
+    }
+  },
+  "default_promotion": false,
+  "findings": [],
+  "later_requirements": {
+    "HF_and_report_prose": [
+      "Call the release an experimental joint-readout retention decoder checkpoint and report actual raw and joint complete-IR counts by named scope, including any regressions and failure of preregistered criteria. Successful optimization, upload and source integration do not prove statutory semantic fidelity.",
+      "State that this run has latent conditioning disabled with a 384D placeholder; it does not validate active 8D, 384D or 768D conditioning, independent US Code gold, or a fresh Lean build. Keep default promotion false.",
+      "Document one planned 146-byte checkpoint-specific .gitattributes append if actually required, its independently verified immutable commit and the subsequent additive payload baseline. Overall additions_only must be false when that preexisting file changes; payload additions_only remains true only after exact verification.",
+      "Do not claim portable numerical reload or automatic Git LFS clone materialization from opaque-byte download verification. Do not update the repository default model card to promote this experimental result."
+    ],
+    "actual_result_and_HF_gates": [
+      "Bind the actual qualified 62-file output freeze and terminal audit, primary analysis, independent recount and independent scientific result review. No future pins or accuracy scores may be inferred from this prepared review.",
+      "Bind the actual HF prepared payload, immutable publication revision and independent forced raw readback of every new file. Keep the current result status and source-only status distinct from successful upload."
+    ],
+    "final_custody": [
+      "Recheck the four approved canonical raw HEAD/index anchors only, compare to their retained values and state their precise observational scope. This review did not reread canonical anchors.",
+      "Keep the training checkout and all sealed scientific source/contract pins unchanged. Incoming agent work belongs in the integration clone rather than repointing frozen package paths."
+    ],
+    "root_stage_PR_and_merge": [
+      "Begin from the current reviewed owned root main, retaining all newer agent commits, all eight other gitlinks and the node_modules symlink. Update only external/ipfs_datasets to the actual merged source commit plus explicitly allowed F17 public evidence/report additions.",
+      "If git update-index is used for the owned external/ipfs_datasets gitlink, restore its sparse skip-worktree flag afterward; do not initialize submodules or change the canonical tree.",
+      "Before commit, compare every root index/tree entry against the current incoming root main: all existing entries must be exact except that sole intended datasets gitlink. Verify the complete finite added pathset and no removals.",
+      "Create/update the root PR from the owned branch, inspect current remote main/head and actual checks, merge only its exact reviewed head, and independently verify the resulting actual tree against its actual incoming parent."
+    ],
+    "source_PR_and_merge": [
+      "Rewrite the PR title/body for the final implementation and observed scientific outcome; include honest local validation, actual HF link/revision and current hosted CI observations. Do not retain the old claim that training is still pending once the actual result review completes.",
+      "Immediately before merge, read the current remote main and PR head, bind exact reviewed head SHA, inspect any new incoming main changes in the owned integration clone, and preserve every incoming tree entry outside the finite owned additions. A prepared review does not cover future uninspected drift.",
+      "After exact reviewed merge, record the actual merge commit, parents, tree, final diff against its actual incoming first parent and raw equality of the two authored source files and approved evidence. Do not infer the merge SHA from the draft head."
+    ],
+    "source_stage": [
+      "Build an explicit finite public allowlist for F17 recipe sources, controls, qualified public evidence and a final outcome report under docs/implementation/reports/evidence/legal-joint-readout-retention-20261014-01 and the selected report path. Preserve failed and superseded evidence under its recorded scope.",
+      "Exclude private native ledger/scheduler bodies, private resource wrappers, diagnostic logs, credentials, foreign artifacts and checkpoint/raw-output payloads from Git; weights and captures use only the separately qualified HF release. Qualify public child log contents before any inclusion.",
+      "Review exact working bytes, Git index blobs, modes, source hashes and the entire staged pathset against that allowlist. Existing model/test bytes must remain the frozen hashes unless a separately reviewed source change is explicitly made.",
+      "Use git add --sparse -f -- with explicit paths only in the owned clone; no broad add or canonical Git command."
+    ]
+  },
+  "limitations": [
+    "No actual F17 outputs, checkpoint, reference or result JSON were opened. Scientific accuracy and complete output freeze status are outside this review.",
+    "Source PR was open and draft at this observation; mergeability was unknown. No future source/root commit or HF publication is approved or claimed complete.",
+    "The numerical training and terminal-audit status supplied by the parent were not independently evaluated here.",
+    "Root preservation is relative to the exact current intake tree. Its newer ipfs_accelerate gitlink and six router publication additions are preserved; this review does not assert every entry is unchanged relative to F16."
+  ],
+  "merge_approval": false,
+  "new_HF_weights_publication_claimed": false,
+  "observed_at_utc": "2026-10-14T19:01:08.109627+00:00",
+  "operations": {
+    "Git_ref_or_index_or_worktree_mutations": 0,
+    "canonical_Git_commands": 0,
+    "checkpoint_or_result_or_reference_JSON_parses": 0,
+    "commands": [
+      {
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration",
+        "returncode": 0
+      },
+      {
+        "argv": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/root",
+        "returncode": 0
+      },
+      {
+        "argv": [
+          "git",
+          "status",
+          "--porcelain=v1",
+          "--untracked-files=no"
+        ],
+        "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration",
+        "returncode": 0
+      },
+      {
+        "argv": [
+          "git",
+          "status",
+          "--porcelain=v1",
+          "--untracked-files=no"
+        ],
+        "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/root",
+        "returncode": 0
+      },
+      {
+        "argv": [
+          "git",
+          "ls-tree",
+          "-rz",
+          "df62a235072c8efeb9c79763f7c05f3006e8d1bf"
+        ],
+        "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration",
+        "returncode": 0
+      },
+      {
+        "argv": [
+          "git",
+          "ls-tree",
+          "-rz",
+          "074bdb34524d15d7d955562202fd7b81714169e1"
+        ],
+        "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration",
+        "returncode": 0
+      },
+      {
+        "argv": [
+          "git",
+          "ls-tree",
+          "-rz",
+          "53c06431d0ca7e57fdf74a67e21c6b61530f5042"
+        ],
+        "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/root",
+        "returncode": 0
+      },
+      {
+        "argv": [
+          "git",
+          "ls-tree",
+          "-rz",
+          "0bb1beb9330f4e6122f9c6debde9af0ffeb524c6"
+        ],
+        "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/root",
+        "returncode": 0
+      },
+      {
+        "argv": [
+          "git",
+          "cat-file",
+          "blob",
+          "074bdb34524d15d7d955562202fd7b81714169e1:ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_joint_readout_retention.py"
+        ],
+        "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration",
+        "returncode": 0
+      },
+      {
+        "argv": [
+          "git",
+          "cat-file",
+          "blob",
+          "074bdb34524d15d7d955562202fd7b81714169e1:tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_joint_readout_retention_contracts.py"
+        ],
+        "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration",
+        "returncode": 0
+      },
+      {
+        "argv": [
+          "git",
+          "merge-base",
+          "--is-ancestor",
+          "0bb1beb9330f4e6122f9c6debde9af0ffeb524c6",
+          "53c06431d0ca7e57fdf74a67e21c6b61530f5042"
+        ],
+        "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/root",
+        "returncode": 0
+      },
+      {
+        "argv": [
+          "gh",
+          "api",
+          "repos/endomorphosis/ipfs_datasets_py/pulls/1305"
+        ],
+        "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration",
+        "returncode": 0
+      },
+      {
+        "argv": [
+          "gh",
+          "api",
+          "repos/endomorphosis/ipfs_datasets_py/commits/074bdb34524d15d7d955562202fd7b81714169e1/check-runs"
+        ],
+        "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration",
+        "returncode": 0
+      },
+      {
+        "argv": [
+          "gh",
+          "api",
+          "repos/endomorphosis/ipfs_datasets_py/check-runs/116014658789/annotations"
+        ],
+        "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration",
+        "returncode": 0
+      },
+      {
+        "argv": [
+          "git",
+          "rev-parse",
+          "074bdb34524d15d7d955562202fd7b81714169e1^{tree}"
+        ],
+        "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration",
+        "returncode": 0
+      },
+      {
+        "argv": [
+          "git",
+          "show",
+          "--format=%P",
+          "--no-patch",
+          "074bdb34524d15d7d955562202fd7b81714169e1"
+        ],
+        "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration",
+        "returncode": 0
+      },
+      {
+        "argv": [
+          "git",
+          "rev-parse",
+          "53c06431d0ca7e57fdf74a67e21c6b61530f5042^{tree}"
+        ],
+        "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/root",
+        "returncode": 0
+      }
+    ],
+    "model_or_numerical_imports_or_calls": 0,
+    "private_native_body_or_log_reads": 0,
+    "read_only_GitHub_API_calls": 3,
+    "remote_writes": 0,
+    "source_or_runtime_execution": 0,
+    "tests_executed_by_this_review": 0
+  },
+  "passed": true,
+  "reviewer": "/root/integration_review_f17",
+  "root": {
+    "F17_changes_already_staged_or_committed": false,
+    "added_since_F16": [
+      "artifacts/router-source-delivery-fences-publication-20261014/child-ci-observation.json",
+      "artifacts/router-source-delivery-fences-publication-20261014/manifest.json",
+      "artifacts/router-source-delivery-fences-publication-20261014/observe_hosted_ci.py",
+      "artifacts/router-source-delivery-fences-publication-20261014/parent-checks.json",
+      "artifacts/router-source-delivery-fences-publication-20261014/publication_checker.py",
+      "implementation_plan/docs/128-supervisor-source-delivery-fences-2026-10-14.md"
+    ],
+    "applicable_scoped_AGENTS_paths": [],
+    "changed_since_F16": {
+      "external/ipfs_accelerate": {
+        "current": "160000 commit e21d6e7b41f14f3994b0fd8556bfcd341d9e888c",
+        "prior": "160000 commit cb104896f55a28352feb8cd35c4b9991144c933a"
+      }
+    },
+    "checkout": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/root",
+    "entries": 37673,
+    "gitlinks": {
+      "JevOps": "160000 commit 9af1ebb6a4245ce2b4e673ac277e4988da4d5caa",
+      "Mcp-Plus-Plus": "160000 commit 628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0",
+      "external/ipfs_accelerate": "160000 commit e21d6e7b41f14f3994b0fd8556bfcd341d9e888c",
+      "external/ipfs_datasets": "160000 commit 4b50ae4aac65da9166bd3b24608f32ba7e9fb23d",
+      "external/ipfs_kit": "160000 commit 40c98c71b95be750509ffdb21e7e5494d91b4e79",
+      "external/meta-wearables-dat-android": "160000 commit 4e56e1864a5e78194bababc3a68775c4196cbed0",
+      "external/meta-wearables-dat-ios": "160000 commit 2b5695d16a710f3d2d7341f88570b86d01723d50",
+      "hallucinate_app": "160000 commit ffcf5ff3b3389c95ba53e9f1be45f89fa96c5ef6",
+      "swissknife": "160000 commit 30ade8e512093f4086ad881ac2189e65e556e97c"
+    },
+    "head": "53c06431d0ca7e57fdf74a67e21c6b61530f5042",
+    "matches_intake_receipt_exact": true,
+    "prior_F16_is_ancestor": true,
+    "prior_F16_merge": "0bb1beb9330f4e6122f9c6debde9af0ffeb524c6",
+    "prior_entries": 37667,
+    "raw_tree_bytes": 6130926,
+    "raw_tree_sha256": "1b98e642e86a2cd86c66472e1e3222c115ba499fe9dccf8bc700261374afe3ad",
+    "removed_since_F16": [],
+    "symlinks": {
+      "visual_check/fv_state/audit2/node_modules": "120000 blob e480c2019a49bbf422e32c4391341c4b3b6c17ce"
+    },
+    "tracked_worktree_clean": true,
+    "tree": "93616625e46981b101d3527dea75a960ae846606"
+  },
+  "schema": "joint-readout-retention-contribution-preservation-prepared-independent-review/v1",
+  "scientific_success": null,
+  "scope": "Read-only independent review of concrete source contribution and owned root intake. Prepared review only; not a final source/root stage, model-result review, HF publication or merge approval.",
+  "source": {
+    "applicable_scoped_AGENTS_paths": [],
+    "checkout": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration",
+    "detached_validation": "Existing root receipt records nine passing detached contract tests before the incoming merge; this reviewer verified exact source/test bytes after that merge and did not execute tests or model code.",
+    "files": [
+      {
+        "all_three_byte_equal": true,
+        "blob_bytes": 80912,
+        "blob_sha256": "34db345e9b0f3daa04b5b8caee4dfa389c48598ea79cd0da529415ea5bb7c502",
+        "classes": [
+          "SpanJointReadoutRetentionAdapterDecoder"
+        ],
+        "copies": [
+          {
+            "bytes": 80912,
+            "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_joint_readout_retention.py",
+            "sha256": "34db345e9b0f3daa04b5b8caee4dfa389c48598ea79cd0da529415ea5bb7c502"
+          },
+          {
+            "bytes": 80912,
+            "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_joint_readout_retention.py",
+            "sha256": "34db345e9b0f3daa04b5b8caee4dfa389c48598ea79cd0da529415ea5bb7c502"
+          }
+        ],
+        "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_joint_readout_retention.py",
+        "test_method_count": 0
+      },
+      {
+        "all_three_byte_equal": true,
+        "blob_bytes": 24160,
+        "blob_sha256": "8ec7efa2f52ddfc3c1ec0421c387a1a9f221671ff9b5d22d4761d56d463c00d5",
+        "classes": [
+          "Contracts"
+        ],
+        "copies": [
+          {
+            "bytes": 24160,
+            "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_joint_readout_retention_contracts.py",
+            "sha256": "8ec7efa2f52ddfc3c1ec0421c387a1a9f221671ff9b5d22d4761d56d463c00d5"
+          },
+          {
+            "bytes": 24160,
+            "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration/tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_joint_readout_retention_contracts.py",
+            "sha256": "8ec7efa2f52ddfc3c1ec0421c387a1a9f221671ff9b5d22d4761d56d463c00d5"
+          }
+        ],
+        "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_joint_readout_retention_contracts.py",
+        "test_method_count": 9
+      }
+    ],
+    "head": "074bdb34524d15d7d955562202fd7b81714169e1",
+    "head_entry_count": 32222,
+    "head_tree": "7b5152dd2a5d12204ca5cddc4d1b9da06643e079",
+    "incoming_entry_count": 32220,
+    "incoming_main": "df62a235072c8efeb9c79763f7c05f3006e8d1bf",
+    "parents": [
+      "34234146fefa2850a785525e6604ed42c4cba58a",
+      "df62a235072c8efeb9c79763f7c05f3006e8d1bf"
+    ],
+    "prior_entries_preserved_exact": 32220,
+    "prior_entry_changes": [],
+    "prior_entry_removals": [],
+    "raw_head_tree_sha256": "1fcf57522072dca58adadfb858c3a826edddd8312d356af9fd0fcd8fbd04d055",
+    "sole_added_paths": [
+      "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_joint_readout_retention.py",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_joint_readout_retention_contracts.py"
+    ],
+    "tracked_worktree_clean": true
+  },
+  "source_pr": {
+    "base_sha": "df62a235072c8efeb9c79763f7c05f3006e8d1bf",
+    "billing_annotation_observed_in_python_check": "The job was not started because your account is locked due to a billing issue.",
+    "changed_files": 2,
+    "check_runs_observed": [
+      {
+        "conclusion": null,
+        "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38611191729/job/116014682955",
+        "id": 116014682955,
+        "name": "Build distribution \ud83d\udce6",
+        "status": "queued"
+      },
+      {
+        "conclusion": null,
+        "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38611191595/job/116014680863",
+        "id": 116014680863,
+        "name": "check-pr-completion",
+        "status": "queued"
+      },
+      {
+        "conclusion": "failure",
+        "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38611185714/job/116014659609",
+        "id": 116014659609,
+        "name": "Analyze (actions)",
+        "status": "completed"
+      },
+      {
+        "conclusion": "failure",
+        "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38611185714/job/116014659423",
+        "id": 116014659423,
+        "name": "Analyze (rust)",
+        "status": "completed"
+      },
+      {
+        "conclusion": "failure",
+        "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38611185714/job/116014659262",
+        "id": 116014659262,
+        "name": "Analyze (javascript-typescript)",
+        "status": "completed"
+      },
+      {
+        "conclusion": "failure",
+        "details_url": "https://github.com/endomorphosis/ipfs_datasets_py/actions/runs/38611185714/job/116014658789",
+        "id": 116014658789,
+        "name": "Analyze (python)",
+        "status": "completed"
+      }
+    ],
+    "draft": true,
+    "head_sha": "074bdb34524d15d7d955562202fd7b81714169e1",
+    "hosted_check_successes": 0,
+    "mergeable": true,
+    "mergeable_state": "unstable",
+    "number": 1305,
+    "other_failed_job_causes_not_independently_generalized": true,
+    "state": "open",
+    "url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1305"
+  }
+}

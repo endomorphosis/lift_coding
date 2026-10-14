@@ -1,0 +1,685 @@
+{
+  "Lake_executed": false,
+  "active_scalar_count": 713,
+  "all32_permission_modality_retained": true,
+  "analysis": {
+    "bytes": 4341301,
+    "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/joint-readout-retention-result-analysis-v01.json",
+    "sha256": "0318c680389de60e9058a36e31bf97bdf52c61d1396ba098bb4f1414acd0dfe4"
+  },
+  "broader_logic_families_qualified": false,
+  "checkpoint": {
+    "bytes": 20467217,
+    "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/joint-readout-retention-20261014-joint-readout-retention-hinge-01/results/cell-checkpoint.json",
+    "sha256": "d38f6481f8cdb35d996d5231d15331855043f20a258180b0af9b1143d477d42e"
+  },
+  "default_promotion": false,
+  "evaluation_scope": "Previously exposed authored engineering diagnostics; no independent statutory gold, unbiased generalization estimate, active latent semantics or new logic-family/Lean admission.",
+  "experimental_optimizer_updates": 32,
+  "exposed_authored_panel_counts": {
+    "authored_dev": {
+      "frozen_F16": {
+        "joint_actor_exact": 61,
+        "joint_exact_ir": 48,
+        "joint_modality_exact": 56,
+        "modality_exact": 52,
+        "raw_actor_exact": 57,
+        "raw_exact_ir": 47,
+        "row_count": 72
+      },
+      "frozen_N11": {
+        "joint_actor_exact": 56,
+        "joint_exact_ir": 46,
+        "joint_modality_exact": 56,
+        "modality_exact": 52,
+        "raw_actor_exact": 51,
+        "raw_exact_ir": 45,
+        "row_count": 72
+      },
+      "initial": {
+        "joint_actor_exact": 59,
+        "joint_exact_ir": 46,
+        "joint_modality_exact": 56,
+        "modality_exact": 52,
+        "raw_actor_exact": 55,
+        "raw_exact_ir": 45,
+        "row_count": 72
+      },
+      "parent_F15": {
+        "joint_actor_exact": 59,
+        "joint_exact_ir": 46,
+        "joint_modality_exact": 56,
+        "modality_exact": 52,
+        "raw_actor_exact": 55,
+        "raw_exact_ir": 45,
+        "row_count": 72
+      },
+      "trained": {
+        "joint_actor_exact": 61,
+        "joint_exact_ir": 48,
+        "joint_modality_exact": 57,
+        "modality_exact": 52,
+        "raw_actor_exact": 55,
+        "raw_exact_ir": 47,
+        "row_count": 72
+      }
+    },
+    "authored_eval": {
+      "frozen_F16": {
+        "joint_actor_exact": 65,
+        "joint_exact_ir": 34,
+        "joint_modality_exact": 55,
+        "modality_exact": 45,
+        "raw_actor_exact": 53,
+        "raw_exact_ir": 27,
+        "row_count": 72
+      },
+      "frozen_N11": {
+        "joint_actor_exact": 63,
+        "joint_exact_ir": 33,
+        "joint_modality_exact": 55,
+        "modality_exact": 45,
+        "raw_actor_exact": 52,
+        "raw_exact_ir": 27,
+        "row_count": 72
+      },
+      "initial": {
+        "joint_actor_exact": 64,
+        "joint_exact_ir": 34,
+        "joint_modality_exact": 55,
+        "modality_exact": 45,
+        "raw_actor_exact": 52,
+        "raw_exact_ir": 27,
+        "row_count": 72
+      },
+      "parent_F15": {
+        "joint_actor_exact": 64,
+        "joint_exact_ir": 34,
+        "joint_modality_exact": 55,
+        "modality_exact": 45,
+        "raw_actor_exact": 52,
+        "raw_exact_ir": 27,
+        "row_count": 72
+      },
+      "trained": {
+        "joint_actor_exact": 65,
+        "joint_exact_ir": 33,
+        "joint_modality_exact": 57,
+        "modality_exact": 47,
+        "raw_actor_exact": 53,
+        "raw_exact_ir": 27,
+        "row_count": 72
+      }
+    },
+    "fresh_challenge": {
+      "frozen_F16": {
+        "joint_actor_exact": 30,
+        "joint_exact_ir": 25,
+        "joint_modality_exact": 33,
+        "modality_exact": 31,
+        "raw_actor_exact": 28,
+        "raw_exact_ir": 25,
+        "row_count": 36
+      },
+      "frozen_N11": {
+        "joint_actor_exact": 30,
+        "joint_exact_ir": 25,
+        "joint_modality_exact": 33,
+        "modality_exact": 31,
+        "raw_actor_exact": 28,
+        "raw_exact_ir": 25,
+        "row_count": 36
+      },
+      "initial": {
+        "joint_actor_exact": 30,
+        "joint_exact_ir": 25,
+        "joint_modality_exact": 33,
+        "modality_exact": 31,
+        "raw_actor_exact": 28,
+        "raw_exact_ir": 25,
+        "row_count": 36
+      },
+      "parent_F15": {
+        "joint_actor_exact": 30,
+        "joint_exact_ir": 25,
+        "joint_modality_exact": 33,
+        "modality_exact": 31,
+        "raw_actor_exact": 28,
+        "raw_exact_ir": 25,
+        "row_count": 36
+      },
+      "trained": {
+        "joint_actor_exact": 30,
+        "joint_exact_ir": 26,
+        "joint_modality_exact": 33,
+        "modality_exact": 30,
+        "raw_actor_exact": 27,
+        "raw_exact_ir": 26,
+        "row_count": 36
+      }
+    },
+    "fresh_dev": {
+      "frozen_F16": {
+        "joint_actor_exact": 26,
+        "joint_exact_ir": 0,
+        "joint_modality_exact": 32,
+        "modality_exact": 8,
+        "raw_actor_exact": 7,
+        "raw_exact_ir": 0,
+        "row_count": 36
+      },
+      "frozen_N11": {
+        "joint_actor_exact": 26,
+        "joint_exact_ir": 0,
+        "joint_modality_exact": 32,
+        "modality_exact": 8,
+        "raw_actor_exact": 7,
+        "raw_exact_ir": 0,
+        "row_count": 36
+      },
+      "initial": {
+        "joint_actor_exact": 26,
+        "joint_exact_ir": 0,
+        "joint_modality_exact": 32,
+        "modality_exact": 8,
+        "raw_actor_exact": 7,
+        "raw_exact_ir": 0,
+        "row_count": 36
+      },
+      "parent_F15": {
+        "joint_actor_exact": 26,
+        "joint_exact_ir": 0,
+        "joint_modality_exact": 32,
+        "modality_exact": 8,
+        "raw_actor_exact": 7,
+        "raw_exact_ir": 0,
+        "row_count": 36
+      },
+      "trained": {
+        "joint_actor_exact": 26,
+        "joint_exact_ir": 0,
+        "joint_modality_exact": 32,
+        "modality_exact": 8,
+        "raw_actor_exact": 7,
+        "raw_exact_ir": 0,
+        "row_count": 36
+      }
+    },
+    "fresh_test": {
+      "frozen_F16": {
+        "joint_actor_exact": 10,
+        "joint_exact_ir": 0,
+        "joint_modality_exact": 18,
+        "modality_exact": 3,
+        "raw_actor_exact": 3,
+        "raw_exact_ir": 0,
+        "row_count": 36
+      },
+      "frozen_N11": {
+        "joint_actor_exact": 9,
+        "joint_exact_ir": 0,
+        "joint_modality_exact": 18,
+        "modality_exact": 3,
+        "raw_actor_exact": 3,
+        "raw_exact_ir": 0,
+        "row_count": 36
+      },
+      "initial": {
+        "joint_actor_exact": 9,
+        "joint_exact_ir": 0,
+        "joint_modality_exact": 18,
+        "modality_exact": 3,
+        "raw_actor_exact": 3,
+        "raw_exact_ir": 0,
+        "row_count": 36
+      },
+      "parent_F15": {
+        "joint_actor_exact": 9,
+        "joint_exact_ir": 0,
+        "joint_modality_exact": 18,
+        "modality_exact": 3,
+        "raw_actor_exact": 3,
+        "raw_exact_ir": 0,
+        "row_count": 36
+      },
+      "trained": {
+        "joint_actor_exact": 10,
+        "joint_exact_ir": 0,
+        "joint_modality_exact": 18,
+        "modality_exact": 3,
+        "raw_actor_exact": 3,
+        "raw_exact_ir": 0,
+        "row_count": 36
+      }
+    },
+    "fresh_tune": {
+      "frozen_F16": {
+        "joint_actor_exact": 28,
+        "joint_exact_ir": 19,
+        "joint_modality_exact": 29,
+        "modality_exact": 10,
+        "raw_actor_exact": 11,
+        "raw_exact_ir": 8,
+        "row_count": 36
+      },
+      "frozen_N11": {
+        "joint_actor_exact": 27,
+        "joint_exact_ir": 19,
+        "joint_modality_exact": 29,
+        "modality_exact": 10,
+        "raw_actor_exact": 11,
+        "raw_exact_ir": 8,
+        "row_count": 36
+      },
+      "initial": {
+        "joint_actor_exact": 28,
+        "joint_exact_ir": 19,
+        "joint_modality_exact": 29,
+        "modality_exact": 10,
+        "raw_actor_exact": 11,
+        "raw_exact_ir": 8,
+        "row_count": 36
+      },
+      "parent_F15": {
+        "joint_actor_exact": 28,
+        "joint_exact_ir": 19,
+        "joint_modality_exact": 29,
+        "modality_exact": 10,
+        "raw_actor_exact": 11,
+        "raw_exact_ir": 8,
+        "row_count": 36
+      },
+      "trained": {
+        "joint_actor_exact": 29,
+        "joint_exact_ir": 21,
+        "joint_modality_exact": 30,
+        "modality_exact": 11,
+        "raw_actor_exact": 13,
+        "raw_exact_ir": 9,
+        "row_count": 36
+      }
+    },
+    "old_authored_eval": {
+      "frozen_F16": {
+        "joint_actor_exact": 64,
+        "joint_exact_ir": 53,
+        "joint_modality_exact": 59,
+        "modality_exact": 56,
+        "raw_actor_exact": 59,
+        "raw_exact_ir": 50,
+        "row_count": 72
+      },
+      "frozen_N11": {
+        "joint_actor_exact": 61,
+        "joint_exact_ir": 51,
+        "joint_modality_exact": 59,
+        "modality_exact": 56,
+        "raw_actor_exact": 56,
+        "raw_exact_ir": 48,
+        "row_count": 72
+      },
+      "initial": {
+        "joint_actor_exact": 63,
+        "joint_exact_ir": 53,
+        "joint_modality_exact": 59,
+        "modality_exact": 56,
+        "raw_actor_exact": 58,
+        "raw_exact_ir": 50,
+        "row_count": 72
+      },
+      "parent_F15": {
+        "joint_actor_exact": 63,
+        "joint_exact_ir": 53,
+        "joint_modality_exact": 59,
+        "modality_exact": 56,
+        "raw_actor_exact": 58,
+        "raw_exact_ir": 50,
+        "row_count": 72
+      },
+      "trained": {
+        "joint_actor_exact": 64,
+        "joint_exact_ir": 55,
+        "joint_modality_exact": 61,
+        "modality_exact": 58,
+        "raw_actor_exact": 60,
+        "raw_exact_ir": 52,
+        "row_count": 72
+      }
+    },
+    "old_tune": {
+      "frozen_F16": {
+        "joint_actor_exact": 95,
+        "joint_exact_ir": 93,
+        "joint_modality_exact": 96,
+        "modality_exact": 96,
+        "raw_actor_exact": 95,
+        "raw_exact_ir": 93,
+        "row_count": 96
+      },
+      "frozen_N11": {
+        "joint_actor_exact": 96,
+        "joint_exact_ir": 94,
+        "joint_modality_exact": 96,
+        "modality_exact": 96,
+        "raw_actor_exact": 96,
+        "raw_exact_ir": 94,
+        "row_count": 96
+      },
+      "initial": {
+        "joint_actor_exact": 96,
+        "joint_exact_ir": 94,
+        "joint_modality_exact": 96,
+        "modality_exact": 96,
+        "raw_actor_exact": 96,
+        "raw_exact_ir": 94,
+        "row_count": 96
+      },
+      "parent_F15": {
+        "joint_actor_exact": 96,
+        "joint_exact_ir": 94,
+        "joint_modality_exact": 96,
+        "modality_exact": 96,
+        "raw_actor_exact": 96,
+        "raw_exact_ir": 94,
+        "row_count": 96
+      },
+      "trained": {
+        "joint_actor_exact": 95,
+        "joint_exact_ir": 93,
+        "joint_modality_exact": 96,
+        "modality_exact": 96,
+        "raw_actor_exact": 95,
+        "raw_exact_ir": 93,
+        "row_count": 96
+      }
+    },
+    "training168": {
+      "frozen_F16": {
+        "joint_actor_exact": 158,
+        "joint_exact_ir": 154,
+        "joint_modality_exact": 162,
+        "modality_exact": 161,
+        "raw_actor_exact": 158,
+        "raw_exact_ir": 154,
+        "row_count": 168
+      },
+      "frozen_N11": {
+        "joint_actor_exact": 156,
+        "joint_exact_ir": 154,
+        "joint_modality_exact": 162,
+        "modality_exact": 161,
+        "raw_actor_exact": 156,
+        "raw_exact_ir": 154,
+        "row_count": 168
+      },
+      "initial": {
+        "joint_actor_exact": 156,
+        "joint_exact_ir": 154,
+        "joint_modality_exact": 162,
+        "modality_exact": 161,
+        "raw_actor_exact": 156,
+        "raw_exact_ir": 154,
+        "row_count": 168
+      },
+      "parent_F15": {
+        "joint_actor_exact": 156,
+        "joint_exact_ir": 154,
+        "joint_modality_exact": 162,
+        "modality_exact": 161,
+        "raw_actor_exact": 156,
+        "raw_exact_ir": 154,
+        "row_count": 168
+      },
+      "trained": {
+        "joint_actor_exact": 158,
+        "joint_exact_ir": 154,
+        "joint_modality_exact": 163,
+        "modality_exact": 162,
+        "raw_actor_exact": 158,
+        "raw_exact_ir": 154,
+        "row_count": 168
+      }
+    }
+  },
+  "external_embedding_encoder_calls": 0,
+  "freeze": {
+    "bytes": 22594,
+    "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/joint-readout-retention-output-freeze-v01.json",
+    "sha256": "09d143e43a40c29e5fb1617b40267c962b91ef5c797755e56788bcc5386c79c4"
+  },
+  "frozen_file_count": 62,
+  "frozen_tensor_count": 28,
+  "frozen_total_bytes": 80818125,
+  "genuine_8D_384D_768D_comparison_qualified": false,
+  "independence_limit": "Primary and separately authored recounter share structural training-validation helpers; neither is independent numerical-gradient replay.",
+  "independent_recount": {
+    "bytes": 3965193,
+    "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/joint-readout-retention-independent-recount-v01.json",
+    "sha256": "a256bee1319225a9997283add19667c312d2c1391a16c72108913aa5903fd00b"
+  },
+  "isolated_metadata_invocation": {
+    "bytes": 47512,
+    "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/freezer-metadata-invocation-v01.json",
+    "sha256": "64c2e9c587e8f9c55a974f5ec03629896bfef0d6db9a56fe96c638d640bfd0f6"
+  },
+  "latent_dimension_placeholder": 384,
+  "latent_enabled": false,
+  "observed_at_utc": "2026-10-14T19:04:42.905201+00:00",
+  "paired_panel_groups": 27,
+  "portable_numerical_reload_qualified": false,
+  "primary_and_recount_acceptance_agree": true,
+  "primary_and_separate_recount_passed": true,
+  "runtime_review": {
+    "bytes": 120466,
+    "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/joint-readout-retention-hinge-runtime-review-v01.json",
+    "sha256": "2737548e6dac2579886aa84e579c9288c18be86226fff1f0fe9bfdeebed60dcb"
+  },
+  "schema": "joint-readout-retention-public-result-summary/v1",
+  "scientific_acceptance": {
+    "all32_permission_retention": {
+      "count": 32,
+      "passed": true
+    },
+    "no_complete_IR_loss_IDs_vs_F15": {
+      "loss_ids_by_scope": {
+        "authored_dev": {
+          "joint": [],
+          "raw": []
+        },
+        "authored_eval": {
+          "joint": [
+            "targeted-loss-authored_eval-condition_exception_duration-0-f-present"
+          ],
+          "raw": []
+        },
+        "fresh_challenge": {
+          "joint": [],
+          "raw": []
+        },
+        "fresh_dev": {
+          "joint": [],
+          "raw": []
+        },
+        "fresh_test": {
+          "joint": [],
+          "raw": []
+        },
+        "fresh_tune": {
+          "joint": [],
+          "raw": []
+        },
+        "old_authored_eval": {
+          "joint": [],
+          "raw": []
+        },
+        "old_tune": {
+          "joint": [
+            "native-tuning-calendula-t4-q5-p"
+          ],
+          "raw": [
+            "native-tuning-calendula-t4-q5-p"
+          ]
+        },
+        "training168": {
+          "joint": [],
+          "raw": []
+        }
+      },
+      "passed": false,
+      "scopes": [
+        "old_tune",
+        "fresh_tune",
+        "fresh_challenge",
+        "old_authored_eval",
+        "authored_dev",
+        "authored_eval",
+        "fresh_dev",
+        "fresh_test",
+        "training168"
+      ],
+      "views": [
+        "raw",
+        "joint"
+      ]
+    },
+    "no_complete_IR_loss_IDs_vs_F16": {
+      "loss_ids_by_scope": {
+        "authored_dev": {
+          "joint": [],
+          "raw": []
+        },
+        "authored_eval": {
+          "joint": [
+            "targeted-loss-authored_eval-condition_exception_duration-0-f-present"
+          ],
+          "raw": []
+        },
+        "fresh_challenge": {
+          "joint": [],
+          "raw": []
+        },
+        "fresh_dev": {
+          "joint": [],
+          "raw": []
+        },
+        "fresh_test": {
+          "joint": [],
+          "raw": []
+        },
+        "fresh_tune": {
+          "joint": [],
+          "raw": []
+        },
+        "old_authored_eval": {
+          "joint": [],
+          "raw": []
+        },
+        "old_tune": {
+          "joint": [],
+          "raw": []
+        },
+        "training168": {
+          "joint": [],
+          "raw": []
+        }
+      },
+      "passed": false,
+      "scopes": [
+        "old_tune",
+        "fresh_tune",
+        "fresh_challenge",
+        "old_authored_eval",
+        "authored_dev",
+        "authored_eval",
+        "fresh_dev",
+        "fresh_test",
+        "training168"
+      ],
+      "views": [
+        "raw",
+        "joint"
+      ]
+    },
+    "no_complete_IR_loss_IDs_vs_N11": {
+      "loss_ids_by_scope": {
+        "authored_dev": {
+          "joint": [],
+          "raw": []
+        },
+        "authored_eval": {
+          "joint": [
+            "targeted-loss-authored_eval-condition_exception_duration-0-f-present"
+          ],
+          "raw": []
+        },
+        "fresh_challenge": {
+          "joint": [],
+          "raw": []
+        },
+        "fresh_dev": {
+          "joint": [],
+          "raw": []
+        },
+        "fresh_test": {
+          "joint": [],
+          "raw": []
+        },
+        "fresh_tune": {
+          "joint": [],
+          "raw": []
+        },
+        "old_authored_eval": {
+          "joint": [],
+          "raw": []
+        },
+        "old_tune": {
+          "joint": [
+            "native-tuning-calendula-t4-q5-p"
+          ],
+          "raw": [
+            "native-tuning-calendula-t4-q5-p"
+          ]
+        },
+        "training168": {
+          "joint": [],
+          "raw": []
+        }
+      },
+      "passed": false,
+      "scopes": [
+        "old_tune",
+        "fresh_tune",
+        "fresh_challenge",
+        "old_authored_eval",
+        "authored_dev",
+        "authored_eval",
+        "fresh_dev",
+        "fresh_test",
+        "training168"
+      ],
+      "views": [
+        "raw",
+        "joint"
+      ]
+    },
+    "schema": "joint-readout-retention-scientific-acceptance/v1",
+    "scientific_success": false,
+    "technical_gate_passed": true,
+    "training168": {
+      "joint_full_IR": 154,
+      "minimum_required": 155,
+      "passed": false,
+      "raw_full_IR": 154
+    }
+  },
+  "scientific_success": false,
+  "scored_state_panel_sets": 45,
+  "semantic_accuracy": null,
+  "statutory8_unscored": true,
+  "synthetic_optimizer_updates": 1,
+  "technical_completion": true,
+  "total_model_forwards_including_fixture": 1313,
+  "total_source_occurrences_including_fixture": 1666,
+  "total_state_panels": 50,
+  "trainable_tensor_count": 14
+}

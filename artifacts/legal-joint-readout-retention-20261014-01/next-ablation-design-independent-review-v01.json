@@ -1,0 +1,413 @@
+{
+  "actual_result_review": {
+    "bytes": 99318,
+    "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/joint-readout-retention-result-independent-review-v01.json",
+    "sha256": "0e896edc19dfa793e85ce8f30090fb579359672bc831c0e6192d78eb97775533"
+  },
+  "analysis": {
+    "bytes": 4341301,
+    "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/joint-readout-retention-result-analysis-v01.json",
+    "sha256": "0318c680389de60e9058a36e31bf97bdf52c61d1396ba098bb4f1414acd0dfe4"
+  },
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/joint_span_selection.py": {
+      "bytes": 16730,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/joint_span_selection.py",
+      "sha256": "791c283f625ae7d8841e7afa697b34cbfa5c74361d0c0129b66af31fb5e13679"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_context_ranking.py": {
+      "bytes": 57479,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_context_ranking.py",
+      "sha256": "6f37e5295ab09fe5f61215ab0445e6348d2972551c6bee1719e1c3c2ce2bd1aa"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_features.py": {
+      "bytes": 60367,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_features.py",
+      "sha256": "498093553607bdeac57e42a6dfaf95275efc081ff46c0a7b428b39b99b3c54a3"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_refinement.py": {
+      "bytes": 56952,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_refinement.py",
+      "sha256": "a6b004330c0b0be63182e5931d9d77654ae0a3144526113fc9bd3075a121642e"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_conditions_presence.py": {
+      "bytes": 49847,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_conditions_presence.py",
+      "sha256": "50d2ac6ac4acc790718eba1769e260bf5e746da69c9d29f8e36aecaee75eee25"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_joint_readout_retention.py": {
+      "bytes": 80912,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_joint_readout_retention.py",
+      "sha256": "34db345e9b0f3daa04b5b8caee4dfa389c48598ea79cd0da529415ea5bb7c502"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_targeted_loss.py": {
+      "bytes": 49658,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_targeted_loss.py",
+      "sha256": "f611490b2c15dee3437d0181686f16bb3aa56f3b20a00b9fa0d4ae2b2624637b"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/evaluation-contract-v02.json": {
+      "bytes": 24697,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/evaluation-contract-v02.json",
+      "sha256": "86f23d36f82989b2cddb0d7aaa298c7277d31d244533ff7591ed0235c0ab2513"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/joint-readout-retention-hinge-plan-v01.json": {
+      "bytes": 106363,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/joint-readout-retention-hinge-plan-v01.json",
+      "sha256": "059f4128a83ab2ffe63b72a2aed127c4061f2c7cefa6013eb3e03b5b8a3d6d96"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/joint-readout-retention-independent-recount-v01.json": {
+      "bytes": 3965193,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/joint-readout-retention-independent-recount-v01.json",
+      "sha256": "a256bee1319225a9997283add19667c312d2c1391a16c72108913aa5903fd00b"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/joint-readout-retention-result-analysis-v01.json": {
+      "bytes": 4341301,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/joint-readout-retention-result-analysis-v01.json",
+      "sha256": "0318c680389de60e9058a36e31bf97bdf52c61d1396ba098bb4f1414acd0dfe4"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/joint-readout-retention-result-independent-review-v01.json": {
+      "bytes": 99318,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/joint-readout-retention-result-independent-review-v01.json",
+      "sha256": "0e896edc19dfa793e85ce8f30090fb579359672bc831c0e6192d78eb97775533"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/postfreeze-error-coupling-model-author-diagnostic-v01.json": {
+      "bytes": 25271,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/postfreeze-error-coupling-model-author-diagnostic-v01.json",
+      "sha256": "94ba33da34a478ce396c28553f0aa111ab2d548ab0daa644a0691bbc630955e7"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/public-result-summary-v01.json": {
+      "bytes": 18599,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/public-result-summary-v01.json",
+      "sha256": "795bfd54bdc416650fbe97cf403e83fa4dde4fd87a338ef23ed64afcc6b8c512"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/training-design-v02.json": {
+      "bytes": 14329,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/training-design-v02.json",
+      "sha256": "e1863441781a3e718cf7b8c4823be94e65211d87611f91da6fd253d664005249"
+    }
+  },
+  "checked_public_assertion_count": 122,
+  "checked_public_assertions": [
+    "actual independent result review passed technical, not science",
+    "public summary/primary/counter acceptance exact",
+    "diagnostic is explicitly model-author, not independent acceptance",
+    "diagnostic artifact legal_span_actor_features.py",
+    "diagnostic artifact legal_span_joint_readout_retention.py",
+    "diagnostic artifact evaluation-contract-v02.json",
+    "diagnostic artifact joint-readout-retention-independent-recount-v01.json",
+    "diagnostic artifact joint-readout-retention-result-analysis-v01.json",
+    "diagnostic artifact training-design-v02.json",
+    "authored_dev/joint public fullIR map",
+    "authored_dev/joint independently recounted fullIR",
+    "authored_dev/raw public fullIR map",
+    "authored_dev/raw independently recounted fullIR",
+    "authored_eval/joint public fullIR map",
+    "authored_eval/joint independently recounted fullIR",
+    "authored_eval/raw public fullIR map",
+    "authored_eval/raw independently recounted fullIR",
+    "fresh_challenge/joint public fullIR map",
+    "fresh_challenge/joint independently recounted fullIR",
+    "fresh_challenge/raw public fullIR map",
+    "fresh_challenge/raw independently recounted fullIR",
+    "fresh_dev/joint public fullIR map",
+    "fresh_dev/joint independently recounted fullIR",
+    "fresh_dev/raw public fullIR map",
+    "fresh_dev/raw independently recounted fullIR",
+    "fresh_test/joint public fullIR map",
+    "fresh_test/joint independently recounted fullIR",
+    "fresh_test/raw public fullIR map",
+    "fresh_test/raw independently recounted fullIR",
+    "fresh_tune/joint public fullIR map",
+    "fresh_tune/joint independently recounted fullIR",
+    "fresh_tune/raw public fullIR map",
+    "fresh_tune/raw independently recounted fullIR",
+    "old_authored_eval/joint public fullIR map",
+    "old_authored_eval/joint independently recounted fullIR",
+    "old_authored_eval/raw public fullIR map",
+    "old_authored_eval/raw independently recounted fullIR",
+    "old_tune/joint public fullIR map",
+    "old_tune/joint independently recounted fullIR",
+    "old_tune/raw public fullIR map",
+    "old_tune/raw independently recounted fullIR",
+    "training168/joint public fullIR map",
+    "training168/joint independently recounted fullIR",
+    "training168/raw public fullIR map",
+    "training168/raw independently recounted fullIR",
+    "parent_F15 independent coverage agreement",
+    "parent_F15 independent presence agreement",
+    "parent_F15/raw independent main counts",
+    "parent_F15/joint independent main counts",
+    "trained independent coverage agreement",
+    "trained independent presence agreement",
+    "trained/raw independent main counts",
+    "trained/joint independent main counts",
+    "training rawjoint154 unchanged",
+    "actor156to158",
+    "raw modality161to162",
+    "head and joint modality162to163",
+    "primary-derived failure patterns copied accurately",
+    "hinge beforeafter exact",
+    "hinge decrease about19.6percent",
+    "two independently corroborated actor correction IDs",
+    "actor corrections still explicit modality errors",
+    "sole modality correction remains separate from actor corrections",
+    "primary class actor12 still0 fullIR",
+    "primary conditions class10of12",
+    "primary other classes all exact",
+    "conditions top8 and presence correct",
+    "conditionally inferred error pattern matched-temporal-train-actor_duration_name-0-f-absent",
+    "published stable actor rank matched-temporal-train-actor_duration_name-0-f-absent",
+    "published abstention matched-temporal-train-actor_duration_name-0-f-absent",
+    "conditionally inferred error pattern matched-temporal-train-actor_duration_name-0-f-present",
+    "published stable actor rank matched-temporal-train-actor_duration_name-0-f-present",
+    "published abstention matched-temporal-train-actor_duration_name-0-f-present",
+    "conditionally inferred error pattern matched-temporal-train-actor_duration_name-0-o-absent",
+    "published stable actor rank matched-temporal-train-actor_duration_name-0-o-absent",
+    "published abstention matched-temporal-train-actor_duration_name-0-o-absent",
+    "conditionally inferred error pattern matched-temporal-train-actor_duration_name-0-o-present",
+    "published stable actor rank matched-temporal-train-actor_duration_name-0-o-present",
+    "published abstention matched-temporal-train-actor_duration_name-0-o-present",
+    "conditionally inferred error pattern matched-temporal-train-actor_duration_name-0-p-absent",
+    "published stable actor rank matched-temporal-train-actor_duration_name-0-p-absent",
+    "published abstention matched-temporal-train-actor_duration_name-0-p-absent",
+    "conditionally inferred error pattern matched-temporal-train-actor_duration_name-0-p-present",
+    "published stable actor rank matched-temporal-train-actor_duration_name-0-p-present",
+    "published abstention matched-temporal-train-actor_duration_name-0-p-present",
+    "conditionally inferred error pattern matched-temporal-train-actor_duration_name-1-f-absent",
+    "published stable actor rank matched-temporal-train-actor_duration_name-1-f-absent",
+    "published abstention matched-temporal-train-actor_duration_name-1-f-absent",
+    "conditionally inferred error pattern matched-temporal-train-actor_duration_name-1-f-present",
+    "published stable actor rank matched-temporal-train-actor_duration_name-1-f-present",
+    "published abstention matched-temporal-train-actor_duration_name-1-f-present",
+    "conditionally inferred error pattern matched-temporal-train-actor_duration_name-1-o-absent",
+    "published stable actor rank matched-temporal-train-actor_duration_name-1-o-absent",
+    "published abstention matched-temporal-train-actor_duration_name-1-o-absent",
+    "conditionally inferred error pattern matched-temporal-train-actor_duration_name-1-o-present",
+    "published stable actor rank matched-temporal-train-actor_duration_name-1-o-present",
+    "published abstention matched-temporal-train-actor_duration_name-1-o-present",
+    "conditionally inferred error pattern matched-temporal-train-actor_duration_name-1-p-absent",
+    "published stable actor rank matched-temporal-train-actor_duration_name-1-p-absent",
+    "published abstention matched-temporal-train-actor_duration_name-1-p-absent",
+    "conditionally inferred error pattern matched-temporal-train-actor_duration_name-1-p-present",
+    "published stable actor rank matched-temporal-train-actor_duration_name-1-p-present",
+    "published abstention matched-temporal-train-actor_duration_name-1-p-present",
+    "eval presence crossrecount parent_F15",
+    "eval raw alreadyabstains parent_F15",
+    "exceptions parent_F15/head",
+    "exceptions parent_F15/joint",
+    "eval presence crossrecount trained",
+    "eval raw alreadyabstains trained",
+    "exceptions trained/head",
+    "exceptions trained/joint",
+    "all other joint field correctness retained on new veto",
+    "oldcalendula is bothroute F15loss and alreadyF16wrong",
+    "six exact parameter names",
+    "geometry modality.weight",
+    "geometry modality.bias",
+    "geometry start.weight",
+    "geometry start.bias",
+    "geometry end.weight",
+    "geometry end.bias",
+    "geometry325active975stored650inactive36frozen",
+    "no raw capture/checkpoint/private input opened"
+  ],
+  "confirmed_facts": {
+    "actor_corrections_still_modality_wrong": true,
+    "actor_raw_and_joint_before_after": [
+      156,
+      158
+    ],
+    "conditions_presence_correct_and_gold_present_spans_retained_top8": true,
+    "hinge_active_rows_before_and_after": 12,
+    "hinge_mean_reduction_percent": 19.599486137830112,
+    "modality_head_and_joint_before_after": [
+      162,
+      163
+    ],
+    "modality_raw_before_after": [
+      161,
+      162
+    ],
+    "one_modality_gain_ID": [
+      "matched-temporal-train-actor_duration_name-1-f-absent"
+    ],
+    "presence_FN_mechanism": "The row moves exceptions head/joint TP to FN in both reports. Source select_joint_spans fixes optional presence by independent argmax before building span domains; absent exceptions excludes its gold span. This supports the observed blocking mechanism, not a separately executed counterfactual intervention.",
+    "primary_actor_class_complete_IR": {
+      "joint_before_after": [
+        0,
+        0
+      ],
+      "raw_before_after": [
+        0,
+        0
+      ],
+      "rows": 12
+    },
+    "primary_conditions_class_complete_IR": {
+      "joint_before_after": [
+        10,
+        10
+      ],
+      "raw_before_after": [
+        10,
+        10
+      ],
+      "rows": 12
+    },
+    "six_tensor_geometry": {
+      "active": 325,
+      "frozen": 36,
+      "inactive_selected": 650,
+      "model": 42,
+      "stored_selected": 975,
+      "trainable": 6
+    },
+    "sole_modality_correction_still_actor_wrong": true,
+    "training_full_IR_raw_and_joint_before_after": [
+      154,
+      154
+    ],
+    "two_actor_gain_IDs": [
+      "matched-temporal-train-actor_duration_name-1-o-absent",
+      "matched-temporal-train-actor_duration_name-1-o-present"
+    ],
+    "veto_IDs": {
+      "authored_eval_joint": "targeted-loss-authored_eval-condition_exception_duration-0-f-present",
+      "old_tune": "native-tuning-calendula-t4-q5-p"
+    }
+  },
+  "correct_mask_provenance_gap": {
+    "current_F17_component_KL_masks_already_qualified": true,
+    "current_F17_scope": "Qualified runtime rederived teacher targets from exact F15 raw training capture and authenticated168 labels and joined every batch. Source _teacher_row derives each of six component masks from a valid gold training index and parent argmax. No current F17 mask failure is alleged.",
+    "exact_two_IDs_authenticated_here": false,
+    "missing": "No immutable independently checked next-trial mask yet binds all168 training row IDs/order/source/token/labels, exact F15 raw scores, deterministic raw decoder and seven-field comparator, selected two IDs and applied weights.",
+    "must_not_substitute": "Do not use class name, rank, aggregate counts, exposed evaluation IDs, future candidate predictions or the new row-weight mask as substitutes for the teacher-correct component masks. Wrong/invalid teacher components remain masked out.",
+    "proposed_new_two_row_weight_mask_is_a_distinct_unbound_artifact": true,
+    "required_custody": "Derive once before update0, freeze both near-complete row weights and the separate six component correctness masks. Join every actual batch ID/index, weight, teacher target and logits to those roots during runtime and postfreeze recount.",
+    "required_derivation": "In a separately qualified training-only path authenticate donor/capture/full168 manifest; decode exact F15 scores with original tie and abstention semantics and compare all seven decoded fields to authenticated training labels. Select only nonabstaining rows with error set exactly{conditions}; all other six fields must match. Assert exactly2 condition_exception_duration IDs and exclude actor/modality co-errors. Record label/output/mask digests and independently recount the complete membership, not merely count2.",
+    "teacher_descriptor_from_qualified_plan_only_not_opened": {
+      "bytes": 3594328,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/legal-trigger-readout-pilot-20261007-01/actor-refinement-20261014-actor-refinement-ce-01/results/trained-training168-raw.json",
+      "sha256": "221fa2ec37fc41298f787d4dfef1d4daf60b07c4c565a1194d2097e7c538fff1"
+    }
+  },
+  "coupling_evidence_qualification": {
+    "explanation": "The counter publishes marginal counts, paired metric gain/loss IDs, coverage and presence buckets, not full per-ID seven-field error sets or the primary class/failure-overlap distributions. Diagnostic pattern copies and its12 per-ID inferences are internally consistent with those primary distributions plus corroborated IDs. They are not a new independent decoded-error-set recount, and stable actor rank alone would not prove joint correctness.",
+    "full_seven_field_co_error_patterns_separately_recounted": false,
+    "independent_count_and_paired_ID_agreement": true,
+    "independent_coverage_and_presence_agreement": true,
+    "primary_only_fields": [
+      "panel_summaries.classes",
+      "panel_summaries.failure_overlap",
+      "decoded_other_role_coupling"
+    ],
+    "raw_prediction_or_reference_bodies_opened_for_this_review": false
+  },
+  "default_promotion": false,
+  "diagnostic": {
+    "bytes": 25271,
+    "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/postfreeze-error-coupling-model-author-diagnostic-v01.json",
+    "sha256": "94ba33da34a478ce396c28553f0aa111ab2d548ab0daa644a0691bbc630955e7"
+  },
+  "error_coupling_assumptions_and_limits": [
+    "Improved actor margins/top1 do not imply complete IR progress: actor and modality repairs occurred on different still-incomplete rows.",
+    "Top8 coverage is candidate availability, not proof of a unique compatible optimum, linear-readout expressivity, or success within32 updates.",
+    "Freeze actor and presence PARAMETERS and verify score bits; do not describe all decoded outputs as frozen. Mutable conditions spans can alter joint nonoverlap choices, actor/object/exception assignments, ties or abstention.",
+    "The raw156 ceiling is conditional on exact F15 actor scores/features and unchanged deterministic raw extraction. It is not an attained score or global joint ceiling;154+2 is only an illustrative no-regression case.",
+    "Clean F15 avoids inheriting known actor drift but also discards F16/F17 gains. Their retention is an outcome, not an assumption.",
+    "Selecting six tensors AND introducing a two-row weight changes multiple factors. A single next trial tests the combined recipe, not the isolated causal effect of weighting, partition or KL. No extra run is needed merely to report this limitation honestly."
+  ],
+  "findings": [],
+  "groundtruth_and_claim_limits": {
+    "Lake_executed": false,
+    "current_panels_previously_exposed_engineering_diagnostics": true,
+    "future_generalization_requirement": "Separately authored/reviewed source-grounded references, adjudicated ambiguity and sealed fresh held-out protocol are needed before generalization/legal-accuracy claims. A bounded exposed training-diagnostic ablation can be reported without such a claim.",
+    "genuine_8D_384D_768D_semantics_qualified": false,
+    "independent_legal_gold_validated": false,
+    "next_design_adaptive_to_exposed_results": true,
+    "statutory8_unscored": true,
+    "training_mask_correctness_means_match_to_authenticated_training_labels_not_legal_truth": true
+  },
+  "headline_factual_errors_found": [],
+  "independent_recount": {
+    "bytes": 3965193,
+    "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/joint-readout-retention-independent-recount-v01.json",
+    "sha256": "a256bee1319225a9997283add19667c312d2c1391a16c72108913aa5903fd00b"
+  },
+  "loss_precision_needed": {
+    "actor_hinge": "All actor parameters frozen implies no actor-hinge learning. Preregister whether its constant scalar is retained or omitted and report it accurately; do not claim an actor repair.",
+    "closed_proposed_expression": "Only the conditions facet receives per-row weight2 for the fixed near-complete mask, otherwise1. Average over fullB=12 and retain outer8; leave other facets and modality2 unchanged. Pin floating-point association and record weighted/unweighted terms.",
+    "equalization_qualification": "Equalizes coefficient2 for a whole optional facet on selected rows, not token-domain loss scales or gradient norms. Frozen conditions-presence CE remains constant. Weighting only pointers instead is a different scalar loss and must be specified if chosen.",
+    "legacy_source_expression": "(2*mean(modality_CE)+sum(six_facet_batch_means))/8; optional facet=presence_CE+0.5*(start_CE+end_CE), absent pointer targets ignored.",
+    "retention": "If retaining existing six-block KL, keep detached F15 targets, valid correct-component masks, T1/coefficient1 and6B denominator including masked/frozen-zero terms. Do not normalize by3B, active masks or sumweights.",
+    "selected_row_gradient_coefficients": {
+      "conditions_end_CE": "2*0.5/8",
+      "conditions_start_CE": "2*0.5/8",
+      "modality_CE": "2/8"
+    }
+  },
+  "minimum_prerequisites_for_one_informative_trial": [
+    "Version one exact policy: trained F15 donor raw/state pins, copy all42 states including learned N11 conditions, ordered six optimizer names/shapes, conditions row3 active,650 inactive/36 frozen; no constructor recopy or checkpoint surgery.",
+    "Independently close the new two-row decoded-error mask and separate KL target provenance described above before real update0; no evaluation masks/targets, mining, oversampling, sweeps or selection.",
+    "Detach-test exact weighted CE/8 and KL/6B math,0/1/2 weighted rows, invalid/wrong/all-masked teacher cases, duplicate-row invariance, forged/reordered target/mask rejection and immutable before-update custody.",
+    "In the qualified guardian child only, run isolated gradient proof: six connected finite selected gradients,36None,650 inactive gradient/moment zeros and unchanged values; separate synthetic optimizer/parameters and restore RNG/gradmode. Preregister fixture calls/rows/steps rather than hiding them in the32 candidate updates.",
+    "Initial632 exact F15 full-head+decoded parity, final632 exact protected actor/presence and action/object/exceptions/temporal boundary scores plus frozen/inactive state checks; matched call geometry. Same168/seed1729/batch12/32 candidate updates384occurrences and fresh ordered Adam.",
+    "Before the run fix comparator identities/scopes, raw AND joint>=155 criterion, per-ID complete-IR vetoes and all32 permissions, including explicit treatment of F17 as a comparator. Freeze all outputs before primary and separate recount; retain all negative outcomes and no default promotion.",
+    "One freshly qualified concrete plan/native guardian admission: actual full current claims,145B/four roots unchanged,2CPU1536MiB1child300s/200M request plus200M future envelope. Historical fit is not current fit; this review performs no resource action."
+  ],
+  "observed_at_utc": "2026-10-14T19:28:02.637449+00:00",
+  "operations_by_reviewer": {
+    "API_network_calls": 0,
+    "Git_mutations": 0,
+    "checkpoint_JSON_parses": 0,
+    "model_or_encoder_calls": 0,
+    "numerical_imports": 0,
+    "private_resource_reads": 0,
+    "production_imports": 0,
+    "raw_teacher_training_head_reference_body_reads": 0,
+    "source_code_edits": 0,
+    "training_calls": 0
+  },
+  "passed": true,
+  "proposal_ready_for_execution": false,
+  "public_summary": {
+    "bytes": 18599,
+    "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/public-result-summary-v01.json",
+    "sha256": "795bfd54bdc416650fbe97cf403e83fa4dde4fd87a338ef23ed64afcc6b8c512"
+  },
+  "reviewer": "runtime_protocol_n9; not the current model/primary-analyzer/next-ablation author",
+  "schema": "joint-readout-retention-next-ablation-design-independent-review/v1",
+  "scientific_success": false,
+  "scope": "Independent public metadata and raw source-AST review only. Not a next execution gate, numerical feasibility test or independent legal-gold validation.",
+  "source_AST_function_sha256": {
+    "joint_span_selection.py:select_joint_spans": "3b8b98eb732c6c0e0823f5ff3b8025e41d6ede7b20c083f8bd84170727b6a0f1",
+    "legal_span_actor_context_ranking.py:_loss": "b8b063f8dac2b9a946dd5659f8545b5440a7cf1875c0880f88cc6b433e79d67c",
+    "legal_span_actor_context_ranking.py:_model": "3803e26d9eac46dcb443c44a292c66bc7541c3c40beea157ccd0ee06fb022760",
+    "legal_span_actor_context_ranking.py:_partition": "54243f8d54b6d9aac4352084ce74ef6ac521ab514c35d3732721678486354ca8",
+    "legal_span_actor_context_ranking.py:_trainable_shapes": "7f8872116cc2e4689c4d0e793eb7c4c8fcbf440610e72a1a2455871c6a2952a5",
+    "legal_span_actor_features.py:_loss": "b9758eb611971e20a32425ecd88ed8fc6e207cf82cc372e922ae4e8775760c56",
+    "legal_span_actor_features.py:_model": "cbe3296520e25e043003f0e3a57dbb83a6afc9529d2b9d8e03da5399d9ee6d94",
+    "legal_span_actor_features.py:_partition": "dcf766d2594348de3c5a12162b6e345a560f9276ccde3c7643cc6f887962d379",
+    "legal_span_actor_features.py:_trainable_shapes": "7f8872116cc2e4689c4d0e793eb7c4c8fcbf440610e72a1a2455871c6a2952a5",
+    "legal_span_actor_refinement.py:_loss": "b9758eb611971e20a32425ecd88ed8fc6e207cf82cc372e922ae4e8775760c56",
+    "legal_span_actor_refinement.py:_model": "d918a9d7bc8bc58cc96da7720f43af52ebf8aea2f8c8bd60ccbafc46c0cbd838",
+    "legal_span_actor_refinement.py:_partition": "736370dc1be55086e7967e6c570dd7884b69aeff41f3f55acd5a1dcc6c70c941",
+    "legal_span_actor_refinement.py:_trainable_shapes": "7f8872116cc2e4689c4d0e793eb7c4c8fcbf440610e72a1a2455871c6a2952a5",
+    "legal_span_conditions_presence.py:_loss": "0164861077d8f3f76c982aa7e230ce134371d20bc6f1f74be874f6a824c29c84",
+    "legal_span_conditions_presence.py:_model": "8a96aa27f0e70fa856b4cb42b513e08f0d742d821d3398e1765daba8af5108e3",
+    "legal_span_conditions_presence.py:_partition": "c2a5efa37214a87aaaac9e12021bb18472f4c2930ce1df4afa2a8661ac8afe1b",
+    "legal_span_conditions_presence.py:_trainable_shapes": "708a46212881525134fd40c06aa81cef18a3eb170f6873065ec42b58da7873bd",
+    "legal_span_joint_readout_retention.py:_active_rows": "84c6e584f6d9586f26a8030242ba87ba54f9412b47e54ccc70965dd25899a891",
+    "legal_span_joint_readout_retention.py:_loss": "7066d4bf01918edfa4fc5afaf3f94574e4617edfe5dfb813cef29f80deb849fd",
+    "legal_span_joint_readout_retention.py:_model": "eeade466b2be771eeaae25b666a5587e12eecf712a54d481317371579d4101c6",
+    "legal_span_joint_readout_retention.py:_partition": "37f0797a7286fc3e61210015fad2df0704caefec96cfb5c93beb38a7592dcd2b",
+    "legal_span_joint_readout_retention.py:_teacher_row": "5fdb88b4747733420970f9f208382f74b66f5c9d4b78020859df123527d2966b",
+    "legal_span_joint_readout_retention.py:_teacher_targets": "87f7a35289b54c536851b995516dd53bd8f7be50b75274afff4e12139cf6d6cb",
+    "legal_span_joint_readout_retention.py:_trainable_shapes": "df6ee5589d8854708a6a75d92460f9c2f858690772fc2441d3937d6a8f930735",
+    "legal_span_joint_readout_retention.py:_validate_teacher_entry": "b24bbaa36f84555bb25a5eafcaa1638eb08f64a6a799ff7292118c5711a7ca57",
+    "legal_span_targeted_loss.py:_combine_main_loss": "4dcb8f51f2c79af1bb91ed71caa1e61afde21af31ef772158e7aefd8bc73558b",
+    "legal_span_targeted_loss.py:_combine_total_loss": "e5876813e5f3b1dc54de1aae488e475f2e53dc964d1d9d9f3febd1588acc0167",
+    "legal_span_targeted_loss.py:_loss": "069fca3b541e86ee4cb37946516c2ad4c63eae3794e00a7cc2019b09c25d2b63"
+  },
+  "summary": "No headline count/geometry error found. The six-tensor325-active clean-F15 proposal is a coherent bounded hypothesis, not a demonstrated repair. Full co-error distributions remain primary-derived; exact new mask/target provenance, loss math, guarded gradients/parity and fixed success/comparator policy remain prerequisites. Execution readiness is not asserted."
+}
