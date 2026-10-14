@@ -1,0 +1,41 @@
+{
+  "accelerator_publication": "2ceac1afc3d66b54204656ee8d7f758780231ff1",
+  "changed_gitlinks": {
+    "external/ipfs_accelerate": "2ceac1afc3d66b54204656ee8d7f758780231ff1"
+  },
+  "files": [
+    {
+      "bytes": 6319,
+      "path": "implementation_plan/docs/119-supervisor-signed-compact-reconciliation-2026-10-14.md",
+      "sha256": "274f45278330a602f2883107ad341386e0671f4bb09bdb78cfb489e946bdeca5"
+    },
+    {
+      "bytes": 23196,
+      "path": "artifacts/signed-scope-compact-reconciliation-publication-20261014/hosted-ci.json",
+      "sha256": "4019733b69f64419319e77e424c8e6b559d5b140241737be4e4a70e6703da4e8"
+    },
+    {
+      "bytes": 154894,
+      "path": "artifacts/signed-scope-compact-reconciliation-publication-20261014/merge-compatibility.json",
+      "sha256": "c50f17fa5f084ec8929ba5bf64a02ee66bf95dca8e6619f92618dbca883be4f5"
+    },
+    {
+      "bytes": 11065,
+      "path": "artifacts/signed-scope-compact-reconciliation-publication-20261014/publication_check_runner.py",
+      "sha256": "4efe995f6aca9ba6e8280d42d660e5cfe57f8acc676af8f25cec500d31d2260d"
+    },
+    {
+      "bytes": 5430,
+      "path": "artifacts/signed-scope-compact-reconciliation-publication-20261014/parent-checks.json",
+      "sha256": "cd41c77d65ac8378753818efab42dd64ad45efbf3bdba70035fe7a73f30e5dd7"
+    }
+  ],
+  "manifest_self_excluded": true,
+  "parent_base": "9fd25a0d77465782cbe53e50e81674c2d0c01efa",
+  "preserved_gitlinks": {
+    "external/ipfs_datasets": "d8f9e3dfc77901162e3d32343860aa4678374db0",
+    "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0"
+  },
+  "qualified_leaf": "2ceac1afc3d66b54204656ee8d7f758780231ff1",
+  "schema": "signed-compact-parent-manifest@1"
+}
