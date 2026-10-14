@@ -1,0 +1,30 @@
+{
+  "actual_model_calls": 0,
+  "actual_runtime_or_score_reads": 0,
+  "checkpoint_JSON_parses": 0,
+  "diff": {
+    "bytes": 12228,
+    "path": "/home/barberb/lift_coding/artifacts/legal-storage-continuation-20261014-01/freezer-port-diff-v01.patch",
+    "sha256": "7722e9b4f7514ab4668630b253a64e72645fb0700e753ef9b0044884c413039c"
+  },
+  "draft": {
+    "bytes": 18728,
+    "path": "/home/barberb/lift_coding/artifacts/legal-storage-continuation-20261014-01/freeze_conditions_balanced_outputs_draft_v01.py",
+    "sha256": "8e150c915581208f0b3940a6ab72cc86309a1e5c1759e549d8b35bd975161bd8"
+  },
+  "notes": [
+    "Retains N11 opaque output freeze/runtime joins and exact62geometry.",
+    "Calls future same-phase balanced runner qualify_conditions_trace for fixed weighted objective validation.",
+    "39 qualified owners and same15loaded/7mandatory; actual counter keys conditions_presence retained.",
+    "538 prior/539 terminal are conditional on unchanged ledger; reconcile to reviewed current baseline before execution.",
+    "Future F13 runner/plan/resource/runtime-source gates absent; cannot execute draft."
+  ],
+  "original": {
+    "bytes": 18731,
+    "path": "/home/barberb/lift_coding/artifacts/legal-head-repair-20261014-01/freeze_conditions_presence_outputs_v01.py",
+    "sha256": "9b635f214e80e2e4705a5dddfe8a804e65f75dd3b5b5f832863e1d909b72b671"
+  },
+  "schema": "balanced-freezer-draft-derivation/v1",
+  "status": "source_only_draft_not_runnable_qualified",
+  "training_authorized": false
+}

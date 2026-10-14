@@ -1,0 +1,485 @@
+{
+  "F12_direct_reference_bytes_excluded": 29100488,
+  "F12_direct_reference_paths_excluded": 22,
+  "all538_prior_claim_bodies_preserved_by_prior_qualified_observation": true,
+  "archive_qualified_owned_result_apparent_bytes": 545190329,
+  "archive_qualified_owned_result_paths": 680,
+  "archives": [
+    {
+      "new_specific_original_result_paths": 55,
+      "phase": "legal-storage-closeout-20261012-02",
+      "review": {
+        "bytes": 130107,
+        "path": "/home/barberb/lift_coding/artifacts/legal-storage-closeout-20261012-02/hf-actual-publication-independent-review-v01.json",
+        "sha256": "0446a77e23ed95899cc6e7a432f9d10a5aa015764c086afa713c5810b83b5685"
+      },
+      "revision": "f573ae8401b0774df0f43fc8ee026a79d9c400a9",
+      "verification": {
+        "bytes": 59394,
+        "path": "/home/barberb/lift_coding/artifacts/legal-storage-closeout-20261012-02/hf-publication-verification-v03.json",
+        "sha256": "3f8f43e17e5d03a875d7d3516bfe3bbe1d931633ed83cb2b780aa421ef4b82a2"
+      }
+    },
+    {
+      "new_specific_original_result_paths": 151,
+      "phase": "legal-targeted-loss-20261012-01",
+      "review": {
+        "bytes": 224985,
+        "path": "/home/barberb/lift_coding/artifacts/legal-targeted-loss-20261012-01/hf-actual-publication-independent-review-v01.json",
+        "sha256": "b42a34289c903ef836a4fe8916d9ae790117629c1cb0057e89d4fe7f76dd20be"
+      },
+      "revision": "0958f81330fb7bb7664a8ce85355413d289932b7",
+      "verification": {
+        "bytes": 101321,
+        "path": "/home/barberb/lift_coding/artifacts/legal-targeted-loss-20261012-01/hf-publication-verification-v01.json",
+        "sha256": "11b651950c723d4d831bd7745426536e3f41e770ef0a1a6059413ce89ea4aae0"
+      }
+    },
+    {
+      "new_specific_original_result_paths": 61,
+      "phase": "legal-split-feature-20261013-01",
+      "review": {
+        "bytes": 191754,
+        "path": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/hf-actual-publication-independent-review-v01.json",
+        "sha256": "885c366d78e9549f899f9cec037109da9a369d65b04dc339de694dfb97c63b3e"
+      },
+      "revision": "70525bcf70e801e78f4882b4834494d67ec0d2b6",
+      "verification": {
+        "bytes": 42488,
+        "path": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/hf-publication-verification-v01.json",
+        "sha256": "c01e9dd171c44d72d701f25ff0e707cb8384da58d1155e392033c50c14d10e25"
+      }
+    },
+    {
+      "new_specific_original_result_paths": 90,
+      "phase": "legal-temporal-adapter-20261013-01",
+      "review": {
+        "bytes": 189227,
+        "path": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/hf-publication-actual-independent-review-v01.json",
+        "sha256": "8a7fab8c4264e5cb634087029199caf7dddde1b5073c600f7ff7d5a56452ae34"
+      },
+      "revision": "0a89f3bfaa9db3ff028801b06fe6ee68ad73be19",
+      "verification": {
+        "bytes": 66994,
+        "path": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/hf-publication-verification-v01.json",
+        "sha256": "629c1a4ade850af66d52f6c0c6a2428cd7bb3adc72e8ea7de16498e97be5af43"
+      }
+    },
+    {
+      "new_specific_original_result_paths": 74,
+      "phase": "legal-temporal-attention-20261013-01",
+      "review": {
+        "bytes": 464801,
+        "path": "/home/barberb/lift_coding/artifacts/legal-temporal-attention-20261013-01/hf-publication-actual-independent-review-v01.json",
+        "sha256": "8a3ae60d779cb91a51bb64e028b3561c7485fe9a644408ca56f6982177377dbe"
+      },
+      "revision": "3440e82e07555b9f7e1d2608cac762ef66eecae4",
+      "verification": {
+        "bytes": 60962,
+        "path": "/home/barberb/lift_coding/artifacts/legal-temporal-attention-20261013-01/hf-publication-verification-v01.json",
+        "sha256": "e4135c017aaad4812453caf5efdb61d29349e7c1f559c69d0dc2faff64d0c183"
+      }
+    },
+    {
+      "new_specific_original_result_paths": 63,
+      "phase": "legal-actor-boundary-20261013-01",
+      "review": {
+        "bytes": 166244,
+        "path": "/home/barberb/lift_coding/artifacts/legal-actor-boundary-20261013-01/hf-publication-actual-independent-review-v01.json",
+        "sha256": "7acc5d1f7cdf41cacecfeb7b833b2bb05f9fcf46975561dee7953221016a6995"
+      },
+      "revision": "fa37360840c070f9318d6ad2baef87d785eac504",
+      "verification": {
+        "bytes": 57428,
+        "path": "/home/barberb/lift_coding/artifacts/legal-actor-boundary-20261013-01/hf-publication-verification-v01.json",
+        "sha256": "61dae96ab0a7eb33cb6e7485a63191337d01435dfdab293961c2be71418b2da5"
+      }
+    },
+    {
+      "new_specific_original_result_paths": 62,
+      "phase": "legal-actor-ranking-20261013-01",
+      "review": {
+        "bytes": 119034,
+        "path": "/home/barberb/lift_coding/artifacts/legal-actor-ranking-20261013-01/hf-publication-actual-independent-review-v01.json",
+        "sha256": "0b385ffbf455239a9c5e6aa7457d68bffed91a07ec797bb1628d5be5096807e8"
+      },
+      "revision": "3c430bdb412a6bd0871f813a944dfec5b2f4c8e9",
+      "verification": {
+        "bytes": 72819,
+        "path": "/home/barberb/lift_coding/artifacts/legal-actor-ranking-20261013-01/hf-publication-verification-v01.json",
+        "sha256": "1a400983a2cff494cdf4a64eb4e5163cd5f9e2111a123e59953fb9cbd246c86f"
+      }
+    },
+    {
+      "new_specific_original_result_paths": 62,
+      "phase": "legal-actor-features-20261013-01",
+      "review": {
+        "bytes": 95022,
+        "path": "/home/barberb/lift_coding/artifacts/legal-actor-features-20261013-01/hf-publication-actual-independent-review-v01.json",
+        "sha256": "904640da11829ac5a9dd6ae7c1a770860c217653b3c82089020850a81276c536"
+      },
+      "revision": "f91692a0a695d91b793a00936dd525fbe2bafcac",
+      "verification": {
+        "bytes": 76994,
+        "path": "/home/barberb/lift_coding/artifacts/legal-actor-features-20261013-01/hf-publication-verification-v01.json",
+        "sha256": "802d37766addc58979f28efd704055c5f19340fe3ee1f214f1d1a93d457c4c77"
+      }
+    },
+    {
+      "new_specific_original_result_paths": 62,
+      "phase": "legal-head-repair-20261014-01",
+      "review": {
+        "bytes": 151510,
+        "path": "/home/barberb/lift_coding/artifacts/legal-head-repair-20261014-01/hf-publication-actual-independent-review-v01.json",
+        "sha256": "680422c3b2aa428bd3dc3198e89c188fc14f863098bc2db0b98ea69aa26d48ba"
+      },
+      "revision": "702caba2da183f9d98a0ffd12f1240243167aab2",
+      "verification": {
+        "bytes": 75025,
+        "path": "/home/barberb/lift_coding/artifacts/legal-head-repair-20261014-01/hf-publication-verification-v01.json",
+        "sha256": "df90c177df785fd95fb6f708fb24273fda195a264c9beeeef2750e1a5f2f0e0c"
+      }
+    }
+  ],
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-actor-boundary-20261013-01/hf-preparation-receipt-v01.json": {
+      "bytes": 55394,
+      "path": "/home/barberb/lift_coding/artifacts/legal-actor-boundary-20261013-01/hf-preparation-receipt-v01.json",
+      "sha256": "53ed0e78983c6f96a2d2d894ebc978d8ecd2f07fc63ccdb2a95028d9c241b086"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-boundary-20261013-01/hf-publication-actual-independent-review-v01.json": {
+      "bytes": 166244,
+      "path": "/home/barberb/lift_coding/artifacts/legal-actor-boundary-20261013-01/hf-publication-actual-independent-review-v01.json",
+      "sha256": "7acc5d1f7cdf41cacecfeb7b833b2bb05f9fcf46975561dee7953221016a6995"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-boundary-20261013-01/hf-publication-verification-v01.json": {
+      "bytes": 57428,
+      "path": "/home/barberb/lift_coding/artifacts/legal-actor-boundary-20261013-01/hf-publication-verification-v01.json",
+      "sha256": "61dae96ab0a7eb33cb6e7485a63191337d01435dfdab293961c2be71418b2da5"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-boundary-20261013-01/hf-release-spec-v01.json": {
+      "bytes": 59953,
+      "path": "/home/barberb/lift_coding/artifacts/legal-actor-boundary-20261013-01/hf-release-spec-v01.json",
+      "sha256": "1e064866897048df89f11851ba369619cfe543b53d69316a406714f32c71c9d2"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-features-20261013-01/hf-preparation-receipt-v01.json": {
+      "bytes": 74287,
+      "path": "/home/barberb/lift_coding/artifacts/legal-actor-features-20261013-01/hf-preparation-receipt-v01.json",
+      "sha256": "d18aa15f8ce98852e657e98331ba1c8cbb5f92d07d9fe3c849292a1eb5eb2b33"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-features-20261013-01/hf-publication-actual-independent-review-v01.json": {
+      "bytes": 95022,
+      "path": "/home/barberb/lift_coding/artifacts/legal-actor-features-20261013-01/hf-publication-actual-independent-review-v01.json",
+      "sha256": "904640da11829ac5a9dd6ae7c1a770860c217653b3c82089020850a81276c536"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-features-20261013-01/hf-publication-verification-v01.json": {
+      "bytes": 76994,
+      "path": "/home/barberb/lift_coding/artifacts/legal-actor-features-20261013-01/hf-publication-verification-v01.json",
+      "sha256": "802d37766addc58979f28efd704055c5f19340fe3ee1f214f1d1a93d457c4c77"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-features-20261013-01/hf-release-spec-v01.json": {
+      "bytes": 78636,
+      "path": "/home/barberb/lift_coding/artifacts/legal-actor-features-20261013-01/hf-release-spec-v01.json",
+      "sha256": "b708bc3e1496907b5c49c43327e421bf1eb49831d14206356b73a62638a89716"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-ranking-20261013-01/hf-preparation-receipt-v01.json": {
+      "bytes": 70206,
+      "path": "/home/barberb/lift_coding/artifacts/legal-actor-ranking-20261013-01/hf-preparation-receipt-v01.json",
+      "sha256": "4c825135fc8a3fd9b8c982ed9af9f811d33c9f7041d0ea91412355dc9f5bcbdf"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-ranking-20261013-01/hf-publication-actual-independent-review-v01.json": {
+      "bytes": 119034,
+      "path": "/home/barberb/lift_coding/artifacts/legal-actor-ranking-20261013-01/hf-publication-actual-independent-review-v01.json",
+      "sha256": "0b385ffbf455239a9c5e6aa7457d68bffed91a07ec797bb1628d5be5096807e8"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-ranking-20261013-01/hf-publication-verification-v01.json": {
+      "bytes": 72819,
+      "path": "/home/barberb/lift_coding/artifacts/legal-actor-ranking-20261013-01/hf-publication-verification-v01.json",
+      "sha256": "1a400983a2cff494cdf4a64eb4e5163cd5f9e2111a123e59953fb9cbd246c86f"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-ranking-20261013-01/hf-release-spec-v01.json": {
+      "bytes": 74495,
+      "path": "/home/barberb/lift_coding/artifacts/legal-actor-ranking-20261013-01/hf-release-spec-v01.json",
+      "sha256": "b1e0598fe6f0273fe7d26ed7b1b4f19d27e0d25dff8a3c500a5286ecd5555f7a"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/capacity-clearance-v01.json": {
+      "bytes": 19246,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/capacity-clearance-v01.json",
+      "sha256": "4167848eb92ff26fe77ed7b01adf01d7bea56adcf94fec5b7314e0c5b61e4143"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/capacity-refusal-independent-review-v01.json": {
+      "bytes": 6862,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/capacity-refusal-independent-review-v01.json",
+      "sha256": "743f2fb2a2f52e3ab8f937e41d2a6209d874c1b541ca44a28c939054b3fecc34"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/completion-review-v01.json": {
+      "bytes": 2367,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/completion-review-v01.json",
+      "sha256": "a12238762191f87041e1a37c54c30953d6eed2e579895ebf6104461c2d62248e"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/conditions-balanced-ce-plan-v01.json": {
+      "bytes": 60156,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/conditions-balanced-ce-plan-v01.json",
+      "sha256": "77da735e19194c40acdf073f9646eb8363b4acccd8535f079aef75cf57d3899a"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/root/implementation_plan/docs/86-legal-training-storage-recovery-2026-10-12.md": {
+      "bytes": 7539,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/root/implementation_plan/docs/86-legal-training-storage-recovery-2026-10-12.md",
+      "sha256": "7524495f20db013b19cfe09b13f6fde2398fc166732f290b3ee79a5dd701ddd9"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/root/implementation_plan/docs/88-legal-storage-closeout-and-temporal-training-2026-10-12.md": {
+      "bytes": 3828,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/root/implementation_plan/docs/88-legal-storage-closeout-and-temporal-training-2026-10-12.md",
+      "sha256": "db1cd81faaa6464fd1c5dc07e27fd9ab526443b1e772415a1d82de3a0d25026e"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-head-repair-20261014-01/hf-preparation-receipt-v01.json": {
+      "bytes": 72419,
+      "path": "/home/barberb/lift_coding/artifacts/legal-head-repair-20261014-01/hf-preparation-receipt-v01.json",
+      "sha256": "f0d10fa4466bd0a5eab4685c8b703770f4a2b6b81737e92ec243ea39b89a4cad"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-head-repair-20261014-01/hf-publication-actual-independent-review-v01.json": {
+      "bytes": 151510,
+      "path": "/home/barberb/lift_coding/artifacts/legal-head-repair-20261014-01/hf-publication-actual-independent-review-v01.json",
+      "sha256": "680422c3b2aa428bd3dc3198e89c188fc14f863098bc2db0b98ea69aa26d48ba"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-head-repair-20261014-01/hf-publication-verification-v01.json": {
+      "bytes": 75025,
+      "path": "/home/barberb/lift_coding/artifacts/legal-head-repair-20261014-01/hf-publication-verification-v01.json",
+      "sha256": "df90c177df785fd95fb6f708fb24273fda195a264c9beeeef2750e1a5f2f0e0c"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-head-repair-20261014-01/hf-release-spec-v01.json": {
+      "bytes": 76317,
+      "path": "/home/barberb/lift_coding/artifacts/legal-head-repair-20261014-01/hf-release-spec-v01.json",
+      "sha256": "3249a58e7e3965e3960109005708fd8fc31782edbc04c4ee2f38c30d381e9772"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/hf-actual-publication-independent-review-v01.json": {
+      "bytes": 191754,
+      "path": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/hf-actual-publication-independent-review-v01.json",
+      "sha256": "885c366d78e9549f899f9cec037109da9a369d65b04dc339de694dfb97c63b3e"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/hf-preparation-receipt-v01.json": {
+      "bytes": 166021,
+      "path": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/hf-preparation-receipt-v01.json",
+      "sha256": "97df1c0b725288fe4354ce3d6eef23c5a91d3e9f49afc49bd790617f1ccad40b"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/hf-publication-verification-v01.json": {
+      "bytes": 42488,
+      "path": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/hf-publication-verification-v01.json",
+      "sha256": "c01e9dd171c44d72d701f25ff0e707cb8384da58d1155e392033c50c14d10e25"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-storage-closeout-20261012-02/hf-actual-publication-independent-review-v01.json": {
+      "bytes": 130107,
+      "path": "/home/barberb/lift_coding/artifacts/legal-storage-closeout-20261012-02/hf-actual-publication-independent-review-v01.json",
+      "sha256": "0446a77e23ed95899cc6e7a432f9d10a5aa015764c086afa713c5810b83b5685"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-storage-closeout-20261012-02/hf-preparation-receipt-v03.json": {
+      "bytes": 58194,
+      "path": "/home/barberb/lift_coding/artifacts/legal-storage-closeout-20261012-02/hf-preparation-receipt-v03.json",
+      "sha256": "8585520b3d4d7c2d4e540ccf27b71f1f983c54bd008be20ccd34221708eaab59"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-storage-closeout-20261012-02/hf-publication-verification-v03.json": {
+      "bytes": 59394,
+      "path": "/home/barberb/lift_coding/artifacts/legal-storage-closeout-20261012-02/hf-publication-verification-v03.json",
+      "sha256": "3f8f43e17e5d03a875d7d3516bfe3bbe1d931633ed83cb2b780aa421ef4b82a2"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-storage-recovery-20261012-01/named-root-metadata-census-v03.json": {
+      "bytes": 185324,
+      "path": "/home/barberb/lift_coding/artifacts/legal-storage-recovery-20261012-01/named-root-metadata-census-v03.json",
+      "sha256": "a690b67a728901a65804b8b07698320d6f93ffb5d6d64832185b897f6c0038e3"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-storage-recovery-20261012-01/storage-remediation-next-actions-v01.json": {
+      "bytes": 13150,
+      "path": "/home/barberb/lift_coding/artifacts/legal-storage-recovery-20261012-01/storage-remediation-next-actions-v01.json",
+      "sha256": "a5271d1b892d7f8664f11c11f46f2f4d4722b741f20fdb792f9c8b45ade62bb7"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-targeted-loss-20261012-01/hf-actual-publication-independent-review-v01.json": {
+      "bytes": 224985,
+      "path": "/home/barberb/lift_coding/artifacts/legal-targeted-loss-20261012-01/hf-actual-publication-independent-review-v01.json",
+      "sha256": "b42a34289c903ef836a4fe8916d9ae790117629c1cb0057e89d4fe7f76dd20be"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-targeted-loss-20261012-01/hf-preparation-receipt-v01.json": {
+      "bytes": 97648,
+      "path": "/home/barberb/lift_coding/artifacts/legal-targeted-loss-20261012-01/hf-preparation-receipt-v01.json",
+      "sha256": "4137e9ec00e5b943280eecea334152c221423b3b0fb52c2ebb0def643ee0fd6b"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-targeted-loss-20261012-01/hf-publication-verification-v01.json": {
+      "bytes": 101321,
+      "path": "/home/barberb/lift_coding/artifacts/legal-targeted-loss-20261012-01/hf-publication-verification-v01.json",
+      "sha256": "11b651950c723d4d831bd7745426536e3f41e770ef0a1a6059413ce89ea4aae0"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/hf-preparation-receipt-v02.json": {
+      "bytes": 144823,
+      "path": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/hf-preparation-receipt-v02.json",
+      "sha256": "cb685e93c01b73725ef6bdb5aeefdc6f52cd07fa2ea8bde121349427f047b94e"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/hf-publication-actual-independent-review-v01.json": {
+      "bytes": 189227,
+      "path": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/hf-publication-actual-independent-review-v01.json",
+      "sha256": "8a7fab8c4264e5cb634087029199caf7dddde1b5073c600f7ff7d5a56452ae34"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/hf-publication-verification-v01.json": {
+      "bytes": 66994,
+      "path": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/hf-publication-verification-v01.json",
+      "sha256": "629c1a4ade850af66d52f6c0c6a2428cd7bb3adc72e8ea7de16498e97be5af43"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/hf-release-spec-v01.json": {
+      "bytes": 6877,
+      "path": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/hf-release-spec-v01.json",
+      "sha256": "e88d557b519b661b26c0a56904187d4b7565613b24260c984cbc403b10cb8327"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/hf-release-spec-v02.json": {
+      "bytes": 6877,
+      "path": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/hf-release-spec-v02.json",
+      "sha256": "0fff12d7337a15fbcaff97f851f26e06b7dda5847d26f1032e411ac3dc2821d1"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/hf-release-spec-v03.json": {
+      "bytes": 7932,
+      "path": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/hf-release-spec-v03.json",
+      "sha256": "16d9b474655cd05eed2d805cfdfe89bbd1d804aeaa484236dccbbc970ec7b21b"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-temporal-attention-20261013-01/hf-preparation-receipt-v01.json": {
+      "bytes": 58937,
+      "path": "/home/barberb/lift_coding/artifacts/legal-temporal-attention-20261013-01/hf-preparation-receipt-v01.json",
+      "sha256": "48484f072ec859041a24a6ca717cca20a04bb55fecc60f4d21119b63b8efa8c3"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-temporal-attention-20261013-01/hf-publication-actual-independent-review-v01.json": {
+      "bytes": 464801,
+      "path": "/home/barberb/lift_coding/artifacts/legal-temporal-attention-20261013-01/hf-publication-actual-independent-review-v01.json",
+      "sha256": "8a3ae60d779cb91a51bb64e028b3561c7485fe9a644408ca56f6982177377dbe"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-temporal-attention-20261013-01/hf-publication-verification-v01.json": {
+      "bytes": 60962,
+      "path": "/home/barberb/lift_coding/artifacts/legal-temporal-attention-20261013-01/hf-publication-verification-v01.json",
+      "sha256": "e4135c017aaad4812453caf5efdb61d29349e7c1f559c69d0dc2faff64d0c183"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-temporal-attention-20261013-01/hf-release-spec-v01.json": {
+      "bytes": 63481,
+      "path": "/home/barberb/lift_coding/artifacts/legal-temporal-attention-20261013-01/hf-release-spec-v01.json",
+      "sha256": "875a08aeb7426c04c488143dbc0c87b9a583b4ba01b3fee46101d237333f2d86"
+    }
+  },
+  "candidate_manifest": {
+    "bytes": 1099773,
+    "path": "/home/barberb/lift_coding/artifacts/legal-storage-continuation-20261014-01/owned-training-archive-candidates-v01.json",
+    "sha256": "29a71fc47a90334fc310d39b669c81034f18c02203b6008c5c08b045ca3f1533"
+  },
+  "cap_bytes": 145000000000,
+  "conclusion": "Verified owned archival result paths alone do not establish the required3.093GB relief. No safe >3.093GB reclamation set is proven by the reviewed evidence; preserve the refusal and qualify an additional owner-specific source-capture/archive or reservation-closeout operation before any cleanup.",
+  "conditional_non_F12_directly_referenced_apparent_bytes": 516089841,
+  "conditional_non_F12_directly_referenced_paths": 658,
+  "current_owner_approval_for_retirement": false,
+  "excluded_categories": [
+    "All foreign or ownership-unknown pytest subtrees;2.913GB recent pytest growth is unattributed.",
+    "All retained recovery branches/worktrees and canonical dirty HEAD/index content.",
+    "All current F12 source/checkpoint/raw-reference paths; candidate byte overlap does not remove their live reference authority.",
+    "All private ledger/scheduler/resource endpoint bodies, claim release or status reinterpretation.",
+    "The already closed generated-field4GB claim; report88 establishes prior recovery, so it cannot be counted again.",
+    "The N7 retained200MB failure claim cannot solve this gap and remains preserved.",
+    "HF upload/download duplicates under artifacts lie outside the four counted roots and supply0 accounting relief here."
+  ],
+  "findings": [],
+  "full_nonreleased_claim_bytes": 44381777216,
+  "guaranteed_reclaimable_bytes": 0,
+  "large_historical_captures_not_qualified": [
+    {
+      "durable_full_tree_archive_established": false,
+      "historical_apparent_bytes": 6876884894,
+      "ownership_established_for_this_effort": false,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-event-validation-resume-20261002",
+      "removal_approved": false,
+      "status": "EXCLUDED: historical size is a lead, not owner authority or durable-copy proof; frozen/live source dependencies may remain."
+    },
+    {
+      "durable_full_tree_archive_established": false,
+      "historical_apparent_bytes": 6832874661,
+      "ownership_established_for_this_effort": false,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/native-dcec-ui-20261002",
+      "removal_approved": false,
+      "status": "EXCLUDED: historical size is a lead, not owner authority or durable-copy proof; frozen/live source dependencies may remain."
+    },
+    {
+      "durable_full_tree_archive_established": false,
+      "historical_apparent_bytes": 4167389909,
+      "ownership_established_for_this_effort": false,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/source-conditioning-development-20261002",
+      "removal_approved": false,
+      "status": "EXCLUDED: historical size is a lead, not owner authority or durable-copy proof; frozen/live source dependencies may remain."
+    },
+    {
+      "durable_full_tree_archive_established": false,
+      "historical_apparent_bytes": 4052925689,
+      "ownership_established_for_this_effort": false,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/intent-ui-gap-repair-20261002",
+      "removal_approved": false,
+      "status": "EXCLUDED: historical size is a lead, not owner authority or durable-copy proof; frozen/live source dependencies may remain."
+    },
+    {
+      "durable_full_tree_archive_established": false,
+      "historical_apparent_bytes": 4022542368,
+      "ownership_established_for_this_effort": false,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/intent-ui-coverage-20261002",
+      "removal_approved": false,
+      "status": "EXCLUDED: historical size is a lead, not owner authority or durable-copy proof; frozen/live source dependencies may remain."
+    },
+    {
+      "durable_full_tree_archive_established": false,
+      "historical_apparent_bytes": 2652720671,
+      "ownership_established_for_this_effort": false,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/source384-fidelity-20261001",
+      "removal_approved": false,
+      "status": "EXCLUDED: historical size is a lead, not owner authority or durable-copy proof; frozen/live source dependencies may remain."
+    },
+    {
+      "durable_full_tree_archive_established": false,
+      "historical_apparent_bytes": 2251433883,
+      "ownership_established_for_this_effort": false,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-source-margin-20261004",
+      "removal_approved": false,
+      "status": "EXCLUDED: historical size is a lead, not owner authority or durable-copy proof; frozen/live source dependencies may remain."
+    }
+  ],
+  "limits": [
+    "Only a bounded set of nine this-effort archived training phases was examined; no assertion that all project storage belongs to us.",
+    "Candidate totals are present apparent regular-file pathname bytes from exact archived manifests, not approved deletion or a full tree census.",
+    "Protected classification checks direct F12 plan references only; absence is insufficient to establish that no other live consumer exists.",
+    "No fresh global capacity/ledger/process state was observed. Saved metadata shows the refused snapshot only."
+  ],
+  "necessary_before_any_reclamation": [
+    "Freeze an exact finite candidate pathname manifest and identify its originating training attempt, owning interface and explicit retention authority; confirm ownership from producer/admission/release evidence, not UID/pathname/age.",
+    "Rehash every proposed pathname opaquely under before/after device/inode/size/time fences; preserve complete directory entries and reject symlinks/specials/path substitutions. Do not silently broaden scope.",
+    "Authenticate immutable remote revision and every proposed byte identity from independent publication/readback proof; for non-Git weights/proof keys/auxiliary evidence, demonstrate complete reconstructable coverage. A code commit alone does not archive arbitrary capture extras.",
+    "Check all current training/guardian/replay/release/source manifests and retained recovery histories for consuming paths. Keep live source owners, N10 donor, N11 references and frozen plan closure available; no historical frozen manifest may be rewritten to pretend its path was never used.",
+    "Use a separately reviewed bounded liveness/open-file/group/lease check for each exact selected producer; saved idle samples are not continuous or current proof. No broad process census or unsupported foreign cleanup.",
+    "Do not implement claim release through deletion. If a selected retained claim is considered, use the current reviewed administrative owner API with exact record hash, attempt binding, full inventory/fsync, dead owner/group evidence, unsupported-external-charge refusal and all foreign bodies preserved; prior4GB closeout cannot repeat.",
+    "Obtain a concrete independently reviewed retirement/relocation protocol with authorized final action. Preserve an external-to-counted-roots durable copy and audit receipts; simply moving/hardlinking within a counted root does not reduce the apparent-path accounting.",
+    "Require a fresh qualified four-root capacity clearance using unchanged145GB cap, full current nonreleased claims and actual future output bound. Account per pathname even for hardlinks; apparent relief is not guaranteed physical block relief.",
+    "After documented legitimate state change, bind a new immutable plan to the fresh capacity receipt and let the unchanged guardian perform actual admission; this proposal grants no training/retry/model permission."
+  ],
+  "objective_3GB_reclamation_established": false,
+  "passed": true,
+  "private_ledger_bodies_read_by_this_review": 0,
+  "proposal_only": true,
+  "required_relief_at_saved_F12_check_bytes": 3093494769,
+  "review_scope": {
+    "Git_mutations": false,
+    "broad_shared_root_censuses": 0,
+    "checkpoint_JSON_parses": 0,
+    "claim_mutations": 0,
+    "claim_releases": 0,
+    "deletions": 0,
+    "model_or_encoder_calls": 0,
+    "moves": 0,
+    "network_calls": 0,
+    "numerical_imports": 0,
+    "private_endpoint_reads": 0,
+    "private_ledger_body_reads": 0,
+    "resource_API_calls": 0,
+    "saved_prediction_or_gold_JSON_parses": 0,
+    "specific_archived_file_opaque_hashes": 680
+  },
+  "saved_F12_apparent_bytes": 103311717553,
+  "saved_F12_full_run_charged_bytes": 148093494769,
+  "schema": "legal-storage-continuation-owned-durability-proposal/v1",
+  "shortfall_after_conditional_non_F12_reference_paths_bytes": 2577404928,
+  "shortfall_even_if_all_verified_owned_result_paths_removed_bytes": 2548304440
+}

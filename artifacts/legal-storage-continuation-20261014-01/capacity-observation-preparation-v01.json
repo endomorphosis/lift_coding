@@ -1,0 +1,294 @@
+{
+  "bounds": {
+    "future_own_output_bound_bytes": 200000000,
+    "global_cap_bytes": 145000000000,
+    "hypothetical_own_reservation_bytes": 200000000,
+    "max_inventory_entries": 2000000,
+    "max_ledger_bytes": 8388608,
+    "max_records": 4096
+  },
+  "capacity_equations": {
+    "admission_guaranteed": false,
+    "full_run_charged": "native_charged + 200000000",
+    "full_run_fit": "full_run_charged <= 145000000000 and physical_free >= full_nonreleased_claims + 400000000",
+    "future_output_projection_is_additional_claim": false,
+    "native_charged": "observed_apparent + full_nonreleased_claims + 200000000"
+  },
+  "counted_root_metadata": [
+    {
+      "device": 66306,
+      "inode": 66764317,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs"
+    },
+    {
+      "device": 66306,
+      "inode": 58092485,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/todo-queues"
+    },
+    {
+      "device": 66306,
+      "inode": 51016937,
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence"
+    },
+    {
+      "device": 66306,
+      "inode": 524352,
+      "path": "/tmp/pytest-of-barberb"
+    }
+  ],
+  "current_record_count_known_by_preparer": false,
+  "exact_reuse": [
+    "F12 protocol raw bytes and contract",
+    "F12 original538 baseline and full public body-hash anchor",
+    "fixed ten native/local producer pins",
+    "six native read-only inventory functions with original identity/symlink/churn/2M guards",
+    "fullclaim charging and conservative future-output arithmetic"
+  ],
+  "future_observer_invocation": {
+    "argv": [
+      "python",
+      "/home/barberb/lift_coding/artifacts/legal-storage-continuation-20261014-01/review_storage_continuation_capacity_observation_v01.py"
+    ],
+    "execute_only_after_independent_source_qualification": true,
+    "not_executed_by_preparer": true
+  },
+  "guardian_check_note": "Qualified guardian --check reads live ledger/scheduler in its subprocess; it has no --check-output flag, acquires no reservation and constructs no scheduler client. Root explicitly owns this invocation. The observer reads only authenticated copied endpoints.",
+  "immutable_prior_anchor": {
+    "full_nonreleased_claim_bytes": 44381777216,
+    "record_body_hash_map_sha256": "b3c68c6a50aa564532be42134e3d803a2ee25ecf48ff1f55034dcaa6ce032df3",
+    "record_count": 538,
+    "record_status_counts": {
+      "released": 437,
+      "retained": 101
+    }
+  },
+  "inherited_artifacts": {
+    "adopt_shared_scheduler_actor_ranking_v02.py": {
+      "bytes": 15101,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/adopt_shared_scheduler_actor_ranking_v02.py",
+      "sha256": "526aa9fa55d955eb92dba37053af2dfdf01f7dd8335cd309cb36770988bab0b7"
+    },
+    "capacity-clearance-source-independent-review-v01.json": {
+      "bytes": 9453,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/capacity-clearance-source-independent-review-v01.json",
+      "sha256": "eed7e84b12c0064f9578630fdc6fa2803e5074ebe1d23f643e3aecf1ac9845e5"
+    },
+    "capacity-clearance-v01.json": {
+      "bytes": 19246,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/capacity-clearance-v01.json",
+      "sha256": "4167848eb92ff26fe77ed7b01adf01d7bea56adcf94fec5b7314e0c5b61e4143"
+    },
+    "capacity-refusal-independent-review-v01.json": {
+      "bytes": 6862,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/capacity-refusal-independent-review-v01.json",
+      "sha256": "743f2fb2a2f52e3ab8f937e41d2a6209d874c1b541ca44a28c939054b3fecc34"
+    },
+    "completion-review-v01.json": {
+      "bytes": 2367,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/completion-review-v01.json",
+      "sha256": "a12238762191f87041e1a37c54c30953d6eed2e579895ebf6104461c2d62248e"
+    },
+    "conditions_balanced_resource_protocol_v01.py": {
+      "bytes": 13965,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/conditions_balanced_resource_protocol_v01.py",
+      "sha256": "265d96839054a16d4c4ab0f2550dc69948263a87566e9337a429b3ddb02f69f0"
+    },
+    "final-integration-independent-review-v01.json": {
+      "bytes": 93334,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/final-integration-independent-review-v01.json",
+      "sha256": "e84c08f2e0fb0784b6ac5d35b6dcf7c595dc6594fd4684576532ecdf65b9574b"
+    },
+    "owned_lease_watchdog_actor_ranking_v02.py": {
+      "bytes": 24435,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/owned_lease_watchdog_actor_ranking_v02.py",
+      "sha256": "6355884b6737c5b0e5cd1a128ad70a09fcf304f27bbf32492a15d8dbe070b032"
+    },
+    "resource-baseline-v01.json": {
+      "bytes": 77889,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/resource-baseline-v01.json",
+      "sha256": "9fd03480b85fb3b9a9164a4b4e87b4807bf8c65419a1037edccbb1b04723775f"
+    },
+    "resource-bridge-source-independent-review-v01.json": {
+      "bytes": 2270,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/resource-bridge-source-independent-review-v01.json",
+      "sha256": "8c64950ffd0a14b6c02ad4a901cfbc0e8517bf3fb9a4dd611b091b125b687360"
+    },
+    "resource-observer-source-independent-review-v01.json": {
+      "bytes": 11282,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/resource-observer-source-independent-review-v01.json",
+      "sha256": "ecc1dab08ccea80d7dc78339f910e90f5d6fd527db15eaae991c1766cc6a79b7"
+    },
+    "resource-protocol-contract-v01.json": {
+      "bytes": 8109,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/resource-protocol-contract-v01.json",
+      "sha256": "34dd2cf9422d076e647f73666d4d10913ebfa62d4ceb78ba6102797cc857acd5"
+    },
+    "review_conditions_balanced_capacity_clearance_v01.py": {
+      "bytes": 8023,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/review_conditions_balanced_capacity_clearance_v01.py",
+      "sha256": "bce76340578fb66a532bf1085f367e9cff703e8df8bac199f2dddbd70c8b8692"
+    },
+    "run_scope_guardian_v02.py": {
+      "bytes": 38449,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/run_scope_guardian_v02.py",
+      "sha256": "b4811b7b24f584d5cb0f7c921451a234a3e0d84b2d7507e015426e258134c2db"
+    },
+    "sample_conditions_balanced_private_resources_v01.py": {
+      "bytes": 6681,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/sample_conditions_balanced_private_resources_v01.py",
+      "sha256": "ba8990d2c7ccc5461d98269ac09a3f920d17b490e82021e71d474096daa6847f"
+    },
+    "sampler-source-independent-review-v01.json": {
+      "bytes": 2166,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/sampler-source-independent-review-v01.json",
+      "sha256": "4b4f5a304c071b07fb5bb8a817f3daff84b05ca922a95c667a9affdcb1f55258"
+    }
+  },
+  "no_actions_by_preparer": {
+    "Git_calls": 0,
+    "actual_censuses": 0,
+    "checkpoint_JSON_parses": 0,
+    "claim_mutations": 0,
+    "claims_created": 0,
+    "cleanup": 0,
+    "guardian_calls": 0,
+    "live_endpoint_reads": 0,
+    "model_calls": 0,
+    "private_copy_reads": 0,
+    "resource_API_calls": 0,
+    "sampler_calls": 0
+  },
+  "not_a_runtime_rebind": "F12 execution plan/runner/clearance remain immutable. A future candidate requires a separately reviewed fresh execution manifest/plan and concrete training approval, even if this observation fits.",
+  "observer": {
+    "bytes": 8772,
+    "path": "/home/barberb/lift_coding/artifacts/legal-storage-continuation-20261014-01/review_storage_continuation_capacity_observation_v01.py",
+    "sha256": "71f56a5d148d8b097b423cf0f396f2e0a313e6b48d118f59cf422bd69ca60632"
+  },
+  "output": {
+    "observation_only": true,
+    "path": "/home/barberb/lift_coding/artifacts/legal-storage-continuation-20261014-01/capacity-observation-v01.json",
+    "schema": "storage-continuation-capacity-observation/v1",
+    "training_authorized": false
+  },
+  "preparation_only": true,
+  "prepared_at_utc": "2026-10-14T05:54:29.379696+00:00",
+  "required_new_input_manifest": {
+    "all_descriptors_are_full_path_bytes_sha256": true,
+    "baseline": {
+      "bytes": 77889,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/resource-baseline-v01.json",
+      "sha256": "9fd03480b85fb3b9a9164a4b4e87b4807bf8c65419a1037edccbb1b04723775f"
+    },
+    "bridge_qualification": {
+      "bytes": 2270,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/resource-bridge-source-independent-review-v01.json",
+      "sha256": "8c64950ffd0a14b6c02ad4a901cfbc0e8517bf3fb9a4dd611b091b125b687360"
+    },
+    "check_path": "/home/barberb/lift_coding/artifacts/legal-storage-continuation-20261014-01/guardian-check-v01.json",
+    "contract": {
+      "bytes": 8109,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/resource-protocol-contract-v01.json",
+      "sha256": "34dd2cf9422d076e647f73666d4d10913ebfa62d4ceb78ba6102797cc857acd5"
+    },
+    "exact_keys": [
+      "schema",
+      "contract",
+      "baseline",
+      "sample_receipt",
+      "check",
+      "sampler_qualification",
+      "bridge_qualification"
+    ],
+    "path": "/home/barberb/lift_coding/artifacts/legal-storage-continuation-20261014-01/capacity-observation-inputs-v01.json",
+    "sample_receipt_path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/private-runtime-snapshots/opening-v03/snapshot-receipt-v01.json",
+    "sampler_qualification": {
+      "bytes": 2166,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/sampler-source-independent-review-v01.json",
+      "sha256": "4b4f5a304c071b07fb5bb8a817f3daff84b05ca922a95c667a9affdcb1f55258"
+    },
+    "schema": "storage-continuation-capacity-observation-inputs/v1"
+  },
+  "required_source_gate": {
+    "findings": [],
+    "observer": {
+      "bytes": 8772,
+      "path": "/home/barberb/lift_coding/artifacts/legal-storage-continuation-20261014-01/review_storage_continuation_capacity_observation_v01.py",
+      "sha256": "71f56a5d148d8b097b423cf0f396f2e0a313e6b48d118f59cf422bd69ca60632"
+    },
+    "passed": true,
+    "path": "/home/barberb/lift_coding/artifacts/legal-storage-continuation-20261014-01/capacity-observation-source-independent-review-v01.json",
+    "schema": "storage-continuation-capacity-observation-source-independent-review/v1"
+  },
+  "resource_producer_pins": {
+    "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/adopt_shared_scheduler_actor_ranking_v02.py": {
+      "bytes": 15101,
+      "sha256": "526aa9fa55d955eb92dba37053af2dfdf01f7dd8335cd309cb36770988bab0b7"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/owned_lease_watchdog_actor_ranking_v02.py": {
+      "bytes": 24435,
+      "sha256": "6355884b6737c5b0e5cd1a128ad70a09fcf304f27bbf32492a15d8dbe070b032"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/decoder-normative-wording-r2-20261006/lazy_scheduler_adoption.py": {
+      "bytes": 1345,
+      "sha256": "42f31d8da1eb5b44274ca0b8c8180cd78bc083dfd0e93438e61f38223929d84a"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/native4096-four-width-20261004/resource-cap/autoencoder_daemon_resources.py": {
+      "bytes": 36724,
+      "sha256": "b00d2752ba852fe73760bba4fbd51b0e845742c3527642606a2a77ed9f8f5e2c"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/__init__.py": {
+      "bytes": 56829,
+      "sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/optimizers/__init__.py": {
+      "bytes": 957,
+      "sha256": "a12bab3724da07be67b447719ace42fc1f480cb5635581f320a99a372f02f450"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/optimizers/logic_theorem_optimizer/__init__.py": {
+      "bytes": 69336,
+      "sha256": "9d693fa576f00dc36899faad75ef3044c437e2bfec5c62306f7031236725bb0e"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_resource_safety.py": {
+      "bytes": 4534,
+      "sha256": "23569b40b44d9130c30c62be564d58908a509fb1f40c6377e89f2fc1e3c799c5"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py": {
+      "bytes": 82754,
+      "sha256": "a418e84f70ed8509ba0518feea69e7a8c27865139f83b6c81349eefdfd5893a4"
+    },
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs/ui-modal-coverage-20261002/validation-source-r2/ipfs_datasets_py/optimizers/logic_theorem_optimizer/runtime_telemetry.py": {
+      "bytes": 53075,
+      "sha256": "542f705867b93fcb138a117e1f5c97a144ad6635dc92c37bc5034eee5065ef63"
+    }
+  },
+  "root_owned_existing_invocations_do_not_repeat": [
+    {
+      "argv": [
+        "python",
+        "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/sample_conditions_balanced_private_resources_v01.py",
+        "--role",
+        "opening",
+        "--index",
+        "3"
+      ],
+      "output": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/private-runtime-snapshots/opening-v03/snapshot-receipt-v01.json"
+    },
+    {
+      "argv": [
+        "python",
+        "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/run_scope_guardian_v02.py",
+        "--check"
+      ],
+      "stdout_to_exclusive_new_file": "/home/barberb/lift_coding/artifacts/legal-storage-continuation-20261014-01/guardian-check-v01.json"
+    }
+  ],
+  "schema": "storage-continuation-capacity-observation-preparation/v1",
+  "scope": "read-only continuation observation of the unchanged qualified F12 contract; no new baseline or training authorization",
+  "source_changes": [
+    "new F13 input/output/qualification paths and schemas",
+    "absolute F12 protocol import with bytecount/SHA guard before import and audited pin after import",
+    "opening index3 and exact new F13 guardian check path",
+    "output identifies historical contract cell/attempt and explicitly denies training authorization"
+  ],
+  "unchanged538_anchor_reuse_rule": "Only if every old record body SHA, exact record set, statuses, full nonreleased charges, roots, cap, and producer/config closure still match. Any mismatch refuses before census; the old baseline remains a historical anchor and cannot authorize a changed current state."
+}
