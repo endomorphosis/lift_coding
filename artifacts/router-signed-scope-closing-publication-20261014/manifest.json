@@ -1,0 +1,46 @@
+{
+  "accelerator_publication": "cb104896f55a28352feb8cd35c4b9991144c933a",
+  "changed_gitlinks": {
+    "external/ipfs_accelerate": "cb104896f55a28352feb8cd35c4b9991144c933a"
+  },
+  "files": [
+    {
+      "bytes": 6064,
+      "path": "implementation_plan/docs/127-supervisor-signed-scope-closing-2026-10-14.md",
+      "sha256": "3c2956969ce46890c2aa8b64f5c0b384b95bc090069c53ea10dda2d940c27d3d"
+    },
+    {
+      "bytes": 5196,
+      "path": "artifacts/router-signed-scope-closing-publication-20261014/observe_hosted_ci.py",
+      "sha256": "f100e98937ddf0cb40d09dcbba1d88903c0e9bfb495b136ef5106df1f4191945"
+    },
+    {
+      "bytes": 23683,
+      "path": "artifacts/router-signed-scope-closing-publication-20261014/child-ci-observation.json",
+      "sha256": "262f71beb2eb911f54324a9c3e065715daec13125884286c0cab2f8bf40557a4"
+    },
+    {
+      "bytes": 28182,
+      "path": "artifacts/router-signed-scope-closing-publication-20261014/fresh-main-compatibility.json",
+      "sha256": "af9d43a331071533ee68581fe444922957473a8c58b86905b8a2d3bd4f7fd17e"
+    },
+    {
+      "bytes": 29784,
+      "path": "artifacts/router-signed-scope-closing-publication-20261014/publication_checker.py",
+      "sha256": "f361ec2328a8934b2b396eba224e842abde9984d90d6d8c04a26ab2dc57d2dcc"
+    },
+    {
+      "bytes": 51971,
+      "path": "artifacts/router-signed-scope-closing-publication-20261014/parent-checks.json",
+      "sha256": "9d92e0c961a7ae2f0dc897f63d888b6646eefd3a6a1d1b516fa30bb1aab42ba4"
+    }
+  ],
+  "manifest_self_excluded": true,
+  "parent_base": "67778aeb76dcac7ae19671643255c5b871b2e879",
+  "preserved_gitlinks": {
+    "external/ipfs_datasets": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+    "external/ipfs_kit": "40c98c71b95be750509ffdb21e7e5494d91b4e79"
+  },
+  "qualified_leaf": "cb104896f55a28352feb8cd35c4b9991144c933a",
+  "schema": "router-signed-scope-closing-parent-manifest@1"
+}
