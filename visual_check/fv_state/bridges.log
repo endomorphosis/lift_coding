@@ -1,0 +1,28 @@
+{
+  "bridges": [
+    {
+      "service": "ipfs_kit_py",
+      "ready": false,
+      "action": "started",
+      "pid": 3833,
+      "announce_file": "test-results/virtual-desktop-ipfs-mcp-orb/ipfs-kit-mcp-p2p-announce.json",
+      "log_path": "test-results/virtual-desktop-ipfs-mcp-orb/ipfs-kit-mcp-p2p.log"
+    },
+    {
+      "service": "ipfs_datasets_py",
+      "ready": false,
+      "action": "started",
+      "pid": 3966,
+      "announce_file": "test-results/virtual-desktop-ipfs-mcp-orb/ipfs-datasets-mcp-p2p-announce.json",
+      "log_path": "test-results/virtual-desktop-ipfs-mcp-orb/ipfs-datasets-mcp-p2p.log"
+    },
+    {
+      "service": "ipfs_accelerate_py",
+      "ready": false,
+      "action": "started",
+      "pid": 4192,
+      "announce_file": "test-results/virtual-desktop-ipfs-mcp-orb/ipfs-accelerate-mcp-p2p-announce.json",
+      "log_path": "test-results/virtual-desktop-ipfs-mcp-orb/ipfs-accelerate-mcp-p2p.log"
+    }
+  ]
+}

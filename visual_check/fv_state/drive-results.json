@@ -1,5 +1,5 @@
 {
- "started_at": "2026-10-14T00:10:17.816Z",
+ "started_at": "2026-10-14T05:03:34.475Z",
  "apps": [
   {
    "app_id": "terminal",
@@ -428,74 +428,23 @@
    "ok": true
   },
   "explorer": {
-   "window_text_head": "※\nMCP++ Explorer\n−\n□\n×\nMCP++ Explorer\n\nLive protocol state and explicit tool exchange across the configured IPFS services.\n\nLOADING\nRefresh\nInspecting configured MCP++ services...\nOverview\nTools\nProtocol\nDiagnostics\nEvents\nPolicy\nArtifacts\nIPFS Kit\nnot inspected\nnot negotiated\nIPFS Datasets\nnot inspected\nnot negotiated\nIPFS Accelerate\nnot inspected\nnot negotiated\nProtocol Coverage\n0 discovered tools\nInterfaces, peer identity, policies, Event DAGs, artifacts, and Helia status are queried from each selected service.\nInspect diagnostics\nVDA-G053 Diagnostics\npeer, Event DAG, policy, scheduling, tr",
-   "text_after_tools_tab": "※\nMCP++ Explorer\n−\n□\n×\nMCP++ Explorer\n\nLive protocol state and explicit tool exchange across the configured IPFS services.\n\nUNAVAILABLE\nRefresh\n0/3 MCP++ services responded.\nOverview\nTools\nProtocol\nDiagnostics\nEvents\nPolicy\nArtifacts\nService\nIPFS Kit\nIPFS Datasets\nIPFS Accelerate\nTools\n0 discovered\nNo tools discovered for this service.\nSelect a tool\nExplicit call\n{}\nArguments\nRun tool\nUse last result\nTool result will remain available for handoff to another selected service.\nK/D/A backend status\ntool_backed\nK\nIPFS Kit\nlive\nmediated-gateway\nmediated-gateway\nCorrelation\nrequired\nPolicy\nnot_evaluated\nReceipt\npending receipt\nRecovery\nThe operation was denied by policy. Review the decision and explicitly confirm if permitted.\nD\nIPFS Datasets\nlive\nmediated-gateway\nmediated-gateway\nCorrelation\nrequired\nPolicy\nnot_evaluated\nReceipt\npending receipt\nRecovery\nThe operation was denied by policy. Revi"
+   "window_text_head": "※\nMCP++ Explorer\n−\n□\n×\nMCP++ Explorer\n\nLive protocol state and explicit tool exchange across the configured IPFS services.\n\nREADY\nRefresh\n3/3 MCP++ services responded.\nOverview\nTools\nProtocol\nDiagnostics\nEvents\nPolicy\nArtifacts\nIPFS Kit\n124 tools\nmcp++/p2p-transport, mcp++/mcp-idl, mcp++/cid-envelope, mcp++/ucan, mcp++/event-dag\nIPFS Datasets\n319 tools\nmcp++/p2p-transport, mcp++/mcp-idl, mcp++/cid-envelope, mcp++/ucan, mcp++/event-dag\nIPFS Accelerate\n18 tools\nmcp++/p2p-transport, mcp++/mcp-idl, mcp++/cid-envelope, mcp++/ucan, mcp++/event-dag\nProtocol Coverage\n461 discovered tools\nInterfaces, p",
+   "text_after_tools_tab": "※\nMCP++ Explorer\n−\n□\n×\nMCP++ Explorer\n\nLive protocol state and explicit tool exchange across the configured IPFS services.\n\nREADY\nRefresh\n3/3 MCP++ services responded.\nOverview\nTools\nProtocol\nDiagnostics\nEvents\nPolicy\nArtifacts\nService\nIPFS Kit\nIPFS Datasets\nIPFS Accelerate\nTools\n124 discovered\naudit_analytics_analyze_causation\nAnalyze causal chain leading to an event Args: effect_event_id: Effect event ID max_depth: Maximum chain depth Returns: Dictionary with causation chain\naudit_analytics_analyze_trends\nAnalyze trends over time Args: metric: Metric to analyze ('event_count', 'failed_auth', 'unique_users') period: Time period ('hourly', 'daily') days: Number of days to analyze Returns: Dictionary with trend data\naudit_analytics_assess_impact\nAssess the impact of an event on the system Args: event_id: Event ID to assess time_window: Time window for impact (seconds) Returns: Dictionary "
   },
   "mcp_control": {
-   "window_text_head": "🔌\nMCP Control\n−\n□\n×\n🔌 MCP Server Control Center\n🟢 0 host daemon commands running\n🌐 0 browser-connected remotes\n🔍 Auto-discovery ON\n🔄 Refresh 📋 Templates 🖥️ Add Host Daemon 🌐 Add Browser Remote 🔍 Discovery 📊 Metrics 🔄 libp2p\n📂 Categories\n🔍\nAll Servers\n0\n🖥️\nHost Daemon\n0\n🌐\nBrowser Remote\n0\n⚙️\nCore\n0\n🔗\nIntegrations\n0\n🗄️\nDatabases\n0\n☁️\nCloud\n0\n🛠️\nCustom\n0\n📊 Quick Stats\nActive Host Daemons:\n0\nBrowser Remote Connections:\n0\nTotal Connections:\n0\nAuto-start Enabled:\n0\nTemplates Available:\n8\nBrowser libp2p Defaults\nRefresh\nEnabled by default: 8 configured, 0 gaps\nListen: /webrtc\nLoader: literal-browser-imports\nUpdated: 12:12:47 AM\nlibp2p Core\nlibp2p\nconfigured from createLibp2p\nWebRTC\n@libp2p/webrtc\nconfigured from webRTC\nWebSockets\n@libp2p/websockets\nconfigured from webSockets\nCircuit Relay v2\n@libp2p/circuit-relay-v2\nconfigured from circuitRelayTransport\nIdentify\n@libp2p/iden"
+   "window_text_head": "🔌\nMCP Control\n−\n□\n×\n🔌 MCP Server Control Center\n🟢 0 host daemon commands running\n🌐 0 browser-connected remotes\n🔍 Auto-discovery ON\n🔄 Refresh 📋 Templates 🖥️ Add Host Daemon 🌐 Add Browser Remote 🔍 Discovery 📊 Metrics 🔄 libp2p\n📂 Categories\n🔍\nAll Servers\n0\n🖥️\nHost Daemon\n0\n🌐\nBrowser Remote\n0\n⚙️\nCore\n0\n🔗\nIntegrations\n0\n🗄️\nDatabases\n0\n☁️\nCloud\n0\n🛠️\nCustom\n0\n📊 Quick Stats\nActive Host Daemons:\n0\nBrowser Remote Connections:\n0\nTotal Connections:\n0\nAuto-start Enabled:\n0\nTemplates Available:\n8\nBrowser libp2p Defaults\nRefresh\nEnabled by default: 8 configured, 0 gaps\nListen: /webrtc\nLoader: literal-browser-imports\nUpdated: 5:05:56 AM\nlibp2p Core\nlibp2p\nconfigured from createLibp2p\nWebRTC\n@libp2p/webrtc\nconfigured from webRTC\nWebSockets\n@libp2p/websockets\nconfigured from webSockets\nCircuit Relay v2\n@libp2p/circuit-relay-v2\nconfigured from circuitRelayTransport\nIdentify\n@libp2p/ident"
   },
   "supervisor": {
-   "window_text_head": "◬\nAgent Supervisor\n−\n□\n×\nAgent Supervisor\nGoals, task queue, receipts, and MCP++ health\nContract\nSecurity\nRefresh\nEmpty\nError\nSTATUS\ndegraded\nACTIVE GOALS\n2\nQUEUED\n4\nRUNNING\n1\nMODE\nfallback\nGoals\n2 goals\nSWR-105\nBuild the Agent Supervisor virtual-desktop application\nSWR-105-ui\nGoals tree, queue, active task, and receipt UI\nSWR-105-contract\nBrowser-safe contract cross-links and health panes\nSWR-106\nAdd governed prompt steering for goals, subgoals, and tasks\nSWR-106-policy\nConfirmation-gated steering request flow\nQueue\n4 tasks\nSWR-105-1\nRender supervisor goals/subgoals tree\nsupervisor\nSWR-105-2\nWire queue item to taskboard and receipts\nrelease-evidence\nSWR-105-3\nPublish browser-safe backend contract links\ngithub\nSWR-106-1\nDraft governed prompt steering confirmation flow\ntodo\nActive task\nDispatch\nSteering\nReceipts\nHealth\nContract\nSWR-105-1\n\nRender supervisor goals/subgoals tree\n\nGOAL\nSWR-10"
+   "window_text_head": "◬\nAgent Supervisor\n−\n□\n×\nAgent Supervisor\nGoals, task queue, receipts, and MCP++ health\nContract\nSecurity\nRefresh\nEmpty\nError\nSTATUS\navailable\nACTIVE GOALS\n0\nQUEUED\n0\nRUNNING\n0\nMODE\ndegraded\nGoals\n0 goals\nNo goals available.\nQueue\n0 tasks\nNo queue items available.\nActive task\nDispatch\nSteering\nReceipts\nHealth\nContract\nNo active task selected.\nVDA-G054 workflow evidence\nBounded goal steering, dispatch, K/D/A receipts, timeout recovery, and taskboard visibility.\nGoal graph\nPrompt preview\nTaskboard links\nPolicy confirmation\nK/D/A evidence\nProgress\nTimeout reassignment\nReceipts\nGoal/subgoal graph\nbafyagentg054goalsubgoalgraph receipt:agent-supervisor:g054:goal-graph 0 goals, 0 subgoals, selected -> .\nPrompt preview\nbafyagentg054promptpreview receipt:agent-supervisor:g054:prompt-preview normalized target task:unselected; planned MCP action agent_supervisor.prompt_steering.request; prompt_log_"
   }
  },
  "console_errors": [
   "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
-  "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
-  "App code-editor not found",
-  "App strudel-grandma not found",
-  "App p2p-chat-offline not found"
+  "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
  ],
  "failed_requests": [
   "GET https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop&crop=center",
-  "GET https://esm.sh/@strudel.cycles/core?bundle",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_kit_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_kit_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_kit_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_kit_py/mcp",
-  "GET http://127.0.0.1:3001/mcp/services/ipfs_kit_py/mcp/helia/status",
-  "GET http://127.0.0.1:3001/mcp/services/ipfs_datasets_py/mcp/health",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_datasets_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_datasets_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_datasets_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_datasets_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_datasets_py/mcp",
-  "GET http://127.0.0.1:3001/mcp/services/ipfs_datasets_py/mcp/helia/status",
-  "GET http://127.0.0.1:3001/mcp/services/ipfs_accelerate_py/mcp/health",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_accelerate_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_accelerate_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_accelerate_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_accelerate_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_accelerate_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_accelerate_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_accelerate_py/mcp",
-  "GET http://127.0.0.1:3001/mcp/services/ipfs_accelerate_py/mcp/helia/status",
-  "GET http://127.0.0.1:3001/mcp/services/ipfs_kit_py/mcp/health",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_kit_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_kit_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_kit_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_kit_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_kit_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_kit_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_kit_py/mcp",
-  "GET http://127.0.0.1:3001/mcp/services/ipfs_kit_py/mcp/helia/status",
-  "GET http://127.0.0.1:3001/mcp/services/ipfs_datasets_py/mcp/health",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_datasets_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_datasets_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_datasets_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_datasets_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_datasets_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_datasets_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_datasets_py/mcp",
-  "GET http://127.0.0.1:3001/mcp/services/ipfs_datasets_py/mcp/helia/status",
-  "GET http://127.0.0.1:3001/mcp/services/ipfs_accelerate_py/mcp/health",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_accelerate_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_accelerate_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_accelerate_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_accelerate_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_accelerate_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_accelerate_py/mcp",
-  "POST http://127.0.0.1:3001/mcp/services/ipfs_accelerate_py/mcp",
-  "GET http://127.0.0.1:3001/mcp/services/ipfs_accelerate_py/mcp/helia/status"
+  "GET https://esm.sh/@strudel.cycles/core?bundle"
  ],
- "finished_at": "2026-10-14T00:13:05.888Z"
+ "finished_at": "2026-10-14T05:06:22.509Z"
 }

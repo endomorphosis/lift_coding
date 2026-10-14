@@ -3,32 +3,14 @@ logic tree pin compiler=/home/hatch/workspace/lift_coding/external/ipfs_accelera
 [ipfs_datasets_py] ergoai: checking whether ergoai is already available
 [ipfs_datasets_py] ergoai: installation started because package import ensure missing managed ErgoAI
 [ipfs_datasets_py] ergoai: installation did not make the prover available
-INFO:     Started server process [1900]
+INFO:     Started server process [3029]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://127.0.0.1:9000 (Press CTRL+C to quit)
-INFO:     127.0.0.1:52586 - "GET /mcp/tools HTTP/1.1" 422 Unprocessable Entity
-INFO:     127.0.0.1:47864 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:47876 - "POST /mcp/ HTTP/1.1" 422 Unprocessable Entity
-INFO:     127.0.0.1:47864 - "GET /mcp/tools HTTP/1.1" 422 Unprocessable Entity
-INFO:     127.0.0.1:47876 - "GET /mcp/health HTTP/1.1" 422 Unprocessable Entity
-INFO:     127.0.0.1:36220 - "GET /mcp/tools HTTP/1.1" 422 Unprocessable Entity
-INFO:     127.0.0.1:33258 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:33264 - "POST /mcp/ HTTP/1.1" 422 Unprocessable Entity
-INFO:     127.0.0.1:33258 - "GET /mcp/tools HTTP/1.1" 422 Unprocessable Entity
-INFO:     127.0.0.1:33264 - "GET /mcp/health HTTP/1.1" 422 Unprocessable Entity
-INFO:     127.0.0.1:44560 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:44564 - "POST /mcp/ HTTP/1.1" 422 Unprocessable Entity
-INFO:     127.0.0.1:44560 - "GET /mcp/tools HTTP/1.1" 422 Unprocessable Entity
-INFO:     127.0.0.1:44564 - "GET /mcp/health HTTP/1.1" 422 Unprocessable Entity
-INFO:     127.0.0.1:45472 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:45488 - "POST /mcp/ HTTP/1.1" 422 Unprocessable Entity
-INFO:     127.0.0.1:45472 - "GET /mcp/tools HTTP/1.1" 422 Unprocessable Entity
-INFO:     127.0.0.1:45488 - "GET /mcp/health HTTP/1.1" 422 Unprocessable Entity
-INFO:     127.0.0.1:49840 - "GET /mcp/tools HTTP/1.1" 422 Unprocessable Entity
-INFO:     127.0.0.1:34918 - "GET /mcp/tools HTTP/1.1" 422 Unprocessable Entity
-INFO:     127.0.0.1:34930 - "POST /mcp HTTP/1.1" 307 Temporary Redirect
-INFO:     127.0.0.1:34934 - "POST /mcp/ HTTP/1.1" 422 Unprocessable Entity
-INFO:     127.0.0.1:34930 - "GET /mcp/tools HTTP/1.1" 422 Unprocessable Entity
-INFO:     127.0.0.1:34934 - "GET /mcp/health HTTP/1.1" 422 Unprocessable Entity
-INFO:     127.0.0.1:56152 - "GET /mcp/tools HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:45352 - "GET /mcp/tools HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:45950 - "GET /mcp/risk/profile HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45958 - "GET /mcp/risk/profile HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45950 - "GET /mcp/goals?limit=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45958 - "GET /mcp/tasks?limit=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45950 - "GET /mcp/goals?limit=200 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59152 - "GET /mcp/tools HTTP/1.1" 404 Not Found

@@ -1,17 +1,4 @@
 
-  VITE v7.1.6  ready in 2020 ms
+  VITE v7.1.6  ready in 3308 ms
 
   ➜  Local:   http://127.0.0.1:3001/
-12:10:41 AM [vite] (client) warning: 
-/home/hatch/workspace/lift_coding/swissknife/web/js/apps/file-manager.js
-111 |  
-112 |    try {
-113 |      const module = await import(COLLABORATIVE_FILE_SYSTEM_MODULE);
-    |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-114 |      return module.CollaborativeFileSystem || CollaborativeFileSystemFallback;
-115 |    } catch (error) {
-The above dynamic import cannot be analyzed by Vite.
-See https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#limitations for supported dynamic import formats. If this is intended to be left as-is, you can use the /* @vite-ignore */ comment inside the import() call to suppress this warning.
-
-  Plugin: vite:import-analysis
-  File: /home/hatch/workspace/lift_coding/swissknife/web/js/apps/file-manager.js

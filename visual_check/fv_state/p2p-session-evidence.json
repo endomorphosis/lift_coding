@@ -1,0 +1,125 @@
+{
+  "session": "two-host loopback libp2p, MCPp2pNode (ipfs_accelerate_py.mcplusplus_module)",
+  "protocol": "/mcp+p2p/1.0.0",
+  "started_at": "2026-10-14T05:10:02Z",
+  "server": {
+    "peer_id": "16Uiu2HAm9rtQVsMcqe2zjt8iBBqwDPsPysosMiEKuoFZW9j4nkC4",
+    "multiaddrs": [
+      "/ip4/127.0.0.1/tcp/44203/p2p/16Uiu2HAm9rtQVsMcqe2zjt8iBBqwDPsPysosMiEKuoFZW9j4nkC4"
+    ],
+    "operational": true,
+    "multiaddrs_after_poll": [
+      "/ip4/127.0.0.1/tcp/44203/p2p/16Uiu2HAm9rtQVsMcqe2zjt8iBBqwDPsPysosMiEKuoFZW9j4nkC4"
+    ]
+  },
+  "client": {
+    "peer_id": "16Uiu2HAmF4k7VCUXhqpsqhM9dYP4CyJJ3ZjBhD2sazwXhhVL3J5U",
+    "multiaddrs": [
+      "/ip4/127.0.0.1/tcp/46285/p2p/16Uiu2HAmF4k7VCUXhqpsqhM9dYP4CyJJ3ZjBhD2sazwXhhVL3J5U"
+    ],
+    "operational": true
+  },
+  "dial_addr": "/ip4/127.0.0.1/tcp/44203/p2p/16Uiu2HAm9rtQVsMcqe2zjt8iBBqwDPsPysosMiEKuoFZW9j4nkC4",
+  "connected": true,
+  "client_connected_peers": [
+    "16Uiu2HAm9rtQVsMcqe2zjt8iBBqwDPsPysosMiEKuoFZW9j4nkC4"
+  ],
+  "descriptor": {
+    "cid": "bafybeiaa5la7h3cy44kxqm2mzczly3bmyuvvfhynlafnq2zxeqmpcn7pue",
+    "name": "gap-pass-echo-service",
+    "namespace": "mcp++",
+    "version": "1.0.0",
+    "description": "Echo tool service used for the live two-host Profile E session.",
+    "methods": [
+      {
+        "name": "mcp/interface",
+        "description": "Return this service's interface descriptor.",
+        "input_schema": {},
+        "output_schema": {
+          "type": "object"
+        },
+        "idempotent": false,
+        "cacheable": false,
+        "timeout_ms": 30000
+      },
+      {
+        "name": "tools/call",
+        "description": "Invoke a tool with a UCAN delegation.",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "arguments": {
+              "type": "object"
+            },
+            "delegation": {
+              "type": "object"
+            }
+          },
+          "required": [
+            "name",
+            "delegation"
+          ]
+        },
+        "output_schema": {
+          "type": "object"
+        },
+        "idempotent": false,
+        "cacheable": false,
+        "timeout_ms": 30000
+      }
+    ],
+    "errors": [],
+    "requires": [],
+    "compatibility": {
+      "compatible_with": [],
+      "supersedes": []
+    },
+    "semantic_tags": [],
+    "author": "",
+    "license": "MIT",
+    "tags": [],
+    "method_count": 2
+  },
+  "descriptor_cid": "bafybeiaa5la7h3cy44kxqm2mzczly3bmyuvvfhynlafnq2zxeqmpcn7pue",
+  "delegation": {
+    "cid": "bafybeig5qtygertjyygfs2ag7sttrqq7aygplgrerbdqr5pwaxjkynwtay",
+    "issuer": "did:p2p:16Uiu2HAm9rtQVsMcqe2zjt8iBBqwDPsPysosMiEKuoFZW9j4nkC4",
+    "audience": "did:p2p:16Uiu2HAmF4k7VCUXhqpsqhM9dYP4CyJJ3ZjBhD2sazwXhhVL3J5U",
+    "capabilities": [
+      {
+        "resource": "tools/echo",
+        "ability": "invoke"
+      }
+    ],
+    "expiry": 1791955209.1788929,
+    "not_before": 0.0,
+    "proof_cids": [],
+    "signed": false
+  },
+  "tool_call": {
+    "result": {
+      "echo": {
+        "message": "hello over real libp2p"
+      },
+      "served_by": "16Uiu2HAm9rtQVsMcqe2zjt8iBBqwDPsPysosMiEKuoFZW9j4nkC4",
+      "sender_peer_id": "16Uiu2HAmF4k7VCUXhqpsqhM9dYP4CyJJ3ZjBhD2sazwXhhVL3J5U"
+    },
+    "authorized": true,
+    "authorization_reason": "authorized",
+    "delegation_cid": "bafybeig5qtygertjyygfs2ag7sttrqq7aygplgrerbdqr5pwaxjkynwtay",
+    "receipt_cid": "bafybeiarmkf4mbgc5gwngkrucz53ez5lwh5q7fnf7sz4qqmvdhrgczks2i",
+    "output_cid": "bafybeifbcnmwye6z2pcc7vvykfq6olhvln5ji3rsj53or7vzv33t7idmvm"
+  },
+  "negative_control_wrong_resource": {
+    "refused": true,
+    "error": "Remote error: UCAN delegation refused: No delegation in chain grants 'invoke' on 'tools/echo'"
+  },
+  "negative_control_no_delegation": {
+    "refused": true,
+    "error": "Remote error: delegation required"
+  },
+  "finished_at": "2026-10-14T05:10:09Z"
+}

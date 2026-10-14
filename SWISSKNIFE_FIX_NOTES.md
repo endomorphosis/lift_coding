@@ -517,3 +517,444 @@ written", "timeout at ~18/48 apps" — the 18 was the complete-screenshot-set co
 are corrected in BROKEN_CONTRACT_MAP.md (B1, R2) and visual_check/FEATURE_MATRIX.md
 (F-09). The B1 disposition is unchanged: BLOCKED-BY-RUNTIME-BUDGET, with the file
 itself as the strongest R2 evidence.
+
+## Gap-closure pass (2026-10-13, later session — Benjamin: "solve the gaps so all backends work, fix all broken contracts")
+
+Scope EXPANDED by Benjamin's directive: source fixes are authorized where a
+contract is refuted. Worklist = BROKEN_CONTRACT_MAP.md R1, X1, R4, F-06 gateway,
+B6, B2, B4, B1; disposition-only B5/B7/B3. All fixes stay UNCOMMITTED, listed
+file-by-file. Baseline: superproject 8ce1bb13, swissknife cd37eeb4,
+external/ipfs_accelerate 125a0b87f.
+
+### R1 investigation (mcp++/risk/profile)
+- Client: web/js/core/mcp-plus-plus-desktop-client.js calls RPC
+  mcp++/risk/profile on every service in inspectService (profileG probe);
+  also getRiskSchedulingProfile + gateway mapping 'supervisor.profile-g.read'.
+- Canonical shapes: datasets ProfileGService.profile (provider ipfs_datasets_py,
+  interface_descriptor + interface_cid, methods[23]); accelerate transport
+  profile_metadata() fallback {version, artifact_schema_major, provider,
+  transports, methods}; kit RuntimeProfileG.metadata() via its dispatcher
+  (risk/profile is in kit's _LOCAL_RUNTIME_METHODS).
+- Baseline live: all three adapters -32601 (re-verified this session).
+- UPSTREAM BUG FOUND: accelerate upstream GET /mcp/risk/profile returns
+  422 (missing query 'request') then 500: pydantic PydanticUserError
+  "TypeAdapter[Annotated[ForwardRef('Request'), Query(...)]] is not fully
+  defined". Cause: fastapi_service.py has `from __future__ import annotations`
+  and imports Request only inside create_fastapi_app(); FastAPI resolves the
+  handler's `request: Request` annotation from module globals, where Request
+  is absent -> treated as a required query param. The whole Profile G REST
+  facade (and Profile D policy evaluate, same pattern) is dead in the running
+  build. Enabling fix F3: module-level Request import in fastapi_service.py.
+- Plan: new shared module swissknife/scripts/mcpplusplus-profile-g-adapter.cjs
+  (mirrors profile-h adapter idiom). Per owner: accelerate -> proxy upstream
+  GET /mcp/risk/profile (normative REST binding); kit -> spawn Python kit
+  get_dispatcher().dispatch('mcp++/risk/profile', {}); datasets -> spawn
+  Python get_profile_g_service().dispatch('mcp++/risk/profile', {}).
+  Backend failure -> G_PROVIDER_UNAVAILABLE (-32051, retryable) with data
+  {code, message, retryable, details:{method}} — never a fabricated profile,
+  never -32601. Result cached 60 s per adapter process. RPC branch +
+  GET /mcp/risk/profile REST route added in all three adapters.
+
+#### Gap-closure checkpoint: R1 FIXED + verified live; R4 FIXED (2026-10-13, later session)
+
+**R1 — mcp++/risk/profile in all three compat adapters: FIXED.**
+New file `swissknife/scripts/mcpplusplus-profile-g-adapter.cjs` (mirrors the
+Profile H adapter idiom): per-owner backend resolution, success cached 60 s,
+failures cached 5 s, wire Profile G error codes mapped through the canonical
+ERROR_NUMBERS table, provider failure reported as -32051
+G_PROVIDER_UNAVAILABLE (verified against a dead upstream — never fabricated).
+- kit (:8014): dispatches the checkout's own
+  `ipfs_kit_py.mcp_server.mcplusplus.profile_g_transport` dispatcher
+  (RuntimeProfileG) in a Python subprocess (PYTHONPATH kit+datasets+accelerate).
+- datasets (:3002): dispatches
+  `ipfs_datasets_py.mcp_server.profile_g_service.ProfileGService`
+  (provider ipfs_datasets_py, full limits + interface descriptor + CID).
+- accelerate (:3003): proxies the upstream's native REST binding
+  GET {upstream}/mcp/risk/profile.
+All three adapters also serve `GET /mcp/risk/profile`. RPC + REST verified by
+direct probe on all three ports.
+
+Enabling source fix **F3** — `external/ipfs_accelerate/ipfs_accelerate_py/
+mcp_server/fastapi_service.py`: the Profile G REST facade was dead in the
+running build. `from __future__ import annotations` + `Request` imported only
+inside `create_fastapi_app()` left the handlers' `request: Request`
+annotation an unresolved ForwardRef, so FastAPI treated it as a required
+query parameter (GET /mcp/risk/profile -> 422; 500 PydanticUserError with
+`?request=` supplied). Fix: module-level `from fastapi import Request`
+(guarded, `Any` fallback) — the same pattern had also broken Profile D
+`POST /mcp/policy/evaluate`'s annotation. After restart the upstream returns
+its genuine profile (provider ipfs_accelerate_py metadata profile).
+
+Adapter liveness fix (same item): the Python bridge originally used
+`spawnSync`, which froze the adapter event loop for the whole cold dispatch
+(datasets ~30 s under load), starving that adapter's health/initialize
+probes past the desktop client's 8 s timeout during parallel inspection —
+the mechanism behind the Explorer's flaky "N/3 responded" counts (observed
+2/3 and 1/3 across runs; the prior pass's own drive capture also recorded a
+0/3 moment). Bridge is now async `spawn`; kit + datasets adapters warm the
+profile dispatch at startup. Datasets interfaces/frontier probes also hang
+without the datasets dashboard on :8899 (prior pass ran it as a separate
+step); with the dashboard up frontier answers in 0.23 s. Residual cold
+costs (not availability-gating): first interfaces/list per adapter start
+(kit ~50 s, datasets ~22 s descriptor build; cached afterwards).
+
+**Live verification (cold full-stack restart via bring-up.sh + dashboard):**
+MCP++ Explorer header: state `ready`, "3/3 MCP++ services responded.",
+124 + 319 + 18 = 461 tools, all capability tags negotiated. Screenshot
+`visual_check/fv-11-explorer-healthy.png`; probe results
+`visual_check/fv_state/explorer-probe-results.json`.
+
+**R4 — ui_ux_ir projection solver determinism: FIXED.**
+Root cause: `SolverBoundsReceipt.elapsed_ms` (wall-clock solve duration)
+was serialized by `to_dict()`, so `UIProjectionArtifact.digest()` — billed
+as a deterministic artifact with a stable content digest — differed between
+identical solves (field-level diff of two in-process runs: only
+`/bounds/elapsed_ms` varied, 16 vs 0). Fix in
+`external/ipfs_datasets/ipfs_datasets_py/logic/ui_ux_ir/projection/solver.py`:
+`elapsed_ms` excluded from `SolverBoundsReceipt.to_dict()` with an
+explanatory comment; the attribute remains on the receipt object (the
+`bounds.elapsed_ms >= 0` test still passes) and the live max_solve_ms bound
+check in `_SolveState.tick` is untouched. No other consumer reads the
+serialized field (repo-wide grep). Suite: `tests/unit/logic/ui_ux_ir` =
+**285 passed, 1 failed** — the one failure is B3 exactly as typed
+(checkout-layout note discovery; the note itself verified compliant by
+direct read in the prior pass). Baseline was 284 passed / 2 failed.
+
+#### Gap-closure checkpoint: X1 FIXED; console gateway stood up (item 4); B6 closed (2026-10-13, later session)
+
+**X1 — served-shell alias resolution: FIXED.**
+`swissknife/web/js/main-simple.js`: added a mirror of the manifest's
+VIRTUAL_DESKTOP_ALIAS_TO_ID (code-editor->vibecode, strudel-grandma->strudel,
+p2p-chat-offline->p2p-chat) + resolveVirtualDesktopAppId with the TS
+resolver's semantics (canonical passthrough, alias -> canonical, unknown ->
+null); launchApp resolves before lookup so windows register under the
+canonical id and singleton/smoke/backend mounts all see the canonical id.
+Live probe (visual_check/fv_state/alias_probe.mjs): all 3 aliases open +
+close their canonical windows; canonical launch unchanged; unknown id stays
+a clean no-op. No user-facing surface used raw aliases before (icons/start
+entries are canonical) — this closes the raw-form refutation in the map.
+
+**Item 4 — supervisor console gateway: STOOD UP + VERIFIED LIVE.**
+Finding: there is no separate console-gateway server artifact in the repo.
+The console's production gateway is the MCP++ desktop client's
+createSupervisorGateway() (browser-side; health via inspectAll, state reads
+mapped onto Profile G). The served shell never installed it for the console:
+the Explorer publishes it as window.swissknifeMCPPlusPlusSupervisorGateway
+(a name the console never reads) and window.__AGENT_SUPERVISOR_GATEWAY_ENDPOINT__
+is set nowhere. Fix: main-simple.js createAgentSupervisorApp now installs
+the client gateway as window.agentSupervisorGateway when no gateway/endpoint
+is configured (explicit configuration still wins; failure leaves the
+designed fallback intact).
+Supporting adapter work (same pass): the Profile G bridge was generalized
+from risk/profile only to the full canonical 23-method set —
+accelerate proxies the upstream's normative REST bindings (writes reach
+the upstream's own validation, e.g. goals/create {} -> G_INVALID_ARTIFACT);
+kit/datasets dispatch through a PERSISTENT Python worker process
+(JSON-lines over stdio, one per adapter) instead of a spawn per call:
+backend import paid once at the adapter-start warm-up, warm reads ~0.0 s
+(were 6-30 s), and Profile G state lives for the adapter process lifetime,
+mirroring the upstream's in-process store semantics.
+Live console probe (visual_check/fv_state/console_probe.mjs; screenshot
+fv-12-supervisor-console-live.png): status ready, transportMode degraded
+(NOT fallback), health status available with all 3 backends available
+(124/319/18 tools, zero diagnostic errors, live server_time), snapshot
+queue/goals/receipts = 0/0/0 LIVE (the fallback sample was 4/2/4 with
+fixture titles). The only capability errors are the 5 the production
+gateway deliberately does not map (taskboard.links, logs, run-history,
+policy.assist, semantic-goal.assist -> typed capability_unavailable) —
+that is the gateway's own contract, recorded here rather than papered over.
+Environment note: a VM reboot mid-pass killed vite + the datasets
+dashboard (both relaunched); a co-tenant OCR burst (load ~11) makes the
+browser's 8 s probe timeouts flap between windows — both browser proofs
+were re-captured in a clean window (Explorer 3/3 ready; console as above).
+
+**B6 JevOps: CLOSED.** Cloned endomorphosis/JevOps (public, shallow) to
+~/lift_coding/JevOps (the sibling path _jevops_path.py requires).
+tests/test_lra_track1_mistral.py collects 21 tests (was the `make test`
+collection blocker); full-suite collection now completes: 3,273 tests
+collected, 0 errors.
+
+#### Gap-closure checkpoint: B4 live libp2p session PROVEN (2026-10-13, later session)
+
+**B4 — live host-to-host MCP++ session: PROVEN (same-machine two-host).**
+Installed the repos' own pinned py-libp2p into the lift_coding venv
+(libp2p 0.7.0 @ git commit 20d9527f, the mcp-p2p extra from
+ipfs_accelerate_py's pyproject / libp2p_runtime.PY_LIBP2P_PINNED_SPEC).
+Session script `visual_check/fv_state/p2p_session.py`, evidence
+`visual_check/fv_state/p2p-session-evidence.json`: two MCPp2pNode hosts
+(repos' Profile E transport, real py-libp2p TCP/Noise/yamux) on loopback
+ephemeral ports — server peer 16Uiu2HAm9rtQVsMcqe2zjt8iBBqwDPsPysosMiEKuoFZW9j4nkC4
+(/ip4/127.0.0.1/tcp/44203), client 16Uiu2HAmF4k7VCUXhqpsqhM9dYP4CyJJ3ZjBhD2sazwXhhVL3J5U,
+both operational. Client connected via the node's own bootstrap-connect
+path; over /mcp+p2p/1.0.0 streams it (1) fetched the server's Profile A
+interface descriptor (CID bafybeiaa5la7h3cy44kxqm2mzczly3bmyuvvfhynlafnq2zxeqmpcn7pue),
+(2) executed a UCAN-gated tool call: delegation CID
+bafybeig5qtygertjyn... evaluated server-side by cid_ucan's
+DelegationEvaluator.can_invoke -> authorized; execution receipt CID
+bafybeiarmkf4mbgc5gwngkrucz53ez5lwh5q7fnf7sz4qqmvdhrgczks2i; the server's
+handler saw the client's real peer id as _sender_peer_id, matching the
+client host's identity, and (3) refused both negative controls
+(wrong-resource delegation: "No delegation in chain grants 'invoke' on
+'tools/echo'"; no delegation: "delegation required"). This is a
+same-machine two-host session — real transport, no mocks — stated plainly
+per the worklist. Sealed DCR service evidence: NOT generatable from this
+tree — implementation_plan/docs/48 records the DCR bootstrap as sealed on
+a dedicated clean integration branch and "sealed current evidence" as
+still required; that remainder of B4 stays typed (the @ucans/ucans half
+was already resolved in the functional pass).
+
+#### Gap-closure checkpoint: closing integration suite GREEN (2026-10-13)
+
+`python -m pytest tests/integration -q` after all gap-closure fixes:
+**528 passed, 29 skipped, 0 failed** in 223.37 s — identical to the
+functional-pass baseline (log: visual_check/fv_state/integration-gap-pass.log).
+No regressions from F3/G1/G2/G3/G4. BROKEN_CONTRACT_MAP.md dispositions and
+FEATURE_MATRIX.md rows updated in place (R1/X1/R4 fixed, B4 narrowed, B6
+closed, console row resolved, new F-11/F-12 rows). Remaining at this
+checkpoint: B1 (SVD-132 completion attempt) and B2 (SWR-096/102 producer
+runs) — both gated on a quiet window (co-tenant OCR load ~11-14 makes the
+in-spec 180 s/900 s budgets unreachable; the producers die mid-run under
+that load, measured).
+## Gap-closure pass — final summary (2026-10-14)
+
+Benjamin's directive (2026-10-13 20:24 PDT): solve the gaps so all backends
+work and fix all the broken contracts; source fixes authorized where a
+contract is refuted. Everything below is an UNCOMMITTED change set — no
+commits, no pushes. Baseline: superproject 8ce1bb13, swissknife cd37eeb4,
+external/ipfs_accelerate 125a0b87f. The pre-modified datasets file
+(processors/legal_scrapers/.../czechia.../normalize.py) was NOT touched.
+
+### Changed files, grouped by fix
+
+**R1 — Profile G on all three compat adapters (incl. enabling fix F3)**
+- NEW swissknife/scripts/mcpplusplus-profile-g-adapter.cjs — canonical
+  Profile G surface (all 23 methods + REST bindings mirrored from
+  ipfs_datasets_py's profile_g_service), per-owner adapters, availability
+  caching for risk/profile, fail-closed -32051 G_PROVIDER_UNAVAILABLE.
+  Kit/datasets dispatch runs through a persistent Python worker bridge
+  (JSON-lines stdio; imports the owner dispatcher once) — v1 (spawnSync)
+  froze the event loop, v2 (per-call spawn) still cost seconds; warm
+  dispatch is ~0.0 s with the worker.
+- swissknife/scripts/start-ipfs-kit-mcp-compat.cjs — Profile G wiring
+  (require, createKitProfileGAdapter, RPC branch, GET /mcp/risk/profile
+  route, listen-time warm-up).
+- swissknife/scripts/start-ipfs-datasets-mcp-compat.cjs — same five
+  touches (createDatasetsProfileGAdapter over profile_g_service).
+- swissknife/scripts/all-tools-evidence-lib.cjs — accelerate Profile G
+  wiring (createHttpProfileGAdapter proxying the upstream's normative
+  REST bindings) inside startAccelerateCompatServer.
+- external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/fastapi_service.py
+  (F3) — module-level guarded `from fastapi import Request`. Root cause:
+  `from __future__ import annotations` + Request imported only inside
+  create_fastapi_app() left the module-global annotation unresolved, so
+  FastAPI treated `request` as a query parameter (422) / raised
+  PydanticUserError (500) on the Profile G (and Profile D) REST facades.
+
+**X1 — alias resolution in the served shell**
+- swissknife/web/js/main-simple.js — VIRTUAL_DESKTOP_ALIAS_TO_ID mirror +
+  resolveVirtualDesktopAppId mirror + launchApp resolves before lookup.
+
+**Item 4 — supervisor console gateway**
+- swissknife/web/js/main-simple.js — createAgentSupervisorApp installs
+  the MCP++ desktop client's createSupervisorGateway() as
+  window.agentSupervisorGateway when no gateway/endpoint is configured.
+
+**R4 — solver determinism**
+- external/ipfs_datasets/ipfs_datasets_py/logic/ui_ux_ir/projection/solver.py
+  — SolverBoundsReceipt.to_dict() no longer serializes wall-clock
+  elapsed_ms into the deterministic artifact digest input (comment added;
+  attribute + live bound check untouched).
+
+**B6 — JevOps (no repo files)**
+- Cloned endomorphosis/JevOps (shallow) to ~/lift_coding/JevOps.
+
+**B4 — libp2p (environment only)**
+- Installed the repos' pinned py-libp2p (0.7.0 @ 20d9527f) + companions
+  into ~/workspace/lift_coding/.venv. Session driver + evidence under
+  visual_check/fv_state/ (p2p_session.py, p2p-session-evidence.json).
+
+**Evidence/harness (visual_check/, uncommitted)**
+- fv_state/{explorer_probe,alias_probe,console_probe}.mjs + *-results.json
+- fv-11-explorer-healthy.png, fv-12-supervisor-console-live.png
+- fv_state/{uiuxir-suite,full-collect,integration-gap-pass}.log
+- fv_state/drive-results.json (gap-pass sweep; prior results preserved as
+  drive-results-functional-pass.json)
+- SVD-132 batch harness: scratch spec/config were created inside
+  swissknife (test/e2e/zz-gap-svd-batch.spec.ts,
+  build-tools/configs/zz-gap-svd-batch.config.ts) for the batched runs and
+  DELETED afterwards; the master copies live at
+  visual_check/fv_state/{svd132-batch.spec.ts,playwright.svd-batch.config.ts}.
+
+### Verification numbers
+- Explorer live: ready, "3/3 MCP++ services responded.", 461 tools.
+- Console live: ready/degraded (not fallback); live queue/goals/receipts.
+- Alias probe: 3/3 aliases open+close canonical windows; unknown id no-op.
+- Drive sweep: 45/45 canonical apps open/focus/close (post-X1).
+- ui_ux_ir suite: 285 passed / 1 failed (B3 only) — was 284/2.
+- test_solver.py: 20/20 incl. test_solver_is_deterministic.
+- Full collection (B6): 3,273 tests, 0 errors.
+- Integration suite (closing): 528 passed / 29 skipped / 0 failed (223 s).
+- libp2p session: connected; descriptor CID exchanged; UCAN-gated tool
+  call authorized (receipt CID issued); 2/2 negative controls refused.
+
+### Left typed (no fix faked)
+- B1: canonical single-run artifact not produced on this 2-core VM (needs ≤18.75 s/app vs ~29 s/app measured at load ~12, minutes/app at load 18-39). Discharged via the runner-supported batched route: 3 completed batch runs, 37/48 ids audited, 33 passed, 74/96 screenshots (assembly: visual_check/fv_state/svd132-batched-assembly.json). Failures: terminal/github/media-player (wallpaper egress only), strudel-ai-daw (B7). Remaining 11 ids attempted twice more under load 18-39 without completing; all 48 are covered by the drive sweep + alias probe.
+- B2: producers attempted standalone with the sealed toolchain; both die
+  on their in-spec budgets (180 s / 420 s) on this 2-core VM under
+  co-tenant load ~13-25 (SWR-096 attempt reached 23 screenshot
+  attachments). SWR-096 still fails on the missing artifacts — an
+  availability-of-evidence failure, not a product-behavior failure.
+- B3: checkout-layout artifact; mechanism documented in the map.
+- B4 remainder: sealed DCR service evidence (doc 48: sealed bootstrap on
+  a dedicated clean integration branch; not generatable from this tree).
+- B5: Leanstral is an external 119B-model server at 127.0.0.1:8080; the
+  repo ships only the client adapter.
+- B7: strudel CDNs refused by the egress proxy; the loader is CDN-first
+  by design (npm fallback is a legacy webpack path).
+
+## Per-app MCP++ interaction-design audit (sharpened requirement, 2026-10-14)
+
+Benjamin's sharpened emphasis: "make sure that the SwissKnife GUI apps are
+actually properly designed to interact with the backend services over
+MCP++." Audit of all **38 tool_backed apps** against the LIVE stack (vite
+mediator :3001, adapters :8014/:3002/:3003, upstream :9000, dashboard
+:8899, Profile E bridges :9112/:9113/:9114). Harnesses + raw results under
+`visual_check/fv_state/audit2/` (bindings.json, backend-status.json,
+per_app_invocations.mjs → per-app-invocations.json,
+ui_truthfulness_probe.mjs → ui-truthfulness.json, screenshot
+`visual_check/fv-13-ui-truthfulness.png`).
+
+### Step 1 — per-app mediated invocation (extends P1/P2 to execution)
+Every app's representative control was invoked through `POST
+/mcp/tools/call`, with calls constructed byte-for-byte as the apps' own
+live-tool-gateway panel builds them (`web/js/live-tool-gateway.js`
+invokeControl: same protocol, route, policy shapes, safe_payloads).
+**38/38 apps executed** over http, each returning a receipt, an
+Event-DAG ref, a persisted-receipt status (`persisted` for all 38), and
+an `application_transport_observation` with a descriptor CID and
+`ucan_did_verified: true`. No app lacked a safe control to fire:
+non-mutating representatives executed live; mutating representatives
+executed as the panel's governed dry run (step 4).
+
+### Step 2 — transports (found R5, fixed; see below)
+Live catalog: 79 controls — 57 declare http only, **22 declare
+(http, libp2p) across 10 apps**, none libp2p-only; the catalog's
+per-control `transport` default is http for all, and the panel selects
+libp2p only via the `__SWISSKNIFE_GATEWAY_TRANSPORT_OVERRIDE__` replay
+hook (recorded as a design fact: libp2p is a declared, mediator-exercised
+transport, not the panel's default). The other 28 apps are http-only —
+stated per app in the table (libp2p column "—").
+After the R5 fix, the mediator-side libp2p route was exercised for every
+declaring app (the same call the override produces): **10/10 executed**,
+each with observation `{transport: 'libp2p', descriptor_cid,
+ucan_did_verified: true, remote_did (the owner bridge's did:key),
+identity_proof_cid}`.
+
+### Step 3 — truthful UX state
+- Data level: matrix ↔ catalog cross-check for all 38 apps — **zero
+  mismatches** (available-control counts equal the matrix's live
+  bindings per app).
+- Browser level (Playwright probe, 8 apps spanning all owners +
+  dispositions): every rendered panel control's disabled state and
+  'ready' output matches the live catalog exactly (**0 mismatches**);
+  the 2 sampled non-tool-backed apps (calculator, settings) mount **no**
+  MCP++ panel at all — no fake affordances. The 7 non-tool-backed apps
+  (settings, api-keys, oauth-login, calculator, clock, idl-explorer,
+  glasses-preview) have no controls by design; dispositions
+  browser_local ×5, policy_blocked ×1 (api-keys, credential isolation),
+  external_provider ×1 — consistent with the functional pass's P4.
+
+### Step 4 — confirmation design
+Three layers, all verified live:
+1. **Catalog**: mutating controls carry `confirmation_required` +
+   `mutates_remote_state` (79-control catalog).
+2. **Mediator (server-side)**: for every app whose representative is
+   mutating (26 apps), a probe call with `dry_run: false` and consent
+   NOT granted was **denied `confirmation_required` — 26/26**, before any
+   adapter was touched.
+3. **App UI flow**: the panel forces governed controls into
+   `require_confirmation` + consent-granted + **dry-run-only** execution
+   (it can never fire a live mutation); the repo's own graded e2e
+   (`test/e2e/all-app-live-gateway-executions.spec.ts`) pins exactly
+   this as the intended evidence class `confirmation_gated_dry_run`.
+   Browser-verified: clicking vibecode's governed control
+   (`...list_virtual_files`) produced `executed; …; receipt=bafkreihk…`
+   as a dry run. The supervisor steering flow additionally has a literal
+   user-confirm gate (P11, prior pass). Design note (not a break, per
+   the repo's own spec): the panel shows no separate confirm dialog for
+   governed controls precisely because it cannot execute them live; the
+   dry-run character is carried in the policy record and the tool's
+   echoed result.
+
+### R5 — mediated libp2p path was dead; FIXED (2 files)
+The desktop's Profile E route (mediator → announce file →
+`scripts/invoke-mcp-libp2p.py` → owner bridge) could not execute at all
+in this environment, for two stacked reasons, both in swissknife's
+standalone Profile E scripts, which create py-libp2p hosts directly:
+- `scripts/ipfs_mcp_libp2p_bridge.py` and `scripts/invoke-mcp-libp2p.py`
+  never applied ipfs_accelerate_py's canonical
+  `patch_libp2p_compatibility()` — the boundary the runtime module
+  designates for ALL host creation. With pymultihash 3.x,
+  `multihash.encode` is absent and py-libp2p 0.7 host creation crashes
+  in `ID.from_pubkey` (all 3 bridges died at startup → no announces →
+  mediator "No verified libp2p announce"). Proven in isolation: patch
+  returns True, restores `encode`, `ID.from_pubkey` succeeds.
+- The helper additionally imported `libp2p.tools.async_service`
+  unconditionally (moved to `libp2p.tools.anyio_service.context` in
+  py-libp2p ≥0.3 — the bridge already had the fallback; the helper
+  didn't).
+Fix (binding alignment, both files): each script now applies the
+canonical patch at startup, resolving the sibling
+`external/ipfs_accelerate` checkout (or `IPFS_ACCELERATE_PY_ROOT`) —
+the helper does so inside its stdout→stderr import discipline; the
+helper also mirrors the bridge's anyio import fallback. After the fix:
+bridges start (`ensure-ipfs-mcp-libp2p-bridges.cjs`: 3/3 ready, valid
+announces, Profile E 1.9.0), a manual Profile E session completes
+(initialize → descriptor → UCAN identity → tools/call), and all 10
+libp2p-declaring apps execute through the mediator (step 2).
+Environment note (not edited): the mediator and the bridge launcher
+default their Python to the author's workstation path
+(`/home/barberb/...`) when `IPFS_ACCELERATE_PYTHON` is unset — the
+designed override; this audit ran with it set to the lift_coding venv.
+
+### Per-app results (representative control per app)
+| app | controls avail/total | owner | http | libp2p | unconsented-mutation probe |
+|---|---|---|---|---|---|
+| terminal | 3/3 | datasets | executed | — | — |
+| vibecode | 3/3 | kit | executed | — | denied |
+| music-studio-unified | 2/2 | kit | executed | — | denied |
+| ai-chat | 3/3 | datasets | executed | executed | — |
+| file-manager | 2/2 | kit | executed | — | denied |
+| task-manager | 2/2 | datasets | executed | — | denied |
+| todo | 2/2 | kit | executed | — | denied |
+| model-browser | 3/3 | datasets | executed | executed | — |
+| huggingface | 3/3 | datasets | executed | — | — |
+| openrouter | 2/2 | datasets | executed | — | denied |
+| ipfs-explorer | 1/1 | kit | executed | executed | denied |
+| device-manager | 2/2 | kit | executed | — | denied |
+| mcp-control | 3/3 | kit | executed | executed | — |
+| github | 2/2 | kit | executed | — | denied |
+| cron | 2/2 | datasets | executed | — | denied |
+| navi | 1/1 | datasets | executed | executed | — |
+| p2p-network | 2/2 | kit | executed | — | — |
+| p2p-chat-unified | 2/2 | kit | executed | — | denied |
+| neural-network-designer | 2/2 | kit | executed | — | denied |
+| training-manager | 3/3 | datasets | executed | — | — |
+| calendar | 2/2 | kit | executed | — | denied |
+| peertube | 2/2 | kit | executed | — | denied |
+| friends-list | 2/2 | kit | executed | — | denied |
+| image-viewer | 2/2 | kit | executed | — | denied |
+| notes | 2/2 | kit | executed | — | denied |
+| media-player | 2/2 | kit | executed | — | denied |
+| system-monitor | 1/1 | accelerate | executed | — | denied |
+| neural-photoshop | 2/2 | kit | executed | — | denied |
+| cinema | 2/2 | kit | executed | — | denied |
+| strudel | 2/2 | kit | executed | — | denied |
+| strudel-ai-daw | 2/2 | kit | executed | — | denied |
+| music-studio | 1/1 | kit | executed | — | denied |
+| p2p-chat | 1/1 | kit | executed | — | denied |
+| datasets-browser | 1/1 | datasets | executed | executed | — |
+| accelerate-panel | 1/1 | accelerate | executed | executed | denied |
+| orb-auto-ui | 3/3 | kit | executed | executed | — |
+| mcp-plus-plus | 3/3 | kit | executed | executed | — |
+| agent-supervisor | 3/3 | datasets | executed | executed | — |

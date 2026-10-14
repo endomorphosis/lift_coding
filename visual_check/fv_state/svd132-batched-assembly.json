@@ -1,0 +1,1943 @@
+{
+  "schema": "swissknife.virtual-desktop-app-audit-runner.v1",
+  "task_id": "SVD-132",
+  "driver": "playwright",
+  "assembly": "gap-pass batched assembly of three runs of the repo's SVD-132 audit runner (runVirtualDesktopAppAudit + PlaywrightVirtualDesktopAppAuditDriver) over manifest batches of 15 entries, via the runner's manifest option; the canonical single-run spec exceeds its 900 s budget on this VM",
+  "batches": [
+    {
+      "file": "svd132-batch-0.json",
+      "generated_at": "2026-10-14T05:20:38.808Z",
+      "apps": 16,
+      "passed": 15,
+      "screenshots": 32
+    },
+    {
+      "file": "svd132-batch-1.json",
+      "generated_at": "2026-10-14T05:29:08.394Z",
+      "apps": 15,
+      "passed": 14,
+      "screenshots": 30
+    },
+    {
+      "file": "svd132-batch-2a.json",
+      "generated_at": "2026-10-14T06:08:26.176Z",
+      "apps": 6,
+      "passed": 4,
+      "screenshots": 12
+    }
+  ],
+  "summary": {
+    "total_id_count": 37,
+    "passed": 33,
+    "failed": 4,
+    "screenshot_count": 74
+  },
+  "apps": [
+    {
+      "requested_id": "terminal",
+      "canonical_id": "terminal",
+      "is_alias": false,
+      "title": "SwissKnife Terminal",
+      "category": "development",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 1087,
+        "window_id": "window-1"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 50
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 190
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/terminal/desktop.png",
+          "byte_length": 209601,
+          "sha256": "c57081294d93c32b2be40f2b88e4f3444ae6c46962125a543665a2dcc2b8670a",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/terminal/narrow.png",
+          "byte_length": 73512,
+          "sha256": "610cc4015a2a4b5dad0e8c506b07296d98ee7079649bd1bc082b4bd3b6950080",
+          "captured": true
+        }
+      ],
+      "console_errors": [
+        {
+          "level": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+          "source": "browser-console"
+        }
+      ],
+      "failed_requests": [
+        {
+          "url": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop&crop=center",
+          "method": "GET",
+          "error_text": "net::ERR_TUNNEL_CONNECTION_FAILED",
+          "phase": "launch"
+        }
+      ],
+      "manifest_drift": [],
+      "status": "failed"
+    },
+    {
+      "requested_id": "vibecode",
+      "canonical_id": "vibecode",
+      "is_alias": false,
+      "title": "VibeCode",
+      "category": "development",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 312,
+        "window_id": "window-3"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 91
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 184
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/vibecode/desktop.png",
+          "byte_length": 241112,
+          "sha256": "45ac3f4fb34a2f47e1b5964773b53e91c11fb713e8d875f9cc3d2504bba23b8e",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/vibecode/narrow.png",
+          "byte_length": 85440,
+          "sha256": "5cb90200f989101ed1efa0526ed84d0fe7ca669190cb241764a8779efd103547",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "code-editor",
+      "canonical_id": "vibecode",
+      "is_alias": true,
+      "title": "VibeCode",
+      "category": "development",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 81,
+        "window_id": "window-5"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 107
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 257
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/code-editor/desktop.png",
+          "byte_length": 252211,
+          "sha256": "5f68486724989c71d811d8d84c330604f7aed11c05d39e4fd5e2f099eef7554e",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/code-editor/narrow.png",
+          "byte_length": 67783,
+          "sha256": "502d9de46948137405e448c1e939b897a05d541297e543040983221d98ecf05c",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "music-studio-unified",
+      "canonical_id": "music-studio-unified",
+      "is_alias": false,
+      "title": "Music Studio",
+      "category": "creative",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 1001,
+        "window_id": "window-7"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 127
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 226
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/music-studio-unified/desktop.png",
+          "byte_length": 323732,
+          "sha256": "4fa1a02ea35975d79ef06fdf56387f4828bdfa95b50a6fbfc451c9412c786e85",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/music-studio-unified/narrow.png",
+          "byte_length": 120205,
+          "sha256": "fdad1f9953a3a061c3db020932f5dba841047d52c0bbe64002472313c09e41e0",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "ai-chat",
+      "canonical_id": "ai-chat",
+      "is_alias": false,
+      "title": "AI Chat",
+      "category": "ai",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 962,
+        "window_id": "window-9"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 172
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 294
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/ai-chat/desktop.png",
+          "byte_length": 282501,
+          "sha256": "6e53a1fcbb85a6512e31773f21d5f943e4fc310cc5e0cc8e0a49c9a9a063a656",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/ai-chat/narrow.png",
+          "byte_length": 82281,
+          "sha256": "03a650d1bc781ef8900fb86d6baaf59aea9219e46d3d765ff3e59d3a327c6702",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "file-manager",
+      "canonical_id": "file-manager",
+      "is_alias": false,
+      "title": "File Manager",
+      "category": "storage",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 1683,
+        "window_id": "window-11"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 263
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 401
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/file-manager/desktop.png",
+          "byte_length": 314607,
+          "sha256": "5de1f986cf61d2f269dd2421942043e592727b2f1fadc69120a7aa8ce219b605",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/file-manager/narrow.png",
+          "byte_length": 102905,
+          "sha256": "ea40dde1b755539c7df83b5231220dcb34d49119735a2bc03055052a4a32a3a9",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "task-manager",
+      "canonical_id": "task-manager",
+      "is_alias": false,
+      "title": "Task Manager",
+      "category": "system",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 601,
+        "window_id": "window-13"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 269
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 540
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/task-manager/desktop.png",
+          "byte_length": 328017,
+          "sha256": "ddd90a4fe0c5846893e0f9bb0ea035f422dbd2a3020b0aaed3eb6c4cbd823b74",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/task-manager/narrow.png",
+          "byte_length": 137603,
+          "sha256": "8b5d7fe42983c675d522ae5d785ade9cc667b9a5d2c6aa36633d44b411d59983",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "todo",
+      "canonical_id": "todo",
+      "is_alias": false,
+      "title": "Todo and Goals",
+      "category": "productivity",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 524,
+        "window_id": "window-15"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 249
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 1841
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/todo/desktop.png",
+          "byte_length": 278865,
+          "sha256": "9049bd288db28940b97eaa87763612ca2b43670ae7f0fedbbc1ad1a9d677d26a",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/todo/narrow.png",
+          "byte_length": 76462,
+          "sha256": "3d4df09f46b0a23bf830f57d8db0b13fa1e1b14cf02812dd3d73d1a0c4aaa6b1",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "model-browser",
+      "canonical_id": "model-browser",
+      "is_alias": false,
+      "title": "AI Model Manager",
+      "category": "ai",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 1042,
+        "window_id": "window-17"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 415
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 345
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/model-browser/desktop.png",
+          "byte_length": 245257,
+          "sha256": "a7ed15f5b56ed8845cba8051c0820f89a0864511c7ab5d0ec737b3c777c4095b",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/model-browser/narrow.png",
+          "byte_length": 48677,
+          "sha256": "09d18b1673aafab4f7a08d6d29afeba4b94d7b54e326c919939e34d4e90aefe6",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "huggingface",
+      "canonical_id": "huggingface",
+      "is_alias": false,
+      "title": "Hugging Face Hub",
+      "category": "ai",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 1494,
+        "window_id": "window-19"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 361
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 1087
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/huggingface/desktop.png",
+          "byte_length": 345898,
+          "sha256": "540dd1eaa9600d79e247a3746bd16e4fa87785acc6be6dbb2e97a3b814b13c3b",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/huggingface/narrow.png",
+          "byte_length": 150624,
+          "sha256": "bed5d4eb402108ea91a250333deb12e150b2207ce6218c8c27c6b7df380b149f",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "openrouter",
+      "canonical_id": "openrouter",
+      "is_alias": false,
+      "title": "OpenRouter Hub",
+      "category": "ai",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 1016,
+        "window_id": "window-21"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 229
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 396
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/openrouter/desktop.png",
+          "byte_length": 420992,
+          "sha256": "52210fbdab1bcd942a87dbf683e08e5f0d08687a72654897f9c61571d30da87b",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/openrouter/narrow.png",
+          "byte_length": 222170,
+          "sha256": "2fdeb35e3aaf3253de8b3988972791486d82306f20d72e4db1dec3e8b62f391f",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "ipfs-explorer",
+      "canonical_id": "ipfs-explorer",
+      "is_alias": false,
+      "title": "IPFS Explorer",
+      "category": "storage",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 513,
+        "window_id": "window-23"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 546
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 1048
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/ipfs-explorer/desktop.png",
+          "byte_length": 348967,
+          "sha256": "aba0bb9fe14a8894dee4b4d1ab40b3fc398f4c567af1127883e950357ae541aa",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/ipfs-explorer/narrow.png",
+          "byte_length": 172519,
+          "sha256": "887390a55471903eecdbd5dcc93a26723d18ad2014c98dc921e728c2fb4b01fc",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "device-manager",
+      "canonical_id": "device-manager",
+      "is_alias": false,
+      "title": "Device Manager",
+      "category": "system",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 2452,
+        "window_id": "window-25"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 915
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 997
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/device-manager/desktop.png",
+          "byte_length": 348315,
+          "sha256": "ca1aa9d2f67c1ae223bbb99ff637e282fcdde987fb15a2f8746b8e9b14493029",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/device-manager/narrow.png",
+          "byte_length": 161136,
+          "sha256": "a0b9cda3bed70d9a3f46032544c7e765607f0ad67a08a307cf9d1744237371a8",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "settings",
+      "canonical_id": "settings",
+      "is_alias": false,
+      "title": "Settings",
+      "category": "system",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 1243,
+        "window_id": "window-27"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 412
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 1502
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/settings/desktop.png",
+          "byte_length": 247520,
+          "sha256": "e5495d5c835dc7244794c09a68ea42ee3bd4f5d145c34625cf4f49fe1ce92018",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/settings/narrow.png",
+          "byte_length": 66382,
+          "sha256": "4793bf6a2d7827da71033e75f32d85ed50faf27e89a3e5a866d18c2903aa169a",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "mcp-control",
+      "canonical_id": "mcp-control",
+      "is_alias": false,
+      "title": "MCP Control",
+      "category": "integration",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 3886,
+        "window_id": "window-29"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 613
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 3216
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/mcp-control/desktop.png",
+          "byte_length": 327312,
+          "sha256": "8a9a9078a4fc25df0f013750a64877b8cbd5aaae5425a38fdf792040399779ac",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/mcp-control/narrow.png",
+          "byte_length": 170736,
+          "sha256": "b9b21494143426d5b7bbb0d2519a0dcac5be8368237f098d64e9e5e38a9a70d1",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "api-keys",
+      "canonical_id": "api-keys",
+      "is_alias": false,
+      "title": "API Keys",
+      "category": "integration",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 3152,
+        "window_id": "window-31"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 806
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 1062
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/api-keys/desktop.png",
+          "byte_length": 262146,
+          "sha256": "c42f606a2ee0a91d34b495cfbbf4edfca9a8a52fb30be19bdd5f159460668137",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/api-keys/narrow.png",
+          "byte_length": 71080,
+          "sha256": "0ec09242bc65598b990b8fb019ba270012390fcfff9ee44295bb56fddddb1275",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "github",
+      "canonical_id": "github",
+      "is_alias": false,
+      "title": "GitHub",
+      "category": "integration",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 954,
+        "window_id": "window-1"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 152
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 169
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/github/desktop.png",
+          "byte_length": 264446,
+          "sha256": "1056e9d39fc08adb23ace14bfd80d1840457392ad18b7731beae33dfb00e0fe6",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/github/narrow.png",
+          "byte_length": 92313,
+          "sha256": "92edaba79df5064f217582c4b797a0cdb6b87805ca071d4ec3561220115a886b",
+          "captured": true
+        }
+      ],
+      "console_errors": [
+        {
+          "level": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+          "source": "browser-console"
+        }
+      ],
+      "failed_requests": [
+        {
+          "url": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop&crop=center",
+          "method": "GET",
+          "error_text": "net::ERR_TUNNEL_CONNECTION_FAILED",
+          "phase": "launch"
+        }
+      ],
+      "manifest_drift": [],
+      "status": "failed"
+    },
+    {
+      "requested_id": "oauth-login",
+      "canonical_id": "oauth-login",
+      "is_alias": false,
+      "title": "OAuth Login",
+      "category": "integration",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 826,
+        "window_id": "window-3"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 92
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 300
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/oauth-login/desktop.png",
+          "byte_length": 316932,
+          "sha256": "3c603e94a4c3f361d2d04cd923f67bb4fe728eead59a29e6525347e4b7a3edc8",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/oauth-login/narrow.png",
+          "byte_length": 168910,
+          "sha256": "484f32efc7c5d4d44874cfb03f534da0ba81796d322beea0b264b6bbe004503b",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "cron",
+      "canonical_id": "cron",
+      "is_alias": false,
+      "title": "AI Cron",
+      "category": "automation",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 611,
+        "window_id": "window-5"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 166
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 582
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/cron/desktop.png",
+          "byte_length": 334618,
+          "sha256": "aa9614b6660609e060185b8d3fac699012b491ba54287362577a2a2d57e94f2e",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/cron/narrow.png",
+          "byte_length": 190231,
+          "sha256": "4579b3eee11f21796af34024d27f3770fee816a31500df92470db99067eec1b4",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "navi",
+      "canonical_id": "navi",
+      "is_alias": false,
+      "title": "NAVI",
+      "category": "ai",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 567,
+        "window_id": "window-7"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 157
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 356
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/navi/desktop.png",
+          "byte_length": 323379,
+          "sha256": "d4d94aafb2c8ed7a454cace48e268e7de2f972bead16949527f8a9c069669997",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/navi/narrow.png",
+          "byte_length": 186349,
+          "sha256": "6ec2497e5b6c763ab6047b7d8421f062183f276f416aae0cc151faed284ba536",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "p2p-network",
+      "canonical_id": "p2p-network",
+      "is_alias": false,
+      "title": "P2P Network Manager",
+      "category": "network",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 3293,
+        "window_id": "window-9"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 145
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 548
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/p2p-network/desktop.png",
+          "byte_length": 306808,
+          "sha256": "d98700eff46156e5704f681abb360404f1419a5006b6d5a8e72d78f3adb3e6bd",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/p2p-network/narrow.png",
+          "byte_length": 115154,
+          "sha256": "e037d02f7831a1a950ddfe8f8884d27f6ee3f93e775e37c0c8eacc09dfdb5af2",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "p2p-chat-unified",
+      "canonical_id": "p2p-chat-unified",
+      "is_alias": false,
+      "title": "P2P Chat",
+      "category": "network",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 1751,
+        "window_id": "window-11"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 570
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 478
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/p2p-chat-unified/desktop.png",
+          "byte_length": 423598,
+          "sha256": "7ed525699f78c95ffa143e9c5f018114ec278f8ce75b52fbfea663f5a3651aad",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/p2p-chat-unified/narrow.png",
+          "byte_length": 81903,
+          "sha256": "11c267cd2e4ba4665a29a593102960720e450fcb4aa1ee4d4a02ce422692518a",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "neural-network-designer",
+      "canonical_id": "neural-network-designer",
+      "is_alias": false,
+      "title": "Neural Network Designer",
+      "category": "ai",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 1763,
+        "window_id": "window-13"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 211
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 355
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/neural-network-designer/desktop.png",
+          "byte_length": 260192,
+          "sha256": "916654677c7ec8130cc7136d88290e9c68909153d765d4012c3dd185b6fdcde1",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/neural-network-designer/narrow.png",
+          "byte_length": 86097,
+          "sha256": "d8a32b4691e8fd0c5a635e17e971bb302174f6a60366702d647ad908db13f417",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "training-manager",
+      "canonical_id": "training-manager",
+      "is_alias": false,
+      "title": "Training Manager",
+      "category": "ai",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 1150,
+        "window_id": "window-15"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 339
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 768
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/training-manager/desktop.png",
+          "byte_length": 204238,
+          "sha256": "30c35d99b7c3dc02be57eb84366ce6a6ef7559a16d56404ae9b4a76030f66e82",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/training-manager/narrow.png",
+          "byte_length": 75251,
+          "sha256": "e43fbc0318cd69933eaf5795430cba987563210a94a3b97a6f2c7b02d8b43bb2",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "calculator",
+      "canonical_id": "calculator",
+      "is_alias": false,
+      "title": "Calculator",
+      "category": "utility",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 1104,
+        "window_id": "window-17"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 189
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 667
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/calculator/desktop.png",
+          "byte_length": 345114,
+          "sha256": "00a3aa6759278672967721610c4aed3da079c3e60cb20925c12d3b8251083f56",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/calculator/narrow.png",
+          "byte_length": 146782,
+          "sha256": "892a09dccdf1c4a67a83ad3f06fc3a48fd7705dd1f28e67f62d106873d7c6234",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "clock",
+      "canonical_id": "clock",
+      "is_alias": false,
+      "title": "Clock and Timers",
+      "category": "utility",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 934,
+        "window_id": "window-19"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 309
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 707
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/clock/desktop.png",
+          "byte_length": 351374,
+          "sha256": "b4c2121de0278e99d3c4f12e5565ea3e25ab81020606566c5b14fbc5badd480e",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/clock/narrow.png",
+          "byte_length": 167056,
+          "sha256": "00b6bfbb8c35071fccd322e39724f173e1ec2fb0d5485c55bb74f7736270a5cc",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "calendar",
+      "canonical_id": "calendar",
+      "is_alias": false,
+      "title": "Calendar and Events",
+      "category": "productivity",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 1378,
+        "window_id": "window-21"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 221
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 1509
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/calendar/desktop.png",
+          "byte_length": 330227,
+          "sha256": "f2f54627c30229da6e3c0a4ff38a2e9bb572d34c7f72b72d8e296b1066a1a21c",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/calendar/narrow.png",
+          "byte_length": 128468,
+          "sha256": "9201348401e9c0f18aeb947e6c9d1f87d9983660bf7dcce9898b886bff5aa764",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "peertube",
+      "canonical_id": "peertube",
+      "is_alias": false,
+      "title": "PeerTube",
+      "category": "media",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 799,
+        "window_id": "window-23"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 378
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 939
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/peertube/desktop.png",
+          "byte_length": 304951,
+          "sha256": "2f8292812f5d4a8b4460a9d358882933f04666b91f813ffe41b34006ef9f6539",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/peertube/narrow.png",
+          "byte_length": 135745,
+          "sha256": "bf428ee3d2df09ed447f6c6bca76152af4c3c8d9106cbc62f6302b838c469824",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "friends-list",
+      "canonical_id": "friends-list",
+      "is_alias": false,
+      "title": "Friends and Network",
+      "category": "social",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 1374,
+        "window_id": "window-25"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 381
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 1045
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/friends-list/desktop.png",
+          "byte_length": 313271,
+          "sha256": "0bdb7dc4ce0aaa5e73a795c904ceabc5280a48c5e62db0727f0e0d2689b6aca0",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/friends-list/narrow.png",
+          "byte_length": 90158,
+          "sha256": "31b70f2d8870dd92db94d96bd66de667bb462cc8ff31fda4772cfebc30f1264b",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "image-viewer",
+      "canonical_id": "image-viewer",
+      "is_alias": false,
+      "title": "Image Viewer",
+      "category": "media",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 1544,
+        "window_id": "window-27"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 442
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 1616
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/image-viewer/desktop.png",
+          "byte_length": 248422,
+          "sha256": "18139eb057e51b37328ef2c29b45f7454a663f3c6a35af9402248087106a8482",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/image-viewer/narrow.png",
+          "byte_length": 60803,
+          "sha256": "c6d09947e6381f85450165ee9fbeab7cd19fb9af221d6e06fe930b0850a903e0",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "notes",
+      "canonical_id": "notes",
+      "is_alias": false,
+      "title": "Notes",
+      "category": "productivity",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 1244,
+        "window_id": "window-29"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 414
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 1410
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/notes/desktop.png",
+          "byte_length": 397574,
+          "sha256": "3a7d08fe3b3517fb633b062be88fa3e946a24f9c9d272f856bdab8714c538bfb",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/notes/narrow.png",
+          "byte_length": 132182,
+          "sha256": "64e899be47144f1ccf0805dc6c35dcde56bca40d42731b284ea358873182eea0",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "media-player",
+      "canonical_id": "media-player",
+      "is_alias": false,
+      "title": "Media Player",
+      "category": "media",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 2950,
+        "window_id": "window-1"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 216
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 506
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/media-player/desktop.png",
+          "byte_length": 297505,
+          "sha256": "86bcc6fa9518979a7b1de80816cb805979e114771604a69abd7d8f1ff93a7145",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/media-player/narrow.png",
+          "byte_length": 83213,
+          "sha256": "3e215a8d296245b8c0d9e029c245f7bca4653f1e1a107ed788e93ff0b17a1f26",
+          "captured": true
+        }
+      ],
+      "console_errors": [
+        {
+          "level": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+          "source": "browser-console"
+        }
+      ],
+      "failed_requests": [
+        {
+          "url": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop&crop=center",
+          "method": "GET",
+          "error_text": "net::ERR_TUNNEL_CONNECTION_FAILED",
+          "phase": "launch"
+        }
+      ],
+      "manifest_drift": [],
+      "status": "failed"
+    },
+    {
+      "requested_id": "system-monitor",
+      "canonical_id": "system-monitor",
+      "is_alias": false,
+      "title": "System Monitor",
+      "category": "system",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 1309,
+        "window_id": "window-3"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 280
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 812
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/system-monitor/desktop.png",
+          "byte_length": 254878,
+          "sha256": "e662ee8afc7a1b921ce543fca6f19441192780757533b0b900cc32a253c50630",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/system-monitor/narrow.png",
+          "byte_length": 91639,
+          "sha256": "eba3be0cbbc9ba02835573039491033006d7bd558ed1220522eb2b4deb52f00f",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "neural-photoshop",
+      "canonical_id": "neural-photoshop",
+      "is_alias": false,
+      "title": "Neural Photoshop",
+      "category": "creative",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 1815,
+        "window_id": "window-5"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 613
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 461
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/neural-photoshop/desktop.png",
+          "byte_length": 216983,
+          "sha256": "9c9287063f146554d89062e39db6bd735c2f2fe88a105cd2fffc03db32ac04c3",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/neural-photoshop/narrow.png",
+          "byte_length": 71295,
+          "sha256": "f75ecff7650cd4de1dac20e424a1140e2434c0082c89d3363fa78cd92ab1dd65",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "cinema",
+      "canonical_id": "cinema",
+      "is_alias": false,
+      "title": "Cinema",
+      "category": "creative",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 1107,
+        "window_id": "window-7"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 298
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 448
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/cinema/desktop.png",
+          "byte_length": 271015,
+          "sha256": "d5e4db5678820a566e724df81274853057107ddbbbf2d7696b6ef3a383c83bfa",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/cinema/narrow.png",
+          "byte_length": 114701,
+          "sha256": "7566574d16a416117ed3d1d005fcc6a4ef78bfdf10b7a4941cd59d79d9d86231",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "strudel",
+      "canonical_id": "strudel",
+      "is_alias": false,
+      "title": "Strudel",
+      "category": "creative",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 2222,
+        "window_id": "window-9"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 216
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 473
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/strudel/desktop.png",
+          "byte_length": 271731,
+          "sha256": "352b8442cb027855c382c33ec6db3b752b42035578152e81e248bed75ca563de",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/strudel/narrow.png",
+          "byte_length": 119274,
+          "sha256": "5f54a28757a89ac81869258b05482c4333534a60e7fb1c056c85f288daed3391",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "strudel-ai-daw",
+      "canonical_id": "strudel-ai-daw",
+      "is_alias": false,
+      "title": "Strudel AI DAW",
+      "category": "creative",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": false,
+        "duration_ms": 1092193,
+        "error": "page.evaluate: Target page, context or browser has been closed"
+      },
+      "focus": {
+        "attempted": false,
+        "focused": false,
+        "duration_ms": 0,
+        "error": "no window id to focus"
+      },
+      "close_reopen": {
+        "attempted": false,
+        "closed": false,
+        "reopened": false,
+        "state_preserved": false,
+        "duration_ms": 70,
+        "error": "no window id to close"
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/strudel-ai-daw/desktop.png",
+          "byte_length": 0,
+          "sha256": "",
+          "captured": false,
+          "error": "page.setViewportSize: Target page, context or browser has been closed"
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/strudel-ai-daw/narrow.png",
+          "byte_length": 0,
+          "sha256": "",
+          "captured": false,
+          "error": "page.setViewportSize: Target page, context or browser has been closed"
+        }
+      ],
+      "console_errors": [
+        {
+          "level": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+          "source": "browser-console"
+        }
+      ],
+      "failed_requests": [
+        {
+          "url": "https://esm.sh/@strudel.cycles/core?bundle",
+          "method": "GET",
+          "error_text": "net::ERR_TUNNEL_CONNECTION_FAILED",
+          "phase": "launch"
+        }
+      ],
+      "manifest_drift": [],
+      "status": "failed"
+    }
+  ]
+}

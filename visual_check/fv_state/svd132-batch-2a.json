@@ -1,0 +1,402 @@
+{
+  "schema": "swissknife.virtual-desktop-app-audit-runner.v1",
+  "task_id": "SVD-132",
+  "generated_at": "2026-10-14T06:08:26.176Z",
+  "driver": "playwright",
+  "manifest_id": "org.hallucinate.swissknife.virtual-desktop-app-manifest",
+  "manifest_version": "2026-07-07",
+  "manifest_generated_from": [
+    "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-inventory.json",
+    "data/swissknife_virtual_desktop/discovery/app-inventory-baseline.md"
+  ],
+  "screenshot_root": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright",
+  "validation": {
+    "valid": false,
+    "errors": [
+      "manifest missing visible desktop app: terminal",
+      "manifest missing visible desktop app: vibecode",
+      "manifest missing visible desktop app: music-studio-unified",
+      "manifest missing visible desktop app: ai-chat",
+      "manifest missing visible desktop app: file-manager",
+      "manifest missing visible desktop app: task-manager",
+      "manifest missing visible desktop app: todo",
+      "manifest missing visible desktop app: model-browser",
+      "manifest missing visible desktop app: huggingface",
+      "manifest missing visible desktop app: openrouter",
+      "manifest missing visible desktop app: ipfs-explorer",
+      "manifest missing visible desktop app: device-manager",
+      "manifest missing visible desktop app: settings",
+      "manifest missing visible desktop app: mcp-control",
+      "manifest missing visible desktop app: agent-supervisor",
+      "manifest missing visible desktop app: api-keys",
+      "manifest missing visible desktop app: github",
+      "manifest missing visible desktop app: oauth-login",
+      "manifest missing visible desktop app: cron",
+      "manifest missing visible desktop app: navi",
+      "manifest missing visible desktop app: p2p-network",
+      "manifest missing visible desktop app: p2p-chat-unified",
+      "manifest missing visible desktop app: neural-network-designer",
+      "manifest missing visible desktop app: training-manager",
+      "manifest missing visible desktop app: calculator",
+      "manifest missing visible desktop app: clock",
+      "manifest missing visible desktop app: calendar",
+      "manifest missing visible desktop app: peertube",
+      "manifest missing visible desktop app: friends-list",
+      "manifest missing visible desktop app: image-viewer",
+      "manifest missing visible desktop app: notes",
+      "manifest missing visible desktop app: music-studio",
+      "manifest missing visible desktop app: p2p-chat",
+      "manifest missing generated/service app: datasets-browser",
+      "manifest missing generated/service app: accelerate-panel",
+      "manifest missing generated/service app: idl-explorer",
+      "manifest missing generated/service app: glasses-preview",
+      "manifest missing generated/service app: orb-auto-ui",
+      "manifest missing generated/service app: mcp-plus-plus"
+    ],
+    "warnings": []
+  },
+  "summary": {
+    "total_id_count": 6,
+    "canonical_app_count": 6,
+    "alias_count": 0,
+    "passed_app_count": 4,
+    "failed_app_count": 2,
+    "apps_with_console_errors_count": 2,
+    "apps_with_failed_requests_count": 2,
+    "apps_with_manifest_drift_count": 0,
+    "screenshot_count": 12,
+    "screenshot_captured_count": 10
+  },
+  "apps": [
+    {
+      "requested_id": "media-player",
+      "canonical_id": "media-player",
+      "is_alias": false,
+      "title": "Media Player",
+      "category": "media",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 2950,
+        "window_id": "window-1"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 216
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 506
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/media-player/desktop.png",
+          "byte_length": 297505,
+          "sha256": "86bcc6fa9518979a7b1de80816cb805979e114771604a69abd7d8f1ff93a7145",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/media-player/narrow.png",
+          "byte_length": 83213,
+          "sha256": "3e215a8d296245b8c0d9e029c245f7bca4653f1e1a107ed788e93ff0b17a1f26",
+          "captured": true
+        }
+      ],
+      "console_errors": [
+        {
+          "level": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+          "source": "browser-console"
+        }
+      ],
+      "failed_requests": [
+        {
+          "url": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop&crop=center",
+          "method": "GET",
+          "error_text": "net::ERR_TUNNEL_CONNECTION_FAILED",
+          "phase": "launch"
+        }
+      ],
+      "manifest_drift": [],
+      "status": "failed"
+    },
+    {
+      "requested_id": "system-monitor",
+      "canonical_id": "system-monitor",
+      "is_alias": false,
+      "title": "System Monitor",
+      "category": "system",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 1309,
+        "window_id": "window-3"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 280
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 812
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/system-monitor/desktop.png",
+          "byte_length": 254878,
+          "sha256": "e662ee8afc7a1b921ce543fca6f19441192780757533b0b900cc32a253c50630",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/system-monitor/narrow.png",
+          "byte_length": 91639,
+          "sha256": "eba3be0cbbc9ba02835573039491033006d7bd558ed1220522eb2b4deb52f00f",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "neural-photoshop",
+      "canonical_id": "neural-photoshop",
+      "is_alias": false,
+      "title": "Neural Photoshop",
+      "category": "creative",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 1815,
+        "window_id": "window-5"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 613
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 461
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/neural-photoshop/desktop.png",
+          "byte_length": 216983,
+          "sha256": "9c9287063f146554d89062e39db6bd735c2f2fe88a105cd2fffc03db32ac04c3",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/neural-photoshop/narrow.png",
+          "byte_length": 71295,
+          "sha256": "f75ecff7650cd4de1dac20e424a1140e2434c0082c89d3363fa78cd92ab1dd65",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "cinema",
+      "canonical_id": "cinema",
+      "is_alias": false,
+      "title": "Cinema",
+      "category": "creative",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 1107,
+        "window_id": "window-7"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 298
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 448
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/cinema/desktop.png",
+          "byte_length": 271015,
+          "sha256": "d5e4db5678820a566e724df81274853057107ddbbbf2d7696b6ef3a383c83bfa",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/cinema/narrow.png",
+          "byte_length": 114701,
+          "sha256": "7566574d16a416117ed3d1d005fcc6a4ef78bfdf10b7a4941cd59d79d9d86231",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "strudel",
+      "canonical_id": "strudel",
+      "is_alias": false,
+      "title": "Strudel",
+      "category": "creative",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": true,
+        "duration_ms": 2222,
+        "window_id": "window-9"
+      },
+      "focus": {
+        "attempted": true,
+        "focused": true,
+        "duration_ms": 216
+      },
+      "close_reopen": {
+        "attempted": true,
+        "closed": true,
+        "reopened": true,
+        "state_preserved": true,
+        "duration_ms": 473
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/strudel/desktop.png",
+          "byte_length": 271731,
+          "sha256": "352b8442cb027855c382c33ec6db3b752b42035578152e81e248bed75ca563de",
+          "captured": true
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/strudel/narrow.png",
+          "byte_length": 119274,
+          "sha256": "5f54a28757a89ac81869258b05482c4333534a60e7fb1c056c85f288daed3391",
+          "captured": true
+        }
+      ],
+      "console_errors": [],
+      "failed_requests": [],
+      "manifest_drift": [],
+      "status": "passed"
+    },
+    {
+      "requested_id": "strudel-ai-daw",
+      "canonical_id": "strudel-ai-daw",
+      "is_alias": false,
+      "title": "Strudel AI DAW",
+      "category": "creative",
+      "resolved": true,
+      "launch": {
+        "attempted": true,
+        "opened": false,
+        "duration_ms": 1092193,
+        "error": "page.evaluate: Target page, context or browser has been closed"
+      },
+      "focus": {
+        "attempted": false,
+        "focused": false,
+        "duration_ms": 0,
+        "error": "no window id to focus"
+      },
+      "close_reopen": {
+        "attempted": false,
+        "closed": false,
+        "reopened": false,
+        "state_preserved": false,
+        "duration_ms": 70,
+        "error": "no window id to close"
+      },
+      "screenshots": [
+        {
+          "viewport": "desktop",
+          "width": 1440,
+          "height": 900,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/strudel-ai-daw/desktop.png",
+          "byte_length": 0,
+          "sha256": "",
+          "captured": false,
+          "error": "page.setViewportSize: Target page, context or browser has been closed"
+        },
+        {
+          "viewport": "narrow",
+          "width": 390,
+          "height": 844,
+          "path": "test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/strudel-ai-daw/narrow.png",
+          "byte_length": 0,
+          "sha256": "",
+          "captured": false,
+          "error": "page.setViewportSize: Target page, context or browser has been closed"
+        }
+      ],
+      "console_errors": [
+        {
+          "level": "error",
+          "text": "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+          "source": "browser-console"
+        }
+      ],
+      "failed_requests": [
+        {
+          "url": "https://esm.sh/@strudel.cycles/core?bundle",
+          "method": "GET",
+          "error_text": "net::ERR_TUNNEL_CONNECTION_FAILED",
+          "phase": "launch"
+        }
+      ],
+      "manifest_drift": [],
+      "status": "failed"
+    }
+  ]
+}

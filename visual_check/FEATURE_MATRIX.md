@@ -46,6 +46,11 @@ Bring-up is idempotent and preserved at `fv_state/bring-up.sh`. Program-state ca
 - **Verdict: PARTIAL — resolver-mediated path PASS; raw `launchApp(alias)` FAIL**
   (contract map X1; no user-facing symptom found — desktop icons/start entries use
   canonical ids).
+- **Gap-closure update (2026-10-14): FIXED.** The served shell now resolves aliases
+  inside `launchApp` (contract map X1). Live probe
+  (`fv_state/alias_probe.mjs` → `alias-probe-results.json`): all 3 aliases open and
+  close their canonical windows; canonical launches unchanged; unknown ids remain
+  clean no-ops. **Verdict now: PASS (raw + resolver-mediated).**
 
 ### F-03 — MCP++ Explorer: service discovery
 - **Intended (intent_ir + ORB/IDL):** with backends up, the Explorer negotiates all three
@@ -62,6 +67,17 @@ Bring-up is idempotent and preserved at `fv_state/bring-up.sh`. Program-state ca
   `fv-03-explorer-live.png`.
 - **Verdict: PASS for discovery (the prior pass's failure mode is gone);
   DEGRADED status traced to refuted contract R1.**
+- **Gap-closure update (2026-10-14): R1 FIXED; Explorer now fully healthy.**
+  All three adapters answer the full Profile G surface including
+  `mcp++/risk/profile` with genuine per-owner profiles (contract map R1/F3/G1).
+  Cold full-stack restart + probe (`fv_state/explorer_probe.mjs` →
+  `explorer-probe-results.json`, screenshot `fv-11-explorer-healthy.png`):
+  header state **`ready`**, **"3/3 MCP++ services responded."**, 461 tools,
+  capability tags negotiated on all three services. Availability note: the
+  header count is `health.ok && initialize.ok` per service; under heavy VM
+  CPU contention the client's 8 s probe timeout can still flap a service —
+  an environment property, reproduced and measured, not a contract defect
+  (warm adapter probes answer in milliseconds in a calm window).
 
 ### F-04 — MCP++ Explorer: explicit tool call
 - **Intended:** the Tools tab runs an explicit call against a chosen service and shows
@@ -109,6 +125,17 @@ Bring-up is idempotent and preserved at `fv_state/bring-up.sh`. Program-state ca
   (`/mcp/apps/backend-status?app_id=agent-supervisor` → `tool_backed`).
 - **Verdict: PASS as designed degradation (fallback state is the documented behavior);
   the fallback is an environment-scope note, not a defect (contract map §4).**
+- **Gap-closure update (2026-10-14): console now runs on its live gateway.**
+  No separate console-gateway server exists in the repo; the production gateway
+  is the desktop client's `createSupervisorGateway()` (its Profile G reads are
+  what R1's fix made real), and the shell now installs it for the console
+  (contract map §4/G3). Live probe (`fv_state/console_probe.mjs` →
+  `console-probe-results.json`, screenshot `fv-12-supervisor-console-live.png`):
+  status **`ready`**, transportMode **`degraded`** (not fallback), health
+  `available` with all 3 backends live, queue/goals/receipts read **live**
+  (0/0/0 — fallback sample data gone). The 5 remaining capability errors are
+  the gateway's own deliberate non-mappings (`capability_unavailable`).
+  **Verdict now: PASS live (with the gateway's typed partial mapping).**
 
 ### F-07 — Agent Supervisor: governed prompt steering through the confirm gate
 - **Intended (SWR-106 + ORB coverage `steering_requires_confirmation: true`):** a
@@ -152,12 +179,71 @@ Bring-up is idempotent and preserved at `fv_state/bring-up.sh`. Program-state ca
   `swissknife/test-results/virtual-desktop-ipfs-mcp-orb/app-screenshots/svd-132-playwright/`.
 - **Verdict: BLOCKED-BY-RUNTIME-BUDGET (contract map B1); superseded by F-01's sweep
   over the same desktop API.**
+- **Gap-closure update (2026-10-14): discharged in batches.** Three completed
+  runs of the repo's own runner + driver over manifest batches (the runner's
+  supported `manifest` option; scratch harness, deleted after use):
+  **37/48 ids audited, 33 passed, 74/96 screenshots** — assembly at
+  `fv_state/svd132-batched-assembly.json`. The F2 close path succeeds in
+  every completed record. Failures: `terminal`, `github`, `media-player`
+  (wallpaper egress only) and `strudel-ai-daw` (B7 esm.sh, verbatim).
+  The last 11 ids were attempted twice more under load 18–39 on this
+  2-core box and did not complete; the canonical single-run
+  `svd-132-playwright.json` was not produced and its filename was left
+  untouched. **Verdict now: PARTIAL-PASS (batched) — audit machinery and
+  close path proven; single-run completion remains budget-blocked here.**
 
 ### F-10 — Apps whose runtime depends on external CDN egress
 - `strudel-ai-daw`'s launch promise never settles because `@strudel.cycles` is fetched
   from `https://esm.sh`, which this VM's egress proxy refuses (`ERR_TUNNEL_CONNECTION_FAILED`);
   its window still registers, focuses, and closes. The desktop wallpaper (unsplash)
   fails the same way. **Verdict: environment-blocked (contract map B7), not app defects.**
+
+### F-11 — Profile G method surface on all MCP++ services (gap-closure, 2026-10-14)
+- **Intended:** every service answers the MCP++ Profile G (risk/scheduling) surface
+  the desktop client and supervisor gateway consume.
+- **Observed:** `mcp++/risk/profile` answers on all three adapters with the genuine
+  per-owner profiles (kit: `RuntimeProfileG@1` from its own transport; datasets:
+  canonical profile from `profile_g_service`; accelerate: the upstream's native
+  profile, whose REST facade was repaired by F3). `goals/list`, `tasks/list`,
+  `tasks/ready`, `schedule/frontier` return real pages on all three; a write
+  (`goals/create {}`) reaches the accelerate backend's own validation. With the
+  upstream killed, the adapter fails closed with `-32051 G_PROVIDER_UNAVAILABLE`
+  (module test) — no fabricated profile. Warm dispatch latency ~0.0 s via the
+  persistent worker bridge. **Verdict: PASS (contract map R1).**
+
+### F-13 — Per-app MCP++ interaction design (sharpened-requirement audit, 2026-10-14)
+- **Intended:** every tool_backed app is actually designed to interact with
+  its backend over MCP++: controls resolve to real owner tools through the
+  gateway mediator, declared transports really execute, rendered state is
+  truthful, mutating controls are confirm-gated in the UI flow.
+- **Observed:** per-app mediated invocations built exactly as the apps' own
+  gateway panel builds them: **38/38 apps executed** over http (receipt +
+  Event-DAG ref + persisted receipt + UCAN-verified observation each);
+  **10/10 libp2p-declaring apps executed over libp2p** through the mediator
+  (after the R5 bridge/helper fix — the path was dead before: bridges
+  crashed on the missing canonical pymultihash shim); the other 28 apps
+  are http-only by declaration. Unconsented-mutation probes **26/26
+  denied `confirmation_required`** mediator-side; the panel itself can
+  only ever rehearse governed controls (confirmation-gated dry run — the
+  repo's own e2e pins this as the intended class), browser-verified with
+  a governed click in vibecode. Truthfulness: matrix↔catalog zero
+  mismatches for all 38; browser probe of 8 apps (all owners +
+  non-tool-backed) — rendered control states match live truth, **0
+  mismatches**; non-tool-backed apps mount no panel. **Verdict: PASS**
+  (contract map P15 + R5). Evidence `fv_state/audit2/`,
+  screenshot `fv-13-ui-truthfulness.png`.
+
+### F-12 — Live libp2p host-to-host MCP++ session (gap-closure, 2026-10-14)
+- **Intended:** two real libp2p hosts run an MCP++ session (descriptor + UCAN
+  identity + a tool call) — the transport proof the peers surface alone could not
+  give.
+- **Observed:** two `MCPp2pNode` hosts (repos' Profile E code, pinned py-libp2p
+  0.7.0) on loopback, both operational; descriptor exchanged (CID-addressed),
+  UCAN-gated tool call authorized server-side by `DelegationEvaluator`,
+  execution receipt CID issued, wrong-resource and missing-delegation calls
+  refused. Same-machine two-host session — real transport, no mocks.
+  **Verdict: PASS (contract map B4); evidence
+  `fv_state/p2p-session-evidence.json`.**
 
 ## Per-app results (45 canonical + 3 aliases)
 
