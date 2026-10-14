@@ -1,0 +1,1190 @@
+{
+  "Git_or_source_or_index_mutations": 0,
+  "PR_base_metadata_qualifier": {
+    "actual_first_parent_sha": "cd420d7301ffd3e96a7d978248022f6e42024145",
+    "explanation": "PR base.sha remains the previously recorded74f5 branch-base field. Exact fetched Git parents and matching fresh premergeV02 establish actual firstparentcd42; preservation was checked against that actual first parent.",
+    "public_PR_base_sha": "74f5d98c8ffff3c284cffddf430091b5fc4c6f8c"
+  },
+  "actual_first_parent": "cd420d7301ffd3e96a7d978248022f6e42024145",
+  "actual_merge": "f4a823231ad52c9252504810a1b00ed4738346b6",
+  "actual_merge_entry_count": 32223,
+  "actual_parents": [
+    "cd420d7301ffd3e96a7d978248022f6e42024145",
+    "fa08b4bba1a0bd9bb257bd7a9988160bcbaf4946"
+  ],
+  "actual_tree": "6f1f236efbb4822daa41026a107ee05872077ce0",
+  "all42_algorithm_and_current_model_test_blobs_match_training_and_published_HF": {
+    "ipfs_datasets_py/logic/formalization/autoencoder/arbitrary_native_source_cache.py": {
+      "actual_merge_entry": "100644 blob 82978c03d34ac25327538fd9714b7074b946bfb6",
+      "raw": {
+        "bytes": 29148,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/arbitrary_native_source_cache.py",
+        "sha256": "af9c9944cfd9c2c926911bca94a7d407af25019a1ab833655a9511deea4f4594"
+      }
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/arbitrary_native_span_runtime.py": {
+      "actual_merge_entry": "100644 blob 373c4207568b97be1932d778d71a32d07dc71e3d",
+      "raw": {
+        "bytes": 28040,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/arbitrary_native_span_runtime.py",
+        "sha256": "dedf1598196e902269f6b82a9249b9d7bf41274df87da65c0b393fbd2547a50a"
+      }
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py": {
+      "actual_merge_entry": "100644 blob fa542082edd89b213843c9d3f8d3c2312ef1d04a",
+      "raw": {
+        "bytes": 37249,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py",
+        "sha256": "57032fb7b824cfc9a39a442ccffa0bd5fb64873baa48a9ab43a94e80f901b430"
+      }
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/dimension_source_inputs.py": {
+      "actual_merge_entry": "100644 blob f1c9efbae82ee2d639ec84cc5ba3578c00c9238a",
+      "raw": {
+        "bytes": 28444,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/dimension_source_inputs.py",
+        "sha256": "c7f396d3323c40b5f4bab1aa42557e693b65cced58435e63c735f875c6d12206"
+      }
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/gte_multilingual_profile.py": {
+      "actual_merge_entry": "100644 blob 6a326c6188bfa05383e143c2339603758576ca69",
+      "raw": {
+        "bytes": 15959,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/gte_multilingual_profile.py",
+        "sha256": "d6d6069c98c7f15bd4c6f8a43bd9ffb72032e04a452419a3ff5d9bd95bb06e8e"
+      }
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/legal_native_conditioning.py": {
+      "actual_merge_entry": "100644 blob c74aed1afce161e349f512f36b6bcfd8db402d48",
+      "raw": {
+        "bytes": 24439,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_native_conditioning.py",
+        "sha256": "48709fa4a521046ad753c87afe2732d17968e33d51ab2f43e4c4fefe2182059f"
+      }
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/retained_span_score_capture.py": {
+      "actual_merge_entry": "100644 blob bae499db41a6cf10e8dc5636bf587a32845e2155",
+      "raw": {
+        "bytes": 17966,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/retained_span_score_capture.py",
+        "sha256": "e11329b8de6876642c500ee6cf2c4f261c6bb3b26556806a1b4caaea625b4909"
+      }
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768.py": {
+      "actual_merge_entry": "100644 blob 66fac7cce3155d0eaf515e63ff3ff46aba11ff5f",
+      "raw": {
+        "bytes": 13375,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768.py",
+        "sha256": "cd4b23b87fefe3f80f234a5c85d9e4823139d5040a5507813b88385ee601b4ea"
+      }
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768_complete.py": {
+      "actual_merge_entry": "100644 blob c67a8c7857ab3123038e849ce7a6ae7018037718",
+      "raw": {
+        "bytes": 9556,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768_complete.py",
+        "sha256": "6f781849dc87eba1b7f0929d292bb10f5724bb1ca5749989feb988cde243c609"
+      }
+    },
+    "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py": {
+      "actual_merge_entry": "100644 blob 1bf4da481ff84ccb3554ae0dd1126dfc4cbffb6b",
+      "raw": {
+        "bytes": 109257,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+        "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+      }
+    },
+    "ipfs_datasets_py/logic/legal_ir/canonical_decoder_preflight.py": {
+      "actual_merge_entry": "100644 blob b863e55c257d6dcb24c721ba1981be8b69e3a284",
+      "raw": {
+        "bytes": 9794,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_decoder_preflight.py",
+        "sha256": "a656d5e692623043f24d670a193a449d43af742de20ccd68c4b7e744d7e3b276"
+      }
+    },
+    "ipfs_datasets_py/logic/legal_ir/canonical_source_guards.py": {
+      "actual_merge_entry": "100644 blob af799a9fcf5699636e3e1dffce96dc1d3e2932ed",
+      "raw": {
+        "bytes": 6017,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_source_guards.py",
+        "sha256": "a1b2fc2fe7fdf23b8caa46e43c5341287a35a94deaa70f291fb351e58505b32b"
+      }
+    },
+    "ipfs_datasets_py/logic/legal_ir/canonical_span_decoder.py": {
+      "actual_merge_entry": "100644 blob 7ce3ed18ec40071f0c8b24457f74fdfb248ad93e",
+      "raw": {
+        "bytes": 21764,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_span_decoder.py",
+        "sha256": "c25044aeb63d66b73feac95de0ca6d49339774edb7611b1b956cf6307db438ec"
+      }
+    },
+    "ipfs_datasets_py/logic/legal_ir/joint_span_selection.py": {
+      "actual_merge_entry": "100644 blob 7b2e23b540f01ee952ff94057d7987257c33cdeb",
+      "raw": {
+        "bytes": 16730,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/joint_span_selection.py",
+        "sha256": "791c283f625ae7d8841e7afa697b34cbfa5c74361d0c0129b66af31fb5e13679"
+      }
+    },
+    "ipfs_datasets_py/logic/legal_ir/matched_temporal_curriculum.py": {
+      "actual_merge_entry": "100644 blob 363d638395d12240d5b403d80b69eb735b911c2e",
+      "raw": {
+        "bytes": 39619,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/matched_temporal_curriculum.py",
+        "sha256": "a64fa4f79e949593744768c8ab4896f349d93d2885ebbc36a13d0854e6185a71"
+      }
+    },
+    "ipfs_datasets_py/logic/legal_ir/targeted_loss_curriculum.py": {
+      "actual_merge_entry": "100644 blob c8e377f8a4e15fb02caf278bade4f06864983c4d",
+      "raw": {
+        "bytes": 43299,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/targeted_loss_curriculum.py",
+        "sha256": "42aa966d65b599b5100617474109c96309c63c263d6182c10b357a7cda0e0dd3"
+      }
+    },
+    "ipfs_datasets_py/logic/legal_ir/temporal_role_contrast_corpus.py": {
+      "actual_merge_entry": "100644 blob 8c0296e65af3bccc72ffcbb281ea6c65c6518dd3",
+      "raw": {
+        "bytes": 15813,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/temporal_role_contrast_corpus.py",
+        "sha256": "acbae8463f6f1a347272fc83a71246a55110580a1e7221dc2f4b95e10c6bcddd"
+      }
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_corpus_manifest.py": {
+      "actual_merge_entry": "100644 blob d4fda5e81f5393b3cd99266e03ea9a75612bb35f",
+      "raw": {
+        "bytes": 27947,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_corpus_manifest.py",
+        "sha256": "b067f05b3cfc28cb213a83519530f7148b2a5fa7d5b25809e87e1f7c286f9a5d"
+      }
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_production.py": {
+      "actual_merge_entry": "100644 blob 3a56d4c2c31e60779ae4a41d6586934609cfc5f3",
+      "raw": {
+        "bytes": 26219,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_production.py",
+        "sha256": "735ca0597186e094d736ef58435c82956c4ab805a68fc7a6adbfc0ee21ee889f"
+      }
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_runtime.py": {
+      "actual_merge_entry": "100644 blob 85eff000585407ffa7b689c574713df824c596a1",
+      "raw": {
+        "bytes": 19364,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_runtime.py",
+        "sha256": "ce80ed6294009e04580051e6eb06a817d74a8a56f04814ad0a698e3d27dd0d41"
+      }
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_native_pool.py": {
+      "actual_merge_entry": "100644 blob 6eb9b3a5f5a5f56c3f2466aa7ae06b3ef24189ee",
+      "raw": {
+        "bytes": 7896,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_native_pool.py",
+        "sha256": "04f29da03f937dfee7ecfcb621980240c014754abe55f71a2c1ef8338ba715bb"
+      }
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py": {
+      "actual_merge_entry": "100644 blob b00afcd281ba189b86e07de75854bb83f1a75e99",
+      "raw": {
+        "bytes": 100140,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py",
+        "sha256": "bde3bd327df59f2e7557eac8aa2e0989ceb1128bc39918bf8cf46011e7bd9415"
+      }
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py": {
+      "actual_merge_entry": "100644 blob 0e96d544c72999d1fe9bc4c03e2585addb4a331c",
+      "raw": {
+        "bytes": 14622,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+        "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+      }
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py": {
+      "actual_merge_entry": "100644 blob 53d7123051e1a1b9737edeb8928dfe57a579286c",
+      "raw": {
+        "bytes": 42137,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py",
+        "sha256": "3b6cd3a6fade78fed275a478f010329e5d030a250b914c4b46ab0f0d77b9d5ab"
+      }
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py": {
+      "actual_merge_entry": "100644 blob 446ea6eb734d8586a060f64fc56bf198e312aabe",
+      "raw": {
+        "bytes": 146870,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+        "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+      }
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_boundary.py": {
+      "actual_merge_entry": "100644 blob 1d8df9d8d772720fd671b5431827c083013be798",
+      "raw": {
+        "bytes": 49894,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_boundary.py",
+        "sha256": "442bfb72ae1038f541530a8d2446872f0393a5eeab07ba9c5616d6ad80368d4a"
+      }
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_context_ranking.py": {
+      "actual_merge_entry": "100644 blob 7de8af230326d00b87fd5a4839d16cdf768dadde",
+      "raw": {
+        "bytes": 57479,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_context_ranking.py",
+        "sha256": "6f37e5295ab09fe5f61215ab0445e6348d2972551c6bee1719e1c3c2ce2bd1aa"
+      }
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_features.py": {
+      "actual_merge_entry": "100644 blob 3537eca84b252ca61157675c7987166efff59c58",
+      "raw": {
+        "bytes": 60367,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_features.py",
+        "sha256": "498093553607bdeac57e42a6dfaf95275efc081ff46c0a7b428b39b99b3c54a3"
+      }
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_ranking.py": {
+      "actual_merge_entry": "100644 blob 0d4d7d8ed5670585d034f6bee17b453ea07e8d37",
+      "raw": {
+        "bytes": 50602,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_ranking.py",
+        "sha256": "83553976f2f09e1cf31d0e3130742befc68355bf271fd4c5eca3a076c6140538"
+      }
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_refinement.py": {
+      "actual_merge_entry": "100644 blob b9b036855ba7e4e8f426d6927b84b7b3b299dfd1",
+      "raw": {
+        "bytes": 56952,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_refinement.py",
+        "sha256": "a6b004330c0b0be63182e5931d9d77654ae0a3144526113fc9bd3075a121642e"
+      }
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_conditions_presence.py": {
+      "actual_merge_entry": "100644 blob 4657325ab34db9137fd683dd78aa78cc715ee810",
+      "raw": {
+        "bytes": 49847,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_conditions_presence.py",
+        "sha256": "50d2ac6ac4acc790718eba1769e260bf5e746da69c9d29f8e36aecaee75eee25"
+      }
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_continuation.py": {
+      "actual_merge_entry": "100644 blob 5c548f8f28085d2a86a9fdf3b4d6bf21ed94e8fe",
+      "raw": {
+        "bytes": 14165,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_continuation.py",
+        "sha256": "3f13a711906103270a5e75f0f3c3411461ad2900537a640371fe10cc4042c79c"
+      }
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_formula.py": {
+      "actual_merge_entry": "100644 blob f138ffb2285f7fc607fe3296f8abe5d6b7b9121a",
+      "raw": {
+        "bytes": 35294,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_formula.py",
+        "sha256": "60e509fc5018584d19530dd6f9b8423f163cb7baec60f5736d849995bca61185"
+      }
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_joint_readout_retention.py": {
+      "actual_merge_entry": "100644 blob 8e1e9d46bd4cc5b41ed54ac313386cfc58eea139",
+      "raw": {
+        "bytes": 80912,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_joint_readout_retention.py",
+        "sha256": "34db345e9b0f3daa04b5b8caee4dfa389c48598ea79cd0da529415ea5bb7c502"
+      }
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_permission_retention.py": {
+      "actual_merge_entry": "100644 blob 8fd095b4c4d7e69dd16f9207ee44569ab5cdb814",
+      "raw": {
+        "bytes": 40092,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_permission_retention.py",
+        "sha256": "25f8d6e9ecfde1b9d28346a0f55e787abfd61b8673a0aaf1618b6c10cda82eb0"
+      }
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_split_features.py": {
+      "actual_merge_entry": "100644 blob b041195072f94cd75031ef729300b7c34d8e36f4",
+      "raw": {
+        "bytes": 52067,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_split_features.py",
+        "sha256": "886a0cde9924dceb5f5a4b655a995eb60a8f3fb954408d991fe4b4eb23ade0cd"
+      }
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_targeted_loss.py": {
+      "actual_merge_entry": "100644 blob bf9fa544c180e42e889f6f48bfb1af07bb2774c6",
+      "raw": {
+        "bytes": 49658,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_targeted_loss.py",
+        "sha256": "f611490b2c15dee3437d0181686f16bb3aa56f3b20a00b9fa0d4ae2b2624637b"
+      }
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_temporal_adapter.py": {
+      "actual_merge_entry": "100644 blob 1ebe9057048a31f2c514adec5b0b5722d05fb97e",
+      "raw": {
+        "bytes": 48506,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_temporal_adapter.py",
+        "sha256": "48143e05dc9459f3f7a21b469ef24a6386f7a7645a8bb28ee3bb231b51332d28"
+      }
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_temporal_attention.py": {
+      "actual_merge_entry": "100644 blob 67934fe9f2cf4132933ed225facf53ad0bea1245",
+      "raw": {
+        "bytes": 56776,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_temporal_attention.py",
+        "sha256": "fb8670887177ac56379fa76dc9efe310b3a5d598f09c21a3d47e5bf960bc1731"
+      }
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_adaptive_optimizer.py": {
+      "actual_merge_entry": "100644 blob 9192b908d3afed67bf8fcec679b05613a1034e61",
+      "raw": {
+        "bytes": 21228,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_adaptive_optimizer.py",
+        "sha256": "dcd3a885820e7985ebec458a80325fe00d4d50656cf5827a828dd9cb45eb2524"
+      }
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/snapshot_evaluator.py": {
+      "actual_merge_entry": "100644 blob a0f72635842cdcb22b333ada6ff782f1fcbfd419",
+      "raw": {
+        "bytes": 38995,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/snapshot_evaluator.py",
+        "sha256": "1aa122f14dc52a4a5cb161bc2c40862334f7b216210bfcdb42fd5989b69761e6"
+      }
+    },
+    "ipfs_datasets_py/utils/cid_utils.py": {
+      "actual_merge_entry": "100644 blob 36944fb73c85e541b0b9c47531ebfd7b79791534",
+      "raw": {
+        "bytes": 4428,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/utils/cid_utils.py",
+        "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+      }
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_joint_readout_retention_contracts.py": {
+      "actual_merge_entry": "100644 blob 299be068d305879c21c939a343f2906272dcb26f",
+      "raw": {
+        "bytes": 24160,
+        "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_joint_readout_retention_contracts.py",
+        "sha256": "8ec7efa2f52ddfc3c1ec0421c387a1a9f221671ff9b5d22d4761d56d463c00d5"
+      }
+    }
+  },
+  "all_first_parent_raw_entries_exact": true,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/SOURCE_REPORT_v01.md": {
+      "bytes": 6380,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/SOURCE_REPORT_v01.md",
+      "sha256": "2b5075d09884853072f6f725123432e46369f8f4ad66320e24bf0493a9d6ff0c"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/arbitrary_native_source_cache.py": {
+      "bytes": 29148,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/arbitrary_native_source_cache.py",
+      "sha256": "af9c9944cfd9c2c926911bca94a7d407af25019a1ab833655a9511deea4f4594"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/arbitrary_native_span_runtime.py": {
+      "bytes": 28040,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/arbitrary_native_span_runtime.py",
+      "sha256": "dedf1598196e902269f6b82a9249b9d7bf41274df87da65c0b393fbd2547a50a"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py": {
+      "bytes": 37249,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/contextual_legal_ir_runtime.py",
+      "sha256": "57032fb7b824cfc9a39a442ccffa0bd5fb64873baa48a9ab43a94e80f901b430"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/dimension_source_inputs.py": {
+      "bytes": 28444,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/dimension_source_inputs.py",
+      "sha256": "c7f396d3323c40b5f4bab1aa42557e693b65cced58435e63c735f875c6d12206"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/gte_multilingual_profile.py": {
+      "bytes": 15959,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/gte_multilingual_profile.py",
+      "sha256": "d6d6069c98c7f15bd4c6f8a43bd9ffb72032e04a452419a3ff5d9bd95bb06e8e"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_native_conditioning.py": {
+      "bytes": 24439,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/legal_native_conditioning.py",
+      "sha256": "48709fa4a521046ad753c87afe2732d17968e33d51ab2f43e4c4fefe2182059f"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/retained_span_score_capture.py": {
+      "bytes": 17966,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/retained_span_score_capture.py",
+      "sha256": "e11329b8de6876642c500ee6cf2c4f261c6bb3b26556806a1b4caaea625b4909"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768.py": {
+      "bytes": 13375,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768.py",
+      "sha256": "cd4b23b87fefe3f80f234a5c85d9e4823139d5040a5507813b88385ee601b4ea"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768_complete.py": {
+      "bytes": 9556,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_768_complete.py",
+      "sha256": "6f781849dc87eba1b7f0929d292bb10f5724bb1ca5749989feb988cde243c609"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py": {
+      "bytes": 109257,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_decoder_preflight.py": {
+      "bytes": 9794,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_decoder_preflight.py",
+      "sha256": "a656d5e692623043f24d670a193a449d43af742de20ccd68c4b7e744d7e3b276"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_source_guards.py": {
+      "bytes": 6017,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_source_guards.py",
+      "sha256": "a1b2fc2fe7fdf23b8caa46e43c5341287a35a94deaa70f291fb351e58505b32b"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_span_decoder.py": {
+      "bytes": 21764,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/canonical_span_decoder.py",
+      "sha256": "c25044aeb63d66b73feac95de0ca6d49339774edb7611b1b956cf6307db438ec"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/joint_span_selection.py": {
+      "bytes": 16730,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/joint_span_selection.py",
+      "sha256": "791c283f625ae7d8841e7afa697b34cbfa5c74361d0c0129b66af31fb5e13679"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/matched_temporal_curriculum.py": {
+      "bytes": 39619,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/matched_temporal_curriculum.py",
+      "sha256": "a64fa4f79e949593744768c8ab4896f349d93d2885ebbc36a13d0854e6185a71"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/targeted_loss_curriculum.py": {
+      "bytes": 43299,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/targeted_loss_curriculum.py",
+      "sha256": "42aa966d65b599b5100617474109c96309c63c263d6182c10b357a7cda0e0dd3"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/temporal_role_contrast_corpus.py": {
+      "bytes": 15813,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/logic/legal_ir/temporal_role_contrast_corpus.py",
+      "sha256": "acbae8463f6f1a347272fc83a71246a55110580a1e7221dc2f4b95e10c6bcddd"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_corpus_manifest.py": {
+      "bytes": 27947,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_corpus_manifest.py",
+      "sha256": "b067f05b3cfc28cb213a83519530f7148b2a5fa7d5b25809e87e1f7c286f9a5d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_production.py": {
+      "bytes": 26219,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_production.py",
+      "sha256": "735ca0597186e094d736ef58435c82956c4ab805a68fc7a6adbfc0ee21ee889f"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_runtime.py": {
+      "bytes": 19364,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_runtime.py",
+      "sha256": "ce80ed6294009e04580051e6eb06a817d74a8a56f04814ad0a698e3d27dd0d41"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_native_pool.py": {
+      "bytes": 7896,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_native_pool.py",
+      "sha256": "04f29da03f937dfee7ecfcb621980240c014754abe55f71a2c1ef8338ba715bb"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py": {
+      "bytes": 100140,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py",
+      "sha256": "bde3bd327df59f2e7557eac8aa2e0989ceb1128bc39918bf8cf46011e7bd9415"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py": {
+      "bytes": 14622,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+      "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py": {
+      "bytes": 42137,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py",
+      "sha256": "3b6cd3a6fade78fed275a478f010329e5d030a250b914c4b46ab0f0d77b9d5ab"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py": {
+      "bytes": 146870,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+      "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_boundary.py": {
+      "bytes": 49894,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_boundary.py",
+      "sha256": "442bfb72ae1038f541530a8d2446872f0393a5eeab07ba9c5616d6ad80368d4a"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_context_ranking.py": {
+      "bytes": 57479,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_context_ranking.py",
+      "sha256": "6f37e5295ab09fe5f61215ab0445e6348d2972551c6bee1719e1c3c2ce2bd1aa"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_features.py": {
+      "bytes": 60367,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_features.py",
+      "sha256": "498093553607bdeac57e42a6dfaf95275efc081ff46c0a7b428b39b99b3c54a3"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_ranking.py": {
+      "bytes": 50602,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_ranking.py",
+      "sha256": "83553976f2f09e1cf31d0e3130742befc68355bf271fd4c5eca3a076c6140538"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_refinement.py": {
+      "bytes": 56952,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_refinement.py",
+      "sha256": "a6b004330c0b0be63182e5931d9d77654ae0a3144526113fc9bd3075a121642e"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_conditions_presence.py": {
+      "bytes": 49847,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_conditions_presence.py",
+      "sha256": "50d2ac6ac4acc790718eba1769e260bf5e746da69c9d29f8e36aecaee75eee25"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_continuation.py": {
+      "bytes": 14165,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_continuation.py",
+      "sha256": "3f13a711906103270a5e75f0f3c3411461ad2900537a640371fe10cc4042c79c"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_formula.py": {
+      "bytes": 35294,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_formula.py",
+      "sha256": "60e509fc5018584d19530dd6f9b8423f163cb7baec60f5736d849995bca61185"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_joint_readout_retention.py": {
+      "bytes": 80912,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_joint_readout_retention.py",
+      "sha256": "34db345e9b0f3daa04b5b8caee4dfa389c48598ea79cd0da529415ea5bb7c502"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_permission_retention.py": {
+      "bytes": 40092,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_permission_retention.py",
+      "sha256": "25f8d6e9ecfde1b9d28346a0f55e787abfd61b8673a0aaf1618b6c10cda82eb0"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_split_features.py": {
+      "bytes": 52067,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_split_features.py",
+      "sha256": "886a0cde9924dceb5f5a4b655a995eb60a8f3fb954408d991fe4b4eb23ade0cd"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_targeted_loss.py": {
+      "bytes": 49658,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_targeted_loss.py",
+      "sha256": "f611490b2c15dee3437d0181686f16bb3aa56f3b20a00b9fa0d4ae2b2624637b"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_temporal_adapter.py": {
+      "bytes": 48506,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_temporal_adapter.py",
+      "sha256": "48143e05dc9459f3f7a21b469ef24a6386f7a7645a8bb28ee3bb231b51332d28"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_temporal_attention.py": {
+      "bytes": 56776,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_temporal_attention.py",
+      "sha256": "fb8670887177ac56379fa76dc9efe310b3a5d598f09c21a3d47e5bf960bc1731"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_adaptive_optimizer.py": {
+      "bytes": 21228,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_adaptive_optimizer.py",
+      "sha256": "dcd3a885820e7985ebec458a80325fe00d4d50656cf5827a828dd9cb45eb2524"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/snapshot_evaluator.py": {
+      "bytes": 38995,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/snapshot_evaluator.py",
+      "sha256": "1aa122f14dc52a4a5cb161bc2c40862334f7b216210bfcdb42fd5989b69761e6"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/utils/cid_utils.py": {
+      "bytes": 4428,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/ipfs_datasets_py/utils/cid_utils.py",
+      "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_joint_readout_retention_contracts.py": {
+      "bytes": 24160,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_joint_readout_retention_contracts.py",
+      "sha256": "8ec7efa2f52ddfc3c1ec0421c387a1a9f221671ff9b5d22d4761d56d463c00d5"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/hf-publication-completion-independent-review-v01.json": {
+      "bytes": 456653,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/hf-publication-completion-independent-review-v01.json",
+      "sha256": "b7ffabdd4e91faa2678fc577b493104454c7109686cedb9b3a59a28479670833"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/hf-release-spec-v01.json": {
+      "bytes": 107655,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/hf-release-spec-v01.json",
+      "sha256": "316dd0e074d6cf92aebe0ca317c4ebe767f08631294df073d872a8e1481de4f5"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/joint-readout-retention-result-independent-review-v01.json": {
+      "bytes": 99318,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/joint-readout-retention-result-independent-review-v01.json",
+      "sha256": "0e896edc19dfa793e85ce8f30090fb579359672bc831c0e6192d78eb97775533"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/phase-intake-v01.json": {
+      "bytes": 1944,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/phase-intake-v01.json",
+      "sha256": "a6acb53c835f56c84db25d249a2f1d9a2af4fcd0093f163f651d9a33b9f56e26"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-PR-propagation-observation-v01.json": {
+      "bytes": 497,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-PR-propagation-observation-v01.json",
+      "sha256": "440b9a20993d0d741bf3544c4436bde325dc1ec5cf71a3ed427835b7c1692794"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-merge-response-v01.json": {
+      "bytes": 109,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-merge-response-v01.json",
+      "sha256": "c525a51bb75defbbc4fdfa95cdfd1211b71abb081336ce828dc0625f7676dc04"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-pr-merged-v01.json": {
+      "bytes": 19501,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-pr-merged-v01.json",
+      "sha256": "6a3a6ab033edb50f5ac2bd89821f30d2ddf2ca99f3004bb202b946c72a51dadf"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-premerge-remote-v01.json": {
+      "bytes": 1877,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-premerge-remote-v01.json",
+      "sha256": "2a1c913aa02faa72ad73b1c86c525276137b506ad307370b8bbe26ca61638b4e"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-premerge-remote-v02.json": {
+      "bytes": 424,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-premerge-remote-v02.json",
+      "sha256": "fbcf94518cc11d9fc7a4ff6379e5bf4942593d68068c415228ceadf5444ff1aa"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-premerge-supplement-independent-review-v01.json": {
+      "bytes": 8340,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-premerge-supplement-independent-review-v01.json",
+      "sha256": "7dc3febeebd39ef7ef9fec421bad76f634335db3bf96e72c440f74a1dcf9224a"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-stage-independent-review-v01.json": {
+      "bytes": 32378,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-stage-independent-review-v01.json",
+      "sha256": "4bc40fbd1a81391705a00c7727d8a2ccaa3931869059f629566c370a3d47a8ac"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-stage-packet-v01.json": {
+      "bytes": 2040,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-stage-packet-v01.json",
+      "sha256": "e84c1f124f1ac34a4e219ae9a41e7d2de2ccc181e429f9cbf1f55c99c6624466"
+    }
+  },
+  "canonical_Git_commands": 0,
+  "default_decoder_change_by_this_merge": false,
+  "default_promotion": false,
+  "findings": [],
+  "first_parent_entry_count": 32220,
+  "hosted_CI_pass_claimed": false,
+  "matches_premerge_prediction": true,
+  "merge_scope": "Actual source Git graph/tree preservation and raw source/report custody only. No accuracy, hosted-CI, numerical-reload or continuous-ref-custody claim. Root gitlink integration remains separate.",
+  "network_SDK_model_numerical_checkpoint_JSON_privatebody_calls": 0,
+  "observed_at_utc": "2026-10-14T19:32:55.420778+00:00",
+  "only_additions": {
+    "docs/autoformalization/legal-joint-readout-retention-20261014.md": {
+      "bytes": 6380,
+      "entry": "100644 blob 96d6912a96c00ff986583b21fba5c5ee1f019722",
+      "sha256": "2b5075d09884853072f6f725123432e46369f8f4ad66320e24bf0493a9d6ff0c"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_joint_readout_retention.py": {
+      "bytes": 80912,
+      "entry": "100644 blob 8e1e9d46bd4cc5b41ed54ac313386cfc58eea139",
+      "sha256": "34db345e9b0f3daa04b5b8caee4dfa389c48598ea79cd0da529415ea5bb7c502"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_joint_readout_retention_contracts.py": {
+      "bytes": 24160,
+      "entry": "100644 blob 299be068d305879c21c939a343f2906272dcb26f",
+      "sha256": "8ec7efa2f52ddfc3c1ec0421c387a1a9f221671ff9b5d22d4761d56d463c00d5"
+    }
+  },
+  "owned_integration_HEAD_unchanged_by_reviewer": "fa08b4bba1a0bd9bb257bd7a9988160bcbaf4946",
+  "owned_integration_index_after": {
+    "bytes": 5313459,
+    "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration/.git/index",
+    "sha256": "697258902bd52640e9032613fcb7199cf6864daec6fcb50b5a92e95943629d10"
+  },
+  "owned_integration_index_before": {
+    "bytes": 5313459,
+    "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration/.git/index",
+    "sha256": "697258902bd52640e9032613fcb7199cf6864daec6fcb50b5a92e95943629d10"
+  },
+  "owned_object_store_checkout": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration",
+  "passed": true,
+  "preserved_all10_gitlinks": {
+    ".tools/ipfs_kit_py": "160000 commit a9b98beac1ef14278b4adf4f2289cd509530fb86",
+    "ipfs_accelerate_py": "160000 commit c88c0eece0a91297f2ee33859adc2d71724d59d4",
+    "ipfs_datasets_py/logic/CEC/DCEC_Library": "160000 commit a4beb5b3280595be6b9221cac3c91dd019e6d371",
+    "ipfs_datasets_py/logic/CEC/Eng-DCEC": "160000 commit df518c21ef81b8001e6db59f5fd70f10cc04ff6c",
+    "ipfs_datasets_py/logic/CEC/ShadowProver": "160000 commit 3060ede1ac1ec3f8ef9f9c9e41386aed1dbbe7f9",
+    "ipfs_datasets_py/logic/CEC/Talos": "160000 commit e0b7650d3e3a403924773f8253e924c719748d36",
+    "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type": "160000 commit d58933631a5362b1e2fdc45254ef620fa231223a",
+    "ipfs_datasets_py/multimedia/omni_converter_mk2": "160000 commit c1d9b0d517cea022516aab5b5d8fa5e3bc9a65aa",
+    "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine": "160000 commit 0e635cba586e8f6f6ea8126e3b1668b3e675c029",
+    "ipfs_kit_py": "160000 commit a9b98beac1ef14278b4adf4f2289cd509530fb86"
+  },
+  "preserved_all4_symlinks": {
+    "Dockerfile": "120000 blob 93c313e63109b53d8354a76a5feb0d55af5ae033",
+    "docker-compose.yml": "120000 blob 3ccbe9c54fc0917f220e81e75ac108f233425f67",
+    "docker-entrypoint.sh": "120000 blob 53701225067752b1eb310846e6fb9d72fb007c78",
+    "ipfs_datasets_py/static/admin/webfonts": "120000 blob 6bb59df539ec3a1bffeb7156906f49e911d6a441"
+  },
+  "raw_tree_listing_sha256": {
+    "actual_first_parent": "fae3aa5da90ee0e70060e14916ab11410b72a029abc28b4ab71b3042b243c6a3",
+    "actual_merge": "77a45f796ffb6527891853eae05b73e78be2871d78a5a2eedff4f41668345f3d",
+    "reviewed_authored_head": "5edd0dcad54c9ee134be75cba6d386c69d7da9c025593b529bb57e109d3ddbff"
+  },
+  "readonly_owned_Git_commands": [
+    {
+      "argv": [
+        "rev-list",
+        "--parents",
+        "-n",
+        "1",
+        "f4a823231ad52c9252504810a1b00ed4738346b6"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "f4a823231ad52c9252504810a1b00ed4738346b6^{tree}"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "--verify",
+        "HEAD"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "--git-path",
+        "index"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "ls-tree",
+        "-r",
+        "-z",
+        "cd420d7301ffd3e96a7d978248022f6e42024145"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "ls-tree",
+        "-r",
+        "-z",
+        "f4a823231ad52c9252504810a1b00ed4738346b6"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "ls-tree",
+        "-r",
+        "-z",
+        "fa08b4bba1a0bd9bb257bd7a9988160bcbaf4946"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "96d6912a96c00ff986583b21fba5c5ee1f019722"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "8e1e9d46bd4cc5b41ed54ac313386cfc58eea139"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "299be068d305879c21c939a343f2906272dcb26f"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "96d6912a96c00ff986583b21fba5c5ee1f019722"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "--verify",
+        "HEAD"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "82978c03d34ac25327538fd9714b7074b946bfb6"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "373c4207568b97be1932d778d71a32d07dc71e3d"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "fa542082edd89b213843c9d3f8d3c2312ef1d04a"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "f1c9efbae82ee2d639ec84cc5ba3578c00c9238a"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "6a326c6188bfa05383e143c2339603758576ca69"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "c74aed1afce161e349f512f36b6bcfd8db402d48"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "bae499db41a6cf10e8dc5636bf587a32845e2155"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "66fac7cce3155d0eaf515e63ff3ff46aba11ff5f"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "c67a8c7857ab3123038e849ce7a6ae7018037718"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "1bf4da481ff84ccb3554ae0dd1126dfc4cbffb6b"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "b863e55c257d6dcb24c721ba1981be8b69e3a284"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "af799a9fcf5699636e3e1dffce96dc1d3e2932ed"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "7ce3ed18ec40071f0c8b24457f74fdfb248ad93e"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "7b2e23b540f01ee952ff94057d7987257c33cdeb"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "363d638395d12240d5b403d80b69eb735b911c2e"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "c8e377f8a4e15fb02caf278bade4f06864983c4d"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "8c0296e65af3bccc72ffcbb281ea6c65c6518dd3"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "d4fda5e81f5393b3cd99266e03ea9a75612bb35f"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "3a56d4c2c31e60779ae4a41d6586934609cfc5f3"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "85eff000585407ffa7b689c574713df824c596a1"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "6eb9b3a5f5a5f56c3f2466aa7ae06b3ef24189ee"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "b00afcd281ba189b86e07de75854bb83f1a75e99"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "0e96d544c72999d1fe9bc4c03e2585addb4a331c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "53d7123051e1a1b9737edeb8928dfe57a579286c"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "446ea6eb734d8586a060f64fc56bf198e312aabe"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "1d8df9d8d772720fd671b5431827c083013be798"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "7de8af230326d00b87fd5a4839d16cdf768dadde"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "3537eca84b252ca61157675c7987166efff59c58"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "0d4d7d8ed5670585d034f6bee17b453ea07e8d37"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "b9b036855ba7e4e8f426d6927b84b7b3b299dfd1"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "4657325ab34db9137fd683dd78aa78cc715ee810"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "5c548f8f28085d2a86a9fdf3b4d6bf21ed94e8fe"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "f138ffb2285f7fc607fe3296f8abe5d6b7b9121a"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "8e1e9d46bd4cc5b41ed54ac313386cfc58eea139"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "8fd095b4c4d7e69dd16f9207ee44569ab5cdb814"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "b041195072f94cd75031ef729300b7c34d8e36f4"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "bf9fa544c180e42e889f6f48bfb1af07bb2774c6"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "1ebe9057048a31f2c514adec5b0b5722d05fb97e"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "67934fe9f2cf4132933ed225facf53ad0bea1245"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "9192b908d3afed67bf8fcec679b05613a1034e61"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "a0f72635842cdcb22b333ada6ff782f1fcbfd419"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "36944fb73c85e541b0b9c47531ebfd7b79791534"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "cat-file",
+        "blob",
+        "299be068d305879c21c939a343f2906272dcb26f"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "diff",
+        "--name-status",
+        "-z",
+        "cd420d7301ffd3e96a7d978248022f6e42024145",
+        "f4a823231ad52c9252504810a1b00ed4738346b6"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "--verify",
+        "HEAD"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration"
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "--verify",
+        "HEAD"
+      ],
+      "cwd": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets"
+    }
+  ],
+  "reviewed_authored_head": "fa08b4bba1a0bd9bb257bd7a9988160bcbaf4946",
+  "reviewer": "actor_architecture_n8 independent of integration author root",
+  "schema": "joint-readout-retention-source-final-merge-independent-review/v1",
+  "scientific_success": false,
+  "source_PR": 1305,
+  "source_PR_merged": true,
+  "training_algorithm_and_model_test_rawbytes_unchanged": true,
+  "training_checkout": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets",
+  "training_checkout_HEAD": "4b50ae4aac65da9166bd3b24608f32ba7e9fb23d",
+  "training_checkout_HEAD_matches_original_intake": true
+}

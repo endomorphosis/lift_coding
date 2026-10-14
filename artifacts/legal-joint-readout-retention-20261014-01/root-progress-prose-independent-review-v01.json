@@ -1,0 +1,54 @@
+{
+  "HF_completion": {
+    "bytes": 456653,
+    "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/hf-publication-completion-independent-review-v01.json",
+    "sha256": "b7ffabdd4e91faa2678fc577b493104454c7109686cedb9b3a59a28479670833"
+  },
+  "checks": {
+    "F17_separate_weights_and_single_rule_scope": true,
+    "HF229_and5847_5846_sole146B_attrs_exact": true,
+    "exposed_not_statutory_gold_qualification": true,
+    "freshdev_and_test0_of36_both": true,
+    "grouped_v1_v2_and_explicit_scope_learned_profile_abstention_match_incoming_doc": true,
+    "next_F15_ablation_proposal_not_execution": true,
+    "no_numerical_reload_or_LFS_clone_claim": true,
+    "training154_both_min155_failed": true,
+    "two_regression_ids_vetoed": true
+  },
+  "default_promotion": false,
+  "findings": [],
+  "incoming_document_observation": "Read-only Git blob74f5d98c:docs/autoencoders/inference_and_qualification.md confirms groupedv1/v2, learned profile abstention and separate8D/384D/768Dweights; sparse worktree does not materialize this file.",
+  "limits": [
+    "Root progress link resolves only after final COMPLETED_REPORT_v01.md is copied into the chosen root public allowlist. This prose review does not approve future root stage or merge objects.",
+    "Actual source merge placeholder must be filled from verified source graph before final report staging.",
+    "No next-design independent receipt was present in the phase name search; the author diagnosis is cited only as a proposal, without an independent-design approval claim."
+  ],
+  "observed_at_utc": "2026-10-14T19:24:46.200620+00:00",
+  "operations": {
+    "Git_mutations": 0,
+    "canonical_Git_commands": 0,
+    "checkpoint_rawheads_reference_private_body_reads": 0,
+    "model_or_runtime_execution": 0,
+    "network_calls": 0,
+    "owned_checkout_edits": 0,
+    "read_only_owned_Git_blob_reads": 1
+  },
+  "passed": true,
+  "progress_append": {
+    "bytes": 2397,
+    "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/ROOT_PROGRESS_APPEND_v01.md",
+    "sha256": "c0ddb685f70ec6ca5fc7b21b89336a1dcdc70c7103cdc59ab4d9f88aa300d563"
+  },
+  "public_summary_sha256": "795bfd54bdc416650fbe97cf403e83fa4dde4fd87a338ef23ed64afcc6b8c512",
+  "reviewer": "/root/integration_review_f17",
+  "root_candidate": {
+    "all9_scope_rows_equal_public_summary": true,
+    "bytes": 7364,
+    "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/ROOT_REPORT_FINAL_CANDIDATE_v01.md",
+    "sha256": "93685be4b818ccf5e29577c2157a3b5902b61982aabfb45e254b10e05affe000",
+    "source_merge_placeholder_count": 1
+  },
+  "schema": "joint-readout-retention-root-progress-prose-independent-review/v1",
+  "scientific_success": false,
+  "scope": "Factual prose check against public summary, qualified independent HF completion, prior source incoming documentation and refreshed public intake. No runtime, numerical, private or checkpoint read."
+}

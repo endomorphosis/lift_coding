@@ -1,0 +1,43 @@
+{
+  "canonical_git_commands": 0,
+  "canonical_raw_anchors": [
+    {
+      "bytes": 37,
+      "path": "/home/barberb/lift_coding/.git/HEAD",
+      "sha256": "32a4e0619657da69ad525c8936b759693db31bc061488a69a547266919aac0c7"
+    },
+    {
+      "bytes": 692628,
+      "path": "/home/barberb/lift_coding/.git/index",
+      "sha256": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4"
+    },
+    {
+      "bytes": 21,
+      "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/HEAD",
+      "sha256": "28d25bf82af4c0e2b72f50959b2beb859e3e60b9630a5e8c603dad4ddb2b6e80"
+    },
+    {
+      "bytes": 5251025,
+      "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/index",
+      "sha256": "8bd28a44ae0a0425cfaba561c3bf8c13f25bbf7e61cbf12c05708c9563dceda8"
+    }
+  ],
+  "created_utc": "2026-10-14T19:21:24.938201+00:00",
+  "root": {
+    "incoming_entries": 37679,
+    "incoming_main": "30d14ca11300adbe35faaa836bbfefb9d1fd2af7",
+    "incoming_tree_equal": true,
+    "owned_head": "30d14ca11300adbe35faaa836bbfefb9d1fd2af7"
+  },
+  "schema": "legal-joint-readout-retention-refreshed-integration-intake-v01",
+  "source": {
+    "added_paths": [
+      "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_joint_readout_retention.py",
+      "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_joint_readout_retention_contracts.py"
+    ],
+    "incoming_entries": 32220,
+    "incoming_entries_preserved_exact": true,
+    "incoming_main": "74f5d98c8ffff3c284cffddf430091b5fc4c6f8c",
+    "owned_head": "8876b60e49b4b46687eb588ba3fd96cf6f1add16"
+  }
+}

@@ -1,0 +1,195 @@
+{
+  "Git_mutations": 0,
+  "HF_or_full_model_review_repeated": false,
+  "SDK_network_model_numerical_or_privatebody_calls": 0,
+  "actual_source_merge_complete": false,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/hf-release-spec-v01.json": {
+      "bytes": 107655,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/hf-release-spec-v01.json",
+      "sha256": "316dd0e074d6cf92aebe0ca317c4ebe767f08631294df073d872a8e1481de4f5"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-PR-propagation-observation-v01.json": {
+      "bytes": 497,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-PR-propagation-observation-v01.json",
+      "sha256": "440b9a20993d0d741bf3544c4436bde325dc1ec5cf71a3ed427835b7c1692794"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-pr-propagated-v01.json": {
+      "bytes": 18477,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-pr-propagated-v01.json",
+      "sha256": "406b8b7a4e1b837236032757af2d37c4b59c15822e1907abab36b4a49da0a465"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-premerge-remote-v01.json": {
+      "bytes": 1877,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-premerge-remote-v01.json",
+      "sha256": "2a1c913aa02faa72ad73b1c86c525276137b506ad307370b8bbe26ca61638b4e"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-stage-independent-review-v01.json": {
+      "bytes": 32378,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-stage-independent-review-v01.json",
+      "sha256": "4bc40fbd1a81391705a00c7727d8a2ccaa3931869059f629566c370a3d47a8ac"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-stage-packet-v01.json": {
+      "bytes": 2040,
+      "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-stage-packet-v01.json",
+      "sha256": "e84c1f124f1ac34a4e219ae9a41e7d2de2ccc181e429f9cbf1f55c99c6624466"
+    }
+  },
+  "authored_parent": "8876b60e49b4b46687eb588ba3fd96cf6f1add16",
+  "authored_tree": "a4468abf116139aebdd97711938e51d79ecc92fc",
+  "candidate_entries": 32223,
+  "canonical_Git_commands": 0,
+  "current_index_equals_exact_accepted_candidate_tree": true,
+  "default_promotion": false,
+  "exact_pushed_head": "fa08b4bba1a0bd9bb257bd7a9988160bcbaf4946",
+  "findings": [],
+  "fresh_HEAD_and_index_unchanged_by_review": true,
+  "fresh_public_PR_receipt_exacthead_fa08": true,
+  "hosted_check_scope": "Only inspected Python annotation attributes non-start to billing lock. Other failures remain un-attributed here; no hosted pass claim.",
+  "hosted_passes_observed": 0,
+  "incoming_entries": 32220,
+  "index_after": {
+    "bytes": 5313459,
+    "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration/.git/index",
+    "sha256": "697258902bd52640e9032613fcb7199cf6864daec6fcb50b5a92e95943629d10"
+  },
+  "index_before": {
+    "bytes": 5313459,
+    "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration/.git/index",
+    "sha256": "697258902bd52640e9032613fcb7199cf6864daec6fcb50b5a92e95943629d10"
+  },
+  "latest_observed_incoming_main": "cd420d7301ffd3e96a7d978248022f6e42024145",
+  "merge_base": "74f5d98c8ffff3c284cffddf430091b5fc4c6f8c",
+  "new_incoming_changed_paths": {
+    "ipfs_datasets_py/logic/autoformal/span_ingest_runtime.py": {
+      "added_lines": 5,
+      "after": "100644 blob 6bb87ff831657450ff3b8224693593a1f92c4fcc",
+      "before": "100644 blob 6c9410f4406872c617201c61268f85d69af10d5c",
+      "removed_lines": 2
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legacy_span_engine_custody.py": {
+      "added_lines": 12,
+      "after": "100644 blob 96325ad87590f500d756983b4dfa5a4d06168f70",
+      "before": "100644 blob d5d80438798a69d7dbcc751804558d6a89411211",
+      "removed_lines": 4
+    },
+    "tests/unit/logic/test_span_ingest_runtime.py": {
+      "added_lines": 98,
+      "after": "100644 blob 53986cea47a5d90ad2a6b647a97f2a9f09c0bc34",
+      "before": "100644 blob d997c5cc0a0ed6f3a7db9aea458748117343c592",
+      "removed_lines": 0
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legacy_span_engine_custody.py": {
+      "added_lines": 243,
+      "after": "100644 blob 1d0e915c94d93933049c88926985e6f93e56a9f6",
+      "before": "100644 blob cb3a2d2afb87d1627e736de6002b3abeb5f81c41",
+      "removed_lines": 0
+    }
+  },
+  "new_incoming_delta_added_lines": 358,
+  "new_incoming_delta_removed_lines": 6,
+  "new_incoming_paths_overlap43_training_HF_source_and_test_paths": [],
+  "new_incoming_paths_overlap_authored_paths": [],
+  "normal_merge_conditions": "Use exact pushed head fa08b4... and ordinary GitHub merge. Postmerge independently verify the actual first-parent tree is preserved plus exactly the three authored additions; if actual first parent differs from observed cd42, do not infer its preservation from this premerge prediction.",
+  "observed_at_utc": "2026-10-14T19:30:30.281182+00:00",
+  "old_propagation_guard_failure_preserved": true,
+  "only_authored_additions": [
+    "docs/autoformalization/legal-joint-readout-retention-20261014.md",
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_joint_readout_retention.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_joint_readout_retention_contracts.py"
+  ],
+  "owned_checkout": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/datasets-integration",
+  "passed": true,
+  "path_level_merge_conflicts": 0,
+  "predicted_merge_preserves_all_latest32220_entries_and_adds_exact3": true,
+  "predicted_normal_merge_tree_if_first_parent_cd42": "6f1f236efbb4822daa41026a107ee05872077ce0",
+  "prediction_computed_without_writing_Git_objects": true,
+  "previous_incoming_main": "74f5d98c8ffff3c284cffddf430091b5fc4c6f8c",
+  "previous_stage_review": {
+    "bytes": 32378,
+    "path": "/home/barberb/lift_coding/artifacts/legal-joint-readout-retention-20261014-01/source-final-stage-independent-review-v01.json",
+    "sha256": "4bc40fbd1a81391705a00c7727d8a2ccaa3931869059f629566c370a3d47a8ac"
+  },
+  "raw_tree_listing_sha256": {
+    "authored_candidate": "5edd0dcad54c9ee134be75cba6d386c69d7da9c025593b529bb57e109d3ddbff",
+    "latest_incoming": "fae3aa5da90ee0e70060e14916ab11410b72a029abc28b4ab71b3042b243c6a3",
+    "previous_incoming": "78c3304fe6af8b30ca9886a78d1c4eb98ddbc8076013b13e902d52926c66a89f"
+  },
+  "readonly_owned_Git_commands": [
+    [
+      "rev-parse",
+      "--verify",
+      "HEAD"
+    ],
+    [
+      "rev-parse",
+      "fa08b4bba1a0bd9bb257bd7a9988160bcbaf4946^{tree}"
+    ],
+    [
+      "rev-list",
+      "--parents",
+      "-n",
+      "1",
+      "fa08b4bba1a0bd9bb257bd7a9988160bcbaf4946"
+    ],
+    [
+      "rev-parse",
+      "--git-path",
+      "index"
+    ],
+    [
+      "ls-tree",
+      "-r",
+      "-z",
+      "74f5d98c8ffff3c284cffddf430091b5fc4c6f8c"
+    ],
+    [
+      "ls-tree",
+      "-r",
+      "-z",
+      "cd420d7301ffd3e96a7d978248022f6e42024145"
+    ],
+    [
+      "ls-tree",
+      "-r",
+      "-z",
+      "fa08b4bba1a0bd9bb257bd7a9988160bcbaf4946"
+    ],
+    [
+      "ls-files",
+      "--stage",
+      "-z"
+    ],
+    [
+      "diff",
+      "--cached",
+      "--raw",
+      "HEAD"
+    ],
+    [
+      "ls-files",
+      "--unmerged",
+      "-z"
+    ],
+    [
+      "merge-base",
+      "--all",
+      "fa08b4bba1a0bd9bb257bd7a9988160bcbaf4946",
+      "cd420d7301ffd3e96a7d978248022f6e42024145"
+    ],
+    [
+      "diff",
+      "--numstat",
+      "74f5d98c8ffff3c284cffddf430091b5fc4c6f8c",
+      "cd420d7301ffd3e96a7d978248022f6e42024145"
+    ],
+    [
+      "rev-parse",
+      "--verify",
+      "HEAD"
+    ]
+  ],
+  "reviewer": "actor_architecture_n8 independent of source integration author root",
+  "schema": "joint-readout-retention-source-final-premerge-supplement-independent-review/v1",
+  "scientific_success": false
+}

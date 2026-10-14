@@ -233,3 +233,38 @@ builds exist, but every new generated artifact needs its own required check.
 Only an actual `lake build <Lib>` may grant Lean admission. This integration
 review grants no model promotion, semantic qualification or law formalization.
 The Constitution remains unformalized.
+
+
+## F17 single-rule decoder result and grouped-decoder progress (2026-10-14)
+
+The experimental joint-readout retention decoder improves individual actor and
+modality fields but leaves complete training LegalIR at 154/168 on both raw and
+joint routes. It fails the minimum of 155 and two exposed-panel loss vetoes, so
+its checkpoint is not promoted. Fresh development and test complete-rule
+accuracy remains 0/36 on each route. These are previously exposed authored
+engineering panels, not independently reviewed statutory gold. See the
+[F17 completed report](../../artifacts/legal-joint-readout-retention-20261014-01/COMPLETED_REPORT_v01.md)
+and [source contribution](https://github.com/endomorphosis/ipfs_datasets_py/pull/1305).
+
+The [immutable HF release](https://huggingface.co/Publicus/legal-ir-autoencoder/tree/290c266d72b8c298ec21db0f9b0857b008914caf/releases/20261014-joint-readout-retention-v1)
+contains 229 new files, including the checkpoint and bounded evidence. All new
+files were downloaded from that revision and checked against their staged raw
+bytes. All 5,847 previous paths remain; 5,846 identities remain exact and the
+sole prior-file change is the declared 146-byte checkpoint-specific
+`.gitattributes` append. Payload additions are additive; the complete publication
+protocol is not additions-only. Numerical reload and Git LFS clone behavior are
+not qualified by raw readback.
+
+The current shared source documentation also describes grouped span decoders
+v1/v2, explicit modal-scope declarations and learned profile abstention. Those
+heads address ordered multi-rule structure. F17 addresses single-rule component
+coupling; it does not merge their weights or establish their accuracy. Both
+contributions remain available for controlled comparisons. Preserve the current
+[inference and qualification guidance](https://github.com/endomorphosis/ipfs_datasets_py/blob/74f5d98c8ffff3c284cffddf430091b5fc4c6f8c/docs/autoencoders/inference_and_qualification.md)
+when extending either route.
+
+The next proposed ablation returns to F15 and freezes actor and all presence
+readouts while targeting modality and conditions boundaries. It requires a
+verified training-only error mask and separate source/resource qualification;
+it has not run. Active 8D/384D/768D comparisons, independently reviewed US Code
+fidelity and applicable logic-family/native-build checks remain separate gaps.
