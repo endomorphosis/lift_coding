@@ -1,0 +1,68 @@
+{
+  "actual_incoming": "1e7a783101df8790ed1ebcafc378766db8ae4886",
+  "actual_merge": "6a1c75771a8eff0ed1fa21387c6c493f3c02cd5d",
+  "added_entries": 141,
+  "all_incoming_entries_exact": true,
+  "all_incoming_gitlinks_preserved": true,
+  "all_reviewed_additions_exact": true,
+  "findings": [],
+  "git_mutations": 0,
+  "incoming_entries_preserved": 31480,
+  "incoming_gitlinks": {
+    ".tools/ipfs_kit_py": {
+      "mode": "160000",
+      "oid": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "type": "commit"
+    },
+    "ipfs_accelerate_py": {
+      "mode": "160000",
+      "oid": "c82e5774fe2ab97ccbb791416e9d77964c519d85",
+      "type": "commit"
+    },
+    "ipfs_datasets_py/logic/CEC/DCEC_Library": {
+      "mode": "160000",
+      "oid": "a4beb5b3280595be6b9221cac3c91dd019e6d371",
+      "type": "commit"
+    },
+    "ipfs_datasets_py/logic/CEC/Eng-DCEC": {
+      "mode": "160000",
+      "oid": "df518c21ef81b8001e6db59f5fd70f10cc04ff6c",
+      "type": "commit"
+    },
+    "ipfs_datasets_py/logic/CEC/ShadowProver": {
+      "mode": "160000",
+      "oid": "3060ede1ac1ec3f8ef9f9c9e41386aed1dbbe7f9",
+      "type": "commit"
+    },
+    "ipfs_datasets_py/logic/CEC/Talos": {
+      "mode": "160000",
+      "oid": "e0b7650d3e3a403924773f8253e924c719748d36",
+      "type": "commit"
+    },
+    "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type": {
+      "mode": "160000",
+      "oid": "d58933631a5362b1e2fdc45254ef620fa231223a",
+      "type": "commit"
+    },
+    "ipfs_datasets_py/multimedia/omni_converter_mk2": {
+      "mode": "160000",
+      "oid": "c1d9b0d517cea022516aab5b5d8fa5e3bc9a65aa",
+      "type": "commit"
+    },
+    "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine": {
+      "mode": "160000",
+      "oid": "0e635cba586e8f6f6ea8126e3b1668b3e675c029",
+      "type": "commit"
+    },
+    "ipfs_kit_py": {
+      "mode": "160000",
+      "oid": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "type": "commit"
+    }
+  },
+  "model_or_private_calls": 0,
+  "passed": true,
+  "reviewed_head": "99c0b7b0340a76d587dd4fdc77f2db28f5fd7ae3",
+  "schema": "conditions-balanced-source-merge-root-observation/v1",
+  "scope": "Owned Git object comparison of actual merge and current first parent; no continuous custody or hosted CI claim."
+}
