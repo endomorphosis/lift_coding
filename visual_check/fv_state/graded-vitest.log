@@ -1,0 +1,35 @@
+
+ RUN  v3.2.4 /home/hatch/workspace/lift_coding/swissknife
+
+ ✓ test/mcp-plus-plus/virtual-desktop-app-manifest.test.ts (17 tests) 81601ms
+   ✓ SVD-132 manifest-driven virtual desktop app audit runner > opens all 48 canonical ids and writes fresh structured evidence to disk  5713ms
+   ✓ SVD-132 manifest-driven virtual desktop app audit runner > covers every canonical app id and every declared alias exactly once  8499ms
+   ✓ SVD-132 manifest-driven virtual desktop app audit runner > captures a desktop and a narrow screenshot for every opened id, written as real decodable PNGs  9406ms
+   ✓ SVD-132 manifest-driven virtual desktop app audit runner > produces byte-distinguishable screenshots per app and per viewport  9348ms
+   ✓ SVD-132 manifest-driven virtual desktop app audit runner > records launch, focus, and close/reopen behavior for every opened id  11905ms
+   ✓ SVD-132 manifest-driven virtual desktop app audit runner > captures empty console-error and failed-request arrays for a clean simulated run, and reports zero manifest drift  9888ms
+   ✓ SVD-132 manifest-driven virtual desktop app audit runner > captures injected console errors, failed requests, and drift findings when a driver reports them  9514ms
+   ✓ SVD-132 manifest-driven virtual desktop app audit runner > is deterministic: two runs against the unchanged manifest produce byte-identical evidence  17057ms
+ ✓ test/mcp-plus-plus/desktop-orb-idl-contract.test.ts (4 tests) 1054ms
+   ✓ SWR-108 virtual desktop ORB/IDL complete coverage > validates one ORB/IDL descriptor for every canonical virtual desktop app  432ms
+⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯
+
+Vitest caught 1 unhandled error during the test run.
+This might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.
+
+⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯
+Error: [vitest-worker]: Timeout calling "onTaskUpdate"
+ ❯ Object.onTimeoutError node_modules/vitest/dist/chunks/rpc.-pEldfrD.js:53:10
+ ❯ Timeout._onTimeout node_modules/vitest/dist/chunks/index.B521nVV-.js:59:62
+ ❯ listOnTimeout node:internal/timers:685:17
+ ❯ processTimers node:internal/timers:618:7
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+
+
+ Test Files  2 passed (2)
+      Tests  21 passed (21)
+     Errors  1 error
+   Start at  00:51:24
+   Duration  94.56s (transform 1.77s, setup 584ms, collect 2.83s, tests 82.66s, environment 3.23s, prepare 1.86s)
+

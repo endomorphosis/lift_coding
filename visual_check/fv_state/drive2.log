@@ -1,0 +1,57 @@
+[drive] desktop booted
+[drive] app terminal opened 
+[drive] app vibecode opened 
+[drive] app music-studio-unified opened 
+[drive] app ai-chat opened 
+[drive] app file-manager opened 
+[drive] app task-manager opened 
+[drive] app todo opened 
+[drive] app model-browser opened 
+[drive] app huggingface opened 
+[drive] app openrouter opened 
+[drive] app ipfs-explorer opened 
+[drive] app device-manager opened 
+[drive] app settings opened 
+[drive] app mcp-control opened 
+[drive] app api-keys opened 
+[drive] app github opened 
+[drive] app oauth-login opened 
+[drive] app cron opened 
+[drive] app navi opened 
+[drive] app p2p-network opened 
+[drive] app p2p-chat-unified opened 
+[drive] app neural-network-designer opened 
+[drive] app training-manager opened 
+[drive] app calculator opened 
+[drive] app clock opened 
+[drive] app calendar opened 
+[drive] app peertube opened 
+[drive] app friends-list opened 
+[drive] app image-viewer opened 
+[drive] app notes opened 
+[drive] app media-player opened 
+[drive] app system-monitor opened 
+[drive] app neural-photoshop opened 
+[drive] app cinema opened 
+[drive] app strudel opened 
+[drive] app strudel-ai-daw FAILED Error: page.evaluate: Target page, context or browser has been closed
+[drive] app music-studio FAILED Error: page.evaluate: Target page, context or browser has been closed
+[drive] app p2p-chat FAILED Error: page.evaluate: Target page, context or browser has been closed
+[drive] app datasets-browser FAILED Error: page.evaluate: Target page, context or browser has been closed
+[drive] app accelerate-panel FAILED Error: page.evaluate: Target page, context or browser has been closed
+[drive] app idl-explorer FAILED Error: page.evaluate: Target page, context or browser has been closed
+[drive] app glasses-preview FAILED Error: page.evaluate: Target page, context or browser has been closed
+[drive] app orb-auto-ui FAILED Error: page.evaluate: Target page, context or browser has been closed
+[drive] app mcp-plus-plus FAILED Error: page.evaluate: Target page, context or browser has been closed
+[drive] app agent-supervisor FAILED Error: page.evaluate: Target page, context or browser has been closed
+[drive] app code-editor FAILED Error: page.evaluate: Target page, context or browser has been closed
+[drive] app strudel-grandma FAILED Error: page.evaluate: Target page, context or browser has been closed
+[drive] app p2p-chat-offline FAILED Error: page.evaluate: Target page, context or browser has been closed
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.screenshot: Target page, context or browser has been closed
+    at /home/hatch/workspace/lift_coding/visual_check/fv_state/drive.mjs:90:12
+
+Node.js v24.20.0

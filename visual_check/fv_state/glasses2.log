@@ -1,0 +1,316 @@
+
+> swissknife@0.0.53 evidence:mcp-glasses
+> node scripts/ensure-mcp-glasses-evidence-prereqs.cjs && npm run test:run -- test/mcp-plus-plus/glasses-manifest-coverage.test.ts test/mcp-plus-plus/desktop-orb-idl-contract.test.ts test/mcp-plus-plus/mobile-orb-edge-all-apps.test.ts test/mcp-plus-plus/virtual-desktop-tool-ui-smoke-evidence.test.ts test/mcp-plus-plus/agent-supervisor-console-evidence.test.ts test/mcp-plus-plus/meta-glasses-simulator-handoff-evidence.test.ts
+
+Regenerating MCP glasses evidence prerequisites: all-tools-composite-workflows.json, all-server-tool-catalog.json, mcp-plus-plus-libp2p-catalog.json, mcpplusplus-libp2p-reachability.json, hierarchical-tools-evidence.json, capability-matrix.json, tool-ui-smoke-receipts.json, app-inventory.json, app-workflow-matrix.json, agent-supervisor-console-e2e.json, agent-supervisor-console-receipts.json, orb-idl-complete-coverage.json, all-tools-policy-release-gate.json:not-go
+{
+  "adapters": [
+    {
+      "service": "ipfs_kit_py",
+      "ready": true,
+      "action": "already_running",
+      "endpoint": "http://127.0.0.1:8014/api/mcp/status",
+      "helia": {
+        "enabled": true,
+        "background_services": [
+          "autoNAT",
+          "autoTLS",
+          "dcutr",
+          "delegatedPeerRouting",
+          "delegatedContentRouting",
+          "dht",
+          "identify",
+          "identifyPush",
+          "keychain",
+          "ping",
+          "relay",
+          "upnp",
+          "http"
+        ],
+        "bootstrap_peers": [
+          "/dnsaddr/bootstrap.libp2p.io/p2p/QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN",
+          "/dnsaddr/bootstrap.libp2p.io/p2p/QmQCU2EcMqAqQPR2i9bChDtGNJchTbq5TbXJJ16u19uLTa",
+          "/dnsaddr/bootstrap.libp2p.io/p2p/QmbLHAnMoJPWSCR5Zhtx6BHJX9KiKNN6tpvbUcqanj75Nb",
+          "/dnsaddr/bootstrap.libp2p.io/p2p/QmcZf59bWwK5XFi76CZX8cbJ4BhTzzA3gU1ZjYZcYW3dwt"
+        ],
+        "node_repo": "/home/hatch/.cache/swissknife/mcpplusplus-helia/network/process-1923",
+        "peer_id": "12D3KooWLVwodmHMF4AcQZNzdn8sUt4fvD8SDmqRxXFjUs6EsuMp",
+        "peer_discovery": [
+          "mdns",
+          "bootstrap"
+        ],
+        "dht_mode": "client",
+        "dht_options": {
+          "clientMode": true,
+          "allowQueryWithZeroPeers": true,
+          "initialQuerySelfInterval": 3600000,
+          "querySelfInterval": 3600000,
+          "kBucketSize": 1,
+          "alpha": 1,
+          "disjointPaths": 1,
+          "prefixLength": 1,
+          "routingTableUpdateQueueConcurrency": 1,
+          "routingTableUpdateMaxQueueSize": 4,
+          "pingNewContactConcurrency": 1,
+          "pingNewContactMaxQueueSize": 4,
+          "maxInboundStreams": 4,
+          "maxOutboundStreams": 4,
+          "networkDialTimeout": 3000
+        },
+        "public_listen": false,
+        "resource_limits": {
+          "max_connections": 4,
+          "min_connections": 0,
+          "max_parallel_dials": 1,
+          "auto_dial_max_queue_length": 1,
+          "max_peer_addrs_to_dial": 2,
+          "max_incoming_pending_connections": 2,
+          "dial_timeout_ms": 3000
+        },
+        "multiaddrs": [
+          "/ip4/127.0.0.1/tcp/36651/p2p/12D3KooWLVwodmHMF4AcQZNzdn8sUt4fvD8SDmqRxXFjUs6EsuMp",
+          "/ip6/::1/tcp/45085/p2p/12D3KooWLVwodmHMF4AcQZNzdn8sUt4fvD8SDmqRxXFjUs6EsuMp",
+          "/ip4/127.0.0.1/tcp/43117/ws/p2p/12D3KooWLVwodmHMF4AcQZNzdn8sUt4fvD8SDmqRxXFjUs6EsuMp",
+          "/ip6/::1/tcp/32985/ws/p2p/12D3KooWLVwodmHMF4AcQZNzdn8sUt4fvD8SDmqRxXFjUs6EsuMp"
+        ],
+        "active_connection_count": 2,
+        "active_peer_count": 2,
+        "connected_peers": []
+      },
+      "pid": 1923
+    },
+    {
+      "service": "ipfs_datasets_py",
+      "ready": true,
+      "action": "already_running",
+      "endpoint": "http://127.0.0.1:3002/api/mcp/status",
+      "helia": {
+        "enabled": true,
+        "background_services": [
+          "autoNAT",
+          "autoTLS",
+          "dcutr",
+          "delegatedPeerRouting",
+          "delegatedContentRouting",
+          "dht",
+          "identify",
+          "identifyPush",
+          "keychain",
+          "ping",
+          "relay",
+          "upnp",
+          "http"
+        ],
+        "bootstrap_peers": [
+          "/dnsaddr/bootstrap.libp2p.io/p2p/QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN",
+          "/dnsaddr/bootstrap.libp2p.io/p2p/QmQCU2EcMqAqQPR2i9bChDtGNJchTbq5TbXJJ16u19uLTa",
+          "/dnsaddr/bootstrap.libp2p.io/p2p/QmbLHAnMoJPWSCR5Zhtx6BHJX9KiKNN6tpvbUcqanj75Nb",
+          "/dnsaddr/bootstrap.libp2p.io/p2p/QmcZf59bWwK5XFi76CZX8cbJ4BhTzzA3gU1ZjYZcYW3dwt"
+        ],
+        "node_repo": "/home/hatch/.cache/swissknife/mcpplusplus-helia/network/process-1927",
+        "peer_id": "12D3KooWQV7yV6foLdGKJdMa4GGy2bzFEr7LsrYQXbsGHvP4DHiH",
+        "peer_discovery": [
+          "mdns",
+          "bootstrap"
+        ],
+        "dht_mode": "client",
+        "dht_options": {
+          "clientMode": true,
+          "allowQueryWithZeroPeers": true,
+          "initialQuerySelfInterval": 3600000,
+          "querySelfInterval": 3600000,
+          "kBucketSize": 1,
+          "alpha": 1,
+          "disjointPaths": 1,
+          "prefixLength": 1,
+          "routingTableUpdateQueueConcurrency": 1,
+          "routingTableUpdateMaxQueueSize": 4,
+          "pingNewContactConcurrency": 1,
+          "pingNewContactMaxQueueSize": 4,
+          "maxInboundStreams": 4,
+          "maxOutboundStreams": 4,
+          "networkDialTimeout": 3000
+        },
+        "public_listen": false,
+        "resource_limits": {
+          "max_connections": 4,
+          "min_connections": 0,
+          "max_parallel_dials": 1,
+          "auto_dial_max_queue_length": 1,
+          "max_peer_addrs_to_dial": 2,
+          "max_incoming_pending_connections": 2,
+          "dial_timeout_ms": 3000
+        },
+        "multiaddrs": [
+          "/ip4/127.0.0.1/tcp/35731/p2p/12D3KooWQV7yV6foLdGKJdMa4GGy2bzFEr7LsrYQXbsGHvP4DHiH",
+          "/ip6/::1/tcp/42999/p2p/12D3KooWQV7yV6foLdGKJdMa4GGy2bzFEr7LsrYQXbsGHvP4DHiH",
+          "/ip4/127.0.0.1/tcp/40373/ws/p2p/12D3KooWQV7yV6foLdGKJdMa4GGy2bzFEr7LsrYQXbsGHvP4DHiH",
+          "/ip6/::1/tcp/44189/ws/p2p/12D3KooWQV7yV6foLdGKJdMa4GGy2bzFEr7LsrYQXbsGHvP4DHiH"
+        ],
+        "active_connection_count": 2,
+        "active_peer_count": 2,
+        "connected_peers": []
+      },
+      "pid": 1927
+    },
+    {
+      "service": "ipfs_accelerate_py",
+      "ready": true,
+      "action": "already_running",
+      "endpoint": "http://127.0.0.1:3003/api/mcp/status",
+      "helia": {
+        "enabled": true,
+        "background_services": [
+          "autoNAT",
+          "autoTLS",
+          "dcutr",
+          "delegatedPeerRouting",
+          "delegatedContentRouting",
+          "dht",
+          "identify",
+          "identifyPush",
+          "keychain",
+          "ping",
+          "relay",
+          "upnp",
+          "http"
+        ],
+        "bootstrap_peers": [
+          "/dnsaddr/bootstrap.libp2p.io/p2p/QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN",
+          "/dnsaddr/bootstrap.libp2p.io/p2p/QmQCU2EcMqAqQPR2i9bChDtGNJchTbq5TbXJJ16u19uLTa",
+          "/dnsaddr/bootstrap.libp2p.io/p2p/QmbLHAnMoJPWSCR5Zhtx6BHJX9KiKNN6tpvbUcqanj75Nb",
+          "/dnsaddr/bootstrap.libp2p.io/p2p/QmcZf59bWwK5XFi76CZX8cbJ4BhTzzA3gU1ZjYZcYW3dwt"
+        ],
+        "node_repo": "/home/hatch/.cache/swissknife/mcpplusplus-helia/network/process-1931",
+        "peer_id": "12D3KooWCnTHM3M4QRhXdNqWvVc4hr51xGUQ4e3duxGUhftZcmfk",
+        "peer_discovery": [
+          "mdns",
+          "bootstrap"
+        ],
+        "dht_mode": "client",
+        "dht_options": {
+          "clientMode": true,
+          "allowQueryWithZeroPeers": true,
+          "initialQuerySelfInterval": 3600000,
+          "querySelfInterval": 3600000,
+          "kBucketSize": 1,
+          "alpha": 1,
+          "disjointPaths": 1,
+          "prefixLength": 1,
+          "routingTableUpdateQueueConcurrency": 1,
+          "routingTableUpdateMaxQueueSize": 4,
+          "pingNewContactConcurrency": 1,
+          "pingNewContactMaxQueueSize": 4,
+          "maxInboundStreams": 4,
+          "maxOutboundStreams": 4,
+          "networkDialTimeout": 3000
+        },
+        "public_listen": false,
+        "resource_limits": {
+          "max_connections": 4,
+          "min_connections": 0,
+          "max_parallel_dials": 1,
+          "auto_dial_max_queue_length": 1,
+          "max_peer_addrs_to_dial": 2,
+          "max_incoming_pending_connections": 2,
+          "dial_timeout_ms": 3000
+        },
+        "multiaddrs": [
+          "/ip4/127.0.0.1/tcp/39527/p2p/12D3KooWCnTHM3M4QRhXdNqWvVc4hr51xGUQ4e3duxGUhftZcmfk",
+          "/ip6/::1/tcp/43021/p2p/12D3KooWCnTHM3M4QRhXdNqWvVc4hr51xGUQ4e3duxGUhftZcmfk",
+          "/ip4/127.0.0.1/tcp/34939/ws/p2p/12D3KooWCnTHM3M4QRhXdNqWvVc4hr51xGUQ4e3duxGUhftZcmfk",
+          "/ip6/::1/tcp/34937/ws/p2p/12D3KooWCnTHM3M4QRhXdNqWvVc4hr51xGUQ4e3duxGUhftZcmfk"
+        ],
+        "active_connection_count": 2,
+        "active_peer_count": 2,
+        "connected_peers": []
+      },
+      "pid": 1931
+    }
+  ]
+}
+{
+  "tool_record_count": 506,
+  "exact_tool_record_count": 506,
+  "configured_live_tool_count": 461,
+  "live_exact_tool_count": 461,
+  "real_local_accelerate_tool_count": 0,
+  "static_descriptor_tool_count": 45,
+  "static_exact_tool_count": 45,
+  "service_counts": {
+    "ipfs_accelerate_py:configured_compat": 18,
+    "ipfs_accelerate_py:static_descriptor": 8,
+    "ipfs_datasets_py:configured": 319,
+    "ipfs_datasets_py:static_descriptor": 8,
+    "ipfs_kit_py:configured": 124,
+    "ipfs_kit_py:static_descriptor": 29
+  }
+}
+{
+  "decision": "no_go",
+  "required_count": 11,
+  "configured_tool_count": 18,
+  "real_local_tool_count": 0,
+  "configured_required_count": 11,
+  "missing_configured_required_count": 0,
+  "real_local_alias_count": 0,
+  "missing_real_local_alias_count": 11,
+  "json_rpc_tools_list_ready": true,
+  "hierarchy_facade_tool_count": 4,
+  "missing_hierarchy_facade_count": 0,
+  "hierarchy_facade_probe_ready": true,
+  "listener_ready": true,
+  "pid_file_matches_listener": true,
+  "process_ready": true,
+  "restart_ready": true,
+  "browser_boundary_status": "enforced_by_bundle_audit",
+  "browser_direct_adapter_execution_allowed": false,
+  "adapter_name": "swissknife-ipfs-accelerate-compat",
+  "adapter_version": "1.0.0",
+  "adapter_source_path": "scripts/start-ipfs-accelerate-mcp-compat.cjs",
+  "pid_path": "test-results/virtual-desktop-ipfs-mcp-orb/ipfs-accelerate-compat.pid"
+}
+{
+  "schema": "swissknife.all-tools-composite-workflows.v1",
+  "workflow_count": 7,
+  "step_count": 20,
+  "output": "test-results/virtual-desktop-ipfs-mcp-orb/all-tools-composite-workflows.json"
+}
+{
+  "schema": "swissknife.virtual-desktop-all-tools-capability-matrix.v1",
+  "app_count": 45,
+  "app_with_bound_tool_count": 23,
+  "app_visible_tool_count": 471,
+  "adapter_required_tool_count": 0,
+  "descriptor_count": 147,
+  "projection_count": 147,
+  "decision": "go",
+  "input_problem_count": 0,
+  "desktop_mobile_only_tool_count": 35,
+  "supervisor_only_tool_count": 0,
+  "output": "test-results/virtual-desktop-ipfs-mcp-orb/capability-matrix.json",
+  "app_backend_contract": "test-results/virtual-desktop-ipfs-mcp-orb/app-backend-contract.json",
+  "app_backend_contract_updated": true,
+  "docs": "docs/virtual-desktop-all-tools-app-coverage.md",
+  "docs_updated": true
+}
+{
+  "decision": "no_go",
+  "blocker_count": 1,
+  "agent_supervisor_decision": "go",
+  "agent_supervisor_blocker_count": 0,
+  "service_count": 3,
+  "available_service_count": 3,
+  "live_dispatch_receipt_count": 69,
+  "policy_gated_evidence_count": 246,
+  "libp2p_decision": "go",
+  "outputs": [
+    "test-results/virtual-desktop-ipfs-mcp-orb/all-server-tool-catalog.json",
+    "test-results/virtual-desktop-ipfs-mcp-orb/mcp-plus-plus-libp2p-catalog.json",
+    "test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-console-e2e.json",
+    "test-results/virtual-desktop-ipfs-mcp-orb/agent-supervisor-console-receipts.json",
+    "docs/mcp-all-tool-catalog-evidence.md",
+    "docs/agent-supervisor-console-evidence.md"
+  ]
+}
+capture-mcp-live-probe-evidence.cjs exited with status 1

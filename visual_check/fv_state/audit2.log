@@ -1,0 +1,669 @@
+
+> swissknife@0.0.53 test:e2e:app-audit-runner
+> node scripts/run-with-owned-port.mjs --env-var SWISSKNIFE_APP_AUDIT_RUNNER_E2E_PORT --preferred 3001 -- node scripts/run_playwright_test.mjs test -c build-tools/configs/playwright.app-audit-runner.config.ts
+
+[run-with-owned-port] preferred port 3001 is already owned by another process; leaving it untouched and leasing verified-free port 3004 instead.
+Browser toolchain verified: node 22.19.0 (/home/hatch/.npm/_npx/759e7e0cbbdd6854/node_modules/node/bin/node), npm 10.8.2, sha256:584a3304603b208797b50faee86f00f5a6fe987d2289f382ae4f7b93a62dbc21; receipt test-results/browser-toolchain/verification-receipt.json
+
+Running 1 test using 1 worker
+
+[WebServer] [2m11:37:06 PM[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [33mwarning: 
+[WebServer] [36m/home/hatch/workspace/lift_coding/swissknife/web/js/apps/file-manager.js[33m
+[WebServer] [0m111 |  
+[WebServer] 112 |    try {
+[WebServer] 113 |      const module = await import(COLLABORATIVE_FILE_SYSTEM_MODULE);
+[WebServer]     |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[WebServer] 114 |      return module.CollaborativeFileSystem || CollaborativeFileSystemFallback;
+[WebServer] 115 |    } catch (error) {[0m[33m
+[WebServer] The above dynamic import cannot be analyzed by Vite.
+[WebServer] See [34mhttps://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#limitations[33m for supported dynamic import formats. If this is intended to be left as-is, you can use the /* @vite-ignore */ comment inside the import() call to suppress this warning.
+[WebServer] [33m[39m
+[WebServer]   Plugin: [35mvite:import-analysis[39m
+[WebServer]   File: [36m/home/hatch/workspace/lift_coding/swissknife/web/js/apps/file-manager.js[39m
+SVD-132 real-browser audit found failing apps: [
+  {
+    requested_id: [32m'terminal'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mtrue[39m,
+      duration_ms: [33m1941[39m,
+      window_id: [32m'window-1'[39m,
+      error: [90mundefined[39m
+    },
+    console_errors: [ [36m[Object][39m ],
+    failed_requests: [ [36m[Object][39m ],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'vibecode'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mtrue[39m,
+      duration_ms: [33m423[39m,
+      window_id: [32m'window-3'[39m,
+      error: [90mundefined[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'code-editor'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mtrue[39m,
+      duration_ms: [33m141[39m,
+      window_id: [32m'window-5'[39m,
+      error: [90mundefined[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'music-studio-unified'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mtrue[39m,
+      duration_ms: [33m1466[39m,
+      window_id: [32m'window-7'[39m,
+      error: [90mundefined[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'ai-chat'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mtrue[39m,
+      duration_ms: [33m1292[39m,
+      window_id: [32m'window-9'[39m,
+      error: [90mundefined[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'file-manager'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mtrue[39m,
+      duration_ms: [33m2181[39m,
+      window_id: [32m'window-11'[39m,
+      error: [90mundefined[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'task-manager'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mtrue[39m,
+      duration_ms: [33m974[39m,
+      window_id: [32m'window-12'[39m,
+      error: [90mundefined[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'todo'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mtrue[39m,
+      duration_ms: [33m1562[39m,
+      window_id: [32m'window-13'[39m,
+      error: [90mundefined[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'model-browser'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mtrue[39m,
+      duration_ms: [33m5493[39m,
+      window_id: [32m'window-15'[39m,
+      error: [90mundefined[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'huggingface'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mtrue[39m,
+      duration_ms: [33m3746[39m,
+      window_id: [32m'window-16'[39m,
+      error: [90mundefined[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'openrouter'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mtrue[39m,
+      duration_ms: [33m5892[39m,
+      window_id: [32m'window-17'[39m,
+      error: [90mundefined[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'ipfs-explorer'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mtrue[39m,
+      duration_ms: [33m1060[39m,
+      window_id: [32m'window-18'[39m,
+      error: [90mundefined[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'device-manager'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mtrue[39m,
+      duration_ms: [33m2651[39m,
+      window_id: [32m'window-19'[39m,
+      error: [90mundefined[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'settings'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mtrue[39m,
+      duration_ms: [33m1217[39m,
+      window_id: [32m'window-20'[39m,
+      error: [90mundefined[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'mcp-control'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m0[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'api-keys'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m1[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'github'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m18[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'oauth-login'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m45[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'cron'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m13[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'navi'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m23[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'p2p-network'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m14[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'p2p-chat-unified'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m0[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'neural-network-designer'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m6[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'training-manager'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m4[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'calculator'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m4[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'clock'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m5[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'calendar'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m36[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'peertube'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m10[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'friends-list'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m18[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'image-viewer'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m0[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'notes'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m11[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'media-player'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m9[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'system-monitor'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m0[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'neural-photoshop'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m10[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'cinema'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m8[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'strudel'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m5[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'strudel-ai-daw'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m20[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'music-studio'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m0[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'strudel-grandma'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m0[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'p2p-chat'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m31[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'p2p-chat-offline'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m19[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'datasets-browser'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m3[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'accelerate-panel'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m6[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'idl-explorer'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m6[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'glasses-preview'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m9[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'orb-auto-ui'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m1[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'mcp-plus-plus'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m0[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  },
+  {
+    requested_id: [32m'agent-supervisor'[39m,
+    launch: {
+      attempted: [33mtrue[39m,
+      opened: [33mfalse[39m,
+      duration_ms: [33m0[39m,
+      window_id: [90mundefined[39m,
+      error: [32m'page.evaluate: Target page, context or browser has been closed'[39m
+    },
+    console_errors: [],
+    failed_requests: [],
+    manifest_drift: []
+  }
+]
+  ✘  1 [chromium] › test/e2e/virtual-desktop-app-audit-runner.spec.ts:34:3 › SVD-132 manifest-driven virtual desktop app audit runner (real browser) › opens all 48 canonical ids against the live desktop shell and captures real evidence (30.0m)
+
+
+  1) [chromium] › test/e2e/virtual-desktop-app-audit-runner.spec.ts:34:3 › SVD-132 manifest-driven virtual desktop app audit runner (real browser) › opens all 48 canonical ids against the live desktop shell and captures real evidence 
+
+    [31mTest timeout of 900000ms exceeded.[39m
+
+    [31mTest timeout of 900000ms exceeded.[39m
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/playwright-artifacts/virtual-desktop-app-audit-runner/virtual-desktop-app-audit--28ac9--and-captures-real-evidence-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/playwright-artifacts/virtual-desktop-app-audit-runner/virtual-desktop-app-audit--28ac9--and-captures-real-evidence-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  Slow test file: [chromium] › test/e2e/virtual-desktop-app-audit-runner.spec.ts (30.0m)
+  Consider running tests from slow files in parallel. See: https://playwright.dev/docs/test-parallel
+  1 failed
+    [chromium] › test/e2e/virtual-desktop-app-audit-runner.spec.ts:34:3 › SVD-132 manifest-driven virtual desktop app audit runner (real browser) › opens all 48 canonical ids against the live desktop shell and captures real evidence 

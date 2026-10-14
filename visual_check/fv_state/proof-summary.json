@@ -1,0 +1,41 @@
+{
+ "obligations": [
+  {
+   "id": "P-discovery-parity-kit",
+   "verdict": "PROVED"
+  },
+  {
+   "id": "P-foreign-exclusion-kit",
+   "verdict": "PROVED"
+  },
+  {
+   "id": "P-discovery-parity-datasets",
+   "verdict": "PROVED"
+  },
+  {
+   "id": "P-foreign-exclusion-datasets",
+   "verdict": "PROVED"
+  },
+  {
+   "id": "P-discovery-parity-accelerate",
+   "verdict": "PROVED"
+  },
+  {
+   "id": "P-foreign-exclusion-accelerate",
+   "verdict": "PROVED"
+  },
+  {
+   "id": "C-tool-backed-completeness",
+   "verdict": "PROVED"
+  },
+  {
+   "id": "C-mutation-requires-confirmation",
+   "verdict": "PROVED"
+  },
+  {
+   "id": "S-status-coherence",
+   "verdict": "PROVED"
+  }
+ ],
+ "counterexamples": []
+}

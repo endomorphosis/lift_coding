@@ -1,0 +1,63 @@
+........................................................................ [ 12%]
+.........................................s.............................. [ 25%]
+........................................................................ [ 38%]
+...................................sssssssssssss...............sssssssss [ 51%]
+ssssss.................................................................. [ 64%]
+........................................................................ [ 77%]
+........................................................................ [ 90%]
+.....................................................                    [100%]
+=============================== warnings summary ===============================
+tests/integration/test_cross_server_mcppp.py::TestProfileAInterop::test_accelerate_interface_descriptor
+  /home/hatch/workspace/lift_coding/tests/integration/../../external/ipfs_accelerate/ipfs_accelerate_py/mcplusplus_module/interface_descriptor.py:19: DeprecationWarning: __package__ != __spec__.parent
+    from .cid_ucan import compute_cid
+
+tests/integration/test_cross_server_mcppp.py::TestProfileBInterop::test_accelerate_execution_envelope
+  /home/hatch/workspace/lift_coding/tests/integration/../../external/ipfs_accelerate/ipfs_accelerate_py/mcplusplus_module/cid_ucan.py:601: DeprecationWarning: __package__ != __spec__.parent
+    from .dag_compaction import DAGCompactor, COLD_TIER_DIR
+
+tests/integration/test_cross_server_mcppp.py::TestProfileDInterop::test_accelerate_policy_evaluation
+  /home/hatch/workspace/lift_coding/tests/integration/../../external/ipfs_accelerate/ipfs_accelerate_py/mcplusplus_module/temporal_policy.py:26: DeprecationWarning: __package__ != __spec__.parent
+    from .cid_ucan import compute_cid
+
+tests/integration/test_cross_server_mcppp.py::TestProfileEInterop::test_accelerate_p2p_message_format
+  /home/hatch/workspace/lift_coding/tests/integration/../../external/ipfs_accelerate/ipfs_accelerate_py/mcplusplus_module/p2p_transport.py:29: DeprecationWarning: __package__ != __spec__.parent
+    from .p2p.libp2p_runtime import (
+
+tests/integration/test_cross_server_mcppp.py::TestProfileEInterop::test_accelerate_p2p_message_format
+  /home/hatch/workspace/lift_coding/tests/integration/../../external/ipfs_accelerate/ipfs_accelerate_py/mcplusplus_module/p2p_transport.py:42: DeprecationWarning: __package__ != __spec__.parent
+    from .leanstral_topology import (
+
+tests/integration/test_ipfs_backend_integration.py::TestIPFSIntegrationAPI::test_capabilities_endpoint
+  /home/hatch/workspace/lift_coding/.venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:295: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.10/migration/
+    warnings.warn(DEPRECATION_MESSAGE, DeprecationWarning)
+
+tests/integration/test_ipfs_backend_integration.py::TestIPFSIntegrationAPI::test_capabilities_endpoint
+  /home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_datasets_py/ipfs_datasets_py/cli/github_cli_init.py:8: DeprecationWarning: ipfs_datasets_py.utils.github_wrapper is deprecated. Use ipfs_datasets_py.utils.github.GitHubCLI instead.
+    from ipfs_datasets_py.utils.github_wrapper import GitHubCLI, WorkflowQueue, RunnerManager
+
+tests/integration/test_ipfs_backend_integration.py::TestIPFSIntegrationAPI::test_capabilities_endpoint
+  /home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_datasets_py/ipfs_datasets_py/mcp_server/tools/development_tools/vscode_cli_tools.py:12: DeprecationWarning: ipfs_datasets_py.utils.vscode_cli is deprecated. Use ipfs_datasets_py.utils.cli_tools.BaseCLITool for new CLI wrappers. This module will be removed in a future version.
+    from ipfs_datasets_py.utils.vscode_cli import VSCodeCLI
+
+tests/integration/test_ipfs_backend_integration.py::TestIPFSIntegrationAPI::test_capabilities_endpoint
+  /home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_datasets_py/ipfs_datasets_py/utils/discord_chat_exporter.py:35: DeprecationWarning: ipfs_datasets_py.utils.query_cache is deprecated. Use ipfs_datasets_py.utils.cache.LocalCache instead. This module will be removed in a future version.
+    from ipfs_datasets_py.utils.query_cache import QueryCache
+
+tests/integration/test_ipfs_backend_integration.py::TestIPFSIntegrationAPI::test_capabilities_endpoint
+  /home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_datasets_py/ipfs_datasets_py/ipfs_cluster/cluster_engine.py:29: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    "last_seen": datetime.utcnow(),
+
+tests/integration/test_ipfs_backend_integration.py::TestIPFSIntegrationAPI::test_capabilities_endpoint
+  /home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_datasets_py/ipfs_datasets_py/ipfs_cluster/cluster_engine.py:36: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    "last_seen": datetime.utcnow(),
+
+tests/integration/test_ipfs_backend_integration.py::TestIPFSIntegrationAPI::test_capabilities_endpoint
+  /home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_datasets_py/ipfs_datasets_py/logic/integration/reasoning/proof_execution_engine.py:39: DeprecationWarning: integration.caching.proof_cache is deprecated. Import from ipfs_datasets_py.logic.common.proof_cache instead.
+    from ..caching.proof_cache import get_global_cache
+
+tests/integration/test_ipfs_backend_integration.py::TestIPFSIntegrationAPI::test_capabilities_endpoint
+  /home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_datasets_py/ipfs_datasets_py/mcp_server/tools/pdf_tools/pdf_ingest_to_graphrag.py:18: DeprecationWarning: processors.pdf_processing is deprecated. Use processors.specialized.pdf instead. This import will be removed in v2.0.0 (August 2026). See docs/PROCESSORS_REFACTORING_MIGRATION_GUIDE.md for details.
+    from ipfs_datasets_py.processors.pdf_processing import PDFProcessor  # type: ignore
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+528 passed, 29 skipped, 13 warnings in 421.91s (0:07:01)

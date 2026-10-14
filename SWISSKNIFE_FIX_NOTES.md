@@ -254,3 +254,266 @@ wall time vs the morning's ~25 min.)
   agent-supervisor-baseline.test.ts,
   verified-gui-optimizer-agent-supervisor-boundary.test.ts).
 - Nothing committed, nothing pushed, in any tree.
+
+## Hold acknowledgment (2026-10-13, ~15:05 PDT)
+Per the coordinator's notice (Benjamin's direct instruction): the morning's
+fix set is being committed by the coordinator with explicit pathspecs
+covering only the morning's files plus submodule-pointer bumps. I am
+HOLDING all source edits inside the three repo trees (superproject tracked
+files, swissknife/, external/ipfs_accelerate/) until the coordinator
+confirms the commit is complete; read-only work, /tmp probes, Lean work,
+and visual_check/ captures may continue. My verification pass was already
+complete and reported before this notice arrived. My verification-pass
+change set — swissknife's 3 test files (mcp-dashboard-browser-policy,
+agent-supervisor-baseline, verified-gui-optimizer-agent-supervisor-
+boundary), the regenerated agent-supervisor-semantic-baseline.json
+evidence, and the boundary test's regression-receipt refresh — is NOT part
+of the coordinator's commit pathspecs; it stays uncommitted as a separate,
+clearly-listed change set (see the completion addendum above) to be
+committed separately later, not by me.
+
+## Hold released — committed baseline verified (2026-10-13, ~15:06 PDT)
+The coordinator's commit landed and was verified against live state (not
+taken on trust): superproject main 22d7c782b, swissknife f2972b38,
+external/ipfs_accelerate 125a0b87f — matching the release notice exactly.
+Only the morning fix set was committed. My verification-pass change set is
+intact and uncommitted on top of the new baseline: swissknife's 3 test
+files (porcelain shows exactly those three), the two
+verified_gui_optimizer evidence JSONs, SWISSKNIFE_FIX_NOTES.md's
+post-commit appends, and untracked visual_check/. Standing state noted,
+not touched by me: pre-existing .handsfree_transport_sessions.json
+modification; Mcp-Plus-Plus pointer noise from the untracked Lean build
+byproducts; accelerate's nested-submodule pointer markers; the
+external/ipfs_datasets working-tree state from the morning's restore.
+Re-verification against the committed baseline: focused Vitest batch
+66/66 passed; integration suite re-run result appended below when it
+lands. I remain the non-committing party for my change set — it will be
+committed separately later.
+
+Integration suite re-run on the committed baseline (22d7c782b + my
+uncommitted change set): **526 passed, 31 skipped, 0 failed** in
+370.90 s — identical to the morning's baseline and to the post-fix
+pre-commit run. Verification pass is complete on the committed baseline;
+the change set listed above remains uncommitted for separate later
+committing.
+
+## Functional verification + broken-contract map pass (2026-10-13, later session)
+
+Scope: Benjamin requires (A) functional verification — visual checks WITH the
+backend live, driven against program state, exercising each app's primary
+features end to end; (B) a broken-contract map — ORB/IDL + MCP++ interface
+contracts compiled into proof obligations via ipfs_datasets_py.logic,
+classified proved / refuted (counterexample) / blocked (exact reason), and
+cross-referenced against (A) both ways. Fixes only for proven breaks inside
+the SwissKnife ↔ MCP++ interfacing scope, as descriptor/registration/
+binding/schema-alignment changes (DCR operator families). Nothing committed.
+
+Launch routes discovered (repos' own):
+- Desktop + gateway: swissknife vite dev server (`vite dev --config
+  vite.web.config.ts`, port 3001) serves web/ AND installs the same-origin
+  mediator middleware: GET /mcp/tools/bindings (control catalog from
+  ALL_APP_LIVE_TOOL_BINDINGS + live tools/list discovery), GET
+  /mcp/apps/backend-status, POST /mcp/tools/call (MCPPPServerConnector,
+  Profile A/C + UCAN verification; receipts persisted via kit
+  /mcp/artifacts/put), and /mcp/services/<owner>/mcp/* proxying.
+- Owner MCP endpoints (vite defaults): ipfs_kit_py 127.0.0.1:8014/mcp,
+  ipfs_datasets_py 127.0.0.1:3002/mcp, ipfs_accelerate_py 127.0.0.1:3003/mcp
+  (env overrides SWISSKNIFE_IPFS_{KIT,DATASETS,ACCELERATE}_MCP_URL, or
+  lease files in test-results/virtual-desktop-ipfs-mcp-orb/).
+- Owner servers: the repos' own compat adapters
+  swissknife/scripts/start-ipfs-{kit,datasets,accelerate}-mcp-compat.cjs
+  (Node HTTP servers implementing MCP JSON-RPC + Profiles A/B/C/E/H,
+  /mcp/health, /mcp/helia/status, /mcp/dag/*, /mcp/artifacts/put; tool
+  catalogs loaded from the Python repos). Author-machine paths are
+  env-overridable: IPFS_KIT_PYTHON, IPFS_DATASETS_PY_ROOT — point them at
+  this checkout's .venv and external/ipfs_datasets.
+
+## Correction — VGO board sealed-toolchain check CLOSED (2026-10-13, later)
+The addendum above recorded the verified-GUI-optimizer board as failing on
+the sealed-toolchain pins because the npx provisioning was believed
+interrupted. A late background-completion delivery showed the provisioning
+had in fact succeeded (~/.npm/_npx/759e7e0cbbdd6854 contains node v22.19.0
++ npm 10.8.2). Re-run with that toolchain prepended to PATH:
+scripts/validate_verified_gui_optimizer_board.py --check-all →
+{"errors": [], "valid": true} (12 goals / 42 tasks / 21 waves). All three
+board validators are now resolved: FACP valid:true, VGO board valid:true,
+DCR board valid:false on bootstrap/source-binding only (the documented
+shared-checkout preflight state per doc 48 §15, not an interfacing
+defect).
+
+#### Checkpoint: stack live + deletion-blocked checks re-run (2026-10-13, post-restore)
+
+Coordinator confirmed the external/ipfs_datasets restore: all 10,447 deleted paths
+restored from HEAD; the tree's only remaining status entry is the preserved modified
+legal_scrapers czechia normalize.py. Re-runs of the previously DELETION-BLOCKED checks
+(this worker did not touch that tree; datasets suite run read-only with
+PYTHONDONTWRITEBYTECODE and an out-of-tree pytest cache dir):
+
+- Superproject tests/unit/logic/ui_ux_ir/test_mcp_idl_identity_contract.py: 33 passed
+  (previously skipped). 
+- Datasets in-tree suite external/ipfs_datasets/tests/unit/logic/ui_ux_ir/ (284 passed,
+  2 failed): (1) projection/test_solver.py::test_solver_is_deterministic — two solver
+  runs yield different digests (sha256:cc71... vs sha256:9d59...): a genuine determinism
+  counterexample in the ipfs_datasets projection solver, outside the SwissKnife-MCP++
+  interfacing fix scope; carried into BROKEN_CONTRACT_MAP.md. (2)
+  test_domain_slice.py::test_ui_ux_adapter_note_declares_required_contract_fields —
+  FileNotFoundError: the test searches ancestors of its own file for
+  data/agent_supervisor/logic_platform_canonicalization/notes/intent_uiux_adapters.md;
+  the note exists at external/ipfs_accelerate/data/... (sibling, not an ancestor, in the
+  submodule layout) and does declare the required fields (verified by direct read).
+  Layout-blocked, not a contract break.
+- SwissKnife cross-language golden vectors (test/mcp-plus-plus/
+  ui-ux-ir-cross-language.test.ts, golden_vectors.json fixtures): 4 passed — previously
+  unrunnable while fixtures were deleted.
+
+Live stack (repos' own launch routes; bring-up script preserved at
+visual_check/fv_state/bring-up.sh): ipfs_accelerate_py.mcp_server --fastapi on
+127.0.0.1:9000; swissknife compat adapters kit :8014 / datasets :3002 / accelerate :3003
+(scripts/start-ipfs-*-mcp-compat.cjs); vite dev (vite.web.config.ts) on :3001 serving
+the desktop + /mcp mediator. Program state captured under visual_check/fv_state/:
+tools/list kit 124, datasets 319, accelerate 18; gateway /mcp/tools/bindings = 79
+controls, all status=available; /mcp/apps/backend-status matrix over 135 statuses:
+79 live, 3 denied, 32 unavailable, 15 local-only, 6 external-provider.
+
+Environment note: the VM rebooted mid-pass (uptime reset, /tmp wiped, background
+processes killed). Recovery was via the persisted bring-up script; all run state now
+lives under visual_check/fv_state/ instead of /tmp.
+
+#### Fix F1 (verification change set): SVD-132 Playwright driver import alignment
+
+The SVD-132 real-browser audit (npm run test:e2e:app-audit-runner) failed to load:
+"SyntaxError: The requested module './virtual-desktop-app-audit-runner.js' does not
+provide an export named 'resolveVirtualDesktopAppId'". The driver imported the resolver
+from the audit runner; the runner imports it from virtual-desktop-app-manifest.ts
+(where it is defined, line 1132) but never re-exports it. Fix: the driver now imports
+resolveVirtualDesktopAppId from './virtual-desktop-app-manifest.js' (its canonical
+module, the same source the runner and the manifest test use); the driver's own
+re-export for callers is unchanged. One import binding aligned; no behavior or test
+changes. File: swissknife/src/services/apps/virtual-desktop-app-audit-playwright-driver.ts.
+
+#### Checkpoint: live proofs + SVD-132 audit timeout + retry (2026-10-13)
+
+- Objective B live-state obligations discharged through ipfs_datasets_py.logic
+  Z3ProverBridge (TDFOL, propositional finite-fact encoding over the captured live
+  state; driver visual_check/fv_state/prove_contracts.py): 9/9 PROVED —
+  P-discovery-parity {kit, datasets, accelerate} (every gateway control's
+  selected_tool_id is in its owner's live tools/list: kit 124 tools, datasets 319,
+  accelerate 18; 79/79 controls), P-foreign-exclusion x3, C-tool-backed-completeness
+  (all 38 tool_backed apps have >=1 available control), C-mutation-requires-
+  confirmation, S-status-coherence (135 statuses: states all in the declared set,
+  every non-live status reasoned, denied statuses policied).
+- SVD-132 real-browser audit, first run after Fix F1: exceeded its own 900000 ms
+  Playwright test timeout at ~18/48 apps (~50 s/app: dual-viewport screenshots +
+  close/reopen cycles against a cold vite dev server on this loaded VM). No evidence
+  JSON written (the spec writes only on completion); 18 app screenshot directories
+  remain under test-results/.../app-screenshots/svd-132-playwright/. Disposition:
+  BLOCKED-BY-RUNTIME-BUDGET in this environment, not a product defect. Retrying once
+  with a warm node_modules/.vite cache and no competing load; the lean fv_state
+  drive (desktop.launchApp over all 48 ids + feature exercise) is the fallback
+  primary evidence.
+- MCP glasses prereq chain (npm run evidence:mcp-glasses) failed at
+  capture-ipfs-mcp-all-tools-ledger.cjs under the chain (exit 1, no detail logged),
+  but the same script run directly exits 0 (ledger: 100 exact tool records, 55
+  configured-live, 45 static-descriptor; real_local_accelerate_tool_count = 0 — the
+  accelerate upstream's real tool catalog is not reachable in the shape the capture
+  expects; cf. the upstream /mcp/tools 422 without a `request` query parameter).
+  Chain re-run planned after the audit retry.
+
+#### SVD-132 retry disposition (2026-10-13)
+
+Retry of the SVD-132 real-browser audit (warm vite cache, no competing load) paced
+identically (~35-50 s/app) and was stopped at ~11 min in the same first-~18-app
+frontier; two runs establish the route cannot meet its 900 s budget on this VM.
+Final disposition: BLOCKED-BY-RUNTIME-BUDGET (test-infrastructure pacing), with the
+18 apps' screenshot sets from run 1 as partial corroboration. Primary Objective A
+evidence is the lean drive (fv_state/drive.mjs) over the same window.desktop
+launchApp/focusWindow/closeWindow API for all 48 ids plus feature-level exercise.
+
+#### Fix F2 (verification change set): SVD-132 driver close path alignment
+
+Runtime probe of the served desktop (web/index.html loads web/js/main-simple.js)
+shows window.desktop (SwissKnifeDesktop) exposes launchApp and focusWindow but NO
+closeWindow method (own + prototype enumerated live). The full web/js/main.js
+implementation defines closeWindow (line 2261) but is not the served entry. The
+SVD-132 Playwright driver's closeApp called desktop.closeWindow(entry.element) —
+a TypeError for every app, so its close/reopen evidence could never succeed
+against the served shell. The shell's own close path is the titlebar control
+(.window-control.close), whose handler deletes the window from the tracking map
+and removes the element — the same click the shell's in-window Close buttons
+dispatch. Fix: the driver's closeApp now clicks that control and verifies the
+window left the tracking map. File:
+swissknife/src/services/apps/virtual-desktop-app-audit-playwright-driver.ts.
+User-facing impact of the underlying divergence: none found — the served shell's
+own UI closes windows correctly through the control; the break was confined to
+the audit driver's assumed programmatic interface.
+
+#### Environment: second VM reboot (2026-10-13)
+
+The VM rebooted a second time mid-pass (uptime reset; all loopback servers killed;
+workspace intact). Earlier drive stalls (drive1 at strudel, drive2 at strudel-ai-daw,
+drive3 at image-viewer/notes) are re-attributed: they coincide with reboot onsets,
+not app launch defects — no app-hang claim is carried into the deliverables without
+a clean re-run. The drive now writes per-app results incrementally (JSONL) so a
+reboot can void at most one app record. Stack recovery is the idempotent
+visual_check/fv_state/bring-up.sh.
+
+#### Final results: functional verification + broken-contract map (2026-10-13)
+
+Deliverables: visual_check/FEATURE_MATRIX.md and BROKEN_CONTRACT_MAP.md (repo root).
+
+Objective A (live stack: vite :3001, kit :8014/124 tools, datasets :3002/319,
+accelerate :3003/18 + upstream :9000, datasets dashboard :8899):
+- 45/45 canonical apps open/focus/close cleanly (drive fv_state/drive.mjs,
+  drive-apps.jsonl). Aliases launch only via the manifest resolver (map X1).
+- MCP++ Explorer discovers 461 tools across 3 negotiated services; header DEGRADED
+  traces to mcp++/risk/profile -32601 on all adapters (map R1). Explicit tool call
+  passes with the full datasets stack (adapter + dashboard :8899).
+- MCP Control mediated invocation EXECUTED end to end (policy allow, CID receipt,
+  Event-DAG id). Agent Supervisor steering: unconfirmed submit policy-denied;
+  confirmed dry-run produced normalized plan + correlation + receipt.
+- SVD-132 real-browser audit blocked by its own 900 s budget at ~18/48 apps (B1).
+
+Objective B: 22 obligation groups — 14 proved (incl. 9/9 live-state Z3 obligations
+via ipfs_datasets_py.logic Z3ProverBridge over captured program state; MCP-IDL
+identity 33 passed post-restore; golden vectors 4 passed; ORB/IDL coverage
+regenerated 45/45 descriptors), 3 refuted (R1 risk/profile — not fixed, adapter
+implementation is out of alignment scope; R2/R3 SVD-132 driver interface — FIXED
+F1/F2; R4 datasets solver determinism — datasets-owned), 1 boundary (X1 aliases),
+4 blocked with exact reasons (B1/B2 runtime budget, B3 checkout layout, B4 sealed
+evidence for DCR live conformance; @ucans/ucans import verified resolved).
+
+Post-restore re-runs: datasets ui_ux_ir suite 284 passed / 2 failed (R4, B3);
+superproject forwarding file 33 passed; integration suite 528 passed / 29 skipped /
+0 failed (baseline 526/31/0 — delta is the restore un-blocking 2 tests).
+
+Fix change set (uncommitted, this pass): ONLY
+swissknife/src/services/apps/virtual-desktop-app-audit-playwright-driver.ts (F1+F2).
+Everything else is evidence/tooling: visual_check/fv-*.png, visual_check/FEATURE_MATRIX.md,
+visual_check/fv_state/*, BROKEN_CONTRACT_MAP.md, regenerated evidence under
+swissknife/test-results/virtual-desktop-ipfs-mcp-orb/ (orb-idl-complete-coverage.json,
+glasses-simulator-handoff.json, refreshed ledgers/catalogs), and these notes.
+Environment provisioning (not repo changes): flask installed into the venv for the
+datasets dashboard. Nothing committed.
+
+#### Addendum: graded vitest confirmation (2026-10-13)
+
+vitest run of test/mcp-plus-plus/virtual-desktop-app-manifest.test.ts +
+desktop-orb-idl-contract.test.ts: 21 passed / 0 failed (incl. the SVD-132 graded
+simulated-driver determinism check — byte-identical evidence across two runs — and
+SWR-108 ORB/IDL coverage). The run's single "unhandled error" is a vitest-worker
+onTaskUpdate RPC timeout (reporting channel on this loaded VM), not a test failure.
+This confirms F1/F2 leave the graded SVD-132 path intact.
+
+#### Erratum (2026-10-13, post-report verification): SVD-132 evidence file
+
+A late-delivered monitoring result prompted re-checking svd-132-playwright.json: the
+file EXISTS (run of 2026-10-13T23:35Z, post-F1/pre-F2). The runner completed its
+sweep and wrote it as the test crossed its 900 s budget: 48 apps recorded,
+0 passed / 48 failed, 26 of 96 screenshots captured. Every app's close_reopen.error
+is the R2 counterexample verbatim ("page.evaluate: TypeError: desktop.closeWindow
+is not a function"); the back ~34 records carry timeout-teardown contamination.
+Earlier statements in these notes and the first B1/F-09 drafts ("no evidence JSON
+written", "timeout at ~18/48 apps" — the 18 was the complete-screenshot-set count)
+are corrected in BROKEN_CONTRACT_MAP.md (B1, R2) and visual_check/FEATURE_MATRIX.md
+(F-09). The B1 disposition is unchanged: BLOCKED-BY-RUNTIME-BUDGET, with the file
+itself as the strongest R2 evidence.

@@ -1,0 +1,133 @@
+[run-with-owned-port] leased verified-free port 3417 for SWISSKNIFE_MCP_E2E_PORT.
+Browser toolchain verified: node 22.19.0 (/home/hatch/.npm/_npx/759e7e0cbbdd6854/node_modules/node/bin/node), npm 10.8.2, sha256:584a3304603b208797b50faee86f00f5a6fe987d2289f382ae4f7b93a62dbc21; receipt test-results/browser-toolchain/verification-receipt.json
+
+Running 2 tests using 1 worker
+
+  ✘  1 test/e2e/mcp-dashboard.spec.ts:1192:3 › HAO-704 Swissknife MCP++ dashboard launch gate › opens every tool-backed virtual desktop app and records MCP UI smoke receipts (3.0m)
+[WebServer] [2m12:41:58 AM[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [33mwarning: 
+[WebServer] [36m/home/hatch/workspace/lift_coding/swissknife/web/js/apps/file-manager.js[33m
+[WebServer] [0m111 |  
+[WebServer] 112 |    try {
+[WebServer] 113 |      const module = await import(COLLABORATIVE_FILE_SYSTEM_MODULE);
+[WebServer]     |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[WebServer] 114 |      return module.CollaborativeFileSystem || CollaborativeFileSystemFallback;
+[WebServer] 115 |    } catch (error) {[0m[33m
+[WebServer] The above dynamic import cannot be analyzed by Vite.
+[WebServer] See [34mhttps://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#limitations[33m for supported dynamic import formats. If this is intended to be left as-is, you can use the /* @vite-ignore */ comment inside the import() call to suppress this warning.
+[WebServer] [33m[39m
+[WebServer]   Plugin: [35mvite:import-analysis[39m
+[WebServer]   File: [36m/home/hatch/workspace/lift_coding/swissknife/web/js/apps/file-manager.js[39m
+  ✘  2 test/e2e/mcp-dashboard.spec.ts:1301:3 › HAO-704 Swissknife MCP++ dashboard launch gate › generates exhaustive SWR-102 per-app UI/UX workflow matrix (7.1m)
+
+
+  1) test/e2e/mcp-dashboard.spec.ts:1192:3 › HAO-704 Swissknife MCP++ dashboard launch gate › opens every tool-backed virtual desktop app and records MCP UI smoke receipts 
+
+    [31mTest timeout of 180000ms exceeded.[39m
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: locator('.tool-smoke-panel[data-app-id="file-manager"]').last().getByTestId('tool-smoke-control-state')
+    Expected string: [32m"48"[39m
+    Received string: [31m""[39m
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 5000ms[22m
+    [2m  - waiting for locator('.tool-smoke-panel[data-app-id="file-manager"]').last().getByTestId('tool-smoke-control-state')[22m
+
+
+      1222 |       const panel = page.locator(`.tool-smoke-panel[data-app-id="${app.app_id}"]`).last();
+      1223 |       await expect(panel, `MCP smoke panel for ${app.app_id}`).toBeVisible();
+    > 1224 |       await expect(panel.getByTestId('tool-smoke-control-state')).toContainText(String(app.app_visible_tool_count));
+           |                                                                   ^
+      1225 |       for (const serviceFamily of app.service_families) {
+      1226 |         await expect(panel.getByTestId('tool-smoke-control-state')).toContainText(serviceFamily);
+      1227 |       }
+        at /home/hatch/workspace/lift_coding/swissknife/test/e2e/mcp-dashboard.spec.ts:1224:67
+
+    attachment #1: tool-ui-smoke-accelerate-panel (image/png) ──────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-accelerate-panel-6a26eafcf5136702b4c92a231c302cdf735b5935.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: tool-ui-smoke-agent-supervisor (image/png) ──────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-agent-supervisor-05f6698198b327a8a155650c9fc98bc02c28ea57.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: tool-ui-smoke-ai-chat (image/png) ───────────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-ai-chat-fcee0562ee418f10b9f0d8bb256c2fbbb4886493.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #4: tool-ui-smoke-api-keys (image/png) ──────────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-api-keys-0c81c5ffc302cc04bacd431f6f2c5ddb9c28c63a.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #5: tool-ui-smoke-cinema (image/png) ────────────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-cinema-13e673c0998db75948b3f7ee7162e18a43543d63.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #6: tool-ui-smoke-datasets-browser (image/png) ──────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-datasets-browser-dfb21a46bcf33e41300dc832d8538d1af6d39aab.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #7: tool-ui-smoke-device-manager (image/png) ────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-device-manager-93d84118c4c6185634ccf9b2ccf795251b32f181.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/error-context.md
+
+  2) test/e2e/mcp-dashboard.spec.ts:1301:3 › HAO-704 Swissknife MCP++ dashboard launch gate › generates exhaustive SWR-102 per-app UI/UX workflow matrix 
+
+    [31mTest timeout of 420000ms exceeded.[39m
+
+    Error: page.evaluate: Target page, context or browser has been closed
+
+      597 |
+      598 | async function closeAllDesktopWindows(page: Page): Promise<void> {
+    > 599 |   await page.evaluate(() => {
+          |              ^
+      600 |     for (const closeButton of Array.from(document.querySelectorAll<HTMLElement>('.window-control.close'))) {
+      601 |       closeButton.click();
+      602 |     }
+        at closeAllDesktopWindows (/home/hatch/workspace/lift_coding/swissknife/test/e2e/mcp-dashboard.spec.ts:599:14)
+        at /home/hatch/workspace/lift_coding/swissknife/test/e2e/mcp-dashboard.spec.ts:1348:13
+
+    attachment #1: app-workflow-terminal (image/png) ───────────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-f377d-r-app-UI-UX-workflow-matrix/attachments/app-workflow-terminal-5dcd3698c60dba62a53368459ea560fef7278369.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: app-workflow-vibecode (image/png) ───────────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-f377d-r-app-UI-UX-workflow-matrix/attachments/app-workflow-vibecode-a499e3fb70ea31fe7bdaec04cf7f6ed44cd4e60b.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: app-workflow-music-studio-unified (image/png) ───────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-f377d-r-app-UI-UX-workflow-matrix/attachments/app-workflow-music-studio-unified-d3553f66f2e600ceb790578287c4d35f7cc08cdd.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #4: app-workflow-ai-chat (image/png) ────────────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-f377d-r-app-UI-UX-workflow-matrix/attachments/app-workflow-ai-chat-f40fce0b8f2ef542aeb3615ab04bb64ee41117c3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #5: app-workflow-file-manager (image/png) ───────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-f377d-r-app-UI-UX-workflow-matrix/attachments/app-workflow-file-manager-3a873e326a84535ebd71f331f78fa9a22cac1f3e.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #6: app-workflow-task-manager (image/png) ───────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-f377d-r-app-UI-UX-workflow-matrix/attachments/app-workflow-task-manager-8895ca92253e914e8f288de9ffb53a3762bbd707.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #7: app-workflow-todo (image/png) ───────────────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-f377d-r-app-UI-UX-workflow-matrix/attachments/app-workflow-todo-ead4623311a2c099a21567e3ffa892614ee3ebf4.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #8: app-workflow-model-browser (image/png) ──────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-f377d-r-app-UI-UX-workflow-matrix/attachments/app-workflow-model-browser-311428995d328515258ae51abc16c5b8443b12fe.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #9: app-workflow-huggingface (image/png) ────────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-f377d-r-app-UI-UX-workflow-matrix/attachments/app-workflow-huggingface-aed80ac50dca391e0679edd74f5748bb4b15538d.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-f377d-r-app-UI-UX-workflow-matrix/error-context.md
+
+  2 failed
+    test/e2e/mcp-dashboard.spec.ts:1192:3 › HAO-704 Swissknife MCP++ dashboard launch gate › opens every tool-backed virtual desktop app and records MCP UI smoke receipts 
+    test/e2e/mcp-dashboard.spec.ts:1301:3 › HAO-704 Swissknife MCP++ dashboard launch gate › generates exhaustive SWR-102 per-app UI/UX workflow matrix 

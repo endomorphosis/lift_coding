@@ -1,0 +1,13 @@
+Could not register patent dashboard routes: No module named 'ipfs_datasets_py.patent_dashboard'
+ * Serving Flask app 'ipfs_datasets_py.dashboards.admin_dashboard'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:8899
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Oct/2026 00:41:18] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [14/Oct/2026 00:42:54] "GET / HTTP/1.1" 200 -
+2026-10-14 00:44:26,617 [INFO] ipfs_datasets_py.mcp_server.mcplusplus: MCP++ module not available: No module named 'ipfs_accelerate_py.mcplusplus_module'
+127.0.0.1 - - [14/Oct/2026 00:44:28] "POST /api/mcp/tools/admin_tools/admin_tools/execute HTTP/1.1" 200 -
+2026-10-14 00:44:28,618 [INFO] werkzeug: 127.0.0.1 - - [14/Oct/2026 00:44:28] "POST /api/mcp/tools/admin_tools/admin_tools/execute HTTP/1.1" 200 -
+127.0.0.1 - - [14/Oct/2026 00:46:14] "POST /api/mcp/tools/admin_tools/admin_tools/execute HTTP/1.1" 200 -
+2026-10-14 00:46:14,788 [INFO] werkzeug: 127.0.0.1 - - [14/Oct/2026 00:46:14] "POST /api/mcp/tools/admin_tools/admin_tools/execute HTTP/1.1" 200 -

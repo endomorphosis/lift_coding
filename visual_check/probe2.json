@@ -1,0 +1,45 @@
+{
+  "mcpControlOverlap": "title not found",
+  "steeringButtons": [
+    {
+      "text": "SWR-106Add governed prompt steering for goals, subgoals, and",
+      "action": null,
+      "describedby": null
+    },
+    {
+      "text": "SWR-106-policyConfirmation-gated steering request flow",
+      "action": null,
+      "describedby": null
+    },
+    {
+      "text": "SWR-106-1\n                Draft governed prompt steering con",
+      "action": null,
+      "describedby": null
+    },
+    {
+      "text": "Dispatch",
+      "action": null,
+      "describedby": null
+    },
+    {
+      "text": "Steering",
+      "action": null,
+      "describedby": null
+    },
+    {
+      "text": "Submit",
+      "action": "submit-steering",
+      "describedby": null
+    },
+    {
+      "text": "Policy confirmation",
+      "action": null,
+      "describedby": null
+    }
+  ],
+  "submitClick": "TimeoutError: locator.click: Timeout 4000ms exceeded.\nCall log:\n  - waiting for locator('[data-action=\"submit-steering\"]",
+  "ariaAfterSubmit": {
+    "invalid": [],
+    "describedbyHolders": []
+  }
+}
