@@ -1,0 +1,135 @@
+{
+  "PR": 1303,
+  "actions": {
+    "Git_mutations": 0,
+    "canonical_Git_commands": 0,
+    "checkpoint_JSON_parses": 0,
+    "model_calls": 0,
+    "network_calls": 0,
+    "owned_Git_object_reads_only": true,
+    "private_body_reads": 0
+  },
+  "actual_merge": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+  "actual_tree": "59a92c2a1704461e358b4ba38d046f375d0ca6b5",
+  "all10_incoming_gitlinks_preserved": true,
+  "all215_manifest_additions_exact": true,
+  "all31628_incoming_entries_preserved": true,
+  "all40_algorithm_rawpins_unchanged": true,
+  "all4_incoming_symlinks_preserved": true,
+  "all_report_and_evidence_blob_pins_exact_via_identical_reviewed_tree": true,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-actor-refinement-20261014-01/REPORT_126_v01.md": {
+      "bytes": 11641,
+      "sha256": "74d1e9c21a916a1034ae7cca0887a716a21f1296da563e9f6af8d06c8972d9b7"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-refinement-20261014-01/actor-refinement-result-independent-review-v01.json": {
+      "bytes": 98977,
+      "sha256": "7732c8fd277193297eceb55abda416a224b34516936ea7d2826a1ffe736e700c"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-refinement-20261014-01/hf-independent-review-preseal-bookkeeping-resolution-v01.json": {
+      "bytes": 1755,
+      "sha256": "c097087e4ff38ea8bd92a8b3a5df3a894ec240f2e224ea015ddd3304b6b82219"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-refinement-20261014-01/hf-publication-actual-independent-review-v01.json": {
+      "bytes": 220073,
+      "sha256": "3097b700479052acffcc3a601e0cacc376247871b67c01cfac357da5a51fcaab"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-refinement-20261014-01/publication-final-stage-review-v01.json": {
+      "bytes": 3629,
+      "sha256": "9c9eff1ab1a69e8e42a2d6eb1a86aece13c453ac1cf9f7cf40f3798960604d4f"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-refinement-20261014-01/publication-main-intake-v01.json": {
+      "bytes": 25845,
+      "sha256": "4f6199ca41f62abb30b4a4a49f87691f37de879a9da16045f50e15737143de94"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-refinement-20261014-01/source-contribution-commit-independent-review-v01.json": {
+      "bytes": 2691,
+      "sha256": "97383b6ae6aaf5462e8b718f5512197cf10dcb3cc4023be8ad3d701a313d4167"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-refinement-20261014-01/source-contribution-independent-review-v01.json": {
+      "bytes": 365257,
+      "sha256": "964aaa640a038290f4b8dadfccbd2c7376fae965ec31938f26015e8267a77808"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-refinement-20261014-01/source-final-ci-annotations-115809588979-v01.json": {
+      "bytes": 350,
+      "sha256": "7805c07c9216e0334585a6964c8ac67776bafabd847a69e76fbcfc717ae4ccb7"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-refinement-20261014-01/source-final-ci-annotations-115809589496-v01.json": {
+      "bytes": 350,
+      "sha256": "7805c07c9216e0334585a6964c8ac67776bafabd847a69e76fbcfc717ae4ccb7"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-refinement-20261014-01/source-final-ci-annotations-115809589564-v01.json": {
+      "bytes": 350,
+      "sha256": "7805c07c9216e0334585a6964c8ac67776bafabd847a69e76fbcfc717ae4ccb7"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-refinement-20261014-01/source-final-ci-annotations-115809589566-v01.json": {
+      "bytes": 350,
+      "sha256": "7805c07c9216e0334585a6964c8ac67776bafabd847a69e76fbcfc717ae4ccb7"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-refinement-20261014-01/source-final-ci-checks-v01.json": {
+      "bytes": 2064,
+      "sha256": "f178c795df42ea04c566d4fcbdafb442f2fb5f40f91f095ce69b7e715ad0251c"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-refinement-20261014-01/source-final-pr-merged-v01.json": {
+      "bytes": 317,
+      "sha256": "00b396f29715437e98be463495b1c86a800319ad3e11018fd3563573859a800b"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-refinement-20261014-01/source-publication-manifest-v01.json": {
+      "bytes": 115636,
+      "sha256": "e902671ce00c01d0a3fe09c6b0c2563da9be3bd88c7efa6974f4ae81cb42e7c9"
+    }
+  },
+  "authored_head": "9005bc6e90f05362fb4761841346a5b9feb4d2e1",
+  "canonical_raw4": {
+    "/home/barberb/lift_coding/.git/HEAD": {
+      "bytes": 37,
+      "path": "/home/barberb/lift_coding/.git/HEAD",
+      "sha256": "32a4e0619657da69ad525c8936b759693db31bc061488a69a547266919aac0c7"
+    },
+    "/home/barberb/lift_coding/.git/index": {
+      "bytes": 692628,
+      "path": "/home/barberb/lift_coding/.git/index",
+      "sha256": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4"
+    },
+    "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/HEAD": {
+      "bytes": 21,
+      "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/HEAD",
+      "sha256": "28d25bf82af4c0e2b72f50959b2beb859e3e60b9630a5e8c603dad4ddb2b6e80"
+    },
+    "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/index": {
+      "bytes": 3799757,
+      "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/index",
+      "sha256": "d2a68a76e7a7ed99ef8ba031261cb8e7b66d6fca6c351b0e1e9dd8dc13910175"
+    }
+  },
+  "canonical_raw4_unchanged": true,
+  "default_promotion": false,
+  "findings": [],
+  "hosted_CI": {
+    "billing_blocked_before_start": 4,
+    "cancelled": 1,
+    "head": "9005bc6e90f05362fb4761841346a5b9feb4d2e1",
+    "observed_checks": 8,
+    "passed_checks_claimed": 0,
+    "queued": 3
+  },
+  "incoming_raw_tree": {
+    "bytes": 4555589,
+    "entries": 31628,
+    "sha256": "dcda4ca71067b3a657021bd75bb3e8812a070a8891ac078ad6f10347095135eb"
+  },
+  "merge_tree_equals_reviewed_authored_tree": true,
+  "merged_raw_tree": {
+    "bytes": 4591720,
+    "entries": 31843,
+    "sha256": "8131a9b1dc6d6e7a45cdf7ffa08f1c02dc63b6f35f16cf095c426b30a10d20d5"
+  },
+  "parents": [
+    "802c8f32c8b3d3058271e23c69e93f37b39f43fb",
+    "9005bc6e90f05362fb4761841346a5b9feb4d2e1"
+  ],
+  "passed": true,
+  "root_merge_integration_qualified": false,
+  "schema": "actor-refinement-source-merge-independent-review/v1",
+  "scientific_success": false
+}
