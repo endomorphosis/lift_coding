@@ -9,6 +9,29 @@ and [updated improvement plan](https://github.com/endomorphosis/ipfs_accelerate_
 Trusted deployed-consumer adoption and complete-session token measurement remain
 subsequent work.
 
+## Concurrent parent integration
+
+The qualified parent leaf `014fc361c31edce74390f5667948f1706655791f`
+was subsequently merged with concurrent main
+`c5ab7034b6e923f66cd7661a3f1ae322856d6fb3`. The retained qualification
+section below describes the original parent stage. This later integration
+preserves all 228 incoming paths and advances datasets to
+`b1fd77597867ad31f1687edc8bff090caf3d3b7d`; its 51 listed source objects
+still match the actual execution checkout. The qualified accelerator and kit pins
+remain unchanged. The [parent merge review](../../artifacts/repository-proof-context-publication-20261014/parent-merge-review.json)
+records the integration separately from the original qualification receipts.
+
+The concurrent [actor-refinement report](126-legal-actor-refinement-2026-10-14.md)
+continues the trained N11 donor, retaining all 42 tensors and freezing the 36
+nonactor tensors, including the learned conditions head. After 32 actor updates,
+training exact IR remains 154/168; older evaluation improves to 50/72 raw and
+53/72 joint, and newer evaluation to 34/72 joint. Fresh development and test
+remain 0/36. These separate findings preserve useful trained assets, while
+actual latent conditioning and external encoder execution remain absent. The
+examined receipts do not establish ModelManager registration. The report's
+immutable Hugging Face publication is attributed to that session, including
+its documented attributes correction; this integration does not repeat it.
+
 ## Scope and retained owners
 
 `RepositoryProofContextAdapter` reuses the original session, native index,

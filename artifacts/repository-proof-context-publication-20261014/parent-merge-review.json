@@ -1,0 +1,655 @@
+{
+  "actor_findings_attributed_to_parallel_session": {
+    "actor_updates": 32,
+    "checkpoint_sha256": "f421514dc02cb3542e7587767191aa99bd32551f145e0af4d01c47595d4d73c4",
+    "copied_tensors": 42,
+    "default_decoder_promoted": false,
+    "external_embedding_encoder_executed": false,
+    "fresh_development_exact_ir": "0/36",
+    "fresh_test_exact_ir": "0/36",
+    "frozen_nonactor_tensors": 36,
+    "hf_attributes_correction_documented": true,
+    "hf_prior_identities_preserved": 5448,
+    "hf_release_bytes": 77331365,
+    "hf_release_files": 198,
+    "hf_release_revision": "1622817fd804ff5333fce7dc8d04433e4acef2e4",
+    "latent_conditioning_enabled": false,
+    "learned_conditions_retained": true,
+    "model_manager_registration_established": false,
+    "network_reverified_here": false,
+    "newer_evaluation_joint_exact_ir": "34/72",
+    "older_evaluation_joint_exact_ir": "53/72",
+    "placeholder_latent_dimension": 384,
+    "trained_donor": "N11",
+    "training_joint_exact_ir": "154/168"
+  },
+  "actual_merge": "5c3ec38d041d7cc6837840a1275155e73957e9ea",
+  "actual_merge_parents": [
+    "014fc361c31edce74390f5667948f1706655791f",
+    "c5ab7034b6e923f66cd7661a3f1ae322856d6fb3"
+  ],
+  "additional_provider_model_training_solver_docker_calls": 0,
+  "all_incoming_tree_objects_preserved_except_owned_accelerator_pin": true,
+  "checked_at_utc": "2026-10-14T10:58:24.399809+00:00",
+  "completion_authority": false,
+  "dataset_objects_same_at_latest_parent_pin": [
+    {
+      "bytes": 56829,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/__init__.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9"
+    },
+    {
+      "bytes": 2052,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/autoformal/tree_pin.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "ec43fd9379f3c9198451e8d62d98db53826dcf115e6858039a73c3da7d72a1c2"
+    },
+    {
+      "bytes": 86862,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/backends/smt/compiler.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "9b14183c071fb9eaed29a18e0bdd6483f71e152a82c88732bc0ae0a6d2321be5"
+    },
+    {
+      "bytes": 51399,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/families/registry.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "669c4d90dbbac1014bd3dced401027be0391d304477b904f9da04d5a2d6c0450"
+    },
+    {
+      "bytes": 7118,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/intent_action_checkpoint_384.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "467b5e00df9e6960618a36064255d2680f2b369e3f27bf1901b6260a132b5eab"
+    },
+    {
+      "bytes": 3468,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_embeddings_384.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "fb3a5aa8ec005e98a2c62dc1d7e3e807a75820fedc156a8080c1f18063d17da7"
+    },
+    {
+      "bytes": 31851,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/source_training_v2.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "8de8096e895de9df08ccf5352dfd704806823296821d98b5badf08bb553a52e4"
+    },
+    {
+      "bytes": 27328,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/formalization/autoencoder/structured_source_384.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "3f9ca9ce7b4cf2a2d10d6aeb1fae78543c468133d2fa0df9fcb32f63f89e90f7"
+    },
+    {
+      "bytes": 24220,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/intent_ir/decoder.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "7bab5781c07e00b54b0283d3a2962926f75935caedc80eceb23264cb388be257"
+    },
+    {
+      "bytes": 14572,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/action_contracts.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "694e490c8f62bf8abed4cea0f60f161888436ee5886b1e814784ff77da811cc7"
+    },
+    {
+      "bytes": 11527,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/intent_ir/formalize/rich_grammar.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "6c40ac99d7e339651b6029764f94b12430ca515d4c5f7426770b013499efe92b"
+    },
+    {
+      "bytes": 27163,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/intent_ir/schema.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "93d38e4724c5f34aab7f39f050742e98ef0c8d80e2ff70459d2401541505fc56"
+    },
+    {
+      "bytes": 14098,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/ir_core/canonical.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "339b5778581c19525a7685edf432aaf124cd12e02d37cd0eca88cb25ab86c0d0"
+    },
+    {
+      "bytes": 31823,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/ir_core/schema_registry.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "1b214ea190a41c6a451377a03bc71ea84f6703314293ef78c5f269082eee4fbe"
+    },
+    {
+      "bytes": 109257,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+    },
+    {
+      "bytes": 37220,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/security_ir/model.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "abc3aea9c2f4d1ce513ee2c9fc4c304d8bd387ded18e0d646247417422225d39"
+    },
+    {
+      "bytes": 57876,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/software_contracts/cache.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "d708bb536860334a43a97244652765bf926d949286207cc25ff68788bf85751f"
+    },
+    {
+      "bytes": 22146,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/software_contracts/content.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "c27c4e3cd4a5ee12ff5c3967a7f57e421ea1bb26ff36b66c7547e9d1e3cde2df"
+    },
+    {
+      "bytes": 53460,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/software_contracts/python_frontend.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "baf1c1ec5e6a5f83a0eb640b988850264d35311cdcedc87d22cff610d05308df"
+    },
+    {
+      "bytes": 22314,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/chunked_snapshot.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "2a187d7ed7b228d4179302405bed47536754a7e789b5623f59a11e76cbe27f9d"
+    },
+    {
+      "bytes": 14891,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/committed_snapshot.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "4700a72c4463f0398b6b68e3df4b694b030dfe88a24db006772322f0cee26a15"
+    },
+    {
+      "bytes": 8128,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/identity.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "373f6f4e99923b58487256b956ebdfd66248485713a91483eca4e6783b59e102"
+    },
+    {
+      "bytes": 34958,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/models.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "4b061c97838929a4cdc055998ce71aa854234c7e75d3fbee12595fa1bafa8a75"
+    },
+    {
+      "bytes": 22375,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/paged_snapshot.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "6f4419e85df97097d2dc20c8253ae2cabb2175f1ea69abcf365f18bf98f00b68"
+    },
+    {
+      "bytes": 30681,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/pytest_analysis.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "45a0ab3fae08e91db2971540e5d933c8e82c47e7f65b3e5ec88912dbedc67ab4"
+    },
+    {
+      "bytes": 54595,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/python_analysis.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "744c5d1699403239d3eb5e9588a38a38cbc0cc56799c2884d8821f1a4e1bdd76"
+    },
+    {
+      "bytes": 32144,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/scanner.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "002957f910a0bc1ff29de1ed72aca9c2464218ac5f65478be34a7c8f04e166a1"
+    },
+    {
+      "bytes": 48191,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/snapshot.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "5135e623a0a3f970252da63dce049be167e8bb73db5355f6c3116316b70aafa6"
+    },
+    {
+      "bytes": 18520,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_index/symbol_graph.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "4e269d1e2f39ea27582e98f240996696d61b0fe0b1358e363ff2376baa7972e3"
+    },
+    {
+      "bytes": 43440,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_state/api.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "e172654ef7f51901f003de2fbe85573e38e0c6544941b36a003fc9392d8e4f51"
+    },
+    {
+      "bytes": 20976,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_state/bindings.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "268ff6aab60e3a8a2e5e9719b637edfd1efb7bc50a4310bd4b1f2660b04cdfcc"
+    },
+    {
+      "bytes": 31668,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_state/capsules.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "6f2581e84606f718e9b3d610d5b01434f386ea74459cafb44d9eb5edb8e6869d"
+    },
+    {
+      "bytes": 33366,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_state/merkle.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "526b8d427247e11a4d3cf9fd568304c8448c4358c0772a28b5637e887d2512e0"
+    },
+    {
+      "bytes": 102763,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/software_contracts/semantic_state/models.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "488fa256322807b895a3f7e277fef5b4d5dc6ac1f3619696a6c288340aae0586"
+    },
+    {
+      "bytes": 44955,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/software_verification/numerical_logic.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "1cc68c30efd6719cc3baad17e196c9f9fc43e3f6161604a75e8029c8e53ed822"
+    },
+    {
+      "bytes": 8003,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/software_verification/numerical_obligation_retrieval.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "8a044dae64a12cccee904929d60b8a7c0aec51d0266592394e237ca4bbe90e85"
+    },
+    {
+      "bytes": 28735,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/software_verification/numerical_source.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "966243b52d57033ee2545142792688af6d2b32c8f6eac6f9f6efd157f03bd3f5"
+    },
+    {
+      "bytes": 58065,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/software_verification/program.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "f051f42d64c5f993451972924953cc7eaa6d17df097235ddabfd5d791d406f91"
+    },
+    {
+      "bytes": 76841,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/software_verification/source_adapters.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "aef42730598f74d35e232f460637560be71b55ddc459d555df9105d17fcfc003"
+    },
+    {
+      "bytes": 47941,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/software_verification/syntax_bridge.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "cc46f305dede1cadb358a524f30dbb894b84ab062f0c083c3138c7e43f271116"
+    },
+    {
+      "bytes": 56966,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/syntax_core/ast.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "4709513f18ab270858fe9595d88a847ddc52092606c52c7802947abed1ab9ac4"
+    },
+    {
+      "bytes": 30488,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/syntax_core/signatures.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "49dd4fb0096661a05a15f056eb57248349e2b4e0b02e83239f36db36788c75bf"
+    },
+    {
+      "bytes": 7300,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/decoder.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "21e8315b0054f7755512212d610d4e3f5f4ac86387f3b27edb9632fa8ca68bc3"
+    },
+    {
+      "bytes": 120714,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/logic/ui_ux_ir/schema.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "8a7b0cc90151043514d263b1a2655d6d41a2835dacd6b56018ba5c0c89961855"
+    },
+    {
+      "bytes": 26219,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_production.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "735ca0597186e094d736ef58435c82956c4ab805a68fc7a6adbfc0ee21ee889f"
+    },
+    {
+      "bytes": 19364,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_runtime.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "ce80ed6294009e04580051e6eb06a817d74a8a56f04814ad0a698e3d27dd0d41"
+    },
+    {
+      "bytes": 34679,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/domain_384_autoencoder.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "66c5ee320f9c7aacd3b246d0666c7fc3ee928e4679892e1e90c838e1b291dbc6"
+    },
+    {
+      "bytes": 14622,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+    },
+    {
+      "bytes": 42137,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "3b6cd3a6fade78fed275a478f010329e5d030a250b914c4b46ab0f0d77b9d5ab"
+    },
+    {
+      "bytes": 146870,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+    },
+    {
+      "bytes": 35427,
+      "matches_immutable_git_object": true,
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_latent_formula.py",
+      "preserved_parent_pin": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+      "repository": "datasets_execution_checkout",
+      "same_used_object": true,
+      "sha256": "ec5bdcd752d157c9fc0257a45551cfe9ce7be172af767e8ed769bf1bc8a31d36"
+    }
+  ],
+  "documentation_notes_checked": [
+    "implementation_plan/docs/126-supervisor-repository-proof-context-2026-10-14.md",
+    "implementation_plan/docs/126-legal-actor-refinement-2026-10-14.md"
+  ],
+  "execution_authority": false,
+  "git_refs_and_index_mutated": false,
+  "git_state_after": {
+    "/home/barberb/lift_coding/.worktrees/repository-proof-context-20261014": {
+      "head": "b184d30229b3b8f23a390ca24580962d44620536",
+      "index_sha256": "82040a36f569101b5314a10361b74ea4cdf30487700bce506884ee51562f7ce3",
+      "refs_sha256": "619b0a92c4b057366e86d0c411bc22833712be1b3cab7f8a7fb7b323690d71f4"
+    },
+    "/home/barberb/lift_coding/.worktrees/repository-proof-context-datasets-20261014": {
+      "head": "a0f60d42f836571a0023515e92dfb0e5724f0d79",
+      "index_sha256": "4adb08d15965c57550d392d10d1dca80b89cff0c620573cb1da11a09cae71d56",
+      "refs_sha256": "cc26e0f6c9f6421de9974f524108d23ace524bb6210dde093614f5ca38662d7b"
+    },
+    "/home/barberb/lift_coding/.worktrees/repository-proof-context-kit-20261014": {
+      "head": "40c98c71b95be750509ffdb21e7e5494d91b4e79",
+      "index_sha256": "755c0d46d5ff81281d61fe417cc692e662f9e68bee5403ae5b4470ba854b6233",
+      "refs_sha256": "1dad841d10e28b42fd738f9d131f70ab29a570eb9fd78d5c5827fc76f2630980"
+    },
+    "/home/barberb/lift_coding/.worktrees/repository-proof-context-root-20261014": {
+      "head": "5c3ec38d041d7cc6837840a1275155e73957e9ea",
+      "index_sha256": "357f6d4eae11c4715f2916368967e2cfad904aab73ec8e95d604255e0edd687d",
+      "refs_sha256": "0f42a20f510935674a348151ad3c89f63d089e92c678a73baa9bbefa200d7730"
+    }
+  },
+  "git_state_before": {
+    "/home/barberb/lift_coding/.worktrees/repository-proof-context-20261014": {
+      "head": "b184d30229b3b8f23a390ca24580962d44620536",
+      "index_sha256": "82040a36f569101b5314a10361b74ea4cdf30487700bce506884ee51562f7ce3",
+      "refs_sha256": "619b0a92c4b057366e86d0c411bc22833712be1b3cab7f8a7fb7b323690d71f4"
+    },
+    "/home/barberb/lift_coding/.worktrees/repository-proof-context-datasets-20261014": {
+      "head": "a0f60d42f836571a0023515e92dfb0e5724f0d79",
+      "index_sha256": "4adb08d15965c57550d392d10d1dca80b89cff0c620573cb1da11a09cae71d56",
+      "refs_sha256": "cc26e0f6c9f6421de9974f524108d23ace524bb6210dde093614f5ca38662d7b"
+    },
+    "/home/barberb/lift_coding/.worktrees/repository-proof-context-kit-20261014": {
+      "head": "40c98c71b95be750509ffdb21e7e5494d91b4e79",
+      "index_sha256": "755c0d46d5ff81281d61fe417cc692e662f9e68bee5403ae5b4470ba854b6233",
+      "refs_sha256": "1dad841d10e28b42fd738f9d131f70ab29a570eb9fd78d5c5827fc76f2630980"
+    },
+    "/home/barberb/lift_coding/.worktrees/repository-proof-context-root-20261014": {
+      "head": "5c3ec38d041d7cc6837840a1275155e73957e9ea",
+      "index_sha256": "357f6d4eae11c4715f2916368967e2cfad904aab73ec8e95d604255e0edd687d",
+      "refs_sha256": "0f42a20f510935674a348151ad3c89f63d089e92c678a73baa9bbefa200d7730"
+    }
+  },
+  "incoming_changed_paths": 228,
+  "incoming_parent": "c5ab7034b6e923f66cd7661a3f1ae322856d6fb3",
+  "incoming_status_counts": {
+    "A": 227,
+    "M": 1
+  },
+  "incoming_tree_objects_checked": 37605,
+  "learned_latent_decoding_qualified": false,
+  "merged_dependency_pins": {
+    "external/ipfs_accelerate": "b184d30229b3b8f23a390ca24580962d44620536",
+    "external/ipfs_datasets": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+    "external/ipfs_kit": "40c98c71b95be750509ffdb21e7e5494d91b4e79"
+  },
+  "model_manager_registration_qualified": false,
+  "original_parent_base": "51774875d8e42deb4d378aa4d9dbf3ec8329969f",
+  "original_receipts_describe_qualified_parent_leaf": true,
+  "output_self_excluded": true,
+  "preserved_actor_evidence_objects": [
+    {
+      "attributed_revision": "c5ab7034b6e923f66cd7661a3f1ae322856d6fb3",
+      "bytes": 11641,
+      "path": "implementation_plan/docs/126-legal-actor-refinement-2026-10-14.md",
+      "sha256": "74d1e9c21a916a1034ae7cca0887a716a21f1296da563e9f6af8d06c8972d9b7"
+    },
+    {
+      "attributed_revision": "c5ab7034b6e923f66cd7661a3f1ae322856d6fb3",
+      "bytes": 2754,
+      "path": "artifacts/legal-actor-refinement-20261014-01/MODEL_CARD_v01.md",
+      "sha256": "e3b072e59f9774d9aeb85358ab2c3131bb81ed6f41da499c0a063c6f59c81df8"
+    },
+    {
+      "attributed_revision": "c5ab7034b6e923f66cd7661a3f1ae322856d6fb3",
+      "bytes": 9624,
+      "path": "artifacts/legal-actor-refinement-20261014-01/public-result-summary-v01.json",
+      "sha256": "f1984b7d2b641f727d6e079872e888f081c8f14e51ff287e4cc5348fa15441ab"
+    }
+  ],
+  "production_consumer_adoption_qualified": false,
+  "proof_authority": false,
+  "qualified_parent_leaf": "014fc361c31edce74390f5667948f1706655791f",
+  "qualified_parent_objects_unchanged_in_merge": [
+    "artifacts/repository-proof-context-publication-20261014/child-ci-observation.json",
+    "artifacts/repository-proof-context-publication-20261014/fresh-main-compatibility.json",
+    "artifacts/repository-proof-context-publication-20261014/manifest.json",
+    "artifacts/repository-proof-context-publication-20261014/parent-checks.json",
+    "artifacts/repository-proof-context-publication-20261014/publication_checker.py",
+    "external/ipfs_accelerate",
+    "implementation_plan/docs/126-supervisor-repository-proof-context-2026-10-14.md"
+  ],
+  "retained_new_cases": 38,
+  "retained_qualification_artifacts": [
+    {
+      "bytes": 23708,
+      "path": "artifacts/repository-proof-context-publication-20261014/child-ci-observation.json",
+      "revision": "014fc361c31edce74390f5667948f1706655791f",
+      "sha256": "a2aed8ea351399f94804c9ebe496582ae2d20b2b49c11d92d4af146092187290"
+    },
+    {
+      "bytes": 23090,
+      "path": "artifacts/repository-proof-context-publication-20261014/fresh-main-compatibility.json",
+      "revision": "014fc361c31edce74390f5667948f1706655791f",
+      "sha256": "352f22afbe4755b3d756e3c0b2209b265aa9a8dc847a547135f82caf11823e4b"
+    },
+    {
+      "bytes": 1663,
+      "path": "artifacts/repository-proof-context-publication-20261014/manifest.json",
+      "revision": "014fc361c31edce74390f5667948f1706655791f",
+      "sha256": "158ee9a68eb4e02803742810b894359ff4b1740e18e4130306ca0821e47c7448"
+    },
+    {
+      "bytes": 118902,
+      "path": "artifacts/repository-proof-context-publication-20261014/parent-checks.json",
+      "revision": "014fc361c31edce74390f5667948f1706655791f",
+      "sha256": "8815cb4245850e3f288c957a4dc0d2dacd196a996d651bb109deb6011ee8ae4d"
+    },
+    {
+      "bytes": 28006,
+      "path": "artifacts/repository-proof-context-publication-20261014/publication_checker.py",
+      "revision": "014fc361c31edce74390f5667948f1706655791f",
+      "sha256": "297a839ac70a1647d9ff32251ef64c2f2912df4ad623890e3d1a9def12ab9a0b"
+    },
+    {
+      "bytes": 6671,
+      "path": "implementation_plan/docs/126-supervisor-repository-proof-context-2026-10-14.md",
+      "revision": "014fc361c31edce74390f5667948f1706655791f",
+      "sha256": "5e2a8288e0b7701b1bda4db6130650dbeeaf79c8c8afeb6785eb26e7485468f5"
+    }
+  ],
+  "retained_source_bindings": 250,
+  "retained_suites": 5,
+  "retained_tests": 187,
+  "schema": "repository-proof-context-parent-merge-review@1",
+  "selected_documentation": "documentation-checks-04.json",
+  "selected_qualification": "qualification-05",
+  "status": "pass",
+  "tests_or_workflow_rerun": false,
+  "total_session_token_savings_established": false,
+  "updated_parent_note_and_checker_bindings": [
+    {
+      "bytes": 8163,
+      "path": "implementation_plan/docs/126-supervisor-repository-proof-context-2026-10-14.md",
+      "sha256": "75cc0224a5a470a39a008fb93699d76d4078924415c7fe6deaf0b17714428c16"
+    },
+    {
+      "bytes": 10109,
+      "path": "artifacts/repository-proof-context-publication-20261014/parent_merge_review.py",
+      "sha256": "c1e430934bf3d363f12b4d02ee484d47f0740bb50f88b428480ca9000ab694ea"
+    }
+  ]
+}
