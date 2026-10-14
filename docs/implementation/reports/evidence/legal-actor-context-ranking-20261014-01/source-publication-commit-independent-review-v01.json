@@ -1,0 +1,64 @@
+{
+  "actual_commit": "8bed92e201e437503f88f1465fe916d1e73b938a",
+  "actual_parents": [
+    "904f885c180eb9dfcdef80199f708125428d3859",
+    "54aae1d13faea237eddde301754db85afd1e127a"
+  ],
+  "actual_tree": "1def5f3586bc44e31d1f890079cc1e9d86081559",
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-actor-context-ranking-20261014-01/source-publication-selection-v01.json": {
+      "bytes": 107355,
+      "sha256": "79cda85283afbd1c6d9204d6a6d103f6b77db7c70c719bb12c2156fa5a0048fd"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-context-ranking-20261014-01/source-publication-stage-independent-review-v01.json": {
+      "bytes": 261440,
+      "sha256": "a33741ac7b00888599e7c776343a7d655c2a228c26aac7c25819119cf443f655"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-context-ranking-20261014-01/source-publication-stage-packet-v01.json": {
+      "bytes": 39144,
+      "sha256": "354fa61e652cfb928a1d42c9e399dd7ec42c45df87795495b5048ce5d1b6d97d"
+    }
+  },
+  "cached_diff_empty": true,
+  "conditional_PR_merge_qualification": {
+    "PR": 1304,
+    "actual_PR_merge_claimed": false,
+    "force_or_admin_or_check_override_qualified": false,
+    "fresh_remote_observation_performed_by_this_reviewer": false,
+    "normal_merge_only": true,
+    "qualified_only_if": {
+      "incoming_main": "904f885c180eb9dfcdef80199f708125428d3859",
+      "remote_PR_head": "8bed92e201e437503f88f1465fe916d1e73b938a"
+    },
+    "repository": "endomorphosis/ipfs_datasets_py",
+    "requires_saved_exact_remote_head_and_incoming_main_observation_before_merge": true
+  },
+  "default_promotion": false,
+  "findings": [],
+  "index_entire_mapping_equals_committed_tree": true,
+  "index_entry_count": 32220,
+  "index_unmerged_entries": 0,
+  "limitations": [
+    "This receipt verifies the immutable named local commit. It is not a live remote main/head observation; normal PR merge qualification is conditional on exact saved official remote observations.",
+    "The completed288path stage review binds source copies, allincomingtree preservation,41algorithm source pins and old/new scheduler separation; those payloads were not redundantly replayed.",
+    "Working-tree cleanliness covers tracked materialized paths according to the current sparse index. Untracked/ignored files and foreign/private worktrees are outside scope.",
+    "No canonical Git, network, fetch, stage/commit/merge/push mutation, tests, producer imports, model/encoder/optimizer/compiler or resource calls occurred. Hosted CI has not been reobserved by this reviewer and no pass or override is claimed."
+  ],
+  "materialized_tracked_working_diff_empty": true,
+  "merge_in_progress": false,
+  "new_numerical_or_semantic_qualification": false,
+  "normal_push_exact_commit_qualified": true,
+  "observed_at_utc": "2026-10-14T13:51:29.604746+00:00",
+  "owned_clone": "/home/barberb/lift_coding/artifacts/legal-actor-context-ranking-20261014-01/datasets-integration",
+  "passed": true,
+  "raw183copy_pins_replayed": false,
+  "raw_commit_pin": {
+    "bytes": 348,
+    "object_id": "8bed92e201e437503f88f1465fe916d1e73b938a",
+    "sha256": "499440f340892b83351f271eefa559fef75372c2345fc23d810d049fe27ef144"
+  },
+  "schema": "actor-context-ranking-source-publication-commit-independent-review/v1",
+  "scientific_success": false,
+  "scope": "Bounded exact local source commit/tree/ordered parents/index qualification reusing the sealed288path stage review; no repeated payload or runtime qualification.",
+  "stage_qualification_reused_unchanged": true
+}
