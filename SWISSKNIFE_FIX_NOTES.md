@@ -958,3 +958,191 @@ designed override; this audit ran with it set to the lift_coding venv.
 | orb-auto-ui | 3/3 | kit | executed | executed | — |
 | mcp-plus-plus | 3/3 | kit | executed | executed | — |
 | agent-supervisor | 3/3 | datasets | executed | executed | — |
+
+## Interaction-coverage audit — continuation (audit3, 2026-10-14)
+
+Benjamin's directive: make sure every user interaction in the GUI apps
+actually connects to some feature of the ORB/IDL of the MCP++ interface to
+one of the three backend services, especially the ipfs_accelerate_py agent
+supervisor. The prior worker completed the inventory, static trace, and
+supervisor deep-dive (`visual_check/fv_state/audit3/CHECKPOINT_2026-10-14.md`);
+this continuation applied the six designed fixes, built the per-app trace
+table, verified live on the real stack, and closed the docs. **All changes
+are uncommitted** (a separate push integration is running; no git was run in
+`external/ipfs_accelerate` or `external/ipfs_datasets`, and the preserved
+czechia normalize.py was never touched).
+
+### Fixes applied (each re-checked by the test/probe that exposed it)
+
+1. **Console truthfulness leak (R6)** — `web/js/apps/agent-supervisor.js`:
+   `readLiveSnapshot` no longer falls back per capability to
+   `SAMPLE_SNAPSHOT`; unserved capabilities contribute empty lists (health an
+   explicitly `unavailable` shell). SAMPLE renders only in full-fallback
+   mode. Check: `audit3/check_fix1.mjs` PASSED; live probes show zero
+   sample leakage.
+2. **Steering dry-run regression (R7)** — same file: `withLocalSteeringPreview`
+   restores the designed local no-mutation preview for dry runs only, when
+   the gateway returns `unavailable/capability_unavailable`; confirmed
+   submissions keep the typed error. Check: `audit3/check_fix2.mjs` PASSED
+   (dry run → local preview receipt `rcpt-prompt-steering-*`; confirmed →
+   typed `capability_unavailable` preserved).
+3. **Gateway mappings (P16)** — `web/js/core/mcp-plus-plus-desktop-client.js`:
+   `createSupervisorGateway` now maps `supervisor.logs.read` → accelerate
+   `mcp++/dag/history` (real EventDag; events normalized to log entries),
+   `supervisor.content.retrieve` → kit `GET /mcp/artifacts/<cid>`,
+   `supervisor.receipts.persist` → kit `POST /mcp/artifacts/put`, and
+   `supervisor.event-dag.checkpoint` → kit `POST /mcp/dag/append`. The two
+   writes are governed: they deny with `confirmation_required` unless the
+   payload carries the console's reviewed `confirmation_token`. For
+   persist, the gateway computes the canonical CIDv1-raw+sha2-256 over the
+   stable-stringified receipt bytes (mirroring
+   `scripts/mcpplusplus-profile-a.cjs` `cidForBytes`/`stableStringify`),
+   which the kit artifact store verifies byte-for-byte. Client gained a
+   `post()` helper. Check: `audit3/check_fix3.mjs` PASSED against a stub
+   whose fake adapter verifies CIDs with the production `cidForBytes`;
+   live round-trip below.
+4. **VDA-G054 (R8)** — `agent-supervisor.js`: the 8 workflow-proof buttons
+   are bound in `bindEvents` to `handleWorkflowProofAction` (real pane
+   navigation), and `renderVdaG054WorkflowProof` renders checkpoint/receipt
+   refs only when the active snapshot carries them. Check:
+   `audit3/check_fix4.mjs` PASSED; live tab navigation recorded.
+5. **datasets-browser canned surface (R9)** — `web/js/main-simple.js`:
+   `createDatasetsBrowserSurface` is async, imports the descriptor
+   registry, and wires Search → `semantic_search`, Provenance →
+   `record_provenance` (confirmed), Prepare → `index` (confirmed),
+   Progress → `sync_status`; the schema/split selects are real
+   `semantic_search` filter inputs; Apply Filters is a labelled local
+   staging action; Recover Error is a labelled local pre-transport
+   validation. All `bafydatasetg048*` CIDs and `receipt:datasets-browser:g048:*`
+   strings are gone from render and log (grep count 0 across `web/js/`).
+6. **accelerate-panel canned surface (R10)** — same file:
+   `createAcceleratePanelSurface` is async and wires Run Inference →
+   `run_inference_job` (confirmed) + `job_status`, Artifacts →
+   `list_models`, Hardware → `hardware_profile`, Recover → `telemetry`.
+   The fabricated "completed through the WebGPU path" claim and all
+   `bafyaccelerateg049*` / `receipt:accelerate-panel:g049:*` strings are
+   gone. Cancel has no descriptor operation: it reports that typed
+   disposition (plus real `job_status` when a session job exists).
+
+### Supervisor capability trace (the deep-dive's contract, after fixes)
+
+| Capability | Owner | Disposition | Route / reason |
+|---|---|---|---|
+| supervisor.health.read | ipfs_accelerate_py | executes | desktop-client inspectAll across the three mediated services |
+| supervisor.queue.read | ipfs_accelerate_py | executes | Profile G `mcp++/tasks/list` |
+| supervisor.goals.read | ipfs_accelerate_py | executes | Profile G `mcp++/goals/list` |
+| supervisor.subgoals.read | ipfs_accelerate_py | executes | Profile G `mcp++/goals/list` |
+| supervisor.receipts.read | ipfs_kit_py | executes | Profile G tasks/list + per-task schedule status |
+| supervisor.logs.read | ipfs_accelerate_py | executes (fix 3) | accelerate adapter `mcp++/dag/history` over its real EventDag, normalized |
+| supervisor.receipts.persist | ipfs_kit_py | executes (fix 3) | kit `POST /mcp/artifacts/put`, confirmation-gated, canonical CID |
+| supervisor.content.retrieve | ipfs_kit_py | executes (fix 3) | kit `GET /mcp/artifacts/<cid>` |
+| supervisor.event-dag.checkpoint | ipfs_kit_py | executes (fix 3) | kit `POST /mcp/dag/append`, confirmation-gated |
+| supervisor.prompt-steering.request (dry run) | ipfs_accelerate_py | local preview (fix 2) | designed local no-mutation preview; no backend steering route exists |
+| supervisor.prompt-steering.request (confirmed) | ipfs_accelerate_py | typed-unavailable | `Supervisor.steer` exists in the accelerate facade; NO MCP adapter route serves it (B10) |
+| supervisor.task-control.request | ipfs_accelerate_py | typed-unavailable | no gateway route for governed dispatch (B10) |
+| supervisor.taskboard.links.read | ipfs_datasets_py | typed-unavailable | zero implementations in ipfs_datasets_py (B8) |
+| supervisor.run-history.search | ipfs_datasets_py | typed-unavailable | zero implementations in ipfs_datasets_py (B8) |
+| supervisor.policy.assist | ipfs_datasets_py | typed-unavailable | zero implementations in ipfs_datasets_py (B8) |
+| supervisor.semantic-goal.assist | ipfs_datasets_py | typed-unavailable | zero implementations in ipfs_datasets_py (B8) |
+
+Totals: 9 execute, 1 local preview, 6 typed-unavailable.
+
+### Per-app interaction trace (exact counts)
+
+Census computed from `audit3/inventory-raw.json`: **45 apps, 1,401 static
+controls (1,095 buttons, 189 inputs, 86 selects, 31 textareas)**. (The
+checkpoint's headline 1,443 does not reproduce from the file; the file is
+authoritative.) Full per-app table: `audit3/TRACE_TABLE.md` /
+`trace-table.json`, generated by `audit3/classify_trace.mjs`. Classes: the
+38 tool-backed apps connect via the runtime-injected mediated panel (P15);
+generated surfaces are classified control-by-control (datasets-browser 8 =
+6 backend + 2 local; accelerate-panel 5 = 4 backend + 1 typed;
+idl-explorer 6 = 3 + 3; orb-auto-ui 8 = 3 + 5; glasses-preview 7 = declared
+browser-local; VDA-G054 section 8 = local navigation, fixed); the console's
+static controls resolve to the capability table above; the remaining apps
+are declared browser-local or external-direct (github, openrouter,
+oauth-login, p2p-network). **Unmapped-and-fixed: 21 controls.
+Unmapped-and-typed: 6 supervisor capabilities + accelerate Cancel.
+Silently unmapped: 0.**
+
+### Live verification (real stack, no mocks)
+
+Stack via `visual_check/fv_state/bring-up.sh` + the datasets dashboard on
+:8899. Probes: `audit3/live_probe.mjs` (cold stack),
+`live_probe2.mjs` (warm re-drive), `live_probe3.mjs` (settle check);
+screenshots `visual_check/fv-14…fv-17`.
+
+- Console settled state: health **available**, all three backends
+  available; error set = exactly the four B8 typed capabilities; queue /
+  goals / receipts / logs all read live (0 items — this stack's Profile G
+  and EventDag state is empty); **no SAMPLE leakage** in any probe.
+- Fix-3 round-trip through the console's own gateway object: persist
+  without confirmation → `denied/confirmation_required`; with the token →
+  available, CID `bafkreidjbmeouqe42mu3uioynseoqgdtfjzrs3yiqv743jcxd56ftvpkw4`,
+  backend `helia`, verified; retrieve → available, verified, 206 bytes;
+  checkpoint → event CID `bafkreicbw5f2hfeflzmtksufkqfzfwxhl6i25qyiu7ui2ujhwzm7a6trwy`;
+  logs.read → available. (Direct curl checks of the same routes through
+  the vite mediator agree: artifacts put/get persisted+verified via helia,
+  dag append returned a recorded event CID.)
+- G054 navigation live: receipts → steering → health → active tabs all
+  switched by the formerly dead buttons.
+- datasets-browser live: no canned CID/receipt anywhere; all six buttons
+  produced real gateway envelopes (status `degraded` — the browser
+  app-capability gateway's designed descriptor-fallback for non-kit
+  families, the same outcome the verified idl-explorer/orb-auto-ui show in
+  this runtime); Apply Filters staged honestly; Recover Error produced the
+  local validation message.
+- accelerate-panel live: no canned refs, no WebGPU claim; Run Inference /
+  Hardware / Artifacts / Recover produced real envelopes; Cancel produced
+  the typed no-operation disposition.
+- Two transient effects, both diagnosed, neither a defect of the fixes:
+  (a) the first (cold) probe's Profile G reads timed out against cold
+  Python worker bridges at load ~10 vs the client's 8 s timeout — the
+  documented contention class from R1's root-cause note; the warm
+  re-drive settled cleanly; (b) `receipts.read` flaked once with
+  `server_unavailable` during a concurrent refresh burst while all three
+  services answered `mcp++/tasks/list` instantly by direct RPC; the next
+  refresh and a direct gateway invoke both returned available.
+- Named remaining live step: driving the steering PANE in live mode needs
+  a seeded Profile G task/goal; this stack's Profile G state is empty, so
+  the pane drive could not run. The invocation path is unit-proved
+  (`check_fix2.mjs`) and the gateway's typed behavior for confirmed
+  submissions is proved live by the console's error set design (the
+  capability is deliberately unmapped gateway-side).
+
+### Suite re-runs
+
+- Affected vitest batch 1 (desktop client, prompt steering, console
+  gateway): **3 files, 17 tests, all passed**.
+- Affected vitest batch 2 (ORB/IDL handoffs, tool gateway, supervisor
+  boundary): **40 passed / 1 failed** — the failure is SVD-098's stale
+  `supervisor_packet_count: 11` expectation vs the TS contract's 26
+  capabilities (contract map B9; its inputs are untouched by audit3;
+  app-side counts match exactly).
+- Python integration suite (`python -m pytest tests/integration -q`):
+  **528 passed / 29 skipped / 0 failed** (677.19 s under load ~9–10) —
+  identical to the gap-closure baseline; no regressions. Log:
+  `visual_check/fv_state/audit3/integration-suite.log`.
+
+### Changed files (audit3, all uncommitted)
+
+Product code (swissknife):
+- `web/js/apps/agent-supervisor.js` (fixes 1, 2, 4)
+- `web/js/core/mcp-plus-plus-desktop-client.js` (fix 3)
+- `web/js/main-simple.js` (fixes 5, 6)
+
+Docs (superproject):
+- `BROKEN_CONTRACT_MAP.md` (P16; R6–R10; B8–B10; §4 cross-refs; §5 A3 fix table; §6)
+- `visual_check/FEATURE_MATRIX.md` (F-14; screenshot index fv-14…fv-17)
+- `SWISSKNIFE_FIX_NOTES.md` (this section)
+
+Evidence (superproject, `visual_check/fv_state/audit3/`):
+- `check_fix1.mjs`, `check_fix2.mjs`, `check_fix3.mjs`, `check_fix4.mjs`
+- `classify_trace.mjs`, `trace-table.json`, `TRACE_TABLE.md`
+- `live_probe.mjs`, `live_probe2.mjs`, `live_probe3.mjs`,
+  `live-probe-results.json`, `live-probe2-results.json`,
+  `live-probe3-results.json`, `bring-up.log`, `datasets-dashboard.log`,
+  `live-probe-stdout.log`, `live-probe2-stdout.log`, `PROGRESS.md`
+- Screenshots: `visual_check/fv-14-supervisor-console-audit3.png`,
+  `fv-15-datasets-browser-audit3.png`, `fv-16-accelerate-panel-audit3.png`,
+  `fv-17-supervisor-console-audit3-warm.png`

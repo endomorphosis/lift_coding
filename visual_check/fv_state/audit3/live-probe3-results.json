@@ -1,0 +1,22 @@
+{
+  "started_at": "2026-10-14T08:26:48.610Z",
+  "console": {
+    "status": "empty",
+    "transportMode": "degraded",
+    "errorCaps": [
+      "supervisor.taskboard.links.read",
+      "supervisor.run-history.search",
+      "supervisor.policy.assist",
+      "supervisor.semantic-goal.assist"
+    ],
+    "healthStatus": "available",
+    "receipts": 0,
+    "logs": 0
+  },
+  "direct_receipts_read": {
+    "state": "available",
+    "reason": null,
+    "count": 0
+  },
+  "finished_at": "2026-10-14T08:27:23.210Z"
+}

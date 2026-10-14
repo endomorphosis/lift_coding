@@ -1,0 +1,624 @@
+{
+  "generated_at": "2026-10-14T08:19:08.530Z",
+  "census_totals": {
+    "buttons": 1095,
+    "selects": 86,
+    "inputs": 189,
+    "textareas": 31,
+    "total": 1401
+  },
+  "census_apps": 45,
+  "tool_backed_apps": 38,
+  "apps": [
+    {
+      "app_id": "terminal",
+      "buttons": 8,
+      "selects": 0,
+      "inputs": 2,
+      "textareas": 0,
+      "total": 10,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "vibecode",
+      "buttons": 7,
+      "selects": 0,
+      "inputs": 0,
+      "textareas": 2,
+      "total": 9,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "music-studio-unified",
+      "buttons": 35,
+      "selects": 1,
+      "inputs": 4,
+      "textareas": 2,
+      "total": 42,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "ai-chat",
+      "buttons": 13,
+      "selects": 1,
+      "inputs": 1,
+      "textareas": 1,
+      "total": 16,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "file-manager",
+      "buttons": 37,
+      "selects": 1,
+      "inputs": 8,
+      "textareas": 2,
+      "total": 48,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "task-manager",
+      "buttons": 16,
+      "selects": 2,
+      "inputs": 3,
+      "textareas": 0,
+      "total": 21,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "todo",
+      "buttons": 7,
+      "selects": 1,
+      "inputs": 3,
+      "textareas": 0,
+      "total": 11,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "model-browser",
+      "buttons": 25,
+      "selects": 0,
+      "inputs": 2,
+      "textareas": 0,
+      "total": 27,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "huggingface",
+      "buttons": 35,
+      "selects": 7,
+      "inputs": 13,
+      "textareas": 2,
+      "total": 57,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "openrouter",
+      "buttons": 24,
+      "selects": 5,
+      "inputs": 7,
+      "textareas": 2,
+      "total": 38,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15. Also: external-direct (openrouter.ai)."
+    },
+    {
+      "app_id": "ipfs-explorer",
+      "buttons": 43,
+      "selects": 3,
+      "inputs": 7,
+      "textareas": 0,
+      "total": 53,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "device-manager",
+      "buttons": 28,
+      "selects": 0,
+      "inputs": 0,
+      "textareas": 0,
+      "total": 28,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "settings",
+      "buttons": 5,
+      "selects": 8,
+      "inputs": 9,
+      "textareas": 0,
+      "total": 22,
+      "class": "declared local / external (no ORB/IDL claim)",
+      "note": "Browser-local app function; no backend feature is claimed by its controls."
+    },
+    {
+      "app_id": "mcp-control",
+      "buttons": 42,
+      "selects": 6,
+      "inputs": 11,
+      "textareas": 2,
+      "total": 61,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "api-keys",
+      "buttons": 28,
+      "selects": 4,
+      "inputs": 9,
+      "textareas": 0,
+      "total": 41,
+      "class": "declared local / external (no ORB/IDL claim)",
+      "note": "policy_blocked disposition (backend-status catalog)"
+    },
+    {
+      "app_id": "github",
+      "buttons": 21,
+      "selects": 5,
+      "inputs": 8,
+      "textareas": 1,
+      "total": 35,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15. Also: external-direct (api.github.com)."
+    },
+    {
+      "app_id": "oauth-login",
+      "buttons": 20,
+      "selects": 0,
+      "inputs": 6,
+      "textareas": 0,
+      "total": 26,
+      "class": "declared local / external (no ORB/IDL claim)",
+      "note": "external-direct (accounts.google.com) / external_provider disposition"
+    },
+    {
+      "app_id": "cron",
+      "buttons": 39,
+      "selects": 6,
+      "inputs": 9,
+      "textareas": 2,
+      "total": 56,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "navi",
+      "buttons": 12,
+      "selects": 2,
+      "inputs": 1,
+      "textareas": 0,
+      "total": 15,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "p2p-network",
+      "buttons": 78,
+      "selects": 1,
+      "inputs": 4,
+      "textareas": 0,
+      "total": 83,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15. Also: external-direct demo endpoints (cloudflare/workers); also carries a mediated panel (in P15 set)."
+    },
+    {
+      "app_id": "p2p-chat-unified",
+      "buttons": 12,
+      "selects": 0,
+      "inputs": 1,
+      "textareas": 1,
+      "total": 14,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "neural-network-designer",
+      "buttons": 27,
+      "selects": 0,
+      "inputs": 5,
+      "textareas": 1,
+      "total": 33,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "training-manager",
+      "buttons": 21,
+      "selects": 6,
+      "inputs": 10,
+      "textareas": 0,
+      "total": 37,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "calculator",
+      "buttons": 109,
+      "selects": 2,
+      "inputs": 2,
+      "textareas": 0,
+      "total": 113,
+      "class": "declared local / external (no ORB/IDL claim)",
+      "note": "Browser-local app function; no backend feature is claimed by its controls."
+    },
+    {
+      "app_id": "clock",
+      "buttons": 19,
+      "selects": 2,
+      "inputs": 6,
+      "textareas": 0,
+      "total": 27,
+      "class": "declared local / external (no ORB/IDL claim)",
+      "note": "Browser-local app function; no backend feature is claimed by its controls."
+    },
+    {
+      "app_id": "calendar",
+      "buttons": 20,
+      "selects": 3,
+      "inputs": 8,
+      "textareas": 1,
+      "total": 32,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "peertube",
+      "buttons": 27,
+      "selects": 1,
+      "inputs": 5,
+      "textareas": 1,
+      "total": 34,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "friends-list",
+      "buttons": 38,
+      "selects": 3,
+      "inputs": 2,
+      "textareas": 1,
+      "total": 44,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "image-viewer",
+      "buttons": 26,
+      "selects": 0,
+      "inputs": 2,
+      "textareas": 0,
+      "total": 28,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "notes",
+      "buttons": 23,
+      "selects": 1,
+      "inputs": 2,
+      "textareas": 1,
+      "total": 27,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "media-player",
+      "buttons": 24,
+      "selects": 1,
+      "inputs": 4,
+      "textareas": 0,
+      "total": 29,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "system-monitor",
+      "buttons": 10,
+      "selects": 2,
+      "inputs": 2,
+      "textareas": 0,
+      "total": 14,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "neural-photoshop",
+      "buttons": 44,
+      "selects": 3,
+      "inputs": 11,
+      "textareas": 0,
+      "total": 58,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "cinema",
+      "buttons": 16,
+      "selects": 0,
+      "inputs": 2,
+      "textareas": 0,
+      "total": 18,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "strudel",
+      "buttons": 14,
+      "selects": 0,
+      "inputs": 1,
+      "textareas": 0,
+      "total": 15,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "strudel-ai-daw",
+      "buttons": 49,
+      "selects": 5,
+      "inputs": 11,
+      "textareas": 3,
+      "total": 68,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "music-studio",
+      "buttons": 21,
+      "selects": 0,
+      "inputs": 1,
+      "textareas": 0,
+      "total": 22,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "p2p-chat",
+      "buttons": 10,
+      "selects": 0,
+      "inputs": 0,
+      "textareas": 1,
+      "total": 11,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "datasets-browser",
+      "buttons": 6,
+      "selects": 2,
+      "inputs": 0,
+      "textareas": 0,
+      "total": 8,
+      "class": "generated descriptor surface (see surface table)",
+      "note": "Covered by the surface table below; census row kept for arithmetic completeness."
+    },
+    {
+      "app_id": "accelerate-panel",
+      "buttons": 5,
+      "selects": 0,
+      "inputs": 0,
+      "textareas": 0,
+      "total": 5,
+      "class": "generated descriptor surface (see surface table)",
+      "note": "Covered by the surface table below; census row kept for arithmetic completeness."
+    },
+    {
+      "app_id": "idl-explorer",
+      "buttons": 4,
+      "selects": 0,
+      "inputs": 0,
+      "textareas": 0,
+      "total": 4,
+      "class": "generated descriptor surface (see surface table)",
+      "note": "Covered by the surface table below; census row kept for arithmetic completeness."
+    },
+    {
+      "app_id": "glasses-preview",
+      "buttons": 7,
+      "selects": 0,
+      "inputs": 0,
+      "textareas": 0,
+      "total": 7,
+      "class": "generated descriptor surface (see surface table)",
+      "note": "Covered by the surface table below; census row kept for arithmetic completeness."
+    },
+    {
+      "app_id": "orb-auto-ui",
+      "buttons": 5,
+      "selects": 0,
+      "inputs": 0,
+      "textareas": 0,
+      "total": 5,
+      "class": "generated descriptor surface (see surface table)",
+      "note": "Covered by the surface table below; census row kept for arithmetic completeness."
+    },
+    {
+      "app_id": "mcp-plus-plus",
+      "buttons": 19,
+      "selects": 2,
+      "inputs": 3,
+      "textareas": 3,
+      "total": 27,
+      "class": "tool_backed — backend-connected via mediated live-tool gateway panel (P15)",
+      "note": "Static controls are the app’s own local features; the runtime-injected panel (tool select, transport select, execute/dry-run/replay) executed real mediated invocations for this app in P15."
+    },
+    {
+      "app_id": "agent-supervisor",
+      "buttons": 16,
+      "selects": 0,
+      "inputs": 4,
+      "textareas": 2,
+      "total": 22,
+      "class": "console — capability-mapped (see supervisor capability table)",
+      "note": "Static census covers header actions, receipt-op controls and the 8 VDA-G054 workflow buttons (fixed by audit3 fix 4); row-selection controls are rendered per live snapshot item and feed the capability invocations."
+    }
+  ],
+  "surfaces": [
+    {
+      "surface": "datasets-browser",
+      "controls": 8,
+      "backend_connected": 6,
+      "declared_local": 2,
+      "fixed": 8,
+      "typed": 0,
+      "detail": "Search→semantic_search, Provenance→record_provenance (confirmed), Prepare→index (confirmed), Progress→sync_status; schema/split selects parameterize semantic_search. Apply Filters = local staging; Recover Error = local pre-transport validation."
+    },
+    {
+      "surface": "accelerate-panel",
+      "controls": 5,
+      "backend_connected": 4,
+      "declared_local": 0,
+      "fixed": 5,
+      "typed": 1,
+      "detail": "Run Inference→run_inference_job+job_status, Artifacts→list_models, Hardware→hardware_profile, Recover→telemetry. Cancel: no descriptor operation exists — typed disposition (reports real job_status when a job exists)."
+    },
+    {
+      "surface": "idl-explorer",
+      "controls": 6,
+      "backend_connected": 3,
+      "declared_local": 3,
+      "fixed": 0,
+      "typed": 0,
+      "detail": "Run Fixture→invokeDescriptorOperation(ipfs_datasets_py.browse); descriptor/operation selects parameterize it. Invalid Input = genuine client-side schema validation; drilldown/badges = local display. Verified OK pre-audit."
+    },
+    {
+      "surface": "orb-auto-ui",
+      "controls": 8,
+      "backend_connected": 3,
+      "declared_local": 5,
+      "fixed": 0,
+      "typed": 0,
+      "detail": "Confirm→invokeDescriptorOperation(selected op); descriptor/operation selects parameterize it. Remainder operate on real registry data / local validation / local render. Verified OK pre-audit."
+    },
+    {
+      "surface": "glasses-preview",
+      "controls": 7,
+      "backend_connected": 0,
+      "declared_local": 7,
+      "fixed": 0,
+      "typed": 0,
+      "detail": "Declared browser_local; canned replays match the disposition. Verified OK pre-audit."
+    },
+    {
+      "surface": "agent-supervisor VDA-G054 section (subset of the console census row)",
+      "controls": 8,
+      "backend_connected": 0,
+      "declared_local": 8,
+      "fixed": 8,
+      "typed": 0,
+      "detail": "The 8 workflow-proof buttons had no handlers and the section rendered SAMPLE refs in live mode; fix 4 wires them to real pane navigation and renders refs only from the active snapshot."
+    }
+  ],
+  "surface_fixed_total": 21,
+  "supervisor_capabilities": [
+    {
+      "capability_id": "supervisor.health.read",
+      "owner": "ipfs_accelerate_py",
+      "disposition": "executes",
+      "route": "desktop-client inspectAll across the three mediated services"
+    },
+    {
+      "capability_id": "supervisor.queue.read",
+      "owner": "ipfs_accelerate_py",
+      "disposition": "executes",
+      "route": "Profile G mcp++/tasks/list"
+    },
+    {
+      "capability_id": "supervisor.goals.read",
+      "owner": "ipfs_accelerate_py",
+      "disposition": "executes",
+      "route": "Profile G mcp++/goals/list"
+    },
+    {
+      "capability_id": "supervisor.subgoals.read",
+      "owner": "ipfs_accelerate_py",
+      "disposition": "executes",
+      "route": "Profile G mcp++/goals/list"
+    },
+    {
+      "capability_id": "supervisor.receipts.read",
+      "owner": "ipfs_kit_py",
+      "disposition": "executes",
+      "route": "Profile G tasks/list + per-task schedule status"
+    },
+    {
+      "capability_id": "supervisor.logs.read",
+      "owner": "ipfs_accelerate_py",
+      "disposition": "executes — audit3 fix 3 (R-d)",
+      "route": "accelerate adapter mcp++/dag/history backed by its real EventDag; events normalized to log entries"
+    },
+    {
+      "capability_id": "supervisor.receipts.persist",
+      "owner": "ipfs_kit_py",
+      "disposition": "executes — audit3 fix 3 (R-c)",
+      "route": "kit POST /mcp/artifacts/put; confirmation_token-gated; gateway computes the canonical CIDv1-raw+sha2-256 over the receipt bytes"
+    },
+    {
+      "capability_id": "supervisor.content.retrieve",
+      "owner": "ipfs_kit_py",
+      "disposition": "executes — audit3 fix 3 (R-c)",
+      "route": "kit GET /mcp/artifacts/<cid>"
+    },
+    {
+      "capability_id": "supervisor.event-dag.checkpoint",
+      "owner": "ipfs_kit_py",
+      "disposition": "executes — audit3 fix 3 (R-c)",
+      "route": "kit POST /mcp/dag/append; confirmation_token-gated"
+    },
+    {
+      "capability_id": "supervisor.prompt-steering.request — dry run",
+      "owner": "ipfs_accelerate_py",
+      "disposition": "local preview — audit3 fix 2 (R-b)",
+      "route": "designed local no-mutation policy preview; no backend steering route exists"
+    },
+    {
+      "capability_id": "supervisor.prompt-steering.request — confirmed",
+      "owner": "ipfs_accelerate_py",
+      "disposition": "typed-unavailable",
+      "route": "Supervisor.steer exists in the accelerate facade; NO MCP adapter route serves it — genuine backend gap, never simulated"
+    },
+    {
+      "capability_id": "supervisor.task-control.request",
+      "owner": "ipfs_accelerate_py",
+      "disposition": "typed-unavailable",
+      "route": "no gateway route exists for governed task dispatch"
+    },
+    {
+      "capability_id": "supervisor.taskboard.links.read",
+      "owner": "ipfs_datasets_py",
+      "disposition": "typed-unavailable",
+      "route": "zero implementations in ipfs_datasets_py (verified by search)"
+    },
+    {
+      "capability_id": "supervisor.run-history.search",
+      "owner": "ipfs_datasets_py",
+      "disposition": "typed-unavailable",
+      "route": "zero implementations in ipfs_datasets_py (verified by search)"
+    },
+    {
+      "capability_id": "supervisor.policy.assist",
+      "owner": "ipfs_datasets_py",
+      "disposition": "typed-unavailable",
+      "route": "zero implementations in ipfs_datasets_py (verified by search)"
+    },
+    {
+      "capability_id": "supervisor.semantic-goal.assist",
+      "owner": "ipfs_datasets_py",
+      "disposition": "typed-unavailable",
+      "route": "zero implementations in ipfs_datasets_py (verified by search)"
+    }
+  ],
+  "capability_totals": {
+    "executes": 9,
+    "local_preview": 1,
+    "typed_unavailable": 6
+  }
+}

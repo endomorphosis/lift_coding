@@ -245,6 +245,34 @@ Bring-up is idempotent and preserved at `fv_state/bring-up.sh`. Program-state ca
   **Verdict: PASS (contract map B4); evidence
   `fv_state/p2p-session-evidence.json`.**
 
+### F-14 — Interaction coverage: every GUI interaction traces to a backend feature or a typed disposition (audit3, 2026-10-14)
+- **Intended:** every user interaction in the GUI apps connects to some
+  feature of the ORB/IDL of the MCP++ interface to one of the three backend
+  services — especially the ipfs_accelerate_py agent supervisor — or carries
+  an honest declared-local/external or typed disposition; no canned surface
+  may present fabricated results as live.
+- **Observed:** full control census (45 apps, 1,401 static controls) and a
+  per-app trace table (`fv_state/audit3/trace-table.json`, `TRACE_TABLE.md`).
+  Supervisor console: 9 of 15 capabilities execute live (the four audit3
+  fix-3 mappings — logs, receipt persist/retrieve, DAG checkpoint — proved
+  by a full gateway round-trip: persist `denied` without confirmation,
+  then persisted/verified/retrieved under CID
+  `bafkreidjbmeouqe42mu3uioynseoqgdtfjzrs3yiqv743jcxd56ftvpkw4` (helia),
+  checkpoint event `bafkreicbw5f2hfeflzmtksufkqfzfwxhl6i25qyiu7ui2ujhwzm7a6trwy`);
+  steering dry run's local preview restored (confirmed steering stays
+  typed — no adapter route exists, contract map B10); the settled
+  console's only errors are the four capabilities with no backend feature
+  (B8), and live mode renders zero SAMPLE fixtures (R6). The console's 8
+  formerly-dead VDA-G054 buttons now navigate to the real panes (R8).
+  datasets-browser and accelerate-panel — formerly canned despite being
+  tool_backed — now invoke real descriptor operations and render the
+  returned envelopes; every fabricated CID/receipt and the fake WebGPU
+  completion claim are gone (R9, R10; accelerate Cancel is typed — the
+  descriptor exposes no cancellation operation).
+  **Verdict: PASS with typed exceptions (contract map P16; R6–R10 fixed;
+  B8/B9/B10 typed).** Screenshots `fv-14…fv-17`; evidence
+  `fv_state/audit3/`.
+
 ## Per-app results (45 canonical + 3 aliases)
 
 Generated from `fv_state/drive-apps.jsonl` (launch/focus/close sweep) joined with
@@ -323,3 +351,7 @@ Notes on individual rows:
 | `fv-08-supervisor-confirm.png` | Unconfirmed submit → policy denial |
 | `fv-09-supervisor-dryrun.png` | Confirmed dry-run: normalized plan + receipt |
 | `fv-10-mcp-control-invoke.png` | MCP Control after the executed mediated invocation |
+| `fv-14-supervisor-console-audit3.png` | Agent Supervisor console, audit3 cold-stack drive (no SAMPLE leakage; G054 navigation live) |
+| `fv-15-datasets-browser-audit3.png` | datasets-browser after invoking all six operations (real gateway envelopes; no canned CIDs/receipts) |
+| `fv-16-accelerate-panel-audit3.png` | accelerate-panel after invoking all five operations (real envelopes; no fake WebGPU claim) |
+| `fv-17-supervisor-console-audit3-warm.png` | Agent Supervisor console settled on the warm stack: health available, error set = the four typed capabilities |

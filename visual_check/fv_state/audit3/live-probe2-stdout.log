@@ -1,0 +1,92 @@
+{
+  "started_at": "2026-10-14T08:25:32.631Z",
+  "console_errors": [
+    "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+  ],
+  "refresh_attempts": [
+    {
+      "attempt": 0,
+      "errorCaps": [
+        "supervisor.taskboard.links.read",
+        "supervisor.receipts.read",
+        "supervisor.run-history.search",
+        "supervisor.policy.assist",
+        "supervisor.semantic-goal.assist"
+      ]
+    }
+  ],
+  "console": {
+    "status": "empty",
+    "transportMode": "degraded",
+    "errorCaps": [
+      "supervisor.taskboard.links.read",
+      "supervisor.receipts.read",
+      "supervisor.run-history.search",
+      "supervisor.policy.assist",
+      "supervisor.semantic-goal.assist"
+    ],
+    "errorReasons": [
+      "supervisor.taskboard.links.read:capability_unavailable",
+      "supervisor.receipts.read:server_unavailable",
+      "supervisor.run-history.search:capability_unavailable",
+      "supervisor.policy.assist:capability_unavailable",
+      "supervisor.semantic-goal.assist:capability_unavailable"
+    ],
+    "healthStatus": "available",
+    "backends": [
+      "ipfs_kit_py:available",
+      "ipfs_datasets_py:available",
+      "ipfs_accelerate_py:available"
+    ],
+    "queue": 0,
+    "goals": 0,
+    "receipts": 0,
+    "taskboardLinks": 0,
+    "logs": 0,
+    "runHistory": 0,
+    "firstQueue": null,
+    "firstReceipt": null
+  },
+  "console_sample_leak": {
+    "hasSampleCid": false,
+    "hasSampleReceipt": false
+  },
+  "gateway_roundtrip": {
+    "persist_denied_without_confirmation": {
+      "state": "denied",
+      "reason": "confirmation_required"
+    },
+    "persisted": {
+      "state": "available",
+      "reason": null,
+      "cid": "bafkreidjbmeouqe42mu3uioynseoqgdtfjzrs3yiqv743jcxd56ftvpkw4",
+      "backend": "helia",
+      "verified": true
+    },
+    "retrieved": {
+      "state": "available",
+      "cid": "bafkreidjbmeouqe42mu3uioynseoqgdtfjzrs3yiqv743jcxd56ftvpkw4",
+      "verified": true,
+      "backend": "helia",
+      "content_bytes": 206
+    },
+    "checkpoint": {
+      "state": "available",
+      "reason": null,
+      "event_cid": "bafkreicbw5f2hfeflzmtksufkqfzfwxhl6i25qyiu7ui2ujhwzm7a6trwy",
+      "receipt_id": "rcpt-checkpoint-rcpt-audit3-live-2"
+    },
+    "logs": {
+      "state": "available",
+      "reason": null,
+      "count": 0
+    }
+  },
+  "steering": {
+    "skipped": "live snapshot carries no queue/goal target on this stack (Profile G state is empty); unit check check_fix2.mjs covers the path"
+  },
+  "receipt_ops_ui": {
+    "skipped": "no live receipts in snapshot; gateway round-trip above covers the same invokeCapability path"
+  },
+  "finished_at": "2026-10-14T08:26:09.150Z"
+}
