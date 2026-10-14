@@ -38,15 +38,40 @@ closure. The [proof-context guide](https://github.com/endomorphosis/ipfs_acceler
 and [improvement plan](https://github.com/endomorphosis/ipfs_accelerate_py/blob/cb104896f55a28352feb8cd35c4b9991144c933a/docs/agent_supervisor/reversible_codebase_views_plan.md)
 now distinguish this closed host regression from remaining deployed handoffs.
 
-Parent publication starts at `67778aeb76dcac7ae19671643255c5b871b2e879`.
-Only the accelerator pin advances to `cb104896f55a28352feb8cd35c4b9991144c933a`. Datasets
+The original qualified parent stage starts at `67778aeb76dcac7ae19671643255c5b871b2e879`
+and ends at `52d841321acf2369d8c5fa33fd0fb4ec7717d93c`.
+In that stage only the accelerator pin advances to `cb104896f55a28352feb8cd35c4b9991144c933a`. Datasets
 `b1fd77597867ad31f1687edc8bff090caf3d3b7d` and kit
 `40c98c71b95be750509ffdb21e7e5494d91b4e79` remain pinned. Actual datasets
 execution used `a0f60d42f836571a0023515e92dfb0e5724f0d79`; all 51 listed
 objects match the retained parent pin. The [compatibility record](../../artifacts/router-signed-scope-closing-publication-20261014/fresh-main-compatibility.json),
 [parent checks](../../artifacts/router-signed-scope-closing-publication-20261014/parent-checks.json)
 and [parent manifest](../../artifacts/router-signed-scope-closing-publication-20261014/manifest.json)
-retain exact Git/source/document custody without rerunning tests.
+retain that stage's exact Git/source/document custody without rerunning tests.
+
+The first parent push encountered concurrent main progress. Merge
+`c507236ed16298543f98b8b13d8c6349fb6e075a` preserves both the qualified stage
+and incoming parent `012ae8b4af4184784688d694c076572ca1db9b85`, whose accelerator
+pin already equals the published fix. Its datasets pin advances to
+`eb18ab0d24557de46d9bd804e8da69d41049874f`; kit remains unchanged. Six of the
+51 listed datasets sources differ from the historical execution: semantic-index
+`pytest_analysis`, `python_analysis`, `scanner`, `snapshot`, `symbol_graph`
+and semantic-state `models`. The remaining 45 datasets bindings and all 217
+accelerator bindings match the earlier qualification.
+
+The [supplemental datasets run](../../artifacts/router-signed-scope-closing-publication-20261014/dependency-qualification-01/commands.json)
+executed the same eight complete suites against these exact new datasets
+sources: **145 distinct tests passed, including all 18 new cases**, with zero
+failures, errors or skips in 490.047 seconds. All 268 listed source bindings,
+execution HEADs and indexes stayed fixed. The raw collector status remains
+`fail` because accelerator and datasets shared reference inventories changed;
+the record does not identify the writers. The [supplemental merge review](../../artifacts/router-signed-scope-closing-publication-20261014/parent-merge-review.json)
+independently checks the raw outcomes, unchanged HEADs/indexes, exact source
+objects, six source snapshots, both merge parents and all incoming tree objects.
+Its narrowly scoped acceptance covers the reference-only guard failure and
+preserves every original publication artifact byte. It does not rewrite the
+raw failure or extend the historical receipts to the new datasets pin. Test
+counts are not aggregated, and no broader datasets feature coverage is claimed.
 
 Git, signatures, complete signed inventories, native owners, compiled capsules,
 linked allocation and capsule paging are real. Combined regression cases author
