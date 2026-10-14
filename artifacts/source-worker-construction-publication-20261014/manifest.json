@@ -1,0 +1,43 @@
+{
+  "accelerator_publication": "bbcc1350141120b454a9d5e7648b48cf315047c9",
+  "child_manifest": {
+    "bytes": 11551,
+    "path": "docs/agent_supervisor/evidence/source-worker-construction-20261014/manifest.json",
+    "sha256": "61098784f769dbb00fc62f60302023139f22691b09404563933dd8340542785b"
+  },
+  "files": [
+    {
+      "bytes": 7328,
+      "path": "implementation_plan/docs/129-supervisor-source-worker-construction-2026-10-14.md",
+      "sha256": "6ead9c5bc50d324ba97edd4c649024ab8b66bc3a2ac17fbcbaee836bf5455b29"
+    },
+    {
+      "bytes": 23658,
+      "path": "artifacts/source-worker-construction-publication-20261014/child-ci-observation.json",
+      "sha256": "9341f9bcb3bb67bc4e9cdf7e8a2fb260d61ff5244ab3fe3c586a0090a6b4d236"
+    },
+    {
+      "bytes": 5193,
+      "path": "artifacts/source-worker-construction-publication-20261014/observe_hosted_ci.py",
+      "sha256": "dca05ad36705548c9c31bf053a418514696b372a7487077f4e957da97bb52c44"
+    },
+    {
+      "bytes": 34283,
+      "path": "artifacts/source-worker-construction-publication-20261014/publication_checker.py",
+      "sha256": "d28d1b53aa56736119fc968ea2ea6bd05a9b24294a6fa0f4afe899979778c952"
+    },
+    {
+      "bytes": 8484,
+      "path": "artifacts/source-worker-construction-publication-20261014/parent-checks.json",
+      "sha256": "6a025b1407a07007f141844099b5589d472966e11ff923e9cad454a44dc19c45"
+    }
+  ],
+  "initial_parent_research_base": "53c06431d0ca7e57fdf74a67e21c6b61530f5042",
+  "manifest_self_excluded": true,
+  "parent_base": "53c06431d0ca7e57fdf74a67e21c6b61530f5042",
+  "preserved_parent_gitlinks": {
+    "external/ipfs_datasets": "4b50ae4aac65da9166bd3b24608f32ba7e9fb23d",
+    "external/ipfs_kit": "40c98c71b95be750509ffdb21e7e5494d91b4e79"
+  },
+  "schema": "source-worker-construction-parent-manifest@1"
+}
