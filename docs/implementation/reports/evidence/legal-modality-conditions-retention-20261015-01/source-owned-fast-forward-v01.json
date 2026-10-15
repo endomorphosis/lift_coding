@@ -1,0 +1,33 @@
+{
+  "added_upstream_paths": [
+    "docs/autoencoders/paired_span_schema_migration.md",
+    "ipfs_datasets_py/logic/autoformal/paired_span_migration.py",
+    "scripts/ops/legal_ir/migrate_legacy_paired_census.py",
+    "tests/unit/logic/test_paired_span_migration.py"
+  ],
+  "all_prior_entries_preserved": true,
+  "canonical_git_commands": 0,
+  "new_entries": 32227,
+  "new_head": "d0d44b3e0f7c2ba804b0d9115f7a1efd2ad926c3",
+  "old_entries": 32223,
+  "old_head": "f4a823231ad52c9252504810a1b00ed4738346b6",
+  "schema": "modality-conditions-retention-owned-source-fast-forward/v1",
+  "staged_F18_work_preserved": true,
+  "staged_paths": [
+    "docs/autoencoders/inference_and_qualification.md",
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-action-publish-invocation-v01.json",
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-chunk01-reconciliation-actual-independent-review-v01.json",
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-publish-TLS-fixed-byte-classification-v01.json",
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/modality-conditions-retention-result-independent-review-v01.json",
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/next-experiment-proposal-v01.json",
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/postfreeze-conditions-error-observation-v01.json",
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/public-result-summary-v01.json",
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/release-manifest-v01.json",
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/root-result-joins-and-summary-independent-review-v02.json",
+    "docs/autoformalization/legal-modality-conditions-retention-20261015.md",
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_modality_conditions_retention.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_modality_conditions_retention_contracts.py"
+  ],
+  "training_source_intake_remains_exact_historical_f4a": true,
+  "upstream_independent_review": "upstream-source-intake-independent-review-v01.json"
+}
