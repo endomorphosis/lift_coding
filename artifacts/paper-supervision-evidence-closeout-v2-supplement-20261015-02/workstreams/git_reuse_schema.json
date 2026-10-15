@@ -1,0 +1,178 @@
+[
+  {
+    "source": {
+      "repository": "/home/barberb/lift_coding",
+      "commit": "d0714ecfae25d4ceca1f1c7044a8f542e64f5515",
+      "path": "papers/completion/neurosymbolic_supervision/qualification/reuse_analysis.json",
+      "bytes": 3924,
+      "sha256": "ca0907c1d76def17b6274187a7ecec45c8a5324de79c82b8f93dc4ff82012f22",
+      "access_status": "git_blob_read",
+      "role": "historical_reuse_analysis",
+      "signature_verification": "not_performed",
+      "observed_at": "2026-10-15T10:54:34.409642+00:00"
+    },
+    "scalar_fields": {
+      "final_admission_enabled": false,
+      "ns016_pilot_or_final_credit": false,
+      "reuse_admitted": false
+    },
+    "structures": {
+      "capability": {
+        "type": "dict",
+        "length": 5
+      },
+      "historical_ns011": {
+        "type": "dict",
+        "length": 7
+      },
+      "independence": {
+        "type": "dict",
+        "length": 4
+      },
+      "ns027_cohort": {
+        "type": "dict",
+        "length": 7
+      },
+      "paper_claim": {
+        "type": "dict",
+        "length": 10
+      },
+      "source_hashes": {
+        "type": "dict",
+        "length": 7
+      },
+      "useful_positive": {
+        "type": "dict",
+        "length": 6
+      }
+    }
+  },
+  {
+    "source": {
+      "repository": "/home/barberb/lift_coding",
+      "commit": "74c50e431a45f8af5e2b0a78d89ed196bc44dfd2",
+      "path": "papers/completion/neurosymbolic_supervision/qualification/reuse_analysis.json",
+      "bytes": 3327,
+      "sha256": "91ac667d84f27791288c5616c636d6e9e630e732c1425f3d64be776132fa9b3f",
+      "access_status": "git_blob_read",
+      "role": "historical_reuse_analysis",
+      "signature_verification": "not_performed",
+      "observed_at": "2026-10-15T10:54:34.413970+00:00"
+    },
+    "scalar_fields": {
+      "final_admission_enabled": false,
+      "ns016_pilot_or_final_credit": false,
+      "reuse_admitted": false
+    },
+    "structures": {
+      "capability": {
+        "type": "dict",
+        "length": 5
+      },
+      "historical_ns011": {
+        "type": "dict",
+        "length": 7
+      },
+      "independence": {
+        "type": "dict",
+        "length": 4
+      },
+      "ns027_cohort": {
+        "type": "dict",
+        "length": 6
+      },
+      "paper_claim": {
+        "type": "dict",
+        "length": 10
+      },
+      "source_hashes": {
+        "type": "dict",
+        "length": 7
+      },
+      "useful_positive": {
+        "type": "dict",
+        "length": 6
+      }
+    }
+  },
+  {
+    "source": {
+      "repository": "/home/barberb/lift_coding",
+      "commit": "6765f4a62046613df119e085e84277feac5b8873",
+      "path": "papers/completion/neurosymbolic_supervision/qualification/reuse_analysis.json",
+      "bytes": 16118,
+      "sha256": "8423c4fc2b7f269de693544ccf275a7d6f2baa71710d841991c0634428c2a066",
+      "access_status": "git_blob_read",
+      "role": "historical_reuse_analysis",
+      "signature_verification": "not_performed",
+      "observed_at": "2026-10-15T10:54:34.418098+00:00"
+    },
+    "scalar_fields": {
+      "each_required_mutation_has_invalidation_or_fallback": true,
+      "positive_reuse_witness_count": 5,
+      "qualification_not_live_ad": true
+    },
+    "structures": {
+      "all_attempted_reuse_cases": {
+        "type": "dict",
+        "length": 4
+      },
+      "baseline_admissions": {
+        "type": "dict",
+        "length": 4
+      },
+      "baseline_cold": {
+        "type": "dict",
+        "length": 5
+      },
+      "capability": {
+        "type": "dict",
+        "length": 6
+      },
+      "consumer_gitlinks": {
+        "type": "dict",
+        "length": 3
+      },
+      "excluded_profiles": {
+        "type": "dict",
+        "length": 1
+      },
+      "genuine_unchanged_positive_reuse_witnesses": {
+        "type": "list",
+        "length": 5
+      },
+      "independence": {
+        "type": "dict",
+        "length": 4
+      },
+      "missing_required_mutation_kinds": {
+        "type": "list",
+        "length": 0
+      },
+      "observed_mutation_kinds": {
+        "type": "list",
+        "length": 15
+      },
+      "paper_claim": {
+        "type": "dict",
+        "length": 7
+      },
+      "profiles": {
+        "type": "dict",
+        "length": 2
+      },
+      "required_mutation_kinds": {
+        "type": "list",
+        "length": 15
+      },
+      "scoring_classes": {
+        "type": "dict",
+        "length": 4
+      },
+      "source_hashes": {
+        "type": "dict",
+        "length": 11
+      }
+    }
+  }
+]

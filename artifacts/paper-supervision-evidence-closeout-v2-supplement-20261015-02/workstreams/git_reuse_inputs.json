@@ -1,0 +1,42 @@
+{
+  "bounded_search_commits": [
+    "d0714ecfae25d4ceca1f1c7044a8f542e64f5515",
+    "74c50e431a45f8af5e2b0a78d89ed196bc44dfd2",
+    "6765f4a62046613df119e085e84277feac5b8873"
+  ],
+  "records": [
+    {
+      "repository": "/home/barberb/lift_coding",
+      "commit": "d0714ecfae25d4ceca1f1c7044a8f542e64f5515",
+      "path": "papers/completion/neurosymbolic_supervision/qualification/reuse_analysis.json",
+      "bytes": 3924,
+      "sha256": "ca0907c1d76def17b6274187a7ecec45c8a5324de79c82b8f93dc4ff82012f22",
+      "access_status": "git_blob_read",
+      "role": "historical_reuse_analysis",
+      "signature_verification": "not_performed",
+      "observed_at": "2026-10-15T10:54:34.409642+00:00"
+    },
+    {
+      "repository": "/home/barberb/lift_coding",
+      "commit": "74c50e431a45f8af5e2b0a78d89ed196bc44dfd2",
+      "path": "papers/completion/neurosymbolic_supervision/qualification/reuse_analysis.json",
+      "bytes": 3327,
+      "sha256": "91ac667d84f27791288c5616c636d6e9e630e732c1425f3d64be776132fa9b3f",
+      "access_status": "git_blob_read",
+      "role": "historical_reuse_analysis",
+      "signature_verification": "not_performed",
+      "observed_at": "2026-10-15T10:54:34.413970+00:00"
+    },
+    {
+      "repository": "/home/barberb/lift_coding",
+      "commit": "6765f4a62046613df119e085e84277feac5b8873",
+      "path": "papers/completion/neurosymbolic_supervision/qualification/reuse_analysis.json",
+      "bytes": 16118,
+      "sha256": "8423c4fc2b7f269de693544ccf275a7d6f2baa71710d841991c0634428c2a066",
+      "access_status": "git_blob_read",
+      "role": "historical_reuse_analysis",
+      "signature_verification": "not_performed",
+      "observed_at": "2026-10-15T10:54:34.418098+00:00"
+    }
+  ]
+}

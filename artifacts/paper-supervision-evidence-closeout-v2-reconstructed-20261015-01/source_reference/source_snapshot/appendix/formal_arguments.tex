@@ -1,0 +1,214 @@
+% Audited restatement of the conditional acceptance and reuse arguments (NS-023).
+% This fragment is for later manuscript integration (NS-022). It is not a
+% machine-checked proof, not a universal-Python theorem, and not a claim that
+% Algorithm~1 ran as a complete live loop.
+%
+% Compile context: the reconstructed body already loads amsmath/amssymb.
+% Do not treat this file as an independent experiment result.
+
+\section*{Conditional acceptance and reuse arguments (audited)}
+\label{sec:formal-arguments-ns023}
+
+The statements below restate Equation~2, the accepted-lineage sketch, the
+dependency-projection reuse obligation, the three acceptance questions, and
+Algorithm~1 with explicit scope, premises, and conclusions. Every sketch is
+\textbf{unmachine-checked}: the sealed validation profile has no usable
+\texttt{z3}, \texttt{lean}, \texttt{coqc}, or \texttt{cvc5}, and no independently
+checked proof artifact discharges these arguments. Implementation evidence
+supports only the named tested premises. External side-effect atomicity and
+universal dependency closure are not inferred. Unknown specifications stay
+visible.
+
+\subsection*{Statement FA-EQ2 (acceptance invariant)}
+\label{stmt:fa-eq2}
+
+\paragraph{Scope.}
+One publication of an accepted lineage root under a declared artifact policy.
+The statement is a design invariant for that publication operation. It is not a
+theorem that every current write path enforces the invariant, and it is not a
+claim about Git, remote stores, or physical effects outside the tested
+expected-parent compare-and-swap.
+
+\paragraph{Premises.}
+Let $s$ be the current accepted root, $s'$ a candidate successor, $a$ the
+requesting actor, and $q$ the required obligation set. Write $\mathrm{Publish}(s')$
+for the unique accepted-lineage publication of $s'$.
+
+\paragraph{Conclusion.}
+\begin{equation}
+\begin{aligned}
+\mathrm{Publish}(s')\Rightarrow{}&\mathrm{CurrentParent}(s)\land\mathrm{Authorized}(a,s)\\
+&\land\mathrm{Scoped}(a)\land\mathrm{CompleteManifest}(q,s')\\
+&\land\mathrm{EvidenceAdmitted}(q,s')\land\mathrm{CAS}(s,s').
+\end{aligned}
+\tag{2$'$}
+\end{equation}
+
+\paragraph{Argument (unmachine-checked).}
+If publication is defined to succeed only after those six gates, then any
+published $s'$ satisfies them. The converse is not claimed: a candidate that
+meets the gates may still lose compare-and-swap. Failed, stale, incomplete, or
+simulated attempts are not $\mathrm{Publish}$ successors.
+
+\paragraph{What the invariant does not establish.}
+Properties omitted by the checked policy; truth of unsupported or lossy
+translations; honesty of signed observations; atomicity of external side
+effects; global consensus; or universal enforcement by unexamined write paths.
+
+\subsection*{Statement FA-I31 (accepted-lineage induction)}
+\label{stmt:fa-i31}
+
+\paragraph{Scope.}
+Roots reachable \emph{solely} through accepted publication transitions of the
+operation in FA-EQ2, under a fixed statement profile $\Theta$ and policy
+predicate $P_{\Theta}$ over artifact manifests.
+
+\paragraph{Premises.}
+\begin{enumerate}
+\item \textbf{Initial-root policy.} The initial accepted root satisfies $P_{\Theta}$.
+\item \textbf{Exact input.} Required subject bytes and dependency references are
+verified before admission.
+\item \textbf{Complete manifest.} The requirement manifest is complete under an
+admitted completeness rule; membership of some units is not completeness.
+\item \textbf{Checker.} Each accepted evidence item satisfies its designated
+checker relation and evidence class.
+\item \textbf{Translation bound.} Lossy or unsupported translations cannot
+discharge source-level obligations.
+\item \textbf{Current parent.} Publication names the expected current parent.
+\item \textbf{Exclusive publication.} Compare-and-swap linearizes concurrent
+same-parent writers; losers are not successors.
+\item \textbf{Protected authority.} Policy and checker identities cannot change
+under ordinary worker authority.
+\end{enumerate}
+
+\paragraph{Conclusion.}
+Every root reachable solely through accepted publication transitions satisfies
+$P_{\Theta}$.
+
+\paragraph{Argument (unmachine-checked).}
+Induction on the number of successful publications. The base case is premise~1.
+For the inductive step, the publisher checks $P_{\Theta}$ on the exact candidate
+manifest and current parent before compare-and-swap linearization. Failed,
+stale, incomplete, or simulated attempts are excluded from the successor
+relation, so they are not inductive cases. The induction preserves only
+properties actually expressed by $P_{\Theta}$.
+
+\paragraph{Nonvacuity.}
+The successor relation is nonempty on the tested sealer: a complete current
+manifest can publish, while an empty or incomplete mandatory manifest cannot.
+Deny-all publication would make the invariant hold vacuously and is not a
+useful-progress witness.
+
+\subsection*{Statement FA-I32 (dependency-projected test reuse)}
+\label{stmt:fa-i32}
+
+\paragraph{Scope.}
+Transfer of a previous setup/call/teardown observation of test $t$ between
+states $s$ and $s'$ under a declared runtime/effect profile $\theta$. The
+statement is a proof \emph{obligation}, not a theorem of arbitrary pytest
+execution.
+
+\paragraph{Premises.}
+Let $\mathrm{Obs}_{\theta}(t,s)$ be the relevant observation. Suppose there exist
+a complete projection $\pi_D$ and a deterministic function $f_{\theta}$ such that
+\[
+\mathrm{Obs}_{\theta}(t,s)=f_{\theta}(\pi_D(s))
+\]
+on every state admitted by the reuse policy.
+
+\paragraph{Conclusion.}
+If $\pi_D(s)=\pi_D(s')$, then $\mathrm{Obs}_{\theta}(t,s)=\mathrm{Obs}_{\theta}(t,s')$.
+An admitted previous observation may transfer only inside that profile and those
+assumptions.
+
+\paragraph{Argument (unmachine-checked).}
+Immediate from functionality of $f_{\theta}$. The difficult premises are
+completeness and determinism of $\pi_D$. Equal digests of incomplete manifests
+do not satisfy $\pi_D$ completeness. Opaque, uncontrolled, or unknown fixture
+values, incomplete runtime traces, and teardown failures do not discharge the
+obligation; they require execution or fail closed. A cold full-run oracle and
+adversarial mutations can check an implementation; they do not prove universal
+dependency closure. No such independent cold-oracle campaign is recorded here.
+
+\subsection*{Statement FA-I33 (three acceptance questions)}
+\label{stmt:fa-i33}
+
+\paragraph{Scope.}
+Any candidate action that might be described as ``accepted.''
+
+\paragraph{Premises and conclusions (separate).}
+\begin{center}
+\begin{tabular}{@{}p{0.28\linewidth}p{0.66\linewidth}@{}}
+\toprule
+Question & What a positive answer establishes, and what it does not \\
+\midrule
+Behavioral claim &
+The candidate program or model satisfies its stated obligation under the
+declared checker, environment, and evidence class. This is not permission to
+act and not publication of a lineage root. \\
+Action permission &
+This actor may perform this action now under the bound lease, policy, scope,
+and roots. This is not behavioral correctness and not publication. \\
+Publication &
+This candidate and its evidence become the current accepted root. This is not,
+by itself, proof that omitted obligations hold or that external effects
+occurred exactly once. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Neither a proof of behavior nor a capability grant answers all three. Formalization
+fixes the statement; authorization binds actor, tool, arguments, resources,
+effects, scope, time, and roots; execution observations report what happened;
+publication chooses the accepted lineage.
+
+\subsection*{Statement FA-ALG1 (composed supervision loop)}
+\label{stmt:fa-alg1}
+
+\paragraph{Scope.}
+Algorithm~1 remains the intended composition: a control-flow specification,
+not a newly executed full-loop result. It is labeled \textbf{executed
+composition} only on the steps supported by the integrated guard-before-write
+witness. Passing isolated stop-path tests does
+not establish the complete loop.
+
+\paragraph{Intended algorithm.}
+Input: authorized query $q$, current source forest $F$, policy $P$, budget $B$.
+\begin{enumerate}
+\item Reconcile event, task, and artifact state; refresh $F$ and derive $G$, $O$.
+\item If cancelled or budget exhausted: return explicit non-success.
+\item If every current obligation is admitted: return goal-completion verification.
+\item Generate bounded task proposals; preview and separately admit ready work.
+\item If no task is admissible: return wait-or-review, not goal success.
+\item Claim the task; bind lease/fence, preimages, required context, and validation.
+\item Choose a deterministic, authorized residual-model, review, or unavailable route.
+\item If review or unavailable: record a blocked attempt; return to the event service.
+\item Produce and apply a candidate only through checked isolated execution.
+\item Rescan; derive $O_{\mathrm{new}}$ from authorized rules, not the worker's pass claim.
+\item Verify or reuse evidence; retain failed, unknown, and pending obligations.
+\item If the failure is refinable: record a new residual; return a bounded retry.
+\item If evidence is incomplete or unsafe: return defer-or-reject.
+\item Persist the manifest; recheck current bindings; compare-and-swap the expected parent.
+\item If publication conflicts: return reconcile, not completion.
+\item Record the accepted task transition and updated $F$, $G$, $O$; reevaluate at line~1.
+\item Propose procedure or policy learning separately; never self-promote.
+\end{enumerate}
+
+\paragraph{Executed composition (integrated witness only).}
+The integrated witness supports a frozen guard-before-write cycle:
+authorized pre-state and obligation; counterexample; admitted deterministic
+route; isolated patch application; independent tests; narrow cache reuse of an
+unchanged eligible receipt; complete-manifest publication; and rejection of
+invalid, incomplete, and simulated non-completion. Those steps correspond to
+intended lines 4, 7~(deterministic), 9, 11~(narrow reuse), 13, 14, and 16, plus
+the negative reading of line~17 (no worker self-promotion). They do \emph{not}
+execute the live event-service loop, residual production-model dispatch,
+budget-exhaustion composition, wait-or-review, procedure/policy learning, native
+proof, federation, or a matched A--D experiment.
+
+\paragraph{Trusted limitations retained with the algorithm.}
+Unknown or inconsistent specifications remain visible. Incomplete projections
+cannot silently authorize reuse. External exactly-once behavior outside the
+tested write-ahead-log / compare-and-swap / lifecycle boundary is not claimed.
+Optional native proving and world/procedure extensions are out of scope unless
+a later task supplies an eligible profile and consumed-result evidence.

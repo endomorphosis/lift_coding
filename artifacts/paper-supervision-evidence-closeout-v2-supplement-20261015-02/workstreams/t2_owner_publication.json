@@ -1,0 +1,49 @@
+{
+  "accepted_source_tree_includes_declared_outputs_reported": true,
+  "actual_owner_validation_results_recovered": false,
+  "artifact_sha256": "96ace2549f97deb8c7af22012000a8e02de99dd34875565b6a07e45112e5aea4",
+  "artifacts_manifest_statuses": [
+    "empty"
+  ],
+  "completion_evidence_digest": "baguqeeraq6xxzsrcmifix4lzxxcppxbfaih4enqtti4ebaucpi65o35kx2da",
+  "declared_outputs_outside_index_scope_count": 1,
+  "declared_validation_count": 1,
+  "declared_validation_count_is_execution_count": false,
+  "evidence_paths": [
+    "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/jobs/supervisor-full-fix-code-vulnerability/fix-code-vulnerability__z4cVfSR/agent/supervisor-result.json"
+  ],
+  "evidence_tier": "original_record",
+  "final_accepted_root_owner_receipt_recovered": false,
+  "goal_completion_authority": "unresolved",
+  "goal_contracts_evaluated": false,
+  "independently_reexecuted": false,
+  "live_freshness_verified_here": false,
+  "new_proof_or_action_authority": false,
+  "original_result_hash_matches_outer_receipt": true,
+  "original_verifier_reward": 1.0,
+  "owner_completion_attempt_id": "",
+  "owner_completion_claim_cid": "",
+  "owner_completion_fencing_token": 0,
+  "owner_completion_receipt_cid": "baguqeerap3g4c5dtwihpkxzfmsjma5zkiqbdkmszltnhugzncay6uueyetua",
+  "owner_state_location_leads": {
+    "lifecycle_dir": "/opt/ipfs-supervisor/state/benchmark/lifecycle",
+    "profile_dir": "/opt/ipfs-supervisor/state/benchmark/profile",
+    "repository": "/app"
+  },
+  "owner_validation_run_id": "",
+  "post_publication_semantic_root_cid": "baguqeeradeh76yrrw5e42xlzrpftbf7zcnlydbx4twmexkrkmfcsqhal63eq",
+  "post_publication_status": "refreshed",
+  "post_publication_world_snapshot_cid": "sha256:2e51c62e0a1c74e4bd49b9981a84d24b7d0626dc34944aa9bec999c9088a4d10",
+  "publication_observation": [
+    {
+      "completion_authority": false,
+      "status": "pending_native_stop",
+      "task_cid": "baguqeeratfi4f6iwvyfwyb42y2wgysecbmte6upxn33do4hcxb6bgc6df2ua"
+    }
+  ],
+  "run_id": "fix-code-vulnerability__z4cVfSR",
+  "signature_verification": "not_performed",
+  "standalone_supervisor_equals_outer_receipt": true,
+  "task_population_complete": false,
+  "task_status": "completed"
+}

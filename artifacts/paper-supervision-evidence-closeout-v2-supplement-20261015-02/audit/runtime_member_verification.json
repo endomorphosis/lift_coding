@@ -1,0 +1,37 @@
+{
+  "all_declared_file_bytes_verified": true,
+  "archive_byte_hash_verification": "audit/large_asset_verification.json",
+  "archive_has_only_declared_regular_files": true,
+  "archive_path": "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/runtime-campaign/runtime/runtime.tar.gz",
+  "archive_sha256_reported": "f89c7ace1f4387bcb020f223758609dac607c8e6258c208189bbd8dec2f652f8",
+  "compressed_bytes_read": 1349592874,
+  "declared_files": 27911,
+  "error": null,
+  "headers": 27911,
+  "inspection_seconds": 9.994409297127277,
+  "links_followed": false,
+  "manifest_path": "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/runtime-campaign/runtime/manifest.json",
+  "manifest_sha256": "54a00df868ea734a75db81bcc3dbf9d1d89b85b874afe63c1866a993c484dd1f",
+  "member_types": {
+    "file": 27911
+  },
+  "mismatches": [],
+  "missing_declared_files": [],
+  "no_extraction_or_execution": true,
+  "regular_member_bytes": 4113131392,
+  "runtime_consumption_or_full_import_closure_proven": false,
+  "schema": "retained-runtime-member-hash-audit@1",
+  "signature_verification": "not_performed",
+  "stable_during_read": true,
+  "undeclared_regular_files": [],
+  "verified_files": 27911,
+  "verified_roots": {
+    "codex-runtime": 3,
+    "datasets": 8653,
+    "extensions": 3,
+    "kit": 1299,
+    "models": 10,
+    "source": 2757,
+    "toolchains": 15186
+  }
+}

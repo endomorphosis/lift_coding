@@ -1,0 +1,423 @@
+{
+  "checks": [
+    {
+      "actual": 9,
+      "check": "T1 nine historical invoked",
+      "expected": 9,
+      "passed": true
+    },
+    {
+      "actual": 2523452,
+      "check": "T1 known subtotal, not project total",
+      "expected": 2523452,
+      "passed": true
+    },
+    {
+      "actual": 3,
+      "check": "T1 missing usage failures",
+      "expected": 3,
+      "passed": true
+    },
+    {
+      "actual": 282802,
+      "check": "fresh no-index independent identity",
+      "expected": 282802,
+      "passed": true
+    },
+    {
+      "actual": 1,
+      "check": "native control counted once",
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "actual": 720840,
+      "check": "fix-code-vulnerability__6Cahzwm",
+      "expected": 720840,
+      "passed": true
+    },
+    {
+      "actual": 445333,
+      "check": "fix-code-vulnerability__wox8jVM",
+      "expected": 445333,
+      "passed": true
+    },
+    {
+      "actual": 113883,
+      "check": "largest-eigenval__8vAYxJm",
+      "expected": 113883,
+      "passed": true
+    },
+    {
+      "actual": 358492,
+      "check": "largest-eigenval__beFUuMt",
+      "expected": 358492,
+      "passed": true
+    },
+    {
+      "actual": 333973,
+      "check": "largest-eigenval__ePRwqVj",
+      "expected": 333973,
+      "passed": true
+    },
+    {
+      "actual": 1310764,
+      "check": "Grok reported incomplete:largest-eigenval__WS7vi7k",
+      "expected": 1310764,
+      "passed": true
+    },
+    {
+      "actual": 1621661,
+      "check": "Grok reported incomplete:largest-eigenval__gB4UUzB",
+      "expected": 1621661,
+      "passed": true
+    },
+    {
+      "actual": 2452634,
+      "check": "Grok reported incomplete:largest-eigenval__kzYcAuM",
+      "expected": 2452634,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T1:fix-code-vulnerability__aw6yeSh",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T1:fix-code-vulnerability__8X8hXVw",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T1:fix-code-vulnerability__6VzktdR",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T1:fix-code-vulnerability__EVjYRri",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T1:fix-code-vulnerability__6Cahzwm",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T1:fix-code-vulnerability__wox8jVM",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T1:fix-code-vulnerability__X2KypAK",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T1:T1-retrieval-candidate",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T1:fix-code-vulnerability__aM5oJU5",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T1:fix-code-vulnerability__G9GPaZK",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T2-T4:codex_input_plus_output:fix-code-vulnerability__aAjF5Sy",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T2-T4:codex_input_plus_output:fix-code-vulnerability__aAjF5Sy",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T2-T4:codex_input_plus_output:fix-code-vulnerability__z4cVfSR",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T2-T4:codex_input_plus_output:fix-code-vulnerability__t5UzZxv",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T2-T4:codex_input_plus_output:fix-code-vulnerability__t5UzZxv",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T2-T4:codex_input_plus_output:fix-code-vulnerability__WAQeD5W",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T2-T4:codex_input_plus_output:fix-code-vulnerability__WAQeD5W",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T2-T4:codex_input_plus_output:fix-code-vulnerability__2f3LChX",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T2-T4:codex_input_plus_output:fix-code-vulnerability__2f3LChX",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T2-T4:fresh_score_equals_original_receipt_sum:None",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T2-T4:codex_input_plus_output:largest-eigenval__iieLP5S",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T2-T4:codex_input_plus_output:largest-eigenval__iieLP5S",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T2-T4:codex_input_plus_output:largest-eigenval__ePRwqVj",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T2-T4:codex_input_plus_output:largest-eigenval__ePRwqVj",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T2-T4:grok_disjoint_categories_sum:5fcf7cf9b9b74cb7b07064c4aa57392b",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T2-T4:grok_disjoint_categories_sum:58b4cd57abff48f2bad3827160949bd4",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T2-T4:grok_disjoint_categories_sum:82e692db03804cdab9e48388a5a7f187",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T2-T4:grok_disjoint_categories_sum:185a4d5aacf049d585361271328f4bff",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T2-T4:grok_disjoint_categories_sum:92433d5e52ac4ad6aee933817b1e02b8",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "T2-T4:grok_disjoint_categories_sum:d95ec5b2a439416aa591468296ebeeb2",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:requests-cold-v1_arm_total",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:requests-cold-v1_A_usage_schema",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:requests-cold-v1_B_usage_schema",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:requests-cold-v1_C_usage_schema",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:requests-cold-v1_D_usage_schema",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:requests-cold-v1_event_usage",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:requests-cold-v1_all_fail_trajectory",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:requests-cold-v2_arm_total",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:requests-cold-v2_A_usage_schema",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:requests-cold-v2_B_usage_schema",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:requests-cold-v2_C_usage_schema",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:requests-cold-v2_D_usage_schema",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:requests-cold-v2_event_usage",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:requests-cold-v2_all_fail_trajectory",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:reuse_case_count",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:reuse_positive_count",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:reuse_cases_cold_match",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:reuse_all_cases_match_prespecification",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:timing_pairs_count",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:timing_warm_reuses",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:timing_wall_totals",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:timing_net_saving_not_established",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:scorer_unique_vs_records",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:historical_report_denominator",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:routing_reduction",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "check": "historical:context_usage_schema",
+      "expected": true,
+      "passed": true
+    }
+  ],
+  "native_receipt_reconciliation": "audit/native_usage_reconciliation.json",
+  "passed": true,
+  "project_total_tokens": null,
+  "schema": "paper-evidence-arithmetic@1",
+  "scope": "Arithmetic/count/schema over retained projections; not authenticity, billing, causal effect or new execution"
+}

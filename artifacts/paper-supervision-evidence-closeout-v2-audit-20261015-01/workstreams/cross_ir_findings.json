@@ -1,0 +1,277 @@
+{
+  "claims": [
+    {
+      "claim": "Intent projection breadth does not establish learned understanding of full benchmark prompts or combined cross-domain proofs.",
+      "claim_id": "IR-01",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_datasets/docs/intent_logic_projections.md"
+      ],
+      "evidence_tier": "documentation_and_source",
+      "status": "supported_scope_limit"
+    },
+    {
+      "claim": "Retained Intent development holdouts are75/75authored and0/3weakpublic; zero-head0/78.",
+      "claim_id": "IR-02",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/intent-ir-roundtrip-20260929/training-03/training-receipt.json",
+        "/home/barberb/lift_coding/artifacts/intent-ir-roundtrip-20260929/training-03/manifest.json",
+        "/home/barberb/lift_coding/artifacts/intent-ir-roundtrip-20260929/training-03/evaluation-test.json",
+        "/home/barberb/lift_coding/artifacts/intent-ir-roundtrip-20260929/training-03/evaluation-test-zero-head.json"
+      ],
+      "evidence_tier": "original_record",
+      "status": "original_record_recovered"
+    },
+    {
+      "claim": "Current Codebase Source384 documentation records parent9/9holdouts and adaptedchild0/9; the child was not promoted.",
+      "claim_id": "IR-03",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_datasets/docs/autoencoders/codebase_source384.md"
+      ],
+      "evidence_tier": "report",
+      "status": "documentation_report_not_reexecuted"
+    },
+    {
+      "claim": "Full prompt/code/security/legal/UI counterexample/admission chain remains an author-specified design without a recovered single-trial joined trace.",
+      "claim_id": "IR-04",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/intent_autoencoder_advisor.py",
+        "/home/barberb/lift_coding/external/ipfs_datasets/docs/intent_logic_projections.md"
+      ],
+      "evidence_tier": "source_inspection",
+      "status": "not_established_within_scope"
+    }
+  ],
+  "implementation_rows": [
+    {
+      "caller": "prepare_intent_advice lines186-211",
+      "claim": "Calls datasets copy/extended/base preplanning according to explicit descriptor; independently validates sidecar while preserving original instruction and false authority flags.",
+      "domain": "IntentIR",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/intent_autoencoder_advisor.py"
+      ],
+      "evidence_tier": "source_inspection",
+      "independently_checked_result": false,
+      "remaining_gap": "No historical trial receipt joins this stage to a full cross-IR execution.",
+      "runtime_invocation_established": false,
+      "stage": "prompt_to_intent",
+      "status": "caller-connected",
+      "trial": "current_source_inspection_only"
+    },
+    {
+      "caller": "native Intent decoder plus bounded codebase candidate matcher",
+      "claim": "Source-bound nomination and candidate matching explicitly retain source_semantics_verified=false and no proof/execution/completion/mutation authority.",
+      "domain": "CodebaseIR",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/intent_codebase_matching.py"
+      ],
+      "evidence_tier": "source_inspection",
+      "independently_checked_result": false,
+      "remaining_gap": "No historical trial receipt joins this stage to a full cross-IR execution.",
+      "runtime_invocation_established": false,
+      "stage": "intent_to_codebase",
+      "status": "caller-connected",
+      "trial": "current_source_inspection_only"
+    },
+    {
+      "caller": "prepare_source384_context; validate_historical_source384_selection",
+      "claim": "Uses datasets captured-source/index/model lineage APIs; historical context explicitly has training_steps=0; current source is not a historical runtime pin.",
+      "domain": "CodebaseIR",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/source384_repository_context.py"
+      ],
+      "evidence_tier": "source_inspection",
+      "independently_checked_result": false,
+      "remaining_gap": "No historical trial receipt joins this stage to a full cross-IR execution.",
+      "runtime_invocation_established": false,
+      "stage": "source_to_codebase",
+      "status": "caller-connected",
+      "trial": "current_source_inspection_only"
+    },
+    {
+      "caller": "prepare_corpus; train_current_source384; infer_current_source384",
+      "claim": "Dedicated source-owner lineage supports explicit fitting and source-bound unchanged prediction checks; presence does not establish any benchmark adapted a model.",
+      "domain": "CodebaseIR",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/codebase_source_384.py"
+      ],
+      "evidence_tier": "source_inspection",
+      "independently_checked_result": false,
+      "remaining_gap": "No historical trial receipt joins this stage to a full cross-IR execution.",
+      "runtime_invocation_established": false,
+      "stage": "repository_adaptation",
+      "status": "caller-connected",
+      "trial": "current_source_inspection_only"
+    },
+    {
+      "caller": "prepare_security_advice lines193-219",
+      "claim": "Calls shared datasets infer_security_checkpoint and validate_security_inference; optional formalization candidates have no proof or edit authority.",
+      "domain": "SecurityIR",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/security_autoencoder_advisor.py"
+      ],
+      "evidence_tier": "source_inspection",
+      "independently_checked_result": false,
+      "remaining_gap": "No historical trial receipt joins this stage to a full cross-IR execution.",
+      "runtime_invocation_established": false,
+      "stage": "codebase_to_security",
+      "status": "caller-connected",
+      "trial": "current_source_inspection_only"
+    },
+    {
+      "caller": "compile_security_formalization_plan",
+      "claim": "Transforms source-bound candidate report into explicit planning tasks; completion_authority and proof_authority remain false.",
+      "domain": "SecurityIR",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/security_formalization_plan.py"
+      ],
+      "evidence_tier": "source_inspection",
+      "independently_checked_result": false,
+      "remaining_gap": "No historical trial receipt joins this stage to a full cross-IR execution.",
+      "runtime_invocation_established": false,
+      "stage": "security_candidates_to_plan",
+      "status": "caller-connected",
+      "trial": "current_source_inspection_only"
+    },
+    {
+      "caller": "LegalApplicabilityQuery; LegalConstraint; CompiledLegalProofObligation",
+      "claim": "Source-bound norm/applicability adapter distinguishes modalities and leaves action admission to a later exact SecurityIR authorization decision.",
+      "domain": "LegalIR",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/legal_constraint_adapter.py"
+      ],
+      "evidence_tier": "source_inspection",
+      "independently_checked_result": false,
+      "remaining_gap": "Actual applicable norm authority/jurisdiction/time/exception provenance and benchmark consumption are unrecovered.",
+      "runtime_invocation_established": false,
+      "stage": "codebase_to_legal",
+      "status": "source-present",
+      "trial": "current_source_inspection_only"
+    },
+    {
+      "caller": "buildDeonticUIManifest -> buildConstrainedInterfaceModel / optional checkPolicyConsistencyRemote",
+      "claim": "Current source maps policy and interface descriptors into UI state; no benchmark host or consent record is joined.",
+      "domain": "UI/UX IR",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/swissknife/src/services/apps/mcp-deontic-ui-manifest.ts"
+      ],
+      "evidence_tier": "source_inspection",
+      "independently_checked_result": false,
+      "remaining_gap": "No historical trial receipt joins this stage to a full cross-IR execution.",
+      "runtime_invocation_established": false,
+      "stage": "codebase_to_uiux",
+      "status": "caller-connected",
+      "trial": "current_source_inspection_only"
+    },
+    {
+      "caller": "host-issued admission token projection client",
+      "claim": "Browser allow/consent/dry_run cannot construct host authority; client requires sealed host admission.",
+      "domain": "MCP/MCP++",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/swissknife/src/services/mcp/admissionTokenClient.ts"
+      ],
+      "evidence_tier": "source_inspection",
+      "independently_checked_result": false,
+      "remaining_gap": "Actual benchmark host loader, exact actor/tool/argument admission, lease/fence and observed effect receipts are unavailable.",
+      "runtime_invocation_established": false,
+      "stage": "host_action_admission",
+      "status": "source-present",
+      "trial": "current_source_inspection_only"
+    },
+    {
+      "caller": "ExactStage policy preimage/CID evaluation",
+      "claim": "Checks exact supported policy documents and preserves unknown/residual policy outcomes.",
+      "domain": "MCP++",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/Mcp-Plus-Plus/adapters/system_one/src/mcp_pp_system_one/exact_policy.py"
+      ],
+      "evidence_tier": "source_inspection",
+      "independently_checked_result": false,
+      "remaining_gap": "No historical trial receipt joins this stage to a full cross-IR execution.",
+      "runtime_invocation_established": false,
+      "stage": "policy_norm_evaluation",
+      "status": "source-present",
+      "trial": "current_source_inspection_only"
+    },
+    {
+      "caller": "Effect Admission Kernel normative contract",
+      "claim": "Contract requires independently host-issued argument-bound admission; the document itself does not prove a joined five-IR counterexample checker.",
+      "domain": "all_domains",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/Mcp-Plus-Plus/docs/spec/effect-admission-kernel.md"
+      ],
+      "evidence_tier": "source_inspection",
+      "independently_checked_result": false,
+      "remaining_gap": "No single retained trace establishes full mapping IDs, complete solver input, bounds, nonvacuity and an independently admitted resulting action.",
+      "runtime_invocation_established": false,
+      "stage": "joined_counterexample_check",
+      "status": "author-specified design",
+      "trial": "current_source_inspection_only"
+    },
+    {
+      "caller": "project_intent_families; validate_intent_family_report",
+      "claim": "Eight default family adapters with explicit unsupported frontiers; TLA view belongs to transition_system and external prover execution is opt-in.",
+      "domain": "IntentIR",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/intent_ir/formalize/extended_projections.py"
+      ],
+      "evidence_tier": "source_inspection",
+      "independently_checked_result": false,
+      "remaining_gap": "No historical trial receipt joins this stage to a full cross-IR execution.",
+      "runtime_invocation_established": false,
+      "stage": "logic_projections",
+      "status": "caller-connected",
+      "trial": "current_source_inspection_only"
+    }
+  ],
+  "logic_families": {
+    "default": [
+      "dcec",
+      "tdfol",
+      "event_calculus",
+      "frame_logic",
+      "datalog",
+      "horn_chc",
+      "transition_system",
+      "higher_order"
+    ],
+    "explicit_context_or_unsupported": [
+      "separation_logic",
+      "hyperproperty",
+      "epistemic",
+      "doxastic",
+      "refinement",
+      "concurrency",
+      "session_process",
+      "cryptographic_protocol"
+    ],
+    "qualification_scope": "Native parse/shape/roundtrip validations are distinct from optional Lake/SANY/TLC, source semantics, normative compliance and action authority.",
+    "transition_system_additional_view": "tla_plus"
+  },
+  "missing": [
+    {
+      "item": "single_trace_all_five_IR_domains",
+      "reason": "Recovered individual current source adapters and independent development artifacts do not establish one compatible historical forest or shared trial.",
+      "remedy": "Recover one original joined trace or propose four bounded semantic/action cases; no current replay authorized."
+    },
+    {
+      "item": "exact_evidence_algebra_and_header_contract_theorem_files",
+      "reason": "Filename-only searches for Evidence/Header/Algebra Lean files in three primary repos found none; selected paper source and named artifact/maintenance direct-child pattern searches produced no exact path. Other-paper Lean filenames were excluded, not reused.",
+      "remedy": "Provide exact theorem source/build receipt identifiers; recover #print axioms before asserting kernel-only proof."
+    },
+    {
+      "item": "actual_historical_legal_and_uiux_applicability",
+      "reason": "No per-trial norm provenance, applicability or explicit inapplicable-domain decision recovered.",
+      "remedy": "Recover domain applicability and host confirmation receipts; never infer inapplicability from no UI activity."
+    },
+    {
+      "item": "intent_development_backend_byte_verification",
+      "reason": "candidate.json is 2243486 bytes, exceeding this audit's 2097152-byte per-file read bound; retained descriptor hash is not byte verification.",
+      "remedy": "Separate bounded streaming hash inspection if needed; no model inference or weight download."
+    },
+    {
+      "item": "full_repository_semantics",
+      "reason": "Source384 scalar grammar and Intent single-clause output exclude arbitrary control flow, numerical libraries and complete program semantics.",
+      "remedy": "Prespecify grammar coverage separately from adaptation and retain unsupported outcomes."
+    }
+  ]
+}

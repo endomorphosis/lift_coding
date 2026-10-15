@@ -1,0 +1,1476 @@
+{
+  "checks": [
+    {
+      "check": "prior frozen manifest unchanged",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:README.md",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:aggregate_failures_and_preparation_inventory.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:anonymous/release_inventory.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:anonymous/results.csv",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:artifacts.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:assemble_audit.py",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:audit/assembly_summary.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:audit/deterministic_reassembly.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:audit/export_review.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:audit/final_projection_review.md",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:audit/native_usage_reconciliation.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:audit/native_usage_reproduction_check.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:audit/numerical_audit.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:audit/review_resolution.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:audit/review_resolution_verified.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:audit_io.py",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:authorization.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:build_page_anonymity_report.md",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:claim_evidence_map.csv",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:contradictions.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:contradictions.md",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:cross_ir_implementation_matrix.csv",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:cross_ir_trace.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:encoder_deployment_ledger.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:evidence_graph.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:failed_uninvoked_missing_observations.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:failure_taxonomy.md",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:ledger_schema.md",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:logic_family_inventory.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:missing_evidence.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:missing_evidence.md",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:next_experiments.yaml",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:private/alias_map.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:private/original_provenance_inventory.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:proof_scope.md",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:proof_scorer_reuse_audit.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:proposed_manuscript/changed_sentences.csv",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:proposed_manuscript/evidence_addendum.md",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:proposed_manuscript/main.md.patch",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:proposed_manuscript/proposal_manifest.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:reconcile_native_usage.py",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:report_commit_manifest.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:results.csv",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:results.md",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:review_historical.md",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:reviewer_matrix.md",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:runs.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:runtime_manifest.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:sessions.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:source_manifest.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:source_to_caller_to_claim.csv",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:source_worktree_manifest.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:studies.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:verify_audit.py",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/cross_ir_encoder_deployments.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/cross_ir_findings.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/cross_ir_inputs.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/historical_findings.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/historical_inputs.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/historical_numerical_checks.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/historical_project.py",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/historical_proof_scorer_reuse.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/historical_report.md",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/historical_runs.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/historical_sessions.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/integration_inputs.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/t1_cross_ir_trace.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/t1_encoder_deployments.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/t1_findings.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/t1_inputs.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/t1_model_preparation_details.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/t1_reconcile.py",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/t1_report.md",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/t1_runs.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/t1_sessions.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/t2_t4_encoder_deployments.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/t2_t4_findings.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/t2_t4_inputs.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/t2_t4_joins.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/t2_t4_proof_observations.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/t2_t4_recover.py",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/t2_t4_report.md",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/t2_t4_runs.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "prior audit unchanged:workstreams/t2_t4_sessions.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/numerical-live-pair-20261013/live-trials/codex-no-index-01/receipt.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/numerical-live-pair-20261013/next-native-baseline/native-codex-01/receipt.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/supervisor-native-input-live-20261013-01/matched-pilot/intent.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/supervisor-native-input-live-20261013-01/matched-pilot/native01/receipt.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/supervisor-native-input-live-20261013-01/matched-pilot/packet01-observation.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/supervisor-native-input-live-20261013-01/matched-pilot/packet01/receipt.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/supervisor-nomination-publish-fix-20261014-01/matched-pilot/intent.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/supervisor-nomination-publish-fix-20261014-01/matched-pilot/native01/receipt.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/supervisor-nomination-publish-fix-20261014-01/matched-pilot/packet01/receipt.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/supervisor-portable-codex-20261014-01/matched-pilot/intent.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/supervisor-portable-codex-20261014-01/matched-pilot/native01-shared-setup-failure.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/supervisor-portable-codex-20261014-01/matched-pilot/native01/receipt.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/runtime-campaign/released-source-freeze.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/runtime-campaign/runtime/manifest.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/supervisor-retrieval-query-runtime-20261014-01/diagnostics/candidate-query01-retained-diagnostic.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/supervisor-retrieval-query-runtime-20261014-01/matched-pilot/query01/receipt.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/supervisor-retrieval-query-runtime-20261014-01/relocated-pilot/execution-status.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/supervisor-task-text-projection-20261014-01/matched-pilot/intent.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/supervisor-task-text-projection-20261014-01/matched-pilot/native01/receipt.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/supervisor-task-text-projection-20261014-01/matched-pilot/packet01-setup-failure.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/supervisor-task-text-projection-20261014-01/matched-pilot/packet01/receipt.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/native-codex-01/receipt.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-01/receipt.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-02/receipt.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-03/receipt.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-04/receipt.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-02/receipt.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-03/receipt.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-04/receipt.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/retained-study-inventory.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-06/receipt.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/jobs/supervisor-full-fix-code-vulnerability/fix-code-vulnerability__z4cVfSR/agent/admission.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/jobs/supervisor-full-fix-code-vulnerability/fix-code-vulnerability__z4cVfSR/agent/supervisor-result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/jobs/supervisor-full-fix-code-vulnerability/fix-code-vulnerability__z4cVfSR/agent/supervisor.stdout",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/jobs/supervisor-full-fix-code-vulnerability/fix-code-vulnerability__z4cVfSR/artifacts/manifest.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/jobs/supervisor-full-fix-code-vulnerability/fix-code-vulnerability__z4cVfSR/result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/jobs/supervisor-full-fix-code-vulnerability/fix-code-vulnerability__z4cVfSR/verifier/ctrf.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/jobs/supervisor-full-fix-code-vulnerability/fix-code-vulnerability__z4cVfSR/verifier/original-repo-ctrf.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/jobs/supervisor-full-fix-code-vulnerability/fix-code-vulnerability__z4cVfSR/verifier/reward.txt",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/receipt.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-no-index-06/receipt.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/numerical-live-comparison-20261013/three-arm-observation-final.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/maintenance/terminal-bounded-context-20261011-01/deployment-cache-validation-03.xml",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/maintenance/terminal-frontier-runtime-20261011-01/deployment-cache-validation.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/maintenance/terminal-frontier-runtime-20261011-01/installed-qualification-01/qualification.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/maintenance/terminal-frontier-runtime-20261011-01/pilot/intent-compact-01/jobs/supervisor-full-native-fix-code-vulnerability/fix-code-vulnerability__aM5oJU5/agent/supervisor-result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/maintenance/terminal-frontier-runtime-20261011-01/pilot/intent-expanded-01/jobs/supervisor-full-native-fix-code-vulnerability/fix-code-vulnerability__G9GPaZK/agent/supervisor-result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/appendix/historical_results_details.tex",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/compositional_v2/child.py",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/compositional_v2/loaded_sources.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/compositional_v2/native_result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v1/state/provider/integrated-2d259adedbf8bb784185c40bc828a9c6/result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v1/state/provider/integrated-4b3a63092aaaebf056fa52fd96ff535c/result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v1/state/provider/integrated-5bbb85be54235a832d05f788ec9f8749/result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v1/state/provider/integrated-6a0e0cd01793ce1a399ce34207154a1a/result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v1/state/provider/integrated-8ec08327c0b6c5554e6addd9bf769388/result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v1/state/provider/integrated-e55fd1bb8d791b7c4ce07cd6f81933dc/result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v1/state/provider/integrated-f408fbb266410de3f01a0ce3f671a84b/result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/root_fixed_cohort_analysis_v2.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/state/provider/integrated-225c51acee1b62a86feb7cceff752b88/result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/state/provider/integrated-268487bcfcde791603e226361df7d730/result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/state/provider/integrated-30f27de33719cb6daecd91b8612c803d/result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/state/provider/integrated-3cbb840e46066bcb7700bfdea712d36d/result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/state/provider/integrated-4d1fbbe61bcbad0b5d433e355d7195aa/result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/state/provider/integrated-55a2da12b753c627eb4236264ec4db0b/result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/state/provider/integrated-5e31f1f4b51dbf0bc74a9e1930a97830/result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/state/provider/integrated-7840d2f1c47aa62eec8d3ae6a58b2871/result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/state/provider/integrated-957f36336365b9d99f6130b9a48e72f2/result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/state/provider/integrated-96b5c92a35e70fcbc6eae8ba501fd1d0/result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/state/provider/integrated-a33c65412704cb8a88755e4bf8548bd9/result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/state/provider/integrated-a3f7f25197246dcf66c162936937a1c9/result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/state/provider/integrated-abac709a57440db64c8630e0a13dc42d/result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/state/provider/integrated-dd5dc91938e3109d40b7192668a060c9/result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/state/provider/integrated-f310a73882c427a5e06b6875bc8dc52a/result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/state/provider/integrated-fb2c7bd9692661baf2e380465dbdfbe5/result.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/archive_integration_v1/run-v1/summary.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/repository_archive_integration_v1/run-v1/summary.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "small evidence unchanged:/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/procedures/native_integration_v1/results_attempt4/summary.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "historical Git blob unchanged:d0714ecfae25d4ceca1f1c7044a8f542e64f5515:papers/completion/neurosymbolic_supervision/qualification/reuse_analysis.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "historical Git blob unchanged:74c50e431a45f8af5e2b0a78d89ed196bc44dfd2:papers/completion/neurosymbolic_supervision/qualification/reuse_analysis.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "historical Git blob unchanged:6765f4a62046613df119e085e84277feac5b8873:papers/completion/neurosymbolic_supervision/qualification/reuse_analysis.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "historical Git blob unchanged:d0714ecfae25d4ceca1f1c7044a8f542e64f5515:papers/completion/neurosymbolic_supervision/pilot/results.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "historical Git blob unchanged:d0714ecfae25d4ceca1f1c7044a8f542e64f5515:papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "historical Git blob unchanged:d0714ecfae25d4ceca1f1c7044a8f542e64f5515:papers/completion/neurosymbolic_supervision/protocol/final_run_manifest.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "worker read allocation:t1",
+      "detail": {
+        "bytes": 2669727,
+        "files": 22
+      },
+      "passed": true
+    },
+    {
+      "check": "worker read allocation:t2",
+      "detail": {
+        "bytes": 3600308,
+        "files": 22
+      },
+      "passed": true
+    },
+    {
+      "check": "worker read allocation:historical",
+      "detail": {
+        "bytes": 403582,
+        "files": 30
+      },
+      "passed": true
+    },
+    {
+      "check": "worker read allocation:integration",
+      "detail": {
+        "bytes": 6763339,
+        "files": 10
+      },
+      "passed": true
+    },
+    {
+      "check": "large asset retained size:T1 runtime archive",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "recorded fresh large asset hash matched:T1 runtime archive",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "large asset retained size:Intent development backend",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "recorded fresh large asset hash matched:Intent development backend",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "combined compressed/asset stream bound",
+      "detail": 2701429234,
+      "passed": true
+    },
+    {
+      "check": "archive regular-byte bound",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "archive verified without extraction",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "actual imports not inferred",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "assembly consistency",
+      "detail": 139,
+      "passed": true
+    },
+    {
+      "check": "independent projection review retained",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "no new benchmark rows",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "all outcomes and reported counters retained",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "unique usage ledger identities",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "provider request merged once:integrated-f408fbb266410de3f01a0ce3f671a84b",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "provider request merged once:integrated-2d259adedbf8bb784185c40bc828a9c6",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "provider request merged once:integrated-4b3a63092aaaebf056fa52fd96ff535c",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "provider request merged once:integrated-5bbb85be54235a832d05f788ec9f8749",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "provider request merged once:integrated-6a0e0cd01793ce1a399ce34207154a1a",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "provider request merged once:integrated-8ec08327c0b6c5554e6addd9bf769388",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "provider request merged once:integrated-e55fd1bb8d791b7c4ce07cd6f81933dc",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "provider request merged once:integrated-5e31f1f4b51dbf0bc74a9e1930a97830",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "provider request merged once:integrated-dd5dc91938e3109d40b7192668a060c9",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "provider request merged once:integrated-96b5c92a35e70fcbc6eae8ba501fd1d0",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "provider request merged once:integrated-3cbb840e46066bcb7700bfdea712d36d",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "provider request merged once:integrated-7840d2f1c47aa62eec8d3ae6a58b2871",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "provider request merged once:integrated-225c51acee1b62a86feb7cceff752b88",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "provider request merged once:integrated-957f36336365b9d99f6130b9a48e72f2",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "provider request merged once:integrated-abac709a57440db64c8630e0a13dc42d",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "provider request merged once:integrated-30f27de33719cb6daecd91b8612c803d",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "provider request merged once:integrated-fb2c7bd9692661baf2e380465dbdfbe5",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "provider request merged once:integrated-f310a73882c427a5e06b6875bc8dc52a",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "provider request merged once:integrated-a33c65412704cb8a88755e4bf8548bd9",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "provider request merged once:integrated-55a2da12b753c627eb4236264ec4db0b",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "provider request merged once:integrated-268487bcfcde791603e226361df7d730",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "provider request merged once:integrated-a3f7f25197246dcf66c162936937a1c9",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "provider request merged once:integrated-4d1fbbe61bcbad0b5d433e355d7195aa",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "no semantic stage promotion by byte verification",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "uninvoked rows remain uninvoked",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:README.md",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:assemble_supplement.py",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:audit/export_review.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:audit/final_consolidation_review.md",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:audit/independent_review.md",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:audit/large_asset_verification.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:audit/runtime_member_verification.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:audit/t4_native_report_join.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:audit_io.py",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:authorization.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:consolidated/artifacts.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:consolidated/checks.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:consolidated/cross_ir_trace.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:consolidated/encoder_deployment_ledger.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:consolidated/gap_status.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:consolidated/git_artifacts.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:consolidated/identity_updates.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:consolidated/remaining_evidence.md",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:consolidated/results.csv",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:consolidated/runs.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:consolidated/session_update_links.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:consolidated/sessions.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:consolidated/summary.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:private/runtime_source_files.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:project_population_leads.py",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:project_runtime_forest.py",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:proposed_manuscript/changed_sentences.csv",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:proposed_manuscript/changes.md",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:proposed_manuscript/evidence_addendum.patch",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:proposed_manuscript/proposal_manifest.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:recover_git_reuse.py",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:reviewer_matrix_delta.md",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:runtime_source_forest.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:verify_large_assets.py",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:verify_runtime_members.py",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:verify_supplement.py",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/git_population_inputs.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/git_population_leads.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/git_population_schema.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/git_reuse_inputs.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/git_reuse_recovery.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/git_reuse_schema.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/historical_archive_proofs.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/historical_compositional.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/historical_findings.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/historical_gap_updates.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/historical_inputs.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/historical_population_search.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/historical_procedure_invocations.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/historical_provider_calls.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/historical_recover.py",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/historical_report.md",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/historical_signed_procedure.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/historical_usage_joins.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/integration_gap_updates.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/integration_inputs.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/t1_frontier_qualification.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/t1_gap_status.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/t1_inputs.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/t1_integrity_joins.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/t1_recover_supplement.py",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/t1_report.md",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/t1_run_updates.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/t1_session_updates.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/t1_slot_inventory.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/t2_axioms.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/t2_gap_updates.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/t2_inputs.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/t2_owner_publication.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/t2_reconciliation.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/t2_recover.py",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/t2_report.md",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/t2_runs.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/t2_search_routes.json",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/t2_sessions.jsonl",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "supplement output hash:workstreams/t2_validations.jsonl",
+      "detail": null,
+      "passed": true
+    }
+  ],
+  "large_original_check_scope": "Current existence/size only; earlier fresh complete hash/member verification receipts included in output manifest",
+  "large_originals_rehashed_in_this_integrity_call": false,
+  "new_runtime_or_solver_execution": false,
+  "output_manifest_sha256": "0b2e706a8d016f631065ffb8d14fbc17d55e581a4ab3e1d0df2e50b82b72712c",
+  "passed": true,
+  "read_allocation_summary": {
+    "historical": {
+      "bytes": 403582,
+      "files": 30
+    },
+    "integration": {
+      "bytes": 6763339,
+      "files": 10
+    },
+    "t1": {
+      "bytes": 2669727,
+      "files": 22
+    },
+    "t2": {
+      "bytes": 3600308,
+      "files": 22
+    }
+  },
+  "schema": "paper-supplement-integrity@1",
+  "signatures_verified": false
+}

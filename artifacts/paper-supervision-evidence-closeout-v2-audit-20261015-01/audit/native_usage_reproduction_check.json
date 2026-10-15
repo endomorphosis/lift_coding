@@ -1,0 +1,293 @@
+{
+  "combined_project_total": null,
+  "function": "reconcile_router_cumulative_usage",
+  "input_selection": "Each final original receipt trials[0].supervisor.provider_invocations exactly once; duplicate wrapper locations excluded.",
+  "limitation": "Current pure arithmetic reconciler applied offline to retained receipts; neither runtime pin compatibility nor all-pipeline usage completeness is inferred.",
+  "loaded_by_file_without_project_package_roots": true,
+  "native_import_roots": [
+    "__future__",
+    "hashlib",
+    "re",
+    "collections.abc",
+    "pathlib",
+    "typing"
+  ],
+  "native_source_path": "/home/barberb/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/cumulative_usage_reconciliation.py",
+  "native_source_sha256": "9ce4faf70b681bda5270644493f7727782fd8d137d0b9da11eb34cbfd07d4d7b",
+  "new_model_or_behavioral_execution": false,
+  "raw_rollouts_read": false,
+  "reproduction_matches": true,
+  "results": [
+    {
+      "arm": "native01",
+      "input_path": "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/matched-pilot/native01/receipt.json",
+      "input_sha256": "dad5e8fd5cc8f9d962197c6771b59cef8b4bc6e4eccfb0cadf88541072f7d3cc",
+      "projection": {
+        "billing_total_verified": false,
+        "cached_and_reasoning_tokens_are_subsets": true,
+        "campaign_usage_complete": null,
+        "completion_authority": false,
+        "correctness_established": false,
+        "execution_authority": false,
+        "issues": [],
+        "known_counter_subtotals": {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 652032,
+          "input_tokens": 716351,
+          "output_tokens": 4489,
+          "reasoning_output_tokens": 1212,
+          "total_tokens": 720840
+        },
+        "known_provider_token_subtotal": 720840,
+        "native_sessions_observed": 2,
+        "observation_order_basis": "caller sequence and native cumulative record cardinality",
+        "observations_received": 2,
+        "provider_token_definition": "input_tokens + output_tokens",
+        "provider_total_tokens": 720840,
+        "repeated_receipt_observations": 0,
+        "schema": "supervisor-cumulative-usage-reconciliation@1",
+        "sessions": [
+          {
+            "invocation_ids": [
+              "60db7f54f4784d20b98286dd087152a3"
+            ],
+            "known_counter_subtotals": {
+              "cache_write_input_tokens": 0,
+              "cached_input_tokens": 11264,
+              "input_tokens": 20934,
+              "output_tokens": 1190,
+              "reasoning_output_tokens": 236,
+              "total_tokens": 22124
+            },
+            "known_provider_token_subtotal": 22124,
+            "model": "gpt-5.6-sol",
+            "observed_token_count_records": 1,
+            "producer_declared_complete": true,
+            "provider": "codex_cli",
+            "provider_total_tokens": 22124,
+            "reasons": [],
+            "selected_observation_ordinal": 0,
+            "selected_rollout_sha256": "8e85b3a9d13fae19885ea3fd0c29d13d0d2add945b346e994cfbaebd5902b27e",
+            "snapshot_evidence": [
+              {
+                "invocation_id": "60db7f54f4784d20b98286dd087152a3",
+                "observation_ordinal": 0,
+                "observed_token_count_records": 1,
+                "prompt_binding_sha256": {
+                  "model_prompt_sha256": "e05eba6f1abae4b789d7f4af336e9ebd22f28eeceefdfdee406b7c71cd7c5ff1",
+                  "native_prompt_sha256": "e05eba6f1abae4b789d7f4af336e9ebd22f28eeceefdfdee406b7c71cd7c5ff1",
+                  "prompt_sha256": "e05eba6f1abae4b789d7f4af336e9ebd22f28eeceefdfdee406b7c71cd7c5ff1",
+                  "router_prompt_sha256": "e05eba6f1abae4b789d7f4af336e9ebd22f28eeceefdfdee406b7c71cd7c5ff1"
+                },
+                "rollout_sha256": "8e85b3a9d13fae19885ea3fd0c29d13d0d2add945b346e994cfbaebd5902b27e",
+                "usage": {
+                  "cache_write_input_tokens": 0,
+                  "cached_input_tokens": 11264,
+                  "input_tokens": 20934,
+                  "output_tokens": 1190,
+                  "reasoning_output_tokens": 236,
+                  "total_tokens": 22124
+                }
+              }
+            ],
+            "snapshot_evidence_omitted_count": 0,
+            "status": "complete",
+            "strict_usage_complete": true,
+            "thread_id": "01a1387a-8a09-7040-ab65-234f5e20f4d7",
+            "workspace_binding_sha256": "a2e9eedc9082752f6f909ba6f6a0ce594546a924725756248b60b3012584076a"
+          },
+          {
+            "invocation_ids": [
+              "f76ce41c54e847d39e33df9f19fd9892"
+            ],
+            "known_counter_subtotals": {
+              "cache_write_input_tokens": 0,
+              "cached_input_tokens": 640768,
+              "input_tokens": 695417,
+              "output_tokens": 3299,
+              "reasoning_output_tokens": 976,
+              "total_tokens": 698716
+            },
+            "known_provider_token_subtotal": 698716,
+            "model": "gpt-5.6-sol",
+            "observed_token_count_records": 14,
+            "producer_declared_complete": true,
+            "provider": "codex_cli",
+            "provider_total_tokens": 698716,
+            "reasons": [],
+            "selected_observation_ordinal": 1,
+            "selected_rollout_sha256": "94dfb87c0c6a231e3820fd54917ce22ed07e7221085e8008c436821ad8a6713d",
+            "snapshot_evidence": [
+              {
+                "invocation_id": "f76ce41c54e847d39e33df9f19fd9892",
+                "observation_ordinal": 1,
+                "observed_token_count_records": 14,
+                "prompt_binding_sha256": {
+                  "model_prompt_sha256": "de4ee23e3f5d55d615bb2e4e1f261e2963032e16983e766418e7a0011bad2dcd",
+                  "native_prompt_sha256": "d89e4ba97fa9517d86897d5c42537eb26af83f0bb24f86fe5242aee6ce4f62c2",
+                  "prompt_sha256": "d89e4ba97fa9517d86897d5c42537eb26af83f0bb24f86fe5242aee6ce4f62c2",
+                  "router_prompt_sha256": "56baffd4661bbff800d577501b2763956f00890696e0bc6200c2bfe4b30c050b",
+                  "workspace_advisory_sha256": "a3965e4df6b0e90bb8edf5b1d37f296cf073030c4b067025357329fa09d82dc5"
+                },
+                "rollout_sha256": "94dfb87c0c6a231e3820fd54917ce22ed07e7221085e8008c436821ad8a6713d",
+                "usage": {
+                  "cache_write_input_tokens": 0,
+                  "cached_input_tokens": 640768,
+                  "input_tokens": 695417,
+                  "output_tokens": 3299,
+                  "reasoning_output_tokens": 976,
+                  "total_tokens": 698716
+                }
+              }
+            ],
+            "snapshot_evidence_omitted_count": 0,
+            "status": "complete",
+            "strict_usage_complete": true,
+            "thread_id": "01a1387b-a97e-7d92-8c08-4fdb8563ed8f",
+            "workspace_binding_sha256": "6e84657182169616b83ecd5f0e2d57f7bf30ff985310f12375163f7ae11faebf"
+          }
+        ],
+        "supplied_receipt_usage_complete": true,
+        "tool_tokens_added": false,
+        "total_scope": "supplied retained receipts only",
+        "unique_invocation_ids": 2
+      }
+    },
+    {
+      "arm": "packet01",
+      "input_path": "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/matched-pilot/packet01/receipt.json",
+      "input_sha256": "8e9d5b6d6f9d76f4dcdb9df27fe8477863b3e86ac4d8ea14b6a77bf10ccd2669",
+      "projection": {
+        "billing_total_verified": false,
+        "cached_and_reasoning_tokens_are_subsets": true,
+        "campaign_usage_complete": null,
+        "completion_authority": false,
+        "correctness_established": false,
+        "execution_authority": false,
+        "issues": [],
+        "known_counter_subtotals": {
+          "cache_write_input_tokens": 0,
+          "cached_input_tokens": 390144,
+          "input_tokens": 441111,
+          "output_tokens": 4222,
+          "reasoning_output_tokens": 1016,
+          "total_tokens": 445333
+        },
+        "known_provider_token_subtotal": 445333,
+        "native_sessions_observed": 2,
+        "observation_order_basis": "caller sequence and native cumulative record cardinality",
+        "observations_received": 2,
+        "provider_token_definition": "input_tokens + output_tokens",
+        "provider_total_tokens": 445333,
+        "repeated_receipt_observations": 0,
+        "schema": "supervisor-cumulative-usage-reconciliation@1",
+        "sessions": [
+          {
+            "invocation_ids": [
+              "12eee5ec6acf4cc1852acd9033034b34"
+            ],
+            "known_counter_subtotals": {
+              "cache_write_input_tokens": 0,
+              "cached_input_tokens": 11264,
+              "input_tokens": 20928,
+              "output_tokens": 1376,
+              "reasoning_output_tokens": 260,
+              "total_tokens": 22304
+            },
+            "known_provider_token_subtotal": 22304,
+            "model": "gpt-5.6-sol",
+            "observed_token_count_records": 1,
+            "producer_declared_complete": true,
+            "provider": "codex_cli",
+            "provider_total_tokens": 22304,
+            "reasons": [],
+            "selected_observation_ordinal": 0,
+            "selected_rollout_sha256": "c7e066d905d31ca61b549248efce8831bf48b415b406f1fb34d978ef1c61b100",
+            "snapshot_evidence": [
+              {
+                "invocation_id": "12eee5ec6acf4cc1852acd9033034b34",
+                "observation_ordinal": 0,
+                "observed_token_count_records": 1,
+                "prompt_binding_sha256": {
+                  "model_prompt_sha256": "ee4e678431f4ca191e6c737975b0c859bc27c3f14af497e5c229409a7e5fc981",
+                  "native_prompt_sha256": "ee4e678431f4ca191e6c737975b0c859bc27c3f14af497e5c229409a7e5fc981",
+                  "prompt_sha256": "ee4e678431f4ca191e6c737975b0c859bc27c3f14af497e5c229409a7e5fc981",
+                  "router_prompt_sha256": "ee4e678431f4ca191e6c737975b0c859bc27c3f14af497e5c229409a7e5fc981"
+                },
+                "rollout_sha256": "c7e066d905d31ca61b549248efce8831bf48b415b406f1fb34d978ef1c61b100",
+                "usage": {
+                  "cache_write_input_tokens": 0,
+                  "cached_input_tokens": 11264,
+                  "input_tokens": 20928,
+                  "output_tokens": 1376,
+                  "reasoning_output_tokens": 260,
+                  "total_tokens": 22304
+                }
+              }
+            ],
+            "snapshot_evidence_omitted_count": 0,
+            "status": "complete",
+            "strict_usage_complete": true,
+            "thread_id": "01a13882-5390-71f3-8176-2eb2ba9e0ed3",
+            "workspace_binding_sha256": "35378d4a055f8b4b378cb54f251b93fa86e1ca7dd9e318e9c01ca5a8a0685dc7"
+          },
+          {
+            "invocation_ids": [
+              "94c1919fd73f437faf69b06c8efa2b43"
+            ],
+            "known_counter_subtotals": {
+              "cache_write_input_tokens": 0,
+              "cached_input_tokens": 378880,
+              "input_tokens": 420183,
+              "output_tokens": 2846,
+              "reasoning_output_tokens": 756,
+              "total_tokens": 423029
+            },
+            "known_provider_token_subtotal": 423029,
+            "model": "gpt-5.6-sol",
+            "observed_token_count_records": 10,
+            "producer_declared_complete": true,
+            "provider": "codex_cli",
+            "provider_total_tokens": 423029,
+            "reasons": [],
+            "selected_observation_ordinal": 1,
+            "selected_rollout_sha256": "986c1b2337b5ba6d9a6109e472bfb17f1faa4fc13af40ea826fa6b6277024ac2",
+            "snapshot_evidence": [
+              {
+                "invocation_id": "94c1919fd73f437faf69b06c8efa2b43",
+                "observation_ordinal": 1,
+                "observed_token_count_records": 10,
+                "prompt_binding_sha256": {
+                  "model_prompt_sha256": "07318bbd231b82b59a46e2b2507a3f67208b71a9058cdfd8b64643dabc4092a3",
+                  "native_prompt_sha256": "465c90ffe340192e23d0e4e57abbc42113100a58c00e1bad3a87997423495ad2",
+                  "prompt_sha256": "465c90ffe340192e23d0e4e57abbc42113100a58c00e1bad3a87997423495ad2",
+                  "router_prompt_sha256": "465c90ffe340192e23d0e4e57abbc42113100a58c00e1bad3a87997423495ad2",
+                  "workspace_advisory_sha256": "2959ddbeac01ee947f2512ab2e4f6c585122d7ac5c2797fb1a565b364fb6c327"
+                },
+                "rollout_sha256": "986c1b2337b5ba6d9a6109e472bfb17f1faa4fc13af40ea826fa6b6277024ac2",
+                "usage": {
+                  "cache_write_input_tokens": 0,
+                  "cached_input_tokens": 378880,
+                  "input_tokens": 420183,
+                  "output_tokens": 2846,
+                  "reasoning_output_tokens": 756,
+                  "total_tokens": 423029
+                }
+              }
+            ],
+            "snapshot_evidence_omitted_count": 0,
+            "status": "complete",
+            "strict_usage_complete": true,
+            "thread_id": "01a13883-4359-7162-8894-d22c65142553",
+            "workspace_binding_sha256": "46528ccf7905f57c5c10cb1650fc8f28ca9cae5d7fa74e9dd797812ff7194f42"
+          }
+        ],
+        "supplied_receipt_usage_complete": true,
+        "tool_tokens_added": false,
+        "total_scope": "supplied retained receipts only",
+        "unique_invocation_ids": 2
+      }
+    }
+  ],
+  "schema": "bounded-native-usage-audit@1"
+}

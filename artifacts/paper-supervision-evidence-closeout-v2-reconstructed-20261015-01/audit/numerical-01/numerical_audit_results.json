@@ -1,0 +1,344 @@
+{
+  "actual_session_deduplication": "unavailable",
+  "arithmetic_status": "passed",
+  "audit_origin": "newly_authored_reconstruction_not_the_missing_supplied_audit",
+  "behavioral_reexecution": false,
+  "comparison_count": 9,
+  "comparisons": [
+    {
+      "accounting_scope": "transcribed_reported_totals_only_usage_completeness_unknown",
+      "candidate_minus_control_tokens": -275507,
+      "candidate_observation_id": "handoff-t1-delivered-compact",
+      "candidate_reduction_percent_of_control": "38.220271",
+      "candidate_reported_tokens": 445333,
+      "candidate_success_claim": true,
+      "comparison_group": "t1_delivered_compact_pair",
+      "comparison_id": "t1_delivered_compact",
+      "control_observation_id": "handoff-t1-delivered-native",
+      "control_reported_tokens": 720840,
+      "control_success_claim": true,
+      "interpretation": "Descriptive arithmetic for the reported delivered compact-input pair. Packet and runtime bindings remain unverified."
+    },
+    {
+      "accounting_scope": "transcribed_reported_totals_only_usage_completeness_unknown",
+      "candidate_minus_control_tokens": 125985,
+      "candidate_observation_id": "handoff-t1-configured-candidate",
+      "candidate_reduction_percent_of_control": "-45.241695",
+      "candidate_reported_tokens": 404456,
+      "candidate_success_claim": true,
+      "comparison_group": "t1_configured_packet_fallback_pair",
+      "comparison_id": "t1_configured_native_fallback",
+      "control_observation_id": "handoff-t1-configured-control",
+      "control_reported_tokens": 278471,
+      "control_success_claim": true,
+      "interpretation": "Configured-packet comparison with delivered native fallback; not an actual compression effect."
+    },
+    {
+      "accounting_scope": "transcribed_reported_totals_only_usage_completeness_unknown",
+      "candidate_minus_control_tokens": 40135,
+      "candidate_observation_id": "handoff-t1-retrieval-candidate",
+      "candidate_reduction_percent_of_control": "-7.895881",
+      "candidate_reported_tokens": 548438,
+      "candidate_success_claim": true,
+      "comparison_group": "t1_retrieval_reference_pair",
+      "comparison_id": "t1_retrieval_attempts",
+      "control_observation_id": "handoff-t1-retrieval-control",
+      "control_reported_tokens": 508303,
+      "control_success_claim": false,
+      "interpretation": "Failed control versus successful candidate; a token contrast does not estimate comparable successful-trajectory cost."
+    },
+    {
+      "accounting_scope": "transcribed_reported_totals_only_usage_completeness_unknown",
+      "candidate_minus_control_tokens": -205881,
+      "candidate_observation_id": "handoff-t2-indexed",
+      "candidate_reduction_percent_of_control": "90.049862",
+      "candidate_reported_tokens": 22749,
+      "candidate_success_claim": true,
+      "comparison_group": "t2_symbolic_security",
+      "comparison_id": "t2_native_vs_indexed",
+      "control_observation_id": "handoff-t2-native",
+      "control_reported_tokens": 228630,
+      "control_success_claim": true,
+      "interpretation": "Retained native control is shared with other T2 comparisons; do not add it again in a project total."
+    },
+    {
+      "accounting_scope": "transcribed_reported_totals_only_usage_completeness_unknown",
+      "candidate_minus_control_tokens": 54172,
+      "candidate_observation_id": "handoff-t2-no-index-fresh-success",
+      "candidate_reduction_percent_of_control": "-23.694178",
+      "candidate_reported_tokens": 282802,
+      "candidate_success_claim": true,
+      "comparison_group": "t2_symbolic_security",
+      "comparison_id": "t2_native_vs_fresh_no_index",
+      "control_observation_id": "handoff-t2-native",
+      "control_reported_tokens": 228630,
+      "control_success_claim": true,
+      "interpretation": "Fresh successful no-index trial has unknown original identity; retained native control is reused, not re-executed."
+    },
+    {
+      "accounting_scope": "transcribed_reported_totals_only_usage_completeness_unknown",
+      "candidate_minus_control_tokens": 129682,
+      "candidate_observation_id": "handoff-numerical-earlier-supervisor",
+      "candidate_reduction_percent_of_control": "-80.174343",
+      "candidate_reported_tokens": 291432,
+      "candidate_success_claim": true,
+      "comparison_group": "numerical_earlier_pair",
+      "comparison_id": "numerical_earlier_native_vs_supervisor",
+      "control_observation_id": "handoff-numerical-earlier-native",
+      "control_reported_tokens": 161750,
+      "control_success_claim": false,
+      "interpretation": "Failed native versus successful supervisor; no completed native trajectory cost or causal effect is established."
+    },
+    {
+      "accounting_scope": "transcribed_reported_totals_only_usage_completeness_unknown",
+      "candidate_minus_control_tokens": 244609,
+      "candidate_observation_id": "handoff-numerical-later-no-index",
+      "candidate_reduction_percent_of_control": "-214.789740",
+      "candidate_reported_tokens": 358492,
+      "candidate_success_claim": true,
+      "comparison_group": "numerical_later_three_profiles",
+      "comparison_id": "numerical_later_native_vs_no_index",
+      "control_observation_id": "handoff-numerical-later-native",
+      "control_reported_tokens": 113883,
+      "control_success_claim": true,
+      "interpretation": "Reported three-profile cohort; executed runtime and usage completeness remain unverified."
+    },
+    {
+      "accounting_scope": "transcribed_reported_totals_only_usage_completeness_unknown",
+      "candidate_minus_control_tokens": 220090,
+      "candidate_observation_id": "handoff-numerical-later-indexed",
+      "candidate_reduction_percent_of_control": "-193.259749",
+      "candidate_reported_tokens": 333973,
+      "candidate_success_claim": true,
+      "comparison_group": "numerical_later_three_profiles",
+      "comparison_id": "numerical_later_native_vs_indexed",
+      "control_observation_id": "handoff-numerical-later-native",
+      "control_reported_tokens": 113883,
+      "control_success_claim": true,
+      "interpretation": "Native control is shared with the other later numerical contrast; do not double charge."
+    },
+    {
+      "accounting_scope": "transcribed_reported_totals_only_usage_completeness_unknown",
+      "candidate_minus_control_tokens": -24519,
+      "candidate_observation_id": "handoff-numerical-later-indexed",
+      "candidate_reduction_percent_of_control": "6.839483",
+      "candidate_reported_tokens": 333973,
+      "candidate_success_claim": true,
+      "comparison_group": "numerical_later_three_profiles",
+      "comparison_id": "numerical_later_no_index_vs_indexed",
+      "control_observation_id": "handoff-numerical-later-no-index",
+      "control_reported_tokens": 358492,
+      "control_success_claim": true,
+      "interpretation": "Same transcribed three-profile cohort; no learned-path efficacy claim follows from the arithmetic."
+    }
+  ],
+  "component_sum_check_count": 2,
+  "empirical_authenticity": "unverified",
+  "historical_2523452_token_subtotal": "unreconciled",
+  "inputs": {
+    "specification": {
+      "bytes": 7628,
+      "file_name": "numerical_audit.json",
+      "sha256": "0bccf091161469158516dd5533f449cdd67dcb129a70718b9ef9395e05ee9e64"
+    },
+    "trials": {
+      "bytes": 32516,
+      "file_name": "reported_trials.jsonl",
+      "sha256": "e1a93b43146fabe7ebaf11414e4503b1dd3273172d3b4dc9def66c29ac6ec41c"
+    }
+  },
+  "limitations": [
+    "No empirical authenticity, independent reexecution, new runtime admission, or claim closure.",
+    "No dollars, provider cache-exclusive charges, byte-to-token conversion, pooled percentages, confidence intervals, or causal attribution.",
+    "No addition of overlapping clock scopes, cumulative snapshots, reused controls, or potentially shared sessions.",
+    "Unknown usage completeness remains unknown even when reward or completion is reported."
+  ],
+  "manuscript_aggregate_checks": [
+    {
+      "arithmetic_status": "checked",
+      "assertion_id": "manuscript_abstract_four_constructed_tasks",
+      "candidate_minus_control_tokens": -2435,
+      "candidate_tokens": 2430,
+      "computed_reduction_percent": "50.05",
+      "control_tokens": 4865,
+      "empirical_authenticity": "unverified",
+      "provenance": "manuscript_aggregate_transcription",
+      "reported_task_count": 4,
+      "source_binding_check": "not_checked_by_this_arithmetic_script",
+      "source_expected_sha256": "666d0da1c0242cba4b6113be1ea0e76cc6ada16fe276cc0f03347dda4ae261b8",
+      "source_reference": "source_reference/source_snapshot/fragments/abstract.tex"
+    }
+  ],
+  "observation_checks": [
+    {
+      "cached_input_subset": "checked",
+      "component_arithmetic": "input_plus_output_checked",
+      "empirical_authenticity": "unverified",
+      "observation_id": "handoff-t1-delivered-native",
+      "reported_total_tokens": 720840,
+      "usage_completeness": "unknown"
+    },
+    {
+      "cached_input_subset": "checked",
+      "component_arithmetic": "input_plus_output_checked",
+      "empirical_authenticity": "unverified",
+      "observation_id": "handoff-t1-delivered-compact",
+      "reported_total_tokens": 445333,
+      "usage_completeness": "unknown"
+    },
+    {
+      "cached_input_subset": "unavailable",
+      "component_arithmetic": "unavailable_aggregate_total_only",
+      "empirical_authenticity": "unverified",
+      "observation_id": "handoff-t1-configured-control",
+      "reported_total_tokens": 278471,
+      "usage_completeness": "unknown"
+    },
+    {
+      "cached_input_subset": "unavailable",
+      "component_arithmetic": "unavailable_aggregate_total_only",
+      "empirical_authenticity": "unverified",
+      "observation_id": "handoff-t1-configured-candidate",
+      "reported_total_tokens": 404456,
+      "usage_completeness": "unknown"
+    },
+    {
+      "cached_input_subset": "unavailable",
+      "component_arithmetic": "unavailable_aggregate_total_only",
+      "empirical_authenticity": "unverified",
+      "observation_id": "handoff-t1-retrieval-control",
+      "reported_total_tokens": 508303,
+      "usage_completeness": "unknown"
+    },
+    {
+      "cached_input_subset": "unavailable",
+      "component_arithmetic": "unavailable_aggregate_total_only",
+      "empirical_authenticity": "unverified",
+      "observation_id": "handoff-t1-retrieval-candidate",
+      "reported_total_tokens": 548438,
+      "usage_completeness": "unknown"
+    },
+    {
+      "cached_input_subset": "unavailable",
+      "component_arithmetic": "unavailable_aggregate_total_only",
+      "empirical_authenticity": "unverified",
+      "observation_id": "handoff-t2-native",
+      "reported_total_tokens": 228630,
+      "usage_completeness": "unknown"
+    },
+    {
+      "cached_input_subset": "unavailable",
+      "component_arithmetic": "unavailable_aggregate_total_only",
+      "empirical_authenticity": "unverified",
+      "observation_id": "handoff-t2-indexed",
+      "reported_total_tokens": 22749,
+      "usage_completeness": "unknown"
+    },
+    {
+      "cached_input_subset": "unavailable",
+      "component_arithmetic": "unavailable_aggregate_total_only",
+      "empirical_authenticity": "unverified",
+      "observation_id": "handoff-t2-no-index-failure",
+      "reported_total_tokens": 194494,
+      "usage_completeness": "unknown"
+    },
+    {
+      "cached_input_subset": "unavailable",
+      "component_arithmetic": "unavailable_aggregate_total_only",
+      "empirical_authenticity": "unverified",
+      "observation_id": "handoff-t2-no-index-fresh-success",
+      "reported_total_tokens": 282802,
+      "usage_completeness": "unknown"
+    },
+    {
+      "cached_input_subset": "unavailable",
+      "component_arithmetic": "unavailable_aggregate_total_only",
+      "empirical_authenticity": "unverified",
+      "observation_id": "handoff-numerical-earlier-native",
+      "reported_total_tokens": 161750,
+      "usage_completeness": "unknown"
+    },
+    {
+      "cached_input_subset": "unavailable",
+      "component_arithmetic": "unavailable_aggregate_total_only",
+      "empirical_authenticity": "unverified",
+      "observation_id": "handoff-numerical-earlier-supervisor",
+      "reported_total_tokens": 291432,
+      "usage_completeness": "unknown"
+    },
+    {
+      "cached_input_subset": "unavailable",
+      "component_arithmetic": "unavailable_aggregate_total_only",
+      "empirical_authenticity": "unverified",
+      "observation_id": "handoff-numerical-later-native",
+      "reported_total_tokens": 113883,
+      "usage_completeness": "unknown"
+    },
+    {
+      "cached_input_subset": "unavailable",
+      "component_arithmetic": "unavailable_aggregate_total_only",
+      "empirical_authenticity": "unverified",
+      "observation_id": "handoff-numerical-later-no-index",
+      "reported_total_tokens": 358492,
+      "usage_completeness": "unknown"
+    },
+    {
+      "cached_input_subset": "unavailable",
+      "component_arithmetic": "unavailable_aggregate_total_only",
+      "empirical_authenticity": "unverified",
+      "observation_id": "handoff-numerical-later-indexed",
+      "reported_total_tokens": 333973,
+      "usage_completeness": "unknown"
+    },
+    {
+      "cached_input_subset": "unavailable",
+      "component_arithmetic": "unavailable_aggregate_total_only",
+      "empirical_authenticity": "unverified",
+      "observation_id": "handoff-grok-ordinal-1",
+      "reported_total_tokens": 1310764,
+      "usage_completeness": "unknown"
+    },
+    {
+      "cached_input_subset": "unavailable",
+      "component_arithmetic": "unavailable_aggregate_total_only",
+      "empirical_authenticity": "unverified",
+      "observation_id": "handoff-grok-ordinal-2",
+      "reported_total_tokens": 1621661,
+      "usage_completeness": "unknown"
+    },
+    {
+      "cached_input_subset": "unavailable",
+      "component_arithmetic": "unavailable_aggregate_total_only",
+      "empirical_authenticity": "unverified",
+      "observation_id": "handoff-grok-ordinal-3",
+      "reported_total_tokens": 2452634,
+      "usage_completeness": "unknown"
+    }
+  ],
+  "observation_count": 18,
+  "project_total_tokens": null,
+  "schema_version": "reconstructed-numerical-audit-results/v1",
+  "source_binding_authentication": "not_performed",
+  "unreconciled_claims": [
+    {
+      "claim_id": "t1_historical_known_subtotal",
+      "reason": "Actual historical session bindings and all final cumulative counters have not been recovered. This is not a complete project total.",
+      "reported_tokens": 2523452,
+      "status": "unreconciled_not_compared_to_a_fabricated_sum"
+    },
+    {
+      "claim_id": "t1_historical_invoked_inventory",
+      "reason": "Six T1 transcribed observations here are not a reconstructed nine-record invocation ledger and may not have the same scope.",
+      "registered_uninvoked_count": null,
+      "reported_failed_or_missing_usage_records": 3,
+      "reported_invoked_records": 9,
+      "status": "not_recovered"
+    },
+    {
+      "claim_id": "all_session_deduplication",
+      "reason": "Actual session identifiers and final counter observations are missing; no project total is calculated.",
+      "status": "unavailable"
+    }
+  ],
+  "usage_completeness": "unknown"
+}

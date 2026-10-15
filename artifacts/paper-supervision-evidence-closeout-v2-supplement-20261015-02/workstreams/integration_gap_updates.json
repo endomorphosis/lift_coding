@@ -1,0 +1,37 @@
+{
+  "updates": [
+    {
+      "evidence": [
+        "audit/large_asset_verification.json",
+        "audit/runtime_member_verification.json",
+        "runtime_source_forest.json"
+      ],
+      "prior_gap": 2,
+      "remaining": [
+        "Actual live worker import origins and execution trace closure",
+        "Executed Git source forest where not retained"
+      ],
+      "resolved": [
+        "Runtime archive exact SHA256 independently verified",
+        "All27911declared regular member size/SHA256 values verified",
+        "Runtime manifest and selected source freeze recovered and joined"
+      ],
+      "status": "partially_closed"
+    },
+    {
+      "does_not_resolve": [
+        "semantic qualification",
+        "384Dhead identity",
+        "Terminal-Bench inference consumption"
+      ],
+      "evidence": [
+        "audit/large_asset_verification.json"
+      ],
+      "prior_gap": 25,
+      "resolved": [
+        "Retained Intent development candidate exact bytes now hash-match original descriptor"
+      ],
+      "status": "closed"
+    }
+  ]
+}

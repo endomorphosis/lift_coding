@@ -1,0 +1,436 @@
+{
+  "arithmetic": {
+    "checks": [
+      {
+        "audit_observation_id": null,
+        "input_plus_output_equal_total": true,
+        "run_id": "fix-code-vulnerability__aw6yeSh"
+      },
+      {
+        "audit_observation_id": null,
+        "input_plus_output_equal_total": true,
+        "run_id": "fix-code-vulnerability__8X8hXVw"
+      },
+      {
+        "audit_observation_id": null,
+        "input_plus_output_equal_total": true,
+        "run_id": "fix-code-vulnerability__6VzktdR"
+      },
+      {
+        "audit_observation_id": null,
+        "input_plus_output_equal_total": true,
+        "run_id": "fix-code-vulnerability__EVjYRri"
+      },
+      {
+        "audit_observation_id": null,
+        "input_plus_output_equal_total": true,
+        "run_id": "fix-code-vulnerability__6Cahzwm"
+      },
+      {
+        "audit_observation_id": null,
+        "input_plus_output_equal_total": true,
+        "run_id": "fix-code-vulnerability__wox8jVM"
+      },
+      {
+        "audit_observation_id": "T1-retrieval-control",
+        "input_plus_output_equal_total": true,
+        "run_id": "fix-code-vulnerability__X2KypAK"
+      },
+      {
+        "audit_observation_id": "T1-retrieval-candidate",
+        "input_plus_output_equal_total": true,
+        "run_id": null
+      },
+      {
+        "audit_observation_id": null,
+        "input_plus_output_equal_total": true,
+        "run_id": "fix-code-vulnerability__aM5oJU5"
+      },
+      {
+        "audit_observation_id": null,
+        "input_plus_output_equal_total": true,
+        "run_id": "fix-code-vulnerability__G9GPaZK"
+      }
+    ],
+    "complete_history_total": null,
+    "final_pair_delta": 275507,
+    "final_pair_reduction_fraction": 0.382202707951834,
+    "first_message_byte_reduction_fraction": 0.10557175456389452,
+    "frontier_pair_delta": 163617,
+    "frontier_reduction_fraction": 0.28918531034702166,
+    "known_usage_trials": 6,
+    "missing_usage_trials": 3,
+    "nine_trial_known_subtotal": 2523452,
+    "retrieval_pair_total": 1056741,
+    "scope": "Recomputed arithmetic over retained counters only, not independent usage authenticity or behavioral reexecution."
+  },
+  "claims": [
+    {
+      "claim": "One matched task pair delivered packet@2, both passed, observed720840vs445333tokens.",
+      "claim_id": "T1-final-observed-pair",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/matched-pilot/comparison/paired.json",
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/matched-pilot/comparison/binding-evidence.json",
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/pilot-result.json"
+      ],
+      "evidence_tier": "original_record_and_reconstructed_join",
+      "limitations": "No causal, generalized, full pipeline cost or billing conclusion."
+    },
+    {
+      "claim": "Nine invoked attempts: six pass and three missing-usage failures;2523452knownsubtotal only.",
+      "claim_id": "T1-history-incomplete",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/all-retained/comparison.json"
+      ],
+      "evidence_tier": "report",
+      "limitations": "Different revisions, not repeated samples of final policy."
+    }
+  ],
+  "contradictions_and_qualifications": [
+    {
+      "claim": "Configured packet in earlier278471/404456 comparison demonstrates compression",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/docs/architecture/terminal_bench_token_reduction.plan.md",
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/all-retained/comparison.json"
+      ],
+      "finding": "Contradicted: candidate delivered native fallback because local estimate preferred native."
+    },
+    {
+      "claim": "38.22% session reduction equals prompt compression effect",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/pilot-result.json"
+      ],
+      "finding": "Unsupported: first message differs10.56%, tool calls13vs9, caches and trajectories differ; one sequential pair."
+    },
+    {
+      "claim": "All final candidate input measurement interfaces complete",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/matched-pilot/packet01-observation.json"
+      ],
+      "finding": "Generic coding_input_census unavailable; separate coding-input and historical decision-dialogue audits verified. Preserve both fields."
+    },
+    {
+      "claim": "Whole history uses2523452 tokens",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/all-retained/comparison.json",
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-20261014-01/pilot-result.json"
+      ],
+      "finding": "Only six known totals in nine retained attempts; three missing usage failures and uninvoked slot preserved."
+    },
+    {
+      "claim": "28.9% lead proves exact source-to-model equivalence",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/maintenance/terminal-frontier-runtime-20261011-01/token-reduction-summary.json"
+      ],
+      "finding": "Both3-second exact-input audits timed out. Hashes, sizes and compact roundtrip do not replace final-input audit."
+    },
+    {
+      "claim": "71 focused passes establish full security profile qualification",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/maintenance/terminal-frontier-runtime-20261011-01/validation.json"
+      ],
+      "finding": "Broader suite82passed7failed6skipped; absent Operation.SECURITY_ADVISE registration before cache path. Exact measured-path dependency requires further read-only caller trace."
+    },
+    {
+      "claim": "Compact source references beat a native-reference baseline",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-python-code-view-session-20261012/README.md"
+      ],
+      "finding": "Six-read authored comparison compact47816bytes versus native refs47593; compact overhead223bytes, and one-read overhead633bytes."
+    },
+    {
+      "claim": "T1 exercised a trained IntentIR and complete policy joins",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/matched-pilot/native01/receipt.json",
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/matched-pilot/packet01/receipt.json"
+      ],
+      "finding": "Original final receipts show intent preplanning fail_open_no_checkpoint; LegalIR/UIUX/counterexample joins not established by recovered trial callers."
+    }
+  ],
+  "edges": [
+    {
+      "from": "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/pilot-result.json",
+      "relation": "reports-on",
+      "to": [
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/matched-pilot/native01/receipt.json",
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/matched-pilot/packet01/receipt.json"
+      ]
+    },
+    {
+      "from": "T1 final arithmetic",
+      "relation": "derived-from",
+      "to": "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/matched-pilot/comparison/paired.json"
+    },
+    {
+      "from": "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/all-retained/comparison.json",
+      "relation": "same-session-as",
+      "scope": "final four native session identities only; deduplicated",
+      "to": "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/matched-pilot/comparison/paired.json"
+    },
+    {
+      "from": "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/matched-pilot/intent.json",
+      "relation": "supersedes-configuration",
+      "replaces_original_observations": false,
+      "to": "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-20261014-01/pilot-result.json"
+    },
+    {
+      "from": "/home/barberb/lift_coding/artifacts/supervisor-retrieval-query-runtime-20261014-01/result.json",
+      "relation": "contradicts",
+      "to": "claim of independently verified retrieval-reference savings"
+    }
+  ],
+  "frontier_validation": {
+    "broader_archive_suite": {
+      "failed": 7,
+      "failure": "Unchanged security_autoencoder_hub.py registration uses absent Operation.SECURITY_ADVISE; cache code is not reached. Baseline full-suite reproduction not performed this turn.",
+      "passed": 82,
+      "skipped": 6,
+      "source_evidence": "deployment-cache-validation.json"
+    },
+    "distinct_passing_cases": 71,
+    "focused_suites": [
+      {
+        "artifact": "audit-validation-01.xml",
+        "failed": 0,
+        "passed": 33,
+        "sha256": "4a9b7582e46f8bf094c19575e4f13d6a303d5f5d2690884258359bd79ae8bc4a",
+        "skipped": 0
+      },
+      {
+        "artifact": "deployment-cache-validation-05.xml",
+        "failed": 0,
+        "passed": 38,
+        "sha256": "9b17c2db2e9ae6c1e8a63542b454cf5f04d1fdf11a95a31efaeffc3dd82ef9e8",
+        "skipped": 6
+      }
+    ],
+    "installed_qualification": "installed-qualification-01/qualification.json",
+    "packaged_production_and_reviewed_source_digests_match": true,
+    "patch_verification": "patch-verification.json",
+    "root_only_test_skips": 6,
+    "runtime_archive_verification": "runtime-archive-verification.json",
+    "schema": "terminal-frontier-runtime-validation@1",
+    "whole_repository_suite_pass_claimed": false
+  },
+  "host_build_module_origins": {
+    "benchmarks": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/__init__.py",
+    "benchmarks.agent_supervisor": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/__init__.py",
+    "benchmarks.agent_supervisor.container_coding.container_worker_deployment": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/container_worker_deployment.py",
+    "benchmarks.agent_supervisor.container_coding.full_supervisor_benchmark": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/full_supervisor_benchmark.py",
+    "benchmarks.agent_supervisor.container_coding.native_codex_baseline": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/native_codex_baseline.py",
+    "benchmarks.agent_supervisor.container_coding.semantic_decision_nomination_delivery": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/semantic_decision_nomination_delivery.py",
+    "benchmarks.agent_supervisor.container_coding.terminal_deployment": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_deployment.py",
+    "benchmarks.agent_supervisor.container_coding.timeout_policy": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/timeout_policy.py"
+  },
+  "integrity_joins": {
+    "all_retained_hash_matches_pilot": true,
+    "archive_bytes_rehashed": false,
+    "archive_pin_agrees_in_build_intent_pilot": true,
+    "complete_import_forest_recovered": false,
+    "paired_report_hash_matches_pilot": true,
+    "signature_verification": "not_performed",
+    "two_original_final_receipt_hashes_match_reports": true
+  },
+  "missing_evidence": [
+    {
+      "field": "Original usage receipts for3 historical failures",
+      "paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-native-input-live-20261013-01/matched-pilot/packet01/receipt.json",
+        "/home/barberb/lift_coding/artifacts/supervisor-task-text-projection-20261014-01/matched-pilot/packet01/receipt.json",
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-20261014-01/matched-pilot/native01/receipt.json"
+      ],
+      "reason": "Retained aggregate records missing usage; raw original failures not separately read within26-file allocation; absence of aggregate counters is not proof no provider work occurred.",
+      "smallest_remedy": "Read those named receipts/declared safe diagnostics under a new bounded read allocation, keeping unknown totals if no trustworthy observation."
+    },
+    {
+      "field": "Complete experiment source forest and runtime archive byte rehash",
+      "paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/runtime-campaign/runtime/manifest.json",
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/runtime-campaign/runtime/runtime.tar.gz"
+      ],
+      "reason": "6.3MB manifest and1.35GB archive exceed bounded inspection size; partial source pins/build origins recovered.",
+      "smallest_remedy": "Propose separately bounded streaming metadata/hash validation; no runtime execution needed."
+    },
+    {
+      "field": "Retrieval candidate original Harbor trial ID",
+      "paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-retrieval-query-runtime-20261014-01/relocated-pilot/observation.json"
+      ],
+      "reason": "Selected observation binds native sessions but lacks original Harbor trial ID.",
+      "smallest_remedy": "Follow retained relocation execution receipt path read-only; do not invent identity."
+    },
+    {
+      "field": "Retrieval candidate exact delivered query reference",
+      "paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-retrieval-query-runtime-20261014-01/diagnostics/candidate-query01-retained-diagnostic.json"
+      ],
+      "reason": "Final report says audit_timeout and native state/capsule/CAS parents not retained after container cleanup.",
+      "smallest_remedy": "Retain unknown historical delivery; prospective separately approved trial with audit custody only if needed."
+    },
+    {
+      "field": "All registered/uninvoked slots outside named portable-codex packet",
+      "paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/matched-pilot/intent.json"
+      ],
+      "reason": "Only named bounded cohort searched; no global experiment registry census.",
+      "smallest_remedy": "Read named prior intentions/registrations under further bounded allocation."
+    },
+    {
+      "field": "Frontier18 recovered hits and seven-failure measured-path reachability",
+      "paths": [
+        "/home/barberb/lift_coding/maintenance/terminal-frontier-runtime-20261011-01/installed-qualification-01/qualification.json",
+        "/home/barberb/lift_coding/maintenance/terminal-frontier-runtime-20261011-01/deployment-cache-validation.json"
+      ],
+      "reason": "Existing selected validation summary supports failureclass but not caller reachability or18hit count;26-file bound reached.",
+      "smallest_remedy": "Inspect the named receipts and relevant archived caller without executing tests."
+    },
+    {
+      "field": "General restoration coverage",
+      "paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/matched-pilot/packet01-observation.json"
+      ],
+      "reason": "Historical packet/native input replay reported verified; no general invertible editable whole-codebase mapping established.",
+      "smallest_remedy": "Limit claim to recorded packet/input restoration; broader restoration is a separate proposed qualification."
+    },
+    {
+      "field": "Seven earlier original receipts and original native-log verification",
+      "paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-native-input-live-20261013-01/matched-pilot/native01/receipt.json",
+        "/home/barberb/lift_coding/artifacts/supervisor-native-input-live-20261013-01/matched-pilot/packet01/receipt.json",
+        "/home/barberb/lift_coding/artifacts/supervisor-nomination-publish-fix-20261014-01/matched-pilot/native01/receipt.json",
+        "/home/barberb/lift_coding/artifacts/supervisor-nomination-publish-fix-20261014-01/matched-pilot/packet01/receipt.json",
+        "/home/barberb/lift_coding/artifacts/supervisor-task-text-projection-20261014-01/matched-pilot/native01/receipt.json",
+        "/home/barberb/lift_coding/artifacts/supervisor-task-text-projection-20261014-01/matched-pilot/packet01/receipt.json",
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-20261014-01/matched-pilot/native01/receipt.json"
+      ],
+      "reason": "Historical identities and counters recovered from hashed all-retained comparison; original receipts for preceding revisions were not independently read/rehashed within26-file allocation. Final two original receipt hashes were independently joined. No original native log was reprocessed by this workstream.",
+      "smallest_remedy": "Further bounded read-only checks of named receipts and native-log bindings if needed; no new experiment is required for receipt verification."
+    }
+  ],
+  "model_preparation_details": "workstreams/t1_model_preparation_details.json",
+  "objective": "paper-supervision-evidence-closeout-v2",
+  "offline_indexed_lead": {
+    "fixtures": [
+      {
+        "all_expansion_response_tokens": 8751,
+        "all_omitted_expansions_exact": true,
+        "expansion_responses": 2,
+        "full_capsules": 13,
+        "full_prepare_and_load_seconds": 1.3432524700183421,
+        "full_worker_bytes": 51443,
+        "full_worker_tokens": 17846,
+        "indexed_plus_all_expansion_response_tokens": 17178,
+        "indexed_prepare_and_load_seconds": 0.9020371320657432,
+        "indexed_worker_bytes": 24275,
+        "indexed_worker_tokens": 8427,
+        "initial_capsules": 5,
+        "initial_worker_reduction_percent": 52.779334304606074,
+        "omitted_capsules": 8,
+        "symbol_functions": 12
+      },
+      {
+        "all_expansion_response_tokens": 22062,
+        "all_omitted_expansions_exact": true,
+        "expansion_responses": 5,
+        "full_capsules": 25,
+        "full_prepare_and_load_seconds": 0.9869335669791326,
+        "full_worker_bytes": 94603,
+        "full_worker_tokens": 32899,
+        "indexed_plus_all_expansion_response_tokens": 30555,
+        "indexed_prepare_and_load_seconds": 1.0421021699439734,
+        "indexed_worker_bytes": 24276,
+        "indexed_worker_tokens": 8493,
+        "initial_capsules": 5,
+        "initial_worker_reduction_percent": 74.18462567251284,
+        "omitted_capsules": 20,
+        "symbol_functions": 24
+      },
+      {
+        "all_expansion_response_tokens": 48381,
+        "all_omitted_expansions_exact": true,
+        "expansion_responses": 11,
+        "full_capsules": 49,
+        "full_prepare_and_load_seconds": 1.5043433280661702,
+        "full_worker_bytes": 180931,
+        "full_worker_tokens": 62802,
+        "indexed_plus_all_expansion_response_tokens": 56784,
+        "indexed_prepare_and_load_seconds": 1.4269854209851474,
+        "indexed_worker_bytes": 24276,
+        "indexed_worker_tokens": 8403,
+        "initial_capsules": 5,
+        "initial_worker_reduction_percent": 86.61985287092767,
+        "omitted_capsules": 44,
+        "symbol_functions": 48
+      }
+    ],
+    "limitations": [
+      "Synthetic source fixtures; no task-solving or official verifier run.",
+      "Local worker/expansion representation counts exclude other context, tools, framing, and later model turns.",
+      "Expansion response sums are not cumulative provider usage; repeated history can cost more.",
+      "Initial context savings are not end-to-end token savings.",
+      "Sequential cold preparations share process caches; timings are diagnostic only."
+    ],
+    "provider_calls": 0,
+    "provider_token_usage": null,
+    "schema": "supervisor-indexed-context-local-benchmark@1",
+    "terminal_bench_success_measured": false,
+    "tokenizer": {
+      "asset_sha256": "446a9538cb6c348e3516120d7c08b09f57c36495e2acfffe59a5bf8b0cfb1a2d",
+      "encoding": "o200k_base",
+      "remote_model_equivalence_asserted": false,
+      "tiktoken_version": "0.12.0"
+    }
+  },
+  "read_bytes": 1626469,
+  "read_files": 26,
+  "schema": "paper-t1-evidence-findings@1",
+  "scope": "Direct local read-only audit authorized; no supervisor state mutation or new execution.",
+  "search_routes": [
+    "Filename-only named matched-pilot/all-retained roots",
+    "Current token-reduction plan selected numerical-result passages",
+    "Named maintenance frontier/indexed summaries",
+    "Named Python code-view README",
+    "Named retrieval result and relocation observation"
+  ],
+  "source_runtime": {
+    "actual_trial_worker_loaded_origins": null,
+    "complete_import_closure_claimed": false,
+    "report_commit": null,
+    "report_current_file": "/home/barberb/lift_coding/external/ipfs_accelerate/docs/architecture/terminal_bench_token_reduction.plan.md",
+    "runtime_archive_bytes_reported": 1349592874,
+    "runtime_archive_sha256_reported": "f89c7ace1f4387bcb020f223758609dac607c8e6258c208189bbd8dec2f652f8",
+    "runtime_manifest_not_read_reason": "6,319,244 bytes exceeds 2 MiB per-file bound",
+    "selected_source_freeze": "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/runtime-campaign/released-source-freeze.json"
+  },
+  "studies": [
+    {
+      "final_pair_task": "fix-code-vulnerability",
+      "mechanism": "actually delivered decision packet @2",
+      "native_harness_baseline": false,
+      "population": "nine historical invoked attempts across different revisions, plus one known uninvoked slot",
+      "study_id": "T1"
+    },
+    {
+      "delivery_qualified": false,
+      "population": "one failed control and one successful later query-reference candidate",
+      "study_id": "T1-retrieval"
+    },
+    {
+      "delivery_qualified": false,
+      "population": "one concurrently executed expanded/compact pair",
+      "study_id": "T1-frontier-lead"
+    },
+    {
+      "benchmark_execution": false,
+      "population": "three authored synthetic fixtures",
+      "provider_calls": 0,
+      "study_id": "T1-offline-indexed-lead"
+    },
+    {
+      "benchmark_execution": false,
+      "population": "authored transport sessions",
+      "provider_calls": 0,
+      "study_id": "T1-python-view-lead"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+\section{Related work}
+\label{sec:related-work}
+
+Proof-carrying code places explicit evidence between a producer and a
+consumer's safety policy~\citep{baseline01}. This motivates separating an
+artifact from the evidence needed to accept it. Our finite-check repair
+experiment and signed provenance records are not proof-carrying code in
+that formal sense. Abstract interpretation and translation validation
+similarly motivate explicit approximation and conversion
+relations~\citep{baseline02,baseline04}, not automatic admission of a backend
+or source-language proof.
+
+Mokhov et al.\ separate scheduling from the decision whether a task needs
+rebuilding~\citep{baseline07}. Our reuse obligation additionally names the
+statement, environment, lifecycle, and trust conditions for transferring a
+test observation. The cold comparison supplies no measured incremental-reuse
+advantage over build systems.
+
+SWE-agent studies an interface for repository navigation, editing, and program
+execution~\citep{baseline08}; SWT-Bench studies test-based validation of
+real-world fixes~\citep{baseline11}. They motivate treating both information
+access and executable checks as parts of a repair method. Differences in tasks,
+interaction, models, and acceptance criteria preclude a head-to-head performance
+claim or an assertion that we reran their benchmarks. The contribution here is
+a bounded composition of evidence and authority mechanisms, not a first-of-kind
+claim or a new foundational algorithm.
+

@@ -1,0 +1,40 @@
+study,run_id,audit_id,requested_profile,delivered_profile,invoked,reward,reported_total_tokens,native_usage_complete,whole_pipeline_complete,supervisor_completed,evidence_tier
+T1,fix-code-vulnerability__aw6yeSh,fix-code-vulnerability__aw6yeSh,native-input,,True,1.0,262166,True,,True,report
+T1,fix-code-vulnerability__94TTSCp,fix-code-vulnerability__94TTSCp,decision-packet,,True,,,,,,report
+T1,fix-code-vulnerability__8X8hXVw,fix-code-vulnerability__8X8hXVw,native-input,,True,1.0,278471,True,,True,report
+T1,fix-code-vulnerability__6VzktdR,fix-code-vulnerability__6VzktdR,decision-packet,native_fallback,True,1.0,404456,True,,True,report
+T1,fix-code-vulnerability__EVjYRri,fix-code-vulnerability__EVjYRri,native-input,,True,1.0,412186,True,,True,report
+T1,fix-code-vulnerability__zZ44wta,fix-code-vulnerability__zZ44wta,decision-packet,,True,,,,,,report
+T1,fix-code-vulnerability__coj9Jqt,fix-code-vulnerability__coj9Jqt,native-input,,True,,,,,,report
+T1,fix-code-vulnerability__6Cahzwm,fix-code-vulnerability__6Cahzwm,native-input,native,True,1.0,720840,True,,True,original_record_and_reconstructed_join
+T1,fix-code-vulnerability__wox8jVM,fix-code-vulnerability__wox8jVM,decision-packet,decision_packet,True,1.0,445333,True,,True,original_record_and_reconstructed_join
+T1,,t1:unbound-slot:10,decision-packet,,False,,,,,,report
+T1-retrieval,fix-code-vulnerability__X2KypAK,fix-code-vulnerability__X2KypAK,plain_packet,,True,0.0,508303,True,,False,original_record_and_reconstructed_join
+T1-retrieval,,T1-retrieval-candidate,retrieval_query_reference,,True,1.0,548438,True,,True,original_record_and_reconstructed_join
+T1-frontier-lead,fix-code-vulnerability__aM5oJU5,fix-code-vulnerability__aM5oJU5,compact,compact,True,1.0,402169,True,,True,report
+T1-frontier-lead,fix-code-vulnerability__G9GPaZK,fix-code-vulnerability__G9GPaZK,expanded,,True,1.0,565786,True,,True,report
+T2,fix-code-vulnerability__VfZu8VN,fix-code-vulnerability__VfZu8VN,native-codex,,True,1.0,228630,True,,,reconstructed_join
+T2,fix-code-vulnerability__aAjF5Sy,fix-code-vulnerability__aAjF5Sy,no-index,,True,0.0,194494,True,,True,reconstructed_join
+T2,fix-code-vulnerability__z4cVfSR,fix-code-vulnerability__z4cVfSR,full,,True,1.0,22749,True,,True,reconstructed_join
+T2,fix-code-vulnerability__t5UzZxv,fix-code-vulnerability__t5UzZxv,no-index,,True,0.0,277174,True,,True,original_record
+T2,fix-code-vulnerability__WAQeD5W,fix-code-vulnerability__WAQeD5W,no-index,,True,1.0,359845,True,,True,original_record
+T2,fix-code-vulnerability__2f3LChX,fix-code-vulnerability__2f3LChX,no-index,,True,1.0,282802,True,,True,original_record
+T2,fix-code-vulnerability__PtEnAhJ,fix-code-vulnerability__PtEnAhJ,native-codex,,True,1.0,177371,,,,report
+T2,fix-code-vulnerability__LpmwPSj,fix-code-vulnerability__LpmwPSj,full,,True,0.0,,,,,report
+T2,fix-code-vulnerability__eho8DzW,fix-code-vulnerability__eho8DzW,full,,True,0.0,21293,True,,,report
+T2,fix-code-vulnerability__79SoPKN,fix-code-vulnerability__79SoPKN,no-index,,True,0.0,292265,True,,,report
+T2,fix-code-vulnerability__nrCRphy,fix-code-vulnerability__nrCRphy,full,,True,0.0,265932,False,,,report
+T2,fix-code-vulnerability__4Dfzugh,fix-code-vulnerability__4Dfzugh,no-index,,True,0.0,288445,True,,,report
+T2,fix-code-vulnerability__DqsoZ7E,fix-code-vulnerability__DqsoZ7E,full,,True,1.0,308102,True,,,report
+T2,fix-code-vulnerability__2xXoTsQ,fix-code-vulnerability__2xXoTsQ,no-index,,True,1.0,317735,True,,,report
+T2,fix-code-vulnerability__jzhr9xA,fix-code-vulnerability__jzhr9xA,full,,True,1.0,22040,True,,,report
+T2,fix-code-vulnerability__xRfZaYk,fix-code-vulnerability__xRfZaYk,no-index,,True,0.0,439027,True,,,report
+T3,largest-eigenval__EKNbpC4,largest-eigenval__EKNbpC4,native-codex,,True,0.0,161750,True,,,reconstructed_join
+T3,largest-eigenval__iieLP5S,largest-eigenval__iieLP5S,full,,True,1.0,291432,True,,True,reconstructed_join
+T3,largest-eigenval__aWFqANC,largest-eigenval__aWFqANC,full,,True,0.0,,,,False,report
+T4,largest-eigenval__ePRwqVj,largest-eigenval__ePRwqVj,full,,True,1.0,333973,True,False,True,reconstructed_join
+T4,largest-eigenval__beFUuMt,largest-eigenval__beFUuMt,no-index,,True,1.0,358492,True,False,True,report
+T4,largest-eigenval__8vAYxJm,largest-eigenval__8vAYxJm,native-codex,,True,1.0,113883,True,False,,report
+X1,largest-eigenval__WS7vi7k,largest-eigenval__WS7vi7k,identity,"{""source_profile"": ""identity@1""}",True,1.0,1310764,,False,True,reconstructed_join
+X1,largest-eigenval__gB4UUzB,largest-eigenval__gB4UUzB,comments,"{""source_profile"": ""python-comments@1""}",True,1.0,1621661,,False,True,reconstructed_join
+X1,largest-eigenval__kzYcAuM,largest-eigenval__kzYcAuM,comments_plus_metadata,"[{""candidate_complete_bytes"": 77585, ""candidate_complete_sha256"": ""3d552c99478f8659f872ecfb16e79015d69f6da521dc8eb685edc02c99400570"", ""fallback_reason"": null, ""fixed_codec_replayed_here"": false, ""native_complete_bytes"": 78553, ""native_complete_sha256"": ""bd873c79f208347eeb3aa3e8217a9573837b38954956278880b789ca01c3696f"", ""observation_scope"": ""Closed recorded arithmetic and selected model-prompt identity; does not independently replay unavailable prompt bodies."", ""requested_mode"": ""common-bindings-instruction@1"", ""required_source_bytes_preserved"": true, ""selected_complete_byte_reduction"": 968, ""selected_complete_bytes"": 77585, ""selected_complete_sha256"": ""3d552c99478f8659f872ecfb16e79015d69f6da521dc8eb685edc02c99400570"", ""selected_mode"": ""common-bindings-instruction@1"", ""selection_basis"": ""bytes_and_proxy"", ""status"": ""observed""}]",True,1.0,2452634,,False,True,reconstructed_join

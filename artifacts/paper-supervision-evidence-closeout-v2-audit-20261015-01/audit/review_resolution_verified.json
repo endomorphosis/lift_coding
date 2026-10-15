@@ -1,0 +1,94 @@
+{
+  "schema": "paper-generated-projection-review-resolution/v1",
+  "scope": "Only generated trace corrections reviewed; no original evidence, execution or other changes.",
+  "prior_review": "audit/final_projection_review.md",
+  "checks": [
+    {
+      "check": "null_identity_stage_invocations_removed",
+      "passed": true,
+      "detail": [
+        [
+          "t1:unbound-slot:10",
+          "IntentIR",
+          "unavailable/unsupported"
+        ],
+        [
+          "t1:unbound-slot:10",
+          "CodebaseIR",
+          "unavailable/unsupported"
+        ],
+        [
+          "t1:unbound-slot:10",
+          "SecurityIR",
+          "unavailable/unsupported"
+        ],
+        [
+          "t1:unbound-slot:10",
+          "LegalIR",
+          "unavailable/unsupported"
+        ],
+        [
+          "t1:unbound-slot:10",
+          "UI/UX IR",
+          "unavailable/unsupported"
+        ],
+        [
+          "T1-retrieval-candidate",
+          "IntentIR",
+          "unavailable/unsupported"
+        ],
+        [
+          "T1-retrieval-candidate",
+          "CodebaseIR",
+          "unavailable/unsupported"
+        ],
+        [
+          "T1-retrieval-candidate",
+          "SecurityIR",
+          "unavailable/unsupported"
+        ],
+        [
+          "T1-retrieval-candidate",
+          "LegalIR",
+          "unavailable/unsupported"
+        ],
+        [
+          "T1-retrieval-candidate",
+          "UI/UX IR",
+          "unavailable/unsupported"
+        ]
+      ]
+    },
+    {
+      "check": "uninvoked_slots_have_no_invoked_stages",
+      "passed": true,
+      "detail": 5
+    },
+    {
+      "check": "codebase_stage_names_restricted",
+      "passed": true,
+      "detail": [
+        "source_to_codebase_preparation_or_inference"
+      ]
+    },
+    {
+      "check": "intent_codebase_admitted_correspondence_remains_unavailable",
+      "passed": true,
+      "detail": [
+        "unavailable/unsupported"
+      ]
+    },
+    {
+      "check": "seven_observed_source_preparation_inference_rows_retained",
+      "passed": true,
+      "detail": 7
+    }
+  ],
+  "all_passed": true,
+  "generated_input_sha256": {
+    "cross_ir_trace.jsonl": "ec5004a17473423483cd67c2c34c26488ae0c4d4de5046927cbcd7b48123bc2b",
+    "runs.jsonl": "334edbfa6733924876d07e5cb759faa88b70aaeaf2ee699241f24874274cd029",
+    "audit/final_projection_review.md": "ca09d0678fa94742a409d414687a4f99b975ed1cea33c6f9ea34396354f73bd6"
+  },
+  "correction_claim": "Null run IDs are not treated as shared identities; source preparation/inference no longer implies admitted Intent-to-Codebase correspondence."
+}

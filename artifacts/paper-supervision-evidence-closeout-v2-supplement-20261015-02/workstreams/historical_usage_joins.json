@@ -1,0 +1,932 @@
+{
+  "all_checks_passed": true,
+  "api_reported_costs": "Directly recorded per-call API charges, not rate-derived dollars or account settlement.",
+  "checks": [
+    {
+      "check": "integrated-f408fbb266410de3f01a0ce3f671a84b:identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-f408fbb266410de3f01a0ce3f671a84b:usage_matches_normalization",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-f408fbb266410de3f01a0ce3f671a84b:component_identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-f408fbb266410de3f01a0ce3f671a84b:single_response",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-2d259adedbf8bb784185c40bc828a9c6:identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-2d259adedbf8bb784185c40bc828a9c6:usage_matches_normalization",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-2d259adedbf8bb784185c40bc828a9c6:component_identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-2d259adedbf8bb784185c40bc828a9c6:single_response",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-4b3a63092aaaebf056fa52fd96ff535c:identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-4b3a63092aaaebf056fa52fd96ff535c:usage_matches_normalization",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-4b3a63092aaaebf056fa52fd96ff535c:component_identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-4b3a63092aaaebf056fa52fd96ff535c:single_response",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-5bbb85be54235a832d05f788ec9f8749:identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-5bbb85be54235a832d05f788ec9f8749:usage_matches_normalization",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-5bbb85be54235a832d05f788ec9f8749:component_identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-5bbb85be54235a832d05f788ec9f8749:single_response",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-6a0e0cd01793ce1a399ce34207154a1a:identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-6a0e0cd01793ce1a399ce34207154a1a:usage_matches_normalization",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-6a0e0cd01793ce1a399ce34207154a1a:component_identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-6a0e0cd01793ce1a399ce34207154a1a:single_response",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-8ec08327c0b6c5554e6addd9bf769388:identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-8ec08327c0b6c5554e6addd9bf769388:usage_matches_normalization",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-8ec08327c0b6c5554e6addd9bf769388:component_identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-8ec08327c0b6c5554e6addd9bf769388:single_response",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-e55fd1bb8d791b7c4ce07cd6f81933dc:identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-e55fd1bb8d791b7c4ce07cd6f81933dc:usage_matches_normalization",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-e55fd1bb8d791b7c4ce07cd6f81933dc:component_identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-e55fd1bb8d791b7c4ce07cd6f81933dc:single_response",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-5e31f1f4b51dbf0bc74a9e1930a97830:identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-5e31f1f4b51dbf0bc74a9e1930a97830:usage_matches_normalization",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-5e31f1f4b51dbf0bc74a9e1930a97830:component_identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-5e31f1f4b51dbf0bc74a9e1930a97830:single_response",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-5e31f1f4b51dbf0bc74a9e1930a97830:original_v2_hash_binding",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-dd5dc91938e3109d40b7192668a060c9:identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-dd5dc91938e3109d40b7192668a060c9:usage_matches_normalization",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-dd5dc91938e3109d40b7192668a060c9:component_identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-dd5dc91938e3109d40b7192668a060c9:single_response",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-dd5dc91938e3109d40b7192668a060c9:original_v2_hash_binding",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-96b5c92a35e70fcbc6eae8ba501fd1d0:identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-96b5c92a35e70fcbc6eae8ba501fd1d0:usage_matches_normalization",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-96b5c92a35e70fcbc6eae8ba501fd1d0:component_identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-96b5c92a35e70fcbc6eae8ba501fd1d0:single_response",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-96b5c92a35e70fcbc6eae8ba501fd1d0:original_v2_hash_binding",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-3cbb840e46066bcb7700bfdea712d36d:identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-3cbb840e46066bcb7700bfdea712d36d:usage_matches_normalization",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-3cbb840e46066bcb7700bfdea712d36d:component_identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-3cbb840e46066bcb7700bfdea712d36d:single_response",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-3cbb840e46066bcb7700bfdea712d36d:original_v2_hash_binding",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-7840d2f1c47aa62eec8d3ae6a58b2871:identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-7840d2f1c47aa62eec8d3ae6a58b2871:usage_matches_normalization",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-7840d2f1c47aa62eec8d3ae6a58b2871:component_identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-7840d2f1c47aa62eec8d3ae6a58b2871:single_response",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-7840d2f1c47aa62eec8d3ae6a58b2871:original_v2_hash_binding",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-225c51acee1b62a86feb7cceff752b88:identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-225c51acee1b62a86feb7cceff752b88:usage_matches_normalization",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-225c51acee1b62a86feb7cceff752b88:component_identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-225c51acee1b62a86feb7cceff752b88:single_response",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-225c51acee1b62a86feb7cceff752b88:original_v2_hash_binding",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-957f36336365b9d99f6130b9a48e72f2:identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-957f36336365b9d99f6130b9a48e72f2:usage_matches_normalization",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-957f36336365b9d99f6130b9a48e72f2:component_identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-957f36336365b9d99f6130b9a48e72f2:single_response",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-957f36336365b9d99f6130b9a48e72f2:original_v2_hash_binding",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-abac709a57440db64c8630e0a13dc42d:identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-abac709a57440db64c8630e0a13dc42d:usage_matches_normalization",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-abac709a57440db64c8630e0a13dc42d:component_identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-abac709a57440db64c8630e0a13dc42d:single_response",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-abac709a57440db64c8630e0a13dc42d:original_v2_hash_binding",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-30f27de33719cb6daecd91b8612c803d:identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-30f27de33719cb6daecd91b8612c803d:usage_matches_normalization",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-30f27de33719cb6daecd91b8612c803d:component_identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-30f27de33719cb6daecd91b8612c803d:single_response",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-30f27de33719cb6daecd91b8612c803d:original_v2_hash_binding",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-fb2c7bd9692661baf2e380465dbdfbe5:identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-fb2c7bd9692661baf2e380465dbdfbe5:usage_matches_normalization",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-fb2c7bd9692661baf2e380465dbdfbe5:component_identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-fb2c7bd9692661baf2e380465dbdfbe5:single_response",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-fb2c7bd9692661baf2e380465dbdfbe5:original_v2_hash_binding",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-f310a73882c427a5e06b6875bc8dc52a:identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-f310a73882c427a5e06b6875bc8dc52a:usage_matches_normalization",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-f310a73882c427a5e06b6875bc8dc52a:component_identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-f310a73882c427a5e06b6875bc8dc52a:single_response",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-f310a73882c427a5e06b6875bc8dc52a:original_v2_hash_binding",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-a33c65412704cb8a88755e4bf8548bd9:identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-a33c65412704cb8a88755e4bf8548bd9:usage_matches_normalization",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-a33c65412704cb8a88755e4bf8548bd9:component_identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-a33c65412704cb8a88755e4bf8548bd9:single_response",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-a33c65412704cb8a88755e4bf8548bd9:original_v2_hash_binding",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-55a2da12b753c627eb4236264ec4db0b:identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-55a2da12b753c627eb4236264ec4db0b:usage_matches_normalization",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-55a2da12b753c627eb4236264ec4db0b:component_identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-55a2da12b753c627eb4236264ec4db0b:single_response",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-55a2da12b753c627eb4236264ec4db0b:original_v2_hash_binding",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-268487bcfcde791603e226361df7d730:identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-268487bcfcde791603e226361df7d730:usage_matches_normalization",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-268487bcfcde791603e226361df7d730:component_identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-268487bcfcde791603e226361df7d730:single_response",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-268487bcfcde791603e226361df7d730:original_v2_hash_binding",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-a3f7f25197246dcf66c162936937a1c9:identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-a3f7f25197246dcf66c162936937a1c9:usage_matches_normalization",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-a3f7f25197246dcf66c162936937a1c9:component_identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-a3f7f25197246dcf66c162936937a1c9:single_response",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-a3f7f25197246dcf66c162936937a1c9:original_v2_hash_binding",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-4d1fbbe61bcbad0b5d433e355d7195aa:identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-4d1fbbe61bcbad0b5d433e355d7195aa:usage_matches_normalization",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-4d1fbbe61bcbad0b5d433e355d7195aa:component_identity",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-4d1fbbe61bcbad0b5d433e355d7195aa:single_response",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "integrated-4d1fbbe61bcbad0b5d433e355d7195aa:original_v2_hash_binding",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "23_unique_provider_calls",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v1-d-5414:prior_event_total",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v1-c-5414:prior_event_total",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v1-a-5414:prior_event_total",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v1-b-5414:prior_event_total",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v1-b-6028:prior_event_total",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v2-d-5414:prior_event_total",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v2-d-6028:prior_event_total",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v2-c-5414:prior_event_total",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v2-c-6028:prior_event_total",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v2-a-5414:prior_event_total",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v2-a-6028:prior_event_total",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v2-b-5414:prior_event_total",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v2-b-6028:prior_event_total",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v1-d-6028:no_provider_call_event",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v1-c-6028:no_provider_call_event",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v1-a-6028:no_provider_call_event",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "requests_v1_original_receipt_sum",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "requests_v2_original_receipt_sum",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "compositional_interpolant_versions",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "compositional_checker_successes_retained",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "compositional_import_recorder_scoped",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "native-archive-integration-v1:all_negative_controls_rejected",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "native-archive-integration-v1:no_execution_truth_promotion",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "native-archive-integration-v1:one_honest_pairing",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "native-repository-archive-integration-v1:all_negative_controls_rejected",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "native-repository-archive-integration-v1:no_execution_truth_promotion",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "native-repository-archive-integration-v1:one_honest_pairing",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "procedure136_decisions_match",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "procedure_truth_counts",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "procedure136_distinct_invocations",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "procedure13_controls_pass",
+      "detail": null,
+      "passed": true
+    },
+    {
+      "check": "procedure_no_live_authority",
+      "detail": null,
+      "passed": true
+    }
+  ],
+  "cohorts": {
+    "requests-cold-v1": {
+      "arms": {
+        "A": {
+          "api_reported_cost_ticks": 38909600,
+          "cached_input_tokens": 13568,
+          "input_tokens": 13693,
+          "reasoning_tokens": 671,
+          "total_tokens": 14428,
+          "visible_output_tokens": 64
+        },
+        "B": {
+          "api_reported_cost_ticks": 437845200,
+          "cached_input_tokens": 15104,
+          "input_tokens": 60684,
+          "reasoning_tokens": 4337,
+          "total_tokens": 65695,
+          "visible_output_tokens": 674
+        },
+        "C": {
+          "api_reported_cost_ticks": 108779600,
+          "cached_input_tokens": 512,
+          "input_tokens": 13693,
+          "reasoning_tokens": 832,
+          "total_tokens": 14589,
+          "visible_output_tokens": 64
+        },
+        "D": {
+          "api_reported_cost_ticks": 102251600,
+          "cached_input_tokens": 512,
+          "input_tokens": 13693,
+          "reasoning_tokens": 508,
+          "total_tokens": 14269,
+          "visible_output_tokens": 68
+        }
+      },
+      "calls": 7,
+      "no_completed_trajectory": true,
+      "original_provider_model_values": [
+        "grok-4.6"
+      ],
+      "served_fingerprints": [
+        "fp_e41c6060b2628547"
+      ],
+      "total_not_pooled_with_other_cohorts": true,
+      "usage": {
+        "api_reported_cost_ticks": 687786000,
+        "cached_input_tokens": 29696,
+        "input_tokens": 101763,
+        "reasoning_tokens": 6348,
+        "total_tokens": 108981,
+        "visible_output_tokens": 870
+      }
+    },
+    "requests-cold-v2": {
+      "arms": {
+        "A": {
+          "api_reported_cost_ticks": 464406000,
+          "cached_input_tokens": 1024,
+          "input_tokens": 50283,
+          "reasoning_tokens": 5351,
+          "total_tokens": 56543,
+          "visible_output_tokens": 909
+        },
+        "B": {
+          "api_reported_cost_ticks": 316288400,
+          "cached_input_tokens": 30976,
+          "input_tokens": 58786,
+          "reasoning_tokens": 3324,
+          "total_tokens": 62439,
+          "visible_output_tokens": 329
+        },
+        "C": {
+          "api_reported_cost_ticks": 408040800,
+          "cached_input_tokens": 14720,
+          "input_tokens": 59481,
+          "reasoning_tokens": 3616,
+          "total_tokens": 63336,
+          "visible_output_tokens": 239
+        },
+        "D": {
+          "api_reported_cost_ticks": 438402800,
+          "cached_input_tokens": 1024,
+          "input_tokens": 58786,
+          "reasoning_tokens": 1824,
+          "total_tokens": 60937,
+          "visible_output_tokens": 327
+        }
+      },
+      "calls": 16,
+      "no_completed_trajectory": true,
+      "original_provider_model_values": [
+        "grok-4.6"
+      ],
+      "served_fingerprints": [
+        "fp_e41c6060b2628547"
+      ],
+      "total_not_pooled_with_other_cohorts": true,
+      "usage": {
+        "api_reported_cost_ticks": 1627138000,
+        "cached_input_tokens": 47744,
+        "input_tokens": 227336,
+        "reasoning_tokens": 14115,
+        "total_tokens": 243255,
+        "visible_output_tokens": 1804
+      }
+    }
+  },
+  "counter_identity": "one provider terminal response per unique call_id; no conversation session asserted",
+  "events": {
+    "requests-cold-v1-a-5414": {
+      "api_reported_cost_ticks": 38909600,
+      "cached_input_tokens": 13568,
+      "input_tokens": 13693,
+      "reasoning_tokens": 671,
+      "total_tokens": 14428,
+      "visible_output_tokens": 64
+    },
+    "requests-cold-v1-b-5414": {
+      "api_reported_cost_ticks": 34095200,
+      "cached_input_tokens": 13568,
+      "input_tokens": 13693,
+      "reasoning_tokens": 433,
+      "total_tokens": 14192,
+      "visible_output_tokens": 66
+    },
+    "requests-cold-v1-b-6028": {
+      "api_reported_cost_ticks": 403750000,
+      "cached_input_tokens": 1536,
+      "input_tokens": 46991,
+      "reasoning_tokens": 3904,
+      "total_tokens": 51503,
+      "visible_output_tokens": 608
+    },
+    "requests-cold-v1-c-5414": {
+      "api_reported_cost_ticks": 108779600,
+      "cached_input_tokens": 512,
+      "input_tokens": 13693,
+      "reasoning_tokens": 832,
+      "total_tokens": 14589,
+      "visible_output_tokens": 64
+    },
+    "requests-cold-v1-d-5414": {
+      "api_reported_cost_ticks": 102251600,
+      "cached_input_tokens": 512,
+      "input_tokens": 13693,
+      "reasoning_tokens": 508,
+      "total_tokens": 14269,
+      "visible_output_tokens": 68
+    },
+    "requests-cold-v2-a-5414": {
+      "api_reported_cost_ticks": 225970800,
+      "cached_input_tokens": 1024,
+      "input_tokens": 27681,
+      "reasoning_tokens": 1708,
+      "total_tokens": 29787,
+      "visible_output_tokens": 398
+    },
+    "requests-cold-v2-a-6028": {
+      "api_reported_cost_ticks": 238435200,
+      "cached_input_tokens": 0,
+      "input_tokens": 22602,
+      "reasoning_tokens": 3643,
+      "total_tokens": 26756,
+      "visible_output_tokens": 511
+    },
+    "requests-cold-v2-b-5414": {
+      "api_reported_cost_ticks": 112648800,
+      "cached_input_tokens": 512,
+      "input_tokens": 13698,
+      "reasoning_tokens": 1020,
+      "total_tokens": 14782,
+      "visible_output_tokens": 64
+    },
+    "requests-cold-v2-b-6028": {
+      "api_reported_cost_ticks": 203639600,
+      "cached_input_tokens": 30464,
+      "input_tokens": 45088,
+      "reasoning_tokens": 2304,
+      "total_tokens": 47657,
+      "visible_output_tokens": 265
+    },
+    "requests-cold-v2-c-5414": {
+      "api_reported_cost_ticks": 36883200,
+      "cached_input_tokens": 13696,
+      "input_tokens": 13698,
+      "reasoning_tokens": 600,
+      "total_tokens": 14364,
+      "visible_output_tokens": 66
+    },
+    "requests-cold-v2-c-6028": {
+      "api_reported_cost_ticks": 371157600,
+      "cached_input_tokens": 1024,
+      "input_tokens": 45783,
+      "reasoning_tokens": 3016,
+      "total_tokens": 48972,
+      "visible_output_tokens": 173
+    },
+    "requests-cold-v2-d-5414": {
+      "api_reported_cost_ticks": 102632400,
+      "cached_input_tokens": 0,
+      "input_tokens": 13698,
+      "reasoning_tokens": 401,
+      "total_tokens": 14163,
+      "visible_output_tokens": 64
+    },
+    "requests-cold-v2-d-6028": {
+      "api_reported_cost_ticks": 335770400,
+      "cached_input_tokens": 1024,
+      "input_tokens": 45088,
+      "reasoning_tokens": 1423,
+      "total_tokens": 46774,
+      "visible_output_tokens": 263
+    }
+  },
+  "observed_arithmetic": "Every record total equals input + visible output + reasoning; cache is retained within input. No schema extrapolation to Grok CLI or other providers.",
+  "original_v2_recorded_hash_bindings_rechecked": 16,
+  "provider_authentication": "not independently authenticated; local original receipt bytes rehashed",
+  "reported_wrapper_counter_semantics": "provider total; components preserved without assuming disjointness",
+  "schema": "paper-original-historical-usage-join/v1",
+  "v1_original_aggregate_provider_hash_bindings_rechecked": false
+}

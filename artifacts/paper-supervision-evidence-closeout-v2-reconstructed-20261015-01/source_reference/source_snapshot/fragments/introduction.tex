@@ -1,0 +1,33 @@
+\section{Problem and contribution}
+\label{sec:introduction}
+
+The cost of a coding agent includes repeated repository discovery, specification
+interpretation, planning, repair, validation, and recovery. Persistent state can
+avoid some of this work only when the state remains applicable to the current
+program. A shorter prompt can omit necessary dependencies; a cached pass can
+refer to obsolete source. Repository-agent interfaces and test-validation
+benchmarks make this boundary between proposals and checks central to useful
+repair~\citep{baseline08,baseline11}.
+
+Our proposed method has three connected contributions. First, source and intent
+produce identity-bound semantic facts and explicit unresolved obligations.
+Second, those obligations guide deterministic analysis, checked reasoning and
+bounded synthesis before an authorized neural residual. Third, validation,
+evidence reuse and accepted-state publication preserve the scope and
+applicability of each observation. Accepted changes invalidate affected facts
+and plans, providing the next iteration with persistent, current evidence.
+
+The resulting hypothesis concerns the entire workflow: repeated neural
+reasoning and validation may be displaced by persistent, checked work.
+Context compression is one possible mechanism. Fewer model calls and less
+replanning are distinct mechanisms, while test reuse primarily reduces
+validation computation. Each requires its own correctness and cost comparison.
+No benefit follows merely from having a symbolic component in the source tree.
+
+We retain an earlier additive-context cold-repair study as one bounded
+experiment, then evaluate missing mechanisms incrementally. Architecture,
+local qualification, development pilots and confirmatory effectiveness have
+different evidential roles. A failed or inconclusive experiment remains a
+result; an unrun comparison remains an open research obligation. In particular,
+the original 32 cold cells cannot establish the value of persistent reasoning
+or whole-system token savings.

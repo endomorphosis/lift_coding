@@ -1,0 +1,18 @@
+{
+  "schema": "projection-review-correction@1",
+  "review": "audit/final_projection_review.md",
+  "changes": [
+    {
+      "finding": "Null IDs matched standalone Intent development to unrelated unbound benchmark rows",
+      "correction": "All encoder joins now require non-null original_run_id; all null-ID trace rows asserted unavailable/unsupported"
+    },
+    {
+      "finding": "Source preparation/inference mislabeled as intent_to_source_grounding",
+      "correction": "Stage renamed source_to_codebase_preparation_or_inference; independent intent_to_codebase_admitted_correspondence field remains unavailable/unsupported for every row"
+    }
+  ],
+  "changed_original_observations": false,
+  "source": "assemble_audit.py",
+  "reassembly_arithmetic_checks": 69,
+  "passed": true
+}

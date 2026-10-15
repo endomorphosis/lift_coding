@@ -1,0 +1,123 @@
+{
+  "completed": true,
+  "evidence": [
+    {
+      "behavior_reexecuted": false,
+      "bytes": 110865,
+      "evidence_tier": "original_record",
+      "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/procedures/native_integration_v1/results_attempt4/summary.json",
+      "sha256": "a22fc98ba9eaaca12a885fa71b88dc9abebd609b49e9674b05d29b0f416488dd",
+      "signature_verification": "not_performed"
+    }
+  ],
+  "freeze_sha256": "742f2fbd823ec1b27d2d544b00fe65a574f6e081ca27b75ad14b6e68853f1b45",
+  "limitations": [
+    "136 TEST-mode executions of a saved bounded arithmetic procedure, not136 repair trials.",
+    "2184 admission events and816 dispatches include repeated gates/steps; not2184 distinct candidates.",
+    "False is computed answer, not execution failure;13true123false all match expected decisions.",
+    "Original key/certificate/proof payload bytes and native interpreter sources were not rehashed here; summary does not establish production authority.",
+    "Earlier signed-procedure report limits (explicit TEST signer, trusted custody, empty native required-proof-contract list supplemented by adapter, no repository generalization) remain unchanged."
+  ],
+  "native_admission_count_is_not_independent_candidate_count": true,
+  "negative_control_checks": [
+    {
+      "control": "native forged-signature rejection",
+      "passed": true
+    },
+    {
+      "control": "native expired-certificate rejection",
+      "passed": true
+    },
+    {
+      "control": "native catalog-drift rejection",
+      "passed": true
+    },
+    {
+      "control": "LIVE admission rejected before dispatch",
+      "passed": true
+    },
+    {
+      "control": "native changed-check-observation rejection",
+      "passed": true
+    },
+    {
+      "control": "native substituted query descriptor rejection",
+      "passed": true
+    },
+    {
+      "control": "native prior invocation check receipt rejected",
+      "passed": true
+    },
+    {
+      "control": "native changed-query-CID rejection before dispatch",
+      "passed": true
+    },
+    {
+      "control": "native cross-invocation input rejection",
+      "passed": true
+    },
+    {
+      "control": "certified-domain length rejected before dispatch",
+      "passed": true
+    },
+    {
+      "control": "certified-domain budget rejected before dispatch",
+      "passed": true
+    },
+    {
+      "control": "certified-domain value rejected before dispatch",
+      "passed": true
+    },
+    {
+      "control": "native exact invocation checkpoint reused without redispatch",
+      "passed": true
+    }
+  ],
+  "partitions": {
+    "adversarial": 24,
+    "held_out": 48,
+    "shadow": 32,
+    "test": 32
+  },
+  "positive_or_negative_computed_answer_is_not_execution_pass_fail": true,
+  "preparation_and_freeze_seconds": 1.4021214819513261,
+  "processes": [
+    {
+      "bound_seconds": 120,
+      "returncode": 0,
+      "role": "produce",
+      "timed_out": false,
+      "wall_seconds": 1.5210041409591213
+    },
+    {
+      "bound_seconds": 120,
+      "returncode": 0,
+      "role": "verify_issue",
+      "timed_out": false,
+      "wall_seconds": 6.902932652039453
+    },
+    {
+      "bound_seconds": 120,
+      "returncode": 0,
+      "role": "execute",
+      "timed_out": false,
+      "wall_seconds": 8.819003315991722
+    }
+  ],
+  "runtime_counters": {
+    "actual_native_interpreter": "ProcedureInterpreter.execute(mode=TEST)",
+    "all_checks_passed": true,
+    "computed_false": 123,
+    "computed_true": 13,
+    "invocations": 136,
+    "model_tokens": 0,
+    "native_admissions": 2184,
+    "native_dispatches": 816,
+    "production_authority": false,
+    "provider_calls": 0,
+    "registry_promoted": false
+  },
+  "schema": "paper-original-signed-procedure-recovery/v1",
+  "study_id": "signed-native-procedure-attempt4",
+  "worker_total_seconds": 17.242940108990297
+}

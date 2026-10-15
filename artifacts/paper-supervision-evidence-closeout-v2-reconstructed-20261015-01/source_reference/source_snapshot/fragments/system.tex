@@ -1,0 +1,60 @@
+\section{The supervision loop}
+\label{sec:system}
+
+\paragraph{Compile state and obligations.}
+The semantic index extracts source-linked symbols, dependencies, contracts and
+analysis limits. Intent supplies candidate goals and permitted effects;
+formalization produces bounded obligations without turning an inferred
+specification into authority. Semantic state is separate from operational task
+state and artifact storage. Missing dependencies, dynamic features and lossy
+translations remain an explicit unknown frontier that requires more source,
+broader checking or abstention.
+
+\paragraph{Reason before proposing.}
+For each obligation, the intended supervisor considers applicable evidence or
+procedures, exact dependency and static analysis, contract/solver checks, and
+bounded deterministic repair or synthesis. A neural model proposes unresolved
+work through a permitted residual route. Abstract interpretation, translation
+validation and counterexample-guided methods provide established foundations;
+the contribution is their composition at the supervisor's decision boundary,
+not a new general-purpose prover~\citep{baseline02,baseline03,baseline04,baseline05}.
+The evaluation must demonstrate that a computed result changes the next actual
+action and passes independent checks. A route label or a candidate's assertion
+that it closes a claim is insufficient.
+
+\paragraph{Validate, reuse and publish.}
+Candidate edits are checked against the current source and required acceptance
+conditions. Evidence reuse requires matching subjects, dependency and
+environment identities, declared checker semantics and trust policy. For
+fixture-based tests, collection and materialized setup state must be resolved
+before call-phase reuse; required setup and teardown effects still run, and
+teardown failure prevents whole-item success. A complete accepted-transition
+manifest binds the current parent and applicable evidence before publication.
+Restart reconciliation must support valid continuation as well as rejection of
+stale work.
+
+\paragraph{Persist, invalidate and replan.}
+An accepted transition updates the state used by the next task. Source,
+dependency, fixture, policy and capability changes invalidate affected evidence
+and reopen obligations. Procedural memory can nominate previously useful
+actions, but applicability and independent validation remain necessary. Learned
+world models and procedure discovery require held-out downstream evaluation;
+their source presence does not establish generalization. The intended savings
+appear over trajectories of tasks, so a single cold proposal is an incomplete
+test of this architecture.
+
+\paragraph{Separate resource hypotheses.}
+For a fixed workload of $N$ tasks and arm $a$, let
+\[
+ T_a(N)=T_{\mathrm{setup},a}+\sum_{j\in\mathcal C_a(N)}T_j,
+\]
+where $\mathcal C_a(N)$ contains every workflow model call, including planning,
+formalization, proposals, review, failed attempts, retries and recovery.
+Provider-reported totals are preserved without adding overlapping cached or
+reasoning-token fields. Unknown usage remains unknown. The reduction
+$1-T_{\mathrm{system}}(N)/T_{\mathrm{baseline}}(N)$ is meaningful only for
+matched workloads with adequate independently measured progress and comparable
+complete accounting. Report setup and priming at explicit reuse horizons;
+provider charges, host computation and elapsed time are separate quantities.
+Independent experimental oracle work is reported separately from each arm's
+runtime validation, without hiding mandatory runtime costs.

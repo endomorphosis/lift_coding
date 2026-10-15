@@ -1,0 +1,110 @@
+{
+  "checks": [
+    {
+      "check": "requests-cold-v1_arm_total",
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v1_A_usage_schema",
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v1_B_usage_schema",
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v1_C_usage_schema",
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v1_D_usage_schema",
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v1_event_usage",
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v1_all_fail_trajectory",
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v2_arm_total",
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v2_A_usage_schema",
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v2_B_usage_schema",
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v2_C_usage_schema",
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v2_D_usage_schema",
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v2_event_usage",
+      "passed": true
+    },
+    {
+      "check": "requests-cold-v2_all_fail_trajectory",
+      "passed": true
+    },
+    {
+      "check": "reuse_case_count",
+      "passed": true
+    },
+    {
+      "check": "reuse_positive_count",
+      "passed": true
+    },
+    {
+      "check": "reuse_cases_cold_match",
+      "passed": true
+    },
+    {
+      "check": "reuse_all_cases_match_prespecification",
+      "passed": true
+    },
+    {
+      "check": "timing_pairs_count",
+      "passed": true
+    },
+    {
+      "check": "timing_warm_reuses",
+      "passed": true
+    },
+    {
+      "check": "timing_wall_totals",
+      "passed": true
+    },
+    {
+      "check": "timing_net_saving_not_established",
+      "passed": true
+    },
+    {
+      "check": "scorer_unique_vs_records",
+      "passed": true
+    },
+    {
+      "check": "historical_report_denominator",
+      "passed": true
+    },
+    {
+      "check": "routing_reduction",
+      "passed": true
+    },
+    {
+      "check": "context_usage_schema",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "scope": "arithmetic/count consistency over retained reports and bounded case records; not originating-run authenticity"
+}
