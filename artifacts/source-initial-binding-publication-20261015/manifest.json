@@ -1,0 +1,43 @@
+{
+  "accelerator_publication": "09b9d761373a9fded02f6e39d18d00907d332a2c",
+  "child_manifest": {
+    "bytes": 12286,
+    "path": "docs/agent_supervisor/evidence/source-initial-binding-20261015/manifest.json",
+    "sha256": "5981039405da2cf5ae4b9a24591d8b1ed617ff69163aa2ec130a2607bae457b6"
+  },
+  "files": [
+    {
+      "bytes": 5932,
+      "path": "implementation_plan/docs/131-supervisor-source-initial-binding-2026-10-15.md",
+      "sha256": "81653e3348191988e0b15813f88cc4a151595f16c0be8752783d98d49c327455"
+    },
+    {
+      "bytes": 23684,
+      "path": "artifacts/source-initial-binding-publication-20261015/child-ci-observation.json",
+      "sha256": "6335b012ed0fb139271d2ca6453ea98ec8d0c47d255b89509b7a0260bce7a849"
+    },
+    {
+      "bytes": 5069,
+      "path": "artifacts/source-initial-binding-publication-20261015/observe_hosted_ci.py",
+      "sha256": "c8f12353e0dad5353a27f8155138f645bbd6f70ff653ab236b3044cf75beb9d6"
+    },
+    {
+      "bytes": 43232,
+      "path": "artifacts/source-initial-binding-publication-20261015/publication_checker.py",
+      "sha256": "c9fc8afdda9dcd2f66d37280a57e3da9a090035d5511fa294c681e6c47d670a1"
+    },
+    {
+      "bytes": 11512,
+      "path": "artifacts/source-initial-binding-publication-20261015/parent-checks.json",
+      "sha256": "515423904b3d2dd482fd949440eda1374e3c3200cf79644cd57ef9209d53dd2f"
+    }
+  ],
+  "initial_parent_research_base": "da570995fcb156d4a64078abf1bb6d7a10645ef3",
+  "manifest_self_excluded": true,
+  "parent_base": "da570995fcb156d4a64078abf1bb6d7a10645ef3",
+  "preserved_parent_gitlinks": {
+    "external/ipfs_datasets": "f4a823231ad52c9252504810a1b00ed4738346b6",
+    "external/ipfs_kit": "40c98c71b95be750509ffdb21e7e5494d91b4e79"
+  },
+  "schema": "source-initial-binding-parent-manifest@1"
+}

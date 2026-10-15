@@ -1,0 +1,243 @@
+{
+  "accelerator_execution_head": "55c42dd740d75c3ba04d6991c90cf0aa0dccd8a9",
+  "accelerator_publication": "09b9d761373a9fded02f6e39d18d00907d332a2c",
+  "actual_inert_child_probes": true,
+  "additional_provider_model_training_solver_docker_calls": 0,
+  "all_prior_parent_index_objects_preserved_except_accelerator": true,
+  "authored_listener_and_deployment_metadata_seams": true,
+  "baseline_control": {
+    "accelerator_execution_head": "55c42dd740d75c3ba04d6991c90cf0aa0dccd8a9",
+    "bytes": 220614,
+    "datasets_execution_checkout": "/home/barberb/lift_coding/.worktrees/source-query-replay-datasets-20261014",
+    "datasets_execution_revision": "f4a823231ad52c9252504810a1b00ed4738346b6",
+    "diagnostic": "initial source binding CAS replay must release SERVER",
+    "elapsed_seconds": 23.079,
+    "expected_failures": 1,
+    "path": "docs/agent_supervisor/evidence/source-initial-binding-20261015/baseline-01/commands.json",
+    "promoted_to_pass": false,
+    "sha256": "1dbe9bb6f0851991943d38093d27d8c75f261a735d15a768e02e39a0563cfef8",
+    "status": "expected_regression",
+    "unpatched_production_revision": "55c42dd740d75c3ba04d6991c90cf0aa0dccd8a9"
+  },
+  "baseline_control_counted_as_pass": false,
+  "baseline_controls": [
+    {
+      "accelerator_execution_head": "55c42dd740d75c3ba04d6991c90cf0aa0dccd8a9",
+      "bytes": 220614,
+      "datasets_execution_checkout": "/home/barberb/lift_coding/.worktrees/source-query-replay-datasets-20261014",
+      "datasets_execution_revision": "f4a823231ad52c9252504810a1b00ed4738346b6",
+      "diagnostic": "initial source binding CAS replay must release SERVER",
+      "elapsed_seconds": 23.079,
+      "expected_failures": 1,
+      "path": "docs/agent_supervisor/evidence/source-initial-binding-20261015/baseline-01/commands.json",
+      "promoted_to_pass": false,
+      "sha256": "1dbe9bb6f0851991943d38093d27d8c75f261a735d15a768e02e39a0563cfef8",
+      "status": "expected_regression",
+      "unpatched_production_revision": "55c42dd740d75c3ba04d6991c90cf0aa0dccd8a9"
+    }
+  ],
+  "checked_at_utc": "2026-10-15T00:40:44.409771+00:00",
+  "child_manifest": {
+    "bytes": 12286,
+    "path": "docs/agent_supervisor/evidence/source-initial-binding-20261015/manifest.json",
+    "sha256": "5981039405da2cf5ae4b9a24591d8b1ed617ff69163aa2ec130a2607bae457b6"
+  },
+  "complete_import_closure_attested": false,
+  "completion_authority": false,
+  "datasets_execution_revision": "f4a823231ad52c9252504810a1b00ed4738346b6",
+  "documentation_link_counts": {
+    "anchors": 18,
+    "manual_links": [
+      {
+        "anchors": 2,
+        "errors": [],
+        "path": "docs/agent_supervisor/evidence/source-initial-binding-20261015/README.md",
+        "relative_links": 18
+      },
+      {
+        "anchors": 2,
+        "errors": [],
+        "path": "docs/agent_supervisor/source_lookup_worker.md",
+        "relative_links": 15
+      },
+      {
+        "anchors": 14,
+        "errors": [],
+        "path": "docs/agent_supervisor/reversible_codebase_views_plan.md",
+        "relative_links": 88
+      }
+    ],
+    "relative_links": 121
+  },
+  "documentation_sha256": "b9271a41db1370272db3925a52d7bb3c97d1fee37178ffa5f237bc60d7a6a296",
+  "execution_authority": false,
+  "fixed_heads_and_indexes_unchanged": true,
+  "four_local_documentation_blocks_passed": true,
+  "git_refs_and_index_mutated": false,
+  "git_state_after": {
+    "/home/barberb/lift_coding/.worktrees/repository-proof-context-kit-20261014": {
+      "head": "40c98c71b95be750509ffdb21e7e5494d91b4e79",
+      "index_sha256": "755c0d46d5ff81281d61fe417cc692e662f9e68bee5403ae5b4470ba854b6233",
+      "refs_sha256": "18f9d26f43abe1a986f904a0a6e91c7e6b65ad20849646b4d4177a78c1b01672"
+    },
+    "/home/barberb/lift_coding/.worktrees/source-initial-binding-20261015": {
+      "head": "09b9d761373a9fded02f6e39d18d00907d332a2c",
+      "index_sha256": "23d05a933189e41a6a1f4823ccca311bcfa6b4851a2d06adbb9717f8e101b142",
+      "refs_sha256": "38a701613432f77d7a34cdf36358e0591006ee4acd8d1df590975268005c408a"
+    },
+    "/home/barberb/lift_coding/.worktrees/source-initial-binding-root-20261015": {
+      "head": "da570995fcb156d4a64078abf1bb6d7a10645ef3",
+      "index_sha256": "6b9d42fd6909ff56914c58149ba9250d1d19e1e499c5e996207de761fd327858",
+      "refs_sha256": "a1a3f126c3cc39661a5d8972c9cf430e73b1450286bb0da78465a897a94c5e74"
+    },
+    "/home/barberb/lift_coding/.worktrees/source-query-replay-datasets-20261014": {
+      "head": "f4a823231ad52c9252504810a1b00ed4738346b6",
+      "index_sha256": "0103458032f333a7020d6436b49ed64b5a1960dd3f099125094e0bbcfd0c86d3",
+      "refs_sha256": "babfcd1d062cc58f6f2d8a9af9c652b5fede36e54839f5931cc8699e8eedad83"
+    }
+  },
+  "git_state_before": {
+    "/home/barberb/lift_coding/.worktrees/repository-proof-context-kit-20261014": {
+      "head": "40c98c71b95be750509ffdb21e7e5494d91b4e79",
+      "index_sha256": "755c0d46d5ff81281d61fe417cc692e662f9e68bee5403ae5b4470ba854b6233",
+      "refs_sha256": "18f9d26f43abe1a986f904a0a6e91c7e6b65ad20849646b4d4177a78c1b01672"
+    },
+    "/home/barberb/lift_coding/.worktrees/source-initial-binding-20261015": {
+      "head": "09b9d761373a9fded02f6e39d18d00907d332a2c",
+      "index_sha256": "23d05a933189e41a6a1f4823ccca311bcfa6b4851a2d06adbb9717f8e101b142",
+      "refs_sha256": "38a701613432f77d7a34cdf36358e0591006ee4acd8d1df590975268005c408a"
+    },
+    "/home/barberb/lift_coding/.worktrees/source-initial-binding-root-20261015": {
+      "head": "da570995fcb156d4a64078abf1bb6d7a10645ef3",
+      "index_sha256": "6b9d42fd6909ff56914c58149ba9250d1d19e1e499c5e996207de761fd327858",
+      "refs_sha256": "a1a3f126c3cc39661a5d8972c9cf430e73b1450286bb0da78465a897a94c5e74"
+    },
+    "/home/barberb/lift_coding/.worktrees/source-query-replay-datasets-20261014": {
+      "head": "f4a823231ad52c9252504810a1b00ed4738346b6",
+      "index_sha256": "0103458032f333a7020d6436b49ed64b5a1960dd3f099125094e0bbcfd0c86d3",
+      "refs_sha256": "babfcd1d062cc58f6f2d8a9af9c652b5fede36e54839f5931cc8699e8eedad83"
+    }
+  },
+  "historical_codec_and_edit_mapper_unchanged": true,
+  "hosted_ci_qualified_here": false,
+  "incoming_parent_accelerator_pin": "55c42dd740d75c3ba04d6991c90cf0aa0dccd8a9",
+  "initial_parent_base_preserved_as_ancestor": true,
+  "initial_parent_research_base": "da570995fcb156d4a64078abf1bb6d7a10645ef3",
+  "kit_execution_revision": "40c98c71b95be750509ffdb21e7e5494d91b4e79",
+  "new_suite_child_processes_launched": false,
+  "observed_child_origin_main": "09b9d761373a9fded02f6e39d18d00907d332a2c",
+  "observed_shared_ref_changes": [],
+  "optional_raw_child_ci_binding": {
+    "bytes": 23684,
+    "path": "artifacts/source-initial-binding-publication-20261015/child-ci-observation.json",
+    "sha256": "6335b012ed0fb139271d2ca6453ea98ec8d0c47d255b89509b7a0260bce7a849"
+  },
+  "original_qualification_counts_added": false,
+  "output_self_excluded": true,
+  "parent_base": "da570995fcb156d4a64078abf1bb6d7a10645ef3",
+  "parent_inputs": [
+    {
+      "bytes": 5932,
+      "path": "implementation_plan/docs/131-supervisor-source-initial-binding-2026-10-15.md",
+      "sha256": "81653e3348191988e0b15813f88cc4a151595f16c0be8752783d98d49c327455"
+    },
+    {
+      "bytes": 23684,
+      "path": "artifacts/source-initial-binding-publication-20261015/child-ci-observation.json",
+      "sha256": "6335b012ed0fb139271d2ca6453ea98ec8d0c47d255b89509b7a0260bce7a849"
+    },
+    {
+      "bytes": 5069,
+      "path": "artifacts/source-initial-binding-publication-20261015/observe_hosted_ci.py",
+      "sha256": "c8f12353e0dad5353a27f8155138f645bbd6f70ff653ab236b3044cf75beb9d6"
+    },
+    {
+      "bytes": 43232,
+      "path": "artifacts/source-initial-binding-publication-20261015/publication_checker.py",
+      "sha256": "c9fc8afdda9dcd2f66d37280a57e3da9a090035d5511fa294c681e6c47d670a1"
+    }
+  ],
+  "preserved_parent_gitlinks": {
+    "external/ipfs_accelerate": "09b9d761373a9fded02f6e39d18d00907d332a2c",
+    "external/ipfs_datasets": "f4a823231ad52c9252504810a1b00ed4738346b6",
+    "external/ipfs_kit": "40c98c71b95be750509ffdb21e7e5494d91b4e79"
+  },
+  "previous_test_counts_aggregated": false,
+  "prior_child_evidence_objects_preserved": 9339,
+  "prior_phase_manifests": {
+    "comparison": "immutable_BASE_Git_objects_and_preserved_stage_zero_modes_blob_ids",
+    "imported_as_current_qualification": false,
+    "manifests": [
+      {
+        "bytes": 22577,
+        "git_blob": "0f32bc95effcc9987c105ca7455c8a00d471c688",
+        "git_mode": "100644",
+        "path": "docs/agent_supervisor/evidence/source-query-replay-20261014/manifest.json",
+        "revision": "55c42dd740d75c3ba04d6991c90cf0aa0dccd8a9",
+        "sha256": "6594c7d99301914f7c48513e20fe752d83f6f9c10879b195070ab96153ea71f8"
+      },
+      {
+        "bytes": 11551,
+        "git_blob": "905758cbb7497f52e92a407ec817c2d868c347c6",
+        "git_mode": "100644",
+        "path": "docs/agent_supervisor/evidence/source-worker-construction-20261014/manifest.json",
+        "revision": "55c42dd740d75c3ba04d6991c90cf0aa0dccd8a9",
+        "sha256": "61098784f769dbb00fc62f60302023139f22691b09404563933dd8340542785b"
+      },
+      {
+        "bytes": 13768,
+        "git_blob": "28d50853951310eb4942e24a4477ee628827ac7f",
+        "git_mode": "100644",
+        "path": "docs/agent_supervisor/evidence/source-worker-delivery-fences-20261014/manifest.json",
+        "revision": "55c42dd740d75c3ba04d6991c90cf0aa0dccd8a9",
+        "sha256": "52ecafe0ad1558063b854565a96e06ff88253c6df4fbc0e498037959ce9ac874"
+      }
+    ],
+    "previous_qualifications_reexecuted_here": false,
+    "previous_test_counts_aggregated": false
+  },
+  "production_coding_child_adoption": false,
+  "proof_authority": false,
+  "qualification_sha256": "576bcb69693faa41383496bbfcb383ebf886266b3f30d8098228751b1309efa8",
+  "qualification_shared_ref_changes": [
+    {
+      "actor_attributed": false,
+      "after": "85ac7a2887fc95892a326b94785185b7727f364cb53b36153fe3df7541b8303c",
+      "before": "a49446e8381e4b516c3ff85d687bbd71a490eb80edc3b500f7047a28794edcf4",
+      "path": "/home/barberb/lift_coding/.worktrees/source-initial-binding-20261015"
+    }
+  ],
+  "retained_new_cases": 32,
+  "retained_source_bindings": 279,
+  "retained_suites": 13,
+  "retained_suites_include_actual_inert_child_probes": true,
+  "retained_tests": 299,
+  "schema": "source-initial-binding-parent-publication@1",
+  "selected_documentation": "documentation-checks.json",
+  "selected_qualification": "qualification-01",
+  "shared_ref_actor_attributed": false,
+  "shared_refs_observational_only": true,
+  "status": "pass",
+  "target_roster_migration": {
+    "appended_target": "test/api/test_current_source_task_admission.py",
+    "baseline_commands_rewritten": false,
+    "expanded_roster_count": 13,
+    "original_roster_count": 12,
+    "original_roster_snapshot": {
+      "bytes": 631,
+      "path": "docs/agent_supervisor/evidence/source-initial-binding-20261015/baseline-01/source-snapshot/targets.json.snapshot.txt",
+      "sha256": "d4664781a92e4f895dcbcbfdf014e073bb2ac1ee11c63d176ad1e3cbb275dcb9"
+    },
+    "qualification_driver_changed": false,
+    "record_binding": {
+      "bytes": 2842,
+      "path": "docs/agent_supervisor/evidence/source-initial-binding-20261015/target-roster-migration.json",
+      "sha256": "9ca5001e371821295fe759ffe3501d2ba1165fbe3bc99314382d6d3cd5d78189"
+    },
+    "source_inventory_changed": false
+  },
+  "tests_or_workflow_rerun": false,
+  "total_session_token_savings_established": false,
+  "universal_cas_callback_safety": false,
+  "worker_uid_qualified": false
+}
