@@ -1,0 +1,83 @@
+{
+  "actual_merge": "a8d2eb15a24d6003c210d8b96ace481865769160",
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-commit-independent-review-v01.json": {
+      "bytes": 2570,
+      "path": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-commit-independent-review-v01.json",
+      "sha256": "1aa28ebe40977d9b646ce1aa551ef5dfa78792b727cf5e28b5d6ed9a5f0bc8a5"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-final-stage-independent-review-v01.json": {
+      "bytes": 23648,
+      "path": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-final-stage-independent-review-v01.json",
+      "sha256": "74805868806748c5d6688955d69c2811a2fc8a1d60db48d2a9c700f63b45ee59"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-merge-response-v01.json": {
+      "bytes": 123,
+      "path": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-merge-response-v01.json",
+      "sha256": "ce987c4638b7e098d4b63b51d82f3069b6a73a1770f8595c0e0336135001f187"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-pr-merged-v01.json": {
+      "bytes": 22953,
+      "path": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-pr-merged-v01.json",
+      "sha256": "84632fb8802fb47ae1b3b762ec0d8eb472907fa73dff08367e54c4b666621698"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-premerge-independent-review-v01.json": {
+      "bytes": 6020,
+      "path": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-premerge-independent-review-v01.json",
+      "sha256": "c47649f695987d8d37145e0282a57c83169ec4db546a1be016985e6616ac292c"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-premerge-remote-observation-v01.json": {
+      "bytes": 127176,
+      "path": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-premerge-remote-observation-v01.json",
+      "sha256": "ac1d3d0c7c85c4d6011d93442111fdb7c80c24cef90e8258ecfa66ea93723e9d"
+    }
+  },
+  "authorship": {
+    "authored_model_primary_archive_resume_helpers": true,
+    "independent_algorithm_or_result_counter_claim": false
+  },
+  "changed_paths": 15,
+  "checks": [
+    "Actual owned fetched merged-main ref equals supplied merge",
+    "Actual ordered merge parents exactly observed incoming d0 and reviewed c13 head",
+    "Actual merge tree exactly equals independently reviewed candidate tree",
+    "Ordinary API merge response explicitly records actual success",
+    "Actual PR1306 record is merged/closed and ready",
+    "Merged PR binds exact reviewed repository/head/base",
+    "Actual merged PR remains exact one-commit15-path contribution",
+    "Clean stage/commit/premerge qualifications join exact actual merged tree",
+    "All prior32227 incoming entries except reviewed guide append, all10gitlinks/4symlinks preserved by exact tree identity",
+    "Prior hosted CI remains explicitly unpassed with four account-billing startup failures",
+    "Closing owned merge-ref identity unchanged"
+  ],
+  "checks_passed": 11,
+  "findings": [],
+  "first_parent": "d0d44b3e0f7c2ba804b0d9115f7a1efd2ad926c3",
+  "full_preservation_transferred_by_exact_tree_identity": true,
+  "gitlinks_preserved": 10,
+  "hosted_CI_limitation": "Four retained CodeQL startup annotations explicitly account billing lock; other checks queued in reviewed premerge observation. No hosted code-validation pass inferred from ordinary merge success.",
+  "hosted_checks_passed": false,
+  "incoming_entries": 32227,
+  "limits": {
+    "Git_mutations": 0,
+    "canonical_Git_commands": 0,
+    "extra_stage_tests": 0,
+    "network_or_SDK_calls": 0,
+    "numerical_or_model_calls": 0,
+    "original_or_private_body_reads": 0
+  },
+  "merged_entries": 32241,
+  "owned_merge_ref": "refs/codex/legal-modality-conditions-retention-20261014-01/merged-main-v01",
+  "parents": [
+    "d0d44b3e0f7c2ba804b0d9115f7a1efd2ad926c3",
+    "c13e83f4e82d5839465744eef19d4240ca378be0"
+  ],
+  "passed": true,
+  "pr_number": 1306,
+  "repository": "endomorphosis/ipfs_datasets_py",
+  "reviewed_head": "c13e83f4e82d5839465744eef19d4240ca378be0",
+  "schema": "modality-conditions-retention-source-merge-independent-review/v1",
+  "scope": "Actual source merge parent/tree/PR custody and inherited full incoming preservation only; no model/HF replay or root integration qualification.",
+  "symlinks_preserved": 4,
+  "tree": "033abb89c28f7d02e8ab0ece156a46acc31002c0"
+}
