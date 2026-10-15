@@ -1,0 +1,521 @@
+diff --git a/ipfsspec/async_ipfs.py b/ipfsspec/async_ipfs.py
+index 197dc65a2aaddd63df1fd24b4e51ca41710f9db1..6924a074d76be8cba0e5f2e33823b483ca05226c 100644
+--- a/ipfsspec/async_ipfs.py
++++ b/ipfsspec/async_ipfs.py
+@@ -27,6 +27,7 @@ logger = logging.getLogger("ipfsspec")
+ DagPbCodec = multicodec.get("dag-pb")
+ RawCodec = multicodec.get("raw")
+ 
++
+ class RequestsTooQuick(OSError):
+     def __init__(self, retry_after=None):
+         self.retry_after = retry_after
+@@ -42,7 +43,12 @@ class AsyncIPFSGateway:
+     async def _cid_req(self, method, path, headers=None, **kwargs):
+         headers = headers or {}
+         if self.resolution == "path":
+-            res = await method("/".join((self.url, self.protocol,  path)), trace_request_ctx={'gateway': self.url}, headers=headers, **kwargs)
++            res = await method(
++                "/".join((self.url, self.protocol, path)),
++                trace_request_ctx={"gateway": self.url},
++                headers=headers,
++                **kwargs,
++            )
+         elif self.resolution == "subdomain":
+             raise NotImplementedError("subdomain resolution is not yet implemented")
+         else:
+@@ -106,7 +112,9 @@ class AsyncIPFSGateway:
+ 
+             # Decode as PBNode to access links
+             if current_cid.codec != DagPbCodec:
+-                raise FileNotFoundError(f"Cannot traverse path through non-DAG-PB block: {current_cid}")
++                raise FileNotFoundError(
++                    f"Cannot traverse path through non-DAG-PB block: {current_cid}"
++                )
+ 
+             node = unixfsv1.PBNode.loads(current_block)
+ 
+@@ -118,7 +126,9 @@ class AsyncIPFSGateway:
+                     break
+ 
+             if matching_link is None:
+-                raise FileNotFoundError(f"Path segment '{segment}' not found in directory {current_cid}")
++                raise FileNotFoundError(
++                    f"Path segment '{segment}' not found in directory {current_cid}"
++                )
+ 
+             # Decode the child CID from the link's Hash
+             try:
+@@ -128,19 +138,28 @@ class AsyncIPFSGateway:
+ 
+             # Verify child block exists in CAR
+             if child_cid not in blocks:
+-                raise FileNotFoundError(f"Child block {child_cid} for path segment '{segment}' not found in CAR response")
++                raise FileNotFoundError(
++                    f"Child block {child_cid} for path segment '{segment}' not found in CAR response"
++                )
+ 
+             current_cid = child_cid
+ 
+         return current_cid
+ 
+     async def info(self, path, session):
+-        res = await self.get(path, session, headers={"Accept": "application/vnd.ipld.car"}, params={"format": "car", "dag-scope": "block"})
++        res = await self.get(
++            path,
++            session,
++            headers={"Accept": "application/vnd.ipld.car"},
++            params={"format": "car", "dag-scope": "block"},
++        )
+         self._raise_not_found_for_status(res, path)
+ 
+         resdata = await res.read()
+ 
+-        _, blocks = read_car(resdata)  # roots should be ignored by https://specs.ipfs.tech/http-gateways/trustless-gateway/
++        _, blocks = read_car(
++            resdata
++        )  # roots should be ignored by https://specs.ipfs.tech/http-gateways/trustless-gateway/
+         blocks = {cid: data for cid, data, _ in blocks}
+ 
+         # Verify the merkle proof from root CID through path segments
+@@ -155,7 +174,6 @@ class AsyncIPFSGateway:
+                 "size": len(block),
+             }
+         elif cid.codec == DagPbCodec:
+-
+             node = unixfsv1.PBNode.loads(block)
+             data = unixfsv1.Data.loads(node.Data)
+             if data.Type == unixfsv1.DataType.Raw:
+@@ -176,7 +194,9 @@ class AsyncIPFSGateway:
+                     "islink": False,
+                 }
+             elif data.Type == unixfsv1.DataType.Metadata:
+-                raise NotImplementedError(f"The path '{path}' contains a Metadata node, this is currently not implemented")
++                raise NotImplementedError(
++                    f"The path '{path}' contains a Metadata node, this is currently not implemented"
++                )
+             elif data.Type == unixfsv1.DataType.Symlink:
+                 return {
+                     "name": path,
+@@ -185,9 +205,13 @@ class AsyncIPFSGateway:
+                     "islink": True,
+                 }
+             elif data.Type == unixfsv1.DataType.HAMTShard:
+-                raise NotImplementedError(f"The path '{path}' contains a HAMTSharded directory, this is currently not implemented")
++                raise NotImplementedError(
++                    f"The path '{path}' contains a HAMTSharded directory, this is currently not implemented"
++                )
+         else:
+-            raise FileNotFoundError(path)  # it exists, but is not a UNIXFSv1 object, so it's not a file
++            raise FileNotFoundError(
++                path
++            )  # it exists, but is not a UNIXFSv1 object, so it's not a file
+ 
+     async def cat(self, path, session):
+         res = await self.get(path, session)
+@@ -207,12 +231,19 @@ class AsyncIPFSGateway:
+             yield size, res.content.iter_chunked(chunk_size)
+ 
+     async def ls(self, path, session, detail=False):
+-        res = await self.get(path, session, headers={"Accept": "application/vnd.ipld.car"}, params={"format": "car", "dag-scope": "block"})
++        res = await self.get(
++            path,
++            session,
++            headers={"Accept": "application/vnd.ipld.car"},
++            params={"format": "car", "dag-scope": "block"},
++        )
+         self._raise_not_found_for_status(res, path)
+ 
+         resdata = await res.read()
+ 
+-        _, blocks = read_car(resdata)  # roots should be ignored by https://specs.ipfs.tech/http-gateways/trustless-gateway/
++        _, blocks = read_car(
++            resdata
++        )  # roots should be ignored by https://specs.ipfs.tech/http-gateways/trustless-gateway/
+         blocks = {cid: data for cid, data, _ in blocks}
+ 
+         # Verify the chain of custody from root CID through path segments
+@@ -228,9 +259,9 @@ class AsyncIPFSGateway:
+             raise NotADirectoryError(path)
+ 
+         if detail:
+-            return await asyncio.gather(*(
+-                self.info(path + "/" + link.Name, session)
+-                for link in node.Links))
++            return await asyncio.gather(
++                *(self.info(path + "/" + link.Name, session) for link in node.Links)
++            )
+         else:
+             return [path + "/" + link.Name for link in node.Links]
+ 
+@@ -240,15 +271,17 @@ class AsyncIPFSGateway:
+         """
+         if response.status == 404:  # returned for known missing files
+             raise FileNotFoundError(url)
+-        elif response.status == 400:  # return for invalid requests, so it's also certainly not there
++        elif (
++            response.status == 400
++        ):  # return for invalid requests, so it's also certainly not there
+             raise FileNotFoundError(url)
+         response.raise_for_status()
+ 
+ 
+ async def get_client(**kwargs):
+     retry_options = aiohttp_retry.ExponentialRetry(
+-            attempts=5,
+-            exceptions={OSError, aiohttp.ServerDisconnectedError, asyncio.TimeoutError})
++        attempts=5, exceptions={OSError, aiohttp.ServerDisconnectedError, asyncio.TimeoutError}
++    )
+     retry_client = aiohttp_retry.RetryClient(raise_for_status=False, retry_options=retry_options)
+     return retry_client
+ 
+@@ -283,8 +316,13 @@ def get_gateway(protocol="ipfs", gateway_addr=None):
+     # internal configuration: accept IPFSSPEC_GATEWAYS for backwards compatibility
+     if ipfsspec_gateways := os.environ.get("IPFSSPEC_GATEWAYS", ""):
+         ipfs_gateway = ipfsspec_gateways.split()[0]
+-        logger.debug("using IPFS gateway from IPFSSPEC_GATEWAYS environment variable: %s", ipfs_gateway)
+-        warnings.warn("The IPFSSPEC_GATEWAYS environment variable is deprecated, please configure your IPFS Gateway according to IPIP-280, e.g. by using the IPFS_GATEWAY environment variable or using the ~/.ipfs/gateway file.", DeprecationWarning)
++        logger.debug(
++            "using IPFS gateway from IPFSSPEC_GATEWAYS environment variable: %s", ipfs_gateway
++        )
++        warnings.warn(
++            "The IPFSSPEC_GATEWAYS environment variable is deprecated, please configure your IPFS Gateway according to IPIP-280, e.g. by using the IPFS_GATEWAY environment variable or using the ~/.ipfs/gateway file.",
++            DeprecationWarning,
++        )
+         return AsyncIPFSGateway(ipfs_gateway, protocol)
+ 
+     # check various well-known files for possible gateway configurations
+@@ -307,7 +345,9 @@ def get_gateway(protocol="ipfs", gateway_addr=None):
+ 
+     if system == "Windows":
+         candidates = [
+-            Path.home() / ".ipfs" / "gateway",  # on windows, the HOME environment variable may not exist
++            Path.home()
++            / ".ipfs"
++            / "gateway",  # on windows, the HOME environment variable may not exist
+             Path(os.environ.get("LOCALAPPDATA")) / "ipfs" / "gateway",
+             Path(os.environ.get("APPDATA")) / "ipfs" / "gateway",
+             Path(os.environ.get("PROGRAMDATA")) / "ipfs" / "gateway",
+@@ -330,27 +370,36 @@ def get_gateway(protocol="ipfs", gateway_addr=None):
+             return ipfs_gateway
+ 
+     # if we reach this point, no gateway is configured
+-    raise RuntimeError("IPFS Gateway could not be found!\n"
+-                       "In order to access IPFS, you must configure an "
+-                       "IPFS Gateway using a IPIP-280 configuration method. "
+-                       "Possible options are: \n"
+-                       "  * set the environment variable IPFS_GATEWAY\n"
+-                       "  * write a gateway in the first line of the file ~/.ipfs/gateway\n"
+-                       "\n"
+-                       "It's always best to run your own IPFS gateway, e.g. by using "
+-                       "IPFS Desktop (https://docs.ipfs.tech/install/ipfs-desktop/) or "
+-                       "the command line version Kubo (https://docs.ipfs.tech/install/command-line/). "
+-                       "If you can't run your own gateway, you may also try using the "
+-                       "public IPFS gateway at https://ipfs.io or https://dweb.link . "
+-                       "However, this is not recommended for productive use and you may experience "
+-                       "severe performance issues.")
++    raise RuntimeError(
++        "IPFS Gateway could not be found!\n"
++        "In order to access IPFS, you must configure an "
++        "IPFS Gateway using a IPIP-280 configuration method. "
++        "Possible options are: \n"
++        "  * set the environment variable IPFS_GATEWAY\n"
++        "  * write a gateway in the first line of the file ~/.ipfs/gateway\n"
++        "\n"
++        "It's always best to run your own IPFS gateway, e.g. by using "
++        "IPFS Desktop (https://docs.ipfs.tech/install/ipfs-desktop/) or "
++        "the command line version Kubo (https://docs.ipfs.tech/install/command-line/). "
++        "If you can't run your own gateway, you may also try using the "
++        "public IPFS gateway at https://ipfs.io or https://dweb.link . "
++        "However, this is not recommended for productive use and you may experience "
++        "severe performance issues."
++    )
+ 
+ 
+ class AsyncIPFSFileSystem(AsyncFileSystem):
+     sep = "/"
+     protocol = "ipfs"
+ 
+-    def __init__(self, asynchronous=False, loop=None, client_kwargs=None, gateway_addr=None, **storage_options):
++    def __init__(
++        self,
++        asynchronous=False,
++        loop=None,
++        client_kwargs=None,
++        gateway_addr=None,
++        **storage_options,
++    ):
+         super().__init__(self, asynchronous=asynchronous, loop=loop, **storage_options)
+         self._session = None
+ 
+diff --git a/ipfsspec/car.py b/ipfsspec/car.py
+index 028e41e43f9a1e784213192cce95ea814181b76c..d0b0bae4932a21efee1335d99f1c69492eae236b 100644
+--- a/ipfsspec/car.py
++++ b/ipfsspec/car.py
+@@ -13,6 +13,7 @@ from .utils import is_cid_list, StreamLike, ensure_stream
+ DagPbCodec = multicodec.get("dag-pb")
+ Sha256Hash = multihash.get("sha2-256")
+ 
++
+ @dataclasses.dataclass
+ class CARBlockLocation:
+     varint_size: int
+@@ -89,7 +90,9 @@ def decode_raw_car_block(stream: BinaryIO) -> Optional[Tuple[CID, bytes, CARBloc
+     return cid, bytes(data), CARBlockLocation(visize, block_size - len(data), len(data))
+ 
+ 
+-def read_car(stream_or_bytes: StreamLike) -> Tuple[List[CID], Iterator[Tuple[CID, bytes, CARBlockLocation]]]:
++def read_car(
++    stream_or_bytes: StreamLike,
++) -> Tuple[List[CID], Iterator[Tuple[CID, bytes, CARBlockLocation]]]:
+     """
+     Reads a CAR.
+ 
+@@ -107,10 +110,12 @@ def read_car(stream_or_bytes: StreamLike) -> Tuple[List[CID], Iterator[Tuple[CID
+     """
+     stream = ensure_stream(stream_or_bytes)
+     roots, header_size = decode_car_header(stream)
++
+     def blocks() -> Iterator[Tuple[CID, bytes, CARBlockLocation]]:
+         offset = header_size
+         while (next_block := decode_raw_car_block(stream)) is not None:
+             cid, data, sizes = next_block
+             yield cid, data, dataclasses.replace(sizes, offset=offset)
+             offset += sizes.size
++
+     return roots, blocks()
+diff --git a/ipfsspec/tracing.py b/ipfsspec/tracing.py
+index 37adb792af5f92004c8a678c11028a028fe70426..2228334f670a537629cd097e11286e0295a0070d 100644
+--- a/ipfsspec/tracing.py
++++ b/ipfsspec/tracing.py
+@@ -5,6 +5,7 @@ import aiohttp
+ class GatewayTracer:
+     def __init__(self):
+         from collections import defaultdict
++
+         self.samples = defaultdict(list)
+ 
+     def make_trace_config(self):
+@@ -21,4 +22,6 @@ class GatewayTracer:
+         elapsed = trace_config_ctx.end - trace_config_ctx.start
+         status = params.response.status
+         gateway = trace_config_ctx.trace_request_ctx.get("gateway", None)
+-        self.samples[gateway].append({"url": params.url, "method": params.method, "elapsed": elapsed, "status": status})
++        self.samples[gateway].append(
++            {"url": params.url, "method": params.method, "elapsed": elapsed, "status": status}
++        )
+diff --git a/ipfsspec/unixfsv1.py b/ipfsspec/unixfsv1.py
+index b3bb03c480db20efa418264f71d55643d57f5616..8a7af64eca8ae2e652b04ca43b3ef1ea095c90e6 100644
+--- a/ipfsspec/unixfsv1.py
++++ b/ipfsspec/unixfsv1.py
+@@ -2,32 +2,32 @@
+ from UNIXFS spec (https://github.com/ipfs/specs/blob/master/UNIXFS.md):
+ 
+ message Data {
+-	enum DataType {
+-		Raw = 0;
+-		Directory = 1;
+-		File = 2;
+-		Metadata = 3;
+-		Symlink = 4;
+-		HAMTShard = 5;
+-	}
+-
+-	required DataType Type = 1;
+-	optional bytes Data = 2;
+-	optional uint64 filesize = 3;
+-	repeated uint64 blocksizes = 4;
+-	optional uint64 hashType = 5;
+-	optional uint64 fanout = 6;
+-	optional uint32 mode = 7;
+-	optional UnixTime mtime = 8;
++        enum DataType {
++                Raw = 0;
++                Directory = 1;
++                File = 2;
++                Metadata = 3;
++                Symlink = 4;
++                HAMTShard = 5;
++        }
++
++        required DataType Type = 1;
++        optional bytes Data = 2;
++        optional uint64 filesize = 3;
++        repeated uint64 blocksizes = 4;
++        optional uint64 hashType = 5;
++        optional uint64 fanout = 6;
++        optional uint32 mode = 7;
++        optional UnixTime mtime = 8;
+ }
+ 
+ message Metadata {
+-	optional string MimeType = 1;
++        optional string MimeType = 1;
+ }
+ 
+ message UnixTime {
+-	required int64 Seconds = 1;
+-	optional fixed32 FractionalNanoseconds = 2;
++        required int64 Seconds = 1;
++        optional fixed32 FractionalNanoseconds = 2;
+ }
+ 
+ 
+@@ -61,6 +61,7 @@ from typing import List, Optional
+ from pure_protobuf.dataclasses_ import field, message  # type: ignore
+ from pure_protobuf.types import uint32, uint64, int64, fixed32  # type: ignore
+ 
++
+ class DataType(IntEnum):
+     Raw = 0
+     Directory = 1
+@@ -69,12 +70,14 @@ class DataType(IntEnum):
+     Symlink = 4
+     HAMTShard = 5
+ 
++
+ @message
+ @dataclass
+ class UnixTime:
+     Seconds: int64 = field(1)
+     FractionalNanoseconds: Optional[fixed32] = field(2)
+ 
++
+ @message
+ @dataclass
+ class Data:
+@@ -88,6 +91,7 @@ class Data:
+     mode: Optional[uint32] = field(7, default=None)
+     mtime: Optional[UnixTime] = field(8, default=None)
+ 
++
+ @message
+ @dataclass
+ class Metadata:
+@@ -101,7 +105,10 @@ class PBLink:
+     Name: Optional[str] = field(2, default=None)
+     Tsize: Optional[uint64] = field(3, default=None)
+ 
++
+ Data_ = Data
++
++
+ @message
+ @dataclass
+ class PBNode:
+diff --git a/ipfsspec/utils.py b/ipfsspec/utils.py
+index d1bb25561d88dc10ca97e9240fcd718e8d6627b3..891fe13f186cdc4736207ce34392814d542f0182 100644
+--- a/ipfsspec/utils.py
++++ b/ipfsspec/utils.py
+@@ -10,6 +10,7 @@ from typing_extensions import TypeGuard
+ 
+ StreamLike = Union[BinaryIO, bytes]
+ 
++
+ def ensure_stream(stream_or_bytes: StreamLike) -> BinaryIO:
+     if isinstance(stream_or_bytes, bytes):
+         return BytesIO(stream_or_bytes)
+diff --git a/test/mockserver.py b/test/mockserver.py
+index 5772dc4937956c3779db942aa5eb3f5b18c8434b..29eed409b775a0c7fc606a8661f17079aad2965b 100644
+--- a/test/mockserver.py
++++ b/test/mockserver.py
+@@ -7,8 +7,9 @@ import random
+ 
+ def is_port_in_use(port):
+     import socket
++
+     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+-        return s.connect_ex(('localhost', port)) == 0
++        return s.connect_ex(("localhost", port)) == 0
+ 
+ 
+ def any_free_port():
+diff --git a/test/test_async.py b/test/test_async.py
+index 4034d537a2da77a8791b18e517b749f23c1f0dff..63cd06c111dd49fae4b01cc06c570932ba002c4f 100644
+--- a/test/test_async.py
++++ b/test/test_async.py
+@@ -5,7 +5,7 @@ import asyncio
+ import aiohttp
+ 
+ TEST_ROOT = "QmW3CrGFuFyF3VH1wvrap4Jend5NRTgtESDjuQ7QhHD5dd"
+-REF_CONTENT = b'ipfsspec test data'
++REF_CONTENT = b"ipfsspec test data"
+ TEST_FILENAMES = ["default", "multi", "raw", "raw_multi", "write"]
+ 
+ 
+@@ -25,7 +25,12 @@ async def get_client(session):
+ async def fs(request, get_client):
+     AsyncIPFSFileSystem.clear_instance_cache()  # avoid reusing old event loop
+     gateway_addr = getattr(request, "param", None)
+-    return AsyncIPFSFileSystem(asynchronous=True, loop=asyncio.get_running_loop(), get_client=get_client, gateway_addr=gateway_addr)
++    return AsyncIPFSFileSystem(
++        asynchronous=True,
++        loop=asyncio.get_running_loop(),
++        get_client=get_client,
++        gateway_addr=gateway_addr,
++    )
+ 
+ 
+ @pytest.mark.parametrize("gw_host", ["http://127.0.0.1:8080"])
+@@ -102,6 +107,7 @@ async def test_isfile(fs):
+     res = await fs._isfile(TEST_ROOT)
+     assert res is False
+ 
++
+ @pytest.mark.parametrize("detail", [False, True])
+ @pytest.mark.parametrize("fs", ["http://127.0.0.1:8080", "https://ipfs.io"], indirect=True)
+ @pytest.mark.asyncio
+diff --git a/test/test_ipfs.py b/test/test_ipfs.py
+index d9c87887d48e4cbe0426df52ab570dc9e574f5db..c28b8846d2fc08d51829c1b562281c02b23f888c 100644
+--- a/test/test_ipfs.py
++++ b/test/test_ipfs.py
+@@ -4,11 +4,11 @@ import pytest
+ 
+ def test_get_hello_world():
+     with fsspec.open("ipfs://QmZ4tDuvesekSs4qM5ZBKpXiZGun7S2CYtEZRB3DYXkjGx") as f:
+-        assert f.read() == b'hello worlds\n'
++        assert f.read() == b"hello worlds\n"
+ 
+ 
+ TEST_ROOT = "QmW3CrGFuFyF3VH1wvrap4Jend5NRTgtESDjuQ7QhHD5dd"
+-REF_CONTENT = b'ipfsspec test data'
++REF_CONTENT = b"ipfsspec test data"
+ 
+ 
+ @pytest.mark.parametrize("filename", ["default", "multi", "raw", "raw_multi", "write"])
+diff --git a/test/test_merkle_verification.py b/test/test_merkle_verification.py
+index f3e62d5446bc944fd4ff6e2cda1884f511e3049a..ee57a763d3e201d8608f2499efdb12a60d49c071 100644
+--- a/test/test_merkle_verification.py
++++ b/test/test_merkle_verification.py
+@@ -45,18 +45,14 @@ def test_verify_merkle_path_valid_child(test_car):
+     expected_child_cid = CID.decode("QmZsn2gmGC6yBs6TWPiRspXfTJ3K4DEtWUePVqBJ84YkU8")
+ 
+     # Verify path to "default" entry
+-    result = AsyncIPFSGateway._verify_merkle_path(
+-        f"{root_cid}/default", blocks
+-    )
++    result = AsyncIPFSGateway._verify_merkle_path(f"{root_cid}/default", blocks)
+     assert result == expected_child_cid
+ 
+ 
+ def test_verify_merkle_path_valid_cidv1_child(test_car):
+     """Test verification with CIDv1 child (raw block)"""
+     root_cid, blocks = test_car
+-    expected_raw_cid = CID.decode(
+-        "bafkreibauudqsswbcktzrs5bwozj3cllhme56jlj23op4lwgmsucpv222q"
+-    )
++    expected_raw_cid = CID.decode("bafkreibauudqsswbcktzrs5bwozj3cllhme56jlj23op4lwgmsucpv222q")
+ 
+     # Verify path to "raw" entry (CIDv1)
+     result = AsyncIPFSGateway._verify_merkle_path(f"{root_cid}/raw", blocks)
+@@ -77,9 +73,7 @@ def test_verify_merkle_path_all_children(test_car):
+ 
+     for name, expected_cid_str in expected_entries.items():
+         expected_cid = CID.decode(expected_cid_str)
+-        result = AsyncIPFSGateway._verify_merkle_path(
+-            f"{root_cid}/{name}", blocks
+-        )
++        result = AsyncIPFSGateway._verify_merkle_path(f"{root_cid}/{name}", blocks)
+         assert result == expected_cid, f"Failed for entry '{name}'"
+ 
+ 

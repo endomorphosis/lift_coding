@@ -1,0 +1,89 @@
+\section*{NeurIPS Paper Checklist}
+
+\begin{enumerate}
+
+\item {\bf Claims}
+    \item[] Question: Do the main claims made in the abstract and introduction accurately reflect the paper's contributions and scope?
+    \item[] Answer: \answerYes{}
+    \item[] Justification: The abstract and introduction describe executed native compilation, source-conditioned reconstruction, learned check ordering, and constructed proof assistance, with explicit limits on source fidelity and generalization.
+
+\item {\bf Limitations}
+    \item[] Question: Does the paper discuss the limitations of the work performed by the authors?
+    \item[] Answer: \answerYes{}
+    \item[] Justification: The limitations section discusses unmeasured independent semantics, source prefixes, corpus dependence, empty classifier tables, the absence of a compression bottleneck, and the restricted proof suite.
+
+\item {\bf Theory assumptions and proofs}
+    \item[] Question: For each theoretical result, does the paper provide the full set of assumptions and a complete (and correct) proof?
+    \item[] Answer: \answerYes{}
+    \item[] Justification: The conditional transfer proposition states bridge assumptions, related-model existence, premise preservation, goal reflection, and soundness, with a complete argument in Appendix~\ref{app:prop}.
+
+    \item {\bf Experimental result reproducibility}
+    \item[] Question: Does the paper fully disclose all the information needed to reproduce the main experimental results of the paper to the extent that it affects the main claims and/or conclusions of the paper (regardless of whether the code and data are provided or not)?
+    \item[] Answer: \answerYes{}
+    \item[] Justification: Protocols, seeds, models, inputs, and metric definitions are disclosed. The supplement reproduces tables from per-unit measurements; a complete fresh inference run additionally requires the identified large local learned states, which are not included in the ZIP.
+
+
+\item {\bf Open access to data and code}
+    \item[] Question: Does the paper provide open access to the data and code, with sufficient instructions to faithfully reproduce the main experimental results, as described in supplemental material?
+    \item[] Answer: \answerNo{}
+    \item[] Justification: The supplement releases observations and table-generation code. The multi-gigabyte learned states and complete external runtime are identified but not distributed here, so complete open-access end-to-end reproduction is not yet provided.
+
+
+\item {\bf Experimental setting/details}
+    \item[] Question: Does the paper specify all the training and test details (e.g., data splits, hyperparameters, how they were chosen, type of optimizer) necessary to understand the results?
+    \item[] Answer: \answerYes{}
+    \item[] Justification: The experimental-design section and supplement specify splits, three training seeds, native compilation budgets, fixed prompts, representation losses, and which stored heads were actually learned.
+
+\item {\bf Experiment statistical significance}
+    \item[] Question: Does the paper report error bars suitably and correctly defined or other appropriate information about the statistical significance of the experiments?
+    \item[] Answer: \answerYes{}
+    \item[] Justification: We report paired component-bootstrap intervals, define resampling units and seeds, and discuss the dominant component. Proof-study intervals use semantic families; no independence of all template variants is assumed.
+
+\item {\bf Experiments compute resources}
+    \item[] Question: For each experiment, does the paper provide sufficient information on the computer resources (type of compute workers, memory, time of execution) needed to reproduce the experiments?
+    \item[] Answer: \answerYes{}
+    \item[] Justification: The execution appendix reports current CPU/model limits and measured costs, plus earlier training costs and failures. Concurrent elapsed times are not presented as controlled throughput comparisons.
+    
+\item {\bf Code of ethics}
+    \item[] Question: Does the research conducted in the paper conform, in every respect, with the NeurIPS Code of Ethics \url{https://neurips.cc/public/EthicsGuidelines}?
+    \item[] Answer: \answerYes{}
+    \item[] Justification: The work uses public legal-source material and automated constructed tests; limitations and broader impacts distinguish machine checks from legal authority.
+
+
+\item {\bf Broader impacts}
+    \item[] Question: Does the paper discuss both potential positive societal impacts and negative societal impacts of the work performed?
+    \item[] Answer: \answerYes{}
+    \item[] Justification: Potential benefits and misuse of automated legal or security formalization are discussed in Appendix~\ref{app:impacts}, including misleading claims of source-faithful verification.
+    
+\item {\bf Safeguards}
+    \item[] Question: Does the paper describe safeguards that have been put in place for responsible release of data or models that have a high risk for misuse (e.g., pre-trained language models, image generators, or scraped datasets)?
+    \item[] Answer: \answerNA{}
+    \item[] Justification: No new large generative model or personal-data collection is released; this question does not apply to a high-risk model or dataset release.
+
+\item {\bf Licenses for existing assets}
+    \item[] Question: Are the creators or original owners of assets (e.g., code, data, models), used in the paper, properly credited and are the license and terms of use explicitly mentioned and properly respected?
+    \item[] Answer: \answerYes{}
+    \item[] Justification: Appendix~\ref{app:assets} identifies the legal corpus and upstream license declarations, MiniLM, and the Leanstral model and quantization provenance.
+
+\item {\bf New assets}
+    \item[] Question: Are new assets introduced in the paper well documented and is the documentation provided alongside the assets?
+    \item[] Answer: \answerYes{}
+    \item[] Justification: The supplement describes its metric observations, scripts, input identities, checksums, and omitted large assets. It includes an explicit distinction between table reproduction and fresh inference.
+
+\item {\bf Crowdsourcing and research with human subjects}
+    \item[] Question: For crowdsourcing experiments and research with human subjects, does the paper include the full text of instructions given to participants and screenshots, if applicable, as well as details about compensation (if any)? 
+    \item[] Answer: \answerNA{}
+    \item[] Justification: No crowdsourcing or human-subject experiment was conducted, and no human agreement or semantic-fidelity score is reported.
+
+\item {\bf Institutional review board (IRB) approvals or equivalent for research with human subjects}
+    \item[] Question: Does the paper describe potential risks incurred by study participants, whether such risks were disclosed to the subjects, and whether Institutional Review Board (IRB) approvals (or an equivalent approval/review based on the requirements of your country or institution) were obtained?
+    \item[] Answer: \answerNA{}
+    \item[] Justification: No human-subject research was performed.
+
+\item {\bf Declaration of LLM usage}
+    \item[] Question: Does the paper describe the usage of LLMs if it is an important, original, or non-standard component of the core methods in this research? Note that if the LLM is used only for writing, editing, or formatting purposes and does \emph{not} impact the core methodology, scientific rigor, or originality of the research, declaration is not required.
+    %this research? 
+    \item[] Answer: \answerYes{}
+    \item[] Justification: Appendix~\ref{app:llm} identifies the actual Leanstral model, prompts and inference budgets, MiniLM teacher, historical development use, and agent assistance with implementation and writing.
+
+\end{enumerate}

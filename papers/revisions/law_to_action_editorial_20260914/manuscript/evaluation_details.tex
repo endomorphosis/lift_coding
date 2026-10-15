@@ -1,0 +1,71 @@
+\section{Evaluation accounting and supplementary measurements}
+\label{app:evaluation-details}
+
+This appendix preserves the detailed accounting behind Section~\ref{sec:eval}. The primary scored population is the resource-qualified fixed-action matrix: $30$ independent source-lineage families, $60$ cases, five matched arms, and three seeds, for $900$ cells. The $6/6/18$ development/calibration/final split is by lineage. Each arm therefore has $90$ forbidden-labelled and $90$ allowed-labelled attempts overall ($180$ decisions), and $54$ of each on the final split. Model calls were $0$; no scientific generative model was pinned. Filesystem-journal observations measure the declarative handler's effects, not AST extraction from model-generated source. Independent human annotations were not collected.
+
+\subsection{Statistical procedure}
+\label{app:evaluation-statistics}
+\setcounter{table}{0}
+
+Table~\ref{tab:paired-effects} reports final-split paired differences in forbidden-effect rate. Values are expressed in percentage points and rounded to one decimal place; the retained analysis summary preserves machine precision. The stratified paired family bootstrap uses $2{,}000$ draws and seed $104729$, resampling families within the legal, CVE, and skill strata while retaining their paired cases and repeated seeds. The final split contains $3/7/8$ families in these strata, respectively. The independent unit remains the lineage family. Repeated seeds do not increase the number of independent families, and zero-width intervals do not establish absence of failures outside this population.
+
+\begin{table}[ht]
+\centering
+\caption{Final-split paired effects and percentile bootstrap intervals (percentage points). Negative differences indicate fewer forbidden effects.}
+\label{tab:paired-effects}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Comparison & Difference & $95\%$ interval \\
+\midrule
+A1 versus A0 & $0.0$ & $[0.0,0.0]$ \\
+A2 versus A0 & $0.0$ & $[0.0,0.0]$ \\
+A3 versus A0 & $-66.7$ & $[-88.9,-44.4]$ \\
+A4 versus A0 & $-100.0$ & $[-100.0,-100.0]$ \\
+A4 versus A3 & $-33.3$ & $[-55.6,-11.1]$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Execution provenance and resource accounting}
+\label{app:evaluation-resources}
+
+The primary summary is \path{results/fixed_actions_admitted/summary.json}, used with its matching cost report and claim guidance. The implementation commitment recorded for that matrix is \path{ee6d73c4a5fc30d05ec4e787fdeb46d6701a4f947b7c874aecabf603e31ce06c}. The compact rows retain independent effect counters; pinned executed mechanisms and a shared durable-store identity support the runtime observations. Full per-cell proof and capability payloads are not retained.
+
+There were $902$ host attempts for $900$ scientific cells and $0$ scientific retries. Two original false host admissions, at schedule indices $459$ and $560$, remain explicitly labeled. Container-startup failures at indices $591$ and $625$ were recovered only after evidence established that scientific execution had not started; each recovered scientific cell was counted once. Measured descendant-inclusive group CPU time was $1608.817478$ seconds, below the frozen $18{,}000$-second stop. Peak cell memory was $274812928$ bytes, and the maximum individual-cell wall-to-exit time was $18.022665493073873$ seconds.
+
+The startup recoveries used prospective cumulative-active allowances. Failed-startup plus recovered-run wall time totaled $11.766052$ seconds at index $591$ and $19.793533$ seconds at index $625$. Separate pauses were excluded from active runtime. These amendments do not establish compliance with an uninterrupted original absolute $20$-second interval.
+
+\subsection{Supplementary studies and evidence mapping}
+\label{app:evaluation-evidence-map}
+
+The following identifiers map manuscript statements to the retained development records. They distinguish scored outcomes from qualification and diagnostic evidence.
+
+\paragraph{Source contracts (LA-009).}
+The $18/18$ skill-validator comparison uses the same Intent IR decoder and schema functions that the normalizer invokes. It is shared-producer conformance, not an independent check. The automated source-contract measures replace an uncollected expert legal-fidelity study. No independent legal applicability, exception-fidelity, semantic-accuracy, inter-annotator-agreement, or legal-validity measurements are available. 
+
+\paragraph{Scored fixed-action matrix (LA-029).}
+Only the matching admitted summary, cost report, and claim guidance supply the primary arm rates. The original compact fixed-action log and its rescue (LA-015) are protocol-unadmitted diagnostics. Historical tables and figures (LA-019) analyze that earlier log and cannot substitute for the admitted summary.
+
+\paragraph{Ablations and comparisons (LA-016/LA-017).}
+Paired mechanism ablations and their associated comparison wording are protocol-unadmitted diagnostic evidence. They do not establish scored model efficacy or additional primary arm rates.
+
+\paragraph{Development efficiency study (LA-018).}
+Cold, warm, stale-root, and stale-clock conditions each have $n=12$ A4 development observations. Mean end-to-end wall time was $0.012326$\,s for cold execution, $0.006635$\,s for warm execution, and $0.00322$\,s for each stale condition. Stale-root and stale-clock conditions recorded $12/12$ stale-evidence flags. Model tokens were unobserved, and no price conversion was made. These timings are instrumentation measurements, not a rescore of the $900$-cell matrix.
+
+\paragraph{Execution traces (LA-020).}
+Twelve-step traces replay frozen A4 identities for diagnosis. They retain intermediate artifacts separately from the compact scored rows and do not add scored cells.
+
+\paragraph{Mechanism qualification.}
+Mediation, DuckDB consumption, and local stdio/HTTP/libp2p parity suites passed their selected-claim cases. These are qualification results rather than arm-rate observations. The protected route wraps the export mutation in explicit \texttt{ENFORCE}. Its original implementation symbols are
+\begin{quote}\raggedright\small
+\path{SupervisorPreInvocationEnforcement.authorize_and_delegate}\\[2pt]
+\path{BoundedExportHandler.export_json}.
+\end{quote}
+The supplement's \path{symbol_aliases.json} maps these definitions to neutral aliases.
+Unprotected, observational, and nonidentical routes were exercised during qualification and excluded from the safety claim. Local transport qualification does not establish wide-area publication; an IPFS daemon was unavailable.
+
+\paragraph{Proof authority and unavailable backends.}
+The selected QF\_BOOL SAT route, checked independently by a truth table, carries satisfiability authority only. SAT/UNSAT cannot authorize an allow requiring \texttt{theorem\_proof}. Z3, cvc5, Vampire, E, Lean, Coq/Rocq, Isabelle, and QF\_LIA interpolation were absent from the sealed validation path and have no measured results in this study.
+
+\paragraph{Closed-loop planning (protocol RQ3).}
+The planned generated-code study was withdrawn without execution: $900/900$ scheduled cells were \texttt{not\_started}, model calls were $0$, and generated programs were $0$. These counts are scheduling accounting, not observed agent failures, and are not pooled with the fixed-action results. No trained skill normalizer or encoder was evaluated.

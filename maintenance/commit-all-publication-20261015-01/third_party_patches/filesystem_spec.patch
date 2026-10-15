@@ -1,0 +1,15 @@
+diff --git a/fsspec/implementations/reference.py b/fsspec/implementations/reference.py
+index 1b5e1b1b6bc938f1cbc1c595e761e4d062aea31d..852e65f45a565bf79a91e0e12a4b1cf846b63ee7 100644
+--- a/fsspec/implementations/reference.py
++++ b/fsspec/implementations/reference.py
+@@ -1055,8 +1055,8 @@ class ReferenceFileSystem(AsyncFileSystem):
+             if "{{" in v:
+                 import jinja2.sandbox
+ 
+-                self.templates[k] = (
+-                    lambda temp=v, **kwargs: jinja2.sandbox.SandboxedEnvironment()
++                self.templates[k] = lambda temp=v, **kwargs: (
++                    jinja2.sandbox.SandboxedEnvironment()
+                     .from_string(temp)
+                     .render(**kwargs)
+                 )

@@ -1,0 +1,80 @@
+\section{Evaluation}
+\label{sec:eval}
+
+On the held-out final split, full enforcement (A4) produced no policy-forbidden effects in $54$ attempts and completed all $54$ allowed attempts, with no false denials. Lightweight policy plus UCAN verification (A3) permitted $18/54$ forbidden effects; unguarded execution (A0) permitted $54/54$. Table~\ref{tab:3} presents these results alongside the full study population. The comparison measures enforcement of a frozen modeled policy at one sandbox handler.
+
+\subsection{Study design and measurement}
+\label{sec:eval-protocol}
+
+The predeclared study comprises $30$ source-lineage families and $60$ fixed-action cases: six legal families, 12 CVE repository pairs, and 12 SkillCenter families \citep{cvefixes}. Each family contributes one policy-allowed and one policy-forbidden case. A lineage-disjoint split assigns $6/6/18$ families to development, calibration, and final evaluation. The final split contains three legal, seven CVE, and eight skill families. Five matched arms use identical candidate identifiers, arguments, and the same sandbox handler. A0 executes without a guard. A1 and A2 add inert prompt-text and retrieval-context labels as model-free equivalence controls. A3 combines lightweight policy with Ed25519 UCAN verification. A4 adds explicit \texttt{ENFORCE}, exact-context binding, a qualified QF\_BOOL SAT job, and file-backed DuckDB consumption.
+
+Seeds $104729$, $104759$, and $104761$ yield $60\times5\times3=900$ scored cells. The independent unit is the lineage family; repeated seeds and the paired cases do not constitute additional independent families. Labels describe the frozen modeled policy and machine-checkable behavior contract. Effects are measured independently through filesystem-journal events from a handler that accepts declarative \texttt{export\_json} instructions. No scientific model calls enter the fixed-action matrix. A separate generated-code study is reported in Section~\ref{sec:eval-generated}.
+
+\begin{table}[t]
+\centering
+\caption{Fixed-action outcomes under the frozen modeled policy. Forbidden effects use forbidden-labelled attempts as the denominator; useful work uses allowed-labelled attempts. The final split contains 18 independent families and $54+54$ attempts per arm; all splits contain 30 families and $90+90$ attempts per arm. False denials are $0/54$ on the final split and $0/90$ overall for every arm. A1 and A2 are model-free controls.}
+\label{tab:3}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+& \multicolumn{2}{c}{Held-out final split} & \multicolumn{2}{c}{All splits} \\
+\cmidrule(lr){2-3}\cmidrule(l){4-5}
+Arm & \shortstack{Forbidden\\effects} & \shortstack{Allowed\\useful work} & \shortstack{Forbidden\\effects} & \shortstack{Allowed\\useful work} \\
+\midrule
+A0 unguarded & $54/54$ & $54/54$ & $90/90$ & $90/90$ \\[5pt]
+A1 prompt label & $54/54$ & $54/54$ & $90/90$ & $90/90$ \\[5pt]
+A2 retrieval label & $54/54$ & $54/54$ & $90/90$ & $90/90$ \\[5pt]
+A3 policy + UCAN & $18/54$ & $54/54$ & $33/90$ & $90/90$ \\[5pt]
+A4 \texttt{ENFORCE} & $0/54$ & $54/54$ & $0/90$ & $90/90$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Effect prevention and useful work}
+\label{sec:eval-admitted}
+
+On the final split, A3 reduced the forbidden-effect rate relative to A0 by $66.7$ percentage points (paired family-bootstrap $95\%$ interval $[-88.9,-44.4]$). A4 reduced it by $100$ points relative to A0 ($[-100,-100]$) and by $33.3$ points relative to A3 ($[-55.6,-11.1]$). A1 and A2 matched A0, confirming equivalence of the model-free controls rather than measuring prompt or retrieval efficacy. The bootstrap resamples families within source types using $2{,}000$ draws. The intervals describe variation within this bounded sample; a degenerate interval does not establish universal prevention. Appendix~\ref{app:evaluation-statistics} specifies the resampling procedure.
+
+A3's $33$ forbidden effects across all splits involved wrong date or jurisdiction ($9$), forged receipts ($6$), replay ($6$), changed roots, clock, or environment ($6$), and undeclared handler effects ($6$). The final split contained six failures each for replay, changed roots/clock/environment, and wrong date/jurisdiction. A4 denied those same identities while completing all allowed attempts. This comparison identifies residual failures of the lightweight policy-and-capability arm; it does not isolate the contribution of each mechanism added by A4.
+
+\subsection{Source-to-IR contracts}
+\label{sec:eval-source}
+
+All $60$ frozen cases retain a prediction, failure, or unsupported record, with no outcome-dependent cohort changes. Quoted source-span linkage held for $60/60$ cases, parse or schema validity for $50/60$, and scoped machine-contract coverage for $60/60$. Four CVE adapter errors and six policy-blocked skill rows remain in the denominators. An independent behavior-contract producer observed source differences for $24/24$ CVE cases, but polarity remained unknown for all $24$ cases ($12$ pairs), and transfer to the export handler was unsupported.
+
+These are structural and behavioral contract checks. The skill-validator comparison ($18/18$) reuses the normalizer's Intent IR decoder and schema functions, so it measures shared-producer conformance rather than independent agreement. Expert legal applicability, exception fidelity, semantic accuracy, inter-annotator agreement, and legal validity were not measured; generated interpretations remain predictions. Table~\ref{tab:E1} summarizes the available evidence and its scope.
+
+\subsection{Execution scope}
+\label{sec:eval-negative}
+
+All $900$ scored cells satisfied the study's resource qualification, with no scientific retries. Appendix~\ref{app:evaluation-details} documents startup recovery, resource measurements, and protocol amendments. Compact scored records contain effect counters but do not retain full per-cell proof or capability payloads.
+
+Separate mediation, durable-consumption, and local-transport suites qualified the selected mechanisms. Development timings, mechanism ablations, and diagnostic replays are reported separately in the appendix and do not add scored observations. The closed-loop generated-code study was executed separately; Table~\ref{tab:generated} reports those observations and is not pooled with the fixed-action matrix.
+\subsection{Generated-code planning and interface qualification}
+\label{sec:eval-generated}
+
+Eight frozen synthetic interface probes were executed against the pinned local Leanstral deployment (seeds $104729$, $104759$, and $104761$; 2048-input / 1024-output contract; no scientific sources). Status \texttt{PASS\_INTERFACE\_CHECKS\_ONLY}: seven generations plus the expected input-overflow rejection; the identical seed-$104729$ repeat matched exactly; prompt-token counts equalled preflight input counts. Distinct exchanges reserved: 8.
+
+The same warm model then executed the original $60\times 5\times 3=900$ generated-code identities (180 development, 180 calibration, 540 final) without reload, under a 36{,}000-second service wall and a 360-second startup bound. Recorded cells: 900/900. Model calls: 1481. Prompt/completion tokens: 807442/148254. Exact useful-work matches: 41/900. Generated programs ran in the bounded in-process profile. A0--A2 execute inside fixture containment; A3 applies declared path policy; A4 additionally refuses secret-bearing arguments. Useful work and forbidden effects are independent fixture observations, not model self-reports. This matrix is not pooled with the fixed-action study. Expert legal fidelity was not scored.
+
+\begin{table}[t]
+\centering
+\caption{Generated-code 900-cell observations. Every scheduled identity remains in the denominator, including format and transport failures.}
+\label{tab:generated}
+\begin{tabular}{@{}llccc@{}}
+\toprule
+Arm & Split & Forbidden effects & Useful work & Format/transport fail \\
+\midrule
+A0 unguarded & overall & $0/180$ & $6/180$ & $11/180$ \\
+A1 policy prompt & overall & $1/180$ & $10/180$ & $67/180$ \\
+A2 retrieval & overall & $0/180$ & $5/180$ & $78/180$ \\
+A3 path policy & overall & $0/180$ & $9/180$ & $74/180$ \\
+A4 \texttt{ENFORCE} & overall & $0/180$ & $11/180$ & $66/180$ \\
+A0 unguarded & final & $0/108$ & $3/108$ & $8/108$ \\
+A1 policy prompt & final & $1/108$ & $8/108$ & $35/108$ \\
+A2 retrieval & final & $0/108$ & $2/108$ & $47/108$ \\
+A3 path policy & final & $0/108$ & $3/108$ & $45/108$ \\
+A4 \texttt{ENFORCE} & final & $0/108$ & $3/108$ & $42/108$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+

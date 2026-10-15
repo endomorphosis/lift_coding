@@ -1,0 +1,1747 @@
+{
+  "behavioral_tests_run": false,
+  "checks": [
+    {
+      "bounded_text_only": true,
+      "export_secret_scan_passed": true,
+      "repository": "filesystem_spec",
+      "source_unchanged": true
+    },
+    {
+      "bounded_text_only": true,
+      "export_secret_scan_passed": true,
+      "repository": "ipfs-docs",
+      "source_unchanged": true
+    },
+    {
+      "bounded_text_only": true,
+      "export_secret_scan_passed": true,
+      "repository": "ipfsspec",
+      "source_unchanged": true
+    },
+    {
+      "bounded_text_only": true,
+      "export_secret_scan_passed": true,
+      "repository": "lighthouse-python-sdk",
+      "source_unchanged": true
+    },
+    {
+      "bounded_text_only": true,
+      "export_secret_scan_passed": true,
+      "repository": "mcp-python-sdk",
+      "source_unchanged": true
+    },
+    {
+      "bounded_text_only": true,
+      "export_secret_scan_passed": true,
+      "repository": "mcp-python-sdk-hallucinate-datasets",
+      "source_unchanged": true
+    },
+    {
+      "bounded_text_only": true,
+      "export_secret_scan_passed": true,
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets",
+      "source_unchanged": true
+    }
+  ],
+  "files_preserved_as_patches": 175,
+  "files_preserved_as_secret_free_edit_recipes": 1,
+  "outputs": [
+    {
+      "bytes": 745,
+      "path": "filesystem_spec.patch",
+      "sha256": "4c1945df8eaf17ceba54e41878a4e791058caad997410c0c342f7939018c5dc8"
+    },
+    {
+      "bytes": 1513,
+      "path": "filesystem_spec.LICENSE.txt",
+      "sha256": "2dc35496ce53a7307915c008a844aad53e772b49b34cdd00445067691407ec94"
+    },
+    {
+      "bytes": 2316,
+      "path": "ipfs-docs.patch",
+      "sha256": "b0e3dc9e19e7feb03df61e0518ad92ed73cb81b4be28ae4d1328ab1475a98904"
+    },
+    {
+      "bytes": 284,
+      "path": "ipfs-docs.license-excerpt.txt",
+      "sha256": "a68d43b643e6c1b6d60d8d2686e65e51708fb929c32f39bbe25cc5d818b675c1"
+    },
+    {
+      "bytes": 21196,
+      "path": "ipfsspec.patch",
+      "sha256": "8bd7e4261798d1e66b470d9978d7b4672111d98cf1bceaeb4a1677ef8adcc19c"
+    },
+    {
+      "bytes": 1091,
+      "path": "ipfsspec.LICENSE.txt",
+      "sha256": "87785265eac4e486d8a4ad9cce9ecfdbf77c4e9be7c9ee30ab94e9535989ba81"
+    },
+    {
+      "bytes": 5100,
+      "path": "lighthouse-python-sdk-test-get-api-key.byte-edits.json",
+      "sha256": "0057c426f11100b996e54f7c780461a6e0a93b2400194a0c8ff8f7c813280bcd"
+    },
+    {
+      "bytes": 54124,
+      "path": "lighthouse-python-sdk.patch",
+      "sha256": "0ca0a0571cd7d573e7174826336693cea5cc301d2c2340038bf1ef72fc6d321b"
+    },
+    {
+      "bytes": 34888,
+      "path": "lighthouse-python-sdk.LICENSE.txt",
+      "sha256": "f817886ee6bb65ed3098a7987b1e9781653d15c71f85589ce0d2af663c66d373"
+    },
+    {
+      "bytes": 66522,
+      "path": "mcp-python-sdk.patch",
+      "sha256": "2f7c33e51713208602fda9411faffc3dda78a4e2bac1a69cada480cf78ffd279"
+    },
+    {
+      "bytes": 1071,
+      "path": "mcp-python-sdk.LICENSE.txt",
+      "sha256": "5e13dbbc1d120fc2a03cecde7c91424ae2d7de11b63d58ded2f4431e261ee50d"
+    },
+    {
+      "bytes": 103458,
+      "path": "mcp-python-sdk-hallucinate-datasets.patch",
+      "sha256": "a2bd03a76adf2dd48e5f021206dd324b0d2394a7e139fe0f7b6b165253ba6586"
+    },
+    {
+      "bytes": 1071,
+      "path": "mcp-python-sdk-hallucinate-datasets.LICENSE.txt",
+      "sha256": "5e13dbbc1d120fc2a03cecde7c91424ae2d7de11b63d58ded2f4431e261ee50d"
+    },
+    {
+      "bytes": 102624,
+      "path": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+      "sha256": "745f71478fd085aa000bafda900668d6d860b3acabf8ed8ae379997c1ef9fab6"
+    },
+    {
+      "bytes": 1071,
+      "path": "mcp-python-sdk-hallucinate-accelerate-datasets.LICENSE.txt",
+      "sha256": "5e13dbbc1d120fc2a03cecde7c91424ae2d7de11b63d58ded2f4431e261ee50d"
+    }
+  ],
+  "package_imports": false,
+  "patch_file_count": 7,
+  "repositories": [
+    {
+      "advertised_upstream": "929eee421ef8a48b755a5ae40493d946b478d91b\trefs/heads/master",
+      "base_commit": "d256591c80620c14a574b803831f39f3ff87420b",
+      "excluded_files": [],
+      "files": [
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 49974,
+          "base_sha256": "60a2f33c117a6cba4e9c763d88cd0c47924b1918b9081eb1d5c58880c6fa0218",
+          "path": "fsspec/implementations/reference.py",
+          "preservation": "filesystem_spec.patch",
+          "result_bytes": 49974,
+          "result_sha256": "977e587ba85690dbdc0e51a249fc10f1014f691719baa5f7516a904fa65f4b76"
+        }
+      ],
+      "head_ahead_behind_tracked_upstream": [
+        0,
+        106
+      ],
+      "license_copy": "filesystem_spec.LICENSE.txt",
+      "license_provenance": {
+        "base_commit": "d256591c80620c14a574b803831f39f3ff87420b",
+        "source_file": "LICENSE",
+        "source_sha256": "2dc35496ce53a7307915c008a844aad53e772b49b34cdd00445067691407ec94"
+      },
+      "name": "filesystem_spec",
+      "origin": "https://github.com/fsspec/filesystem_spec.git",
+      "review_note": "Observed edits are formatting-oriented; Python AST comparisons are recorded per file. This is not behavioral validation.",
+      "source_path": "external/ipfs_datasets/.tools/ipfs_kit_py/docs/filesystem_spec",
+      "tracked_upstream_commit": "21e18b050f729f69b062c1028f3f0cc4fefbcca1",
+      "upstream_status": "All edited files differ from locally tracked upstream bytes; no broad remote history search performed."
+    },
+    {
+      "advertised_upstream": "1261c016f2b6c700e9354e46cedcdf38c9ad7b91\trefs/heads/main",
+      "base_commit": "d725e8e945266dda4175a04371a9f9976a990aa7",
+      "excluded_files": [],
+      "files": [
+        {
+          "base_bytes": 11000,
+          "base_sha256": "4779017db743be850b70b1476df719367da557a024d959513af7288920bee42e",
+          "path": "docs/case-studies/orcestra.md",
+          "preservation": "ipfs-docs.patch",
+          "result_bytes": 10996,
+          "result_sha256": "e03a6ac9392358ad6d616d5a4096f62ed7ce9573923044c27c24dc4071600c9d"
+        },
+        {
+          "base_bytes": 24507,
+          "base_sha256": "b5b630003ec9acc1e74c70929cc395efd3b856bc1668b8a85c6dda03533088d2",
+          "path": "docs/how-to/scientific-data/landscape-guide.md",
+          "preservation": "ipfs-docs.patch",
+          "result_bytes": 24503,
+          "result_sha256": "c5d384f42876df8ab5a620b3fc29e4e0789606078c074720e62b173af29285c5"
+        },
+        {
+          "base_bytes": 15982,
+          "base_sha256": "de966c76e6eced3627f19a2559f3e8ec881c0efa87dfc51661fe0fa2e534ee83",
+          "path": "docs/how-to/scientific-data/publish-geospatial-zarr-data.md",
+          "preservation": "ipfs-docs.patch",
+          "result_bytes": 15972,
+          "result_sha256": "5bc8b531db0b56b9f71c9848581d05e1d0958cb030e558c4f3a1f9a628d2bcf7"
+        }
+      ],
+      "head_ahead_behind_tracked_upstream": [
+        0,
+        20
+      ],
+      "license_copy": "ipfs-docs.license-excerpt.txt",
+      "license_provenance": {
+        "base_commit": "d725e8e945266dda4175a04371a9f9976a990aa7",
+        "note": "Preserved verbatim: source description and linked CC license differ; no independent license interpretation supplied.",
+        "source_file": "README.md",
+        "source_sha256": "60600a1d7173aba40e770189220798c04e3ed7dab17e1a4b94bc0d3dcab00f52",
+        "verbatim_section": "License"
+      },
+      "name": "ipfs-docs",
+      "origin": "https://github.com/ipfs/ipfs-docs.git",
+      "review_note": "Observed edits are formatting-oriented; Python AST comparisons are recorded per file. This is not behavioral validation.",
+      "source_path": "external/ipfs_datasets/.tools/ipfs_kit_py/docs/ipfs-docs",
+      "tracked_upstream_commit": "1261c016f2b6c700e9354e46cedcdf38c9ad7b91",
+      "upstream_status": "All edited files differ from locally tracked upstream bytes; no broad remote history search performed."
+    },
+    {
+      "advertised_upstream": "03f5199b9bf5a96c7ebf5e2e6f5dce8cf58b655f\trefs/heads/main",
+      "base_commit": "03f5199b9bf5a96c7ebf5e2e6f5dce8cf58b655f",
+      "excluded_files": [],
+      "files": [
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 17433,
+          "base_sha256": "8558d1df2bfe2778f4f2cb722fcf7ee0a635b3cffbd4bd0ce32c40d41b3f5e48",
+          "path": "ipfsspec/async_ipfs.py",
+          "preservation": "ipfsspec.patch",
+          "result_bytes": 17858,
+          "result_sha256": "363f75a698d036ecdf64583213f3c2a66c12cf6f2e5b56ce3790d61d67fe2f93"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 4047,
+          "base_sha256": "fb9927b527e94c2bb4c4a31f0b052badd239ea99507124057ef4b850fec4afca",
+          "path": "ipfsspec/car.py",
+          "preservation": "ipfsspec.patch",
+          "result_bytes": 4057,
+          "result_sha256": "5efe2690f6fbd76e6c9c6474af84d0d97489ece01f07e7cf7d00bc72213512ec"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 974,
+          "base_sha256": "c706dee4076be74e9917d9ca62ca16171d568ecd428eb0af035d242c59cc50f7",
+          "path": "ipfsspec/tracing.py",
+          "preservation": "ipfsspec.patch",
+          "result_bytes": 997,
+          "result_sha256": "afe803b29a954f4af63f85793e9d76aee1fbd822f08155a5ff755677037fe12e"
+        },
+        {
+          "ast_comparison": "identical_after_removing_docstrings",
+          "base_bytes": 2450,
+          "base_sha256": "1b73b572b5be35a4cd787e79420f3f97c301d5a3f46f9ebb1958166bf41c6640",
+          "path": "ipfsspec/unixfsv1.py",
+          "preservation": "ipfsspec.patch",
+          "result_bytes": 2632,
+          "result_sha256": "bb4229f854da2f91e62f38fcda8880413a77e4052b4e812f92281e72d321a5a4"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 489,
+          "base_sha256": "420f645c0286f83b33e50fe53c37d055b43d4af9ce10055a67d9154c663fa77b",
+          "path": "ipfsspec/utils.py",
+          "preservation": "ipfsspec.patch",
+          "result_bytes": 490,
+          "result_sha256": "9a20198dce9123ed28f36d5a746c5d783ecaee6d75fe8a1dcf368cab688e85d9"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 975,
+          "base_sha256": "423364dc807c109e48c7252b603a9afea5768b80aa4407849138133deda2ff45",
+          "path": "test/mockserver.py",
+          "preservation": "ipfsspec.patch",
+          "result_bytes": 976,
+          "result_sha256": "dec27684fe0023abad4c5f84fa7c0c4a12776ca6254c4f1b439f99957d79ffc9"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 3844,
+          "base_sha256": "0514922d24a2685be3f2e0235fe9f8a9977f9092b9e29efdcfe1352163230075",
+          "path": "test/test_async.py",
+          "preservation": "ipfsspec.patch",
+          "result_bytes": 3884,
+          "result_sha256": "2b8100e454e6549c1061cc868160f017b1b4c0df178049946347fa9a6549de4f"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 628,
+          "base_sha256": "8adfce8cd7194803133bc3ff0447ba0db34393db5bb9f05e8840d6440b9f93cd",
+          "path": "test/test_ipfs.py",
+          "preservation": "ipfsspec.patch",
+          "result_bytes": 628,
+          "result_sha256": "54695b7365befc3c8ef2cf57835044abc61f9641c12373aef3c3cb076c02233a"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 4798,
+          "base_sha256": "3e3d447aed5b43440cb9a7c58a39cc370f9e1b449e357f2bf6dd7500e1519167",
+          "path": "test/test_merkle_verification.py",
+          "preservation": "ipfsspec.patch",
+          "result_bytes": 4748,
+          "result_sha256": "609ad5005ead7349935b2b354435aa90434b1e6627f9f084a42ebc51147a0785"
+        }
+      ],
+      "head_ahead_behind_tracked_upstream": [
+        0,
+        0
+      ],
+      "license_copy": "ipfsspec.LICENSE.txt",
+      "license_provenance": {
+        "base_commit": "03f5199b9bf5a96c7ebf5e2e6f5dce8cf58b655f",
+        "source_file": "LICENSE",
+        "source_sha256": "87785265eac4e486d8a4ad9cce9ecfdbf77c4e9be7c9ee30ab94e9535989ba81"
+      },
+      "name": "ipfsspec",
+      "origin": "https://github.com/fsspec/ipfsspec.git",
+      "review_note": "Observed edits are formatting-oriented; Python AST comparisons are recorded per file. This is not behavioral validation.",
+      "source_path": "external/ipfs_datasets/.tools/ipfs_kit_py/docs/ipfsspec",
+      "tracked_upstream_commit": "03f5199b9bf5a96c7ebf5e2e6f5dce8cf58b655f",
+      "upstream_status": "All edited files differ from locally tracked upstream bytes; no broad remote history search performed."
+    },
+    {
+      "advertised_upstream": "6b2c86693090c770d2c9a4d82ba315000a77068b\trefs/heads/main",
+      "base_commit": "6b2c86693090c770d2c9a4d82ba315000a77068b",
+      "excluded_files": [],
+      "files": [
+        {
+          "base_bytes": 1595,
+          "base_sha256": "f656b0c1b7852a28a096b5cfec713b7d2428fd1ba39d9be23eb59130b0add6c9",
+          "path": "README.md",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 1599,
+          "result_sha256": "58e2e80c1ebc72b37cf626beb45beed4e5e689d29359fb0eccba1bca549bc6b3"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 1502,
+          "base_sha256": "accb10f6eb8e0fcc28c799063d357daaaa4dd02efd302eaa2f883726b726ef64",
+          "path": "setup.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 1502,
+          "result_sha256": "f472bb1f5fb40d1084eeffac0bf71dc7b795834c4dae278b9439d7d8c32e3b78"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 7158,
+          "base_sha256": "a8b6bdede9fe72db52e42b65b477a4662753435569459c56455488262f6e9592",
+          "path": "src/lighthouseweb3/__init__.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 7123,
+          "result_sha256": "201a97d76980bf1efc5b2ec39185cac4e9811f8528aca3481028abb23e8a928a"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 2539,
+          "base_sha256": "65e7890a824ff94164000bd3bcccefa2816831c6699f333d7eab241ee8bb31e7",
+          "path": "src/lighthouseweb3/functions/axios.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 2545,
+          "result_sha256": "0dce17264123c9bdb886508b04ae720250192d2edc27a6148951afec5bccecae"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 410,
+          "base_sha256": "4349d9f7af36dab4c9c2fb2819779e47fdb40b7db94707bf5e8e587b20ecf51b",
+          "path": "src/lighthouseweb3/functions/config.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 410,
+          "result_sha256": "68525d410c0b5a419310e0a50c7ec15ceaacd2d734c793d45d33e87fa59b2a7b"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 494,
+          "base_sha256": "5ee656928d5e7ec2941d05eeb2bf95b9877bfd696e1a861e6967f4820cd4f667",
+          "path": "src/lighthouseweb3/functions/create_wallet.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 522,
+          "result_sha256": "6555251183f76306226d9467ec9b2874938f641283ef2b0cb9b0736aec18106c"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 1584,
+          "base_sha256": "85a1e9db1a1321529ff1efa4ef6b3558d84575b8c4eb5cefcf3fb0c552f35470",
+          "path": "src/lighthouseweb3/functions/download.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 1605,
+          "result_sha256": "8e97f72eccfd44bc1ce82d252f7a7d20f0de19481aa1e2a91b5cda5bb3f830ef"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 531,
+          "base_sha256": "65c969cac700d9fa81264098ea31861195272e1e22759c7a7a08ed1509c9e67b",
+          "path": "src/lighthouseweb3/functions/get_api_key.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 528,
+          "result_sha256": "48c588e180d8fa41a5613e578e0c33a7151294e3d6b34ed5cc4f7412c6735cdb"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 358,
+          "base_sha256": "90e500328fe37dc2bbfd0034e1c3464d609b3db3bf4069133e44b34de2926604",
+          "path": "src/lighthouseweb3/functions/get_balance.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 379,
+          "result_sha256": "27db932d44350eb6b936ca36c6ce852b034b61512a4444d53f0a2975934acdc3"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 286,
+          "base_sha256": "91b90b1084fc812a004264cf8837318698c58e68b720fb6496f4da181ebb13b6",
+          "path": "src/lighthouseweb3/functions/get_file_info.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 304,
+          "result_sha256": "9699f8606330ae4965531060d4244bd0bdc0770e122aab857343972243be7c58"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 436,
+          "base_sha256": "04eb8aee85758da2a75bda379d6c2bf1eed683af85f4099b59863cd99cba1130",
+          "path": "src/lighthouseweb3/functions/get_ipns_record.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 460,
+          "result_sha256": "aa33972bbc45169394ebc9fee9bba81f306bab9018d68a83678f4839f12f8bbb"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 705,
+          "base_sha256": "a99734144e919d0831b3a481d611bcd42bae0a3b6fd8d320507540ceebfdf190",
+          "path": "src/lighthouseweb3/functions/get_uploads.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 704,
+          "result_sha256": "9f50e9a0038925911b44147dc8cda3ce389a76a6cac617ffac700bb58ff80d77"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 434,
+          "base_sha256": "92b04fa724cb2b366a041444599a3348d9f5e2560cdd272a23a2f403f64cb6de",
+          "path": "src/lighthouseweb3/functions/ipns_generate_key.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 458,
+          "result_sha256": "38eb0febbdf3fd66bdf6b49f4667c90feca347a11cf7c6530895684ed2a323ce"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 490,
+          "base_sha256": "b10242db45a96ebcb97aea0c46d49bbda3ff34cefd95f06edc2368629f80eacf",
+          "path": "src/lighthouseweb3/functions/ipns_publish_record.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 514,
+          "result_sha256": "e5bf69dc7f6bd7259cda38b25a507a811932ee458abcca78efc6966b8a9a1180"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 470,
+          "base_sha256": "19a2cccc983725400223224bfd6af2447d7e8a25ca98a6b1564d6cf1cf044c19",
+          "path": "src/lighthouseweb3/functions/remove_ipns_record.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 493,
+          "result_sha256": "03752e3ff7d69e8cb7ffb24f23a19023982c313bee830731e5ac4748e0ba1b26"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 2879,
+          "base_sha256": "f598b7d922c43ea00e1db49ed624500d26d309710ce0b2f000336525b5c1adcf",
+          "path": "src/lighthouseweb3/functions/upload.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 2918,
+          "result_sha256": "0a64051e4bde40b44a05cfc9375f27eef0ab3fb6133e6cfdd95e033c2c534adf"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 1881,
+          "base_sha256": "6469c205d0acf1db2570a2f60ebefc91ffa882e0eeccb42b979908c3d3617d2a",
+          "path": "src/lighthouseweb3/functions/utils.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 1872,
+          "result_sha256": "f0599ad44e3d1920ee26e8fa427055e2c4b7f545d8cec8f39b8b93e270a8e659"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 978,
+          "base_sha256": "b6e78fde29f4a94a1fa876a956fc13cbb9ef8ba800ed2e3deddaf3a39bde79de",
+          "path": "tests/test_create_wallet.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 983,
+          "result_sha256": "c2d92daddc90b684bdd3d4083e56bf2e9e261124804459956756e4313aee7514"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 969,
+          "base_sha256": "faedc16c60302f33d0ed714f70782c2171b74884cdf4a92d446904ce1298b021",
+          "path": "tests/test_deal_status.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 916,
+          "result_sha256": "88c5ef6774c15821b7435ef277368848b79619313945ddfc016e680e2f8cf9ac"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 1581,
+          "base_sha256": "5573b108d2ca48cacc2635c113cc436038ba4ff49d9161ec134a5ec02f595d62",
+          "path": "tests/test_download.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 1532,
+          "result_sha256": "4d1d8db294e1f6b74b3127f1203db598aeb410041c487e3643f14b4b6f83491f"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 3139,
+          "base_sha256": "50ac4bb7609c8ba04e9ac5a35ab4ed3319c8c9c674ce354b94b3b9536427855a",
+          "omitted_from_patch_reason": "Preexisting private-key-shaped literal omitted from all exported artifacts.",
+          "path": "tests/test_get_api_key.py",
+          "preservation": "lighthouse-python-sdk-test-get-api-key.byte-edits.json",
+          "result_bytes": 3232,
+          "result_sha256": "4266b41efaddfa2c9b1fe2172a28f04f16c65ad879b710d2afd2b580e21886e8"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 892,
+          "base_sha256": "61896205debc9168655783a7c3e930856a5104bc9c4fd91fdfe62ee6a88f07c2",
+          "path": "tests/test_get_balance.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 886,
+          "result_sha256": "d79172e98a2e22b549f42aadf51a140a809c704ec498753a396f14fa3b8d9c14"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 1312,
+          "base_sha256": "f0f68e646f745232be114bd9272d389a323ba4e2aca2032d98a7bb4ec373ccbe",
+          "path": "tests/test_get_file_info.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 1327,
+          "result_sha256": "e5a3ad9c60c14198bd6346ec5a156b70ae2d4d1e7d13a38c06dd424afa55253b"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 1282,
+          "base_sha256": "fbc49896183049dc1a7a9d402de153e8e11a50b319ab921af17c68bf2eaf60e7",
+          "path": "tests/test_get_ipns_record.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 1272,
+          "result_sha256": "32270b45aabfa3a1d7683035f520fd9dd5b3a217a7c11d08d332e229f97349d0"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 1317,
+          "base_sha256": "cb28ccedd5cb70b5752d46252f37519cc935f126a27cf21e2fcd7d0b249f8fa2",
+          "path": "tests/test_get_uploads.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 1309,
+          "result_sha256": "94f26b1dba473df61b9a8c283ff2ef762f452a7176930ce12942e9a69a4d8836"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 1023,
+          "base_sha256": "686dfe67d809b7d7900213f5cc387463a9eba7d1accc9dd0adcb39fdad5407bc",
+          "path": "tests/test_ipns_generate_key.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 1002,
+          "result_sha256": "02758c976b21a3c46b2689873a349b1306250ab0fe9cf30ec7547be88f91ed15"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 3738,
+          "base_sha256": "8c96baea1f7dcb9e0b77cccddb7a5686bb906a5acf6b9038adf5233c2cc514b0",
+          "path": "tests/test_ipns_publish_record.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 3804,
+          "result_sha256": "65b75bf351711aed2cec798bd75a6f9e3c50691eb182c03a44a605af4775f68a"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 2403,
+          "base_sha256": "d3fe46e4a45b2145a9e511c1eb3ace1478e4188ea0a6b46ced7e9921e88925ec",
+          "path": "tests/test_remove_ipns_record.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 2403,
+          "result_sha256": "d8b716923699d741643192f16e6101d9e16732433f9a67283ffd8048158223a5"
+        },
+        {
+          "ast_comparison": "identical",
+          "base_bytes": 3986,
+          "base_sha256": "d1b74fd5bc570444d79b0a18d6b2df23d3abd4fd4fa47ffde06c3d3fde666075",
+          "path": "tests/test_upload.py",
+          "preservation": "lighthouse-python-sdk.patch",
+          "result_bytes": 3985,
+          "result_sha256": "35c5474d82b16d217701f8dd6b7ca1a7cda5f37d89c3741804d65b9b6df0bde3"
+        }
+      ],
+      "head_ahead_behind_tracked_upstream": [
+        0,
+        0
+      ],
+      "license_copy": "lighthouse-python-sdk.LICENSE.txt",
+      "license_provenance": {
+        "base_commit": "6b2c86693090c770d2c9a4d82ba315000a77068b",
+        "source_file": "LICENSE.md",
+        "source_sha256": "f817886ee6bb65ed3098a7987b1e9781653d15c71f85589ce0d2af663c66d373"
+      },
+      "name": "lighthouse-python-sdk",
+      "origin": "https://github.com/lighthouse-web3/lighthouse-python-sdk.git",
+      "review_note": "Observed edits are formatting-oriented; Python AST comparisons are recorded per file. This is not behavioral validation.",
+      "source_path": "external/ipfs_datasets/.tools/ipfs_kit_py/docs/lighthouse-python-sdk",
+      "tracked_upstream_commit": "6b2c86693090c770d2c9a4d82ba315000a77068b",
+      "upstream_status": "All edited files differ from locally tracked upstream bytes; no broad remote history search performed."
+    },
+    {
+      "advertised_upstream": "754254c08fe1c3eda18b69da3d336106fe8d72d6\trefs/heads/main",
+      "base_commit": "e942d00b981d51897df2bd76fc5ffee5c00c4d5b",
+      "excluded_files": [],
+      "files": [
+        {
+          "base_bytes": 6835,
+          "base_sha256": "e2a7576a0b38164ea3f7ed92d718601c7bd0300a4483ce89c6ff0b0a71b898b2",
+          "path": "docs/advanced/authorization.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 6837,
+          "result_sha256": "eb7fdd716d49f31291840819433f900a9a2cc1fa899ec1bf90a447b7f7cab60f"
+        },
+        {
+          "base_bytes": 14900,
+          "base_sha256": "dfa934332db2eae7beb48fab6be1d108321ff0f4ec6bafa322d3acc65252b1cc",
+          "path": "docs/advanced/identity-assertion.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 14902,
+          "result_sha256": "510a2b4b59e3cc97d81245df536cca154e9cefd8756500f57af016201bd1923e"
+        },
+        {
+          "base_bytes": 11112,
+          "base_sha256": "17f9de8303bd4b0efbd3ccdc2ae0dea8f467a49a20e12b7b12f5cd12d6aa153e",
+          "path": "docs/advanced/low-level-server.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 11118,
+          "result_sha256": "30aed5b9430f42ab5726829401469f50538de4e61cacb814debac5690745cfb3"
+        },
+        {
+          "base_bytes": 5174,
+          "base_sha256": "2b5ce41719b45b7b1f04a07e13173a8cffc3935531e40b44f98ce9aec64c3a85",
+          "path": "docs/advanced/middleware.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 5175,
+          "result_sha256": "03cd358e3423ceb79fb42cc17172b9fac80888de20405d5d211fe91cae33efcb"
+        },
+        {
+          "base_bytes": 7266,
+          "base_sha256": "8ee107aae82b59e4702fc372b09abdd75cb4798bbcb4a2da1118027f10ad1af5",
+          "path": "docs/advanced/multi-round-trip.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 7269,
+          "result_sha256": "208132b6a70c9e17ba282ca8339dff5d7d801a2e43e0eccc93d8ef1f66dcfbd7"
+        },
+        {
+          "base_bytes": 9014,
+          "base_sha256": "1472e8f3a832af271d29d99bc3630dac7955e70cb2029e936440a308ccd510bd",
+          "path": "docs/advanced/oauth-clients.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 9016,
+          "result_sha256": "0836bc65ac2a0fbb4d29acbac0ccf22914d5391a579d90109b4944ff75ad186f"
+        },
+        {
+          "base_bytes": 4721,
+          "base_sha256": "8df5d849abe2261ac706732f007cebe8e17ccf089f89e4de3de1e1beaea933a0",
+          "path": "docs/advanced/opentelemetry.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 4722,
+          "result_sha256": "15c1a0bc5d75898f0a157c7ca0f699a5487b7ab2fdf3a7e402e60bf979adf81b"
+        },
+        {
+          "base_bytes": 4718,
+          "base_sha256": "5e5a2f88c8a1aad5e874e1005cee0c089083caeb793bb6449ad774fe70de117c",
+          "path": "docs/advanced/pagination.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 4720,
+          "result_sha256": "ccb98f82b7e4b8d21a43614b5c3e145e932038a544d7ccce29e484db00ab4a11"
+        },
+        {
+          "base_bytes": 4392,
+          "base_sha256": "8b9094744f53e5b635918e743834ce9fa9a0c75f3257be357b71ae81ffe5e7c8",
+          "path": "docs/advanced/session-groups.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 4396,
+          "result_sha256": "3de204d1c2dda196f90d7b66685b650aa0994aed1f58b4ffd6bc03d6d6025398"
+        },
+        {
+          "base_bytes": 11978,
+          "base_sha256": "82e7241c0d8f8f47129530a4d3d58934e78d856435d4686a6ebc15f02bc9d0fa",
+          "path": "docs/advanced/uri-templates.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 11983,
+          "result_sha256": "f3c1d85a0f45468b5a8ea5e841cafe12fd38e0e99720b308321e7de90b3c407a"
+        },
+        {
+          "base_bytes": 7875,
+          "base_sha256": "6c6ea66157388812119db536da48b1ce8cac7b908eda9abd2078209ada43d8fa",
+          "path": "docs/client/callbacks.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 7833,
+          "result_sha256": "1a5c71b4d13420ddd5580dab0fb583a3dd877c2df795f9041c6c6a40ed85079c"
+        },
+        {
+          "base_bytes": 10999,
+          "base_sha256": "9b0f2624ce55a65882470fc3f46ca65357a88456fc4da1a6c596ad54b5c4066c",
+          "path": "docs/client/index.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 10933,
+          "result_sha256": "67613fc15c1144641a156ff4a2849ea085c25158d7f703b96058dd434dcff9db"
+        },
+        {
+          "base_bytes": 6470,
+          "base_sha256": "bd6462150c6addb1f4279c3c18ea24c8c9093758707e4bb0ca33ff9286cb0102",
+          "path": "docs/client/protocol-versions.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 6474,
+          "result_sha256": "aee9faed465510ed6c28a1c1e98e2c49816b2f9f5ed6c43e153b12a18813797b"
+        },
+        {
+          "base_bytes": 6203,
+          "base_sha256": "8dc85d30f80cf8e5227a11973a61665f194a31c35281ba39d93939a174dc3c74",
+          "path": "docs/client/transports.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 6207,
+          "result_sha256": "41eff9f37f2c9a6060ca8dbff16a4181a1bfb4864ad61a621730ae1a7828f37e"
+        },
+        {
+          "base_bytes": 2775,
+          "base_sha256": "2ff6e3d6026d3c0aba949fd6c49ea7d91c9b02a83396d8edf7791996cd74abfa",
+          "path": "docs/index.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 2776,
+          "result_sha256": "a0dfaab719948c6593081dc8a4c72d8b5609d31133bf23a56032a9162fdaf02e"
+        },
+        {
+          "base_bytes": 83233,
+          "base_sha256": "b7eaf0745de41836e0849429baa0ffaa5af841787b810629b247aabb8223cadc",
+          "path": "docs/migration.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 83287,
+          "result_sha256": "df2d966ca2e021a6ee539a1c5ff3e7e0d725fa510f74029192a721e844f1b5d0"
+        },
+        {
+          "base_bytes": 9452,
+          "base_sha256": "c2cabc529868ef15dad2253e799344b91f698a4986e7153c2bb51305bc4d33b5",
+          "path": "docs/run/asgi.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 9458,
+          "result_sha256": "c757a1ee9dfc9b5c9363b4d07a2a60909372d8674dd3f66e4318e67cac729e62"
+        },
+        {
+          "base_bytes": 6318,
+          "base_sha256": "5a67559a31893fe1d3e786b20f674f96e2894a666deca962293112fadbefa0a4",
+          "path": "docs/run/index.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 6321,
+          "result_sha256": "1535799bd59bf9e3ecc925ca01e1a3a4c8ad8ca6fa3690864cb89939915f477b"
+        },
+        {
+          "base_bytes": 5362,
+          "base_sha256": "6ae76a93ec3f295516bb69fc1f43f28bb77fc081c8eb4b4f9beb695461eeb1e7",
+          "path": "docs/tutorial/completions.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 5365,
+          "result_sha256": "7dba8176fbbfd80890684919382e0bf550d789b766c87430704c26553a679432"
+        },
+        {
+          "base_bytes": 5674,
+          "base_sha256": "c83377efa799c4f246b6f4da12573e080fcd7b16a0e204182c08682febc5d185",
+          "path": "docs/tutorial/context.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 5675,
+          "result_sha256": "c45837375007f9a699373f406f32f2ac473e9f4cd264cf8f0e6aeb160faef47a"
+        },
+        {
+          "base_bytes": 7996,
+          "base_sha256": "572baf02d0337676b306f965c173a5819a41467dd0d92dad19d762779ba42555",
+          "path": "docs/tutorial/elicitation.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 7999,
+          "result_sha256": "6af6ff4c2d5acfd89c2cab853d6527b4b1cd693a22567956e15065c1b1463478"
+        },
+        {
+          "base_bytes": 7168,
+          "base_sha256": "86d7b36c4e650d22554923a8d0e533827f2ecd9abc75500fec280aa9dafb89da",
+          "path": "docs/tutorial/first-steps.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 7169,
+          "result_sha256": "451b618446147f0a33bc21bcbf8fe69a8a3c8022c9311c4ed8e5baa537b05887"
+        },
+        {
+          "base_bytes": 6891,
+          "base_sha256": "cd4edc4902b8b5b87ce586b711a374f8103726e493afc2f461d31a0ca05a1dd1",
+          "path": "docs/tutorial/handling-errors.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 6873,
+          "result_sha256": "12bea320c87f0bd337e2b4a13f3e1b78b90cce55d3a1db4f6db990b92a420423"
+        },
+        {
+          "base_bytes": 4574,
+          "base_sha256": "9da73dd89ed43306ac4603340baf143c29de7daa916c4444bb8ba969be72e6a5",
+          "path": "docs/tutorial/lifespan.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 4576,
+          "result_sha256": "00b80fbc1ff8dbe6148d4de910e4c28db0d562540615772450c48640de3c072e"
+        },
+        {
+          "base_bytes": 3744,
+          "base_sha256": "6053665733450f3a68590c85a11b1e19bfac8b5498715dff4f3e4a4ad29faaa0",
+          "path": "docs/tutorial/logging.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 3734,
+          "result_sha256": "3f34263a39040e281a9a5497961194725ee9004db71203abafb452201ecb9ac5"
+        },
+        {
+          "base_bytes": 4973,
+          "base_sha256": "57591189565b44d767b75d8ce3419ccbe6b40f13c565ca4e3ac744f6d5d61121",
+          "path": "docs/tutorial/media.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 4954,
+          "result_sha256": "c3527504c42b4c9beb80d915172bbf974027f3af021a301407525c74e16ac672"
+        },
+        {
+          "base_bytes": 4542,
+          "base_sha256": "bfb98b31a549216aee376e49907f94f305c31e23f648a6ca2b694884b0ea9226",
+          "path": "docs/tutorial/progress.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 4544,
+          "result_sha256": "618b6d3f85872f30ec76c42c54860896cd93c8ad00e9eaa1ebb4e992a0a30550"
+        },
+        {
+          "base_bytes": 5527,
+          "base_sha256": "a251e4d17856daf72db53b68d6353234189d909b319fb89d8896609d60b57035",
+          "path": "docs/tutorial/prompts.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 5530,
+          "result_sha256": "3292e9692ee780469c86562452062d6d637a54bf513f7d924bb39082347d8d32"
+        },
+        {
+          "base_bytes": 6051,
+          "base_sha256": "97951c11d16962f16d5f0c7aab510179b0eaf9aa74f9022658db28855f91592c",
+          "path": "docs/tutorial/resources.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 6054,
+          "result_sha256": "656fed6af7537161adfe608bb9b7bae73c6dd82504e54144dbe6f3ed6e252d24"
+        },
+        {
+          "base_bytes": 9078,
+          "base_sha256": "bca792ece4bc5a5065a92c72da11ca8eb6d31fbd86febb25ff609bf8120c34cb",
+          "path": "docs/tutorial/structured-output.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 9076,
+          "result_sha256": "ea59b4c082a7cd2c19091c7c1c051dcc2cdbab5caf1f56a07ad3cf842f1b10c6"
+        },
+        {
+          "base_bytes": 3905,
+          "base_sha256": "f025143279e8b30388bcd29f333df2e445f9bfad6d05ab75e4d727c9700483fb",
+          "path": "docs/tutorial/testing.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 3906,
+          "result_sha256": "b553b104692cf541281b97ee118e6b4d1f992ed7e7c334451010f33f4860f035"
+        },
+        {
+          "base_bytes": 6710,
+          "base_sha256": "b843b05d46e07e307e697925ca520d0fa6f49421ea5fe10f89aa3e73fe04866c",
+          "path": "docs/tutorial/tools.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 6704,
+          "result_sha256": "f89521f3412ea52644836cc796117c3e1c802799fbaec1980736ec7661ca76c0"
+        },
+        {
+          "base_bytes": 2485,
+          "base_sha256": "05d3c13387c26b575a64267928b8a2fb8af69209fc35db73f44032a44aeddc83",
+          "path": "examples/servers/simple-pagination/README.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 2494,
+          "result_sha256": "b5559fbe0f67905ea28c63099387c64f7012b1647af4f0f2dbe57588529caed9"
+        },
+        {
+          "base_bytes": 1509,
+          "base_sha256": "e3369c477885ff0306b7be190aba91f0d018293b4aeae3470e35c5563481362f",
+          "path": "examples/servers/simple-prompt/README.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 1495,
+          "result_sha256": "15bb81d802cfeade140f8ccab65af0424ec0e590f1159333067bebf4b5a61233"
+        },
+        {
+          "base_bytes": 1261,
+          "base_sha256": "16bc1d5e7a07da16d1583524715888d88505fc4709eca607132ef06b53abe738",
+          "path": "examples/servers/simple-resource/README.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 1246,
+          "result_sha256": "def39f8606d0ca5697b9f3e23ad066368b666c7f9adf690bae88c448597fb12f"
+        },
+        {
+          "base_bytes": 1206,
+          "base_sha256": "176ca54a2c0b02ed6d5f9da4392d247a2a946333d8a5b0e1921eb0fb3fd686f7",
+          "path": "examples/servers/simple-tool/README.md",
+          "preservation": "mcp-python-sdk.patch",
+          "result_bytes": 1191,
+          "result_sha256": "18feadd0acc9a1324217688d72c7060c06649d1ae69920dd49109e84a4e5cad4"
+        }
+      ],
+      "head_ahead_behind_tracked_upstream": [
+        0,
+        127
+      ],
+      "license_copy": "mcp-python-sdk.LICENSE.txt",
+      "license_provenance": {
+        "base_commit": "e942d00b981d51897df2bd76fc5ffee5c00c4d5b",
+        "source_file": "LICENSE",
+        "source_sha256": "5e13dbbc1d120fc2a03cecde7c91424ae2d7de11b63d58ded2f4431e261ee50d"
+      },
+      "name": "mcp-python-sdk",
+      "origin": "https://github.com/modelcontextprotocol/python-sdk.git",
+      "review_warning": "Formatting changed MkDocs snippet include delimiters. Patch is preserved unapproved and must not be applied as an endorsed documentation fix.",
+      "source_path": "external/ipfs_datasets/.tools/ipfs_kit_py/docs/mcp-python-sdk",
+      "tracked_upstream_commit": "17aaf2557205c3768ed61831398a4e074b21e96d",
+      "upstream_status": "All edited files differ from locally tracked upstream bytes; no broad remote history search performed."
+    },
+    {
+      "advertised_upstream": "754254c08fe1c3eda18b69da3d336106fe8d72d6\trefs/heads/main",
+      "base_commit": "45f2a88a9aaeee5019d0fd4541693757ace5bbc3",
+      "excluded_files": [],
+      "files": [
+        {
+          "base_bytes": 6771,
+          "base_sha256": "bf8abb2be6ed5c984a5b30f44b66f562c761c6b7e4e746802fcd9f481683666d",
+          "path": "docs/advanced/apps.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 6775,
+          "result_sha256": "2dd5c34512e0097e5eaa637565046d6657c0ca241ce49ca34b82c4939bb7f0a3"
+        },
+        {
+          "base_bytes": 11631,
+          "base_sha256": "de0a0ae1bce54a99a279cb3574c41c9832f365fb5494c9b9d99ad046d84ea32f",
+          "path": "docs/advanced/extensions.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 11641,
+          "result_sha256": "a0d66bfe8e39061b37c4b97d72edd995f1fd01421eff22bc517bde5b1cb17e7b"
+        },
+        {
+          "base_bytes": 12589,
+          "base_sha256": "99563830b3b64ea95c96f6f9ed2bf6ac6d77b1d26dba8f72b55d6739a3df1f75",
+          "path": "docs/advanced/low-level-server.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 12595,
+          "result_sha256": "d63f6b118884b59a72eaf11b2890468f88d0252c698f665f3f58fa7d202eb5a6"
+        },
+        {
+          "base_bytes": 5644,
+          "base_sha256": "4deca423728b91bbc80ad2f398ab36048ecf12eeec326a33223a7a5b7a6a197c",
+          "path": "docs/advanced/middleware.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 5645,
+          "result_sha256": "b3fa835f3af02e922e9fc276bff17f83e779271a1696beb13c8796db9766f436"
+        },
+        {
+          "base_bytes": 4797,
+          "base_sha256": "48b78889eafedac2cd87d87cb7f3a40b3c0752326b85dd4a884b9ff6009bc1cb",
+          "path": "docs/advanced/pagination.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 4799,
+          "result_sha256": "dc762f6b8e3bd8840006e8053c705050528f95700765540f5561e75bbf69a745"
+        },
+        {
+          "base_bytes": 14228,
+          "base_sha256": "e77cae025d8d67d39850b5bb0553b0ac54b6e808036676f05e9ef8d38b46d980",
+          "path": "docs/client/caching.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 14231,
+          "result_sha256": "07987b7a7d118a09e4098a8e9031d24458ed4218a2cc452e772668f55121607b"
+        },
+        {
+          "base_bytes": 8700,
+          "base_sha256": "3c479b6ffc87280f93c692141780a4958e734147232b8d5759a5fc2b80b88b3d",
+          "path": "docs/client/callbacks.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 8658,
+          "result_sha256": "0bc04da3d9a462d90f7598b20b9c913031e4de2748a50b3b6b24a79b1578b7a1"
+        },
+        {
+          "base_bytes": 15816,
+          "base_sha256": "f22d47cbd09259433228ba1cfb72f2e0f12d1d727e383b3f52d52992f0caee83",
+          "path": "docs/client/identity-assertion.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 15818,
+          "result_sha256": "d8d8313212d6fbacd9803a520bfdef193f2abfd68445f45e83f323a69fec15f7"
+        },
+        {
+          "base_bytes": 11422,
+          "base_sha256": "24177cbe64f2652a7f0505cb8596ce777df8b18d443257ec7bbc33a777c96e1a",
+          "path": "docs/client/index.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 11356,
+          "result_sha256": "58ce0c11448eb080992ed4c7684a75ed1b7b43cd9b74ff0117891466484e13ae"
+        },
+        {
+          "base_bytes": 10500,
+          "base_sha256": "4e3da6e1f681ed48dca0ea258c704d5a588bea47a634289147d3d7730f398f8b",
+          "path": "docs/client/oauth-clients.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 10502,
+          "result_sha256": "f351775e541f9fd6e3718e5fb49f028e777e4a223b34027c3e1153c068218115"
+        },
+        {
+          "base_bytes": 4656,
+          "base_sha256": "187c2d8d76c9abbff8288ce4ecd3b1499c41f7e7bb3b4d76e00721140eba9b11",
+          "path": "docs/client/session-groups.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 4660,
+          "result_sha256": "01a8a90c9bf19efb708f1b1b968ef468a0fce5b818fb2c1dff75a55a4377ebe0"
+        },
+        {
+          "base_bytes": 6254,
+          "base_sha256": "65364ffe8f2caa27cca081045495cc1a6577e8ba8bfe7cab39344b0ac52f9256",
+          "path": "docs/client/subscriptions.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 6259,
+          "result_sha256": "309744eb3f970986a644870cb0a8e90e23aedd49db626d95f4f8d6e750dc74f6"
+        },
+        {
+          "base_bytes": 7020,
+          "base_sha256": "1bbd9b75323afe3defafb60a9fb51535ff3c7e4c73b851035b47c01bd0f0f99c",
+          "path": "docs/client/transports.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 7024,
+          "result_sha256": "dcb259d6aacad414a85b04e2176c4762e28f0bc670f85baaeb9b8cd2ae17af34"
+        },
+        {
+          "base_bytes": 7546,
+          "base_sha256": "3531c5686a6ff79aabe6f0f8a3cb96213b6fc13b0bbbb0e762dc9f4a827b4be3",
+          "path": "docs/get-started/first-steps.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 7547,
+          "result_sha256": "0c70b3fd27d88594458cfb3085bd14ca81725eda9b3e76cb777d88cf95a26e33"
+        },
+        {
+          "base_bytes": 10063,
+          "base_sha256": "89f14a80c6fa9030225324a4d7f1792c4f6d9bd7eab2c9368260f6b606c75cae",
+          "path": "docs/get-started/real-host.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 10064,
+          "result_sha256": "eb9770e43f2dfebaaf6403dcfdcf9c4fb421f89316f28ecccceb4da65e985110"
+        },
+        {
+          "base_bytes": 4139,
+          "base_sha256": "8ad42e7154ca98ce56ab3f842d582187e24f5fae600d52a05864b65fe591cc68",
+          "path": "docs/get-started/testing.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 4140,
+          "result_sha256": "a322ac250e6af63231130c4cf1e4fd649e291f85974fc3e8c4fecf331b8cd763"
+        },
+        {
+          "base_bytes": 6482,
+          "base_sha256": "7a4c7a08ad5748e5fa90685e2dddb0f6e7dc7a48dbb7135f7533e06dfef5d044",
+          "path": "docs/handlers/context.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 6483,
+          "result_sha256": "501ab498f1d0992cc48c46895858548ac250893ce3dc79d27e1de303ac1e46ec"
+        },
+        {
+          "base_bytes": 10678,
+          "base_sha256": "7c874394324509f82cda1b005cea850328f771f7a2da9efef7ab8cc556ae3653",
+          "path": "docs/handlers/dependencies.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 10682,
+          "result_sha256": "645f7098ece88c97b5fb72ebdb39cb1a448f18f66311acae580e1a7b8bf951d5"
+        },
+        {
+          "base_bytes": 11152,
+          "base_sha256": "4d2c13e06b7dec1481b293882438dbfac8cf5cc513559f843a0525605220e190",
+          "path": "docs/handlers/elicitation.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 11156,
+          "result_sha256": "060bf915fc9600d6fb8128e1a54410083621e94af4d7779aba4eacae093d6f18"
+        },
+        {
+          "base_bytes": 4650,
+          "base_sha256": "d32e866d7bf28d622af89510eea5b6c8d6e129cfd33e21baee639d4b80235e19",
+          "path": "docs/handlers/lifespan.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 4652,
+          "result_sha256": "dff814e686c6301ca534e12892f915d9a59d8f7da6f8a640c0a45124d2a1d1f3"
+        },
+        {
+          "base_bytes": 4320,
+          "base_sha256": "725d0d70febc611f43a299d75fc5454885f5166f169db4b959c95ce50cf68005",
+          "path": "docs/handlers/logging.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 4310,
+          "result_sha256": "2dd2972b66694b9a3a066c7f9e281ad5ae6c6e17f7297cca0997bde1f270bfa5"
+        },
+        {
+          "base_bytes": 17918,
+          "base_sha256": "8308fa2579030749f552341195cd60a0e9023c6eff89a8fa683204f47b75dec4",
+          "path": "docs/handlers/multi-round-trip.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 17918,
+          "result_sha256": "5a6c05286651fd80ee0710322f16f6b767aca1f99338ac694fc5f321ec680e86"
+        },
+        {
+          "base_bytes": 4585,
+          "base_sha256": "3885a36fddddbf8b141ec73532d106bead101d4cbb611deb250a2e1882630bdd",
+          "path": "docs/handlers/progress.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 4587,
+          "result_sha256": "128e49340a582d31bafa62595a631066bd23e0be6cd089570f1470d20253ac6e"
+        },
+        {
+          "base_bytes": 4028,
+          "base_sha256": "b5bb7f7118578d5b1e57038156519613fe71fc3056ea338bc36868a4637fdc45",
+          "path": "docs/handlers/sampling-and-roots.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 4030,
+          "result_sha256": "3bf4f2ab115a5a3bb3c43375c1521cf6419f6f4c68c29c8f5b36887e553e5a32"
+        },
+        {
+          "base_bytes": 8255,
+          "base_sha256": "b998996e866ac022f13f346278d1e0adcad7c7174fcb16b231b4d4dfc5ebbfc5",
+          "path": "docs/handlers/subscriptions.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 8258,
+          "result_sha256": "e7683c86a5219aaa3abb04b74ac637e6cfcb47b1c664cdbfaf59bf38b74e621d"
+        },
+        {
+          "base_bytes": 3818,
+          "base_sha256": "8b4ca614218b7043752b47da54c02ce2baea2dfcb250c6f78c3ec412ca9b5e1a",
+          "path": "docs/index.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 3819,
+          "result_sha256": "46e8b5e597056d70f39caff847251bcce26afbe84df19904feaaf35e97759b73"
+        },
+        {
+          "base_bytes": 133592,
+          "base_sha256": "14e5a4d8a31ae61b68fbbe31a59bdd8888d920c7297930dfc831ecf18ec0b7ee",
+          "path": "docs/migration.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 133618,
+          "result_sha256": "63f6be33799a4f2d89b7f514d270390d47359882903744b4454831a969d61c84"
+        },
+        {
+          "base_bytes": 6597,
+          "base_sha256": "14a56d38684150fe95a9f59c30f7f9d16e93d565720cb88c5697b6f08807ca07",
+          "path": "docs/protocol-versions.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 6601,
+          "result_sha256": "c61520223aa668c18596a26b57c43d2f5257f7d67a8f7fd09da383156171c4c6"
+        },
+        {
+          "base_bytes": 8117,
+          "base_sha256": "beff84db15de93589ce7eb6300247de8b01a725ff29fc99f624af46fbec39345",
+          "path": "docs/run/asgi.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 8123,
+          "result_sha256": "4ea5ceb3e19d9524c952536a4335461035032840018c9f6aaa0286a01d6fadaa"
+        },
+        {
+          "base_bytes": 7322,
+          "base_sha256": "118752f7480bc070121fea5891fe1b96c55b5df5585d0aa7abea844a36f9b240",
+          "path": "docs/run/authorization.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 7324,
+          "result_sha256": "017d7fc4792eaa3fcfb3f0f67964c935c63051161f1a536f7e2b39e6e29d976a"
+        },
+        {
+          "base_bytes": 14402,
+          "base_sha256": "0bcac108e2d5f9eeafffb6594aebda9d2bde9ab6592afbe1c3b29a4b40833009",
+          "path": "docs/run/deploy.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 14406,
+          "result_sha256": "fb44eea536a9f7e95be096ea17feeffaa1d43a250d6b9ab5512c9536f0ee8b89"
+        },
+        {
+          "base_bytes": 7587,
+          "base_sha256": "1ebfc256e2bfe35e38479b41b627459ba40bb867aecf4111030aa955cda48255",
+          "path": "docs/run/index.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 7590,
+          "result_sha256": "064ce1115b4c5e7d96fc7ae6d95cb4e82328972ad90bbf27f8416cacdeb665be"
+        },
+        {
+          "base_bytes": 9869,
+          "base_sha256": "4e00a32737535881aac5df9f180785609c0e6083afe21d98009581307288fc9e",
+          "path": "docs/run/legacy-clients.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 9872,
+          "result_sha256": "f9c7955ae78c971454dd2178b1506f910f1a224172c2eb3376e6a9bf11c216fb"
+        },
+        {
+          "base_bytes": 4749,
+          "base_sha256": "ad75e0376f112b17ee68e7e0a2e2b4d92b0c050a503267661e21a725deed0e5b",
+          "path": "docs/run/opentelemetry.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 4750,
+          "result_sha256": "f73e3ef0747a618051e0f5fae365a867332d21f4a74ac09fa088f00c160332e7"
+        },
+        {
+          "base_bytes": 5523,
+          "base_sha256": "1d60e1356fb43e065a0a3d357ca1c497f9ad4525c0e91102a3db34a2cc070c98",
+          "path": "docs/servers/completions.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 5526,
+          "result_sha256": "05b8d0a6641c431674a209b1798ed9c88af5338b906766b143ac35253c2bd33f"
+        },
+        {
+          "base_bytes": 7208,
+          "base_sha256": "36d772122f2fe8ff60521ea12d793aa460813cd9c663fdc8b134faad07797c59",
+          "path": "docs/servers/handling-errors.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 7190,
+          "result_sha256": "e069bfcf6f4e8688f9ffc3e4fc631a64edc88645f7b5fb3b79dbafd9f4d93615"
+        },
+        {
+          "base_bytes": 5599,
+          "base_sha256": "9b836a4b10afc81b9f551e8f266803eaecb4a99d7de90259bed3e526160de379",
+          "path": "docs/servers/media.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 5581,
+          "result_sha256": "fe4a4b7bff0ad0ac495765b20e88cb16edffc6be00d6fa8c06885f7a4a2628ad"
+        },
+        {
+          "base_bytes": 5590,
+          "base_sha256": "e532eb8cc4386c3b35d5d1ebffc9cf87ae1b3f07c7aa64af5467f22133afc100",
+          "path": "docs/servers/prompts.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 5593,
+          "result_sha256": "01a645114273be701f9fb8406ca8f441214eda69160fa6b0a3316d6eb992f36a"
+        },
+        {
+          "base_bytes": 6144,
+          "base_sha256": "493a06de8296c4eed4510af80248585f7ff8daa62ea784061ec8278a02140028",
+          "path": "docs/servers/resources.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 6147,
+          "result_sha256": "9d02f56cd53d2300ae397426713c30cd417902d5b91283a7e1ea24401d740645"
+        },
+        {
+          "base_bytes": 9171,
+          "base_sha256": "3301494616603325ec08b6b898f0f2ccbca289a0dd9c934bd9d16b5e8e1b6f9e",
+          "path": "docs/servers/structured-output.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 9169,
+          "result_sha256": "7b7a6d9b196a688aad86df44e8f5df56b897cd2d914d34bd61f660c34ceeb003"
+        },
+        {
+          "base_bytes": 6748,
+          "base_sha256": "e0a3522e6d9625b31d6ce147fcea90f501628327cfe15c70bf16d93d32b9e3d1",
+          "path": "docs/servers/tools.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 6742,
+          "result_sha256": "3875db270b772fed0bdf40ea07eaaf32c84a7084e03eb674c8c28a815ce09615"
+        },
+        {
+          "base_bytes": 12076,
+          "base_sha256": "736b20dee7cab385878a68f05ea1c302f04c1c35b81cec53747a7bb1e56c1675",
+          "path": "docs/servers/uri-templates.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 12081,
+          "result_sha256": "7005fa54929167e76ab49921e1d7fcb7108daa5e219587f41b125aec0124b969"
+        },
+        {
+          "base_bytes": 25447,
+          "base_sha256": "3b7542f352d836828c22c1a0b6bcf861b9a1013aed760ce7b8189b2013051287",
+          "path": "docs/troubleshooting.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 25454,
+          "result_sha256": "46bada87a9425d26390478d5af53170bc6fddb14393be5b67a8954d9d210db01"
+        },
+        {
+          "base_bytes": 25723,
+          "base_sha256": "a1a6d013e97897e251fc84e33ca37ce637f7206b560ebee98553467ebc6448b4",
+          "path": "docs/whats-new.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 25726,
+          "result_sha256": "55e1a724b8f4afe2e9f9ef8169ca4efa4202600bf2495c4f941dbc395fccde85"
+        },
+        {
+          "base_bytes": 2485,
+          "base_sha256": "05d3c13387c26b575a64267928b8a2fb8af69209fc35db73f44032a44aeddc83",
+          "path": "examples/servers/simple-pagination/README.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 2494,
+          "result_sha256": "b5559fbe0f67905ea28c63099387c64f7012b1647af4f0f2dbe57588529caed9"
+        },
+        {
+          "base_bytes": 1509,
+          "base_sha256": "e3369c477885ff0306b7be190aba91f0d018293b4aeae3470e35c5563481362f",
+          "path": "examples/servers/simple-prompt/README.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 1495,
+          "result_sha256": "15bb81d802cfeade140f8ccab65af0424ec0e590f1159333067bebf4b5a61233"
+        },
+        {
+          "base_bytes": 1261,
+          "base_sha256": "16bc1d5e7a07da16d1583524715888d88505fc4709eca607132ef06b53abe738",
+          "path": "examples/servers/simple-resource/README.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 1246,
+          "result_sha256": "def39f8606d0ca5697b9f3e23ad066368b666c7f9adf690bae88c448597fb12f"
+        },
+        {
+          "base_bytes": 1206,
+          "base_sha256": "176ca54a2c0b02ed6d5f9da4392d247a2a946333d8a5b0e1921eb0fb3fd686f7",
+          "path": "examples/servers/simple-tool/README.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 1191,
+          "result_sha256": "18feadd0acc9a1324217688d72c7060c06649d1ae69920dd49109e84a4e5cad4"
+        },
+        {
+          "base_bytes": 5252,
+          "base_sha256": "dfab7435420b2444e31ae5f32ac0d6d4e1be3ca8390c73187e49e79031035100",
+          "path": "examples/stories/legacy_routing/README.md",
+          "preservation": "mcp-python-sdk-hallucinate-datasets.patch",
+          "result_bytes": 5244,
+          "result_sha256": "20e533e669eae87325cee85b42618bc6be4661538d4eb403371624d3311dfd75"
+        }
+      ],
+      "head_ahead_behind_tracked_upstream": [
+        0,
+        69
+      ],
+      "license_copy": "mcp-python-sdk-hallucinate-datasets.LICENSE.txt",
+      "license_provenance": {
+        "base_commit": "45f2a88a9aaeee5019d0fd4541693757ace5bbc3",
+        "source_file": "LICENSE",
+        "source_sha256": "5e13dbbc1d120fc2a03cecde7c91424ae2d7de11b63d58ded2f4431e261ee50d"
+      },
+      "name": "mcp-python-sdk-hallucinate-datasets",
+      "origin": "https://github.com/modelcontextprotocol/python-sdk.git",
+      "review_warning": "Formatting changed MkDocs snippet include delimiters. Patch is preserved unapproved and must not be applied as an endorsed documentation fix.",
+      "source_path": "hallucinate_app/ipfs_datasets_py/.tools/ipfs_kit_py/docs/mcp-python-sdk",
+      "tracked_upstream_commit": "17aaf2557205c3768ed61831398a4e074b21e96d",
+      "upstream_status": "All edited files differ from locally tracked upstream bytes; no broad remote history search performed."
+    },
+    {
+      "advertised_upstream": "754254c08fe1c3eda18b69da3d336106fe8d72d6\trefs/heads/main",
+      "base_commit": "1216c536937819070981e63177b258b79a615bfd",
+      "excluded_files": [],
+      "files": [
+        {
+          "base_bytes": 6771,
+          "base_sha256": "bf8abb2be6ed5c984a5b30f44b66f562c761c6b7e4e746802fcd9f481683666d",
+          "path": "docs/advanced/apps.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 6775,
+          "result_sha256": "2dd5c34512e0097e5eaa637565046d6657c0ca241ce49ca34b82c4939bb7f0a3"
+        },
+        {
+          "base_bytes": 11151,
+          "base_sha256": "1538a8d1b633fcaad9ad844237d13a8f612966580d5cdbb6530075c9c50964e3",
+          "path": "docs/advanced/extensions.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 11161,
+          "result_sha256": "bed9cdf9881832cc35595d8b70b6a06a6d4891680c942ccc8bbfb98f3b6d1179"
+        },
+        {
+          "base_bytes": 12201,
+          "base_sha256": "b135b763ada31a05a0b99df5453236fc6faac592a1498a15a5982989a57c9376",
+          "path": "docs/advanced/low-level-server.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 12207,
+          "result_sha256": "a1c9aae61f0e074e7e51a20d9d8a7b35154efed6ea7e69c1fcfc009a834ef32c"
+        },
+        {
+          "base_bytes": 5278,
+          "base_sha256": "ccc629cab1210e570355bd1648822532d29485cb86b10f9c1863b0bca1d32f14",
+          "path": "docs/advanced/middleware.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 5279,
+          "result_sha256": "c4c377b8b90b8b5e78bb05640d1e2b368c855d27d150c1781d16e927d579157b"
+        },
+        {
+          "base_bytes": 4797,
+          "base_sha256": "48b78889eafedac2cd87d87cb7f3a40b3c0752326b85dd4a884b9ff6009bc1cb",
+          "path": "docs/advanced/pagination.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 4799,
+          "result_sha256": "dc762f6b8e3bd8840006e8053c705050528f95700765540f5561e75bbf69a745"
+        },
+        {
+          "base_bytes": 14230,
+          "base_sha256": "d695877146b9449c1aec20252d0a098babc026d084bc86e5f29c25b6eb8a5bd9",
+          "path": "docs/client/caching.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 14233,
+          "result_sha256": "5a5656705bd50fa2ee392ac5626b0d37f59959a58d75d1cbee12bf16f6253f4e"
+        },
+        {
+          "base_bytes": 8394,
+          "base_sha256": "f37bbaad63bdc3ceee4439bfa1007b001bdecf4577d55963bdc5f39b2708ebdc",
+          "path": "docs/client/callbacks.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 8352,
+          "result_sha256": "9f29423d4834fac11a1909766e034480dbfa746f42284812415bc01ce2909506"
+        },
+        {
+          "base_bytes": 15813,
+          "base_sha256": "5cae0d63452abf5a147be4073872b3698d30f82f53dcd15eb8b9736f309f9004",
+          "path": "docs/client/identity-assertion.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 15815,
+          "result_sha256": "0f2bea8ff68ccde498243aeda2893d863640b9b0f39ff2f4cf2541236f676319"
+        },
+        {
+          "base_bytes": 11288,
+          "base_sha256": "e38741a0b97fdbff654e585b58ef3025aa828be7158b493a85975bf06caf89ab",
+          "path": "docs/client/index.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 11222,
+          "result_sha256": "0f0cfd720764029c280ee044de78c22bca737fefb08b589541c63e3727b05b6c"
+        },
+        {
+          "base_bytes": 10508,
+          "base_sha256": "96e2b2abe6fed0c96574cbb052b6dcc7e216a2ad1389f0d346e5cd6f297ea5a7",
+          "path": "docs/client/oauth-clients.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 10510,
+          "result_sha256": "ceaf52679047c03d9a511bbff6238d6c916504e78383ee4208bccd14f7882cc8"
+        },
+        {
+          "base_bytes": 4446,
+          "base_sha256": "13388997dcd97fd7cbf4af4b9730817afe14daf054d5f3402c2eaa399a5bc48a",
+          "path": "docs/client/session-groups.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 4450,
+          "result_sha256": "d8b6051f225456931f7f7ddbdfb94bec6425fd06cfcfbcc3c728723320b8f129"
+        },
+        {
+          "base_bytes": 6254,
+          "base_sha256": "65364ffe8f2caa27cca081045495cc1a6577e8ba8bfe7cab39344b0ac52f9256",
+          "path": "docs/client/subscriptions.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 6259,
+          "result_sha256": "309744eb3f970986a644870cb0a8e90e23aedd49db626d95f4f8d6e750dc74f6"
+        },
+        {
+          "base_bytes": 6460,
+          "base_sha256": "d208b4c89a49ef5779ca0c691fb7055fa12899ac8fcb6c046ffda0130f83fa30",
+          "path": "docs/client/transports.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 6464,
+          "result_sha256": "8fcc32679bbf48830f33d7a49fdc44c0a988923d3398af6a433a9fd4cfd34110"
+        },
+        {
+          "base_bytes": 7546,
+          "base_sha256": "3531c5686a6ff79aabe6f0f8a3cb96213b6fc13b0bbbb0e762dc9f4a827b4be3",
+          "path": "docs/get-started/first-steps.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 7547,
+          "result_sha256": "0c70b3fd27d88594458cfb3085bd14ca81725eda9b3e76cb777d88cf95a26e33"
+        },
+        {
+          "base_bytes": 9725,
+          "base_sha256": "33e23532c6a34e79dc472ccf115e5d1d6453f4b2fceebc12f9f2758cc0ae8555",
+          "path": "docs/get-started/real-host.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 9726,
+          "result_sha256": "d2e29b010cd41f14ba50073d9ab5ad94e2f780d2dbe1de6a9047d8dd4b8431ca"
+        },
+        {
+          "base_bytes": 4032,
+          "base_sha256": "2f7d4ce32fd61f762519af0a75518287ed49ef84a47a9768f6fe4dfa9dea4d89",
+          "path": "docs/get-started/testing.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 4033,
+          "result_sha256": "01dab682b4cc9143bd4bd8e4a6dcfcad1a374d0522cc0d586b1bf96f0206f91a"
+        },
+        {
+          "base_bytes": 6482,
+          "base_sha256": "7a4c7a08ad5748e5fa90685e2dddb0f6e7dc7a48dbb7135f7533e06dfef5d044",
+          "path": "docs/handlers/context.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 6483,
+          "result_sha256": "501ab498f1d0992cc48c46895858548ac250893ce3dc79d27e1de303ac1e46ec"
+        },
+        {
+          "base_bytes": 10678,
+          "base_sha256": "7c874394324509f82cda1b005cea850328f771f7a2da9efef7ab8cc556ae3653",
+          "path": "docs/handlers/dependencies.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 10682,
+          "result_sha256": "645f7098ece88c97b5fb72ebdb39cb1a448f18f66311acae580e1a7b8bf951d5"
+        },
+        {
+          "base_bytes": 11152,
+          "base_sha256": "4d2c13e06b7dec1481b293882438dbfac8cf5cc513559f843a0525605220e190",
+          "path": "docs/handlers/elicitation.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 11156,
+          "result_sha256": "060bf915fc9600d6fb8128e1a54410083621e94af4d7779aba4eacae093d6f18"
+        },
+        {
+          "base_bytes": 4650,
+          "base_sha256": "d32e866d7bf28d622af89510eea5b6c8d6e129cfd33e21baee639d4b80235e19",
+          "path": "docs/handlers/lifespan.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 4652,
+          "result_sha256": "dff814e686c6301ca534e12892f915d9a59d8f7da6f8a640c0a45124d2a1d1f3"
+        },
+        {
+          "base_bytes": 3785,
+          "base_sha256": "4da58c1adbe43b174fd0c34956fa904b4291c3f20d165d85561241bbf9ac1838",
+          "path": "docs/handlers/logging.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 3775,
+          "result_sha256": "d83881d9afb0d2e383460ff07f2cf529da8f80cef59cc39d66b2f33a9fcadbe0"
+        },
+        {
+          "base_bytes": 17918,
+          "base_sha256": "8308fa2579030749f552341195cd60a0e9023c6eff89a8fa683204f47b75dec4",
+          "path": "docs/handlers/multi-round-trip.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 17918,
+          "result_sha256": "5a6c05286651fd80ee0710322f16f6b767aca1f99338ac694fc5f321ec680e86"
+        },
+        {
+          "base_bytes": 4585,
+          "base_sha256": "3885a36fddddbf8b141ec73532d106bead101d4cbb611deb250a2e1882630bdd",
+          "path": "docs/handlers/progress.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 4587,
+          "result_sha256": "128e49340a582d31bafa62595a631066bd23e0be6cd089570f1470d20253ac6e"
+        },
+        {
+          "base_bytes": 4028,
+          "base_sha256": "b5bb7f7118578d5b1e57038156519613fe71fc3056ea338bc36868a4637fdc45",
+          "path": "docs/handlers/sampling-and-roots.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 4030,
+          "result_sha256": "3bf4f2ab115a5a3bb3c43375c1521cf6419f6f4c68c29c8f5b36887e553e5a32"
+        },
+        {
+          "base_bytes": 8687,
+          "base_sha256": "ae0050672b361997b0b7085804ce9f2f2f22f5d8861a7d238e25815e307df76e",
+          "path": "docs/handlers/subscriptions.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 8690,
+          "result_sha256": "4e8d0e3765781b90616ae19a4083a07bdaeefc0ec6a510c13dda9c1ce9355a29"
+        },
+        {
+          "base_bytes": 3805,
+          "base_sha256": "6cded090bf5b42d1242e86442ad51a0b947731dac5e48598cf71feb33899876d",
+          "path": "docs/index.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 3806,
+          "result_sha256": "ed255aa54ca4581a00e9b32e4ca8aa98cf359b85d60079d2d3ead05f77c5a33a"
+        },
+        {
+          "base_bytes": 118683,
+          "base_sha256": "7f7bf2ba70335fa6cb03a32511436a98a880555211eda66cf81c46f3e72b050b",
+          "path": "docs/migration.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 118709,
+          "result_sha256": "085b7103335b48d3a65bd29020ef9a31292b58d7855344dab9ad3dc3061973cf"
+        },
+        {
+          "base_bytes": 6610,
+          "base_sha256": "40cc480fccb079ff81006407fb3569d9f884cc21226739a7fea37bb5f490ae90",
+          "path": "docs/protocol-versions.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 6614,
+          "result_sha256": "6039d406666f177dd0179d19bf6e746267c1eccb8db728f032e9ebff0afa4c73"
+        },
+        {
+          "base_bytes": 8117,
+          "base_sha256": "beff84db15de93589ce7eb6300247de8b01a725ff29fc99f624af46fbec39345",
+          "path": "docs/run/asgi.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 8123,
+          "result_sha256": "4ea5ceb3e19d9524c952536a4335461035032840018c9f6aaa0286a01d6fadaa"
+        },
+        {
+          "base_bytes": 7322,
+          "base_sha256": "118752f7480bc070121fea5891fe1b96c55b5df5585d0aa7abea844a36f9b240",
+          "path": "docs/run/authorization.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 7324,
+          "result_sha256": "017d7fc4792eaa3fcfb3f0f67964c935c63051161f1a536f7e2b39e6e29d976a"
+        },
+        {
+          "base_bytes": 14402,
+          "base_sha256": "0bcac108e2d5f9eeafffb6594aebda9d2bde9ab6592afbe1c3b29a4b40833009",
+          "path": "docs/run/deploy.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 14406,
+          "result_sha256": "fb44eea536a9f7e95be096ea17feeffaa1d43a250d6b9ab5512c9536f0ee8b89"
+        },
+        {
+          "base_bytes": 6901,
+          "base_sha256": "7ea986307c97ab85e880caff8ca00cf91e5045c72337f35c1610ea8708ca501e",
+          "path": "docs/run/index.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 6904,
+          "result_sha256": "3f7a63852e35a518eebaad4fe01f09f27ac22381311e70056a56a5ef9b7be348"
+        },
+        {
+          "base_bytes": 9869,
+          "base_sha256": "4e00a32737535881aac5df9f180785609c0e6083afe21d98009581307288fc9e",
+          "path": "docs/run/legacy-clients.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 9872,
+          "result_sha256": "f9c7955ae78c971454dd2178b1506f910f1a224172c2eb3376e6a9bf11c216fb"
+        },
+        {
+          "base_bytes": 4749,
+          "base_sha256": "ad75e0376f112b17ee68e7e0a2e2b4d92b0c050a503267661e21a725deed0e5b",
+          "path": "docs/run/opentelemetry.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 4750,
+          "result_sha256": "f73e3ef0747a618051e0f5fae365a867332d21f4a74ac09fa088f00c160332e7"
+        },
+        {
+          "base_bytes": 5523,
+          "base_sha256": "1d60e1356fb43e065a0a3d357ca1c497f9ad4525c0e91102a3db34a2cc070c98",
+          "path": "docs/servers/completions.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 5526,
+          "result_sha256": "05b8d0a6641c431674a209b1798ed9c88af5338b906766b143ac35253c2bd33f"
+        },
+        {
+          "base_bytes": 7208,
+          "base_sha256": "36d772122f2fe8ff60521ea12d793aa460813cd9c663fdc8b134faad07797c59",
+          "path": "docs/servers/handling-errors.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 7190,
+          "result_sha256": "e069bfcf6f4e8688f9ffc3e4fc631a64edc88645f7b5fb3b79dbafd9f4d93615"
+        },
+        {
+          "base_bytes": 5029,
+          "base_sha256": "b991dd9c5661b6df94456849d7dd8c0e78466f080c5cb84c578ceb4260bfb26d",
+          "path": "docs/servers/media.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 5010,
+          "result_sha256": "cf4a15c46c54dd9a50b2fe5a436b1cdb4d003a7b985c12497369c461f375743d"
+        },
+        {
+          "base_bytes": 5590,
+          "base_sha256": "e532eb8cc4386c3b35d5d1ebffc9cf87ae1b3f07c7aa64af5467f22133afc100",
+          "path": "docs/servers/prompts.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 5593,
+          "result_sha256": "01a645114273be701f9fb8406ca8f441214eda69160fa6b0a3316d6eb992f36a"
+        },
+        {
+          "base_bytes": 6144,
+          "base_sha256": "493a06de8296c4eed4510af80248585f7ff8daa62ea784061ec8278a02140028",
+          "path": "docs/servers/resources.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 6147,
+          "result_sha256": "9d02f56cd53d2300ae397426713c30cd417902d5b91283a7e1ea24401d740645"
+        },
+        {
+          "base_bytes": 9171,
+          "base_sha256": "3301494616603325ec08b6b898f0f2ccbca289a0dd9c934bd9d16b5e8e1b6f9e",
+          "path": "docs/servers/structured-output.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 9169,
+          "result_sha256": "7b7a6d9b196a688aad86df44e8f5df56b897cd2d914d34bd61f660c34ceeb003"
+        },
+        {
+          "base_bytes": 6748,
+          "base_sha256": "e0a3522e6d9625b31d6ce147fcea90f501628327cfe15c70bf16d93d32b9e3d1",
+          "path": "docs/servers/tools.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 6742,
+          "result_sha256": "3875db270b772fed0bdf40ea07eaaf32c84a7084e03eb674c8c28a815ce09615"
+        },
+        {
+          "base_bytes": 12076,
+          "base_sha256": "736b20dee7cab385878a68f05ea1c302f04c1c35b81cec53747a7bb1e56c1675",
+          "path": "docs/servers/uri-templates.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 12081,
+          "result_sha256": "7005fa54929167e76ab49921e1d7fcb7108daa5e219587f41b125aec0124b969"
+        },
+        {
+          "base_bytes": 25122,
+          "base_sha256": "c705ed89487d72f3bf71c2fbc04925de98824cfa4aa523774426e0e1abf8b740",
+          "path": "docs/troubleshooting.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 25129,
+          "result_sha256": "9defc90d88c180f3f30b6e8383e977e52eec984172127769c02fe1e327af733a"
+        },
+        {
+          "base_bytes": 24281,
+          "base_sha256": "bbe184da1b4b541fa13e548926250fe95c510e33e767c6ff6d80083ca3a7054b",
+          "path": "docs/whats-new.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 24284,
+          "result_sha256": "d4e14e00aea4030d70bf463a48e4bdf09e4c0a06c288e8f483fa0b66271caa13"
+        },
+        {
+          "base_bytes": 2485,
+          "base_sha256": "05d3c13387c26b575a64267928b8a2fb8af69209fc35db73f44032a44aeddc83",
+          "path": "examples/servers/simple-pagination/README.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 2494,
+          "result_sha256": "b5559fbe0f67905ea28c63099387c64f7012b1647af4f0f2dbe57588529caed9"
+        },
+        {
+          "base_bytes": 1509,
+          "base_sha256": "e3369c477885ff0306b7be190aba91f0d018293b4aeae3470e35c5563481362f",
+          "path": "examples/servers/simple-prompt/README.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 1495,
+          "result_sha256": "15bb81d802cfeade140f8ccab65af0424ec0e590f1159333067bebf4b5a61233"
+        },
+        {
+          "base_bytes": 1261,
+          "base_sha256": "16bc1d5e7a07da16d1583524715888d88505fc4709eca607132ef06b53abe738",
+          "path": "examples/servers/simple-resource/README.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 1246,
+          "result_sha256": "def39f8606d0ca5697b9f3e23ad066368b666c7f9adf690bae88c448597fb12f"
+        },
+        {
+          "base_bytes": 1206,
+          "base_sha256": "176ca54a2c0b02ed6d5f9da4392d247a2a946333d8a5b0e1921eb0fb3fd686f7",
+          "path": "examples/servers/simple-tool/README.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 1191,
+          "result_sha256": "18feadd0acc9a1324217688d72c7060c06649d1ae69920dd49109e84a4e5cad4"
+        },
+        {
+          "base_bytes": 5257,
+          "base_sha256": "ce053a8ea9c1483d7f0e194484dc26ca783bdf4165bf45ac11d9ad6bec2582a6",
+          "path": "examples/stories/legacy_routing/README.md",
+          "preservation": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+          "result_bytes": 5249,
+          "result_sha256": "778b3df8f698df1b24186b922deb1dc8c043662fca1811591e4493de3128264b"
+        }
+      ],
+      "head_ahead_behind_tracked_upstream": [
+        0,
+        91
+      ],
+      "license_copy": "mcp-python-sdk-hallucinate-accelerate-datasets.LICENSE.txt",
+      "license_provenance": {
+        "base_commit": "1216c536937819070981e63177b258b79a615bfd",
+        "source_file": "LICENSE",
+        "source_sha256": "5e13dbbc1d120fc2a03cecde7c91424ae2d7de11b63d58ded2f4431e261ee50d"
+      },
+      "name": "mcp-python-sdk-hallucinate-accelerate-datasets",
+      "origin": "https://github.com/modelcontextprotocol/python-sdk.git",
+      "review_warning": "Formatting changed MkDocs snippet include delimiters. Patch is preserved unapproved and must not be applied as an endorsed documentation fix.",
+      "source_path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/docs/mcp-python-sdk",
+      "tracked_upstream_commit": "17aaf2557205c3768ed61831398a4e074b21e96d",
+      "upstream_status": "All edited files differ from locally tracked upstream bytes; no broad remote history search performed."
+    }
+  ],
+  "schema": "third-party-local-edit-preservation/v1",
+  "scope": "Five nested third-party origins plus two distinct MCP SDK variants; preserved artifacts, not approved changes or upstream contributions.",
+  "source_repositories_mutated": false,
+  "total_modified_files_preserved": 176,
+  "total_patch_bytes": 350985,
+  "total_repositories": 7,
+  "upstream_pushes": false
+}

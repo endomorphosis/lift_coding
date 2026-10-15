@@ -1,0 +1,1329 @@
+diff --git a/README.md b/README.md
+index 6b2a43ff709c0ef2a62c435ef336c00cac4515d2..cdc1c3879fa31c620e4bb8dfb1d4555000ebe31d 100644
+--- a/README.md
++++ b/README.md
+@@ -26,18 +26,20 @@ lh = Lighthouse(token="your_token")
+ 
+ ```python
+ from lighthouseweb3 import Lighthouse
++
+ lh = Lighthouse()
+ response = lh.upload("path/to/file")
+-print(response) # prints a dict containing the cid of the file
++print(response)  # prints a dict containing the cid of the file
+ ```
+ 
+ ### Uploading a directory
+ 
+ ```python
+ from lighthouseweb3 import Lighthouse
++
+ lh = Lighthouse("my-lightouse-token")
+ response = lh.upload("path/to/directory")
+-print(response) # prints a dict containing the root cid of the directory
++print(response)  # prints a dict containing the root cid of the directory
+ ```
+ 
+ # Testing
+diff --git a/setup.py b/setup.py
+index ec073f9ab355eeebb77ccea9f8920449420b3ea2..3cb3317aa69db589c4b408399be9803724e458c8 100644
+--- a/setup.py
++++ b/setup.py
+@@ -34,8 +34,8 @@ setup(
+         "Programming Language :: Python :: 3.11",
+     ],
+     keywords="lighthouse storage sdk python filecoin ipfs web3 perpetual",
+-    long_description=(
+-        (pathlib.Path(__file__).parent.resolve()) / "README.md"
+-    ).read_text(encoding="utf-8"),
++    long_description=((pathlib.Path(__file__).parent.resolve()) / "README.md").read_text(
++        encoding="utf-8"
++    ),
+     long_description_content_type="text/markdown",
+ )
+diff --git a/src/lighthouseweb3/__init__.py b/src/lighthouseweb3/__init__.py
+index b1d8d7c30096d440318a83d5f7789038cfaf190a..58b3d84ef45ad8f23de0b87cd253a3b930b4978e 100644
+--- a/src/lighthouseweb3/__init__.py
++++ b/src/lighthouseweb3/__init__.py
+@@ -4,8 +4,8 @@ import os
+ import io
+ from .functions import (
+     upload as d,
+-    deal_status, 
+-    get_uploads as getUploads, 
++    deal_status,
++    get_uploads as getUploads,
+     download as _download,
+     get_file_info as getFileInfo,
+     get_balance as getBalance,
+@@ -14,7 +14,7 @@ from .functions import (
+     ipns_publish_record as ipnsPublishRecord,
+     get_ipns_record as getIpnsRecord,
+     remove_ipns_record as removeIpnsRecord,
+-    create_wallet as createWallet
++    create_wallet as createWallet,
+ )
+ 
+ 
+@@ -26,7 +26,7 @@ class Lighthouse:
+                 "No token provided: Please provide a token or set the LIGHTHOUSE_TOKEN environment variable"
+             )
+ 
+-    def upload(self, source: str, tag: str = ''):
++    def upload(self, source: str, tag: str = ""):
+         """
+         Upload a file or directory to the Lighthouse.
+ 
+@@ -38,20 +38,20 @@ class Lighthouse:
+         except Exception as e:
+             raise e
+ 
+-    def uploadBlob(self, source: io.BufferedReader, filename: str, tag: str = ''):
++    def uploadBlob(self, source: io.BufferedReader, filename: str, tag: str = ""):
+         """
+         Upload Blob a file or directory to the Lighthouse.
+ 
+         :param source: str, path to file or directory
+         :return: t.Upload, the upload result
+         """
+-        if not (hasattr(source, 'read') and hasattr(source, 'close')):
++        if not (hasattr(source, "read") and hasattr(source, "close")):
+             raise TypeError("source must have 'read' and 'close' methods")
+         try:
+             return d.uploadBlob(source, filename, self.token, tag)
+         except Exception as e:
+             raise e
+-    
++
+     def getBalance(self):
+         """
+         Retrieve the balance information of a user from the Lighthouse.
+@@ -63,7 +63,7 @@ class Lighthouse:
+             return getBalance.get_balance(self.token)
+         except Exception as e:
+             raise e
+-    
++
+     def generateKey(self):
+         """
+         Generate a new IPNS key for the authenticated user.
+@@ -112,7 +112,7 @@ class Lighthouse:
+             return removeIpnsRecord.remove_ipns_record(self.token, keyName)
+         except Exception as e:
+             raise e
+-    
++
+     @staticmethod
+     def createWallet(password: str):
+         """
+@@ -127,7 +127,7 @@ class Lighthouse:
+             raise e
+ 
+     @staticmethod
+-    def downloadBlob(dist: io.BufferedWriter, cid: str, chunk_size=1024*1024*10):
++    def downloadBlob(dist: io.BufferedWriter, cid: str, chunk_size=1024 * 1024 * 10):
+         """
+         Download a Blob (file or directory) from the Lighthouse.
+ 
+@@ -136,13 +136,13 @@ class Lighthouse:
+         :param chunk_size: int, size of chunks in which the file will be downloaded (default: 10MB)
+         :return: t.Upload, the download result
+         """
+-        if not (hasattr(dist, 'read') and hasattr(dist, 'close')):
++        if not (hasattr(dist, "read") and hasattr(dist, "close")):
+             raise TypeError("source must have 'read' and 'close' methods")
+         try:
+             return _download.download_file_into_writable(cid, dist, chunk_size)
+         except Exception as e:
+             raise e
+-            
++
+     @staticmethod
+     def getDealStatus(cid: str):
+         """
+@@ -155,7 +155,7 @@ class Lighthouse:
+             return deal_status.get_deal_status(cid)
+         except Exception as e:
+             raise e
+-    
++
+     def getUploads(self, lastKey: str = None):
+         """
+         Get uploads from the Lighthouse.
+@@ -181,7 +181,7 @@ class Lighthouse:
+             return _download.get_file(cid)
+         except Exception as e:
+             raise e
+-    
++
+     @staticmethod
+     def getFileInfo(cid: str):
+         """
+@@ -195,7 +195,7 @@ class Lighthouse:
+             return getFileInfo.get_file_info(cid)
+         except Exception as e:
+             raise e
+-    
++
+     @staticmethod
+     def getApiKey(publicKey: str, signedMessage: str):
+         """
+@@ -206,7 +206,6 @@ class Lighthouse:
+         :return: dict, A dict with generated API key.
+         """
+ 
+-
+         try:
+             return getApiKey.get_api_key(publicKey, signedMessage)
+         except Exception as e:
+@@ -223,4 +222,3 @@ class Lighthouse:
+             return _download.getTaggedCid(tag, self.token)
+         except Exception as e:
+             raise e
+-
+diff --git a/src/lighthouseweb3/functions/axios.py b/src/lighthouseweb3/functions/axios.py
+index a50df40da36a7b8a60c2d3b5d9f37d9f81d772da..4d12820c2eecfd9743c06e321b5d4775520f7e58 100644
+--- a/src/lighthouseweb3/functions/axios.py
++++ b/src/lighthouseweb3/functions/axios.py
+@@ -20,7 +20,7 @@ class Axios:
+         except Exception as e:
+             raise e
+ 
+-    def get(self, headers = None, **kwargs) :
++    def get(self, headers=None, **kwargs):
+         try:
+             self.parse_url_query(kwargs.get("query", None))
+             r = req.get(self.url, headers=headers)
+@@ -29,9 +29,7 @@ class Axios:
+         except Exception as e:
+             raise e
+ 
+-    def post(
+-        self, body=None, headers= None, **kwargs
+-    ):
++    def post(self, body=None, headers=None, **kwargs):
+         try:
+             self.parse_url_query(kwargs.get("query", None))
+             r = req.post(self.url, data=body, headers=headers)
+@@ -40,9 +38,7 @@ class Axios:
+         except Exception as e:
+             raise e
+ 
+-    def post_files(
+-        self, file, headers = None, **kwargs
+-    ) :
++    def post_files(self, file, headers=None, **kwargs):
+         try:
+             self.parse_url_query(kwargs.get("query", None))
+             files = utils.read_files_for_upload(file)
+@@ -58,19 +54,19 @@ class Axios:
+             utils.close_files_after_upload(files)
+             raise e
+ 
+-    def post_blob(
+-        self, file: BufferedReader, filename: str, headers = None, **kwargs
+-    ) :
++    def post_blob(self, file: BufferedReader, filename: str, headers=None, **kwargs):
+         try:
+             self.parse_url_query(kwargs.get("query", None))
+-            files = [(
+-                "file",
++            files = [
+                 (
+-                    utils.extract_file_name(filename),
+-                    file.read(),
+-                    "application/octet-stream",
++                    "file",
++                    (
++                        utils.extract_file_name(filename),
++                        file.read(),
++                        "application/octet-stream",
++                    ),
+                 ),
+-            ),]
++            ]
+             r = req.post(self.url, headers=headers, files=files)
+             r.raise_for_status()
+             file.close()
+diff --git a/src/lighthouseweb3/functions/config.py b/src/lighthouseweb3/functions/config.py
+index 3fa44a2060fcee9f52081a6d2f2508b6ab6cdfdb..7947f829a18748c7b34825581e5421ccfeb0cdbd 100644
+--- a/src/lighthouseweb3/functions/config.py
++++ b/src/lighthouseweb3/functions/config.py
+@@ -5,7 +5,7 @@ class Config:
+     """Config class for lighthouse"""
+ 
+     # lighthouse_api = "http://13.234.35.183:5050"  # "https://api.lighthouse.storage"
+-    lighthouse_api = 'https://api.lighthouse.storage'
++    lighthouse_api = "https://api.lighthouse.storage"
+     lighthouse_node = "https://upload.lighthouse.storage"
+     lighthouse_bls_node = "https://encryption.lighthouse.storage"
+     lighthouse_gateway = "https://gateway.lighthouse.storage/ipfs"
+diff --git a/src/lighthouseweb3/functions/create_wallet.py b/src/lighthouseweb3/functions/create_wallet.py
+index a8d2335c37f5c85e7b592042d28e28da69e28836..dbd8d016806b707871a5799598aa5bbf28f67b0b 100644
+--- a/src/lighthouseweb3/functions/create_wallet.py
++++ b/src/lighthouseweb3/functions/create_wallet.py
+@@ -3,21 +3,22 @@ from .config import Config
+ 
+ from eth_account import Account
+ 
++
+ def create_wallet(password: str):
+-  wallet = Account.create()
++    wallet = Account.create()
++
++    url = f"{Config.lighthouse_api}/api/auth/get_auth_message?publicKey={wallet.address}"
+ 
+-  url = f"{Config.lighthouse_api}/api/auth/get_auth_message?publicKey={wallet.address}"
++    try:
++        response = req.get(url)
++    except Exception as e:
++        raise Exception("Failed to create wallet")
+ 
+-  try:
+-    response = req.get(url)
+-  except Exception as e:
+-    raise Exception("Failed to create wallet")
++    if response.status_code != 200:
++        return response.json()
+ 
+-  if response.status_code != 200:
+-    return response.json()
+-  
+-  encrypted_wallet = wallet.encrypt(password)
++    encrypted_wallet = wallet.encrypt(password)
+ 
+-  del wallet
++    del wallet
+ 
+-  return encrypted_wallet
+\ No newline at end of file
++    return encrypted_wallet
+diff --git a/src/lighthouseweb3/functions/download.py b/src/lighthouseweb3/functions/download.py
+index c0f25b8ece1a26ea346b06953727ebf8dc69cc88..3c397d962e2bdde73b2dfff2259643d879c072be 100644
+--- a/src/lighthouseweb3/functions/download.py
++++ b/src/lighthouseweb3/functions/download.py
+@@ -6,7 +6,9 @@ from .config import Config
+ 
+ 
+ # 10MB chunks by default
+-def download_file_into_writable(cid: str, writable_object: io.BufferedWriter, chunk_size=1024*1024*10):
++def download_file_into_writable(
++    cid: str, writable_object: io.BufferedWriter, chunk_size=1024 * 1024 * 10
++):
+     url = f"{Config.lighthouse_gateway}/{cid}"
+     with requests.get(url, stream=True) as r:
+         r.raise_for_status()
+@@ -29,21 +31,20 @@ def get_file(cid: str) -> (bytes, str):
+         (body, headers) = get_url_body(url)
+ 
+         # show a warning if the file is greater then 2GB
+-        if (int(headers['Content-Length']) > 1024*1024*1024*2):
++        if int(headers["Content-Length"]) > 1024 * 1024 * 1024 * 2:
+             warnings.warn(
+-                "This content of the file is grater then 2GB, use `downloadBlob` instead", UserWarning)
+-        return (body, headers['Content-Type'])
++                "This content of the file is grater then 2GB, use `downloadBlob` instead",
++                UserWarning,
++            )
++        return (body, headers["Content-Type"])
+     except requests.HTTPError as error:
+         raise Exception(error.response.text)
+ 
+ 
+ def getTaggedCid(tag: str, token: str):
+ 
+-    _axios = Axios(
+-        f"{Config.lighthouse_api}/api/user/get_tag_details?tag={tag}")
+-    data = _axios.get({
+-        "Authorization": f"Bearer {token}"
+-    })
++    _axios = Axios(f"{Config.lighthouse_api}/api/user/get_tag_details?tag={tag}")
++    data = _axios.get({"Authorization": f"Bearer {token}"})
+     return data
+ 
+     # return {"data": {"Hash": cid, "Size": writable_object.tell()}}
+diff --git a/src/lighthouseweb3/functions/get_api_key.py b/src/lighthouseweb3/functions/get_api_key.py
+index 5d629b8d6cb09d8c0a4bfbe6fc8241d46366a857..dc72fb49c7a9c890a221df997ae0d6c6eb9d2723 100644
+--- a/src/lighthouseweb3/functions/get_api_key.py
++++ b/src/lighthouseweb3/functions/get_api_key.py
+@@ -1,28 +1,22 @@
+ from .config import Config
+ import requests as req
+ 
++
+ def get_api_key(publicKey: str, signedMessage: str):
+-  url = f"{Config.lighthouse_api}/api/auth/create_api_key"
++    url = f"{Config.lighthouse_api}/api/auth/create_api_key"
+ 
+-  data = {
+-    "publicKey": publicKey,
+-    "signedMessage": signedMessage
+-  }
++    data = {"publicKey": publicKey, "signedMessage": signedMessage}
+ 
+-  try:
+-    response = req.post(url, data=data)
+-  except Exception as e:
+-    raise Exception("Failed to create api key")
++    try:
++        response = req.post(url, data=data)
++    except Exception as e:
++        raise Exception("Failed to create api key")
+ 
+-  if response.status_code != 200:
+-    return response.json()
++    if response.status_code != 200:
++        return response.json()
+ 
+-  apiKey = response.json()
++    apiKey = response.json()
+ 
+-  result = {
+-    "data": {
+-      "apiKey" : apiKey
+-    }
+-  }
++    result = {"data": {"apiKey": apiKey}}
+ 
+-  return result
+\ No newline at end of file
++    return result
+diff --git a/src/lighthouseweb3/functions/get_balance.py b/src/lighthouseweb3/functions/get_balance.py
+index 0b36ec1e07047c4f0d939f73c7f5ba2a92a15dcb..fab33386aab943dd4a1347acd38959c0991d84b4 100644
+--- a/src/lighthouseweb3/functions/get_balance.py
++++ b/src/lighthouseweb3/functions/get_balance.py
+@@ -1,14 +1,15 @@
+ from .config import Config
+ import requests as req
+ 
+-def get_balance(token:str):
+-  headers = {
++
++def get_balance(token: str):
++    headers = {
+         "Authorization": f"Bearer {token}",
+     }
+-  url = f"{Config.lighthouse_api}/api/user/user_data_usage"
+-  try:
+-    response = req.get(url, headers=headers)
+-  except Exception as e:
+-    raise Exception("Failed to get account balance")
++    url = f"{Config.lighthouse_api}/api/user/user_data_usage"
++    try:
++        response = req.get(url, headers=headers)
++    except Exception as e:
++        raise Exception("Failed to get account balance")
+ 
+-  return response.json()
+\ No newline at end of file
++    return response.json()
+diff --git a/src/lighthouseweb3/functions/get_file_info.py b/src/lighthouseweb3/functions/get_file_info.py
+index dbc89c77aaed943f9b2962cfcda82026e8fcbe3e..4ed6fca8682553fe79d8e23caa7e9450fbff3a5e 100644
+--- a/src/lighthouseweb3/functions/get_file_info.py
++++ b/src/lighthouseweb3/functions/get_file_info.py
+@@ -1,11 +1,12 @@
+ from .config import Config
+ import requests as req
+ 
++
+ def get_file_info(cid: str):
+-  url = f"{Config.lighthouse_api}/api/lighthouse/file_info?cid={cid}"
+-  try:
+-    response = req.get(url)
+-  except Exception as e:
+-    raise Exception("Failed to get file metadata")
++    url = f"{Config.lighthouse_api}/api/lighthouse/file_info?cid={cid}"
++    try:
++        response = req.get(url)
++    except Exception as e:
++        raise Exception("Failed to get file metadata")
+ 
+-  return response.json()
+\ No newline at end of file
++    return response.json()
+diff --git a/src/lighthouseweb3/functions/get_ipns_record.py b/src/lighthouseweb3/functions/get_ipns_record.py
+index b92e4edc205207dc7160d410110fa0931ebecc72..6266facaf5c3eb6260954cfa275fae091e6417c3 100644
+--- a/src/lighthouseweb3/functions/get_ipns_record.py
++++ b/src/lighthouseweb3/functions/get_ipns_record.py
+@@ -1,19 +1,18 @@
+ from .config import Config
+ import requests as req
+ 
++
+ def get_ipns_records(token: str):
+-  headers = {
+-    "Authorization": f"Bearer {token}",
+-  }
+-  url = f"{Config.lighthouse_api}/api/ipns/get_ipns_records"
+-  try:
+-    response = req.get(url, headers=headers)
+-  except Exception as e:
+-    raise Exception("Failed to get ipns records")
++    headers = {
++        "Authorization": f"Bearer {token}",
++    }
++    url = f"{Config.lighthouse_api}/api/ipns/get_ipns_records"
++    try:
++        response = req.get(url, headers=headers)
++    except Exception as e:
++        raise Exception("Failed to get ipns records")
+ 
+-  if response.status_code != 200:
+-    return response.json()
++    if response.status_code != 200:
++        return response.json()
+ 
+-  return {
+-    "data": response.json()
+-  }
+\ No newline at end of file
++    return {"data": response.json()}
+diff --git a/src/lighthouseweb3/functions/get_uploads.py b/src/lighthouseweb3/functions/get_uploads.py
+index 1572a0569302267b34c44df0c0c79052d36f82ca..42db925a62bac4a82bf7dead60acc5b89710fc3f 100644
+--- a/src/lighthouseweb3/functions/get_uploads.py
++++ b/src/lighthouseweb3/functions/get_uploads.py
+@@ -3,7 +3,7 @@ from .config import Config
+ 
+ 
+ def bytes_to_size(bytes_size):
+-    units = ['B', 'KB', 'MB', 'GB', 'TB']
++    units = ["B", "KB", "MB", "GB", "TB"]
+     index = 0
+     while bytes_size >= 1024 and index < len(units) - 1:
+         bytes_size /= 1024
+@@ -11,7 +11,7 @@ def bytes_to_size(bytes_size):
+     return f"{round(bytes_size, 2)} {units[index]}"
+ 
+ 
+-def get_uploads(token: str, lastKey: str = None) :
++def get_uploads(token: str, lastKey: str = None):
+     headers = {
+         "Authorization": f"Bearer {token}",
+     }
+diff --git a/src/lighthouseweb3/functions/ipns_generate_key.py b/src/lighthouseweb3/functions/ipns_generate_key.py
+index f5310e13ae3b199764e6718d00d3545ad5f1800a..337a397b838905c7072d888859616662973381c2 100644
+--- a/src/lighthouseweb3/functions/ipns_generate_key.py
++++ b/src/lighthouseweb3/functions/ipns_generate_key.py
+@@ -1,19 +1,18 @@
+ from .config import Config
+ import requests as req
+ 
++
+ def ipns_generate_key(token: str):
+-  headers = {
+-    "Authorization": f"Bearer {token}",
+-  }
+-  url = f"{Config.lighthouse_api}/api/ipns/generate_key"
+-  try:
+-    response = req.get(url, headers=headers)
+-  except Exception as e:
+-    raise Exception("Failed to ipns generate key")
++    headers = {
++        "Authorization": f"Bearer {token}",
++    }
++    url = f"{Config.lighthouse_api}/api/ipns/generate_key"
++    try:
++        response = req.get(url, headers=headers)
++    except Exception as e:
++        raise Exception("Failed to ipns generate key")
+ 
+-  if response.status_code != 200:
+-    return response.json()
++    if response.status_code != 200:
++        return response.json()
+ 
+-  return {
+-    "data": response.json()
+-  }
+\ No newline at end of file
++    return {"data": response.json()}
+diff --git a/src/lighthouseweb3/functions/ipns_publish_record.py b/src/lighthouseweb3/functions/ipns_publish_record.py
+index 53afd9cb5e5acfaaa21534407fdba8aaf9735daf..64de59521da745bfc064feb21d6250eb666c0133 100644
+--- a/src/lighthouseweb3/functions/ipns_publish_record.py
++++ b/src/lighthouseweb3/functions/ipns_publish_record.py
+@@ -1,19 +1,18 @@
+ from .config import Config
+ import requests as req
+ 
++
+ def ipns_publish_record(token: str, cid: str, keyName: str):
+-  headers = {
+-    "Authorization": f"Bearer {token}",
+-  }
+-  url = f"{Config.lighthouse_api}/api/ipns/publish_record?cid={cid}&keyName={keyName}"
+-  try:
+-    response = req.get(url, headers=headers)
+-  except Exception as e:
+-    raise Exception("Failed to ipns generate key")
++    headers = {
++        "Authorization": f"Bearer {token}",
++    }
++    url = f"{Config.lighthouse_api}/api/ipns/publish_record?cid={cid}&keyName={keyName}"
++    try:
++        response = req.get(url, headers=headers)
++    except Exception as e:
++        raise Exception("Failed to ipns generate key")
+ 
+-  if response.status_code != 200:
+-    return response.json()
++    if response.status_code != 200:
++        return response.json()
+ 
+-  return {
+-    "data": response.json()
+-  }
+\ No newline at end of file
++    return {"data": response.json()}
+diff --git a/src/lighthouseweb3/functions/remove_ipns_record.py b/src/lighthouseweb3/functions/remove_ipns_record.py
+index cc426f1b9a5e354aae9ce35e56799840d5da0fb9..47f5ed0be0cd8b7e3be5f034b40f0c0d68d1a350 100644
+--- a/src/lighthouseweb3/functions/remove_ipns_record.py
++++ b/src/lighthouseweb3/functions/remove_ipns_record.py
+@@ -1,19 +1,18 @@
+ from .config import Config
+ import requests as req
+ 
+-def remove_ipns_record(token: str,  keyName: str):
+-  headers = {
+-    "Authorization": f"Bearer {token}",
+-  }
+-  url = f"{Config.lighthouse_api}/api/ipns/remove_key?keyName={keyName}"
+-  try:
+-    response = req.delete(url, headers=headers)
+-  except Exception as e:
+-    raise Exception("Failed to remove ipns record")
+ 
+-  if response.status_code != 200:
+-    return response.json()
++def remove_ipns_record(token: str, keyName: str):
++    headers = {
++        "Authorization": f"Bearer {token}",
++    }
++    url = f"{Config.lighthouse_api}/api/ipns/remove_key?keyName={keyName}"
++    try:
++        response = req.delete(url, headers=headers)
++    except Exception as e:
++        raise Exception("Failed to remove ipns record")
+ 
+-  return {
+-    "data": response.json()
+-  }
+\ No newline at end of file
++    if response.status_code != 200:
++        return response.json()
++
++    return {"data": response.json()}
+diff --git a/src/lighthouseweb3/functions/upload.py b/src/lighthouseweb3/functions/upload.py
+index 652cd8a8b7476504ac24d40152f5d2065b31eff1..04b37e2b5209dcfc1455449f208f4f589ed89e0d 100644
+--- a/src/lighthouseweb3/functions/upload.py
++++ b/src/lighthouseweb3/functions/upload.py
+@@ -25,7 +25,7 @@ def upload(source, token: str, tag: str = ""):
+         axios = Axios(Config.lighthouse_node + "/api/v0/add")
+         # create list of files to upload
+ 
+-        if (isinstance(source, str)):
++        if isinstance(source, str):
+             file_dict = {}
+ 
+             # check if source is a directory
+@@ -45,18 +45,19 @@ def upload(source, token: str, tag: str = ""):
+ 
+         if len(tag):
+             _axios = Axios(Config.lighthouse_api + "/api/user/create_tag")
+-            data = _axios.post({
+-                "tag": tag,
+-                "cid": hashData.get("Hash")
+-            }, {
+-                "Authorization": f"Bearer {token}", })
++            data = _axios.post(
++                {"tag": tag, "cid": hashData.get("Hash")},
++                {
++                    "Authorization": f"Bearer {token}",
++                },
++            )
+         return {"data": hashData}
+     except Exception as e:
+         print(e)
+         raise e
+ 
+ 
+-def uploadBlob(source:  BufferedReader, filename: str, token: str, tag: str = ""):
++def uploadBlob(source: BufferedReader, filename: str, token: str, tag: str = ""):
+     """
+     Upload a Buffer or readable Object
+     @params {source}: str, path to file or directory
+@@ -77,11 +78,12 @@ def uploadBlob(source:  BufferedReader, filename: str, token: str, tag: str = ""
+         hashData = axios.post_blob(source, filename, headers)
+         if len(tag):
+             _axios = Axios(Config.lighthouse_api + "/api/user/create_tag")
+-            data = _axios.post({
+-                "tag": tag,
+-                "cid": hashData.get("Hash")
+-            }, {
+-                "Authorization": f"Bearer {token}", })
++            data = _axios.post(
++                {"tag": tag, "cid": hashData.get("Hash")},
++                {
++                    "Authorization": f"Bearer {token}",
++                },
++            )
+         return {"data": hashData}
+     except Exception as e:
+         print(e)
+diff --git a/src/lighthouseweb3/functions/utils.py b/src/lighthouseweb3/functions/utils.py
+index 691759e971a73ad9c9c04541a75c5dca1d3f0896..a28b17347377b1a814d8a4e68c13e8fc8f82f48b 100644
+--- a/src/lighthouseweb3/functions/utils.py
++++ b/src/lighthouseweb3/functions/utils.py
+@@ -5,7 +5,7 @@ import os
+ 
+ 
+ class NamedBufferedReader:
+-    def __init__(self, buffer, name:str):
++    def __init__(self, buffer, name: str):
+         self.reader = BufferedReader(buffer)
+         self.name = name
+ 
+@@ -14,6 +14,8 @@ class NamedBufferedReader:
+ 
+     def close(self):
+         self.reader.close()
++
++
+ # walk path and return list of file paths
+ 
+ 
+@@ -43,9 +45,7 @@ def extract_file_name_with_source(file: str, source: str):
+     return base + file.split(base)[-1]
+ 
+ 
+-def read_files_for_upload(
+-    files
+-):
++def read_files_for_upload(files):
+     file_list = []
+     for file in files["files"]:
+         if files["is_dir"]:
+@@ -73,8 +73,6 @@ def read_files_for_upload(
+     return file_list
+ 
+ 
+-def close_files_after_upload(
+-    files
+-) -> None:
++def close_files_after_upload(files) -> None:
+     for file in files:
+         file[1][1].close()
+diff --git a/tests/test_create_wallet.py b/tests/test_create_wallet.py
+index fc1c2593ebafcb8c709715eee9978f3b0a93dbff..3d024a6153288c813264641cf20d45b559daf827 100644
+--- a/tests/test_create_wallet.py
++++ b/tests/test_create_wallet.py
+@@ -5,20 +5,20 @@ from eth_account import Account
+ 
+ 
+ class TestCreateWallet(unittest.TestCase):
+-
+     def test_create_wallet(self):
+         """test static create wallet function"""
+-        password = 'TestPassword'
++        password = "TestPassword"
+         encrypted_wallet = Lighthouse.createWallet(password)
+-        
++
+         private_key = Account.decrypt(encrypted_wallet, password)
+         wallet = Account.from_key(private_key)
+-        self.assertEqual(wallet.address, f"0x{encrypted_wallet['address']}", 'Both public key must be same')
+-    
++        self.assertEqual(
++            wallet.address, f"0x{encrypted_wallet['address']}", "Both public key must be same"
++        )
++
+     def test_create_wallet_different_password(self):
+         """test static create wallet function use different password for decryption"""
+-        encrypted_wallet = Lighthouse.createWallet('TestPassword')
++        encrypted_wallet = Lighthouse.createWallet("TestPassword")
+         with self.assertRaises(Exception) as context:
+-          private_key = Account.decrypt(encrypted_wallet, 'RandomPassword')
+-          self.assertIn("valueerror", str(context).lower())
+-        
+\ No newline at end of file
++            private_key = Account.decrypt(encrypted_wallet, "RandomPassword")
++            self.assertIn("valueerror", str(context).lower())
+diff --git a/tests/test_deal_status.py b/tests/test_deal_status.py
+index bb9b3ae45d6c3da24d60e741afbfbad7a5fc6de1..2cbe5d359273e8472fb62f1f88751b7fe806a0d4 100644
+--- a/tests/test_deal_status.py
++++ b/tests/test_deal_status.py
+@@ -8,21 +8,16 @@ from .setup import parse_env
+ 
+ 
+ class TestDealStatus(unittest.TestCase):
+-
+     def test_deal_status(self):
+         """test static test_deal_status function"""
+-        res = Lighthouse.getDealStatus(
+-            "QmT9shXpKcn4HRbJhXJ1ZywzwjEo2QWbxAx4SVgW4eYKjG")
++        res = Lighthouse.getDealStatus("QmT9shXpKcn4HRbJhXJ1ZywzwjEo2QWbxAx4SVgW4eYKjG")
+         self.assertIsInstance(res, list, "data is a list")
+-        self.assertIsInstance(res[0].get(
+-            "DealID"), int, "DealID is Int")
++        self.assertIsInstance(res[0].get("DealID"), int, "DealID is Int")
+ 
+     def test_deal_status_init(self):
+         """test deal_status function"""
+         parse_env()
+         l = Lighthouse(os.environ.get("LIGHTHOUSE_TOKEN"))
+-        res = l.getDealStatus(
+-            "QmT9shXpKcn4HRbJhXJ1ZywzwjEo2QWbxAx4SVgW4eYKjG")
++        res = l.getDealStatus("QmT9shXpKcn4HRbJhXJ1ZywzwjEo2QWbxAx4SVgW4eYKjG")
+         self.assertIsInstance(res, list, "data is a list")
+-        self.assertIsInstance(res[0].get(
+-            "DealID"), int, "DealID is Int")
++        self.assertIsInstance(res[0].get("DealID"), int, "DealID is Int")
+diff --git a/tests/test_download.py b/tests/test_download.py
+index f7a6e62f21b505cd40194484f58b758b8615af00..621e92362c722af1d4ed1cfe953799af249d309e 100644
+--- a/tests/test_download.py
++++ b/tests/test_download.py
+@@ -11,7 +11,7 @@ import secrets
+ 
+ def generate_random_string(length: int) -> str:
+     characters = string.ascii_letters + string.digits
+-    return ''.join(secrets.choice(characters) for _ in range(length))
++    return "".join(secrets.choice(characters) for _ in range(length))
+ 
+ 
+ class TestDownload(unittest.TestCase):
+@@ -21,27 +21,24 @@ class TestDownload(unittest.TestCase):
+ 
+     def test_env(self):
+         """test env var"""
+-        self.assertNotEqual(
+-            os.environ.get("LIGHTHOUSE_TOKEN"), None, "token is not None"
+-        )
++        self.assertNotEqual(os.environ.get("LIGHTHOUSE_TOKEN"), None, "token is not None")
+ 
+     def test_download_file(self):
+         """test Upload function"""
+         l = Lighthouse()  # will use env var
+-        res, _ = l.download(
+-            "Qmd5MBBScDUV3Ly8qahXtZFqyRRfYSmUwEcxpYcV4hzKfW")
++        res, _ = l.download("Qmd5MBBScDUV3Ly8qahXtZFqyRRfYSmUwEcxpYcV4hzKfW")
+         self.assertIsInstance(res, bytes, "type doesn't match")
+-        self.assertEqual(res, b'tests/testdir/', "data doesn't match")
+-        self.assertEqual(res.decode('utf-8'), 'tests/testdir/')
++        self.assertEqual(res, b"tests/testdir/", "data doesn't match")
++        self.assertEqual(res.decode("utf-8"), "tests/testdir/")
+ 
+     def test_download_blob_file(self):
+         """test download_blob function"""
+         l = Lighthouse(os.environ.get("LIGHTHOUSE_TOKEN"))
+         with open("./image.png", "wb") as file:
+             res = l.downloadBlob(
+-                file, "QmPT11PFFQQD3mT6BdwfSHQGHRdF8ngmRmcvxtSBiddWEa", chunk_size=1024*100)
+-            self.assertEqual(res.get("data").get("Size"),
+-                             123939, "File Size dont match")
++                file, "QmPT11PFFQQD3mT6BdwfSHQGHRdF8ngmRmcvxtSBiddWEa", chunk_size=1024 * 100
++            )
++            self.assertEqual(res.get("data").get("Size"), 123939, "File Size dont match")
+ 
+ 
+ if __name__ == "__main__":
+diff --git a/tests/test_get_balance.py b/tests/test_get_balance.py
+index d6c2699ca101027ae3285a6bbc4fa188fb87a42b..b2c8a5997a72bb6b4fd9d9418b8cd21546754f44 100644
+--- a/tests/test_get_balance.py
++++ b/tests/test_get_balance.py
+@@ -6,7 +6,6 @@ from .setup import parse_env
+ 
+ 
+ class TestGetBalance(unittest.TestCase):
+-
+     def test_get_balance(self):
+         """test get_balance function"""
+         parse_env()
+@@ -15,12 +14,11 @@ class TestGetBalance(unittest.TestCase):
+         self.assertIsInstance(res, dict, "data is a dict")
+         self.assertIsInstance(res.get("dataLimit"), int, "data limit is a integer")
+         self.assertIsInstance(res.get("dataUsed"), int, "data used is a integer")
+-    
++
+     def test_get_balance_invalid_token(self):
+         """test get_balance function with invalid token"""
+         parse_env()
+-        l = Lighthouse('invalid_token')
++        l = Lighthouse("invalid_token")
+         res = l.getBalance()
+         self.assertIsInstance(res, dict, "res is a dict")
+         self.assertIn("authentication failed", str(res).lower())
+-
+diff --git a/tests/test_get_file_info.py b/tests/test_get_file_info.py
+index 7602e21c713a9e6813b4f37031836d6308dd2d9e..02e8d87f70b9c7d7e1f018fde5673075d45fd253 100644
+--- a/tests/test_get_file_info.py
++++ b/tests/test_get_file_info.py
+@@ -6,26 +6,27 @@ from .setup import parse_env
+ 
+ 
+ class TestGetFileInfo(unittest.TestCase):
+-
+     def test_get_file_info(self):
+         """test get_file_info function"""
+         parse_env()
+         l = Lighthouse(os.environ.get("LIGHTHOUSE_TOKEN"))
+         res = l.getFileInfo("Qmd5MBBScDUV3Ly8qahXtZFqyRRfYSmUwEcxpYcV4hzKfW")
+         self.assertIsInstance(res, dict, "data is a dict")
+-        self.assertEqual(res.get("cid"),"Qmd5MBBScDUV3Ly8qahXtZFqyRRfYSmUwEcxpYcV4hzKfW", "cid is matching")
+-    
++        self.assertEqual(
++            res.get("cid"), "Qmd5MBBScDUV3Ly8qahXtZFqyRRfYSmUwEcxpYcV4hzKfW", "cid is matching"
++        )
++
+     def test_get_file_info_invalid_token(self):
+         """test get_upload with invalid token"""
+         with self.assertRaises(Exception) as context:
+             l = Lighthouse("invalid_token")
+             l.getFileInfo("Qmd5MBBScDUV3Ly8qahXtZFqyRRfYSmUwEcxpYcV4hzKfW")
+             self.assertIn("authentication failed", str(context.exception).lower())
+-    
++
+     def test_get_file_info_invalid_cid(self):
+         parse_env()
+         l = Lighthouse(os.environ.get("LIGHTHOUSE_TOKEN"))
+         res = l.getFileInfo("invalid_cid")
+         self.assertIsInstance(res, dict, "res is dict")
+-        self.assertIsInstance(res.get('error'), dict, "error is dict")
+-        self.assertEqual(res.get("error").get('message'), 'Not Found', 'cid not found')
+\ No newline at end of file
++        self.assertIsInstance(res.get("error"), dict, "error is dict")
++        self.assertEqual(res.get("error").get("message"), "Not Found", "cid not found")
+diff --git a/tests/test_get_ipns_record.py b/tests/test_get_ipns_record.py
+index a41a6e9eb9af3730bee0d9b321d6ef7591d7d3ba..689a4d228cd7c7ebebd90a1de6e0f2660f451ec7 100644
+--- a/tests/test_get_ipns_record.py
++++ b/tests/test_get_ipns_record.py
+@@ -6,24 +6,23 @@ from .setup import parse_env
+ 
+ 
+ class TestGetIPNSRecord(unittest.TestCase):
+-
+     def test_get_ipns_records(self):
+         """test get_ipns_records function"""
+         parse_env()
+         l = Lighthouse(os.environ.get("LIGHTHOUSE_TOKEN"))
+         res = l.getAllKeys()
+         self.assertIsInstance(res, dict, "result is a dict")
+-        self.assertIsInstance(res.get("data"), list , "data is a dict")
+-        self.assertIsInstance(res.get("data")[0].get("ipnsName"), str , "ipnsName is a str")
+-        self.assertIsInstance(res.get("data")[0].get("ipnsId"), str , "ipnsId is a str")
+-        self.assertIsInstance(res.get("data")[0].get("publicKey"), str , "publicKey is a str")
+-        self.assertIsInstance(res.get("data")[0].get("cid"), str , "cid is a str")
+-        self.assertIsInstance(res.get("data")[0].get("lastUpdate"), int , "lastUpdate is a int")
+-    
++        self.assertIsInstance(res.get("data"), list, "data is a dict")
++        self.assertIsInstance(res.get("data")[0].get("ipnsName"), str, "ipnsName is a str")
++        self.assertIsInstance(res.get("data")[0].get("ipnsId"), str, "ipnsId is a str")
++        self.assertIsInstance(res.get("data")[0].get("publicKey"), str, "publicKey is a str")
++        self.assertIsInstance(res.get("data")[0].get("cid"), str, "cid is a str")
++        self.assertIsInstance(res.get("data")[0].get("lastUpdate"), int, "lastUpdate is a int")
++
+     def test_get_ipns_records_invalid_token(self):
+         """test get_ipns_records with invalid token"""
+         parse_env()
+         l = Lighthouse("invalid_token")
+         with self.assertRaises(Exception) as context:
+             l.generateKey()
+-            self.assertIn("authentication failed", str(context.exception).lower())
+\ No newline at end of file
++            self.assertIn("authentication failed", str(context.exception).lower())
+diff --git a/tests/test_get_uploads.py b/tests/test_get_uploads.py
+index 06ac8716d10f687fa3b9dd75f17f991f765bdc32..010ea0e3931b28f6825195832a603df097933f97 100644
+--- a/tests/test_get_uploads.py
++++ b/tests/test_get_uploads.py
+@@ -8,27 +8,26 @@ from .setup import parse_env
+ 
+ 
+ class TestGetUploads(unittest.TestCase):
+-
+     def test_get_upload(self):
+         """test get_upload function"""
+         parse_env()
+         l = Lighthouse(os.environ.get("LIGHTHOUSE_TOKEN"))
+         res = l.getUploads()
+         self.assertIsInstance(res.get("fileList"), list, "data is a list")
+-        self.assertIsInstance(res.get('totalFiles'), int, "totalFiles is an int")
+-    
++        self.assertIsInstance(res.get("totalFiles"), int, "totalFiles is an int")
++
+     def test_get_upload_with_last_key(self):
+         """test get_upload function with lastKey"""
+         parse_env()
+         l = Lighthouse(os.environ.get("LIGHTHOUSE_TOKEN"))
+-        res = l.getUploads('b5f60ba0-b708-41a3-b0f2-5c808ce63b48')
++        res = l.getUploads("b5f60ba0-b708-41a3-b0f2-5c808ce63b48")
+         self.assertIsInstance(res.get("fileList"), list, "data is a list")
+-        self.assertIsInstance(res.get('totalFiles'), int, "totalFiles is an int")
+-    
++        self.assertIsInstance(res.get("totalFiles"), int, "totalFiles is an int")
++
+     def test_get_upload_with_invalid_token(self):
+         """test get_upload function with invalid token"""
+         parse_env()
+         l = Lighthouse("invalid_token")
+         with self.assertRaises(Exception) as context:
+             l.getUploads()
+-            self.assertIn("authentication failed", str(context.exception).lower())
+\ No newline at end of file
++            self.assertIn("authentication failed", str(context.exception).lower())
+diff --git a/tests/test_ipns_generate_key.py b/tests/test_ipns_generate_key.py
+index eb99938c70b6c901faf1758d455d4c10661718b0..c6a04a7e44ff63e0d6e0ec547d4773ed959bbb80 100644
+--- a/tests/test_ipns_generate_key.py
++++ b/tests/test_ipns_generate_key.py
+@@ -6,17 +6,16 @@ from .setup import parse_env
+ 
+ 
+ class TestIPNSGenerateKey(unittest.TestCase):
+-
+     def test_ipns_generate_key(self):
+         """test ipns_generate_key function"""
+         parse_env()
+         l = Lighthouse(os.environ.get("LIGHTHOUSE_TOKEN"))
+         res = l.generateKey()
+         self.assertIsInstance(res, dict, "result is a dict")
+-        self.assertIsInstance(res.get("data"), dict , "data is a dict")
+-        self.assertIsInstance(res.get("data").get("ipnsName"), str , "ipnsName is a str")
+-        self.assertIsInstance(res.get("data").get("ipnsId"), str , "ipnsId is a dict")
+-    
++        self.assertIsInstance(res.get("data"), dict, "data is a dict")
++        self.assertIsInstance(res.get("data").get("ipnsName"), str, "ipnsName is a str")
++        self.assertIsInstance(res.get("data").get("ipnsId"), str, "ipnsId is a dict")
++
+     def test_ipns_generate_key_invalid_token(self):
+         """test ipns_generate_key with invalid token"""
+         parse_env()
+@@ -24,5 +23,3 @@ class TestIPNSGenerateKey(unittest.TestCase):
+         with self.assertRaises(Exception) as context:
+             l.generateKey()
+             self.assertIn("authentication failed", str(context.exception).lower())
+-        
+-    
+\ No newline at end of file
+diff --git a/tests/test_ipns_publish_record.py b/tests/test_ipns_publish_record.py
+index 509570ffc57487033312cc8235bd2c9072ecf398..4d00a9a0ba9fd02acd22b9770e0b0b54da12d343 100644
+--- a/tests/test_ipns_publish_record.py
++++ b/tests/test_ipns_publish_record.py
+@@ -6,83 +6,78 @@ from .setup import parse_env
+ 
+ 
+ class TestIPNSPublishRecord(unittest.TestCase):
+-
+     def test_ipns_publish_record(self):
+-      """test ipns_publish_record function"""
+-      parse_env()
+-
+-      l = Lighthouse(os.environ.get("LIGHTHOUSE_TOKEN"))
+-      res = l.generateKey()
+-
+-      self.assertIsInstance(res, dict, "result is a dict")
+-      self.assertIsInstance(res.get("data"), dict , "data is a dict")
+-      self.assertIsInstance(res.get("data").get("ipnsName"), str , "ipnsName is a str")
+-      self.assertIsInstance(res.get("data").get("ipnsId"), str , "ipnsId is a dict")
+-
+-      record = l.publishRecord(
+-        'QmeMsykMDyD76zpAbinCy1cjb1KL6CVNBfB44am15U1XHh', 
+-        res.get('data').get('ipnsName')
+-      )
+-
+-      self.assertIsInstance(record, dict, "record is a dict")
+-      self.assertIsInstance(record.get("data"), dict, "data is a dict")
+-      self.assertIsInstance(record.get("data").get("Name"), str, "name is a str")
+-      self.assertIsInstance(record.get("data").get("Value"), str, "value is a str")
+-      self.assertEqual(record.get("data").get("Value"), "/ipfs/QmeMsykMDyD76zpAbinCy1cjb1KL6CVNBfB44am15U1XHh")
+-    
+-    def test_ipns_publish_record_invalid_token(self):
+-      """test ipns_generate_key with invalid token"""
+-      parse_env()
+-      l = Lighthouse(os.environ.get("LIGHTHOUSE_TOKEN"))
+-      res = l.generateKey()
+-
+-      self.assertIsInstance(res, dict, "result is a dict")
+-      self.assertIsInstance(res.get("data"), dict , "data is a dict")
+-      self.assertIsInstance(res.get("data").get("ipnsName"), str , "ipnsName is a str")
+-      self.assertIsInstance(res.get("data").get("ipnsId"), str , "ipnsId is a dict")
+-
+-      l = Lighthouse("invalid_token")
+-      with self.assertRaises(Exception) as context:
+-        l.publishRecord(
+-          'QmeMsykMDyD76zpAbinCy1cjb1KL6CVNBfB44am15U1XHh', 
+-          res.get('data').get('ipnsName')
++        """test ipns_publish_record function"""
++        parse_env()
++
++        l = Lighthouse(os.environ.get("LIGHTHOUSE_TOKEN"))
++        res = l.generateKey()
++
++        self.assertIsInstance(res, dict, "result is a dict")
++        self.assertIsInstance(res.get("data"), dict, "data is a dict")
++        self.assertIsInstance(res.get("data").get("ipnsName"), str, "ipnsName is a str")
++        self.assertIsInstance(res.get("data").get("ipnsId"), str, "ipnsId is a dict")
++
++        record = l.publishRecord(
++            "QmeMsykMDyD76zpAbinCy1cjb1KL6CVNBfB44am15U1XHh", res.get("data").get("ipnsName")
+         )
+-        self.assertIn("authentication failed", str(context.exception).lower())
+-    
++
++        self.assertIsInstance(record, dict, "record is a dict")
++        self.assertIsInstance(record.get("data"), dict, "data is a dict")
++        self.assertIsInstance(record.get("data").get("Name"), str, "name is a str")
++        self.assertIsInstance(record.get("data").get("Value"), str, "value is a str")
++        self.assertEqual(
++            record.get("data").get("Value"), "/ipfs/QmeMsykMDyD76zpAbinCy1cjb1KL6CVNBfB44am15U1XHh"
++        )
++
++    def test_ipns_publish_record_invalid_token(self):
++        """test ipns_generate_key with invalid token"""
++        parse_env()
++        l = Lighthouse(os.environ.get("LIGHTHOUSE_TOKEN"))
++        res = l.generateKey()
++
++        self.assertIsInstance(res, dict, "result is a dict")
++        self.assertIsInstance(res.get("data"), dict, "data is a dict")
++        self.assertIsInstance(res.get("data").get("ipnsName"), str, "ipnsName is a str")
++        self.assertIsInstance(res.get("data").get("ipnsId"), str, "ipnsId is a dict")
++
++        l = Lighthouse("invalid_token")
++        with self.assertRaises(Exception) as context:
++            l.publishRecord(
++                "QmeMsykMDyD76zpAbinCy1cjb1KL6CVNBfB44am15U1XHh", res.get("data").get("ipnsName")
++            )
++            self.assertIn("authentication failed", str(context.exception).lower())
++
+     def test_ipns_publish_record_invalid_cid(self):
+-      """test ipns_generate_key with invalid cid"""
+-      l = Lighthouse(os.environ.get("LIGHTHOUSE_TOKEN"))
+-      res = l.generateKey()
+-
+-      self.assertIsInstance(res, dict, "result is a dict")
+-      self.assertIsInstance(res.get("data"), dict , "data is a dict")
+-      self.assertIsInstance(res.get("data").get("ipnsName"), str , "ipnsName is a str")
+-      self.assertIsInstance(res.get("data").get("ipnsId"), str , "ipnsId is a dict")
+-
+-      record = l.publishRecord(
+-        'invalid_cid', 
+-        res.get('data').get('ipnsName')
+-      )
+-      self.assertIsInstance(record, dict, "record is a dict")
+-      self.assertIsInstance(record.get("error"), list, "error is a list")
+-      self.assertEqual(record.get("error")[0]['message'], 'Something went wrong.' )
+-    
++        """test ipns_generate_key with invalid cid"""
++        l = Lighthouse(os.environ.get("LIGHTHOUSE_TOKEN"))
++        res = l.generateKey()
++
++        self.assertIsInstance(res, dict, "result is a dict")
++        self.assertIsInstance(res.get("data"), dict, "data is a dict")
++        self.assertIsInstance(res.get("data").get("ipnsName"), str, "ipnsName is a str")
++        self.assertIsInstance(res.get("data").get("ipnsId"), str, "ipnsId is a dict")
++
++        record = l.publishRecord("invalid_cid", res.get("data").get("ipnsName"))
++        self.assertIsInstance(record, dict, "record is a dict")
++        self.assertIsInstance(record.get("error"), list, "error is a list")
++        self.assertEqual(record.get("error")[0]["message"], "Something went wrong.")
++
+     def test_ipns_publish_record_invalid_key_name(self):
+-      """test ipns_generate_key with invalid key name"""
+-      parse_env()
+-
+-      l = Lighthouse(os.environ.get("LIGHTHOUSE_TOKEN"))
+-      res = l.generateKey()
+-
+-      self.assertIsInstance(res, dict, "result is a dict")
+-      self.assertIsInstance(res.get("data"), dict , "data is a dict")
+-      self.assertIsInstance(res.get("data").get("ipnsName"), str , "ipnsName is a str")
+-      self.assertIsInstance(res.get("data").get("ipnsId"), str , "ipnsId is a dict")
+-
+-      record = l.publishRecord(
+-        'QmeMsykMDyD76zpAbinCy1cjb1KL6CVNBfB44am15U1XHh', 
+-        'invalid_key_name'
+-      )
+-      self.assertIsInstance(record, dict, "record is a dict")
+-      self.assertIsInstance(record.get("error"), list, "error is a list")
+-      self.assertEqual(record.get("error")[0]['message'], 'Something went wrong.' )
+\ No newline at end of file
++        """test ipns_generate_key with invalid key name"""
++        parse_env()
++
++        l = Lighthouse(os.environ.get("LIGHTHOUSE_TOKEN"))
++        res = l.generateKey()
++
++        self.assertIsInstance(res, dict, "result is a dict")
++        self.assertIsInstance(res.get("data"), dict, "data is a dict")
++        self.assertIsInstance(res.get("data").get("ipnsName"), str, "ipnsName is a str")
++        self.assertIsInstance(res.get("data").get("ipnsId"), str, "ipnsId is a dict")
++
++        record = l.publishRecord(
++            "QmeMsykMDyD76zpAbinCy1cjb1KL6CVNBfB44am15U1XHh", "invalid_key_name"
++        )
++        self.assertIsInstance(record, dict, "record is a dict")
++        self.assertIsInstance(record.get("error"), list, "error is a list")
++        self.assertEqual(record.get("error")[0]["message"], "Something went wrong.")
+diff --git a/tests/test_remove_ipns_record.py b/tests/test_remove_ipns_record.py
+index cc68172c173ad21cf410927c9bf5a0a0c5299c40..c887106ad70b0da1e4c74a08d1c2160abe215ccb 100644
+--- a/tests/test_remove_ipns_record.py
++++ b/tests/test_remove_ipns_record.py
+@@ -6,7 +6,6 @@ from .setup import parse_env
+ 
+ 
+ class TestRemoveIPNSRecord(unittest.TestCase):
+-
+     def test_ipns_remove_key(self):
+         """test ipns_remove_key function"""
+         parse_env()
+@@ -15,18 +14,19 @@ class TestRemoveIPNSRecord(unittest.TestCase):
+         key = l.generateKey()
+ 
+         self.assertIsInstance(key, dict, "result is a dict")
+-        self.assertIsInstance(key.get("data"), dict , "data is a dict")
+-        self.assertIsInstance(key.get("data").get("ipnsName"), str , "ipnsName is a str")
+-        self.assertIsInstance(key.get("data").get("ipnsId"), str , "ipnsId is a dict")
++        self.assertIsInstance(key.get("data"), dict, "data is a dict")
++        self.assertIsInstance(key.get("data").get("ipnsName"), str, "ipnsName is a str")
++        self.assertIsInstance(key.get("data").get("ipnsId"), str, "ipnsId is a dict")
+ 
+-    
+-        res = l.removeKey(key.get('data').get('ipnsName'))
++        res = l.removeKey(key.get("data").get("ipnsName"))
+         self.assertIsInstance(res, dict, "result is a dict")
+-        self.assertIsInstance(res.get("data"), dict , "data is a dict")
+-        self.assertIsInstance(res.get("data").get("Keys"), list , "Keys is a list")
+-        self.assertEqual(res.get("data").get("Keys")[0].get('Name'), key.get('data').get('ipnsName'))
+-        self.assertEqual(res.get("data").get("Keys")[0].get('Id'), key.get('data').get('ipnsId'))
+-    
++        self.assertIsInstance(res.get("data"), dict, "data is a dict")
++        self.assertIsInstance(res.get("data").get("Keys"), list, "Keys is a list")
++        self.assertEqual(
++            res.get("data").get("Keys")[0].get("Name"), key.get("data").get("ipnsName")
++        )
++        self.assertEqual(res.get("data").get("Keys")[0].get("Id"), key.get("data").get("ipnsId"))
++
+     def test_ipns_remove_key_invalid_token(self):
+         """test ipns_remove_key with invalid token"""
+         parse_env()
+@@ -35,22 +35,22 @@ class TestRemoveIPNSRecord(unittest.TestCase):
+         key = l.generateKey()
+ 
+         self.assertIsInstance(key, dict, "result is a dict")
+-        self.assertIsInstance(key.get("data"), dict , "data is a dict")
+-        self.assertIsInstance(key.get("data").get("ipnsName"), str , "ipnsName is a str")
+-        self.assertIsInstance(key.get("data").get("ipnsId"), str , "ipnsId is a dict")
++        self.assertIsInstance(key.get("data"), dict, "data is a dict")
++        self.assertIsInstance(key.get("data").get("ipnsName"), str, "ipnsName is a str")
++        self.assertIsInstance(key.get("data").get("ipnsId"), str, "ipnsId is a dict")
+ 
+         l = Lighthouse("invalid_token")
+-        key_name = key.get('data').get('ipnsName')
++        key_name = key.get("data").get("ipnsName")
+         with self.assertRaises(Exception) as context:
+             l.removeKey(key_name)
+             self.assertIn("authentication failed", str(context.exception).lower())
+-    
++
+     def test_ipns_remove_key_invalid_key_name(self):
+         """test ipns_remove_key with invalid key name"""
+         parse_env()
+ 
+         l = Lighthouse(os.environ.get("LIGHTHOUSE_TOKEN"))
+-        res = l.removeKey('invalid_key_name')
++        res = l.removeKey("invalid_key_name")
+         self.assertIsInstance(res, dict, "record is a dict")
+         self.assertIsInstance(res.get("error"), list, "error is a list")
+-        self.assertEqual(res.get("error")[0]['message'], 'Something went wrong.' )
+\ No newline at end of file
++        self.assertEqual(res.get("error")[0]["message"], "Something went wrong.")
+diff --git a/tests/test_upload.py b/tests/test_upload.py
+index 19c973a8ce9e33d2f4e45eaae962ad6be3355b3c..8aef3a512c68fb39b95449268b81cf2884022e29 100644
+--- a/tests/test_upload.py
++++ b/tests/test_upload.py
+@@ -11,7 +11,7 @@ import secrets
+ 
+ def generate_random_string(length: int) -> str:
+     characters = string.ascii_letters + string.digits
+-    return ''.join(secrets.choice(characters) for _ in range(length))
++    return "".join(secrets.choice(characters) for _ in range(length))
+ 
+ 
+ class TestUpload(unittest.TestCase):
+@@ -21,9 +21,7 @@ class TestUpload(unittest.TestCase):
+ 
+     def test_env(self):
+         """test env var"""
+-        self.assertNotEqual(
+-            os.environ.get("LIGHTHOUSE_TOKEN"), None, "token is not None"
+-        )
++        self.assertNotEqual(os.environ.get("LIGHTHOUSE_TOKEN"), None, "token is not None")
+ 
+     def test_upload_file(self):
+         """test Upload function"""
+@@ -38,16 +36,13 @@ class TestUpload(unittest.TestCase):
+         res = l.upload("tests/")
+         self.assertNotEqual(res.get("data"), None, "data is None")
+         self.assertIsInstance(res.get("data"), dict, "data is a dict")
+-        self.assertIsInstance(res.get("data").get(
+-            "Hash"), str, "Instance is not of type String")
+-        self.assertIsInstance(res.get("data").get(
+-            "Size"), str, "Instance is not of type String")
++        self.assertIsInstance(res.get("data").get("Hash"), str, "Instance is not of type String")
++        self.assertIsInstance(res.get("data").get("Size"), str, "Instance is not of type String")
+ 
+     def test_upload_Blob(self):
+         """test Upload function"""
+         l = Lighthouse(os.environ.get("LIGHTHOUSE_TOKEN"))
+-        res = l.uploadBlob(
+-            io.BytesIO(b"tests/testdir/"), f"{generate_random_string(16)}.txt")
++        res = l.uploadBlob(io.BytesIO(b"tests/testdir/"), f"{generate_random_string(16)}.txt")
+         self.assertNotEqual(res.get("data"), None, "data is None")
+         self.assertIsInstance(res.get("data"), dict, "data is a dict")
+         self.assertNotEqual(res.get("data").get("Hash"), None, "data is None")
+@@ -59,32 +54,38 @@ class TestUpload(unittest.TestCase):
+             res = l.upload(file)
+             self.assertNotEqual(res.get("data"), None, "data is None")
+             self.assertIsInstance(res.get("data"), dict, "data is a dict")
+-            self.assertNotEqual(res.get("data").get(
+-                "Hash"), None, "data is None")
++            self.assertNotEqual(res.get("data").get("Hash"), None, "data is None")
+ 
+     def test_upload_with_tag(self):
+         """test Upload with tag function"""
+         l = Lighthouse(os.environ.get("LIGHTHOUSE_TOKEN"))
+         tag = generate_random_string(8)
+         res = l.uploadBlob(
+-            io.BytesIO(b"tests/testdir/"+generate_random_string(80).encode("utf-8")), f"{generate_random_string(16)}.txt", tag)
++            io.BytesIO(b"tests/testdir/" + generate_random_string(80).encode("utf-8")),
++            f"{generate_random_string(16)}.txt",
++            tag,
++        )
+         self.assertNotEqual(res.get("data"), None, "data is None")
+         self.assertIsInstance(res.get("data"), dict, "data is a dict")
+-        self.assertIsInstance(res.get("data").get(
+-            "Hash"), str, "Hash is not of type string")
++        self.assertIsInstance(res.get("data").get("Hash"), str, "Hash is not of type string")
+ 
+         tagData = l.getTagged(tag)
+         self.assertEqual(tag, tagData.get("data").get("tag"), "Tag dont match")
+-        self.assertEqual(res.get("data").get("Hash"), tagData.get(
+-            "data").get("cid"), "Tag dont match")
++        self.assertEqual(
++            res.get("data").get("Hash"), tagData.get("data").get("cid"), "Tag dont match"
++        )
+ 
+         # overWrite tag
+         res = l.uploadBlob(
+-            io.BytesIO(b"tests/testdir/"+generate_random_string(80).encode("utf-8")), f"{generate_random_string(16)}.txt", tag)
++            io.BytesIO(b"tests/testdir/" + generate_random_string(80).encode("utf-8")),
++            f"{generate_random_string(16)}.txt",
++            tag,
++        )
+         tagData = l.getTagged(tag)
+         self.assertEqual(tag, tagData.get("data").get("tag"), "Tag dont match")
+-        self.assertEqual(res.get("data").get("Hash"), tagData.get(
+-            "data").get("cid"), "Tag dont match")
++        self.assertEqual(
++            res.get("data").get("Hash"), tagData.get("data").get("cid"), "Tag dont match"
++        )
+ 
+     def test_tag_notFound(self):
+         """test Upload with tag function"""

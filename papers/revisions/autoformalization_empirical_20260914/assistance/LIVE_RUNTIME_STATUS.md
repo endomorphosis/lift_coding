@@ -1,0 +1,5 @@
+All **100 natural-source attempts are complete**. The same model instance was retained across the entire natural workload, then stopped at **09:04:49 UTC on 14 September 2026**. Its server, original watchdogs and warm controller have exited; port 8080 is closed, the shared resource lock is free, and the temporary runtime override has been removed. The permanent user service remains masked.
+
+The user-requested total wall bound was **10000 seconds**, superseding the historical 900-second launch without a reload. Startup readiness was separately bounded at 360 seconds. The model completed below its inherited 3600-CPU-second limit. Every model response, malformed output and request timeout is retained in the final 100-attempt record.
+
+Future natural launches use `launch_natural_warm.py`, which explicitly passes `--wall-seconds 10000 --startup-seconds 360` and retains one warm model until the workload finishes. It exits without starting a model when all attempts are already complete. See `natural_summary.json`, `natural_provenance_audit.json` and `warm_lifecycle.jsonl` for the final results and lifecycle evidence.

@@ -1,0 +1,18 @@
+{
+  "schema": "staged-whitespace-review@1",
+  "exit_code": 2,
+  "diagnostic_lines": 182,
+  "scope": "Original authored sources and retained alternatives are preserved byte-for-byte. Whitespace diagnostics are recorded, not rewritten during publication.",
+  "examples": [
+    "implementation_plan/legal_autoformalization_convergence_20261013/goals.objectives.md:8: trailing whitespace.",
+    "implementation_plan/legal_autoformalization_convergence_20261013/tasks.todo.md:18: trailing whitespace.",
+    "implementation_plan/legal_autoformalization_convergence_20261013/tasks.todo.md:47: trailing whitespace.",
+    "implementation_plan/legal_autoformalization_convergence_20261013/tasks.todo.md:76: trailing whitespace.",
+    "maintenance/terminal-admitted-context-budget-20261013-01/container_prepare_signed_fixture_01.py:84: new blank line at EOF.",
+    "maintenance/terminal-admitted-context-budget-20261013-01/container_prepare_signed_fixture_02.py:84: new blank line at EOF.",
+    "maintenance/terminal-admitted-context-budget-20261013-01/container_prepare_signed_fixture_03.py:84: new blank line at EOF.",
+    "maintenance/terminal-admitted-context-budget-20261013-01/container_prepare_signed_fixture_06.py:84: new blank line at EOF.",
+    "maintenance/terminal-admitted-context-budget-20261013-01/container_prepare_signed_fixture_07.py:84: new blank line at EOF.",
+    "maintenance/terminal-admitted-context-budget-20261013-01/container_prepare_signed_fixture_08.py:84: new blank line at EOF."
+  ]
+}

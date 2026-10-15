@@ -1,0 +1,53 @@
+diff --git a/docs/case-studies/orcestra.md b/docs/case-studies/orcestra.md
+index ddc3b9e6754ddf0b6d76b3d34b489be5712ce4fe..3316e5af3576bad0ff1ef8ff1c69cc29a1d43eba 100644
+--- a/docs/case-studies/orcestra.md
++++ b/docs/case-studies/orcestra.md
+@@ -88,8 +88,7 @@ Through [ipfsspec](https://github.com/fsspec/ipfsspec/), ORCESTRA data integrate
+ import xarray as xr
+ 
+ ds = xr.open_dataset(
+-    "ipfs://bafybeif52irmuurpb27cujwpqhtbg5w6maw4d7zppg2lqgpew25gs5eczm",
+-    engine="zarr"
++    "ipfs://bafybeif52irmuurpb27cujwpqhtbg5w6maw4d7zppg2lqgpew25gs5eczm", engine="zarr"
+ )
+ ```
+ 
+diff --git a/docs/how-to/scientific-data/landscape-guide.md b/docs/how-to/scientific-data/landscape-guide.md
+index 440b2c5755a6168550462f45cd51ac3e679d1839..5a0b20ba744760852d98676c6634e40a752509b0 100644
+--- a/docs/how-to/scientific-data/landscape-guide.md
++++ b/docs/how-to/scientific-data/landscape-guide.md
+@@ -200,8 +200,7 @@ See the [IPFS pinning services documentation](https://docs.ipfs.tech/how-to/pin-
+ import xarray as xr
+ 
+ ds = xr.open_dataset(
+-    "ipfs://bafybeif52irmuurpb27cujwpqhtbg5w6maw4d7zppg2lqgpew25gs5eczm",
+-    engine="zarr"
++    "ipfs://bafybeif52irmuurpb27cujwpqhtbg5w6maw4d7zppg2lqgpew25gs5eczm", engine="zarr"
+ )
+ ```
+ 
+diff --git a/docs/how-to/scientific-data/publish-geospatial-zarr-data.md b/docs/how-to/scientific-data/publish-geospatial-zarr-data.md
+index 805e9612cb9c0deaa78ec31af29703d44d8105e8..0177f271b02e8628f6c265d4050a8119186586fe 100644
+--- a/docs/how-to/scientific-data/publish-geospatial-zarr-data.md
++++ b/docs/how-to/scientific-data/publish-geospatial-zarr-data.md
+@@ -81,9 +81,7 @@ import xarray as xr
+ 
+ ds = xr.open_dataset(filename)
+ # Example: targeting ~1 MB chunks with float32 data
+-ds.to_zarr('output.zarr', encoding={
+-    'var_name': {'chunks': (1, 512, 512)}
+-})
++ds.to_zarr("output.zarr", encoding={"var_name": {"chunks": (1, 512, 512)}})
+ 
+ # Total size: 1 × 512 × 512 × 4 bytes (float32) = 1048576 bytes = 1 MiB per chunk
+ ```
+@@ -272,8 +270,7 @@ import xarray as xr
+ 
+ # after the installation of ipfsspec, `ipfs://` urls are automatically recognized
+ ds = xr.open_dataset(
+-    "ipfs://bafybeiesyutuduzqwvu4ydn7ktihjljicywxeth6wtgd5zi4ynxzqngx4m",
+-    engine="zarr"
++    "ipfs://bafybeiesyutuduzqwvu4ydn7ktihjljicywxeth6wtgd5zi4ynxzqngx4m", engine="zarr"
+ )
+ ```
+ 

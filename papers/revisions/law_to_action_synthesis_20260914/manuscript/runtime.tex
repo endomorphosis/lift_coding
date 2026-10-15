@@ -1,0 +1,24 @@
+\section{Context-bound runtime enforcement}
+\label{sec:method}
+
+The runtime joins source constraints, checked evidence, and delegated authority at one action boundary. An admitted plan, a current execution permit, and observed completion are separate states. A valid decision for an earlier context does not authorize a changed invocation.
+
+\subsection{Binding intent to the operation}
+
+The invocation envelope records source identities, tenant, actor, audience, tool and version, arguments, proposed effects, environment, nonce, and relevant state roots. Trusted adapters connect the effect description to the operation being requested. In the broader design, legal applicability jobs bind jurisdiction, authority, time, definitions, and exceptions; security jobs bind the principal, asset, channel, action, effect, and environment. Hard conditions precede quality or cost ranking, so a favorable score cannot compensate for a failed required constraint.
+
+The broader design correlates effects declared in Intent IR with independently extracted code or handler facts under the same Security IR root. An undeclared or broader effect must remain visible to admission. The experiment instantiates this boundary using fixed declarative \texttt{export\_json} instructions and a known sandbox handler. It does not evaluate generated-code analysis or transfer of a CVE restriction to unrelated code.
+
+\subsection{Live authority and durable consumption}
+
+A candidate that satisfies the represented constraints also needs a current grant for the actor, tool, resource, and requested bounds. UCAN represents signed delegated capabilities; attenuation restricts a child's authority to the parent's scope \citep{ucan}. Our verifier checks Ed25519 signatures and supported issuer, audience, resource, time, and use-state bindings. Immediately before delegation, the protected wrapper rechecks the live arguments, effects, clock, relevant roots, and grant. Default pass-through operation does not provide this prevention behavior.
+
+In the evaluated \texttt{ENFORCE} configuration, permitted use is consumed through a typed owner backed by file-based DuckDB. The owner accepts named, parameter-bound commands with revision, generation, fence, and idempotency identities. Repeating an identical command after a lost reply can retrieve the committed result; a changed payload or stale authority is a conflict. These application checks are separate from the general DuckDB/Quack client-server substrate \citep{quack}. The evaluated route uses the typed owner; the optional Quack gateway extension was unavailable in the validation environment.
+
+For a JSON export, Intent IR records the data, destination, prerequisites, and expected effect. Changing the recipient invalidates the invocation binding; replay fails the use-state check. An independent filesystem journal measures mutations and allowed work, separately from the authorization response. Appendix~\ref{app:trace} exposes intermediate checks in a diagnostic replay that adds no scored observations.
+
+\subsection{State, artifacts, and peer execution}
+
+Mutable operational state and immutable evidence have different responsibilities. DuckDB commits command results and use state. Content-addressed artifacts preserve source bodies, declarations, maps, and decision records; IPFS content identifiers name bytes under a declared encoding and hash profile \citep{ipfs}. A recipient can verify retrieved content against that identity. Retention and transport still determine availability. Our local artifact checks do not establish wide-area publication.
+
+libp2p supplies peer authentication, protocol negotiation, and multiplexed streams \citep{libp2p}. It allows agents to exchange artifacts and requests without sharing the supervisor database. Peer identity does not confer application authority. The implementation's optional MCP++ profiles describe invocation artifacts, delegation, temporal-deontic policy, peer carriage, causal provenance, and coordination around MCP. These are application extensions with related but nonidentical checking routes. The measured prevention claim remains the selected export wrapper; separate stdio and loopback HTTP/libp2p checks establish only their tested local behavior. Appendix~\ref{app:infrastructure} gives the layer and implementation mapping.
