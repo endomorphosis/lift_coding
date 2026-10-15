@@ -1,0 +1,86 @@
+{
+  "F19_summary": {
+    "bytes": 245319,
+    "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/conditions-composition-result-summary-v01.json",
+    "sha256": "cd49699b791e14d92ed7d05f13f2dceed82dd59979aca83f45c2e4ae4a0f9826"
+  },
+  "Lake_executed": false,
+  "base_commit": "ff07d332e99a4f15cc9d5f864a1b0b275ac51d3d",
+  "broader_requirements_preserved": {
+    "M0": "Progress/source-owner reconciliation, exact graph endpoints and no duplicate owners.",
+    "M1": "Reuse existing sampler/view extractor, acquisition and source/context coordinates; no parallel sampler implemented.",
+    "M2": "Candidate-blind independent meaning/formal review, split/exposure policy and no gold masks for unresolved targets.",
+    "M3": "Minimal supported typed/scoped graph extension with all arguments/qualifiers/endpoints and dependencies.",
+    "M4": "Deterministic shared Lean modules, actual builds, assumptions/placeholders policy and changed-definition invalidation.",
+    "M5": "Reviewed complete-rule improvement, preregistered retention/uncertainty gates, active encoder qualification and compatible transfer; F19 recount completion alone satisfies none of those wider gates.",
+    "M6": "Connected-provision expansion, reconciled denominators and immutable cross-cache/model/Lean readback."
+  },
+  "default_promotion": false,
+  "findings": [],
+  "frozen_F19_guide": {
+    "bytes": 6147,
+    "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/legal-conditions-composition-20261015.md",
+    "sha256": "014e1487e079beb3d85892c8d6d012ec79048635b2539f5bcd93ae766648aa2b"
+  },
+  "incoming_plan": {
+    "bytes": 39326,
+    "path_at_commit": "docs/autoencoders/legal_ir_uscode_corpus_improvement_plan_20261015.md",
+    "sha256": "d9dca296551c92bb90498473384d41a957d9482e8da32c9920bd51d1ca95eb48"
+  },
+  "mechanical_checks": {
+    "Git_operation": "Only git show ff07d332...:docs/autoencoders/legal_ir_uscode_corpus_improvement_plan_20261015.md in owned clone, GIT_OPTIONAL_LOCKS=0; no canonical Git/index/worktree mutation.",
+    "all_four_old_to_new_replacements_replay_exact_new_bytes": true,
+    "all_other_plan_bytes_preserved": true,
+    "each_old_literal_occurs_exactly_once": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "literal_replacement_count": 4,
+    "other_upstream_source_paths_not_modified_by_this_reviewer": true
+  },
+  "model_or_training_execution": 0,
+  "network_or_Viewer_calls": 0,
+  "new_plan": {
+    "bytes": 39801,
+    "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoencoders/legal_ir_uscode_corpus_improvement_plan_20261015.md",
+    "sha256": "4b417d53670b1c244140eb71d1d9bbd872a8ab423b688a06c395f3b983423d0b"
+  },
+  "original_capture_reference_teacher_export_checkpoint_private_or_parquet_body_reads": 0,
+  "owned_checkout": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets",
+  "passed": true,
+  "prior_publication_prose_review": {
+    "bytes": 9076,
+    "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/publication-summary-prose-independent-review-v01.json",
+    "sha256": "03d233b223514b9bc1f9af4491d615833b085b510cb85bd872bb343b0fb04aa7"
+  },
+  "product_or_plan_source_edits_by_reviewer": 0,
+  "production_or_numeric_imports": 0,
+  "prose_checks": {
+    "both_fixed_mixes_training_raw_and_joint_154_of168": true,
+    "counts_match_summary": {
+      "comparison_groups": 81,
+      "panels": 60,
+      "rank_records": 6,
+      "scored_sets": 54
+    },
+    "first_section_now_links_completed_F19_report": true,
+    "future_freezing_plus_margin_arm_labelled_engineering_compound_recipe": true,
+    "gold_rank2or3_actual_top8_and_all6_gold_assignments_feasible": true,
+    "matched_retained_CE_causal_comparison_obligation_not_claimed_satisfied": true,
+    "no_new_composed_checkpoint_training_active_latent_Lake_or_promotion_claim": true,
+    "old_tune_regression_stays_promotion_veto": true,
+    "section5_recount_prerequisite_and_M5_and_closing_status_updated_consistently": true,
+    "shorter_prefix_preference_retained_no_general_capacity_or_causal_claim": true
+  },
+  "reviewer_authorship_disclosure": "Reviewer authored the F19 independent rank/composition kernels and counter, plus prior family/prose reviews; this is a bounded incoming prose/status review, not new scientific or runtime authority.",
+  "schema": "conditions-composition-corpus-plan-completion-independent-source-review/v1",
+  "scope": "Exactly four incoming plan-status literal replacements and their prose consistency with completed F19 and unchanged broader M0-M6 requirements. Full Git-stage/path preservation is a separate reviewer responsibility.",
+  "sections3_4_7_8_9_10_byte_exact": true,
+  "update_recipe": {
+    "bytes": 2825,
+    "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/source-corpus-plan-update-v01.json",
+    "sha256": "435902afe05e89d252b55a5d554876056907e842d14806216af189b316e5c65d"
+  }
+}
