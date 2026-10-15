@@ -1,0 +1,545 @@
+{
+  "CI_limit": "Recorded CodeQL job had zero steps because the account was locked due to billing; no hosted CI success claimed.",
+  "PR": {
+    "merged": true,
+    "merged_at": "2026-10-15T04:37:57Z",
+    "number": 1307,
+    "url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1307"
+  },
+  "actual_incoming_entry_count": 32282,
+  "actual_merge": "6deae26e98452669b32b256794b18affb1155c16",
+  "actual_merge_entry_count": 32329,
+  "actual_merge_tree": "edb1dfdef81b7d1204c6c3c8c5bc64bb14d513da",
+  "addition_count": 47,
+  "additions_identical_to_qualified_stage": [
+    {
+      "git_blob": "61dde519a96e609f327b40c230ccf4f615597a8d",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/diagnostic-design-v01.json",
+      "raw": {
+        "bytes": 6172,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/diagnostic-design-v01.json",
+        "sha256": "485e24dccd7f55ef547acb54afc1e3785a46de547454c9e5a155fc4f04a359c5"
+      }
+    },
+    {
+      "git_blob": "4cc29363810c309ebf21cf5dbd6b9915841424ea",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/diagnostic-execution-contract-v01.json",
+      "raw": {
+        "bytes": 3321,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/diagnostic-execution-contract-v01.json",
+        "sha256": "1bf6393d2c3c177342df97856b73868652d8f23aafa1dbe47f1aca81f3382dea"
+      }
+    },
+    {
+      "git_blob": "b031475bce9c1d713c29c0715857a5c09d984e59",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/diagnostic-inputs-v01.json",
+      "raw": {
+        "bytes": 40054,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/diagnostic-inputs-v01.json",
+        "sha256": "fbbf88f03dac543c6fb839c385f2ef165e0b0636854764e662f770a19a7ebb77"
+      }
+    },
+    {
+      "git_blob": "0d04881859069bbde1159ad190c7fd4f684dddd7",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/owned-source-intake-v01.json",
+      "raw": {
+        "bytes": 2613,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/owned-source-intake-v01.json",
+        "sha256": "0547e44d15cc986ef40883b9a1db6c4ddfba94cb2c8298461de3740b3ece5587"
+      }
+    },
+    {
+      "git_blob": "0485b08db73a9738925d587a03eebff1a23e3e98",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/owned-root-intake-v01.json",
+      "raw": {
+        "bytes": 648,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/owned-root-intake-v01.json",
+        "sha256": "6a36f56e18ab813636450ca2e9c9623abbe58630841301626c23dfe527d92374"
+      }
+    },
+    {
+      "git_blob": "91566b5989617bb92384eb641ac162805c8be483",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/finite-analysis-readiness-review-v01.json",
+      "raw": {
+        "bytes": 14084,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/finite-analysis-readiness-review-v01.json",
+        "sha256": "da7ea5135c8b6fcf8660df451da7b14ebbc6843716b9afdebd78f8861ddeeeaf"
+      }
+    },
+    {
+      "git_blob": "510db52f57c06cb11ad240abe9804df727172712",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/finite-input-readiness-independent-review-v01.json",
+      "raw": {
+        "bytes": 71119,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/finite-input-readiness-independent-review-v01.json",
+        "sha256": "4e95d79f1bd542c60344bba9077a8fa7e162bd3fb8589b4295f07ce1d8b2de84"
+      }
+    },
+    {
+      "git_blob": "e0b9baf2f6f4501411a913b82338a5c65a5a0e7b",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/analyze_conditions_composition_v01.py.txt",
+      "raw": {
+        "bytes": 40929,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/analyze_conditions_composition_v01.py.txt",
+        "sha256": "b5e946babffb41834d4b95e5700201d50b957991b17e7b44551130df12446553"
+      }
+    },
+    {
+      "git_blob": "2411b857157d6ccb9c75024c69000b985c32fb2d",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/test_conditions_composition_detached_v01.py.txt",
+      "raw": {
+        "bytes": 10398,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/test_conditions_composition_detached_v01.py.txt",
+        "sha256": "baab524c2dd8b5136d70974b2680e0e111a8c969e163f327e6a5492d3f90446e"
+      }
+    },
+    {
+      "git_blob": "389052eab9a67076b4d31879c467cd23fd716f93",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/review_conditions_composition_primary_detached_v01.py.txt",
+      "raw": {
+        "bytes": 5525,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/review_conditions_composition_primary_detached_v01.py.txt",
+        "sha256": "33fe45fc88a917bc554d1f4fcee2dd9b3454d04aaa1b179106561757c016715e"
+      }
+    },
+    {
+      "git_blob": "3eca05057ed1e2012e17b49058428c1178469ffc",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/conditions-composition-author-controls-v01.json",
+      "raw": {
+        "bytes": 5005,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/conditions-composition-author-controls-v01.json",
+        "sha256": "d2d0052c7a525d5a2e641d6c077014c19833757b137be13e5efd606a43e2f35d"
+      }
+    },
+    {
+      "git_blob": "824a79929d926e1cbf90dbf25fa6d51a10d720d6",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/conditions-composition-independent-source-controls-v01.json",
+      "raw": {
+        "bytes": 2077,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/conditions-composition-independent-source-controls-v01.json",
+        "sha256": "495c812897b680137fca7f188ef116c349732996ff4bcd4d6c5fe4b47c0243fa"
+      }
+    },
+    {
+      "git_blob": "b193030229a7aa572d6a64475775df9f26ca1aa3",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/conditions-composition-source-derivation-v01.json",
+      "raw": {
+        "bytes": 6962,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/conditions-composition-source-derivation-v01.json",
+        "sha256": "81c2d447036c11c8cbf7554d71cd00f5a612aece2b19e4a7702d2026007f30dd"
+      }
+    },
+    {
+      "git_blob": "7472ea6557e037713b6590e48752239c92342ba0",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/conditions-composition-source-handoff-v01.json",
+      "raw": {
+        "bytes": 6848,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/conditions-composition-source-handoff-v01.json",
+        "sha256": "0b500a457bd7fc7be57af93ee0b3f3d591744fe52fe70ebff97f6aa0b15a83d5"
+      }
+    },
+    {
+      "git_blob": "6eecea934746315e81b528376b3c4647facb585f",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/analyzer-source-independent-review-v01.json",
+      "raw": {
+        "bytes": 55123,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/analyzer-source-independent-review-v01.json",
+        "sha256": "0932627121a7cb0360c2bbbc8f351b92b55ca4abbcc8f306a80a7a7f7ebe2f8b"
+      }
+    },
+    {
+      "git_blob": "6103f1bf6ca75fdfbf4c3bbcbd01c84bb44a648b",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/recount_conditions_composition_v01.py.txt",
+      "raw": {
+        "bytes": 33269,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/recount_conditions_composition_v01.py.txt",
+        "sha256": "4f5c4cde42e9e088db70d5f96649a0dac15fab4631e033dc73db08223c2ead41"
+      }
+    },
+    {
+      "git_blob": "ddaa0af8bb16dfb4c4897bc59ef743a923211a0c",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/test_conditions_composition_counter_adapter_v01.py.txt",
+      "raw": {
+        "bytes": 8159,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/test_conditions_composition_counter_adapter_v01.py.txt",
+        "sha256": "4c3cf925e24402ff94b9a5dfff86ae4667600fcaaef48a018f092c1b089ae730"
+      }
+    },
+    {
+      "git_blob": "4ad71eeb331a0ba7ab86255839014e71a3dd103c",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/counter-adapter-draft-before-wall-v01.py.txt",
+      "raw": {
+        "bytes": 32808,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/counter-adapter-draft-before-wall-v01.py.txt",
+        "sha256": "1dd435a5a82a60d4f7a5538b41898f593670336082c7aec459216e221cbe1152"
+      }
+    },
+    {
+      "git_blob": "d9901bb5207c54c41311d3c52c70d6b82f960e47",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/test-counter-adapter-draft-before-wall-v01.py.txt",
+      "raw": {
+        "bytes": 6979,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/test-counter-adapter-draft-before-wall-v01.py.txt",
+        "sha256": "2f6c1cc0d79085269ef13d18bbd2e98094cb8dfddb78bd3ab8e886403cdbbfce"
+      }
+    },
+    {
+      "git_blob": "86490a8ea87ef031fd2a515d5a2343c0e5bb9555",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/independent-counter-adapter-invented-controls-v01.json",
+      "raw": {
+        "bytes": 2152,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/independent-counter-adapter-invented-controls-v01.json",
+        "sha256": "e2433505ea62e762e4a1243950fe06075e208e855def652cf00425c7164b83c0"
+      }
+    },
+    {
+      "git_blob": "0186a520d79770cd481e76c3733e320686a4b444",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/independent-counter-adapter-wall-controls-v01.json",
+      "raw": {
+        "bytes": 1797,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/independent-counter-adapter-wall-controls-v01.json",
+        "sha256": "e737f294b06748198e83d868928b75f8bbeff759411a3469b6147c4d1293d5e2"
+      }
+    },
+    {
+      "git_blob": "d3b37146c76ecf7bcf3b82c7d3432be007554545",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/independent-counter-adapter-independent-source-controls-v01.json",
+      "raw": {
+        "bytes": 2474,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/independent-counter-adapter-independent-source-controls-v01.json",
+        "sha256": "9ebf8dfaa58a1539cd0dbaff4f9dc50eea838ff135ae1139166ee37f2cac8ece"
+      }
+    },
+    {
+      "git_blob": "f1322a48e8cf369873de7975ca1a119eb7525fd7",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/independent-counter-source-handoff-v01.json",
+      "raw": {
+        "bytes": 7418,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/independent-counter-source-handoff-v01.json",
+        "sha256": "7c3dfa4ca4c0ba055105d882a33f7d564e415f7abe162400194d41804dcd098a"
+      }
+    },
+    {
+      "git_blob": "cf0321f11de60e88ddbfa0a3477ac23b36b89a61",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/counter-source-independent-review-v01.json",
+      "raw": {
+        "bytes": 76523,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/counter-source-independent-review-v01.json",
+        "sha256": "e2fb06ff0432338336887a1058dde5e6345d35118cadd435f666693f10b6b514"
+      }
+    },
+    {
+      "git_blob": "5628fd4f781ac81f7c5ee17a79a7cbb7ca7d2177",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/independent_conditions_rank_kernel_v01.py.txt",
+      "raw": {
+        "bytes": 15787,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/independent_conditions_rank_kernel_v01.py.txt",
+        "sha256": "e699571ad874c27bf9a310746e1b72e7840d9548fb8d80cc7856fc8c4702201e"
+      }
+    },
+    {
+      "git_blob": "1361bb667840a0cb39b83d6908d46de735e798b0",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/test_independent_conditions_rank_kernel_v01.py.txt",
+      "raw": {
+        "bytes": 9621,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/test_independent_conditions_rank_kernel_v01.py.txt",
+        "sha256": "f9c8344149cf9be1e77608eb980ce68dd5922f6fabf4bede316316e66ed7830e"
+      }
+    },
+    {
+      "git_blob": "0789f8445d58e6cb4ba4afe4061c91c35f5ce2dd",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/independent_conditions_composition_kernel_v01.py.txt",
+      "raw": {
+        "bytes": 15324,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/independent_conditions_composition_kernel_v01.py.txt",
+        "sha256": "c0f307a33a0bf68bb02528a89efd5109d0409792b4a347ac4f455ffb75198266"
+      }
+    },
+    {
+      "git_blob": "af3742187306924e023d6a85da3abbeb1228613b",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/test_independent_conditions_composition_kernel_v01.py.txt",
+      "raw": {
+        "bytes": 10479,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/test_independent_conditions_composition_kernel_v01.py.txt",
+        "sha256": "f124718cb0ebd20a08d39d363dd45e37103c2152cc13b1aba94bd9fb3a2de798"
+      }
+    },
+    {
+      "git_blob": "6b31a59e62bf280f31558872b377125386f93c24",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/independent-conditions-rank-invented-controls-v03.json",
+      "raw": {
+        "bytes": 3158,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/independent-conditions-rank-invented-controls-v03.json",
+        "sha256": "76deca410546f2bd0181ff213ec536b0a4758cbe7d46048e3af163a5b4d7bb36"
+      }
+    },
+    {
+      "git_blob": "ba0f32e2851a183043032e06157e45a400a73931",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/independent-conditions-rank-control-harness-refusal-v01.json",
+      "raw": {
+        "bytes": 649,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/independent-conditions-rank-control-harness-refusal-v01.json",
+        "sha256": "7f642fda86ff4db93d867bb1306b96dd5776135444235b89962280d5de5cfde4"
+      }
+    },
+    {
+      "git_blob": "0e97f5b9bbe04bba6897bf72617152c3debd09d3",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/independent-conditions-rank-control-harness-refusal-v02.json",
+      "raw": {
+        "bytes": 889,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/independent-conditions-rank-control-harness-refusal-v02.json",
+        "sha256": "b4377d48e2c3c11307fab1a150134e605feb798f3d1a053465da466dffd76fac"
+      }
+    },
+    {
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/independent-conditions-rank-invented-controls-v02.json",
+      "raw": {
+        "bytes": 0,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/independent-conditions-rank-invented-controls-v02.json",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "git_blob": "3e18a900e7cf4bbdc85b45e1721f2d49970c2bf6",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/independent-conditions-composition-invented-controls-v01.json",
+      "raw": {
+        "bytes": 2135,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/independent-conditions-composition-invented-controls-v01.json",
+        "sha256": "0a1360d4ffcd2c3b00eb44b2f84f3527bad138ed669d7750cd81bace58edb533"
+      }
+    },
+    {
+      "git_blob": "1a15cdf1d37163845093d1090d20717ce60c5b2e",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/independent-scientific-kernels-source-review-v01.json",
+      "raw": {
+        "bytes": 14412,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/independent-scientific-kernels-source-review-v01.json",
+        "sha256": "a6a03d9ca9520b68c73434b1753a67d88d791cce28c3f39a6ce80ac341fea8fc"
+      }
+    },
+    {
+      "git_blob": "75b3230661a82c637408f11db4b65942180ce551",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/primary-execution-receipt-v01.json",
+      "raw": {
+        "bytes": 950,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/primary-execution-receipt-v01.json",
+        "sha256": "b34926e63ec99c0049aeae75262009260139a9fb471d3182b84b0995eb422be5"
+      }
+    },
+    {
+      "git_blob": "a9bac110bef7f2319bcf06a2a74b64d3c0d6fa12",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/counter-execution-receipt-v01.json",
+      "raw": {
+        "bytes": 761,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/counter-execution-receipt-v01.json",
+        "sha256": "898b4ca507ae69fdafd8c63c30d5795adb833b795a0e16797d6740e935cf446f"
+      }
+    },
+    {
+      "git_blob": "9b780f3910108c2cc6e89818fcbd627e82e9abbb",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/conditions-composition-result-summary-v01.json",
+      "raw": {
+        "bytes": 245319,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/conditions-composition-result-summary-v01.json",
+        "sha256": "cd49699b791e14d92ed7d05f13f2dceed82dd59979aca83f45c2e4ae4a0f9826"
+      }
+    },
+    {
+      "git_blob": "74e2fdba32c989e3aece4f596b8d2a01ffd5e2e4",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/conditions-composition-result-independent-review-v01.json",
+      "raw": {
+        "bytes": 69834,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/conditions-composition-result-independent-review-v01.json",
+        "sha256": "07a1682642e5a3274929d55f64b661c8f5ba17385cd6e239e9e3ea030332eddf"
+      }
+    },
+    {
+      "git_blob": "ea38a82924ac3b1ba7313b7fa36e62375aaae534",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/family-existing-bridge-independent-source-review-v01.json",
+      "raw": {
+        "bytes": 20268,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/family-existing-bridge-independent-source-review-v01.json",
+        "sha256": "840824af8f89e4551f044b491144ff757629463d0c0f52c8d80375efdebc1bf0"
+      }
+    },
+    {
+      "git_blob": "b1d9c0d3d812e5611b42354952f4c1d906181c83",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/next-training-proposal-v01.json",
+      "raw": {
+        "bytes": 49817,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/next-training-proposal-v01.json",
+        "sha256": "3701f01f6ee48dfd42214a433c4e801df73e22e99537fc69dc74ced225080fa8"
+      }
+    },
+    {
+      "git_blob": "3dbe4401544dcfd64cb23e590e8b298f06ae1e78",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/historical-pure-analyze_conditions_balanced_v02.py.txt",
+      "raw": {
+        "bytes": 78492,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/historical-pure-analyze_conditions_balanced_v02.py.txt",
+        "sha256": "1a4b4f6b579d0d086ef97d4867c9eea274ceb88142edb4bff849eb95f0fa2e57"
+      }
+    },
+    {
+      "git_blob": "62b52c8c62c0ddf3bc0b26f8561eee25530e69a6",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/historical-coordinate-analyze_targeted_results_v01.py.txt",
+      "raw": {
+        "bytes": 66275,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/historical-coordinate-analyze_targeted_results_v01.py.txt",
+        "sha256": "4274d682da303954689bbb318750a91a49b407961f26d718104e1890a0ae4d0f"
+      }
+    },
+    {
+      "git_blob": "57ddf27df11fac51317eb8414d389ec66d44c116",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/historical-scorer-run_temporal_contrast_pilot.py.txt",
+      "raw": {
+        "bytes": 42637,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/historical-scorer-run_temporal_contrast_pilot.py.txt",
+        "sha256": "0ae80b9554c45ec104430b7f1a482ad834a33e5f41f5f031fdd203634374fa05"
+      }
+    },
+    {
+      "git_blob": "bae499db41a6cf10e8dc5636bf587a32845e2155",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/historical-greedy-retained_span_score_capture.py.txt",
+      "raw": {
+        "bytes": 17966,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/historical-greedy-retained_span_score_capture.py.txt",
+        "sha256": "e11329b8de6876642c500ee6cf2c4f261c6bb3b26556806a1b4caaea625b4909"
+      }
+    },
+    {
+      "git_blob": "7b2e23b540f01ee952ff94057d7987257c33cdeb",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/historical-joint-joint_span_selection.py.txt",
+      "raw": {
+        "bytes": 16730,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/historical-joint-joint_span_selection.py.txt",
+        "sha256": "791c283f625ae7d8841e7afa697b34cbfa5c74361d0c0129b66af31fb5e13679"
+      }
+    },
+    {
+      "git_blob": "77feab4e75e1ea02fc62f71d38d93e20cafad060",
+      "mode": "100644",
+      "path": "docs/autoformalization/evidence/legal-conditions-composition-20261015-01/publication-summary-prose-independent-review-v01.json",
+      "raw": {
+        "bytes": 9076,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/evidence/legal-conditions-composition-20261015-01/publication-summary-prose-independent-review-v01.json",
+        "sha256": "03d233b223514b9bc1f9af4491d615833b085b510cb85bd872bb343b0fb04aa7"
+      }
+    },
+    {
+      "git_blob": "b80d1178a88361017397c04023fbc25d3c41b7aa",
+      "mode": "100644",
+      "path": "docs/autoformalization/legal-conditions-composition-20261015.md",
+      "raw": {
+        "bytes": 6147,
+        "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoformalization/legal-conditions-composition-20261015.md",
+        "sha256": "014e1487e079beb3d85892c8d6d012ec79048635b2539f5bcd93ae766648aa2b"
+      }
+    }
+  ],
+  "admin_or_protection_bypass_requested": false,
+  "all_other_32281_incoming_entries_exact": true,
+  "canonical_Git_calls": 0,
+  "canonical_raw_anchors": [
+    {
+      "bytes": 37,
+      "path": "/home/barberb/lift_coding/.git/HEAD",
+      "sha256": "32a4e0619657da69ad525c8936b759693db31bc061488a69a547266919aac0c7"
+    },
+    {
+      "bytes": 692628,
+      "path": "/home/barberb/lift_coding/.git/index",
+      "sha256": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4"
+    },
+    {
+      "bytes": 21,
+      "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/HEAD",
+      "sha256": "28d25bf82af4c0e2b72f50959b2beb859e3e60b9630a5e8c603dad4ddb2b6e80"
+    },
+    {
+      "bytes": 5251025,
+      "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/index",
+      "sha256": "8bd28a44ae0a0425cfaba561c3bf8c13f25bbf7e61cbf12c05708c9563dceda8"
+    }
+  ],
+  "concurrent_storage_commit": "3101416594780604f6a1346edbc526f11798d35b",
+  "earlier_expected_base_assertion_refusal": {
+    "bytes": 1115,
+    "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/source-postmerge-assumption-refusal-v01.json",
+    "sha256": "31179d642c7a3d141780850c314d31eddf560b9bce12dd48cfa37aab0877d9e0"
+  },
+  "exact_literal_replacements": 4,
+  "findings": [],
+  "hosted_CI_passed": false,
+  "merge_attempts": 1,
+  "model_or_encoder_calls": 0,
+  "modified_plan": {
+    "bytes": 39801,
+    "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets/docs/autoencoders/legal_ir_uscode_corpus_improvement_plan_20261015.md",
+    "sha256": "4b417d53670b1c244140eb71d1d9bbd872a8ab423b688a06c395f3b983423d0b"
+  },
+  "new_weights": false,
+  "ordered_parents": [
+    "3101416594780604f6a1346edbc526f11798d35b",
+    "a753f4f59857368b375723f133dec54ca4795cc0"
+  ],
+  "ordinary_head_conditional_merge": true,
+  "original_capture_reference_teacher_checkpoint_body_reads": 0,
+  "owned_repo": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets",
+  "passed": true,
+  "prior_stage_review_tree_is_historical_not_actual_merge_tree": true,
+  "schema": "conditions-composition-source-postmerge-verification/v1",
+  "sole_modified_incoming_path": "docs/autoencoders/legal_ir_uscode_corpus_improvement_plan_20261015.md",
+  "storage_owner_paths_preserved": [
+    "docs/autoencoders/parented_phase_storage.md",
+    "docs/autoencoders/validation_storage.md",
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_resources.py",
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/parented_phase_resources.py"
+  ]
+}
