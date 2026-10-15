@@ -1,0 +1,38 @@
+--- /dev/null
++++ b/source/evidence_recovery_boundary_scope.tex
+@@ -0,0 +1,35 @@
++% Proposed evidence-supported scope insertion; current author baseline unavailable.
++% Sources: native_verifier_boundary.json and cve_specificity_boundary.json.
++\paragraph{Receipt verification and authentication scope.}
++The recovered source at the original declared revisions distinguishes native
++receipt content integrity from producer authentication. Canonical hashes bind
++receipt fields and checks compare supplied invocation context, roots, and time;
++these functions do not verify a producer signature or discharge the referenced
++proof obligations. The separate UCAN path performs Ed25519 authorization checks,
++and its token signature is not a signature over the datasets decision receipt.
++The selected harness constructs the receipt directly after its host Boolean
++and UCAN gates; this does not demonstrate execution of the full native evidence
++selection and decision service. Its forged-receipt control substitutes a literal
++invalid string and does not establish rejection of an attacker-authored,
++self-consistent receipt with recomputed unkeyed identifiers.
++
++The receipt-derived datasets capability and the signed UCAN are distinct
++objects. The archived enforcer permits a receipt-based consumption fallback
++when datasets capability derivation fails; the selected A4 route still requires
++its separate UCAN gate. Generic capability attenuation/fallback limits found
++in source are not observed failures of the retained benchmark cases.
++
++Receipt freshness is checked against a supplied frozen logical clock and
++symbolic root labels in this harness. These probes do not attest a live root
++registry or ambient wall-clock freshness of the datasets receipt; the UCAN path
++has separate token timing checks. Consume-before-dispatch and a one-time marker
++also do not prove atomic or exactly-once arbitrary external effects. Historical
++source-pin recovery is distinct from per-worker imported-module attestation.
++
++\paragraph{CVE-specific interpretation.}
++Retained automated source contracts and source differences do not establish
++independent vulnerable/fixed/unrelated polarity or applicability to the modeled
++export operation. A development diagnostic trace permits the declared export
++and denies an authored undeclared-effect mutation before dispatch; these are
++modeled contract outcomes, not a native CVE reproduction or new semantic label.
++The separate diagnostic traces add no primary experimental cells.

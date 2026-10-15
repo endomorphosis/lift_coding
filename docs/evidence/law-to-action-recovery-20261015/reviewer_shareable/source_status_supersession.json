@@ -1,0 +1,76 @@
+{
+  "schema": "law-to-action-source-status-supersession/v1",
+  "created_utc": "2026-10-15T11:12:21.498841+00:00",
+  "historical_reports_preserved": true,
+  "precedence": "Current top-level reviewer summaries and this record supersede conflicting status wording in preserved recovered_* reports. Original observations and receipts are unchanged.",
+  "original_section_document": {
+    "previous_status": "Original full statute section document not recovered",
+    "current_status": "recovered_and_hash_checked",
+    "bytes": 139247,
+    "sha256": "32bd2e92ac9ad9897e286c93b9373bdc88ad28f976215a2ff859ad029c0fefa0",
+    "official_url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/pdf/USCODE-2024-title42-chap7-subchapXI-partC-sec1320d-6.pdf",
+    "receipt": "pinned_statute_fetch.json",
+    "fetch_local_artifact_path_base": "Package root; author_only/original_statute_source.pdf is not relative to the reviewer directory.",
+    "evidence_levels": [
+      "recovered",
+      "hash-checked"
+    ],
+    "limit": "Exact retained section PDF only. External definitions, regulations and other legal context are not established by this recovery."
+  },
+  "field_count": {
+    "previous_label": 12,
+    "current_count": 11,
+    "retained_quote_count": 5,
+    "field_names": [
+      "action",
+      "actor",
+      "authority",
+      "conditions",
+      "cross_references",
+      "definitions",
+      "effective_interval",
+      "exceptions",
+      "jurisdiction",
+      "modality",
+      "object"
+    ],
+    "evidence": "source_context_validation.json#/preflight_field_count_correction",
+    "scope": "Static recount of already retained authorized development metadata; not PDF-offset or semantic validation.",
+    "previous_labels_superseded": [
+      "all_twelve_field_maps_reference_retained_spans",
+      "all twelve field groups",
+      "twelve field mappings"
+    ],
+    "origin_of_previous_mistake": null,
+    "null_reason": "Cause of the previous incorrect count was not established."
+  },
+  "source_text_comparison": {
+    "status": "not_started_after_shared_admission_timeout",
+    "checks": null,
+    "null_reason": "One default resource request timed out before extraction or comparison began; no retry, override or alternate execution.",
+    "receipt": "source_context_validation.json",
+    "report_scope_field_interpretation": "Planned scope only; the source_context_validation report does not document executed preprocessing.",
+    "derived_text_files_created": 0,
+    "redaction_text_interpretation": "No new derived text exists. The retained development packet remains author-only.",
+    "lease_released_false_interpretation": "No lease was acquired; false is not evidence of a leaked acquired lease.",
+    "new_extraction": false,
+    "new_offset_comparison": false,
+    "separate_fetch_hash_check_unchanged": true,
+    "producer_decoded_text_hash_scope": "Original Path.read_text UTF-8 text re-encoded for hashing; not asserted to be a raw cache-file byte hash."
+  },
+  "preserved_limits": {
+    "original_parser_elements": [],
+    "original_parser_confidence": 0.05,
+    "original_parser_limitation": "UnparsedNonNormativeOrAmbiguousText",
+    "applicability": "unknown",
+    "definitions": "unsupported",
+    "exceptions": "unknown",
+    "qualified_human_review": null,
+    "review_null_reason": "No qualified human review was recovered; original development status is not_obtained.",
+    "semantic_fidelity_established": false,
+    "new_parser_execution": false,
+    "new_annotations": false,
+    "C1_C6_identity_join": null,
+    "component_null_reason": "Exact author ledger and component locators unavailable."
+  }
+}

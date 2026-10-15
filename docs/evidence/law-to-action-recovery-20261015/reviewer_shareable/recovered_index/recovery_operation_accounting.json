@@ -1,0 +1,91 @@
+{
+  "scope": "Recovery/verification/packaging operations only; never added to original experiment costs. This is not a complete meter of all analyst/editor time.",
+  "original_cost_table": "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/cost_accounting.json",
+  "operations": [
+    {
+      "operation": "Copied portable reader offline reanalysis",
+      "status": "completed",
+      "evidence_level": "newly executed offline analysis; recomputed retained statistics",
+      "cpu_seconds": 3.813809,
+      "wall_seconds": 4.835806275019422,
+      "reported_child_maxrss_kib": 90144,
+      "memory_source": "Original recovery execution receipt RUSAGE_CHILDREN value, not a new measurement",
+      "memory_limit_bytes": 536870912,
+      "new_scientific_cells": 0
+    },
+    {
+      "operation": "Earlier alternate-byte verification admission",
+      "status": "not_started after shared LeaseTimeoutError",
+      "attempted_wait_seconds": 1,
+      "cpu_seconds": null,
+      "null_reason": "No exact process CPU measurement recorded for this refusal.",
+      "source": "../../law-to-action-evidence-followup-20261015T093458Z/reviewer_shareable/original_input_locator_audit.json",
+      "new_scientific_cells": 0
+    },
+    {
+      "operation": "ZIP-directory author-package locator search",
+      "status": "admitted",
+      "cpu_seconds": 0.676698,
+      "wall_seconds": 0.9272888458799571,
+      "raw_lifetime_ru_maxrss_kib": 4517460,
+      "attributable_work_peak_rss_kib": null,
+      "null_reason": "No /proc peak measurement captured for this search; lifetime getrusage highwater cannot be assigned solely to admitted work.",
+      "scope": "Metadata only; no member decompression.512MiB RLIMIT_AS was set after imports/admission.",
+      "source": "../../law-to-action-author-package-search-20261015T095730Z/reviewer_shareable/author_package_search_status.json",
+      "new_scientific_cells": 0
+    },
+    {
+      "operation": "Original/portable index and named archive identity verification",
+      "status": "admitted",
+      "cpu_seconds": 0.49091999999999997,
+      "wall_seconds": 0.5394491089973599,
+      "admitted_work_seconds": 0.44252824410796165,
+      "raw_startup_ru_maxrss_kib": 4517460,
+      "raw_end_ru_maxrss_kib": 4517460,
+      "proc_startup": {
+        "VmHWM": "17812 kB",
+        "VmRSS": "17812 kB",
+        "VmSize": "41044 kB"
+      },
+      "proc_end": {
+        "VmHWM": "114920 kB",
+        "VmRSS": "83200 kB",
+        "VmSize": "180812 kB"
+      },
+      "attributable_work_peak_rss_kib": null,
+      "null_reason": "/proc highwater covers this process; no separate admitted-work-only peak sampler. Raw getrusage value was already high at startup.",
+      "source": "../../law-to-action-author-package-search-20261015T095730Z/reviewer_shareable/original_input_verification.json",
+      "new_scientific_cells": 0
+    },
+    {
+      "operation": "Requested bulk consolidation",
+      "status": "not_admitted",
+      "cpu_seconds": 0.10367,
+      "wall_seconds": 10.081985030788928,
+      "exception_class": "LeaseTimeoutError",
+      "attempted_wait_seconds": 10,
+      "raw_lifetime_ru_maxrss_kib": 4517460,
+      "proc_before_import": {
+        "VmPeak": "38328 kB",
+        "VmSize": "38264 kB",
+        "VmHWM": "15036 kB",
+        "VmRSS": "15036 kB"
+      },
+      "proc_end": {
+        "VmPeak": "57116 kB",
+        "VmSize": "56844 kB",
+        "VmHWM": "33472 kB",
+        "VmRSS": "33360 kB"
+      },
+      "work_started": false,
+      "bulk_files_copied": 0,
+      "retries": 0,
+      "scheduler_override": false,
+      "attributable_bulk_work_memory_bytes": null,
+      "null_reason": "Admission refused; no bulk copy work started. Small index/report finalization is a separate operation.",
+      "new_scientific_cells": 0
+    }
+  ],
+  "all_new_scientific_execution_count": 0,
+  "no_full_reanalysis_rerun_this_continuation": true
+}

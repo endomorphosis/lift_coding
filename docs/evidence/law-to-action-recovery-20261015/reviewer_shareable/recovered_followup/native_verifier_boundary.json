@@ -1,0 +1,711 @@
+{
+  "actual_route": [
+    {
+      "behavior": "A4 calls host check_obligation and run_ucan, then computes pre_allow from both. This route does not call IntentAuthorizationService.evaluate or the composed proof-job policy to build its decision.",
+      "refs": [
+        "harness:875-911"
+      ],
+      "step": 1
+    },
+    {
+      "behavior": "Harness constructs DecisionReceipt directly with outcome ALLOW, selected-evidence identifier and obligation label, and fixed attempt/result/decision/policy digests. If the pre-gate fails it uses a deliberately wrong receipt audience; the forged control is the literal string forged.",
+      "refs": [
+        "harness:467-491",
+        "harness:912-929",
+        "baseline:56-63"
+      ],
+      "step": 2
+    },
+    {
+      "behavior": "Enforcer resolves receipt/capability, invokes native verify_decision_receipt with caller context, expected roots and supplied clock, then requires exact ALLOW and checks tool/arguments/effects/delegation/environment bindings.",
+      "refs": [
+        "archived_enforcer:735-856",
+        "datasets_receipt:1577-1654"
+      ],
+      "step": 3
+    },
+    {
+      "behavior": "When a capability exists, native verify_capability checks content integrity, one-time marker, parent allow-receipt identity, effect/resource subsets and other parent/context restrictions. This pure check neither authenticates an issuer nor consumes anything.",
+      "refs": [
+        "archived_enforcer:858-880",
+        "datasets_receipt:1657-1771"
+      ],
+      "step": 4
+    },
+    {
+      "behavior": "Enforcer derives a consumption key, calls injected store.try_consume, denies an already-consumed key, then invokes the delegate. The archived deployment injects the file-backed adapter through an embedded exclusive owner client.",
+      "refs": [
+        "archived_enforcer:554-580",
+        "archived_enforcer:1173-1229",
+        "consumption:212-228",
+        "consumption:243-323"
+      ],
+      "step": 5
+    }
+  ],
+  "archived_callsite_sources": [
+    {
+      "archive_member": "recovery_history/candidate/papers/completion/law_to_action/benchmark/fixed_action_operator/cell.py",
+      "bytes": 9229,
+      "id": "cell",
+      "line_count": 159,
+      "line_refs": [
+        {
+          "end": 65,
+          "excerpt_sha256": "790602f0d42388cfe3db0c43bc7e48a8cc66a5e9770079886b4023ef2e3ddf7d",
+          "start": 45
+        },
+        {
+          "end": 105,
+          "excerpt_sha256": "c4d1e4bb94cbcffd782277fc67ac789b3b5424a5e2f3dd93115b4a6011ee10ee",
+          "start": 79
+        },
+        {
+          "end": 145,
+          "excerpt_sha256": "42ea3c7fe6155937219fb8afb734bd67be35225ec79cfe6974f604a3d003282d",
+          "start": 108
+        },
+        {
+          "end": 155,
+          "excerpt_sha256": "fccd6d74db454afbf22c7091b07d9763d18389157fd8e56b6b3ca98ec7332e2a",
+          "start": 146
+        }
+      ],
+      "original_bytes_available_in_this_member": true,
+      "original_sha256": "984c24297f0802c599fb91677aee39e06af3a1e680f1a09a5bcc14b53f9c2b3d",
+      "portable_bytes_verified": true,
+      "portable_sha256": "984c24297f0802c599fb91677aee39e06af3a1e680f1a09a5bcc14b53f9c2b3d",
+      "sha256": "984c24297f0802c599fb91677aee39e06af3a1e680f1a09a5bcc14b53f9c2b3d",
+      "transformation": "byte-identical"
+    },
+    {
+      "archive_member": "recovery_history/candidate/papers/completion/law_to_action/benchmark/baselines.py",
+      "bytes": 57307,
+      "id": "baseline",
+      "line_count": 1346,
+      "line_refs": [
+        {
+          "end": 63,
+          "excerpt_sha256": "278d22e9f43b8a8137a15d873c1001056a8ac0bb8f19367e44502f4c5357d55f",
+          "start": 51
+        },
+        {
+          "end": 201,
+          "excerpt_sha256": "3150b7edb454e4e95b3c86c6a8b49bca7a8932aa60ff22800b284ff624cd2d28",
+          "start": 183
+        },
+        {
+          "end": 310,
+          "excerpt_sha256": "9a9b4a1f118fec25694d591069be3479cbe1d6a8a025395d39af9db7079288e3",
+          "start": 294
+        },
+        {
+          "end": 362,
+          "excerpt_sha256": "ef277d4fc99c80ade218dea02a98daa4d83cfefefa77a6aa7015367f7eae016a",
+          "start": 314
+        },
+        {
+          "end": 480,
+          "excerpt_sha256": "f29b985fa45b5db791143e32e0d4db009d9fe19a81af78340e1120d1c2d525d6",
+          "start": 365
+        },
+        {
+          "end": 670,
+          "excerpt_sha256": "593d5d74c5c8eee4f3e368f622917db28e6d69bc7ab147d15c9b702d29dc194e",
+          "start": 578
+        },
+        {
+          "end": 904,
+          "excerpt_sha256": "23ec70ab596195732d59e8885ad004aecf151140b49591e4d85e3869146be029",
+          "start": 896
+        }
+      ],
+      "original_bytes_available_in_this_member": true,
+      "original_sha256": "d7c5cf6a4af336e3fab63d1ff326fe2a9749cf04467d579dc8b5867c7af00f74",
+      "portable_bytes_verified": true,
+      "portable_sha256": "d7c5cf6a4af336e3fab63d1ff326fe2a9749cf04467d579dc8b5867c7af00f74",
+      "sha256": "d7c5cf6a4af336e3fab63d1ff326fe2a9749cf04467d579dc8b5867c7af00f74",
+      "transformation": "byte-identical"
+    },
+    {
+      "archive_member": "recovery_history/candidate/papers/completion/law_to_action/receipts/snapshots/LA-015/run_fixed_actions.py",
+      "bytes": 61888,
+      "id": "harness",
+      "line_count": 1564,
+      "line_refs": [
+        {
+          "end": 324,
+          "excerpt_sha256": "a5d8ac06f570b9932b2ac9ae252c96694505689c9ae5004d4aeb08a1323cce43",
+          "start": 266
+        },
+        {
+          "end": 519,
+          "excerpt_sha256": "20339ab4fcff17b86b3175dda8f56895bec4b6d4b4bc3b336ddd6f472a8c9d6b",
+          "start": 444
+        },
+        {
+          "end": 645,
+          "excerpt_sha256": "b96c22d8a156014d3d97b9a9177e3c1e7940a1221b181e4f230c6835130878ae",
+          "start": 553
+        },
+        {
+          "end": 767,
+          "excerpt_sha256": "04d9406f2edfc96224bad055cc9f6c0f1362cd152d27aea8e59fe19938aa1948",
+          "start": 681
+        },
+        {
+          "end": 871,
+          "excerpt_sha256": "a67c0315945e854e0bcaddce374b5d240fafc9d67967a71237c11114695f7153",
+          "start": 818
+        },
+        {
+          "end": 1016,
+          "excerpt_sha256": "068612745b9f9761485d7d2be5b65ec6d3cdaf3b181eb314c455325a37741373",
+          "start": 875
+        },
+        {
+          "end": 1066,
+          "excerpt_sha256": "b9ce5975c954454a4532abf3752f83b90e7fd20b9faa90e221b23e84718342ad",
+          "start": 1019
+        }
+      ],
+      "original_bytes_available_in_this_member": true,
+      "original_sha256": "7759e746397ac2ef4bb0f75c499088d4689a50e67204fa1f803c748272937dd5",
+      "portable_bytes_verified": true,
+      "portable_sha256": "7759e746397ac2ef4bb0f75c499088d4689a50e67204fa1f803c748272937dd5",
+      "sha256": "7759e746397ac2ef4bb0f75c499088d4689a50e67204fa1f803c748272937dd5",
+      "transformation": "byte-identical"
+    },
+    {
+      "archive_member": "recovery_history/candidate/papers/completion/law_to_action/benchmark/durable_consumption.py",
+      "bytes": 71273,
+      "id": "consumption",
+      "line_count": 1785,
+      "line_refs": [
+        {
+          "end": 150,
+          "excerpt_sha256": "45684a521192e5becf475098e711f337762f532f2b838060713305e6ef3a9433",
+          "start": 134
+        },
+        {
+          "end": 241,
+          "excerpt_sha256": "19829985b6ef580be3ba7bfd3a0761455f90b142020c0712e2bfeedc6ac3b78c",
+          "start": 179
+        },
+        {
+          "end": 323,
+          "excerpt_sha256": "e5de9d130ebb32b9a125b722e7cc42f0821443a083b7bfa0fa6492a67aed7f18",
+          "start": 243
+        }
+      ],
+      "original_bytes_available_in_this_member": true,
+      "original_sha256": "3c030e8347e0111979982c6fa5bc6734c597b391e48104e66d928e2b2370f5fe",
+      "portable_bytes_verified": true,
+      "portable_sha256": "3c030e8347e0111979982c6fa5bc6734c597b391e48104e66d928e2b2370f5fe",
+      "sha256": "3c030e8347e0111979982c6fa5bc6734c597b391e48104e66d928e2b2370f5fe",
+      "transformation": "byte-identical"
+    },
+    {
+      "archive_member": "recovery_history/candidate/external/ipfs_kit/ipfs_kit_py/mcp_server/authorization.py",
+      "bytes": 13330,
+      "id": "authorization",
+      "line_count": 288,
+      "line_refs": [
+        {
+          "end": 258,
+          "excerpt_sha256": "64ddaf6a4a3e0acb770781c3c2bcc6cc2407817c127e6c0e135e605e415fe258",
+          "start": 163
+        }
+      ],
+      "original_bytes_available_in_this_member": true,
+      "original_sha256": "0410b8742399e0b72af1140d494fa763eb04cc38c31df9f887b473893b5516cd",
+      "portable_bytes_verified": true,
+      "portable_sha256": "0410b8742399e0b72af1140d494fa763eb04cc38c31df9f887b473893b5516cd",
+      "sha256": "0410b8742399e0b72af1140d494fa763eb04cc38c31df9f887b473893b5516cd",
+      "transformation": "byte-identical"
+    },
+    {
+      "archive_member": "recovery_history/candidate/external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/ucan.py",
+      "bytes": 21851,
+      "id": "ucan",
+      "line_count": 483,
+      "line_refs": [
+        {
+          "end": 344,
+          "excerpt_sha256": "d1ef3a83582f11e028e0f15e29a5780281022ce2580db4ab532f449eb0eea816",
+          "start": 286
+        },
+        {
+          "end": 471,
+          "excerpt_sha256": "5ea45d552cbd4761db3784b5e5e3843ea3f23872d788b297be3a57b7222e0c64",
+          "start": 391
+        }
+      ],
+      "original_bytes_available_in_this_member": true,
+      "original_sha256": "c9f68de79fe7ac456e12143136bcef875570d4dfa4c47581c0f1269aeb7f3d95",
+      "portable_bytes_verified": true,
+      "portable_sha256": "c9f68de79fe7ac456e12143136bcef875570d4dfa4c47581c0f1269aeb7f3d95",
+      "sha256": "c9f68de79fe7ac456e12143136bcef875570d4dfa4c47581c0f1269aeb7f3d95",
+      "transformation": "byte-identical"
+    }
+  ],
+  "boundary_findings": {
+    "capability_presence_and_attenuation": {
+      "actual_case_limit": "The selected harness derives one export effect equal to its one receipt effect. These generic boundary gaps are source findings, not newly executed exploits or observed LA-029 failures.",
+      "finding": "This finding concerns only the receipt-derived datasets AuthorizationCapability, not the separately signed UCAN. The resolver attempts derivation from an allow receipt but swallows derivation errors, leaving capability absent. An otherwise-valid receipt can proceed to receipt-based consumption. Native capability verification enforces subset relative to the receipt if supplied; the archived invocation context check does not directly compare requested effects against the attenuated capability effect set or requested resource IDs against capability resources.",
+      "refs": [
+        "archived_enforcer:818-825",
+        "archived_enforcer:858-880",
+        "archived_enforcer:925-954",
+        "archived_enforcer:554-575",
+        "datasets_receipt:1746-1768"
+      ],
+      "standalone_capability_mandatory_in_archived_enforcer": false,
+      "ucan_prerequisite_unchanged_by_datasets_fallback": true
+    },
+    "clock": {
+      "ambient_wall_clock_freshness_proof_for_datasets_receipt": null,
+      "finding": "Native receipt expiry/deadline and capability expiry checks execute only when require_not_expired and a non-None now are supplied. Archived enforcer returns None when no clock is injected and disables those checks. Actual A4 injects a frozen logical UTC clock (normal12:02 or mutated12:11 on2026-07-28) against frozen issue/deadline/expiry values; this is distinct from the wall-clock-based UCAN token times.",
+      "refs": [
+        "datasets_receipt:147-157",
+        "datasets_receipt:1643-1652",
+        "datasets_receipt:1709-1714",
+        "archived_enforcer:730-765",
+        "baseline:56-59",
+        "harness:948-955",
+        "harness:534-549"
+      ],
+      "timestamp_comparison_limit": "Receipt _timestamp checks textual format and returns the string; temporal comparisons in these functions are lexical. This audit does not establish normalized temporal semantics for arbitrary mixed offsets. The selected harness supplies fixed Z-form timestamps."
+    },
+    "content_integrity": {
+      "cryptographic_producer_authentication_implied": false,
+      "established_by_source": "Canonical JSON SHA256 and CID recomputation bind the receipt and capability fields. Constructors validate field shape/schema, status correspondence and supplied digest/CID; verification checks against recomputation. Hash agreement means content consistency.",
+      "refs": [
+        "datasets_receipt:49-57",
+        "datasets_receipt:225-242",
+        "datasets_receipt:749-768",
+        "datasets_receipt:928-943",
+        "datasets_receipt:1217-1230",
+        "datasets_identity:153-172"
+      ]
+    },
+    "evidence_and_obligation_requirements": {
+      "finding": "DecisionReceipt includes evidence IDs/digests, obligation IDs, residual duties and attempt/result digests as fields. Native receipt/capability verification does not fetch evidence, verify a proof certificate, discharge residual duties, reevaluate policy, or require a checker receipt. The archived harness uses fixed evidence/attempt/result/decision/policy values after a separate host Boolean gate.",
+      "full_service_distinction": "The same pinned repository contains a separate injectable evidence-selection/verifier/service route and composed decision policy. Those definitions were inspected and preserved for boundary clarity; no invocation of that route was found in this archived A4 path.",
+      "native_proof_job_result_bound_to_historical_receipt": null,
+      "refs": [
+        "datasets_receipt:638-689",
+        "datasets_receipt:1242-1350",
+        "datasets_receipt:1577-1771",
+        "harness:467-491"
+      ],
+      "selected_evidence_signature_or_certificate_validation_receipt": null,
+      "separate_service_refs": [
+        "datasets_service:728-787",
+        "datasets_service:1366-1458",
+        "datasets_service:1679-1690",
+        "datasets_service:1780-1860",
+        "datasets_compose:1625-1649"
+      ]
+    },
+    "forgery_control_coverage": {
+      "finding": "Archived harness substitutes a plain string for forged_receipt; native coercion rejects it. That control does not establish rejection of an attacker-authored, self-consistent allow receipt with recomputed unkeyed identity. This audit does not execute such an input.",
+      "new_forgery_test_executed": false,
+      "refs": [
+        "harness:927-929",
+        "archived_enforcer:583-599",
+        "datasets_receipt:749-768"
+      ]
+    },
+    "one_time_consumption": {
+      "atomic_store_plus_external_delegate_transaction_proof": null,
+      "exactly_once_arbitrary_external_effect_proof": null,
+      "finding": "one_time=True is a data marker until an external store enforces consumption. The archived store submits a typed CLAIM command with session/generation/revision/fence/idempotency identity; accepted returns True and idempotent replay returns False. Enforcer invokes delegate after successful consume. Its key includes capability/receipt identity and digest; it is not a universal action-semantic deduplication key.",
+      "refs": [
+        "datasets_receipt:1680-1685",
+        "archived_enforcer:554-580",
+        "archived_enforcer:1198-1229",
+        "consumption:243-323"
+      ],
+      "state_database_opened_by_this_audit": false,
+      "transport": "embedded-exclusive-lock, not an inspected live remote Quack owner"
+    },
+    "producer_authentication": {
+      "finding": "The pinned receipt module explicitly excludes signing infrastructure; producer_id is an identifier included in the hashed payload, with no producer signature/key trust check in these verifier functions. Matching unkeyed hashes do not identify who issued the receipt or establish an authorized decision.",
+      "producer_signature_verification_receipt": null,
+      "refs": [
+        "datasets_receipt:1-14",
+        "datasets_receipt:49-57",
+        "datasets_receipt:815-842",
+        "datasets_receipt:1577-1771"
+      ],
+      "trusted_issuer_key_join_for_decision_receipt": null
+    },
+    "roots": {
+      "ambient_current_root_observation_receipt": null,
+      "finding": "BoundRoots.matches compares the bound policy/corpus/revocation/circuit/VK labels with caller-supplied expected values. It does not fetch a live policy head, corpus, revocation ledger or key registry. The actual harness supplies symbolic root-v1 labels; the mutation changes expected policy root to root-v2.",
+      "refs": [
+        "datasets_receipt:271-368",
+        "datasets_receipt:1635-1641",
+        "datasets_receipt:1701-1707",
+        "archived_enforcer:843-856",
+        "baseline:578-587",
+        "harness:937-947"
+      ]
+    },
+    "separate_signed_ucan": {
+      "cryptographic_receipt_to_ucan_result_binding_recovered": null,
+      "decision_receipt_signed_by_ucan_key": false,
+      "finding": "The separate UCAN path uses Ed25519 issuance/verification and authorization checks. Its signature authenticates that token under its own key/audience/resource/expiry/revocation rules; it is not a signature over the datasets DecisionReceipt. The harness host gate connects the outcomes; no UCAN authorization-result digest is substituted for the receipt\u2019s fixed decision/evidence digests.",
+      "refs": [
+        "harness:522-550",
+        "harness:553-645",
+        "harness:901-911",
+        "harness:467-491",
+        "authorization:163-258",
+        "ucan:286-344",
+        "ucan:391-471"
+      ]
+    }
+  },
+  "copy_inventory": {
+    "all_native_blobs_from_exact_original_pins": true,
+    "budget_bytes": 2097152,
+    "bytes": 314308,
+    "directory": "author_only/native_verifier_sources",
+    "files": 7,
+    "source_copy_bytes_equal": true
+  },
+  "created_at_utc": "2026-10-15T09:42:41.853448+00:00",
+  "discrepancies_or_required_claim_precision": [
+    "Describe these functions as content-integrity/context-binding verifiers; producer authentication belongs to a separate authenticated channel/issuer design not recovered here.",
+    "Keep separately signed UCAN authorization distinct from the unsigned datasets DecisionReceipt and from its proof/evidence fields.",
+    "Do not present fixed logical-clock/root mutation checks as live wall-clock/current-root freshness attestation.",
+    "Do not claim the full native evidence-service/solver pipeline ran merely because the repository contains it or the module is imported.",
+    "A one-time marker, store replay test, or source model does not prove exactly-once arbitrary external effects.",
+    "Exact historical Git pins recover source identity; they do not replace absent per-worker module-import or checker-receipt evidence."
+  ],
+  "distribution": "reviewer_shareable",
+  "historical_revision_join": {
+    "cell_and_import_join": "Archived cell58\u201365 checks frozen harness/dependency file hashes; cell108\u2013109 loads that harness; harness72\u201381 adds source-root native checkouts to sys.path. The archived enforcer equals its original declared accelerate Git blob byte-for-byte; native verifier blobs are read from the exact declared datasets commit.",
+    "complete_transitive_runtime_dependency_closure": null,
+    "controller_source": {
+      "archive_member": "recovery_history/candidate/papers/completion/law_to_action/benchmark/fixed_action_operator/controller.py",
+      "line_refs": [
+        {
+          "end": 227,
+          "start": 210
+        },
+        {
+          "end": 270,
+          "start": 246
+        }
+      ],
+      "original_and_portable_sha256": "b51940d97d76478deca1a1283b01360e98d9da4a0cee95df17f6f65a7f1b97a7",
+      "source_behavior": "Checks source and native repository HEAD pins and cleanliness, then uses read-only source mounts. This is archived guard code, not a new execution of those guards."
+    },
+    "current_installed_module_identity_claimed": false,
+    "join_classification": "Recovered original declared source-revision join, stronger than reading later checkout files. The archive pin/guard sources and matching enforcer bytes do not alone attest every Python module actually imported by every historical worker.",
+    "lineage_artifact": {
+      "accelerate_pin": "9e2fb0e16d99b7a26be0acd61ac969c9022e4aa2",
+      "archive_member": "source_lineage.json",
+      "datasets_pin": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "datasets_pin_json_pointer": "/native_pins/external~1ipfs_datasets",
+      "schema": "la029-actual-executed-source-lineage/v1",
+      "sha256": "2955a8f899dce7721d62d385e1efa5bb50f81e4a98fa061bfc15302374e08475"
+    },
+    "nested_archive": {
+      "member": "law_to_action_final_supplement/recovery_source_v1/evidence.zip",
+      "sha256": "56d8cad962292e59513d214eaa0e3bf494ad02982d28a5a712ac33fb221c58c2"
+    },
+    "per_worker_imported_module_file_digest_receipt": null
+  },
+  "limitations": [
+    "Historical source code was inspected and copied but not executed. No active database, original private admission body, protected component-final panel, or live service was opened, and no scientific experiment was run.",
+    "No claim that every optional dependency imported at runtime is included in the selected source copies.",
+    "No arbitrary historical status or summary is upgraded to implementation proof or fresh qualification."
+  ],
+  "preserved_native_sources": [
+    {
+      "bytes": 65482,
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "copy": "author_only/native_verifier_sources/datasets/ipfs_datasets_py/logic/admissibility/receipt.py",
+      "git_blob_oid": "ba2f9da1a835b8470d90584cd88c25865e69cb91",
+      "id": "datasets_receipt",
+      "line_count": 1822,
+      "line_refs": [
+        {
+          "end": 14,
+          "excerpt_sha256": "572df88e2ae2e8d91e57cec3032d308dbfc649ba3a22fd140cc620bcaeec9c40",
+          "start": 1
+        },
+        {
+          "end": 57,
+          "excerpt_sha256": "7d2c28f1983ec80ed018659bed0b2bc796d8fe23de531873a4661ebb9a2a0109",
+          "start": 49
+        },
+        {
+          "end": 157,
+          "excerpt_sha256": "415c5c7a74c516784b4751acd089a410a1d1a5f701556c866e124c4874d9e18f",
+          "start": 147
+        },
+        {
+          "end": 242,
+          "excerpt_sha256": "1609af01fdd867dba50e7ef788711d0ed66e216683705a2c98888300a46f47a2",
+          "start": 225
+        },
+        {
+          "end": 368,
+          "excerpt_sha256": "550f6fbf54ae45b67f000a518ee3d1043360cd79c4111cc15efb2c9328dbe989",
+          "start": 271
+        },
+        {
+          "end": 689,
+          "excerpt_sha256": "ffc7032736342b39cfe408849f562c89baa0ff11df046787668ad3698e78116b",
+          "start": 638
+        },
+        {
+          "end": 787,
+          "excerpt_sha256": "a4dd73298cbc8b47cf0f309b3850056c2ba022dc71621458ae0775e33999d757",
+          "start": 749
+        },
+        {
+          "end": 943,
+          "excerpt_sha256": "77ddcac990834e2643507495b8b98dbafe6815ff2578242cc6f6834f79162829",
+          "start": 815
+        },
+        {
+          "end": 1149,
+          "excerpt_sha256": "348b23b32ac76aa607c8524176284fbd8679827f418012513e6dee87dd7767dd",
+          "start": 1096
+        },
+        {
+          "end": 1230,
+          "excerpt_sha256": "dd92f9ef626d28e7514a2b04048d27335a4216dc1fc697a25652816f0542e770",
+          "start": 1217
+        },
+        {
+          "end": 1350,
+          "excerpt_sha256": "5df87377de2de8da5ab8d46017d66729c71afd70355699d02054d94cb13c5601",
+          "start": 1242
+        },
+        {
+          "end": 1488,
+          "excerpt_sha256": "77d9d9b47630e1374450d4b40eca3a807d231b1664d671fa89d253febc7821f1",
+          "start": 1353
+        },
+        {
+          "end": 1771,
+          "excerpt_sha256": "a82bc13f3b2dbba6f9f2d881f049a21f0f8d9960ea60bf766eeb1a64ef5a10b0",
+          "start": 1577
+        }
+      ],
+      "path": "ipfs_datasets_py/logic/admissibility/receipt.py",
+      "repository": "ipfs_datasets",
+      "sha256": "ae8c4462361c8fc79ee5ab4889ac365efb6accc43d6efe4387ed28a7c5e7397b",
+      "source_kind": "exact_historical_git_blob"
+    },
+    {
+      "bytes": 81956,
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "copy": "author_only/native_verifier_sources/datasets/ipfs_datasets_py/logic/admissibility/compose.py",
+      "git_blob_oid": "13448578f48689da5646cd2f6c802df0855d157d",
+      "id": "datasets_compose",
+      "line_count": 2182,
+      "line_refs": [
+        {
+          "end": 157,
+          "excerpt_sha256": "a45043434bf63bb023b24adf9fa685197c5c9f4a35723b640e9622f866706ba6",
+          "start": 128
+        },
+        {
+          "end": 897,
+          "excerpt_sha256": "87cdf5612cab5cbaa4d67afc5a9d9de3b8e096f39a2b2f58ec0d0a052460d57e",
+          "start": 834
+        },
+        {
+          "end": 983,
+          "excerpt_sha256": "3337e8947e6949f723613dbec81eb1ba795634930e931be6312f80f43a3ceb27",
+          "start": 965
+        },
+        {
+          "end": 1649,
+          "excerpt_sha256": "8fb0ac71406bdf02dc601ef272a5d01a4a350717ca9cc5883568d7cf07448364",
+          "start": 1625
+        }
+      ],
+      "path": "ipfs_datasets_py/logic/admissibility/compose.py",
+      "repository": "ipfs_datasets",
+      "sha256": "99f3a672ad2c765c31d327b85fb77e1c000451a27636409c2e8c9c5632fa7765",
+      "source_kind": "exact_historical_git_blob"
+    },
+    {
+      "bytes": 80653,
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "copy": "author_only/native_verifier_sources/datasets/ipfs_datasets_py/logic/admissibility/service.py",
+      "git_blob_oid": "d2fa321450f274f2710ef38cffc245c74bb87bb3",
+      "id": "datasets_service",
+      "line_count": 2153,
+      "line_refs": [
+        {
+          "end": 787,
+          "excerpt_sha256": "d16ac6b94734b123e714bb92a0deafd06d713c0bd2f6ec4c1ec9bd777cec82bd",
+          "start": 728
+        },
+        {
+          "end": 1100,
+          "excerpt_sha256": "74282cee9c78f283f878f348de379c513122a91e8972647cebb1dea1a99edbe6",
+          "start": 1051
+        },
+        {
+          "end": 1458,
+          "excerpt_sha256": "5047d93cc537ff4d69f4a3952a4d95f1b95bd8b2fb976c324ad18b0ff4a60fba",
+          "start": 1366
+        },
+        {
+          "end": 1690,
+          "excerpt_sha256": "229bd3728b0a3a70556b98b03ced8c3a4552bb1002bc6d2e8f76cb3164568eea",
+          "start": 1679
+        },
+        {
+          "end": 1860,
+          "excerpt_sha256": "8d395012565c0a18b8c9843dd1e797033a74ffd560b144303a2f49cb4cd8a51f",
+          "start": 1780
+        }
+      ],
+      "path": "ipfs_datasets_py/logic/admissibility/service.py",
+      "repository": "ipfs_datasets",
+      "sha256": "e21f01a09e0f5b19b6171dc87bbc57b115ccf183b92a030752339a0b0a8ee4e5",
+      "source_kind": "exact_historical_git_blob"
+    },
+    {
+      "bytes": 9210,
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "copy": "author_only/native_verifier_sources/datasets/ipfs_datasets_py/logic/admissibility/reasons.py",
+      "git_blob_oid": "47f05d17c4e39c5ab28dd5fdd1fd47d451217da9",
+      "id": "datasets_reasons",
+      "line_count": 242,
+      "line_refs": [
+        {
+          "end": 78,
+          "excerpt_sha256": "13530729f875eba437d55c8be958be78c9943d1832cc9ab0708a99498f039bdb",
+          "start": 45
+        }
+      ],
+      "path": "ipfs_datasets_py/logic/admissibility/reasons.py",
+      "repository": "ipfs_datasets",
+      "sha256": "f7b48c101c08de519a678e0764d8f296a6de2ed1a6cab13d2d18c7fdd19c2737",
+      "source_kind": "exact_historical_git_blob"
+    },
+    {
+      "bytes": 9211,
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "copy": "author_only/native_verifier_sources/datasets/ipfs_datasets_py/logic/ir_core/identity.py",
+      "git_blob_oid": "060aff14349e37bb31452b0af9670a6879e65afa",
+      "id": "datasets_identity",
+      "line_count": 301,
+      "line_refs": [
+        {
+          "end": 172,
+          "excerpt_sha256": "378901a74a29d5ac54ba599531ae7e5b1cbc89cee6b7122e06b699523f113f27",
+          "start": 145
+        }
+      ],
+      "path": "ipfs_datasets_py/logic/ir_core/identity.py",
+      "repository": "ipfs_datasets",
+      "sha256": "283d46385f982381bc7f3e8b4f0ed4948be834487dc4d7e7f604e091f0c857fa",
+      "source_kind": "exact_historical_git_blob"
+    },
+    {
+      "bytes": 16330,
+      "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+      "copy": "author_only/native_verifier_sources/datasets/ipfs_datasets_py/logic/ir_core/claims.py",
+      "git_blob_oid": "93735ecabfacb8a9c8abe168a47392741265a7fd",
+      "id": "datasets_claims",
+      "line_count": 448,
+      "line_refs": [
+        {
+          "end": 65,
+          "excerpt_sha256": "93c9e13fcbfb16cda8533671c463bf9ba57360711e606281904bb497090a3ee2",
+          "start": 37
+        },
+        {
+          "end": 121,
+          "excerpt_sha256": "c4ed3cd59d68ec4fdb56b8fab6cc75d3c23bf81d3a6f1cfcf4017f2da390dd92",
+          "start": 110
+        }
+      ],
+      "path": "ipfs_datasets_py/logic/ir_core/claims.py",
+      "repository": "ipfs_datasets",
+      "sha256": "44e9e2f4fdc1ed670e2ba82a3d768daf00e66e37096c7e2eb110ebe992db6999",
+      "source_kind": "exact_historical_git_blob"
+    },
+    {
+      "archive_member": "recovery_history/candidate/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/admissibility_enforcement.py",
+      "bytes": 51466,
+      "commit": "9e2fb0e16d99b7a26be0acd61ac969c9022e4aa2",
+      "copy": "author_only/native_verifier_sources/accelerate/ipfs_accelerate_py/agent_supervisor/proof/admissibility_enforcement.py",
+      "git_blob_oid": "2702a7a3cfb28b3542ec231252ca4930dda9e361",
+      "id": "archived_enforcer",
+      "line_count": 1340,
+      "line_refs": [
+        {
+          "end": 608,
+          "excerpt_sha256": "0ee1003a91ec380c8ec749cb85a560430b8dc5f297f22a790aad274050a6dedc",
+          "start": 554
+        },
+        {
+          "end": 889,
+          "excerpt_sha256": "9c7c918f4935f91fd54383986febb80dc2cabb1d7183bfb1cd0542705e5c6dca",
+          "start": 730
+        },
+        {
+          "end": 954,
+          "excerpt_sha256": "e59779f3c02bd72f669db8e7d50ee7086625a8c8c1128ab664e74f644c4a2131",
+          "start": 891
+        },
+        {
+          "end": 1104,
+          "excerpt_sha256": "ff5c4803f2d7e4758c21e068845f1c1013e540ae7fcaf004a5ea7f88becd8e8b",
+          "start": 1087
+        },
+        {
+          "end": 1246,
+          "excerpt_sha256": "87c40948a54fbdb20c9ceb9d58e44f28dbf7c4f18174a7219a7c79ce15d21176",
+          "start": 1153
+        }
+      ],
+      "matches_archived_source_sha256": true,
+      "path": "ipfs_accelerate_py/agent_supervisor/proof/admissibility_enforcement.py",
+      "repository": "ipfs_accelerate",
+      "sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0",
+      "source_kind": "exact_historical_git_blob_equal_to_archived_executed_source"
+    }
+  ],
+  "prior_evidence_preserved": {
+    "missing_original_native_checker_or_build_records_remain_null": true,
+    "other_recovered_diagnostic_satisfiability_records_not_reclassified": true,
+    "previous_package_unchanged": true,
+    "previous_report_name": "runtime_formal_audit.json",
+    "runtime_audit_sha256": "1b4a011491ef779ac9f05a6d5d13f327484ba354072ca6797b3fa08d985cda99"
+  },
+  "schema": "law_to_action.native_verifier_boundary@1",
+  "scope": {
+    "database_opened": false,
+    "later_checkout_source_used_as_original": false,
+    "method": "Bounded local historical Git-blob reads, static source/AST inspection, source SHA256 and copy-byte comparison only.",
+    "original_authorized_owner_export_grant_available": false,
+    "original_source_or_worktree_modified": false,
+    "protected_component_final_panels_read": false,
+    "revised_paper_claim_identity": null,
+    "scientific_replay_or_new_verification_job_run": false,
+    "supervisor_run_preview_or_export_invoked": false,
+    "task": "Recover and inspect the exact LA-029-declared native datasets receipt/capability implementation, preserving original versus later-source identities.",
+    "tests_builds_solvers_or_providers_run": false
+  },
+  "token_terminology": {
+    "datasets_AuthorizationCapability": "Unsigned content-addressed dispatch object derived from a datasets DecisionReceipt; optional in the archived enforcer fallback. This is the capability discussed in native derive_capability/verify_capability.",
+    "observed_failure_claim": "No generic-path finding in this static audit is classified as an observed LA-029 benchmark failure.",
+    "separate_Ed25519_UCAN": "Separately signed delegation/authorization token verified by the UCAN gate. A4 pre_allow requires that gate to allow; optional datasets capability derivation does not make the UCAN gate optional."
+  }
+}

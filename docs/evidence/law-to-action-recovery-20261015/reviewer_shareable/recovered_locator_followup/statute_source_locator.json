@@ -1,0 +1,175 @@
+{
+  "C1_C6": {
+    "join": null,
+    "null_reason": "Author ledger and exact component identities remain unavailable; no joins inferred from this development source."
+  },
+  "completed_utc": "2026-10-15T10:37:26.608492+00:00",
+  "filename_search_summary": {
+    "absent_roots": 4,
+    "candidates": 0,
+    "directories_seen": 366,
+    "entries_seen": 1143,
+    "errors": 0,
+    "existing_roots_completed_within_bounds": 4,
+    "limits": {
+      "candidate_bytes": 8388608,
+      "candidate_count": 8,
+      "depth": 12,
+      "entries_per_root": 5000,
+      "total_entries": 20000,
+      "wall_seconds": 10
+    },
+    "matching_scope": "Exact retained basenames, full document/text digest names, and PDF/TXT filenames containing the same section number. Arbitrarily named/hashed objects, databases, archive contents and unrelated locations were not inspected.",
+    "roots_named": 8,
+    "search_bounds_reached": false,
+    "wall_seconds": 0.004222074057906866
+  },
+  "next_possible_recovery": "If separately authorized and resource-admitted, retrieve only the exact versioned URL and compare complete response bytes to the recorded size and SHA256 before identifying it as the original. This report performs no network access.",
+  "operations": {
+    "archive_decomposition": false,
+    "content_hash_scan": false,
+    "database_access": false,
+    "key_content_read": false,
+    "model_calls": 0,
+    "network_requests": 0,
+    "new_human_review": false,
+    "new_scientific_experiment": false,
+    "prior_packages_written": false,
+    "protected_annotations_read": false,
+    "source_body_read": false,
+    "source_extraction_executed": false
+  },
+  "redaction": "Absolute local paths and development family/case identities omitted. Exact public versioned source URL and source commitments retained.",
+  "remaining_limitations": [
+    "Recorded original PDF and text commitments have not been checked against currently available full source bytes.",
+    "The extracted text pin and normalized text pin use different transformations and must not be equated with the PDF hash.",
+    "A matching statute citation or newer version does not establish identity with the retained original source.",
+    "Recovering source bytes would not establish independent human review, legal applicability or source-to-IR semantic fidelity."
+  ],
+  "resource_admission": {
+    "api": "ipfs_datasets_py.logic.software_contracts.codebase_resources.acquire_codebase_resources",
+    "attempts": 0,
+    "bypass": false,
+    "conditional_request": {
+      "child_process_slots": 1,
+      "cpu_slots": 1,
+      "memory_mb": 256,
+      "parent_lease": "omitted",
+      "scheduler": "omitted; actual shared default",
+      "timeout_seconds": 10
+    },
+    "lease": null,
+    "null_reason": "The prerequisite eligible local source candidate was not found; no source-body copy/hash work was started.",
+    "retry": 0,
+    "scheduler_override": false,
+    "status": "not_attempted_no_candidate"
+  },
+  "result": {
+    "eligible_local_source_candidates": 0,
+    "exact_original_pdf_hash_and_size_recovered": true,
+    "exact_versioned_url_recovered": true,
+    "full_extracted_text_recovered": false,
+    "full_original_pdf_recovered": false,
+    "global_unrecoverability_claim": false,
+    "normalized_text_hash_recovered": true,
+    "original_version_substituted": false,
+    "producer_text_hash_recovered": true,
+    "source_bytes_copied": 0
+  },
+  "schema": "law-to-action-statute-source-locator/v1",
+  "scope": "Full-context original source locator followup for one already retained development statute example; not a new annotation or semantic-fidelity audit.",
+  "searched_root_categories": [
+    "Historical temporary text extraction cache",
+    "Historical original source cache and preserved-checkout counterpart",
+    "Repository legal-source data directory",
+    "Named local US Code, legal page and legal corpus caches",
+    "Named application cache location"
+  ],
+  "source_evidence": [
+    {
+      "bytes": 17727,
+      "executed": false,
+      "id": "prior_audit",
+      "sha256": "58eef69d30183fa401147e04e6a1d4facbb4752d1d8f5724016b786ab7519bac"
+    },
+    {
+      "bytes": 9186,
+      "executed": false,
+      "id": "development_context",
+      "sha256": "574d4309bb099869e6b5c16f0b6ff1ad9486687f27627a190f9d0a3dbaa752e6"
+    },
+    {
+      "bytes": 9152,
+      "executed": false,
+      "id": "la005_receipt",
+      "sha256": "d63c7184e5415d7594b25c9152b933a8b3f927600d307ad22b8fd5f402e42e62"
+    },
+    {
+      "bytes": 16039,
+      "executed": false,
+      "id": "la004_receipt",
+      "sha256": "fe0f44d3a0352269952036fc5404497813313fa728505cd8aed737b3b08ff52d"
+    },
+    {
+      "bytes": 51880,
+      "executed": false,
+      "id": "source_manifest",
+      "sha256": "55c69799805ce8466c7935f41c43a6656fbb2dce867496fb771ae07c4395feb6"
+    },
+    {
+      "bytes": 59949,
+      "executed": false,
+      "id": "producer_source",
+      "sha256": "99fdc3fa17d869fe0c9003852fb9cb71961e774abb188a4943bf726f73552e4f"
+    },
+    {
+      "bytes": 2767,
+      "executed": false,
+      "id": "filename_search",
+      "sha256": "feead632d32c7bbbdf86cff5da443ead20a6879310b39748c882dfce878448ff"
+    },
+    {
+      "bytes": 4315,
+      "executed": true,
+      "id": "filename_search_script",
+      "sha256": "055879a289293b3139748eab9976ee993d7541b641e6f8da432dc9ed512eecf3"
+    }
+  ],
+  "source_pins": {
+    "edition": "2024",
+    "extracted_text": {
+      "current_text_found": false,
+      "current_text_sha256": null,
+      "current_text_sha256_null_reason": "No matching local text candidate found; no text reconstruction, PDF extraction or normalization of a source body performed.",
+      "extraction_recorded": "pdftotext -raw UTF-8; whitespace collapsed with re.sub(r'\\s+', ' ', text)",
+      "normalization": "re.sub(r\"\\s+\", \" \", text), then UTF-8 SHA256; no strip in inspected normalize function.",
+      "normalized_source_sha256": "279c74a9baa635848c0b193b7ceca7880803011af3cbf621eef009d1b08fb7eb",
+      "original_cache_basename": "legal-health-information.txt",
+      "original_raw_text_file_sha256": null,
+      "original_raw_text_file_sha256_null_reason": "The inspected producer pins decoded/re-encoded text; no source text file found to distinguish raw-byte identity.",
+      "pdftotext_version_recorded": "24.02.0",
+      "producer_expected_text_sha256": "7ea0ca5d9050d31079e9d36f61a53fa426f5bc08afc28ef79136655dc14c2321",
+      "producer_hash_domain": "Path.read_text(encoding=\"utf-8\") result encoded to UTF-8 and hashed; universal newline handling means this is not independently guaranteed to be the original on-disk raw-byte hash."
+    },
+    "original_pdf": {
+      "cache_relative_path": "legal_raw/legal-health-information.pdf",
+      "current_pdf_bytes_found": false,
+      "current_pdf_sha256": null,
+      "current_pdf_sha256_null_reason": "No matching local filename candidate was found; no original PDF body was opened or rehashed.",
+      "expected_bytes": 139247,
+      "expected_sha256": "32bd2e92ac9ad9897e286c93b9373bdc88ad28f976215a2ff859ad029c0fefa0",
+      "hash_domain": "Complete original PDF bytes, as recorded in the retained development source and source manifest.",
+      "identity_null_reason": "Exact URI and original pin recovered; current source bytes unavailable in this bounded local search.",
+      "original_cache_basename": "legal-health-information.pdf",
+      "original_version_identity_verified_from_current_bytes": null,
+      "source_url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/pdf/USCODE-2024-title42-chap7-subchapXI-partC-sec1320d-6.pdf",
+      "versioned_url_basename": "USCODE-2024-title42-chap7-subchapXI-partC-sec1320d-6.pdf"
+    },
+    "provenance_limit": "The exact retained development packet and producer source were checked against prior hashes. The present source manifest contributes the selected artifact byte count and matching PDF pin; its whole-file digest is not asserted to equal the historical LA005 source-manifest digest.",
+    "redistribution_recorded": "quoted spans only; full PDF bodies remain retrieval_only",
+    "revision": "USCODE-2024:42-USC-1320d-6",
+    "statute": "42 U.S.C. 1320d-6"
+  },
+  "status": "EXACT_ORIGINAL_SOURCE_LOCATOR_AND_PINS_RECOVERED_LOCAL_BODY_NOT_FOUND",
+  "visibility": "reviewer_shareable"
+}

@@ -1,0 +1,17 @@
+kind,status,observed_normalized_worker_terminal_label_count,explicit_scientific_dispatch_not_reached_count,underlying_checker_transport_status_count,null_reason,coverage
+scientific_cell,allow,753,,,Intermediate statuses are not recoverable from retained terminal records. Host startup attempts have no worker terminal record.,Recorded worker terminal labels only
+scientific_cell,deny,147,,,Intermediate statuses are not recoverable from retained terminal records. Host startup attempts have no worker terminal record.,Recorded worker terminal labels only
+scientific_cell,unknown,0,,,Intermediate statuses are not recoverable from retained terminal records. Host startup attempts have no worker terminal record.,Recorded worker terminal labels only
+scientific_cell,unsupported,0,,,Intermediate statuses are not recoverable from retained terminal records. Host startup attempts have no worker terminal record.,Recorded worker terminal labels only
+scientific_cell,error,0,,,Intermediate statuses are not recoverable from retained terminal records. Host startup attempts have no worker terminal record.,Recorded worker terminal labels only
+scientific_cell,timeout,0,,,Intermediate statuses are not recoverable from retained terminal records. Host startup attempts have no worker terminal record.,Recorded worker terminal labels only
+scientific_cell,cancellation,0,,,Intermediate statuses are not recoverable from retained terminal records. Host startup attempts have no worker terminal record.,Recorded worker terminal labels only
+scientific_cell,not_started,0,,,Intermediate statuses are not recoverable from retained terminal records. Host startup attempts have no worker terminal record.,Recorded worker terminal labels only
+host_startup_failure,allow,,,,Intermediate statuses are not recoverable from retained terminal records. Host startup attempts have no worker terminal record.,Explicit host scientific_dispatch_not_reached flag only
+host_startup_failure,deny,,,,Intermediate statuses are not recoverable from retained terminal records. Host startup attempts have no worker terminal record.,Explicit host scientific_dispatch_not_reached flag only
+host_startup_failure,unknown,,,,Intermediate statuses are not recoverable from retained terminal records. Host startup attempts have no worker terminal record.,Explicit host scientific_dispatch_not_reached flag only
+host_startup_failure,unsupported,,,,Intermediate statuses are not recoverable from retained terminal records. Host startup attempts have no worker terminal record.,Explicit host scientific_dispatch_not_reached flag only
+host_startup_failure,error,,,,Intermediate statuses are not recoverable from retained terminal records. Host startup attempts have no worker terminal record.,Explicit host scientific_dispatch_not_reached flag only
+host_startup_failure,timeout,,,,Intermediate statuses are not recoverable from retained terminal records. Host startup attempts have no worker terminal record.,Explicit host scientific_dispatch_not_reached flag only
+host_startup_failure,cancellation,,,,Intermediate statuses are not recoverable from retained terminal records. Host startup attempts have no worker terminal record.,Explicit host scientific_dispatch_not_reached flag only
+host_startup_failure,not_started,,2,,Intermediate statuses are not recoverable from retained terminal records. Host startup attempts have no worker terminal record.,Explicit host scientific_dispatch_not_reached flag only

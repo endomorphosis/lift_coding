@@ -1,0 +1,20 @@
+{
+  "kind": "Standalone proposed insertion in new file; not a baseline patch",
+  "baseline_path": null,
+  "baseline_sha256": null,
+  "null_reason": "Exact current author manuscript and includes unavailable.",
+  "proposed_target": "source/recovery_scope_proposed.tex",
+  "applied": false,
+  "included": false,
+  "compiled": false,
+  "evidence_sources": "claim_to_evidence_matrix.json and its artifact paths",
+  "next_action": "After obtaining the exact author package,read its full prompt and integrate or reduce this text on a copied baseline; do not automatically apply older proposals.",
+  "supersedes_for_current_view": [
+    "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/proposed_manuscript.patch",
+    "../../law-to-action-evidence-followup-20261015T093458Z/reviewer_shareable/proposed_manuscript_scope.patch"
+  ],
+  "editorial_corrections": [
+    "Two distinct diagnostic traces support allow and deny; no single trace conflated.",
+    "Receipt-pinned development CVE recovery is not semantic validation."
+  ]
+}

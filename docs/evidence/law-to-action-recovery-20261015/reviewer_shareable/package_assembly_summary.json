@@ -1,0 +1,15 @@
+{
+  "status": "admitted",
+  "completed_utc": "2026-10-15T10:55:01.718450+00:00",
+  "copied_files": 312,
+  "copied_bytes": 77501588,
+  "all_source_and_copy_hashes_equal": true,
+  "all_source_stats_stable": true,
+  "original_expected_hash_matches_when_available": true,
+  "payload_hashes_reused_at_finalization": true,
+  "hash_scope": "Equality at admitted copy time, not a second finalization rehash.",
+  "prior_packages_modified": false,
+  "complete_author_package_present": false,
+  "raw_copy_inventory": "../author_only/copy_inventory.json",
+  "raw_admission_receipt": "../author_only/assembly_receipt.json"
+}

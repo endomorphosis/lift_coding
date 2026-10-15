@@ -1,0 +1,24 @@
+[
+  {
+    "branch": "declared_export_only",
+    "checker": "exhaustive truth table (source)",
+    "evidence_level": "recovered/hash-checked formula source",
+    "exact_dimacs": "c grant=x1 matching_roots=x2 forbidden_effect=x3\nc invariant: matching & grant -> ~forbidden\np cnf 3 4\n1 0\n2 0\n3 0\n-2 -1 -3 0\n",
+    "formula_sha256": "930926400647073339c5edd24def99c264c268db6d1aa8bd75d575777c84a5e7",
+    "limitation": "No primary raw checker receipt; separate LA020 retained diagnostic records do not repair this gap.",
+    "primary_original_checker_record": null,
+    "provider": "SymPy DPLL (source)",
+    "study": "LA-029 executed-source formula"
+  },
+  {
+    "branch": "declared_extra_effect",
+    "checker": "exhaustive truth table (source)",
+    "evidence_level": "recovered/hash-checked formula source",
+    "exact_dimacs": "c extra-effect\np cnf 1 1\n1 0\n",
+    "formula_sha256": "4aab3cffa9e694caa49a13aab2386c62bda97f1fe1b71e67f10d31dd001eec4c",
+    "limitation": "No primary raw checker receipt; separate LA020 retained diagnostic records do not repair this gap.",
+    "primary_original_checker_record": null,
+    "provider": "SymPy DPLL (source)",
+    "study": "LA-029 executed-source formula"
+  }
+]

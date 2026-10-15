@@ -1,0 +1,98 @@
+{
+  "schema": "law-to-action-recovery-accounting/v1",
+  "created_utc": "2026-10-15T11:12:21.498841+00:00",
+  "scope": "Current recovery operations only; not original experiment or component cost.",
+  "operations": [
+    {
+      "operation": "Recover exact retained statute PDF",
+      "status": "completed",
+      "evidence_levels": [
+        "recovered",
+        "hash-checked"
+      ],
+      "admission": "admitted",
+      "cpu_slots": 1,
+      "reserved_memory_mib": 256,
+      "child_process_slots": 1,
+      "wall_seconds_including_admission": 0.36388968396931887,
+      "process_cpu_seconds": 0.123233,
+      "proc_lifetime_high_water_kib": 35916,
+      "raw_getrusage_peak_rss_kib": 4517460,
+      "bytes": 139247,
+      "receipt": "pinned_statute_fetch.json",
+      "attributable_work_peak_rss_bytes": null,
+      "null_reason": "No separate work-only peak sampler; process /proc and raw lifetime getrusage recorded separately."
+    },
+    {
+      "operation": "Copy and verify prior evidence files",
+      "status": "completed",
+      "evidence_levels": [
+        "recovered",
+        "hash-checked"
+      ],
+      "admission": "admitted",
+      "cpu_slots": 1,
+      "reserved_memory_mib": 512,
+      "child_process_slots": 1,
+      "wall_seconds_including_admission": 4.2476459729950875,
+      "process_cpu_seconds": 0.254038,
+      "proc_lifetime_high_water_kib": 35348,
+      "raw_getrusage_peak_rss_kib": 4517460,
+      "files": 312,
+      "bytes": 77501588,
+      "receipt": "../author_only/assembly_receipt.json",
+      "attributable_work_peak_rss_bytes": null,
+      "null_reason": "No separate work-only peak sampler; raw lifetime high-water is not attributed to copying alone."
+    },
+    {
+      "operation": "Planned PDF text/span comparison",
+      "status": "not_started",
+      "evidence_levels": [
+        "newly recorded admission refusal only"
+      ],
+      "admission": "not_admitted",
+      "cpu_slots_requested": 1,
+      "memory_mib_requested": 256,
+      "child_process_slots_requested": 1,
+      "wall_seconds_including_admission": 10.069305492099375,
+      "process_cpu_seconds": null,
+      "cpu_null_reason": "Work did not begin and whole-process CPU was not retained.",
+      "proc_lifetime_high_water_kib": 35428,
+      "raw_getrusage_peak_rss_kib": 4517460,
+      "attributable_work_peak_rss_bytes": null,
+      "null_reason": "No admitted work ran; no work-only peak exists.",
+      "receipt": "source_context_validation.json",
+      "attempts": 1,
+      "retries": 0,
+      "exact_timeout_cause": null,
+      "cause_null_reason": "Detached gate observations do not establish an exclusive terminal cause.",
+      "lease_acquired": false
+    }
+  ],
+  "process_measurement_limits": "Raw getrusage high-water of 4517460 KiB was already present at process startup and may include inherited pre-exec history. Preserve it as raw; /proc lifetime high-water is separate. Neither measures work-only peak.",
+  "all_current_turn_cpu_seconds": null,
+  "total_null_reason": "Editor/tool/helper overhead and failed-admission CPU were not comprehensively metered. Do not total only the measured successful jobs as all recovery cost.",
+  "new_scientific_cells": 0,
+  "new_solver_runs": 0,
+  "new_model_calls_for_scientific_trials": 0,
+  "new_training_jobs": 0,
+  "external_publications": 0,
+  "currency_cost": null,
+  "currency_null_reason": "No currency accounting was measured.",
+  "recovery_assistant_token_usage": null,
+  "token_null_reason": "Scientific trial model calls were zero; recovery-assistant token usage was not captured in these evidence receipts.",
+  "small_metadata_finalization": {
+    "activity": "Compose summaries and inventories; stat payloads; reuse completed copy/fetch digests; hash only new small metadata.",
+    "additional_bulk_payload_rehash": false,
+    "pdf_extraction": false,
+    "new_analysis_or_scheduler_fallback": false,
+    "cpu_and_peak_memory": null,
+    "null_reason": "Small editorial and final metadata operations were not separately metered."
+  },
+  "prior_recovery_receipts": [
+    "recovered_index/recovery_operation_accounting.json",
+    "recovered_locator_followup/continuation_cost_accounting.json"
+  ],
+  "original_experiment_costs": "cost_accounting.json",
+  "same_artifact_copied_twice_is_not_new_experiment": true
+}

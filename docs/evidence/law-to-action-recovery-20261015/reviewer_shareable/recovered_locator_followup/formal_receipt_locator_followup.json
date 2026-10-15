@@ -1,0 +1,18 @@
+{
+  "scope": "Follow only exact prior-audited summary and three integration-test source locators",
+  "source_report": "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/formal_source_receipt_audit.json",
+  "bytes_read_reported_by_helper": 121445,
+  "source_hash_matches_reported_by_helper": 4,
+  "new_persisted_native_check_receipt": null,
+  "null_reason": "No persisted output artifact/directory locator found through those specific sources; no global/session-log search conducted.",
+  "findings": [
+    "FACP020 summary contains source/tool labels but no raw stdout/stderr/exit artifact locator.",
+    "Basic source captures subprocess output without a persisted log path.",
+    "Promotion captures output in memory and emits FACP-012_LEAN_IDENTITY= to pytest capture; no saved capture path is named.",
+    "TLA test returns in-memory records; no persisted receipt directory is named."
+  ],
+  "method": "Read-only static follow-up reported by helper agent. These are current audit observations, not original native checker receipts.",
+  "scientific_execution": false,
+  "proof_status_changed": false,
+  "global_absence_claim": false
+}

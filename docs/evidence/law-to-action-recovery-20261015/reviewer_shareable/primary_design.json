@@ -1,0 +1,59 @@
+{
+  "A1_A2_role": "inert equivalence/instrumentation controls; no model consumes policy/retrieval text",
+  "arms": [
+    "A0",
+    "A1",
+    "A2",
+    "A3",
+    "A4"
+  ],
+  "bootstrap": {
+    "all_match_retained_summary": true,
+    "contrasts_recomputed": 45,
+    "resamples": 2000,
+    "seed": 104729,
+    "unit": "lineage family, stratified by source population, preserving paired cases and all seeds"
+  },
+  "canonical_schedule_sha256_sort_keys_true": "dac3d21265b6acbb2feaf35212cd6e01b23e4f421fc3dec5dbddc8fc25e49d43",
+  "cases": 60,
+  "complete_native_worktree_hash_verification": null,
+  "evidence_level": "recomputed from retained records; protocol/source hashes checked",
+  "families": 30,
+  "family_population_counts": {
+    "cve": 12,
+    "legal": 6,
+    "skill": 12
+  },
+  "frozen_inputs_member": "recovery_history/candidate/papers/completion/law_to_action/benchmark/fixed_action_operator/frozen_inputs.json",
+  "frozen_inputs_sha256": "52d5464060aaa57896702de6f11f1f9a0dea2510530f1f17a934f4f16d3dd9d9",
+  "host_attempts": 902,
+  "model_calls_reported": 0,
+  "native_source_pins_reported": {
+    "external/ipfs_accelerate": "9e2fb0e16d99b7a26be0acd61ac969c9022e4aa2",
+    "external/ipfs_datasets": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+    "external/ipfs_kit": "6196017ca3df016c7159dce43af60f2a0d96a9ae"
+  },
+  "null_reason": "Portable archive binds selected source files; complete historical checkout was not reconstructed.",
+  "protocol_member": "recovery_history/candidate/papers/completion/law_to_action/benchmark/protocol.json",
+  "protocol_original_sha256": "c6bc0ca50d6c98b6bac1efa05ebd83fc93d4ed0765ac348f3b1ff5875c9aa4a2",
+  "protocol_portable_sha256": "c6bc0ca50d6c98b6bac1efa05ebd83fc93d4ed0765ac348f3b1ff5875c9aa4a2",
+  "recorded_original_schedule_file_sha256": "80366f623ecbf5883be07311f9e3981813c86f7cdfe802d66ee5388d7677fb9e",
+  "rows": 900,
+  "schedule_hash_scope": "Canonical schedule-list hash is distinct from hash of original schedule file.",
+  "seeds": [
+    104729,
+    104759,
+    104761
+  ],
+  "source_commit_reported": "d6127a257a433fabb8183180d82cc3b309040c47",
+  "split_families": {
+    "calibration": 6,
+    "development": 6,
+    "final": 18
+  },
+  "split_rows": {
+    "calibration": 180,
+    "development": 180,
+    "final": 540
+  }
+}

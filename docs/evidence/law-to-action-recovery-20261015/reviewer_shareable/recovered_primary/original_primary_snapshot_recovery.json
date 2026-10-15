@@ -1,0 +1,126 @@
+{
+  "absolute_original_bound_paths_currently_present": 0,
+  "all_output_and_adoption_snapshot_hashes_match": true,
+  "bound_path_query": "Filesystem metadata only; no active database or arbitrary referenced file opened.",
+  "files": [
+    {
+      "bytes": 1562,
+      "hash_matches": true,
+      "kind": "results",
+      "observed_sha256": "6d93675b11c2ca88bbc842d3368220e260fa5a30fdc790f0cf90b4ec9013f214",
+      "receipt_expected_sha256": "6d93675b11c2ca88bbc842d3368220e260fa5a30fdc790f0cf90b4ec9013f214",
+      "repository_path": "papers/completion/law_to_action/results/fixed_actions_admitted/claim_guidance.md"
+    },
+    {
+      "bytes": 1562,
+      "hash_matches": true,
+      "kind": "snapshot",
+      "observed_sha256": "6d93675b11c2ca88bbc842d3368220e260fa5a30fdc790f0cf90b4ec9013f214",
+      "receipt_expected_sha256": "6d93675b11c2ca88bbc842d3368220e260fa5a30fdc790f0cf90b4ec9013f214",
+      "repository_path": "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/claim_guidance.md"
+    },
+    {
+      "bytes": 6790,
+      "hash_matches": true,
+      "kind": "results",
+      "observed_sha256": "04939a405aa1a993bc803d2ab49de6ca56d2f1c9deece664d57005c3792488a4",
+      "receipt_expected_sha256": "04939a405aa1a993bc803d2ab49de6ca56d2f1c9deece664d57005c3792488a4",
+      "repository_path": "papers/completion/law_to_action/results/fixed_actions_admitted/cost_report.md"
+    },
+    {
+      "bytes": 6790,
+      "hash_matches": true,
+      "kind": "snapshot",
+      "observed_sha256": "04939a405aa1a993bc803d2ab49de6ca56d2f1c9deece664d57005c3792488a4",
+      "receipt_expected_sha256": "04939a405aa1a993bc803d2ab49de6ca56d2f1c9deece664d57005c3792488a4",
+      "repository_path": "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/cost_report.md"
+    },
+    {
+      "bytes": 616945,
+      "hash_matches": true,
+      "kind": "results",
+      "observed_sha256": "f4ab28bf555a24e57101b71b2bae9c99b427c7cd2619832e28d289ddfa8b3ec7",
+      "receipt_expected_sha256": "f4ab28bf555a24e57101b71b2bae9c99b427c7cd2619832e28d289ddfa8b3ec7",
+      "repository_path": "papers/completion/law_to_action/results/fixed_actions_admitted/costs.jsonl"
+    },
+    {
+      "bytes": 616945,
+      "hash_matches": true,
+      "kind": "snapshot",
+      "observed_sha256": "f4ab28bf555a24e57101b71b2bae9c99b427c7cd2619832e28d289ddfa8b3ec7",
+      "receipt_expected_sha256": "f4ab28bf555a24e57101b71b2bae9c99b427c7cd2619832e28d289ddfa8b3ec7",
+      "repository_path": "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/costs.jsonl"
+    },
+    {
+      "bytes": 878298,
+      "hash_matches": true,
+      "kind": "results",
+      "observed_sha256": "d71c777523e454559bbc4936b89127bb7658a10ba684df44156a848c457aea07",
+      "receipt_expected_sha256": "d71c777523e454559bbc4936b89127bb7658a10ba684df44156a848c457aea07",
+      "repository_path": "papers/completion/law_to_action/results/fixed_actions_admitted/raw.jsonl"
+    },
+    {
+      "bytes": 878298,
+      "hash_matches": true,
+      "kind": "snapshot",
+      "observed_sha256": "d71c777523e454559bbc4936b89127bb7658a10ba684df44156a848c457aea07",
+      "receipt_expected_sha256": "d71c777523e454559bbc4936b89127bb7658a10ba684df44156a848c457aea07",
+      "repository_path": "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/raw.jsonl"
+    },
+    {
+      "bytes": 598808,
+      "hash_matches": true,
+      "kind": "results",
+      "observed_sha256": "f51ab29616e6bbafb033ef859368d8617d9b4c31cffe7f05bce1652fe72fe826",
+      "receipt_expected_sha256": "f51ab29616e6bbafb033ef859368d8617d9b4c31cffe7f05bce1652fe72fe826",
+      "repository_path": "papers/completion/law_to_action/results/fixed_actions_admitted/resource_admission.json"
+    },
+    {
+      "bytes": 598808,
+      "hash_matches": true,
+      "kind": "snapshot",
+      "observed_sha256": "f51ab29616e6bbafb033ef859368d8617d9b4c31cffe7f05bce1652fe72fe826",
+      "receipt_expected_sha256": "f51ab29616e6bbafb033ef859368d8617d9b4c31cffe7f05bce1652fe72fe826",
+      "repository_path": "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/resource_admission.json"
+    },
+    {
+      "bytes": 2460883,
+      "hash_matches": true,
+      "kind": "results",
+      "observed_sha256": "fa85df20ee5179dc5f0e19631bbce863d79e1400aef576917afdc905dfbf6d5b",
+      "receipt_expected_sha256": "fa85df20ee5179dc5f0e19631bbce863d79e1400aef576917afdc905dfbf6d5b",
+      "repository_path": "papers/completion/law_to_action/results/fixed_actions_admitted/run_manifest.json"
+    },
+    {
+      "bytes": 2460883,
+      "hash_matches": true,
+      "kind": "snapshot",
+      "observed_sha256": "fa85df20ee5179dc5f0e19631bbce863d79e1400aef576917afdc905dfbf6d5b",
+      "receipt_expected_sha256": "fa85df20ee5179dc5f0e19631bbce863d79e1400aef576917afdc905dfbf6d5b",
+      "repository_path": "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/run_manifest.json"
+    },
+    {
+      "bytes": 172562,
+      "hash_matches": true,
+      "kind": "results",
+      "observed_sha256": "26122e64debe4e1fcc7354dca42227f8d244ebc74e5939c29092e53e97a39656",
+      "receipt_expected_sha256": "26122e64debe4e1fcc7354dca42227f8d244ebc74e5939c29092e53e97a39656",
+      "repository_path": "papers/completion/law_to_action/results/fixed_actions_admitted/summary.json"
+    },
+    {
+      "bytes": 172562,
+      "hash_matches": true,
+      "kind": "snapshot",
+      "observed_sha256": "26122e64debe4e1fcc7354dca42227f8d244ebc74e5939c29092e53e97a39656",
+      "receipt_expected_sha256": "26122e64debe4e1fcc7354dca42227f8d244ebc74e5939c29092e53e97a39656",
+      "repository_path": "papers/completion/law_to_action/receipts/snapshots/LA-029/operator-adoption-v1/summary.json"
+    }
+  ],
+  "null_reason_for_unrecovered_original_inputs": "Original absolute run locations are not reconstructed from portable path aliases.",
+  "original_run_bindings": 9933,
+  "receipt_sha256": "16c60728771f63e1ef2cbc37e7f23e6a97d197e7147bb187b3df7f01850fe595",
+  "receipt_task": "LA-029",
+  "scientific_executions": 0,
+  "source_checkout": "preserved maintenance checkout (author-only locator)",
+  "source_checkout_identity": "preserved maintenance checkout; no ancestry assertion"
+}

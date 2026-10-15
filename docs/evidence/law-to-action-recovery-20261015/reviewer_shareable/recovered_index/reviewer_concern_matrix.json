@@ -1,0 +1,311 @@
+{
+  "original_matrix_recovered": false,
+  "original_reviewer_ids": null,
+  "null_reason": "The accompanying author package is not located. This is a provisional mapping of the supplied task priorities, not a reconstructed reviewer document.",
+  "concerns": [
+    {
+      "local_concern_id": "P1-identity",
+      "original_reviewer_concern_id": null,
+      "reviewer_id_null_reason": "Exact author reviewer_concern_matrix.csv and feedback not recovered; local IDs are not original reviewer IDs.",
+      "concern": "LA-029 original identity and admitted output commitments",
+      "status": "resolved_within_historical_run",
+      "finding": "Seven requested result outputs and seven adoption copies match the recovered LA-029 receipt. Latest ledger mapping remains unavailable.",
+      "evidence": [
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/original_primary_snapshot_recovery.json",
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/primary_requested_path_mapping.csv"
+      ],
+      "evidence_levels": [
+        "recovered",
+        "hash-checked"
+      ],
+      "remaining_input": "Author ledger to bind recovered historical run to the latest manuscript.",
+      "scientific_replay_during_recovery": false,
+      "new_scientific_execution": false
+    },
+    {
+      "local_concern_id": "P1-recount",
+      "original_reviewer_concern_id": null,
+      "reviewer_id_null_reason": "Exact author reviewer_concern_matrix.csv and feedback not recovered; local IDs are not original reviewer IDs.",
+      "concern": "Primary design and paired-family analysis",
+      "status": "resolved_within_retained_analysis",
+      "finding": "900 scientific cells,30 families,60 cases,5 arms,3 seeds; all45 family-bootstrap contrasts reproduce. No forced manuscript matching. A1/A2 are inert controls.",
+      "evidence": [
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/verification.json",
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/split_analysis.json",
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/primary_recounts.csv",
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/reducer_function_equivalence.json"
+      ],
+      "evidence_levels": [
+        "recovered",
+        "hash-checked",
+        "recomputed"
+      ],
+      "remaining_input": null,
+      "scientific_replay_during_recovery": false,
+      "new_scientific_execution": false
+    },
+    {
+      "local_concern_id": "P1-originals",
+      "original_reviewer_concern_id": null,
+      "reviewer_id_null_reason": "Exact author reviewer_concern_matrix.csv and feedback not recovered; local IDs are not original reviewer IDs.",
+      "concern": "Original reducer inputs",
+      "status": "partial",
+      "finding": "All9933 bindings join;8120 byte-identical originals,1813 portable transformations. Both named alternative archives retain the1813 transformed commitments; no indexed original restoration.",
+      "evidence": [
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/original_reducer_binding_inventory.csv",
+        "../../law-to-action-author-package-search-20261015T095730Z/reviewer_shareable/original_input_verification.json"
+      ],
+      "evidence_levels": [
+        "recovered",
+        "hash-checked",
+        "recomputed"
+      ],
+      "remaining_input": "Existing original bytes for the1813 exact path/digest pairs in the author-only binding inventory; no reverse-generated substitutes.",
+      "scientific_replay_during_recovery": false,
+      "new_scientific_execution": false
+    },
+    {
+      "local_concern_id": "P1-effects",
+      "original_reviewer_concern_id": null,
+      "reviewer_id_null_reason": "Exact author reviewer_concern_matrix.csv and feedback not recovered; local IDs are not original reviewer IDs.",
+      "concern": "Independent primary effect evidence",
+      "status": "partial",
+      "finding": "Effect counters and observer source recovered. Raw filesystem/journal events and full integrity fields missing; algorithm runs in same worker. LA020 traces are separate diagnostics.",
+      "evidence": [
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/runtime_formal_audit.json",
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/terminal_status_records.csv"
+      ],
+      "evidence_levels": [
+        "recovered",
+        "hash-checked"
+      ],
+      "remaining_input": "Original primary raw effect observations/journals or explicit original retention/deletion records.",
+      "scientific_replay_during_recovery": false,
+      "new_scientific_execution": false
+    },
+    {
+      "local_concern_id": "P2-status",
+      "original_reviewer_concern_id": null,
+      "reviewer_id_null_reason": "Exact author reviewer_concern_matrix.csv and feedback not recovered; local IDs are not original reviewer IDs.",
+      "concern": "Terminal versus intermediate status and startup failures",
+      "status": "partial",
+      "finding": "753 explicit allow/success,147 deny/denial scientific pairs and2 separate undispatched starts. Other normalized terminal labels have zero observed records; missing intermediate outcomes stay null.",
+      "evidence": [
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/terminal_status_counts.json",
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/terminal_status_limits.json",
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/terminal_status_records.csv"
+      ],
+      "evidence_levels": [
+        "recovered",
+        "hash-checked",
+        "recomputed"
+      ],
+      "remaining_input": "Existing per-job intermediate dispositions with stage, timestamps and run/cell identities.",
+      "scientific_replay_during_recovery": false,
+      "new_scientific_execution": false
+    },
+    {
+      "local_concern_id": "P2-timing",
+      "original_reviewer_concern_id": null,
+      "reviewer_id_null_reason": "Exact author reviewer_concern_matrix.csv and feedback not recovered; local IDs are not original reviewer IDs.",
+      "concern": "LA018 timing and LA020 trace recovery",
+      "status": "resolved_within_retained_diagnostics",
+      "finding": "48 LA018 development timing rows recomputed without double-counting nested clocks; twelve-step LA020 trace and7 raw diagnostic checker records recovered. No new solver checking.",
+      "evidence": [
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/LA018_timing_reanalysis.json",
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/LA018_phase_timings.csv",
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/LA020_checker_records.json"
+      ],
+      "evidence_levels": [
+        "recovered",
+        "hash-checked",
+        "recomputed"
+      ],
+      "remaining_input": null,
+      "scientific_replay_during_recovery": false,
+      "new_scientific_execution": false
+    },
+    {
+      "local_concern_id": "P3-exclusions",
+      "original_reviewer_concern_id": null,
+      "reviewer_id_null_reason": "Exact author reviewer_concern_matrix.csv and feedback not recovered; local IDs are not original reviewer IDs.",
+      "concern": "Ablation exclusions and actual model controls",
+      "status": "partial",
+      "finding": "LA015/019 resource exclusion and LA016 blockers recovered. LA017 unadmitted classification preserved; its specific original resource rejection reason remains unavailable. LA016 is withdrawn/not_started accounting. Formal-job-only LA017 comparison remains unadmitted; A4-v-A3 changes multiple checks.",
+      "evidence": [
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/historical_diagnostics_recovery.json",
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/historical_protocol_audit.json"
+      ],
+      "evidence_levels": [
+        "reported",
+        "recovered",
+        "hash-checked"
+      ],
+      "remaining_input": "Original LA017 rejection receipt/reason if retained; any existing admitted formal-job-only protocol/run and separate qualified actual-model prompt/RAG identities. Otherwise leave causal claim unsupported.",
+      "scientific_replay_during_recovery": false,
+      "new_scientific_execution": false
+    },
+    {
+      "local_concern_id": "P4-components",
+      "original_reviewer_concern_id": null,
+      "reviewer_id_null_reason": "Exact author reviewer_concern_matrix.csv and feedback not recovered; local IDs are not original reviewer IDs.",
+      "concern": "C1-C6 separately included component studies",
+      "status": "unresolved",
+      "finding": "Exact ledger/Publicus identities absent. Numerical recounts, splits, predictions, selected/rejected checkpoints, training/selection/native-check/cost evidence remain null. No pooling or protected-final access.",
+      "evidence": [
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/component_recovery_status.json",
+        "../../law-to-action-author-package-search-20261015T095730Z/reviewer_shareable/author_package_search_status.json"
+      ],
+      "evidence_levels": [
+        "reported requirements only"
+      ],
+      "remaining_input": "Complete author ledger and exact immutable component locators plus permitted typed-owner export if applicable.",
+      "scientific_replay_during_recovery": false,
+      "new_scientific_execution": false
+    },
+    {
+      "local_concern_id": "P5-native",
+      "original_reviewer_concern_id": null,
+      "reviewer_id_null_reason": "Exact author reviewer_concern_matrix.csv and feedback not recovered; local IDs are not original reviewer IDs.",
+      "concern": "Runtime route and native verification boundaries",
+      "status": "partial",
+      "finding": "Exact-pin native source access recovered, superseding earlier missing-source finding. CID integrity differs from producer authentication; signed UCAN is separate. Caller roots/clock and consumption boundaries are explicit. Runtime import attestations/full primary payloads still missing.",
+      "evidence": [
+        "../../law-to-action-author-package-search-20261015T095730Z/reviewer_shareable/consolidated_route_check_matrix.csv",
+        "../../law-to-action-evidence-followup-20261015T093458Z/reviewer_shareable/native_verifier_boundary.json",
+        "../../law-to-action-author-package-search-20261015T095730Z/reviewer_shareable/consolidated_evidence_notes.json"
+      ],
+      "evidence_levels": [
+        "recovered",
+        "hash-checked",
+        "source inference"
+      ],
+      "remaining_input": "Existing per-worker imported-module hashes/config and complete primary checker/receipt/effect records; no active database access.",
+      "scientific_replay_during_recovery": false,
+      "new_scientific_execution": false
+    },
+    {
+      "local_concern_id": "P5-formal",
+      "original_reviewer_concern_id": null,
+      "reviewer_id_null_reason": "Exact author reviewer_concern_matrix.csv and feedback not recovered; local IDs are not original reviewer IDs.",
+      "concern": "QF_BOOL, Lean and TLA+ proof scope",
+      "status": "partial",
+      "finding": "Exact CNF and retained diagnostic checker records recovered. Lean/TLA sources and summary receipts do not establish raw builds, invariant exploration or handler refinement. No new build or model check performed.",
+      "evidence": [
+        "../../law-to-action-author-package-search-20261015T095730Z/reviewer_shareable/consolidated_formal_job_table.csv",
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/formal_source_receipt_audit.json",
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/LA020_checker_records.json"
+      ],
+      "evidence_levels": [
+        "reported",
+        "recovered",
+        "hash-checked",
+        "source inference"
+      ],
+      "remaining_input": "Original lake build output/exit/version and source hashes, TLC cfg/model/invariant/trace receipt, and actual handler mapping if they exist.",
+      "scientific_replay_during_recovery": false,
+      "new_scientific_execution": false
+    },
+    {
+      "local_concern_id": "P6-source",
+      "original_reviewer_concern_id": null,
+      "reviewer_id_null_reason": "Exact author reviewer_concern_matrix.csv and feedback not recovered; local IDs are not original reviewer IDs.",
+      "concern": "Statute-to-IR source fidelity and qualified review",
+      "status": "partial",
+      "finding": "One retained development example has quoted spans, field maps and declared losses; empty elements reflect an upstream extraction limitation. Full source context and genuine qualified human review not recovered.",
+      "evidence": [
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/retained_source_example_audit.json",
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/source_fidelity_audit.json"
+      ],
+      "evidence_levels": [
+        "reported",
+        "recovered",
+        "hash-checked"
+      ],
+      "remaining_input": "Full original versioned statute source and any existing signed/dated qualified human review tied to source/IR hashes.",
+      "scientific_replay_during_recovery": false,
+      "new_scientific_execution": false
+    },
+    {
+      "local_concern_id": "P6-CVE",
+      "original_reviewer_concern_id": null,
+      "reviewer_id_null_reason": "Exact author reviewer_concern_matrix.csv and feedback not recovered; local IDs are not original reviewer IDs.",
+      "concern": "CVE polarity, applicability and effect correlation",
+      "status": "partial",
+      "finding": "LA006 reports108 unknown labels; not newly recounted. Receipt-pinned development source differences and two separate export traces do not establish independently labeled native vulnerable/fixed/unrelated controls.",
+      "evidence": [
+        "../../law-to-action-evidence-followup-20261015T093458Z/reviewer_shareable/cve_specificity_boundary.json",
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/LA020_checker_records.json"
+      ],
+      "evidence_levels": [
+        "reported",
+        "recovered",
+        "hash-checked"
+      ],
+      "remaining_input": "Existing independently adjudicated control manifest with polarity/applicability provenance and original native sink observations.",
+      "scientific_replay_during_recovery": false,
+      "new_scientific_execution": false
+    },
+    {
+      "local_concern_id": "P7-RQ3",
+      "original_reviewer_concern_id": null,
+      "reviewer_id_null_reason": "Exact author reviewer_concern_matrix.csv and feedback not recovered; local IDs are not original reviewer IDs.",
+      "concern": "Historical RQ3 conflict",
+      "status": "partial",
+      "finding": "Loose older synthesis prose conflicts with archived withdrawal and original LA016 blockers. No matching admitted generated-code run recovered; RQ3 stays withdrawn/not_started. Latest23-page baseline is unavailable.",
+      "evidence": [
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/historical_diagnostics_recovery.json",
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/historical_protocol_audit.json"
+      ],
+      "evidence_levels": [
+        "reported",
+        "recovered",
+        "hash-checked"
+      ],
+      "remaining_input": "Exact revised source and ledger protocol identities; only an original matching admitted run could change execution status.",
+      "scientific_replay_during_recovery": false,
+      "new_scientific_execution": false
+    },
+    {
+      "local_concern_id": "D-costs",
+      "original_reviewer_concern_id": null,
+      "reviewer_id_null_reason": "Exact author reviewer_concern_matrix.csv and feedback not recovered; local IDs are not original reviewer IDs.",
+      "concern": "Original and recovery resource accounting",
+      "status": "partial",
+      "finding": "Original science CPU1608.698691s plus failed-start0.118787s kept separate; LA018 nested clocks not summed twice. Missing detailed costs/tokens remain null. Current analysis receipts distinguish observed process memory from attribution uncertainty.",
+      "evidence": [
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/cost_accounting.json",
+        "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/LA018_timing_reanalysis.json",
+        "recovery_operation_accounting.json"
+      ],
+      "evidence_levels": [
+        "reported",
+        "recovered",
+        "hash-checked",
+        "recomputed"
+      ],
+      "remaining_input": "Any retained primary phase/currency/usage records and exact component accounting locators; no invented savings.",
+      "scientific_replay_during_recovery": false,
+      "new_scientific_execution": false
+    },
+    {
+      "local_concern_id": "D-manuscript",
+      "original_reviewer_concern_id": null,
+      "reviewer_id_null_reason": "Exact author reviewer_concern_matrix.csv and feedback not recovered; local IDs are not original reviewer IDs.",
+      "concern": "Current manuscript patch and exact reviewer matrix",
+      "status": "unresolved",
+      "finding": "Proposed insertion text only; baseline hash and original reviewer IDs null. No source replacement, application or compilation asserted.",
+      "evidence": [
+        "manuscript_patch_status.json",
+        "proposed_recovery_scope.tex",
+        "../../law-to-action-author-package-search-20261015T095730Z/reviewer_shareable/author_package_search_status.json"
+      ],
+      "evidence_levels": [
+        "newly written evidence-supported proposal"
+      ],
+      "remaining_input": "Local complete author package with full recovery prompt,revision notes,ledger,reviewer matrix/feedback,current TeX and includes.",
+      "scientific_replay_during_recovery": false,
+      "new_scientific_execution": false
+    }
+  ]
+}

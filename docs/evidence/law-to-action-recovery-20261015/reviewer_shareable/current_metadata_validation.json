@@ -1,0 +1,1170 @@
+{
+  "archive_access": false,
+  "checks": [
+    {
+      "check": "claim_matrix_nonempty",
+      "passed": true
+    },
+    {
+      "check": "reviewer_and_claim_json_agree",
+      "passed": true
+    },
+    {
+      "check": "original_reviewer_matrix_not_claimed",
+      "passed": true
+    },
+    {
+      "check": "original_reviewer_ids_remain_null",
+      "passed": true
+    },
+    {
+      "check": "claim_to_evidence_matrix.csv:columns",
+      "passed": true
+    },
+    {
+      "check": "claim_to_evidence_matrix.csv:row_count",
+      "passed": true
+    },
+    {
+      "check": "claim_to_evidence_matrix.csv:typed_values_match_json",
+      "passed": true
+    },
+    {
+      "check": "reviewer_concern_matrix.csv:columns",
+      "passed": true
+    },
+    {
+      "check": "reviewer_concern_matrix.csv:row_count",
+      "passed": true
+    },
+    {
+      "check": "reviewer_concern_matrix.csv:typed_values_match_json",
+      "passed": true
+    },
+    {
+      "check": "local_claim_ids_unique",
+      "passed": true
+    },
+    {
+      "check": "reviewer_id_null_with_reason:P1-identity",
+      "passed": true
+    },
+    {
+      "check": "no_new_science_claim:P1-identity",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P1-identity: recovered_primary/original_primary_snapshot_recovery.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P1-identity: recovered_primary/primary_requested_path_mapping.csv",
+      "passed": true
+    },
+    {
+      "check": "reviewer_id_null_with_reason:P1-recount",
+      "passed": true
+    },
+    {
+      "check": "no_new_science_claim:P1-recount",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P1-recount: recovered_primary/verification.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P1-recount: recovered_primary/split_analysis.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P1-recount: recovered_primary/primary_recounts.csv",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P1-recount: recovered_primary/reducer_function_equivalence.json",
+      "passed": true
+    },
+    {
+      "check": "reviewer_id_null_with_reason:P1-originals",
+      "passed": true
+    },
+    {
+      "check": "no_new_science_claim:P1-originals",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P1-originals: recovered_primary/original_reducer_binding_inventory.csv",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P1-originals: continuation/original_input_verification.json",
+      "passed": true
+    },
+    {
+      "check": "reviewer_id_null_with_reason:P1-effects",
+      "passed": true
+    },
+    {
+      "check": "no_new_science_claim:P1-effects",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P1-effects: recovered_primary/runtime_formal_audit.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P1-effects: recovered_primary/terminal_status_records.csv",
+      "passed": true
+    },
+    {
+      "check": "reviewer_id_null_with_reason:P2-status",
+      "passed": true
+    },
+    {
+      "check": "no_new_science_claim:P2-status",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P2-status: recovered_primary/terminal_status_counts.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P2-status: recovered_primary/terminal_status_limits.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P2-status: recovered_primary/terminal_status_records.csv",
+      "passed": true
+    },
+    {
+      "check": "reviewer_id_null_with_reason:P2-timing",
+      "passed": true
+    },
+    {
+      "check": "no_new_science_claim:P2-timing",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P2-timing: recovered_primary/LA018_timing_reanalysis.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P2-timing: recovered_primary/LA018_phase_timings.csv",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P2-timing: recovered_primary/LA020_checker_records.json",
+      "passed": true
+    },
+    {
+      "check": "reviewer_id_null_with_reason:P3-exclusions",
+      "passed": true
+    },
+    {
+      "check": "no_new_science_claim:P3-exclusions",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P3-exclusions: recovered_primary/historical_diagnostics_recovery.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P3-exclusions: recovered_primary/historical_protocol_audit.json",
+      "passed": true
+    },
+    {
+      "check": "reviewer_id_null_with_reason:P4-components",
+      "passed": true
+    },
+    {
+      "check": "no_new_science_claim:P4-components",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P4-components: recovered_primary/component_recovery_status.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P4-components: continuation/author_package_search_status.json",
+      "passed": true
+    },
+    {
+      "check": "reviewer_id_null_with_reason:P5-native",
+      "passed": true
+    },
+    {
+      "check": "no_new_science_claim:P5-native",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P5-native: continuation/consolidated_route_check_matrix.csv",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P5-native: recovered_followup/native_verifier_boundary.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P5-native: continuation/consolidated_evidence_notes.json",
+      "passed": true
+    },
+    {
+      "check": "reviewer_id_null_with_reason:P5-formal",
+      "passed": true
+    },
+    {
+      "check": "no_new_science_claim:P5-formal",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P5-formal: continuation/consolidated_formal_job_table.csv",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P5-formal: recovered_primary/formal_source_receipt_audit.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P5-formal: recovered_primary/LA020_checker_records.json",
+      "passed": true
+    },
+    {
+      "check": "reviewer_id_null_with_reason:P6-source",
+      "passed": true
+    },
+    {
+      "check": "no_new_science_claim:P6-source",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P6-source: source_context_validation.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P6-source: pinned_statute_fetch.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P6-source: recovered_primary/retained_source_example_audit.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P6-source: recovered_primary/source_fidelity_audit.json",
+      "passed": true
+    },
+    {
+      "check": "reviewer_id_null_with_reason:P6-CVE",
+      "passed": true
+    },
+    {
+      "check": "no_new_science_claim:P6-CVE",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P6-CVE: recovered_followup/cve_specificity_boundary.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P6-CVE: recovered_primary/LA020_checker_records.json",
+      "passed": true
+    },
+    {
+      "check": "reviewer_id_null_with_reason:P7-RQ3",
+      "passed": true
+    },
+    {
+      "check": "no_new_science_claim:P7-RQ3",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P7-RQ3: recovered_primary/historical_diagnostics_recovery.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:P7-RQ3: recovered_primary/historical_protocol_audit.json",
+      "passed": true
+    },
+    {
+      "check": "reviewer_id_null_with_reason:D-costs",
+      "passed": true
+    },
+    {
+      "check": "no_new_science_claim:D-costs",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:D-costs: recovered_primary/cost_accounting.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:D-costs: recovered_primary/LA018_timing_reanalysis.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:D-costs: recovery_operation_accounting.json",
+      "passed": true
+    },
+    {
+      "check": "reviewer_id_null_with_reason:D-manuscript",
+      "passed": true
+    },
+    {
+      "check": "no_new_science_claim:D-manuscript",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:D-manuscript: manuscript_patch_status.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:D-manuscript: proposed_recovery_scope.tex",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "matrix:D-manuscript: continuation/author_package_search_status.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "deliverable:Current findings: ../RECOVERY_REPORT.txt",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "deliverable:Exact artifact inventory: artifact_inventory.csv",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "deliverable:Run inventory: recovered_primary/primary_run_inventory.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "deliverable:Primary recount: recovered_primary/primary_recounts.csv",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "deliverable:Component recount/status: recovered_primary/component_recovery_status.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "deliverable:Terminal dispositions: recovered_primary/terminal_status_counts.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "deliverable:Route/check table: continuation/consolidated_route_check_matrix.csv",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "deliverable:Formal-job table: continuation/consolidated_formal_job_table.csv",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "deliverable:Original costs: recovered_primary/cost_accounting.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "deliverable:Recovery costs: recovery_operation_accounting.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "deliverable:Claim/reviewer mapping: claim_to_evidence_matrix.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "deliverable:Remaining inputs: remaining_requests.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "deliverable:Missing-work plan: minimal_missing_work_plan.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "deliverable:Manuscript proposal: proposed_manuscript.patch",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "deliverable:Input lineage followup: continuation/original_input_verification.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "deliverable:Author-package search: continuation/author_package_search_status.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "deliverable:Recovered original statute: pinned_statute_fetch.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "deliverable:Deferred source comparison: source_context_validation.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "deliverable:Superseded source findings: source_status_supersession.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "deliverable:Package validation: package_validation.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "deliverable:Physical package assembly: package_assembly_summary.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "deliverable:LA-017 rejection locator followup: recovered_locator_followup/la017_rejection_locator_audit.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "deliverable:Formal build/model-check receipt followup: recovered_locator_followup/formal_receipt_locator_followup.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "deliverable:Historical discrepancy inventory: recovered_primary/unresolved_discrepancies.json",
+      "passed": true
+    },
+    {
+      "check": "reference_is_ordinary_file",
+      "detail": "deliverable:Supervisor interface discovery: recovered_primary/supervisor_interface_summary.json",
+      "passed": true
+    },
+    {
+      "check": "component_recovery_status.csv:columns",
+      "passed": true
+    },
+    {
+      "check": "component_recovery_status.csv:row_count",
+      "passed": true
+    },
+    {
+      "check": "component_recovery_status.csv:typed_values_match_json",
+      "passed": true
+    },
+    {
+      "check": "component_status_matches_retained_metadata",
+      "passed": true
+    },
+    {
+      "check": "six_distinct_unjoined_components",
+      "passed": true
+    },
+    {
+      "check": "component_fields_null_with_reason:C1",
+      "passed": true
+    },
+    {
+      "check": "component_no_execution_pooling_or_protected_access:C1",
+      "passed": true
+    },
+    {
+      "check": "component_fields_null_with_reason:C2",
+      "passed": true
+    },
+    {
+      "check": "component_no_execution_pooling_or_protected_access:C2",
+      "passed": true
+    },
+    {
+      "check": "component_fields_null_with_reason:C3",
+      "passed": true
+    },
+    {
+      "check": "component_no_execution_pooling_or_protected_access:C3",
+      "passed": true
+    },
+    {
+      "check": "component_fields_null_with_reason:C4",
+      "passed": true
+    },
+    {
+      "check": "component_no_execution_pooling_or_protected_access:C4",
+      "passed": true
+    },
+    {
+      "check": "component_fields_null_with_reason:C5",
+      "passed": true
+    },
+    {
+      "check": "component_no_execution_pooling_or_protected_access:C5",
+      "passed": true
+    },
+    {
+      "check": "component_fields_null_with_reason:C6",
+      "passed": true
+    },
+    {
+      "check": "component_no_execution_pooling_or_protected_access:C6",
+      "passed": true
+    },
+    {
+      "check": "current_design_matches_retained_metadata",
+      "passed": true
+    },
+    {
+      "check": "retained_design_900_30_60_5_3",
+      "passed": true
+    },
+    {
+      "check": "retained_design_records_all_45_contrasts",
+      "passed": true
+    },
+    {
+      "check": "retained_verification_agrees_on_design_and_45",
+      "passed": true
+    },
+    {
+      "check": "retained_offline_verification_not_scientific_execution",
+      "passed": true
+    },
+    {
+      "check": "fetch_receipt_records_successful_admission_and_recovery",
+      "passed": true
+    },
+    {
+      "check": "fetch_receipt_byte_counts_agree",
+      "passed": true
+    },
+    {
+      "check": "fetch_receipt_recorded_digests_agree",
+      "passed": true
+    },
+    {
+      "check": "fetch_scope_not_new_science_or_substitution",
+      "passed": true
+    },
+    {
+      "check": "supersession_matches_recorded_fetch",
+      "passed": true
+    },
+    {
+      "check": "source_comparison_deferred_not_run",
+      "passed": true
+    },
+    {
+      "check": "no_new_source_text_created",
+      "passed": true
+    },
+    {
+      "check": "unexecuted_source_checks_are_null_with_reasons",
+      "passed": true
+    },
+    {
+      "check": "eleven_fields_five_spans_from_metadata",
+      "passed": true
+    },
+    {
+      "check": "supersession_field_count_agrees",
+      "passed": true
+    },
+    {
+      "check": "supersession_preserves_deferred_comparison",
+      "passed": true
+    },
+    {
+      "check": "source_recovery_not_legal_or_component_validation",
+      "passed": true
+    },
+    {
+      "check": "manuscript_unapplied_and_baseline_unknown",
+      "passed": true
+    },
+    {
+      "check": "new_file_patch_exactly_encodes_proposed_tex",
+      "passed": true
+    },
+    {
+      "check": "manuscript_preserves_field_correction_and_deferred_work",
+      "passed": true
+    },
+    {
+      "check": "artifact_requests_do_not_request_new_experiments",
+      "passed": true
+    },
+    {
+      "check": "conditional_work_not_current_experiment_authorization",
+      "passed": true
+    },
+    {
+      "check": "selected_current_metadata_private_marker_check",
+      "passed": true
+    }
+  ],
+  "database_access": false,
+  "failures": [],
+  "finished_utc": "2026-10-15T11:13:31.423738+00:00",
+  "interpretation_limits": [
+    "Retained component CSV uses reordered columns and blank cells for JSON null; current claim/reviewer CSV matrices use literal null. Both are checked against their JSON values.",
+    "Design and all-45 checks compare existing metadata assertions; no contrast or outcome was recalculated.",
+    "Recorded PDF digests are compared as strings from receipts; the PDF payload was not reopened or rehashed.",
+    "Reference existence does not verify scientific validity or payload contents.",
+    "Private-marker checks cover only selected current top-level metadata, not every copied artifact or all possible sensitive information.",
+    "Missing artifact_inventory.csv or package_validation.json is pending only while explicitly listed here; not a completed-reference pass."
+  ],
+  "limits": {
+    "per_file_bytes": 262144,
+    "total_selected_metadata_bytes": 2097152
+  },
+  "metadata_digests_recorded": true,
+  "new_scientific_execution": false,
+  "observed_selected_metadata_bytes_read": 107724,
+  "original_artifacts_modified": false,
+  "pdf_opened_or_extracted": false,
+  "pending_references": [],
+  "reference_checks": [
+    {
+      "content_opened": false,
+      "owner": "matrix:P1-identity",
+      "reference": "recovered_primary/original_primary_snapshot_recovery.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P1-identity",
+      "reference": "recovered_primary/primary_requested_path_mapping.csv",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P1-recount",
+      "reference": "recovered_primary/verification.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P1-recount",
+      "reference": "recovered_primary/split_analysis.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P1-recount",
+      "reference": "recovered_primary/primary_recounts.csv",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P1-recount",
+      "reference": "recovered_primary/reducer_function_equivalence.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P1-originals",
+      "reference": "recovered_primary/original_reducer_binding_inventory.csv",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P1-originals",
+      "reference": "continuation/original_input_verification.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P1-effects",
+      "reference": "recovered_primary/runtime_formal_audit.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P1-effects",
+      "reference": "recovered_primary/terminal_status_records.csv",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P2-status",
+      "reference": "recovered_primary/terminal_status_counts.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P2-status",
+      "reference": "recovered_primary/terminal_status_limits.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P2-status",
+      "reference": "recovered_primary/terminal_status_records.csv",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P2-timing",
+      "reference": "recovered_primary/LA018_timing_reanalysis.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P2-timing",
+      "reference": "recovered_primary/LA018_phase_timings.csv",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P2-timing",
+      "reference": "recovered_primary/LA020_checker_records.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P3-exclusions",
+      "reference": "recovered_primary/historical_diagnostics_recovery.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P3-exclusions",
+      "reference": "recovered_primary/historical_protocol_audit.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P4-components",
+      "reference": "recovered_primary/component_recovery_status.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P4-components",
+      "reference": "continuation/author_package_search_status.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P5-native",
+      "reference": "continuation/consolidated_route_check_matrix.csv",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P5-native",
+      "reference": "recovered_followup/native_verifier_boundary.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P5-native",
+      "reference": "continuation/consolidated_evidence_notes.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P5-formal",
+      "reference": "continuation/consolidated_formal_job_table.csv",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P5-formal",
+      "reference": "recovered_primary/formal_source_receipt_audit.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P5-formal",
+      "reference": "recovered_primary/LA020_checker_records.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P6-source",
+      "reference": "source_context_validation.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P6-source",
+      "reference": "pinned_statute_fetch.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P6-source",
+      "reference": "recovered_primary/retained_source_example_audit.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P6-source",
+      "reference": "recovered_primary/source_fidelity_audit.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P6-CVE",
+      "reference": "recovered_followup/cve_specificity_boundary.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P6-CVE",
+      "reference": "recovered_primary/LA020_checker_records.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P7-RQ3",
+      "reference": "recovered_primary/historical_diagnostics_recovery.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:P7-RQ3",
+      "reference": "recovered_primary/historical_protocol_audit.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:D-costs",
+      "reference": "recovered_primary/cost_accounting.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:D-costs",
+      "reference": "recovered_primary/LA018_timing_reanalysis.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:D-costs",
+      "reference": "recovery_operation_accounting.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:D-manuscript",
+      "reference": "manuscript_patch_status.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:D-manuscript",
+      "reference": "proposed_recovery_scope.tex",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "matrix:D-manuscript",
+      "reference": "continuation/author_package_search_status.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "deliverable:Current findings",
+      "reference": "../RECOVERY_REPORT.txt",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "deliverable:Exact artifact inventory",
+      "reference": "artifact_inventory.csv",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "deliverable:Run inventory",
+      "reference": "recovered_primary/primary_run_inventory.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "deliverable:Primary recount",
+      "reference": "recovered_primary/primary_recounts.csv",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "deliverable:Component recount/status",
+      "reference": "recovered_primary/component_recovery_status.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "deliverable:Terminal dispositions",
+      "reference": "recovered_primary/terminal_status_counts.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "deliverable:Route/check table",
+      "reference": "continuation/consolidated_route_check_matrix.csv",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "deliverable:Formal-job table",
+      "reference": "continuation/consolidated_formal_job_table.csv",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "deliverable:Original costs",
+      "reference": "recovered_primary/cost_accounting.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "deliverable:Recovery costs",
+      "reference": "recovery_operation_accounting.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "deliverable:Claim/reviewer mapping",
+      "reference": "claim_to_evidence_matrix.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "deliverable:Remaining inputs",
+      "reference": "remaining_requests.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "deliverable:Missing-work plan",
+      "reference": "minimal_missing_work_plan.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "deliverable:Manuscript proposal",
+      "reference": "proposed_manuscript.patch",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "deliverable:Input lineage followup",
+      "reference": "continuation/original_input_verification.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "deliverable:Author-package search",
+      "reference": "continuation/author_package_search_status.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "deliverable:Recovered original statute",
+      "reference": "pinned_statute_fetch.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "deliverable:Deferred source comparison",
+      "reference": "source_context_validation.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "deliverable:Superseded source findings",
+      "reference": "source_status_supersession.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "deliverable:Package validation",
+      "reference": "package_validation.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "deliverable:Physical package assembly",
+      "reference": "package_assembly_summary.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "deliverable:LA-017 rejection locator followup",
+      "reference": "recovered_locator_followup/la017_rejection_locator_audit.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "deliverable:Formal build/model-check receipt followup",
+      "reference": "recovered_locator_followup/formal_receipt_locator_followup.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "deliverable:Historical discrepancy inventory",
+      "reference": "recovered_primary/unresolved_discrepancies.json",
+      "status": "present"
+    },
+    {
+      "content_opened": false,
+      "owner": "deliverable:Supervisor interface discovery",
+      "reference": "recovered_primary/supervisor_interface_summary.json",
+      "status": "present"
+    }
+  ],
+  "schema": "law-to-action-current-metadata-validation/v1",
+  "scientific_payloads_opened_or_rehashed": false,
+  "scientific_statistics_recalculated": false,
+  "scope": "Selected small metadata agreement, retained reported counts, current source status, local reference existence, and unapplied new-file patch encoding only.",
+  "selected_metadata_inputs": {
+    "reviewer_shareable/claim_to_evidence_matrix.csv": {
+      "bytes": 10910,
+      "hash_scope": "selected metadata bytes only; no scientific payload hash",
+      "sha256": "65d489b2b06ec99ce3c8a29587cd803e56a0ff7160dc8da08a8c15bf64311398"
+    },
+    "reviewer_shareable/claim_to_evidence_matrix.json": {
+      "bytes": 15633,
+      "hash_scope": "selected metadata bytes only; no scientific payload hash",
+      "sha256": "f23f7023c757aec797da9e3dfa6c5a25f637b8143e2226e2e82853de76efeccd"
+    },
+    "reviewer_shareable/component_recovery_status.csv": {
+      "bytes": 1780,
+      "hash_scope": "selected metadata bytes only; no scientific payload hash",
+      "sha256": "c7e23f346f4edc5e46af7e88755baa75f2797cfe6c295cc6b0f18fd6ff7f9bb9"
+    },
+    "reviewer_shareable/component_recovery_status.json": {
+      "bytes": 4994,
+      "hash_scope": "selected metadata bytes only; no scientific payload hash",
+      "sha256": "d7597e1bf0a8055c75cb4f3a4ea6e1d3c4b056effa31daf86770057d263539a3"
+    },
+    "reviewer_shareable/deliverable_index.json": {
+      "bytes": 4740,
+      "hash_scope": "selected metadata bytes only; no scientific payload hash",
+      "sha256": "b0be37feeb3905edc563b77ec4957e56fca27592a35e9e7c0da9db18dadde121"
+    },
+    "reviewer_shareable/manuscript_patch_status.json": {
+      "bytes": 1095,
+      "hash_scope": "selected metadata bytes only; no scientific payload hash",
+      "sha256": "c0e69f7276773b191b55412208d808cf6a142d9012e53a9c54953681100f644a"
+    },
+    "reviewer_shareable/minimal_missing_work_plan.json": {
+      "bytes": 3499,
+      "hash_scope": "selected metadata bytes only; no scientific payload hash",
+      "sha256": "300c55498db02ab5a500f710803ba03f3578ff3e3d3d043d1beffeac9fce9bd2"
+    },
+    "reviewer_shareable/pinned_statute_fetch.json": {
+      "bytes": 2408,
+      "hash_scope": "selected metadata bytes only; no scientific payload hash",
+      "sha256": "12a1afb8eb8df63ca12e5ca213eb90e7149e727618e020b57ce9ac6bda3cce3f"
+    },
+    "reviewer_shareable/primary_design.json": {
+      "bytes": 2281,
+      "hash_scope": "selected metadata bytes only; no scientific payload hash",
+      "sha256": "7449c421521055978a20ae81c98f6b7679eaa93acb92f29011936572ee2f4510"
+    },
+    "reviewer_shareable/proposed_manuscript.patch": {
+      "bytes": 4948,
+      "hash_scope": "selected metadata bytes only; no scientific payload hash",
+      "sha256": "51df82e60c37f17bd5741cc823da5acab9b9bf8e25d1f9ac7400948695333798"
+    },
+    "reviewer_shareable/proposed_recovery_scope.tex": {
+      "bytes": 4806,
+      "hash_scope": "selected metadata bytes only; no scientific payload hash",
+      "sha256": "9302764ba6271e8297d8c6bfd2e6a42c117aeac5484dc7a039ac92c2c8f1aba4"
+    },
+    "reviewer_shareable/recovered_primary/component_recovery_status.json": {
+      "bytes": 4994,
+      "hash_scope": "selected metadata bytes only; no scientific payload hash",
+      "sha256": "d7597e1bf0a8055c75cb4f3a4ea6e1d3c4b056effa31daf86770057d263539a3"
+    },
+    "reviewer_shareable/recovered_primary/primary_design.json": {
+      "bytes": 2281,
+      "hash_scope": "selected metadata bytes only; no scientific payload hash",
+      "sha256": "7449c421521055978a20ae81c98f6b7679eaa93acb92f29011936572ee2f4510"
+    },
+    "reviewer_shareable/recovered_primary/verification.json": {
+      "bytes": 917,
+      "hash_scope": "selected metadata bytes only; no scientific payload hash",
+      "sha256": "b43af22d037f5291127f2a68abf4eca1849ca78b13a96bdfe5481af29f8fe03b"
+    },
+    "reviewer_shareable/remaining_requests.json": {
+      "bytes": 4586,
+      "hash_scope": "selected metadata bytes only; no scientific payload hash",
+      "sha256": "3dfdb00c9edf8964029cc97f7885f65e0260fbd047fcb98530e5f375db962944"
+    },
+    "reviewer_shareable/reviewer_concern_matrix.csv": {
+      "bytes": 10910,
+      "hash_scope": "selected metadata bytes only; no scientific payload hash",
+      "sha256": "65d489b2b06ec99ce3c8a29587cd803e56a0ff7160dc8da08a8c15bf64311398"
+    },
+    "reviewer_shareable/reviewer_concern_matrix.json": {
+      "bytes": 16506,
+      "hash_scope": "selected metadata bytes only; no scientific payload hash",
+      "sha256": "919e9ec625e79e804093f4659be912cbed3513e7fa896e275f7b5da35b8ac694"
+    },
+    "reviewer_shareable/source_context_validation.json": {
+      "bytes": 6793,
+      "hash_scope": "selected metadata bytes only; no scientific payload hash",
+      "sha256": "dcb8c87c62f44b263adaffd73596e2f5fa55b3bd58ee6fe8941797a657687e40"
+    },
+    "reviewer_shareable/source_status_supersession.json": {
+      "bytes": 3643,
+      "hash_scope": "selected metadata bytes only; no scientific payload hash",
+      "sha256": "ca6545b88bb1bc1f8463e99ccd6488eb01acda7332d771231bd68205ca0e358e"
+    }
+  },
+  "started_utc": "2026-10-15T11:13:31.421161+00:00",
+  "status": "passed"
+}

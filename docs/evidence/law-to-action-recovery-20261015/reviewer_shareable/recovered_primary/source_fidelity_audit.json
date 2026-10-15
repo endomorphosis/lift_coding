@@ -1,0 +1,289 @@
+{
+  "archive_integrity_checks": {
+    "constructed_control_stdout_matches_receipt": true,
+    "cve_fixed_source_receipt_pairs_checked": 2,
+    "cve_hash_and_length_matches": 2,
+    "handoff_summary_pin_checks": 2,
+    "handoff_summary_pin_matches": 2,
+    "legal_source_files_checked": 6,
+    "legal_source_hashes_matched": 6
+  },
+  "audience": "reviewer_shareable",
+  "claim_identity_mapping": {
+    "C1": {
+      "evidence_join": null,
+      "identity": null,
+      "null_reason": "Required author evidence ledger and concern matrix are unavailable; archival task/family identifiers are not guessed claim identities."
+    },
+    "C2": {
+      "evidence_join": null,
+      "identity": null,
+      "null_reason": "Required author evidence ledger and concern matrix are unavailable; archival task/family identifiers are not guessed claim identities."
+    },
+    "C3": {
+      "evidence_join": null,
+      "identity": null,
+      "null_reason": "Required author evidence ledger and concern matrix are unavailable; archival task/family identifiers are not guessed claim identities."
+    },
+    "C4": {
+      "evidence_join": null,
+      "identity": null,
+      "null_reason": "Required author evidence ledger and concern matrix are unavailable; archival task/family identifiers are not guessed claim identities."
+    },
+    "C5": {
+      "evidence_join": null,
+      "identity": null,
+      "null_reason": "Required author evidence ledger and concern matrix are unavailable; archival task/family identifiers are not guessed claim identities."
+    },
+    "C6": {
+      "evidence_join": null,
+      "identity": null,
+      "null_reason": "Required author evidence ledger and concern matrix are unavailable; archival task/family identifiers are not guessed claim identities."
+    }
+  },
+  "evidence": [
+    {
+      "bytes": 5549,
+      "content_inspected": true,
+      "evidence_id": "legal_review",
+      "record_kind": "source-relative review summary",
+      "repository_relative_path": "papers/revisions/law_source_review_20260914/review.json",
+      "sha256": "db0c3bf5c004e3a0a4ae6e3e6e3e0e6e075b9d16071b7b25e5eb56134f60432f"
+    },
+    {
+      "bytes": 39063,
+      "content_inspected": false,
+      "evidence_id": "legal_draft_map",
+      "record_kind": "draft mapping locator; content not inspected",
+      "repository_relative_path": "papers/revisions/law_source_review_20260914/legal_candidates_clarified_v1.json",
+      "sha256": "032f48e04ebd7afbf7fc6c45965c8be339d84140947f36fdc93036f3783ea787"
+    },
+    {
+      "bytes": 5343,
+      "content_inspected": true,
+      "evidence_id": "cve_readme",
+      "record_kind": "historical source-screening narrative",
+      "repository_relative_path": "papers/revisions/law_cve_screen_completion_20260914/README.md",
+      "sha256": "d5e68e16a7aa578cc5d92cdf515e40bf5f97a65deedf095d230dac6c3f63b621"
+    },
+    {
+      "bytes": 3303,
+      "content_inspected": true,
+      "evidence_id": "cve_handoff",
+      "record_kind": "historical validation handoff receipt",
+      "repository_relative_path": "papers/revisions/law_cve_screen_completion_20260914/handoff.json",
+      "sha256": "366ce0ac1e5231553b9d699ba2b4aba86ea7bf1083252756002a717c0eb2a154"
+    },
+    {
+      "bytes": 17265,
+      "content_inspected": true,
+      "evidence_id": "cve_recovery",
+      "record_kind": "retained source-recovery summary",
+      "repository_relative_path": "papers/revisions/law_cve_screen_completion_20260914/recovery_summary.json",
+      "sha256": "67845f079221c7a3598b357aa04e0102aecf829e5927c4662a4450e6a334c8fe"
+    },
+    {
+      "bytes": 869,
+      "content_inspected": true,
+      "evidence_id": "cve_policy",
+      "record_kind": "historical recovery policy",
+      "repository_relative_path": "papers/revisions/law_cve_screen_completion_20260914/recovery_policy.json",
+      "sha256": "f2d3daa176d5273fd2bb10dc933ff3ff64e5a27d04f50dd9c221c524d5bb4b55"
+    },
+    {
+      "bytes": 39193,
+      "content_inspected": true,
+      "evidence_id": "cve_decisions",
+      "record_kind": "draft source-screen decisions; selected status text inspected",
+      "repository_relative_path": "papers/revisions/law_cve_screen_completion_20260914/screen_completion_decisions.json",
+      "sha256": "e7b464af9965e1f28e9265b5fda58373ea6e0cab407bb3b53864bab34769b13d"
+    },
+    {
+      "bytes": 6886,
+      "content_inspected": true,
+      "evidence_id": "effect_boundary",
+      "record_kind": "historical implementation-inspection narrative",
+      "repository_relative_path": "papers/completion/law_to_action/audit/generated_code_effect_boundary.md",
+      "sha256": "ad50230c56c46fd9bab80b200ff90c476114f4e29fd5b6e9630b7717f422ef05"
+    },
+    {
+      "bytes": 18430,
+      "content_inspected": true,
+      "evidence_id": "claim_matrix",
+      "record_kind": "historical claim/code inspection matrix; selected source-fidelity text inspected",
+      "repository_relative_path": "papers/completion/law_to_action/claim_evidence_matrix.json",
+      "sha256": "975e422a30b5b719b91abc61f84f0d71596a7dcc6a47699c247b990b91096808"
+    },
+    {
+      "bytes": 942,
+      "content_inspected": true,
+      "evidence_id": "source_pointer",
+      "record_kind": "historical preparation source locator",
+      "repository_relative_path": "papers/completion/law_to_action/benchmark/generated_code_study/preparation/source_pointer.json",
+      "sha256": "414e56fdab4745b59f1564643ebcb72bb3e7df57955c59e2b9d0520118cea7f0"
+    },
+    {
+      "bytes": 1014,
+      "content_inspected": true,
+      "evidence_id": "oracle_contracts",
+      "record_kind": "constructed-control summary",
+      "repository_relative_path": "papers/completion/law_to_action/benchmark/generated_code_study/qualification/legal_cve_oracles.json",
+      "sha256": "ad42180ab36a64f95cae3ee503452f49535d91fa431b4dd39b6cd34ac5f3f42b"
+    },
+    {
+      "bytes": 8238,
+      "content_inspected": true,
+      "evidence_id": "constructed_handlers",
+      "record_kind": "constructed-program summary",
+      "repository_relative_path": "papers/completion/law_to_action/benchmark/generated_code_study/qualification/generated_program_handlers.json",
+      "sha256": "402fa64418d251c0897746e9969567d1dd4bf015a921dfea2719a009287d8c1c"
+    },
+    {
+      "bytes": 1828,
+      "content_inspected": true,
+      "evidence_id": "measurement_controls_receipt",
+      "record_kind": "historical command/exit/stdout receipt for constructed controls",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/negative-controls.json",
+      "sha256": "ed7fc805b2d7983e2e3bf72e650a30c777b96262968233cb46418a214cc1f0f2"
+    },
+    {
+      "bytes": 795,
+      "content_inspected": true,
+      "evidence_id": "measurement_controls_stdout",
+      "record_kind": "retained constructed-control stdout summary",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-008/independent-correction/validation/negative-controls.stdout.raw",
+      "sha256": "f96a846df5faba51cc3b99106c2c26ee4b87d952b23a685debef3a070a921e67"
+    },
+    {
+      "bytes": 10563,
+      "content_inspected": true,
+      "evidence_id": "manuscript_reconstruction",
+      "record_kind": "historical PDF reconstruction narrative",
+      "repository_relative_path": "papers/completion/law_to_action/source_recovery.md",
+      "sha256": "d2ceac27bb010ea1913d4f8a33e1d2858dc38bb5ff7ca91d9747eb40709444ac"
+    },
+    {
+      "bytes": 17416,
+      "content_inspected": false,
+      "evidence_id": "historical_formatting_input",
+      "record_kind": "formatting input locator; content not inspected",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-001/provided-inputs/neurips_2026_vericode_workshop.tex",
+      "sha256": "c1c74133705d906972ee7571ee34f57122da5088e9f09ffe9dacb01cf0db1250"
+    },
+    {
+      "bytes": 16039,
+      "content_inspected": true,
+      "evidence_id": "source_freeze_receipt",
+      "record_kind": "historical source-freeze receipt; selected limits inspected",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/LA-004.json",
+      "sha256": "fe0f44d3a0352269952036fc5404497813313fa728505cd8aed737b3b08ff52d"
+    }
+  ],
+  "findings": [
+    {
+      "evidence_ids": [
+        "legal_review",
+        "legal_draft_map"
+      ],
+      "missing": [
+        "Qualified human reviewer identity or pseudonymous attestation",
+        "Relevant expertise/qualification evidence",
+        "Review rubric and independent judgments",
+        "Disagreement/adjudication record",
+        "Author-ledger linkage to current claims and frozen source-to-IR artifacts"
+      ],
+      "qualified_human_review": null,
+      "qualified_human_review_null_reason": "No qualified-human review evidence recovered in the inspected summaries; source-relative assistant/root review is not a substitute.",
+      "recovered": "Six historical source-relative mappings and six retained source texts with matching recorded SHA256 pins.",
+      "supported_boundary": "The original review limits its judgment to benchmark mappings and stipulated fixture assumptions; it explicitly excludes independent human annotation and real-world legal validity.",
+      "topic": "legal_source_fidelity"
+    },
+    {
+      "evidence_ids": [
+        "cve_handoff",
+        "cve_recovery",
+        "cve_decisions",
+        "cve_policy",
+        "cve_readme"
+      ],
+      "missing": [
+        "Complete historical repository ancestry/fork/rename/clone closure",
+        "Pinned runtime and actual original-system reproduction",
+        "Qualified independent CVE effect-transfer review",
+        "Current author-ledger identity linkage"
+      ],
+      "recovered": "Historical handoff reports five completed source screens,26 recovered source/test files,and draft candidate rows130/150; two retained fixed-source bodies match their historical HTTP receipt hashes and lengths.",
+      "supported_boundary": "Archive integrity and draft source-recovery provenance only. Handoff reports observed validation exit0,scientific admissionfalse,scientific cells0,and no upstream code execution. Historical validation was not rerun.",
+      "topic": "cve_source_fidelity"
+    },
+    {
+      "evidence_ids": [
+        "effect_boundary",
+        "claim_matrix",
+        "oracle_contracts",
+        "constructed_handlers",
+        "measurement_controls_receipt",
+        "measurement_controls_stdout"
+      ],
+      "missing": [
+        "Current code/revision binding for the claimed route",
+        "Trusted original source-byte producer and intent/code correlation binding",
+        "Independent native observations at the executed delegate boundary",
+        "Current frozen empirical results and exact claim linkage"
+      ],
+      "recovered": "Implementation-inspection note distinguishes Python syntax facts from independently observed effects; constructed-control summaries and an exit/stdout-bound historical receipt are retained.",
+      "supported_boundary": "The252 oracle contract controls explicitly report native observer/program qualificationfalse and scientific admitted families0/cells0. Generated handler PASS concerns constructed programs,candidate executions0 and scientific admissionfalse. The negative-control receipt expressly says empirical_benchmark_resultfalse.",
+      "topic": "effect_correlation"
+    },
+    {
+      "evidence_ids": [
+        "manuscript_reconstruction",
+        "historical_formatting_input"
+      ],
+      "recovered": "A historical neurips_2026_vericode_workshop.tex basename exists in LA-001 provided inputs.",
+      "required_author_source": null,
+      "required_author_source_null_reason": "Historical formatting input cannot stand in for the missing author-package source/neurips_2026_vericode_workshop.tex.",
+      "supported_boundary": "source_recovery.md expressly classifies this as a formatting input; the historical manuscript was reconstructed from PDF and original author LaTeX was not recovered.",
+      "topic": "manuscript_source_identity"
+    }
+  ],
+  "limitations": [
+    "Current C1–C6 identities cannot be established without the author ledger.",
+    "Historical summaries and PASS fields are claims until supported by their retained original receipts; only the explicitly listed file-hash relationships were independently checked here.",
+    "No sealed final panels,predictions,annotations,source programs,or evaluation scripts were executed or inspected as outcome data.",
+    "Archival review qualifications were not inferred from filenames such as review or independent-review."
+  ],
+  "method": "Bounded local file listing, selected text/JSON summary inspection, SHA256/length checks, and JSON audit serialization only.",
+  "no_new_empirical_result": true,
+  "qualified_human_review": {
+    "adjudication": null,
+    "expertise_attestation": null,
+    "found_in_inspected_records": false,
+    "independent_judgments": null,
+    "null_reason": "No such original evidence located within the bounded inspected records; absence outside this scope is not asserted.",
+    "qualifications": null,
+    "reviewer_identity": null,
+    "rubric": null
+  },
+  "recorded_at": "2026-10-15T09:04:20.798797+00:00",
+  "redactions": [
+    "Absolute host paths",
+    "Private source-provenance record and editor project location",
+    "Case/family identities and protected outcome data"
+  ],
+  "restrictions": {
+    "annotation_content_read": false,
+    "artifact_or_source_execution": 0,
+    "database_access": 0,
+    "installations": 0,
+    "model_calls": 0,
+    "network_requests": 0,
+    "prediction_content_read": false,
+    "protected_final_panel_content_read": false,
+    "secret_content_read": false,
+    "supervisor_submissions": 0,
+    "training": 0
+  },
+  "schema": "law-to-action-source-fidelity-archival-audit/v1",
+  "status": "ARCHIVAL_LOCATORS_RECOVERED_CURRENT_CLAIM_LINKAGE_AND_QUALIFIED_HUMAN_REVIEW_UNRESOLVED"
+}

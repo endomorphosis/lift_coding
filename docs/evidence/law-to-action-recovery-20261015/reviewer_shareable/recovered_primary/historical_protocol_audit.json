@@ -1,0 +1,472 @@
+{
+  "schema": "law-to-action-historical-protocol-audit/v1",
+  "audit_date_utc": "2026-10-15",
+  "paper_title": "From Law to Action: Neuro-Symbolic Runtime Enforcement for MCP Agents",
+  "scope": "Historical provenance only; does not replace the missing revised author package or authorize scientific execution.",
+  "required_revised_author_package": {
+    "status": "reported_not_found_by_parent; path clarification pending",
+    "recovered_path": null,
+    "evidence_ledger": null,
+    "recovery_prompt": null
+  },
+  "latest_baseline": {
+    "rq3_status": "withdrawn/not_started",
+    "authority": "Current user baseline relayed by parent; retained unchanged.",
+    "changed": false
+  },
+  "method": {
+    "source_roots": [
+      "papers/revisions/law_to_action_synthesis_20260914",
+      "papers/revisions/law_to_action_editorial_20260914",
+      "papers/completion/law_to_action/receipts"
+    ],
+    "operations": [
+      "Read historical manuscript source and small archived summaries",
+      "Read ZIP directory metadata and SHA-256 container/member bytes",
+      "Check exact LA-015 through LA-020 receipt/snapshot paths"
+    ],
+    "archive_extraction_to_disk": false,
+    "repository_or_archive_scripts_executed": false,
+    "solvers_providers_supervisor_database_or_admissions_executed": false,
+    "new_scientific_data_generated": false,
+    "protected_final_panels_or_prediction_members_opened": false,
+    "maximum_nested_archive_bytes_read": 30926382,
+    "maximum_individual_archived_text_bytes_read": 24163,
+    "originals_modified": false,
+    "inspection_note": "A local read-only summary-inspection command encountered an AttributeError on a list-shaped summary. It made no writes and the relevant structured fields were subsequently read with corrected type handling."
+  },
+  "source_hash_semantics": "sha256 values in sources are measured over actual inspected container/member/file bytes; commitments quoted inside historical records are separately labeled reported_sha256.",
+  "sources": [
+    {
+      "id": "synthesis_zip",
+      "path": "papers/revisions/law_to_action_synthesis_20260914/supplement.zip",
+      "member_chain": [],
+      "sha256": "00540f54ff5bdd931b4bfed6e9556aa3130db2f86a9f84e5ed9c90414d63d185",
+      "access": "container hashing and selected member inspection only"
+    },
+    {
+      "id": "editorial_zip",
+      "path": "papers/revisions/law_to_action_editorial_20260914/supplement.zip",
+      "member_chain": [],
+      "sha256": "a659ed7b30d96244b30ac3716d2148eb497569a3fe3f5759e46209db09d7437e",
+      "access": "container hashing and selected member inspection only"
+    },
+    {
+      "id": "synthesis_loose_evaluation",
+      "path": "papers/revisions/law_to_action_synthesis_20260914/manuscript/evaluation_details.tex",
+      "member_chain": [],
+      "sha256": "19c7d7ab64002636c5ba52ef32b3e6c0fa5f72ce48c7b4b064d7949c595943ac",
+      "sections": "lines 46-56 and 70-71"
+    },
+    {
+      "id": "editorial_loose_evaluation",
+      "path": "papers/revisions/law_to_action_editorial_20260914/manuscript/evaluation_details.tex",
+      "member_chain": [],
+      "sha256": "ab3ab9d0be9dd280665b888ec0baadb7c2676fd43d1c3740ca46d135ae4af892",
+      "sections": "lines 46-56 and 70-71"
+    },
+    {
+      "id": "synthesis_loose_results",
+      "path": "papers/revisions/law_to_action_synthesis_20260914/manuscript/results.tex",
+      "member_chain": [],
+      "sha256": "e2e1f07a28effa7bd9c23e74673af4ce2074953f96e74d0a02defa6cad9425ef",
+      "sections": "line 51"
+    },
+    {
+      "id": "editorial_loose_results",
+      "path": "papers/revisions/law_to_action_editorial_20260914/manuscript/results.tex",
+      "member_chain": [],
+      "sha256": "09c126580b76900e1ccd933379518a11862bd5269e1237ec7adbf6c565e86fdd",
+      "sections": "line 51"
+    },
+    {
+      "id": "editorial_appendices",
+      "path": "papers/revisions/law_to_action_editorial_20260914/manuscript/appendices.tex",
+      "member_chain": [],
+      "sha256": "6b297f611820a944b673022fa6d6f79ef50170640839e787a5da98fd5b88b20f",
+      "sections": "lines 125-127"
+    },
+    {
+      "id": "synthesis_appendices",
+      "path": "papers/revisions/law_to_action_synthesis_20260914/manuscript/appendices.tex",
+      "member_chain": [],
+      "sha256": "6b297f611820a944b673022fa6d6f79ef50170640839e787a5da98fd5b88b20f",
+      "sections": "lines 125-127"
+    },
+    {
+      "id": "synthesis_archived_evaluation",
+      "path": "papers/revisions/law_to_action_synthesis_20260914/supplement.zip",
+      "member_chain": [
+        "law_to_action_final_supplement/manuscript/evaluation_details.tex"
+      ],
+      "sha256": "ab3ab9d0be9dd280665b888ec0baadb7c2676fd43d1c3740ca46d135ae4af892",
+      "bytes": 7333,
+      "sections": "line 71"
+    },
+    {
+      "id": "editorial_archived_evaluation",
+      "path": "papers/revisions/law_to_action_editorial_20260914/supplement.zip",
+      "member_chain": [
+        "law_to_action_final_supplement/manuscript/evaluation_details.tex"
+      ],
+      "sha256": "ab3ab9d0be9dd280665b888ec0baadb7c2676fd43d1c3740ca46d135ae4af892",
+      "bytes": 7333,
+      "sections": "line 71"
+    },
+    {
+      "id": "synthesis_archived_results",
+      "path": "papers/revisions/law_to_action_synthesis_20260914/supplement.zip",
+      "member_chain": [
+        "law_to_action_final_supplement/manuscript/results.tex"
+      ],
+      "sha256": "19a5ba199d131d54016efd56e412583e0f62921f3465eebd05c4e69c3f042c07",
+      "bytes": 6176
+    },
+    {
+      "id": "editorial_archived_results",
+      "path": "papers/revisions/law_to_action_editorial_20260914/supplement.zip",
+      "member_chain": [
+        "law_to_action_final_supplement/manuscript/results.tex"
+      ],
+      "sha256": "09c126580b76900e1ccd933379518a11862bd5269e1237ec7adbf6c565e86fdd",
+      "bytes": 6079
+    },
+    {
+      "id": "editorial_supplement_readme",
+      "path": "papers/revisions/law_to_action_editorial_20260914/supplement.zip",
+      "member_chain": [
+        "law_to_action_final_supplement/README.md"
+      ],
+      "sha256": "091309718c15a92e38f166243f6a21729275800465278db01f4ead98f9543738",
+      "bytes": 7609
+    },
+    {
+      "id": "synthesis_supplement_readme",
+      "path": "papers/revisions/law_to_action_synthesis_20260914/supplement.zip",
+      "member_chain": [
+        "law_to_action_final_supplement/README.md"
+      ],
+      "sha256": "d7a084cb6b9921d86e3a2ab22ee10f80f4ea9059c5021b26de380cc0c00d730f",
+      "bytes": 7639,
+      "access": "hash only"
+    },
+    {
+      "id": "recovery_readme",
+      "path": "papers/revisions/law_to_action_editorial_20260914/supplement.zip",
+      "member_chain": [
+        "law_to_action_final_supplement/recovery_source_v1/README.md"
+      ],
+      "sha256": "55601c93a89e0b545c90fb42eb6fe2c9df67daaa78dd29b13a6462afcfd890cc",
+      "bytes": 7145
+    },
+    {
+      "id": "compact_container",
+      "path": "papers/revisions/law_to_action_editorial_20260914/supplement.zip",
+      "member_chain": [
+        "law_to_action_final_supplement/historical_compact/anonymous_supplement.zip"
+      ],
+      "sha256": "95c5dbb5d7023dbccbafb2003985265d7fe68434d580c2334ca8925f55d08b79",
+      "bytes": 102971,
+      "member_count": 20,
+      "note": "Same member digest measured in synthesis ZIP."
+    },
+    {
+      "id": "recovery_container",
+      "path": "papers/revisions/law_to_action_editorial_20260914/supplement.zip",
+      "member_chain": [
+        "law_to_action_final_supplement/recovery_source_v1/evidence.zip"
+      ],
+      "sha256": "56d8cad962292e59513d214eaa0e3bf494ad02982d28a5a712ac33fb221c58c2",
+      "bytes": 30926382,
+      "member_count": 9976,
+      "access": "metadata listing plus preservation/source-lineage summaries; no raw cell/prediction reads"
+    },
+    {
+      "id": "compact_readme",
+      "path": "papers/revisions/law_to_action_editorial_20260914/supplement.zip",
+      "member_chain": [
+        "law_to_action_final_supplement/historical_compact/anonymous_supplement.zip",
+        "law_to_action_anonymous_supplement/README.md"
+      ],
+      "sha256": "86c0eaba4203c414519443fb3a5ba3cb99ffee90e2be70134fdd4954d44e64e2",
+      "bytes": 8452
+    },
+    {
+      "id": "compact_claim_matrix",
+      "path": "papers/revisions/law_to_action_editorial_20260914/supplement.zip",
+      "member_chain": [
+        "law_to_action_final_supplement/historical_compact/anonymous_supplement.zip",
+        "law_to_action_anonymous_supplement/subset/claim_evidence_matrix.json"
+      ],
+      "sha256": "d88508eec5f47513ea22eb8ca450cdce873eb5cd186acc2be2ec1ffd2ed8abb3",
+      "bytes": 20516,
+      "sections": "labeling_rules; M13, M14, M15, M19"
+    },
+    {
+      "id": "compact_claim_guidance",
+      "path": "papers/revisions/law_to_action_editorial_20260914/supplement.zip",
+      "member_chain": [
+        "law_to_action_final_supplement/historical_compact/anonymous_supplement.zip",
+        "law_to_action_anonymous_supplement/subset/claim_guidance.md"
+      ],
+      "sha256": "6d93675b11c2ca88bbc842d3368220e260fa5a30fdc790f0cf90b4ec9013f214",
+      "bytes": 1562
+    },
+    {
+      "id": "compact_cost_report",
+      "path": "papers/revisions/law_to_action_editorial_20260914/supplement.zip",
+      "member_chain": [
+        "law_to_action_final_supplement/historical_compact/anonymous_supplement.zip",
+        "law_to_action_anonymous_supplement/logs/anonymized_cost_report.md"
+      ],
+      "sha256": "d8d86ee16a6db9bb9c107632dce52173591a8e3719ea23046e071227e65a6d92",
+      "bytes": 6816,
+      "sections": "original_diagnostic_cpu_reason; original_diagnostic_cpu_seconds"
+    },
+    {
+      "id": "compact_headline_summary",
+      "path": "papers/revisions/law_to_action_editorial_20260914/supplement.zip",
+      "member_chain": [
+        "law_to_action_final_supplement/historical_compact/anonymous_supplement.zip",
+        "law_to_action_anonymous_supplement/subset/headline_claims.json"
+      ],
+      "sha256": "0e673a6e2138959423d659ec35adf57d2fd1b39dce08513222b8bfabb3fae0b8",
+      "bytes": 24098,
+      "sections": "historical diagnostic labels only; no rates promoted"
+    },
+    {
+      "id": "compact_protocol",
+      "path": "papers/revisions/law_to_action_editorial_20260914/supplement.zip",
+      "member_chain": [
+        "law_to_action_final_supplement/historical_compact/anonymous_supplement.zip",
+        "law_to_action_anonymous_supplement/subset/protocol.json"
+      ],
+      "sha256": "c6bc0ca50d6c98b6bac1efa05ebd83fc93d4ed0765ac348f3b1ff5875c9aa4a2",
+      "bytes": 24163,
+      "sections": "RQ3; closed_loop_plan; source_freeze_and_evaluation_admission"
+    },
+    {
+      "id": "recovery_preservation_record",
+      "path": "papers/revisions/law_to_action_editorial_20260914/supplement.zip",
+      "member_chain": [
+        "law_to_action_final_supplement/recovery_source_v1/evidence.zip",
+        "recovery_history/preservation.private.json"
+      ],
+      "sha256": "d29782c2fa7d7a1bb8bd9d8ae624b7b8961dc0eebd502722c418bcb253a7ea9a",
+      "bytes": 14374,
+      "sections": "reported terminal LA-015 receipt commitment; its target is not present in ZIP"
+    },
+    {
+      "id": "recovery_source_lineage",
+      "path": "papers/revisions/law_to_action_editorial_20260914/supplement.zip",
+      "member_chain": [
+        "law_to_action_final_supplement/recovery_source_v1/evidence.zip",
+        "source_lineage.json"
+      ],
+      "sha256": "2955a8f899dce7721d62d385e1efa5bb50f81e4a98fa061bfc15302374e08475",
+      "bytes": 8845,
+      "access": "top-level metadata inspected"
+    }
+  ],
+  "findings": [
+    {
+      "task_ids": [
+        "LA-015",
+        "LA-019"
+      ],
+      "status": "exclusion_labels_recovered; original admission decision receipts not recovered",
+      "exclusion_reason_reported": "Original compact fixed-action rows and their rescue are protocol-unadmitted diagnostics. LA-019 tables/figures/statistical claims derive from that earlier unadmitted log and cannot substitute for the separately admitted LA-029 summary/cost/guidance. Matching numerical rates do not establish admitted-run provenance.",
+      "additional_reported_limit": "Historical diagnostic CPU was not measured with the required process-group boundary; original_diagnostic_cpu_seconds is null and must not be imputed.",
+      "exact_original_admission_failure_reason": null,
+      "reason_null_explanation": "The accessible summaries state exclusion status and the process-group measurement limit, but do not supply the complete original rejection/admission decision. A full causal reconstruction would be speculation.",
+      "sources": [
+        "editorial_loose_evaluation",
+        "compact_claim_matrix",
+        "compact_claim_guidance",
+        "compact_cost_report",
+        "editorial_supplement_readme"
+      ],
+      "promoted_to_primary_evidence": false
+    },
+    {
+      "task_ids": [
+        "LA-016",
+        "LA-017"
+      ],
+      "status": "exclusion_and_withdrawal_labels_recovered",
+      "exclusion_reason_reported": "LA-016 closed-loop model study is withdrawn/unrun, and LA-016/LA-017 comparison wording plus LA-017 mechanism ablations are protocol-unadmitted diagnostics. They establish neither admitted model efficacy nor additional primary arm rates.",
+      "rq3_accounting_reported": {
+        "scheduled_cells": 900,
+        "not_started": 900,
+        "model_calls": 0,
+        "generated_programs": 0
+      },
+      "accounting_kind": "Reported scheduling accounting, not observed failures or newly verified terminal executions.",
+      "independent_execution_verification": false,
+      "complete_original_rejection_receipt": null,
+      "sources": [
+        "editorial_loose_evaluation",
+        "compact_claim_matrix",
+        "compact_protocol",
+        "compact_claim_guidance"
+      ],
+      "promoted_to_primary_evidence": false
+    },
+    {
+      "task_ids": [
+        "LA-018"
+      ],
+      "status": "reported_timing_summary_recovered; underlying timing artifact not recovered",
+      "reported_arm": "A4",
+      "reported_split": "development",
+      "reported_conditions": [
+        {
+          "condition": "cold",
+          "n": 12,
+          "mean_end_to_end_wall_seconds": 0.012326
+        },
+        {
+          "condition": "warm",
+          "n": 12,
+          "mean_end_to_end_wall_seconds": 0.006635
+        },
+        {
+          "condition": "stale-root",
+          "n": 12,
+          "mean_end_to_end_wall_seconds": 0.00322,
+          "stale_evidence_flags": 12
+        },
+        {
+          "condition": "stale-clock",
+          "n": 12,
+          "mean_end_to_end_wall_seconds": 0.00322,
+          "stale_evidence_flags": 12
+        }
+      ],
+      "model_tokens": null,
+      "price_conversion": null,
+      "raw_timing_values": null,
+      "limits": "Instrumentation measurements only; not a 900-cell rescore, token count, monetary-savings result or primary arm-rate observation.",
+      "artifact_locators": [
+        {
+          "reported_repository_path": "papers/completion/law_to_action/results/efficiency/summary.json",
+          "recovered_path": null,
+          "recovered_sha256": null,
+          "status": "reported in archived claim matrix M19; not recovered within permitted scope"
+        },
+        {
+          "reported_repository_path": "papers/completion/law_to_action/receipts/LA-018.json",
+          "recovered_path": null,
+          "recovered_sha256": null,
+          "status": "reported in archived claim matrix M19; exact local path absent"
+        }
+      ],
+      "sources": [
+        "editorial_loose_evaluation",
+        "synthesis_loose_evaluation",
+        "compact_claim_matrix"
+      ],
+      "promoted_to_primary_evidence": false
+    },
+    {
+      "task_ids": [
+        "LA-020"
+      ],
+      "status": "reported_trace_description_and_locators_recovered; trace payload not recovered",
+      "description_reported": "Separate twelve-step diagnostic replays of frozen A4 identities; permitted skill-case trace with seed 104729 and matched denied variants. They do not add scored cells or establish generated-program outcomes.",
+      "worked_trace_identifier": null,
+      "trace_payload_sha256": null,
+      "artifact_locators": [
+        {
+          "reported_repository_path": "papers/completion/law_to_action/results/worked_trace/trace.md",
+          "recovered_path": null,
+          "recovered_sha256": null,
+          "status": "reported in archived claim matrix M15; not recovered within permitted scope"
+        },
+        {
+          "reported_repository_path": "papers/completion/law_to_action/results/worked_trace/trace.json",
+          "recovered_path": null,
+          "recovered_sha256": null,
+          "status": "reported in archived claim matrix M15; not recovered within permitted scope"
+        },
+        {
+          "reported_repository_path": "papers/completion/law_to_action/receipts/LA-020.json",
+          "recovered_path": null,
+          "recovered_sha256": null,
+          "status": "reported in archived claim matrix M15; exact local path absent"
+        }
+      ],
+      "sources": [
+        "editorial_loose_evaluation",
+        "editorial_appendices",
+        "compact_claim_matrix"
+      ],
+      "promoted_to_primary_evidence": false
+    }
+  ],
+  "rq3_conflict": {
+    "status": "historical text inconsistency recovered; latest baseline retained",
+    "executed_claim": {
+      "source_ids": [
+        "synthesis_loose_evaluation",
+        "synthesis_loose_results"
+      ],
+      "statement": "Loose synthesis source says the generated-code study was executed and 900/900 scheduled cells have terminal records.",
+      "evidence_of_execution_recovered": null
+    },
+    "withdrawn_claim": {
+      "source_ids": [
+        "editorial_loose_evaluation",
+        "editorial_loose_results",
+        "synthesis_archived_evaluation",
+        "editorial_archived_evaluation",
+        "compact_claim_matrix",
+        "compact_protocol",
+        "compact_readme",
+        "recovery_readme"
+      ],
+      "statement": "Editorial source and BOTH archived evaluation_details.tex members state withdrawn/900 not_started; archived claim matrix M13 reports zero model calls and generated programs; protocol RQ3 remains planned/unrun."
+    },
+    "file_archive_mismatch": "Loose synthesis evaluation_details.tex SHA-256 differs from its archived member; that archived member is byte-identical to editorial evaluation_details.tex.",
+    "chronology_or_reason_for_loose_change": null,
+    "decision": "Do not infer execution from the loose synthesis wording, do not open final panels/predictions to resolve it, and do not supersede the current withdrawn/not_started baseline."
+  },
+  "reported_unrecovered_commitments": [
+    {
+      "source_id": "recovery_preservation_record",
+      "reported_path": "recovery_history/terminal_committed/papers/completion/law_to_action/receipts/LA-015.json",
+      "reported_sha256": "53b3b162d64459e841ed90a4e8a10b32efeb1dbd34ec8fac8cbc9629b8209b11",
+      "reported_bytes": 11989,
+      "recovered_member": null,
+      "recovered_sha256": null,
+      "note": "A metadata reference is not recovery of the referenced receipt. That member was absent from the inspected recovery ZIP directory."
+    }
+  ],
+  "missing_or_uninspected": {
+    "exact_local_receipt_paths_absent": [
+      "papers/completion/law_to_action/receipts/LA-015.json",
+      "papers/completion/law_to_action/receipts/LA-016.json",
+      "papers/completion/law_to_action/receipts/LA-017.json",
+      "papers/completion/law_to_action/receipts/LA-018.json",
+      "papers/completion/law_to_action/receipts/LA-019.json",
+      "papers/completion/law_to_action/receipts/LA-020.json"
+    ],
+    "exact_local_snapshot_directories_absent": [
+      "papers/completion/law_to_action/receipts/snapshots/LA-015",
+      "papers/completion/law_to_action/receipts/snapshots/LA-016",
+      "papers/completion/law_to_action/receipts/snapshots/LA-017",
+      "papers/completion/law_to_action/receipts/snapshots/LA-018",
+      "papers/completion/law_to_action/receipts/snapshots/LA-019",
+      "papers/completion/law_to_action/receipts/snapshots/LA-020"
+    ],
+    "underlying_la018_timing_artifact": null,
+    "underlying_la020_trace_artifact": null,
+    "results_tree_outside_assigned_scope": "Only locators recovered from summaries; no broad search or reads of the live results tree.",
+    "complete_admission_rejection_reasons": null,
+    "revised_author_package": null
+  },
+  "conclusion": "Historical exclusion rules and a concrete source/archive RQ3 conflict are documented. Timing values and trace locations remain explicitly reported, not remeasured or payload-recovered. No diagnostic history is promoted and no scientific result is generated.",
+  "visibility": "reviewer_shareable",
+  "repository_root": null,
+  "redaction": "Host absolute paths omitted; repository-relative and archive-member locators retained."
+}

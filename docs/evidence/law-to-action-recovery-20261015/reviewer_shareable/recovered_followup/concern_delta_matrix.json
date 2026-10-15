@@ -1,0 +1,50 @@
+[
+  {
+    "concern": "Actual native verifier implementation",
+    "limits": "No per-worker imported-module digest or complete native checker receipt recovered.",
+    "new_evidence": "Seven exact historical source blobs recovered; archived enforcer byte-matches declared accelerate revision.",
+    "request_priority": "5",
+    "source": "native_verifier_boundary.json",
+    "status": "source recovery resolved; runtime import attestation remains partial"
+  },
+  {
+    "concern": "Receipt authentication and evidence checking",
+    "limits": "No attacker-authored self-consistent receipt was tested. Optional datasets capability does not make UCAN optional.",
+    "new_evidence": "Native receipt/capability functions check content integrity and supplied context, not producer signatures or proof discharge. Separate UCAN gate uses Ed25519. The benchmark constructs receipts directly after host gates.",
+    "request_priority": "5",
+    "source": "native_verifier_boundary.json",
+    "status": "claim boundary clarified"
+  },
+  {
+    "concern": "Clock/root freshness, attenuation and consumption",
+    "limits": "Not live root/time attestation or exactly-once arbitrary external-effect proof. Generic attenuation/fallback findings are not observed primary failures.",
+    "new_evidence": "Datasets checks use supplied clocks/expected root labels; selected harness uses frozen logical time and symbolic roots. Consumption precedes dispatch through a separate store.",
+    "request_priority": "5",
+    "source": "native_verifier_boundary.json",
+    "status": "static boundary recovered"
+  },
+  {
+    "concern": "CVE polarity/applicability and correlation",
+    "limits": "No independent vulnerable/fixed/unrelated semantic labels or new native CVE reproduction; LA020 remains diagnostic.",
+    "new_evidence": "LA006 reports unknown polarity/no human review. A prevalidated development CVE recovery and two development LA020 traces separate source differences and modeled export checks from actual vulnerability applicability.",
+    "request_priority": "6",
+    "source": "cve_specificity_boundary.json",
+    "status": "additional source/receipt evidence recovered; semantic validation remains absent"
+  },
+  {
+    "concern": "Original bytes for1813 transformed reducer inputs",
+    "limits": "No alternate-byte hash join, reconstruction or copied original-input recovery; unavailable verification values remain null.",
+    "new_evidence": "Exact alternate portable-archive locations and original-prefix absence documented. Public/private portable versions do not establish pre-normalization input recovery.",
+    "request_priority": "1",
+    "source": "original_input_locator_audit.json",
+    "status": "verification deferred after shared admission refusal"
+  },
+  {
+    "concern": "Author package, C1-C6 and current manuscript",
+    "limits": "Search incomplete over unreadable directories and uninspected archive members; no invented C1-C6 identities or baseline patch.",
+    "new_evidence": "Expanded filename search found no external exact prompt/ledger/feedback/matrix files; generated recovery matrix was excluded as a self-hit.",
+    "request_priority": "4,7;full task specification",
+    "source": "package_search_status.json",
+    "status": "unresolved; author path required"
+  }
+]

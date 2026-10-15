@@ -1,0 +1,75 @@
+{
+  "original_reviewer_id_null_reason": "Author reviewer matrix unavailable; local IDs match the prior provisional index.",
+  "concerns": [
+    {
+      "local_concern_id": "P3-exclusions",
+      "original_reviewer_id": null,
+      "status": "partial",
+      "finding": "Original LA017 receipt and eight metadata/log bindings hash-check; recorded commands succeed, but no specific original rejection reason is stated. Unadmitted classification preserved.",
+      "evidence_levels": [
+        "recovered original records",
+        "hash-checked",
+        "new static audit"
+      ],
+      "evidence": "la017_rejection_locator_audit.json",
+      "missing_value": null,
+      "null_reason": "Exact original admission/exclusion decision receipt not located through inspected paths.",
+      "next_input": "Original LA017 protocol admission/exclusion decision artifact with run/protocol identity, if retained."
+    },
+    {
+      "local_concern_id": "P6-source",
+      "original_reviewer_id": null,
+      "status": "partial",
+      "finding": "Exact original PDF URL,bytecount andSHA256 recovered from retained source commitments. No local body found; source-fetch admission timed out before network.",
+      "evidence_levels": [
+        "recovered source metadata",
+        "hash-checked metadata",
+        "reported original body commitment"
+      ],
+      "evidence": "statute_source_locator.json;pinned_statute_fetch.json",
+      "missing_value": null,
+      "null_reason": "Original source body not recovered or newly hash-verified.",
+      "next_input": "Existing139247-byte original PDF matching32bd2e92ac9ad9897e286c93b9373bdc88ad28f976215a2ff859ad029c0fefa0,or later normal admitted recovery."
+    },
+    {
+      "local_concern_id": "P5-formal",
+      "original_reviewer_id": null,
+      "status": "partial",
+      "finding": "Exact summary/test-source locator pass exhausted; no named persisted native-check receipt path.",
+      "evidence_levels": [
+        "reported bounded static audit",
+        "previously recovered and hash-checked source"
+      ],
+      "evidence": "formal_receipt_locator_followup.json",
+      "missing_value": null,
+      "null_reason": "No original raw stdout/exit/tool/source-bound build or model-check receipt recovered.",
+      "next_input": "Original native-check output capture and source/tool/config/run bindings,if retained."
+    },
+    {
+      "local_concern_id": "P4-components-and-baseline",
+      "original_reviewer_id": null,
+      "status": "blocked_on_author_package",
+      "finding": "No exact author-package locator supplied or newly located. C1-C6 identities,original reviewer mapping and baseline patch remain unresolved.",
+      "evidence_levels": [
+        "new scoped filename search"
+      ],
+      "evidence": "author_package_locator_status.json",
+      "missing_value": null,
+      "null_reason": "Recovery prompt,ledger,reviewer files and revised source are unavailable.",
+      "next_input": "Local directory/archive path of the complete author package."
+    },
+    {
+      "local_concern_id": "package-consolidation",
+      "original_reviewer_id": null,
+      "status": "not_started",
+      "finding": "Shared admission timed out after the single30-second wait; no bulk copying. Prior index remains authoritative.",
+      "evidence_levels": [
+        "newly executed admission attempt; no scientific execution"
+      ],
+      "evidence": "continuation_cost_accounting.json;dependencies.json",
+      "missing_value": null,
+      "null_reason": "No physically consolidated copy was produced.",
+      "next_input": "Normal shared capacity in a later authorized packaging step; do not override others resources."
+    }
+  ]
+}

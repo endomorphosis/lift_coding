@@ -1,0 +1,77 @@
+[
+  {
+    "id": "R0",
+    "priority": "first",
+    "request": "Local directory/archive path of the complete accompanying author package.",
+    "exact_files": [
+      "codex_evidence_recovery_prompt.md",
+      "author_only/revision_notes.md",
+      "author_only/evidence_ledger.json",
+      "author_only/reviewer_concern_matrix.csv",
+      "author_only/reviewer_feedback.md",
+      "source/neurips_2026_vericode_workshop.tex",
+      "all included manuscript files"
+    ],
+    "why": "Needed to read full specification,resolve C1-C6 exact identities and original reviewer IDs,and patch the correct baseline. Repeated task text supplies no locator.",
+    "new_experiment_requested": false
+  },
+  {
+    "id": "R1",
+    "priority": "existing_artifacts_only",
+    "request": "Original bytes matching the1813 transformed reducer bindings.",
+    "exact_locator": "../../law-to-action-author-package-search-20261015T095730Z/author_only/original_input_verification_bindings.json; original path and SHA256 per binding",
+    "why": "Portable path normalization cannot be reversed and called original recovery; both named alternate archives still index transformed versions.",
+    "new_experiment_requested": false
+  },
+  {
+    "id": "R2",
+    "priority": "existing_artifacts_only",
+    "request": "Primary raw export/journal observations and complete checker/receipt/capability payloads bound to LA029 cell/run identities; intermediate terminal/timing logs if retained.",
+    "exact_locator": "Recovered LA029 receipt and900cell IDs in ../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/primary_run_inventory.json and ../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/terminal_status_records.csv",
+    "why": "Counters and same-worker observer source do not replace raw independent observations; missing statuses must not be inferred.",
+    "new_experiment_requested": false
+  },
+  {
+    "id": "R3",
+    "priority": "after_R0",
+    "request": "C1-C6 exact ledger/Publicus source-group/split/prediction/checkpoint/selection/native-check/accounting locators and existing authorized typed-owner export.",
+    "exact_locator": null,
+    "null_reason": "Ledger unavailable; candidate studies cannot safely be assigned C labels by similarity.",
+    "why": "Preserve unsupported emissions,rejected updates,and all matching/refuted/no-enabled/missing-effect categories without protected-final reuse.",
+    "new_experiment_requested": false
+  },
+  {
+    "id": "R4",
+    "priority": "existing_artifacts_only",
+    "request": "Original Lean compiler and TLC model-check receipts, source/tool/config hashes, exit/stdout/stderr, checked invariants and implementation mapping.",
+    "exact_locator": "../../law-to-action-author-package-search-20261015T095730Z/reviewer_shareable/consolidated_formal_job_table.csv",
+    "locator_scope": "FormalClaimAlgebra Basic/Promotion and transactional TLA+ identities",
+    "why": "A summary,self-digest,specification,test file or SANY syntax success does not prove completed implementation verification.",
+    "new_experiment_requested": false
+  },
+  {
+    "id": "R5",
+    "priority": "existing_artifacts_only",
+    "request": "Full original statute source/version and retained qualified human source-to-IR judgments, if they exist.",
+    "exact_locator": "Development42USC1320d-6 example in ../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/retained_source_example_audit.json",
+    "why": "Quotations alone are incomplete context; model output cannot fill missing legal review.",
+    "new_experiment_requested": false
+  },
+  {
+    "id": "R6",
+    "priority": "existing_artifacts_only",
+    "request": "Independently established vulnerable/fixed/unrelated polarity/applicability for retained CVE controls, with source/version/label provenance and native behavior observations.",
+    "exact_locator": "LA006/LA026 and developmentCVE2021-4265 record in ../../law-to-action-evidence-followup-20261015T093458Z/reviewer_shareable/cve_specificity_boundary.json",
+    "why": "Source-difference checks and authored export contracts do not establish CVE-specific causal validity.",
+    "new_experiment_requested": false
+  },
+  {
+    "id": "R7",
+    "priority": "existing_artifacts_only",
+    "request": "Any genuinely admitted formal-job-only or qualified actual-model prompt/RAG study with original frozen protocol and run identity.",
+    "exact_locator": null,
+    "null_reason": "No admitted comparison identified in inspected material.",
+    "why": "Unadmitted LA017 and inert A1/A2 cannot support those efficacy claims; unrelated supervisor trials cannot restore RQ3.",
+    "new_experiment_requested": false
+  }
+]

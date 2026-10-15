@@ -1,0 +1,281 @@
+{
+  "C1_to_C6_joins": {
+    "joins": null,
+    "null_reason": "Author evidence ledger and exact C1-C6 identities remain unavailable; no joins inferred from CVE IDs, historical case names or neighboring task numbers.",
+    "status": "unresolved"
+  },
+  "count_verification": "108 unknown is a receipt/summary report, not a newly computed catalog count. Both new reports clearly distinguish current byte checks from historical measured outcomes.",
+  "created_at": "2026-10-15T09:48:35.422666+00:00",
+  "development_evidence": {
+    "diagnostic_limit": "Historical fixed-action export_json traces only; no recovered CVE source execution or independent specificity oracle.",
+    "effect_diagnostics": [
+      {
+        "decision": "allow",
+        "declared_observed_tuple_matches": true,
+        "delegate_called": true,
+        "label": "declared_export_allowed",
+        "mutation": "none",
+        "observed_effect_count": 1,
+        "sha256": "3c89ab6fe1fe086306d96c30649e2554359cf24322a42b0a652b22586a5f8ce8",
+        "split": "development"
+      },
+      {
+        "decision": "deny",
+        "delegate_called": false,
+        "denial_reason": "context-mismatch",
+        "label": "authored_extra_effect_refused",
+        "mutation": "undeclared_handler_effect",
+        "observed_effect_count": 0,
+        "sha256": "d0cce1faf1fa2256f9367d0db8702aed470b8584e57085ec2dec335a3f817110",
+        "split": "development"
+      }
+    ],
+    "upstream_record": {
+      "applicability": "unknown_pending_independent_review",
+      "distinct_quote_hashes": 3,
+      "embedded_quote_hashes_verified": 6,
+      "executed_untrusted_source": false,
+      "native_sink_observed": false,
+      "receipt_pin_verified": true,
+      "sha256": "c8cd6ae9339f2b5213456b1eb538927c7966b1030063539b09722c7bebfeb791",
+      "source_revision_identity_matches_manifest": true,
+      "split": "development",
+      "transfer_to_export_json": "unsupported",
+      "upstream_original_file_bodies_verified": false
+    }
+  },
+  "extraction_correlation_enforcement_boundary": [
+    {
+      "does_not_support": "Native sink execution, exploit reproduction, independent CVE polarity or secure fixed-code proof. The inspected assembler consumes already recovered records; it does not itself execute upstream source.",
+      "evidence": "LA-026 standalone development record and receipt-pinned recover_upstream.py",
+      "stage": "Upstream source recovery",
+      "supports": "Historical recovery of commit metadata, pinned revisions, file hashes and source quotes; isolated_reproduction means source_text_difference_at_fix_commit_versus_first_parent."
+    },
+    {
+      "does_not_support": "Producer separation is not independent human review or proof that the underlying source behavior applies to export_json.",
+      "evidence": "LA-006 receipt-pinned bind_automated_scope.py, summary and review status",
+      "stage": "Machine source contract",
+      "supports": "A separately named machine expectation producer records source observations and structural controls with explicit unknown polarity."
+    },
+    {
+      "does_not_support": "This historical audit is not new inspection of the current library, a trace of the CVE program executing, whole-program semantics, or proof the supplied facts faithfully cover all runtime effects.",
+      "evidence": "Historical generated_code_effect_boundary.md source audit",
+      "stage": "Generic extraction and effect correlation",
+      "supports": "The historical audit describes syntax facts from supplied code text, correlation with supplied code-effect facts, and invocation/capability context checks."
+    },
+    {
+      "does_not_support": "These are machine-authored fixed-action harness cases, not independently reviewed vulnerable/fixed outcomes or execution of the original CVE code.",
+      "evidence": "Two explicitly development LA-020 diagnostic trace copies from the prior frozen package",
+      "stage": "Declared-versus-observed fixed action",
+      "supports": "For the allow trace, the declared filesystem.export_json tuple equals the retained observer tuple on effect_kind, target, payload_sha256 and payload_bytes. The authored undeclared_handler_effect mutation is denied for context-mismatch before delegate invocation, with zero observed effects."
+    },
+    {
+      "does_not_support": "No fresh database, signature, solver, filesystem-export, or enforcement execution was performed in this recovery. Internal receipts explicitly mark harness constants, stub CID presence, no published proof and no theorem proof.",
+      "evidence": "LA-020 retained enforce/handler/observation fields",
+      "stage": "Invocation enforcement",
+      "supports": "The retained traces report allow plus one handler call, and deny plus no handler call. Both SAT and UCAN report allowance; the refusal is the bound invocation context check."
+    }
+  ],
+  "historical_status_inconsistency": {
+    "evidence_id": "la006_original_receipt",
+    "interpretation": "Do not promote complete/met metadata into satisfied independent polarity. The archived explanations and limitations control this evidence classification.",
+    "issue": "The original criterion requires independently reviewed expected polarity and is marked met, while its own explanation and limitations state that reviewed polarity is unknown, human review was not obtained, native reproduction was not run and evaluation admission was blocked. The current receipt narrows completion to automated scope.",
+    "recorded_first_criterion_status": "met",
+    "recorded_status": "complete"
+  },
+  "human_review": {
+    "independence": null,
+    "independence_null_reason": "No independently authored review or adjudication recovered.",
+    "machine_producer_is_independent_review": false,
+    "qualifications": null,
+    "qualifications_null_reason": "No qualification records were recovered; none inferred.",
+    "qualified_human_review_found": false,
+    "reviewer_identity": null,
+    "reviewer_identity_null_reason": "No authentic reviewer identity was recovered; machine worker roles are not human reviewer identities."
+  },
+  "new_experiment_performed": false,
+  "polarity_and_applicability": {
+    "absence_scope": "Not recovered within this bounded inspection; no claim of exhaustive absence across unavailable author material or other archives.",
+    "applicability": "unknown_pending_independent_review",
+    "fixed": {
+      "basis": "Pinned fix-commit source metadata and changed source bytes; no native sink observation, applicability review, or claim of universal security.",
+      "expected_polarity": "unknown",
+      "independently_established_by_inspected_evidence": false
+    },
+    "fixed_negative_control": {
+      "basis": "Static binder comparison requires the parent fixed-body hash and fixed case identity; this checks record linkage, not the negative security truth label.",
+      "independently_established_by_inspected_evidence": false,
+      "original_control_row_inspected": false
+    },
+    "transfer_to_export_json": "unsupported",
+    "unrelated_code_control": {
+      "basis": "Static inspection of control_observation shows misleading_cve_similarity checks a nonempty distractor CVE identifier differs from the parent identifier. That is an identity distinction, not independently established semantic non-applicability. The mixed control catalog was not opened.",
+      "expected_polarity": "unknown_as_reported_by_LA006_summary",
+      "independently_established_by_inspected_evidence": false,
+      "original_control_row_inspected": false
+    },
+    "vulnerable": {
+      "basis": "Dataset-derived role and first-parent source revision; source differences and scoped quotes are not native exploit or independent polarity evidence.",
+      "expected_polarity": "unknown",
+      "independently_established_by_inspected_evidence": false
+    }
+  },
+  "protocol_scope": {
+    "amended_scope": "Fixed-action comparison using machine-checkable expectations and observed effects; independent human gold remains uncollected. Development qualification is not held-out evaluation.",
+    "amendment": "LA-027/v1",
+    "amendment_is_new_human_review": false,
+    "evidence_scope": "automated_source_contracts_and_policy_effects",
+    "original_protocol_bytes_independently_checked_here": false,
+    "original_protocol_sha256_recorded": "ba03394cd66f51999d1b177a29558b6130429eb9fc3faebea5e57c780857940f"
+  },
+  "provenance": [
+    {
+      "bytes": 16430,
+      "id": "la006_receipt",
+      "null_reason": "No independent binding asserted here; current archival bytes were hashed. The receipt and historical-audit contents are themselves claims/records, not independent proof.",
+      "original_relative_path": "papers/completion/law_to_action/receipts/LA-006.json",
+      "receipt_pin_matches": null,
+      "sha256": "b27bb08422fc5eba0751815cec55b8d7ee55765d99e6314048e24ed908fb3df3"
+    },
+    {
+      "bytes": 16087,
+      "id": "la026_receipt",
+      "null_reason": "No independent binding asserted here; current archival bytes were hashed. The receipt and historical-audit contents are themselves claims/records, not independent proof.",
+      "original_relative_path": "papers/completion/law_to_action/receipts/LA-026.json",
+      "receipt_pin_matches": null,
+      "sha256": "d79447296f4f77952bffbac39ae9726ea1808160abea7f25e1ac3cd7b548f883"
+    },
+    {
+      "bytes": 1529,
+      "id": "la006_review_status",
+      "null_reason": null,
+      "original_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-006/review_status.json",
+      "receipt_pin_matches": true,
+      "sha256": "74f32c12073ecde05ff65bf05704f5b172cc81d77dabb03954e76d41aad166e3"
+    },
+    {
+      "bytes": 1836,
+      "id": "la006_bind_summary",
+      "null_reason": null,
+      "original_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-006/bind_summary.json",
+      "receipt_pin_matches": true,
+      "sha256": "225acf90067e93c65904c9250fb2da1b26e3093970952355631e2279047ab20f"
+    },
+    {
+      "bytes": 28003,
+      "id": "la006_bind_source",
+      "null_reason": null,
+      "original_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-006/bind_automated_scope.py",
+      "receipt_pin_matches": true,
+      "sha256": "f8848132c4fa36a75abb7272f9563a3299816da8aed89e6961577bb30d2b2e90"
+    },
+    {
+      "bytes": 229,
+      "id": "la006_bind_stdout",
+      "null_reason": null,
+      "original_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-006/validation/bind_automated_scope.stdout.log",
+      "receipt_pin_matches": true,
+      "sha256": "94085fd2a256ec7df49a01346dee924f3dee69d4af374e04893968381ecd0921"
+    },
+    {
+      "bytes": 899,
+      "id": "la006_validation_stdout",
+      "null_reason": null,
+      "original_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-006/validation/validate_cve_pairs.stdout.log",
+      "receipt_pin_matches": true,
+      "sha256": "85bc260fd5bd310baa4ea498e53d50a9b24e43842b3d25d4f76d4d36ecf01370"
+    },
+    {
+      "bytes": 10839,
+      "id": "la006_original_receipt",
+      "null_reason": null,
+      "original_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-006/original_failed_blocked_attempt_20260911/original_receipt.json",
+      "receipt_pin_matches": true,
+      "sha256": "d324efd753761d5de92ef18f53b8a52fc38827e716030b8f96a78771ffa345bb"
+    },
+    {
+      "bytes": 26654,
+      "id": "la026_recovery_source",
+      "null_reason": null,
+      "original_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-026/recover_upstream.py",
+      "receipt_pin_matches": true,
+      "sha256": "8d9ac0eae502bd9d00af3c76ebfe910512943f356d5ba7652fc161db9b2ace72"
+    },
+    {
+      "bytes": 20227,
+      "id": "development_upstream_recovery",
+      "null_reason": null,
+      "original_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-026/outputs/benchmark/cve_reproduction/pairs/CVE-2021-4265.json",
+      "receipt_pin_matches": true,
+      "sha256": "c8cd6ae9339f2b5213456b1eb538927c7966b1030063539b09722c7bebfeb791"
+    },
+    {
+      "bytes": 24163,
+      "id": "protocol",
+      "null_reason": "No independent binding asserted here; current archival bytes were hashed. The receipt and historical-audit contents are themselves claims/records, not independent proof.",
+      "original_relative_path": "papers/completion/law_to_action/benchmark/protocol.json",
+      "receipt_pin_matches": null,
+      "sha256": "c6bc0ca50d6c98b6bac1efa05ebd83fc93d4ed0765ac348f3b1ff5875c9aa4a2"
+    },
+    {
+      "bytes": 6886,
+      "id": "historical_effect_boundary_audit",
+      "null_reason": "No independent binding asserted here; current archival bytes were hashed. The receipt and historical-audit contents are themselves claims/records, not independent proof.",
+      "original_relative_path": "papers/completion/law_to_action/audit/generated_code_effect_boundary.md",
+      "receipt_pin_matches": null,
+      "sha256": "ad50230c56c46fd9bab80b200ff90c476114f4e29fd5b6e9630b7717f422ef05"
+    },
+    {
+      "bytes": 9529,
+      "id": "la020_development_case_0",
+      "null_reason": "Development trace identity/path withheld from shareable report; copy hash matches previously retained evidence.",
+      "original_relative_path": null,
+      "receipt_pin_matches": null,
+      "sha256": "3c89ab6fe1fe086306d96c30649e2554359cf24322a42b0a652b22586a5f8ce8"
+    },
+    {
+      "bytes": 7468,
+      "id": "la020_development_case_1",
+      "null_reason": "Development trace identity/path withheld from shareable report; copy hash matches previously retained evidence.",
+      "original_relative_path": null,
+      "receipt_pin_matches": null,
+      "sha256": "d0cce1faf1fa2256f9367d0db8702aed470b8584e57085ec2dec335a3f817110"
+    }
+  ],
+  "recovery_mode": "archival inspection and local byte/JSON consistency checks only",
+  "remaining_evidence_gaps": [
+    "Original author ledger and precise claim-to-artifact identities are required to resolve C1-C6.",
+    "A genuine independent, qualified applicability/polarity assessment or a separately justified explicit development oracle is needed for vulnerable, fixed and unrelated-code specificity claims.",
+    "The current upstream recovery does not supply native sink observations; pinned source text differences must stay separate from runtime behavior claims.",
+    "To connect a source contract to the delegate, retain provenance binding the exact source/version, extracted facts, declared request and independently observed effects; the current CVE record explicitly reports this transfer unsupported.",
+    "Any future original-program experiment or human review is separate work; none is authorized or performed by this archival audit."
+  ],
+  "reported_aggregate_status": {
+    "empirical_success_credits": 0,
+    "excluded_control_records": 84,
+    "expected_polarity_unknown": 108,
+    "final_adjudication": null,
+    "final_adjudication_null_reason": "Historical review_status explicitly records null; no independent reviewer or adjudication recovered.",
+    "independent_human_security_review": "not_obtained",
+    "pairs": 12,
+    "provenance": "Historical LA-006 receipt, bind_summary.json and review_status.json; source bytes verified against the receipt. These aggregate counts were NOT recomputed from mixed cases, controls, polarity catalogs, annotations or predictions.",
+    "reserved_empirical_cases": 24
+  },
+  "result": "The inspected retained evidence supports pinned source-text recovery and a separate development fixed-action enforcement diagnostic. It does not independently establish vulnerable/fixed/unrelated-code security polarity or transfer the recovered CVE behavior to the export_json handler.",
+  "sanitization": "Absolute filesystem paths, family/case identifiers, trace authentication metadata and raw trace contents omitted. Original receipts and raw development evidence are retained author-only.",
+  "schema": "law-to-action-cve-specificity-boundary-audit/v1",
+  "scope_limits": {
+    "database_accessed": false,
+    "mixed_case_or_polarity_jsonl_read": false,
+    "mixed_case_or_polarity_jsonl_whole_file_hashed": false,
+    "models_or_training_run": false,
+    "native_toolchain_or_recovered_code_executed": false,
+    "network_accessed": false,
+    "new_annotations_created": false,
+    "new_human_review_obtained": false,
+    "original_upstream_source_bodies_read_or_refetched": false,
+    "protected_final_panels_read": false,
+    "supervisor_submitted": false
+  },
+  "visibility": "reviewer_shareable"
+}

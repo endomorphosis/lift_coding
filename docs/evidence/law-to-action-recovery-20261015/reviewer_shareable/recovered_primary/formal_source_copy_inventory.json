@@ -1,0 +1,109 @@
+{
+  "basic_source_distinction": {
+    "current_sha256": "1fe4e531683b9774bafaa5da40ef999c964c8d04fdf8e91ca2ce1fd9a5b74d45",
+    "historical_is_current_plus_one_trailing_newline": true,
+    "historical_sha256": "f701d92fe1a5141b3273ad2eafe8fbd6d7b78d0d2e9f47708b51abb0c87c7d54",
+    "sources_have_distinct_hashes": true
+  },
+  "copy_budget_bytes": 1048576,
+  "created_at_utc": "2026-10-15T09:21:20.524675+00:00",
+  "distribution": "reviewer_shareable",
+  "evidence_limits": [
+    "These are source/specification copies and a historical conformance summary, not new compiler, model-checker, or implementation-proof receipts.",
+    "Raw Lean compiler output and completed TLC/model-check receipts remain unrecovered in the inspected scope.",
+    "No databases, historical code, tests, solvers, toolchains or providers were executed.",
+    "No additional source search was performed; the historical Basic Git blob was reread using the already-inspected exact commit and path."
+  ],
+  "files": [
+    {
+      "copy_bytes": 21237,
+      "copy_package_relative_path": "author_only/formal_source_copies/current/FormalClaimAlgebra/Basic.lean",
+      "copy_sha256": "1fe4e531683b9774bafaa5da40ef999c964c8d04fdf8e91ca2ce1fd9a5b74d45",
+      "id": "lean_basic",
+      "source_bytes": 21237,
+      "source_copy_bytes_equal": true,
+      "source_kind": "inspected_regular_file",
+      "source_matches_prior_audit": true,
+      "source_repository_alias": "mcp_plus_plus_current",
+      "source_repository_relative_path": "formal/lean/FormalClaimAlgebra/Basic.lean",
+      "source_sha256": "1fe4e531683b9774bafaa5da40ef999c964c8d04fdf8e91ca2ce1fd9a5b74d45"
+    },
+    {
+      "copy_bytes": 19078,
+      "copy_package_relative_path": "author_only/formal_source_copies/current/FormalClaimAlgebra/Promotion.lean",
+      "copy_sha256": "f8a32df78c0830ea21fdf4f03d49ccff18cb020c3b20b2b68f1c2daea4ecf9b7",
+      "id": "lean_promotion",
+      "source_bytes": 19078,
+      "source_copy_bytes_equal": true,
+      "source_kind": "inspected_regular_file",
+      "source_matches_prior_audit": true,
+      "source_repository_alias": "mcp_plus_plus_current",
+      "source_repository_relative_path": "formal/lean/FormalClaimAlgebra/Promotion.lean",
+      "source_sha256": "f8a32df78c0830ea21fdf4f03d49ccff18cb020c3b20b2b68f1c2daea4ecf9b7"
+    },
+    {
+      "copy_bytes": 302,
+      "copy_package_relative_path": "author_only/formal_source_copies/current/lakefile.toml",
+      "copy_sha256": "e045d9179b637f5ccf92121d95dba94029261b7216055894e1f8a112b9006b8a",
+      "id": "lakefile",
+      "source_bytes": 302,
+      "source_copy_bytes_equal": true,
+      "source_kind": "inspected_regular_file",
+      "source_matches_prior_audit": true,
+      "source_repository_alias": "mcp_plus_plus_current",
+      "source_repository_relative_path": "formal/lean/lakefile.toml",
+      "source_sha256": "e045d9179b637f5ccf92121d95dba94029261b7216055894e1f8a112b9006b8a"
+    },
+    {
+      "copy_bytes": 24529,
+      "copy_package_relative_path": "author_only/formal_source_copies/current/TransactionalEffects.tla",
+      "copy_sha256": "0e3c05313c76050415fa9ea3984b6d4c610e922caa699f6093450bb686a93e73",
+      "id": "tla_model",
+      "source_bytes": 24529,
+      "source_copy_bytes_equal": true,
+      "source_kind": "inspected_regular_file",
+      "source_matches_prior_audit": true,
+      "source_repository_alias": "mcp_plus_plus_current",
+      "source_repository_relative_path": "formal/protocols/transactional_effects/TransactionalEffects.tla",
+      "source_sha256": "0e3c05313c76050415fa9ea3984b6d4c610e922caa699f6093450bb686a93e73"
+    },
+    {
+      "copy_bytes": 15403,
+      "copy_package_relative_path": "author_only/formal_source_copies/historical/formal_claim_algebra_v1.json",
+      "copy_sha256": "2b8c0beb013cdad1db1b8d6cdc4f5553fe74d42ab210a0e18c2c65c648cd9d21",
+      "id": "fca_conformance_summary",
+      "source_bytes": 15403,
+      "source_copy_bytes_equal": true,
+      "source_kind": "inspected_regular_file",
+      "source_matches_prior_audit": true,
+      "source_repository_alias": "preserved_root",
+      "source_repository_relative_path": "implementation_plan/formal_assurance_control_plane/gates/formal_claim_algebra_v1.json",
+      "source_sha256": "2b8c0beb013cdad1db1b8d6cdc4f5553fe74d42ab210a0e18c2c65c648cd9d21"
+    },
+    {
+      "copy_bytes": 21238,
+      "copy_package_relative_path": "author_only/formal_source_copies/historical/FormalClaimAlgebra/Basic.lean",
+      "copy_sha256": "f701d92fe1a5141b3273ad2eafe8fbd6d7b78d0d2e9f47708b51abb0c87c7d54",
+      "id": "historical_lean_basic",
+      "source_bytes": 21238,
+      "source_copy_bytes_equal": true,
+      "source_git_commit": "d572b1662922ffda952016f04537711f5c730581",
+      "source_kind": "previously_inspected_git_blob",
+      "source_matches_prior_audit": true,
+      "source_repository_alias": "mcp_plus_plus_git_objects",
+      "source_repository_relative_path": "formal/lean/FormalClaimAlgebra/Basic.lean",
+      "source_sha256": "f701d92fe1a5141b3273ad2eafe8fbd6d7b78d0d2e9f47708b51abb0c87c7d54"
+    }
+  ],
+  "lean_toolchain_file": null,
+  "lean_toolchain_file_status": "The directly addressed formal/lean/lean-toolchain path is absent. No toolchain file was invented; existing lakefile.toml records a Lean4.33.0 comment, and the historical summary records a reported toolchain identity. Neither is a newly verified executable.",
+  "purpose": "Preserve already-inspected formal source bytes and historical conformance summary without executing them. Copies remain under author_only; this inventory discloses relative identities and hashes only.",
+  "schema": "law_to_action.formal_source_copy_inventory@1",
+  "source_and_copy_sha256_verified": true,
+  "source_audit": {
+    "reviewer_shareable_path": "reviewer_shareable/formal_source_receipt_audit.json",
+    "sha256": "6e0604ad8897919dad82e0c8c22a366e49f7113282aafc692d8442947d3f6ebb"
+  },
+  "total_files": 6,
+  "total_source_copy_bytes": 101787
+}
