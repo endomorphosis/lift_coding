@@ -1,0 +1,50 @@
+=== CHUNK top/scripts/__files__
+error: pathspec 'scripts/audit_docs_drift' did not match any file(s) known to git
+error: pathspec 'copy.py' did not match any file(s) known to git
+FAIL top/scripts/__files__ rc=1
+=== CHUNK top/scripts/benchmarks
+OK   top/scripts/benchmarks
+=== CHUNK top/scripts/ci
+OK   top/scripts/ci
+=== CHUNK top/scripts/cli
+OK   top/scripts/cli
+=== CHUNK top/scripts/dashboard
+OK   top/scripts/dashboard
+=== CHUNK top/scripts/debug
+OK   top/scripts/debug
+=== CHUNK top/scripts/demo
+OK   top/scripts/demo
+=== CHUNK top/scripts/dev_tools
+OK   top/scripts/dev_tools
+=== CHUNK top/scripts/documentation
+OK   top/scripts/documentation
+=== CHUNK top/scripts/evaluation
+OK   top/scripts/evaluation
+=== CHUNK top/scripts/experimental
+OK   top/scripts/experimental
+=== CHUNK top/scripts/migration
+OK   top/scripts/migration
+=== CHUNK top/scripts/migrations
+OK   top/scripts/migrations
+=== CHUNK top/scripts/monitoring
+OK   top/scripts/monitoring
+=== CHUNK top/scripts/ops/__files__
+OK   top/scripts/ops/__files__
+=== CHUNK top/scripts/ops/agent_supervisor
+OK   top/scripts/ops/agent_supervisor
+=== CHUNK top/scripts/ops/autoencoder
+=== CHUNK top/scripts/__files__
+error: pathspec 'scripts/audit_docs_drift' did not match any file(s) known to git
+error: pathspec 'copy.py' did not match any file(s) known to git
+FAIL top/scripts/__files__ rc=1
+=== CHUNK top/scripts/ops/autoencoder
+OK   top/scripts/ops/autoencoder
+=== CHUNK top/scripts/ops/intent_ir
+OK   top/scripts/ops/intent_ir
+=== CHUNK top/scripts/ops/legal_corpora_reindex
+OK   top/scripts/ops/legal_corpora_reindex
+=== CHUNK top/scripts/ops/legal_data
+OK   top/scripts/ops/legal_data
+=== CHUNK top/scripts/ops/legal_ir/__files__#0
+OK   top/scripts/ops/legal_ir/__files__#0
+=== CHUNK top/scripts/ops/legal_ir/__files__#1

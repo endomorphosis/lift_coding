@@ -1,0 +1,55 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.3.4, pluggy-1.6.0
+rootdir: /home/hatch/workspace/lift_coding/external/ipfs_accelerate/test
+configfile: pytest.ini
+plugins: anyio-4.8.0, asyncio-0.23.8, respx-0.22.0
+asyncio: mode=Mode.STRICT
+collected 34 items
+
+test/api/test_repository_plan_preview.py::test_native_preview_compiles_declared_tasks_and_binds_current_structural_input[1] SKIPPED [  2%]
+test/api/test_repository_plan_preview.py::test_native_preview_compiles_declared_tasks_and_binds_current_structural_input[2] SKIPPED [  5%]
+test/api/test_repository_plan_preview.py::test_wrong_selected_source_roots_reject_before_planning[repository_root_cid] SKIPPED [  8%]
+test/api/test_repository_plan_preview.py::test_wrong_selected_source_roots_reject_before_planning[dirty_worktree_root] SKIPPED [ 11%]
+test/api/test_repository_plan_preview.py::test_wrong_selected_source_roots_reject_before_planning[program_root] SKIPPED [ 14%]
+test/api/test_repository_plan_preview.py::test_caller_authority_and_model_inputs_cannot_enter_repository_route[current_roots] SKIPPED [ 17%]
+test/api/test_repository_plan_preview.py::test_caller_authority_and_model_inputs_cannot_enter_repository_route[current_facts] SKIPPED [ 20%]
+test/api/test_repository_plan_preview.py::test_caller_authority_and_model_inputs_cannot_enter_repository_route[obligation_graph] SKIPPED [ 23%]
+test/api/test_repository_plan_preview.py::test_caller_authority_and_model_inputs_cannot_enter_repository_route[evidence_bundle] SKIPPED [ 26%]
+test/api/test_repository_plan_preview.py::test_caller_authority_and_model_inputs_cannot_enter_repository_route[admission_materials] SKIPPED [ 29%]
+test/api/test_repository_plan_preview.py::test_caller_authority_and_model_inputs_cannot_enter_repository_route[model_provider] SKIPPED [ 32%]
+test/api/test_repository_plan_preview.py::test_caller_authority_and_model_inputs_cannot_enter_repository_route[scan] SKIPPED [ 35%]
+test/api/test_repository_plan_preview.py::test_caller_authority_and_model_inputs_cannot_enter_repository_route[evidence_adapters] SKIPPED [ 38%]
+test/api/test_repository_plan_preview.py::test_caller_authority_and_model_inputs_cannot_enter_repository_route[evidence_queries] SKIPPED [ 41%]
+test/api/test_repository_plan_preview.py::test_caller_authority_and_model_inputs_cannot_enter_repository_route[parallel_request] SKIPPED [ 44%]
+test/api/test_repository_plan_preview.py::test_caller_authority_and_model_inputs_cannot_enter_repository_route[parallel_tasks] SKIPPED [ 47%]
+test/api/test_repository_plan_preview.py::test_caller_cannot_shadow_frozen_request_or_owner_context[candidate_context-request_cid] SKIPPED [ 50%]
+test/api/test_repository_plan_preview.py::test_caller_cannot_shadow_frozen_request_or_owner_context[candidate_context-scope_paths] PASSED [ 52%]
+test/api/test_repository_plan_preview.py::test_caller_cannot_shadow_frozen_request_or_owner_context[candidate_context-structural_codebase_context_cid] PASSED [ 55%]
+test/api/test_repository_plan_preview.py::test_caller_cannot_shadow_frozen_request_or_owner_context[extra-structural_codebase] PASSED [ 58%]
+test/api/test_repository_plan_preview.py::test_preview_observation_never_reprepares_or_parses_repository PASSED [ 61%]
+test/api/test_repository_plan_preview.py::test_authored_goal_must_reference_selected_snapshot[intent] PASSED [ 64%]
+test/api/test_repository_plan_preview.py::test_authored_goal_must_reference_selected_snapshot[frozen_goal] PASSED [ 67%]
+test/api/test_repository_plan_preview.py::test_changed_checkout_rejects_even_when_policy_observer_returns_static_expected_roots PASSED [ 70%]
+test/api/test_repository_plan_preview.py::test_policy_observer_cannot_hide_source_edit_during_observation PASSED [ 73%]
+test/api/test_repository_plan_preview.py::test_source_edit_after_real_candidate_work_cannot_persist_or_cache PASSED [ 76%]
+test/api/test_repository_plan_preview.py::test_policy_change_during_real_candidate_work_prevents_persistence PASSED [ 79%]
+test/api/test_repository_plan_preview.py::test_stale_selected_generation_is_not_replaced_by_current_head PASSED [ 82%]
+test/api/test_repository_plan_preview.py::test_native_successor_changes_frozen_metadata_and_planner_identity PASSED [ 85%]
+test/api/test_repository_plan_preview.py::test_cancelled_repository_preview_returns_no_result_or_cache[before_entry] PASSED [ 88%]
+test/api/test_repository_plan_preview.py::test_cancelled_repository_preview_returns_no_result_or_cache[during_policy_observation] PASSED [ 91%]
+test/api/test_repository_plan_preview.py::test_expired_overall_deadline_prevents_service_work PASSED [ 94%]
+test/api/test_repository_plan_preview.py::test_missing_live_policy_observer_and_wrong_repository_locator_reject PASSED [ 97%]
+test/api/test_repository_plan_preview.py::test_owner_controls_are_frozen_and_native_owner_is_required PASSED [100%]
+
+============================= slowest 10 durations =============================
+5.18s call     api/test_repository_plan_preview.py::test_native_successor_changes_frozen_metadata_and_planner_identity
+1.54s call     api/test_repository_plan_preview.py::test_preview_observation_never_reprepares_or_parses_repository
+1.00s setup    api/test_repository_plan_preview.py::test_caller_cannot_shadow_frozen_request_or_owner_context[candidate_context-scope_paths]
+0.97s setup    api/test_repository_plan_preview.py::test_owner_controls_are_frozen_and_native_owner_is_required
+0.93s setup    api/test_repository_plan_preview.py::test_changed_checkout_rejects_even_when_policy_observer_returns_static_expected_roots
+0.92s setup    api/test_repository_plan_preview.py::test_missing_live_policy_observer_and_wrong_repository_locator_reject
+0.90s setup    api/test_repository_plan_preview.py::test_authored_goal_must_reference_selected_snapshot[frozen_goal]
+0.90s setup    api/test_repository_plan_preview.py::test_cancelled_repository_preview_returns_no_result_or_cache[before_entry]
+0.89s setup    api/test_repository_plan_preview.py::test_native_successor_changes_frozen_metadata_and_planner_identity
+0.88s setup    api/test_repository_plan_preview.py::test_authored_goal_must_reference_selected_snapshot[intent]
+================== 17 passed, 17 skipped in 67.67s (0:01:07) ===================

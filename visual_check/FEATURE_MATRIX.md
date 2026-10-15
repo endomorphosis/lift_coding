@@ -260,7 +260,8 @@ Bring-up is idempotent and preserved at `fv_state/bring-up.sh`. Program-state ca
   `bafkreidjbmeouqe42mu3uioynseoqgdtfjzrs3yiqv743jcxd56ftvpkw4` (helia),
   checkpoint event `bafkreicbw5f2hfeflzmtksufkqfzfwxhl6i25qyiu7ui2ujhwzm7a6trwy`);
   steering dry run's local preview restored (confirmed steering stays
-  typed — no adapter route exists, contract map B10); the settled
+  typed — no adapter route exists, contract map B10; **route built in
+  the steering build, see F-15**); the settled
   console's only errors are the four capabilities with no backend feature
   (B8), and live mode renders zero SAMPLE fixtures (R6). The console's 8
   formerly-dead VDA-G054 buttons now navigate to the real panes (R8).
@@ -272,6 +273,110 @@ Bring-up is idempotent and preserved at `fv_state/bring-up.sh`. Program-state ca
   **Verdict: PASS with typed exceptions (contract map P16; R6–R10 fixed;
   B8/B9/B10 typed).** Screenshots `fv-14…fv-17`; evidence
   `fv_state/audit3/`.
+
+### F-15 — Confirmed prompt steering route (steering build, 2026-10-14)
+- **Intended:** a confirmed steering submission in the Agent Supervisor
+  console executes for real against the ipfs_accelerate_py agent
+  supervisor — the facade's `Supervisor.steer` — through the MCP++
+  interface, with the P11 governance contract intact (unconfirmed denied,
+  dry run = local preview only, no simulated success).
+- **Observed:** the route is built at the three layers the evidence
+  supports and dispatch is proved live at every hop (contract map P17):
+  gateway `invokeSupervisorPromptSteering` (dry run → typed
+  `capability_unavailable`, so the console's R7 local preview engages —
+  in-browser preview receipt `rcpt-prompt-steering-d0d1923a`; unconfirmed
+  → `denied/confirmation_required` at the gateway; confirmed → RPC) →
+  accelerate adapter method `agent_supervisor.prompt_steering.request` →
+  persistent steering bridge worker hosting ONE production Supervisor
+  session (opened live from the ipfs_accelerate repository, ASE3-026
+  activation verified, composition CID
+  `baguqeerauqzq7qsd5l23zxfasd7it6rhxabq747agtnelhkmqnbcgfg5tm3a`) →
+  the backend's own `agent_supervisor_steer` prompt-lifecycle tool.
+  **Terminal boundary (typed, B10):** the session's seed run cannot be
+  created — originally because `Supervisor.run()` required
+  `ipfs_datasets_py.logic.formalization.autoencoder.source_screening`,
+  absent from the pinned datasets checkout (cross-repo pin skew); the
+  backend's verbatim typed error surfaces through every hop
+  (adapter probe, node gateway check, in-browser gateway + console path)
+  as `server_unavailable`, never as a fabricated acceptance. The
+  console's steering target list (Profile G snapshot) also remains
+  empty: the seed artifact chain validates locally under the backend's
+  own `GoalPlanValidator`, but this stack's Profile G services are
+  constructed without authority/policy validators, so creates fail
+  closed with `G_AUTHORITY_DENIED` by design.
+  **Pin advance (2026-10-14):** the datasets pin was advanced
+  (`external/ipfs_datasets` → `f4a823231ad52c9252504810a1b00ed4738346b6`);
+  `source_screening` is present and importable from the pinned submodule,
+  and on the restarted stack the seed run now proceeds into plan
+  construction — the boundary moved to an ipfs_accelerate_py internal
+  inconsistency (facade projects scope_paths `"."` for a root scan;
+  `plan_revision_contracts` rejects `"."`: `PlanRevisionPathError`,
+  typed in B10). Governance re-proved at the new pin at every hop
+  (gateway check + Playwright drive: dry run → local preview receipt
+  `rcpt-prompt-steering-7a6205d4`; unconfirmed → denied; confirmed →
+  dispatched, `server_unavailable` with the new verbatim cause; adapter
+  session snapshots before/after byte-identical — fail-closed).
+  **Verdict: PASS for the route and its governance; execution remainder
+  typed at B10 with the exact blocking piece named.** Screenshots
+  `fv-18-supervisor-steering-live.png`, `fv-19-supervisor-console-live.png`;
+  at the new pin `fv-20-supervisor-steering-newpin.png`,
+  `fv-21-supervisor-steering-after-confirmed.png`,
+  `fv-22-supervisor-console-newpin.png`;
+  evidence `fv_state/steering_route/`, `fv_state/pin_advance/`.
+
+  **Finisher (2026-10-14):** the two ipfs_accelerate_py inconsistencies
+  in the run-creation chain are FIXED (uncommitted; contract map B10
+  carries the evidence chain): the plan-scope projection now emits the
+  contracts' empty-tuple unnarrowed scope for a root scan instead of
+  leaking the scan layer's `"."` sentinel, and the facade supplies the
+  scanner's canonical allowlist/repository-root identities when
+  constructing the workflow request. Run creation now passes plan
+  construction and both scanner identity checks and reaches the real
+  directory scan, which terminates execution under its designed,
+  test-pinned policy: `NestedRepositoryError: nested repository or
+  submodule is forbidden at 'docs/fastmcp'` — ipfs_accelerate_py's HEAD
+  contains 10 tracked submodules, and it is the only repository here
+  with an activated production composition. Re-proved live on the
+  restarted stack at every hop: adapter probes (two identical
+  fail-closed sessions, composition CID unchanged), node gateway check
+  PASSED (dry run → local preview; unconfirmed → denied; confirmed →
+  `server_unavailable` with the verbatim cause), browser console path
+  (dry run → local preview receipt `rcpt-prompt-steering-9eb1272c`;
+  confirmed → the verbatim cause rendered). Suites: accelerate plan
+  set 143 passed before/after (fully unsealed re-runs); facade set
+  82 passed / 2 failed / 41 errors before/after (identical pre-existing
+  failures); superproject integration 528 passed / 29 skipped /
+  0 failed; steering vitest batch 17/17. **Verdict stands: PASS for the
+  route and governance; the execution remainder is the backend's
+  designed nested-repository policy — a deployment decision (a
+  submodule-free supervisor target), not a defect.** Screenshots
+  `fv-23-supervisor-steering-finisher.png`,
+  `fv-24-supervisor-steering-finisher-after-confirmed.png`,
+  `fv-25-supervisor-console-finisher.png`,
+  `fv-26-supervisor-steering-finisher-confirmed.png`;
+  evidence `fv_state/pin_advance/`.
+
+### F-16 — Audit4 verification pass (2026-10-15)
+- **Intended:** re-verify every suite baseline on the current tree (steering route + datasets pin
+  f4a82323 + two accelerate seam fixes, all uncommitted); re-scan the GUI↔backend inventory for
+  new controls and new fabricated claims; fix what the scan finds.
+- **Observed:** datasets ui_ux_ir **361 passed / 1 failed** (the 1 = known B3 checkout-layout);
+  solver determinism 1 passed; mcp_idl_identity_contract 32 passed; superproject integration
+  **528 passed / 29 skipped / 0 failed**; steering vitest batch **17/17** (also after the fixes
+  below); inventory re-run **45 apps / 1,401 controls — identical to audit3**, zero new controls;
+  R-f/R-g fixes hold (fabricated CIDs/receipts gone from datasets-browser and accelerate-panel).
+  Accelerate plan set **143 passed / 0 failed**; facade set **82 passed / 2 failed / 41 errors**
+  (both failures + all errors pre-existing/environmental, identical to baseline). Fixes applied: stale "no steering route" comment corrected (R-h); steering result
+  pane Mode badge now marks the standalone local preview honestly (R-i); 11 VDA evidence sections
+  carry an explicit "Evidence draft — fixture references" marker (R-j; strudel already declared
+  local). Steering confirmed-steering disposition moved out of typed-unavailable: the route is real
+  end-to-end; live execution currently terminates at the backend's designed, test-pinned
+  `NestedRepositoryError` policy — surfaced verbatim, fail-closed (a deployment decision, not a
+  defect). The 6 remaining typed-unavailable capabilities re-verified as genuinely absent in the
+  backends. All changes UNCOMMITTED.
+- **Program state:** `~/workspace/goals/lift-coding-swissknife-gui-integration/hidden_files/audit4_*`
+  (suite logs, scan census + notes).
+- **Verdict: PASS — no regressions; 3 truthfulness gaps found and fixed.**
 
 ## Per-app results (45 canonical + 3 aliases)
 
@@ -355,3 +460,5 @@ Notes on individual rows:
 | `fv-15-datasets-browser-audit3.png` | datasets-browser after invoking all six operations (real gateway envelopes; no canned CIDs/receipts) |
 | `fv-16-accelerate-panel-audit3.png` | accelerate-panel after invoking all five operations (real envelopes; no fake WebGPU claim) |
 | `fv-17-supervisor-console-audit3-warm.png` | Agent Supervisor console settled on the warm stack: health available, error set = the four typed capabilities |
+| `fv-18-supervisor-steering-live.png` | Agent Supervisor console, Steering pane on the live stack (steering build): planned MCP action `agent_supervisor.prompt_steering.request`, no target in the empty Profile G snapshot |
+| `fv-19-supervisor-console-live.png` | Agent Supervisor console live state during the steering-route drive (health available, snapshot genuinely empty) |

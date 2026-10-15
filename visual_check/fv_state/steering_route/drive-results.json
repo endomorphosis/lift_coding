@@ -1,0 +1,50 @@
+{
+  "started_at": "2026-10-14T11:34:43.736Z",
+  "console_errors": [
+    "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+  ],
+  "console": {
+    "status": "empty",
+    "transportMode": "degraded",
+    "healthStatus": "available",
+    "queue": 0,
+    "goals": 0,
+    "receipts": 0,
+    "gatewayInstalled": true
+  },
+  "steering_pane_text": "🖥️\nTerminal\n🎯\nVibeCode\n🎵\nMusic Studio\n🤖\nAI Chat\n📁\nFiles\n⚡\nTasks\n📋\nTodo\n🧠\nAI Models\n🤗\nHugging Face\n🔄\nOpenRouter\n🌐\nIPFS\n🔧\nDevices\n⚙️\nSettings\n🔌\nMCP Control\n🔑\nAPI Keys\n🐙\nGitHub\n🔐\nOAuth\n⏰\nAI Cron\nNAVI\n🔗\nP2P Network\n💬\nP2P Chat\n🧠\nNN Designer\n🎯\nTraining\n🧮\nCalculator\n🕐\nClock\n📅\nCalendar\n📺\nPeerTube\n👥\nFriends\n🖼️\nImages\n📝\nNotes\n🎵\nMedia Player\n📊\nMonitor\n🎨\nArt\n🎬\nCinema\n🎹\nStrudel\n🎼\nStrudel AI\n🎸\nStudio Classic\n💭\nP2P Classic\n▦\nDatasets\n▶\nAccelerate\n⌘\nIDL\n◉\nGlasses\n◇\nORB UI\n※\nMCP++\n◬\nSupervisor\n◬\nAgent Supervisor\n−\n□\n×\nAgent Supervisor\nGoals, task queue, receipts, and MCP++ health\nContract\nSecurity\nRefresh\nEmpty\nError\nSTATUS\navailable\nACTIVE GOALS\n0\nQUEUED\n0\nRUNNING\n0\nMODE\ndegraded\nNo supervisor work is queued.\nGoals, queue items, receipts, and logs are all empty for this snapshot.\nGoals\n0 goals\nNo goals available.\nQueue\n0 tasks\nNo queue items available.\nActive task\nDispatch\nSteering\nReceipts\nHealth\nContract\nPrompt steering\n\nNo target selected\n\nSteering prompt\nNORMALIZED TARGET\ntask:unselected\nPOLICY CLASS\nconfirm\nAFFECTED TASKS\nnone\nPROMPT SIZE\n0/8000\nPlanned MCP action\nagent_supervisor.prompt_steering.request\nipfs_accelerate_py via mcp, mcp++\nstructured-json-paylo",
+  "gateway": {
+    "dry": {
+      "state": "unavailable",
+      "reason": "capability_unavailable",
+      "message": "Prompt steering dry runs are previewed locally by the console; the backend route executes confirmed submissions only.",
+      "required_confirmation": false
+    },
+    "unconfirmed": {
+      "state": "denied",
+      "reason": "confirmation_required",
+      "message": "Governed supervisor writes require an explicit reviewed confirmation.",
+      "required_confirmation": true
+    },
+    "confirmed": {
+      "state": "unavailable",
+      "reason": "server_unavailable",
+      "message": "Timed out after 8000ms.",
+      "required_confirmation": false
+    }
+  },
+  "console_path": {
+    "dry": {
+      "state": "available",
+      "accepted": true,
+      "dry_run": true,
+      "receipt_id": "rcpt-prompt-steering-d0d1923a"
+    },
+    "confirmed": {
+      "state": "unavailable",
+      "reason": "server_unavailable",
+      "message": "Timed out after 8000ms."
+    }
+  },
+  "finished_at": "2026-10-14T11:35:36.556Z"
+}

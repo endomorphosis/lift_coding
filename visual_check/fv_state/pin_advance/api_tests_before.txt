@@ -1,0 +1,19 @@
+BEFORE the plan_create_service scope-projection fix (2026-10-14).
+
+Command (cwd = external/ipfs_accelerate, lift_coding .venv python):
+  python visual_check/fv_state/pin_advance/run_api_tests.py \
+    test/api/test_agent_supervisor_plan_revision_contracts.py \
+    test/api/test_agent_supervisor_plan_create_service.py \
+    test/api/test_plan_create_live_root_observation.py \
+    test/api/test_plan_create_semantic_input_identity.py \
+    test/api/test_agent_supervisor_plan_revision_store.py \
+    test/api/test_agent_supervisor_lgswf_plan_revision.py \
+    test/api/test_external_plan_revision.py -q -p no:cacheprovider
+
+run_api_tests.py pre-resolves ipfs_datasets_py from the pinned submodule
+(external/ipfs_datasets, f4a823231) — the stack's own configuration —
+because the accelerate repo conftest inserts the repo root at sys.path[0],
+which would otherwise resolve ipfs_datasets_py to the repo's vendored
+in-root clone (older pin, no logic/formalization/autoencoder package).
+
+Result: 143 passed in 162.83s (0 failed).

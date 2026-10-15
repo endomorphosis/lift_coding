@@ -1,0 +1,19 @@
+{
+ "jsonrpc": "2.0",
+ "id": 2,
+ "result": {
+  "ok": false,
+  "error": "NestedRepositoryError: nested repository or submodule is forbidden at 'docs/fastmcp'",
+  "error_code": "SupervisorRunUnavailable",
+  "session": {
+   "repository": "/home/hatch/workspace/lift_coding/external/ipfs_accelerate",
+   "open": true,
+   "open_error": null,
+   "composition_cid": "baguqeerauqzq7qsd5l23zxfasd7it6rhxabq747agtnelhkmqnbcgfg5tm3a",
+   "run_id": null,
+   "run_state": null,
+   "run_error": "NestedRepositoryError: nested repository or submodule is forbidden at 'docs/fastmcp'",
+   "seed_prompt_configured": false
+  }
+ }
+}

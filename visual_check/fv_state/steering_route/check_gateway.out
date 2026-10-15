@@ -1,0 +1,4 @@
+dry-run:     unavailable | capability_unavailable
+unconfirmed: denied | confirmation_required | required_confirmation: true
+confirmed:   unavailable | server_unavailable | ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.formalization.autoencoder'
+GATEWAY CHECK PASSED

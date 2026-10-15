@@ -1146,3 +1146,491 @@ Evidence (superproject, `visual_check/fv_state/audit3/`):
 - Screenshots: `visual_check/fv-14-supervisor-console-audit3.png`,
   `fv-15-datasets-browser-audit3.png`, `fv-16-accelerate-panel-audit3.png`,
   `fv-17-supervisor-console-audit3-warm.png`
+
+## Steering-route build (2026-10-14 — Benjamin: "build the steering adapter route")
+
+Closes the confirmed-steering half of B10: the route from the Agent
+Supervisor console to the ipfs_accelerate_py facade's `Supervisor.steer`
+now exists and dispatches genuinely end-to-end. All changes UNCOMMITTED.
+
+### Why the route has this shape (investigation, all live-verified)
+
+- The backend feature and its MCP publication already exist:
+  `agent_supervisor_steer` and siblings in
+  `external/ipfs_accelerate/ipfs_accelerate_py/mcp_server/tools/agent_supervisor_tools/prompt_entrypoints.py`
+  (ASE3-011) dispatch to the production facade. What was missing was
+  transport + session hosting, in three places:
+  1. The upstream FastAPI server (`fastapi_service.create_fastapi_app`)
+     registers only `/healthz` and `POST /mcp/policy/evaluate`; the
+     `/mcp/{path}` catch-all is the Profile G REST dispatcher and shadows
+     the mounted MCP tool app (live: `GET :9000/mcp/tools` → 404), so no
+     `agent_supervisor_*` tool is HTTP-reachable and the accelerate
+     adapter's upstream tool catalog is empty.
+  2. The prompt-lifecycle tools resolve their Supervisor through the
+     embedder hook `configure_prompt_lifecycle_supervisor(...)`; nothing
+     in the shipped server calls it, so each call would open a fresh
+     `Supervisor.open()` whose run registry is empty (open() never
+     rehydrates runs) — cross-call steering is impossible without a
+     hosted long-lived session.
+  3. The desktop gateway mapped no steering capability at all.
+- The production composition is activatable exactly one way in this
+  workspace: `Supervisor.open()` requires
+  `config/agent_supervisor_prompt_only_self_improvement_v3_scheduler.json`
+  under the repository root with the ASE3-026 activation completed —
+  present only in the ipfs_accelerate checkout (live probe:
+  `Supervisor.open(repository=<lift_coding>)` → SupervisorConfigurationError;
+  `Supervisor.open(repository=<external/ipfs_accelerate>)` → succeeds).
+
+### Changes (3 files, swissknife only; no backend repo touched)
+
+- `scripts/mcpplusplus-supervisor-steering.cjs` (new): persistent Python
+  worker bridge in the Profile G bridges' JSON-lines pattern. The worker
+  opens ONE production Supervisor session for the server-configured
+  repository (env `IPFS_ACCELERATE_AGENT_REPOSITORY`, default the sibling
+  `external/ipfs_accelerate` checkout — never client-supplied), injects
+  it via `configure_prompt_lifecycle_supervisor`, seeds the session's
+  run through the facade's own `Supervisor.run()` (env
+  `IPFS_ACCELERATE_SUPERVISOR_SEED_PROMPT` or a default backlog prompt),
+  and dispatches the backend's own `agent_supervisor_steer` tool
+  function plus a same-session `agent_supervisor_status` read-back.
+  Session state and typed errors are returned verbatim — fail-closed,
+  nothing fabricated.
+- `scripts/all-tools-evidence-lib.cjs`: the accelerate compat adapter
+  answers JSON-RPC `agent_supervisor.prompt_steering.request` through
+  the bridge (warmed at listen); bridge failure → JSON-RPC error with
+  the backend's real message.
+- `web/js/core/mcp-plus-plus-desktop-client.js`:
+  `createSupervisorGateway` gains `invokeSupervisorPromptSteering` —
+  dry runs return the same typed `capability_unavailable` result as
+  before, so the console's audit3 R7 local preview engages identically
+  and the backend is never called for a preview; a confirmed submission
+  without the console's confirmation token is denied at the gateway by
+  the shared `supervisorGovernedWriteDenial` (the audit3 governed-write
+  layer); a confirmed submission RPCs the adapter route and maps the
+  facade observation into the governed-acceptance shape, its receipt
+  CID being the backend's own `steering_prompt_cid`; backend failure
+  surfaces as `server_unavailable` with the verbatim cause — never as
+  `capability_unavailable`, so a confirmed failure can never be masked
+  by the local preview. The console app itself is unchanged.
+
+### Live proof (real stack; evidence `visual_check/fv_state/steering_route/`)
+
+- Adapter hop (`adapter-steer-probe.json`): the bridge session is OPEN
+  against the production composition — `open: true`, composition CID
+  `baguqeerauqzq7qsd5l23zxfasd7it6rhxabq747agtnelhkmqnbcgfg5tm3a` —
+  and the dispatch returns the tool envelope with the session record.
+- Gateway hop (`check_gateway.mjs`): dry run →
+  `unavailable/capability_unavailable`; unconfirmed →
+  `denied/confirmation_required`; confirmed → dispatched,
+  `server_unavailable` carrying the backend's verbatim error.
+- Browser hop (`drive_console.mjs`, `drive_confirmed.mjs`; screenshots
+  `fv-18`, `fv-19`): the console loads live (health available, snapshot
+  genuinely empty), the steering pane renders its planned MCP action
+  `agent_supervisor.prompt_steering.request`; through the page's own
+  gateway and the console's `invokeCapability`, the dry run produces the
+  local preview (receipt `rcpt-prompt-steering-d0d1923a`) and the
+  confirmed submission surfaces the backend's verbatim boundary as
+  `server_unavailable`. (One transient: the first in-browser confirmed
+  call exceeded the client timeout under VM load; the warm re-run
+  returns the boundary message — mediator path measured at 80 ms.)
+
+### The typed remainder (exact missing pieces; no simulation)
+
+1. **Run creation.** `Supervisor.run()` → `_run_from_prompt` imports
+   `prompt/plan_create_service.py` → `analysis/planning_analysis_factory.py`
+   → `ipfs_datasets_py.logic.formalization.autoencoder.source_screening`,
+   which exists in neither datasets checkout here (pinned submodule or
+   `~/workspace/ipfs_datasets_py`): cross-repo pin skew in the datasets
+   logic layer. Until the datasets pin gains
+   `logic/formalization/autoencoder/source_screening.py`, the hosted
+   session has no run to steer and the route returns the backend's
+   typed `SupervisorRunUnavailable` verbatim. The moment the module
+   exists, the unchanged route executes: the bridge seeds its run at
+   startup, `agent_supervisor_steer` returns the observation, and the
+   gateway issues the acceptance receipt from its
+   `steering_prompt_cid`. Note the facade's own semantics, by design:
+   a steer is an admitted intent record (`effect_applied: False`,
+   "no policy widening") consumed by the supervisor's admitted
+   workflow machinery — the route serves exactly that contract.
+2. **Console target seeding.** The steering pane's targets come from
+   the Profile G snapshot. A complete goal→decompose→select→task seed
+   chain was built and locally validated with the backend's own
+   `GoalPlanValidator` (`fv_state/steering_route/seed_profile_g.py`;
+   CIDs in `seed_profile_g.out`), but every Profile G service instance
+   in this stack is constructed without authority/policy validators,
+   so mutations fail closed with `G_AUTHORITY_DENIED`
+   ("Network deployments must replace these validators using
+   configure_profile_g_service before advertising the profile" — no
+   bootstrap in this stack does). Configuring validators is a
+   deployment decision outside this build; the seed script runs
+   unchanged once one is made.
+3. `supervisor.task-control.request` remains unrouted (unchanged;
+   this build was prompt-steering only).
+
+### Suites
+- audit3 `check_fix2.mjs`: PASSED (console preview/typed logic intact).
+- vitest batch 1 (browser-desktop-client, agent-supervisor-prompt-steering,
+  agent-supervisor-console-gateway): 17/17 passed — baseline held.
+- vitest batch 2 surface (ORB/IDL handoff, all-app tool gateway,
+  supervisor boundary, live gateway): only failure is the pre-existing
+  B9 SVD-098 stale packet-count expectation — unchanged, inputs untouched.
+- Python integration suite: **528 passed / 29 skipped / 0 failed**
+  (283.91 s) — the 528/29/0 baseline held exactly.
+
+## Datasets pin advance + steering completion attempt (2026-10-14 — Benjamin: "Advance the datasets pin and finish it end-to-end")
+
+### Pin advance: external/ipfs_datasets 8e67389b3 → f4a823231ad52c9252504810a1b00ed4738346b6
+- **Old pin:** local HEAD `8e67389b3e92db5b5e87c5c1ac577426a5abfc45`
+  (pin `721773d27` + the R4 solver commit; the pushed upstream form of
+  that commit is `d18fc9306`). **New pin:** `f4a823231ad52c9252504810a1b00ed4738346b6`,
+  the live `ipfs_datasets_py` main tip at advance start (ls-remote-verified;
+  `d18fc9306` verified an ancestor, so the advance loses nothing).
+  Superproject records the move as an UNSTAGED gitlink change, per
+  instructions; nothing committed or pushed in any repo.
+- **Step 1 (import path):** the steering bridge worker's own environment
+  (cwd = superproject root, lift_coding `.venv` python,
+  PYTHONPATH = external/ipfs_kit : external/ipfs_datasets :
+  external/ipfs_accelerate, as constructed in
+  `mcpplusplus-supervisor-steering.cjs`) resolves `ipfs_datasets_py` to
+  the superproject's `external/ipfs_datasets` copy — the pin advanced is
+  the right lever; pre-advance it reproduced
+  `ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.formalization.autoencoder'`.
+- **Preservation:** the one worktree modification — the czechia
+  legal_scrapers `normalize.py`, sha256
+  `e12ba1297aa245c74ddc4b9b4eb61478dac1e784d8ce072d18176ad6a5276d71` —
+  was copied to `visual_check/fv_state/pin_advance/normalize_preserved.py`
+  before the move (sha256 verified equal) and restored byte-identically
+  after; the path exists at the new pin with an identical committed blob
+  at both pins. Post-advance `git update-index --refresh` reported
+  exactly one path "needs update" (normalize.py), and
+  `git status --porcelain` is exactly one line (` M .../normalize.py`).
+- **How the checkout landed (the plain routes all failed on this egress):**
+  a plain detached checkout issued one 9,523-object promisor batch over
+  SSH and stalled mid-pack; chunked pathspec checkouts (219 chunks) then
+  proved the lazy-fetch path is round-trip-bound through the proxy
+  (32/219 banked in pass 1; HTTP/2 CANCEL errors → repo config
+  `http.version=HTTP/1.1` + stored HTTPS origin for the duration, both
+  reverted after) and a VM reboot killed a driver mid-pass (resumable
+  chunk bookkeeping under `fv_state/pin_advance/`). The bulk bytes were
+  finally moved as ONE resumable codeload tarball of the tip tree
+  (3,428,060,983 bytes in a single unbroken curl stream, `gzip -t` OK),
+  extracted over the worktree (0 errors), then `git read-tree <tip>`,
+  a `--no-renames` stale-file pass (exactly 13 old-pin-only files
+  removed; rename detection left off deliberately — it lazy-fetches
+  blobs for similarity), and `git update-ref --no-deref HEAD <tip>`.
+  Clone config restored (origin = SSH, `http.version` unset; promisor
+  `blob:none` untouched).
+- **Object store:** the worktree is 100% status-verified; of 26,687
+  unique tip-tree blobs, 17,918 (67.1%) are in the local object store
+  and 8,769 remain promisor-fetchable on demand. A bounded bonus
+  backfill of the missing list streamed to its 1,500 s cap without its
+  single pack finishing index-pack (rc=124, census unchanged).
+- **LFS note:** this clone has no `filter.lfs.smudge` configured and
+  git-lfs is not installed, so the one LFS subtree
+  (`processors/legal_scrapers/international/harvested/`, binary
+  extensions) sits in the worktree as pointer files — exactly what a
+  native checkout under this clone's configuration produces.
+
+### Suite re-baselines at the new pin (old → new)
+- datasets `tests/unit/logic/ui_ux_ir/`: **285 passed / 1 failed →
+  361 passed / 1 failed.** +76 tests, all passing (upstream added tests
+  between the pins). The failure is B3 again, identical mechanism
+  (adapter-note test ancestor-searches for the sibling accelerate
+  `data/…` path — checkout-layout, typed). Environment note: the suite
+  needs the three-tree PYTHONPATH the baseline runs used; without it,
+  collection fails because the datasets tree's uninitialized
+  `ipfs_accelerate_py` gitlink directory shadows the real package as a
+  namespace package (the module exists in the accelerate checkout).
+  `test_solver.py::test_solver_is_deterministic`: **1 passed** (the R4
+  fix is in the new pin's ancestry). `test_mcp_idl_identity_contract.py`:
+  33 → 32 tests (upstream revised the file between pins), all pass.
+- Superproject integration suite: **528 passed / 29 skipped / 0 failed**
+  (254.02 s) — identical to the old-pin baseline; no delta.
+- Steering vitest batch (browser-desktop-client,
+  agent-supervisor-prompt-steering, agent-supervisor-console-gateway):
+  **17/17** — identical to baseline.
+
+### Steering at the new pin — the boundary moved one layer deeper
+Stack restarted via `fv_state/bring-up.sh` + datasets dashboard :8899
+(all six ports UP, including the :9000 upstream that was down in the
+steering pass). The steering bridge's session opens live (composition
+CID `baguqeerauqzq7qsd5l23zxfasd7it6rhxabq747agtnelhkmqnbcgfg5tm3a`)
+and the seed `Supervisor.run()` — the step the pin advance was for —
+now gets PAST the datasets analysis import (that boundary is resolved:
+`source_screening` on disk in the pinned submodule and importable under
+the bridge's own environment) and ~19 s into plan construction, where
+it fails with a new typed error: **`PlanRevisionPathError: scope_paths
+must be a relative repository path`**. Root cause, code-verified
+(full traceback in `fv_state/pin_advance/probe_seed.out`):
+`plan_create_service.plan_create_request_from_workflow` projects
+`scope_paths` from the scan directory relative to the repository root;
+the facade's `_scan_directory_for_repository` returns the repository
+ROOT when the repo has no `pkg/` directory (the ipfs_accelerate
+checkout has none; the helper's docstring says "Scanning the repository
+root is valid"), projecting scope `"."` — and
+`planning/plan_revision_contracts._relative_path` explicitly rejects
+`"."` and `""`. An internal inconsistency in ipfs_accelerate_py,
+independent of the datasets pin. It was not worked around: editing the
+facade/contracts is a backend fix outside this pass's authority, and
+creating a `pkg/` directory in the accelerate tree would be a
+repo-tree change that also makes the seed scan vacuous.
+- **Governance re-proved at every hop at the new pin** (unchanged
+  `fv_state/steering_route/check_gateway.mjs`): dry run →
+  `unavailable/capability_unavailable` (console local preview engages —
+  in-browser preview receipt `rcpt-prompt-steering-7a6205d4`); unconfirmed
+  → `denied/confirmation_required`; confirmed → dispatched through the
+  route, surfacing `server_unavailable` with the verbatim new cause —
+  never masked, never simulated. (The check script exits 1 only because
+  its hard-coded alternative expectation names the OLD autoencoder
+  cause.) Adapter session snapshots before/after the attempts are
+  byte-identical: no run exists, nothing was mutated, no receipt
+  fabricated. Playwright drive: `fv-20` (steering pane, live console in
+  its honest degraded/empty state, "No target selected"),
+  `fv-21` (pane after the confirmed attempt), `fv-22` (console health);
+  results in `fv_state/pin_advance/drive-results.json`.
+- **Not exercised, deliberately:** the `configure_profile_g_service`
+  validator bootstrap (local-stack-only, as briefed). Its purpose is
+  letting the console pane target a seeded supervisor run; targeting is
+  downstream of run creation, which is what is blocked. It remains the
+  next step after the facade scope defect is fixed, together with the
+  already-validated `seed_profile_g.py`.
+- **Remaining chain to a real steering receipt, in order:** (1) an
+  ipfs_accelerate_py fix for the scope projection/contract mismatch
+  (Benjamin's call — a backend source change); (2) bridge seed succeeds
+  → confirmed steer returns the backend's `steering_prompt_cid`
+  acceptance through the unchanged route; (3) optional Profile G
+  validator bootstrap + `seed_profile_g.py` for pane-level targeting.
+  `supervisor.task-control.request` remains unrouted (unchanged).
+
+All changes UNCOMMITTED per instructions. Evidence directory:
+`visual_check/fv_state/pin_advance/` (PROGRESS.md, probes, suite logs,
+drive results, preservation + census artifacts). Contract map P17/B10
+and feature matrix F-15 updated.
+
+
+---
+
+## Finisher: plan-scope fix + scanner-identity fix; steering terminates at the designed nested-repository policy (2026-10-14)
+
+Scope: Benjamin's "Advance the datasets pin and finish it end-to-end" —
+the pin advance (previous section) left run creation blocked at
+`PlanRevisionPathError: scope_paths must be a relative repository path`.
+All changes UNCOMMITTED; no push.
+
+### Defect 1 — plan-scope projection (the assigned defect)
+
+Chain: bridge seed → `Supervisor.run()` → `facade._run_from_prompt` →
+`plan_create_service.plan_create_request_from_workflow` →
+`PlanCreateRequest.__post_init__` → `_paths` →
+`plan_revision_contracts._relative_path` rejects the projected
+`scope_paths=(".",)`.
+
+Layer decision (fix the DERIVATION, not the contract): both canonical
+contract layers reject root-as-value by design
+(`plan_revision_contracts._relative_path` rejects `"."`; its sibling
+`_absolute_path` explicitly rejects the filesystem root;
+`prompt_workflow._relative_path` likewise). No test or doc admits `"."`
+as a scope value (the fail-closed contracts test pins `../escape`,
+absolute, and relative-`repository_root` rejections only). Boundary
+translators elsewhere resolve the scan-layer `"."` sentinel rather than
+passing it through (`prompt_goal_planner.py`: substitutes output paths
+when the scan scope is `"."`). The contracts' representation of an
+unnarrowed whole-repository scope is the EMPTY tuple: `_paths` imposes
+no non-empty requirement, `PlanCreateRequest.from_dict` defaults
+missing scope to `()`, production + test code construct
+`scope_paths=()`, and downstream service code treats empty scope as
+root scope via explicit fallbacks. The tested projection shape is a
+package-relative path (service test: root `/workspace/plan-create`,
+directory `…/ipfs_accelerate_py` → scope `ipfs_accelerate_py`); the
+directory==root case was simply never exercised.
+
+Fix (`external/ipfs_accelerate`, `prompt/plan_create_service.py`,
++6/−1): in `plan_create_request_from_workflow`, the derived scan scope
+is translated where the projected `scope_paths` is formed — `"."`/`""`
+→ `()` (`projected_scope_paths`), with a comment naming the boundary.
+Explicit caller-supplied `scope_paths` untouched (the other production
+caller always passes explicit scope); `_relative_path`'s guards
+unchanged; no `pkg/` directory created; no bridge/seed special-casing.
+
+### Defect 2 — scanner identity seam (found by the finisher probe)
+
+With defect 1 fixed, the seed advanced into `preview()` and the real
+scanner rejected the request: `RepositoryAllowlistError: request
+allowlist identity does not match explicit allowlist`. Cause:
+`observe_production_bindings` stamps the workflow request with ad-hoc
+observed-scheme identities (`cid_for_dag_json` over
+`observed-allowlist@1` / `observed-repository-root@1`+head_tree),
+while the scanner's `_resolve_request` and the service's
+`_validate_scan` recompute and demand the scanner's canonical
+identities (`repository-allowlist@1` / `resolved-repository-root@1`,
+sha256-digest form). The two schemes can never match, for any root —
+the facade path was dead at both checks (the allowlist check fires
+first; the root-cid check is next). Deciding evidence: the request is
+a prompt/scanner contract — the scanner's own tests construct requests
+with `allowlist.allowlist_cid` from a canonical `RepositoryAllowlist`;
+the observed schemes appear exactly once in the codebase and have no
+other consumer; the conformance tests assert only presence of the
+observation identities (and the passing `run()` tests inject a stub
+scanner, which is why the seam was never exercised end-to-end).
+
+Fix (`entrypoints/facade.py`, +17/−2): at the request-construction
+boundary in `_run_from_prompt`, compute the request's
+`repository_root_cid` / `allowlist_cid` via
+`prompt_directory_scanner.repository_root_cid` /
+`repository_allowlist_cid`. The observation itself is untouched —
+repository_id, state roots, and status displays keep the observed
+domain. Downward import only (entrypoints → prompt); the pre-existing
+upward-import audit failure is byte-identical before/after (20 items).
+
+### Terminal boundary — designed policy, typed (not fixed)
+
+With both fixes, run creation passes plan construction and both
+identity checks and reaches the real scan, which raises
+`NestedRepositoryError: nested repository or submodule is forbidden at
+'docs/fastmcp'`. `_git_entries` rejects any gitlink in HEAD
+unconditionally; the error is test-pinned by design ("A nested Git
+repository makes the requested source closure ambiguous").
+ipfs_accelerate_py's HEAD contains 10 tracked submodules
+(docs/fastmcp, docs/mcp-python-sdk, ipfs_accelerate_py/mcplusplus,
+ipfs_datasets_py, ipfs_kit_py, ipfs_model_manager_py,
+ipfs_transformers_py, test/doc-builder, test/huggingface_doc_builder,
+test/huggingface_transformers), and it is the only repository on this
+machine with an activated production composition (ASE3-026) — no
+alternative honest seed target exists. Closing this means a
+backend/deployment decision (supervise a submodule-free repository, or
+a sanctioned nested-repo policy in the backend); weakening the
+fail-closed source-closure guard or restructuring the backend repo was
+deliberately NOT improvised. The Profile G validator bootstrap remains
+unexercised: pane targeting is downstream of run creation.
+
+### Tests (before → after; fully unsealed re-runs)
+
+The accelerate repo has a bespoke AST-seal pytest plugin
+(`ipfs_accelerate_py.testing.pytest_ast_seal`): a test is skipped when
+every file in its AST import closure matches a previously-passed seal.
+After-numbers below come from runs against a FRESH seal store
+(`IPFS_ACCELERATE_PYTEST_SEAL_DUCKDB` pointed at a new file), so every
+test genuinely re-executed. Test env: the stack's three-tree layout
+(pinned datasets pre-resolved) via
+`visual_check/fv_state/pin_advance/run_api_tests.py` — naive runs
+resolve `ipfs_datasets_py` to the accelerate repo's vendored in-root
+clone (older pin) and fail collection; an environment property, not
+the defect. Note: /tmp is a 512 MB tmpfs that pytest's scratch filled
+mid-run once (Errno 28); re-runs used `TMPDIR=~/.pytest_tmp` (roomy,
+outside any git worktree — fixture repos must not nest inside one).
+
+- Plan set (7 files: plan_revision_contracts, plan_create_service,
+  live_root_observation, semantic_input_identity, plan_revision_store,
+  lgswf_plan_revision, external_plan_revision): 143 passed →
+  **143 passed, 0 failed**.
+- Facade set (6 files: prompt_v3_python_api,
+  prompt_only_v3_conformance, entrypoint_package,
+  supervisor_planning_composition, repository_plan_preview,
+  finite_integer_plan_preview): 82 passed / 2 failed / 41 errors →
+  **82 passed / 2 failed / 41 errors** — failures identical
+  (duckdb-connect audit; upward-import audit, same 20 violations) and
+  the 41 errors are the finite-integer file's pre-existing
+  "native tools are required for qualification" environment errors.
+- Superproject integration (`python -m pytest tests/integration -q`):
+  **528 passed / 29 skipped / 0 failed** (baseline identical).
+- Steering vitest batch 1 (desktop client, prompt steering, console
+  gateway): **17/17**.
+
+### Live proof (stack restarted on the fixed code; dashboard :8899 up)
+
+- Seed probe (`pin_advance/probe_seed.py`, replicates the bridge seed):
+  before fixes — PlanRevisionPathError (`probe_seed.out`, pin-advance
+  pass); after fix 1 — RepositoryAllowlistError
+  (`probe_seed_fixed.out`); after fix 2 — NestedRepositoryError at the
+  real scan (`probe_seed_fixed2.out`).
+- Adapter (`pin_advance/adapter_probe.py`): two identical confirmed
+  dispatches → `SupervisorRunUnavailable`, session `run_id: null`,
+  `run_error` = the verbatim NestedRepositoryError; the two session
+  snapshots are byte-identical (fail-closed, composition CID
+  `baguqeerauqzq7qsd5l23zxfasd7it6rhxabq747agtnelhkmqnbcgfg5tm3a`
+  unchanged, nothing mutated, no receipt fabricated)
+  (`adapter-steer-1.json`, `adapter-steer-2.json`).
+- Gateway (`steering_route/check_gateway.mjs`, expectation updated to
+  the current verbatim cause; dry-run/unconfirmed assertions intact):
+  **GATEWAY CHECK PASSED** — dry run typed `capability_unavailable`,
+  unconfirmed `denied/confirmation_required`, confirmed dispatched →
+  `server_unavailable` with the verbatim cause
+  (`pin_advance/check_gateway.out`).
+- Browser console (Playwright): dry run → local preview receipt
+  `rcpt-prompt-steering-9eb1272c`; confirmed → `server_unavailable`
+  with the verbatim NestedRepositoryError through the console's own
+  invocation path (`drive-results-finisher.json`,
+  `drive-confirmed-finisher.json`). The full drive's confirmed calls
+  initially returned the gateway's 8 s RPC timeout under test-suite
+  load; the focused re-drive on the idle stack returned the verbatim
+  cause. Screenshots fv-23…fv-26.
+
+### Still typed
+
+- `supervisor.task-control.request`: no route (unchanged; out of this
+  build's scope).
+- Profile G validator configuration (`configure_profile_g_service`):
+  a deployment decision; the pane's target list stays empty until a
+  run exists and validators are configured.
+- Steering execution itself: terminates at the backend's designed
+  nested-repository scanner policy until the supervisor is deployed
+  against a submodule-free repository (backend/deployment decision).
+
+Evidence: `visual_check/fv_state/pin_advance/` (PROGRESS.md finisher
+appendix, probes, suite logs, drive results). Contract map P17/B10 and
+feature matrix F-15 updated. All changes UNCOMMITTED.
+
+## Audit4 verification + truthfulness fixes (2026-10-15)
+
+Re-verification pass on the current tree (steering route + datasets pin f4a82323 + two accelerate
+seam fixes, all uncommitted). Suites: datasets ui_ux_ir 361 passed / 1 failed (known B3);
+solver determinism 1 passed; mcp_idl_identity_contract 32 passed; superproject integration
+528 passed / 29 skipped / 0 failed; steering vitest batch 17/17 (also after the fixes below);
+accelerate plan set 143 passed / 0 failed; accelerate facade set 82 passed / 2 failed / 41 errors
+(both failures + all errors pre-existing/environmental, identical to baseline).
+GUI↔backend gap scan: inventory re-run = 45 apps / 1,401 controls, IDENTICAL to
+audit3 — zero new controls; R-f/R-g fixes hold (datasets-browser and accelerate-panel hardcoded
+CIDs and fixture receipts are gone: 8→0 / 4→0 CIDs, 7→0 / 7→0 receipts).
+
+### Fix A4-1 — stale "no steering route" comment (R-h)
+
+### Fix A4-1 — stale "no steering route" comment (R-h)
+`swissknife/web/js/apps/agent-supervisor.js`, `withLocalSteeringPreview`: the comment still said
+"the mediated gateway maps no prompt-steering route (a genuine backend gap)". The finisher built
+that route (console → gateway → accelerate adapter → Python bridge → production `Supervisor.steer`),
+so the comment was rewritten to describe the current architecture. Comment-only; behavior unchanged.
+
+### Fix A4-2 — honest Mode badge for the standalone local preview (R-i)
+`swissknife/web/js/apps/agent-supervisor.js`, steering result pane: previously a confirmed steering
+submission served by the no-gateway standalone fallback rendered `Mode: confirmed` next to a
+locally-computed `rcpt-prompt-steering-*` receipt with no local-preview indication. The badge now
+reads `dry-run (local preview)` for dry runs and `confirmed — local preview, no backend call` for
+confirmed submissions served by the standalone fallback (detected by the `rcpt-prompt-steering-`
+receipt prefix); gateway-path confirmed steering still renders `confirmed`. No test asserted the
+old label; steering vitest batch still 17/17 after the change.
+
+### Fix A4-3 — "Evidence draft" markers on the VDA evidence sections (R-j)
+11 app files under `swissknife/web/js/apps/` (calendar, neural-network-designer, clock, peertube,
+notes, p2p-chat-unified, friends-list, image-viewer, media-player, p2p-chat, mcp-plus-plus-explorer):
+each SVD evidence section header now carries `Evidence draft — CIDs, receipts and metrics shown are
+fixture references for design verification.` This closes the last fabricated-claim class found by the
+audit4 scan: fixture CIDs/receipts/metrics (e.g. calendar's `bafycalg035eventartifact`, media-player's
+`gateway RTT 42 ms`) rendered with no fixture marking, on cards whose buttons only update local state.
+Additive text only; SVD evidence markers and existing copy untouched; the e2e layout spec asserts
+layout (overflow/overlap/clipping), not text content. strudel-ai-daw skipped — its section already
+declares "tracked in one local session". All 12 edited JS files parse clean (esbuild).
+
+### Deliberately not changed
+- The scanner's `NestedRepositoryError` guard: designed, test-pinned policy; the nested-repo
+  deployment fork is Benjamin's decision. The steering route now terminates there fail-closed with the
+  verbatim backend error surfaced — never masked, never weakened.
+- The 6 typed-unavailable supervisor capabilities and accelerate Cancel: re-verified zero backend
+  implementations at the current pins — correctly typed, not gaps.
+- Wiring the 12 VDA evidence cards to live kit artifact routes (receipts.persist → artifacts PUT etc.)
+  would be the deeper fix for R-j; the evidence-draft markers are the honest, low-blast-radius close for
+  this pass. Full rewiring remains future work if Benjamin wants it.
+- `external/ipfs_kit` gitlink delta (recorded 40c98c71b9, checkout a9b98bea — 2026-09-28 setup residue)
+  and accelerate's nested `ipfs_datasets_py`/`ipfs_kit_py` deltas: pre-existing, untouched, flagged in the
+  contract map; alignment/commit is Benjamin's call.
+
+All changes UNCOMMITTED; nothing pushed. Evidence: `~/workspace/goals/lift-coding-swissknife-gui-integration/hidden_files/audit4_*`.

@@ -1,0 +1,1336 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.3.4, pluggy-1.6.0
+rootdir: /home/hatch/workspace/lift_coding/external/ipfs_accelerate/test
+configfile: pytest.ini
+plugins: anyio-4.8.0, asyncio-0.23.8, respx-0.22.0
+asyncio: mode=Mode.STRICT
+collected 125 items
+
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_composition_manifest_is_body_free_and_stable PASSED [  0%]
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_resolve_composition_from_activated_repo PASSED [  1%]
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_open_from_repo_requires_no_expert_args PASSED [  2%]
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_open_without_config_fails_typed PASSED [  3%]
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_preview_is_effect_free PASSED [  4%]
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_prompt_preview_rejects_scanner_program_root_mismatch_before_planning PASSED [  4%]
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_prompt_service_does_not_replace_the_planners_graph_with_campaign_ids PASSED [  5%]
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_run_without_complete_launch_plan_uses_observed_bindings PASSED [  6%]
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_start_without_bound_runtime_is_typed_unavailable PASSED [  7%]
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_run_with_real_intent_factory_reaches_service PASSED [  8%]
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_registered_run_handle_status_and_ambiguity PASSED [  8%]
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_status_ambiguity_without_run PASSED [  9%]
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_lazy_entrypoints_export_supervisor PASSED [ 10%]
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_package_root_exports_supervisor PASSED [ 11%]
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_init_local_requires_consent PASSED [ 12%]
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_observe_bindings_from_activated_repo PASSED [ 12%]
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_mutation_without_lease_fails_closed PASSED [ 13%]
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_stale_program_root_fails_closed PASSED [ 14%]
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_admitted_preview_includes_complete_materialization_inputs PASSED [ 15%]
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_authorized_apply_publishes_projection_identities 
+-------------------------------- live log call ---------------------------------
+2026-10-14 23:23:16 [    INFO] agent-supervisor quack prefer: no_live_owner database=/tmp/pytest-of-root/pytest-3/test_authorized_apply_publishe0/state/projections/tasks.duckdb reason=no_live_owner source=none rejections=status_missing; falling back to exclusive DuckDB file (duckdb_state.py:1857)
+2026-10-14 23:23:17 [    INFO] agent-supervisor quack prefer: no_live_owner database=/tmp/pytest-of-root/pytest-3/test_authorized_apply_publishe0/state/projections/tasks.duckdb reason=no_live_owner source=none rejections=status_missing; falling back to exclusive DuckDB file (duckdb_state.py:1857)
+2026-10-14 23:23:17 [    INFO] agent-supervisor quack prefer: no_live_owner database=/tmp/pytest-of-root/pytest-3/test_authorized_apply_publishe0/state/projections/tasks.duckdb reason=no_live_owner source=none rejections=status_missing; falling back to exclusive DuckDB file (duckdb_state.py:1857)
+2026-10-14 23:23:17 [    INFO] agent-supervisor quack prefer: no_live_owner database=/tmp/pytest-of-root/pytest-3/test_authorized_apply_publishe0/state/projections/tasks.duckdb reason=no_live_owner source=none rejections=status_missing; falling back to exclusive DuckDB file (duckdb_state.py:1857)
+2026-10-14 23:23:17 [    INFO] agent-supervisor quack prefer: no_live_owner database=/tmp/pytest-of-root/pytest-3/test_authorized_apply_publishe0/state/projections/tasks.duckdb reason=no_live_owner source=none rejections=status_missing; falling back to exclusive DuckDB file (duckdb_state.py:1857)
+2026-10-14 23:23:17 [    INFO] agent-supervisor quack prefer: no_live_owner database=/tmp/pytest-of-root/pytest-3/test_authorized_apply_publishe0/state/projections/tasks.duckdb reason=no_live_owner source=none rejections=status_missing; falling back to exclusive DuckDB file (duckdb_state.py:1857)
+2026-10-14 23:23:17 [    INFO] agent-supervisor quack prefer: no_live_owner database=/tmp/pytest-of-root/pytest-3/test_authorized_apply_publishe0/state/projections/tasks.duckdb reason=no_live_owner source=none rejections=status_missing; falling back to exclusive DuckDB file (duckdb_state.py:1857)
+2026-10-14 23:23:18 [    INFO] agent-supervisor quack prefer: no_live_owner database=/tmp/pytest-of-root/pytest-3/test_authorized_apply_publishe0/state/projections/tasks.duckdb reason=no_live_owner source=none rejections=status_missing; falling back to exclusive DuckDB file (duckdb_state.py:1857)
+2026-10-14 23:23:18 [    INFO] agent-supervisor quack prefer: no_live_owner database=/tmp/pytest-of-root/pytest-3/test_authorized_apply_publishe0/state/projections/tasks.duckdb reason=no_live_owner source=none rejections=status_missing; falling back to exclusive DuckDB file (duckdb_state.py:1857)
+PASSED                                                                   [ 16%]
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_start_is_separate_authorized_control 
+-------------------------------- live log call ---------------------------------
+2026-10-14 23:23:18 [    INFO] agent-supervisor quack prefer: no_live_owner database=/tmp/pytest-of-root/pytest-3/test_start_is_separate_authori0/state/projections/tasks.duckdb reason=no_live_owner source=none rejections=status_missing; falling back to exclusive DuckDB file (duckdb_state.py:1857)
+2026-10-14 23:23:19 [    INFO] agent-supervisor quack prefer: no_live_owner database=/tmp/pytest-of-root/pytest-3/test_start_is_separate_authori0/state/projections/tasks.duckdb reason=no_live_owner source=none rejections=status_missing; falling back to exclusive DuckDB file (duckdb_state.py:1857)
+2026-10-14 23:23:19 [    INFO] agent-supervisor quack prefer: no_live_owner database=/tmp/pytest-of-root/pytest-3/test_start_is_separate_authori0/state/projections/tasks.duckdb reason=no_live_owner source=none rejections=status_missing; falling back to exclusive DuckDB file (duckdb_state.py:1857)
+2026-10-14 23:23:19 [    INFO] agent-supervisor quack prefer: no_live_owner database=/tmp/pytest-of-root/pytest-3/test_start_is_separate_authori0/state/projections/tasks.duckdb reason=no_live_owner source=none rejections=status_missing; falling back to exclusive DuckDB file (duckdb_state.py:1857)
+2026-10-14 23:23:19 [    INFO] agent-supervisor quack prefer: no_live_owner database=/tmp/pytest-of-root/pytest-3/test_start_is_separate_authori0/state/projections/tasks.duckdb reason=no_live_owner source=none rejections=status_missing; falling back to exclusive DuckDB file (duckdb_state.py:1857)
+2026-10-14 23:23:19 [    INFO] agent-supervisor quack prefer: no_live_owner database=/tmp/pytest-of-root/pytest-3/test_start_is_separate_authori0/state/projections/tasks.duckdb reason=no_live_owner source=none rejections=status_missing; falling back to exclusive DuckDB file (duckdb_state.py:1857)
+2026-10-14 23:23:20 [    INFO] agent-supervisor quack prefer: no_live_owner database=/tmp/pytest-of-root/pytest-3/test_start_is_separate_authori0/state/projections/tasks.duckdb reason=no_live_owner source=none rejections=status_missing; falling back to exclusive DuckDB file (duckdb_state.py:1857)
+2026-10-14 23:23:20 [    INFO] agent-supervisor quack prefer: no_live_owner database=/tmp/pytest-of-root/pytest-3/test_start_is_separate_authori0/state/projections/tasks.duckdb reason=no_live_owner source=none rejections=status_missing; falling back to exclusive DuckDB file (duckdb_state.py:1857)
+2026-10-14 23:23:20 [    INFO] agent-supervisor quack prefer: no_live_owner database=/tmp/pytest-of-root/pytest-3/test_start_is_separate_authori0/state/projections/tasks.duckdb reason=no_live_owner source=none rejections=status_missing; falling back to exclusive DuckDB file (duckdb_state.py:1857)
+PASSED                                                                   [ 16%]
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_generic_submission_materializes_sixty_six_named_tasks PASSED [ 17%]
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_python_cli_mcp_identity_parity PASSED [ 18%]
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_direct_database_bypass_is_not_exposed PASSED [ 19%]
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_scheduler_handoff_disables_complete_launch_plan_injection PASSED [ 20%]
+test/api/test_agent_supervisor_prompt_v3_python_api.py::test_scan_directory_falls_back_to_repository_root_when_pkg_is_absent PASSED [ 20%]
+test/api/test_agent_supervisor_prompt_only_v3_conformance.py::test_python_and_cli_share_composition_cid PASSED [ 21%]
+test/api/test_agent_supervisor_prompt_only_v3_conformance.py::test_python_preview_and_mcp_discovery_share_backend_roles PASSED [ 22%]
+test/api/test_agent_supervisor_prompt_only_v3_conformance.py::test_cli_and_mcp_operation_vocabulary_parity PASSED [ 23%]
+test/api/test_agent_supervisor_prompt_only_v3_conformance.py::test_cli_cold_help_and_discovery_manifest PASSED [ 24%]
+test/api/test_agent_supervisor_prompt_only_v3_conformance.py::test_mcp_registration_is_schema_plus_callable_not_schema_only PASSED [ 24%]
+test/api/test_agent_supervisor_prompt_only_v3_conformance.py::test_preview_does_not_authorize_effects PASSED [ 25%]
+test/api/test_agent_supervisor_prompt_only_v3_conformance.py::test_run_without_bound_runtime_is_unavailable_not_simulated PASSED [ 26%]
+test/api/test_agent_supervisor_prompt_only_v3_conformance.py::test_launch_roots_do_not_call_raw_duckdb_connect PASSED [ 27%]
+test/api/test_agent_supervisor_prompt_only_v3_conformance.py::test_prompt_product_duckdb_connection_audit_classifies_raw_sites FAILED [ 28%]
+test/api/test_agent_supervisor_entrypoint_package.py::test_reviewed_contract_exports_preserve_exact_object_identity PASSED [ 28%]
+test/api/test_agent_supervisor_entrypoint_package.py::test_import_is_cold_provider_free_and_effect_free PASSED [ 29%]
+test/api/test_agent_supervisor_entrypoint_package.py::test_no_lower_domain_package_imports_upward_to_entrypoints FAILED [ 30%]
+test/api/test_agent_supervisor_entrypoint_package.py::test_entrypoint_initializer_imports_contracts_only PASSED [ 31%]
+test/api/test_agent_supervisor_entrypoint_package.py::test_package_map_documents_highest_layer_and_storage_boundary PASSED [ 32%]
+test/api/test_supervisor_planning_composition.py::test_native_analysis_and_admission_factory_reach_prompt_service PASSED [ 32%]
+test/api/test_repository_plan_preview.py::test_native_preview_compiles_declared_tasks_and_binds_current_structural_input[1] PASSED [ 33%]
+test/api/test_repository_plan_preview.py::test_native_preview_compiles_declared_tasks_and_binds_current_structural_input[2] PASSED [ 34%]
+test/api/test_repository_plan_preview.py::test_wrong_selected_source_roots_reject_before_planning[repository_root_cid] PASSED [ 35%]
+test/api/test_repository_plan_preview.py::test_wrong_selected_source_roots_reject_before_planning[dirty_worktree_root] PASSED [ 36%]
+test/api/test_repository_plan_preview.py::test_wrong_selected_source_roots_reject_before_planning[program_root] PASSED [ 36%]
+test/api/test_repository_plan_preview.py::test_caller_authority_and_model_inputs_cannot_enter_repository_route[current_roots] PASSED [ 37%]
+test/api/test_repository_plan_preview.py::test_caller_authority_and_model_inputs_cannot_enter_repository_route[current_facts] PASSED [ 38%]
+test/api/test_repository_plan_preview.py::test_caller_authority_and_model_inputs_cannot_enter_repository_route[obligation_graph] PASSED [ 39%]
+test/api/test_repository_plan_preview.py::test_caller_authority_and_model_inputs_cannot_enter_repository_route[evidence_bundle] PASSED [ 40%]
+test/api/test_repository_plan_preview.py::test_caller_authority_and_model_inputs_cannot_enter_repository_route[admission_materials] PASSED [ 40%]
+test/api/test_repository_plan_preview.py::test_caller_authority_and_model_inputs_cannot_enter_repository_route[model_provider] PASSED [ 41%]
+test/api/test_repository_plan_preview.py::test_caller_authority_and_model_inputs_cannot_enter_repository_route[scan] PASSED [ 42%]
+test/api/test_repository_plan_preview.py::test_caller_authority_and_model_inputs_cannot_enter_repository_route[evidence_adapters] PASSED [ 43%]
+test/api/test_repository_plan_preview.py::test_caller_authority_and_model_inputs_cannot_enter_repository_route[evidence_queries] PASSED [ 44%]
+test/api/test_repository_plan_preview.py::test_caller_authority_and_model_inputs_cannot_enter_repository_route[parallel_request] PASSED [ 44%]
+test/api/test_repository_plan_preview.py::test_caller_authority_and_model_inputs_cannot_enter_repository_route[parallel_tasks] PASSED [ 45%]
+test/api/test_repository_plan_preview.py::test_caller_cannot_shadow_frozen_request_or_owner_context[candidate_context-request_cid] PASSED [ 46%]
+test/api/test_repository_plan_preview.py::test_caller_cannot_shadow_frozen_request_or_owner_context[candidate_context-scope_paths] ERROR [ 47%]
+test/api/test_repository_plan_preview.py::test_caller_cannot_shadow_frozen_request_or_owner_context[candidate_context-structural_codebase_context_cid] ERROR [ 48%]
+test/api/test_repository_plan_preview.py::test_caller_cannot_shadow_frozen_request_or_owner_context[extra-structural_codebase] ERROR [ 48%]
+test/api/test_repository_plan_preview.py::test_preview_observation_never_reprepares_or_parses_repository ERROR [ 49%]
+test/api/test_repository_plan_preview.py::test_authored_goal_must_reference_selected_snapshot[intent] ERROR [ 50%]
+test/api/test_repository_plan_preview.py::test_authored_goal_must_reference_selected_snapshot[frozen_goal] ERROR [ 51%]
+test/api/test_repository_plan_preview.py::test_changed_checkout_rejects_even_when_policy_observer_returns_static_expected_roots ERROR [ 52%]
+test/api/test_repository_plan_preview.py::test_policy_observer_cannot_hide_source_edit_during_observation ERROR [ 52%]
+test/api/test_repository_plan_preview.py::test_source_edit_after_real_candidate_work_cannot_persist_or_cache ERROR [ 53%]
+test/api/test_repository_plan_preview.py::test_policy_change_during_real_candidate_work_prevents_persistence ERROR [ 54%]
+test/api/test_repository_plan_preview.py::test_stale_selected_generation_is_not_replaced_by_current_head ERROR [ 55%]
+test/api/test_repository_plan_preview.py::test_native_successor_changes_frozen_metadata_and_planner_identity ERROR [ 56%]
+test/api/test_repository_plan_preview.py::test_cancelled_repository_preview_returns_no_result_or_cache[before_entry] ERROR [ 56%]
+test/api/test_repository_plan_preview.py::test_cancelled_repository_preview_returns_no_result_or_cache[during_policy_observation] ERROR [ 57%]
+test/api/test_repository_plan_preview.py::test_expired_overall_deadline_prevents_service_work ERROR [ 58%]
+test/api/test_repository_plan_preview.py::test_missing_live_policy_observer_and_wrong_repository_locator_reject ERROR [ 59%]
+test/api/test_repository_plan_preview.py::test_owner_controls_are_frozen_and_native_owner_is_required ERROR [ 60%]
+test/api/test_finite_integer_plan_preview.py::test_one_current_finite_fact_selects_only_the_reviewed_offset_operation ERROR [ 60%]
+test/api/test_finite_integer_plan_preview.py::test_newly_captured_successor_has_two_facts_and_an_explicit_empty_plan ERROR [ 61%]
+test/api/test_finite_integer_plan_preview.py::test_fresh_repeat_runs_the_native_observer_again_and_never_recovers_facts_from_history ERROR [ 62%]
+test/api/test_finite_integer_plan_preview.py::test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[prompt] ERROR [ 63%]
+test/api/test_finite_integer_plan_preview.py::test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[intent] ERROR [ 64%]
+test/api/test_finite_integer_plan_preview.py::test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[catalog] ERROR [ 64%]
+test/api/test_finite_integer_plan_preview.py::test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[repository_root] ERROR [ 65%]
+test/api/test_finite_integer_plan_preview.py::test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[dirty_root] ERROR [ 66%]
+test/api/test_finite_integer_plan_preview.py::test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[program] ERROR [ 67%]
+test/api/test_finite_integer_plan_preview.py::test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[locator] ERROR [ 68%]
+test/api/test_finite_integer_plan_preview.py::test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[scope] ERROR [ 68%]
+test/api/test_finite_integer_plan_preview.py::test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[model_budget] ERROR [ 69%]
+test/api/test_finite_integer_plan_preview.py::test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[task_budget] ERROR [ 70%]
+test/api/test_finite_integer_plan_preview.py::test_reviewed_catalog_cannot_retarget_a_clause[path-other.py] ERROR [ 71%]
+test/api/test_finite_integer_plan_preview.py::test_reviewed_catalog_cannot_retarget_a_clause[function_name-different] ERROR [ 72%]
+test/api/test_finite_integer_plan_preview.py::test_reviewed_catalog_cannot_retarget_a_clause[parameter-other] ERROR [ 72%]
+test/api/test_finite_integer_plan_preview.py::test_catalog_requires_two_distinct_reviewed_bounded_operations[missing_clause] PASSED [ 73%]
+test/api/test_finite_integer_plan_preview.py::test_catalog_requires_two_distinct_reviewed_bounded_operations[duplicate_requirement] PASSED [ 74%]
+test/api/test_finite_integer_plan_preview.py::test_catalog_requires_two_distinct_reviewed_bounded_operations[duplicate_task] PASSED [ 75%]
+test/api/test_finite_integer_plan_preview.py::test_catalog_requires_two_distinct_reviewed_bounded_operations[duplicate_producer] PASSED [ 76%]
+test/api/test_finite_integer_plan_preview.py::test_catalog_requires_two_distinct_reviewed_bounded_operations[unknown_requirement] PASSED [ 76%]
+test/api/test_finite_integer_plan_preview.py::test_catalog_requires_two_distinct_reviewed_bounded_operations[unreviewed] PASSED [ 77%]
+test/api/test_finite_integer_plan_preview.py::test_catalog_requires_two_distinct_reviewed_bounded_operations[wrong_operation] PASSED [ 78%]
+test/api/test_finite_integer_plan_preview.py::test_catalog_identity_is_frozen_and_reflects_reviewed_operation_identity PASSED [ 79%]
+test/api/test_finite_integer_plan_preview.py::test_prompt_and_ir_have_distinct_dag_json_roles_binding_exact_native_bytes PASSED [ 80%]
+test/api/test_finite_integer_plan_preview.py::test_public_route_accepts_no_caller_evidence_or_stage_injection[observation] ERROR [ 80%]
+test/api/test_finite_integer_plan_preview.py::test_public_route_accepts_no_caller_evidence_or_stage_injection[current_facts] ERROR [ 81%]
+test/api/test_finite_integer_plan_preview.py::test_public_route_accepts_no_caller_evidence_or_stage_injection[materials] ERROR [ 82%]
+test/api/test_finite_integer_plan_preview.py::test_public_route_accepts_no_caller_evidence_or_stage_injection[service_factory] ERROR [ 83%]
+test/api/test_finite_integer_plan_preview.py::test_public_route_accepts_no_caller_evidence_or_stage_injection[evidence_bundle] ERROR [ 84%]
+test/api/test_finite_integer_plan_preview.py::test_public_route_accepts_no_caller_evidence_or_stage_injection[receipt] ERROR [ 84%]
+test/api/test_finite_integer_plan_preview.py::test_unsupported_captured_module_creates_no_service_proposal_or_native_process ERROR [ 85%]
+test/api/test_finite_integer_plan_preview.py::test_valid_ir_with_different_clause_meaning_cannot_borrow_the_full_prompt ERROR [ 86%]
+test/api/test_finite_integer_plan_preview.py::test_live_service_fences_refuse_source_artifact_or_tool_drift_before_publication[_stage_candidate-source] ERROR [ 87%]
+test/api/test_finite_integer_plan_preview.py::test_live_service_fences_refuse_source_artifact_or_tool_drift_before_publication[_stage_critique-source] ERROR [ 88%]
+test/api/test_finite_integer_plan_preview.py::test_live_service_fences_refuse_source_artifact_or_tool_drift_before_publication[_stage_candidate-trace] ERROR [ 88%]
+test/api/test_finite_integer_plan_preview.py::test_live_service_fences_refuse_source_artifact_or_tool_drift_before_publication[_stage_critique-lean] ERROR [ 89%]
+test/api/test_finite_integer_plan_preview.py::test_live_service_fences_refuse_source_artifact_or_tool_drift_before_publication[_stage_candidate-tool] ERROR [ 90%]
+test/api/test_finite_integer_plan_preview.py::test_independent_policy_callback_cannot_shadow_current_owner_or_full_roots[partial_roots] ERROR [ 91%]
+test/api/test_finite_integer_plan_preview.py::test_independent_policy_callback_cannot_shadow_current_owner_or_full_roots[stale_policy] ERROR [ 92%]
+test/api/test_finite_integer_plan_preview.py::test_independent_policy_callback_cannot_shadow_current_owner_or_full_roots[source_drift] ERROR [ 92%]
+test/api/test_finite_integer_plan_preview.py::test_policy_callback_tampering_with_fresh_certificate_is_rechecked_after_callback ERROR [ 93%]
+test/api/test_finite_integer_plan_preview.py::test_final_inner_native_exit_rechecks_artifacts_before_service_publication ERROR [ 94%]
+test/api/test_finite_integer_plan_preview.py::test_final_outer_native_exit_cannot_return_a_proposal_with_changed_artifacts ERROR [ 95%]
+test/api/test_finite_integer_plan_preview.py::test_same_byte_new_head_generation_rejects_old_owner_without_execution ERROR [ 96%]
+test/api/test_finite_integer_plan_preview.py::test_cancellation_cannot_return_or_publish_a_finite_plan[entry] ERROR [ 96%]
+test/api/test_finite_integer_plan_preview.py::test_cancellation_cannot_return_or_publish_a_finite_plan[candidate] ERROR [ 97%]
+test/api/test_finite_integer_plan_preview.py::test_expired_overall_budget_cannot_start_native_execution ERROR [ 98%]
+test/api/test_finite_integer_plan_preview.py::test_deadline_after_actual_candidate_work_prevents_receipt_publication ERROR [ 99%]
+test/api/test_finite_integer_plan_preview.py::test_output_directory_cannot_reuse_a_prior_positive_observation ERROR [100%]
+
+==================================== ERRORS ====================================
+_ ERROR at setup of test_caller_cannot_shadow_frozen_request_or_owner_context[candidate_context-scope_paths] _
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-3/test_caller_cannot_shadow_froz1')
+
+    @pytest.fixture
+    def native(tmp_path):
+        repository = tmp_path / "private-repository-locator"
+        repository.mkdir()
+        source = repository / "private_source_name.py"
+>       source.write_text("def private_source_symbol(n):\n    return n + 1\n")
+
+test/api/test_structural_codebase_context.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-root/pytest-3/test_caller_cannot_shadow_froz1/private-repository-locator/private_source_name.py')
+data = 'def private_source_symbol(n):\n    return n + 1\n', encoding = 'utf-8'
+errors = None, newline = None
+
+    def write_text(self, data, encoding=None, errors=None, newline=None):
+        """
+        Open the file in text mode, write to it, and close the file.
+        """
+        if not isinstance(data, str):
+            raise TypeError('data must be str, not %s' %
+                            data.__class__.__name__)
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+E       OSError: [Errno 28] No space left on device
+
+/usr/lib/python3.12/pathlib.py:1049: OSError
+_ ERROR at setup of test_caller_cannot_shadow_frozen_request_or_owner_context[candidate_context-structural_codebase_context_cid] _
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-3/test_caller_cannot_shadow_froz2')
+
+    @pytest.fixture
+    def native(tmp_path):
+        repository = tmp_path / "private-repository-locator"
+        repository.mkdir()
+        source = repository / "private_source_name.py"
+>       source.write_text("def private_source_symbol(n):\n    return n + 1\n")
+
+test/api/test_structural_codebase_context.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-root/pytest-3/test_caller_cannot_shadow_froz2/private-repository-locator/private_source_name.py')
+data = 'def private_source_symbol(n):\n    return n + 1\n', encoding = 'utf-8'
+errors = None, newline = None
+
+    def write_text(self, data, encoding=None, errors=None, newline=None):
+        """
+        Open the file in text mode, write to it, and close the file.
+        """
+        if not isinstance(data, str):
+            raise TypeError('data must be str, not %s' %
+                            data.__class__.__name__)
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+E       OSError: [Errno 28] No space left on device
+
+/usr/lib/python3.12/pathlib.py:1049: OSError
+_ ERROR at setup of test_caller_cannot_shadow_frozen_request_or_owner_context[extra-structural_codebase] _
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-3/test_caller_cannot_shadow_froz3')
+
+    @pytest.fixture
+    def native(tmp_path):
+        repository = tmp_path / "private-repository-locator"
+        repository.mkdir()
+        source = repository / "private_source_name.py"
+>       source.write_text("def private_source_symbol(n):\n    return n + 1\n")
+
+test/api/test_structural_codebase_context.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-root/pytest-3/test_caller_cannot_shadow_froz3/private-repository-locator/private_source_name.py')
+data = 'def private_source_symbol(n):\n    return n + 1\n', encoding = 'utf-8'
+errors = None, newline = None
+
+    def write_text(self, data, encoding=None, errors=None, newline=None):
+        """
+        Open the file in text mode, write to it, and close the file.
+        """
+        if not isinstance(data, str):
+            raise TypeError('data must be str, not %s' %
+                            data.__class__.__name__)
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+E       OSError: [Errno 28] No space left on device
+
+/usr/lib/python3.12/pathlib.py:1049: OSError
+_ ERROR at setup of test_preview_observation_never_reprepares_or_parses_repository _
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-3/test_preview_observation_never0')
+
+    @pytest.fixture
+    def native(tmp_path):
+        repository = tmp_path / "private-repository-locator"
+        repository.mkdir()
+        source = repository / "private_source_name.py"
+>       source.write_text("def private_source_symbol(n):\n    return n + 1\n")
+
+test/api/test_structural_codebase_context.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-root/pytest-3/test_preview_observation_never0/private-repository-locator/private_source_name.py')
+data = 'def private_source_symbol(n):\n    return n + 1\n', encoding = 'utf-8'
+errors = None, newline = None
+
+    def write_text(self, data, encoding=None, errors=None, newline=None):
+        """
+        Open the file in text mode, write to it, and close the file.
+        """
+        if not isinstance(data, str):
+            raise TypeError('data must be str, not %s' %
+                            data.__class__.__name__)
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+E       OSError: [Errno 28] No space left on device
+
+/usr/lib/python3.12/pathlib.py:1049: OSError
+_ ERROR at setup of test_authored_goal_must_reference_selected_snapshot[intent] _
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-3/test_authored_goal_must_refere0')
+
+    @pytest.fixture
+    def native(tmp_path):
+        repository = tmp_path / "private-repository-locator"
+        repository.mkdir()
+        source = repository / "private_source_name.py"
+>       source.write_text("def private_source_symbol(n):\n    return n + 1\n")
+
+test/api/test_structural_codebase_context.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-root/pytest-3/test_authored_goal_must_refere0/private-repository-locator/private_source_name.py')
+data = 'def private_source_symbol(n):\n    return n + 1\n', encoding = 'utf-8'
+errors = None, newline = None
+
+    def write_text(self, data, encoding=None, errors=None, newline=None):
+        """
+        Open the file in text mode, write to it, and close the file.
+        """
+        if not isinstance(data, str):
+            raise TypeError('data must be str, not %s' %
+                            data.__class__.__name__)
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+E       OSError: [Errno 28] No space left on device
+
+/usr/lib/python3.12/pathlib.py:1049: OSError
+_ ERROR at setup of test_authored_goal_must_reference_selected_snapshot[frozen_goal] _
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-3/test_authored_goal_must_refere1')
+
+    @pytest.fixture
+    def native(tmp_path):
+        repository = tmp_path / "private-repository-locator"
+        repository.mkdir()
+        source = repository / "private_source_name.py"
+>       source.write_text("def private_source_symbol(n):\n    return n + 1\n")
+
+test/api/test_structural_codebase_context.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-root/pytest-3/test_authored_goal_must_refere1/private-repository-locator/private_source_name.py')
+data = 'def private_source_symbol(n):\n    return n + 1\n', encoding = 'utf-8'
+errors = None, newline = None
+
+    def write_text(self, data, encoding=None, errors=None, newline=None):
+        """
+        Open the file in text mode, write to it, and close the file.
+        """
+        if not isinstance(data, str):
+            raise TypeError('data must be str, not %s' %
+                            data.__class__.__name__)
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+E       OSError: [Errno 28] No space left on device
+
+/usr/lib/python3.12/pathlib.py:1049: OSError
+_ ERROR at setup of test_changed_checkout_rejects_even_when_policy_observer_returns_static_expected_roots _
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-3/test_changed_checkout_rejects_0')
+
+    @pytest.fixture
+    def native(tmp_path):
+        repository = tmp_path / "private-repository-locator"
+        repository.mkdir()
+        source = repository / "private_source_name.py"
+>       source.write_text("def private_source_symbol(n):\n    return n + 1\n")
+
+test/api/test_structural_codebase_context.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-root/pytest-3/test_changed_checkout_rejects_0/private-repository-locator/private_source_name.py')
+data = 'def private_source_symbol(n):\n    return n + 1\n', encoding = 'utf-8'
+errors = None, newline = None
+
+    def write_text(self, data, encoding=None, errors=None, newline=None):
+        """
+        Open the file in text mode, write to it, and close the file.
+        """
+        if not isinstance(data, str):
+            raise TypeError('data must be str, not %s' %
+                            data.__class__.__name__)
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+E       OSError: [Errno 28] No space left on device
+
+/usr/lib/python3.12/pathlib.py:1049: OSError
+_ ERROR at setup of test_policy_observer_cannot_hide_source_edit_during_observation _
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-3/test_policy_observer_cannot_hi0')
+
+    @pytest.fixture
+    def native(tmp_path):
+        repository = tmp_path / "private-repository-locator"
+        repository.mkdir()
+        source = repository / "private_source_name.py"
+>       source.write_text("def private_source_symbol(n):\n    return n + 1\n")
+
+test/api/test_structural_codebase_context.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-root/pytest-3/test_policy_observer_cannot_hi0/private-repository-locator/private_source_name.py')
+data = 'def private_source_symbol(n):\n    return n + 1\n', encoding = 'utf-8'
+errors = None, newline = None
+
+    def write_text(self, data, encoding=None, errors=None, newline=None):
+        """
+        Open the file in text mode, write to it, and close the file.
+        """
+        if not isinstance(data, str):
+            raise TypeError('data must be str, not %s' %
+                            data.__class__.__name__)
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+E       OSError: [Errno 28] No space left on device
+
+/usr/lib/python3.12/pathlib.py:1049: OSError
+_ ERROR at setup of test_source_edit_after_real_candidate_work_cannot_persist_or_cache _
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-3/test_source_edit_after_real_ca0')
+
+    @pytest.fixture
+    def native(tmp_path):
+        repository = tmp_path / "private-repository-locator"
+        repository.mkdir()
+        source = repository / "private_source_name.py"
+>       source.write_text("def private_source_symbol(n):\n    return n + 1\n")
+
+test/api/test_structural_codebase_context.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-root/pytest-3/test_source_edit_after_real_ca0/private-repository-locator/private_source_name.py')
+data = 'def private_source_symbol(n):\n    return n + 1\n', encoding = 'utf-8'
+errors = None, newline = None
+
+    def write_text(self, data, encoding=None, errors=None, newline=None):
+        """
+        Open the file in text mode, write to it, and close the file.
+        """
+        if not isinstance(data, str):
+            raise TypeError('data must be str, not %s' %
+                            data.__class__.__name__)
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+E       OSError: [Errno 28] No space left on device
+
+/usr/lib/python3.12/pathlib.py:1049: OSError
+_ ERROR at setup of test_policy_change_during_real_candidate_work_prevents_persistence _
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-3/test_policy_change_during_real0')
+
+    @pytest.fixture
+    def native(tmp_path):
+        repository = tmp_path / "private-repository-locator"
+        repository.mkdir()
+        source = repository / "private_source_name.py"
+>       source.write_text("def private_source_symbol(n):\n    return n + 1\n")
+
+test/api/test_structural_codebase_context.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-root/pytest-3/test_policy_change_during_real0/private-repository-locator/private_source_name.py')
+data = 'def private_source_symbol(n):\n    return n + 1\n', encoding = 'utf-8'
+errors = None, newline = None
+
+    def write_text(self, data, encoding=None, errors=None, newline=None):
+        """
+        Open the file in text mode, write to it, and close the file.
+        """
+        if not isinstance(data, str):
+            raise TypeError('data must be str, not %s' %
+                            data.__class__.__name__)
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+E       OSError: [Errno 28] No space left on device
+
+/usr/lib/python3.12/pathlib.py:1049: OSError
+_ ERROR at setup of test_stale_selected_generation_is_not_replaced_by_current_head _
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-3/test_stale_selected_generation0')
+
+    @pytest.fixture
+    def native(tmp_path):
+        repository = tmp_path / "private-repository-locator"
+        repository.mkdir()
+        source = repository / "private_source_name.py"
+>       source.write_text("def private_source_symbol(n):\n    return n + 1\n")
+
+test/api/test_structural_codebase_context.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-root/pytest-3/test_stale_selected_generation0/private-repository-locator/private_source_name.py')
+data = 'def private_source_symbol(n):\n    return n + 1\n', encoding = 'utf-8'
+errors = None, newline = None
+
+    def write_text(self, data, encoding=None, errors=None, newline=None):
+        """
+        Open the file in text mode, write to it, and close the file.
+        """
+        if not isinstance(data, str):
+            raise TypeError('data must be str, not %s' %
+                            data.__class__.__name__)
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+E       OSError: [Errno 28] No space left on device
+
+/usr/lib/python3.12/pathlib.py:1049: OSError
+_ ERROR at setup of test_native_successor_changes_frozen_metadata_and_planner_identity _
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-3/test_native_successor_changes_0')
+
+    @pytest.fixture
+    def native(tmp_path):
+        repository = tmp_path / "private-repository-locator"
+        repository.mkdir()
+        source = repository / "private_source_name.py"
+>       source.write_text("def private_source_symbol(n):\n    return n + 1\n")
+
+test/api/test_structural_codebase_context.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-root/pytest-3/test_native_successor_changes_0/private-repository-locator/private_source_name.py')
+data = 'def private_source_symbol(n):\n    return n + 1\n', encoding = 'utf-8'
+errors = None, newline = None
+
+    def write_text(self, data, encoding=None, errors=None, newline=None):
+        """
+        Open the file in text mode, write to it, and close the file.
+        """
+        if not isinstance(data, str):
+            raise TypeError('data must be str, not %s' %
+                            data.__class__.__name__)
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+E       OSError: [Errno 28] No space left on device
+
+/usr/lib/python3.12/pathlib.py:1049: OSError
+_ ERROR at setup of test_cancelled_repository_preview_returns_no_result_or_cache[before_entry] _
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-3/test_cancelled_repository_prev0')
+
+    @pytest.fixture
+    def native(tmp_path):
+        repository = tmp_path / "private-repository-locator"
+        repository.mkdir()
+        source = repository / "private_source_name.py"
+>       source.write_text("def private_source_symbol(n):\n    return n + 1\n")
+
+test/api/test_structural_codebase_context.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-root/pytest-3/test_cancelled_repository_prev0/private-repository-locator/private_source_name.py')
+data = 'def private_source_symbol(n):\n    return n + 1\n', encoding = 'utf-8'
+errors = None, newline = None
+
+    def write_text(self, data, encoding=None, errors=None, newline=None):
+        """
+        Open the file in text mode, write to it, and close the file.
+        """
+        if not isinstance(data, str):
+            raise TypeError('data must be str, not %s' %
+                            data.__class__.__name__)
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+E       OSError: [Errno 28] No space left on device
+
+/usr/lib/python3.12/pathlib.py:1049: OSError
+_ ERROR at setup of test_cancelled_repository_preview_returns_no_result_or_cache[during_policy_observation] _
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-3/test_cancelled_repository_prev1')
+
+    @pytest.fixture
+    def native(tmp_path):
+        repository = tmp_path / "private-repository-locator"
+        repository.mkdir()
+        source = repository / "private_source_name.py"
+>       source.write_text("def private_source_symbol(n):\n    return n + 1\n")
+
+test/api/test_structural_codebase_context.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-root/pytest-3/test_cancelled_repository_prev1/private-repository-locator/private_source_name.py')
+data = 'def private_source_symbol(n):\n    return n + 1\n', encoding = 'utf-8'
+errors = None, newline = None
+
+    def write_text(self, data, encoding=None, errors=None, newline=None):
+        """
+        Open the file in text mode, write to it, and close the file.
+        """
+        if not isinstance(data, str):
+            raise TypeError('data must be str, not %s' %
+                            data.__class__.__name__)
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+E       OSError: [Errno 28] No space left on device
+
+/usr/lib/python3.12/pathlib.py:1049: OSError
+____ ERROR at setup of test_expired_overall_deadline_prevents_service_work _____
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-3/test_expired_overall_deadline_0')
+
+    @pytest.fixture
+    def native(tmp_path):
+        repository = tmp_path / "private-repository-locator"
+        repository.mkdir()
+        source = repository / "private_source_name.py"
+>       source.write_text("def private_source_symbol(n):\n    return n + 1\n")
+
+test/api/test_structural_codebase_context.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-root/pytest-3/test_expired_overall_deadline_0/private-repository-locator/private_source_name.py')
+data = 'def private_source_symbol(n):\n    return n + 1\n', encoding = 'utf-8'
+errors = None, newline = None
+
+    def write_text(self, data, encoding=None, errors=None, newline=None):
+        """
+        Open the file in text mode, write to it, and close the file.
+        """
+        if not isinstance(data, str):
+            raise TypeError('data must be str, not %s' %
+                            data.__class__.__name__)
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+E       OSError: [Errno 28] No space left on device
+
+/usr/lib/python3.12/pathlib.py:1049: OSError
+_ ERROR at setup of test_missing_live_policy_observer_and_wrong_repository_locator_reject _
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-3/test_missing_live_policy_obser0')
+
+    @pytest.fixture
+    def native(tmp_path):
+        repository = tmp_path / "private-repository-locator"
+        repository.mkdir()
+        source = repository / "private_source_name.py"
+>       source.write_text("def private_source_symbol(n):\n    return n + 1\n")
+
+test/api/test_structural_codebase_context.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-root/pytest-3/test_missing_live_policy_obser0/private-repository-locator/private_source_name.py')
+data = 'def private_source_symbol(n):\n    return n + 1\n', encoding = 'utf-8'
+errors = None, newline = None
+
+    def write_text(self, data, encoding=None, errors=None, newline=None):
+        """
+        Open the file in text mode, write to it, and close the file.
+        """
+        if not isinstance(data, str):
+            raise TypeError('data must be str, not %s' %
+                            data.__class__.__name__)
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+E       OSError: [Errno 28] No space left on device
+
+/usr/lib/python3.12/pathlib.py:1049: OSError
+_ ERROR at setup of test_owner_controls_are_frozen_and_native_owner_is_required _
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-3/test_owner_controls_are_frozen0')
+
+    @pytest.fixture
+    def native(tmp_path):
+        repository = tmp_path / "private-repository-locator"
+        repository.mkdir()
+        source = repository / "private_source_name.py"
+>       source.write_text("def private_source_symbol(n):\n    return n + 1\n")
+
+test/api/test_structural_codebase_context.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-root/pytest-3/test_owner_controls_are_frozen0/private-repository-locator/private_source_name.py')
+data = 'def private_source_symbol(n):\n    return n + 1\n', encoding = 'utf-8'
+errors = None, newline = None
+
+    def write_text(self, data, encoding=None, errors=None, newline=None):
+        """
+        Open the file in text mode, write to it, and close the file.
+        """
+        if not isinstance(data, str):
+            raise TypeError('data must be str, not %s' %
+                            data.__class__.__name__)
+        encoding = io.text_encoding(encoding)
+>       with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+E       OSError: [Errno 28] No space left on device
+
+/usr/lib/python3.12/pathlib.py:1049: OSError
+_ ERROR at setup of test_one_current_finite_fact_selects_only_the_reviewed_offset_operation _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_newly_captured_successor_has_two_facts_and_an_explicit_empty_plan _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_fresh_repeat_runs_the_native_observer_again_and_never_recovers_facts_from_history _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[prompt] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[intent] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[catalog] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[repository_root] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[dirty_root] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[program] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[locator] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[scope] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[model_budget] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[task_budget] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_reviewed_catalog_cannot_retarget_a_clause[path-other.py] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_reviewed_catalog_cannot_retarget_a_clause[function_name-different] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_reviewed_catalog_cannot_retarget_a_clause[parameter-other] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_public_route_accepts_no_caller_evidence_or_stage_injection[observation] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_public_route_accepts_no_caller_evidence_or_stage_injection[current_facts] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_public_route_accepts_no_caller_evidence_or_stage_injection[materials] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_public_route_accepts_no_caller_evidence_or_stage_injection[service_factory] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_public_route_accepts_no_caller_evidence_or_stage_injection[evidence_bundle] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_public_route_accepts_no_caller_evidence_or_stage_injection[receipt] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_unsupported_captured_module_creates_no_service_proposal_or_native_process _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_valid_ir_with_different_clause_meaning_cannot_borrow_the_full_prompt _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_live_service_fences_refuse_source_artifact_or_tool_drift_before_publication[_stage_candidate-source] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_live_service_fences_refuse_source_artifact_or_tool_drift_before_publication[_stage_critique-source] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_live_service_fences_refuse_source_artifact_or_tool_drift_before_publication[_stage_candidate-trace] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_live_service_fences_refuse_source_artifact_or_tool_drift_before_publication[_stage_critique-lean] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_live_service_fences_refuse_source_artifact_or_tool_drift_before_publication[_stage_candidate-tool] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_independent_policy_callback_cannot_shadow_current_owner_or_full_roots[partial_roots] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_independent_policy_callback_cannot_shadow_current_owner_or_full_roots[stale_policy] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_independent_policy_callback_cannot_shadow_current_owner_or_full_roots[source_drift] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_policy_callback_tampering_with_fresh_certificate_is_rechecked_after_callback _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_final_inner_native_exit_rechecks_artifacts_before_service_publication _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_final_outer_native_exit_cannot_return_a_proposal_with_changed_artifacts _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_same_byte_new_head_generation_rejects_old_owner_without_execution _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_cancellation_cannot_return_or_publish_a_finite_plan[entry] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_cancellation_cannot_return_or_publish_a_finite_plan[candidate] _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_expired_overall_budget_cannot_start_native_execution __
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_deadline_after_actual_candidate_work_prevents_receipt_publication _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+_ ERROR at setup of test_output_directory_cannot_reuse_a_prior_positive_observation _
+
+    @pytest.fixture(scope="module")
+    def finite_tools():
+>       assert PYTHON.is_file() and LEAN.is_file(), "native tools are required for qualification"
+E       AssertionError: native tools are required for qualification
+E       assert (False)
+E        +  where False = is_file()
+E        +    where is_file = PosixPath('/home/barberb/.local/bin/python').is_file
+
+test/api/test_finite_integer_codebase.py:55: AssertionError
+=================================== FAILURES ===================================
+_______ test_prompt_product_duckdb_connection_audit_classifies_raw_sites _______
+
+    def test_prompt_product_duckdb_connection_audit_classifies_raw_sites() -> None:
+        """Classify remaining raw duckdb.connect sites as non-launch-reachable."""
+    
+        # Known raw sites outside prompt-product launch roots (legacy / proof / tools).
+        known_non_launch = {
+            "ipfs_accelerate_py/agent_supervisor/runtime/artifact_store.py",
+        }
+        raw_sites: list[str] = []
+        root = REPO_ROOT / "ipfs_accelerate_py" / "agent_supervisor"
+        for path in sorted(root.rglob("*.py")):
+            relative = path.relative_to(REPO_ROOT).as_posix()
+            if relative in PROMPT_PRODUCT_LAUNCH_ROOTS:
+                continue
+            try:
+                tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+            except SyntaxError:
+                continue
+            for node in ast.walk(tree):
+                if (
+                    isinstance(node, ast.Call)
+                    and isinstance(node.func, ast.Attribute)
+                    and node.func.attr == "connect"
+                    and isinstance(node.func.value, ast.Name)
+                    and node.func.value.id == "duckdb"
+                ):
+                    raw_sites.append(f"{relative}:{node.lineno}")
+        # Every raw site must live under a non-launch-classified module prefix.
+        non_launch_prefixes = (
+            "ipfs_accelerate_py/agent_supervisor/runtime/",
+            "ipfs_accelerate_py/agent_supervisor/validation/",
+            "ipfs_accelerate_py/agent_supervisor/todo_daemon/",
+            "ipfs_accelerate_py/agent_supervisor/rescue/",
+            "ipfs_accelerate_py/agent_supervisor/analysis/",
+            "ipfs_accelerate_py/agent_supervisor/planning/",
+            "ipfs_accelerate_py/agent_supervisor/task_sources/",
+            "ipfs_accelerate_py/agent_supervisor/merge/",
+            "ipfs_accelerate_py/agent_supervisor/proof/",
+            "ipfs_accelerate_py/agent_supervisor/context/",
+            "ipfs_accelerate_py/agent_supervisor/self_improvement/",
+            "ipfs_accelerate_py/agent_supervisor/control/",
+            "ipfs_accelerate_py/agent_supervisor/integrations/",
+        )
+        for site in raw_sites:
+            module_path = site.split(":")[0]
+            classified = module_path in known_non_launch or any(
+                module_path.startswith(prefix) for prefix in non_launch_prefixes
+            )
+            # Never allow raw connect under prompt-product launch roots.
+            assert not any(
+                module_path == root or module_path.startswith(root.removesuffix(".py"))
+                for root in PROMPT_PRODUCT_LAUNCH_ROOTS
+            ), f"raw duckdb.connect under launch root: {site}"
+>           assert classified, f"unclassified raw duckdb.connect site: {site}"
+E           AssertionError: unclassified raw duckdb.connect site: ipfs_accelerate_py/agent_supervisor/federation/ducklake_fleet.py:60
+E           assert False
+
+test/api/test_agent_supervisor_prompt_only_v3_conformance.py:213: AssertionError
+__________ test_no_lower_domain_package_imports_upward_to_entrypoints __________
+
+    def test_no_lower_domain_package_imports_upward_to_entrypoints() -> None:
+        violations: list[str] = []
+        expected = set(entrypoints.ENTRYPOINT_LOWER_DOMAIN_PACKAGES)
+        present = {
+            path.name
+            for path in AGENT_SUPERVISOR_ROOT.iterdir()
+            if path.is_dir() and (path / "__init__.py").is_file()
+        }
+        assert expected <= present
+    
+        for package in entrypoints.ENTRYPOINT_LOWER_DOMAIN_PACKAGES:
+            package_root = AGENT_SUPERVISOR_ROOT / package
+            for path in sorted(package_root.rglob("*.py")):
+                tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+                for node in ast.walk(tree):
+                    if _node_imports_entrypoints(node):
+                        violations.append(
+                            f"{path.relative_to(REPO_ROOT)}:{getattr(node, 'lineno', 0)}"
+                        )
+>       assert violations == []
+E       AssertionError: assert ['ipfs_accele...e.py:23', ...] == []
+E         
+E         Left contains 20 more items, first extra item: 'ipfs_accelerate_py/agent_supervisor/control/before_popen_refusal.py:58'
+E         
+E         Full diff:
+E         - []
+E         + [
+E         +     'ipfs_accelerate_py/agent_supervisor/control/before_popen_refusal.py:58',...
+E         
+E         ...Full output truncated (20 lines hidden), use '-vv' to show
+
+test/api/test_agent_supervisor_entrypoint_package.py:250: AssertionError
+============================= slowest 10 durations =============================
+35.92s call     api/test_agent_supervisor_prompt_only_v3_conformance.py::test_prompt_product_duckdb_connection_audit_classifies_raw_sites
+27.66s call     api/test_agent_supervisor_entrypoint_package.py::test_no_lower_domain_package_imports_upward_to_entrypoints
+5.83s call     api/test_agent_supervisor_prompt_v3_python_api.py::test_observe_bindings_from_activated_repo
+2.69s call     api/test_agent_supervisor_prompt_only_v3_conformance.py::test_run_without_bound_runtime_is_unavailable_not_simulated
+2.23s call     api/test_agent_supervisor_prompt_v3_python_api.py::test_authorized_apply_publishes_projection_identities
+2.17s call     api/test_agent_supervisor_prompt_v3_python_api.py::test_start_is_separate_authorized_control
+1.56s call     api/test_agent_supervisor_prompt_only_v3_conformance.py::test_cli_cold_help_and_discovery_manifest
+0.89s call     api/test_agent_supervisor_prompt_v3_python_api.py::test_generic_submission_materializes_sixty_six_named_tasks
+0.77s call     api/test_repository_plan_preview.py::test_native_preview_compiles_declared_tasks_and_binds_current_structural_input[2]
+0.71s call     api/test_repository_plan_preview.py::test_native_preview_compiles_declared_tasks_and_binds_current_structural_input[1]
+=========================== short test summary info ============================
+FAILED test/api/test_agent_supervisor_prompt_only_v3_conformance.py::test_prompt_product_duckdb_connection_audit_classifies_raw_sites - AssertionError: unclassified raw duckdb.connect site: ipfs_accelerate_py/ag...
+FAILED test/api/test_agent_supervisor_entrypoint_package.py::test_no_lower_domain_package_imports_upward_to_entrypoints - AssertionError: assert ['ipfs_accele...e.py:23', ...] == []
+ERROR test/api/test_repository_plan_preview.py::test_caller_cannot_shadow_frozen_request_or_owner_context[candidate_context-scope_paths] - OSError: [Errno 28] No space left on device
+ERROR test/api/test_repository_plan_preview.py::test_caller_cannot_shadow_frozen_request_or_owner_context[candidate_context-structural_codebase_context_cid] - OSError: [Errno 28] No space left on device
+ERROR test/api/test_repository_plan_preview.py::test_caller_cannot_shadow_frozen_request_or_owner_context[extra-structural_codebase] - OSError: [Errno 28] No space left on device
+ERROR test/api/test_repository_plan_preview.py::test_preview_observation_never_reprepares_or_parses_repository - OSError: [Errno 28] No space left on device
+ERROR test/api/test_repository_plan_preview.py::test_authored_goal_must_reference_selected_snapshot[intent] - OSError: [Errno 28] No space left on device
+ERROR test/api/test_repository_plan_preview.py::test_authored_goal_must_reference_selected_snapshot[frozen_goal] - OSError: [Errno 28] No space left on device
+ERROR test/api/test_repository_plan_preview.py::test_changed_checkout_rejects_even_when_policy_observer_returns_static_expected_roots - OSError: [Errno 28] No space left on device
+ERROR test/api/test_repository_plan_preview.py::test_policy_observer_cannot_hide_source_edit_during_observation - OSError: [Errno 28] No space left on device
+ERROR test/api/test_repository_plan_preview.py::test_source_edit_after_real_candidate_work_cannot_persist_or_cache - OSError: [Errno 28] No space left on device
+ERROR test/api/test_repository_plan_preview.py::test_policy_change_during_real_candidate_work_prevents_persistence - OSError: [Errno 28] No space left on device
+ERROR test/api/test_repository_plan_preview.py::test_stale_selected_generation_is_not_replaced_by_current_head - OSError: [Errno 28] No space left on device
+ERROR test/api/test_repository_plan_preview.py::test_native_successor_changes_frozen_metadata_and_planner_identity - OSError: [Errno 28] No space left on device
+ERROR test/api/test_repository_plan_preview.py::test_cancelled_repository_preview_returns_no_result_or_cache[before_entry] - OSError: [Errno 28] No space left on device
+ERROR test/api/test_repository_plan_preview.py::test_cancelled_repository_preview_returns_no_result_or_cache[during_policy_observation] - OSError: [Errno 28] No space left on device
+ERROR test/api/test_repository_plan_preview.py::test_expired_overall_deadline_prevents_service_work - OSError: [Errno 28] No space left on device
+ERROR test/api/test_repository_plan_preview.py::test_missing_live_policy_observer_and_wrong_repository_locator_reject - OSError: [Errno 28] No space left on device
+ERROR test/api/test_repository_plan_preview.py::test_owner_controls_are_frozen_and_native_owner_is_required - OSError: [Errno 28] No space left on device
+ERROR test/api/test_finite_integer_plan_preview.py::test_one_current_finite_fact_selects_only_the_reviewed_offset_operation - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_newly_captured_successor_has_two_facts_and_an_explicit_empty_plan - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_fresh_repeat_runs_the_native_observer_again_and_never_recovers_facts_from_history - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[prompt] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[intent] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[catalog] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[repository_root] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[dirty_root] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[program] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[locator] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[scope] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[model_budget] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_wrong_request_binding_cannot_run_an_observer_or_create_a_proposal[task_budget] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_reviewed_catalog_cannot_retarget_a_clause[path-other.py] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_reviewed_catalog_cannot_retarget_a_clause[function_name-different] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_reviewed_catalog_cannot_retarget_a_clause[parameter-other] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_public_route_accepts_no_caller_evidence_or_stage_injection[observation] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_public_route_accepts_no_caller_evidence_or_stage_injection[current_facts] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_public_route_accepts_no_caller_evidence_or_stage_injection[materials] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_public_route_accepts_no_caller_evidence_or_stage_injection[service_factory] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_public_route_accepts_no_caller_evidence_or_stage_injection[evidence_bundle] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_public_route_accepts_no_caller_evidence_or_stage_injection[receipt] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_unsupported_captured_module_creates_no_service_proposal_or_native_process - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_valid_ir_with_different_clause_meaning_cannot_borrow_the_full_prompt - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_live_service_fences_refuse_source_artifact_or_tool_drift_before_publication[_stage_candidate-source] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_live_service_fences_refuse_source_artifact_or_tool_drift_before_publication[_stage_critique-source] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_live_service_fences_refuse_source_artifact_or_tool_drift_before_publication[_stage_candidate-trace] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_live_service_fences_refuse_source_artifact_or_tool_drift_before_publication[_stage_critique-lean] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_live_service_fences_refuse_source_artifact_or_tool_drift_before_publication[_stage_candidate-tool] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_independent_policy_callback_cannot_shadow_current_owner_or_full_roots[partial_roots] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_independent_policy_callback_cannot_shadow_current_owner_or_full_roots[stale_policy] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_independent_policy_callback_cannot_shadow_current_owner_or_full_roots[source_drift] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_policy_callback_tampering_with_fresh_certificate_is_rechecked_after_callback - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_final_inner_native_exit_rechecks_artifacts_before_service_publication - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_final_outer_native_exit_cannot_return_a_proposal_with_changed_artifacts - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_same_byte_new_head_generation_rejects_old_owner_without_execution - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_cancellation_cannot_return_or_publish_a_finite_plan[entry] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_cancellation_cannot_return_or_publish_a_finite_plan[candidate] - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_expired_overall_budget_cannot_start_native_execution - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_deadline_after_actual_candidate_work_prevents_receipt_publication - AssertionError: native tools are required for qualification
+ERROR test/api/test_finite_integer_plan_preview.py::test_output_directory_cannot_reuse_a_prior_positive_observation - AssertionError: native tools are required for qualification
+============= 2 failed, 65 passed, 58 errors in 246.94s (0:04:06) ==============
