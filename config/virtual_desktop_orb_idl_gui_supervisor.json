@@ -1,0 +1,43 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/virtual-desktop-orb-idl-gui-profile@1",
+  "profileId": "virtual-desktop-orb-idl-gui-v1",
+  "mode": "observe_then_invoke",
+  "repositoryRoot": ".",
+  "primaryRepository": "swissknife",
+  "objectivePath": "implementation_plan/docs/52-virtual-desktop-orb-idl-gui.objectives.md",
+  "todoPath": "implementation_plan/docs/52-virtual-desktop-orb-idl-gui.todo.md",
+  "taskPrefix": "## VOG-",
+  "goalPrefix": "VOG-G",
+  "rootGoalId": "VOG-G000",
+  "statePrefix": "virtual_desktop_orb_idl_gui",
+  "runtimeRoot": "data/agent_supervisor/virtual_desktop_orb_idl_gui",
+  "mergeTargetBranch": "agent/virtual-desktop-orb-idl-gui",
+  "lanesAfterSeal": 1,
+  "bounds": {
+    "masterDurationSeconds": 28800,
+    "heartbeatSeconds": 30,
+    "statusStaleSeconds": 600,
+    "quietLogSeconds": 900,
+    "taskTransitionStallSeconds": 900,
+    "restarts": 3,
+    "attemptsPerTask": 3,
+    "defaultTaskTimeoutSeconds": 1800,
+    "browserTaskTimeoutSeconds": 7200
+  },
+  "authority": {
+    "manifestCounts": "not_execution_evidence",
+    "screenshotSmoke": "not_execution_evidence",
+    "privateMcpRoute": "not_an_orb_idl_call",
+    "testsAndRuntime": "observation",
+    "llmOutput": "proposal_only",
+    "watchdog": "cannot_set_work_complete"
+  },
+  "pythonPath": "external/ipfs_accelerate",
+  "providerScopes": [
+    "external/ipfs_accelerate",
+    "external/ipfs_kit",
+    "external/ipfs_datasets",
+    "Mcp-Plus-Plus",
+    "swissknife"
+  ]
+}

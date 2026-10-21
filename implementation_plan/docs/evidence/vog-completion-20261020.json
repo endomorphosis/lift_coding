@@ -1,0 +1,332 @@
+{
+  "schema": "agent-supervisor/vog-historical-completion-receipt@1",
+  "historical_verified_at": "2026-10-20T20:53:36.769464+00:00",
+  "scope": "Historical verification of the VOG executable taskboard and seven then-current live-click reports. This compact receipt is not a standalone live GO report and grants no completion authority. Raw reports and screenshots remain ignored local runtime artifacts; their hashes preserve identity without publishing their contents. Disk retrieval proves verified stored bytes, not remote IPFS propagation.",
+  "source_audit": {
+    "path": "data/agent_supervisor/virtual_desktop_orb_idl_gui/watchdog/pilot-revalidation-20261020/completion-audit.json",
+    "sha256": "9c15298ac71abd0769ffe7ccc971db84f708803b73a6fc4158b0ae712c05cef3",
+    "retained_in_repository": false
+  },
+  "taskboard": {
+    "path": "implementation_plan/docs/52-virtual-desktop-orb-idl-gui.todo.md",
+    "sha256": "e92141dbab8a504e9b39ae2eb1d09b1c478edabef1a6052fa9bd1e0bc4ada2ee",
+    "completed_task_count": 28,
+    "completed_task_ids": [
+      "VOG-000",
+      "VOG-001",
+      "VOG-010",
+      "VOG-011",
+      "VOG-012",
+      "VOG-013",
+      "VOG-014",
+      "VOG-016",
+      "VOG-018",
+      "VOG-019",
+      "VOG-020",
+      "VOG-021",
+      "VOG-031",
+      "VOG-032",
+      "VOG-033",
+      "VOG-034",
+      "VOG-035",
+      "VOG-036",
+      "VOG-041",
+      "VOG-042",
+      "VOG-043",
+      "VOG-044",
+      "VOG-045",
+      "VOG-046",
+      "VOG-070",
+      "VOG-080",
+      "VOG-090",
+      "VOG-R012"
+    ],
+    "pending_task_ids": [],
+    "completion_notes": {
+      "VOG-021": "lane_resume deterministic command exit 0 at 2026-10-20T20:48:21Z",
+      "VOG-080": "lane_resume deterministic command exit 0 at 2026-10-20T20:48:21Z",
+      "VOG-090": "lane_resume deterministic command exit 0 at 2026-10-20T20:48:52Z"
+    },
+    "snapshot_matches_historical_board": true
+  },
+  "program_sources": [
+    {
+      "path": "config/virtual_desktop_orb_idl_gui_supervisor.json",
+      "sha256": "0b7b403b1f9a45035458af7216d9966e851cf6131eebdf25a1a527c5725f573e"
+    },
+    {
+      "path": "config/virtual_desktop_orb_idl_gui_lane_inventory.json",
+      "sha256": "5de20f3d760e9c3862686a421185daae5fc9044989a39971727562cfdbdba249"
+    },
+    {
+      "path": "implementation_plan/docs/52-virtual-desktop-orb-idl-gui.objectives.md",
+      "sha256": "9b0fc5ec2fcab304201faaa391b93cf2231f01d0458358c257bf7b1780841e51"
+    }
+  ],
+  "reports": [
+    {
+      "target": "pilot",
+      "generated_at": "2026-10-20T20:48:19.925Z",
+      "row_count": 32,
+      "failure_count": 0,
+      "sha256": "f2852613b08487f84f391521e06b220f8e2a16383b62669924488e3505fe6e17",
+      "observation_validator_exit_code": 0,
+      "path": "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/live-clicks/pilot/image-viewer.json"
+    },
+    {
+      "target": "storage",
+      "generated_at": "2026-10-20T02:50:57.323Z",
+      "row_count": 166,
+      "failure_count": 0,
+      "sha256": "af95694747164ead417f1588a56305099ebd48d65f1b167c146e1824fdbdc252",
+      "observation_validator_exit_code": 0,
+      "path": "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/live-clicks/storage.json"
+    },
+    {
+      "target": "datasets",
+      "generated_at": "2026-10-20T03:28:38.386Z",
+      "row_count": 75,
+      "failure_count": 0,
+      "sha256": "f1a75f12972b6aaa388553a271074e438f01a07948440033a5ae41c8325e69ab",
+      "observation_validator_exit_code": 0,
+      "path": "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/live-clicks/datasets.json"
+    },
+    {
+      "target": "accelerate",
+      "generated_at": "2026-10-20T04:30:37.855Z",
+      "row_count": 135,
+      "failure_count": 0,
+      "sha256": "3416dc2f2ee9c6cf2703505ce085ee92c7d6f6776f83c38d595962574c24893f",
+      "observation_validator_exit_code": 0,
+      "path": "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/live-clicks/accelerate.json"
+    },
+    {
+      "target": "network",
+      "generated_at": "2026-10-20T05:10:52.812Z",
+      "row_count": 97,
+      "failure_count": 0,
+      "sha256": "41eaaa2827fa923e8b206e689228c4da4da2821798f43a2482accd0ecfafaff7",
+      "observation_validator_exit_code": 0,
+      "path": "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/live-clicks/network.json"
+    },
+    {
+      "target": "control",
+      "generated_at": "2026-10-20T06:27:07.631Z",
+      "row_count": 92,
+      "failure_count": 0,
+      "sha256": "25990023623c616d9e4f302256d6b73b75b0e2cc820a553a42bac798d5d0819e",
+      "observation_validator_exit_code": 0,
+      "path": "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/live-clicks/control.json"
+    },
+    {
+      "target": "local",
+      "generated_at": "2026-10-20T08:44:52.914Z",
+      "row_count": 291,
+      "failure_count": 0,
+      "sha256": "93e56a8b5b3ff400bc5432cf5084eea3169065da47c2844034efb3d493db1b04",
+      "observation_validator_exit_code": 0,
+      "path": "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/live-clicks/local.json"
+    }
+  ],
+  "validated_click_rows": 888,
+  "row_failures": 0,
+  "historical_coverage": {
+    "sha256": "494034d9ae99b5d061895c93e70418702a53e15d6ba28be2c5bc9557defffebb",
+    "generated_at": "2026-10-20T20:48:21.583Z",
+    "decision": "GO",
+    "passed": true,
+    "clicked": true,
+    "path": "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/vog/orb-idl-gui-coverage.json",
+    "strict_closeout_exit_code": 0,
+    "retained_in_repository": false
+  },
+  "screenshot_manifest": {
+    "unique_paths": 1688,
+    "total_size_bytes": 215366039,
+    "all_files_present_at_publication": true,
+    "manifest_sha256": "72fc82000ad52f3057d5f1a6123117d2531c7257b7920bf91adf8ed9f30260da",
+    "manifest_encoding": "UTF-8 JSON array, records sorted lexicographically by root-relative path, keys sorted, separators comma and colon, no whitespace or trailing newline; each record contains path, sha256, size_bytes. SHA-256 covers this manifest, not concatenated PNG bytes.",
+    "contents_retained_in_repository": false,
+    "purpose": "Compact identity commitment to the original 1688 PNG files. The screenshots and their referring report rows remain local, allowing reconstruction of this manifest; full screenshots are required for independent screenshot validation."
+  },
+  "fixture_proof": {
+    "cid": "bafkreiboczqvtm47rm3pz7x27f7isrzi6ogfddyquo5qisw4fthjhiytcm",
+    "size_bytes": 184,
+    "sha256": "2e166159b39f8b36fcfefaf97e894728f38c518f10a3bb044adc2cce93a31313",
+    "backend": "disk",
+    "hash_verified_for_publication": true,
+    "retrievals": [
+      {
+        "selector": "[data-action=\"retrieve-cid-image\"]",
+        "route": "/mcp/tools/call",
+        "tool_id": "ipfs_cat",
+        "transport": "http",
+        "dry_run": true,
+        "receipt_id": "bafkreibyaxjrxp3pcmmsvzleuk57tfswuqxgecs3ck3ljra5aatrkro2au",
+        "event_dag_cid": "bafkreih4r2iz6tqb5h27botaqfzxwzhvj4stowmwy2ha6ltzehactjhrsi",
+        "outcome": "executed",
+        "origin": "native-control",
+        "policy_outcome": "require_confirmation",
+        "receipt_block_sha256": "3805d31bbf6f13192ae564a2bbf99656a42e620a5b12b6b4c41d00271545da05",
+        "receipt_block_hash_verified_for_publication": true,
+        "fixture_cid": "bafkreiboczqvtm47rm3pz7x27f7isrzi6ogfddyquo5qisw4fthjhiytcm",
+        "backend": "disk",
+        "actual_retrieved_bytes": 184,
+        "content_sha256": "2e166159b39f8b36fcfefaf97e894728f38c518f10a3bb044adc2cce93a31313",
+        "content_hash_verified_for_publication": true
+      },
+      {
+        "selector": "[data-live-gateway-binding=\"image-viewer.ipfs_kit_py.retrieve_content\"]",
+        "route": "/mcp/tools/call",
+        "tool_id": "ipfs_cat",
+        "transport": "http",
+        "dry_run": true,
+        "receipt_id": "bafkreigas4lhtwteoyulyjbs6badfgpcd7fftl2tftx7fx274dnjbghzpu",
+        "event_dag_cid": "bafkreibm2x5hyfzvbf3ewbrqk6jehghaoqer3ytrdwzxihs6slc5ngw6iy",
+        "outcome": "executed",
+        "origin": "gateway-button",
+        "policy_outcome": "require_confirmation",
+        "receipt_block_sha256": "c0971679da647628bc2432f0403299e21fca59af532ceff2df5fe0da9098f97d",
+        "receipt_block_hash_verified_for_publication": true,
+        "fixture_cid": "bafkreiboczqvtm47rm3pz7x27f7isrzi6ogfddyquo5qisw4fthjhiytcm",
+        "backend": "disk",
+        "actual_retrieved_bytes": 184,
+        "content_sha256": "2e166159b39f8b36fcfefaf97e894728f38c518f10a3bb044adc2cce93a31313",
+        "content_hash_verified_for_publication": true
+      }
+    ]
+  },
+  "historical_tests": {
+    "supervisor": {
+      "collected": 140,
+      "passed": 114,
+      "skipped": 26,
+      "reverified_reuse": 26,
+      "ordinary_skips": 0,
+      "failed": 0,
+      "exit_code": 0,
+      "tested_source_sha256": "7f5db2be0002025f92f944c0b68878be6ff94aa22385ffa85fe22121c4758380",
+      "reuse_verification": "run_repo_pytest._reused_pass rechecks complete pytest AST seals through the current oracle; all skipped items reported pytest AST seal matches.",
+      "test_files": [
+        "test/api/test_agent_supervisor_gate_recovery.py",
+        "test/api/test_agent_supervisor_lane_resume_evidence.py",
+        "test/api/test_agent_supervisor_lane_resume_lifecycle.py",
+        "test/api/test_agent_supervisor_node_preload_scope.py",
+        "test/api/test_agent_supervisor_supervisor_watchdog.py"
+      ],
+      "test_source_sha256": {
+        "test/api/test_agent_supervisor_gate_recovery.py": "d2a4668bcd65150433cace039a8f92bdb3b699ee2050f6b03638037cfc116e70",
+        "test/api/test_agent_supervisor_lane_resume_evidence.py": "b569efad46f2feac2fadecca138ff9f88abbd6aa385e359e97c1475695abe1d2",
+        "test/api/test_agent_supervisor_lane_resume_lifecycle.py": "e9ac9b4f126da017fc66f98e779db81220bca652c781ed31c440bf561f4d3ad1",
+        "test/api/test_agent_supervisor_node_preload_scope.py": "895a53bd1971d2fb501cc612253c27292f6ac2bb12918d5da5deaa70f461c91e",
+        "test/api/test_agent_supervisor_supervisor_watchdog.py": "5f538a2b207603f93057c15d5bbe24e7801e741abd9321f85ca846013ae1bb5d"
+      }
+    },
+    "coverage_gate": {
+      "passed": 24
+    },
+    "ipfs_kit_artifact_cat": {
+      "passed": 13
+    },
+    "live_click_fixture": {
+      "passed": 6
+    },
+    "observation_validation": {
+      "reports_passed": 7,
+      "exit_code": 0
+    },
+    "strict_closeout": {
+      "exit_code": 0
+    }
+  },
+  "historical_observed_source_sha256": {
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/rescue/lane_resume.py": "7f5db2be0002025f92f944c0b68878be6ff94aa22385ffa85fe22121c4758380",
+    "external/ipfs_accelerate/test/api/test_agent_supervisor_lane_resume_evidence.py": "b569efad46f2feac2fadecca138ff9f88abbd6aa385e359e97c1475695abe1d2",
+    "swissknife/scripts/build-orb-idl-gui-coverage.cjs": "9cba63d75f67196813461db48f3b0b7ec07d6cd61398d6db7bdba2afbc2eeb44",
+    "swissknife/scripts/vog_closeout_requires_go.py": "a274d1f4375c3c36d563c36d38b360cce9816d7b8e56eccdba4c80d9969d16c3",
+    "swissknife/scripts/ipfs-kit-artifact-cat.cjs": "6dae66fd898613a907cf5f362fb690e988885cc2a8ed9b685d94f22774babd2e",
+    "swissknife/scripts/start-ipfs-kit-mcp-compat.cjs": "19ca10e9309c267931689256d3046122d105502f6693b445b2499d162d8fd1b7",
+    "swissknife/scripts/live-click-fixture.cjs": "efe33c3520b331df9f1871dd21000d8bc004eea3a473d8c7e3ff8842970d0c6e",
+    "swissknife/scripts/run-live-click.mjs": "10922838d8db057187032cb467fb3afc0280c19abdf7499df454baead8bc5289",
+    "swissknife/test/e2e/helpers/live-click-session.ts": "24563b66a6964c4ad39ba934b8e8c4f688473b60b1ca365b859dc0f2fb0b6687"
+  },
+  "fixes": [
+    "Reopened legacy pilot and downstream aggregation/closeout after historical GO failed current owner-health validation; the supervisor reran them to completion.",
+    "Aggregate and closeout independently validate all seven current reports and reject malformed, stale or incomplete success evidence.",
+    "ipfs_cat genuinely reads and verifies actual stored bytes through both adapter dispatch paths; failures retain native fallback/errors.",
+    "Live-click setup persists and verifies actual content-addressed SVG fixture bytes instead of passing a fabricated CID.",
+    "Supervisor backoff completion requires changed evidence bound to the exact command contract; interrupted attempts and invalid validators fail closed.",
+    "Changed command/script contracts rearm exhausted task retries once; unchanged evidence and timestamp-only changes preserve cooldown."
+  ],
+  "publication_consistency_checks": {
+    "root_profile_and_inventory_json_parse": true,
+    "root_snapshot_sources_equal_historical_sources": true,
+    "task_ids_unique": true,
+    "task_dependencies_reference_completed_tasks": true,
+    "seven_report_bytes_match_historical_hashes": true,
+    "all_screenshot_pngs_present": true,
+    "two_retrieval_receipt_cids_and_fixture_bytes_reverified": true
+  },
+  "work_complete": false,
+  "completion_authority": false,
+  "publication": {
+    "prepared_at_utc": "2026-10-21T00:21:51.751159+00:00",
+    "target": "origin/main",
+    "dependency_commits": {
+      "ipfs_accelerate_py": "e227152f7ae3cbd404c5da22f21d4b5612ebef2b",
+      "swissknife": "75f99bda1c4b658119d02104f772246dff5eecac"
+    },
+    "supervisor_validation": {
+      "collected": 131,
+      "passed": 131,
+      "skipped": 0,
+      "exit_code": 0,
+      "log_sha256": {
+        "supervisor-validation.log": "2187f095c71eec49afdef3b648864f82eb156506caeb64c1bc2d4b94d64420c4",
+        "supervisor-refill-validation.log": "550d7c228fdf82fbfea34121adb9cb042c1e9a483b6af511b9601ec384cfab68"
+      },
+      "validation_runs": [
+        {
+          "label": "complete supervisor and GUI doctor suite",
+          "exit_code": 1,
+          "collected": 314,
+          "passed": 312,
+          "failed": 2,
+          "skipped": 0,
+          "duration_seconds": 216.15,
+          "log_sha256": "2187f095c71eec49afdef3b648864f82eb156506caeb64c1bc2d4b94d64420c4",
+          "log": "supervisor-validation.log"
+        },
+        {
+          "label": "final packaged-rule integration",
+          "exit_code": 0,
+          "collected": 131,
+          "passed": 131,
+          "failed": 0,
+          "skipped": 0,
+          "duration_seconds": 110.99,
+          "log_sha256": "550d7c228fdf82fbfea34121adb9cb042c1e9a483b6af511b9601ec384cfab68",
+          "log": "supervisor-refill-validation.log"
+        }
+      ],
+      "scope": "Supervisor recovery, process ownership, command lifecycle, gate recovery, repair dispatch, test reuse validation, and GUI contract doctor; isolated checkout with fresh verification storage."
+    },
+    "swissknife_validation": {
+      "node_passed": 54,
+      "typescript_passed": 8,
+      "static_checks_passed": 5,
+      "log_sha256": {
+        "swissknife-node-regressions.log": "de60e63d68b893fd7dccad236e87296aaf523b971d2d1fac834bfebe4eb08b4c",
+        "swissknife-ts-regressions.log": "897ba1c19b939818fcd9a1422e7fa8f8e638d494e38717fe73933147daf84b34",
+        "swissknife-static-checks.log": "78931a060cc896a90269ed91ef417e06b371c0ad5f139d91f1b9cb97699d1578",
+        "swissknife-module-imports.log": "6f1b026f4359ecde34293514c0af33bc66aeaa4b43211f03347e8ae15a75e4f1"
+      }
+    },
+    "portability_repairs": [
+      "Resolve GUI contract test dependencies from the checkout or explicit environment paths.",
+      "Resolve generated control-matrix test paths through import.meta.url under ES modules.",
+      "Bundle validation-gap admission rules with the supervisor so recovery does not depend on an unpublished datasets file."
+    ],
+    "runtime_policy": "Runtime logs, locks, process telemetry, dependency directories, raw live-click reports and screenshots are not source-controlled. Live checkouts and unrelated work are preserved."
+  }
+}
