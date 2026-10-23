@@ -1,0 +1,302 @@
+{
+  "schema": "lift-coding.workspace-origin-main-integration.v1",
+  "observed_at": "2026-10-23T08:11:10.294767+00:00",
+  "github_origins": 34,
+  "initialized_real_working_copies": 139,
+  "excluded_copied_git_marker_aliases": 8,
+  "origins": [
+    {
+      "origin": "https://github.com/RAIRLab/snark",
+      "branch": "main",
+      "commit": "1b657eadf4e87f3ba46e030c3e549854b2454a4e",
+      "working_copies": 1
+    },
+    {
+      "origin": "https://github.com/endomorphosis/DCEC_Library",
+      "branch": "main",
+      "commit": "72efd97f0fc8ab95fb5a7fdb0a6f8efd94c20337",
+      "working_copies": 3
+    },
+    {
+      "origin": "https://github.com/endomorphosis/Eng-DCEC",
+      "branch": "main",
+      "commit": "c96e40dd9351e93b5a573af3fbc82fab644a0eb4",
+      "working_copies": 3
+    },
+    {
+      "origin": "https://github.com/endomorphosis/JevOps",
+      "branch": "main",
+      "commit": "9af1ebb6a4245ce2b4e673ac277e4988da4d5caa",
+      "working_copies": 1
+    },
+    {
+      "origin": "https://github.com/endomorphosis/Mcp-Plus-Plus",
+      "branch": "main",
+      "commit": "628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0",
+      "working_copies": 5
+    },
+    {
+      "origin": "https://github.com/endomorphosis/ShadowProver",
+      "branch": "main",
+      "commit": "8bf6ce7d30bc069b740078bacaee0589b4c2c49b",
+      "working_copies": 3
+    },
+    {
+      "origin": "https://github.com/endomorphosis/Talos",
+      "branch": "main",
+      "commit": "cf386792a15583357ad8640b61a80684430b8e0f",
+      "working_copies": 3
+    },
+    {
+      "origin": "https://github.com/endomorphosis/common_crawl_search_engine",
+      "branch": "main",
+      "commit": "eddcce0883b15c9043ba61ff7278751c484d6178",
+      "working_copies": 3
+    },
+    {
+      "origin": "https://github.com/endomorphosis/convert_to_txt_based_on_mime_type",
+      "branch": "main",
+      "commit": "2b7a36e7699dbd451a89acb273ab7090c99d1cc0",
+      "working_copies": 3
+    },
+    {
+      "origin": "https://github.com/endomorphosis/hallucinate_app",
+      "branch": "main",
+      "commit": "126f78bbade1644b96865dd4e2cf879c207b3cfe",
+      "working_copies": 1
+    },
+    {
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py",
+      "branch": "main",
+      "commit": "1c4541343b00e079c8f3dc96bb7f8ee32c227989",
+      "working_copies": 9
+    },
+    {
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+      "branch": "main",
+      "commit": "7ba681c2eea75ced6592254bf1125d10464b2c2b",
+      "working_copies": 6
+    },
+    {
+      "origin": "https://github.com/endomorphosis/ipfs_kit_py",
+      "branch": "main",
+      "commit": "0007f735b90215fa611f39aa558eb512a493b8af",
+      "working_copies": 12
+    },
+    {
+      "origin": "https://github.com/endomorphosis/ipfs_model_manager_py",
+      "branch": "main",
+      "commit": "f6151d2113f42e75ea7d83a1b2362fc97e55e44d",
+      "working_copies": 4
+    },
+    {
+      "origin": "https://github.com/endomorphosis/ipfs_transformers_py",
+      "branch": "main",
+      "commit": "b397988ed9e3e656475c1cf4417b84efdb95daf3",
+      "working_copies": 4
+    },
+    {
+      "origin": "https://github.com/endomorphosis/lift_coding",
+      "branch": "main",
+      "commit": "the superproject commit carrying this report",
+      "working_copies": 1,
+      "merged_upstream_base": "5e287611a98ac35593f276bf05ca1bd3033b883e"
+    },
+    {
+      "origin": "https://github.com/endomorphosis/omni_converter_mk2",
+      "branch": "main",
+      "commit": "ae4f3c2b321e25935f62f99fd50f72bb8916c420",
+      "working_copies": 3
+    },
+    {
+      "origin": "https://github.com/endomorphosis/swissknife",
+      "branch": "main",
+      "commit": "ea6460f18683f2f24a4b4c3b6b972c04708e0fdf",
+      "working_copies": 2
+    },
+    {
+      "origin": "https://github.com/facebook/meta-wearables-dat-android",
+      "branch": "main",
+      "commit": "f4371bc9f90249d51eb07d7f8a61e8d829294f16",
+      "working_copies": 1
+    },
+    {
+      "origin": "https://github.com/facebook/meta-wearables-dat-ios",
+      "branch": "main",
+      "commit": "bbae597cd1c748cd29b9375a1624a8d75b1c9e14",
+      "working_copies": 1
+    },
+    {
+      "origin": "https://github.com/filecoin-project/lassie",
+      "branch": "main",
+      "commit": "c6ba777810d03fed23aea11b5969b7d8a97f1edf",
+      "working_copies": 5
+    },
+    {
+      "origin": "https://github.com/fsspec/filesystem_spec",
+      "branch": "master",
+      "commit": "70687c31f08b83223cbcb85fed44cb234ca144fd",
+      "working_copies": 5
+    },
+    {
+      "origin": "https://github.com/fsspec/ipfsspec",
+      "branch": "main",
+      "commit": "03f5199b9bf5a96c7ebf5e2e6f5dce8cf58b655f",
+      "working_copies": 5
+    },
+    {
+      "origin": "https://github.com/huggingface/doc-builder",
+      "branch": "main",
+      "commit": "e008c246aaa2eaa86b7b95a19a1944d59917990a",
+      "working_copies": 8
+    },
+    {
+      "origin": "https://github.com/huggingface/transformers",
+      "branch": "main",
+      "commit": "3043da63578bcef1392499579ae7527f044c93bb",
+      "working_copies": 4
+    },
+    {
+      "origin": "https://github.com/ipfs-cluster/ipfs-cluster-website",
+      "branch": "master",
+      "commit": "c7ca8b5f87b41fcc795297ca65b0bb41c10234bf",
+      "working_copies": 5
+    },
+    {
+      "origin": "https://github.com/ipfs/ipfs-docs",
+      "branch": "main",
+      "commit": "1261c016f2b6c700e9354e46cedcdf38c9ad7b91",
+      "working_copies": 5
+    },
+    {
+      "origin": "https://github.com/jlowin/fastmcp",
+      "branch": "main",
+      "commit": "37301f9dee0f3642a7786cebfe685ed963299f69",
+      "working_copies": 4
+    },
+    {
+      "origin": "https://github.com/jlowin/mcp-python-sdk",
+      "branch": "main",
+      "commit": "0da9a074d09267a927d72faa58c26d828f0f8edb",
+      "working_copies": 4
+    },
+    {
+      "origin": "https://github.com/libp2p/docs",
+      "branch": "master",
+      "commit": "17cee4a438797313d1e878b103abc1dbefdf423e",
+      "working_copies": 5
+    },
+    {
+      "origin": "https://github.com/libp2p/universal-connectivity",
+      "branch": "main",
+      "commit": "feb2b72000442eb6614cdfd63e825dfdc5376345",
+      "working_copies": 5
+    },
+    {
+      "origin": "https://github.com/lighthouse-web3/lighthouse-python-sdk",
+      "branch": "main",
+      "commit": "6b2c86693090c770d2c9a4d82ba315000a77068b",
+      "working_copies": 5
+    },
+    {
+      "origin": "https://github.com/modelcontextprotocol/python-sdk",
+      "branch": "main",
+      "commit": "2af9e3089ac66b35c1550c500aae86a82efb1e17",
+      "working_copies": 5
+    },
+    {
+      "origin": "https://github.com/storacha/specs",
+      "branch": "main",
+      "commit": "3b6791869635735ddb1a54aed7450ad6ef687c06",
+      "working_copies": 5
+    }
+  ],
+  "root_gitlinks": {
+    "external/ipfs_accelerate": "1c4541343b00e079c8f3dc96bb7f8ee32c227989",
+    "external/ipfs_kit": "0007f735b90215fa611f39aa558eb512a493b8af",
+    "swissknife": "ea6460f18683f2f24a4b4c3b6b972c04708e0fdf",
+    "Mcp-Plus-Plus": "628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0",
+    "JevOps": "9af1ebb6a4245ce2b4e673ac277e4988da4d5caa",
+    "external/meta-wearables-dat-android": "f4371bc9f90249d51eb07d7f8a61e8d829294f16",
+    "external/meta-wearables-dat-ios": "bbae597cd1c748cd29b9375a1624a8d75b1c9e14",
+    "external/ipfs_datasets": "7ba681c2eea75ced6592254bf1125d10464b2c2b",
+    "hallucinate_app": "126f78bbade1644b96865dd4e2cf879c207b3cfe"
+  },
+  "force_push_used": false,
+  "runtime_secrets_and_capture_pngs_published": false,
+  "submodule_mappings_valid": 9,
+  "recursive_submodule_status_exit_code": 0,
+  "dependency_cut": "Recorded fetched refs; ongoing upstream development is recorded separately, not chased indefinitely.",
+  "concurrent_upstream_advances": [
+    {
+      "origin": "https://github.com/huggingface/transformers",
+      "merged_cut": "3043da63578bcef1392499579ae7527f044c93bb",
+      "observed_later_main": "21572da2ff9f0aa25cc4b3ac60380a318fbde94a"
+    }
+  ],
+  "circular_dependencies": {
+    "policy": "Publish each origin once; pin reachable published snapshots across reciprocal IPFS dependencies. All regular source is committed; eight nested gitlink differences remain visible.",
+    "nested_gitlink_differences": 8,
+    "git_ignore_config_changed_to_hide_drift": false
+  },
+  "local_checks": {
+    "swissknife": {
+      "passed": 132,
+      "all12_capture_fingerprints_unchanged": true
+    },
+    "ipfs_accelerate_py": {
+      "changed_suite_passed": 588,
+      "private_layout_skips": 2,
+      "actual_workspace_fixture_check_passed": 10,
+      "both_private_skips_exercised": true
+    },
+    "ipfs_datasets_py": {
+      "python_files_parsed": 2557,
+      "focused_tests_passed": 111,
+      "real_json_jsonl_loader_smokes_passed": 2,
+      "preserved_local_source_files_per_clone": 2615,
+      "known_unchanged_upstream_loader_wording_failure": 1
+    },
+    "parent_monitor_health_tests_passed": 34,
+    "maintenance_helper_artifact_tests_passed": 24,
+    "hold_release_guard_artifact_tests_passed": 21
+  },
+  "vdg": {
+    "completed_tasks": 65,
+    "board_sha256": "8f6c9b0b2e34b30eff81ab126cddf17350910f7e903e43fdf769beadd4122366",
+    "acquisitions": 12,
+    "strict_family_go_count": 6,
+    "decision": "GO",
+    "closeout_source_contract": "8b6acd05d8553313bd3cdf617f15a13d828ddd715212fd65bc9b1e3bd280b7e7",
+    "current_aggregate_sha256": "8eb2164e65be4078a468db5877856ae2c71a6051ce2702032fd5551671208cb3",
+    "maintenance": {
+      "execution_kind": "operator_maintenance_revalidation",
+      "result_sha256": "dd399e49d9e579b639dfb4ca2d6d0ad7956caef55b83c8466b5c014edea13fb4",
+      "helper_sha256": "0f78286593635e69a90e3687b52319dff95b8c34e37e05642ed4a5e60ad4560d",
+      "producer_exit_code": 0,
+      "validation_exit_code": 0,
+      "original_natural_completion_preserved": "lane_resume deterministic command exit 0 at 2026-10-23T05:36:25Z",
+      "all12_acquisition_bindings_unchanged": true,
+      "other_ledger_bytes_preserved": true,
+      "source_drift": {
+        "external/ipfs_accelerate/test/api/test_agent_supervisor_gate_recovery.py": [
+          "894fc5d6035bd786e27c3bd491e9ec87db1531416039f2c03dab8c017d64a718",
+          "e01b5e13d760136a6662f89b54a256ce894fbb1b0e50b6e42f2e72a35240ce74"
+        ],
+        "external/ipfs_accelerate/test/api/test_agent_supervisor_storage_pressure.py": [
+          "88be1827c7925fb45f5e673f809e53a7130bf59f5825a7bd4e00f5b65dd7ab29",
+          "e0dde89ae0e9f0865835884fef25eda6d69c5fa16e34f1dbd081b10cd2de5877"
+        ]
+      },
+      "old_ledger_and_log_archived": true,
+      "only_top_level_report_generation_timestamps_changed": true
+    }
+  },
+  "lfs": {
+    "repository": "https://github.com/endomorphosis/JevOps",
+    "git_source_at_main": true,
+    "working_tree_git_clean": true,
+    "asset_download_status": "GitHub repository LFS budget exceeded; source pointers retained and binary downloads not fabricated"
+  },
+  "all_original_local_source_snapshots_and_committed_history_retained": true
+}
