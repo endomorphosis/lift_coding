@@ -1,0 +1,1866 @@
+{
+  "claims": [
+    {
+      "claim_id": "historical-cold-repair-32",
+      "evidence": [
+        {
+          "artifact_id": "sha256:62cd23fd07b3e36fac24ebd86dd6d58badc34ec34cd0c8d70b87210ddc656d6f",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/fragments/results.tex",
+          "sha256": "62cd23fd07b3e36fac24ebd86dd6d58badc34ec34cd0c8d70b87210ddc656d6f",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:5b8928000561ae2204b08c6dfd7ebf8c8a0d9389bed8dedb23ac4c1d22b9a22f",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/appendix/historical_results_details.tex",
+          "sha256": "5b8928000561ae2204b08c6dfd7ebf8c8a0d9389bed8dedb23ac4c1d22b9a22f",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "limitations": [
+        "Frozen manuscript aggregates only; 32 original cell records not independently joined in this bounded pass.",
+        "All failures retained; unknown provider charges and half-cohort usage prevent complete token/cost totals.",
+        "Convenience sample; additive-context comparison does not test full supervision or support a pooled mechanism claim."
+      ],
+      "study_id": "historical-cold-repair-32"
+    },
+    {
+      "claim_id": "historical-development-pilot-24",
+      "evidence": [
+        {
+          "artifact_id": "sha256:5b8928000561ae2204b08c6dfd7ebf8c8a0d9389bed8dedb23ac4c1d22b9a22f",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/appendix/historical_results_details.tex",
+          "sha256": "5b8928000561ae2204b08c6dfd7ebf8c8a0d9389bed8dedb23ac4c1d22b9a22f",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "limitations": [
+        "Separate development cohort, not additional final-policy repeats.",
+        "Raw cell ledger not recovered within allocation."
+      ],
+      "study_id": "historical-development-pilot-24"
+    },
+    {
+      "claim_id": "routing-v2-development",
+      "evidence": [
+        {
+          "artifact_id": "sha256:25c891911ff5d3408d65b54f865b6b729d2a1fd10406943b99f6c011add05b8f",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/routing_v2/summary.json",
+          "sha256": "25c891911ff5d3408d65b54f865b6b729d2a1fd10406943b99f6c011add05b8f",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:3cc0f954f3e5502732308e99f8315641cf7176b6e150727ad30620a067320a59",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/fragments/incremental_results.tex",
+          "sha256": "3cc0f954f3e5502732308e99f8315641cf7176b6e150727ad30620a067320a59",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "limitations": [
+        "Authored four-task suite, one observation per arm/task; internal CEGIS marker gates are not theorem proofs.",
+        "Same Grok 4.6 low-effort residual for unsupported tasks; no production or generalization claim."
+      ],
+      "study_id": "routing-v2-development"
+    },
+    {
+      "claim_id": "context-live-v1",
+      "evidence": [
+        {
+          "artifact_id": "sha256:949ebeaa52a8562dfb6106b10850776061a59badff65ab8e7f415d3bfe38079c",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/context/live_v1/summary.json",
+          "sha256": "949ebeaa52a8562dfb6106b10850776061a59badff65ab8e7f415d3bfe38079c",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:3cc0f954f3e5502732308e99f8315641cf7176b6e150727ad30620a067320a59",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/fragments/incremental_results.tex",
+          "sha256": "3cc0f954f3e5502732308e99f8315641cf7176b6e150727ad30620a067320a59",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "limitations": [
+        "Three authored dependency-bearing repairs; no dynamic expansion.",
+        "Provider caching differs. Do not add percentage to routing reduction."
+      ],
+      "study_id": "context-live-v1"
+    },
+    {
+      "claim_id": "reuse-development-v6",
+      "evidence": [
+        {
+          "artifact_id": "sha256:98feb352c02f5abd08ca69db298c7b29c9c3d8c0d5462bc936c28b686c6e13ff",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/README.md",
+          "sha256": "98feb352c02f5abd08ca69db298c7b29c9c3d8c0d5462bc936c28b686c6e13ff",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:71c8802ea6b040c4d1a993ead754ece872a2481957b4511fa060afb280933d4e",
+          "evidence_tier": "original_record",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/cases.json",
+          "sha256": "71c8802ea6b040c4d1a993ead754ece872a2481957b4511fa060afb280933d4e",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:1619e8031686b01218afb57e06b7a13e08a99f24b580b40679b92ee88f0d00db",
+          "evidence_tier": "original_record",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/timing.json",
+          "sha256": "1619e8031686b01218afb57e06b7a13e08a99f24b580b40679b92ee88f0d00db",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "limitations": [
+        "Fourteen cases are not fourteen positive admissions. Both positive matrix cases were cold audited; teardown failure remains whole-item failure.",
+        "Explicit reviewed source/fixture/environment snapshot policy, not generic tracer completeness.",
+        "Default native production probe has zero positive reuse. Earlier one-in-26 false reuse remains report-supported and unrecovered at named original path."
+      ],
+      "study_id": "reuse-development-v6"
+    },
+    {
+      "claim_id": "scorer-integrity-supplement",
+      "evidence": [
+        {
+          "artifact_id": "sha256:3b6b34866e36df8587a0b922476277646ffad353b1ec08339e15b28c01788352",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/scorer_integrity/REPORT.md",
+          "sha256": "3b6b34866e36df8587a0b922476277646ffad353b1ec08339e15b28c01788352",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:9ded32f9de2452423ea71fcb7fd322d81fdc67d07ae6dd927a2fd5e276d172ff",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/scorer_integrity/summary.json",
+          "sha256": "9ded32f9de2452423ea71fcb7fd322d81fdc67d07ae6dd927a2fd5e276d172ff",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "limitations": [
+        "Six deliberately authored attacks do not estimate attack prevalence.",
+        "This tests new development routing/context scorers, not historical cold-repair scorer robustness.",
+        "Ten unique bodies map to fourteen records; original observations and usage remain unchanged."
+      ],
+      "study_id": "scorer-integrity-supplement"
+    },
+    {
+      "claim_id": "requests-cold-v1",
+      "evidence": [
+        {
+          "artifact_id": "sha256:09b1cdec0164bea1a6e595456c56a3486d0b69b9432a60f204d8954d7f0eb9c2",
+          "evidence_tier": "reconstructed_join",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v1/root_fixed_cohort_analysis_v1.json",
+          "sha256": "09b1cdec0164bea1a6e595456c56a3486d0b69b9432a60f204d8954d7f0eb9c2",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:16118f871b6566de71bb3f3d621ff8fb9bc63f99284d5dc8c4cbc63154d4599c",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/appendix/incremental_qualification_details.tex",
+          "sha256": "16118f871b6566de71bb3f3d621ff8fb9bc63f99284d5dc8c4cbc63154d4599c",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "limitations": [
+        "Original retained aggregate joins re-read; individual provider receipt authenticity and source/import archives not revalidated here.",
+        "Exposed development family, adaptive second cohort, unequal server caching; no trajectory completes.",
+        "No source omissions or successful symbolic closure; D has actual publication/read but remains partial.",
+        "Grok visible-output and reasoning counters are disjoint in these records; cache is subset of input."
+      ],
+      "study_id": "requests-cold-v1"
+    },
+    {
+      "claim_id": "requests-cold-v2",
+      "evidence": [
+        {
+          "artifact_id": "sha256:ea538030be9b93521ef79ff670dcaf901de94a1ac8d8b045223acf28d93546ba",
+          "evidence_tier": "reconstructed_join",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/root_fixed_cohort_analysis_v2.json",
+          "sha256": "ea538030be9b93521ef79ff670dcaf901de94a1ac8d8b045223acf28d93546ba",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:16118f871b6566de71bb3f3d621ff8fb9bc63f99284d5dc8c4cbc63154d4599c",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/appendix/incremental_qualification_details.tex",
+          "sha256": "16118f871b6566de71bb3f3d621ff8fb9bc63f99284d5dc8c4cbc63154d4599c",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "limitations": [
+        "Original retained aggregate joins re-read; individual provider receipt authenticity and source/import archives not revalidated here.",
+        "Exposed development family, adaptive second cohort, unequal server caching; no trajectory completes.",
+        "No source omissions or successful symbolic closure; D has actual publication/read but remains partial.",
+        "Grok visible-output and reasoning counters are disjoint in these records; cache is subset of input."
+      ],
+      "study_id": "requests-cold-v2"
+    },
+    {
+      "claim_id": "compositional-v2",
+      "evidence": [
+        {
+          "artifact_id": "sha256:cd49f85926539063027fbd7a462ee164e96335fbe8e68245f6eb8d7a3937dbc7",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/compositional_v2/README.md",
+          "sha256": "cd49f85926539063027fbd7a462ee164e96335fbe8e68245f6eb8d7a3937dbc7",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:5789557ae88e22528947b86335d85d0caae205c42e5dec3dd9f4d37116bf5e96",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/compositional_v2/summary.json",
+          "sha256": "5789557ae88e22528947b86335d85d0caae205c42e5dec3dd9f4d37116bf5e96",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:151cf060a686d7c429e2104cc0e0cfa7e38f3d044d2f1fb0bafbc1914e34a077",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/compositional_v2/protocol.json",
+          "sha256": "151cf060a686d7c429e2104cc0e0cfa7e38f3d044d2f1fb0bafbc1914e34a077",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "limitations": [
+        "One prescribed fault/repair fixture; solver checking is not kernel reconstruction.",
+        "Protocol reports source aa5e43ec77ed710fb9cb08c8270b4c93f49743e5 and nested datasets 2328d13f085210484eb1f712c2fbdbcb4dee736f; observed loaded-source manifest was not rechecked.",
+        "Earlier source mismatch and 240-second test collection timeout are retained report-level failures."
+      ],
+      "study_id": "compositional-v2"
+    },
+    {
+      "claim_id": "native-proof-v3",
+      "evidence": [
+        {
+          "artifact_id": "sha256:ea7300731906bbef2aed6bfe35631d98e645b921dae8e2f216f742c1ad4d941f",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/README.md",
+          "sha256": "ea7300731906bbef2aed6bfe35631d98e645b921dae8e2f216f742c1ad4d941f",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:6481c08e491092bbca20274dea2c47fb68eadf649cf5fe674f6aabb75641e3c8",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/runs/source-built-v1/summary.json",
+          "sha256": "6481c08e491092bbca20274dea2c47fb68eadf649cf5fe674f6aabb75641e3c8",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "limitations": [
+        "Three bounded Groth16 relation examples; development keys. Exact full-root/count caller binding is required.",
+        "Scalar-equivalent changed outer root accepted by raw verifier; no pytest execution theorem, production admission, or token-saving evidence.",
+        "Bundled binary v3/v5 mismatch and unsupported source-built v5 retained in report."
+      ],
+      "study_id": "native-proof-v3"
+    },
+    {
+      "claim_id": "native-proof-horn-v2",
+      "evidence": [
+        {
+          "artifact_id": "sha256:e46a12a3b9193b01e99e13357792ae83af45a2c4d21fefb1ca05ccaeb8dd0fa3",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/horn_report.md",
+          "sha256": "e46a12a3b9193b01e99e13357792ae83af45a2c4d21fefb1ca05ccaeb8dd0fa3",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:ef96a045f31f2faba5bd92616a11f62953c91b74d8a36528e81c8e0a4e9fe022",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/runs/horn-v1/honest_only_summary.json",
+          "sha256": "ef96a045f31f2faba5bd92616a11f62953c91b74d8a36528e81c8e0a4e9fe022",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "limitations": [
+        "16 axiom/16 trace slot bounded profile, three honest chains.",
+        "Raw verification accepted three changed wire fields with unchanged scalar statement; caller rejected exact statement mismatch.",
+        "Alternative prover investigation stopped before execution; no reproduced false theorem or general textual binding assurance."
+      ],
+      "study_id": "native-proof-horn-v2"
+    },
+    {
+      "claim_id": "native-publication-source-tests",
+      "evidence": [
+        {
+          "artifact_id": "sha256:45f29db8767123b455443e0fc03b4ede0add12bf8ee73962a6be3752acf816d3",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/publication_baseline/run-v1/summary.json",
+          "sha256": "45f29db8767123b455443e0fc03b4ede0add12bf8ee73962a6be3752acf816d3",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "limitations": [
+        "Constructed fixtures and exception interruption; not real process-kill or integrated theorem production."
+      ],
+      "study_id": "native-publication-source-tests"
+    },
+    {
+      "claim_id": "sealing-development",
+      "evidence": [
+        {
+          "artifact_id": "sha256:5652d7a66284aae64c13f98302d65da6d3fe2860a22989f94646af56f42c486e",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/sealing_development/REPORT.md",
+          "sha256": "5652d7a66284aae64c13f98302d65da6d3fe2860a22989f94646af56f42c486e",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "limitations": [
+        "Native integrity verification accepts internally consistent wrong/stale receipts; independent finite output replay and binding checks are substantive.",
+        "Native pre-CAS recovery leaves pending transition; direct retry fails already_exists; added caller completes CAS/WAL with independent replay.",
+        "Report-only recovery here; no new proof, execution, or read of stores; independent receipt checker still runs on reuse."
+      ],
+      "study_id": "sealing-development"
+    },
+    {
+      "claim_id": "world-memory-development-v1",
+      "evidence": [
+        {
+          "artifact_id": "sha256:ea3a03bf54050b83409a333a51e2f1d706013e400e5f7697d19d72bec7b50c4b",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/world_memory_development/runs/development-v1/summary.json",
+          "sha256": "ea3a03bf54050b83409a333a51e2f1d706013e400e5f7697d19d72bec7b50c4b",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:3cc0f954f3e5502732308e99f8315641cf7176b6e150727ad30620a067320a59",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/fragments/incremental_results.tex",
+          "sha256": "3cc0f954f3e5502732308e99f8315641cf7176b6e150727ad30620a067320a59",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "limitations": [
+        "Exact JSON and complete-condition templates equal native memory action count (16 vs27 without memory; seed-charged19vs30).",
+        "Native time8.947s exceeds no-memory8.739s before shared seed; not learned transfer or token-saving evidence.",
+        "Original compiler emits incorrect record IDs; separate later correction does not replace original comparison."
+      ],
+      "study_id": "world-memory-development-v1"
+    },
+    {
+      "claim_id": "procedure-control",
+      "evidence": [
+        {
+          "artifact_id": "sha256:0da1823c5f1a00950dc34d4702a5fd8ed96dd76f657a8aa485d6179298f508e6",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/procedures/control_summary.json",
+          "sha256": "0da1823c5f1a00950dc34d4702a5fd8ed96dd76f657a8aa485d6179298f508e6",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:3cc0f954f3e5502732308e99f8315641cf7176b6e150727ad30620a067320a59",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/fragments/incremental_results.tex",
+          "sha256": "3cc0f954f3e5502732308e99f8315641cf7176b6e150727ad30620a067320a59",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "limitations": [
+        "Fixed-template control matches quality without synthesis; no demonstrated advantage over simpler control.",
+        "Arithmetic construction not a repository-repair procedure; no provider calls."
+      ],
+      "study_id": "procedure-control"
+    }
+  ],
+  "complete_historical_inventory": false,
+  "contradictions": [
+    {
+      "claim_to_avoid": "14 positive reuse admissions",
+      "evidence": [
+        {
+          "artifact_id": "sha256:71c8802ea6b040c4d1a993ead754ece872a2481957b4511fa060afb280933d4e",
+          "evidence_tier": "original_record",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/cases.json",
+          "sha256": "71c8802ea6b040c4d1a993ead754ece872a2481957b4511fa060afb280933d4e",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "id": "reuse-count-scope",
+      "observation": "14 heterogeneous cases;2 positive matrix call reuses, plus5 separate timing reuses; all had matching cold outcomes."
+    },
+    {
+      "claim_to_avoid": "default production plugin validated reuse",
+      "evidence": [
+        {
+          "artifact_id": "sha256:98feb352c02f5abd08ca69db298c7b29c9c3d8c0d5462bc936c28b686c6e13ff",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/README.md",
+          "sha256": "98feb352c02f5abd08ca69db298c7b29c9c3d8c0d5462bc936c28b686c6e13ff",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "id": "reuse-default-vs-adapter",
+      "observation": "Positive results belong to added adapter; retained default probe reports zero reuse."
+    },
+    {
+      "claim_to_avoid": "raw proof authenticates displayed statement fields",
+      "evidence": [
+        {
+          "artifact_id": "sha256:6481c08e491092bbca20274dea2c47fb68eadf649cf5fe674f6aabb75641e3c8",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/runs/source-built-v1/summary.json",
+          "sha256": "6481c08e491092bbca20274dea2c47fb68eadf649cf5fe674f6aabb75641e3c8",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:ef96a045f31f2faba5bd92616a11f62953c91b74d8a36528e81c8e0a4e9fe022",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/runs/horn-v1/honest_only_summary.json",
+          "sha256": "ef96a045f31f2faba5bd92616a11f62953c91b74d8a36528e81c8e0a4e9fe022",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "id": "proof-outer-statement",
+      "observation": "v3 raw scalar alias and three v2 wire-field changes accepted; exact caller binding rejected."
+    },
+    {
+      "claim_to_avoid": "14 independent saved-candidate tests",
+      "evidence": [
+        {
+          "artifact_id": "sha256:9ded32f9de2452423ea71fcb7fd322d81fdc67d07ae6dd927a2fd5e276d172ff",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/scorer_integrity/summary.json",
+          "sha256": "9ded32f9de2452423ea71fcb7fd322d81fdc67d07ae6dd927a2fd5e276d172ff",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "id": "scorer-unique-outcomes",
+      "observation": "10 unique bodies/evaluation units explain14 saved outcome records."
+    },
+    {
+      "claim_to_avoid": "later executed Z3/cvc5/circuit runs machine-check manuscript acceptance/reuse sketches",
+      "evidence": [
+        {
+          "artifact_id": "sha256:b1d1f95188a4c8633332a4bd15c7977062d24d9affd9e0a7830e553e2a7e8664",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/appendix/formal_arguments.tex",
+          "sha256": "b1d1f95188a4c8633332a4bd15c7977062d24d9affd9e0a7830e553e2a7e8664",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:cd49f85926539063027fbd7a462ee164e96335fbe8e68245f6eb8d7a3937dbc7",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/compositional_v2/README.md",
+          "sha256": "cd49f85926539063027fbd7a462ee164e96335fbe8e68245f6eb8d7a3937dbc7",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "id": "formal-sketch-vs-executed-solver",
+      "observation": "Formal appendix explicitly labels sketches unmachine-checked. Separate native solver/circuit profiles prove different encoded statements."
+    },
+    {
+      "claim_to_avoid": "completed-trajectory token efficiency",
+      "evidence": [
+        {
+          "artifact_id": "sha256:ea538030be9b93521ef79ff670dcaf901de94a1ac8d8b045223acf28d93546ba",
+          "evidence_tier": "reconstructed_join",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/root_fixed_cohort_analysis_v2.json",
+          "sha256": "ea538030be9b93521ef79ff670dcaf901de94a1ac8d8b045223acf28d93546ba",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "id": "requests-cost-completion",
+      "observation": "No arm in either cohort completes both nodes; trajectory ratio undefined, failures retained."
+    }
+  ],
+  "edges": [
+    {
+      "from": "sha256:62cd23fd07b3e36fac24ebd86dd6d58badc34ec34cd0c8d70b87210ddc656d6f",
+      "relationship": "reports-on",
+      "to": "historical-cold-repair-32"
+    },
+    {
+      "from": "sha256:5b8928000561ae2204b08c6dfd7ebf8c8a0d9389bed8dedb23ac4c1d22b9a22f",
+      "relationship": "reports-on",
+      "to": "historical-cold-repair-32"
+    },
+    {
+      "from": "sha256:5b8928000561ae2204b08c6dfd7ebf8c8a0d9389bed8dedb23ac4c1d22b9a22f",
+      "relationship": "reports-on",
+      "to": "historical-development-pilot-24"
+    },
+    {
+      "from": "sha256:25c891911ff5d3408d65b54f865b6b729d2a1fd10406943b99f6c011add05b8f",
+      "relationship": "reports-on",
+      "to": "routing-v2-development"
+    },
+    {
+      "from": "sha256:3cc0f954f3e5502732308e99f8315641cf7176b6e150727ad30620a067320a59",
+      "relationship": "reports-on",
+      "to": "routing-v2-development"
+    },
+    {
+      "from": "sha256:949ebeaa52a8562dfb6106b10850776061a59badff65ab8e7f415d3bfe38079c",
+      "relationship": "reports-on",
+      "to": "context-live-v1"
+    },
+    {
+      "from": "sha256:3cc0f954f3e5502732308e99f8315641cf7176b6e150727ad30620a067320a59",
+      "relationship": "reports-on",
+      "to": "context-live-v1"
+    },
+    {
+      "from": "sha256:98feb352c02f5abd08ca69db298c7b29c9c3d8c0d5462bc936c28b686c6e13ff",
+      "relationship": "reports-on",
+      "to": "reuse-development-v6"
+    },
+    {
+      "from": "sha256:71c8802ea6b040c4d1a993ead754ece872a2481957b4511fa060afb280933d4e",
+      "relationship": "reports-on",
+      "to": "reuse-development-v6"
+    },
+    {
+      "from": "sha256:1619e8031686b01218afb57e06b7a13e08a99f24b580b40679b92ee88f0d00db",
+      "relationship": "reports-on",
+      "to": "reuse-development-v6"
+    },
+    {
+      "from": "sha256:3b6b34866e36df8587a0b922476277646ffad353b1ec08339e15b28c01788352",
+      "relationship": "reports-on",
+      "to": "scorer-integrity-supplement"
+    },
+    {
+      "from": "sha256:9ded32f9de2452423ea71fcb7fd322d81fdc67d07ae6dd927a2fd5e276d172ff",
+      "relationship": "reports-on",
+      "to": "scorer-integrity-supplement"
+    },
+    {
+      "from": "sha256:09b1cdec0164bea1a6e595456c56a3486d0b69b9432a60f204d8954d7f0eb9c2",
+      "relationship": "reports-on",
+      "to": "requests-cold-v1"
+    },
+    {
+      "from": "sha256:16118f871b6566de71bb3f3d621ff8fb9bc63f99284d5dc8c4cbc63154d4599c",
+      "relationship": "reports-on",
+      "to": "requests-cold-v1"
+    },
+    {
+      "from": "sha256:ea538030be9b93521ef79ff670dcaf901de94a1ac8d8b045223acf28d93546ba",
+      "relationship": "reports-on",
+      "to": "requests-cold-v2"
+    },
+    {
+      "from": "sha256:16118f871b6566de71bb3f3d621ff8fb9bc63f99284d5dc8c4cbc63154d4599c",
+      "relationship": "reports-on",
+      "to": "requests-cold-v2"
+    },
+    {
+      "from": "sha256:cd49f85926539063027fbd7a462ee164e96335fbe8e68245f6eb8d7a3937dbc7",
+      "relationship": "reports-on",
+      "to": "compositional-v2"
+    },
+    {
+      "from": "sha256:5789557ae88e22528947b86335d85d0caae205c42e5dec3dd9f4d37116bf5e96",
+      "relationship": "reports-on",
+      "to": "compositional-v2"
+    },
+    {
+      "from": "sha256:151cf060a686d7c429e2104cc0e0cfa7e38f3d044d2f1fb0bafbc1914e34a077",
+      "relationship": "reports-on",
+      "to": "compositional-v2"
+    },
+    {
+      "from": "sha256:ea7300731906bbef2aed6bfe35631d98e645b921dae8e2f216f742c1ad4d941f",
+      "relationship": "reports-on",
+      "to": "native-proof-v3"
+    },
+    {
+      "from": "sha256:6481c08e491092bbca20274dea2c47fb68eadf649cf5fe674f6aabb75641e3c8",
+      "relationship": "reports-on",
+      "to": "native-proof-v3"
+    },
+    {
+      "from": "sha256:e46a12a3b9193b01e99e13357792ae83af45a2c4d21fefb1ca05ccaeb8dd0fa3",
+      "relationship": "reports-on",
+      "to": "native-proof-horn-v2"
+    },
+    {
+      "from": "sha256:ef96a045f31f2faba5bd92616a11f62953c91b74d8a36528e81c8e0a4e9fe022",
+      "relationship": "reports-on",
+      "to": "native-proof-horn-v2"
+    },
+    {
+      "from": "sha256:45f29db8767123b455443e0fc03b4ede0add12bf8ee73962a6be3752acf816d3",
+      "relationship": "reports-on",
+      "to": "native-publication-source-tests"
+    },
+    {
+      "from": "sha256:5652d7a66284aae64c13f98302d65da6d3fe2860a22989f94646af56f42c486e",
+      "relationship": "reports-on",
+      "to": "sealing-development"
+    },
+    {
+      "from": "sha256:ea3a03bf54050b83409a333a51e2f1d706013e400e5f7697d19d72bec7b50c4b",
+      "relationship": "reports-on",
+      "to": "world-memory-development-v1"
+    },
+    {
+      "from": "sha256:3cc0f954f3e5502732308e99f8315641cf7176b6e150727ad30620a067320a59",
+      "relationship": "reports-on",
+      "to": "world-memory-development-v1"
+    },
+    {
+      "from": "sha256:0da1823c5f1a00950dc34d4702a5fd8ed96dd76f657a8aa485d6179298f508e6",
+      "relationship": "reports-on",
+      "to": "procedure-control"
+    },
+    {
+      "from": "sha256:3cc0f954f3e5502732308e99f8315641cf7176b6e150727ad30620a067320a59",
+      "relationship": "reports-on",
+      "to": "procedure-control"
+    },
+    {
+      "from": "scorer-integrity-supplement",
+      "relationship": "validates",
+      "scope": "saved candidate body outcomes; no new inference",
+      "to": "routing-v2-development"
+    },
+    {
+      "from": "scorer-integrity-supplement",
+      "relationship": "validates",
+      "scope": "saved candidate body outcomes; no new inference",
+      "to": "context-live-v1"
+    },
+    {
+      "from": "requests-cold-v2",
+      "relationship": "supersedes-configuration",
+      "scope": "conflict-first retrieval profile; original outcomes remain unchanged",
+      "to": "requests-cold-v1"
+    }
+  ],
+  "identity_status": "author-selected reconstructed increment-016 source; original supplied v2 package remains unrecovered",
+  "independent_recomputation": {
+    "checks": [
+      {
+        "check": "requests-cold-v1_arm_total",
+        "passed": true
+      },
+      {
+        "check": "requests-cold-v1_A_usage_schema",
+        "passed": true
+      },
+      {
+        "check": "requests-cold-v1_B_usage_schema",
+        "passed": true
+      },
+      {
+        "check": "requests-cold-v1_C_usage_schema",
+        "passed": true
+      },
+      {
+        "check": "requests-cold-v1_D_usage_schema",
+        "passed": true
+      },
+      {
+        "check": "requests-cold-v1_event_usage",
+        "passed": true
+      },
+      {
+        "check": "requests-cold-v1_all_fail_trajectory",
+        "passed": true
+      },
+      {
+        "check": "requests-cold-v2_arm_total",
+        "passed": true
+      },
+      {
+        "check": "requests-cold-v2_A_usage_schema",
+        "passed": true
+      },
+      {
+        "check": "requests-cold-v2_B_usage_schema",
+        "passed": true
+      },
+      {
+        "check": "requests-cold-v2_C_usage_schema",
+        "passed": true
+      },
+      {
+        "check": "requests-cold-v2_D_usage_schema",
+        "passed": true
+      },
+      {
+        "check": "requests-cold-v2_event_usage",
+        "passed": true
+      },
+      {
+        "check": "requests-cold-v2_all_fail_trajectory",
+        "passed": true
+      },
+      {
+        "check": "reuse_case_count",
+        "passed": true
+      },
+      {
+        "check": "reuse_positive_count",
+        "passed": true
+      },
+      {
+        "check": "reuse_cases_cold_match",
+        "passed": true
+      },
+      {
+        "check": "reuse_all_cases_match_prespecification",
+        "passed": true
+      },
+      {
+        "check": "timing_pairs_count",
+        "passed": true
+      },
+      {
+        "check": "timing_warm_reuses",
+        "passed": true
+      },
+      {
+        "check": "timing_wall_totals",
+        "passed": true
+      },
+      {
+        "check": "timing_net_saving_not_established",
+        "passed": true
+      },
+      {
+        "check": "scorer_unique_vs_records",
+        "passed": true
+      },
+      {
+        "check": "historical_report_denominator",
+        "passed": true
+      },
+      {
+        "check": "routing_reduction",
+        "passed": true
+      },
+      {
+        "check": "context_usage_schema",
+        "passed": true
+      }
+    ],
+    "passed": true,
+    "scope": "arithmetic/count consistency over retained reports and bounded case records; not originating-run authenticity"
+  },
+  "missing": [
+    {
+      "item": "H1/D1-D6/R1/R2 label mapping",
+      "reason": "Supplied original v2 revision package not recovered; report-native names retained.",
+      "remedy": "Author supplies exact mapping/source; do not infer by ordinal proximity."
+    },
+    {
+      "item": "32 final and 24 pilot original per-cell records",
+      "reason": "Only retained aggregate manuscripts recovered within 28-file allocation; no exact current ledger lead admitted.",
+      "remedy": "Recover original cell ledger from documented archive and match run IDs/signatures before per-cell authenticity claims.",
+      "searched_routes": [
+        "selected frozen manuscript results and historical accounting appendix",
+        "papers/completion/neurosymbolic_supervision filename discovery",
+        "papers/final/neurosymbolic_supervision filename discovery"
+      ]
+    },
+    {
+      "access_status": "both not present",
+      "exact_paths": [
+        ".worktrees/vericodegen-neurosymbolic_supervision-2026/papers/completion/neurosymbolic_supervision/qualification/reuse_analysis.json",
+        "papers/completion/neurosymbolic_supervision/qualification/reuse_analysis.json"
+      ],
+      "item": "Historical NS-011/NS-027 reuse_analysis.json",
+      "reason": "Old worktree missing; report retains one-in-26 false reuse and enforced_full_cold_removal.",
+      "remedy": "Locate retained archive or scoped historical commit; absence is not evidence experiment never occurred."
+    },
+    {
+      "item": "Exact evidence-algebra/header-contract Lean theorem files, build receipts and #print axioms",
+      "reason": "Selected appendix explicitly says unmachine-checked; no .lean hits in bounded search. Separate later profile possible.",
+      "remedy": "Root/source audit to recover exact theorem profile; no new execution assumed.",
+      "searched_routes": [
+        "selected appendix/formal_arguments.tex",
+        "bounded filename-only paper revision tree search with source/runtime/curator trees pruned; stopped at4001 directories"
+      ]
+    },
+    {
+      "exact_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/compositional_v2/loaded_sources.json",
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/compositional_v2/native_result.json"
+      ],
+      "item": "Actual backend versions and full imported-source closure for compositional proof",
+      "reason": "Protocol and original summary/report inspected; allocation exhausted before native result/imports.",
+      "remedy": "Read allowlisted version/hash/checker fields from these existing records, independently verify actual origins."
+    },
+    {
+      "exact_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v1/state/provider",
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/state/provider"
+      ],
+      "item": "Individual provider final cumulative receipts for Requests cohorts",
+      "reason": "Retained source-bound joins checked arithmetically, raw provider receipts not re-read within allocation.",
+      "remedy": "Offline allowlist extraction and counter reconciliation; do not reconstruct per-call usage by averaging."
+    },
+    {
+      "exact_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/archive_integration_v1/run-v1/summary.json",
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/repository_archive_integration_v1/run-v1/summary.json",
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/procedures/native_integration_v1/results_attempt4/summary.json"
+      ],
+      "item": "Accepted-history archive integrations and signed procedure original receipts",
+      "reason": "Recovered frozen manuscript report only; direct original summary reads deferred at allocation.",
+      "remedy": "Read existing summaries/explicit receipt joins if additional bounded allocation is authorized."
+    }
+  ],
+  "no_behavioral_reexecution": true,
+  "no_law_to_action_sources_used": true,
+  "paper_title": "Proof-Carrying Neurosymbolic Supervision: State, Reasoning, and Evidence Reuse",
+  "provider_call_identity_rows": 23,
+  "read_bound": {
+    "actual_bytes": 443093,
+    "actual_files": 28,
+    "bytes": 6291456,
+    "files": 28,
+    "max_file_bytes": 2097152
+  },
+  "run_rows": 46,
+  "schema": "paper-historical-evidence-findings/v1",
+  "studies": [
+    {
+      "evidence": [
+        {
+          "artifact_id": "sha256:62cd23fd07b3e36fac24ebd86dd6d58badc34ec34cd0c8d70b87210ddc656d6f",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/fragments/results.tex",
+          "sha256": "62cd23fd07b3e36fac24ebd86dd6d58badc34ec34cd0c8d70b87210ddc656d6f",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:5b8928000561ae2204b08c6dfd7ebf8c8a0d9389bed8dedb23ac4c1d22b9a22f",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/appendix/historical_results_details.tex",
+          "sha256": "5b8928000561ae2204b08c6dfd7ebf8c8a0d9389bed8dedb23ac4c1d22b9a22f",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "handoff_label_mapping": "unresolved; supplied v2 label map unavailable",
+      "limitations": [
+        "Frozen manuscript aggregates only; 32 original cell records not independently joined in this bounded pass.",
+        "All failures retained; unknown provider charges and half-cohort usage prevent complete token/cost totals.",
+        "Convenience sample; additive-context comparison does not test full supervision or support a pooled mechanism claim."
+      ],
+      "metrics": {
+        "A_useful": 5,
+        "B_useful": 4,
+        "arm_cells": 16,
+        "completed_cold_validation": 15,
+        "deadlines": 14,
+        "executed_hidden_failures": 6,
+        "incomplete_hidden_validation": 1,
+        "known_proposal_failures": 2,
+        "original_hidden_failure_labels": 7,
+        "planned_cells": 32,
+        "proposal_posts": 32,
+        "scorer_invocations": 16,
+        "terminal_records_reported": 32,
+        "total_tokens": null,
+        "usage_available_cells": 16,
+        "useful_completion": 9
+      },
+      "original_report_label": "Historical cold-repair results",
+      "requested_handoff_label": null,
+      "study_id": "historical-cold-repair-32"
+    },
+    {
+      "evidence": [
+        {
+          "artifact_id": "sha256:5b8928000561ae2204b08c6dfd7ebf8c8a0d9389bed8dedb23ac4c1d22b9a22f",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/appendix/historical_results_details.tex",
+          "sha256": "5b8928000561ae2204b08c6dfd7ebf8c8a0d9389bed8dedb23ac4c1d22b9a22f",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "handoff_label_mapping": "unresolved; supplied v2 label map unavailable",
+      "limitations": [
+        "Separate development cohort, not additional final-policy repeats.",
+        "Raw cell ledger not recovered within allocation."
+      ],
+      "metrics": {
+        "A_useful": 5,
+        "B_useful": 5,
+        "cells": 24,
+        "historical_useful_labels": 10
+      },
+      "original_report_label": "four-family developmental pilot",
+      "requested_handoff_label": null,
+      "study_id": "historical-development-pilot-24"
+    },
+    {
+      "evidence": [
+        {
+          "artifact_id": "sha256:25c891911ff5d3408d65b54f865b6b729d2a1fd10406943b99f6c011add05b8f",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/routing_v2/summary.json",
+          "sha256": "25c891911ff5d3408d65b54f865b6b729d2a1fd10406943b99f6c011add05b8f",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:3cc0f954f3e5502732308e99f8315641cf7176b6e150727ad30620a067320a59",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/fragments/incremental_results.tex",
+          "sha256": "3cc0f954f3e5502732308e99f8315641cf7176b6e150727ad30620a067320a59",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "handoff_label_mapping": "unresolved; supplied v2 label map unavailable",
+      "limitations": [
+        "Authored four-task suite, one observation per arm/task; internal CEGIS marker gates are not theorem proofs.",
+        "Same Grok 4.6 low-effort residual for unsupported tasks; no production or generalization claim."
+      ],
+      "metrics": {
+        "arms": {
+          "baseline": {
+            "cells": 4,
+            "provider_calls": 4,
+            "successes": 4,
+            "tokens_complete": true,
+            "total_tokens": 4865
+          },
+          "system": {
+            "cells": 4,
+            "provider_calls": 2,
+            "successes": 4,
+            "tokens_complete": true,
+            "total_tokens": 2430
+          }
+        },
+        "complete": true,
+        "observed_cells": 8,
+        "scheduled_cells": 8,
+        "schema": "ns-routing-development-summary/v1",
+        "scope": "constructed development routing comparison; not native full-system or confirmatory generalization",
+        "token_reduction": 0.5005138746145941
+      },
+      "original_report_label": "Constructed four-task routing development",
+      "requested_handoff_label": null,
+      "study_id": "routing-v2-development"
+    },
+    {
+      "evidence": [
+        {
+          "artifact_id": "sha256:949ebeaa52a8562dfb6106b10850776061a59badff65ab8e7f415d3bfe38079c",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/context/live_v1/summary.json",
+          "sha256": "949ebeaa52a8562dfb6106b10850776061a59badff65ab8e7f415d3bfe38079c",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:3cc0f954f3e5502732308e99f8315641cf7176b6e150727ad30620a067320a59",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/fragments/incremental_results.tex",
+          "sha256": "3cc0f954f3e5502732308e99f8315641cf7176b6e150727ad30620a067320a59",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "handoff_label_mapping": "unresolved; supplied v2 label map unavailable",
+      "limitations": [
+        "Three authored dependency-bearing repairs; no dynamic expansion.",
+        "Provider caching differs. Do not add percentage to routing reduction."
+      ],
+      "metrics": {
+        "arms": {
+          "compact": {
+            "cells": 3,
+            "provider_calls": 3,
+            "successes": 3,
+            "tokens_complete": true,
+            "usage_totals": {
+              "api_reported_cost_ticks": 34850000,
+              "cached_input_tokens": 1536,
+              "input_tokens": 3817,
+              "output_tokens": 165,
+              "reasoning_tokens": 655,
+              "total_tokens": 4637
+            }
+          },
+          "raw": {
+            "cells": 3,
+            "provider_calls": 3,
+            "successes": 3,
+            "tokens_complete": true,
+            "usage_totals": {
+              "api_reported_cost_ticks": 39453600,
+              "cached_input_tokens": 1024,
+              "input_tokens": 4014,
+              "output_tokens": 165,
+              "reasoning_tokens": 687,
+              "total_tokens": 4866
+            }
+          }
+        },
+        "complete": true,
+        "freeze_sha256": "29ffa5e143c0736e341773315bcfa5207422bcf7c35ffd4b14021dd11d80a8a0",
+        "observed_cells": 6,
+        "reduction_vs_raw": {
+          "input_tokens": 0.04907822620827107,
+          "output_tokens": 0.0,
+          "total_tokens": 0.04706124126592681
+        },
+        "scheduled_cells": 6,
+        "schema": "ns-live-context-development-summary/v1",
+        "scope": "Constructed three-case development: raw versus bounded native integer-equation projection; no dynamic expansion; no general token-savings claim"
+      },
+      "original_report_label": "Constructed raw versus bounded integer-equation projection",
+      "requested_handoff_label": null,
+      "study_id": "context-live-v1"
+    },
+    {
+      "evidence": [
+        {
+          "artifact_id": "sha256:98feb352c02f5abd08ca69db298c7b29c9c3d8c0d5462bc936c28b686c6e13ff",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/README.md",
+          "sha256": "98feb352c02f5abd08ca69db298c7b29c9c3d8c0d5462bc936c28b686c6e13ff",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:71c8802ea6b040c4d1a993ead754ece872a2481957b4511fa060afb280933d4e",
+          "evidence_tier": "original_record",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/cases.json",
+          "sha256": "71c8802ea6b040c4d1a993ead754ece872a2481957b4511fa060afb280933d4e",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:1619e8031686b01218afb57e06b7a13e08a99f24b580b40679b92ee88f0d00db",
+          "evidence_tier": "original_record",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/timing.json",
+          "sha256": "1619e8031686b01218afb57e06b7a13e08a99f24b580b40679b92ee88f0d00db",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "handoff_label_mapping": "unresolved; supplied v2 label map unavailable",
+      "limitations": [
+        "Fourteen cases are not fourteen positive admissions. Both positive matrix cases were cold audited; teardown failure remains whole-item failure.",
+        "Explicit reviewed source/fixture/environment snapshot policy, not generic tracer completeness.",
+        "Default native production probe has zero positive reuse. Earlier one-in-26 false reuse remains report-supported and unrecovered at named original path."
+      ],
+      "metrics": {
+        "case_count": 14,
+        "cold_wall_seconds": 1.281301724142395,
+        "false_whole_passes": 0,
+        "issuance_seconds": 0.005822961102239788,
+        "positive_matrix_call_reuses": 2,
+        "positive_matrix_cold_audits": 2,
+        "positive_timing_call_reuses": 5,
+        "prime_seconds": 0.2560505250003189,
+        "production_probe_positive_reuses": 0,
+        "timing_cold_audits": 5,
+        "warm_wall_seconds": 1.2403415989829227
+      },
+      "original_report_label": "Lifecycle-preserving bounded reuse adapter",
+      "requested_handoff_label": null,
+      "study_id": "reuse-development-v6"
+    },
+    {
+      "evidence": [
+        {
+          "artifact_id": "sha256:3b6b34866e36df8587a0b922476277646ffad353b1ec08339e15b28c01788352",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/scorer_integrity/REPORT.md",
+          "sha256": "3b6b34866e36df8587a0b922476277646ffad353b1ec08339e15b28c01788352",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:9ded32f9de2452423ea71fcb7fd322d81fdc67d07ae6dd927a2fd5e276d172ff",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/scorer_integrity/summary.json",
+          "sha256": "9ded32f9de2452423ea71fcb7fd322d81fdc67d07ae6dd927a2fd5e276d172ff",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "handoff_label_mapping": "unresolved; supplied v2 label map unavailable",
+      "limitations": [
+        "Six deliberately authored attacks do not estimate attack prevalence.",
+        "This tests new development routing/context scorers, not historical cold-repair scorer robustness.",
+        "Ten unique bodies map to fourteen records; original observations and usage remain unchanged."
+      ],
+      "metrics": {
+        "categories": {
+          "adversarial": {
+            "old_false_admissions": 5,
+            "old_passes": 5,
+            "stronger_false_admissions": 0,
+            "stronger_passes": 0,
+            "units": 6
+          },
+          "saved_control": {
+            "old_false_admissions": 0,
+            "old_passes": 10,
+            "stronger_false_admissions": 0,
+            "stronger_passes": 10,
+            "units": 10
+          },
+          "unfixed_control": {
+            "old_false_admissions": 0,
+            "old_passes": 0,
+            "stronger_false_admissions": 0,
+            "stronger_passes": 0,
+            "units": 7
+          }
+        },
+        "frozen_files_match": true,
+        "provider_calls": 0,
+        "saved_records": 14,
+        "schema": "ns-scorer-integrity-summary/v1",
+        "supplementary_quality": {
+          "context": {
+            "changed_results": 0,
+            "original_successes": 6,
+            "records": 6,
+            "rescored_successes": 6
+          },
+          "routing": {
+            "changed_results": 0,
+            "original_successes": 8,
+            "records": 8,
+            "rescored_successes": 8
+          }
+        },
+        "unique_saved_candidate_bodies": 10,
+        "unique_saved_evaluation_units": 10
+      },
+      "original_report_label": "Targeted scorer integrity and supplementary rescoring",
+      "requested_handoff_label": null,
+      "study_id": "scorer-integrity-supplement"
+    },
+    {
+      "evidence": [
+        {
+          "artifact_id": "sha256:09b1cdec0164bea1a6e595456c56a3486d0b69b9432a60f204d8954d7f0eb9c2",
+          "evidence_tier": "reconstructed_join",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v1/root_fixed_cohort_analysis_v1.json",
+          "sha256": "09b1cdec0164bea1a6e595456c56a3486d0b69b9432a60f204d8954d7f0eb9c2",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:16118f871b6566de71bb3f3d621ff8fb9bc63f99284d5dc8c4cbc63154d4599c",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/appendix/incremental_qualification_details.tex",
+          "sha256": "16118f871b6566de71bb3f3d621ff8fb9bc63f99284d5dc8c4cbc63154d4599c",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "handoff_label_mapping": "unresolved; supplied v2 label map unavailable",
+      "limitations": [
+        "Original retained aggregate joins re-read; individual provider receipt authenticity and source/import archives not revalidated here.",
+        "Exposed development family, adaptive second cohort, unequal server caching; no trajectory completes.",
+        "No source omissions or successful symbolic closure; D has actual publication/read but remains partial.",
+        "Grok visible-output and reasoning counters are disjoint in these records; cache is subset of input."
+      ],
+      "metrics": {
+        "arms": [
+          {
+            "accepted_nodes": 1,
+            "arm": "A",
+            "complete_trajectory": false,
+            "controller_seconds": 96.4244066249812,
+            "invocation_seconds": 96.74528513709083,
+            "observed_horizons": [
+              {
+                "accepted_nodes": 1,
+                "issue_nodes": 1,
+                "total_tokens": 14428
+              },
+              {
+                "accepted_nodes": 1,
+                "issue_nodes": 2,
+                "total_tokens": 14428
+              }
+            ],
+            "provider_posts": 1,
+            "scheduled_nodes": 2,
+            "usage": {
+              "api_reported_cost_ticks": 38909600,
+              "cached_input_tokens": 13568,
+              "input_tokens": 13693,
+              "output_tokens": 64,
+              "reasoning_tokens": 671,
+              "total_tokens": 14428
+            }
+          },
+          {
+            "accepted_nodes": 1,
+            "arm": "B",
+            "complete_trajectory": false,
+            "controller_seconds": 408.50971196591854,
+            "invocation_seconds": null,
+            "observed_horizons": [
+              {
+                "accepted_nodes": 1,
+                "issue_nodes": 1,
+                "total_tokens": 14192
+              },
+              {
+                "accepted_nodes": 1,
+                "issue_nodes": 2,
+                "total_tokens": 65695
+              }
+            ],
+            "provider_posts": 4,
+            "scheduled_nodes": 2,
+            "usage": {
+              "api_reported_cost_ticks": 437845200,
+              "cached_input_tokens": 15104,
+              "input_tokens": 60684,
+              "output_tokens": 674,
+              "reasoning_tokens": 4337,
+              "total_tokens": 65695
+            }
+          },
+          {
+            "accepted_nodes": 1,
+            "arm": "C",
+            "complete_trajectory": false,
+            "controller_seconds": 285.48776885902043,
+            "invocation_seconds": 285.78974166105036,
+            "observed_horizons": [
+              {
+                "accepted_nodes": 1,
+                "issue_nodes": 1,
+                "total_tokens": 14589
+              },
+              {
+                "accepted_nodes": 1,
+                "issue_nodes": 2,
+                "total_tokens": 14589
+              }
+            ],
+            "provider_posts": 1,
+            "scheduled_nodes": 2,
+            "usage": {
+              "api_reported_cost_ticks": 108779600,
+              "cached_input_tokens": 512,
+              "input_tokens": 13693,
+              "output_tokens": 64,
+              "reasoning_tokens": 832,
+              "total_tokens": 14589
+            }
+          },
+          {
+            "accepted_nodes": 1,
+            "arm": "D",
+            "complete_trajectory": false,
+            "controller_seconds": 506.81407376891,
+            "invocation_seconds": 507.357722847024,
+            "observed_horizons": [
+              {
+                "accepted_nodes": 1,
+                "issue_nodes": 1,
+                "total_tokens": 14269
+              },
+              {
+                "accepted_nodes": 1,
+                "issue_nodes": 2,
+                "total_tokens": 14269
+              }
+            ],
+            "provider_posts": 1,
+            "scheduled_nodes": 2,
+            "usage": {
+              "api_reported_cost_ticks": 102251600,
+              "cached_input_tokens": 512,
+              "input_tokens": 13693,
+              "output_tokens": 68,
+              "reasoning_tokens": 508,
+              "total_tokens": 14269
+            }
+          }
+        ],
+        "outer_timing_complete_reported": false,
+        "provider_posts": 7,
+        "provider_total_tokens": 108981,
+        "usage_complete_reported": true
+      },
+      "original_report_label": "requests-cold-v1",
+      "requested_handoff_label": null,
+      "study_id": "requests-cold-v1"
+    },
+    {
+      "evidence": [
+        {
+          "artifact_id": "sha256:ea538030be9b93521ef79ff670dcaf901de94a1ac8d8b045223acf28d93546ba",
+          "evidence_tier": "reconstructed_join",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/root_fixed_cohort_analysis_v2.json",
+          "sha256": "ea538030be9b93521ef79ff670dcaf901de94a1ac8d8b045223acf28d93546ba",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:16118f871b6566de71bb3f3d621ff8fb9bc63f99284d5dc8c4cbc63154d4599c",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/appendix/incremental_qualification_details.tex",
+          "sha256": "16118f871b6566de71bb3f3d621ff8fb9bc63f99284d5dc8c4cbc63154d4599c",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "handoff_label_mapping": "unresolved; supplied v2 label map unavailable",
+      "limitations": [
+        "Original retained aggregate joins re-read; individual provider receipt authenticity and source/import archives not revalidated here.",
+        "Exposed development family, adaptive second cohort, unequal server caching; no trajectory completes.",
+        "No source omissions or successful symbolic closure; D has actual publication/read but remains partial.",
+        "Grok visible-output and reasoning counters are disjoint in these records; cache is subset of input."
+      ],
+      "metrics": {
+        "arms": [
+          {
+            "accepted_nodes": 1,
+            "arm": "A",
+            "complete_trajectory": false,
+            "controller_seconds": 227.5303622529609,
+            "invocation_seconds": 227.88219574501272,
+            "observed_horizons": [
+              {
+                "accepted_nodes": 1,
+                "issue_nodes": 1,
+                "total_tokens": 29787
+              },
+              {
+                "accepted_nodes": 1,
+                "issue_nodes": 2,
+                "total_tokens": 56543
+              }
+            ],
+            "provider_posts_known": 4,
+            "scheduled_nodes": 2,
+            "tokens_per_accepted_node": 56543.0,
+            "tokens_per_complete_trajectory": null,
+            "unknown_provider_slots": 0,
+            "usage": {
+              "api_reported_cost_ticks": 464406000,
+              "cached_input_tokens": 1024,
+              "input_tokens": 50283,
+              "output_tokens": 909,
+              "reasoning_tokens": 5351,
+              "total_tokens": 56543
+            }
+          },
+          {
+            "accepted_nodes": 1,
+            "arm": "B",
+            "complete_trajectory": false,
+            "controller_seconds": 249.02975571493153,
+            "invocation_seconds": 249.38502955401782,
+            "observed_horizons": [
+              {
+                "accepted_nodes": 1,
+                "issue_nodes": 1,
+                "total_tokens": 14782
+              },
+              {
+                "accepted_nodes": 1,
+                "issue_nodes": 2,
+                "total_tokens": 62439
+              }
+            ],
+            "provider_posts_known": 4,
+            "scheduled_nodes": 2,
+            "tokens_per_accepted_node": 62439.0,
+            "tokens_per_complete_trajectory": null,
+            "unknown_provider_slots": 0,
+            "usage": {
+              "api_reported_cost_ticks": 316288400,
+              "cached_input_tokens": 30976,
+              "input_tokens": 58786,
+              "output_tokens": 329,
+              "reasoning_tokens": 3324,
+              "total_tokens": 62439
+            }
+          },
+          {
+            "accepted_nodes": 1,
+            "arm": "C",
+            "complete_trajectory": false,
+            "controller_seconds": 415.4140618320089,
+            "invocation_seconds": 415.7432026170427,
+            "observed_horizons": [
+              {
+                "accepted_nodes": 1,
+                "issue_nodes": 1,
+                "total_tokens": 14364
+              },
+              {
+                "accepted_nodes": 1,
+                "issue_nodes": 2,
+                "total_tokens": 63336
+              }
+            ],
+            "provider_posts_known": 4,
+            "scheduled_nodes": 2,
+            "tokens_per_accepted_node": 63336.0,
+            "tokens_per_complete_trajectory": null,
+            "unknown_provider_slots": 0,
+            "usage": {
+              "api_reported_cost_ticks": 408040800,
+              "cached_input_tokens": 14720,
+              "input_tokens": 59481,
+              "output_tokens": 239,
+              "reasoning_tokens": 3616,
+              "total_tokens": 63336
+            }
+          },
+          {
+            "accepted_nodes": 1,
+            "arm": "D",
+            "complete_trajectory": false,
+            "controller_seconds": 489.13409300893545,
+            "invocation_seconds": 489.51564058708027,
+            "observed_horizons": [
+              {
+                "accepted_nodes": 1,
+                "issue_nodes": 1,
+                "total_tokens": 14163
+              },
+              {
+                "accepted_nodes": 1,
+                "issue_nodes": 2,
+                "total_tokens": 60937
+              }
+            ],
+            "provider_posts_known": 4,
+            "scheduled_nodes": 2,
+            "tokens_per_accepted_node": 60937.0,
+            "tokens_per_complete_trajectory": null,
+            "unknown_provider_slots": 0,
+            "usage": {
+              "api_reported_cost_ticks": 438402800,
+              "cached_input_tokens": 1024,
+              "input_tokens": 58786,
+              "output_tokens": 327,
+              "reasoning_tokens": 1824,
+              "total_tokens": 60937
+            }
+          }
+        ],
+        "outer_timing_complete_reported": true,
+        "provider_posts": 16,
+        "provider_total_tokens": 243255,
+        "usage_complete_reported": true
+      },
+      "original_report_label": "requests-cold-v2",
+      "requested_handoff_label": null,
+      "study_id": "requests-cold-v2"
+    },
+    {
+      "evidence": [
+        {
+          "artifact_id": "sha256:cd49f85926539063027fbd7a462ee164e96335fbe8e68245f6eb8d7a3937dbc7",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/compositional_v2/README.md",
+          "sha256": "cd49f85926539063027fbd7a462ee164e96335fbe8e68245f6eb8d7a3937dbc7",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:5789557ae88e22528947b86335d85d0caae205c42e5dec3dd9f4d37116bf5e96",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/compositional_v2/summary.json",
+          "sha256": "5789557ae88e22528947b86335d85d0caae205c42e5dec3dd9f4d37116bf5e96",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:151cf060a686d7c429e2104cc0e0cfa7e38f3d044d2f1fb0bafbc1914e34a077",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/compositional_v2/protocol.json",
+          "sha256": "151cf060a686d7c429e2104cc0e0cfa7e38f3d044d2f1fb0bafbc1914e34a077",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "handoff_label_mapping": "unresolved; supplied v2 label map unavailable",
+      "limitations": [
+        "One prescribed fault/repair fixture; solver checking is not kernel reconstruction.",
+        "Protocol reports source aa5e43ec77ed710fb9cb08c8270b4c93f49743e5 and nested datasets 2328d13f085210484eb1f712c2fbdbcb4dee736f; observed loaded-source manifest was not rechecked.",
+        "Earlier source mismatch and 240-second test collection timeout are retained report-level failures."
+      ],
+      "metrics": {
+        "artifact_verification": {
+          "artifact_cid": "baguqeeraty5q62r2343sv6vpxzs5ydbfscrjrtqkeo2lkokuv4ovsyssecxq",
+          "checks": {
+            "composition_redischarge": true,
+            "content_identity_reconstructed": true,
+            "discharge_identity_reconstructed": true,
+            "selected_test_receipt_cid": "baguqeerad5k5drxeuyyb7lmn3jyvp6lvyqcwzqbtgsdrvzhh7pkq22xqvtha",
+            "selected_test_receipt_reconstructed": true,
+            "selected_tests_replayed": true,
+            "semantic_index_reconstructed": true,
+            "semantic_state_reconstructed": true
+          },
+          "disposition": "validated",
+          "interface": "CompositionalVerificationArtifactVerifier@1",
+          "issues": [],
+          "replay_receipt_cid": "baguqeerazcs3367rehq4l3q6vq54hm55sljqa37gucealv46me5plvcl7uha",
+          "valid": true
+        },
+        "baseline_disposition": "proved",
+        "fault_disposition": "disproved",
+        "final_disposition": "proved",
+        "full_tests_status": "passed",
+        "host_elapsed_seconds": 19.30881680396851,
+        "model_token_savings": null,
+        "native_result_sha256": "1d5c59c68312899613403cf09d5dffdd608e94e8e5433d760854e46ae5b1789c",
+        "returncode": 0,
+        "schema": "ns-native-compositional-observation/v1",
+        "selected_tests_status": "passed",
+        "status": "completed",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_sha256": "d24192ccd6c9e0011e0642c69cdc9fc3c0b41fc11aafbfa1fae837fac2f00eed",
+        "timed_out": false
+      },
+      "original_report_label": "Native compositional reasoning qualification",
+      "requested_handoff_label": null,
+      "study_id": "compositional-v2"
+    },
+    {
+      "evidence": [
+        {
+          "artifact_id": "sha256:ea7300731906bbef2aed6bfe35631d98e645b921dae8e2f216f742c1ad4d941f",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/README.md",
+          "sha256": "ea7300731906bbef2aed6bfe35631d98e645b921dae8e2f216f742c1ad4d941f",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:6481c08e491092bbca20274dea2c47fb68eadf649cf5fe674f6aabb75641e3c8",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/runs/source-built-v1/summary.json",
+          "sha256": "6481c08e491092bbca20274dea2c47fb68eadf649cf5fe674f6aabb75641e3c8",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "handoff_label_mapping": "unresolved; supplied v2 label map unavailable",
+      "limitations": [
+        "Three bounded Groth16 relation examples; development keys. Exact full-root/count caller binding is required.",
+        "Scalar-equivalent changed outer root accepted by raw verifier; no pytest execution theorem, production admission, or token-saving evidence.",
+        "Bundled binary v3/v5 mismatch and unsupported source-built v5 retained in report."
+      ],
+      "metrics": {
+        "field_alias_exact_statement_binder_rejected": true,
+        "field_alias_native_verified": true,
+        "model_calls": 0,
+        "ordinary_mutation_controls": 8,
+        "ordinary_rejections": 8,
+        "positive_proofs": 3,
+        "production_admission": false,
+        "proof_json_bytes": [
+          1484,
+          1484,
+          1484
+        ],
+        "prove_wall_seconds": [
+          12.349230786086991,
+          12.04848077101633,
+          12.473866579006426
+        ],
+        "pytest_execution_proven": false,
+        "setup_alternate_seconds": 7.763997838017531,
+        "setup_primary_seconds": 7.810198399005458,
+        "status": "qualified_named_relation",
+        "token_savings_claim": false,
+        "verify_wall_seconds": [
+          0.003053140011616051,
+          0.0051469020545482635,
+          0.003282243967987597
+        ]
+      },
+      "original_report_label": "EventDagCompactionCircuitV3",
+      "requested_handoff_label": null,
+      "study_id": "native-proof-v3"
+    },
+    {
+      "evidence": [
+        {
+          "artifact_id": "sha256:e46a12a3b9193b01e99e13357792ae83af45a2c4d21fefb1ca05ccaeb8dd0fa3",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/horn_report.md",
+          "sha256": "e46a12a3b9193b01e99e13357792ae83af45a2c4d21fefb1ca05ccaeb8dd0fa3",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:ef96a045f31f2faba5bd92616a11f62953c91b74d8a36528e81c8e0a4e9fe022",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/runs/horn-v1/honest_only_summary.json",
+          "sha256": "ef96a045f31f2faba5bd92616a11f62953c91b74d8a36528e81c8e0a4e9fe022",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "handoff_label_mapping": "unresolved; supplied v2 label map unavailable",
+      "limitations": [
+        "16 axiom/16 trace slot bounded profile, three honest chains.",
+        "Raw verification accepted three changed wire fields with unchanged scalar statement; caller rejected exact statement mismatch.",
+        "Alternative prover investigation stopped before execution; no reproduced false theorem or general textual binding assurance."
+      ],
+      "metrics": {
+        "binary_and_key_pins": {
+          "binary_sha256": "88686a976dac69f4e877b99e1f15c2a3ad39a6cf759c0f2e9614802d3e63e8b4",
+          "proving_key_sha256": "cddcd989b5538d6ef73a056c6304c8868e45c92420b435918bfe4d65daf9e270",
+          "verifying_key_sha256": "c5cb837692d81085ce840d1df7aa03ac37efbbf9d3afde220f7169ced006f154"
+        },
+        "control_count": 8,
+        "positive_proofs": 3,
+        "setup_seconds": 1.1013326660031453,
+        "status": "honest_prover_and_representation_controls_complete_deeper_assurance_incomplete",
+        "stronger_textual_binding_claim": false
+      },
+      "original_report_label": "TDFOLv1DerivationCircuitV2 honest-only",
+      "requested_handoff_label": null,
+      "study_id": "native-proof-horn-v2"
+    },
+    {
+      "evidence": [
+        {
+          "artifact_id": "sha256:45f29db8767123b455443e0fc03b4ede0add12bf8ee73962a6be3752acf816d3",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/publication_baseline/run-v1/summary.json",
+          "sha256": "45f29db8767123b455443e0fc03b4ede0add12bf8ee73962a6be3752acf816d3",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "handoff_label_mapping": "unresolved; supplied v2 label map unavailable",
+      "limitations": [
+        "Constructed fixtures and exception interruption; not real process-kill or integrated theorem production."
+      ],
+      "metrics": {
+        "cases": 47,
+        "counts": {
+          "error": 0,
+          "failed": 0,
+          "passed": 47,
+          "skipped": 0
+        },
+        "host_elapsed_seconds": 5.373573691933416
+      },
+      "original_report_label": "Publication/recovery source-shipped qualifications",
+      "requested_handoff_label": null,
+      "study_id": "native-publication-source-tests"
+    },
+    {
+      "evidence": [
+        {
+          "artifact_id": "sha256:5652d7a66284aae64c13f98302d65da6d3fe2860a22989f94646af56f42c486e",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/sealing_development/REPORT.md",
+          "sha256": "5652d7a66284aae64c13f98302d65da6d3fe2860a22989f94646af56f42c486e",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "handoff_label_mapping": "unresolved; supplied v2 label map unavailable",
+      "limitations": [
+        "Native integrity verification accepts internally consistent wrong/stale receipts; independent finite output replay and binding checks are substantive.",
+        "Native pre-CAS recovery leaves pending transition; direct retry fails already_exists; added caller completes CAS/WAL with independent replay.",
+        "Report-only recovery here; no new proof, execution, or read of stores; independent receipt checker still runs on reuse."
+      ],
+      "metrics": {
+        "honest_preparation_subprocesses": 5,
+        "mutation_rejections": 5,
+        "parallel_preparation_pairs": 4,
+        "real_process_terminations": 2,
+        "state_input_observations_reported": 700,
+        "unchanged_receipt_reuses": 3
+      },
+      "original_report_label": "Evidence-backed sealing and separately added recovery caller",
+      "requested_handoff_label": null,
+      "study_id": "sealing-development"
+    },
+    {
+      "evidence": [
+        {
+          "artifact_id": "sha256:ea3a03bf54050b83409a333a51e2f1d706013e400e5f7697d19d72bec7b50c4b",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/world_memory_development/runs/development-v1/summary.json",
+          "sha256": "ea3a03bf54050b83409a333a51e2f1d706013e400e5f7697d19d72bec7b50c4b",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:3cc0f954f3e5502732308e99f8315641cf7176b6e150727ad30620a067320a59",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/fragments/incremental_results.tex",
+          "sha256": "3cc0f954f3e5502732308e99f8315641cf7176b6e150727ad30620a067320a59",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "handoff_label_mapping": "unresolved; supplied v2 label map unavailable",
+      "limitations": [
+        "Exact JSON and complete-condition templates equal native memory action count (16 vs27 without memory; seed-charged19vs30).",
+        "Native time8.947s exceeds no-memory8.739s before shared seed; not learned transfer or token-saving evidence.",
+        "Original compiler emits incorrect record IDs; separate later correction does not replace original comparison."
+      ],
+      "metrics": {
+        "learned_model": false,
+        "provider_calls": 0,
+        "totals": {
+          "condition_template": {
+            "action_elapsed_seconds": 0.3123379769967869,
+            "action_processes": 16,
+            "action_processes_including_shared_seed": 19,
+            "cases": 11,
+            "passed": 11,
+            "persistent_store_bytes": 260706,
+            "persistent_store_files": 113,
+            "process_elapsed_including_shared_seed": 9.727451214916073,
+            "process_elapsed_seconds": 8.547625982901081,
+            "retrieval_gate_elapsed_seconds": 0.009495309088379145
+          },
+          "exact_json": {
+            "action_elapsed_seconds": 0.2871874989941716,
+            "action_processes": 16,
+            "action_processes_including_shared_seed": 19,
+            "cases": 11,
+            "passed": 11,
+            "persistent_store_bytes": 260706,
+            "persistent_store_files": 113,
+            "process_elapsed_including_shared_seed": 9.531864610151388,
+            "process_elapsed_seconds": 8.352039378136396,
+            "retrieval_gate_elapsed_seconds": 0.013139092014171183
+          },
+          "native_memory": {
+            "action_elapsed_seconds": 0.32707138219848275,
+            "action_processes": 16,
+            "action_processes_including_shared_seed": 19,
+            "cases": 11,
+            "passed": 11,
+            "persistent_store_bytes": 261587,
+            "persistent_store_files": 114,
+            "process_elapsed_including_shared_seed": 10.126974981976673,
+            "process_elapsed_seconds": 8.947149749961682,
+            "retrieval_gate_elapsed_seconds": 0.22393747593741864
+          },
+          "no_memory": {
+            "action_elapsed_seconds": 0.48625872225966305,
+            "action_processes": 27,
+            "action_processes_including_shared_seed": 30,
+            "cases": 11,
+            "passed": 11,
+            "persistent_store_bytes": 273938,
+            "persistent_store_files": 124,
+            "process_elapsed_including_shared_seed": 9.919053721940145,
+            "process_elapsed_seconds": 8.739228489925154,
+            "retrieval_gate_elapsed_seconds": 9.551644325256348e-06
+          }
+        }
+      },
+      "original_report_label": "Closed-catalog subsequent-action comparison",
+      "requested_handoff_label": null,
+      "study_id": "world-memory-development-v1"
+    },
+    {
+      "evidence": [
+        {
+          "artifact_id": "sha256:0da1823c5f1a00950dc34d4702a5fd8ed96dd76f657a8aa485d6179298f508e6",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/procedures/control_summary.json",
+          "sha256": "0da1823c5f1a00950dc34d4702a5fd8ed96dd76f657a8aa485d6179298f508e6",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:3cc0f954f3e5502732308e99f8315641cf7176b6e150727ad30620a067320a59",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/fragments/incremental_results.tex",
+          "sha256": "3cc0f954f3e5502732308e99f8315641cf7176b6e150727ad30620a067320a59",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "handoff_label_mapping": "unresolved; supplied v2 label map unavailable",
+      "limitations": [
+        "Fixed-template control matches quality without synthesis; no demonstrated advantage over simpler control.",
+        "Arithmetic construction not a repository-repair procedure; no provider calls."
+      ],
+      "metrics": {
+        "control_summary": {
+          "fixed_template": {
+            "abstentions": 554,
+            "agreement": 3883,
+            "false_admissions": 0,
+            "successful_units": 7,
+            "synthesis_calls": 0,
+            "units": 8
+          },
+          "independently_replayed_cells": 16,
+          "persisted_plan_fresh_process": {
+            "agreement": 4437,
+            "lookup": "native_exact_bindings_match",
+            "native_synthesis_calls": 0,
+            "pid": 2968584,
+            "queries": 4437
+          },
+          "provider_calls": 0,
+          "same_candidate_used_for_prime_and_reuse": true,
+          "scaffold_disagreements": 1461,
+          "schema": "ns-procedure-postdevelopment-control-summary/v1",
+          "source_freeze_matches": true,
+          "tokens": 0
+        }
+      },
+      "original_report_label": "Bounded stored-procedure/simple-template control",
+      "requested_handoff_label": null,
+      "study_id": "procedure-control"
+    }
+  ]
+}

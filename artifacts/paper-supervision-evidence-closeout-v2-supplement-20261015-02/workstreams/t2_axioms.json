@@ -1,0 +1,55 @@
+{
+  "actual_lean_axiom_stdout_recovered": false,
+  "artifact_sha256": "96ace2549f97deb8c7af22012000a8e02de99dd34875565b6a07e45112e5aea4",
+  "evidence_paths": [
+    "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/jobs/supervisor-full-fix-code-vulnerability/fix-code-vulnerability__z4cVfSR/agent/supervisor-result.json"
+  ],
+  "evidence_tier": "original_record",
+  "expected_axiom_strings": [
+    "'rejected_unsafe' does not depend on any axioms",
+    "'preserved_safe' does not depend on any axioms",
+    "'accepted_only_safe' does not depend on any axioms"
+  ],
+  "expected_strings_are_original_stdout": false,
+  "independently_reexecuted": false,
+  "kernel_replay_receipt": {
+    "executed": true,
+    "exit_code": 0,
+    "kernel_id": "kernel:lean4-header-guard",
+    "kernel_verified": true,
+    "stdout_cid": "baguqeerac7veg34hzflm2pf4cuqgrzfdptkhkmbrjlniofydikhpapt7aoua",
+    "transcript_cid": "baguqeera6nbepweij7amrv3bmaq6zjwdouxuiijrzdffh4xg65q6224w7kbq"
+  },
+  "retained_supervisor_stdout_contains_exact_expected_lines": [
+    false,
+    false,
+    false
+  ],
+  "run_id": "fix-code-vulnerability__z4cVfSR",
+  "scope": "Recorded wrapper captures Lean stdout, asserts the expected axiom lines, then emits its own receipt JSON. The recorded wrapper output CID does not itself recover raw Lean stdout. No solver/kernel replay executed.",
+  "sealed_reference_signature_verification": "not_performed",
+  "sealed_store_references": [
+    {
+      "entry_id": "sealed-entry:baguqeera66q4lje75gu36ia7a5i3ktfhyhhmids5dw2ozockktb2yktvclkq",
+      "receipt_cid": "baguqeera2y7v536ii6ogxddew422w5w3eb2w2uzg5s2ghiakauz5ohvatr6q",
+      "receipt_schema": "ipfs_accelerate_py/agent-supervisor/doctor-native-execution-receipt@1",
+      "sequence": 1,
+      "store_id": "baguqeeraetscyoyfzccd2acziy2nly4reuqtnmnutihp55w7a55zeipomnoa"
+    },
+    {
+      "entry_id": "sealed-entry:baguqeerauuozo5p6paztxts22fvm6vql3nlg4cdbejn3dbbxo6ltqbp3ofna",
+      "receipt_cid": "baguqeeragrhbvbx2c5ry7ym5lmf7rvpmqftfxihzr5sgvgozt7ahrqktrsca",
+      "receipt_schema": "ipfs_accelerate_py/agent-supervisor/doctor-kernel-replay-receipt@1",
+      "sequence": 2,
+      "store_id": "baguqeeraetscyoyfzccd2acziy2nly4reuqtnmnutihp55w7a55zeipomnoa"
+    }
+  ],
+  "signature_verification": "not_performed",
+  "solver_execution_receipt": {
+    "executed": true,
+    "exit_code": 0,
+    "stdout_cid": "baguqeeralpq3yzqjp3y7ysni25cloljj52xhvbrwyo2hsx7m7buzt6lhsdka",
+    "transcript_cid": "baguqeerabjueoftpamsahioh33arhnpr4l3qlhi4u6sicy4vhobpfh6sewza"
+  },
+  "wrapper_stdout_is_lean_subprocess_stdout": false
+}

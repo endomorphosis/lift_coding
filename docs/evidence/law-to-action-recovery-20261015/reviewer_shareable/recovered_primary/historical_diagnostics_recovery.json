@@ -1,0 +1,980 @@
+{
+  "audit_date_utc": "2026-10-15",
+  "conclusion": "Original diagnostic artifacts are now recovered under expanded scope, with source/copy hashes and receipt joins. Their protocol-unadmitted and withdrawn classifications remain unchanged; earlier source/archive conflict remains unresolved.",
+  "evidence_classification": {
+    "admitted_primary_owner_remains": "LA-029",
+    "all_tasks": [
+      "LA-015",
+      "LA-016",
+      "LA-017",
+      "LA-018",
+      "LA-019",
+      "LA-020"
+    ],
+    "latest_rq3_baseline": "withdrawn/not_started",
+    "native_task_completion_is_scientific_admission": false,
+    "no_latest_baseline_change": true,
+    "promoted_to_primary_evidence": false
+  },
+  "exclusions": [
+    "No LA-015 full raw outcome panel was opened or copied.",
+    "No LA-016 per-cell raw ledger or generated-code index was opened or copied.",
+    "No LA-017 raw outcome panel was opened or copied.",
+    "No figure/PDF or protected final prediction member was opened or copied.",
+    "Source scripts, solver binaries, database files, private keys and archive admissions were not copied or executed."
+  ],
+  "files": [
+    {
+      "bound_by_receipt": null,
+      "bytes": 11989,
+      "copied_sha256": "53b3b162d64459e841ed90a4e8a10b32efeb1dbd34ec8fac8cbc9629b8209b11",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/LA-015.json",
+      "kind": "original_receipt",
+      "receipt_binding_matches": null,
+      "reported_sha256": null,
+      "repository_relative_path": "papers/completion/law_to_action/receipts/LA-015.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/LA-015.json",
+      "source_sha256": "53b3b162d64459e841ed90a4e8a10b32efeb1dbd34ec8fac8cbc9629b8209b11",
+      "task": "LA-015"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-015.json",
+      "bytes": 17115,
+      "copied_sha256": "3f67fcaeee044a442726e560997d72b224c0e4655bcdb81c34720d18cd08cacf",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-015/outputs/results/fixed_actions/run_manifest.json",
+      "kind": "receipt_bound_snapshot",
+      "receipt_binding_matches": true,
+      "reported_sha256": "3f67fcaeee044a442726e560997d72b224c0e4655bcdb81c34720d18cd08cacf",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-015/outputs/results/fixed_actions/run_manifest.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-015/outputs/results/fixed_actions/run_manifest.json",
+      "source_sha256": "3f67fcaeee044a442726e560997d72b224c0e4655bcdb81c34720d18cd08cacf",
+      "task": "LA-015"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-015.json",
+      "bytes": 993,
+      "copied_sha256": "5eba898556a70cd0c05c8599b434bfb33b5fd64d6804459a6c7b4fd61d8b7840",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-015/probe/resources.json",
+      "kind": "receipt_bound_snapshot",
+      "receipt_binding_matches": true,
+      "reported_sha256": "5eba898556a70cd0c05c8599b434bfb33b5fd64d6804459a6c7b4fd61d8b7840",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-015/probe/resources.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-015/probe/resources.json",
+      "source_sha256": "5eba898556a70cd0c05c8599b434bfb33b5fd64d6804459a6c7b4fd61d8b7840",
+      "task": "LA-015"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-015.json",
+      "bytes": 1784,
+      "copied_sha256": "86e1f06a92f0fa750c44a28c774fa4da6eb921681e27e3a356b258cc1d9d3a78",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-015/probe/environment.json",
+      "kind": "receipt_bound_snapshot",
+      "receipt_binding_matches": true,
+      "reported_sha256": "86e1f06a92f0fa750c44a28c774fa4da6eb921681e27e3a356b258cc1d9d3a78",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-015/probe/environment.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-015/probe/environment.json",
+      "source_sha256": "86e1f06a92f0fa750c44a28c774fa4da6eb921681e27e3a356b258cc1d9d3a78",
+      "task": "LA-015"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-015.json",
+      "bytes": 672,
+      "copied_sha256": "98e1ace9c1e189977880d82fe5ab70fd7d80e76aa6c4541770fdde538843cb60",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-015/validation/validate.stdout.log",
+      "kind": "receipt_bound_snapshot",
+      "receipt_binding_matches": true,
+      "reported_sha256": "98e1ace9c1e189977880d82fe5ab70fd7d80e76aa6c4541770fdde538843cb60",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-015/validation/validate.stdout.log",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-015/validation/validate.stdout.log",
+      "source_sha256": "98e1ace9c1e189977880d82fe5ab70fd7d80e76aa6c4541770fdde538843cb60",
+      "task": "LA-015"
+    },
+    {
+      "bound_by_receipt": null,
+      "bytes": 13515,
+      "copied_sha256": "6ab90ef02099e1c92aa2f1fc760a63f5c99f50ffadda86e948204cd39230071f",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/LA-016.json",
+      "kind": "original_receipt",
+      "receipt_binding_matches": null,
+      "reported_sha256": null,
+      "repository_relative_path": "papers/completion/law_to_action/receipts/LA-016.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/LA-016.json",
+      "source_sha256": "6ab90ef02099e1c92aa2f1fc760a63f5c99f50ffadda86e948204cd39230071f",
+      "task": "LA-016"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-016.json",
+      "bytes": 7940,
+      "copied_sha256": "433b0b3fb2ccb2dbfe4014336e5e22b4fc0e7d2eba49c9d843ae310b39cd38e9",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/recovery_analysis.md",
+      "kind": "receipt_bound_snapshot",
+      "receipt_binding_matches": true,
+      "reported_sha256": "433b0b3fb2ccb2dbfe4014336e5e22b4fc0e7d2eba49c9d843ae310b39cd38e9",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/recovery_analysis.md",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/recovery_analysis.md",
+      "source_sha256": "433b0b3fb2ccb2dbfe4014336e5e22b4fc0e7d2eba49c9d843ae310b39cd38e9",
+      "task": "LA-016"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-016.json",
+      "bytes": 62295,
+      "copied_sha256": "8fa99a856023300312f760a0aceaa3623d976289e68cda31c059983db9a76a90",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/run_manifest.json",
+      "kind": "receipt_bound_snapshot",
+      "receipt_binding_matches": true,
+      "reported_sha256": "8fa99a856023300312f760a0aceaa3623d976289e68cda31c059983db9a76a90",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/run_manifest.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/run_manifest.json",
+      "source_sha256": "8fa99a856023300312f760a0aceaa3623d976289e68cda31c059983db9a76a90",
+      "task": "LA-016"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-016.json",
+      "bytes": 3639,
+      "copied_sha256": "0074a0076312cf97034ec25a52bbb93e57c7782c6f42c73dd0c1e92c0cc89bee",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-016/probe/model_provider.json",
+      "kind": "receipt_bound_snapshot",
+      "receipt_binding_matches": true,
+      "reported_sha256": "0074a0076312cf97034ec25a52bbb93e57c7782c6f42c73dd0c1e92c0cc89bee",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-016/probe/model_provider.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-016/probe/model_provider.json",
+      "source_sha256": "0074a0076312cf97034ec25a52bbb93e57c7782c6f42c73dd0c1e92c0cc89bee",
+      "task": "LA-016"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-016.json",
+      "bytes": 838,
+      "copied_sha256": "f8d49a4a7c735e2c66bebec17baf1f808c84c5a6679e5a4430fe81b11a770852",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-016/probe/source_disjointness.json",
+      "kind": "receipt_bound_snapshot",
+      "receipt_binding_matches": true,
+      "reported_sha256": "f8d49a4a7c735e2c66bebec17baf1f808c84c5a6679e5a4430fe81b11a770852",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-016/probe/source_disjointness.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-016/probe/source_disjointness.json",
+      "source_sha256": "f8d49a4a7c735e2c66bebec17baf1f808c84c5a6679e5a4430fe81b11a770852",
+      "task": "LA-016"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-016.json",
+      "bytes": 1453,
+      "copied_sha256": "1cfe83bafcc15de86cb9c417fff377328a41e2d04d5d71cd86fdd469e7973e1b",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-016/traces/blockers.json",
+      "kind": "receipt_bound_snapshot",
+      "receipt_binding_matches": true,
+      "reported_sha256": "1cfe83bafcc15de86cb9c417fff377328a41e2d04d5d71cd86fdd469e7973e1b",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-016/traces/blockers.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-016/traces/blockers.json",
+      "source_sha256": "1cfe83bafcc15de86cb9c417fff377328a41e2d04d5d71cd86fdd469e7973e1b",
+      "task": "LA-016"
+    },
+    {
+      "bound_by_receipt": null,
+      "bytes": 11810,
+      "copied_sha256": "6e1a662f59ac5f2d83a3b725939b6c3765de262a8baaedad131f9321d391b4ad",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/LA-017.json",
+      "kind": "original_receipt",
+      "receipt_binding_matches": null,
+      "reported_sha256": null,
+      "repository_relative_path": "papers/completion/law_to_action/receipts/LA-017.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/LA-017.json",
+      "source_sha256": "6e1a662f59ac5f2d83a3b725939b6c3765de262a8baaedad131f9321d391b4ad",
+      "task": "LA-017"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-017.json",
+      "bytes": 11236,
+      "copied_sha256": "8b4cf2f6de9bc82535ff837414d0afa08d6148c538d7625d0185dd08e78dd54d",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-017/outputs/benchmark/ablations.json",
+      "kind": "receipt_bound_snapshot",
+      "receipt_binding_matches": true,
+      "reported_sha256": "8b4cf2f6de9bc82535ff837414d0afa08d6148c538d7625d0185dd08e78dd54d",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-017/outputs/benchmark/ablations.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-017/outputs/benchmark/ablations.json",
+      "source_sha256": "8b4cf2f6de9bc82535ff837414d0afa08d6148c538d7625d0185dd08e78dd54d",
+      "task": "LA-017"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-017.json",
+      "bytes": 25453,
+      "copied_sha256": "2c698efe7ebb632fad889c46ca77f901dcab99f70169b20e11e4f387736fffa7",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-017/outputs/results/ablations/summary.json",
+      "kind": "receipt_bound_snapshot",
+      "receipt_binding_matches": true,
+      "reported_sha256": "2c698efe7ebb632fad889c46ca77f901dcab99f70169b20e11e4f387736fffa7",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-017/outputs/results/ablations/summary.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-017/outputs/results/ablations/summary.json",
+      "source_sha256": "2c698efe7ebb632fad889c46ca77f901dcab99f70169b20e11e4f387736fffa7",
+      "task": "LA-017"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-017.json",
+      "bytes": 1791,
+      "copied_sha256": "35b0822e01ed8e149cc19528e4531d2de0428622c5975fda2f4fc765c8916a1f",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-017/probe/environment.json",
+      "kind": "receipt_bound_snapshot",
+      "receipt_binding_matches": true,
+      "reported_sha256": "35b0822e01ed8e149cc19528e4531d2de0428622c5975fda2f4fc765c8916a1f",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-017/probe/environment.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-017/probe/environment.json",
+      "source_sha256": "35b0822e01ed8e149cc19528e4531d2de0428622c5975fda2f4fc765c8916a1f",
+      "task": "LA-017"
+    },
+    {
+      "bound_by_receipt": null,
+      "bytes": 11463,
+      "copied_sha256": "916e45620c9a62975552e153c898e5fd2f779eb767a8be2555210305a472d7e1",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/LA-018.json",
+      "kind": "original_receipt",
+      "receipt_binding_matches": null,
+      "reported_sha256": null,
+      "repository_relative_path": "papers/completion/law_to_action/receipts/LA-018.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/LA-018.json",
+      "source_sha256": "916e45620c9a62975552e153c898e5fd2f779eb767a8be2555210305a472d7e1",
+      "task": "LA-018"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-018.json",
+      "bytes": 370078,
+      "copied_sha256": "766aecb9c0b7abdc900b1aabdb2244c0c3a7ff04611f5bc28c528ef120e1885a",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-018/outputs/results/efficiency/raw.jsonl",
+      "kind": "receipt_bound_snapshot",
+      "receipt_binding_matches": true,
+      "reported_sha256": "766aecb9c0b7abdc900b1aabdb2244c0c3a7ff04611f5bc28c528ef120e1885a",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-018/outputs/results/efficiency/raw.jsonl",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-018/outputs/results/efficiency/raw.jsonl",
+      "source_sha256": "766aecb9c0b7abdc900b1aabdb2244c0c3a7ff04611f5bc28c528ef120e1885a",
+      "task": "LA-018"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-018.json",
+      "bytes": 11478,
+      "copied_sha256": "04fa3c180d0337500cc193aa816f713ba7c3f7e0da44f48cbe14a767fa4935b0",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-018/outputs/results/efficiency/environment.json",
+      "kind": "receipt_bound_snapshot",
+      "receipt_binding_matches": true,
+      "reported_sha256": "04fa3c180d0337500cc193aa816f713ba7c3f7e0da44f48cbe14a767fa4935b0",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-018/outputs/results/efficiency/environment.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-018/outputs/results/efficiency/environment.json",
+      "source_sha256": "04fa3c180d0337500cc193aa816f713ba7c3f7e0da44f48cbe14a767fa4935b0",
+      "task": "LA-018"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-018.json",
+      "bytes": 17826,
+      "copied_sha256": "b96a384fb2f7aeca06c431b128c634e6b5ac26b393f2a6ad8b6ba99a31cc12fe",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-018/outputs/results/efficiency/summary.json",
+      "kind": "receipt_bound_snapshot",
+      "receipt_binding_matches": true,
+      "reported_sha256": "b96a384fb2f7aeca06c431b128c634e6b5ac26b393f2a6ad8b6ba99a31cc12fe",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-018/outputs/results/efficiency/summary.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-018/outputs/results/efficiency/summary.json",
+      "source_sha256": "b96a384fb2f7aeca06c431b128c634e6b5ac26b393f2a6ad8b6ba99a31cc12fe",
+      "task": "LA-018"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-018.json",
+      "bytes": 36,
+      "copied_sha256": "8199b77e7fe6316db41045fc6173dccb8a481cf5a5793a554910cece56eb92a3",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-018/validation/validate.stdout.log",
+      "kind": "receipt_bound_snapshot",
+      "receipt_binding_matches": true,
+      "reported_sha256": "8199b77e7fe6316db41045fc6173dccb8a481cf5a5793a554910cece56eb92a3",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-018/validation/validate.stdout.log",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-018/validation/validate.stdout.log",
+      "source_sha256": "8199b77e7fe6316db41045fc6173dccb8a481cf5a5793a554910cece56eb92a3",
+      "task": "LA-018"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-018.json",
+      "bytes": 370078,
+      "copied_sha256": "766aecb9c0b7abdc900b1aabdb2244c0c3a7ff04611f5bc28c528ef120e1885a",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/results/efficiency/raw.jsonl",
+      "kind": "logical_output_joined_by_receipt",
+      "receipt_binding_matches": true,
+      "receipt_snapshot_path": "papers/completion/law_to_action/receipts/snapshots/LA-018/outputs/results/efficiency/raw.jsonl",
+      "reported_sha256": "766aecb9c0b7abdc900b1aabdb2244c0c3a7ff04611f5bc28c528ef120e1885a",
+      "repository_relative_path": "papers/completion/law_to_action/results/efficiency/raw.jsonl",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/results/efficiency/raw.jsonl",
+      "source_sha256": "766aecb9c0b7abdc900b1aabdb2244c0c3a7ff04611f5bc28c528ef120e1885a",
+      "task": "LA-018"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-018.json",
+      "bytes": 11478,
+      "copied_sha256": "04fa3c180d0337500cc193aa816f713ba7c3f7e0da44f48cbe14a767fa4935b0",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/results/efficiency/environment.json",
+      "kind": "logical_output_joined_by_receipt",
+      "receipt_binding_matches": true,
+      "receipt_snapshot_path": "papers/completion/law_to_action/receipts/snapshots/LA-018/outputs/results/efficiency/environment.json",
+      "reported_sha256": "04fa3c180d0337500cc193aa816f713ba7c3f7e0da44f48cbe14a767fa4935b0",
+      "repository_relative_path": "papers/completion/law_to_action/results/efficiency/environment.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/results/efficiency/environment.json",
+      "source_sha256": "04fa3c180d0337500cc193aa816f713ba7c3f7e0da44f48cbe14a767fa4935b0",
+      "task": "LA-018"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-018.json",
+      "bytes": 17826,
+      "copied_sha256": "b96a384fb2f7aeca06c431b128c634e6b5ac26b393f2a6ad8b6ba99a31cc12fe",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/results/efficiency/summary.json",
+      "kind": "logical_output_joined_by_receipt",
+      "receipt_binding_matches": true,
+      "receipt_snapshot_path": "papers/completion/law_to_action/receipts/snapshots/LA-018/outputs/results/efficiency/summary.json",
+      "reported_sha256": "b96a384fb2f7aeca06c431b128c634e6b5ac26b393f2a6ad8b6ba99a31cc12fe",
+      "repository_relative_path": "papers/completion/law_to_action/results/efficiency/summary.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/results/efficiency/summary.json",
+      "source_sha256": "b96a384fb2f7aeca06c431b128c634e6b5ac26b393f2a6ad8b6ba99a31cc12fe",
+      "task": "LA-018"
+    },
+    {
+      "bound_by_receipt": null,
+      "bytes": 26657,
+      "copied_sha256": "7dbca172f0ef32961ce6515582ed76ca49d345f7c1fbb815e160673f4f05fc28",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/LA-019.json",
+      "kind": "original_receipt",
+      "receipt_binding_matches": null,
+      "reported_sha256": null,
+      "repository_relative_path": "papers/completion/law_to_action/receipts/LA-019.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/LA-019.json",
+      "source_sha256": "7dbca172f0ef32961ce6515582ed76ca49d345f7c1fbb815e160673f4f05fc28",
+      "task": "LA-019"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-019.json",
+      "bytes": 19625,
+      "copied_sha256": "c38e0f69700ee576d407f00a78841780ffc600094b9182a61b4da47b0e43ce2f",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/statistical_report.md",
+      "kind": "receipt_bound_snapshot",
+      "receipt_binding_matches": true,
+      "reported_sha256": "c38e0f69700ee576d407f00a78841780ffc600094b9182a61b4da47b0e43ce2f",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/statistical_report.md",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/statistical_report.md",
+      "source_sha256": "c38e0f69700ee576d407f00a78841780ffc600094b9182a61b4da47b0e43ce2f",
+      "task": "LA-019"
+    },
+    {
+      "bound_by_receipt": null,
+      "bytes": 16237,
+      "copied_sha256": "b295ec582261695f547cc68fea4e5374e6e8630b3c03998f8545cb172e40c255",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/LA-020.json",
+      "kind": "original_receipt",
+      "receipt_binding_matches": null,
+      "reported_sha256": null,
+      "repository_relative_path": "papers/completion/law_to_action/receipts/LA-020.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/LA-020.json",
+      "source_sha256": "b295ec582261695f547cc68fea4e5374e6e8630b3c03998f8545cb172e40c255",
+      "task": "LA-020"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-020.json",
+      "bytes": 31691,
+      "copied_sha256": "48f9556ea74a8803240d6370fa800cd224d2762681ea29f3958cdaf3c3614a11",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-020/outputs/results/worked_trace/trace.json",
+      "kind": "receipt_bound_snapshot",
+      "receipt_binding_matches": true,
+      "reported_sha256": "48f9556ea74a8803240d6370fa800cd224d2762681ea29f3958cdaf3c3614a11",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-020/outputs/results/worked_trace/trace.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-020/outputs/results/worked_trace/trace.json",
+      "source_sha256": "48f9556ea74a8803240d6370fa800cd224d2762681ea29f3958cdaf3c3614a11",
+      "task": "LA-020"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-020.json",
+      "bytes": 7850,
+      "copied_sha256": "d3d199f01ddfbbd17734a2a8e1c3d07192650aa719d8188b5caeab112fac3e9b",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-020/outputs/results/worked_trace/trace.md",
+      "kind": "receipt_bound_snapshot",
+      "receipt_binding_matches": true,
+      "reported_sha256": "d3d199f01ddfbbd17734a2a8e1c3d07192650aa719d8188b5caeab112fac3e9b",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-020/outputs/results/worked_trace/trace.md",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-020/outputs/results/worked_trace/trace.md",
+      "source_sha256": "d3d199f01ddfbbd17734a2a8e1c3d07192650aa719d8188b5caeab112fac3e9b",
+      "task": "LA-020"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-020.json",
+      "bytes": 1218,
+      "copied_sha256": "450693ba768ce9da1efd8f92f2f96b8ca63e89c876a5e59b3e0c111d5faee612",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/selection.json",
+      "kind": "receipt_bound_snapshot",
+      "receipt_binding_matches": true,
+      "reported_sha256": "450693ba768ce9da1efd8f92f2f96b8ca63e89c876a5e59b3e0c111d5faee612",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/selection.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/selection.json",
+      "source_sha256": "450693ba768ce9da1efd8f92f2f96b8ca63e89c876a5e59b3e0c111d5faee612",
+      "task": "LA-020"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-020.json",
+      "bytes": 304,
+      "copied_sha256": "4db0626a6ceb7fe88ee207fcfb36b269e4cc95ae12f650fa35a9e6f5efbf8acd",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/run_head.json",
+      "kind": "receipt_bound_snapshot",
+      "receipt_binding_matches": true,
+      "reported_sha256": "4db0626a6ceb7fe88ee207fcfb36b269e4cc95ae12f650fa35a9e6f5efbf8acd",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/run_head.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/run_head.json",
+      "source_sha256": "4db0626a6ceb7fe88ee207fcfb36b269e4cc95ae12f650fa35a9e6f5efbf8acd",
+      "task": "LA-020"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-020.json",
+      "bytes": 646,
+      "copied_sha256": "b0555cc0f593c70c3a607b09ee400c09b78bdd2a2c78160202e9644d4ebd7a00",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-020/validation/validate.stdout.log",
+      "kind": "receipt_bound_snapshot",
+      "receipt_binding_matches": true,
+      "reported_sha256": "b0555cc0f593c70c3a607b09ee400c09b78bdd2a2c78160202e9644d4ebd7a00",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-020/validation/validate.stdout.log",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-020/validation/validate.stdout.log",
+      "source_sha256": "b0555cc0f593c70c3a607b09ee400c09b78bdd2a2c78160202e9644d4ebd7a00",
+      "task": "LA-020"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-020.json",
+      "bytes": 9527,
+      "copied_sha256": "daaecfafbc6f2755dd9ae626b03356fe98c5213c3769cd5c40a967e0e00cc0de",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85_case-0.json",
+      "kind": "receipt_bound_diagnostic_trace",
+      "receipt_binding_matches": true,
+      "reported_sha256": "daaecfafbc6f2755dd9ae626b03356fe98c5213c3769cd5c40a967e0e00cc0de",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85_case-0.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85_case-0.json",
+      "source_sha256": "daaecfafbc6f2755dd9ae626b03356fe98c5213c3769cd5c40a967e0e00cc0de",
+      "task": "LA-020"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-020.json",
+      "bytes": 384,
+      "copied_sha256": "ed796af33d6bce63d499c53ed4dcc1d2ef1785679644ac63bd8423b6f8916951",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85_case-0.ucan-meta.json",
+      "kind": "receipt_bound_diagnostic_trace",
+      "receipt_binding_matches": true,
+      "reported_sha256": "ed796af33d6bce63d499c53ed4dcc1d2ef1785679644ac63bd8423b6f8916951",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85_case-0.ucan-meta.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85_case-0.ucan-meta.json",
+      "source_sha256": "ed796af33d6bce63d499c53ed4dcc1d2ef1785679644ac63bd8423b6f8916951",
+      "task": "LA-020"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-020.json",
+      "bytes": 7119,
+      "copied_sha256": "5b5cdfb6c627af0f8909aa1ed07b9415b00d1dd8a9651860317f0dd34278cc57",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85_case-1.json",
+      "kind": "receipt_bound_diagnostic_trace",
+      "receipt_binding_matches": true,
+      "reported_sha256": "5b5cdfb6c627af0f8909aa1ed07b9415b00d1dd8a9651860317f0dd34278cc57",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85_case-1.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85_case-1.json",
+      "source_sha256": "5b5cdfb6c627af0f8909aa1ed07b9415b00d1dd8a9651860317f0dd34278cc57",
+      "task": "LA-020"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-020.json",
+      "bytes": 322,
+      "copied_sha256": "901361334d366579d989733c22221ca433a76d81de7340d7d4dc7828e4e5821b",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85_case-1.ucan-meta.json",
+      "kind": "receipt_bound_diagnostic_trace",
+      "receipt_binding_matches": true,
+      "reported_sha256": "901361334d366579d989733c22221ca433a76d81de7340d7d4dc7828e4e5821b",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85_case-1.ucan-meta.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85_case-1.ucan-meta.json",
+      "source_sha256": "901361334d366579d989733c22221ca433a76d81de7340d7d4dc7828e4e5821b",
+      "task": "LA-020"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-020.json",
+      "bytes": 9529,
+      "copied_sha256": "3c89ab6fe1fe086306d96c30649e2554359cf24322a42b0a652b22586a5f8ce8",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a_case-0.json",
+      "kind": "receipt_bound_diagnostic_trace",
+      "receipt_binding_matches": true,
+      "reported_sha256": "3c89ab6fe1fe086306d96c30649e2554359cf24322a42b0a652b22586a5f8ce8",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a_case-0.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a_case-0.json",
+      "source_sha256": "3c89ab6fe1fe086306d96c30649e2554359cf24322a42b0a652b22586a5f8ce8",
+      "task": "LA-020"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-020.json",
+      "bytes": 384,
+      "copied_sha256": "1b0ba8d5b2a5c4728ae175486b3e97201d988630fb4f7ca8c2855e56fa730e3f",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a_case-0.ucan-meta.json",
+      "kind": "receipt_bound_diagnostic_trace",
+      "receipt_binding_matches": true,
+      "reported_sha256": "1b0ba8d5b2a5c4728ae175486b3e97201d988630fb4f7ca8c2855e56fa730e3f",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a_case-0.ucan-meta.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a_case-0.ucan-meta.json",
+      "source_sha256": "1b0ba8d5b2a5c4728ae175486b3e97201d988630fb4f7ca8c2855e56fa730e3f",
+      "task": "LA-020"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-020.json",
+      "bytes": 7468,
+      "copied_sha256": "d0cce1faf1fa2256f9367d0db8702aed470b8584e57085ec2dec335a3f817110",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a_case-1.json",
+      "kind": "receipt_bound_diagnostic_trace",
+      "receipt_binding_matches": true,
+      "reported_sha256": "d0cce1faf1fa2256f9367d0db8702aed470b8584e57085ec2dec335a3f817110",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a_case-1.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a_case-1.json",
+      "source_sha256": "d0cce1faf1fa2256f9367d0db8702aed470b8584e57085ec2dec335a3f817110",
+      "task": "LA-020"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-020.json",
+      "bytes": 384,
+      "copied_sha256": "101447ed7f5f196179b14161cd1bcf71a804dcbb907db6345faf8dde923b86d3",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a_case-1.ucan-meta.json",
+      "kind": "receipt_bound_diagnostic_trace",
+      "receipt_binding_matches": true,
+      "reported_sha256": "101447ed7f5f196179b14161cd1bcf71a804dcbb907db6345faf8dde923b86d3",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a_case-1.ucan-meta.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a_case-1.ucan-meta.json",
+      "source_sha256": "101447ed7f5f196179b14161cd1bcf71a804dcbb907db6345faf8dde923b86d3",
+      "task": "LA-020"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-020.json",
+      "bytes": 9537,
+      "copied_sha256": "60b04f24f176666682627a919ddcf36eab486702f82fbdb2dfaf61473dfbd2ab",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.json",
+      "kind": "receipt_bound_diagnostic_trace",
+      "receipt_binding_matches": true,
+      "reported_sha256": "60b04f24f176666682627a919ddcf36eab486702f82fbdb2dfaf61473dfbd2ab",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.json",
+      "source_sha256": "60b04f24f176666682627a919ddcf36eab486702f82fbdb2dfaf61473dfbd2ab",
+      "task": "LA-020"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-020.json",
+      "bytes": 384,
+      "copied_sha256": "c3b700584628d4c33ef3668f67735742716b3375197e504d3dd5a3a2bd74c3f8",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.ucan-meta.json",
+      "kind": "receipt_bound_diagnostic_trace",
+      "receipt_binding_matches": true,
+      "reported_sha256": "c3b700584628d4c33ef3668f67735742716b3375197e504d3dd5a3a2bd74c3f8",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.ucan-meta.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949_case-0.ucan-meta.json",
+      "source_sha256": "c3b700584628d4c33ef3668f67735742716b3375197e504d3dd5a3a2bd74c3f8",
+      "task": "LA-020"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-020.json",
+      "bytes": 9510,
+      "copied_sha256": "521a3b65bca1a9e8ec58345892ee7b54356e216bb44e578bbba052aa150773ce",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8_case-0.json",
+      "kind": "receipt_bound_diagnostic_trace",
+      "receipt_binding_matches": true,
+      "reported_sha256": "521a3b65bca1a9e8ec58345892ee7b54356e216bb44e578bbba052aa150773ce",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8_case-0.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8_case-0.json",
+      "source_sha256": "521a3b65bca1a9e8ec58345892ee7b54356e216bb44e578bbba052aa150773ce",
+      "task": "LA-020"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-020.json",
+      "bytes": 384,
+      "copied_sha256": "613b4078b30ca5ddb6b760a49a3c5762ec34478373159681bcd14c8ecaecef9c",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8_case-0.ucan-meta.json",
+      "kind": "receipt_bound_diagnostic_trace",
+      "receipt_binding_matches": true,
+      "reported_sha256": "613b4078b30ca5ddb6b760a49a3c5762ec34478373159681bcd14c8ecaecef9c",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8_case-0.ucan-meta.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8_case-0.ucan-meta.json",
+      "source_sha256": "613b4078b30ca5ddb6b760a49a3c5762ec34478373159681bcd14c8ecaecef9c",
+      "task": "LA-020"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-020.json",
+      "bytes": 8275,
+      "copied_sha256": "5e3678749bf880319afebaec83480ecad52ca70ced0f2b8351be1e995ed12dab",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8_case-1.json",
+      "kind": "receipt_bound_diagnostic_trace",
+      "receipt_binding_matches": true,
+      "reported_sha256": "5e3678749bf880319afebaec83480ecad52ca70ced0f2b8351be1e995ed12dab",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8_case-1.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8_case-1.json",
+      "source_sha256": "5e3678749bf880319afebaec83480ecad52ca70ced0f2b8351be1e995ed12dab",
+      "task": "LA-020"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-020.json",
+      "bytes": 384,
+      "copied_sha256": "475d81f214a550d27f169064dfd112c5e22e151e1351c59857dc126affc15eef",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8_case-1.ucan-meta.json",
+      "kind": "receipt_bound_diagnostic_trace",
+      "receipt_binding_matches": true,
+      "reported_sha256": "475d81f214a550d27f169064dfd112c5e22e151e1351c59857dc126affc15eef",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8_case-1.ucan-meta.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-020/traces/attempts/104729_A4_family_336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8_case-1.ucan-meta.json",
+      "source_sha256": "475d81f214a550d27f169064dfd112c5e22e151e1351c59857dc126affc15eef",
+      "task": "LA-020"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-020.json",
+      "bytes": 31691,
+      "copied_sha256": "48f9556ea74a8803240d6370fa800cd224d2762681ea29f3958cdaf3c3614a11",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/results/worked_trace/trace.json",
+      "kind": "logical_output_joined_by_receipt",
+      "receipt_binding_matches": true,
+      "receipt_snapshot_path": "papers/completion/law_to_action/receipts/snapshots/LA-020/outputs/results/worked_trace/trace.json",
+      "reported_sha256": "48f9556ea74a8803240d6370fa800cd224d2762681ea29f3958cdaf3c3614a11",
+      "repository_relative_path": "papers/completion/law_to_action/results/worked_trace/trace.json",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/results/worked_trace/trace.json",
+      "source_sha256": "48f9556ea74a8803240d6370fa800cd224d2762681ea29f3958cdaf3c3614a11",
+      "task": "LA-020"
+    },
+    {
+      "bound_by_receipt": "papers/completion/law_to_action/receipts/LA-020.json",
+      "bytes": 7850,
+      "copied_sha256": "d3d199f01ddfbbd17734a2a8e1c3d07192650aa719d8188b5caeab112fac3e9b",
+      "copy_path": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/results/worked_trace/trace.md",
+      "kind": "logical_output_joined_by_receipt",
+      "receipt_binding_matches": true,
+      "receipt_snapshot_path": "papers/completion/law_to_action/receipts/snapshots/LA-020/outputs/results/worked_trace/trace.md",
+      "reported_sha256": "d3d199f01ddfbbd17734a2a8e1c3d07192650aa719d8188b5caeab112fac3e9b",
+      "repository_relative_path": "papers/completion/law_to_action/results/worked_trace/trace.md",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/results/worked_trace/trace.md",
+      "source_sha256": "d3d199f01ddfbbd17734a2a8e1c3d07192650aa719d8188b5caeab112fac3e9b",
+      "task": "LA-020"
+    }
+  ],
+  "findings": [
+    {
+      "reason": "Private cgroup creation failed on a read-only cgroup filesystem; singleton descendant CPU cgroup/quota enforcement was unavailable. The original 900 executed cells remain protocol-unadmitted diagnostic measurements.",
+      "reported_resource_fields": {
+        "private_cgroup_created": false,
+        "protocol_gate": "If singleton CPU cgroup/quota cannot be enforced for every descendant, protocol-scored attempts stay unadmitted. Executed cells remain in the raw log with effect counters and are never recoded as zero-failure.",
+        "reason": "private cgroup creation failed: OSError: [Errno 30] Read-only file system: '<CGROUP_PATH>'",
+        "scored_attempts_admitted": false,
+        "singleton_cpu_enforced": false
+      },
+      "source_paths": [
+        "papers/completion/law_to_action/receipts/LA-015.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-015/probe/resources.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-015/outputs/results/fixed_actions/run_manifest.json"
+      ],
+      "status": "original exclusion reason recovered and receipt-bound",
+      "task": "LA-015"
+    },
+    {
+      "counts_are_scheduling_accounting_not_empirical_failures": true,
+      "reason": "unqualified_model_and_unfrozen_cohort",
+      "reported_blockers": {
+        "dispatchable": false,
+        "fixture_model_used": false,
+        "lineage_disjoint_cohort_frozen": false,
+        "model_reasons": [
+          "no generative inference runtime (torch, llama_cpp, or vllm) is importable under the sealed PATH",
+          "transformers is importable from site-packages but no model id, tokenizer revision, or weight digest is pinned",
+          "onnxruntime is importable but no ONNX generative-model artifact is present or pinned",
+          "no local weight files (.bin/.safetensors/.gguf/.pt) were found under sealed HOME or <MODEL_SEARCH_PATH>",
+          "no model serving executable (ollama, llama-cli, vllm, ...) is on the sealed PATH",
+          "no provider credential names are present in the process environment",
+          "LA-003 did not pin a scientific model revision, tokenizer, decoding policy, or deployment digest",
+          "an existing supervisor provider session is not scientific model qualification"
+        ],
+        "not_started_reason": "unqualified_model_and_unfrozen_cohort",
+        "scientific_model_pinned": false,
+        "source_reasons": [
+          "LA-004 froze exactly 30 lineage families and LA-015 consumed all of them",
+          "protocol requires a separately frozen 30-family cohort with salt vericodegen-2026-law-to-action-LA016-v1 and no overlap with the fixed-action study",
+          "no LA-016 source freeze exists in allowed task outputs, and inventing family hashes is not a freeze",
+          "leftover unread CVE/Skill rows are not admitted without a versioned pre-outcome freeze"
+        ]
+      },
+      "rq3_accounting_reported": {
+        "generated_programs": 0,
+        "model_calls": 0,
+        "not_started": 900,
+        "scheduled": 900
+      },
+      "source_paths": [
+        "papers/completion/law_to_action/receipts/LA-016.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-016/traces/blockers.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-016/outputs/results/agents/recovery_analysis.md"
+      ],
+      "status": "original nonexecution reasons recovered and receipt-bound",
+      "task": "LA-016"
+    },
+    {
+      "admission_label_source": "Earlier recovered compact claim matrix labeling_rules.LA-017 and M14; recovered original completion receipt alone does not establish protocol admission.",
+      "admission_status": "protocol_unadmitted_diagnostic",
+      "claim_limits": [
+        "Calibration skill case plus documented extra_claimed_effect sandbox overlay; no frozen LA-015 mutation isolated proof jobs.",
+        "The contrast removes the selected SAT provider/exhaustive-checker obligation while retaining ENFORCE, UCAN and consumption.",
+        "It does not isolate or establish theorem-prover efficacy generally.",
+        "Do not infer the formal-job contribution from joint A4-versus-A3 arm differences.",
+        "No admitted causal efficacy estimate or live-service recommendation is created."
+      ],
+      "one_factor_definition_reported": {
+        "challenge": "Frozen candidates compile an already-satisfied SAT obligation, so a frozen mutation cannot isolate proof jobs. The sandbox overlay feeds the extra-effect DIMACS branch without changing handler arguments. SAT/UNSAT cannot authorize theorem_proof allows.",
+        "frozen_mutation": "none",
+        "id": "proof_jobs",
+        "in_selected_a4_dispatch": true,
+        "lineage_family_id": "family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3",
+        "negative_case_id": "family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-0",
+        "negative_overlay": "extra_claimed_effect",
+        "paper_evidence": "p16 E.2 lines 530-534; p4-5 Table 2 and selected QF_BOOL SAT/checker route",
+        "paper_name": "proof jobs",
+        "population": "skill",
+        "positive_case_id": "family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-0",
+        "removed_when_ablated": "Skip the SAT/checker obligation and treat it as allowed. ENFORCE, UCAN, and consumption still run.",
+        "role": "Selected SAT provider plus independent exhaustive checker must agree the export invariant is UNSAT before allow.",
+        "sandbox_wrapper": false,
+        "split": "calibration"
+      },
+      "one_factor_summary_reported": {
+        "ablated_negative": {
+          "decision": "allow",
+          "masked_by": [],
+          "observed_effect_count": 1,
+          "observed_forbidden_effect": true,
+          "remaining_guards": []
+        },
+        "ablated_positive": {
+          "decision": "allow",
+          "false_rejection": false,
+          "observed_effect_count": 1,
+          "useful_work": true
+        },
+        "attribution": {
+          "ablated_forbidden_effect": true,
+          "absence_of_change_manufactured_into_benefit": false,
+          "forbidden_effect_delta": 1,
+          "full_forbidden_effect": false,
+          "kind": "load_bearing",
+          "mechanism_id": "proof_jobs",
+          "remaining_guards": [],
+          "text": "Removing proof_jobs changed the forbidden-effect counter from 0 to 1 on the isolated challenge. No remaining enabled guard denied the request. This is an observed effect change, not a live-service recommendation.",
+          "would_deny_ablated_challenge": true
+        },
+        "challenge_overlay": "extra_claimed_effect",
+        "configuration_difference": {
+          "ablated": {
+            "capability_verification": true,
+            "consumption": true,
+            "current_root_binding": true,
+            "hard_applicability": true,
+            "intent_code_correlation": true,
+            "proof_jobs": false,
+            "source_provenance": true
+          },
+          "changed_mechanisms": [
+            "proof_jobs"
+          ],
+          "full": {
+            "capability_verification": true,
+            "consumption": true,
+            "current_root_binding": true,
+            "hard_applicability": true,
+            "intent_code_correlation": true,
+            "proof_jobs": true,
+            "source_provenance": true
+          },
+          "one_factor": true
+        },
+        "frozen_mutation": "none",
+        "full_negative": {
+          "decision": "deny",
+          "observed_effect_count": 0,
+          "observed_forbidden_effect": false,
+          "remaining_guards": [
+            "proof_jobs"
+          ]
+        },
+        "full_positive": {
+          "decision": "allow",
+          "false_rejection": false,
+          "observed_effect_count": 1,
+          "useful_work": true
+        },
+        "id": "proof_jobs",
+        "live_service_enabled": false,
+        "negative_case_id": "family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-0",
+        "paper_name": "proof jobs",
+        "positive_case_id": "family:4095a8192ffd393fa8298a444fdcde2f06130ca88eae32c4e10bfaf5361a67f3:case-0",
+        "scoped_omission": false,
+        "status": "paired_experiment"
+      },
+      "source_paths": [
+        "papers/completion/law_to_action/receipts/LA-017.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-017/outputs/benchmark/ablations.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-017/outputs/results/ablations/summary.json"
+      ],
+      "specific_original_resource_admission_failure_reason": null,
+      "status": "formal-job-only diagnostic contrast recovered; not admitted primary evidence",
+      "summary_is_not_newly_recomputed": true,
+      "task": "LA-017"
+    },
+    {
+      "limits": "Development instrumentation only, not a 900-cell rescore, measured model-token usage or an admitted primary arm-rate comparison.",
+      "logical_output_paths": [
+        "papers/completion/law_to_action/results/efficiency/raw.jsonl",
+        "papers/completion/law_to_action/results/efficiency/environment.json",
+        "papers/completion/law_to_action/results/efficiency/summary.json"
+      ],
+      "model_tokens": null,
+      "monetary_savings": null,
+      "price_conversion_applied": false,
+      "raw_timing_aggregates_recomputed": false,
+      "reconciliation_reported": {
+        "all_rows_reconcile": true,
+        "double_counting_avoided": [
+          "SymPy provider elapsed_seconds is nested inside solver wall and is not summed again.",
+          "authorize_and_delegate envelope is nested; exclusive database and handler wrappers are used instead.",
+          "Setup/qualification wall is reported separately and is included once in full paper cost."
+        ],
+        "full_paper_cost_rule": "setup_qualification_wall_seconds + sum(end_to_end_wall_seconds). Do not add exclusive phase sums on top of end-to-end walls.",
+        "full_paper_cost_wall_seconds": 0.531900513,
+        "identity": "end_to_end_wall_seconds = exclusive_phase_sum_seconds + overhead_seconds",
+        "overhead_covers": [
+          "temporary directory create/remove",
+          "receipt/capability object construction",
+          "control flow between exclusive phases"
+        ],
+        "rows": 48,
+        "setup_qualification_wall_seconds": 0.227031069,
+        "total_end_to_end_wall_seconds": 0.304869444,
+        "total_exclusive_phase_sum_seconds": 0.236993421,
+        "total_overhead_seconds": 0.067876023
+      },
+      "reported_arm": "A4",
+      "reported_conditions": {
+        "cold": {
+          "end_to_end_wall_mean_seconds": 0.012326067,
+          "n": 12,
+          "stale_evidence": 0
+        },
+        "stale_clock": {
+          "end_to_end_wall_mean_seconds": 0.003221592,
+          "n": 12,
+          "stale_evidence": 12
+        },
+        "stale_root": {
+          "end_to_end_wall_mean_seconds": 0.003223513,
+          "n": 12,
+          "stale_evidence": 12
+        },
+        "warm": {
+          "end_to_end_wall_mean_seconds": 0.006634614,
+          "n": 12,
+          "stale_evidence": 0
+        }
+      },
+      "reported_split": "development",
+      "status": "raw timings, summary and environment recovered with exact receipt bindings",
+      "task": "LA-018"
+    },
+    {
+      "reason": "The report analyzes historical LA-015 protocol-unadmitted outcomes and repeats the failed singleton cgroup/quota resource gate. LA-029 separately owns admitted operator results, statistics and costs.",
+      "rq3_interval_withdrawal": "The receipt explicitly withdraws H6 uncertainty: 900 not_started units are administrative scheduling accounting rather than sampled outcomes.",
+      "source_paths": [
+        "papers/completion/law_to_action/receipts/LA-019.json",
+        "papers/completion/law_to_action/receipts/snapshots/LA-019/outputs/results/statistical_report.md"
+      ],
+      "status": "receipt-bound diagnostic statistical report recovered",
+      "task": "LA-019"
+    },
+    {
+      "additional_scored_cells": 0,
+      "limits": "Separate diagnostic replays of frozen A4 identities; no generated-program, kernel-theorem, independent-human-gold or published-proof claim.",
+      "logical_output_paths": [
+        "papers/completion/law_to_action/results/worked_trace/trace.json",
+        "papers/completion/law_to_action/results/worked_trace/trace.md"
+      ],
+      "permitted_attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+      "selection_reported": {
+        "arm_id": "A4",
+        "attempt_ids": [
+          "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+          "104729:A4:family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-0",
+          "104729:A4:family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1",
+          "104729:A4:family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-0",
+          "104729:A4:family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+          "104729:A4:family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-0",
+          "104729:A4:family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1"
+        ],
+        "mutations": {
+          "replay": "104729:A4:family:336629d04e385ffc653cb53a747a48b39405152e8a0bd6fc136bc38035bfd3c8:case-1",
+          "undeclared_handler_effect": "104729:A4:family:0bbb54a64a61f2c7f5a5522e5949eb61a6c4ff7a854c41ede84623e060a3752a:case-1",
+          "wrong_audience": "104729:A4:family:02b8daf26d6786a78c5c17ddb8bf3380e0d37a26cbbb67e06a8118c09d03dc85:case-1"
+        },
+        "permitted_attempt_id": "104729:A4:family:10df17dbfee02e86d083e2784e7aaec79a4691d1441d1ceff4ef944f2695b949:case-0",
+        "seed": 104729
+      },
+      "status": "worked trace and detailed diagnostic replay payloads recovered with exact receipt bindings",
+      "task": "LA-020",
+      "trace_claim_fields_reported": {
+        "fabricated_signature": false,
+        "generated_program_count": 0,
+        "mismatch_count": 0,
+        "model_calls": 0,
+        "replay_matches_la015": true,
+        "theorem_proof": false
+      },
+      "trace_semantics_reexecuted": false,
+      "twelve_step_structure_count": 12
+    }
+  ],
+  "method": {
+    "archive_or_repository_scripts_executed": false,
+    "copied_files": 47,
+    "copy_hashes_match": true,
+    "file_hash_and_copy_inspection_only": true,
+    "fresh_author_only_copy_root": "<RECOVERY_ROOT>/author_only/recovered_historical_diagnostics",
+    "nontrivial_reanalysis_performed": false,
+    "originals_modified": false,
+    "protected_final_panels_or_predictions_read": false,
+    "receipt_binding_mismatch_count": 0,
+    "resource_lease_required": false,
+    "resource_note": "No new scientific workload, reducer, solver, provider, supervisor or database was invoked; this pass only reads, hashes, copies and inspects small historical records.",
+    "total_copied_bytes": 1190146,
+    "total_copy_byte_limit": 20971520
+  },
+  "redaction": "Private checkout/copy roots and host cgroup/model-search paths redacted; all payload copies remain author-only. Repository-relative source paths and digests retained.",
+  "revised_author_package": {
+    "path": null,
+    "status": "not_recovered; requested location still pending"
+  },
+  "schema": "law-to-action-historical-diagnostics-recovery/v1",
+  "scope": "Expanded read-only receipt-bound diagnostic recovery; no scientific execution or inferential reanalysis.",
+  "source_checkout": {
+    "git_last_touch_query": {
+      "commit": "9bdb48a2cf64019ba6bbcda3fd7e0c4c06552441",
+      "commit_time": "2026-09-12T18:59:35+00:00",
+      "paths": [
+        "papers/completion/law_to_action/receipts/LA-018.json",
+        "papers/completion/law_to_action/receipts/LA-020.json"
+      ]
+    },
+    "head": "3bbe3fa3039c2d837e4f54e785d6772600b77fb9",
+    "head_is_not_claimed_to_be_original_experiment_revision": true,
+    "path": "<PRESERVED_CHECKOUT>"
+  },
+  "supersedes": {
+    "earlier_reports_modified": false,
+    "newly_recovered": [
+      "Six original completion receipts",
+      "LA-015 original resource admission reason",
+      "LA-016 original model/cohort blockers",
+      "LA-017 one-factor proof_jobs diagnostic definition and summary",
+      "LA-018 raw development timings, summary and environment",
+      "LA-019 historical statistical report",
+      "LA-020 worked trace and detailed diagnostic replay records"
+    ],
+    "prior_reports": [
+      "author_only/historical_protocol_audit.json",
+      "reviewer_shareable/historical_protocol_audit.json"
+    ],
+    "scope": "Supersedes only prior scoped missing-artifact findings and incomplete original rejection details for LA-015..020. Earlier original checkout absence and historical RQ3 text/archive conflict remain accurate."
+  },
+  "unresolved": {
+    "la017_specific_original_resource_admission_failure_reason": null,
+    "reason_for_loose_synthesis_rq3_text_change": null,
+    "required_revised_author_package": null
+  },
+  "visibility": "reviewer_shareable"
+}

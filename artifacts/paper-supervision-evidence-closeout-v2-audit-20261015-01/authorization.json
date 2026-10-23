@@ -1,0 +1,55 @@
+{
+  "schema": "direct-evidence-audit-authorization@1",
+  "objective": "paper-supervision-evidence-closeout-v2",
+  "authorization_observed_at_utc": "2026-10-15T10:10:23.054221+00:00",
+  "user_reply": "yes, continue",
+  "responding_to": "May I execute the bounded audit directly against local files, leaving supervisor state untouched?",
+  "execution_mode": "direct_read_only_local_evidence_recovery",
+  "supervisor_objective_submitted": false,
+  "supervisor_state_mutated": false,
+  "working_package": "../paper-supervision-evidence-closeout-v2-reconstructed-20261015-01",
+  "original_supplied_pdf_identity": "unresolved_selected_working_base_explicit",
+  "allowed": [
+    "bounded local authorized evidence reads",
+    "new audit projections and deterministic scripts",
+    "provider-free arithmetic schema hash artifact joins"
+  ],
+  "forbidden": [
+    "new model or benchmark trials",
+    "weights download or training",
+    "solver execution or builds",
+    "hidden graders",
+    "service changes",
+    "acceptance threshold changes",
+    "source report mutation",
+    "publishing or pushing"
+  ],
+  "bounds": {
+    "unique_evidence_files": 120,
+    "total_text_json_bytes": 33554432,
+    "per_file_bytes": 2097152,
+    "rows_per_workstream": 200
+  },
+  "workstream_allocations": {
+    "t1": {
+      "files": 26,
+      "bytes": 8388608
+    },
+    "t2_t4": {
+      "files": 28,
+      "bytes": 8388608
+    },
+    "historical": {
+      "files": 28,
+      "bytes": 6291456
+    },
+    "cross_ir": {
+      "files": 28,
+      "bytes": 6291456
+    },
+    "integration": {
+      "files": 10,
+      "bytes": 4194304
+    }
+  }
+}

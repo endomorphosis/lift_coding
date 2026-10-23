@@ -1,0 +1,166 @@
+{
+  "apps": {
+    "terminal": {
+      "rendered": {
+        "window": true,
+        "panel": true,
+        "controls": [
+          {
+            "binding_id": "terminal.ipfs_kit_py.retrieve_content",
+            "disabled": false,
+            "output": "ready"
+          },
+          {
+            "binding_id": "terminal.ipfs_datasets_py.query_catalog",
+            "disabled": false,
+            "output": "ready"
+          },
+          {
+            "binding_id": "terminal.ipfs_accelerate_py.inspect_model_catalog",
+            "disabled": false,
+            "output": "ready"
+          }
+        ]
+      },
+      "expected_controls": 3,
+      "mismatches": []
+    },
+    "ai-chat": {
+      "rendered": {
+        "window": true,
+        "panel": true,
+        "controls": [
+          {
+            "binding_id": "ai-chat.ipfs_kit_py.retrieve_content",
+            "disabled": false,
+            "output": "ready"
+          },
+          {
+            "binding_id": "ai-chat.ipfs_datasets_py.query_catalog",
+            "disabled": false,
+            "output": "ready"
+          },
+          {
+            "binding_id": "ai-chat.ipfs_accelerate_py.submit_inference",
+            "disabled": false,
+            "output": "ready"
+          }
+        ]
+      },
+      "expected_controls": 3,
+      "mismatches": []
+    },
+    "agent-supervisor": {
+      "rendered": {
+        "window": true,
+        "panel": true,
+        "controls": [
+          {
+            "binding_id": "agent-supervisor.ipfs_accelerate_py.supervise_agent_work",
+            "disabled": false,
+            "output": "ready"
+          },
+          {
+            "binding_id": "agent-supervisor.ipfs_datasets_py.query_catalog",
+            "disabled": false,
+            "output": "ready"
+          },
+          {
+            "binding_id": "agent-supervisor.ipfs_kit_py.retrieve_content",
+            "disabled": false,
+            "output": "ready"
+          }
+        ]
+      },
+      "expected_controls": 3,
+      "mismatches": []
+    },
+    "datasets-browser": {
+      "rendered": {
+        "window": true,
+        "panel": true,
+        "controls": [
+          {
+            "binding_id": "datasets-browser.ipfs_datasets_py.query_catalog",
+            "disabled": false,
+            "output": "ready"
+          }
+        ]
+      },
+      "expected_controls": 1,
+      "mismatches": []
+    },
+    "mcp-plus-plus": {
+      "rendered": {
+        "window": true,
+        "panel": true,
+        "controls": [
+          {
+            "binding_id": "mcp-plus-plus.ipfs_kit_py.inspect_tool_registry",
+            "disabled": false,
+            "output": "ready"
+          },
+          {
+            "binding_id": "mcp-plus-plus.ipfs_datasets_py.inspect_tool_registry",
+            "disabled": false,
+            "output": "ready"
+          },
+          {
+            "binding_id": "mcp-plus-plus.ipfs_accelerate_py.inspect_tool_registry",
+            "disabled": false,
+            "output": "ready"
+          }
+        ]
+      },
+      "expected_controls": 3,
+      "mismatches": []
+    },
+    "vibecode": {
+      "rendered": {
+        "window": true,
+        "panel": true,
+        "controls": [
+          {
+            "binding_id": "vibecode.ipfs_kit_py.list_virtual_files",
+            "disabled": false,
+            "output": "ready"
+          },
+          {
+            "binding_id": "vibecode.ipfs_datasets_py.record_provenance",
+            "disabled": false,
+            "output": "ready"
+          },
+          {
+            "binding_id": "vibecode.ipfs_accelerate_py.submit_inference",
+            "disabled": false,
+            "output": "ready"
+          }
+        ]
+      },
+      "expected_controls": 3,
+      "mismatches": []
+    },
+    "calculator": {
+      "rendered": {
+        "window": true,
+        "panel": false
+      },
+      "expected_controls": 0,
+      "mismatches": []
+    },
+    "settings": {
+      "rendered": {
+        "window": true,
+        "panel": false
+      },
+      "expected_controls": 0,
+      "mismatches": []
+    }
+  },
+  "governed_click": {
+    "panel": true,
+    "clicked": true,
+    "binding": "vibecode.ipfs_kit_py.list_virtual_files",
+    "result_line": "executed; desktop:vibecode.ipfs_kit_py.list_virtual_files:1791960170410:yns2dd47; receipt=bafkreihk2526msl7zndveexyhghxhlygvcg7xujumohatky7zknwlzlvv4; event=bafkreidf4qxagkku3sd6iaz4p6omqsqpnxzopwz652cfsgqiqc4jydgqcy"
+  }
+}

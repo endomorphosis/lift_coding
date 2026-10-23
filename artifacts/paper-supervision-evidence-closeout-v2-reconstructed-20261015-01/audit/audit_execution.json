@@ -1,0 +1,73 @@
+{
+  "actual_session_deduplication": "unavailable",
+  "arithmetic_status": "passed",
+  "command": [
+    "python3",
+    "author_materials/verify_reported_numbers.py",
+    "--trials",
+    "author_materials/reported_trials.jsonl",
+    "--audit-spec",
+    "author_materials/numerical_audit.json",
+    "--output-dir",
+    "audit/numerical-01"
+  ],
+  "component_sum_checks": 2,
+  "elapsed_seconds": null,
+  "elapsed_time_limitation": "This invocation was not instrumented as a performance experiment.",
+  "exit_code_observed": 0,
+  "historical_subtotal_2523452_status": "unreconciled",
+  "import_roots": [
+    "argparse",
+    "csv",
+    "decimal",
+    "hashlib",
+    "io",
+    "json",
+    "math",
+    "os",
+    "pathlib",
+    "sys"
+  ],
+  "inputs": [
+    {
+      "bytes": 17224,
+      "path": "author_materials/verify_reported_numbers.py",
+      "sha256": "cfd94d4745e6efc8a754a1fbe8fba9962f4387b13dec673ddcefee09e865feb9"
+    },
+    {
+      "bytes": 32516,
+      "path": "author_materials/reported_trials.jsonl",
+      "sha256": "e1a93b43146fabe7ebaf11414e4503b1dd3273172d3b4dc9def66c29ac6ec41c"
+    },
+    {
+      "bytes": 7628,
+      "path": "author_materials/numerical_audit.json",
+      "sha256": "0bccf091161469158516dd5533f449cdd67dcb129a70718b9ef9395e05ee9e64"
+    }
+  ],
+  "manuscript_aggregate_assertions": 1,
+  "new_empirical_experiment": false,
+  "observation_count": 18,
+  "outputs": [
+    {
+      "bytes": 15208,
+      "path": "audit/numerical-01/numerical_audit_results.json",
+      "sha256": "2f7bde8a1da8020c545014591104fe56505ffb5b70cb3eec538fa18cef8b2492"
+    },
+    {
+      "bytes": 3174,
+      "path": "audit/numerical-01/comparison_results.csv",
+      "sha256": "b34631647721e72e83de2a128f5f700aa12d1870d40f423fffc2506f6b2de635"
+    }
+  ],
+  "project_total_tokens": null,
+  "recorded_at_utc": "2026-10-15T09:47:46.197316+00:00",
+  "review_findings": "Explicit bounded UTF-8 inputs; local standard-library arithmetic; exclusive creation of a new output directory and two result files. No network, subprocess, runtime package imports, solver or model invocation.",
+  "run_authenticity": "unverified",
+  "schema": "reconstructed-audit-execution@1",
+  "script_origin": "newly_authored_reconstruction_not_recovered_supplied_audit",
+  "script_reviewed_before_execution": true,
+  "separate_arithmetic_contrasts": 9,
+  "supervisor_task_invoked": false,
+  "working_directory": "/home/barberb/lift_coding/artifacts/paper-supervision-evidence-closeout-v2-reconstructed-20261015-01"
+}

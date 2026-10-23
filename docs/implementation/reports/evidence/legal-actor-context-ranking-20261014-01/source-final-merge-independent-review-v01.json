@@ -1,0 +1,127 @@
+{
+  "PR": 1304,
+  "PR_diff_metric_scope": {
+    "actual_first_parent_for_preservation": "904f885c180eb9dfcdef80199f708125428d3859",
+    "closed_contribution_delta_uses_Git_tree_not_cached_PR_metric": true,
+    "saved_API_base_sha": "b1fd77597867ad31f1687edc8bff090caf3d3b7d",
+    "saved_API_changed_files": 403
+  },
+  "actual_merge": "4b50ae4aac65da9166bd3b24608f32ba7e9fb23d",
+  "actual_merge_parents": [
+    "904f885c180eb9dfcdef80199f708125428d3859",
+    "8bed92e201e437503f88f1465fe916d1e73b938a"
+  ],
+  "actual_merged_entry_count": 32220,
+  "actual_own_commit": "8bed92e201e437503f88f1465fe916d1e73b938a",
+  "actual_tree": "1def5f3586bc44e31d1f890079cc1e9d86081559",
+  "actual_tree_equals_qualified_own_commit_tree": true,
+  "all288approved_stage_objects_exact_in_actual_merge": true,
+  "all31932_incoming_entries_modes_kinds_and_objects_preserved": true,
+  "artifact_count": 11,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-actor-context-ranking-20261014-01/main-intake-independent-review-v01.json": {
+      "bytes": 115779,
+      "sha256": "53eeea167ef229c80823754b94a1daa4c83f6eff7449e5171ac02df99e852502"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-context-ranking-20261014-01/source-final-ci-annotations-115890672284-v01.json": {
+      "bytes": 785,
+      "sha256": "914f1100662ad86659216a81aa9110941651dd82898327bfe0384590c2cf2c3d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-context-ranking-20261014-01/source-final-ci-annotations-115890672291-v01.json": {
+      "bytes": 785,
+      "sha256": "914f1100662ad86659216a81aa9110941651dd82898327bfe0384590c2cf2c3d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-context-ranking-20261014-01/source-final-ci-annotations-115890672401-v01.json": {
+      "bytes": 785,
+      "sha256": "914f1100662ad86659216a81aa9110941651dd82898327bfe0384590c2cf2c3d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-context-ranking-20261014-01/source-final-ci-annotations-115890672563-v01.json": {
+      "bytes": 785,
+      "sha256": "914f1100662ad86659216a81aa9110941651dd82898327bfe0384590c2cf2c3d"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-context-ranking-20261014-01/source-final-ci-checks-v02.json": {
+      "bytes": 24849,
+      "sha256": "5924459e3f002572db3f06b9e8618b23491dc8932bec2786865d13da78cfcdab"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-context-ranking-20261014-01/source-final-merge-response-v01.json": {
+      "bytes": 109,
+      "sha256": "48a7ddbce293589b91e3b7903ec1550ecfd81640439426f7254567e037aa0e47"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-context-ranking-20261014-01/source-final-pr-merged-v01.json": {
+      "bytes": 19940,
+      "sha256": "d259760249e32738cdd4786f39dfd4f050111713d9af69e14dddb4e7a51a373c"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-context-ranking-20261014-01/source-final-premerge-remote-v01.json": {
+      "bytes": 251,
+      "sha256": "5627fcc54bc8a31430a12cca88bc6fef5f8e161ba85932d62eb1660049bd75db"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-context-ranking-20261014-01/source-publication-commit-independent-review-v01.json": {
+      "bytes": 3528,
+      "sha256": "d4423405126c7f5c7a8c26152aaac25ff8500eec7caf675fed0a62ebcbf8bd76"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-actor-context-ranking-20261014-01/source-publication-stage-independent-review-v01.json": {
+      "bytes": 261440,
+      "sha256": "a33741ac7b00888599e7c776343a7d655c2a228c26aac7c25819119cf443f655"
+    }
+  },
+  "both_old_F16_draft_commits_retained_through54aae": true,
+  "default_promotion": false,
+  "exact_additions": 288,
+  "findings": [],
+  "hosted_CI_snapshot": {
+    "billing_blocked_analysis_failures": 4,
+    "cancelled": 1,
+    "check_count": 8,
+    "fresh_network_query_by_reviewer": false,
+    "hosted_CI_passed": false,
+    "passed": 0,
+    "queued": 3
+  },
+  "incoming_first_parent_entry_count": 31932,
+  "limitations": [
+    "The fetched owned ref and official API bodies are saved root observations. No fresh network call or global live-main claim is made by this reviewer.",
+    "GitHub savedPR diff/base metadata has a historical base; actual immutable merge firstparent904f is used for exact incoming-tree preservation and288owned-addition closure.",
+    "This receipt reuses sealed source-stage/commit and main-intake reviews; it does not replay physical source copies, scientific scores, model parameters, resource behavior or HF downloads.",
+    "Canonical raw4/history/ref/private-worktree custody remains scoped to the prior admitted observations. No canonical Git, private worktree read or new preservation claim over foreign uncommitted bodies is added.",
+    "No Git mutation, fetch/network, test/producer/model/checkpoint/encoder/optimizer/compiler/resource execution occurred. Hosted CI has no pass, and statutory semantic gold, extra family support or default promotion is not inferred."
+  ],
+  "new_family_qualified": false,
+  "new_numerical_qualification": false,
+  "observed_at_utc": "2026-10-14T13:54:37.662732+00:00",
+  "old_draft54aae_ancestor_of_actual_merge": true,
+  "original_training_checkout_repointed": false,
+  "original_training_clone_HEAD": "54aae1d13faea237eddde301754db85afd1e127a",
+  "owned_observed_main_ref": "refs/codex/legal-actor-context-ranking-20261014-01/source-merged-main-1354",
+  "owned_observed_main_ref_value": "4b50ae4aac65da9166bd3b24608f32ba7e9fb23d",
+  "passed": true,
+  "prior_F15_retention_reused": {
+    "divergent_recovery5_rawpins_and_counts": true,
+    "new_root_integration_review_pending": true,
+    "no_current_canonical_refs_or_private_worktree_custody_claim": true,
+    "selected_source22_and_root10_commit_rawpins": true,
+    "source22_retention_follows904f_ancestry": true
+  },
+  "raw183copies_rehashed_again": false,
+  "raw_algorithm_roster41_and_scheduler_separation_reused_from_exact_tree": true,
+  "raw_merge_commit_pin": {
+    "bytes": 1252,
+    "object_id": "4b50ae4aac65da9166bd3b24608f32ba7e9fb23d",
+    "sha256": "5fe50b50252c4c210e9be92bb21aca3ab967d32cba47645c3154f3d960acadd4"
+  },
+  "repository": "endomorphosis/ipfs_datasets_py",
+  "root_source_gitlink_target_qualified": "4b50ae4aac65da9166bd3b24608f32ba7e9fb23d",
+  "root_stage_or_merge_qualified_here": false,
+  "saved_merge_response_and_merged_PR_identity_exact": true,
+  "saved_premerge_main_and_phase_exact": true,
+  "schema": "actor-context-ranking-source-final-merge-independent-review/v1",
+  "scientific_success": false,
+  "scope": "Bounded actual source merge object and saved official receipt review. Reuses the exact sealed1def5tree without repeating183physical copy hashes.",
+  "source_head_intake_retention": {
+    "all38_saved_heads_ancestors_of_actual_merge": true,
+    "already_ancestors_of904f": 37,
+    "derivation": "Reuse37head ancestry in pinned904f from main-intake53eeea plus explicit904f/54aae ancestry of the actual merge.",
+    "phase54aae_now_ancestor": true,
+    "saved_selected_heads": 38
+  },
+  "source_semantics_verified": false
+}

@@ -1,0 +1,54 @@
+{
+  "started_at": "2026-10-14T21:52:32.336Z",
+  "console_errors": [
+    "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+  ],
+  "console": {
+    "status": "empty",
+    "transportMode": "degraded",
+    "healthStatus": "degraded",
+    "queue": 0,
+    "goals": 0,
+    "receipts": 0,
+    "gatewayInstalled": true
+  },
+  "steering_pane_text": "🖥️\nTerminal\n🎯\nVibeCode\n🎵\nMusic Studio\n🤖\nAI Chat\n📁\nFiles\n⚡\nTasks\n📋\nTodo\n🧠\nAI Models\n🤗\nHugging Face\n🔄\nOpenRouter\n🌐\nIPFS\n🔧\nDevices\n⚙️\nSettings\n🔌\nMCP Control\n🔑\nAPI Keys\n🐙\nGitHub\n🔐\nOAuth\n⏰\nAI Cron\nNAVI\n🔗\nP2P Network\n💬\nP2P Chat\n🧠\nNN Designer\n🎯\nTraining\n🧮\nCalculator\n🕐\nClock\n📅\nCalendar\n📺\nPeerTube\n👥\nFriends\n🖼️\nImages\n📝\nNotes\n🎵\nMedia Player\n📊\nMonitor\n🎨\nArt\n🎬\nCinema\n🎹\nStrudel\n🎼\nStrudel AI\n🎸\nStudio Classic\n💭\nP2P Classic\n▦\nDatasets\n▶\nAccelerate\n⌘\nIDL\n◉\nGlasses\n◇\nORB UI\n※\nMCP++\n◬\nSupervisor\n◬\nAgent Supervisor\n−\n□\n×\nAgent Supervisor\nGoals, task queue, receipts, and MCP++ health\nContract\nSecurity\nRefresh\nEmpty\nError\nSTATUS\ndegraded\nACTIVE GOALS\n0\nQUEUED\n0\nRUNNING\n0\nMODE\ndegraded\nNo supervisor work is queued.\nGoals, queue items, receipts, and logs are all empty for this snapshot.\nGoals\n0 goals\nNo goals available.\nQueue\n0 tasks\nNo queue items available.\nActive task\nDispatch\nSteering\nReceipts\nHealth\nContract\nPrompt steering\n\nNo target selected\n\nSteering prompt\nNORMALIZED TARGET\ntask:unselected\nPOLICY CLASS\nconfirm\nAFFECTED TASKS\nnone\nPROMPT SIZE\n0/8000\nPlanned MCP action\nagent_supervisor.prompt_steering.request\nipfs_accelerate_py via mcp, mcp++\nstructured-json-payloa",
+  "gateway": {
+    "dry": {
+      "state": "unavailable",
+      "reason": "capability_unavailable",
+      "message": "Prompt steering dry runs are previewed locally by the console; the backend route executes confirmed submissions only.",
+      "required_confirmation": false,
+      "receipt": null
+    },
+    "unconfirmed": {
+      "state": "denied",
+      "reason": "confirmation_required",
+      "message": "Governed supervisor writes require an explicit reviewed confirmation.",
+      "required_confirmation": true,
+      "receipt": null
+    },
+    "confirmed": {
+      "state": "unavailable",
+      "reason": "server_unavailable",
+      "message": "PlanRevisionPathError: scope_paths must be a relative repository path",
+      "required_confirmation": false,
+      "receipt": null
+    }
+  },
+  "console_path": {
+    "dry": {
+      "state": "available",
+      "accepted": true,
+      "dry_run": true,
+      "receipt_id": "rcpt-prompt-steering-7a6205d4"
+    },
+    "confirmed": {
+      "state": "unavailable",
+      "reason": "server_unavailable",
+      "message": "PlanRevisionPathError: scope_paths must be a relative repository path"
+    }
+  },
+  "steering_pane_after_text": "🖥️\nTerminal\n🎯\nVibeCode\n🎵\nMusic Studio\n🤖\nAI Chat\n📁\nFiles\n⚡\nTasks\n📋\nTodo\n🧠\nAI Models\n🤗\nHugging Face\n🔄\nOpenRouter\n🌐\nIPFS\n🔧\nDevices\n⚙️\nSettings\n🔌\nMCP Control\n🔑\nAPI Keys\n🐙\nGitHub\n🔐\nOAuth\n⏰\nAI Cron\nNAVI\n🔗\nP2P Network\n💬\nP2P Chat\n🧠\nNN Designer\n🎯\nTraining\n🧮\nCalculator\n🕐\nClock\n📅\nCalendar\n📺\nPeerTube\n👥\nFriends\n🖼️\nImages\n📝\nNotes\n🎵\nMedia Player\n📊\nMonitor\n🎨\nArt\n🎬\nCinema\n🎹\nStrudel\n🎼\nStrudel AI\n🎸\nStudio Classic\n💭\nP2P Classic\n▦\nDatasets\n▶\nAccelerate\n⌘\nIDL\n◉\nGlasses\n◇\nORB UI\n※\nMCP++\n◬\nSupervisor\n◬\nAgent Supervisor\n−\n□\n×\nAgent Supervisor\nGoals, task queue, receipts, and MCP++ health\nContract\nSecurity\nRefresh\nEmpty\nError\nSTATUS\ndegraded\nACTIVE GOALS\n0\nQUEUED\n0\nRUNNING\n0\nMODE\ndegraded\nNo supervisor work is queued.\nGoals, queue items, receipts, and logs are all empty for this snapshot.\nGoals\n0 goals\nNo goals available.\nQueue\n0 tasks\nNo queue items available.\nActive task\nDispatch\nSteering\nReceipts\nHealth\nContract\nPrompt steering\n\nNo target selected\n\nSteering prompt\nNORMALIZED TARGET\ntask:unselected\nPOLICY CLASS\nconfirm\nAFFECTED TASKS\nnone\nPROMPT SIZE\n0/8000\nPlanned MCP action\nagent_supervisor.prompt_steering.request\nipfs_accelerate_py via mcp, mcp++\nstructured-json-payload; logs store [prompt redacted]\ntarget_authorization, task_dependencies, branch_protection, confirmation_policy, execution_budget, receipt_persistence\nDry run: review policy, receipt, and event-DAG output without mutating supervisor state.\nConfirm this governed prompt steering request for the reviewed target.\nSubmit\nVDA-G054 workflow evidence\nBounded goal steering, dispatch, K/D/A receipts, timeou",
+  "finished_at": "2026-10-14T21:53:11.174Z"
+}

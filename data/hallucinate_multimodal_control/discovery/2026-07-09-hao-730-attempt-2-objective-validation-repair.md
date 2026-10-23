@@ -69,3 +69,5 @@ Required validation:
 Focused validation:
 
 `python -m pytest tests/integration/test_swissknife_mobile_interop.py -q`
+
+Cross-reference: this HAO-730 attempt 2 repair builds on the VAI-661 attempt 1 objective validation repair recorded for the same interface contract swissknife mobile packet.

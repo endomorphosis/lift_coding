@@ -1,0 +1,61 @@
+{
+  "C1_C6_join": null,
+  "C1_C6_null_reason": "Original author ledger and exact component identities missing; no joins inferred.",
+  "admission": {
+    "admitted_combined_cpu_seconds": null,
+    "admitted_work_seconds": null,
+    "attempts": 1,
+    "cause_inferred": false,
+    "end_proc_status": {
+      "VmHWM": "35428 kB",
+      "VmRSS": "35428 kB",
+      "VmSize": "58976 kB"
+    },
+    "end_ru_maxrss_kib_raw": 4517460,
+    "lease_released": false,
+    "peak_memory_null_reason": "/proc high-water is process lifetime; raw getrusage may include inherited pre-exec high-water. No isolated work-only peak is claimed.",
+    "retries": 0,
+    "scheduler_overrides": 0,
+    "startup_proc_status": {
+      "VmHWM": "17312 kB",
+      "VmRSS": "17312 kB",
+      "VmSize": "40224 kB"
+    },
+    "startup_ru_maxrss_kib_raw": 4517460,
+    "status": "not_admitted",
+    "work_only_attributable_peak_memory_kib": null,
+    "work_started": false
+  },
+  "author_report_sha256": "345d7429681fd5f73cfd871cc819b5e37e9dd5ae9bda12a958535abe953905d0",
+  "checks": null,
+  "conclusion": "Bounded comparison did not complete; no retry, scheduler override, parser execution or cause inference.",
+  "legal_applicability_established": false,
+  "limits": {
+    "admission_timeout_seconds": 10,
+    "admitted_wall_seconds": 30,
+    "child_process_slots": 1,
+    "cpu_seconds": 20,
+    "cpu_slots": 1,
+    "memory_mb": 256,
+    "output_file_bytes": 2097152,
+    "selected_development_copies_bytes": 30720
+  },
+  "operations": {
+    "database_access": false,
+    "human_or_legal_review": false,
+    "mixed_annotation_reads": false,
+    "network_access": false,
+    "new_pdfinfo_metadata_inspection": false,
+    "new_pdftotext_preprocessing": false,
+    "parser_or_converter_rerun": false,
+    "prior_packages_written": false,
+    "protected_panel_reads": false,
+    "training_or_model_calls": 0
+  },
+  "redaction": "Absolute local paths, case identities and original raw source contents omitted; all full derived text and copied development records remain author-only.",
+  "schema": "law-to-action-source-context-validation/v1",
+  "scope": "New offline source preprocessing plus exact retained development byte/span/field-reference comparison; no new scientific parser or legal review.",
+  "semantic_fidelity_established": false,
+  "status": "admission_refused_or_import_failed",
+  "visibility": "reviewer_shareable"
+}

@@ -1,0 +1,24 @@
+{
+  "actual_model_calls": 0,
+  "actual_observation_executed": false,
+  "basis": [
+    "Narrow diff from qualified F12 capacity observer: source/metadata paths, observation-only labels, openingindex3 and exactF13check.",
+    "Exact original538body conservation, fixedten producerpins, same four2Mentrybounded census, unchanged145B and200Mrequest/outputbounds.",
+    "No reservation/model/shared writes; metadata audit restricts writes to exactF13observation.",
+    "No old baseline or false-clearance record replacement; output explicitly grants no training authority."
+  ],
+  "findings": [],
+  "inputs": {
+    "bytes": 1595,
+    "path": "/home/barberb/lift_coding/artifacts/legal-storage-continuation-20261014-01/capacity-observation-inputs-v01.json",
+    "sha256": "e805c691cdd16a903d38d196de86d0bf599a78ca6098834cfebd5aa6ba2c08a8"
+  },
+  "observer": {
+    "bytes": 8772,
+    "path": "/home/barberb/lift_coding/artifacts/legal-storage-continuation-20261014-01/review_storage_continuation_capacity_observation_v01.py",
+    "sha256": "71f56a5d148d8b097b423cf0f396f2e0a313e6b48d118f59cf422bd69ca60632"
+  },
+  "passed": true,
+  "private_endpoint_body_reads_by_reviewer": 0,
+  "schema": "storage-continuation-observer-root-static-review/v1"
+}

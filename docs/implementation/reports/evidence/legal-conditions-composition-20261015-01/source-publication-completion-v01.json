@@ -1,0 +1,44 @@
+{
+  "CI_limit": "Recorded CodeQL job had zero steps due to account billing lock; no hosted CI success claimed.",
+  "PR": {
+    "merged": true,
+    "number": 1307,
+    "url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1307"
+  },
+  "actual_incoming_entries": 32282,
+  "actual_merge": "6deae26e98452669b32b256794b18affb1155c16",
+  "actual_merge_entries": 32329,
+  "actual_merge_tree": "edb1dfdef81b7d1204c6c3c8c5bc64bb14d513da",
+  "additions": 47,
+  "admin_or_protection_bypass_requested": false,
+  "all_other_32281_incoming_entries_exact": true,
+  "canonical_Git_calls": 0,
+  "default_promotion": false,
+  "findings": [],
+  "historical_base_assumption_refusal": {
+    "bytes": 1115,
+    "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/source-postmerge-assumption-refusal-v01.json",
+    "sha256": "31179d642c7a3d141780850c314d31eddf560b9bce12dd48cfa37aab0877d9e0"
+  },
+  "hosted_CI_passed": false,
+  "independent_actual_merge_review": {
+    "bytes": 7877,
+    "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/source-postmerge-independent-review-v01.json",
+    "sha256": "5a2b1d601ca3872bab444683a5ee89f2d606a5f421a4c7e1aab04b5196f925da"
+  },
+  "merge_attempts": 1,
+  "new_weights": false,
+  "ordered_parents": [
+    "3101416594780604f6a1346edbc526f11798d35b",
+    "a753f4f59857368b375723f133dec54ca4795cc0"
+  ],
+  "ordinary_head_conditional_merge": true,
+  "passed": true,
+  "schema": "conditions-composition-source-publication-completion/v1",
+  "sole_incoming_modification": "Four exact F19 completion status references in docs/autoencoders/legal_ir_uscode_corpus_improvement_plan_20261015.md",
+  "source_postmerge_verification": {
+    "bytes": 31636,
+    "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/source-postmerge-verification-v01.json",
+    "sha256": "e1485dbe26107f0466d68c80442d2f77a6fcf2cf62df6a0b6fc4fd915acab4e6"
+  }
+}

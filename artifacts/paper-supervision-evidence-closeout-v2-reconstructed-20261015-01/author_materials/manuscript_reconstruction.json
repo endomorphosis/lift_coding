@@ -1,0 +1,316 @@
+{
+  "schema": "paper-manuscript-reconstruction/v1",
+  "status": "reconstructed_local_base_not_supplied_v2",
+  "title": "Proof-Carrying Neurosymbolic Supervision: State, Reasoning, and Evidence Reuse",
+  "selected_build": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016",
+  "selection_basis": "Operator requested a new package; increment-016 selected as one exact-title retained 37-page base, not as an identity proof.",
+  "supplied_pdf_identity_bound": false,
+  "selected_pdf_sha256": "51a72d60c7dcb23faa17918091fe172f6cbacf8f25df10e94d1b4071dce05ce7",
+  "source_manifest_sha256": "2f774bd2b3b32b868e3ff72775cbfbbf205921ca387267f7d6c51e61c2390f8b",
+  "source_manifest_members_verified": 29,
+  "source_manifest_members": [
+    {
+      "path": "appendix/entry.tex",
+      "sha256": "c4f0c14c9feb2139bcc872b03604904d0b7a9b649024d77e2c133d6f1460daa0"
+    },
+    {
+      "path": "appendix/formal_arguments.tex",
+      "sha256": "b1d1f95188a4c8633332a4bd15c7977062d24d9affd9e0a7830e553e2a7e8664"
+    },
+    {
+      "path": "appendix/historical_results_details.tex",
+      "sha256": "5b8928000561ae2204b08c6dfd7ebf8c8a0d9389bed8dedb23ac4c1d22b9a22f"
+    },
+    {
+      "path": "appendix/incremental_qualification_details.tex",
+      "sha256": "16118f871b6566de71bb3f3d621ff8fb9bc63f99284d5dc8c4cbc63154d4599c"
+    },
+    {
+      "path": "appendix/llm_usage_disclosure.tex",
+      "sha256": "8dec847880a25b50c8b0c4d1252a6a7a31ad7445dfa48e001c6fa257ce5612dd"
+    },
+    {
+      "path": "checklist.tex",
+      "sha256": "ca5d9fd7ad79a82cc483ecc568e1fac70499e28e793404325ac62c6c345624c5"
+    },
+    {
+      "path": "fragments/abstract.tex",
+      "sha256": "666d0da1c0242cba4b6113be1ea0e76cc6ada16fe276cc0f03347dda4ae261b8"
+    },
+    {
+      "path": "fragments/analysis_method.tex",
+      "sha256": "78911bc18e806dde8af1d49b47e491e9b158b7a7b80740fcd72e38eca85c2509"
+    },
+    {
+      "path": "fragments/conclusion.tex",
+      "sha256": "080d7e4fdb9fad8db334e42ff3bf14f974aea2b53fb0ea8a1730cb4b35f1560c"
+    },
+    {
+      "path": "fragments/design.tex",
+      "sha256": "ff023bb6289909fbeae04b78388eb893a2ad1a5a512b44e882786639e02c86a1"
+    },
+    {
+      "path": "fragments/evidence_method.tex",
+      "sha256": "ec7bc2db2dcc8a127759782abf04146488dc73d5b0cf279fce3ed7025761205c"
+    },
+    {
+      "path": "fragments/historical_method_summary.tex",
+      "sha256": "0d3855c9756391f7dc9082aab10530791d970c006fff3ac00eec56c09a130efd"
+    },
+    {
+      "path": "fragments/incremental_results.tex",
+      "sha256": "3cc0f954f3e5502732308e99f8315641cf7176b6e150727ad30620a067320a59"
+    },
+    {
+      "path": "fragments/introduction.tex",
+      "sha256": "3deba8036c94d6d76c5a82dc14c3b79be59e9d3140932fe354e96add77cdfdff"
+    },
+    {
+      "path": "fragments/limitations.tex",
+      "sha256": "372b23c4b71a11c2cefdea05c416b4f6e6e742b22f299a2d023ca99f63741e54"
+    },
+    {
+      "path": "fragments/related_work.tex",
+      "sha256": "547ace4232d873f8d159785455d24bc66c160c9b1ff313f0039a659e44add58f"
+    },
+    {
+      "path": "fragments/results.tex",
+      "sha256": "62cd23fd07b3e36fac24ebd86dd6d58badc34ec34cd0c8d70b87210ddc656d6f"
+    },
+    {
+      "path": "fragments/system.tex",
+      "sha256": "135d3cc93fb47219ed5db442195caaa5fd0279567e16ca6f2d8e626b6727f124"
+    },
+    {
+      "path": "generated/ablations.tex",
+      "sha256": "8c57477902aba200e9a2228d6a316ec06f14859f7894fa1f534f16e8b19d8ccf"
+    },
+    {
+      "path": "generated/figures/family_useful.pdf",
+      "sha256": "001ddc3496915e7c21a52567551b36711a3dd4740ff12a0b4ae2402e56b96a06"
+    },
+    {
+      "path": "generated/figures/family_useful.svg",
+      "sha256": "e1503343b198855975b3136e44efbe5330791945435bfabf99b53ea9a400cc90"
+    },
+    {
+      "path": "generated/table17.tex",
+      "sha256": "ffbb7f2e6aecefb0e4a65fe2da32cc43e87601e01eb7ab97715e516a22cc0b79"
+    },
+    {
+      "path": "generated/table18.tex",
+      "sha256": "3fa332e34627a5825f6065623ac39bd3f0a5041627375d167e3fd397f33e2495"
+    },
+    {
+      "path": "header.tex",
+      "sha256": "9af14ddc4e4810468e1695437fea37886442bad94aa17f4b7cdebdcf2331b470"
+    },
+    {
+      "path": "layout/family_useful.pdf",
+      "sha256": "d70be87412a97285b440aef5de8b05c6fe575d3cbaf00b3abe34eae707146443"
+    },
+    {
+      "path": "layout/table18.tex",
+      "sha256": "ce7f1d2b9e89cc276ffb4a6805687be65aa8943fdc2c541507debea132d9dfa3"
+    },
+    {
+      "path": "main.tex",
+      "sha256": "5a2bc07710b8694eab172717f50435e30ee6782ddfa7bd1fce2959d211adccb0"
+    },
+    {
+      "path": "neurips_2026_vericode.sty",
+      "sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11"
+    },
+    {
+      "path": "verified_references.bib",
+      "sha256": "ee2079249c1d022a991da4dbe4ff2582275f0fad41ac3dd6f583815c4d09bc2a"
+    }
+  ],
+  "retained_text_sha256": "fdb6e202eb611447e488c56de379db0db74223beaec1c5db6533e346a9426378",
+  "fresh_pdftotext_equals_retained_text": true,
+  "pdftotext_version": "pdftotext version 24.02.0",
+  "pdftotext_stderr_bytes": 0,
+  "commands": [
+    [
+      "pdftotext",
+      "-layout",
+      "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/main.pdf",
+      "-"
+    ],
+    [
+      "pdftotext",
+      "-v"
+    ],
+    [
+      "python3",
+      "author_materials/reconstruct_manuscript.py",
+      "--selected-build",
+      "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016",
+      "--output-package",
+      "FRESH_OUTPUT_DIRECTORY"
+    ]
+  ],
+  "script_sha256": "4d5cb989ad7864b311f90c5d529d177c5ba6d9ab3896613164a777f32b294f04",
+  "page_count": 37,
+  "main_text_pages_observed": 10,
+  "page_split": {
+    "main_body": [
+      1,
+      10
+    ],
+    "references": [
+      11,
+      11
+    ],
+    "appendices": [
+      12,
+      30
+    ],
+    "checklist": [
+      31,
+      37
+    ]
+  },
+  "split_rules": [
+    "Split retained text on form feed; remove only the last empty segment.",
+    "Require 37 pages, line 412 References on page 11, line 454 Appendix A heading on page 12, and checklist heading on page 31.",
+    "Preserve every page's extracted text inside a fenced block; add Markdown page labels.",
+    "Split original main.tex once at its literal appendix directive; recursively expand only manifest-listed input directives in original order.",
+    "Preserve all non-input source text, with inserted BEGIN/END comments identifying each included file.",
+    "Normalize abstract whitespace, remove its abstract environment, and replace only the escaped percent sign."
+  ],
+  "source_include_order": {
+    "main": [
+      {
+        "path": "header.tex",
+        "sha256": "9af14ddc4e4810468e1695437fea37886442bad94aa17f4b7cdebdcf2331b470"
+      },
+      {
+        "path": "fragments/abstract.tex",
+        "sha256": "666d0da1c0242cba4b6113be1ea0e76cc6ada16fe276cc0f03347dda4ae261b8"
+      },
+      {
+        "path": "fragments/introduction.tex",
+        "sha256": "3deba8036c94d6d76c5a82dc14c3b79be59e9d3140932fe354e96add77cdfdff"
+      },
+      {
+        "path": "fragments/system.tex",
+        "sha256": "135d3cc93fb47219ed5db442195caaa5fd0279567e16ca6f2d8e626b6727f124"
+      },
+      {
+        "path": "fragments/evidence_method.tex",
+        "sha256": "ec7bc2db2dcc8a127759782abf04146488dc73d5b0cf279fce3ed7025761205c"
+      },
+      {
+        "path": "fragments/historical_method_summary.tex",
+        "sha256": "0d3855c9756391f7dc9082aab10530791d970c006fff3ac00eec56c09a130efd"
+      },
+      {
+        "path": "fragments/results.tex",
+        "sha256": "62cd23fd07b3e36fac24ebd86dd6d58badc34ec34cd0c8d70b87210ddc656d6f"
+      },
+      {
+        "path": "fragments/incremental_results.tex",
+        "sha256": "3cc0f954f3e5502732308e99f8315641cf7176b6e150727ad30620a067320a59"
+      },
+      {
+        "path": "generated/table17.tex",
+        "sha256": "ffbb7f2e6aecefb0e4a65fe2da32cc43e87601e01eb7ab97715e516a22cc0b79"
+      },
+      {
+        "path": "fragments/related_work.tex",
+        "sha256": "547ace4232d873f8d159785455d24bc66c160c9b1ff313f0039a659e44add58f"
+      },
+      {
+        "path": "fragments/limitations.tex",
+        "sha256": "372b23c4b71a11c2cefdea05c416b4f6e6e742b22f299a2d023ca99f63741e54"
+      },
+      {
+        "path": "fragments/conclusion.tex",
+        "sha256": "080d7e4fdb9fad8db334e42ff3bf14f974aea2b53fb0ea8a1730cb4b35f1560c"
+      }
+    ],
+    "appendices": [
+      {
+        "path": "appendix/entry.tex",
+        "sha256": "c4f0c14c9feb2139bcc872b03604904d0b7a9b649024d77e2c133d6f1460daa0"
+      },
+      {
+        "path": "appendix/formal_arguments.tex",
+        "sha256": "b1d1f95188a4c8633332a4bd15c7977062d24d9affd9e0a7830e553e2a7e8664"
+      },
+      {
+        "path": "fragments/design.tex",
+        "sha256": "ff023bb6289909fbeae04b78388eb893a2ad1a5a512b44e882786639e02c86a1"
+      },
+      {
+        "path": "fragments/analysis_method.tex",
+        "sha256": "78911bc18e806dde8af1d49b47e491e9b158b7a7b80740fcd72e38eca85c2509"
+      },
+      {
+        "path": "appendix/historical_results_details.tex",
+        "sha256": "5b8928000561ae2204b08c6dfd7ebf8c8a0d9389bed8dedb23ac4c1d22b9a22f"
+      },
+      {
+        "path": "appendix/incremental_qualification_details.tex",
+        "sha256": "16118f871b6566de71bb3f3d621ff8fb9bc63f99284d5dc8c4cbc63154d4599c"
+      },
+      {
+        "path": "layout/table18.tex",
+        "sha256": "ce7f1d2b9e89cc276ffb4a6805687be65aa8943fdc2c541507debea132d9dfa3"
+      },
+      {
+        "path": "generated/ablations.tex",
+        "sha256": "8c57477902aba200e9a2228d6a316ec06f14859f7894fa1f534f16e8b19d8ccf"
+      },
+      {
+        "path": "appendix/llm_usage_disclosure.tex",
+        "sha256": "8dec847880a25b50c8b0c4d1252a6a7a31ad7445dfa48e001c6fa257ce5612dd"
+      },
+      {
+        "path": "checklist.tex",
+        "sha256": "ca5d9fd7ad79a82cc483ecc568e1fac70499e28e793404325ac62c6c345624c5"
+      }
+    ]
+  },
+  "abstract_source_sha256": "666d0da1c0242cba4b6113be1ea0e76cc6ada16fe276cc0f03347dda4ae261b8",
+  "abstract_is": "Whitespace-normalized author-written abstract, not a model prediction or new summary.",
+  "cross_ir_named_terms_in_selected_main_source": {
+    "IntentIR": false,
+    "CodebaseIR": false,
+    "SecurityIR": false,
+    "LegalIR": false,
+    "UI/UX IR": false
+  },
+  "limitations": [
+    "The supplied v2 package and its PDF-to-source identity remain unavailable; this reconstruction does not establish that relationship.",
+    "The exact-title candidate increment-015 also has 37 pages; selection of increment-016 does not prove which one the user originally supplied.",
+    "Fresh extraction equality binds this reading view to the retained selected PDF, not to originating experiments or a new build.",
+    "PDF text can damage mathematical typography; the original LaTeX expressions are preserved separately in the source assembly and copied snapshot.",
+    "The body of selected Section 2 does not explicitly name the requested five-IR chain; the missing v2 Section 2 and Appendix G must not be inferred from this base.",
+    "No historical result, checklist answer, proof-scope claim, or training status was updated during reconstruction.",
+    "Ten observed main-text pages exceed the requested nine-page limit; original style authenticity and anonymity were not independently established.",
+    "The expanded LaTeX segments are review derivatives, not standalone compilation inputs and not signed originals."
+  ],
+  "outputs": [
+    {
+      "path": "manuscript/main.md",
+      "bytes": 92189,
+      "sha256": "d263d52ccb9ccf8c403c9dbc66c73b0068a511e1e0f55f46ea7144e9d6c5a202"
+    },
+    {
+      "path": "manuscript/appendices.md",
+      "bytes": 236398,
+      "sha256": "bde3c2962435fa400b9cbd076db452b59cffc0523b81a6d4be93386a20016e26"
+    },
+    {
+      "path": "manuscript/abstract.txt",
+      "bytes": 1600,
+      "sha256": "b5bd743855e32d81e977eaf7579da4462a68c6ded9c69879fc58ba3cdacc3ca0"
+    }
+  ],
+  "source_mutated": false,
+  "new_build_run": false,
+  "solver_run": false,
+  "model_call_run": false
+}

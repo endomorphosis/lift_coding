@@ -1,0 +1,122 @@
+{
+  "actual_remote_observation": {
+    "bytes": 127176,
+    "path": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-premerge-remote-observation-v01.json",
+    "sha256": "ac1d3d0c7c85c4d6011d93442111fdb7c80c24cef90e8258ecfa66ea93723e9d"
+  },
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-commit-independent-review-v01.json": {
+      "bytes": 2570,
+      "path": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-commit-independent-review-v01.json",
+      "sha256": "1aa28ebe40977d9b646ce1aa551ef5dfa78792b727cf5e28b5d6ed9a5f0bc8a5"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-final-stage-independent-review-v01.json": {
+      "bytes": 23648,
+      "path": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-final-stage-independent-review-v01.json",
+      "sha256": "74805868806748c5d6688955d69c2811a2fc8a1d60db48d2a9c700f63b45ee59"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-premerge-remote-observation-v01.json": {
+      "bytes": 127176,
+      "path": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-premerge-remote-observation-v01.json",
+      "sha256": "ac1d3d0c7c85c4d6011d93442111fdb7c80c24cef90e8258ecfa66ea93723e9d"
+    }
+  },
+  "authorship": {
+    "authored_model_primary_and_archive_helpers": true,
+    "independent_algorithm_review_claim": false
+  },
+  "checks": [
+    "Exact supplied actual public remote observation pin",
+    "Exact repository and PR1306 public observation",
+    "Actual observed remote head/base exactly match reviewed commit and sole parent",
+    "Same exact repository and main target, no alternate fork",
+    "Observed open draft is mergeable but not merged or ready yet",
+    "Observed PR scope is the exact one-commit15-file contribution",
+    "Actual commit and full-preservation stage gates remain clean and same tree",
+    "Latest already-fetched owned intake-main-v08 exactly equals observed base",
+    "Owned exact candidate HEAD remains reviewed head",
+    "Hosted checks explicitly NOT passed",
+    "Exactly four failed checks have retained annotations",
+    "Failed check explicitly did not start due to account billing lock: Analyze (actions)",
+    "Failed check explicitly did not start due to account billing lock: Analyze (rust)",
+    "Failed check explicitly did not start due to account billing lock: Analyze (python)",
+    "Failed check explicitly did not start due to account billing lock: Analyze (javascript-typescript)",
+    "All observed check runs bind exact reviewed source head",
+    "Remaining queued checks are not promoted to success",
+    "PR prose preserves negative diagnostic outcome and actual archive bounds",
+    "Closing public observation bytes unchanged"
+  ],
+  "checks_passed": 19,
+  "expected_base": "d0d44b3e0f7c2ba804b0d9115f7a1efd2ad926c3",
+  "failed_checks": [
+    {
+      "cause": "Account billing lock; job not started; no hosted code validation pass",
+      "id": 116228283407,
+      "name": "Analyze (actions)"
+    },
+    {
+      "cause": "Account billing lock; job not started; no hosted code validation pass",
+      "id": 116228283369,
+      "name": "Analyze (rust)"
+    },
+    {
+      "cause": "Account billing lock; job not started; no hosted code validation pass",
+      "id": 116228283298,
+      "name": "Analyze (python)"
+    },
+    {
+      "cause": "Account billing lock; job not started; no hosted code validation pass",
+      "id": 116228283147,
+      "name": "Analyze (javascript-typescript)"
+    }
+  ],
+  "findings": [],
+  "hosted_check_status_counts": {
+    "completed/failure": 4,
+    "queued/None": 15
+  },
+  "hosted_checks_passed": false,
+  "limits": {
+    "Git_mutations": 0,
+    "SDK_or_numerical_model_calls": 0,
+    "actual_merge_not_yet_qualified": true,
+    "canonical_Git_commands": 0,
+    "hosted_CI_code_execution_pass_claim": false,
+    "network_calls_by_reviewer": 0,
+    "original_or_private_body_reads": 0
+  },
+  "owned_intake_ref": {
+    "oid": "d0d44b3e0f7c2ba804b0d9115f7a1efd2ad926c3",
+    "ref": "refs/codex/legal-modality-conditions-retention-20261014-01/intake-main-v08"
+  },
+  "passed": true,
+  "permitted_next_actions": {
+    "if_head_or_base_changed": "Stop for new exact-parent/head review.",
+    "if_protection_rejects": "Stop and report; do not bypass or reinterpret hosted CI as passed.",
+    "mark_ready": true,
+    "no_admin_or_bypass": true,
+    "no_force_push": true,
+    "no_source_changes": true,
+    "ordinary_exact_head_merge": true,
+    "postmerge_exact_parent_tree_verification_required": true,
+    "required_base": "d0d44b3e0f7c2ba804b0d9115f7a1efd2ad926c3",
+    "required_head": "c13e83f4e82d5839465744eef19d4240ca378be0",
+    "scope": "Existing user-authorized ordinary ready transition and ordinary merge of exact reviewed HEAD only, conditional on a fresh matching head/base check immediately before mutation."
+  },
+  "pr_number": 1306,
+  "pr_url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1306",
+  "repository": "endomorphosis/ipfs_datasets_py",
+  "reviewed_head": "c13e83f4e82d5839465744eef19d4240ca378be0",
+  "reviewed_tree": "033abb89c28f7d02e8ab0ece156a46acc31002c0",
+  "schema": "modality-conditions-retention-source-premerge-independent-review/v1",
+  "source_commit_review": {
+    "bytes": 2570,
+    "path": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-commit-independent-review-v01.json",
+    "sha256": "1aa28ebe40977d9b646ce1aa551ef5dfa78792b727cf5e28b5d6ed9a5f0bc8a5"
+  },
+  "source_stage_review": {
+    "bytes": 23648,
+    "path": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-final-stage-independent-review-v01.json",
+    "sha256": "74805868806748c5d6688955d69c2811a2fc8a1d60db48d2a9c700f63b45ee59"
+  }
+}

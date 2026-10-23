@@ -1,0 +1,28 @@
+{
+  "first_required_input": "Local directory/archive path of the complete author package, not another copy of the task instructions.",
+  "required_files": [
+    "codex_evidence_recovery_prompt.md",
+    "author_only/revision_notes.md",
+    "author_only/evidence_ledger.json",
+    "author_only/reviewer_concern_matrix.csv",
+    "author_only/reviewer_feedback.md",
+    "source/neurips_2026_vericode_workshop.tex and includes"
+  ],
+  "additional_existing_artifact_requests": [
+    "Original LA017 protocol admission/exclusion decision artifact with run/protocol identity, if retained.",
+    "Existing139247-byte original PDF matching32bd2e92ac9ad9897e286c93b9373bdc88ad28f976215a2ff859ad029c0fefa0,or later normal admitted recovery.",
+    "Original native-check output capture and source/tool/config/run bindings,if retained."
+  ],
+  "other_unresolved_requests": "../../law-to-action-evidence-package-20261015T101011Z/reviewer_shareable/remaining_requests.json",
+  "minimal_missing_work_plan": "../../law-to-action-evidence-package-20261015T101011Z/reviewer_shareable/minimal_missing_work_plan.json",
+  "new_experiments_proposed_this_continuation": null,
+  "null_reason": "Author-ledger recovery is incomplete; no new experiment is needed to resolve the locator/admission blockers.",
+  "restrictions": [
+    "No substitute component identities",
+    "No original-byte reconstruction",
+    "No protected-final tuning or rejected-candidate evaluation",
+    "No revival of RQ3 from unrelated trials",
+    "No independent review invented",
+    "No new native proof claimed from source/test presence"
+  ]
+}

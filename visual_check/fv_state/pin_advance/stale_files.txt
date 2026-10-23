@@ -1,0 +1,13 @@
+docs/implementation/reports/SUPERVISOR_PARALLEL_REPAIR_20260928.md
+docs/software_contracts/PAGED_RAW_FACTS_V1.md
+ipfs_datasets_py/logic/software_contracts/semantic_index/paged_fact_scan.py
+ipfs_datasets_py/logic/software_contracts/semantic_index/paged_fact_store.py
+ipfs_datasets_py/logic/software_contracts/semantic_index/paged_fact_worker.py
+tests/unit/logic/autoformal_repairs/test_817b9bac3966fbc1e819.py
+tests/unit/logic/autoformal_repairs/test_e3b018a00ef13c0c927c.py
+tests/unit/logic/software_contracts/semantic_index/test_committed_metadata_pack_memory.py
+tests/unit/logic/software_contracts/semantic_index/test_committed_metadata_thread_pressure.py
+tests/unit/logic/software_contracts/semantic_index/test_paged_fact_io_faults.py
+tests/unit/logic/software_contracts/semantic_index/test_paged_fact_scan.py
+tests/unit/logic/software_contracts/semantic_index/test_paged_fact_store.py
+tests/unit/logic/software_contracts/semantic_index/test_paged_fact_worker.py

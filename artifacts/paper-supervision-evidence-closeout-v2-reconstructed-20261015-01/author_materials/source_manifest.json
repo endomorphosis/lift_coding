@@ -1,0 +1,263 @@
+{
+  "abstract_source_sha256": "666d0da1c0242cba4b6113be1ea0e76cc6ada16fe276cc0f03347dda4ae261b8",
+  "adjacent_verification_scope": "Retained historical metadata, not a fresh build, signature check or experiment authentication.",
+  "anonymous_release_ready": false,
+  "authorization": {
+    "context": "Reply to request for the missing supplied v2 revision package path.",
+    "user_reply": "just make one"
+  },
+  "created_at_utc": "2026-10-15T09:38:59.345855+00:00",
+  "header_source_sha256": "9af14ddc4e4810468e1695437fea37886442bad94aa17f4b7cdebdcf2331b470",
+  "original_manuscripts_or_reports_modified": false,
+  "original_supplied_v2_package_recovered": false,
+  "other_37_page_candidate": {
+    "name": "increment-015",
+    "not_used_for_reconstruction": true,
+    "pdf_sha256_observed_in_prior_intake": "4d1d770f607b41d34491a920ec443519889dbd8ae77d661e67faf87630fca9bb"
+  },
+  "package_kind": "new_authorized_local_reconstruction",
+  "pdf_sha256": "51a72d60c7dcb23faa17918091fe172f6cbacf8f25df10e94d1b4071dce05ce7",
+  "private_provenance": true,
+  "relation_to_supplied_37_page_pdf": "unresolved_original_bytes_and_hash_unavailable",
+  "retained_source_manifest_sha256": "2f774bd2b3b32b868e3ff72775cbfbbf205921ca387267f7d6c51e61c2390f8b",
+  "runtime_source_forest": null,
+  "schema": "reconstructed-paper-source-manifest@1",
+  "selected_working_base": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016",
+  "selection_basis": "Explicit working-base choice among retained exact-title 37-page candidates, not proof of supplied-PDF identity.",
+  "snapshot_is_experiment_runtime_evidence": false,
+  "snapshot_members_verified": 29,
+  "source_files": [
+    {
+      "bytes": 708,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/appendix/entry.tex",
+      "path": "source_reference/source_snapshot/appendix/entry.tex",
+      "sha256": "c4f0c14c9feb2139bcc872b03604904d0b7a9b649024d77e2c133d6f1460daa0"
+    },
+    {
+      "bytes": 10689,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/appendix/formal_arguments.tex",
+      "path": "source_reference/source_snapshot/appendix/formal_arguments.tex",
+      "sha256": "b1d1f95188a4c8633332a4bd15c7977062d24d9affd9e0a7830e553e2a7e8664"
+    },
+    {
+      "bytes": 5485,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/appendix/historical_results_details.tex",
+      "path": "source_reference/source_snapshot/appendix/historical_results_details.tex",
+      "sha256": "5b8928000561ae2204b08c6dfd7ebf8c8a0d9389bed8dedb23ac4c1d22b9a22f"
+    },
+    {
+      "bytes": 52171,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/appendix/incremental_qualification_details.tex",
+      "path": "source_reference/source_snapshot/appendix/incremental_qualification_details.tex",
+      "sha256": "16118f871b6566de71bb3f3d621ff8fb9bc63f99284d5dc8c4cbc63154d4599c"
+    },
+    {
+      "bytes": 4713,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/appendix/llm_usage_disclosure.tex",
+      "path": "source_reference/source_snapshot/appendix/llm_usage_disclosure.tex",
+      "sha256": "8dec847880a25b50c8b0c4d1252a6a7a31ad7445dfa48e001c6fa257ce5612dd"
+    },
+    {
+      "bytes": 27933,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/checklist.tex",
+      "path": "source_reference/source_snapshot/checklist.tex",
+      "sha256": "ca5d9fd7ad79a82cc483ecc568e1fac70499e28e793404325ac62c6c345624c5"
+    },
+    {
+      "bytes": 1633,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/fragments/abstract.tex",
+      "path": "source_reference/source_snapshot/fragments/abstract.tex",
+      "sha256": "666d0da1c0242cba4b6113be1ea0e76cc6ada16fe276cc0f03347dda4ae261b8"
+    },
+    {
+      "bytes": 2619,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/fragments/analysis_method.tex",
+      "path": "source_reference/source_snapshot/fragments/analysis_method.tex",
+      "sha256": "78911bc18e806dde8af1d49b47e491e9b158b7a7b80740fcd72e38eca85c2509"
+    },
+    {
+      "bytes": 1043,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/fragments/conclusion.tex",
+      "path": "source_reference/source_snapshot/fragments/conclusion.tex",
+      "sha256": "080d7e4fdb9fad8db334e42ff3bf14f974aea2b53fb0ea8a1730cb4b35f1560c"
+    },
+    {
+      "bytes": 4229,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/fragments/design.tex",
+      "path": "source_reference/source_snapshot/fragments/design.tex",
+      "sha256": "ff023bb6289909fbeae04b78388eb893a2ad1a5a512b44e882786639e02c86a1"
+    },
+    {
+      "bytes": 3239,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/fragments/evidence_method.tex",
+      "path": "source_reference/source_snapshot/fragments/evidence_method.tex",
+      "sha256": "ec7bc2db2dcc8a127759782abf04146488dc73d5b0cf279fce3ed7025761205c"
+    },
+    {
+      "bytes": 1963,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/fragments/historical_method_summary.tex",
+      "path": "source_reference/source_snapshot/fragments/historical_method_summary.tex",
+      "sha256": "0d3855c9756391f7dc9082aab10530791d970c006fff3ac00eec56c09a130efd"
+    },
+    {
+      "bytes": 20404,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/fragments/incremental_results.tex",
+      "path": "source_reference/source_snapshot/fragments/incremental_results.tex",
+      "sha256": "3cc0f954f3e5502732308e99f8315641cf7176b6e150727ad30620a067320a59"
+    },
+    {
+      "bytes": 2029,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/fragments/introduction.tex",
+      "path": "source_reference/source_snapshot/fragments/introduction.tex",
+      "sha256": "3deba8036c94d6d76c5a82dc14c3b79be59e9d3140932fe354e96add77cdfdff"
+    },
+    {
+      "bytes": 2709,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/fragments/limitations.tex",
+      "path": "source_reference/source_snapshot/fragments/limitations.tex",
+      "sha256": "372b23c4b71a11c2cefdea05c416b4f6e6e742b22f299a2d023ca99f63741e54"
+    },
+    {
+      "bytes": 1490,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/fragments/related_work.tex",
+      "path": "source_reference/source_snapshot/fragments/related_work.tex",
+      "sha256": "547ace4232d873f8d159785455d24bc66c160c9b1ff313f0039a659e44add58f"
+    },
+    {
+      "bytes": 1717,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/fragments/results.tex",
+      "path": "source_reference/source_snapshot/fragments/results.tex",
+      "sha256": "62cd23fd07b3e36fac24ebd86dd6d58badc34ec34cd0c8d70b87210ddc656d6f"
+    },
+    {
+      "bytes": 3542,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/fragments/system.tex",
+      "path": "source_reference/source_snapshot/fragments/system.tex",
+      "sha256": "135d3cc93fb47219ed5db442195caaa5fd0279567e16ca6f2d8e626b6727f124"
+    },
+    {
+      "bytes": 894,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/generated/ablations.tex",
+      "path": "source_reference/source_snapshot/generated/ablations.tex",
+      "sha256": "8c57477902aba200e9a2228d6a316ec06f14859f7894fa1f534f16e8b19d8ccf"
+    },
+    {
+      "bytes": 16554,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/generated/figures/family_useful.pdf",
+      "path": "source_reference/source_snapshot/generated/figures/family_useful.pdf",
+      "sha256": "001ddc3496915e7c21a52567551b36711a3dd4740ff12a0b4ae2402e56b96a06"
+    },
+    {
+      "bytes": 42894,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/generated/figures/family_useful.svg",
+      "path": "source_reference/source_snapshot/generated/figures/family_useful.svg",
+      "sha256": "e1503343b198855975b3136e44efbe5330791945435bfabf99b53ea9a400cc90"
+    },
+    {
+      "bytes": 477,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/generated/table17.tex",
+      "path": "source_reference/source_snapshot/generated/table17.tex",
+      "sha256": "ffbb7f2e6aecefb0e4a65fe2da32cc43e87601e01eb7ab97715e516a22cc0b79"
+    },
+    {
+      "bytes": 1431,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/generated/table18.tex",
+      "path": "source_reference/source_snapshot/generated/table18.tex",
+      "sha256": "3fa332e34627a5825f6065623ac39bd3f0a5041627375d167e3fd397f33e2495"
+    },
+    {
+      "bytes": 604,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/header.tex",
+      "path": "source_reference/source_snapshot/header.tex",
+      "sha256": "9af14ddc4e4810468e1695437fea37886442bad94aa17f4b7cdebdcf2331b470"
+    },
+    {
+      "bytes": 14063,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/layout/family_useful.pdf",
+      "path": "source_reference/source_snapshot/layout/family_useful.pdf",
+      "sha256": "d70be87412a97285b440aef5de8b05c6fe575d3cbaf00b3abe34eae707146443"
+    },
+    {
+      "bytes": 1455,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/layout/table18.tex",
+      "path": "source_reference/source_snapshot/layout/table18.tex",
+      "sha256": "ce7f1d2b9e89cc276ffb4a6805687be65aa8943fdc2c541507debea132d9dfa3"
+    },
+    {
+      "bytes": 2618,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/main.tex",
+      "path": "source_reference/source_snapshot/main.tex",
+      "sha256": "5a2bc07710b8694eab172717f50435e30ee6782ddfa7bd1fce2959d211adccb0"
+    },
+    {
+      "bytes": 13757,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/neurips_2026_vericode.sty",
+      "path": "source_reference/source_snapshot/neurips_2026_vericode.sty",
+      "sha256": "2944ec0d4f64dba353827e9ead104da1a9ac81b4057f4ff40969c693632a1e11"
+    },
+    {
+      "bytes": 7778,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/verified_references.bib",
+      "path": "source_reference/source_snapshot/verified_references.bib",
+      "sha256": "ee2079249c1d022a991da4dbe4ff2582275f0fad41ac3dd6f583815c4d09bc2a"
+    },
+    {
+      "bytes": 352286,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/main.pdf",
+      "path": "source_reference/main.pdf",
+      "sha256": "51a72d60c7dcb23faa17918091fe172f6cbacf8f25df10e94d1b4071dce05ce7"
+    },
+    {
+      "bytes": 168079,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/paper.txt",
+      "path": "source_reference/paper.txt",
+      "sha256": "fdb6e202eb611447e488c56de379db0db74223beaec1c5db6533e346a9426378"
+    },
+    {
+      "bytes": 2884,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_manifest.json",
+      "path": "source_reference/source_manifest.original.json",
+      "sha256": "2f774bd2b3b32b868e3ff72775cbfbbf205921ca387267f7d6c51e61c2390f8b"
+    },
+    {
+      "bytes": 423,
+      "copy_is_byte_identical": true,
+      "original_path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/verification.json",
+      "path": "source_reference/verification.original.json",
+      "sha256": "114a10834df8f53ddcaac6ede5b7cf1ea9f6711dc57af3030866652f9c1741dc"
+    }
+  ],
+  "title": "Proof-Carrying Neurosymbolic Supervision: State, Reasoning, and Evidence Reuse"
+}

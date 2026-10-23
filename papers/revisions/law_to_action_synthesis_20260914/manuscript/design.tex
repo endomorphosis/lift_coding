@@ -1,0 +1,50 @@
+\section{Typed formalization and evidence}
+\label{sec:formalization}
+
+The architecture separates three questions: what a source says, how a selected statement is represented logically, and what a checker establishes about that representation. Figure~\ref{fig:architecture} shows how those stages connect to execution. This section describes the broader design; the experiment selects a propositional checking route within it.
+
+\subsection{Domain representations and logical views}
+
+A domain IR preserves extracted information and its provenance. A logical view gives that information a declared interpretation, and a backend evaluates an encoding in a supported fragment. Frame views describe typed entities and attributes. Deontic views distinguish obligations, permissions, and prohibitions; temporal views express validity, ordering, and continuing duties. Temporal Deontic First-Order Logic (TDFOL) combines those operators with predicates and quantifiers. Deontic Cognitive Event Calculus (DCEC) additionally represents beliefs, knowledge, intentions, and events. These distinctions allow an agent's asserted belief that it has permission to remain separate from evidence of an actual grant.
+
+Shared symbols and cross-view links do not establish translation correctness. The compiler retains source maps, assumptions, unsupported facets, and the relationship claimed by each translation. Structural equality, equivalence, entailment, and equisatisfiability serve different purposes. A representation accepted by a parser may still lose a legally relevant exception or temporal qualifier. Appendix~\ref{app:logic} records representation support and available checking routes.
+
+\begin{figure}[t]
+\centering
+\setlength{\unitlength}{1mm}
+\begin{picture}(138,43)
+\put(0,26){\framebox(42,16){\shortstack{Source-derived IRs\\Legal / Security / Intent\\Maps and declared losses}}}
+\put(48,26){\framebox(42,16){\shortstack{Typed obligations\\Applicable constraints\\Checked evidence}}}
+\put(96,26){\framebox(42,16){\shortstack{Decision record\\Exact invocation\\Evidence and state roots}}}
+\put(42,34){\vector(1,0){6}}
+\put(90,34){\vector(1,0){6}}
+\put(0,0){\framebox(42,15){\shortstack{Host-controlled state\\Current context\\Signed capability}}}
+\put(48,0){\framebox(42,15){\shortstack{Revalidate and consume\\Durable use state\\Explicit enforcement}}}
+\put(96,0){\framebox(42,15){\shortstack{Protected handler\\Independent journal\\Observed effect}}}
+\put(42,7.5){\vector(1,0){6}}
+\put(90,7.5){\vector(1,0){6}}
+\put(116,26){\vector(-3,-1){33}}
+\end{picture}
+\caption{Source constraints yield evidence for a particular invocation. Execution additionally requires current authority and available permitted use. The fixed-action study evaluates this boundary using a QF\_BOOL check and one JSON-export handler; it does not validate the semantics of every source representation.}
+\label{fig:architecture}
+\end{figure}
+
+\subsection{Per-action obligations and evidence contracts}
+
+An invocation determines mandatory jobs for applicability, positive grant, non-conflict, security invariants, pre-obligations, coverage, and context binding. Coverage is relative to the declared modeled scope. Each job identifies its premises, assumptions, target, logical fragment, resource bound, and required kind of evidence. The authorization service produces a decision and receipt; it does not itself perform the requested operation.
+
+Let $J(x)$ be the mandatory jobs for invocation $x$, and let $E$ contain their candidate evidence. The admission contract can be summarized as
+\begin{equation}
+\operatorname{Admit}(x,E)=\operatorname{ScopeResolved}(x)\;\land\!
+\bigwedge_{j\in J(x)}\operatorname{MeetsContract}(e_j,j,x).
+\label{eq:admission}
+\end{equation}
+Here $\operatorname{MeetsContract}$ requires evidence for the stated obligation, assumptions, fragment, invocation, and required evidence type. Missing evidence, unresolved applicability, or an unsupported required construct prevents admission. Equation~\ref{eq:admission} describes the design contract; it is not a soundness theorem for source interpretation.
+
+Backend execution can produce models, cores, proof candidates, or inconclusive results. Reconstruction and independent checking add evidence only when the selected route supports them. Policy approval, runtime observations, satisfiability results, and kernel-checked theorems therefore remain distinct types. The scored route encodes a Hoare-style security invariant in quantifier-free Boolean logic (QF\_BOOL): SymPy DPLL runs in a child process, and an independent exhaustive truth-table checker checks the result. This supplies satisfiability evidence. It cannot discharge a job requiring a kernel-checked theorem. The richer theorem, temporal, and interpolation routes were not evaluated.
+
+\subsection{Proposal, checking, and reuse}
+
+Learned components can propose normalizations, premises, tactics, or revised plans. Acceptance follows the checking contract: similarity cannot establish entailment or repair a missing obligation. Rejection witnesses identify affected actions and missing evidence for local revision. Trained normalization, encoding, and replanning were not evaluated.
+
+Declarations, checking runs, results, and receipts have separate identities. Running a prover creates evidence without changing the source declaration. A cached result remains a reuse candidate only while its assumptions, checker, translation, and relevant dependencies still match. Reuse requires renewed checking after relevant source, policy, revocation, or environment roots change. This design supports incremental work while retaining explicit freshness checks; the present measurements do not establish a general speedup from proof reuse.

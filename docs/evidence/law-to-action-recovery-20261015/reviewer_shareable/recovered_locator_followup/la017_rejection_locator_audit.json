@@ -1,0 +1,245 @@
+{
+  "adds_evidence": true,
+  "adds_evidence_scope": "New hash-checked command/stdout/stderr inspection narrows the missing-reason finding. It supplies no admission decision, new measured effect or newly admitted study.",
+  "budget": {
+    "maximum_source_bytes_read": 5242880,
+    "new_copied_original_artifacts": 0,
+    "source_bytes_read_in_prior_cells": 152174,
+    "source_bytes_read_in_report_cell": 128554,
+    "total_source_bytes_read_including_repeat_reads": 280728,
+    "unique_source_files_read": 11
+  },
+  "conclusion": "The original receipt and retained command logs report successful sandbox execution. No explicit original protocol/resource rejection reason was recovered from these exact metadata/log locators. The later unadmitted classification remains in force; LA-015 resource failures are not attributed to LA-017.",
+  "created_at": "2026-10-15T10:35:54.384610+00:00",
+  "current_tree_exact_locator_checks": [
+    {
+      "content_read": false,
+      "exists": false,
+      "path": "<CURRENT_CHECKOUT>/papers/completion/law_to_action/receipts/LA-017.json"
+    },
+    {
+      "content_read": false,
+      "exists": false,
+      "path": "<CURRENT_CHECKOUT>/papers/completion/law_to_action/benchmark/ablations.json"
+    },
+    {
+      "content_read": false,
+      "exists": false,
+      "path": "<CURRENT_CHECKOUT>/papers/completion/law_to_action/results/ablations/raw.jsonl"
+    },
+    {
+      "content_read": false,
+      "exists": false,
+      "path": "<CURRENT_CHECKOUT>/papers/completion/law_to_action/results/ablations/summary.json"
+    }
+  ],
+  "later_classification": {
+    "basis": "Earlier recovered compact claim matrix labeling_rules.LA-017 and M14; recovered original completion receipt alone does not establish protocol admission.",
+    "classification": "protocol_unadmitted_diagnostic",
+    "label_source_inspected_here": "Prior recovery audit finding for LA-017; original archived compact classification was not reopened.",
+    "not_promoted_by_original_complete_status": true,
+    "source_id": "prior_recovery_classification",
+    "source_json_pointer": "/findings/2",
+    "specific_resource_reason_in_prior_audit": null
+  },
+  "limits": {
+    "LA015_failure_inferred_for_LA017": false,
+    "archive_decompression": false,
+    "broad_worktree_scan": false,
+    "database_opened": false,
+    "mixed_split_metadata_limit": "The bound ablation definition/summary names diagnostic controls across development/calibration/final splits; no original per-cell raw panel was opened or evaluated, and no final data was used for tuning.",
+    "new_admission_or_supervisor_dispatch": false,
+    "new_experiment": false,
+    "old_packages_modified": false,
+    "one_bounded_locator_pass": true,
+    "original_artifacts_modified": false,
+    "protected_component_panels_read": false,
+    "raw_jsonl_read": false,
+    "scientific_runtime_or_script_executed": false
+  },
+  "locator_exhaustion": "This pass exhausts the selected original receipt-linked metadata/command-log locators; it does not assert absence in unread source/trace/raw files, unavailable author material or all historical storage.",
+  "next_input": "An exact original LA-017 admission/rejection record or later decision document explicitly recording why it was excluded, if retained. No additional broad search or replay is implied.",
+  "original_record": {
+    "admission_decision_null_reason": "Completion/validation success fields are not a resource or scientific admission decision.",
+    "admission_decision_recovered": null,
+    "completed_at": "2026-09-12T18:16:35.863658+00:00",
+    "completion_mode_label": "Seven sandbox paired component ablations, reported as executed; not proof of protocol admission.",
+    "manifest_status_reported": "sandbox_paired_component_ablations",
+    "receipt_empirical_benchmark_result_reported": true,
+    "recorded_command_exits": {
+      "run": 0,
+      "validate": 0
+    },
+    "recorded_outcome_recount_performed": false,
+    "recorded_stdout_ok": {
+      "validation/run.stdout.log": true,
+      "validation/validate.stdout.log": true
+    },
+    "sandbox_only_reported": true,
+    "status": "complete",
+    "stderr_bytes": {
+      "validation/run.stderr.log": 0,
+      "validation/validate.stderr.log": 0
+    },
+    "summary_protocol_revision_reported": "LA-003/v3"
+  },
+  "redaction": "Absolute host paths omitted; no case identifiers, raw diagnostic records, environment secrets or historical source bodies copied into this report.",
+  "schema": "law-to-action-la017-rejection-locator-audit/v1",
+  "scope": "Original receipt and eight exactly receipt-bound snapshot metadata/log files, plus the prior recovery classification. No archive or runtime access.",
+  "sources": [
+    {
+      "bytes": 11810,
+      "expected_sha256": null,
+      "id": "recovered_original_receipt",
+      "provenance_kind": "prior_package_copy_of_original_receipt",
+      "receipt_binding_matches": null,
+      "sha256": "6e1a662f59ac5f2d83a3b725939b6c3765de262a8baaedad131f9321d391b4ad",
+      "source_path": "<RECOVERY_PACKAGE_1>/author_only/recovered_historical_diagnostics/papers/completion/law_to_action/receipts/LA-017.json"
+    },
+    {
+      "bytes": 11810,
+      "expected_sha256": "6e1a662f59ac5f2d83a3b725939b6c3765de262a8baaedad131f9321d391b4ad",
+      "id": "preserved_original_receipt",
+      "provenance_kind": "original_historical_artifact",
+      "receipt_binding_matches": true,
+      "sha256": "6e1a662f59ac5f2d83a3b725939b6c3765de262a8baaedad131f9321d391b4ad",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/LA-017.json"
+    },
+    {
+      "bytes": 11236,
+      "expected_sha256": "8b4cf2f6de9bc82535ff837414d0afa08d6148c538d7625d0185dd08e78dd54d",
+      "id": "snapshot_outputs/benchmark/ablations.json",
+      "provenance_kind": "original_historical_artifact",
+      "receipt_binding_matches": true,
+      "sha256": "8b4cf2f6de9bc82535ff837414d0afa08d6148c538d7625d0185dd08e78dd54d",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-017/outputs/benchmark/ablations.json"
+    },
+    {
+      "bytes": 25453,
+      "expected_sha256": "2c698efe7ebb632fad889c46ca77f901dcab99f70169b20e11e4f387736fffa7",
+      "id": "snapshot_outputs/results/ablations/summary.json",
+      "provenance_kind": "original_historical_artifact",
+      "receipt_binding_matches": true,
+      "sha256": "2c698efe7ebb632fad889c46ca77f901dcab99f70169b20e11e4f387736fffa7",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-017/outputs/results/ablations/summary.json"
+    },
+    {
+      "bytes": 1791,
+      "expected_sha256": "35b0822e01ed8e149cc19528e4531d2de0428622c5975fda2f4fc765c8916a1f",
+      "id": "snapshot_probe/environment.json",
+      "provenance_kind": "original_historical_artifact",
+      "receipt_binding_matches": true,
+      "sha256": "35b0822e01ed8e149cc19528e4531d2de0428622c5975fda2f4fc765c8916a1f",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-017/probe/environment.json"
+    },
+    {
+      "bytes": 723,
+      "expected_sha256": "a4f291ca57e91b5686d02665bef91a9674db774865fbf37d4f67cabfd3ab99d7",
+      "id": "snapshot_validation/commands.json",
+      "provenance_kind": "original_historical_artifact",
+      "receipt_binding_matches": true,
+      "sha256": "a4f291ca57e91b5686d02665bef91a9674db774865fbf37d4f67cabfd3ab99d7",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-017/validation/commands.json"
+    },
+    {
+      "bytes": 0,
+      "expected_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "id": "snapshot_validation/run.stderr.log",
+      "provenance_kind": "original_historical_artifact",
+      "receipt_binding_matches": true,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-017/validation/run.stderr.log"
+    },
+    {
+      "bytes": 445,
+      "expected_sha256": "1c64e09bc499c83787a78e978ff99a8e67b51cb4de2b47098a5b57e48ea06312",
+      "id": "snapshot_validation/run.stdout.log",
+      "provenance_kind": "original_historical_artifact",
+      "receipt_binding_matches": true,
+      "sha256": "1c64e09bc499c83787a78e978ff99a8e67b51cb4de2b47098a5b57e48ea06312",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-017/validation/run.stdout.log"
+    },
+    {
+      "bytes": 0,
+      "expected_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "id": "snapshot_validation/validate.stderr.log",
+      "provenance_kind": "original_historical_artifact",
+      "receipt_binding_matches": true,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-017/validation/validate.stderr.log"
+    },
+    {
+      "bytes": 678,
+      "expected_sha256": "a260b1d1df6340ddd584af46dde7c02d5089c1f81434ef0a1db70c175dbd622b",
+      "id": "snapshot_validation/validate.stdout.log",
+      "provenance_kind": "original_historical_artifact",
+      "receipt_binding_matches": true,
+      "sha256": "a260b1d1df6340ddd584af46dde7c02d5089c1f81434ef0a1db70c175dbd622b",
+      "source_path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-017/validation/validate.stdout.log"
+    },
+    {
+      "bytes": 64608,
+      "expected_sha256": null,
+      "id": "prior_recovery_classification",
+      "provenance_kind": "later_recovery_audit_not_original_admission_receipt",
+      "receipt_binding_matches": null,
+      "sha256": "97eef44b20087ce657b877ff6ba48180803e38ba5f23c26ebe25757b8175fac6",
+      "source_path": "<RECOVERY_PACKAGE_1>/reviewer_shareable/historical_diagnostics_recovery.json"
+    }
+  ],
+  "specific_original_rejection_reason": null,
+  "specific_original_rejection_reason_null_reason": "No original admission refusal or specific resource/protocol rejection statement was located in the inspected receipt, manifest, summary, environment, commands or command logs. The current-tree receipt and mapped output locations are absent. Later classification alone does not identify its cause.",
+  "status": "bounded_locator_pass_completed_specific_reason_unrecovered",
+  "task": "LA-017",
+  "term_search": {
+    "limit": "Text search supplements explicit field/log review and is not proof of global absence.",
+    "matching_inspected_documents": {
+      "admission_failure": [],
+      "admission_refus": [],
+      "cgroup": [],
+      "cpu.max": [],
+      "protocol_unadmitted": [],
+      "quota": [],
+      "rejection_reason": [],
+      "resource_admission": []
+    },
+    "terms": [
+      "cgroup",
+      "cpu.max",
+      "quota",
+      "admission_failure",
+      "admission_refus",
+      "resource_admission",
+      "rejection_reason",
+      "protocol_unadmitted"
+    ]
+  },
+  "unread_receipt_bound_artifacts": [
+    {
+      "content_read": false,
+      "reason": "Per-cell raw outcomes, trace selections or executable source are outside this metadata/log rejection-reason pass; no broad negative claim over these artifacts.",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-017/outputs/results/ablations/raw.jsonl"
+    },
+    {
+      "content_read": false,
+      "reason": "Per-cell raw outcomes, trace selections or executable source are outside this metadata/log rejection-reason pass; no broad negative claim over these artifacts.",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-017/run_ablations.py"
+    },
+    {
+      "content_read": false,
+      "reason": "Per-cell raw outcomes, trace selections or executable source are outside this metadata/log rejection-reason pass; no broad negative claim over these artifacts.",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-017/traces/pairs.json"
+    },
+    {
+      "content_read": false,
+      "reason": "Per-cell raw outcomes, trace selections or executable source are outside this metadata/log rejection-reason pass; no broad negative claim over these artifacts.",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-017/traces/run_head.json"
+    },
+    {
+      "content_read": false,
+      "reason": "Per-cell raw outcomes, trace selections or executable source are outside this metadata/log rejection-reason pass; no broad negative claim over these artifacts.",
+      "repository_relative_path": "papers/completion/law_to_action/receipts/snapshots/LA-017/validate_ablations.py"
+    }
+  ],
+  "visibility": "reviewer_shareable"
+}

@@ -1,0 +1,48 @@
+{
+  "scope": "This continuation only; separate from original experiments and earlier recovery passes",
+  "original_costs": "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/cost_accounting.json",
+  "operations": [
+    {
+      "operation": "bulk_package_consolidation",
+      "state": "not_started_after_admission_timeout",
+      "admission_wait_budget_seconds": 30,
+      "process_wall_seconds": 30.079955040942878,
+      "process_cpu_seconds": 0.148209,
+      "proc_memory_end": {
+        "VmPeak": "57240 kB",
+        "VmSize": "56840 kB",
+        "VmHWM": "33472 kB",
+        "VmRSS": "33368 kB"
+      },
+      "raw_lifetime_ru_maxrss_kib": 4517460,
+      "attributable_work_peak_bytes": null,
+      "null_reason": "Bulk work never began; process raw highwater is not a measurement of bulk work.",
+      "bulk_files_copied": 0,
+      "scientific_cells_executed": 0,
+      "attempts": 1,
+      "scheduler_override": false
+    },
+    {
+      "operation": "exact_original_statute_download",
+      "state": "not_started_after_admission_timeout",
+      "admission_wait_budget_seconds": 10,
+      "process_wall_seconds": 10.066024760017172,
+      "process_cpu_seconds": 0.10785,
+      "proc_memory_end": {
+        "VmSize": "59164 kB",
+        "VmHWM": "34876 kB",
+        "VmRSS": "34848 kB"
+      },
+      "raw_lifetime_ru_maxrss_kib": 4517460,
+      "attributable_work_peak_bytes": null,
+      "null_reason": "Download never began; no body received or work-only memory sampled.",
+      "network_requests_attempted": 0,
+      "scientific_cells_executed": 0,
+      "attempts": 1,
+      "scheduler_override": false
+    }
+  ],
+  "static_audit_costs_measured": null,
+  "static_audit_costs_null_reason": "Small locator/source reviews were not comprehensively CPU-metered; bytes-read/search counts are scoped in individual reports.",
+  "missing_values_are_not_zero": true
+}

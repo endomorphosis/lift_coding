@@ -1,0 +1,9 @@
+{
+  "schema": "paper-deterministic-assembly-check@1",
+  "identical_regenerated_outputs": 26,
+  "changed_outputs": [
+    "evidence_graph.jsonl"
+  ],
+  "intentional_correction": "Provider-call records without session IDs now use reports-on edges, never same-session-as. Provider session edges unchanged.",
+  "no_original_evidence_changed": true
+}

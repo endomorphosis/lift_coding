@@ -1,0 +1,32 @@
+[
+  {
+    "name": "01-virtual-desktop",
+    "title": "SwissKnife Web Desktop",
+    "url": "http://127.0.0.1:8901/index.html"
+  },
+  {
+    "name": "02-agent-supervisor-console",
+    "title": "SwissKnife Web Desktop",
+    "url": "http://127.0.0.1:8901/index.html",
+    "errors": [
+      "console: Failed to load resource: the server responded with a status of 404 (File not found)",
+      "console: Failed to load resource: the server responded with a status of 404 (File not found)",
+      "console: Failed to launch Agent Supervisor: Error: Gateway control catalog returned HTTP 404.\n    at http://127.0.0.1:8901/js/live-tool-gateway.js:61:17\n    at async controlsFor (http://127.0.0.1:8901/js/live-tool-gateway.js:70:12)\n    at async mountLiveToolGateway (http://127.0.0.1:8901/js/live-tool-gateway.js:13:20)\n    at async SwissKnifeDesktop.launchApp (http://127.0.0.1:8901/js/main-simple.js:618:13)"
+    ]
+  },
+  {
+    "name": "03-mcp-plus-plus-app",
+    "appId": "mcp-plus-plus",
+    "failed": "page.click: Timeout 8000ms exceeded.\nCall log:\n  - waiting for locator('[data-app=\"mcp-plus-plus\"]')\n    - locator resolved to 2 elements. Proceeding with the first one: <div class=\"icon\" tabindex=\"0\" role=\"button\" title=\"MCP++ Explorer\" data-app=\"mcp-plus-plus\" aria-label=\"MCP++ Explorer\">…</div>\n "
+  },
+  {
+    "name": "04-mcp-control",
+    "title": "SwissKnife Web Desktop",
+    "url": "http://127.0.0.1:8901/index.html",
+    "errors": [
+      "console: Failed to load resource: the server responded with a status of 404 (File not found)",
+      "console: Failed to load resource: the server responded with a status of 404 (File not found)",
+      "console: Failed to launch MCP Control: Error: Gateway control catalog returned HTTP 404.\n    at http://127.0.0.1:8901/js/live-tool-gateway.js:61:17\n    at async controlsFor (http://127.0.0.1:8901/js/live-tool-gateway.js:70:12)\n    at async mountLiveToolGateway (http://127.0.0.1:8901/js/live-tool-gateway.js:13:20)\n    at async SwissKnifeDesktop.launchApp (http://127.0.0.1:8901/js/main-simple.js:618:13)"
+    ]
+  }
+]

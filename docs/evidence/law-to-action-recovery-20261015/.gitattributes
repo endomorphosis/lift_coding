@@ -1,0 +1,4 @@
+# Preserve evidence bytes and their recorded digests across Git checkouts.
+* -text
+# The retained CSV writer uses CRLF record terminators.
+*.csv whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

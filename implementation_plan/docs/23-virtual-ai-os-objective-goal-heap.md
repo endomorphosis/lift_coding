@@ -2201,3 +2201,4 @@ If a shard still collides at merge time, `Conflict policy` tells the LLM merge r
 ## VAI-533 validation retry-budget repair
 
 - data/virtual_ai_os/state/discovery/2026-06-28-vai-533-validation-retry-budget-repair.md
+- HAO-730 attempt 2 objective validation repair (interface contract swissknife mobile): data/hallucinate_multimodal_control/discovery/2026-07-09-hao-730-attempt-2-objective-validation-repair.md

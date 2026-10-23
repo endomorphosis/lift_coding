@@ -1,0 +1,1001 @@
+{
+  "archives_rehashed_in_this_audit": false,
+  "build_time_origins_not_live_loaded_origins": {
+    "benchmarks": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/__init__.py",
+    "benchmarks.agent_supervisor": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/__init__.py",
+    "benchmarks.agent_supervisor.container_coding.container_worker_deployment": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/container_worker_deployment.py",
+    "benchmarks.agent_supervisor.container_coding.full_supervisor_benchmark": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/full_supervisor_benchmark.py",
+    "benchmarks.agent_supervisor.container_coding.native_codex_baseline": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/native_codex_baseline.py",
+    "benchmarks.agent_supervisor.container_coding.semantic_decision_nomination_delivery": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/semantic_decision_nomination_delivery.py",
+    "benchmarks.agent_supervisor.container_coding.terminal_deployment": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/terminal_deployment.py",
+    "benchmarks.agent_supervisor.container_coding.timeout_policy": "/home/barberb/lift_coding/external/ipfs_accelerate/benchmarks/agent_supervisor/container_coding/timeout_policy.py"
+  },
+  "current_heads_not_combined_into_runtime_forest": true,
+  "rows": [
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/all-retained/comparison.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__aw6yeSh",
+      "report_commit": null,
+      "runtime_archive_sha256": "025bfa6f6802eb2f3967be3335356965f91f7f3d4eb37d1b05fcc831a3e8e9dc",
+      "study_id": "T1"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/all-retained/comparison.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__94TTSCp",
+      "report_commit": null,
+      "runtime_archive_sha256": "025bfa6f6802eb2f3967be3335356965f91f7f3d4eb37d1b05fcc831a3e8e9dc",
+      "study_id": "T1"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/all-retained/comparison.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__8X8hXVw",
+      "report_commit": null,
+      "runtime_archive_sha256": "bede6aba313c411270a0843559c05129446922d7a8ab99c9400cbae2458d71dc",
+      "study_id": "T1"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/all-retained/comparison.json",
+        "/home/barberb/lift_coding/external/ipfs_accelerate/docs/architecture/terminal_bench_token_reduction.plan.md"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__6VzktdR",
+      "report_commit": null,
+      "runtime_archive_sha256": "bede6aba313c411270a0843559c05129446922d7a8ab99c9400cbae2458d71dc",
+      "study_id": "T1"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/all-retained/comparison.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__EVjYRri",
+      "report_commit": null,
+      "runtime_archive_sha256": "d88f032fc347ba9f16f7b01c2665941f090d5efbbc9e5ca3441dbd055afb864e",
+      "study_id": "T1"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/all-retained/comparison.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__zZ44wta",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "T1"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/all-retained/comparison.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__coj9Jqt",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "T1"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/all-retained/comparison.json",
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/matched-pilot/native01/receipt.json",
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/matched-pilot/native01-observation.json",
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/pilot-result.json"
+      ],
+      "executed_source_forest": {
+        "complete_import_closure_claimed": false,
+        "source_freeze_evidence": "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/runtime-campaign/released-source-freeze.json",
+        "status": "partial_selected_file_hashes_not_complete_import_forest"
+      },
+      "ledger_id": "fix-code-vulnerability__6Cahzwm",
+      "report_commit": null,
+      "runtime_archive_sha256": "f89c7ace1f4387bcb020f223758609dac607c8e6258c208189bbd8dec2f652f8",
+      "study_id": "T1"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/all-retained/comparison.json",
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/matched-pilot/packet01/receipt.json",
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/matched-pilot/packet01-observation.json",
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/pilot-result.json"
+      ],
+      "executed_source_forest": {
+        "complete_import_closure_claimed": false,
+        "source_freeze_evidence": "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/runtime-campaign/released-source-freeze.json",
+        "status": "partial_selected_file_hashes_not_complete_import_forest"
+      },
+      "ledger_id": "fix-code-vulnerability__wox8jVM",
+      "report_commit": null,
+      "runtime_archive_sha256": "f89c7ace1f4387bcb020f223758609dac607c8e6258c208189bbd8dec2f652f8",
+      "study_id": "T1"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-20261014-01/pilot-result.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "t1:unbound-slot:10",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "T1"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-retrieval-query-runtime-20261014-01/result.json",
+        "/home/barberb/lift_coding/artifacts/supervisor-retrieval-query-runtime-20261014-01/matched-pilot/plain01/receipt.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__X2KypAK",
+      "report_commit": null,
+      "runtime_archive_sha256": "cc68fcb153497b2e11a2473128a6f4a377fe99c05b17fd9baf17e4cfd2f1c47c",
+      "study_id": "T1-retrieval"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-retrieval-query-runtime-20261014-01/result.json",
+        "/home/barberb/lift_coding/artifacts/supervisor-retrieval-query-runtime-20261014-01/relocated-pilot/observation.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "T1-retrieval-candidate",
+      "report_commit": null,
+      "runtime_archive_sha256": "cc68fcb153497b2e11a2473128a6f4a377fe99c05b17fd9baf17e4cfd2f1c47c",
+      "study_id": "T1-retrieval"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/maintenance/terminal-frontier-runtime-20261011-01/token-reduction-summary.json",
+        "/home/barberb/lift_coding/maintenance/terminal-frontier-runtime-20261011-01/validation.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__aM5oJU5",
+      "report_commit": null,
+      "runtime_archive_sha256": "39f405e3714f877019b0fc0bb9771160094ad2a1d5a52bc3296a97dc3109e038",
+      "study_id": "T1-frontier-lead"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/maintenance/terminal-frontier-runtime-20261011-01/token-reduction-summary.json",
+        "/home/barberb/lift_coding/maintenance/terminal-frontier-runtime-20261011-01/validation.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__G9GPaZK",
+      "report_commit": null,
+      "runtime_archive_sha256": "39f405e3714f877019b0fc0bb9771160094ad2a1d5a52bc3296a97dc3109e038",
+      "study_id": "T1-frontier-lead"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/benchmark-declared-controls-recovery-20261002/retained-pilot-comparison.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/native-codex-05/receipt.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/retained-study-inventory.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__VfZu8VN",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "T2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/benchmark-declared-controls-recovery-20261002/retained-pilot-comparison.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-no-index-08/receipt.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__aAjF5Sy",
+      "report_commit": null,
+      "runtime_archive_sha256": "738b6c05790a65f218d39e9ae869d6fcd3cf56a39ebc0693a38ee0f42ace4231",
+      "study_id": "T2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/benchmark-declared-controls-recovery-20261002/retained-pilot-comparison.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/receipt.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__z4cVfSR",
+      "report_commit": null,
+      "runtime_archive_sha256": "738b6c05790a65f218d39e9ae869d6fcd3cf56a39ebc0693a38ee0f42ace4231",
+      "study_id": "T2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/no-index-diagnosis-20260929/no-index-observed-01/receipt.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__t5UzZxv",
+      "report_commit": null,
+      "runtime_archive_sha256": "738b6c05790a65f218d39e9ae869d6fcd3cf56a39ebc0693a38ee0f42ace4231",
+      "study_id": "T2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/no-index-diagnosis-20260929/no-index-corrected-01/receipt.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__WAQeD5W",
+      "report_commit": null,
+      "runtime_archive_sha256": "583a1c8e9f80ff95b32f6ffc35f13a20f55d5bf74ec63405243822ba0feca092",
+      "study_id": "T2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/no-index-diagnosis-20260929/no-index-corrected-02/receipt.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/no-index-diagnosis-20260929/no-index-corrected-02/token-score.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__2f3LChX",
+      "report_commit": null,
+      "runtime_archive_sha256": "583a1c8e9f80ff95b32f6ffc35f13a20f55d5bf74ec63405243822ba0feca092",
+      "study_id": "T2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/retained-study-inventory.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__PtEnAhJ",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "T2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/retained-study-inventory.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__LpmwPSj",
+      "report_commit": null,
+      "runtime_archive_sha256": "fab413d963c0d9251b5fb88dc95ce07ae3502ed4723d74e60df57264de0e896a",
+      "study_id": "T2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/retained-study-inventory.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__eho8DzW",
+      "report_commit": null,
+      "runtime_archive_sha256": "d457605f72efd98ea6662753e8112efeacfc30188691f6ad4bf772804232dfd3",
+      "study_id": "T2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/retained-study-inventory.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__79SoPKN",
+      "report_commit": null,
+      "runtime_archive_sha256": "d457605f72efd98ea6662753e8112efeacfc30188691f6ad4bf772804232dfd3",
+      "study_id": "T2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/retained-study-inventory.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__nrCRphy",
+      "report_commit": null,
+      "runtime_archive_sha256": "2e25bf15f7d59ca164ca5448905e73d9ff6d652e4afee8c222ef65397d5d1013",
+      "study_id": "T2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/retained-study-inventory.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__4Dfzugh",
+      "report_commit": null,
+      "runtime_archive_sha256": "2e25bf15f7d59ca164ca5448905e73d9ff6d652e4afee8c222ef65397d5d1013",
+      "study_id": "T2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/retained-study-inventory.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__DqsoZ7E",
+      "report_commit": null,
+      "runtime_archive_sha256": "53d7d8a4d29c245ca6e056ebf7ab4ec9481ea8b879b9782ab6f872c14e9cf40e",
+      "study_id": "T2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/retained-study-inventory.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__2xXoTsQ",
+      "report_commit": null,
+      "runtime_archive_sha256": "53d7d8a4d29c245ca6e056ebf7ab4ec9481ea8b879b9782ab6f872c14e9cf40e",
+      "study_id": "T2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/retained-study-inventory.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__jzhr9xA",
+      "report_commit": null,
+      "runtime_archive_sha256": "f39417fa686b8fa59e203354e973c8a98d84265a1dcff3dddf35e46b945cefbd",
+      "study_id": "T2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/retained-study-inventory.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "fix-code-vulnerability__xRfZaYk",
+      "report_commit": null,
+      "runtime_archive_sha256": "f39417fa686b8fa59e203354e973c8a98d84265a1dcff3dddf35e46b945cefbd",
+      "study_id": "T2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/terminal-codex-eigenvalue-baseline-20261005/comparison.json",
+        "/home/barberb/lift_coding/artifacts/terminal-codex-eigenvalue-baseline-20261005/native-01/receipt.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "largest-eigenval__EKNbpC4",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "T3"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/terminal-codex-eigenvalue-baseline-20261005/comparison.json",
+        "/home/barberb/lift_coding/artifacts/terminal-supervisor-blockers-20261005/largest-eigenval-03/receipt.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "largest-eigenval__iieLP5S",
+      "report_commit": null,
+      "runtime_archive_sha256": "a9f25619d230725ebe9f0f784d74feaf9191905ab78216fcedaee45a95c0cbcc",
+      "study_id": "T3"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/terminal-supervisor-blockers-20261005/trial-02-summary.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "largest-eigenval__aWFqANC",
+      "report_commit": null,
+      "runtime_archive_sha256": "6a7b9ec5951126efb873e4f2128c0c33f6dc311bdb96d5b937c53e79af058ff0",
+      "study_id": "T3"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/numerical-live-comparison-20261013/three-arm-observation-final.json",
+        "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/numerical-live-comparison-20261013/pair-observation-final.json",
+        "/home/barberb/lift_coding/artifacts/numerical-live-pair-20261013/live-trials/codex-full-01/receipt.json"
+      ],
+      "executed_source_forest": {
+        "accelerate": "a8f57366ff4110a87f1f13d1e60992f83f689821",
+        "datasets": "28b9ef1f0b9da51e87b1e68ee565b43681397109",
+        "kit": "8ac00bb1974b1378e12091d546d8425af34049e0"
+      },
+      "ledger_id": "largest-eigenval__ePRwqVj",
+      "report_commit": null,
+      "runtime_archive_sha256": "488ae75f90bd9c4c9cc88b520d4db68157984625ea8bbef3874f63da48b5f94a",
+      "study_id": "T4"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/numerical-live-comparison-20261013/three-arm-observation-final.json",
+        "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/numerical-live-comparison-20261013/pair-observation-final.json"
+      ],
+      "executed_source_forest": {
+        "accelerate": "a8f57366ff4110a87f1f13d1e60992f83f689821",
+        "datasets": "28b9ef1f0b9da51e87b1e68ee565b43681397109",
+        "kit": "8ac00bb1974b1378e12091d546d8425af34049e0"
+      },
+      "ledger_id": "largest-eigenval__beFUuMt",
+      "report_commit": null,
+      "runtime_archive_sha256": "488ae75f90bd9c4c9cc88b520d4db68157984625ea8bbef3874f63da48b5f94a",
+      "study_id": "T4"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/numerical-live-comparison-20261013/three-arm-observation-final.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "largest-eigenval__8vAYxJm",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "T4"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/compact-worker-live-20261014/readouts/original-pair.json",
+        "/home/barberb/lift_coding/artifacts/repeated-compact-edits-20261013/live-trials/grok-identity-02/receipt.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "largest-eigenval__WS7vi7k",
+      "report_commit": null,
+      "runtime_archive_sha256": "1fe8bfc4564a916174c4b9df42c7243d6b0e6fd8b1e71593a2385bf7fbe8d157",
+      "study_id": "X1"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/compact-worker-live-20261014/readouts/original-pair.json",
+        "/home/barberb/lift_coding/artifacts/repeated-compact-edits-20261013/live-trials/grok-comments-02/receipt.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "largest-eigenval__gB4UUzB",
+      "report_commit": null,
+      "runtime_archive_sha256": "1fe8bfc4564a916174c4b9df42c7243d6b0e6fd8b1e71593a2385bf7fbe8d157",
+      "study_id": "X1"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/compact-worker-live-20261014/readouts/metadata-treatment.json",
+        "/home/barberb/lift_coding/artifacts/repeated-compact-edits-20261013/live-trials/grok-comments-metadata-03/receipt.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "largest-eigenval__kzYcAuM",
+      "report_commit": null,
+      "runtime_archive_sha256": "1fe8bfc4564a916174c4b9df42c7243d6b0e6fd8b1e71593a2385bf7fbe8d157",
+      "study_id": "X1"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v1/root_fixed_cohort_analysis_v1.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "requests-cold-v1-d-5414",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "requests-cold-v1"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v1/root_fixed_cohort_analysis_v1.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "requests-cold-v1-d-6028",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "requests-cold-v1"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v1/root_fixed_cohort_analysis_v1.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "requests-cold-v1-c-5414",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "requests-cold-v1"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v1/root_fixed_cohort_analysis_v1.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "requests-cold-v1-c-6028",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "requests-cold-v1"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v1/root_fixed_cohort_analysis_v1.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "requests-cold-v1-a-5414",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "requests-cold-v1"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v1/root_fixed_cohort_analysis_v1.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "requests-cold-v1-a-6028",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "requests-cold-v1"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v1/root_fixed_cohort_analysis_v1.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "requests-cold-v1-b-5414",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "requests-cold-v1"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v1/root_fixed_cohort_analysis_v1.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "requests-cold-v1-b-6028",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "requests-cold-v1"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/root_fixed_cohort_analysis_v2.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "requests-cold-v2-d-5414",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "requests-cold-v2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/root_fixed_cohort_analysis_v2.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "requests-cold-v2-d-6028",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "requests-cold-v2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/root_fixed_cohort_analysis_v2.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "requests-cold-v2-c-5414",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "requests-cold-v2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/root_fixed_cohort_analysis_v2.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "requests-cold-v2-c-6028",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "requests-cold-v2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/root_fixed_cohort_analysis_v2.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "requests-cold-v2-a-5414",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "requests-cold-v2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/root_fixed_cohort_analysis_v2.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "requests-cold-v2-a-6028",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "requests-cold-v2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/root_fixed_cohort_analysis_v2.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "requests-cold-v2-b-5414",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "requests-cold-v2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/controller_qualification/requests-cold-v2/root_fixed_cohort_analysis_v2.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "requests-cold-v2-b-6028",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "requests-cold-v2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/cases.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:17",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "reuse-development-v6"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/cases.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:18",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "reuse-development-v6"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/cases.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:19",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "reuse-development-v6"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/cases.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:20",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "reuse-development-v6"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/cases.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:21",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "reuse-development-v6"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/cases.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:22",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "reuse-development-v6"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/cases.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:23",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "reuse-development-v6"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/cases.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:24",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "reuse-development-v6"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/cases.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:25",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "reuse-development-v6"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/cases.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:26",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "reuse-development-v6"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/cases.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:27",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "reuse-development-v6"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/cases.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:28",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "reuse-development-v6"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/cases.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:29",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "reuse-development-v6"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/cases.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:30",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "reuse-development-v6"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/timing.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:31",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "reuse-development-v6-timing"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/timing.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:32",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "reuse-development-v6-timing"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/timing.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:33",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "reuse-development-v6-timing"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/timing.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:34",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "reuse-development-v6-timing"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/timing.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:35",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "reuse-development-v6-timing"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/runs/horn-v1/honest_only_summary.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:36",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "native-proof-horn-v2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/runs/horn-v1/honest_only_summary.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:37",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "native-proof-horn-v2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/runs/horn-v1/honest_only_summary.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:38",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "native-proof-horn-v2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/runs/horn-v1/honest_only_summary.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:39",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "native-proof-horn-v2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/runs/horn-v1/honest_only_summary.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:40",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "native-proof-horn-v2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/runs/horn-v1/honest_only_summary.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:41",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "native-proof-horn-v2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/runs/horn-v1/honest_only_summary.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:42",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "native-proof-horn-v2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/runs/horn-v1/honest_only_summary.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:43",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "native-proof-horn-v2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/runs/horn-v1/honest_only_summary.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:44",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "native-proof-horn-v2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/runs/horn-v1/honest_only_summary.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:45",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "native-proof-horn-v2"
+    },
+    {
+      "actual_loaded_module_origins": null,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/runs/horn-v1/honest_only_summary.json"
+      ],
+      "executed_source_forest": null,
+      "ledger_id": "historical:unbound-slot:46",
+      "report_commit": null,
+      "runtime_archive_sha256": null,
+      "study_id": "native-proof-horn-v2"
+    }
+  ],
+  "t1_source_runtime_observations": {
+    "actual_trial_worker_loaded_origins": null,
+    "complete_import_closure_claimed": false,
+    "report_commit": null,
+    "report_current_file": "/home/barberb/lift_coding/external/ipfs_accelerate/docs/architecture/terminal_bench_token_reduction.plan.md",
+    "runtime_archive_bytes_reported": 1349592874,
+    "runtime_archive_sha256_reported": "f89c7ace1f4387bcb020f223758609dac607c8e6258c208189bbd8dec2f652f8",
+    "runtime_manifest_not_read_reason": "6,319,244 bytes exceeds 2 MiB per-file bound",
+    "selected_source_freeze": "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/runtime-campaign/released-source-freeze.json"
+  }
+}

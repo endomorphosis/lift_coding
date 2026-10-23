@@ -1,0 +1,50 @@
+{
+  "schema": "law-to-action-pinned-statute-fetch/v1",
+  "started_utc": "2026-10-15T10:37:28.846178+00:00",
+  "url": "https://www.govinfo.gov/content/pkg/USCODE-2024-title42/pdf/USCODE-2024-title42-chap7-subchapXI-partC-sec1320d-6.pdf",
+  "expected_original_sha256": "32bd2e92ac9ad9897e286c93b9373bdc88ad28f976215a2ff859ad029c0fefa0",
+  "expected_original_bytes": 139247,
+  "pin_provenance": "Previously recovered LA005 development record and original sources manifest; see statute_source_locator report.",
+  "admission": "not_admitted",
+  "network_request_started": false,
+  "network_requests_attempted": 0,
+  "response_status": null,
+  "received_bytes": null,
+  "received_sha256": null,
+  "original_bytes_recovered": false,
+  "error": {
+    "class": "LeaseTimeoutError",
+    "message": "timed out waiting for a resource lease"
+  },
+  "limits": {
+    "cpu_slots": 1,
+    "memory_mb": 256,
+    "child_process_slots": 1,
+    "admission_wait_seconds": 10,
+    "network_timeout_seconds": 20,
+    "response_bytes": 1048576
+  },
+  "startup_memory": {
+    "VmSize": "42908 kB",
+    "VmHWM": "18736 kB",
+    "VmRSS": "18736 kB"
+  },
+  "raw_startup_ru_maxrss_kib": 4517460,
+  "new_scientific_execution": false,
+  "new_annotation": false,
+  "replacement_with_newer_version": false,
+  "admission_requested_utc": "2026-10-15T10:37:28.900262+00:00",
+  "finished_utc": "2026-10-15T10:37:38.912190+00:00",
+  "wall_seconds": 10.066024760017172,
+  "cpu_seconds": 0.10785,
+  "end_memory": {
+    "VmSize": "59164 kB",
+    "VmHWM": "34876 kB",
+    "VmRSS": "34848 kB"
+  },
+  "raw_end_ru_maxrss_kib": 4517460,
+  "attributable_work_peak_rss_bytes": null,
+  "memory_null_reason": "No separate work-only peak sampler; process /proc and raw lifetime getrusage recorded separately.",
+  "scheduler_override": false,
+  "retries": 0
+}

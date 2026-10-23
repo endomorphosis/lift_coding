@@ -1,0 +1,1381 @@
+diff --git a/docs/advanced/authorization.md b/docs/advanced/authorization.md
+index 2afb3d5a07c12d47e95809cbf018ed25fd7d7c86..83284b0d708718b3acb60d1a7c5d1f72d02a3632 100644
+--- a/docs/advanced/authorization.md
++++ b/docs/advanced/authorization.md
+@@ -17,7 +17,7 @@ That's the whole triangle. Everything on this page is the middle bullet.
+ The SDK has no opinion about what a valid token looks like. You tell it, by implementing **`TokenVerifier`**:
+ 
+ ```python title="server.py" hl_lines="12-14 19-24"
+---8<-- "docs_src/authorization/tutorial001.py"
++--8 < --"docs_src/authorization/tutorial001.py"
+ ```
+ 
+ * `TokenVerifier` is a protocol with one async method. `verify_token` gets the raw token from the `Authorization` header and returns an **`AccessToken`** if it's valid, `None` if it isn't. There is nothing else to implement.
+@@ -85,7 +85,7 @@ This document is how a client that has never heard of your server finds its way
+ Inside any handler, **`get_access_token()`** is the `AccessToken` your verifier returned for the current request:
+ 
+ ```python title="server.py" hl_lines="4 32-35"
+---8<-- "docs_src/authorization/tutorial002.py"
++--8 < --"docs_src/authorization/tutorial002.py"
+ ```
+ 
+ * It works in tools, resources, and prompts, and there is nothing to pass around: the auth middleware stores it in a context variable per request.
+diff --git a/docs/advanced/identity-assertion.md b/docs/advanced/identity-assertion.md
+index 5a48c13c7403828756f0b8a026fdd48e1b974e72..486db72c0c6ee46591a1ce61a59bf0c1d209c243 100644
+--- a/docs/advanced/identity-assertion.md
++++ b/docs/advanced/identity-assertion.md
+@@ -22,7 +22,7 @@ Everything below is the second request: the client that sends it and the authori
+ **`IdentityAssertionOAuthProvider`** lives in `mcp.client.auth.extensions.identity_assertion`. Like every provider in **OAuth clients** it is an `httpx.Auth`: construct one, put it on `auth=`, hand the `httpx.AsyncClient` to the transport.
+ 
+ ```python title="client.py" hl_lines="49-50 53-61"
+---8<-- "docs_src/identity_assertion/tutorial001.py"
++--8 < --"docs_src/identity_assertion/tutorial001.py"
+ ```
+ 
+ Read it from the bottom.
+@@ -81,7 +81,7 @@ Most of the time you stop here. The MCP authorization server is somebody else's
+ The SDK can also *be* the authorization server: `create_auth_routes` returns the authorization server's routes as a list any Starlette app can mount, which is how `examples/servers/simple-auth/` in the repository runs one. SEP-990 adds one flag and one method to that surface:
+ 
+ ```python title="auth_server.py" hl_lines="48-50 105-107"
+---8<-- "docs_src/identity_assertion/tutorial002.py"
++--8 < --"docs_src/identity_assertion/tutorial002.py"
+ ```
+ 
+ * `identity_assertion_enabled=True` gates everything. Off, which is the default, `/token` answers this grant with `unsupported_grant_type` even if you implemented the hook, and the metadata does not mention it. On, the metadata gains the `jwt-bearer` grant type and lists `urn:ietf:params:oauth:grant-profile:id-jag` in `authorization_grant_profiles_supported`, the field the extension uses to advertise support. (This SDK's client never reads it: it is provisioned for one issuer and simply asks.)
+diff --git a/docs/advanced/low-level-server.md b/docs/advanced/low-level-server.md
+index 8473495ce0c57d3f1d40edec2f7215b2c67db176..d1531881e4e9556d32c10d526bbf33b429efe801 100644
+--- a/docs/advanced/low-level-server.md
++++ b/docs/advanced/low-level-server.md
+@@ -15,7 +15,7 @@ For everything else, stay on `MCPServer`.
+ This is `search_books` from **Tools** (the nine-line `@mcp.tool()` file) with the sugar removed:
+ 
+ ```python title="server.py" hl_lines="23 27 33"
+---8<-- "docs_src/lowlevel/tutorial001.py"
++--8 < --"docs_src/lowlevel/tutorial001.py"
+ ```
+ 
+ Three things changed, and they are the whole low-level API:
+@@ -81,7 +81,7 @@ That generalises. An exception raised from a low-level handler is **always** a p
+ `on_call_tool` is the single entry point for every tool on the server. You route on `params.name`:
+ 
+ ```python title="server.py" hl_lines="39-44"
+---8<-- "docs_src/lowlevel/tutorial002.py"
++--8 < --"docs_src/lowlevel/tutorial002.py"
+ ```
+ 
+ * `list_tools` advertises both. `call_tool` dispatches on the name.
+@@ -92,7 +92,7 @@ That generalises. An exception raised from a low-level handler is **always** a p
+ Declare `output_schema` on the `Tool` and put `structured_content` on the result. Both are yours:
+ 
+ ```python title="server.py" hl_lines="20-24 37"
+---8<-- "docs_src/lowlevel/tutorial003.py"
++--8 < --"docs_src/lowlevel/tutorial003.py"
+ ```
+ 
+ Call it and the result carries both representations:
+@@ -115,7 +115,7 @@ The server never compares the two fields. This SDK's `Client` does: return `stru
+ Use it for record IDs, trace IDs, anything your UI needs and your prompt doesn't:
+ 
+ ```python title="server.py" hl_lines="38"
+---8<-- "docs_src/lowlevel/tutorial004.py"
++--8 < --"docs_src/lowlevel/tutorial004.py"
+ ```
+ 
+ * You construct it as `_meta=`, the wire name. The client reads it back as `result.meta`.
+@@ -142,7 +142,7 @@ No `resources`, no `prompts`: there is nothing to back them. Pass `on_list_promp
+ `Server` is generic in the type its lifespan yields. Annotate it once and the object is typed everywhere it surfaces:
+ 
+ ```python title="server.py" hl_lines="25-27 45-46 51"
+---8<-- "docs_src/lowlevel/tutorial005.py"
++--8 < --"docs_src/lowlevel/tutorial005.py"
+ ```
+ 
+ * The lifespan is a `Callable[[Server[Catalog]], AbstractAsyncContextManager[Catalog]]`; `@asynccontextmanager` on an `async` generator gives you exactly that.
+@@ -156,7 +156,7 @@ Without a `lifespan=`, `ctx.lifespan_context` is an empty `dict`.
+ The constructor covers the methods MCP defines. `add_request_handler` covers everything else:
+ 
+ ```python title="server.py" hl_lines="35-36 39-40 43-44 48"
+---8<-- "docs_src/lowlevel/tutorial006.py"
++--8 < --"docs_src/lowlevel/tutorial006.py"
+ ```
+ 
+ * The first argument is the method string. Notifications have a twin, `add_notification_handler`.
+diff --git a/docs/advanced/middleware.md b/docs/advanced/middleware.md
+index cb10c6cf1c21258c4ace55b4f26e5a82632fb11c..e66b4a3679afde88d2c70767230e88b1eac51386 100644
+--- a/docs/advanced/middleware.md
++++ b/docs/advanced/middleware.md
+@@ -17,7 +17,7 @@ If `Server(name, on_call_tool=...)` is new to you, read **The low-level Server**
+ One server, one tool, one middleware that logs how long each message took:
+ 
+ ```python title="server.py" hl_lines="40-46 50"
+---8<-- "docs_src/middleware/tutorial001.py"
++--8 < --"docs_src/middleware/tutorial001.py"
+ ```
+ 
+ * `ctx` is the same `ServerRequestContext` your handlers receive. `ctx.method` is the raw
+diff --git a/docs/advanced/multi-round-trip.md b/docs/advanced/multi-round-trip.md
+index a90cb5e98021656c562823d92ae8a11c5ee4a22a..c4890003c032ebf153e91902a9b82eebb5e45193 100644
+--- a/docs/advanced/multi-round-trip.md
++++ b/docs/advanced/multi-round-trip.md
+@@ -22,7 +22,7 @@ That's the whole protocol. Every leg is an ordinary request from the client to t
+ The high-level `@mcp.tool()` decorator has no sugar for this yet. Today you write it on the **low-level** `Server`, whose `on_call_tool` handler is allowed to return either result type:
+ 
+ ```python title="server.py" hl_lines="44-47"
+---8<-- "docs_src/mrtr/tutorial001.py"
++--8 < --"docs_src/mrtr/tutorial001.py"
+ ```
+ 
+ * `on_call_tool` is typed `-> CallToolResult | InputRequiredResult`. Returning the second one is the entire server-side API.
+@@ -38,7 +38,7 @@ Everything else in that file (the explicit `input_schema`, the hand-built `CallT
+ Register the callbacks the server might ask for (`elicitation_callback`, `sampling_callback`, `list_roots_callback`) and call the tool. When an `InputRequiredResult` arrives, `Client` dispatches each entry in `input_requests` to the matching callback, retries with the answers and the echoed `request_state`, and keeps going until a `CallToolResult` comes back:
+ 
+ ```python title="client.py" hl_lines="12 13"
+---8<-- "docs_src/mrtr/tutorial003.py"
++--8 < --"docs_src/mrtr/tutorial003.py"
+ ```
+ 
+ * That `elicitation_callback` is the same one a pre-2026 server's back-channel `elicitation/create` would have hit. The same is true of `sampling_callback` for `sampling/createMessage` and `list_roots_callback` for `roots/list`: at 2026-07-28 the standalone server->client RPCs are gone, but the identical `ElicitRequest` / `CreateMessageRequest` / `ListRootsRequest` payloads ride inside `input_requests` and dispatch to the same three callbacks. One set of callbacks serves both eras.
+@@ -63,7 +63,7 @@ The auto-loop is enough for a single-process client. Own the loop instead when:
+ Drop to the underlying session, where `allow_input_required=True` hands you the union directly:
+ 
+ ```python title="client.py" hl_lines="13 14 20"
+---8<-- "docs_src/mrtr/tutorial002.py"
++--8 < --"docs_src/mrtr/tutorial002.py"
+ ```
+ 
+ * `client.session.call_tool(..., allow_input_required=True)` widens the return type to `CallToolResult | InputRequiredResult`. The `isinstance` is what narrows it back.
+diff --git a/docs/advanced/oauth-clients.md b/docs/advanced/oauth-clients.md
+index 3407f026664b2b93f01e0d130b46e200db870e4d..5255763b7944cd6a1f0cdffc1b189b1c427ed166 100644
+--- a/docs/advanced/oauth-clients.md
++++ b/docs/advanced/oauth-clients.md
+@@ -9,7 +9,7 @@ This chapter is the client side. Making your own server demand a token is **Auth
+ ## The provider
+ 
+ ```python title="client.py" hl_lines="44-54"
+---8<-- "docs_src/oauth_clients/tutorial001.py"
++--8 < --"docs_src/oauth_clients/tutorial001.py"
+ ```
+ 
+ You give it four things:
+@@ -98,7 +98,7 @@ A nightly job, a CI step, another service. There is no browser and nobody to cli
+ `ClientCredentialsOAuthProvider` is the same `httpx.Auth`, minus the human:
+ 
+ ```python title="client.py" hl_lines="4 27-33"
+---8<-- "docs_src/oauth_clients/tutorial002.py"
++--8 < --"docs_src/oauth_clients/tutorial002.py"
+ ```
+ 
+ What changed:
+diff --git a/docs/advanced/opentelemetry.md b/docs/advanced/opentelemetry.md
+index 0d971d6e08e024f8a6843525af7f313c9075b11e..903d275d6f750272d8d852af5426e78e28f6b44a 100644
+--- a/docs/advanced/opentelemetry.md
++++ b/docs/advanced/opentelemetry.md
+@@ -7,7 +7,7 @@ message it handles. You didn't write that, and you don't import it. It is there
+ call `MCPServer(...)`.
+ 
+ ```python title="server.py"
+---8<-- "docs_src/opentelemetry/tutorial001.py"
++--8 < --"docs_src/opentelemetry/tutorial001.py"
+ ```
+ 
+ That is a complete, traced server. Call `search_books` and a span is created for it. The same is
+diff --git a/docs/advanced/pagination.md b/docs/advanced/pagination.md
+index ef33fa0c32d4e48098415dad3660b5fe12d3e170..18eb6018d43afafe6b5380a048d8d69530d4952b 100644
+--- a/docs/advanced/pagination.md
++++ b/docs/advanced/pagination.md
+@@ -11,7 +11,7 @@ Pagination is for the server whose resource list is really a database: thousands
+ ## A server that pages
+ 
+ ```python title="server.py" hl_lines="13 16-17"
+---8<-- "docs_src/pagination/tutorial001.py"
++--8 < --"docs_src/pagination/tutorial001.py"
+ ```
+ 
+ * On a low-level `Server`, handlers are constructor arguments, not decorators. `on_list_resources` answers every `resources/list` request; that's the whole hookup.
+@@ -39,7 +39,7 @@ The tenth page comes back with `next_cursor` set to `None`. Done.
+ Every `list_*` method on `Client` (`list_tools`, `list_resources`, `list_resource_templates`, `list_prompts`) takes a `cursor=` keyword. Draining a paged list is one `while True`:
+ 
+ ```python title="client.py" hl_lines="27-33"
+---8<-- "docs_src/pagination/tutorial002.py"
++--8 < --"docs_src/pagination/tutorial002.py"
+ ```
+ 
+ * `cursor` starts as `None`, so the first request carries no cursor.
+diff --git a/docs/advanced/session-groups.md b/docs/advanced/session-groups.md
+index e33004c47d44ba1748310a544a34532a884af179..22aae30d64f0b5f526b1f13ae7553ecf5e88490e 100644
+--- a/docs/advanced/session-groups.md
++++ b/docs/advanced/session-groups.md
+@@ -9,11 +9,11 @@ A `Client` connects to one server. Real applications often want several (a searc
+ Start with two ordinary servers. They have nothing to do with each other, so both naturally called their tool `search`:
+ 
+ ```python title="library_server.py" hl_lines="7"
+---8<-- "docs_src/session_groups/tutorial001.py"
++--8 < --"docs_src/session_groups/tutorial001.py"
+ ```
+ 
+ ```python title="web_server.py" hl_lines="7"
+---8<-- "docs_src/session_groups/tutorial002.py"
++--8 < --"docs_src/session_groups/tutorial002.py"
+ ```
+ 
+ ## One group
+@@ -21,7 +21,7 @@ Start with two ordinary servers. They have nothing to do with each other, so bot
+ Create a `ClientSessionGroup` and call **`connect_to_server`** once per server:
+ 
+ ```python title="client.py" hl_lines="10-12"
+---8<-- "docs_src/session_groups/tutorial003.py"
++--8 < --"docs_src/session_groups/tutorial003.py"
+ ```
+ 
+ * `connect_to_server` takes transport parameters, not a server object: `StdioServerParameters` (from `mcp`) to launch a subprocess, or `StreamableHttpParameters` / `SseServerParameters` (from `mcp.client.session_group`) for a server already listening on a URL.
+@@ -43,7 +43,7 @@ Create a `ClientSessionGroup` and call **`connect_to_server`** once per server:
+ You fix this at the group, not at the servers. Pass a function of `(name, server_info)` and the group runs it on every name it registers:
+ 
+ ```python title="client.py" hl_lines="8-9 16"
+---8<-- "docs_src/session_groups/tutorial004.py"
++--8 < --"docs_src/session_groups/tutorial004.py"
+ ```
+ 
+ Run it again. `print(sorted(group.tools))` now shows both:
+diff --git a/docs/advanced/uri-templates.md b/docs/advanced/uri-templates.md
+index 32560f8ecdd61543efc4f4ec2af18c4d5a48971a..c223b73a060a51b709c2058ae1627a9373b84567 100644
+--- a/docs/advanced/uri-templates.md
++++ b/docs/advanced/uri-templates.md
+@@ -22,7 +22,7 @@ operator forms; here they are on one server so you can see them next to
+ each other:
+ 
+ ```python title="server.py" hl_lines="16-17 22-23 28-29 34-35 40-41"
+---8<-- "docs_src/uri_templates/tutorial001.py"
++--8 < --"docs_src/uri_templates/tutorial001.py"
+ ```
+ 
+ Each highlighted decorator is a different way of carving up the URI.
+@@ -160,7 +160,7 @@ boundary. For filesystem access, use `safe_join` to resolve the path
+ and verify it stays inside your base directory:
+ 
+ ```python title="server.py" hl_lines="4 14"
+---8<-- "docs_src/uri_templates/tutorial002.py"
++--8 < --"docs_src/uri_templates/tutorial002.py"
+ ```
+ 
+ `safe_join` catches symlink escapes, `..` sequences, and absolute-path
+@@ -177,7 +177,7 @@ safely without touching the filesystem. Exempt that parameter, or relax
+ the policy for the whole server:
+ 
+ ```python title="server.py" hl_lines="9 16-19"
+---8<-- "docs_src/uri_templates/tutorial003.py"
++--8 < --"docs_src/uri_templates/tutorial003.py"
+ ```
+ 
+ * `security=ResourceSecurity(exempt_params={"source"})` on the decorator
+@@ -216,7 +216,7 @@ return the protocol types yourself.
+ For fixed URIs, keep a registry and dispatch on exact match:
+ 
+ ```python title="server.py" hl_lines="18 22 28"
+---8<-- "docs_src/uri_templates/tutorial004.py"
++--8 < --"docs_src/uri_templates/tutorial004.py"
+ ```
+ 
+ The list handler tells clients what's available; the read handler
+@@ -230,7 +230,7 @@ and works on its own. You get the same parsing and matching; you wire
+ up the routing and security policy yourself.
+ 
+ ```python title="server.py" hl_lines="14-17 23-26 30 34 46"
+---8<-- "docs_src/uri_templates/tutorial005.py"
++--8 < --"docs_src/uri_templates/tutorial005.py"
+ ```
+ 
+ Three things are happening in the highlighted lines:
+diff --git a/docs/client/callbacks.md b/docs/client/callbacks.md
+index db2c4d7cd01ac2a5489386d2b5806462ea95051b..8c4f418f5bad8c90a92cdf9642afbad7f8c21154 100644
+--- a/docs/client/callbacks.md
++++ b/docs/client/callbacks.md
+@@ -9,7 +9,7 @@ A server can also ask the **client** for things: to put a question to the user,
+ Here is a server whose tool can't finish on its own:
+ 
+ ```python title="server.py" hl_lines="16"
+---8<-- "docs_src/client_callbacks/tutorial001.py"
++--8 < --"docs_src/client_callbacks/tutorial001.py"
+ ```
+ 
+ * `ctx.elicit(...)` sends an `elicitation/create` request **to the client** and waits.
+@@ -20,7 +20,7 @@ That is the server half, and the **Elicitation** chapter owns it. This chapter i
+ ## The elicitation callback
+ 
+ ```python title="client.py" hl_lines="7-11 17-18"
+---8<-- "docs_src/client_callbacks/tutorial002.py"
++--8 < --"docs_src/client_callbacks/tutorial002.py"
+ ```
+ 
+ * An elicitation callback is `async (context, params) -> ElicitResult`.
+@@ -40,10 +40,10 @@ Call `issue_card` and watch both ends.
+ Your callback receives the server's question, already parsed:
+ 
+ ```python
+-params.mode              # 'form'
+-params.message           # 'What name should go on the card?'
++params.mode  # 'form'
++params.message  # 'What name should go on the card?'
+ params.requested_schema  # {'properties': {'name': {'title': 'Name', 'type': 'string'}},
+-                         #  'required': ['name'], 'title': 'CardHolder', 'type': 'object'}
++#  'required': ['name'], 'title': 'CardHolder', 'type': 'object'}
+ ```
+ 
+ It answers, `ctx.elicit(...)` resumes inside the tool, and the tool finishes:
+@@ -83,7 +83,7 @@ When a client connects it declares its `capabilities`, the mirror image of the s
+ The server reads the declaration back with `ctx.session.check_client_capability(...)`. Add a tool that does:
+ 
+ ```python title="server.py" hl_lines="23-31"
+---8<-- "docs_src/client_callbacks/tutorial003.py"
++--8 < --"docs_src/client_callbacks/tutorial003.py"
+ ```
+ 
+ Connect with only `elicitation_callback` and call it:
+@@ -118,7 +118,7 @@ Both work. Both follow the rule above. And both serve RPCs the **2026-07-28 spec
+ You still need the callbacks to talk to servers that haven't moved. The signatures:
+ 
+ ```python title="client.py"
+---8<-- "docs_src/client_callbacks/tutorial004.py"
++--8 < --"docs_src/client_callbacks/tutorial004.py"
+ ```
+ 
+ * A sampling callback receives the full `CreateMessageRequestParams` (`messages`, `model_preferences`, `max_tokens`) and returns a `CreateMessageResult`. *You* run the model, however you like; the SDK only carries the request.
+diff --git a/docs/client/index.md b/docs/client/index.md
+index 38efa72b69fccfe277a514d22cc407237585449a..d85fca03c37c4706c7a93f9b4047a7544cd3d0c8 100644
+--- a/docs/client/index.md
++++ b/docs/client/index.md
+@@ -7,7 +7,7 @@ It is one object with one lifecycle: construct it, enter `async with`, call meth
+ ## Your first client
+ 
+ ```python title="client.py" hl_lines="14-18"
+---8<-- "docs_src/client/tutorial001.py"
++--8 < --"docs_src/client/tutorial001.py"
+ ```
+ 
+ The server at the top is only there so you have something to connect to. The client is the five highlighted lines.
+@@ -44,15 +44,15 @@ You never picked a protocol version. By default the `Client` probes the server a
+ ## Listing tools
+ 
+ ```python title="client.py" hl_lines="15-20"
+---8<-- "docs_src/client/tutorial002.py"
++--8 < --"docs_src/client/tutorial002.py"
+ ```
+ 
+ `list_tools()` returns a `ListToolsResult`; the tools are in `.tools`. Each one is the complete definition a host would hand to a model:
+ 
+ ```python
+-tool.name          # 'search_books'
+-tool.title         # 'Search the catalog'
+-tool.description   # 'Search the catalog by title or author.'
++tool.name  # 'search_books'
++tool.title  # 'Search the catalog'
++tool.description  # 'Search the catalog by title or author.'
+ ```
+ 
+ and `tool.input_schema` is the JSON Schema the server derived from the function's type hints:
+@@ -81,15 +81,15 @@ That schema is everything a UI needs to render an argument form, and everything
+ `call_tool(name, arguments)` runs the tool and gives you back a `CallToolResult`.
+ 
+ ```python title="client.py" hl_lines="26-33"
+---8<-- "docs_src/client/tutorial003.py"
++--8 < --"docs_src/client/tutorial003.py"
+ ```
+ 
+ The server's `lookup_book` returns a Pydantic `Book`. Here is what the client sees:
+ 
+ ```python
+-result.content             # [TextContent(type='text', text='{\n  "title": "Dune",\n  "author": "Frank Herbert",\n  "year": 1965\n}')]
++result.content  # [TextContent(type='text', text='{\n  "title": "Dune",\n  "author": "Frank Herbert",\n  "year": 1965\n}')]
+ result.structured_content  # {'title': 'Dune', 'author': 'Frank Herbert', 'year': 1965}
+-result.is_error            # False
++result.is_error  # False
+ ```
+ 
+ One return value, three things to read. Each has a different consumer.
+@@ -115,8 +115,8 @@ A tool that raises does **not** raise in your client. It comes back as an ordina
+     `ValueError`. The call still returns normally:
+ 
+     ```python
+-    result.is_error            # True
+-    result.content             # [TextContent(type='text', text="Error executing tool lookup_book: No book titled 'Solaris' in the catalog.")]
++    result.is_error  # True
++    result.content  # [TextContent(type='text', text="Error executing tool lookup_book: No book titled 'Solaris' in the catalog.")]
+     result.structured_content  # None
+     ```
+ 
+@@ -136,7 +136,7 @@ A tool that raises does **not** raise in your client. It comes back as an ordina
+ The resource verbs come in pairs: two ways to list, one way to read.
+ 
+ ```python title="client.py" hl_lines="23-32"
+---8<-- "docs_src/client/tutorial004.py"
++--8 < --"docs_src/client/tutorial004.py"
+ ```
+ 
+ * `list_resources()` returns the **concrete** resources, the ones with a fixed URI. Here: `['catalog://genres']`.
+@@ -150,21 +150,21 @@ A client can also **subscribe** to a resource and be told when it changes: `subs
+ ## Prompts
+ 
+ ```python title="client.py" hl_lines="15-20"
+---8<-- "docs_src/client/tutorial005.py"
++--8 < --"docs_src/client/tutorial005.py"
+ ```
+ 
+ `list_prompts()` tells you what the server offers and what each prompt needs:
+ 
+ ```python
+-prompt.name        # 'recommend'
+-prompt.title       # 'Recommend a book'
+-prompt.arguments   # [PromptArgument(name='genre', required=True)]
++prompt.name  # 'recommend'
++prompt.title  # 'Recommend a book'
++prompt.arguments  # [PromptArgument(name='genre', required=True)]
+ ```
+ 
+ `get_prompt(name, arguments)` renders it. The arguments dict is `str -> str`: prompt arguments are always strings. The result is `messages`, a list of `PromptMessage`, each with a `role` and a `content` block:
+ 
+ ```python
+-message.role     # 'user'
++message.role  # 'user'
+ message.content  # TextContent(type='text', text='Recommend one poetry book from the catalog and say why.')
+ ```
+ 
+@@ -175,7 +175,7 @@ A host hands those messages straight to the model. That is the whole feature.
+ A server with a completion handler can autocomplete prompt and resource-template arguments as the user types.
+ 
+ ```python title="client.py" hl_lines="28-32"
+---8<-- "docs_src/client/tutorial006.py"
++--8 < --"docs_src/client/tutorial006.py"
+ ```
+ 
+ * `ref` says *which* prompt or template you're filling in: a `PromptReference` or a `ResourceTemplateReference`.
+@@ -188,7 +188,7 @@ The answer is in `result.completion.values`. Type `"p"` and the server comes bac
+ Every `list_*` method takes a `cursor=` keyword and every result carries a `next_cursor`. When `next_cursor` is `None`, you have everything.
+ 
+ ```python title="client.py" hl_lines="23-31"
+---8<-- "docs_src/client/tutorial007.py"
++--8 < --"docs_src/client/tutorial007.py"
+ ```
+ 
+ This loop is correct against every server. `MCPServer` returns everything in one page, so `next_cursor` is `None` and the loop runs once, which is why most code never writes it. Servers that genuinely page, and the rules cursors obey, are in **Pagination**.
+diff --git a/docs/client/protocol-versions.md b/docs/client/protocol-versions.md
+index 323cc9cd48f4b6b1d1a5d1aa97b3404a71319cc2..82013feb52ca5daca43a328fd22ff3f509497eb5 100644
+--- a/docs/client/protocol-versions.md
++++ b/docs/client/protocol-versions.md
+@@ -9,7 +9,7 @@ You haven't had to care, because `Client` negotiates for you. This chapter is ab
+ ## `mode="auto"`
+ 
+ ```python title="client.py" hl_lines="14-15"
+---8<-- "docs_src/protocol_versions/tutorial001.py"
++--8 < --"docs_src/protocol_versions/tutorial001.py"
+ ```
+ 
+ You didn't pass `mode`, so you got the default: `"auto"`. Entering `async with` sends a single `server/discover` probe at the newest version this SDK speaks. Then:
+@@ -33,7 +33,7 @@ That is the whole feature. One `Client`, any era of server, no branching in your
+ ## `mode="legacy"`
+ 
+ ```python title="client.py" hl_lines="14"
+---8<-- "docs_src/protocol_versions/tutorial002.py"
++--8 < --"docs_src/protocol_versions/tutorial002.py"
+ ```
+ 
+ `mode="legacy"` never probes. It runs the `initialize` handshake, the same connection a pre-2026 client opens.
+@@ -57,7 +57,7 @@ At 2026-07-28 it is gone. The server *returns* its questions and you retry the c
+ `mode` also accepts a modern protocol version string. Today that set is exactly `["2026-07-28"]`.
+ 
+ ```python title="client.py" hl_lines="14"
+---8<-- "docs_src/protocol_versions/tutorial003.py"
++--8 < --"docs_src/protocol_versions/tutorial003.py"
+ ```
+ 
+ A pin sends **nothing**. No probe, no handshake. The client adopts `2026-07-28` locally and the connection is live the instant `async with` returns.
+@@ -90,7 +90,7 @@ The probe is cheap, but it is still a round trip you pay on every reconnect, and
+ So keep it. After an `auto` connection, `client.session.discover_result` holds the exact `DiscoverResult` the server sent: its `supported_versions`, its `capabilities`, its `server_info`, its `instructions`. Hand it back as `prior_discover=` the next time:
+ 
+ ```python title="client.py" hl_lines="15 17"
+---8<-- "docs_src/protocol_versions/tutorial004.py"
++--8 < --"docs_src/protocol_versions/tutorial004.py"
+ ```
+ 
+ ```text
+diff --git a/docs/client/transports.md b/docs/client/transports.md
+index c47669267a08ef2f8b4b2ad0b7c0226b9e8502e8..cf2224306a455b3bad3e1f851a1203a2f96c85c9 100644
+--- a/docs/client/transports.md
++++ b/docs/client/transports.md
+@@ -11,7 +11,7 @@ The *server* side of each (what `mcp.run()` does and what you deploy) is **Runni
+ Pass the server object itself:
+ 
+ ```python title="client.py" hl_lines="14"
+---8<-- "docs_src/client_transports/tutorial001.py"
++--8 < --"docs_src/client_transports/tutorial001.py"
+ ```
+ 
+ No subprocess, no port, no bytes on a wire. The client and the server are two objects in the same process, and the call still goes through the real protocol layer: `search_books` is listed, validated and invoked exactly as it would be over HTTP.
+@@ -26,7 +26,7 @@ That makes it two things at once:
+ Pass a URL string and you get **Streamable HTTP**, the transport you deploy behind:
+ 
+ ```python title="client.py" hl_lines="5"
+---8<-- "docs_src/client_transports/tutorial002.py"
++--8 < --"docs_src/client_transports/tutorial002.py"
+ ```
+ 
+ That is the whole production client. `Client` wraps the URL in `streamable_http_client(...)` for you, on top of an `httpx.AsyncClient` configured the way MCP needs: `follow_redirects=True`, a 30-second timeout for connect/write/pool, and a 300-second read timeout because the server may hold a response stream open.
+@@ -46,7 +46,7 @@ That is the whole production client. `Client` wraps the URL in `streamable_http_
+ The moment you need an `Authorization` header, a cookie, a proxy, mTLS, or a different timeout, build the `httpx.AsyncClient` yourself and hand it to `streamable_http_client`:
+ 
+ ```python title="client.py" hl_lines="8-14"
+---8<-- "docs_src/client_transports/tutorial003.py"
++--8 < --"docs_src/client_transports/tutorial003.py"
+ ```
+ 
+ Two things to notice:
+@@ -77,7 +77,7 @@ A **stdio** server is a subprocess. The client launches it, writes JSON-RPC to i
+ Describe the process with `StdioServerParameters`, turn it into a transport with `stdio_client`, and hand *that* to `Client`:
+ 
+ ```python title="client.py" hl_lines="4-8 12"
+---8<-- "docs_src/client_transports/tutorial004.py"
++--8 < --"docs_src/client_transports/tutorial004.py"
+ ```
+ 
+ `Client` does not accept the parameters object on its own. `StdioServerParameters` is configuration; `stdio_client(server)` is the transport that knows how to spawn a process from it. Always wrap.
+diff --git a/docs/index.md b/docs/index.md
+index 48c22e03f569bd25c30da2df801f77edc4cd9485..1953807ae4826f85ac747f555a1947aa4e63ce4d 100644
+--- a/docs/index.md
++++ b/docs/index.md
+@@ -44,7 +44,7 @@ The `[cli]` extra gives you the `mcp` command; you'll want it for development.
+ Create a file `server.py`:
+ 
+ ```python title="server.py"
+---8<-- "docs_src/index/tutorial001.py"
++--8 < --"docs_src/index/tutorial001.py"
+ ```
+ 
+ That's a complete MCP server.
+diff --git a/docs/migration.md b/docs/migration.md
+index 42d420bf04cceedf0d1b28a617c472ca5cee516f..171f9ee8535515acccfcf1cf89dc2d16c63a4b6f 100644
+--- a/docs/migration.md
++++ b/docs/migration.md
+@@ -137,11 +137,13 @@ async with streamable_http_client(url) as (read_stream, write_stream):
+ # Option 2: Capture session ID via httpx event hooks if needed
+ captured_session_ids: list[str] = []
+ 
++
+ async def capture_session_id(response: httpx.Response) -> None:
+     session_id = response.headers.get("mcp-session-id")
+     if session_id:
+         captured_session_ids.append(session_id)
+ 
++
+ http_client = httpx.AsyncClient(
+     event_hooks={"response": [capture_session_id]},
+     follow_redirects=True,
+@@ -591,6 +593,7 @@ async def my_tool(x: int) -> str:
+ ```python
+ from mcp.server.mcpserver import Context
+ 
++
+ @mcp.tool()
+ async def my_tool(x: int, ctx: Context) -> str:
+     await ctx.info("Processing...")
+@@ -630,6 +633,7 @@ traversal sequences, exempt it:
+ ```python
+ from mcp.server.mcpserver import ResourceSecurity
+ 
++
+ @mcp.resource(
+     "inspect://file/{+target}",
+     security=ResourceSecurity(exempt_params={"target"}),
+@@ -687,8 +691,8 @@ security configuration, and filesystem safety utilities.
+ 
+ ```python
+ @mcp._mcp_server.set_logging_level()  # pyright: ignore[reportPrivateUsage]
+-async def handle_set_logging_level(level: str) -> None:
+-    ...
++async def handle_set_logging_level(level: str) -> None: ...
++
+ 
+ mcp._mcp_server.subscribe_resource()(handle_subscribe)  # pyright: ignore[reportPrivateUsage]
+ ```
+@@ -832,12 +836,14 @@ async def handle_tool(name: str, arguments: dict) -> list[TextContent]:
+     if ctx.meta and ctx.meta.progress_token:
+         await ctx.session.send_progress_notification(ctx.meta.progress_token, 0.5, 100)
+ 
++
+ # After (v2)
+ async def handle_call_tool(ctx: ServerRequestContext, params: CallToolRequestParams) -> CallToolResult:
+     if ctx.meta and "progress_token" in ctx.meta:
+         await ctx.session.send_progress_notification(ctx.meta["progress_token"], 0.5, 100)
+     ...
+ 
++
+ server = Server("my-server", on_call_tool=handle_call_tool)
+ ```
+ 
+@@ -1134,10 +1140,12 @@ from mcp.server.lowlevel.server import Server
+ 
+ server = Server("my-server")
+ 
++
+ @server.list_tools()
+ async def handle_list_tools():
+     return [types.Tool(name="my_tool", description="A tool", inputSchema={})]
+ 
++
+ @server.call_tool()
+ async def handle_call_tool(name: str, arguments: dict):
+     return [types.TextContent(type="text", text=f"Called {name}")]
+@@ -1156,6 +1164,7 @@ from mcp_types import (
+     Tool,
+ )
+ 
++
+ async def handle_list_tools(ctx: ServerRequestContext, params: PaginatedRequestParams | None) -> ListToolsResult:
+     return ListToolsResult(tools=[Tool(name="my_tool", description="A tool", input_schema={"type": "object"})])
+ 
+@@ -1166,6 +1175,7 @@ async def handle_call_tool(ctx: ServerRequestContext, params: CallToolRequestPar
+         is_error=False,
+     )
+ 
++
+ server = Server("my-server", on_list_tools=handle_list_tools, on_call_tool=handle_call_tool)
+ ```
+ 
+@@ -1208,6 +1218,7 @@ from mcp_types import ProgressNotificationParams
+ async def handle_progress(ctx: ServerRequestContext, params: ProgressNotificationParams) -> None:
+     print(f"Progress: {params.progress}/{params.total}")
+ 
++
+ server = Server("my-server", on_progress=handle_progress)
+ ```
+ 
+@@ -1225,6 +1236,7 @@ The old decorator accepted several return types and auto-wrapped them into `Call
+ async def handle(name: str, arguments: dict) -> dict:
+     return {"temperature": 22.5, "city": "London"}
+ 
++
+ # Before (v1) — returning a list auto-wrapped into CallToolResult.content
+ @server.call_tool()
+ async def handle(name: str, arguments: dict) -> list[TextContent]:
+@@ -1235,6 +1247,7 @@ async def handle(name: str, arguments: dict) -> list[TextContent]:
+ # After (v2) — construct the full result yourself
+ import json
+ 
++
+ async def handle(ctx: ServerRequestContext, params: CallToolRequestParams) -> CallToolResult:
+     data = {"temperature": 22.5, "city": "London"}
+     return CallToolResult(
+@@ -1253,15 +1266,18 @@ The old decorator auto-wrapped `Iterable[ReadResourceContents]` (and the depreca
+ # Before (v1) — Iterable[ReadResourceContents] auto-wrapped
+ from mcp.server.lowlevel.helper_types import ReadResourceContents
+ 
++
+ @server.read_resource()
+ async def handle(uri: AnyUrl) -> Iterable[ReadResourceContents]:
+     return [ReadResourceContents(content="file contents", mime_type="text/plain")]
+ 
++
+ # Before (v1) — str/bytes shorthand (already deprecated in v1)
+ @server.read_resource()
+ async def handle(uri: str) -> str:
+     return "file contents"
+ 
++
+ @server.read_resource()
+ async def handle(uri: str) -> bytes:
+     return b"\x89PNG..."
+@@ -1271,20 +1287,24 @@ async def handle(uri: str) -> bytes:
+ # After (v2) — construct TextResourceContents or BlobResourceContents yourself
+ import base64
+ 
++
+ async def handle_read(ctx: ServerRequestContext, params: ReadResourceRequestParams) -> ReadResourceResult:
+     # Text content
+     return ReadResourceResult(
+         contents=[TextResourceContents(uri=str(params.uri), text="file contents", mime_type="text/plain")]
+     )
+ 
++
+ async def handle_read(ctx: ServerRequestContext, params: ReadResourceRequestParams) -> ReadResourceResult:
+     # Binary content — you must base64-encode it yourself
+     return ReadResourceResult(
+-        contents=[BlobResourceContents(
+-            uri=str(params.uri),
+-            blob=base64.b64encode(b"\x89PNG...").decode("utf-8"),
+-            mime_type="image/png",
+-        )]
++        contents=[
++            BlobResourceContents(
++                uri=str(params.uri),
++                blob=base64.b64encode(b"\x89PNG...").decode("utf-8"),
++                mime_type="image/png",
++            )
++        ]
+     )
+ ```
+ 
+@@ -1316,6 +1336,7 @@ The `server.request_context` property has been removed. Request context is now p
+ ```python
+ from mcp.server.lowlevel.server import request_ctx
+ 
++
+ @server.call_tool()
+ async def handle_call_tool(name: str, arguments: dict):
+     ctx = server.request_context  # or request_ctx.get()
+diff --git a/docs/run/asgi.md b/docs/run/asgi.md
+index 2a21489a162538b0681540906a79d354b31189a2..e856ba4c91979bb2c14116d2cf7750abac2b5cba 100644
+--- a/docs/run/asgi.md
++++ b/docs/run/asgi.md
+@@ -9,7 +9,7 @@ A Starlette app is an ASGI app, so anything that hosts ASGI (uvicorn, Hypercorn,
+ ## The app
+ 
+ ```python title="server.py" hl_lines="12"
+---8<-- "docs_src/asgi/tutorial001.py"
++--8 < --"docs_src/asgi/tutorial001.py"
+ ```
+ 
+ `app` is an ordinary ASGI application. Hand it to any ASGI server:
+@@ -81,7 +81,7 @@ app = mcp.streamable_http_app(transport_security=security)
+ The moment the MCP server is *part* of a bigger application, you put the app inside a `Mount`. And the moment you do that, the lifespan becomes your problem:
+ 
+ ```python title="server.py" hl_lines="18-21 25-26"
+---8<-- "docs_src/asgi/tutorial002.py"
++--8 < --"docs_src/asgi/tutorial002.py"
+ ```
+ 
+ * `Mount("/", ...)` plus the default `/mcp` path keeps the endpoint at `/mcp`. Starlette tries routes in order and `Mount("/")` matches **every** path, so your own routes go *before* it in the list. Anything after it is unreachable.
+@@ -111,7 +111,7 @@ Starlette's `Host` route works the same way: swap `Mount("/", ...)` for `Host("m
+ Each `MCPServer` is its own app with its own session manager. Mount as many as you like; enter every manager from the one host lifespan:
+ 
+ ```python title="server.py" hl_lines="27-30 35-36"
+---8<-- "docs_src/asgi/tutorial003.py"
++--8 < --"docs_src/asgi/tutorial003.py"
+ ```
+ 
+ * `AsyncExitStack` enters both managers; they start together and shut down in reverse order.
+@@ -122,7 +122,7 @@ Each `MCPServer` is its own app with its own session manager. Mount as many as y
+ That trailing `/mcp` is `streamable_http_path`. Set it to `"/"` and the mount prefix becomes the whole public path:
+ 
+ ```python title="server.py" hl_lines="25"
+---8<-- "docs_src/asgi/tutorial004.py"
++--8 < --"docs_src/asgi/tutorial004.py"
+ ```
+ 
+ Now clients connect to `/notes`, not `/notes/mcp`.
+@@ -132,7 +132,7 @@ Now clients connect to `/notes`, not `/notes/mcp`.
+ A browser-based client needs two permissions from you: to **send** its MCP request headers, and to **read** the one MCP sends back. Both are CORS configuration on the host app, and the transport-security allowlist above has to agree with it:
+ 
+ ```python title="server.py" hl_lines="27-30 33 35-49"
+---8<-- "docs_src/asgi/tutorial005.py"
++--8 < --"docs_src/asgi/tutorial005.py"
+ ```
+ 
+ * `allow_headers` is the half everyone forgets. A browser **preflights** every MCP request, because `Content-Type: application/json` and the `Mcp-*` request headers are not on the CORS safelist, and a header the preflight doesn't grant is a request the browser never sends. (`allow_headers=["*"]` also works: Starlette answers a preflight with whatever it asked for.)
+@@ -145,7 +145,7 @@ A browser-based client needs two permissions from you: to **send** its MCP reque
+ `@mcp.custom_route()` registers a plain HTTP endpoint on the same app, for the things every deployed service needs that have nothing to do with MCP: a health check, an OAuth callback.
+ 
+ ```python title="server.py" hl_lines="15-17"
+---8<-- "docs_src/asgi/tutorial006.py"
++--8 < --"docs_src/asgi/tutorial006.py"
+ ```
+ 
+ * The handler is plain Starlette: an `async` function from `Request` to `Response`.
+diff --git a/docs/run/index.md b/docs/run/index.md
+index da6bb2bfd1704167048fdb0f5f8ca73b5e55ac2e..fc012ae4f6b3aca36669dd9ca62a28d23cbc125a 100644
+--- a/docs/run/index.md
++++ b/docs/run/index.md
+@@ -20,7 +20,7 @@ The only decision you make is the **transport**: how the bytes between your serv
+ ## `mcp.run()`
+ 
+ ```python title="server.py" hl_lines="12-13"
+---8<-- "docs_src/run/tutorial001.py"
++--8 < --"docs_src/run/tutorial001.py"
+ ```
+ 
+ * `run()` is synchronous. It blocks for the life of the server.
+@@ -56,7 +56,7 @@ You never gave it a port. There isn't one.
+ To put the same server on a port instead, name the transport (and its options) in `run()`:
+ 
+ ```python title="server.py" hl_lines="13"
+---8<-- "docs_src/run/tutorial002.py"
++--8 < --"docs_src/run/tutorial002.py"
+ ```
+ 
+ That one line builds a Starlette app and serves it with uvicorn. Clients connect to `http://127.0.0.1:3001/mcp`.
+@@ -85,7 +85,7 @@ Each transport has its own keyword arguments, all on `run()`:
+ A couple of things about running are not about the transport. They are constructor arguments:
+ 
+ ```python title="server.py" hl_lines="3"
+---8<-- "docs_src/run/tutorial003.py"
++--8 < --"docs_src/run/tutorial003.py"
+ ```
+ 
+ * `log_level`: handed to `logging.basicConfig()` the moment `MCPServer(...)` is constructed. That configures the **root** logger, so it sets the level for your own loggers too, not just the SDK's. Default `"INFO"`.
+diff --git a/docs/tutorial/completions.md b/docs/tutorial/completions.md
+index e1d1815a13b514fd842cfcbd1642cb1a6d1579f7..349d3a814d6b837c1e8ff4a3a8cc37d660f00dd9 100644
+--- a/docs/tutorial/completions.md
++++ b/docs/tutorial/completions.md
+@@ -9,7 +9,7 @@ A client building a UI on top of your server wants to autocomplete argument valu
+ Completions apply to exactly two things: the arguments of a **prompt** and the parameters of a **resource template**. So start with a server that has one of each:
+ 
+ ```python title="server.py" hl_lines="6 12"
+---8<-- "docs_src/completions/tutorial001.py"
++--8 < --"docs_src/completions/tutorial001.py"
+ ```
+ 
+ Nothing here is about completions yet.
+@@ -22,7 +22,7 @@ Nothing here is about completions yet.
+ Add **one** function decorated with `@mcp.completion()`:
+ 
+ ```python title="server.py" hl_lines="22-30"
+---8<-- "docs_src/completions/tutorial002.py"
++--8 < --"docs_src/completions/tutorial002.py"
+ ```
+ 
+ * There is one handler per server. Every completion request lands here, and you branch on what's being completed.
+@@ -92,7 +92,7 @@ You didn't list `completions` anywhere. The SDK saw the handler and advertised i
+ That's what `context` is for. It carries the arguments the user has **already resolved**:
+ 
+ ```python title="server.py" hl_lines="9-12 35-39"
+---8<-- "docs_src/completions/tutorial003.py"
++--8 < --"docs_src/completions/tutorial003.py"
+ ```
+ 
+ * The new branch fires for the template's `repo` parameter.
+diff --git a/docs/tutorial/context.md b/docs/tutorial/context.md
+index 3a15e8fc82ef994c46ea3469f8e5983f332a3c7e..710d97dba05e0fa365a7fc1d364f75469b3d112c 100644
+--- a/docs/tutorial/context.md
++++ b/docs/tutorial/context.md
+@@ -9,7 +9,7 @@ You don't construct it and you don't configure it. You ask for it.
+ Add a parameter annotated with `Context` to any tool:
+ 
+ ```python title="server.py" hl_lines="2 8"
+---8<-- "docs_src/context/tutorial001.py"
++--8 < --"docs_src/context/tutorial001.py"
+ ```
+ 
+ * The SDK builds a fresh `Context` for every request and passes it in.
+@@ -77,13 +77,13 @@ Logging is deliberately not on that list. A server logs with Python's `logging`
+ A server's resources aren't only for clients. A tool can read them too:
+ 
+ ```python title="server.py" hl_lines="16"
+---8<-- "docs_src/context/tutorial002.py"
++--8 < --"docs_src/context/tutorial002.py"
+ ```
+ 
+ `ctx.read_resource` resolves the URI through the same registry that serves `resources/read`, so a tool gets what a client would get: an iterable of `ReadResourceContents`, one per content block. For this URI there is one:
+ 
+ ```python
+-contents.content    # 'fiction, non-fiction, poetry'
++contents.content  # 'fiction, non-fiction, poetry'
+ contents.mime_type  # 'text/plain'
+ ```
+ 
+@@ -95,7 +95,7 @@ contents.mime_type  # 'text/plain'
+ What a server offers is not fixed at import time. Register a tool at runtime, then tell the client:
+ 
+ ```python title="server.py" hl_lines="15-16"
+---8<-- "docs_src/context/tutorial003.py"
++--8 < --"docs_src/context/tutorial003.py"
+ ```
+ 
+ * `mcp.add_tool(recommend_book)` registers a plain function as a tool: name, description and schema derived exactly as `@mcp.tool()` would have.
+diff --git a/docs/tutorial/elicitation.md b/docs/tutorial/elicitation.md
+index df7ae477f26ba95fcfb3e0bdc49e98f2a83ceb98..7e753ba0892b8143cb0a0b3e52848d2c794ebf0d 100644
+--- a/docs/tutorial/elicitation.md
++++ b/docs/tutorial/elicitation.md
+@@ -14,7 +14,7 @@ There are two modes:
+ `ctx.elicit()` takes a message and a Pydantic model:
+ 
+ ```python title="server.py" hl_lines="9-11 20-23 25"
+---8<-- "docs_src/elicitation/tutorial001.py"
++--8 < --"docs_src/elicitation/tutorial001.py"
+ ```
+ 
+ * The **`Context`** parameter is what gives you `ctx.elicit`; any tool can take one. That object has its own chapter: **The Context**.
+@@ -84,7 +84,7 @@ A refusal is not an error. The tool decides what declining means (here, no booki
+ Some things must not go through the model or the client: credentials, card numbers, OAuth consent. For those you don't ask for data; you ask the user to go somewhere:
+ 
+ ```python title="server.py" hl_lines="10-14 23"
+---8<-- "docs_src/elicitation/tutorial002.py"
++--8 < --"docs_src/elicitation/tutorial002.py"
+ ```
+ 
+ * `ctx.elicit_url()` takes the message, the **URL** to visit, and an `elicitation_id` you choose: any string that identifies this elicitation within your server.
+@@ -98,7 +98,7 @@ Look at the second tool. When your server learns the out-of-band flow finished (
+ Servers ask. Clients answer by passing an **`elicitation_callback`** to `Client(...)`:
+ 
+ ```python title="client.py" hl_lines="7-8 19"
+---8<-- "docs_src/elicitation/tutorial003.py"
++--8 < --"docs_src/elicitation/tutorial003.py"
+ ```
+ 
+ * One callback handles both modes. `params` is a union of `ElicitRequestFormParams` and `ElicitRequestURLParams`; `isinstance` is the branch.
+diff --git a/docs/tutorial/first-steps.md b/docs/tutorial/first-steps.md
+index ccf1a32b50cf51aa26ce645e8c8338a7cf209099..66a51ec383e93fe6a25ed2c5879eb153da8e3088 100644
+--- a/docs/tutorial/first-steps.md
++++ b/docs/tutorial/first-steps.md
+@@ -35,7 +35,7 @@ A server exposes exactly three kinds of thing. What separates them is **who deci
+ ## One server, all three
+ 
+ ```python title="server.py" hl_lines="6 12 18"
+---8<-- "docs_src/first_steps/tutorial001.py"
++--8 < --"docs_src/first_steps/tutorial001.py"
+ ```
+ 
+ Three plain functions, three decorators. Each decorator is the entire registration:
+diff --git a/docs/tutorial/handling-errors.md b/docs/tutorial/handling-errors.md
+index 9ee6dd981785518ba7182765743bceb51f5f5ff0..246eb35693c7a295142de17e81dbf81b9879ed7f 100644
+--- a/docs/tutorial/handling-errors.md
++++ b/docs/tutorial/handling-errors.md
+@@ -11,7 +11,7 @@ This chapter is about choosing.
+ Take a tool that looks something up, and let the lookup miss:
+ 
+ ```python title="server.py" hl_lines="11-12"
+---8<-- "docs_src/handling_errors/tutorial001.py"
++--8 < --"docs_src/handling_errors/tutorial001.py"
+ ```
+ 
+ There is nothing MCP about those two lines. `get_author` raises a plain `ValueError`, the way any Python function would.
+@@ -19,8 +19,8 @@ There is nothing MCP about those two lines. `get_author` raises a plain `ValueEr
+ Call it with a title that isn't in the catalog and look at the result:
+ 
+ ```python
+-result.is_error            # True
+-result.content             # [TextContent(text="Error executing tool get_author: No book titled 'Nothing' in the catalog.")]
++result.is_error  # True
++result.content  # [TextContent(text="Error executing tool get_author: No book titled 'Nothing' in the catalog.")]
+ result.structured_content  # None
+ ```
+ 
+@@ -42,7 +42,7 @@ The model is the one calling your tool. It picked the arguments. So a tool error
+ Now swap `ValueError` for `MCPError`.
+ 
+ ```python title="server.py" hl_lines="1 3 15"
+---8<-- "docs_src/handling_errors/tutorial002.py"
++--8 < --"docs_src/handling_errors/tutorial002.py"
+ ```
+ 
+ `MCPError` is the SDK's **protocol error**. It is the one exception the tool wrapper does *not* catch: it propagates, and the whole `tools/call` request fails with a JSON-RPC error instead of a result.
+@@ -89,7 +89,7 @@ By that test, the second version of `get_author` made the wrong choice: a better
+ Resources draw the same line, and ship one named exception for the common case.
+ 
+ ```python title="server.py" hl_lines="2 13"
+---8<-- "docs_src/handling_errors/tutorial003.py"
++--8 < --"docs_src/handling_errors/tutorial003.py"
+ ```
+ 
+ `books://{title}` is a **template**. It matches *any* title, so "the URI is well-formed" and "the book exists" are two different questions, and only your function can answer the second one.
+diff --git a/docs/tutorial/lifespan.md b/docs/tutorial/lifespan.md
+index 97ea2d096499899d04e08cf440d9c0236b64c2cf..1d8a3f1047e4e94db718be34eea6abfbb2bea4e4 100644
+--- a/docs/tutorial/lifespan.md
++++ b/docs/tutorial/lifespan.md
+@@ -9,7 +9,7 @@ You don't want to build it on every call, and you do want to close it cleanly. T
+ A lifespan is an `@asynccontextmanager` that receives the server and `yield`s **one object**. Whatever you yield is available to every handler for as long as the server runs.
+ 
+ ```python title="server.py" hl_lines="25-31 34 38 40"
+---8<-- "docs_src/lifespan/tutorial001.py"
++--8 < --"docs_src/lifespan/tutorial001.py"
+ ```
+ 
+ Read it bottom-up:
+@@ -76,7 +76,7 @@ Write a bare `Context` instead and `lifespan_context` is typed as `dict[str, Any
+ Strip the server down to the lifecycle: give `Database` a `connected` flag, flip it in `connect()` and `disconnect()`, and add a tool that reports it.
+ 
+ ```python title="server.py" hl_lines="11 14 17 25 44"
+---8<-- "docs_src/lifespan/tutorial002.py"
++--8 < --"docs_src/lifespan/tutorial002.py"
+ ```
+ 
+ `database` lives at module level for one reason: so you can look at it from *outside* the server.
+diff --git a/docs/tutorial/logging.md b/docs/tutorial/logging.md
+index 628c4ce26878f07c88746a958b47704b2a7be071..3341a014fa61dc9cb4ee51e32cad29aef6d90cb6 100644
+--- a/docs/tutorial/logging.md
++++ b/docs/tutorial/logging.md
+@@ -9,7 +9,7 @@ What you do instead is what you do in every other Python program: the standard l
+ ## A tool that logs
+ 
+ ```python title="server.py" hl_lines="1 5 13"
+---8<-- "docs_src/logging/tutorial001.py"
++--8 < --"docs_src/logging/tutorial001.py"
+ ```
+ 
+ * `logging.getLogger(__name__)` gives you a logger named after your module. Create it once, at the top.
+@@ -19,7 +19,7 @@ What you do instead is what you do in every other Python program: the standard l
+     Call the tool and look at the whole result:
+ 
+     ```python
+-    result.content             # [TextContent(text="Found 3 books matching 'dune'.")]
++    result.content  # [TextContent(text="Found 3 books matching 'dune'.")]
+     result.structured_content  # {'result': "Found 3 books matching 'dune'."}
+     ```
+ 
+diff --git a/docs/tutorial/media.md b/docs/tutorial/media.md
+index a473c0bba23aec3e34831944c77cf2e2cd7e87b7..9776ec4d04154242c6d42464ad942cf1f9d74982 100644
+--- a/docs/tutorial/media.md
++++ b/docs/tutorial/media.md
+@@ -9,7 +9,7 @@ The SDK ships two helpers for binary results (**`Image`** and **`Audio`**) and a
+ Annotate the return type as `Image` and return one:
+ 
+ ```python title="server.py" hl_lines="14 16"
+---8<-- "docs_src/media/tutorial001.py"
++--8 < --"docs_src/media/tutorial001.py"
+ ```
+ 
+ * `Image` takes exactly one of `data` (raw bytes) or `path` (a file to read).
+@@ -19,7 +19,7 @@ Annotate the return type as `Image` and return one:
+ `Image` is an SDK convenience, not a protocol type. On the wire your return value becomes an **`ImageContent`** block (your bytes base64-encoded, plus the MIME type):
+ 
+ ```python
+-result.content             # [ImageContent(type="image", data="iVBORw0KGgoAAAANSUhEUg...", mime_type="image/png")]
++result.content  # [ImageContent(type="image", data="iVBORw0KGgoAAAANSUhEUg...", mime_type="image/png")]
+ result.structured_content  # None
+ ```
+ 
+@@ -46,13 +46,13 @@ Open the **Tools** tab and call `logo`. The result is not a string: it is an `im
+ `Audio` is the same shape:
+ 
+ ```python title="server.py" hl_lines="21-24"
+---8<-- "docs_src/media/tutorial002.py"
++--8 < --"docs_src/media/tutorial002.py"
+ ```
+ 
+ The result is an **`AudioContent`** block:
+ 
+ ```python
+-result.content             # [AudioContent(type="audio", data="UklGRjQAAABXQVZFZm1...", mime_type="audio/wav")]
++result.content  # [AudioContent(type="audio", data="UklGRjQAAABXQVZFZm1...", mime_type="audio/wav")]
+ result.structured_content  # None
+ ```
+ 
+@@ -78,7 +78,7 @@ A suffix it doesn't recognise falls back to `application/octet-stream`.
+ An `Icon` is metadata, not content. It doesn't carry the image; it points at one with a URI, and a client may fetch it and show it next to your server's name, a tool, a resource, or a prompt.
+ 
+ ```python title="server.py" hl_lines="5-6 8 11 17"
+---8<-- "docs_src/media/tutorial003.py"
++--8 < --"docs_src/media/tutorial003.py"
+ ```
+ 
+ * `src` is a URI the client can resolve: `https:`, or a `data:` URI if you want the icon embedded with no extra fetch.
+diff --git a/docs/tutorial/progress.md b/docs/tutorial/progress.md
+index 3267e89193e4399fc012438462927c5b3b37f47f..dcd24613713b68b7caca3a6f4dbfcb269259f24e 100644
+--- a/docs/tutorial/progress.md
++++ b/docs/tutorial/progress.md
+@@ -9,7 +9,7 @@ A tool that takes thirty seconds and says nothing for thirty seconds looks broke
+ Take a **`Context`** parameter and call `report_progress`:
+ 
+ ```python title="server.py" hl_lines="8 11"
+---8<-- "docs_src/progress/tutorial001.py"
++--8 < --"docs_src/progress/tutorial001.py"
+ ```
+ 
+ Three arguments, and you decide what they mean:
+@@ -97,7 +97,7 @@ Every `await ctx.report_progress(...)` on the server became one call to `show` o
+ Leave it out:
+ 
+ ```python title="server.py" hl_lines="20"
+---8<-- "docs_src/progress/tutorial002.py"
++--8 < --"docs_src/progress/tutorial002.py"
+ ```
+ 
+ The callback receives `total=None`. A client can still show *activity* ("3 imported so far...") but it can't show a percentage. Don't invent a total to get a prettier bar.
+diff --git a/docs/tutorial/prompts.md b/docs/tutorial/prompts.md
+index 44c23fa2e277ec05a18f64a08e3d979e29b79670..95cf6527e56760f22de5dd709d9591e17c362ddd 100644
+--- a/docs/tutorial/prompts.md
++++ b/docs/tutorial/prompts.md
+@@ -9,7 +9,7 @@ You declare one by putting `@mcp.prompt()` on a function that returns the text.
+ ## Your first prompt
+ 
+ ```python title="server.py" hl_lines="6-9"
+---8<-- "docs_src/prompts/tutorial001.py"
++--8 < --"docs_src/prompts/tutorial001.py"
+ ```
+ 
+ The SDK reads the same three things it read from your tools:
+@@ -82,7 +82,7 @@ A code review is one message. A debugging session is a conversation, and a promp
+ Return a list of messages instead of a `str`:
+ 
+ ```python title="server.py" hl_lines="2 13-20"
+---8<-- "docs_src/prompts/tutorial002.py"
++--8 < --"docs_src/prompts/tutorial002.py"
+ ```
+ 
+ * `UserMessage` and `AssistantMessage` come from `mcp.server.mcpserver.prompts.base`. Hand them a `str` and they wrap it in `TextContent` for you. The role is the class name.
+@@ -112,7 +112,7 @@ Notice the last one. Pre-filling an `assistant` turn is how you steer the model'
+ `review_code` is a function name, not a label. Give the client something better to put on the button, and describe each argument so the form explains itself:
+ 
+ ```python title="server.py" hl_lines="10-13"
+---8<-- "docs_src/prompts/tutorial003.py"
++--8 < --"docs_src/prompts/tutorial003.py"
+ ```
+ 
+ * `title="Code review"` is the human-readable name, exactly like a tool's `title`.
+diff --git a/docs/tutorial/resources.md b/docs/tutorial/resources.md
+index 749b8227d623faab2a5e3a68866e022894b3dbe5..40950cc00ccc7c2e7604af5bdfd790318518d795 100644
+--- a/docs/tutorial/resources.md
++++ b/docs/tutorial/resources.md
+@@ -9,7 +9,7 @@ You declare one by putting `@mcp.resource(uri)` on a plain Python function.
+ ## Your first resource
+ 
+ ```python title="server.py" hl_lines="6-8"
+---8<-- "docs_src/resources/tutorial001.py"
++--8 < --"docs_src/resources/tutorial001.py"
+ ```
+ 
+ It's the same shape as a tool, plus one thing: the **URI**. Resources are addressed, not named. A client asks for `config://app`, never for `get_config`.
+@@ -57,7 +57,7 @@ Open the URL it prints and go to the **Resources** tab. `config://app` is in the
+ One URI per record doesn't scale. Put a **placeholder** in the URI and a matching parameter on the function:
+ 
+ ```python title="server.py" hl_lines="12-13"
+---8<-- "docs_src/resources/tutorial002.py"
++--8 < --"docs_src/resources/tutorial002.py"
+ ```
+ 
+ `{user_id}` in the URI, `user_id: str` on the function. That is the entire contract.
+@@ -101,7 +101,7 @@ The placeholder syntax is RFC 6570: `{+path}` for multi-segment values, `{?q,lan
+ You're not limited to `str`. Give each resource a `mime_type` and return whatever fits:
+ 
+ ```python title="server.py" hl_lines="8-9 14-15 20-21"
+---8<-- "docs_src/resources/tutorial003.py"
++--8 < --"docs_src/resources/tutorial003.py"
+ ```
+ 
+ * `readme` returns a `str`, so it's sent as-is. This is the common case.
+diff --git a/docs/tutorial/structured-output.md b/docs/tutorial/structured-output.md
+index 7f20b670adcb68de5ba87ec231965a53dff21d16..7afd79f351628e7e91b44ad24cc76457762e6b6c 100644
+--- a/docs/tutorial/structured-output.md
++++ b/docs/tutorial/structured-output.md
+@@ -9,7 +9,7 @@ The short version: **the return type annotation is the output schema**. You alre
+ ## The output schema
+ 
+ ```python title="server.py" hl_lines="9"
+---8<-- "docs_src/structured_output/tutorial001.py"
++--8 < --"docs_src/structured_output/tutorial001.py"
+ ```
+ 
+ The line that matters is the signature: `-> int`.
+@@ -30,7 +30,7 @@ Because of it, the tool the SDK sends during `tools/list` carries an `output_sch
+ A bare `int` isn't a JSON object, so the SDK **wraps** it in `{"result": ...}`. Call the tool and both channels are filled:
+ 
+ ```python
+-result.content             # [TextContent(text="17")]
++result.content  # [TextContent(text="17")]
+ result.structured_content  # {"result": 17}
+ ```
+ 
+@@ -51,7 +51,7 @@ You return one Python value. The SDK fills in all three.
+ Declare the shape as a Pydantic `BaseModel` and return an instance:
+ 
+ ```python title="server.py" hl_lines="8-11 15"
+---8<-- "docs_src/structured_output/tutorial002.py"
++--8 < --"docs_src/structured_output/tutorial002.py"
+ ```
+ 
+ `WeatherData` **is** the schema now. No wrapper, no `result` key:
+@@ -97,7 +97,7 @@ Notice the `Field(description=...)` on `temperature` and `humidity` landed in th
+ Not every shape deserves a class. A `TypedDict` produces the same schema:
+ 
+ ```python title="server.py" hl_lines="8"
+---8<-- "docs_src/structured_output/tutorial003.py"
++--8 < --"docs_src/structured_output/tutorial003.py"
+ ```
+ 
+ A `TypedDict` is a plain `dict` at runtime, so that is what you build and return. The schema, the validation, and `structured_content` are identical to the `BaseModel` version (minus the descriptions, which `TypedDict` has no place for).
+@@ -107,7 +107,7 @@ A `TypedDict` is a plain `dict` at runtime, so that is what you build and return
+ Dataclasses work too, and so does any ordinary class whose attributes have type hints. The SDK builds a Pydantic model out of the annotations behind the scenes.
+ 
+ ```python title="server.py" hl_lines="8-9"
+---8<-- "docs_src/structured_output/tutorial004.py"
++--8 < --"docs_src/structured_output/tutorial004.py"
+ ```
+ 
+ Three spellings, one schema. Use whichever your codebase already has.
+@@ -117,7 +117,7 @@ Three spellings, one schema. Use whichever your codebase already has.
+ A `list[...]` isn't a JSON object either, so it gets the `{"result": ...}` wrapper, with your item type as a `$defs` reference inside it:
+ 
+ ```python title="server.py" hl_lines="15"
+---8<-- "docs_src/structured_output/tutorial005.py"
++--8 < --"docs_src/structured_output/tutorial005.py"
+ ```
+ 
+ ```json
+@@ -152,7 +152,7 @@ Ask for a two-day forecast and `structured_content` is `{"result": [{...}, {...}
+ `dict[str, ...]` is the one generic that already *is* a JSON object, so it isn't wrapped:
+ 
+ ```python title="server.py" hl_lines="9"
+---8<-- "docs_src/structured_output/tutorial006.py"
++--8 < --"docs_src/structured_output/tutorial006.py"
+ ```
+ 
+ ```json
+@@ -176,7 +176,7 @@ The keys must be `str`. A `dict[int, float]` can't be a JSON object, so it falls
+ You don't notice while you build the value by hand: Pydantic already made sure your `WeatherData` was a `WeatherData`. You notice the day the data comes from somewhere you don't control:
+ 
+ ```python title="server.py" hl_lines="9 21"
+---8<-- "docs_src/structured_output/tutorial007.py"
++--8 < --"docs_src/structured_output/tutorial007.py"
+ ```
+ 
+ The annotation promises `WeatherData`. The upstream response stopped sending `humidity`.
+@@ -201,7 +201,7 @@ Returning a plain `dict` from a `-> WeatherData` tool is fine, by the way. That'
+ Sometimes the return annotation is for your type checker, not for the protocol. Pass `structured_output=False` and the tool is text-only:
+ 
+ ```python title="server.py" hl_lines="6"
+---8<-- "docs_src/structured_output/tutorial008.py"
++--8 < --"docs_src/structured_output/tutorial008.py"
+ ```
+ 
+ No `output_schema`, no wrapping, no validation. `structured_content` is `None` and `content` is the string you returned.
+@@ -213,7 +213,7 @@ The opposite, `structured_output=True`, turns the automatic detection into a req
+ There is one way to end up unstructured without asking for it: return a class that has **no annotations on its body**.
+ 
+ ```python title="server.py" hl_lines="6-9"
+---8<-- "docs_src/structured_output/tutorial009.py"
++--8 < --"docs_src/structured_output/tutorial009.py"
+ ```
+ 
+ `Station` sets `name` and `online` inside `__init__`, but the *class* declares nothing. The SDK reads class annotations, finds none, and gives up.
+diff --git a/docs/tutorial/testing.md b/docs/tutorial/testing.md
+index 9e31aa095ff01a0a817af5a56d7f8cb895622bd0..3167c978213b011921dd1f38ed473e7d64cd0fa4 100644
+--- a/docs/tutorial/testing.md
++++ b/docs/tutorial/testing.md
+@@ -9,7 +9,7 @@ No subprocess. No port. No transport at all. It's the same idea as FastAPI's `Te
+ Let's assume you have a simple server with a single tool:
+ 
+ ```python title="server.py"
+---8<-- "docs_src/testing/tutorial001.py"
++--8 < --"docs_src/testing/tutorial001.py"
+ ```
+ 
+ To run the test below you'll need two extra (development) dependencies:
+diff --git a/docs/tutorial/tools.md b/docs/tutorial/tools.md
+index 774638856d34b167b2b243f01c21dac831dbfe64..98f06ed03faa0f497eb1ee840684c71f74f0afbb 100644
+--- a/docs/tutorial/tools.md
++++ b/docs/tutorial/tools.md
+@@ -7,7 +7,7 @@ You declare one by putting `@mcp.tool()` on a plain Python function. That's the
+ ## Your first tool
+ 
+ ```python title="server.py" hl_lines="6-8"
+---8<-- "docs_src/tools/tutorial001.py"
++--8 < --"docs_src/tools/tutorial001.py"
+ ```
+ 
+ Look at what you wrote. There are no schemas, no JSON, no protocol, just a function. The SDK reads three things from it:
+@@ -43,7 +43,7 @@ Both arguments are in `required` because neither has a default. You'll fix that
+ Call the tool with `{"query": "dune", "limit": 5}` and the result has two parts:
+ 
+ ```python
+-result.content             # [TextContent(text="Found 3 books matching 'dune' (showing up to 5).")]
++result.content  # [TextContent(text="Found 3 books matching 'dune' (showing up to 5).")]
+ result.structured_content  # {'result': "Found 3 books matching 'dune' (showing up to 5)."}
+ ```
+ 
+@@ -68,7 +68,7 @@ The Inspector renders a form with a required `query` text field and a required `
+ Give a parameter a default value and it stops being required. That's it. It's just Python.
+ 
+ ```python title="server.py" hl_lines="7"
+---8<-- "docs_src/tools/tutorial002.py"
++--8 < --"docs_src/tools/tutorial002.py"
+ ```
+ 
+ The schema follows:
+@@ -94,7 +94,7 @@ Type hints get you a long way, but sometimes you want to *describe* an argument,
+ Wrap the type in `Annotated` and add a Pydantic `Field`:
+ 
+ ```python title="server.py" hl_lines="12-14"
+---8<-- "docs_src/tools/tutorial003.py"
++--8 < --"docs_src/tools/tutorial003.py"
+ ```
+ 
+ Three new things, all on the parameters:
+@@ -123,7 +123,7 @@ Three new things, all on the parameters:
+ When a tool takes more than a couple of arguments, group them into a Pydantic model:
+ 
+ ```python title="server.py" hl_lines="8-11 15"
+---8<-- "docs_src/tools/tutorial004.py"
++--8 < --"docs_src/tools/tutorial004.py"
+ ```
+ 
+ The `Book` schema is nested inside the tool's input schema (as a `$defs` reference), the model fills it in as a JSON object, and your function receives a **real `Book` instance**, already validated, with `.title`, `.author` and `.year` attributes.
+@@ -143,7 +143,7 @@ There is nothing else to configure.
+ Everything the SDK infers, you can override in the decorator:
+ 
+ ```python title="server.py" hl_lines="8-11"
+---8<-- "docs_src/tools/tutorial005.py"
++--8 < --"docs_src/tools/tutorial005.py"
+ ```
+ 
+ * `title` is a human-readable name for UIs. Clients show *"Search the catalog"* instead of `search_books`.
+diff --git a/examples/servers/simple-pagination/README.md b/examples/servers/simple-pagination/README.md
+index 4cab40fd34e098d81b753880e8b58b526e8ab3d0..a44cd1f0d70cdb23c34b8c70f89d2530e66c21ae 100644
+--- a/examples/servers/simple-pagination/README.md
++++ b/examples/servers/simple-pagination/README.md
+@@ -33,9 +33,10 @@ from mcp.client.stdio import StdioServerParameters, stdio_client
+ 
+ 
+ async def main():
+-    async with stdio_client(
+-        StdioServerParameters(command="uv", args=["run", "mcp-simple-pagination"])
+-    ) as (read, write):
++    async with stdio_client(StdioServerParameters(command="uv", args=["run", "mcp-simple-pagination"])) as (
++        read,
++        write,
++    ):
+         async with ClientSession(read, write) as session:
+             await session.initialize()
+ 
+diff --git a/examples/servers/simple-prompt/README.md b/examples/servers/simple-prompt/README.md
+index c837da876e284aff6dc72303148466aea8be2bc4..1ee919bdabae0f801c0c8b4296945726c09cd0b8 100644
+--- a/examples/servers/simple-prompt/README.md
++++ b/examples/servers/simple-prompt/README.md
+@@ -30,9 +30,7 @@ from mcp.client.stdio import StdioServerParameters, stdio_client
+ 
+ 
+ async def main():
+-    async with stdio_client(
+-        StdioServerParameters(command="uv", args=["run", "mcp-simple-prompt"])
+-    ) as (read, write):
++    async with stdio_client(StdioServerParameters(command="uv", args=["run", "mcp-simple-prompt"])) as (read, write):
+         async with ClientSession(read, write) as session:
+             await session.initialize()
+ 
+diff --git a/examples/servers/simple-resource/README.md b/examples/servers/simple-resource/README.md
+index 1d8fb7c2aa0058402ed5871b3533477a13034a6c..cfabeb83e55dfe4e57bd9e30591d2c977185b20d 100644
+--- a/examples/servers/simple-resource/README.md
++++ b/examples/servers/simple-resource/README.md
+@@ -28,9 +28,7 @@ from mcp.client.stdio import StdioServerParameters, stdio_client
+ 
+ 
+ async def main():
+-    async with stdio_client(
+-        StdioServerParameters(command="uv", args=["run", "mcp-simple-resource"])
+-    ) as (read, write):
++    async with stdio_client(StdioServerParameters(command="uv", args=["run", "mcp-simple-resource"])) as (read, write):
+         async with ClientSession(read, write) as session:
+             await session.initialize()
+ 
+@@ -44,5 +42,4 @@ async def main():
+ 
+ 
+ asyncio.run(main())
+-
+ ```
+diff --git a/examples/servers/simple-tool/README.md b/examples/servers/simple-tool/README.md
+index 7d3759f9de26d3a290ebb7e49d7dc0f72cb496cd..f790bf16e90f2e55b9fe56db728d5f521c8028e9 100644
+--- a/examples/servers/simple-tool/README.md
++++ b/examples/servers/simple-tool/README.md
+@@ -28,9 +28,7 @@ from mcp.client.stdio import StdioServerParameters, stdio_client
+ 
+ 
+ async def main():
+-    async with stdio_client(
+-        StdioServerParameters(command="uv", args=["run", "mcp-simple-tool"])
+-    ) as (read, write):
++    async with stdio_client(StdioServerParameters(command="uv", args=["run", "mcp-simple-tool"])) as (read, write):
+         async with ClientSession(read, write) as session:
+             await session.initialize()
+ 
+@@ -44,5 +42,4 @@ async def main():
+ 
+ 
+ asyncio.run(main())
+-
+ ```

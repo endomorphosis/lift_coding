@@ -1,0 +1,18 @@
+{
+  "head": "e4b8c4bba2fc7d5b7484b9021cbb9a5bcfc5e7d4",
+  "previous_full_audit": "final-static-audit.json",
+  "delta_from": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f",
+  "paths": [
+    "ipfs_accelerate_py/agent_supervisor/prompt/README.md",
+    "ipfs_accelerate_py/agent_supervisor/prompt/acceptance_bindings.py",
+    "ipfs_accelerate_py/agent_supervisor/runtime/router_implementation_runner.py",
+    "test/api/test_agent_supervisor_acceptance_bindings.py",
+    "test/api/test_query_reference_policy.py",
+    "test/api/test_representation_displacement.py",
+    "test/api/test_semantic_router_integration.py",
+    "test/api/test_source_input_policy.py"
+  ],
+  "syntax_errors": [],
+  "high_confidence_secret_candidates": [],
+  "passed": true
+}

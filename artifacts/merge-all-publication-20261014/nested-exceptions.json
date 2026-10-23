@@ -1,0 +1,453 @@
+{
+  "schema": "nested_publication_exceptions_v1",
+  "created_at": "2026-10-14T04:21:25.098532+00:00",
+  "source_audit": "nested-repository-audit.json",
+  "source_audit_completed_at": "2026-10-14T04:18:02.752287+00:00",
+  "scope": "Read-only audit of 304 nested Git directories using cached remotes and frozen primary integration heads. No further scan, fetch, merge, push, source edit, or ref deletion performed.",
+  "all_branches_merged": false,
+  "refs_preserved": true,
+  "counts": {
+    "repositories_audited": 304,
+    "unread_repositories": 0,
+    "distinct_origin_head_pairs": 1367,
+    "exact_published_tree_head_rows": 79,
+    "historical_gitlink_only_head_rows": 52,
+    "historical_source_head_rows_retained": 26,
+    "historical_source_distinct_trees_retained": 19,
+    "accelerate_historical_heads": 22,
+    "accelerate_historical_distinct_trees": 16,
+    "mcp_historical_heads": 4,
+    "mcp_historical_distinct_trees": 3,
+    "active_post_cutoff_heads_retained": 1
+  },
+  "classification_notes": {
+    "exact_published_tree_head_rows": "79 head rows have exact tree matches in cached published history; tree equivalence is source evidence, not proof that original raw commit ancestry was merged. Seven are empty retained snapshots and must not replace current source.",
+    "historical_gitlink_only_head_rows": "52 head rows change only submodule commit pointers versus their cached-origin merge base; no direct source-file delta. Preserve those original refs rather than restore stale pointers.",
+    "counting": "Head-row counts include clone-local records. Full audit has 159 distinct origin/head pairs across 160 outstanding head rows; 26 historical source rows below contain 26 distinct commit heads and 19 distinct origin/tree pairs."
+  },
+  "reason_definitions": {
+    "raw_oversized_historical_accelerate_source": "August FVT retry/rescue or October retained-source snapshots are not ancestors of the frozen primary candidate and are not exact published-tree equivalents. Changed source/configuration/receipt paths still differ. Every one of these 22 heads contains a 142,880,768-byte bundles/index.duckdb blob; a raw ancestry merge would reintroduce a GitHub-oversized object. Preserve refs; any useful source recovery requires a separate path-level review and filtered publication. No source-ready conclusion is claimed.",
+    "unreviewed_historical_mcp_source_snapshot": "October 4 retained-source snapshot differs from its cached origin baseline and has no exact tree equivalence in the inspected cached published history. Four heads represent three unique trees. Source-level reconciliation has not been reviewed or tested; preserve refs and exclude from this publication."
+  },
+  "frozen_primary_comparison_heads": {
+    "github.com/endomorphosis/ipfs_accelerate_py": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f",
+    "github.com/endomorphosis/ipfs_datasets_py": "0897aa1d4252e175477addac5417028241de596a",
+    "github.com/endomorphosis/ipfs_kit_py": "40c98c71b95be750509ffdb21e7e5494d91b4e79"
+  },
+  "oversized_blobs": [
+    {
+      "blob": "14d6706502842110d16161a81d168281d6989a1c",
+      "bytes": 142880768,
+      "path": "data/agent_supervisor/formal_verification_tactician_readiness/bundles/index.duckdb"
+    }
+  ],
+  "historical_source_exceptions": [
+    {
+      "origin": "github.com/endomorphosis/Mcp-Plus-Plus",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_accelerate_py/mcplusplus",
+      "head": "2068d848e40e0da11ccc2e4ac0580b3dfeb014b6",
+      "tree": "de8ec8d9f7cacc41e4ed630150f0883b7d44acb9",
+      "branch_refs": [
+        "refs/heads/publication/wip-20261004/26865a63c1e70607818e2b3b"
+      ],
+      "branch_ref_count": 1,
+      "date": "2026-10-04 18:34:13 +0000",
+      "reason": "unreviewed_historical_mcp_source_snapshot",
+      "changed_path_count": 47,
+      "cached_origin_default": "97c62bd060ebb479ee43745a3863673929146b25"
+    },
+    {
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_accelerate_py",
+      "head": "04a471cec62baab2c4d5c1928c906ce4f9a7cd00",
+      "tree": "f3d286d1cee62542ca51719a9a0d5b1f2b0ad5e2",
+      "branch_refs": [
+        "refs/heads/publication/wip-20261004/32aa366c048f82eae4ddf00d"
+      ],
+      "branch_ref_count": 1,
+      "date": "2026-10-04 18:29:36 +0000",
+      "reason": "raw_oversized_historical_accelerate_source",
+      "changed_path_count": 86,
+      "compared_to": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f",
+      "changed_source_paths_differing_primary": 33
+    },
+    {
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_accelerate_py",
+      "head": "248abba933e0d606b6ce22d962c60332cb6edad4",
+      "tree": "e1f5a1587c32d0971cb1983241b1026093f55760",
+      "branch_refs": [
+        "refs/heads/publication/wip-20261004/3cf8bc323d06245b3dd5cf91"
+      ],
+      "branch_ref_count": 1,
+      "date": "2026-10-04 18:29:47 +0000",
+      "reason": "raw_oversized_historical_accelerate_source",
+      "changed_path_count": 71,
+      "compared_to": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f",
+      "changed_source_paths_differing_primary": 33
+    },
+    {
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_accelerate_py",
+      "head": "2eca1919cb7712b14d806accc983bbdb4f161351",
+      "tree": "1cc78dec0f58cf2515e359ee47b5cec4dfa2bd31",
+      "branch_refs": [
+        "refs/heads/publication/wip-20261004/bda298a36155c70748f62697"
+      ],
+      "branch_ref_count": 1,
+      "date": "2026-10-04 18:29:28 +0000",
+      "reason": "raw_oversized_historical_accelerate_source",
+      "changed_path_count": 64,
+      "compared_to": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f",
+      "changed_source_paths_differing_primary": 29
+    },
+    {
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_accelerate_py",
+      "head": "327bb0093060be1bf07ebfcd058803d8b1d13c48",
+      "tree": "f82ca2ddeeeb75ce0f46eab205cbe8f1b6cc2d31",
+      "branch_refs": [
+        "refs/heads/publication/wip-20261004/c26a67a1b201911e754695ba"
+      ],
+      "branch_ref_count": 1,
+      "date": "2026-10-04 18:29:35 +0000",
+      "reason": "raw_oversized_historical_accelerate_source",
+      "changed_path_count": 83,
+      "compared_to": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f",
+      "changed_source_paths_differing_primary": 33
+    },
+    {
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_accelerate_py",
+      "head": "3f60acf359b55c6175f5f54ccf3a072904ad40d0",
+      "tree": "d01b0f945ef968e31d9df3b8a5a67d1d27c02c07",
+      "branch_refs": [
+        "refs/heads/implementation/fvt-099-ca00feac74c5-attempt-1-1785828711"
+      ],
+      "branch_ref_count": 1,
+      "date": "2026-08-04 07:30:19 +0000",
+      "reason": "raw_oversized_historical_accelerate_source",
+      "changed_path_count": 69,
+      "compared_to": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f",
+      "changed_source_paths_differing_primary": 19
+    },
+    {
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_accelerate_py",
+      "head": "40e67c2f9e43ca687f9214d1f1883c0e086ee00c",
+      "tree": "ffbdd26e06dcc730a8e99c964d78abad92155acb",
+      "branch_refs": [
+        "refs/heads/publication/wip-20261004/a6c3fd5b59c8ee3975e3b321"
+      ],
+      "branch_ref_count": 1,
+      "date": "2026-10-04 18:29:49 +0000",
+      "reason": "raw_oversized_historical_accelerate_source",
+      "changed_path_count": 79,
+      "compared_to": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f",
+      "changed_source_paths_differing_primary": 33
+    },
+    {
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_accelerate_py",
+      "head": "424c215f3a7a8276e54a9518ff9203850dfbfe94",
+      "tree": "64f683da8b6f545272471e9bc5f7cf5b53136042",
+      "branch_refs": [
+        "refs/heads/rescue/fvt-088-227e71970b35-attempt-1-1785806388-failed-validation"
+      ],
+      "branch_ref_count": 1,
+      "date": "2026-08-04 01:25:38 +0000",
+      "reason": "raw_oversized_historical_accelerate_source",
+      "changed_path_count": 50,
+      "compared_to": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f",
+      "changed_source_paths_differing_primary": 15
+    },
+    {
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_accelerate_py",
+      "head": "5f4dfb89eb1a6290263cac28594f86bef3e57370",
+      "tree": "e1f5a1587c32d0971cb1983241b1026093f55760",
+      "branch_refs": [
+        "refs/heads/publication/wip-20261004/7b4b705d597cb4fb394779fa"
+      ],
+      "branch_ref_count": 1,
+      "date": "2026-10-04 18:29:40 +0000",
+      "reason": "raw_oversized_historical_accelerate_source",
+      "changed_path_count": 71,
+      "compared_to": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f",
+      "changed_source_paths_differing_primary": 33
+    },
+    {
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_accelerate_py",
+      "head": "6d210b35559eeba973589457332eed1f1f341261",
+      "tree": "1c6c481953f659c0840113363b16cbe508171e34",
+      "branch_refs": [
+        "refs/heads/publication/wip-20261004/82e8c879ecab98759e462107"
+      ],
+      "branch_ref_count": 1,
+      "date": "2026-10-04 18:29:35 +0000",
+      "reason": "raw_oversized_historical_accelerate_source",
+      "changed_path_count": 88,
+      "compared_to": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f",
+      "changed_source_paths_differing_primary": 33
+    },
+    {
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_accelerate_py",
+      "head": "78afa28ebdeda50e36ab2ede1116a6f0db5f6dce",
+      "tree": "9192a6688a4a6248de7603aa37a9103a82bc21e7",
+      "branch_refs": [
+        "refs/heads/implementation/fvt-089-74ebf612ce3f-attempt-3-1785827133",
+        "refs/heads/rescue/worktree/implementation-fvt-089-74ebf612ce3f-attempt-3-1785827133-c61aa242535f"
+      ],
+      "branch_ref_count": 2,
+      "date": "2026-08-04 07:05:11 +0000",
+      "reason": "raw_oversized_historical_accelerate_source",
+      "changed_path_count": 57,
+      "compared_to": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f",
+      "changed_source_paths_differing_primary": 19
+    },
+    {
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_accelerate_py",
+      "head": "7995dc817ab14f5343ef973b0f80014ecac4f133",
+      "tree": "c4f511000a904cdbd85f216fdd284eba61dace30",
+      "branch_refs": [
+        "refs/heads/implementation/fvt-089-74ebf612ce3f-attempt-1-1785809412"
+      ],
+      "branch_ref_count": 1,
+      "date": "2026-08-04 02:08:40 +0000",
+      "reason": "raw_oversized_historical_accelerate_source",
+      "changed_path_count": 50,
+      "compared_to": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f",
+      "changed_source_paths_differing_primary": 15
+    },
+    {
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_accelerate_py",
+      "head": "7a4aaab668072baeea165c88737a3b636cbc3766",
+      "tree": "7a443774e68c60ecc1dc16f73e268eb9ee388c59",
+      "branch_refs": [
+        "refs/heads/implementation/fvt-099-ca00feac74c5-attempt-2-1785829419"
+      ],
+      "branch_ref_count": 1,
+      "date": "2026-08-04 07:32:39 +0000",
+      "reason": "raw_oversized_historical_accelerate_source",
+      "changed_path_count": 72,
+      "compared_to": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f",
+      "changed_source_paths_differing_primary": 19
+    },
+    {
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_accelerate_py",
+      "head": "91508f2649c4bf7a582f28db129862cc6467adab",
+      "tree": "dd07531561c474c80ea776e84abaeb2638c6cd35",
+      "branch_refs": [
+        "refs/heads/publication/wip-20261004/454163474b64ec7a2ecc1a48"
+      ],
+      "branch_ref_count": 1,
+      "date": "2026-10-04 18:29:54 +0000",
+      "reason": "raw_oversized_historical_accelerate_source",
+      "changed_path_count": 64,
+      "compared_to": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f",
+      "changed_source_paths_differing_primary": 29
+    },
+    {
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_accelerate_py",
+      "head": "997fd27e75783ff3ad8c644e2284fa5b17e5e92e",
+      "tree": "dfb75bfca70963fca68691a3aa6817eb888a6014",
+      "branch_refs": [
+        "refs/heads/implementation/fvt-095-3b3215b6610f-attempt-1-1785809956",
+        "refs/heads/implementation/fvt-096-502e1abaa4ba-attempt-1-1785809956"
+      ],
+      "branch_ref_count": 2,
+      "date": "2026-08-04 02:18:40 +0000",
+      "reason": "raw_oversized_historical_accelerate_source",
+      "changed_path_count": 53,
+      "compared_to": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f",
+      "changed_source_paths_differing_primary": 17
+    },
+    {
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_accelerate_py",
+      "head": "9b33df28c885085c9b0dfd5a2c58e3143ab98e3c",
+      "tree": "04f859e8a76c8b56454b9eb919cc61e7c22fb366",
+      "branch_refs": [
+        "refs/heads/rescue/worktree/implementation-fvt-095-3b3215b6610f-attempt-1-1785809956-69b36d60f7d4"
+      ],
+      "branch_ref_count": 1,
+      "date": "2026-08-05 05:44:24 +0000",
+      "reason": "raw_oversized_historical_accelerate_source",
+      "changed_path_count": 67,
+      "compared_to": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f",
+      "changed_source_paths_differing_primary": 31
+    },
+    {
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_accelerate_py",
+      "head": "9fea9f355f9a2bfd8f1480b91e57554fcd7cb672",
+      "tree": "e898e8457edeefdeffc4d2f0ec7d91fbbb07a430",
+      "branch_refs": [
+        "refs/heads/publication/wip-20261004/a770de21ccf47889a0b218cd"
+      ],
+      "branch_ref_count": 1,
+      "date": "2026-10-04 18:29:34 +0000",
+      "reason": "raw_oversized_historical_accelerate_source",
+      "changed_path_count": 64,
+      "compared_to": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f",
+      "changed_source_paths_differing_primary": 29
+    },
+    {
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_accelerate_py",
+      "head": "aaf8cfc1007cb37ff2ec0d438b47fd992f54ba43",
+      "tree": "0bfee002e78b2bfcb95adda5f15aaa7f3c2c0da8",
+      "branch_refs": [
+        "refs/heads/backup/pre-duckdb-strip"
+      ],
+      "branch_ref_count": 1,
+      "date": "2026-08-04 22:30:12 +0000",
+      "reason": "raw_oversized_historical_accelerate_source",
+      "changed_path_count": 94,
+      "compared_to": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f",
+      "changed_source_paths_differing_primary": 26
+    },
+    {
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_accelerate_py",
+      "head": "ccff4be18d4f38468b4703354321c39d059f98a3",
+      "tree": "04f859e8a76c8b56454b9eb919cc61e7c22fb366",
+      "branch_refs": [
+        "refs/heads/rescue/worktree/implementation-fvt-096-502e1abaa4ba-attempt-1-1785809956-160eb9d5efee"
+      ],
+      "branch_ref_count": 1,
+      "date": "2026-08-05 05:45:10 +0000",
+      "reason": "raw_oversized_historical_accelerate_source",
+      "changed_path_count": 67,
+      "compared_to": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f",
+      "changed_source_paths_differing_primary": 31
+    },
+    {
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_accelerate_py",
+      "head": "e57a65ca05a1bcec9929e9a878729fea48bb52c4",
+      "tree": "dd07531561c474c80ea776e84abaeb2638c6cd35",
+      "branch_refs": [
+        "refs/heads/publication/wip-20261004/a76cddea5957bbeb4645c908"
+      ],
+      "branch_ref_count": 1,
+      "date": "2026-10-04 18:29:27 +0000",
+      "reason": "raw_oversized_historical_accelerate_source",
+      "changed_path_count": 64,
+      "compared_to": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f",
+      "changed_source_paths_differing_primary": 29
+    },
+    {
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_accelerate_py",
+      "head": "eb9694bffa380e12322a08cad93e94297e41b9d3",
+      "tree": "e1f5a1587c32d0971cb1983241b1026093f55760",
+      "branch_refs": [
+        "refs/heads/publication/wip-20261004/450810ad4ddff53f0e60fff0"
+      ],
+      "branch_ref_count": 1,
+      "date": "2026-10-04 18:29:48 +0000",
+      "reason": "raw_oversized_historical_accelerate_source",
+      "changed_path_count": 71,
+      "compared_to": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f",
+      "changed_source_paths_differing_primary": 33
+    },
+    {
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_accelerate_py",
+      "head": "eefac4abe142e393b6053d5b43caf8245371b568",
+      "tree": "e1f5a1587c32d0971cb1983241b1026093f55760",
+      "branch_refs": [
+        "refs/heads/publication/wip-20261004/cf52e961dccdda718560b94b"
+      ],
+      "branch_ref_count": 1,
+      "date": "2026-10-04 18:29:13 +0000",
+      "reason": "raw_oversized_historical_accelerate_source",
+      "changed_path_count": 71,
+      "compared_to": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f",
+      "changed_source_paths_differing_primary": 33
+    },
+    {
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_accelerate_py",
+      "head": "f2fe7a6c45f49243ec5e2beb8613e2989f7dde8e",
+      "tree": "ffbdd26e06dcc730a8e99c964d78abad92155acb",
+      "branch_refs": [
+        "refs/heads/publication/wip-20261004/663c9c58ff4442fba0a5bac8"
+      ],
+      "branch_ref_count": 1,
+      "date": "2026-10-04 18:29:45 +0000",
+      "reason": "raw_oversized_historical_accelerate_source",
+      "changed_path_count": 79,
+      "compared_to": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f",
+      "changed_source_paths_differing_primary": 33
+    },
+    {
+      "origin": "github.com/endomorphosis/Mcp-Plus-Plus",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_accelerate_py/mcplusplus",
+      "head": "c45fb824304747ef850657887482841a0ff96893",
+      "tree": "368acb1d47eb97ecf341b8f5e566247e501eddd2",
+      "branch_refs": [
+        "refs/heads/publication/wip-20261004/ec8ba3bf29e8568866de5067"
+      ],
+      "branch_ref_count": 1,
+      "date": "2026-10-04 18:35:54 +0000",
+      "reason": "unreviewed_historical_mcp_source_snapshot",
+      "changed_path_count": 38,
+      "cached_origin_default": "15c1816d6c63a2b11edd505704f6a04a9abc6167"
+    },
+    {
+      "origin": "github.com/endomorphosis/Mcp-Plus-Plus",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_accelerate_py/mcplusplus",
+      "head": "10f2e5780549cd16dd33d9ea962a60ef7a2fcf6e",
+      "tree": "51c05ee98abd11df052d9e1a91293193856f3a53",
+      "branch_refs": [
+        "refs/heads/publication/wip-20261004/1640cbf6f12b3cc741ed1893"
+      ],
+      "branch_ref_count": 1,
+      "date": "2026-10-04 18:34:33 +0000",
+      "reason": "unreviewed_historical_mcp_source_snapshot",
+      "changed_path_count": 38,
+      "cached_origin_default": "15c1816d6c63a2b11edd505704f6a04a9abc6167"
+    },
+    {
+      "origin": "github.com/endomorphosis/Mcp-Plus-Plus",
+      "git_dir_relative": "hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_accelerate_py/mcplusplus",
+      "head": "265b455edd527862846410f1813d5d2bc0d26c42",
+      "tree": "de8ec8d9f7cacc41e4ed630150f0883b7d44acb9",
+      "branch_refs": [
+        "refs/heads/publication/wip-20261004/f69951ded757e61d49783a4c"
+      ],
+      "branch_ref_count": 1,
+      "date": "2026-10-04 18:30:42 +0000",
+      "reason": "unreviewed_historical_mcp_source_snapshot",
+      "changed_path_count": 47,
+      "cached_origin_default": "97c62bd060ebb479ee43745a3863673929146b25"
+    }
+  ],
+  "active_work_exceptions": [
+    {
+      "origin": "github.com/endomorphosis/ipfs_accelerate_py",
+      "head": "4b9767c092f3f9113b3a0ee6378f107daa0312f1",
+      "tree": "08b58508a816ab7406e6a3de54e1f3eda3b8b63a",
+      "branch_refs": [
+        "refs/heads/agent/legal-autoformalization-source-alignment-supervisor-20261014"
+      ],
+      "reason": "Active branch advanced after the accepted campaign cutoff e3c5fe368dac47307f47603216e18aeb188dc1e1; retain and exclude from this frozen publication."
+    }
+  ],
+  "known_rewritten_archive_exception": {
+    "origin": "github.com/endomorphosis/ipfs_datasets_py",
+    "head": "b8a9bb35a8234d1c12204f2bae34d2a0c2635056",
+    "published_replacement": "4ecd618ec87cec710480cc204c3b4050886bd93f",
+    "reason": "Prior audit found source equivalence except four raw evidence.tar.xz archives replaced by .hf.json pointers; preserve raw original ref without remerging its archive ancestry.",
+    "evidence": "datasets-audit.json"
+  },
+  "recommendation": "Publish the separately reviewed integration candidates; retain every exception ref above and report these outstanding historical/live-work exceptions explicitly."
+}

@@ -1,0 +1,68 @@
+[
+  {
+    "view": "05-mcp-control-alone",
+    "errors": [
+      "console: Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "console: Failed to load resource: the server responded with a status of 404 (File not found)",
+      "console: Failed to load resource: the server responded with a status of 404 (File not found)",
+      "console: Failed to launch MCP Control: Error: Gateway control catalog returned HTTP 404.\n    at http://127.0.0.1:8901/js/live-tool-gateway.js:61:17\n    at async controlsFor (http://127.0.0.1:8901/js/live-tool-"
+    ]
+  },
+  {
+    "view": "06-mcp-plus-plus-app",
+    "errors": [
+      "console: Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "console: Failed to load resource: the server responded with a status of 404 (File not found)",
+      "console: Failed to load resource: the server responded with a status of 404 (File not found)",
+      "console: Failed to launch MCP++ Explorer: Error: Gateway control catalog returned HTTP 404.\n    at http://127.0.0.1:8901/js/live-tool-gateway.js:61:17\n    at async controlsFor (http://127.0.0.1:8901/js/live-to",
+      "console: Failed to load resource: the server responded with a status of 404 (File not found)",
+      "console: Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))",
+      "console: Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))",
+      "console: Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))",
+      "console: Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))",
+      "console: Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))",
+      "console: Failed to load resource: the server responded with a status of 404 (File not found)",
+      "console: Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))",
+      "console: Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))",
+      "console: Failed to load resource: the server responded with a status of 404 (File not found)",
+      "console: Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))",
+      "console: Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))",
+      "console: Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))",
+      "console: Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))",
+      "console: Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))",
+      "console: Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))",
+      "console: Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))",
+      "console: Failed to load resource: the server responded with a status of 404 (File not found)",
+      "console: Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))",
+      "console: Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))",
+      "console: Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))",
+      "console: Failed to load resource: the server responded with a status of 404 (File not found)",
+      "console: Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))",
+      "console: Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))",
+      "console: Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))",
+      "console: Failed to load resource: the server responded with a status of 501 (Unsupported method ('POST'))",
+      "console: Failed to load resource: the server responded with a status of 404 (File not found)"
+    ],
+    "winText": [
+      "※\n                MCP++ Explorer\n                \n                    −\n                    □\n                    ×\n    ",
+      "※\n                MCP++ Explorer\n                \n                    −\n                    □\n                    ×\n    ",
+      "※\n                MCP++ Explorer\n                \n                    −\n                    □\n                    ×",
+      "※"
+    ]
+  },
+  {
+    "view": "07-agent-supervisor-steering",
+    "errors": [
+      "console: Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+      "console: Failed to load resource: the server responded with a status of 404 (File not found)",
+      "console: Failed to load resource: the server responded with a status of 404 (File not found)",
+      "console: Failed to launch Agent Supervisor: Error: Gateway control catalog returned HTTP 404.\n    at http://127.0.0.1:8901/js/live-tool-gateway.js:61:17\n    at async controlsFor (http://127.0.0.1:8901/js/live-"
+    ],
+    "aria": {
+      "ariaInvalid": 0,
+      "ariaDescribedby": 0,
+      "ariaErrormessage": 0,
+      "sampleDescribedby": null
+    }
+  }
+]

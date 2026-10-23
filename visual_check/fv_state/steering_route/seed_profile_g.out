@@ -1,0 +1,28 @@
+local validation: goal/subgoal/branch/selection/task all valid
+{
+  "goal_cid": "baguqeerauvuvpkvpstl3a5vzxhikaib3ghjml3x7f7tov3e7pcn4fou7fjpa",
+  "subgoal_cid": "baguqeeraiva5veye77nttk6onn7zfpfd2hwn6uqbxpudacoqf5xnf2z3fnqa",
+  "branch_cid": "baguqeerampdzafe6id2occnneumv4vje72kckgcnhdyassfdkiqcqqkfzqbq",
+  "selection_cid": "baguqeeralyfxudpkwm53nsafxveyjvn3ae7gyagxo7ueukufhmujqwbzsrfa",
+  "task_cid": "baguqeeraeap3lbljfvub7cws37dmtb2dwti2scbdhk4hou7rikrbfir7utgq",
+  "mutation_outcomes": {
+    "goal": {
+      "ok": false,
+      "error": "mcp++/goals/create -> {\"code\": -32042, \"message\": \"Profile C authority did not validate\", \"data\": {\"code\": \"G_AUTHORITY_DENIED\", \"message\": \"Profile C authority did not validate\", \"retryable\": false}}"
+    },
+    "decompose": {
+      "ok": false,
+      "error": "mcp++/goals/decompose -> {\"code\": -32041, \"message\": \"linked artifact is unavailable\", \"data\": {\"code\": \"G_CID_MISMATCH\", \"message\": \"linked artifact is unavailable\", \"retryable\": false, \"details\": {\"path\": \"/goal_cid\"}}}"
+    },
+    "select": {
+      "ok": false,
+      "error": "mcp++/goals/select -> {\"code\": -32041, \"message\": \"linked artifact is unavailable\", \"data\": {\"code\": \"G_CID_MISMATCH\", \"message\": \"linked artifact is unavailable\", \"retryable\": false, \"details\": {\"path\": \"/subgoal_cid\"}}}"
+    },
+    "task": {
+      "ok": false,
+      "error": "mcp++/tasks/create -> {\"code\": -32041, \"message\": \"linked artifact is unavailable\", \"data\": {\"code\": \"G_CID_MISMATCH\", \"message\": \"linked artifact is unavailable\", \"retryable\": false, \"details\": {\"path\": \"/subgoal_cid\"}}}"
+    }
+  },
+  "goals_list_count": 0,
+  "tasks_list_count": 0
+}

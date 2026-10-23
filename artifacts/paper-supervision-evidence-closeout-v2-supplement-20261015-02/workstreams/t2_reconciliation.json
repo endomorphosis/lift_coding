@@ -1,0 +1,385 @@
+{
+  "all_checked_bindings_match": true,
+  "arithmetic_checks": [
+    {
+      "check": "input_plus_output_equals_total",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/native-codex-01/receipt.json"
+      ],
+      "invocation_id": null,
+      "passed": true,
+      "run_id": "fix-code-vulnerability__PtEnAhJ",
+      "session_id_sha256": "937a5641fef939a6747ed96ecd780687bc412387446f64246f84259df2dc1afc"
+    },
+    {
+      "check": "input_plus_output_equals_total",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-02/receipt.json"
+      ],
+      "invocation_id": "c66b00de19114e2e948a6e577c4ecb81",
+      "passed": true,
+      "run_id": "fix-code-vulnerability__eho8DzW",
+      "session_id_sha256": "5cc8cdf86a4f483608fa3dea18f7965d531b4ffc68d29f1894f9a2261fac7aae"
+    },
+    {
+      "check": "input_plus_output_equals_total",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-02/receipt.json"
+      ],
+      "invocation_id": "172ad971514b428ea427ae65db35daaa",
+      "passed": true,
+      "run_id": "fix-code-vulnerability__79SoPKN",
+      "session_id_sha256": "f345595a945acfb8ceee51179b5a4c3f9876d6b5285b5a7db5e60527ad6d8f41"
+    },
+    {
+      "check": "input_plus_output_equals_total",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-02/receipt.json"
+      ],
+      "invocation_id": "24f721c0d66645559bc4cf2775dd8709",
+      "passed": true,
+      "run_id": "fix-code-vulnerability__79SoPKN",
+      "session_id_sha256": "40d06a92b7199aaabcc1d39d6fd62748db57c1ec3047988fb2fdeeeb9be51b34"
+    },
+    {
+      "check": "input_plus_output_equals_total",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-03/receipt.json"
+      ],
+      "invocation_id": "5c5c3fb5514e49608fe4641c60e84b9e",
+      "passed": true,
+      "run_id": "fix-code-vulnerability__nrCRphy",
+      "session_id_sha256": "c0bb9ae1a957d153b8e743bfa74085a3978b7db60de162ed56cbef6f0ecc7838"
+    },
+    {
+      "check": "input_plus_output_equals_total",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-03/receipt.json"
+      ],
+      "invocation_id": "d0beb52b890a447181eaa23870700bc9",
+      "passed": true,
+      "run_id": "fix-code-vulnerability__nrCRphy",
+      "session_id_sha256": "3363cb4f9924cfe1d0a64ab1fb95a383d61c474055dc4f9e4d5889f7924ecf88"
+    },
+    {
+      "check": "input_plus_output_equals_total",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-03/receipt.json"
+      ],
+      "invocation_id": "4b19faa7670a407d86ff6054cea5cf03",
+      "passed": true,
+      "run_id": "fix-code-vulnerability__4Dfzugh",
+      "session_id_sha256": "e7c798ab72a11e88ba983512a630ea99303a27d6b67a71d806d8ba18cc62c85d"
+    },
+    {
+      "check": "input_plus_output_equals_total",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-03/receipt.json"
+      ],
+      "invocation_id": "f5f10a457aa442a89da8c74f78929467",
+      "passed": true,
+      "run_id": "fix-code-vulnerability__4Dfzugh",
+      "session_id_sha256": "4f045d8527db851e7be23c3e25ac355ecfac3dc3ca4073aee38eb1dd3d82e195"
+    },
+    {
+      "check": "input_plus_output_equals_total",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-04/receipt.json"
+      ],
+      "invocation_id": "1ea3d7d14dd647e2af26f5d2b18a3e4e",
+      "passed": true,
+      "run_id": "fix-code-vulnerability__DqsoZ7E",
+      "session_id_sha256": "e03336d6a07931aa2e9b8002424dd53132e4acde897c683e5e16f52adaa4b049"
+    },
+    {
+      "check": "input_plus_output_equals_total",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-04/receipt.json"
+      ],
+      "invocation_id": "ef79f0e2c95244fa87affe02a7ae0cc2",
+      "passed": true,
+      "run_id": "fix-code-vulnerability__DqsoZ7E",
+      "session_id_sha256": "5b36e5647d7df3e7bdb1d9c8c4609637ee2a6a132a3eea40383d994b5fbba351"
+    },
+    {
+      "check": "input_plus_output_equals_total",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-04/receipt.json"
+      ],
+      "invocation_id": "7fecb9a7f9ab417c861d2de7cdfdca9f",
+      "passed": true,
+      "run_id": "fix-code-vulnerability__2xXoTsQ",
+      "session_id_sha256": "ec82ce8c283713f41c308a44712da86a9b4acc4df9b33b2d177638621d39f7bc"
+    },
+    {
+      "check": "input_plus_output_equals_total",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-04/receipt.json"
+      ],
+      "invocation_id": "91a16c6a2f4946d8ab7a4164f49f5641",
+      "passed": true,
+      "run_id": "fix-code-vulnerability__2xXoTsQ",
+      "session_id_sha256": "bbd52c4fbd44ae7dca86aa8d23e3ba5fb49ede3dc3775e1f99006472b364dd92"
+    },
+    {
+      "check": "input_plus_output_equals_total",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-06/receipt.json"
+      ],
+      "invocation_id": "57c6fc3b4a2e4f2187aa513ba62e5ad9",
+      "passed": true,
+      "run_id": "fix-code-vulnerability__jzhr9xA",
+      "session_id_sha256": "f8bdf1c01414bad1d95c5f5e9a74b0a26699f7e8b04bc346c4e8ca132ba11aab"
+    },
+    {
+      "check": "input_plus_output_equals_total",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-no-index-06/receipt.json"
+      ],
+      "invocation_id": "954621db4ff34ab68f91657dd11fc151",
+      "passed": true,
+      "run_id": "fix-code-vulnerability__xRfZaYk",
+      "session_id_sha256": "eaefdbbb346620c614e0bee1900bfd48186f67d4b728abacd7993246c2e236b2"
+    },
+    {
+      "check": "input_plus_output_equals_total",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-no-index-06/receipt.json"
+      ],
+      "invocation_id": "0294ff35bdcd4731bfcc30f0f64ff3b9",
+      "passed": true,
+      "run_id": "fix-code-vulnerability__xRfZaYk",
+      "session_id_sha256": "e017a63b6e13ab4ef8d4eabacd2d4586aec8d4b768a078ff637065ec2c2ce499"
+    },
+    {
+      "check": "input_plus_output_equals_total",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/numerical-live-pair-20261013/live-trials/codex-no-index-01/receipt.json"
+      ],
+      "invocation_id": "4c2b058967ca4d1698f5809e17aa4e27",
+      "passed": true,
+      "run_id": "largest-eigenval__beFUuMt",
+      "session_id_sha256": "95618613a7cf7e9bd134c6f418afb9559c0099a81bf2c5a4391b5b7fc32adc90"
+    },
+    {
+      "check": "input_plus_output_equals_total",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/numerical-live-pair-20261013/live-trials/codex-no-index-01/receipt.json"
+      ],
+      "invocation_id": "f310cc7948ed4312b1b0c474fd99a7c4",
+      "passed": true,
+      "run_id": "largest-eigenval__beFUuMt",
+      "session_id_sha256": "40f3cb95cabe90fc9cadb5e5e211f59ef8e4d8c15c40dbf7014b97bd11a1f14f"
+    },
+    {
+      "check": "input_plus_output_equals_total",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/numerical-live-pair-20261013/next-native-baseline/native-codex-01/receipt.json"
+      ],
+      "invocation_id": null,
+      "passed": true,
+      "run_id": "largest-eigenval__8vAYxJm",
+      "session_id_sha256": "558979c37b33a6332022c74cc74312d73d391f0aed6b4a9917f49d44bc4d49c1"
+    },
+    {
+      "check": "input_plus_output_equals_total",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/receipt.json"
+      ],
+      "invocation_id": "3bba273ba54540b691a8e3a102d8c526",
+      "passed": true,
+      "run_id": "fix-code-vulnerability__z4cVfSR",
+      "session_id_sha256": "5ee76e0b8cd386b2ebd85dcb33d40a476453693f273854039fd9cba42ec711f1"
+    },
+    {
+      "check": "ctrf_status_counts_equal_total",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/jobs/supervisor-full-fix-code-vulnerability/fix-code-vulnerability__z4cVfSR/verifier/ctrf.json"
+      ],
+      "passed": true,
+      "scope": "original-task verifier CTRF"
+    },
+    {
+      "check": "ctrf_status_counts_equal_total",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/jobs/supervisor-full-fix-code-vulnerability/fix-code-vulnerability__z4cVfSR/verifier/original-repo-ctrf.json"
+      ],
+      "passed": true,
+      "scope": "original-repository test CTRF"
+    }
+  ],
+  "hash_or_structural_joins": [
+    {
+      "actual_sha256": "5d448f3ea2920a9ab0a1e0c0262710b9ed8a3165e5d92492a3a0a1ca430644c2",
+      "artifact_path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/native-codex-01/receipt.json",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/native-codex-01/receipt.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/retained-study-inventory.json"
+      ],
+      "expected_sha256": "5d448f3ea2920a9ab0a1e0c0262710b9ed8a3165e5d92492a3a0a1ca430644c2",
+      "matches": true,
+      "scope": "original receipt bytes versus retained reporting binding; not execution authenticity"
+    },
+    {
+      "actual_sha256": "2c1064404a66c3d3525eebdb8dda75f0fcd8c1631d40ec99177cf699dbe31dfe",
+      "artifact_path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-01/receipt.json",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-01/receipt.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/retained-study-inventory.json"
+      ],
+      "expected_sha256": "2c1064404a66c3d3525eebdb8dda75f0fcd8c1631d40ec99177cf699dbe31dfe",
+      "matches": true,
+      "scope": "original receipt bytes versus retained reporting binding; not execution authenticity"
+    },
+    {
+      "actual_sha256": "aa33c3d28a5c98d266ca210de4d0dfaa260006e017685194f1978fb4c480f8f8",
+      "artifact_path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-02/receipt.json",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-02/receipt.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/retained-study-inventory.json"
+      ],
+      "expected_sha256": "aa33c3d28a5c98d266ca210de4d0dfaa260006e017685194f1978fb4c480f8f8",
+      "matches": true,
+      "scope": "original receipt bytes versus retained reporting binding; not execution authenticity"
+    },
+    {
+      "actual_sha256": "023cec64883419739a9b9a6557b1c45ac6c04a4a05b02694283127ed6ad3defd",
+      "artifact_path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-02/receipt.json",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-02/receipt.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/retained-study-inventory.json"
+      ],
+      "expected_sha256": "023cec64883419739a9b9a6557b1c45ac6c04a4a05b02694283127ed6ad3defd",
+      "matches": true,
+      "scope": "original receipt bytes versus retained reporting binding; not execution authenticity"
+    },
+    {
+      "actual_sha256": "a5c251dd97168af8c38876602dea6d330db1b9176f243d35f587c831e906b5bc",
+      "artifact_path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-03/receipt.json",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-03/receipt.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/retained-study-inventory.json"
+      ],
+      "expected_sha256": "a5c251dd97168af8c38876602dea6d330db1b9176f243d35f587c831e906b5bc",
+      "matches": true,
+      "scope": "original receipt bytes versus retained reporting binding; not execution authenticity"
+    },
+    {
+      "actual_sha256": "9ccddfa672107ac86ee1e63a668a30780cf4ee08ee2d5f4bec13040907c8381a",
+      "artifact_path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-03/receipt.json",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-03/receipt.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/retained-study-inventory.json"
+      ],
+      "expected_sha256": "9ccddfa672107ac86ee1e63a668a30780cf4ee08ee2d5f4bec13040907c8381a",
+      "matches": true,
+      "scope": "original receipt bytes versus retained reporting binding; not execution authenticity"
+    },
+    {
+      "actual_sha256": "998a3ba17d26bf6f9e1fc911cfff75ebf209bcf5403ad6c25a9b151cf6b11b99",
+      "artifact_path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-04/receipt.json",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-04/receipt.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/retained-study-inventory.json"
+      ],
+      "expected_sha256": "998a3ba17d26bf6f9e1fc911cfff75ebf209bcf5403ad6c25a9b151cf6b11b99",
+      "matches": true,
+      "scope": "original receipt bytes versus retained reporting binding; not execution authenticity"
+    },
+    {
+      "actual_sha256": "8a5dd1317a3ac6de6bd0f44be995e912927d8e468b8bbc0cbf8c07c668fbad07",
+      "artifact_path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-04/receipt.json",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-04/receipt.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/retained-study-inventory.json"
+      ],
+      "expected_sha256": "8a5dd1317a3ac6de6bd0f44be995e912927d8e468b8bbc0cbf8c07c668fbad07",
+      "matches": true,
+      "scope": "original receipt bytes versus retained reporting binding; not execution authenticity"
+    },
+    {
+      "actual_sha256": "a194303375c408f6a91c1f451c6a2c38e5afd6587d7a2916820d820b7dc98281",
+      "artifact_path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-06/receipt.json",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-06/receipt.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/retained-study-inventory.json"
+      ],
+      "expected_sha256": "a194303375c408f6a91c1f451c6a2c38e5afd6587d7a2916820d820b7dc98281",
+      "matches": true,
+      "scope": "original receipt bytes versus retained reporting binding; not execution authenticity"
+    },
+    {
+      "actual_sha256": "310835f422fac2d0ec9a3228d6e2ce89c695314a54f59c116e94fa4614064de1",
+      "artifact_path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-no-index-06/receipt.json",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-no-index-06/receipt.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/retained-study-inventory.json"
+      ],
+      "expected_sha256": "310835f422fac2d0ec9a3228d6e2ce89c695314a54f59c116e94fa4614064de1",
+      "matches": true,
+      "scope": "original receipt bytes versus retained reporting binding; not execution authenticity"
+    },
+    {
+      "actual_sha256": "195635b14c20f43603507c5e4794a7e9e2e755c3daeb8d874a0e37d0c8abaf47",
+      "artifact_path": "/home/barberb/lift_coding/artifacts/numerical-live-pair-20261013/live-trials/codex-no-index-01/receipt.json",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/numerical-live-pair-20261013/live-trials/codex-no-index-01/receipt.json",
+        "/home/barberb/lift_coding/artifacts/paper-supervision-evidence-closeout-v2-audit-20261015-01/workstreams/t2_t4_joins.json"
+      ],
+      "expected_sha256": "195635b14c20f43603507c5e4794a7e9e2e755c3daeb8d874a0e37d0c8abaf47",
+      "matches": true,
+      "scope": "original receipt bytes versus retained reporting binding; not execution authenticity"
+    },
+    {
+      "actual_sha256": "6637fa775c114e83722e6639e1f113736e49b88f799b037e3d728405662c7cdf",
+      "artifact_path": "/home/barberb/lift_coding/artifacts/numerical-live-pair-20261013/next-native-baseline/native-codex-01/receipt.json",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/numerical-live-pair-20261013/next-native-baseline/native-codex-01/receipt.json",
+        "/home/barberb/lift_coding/artifacts/paper-supervision-evidence-closeout-v2-supplement-20261015-02/audit/t4_native_report_join.json"
+      ],
+      "expected_sha256": "6637fa775c114e83722e6639e1f113736e49b88f799b037e3d728405662c7cdf",
+      "matches": true,
+      "scope": "Original receipt hash joined to separately root-inspected three-arm report binding"
+    },
+    {
+      "actual_sha256": "9297d03dbe8cf99f7014b23f14068622fc7e5a868ed7bbc18fbbdcf4084b30ea",
+      "artifact_path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/receipt.json",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/receipt.json",
+        "/home/barberb/lift_coding/artifacts/paper-supervision-evidence-closeout-v2-audit-20261015-01/workstreams/t2_t4_inputs.jsonl"
+      ],
+      "expected_sha256": "9297d03dbe8cf99f7014b23f14068622fc7e5a868ed7bbc18fbbdcf4084b30ea",
+      "matches": true,
+      "scope": "original receipt bytes versus retained reporting binding; not execution authenticity"
+    },
+    {
+      "artifact_path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/jobs/supervisor-full-fix-code-vulnerability/fix-code-vulnerability__z4cVfSR/agent/supervisor-result.json",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/jobs/supervisor-full-fix-code-vulnerability/fix-code-vulnerability__z4cVfSR/agent/supervisor-result.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/receipt.json"
+      ],
+      "matches": true,
+      "scope": "Structural equality of standalone supervisor result and original outer receipt projection"
+    },
+    {
+      "actual_sha256": "d87f56c18913ced862bcee8b8ad775605913e915b1d2e73cc4e1b6e84177521d",
+      "artifact_path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/jobs/supervisor-full-fix-code-vulnerability/fix-code-vulnerability__z4cVfSR/result.json",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/jobs/supervisor-full-fix-code-vulnerability/fix-code-vulnerability__z4cVfSR/result.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/receipt.json"
+      ],
+      "expected_sha256": "d87f56c18913ced862bcee8b8ad775605913e915b1d2e73cc4e1b6e84177521d",
+      "matches": true,
+      "scope": "Outer receipt binds original Harbor result bytes"
+    }
+  ],
+  "missing_native_expected_hash_requires_root_join": false,
+  "new_model_solver_training_build_grader_execution": false,
+  "original_bytes_read": 3600308,
+  "original_files_read": 22,
+  "run_rows": 13,
+  "runtime_authority_modified": false,
+  "schema": "bounded-t2-t4-supplement/v1",
+  "session_rows": 19,
+  "source_or_test_bodies_exported": false
+}

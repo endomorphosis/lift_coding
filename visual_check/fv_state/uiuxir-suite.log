@@ -1,0 +1,62 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.3.4, pluggy-1.6.0
+cachedir: /tmp/pytest_cache_r4
+rootdir: /home/hatch/workspace/lift_coding/external/ipfs_datasets
+configfile: pytest.ini
+plugins: respx-0.22.0
+asyncio: mode=Mode.STRICT
+collected 286 items
+
+tests/unit/logic/ui_ux_ir/formalize/test_compiler.py .....               [  1%]
+tests/unit/logic/ui_ux_ir/formalize/test_dcec.py .                       [  2%]
+tests/unit/logic/ui_ux_ir/formalize/test_event_calculus.py .             [  2%]
+tests/unit/logic/ui_ux_ir/formalize/test_flogic.py .                     [  2%]
+tests/unit/logic/ui_ux_ir/formalize/test_ontology.py ...                 [  3%]
+tests/unit/logic/ui_ux_ir/formalize/test_roundtrip.py ...                [  4%]
+tests/unit/logic/ui_ux_ir/formalize/test_synthesis.py ................   [ 10%]
+tests/unit/logic/ui_ux_ir/formalize/test_tdfol.py .                      [ 10%]
+tests/unit/logic/ui_ux_ir/model/test_behavior_experience.py ...          [ 11%]
+tests/unit/logic/ui_ux_ir/model/test_components_layout.py ......         [ 13%]
+tests/unit/logic/ui_ux_ir/projection/test_glasses.py ...                 [ 15%]
+tests/unit/logic/ui_ux_ir/projection/test_mobile.py ..                   [ 15%]
+tests/unit/logic/ui_ux_ir/projection/test_solver.py .................... [ 22%]
+                                                                         [ 22%]
+tests/unit/logic/ui_ux_ir/projection/test_voice.py ...                   [ 23%]
+tests/unit/logic/ui_ux_ir/projection/test_web.py .......                 [ 26%]
+tests/unit/logic/ui_ux_ir/runtime/test_embodied_input.py ............... [ 31%]
+                                                                         [ 31%]
+tests/unit/logic/ui_ux_ir/runtime/test_events.py ...                     [ 32%]
+tests/unit/logic/ui_ux_ir/runtime/test_fusion.py .....                   [ 34%]
+tests/unit/logic/ui_ux_ir/runtime/test_mediator.py ..................... [ 41%]
+.......                                                                  [ 44%]
+tests/unit/logic/ui_ux_ir/runtime/test_receipts.py ..................... [ 51%]
+.                                                                        [ 51%]
+tests/unit/logic/ui_ux_ir/runtime/test_speech_input.py ........          [ 54%]
+tests/unit/logic/ui_ux_ir/runtime/test_state_machine.py ................ [ 60%]
+....                                                                     [ 61%]
+tests/unit/logic/ui_ux_ir/source_adapters/test_intent_ir.py ...........  [ 65%]
+tests/unit/logic/ui_ux_ir/source_adapters/test_mcp_idl.py ...            [ 66%]
+tests/unit/logic/ui_ux_ir/test_assurance.py ........                     [ 69%]
+tests/unit/logic/ui_ux_ir/test_conformance.py ......                     [ 71%]
+tests/unit/logic/ui_ux_ir/test_domain_slice.py F..                       [ 72%]
+tests/unit/logic/ui_ux_ir/test_internal_api.py .....                     [ 74%]
+tests/unit/logic/ui_ux_ir/test_mcp_idl_identity_contract.py ............ [ 78%]
+....................                                                     [ 85%]
+tests/unit/logic/ui_ux_ir/test_modality_bindings.py ......               [ 87%]
+tests/unit/logic/ui_ux_ir/test_provenance.py ..                          [ 88%]
+tests/unit/logic/ui_ux_ir/test_public_api.py ......                      [ 90%]
+tests/unit/logic/ui_ux_ir/test_schema.py .........................       [ 98%]
+tests/unit/logic/ui_ux_ir/test_versioning.py ...                         [100%]
+
+=================================== FAILURES ===================================
+__________ test_ui_ux_adapter_note_declares_required_contract_fields ___________
+tests/unit/logic/ui_ux_ir/test_domain_slice.py:39: in test_ui_ux_adapter_note_declares_required_contract_fields
+    text = _adapter_note().read_text(encoding="utf-8").lower()
+/usr/lib/python3.12/pathlib.py:1029: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+/usr/lib/python3.12/pathlib.py:1015: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+E   FileNotFoundError: [Errno 2] No such file or directory: '/home/hatch/workspace/lift_coding/external/data/agent_supervisor/logic_platform_canonicalization/notes/intent_uiux_adapters.md'
+=========================== short test summary info ============================
+FAILED tests/unit/logic/ui_ux_ir/test_domain_slice.py::test_ui_ux_adapter_note_declares_required_contract_fields
+=================== 1 failed, 285 passed in 61.51s (0:01:01) ===================

@@ -1,0 +1,110 @@
+% Citation-verified synthesis of the original architecture and measured evaluation.
+\documentclass{article}
+\PassOptionsToPackage{numbers,compress}{natbib}
+\usepackage{neurips_2026_vericode}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsfonts,amsmath}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{longtable,array}
+\hypersetup{hidelinks,pdftitle={From Law to Action: Neuro-Symbolic Runtime Enforcement for MCP Agents},pdfauthor={}}
+\title{From Law to Action: Neuro-Symbolic Runtime Enforcement for MCP Agents}
+\workshoptitle{NeurIPS 2026 Workshop on AI for Verifiable Coding}
+\author{Anonymous Author(s)}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Tool-using agents need to distinguish what a procedure recommends from what an action is authorized to do. We present a runtime enforcement architecture for Model Context Protocol (MCP) agents that separates source-derived constraints from delegated authority. Legal documents, vulnerability-and-fix records, and procedural skills produce distinct intermediate representations with source maps and typed logical views. Before a protected operation, the runtime checks the invocation context, scoped logical evidence, a signed capability, and durable consumption state. We evaluate this boundary in 900 fixed-action trials spanning 30 source families and five mechanism variants. On the held-out split, full enforcement produced no forbidden effects in 54 policy-forbidden attempts and completed all 54 allowed attempts. A policy-and-capability baseline allowed 18 of the 54 forbidden effects; unguarded execution allowed all 54. These results characterize enforcement of modeled policies at one sandbox handler. Legal interpretation accuracy was not evaluated. Closed-loop model planning was measured in a separate 900-cell study.
+\end{abstract}
+
+\section{Introduction}
+
+An agent may select a useful procedure while overlooking a jurisdictional restriction, a known vulnerability, or the limits of its delegated authority. These concerns arise at different levels. A legal source describes obligations and exceptions; a vulnerability record identifies a potential security condition; a procedural skill describes intended work. None, by itself, determines whether a particular tool invocation should be permitted. The Model Context Protocol (MCP) provides a common interface for tool discovery and invocation, while applications remain responsible for enforcing their security requirements \citep{mcp,mcp-auth}.
+
+We study an enforcement boundary immediately before a protected tool operation. The architecture compiles legal, security, and procedural sources into separate intermediate representations (IRs), binds their constraints to the exact proposed invocation, and checks the caller's capability before allowing an effect. The final decision depends on the current actor, arguments, resource, and environment. A previously acceptable request may therefore be denied after a change of audience, policy context, or use state.
+
+For agentic coding, useful behavior must be considered alongside the effects a program or tool may produce. We isolate the enforcement boundary using fixed declarative actions and independently observed filesystem effects, measuring whether the mechanism prevents policy-forbidden mutations while preserving allowed work. This design separates enforcement from model planning and code generation.
+
+We contribute a source-to-action architecture with typed representations and evidence contracts; an implementation that connects source provenance, current state, and delegated authority to a protected handler; and a fixed-action evaluation of five matched mechanism variants across 30 source families.
+
+
+\section{Related work}
+\label{sec:related}
+
+\paragraph{Runtime enforcement and agent security.}
+Complete mediation requires each protected access to pass an authorization check \citep{saltzer1975protection}. Security automata, inlined monitors, and edit automata characterize runtime-enforceable policies \citep{schneider2000enforceable,erlingsson2000irm,ligatti2005edit,hamlen2006enforcement}. AgentSpec supplies runtime triggers and rules \citep{wang2025agentspec}; Progent checks symbolic tool privileges and policy updates \citep{shi2025progent}; CaMeL uses capabilities to isolate agent data flow \citep{debenedetti2025camel}. We connect this enforcement boundary to source-derived constraints and exact invocation context.
+
+\paragraph{Executable law and checked evidence.}
+Formalizing a statute entails an interpretation of the source \citep{sergot1986bna,prakken2015lawlogic,benzmueller2020logikey}. Catala makes legal specifications executable \citep{catala}; Mlang compiles the French tax code \citep{merigoux2021tax}. Proof-carrying code and authentication place checked evidence before execution or authorization \citep{necula1997pcc,appel1999pca}, while translation validation and CompCert explicitly connect translation to verification \citep{pnueli1998translation,leroy2009compcert}. Our design similarly distinguishes source fidelity, translation, and checker output; its evaluated propositional evidence is narrower than a kernel-checked theorem.
+
+\paragraph{Capabilities and policy languages.}
+Object capabilities, attenuating caveats, relation-based authorization, and policy languages restrict authority in complementary ways \citep{miller2006robust,birgisson2014macaroons,pang2019zanzibar,cutler2024cedar}. UCAN supplies signed delegated capabilities \citep{ucan}. Both our lightweight baseline and full mechanism verify capabilities; the latter additionally binds current context and durable use state. This application check complements MCP transport authorization \citep{mcp-auth}.
+
+\paragraph{Coding and tool-agent evaluation.}
+Code-generation and issue-resolution benchmarks emphasize functional correctness \citep{chen2021codex,jimenez2024swebench}. Verified generation, theorem proving, and autoformalization connect programs or specifications to formal checks \citep{sun2024clover,yang2023leandojo,wu2022autoformalization}. AgentDojo, ToolEmu, InjecAgent, $\tau$-bench, and AgentHarm examine attacks, risky actions, policy following, and harmful tool use \citep{debenedetti2024agentdojo,ruan2024toolemu,zhan2024injecagent,yao2024taubench,andriushchenko2025agentharm}. Our comparison measures forbidden effects alongside allowed work within one implementation; these external systems were not executed as baselines.
+
+\section{From source documents to action constraints}
+\label{sec:sources}
+
+The architecture uses three source streams because normative constraints, security evidence, and procedural intent answer different questions (Table~\ref{tab:1}). Each representation retains source identity, provenance, and declared limitations. Evidence from one stream does not confer authority on another.
+
+
+
+\paragraph{Legal sources.}
+A restricted grammar extracts seven fields: modality, actor, action, object, conditions, exceptions, and temporal qualifiers. Source maps connect the resulting representation to the document, and loss diagnostics identify unsupported constructs. This makes the compilation inspectable, but inspection alone does not establish whether the interpretation is legally correct. The source inventory spans statutes, regulations, court material, municipal codes, and national legislation. Original documents remain separate from normalized provisions, preserving recorded jurisdiction, publication status, effective interval when known, and retrieval provenance. The evaluated legal cohort contains six documents; Appendix~\ref{app:corpus} describes the broader inventory.
+
+\paragraph{Vulnerability and repair records.}
+CVEfixes links vulnerability records to repositories and fixes \citep{cvefixes}. The evaluated source package is pinned separately from the CVEfixes paper \citep{cvefixes-source}. The adapter creates scoped Security IR declarations and rejects wildcard scope and inserted authority grants. Vulnerable/fixed pairs provide candidate contrasts for a restriction, but applying that restriction to a tool requires an explicit connection between the recorded behavior and the proposed effect. The evaluation retains 12 repository families and 24 cases. Their vulnerability polarity and transfer to the export handler remain unestablished; the fixed-action experiment instead tests an explicitly modeled policy.
+
+\paragraph{Procedural skills.}
+SkillCenter supplies procedural Markdown \citep{skillcenter-source}. A deterministic normalizer extracts goals, guards, effects, and control edges, retaining source spans and distinguishing grounded from inferred content. The reader opens source bundles read-only, disables extension loading, and treats embedded commands as data. The evaluated cohort contains 12 skill families, each with a base procedure and an adversarial variant. A statement that a procedure is ``permitted'' remains a source assertion; permission to execute comes from the capability check. Intent IR also distinguishes success, failure, conditional, retry, parallel, and join edges, together with assumptions and verification steps. No trained skill encoder is used in this evaluation.
+
+\begin{table}[t]
+\centering
+\caption{The three source representations contribute constraints or intent to an action decision. Execution authority is checked separately.}
+\label{tab:1}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.18\linewidth} >{\raggedright\arraybackslash}p{.36\linewidth} >{\raggedright\arraybackslash}p{.40\linewidth}@{}}
+\toprule
+Representation & Source and retained information & Role in the decision \\
+\midrule
+Legal IR & Legal text: modality, parties, conditions, exceptions, and time & Represents the selected normative constraints and their applicability. \\[4pt]
+Security IR & Vulnerability records and fixes: scope, effects, and candidate restrictions & Describes a potential prohibition and the evidence needed to connect it to an operation. \\[4pt]
+Intent IR & Procedural skills: goals, actions, guards, effects, and control flow & Describes the proposed work and distinguishes source-grounded content from inference. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Common lineage.}
+The IRs share identity, provenance, schema, and result contracts while retaining different semantics. Sources and derived views remain independently addressable. Retrieval nominates evidence; applicability determines whether it may enter a decision. Citation edges do not establish logical implications. Appendix~\ref{app:corpus} records source revisions and sampling context.
+
+\input{design}
+\input{runtime}
+
+\input{results}
+\input{limitations}
+\input{extensions}
+
+\section{Conclusion}
+
+The architecture connects source-preserving compilation, typed evidence, current operational state, and delegated authority at an action boundary. Across the fixed-action experiment, full context-bound enforcement prevented the tested policy-forbidden effects while preserving allowed work. The policy-and-capability baseline left residual failures involving context changes and replay, motivating checks at the point of execution. These observations support the evaluated configuration at one sandbox handler. Extending the result to legal interpretation or model-generated programs requires separate semantic and closed-loop evaluations.\label{la-main-text-end}
+
+\clearpage
+\bibliographystyle{unsrtnat}
+\bibliography{related_work}
+\clearpage
+\appendix
+\input{appendices}
+\input{evaluation_details}
+\section{Language-model assistance}
+\label{app:disclosure}
+Language-model assistance supported source inspection, implementation, execution orchestration, analysis of retained data, and manuscript preparation. Grok \texttt{grok-4.6} (xAI) supported drafting and inspection; Codex (GPT-6) supported implementation, recovery, analysis, citation verification, and manuscript revision. The fixed-action experiment made no scientific model calls: these assistants were not experimental arms. No independent human legal, security, or intent evaluation was collected.
+
+\clearpage
+\input{checklist}
+\end{document}

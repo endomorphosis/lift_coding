@@ -1,0 +1,41 @@
+{
+  "accelerator_publication": "df577aee916a20594e6672dceadd6e40e3948d16",
+  "changed_gitlinks": {
+    "external/ipfs_accelerate": "df577aee916a20594e6672dceadd6e40e3948d16"
+  },
+  "files": [
+    {
+      "bytes": 7590,
+      "path": "implementation_plan/docs/124-supervisor-native-source-worker-spawn-2026-10-14.md",
+      "sha256": "5b6b222fb19eb03424b3443f0394bda8446651830a21b366b1dbb38a44c1b0b0"
+    },
+    {
+      "bytes": 23359,
+      "path": "artifacts/native-source-worker-spawn-publication-20261014/hosted-ci.json",
+      "sha256": "933c7ccd24bf094cb903f563f4c9267fd20f09c654915dd2521dd4e78fd18edd"
+    },
+    {
+      "bytes": 72522,
+      "path": "artifacts/native-source-worker-spawn-publication-20261014/merge-compatibility.json",
+      "sha256": "681ab4eec7a834e69301541195eb671d608ef3a82f1d7e08a35a114a5860f505"
+    },
+    {
+      "bytes": 20610,
+      "path": "artifacts/native-source-worker-spawn-publication-20261014/publication_check_runner.py",
+      "sha256": "295da5437ffb12fc6d6e06612542ac16adc6c072fe88850cfaa052253f01250c"
+    },
+    {
+      "bytes": 29959,
+      "path": "artifacts/native-source-worker-spawn-publication-20261014/parent-checks.json",
+      "sha256": "b27a2446d511c4d57263c49c1935cd18d38c8951338fe4ba3f7a8413c8039d24"
+    }
+  ],
+  "manifest_self_excluded": true,
+  "parent_base": "d32bc5848a2a13f1a7902d5a76b1cc6f3467e63b",
+  "preserved_gitlinks": {
+    "external/ipfs_datasets": "a0f60d42f836571a0023515e92dfb0e5724f0d79",
+    "external/ipfs_kit": "40c98c71b95be750509ffdb21e7e5494d91b4e79"
+  },
+  "qualified_leaf": "df577aee916a20594e6672dceadd6e40e3948d16",
+  "schema": "native-source-worker-spawn-parent-manifest@1"
+}

@@ -1,0 +1,135 @@
+diff --git a/docs/experimental/index.md b/docs/experimental/index.md
+index 1d496b3..cb032be 100644
+--- a/docs/experimental/index.md
++++ b/docs/experimental/index.md
+@@ -32,2 +32,2 @@ Experimental features are accessed via the `.experimental` property:
+-async def handle_get_task(request: GetTaskRequest) -> GetTaskResult:
+-    ...
++async def handle_get_task(request: GetTaskRequest) -> GetTaskResult: ...
++
+diff --git a/docs/experimental/tasks-client.md b/docs/experimental/tasks-client.md
+index cfd23e4..d58b2d1 100644
+--- a/docs/experimental/tasks-client.md
++++ b/docs/experimental/tasks-client.md
+@@ -43,4 +43,4 @@ result = await session.experimental.call_tool_as_task(
+-    "my_tool",           # Tool name
+-    {"arg": "value"},    # Arguments
+-    ttl=60000,           # Time-to-live in milliseconds
+-    meta={"key": "val"}, # Optional metadata
++    "my_tool",  # Tool name
++    {"arg": "value"},  # Arguments
++    ttl=60000,  # Time-to-live in milliseconds
++    meta={"key": "val"},  # Optional metadata
+@@ -100,0 +101 @@ from mcp.types import ElicitRequestParams, ElicitResult
++
+@@ -113,0 +115 @@ async def handle_elicitation(context, params: ElicitRequestParams) -> ElicitResu
++
+@@ -211,2 +213,5 @@ from mcp.types import (
+-    CreateTaskResult, GetTaskResult, GetTaskPayloadResult,
+-    TaskMetadata, ElicitRequestParams,
++    CreateTaskResult,
++    GetTaskResult,
++    GetTaskPayloadResult,
++    TaskMetadata,
++    ElicitRequestParams,
+@@ -218,0 +224 @@ client_store = InMemoryTaskStore()
++
+@@ -235,0 +242 @@ async def handle_augmented_elicitation(context, params: ElicitRequestParams, tas
++
+@@ -248,0 +256 @@ async def handle_get_task(context, params):
++
+@@ -253,0 +262 @@ async def handle_get_task_result(context, params):
++
+diff --git a/docs/experimental/tasks-server.md b/docs/experimental/tasks-server.md
+index 761dc5d..3a2a84a 100644
+--- a/docs/experimental/tasks-server.md
++++ b/docs/experimental/tasks-server.md
+@@ -20,0 +21 @@ server.experimental.enable_tasks()  # Registers all task handlers automatically
++
+@@ -31,0 +33 @@ async def list_tools():
++
+@@ -37,0 +40 @@ async def handle_tool(name: str, arguments: dict) -> CallToolResult | CreateTask
++
+@@ -135 +138 @@ async def work(task: ServerTaskContext) -> CallToolResult:
+-        await task.update_status(f"Processing {i+1}/{len(items)}")
++        await task.update_status(f"Processing {i + 1}/{len(items)}")
+@@ -203,0 +207 @@ from mcp.types import SamplingMessage, TextContent
++
+@@ -303,2 +307,7 @@ from mcp.types import (
+-    CallToolResult, CreateTaskResult, TextContent, Tool, ToolExecution,
+-    SamplingMessage, TASK_REQUIRED,
++    CallToolResult,
++    CreateTaskResult,
++    TextContent,
++    Tool,
++    ToolExecution,
++    SamplingMessage,
++    TASK_REQUIRED,
+@@ -422 +431,6 @@ from mcp.types import (
+-    CallToolResult, CreateTaskResult, TextContent, Tool, ToolExecution, TASK_REQUIRED,
++    CallToolResult,
++    CreateTaskResult,
++    TextContent,
++    Tool,
++    ToolExecution,
++    TASK_REQUIRED,
+@@ -449,0 +464 @@ async def handle_long_operation(arguments: dict) -> CreateTaskResult:
++
+@@ -451 +466 @@ async def handle_long_operation(arguments: dict) -> CreateTaskResult:
+-            await task.update_status(f"Step {i+1}/{int(duration)}")
++            await task.update_status(f"Step {i + 1}/{int(duration)}")
+diff --git a/docs/experimental/tasks.md b/docs/experimental/tasks.md
+index 2d4d06a..44979ee 100644
+--- a/docs/experimental/tasks.md
++++ b/docs/experimental/tasks.md
+@@ -150,0 +151 @@ server.experimental.enable_tasks()  # One-line setup
++
+diff --git a/docs/testing.md b/docs/testing.md
+index 8d84449..fbf7a20 100644
+--- a/docs/testing.md
++++ b/docs/testing.md
+@@ -13,0 +14 @@ app = FastMCP("Calculator")
++
+diff --git a/examples/servers/simple-pagination/README.md b/examples/servers/simple-pagination/README.md
+index e732b8e..61d6231 100644
+--- a/examples/servers/simple-pagination/README.md
++++ b/examples/servers/simple-pagination/README.md
+@@ -36,3 +36,4 @@ async def main():
+-    async with stdio_client(
+-        StdioServerParameters(command="uv", args=["run", "mcp-simple-pagination"])
+-    ) as (read, write):
++    async with stdio_client(StdioServerParameters(command="uv", args=["run", "mcp-simple-pagination"])) as (
++        read,
++        write,
++    ):
+diff --git a/examples/servers/simple-prompt/README.md b/examples/servers/simple-prompt/README.md
+index 48e796e..81d837b 100644
+--- a/examples/servers/simple-prompt/README.md
++++ b/examples/servers/simple-prompt/README.md
+@@ -33,3 +33 @@ async def main():
+-    async with stdio_client(
+-        StdioServerParameters(command="uv", args=["run", "mcp-simple-prompt"])
+-    ) as (read, write):
++    async with stdio_client(StdioServerParameters(command="uv", args=["run", "mcp-simple-prompt"])) as (read, write):
+diff --git a/examples/servers/simple-resource/README.md b/examples/servers/simple-resource/README.md
+index df674e9..811bf5d 100644
+--- a/examples/servers/simple-resource/README.md
++++ b/examples/servers/simple-resource/README.md
+@@ -31,3 +31 @@ async def main():
+-    async with stdio_client(
+-        StdioServerParameters(command="uv", args=["run", "mcp-simple-resource"])
+-    ) as (read, write):
++    async with stdio_client(StdioServerParameters(command="uv", args=["run", "mcp-simple-resource"])) as (read, write):
+@@ -47 +44,0 @@ asyncio.run(main())
+-
+diff --git a/examples/servers/simple-tool/README.md b/examples/servers/simple-tool/README.md
+index 06020b4..408d09e 100644
+--- a/examples/servers/simple-tool/README.md
++++ b/examples/servers/simple-tool/README.md
+@@ -31,3 +31 @@ async def main():
+-    async with stdio_client(
+-        StdioServerParameters(command="uv", args=["run", "mcp-simple-tool"])
+-    ) as (read, write):
++    async with stdio_client(StdioServerParameters(command="uv", args=["run", "mcp-simple-tool"])) as (read, write):
+@@ -47 +44,0 @@ asyncio.run(main())
+-

@@ -1,0 +1,447 @@
+{
+  "schema": "paper-supervision-next-experiments-proposal/v1",
+  "paper": "Proof-Carrying Neurosymbolic Supervision: State, Reasoning, and Evidence Reuse",
+  "format": "JSON serialization, a YAML 1.2 subset; validate with standard-library json.tool.",
+  "common": {
+    "status": "proposal_only_not_scheduled",
+    "operator_approval": false,
+    "authorization_in_this_audit": {
+      "execution": false,
+      "model_calls": false,
+      "solver_calls": false,
+      "training": false,
+      "production_changes": false,
+      "publishing": false
+    },
+    "approval_requires": [
+      "Exact immutable source forest, loaded-module origins and runtime archive manifest for all arms; never combine independently retrieved heads.",
+      "Fixed public task revisions and allowed source inventories; hidden/reference/fix data excluded from model input, retrieval, training and checkpoint selection.",
+      "Per-slot signed or otherwise auditable enrollment manifest with task, repeat, arm, order, budget and acceptance policy.",
+      "Current resource-isolation and free-space admission checks using unchanged thresholds; no production-service shutdown by implication.",
+      "Operator-approved model/provider/token and dollar limits where model calls are proposed; current pricing/rates must be documented separately.",
+      "Retained originals access policy and explicit redacted derivative schema; no raw transcripts or protected grader content exported."
+    ],
+    "common_accounting": [
+      "Keep every enrolled slot, failed attempt, refused qualification and uninvoked slot with exact reason.",
+      "One final consistent cumulative record per distinct provider session; retain provider-specific cache/reasoning semantics.",
+      "Missing, conflicting or interrupted usage stays unknown or a justified lower bound; reward does not imply complete usage.",
+      "Charge initial indexing, local training/inference, priming, retrieval/expansion, validation, failed attempts and recovery separately; do not add overlapping clocks.",
+      "No pooled percentage across unlike tasks, providers, source revisions or mechanisms; no generality claim or single-pair confidence interval.",
+      "Report requested and actually delivered treatment separately, including fallback and exact refusal reason."
+    ],
+    "common_retained_outputs": [
+      "enrollment.jsonl",
+      "source_forest.json",
+      "runtime_archive_manifest.json",
+      "loaded_modules.json",
+      "launch_intentions.jsonl",
+      "task_allowed_inventory.json",
+      "raw_private_artifact_manifest.jsonl",
+      "allowlisted_run_and_session_ledgers.jsonl",
+      "usage_schema.json",
+      "resource_and_clock_scopes.json",
+      "acceptance_and_reward_receipts.jsonl",
+      "failed_uninvoked_missing_observations.jsonl",
+      "anonymous_derivative_manifest.json"
+    ],
+    "numeric_budgets": "Illustrative maximums for operator review, not approved spending limits or a claim of sufficient statistical power.",
+    "precision_rationale": "These small development comparisons diagnose delivery, qualification and accounting. Report per-task paired differences and all-enrolled outcomes; do not claim population-level precision. Decide any larger confirmatory sample only after a separately approved precision analysis.",
+    "model_policy": "Where applicable, freeze one observed model string/provider/CLI/reasoning/sampling configuration within each comparison; disable automatic provider/model fallback or mark the slot an identity failure. The proposal does not assume served revisions are knowable."
+  },
+  "experiments": [
+    {
+      "id": "E1",
+      "name": "Repeated native-input versus actually delivered compact-packet supervisor pairs",
+      "hypothesis": "A fully delivered compact packet may reduce total native-session usage without reducing task acceptance; initial message bytes alone cannot establish this.",
+      "gap": "T1 is one final successful pair following multiple revisions; earlier configured packet fell back, retrieval attempts and timed-out audits remain adverse or incomplete.",
+      "evidence": [
+        "workstreams/t1_report.md",
+        "workstreams/t1_findings.json"
+      ],
+      "exact_sources": {
+        "candidate_existing_runtime_sha256": "f89c7ace1f4387bcb020f223758609dac607c8e6258c208189bbd8dec2f652f8",
+        "runtime_status": "Retained identity only; complete manifest/import closure must be recovered and both task profiles independently qualified before approval.",
+        "task_candidates": [
+          "fix-code-vulnerability",
+          "largest-eigenval"
+        ],
+        "task_revision_status": "Exact revisions must be frozen from permitted pre-task inventories before enrollment; no revision inferred from current checkout.",
+        "delivery_contract": "decision_packet@2, native-input supervisor control; source restoration and required task-text bindings preserved."
+      },
+      "arms": [
+        {
+          "id": "native",
+          "treatment": "native-input supervisor"
+        },
+        {
+          "id": "compact",
+          "treatment": "delivered decision_packet@2 supervisor"
+        }
+      ],
+      "sample_unit": "One task/repetition matched pair; two fixed public development tasks \u00d7 three repetitions \u00d7 two arms =12 enrolled slots.",
+      "order_randomization": "Before any run, seed and retain a within-task AB/BA schedule with opposite first arms across tasks. No order changes based on outcomes.",
+      "controls": [
+        "Same model/router, reasoning, sampling, runtime, task bytes, planner, Doctor policy, budgets, acceptance and resource limits.",
+        "Exact full-input audit for each coding invocation; fallback is not classified as delivered compaction.",
+        "Retain expansion/restoration events and total conversation counters, not only first-message bytes.",
+        "Record provider cache and contemporaneous workload observations; do not claim cache equality or flush unrelated services."
+      ],
+      "exposed_task_status": "Public and previously tuned development tasks; not retrospectively held out.",
+      "budget": {
+        "max_slots": 12,
+        "max_native_tokens_per_slot": 1000000,
+        "max_native_tokens_campaign": 12000000,
+        "max_agent_seconds_per_slot": 6480,
+        "max_setup_seconds_per_slot": 1800,
+        "max_local_audit_seconds_per_slot": 300,
+        "max_retained_gib": 8,
+        "dollar_limit": null,
+        "dollar_limit_required_before_model_execution": true
+      },
+      "acceptance": "Original task reward and supervisor completion remain separate. Both original acceptance checks and exact delivery/restoration bindings must be reported. Do not weaken either check or replace failed runs.",
+      "stop_rule": "Stop new slots on configured resource, cost or integrity failure; retain enrolled uninvoked slots. Missing exact delivery downgrades treatment observability, not the original reward. No adaptive retries.",
+      "safety_checks": [
+        "No hidden/reference data in retrieval.",
+        "No production service or admission-threshold changes.",
+        "Refuse execution if one runtime cannot support both fixed task profiles."
+      ],
+      "retained_outputs": [
+        "complete_input_delivery_audits.jsonl",
+        "packet_restoration_coverage.jsonl",
+        "expanded_context_calls.jsonl",
+        "paired_task_results.json"
+      ],
+      "precision_rationale": "Six task-matched pairs permit inspection of repeat variability; inadequate for a general benchmark-superiority claim. This control is a native-input supervisor, not the native Codex harness.",
+      "operator_approval": false
+    },
+    {
+      "id": "E2",
+      "name": "Supported Doctor-enabled/disabled \u00d7 native/compact input ablation",
+      "hypothesis": "Avoided coding calls through an admitted deterministic repair and context reduction are separable mechanisms; their costs may interact.",
+      "gap": "T2 exercises a narrow symbolic repair while T1 final pair is explicitly model-only; unlike historical runtimes cannot identify a 2\u00d72 effect.",
+      "evidence": [
+        "workstreams/t2_t4_proof_observations.jsonl",
+        "workstreams/t1_report.md"
+      ],
+      "exact_sources": {
+        "task": "fix-code-vulnerability",
+        "existing_contract_runtime_sha256": "738b6c05790a65f218d39e9ae869d6fcd3cf56a39ebc0693a38ee0f42ace4231",
+        "existing_packet_runtime_sha256": "f89c7ace1f4387bcb020f223758609dac607c8e6258c208189bbd8dec2f652f8",
+        "compatibility": "These are different historical runtimes. Neither is asserted to support the factorial comparison. Recover an already-existing jointly qualified runtime or leave this proposal blocked; do not invent a compatible forest or start architecture development.",
+        "contract_caller": "retained qualified-source-08/source/benchmarks/agent_supervisor/container_coding/terminal_doctor_dispatch.py::prepare_terminal_doctor_dispatch"
+      },
+      "arms": [
+        {
+          "doctor": "enabled",
+          "input": "native"
+        },
+        {
+          "doctor": "enabled",
+          "input": "decision_packet@2"
+        },
+        {
+          "doctor": "disabled",
+          "input": "native"
+        },
+        {
+          "doctor": "disabled",
+          "input": "decision_packet@2"
+        }
+      ],
+      "sample_unit": "One task/repetition complete four-arm block; two prespecified repetitions =8 enrolled slots.",
+      "order_randomization": "Freeze two counterbalanced four-arm orders with retained seed before execution; analyze matched blocks only.",
+      "controls": [
+        "Disabling Doctor changes repair nomination only; security enforcement, checker, original verifier and action authority remain identical.",
+        "Same model, runtime, task, source, planner and acceptance limits for all four arms.",
+        "Actual deterministic dispatch, materialization, publication and provider absence must be proven from receipts rather than inferred from configuration."
+      ],
+      "exposed_task_status": "Previously exposed development task with benchmark-informed operator.",
+      "budget": {
+        "max_slots": 8,
+        "max_native_tokens_per_slot": 1000000,
+        "max_native_tokens_campaign": 8000000,
+        "max_agent_seconds_per_slot": 6480,
+        "max_setup_seconds_per_slot": 1800,
+        "max_retained_gib": 6,
+        "dollar_limit": null,
+        "dollar_limit_required_before_model_execution": true
+      },
+      "acceptance": "Unchanged original reward, validation, supervisor completion and independently admitted publication. A symbolic candidate alone is not task success.",
+      "stop_rule": "Do not enroll execution until joint support and all four routes are qualified without weakening checks. Stop on unsafe effect, identity mismatch or budget exhaustion; no substitution of a favored task or arm.",
+      "safety_checks": [
+        "No removal of security/admission gates.",
+        "No training against hidden grader or reference fix.",
+        "No assumption that a header repair operator solves numerical tasks."
+      ],
+      "retained_outputs": [
+        "factorial_enrollment.jsonl",
+        "doctor_contract_dispatch_materialization.jsonl",
+        "validation_publication_join.jsonl",
+        "input_delivery_audits.jsonl"
+      ],
+      "precision_rationale": "Two four-arm blocks diagnose mechanism participation and gross interaction only; no general interaction-effect precision claim.",
+      "operator_approval": false
+    },
+    {
+      "id": "E3",
+      "name": "Fixed multi-task reuse trajectory with cold-oracle checks",
+      "hypothesis": "A justified unchanged or irrelevant-change admission can avoid selected work while relevant changes invalidate it, including teardown and priming costs.",
+      "gap": "Fourteen lifecycle cases contain only two positive admissions; separate timing pairs and zero production-default reuse do not establish a complete multi-task trajectory.",
+      "evidence": [
+        "workstreams/historical_proof_scorer_reuse.json",
+        "workstreams/historical_report.md"
+      ],
+      "exact_sources": {
+        "retained_case_source": "papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/cases.json",
+        "retained_timing_source": "papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v6/timing.json",
+        "runtime_binding": "Exact reuse caller/source/fixture/environment policy must be recovered and frozen before enrollment; current production default cannot be assumed to admit reuse.",
+        "task_selection": "Choose and freeze two existing public development tasks with distinct admitted dependency footprints from the retained case family before any execution."
+      },
+      "arms": [
+        "Reuse-enabled trajectory under unchanged admission policy",
+        "Independent cold oracle for every trajectory stage"
+      ],
+      "sample_unit": "Two fixed tasks \u00d7 two repeated trajectories \u00d7 four stages (cold, unchanged, irrelevant change, relevant change) \u00d7 candidate/cold-oracle =32 evaluation cells; priming is additionally charged and recorded.",
+      "order_randomization": "Stage order follows causal dependencies; counterbalance task order and candidate/oracle run order within each stage using a retained seed. Use isolated state for the oracle.",
+      "controls": [
+        "Exact source, fixture, environment and selected-test footprints.",
+        "Retain setup/call/teardown results separately; a reused passing call with failed teardown remains a failed item.",
+        "Cold checks use the same disclosed constructed oracle; do not claim independent semantic truth from agreeing copies."
+      ],
+      "exposed_task_status": "Authored/exposed development reuse tasks; no unseen-repository claim.",
+      "budget": {
+        "max_evaluation_cells": 32,
+        "max_model_calls": 0,
+        "max_cpu_wall_seconds": 3600,
+        "max_memory_gib": 8,
+        "max_retained_gib": 2,
+        "max_priming_seconds_per_task": 300
+      },
+      "acceptance": "Every admitted reuse must have correct source/fixture/environment applicability and agree with its separate cold check. Relevant-change invalidation and teardown failure must be preserved. Report complete trajectory outcomes and all setup costs.",
+      "stop_rule": "One false reuse, stale binding or missing cold oracle halts further admissions and preserves all remaining planned slots; no threshold changes or new policy promotion.",
+      "safety_checks": [
+        "No reuse receipts treated as execution authority.",
+        "No production default changed.",
+        "No hidden tests copied into model-facing indexes."
+      ],
+      "retained_outputs": [
+        "priming_receipts.jsonl",
+        "reuse_admissions_and_refusals.jsonl",
+        "cold_oracle_receipts.jsonl",
+        "teardown_outcomes.jsonl",
+        "dependency_changes.jsonl",
+        "full_trajectory_costs.json"
+      ],
+      "precision_rationale": "Designed to observe admission boundaries and full trajectory accounting, not estimate a universal false-reuse probability.",
+      "operator_approval": false
+    },
+    {
+      "id": "E4",
+      "name": "Bounded local-contract checker and admission correspondence qualification",
+      "hypothesis": "The exact runtime checker rejects incorrect, stale or mismatched local-contract evidence and accepts correctly bound evidence under its declared assumptions.",
+      "gap": "Local solver/kernel receipts do not supply a theorem that the actual admission checker implements the stated contract; older scoring false admissions demonstrate why labels alone are inadequate.",
+      "evidence": [
+        "workstreams/t2_t4_proof_observations.jsonl",
+        "workstreams/historical_proof_scorer_reuse.json",
+        "workstreams/cross_ir_findings.json"
+      ],
+      "exact_sources": {
+        "local_theorem_sha256": "111cc1c1ce988b5fddf545158ad7dcb7b11366836170ec5a18942b08a571f55d",
+        "contract_interface": "DoctorAuthoritativeProofReceipt@1",
+        "source_caller_lead": "artifacts/terminal_bench_supervisor/symbolic-security-20260929/qualified-source-08/source/benchmarks/agent_supervisor/container_coding/terminal_doctor_dispatch.py",
+        "lean_binary_sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+        "z3_binary_sha256": "93d21370b00778f72cc5713065fca89c5ee2641e62a4d026a83ab2843bc0e9fe",
+        "prerequisite": "Recover the exact admitted checker and theorem/source/axiom receipts first. If unavailable, keep proposal blocked. A new correspondence proof would be separately proposed work, not an accomplished result."
+      },
+      "arms": [
+        "Exact existing admission checker",
+        "Independent specification oracle for the same bounded contract"
+      ],
+      "sample_unit": "Sixteen prespecified unique authored evidence candidates: eight positive and eight negative, including incorrect guard semantics, stale source, mismatched theorem/arguments and wrong authority. Duplicate outcome records do not increase this denominator.",
+      "order_randomization": "Freeze candidate hashes before execution; randomize evaluation order with retained seed. No tuning on the final protected set.",
+      "controls": [
+        "Same statement and assumptions in checker and oracle.",
+        "Keep expected outcomes and protected checker/reference material outside worker/model retrieval.",
+        "Inspect actual axiom output and exact caller bindings; no assumption that native_decide is kernel-only.",
+        "Any solver timeout/unknown is distinct from counterexample or proof."
+      ],
+      "exposed_task_status": "Authored bounded checker qualification, not a repair benchmark or prevalence estimate.",
+      "budget": {
+        "max_model_calls": 0,
+        "max_candidates": 16,
+        "max_solver_seconds_per_candidate": 30,
+        "max_lean_seconds_per_candidate": 30,
+        "max_total_wall_seconds": 1800,
+        "max_retained_gib": 1
+      },
+      "acceptance": "Zero false admissions in this fixed set; positives must also progress under the exact policy. A finite pass does not itself constitute a machine-checked correspondence theorem.",
+      "stop_rule": "Stop on first false admission, source/policy mismatch or protected-data exposure; preserve all slots and original results. Do not weaken checker or acceptance to obtain a pass.",
+      "safety_checks": [
+        "No hidden-grader rerun by implication.",
+        "No arbitrary code from evidence executed.",
+        "No automatic production policy promotion."
+      ],
+      "retained_outputs": [
+        "candidate_hashes_and_private_expected_statuses.jsonl",
+        "checker_and_oracle_results.jsonl",
+        "source_theorem_caller_bindings.json",
+        "axiom_stdout_commitments.json",
+        "counterexamples_or_unknowns.jsonl"
+      ],
+      "precision_rationale": "Tests a bounded correspondence concern and detects crafted errors; cannot estimate general soundness or attack prevalence.",
+      "operator_approval": false
+    },
+    {
+      "id": "E5",
+      "name": "Grammar-controlled deterministic, frozen and repository-adapted numerical comparison",
+      "hypothesis": "Repository adaptation helps only where the decoder can represent the source; grammar enrichment and weight updates are separate interventions whose preparation costs may outweigh inference savings.",
+      "gap": "T3, T4 and X1 independently used pinned-parent Source384 with zero target updates; T4 had four unsupported predictions and105 unresolved obligations. An adapted child elsewhere failed0/9 holdouts and was not promoted.",
+      "evidence": [
+        "workstreams/t2_t4_encoder_deployments.jsonl",
+        "workstreams/cross_ir_findings.json",
+        "workstreams/t2_t4_findings.json"
+      ],
+      "exact_sources": {
+        "task": "largest-eigenval, fixed permitted pre-task source revision",
+        "reference_frozen_parent_checkpoint_sha256": "2ca38dfcc05536315fc3e2c0647b710b930ef4066b474061a7b4e5bfb9a258c5",
+        "historical_comparison_runtime_sha256": "488ae75f90bd9c4c9cc88b520d4db68157984625ea8bbef3874f63da48b5f94a",
+        "datasets_source_owner": "external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/codebase_source_384.py",
+        "grammar_status": "Freeze two independently assessed grammars, existing restricted and richer supported; a richer grammar is not presumed implemented or qualified. If no qualified richer grammar exists, do not start that stratum or expand this audit into development.",
+        "training_data": "Only disclosed pre-task repository source inventory; no hidden grader, expected fix, reference commit, final holdout outcome or benchmark reward in target generation or selection."
+      },
+      "arms": [
+        {
+          "grammar": "existing",
+          "representation": "deterministic-only"
+        },
+        {
+          "grammar": "existing",
+          "representation": "frozen unadapted checkpoint"
+        },
+        {
+          "grammar": "existing",
+          "representation": "repository-adapted qualified checkpoint"
+        },
+        {
+          "grammar": "richer independently qualified",
+          "representation": "deterministic-only"
+        },
+        {
+          "grammar": "richer independently qualified",
+          "representation": "frozen unadapted checkpoint"
+        },
+        {
+          "grammar": "richer independently qualified",
+          "representation": "repository-adapted qualified checkpoint"
+        }
+      ],
+      "sample_unit": "One fixed task, two prespecified preparation/run repetitions per grammar/profile =12 enrolled slots. Representation preparation differs; any authorized neural coding residual has the same model and budget in every arm.",
+      "order_randomization": "Freeze grammar strata and qualification rules first; counterbalance the three representation profiles within each stratum. Separate train/validation/holdout groups with clone controls before fitting.",
+      "controls": [
+        "Keep task/source/model/acceptance/budget fixed; compare training within grammar strata and grammar within preparation profiles.",
+        "Validation can select checkpoints; final holdouts and benchmark rewards cannot.",
+        "Retain wrong predictions unchanged; never replace them with deterministic targets and claim learned correctness.",
+        "Repository-specific CodebaseIR adaptation does not imply IntentIR, LegalIR, SecurityIR or UI/UX head training.",
+        "Keep OOD, missing vocabulary/parameters, unsupported grammar, missing logic/policy, retrieval overhead and infrastructure failures separate."
+      ],
+      "exposed_task_status": "Known public development task; disclosed transductive source adaptation is not zero-shot evaluation.",
+      "budget": {
+        "max_enrolled_slots": 12,
+        "max_training_updates_per_adapted_slot": 200,
+        "max_training_gpu_wall_seconds_per_adapted_slot": 600,
+        "max_training_source_units": 256,
+        "max_native_tokens_per_invoked_slot": 750000,
+        "max_native_tokens_campaign": 9000000,
+        "max_agent_seconds_per_slot": 6480,
+        "max_retained_gib": 8,
+        "dollar_limit": null,
+        "dollar_limit_required_before_model_execution": true
+      },
+      "acceptance": "Independently qualify reconstruction plus source/effect/modal bindings, parent retention and supported grammar before relying on an adapted head. Keep failed qualification as an enrolled preparation failure and uninvoked benchmark slot, not a fabricated zero reward. Once invoked, preserve original benchmark reward even if representation is unqualified.",
+      "stop_rule": "Stop an adapted slot on leakage, qualification failure, grammar mismatch or preparation budget. No on-holdout tuning, promotion of failed heads, or replacement by a successful later attempt.",
+      "safety_checks": [
+        "Training, weight acquisition and solver execution each require explicit separate approval for this proposal.",
+        "Do not overwrite parent/domain checkpoints.",
+        "Pin all datasets and normalization/decoder versions and retain rights/provenance."
+      ],
+      "retained_outputs": [
+        "grammar_coverage_matrix.json",
+        "train_validation_holdout_group_manifest.json",
+        "parent_child_checkpoint_byte_hashes.json",
+        "all_training_attempts.jsonl",
+        "independent_qualification_receipts.jsonl",
+        "unchanged_predictions_and_source_bindings.private.jsonl",
+        "all_enrolled_outcomes.jsonl",
+        "preparation_inference_requalification_costs.json"
+      ],
+      "precision_rationale": "A controlled development diagnosis of unsupported grammar versus adaptation; two repetitions per profile do not establish repository-wide or cross-task efficacy.",
+      "operator_approval": false
+    },
+    {
+      "id": "E6",
+      "name": "Four-case fully traced cross-IR policy and action example",
+      "hypothesis": "A supported joined semantic path can permit authorized progress and reject a checked policy violation while explicitly representing inapplicable norms and missing semantics.",
+      "gap": "Current component callers and separate tests do not establish one prompt\u2192IntentIR\u2192CodebaseIR\u2192SecurityIR/LegalIR/UIUX\u2192counterexample\u2192host action trace.",
+      "evidence": [
+        "workstreams/cross_ir_findings.json",
+        "workstreams/t1_cross_ir_trace.jsonl",
+        "workstreams/t2_t4_proof_observations.jsonl"
+      ],
+      "exact_sources": {
+        "intent_caller": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/intent_autoencoder_advisor.py::prepare_intent_advice",
+        "codebase_matcher": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/intent_codebase_matching.py",
+        "security_caller": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/security_autoencoder_advisor.py::prepare_security_advice",
+        "legal_adapter": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/legal_constraint_adapter.py",
+        "ui_producer": "swissknife/src/services/apps/mcp-deontic-ui-manifest.ts",
+        "host_admission_client": "swissknife/src/services/mcp/admissionTokenClient.ts",
+        "policy_caller": "Mcp-Plus-Plus/adapters/system_one/src/mcp_pp_system_one/exact_policy.py",
+        "binding_prerequisite": "These are current source leads, not a compatible executed forest. Recover an existing connected runtime and freeze exact module origins before approval. If absent, proposal remains blocked rather than authorizing new architecture."
+      },
+      "arms": [
+        "Permitted action with applicable organizational policy",
+        "Checked violating action path",
+        "Explicit inapplicable-norm case",
+        "Missing or ambiguous semantics case"
+      ],
+      "sample_unit": "Four fixed authored cases over one small permitted source snapshot and one explicitly organizational policy. One execution per case, with fixed positive/negative witnesses; no benchmark-efficacy claim.",
+      "order_randomization": "Freeze case content commitments and expected decisions before execution; randomize order with retained seed and reset isolated operational state per case.",
+      "controls": [
+        "Same mapping IDs/versions, source snapshot, policy provenance, inference checkpoints and host interface.",
+        "Preserve actor/action/object, modalities, negation, order/conditions, norm exceptions and applicability without weakening O/P/F.",
+        "Fixture/KG referents may supply declared entities, but cannot replace an incorrect learned prediction with a training label.",
+        "Use complete solver inputs, a fixed transition bound and nonvacuity checks; keep SAT, bounded UNSAT, timeout, unknown and unsupported distinct.",
+        "Action authority must independently bind actor/tool/arguments/resources/confirmation/lease/fence; a UI allow field cannot authorize effects."
+      ],
+      "exposed_task_status": "Authored illustrative example; policy is organizational and is not represented as a statute or proof of legal compliance.",
+      "budget": {
+        "max_cases": 4,
+        "max_frontier_model_calls": 0,
+        "max_training_steps": 0,
+        "max_solver_seconds_per_case": 30,
+        "max_local_inference_seconds_per_case": 60,
+        "max_total_wall_seconds": 600,
+        "max_retained_gib": 1,
+        "max_transition_depth": 4
+      },
+      "acceptance": "Permitted action progresses only after independent admission and observed effect/publication; violating path yields a checked counterexample and refusal; inapplicability has an explicit decision; missing semantics remains unsupported/review according to unchanged policy. A fail-open candidate generator does not confer action authority.",
+      "stop_rule": "Stop on absent compatible runtime, missing admission binding, unsafe effect, vacuous constraint set or exceeded bound. Retain unsupported/incomplete cases; do not silently add training, scaffolds or relax policy to produce a trace.",
+      "safety_checks": [
+        "Local disposable permitted resources only; no production services or external messages.",
+        "No model download/training without separate approval.",
+        "No claim that bounded UNSAT gives unbounded safety or complete intended meaning."
+      ],
+      "retained_outputs": [
+        "prompt_hash_and_normalization.json",
+        "domain_frames_and_unsupported_fields.private.jsonl",
+        "source_effect_grounding.json",
+        "norm_applicability_and_mapping_versions.json",
+        "solver_inputs.private.jsonl",
+        "bounds_nonvacuity_counterexamples.jsonl",
+        "host_authority_and_confirmation_receipts.jsonl",
+        "invocation_effect_publication_invalidation_trace.jsonl"
+      ],
+      "precision_rationale": "A four-case architectural trace and boundary demonstration, not a statistical benchmark or evidence of learned generalization.",
+      "operator_approval": false
+    }
+  ]
+}

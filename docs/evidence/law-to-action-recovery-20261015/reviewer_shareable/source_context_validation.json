@@ -1,0 +1,157 @@
+{
+  "C1_C6_join": null,
+  "C1_C6_null_reason": "Original author ledger and exact component identities missing; no joins inferred.",
+  "admission": {
+    "admitted_combined_cpu_seconds": null,
+    "admitted_work_seconds": null,
+    "attempts": 1,
+    "cause_inferred": false,
+    "end_proc_status": {
+      "VmHWM": "35428 kB",
+      "VmRSS": "35428 kB",
+      "VmSize": "58976 kB"
+    },
+    "end_ru_maxrss_kib_raw": 4517460,
+    "lease_released": false,
+    "peak_memory_null_reason": "/proc high-water is process lifetime; raw getrusage may include inherited pre-exec high-water. No isolated work-only peak is claimed.",
+    "retries": 0,
+    "scheduler_overrides": 0,
+    "startup_proc_status": {
+      "VmHWM": "17312 kB",
+      "VmRSS": "17312 kB",
+      "VmSize": "40224 kB"
+    },
+    "startup_ru_maxrss_kib_raw": 4517460,
+    "status": "not_admitted",
+    "work_only_attributable_peak_memory_kib": null,
+    "work_started": false
+  },
+  "admission_outcome": {
+    "admission_observation_recorded": true,
+    "attempts": 1,
+    "cause_inferred": false,
+    "diagnostic_limit": "Detached scheduler observations/terminal branch inputs are preserved in the admission receipt; no exclusive cause inferred.",
+    "exception": {
+      "message": "timed out waiting for a resource lease",
+      "type": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler.LeaseTimeoutError"
+    },
+    "retries": 0,
+    "scheduler_overrides": 0,
+    "timeout_decision_recorded": true,
+    "total_wall_seconds": 10.069305492099375,
+    "work_started": false
+  },
+  "author_report_sha256": "a98a5c34beefc571344c280d589d25d97caccf406bacc10630298131694ddd5c",
+  "checks": null,
+  "conclusion": "The parent recovered the original PDF. This task did not independently rehash or preprocess it: its sole shared admission attempt timed out. Text pin, five quotation-offset and field-map source checks remain unperformed. Preflight metadata confirms 11 actual field groups; historical parser output and declared losses are unchanged.",
+  "derived_text_files_created": 0,
+  "editorial_clarification": {
+    "edited_utc": "2026-10-15T11:00:18.728622+00:00",
+    "kind": "Metadata-only clarification after the single failed admission; no retry or work bypass.",
+    "raw_author_report_sha256": "345d7429681fd5f73cfd871cc819b5e37e9dd5ae9bda12a958535abe953905d0",
+    "raw_public_report_sha256": "5d9ca8cd370b48304d83f008ca18b1f599fd679927093ae793a9278b329bcbf4",
+    "reason": "Make unexecuted preprocessing explicit and preserve the separately established11-field count correction. No extraction/comparison result was invented."
+  },
+  "historical_parser_unchanged": {
+    "converter_proposition": "UnparsedNonNormativeOrAmbiguousText",
+    "element_count": 0,
+    "elements": [],
+    "rerun": false,
+    "semantic_fidelity_established": false,
+    "source": "Previously retained authorized development observation; no new parser execution."
+  },
+  "legal_applicability_established": false,
+  "limits": {
+    "admission_timeout_seconds": 10,
+    "admitted_wall_seconds": 30,
+    "child_process_slots": 1,
+    "cpu_seconds": 20,
+    "cpu_slots": 1,
+    "memory_mb": 256,
+    "output_file_bytes": 2097152,
+    "selected_development_copies_bytes": 30720
+  },
+  "old_admission_replayed": false,
+  "operations": {
+    "database_access": false,
+    "human_or_legal_review": false,
+    "mixed_annotation_reads": false,
+    "network_access": false,
+    "new_pdfinfo_metadata_inspection": false,
+    "new_pdftotext_preprocessing": false,
+    "parser_or_converter_rerun": false,
+    "prior_packages_written": false,
+    "protected_panel_reads": false,
+    "training_or_model_calls": 0
+  },
+  "preflight_field_count_correction": {
+    "actual_retained_field_group_count": 11,
+    "all_actual_field_map_offset_checks": null,
+    "all_actual_field_map_offset_checks_null_reason": "No admitted PDF extraction/span comparison executed.",
+    "development_context_sha256": "574d4309bb099869e6b5c16f0b6ff1ad9486687f27627a190f9d0a3dbaa752e6",
+    "field_names": [
+      "action",
+      "actor",
+      "authority",
+      "conditions",
+      "cross_references",
+      "definitions",
+      "effective_interval",
+      "exceptions",
+      "jurisdiction",
+      "modality",
+      "object"
+    ],
+    "kind": "Pre-admission reading of already retained development metadata and producer/validator source only; no source-text validation.",
+    "original_validator_declared_count": 11,
+    "preserved_limits": {
+      "applicability": "unknown",
+      "definitions": "unsupported",
+      "exceptions": "unknown",
+      "human_review": "not_obtained"
+    },
+    "requested_or_previous_label": 12,
+    "retained_source_span_count": 5,
+    "twelfth_field": null,
+    "twelfth_field_null_reason": "The retained packet and original validator declare 11 atom field groups. The validator separately expects 12 reserved legal cases; the origin of the earlier mistaken field count is not established."
+  },
+  "preprocessing_replayed": false,
+  "redaction": "Absolute local paths, case identities and original raw source contents omitted; all full derived text and copied development records remain author-only.",
+  "schema": "law-to-action-source-context-validation/v1",
+  "scientific_experiment_replayed": false,
+  "scope": "New offline source preprocessing plus exact retained development byte/span/field-reference comparison; no new scientific parser or legal review.",
+  "semantic_fidelity_established": false,
+  "source_body_copies_created": 0,
+  "status": "deferred_shared_admission_timeout",
+  "unexecuted_checks": {
+    "all_eleven_field_reference_offsets": {
+      "null_reason": "Own default shared resource lease timed out before source-body work began.",
+      "result": null
+    },
+    "current_pdf_byte_pin_comparison": {
+      "null_reason": "Own default shared resource lease timed out before source-body work began.",
+      "result": null
+    },
+    "five_quote_actual_offset_slices": {
+      "null_reason": "Own default shared resource lease timed out before source-body work began.",
+      "result": null
+    },
+    "new_text_extraction": {
+      "null_reason": "Own default shared resource lease timed out before source-body work began.",
+      "result": null
+    },
+    "normalized_text_pin_comparison": {
+      "null_reason": "Own default shared resource lease timed out before source-body work began.",
+      "result": null
+    },
+    "producer_decoded_text_pin_comparison": {
+      "null_reason": "Own default shared resource lease timed out before source-body work began.",
+      "result": null
+    },
+    "two_page_full_context_comparison": {
+      "null_reason": "Own default shared resource lease timed out before source-body work began.",
+      "result": null
+    }
+  },
+  "visibility": "reviewer_shareable"
+}

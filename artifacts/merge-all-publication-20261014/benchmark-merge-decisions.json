@@ -1,0 +1,217 @@
+{
+  "schema": "merge-all-benchmark-integration-decisions@1",
+  "generated_at": "2026-10-14T03:47:33.727234+00:00",
+  "repository": "/home/barberb/lift_coding_worktrees/merge-all-accelerate-20261014",
+  "commits": {
+    "provider_context_merge": "452239d40698a2cceab035ff001d573733804d5e",
+    "capsule_growth_merge": "942686a6d1a966f96658047095d837eaf142dd4d"
+  },
+  "scope": {
+    "initial_merge_conflicted_files_total": 20,
+    "initial_benchmark_conflicts_owned_here": 13,
+    "initial_runtime_conflicts_owned_by_other_agent": 7,
+    "followup_benchmark_conflicts_owned_here": 7,
+    "total_conflict_resolution_instances_across_team": 27,
+    "unique_benchmark_conflict_paths_owned_here": 13,
+    "initial_benchmark_conflicts": [
+      "benchmark_controls.py",
+      "full_supervisor_benchmark.py",
+      "full_supervisor_harbor_agent.py",
+      "terminal_container_supervisor.py",
+      "terminal_context_audit.py",
+      "terminal_deployment.py",
+      "terminal_doctor_dispatch.py",
+      "terminal_indexed_preparation.py",
+      "terminal_initial_context.py",
+      "terminal_semantic_metadata_policy.py",
+      "terminal_source_view_policy.py",
+      "test_terminal_initial_context.py",
+      "test_terminal_source_view_policy.py"
+    ],
+    "followup_benchmark_conflicts": [
+      "benchmark_controls.py",
+      "full_supervisor_benchmark.py",
+      "full_supervisor_harbor_agent.py",
+      "terminal_container_supervisor.py",
+      "terminal_doctor_dispatch.py",
+      "terminal_indexed_preparation.py",
+      "terminal_initial_context.py"
+    ],
+    "additional_benchmark_compatibility_edits": [
+      "container_worker_deployment.py",
+      "terminal_repository_source_policy.py",
+      "test_terminal_repository_source_policy.py",
+      "test_terminal_repository_source_routing.py",
+      "terminal_query_reference_experiment.py"
+    ],
+    "index_mutations_by_auditor": false,
+    "tests_run_by_auditor": false
+  },
+  "decisions": [
+    {
+      "topic": "independently added source-view APIs",
+      "retained": "Main source_view_profile and structured source_view_policy recipe, descriptor hashes, source edit modes and worker capability validation.",
+      "merged": "Incoming raw/compact Python helper modes use source_view_advisory_policy for function arguments, frozen config/report/receipt keys, and --source-view-advisory-policy CLI.",
+      "compatibility": "SourceViewPolicy and its main recipe CLI remain unchanged. The old incoming advisory string must use the new explicit field; no dict/string guessing weakens the recipe parser. Benchmark repository policy wrapper accepts source_view_advisory_policy, while runtime repository policy retains its existing internal source_view_policy keyword."
+    },
+    {
+      "topic": "signed source custody and audit",
+      "retained": [
+        "Signed Terminal semantic-source scope inclusion and dispatch recheck",
+        "Source-formalization receipt checks and semantic prompt component census",
+        "Source-view descriptor/guidance binding, source editing checks and source-session telemetry",
+        "Explicit planning mode and capsule retrieval selection",
+        "Provider quota, pressure/backoff and stopped-provider observations"
+      ],
+      "merged": "Incoming source-input/query-reference transformations and complete receipt binding remain represented in exact-input replay. Replay transform order follows runtime translation, selected query/source-input projection, worker source guidance, Doctor residual, public instruction, then model wrapper.",
+      "guard": "Signed source views refuse simultaneous incoming advisory/repository/source-input/query-reference policies; neither side is silently omitted."
+    },
+    {
+      "topic": "capsule selector compatibility",
+      "decision": "Verified retrieval capsule ranking and indexed semantic capsule profiles are independently qualified selectors and cannot be selected together."
+    },
+    {
+      "topic": "bounded capsule budgets",
+      "decision": "Capsule budgets are additive to indexed context profiles. Effective maximum is min(profile maximum, selected explicit budget); legacy budget preserves the profile maximum.",
+      "examples": [
+        {
+          "profile": "indexed-default@1",
+          "budget": "legacy",
+          "effective_maximum": 8
+        },
+        {
+          "profile": "indexed-compact@1",
+          "budget": "legacy",
+          "effective_maximum": 2
+        },
+        {
+          "profile": "indexed-default@1",
+          "budget": "one-capsule@1",
+          "effective_maximum": 1
+        },
+        {
+          "profile": "indexed-compact@1",
+          "budget": "one-capsule@1",
+          "effective_maximum": 1
+        }
+      ],
+      "freshness": "Initial descriptor and result bind explicit semantic_context_profile as well as capsule_budget. Equal effective caps cannot hide changed frozen profile identity."
+    },
+    {
+      "topic": "checked provider-free Doctor route",
+      "decision": "Retain provider-free materialization observation and not_applicable context input audit. Model-only fallback policy route requirements do not veto an independently checked provider-free Doctor candidate. Policy combinations still validate; provider usage is preserved when treatment metadata differs."
+    }
+  ],
+  "validation_by_this_agent": {
+    "static_compile": "All benchmark Python files compiled successfully using Python compile(); no imports, providers, models, containers, training, or tests executed.",
+    "ast_review": "At first integration, changed benchmark files had no duplicate top-level definitions or literal dictionary keys.",
+    "added_regression_coverage": [
+      "Four signed source/profile versus incoming projection rejection cases",
+      "One competing capsule-selector rejection case",
+      "Expanded actual authored initial-context test to six indexed-profile by capsule-budget cases, checking selected limits and frozen-profile drift rejection"
+    ],
+    "test_execution_status": "Parent/root owns serialized executions and authoritative pass/failure evidence. This report makes no suite-passed or live token-savings claim."
+  },
+  "docs_changes": [
+    {
+      "path": "benchmarks/agent_supervisor/container_coding/README.md",
+      "before_sha256": "9fbd741ac95629104d6be09b339ffbdd350992d57efd1e383a8e33b654b1c8df",
+      "after_sha256": "dfea728e67e88e6c704edad97c8518ce2b553752726914664349f02cba046023",
+      "reason": "Rename only the optional raw/compact helper CLI in existing benchmark guidance; preserve structured source recipe option."
+    }
+  ],
+  "historical_root_publication_exceptions": {
+    "source": "root-audit.json and artifacts/autoencoder-balanced-wording-20261007/publication/final-main-worktree-reconciliation.json",
+    "historical_count_caveat": "Path counts below belong to the retained October 7 audit; no fresh payload custody or model-weight assessment is asserted.",
+    "tips": [
+      {
+        "tip": "ef9c8e4d94d9d427d1bd60168e9bd6d0a15cfe38",
+        "refs": [
+          "refs/heads/publication/canonical-current-root-20261004/3560d0e1d9383e2100675998"
+        ],
+        "historical_20261007_path_counts": {
+          "already_exact_main_postimage": 2362,
+          "historical_postimage_absent_main_unreviewed": 147,
+          "historical_postimage_differs_main_unreviewed": 3
+        },
+        "prior_disposition": "Most changed postimages exact on main. Every remaining different/deleted postimage or absent loose path is retained in historical tip and explicitly unreviewed for source restoration/archive port; no wholesale cherry-pick.",
+        "current_audit_status": "Tip remains outside locally observed root origin/main at f2407c64b9c4cc5147b2f70d4bf4717395dd7f11; history reachability is not evidence that its old snapshot should replace current main.",
+        "integration_exception": "Retain local refs and evidence. Do not restore obsolete canonical snapshots, bulk raw experiment/checkpoint payloads, historical publisher state or older source variants without path-level custody and compatibility review."
+      },
+      {
+        "tip": "bc64e1a2d3d3428ae3823fd4754d0051a61d485d",
+        "refs": [
+          "refs/heads/publication/canonical-wip-20261004/3560d0e1d9383e2100675998"
+        ],
+        "historical_20261007_path_counts": {
+          "already_exact_main_postimage": 699,
+          "historical_postimage_absent_main_unreviewed": 27,
+          "historical_postimage_differs_main_unreviewed": 4
+        },
+        "prior_disposition": "Most changed postimages exact on main. Every remaining different/deleted postimage or absent loose path is retained in historical tip and explicitly unreviewed for source restoration/archive port; no wholesale cherry-pick.",
+        "current_audit_status": "Tip remains outside locally observed root origin/main at f2407c64b9c4cc5147b2f70d4bf4717395dd7f11; history reachability is not evidence that its old snapshot should replace current main.",
+        "integration_exception": "Retain local refs and evidence. Do not restore obsolete canonical snapshots, bulk raw experiment/checkpoint payloads, historical publisher state or older source variants without path-level custody and compatibility review."
+      },
+      {
+        "tip": "ce3e21da27d23bfa4ac5490be9a5cb44798945f2",
+        "refs": [
+          "refs/heads/publication/main-20261004/root-02"
+        ],
+        "historical_20261007_path_counts": {
+          "already_exact_main_postimage": 2356,
+          "historical_postimage_absent_main_unreviewed": 174,
+          "historical_postimage_differs_main_unreviewed": 2
+        },
+        "prior_disposition": "Most changed postimages exact on main. Every remaining different/deleted postimage or absent loose path is retained in historical tip and explicitly unreviewed for source restoration/archive port; no wholesale cherry-pick.",
+        "current_audit_status": "Tip remains outside locally observed root origin/main at f2407c64b9c4cc5147b2f70d4bf4717395dd7f11; history reachability is not evidence that its old snapshot should replace current main.",
+        "integration_exception": "Retain local refs and evidence. Do not restore obsolete canonical snapshots, bulk raw experiment/checkpoint payloads, historical publisher state or older source variants without path-level custody and compatibility review."
+      },
+      {
+        "tip": "57fd19895ce42ad68f87b3d7126fbf19da285bdb",
+        "refs": [
+          "refs/heads/publication/main-20261004/root-03"
+        ],
+        "historical_20261007_path_counts": {
+          "already_exact_main_postimage": 2397,
+          "historical_postimage_differs_main_unreviewed": 3
+        },
+        "prior_disposition": "Most changed postimages exact on main. Every remaining different/deleted postimage or absent loose path is retained in historical tip and explicitly unreviewed for source restoration/archive port; no wholesale cherry-pick.",
+        "current_audit_status": "Tip remains outside locally observed root origin/main at f2407c64b9c4cc5147b2f70d4bf4717395dd7f11; history reachability is not evidence that its old snapshot should replace current main.",
+        "integration_exception": "Retain local refs and evidence. Do not restore obsolete canonical snapshots, bulk raw experiment/checkpoint payloads, historical publisher state or older source variants without path-level custody and compatibility review."
+      },
+      {
+        "tip": "9d1944b9a9fd95abbb6297b4c7d34a1312809f14",
+        "refs": [
+          "refs/heads/publication/main-refresh-20261004/root-01"
+        ],
+        "historical_20261007_path_counts": {
+          "already_exact_main_postimage": 2390,
+          "historical_postimage_differs_main_unreviewed": 1
+        },
+        "prior_disposition": "Most changed postimages exact on main. Every remaining different/deleted postimage or absent loose path is retained in historical tip and explicitly unreviewed for source restoration/archive port; no wholesale cherry-pick.",
+        "current_audit_status": "Tip remains outside locally observed root origin/main at f2407c64b9c4cc5147b2f70d4bf4717395dd7f11; history reachability is not evidence that its old snapshot should replace current main.",
+        "integration_exception": "Retain local refs and evidence. Do not restore obsolete canonical snapshots, bulk raw experiment/checkpoint payloads, historical publisher state or older source variants without path-level custody and compatibility review."
+      }
+    ],
+    "specific_residuals_from_prior_review": {
+      "absent_current_main_paths": 174,
+      "absent_path_blob_not_found_in_two_main_trees": 73,
+      "absent_path_same_blob_elsewhere_on_two_main_trees": 101,
+      "different_or_deleted_paths": [
+        "implementation_plan/docs/49-autoformalization-joint-embeddings-improvement-plan-2026-10-03.md",
+        "implementation_plan/docs/50-autoformalization-alignment-implementation-backlog-2026-10-04.md",
+        "tests/test_autoformalization_recovery_probe.py",
+        "artifacts/autoformalization-publication-20261004/integrate_main.py",
+        "artifacts/autoformalization-publication-20261004/git/prepare_datasets_hf_history_recovery.py"
+      ],
+      "unique_nonexact_paths": 179
+    },
+    "why_not_wholesale_merge": [
+      "The five snapshot/publication refs are from October 4; most selected source postimages were already integrated on later main by content.",
+      "The two maximal historical snapshot tips differ from their main merge base by about 2,800-2,945 files and roughly 21 million inserted lines, so blind history integration can restore bulk evidence and obsolete publisher/canonical state.",
+      "The prior audit records 174 absent main paths: 101 exact blobs elsewhere and 73 not found as loose blobs in either inspected main tree. The latter include 27 alignment checkpoint/control JSON paths and 46 additional-decoder release documentation/checkpoint/source-capsule paths; external/compressed custody and provenance remain unverified by this merge.",
+      "Five historical changed source/plan/test paths require semantic and current-API review; old proof, qualification or training receipts do not establish current execution correctness.",
+      "A blanket ours merge would falsely imply content integration. Preserve refs, describe exceptions, and port only reviewed unique contributions."
+    ]
+  }
+}

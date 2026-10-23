@@ -1,0 +1,343 @@
+{
+  "all_other_incoming_entries_preserved": true,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/hf-action-resume-invocation-v01.json": {
+      "bytes": 3644,
+      "path": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/hf-action-resume-invocation-v01.json",
+      "sha256": "8162086428b7fe21807d1c85c21eee2796d9cf7d15b078016d79781ecce793f8"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/hf-publication-completion-independent-review-v01.json": {
+      "bytes": 77425,
+      "path": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/hf-publication-completion-independent-review-v01.json",
+      "sha256": "1ade89eda52fe2424bdf1944497d8787b6cbcadad76a77f09302491bb81b2d40"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/publication-prose-delta-independent-review-v01.json": {
+      "bytes": 10026,
+      "path": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/publication-prose-delta-independent-review-v01.json",
+      "sha256": "256d2213a8f0fb8a681f608187e226c420f5d9b6c2636475080b47e101ad8c11"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-owned-fast-forward-v01.json": {
+      "bytes": 2308,
+      "path": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-owned-fast-forward-v01.json",
+      "sha256": "a7750623c1080faae7c798ab9445c76dfef9e1b970d2b677a93095b73977f516"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-publication-stage-packet-v01.json": {
+      "bytes": 9299,
+      "path": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-publication-stage-packet-v01.json",
+      "sha256": "074fe033daff5ed12a871819e4abdad74da590586dab1331d7c98a949f8e9981"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-staged-prose-independent-review-v01.json": {
+      "bytes": 15164,
+      "path": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/source-staged-prose-independent-review-v01.json",
+      "sha256": "935827fc0a9545917a4802b9f1253227f5a8a8b1253eefe019206b92cfb6bfed"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/upstream-source-intake-independent-review-v01.json": {
+      "bytes": 46312,
+      "path": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/upstream-source-intake-independent-review-v01.json",
+      "sha256": "164e5eaf4df7c5b028a68dcdebc598a3eac32404c58222f9fc5b62e5d54e97c4"
+    }
+  },
+  "authorship": {
+    "authored_archive_resume_helpers": true,
+    "authored_model": true,
+    "authored_primary_analyzer": true,
+    "authored_root_source_prose": false,
+    "independent_algorithm_or_result_counter_claim": false
+  },
+  "blobs": {
+    "docs/autoencoders/inference_and_qualification.md": {
+      "blob_oid": "e2fe6aedac3be86d47ae5753cea281a434dfa38a",
+      "bytes": 52940,
+      "mode": "100644",
+      "sha256": "d6589576a5fba43da8f3cb6ec4e302f850fa7eeaf410b8207ff897ade20fddff",
+      "status": "M"
+    },
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-action-publish-invocation-v01.json": {
+      "blob_oid": "b283ebf49a8cc5335c27a88835ddac55d4a5de74",
+      "bytes": 3016,
+      "mode": "100644",
+      "sha256": "971108260a32d46b83fb5b433643f40125c745bf567921b894bd47b17b13ba9f",
+      "status": "A"
+    },
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-action-resume-invocation-v01.json": {
+      "blob_oid": "68ca10c8c39eca6eec616796623971435c68747c",
+      "bytes": 3644,
+      "mode": "100644",
+      "sha256": "8162086428b7fe21807d1c85c21eee2796d9cf7d15b078016d79781ecce793f8",
+      "status": "A"
+    },
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-chunk01-reconciliation-actual-independent-review-v01.json": {
+      "blob_oid": "9f1c48b05fa988cdb2af8c7646224aa11c85cbdc",
+      "bytes": 9697,
+      "mode": "100644",
+      "sha256": "36ce657f7f8e71a0db63051fd1c872c7dff79dbd2344dd28f4cef1f860cf5b32",
+      "status": "A"
+    },
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-publication-completion-independent-review-v01.json": {
+      "blob_oid": "922bd1de5e48f75b522f7f41978e3ca36b6a6fc9",
+      "bytes": 77425,
+      "mode": "100644",
+      "sha256": "1ade89eda52fe2424bdf1944497d8787b6cbcadad76a77f09302491bb81b2d40",
+      "status": "A"
+    },
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-publish-TLS-fixed-byte-classification-v01.json": {
+      "blob_oid": "e99c97e68fbd939caa47c7b3afb3bc4215e654c7",
+      "bytes": 932,
+      "mode": "100644",
+      "sha256": "c53aaf6fdbe2f096308d0edae948e3885a6fa978b8f3dce2d921287d5d436296",
+      "status": "A"
+    },
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/modality-conditions-retention-result-independent-review-v01.json": {
+      "blob_oid": "ba16904e3e10f47df7e2964775810e2df56ffe57",
+      "bytes": 181847,
+      "mode": "100644",
+      "sha256": "0c9d1105006f3d5a6cd92a219a49c8a421e6ecf799ac3c4f83e8aba5dce60d30",
+      "status": "A"
+    },
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/next-experiment-proposal-v01.json": {
+      "blob_oid": "10e13f2e8fb00e2c958e892b0b551b226bdd2e21",
+      "bytes": 5527,
+      "mode": "100644",
+      "sha256": "ea0742f491f0c4efacdaae2600434b3b0e2b159090837ed05e227d5707ccf6d8",
+      "status": "A"
+    },
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/postfreeze-conditions-error-observation-v01.json": {
+      "blob_oid": "53157d7acb3faf033d355bee2c3db423bf22d37e",
+      "bytes": 5466,
+      "mode": "100644",
+      "sha256": "ac5a216f23558754acf98195c38e64c951cacbb4da4e8052d11545e470a6700d",
+      "status": "A"
+    },
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/public-result-summary-v01.json": {
+      "blob_oid": "b700addfae61f3c020831a32d1f95333588dd43c",
+      "bytes": 15638,
+      "mode": "100644",
+      "sha256": "2cbb3f6ea668bdfa86680ac627840b7515d5a63620486b4d842d190547582490",
+      "status": "A"
+    },
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/release-manifest-v01.json": {
+      "blob_oid": "4eb60a170cdd949a785a76ddf84f787a69685338",
+      "bytes": 204043,
+      "mode": "100644",
+      "sha256": "37c1305837c11fef6dd95eba5fbef17344a8443e39bad92def1a4418e78993b2",
+      "status": "A"
+    },
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/root-result-joins-and-summary-independent-review-v02.json": {
+      "blob_oid": "c9ca2b3e912cb0ee65bf1bed82f5fd0260478c7d",
+      "bytes": 10103,
+      "mode": "100644",
+      "sha256": "ba42698f013216ebfb856c9e879a133c09664e877327e4a9691bf63931d886fe",
+      "status": "A"
+    },
+    "docs/autoformalization/legal-modality-conditions-retention-20261015.md": {
+      "blob_oid": "c4ece8870e7e3b5d5fdbba7e727f1f5c82799902",
+      "bytes": 8532,
+      "mode": "100644",
+      "sha256": "44f7303d44b9240d9842b9e97d73813b4cb2db66610cca9c9c2e95328eba9c29",
+      "status": "A"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_modality_conditions_retention.py": {
+      "blob_oid": "324c4dd3b02b0e1a31e1881e9cc8e317c3250e4d",
+      "bytes": 83852,
+      "mode": "100644",
+      "sha256": "fb7449d4794ca9a279b2df2ea533b89d360344ff786edc0798395ab799db1823",
+      "status": "A"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_modality_conditions_retention_contracts.py": {
+      "blob_oid": "daed5dbb1405b316b3686ffeec5f54df152cd006",
+      "bytes": 22122,
+      "mode": "100644",
+      "sha256": "3094d9fd2bd7f409a913d4096557e9a342c8c79214c5810f7a6980b33f204c58",
+      "status": "A"
+    }
+  },
+  "checks": [
+    "Exact incoming d0 source HEAD",
+    "All32227 incoming and32241 index entries observed",
+    "Exact final15-path packet with no undeclared changes or removals",
+    "Only existing incoming path modified is the guide append",
+    "All other32226 incoming entries preserved exact mode/OID",
+    "All10 incoming gitlinks, including accelerator, preserved",
+    "All4 incoming symlinks preserved",
+    "In-memory read-only tree encoding matches actual incoming Git tree",
+    "Exact final staged tree computed without write-tree or Git mutation",
+    "Exact final staged blob: docs/autoencoders/inference_and_qualification.md",
+    "Regular public Git blob identity: docs/autoencoders/inference_and_qualification.md",
+    "Physical working bytes match index after rematerialization: docs/autoencoders/inference_and_qualification.md",
+    "Exact final staged blob: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-action-publish-invocation-v01.json",
+    "Regular public Git blob identity: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-action-publish-invocation-v01.json",
+    "Physical working bytes match index after rematerialization: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-action-publish-invocation-v01.json",
+    "Explicit public evidence origin byte exact: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-action-publish-invocation-v01.json",
+    "Exact final staged blob: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-action-resume-invocation-v01.json",
+    "Regular public Git blob identity: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-action-resume-invocation-v01.json",
+    "Physical working bytes match index after rematerialization: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-action-resume-invocation-v01.json",
+    "Explicit public evidence origin byte exact: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-action-resume-invocation-v01.json",
+    "Exact final staged blob: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-chunk01-reconciliation-actual-independent-review-v01.json",
+    "Regular public Git blob identity: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-chunk01-reconciliation-actual-independent-review-v01.json",
+    "Physical working bytes match index after rematerialization: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-chunk01-reconciliation-actual-independent-review-v01.json",
+    "Explicit public evidence origin byte exact: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-chunk01-reconciliation-actual-independent-review-v01.json",
+    "Exact final staged blob: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-publication-completion-independent-review-v01.json",
+    "Regular public Git blob identity: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-publication-completion-independent-review-v01.json",
+    "Physical working bytes match index after rematerialization: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-publication-completion-independent-review-v01.json",
+    "Explicit public evidence origin byte exact: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-publication-completion-independent-review-v01.json",
+    "Exact final staged blob: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-publish-TLS-fixed-byte-classification-v01.json",
+    "Regular public Git blob identity: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-publish-TLS-fixed-byte-classification-v01.json",
+    "Physical working bytes match index after rematerialization: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-publish-TLS-fixed-byte-classification-v01.json",
+    "Explicit public evidence origin byte exact: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-publish-TLS-fixed-byte-classification-v01.json",
+    "Exact final staged blob: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/modality-conditions-retention-result-independent-review-v01.json",
+    "Regular public Git blob identity: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/modality-conditions-retention-result-independent-review-v01.json",
+    "Physical working bytes match index after rematerialization: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/modality-conditions-retention-result-independent-review-v01.json",
+    "Explicit public evidence origin byte exact: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/modality-conditions-retention-result-independent-review-v01.json",
+    "Exact final staged blob: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/next-experiment-proposal-v01.json",
+    "Regular public Git blob identity: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/next-experiment-proposal-v01.json",
+    "Physical working bytes match index after rematerialization: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/next-experiment-proposal-v01.json",
+    "Explicit public evidence origin byte exact: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/next-experiment-proposal-v01.json",
+    "Exact final staged blob: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/postfreeze-conditions-error-observation-v01.json",
+    "Regular public Git blob identity: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/postfreeze-conditions-error-observation-v01.json",
+    "Physical working bytes match index after rematerialization: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/postfreeze-conditions-error-observation-v01.json",
+    "Explicit public evidence origin byte exact: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/postfreeze-conditions-error-observation-v01.json",
+    "Exact final staged blob: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/public-result-summary-v01.json",
+    "Regular public Git blob identity: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/public-result-summary-v01.json",
+    "Physical working bytes match index after rematerialization: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/public-result-summary-v01.json",
+    "Explicit public evidence origin byte exact: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/public-result-summary-v01.json",
+    "Exact final staged blob: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/release-manifest-v01.json",
+    "Regular public Git blob identity: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/release-manifest-v01.json",
+    "Physical working bytes match index after rematerialization: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/release-manifest-v01.json",
+    "Explicit public evidence origin byte exact: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/release-manifest-v01.json",
+    "Exact final staged blob: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/root-result-joins-and-summary-independent-review-v02.json",
+    "Regular public Git blob identity: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/root-result-joins-and-summary-independent-review-v02.json",
+    "Physical working bytes match index after rematerialization: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/root-result-joins-and-summary-independent-review-v02.json",
+    "Explicit public evidence origin byte exact: docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/root-result-joins-and-summary-independent-review-v02.json",
+    "Exact final staged blob: docs/autoformalization/legal-modality-conditions-retention-20261015.md",
+    "Regular public Git blob identity: docs/autoformalization/legal-modality-conditions-retention-20261015.md",
+    "Physical working bytes match index after rematerialization: docs/autoformalization/legal-modality-conditions-retention-20261015.md",
+    "Exact final staged blob: ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_modality_conditions_retention.py",
+    "Regular public Git blob identity: ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_modality_conditions_retention.py",
+    "Physical working bytes match index after rematerialization: ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_modality_conditions_retention.py",
+    "Exact final staged blob: tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_modality_conditions_retention_contracts.py",
+    "Regular public Git blob identity: tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_modality_conditions_retention_contracts.py",
+    "Physical working bytes match index after rematerialization: tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_modality_conditions_retention_contracts.py",
+    "Guide is exact previously reviewed append-only blob",
+    "All52229 original guide bytes exact with711-byte finite append",
+    "Exact admitted model/test raw bytes without execution: ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_modality_conditions_retention.py",
+    "Exact admitted model/test raw bytes without execution: tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_modality_conditions_retention_contracts.py",
+    "All publication prose already reviewed remains exact source-report prefix",
+    "Only final source delta is three finite publication evidence links",
+    "Every new source evidence link resolves to exact reviewed staged public blob: evidence/legal-modality-conditions-retention-20261015/hf-publication-completion-independent-review-v01.json",
+    "Every new source evidence link resolves to exact reviewed staged public blob: evidence/legal-modality-conditions-retention-20261015/release-manifest-v01.json",
+    "Every new source evidence link resolves to exact reviewed staged public blob: evidence/legal-modality-conditions-retention-20261015/hf-action-resume-invocation-v01.json",
+    "Root report retains exact previously reviewed publication prefix",
+    "Root report final prose delta is only five explicit matching public-evidence links; actual root destinations deferred to root stage",
+    "New actual independent completion receipt exact supplied pin",
+    "New completion review independently confirms actual final395-file archive",
+    "Completion does not promote or strengthen scientific/numerical result",
+    "Finite public source/test/prose/receipt scope only; no actual rawweight/result/download/private/log/archive paths",
+    "No unstaged tracked changes",
+    "No untracked foreign contribution files",
+    "Exact final staged whitespace check passes",
+    "Closing HEAD and all index mode/OID entries unchanged; owned cache metadata not contribution content"
+  ],
+  "checks_passed": 84,
+  "final_root_report_prose_pin": {
+    "bytes": 7077,
+    "path": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/root/implementation_plan/docs/132-legal-modality-conditions-retention-2026-10-15.md",
+    "sha256": "06bced57302f171cbbede10025e7db59130f88309ac3ed8a1be20cd98474621a"
+  },
+  "findings": [],
+  "first_parent_for_proposed_commit": "d0d44b3e0f7c2ba804b0d9115f7a1efd2ad926c3",
+  "incoming_entries": 32227,
+  "incoming_gitlinks": {
+    ".tools/ipfs_kit_py": {
+      "mode": "160000",
+      "oid": "a9b98beac1ef14278b4adf4f2289cd509530fb86"
+    },
+    "ipfs_accelerate_py": {
+      "mode": "160000",
+      "oid": "c88c0eece0a91297f2ee33859adc2d71724d59d4"
+    },
+    "ipfs_datasets_py/logic/CEC/DCEC_Library": {
+      "mode": "160000",
+      "oid": "a4beb5b3280595be6b9221cac3c91dd019e6d371"
+    },
+    "ipfs_datasets_py/logic/CEC/Eng-DCEC": {
+      "mode": "160000",
+      "oid": "df518c21ef81b8001e6db59f5fd70f10cc04ff6c"
+    },
+    "ipfs_datasets_py/logic/CEC/ShadowProver": {
+      "mode": "160000",
+      "oid": "3060ede1ac1ec3f8ef9f9c9e41386aed1dbbe7f9"
+    },
+    "ipfs_datasets_py/logic/CEC/Talos": {
+      "mode": "160000",
+      "oid": "e0b7650d3e3a403924773f8253e924c719748d36"
+    },
+    "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type": {
+      "mode": "160000",
+      "oid": "d58933631a5362b1e2fdc45254ef620fa231223a"
+    },
+    "ipfs_datasets_py/multimedia/omni_converter_mk2": {
+      "mode": "160000",
+      "oid": "c1d9b0d517cea022516aab5b5d8fa5e3bc9a65aa"
+    },
+    "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine": {
+      "mode": "160000",
+      "oid": "0e635cba586e8f6f6ea8126e3b1668b3e675c029"
+    },
+    "ipfs_kit_py": {
+      "mode": "160000",
+      "oid": "a9b98beac1ef14278b4adf4f2289cd509530fb86"
+    }
+  },
+  "incoming_symlinks": {
+    "Dockerfile": {
+      "mode": "120000",
+      "oid": "93c313e63109b53d8354a76a5feb0d55af5ae033"
+    },
+    "docker-compose.yml": {
+      "mode": "120000",
+      "oid": "3ccbe9c54fc0917f220e81e75ac108f233425f67"
+    },
+    "docker-entrypoint.sh": {
+      "mode": "120000",
+      "oid": "53701225067752b1eb310846e6fb9d72fb007c78"
+    },
+    "ipfs_datasets_py/static/admin/webfonts": {
+      "mode": "120000",
+      "oid": "6bb59df539ec3a1bffeb7156906f49e911d6a441"
+    }
+  },
+  "index_entries": 32241,
+  "limits": {
+    "Git_mutations": 0,
+    "SDK_network_calls": 0,
+    "actual_HF395_replay_not_repeated": true,
+    "canonical_Git_commands": 0,
+    "final_root_stage_and_link_destinations_review_separate": true,
+    "model_numerical_imports_or_calls": 0,
+    "original_score_checkpoint_reference_payload_bodies_read": 0,
+    "private_body_reads": 0,
+    "tests_executed": 0
+  },
+  "modified_existing_paths": [
+    "docs/autoencoders/inference_and_qualification.md"
+  ],
+  "owned_index_raw_metadata_unchanged": true,
+  "passed": true,
+  "qualified_scope": "Exact owned source index commit may use reviewed tree033abb89 and sole incoming parentd0. No remote current-main freshness, push or PR-merge authority; actual commit head needs separate binding.",
+  "regular_additions": 14,
+  "removed_paths": [],
+  "reviewed_head": "d0d44b3e0f7c2ba804b0d9115f7a1efd2ad926c3",
+  "reviewed_index_raw_after": {
+    "bytes": 5313636,
+    "path": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/datasets/.git/index",
+    "sha256": "4c9ab62c281fb67de24e357de1e51299fec94390c31230f86e51d02d7f0ec680"
+  },
+  "reviewed_index_raw_before": {
+    "bytes": 5313636,
+    "path": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/datasets/.git/index",
+    "sha256": "4c9ab62c281fb67de24e357de1e51299fec94390c31230f86e51d02d7f0ec680"
+  },
+  "reviewed_index_tree": "033abb89c28f7d02e8ab0ece156a46acc31002c0",
+  "schema": "modality-conditions-retention-source-final-stage-independent-review/v1",
+  "staged_paths": 15
+}

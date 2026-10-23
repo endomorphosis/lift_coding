@@ -1,0 +1,162 @@
+{
+  "accelerator_execution_head": "f58aa231805f2546d4f5cf650ef0bf3900d25540",
+  "accelerator_publication": "e21d6e7b41f14f3994b0fd8556bfcd341d9e888c",
+  "actual_inert_child_probes": true,
+  "additional_provider_model_training_solver_docker_calls": 0,
+  "all_prior_parent_index_objects_preserved_except_accelerator": true,
+  "authored_listener_and_deployment_metadata_seams": true,
+  "checked_at_utc": "2026-10-14T17:33:35.032346+00:00",
+  "child_manifest": {
+    "bytes": 13768,
+    "path": "docs/agent_supervisor/evidence/source-worker-delivery-fences-20261014/manifest.json",
+    "sha256": "52ecafe0ad1558063b854565a96e06ff88253c6df4fbc0e498037959ce9ac874"
+  },
+  "complete_import_closure_attested": false,
+  "completion_authority": false,
+  "datasets_execution_revision": "4b50ae4aac65da9166bd3b24608f32ba7e9fb23d",
+  "documentation_link_counts": {
+    "anchors": 14,
+    "manual_links": [
+      {
+        "anchors": 1,
+        "errors": [],
+        "path": "docs/agent_supervisor/evidence/source-worker-delivery-fences-20261014/README.md",
+        "relative_links": 11
+      },
+      {
+        "anchors": 2,
+        "errors": [],
+        "path": "docs/agent_supervisor/source_lookup_worker.md",
+        "relative_links": 12
+      },
+      {
+        "anchors": 11,
+        "errors": [],
+        "path": "docs/agent_supervisor/reversible_codebase_views_plan.md",
+        "relative_links": 82
+      }
+    ],
+    "relative_links": 105
+  },
+  "documentation_sha256": "544920509abb66547dcba93af1f0e238a90eed0eefb231c800237a48f5c60d78",
+  "execution_authority": false,
+  "four_local_documentation_blocks_passed": true,
+  "git_refs_and_index_mutated": false,
+  "git_state_after": {
+    "/home/barberb/lift_coding/.worktrees/repository-proof-context-kit-20261014": {
+      "head": "40c98c71b95be750509ffdb21e7e5494d91b4e79",
+      "index_sha256": "755c0d46d5ff81281d61fe417cc692e662f9e68bee5403ae5b4470ba854b6233",
+      "refs_sha256": "1dad841d10e28b42fd738f9d131f70ab29a570eb9fd78d5c5827fc76f2630980"
+    },
+    "/home/barberb/lift_coding/.worktrees/router-source-delivery-fences-20261014": {
+      "head": "e21d6e7b41f14f3994b0fd8556bfcd341d9e888c",
+      "index_sha256": "f081d3f80e987718d3b1c7fb8d8641df717cc3ee54c2c0d5ebc6ab25ec46e78a",
+      "refs_sha256": "b1180188e7686d1cf0292380a4b286e79d2e05633cefb9c4f9962dc19743e745"
+    },
+    "/home/barberb/lift_coding/.worktrees/router-source-delivery-fences-datasets-20261014": {
+      "head": "4b50ae4aac65da9166bd3b24608f32ba7e9fb23d",
+      "index_sha256": "7b7862bf3e26280f78aa1e75619b00abb7a8e4f9894a57dc27555d4c80f29cd7",
+      "refs_sha256": "cdac6f2c6e706e71a7cf4ccb6fbe8400e5d68aebd64e3542776572b369da6735"
+    },
+    "/home/barberb/lift_coding/.worktrees/router-source-delivery-fences-root-20261014": {
+      "head": "2ce0b414079c4e85485d230fc147e72ee9b3206a",
+      "index_sha256": "6f791cb094a462d6ea0fa0e379a0aca68d66a26d2a4f1d40b51f715387418d29",
+      "refs_sha256": "947d79a6a0e1cce2d4e55e1f3421599a4f1c5c78d935db4a9314d393858cac03"
+    }
+  },
+  "git_state_before": {
+    "/home/barberb/lift_coding/.worktrees/repository-proof-context-kit-20261014": {
+      "head": "40c98c71b95be750509ffdb21e7e5494d91b4e79",
+      "index_sha256": "755c0d46d5ff81281d61fe417cc692e662f9e68bee5403ae5b4470ba854b6233",
+      "refs_sha256": "1dad841d10e28b42fd738f9d131f70ab29a570eb9fd78d5c5827fc76f2630980"
+    },
+    "/home/barberb/lift_coding/.worktrees/router-source-delivery-fences-20261014": {
+      "head": "e21d6e7b41f14f3994b0fd8556bfcd341d9e888c",
+      "index_sha256": "f081d3f80e987718d3b1c7fb8d8641df717cc3ee54c2c0d5ebc6ab25ec46e78a",
+      "refs_sha256": "b1180188e7686d1cf0292380a4b286e79d2e05633cefb9c4f9962dc19743e745"
+    },
+    "/home/barberb/lift_coding/.worktrees/router-source-delivery-fences-datasets-20261014": {
+      "head": "4b50ae4aac65da9166bd3b24608f32ba7e9fb23d",
+      "index_sha256": "7b7862bf3e26280f78aa1e75619b00abb7a8e4f9894a57dc27555d4c80f29cd7",
+      "refs_sha256": "cdac6f2c6e706e71a7cf4ccb6fbe8400e5d68aebd64e3542776572b369da6735"
+    },
+    "/home/barberb/lift_coding/.worktrees/router-source-delivery-fences-root-20261014": {
+      "head": "2ce0b414079c4e85485d230fc147e72ee9b3206a",
+      "index_sha256": "6f791cb094a462d6ea0fa0e379a0aca68d66a26d2a4f1d40b51f715387418d29",
+      "refs_sha256": "947d79a6a0e1cce2d4e55e1f3421599a4f1c5c78d935db4a9314d393858cac03"
+    }
+  },
+  "historical_codec_and_edit_mapper_unchanged": true,
+  "hosted_ci_qualified_here": false,
+  "incoming_parent_accelerator_pin": "8f5fa23317bc9609ea8cf7febf2d01c7b821f552",
+  "initial_parent_base_preserved_as_ancestor": true,
+  "initial_parent_research_base": "0bb1beb9330f4e6122f9c6debde9af0ffeb524c6",
+  "kit_execution_revision": "40c98c71b95be750509ffdb21e7e5494d91b4e79",
+  "observed_child_origin_main": "e21d6e7b41f14f3994b0fd8556bfcd341d9e888c",
+  "optional_raw_child_ci_binding": {
+    "bytes": 23652,
+    "path": "artifacts/router-source-delivery-fences-publication-20261014/child-ci-observation.json",
+    "sha256": "c32c57883b5b2517760998eccea4ae179e95bf1f9f57179c344a8b9d2da697ab"
+  },
+  "original_qualification_counts_added": false,
+  "output_self_excluded": true,
+  "parent_base": "2ce0b414079c4e85485d230fc147e72ee9b3206a",
+  "parent_inputs": [
+    {
+      "bytes": 7377,
+      "path": "implementation_plan/docs/128-supervisor-source-delivery-fences-2026-10-14.md",
+      "sha256": "f314112687cd056dae6b50129df77e11b6aba300641e52a6e76e8b247a2ec9b1"
+    },
+    {
+      "bytes": 23652,
+      "path": "artifacts/router-source-delivery-fences-publication-20261014/child-ci-observation.json",
+      "sha256": "c32c57883b5b2517760998eccea4ae179e95bf1f9f57179c344a8b9d2da697ab"
+    },
+    {
+      "bytes": 5195,
+      "path": "artifacts/router-source-delivery-fences-publication-20261014/observe_hosted_ci.py",
+      "sha256": "812b727b4b9b92d26dde896776c574e94f17bf360f30a75768ecea64a9c1942a"
+    },
+    {
+      "bytes": 25268,
+      "path": "artifacts/router-source-delivery-fences-publication-20261014/publication_checker.py",
+      "sha256": "a7ef41f2c502e655550e72a19256e725d406cdae6a088d4e57d02b4c5025f6ec"
+    }
+  ],
+  "preserved_parent_gitlinks": {
+    "external/ipfs_accelerate": "e21d6e7b41f14f3994b0fd8556bfcd341d9e888c",
+    "external/ipfs_datasets": "4b50ae4aac65da9166bd3b24608f32ba7e9fb23d",
+    "external/ipfs_kit": "40c98c71b95be750509ffdb21e7e5494d91b4e79"
+  },
+  "prior_child_evidence_objects_preserved": 9176,
+  "production_coding_child_adoption": false,
+  "proof_authority": false,
+  "qualification_sha256": "8d78d2ba17d3d8cd5f59bfc5abe84df98324d6e69e4eb7ef60b5ace333c29f07",
+  "qualification_shared_ref_changes": [
+    {
+      "actor_attributed": false,
+      "after": "04dbd6ed29a7e8837cb418e5001b2f38b956186d2460e01607547c460118e3b9",
+      "before": "21097ff2512959c282e6c6e5c4bf8ae1d82173272e709380badbcc892c4e4f6c",
+      "path": "/home/barberb/lift_coding/.worktrees/router-source-delivery-fences-20261014"
+    },
+    {
+      "actor_attributed": false,
+      "after": "cdac6f2c6e706e71a7cf4ccb6fbe8400e5d68aebd64e3542776572b369da6735",
+      "before": "39d70e9ea04ed67f482cf8ac8326d4078a5c1b10d360574228efef61eaa3101a",
+      "path": "/home/barberb/lift_coding/.worktrees/router-source-delivery-fences-datasets-20261014"
+    }
+  ],
+  "retained_new_cases": 22,
+  "retained_source_bindings": 273,
+  "retained_suites": 8,
+  "retained_tests": 166,
+  "schema": "source-worker-delivery-parent-publication@1",
+  "selected_documentation": "documentation-checks-02.json",
+  "selected_qualification": "qualification-03",
+  "shared_ref_actor_attributed": false,
+  "status": "pass",
+  "tests_or_workflow_rerun": false,
+  "total_session_token_savings_established": false,
+  "universal_cas_callback_safety": false,
+  "worker_uid_qualified": false
+}

@@ -1,0 +1,138 @@
+[
+  {
+    "evidence_level": "recomputed",
+    "metric": "group_cpu_total",
+    "null_reason": null,
+    "scope": "902 host attempts, count each final cumulative parent once",
+    "units": "seconds",
+    "value": 1608.817478
+  },
+  {
+    "evidence_level": "recomputed",
+    "metric": "scientific_group_cpu",
+    "null_reason": null,
+    "scope": "900 scientific cells",
+    "units": "seconds",
+    "value": 1608.698691
+  },
+  {
+    "evidence_level": "recomputed",
+    "metric": "startup_group_cpu",
+    "null_reason": null,
+    "scope": "2 explicitly undispatched failed starts",
+    "units": "seconds",
+    "value": 0.118787
+  },
+  {
+    "evidence_level": "recomputed",
+    "metric": "sum_cell_host_wall_including_cleanup",
+    "null_reason": null,
+    "scope": "902 host attempts; not experiment makespan, overlaps other clocks",
+    "units": "seconds",
+    "value": 2686.8702189085307
+  },
+  {
+    "evidence_level": "recomputed",
+    "metric": "max_scientific_peak_memory",
+    "null_reason": null,
+    "scope": "maximum per scientific cgroup; not summed",
+    "units": "bytes",
+    "value": 274812928
+  },
+  {
+    "evidence_level": "recomputed",
+    "metric": "max_whole_cell_wall_to_group_exit",
+    "null_reason": null,
+    "scope": "scientific cell execution envelope",
+    "units": "seconds",
+    "value": 18.022665493073873
+  },
+  {
+    "evidence_level": "recovered; original reader recomputed identity/cost checks",
+    "metric": "slot_591_cumulative_active_wall",
+    "null_reason": null,
+    "scope": "amended allowance across startup+scientific attempts, excludes operator pause",
+    "units": "seconds",
+    "value": 11.766051943064667
+  },
+  {
+    "evidence_level": "recovered",
+    "metric": "slot_591_operator_pause_wall",
+    "null_reason": null,
+    "scope": "operator interruption gap; separate from active cell envelope",
+    "units": "seconds",
+    "value": 2335.7108575609745
+  },
+  {
+    "evidence_level": "recovered; original reader recomputed identity/cost checks",
+    "metric": "slot_625_cumulative_active_wall",
+    "null_reason": null,
+    "scope": "amended allowance across startup+scientific attempts, excludes operator pause",
+    "units": "seconds",
+    "value": 19.793533246032894
+  },
+  {
+    "evidence_level": "recovered",
+    "metric": "slot_625_operator_pause_wall",
+    "null_reason": null,
+    "scope": "operator interruption gap; separate from active cell envelope",
+    "units": "seconds",
+    "value": 840.292727435939
+  },
+  {
+    "evidence_level": "recovered; source-supported",
+    "metric": "model_calls",
+    "null_reason": null,
+    "scope": "primary LA-029 only; no actual-model prompt/RAG trial",
+    "units": "calls",
+    "value": 0
+  },
+  {
+    "evidence_level": "not recovered",
+    "metric": "input_tokens",
+    "null_reason": "No per-call token ledger is needed for this model-free matrix and none is recovered; not inferred from zero calls.",
+    "scope": "not included in primary measured group CPU",
+    "units": "tokens",
+    "value": null
+  },
+  {
+    "evidence_level": "not recovered",
+    "metric": "output_tokens",
+    "null_reason": "No token ledger recovered; not imputed.",
+    "scope": "not included in primary measured group CPU",
+    "units": "tokens",
+    "value": null
+  },
+  {
+    "evidence_level": "not recovered",
+    "metric": "preparation_cpu",
+    "null_reason": "Preparation excluded from reported matrix total; original accounting not recovered.",
+    "scope": "not included in primary measured group CPU",
+    "units": "seconds",
+    "value": null
+  },
+  {
+    "evidence_level": "not recovered",
+    "metric": "original_diagnostic_cpu",
+    "null_reason": "Historical diagnostic runs lacked required process-group measurement.",
+    "scope": "not included in primary measured group CPU",
+    "units": "seconds",
+    "value": null
+  },
+  {
+    "evidence_level": "recovered/hash-checked; phase aggregates recomputed",
+    "metric": "LA018_phase_timings",
+    "null_reason": "A single scalar is inappropriate for48rows across4conditions and multiple phases. Structured measurements are recovered.",
+    "scope": "Separate LA-018 development diagnostic; see LA018_phase_timings.csv and LA018_timing_reanalysis.json",
+    "units": "seconds",
+    "value": null
+  },
+  {
+    "evidence_level": "not recovered",
+    "metric": "formal_job_latency",
+    "null_reason": "No retained primary phase timing; separate LA018 diagnostic measurements are not the primary cost breakdown.",
+    "scope": "Primary checker work lies within measured descendant-inclusive CPU; its separate phase latency cannot be attributed from compact primary records.",
+    "units": "seconds",
+    "value": null
+  }
+]

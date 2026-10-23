@@ -1,0 +1,44 @@
+{
+  "scope": "Bounded ZIP central-directory filename search; no member decompression",
+  "admission": "admitted",
+  "started_utc": "2026-10-15T10:03:48.641893+00:00",
+  "finished_utc": "2026-10-15T10:03:49.569167+00:00",
+  "candidate_count": 696,
+  "status_counts": {
+    "excluded_unrelated_or_protected_path": 177,
+    "directory_listed": 508,
+    "no_supported_eocd": 1,
+    "read_error": 6,
+    "unsupported_multidisk_or_zip64": 4
+  },
+  "exact_filename_matches": [],
+  "central_directory_bytes_read": 55415741,
+  "central_directory_hash_scope": "Directory bytes only; not full archive hashes",
+  "full_author_package_located": false,
+  "full_recovery_prompt_read": false,
+  "search_limits": [
+    "Accessible filename inventory previously returned exit2; some paths unreadable",
+    "Only ZIP candidates at most128MiB; central directory at most4MiB and20000entries; no exhaustive nested archive or tar scan",
+    "Unrelated/protected grant and fixture paths excluded; ZIP64/multidisk unsupported",
+    "Scoped not-found result, not proof of global absence"
+  ],
+  "task_worktree_attachment_response": {
+    "data": [],
+    "nextCursor": null,
+    "source": "Read-only list_worktrees tool response; manually transcribed"
+  },
+  "local_attachment_status": "Two unrelated pasted-text attachments; no author package identified",
+  "user_clarification_result": "User repeated task specification; no local author-package locator supplied",
+  "next_required_input": "Exact local directory/archive path containing codex_evidence_recovery_prompt.md and ledger/current source",
+  "evidence_state": [
+    "newly executed metadata inspection",
+    "recovered metadata",
+    "hash-checked directory bytes"
+  ],
+  "new_scientific_executions": false,
+  "peak_scan_rss_bytes": null,
+  "peak_scan_rss_null_reason": "Only raw process lifetime ru_maxrss captured for this scan, not /proc peak attributable to admitted work; see memory qualification",
+  "raw_getrusage_peak_rss_kib": 4517460,
+  "analysis_cpu_seconds": 0.676698,
+  "analysis_wall_seconds": 0.9272888458799571
+}

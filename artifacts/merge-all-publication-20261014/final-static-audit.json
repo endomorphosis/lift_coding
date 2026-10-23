@@ -1,0 +1,305 @@
+{
+  "generated_at": "2026-10-14T04:11:06.315609+00:00",
+  "repository": "/home/barberb/lift_coding_worktrees/merge-all-accelerate-20261014",
+  "base_commit": "04baaef0f89c2391ae3dfda2087fd67996a45e34",
+  "audited_commit": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f",
+  "method": "Read frozen Git blobs and captured heads only. Static compile without imports/execution. Secret candidates report kind/path/line only; no secret values exported. No source edits, tests, ref mutation, or publication.",
+  "changed_current_blob_count": 438,
+  "changed_current_blob_bytes": 22752664,
+  "changed_gitlinks": [
+    {
+      "path": "ipfs_datasets_py",
+      "sha": "0897aa1d4252e175477addac5417028241de596a",
+      "mode": "160000",
+      "bytes": null,
+      "type": "commit"
+    },
+    {
+      "path": "ipfs_kit_py",
+      "sha": "40c98c71b95be750509ffdb21e7e5494d91b4e79",
+      "mode": "160000",
+      "bytes": null,
+      "type": "commit"
+    }
+  ],
+  "largest_changed_blobs": [
+    {
+      "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+      "sha": "90015959091e409a96679b2668c1c909bd8524f3",
+      "mode": "100644",
+      "bytes": 3258627
+    },
+    {
+      "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py",
+      "sha": "73cf99e4123cb72b39929d402229dbd074b6b5fd",
+      "mode": "100644",
+      "bytes": 1010299
+    },
+    {
+      "path": "data/legal_autoformalization_span_section/LAC-S6-024/result.json",
+      "sha": "6b77441ea948852104837e2be40a6d63f74d0d9e",
+      "mode": "100644",
+      "bytes": 988218
+    },
+    {
+      "path": "data/legal_autoformalization_span_section/LAC-S6-044/result.json",
+      "sha": "55e79bf32e88109e10d92e7c377e3f06ae9929c8",
+      "mode": "100644",
+      "bytes": 935498
+    },
+    {
+      "path": "data/legal_autoformalization_source_views/LAC-S8-024/result.json",
+      "sha": "c0e2c63213e184662e43253de0b308723c97c1b8",
+      "mode": "100644",
+      "bytes": 859809
+    },
+    {
+      "path": "data/legal_autoformalization_source_views_recovery/LAC-S8R1-024/result.json",
+      "sha": "b4b4123a8e2911025c5f656715d4a9d0f18dd7a0",
+      "mode": "100644",
+      "bytes": 858378
+    },
+    {
+      "path": "ipfs_accelerate_py/llm_router.py",
+      "sha": "467ecb5dd5a8dccdd83d21a1339db1cd285283d5",
+      "mode": "100644",
+      "bytes": 569385
+    },
+    {
+      "path": "data/legal_autoformalization_source_views/LAC-S8-011/result.json",
+      "sha": "0bcdb19201ddcf41f975695a57915e3218954005",
+      "mode": "100644",
+      "bytes": 460473
+    },
+    {
+      "path": "data/legal_autoformalization_source_views_recovery/LAC-S8R1-011/result.json",
+      "sha": "20ae02ab41e211c175c8c8bdf6b7b0d95ac2d5de",
+      "mode": "100644",
+      "bytes": 459042
+    },
+    {
+      "path": "ipfs_accelerate_py/agent_supervisor/objectives/backlog_refinery.py",
+      "sha": "db80f481bcdbce4da6f98aa80766e8fed7ab248c",
+      "mode": "100644",
+      "bytes": 385163
+    },
+    {
+      "path": "data/legal_autoformalization_span_reconstruction_recovery/LAC-S10R1-044/result.json",
+      "sha": "891ffee6080e6931aa1eb1a2c66f22155e27b1cd",
+      "mode": "100644",
+      "bytes": 344987
+    },
+    {
+      "path": "data/legal_autoformalization_span_reconstruction/LAC-S10-044/result.json",
+      "sha": "a4f057f4a654e4fe357cf67d0ece59db81e8c07d",
+      "mode": "100644",
+      "bytes": 341794
+    },
+    {
+      "path": "config/legal_autoformalization_source_views_sources.json",
+      "sha": "839e34110ca9aaf2adb8f2b2ae80081470edefaa",
+      "mode": "100644",
+      "bytes": 318059
+    },
+    {
+      "path": "data/legal_autoformalization_source_custody/LAC-S7-044/result.json",
+      "sha": "13708cab85c11d624febc46c0cac789904d9bf45",
+      "mode": "100644",
+      "bytes": 304558
+    },
+    {
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py",
+      "sha": "c7e07adddee8ff2b9b16bf738e1d5638faa8e9c3",
+      "mode": "100644",
+      "bytes": 290441
+    },
+    {
+      "path": "ipfs_accelerate_py/agent_supervisor/merge/merge_train.py",
+      "sha": "fc5564a4b97379dfbf522fed98fb1a29e2ce01e9",
+      "mode": "100644",
+      "bytes": 285514
+    },
+    {
+      "path": "data/legal_autoformalization_parent_pages/LAC-S9-044/result.json",
+      "sha": "6a1583c5e396d1cb87f3c984caed977cc04d5e7a",
+      "mode": "100644",
+      "bytes": 245419
+    },
+    {
+      "path": "docs/architecture/legal_autoformalization_convergence/full_plan/tasks.json",
+      "sha": "39f5c24658e66554fc5c46d116eb040738173db4",
+      "mode": "100644",
+      "bytes": 190570
+    },
+    {
+      "path": "data/legal_autoformalization_source_custody/LAC-S7-011/result.json",
+      "sha": "8004171e5f9d6fa1e45d0af8456df4b42d3d4db8",
+      "mode": "100644",
+      "bytes": 176964
+    },
+    {
+      "path": "data/legal_autoformalization_convergence/LAC-002/result.json",
+      "sha": "4fc819ecbf1b76869dfebc90eb878bb4f3d8708b",
+      "mode": "100644",
+      "bytes": 170998
+    }
+  ],
+  "changed_blobs_over_10MiB": [],
+  "newly_reachable_blob_count": 714,
+  "newly_reachable_blob_bytes": 50443527,
+  "newly_reachable_blobs_over_10MiB": [],
+  "python_files_compiled": 265,
+  "python_compile_errors": [],
+  "high_confidence_secret_pattern_candidates": [],
+  "secret_scan_limitations": "Signature scan is not a guarantee of absence. Scanned complete changed tip blobs up to100MiB, including binary bytes. Historical objects were size-scanned only.",
+  "unresolved_conflict_marker_candidates": [],
+  "binary_changed_paths": [],
+  "skipped_blob_scans": [],
+  "captured_head_verification": {
+    "inputs": [
+      "accelerate-audit.json",
+      "remaining-heads.json"
+    ],
+    "distinct_captured_heads": 182,
+    "ancestor_count": 180,
+    "not_ancestor": [
+      {
+        "sha": "04fbb09b4a8b34e77d11bd8da6642e0978baa02c",
+        "labels": [
+          "refs/heads/archive/pgir-authority-20260817"
+        ],
+        "historical_disposition": {
+          "state": "historical_superseded_preserve_ref_without_merge",
+          "published_exact_tree_commits": [
+            "fd3ae399d65f42aed07f41b2db0944196a106456",
+            "75499c674635c0f0f78b27bfd2e32b492c7f702b",
+            "6a3e4ae1a85994ed21724749ae523ac3d3f05e94"
+          ],
+          "large_unpublished_blobs_over_100MiB": [
+            {
+              "sha": "9b6ded832adffea56cd1402bb08d1dca484eb3c8",
+              "size_bytes": 2022179327,
+              "path": "data/agent_supervisor/proof_grounded_ir_learning/datasets/pgir-objective-ast.jsonl"
+            }
+          ]
+        }
+      },
+      {
+        "sha": "49569f1f2a9aa233e532e92c27f74ba5c004fd48",
+        "labels": [
+          "/home/barberb/lift_coding/.worktrees/publication-main-20261004/accelerate",
+          "refs/heads/publication/main-20261004/accelerate"
+        ],
+        "historical_disposition": {
+          "state": "historical_superseded_preserve_ref_without_merge",
+          "published_exact_tree_commits": [
+            "d6163a6cb844617f35f8f56d0b6ccd521fa677b7",
+            "a370dd5cce648e9b46274403c40e9964ee61b423"
+          ],
+          "large_unpublished_blobs_over_100MiB": [
+            {
+              "sha": "9b6ded832adffea56cd1402bb08d1dca484eb3c8",
+              "size_bytes": 2022179327,
+              "path": "data/agent_supervisor/proof_grounded_ir_learning/datasets/pgir-objective-ast.jsonl"
+            },
+            {
+              "sha": "14d6706502842110d16161a81d168281d6989a1c",
+              "size_bytes": 142880768,
+              "path": "data/agent_supervisor/formal_verification_tactician_readiness/bundles/index.duckdb"
+            }
+          ]
+        }
+      }
+    ],
+    "nonhistorical_not_ancestor": [],
+    "retry_heads": [
+      {
+        "sha": "b3f59198304effc3391fd332d7c35953b39ec0cb",
+        "labels": [
+          "refs/heads/implementation/lac-s6-044-2a401a7ddb44-attempt-1-1791928808"
+        ],
+        "ancestor": true
+      },
+      {
+        "sha": "090175ca5a9e58ed82ab60484eebb55c542c2410",
+        "labels": [
+          "refs/heads/implementation/lac-s6-044-2a401a7ddb44-attempt-1-1791928851"
+        ],
+        "ancestor": true
+      },
+      {
+        "sha": "702c8a81af6d296d9dc4e14b3690a76ea627cbca",
+        "labels": [
+          "refs/heads/implementation/lac-s6-044-2a401a7ddb44-attempt-1-1791928916"
+        ],
+        "ancestor": true
+      },
+      {
+        "sha": "3439c3db7a104f55bf1a0d0cbb5615bf7d2586d6",
+        "labels": [
+          "refs/heads/implementation/lac-s6-044-2a401a7ddb44-attempt-1-1791928951"
+        ],
+        "ancestor": true
+      },
+      {
+        "sha": "e9d41a35ec079082872b4d3be7f115e55bf420a3",
+        "labels": [
+          "refs/heads/implementation/lac-s6-044-2a401a7ddb44-attempt-2-1791928891"
+        ],
+        "ancestor": true
+      },
+      {
+        "sha": "5c4450150a9ba66d5317afedbc236b07a050980f",
+        "labels": [
+          "refs/heads/rescue/lac-002-de60c4a5104b-attempt-1-1791880701-failed-validation"
+        ],
+        "ancestor": true
+      },
+      {
+        "sha": "aba360e31cdd5be57423122b06b55080b5df67d9",
+        "labels": [
+          "refs/heads/rescue/lac-002-de60c4a5104b-attempt-1-1791880715-failed-validation"
+        ],
+        "ancestor": true
+      },
+      {
+        "sha": "6f2c0c1ca6c1fc9de1978e8a11f6ec22d58fa605",
+        "labels": [
+          "refs/heads/rescue/lac-002-de60c4a5104b-attempt-2-1791880728-failed-validation"
+        ],
+        "ancestor": true
+      },
+      {
+        "sha": "ccfb4aacdd36d5c2705d7ccf4468b73351b3ca70",
+        "labels": [
+          "refs/heads/rescue/lac-s6-044-2a401a7ddb44-attempt-2-1791928902-failed-validation"
+        ],
+        "ancestor": true
+      },
+      {
+        "sha": "ab58d7b88bd5ef0b12e28376978e9e809f2a8798",
+        "labels": [
+          "refs/heads/rescue/lac-s6-044-2a401a7ddb44-attempt-2-1791928984-failed-validation"
+        ],
+        "ancestor": true
+      },
+      {
+        "sha": "ae8d2a1fcd05da547c5f21b7374011ffab9bee1b",
+        "labels": [
+          "refs/heads/rescue/lac-s6-044-2a401a7ddb44-attempt-2-1791928991-failed-validation"
+        ],
+        "ancestor": true
+      },
+      {
+        "sha": "7f2125b6d6a005fb34e8eb5d3fb96e5340633aae",
+        "labels": [
+          "refs/heads/rescue/lac-s6-044-2a401a7ddb44-attempt-3-1791928909-failed-validation"
+        ],
+        "ancestor": true
+      }
+    ],
+    "retry_count": 12,
+    "all_retry_heads_ancestors": true
+  },
+  "head_when_audit_finished": "a47edf60bd077fa7e754b0965dfdfbea4a9d127f"
+}

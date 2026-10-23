@@ -1,0 +1,156 @@
+\section{Corpus lineage and source provenance}
+\label{app:corpus}
+\setcounter{table}{0}
+\renewcommand{\thetable}{\thesection.\arabic{table}}
+\renewcommand{\theHtable}{\thesection.\arabic{table}}
+
+The evaluated sample comprises six legal documents, 12 CVE repository families, and 12 SkillCenter families. Each family contributes two cases, giving 60 cases in total. The source inspection used to construct this sample read six legal documents, 4,329 rows from the first CVEfixes shard, and 1,182 SkillCenter index/content rows. These inspection counts are distinct from both the evaluated cases and the sizes reported on release cards. In particular, the release-card totals of 12,987 CVEfixes input rows and 216,972 SkillCenter physical records were not independently recounted. Municipal and national-legislation release totals likewise describe source collections, not evaluation coverage.
+
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{.22\linewidth} >{\raggedright\arraybackslash}p{.34\linewidth} >{\raggedright\arraybackslash}p{.38\linewidth}@{}}
+\caption{Legal source inventory and the provenance distinctions required for interpretation. The evaluated legal sample remains six documents.}\label{tab:A1}\\
+\toprule
+Source family & Inspected material & Provenance requirements \\
+\midrule
+\endfirsthead
+\toprule
+Source family & Inspected material & Provenance requirements \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Federal statutes & U.S.\ Code release with pinned revision & Provision identity, release point, amendments, and effective dates. \\[4pt]
+State law & State statutes and a separate administrative-rule corpus & Jurisdiction, issuing authority, legal form, and temporal coverage. \\[4pt]
+Federal regulatory material & Federal Register collection & Proposed or final status, publication date, effective date, and codification. \\[4pt]
+Court rules and caselaw & State court rules and a Caselaw Access Project-derived collection & Court, jurisdiction, rule scope, and holdings versus quotations. \\[4pt]
+Municipal and county law & Municipal harvests across releases & Publisher, jurisdiction, discovery and failure counts, and release aliases. \\[4pt]
+International legislation & Netherlands, Belgian, and Argentine source collections & Language, authority, consolidation date, capture and extraction version, and coverage gaps. \\
+\end{longtable}
+
+\paragraph{Security-source revision.}
+The inspected CVEfixes source is \texttt{hitoshura25/cvefixes} at revision
+\begin{quote}\small\path{d4f5c4ea65329d9ccbb8a3b3149e5d06eda5edb2}.\end{quote}
+The evaluated cohort contains 12 repository families and 24 cases. A further 84 controls were excluded and do not enter the empirical denominators. Source rows, graph nodes, edges, vectors, and unique vulnerability identifiers count different objects. Vulnerable/fixed source differences were observable in the retained records, but vulnerability polarity remained unknown under the behavior contract, and transfer to the export handler was not established.
+
+\paragraph{Skill-source revision.}
+The inspected SkillCenter source is \texttt{Tommysha/skillcenter-bundles} at revision
+\begin{quote}\small\path{f9dd4fec3c86d85ebf116c7408ac5ce602c418a1}.\end{quote}
+The evaluated skill cohort contains 12 families and 24 cases. SQLite bundles are read-only input containers; they are separate from the runtime's DuckDB state store. Index entries and available source records do not imply the same number of successfully normalized procedures.
+
+\section{Logic representations and evidence types}
+\label{app:logic}
+\setcounter{table}{0}
+
+The implementation separates a domain representation, its logical interpretation, and the backend that evaluates a supported encoding. The TDFOL and DCEC Python cores supply parsable native representations. Shared symbols or links between representations do not establish semantic equivalence. Checker outputs therefore retain their evidence type: a satisfiability result, a policy decision, a runtime observation, and a kernel-checked theorem are distinct outcomes. A timeout or an unavailable backend remains inconclusive.
+
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{.23\linewidth} >{\raggedright\arraybackslash}p{.36\linewidth} >{\raggedright\arraybackslash}p{.35\linewidth}@{}}
+\caption{Representation support and evaluation scope. The scored experiment used the QF\_BOOL route.}\label{tab:B1}\\
+\toprule
+Representation & Expressed information & Evaluation scope \\
+\midrule
+\endfirsthead
+\toprule
+Representation & Expressed information & Evaluation scope \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Propositional and first-order & Boolean operators, typed terms, predicates, and quantifiers & Support depends on the selected fragment and vocabulary. \\[4pt]
+Frame and F-logic & Object identity, class membership, slots, and relational inheritance & Structured representation; no scored semantic-equivalence result. \\[4pt]
+Deontic & Obligations, permissions, and prohibitions & Normative representation; execution permission still requires a capability. \\[4pt]
+Temporal / TDFOL & Temporal operators, including always, eventually, until, and since & Representations registered; temporal backends were not scored. \\[4pt]
+Event calculus & Events, fluents, and initiation or termination of state & Transition representation; not a scored backend. \\[4pt]
+Datalog and policy rules & Bounded rules and authorization declarations & Rule derivation under an explicit open- or closed-world convention. \\[4pt]
+Hoare-style / SAT & Preconditions, postconditions, and propositional invariants & QF\_BOOL checked by SymPy DPLL and an independent truth table; satisfiability evidence only. \\[4pt]
+Interactive proof & Native proof terms and scripts & Kernel backends were unavailable in the evaluation environment. \\
+\end{longtable}
+
+QF\_LIA interpolation was not selected or available. SAT-only, simulated, policy, and monitor evidence cannot discharge a requirement for a kernel-checked theorem. Backend-specific availability and the distinction between scored runs and diagnostic checks are recorded in Appendix~\ref{app:evaluation-details}.
+
+\section{State, artifacts, transport, and capabilities}
+\label{app:infrastructure}
+\setcounter{table}{0}
+
+The implementation assigns separate responsibilities to mutable state, immutable artifacts, transport, and authorization (Table~\ref{tab:C1}). This separation determines what an observation at each layer can establish.
+
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{.21\linewidth} >{\raggedright\arraybackslash}p{.37\linewidth} >{\raggedright\arraybackslash}p{.36\linewidth}@{}}
+\caption{Infrastructure responsibilities and their boundaries.}\label{tab:C1}\\
+\toprule
+Layer & Responsibility & Boundary \\
+\midrule
+\endfirsthead
+\toprule
+Layer & Responsibility & Boundary \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Operational state & File-backed DuckDB, typed Quack commands, compare-and-swap revisions, and idempotency & Local committed state; remote exactly-once execution is not established. \\[4pt]
+Source input & Read-only SQLite bundles and Parquet, JSON-LD, HTML, or WARC records & Storage format does not determine source meaning or execution authority. \\[4pt]
+Retrieval & Sparse, vector, and graph products keyed by source identifiers & Retrieves candidate evidence; applicability requires a separate check. \\[4pt]
+Immutable artifacts & Content-addressed blocks, manifests, maps, and decision records \citep{ipfs} & Identifies bytes; local identifiers do not demonstrate public availability. \\[4pt]
+Peer transport & libp2p streams and framed MCP messages \citep{libp2p} & Carries requests; peer identity alone does not grant tool access. \\[4pt]
+Delegated capability & Signed UCAN verification and revocation or replay state \citep{ucan} & Bounds delegated authority; legal interpretation requires separate validation. \\
+\end{longtable}
+
+A state client supplies a named command with typed parameters. After a lost reply, repeating an identical command can retrieve its committed result; reusing the same identity with a changed payload produces a conflict. The optional Quack gateway extension was unavailable in the isolated validation environment. The evaluated durable-consumption configuration uses the typed owner route described in Section~\ref{sec:method}.
+
+UCAN checks cover issuer identity, delegation continuity, resource and ability bounds, temporal validity, attenuation, revocation, and replay policy. The separate transport checks exercise local processes and loopback routes. Wide-area libp2p behavior and an IPFS daemon were not evaluated. The auxiliary \texttt{AuthorizationGate} is a related policy gate rather than the wrapper evaluated for protected-effect prevention.
+
+\section{Implementation mapping and worked trace}
+\label{app:trace}
+\setcounter{table}{0}
+
+The supplement maps neutral aliases to included implementation definitions and records both original source commitments and hashes of the portable, path-normalized files. Private credentials and the live state store are excluded.
+
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{.25\linewidth} >{\raggedright\arraybackslash}p{.69\linewidth}@{}}
+\caption{Information inspected at each stage of the implemented route.}\label{tab:D1}\\
+\toprule
+Stage & Relevant inputs \\
+\midrule
+\endfirsthead
+\toprule
+Stage & Relevant inputs \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Legal compilation & Document revision, jurisdiction, source maps, selected facets, and unsupported constructs. \\[4pt]
+Skill and CVE adaptation & Physical source records, procedural spans, vulnerable/fixed pairs, restriction scope, and uncertainty. \\[4pt]
+Constraint checking & Candidate graph, applicable checks, evidence requirements, and current roots. \\[4pt]
+Logical evaluation & QF\_BOOL jobs, provider results, independent truth-table results, and required evidence type. \\[4pt]
+Guarded execution & Live invocation context, authenticated decision record, capability, expiry, and use state. \\[4pt]
+Durable consumption & Command identity, generation, fence, revision, idempotency key, and committed result. \\
+\end{longtable}
+
+A separate diagnostic replay follows a permitted A4 skill case with seed 104729. The trace resolves source pins, derives Intent IR, binds the tool and arguments, and runs the QF\_BOOL check. The provider reports unsatisfiability and the independent checker agrees. After Ed25519 capability verification and durable consumption, the wrapper dispatches one JSON export; the independent journal records one event and useful work. The selected source adapter in this trace is the skill adapter, not the legal compiler.
+
+Matched diagnostic replays with a wrong audience, an undeclared effect, or a reused invocation are denied at delegation or consumption and produce no forbidden effects. These traces explain the mechanism but are separate from the scored fixed-action executions. The supplement retains the original worked-trace identifier under the LA-020 record.
+
+\section{Measurement coverage}
+\label{app:coverage}
+\setcounter{table}{0}
+
+Table~\ref{tab:E1} distinguishes the primary runtime results from source checks, component qualification, and unmeasured questions. Qualification denotes a targeted implementation check rather than an additional experimental arm or an independent semantic evaluation.
+
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{.26\linewidth} >{\raggedright\arraybackslash}p{.68\linewidth}@{}}
+\caption{Evidence available for each measurement objective. Unmeasured studies are excluded from empirical claims.}\label{tab:E1}\\
+\toprule
+Objective & Evidence and scope \\
+\midrule
+\endfirsthead
+\toprule
+Objective & Evidence and scope \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Source-to-IR contracts & Across all 60 legal, CVE, and skill cases: source linkage $60/60$, parse/schema validity $50/60$, and machine-contract coverage $60/60$. Expert legal fidelity, applicability, exceptions, and agreement were not evaluated. \\[4pt]
+CVE restriction specificity & 12 pairs and 24 cases, with 84 excluded controls. Source differences were observed in $24/24$ cases; polarity remained unknown in all 24. Transfer was not established. \\[4pt]
+Skill grounding & Source-span linkage on all skill cases; $18/18$ shared-producer schema conformance. Six unsupported, policy-blocked rows remain in the accounting. \\[4pt]
+Logical checks & QF\_BOOL SAT with an independent truth-table checker. Theorem kernels and QF\_LIA interpolation were unavailable. \\[4pt]
+Protected effects & Full enforcement produced $0/90$ forbidden effects and $90/90$ allowed-task successes across the primary study. \\[4pt]
+Durable-state behavior & $14/14$ targeted qualification cases covered generation/fence checks, concurrency, lost replies, and restart behavior. \\[4pt]
+Transport parity & Local-process and loopback checks; wide-area behavior and an IPFS daemon were unavailable. \\[4pt]
+Execution overhead & Development-only A4 instrumentation. Model-token counts and price-based comparisons were not measured. \\[4pt]
+Closed-loop planning & The separate 900-cell planning study was not started: no model calls or generated programs. It contributes no outcome rates. \\
+\end{longtable}

@@ -1,0 +1,92 @@
+[
+  {
+    "concern": "Primary LA-029 identity, input coverage and family analysis",
+    "evidence_files": "primary_requested_path_mapping.csv;original_primary_snapshot_recovery.json;primary_design.json;verification.json;primary_recounts.csv;split_analysis.json;reducer_function_equivalence.json",
+    "finding": "Exact requested output paths are bound by recovered LA-029 receipt; all7 outputs and7 adoption copies match. 900 cells,30 families,60 cases,5arms,3seeds. All45family contrasts recomputed.",
+    "local_request_id": "request-1",
+    "original_id_null_reason": "Author reviewer_concern_matrix.csv not available; IDs below refer only to current user request.",
+    "original_reviewer_concern_id": null,
+    "remaining_input": "Original raw bytes of1813 transformed reducer inputs and latest author-ledger/run join remain unavailable.",
+    "status": "resolved for recovered historical run; latest-ledger join pending"
+  },
+  {
+    "concern": "Independent effect records",
+    "evidence_files": "runtime_formal_audit.json;terminal_status_records.csv",
+    "finding": "Retained worker counters and observer source recovered. Raw filesystem/journal entries and observation integrity fields were not retained in inspected primary archive.",
+    "local_request_id": "request-1-effects",
+    "original_id_null_reason": "Author reviewer_concern_matrix.csv not available; IDs below refer only to current user request.",
+    "original_reviewer_concern_id": null,
+    "remaining_input": "Primary raw effect journals or explicit retention confirmation; do not substitute LA020 replay traces.",
+    "status": "partial"
+  },
+  {
+    "concern": "Terminal dispositions, startup failures, phase timing and traces",
+    "evidence_files": "terminal_status_records.csv;terminal_status_counts.csv;terminal_status_limits.json;cost_accounting.json;historical_diagnostics_recovery.json",
+    "finding": "753 explicit allow/success and147 deny/denial scientific records;2 separate explicitly undispatched startup failures. Intermediate status coverage is not inferred from terminal outcome or no effect.",
+    "local_request_id": "request-2",
+    "original_id_null_reason": "Author reviewer_concern_matrix.csv not available; IDs below refer only to current user request.",
+    "original_reviewer_concern_id": null,
+    "remaining_input": "Unrecorded intermediate statuses remain null; LA018/LA020 are separate diagnostic execution identities.",
+    "status": "partial"
+  },
+  {
+    "concern": "Ablations, exclusions and actual-model trials",
+    "evidence_files": "historical_protocol_audit.json;historical_diagnostics_recovery.json;primary_design.json",
+    "finding": "Protocol-unadmitted labels preserved; formal-only diagnostic contrast recovered separately where documented. A1/A2 remain inert controls.",
+    "local_request_id": "request-3",
+    "original_id_null_reason": "Author reviewer_concern_matrix.csv not available; IDs below refer only to current user request.",
+    "original_reviewer_concern_id": null,
+    "remaining_input": "No admitted formal-job-only comparator established; no actual-model trial promoted to primary matrix.",
+    "status": "partial"
+  },
+  {
+    "concern": "C1-C6 component evidence",
+    "evidence_files": "component_recovery_status.json;missing_author_package.json",
+    "finding": "No exact ledger identity available; studies kept separate and protected final data not accessed.",
+    "local_request_id": "request-4",
+    "original_id_null_reason": "Author reviewer_concern_matrix.csv not available; IDs below refer only to current user request.",
+    "original_reviewer_concern_id": null,
+    "remaining_input": "Exact author package and ledger/Publicus locators, then existing admissible manifests/receipts.",
+    "status": "unresolved"
+  },
+  {
+    "concern": "Runtime checks and formal guarantees",
+    "evidence_files": "runtime_formal_audit.json;formal_source_receipt_audit.json",
+    "finding": "Executed-source route/check boundary and exact Boolean CNF recovered. Solver/checker source is not a proof of implementation or legal compilation.",
+    "local_request_id": "request-5",
+    "original_id_null_reason": "Author reviewer_concern_matrix.csv not available; IDs below refer only to current user request.",
+    "original_reviewer_concern_id": null,
+    "remaining_input": "Original per-job checker receipts, native receipt-authentication implementation bindings, build/model-check receipts and implementation refinement mapping where absent.",
+    "status": "partial"
+  },
+  {
+    "concern": "Source fidelity, CVE specificity and extraction/correlation",
+    "evidence_files": "source_fidelity_audit.json;retained_source_example_audit.json",
+    "finding": "Source/receipt hashes recovered; qualified human fidelity is not established. Source support and constructed controls are distinct from independently established polarity/applicability.",
+    "local_request_id": "request-6",
+    "original_id_null_reason": "Author reviewer_concern_matrix.csv not available; IDs below refer only to current user request.",
+    "original_reviewer_concern_id": null,
+    "remaining_input": "Retained qualified human reviews, independent CVE labels/applicability and upstream extraction/correlation records if they exist.",
+    "status": "partial"
+  },
+  {
+    "concern": "Conflicting RQ3 historical versions",
+    "evidence_files": "historical_protocol_audit.json;historical_diagnostics_recovery.json",
+    "finding": "Loose synthesis source differs from its own supplement. Both archived versions state withdrawn/not_started; original protocol identities and LA016 blockers constrain interpretation.",
+    "local_request_id": "request-7",
+    "original_id_null_reason": "Author reviewer_concern_matrix.csv not available; IDs below refer only to current user request.",
+    "original_reviewer_concern_id": null,
+    "remaining_input": "Current23page author source; any contrary execution claim requires original matching run/protocol identities, not unrelated supervisor trial.",
+    "status": "partial; baseline withdrawal preserved"
+  },
+  {
+    "concern": "Existing supervisor and state export boundary",
+    "evidence_files": "supervisor_interface_summary.json",
+    "finding": "Actual supported interfaces inspected. Supervisor preview can materialize; no generic run/preview or DB path used. Existing shared admission API governed offline analysis; no owner snapshot invented.",
+    "local_request_id": "request-supervisor",
+    "original_id_null_reason": "Author reviewer_concern_matrix.csv not available; IDs below refer only to current user request.",
+    "original_reviewer_concern_id": null,
+    "remaining_input": "Any future state recovery requires a previously authorized typed-owner export or original authorized owner grant.",
+    "status": "resolved for safe recovery route"
+  }
+]

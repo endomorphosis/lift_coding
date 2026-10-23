@@ -1,0 +1,626 @@
+diff --git a/.claude/skills/python-tests/SKILL.md b/.claude/skills/python-tests/SKILL.md
+index 4193f614..a9be027f 100644
+--- a/.claude/skills/python-tests/SKILL.md
++++ b/.claude/skills/python-tests/SKILL.md
+@@ -25,0 +26 @@ def test_user_creation_sets_defaults():
++
+@@ -40,6 +41,10 @@ import pytest
+-@pytest.mark.parametrize("input,expected", [
+-    ("hello", "HELLO"),
+-    ("World", "WORLD"),
+-    ("", ""),
+-    ("123", "123"),
+-])
++
++@pytest.mark.parametrize(
++    "input,expected",
++    [
++        ("hello", "HELLO"),
++        ("World", "WORLD"),
++        ("", ""),
++        ("123", "123"),
++    ],
++)
+@@ -65,0 +71 @@ async def test_async_operation():
++
+@@ -68,2 +74 @@ async def test_async_operation():
+-async def test_async_operation():
+-    ...
++async def test_async_operation(): ...
+@@ -81,0 +87 @@ from fastmcp.client import Client
++
+@@ -85,0 +92 @@ async def test_something():
++
+@@ -88,0 +96 @@ async def test_something():
++
+@@ -101,0 +110 @@ mcp = FastMCP("TestServer")
++
+@@ -105,0 +115 @@ def greet(name: str) -> str:
++
+@@ -120,0 +131 @@ from inline_snapshot import snapshot
++
+@@ -138,0 +150 @@ def client():
++
+@@ -159,0 +172 @@ from unittest.mock import patch, AsyncMock
++
+@@ -191,0 +205 @@ import pytest
++
+@@ -195,0 +210 @@ def test_raises_on_invalid_input():
++
+diff --git a/README.md b/README.md
+index b2b8c188..7448a500 100644
+--- a/README.md
++++ b/README.md
+@@ -34,0 +35 @@ mcp = FastMCP("Demo 🚀")
++
+@@ -39,0 +41 @@ def add(a: int, b: int) -> int:
++
+diff --git a/dev-docs/v3-notes/prompt-internal-types.md b/dev-docs/v3-notes/prompt-internal-types.md
+index addbd01c..2d9ad663 100644
+--- a/dev-docs/v3-notes/prompt-internal-types.md
++++ b/dev-docs/v3-notes/prompt-internal-types.md
+@@ -15,0 +16 @@ from mcp.types import PromptMessage, TextContent
++
+@@ -18,4 +19 @@ def my_prompt() -> PromptMessage:
+-    return PromptMessage(
+-        role="user",
+-        content=TextContent(type="text", text="Hello")
+-    )
++    return PromptMessage(role="user", content=TextContent(type="text", text="Hello"))
+@@ -27,0 +26 @@ from fastmcp.prompts import Message
++
+@@ -86,0 +86 @@ from mcp.types import PromptMessage, TextContent
++
+@@ -90,0 +91 @@ from fastmcp.prompts import Message
++
+@@ -113,4 +114 @@ from fastmcp.prompts import Message, PromptResult
+-return PromptResult(
+-    messages=[Message("Analyze this")],
+-    meta={"priority": "high"}
+-)
++return PromptResult(messages=[Message("Analyze this")], meta={"priority": "high"})
+diff --git a/dev-docs/v3-notes/provider-architecture.md b/dev-docs/v3-notes/provider-architecture.md
+index b1a0e808..131e0ad1 100644
+--- a/dev-docs/v3-notes/provider-architecture.md
++++ b/dev-docs/v3-notes/provider-architecture.md
+@@ -34,0 +35 @@ sub_server = FastMCP("Sub")
++
+@@ -38,0 +40 @@ def greet(name: str) -> str:
++
+@@ -56,2 +58 @@ provider = FastMCPProvider(server).with_transforms(
+-    namespace="api",
+-    tool_renames={"verbose_tool_name": "short"}
++    namespace="api", tool_renames={"verbose_tool_name": "short"}
+@@ -68,5 +69 @@ Transformations compose via stacking:
+-provider = (
+-    FastMCPProvider(server)
+-    .with_namespace("inner")
+-    .with_namespace("outer")
+-)
++provider = FastMCPProvider(server).with_namespace("inner").with_namespace("outer")
+@@ -84,3 +81 @@ main.mount(sub, namespace="api")
+-main.add_provider(
+-    FastMCPProvider(sub).with_namespace("api")
+-)
++main.add_provider(FastMCPProvider(sub).with_namespace("api"))
+@@ -95,0 +91 @@ from fastmcp.server.providers import MountedProvider
++
+@@ -99,0 +96 @@ from fastmcp.server.providers import FastMCPProvider
++
+diff --git a/dev-docs/v3-notes/resource-internal-types.md b/dev-docs/v3-notes/resource-internal-types.md
+index 24cd6328..70d6d436 100644
+--- a/dev-docs/v3-notes/resource-internal-types.md
++++ b/dev-docs/v3-notes/resource-internal-types.md
+@@ -17,0 +18 @@ def get_config() -> dict:  # Auto-serialized to JSON
++
+@@ -21,0 +23 @@ def get_items() -> list:  # Each item auto-wrapped
++
+@@ -23 +25 @@ ResourceResult({"key": "value"})  # Dict auto-converted
+-ResourceResult(["a", "b"])         # List split into items
++ResourceResult(["a", "b"])  # List split into items
+@@ -30,0 +33 @@ def get_config() -> str:  # Explicit JSON serialization
++
+@@ -32,0 +36 @@ def get_config() -> str:  # Explicit JSON serialization
++
+@@ -35,4 +39,7 @@ def get_items() -> ResourceResult:  # Explicit multi-item response
+-    return ResourceResult([
+-        ResourceContent("item1"),
+-        ResourceContent("item2"),
+-    ])
++    return ResourceResult(
++        [
++            ResourceContent("item1"),
++            ResourceContent("item2"),
++        ]
++    )
++
+@@ -126,0 +134 @@ import json
++
+@@ -141,0 +150 @@ import json
++
+@@ -149,0 +159 @@ from fastmcp.resources import ResourceContent, ResourceResult
++
+@@ -151,5 +161,7 @@ def get_items() -> ResourceResult:
+-    return ResourceResult([
+-        ResourceContent("user1"),
+-        ResourceContent("user2"),
+-        ResourceContent("user3"),
+-    ])
++    return ResourceResult(
++        [
++            ResourceContent("user1"),
++            ResourceContent("user2"),
++            ResourceContent("user3"),
++        ]
++    )
+@@ -168,0 +181 @@ from fastmcp.resources import ResourceContent, ResourceResult
++
+@@ -170,6 +183,3 @@ def get_html() -> ResourceResult:
+-    return ResourceResult([
+-        ResourceContent(
+-            content="<div>content</div>",
+-            mime_type="text/html"
+-        )
+-    ])
++    return ResourceResult(
++        [ResourceContent(content="<div>content</div>", mime_type="text/html")]
++    )
+diff --git a/dev-docs/v3-notes/task-meta-parameter.md b/dev-docs/v3-notes/task-meta-parameter.md
+index 4678c426..97899d5c 100644
+--- a/dev-docs/v3-notes/task-meta-parameter.md
++++ b/dev-docs/v3-notes/task-meta-parameter.md
+@@ -24 +24,3 @@ from fastmcp.server.tasks import TaskMeta
+-result = await server.call_tool("my_tool", {"arg": "value"}, task_meta=TaskMeta(ttl=300))
++result = await server.call_tool(
++    "my_tool", {"arg": "value"}, task_meta=TaskMeta(ttl=300)
++)
+@@ -76,0 +79 @@ async def call_tool(
++
+diff --git a/dev-docs/v3-notes/v3-features.md b/dev-docs/v3-notes/v3-features.md
+index 62d11e0b..f5ae20ca 100644
+--- a/dev-docs/v3-notes/v3-features.md
++++ b/dev-docs/v3-notes/v3-features.md
+@@ -18,0 +19 @@ def search(query: str) -> str:
++
+@@ -22 +23 @@ result = await ctx.sample(
+-    tools=[search]  # FunctionTool works directly!
++    tools=[search],  # FunctionTool works directly!
+@@ -89,0 +91 @@ from fastmcp.server.auth import AccessToken
++
+@@ -101,0 +104 @@ from fastmcp.server.auth.providers.azure import EntraOBOToken
++
+@@ -342,5 +345,7 @@ mcp.add_middleware(ResponseLimitingMiddleware(max_size=500_000))
+-mcp.add_middleware(ResponseLimitingMiddleware(
+-    max_size=100_000,
+-    tools=["search", "fetch_data"],
+-    raise_on_unstructured=True,
+-))
++mcp.add_middleware(
++    ResponseLimitingMiddleware(
++        max_size=100_000,
++        tools=["search", "fetch_data"],
++        raise_on_unstructured=True,
++    )
++)
+@@ -392,0 +398 @@ mcp = FastMCP("My Server")
++
+@@ -402,0 +409 @@ def app_html() -> str:
++
+@@ -404,0 +412 @@ def app_html() -> str:
++
+@@ -409,0 +418 @@ async def list_users() -> list[dict]:
++
+@@ -425,0 +435 @@ from fastmcp.apps import AppConfig, UI_EXTENSION_ID
++
+@@ -483,0 +494 @@ provider = LocalProvider()
++
+@@ -487,0 +499 @@ def greet(name: str) -> str:
++
+@@ -535,0 +548 @@ sub = FastMCP("Sub")
++
+@@ -539,0 +553 @@ def greet(name: str) -> str:
++
+@@ -566,3 +580,3 @@ provider.add_transform(Namespace("api"))
+-provider.add_transform(ToolTransform({
+-    "api_verbose_tool_name": ToolTransformConfig(name="short")
+-}))
++provider.add_transform(
++    ToolTransform({"api_verbose_tool_name": ToolTransformConfig(name="short")})
++)
+@@ -580,0 +595 @@ from fastmcp.tools import Tool
++
+@@ -610,0 +626 @@ mcp = FastMCP("Server")
++
+@@ -614,0 +631 @@ def get_config() -> dict:
++
+@@ -628,0 +646 @@ mcp = FastMCP("Server")
++
+@@ -632,0 +651 @@ def analyze_code(code: str, language: str = "python") -> str:
++
+@@ -720,0 +740 @@ mcp = FastMCP("Server")
++
+@@ -724,0 +745 @@ def premium_analysis(data: str) -> str:
++
+@@ -730,0 +752 @@ async def unlock_premium(ctx: Context) -> str:
++
+@@ -736,0 +759 @@ async def reset_features(ctx: Context) -> str:
++
+@@ -762,0 +786 @@ def add(x: int, y: int) -> int:
++
+@@ -766,0 +791 @@ def add(x: int, y: int, z: int = 0) -> int:
++
+@@ -839,0 +865 @@ components = LocalProvider()
++
+@@ -843,0 +870 @@ def calculate(x: int, y: int) -> int:
++
+@@ -847,0 +875 @@ def calculate(x: int, y: int, z: int = 0) -> int:
++
+@@ -880,0 +909 @@ from fastmcp.tools import ToolResult
++
+@@ -886 +915 @@ def process(data: str) -> ToolResult:
+-        meta={"processing_time_ms": 150}
++        meta={"processing_time_ms": 150},
+@@ -901,0 +931 @@ from fastmcp.resources import ResourceResult, ResourceContent
++
+@@ -909 +939 @@ def get_items() -> ResourceResult:
+-        meta={"count": 2}
++        meta={"count": 2},
+@@ -921,0 +952 @@ from fastmcp.prompts import PromptResult, Message
++
+@@ -929 +960 @@ def conversation() -> PromptResult:
+-        meta={"generated_at": "2024-01-01"}
++        meta={"generated_at": "2024-01-01"},
+@@ -943,0 +975 @@ from fastmcp.utilities.tasks import TaskConfig
++
+@@ -948,0 +981 @@ async def long_running_task():
++
+@@ -953,0 +987 @@ async def flexible_task():
++
+@@ -955,2 +989 @@ async def flexible_task():
+-async def simple_task():
+-    ...
++async def simple_task(): ...
+@@ -977,0 +1011 @@ def greet(name: str) -> str:
++
+@@ -1040,0 +1075 @@ mcp = FastMCP()
++
+@@ -1043,0 +1079 @@ def protected_tool(): ...
++
+@@ -1046,0 +1083 @@ def secret_data(): ...
++
+@@ -1061,3 +1098 @@ mcp = FastMCP(middleware=[AuthMiddleware(auth=require_scopes("api"))])
+-mcp = FastMCP(middleware=[
+-    AuthMiddleware(auth=restrict_tag("admin", scopes=["admin"]))
+-])
++mcp = FastMCP(middleware=[AuthMiddleware(auth=restrict_tag("admin", scopes=["admin"]))])
+@@ -1102,0 +1138 @@ from fastmcp.tools import tool
++
+@@ -1223,0 +1260 @@ from fastmcp.server.lifespan import lifespan
++
+@@ -1231,0 +1269 @@ async def db_lifespan(server):
++
+@@ -1239,0 +1278 @@ async def cache_lifespan(server):
++
+@@ -1298,0 +1338 @@ mcp = FastMCP("example")
++
+@@ -1316,0 +1357 @@ import time
++
+@@ -1377,0 +1419 @@ def greet(name: str) -> str:
++
+@@ -1379,0 +1422 @@ isinstance(greet, FunctionTool)  # True
++
+@@ -1384,0 +1428 @@ def greet(name: str) -> str:
++
+@@ -1386,2 +1430,2 @@ isinstance(greet, FunctionTool)  # False
+-callable(greet)                  # True - it's still your function
+-greet("World")                   # "Hello, World!"
++callable(greet)  # True - it's still your function
++greet("World")  # "Hello, World!"
+@@ -1430,0 +1475 @@ from mcp.types import PromptMessage, TextContent
++
+@@ -1434,0 +1480 @@ def my_prompt() -> PromptMessage:
++
+@@ -1437,0 +1484 @@ from fastmcp.prompts import Message
++
+@@ -1452,0 +1500 @@ import os
++
+diff --git a/dev-docs/v3-notes/visibility.md b/dev-docs/v3-notes/visibility.md
+index fa1c0406..103059c0 100644
+--- a/dev-docs/v3-notes/visibility.md
++++ b/dev-docs/v3-notes/visibility.md
+@@ -26 +26 @@ server.disable(keys=["tool:my_tool"])  # Hide specific component
+-server.disable(tags={"internal"})       # Hide all components with tag
++server.disable(tags={"internal"})  # Hide all components with tag
+@@ -79,0 +80 @@ def my_tool(): ...
++
+@@ -83,0 +85 @@ def my_tool(): ...
++
+diff --git a/dev-docs/v4-notes/background-tasks.md b/dev-docs/v4-notes/background-tasks.md
+index 125c8ba7..cd8c5cd8 100644
+--- a/dev-docs/v4-notes/background-tasks.md
++++ b/dev-docs/v4-notes/background-tasks.md
+@@ -98 +98 @@ mcp = FastMCP("Server")
+-mcp.add_extension(TasksExtension(url="redis://..."))   # required to enable tasks
++mcp.add_extension(TasksExtension(url="redis://..."))  # required to enable tasks
+@@ -101,3 +101,2 @@ mcp.add_extension(TasksExtension(url="redis://..."))   # required to enable task
+-@mcp.tool(task=True)          # intent: this tool CAN run as a task
+-async def crunch(dataset: str) -> str:
+-    ...
++@mcp.tool(task=True)  # intent: this tool CAN run as a task
++async def crunch(dataset: str) -> str: ...
+diff --git a/dev-docs/v4-notes/change-register.md b/dev-docs/v4-notes/change-register.md
+index 89762a6e..5d136371 100644
+--- a/dev-docs/v4-notes/change-register.md
++++ b/dev-docs/v4-notes/change-register.md
+@@ -250,2 +250,2 @@ from fastmcp import Client
+-client = Client("https://example.com/mcp")                  # now negotiates "auto"
+-client = Client("https://example.com/mcp", mode="legacy")   # opt back into the handshake
++client = Client("https://example.com/mcp")  # now negotiates "auto"
++client = Client("https://example.com/mcp", mode="legacy")  # opt back into the handshake
+@@ -303,0 +304 @@ from fastmcp.client.transports.base import ClientTransport, TransportOptions
++
+diff --git a/dev-docs/v4-notes/feature-program.md b/dev-docs/v4-notes/feature-program.md
+index 8c7b9f02..a334a7e8 100644
+--- a/dev-docs/v4-notes/feature-program.md
++++ b/dev-docs/v4-notes/feature-program.md
+@@ -64 +64,3 @@ async def create_shipment(
+-    address: Annotated[Address, Resolve(ask_address)],  # unwrapped; decline -> ToolError
++    address: Annotated[
++        Address, Resolve(ask_address)
++    ],  # unwrapped; decline -> ToolError
+@@ -72 +74,3 @@ async def maybe_ship(
+-    address: Annotated[ElicitationResult[Address], Resolve(ask_address)],  # full outcome
++    address: Annotated[
++        ElicitationResult[Address], Resolve(ask_address)
++    ],  # full outcome
+diff --git a/dev-docs/v4-notes/stateless-session-state.md b/dev-docs/v4-notes/stateless-session-state.md
+index 5b0bea73..0183d9ab 100644
+--- a/dev-docs/v4-notes/stateless-session-state.md
++++ b/dev-docs/v4-notes/stateless-session-state.md
+@@ -48,0 +49 @@ from fastmcp.server.sessions import UserSession
++
+@@ -67,0 +69 @@ from fastmcp.server.dependencies import get_session
++
+diff --git a/examples/atproto_mcp/README.md b/examples/atproto_mcp/README.md
+index 75435540..9965122e 100644
+--- a/examples/atproto_mcp/README.md
++++ b/examples/atproto_mcp/README.md
+@@ -64,0 +65 @@ from atproto_mcp.server import atproto_mcp
++
+@@ -68,4 +69,2 @@ async def demo():
+-        await client.call_tool("post", {
+-            "text": "Hello from FastMCP!"
+-        })
+-        
++        await client.call_tool("post", {"text": "Hello from FastMCP!"})
++
+@@ -73,6 +72,9 @@ async def demo():
+-        await client.call_tool("post", {
+-            "text": "Beautiful sunset! 🌅",
+-            "images": ["https://example.com/sunset.jpg"],
+-            "image_alts": ["Sunset over the ocean"]
+-        })
+-        
++        await client.call_tool(
++            "post",
++            {
++                "text": "Beautiful sunset! 🌅",
++                "images": ["https://example.com/sunset.jpg"],
++                "image_alts": ["Sunset over the ocean"],
++            },
++        )
++
+@@ -80,5 +82,8 @@ async def demo():
+-        await client.call_tool("post", {
+-            "text": "Great point!",
+-            "reply_to": "at://did:plc:xxx/app.bsky.feed.post/yyy"
+-        })
+-        
++        await client.call_tool(
++            "post",
++            {
++                "text": "Great point!",
++                "reply_to": "at://did:plc:xxx/app.bsky.feed.post/yyy",
++            },
++        )
++
+@@ -86,5 +91,8 @@ async def demo():
+-        await client.call_tool("post", {
+-            "text": "This is important:",
+-            "quote": "at://did:plc:xxx/app.bsky.feed.post/yyy"
+-        })
+-        
++        await client.call_tool(
++            "post",
++            {
++                "text": "This is important:",
++                "quote": "at://did:plc:xxx/app.bsky.feed.post/yyy",
++            },
++        )
++
+@@ -92,6 +100,16 @@ async def demo():
+-        await client.call_tool("post", {
+-            "text": "Check out FastMCP by @alternatebuild.dev",
+-            "links": [{"text": "FastMCP", "url": "https://github.com/PrefectHQ/fastmcp"}],
+-            "mentions": [{"handle": "alternatebuild.dev", "display_text": "@alternatebuild.dev"}]
+-        })
+-        
++        await client.call_tool(
++            "post",
++            {
++                "text": "Check out FastMCP by @alternatebuild.dev",
++                "links": [
++                    {"text": "FastMCP", "url": "https://github.com/PrefectHQ/fastmcp"}
++                ],
++                "mentions": [
++                    {
++                        "handle": "alternatebuild.dev",
++                        "display_text": "@alternatebuild.dev",
++                    }
++                ],
++            },
++        )
++
+@@ -99,6 +117,9 @@ async def demo():
+-        await client.call_tool("post", {
+-            "text": "Adding visual context:",
+-            "quote": "at://did:plc:xxx/app.bsky.feed.post/yyy",
+-            "images": ["https://example.com/chart.png"]
+-        })
+-        
++        await client.call_tool(
++            "post",
++            {
++                "text": "Adding visual context:",
++                "quote": "at://did:plc:xxx/app.bsky.feed.post/yyy",
++                "images": ["https://example.com/chart.png"],
++            },
++        )
++
+@@ -106,6 +127,11 @@ async def demo():
+-        await client.call_tool("post", {
+-            "text": "I agree! See this article for more info",
+-            "reply_to": "at://did:plc:xxx/app.bsky.feed.post/yyy",
+-            "links": [{"text": "this article", "url": "https://example.com/article"}]
+-        })
+-        
++        await client.call_tool(
++            "post",
++            {
++                "text": "I agree! See this article for more info",
++                "reply_to": "at://did:plc:xxx/app.bsky.feed.post/yyy",
++                "links": [
++                    {"text": "this article", "url": "https://example.com/article"}
++                ],
++            },
++        )
++
+@@ -113,7 +139,13 @@ async def demo():
+-        await client.call_tool("create_thread", {
+-            "posts": [
+-                {"text": "Starting a thread about Python 🧵"},
+-                {"text": "Python is great for rapid prototyping"},
+-                {"text": "And the ecosystem is amazing!", "images": ["https://example.com/python.jpg"]}
+-            ]
+-        })
++        await client.call_tool(
++            "create_thread",
++            {
++                "posts": [
++                    {"text": "Starting a thread about Python 🧵"},
++                    {"text": "Python is great for rapid prototyping"},
++                    {
++                        "text": "And the ecosystem is amazing!",
++                        "images": ["https://example.com/python.jpg"],
++                    },
++                ]
++            },
++        )
+diff --git a/examples/skills/sample_skills/pdf-processing/reference.md b/examples/skills/sample_skills/pdf-processing/reference.md
+index 7b7b329d..2a250fc0 100644
+--- a/examples/skills/sample_skills/pdf-processing/reference.md
++++ b/examples/skills/sample_skills/pdf-processing/reference.md
+@@ -27,4 +27 @@ writer.append(reader)
+-writer.update_page_form_field_values(
+-    writer.pages[0],
+-    {"field_name": "field_value"}
+-)
++writer.update_page_form_field_values(writer.pages[0], {"field_name": "field_value"})
+diff --git a/fastmcp_slim/README.md b/fastmcp_slim/README.md
+index 9afc7f4f..02364b36 100644
+--- a/fastmcp_slim/README.md
++++ b/fastmcp_slim/README.md
+@@ -34,0 +35 @@ mcp = FastMCP("Demo 🚀")
++
+@@ -39,0 +41 @@ def add(a: int, b: int) -> int:
++
+diff --git a/fastmcp_slim/fastmcp/contrib/component_manager/README.md b/fastmcp_slim/fastmcp/contrib/component_manager/README.md
+index 0cc99ad1..94b13db1 100644
+--- a/fastmcp_slim/fastmcp/contrib/component_manager/README.md
++++ b/fastmcp_slim/fastmcp/contrib/component_manager/README.md
+@@ -31 +31,4 @@ from fastmcp.contrib.component_manager import set_up_component_manager
+-mcp = FastMCP(name="Component Manager", instructions="This is a test server with component manager.")
++mcp = FastMCP(
++    name="Component Manager",
++    instructions="This is a test server with component manager.",
++)
+@@ -98 +101,5 @@ If your server uses authentication:
+-mcp = FastMCP(name="Component Manager", instructions="This is a test server with component manager.", auth=auth)
++mcp = FastMCP(
++    name="Component Manager",
++    instructions="This is a test server with component manager.",
++    auth=auth,
++)
+@@ -120 +127,5 @@ You can also combine different configurations when working with mounted servers
+-mcp = FastMCP(name="Component Manager", instructions="This is a test server with component manager.", auth=auth)
++mcp = FastMCP(
++    name="Component Manager",
++    instructions="This is a test server with component manager.",
++    auth=auth,
++)
+@@ -123 +134,5 @@ set_up_component_manager(server=mcp, required_scopes=["mcp:write"])
+-mounted = FastMCP(name="Component Manager", instructions="This is a test server with component manager.", auth=auth)
++mounted = FastMCP(
++    name="Component Manager",
++    instructions="This is a test server with component manager.",
++    auth=auth,
++)
+diff --git a/fastmcp_slim/fastmcp/server/providers/openapi/README.md b/fastmcp_slim/fastmcp/server/providers/openapi/README.md
+index 8c5e890c..39396b32 100644
+--- a/fastmcp_slim/fastmcp/server/providers/openapi/README.md
++++ b/fastmcp_slim/fastmcp/server/providers/openapi/README.md
+@@ -74,2 +74,2 @@ def _create_tool(self, route: HTTPRoute) -> Tool:
+-        client=self._client, 
+-        route=route, 
++        client=self._client,
++        route=route,
+@@ -79 +79 @@ def _create_tool(self, route: HTTPRoute) -> Tool:
+-        parameters=flat_param_schema
++        parameters=flat_param_schema,
+@@ -142,5 +142,5 @@ server = FastMCPOpenAPI(
+-    openapi_spec=spec,           # Required: OpenAPI specification
+-    client=httpx_client,         # Required: HTTP client instance
+-    name="API Server",           # Optional: Server name
+-    route_map=custom_routes,     # Optional: Custom route mappings
+-    enable_caching=True,         # Optional: Enable response caching
++    openapi_spec=spec,  # Required: OpenAPI specification
++    client=httpx_client,  # Required: HTTP client instance
++    name="API Server",  # Optional: Server name
++    route_map=custom_routes,  # Optional: Custom route mappings
++    enable_caching=True,  # Optional: Enable response caching
+@@ -155,4 +155,6 @@ from fastmcp.server.openapi_new.routing import RouteMap
+-custom_routes = RouteMap({
+-    "GET:/users": "tool",        # Force specific operations to be tools
+-    "GET:/status": "resource",   # Force specific operations to be resources
+-})
++custom_routes = RouteMap(
++    {
++        "GET:/users": "tool",  # Force specific operations to be tools
++        "GET:/status": "resource",  # Force specific operations to be resources
++    }
++)
+@@ -183 +185 @@ async def test_stateless_request_building():
+-    
++
+@@ -189 +191 @@ async def test_stateless_request_building():
+-    
++
+@@ -191,2 +193,2 @@ async def test_stateless_request_building():
+-    assert hasattr(server, '_director')
+-    assert hasattr(server, '_spec')
++    assert hasattr(server, "_director")
++    assert hasattr(server, "_spec")
+@@ -217,0 +220 @@ import logging
++
+diff --git a/fastmcp_slim/fastmcp/utilities/openapi/README.md b/fastmcp_slim/fastmcp/utilities/openapi/README.md
+index 2f2a5f45..5f3ec088 100644
+--- a/fastmcp_slim/fastmcp/utilities/openapi/README.md
++++ b/fastmcp_slim/fastmcp/utilities/openapi/README.md
+@@ -116,3 +116 @@ async with httpx.AsyncClient() as client:
+-        openapi_spec=openapi_spec,
+-        client=client,
+-        name="My API Server"
++        openapi_spec=openapi_spec, client=client, name="My API Server"
+@@ -120 +118 @@ async with httpx.AsyncClient() as client:
+-    
++

@@ -1,0 +1,219 @@
+{
+  "configuration_failure": {
+    "all_observed_hash_bindings_match": true,
+    "budget_exhausted_remaining_originals_unread": true,
+    "configuration_preparation_failures": [
+      {
+        "binding": {
+          "bytes": 1590,
+          "path": "/home/barberb/lift_coding/artifacts/repeated-compact-edits-20261013/live-preparation/identity-prepare-result.json",
+          "sha256": "a204548a3baa95051c55d86447cb84ba8a2cac193c6cf79657b5075de814b780"
+        },
+        "label": "identity",
+        "provider_profile": "grok-4.7-cli-1.0.46@1",
+        "reported_model_calls": 0,
+        "reported_provider_generation_calls": 0,
+        "returncode": 1,
+        "scope": "Retained configuration preparation failure; separate from executed native trials and token totals.",
+        "seconds": 0.14780051610432565
+      }
+    ],
+    "joins": [
+      {
+        "actual_sha256": "6e2c0d9c36c6b7b5c6a67a0d2e30cfb860266fbfac238deef820233524704c22",
+        "artifact_path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/native-codex-05/receipt.json",
+        "evidence_paths": [
+          "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/benchmark-declared-controls-recovery-20261002/retained-pilot-comparison.json",
+          "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/native-codex-05/receipt.json"
+        ],
+        "evidence_tier": "reconstructed_join",
+        "expected_sha256": "6e2c0d9c36c6b7b5c6a67a0d2e30cfb860266fbfac238deef820233524704c22",
+        "hash_matches": true,
+        "report": "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/benchmark-declared-controls-recovery-20261002/retained-pilot-comparison.json",
+        "status": "rehashed_bound_file"
+      },
+      {
+        "actual_sha256": "cc35a8d9c79013eacc24d734a49b3fba033207068bcb6b327f81ce45aeb14c6e",
+        "artifact_path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-no-index-08/receipt.json",
+        "evidence_paths": [
+          "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/benchmark-declared-controls-recovery-20261002/retained-pilot-comparison.json",
+          "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-no-index-08/receipt.json"
+        ],
+        "evidence_tier": "reconstructed_join",
+        "expected_sha256": "cc35a8d9c79013eacc24d734a49b3fba033207068bcb6b327f81ce45aeb14c6e",
+        "hash_matches": true,
+        "report": "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/benchmark-declared-controls-recovery-20261002/retained-pilot-comparison.json",
+        "status": "rehashed_bound_file"
+      },
+      {
+        "actual_sha256": "9297d03dbe8cf99f7014b23f14068622fc7e5a868ed7bbc18fbbdcf4084b30ea",
+        "artifact_path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/receipt.json",
+        "evidence_paths": [
+          "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/benchmark-declared-controls-recovery-20261002/retained-pilot-comparison.json",
+          "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/receipt.json"
+        ],
+        "evidence_tier": "reconstructed_join",
+        "expected_sha256": "9297d03dbe8cf99f7014b23f14068622fc7e5a868ed7bbc18fbbdcf4084b30ea",
+        "hash_matches": true,
+        "report": "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/benchmark-declared-controls-recovery-20261002/retained-pilot-comparison.json",
+        "status": "rehashed_bound_file"
+      },
+      {
+        "actual_sha256": "2a72916e8f312022f9af04bc4637e397a5ddc50770f169d3ff00a68fef6d1dd1",
+        "artifact_path": "/home/barberb/lift_coding/artifacts/terminal-codex-eigenvalue-baseline-20261005/native-01/receipt.json",
+        "evidence_paths": [
+          "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/terminal-codex-eigenvalue-baseline-20261005/comparison.json",
+          "/home/barberb/lift_coding/artifacts/terminal-codex-eigenvalue-baseline-20261005/native-01/receipt.json"
+        ],
+        "evidence_tier": "reconstructed_join",
+        "expected_sha256": "2a72916e8f312022f9af04bc4637e397a5ddc50770f169d3ff00a68fef6d1dd1",
+        "hash_matches": true,
+        "report": "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/terminal-codex-eigenvalue-baseline-20261005/comparison.json",
+        "status": "rehashed_bound_file"
+      },
+      {
+        "actual_sha256": "73b1fd7721092e9ddc228114a95e4d9dd7ee71c9e41904465797b80e9ebc2caf",
+        "artifact_path": "/home/barberb/lift_coding/artifacts/terminal-supervisor-blockers-20261005/largest-eigenval-03/receipt.json",
+        "evidence_paths": [
+          "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/terminal-codex-eigenvalue-baseline-20261005/comparison.json",
+          "/home/barberb/lift_coding/artifacts/terminal-supervisor-blockers-20261005/largest-eigenval-03/receipt.json"
+        ],
+        "evidence_tier": "reconstructed_join",
+        "expected_sha256": "73b1fd7721092e9ddc228114a95e4d9dd7ee71c9e41904465797b80e9ebc2caf",
+        "hash_matches": true,
+        "report": "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/terminal-codex-eigenvalue-baseline-20261005/comparison.json",
+        "status": "rehashed_bound_file"
+      },
+      {
+        "actual_sha256": null,
+        "artifact_path": "/home/barberb/lift_coding/artifacts/terminal-codex-eigenvalue-baseline-20261005/native-01/jobs/native-codex-largest-eigenval/largest-eigenval__EKNbpC4/result.json",
+        "evidence_paths": [
+          "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/terminal-codex-eigenvalue-baseline-20261005/comparison.json"
+        ],
+        "evidence_tier": "reconstructed_join",
+        "expected_sha256": "99bdb221657148380a5b5737ba83effe7ca05cc0b8345647e70e8554cae42f12",
+        "hash_matches": null,
+        "report": "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/terminal-codex-eigenvalue-baseline-20261005/comparison.json",
+        "status": "not_read_within_bound"
+      },
+      {
+        "actual_sha256": null,
+        "artifact_path": "/home/barberb/lift_coding/artifacts/terminal-codex-eigenvalue-baseline-20261005/native-01/config.json",
+        "evidence_paths": [
+          "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/terminal-codex-eigenvalue-baseline-20261005/comparison.json"
+        ],
+        "evidence_tier": "reconstructed_join",
+        "expected_sha256": "5a507dd92450667d072dd11eeed8edeea37a78a8c655244c4396bdcf91424a54",
+        "hash_matches": null,
+        "report": "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/terminal-codex-eigenvalue-baseline-20261005/comparison.json",
+        "status": "not_read_within_bound"
+      },
+      {
+        "actual_sha256": null,
+        "artifact_path": "/home/barberb/lift_coding/artifacts/terminal-supervisor-blockers-20261005/largest-eigenval-03/config.json",
+        "evidence_paths": [
+          "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/terminal-codex-eigenvalue-baseline-20261005/comparison.json"
+        ],
+        "evidence_tier": "reconstructed_join",
+        "expected_sha256": "afa0da8a211789963cc70d6fb36dce6914bd9207f0cc915e9b52bbd884dda30e",
+        "hash_matches": null,
+        "report": "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/terminal-codex-eigenvalue-baseline-20261005/comparison.json",
+        "status": "not_read_within_bound"
+      },
+      {
+        "actual_sha256": "a4e8ba8eed4e3aa773dc486f77a103c029e48792517c42302606710e9205c80e",
+        "artifact_path": "/home/barberb/lift_coding/artifacts/numerical-live-pair-20261013/live-trials/codex-full-01/receipt.json",
+        "evidence_paths": [
+          "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/numerical-live-comparison-20261013/pair-observation-final.json",
+          "/home/barberb/lift_coding/artifacts/numerical-live-pair-20261013/live-trials/codex-full-01/receipt.json"
+        ],
+        "evidence_tier": "reconstructed_join",
+        "expected_sha256": "a4e8ba8eed4e3aa773dc486f77a103c029e48792517c42302606710e9205c80e",
+        "hash_matches": true,
+        "report": "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/numerical-live-comparison-20261013/pair-observation-final.json",
+        "status": "rehashed_bound_file"
+      },
+      {
+        "actual_sha256": null,
+        "artifact_path": "/home/barberb/lift_coding/artifacts/numerical-live-pair-20261013/live-trials/codex-no-index-01/receipt.json",
+        "evidence_paths": [
+          "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/numerical-live-comparison-20261013/pair-observation-final.json"
+        ],
+        "evidence_tier": "reconstructed_join",
+        "expected_sha256": "195635b14c20f43603507c5e4794a7e9e2e755c3daeb8d874a0e37d0c8abaf47",
+        "hash_matches": null,
+        "report": "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/numerical-live-comparison-20261013/pair-observation-final.json",
+        "status": "not_read_within_bound"
+      },
+      {
+        "actual_sha256": "f5ea12674ed2083cc50797fabde98902d6b07ff95ab7f54c1aaab72ee0b8f135",
+        "artifact_path": "/home/barberb/lift_coding/artifacts/repeated-compact-edits-20261013/live-trials/grok-identity-02/receipt.json",
+        "evidence_paths": [
+          "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/compact-worker-live-20261014/readouts/original-pair.json",
+          "/home/barberb/lift_coding/artifacts/repeated-compact-edits-20261013/live-trials/grok-identity-02/receipt.json"
+        ],
+        "evidence_tier": "reconstructed_join",
+        "expected_sha256": "f5ea12674ed2083cc50797fabde98902d6b07ff95ab7f54c1aaab72ee0b8f135",
+        "hash_matches": true,
+        "report": "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/compact-worker-live-20261014/readouts/original-pair.json",
+        "status": "rehashed_bound_file"
+      },
+      {
+        "actual_sha256": "f0ef93544f3201fe045a339738be091da759fa158c563ac3867306b4f8f44d44",
+        "artifact_path": "/home/barberb/lift_coding/artifacts/repeated-compact-edits-20261013/live-trials/grok-comments-02/receipt.json",
+        "evidence_paths": [
+          "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/compact-worker-live-20261014/readouts/original-pair.json",
+          "/home/barberb/lift_coding/artifacts/repeated-compact-edits-20261013/live-trials/grok-comments-02/receipt.json"
+        ],
+        "evidence_tier": "reconstructed_join",
+        "expected_sha256": "f0ef93544f3201fe045a339738be091da759fa158c563ac3867306b4f8f44d44",
+        "hash_matches": true,
+        "report": "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/compact-worker-live-20261014/readouts/original-pair.json",
+        "status": "rehashed_bound_file"
+      },
+      {
+        "actual_sha256": "300d2c1b075b8c01429d547afd688875b4f1fe44da776318fa227fb79bab76b7",
+        "artifact_path": "/home/barberb/lift_coding/artifacts/repeated-compact-edits-20261013/live-trials/grok-comments-metadata-03/receipt.json",
+        "evidence_paths": [
+          "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/compact-worker-live-20261014/readouts/metadata-treatment.json",
+          "/home/barberb/lift_coding/artifacts/repeated-compact-edits-20261013/live-trials/grok-comments-metadata-03/receipt.json"
+        ],
+        "evidence_tier": "reconstructed_join",
+        "expected_sha256": "300d2c1b075b8c01429d547afd688875b4f1fe44da776318fa227fb79bab76b7",
+        "hash_matches": true,
+        "report": "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/compact-worker-live-20261014/readouts/metadata-treatment.json",
+        "status": "rehashed_bound_file"
+      },
+      {
+        "actual_sha256": "c09f59baad35a3613bbc80ec5b1c9e87d2e809ed53269de3ac6f13730be4f57e",
+        "artifact_path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/no-index-diagnosis-20260929/no-index-corrected-02/receipt.json",
+        "evidence_paths": [
+          "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/no-index-diagnosis-20260929/no-index-corrected-02/token-score.json",
+          "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/no-index-diagnosis-20260929/no-index-corrected-02/receipt.json"
+        ],
+        "evidence_tier": "reconstructed_join",
+        "expected_sha256": "c09f59baad35a3613bbc80ec5b1c9e87d2e809ed53269de3ac6f13730be4f57e",
+        "hash_matches": true,
+        "report": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/no-index-diagnosis-20260929/no-index-corrected-02/token-score.json",
+        "status": "rehashed_bound_file"
+      },
+      {
+        "actual_sha256": "8d797316c945e90dab840b4a1f4dd43490d146c9ef5d4be949e7d91312391c56",
+        "artifact_path": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/no-index-diagnosis-20260929/no-index-corrected-01/receipt.json",
+        "evidence_paths": [
+          "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/no-index-diagnosis-20260929/no-index-corrected-02/token-score.json",
+          "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/no-index-diagnosis-20260929/no-index-corrected-01/receipt.json"
+        ],
+        "evidence_tier": "reconstructed_join",
+        "expected_sha256": "8d797316c945e90dab840b4a1f4dd43490d146c9ef5d4be949e7d91312391c56",
+        "hash_matches": true,
+        "report": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/no-index-diagnosis-20260929/no-index-corrected-02/token-score.json",
+        "status": "rehashed_bound_file"
+      }
+    ],
+    "not_reexecuted": true
+  },
+  "historical_24": "Separate 24-cell pilot; 10 useful labels; original individual rows not recovered",
+  "historical_32": "32 original cells not individually recovered; 16/32 usage observed; see studies.json for all outcome classes",
+  "unknown_gaps": "No global registry census; inventory completeness applies to the bounded named evidence only"
+}

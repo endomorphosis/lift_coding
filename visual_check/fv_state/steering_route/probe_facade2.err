@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/home/hatch/workspace/lift_coding/visual_check/fv_state/steering_route/probe_facade2.py", line 63, in <module>
+    main()
+  File "/home/hatch/workspace/lift_coding/visual_check/fv_state/steering_route/probe_facade2.py", line 21, in main
+    run = sup.run(
+          ^^^^^^^^
+  File "/home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/facade.py", line 303, in run
+    return self._run_from_prompt(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/facade.py", line 411, in _run_from_prompt
+    from ipfs_accelerate_py.agent_supervisor.prompt.plan_create_service import (
+  File "/home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/prompt/plan_create_service.py", line 35, in <module>
+    from ..analysis.planning_analysis_factory import (
+  File "/home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/analysis/planning_analysis_factory.py", line 33, in <module>
+    from ipfs_datasets_py.logic.formalization.autoencoder.source_screening import (
+ModuleNotFoundError: No module named 'ipfs_datasets_py.logic.formalization.autoencoder'

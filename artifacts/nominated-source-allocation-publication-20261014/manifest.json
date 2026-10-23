@@ -1,0 +1,41 @@
+{
+  "accelerator_publication": "83ad1ca1a43ae53d3642efe8799d25a9df8cebf3",
+  "changed_gitlinks": {
+    "external/ipfs_accelerate": "83ad1ca1a43ae53d3642efe8799d25a9df8cebf3"
+  },
+  "files": [
+    {
+      "bytes": 6311,
+      "path": "implementation_plan/docs/121-supervisor-nominated-source-allocation-2026-10-14.md",
+      "sha256": "3aa71a85d4804ce77d04a57582dffbb02f1ae2f9ec51a1c8947cc4f112088c03"
+    },
+    {
+      "bytes": 43199,
+      "path": "artifacts/nominated-source-allocation-publication-20261014/hosted-ci.json",
+      "sha256": "86e1573546ef945676b791cede3b7dbc44d80cd1bdac6abf806c0458843491e2"
+    },
+    {
+      "bytes": 64840,
+      "path": "artifacts/nominated-source-allocation-publication-20261014/merge-compatibility.json",
+      "sha256": "afea4c67ac4c2e9d565b7666ed93b3185f6074915ef6a0adb554808a1e05036a"
+    },
+    {
+      "bytes": 18248,
+      "path": "artifacts/nominated-source-allocation-publication-20261014/publication_check_runner.py",
+      "sha256": "dfa1af82e730b6ab2d45e08eb5fb1e3e196a8be5eeae9665ed8c6f4d65b46440"
+    },
+    {
+      "bytes": 28641,
+      "path": "artifacts/nominated-source-allocation-publication-20261014/parent-checks.json",
+      "sha256": "c8304169f1bfd87ef1f56544c5408e652d02ed69c185ce5244ba37c870c6dc2c"
+    }
+  ],
+  "manifest_self_excluded": true,
+  "parent_base": "92875093af74738f58a708230e2804e027bbd009",
+  "preserved_gitlinks": {
+    "external/ipfs_datasets": "ebdf6539a4afaf1f10c20744cb14222ef9db4d2b",
+    "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0"
+  },
+  "qualified_leaf": "ba63f2f78fbaac64637d3fbca5b71b713b3856f7",
+  "schema": "nominated-source-allocation-parent-manifest@1"
+}

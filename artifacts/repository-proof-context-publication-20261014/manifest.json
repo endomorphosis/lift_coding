@@ -1,0 +1,41 @@
+{
+  "accelerator_publication": "b184d30229b3b8f23a390ca24580962d44620536",
+  "changed_gitlinks": {
+    "external/ipfs_accelerate": "b184d30229b3b8f23a390ca24580962d44620536"
+  },
+  "files": [
+    {
+      "bytes": 6671,
+      "path": "implementation_plan/docs/126-supervisor-repository-proof-context-2026-10-14.md",
+      "sha256": "5e2a8288e0b7701b1bda4db6130650dbeeaf79c8c8afeb6785eb26e7485468f5"
+    },
+    {
+      "bytes": 23708,
+      "path": "artifacts/repository-proof-context-publication-20261014/child-ci-observation.json",
+      "sha256": "a2aed8ea351399f94804c9ebe496582ae2d20b2b49c11d92d4af146092187290"
+    },
+    {
+      "bytes": 23090,
+      "path": "artifacts/repository-proof-context-publication-20261014/fresh-main-compatibility.json",
+      "sha256": "352f22afbe4755b3d756e3c0b2209b265aa9a8dc847a547135f82caf11823e4b"
+    },
+    {
+      "bytes": 28006,
+      "path": "artifacts/repository-proof-context-publication-20261014/publication_checker.py",
+      "sha256": "297a839ac70a1647d9ff32251ef64c2f2912df4ad623890e3d1a9def12ab9a0b"
+    },
+    {
+      "bytes": 118902,
+      "path": "artifacts/repository-proof-context-publication-20261014/parent-checks.json",
+      "sha256": "8815cb4245850e3f288c957a4dc0d2dacd196a996d651bb109deb6011ee8ae4d"
+    }
+  ],
+  "manifest_self_excluded": true,
+  "parent_base": "51774875d8e42deb4d378aa4d9dbf3ec8329969f",
+  "preserved_gitlinks": {
+    "external/ipfs_datasets": "802c8f32c8b3d3058271e23c69e93f37b39f43fb",
+    "external/ipfs_kit": "40c98c71b95be750509ffdb21e7e5494d91b4e79"
+  },
+  "qualified_leaf": "b184d30229b3b8f23a390ca24580962d44620536",
+  "schema": "repository-proof-context-parent-manifest@1"
+}

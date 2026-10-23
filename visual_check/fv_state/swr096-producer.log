@@ -1,0 +1,126 @@
+[run-with-owned-port] leased verified-free port 3417 for SWISSKNIFE_MCP_E2E_PORT.
+Browser toolchain verified: node 22.19.0 (/home/hatch/.npm/_npx/759e7e0cbbdd6854/node_modules/node/bin/node), npm 10.8.2, sha256:584a3304603b208797b50faee86f00f5a6fe987d2289f382ae4f7b93a62dbc21; receipt test-results/browser-toolchain/verification-receipt.json
+
+Running 1 test using 1 worker
+
+  ✘  1 test/e2e/mcp-dashboard.spec.ts:1192:3 › HAO-704 Swissknife MCP++ dashboard launch gate › opens every tool-backed virtual desktop app and records MCP UI smoke receipts (3.0m)
+
+
+  1) test/e2e/mcp-dashboard.spec.ts:1192:3 › HAO-704 Swissknife MCP++ dashboard launch gate › opens every tool-backed virtual desktop app and records MCP UI smoke receipts 
+
+    [31mTest timeout of 180000ms exceeded.[39m
+
+    Error: locator.screenshot: Test timeout of 180000ms exceeded.
+    Call log:
+    [2m  - taking element screenshot[22m
+    [2m  - waiting for fonts to load...[22m
+    [2m  - fonts loaded[22m
+    [2m  - attempting scroll into view action[22m
+    [2m    - waiting for element to be stable[22m
+
+
+      1239 |
+      1240 |       const screenshotPath = path.join(TOOL_UI_SMOKE_SCREENSHOT_DIR, `${app.app_id}.png`);
+    > 1241 |       await panel.screenshot({ path: screenshotPath });
+           |                   ^
+      1242 |       await testInfo.attach(`tool-ui-smoke-${app.app_id}`, {
+      1243 |         path: screenshotPath,
+      1244 |         contentType: 'image/png',
+        at /home/hatch/workspace/lift_coding/swissknife/test/e2e/mcp-dashboard.spec.ts:1241:19
+
+    attachment #1: tool-ui-smoke-accelerate-panel (image/png) ──────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-accelerate-panel-6a26eafcf5136702b4c92a231c302cdf735b5935.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: tool-ui-smoke-agent-supervisor (image/png) ──────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-agent-supervisor-05f6698198b327a8a155650c9fc98bc02c28ea57.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: tool-ui-smoke-ai-chat (image/png) ───────────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-ai-chat-fcee0562ee418f10b9f0d8bb256c2fbbb4886493.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #4: tool-ui-smoke-api-keys (image/png) ──────────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-api-keys-0c81c5ffc302cc04bacd431f6f2c5ddb9c28c63a.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #5: tool-ui-smoke-cinema (image/png) ────────────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-cinema-13e673c0998db75948b3f7ee7162e18a43543d63.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #6: tool-ui-smoke-datasets-browser (image/png) ──────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-datasets-browser-dfb21a46bcf33e41300dc832d8538d1af6d39aab.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #7: tool-ui-smoke-device-manager (image/png) ────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-device-manager-93d84118c4c6185634ccf9b2ccf795251b32f181.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #8: tool-ui-smoke-file-manager (image/png) ──────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-file-manager-6971e7a6871419bcafe0d86039c010486e5cc6fd.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #9: tool-ui-smoke-friends-list (image/png) ──────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-friends-list-3e72cd4b6a92fd18318420a14f43abd232caf1c1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #10: tool-ui-smoke-github (image/png) ───────────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-github-44fc8049a14a441c0fbd55fe2d77cd75dbf7bbc4.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #11: tool-ui-smoke-huggingface (image/png) ──────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-huggingface-156b04a50e989a24e628f858a24f19e81f5d9e97.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #12: tool-ui-smoke-idl-explorer (image/png) ─────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-idl-explorer-fea51cf46b15e1bc8e337e20f5702a2f96625f1b.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #13: tool-ui-smoke-image-viewer (image/png) ─────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-image-viewer-81546e9bdf4b5f3f867df2f622b409405bced263.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #14: tool-ui-smoke-ipfs-explorer (image/png) ────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-ipfs-explorer-b4f53be0eb5689dde4cd6a86882c93c6a523e8a1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #15: tool-ui-smoke-mcp-control (image/png) ──────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-mcp-control-2ba946f880d57a3a354186102b688f897f904cae.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #16: tool-ui-smoke-mcp-plus-plus (image/png) ────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-mcp-plus-plus-990cb3c159aab299fdd45cc7148d234638133ca7.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #17: tool-ui-smoke-media-player (image/png) ─────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-media-player-040c17b8921f42882d7ed952337d463ae488b2e0.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #18: tool-ui-smoke-model-browser (image/png) ────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-model-browser-b1f1514714570fad8c474da611a9344f597803aa.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #19: tool-ui-smoke-navi (image/png) ─────────────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-navi-a0f3bfe6de9fde811c617da9010174012a1148a5.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #20: tool-ui-smoke-neural-network-designer (image/png) ──────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-neural-network-designer-a8f224d2defa91c6e72798f90776517c6b4f25fd.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #21: tool-ui-smoke-neural-photoshop (image/png) ─────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-neural-photoshop-53d066cea29586b008d89f4b1ac543db45aa3634.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #22: tool-ui-smoke-notes (image/png) ────────────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-notes-b161970c934d4d32a6f51cbe349eb095e084c074.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #23: tool-ui-smoke-orb-auto-ui (image/png) ──────────────────────────────────────────
+    test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/attachments/tool-ui-smoke-orb-auto-ui-242c5ffaa64ada76dc8641410de2bb28ff67a602.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/playwright-mcp-dashboard-artifacts/mcp-dashboard-HAO-704-Swis-04823-cords-MCP-UI-smoke-receipts/error-context.md
+
+  1 failed
+    test/e2e/mcp-dashboard.spec.ts:1192:3 › HAO-704 Swissknife MCP++ dashboard launch gate › opens every tool-backed virtual desktop app and records MCP UI smoke receipts 

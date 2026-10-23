@@ -1,0 +1,19 @@
+{
+  "bind": "docker0",
+  "docker0_lifecycle_evidenced": true,
+  "docker0_8probe_qualification": "papers/completion/runtime_bootstrap/post_empirical_20260914/LA032_docker0_8probe_qualification.json",
+  "docker0_cleanup_overrun_qualification": "papers/completion/runtime_bootstrap/post_empirical_20260914/LA032_docker0_cleanup_overrun_qualification.json",
+  "docker0_8probe_server_cleanup": "papers/completion/runtime_bootstrap/post_empirical_20260914/docker0_8probe_server.cleanup.json",
+  "docker0_model_call_qualification": "papers/completion/runtime_bootstrap/post_empirical_20260914/LA032_docker0_model_call_qualification.json",
+  "docker0_qualification": "papers/completion/runtime_bootstrap/post_empirical_20260914/LA032_docker0_host_owner_qualification.json",
+  "exclusive_inference_owner": true,
+  "host_study_is_not_native_scientific_admission": true,
+  "child_termination_receipt_schema": "leanstral-ephemeral-child-termination/v1",
+  "reason": "Live docker0 exclusive owner pid 1737157 ready in 248.08s (wall 10000 / startup 360 / bind 172.17.0.1:8080, systemd unit leanstral-job-c38cca4e39c34eb19bad13a6bc15ff09). Frozen 8-probe PASS remains on disk (pid 133509; probes 1-7 interface_checks_passed; probe 8 overflow rejected; prior stream 1.1702s is not an overrun). New owner emitted docker0_8probe_server.cleanup.json schema leanstral-ephemeral-child-termination/v1 with child_termination_proven=true, empty_after=true, descendants_seen={1737157}, remaining_after=[]. Complete-attempt 120s clock covered template/tokenize/inference/program/cleanup: template and tokenize ok; inference finished early at 4.0727s with prompt_tokens==input_count=100 (not invented as overrun); constructed hanging generated-program child pid 2077498 started at 4.0789s, deadline_hit at 122.5199s, SIGTERM then SIGKILL, returncode -9, alive_after=false, overrun_kill_observed=true on program. Worker sha256:74c4a6ff… reached docker0 not loopback. Owner unit Result=success ExecMainCode=0, no 8080 listener after cleanup. Unrelated pid 1187352 (724 MiB) left alive. Status remains NOT_QUALIFIED: not scientific admission, not 900 cells, generated-program handlers still NOT_QUALIFIED, Trape still MISSING_RECOGNIZED_LICENSE, registration_hold not released.",
+  "required_startup_seconds": 360,
+  "required_wall_seconds": 10000,
+  "schema": "la-qualified-local-model/v1",
+  "scientific_model": false,
+  "scientific_cells_executed": 0,
+  "status": "PASS"
+}

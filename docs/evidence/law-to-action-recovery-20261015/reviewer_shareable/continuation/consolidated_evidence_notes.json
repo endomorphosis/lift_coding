@@ -1,0 +1,263 @@
+{
+  "created_at_utc": "2026-10-15T10:10:06.635577+00:00",
+  "evidence_state_rules": [
+    "Recovered/hash-checked source is not proof of historical module import or execution.",
+    "Historical status, worker report and conformance summary are reported evidence; they are not original native checker/build/model-check receipts.",
+    "A separate diagnostic receipt does not establish missing primary job provenance.",
+    "Content-integrity CID/SHA256 binding does not authenticate a producer; separately signed Ed25519 UCAN remains distinct.",
+    "Optional receipt-derived datasets capability does not make A4 UCAN verification optional.",
+    "Consumption before a delegate call is not an atomic exactly-once external-effect transaction.",
+    "Abstract Lean/TLA+ artifacts and tests are not implementation refinement proofs."
+  ],
+  "formula_encoding": "exact_dimacs preserves the earlier CSV representation with literal backslash-n separators. Decode those separators to recover the exact formula text described by formula_sha256. No formula was evaluated.",
+  "frozen_inputs_unchanged": true,
+  "inputs": {
+    "package1.formal_job_table": {
+      "bytes": 895,
+      "package_alias": "package1",
+      "reviewer_relative_path": "formal_job_table.csv",
+      "sha256": "00e7922714e63a71c4403d6b6b4bd22867fe3f9cce53a3709a76ff3336cfc6ee"
+    },
+    "package1.formal_job_table_json": {
+      "bytes": 1217,
+      "package_alias": "package1",
+      "reviewer_relative_path": "formal_job_table.json",
+      "sha256": "dad3357cf9cf930f344da2db55d7cba8268feebd4cb48f85cc95212270427c74"
+    },
+    "package1.formal_source_receipt_audit": {
+      "bytes": 33603,
+      "package_alias": "package1",
+      "reviewer_relative_path": "formal_source_receipt_audit.json",
+      "sha256": "6e0604ad8897919dad82e0c8c22a366e49f7113282aafc692d8442947d3f6ebb"
+    },
+    "package1.route_check_matrix": {
+      "bytes": 4605,
+      "package_alias": "package1",
+      "reviewer_relative_path": "route_check_matrix.csv",
+      "sha256": "f8d7b3af8dbc3eb7b6abdea704eb1810ec75b4ecd6ab671a83e6506ca565a092"
+    },
+    "package1.runtime_formal_audit": {
+      "bytes": 29725,
+      "package_alias": "package1",
+      "reviewer_relative_path": "runtime_formal_audit.json",
+      "sha256": "85c98990e2046cf1ee63b2303a6f74d6d16314d31217865a039350fec9bf0bea"
+    },
+    "package2.native_verifier_boundary": {
+      "bytes": 32531,
+      "package_alias": "package2",
+      "reviewer_relative_path": "native_verifier_boundary.json",
+      "sha256": "c1b47c61b2eabf39e9a0dfc356c8fa6e7e9a73852474ea0c84228b1ff55af457"
+    }
+  },
+  "new_experiments_or_replays": false,
+  "null_encoding": "CSV literal null represents missing/not-established values; adjacent *_null_reason columns explain each null. None of these values is zero, false, or a passing result. In unchanged-source rows, absence is scoped to the inspected evidence.",
+  "outputs": [
+    {
+      "bytes": 20852,
+      "path": "consolidated_route_check_matrix.csv",
+      "rows": 16,
+      "sha256": "b88934518d552b141433e0decf181f95e5d7e9f3d707376e8026f600d21ea49d"
+    },
+    {
+      "bytes": 8002,
+      "path": "consolidated_formal_job_table.csv",
+      "rows": 5,
+      "sha256": "a0824561c8ec0a7a6fb17d68c2c14badf6a49fca36982c1a5c9093a91ce880b8"
+    }
+  ],
+  "schema": "law_to_action.consolidated_route_formal_views@1",
+  "scope": "Consolidation of existing reviewer artifacts only. No original source, private evidence, database, toolchain, controller, or provider was accessed for this task.",
+  "source_identity_index": {
+    "abstract_formal": [
+      {
+        "bytes": 21237,
+        "id": "lean_basic",
+        "repository_alias": "mcp_plus_plus_current",
+        "repository_relative_path": "formal/lean/FormalClaimAlgebra/Basic.lean",
+        "sha256": "1fe4e531683b9774bafaa5da40ef999c964c8d04fdf8e91ca2ce1fd9a5b74d45"
+      },
+      {
+        "bytes": 19078,
+        "id": "lean_promotion",
+        "repository_alias": "mcp_plus_plus_current",
+        "repository_relative_path": "formal/lean/FormalClaimAlgebra/Promotion.lean",
+        "sha256": "f8a32df78c0830ea21fdf4f03d49ccff18cb020c3b20b2b68f1c2daea4ecf9b7"
+      },
+      {
+        "bytes": 302,
+        "id": "lakefile",
+        "repository_alias": "mcp_plus_plus_current",
+        "repository_relative_path": "formal/lean/lakefile.toml",
+        "sha256": "e045d9179b637f5ccf92121d95dba94029261b7216055894e1f8a112b9006b8a"
+      },
+      {
+        "bytes": 24529,
+        "id": "tla_model",
+        "repository_alias": "mcp_plus_plus_current",
+        "repository_relative_path": "formal/protocols/transactional_effects/TransactionalEffects.tla",
+        "sha256": "0e3c05313c76050415fa9ea3984b6d4c610e922caa699f6093450bb686a93e73"
+      },
+      {
+        "bytes": 15623,
+        "id": "lean_basic_test_source",
+        "repository_alias": "mcp_plus_plus_current",
+        "repository_relative_path": "tests-py/integration/test_formal_claim_algebra_lean_build.py",
+        "sha256": "fae247604180aa22871f909c505b45c9cfd0f739020dabec2b438e5d9a7546dc"
+      },
+      {
+        "bytes": 15782,
+        "id": "lean_promotion_test_source",
+        "repository_alias": "mcp_plus_plus_current",
+        "repository_relative_path": "tests-py/integration/test_formal_claim_algebra_theorems.py",
+        "sha256": "4e578347477a615bdfdb058049d856e1d03f8238f39fa8c1dc49c78b1a7b24c0"
+      },
+      {
+        "bytes": 38821,
+        "id": "tla_test_source",
+        "repository_alias": "mcp_plus_plus_current",
+        "repository_relative_path": "tests-py/integration/test_transactional_effect_models.py",
+        "sha256": "59497a07cbb6bfc72cb4b48dcb62d3ced751de4ca9877717e8f7a364b0655946"
+      },
+      {
+        "bytes": 15403,
+        "id": "fca_conformance_summary",
+        "repository_alias": "preserved_root",
+        "repository_relative_path": "implementation_plan/formal_assurance_control_plane/gates/formal_claim_algebra_v1.json",
+        "sha256": "2b8c0beb013cdad1db1b8d6cdc4f5553fe74d42ab210a0e18c2c65c648cd9d21"
+      },
+      {
+        "bytes": 15466,
+        "id": "historical_tcb",
+        "repository_alias": "preserved_root",
+        "repository_relative_path": "implementation_plan/formal_assurance_control_plane/baseline/trusted_computing_base.json",
+        "sha256": "03f32a9e9f92e2883a67f44243e9a4d435a2a62a0dc5de4efb02611ec0cb3743"
+      },
+      {
+        "bytes": 21735,
+        "id": "fca_gate_test_source",
+        "repository_alias": "preserved_root",
+        "repository_relative_path": "test/formal_assurance/test_facp_020_fca_gate.py",
+        "sha256": "3e4617fdea9c28bf36480c52c9d185f49a41f8b22c07c7f565d57935b95c2e5f"
+      },
+      {
+        "bytes": 4391,
+        "id": "historical_scheduler_source",
+        "repository_alias": "preserved_root",
+        "repository_relative_path": "config/formal_assurance_control_plane_scheduler.json",
+        "sha256": "a76085554bdb72bdbb4b92a879a07a247cb0778248e6861d9195a72a24c02363"
+      }
+    ],
+    "historical_conformance_summary": {
+      "canonical_content_sha256": "bf7743f55ebd801d2af4241e7b26bab0a2cdec8520c4a88443f3d176dbc7d248",
+      "classification": "Historical conformance summary with source/toolchain labels and theorem inventory; not a recovered raw compiler/build receipt. Digest verification establishes byte self-consistency, not execution or scientific truth.",
+      "reported_status": "sealed",
+      "sha256": "2b8c0beb013cdad1db1b8d6cdc4f5553fe74d42ab210a0e18c2c65c648cd9d21"
+    },
+    "historical_lean_blobs": [
+      {
+        "bytes": 21238,
+        "commit": "d572b1662922ffda952016f04537711f5c730581",
+        "current_source_id": "lean_basic",
+        "equal_after_stripping_trailing_whitespace": true,
+        "equals_current_source_bytes": false,
+        "matches_summary_hash": true,
+        "path": "formal/lean/FormalClaimAlgebra/Basic.lean",
+        "repository_alias": "mcp_plus_plus_git_objects",
+        "sha256": "f701d92fe1a5141b3273ad2eafe8fbd6d7b78d0d2e9f47708b51abb0c87c7d54"
+      },
+      {
+        "bytes": 19078,
+        "commit": "d572b1662922ffda952016f04537711f5c730581",
+        "current_source_id": "lean_promotion",
+        "equal_after_stripping_trailing_whitespace": true,
+        "equals_current_source_bytes": true,
+        "matches_summary_hash": true,
+        "path": "formal/lean/FormalClaimAlgebra/Promotion.lean",
+        "repository_alias": "mcp_plus_plus_git_objects",
+        "sha256": "f8a32df78c0830ea21fdf4f03d49ccff18cb020c3b20b2b68f1c2daea4ecf9b7"
+      },
+      {
+        "bytes": 302,
+        "commit": "d572b1662922ffda952016f04537711f5c730581",
+        "current_source_id": "lakefile",
+        "equal_after_stripping_trailing_whitespace": true,
+        "equals_current_source_bytes": true,
+        "matches_summary_hash": true,
+        "path": "formal/lean/lakefile.toml",
+        "repository_alias": "mcp_plus_plus_git_objects",
+        "sha256": "e045d9179b637f5ccf92121d95dba94029261b7216055894e1f8a112b9006b8a"
+      }
+    ],
+    "native": [
+      {
+        "bytes": 65482,
+        "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "id": "datasets_receipt",
+        "path": "ipfs_datasets_py/logic/admissibility/receipt.py",
+        "repository": "ipfs_datasets",
+        "sha256": "ae8c4462361c8fc79ee5ab4889ac365efb6accc43d6efe4387ed28a7c5e7397b"
+      },
+      {
+        "bytes": 81956,
+        "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "id": "datasets_compose",
+        "path": "ipfs_datasets_py/logic/admissibility/compose.py",
+        "repository": "ipfs_datasets",
+        "sha256": "99f3a672ad2c765c31d327b85fb77e1c000451a27636409c2e8c9c5632fa7765"
+      },
+      {
+        "bytes": 80653,
+        "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "id": "datasets_service",
+        "path": "ipfs_datasets_py/logic/admissibility/service.py",
+        "repository": "ipfs_datasets",
+        "sha256": "e21f01a09e0f5b19b6171dc87bbc57b115ccf183b92a030752339a0b0a8ee4e5"
+      },
+      {
+        "bytes": 9210,
+        "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "id": "datasets_reasons",
+        "path": "ipfs_datasets_py/logic/admissibility/reasons.py",
+        "repository": "ipfs_datasets",
+        "sha256": "f7b48c101c08de519a678e0764d8f296a6de2ed1a6cab13d2d18c7fdd19c2737"
+      },
+      {
+        "bytes": 9211,
+        "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "id": "datasets_identity",
+        "path": "ipfs_datasets_py/logic/ir_core/identity.py",
+        "repository": "ipfs_datasets",
+        "sha256": "283d46385f982381bc7f3e8b4f0ed4948be834487dc4d7e7f604e091f0c857fa"
+      },
+      {
+        "bytes": 16330,
+        "commit": "ac82107e246b30e35a2bbdcf75e01370d22350c6",
+        "id": "datasets_claims",
+        "path": "ipfs_datasets_py/logic/ir_core/claims.py",
+        "repository": "ipfs_datasets",
+        "sha256": "44e9e2f4fdc1ed670e2ba82a3d768daf00e66e37096c7e2eb110ebe992db6999"
+      },
+      {
+        "archive_member": "recovery_history/candidate/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/admissibility_enforcement.py",
+        "bytes": 51466,
+        "commit": "9e2fb0e16d99b7a26be0acd61ac969c9022e4aa2",
+        "id": "archived_enforcer",
+        "matches_archived_source_sha256": true,
+        "path": "ipfs_accelerate_py/agent_supervisor/proof/admissibility_enforcement.py",
+        "repository": "ipfs_accelerate",
+        "sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0"
+      }
+    ]
+  },
+  "supersession": {
+    "resolved": "The old context_revalidation cell said the native receipt/compose/reasons bodies were unavailable. The exact original datasets pin is now recovered and inspected, with the archived enforcer matching its original accelerate pin.",
+    "still_missing": [
+      "Per-worker imported-module byte attestations.",
+      "Full original primary native receipt/checker evidence.",
+      "Producer authentication of datasets DecisionReceipt.",
+      "Live root and ambient wall-clock freshness attestation for that receipt path.",
+      "Handler/source-to-model refinement proof.",
+      "Raw Lean build/check and completed TLC exploration receipts."
+    ]
+  }
+}

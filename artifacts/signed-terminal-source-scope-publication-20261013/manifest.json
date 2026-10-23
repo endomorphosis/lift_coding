@@ -1,0 +1,41 @@
+{
+  "accelerator_publication": "fe8c314449b0da7fbcfa4b8a4341f9bc3b9f9d9f",
+  "changed_gitlinks": {
+    "external/ipfs_accelerate": "fe8c314449b0da7fbcfa4b8a4341f9bc3b9f9d9f"
+  },
+  "files": [
+    {
+      "bytes": 6115,
+      "path": "implementation_plan/docs/116-supervisor-signed-terminal-source-scope-2026-10-13.md",
+      "sha256": "e39f0fc9ed72747ce5ab162386e71c746148e0c12b08966e64d6c467f9903d69"
+    },
+    {
+      "bytes": 23504,
+      "path": "artifacts/signed-terminal-source-scope-publication-20261013/hosted-ci.json",
+      "sha256": "b169f2686d156f57150a4266a95d21f23ba7bf123f86d546ee101fe1c5731624"
+    },
+    {
+      "bytes": 15171,
+      "path": "artifacts/signed-terminal-source-scope-publication-20261013/merge-compatibility.json",
+      "sha256": "f2b21cc31a433cf3d28b255c285371246a035d6a96ecd03531f1485eb0039e6d"
+    },
+    {
+      "bytes": 11116,
+      "path": "artifacts/signed-terminal-source-scope-publication-20261013/publication_check_runner.py",
+      "sha256": "67c92afbd3c8c934e3d7e3aab3bfd7add41e04cbb066810b891b499a35f2e4a5"
+    },
+    {
+      "bytes": 5345,
+      "path": "artifacts/signed-terminal-source-scope-publication-20261013/parent-checks.json",
+      "sha256": "a2f46a9d525ae4ab88d3b630ab16143396d33c376a8e4d37ecadca7e0513f2bb"
+    }
+  ],
+  "manifest_self_excluded": true,
+  "parent_base": "e18ce337cb622d424395448b4d4fe2c666087eb1",
+  "preserved_gitlinks": {
+    "external/ipfs_datasets": "c9d0f016a9fcfa327346e056e38e2ffa3b25ffa0",
+    "external/ipfs_kit": "8ac00bb1974b1378e12091d546d8425af34049e0"
+  },
+  "qualified_leaf": "fe8c314449b0da7fbcfa4b8a4341f9bc3b9f9d9f",
+  "schema": "signed-terminal-source-scope-parent-manifest@1"
+}

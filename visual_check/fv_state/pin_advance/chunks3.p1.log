@@ -1,0 +1,22 @@
+=== CHUNK top/scripts/__files__
+error: pathspec 'scripts/audit_docs_drift' did not match any file(s) known to git
+error: pathspec 'copy.py' did not match any file(s) known to git
+FAIL top/scripts/__files__ rc=1
+=== CHUNK top/scripts/ops/logic
+OK   top/scripts/ops/logic
+=== CHUNK top/scripts/ops/patent_legal_intelligence
+OK   top/scripts/ops/patent_legal_intelligence
+=== CHUNK top/scripts/ops/ui_ux_ir
+OK   top/scripts/ops/ui_ux_ir
+=== CHUNK top/scripts/repair
+OK   top/scripts/repair
+=== CHUNK top/scripts/software_contracts
+OK   top/scripts/software_contracts
+=== CHUNK top/scripts/tools
+OK   top/scripts/tools
+=== CHUNK top/scripts/validation
+OK   top/scripts/validation
+=== CHUNK top/workspace/legacy-cuda-span-scores
+OK   top/workspace/legacy-cuda-span-scores
+=== CHUNK top/workspace/test-logs/legal-permission-retention-20261012-01
+fatal: unable to access 'https://github.com/endomorphosis/ipfs_datasets_py.git/': GnuTLS recv error (-110): The TLS connection was non-properly terminated.

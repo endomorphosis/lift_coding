@@ -1,0 +1,73 @@
+{
+  "actual_training_or_model_calls": 0,
+  "checkpoint_JSON_parses": 0,
+  "checks": [
+    {
+      "name": "actual prepared plan satisfies original closed source recipe",
+      "passed": true,
+      "scope": "Public plan metadata only; no producer main"
+    },
+    {
+      "name": "actual refused clearance remains refusal in preparation",
+      "passed": true,
+      "scope": "Detached pure original capacity validator"
+    },
+    {
+      "name": "actual refused clearance rejects training",
+      "passed": true,
+      "scope": "Detached pure validator; no actual model"
+    },
+    {
+      "name": "old plan validator refuses changed attempt identity",
+      "passed": true,
+      "scope": "Synthetic copy only; immutable artifact untouched"
+    },
+    {
+      "name": "old plan validator refuses phase relocation without a new qualified producer",
+      "passed": true,
+      "scope": "Synthetic copy only; immutable artifact untouched"
+    },
+    {
+      "name": "full-run PASS call precedes mkdir/bootstrap/checkpoint parse/torch import",
+      "passed": true,
+      "scope": "Original AST source-order gate only"
+    },
+    {
+      "name": "V02 analyzer retained all functions except weighted CE grouping and own gate",
+      "passed": true,
+      "scope": "AST equality only; retained prior cancellation controls not rerun"
+    },
+    {
+      "name": "analyzer authenticates freeze before authored reference helper",
+      "passed": true,
+      "scope": "Static main order; no authored reference read"
+    },
+    {
+      "name": "prepared F12 has no fabricated runtime/scoring closure",
+      "passed": true,
+      "scope": "Existence metadata only"
+    },
+    {
+      "name": "fixed weights/counts/counter scope remain preregistered",
+      "passed": true,
+      "scope": "Public prepared metadata fingerprint only"
+    }
+  ],
+  "count": 10,
+  "findings": [],
+  "new_claims": 0,
+  "original_main_order_lines": {
+    "bootstrap": 412,
+    "capacity_PASS": 393,
+    "checkpoint_parse": 431,
+    "mkdir": 410,
+    "torch_import": 441
+  },
+  "passed": true,
+  "private_body_reads": 0,
+  "production_imports": 0,
+  "reference_or_saved_score_reads": 0,
+  "resource_API_calls": 0,
+  "schema": "conditions-balanced-runtime-rebind-static-controls/v1",
+  "source_or_Git_mutations": 0
+}

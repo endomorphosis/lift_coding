@@ -1,0 +1,982 @@
+{
+  "checks": [
+    {
+      "artifact": "filesystem_spec.patch",
+      "hash_and_size": true
+    },
+    {
+      "artifact": "filesystem_spec.LICENSE.txt",
+      "hash_and_size": true
+    },
+    {
+      "artifact": "ipfs-docs.patch",
+      "hash_and_size": true
+    },
+    {
+      "artifact": "ipfs-docs.license-excerpt.txt",
+      "hash_and_size": true
+    },
+    {
+      "artifact": "ipfsspec.patch",
+      "hash_and_size": true
+    },
+    {
+      "artifact": "ipfsspec.LICENSE.txt",
+      "hash_and_size": true
+    },
+    {
+      "artifact": "lighthouse-python-sdk-test-get-api-key.byte-edits.json",
+      "hash_and_size": true
+    },
+    {
+      "artifact": "lighthouse-python-sdk.patch",
+      "hash_and_size": true
+    },
+    {
+      "artifact": "lighthouse-python-sdk.LICENSE.txt",
+      "hash_and_size": true
+    },
+    {
+      "artifact": "mcp-python-sdk.patch",
+      "hash_and_size": true
+    },
+    {
+      "artifact": "mcp-python-sdk.LICENSE.txt",
+      "hash_and_size": true
+    },
+    {
+      "artifact": "mcp-python-sdk-hallucinate-datasets.patch",
+      "hash_and_size": true
+    },
+    {
+      "artifact": "mcp-python-sdk-hallucinate-datasets.LICENSE.txt",
+      "hash_and_size": true
+    },
+    {
+      "artifact": "mcp-python-sdk-hallucinate-accelerate-datasets.patch",
+      "hash_and_size": true
+    },
+    {
+      "artifact": "mcp-python-sdk-hallucinate-accelerate-datasets.LICENSE.txt",
+      "hash_and_size": true
+    },
+    {
+      "patch_applies_to_exact_base": true,
+      "repository": "filesystem_spec"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "fsspec/implementations/reference.py",
+      "repository": "filesystem_spec"
+    },
+    {
+      "patch_applies_to_exact_base": true,
+      "repository": "ipfs-docs"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/case-studies/orcestra.md",
+      "repository": "ipfs-docs"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/how-to/scientific-data/landscape-guide.md",
+      "repository": "ipfs-docs"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/how-to/scientific-data/publish-geospatial-zarr-data.md",
+      "repository": "ipfs-docs"
+    },
+    {
+      "patch_applies_to_exact_base": true,
+      "repository": "ipfsspec"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "ipfsspec/async_ipfs.py",
+      "repository": "ipfsspec"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "ipfsspec/car.py",
+      "repository": "ipfsspec"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "ipfsspec/tracing.py",
+      "repository": "ipfsspec"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "ipfsspec/unixfsv1.py",
+      "repository": "ipfsspec"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "ipfsspec/utils.py",
+      "repository": "ipfsspec"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "test/mockserver.py",
+      "repository": "ipfsspec"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "test/test_async.py",
+      "repository": "ipfsspec"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "test/test_ipfs.py",
+      "repository": "ipfsspec"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "test/test_merkle_verification.py",
+      "repository": "ipfsspec"
+    },
+    {
+      "patch_applies_to_exact_base": true,
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "README.md",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "setup.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "src/lighthouseweb3/__init__.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "src/lighthouseweb3/functions/axios.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "src/lighthouseweb3/functions/config.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "src/lighthouseweb3/functions/create_wallet.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "src/lighthouseweb3/functions/download.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "src/lighthouseweb3/functions/get_api_key.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "src/lighthouseweb3/functions/get_balance.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "src/lighthouseweb3/functions/get_file_info.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "src/lighthouseweb3/functions/get_ipns_record.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "src/lighthouseweb3/functions/get_uploads.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "src/lighthouseweb3/functions/ipns_generate_key.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "src/lighthouseweb3/functions/ipns_publish_record.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "src/lighthouseweb3/functions/remove_ipns_record.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "src/lighthouseweb3/functions/upload.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "src/lighthouseweb3/functions/utils.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "tests/test_create_wallet.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "tests/test_deal_status.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "tests/test_download.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "tests/test_get_api_key.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "path": "tests/test_get_api_key.py",
+      "repository": "lighthouse-python-sdk",
+      "secret_free_recipe_exact_reconstruction": true
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "tests/test_get_balance.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "tests/test_get_file_info.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "tests/test_get_ipns_record.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "tests/test_get_uploads.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "tests/test_ipns_generate_key.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "tests/test_ipns_publish_record.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "tests/test_remove_ipns_record.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "tests/test_upload.py",
+      "repository": "lighthouse-python-sdk"
+    },
+    {
+      "patch_applies_to_exact_base": true,
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/advanced/authorization.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/advanced/identity-assertion.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/advanced/low-level-server.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/advanced/middleware.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/advanced/multi-round-trip.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/advanced/oauth-clients.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/advanced/opentelemetry.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/advanced/pagination.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/advanced/session-groups.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/advanced/uri-templates.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/client/callbacks.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/client/index.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/client/protocol-versions.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/client/transports.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/index.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/migration.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/run/asgi.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/run/index.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/tutorial/completions.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/tutorial/context.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/tutorial/elicitation.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/tutorial/first-steps.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/tutorial/handling-errors.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/tutorial/lifespan.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/tutorial/logging.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/tutorial/media.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/tutorial/progress.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/tutorial/prompts.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/tutorial/resources.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/tutorial/structured-output.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/tutorial/testing.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/tutorial/tools.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "examples/servers/simple-pagination/README.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "examples/servers/simple-prompt/README.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "examples/servers/simple-resource/README.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "examples/servers/simple-tool/README.md",
+      "repository": "mcp-python-sdk"
+    },
+    {
+      "patch_applies_to_exact_base": true,
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/advanced/apps.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/advanced/extensions.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/advanced/low-level-server.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/advanced/middleware.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/advanced/pagination.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/client/caching.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/client/callbacks.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/client/identity-assertion.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/client/index.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/client/oauth-clients.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/client/session-groups.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/client/subscriptions.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/client/transports.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/get-started/first-steps.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/get-started/real-host.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/get-started/testing.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/handlers/context.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/handlers/dependencies.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/handlers/elicitation.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/handlers/lifespan.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/handlers/logging.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/handlers/multi-round-trip.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/handlers/progress.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/handlers/sampling-and-roots.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/handlers/subscriptions.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/index.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/migration.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/protocol-versions.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/run/asgi.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/run/authorization.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/run/deploy.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/run/index.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/run/legacy-clients.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/run/opentelemetry.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/servers/completions.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/servers/handling-errors.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/servers/media.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/servers/prompts.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/servers/resources.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/servers/structured-output.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/servers/tools.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/servers/uri-templates.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/troubleshooting.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/whats-new.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "examples/servers/simple-pagination/README.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "examples/servers/simple-prompt/README.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "examples/servers/simple-resource/README.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "examples/servers/simple-tool/README.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "examples/stories/legacy_routing/README.md",
+      "repository": "mcp-python-sdk-hallucinate-datasets"
+    },
+    {
+      "patch_applies_to_exact_base": true,
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/advanced/apps.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/advanced/extensions.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/advanced/low-level-server.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/advanced/middleware.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/advanced/pagination.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/client/caching.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/client/callbacks.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/client/identity-assertion.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/client/index.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/client/oauth-clients.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/client/session-groups.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/client/subscriptions.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/client/transports.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/get-started/first-steps.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/get-started/real-host.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/get-started/testing.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/handlers/context.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/handlers/dependencies.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/handlers/elicitation.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/handlers/lifespan.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/handlers/logging.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/handlers/multi-round-trip.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/handlers/progress.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/handlers/sampling-and-roots.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/handlers/subscriptions.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/index.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/migration.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/protocol-versions.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/run/asgi.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/run/authorization.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/run/deploy.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/run/index.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/run/legacy-clients.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/run/opentelemetry.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/servers/completions.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/servers/handling-errors.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/servers/media.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/servers/prompts.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/servers/resources.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/servers/structured-output.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/servers/tools.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/servers/uri-templates.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/troubleshooting.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "docs/whats-new.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "examples/servers/simple-pagination/README.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "examples/servers/simple-prompt/README.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "examples/servers/simple-resource/README.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "examples/servers/simple-tool/README.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    },
+    {
+      "base_and_retained_result_hashes": true,
+      "path": "examples/stories/legacy_routing/README.md",
+      "repository": "mcp-python-sdk-hallucinate-accelerate-datasets"
+    }
+  ],
+  "checks_passed": 199,
+  "model_or_behavioral_execution": false,
+  "schema": "third-party-preservation-verification/v1",
+  "source_repository_indexes_modified": false,
+  "source_worktrees_modified": false
+}

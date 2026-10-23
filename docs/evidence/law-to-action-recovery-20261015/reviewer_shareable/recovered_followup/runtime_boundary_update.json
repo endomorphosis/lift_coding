@@ -1,0 +1,74 @@
+[
+  {
+    "boundary": "capability_presence_and_attenuation",
+    "evidence_level": "recovered/hash-checked exact declared historical source; static inspection",
+    "finding": "This finding concerns only the receipt-derived datasets AuthorizationCapability, not the separately signed UCAN. The resolver attempts derivation from an allow receipt but swallows derivation errors, leaving capability absent. An otherwise-valid receipt can proceed to receipt-based consumption. Native capability verification enforces subset relative to the receipt if supplied; the archived invocation context check does not directly compare requested effects against the attenuated capability effect set or requested resource IDs against capability resources.",
+    "null_reason": "No new execution performed; unused generic paths are not observed benchmark outcomes.",
+    "observed_new_benchmark_failure": null,
+    "source_refs": "archived_enforcer:818-825;archived_enforcer:858-880;archived_enforcer:925-954;archived_enforcer:554-575;datasets_receipt:1746-1768"
+  },
+  {
+    "boundary": "clock",
+    "evidence_level": "recovered/hash-checked exact declared historical source; static inspection",
+    "finding": "Native receipt expiry/deadline and capability expiry checks execute only when require_not_expired and a non-None now are supplied. Archived enforcer returns None when no clock is injected and disables those checks. Actual A4 injects a frozen logical UTC clock (normal12:02 or mutated12:11 on2026-07-28) against frozen issue/deadline/expiry values; this is distinct from the wall-clock-based UCAN token times.",
+    "null_reason": "No new execution performed; unused generic paths are not observed benchmark outcomes.",
+    "observed_new_benchmark_failure": null,
+    "source_refs": "datasets_receipt:147-157;datasets_receipt:1643-1652;datasets_receipt:1709-1714;archived_enforcer:730-765;baseline:56-59;harness:948-955;harness:534-549"
+  },
+  {
+    "boundary": "content_integrity",
+    "evidence_level": "recovered/hash-checked exact declared historical source; static inspection",
+    "finding": "Canonical JSON SHA256 and CID recomputation bind the receipt and capability fields. Constructors validate field shape/schema, status correspondence and supplied digest/CID; verification checks against recomputation. Hash agreement means content consistency.",
+    "null_reason": "No new execution performed; unused generic paths are not observed benchmark outcomes.",
+    "observed_new_benchmark_failure": null,
+    "source_refs": "datasets_receipt:49-57;datasets_receipt:225-242;datasets_receipt:749-768;datasets_receipt:928-943;datasets_receipt:1217-1230;datasets_identity:153-172"
+  },
+  {
+    "boundary": "evidence_and_obligation_requirements",
+    "evidence_level": "recovered/hash-checked exact declared historical source; static inspection",
+    "finding": "DecisionReceipt includes evidence IDs/digests, obligation IDs, residual duties and attempt/result digests as fields. Native receipt/capability verification does not fetch evidence, verify a proof certificate, discharge residual duties, reevaluate policy, or require a checker receipt. The archived harness uses fixed evidence/attempt/result/decision/policy values after a separate host Boolean gate.",
+    "null_reason": "No new execution performed; unused generic paths are not observed benchmark outcomes.",
+    "observed_new_benchmark_failure": null,
+    "source_refs": "datasets_receipt:638-689;datasets_receipt:1242-1350;datasets_receipt:1577-1771;harness:467-491"
+  },
+  {
+    "boundary": "forgery_control_coverage",
+    "evidence_level": "recovered/hash-checked exact declared historical source; static inspection",
+    "finding": "Archived harness substitutes a plain string for forged_receipt; native coercion rejects it. That control does not establish rejection of an attacker-authored, self-consistent allow receipt with recomputed unkeyed identity. This audit does not execute such an input.",
+    "null_reason": "No new execution performed; unused generic paths are not observed benchmark outcomes.",
+    "observed_new_benchmark_failure": null,
+    "source_refs": "harness:927-929;archived_enforcer:583-599;datasets_receipt:749-768"
+  },
+  {
+    "boundary": "one_time_consumption",
+    "evidence_level": "recovered/hash-checked exact declared historical source; static inspection",
+    "finding": "one_time=True is a data marker until an external store enforces consumption. The archived store submits a typed CLAIM command with session/generation/revision/fence/idempotency identity; accepted returns True and idempotent replay returns False. Enforcer invokes delegate after successful consume. Its key includes capability/receipt identity and digest; it is not a universal action-semantic deduplication key.",
+    "null_reason": "No new execution performed; unused generic paths are not observed benchmark outcomes.",
+    "observed_new_benchmark_failure": null,
+    "source_refs": "datasets_receipt:1680-1685;archived_enforcer:554-580;archived_enforcer:1198-1229;consumption:243-323"
+  },
+  {
+    "boundary": "producer_authentication",
+    "evidence_level": "recovered/hash-checked exact declared historical source; static inspection",
+    "finding": "The pinned receipt module explicitly excludes signing infrastructure; producer_id is an identifier included in the hashed payload, with no producer signature/key trust check in these verifier functions. Matching unkeyed hashes do not identify who issued the receipt or establish an authorized decision.",
+    "null_reason": "No new execution performed; unused generic paths are not observed benchmark outcomes.",
+    "observed_new_benchmark_failure": null,
+    "source_refs": "datasets_receipt:1-14;datasets_receipt:49-57;datasets_receipt:815-842;datasets_receipt:1577-1771"
+  },
+  {
+    "boundary": "roots",
+    "evidence_level": "recovered/hash-checked exact declared historical source; static inspection",
+    "finding": "BoundRoots.matches compares the bound policy/corpus/revocation/circuit/VK labels with caller-supplied expected values. It does not fetch a live policy head, corpus, revocation ledger or key registry. The actual harness supplies symbolic root-v1 labels; the mutation changes expected policy root to root-v2.",
+    "null_reason": "No new execution performed; unused generic paths are not observed benchmark outcomes.",
+    "observed_new_benchmark_failure": null,
+    "source_refs": "datasets_receipt:271-368;datasets_receipt:1635-1641;datasets_receipt:1701-1707;archived_enforcer:843-856;baseline:578-587;harness:937-947"
+  },
+  {
+    "boundary": "separate_signed_ucan",
+    "evidence_level": "recovered/hash-checked exact declared historical source; static inspection",
+    "finding": "The separate UCAN path uses Ed25519 issuance/verification and authorization checks. Its signature authenticates that token under its own key/audience/resource/expiry/revocation rules; it is not a signature over the datasets DecisionReceipt. The harness host gate connects the outcomes; no UCAN authorization-result digest is substituted for the receipt\u2019s fixed decision/evidence digests.",
+    "null_reason": "No new execution performed; unused generic paths are not observed benchmark outcomes.",
+    "observed_new_benchmark_failure": null,
+    "source_refs": "harness:522-550;harness:553-645;harness:901-911;harness:467-491;authorization:163-258;ucan:286-344;ucan:391-471"
+  }
+]

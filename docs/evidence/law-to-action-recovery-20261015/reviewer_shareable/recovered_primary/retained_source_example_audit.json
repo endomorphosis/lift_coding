@@ -1,0 +1,217 @@
+{
+  "all_twelve_field_maps_reference_retained_spans": true,
+  "audience": "reviewer_shareable",
+  "c1_c6": {
+    "C1": {
+      "evidence_join": null,
+      "identity": null,
+      "null_reason": "Author evidence ledger and current reviewer concern identities remain unavailable; no joins guessed."
+    },
+    "C2": {
+      "evidence_join": null,
+      "identity": null,
+      "null_reason": "Author evidence ledger and current reviewer concern identities remain unavailable; no joins guessed."
+    },
+    "C3": {
+      "evidence_join": null,
+      "identity": null,
+      "null_reason": "Author evidence ledger and current reviewer concern identities remain unavailable; no joins guessed."
+    },
+    "C4": {
+      "evidence_join": null,
+      "identity": null,
+      "null_reason": "Author evidence ledger and current reviewer concern identities remain unavailable; no joins guessed."
+    },
+    "C5": {
+      "evidence_join": null,
+      "identity": null,
+      "null_reason": "Author evidence ledger and current reviewer concern identities remain unavailable; no joins guessed."
+    },
+    "C6": {
+      "evidence_join": null,
+      "identity": null,
+      "null_reason": "Author evidence ledger and current reviewer concern identities remain unavailable; no joins guessed."
+    }
+  },
+  "field_mapping_status": [
+    {
+      "field": "action",
+      "retained_span_references_valid": true,
+      "statuses": [
+        "source_attested"
+      ]
+    },
+    {
+      "field": "actor",
+      "retained_span_references_valid": true,
+      "statuses": [
+        "source_attested"
+      ]
+    },
+    {
+      "field": "authority",
+      "retained_span_references_valid": true,
+      "statuses": [
+        "source_attested"
+      ]
+    },
+    {
+      "field": "conditions",
+      "retained_span_references_valid": true,
+      "statuses": [
+        "source_attested"
+      ]
+    },
+    {
+      "field": "cross_references",
+      "retained_span_references_valid": true,
+      "statuses": [
+        "source_attested"
+      ]
+    },
+    {
+      "field": "definitions",
+      "retained_span_references_valid": true,
+      "statuses": [
+        "unsupported"
+      ]
+    },
+    {
+      "field": "effective_interval",
+      "retained_span_references_valid": true,
+      "statuses": [
+        "source_attested"
+      ]
+    },
+    {
+      "field": "exceptions",
+      "retained_span_references_valid": true,
+      "statuses": [
+        "unknown"
+      ]
+    },
+    {
+      "field": "jurisdiction",
+      "retained_span_references_valid": true,
+      "statuses": [
+        "source_attested"
+      ]
+    },
+    {
+      "field": "modality",
+      "retained_span_references_valid": true,
+      "statuses": [
+        "source_attested"
+      ]
+    },
+    {
+      "field": "object",
+      "retained_span_references_valid": true,
+      "statuses": [
+        "source_attested"
+      ]
+    }
+  ],
+  "findings": {
+    "applicability": {
+      "assumptions": [
+        "Facts are synthetic.",
+        "Covered-entity status depends on a regulation and section not fully quoted here.",
+        "No expert determination of mens rea, authorization, or preemption is made."
+      ],
+      "expert_certified": false,
+      "forced_permission_or_denial": false,
+      "label": "unknown"
+    },
+    "declared_losses_and_limits": {
+      "context_not_treated_as_controlling_gold": [
+        "Judicial gloss",
+        "Later amendments",
+        "Implementing regulations",
+        "Unquoted neighboring sections"
+      ],
+      "definition_status": "unsupported",
+      "exception_interpretation_status": "unknown",
+      "no_reconstructed_successful_IR": true,
+      "source_to_all_IR_fields_preserved": false,
+      "unsupported_external_constructs": [
+        "HIPAA privacy regulation definition of covered entity is outside this section PDF.",
+        "Interaction with 42 U.S.C. § 1320d-7 state-law effect is not annotated as a rule."
+      ]
+    },
+    "full_original_statute_document_null_reason": "The inspected packet retains quoted spans and declares full PDFs retrieval_only; no matching complete PDF/text file was located by the bounded filename search inside this preserved paper checkout. Original full-document and normalized-document hashes are reported pins, not independently rechecked here.",
+    "full_original_statute_document_recovered": false,
+    "human_review": {
+      "agreement": "not_applicable_no_independent_reviewer",
+      "final_adjudication": null,
+      "null_reason": "Original development packet, LA005 review status, and LA009 receipt explicitly report absent human review; no credentials are inferred.",
+      "reviewed_at": null,
+      "reviewer_credentials": null,
+      "reviewer_id": null,
+      "second_annotator_status": "not_obtained",
+      "status": "not_obtained"
+    },
+    "legal_ir_compiler": {
+      "available": false,
+      "historical_error": "OSError: read-only filesystem blocked library initialization (host path omitted).",
+      "new_attempt": false,
+      "selected": false
+    },
+    "observed_adapter_result": {
+      "converter_confidence": 0.05,
+      "converter_proposition": "UnparsedNonNormativeOrAmbiguousText",
+      "element_count": 0,
+      "elements": [],
+      "empty_parse_is_schema_valid": true,
+      "meaning": "The retained adapter emitted no deontic elements. Passing structural/schema and span checks therefore does not establish semantic fidelity.",
+      "schema_valid": true,
+      "semantic_fidelity_established": false
+    },
+    "provenance_limits": [
+      "This is an original retained development case, not a newly generated example.",
+      "LA005 packet-preparer atoms and LA009 emitted adapter elements have different producers and roles; the former are not asserted to be the latter.",
+      "The LA009 receipt describes a later automated evidence scope that permits execution without human review; this does not resolve the missing expert assessment recorded by LA005.",
+      "CVE polarity remains unknown per the LA009 receipt; no mixed CVE case file was opened in this expansion."
+    ],
+    "retained_context": "Complete first development packet, including all five retained quotations, all twelve field groups, source-span maps, synthetic request assumptions, unsupported constructs, and review/adjudication limits.",
+    "source": "42 U.S.C. §1320d-6, USCODE-2024"
+  },
+  "operations": {
+    "artifact_execution": 0,
+    "database": 0,
+    "experiments_rerun": 0,
+    "final_or_blind_annotation_content_read": false,
+    "final_or_blind_prediction_content_read": false,
+    "model_calls": 0,
+    "network": 0,
+    "protected_final_panel_content_read": false,
+    "training": 0
+  },
+  "original_record_hashes": {
+    "LA005_receipt_sha256": "d63c7184e5415d7594b25c9152b933a8b3f927600d307ad22b8fd5f402e42e62",
+    "LA005_review_status_sha256": "f373dd2a28b5be96189a09de618cde0e4e69812cacde994ea3fc2cc9ea88a0ca",
+    "LA009_receipt_sha256": "33400bc5f4f788f932051c5a06c213f82f3f169c969a5f8ee95a9f0f033889a6",
+    "development_context_line_sha256": "574d4309bb099869e6b5c16f0b6ff1ad9486687f27627a190f9d0a3dbaa752e6",
+    "development_observation_line_sha256": "41954c974eecc14bce22b1620c52b17fcf215d8ce7734e13d2e33d00d25c968f",
+    "split_manifest_sha256": "f40b60ce73acbbbb7e9da39159b7dc5706f250cb5b85ac407c4b10140cb5c5a6"
+  },
+  "reconstructed_adapter_input_matches_recorded_hash": true,
+  "reconstructed_adapter_input_sha256": "5dbcefa1c7d579f5b1501c600aa6102e823f21ced408ccc3fbffb121ae46f63a",
+  "recorded_at": "2026-10-15T09:11:10.779690+00:00",
+  "reviewer_release_boundary": "This audit contains no raw source/example files,case/family identifiers,private host paths,or final/held-out labels. Exact development copies remain author-only.",
+  "schema": "law-to-action-retained-development-source-example-audit/v1",
+  "scope_relation": "This expands inspection into a preserved October5 checkout. Earlier source_fidelity_audit.json files remain unchanged and describe their narrower September14 archive scope.",
+  "selection": {
+    "held_out": false,
+    "later_mixed_rows_read": false,
+    "physical_line": 1,
+    "population": "legal",
+    "selection_basis": "Pinned split manifest assignment0 plus inspected historical producer ordering; both exact first-line records then matched the same development case/source/family identities.",
+    "split": "development",
+    "whole_mixed_file_hash_recomputed": false,
+    "whole_mixed_file_read": false
+  },
+  "source_quote_hash_checks_passed": 5,
+  "source_quote_offset_lengths_match": true,
+  "status": "RETAINED_DEVELOPMENT_CONTEXT_AND_EMPTY_PARSE_RECOVERED_NO_EXPERT_FIDELITY_CLAIM"
+}

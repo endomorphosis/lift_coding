@@ -1,0 +1,8 @@
+\section{Limitations and modeling assumptions}
+\label{sec:limits}
+
+The source representations are models of selected information. Legal IR omits unsupported constructs, and its interpretation has not been independently validated. Security IR expresses candidate prohibitions: a CVE/CWE identifier, fix, or source difference does not establish vulnerability absence or applicability to unrelated code. Skill Markdown remains untrusted input, including assertions of permission. Corpus release totals were not independently recounted and do not describe the evaluated population.
+
+Mediation is confined to explicit \texttt{ENFORCE} around one sandbox export handler. Default \texttt{OFF} mode passes calls through; default in-memory consumption differs from the file-backed DuckDB configuration used to qualify restart behavior. A database commit alone does not establish exactly-once remote effects. Unprotected, observational, and nonidentical routes remain outside the safety claim, and local stdio and loopback HTTP/libp2p checks leave wide-area behavior untested.
+
+The logical checking route supplies propositional satisfiability evidence, not a kernel-checked theorem. Omission of full per-cell proof and capability payloads limits retrospective inspection. The handler executes declarative instructions; closed-loop generation, trained normalizers, and learned encoders were not evaluated. The findings therefore concern the measured runtime boundary and automated contracts, without independent human semantic validation.

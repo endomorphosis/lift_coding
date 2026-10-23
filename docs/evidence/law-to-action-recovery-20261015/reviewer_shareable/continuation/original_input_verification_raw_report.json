@@ -1,0 +1,202 @@
+{
+  "C1_C6_join": null,
+  "C1_C6_null_reason": "Missing author ledger and exact identities; none inferred.",
+  "admission": {
+    "admission": "admitted",
+    "admitted_work_seconds": 0.44252824410796165,
+    "attempts": 1,
+    "bypass": false,
+    "cpu_seconds": 0.49091999999999997,
+    "end_proc_status": {
+      "VmHWM": "114920 kB",
+      "VmRSS": "83200 kB",
+      "VmSize": "180812 kB"
+    },
+    "end_ru_maxrss_kib_raw": 4517460,
+    "lease_released": true,
+    "peak_rss_kib": 4517460,
+    "resource_limit_scope": "RLIMIT_AS512MiB and RLIMIT_CPU are installed only after admission, not during startup/imports.",
+    "retries": 0,
+    "rusage_attribution_limit": "Raw getrusage high-water values are retained separately from /proc/self/status; inherited pre-exec high-water may affect attribution and is not inferred away.",
+    "scheduler_overrides": 0,
+    "startup_proc_status": {
+      "VmHWM": "17812 kB",
+      "VmRSS": "17812 kB",
+      "VmSize": "41044 kB"
+    },
+    "startup_ru_maxrss_kib_raw": 4517460,
+    "total_wall_seconds": 0.5394491089973599,
+    "work_started": true
+  },
+  "admission_receipt_sha256": "89d027c22cb9319a315e1fc337c7d2ce7a2251aa7106c5c463ca5d93e0646bb4",
+  "alternatives": [
+    {
+      "all_original_inputs_claimed_restored": false,
+      "counts": {
+        "missing_original_bindings": 0,
+        "original_commitment_mismatches": 0,
+        "target_original_digest_claimed_by_index": 0,
+        "target_portable_digest_differs_from_reference": 0,
+        "target_still_transformed": 1813
+      },
+      "label": "earlier_private_portable",
+      "matches_public_derivation_two_changed_members": true,
+      "payload_originality_verified": false,
+      "same_whole_archive_as_reference": false,
+      "source_lineage_metadata_equal_to_reference": true,
+      "target_transformed_count": 1813
+    },
+    {
+      "all_original_inputs_claimed_restored": false,
+      "counts": {
+        "missing_original_bindings": 0,
+        "original_commitment_mismatches": 0,
+        "target_original_digest_claimed_by_index": 0,
+        "target_portable_digest_differs_from_reference": 0,
+        "target_still_transformed": 1813
+      },
+      "label": "alternative_public_portable",
+      "payload_originality_verified": false,
+      "same_whole_archive_as_reference": true,
+      "source_lineage_metadata_equal_to_reference": true,
+      "target_transformed_count": 1813
+    }
+  ],
+  "archives": [
+    {
+      "archive_members": 9976,
+      "bytes": 30926382,
+      "expected_sha256": "56d8cad962292e59513d214eaa0e3bf494ad02982d28a5a712ac33fb221c58c2",
+      "index_directory_membership_matches": true,
+      "indexed_files": 9974,
+      "label": "retained_public_portable",
+      "members_read": [
+        {
+          "bytes": 3826412,
+          "expected_matches": true,
+          "expected_sha256": "16b6a2ee75b1b1998571e1da28e230b2d14d9397f1e8902a9da30e045d4bb9ef",
+          "member": "portable_index.json",
+          "sha256": "16b6a2ee75b1b1998571e1da28e230b2d14d9397f1e8902a9da30e045d4bb9ef"
+        },
+        {
+          "bytes": 8845,
+          "expected_matches": true,
+          "expected_sha256": "2955a8f899dce7721d62d385e1efa5bb50f81e4a98fa061bfc15302374e08475",
+          "member": "source_lineage.json",
+          "sha256": "2955a8f899dce7721d62d385e1efa5bb50f81e4a98fa061bfc15302374e08475"
+        }
+      ],
+      "sha256": "56d8cad962292e59513d214eaa0e3bf494ad02982d28a5a712ac33fb221c58c2",
+      "stable_stat_during_read": true,
+      "status": "verified_archive_identity_and_metadata",
+      "whole_archive_hash_scope": "Opaque compressed archive bytes; not independent member-payload originality verification.",
+      "whole_archive_sha_matches": true
+    },
+    {
+      "archive_members": 9976,
+      "bytes": 30925812,
+      "expected_sha256": "5456553d86dd7397ce4bd6b090ab02614da9721160974a8a4bb5b6e074d3e58d",
+      "index_directory_membership_matches": true,
+      "indexed_files": 9974,
+      "label": "earlier_private_portable",
+      "members_read": [
+        {
+          "bytes": 3824001,
+          "expected_matches": true,
+          "expected_sha256": "11fbb987f90130aa40f842b5c2addcf1c7c7aa49d571ac74acead4f7be043078",
+          "member": "portable_index.json",
+          "sha256": "11fbb987f90130aa40f842b5c2addcf1c7c7aa49d571ac74acead4f7be043078"
+        },
+        {
+          "bytes": 8845,
+          "expected_matches": null,
+          "expected_sha256": null,
+          "member": "source_lineage.json",
+          "sha256": "2955a8f899dce7721d62d385e1efa5bb50f81e4a98fa061bfc15302374e08475"
+        }
+      ],
+      "sha256": "5456553d86dd7397ce4bd6b090ab02614da9721160974a8a4bb5b6e074d3e58d",
+      "stable_stat_during_read": true,
+      "status": "verified_archive_identity_and_metadata",
+      "whole_archive_hash_scope": "Opaque compressed archive bytes; not independent member-payload originality verification.",
+      "whole_archive_sha_matches": true
+    },
+    {
+      "archive_members": 9976,
+      "bytes": 30926382,
+      "expected_sha256": "56d8cad962292e59513d214eaa0e3bf494ad02982d28a5a712ac33fb221c58c2",
+      "index_directory_membership_matches": true,
+      "indexed_files": 9974,
+      "label": "alternative_public_portable",
+      "members_read": [
+        {
+          "bytes": 3826412,
+          "expected_matches": true,
+          "expected_sha256": "16b6a2ee75b1b1998571e1da28e230b2d14d9397f1e8902a9da30e045d4bb9ef",
+          "member": "portable_index.json",
+          "sha256": "16b6a2ee75b1b1998571e1da28e230b2d14d9397f1e8902a9da30e045d4bb9ef"
+        },
+        {
+          "bytes": 8845,
+          "expected_matches": null,
+          "expected_sha256": null,
+          "member": "source_lineage.json",
+          "sha256": "2955a8f899dce7721d62d385e1efa5bb50f81e4a98fa061bfc15302374e08475"
+        }
+      ],
+      "sha256": "56d8cad962292e59513d214eaa0e3bf494ad02982d28a5a712ac33fb221c58c2",
+      "stable_stat_during_read": true,
+      "status": "verified_archive_identity_and_metadata",
+      "whole_archive_hash_scope": "Opaque compressed archive bytes; not independent member-payload originality verification.",
+      "whole_archive_sha_matches": true
+    }
+  ],
+  "author_report_sha256": "c7b4b4a0599139f0502c68b9fcb66dce3fd8917802b4fbe47de0dfcc7503baec",
+  "conclusion": "All 9,933 original bindings map to matching original commitments in the portable index. Exact original-versus-portable differences and alternative archive comparisons are recomputed metadata findings; no original member payload was restored or rehashed. Earlier private portable packaging must not be called original run bytes. Neither named alternative indexes original bytes for any of the 1,813 transformed reducer inputs; all retain the same transformed commitments.",
+  "join": {
+    "all_original_binding_metadata_matched": true,
+    "bindings": 9933,
+    "count_basis": "Recomputed from all 9,933 original manifest bindings joined to the reference portable index; no member payloads were inspected.",
+    "index_original_commitment_mismatch_count": 0,
+    "injective": true,
+    "matches_prior_reported_count": true,
+    "member_originality_verified_from_payloads": false,
+    "missing_members_count": 0,
+    "original_differs_from_portable_index_commitment": 1813,
+    "original_equals_portable_index_commitment": 8120,
+    "reported_prior_transformed_count": 1813
+  },
+  "keys_or_database_opened": false,
+  "limits": {
+    "admission_wait_seconds": 10,
+    "admitted_work_seconds": 30,
+    "archive_bytes_each": 134217728,
+    "archive_candidates": 3,
+    "archive_directory_bytes_each": 4194304,
+    "archive_entries_each": 20000,
+    "child_process_slots": 1,
+    "cpu_slots": 1,
+    "index_bytes_each": 8388608,
+    "lineage_bytes_each": 131072,
+    "memory_mb": 512,
+    "metadata_files": 3,
+    "run_manifest_bytes": 4194304,
+    "stream_chunk_bytes": 1048576
+  },
+  "limits_of_inference": [
+    "Equal whole-archive SHA establishes archive-byte identity, not identity between a portable member and the original run input.",
+    "Index comparisons establish retained commitments only. Protected payloads, keys and databases were not opened; this pass did not independently verify all member contents.",
+    "This bounded search checks two named alternatives, not global unrecoverability of original bytes.",
+    "The earlier private portable archive differs from the public derivative in administrative metadata; its earlier date/name does not reverse prior normalization."
+  ],
+  "new_original_payload_files_recovered": 0,
+  "new_scientific_experiment": false,
+  "original_input_bytes_reconstructed": 0,
+  "prior_packages_modified": false,
+  "protected_final_panels_read": false,
+  "redaction": "Absolute host paths, individual binding identities and prior private administrative content withheld; raw payloads never decompressed.",
+  "schema": "law-to-action-original-input-verification/v1",
+  "scope": "Exact original binding to portable index metadata join and named archive identity verification; no member payload reanalysis.",
+  "status": "completed_metadata_verification",
+  "visibility": "reviewer_shareable"
+}

@@ -1,0 +1,68 @@
+
+> swissknife@0.0.53 test:run
+> vitest run --config build-tools/configs/vitest.config.ts test/mcp-plus-plus/glasses-manifest-coverage.test.ts test/mcp-plus-plus/desktop-orb-idl-contract.test.ts test/mcp-plus-plus/mobile-orb-edge-all-apps.test.ts test/mcp-plus-plus/virtual-desktop-tool-ui-smoke-evidence.test.ts test/mcp-plus-plus/agent-supervisor-console-evidence.test.ts test/mcp-plus-plus/meta-glasses-simulator-handoff-evidence.test.ts
+
+
+ RUN  v3.2.4 /home/hatch/workspace/lift_coding/swissknife
+
+ ❯ test/mcp-plus-plus/meta-glasses-simulator-handoff-evidence.test.ts (1 test | 1 failed) 380ms
+   × SWR-097 Meta glasses simulator handoff evidence > validates simulator-driven ORB/IDL handoff evidence without physical glasses pairing 342ms
+     → expected false to be true // Object.is equality
+ ❯ test/mcp-plus-plus/virtual-desktop-tool-ui-smoke-evidence.test.ts (1 test | 1 failed) 426ms
+   × SWR-096 virtual desktop tool UI smoke evidence > covers every tool-backed app with browser-safe success, fallback, error receipts, and screenshots 398ms
+     → expected false to be true // Object.is equality
+ ✓ test/mcp-plus-plus/desktop-orb-idl-contract.test.ts (4 tests) 2403ms
+   ✓ SWR-108 virtual desktop ORB/IDL complete coverage > validates one ORB/IDL descriptor for every canonical virtual desktop app  444ms
+   ✓ SWR-108 virtual desktop ORB/IDL complete coverage > makes display, camera, speaker, microphone, input, action policy, and fallback semantics explicit  907ms
+ ✓ test/mcp-plus-plus/agent-supervisor-console-evidence.test.ts (1 test) 242ms
+ ✓ test/mcp-plus-plus/mobile-orb-edge-all-apps.test.ts (1 test) 3636ms
+   ✓ SWR-006 mobile ORB edge coverage for all app surfaces > binds every dashboard app capability through the phone-edge ORB adapter  3629ms
+ ✓ test/mcp-plus-plus/glasses-manifest-coverage.test.ts (2 tests) 3730ms
+   ✓ SWR-006 glasses manifest ownership and coverage > rebuilds ORB/IDL and glasses coverage from app-owned manifest inputs  3520ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  test/mcp-plus-plus/meta-glasses-simulator-handoff-evidence.test.ts > SWR-097 Meta glasses simulator handoff evidence > validates simulator-driven ORB/IDL handoff evidence without physical glasses pairing
+AssertionError: expected false to be true // Object.is equality
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- true[39m
+[31m+ false[39m
+
+ ❯ test/mcp-plus-plus/meta-glasses-simulator-handoff-evidence.test.ts:21:38
+     19| describe('SWR-097 Meta glasses simulator handoff evidence', () => {
+     20|   it('validates simulator-driven ORB/IDL handoff evidence without phys…
+     21|     expect(existsSync(evidencePath)).toBe(true);
+       |                                      ^
+     22|     expect(existsSync(docPath)).toBe(true);
+     23| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  test/mcp-plus-plus/virtual-desktop-tool-ui-smoke-evidence.test.ts > SWR-096 virtual desktop tool UI smoke evidence > covers every tool-backed app with browser-safe success, fallback, error receipts, and screenshots
+AssertionError: expected false to be true // Object.is equality
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- true[39m
+[31m+ false[39m
+
+ ❯ test/mcp-plus-plus/virtual-desktop-tool-ui-smoke-evidence.test.ts:27:37
+     25|   it('covers every tool-backed app with browser-safe success, fallback…
+     26|     expect(existsSync(matrixPath)).toBe(true);
+     27|     expect(existsSync(receiptPath)).toBe(true);
+       |                                     ^
+     28|     expect(existsSync(workflowMatrixPath)).toBe(true);
+     29|     expect(existsSync(docPath)).toBe(true);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed | 4 passed (6)
+      Tests  2 failed | 8 passed (10)
+   Start at  00:25:22
+   Duration  61.62s (transform 8.71s, setup 1.75s, collect 17.56s, tests 10.82s, environment 2ms, prepare 11.20s)
+

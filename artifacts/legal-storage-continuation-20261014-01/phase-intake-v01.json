@@ -1,0 +1,74 @@
+{
+  "actual_new_model_calls": 0,
+  "actual_new_training": 0,
+  "canonical_raw4": {
+    "/home/barberb/lift_coding/.git/HEAD": {
+      "bytes": 37,
+      "path": "/home/barberb/lift_coding/.git/HEAD",
+      "sha256": "32a4e0619657da69ad525c8936b759693db31bc061488a69a547266919aac0c7"
+    },
+    "/home/barberb/lift_coding/.git/index": {
+      "bytes": 692628,
+      "path": "/home/barberb/lift_coding/.git/index",
+      "sha256": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4"
+    },
+    "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/HEAD": {
+      "bytes": 21,
+      "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/HEAD",
+      "sha256": "28d25bf82af4c0e2b72f50959b2beb859e3e60b9630a5e8c603dad4ddb2b6e80"
+    },
+    "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/index": {
+      "bytes": 3799757,
+      "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/index",
+      "sha256": "d2a68a76e7a7ed99ef8ba031261cb8e7b66d6fca6c351b0e1e9dd8dc13910175"
+    }
+  },
+  "canonical_raw4_unchanged": true,
+  "cap_increase_authorized": false,
+  "existing_checkpoints_and_recovery_worktrees_preserved": true,
+  "foreign_cleanup_authorized": false,
+  "new_claims": 0,
+  "observed_at_utc": "2026-10-14T05:50:18.810974+00:00",
+  "phase": "storage_recovery_then_same_fixed_balanced_experiment",
+  "planned_work": [
+    "Independently establish ownership, durability and consumer constraints for exact candidate paths.",
+    "Perform a new qualified observation before considering reclamation or execution.",
+    "Use only owner-scoped reviewed cleanup/closeout after concrete safety qualification.",
+    "Keep the N12 architecture, weighted loss, donor, training data, ordering, seed and evaluation contract fixed."
+  ],
+  "prior": {
+    "capacity-clearance-v01.json": {
+      "bytes": 19246,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/capacity-clearance-v01.json",
+      "sha256": "4167848eb92ff26fe77ed7b01adf01d7bea56adcf94fec5b7314e0c5b61e4143"
+    },
+    "completion-review-v01.json": {
+      "bytes": 2367,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/completion-review-v01.json",
+      "sha256": "a12238762191f87041e1a37c54c30953d6eed2e579895ebf6104461c2d62248e"
+    },
+    "evaluation-contract-v01.json": {
+      "bytes": 15724,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/evaluation-contract-v01.json",
+      "sha256": "cdd58af7b0b0abbb5e8523e23682a53f26ef28bf30e4b0f9090c4a88aeacf837"
+    },
+    "final-integration-independent-review-v01.json": {
+      "bytes": 93334,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/final-integration-independent-review-v01.json",
+      "sha256": "e84c08f2e0fb0784b6ac5d35b6dcf7c595dc6594fd4684576532ecdf65b9574b"
+    },
+    "resource-protocol-contract-v01.json": {
+      "bytes": 8109,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/resource-protocol-contract-v01.json",
+      "sha256": "34dd2cf9422d076e647f73666d4d10913ebfa62d4ceb78ba6102797cc857acd5"
+    },
+    "training-design-v01.json": {
+      "bytes": 8880,
+      "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/training-design-v01.json",
+      "sha256": "a64ba710a1f02dbad996eec355ef42e9368846b2b4ba9bdb735d1b5ae6f60f11"
+    }
+  },
+  "prior_required_full_run_headroom_bytes": 3093494769,
+  "schema": "legal-storage-continuation-intake/v1",
+  "storage_limit_bytes": 145000000000
+}

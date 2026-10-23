@@ -1,0 +1,111 @@
+{
+  "started_at": "2026-10-14T08:21:02.025Z",
+  "console_errors": [
+    "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+  ],
+  "console": {
+    "status": "empty",
+    "transportMode": "degraded",
+    "errorCaps": [
+      "supervisor.queue.read",
+      "supervisor.goals.read",
+      "supervisor.subgoals.read",
+      "supervisor.taskboard.links.read",
+      "supervisor.logs.read",
+      "supervisor.receipts.read",
+      "supervisor.run-history.search",
+      "supervisor.policy.assist",
+      "supervisor.semantic-goal.assist"
+    ],
+    "healthStatus": "degraded",
+    "queue": 0,
+    "goals": 0,
+    "receipts": 0,
+    "taskboardLinks": 0,
+    "logs": [],
+    "runHistory": 0,
+    "gatewayInstalled": true
+  },
+  "console_sample_leak": {
+    "hasSampleCid": false,
+    "hasSampleReceipt": false,
+    "hasSampleTaskboardTitle": false
+  },
+  "g054_navigation": {
+    "after_receipt_visibility": "receipts",
+    "after_preview_steering": "steering",
+    "after_kda": "health",
+    "after_taskboard": "active"
+  },
+  "gateway_roundtrip": {
+    "persist_denied_without_confirmation": {
+      "state": "denied",
+      "reason": "confirmation_required"
+    },
+    "persisted": {
+      "state": "unavailable",
+      "cid": null
+    },
+    "retrieved": null,
+    "checkpoint": {
+      "state": "unavailable"
+    },
+    "logs": {
+      "state": "unavailable",
+      "count": null,
+      "first": null
+    }
+  },
+  "steering": {
+    "skipped": "no live queue/goal target in snapshot"
+  },
+  "datasets_initial": {
+    "found": true,
+    "hasCannedCid": false,
+    "hasCannedReceipt": false,
+    "semanticStatus": "semantic_search has not run yet in this session. Search invokes ipfs.datasets.operation.semantic_search (\"refund policy escalation\", top_k 5) with the staged filters."
+  },
+  "datasets_after": {
+    "semanticStatus": "Filters staged locally: schema=support-intent-v2, split=train. They are sent with the next semantic_search invocation; nothing has been sent yet.",
+    "provenanceStatus": "record_provenance degraded via descriptor-fallback receipt browser:cap-1791966140534-8xa4cr8y:ipfs.datasets.operation.record_provenance: record_provenance is unavailable; returning descriptor-backed fallback output.",
+    "preparationStatus": "index degraded via descriptor-fallback receipt browser:cap-1791966146586-sjp9htp9:ipfs.datasets.operation.index: index is unavailable; returning descriptor-backed fallback output.",
+    "errorStatus": "Local schema validation rejected the staged filter before transport: unsupported field customer is not part of the semantic_search filter schema. No backend call was made.",
+    "progressStatus": "sync_status degraded via descriptor-fallback receipt browser:cap-1791966152669-ak9x0bnx:ipfs.datasets.operation.sync_status: sync_status is unavailable; returning descriptor-backed fallback output.",
+    "envelopeRendered": true,
+    "envelopeStatus": "degraded",
+    "logEntries": [
+      "No gateway operations have run yet in this session; real envelope outcomes will appear here.",
+      "semantic_search degraded via descriptor-fallback receipt browser:cap-1791966134472-o3mr4nzh:ipfs.datasets.operation.semantic_search: semantic_search is unavailable; returning descriptor-backed fallbac",
+      "record_provenance degraded via descriptor-fallback receipt browser:cap-1791966140534-8xa4cr8y:ipfs.datasets.operation.record_provenance: record_provenance is unavailable; returning descriptor-backed f",
+      "index degraded via descriptor-fallback receipt browser:cap-1791966146586-sjp9htp9:ipfs.datasets.operation.index: index is unavailable; returning descriptor-backed fallback output.",
+      "filters staged locally: schema=support-intent-v2 split=train",
+      "local schema validation rejected unsupported filter field customer.password before transport; no backend call made",
+      "sync_status degraded via descriptor-fallback receipt browser:cap-1791966152669-ak9x0bnx:ipfs.datasets.operation.sync_status: sync_status is unavailable; returning descriptor-backed fallback output."
+    ]
+  },
+  "accelerate_initial": {
+    "found": true,
+    "hasCannedCid": false,
+    "hasCannedReceipt": false,
+    "hasFakeWebGpuClaim": false,
+    "primaryStatus": "run_inference_job has not run yet in this session. Run Inference invokes it with execution_mode \"confirmed\" and then polls job_status for the returned job; the outcome shown is the gateway's envelope, never a locally claimed completion."
+  },
+  "accelerate_after": {
+    "primaryStatus": "run_inference_job degraded via descriptor-fallback receipt browser:cap-1791966179764-lzw55k8q:ipfs.accelerate.operation.run_inference_job: run_inference_job is unavailable; returning descriptor-backed fallback output.",
+    "hardwareStatus": "hardware_profile degraded via descriptor-fallback receipt browser:cap-1791966187828-yrhprlpp:ipfs.accelerate.operation.hardware_profile: hardware_profile is unavailable; returning descriptor-backed fallback output.",
+    "modelStatus": "list_models degraded via descriptor-fallback receipt browser:cap-1791966187846-9bhx1e3g:ipfs.accelerate.operation.list_models: list_models is unavailable; returning descriptor-backed fallback output.",
+    "queueStatus": "No job has been submitted in this session, and the ipfs_accelerate_py descriptor exposes no cancellation operation; nothing was cancelled.",
+    "recoveryStatus": "telemetry degraded via descriptor-fallback receipt browser:cap-1791966193921-m8ostnct:ipfs.accelerate.operation.telemetry: telemetry is unavailable; returning descriptor-backed fallback output.",
+    "envelopeRendered": true,
+    "envelopeStatus": "degraded",
+    "logEntries": [
+      "No gateway operations have run yet in this session; real envelope outcomes will appear here.",
+      "run_inference_job degraded via descriptor-fallback receipt browser:cap-1791966179764-lzw55k8q:ipfs.accelerate.operation.run_inference_job: run_inference_job is unavailable; returning descriptor-backed",
+      "hardware_profile degraded via descriptor-fallback receipt browser:cap-1791966187828-yrhprlpp:ipfs.accelerate.operation.hardware_profile: hardware_profile is unavailable; returning descriptor-backed fa",
+      "list_models degraded via descriptor-fallback receipt browser:cap-1791966187846-9bhx1e3g:ipfs.accelerate.operation.list_models: list_models is unavailable; returning descriptor-backed fallback output.",
+      "No job has been submitted in this session, and the ipfs_accelerate_py descriptor exposes no cancellation operation; nothing was cancelled.",
+      "telemetry degraded via descriptor-fallback receipt browser:cap-1791966193921-m8ostnct:ipfs.accelerate.operation.telemetry: telemetry is unavailable; returning descriptor-backed fallback output."
+    ]
+  },
+  "finished_at": "2026-10-14T08:23:31.256Z"
+}

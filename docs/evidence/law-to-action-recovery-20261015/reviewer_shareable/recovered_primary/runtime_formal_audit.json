@@ -1,0 +1,636 @@
+{
+  "actions": {
+    "archive_members_extracted_to_filesystem": 0,
+    "benchmarks": 0,
+    "controller_runs": 0,
+    "database_opens": 0,
+    "historical_code_executions": 0,
+    "historical_modules_imported": 0,
+    "provider_calls": 0,
+    "resource_leases_acquired": 0,
+    "scientific_outcomes_recomputed": 0,
+    "solver_invocations": 0,
+    "source_modifications": 0,
+    "task_submissions": 0
+  },
+  "archive": {
+    "all_archive_members_verified": false,
+    "expanded_byte_count": 198376041,
+    "manifest_member": "law_to_action_final_supplement/recovery_source_v1/manifest.json",
+    "manifest_sha256": "8f73043581a9ae05350ffb6312c64cb5ab91ac27f3559ae09a17b2c727a9d37e",
+    "member_count": 9976,
+    "nested_bytes": 30926382,
+    "nested_member": "law_to_action_final_supplement/recovery_source_v1/evidence.zip",
+    "nested_sha256": "56d8cad962292e59513d214eaa0e3bf494ad02982d28a5a712ac33fb221c58c2",
+    "outer_basename": "supplement.zip",
+    "outer_bytes": 27564897,
+    "outer_sha256": "00540f54ff5bdd931b4bfed6e9556aa3130db2f86a9f84e5ed9c90414d63d185",
+    "portable_index_member": "portable_index.json",
+    "portable_index_sha256": "16b6a2ee75b1b1998571e1da28e230b2d14d9397f1e8902a9da30e045d4bb9ef",
+    "public_derivation_sha256": "cab35f388a456884db1d9c6095bb9525b6e428afe03d0fe556f9765c05a8bd82",
+    "selected_members_verified": true,
+    "source_lineage_member": "source_lineage.json",
+    "source_lineage_sha256": "2955a8f899dce7721d62d385e1efa5bb50f81e4a98fa061bfc15302374e08475"
+  },
+  "audit_method": "Bounded ZIP member listing, ordinary-byte hashing, static source reading and AST literal extraction only. Historical modules were never imported or executed. No solver, benchmark, controller, DB or provider was invoked.",
+  "authority": {
+    "completion_authority": false,
+    "execution_authority": false,
+    "proof_authority": false,
+    "publication_authority": false
+  },
+  "common_cell_lineage_join_verified": true,
+  "created_at_utc": "2026-10-15T09:04:26.094285+00:00",
+  "distribution": "reviewer_shareable",
+  "formal_job_boundary": {
+    "acceptance_in_source": "provider.status == unsat and checker.agrees_with_provider is True; authority_kind=satisfiability and theorem_proof=False.",
+    "all_formula_or_checker_execution_claims": "Not established by this audit. No new result or proof is inferred from source, a stored sat_status, matching hashes or theorem_proof labels.",
+    "candidate_builder_limit": "The archived build_candidates source constructs declared_effects containing only filesystem.export_json. Frozen candidate bodies were not inspected or regenerated, so no claim is made here that every archived input takes a particular branch.",
+    "current_revised_paper_job_identity": null,
+    "formalism": "Finite propositional Boolean CNF; no archived SMT-LIB artifact or Lean/Coq/Isabelle/TLA+ proof job was found by member suffix/name inventory.",
+    "formula_extraction": "String constants extracted from the archived obligation_formula AST; no function, compiler, solver or truth-table enumeration executed.",
+    "formulas": [
+      {
+        "branch": "declared_export_only",
+        "exact_dimacs": "c grant=x1 matching_roots=x2 forbidden_effect=x3\nc invariant: matching & grant -> ~forbidden\np cnf 3 4\n1 0\n2 0\n3 0\n-2 -1 -3 0\n",
+        "observed_checker_receipt": null,
+        "sha256": "930926400647073339c5edd24def99c264c268db6d1aa8bd75d575777c84a5e7",
+        "solver_executed_by_this_audit": false,
+        "source_intended_outcome": "unsat",
+        "source_ref": "baseline:451-466"
+      },
+      {
+        "branch": "declared_extra_effect",
+        "exact_dimacs": "c extra-effect\np cnf 1 1\n1 0\n",
+        "observed_checker_receipt": null,
+        "sha256": "4aab3cffa9e694caa49a13aab2386c62bda97f1fe1b71e67f10d31dd001eec4c",
+        "solver_executed_by_this_audit": false,
+        "source_intended_outcome": "sat",
+        "source_ref": "baseline:451-466"
+      }
+    ],
+    "label_in_source": "QF_BOOL satisfiability over DIMACS CNF",
+    "legal_to_logic_compiler_record": null,
+    "native_checker_receipt_records": null,
+    "native_solver_version_receipt": null,
+    "proof_certificate": null,
+    "receipt_binding_limit": "attempt_receipt declares obl:sat-qf-bool but fills attempt/result/decision/policy digests from fixed baseline literals (1,2,e,f repeated64). These source literals cannot be treated as recovered native per-job checker commitments.",
+    "receipt_binding_source_refs": [
+      "baseline:51-63",
+      "harness:467-491"
+    ],
+    "semantic_limit": "The normal formula asserts grant(x1), matching_roots(x2), forbidden_effect(x3) and their incompatibility clause simultaneously. Those names are comments/constants, not facts derived within the formula from native UCAN receipts, live roots, legal texts or filesystem behavior. The branch is selected only from declared effect-kind strings. Actual authorization roots/grants are checked separately by host code. This audit identifies the intended syntactic contradiction without evaluating it.",
+    "source_checker": {
+      "execution_receipt": null,
+      "function": "sat_checker",
+      "implementation": "exhaustive-truth-table",
+      "max_variables": 16,
+      "source_ref": "baseline:424-448"
+    },
+    "source_provider": {
+      "algorithm": "dpll",
+      "execution_receipt": null,
+      "function": "sat_provider",
+      "implementation": "sympy.logic.inference.satisfiable",
+      "source_ref": "baseline:387-421"
+    }
+  },
+  "historical_scope": "LA-029 retained fixed-action recovery lineage, including its archived LA-015 run_slot implementation. This is not an identification of the missing revised-paper author package.",
+  "identity_rules": [
+    "Original hashes are historical commitments from portable_index.json; portable hashes authenticate included member bytes. Equality is asserted only for inspected byte-identical members.",
+    "The public derivative changes two administrative metadata members; no private URL, path map, signing key, private store or admission body is copied into this report.",
+    "The source-lineage common_cell original and portable digests match the inspected cell.py. This verifies an archive join, not new execution authority.",
+    "README prose retains an older archive byte count; the actual nested byte length and digest agree with manifest.json. Manifest/public derivative commitments are recorded without silently rewriting historical prose."
+  ],
+  "limitations": [
+    "Missing revised-paper author prompt/ledger prevents binding this historical study to exact revised-paper claims, tasks or formal-job identities.",
+    "This report is source/retention evidence only; it does not re-count the900-cell population, validate individual resource admissions, establish model efficacy, real-world legal correctness, compiler soundness, theorem proof or universal prevention.",
+    "No historical admission, consumed marker, retained source or digest authorizes a new execution."
+  ],
+  "privacy": {
+    "host_paths_omitted": true,
+    "original_secret_material_omitted": true,
+    "private_metadata_omitted": true,
+    "raw_primary_rows_omitted": true
+  },
+  "protected_scope": {
+    "annotation_bodies_inspected": false,
+    "component_panels_C1_to_C6_inspected": false,
+    "frozen_inputs_body_inspected": false,
+    "primary_LA029_worker_record_inspection_authorized": true,
+    "private_admission_bodies_inspected": false,
+    "protected_component_final_data_inspected": false,
+    "split_manifest_body_inspected": false
+  },
+  "retention_findings": {
+    "checker_absence_scope": "Two inspected primary A4 worker result records have no original checker records. Entire nested member-name/suffix inventory contains no separately named checker/formal artifact. This is scoped evidence of retention limits, not a content search of every historical JSON or a claim that all possible upstream records never existed.",
+    "compact_schema_behavior": "finish_record reads effect and journal counts plus provider sat_status, then compact_record omits the complete mechanism/checker/certificate/receipt/capability payload, raw events/files and observer digest.",
+    "inspected_primary_samples": [
+      {
+        "archive_member": "recovery_history/actual_operator_run_v1/cells/0001/worker/result.json",
+        "capability_payload": null,
+        "checker_agreement": null,
+        "checker_receipt": null,
+        "checker_status": null,
+        "child_claims_scored_admission": false,
+        "component_panel_record": false,
+        "decision_receipt_payload": null,
+        "formula_record": null,
+        "primary_study_record": true,
+        "proof_certificate": null,
+        "raw_effect_events": null,
+        "raw_effect_files": null,
+        "record_schema": "la029-fixed-action-cell-result/v1",
+        "reported_fields": {
+          "arm_id": "A4",
+          "decision": "allow",
+          "enforce_mode": "enforce",
+          "handler_calls": 1,
+          "journal_event_count": 1,
+          "observed_effect_count": 1,
+          "sat_status": "unsat",
+          "store_kind": "duckdb-file-typed-quack-owner"
+        },
+        "scope": "Two retained primary records only. Values are worker reports, not fresh validation or a population recount.",
+        "source_id": "primary_worker_0001"
+      },
+      {
+        "archive_member": "recovery_history/actual_operator_run_v1/cells/0005/worker/result.json",
+        "capability_payload": null,
+        "checker_agreement": null,
+        "checker_receipt": null,
+        "checker_status": null,
+        "child_claims_scored_admission": false,
+        "component_panel_record": false,
+        "decision_receipt_payload": null,
+        "formula_record": null,
+        "primary_study_record": true,
+        "proof_certificate": null,
+        "raw_effect_events": null,
+        "raw_effect_files": null,
+        "record_schema": "la029-fixed-action-cell-result/v1",
+        "reported_fields": {
+          "arm_id": "A4",
+          "decision": "allow",
+          "enforce_mode": "enforce",
+          "handler_calls": 1,
+          "journal_event_count": 1,
+          "observed_effect_count": 1,
+          "sat_status": "unsat",
+          "store_kind": "duckdb-file-typed-quack-owner"
+        },
+        "scope": "Two retained primary records only. Values are worker reports, not fresh validation or a population recount.",
+        "source_id": "primary_worker_0005"
+      }
+    ],
+    "observer_integrity_limit": "finish_record does not retain or inspect journal_consistent, observation_complete or integrity_errors. Retained counts alone therefore cannot establish a newly checked journal/file bijection.",
+    "primary_lookup_discovery": "Small host/worker result objects at primary indices0000 through0005 were read while locating two A4 worker records. Their ancillary host metadata is not exported or used to assert resource admission.",
+    "raw_effect_journal_records": null,
+    "raw_independent_effect_observation_records": null,
+    "separately_named_effect_journal_or_observation_members": [],
+    "separately_named_formal_or_checker_members": [],
+    "source_file_suffix_counts": {
+      ".cnf": 0,
+      ".dimacs": 0,
+      ".drat": 0,
+      ".lean": 0,
+      ".lrat": 0,
+      ".proof": 0,
+      ".py": 24,
+      ".smt2": 0,
+      ".thy": 0,
+      ".tla": 0,
+      ".v": 0
+    },
+    "source_refs": [
+      "harness:681-767",
+      "harness:966-1016"
+    ]
+  },
+  "runtime_route_checks": [
+    {
+      "description": "Source checks frozen harness/dependency digests, population/index membership, actual cgroup values, single shared-state lock and persistent predecessor/key/store identity before one run_slot call. Shared key creation/store attachment are historical executable effects and were not replayed.",
+      "id": "cell_admission",
+      "limits": "Child result explicitly cannot confer host resource/scoring admission. This audit does not revalidate actual physical controls.",
+      "source_refs": [
+        "cell:45-65",
+        "cell:79-105",
+        "cell:108-145"
+      ]
+    },
+    {
+      "description": "Component flags choose A4 ENFORCE, A3 real-UCAN policy, or direct bounded export handler. A0/A1/A2 metadata is inert in the fixed-action path; no model consumes it.",
+      "id": "arm_dispatch",
+      "limits": "Route coverage is this benchmark-owned bounded export path, not a proof that every MCP server tool or arbitrary agent effect is mediated.",
+      "source_refs": [
+        "baseline:183-201",
+        "harness:1019-1066"
+      ]
+    },
+    {
+      "description": "Declared lightweight actor/action/resource clauses plus Ed25519 verification, chain/audience/expiry/revocation/attenuation/resource checks, nonce consumption and authorization-envelope bindings precede permitted A3/A4 dispatch.",
+      "id": "policy_and_ucan",
+      "limits": "DeclaredLightweightPolicy is explicitly noncanonical and not the datasets Profile D evaluator. These checks do not recover legal-source semantic fidelity or human correctness judgments.",
+      "source_refs": [
+        "baseline:314-362",
+        "harness:553-645",
+        "authorization:163-258",
+        "ucan:286-344",
+        "ucan:391-471"
+      ]
+    },
+    {
+      "description": "A4 calls the local Boolean obligation checker and UCAN gate, computes pre_allow, supplies/derives a receipt and capability, and passes context plus current expected roots/clock into ENFORCE.",
+      "id": "a4_formal_join",
+      "limits": "The Boolean obligation and UCAN results are host-computed gates. Their composition does not constitute a compiled proof of the Python handler, scheduler, ledger or legal policy.",
+      "source_refs": [
+        "harness:875-991",
+        "baseline:469-480"
+      ]
+    },
+    {
+      "description": "Enforcer requests native receipt/capability verification, exact ALLOW status, context tool/version/argument/effect/delegation/environment bindings, audience/request/actor/nonce and expected roots/time; missing native auth surface refuses under ENFORCE.",
+      "id": "context_revalidation",
+      "limits": "The called datasets receipt/compose/reasons implementation bodies are not among the nested archive Python source members. This audit can identify calls and adapter checks, not independently inspect the omitted native verifier implementation.",
+      "source_refs": [
+        "enforcer:735-880",
+        "enforcer:891-954",
+        "enforcer:1047-1104"
+      ]
+    },
+    {
+      "description": "Successful ENFORCE consumes the one-time token before a single delegate invocation. The adapter uses generation/revision/fence/idempotency-bound StateCommand; accepted returns true and identical replay returns false.",
+      "id": "consume_before_effect",
+      "limits": "Historical store advertises typed Quack ownership but attach uses open_embedded_client with embedded-exclusive-lock transport. This is not evidence of a remote multi-client production Quack execution. The private database is absent and was not opened.",
+      "source_refs": [
+        "enforcer:1153-1246",
+        "consumption:179-323"
+      ]
+    },
+    {
+      "description": "Sole benchmark-owned mutation is declarative export_json with exact operation/path/payload keys, normalized relative exports/ path, canonical payload at most65536 bytes, fresh O_EXCL file write and journal append. It does not evaluate generated source text.",
+      "id": "bounded_handler",
+      "limits": "This is a trusted bounded DSL and sandbox route. Path checks and post-dispatch observations alone do not establish hostile concurrent-filesystem containment or universal effect prevention.",
+      "source_refs": [
+        "harness:444-460",
+        "effects:35-93"
+      ]
+    },
+    {
+      "description": "A separate observer algorithm performs nofollow reads and hashes filesystem bytes, checks link/stability/size constraints, and reconciles journal claims one-to-one against actual files. The executed harness invokes it after dispatch within the same worker and then deletes temporary state.",
+      "id": "observer_boundary",
+      "limits": "Independent algorithm is not an independent observer process. Raw export files, append-only journal events, observation digests and complete error reports are not retained in the inspected worker records.",
+      "source_refs": [
+        "effects:96-104",
+        "effects:119-174",
+        "effects:194-257",
+        "harness:1000-1003"
+      ]
+    }
+  ],
+  "schema": "law-to-action-archival-runtime-formal-audit@1",
+  "sources_and_sample_records": [
+    {
+      "archive_member": "recovery_history/candidate/papers/completion/law_to_action/benchmark/fixed_action_operator/cell.py",
+      "bytes": 9229,
+      "id": "cell",
+      "line_count": 159,
+      "line_refs": [
+        {
+          "end": 65,
+          "excerpt_sha256": "790602f0d42388cfe3db0c43bc7e48a8cc66a5e9770079886b4023ef2e3ddf7d",
+          "start": 45
+        },
+        {
+          "end": 105,
+          "excerpt_sha256": "c4d1e4bb94cbcffd782277fc67ac789b3b5424a5e2f3dd93115b4a6011ee10ee",
+          "start": 79
+        },
+        {
+          "end": 145,
+          "excerpt_sha256": "42ea3c7fe6155937219fb8afb734bd67be35225ec79cfe6974f604a3d003282d",
+          "start": 108
+        },
+        {
+          "end": 155,
+          "excerpt_sha256": "fccd6d74db454afbf22c7091b07d9763d18389157fd8e56b6b3ca98ec7332e2a",
+          "start": 146
+        }
+      ],
+      "original_bytes_available_in_this_member": true,
+      "original_sha256": "984c24297f0802c599fb91677aee39e06af3a1e680f1a09a5bcc14b53f9c2b3d",
+      "portable_bytes_verified": true,
+      "portable_sha256": "984c24297f0802c599fb91677aee39e06af3a1e680f1a09a5bcc14b53f9c2b3d",
+      "sha256": "984c24297f0802c599fb91677aee39e06af3a1e680f1a09a5bcc14b53f9c2b3d",
+      "transformation": "byte-identical"
+    },
+    {
+      "archive_member": "recovery_history/candidate/papers/completion/law_to_action/benchmark/handlers/effects.py",
+      "bytes": 12768,
+      "id": "effects",
+      "line_count": 257,
+      "line_refs": [
+        {
+          "end": 5,
+          "excerpt_sha256": "5ee1a75dea065a739bf2d2aaba7e5adaa348a8d43cea77b9c43c907a90bda135",
+          "start": 1
+        },
+        {
+          "end": 19,
+          "excerpt_sha256": "82f0559ffd6f7295636837082632b53d2898f72e8ca6ecdcec4b9b43bf8a262b",
+          "start": 18
+        },
+        {
+          "end": 93,
+          "excerpt_sha256": "34cf062bcf2055bdfca9ca1668b5a25bd21b4bda8cd4d998640396047e8e3bd7",
+          "start": 35
+        },
+        {
+          "end": 104,
+          "excerpt_sha256": "153d9ea93070f881fec738bf8bd0e209e8e7dc49a99cbb628298c29c74cac67e",
+          "start": 96
+        },
+        {
+          "end": 174,
+          "excerpt_sha256": "6ccd10c41fabe54d187bcdedee766bd22baffd52969fd4fd11e154bd5daf1ae7",
+          "start": 119
+        },
+        {
+          "end": 257,
+          "excerpt_sha256": "c4a336221e9227080e407f61994aff2913ab062bc7407bd3a170bbafb4ace90a",
+          "start": 194
+        }
+      ],
+      "original_bytes_available_in_this_member": true,
+      "original_sha256": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b",
+      "portable_bytes_verified": true,
+      "portable_sha256": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b",
+      "sha256": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b",
+      "transformation": "byte-identical"
+    },
+    {
+      "archive_member": "recovery_history/candidate/papers/completion/law_to_action/benchmark/baselines.py",
+      "bytes": 57307,
+      "id": "baseline",
+      "line_count": 1346,
+      "line_refs": [
+        {
+          "end": 63,
+          "excerpt_sha256": "278d22e9f43b8a8137a15d873c1001056a8ac0bb8f19367e44502f4c5357d55f",
+          "start": 51
+        },
+        {
+          "end": 201,
+          "excerpt_sha256": "3150b7edb454e4e95b3c86c6a8b49bca7a8932aa60ff22800b284ff624cd2d28",
+          "start": 183
+        },
+        {
+          "end": 310,
+          "excerpt_sha256": "9a9b4a1f118fec25694d591069be3479cbe1d6a8a025395d39af9db7079288e3",
+          "start": 294
+        },
+        {
+          "end": 362,
+          "excerpt_sha256": "ef277d4fc99c80ade218dea02a98daa4d83cfefefa77a6aa7015367f7eae016a",
+          "start": 314
+        },
+        {
+          "end": 480,
+          "excerpt_sha256": "f29b985fa45b5db791143e32e0d4db009d9fe19a81af78340e1120d1c2d525d6",
+          "start": 365
+        },
+        {
+          "end": 670,
+          "excerpt_sha256": "593d5d74c5c8eee4f3e368f622917db28e6d69bc7ab147d15c9b702d29dc194e",
+          "start": 578
+        },
+        {
+          "end": 904,
+          "excerpt_sha256": "23ec70ab596195732d59e8885ad004aecf151140b49591e4d85e3869146be029",
+          "start": 896
+        }
+      ],
+      "original_bytes_available_in_this_member": true,
+      "original_sha256": "d7c5cf6a4af336e3fab63d1ff326fe2a9749cf04467d579dc8b5867c7af00f74",
+      "portable_bytes_verified": true,
+      "portable_sha256": "d7c5cf6a4af336e3fab63d1ff326fe2a9749cf04467d579dc8b5867c7af00f74",
+      "sha256": "d7c5cf6a4af336e3fab63d1ff326fe2a9749cf04467d579dc8b5867c7af00f74",
+      "transformation": "byte-identical"
+    },
+    {
+      "archive_member": "recovery_history/candidate/papers/completion/law_to_action/receipts/snapshots/LA-015/run_fixed_actions.py",
+      "bytes": 61888,
+      "id": "harness",
+      "line_count": 1564,
+      "line_refs": [
+        {
+          "end": 324,
+          "excerpt_sha256": "a5d8ac06f570b9932b2ac9ae252c96694505689c9ae5004d4aeb08a1323cce43",
+          "start": 266
+        },
+        {
+          "end": 519,
+          "excerpt_sha256": "20339ab4fcff17b86b3175dda8f56895bec4b6d4b4bc3b336ddd6f472a8c9d6b",
+          "start": 444
+        },
+        {
+          "end": 645,
+          "excerpt_sha256": "b96c22d8a156014d3d97b9a9177e3c1e7940a1221b181e4f230c6835130878ae",
+          "start": 553
+        },
+        {
+          "end": 767,
+          "excerpt_sha256": "04d9406f2edfc96224bad055cc9f6c0f1362cd152d27aea8e59fe19938aa1948",
+          "start": 681
+        },
+        {
+          "end": 871,
+          "excerpt_sha256": "a67c0315945e854e0bcaddce374b5d240fafc9d67967a71237c11114695f7153",
+          "start": 818
+        },
+        {
+          "end": 1016,
+          "excerpt_sha256": "068612745b9f9761485d7d2be5b65ec6d3cdaf3b181eb314c455325a37741373",
+          "start": 875
+        },
+        {
+          "end": 1066,
+          "excerpt_sha256": "b9ce5975c954454a4532abf3752f83b90e7fd20b9faa90e221b23e84718342ad",
+          "start": 1019
+        }
+      ],
+      "original_bytes_available_in_this_member": true,
+      "original_sha256": "7759e746397ac2ef4bb0f75c499088d4689a50e67204fa1f803c748272937dd5",
+      "portable_bytes_verified": true,
+      "portable_sha256": "7759e746397ac2ef4bb0f75c499088d4689a50e67204fa1f803c748272937dd5",
+      "sha256": "7759e746397ac2ef4bb0f75c499088d4689a50e67204fa1f803c748272937dd5",
+      "transformation": "byte-identical"
+    },
+    {
+      "archive_member": "recovery_history/candidate/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/admissibility_enforcement.py",
+      "bytes": 51466,
+      "id": "enforcer",
+      "line_count": 1340,
+      "line_refs": [
+        {
+          "end": 26,
+          "excerpt_sha256": "2026f8a52e6b7db27dc2deee51a50b73074eaf1f5c39e06e6d7b35b0ef89cd2a",
+          "start": 1
+        },
+        {
+          "end": 880,
+          "excerpt_sha256": "ea4c138340ebcba77e6489d7086e9fbfd1c36ae24400f7233be6a6a1cbeb7ddc",
+          "start": 735
+        },
+        {
+          "end": 954,
+          "excerpt_sha256": "e59779f3c02bd72f669db8e7d50ee7086625a8c8c1128ab664e74f644c4a2131",
+          "start": 891
+        },
+        {
+          "end": 993,
+          "excerpt_sha256": "fb828ff8f697f87e9373b21d9532ed625c257a223dcb59682259487ed5b59736",
+          "start": 956
+        },
+        {
+          "end": 1015,
+          "excerpt_sha256": "b4f873e7762fe74eaad73a8aad110250c468098d00c48940e5fb48bd947d9cb5",
+          "start": 997
+        },
+        {
+          "end": 1104,
+          "excerpt_sha256": "949cb1b6538a9303ed5b645fb0b58b22bd40e743eca6e621feb94d6e88d8bea2",
+          "start": 1047
+        },
+        {
+          "end": 1246,
+          "excerpt_sha256": "87c40948a54fbdb20c9ceb9d58e44f28dbf7c4f18174a7219a7c79ce15d21176",
+          "start": 1153
+        }
+      ],
+      "original_bytes_available_in_this_member": true,
+      "original_sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0",
+      "portable_bytes_verified": true,
+      "portable_sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0",
+      "sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0",
+      "transformation": "byte-identical"
+    },
+    {
+      "archive_member": "recovery_history/candidate/papers/completion/law_to_action/benchmark/durable_consumption.py",
+      "bytes": 71273,
+      "id": "consumption",
+      "line_count": 1785,
+      "line_refs": [
+        {
+          "end": 150,
+          "excerpt_sha256": "45684a521192e5becf475098e711f337762f532f2b838060713305e6ef3a9433",
+          "start": 134
+        },
+        {
+          "end": 241,
+          "excerpt_sha256": "19829985b6ef580be3ba7bfd3a0761455f90b142020c0712e2bfeedc6ac3b78c",
+          "start": 179
+        },
+        {
+          "end": 323,
+          "excerpt_sha256": "e5de9d130ebb32b9a125b722e7cc42f0821443a083b7bfa0fa6492a67aed7f18",
+          "start": 243
+        }
+      ],
+      "original_bytes_available_in_this_member": true,
+      "original_sha256": "3c030e8347e0111979982c6fa5bc6734c597b391e48104e66d928e2b2370f5fe",
+      "portable_bytes_verified": true,
+      "portable_sha256": "3c030e8347e0111979982c6fa5bc6734c597b391e48104e66d928e2b2370f5fe",
+      "sha256": "3c030e8347e0111979982c6fa5bc6734c597b391e48104e66d928e2b2370f5fe",
+      "transformation": "byte-identical"
+    },
+    {
+      "archive_member": "recovery_history/candidate/external/ipfs_kit/ipfs_kit_py/mcp_server/authorization.py",
+      "bytes": 13330,
+      "id": "authorization",
+      "line_count": 288,
+      "line_refs": [
+        {
+          "end": 258,
+          "excerpt_sha256": "64ddaf6a4a3e0acb770781c3c2bcc6cc2407817c127e6c0e135e605e415fe258",
+          "start": 163
+        }
+      ],
+      "original_bytes_available_in_this_member": true,
+      "original_sha256": "0410b8742399e0b72af1140d494fa763eb04cc38c31df9f887b473893b5516cd",
+      "portable_bytes_verified": true,
+      "portable_sha256": "0410b8742399e0b72af1140d494fa763eb04cc38c31df9f887b473893b5516cd",
+      "sha256": "0410b8742399e0b72af1140d494fa763eb04cc38c31df9f887b473893b5516cd",
+      "transformation": "byte-identical"
+    },
+    {
+      "archive_member": "recovery_history/candidate/external/ipfs_kit/ipfs_kit_py/mcp_server/mcplusplus/ucan.py",
+      "bytes": 21851,
+      "id": "ucan",
+      "line_count": 483,
+      "line_refs": [
+        {
+          "end": 344,
+          "excerpt_sha256": "d1ef3a83582f11e028e0f15e29a5780281022ce2580db4ab532f449eb0eea816",
+          "start": 286
+        },
+        {
+          "end": 471,
+          "excerpt_sha256": "5ea45d552cbd4761db3784b5e5e3843ea3f23872d788b297be3a57b7222e0c64",
+          "start": 391
+        }
+      ],
+      "original_bytes_available_in_this_member": true,
+      "original_sha256": "c9f68de79fe7ac456e12143136bcef875570d4dfa4c47581c0f1269aeb7f3d95",
+      "portable_bytes_verified": true,
+      "portable_sha256": "c9f68de79fe7ac456e12143136bcef875570d4dfa4c47581c0f1269aeb7f3d95",
+      "sha256": "c9f68de79fe7ac456e12143136bcef875570d4dfa4c47581c0f1269aeb7f3d95",
+      "transformation": "byte-identical"
+    },
+    {
+      "archive_member": "recovery_history/candidate/papers/completion/law_to_action/benchmark/fixed_action_operator/README.md",
+      "bytes": 4146,
+      "id": "historical_operator_readme",
+      "line_count": 17,
+      "line_refs": [
+        {
+          "end": 17,
+          "excerpt_sha256": "7db1e3233d2fc7bb1f9f7aa698923d26b51cd1eb44ded01c2e13f9f1b1202586",
+          "start": 1
+        }
+      ],
+      "original_bytes_available_in_this_member": true,
+      "original_sha256": "7db1e3233d2fc7bb1f9f7aa698923d26b51cd1eb44ded01c2e13f9f1b1202586",
+      "portable_bytes_verified": true,
+      "portable_sha256": "7db1e3233d2fc7bb1f9f7aa698923d26b51cd1eb44ded01c2e13f9f1b1202586",
+      "sha256": "7db1e3233d2fc7bb1f9f7aa698923d26b51cd1eb44ded01c2e13f9f1b1202586",
+      "transformation": "byte-identical"
+    },
+    {
+      "archive_member": "recovery_history/actual_operator_run_v1/cells/0001/worker/result.json",
+      "bytes": 1635,
+      "id": "primary_worker_0001",
+      "line_count": 42,
+      "line_refs": [],
+      "original_bytes_available_in_this_member": true,
+      "original_sha256": "355c4eea6e5af12755a614ca290c2912fd4029a68cd81162b59cea6d24e6a973",
+      "portable_bytes_verified": true,
+      "portable_sha256": "355c4eea6e5af12755a614ca290c2912fd4029a68cd81162b59cea6d24e6a973",
+      "sha256": "355c4eea6e5af12755a614ca290c2912fd4029a68cd81162b59cea6d24e6a973",
+      "transformation": "byte-identical"
+    },
+    {
+      "archive_member": "recovery_history/actual_operator_run_v1/cells/0005/worker/result.json",
+      "bytes": 1633,
+      "id": "primary_worker_0005",
+      "line_count": 42,
+      "line_refs": [],
+      "original_bytes_available_in_this_member": true,
+      "original_sha256": "c5ec4fce4a42c8529b1d8b7b12ab3b9192c8ebeb0b4a0ed996e15dba48afcae4",
+      "portable_bytes_verified": true,
+      "portable_sha256": "c5ec4fce4a42c8529b1d8b7b12ab3b9192c8ebeb0b4a0ed996e15dba48afcae4",
+      "sha256": "c5ec4fce4a42c8529b1d8b7b12ab3b9192c8ebeb0b4a0ed996e15dba48afcae4",
+      "transformation": "byte-identical"
+    }
+  ]
+}

@@ -1,0 +1,227 @@
+{
+  "authored_passive_probe": {
+    "complete_hit_count": 20,
+    "deferred_hit_count": 18,
+    "frontier_context_bytes": 10235,
+    "full_context_bytes": 48831,
+    "scope": "Authored passive source AST/local-vector serialization and worker reachability; target code never imported.",
+    "selected_hit_count": 2,
+    "selected_transport": "frontier"
+  },
+  "deployment_validation": {
+    "broader_failure": "7 frozen-security advice failures: isolated ipfs_accelerate_py/model_catalog/schema.py Operation.SECURITY_ADVISE absent; unchanged registration path outside cache edits",
+    "checks": [
+      {
+        "errors": 0,
+        "failures": 0,
+        "junit": "/home/barberb/lift_coding/maintenance/terminal-bounded-context-20261011-01/deployment-cache-validation-05.xml",
+        "revision": "final captured source",
+        "sha256": "9b17c2db2e9ae6c1e8a63542b454cf5f04d1fdf11a95a31efaeffc3dd82ef9e8",
+        "skipped": 6,
+        "tests": 44
+      },
+      {
+        "errors": 0,
+        "failures": 7,
+        "junit": "/home/barberb/lift_coding/maintenance/terminal-bounded-context-20261011-01/deployment-cache-validation-03.xml",
+        "revision": "earlier cache revision before final source-identity and fresh-home refinements",
+        "sha256": "18b27272c2171ee664a0c56143294aca59056c73d34dcad1a8ee61fb30570052",
+        "skipped": 6,
+        "tests": 95
+      }
+    ],
+    "focused_passed": true,
+    "provider_calls": 0
+  },
+  "deployment_validation_evidence": {
+    "behavioral_reexecution": false,
+    "evidence_paths": [
+      "/home/barberb/lift_coding/maintenance/terminal-frontier-runtime-20261011-01/deployment-cache-validation.json"
+    ],
+    "evidence_sha256": "494f81a78fbf97f40c5afb8cc59487abbd67abeb224bc732163849257b71ff57",
+    "evidence_tier": "original_record",
+    "raw_native_logs_read": false,
+    "signature_verification": "not_performed"
+  },
+  "failure_evidence": {
+    "behavioral_reexecution": false,
+    "evidence_paths": [
+      "/home/barberb/lift_coding/maintenance/terminal-bounded-context-20261011-01/deployment-cache-validation-03.xml"
+    ],
+    "evidence_sha256": "18b27272c2171ee664a0c56143294aca59056c73d34dcad1a8ee61fb30570052",
+    "evidence_tier": "original_record",
+    "raw_native_logs_read": false,
+    "signature_verification": "not_performed"
+  },
+  "live_profile_observations": [
+    {
+      "additional_trial": false,
+      "behavioral_reexecution": false,
+      "code_retrieval_transport": "full",
+      "context_input_audit_reason": "audit_timeout",
+      "context_input_audit_status": "unknown",
+      "doctor_dispatch": {
+        "analysis_status": "unavailable",
+        "provider_calls": 0,
+        "residual_work_proposals": 1,
+        "route": "model_router",
+        "status": "residual"
+      },
+      "doctor_profile": "generic",
+      "doctor_profile_experimental": true,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/maintenance/terminal-frontier-runtime-20261011-01/pilot/intent-compact-01/jobs/supervisor-full-native-fix-code-vulnerability/fix-code-vulnerability__aM5oJU5/agent/supervisor-result.json"
+      ],
+      "evidence_sha256": "e0a9024fef9b5802eac21453ddaff8e296f1a96c5339cd14407ba1f02bd2a0f6",
+      "evidence_tier": "original_record",
+      "implementation_route": "model_router",
+      "intent_preplanning_status": "fail_open_no_checkpoint",
+      "intent_requirements_transport": "compact",
+      "official_reward_field_in_supervisor_report": null,
+      "original_verifier_result_separately_read": false,
+      "raw_native_logs_read": false,
+      "relation_to_prior": "reports-on",
+      "reported_native_usage_complete_in_prior_summary": true,
+      "reward_reported_by_prior_summary": 1.0,
+      "run_id": "fix-code-vulnerability__aM5oJU5",
+      "runtime_archive_sha256_from_prior": "39f405e3714f877019b0fc0bb9771160094ad2a1d5a52bc3296a97dc3109e038",
+      "semantic_transport": "native",
+      "signature_verification": "not_performed",
+      "study_id": "T1-frontier-lead",
+      "supervisor_completed": true
+    },
+    {
+      "additional_trial": false,
+      "behavioral_reexecution": false,
+      "code_retrieval_transport": "full",
+      "context_input_audit_reason": "audit_timeout",
+      "context_input_audit_status": "unknown",
+      "doctor_dispatch": {
+        "analysis_status": "unavailable",
+        "provider_calls": 0,
+        "residual_work_proposals": 1,
+        "route": "model_router",
+        "status": "residual"
+      },
+      "doctor_profile": "generic",
+      "doctor_profile_experimental": true,
+      "evidence_paths": [
+        "/home/barberb/lift_coding/maintenance/terminal-frontier-runtime-20261011-01/pilot/intent-expanded-01/jobs/supervisor-full-native-fix-code-vulnerability/fix-code-vulnerability__G9GPaZK/agent/supervisor-result.json"
+      ],
+      "evidence_sha256": "0fed1e080adffa5eabd3f341182c21afdcfc81ae05b81ce0bd68b175147a3bcd",
+      "evidence_tier": "original_record",
+      "implementation_route": "model_router",
+      "intent_preplanning_status": "fail_open_no_checkpoint",
+      "intent_requirements_transport": "expanded",
+      "official_reward_field_in_supervisor_report": null,
+      "original_verifier_result_separately_read": false,
+      "raw_native_logs_read": false,
+      "relation_to_prior": "reports-on",
+      "reported_native_usage_complete_in_prior_summary": true,
+      "reward_reported_by_prior_summary": 1.0,
+      "run_id": "fix-code-vulnerability__G9GPaZK",
+      "runtime_archive_sha256_from_prior": "39f405e3714f877019b0fc0bb9771160094ad2a1d5a52bc3296a97dc3109e038",
+      "semantic_transport": "native",
+      "signature_verification": "not_performed",
+      "study_id": "T1-frontier-lead",
+      "supervisor_completed": true
+    }
+  ],
+  "not_a_task_efficacy_measurement": "Eighteen recovered hits are an authored provider-free expansion qualification; they are not eighteen benchmark successes or measured live retrieval hits.",
+  "production_quota_probe": {
+    "complete_hit_count": 5,
+    "frontier_context_bytes": 8860,
+    "full_context_bytes": 7992,
+    "included_hit_count": 2,
+    "native_fact_rows_replayed": 426,
+    "omitted_hit_count": 3,
+    "provider_calls": 0,
+    "retrieval_model": "lexical TF-IDF over qualified symbol names; no learned embedding model",
+    "scope": "Actual production lexical qualifier/max5 over copied public Bottle and literal instruction; authored task labels, no signed IntentIR admission or learned-provider evaluation.",
+    "selected_context_bytes": 7992,
+    "selected_transport": "full"
+  },
+  "qualification_evidence": {
+    "behavioral_reexecution": false,
+    "evidence_paths": [
+      "/home/barberb/lift_coding/maintenance/terminal-frontier-runtime-20261011-01/installed-qualification-01/qualification.json"
+    ],
+    "evidence_sha256": "850ef4993e3045bee0aecf7e724bce4c8e3359718c4aa5d6b2ce1cb1c56fb9db",
+    "evidence_tier": "original_record",
+    "raw_native_logs_read": false,
+    "signature_verification": "not_performed"
+  },
+  "reachability_conclusion": "All seven failures concern frozen-security advice tests; both measured live reports select experimental generic Doctor and model_router, with full code retrieval and native semantic transport. This establishes different declared paths but is not a complete archived caller/import reachability proof.",
+  "reachability_status": "partial",
+  "remaining_gap": "Need exact archived generic-versus-frozen-security branch and loaded-module evidence to rule out shared dependency reachability; no new test needed for static inspection.",
+  "scope": "Retained qualification and JUnit records; no new execution",
+  "seven_failures": [
+    {
+      "attribute_error_in_trace": true,
+      "classname": "benchmarks.agent_supervisor.container_coding.test_terminal_frozen_security",
+      "failure_message": "AttributeError: type object 'Operation' has no attribute 'SECURITY_ADVISE'",
+      "missing_SECURITY_ADVISE": true,
+      "security_autoencoder_hub_in_trace": true,
+      "test_name": "test_actual_frozen_advice_reaches_planner_and_admission_without_training"
+    },
+    {
+      "attribute_error_in_trace": true,
+      "classname": "benchmarks.agent_supervisor.container_coding.test_terminal_frozen_security",
+      "failure_message": "AttributeError: type object 'Operation' has no attribute 'SECURITY_ADVISE'",
+      "missing_SECURITY_ADVISE": true,
+      "security_autoencoder_hub_in_trace": true,
+      "test_name": "test_generic_local_refresh_recomputes_current_rows_with_same_frozen_weights"
+    },
+    {
+      "attribute_error_in_trace": true,
+      "classname": "benchmarks.agent_supervisor.container_coding.test_terminal_frozen_security",
+      "failure_message": "AttributeError: type object 'Operation' has no attribute 'SECURITY_ADVISE'",
+      "missing_SECURITY_ADVISE": true,
+      "security_autoencoder_hub_in_trace": true,
+      "test_name": "test_advice_selection_drift_refused_before_provider"
+    },
+    {
+      "attribute_error_in_trace": true,
+      "classname": "benchmarks.agent_supervisor.container_coding.test_terminal_frozen_security",
+      "failure_message": "AttributeError: type object 'Operation' has no attribute 'SECURITY_ADVISE'",
+      "missing_SECURITY_ADVISE": true,
+      "security_autoencoder_hub_in_trace": true,
+      "test_name": "test_lake_drift_invalidates_advice_and_refuses_refresh[world-lake-delete_catalog]"
+    },
+    {
+      "attribute_error_in_trace": true,
+      "classname": "benchmarks.agent_supervisor.container_coding.test_terminal_frozen_security",
+      "failure_message": "AttributeError: type object 'Operation' has no attribute 'SECURITY_ADVISE'",
+      "missing_SECURITY_ADVISE": true,
+      "security_autoencoder_hub_in_trace": true,
+      "test_name": "test_lake_drift_invalidates_advice_and_refuses_refresh[metadata-lake-delete_catalog]"
+    },
+    {
+      "attribute_error_in_trace": true,
+      "classname": "benchmarks.agent_supervisor.container_coding.test_terminal_frozen_security",
+      "failure_message": "AttributeError: type object 'Operation' has no attribute 'SECURITY_ADVISE'",
+      "missing_SECURITY_ADVISE": true,
+      "security_autoencoder_hub_in_trace": true,
+      "test_name": "test_lake_drift_invalidates_advice_and_refuses_refresh[world-lake-corrupt_parquet]"
+    },
+    {
+      "attribute_error_in_trace": true,
+      "classname": "benchmarks.agent_supervisor.container_coding.test_terminal_frozen_security",
+      "failure_message": "AttributeError: type object 'Operation' has no attribute 'SECURITY_ADVISE'",
+      "missing_SECURITY_ADVISE": true,
+      "security_autoencoder_hub_in_trace": true,
+      "test_name": "test_lake_drift_invalidates_advice_and_refuses_refresh[metadata-lake-corrupt_parquet]"
+    }
+  ],
+  "worker": {
+    "all_emitted_cli_returncodes_zero": true,
+    "emitted_cli_invocations": 18,
+    "exact_deferred_hits_recovered": 18,
+    "official_verifier_executed": false,
+    "provider_calls": 0,
+    "qualification_elapsed_seconds": 488.411586505943,
+    "signed_plan_admission_claimed": false,
+    "training_or_proving_performed": false,
+    "worker_elapsed_seconds": 10.59535123303067
+  }
+}

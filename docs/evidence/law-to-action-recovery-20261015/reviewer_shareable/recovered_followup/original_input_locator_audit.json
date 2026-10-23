@@ -1,0 +1,214 @@
+{
+  "schema": "law-to-action-original-input-locator-audit/v1",
+  "stage": "initial_locator_metadata_only",
+  "scope": "Target original bytes for 1,813 previously reported transformed reducer inputs through exact retained path identities; no content reconstruction or new scientific execution.",
+  "completed_observation_time_utc": "2026-10-15T09:38:31Z",
+  "latest_author_package": {
+    "path": null,
+    "status": "not located; no substitute baseline selected"
+  },
+  "previous_package_immutable": true,
+  "admission": {
+    "api": "ipfs_datasets_py.logic.software_contracts.codebase_resources.acquire_codebase_resources",
+    "implementation_source": "<REPOSITORY_ROOT>/external/ipfs_datasets/ipfs_datasets_py/logic/software_contracts/codebase_resources.py",
+    "call": {
+      "timeout_seconds": 1,
+      "memory_mb": 256,
+      "scheduler": "omitted; actual shared default",
+      "parent_lease": "omitted"
+    },
+    "status": "refused",
+    "exception_class": "ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler.LeaseTimeoutError",
+    "reason": "timed out waiting for a resource lease",
+    "process_exit_code": 1,
+    "tool_wall_time_seconds": 0.970052529,
+    "attempt_time_utc": null,
+    "attempt_time_null_reason": "The command did not record a UTC start/end timestamp; tool output supplies elapsed time only. Do not invent exact refusal time.",
+    "refusal_observed_before_utc": "2026-10-15T09:38:31Z",
+    "retries": 0,
+    "scheduler_overrides": 0,
+    "bypass": false,
+    "deferred_work": "No portable-index parse/join or substantive alternate-byte verification ran after refusal. Remaining work was limited to small metadata reads, exact stat/name checks and hashes of already selected metadata."
+  },
+  "inputs": [
+    {
+      "path": "<PRIOR_RECOVERY_PACKAGE>/author_only/original_primary_snapshot/results/run_manifest.json",
+      "bytes": 2460883,
+      "sha256": "fa85df20ee5179dc5f0e19631bbce863d79e1400aef576917afdc905dfbf6d5b",
+      "access": "top-level shape, one exact binding, two targeted digest searches, file hash",
+      "binding_count_observed": 9933
+    },
+    {
+      "path": "<PRIOR_RECOVERY_PACKAGE>/author_only/copied_portable_recovery/evidence.zip",
+      "bytes": 30926382,
+      "sha256": null,
+      "reported_prior_sha256": "56d8cad962292e59513d214eaa0e3bf494ad02982d28a5a712ac33fb221c58c2",
+      "access": "ZIP directory metadata and source_lineage.json only",
+      "current_full_archive_rehash": false
+    },
+    {
+      "path": "<PRIOR_RECOVERY_PACKAGE>/author_only/copied_portable_recovery/evidence.zip",
+      "member": "portable_index.json",
+      "bytes": 3826412,
+      "sha256": null,
+      "reported_manifest_sha256": "16b6a2ee75b1b1998571e1da28e230b2d14d9397f1e8902a9da30e045d4bb9ef",
+      "access": "ZIP member metadata only; deferred parsing"
+    },
+    {
+      "path": "<PRIOR_RECOVERY_PACKAGE>/author_only/copied_portable_recovery/evidence.zip",
+      "member": "source_lineage.json",
+      "bytes": 8845,
+      "sha256": "2955a8f899dce7721d62d385e1efa5bb50f81e4a98fa061bfc15302374e08475",
+      "access": "small metadata read and measured member hash"
+    },
+    {
+      "path": "<PRIOR_RECOVERY_PACKAGE>/author_only/copied_portable_recovery/manifest.json",
+      "bytes": 1945,
+      "sha256": "8f73043581a9ae05350ffb6312c64cb5ab91ac27f3559ae09a17b2c727a9d37e",
+      "access": "small metadata read and measured file hash"
+    },
+    {
+      "path": "<PRIOR_RECOVERY_PACKAGE>/author_only/copied_portable_recovery/public_derivation.json",
+      "bytes": 2420,
+      "sha256": "cab35f388a456884db1d9c6095bb9525b6e428afe03d0fe556f9765c05a8bd82",
+      "access": "small metadata read and measured file hash"
+    }
+  ],
+  "original_binding_sample": {
+    "original_path": "<REPOSITORY_ROOT>/papers/completion/runtime_bootstrap/unblock_20260912/la015_fixed_action_recovery_v1/actual_operator_continuation_v1/cells/0460/host/created.json",
+    "original_sha256": "81cd233d6b57a2385c6051ff1f0fd930eb7010ff1f9e37f905880c341fa5a34d",
+    "expected_portable_alias_member": "recovery_history/actual_operator_continuation_v1/cells/0460/host/created.json",
+    "alias_mapping_status": "plausible prefix relationship; exact portable-index row comparison deferred",
+    "transformed_membership": null,
+    "untransformed_bytes_recovered": false
+  },
+  "prefix_locator_checks": [
+    {
+      "path": "<REPOSITORY_ROOT>/papers/completion/runtime_bootstrap/unblock_20260912/la015_fixed_action_recovery_v1",
+      "exists": false,
+      "method": "exact directory stat; absent",
+      "implication": "Original recorded runtime-bootstrap tree unavailable at its original location."
+    },
+    {
+      "path": "<PRESERVED_CHECKOUT>/papers/completion/runtime_bootstrap/unblock_20260912/la015_fixed_action_recovery_v1",
+      "exists": false,
+      "method": "exact directory stat; absent",
+      "implication": "Known preserved checkout does not supply the same runtime-bootstrap prefix."
+    },
+    {
+      "path": "<PRESERVED_CHECKOUT>/papers/completion/law_to_action/receipts/snapshots/LA-029",
+      "exists": true,
+      "method": "exact directory stat and bounded filename listing",
+      "observed_contents": "operator-adoption-v1 final aggregate outputs plus operator/cell.py, operator/controller.py, operator/frozen_inputs.json, operator/README.md; validation entries",
+      "implication": "Adoption snapshot provenance is a locator for final outputs and selected sources; no per-cell source-input tree is identified by this listing.",
+      "per_cell_original_input_bytes_verified": null
+    }
+  ],
+  "alternative_archive_locators": [
+    {
+      "path": "<RETAINED_ARTIFACT_ROOT>/recovery_source_v1/evidence.zip",
+      "exists": true,
+      "observed_bytes": 30925812,
+      "content_opened": false,
+      "sha256": null,
+      "reported_expected_sha256": "5456553d86dd7397ce4bd6b090ab02614da9721160974a8a4bb5b6e074d3e58d",
+      "provenance": "Exact candidate supplied by parent filename inventory; expected identity from retained public_derivation.json.",
+      "status": "stat-only original-portable archive candidate; not original untransformed run bytes"
+    },
+    {
+      "path": "<RETAINED_ARTIFACT_ROOT>/recovery_source_public_v4/evidence.zip",
+      "exists": true,
+      "observed_bytes": 30926382,
+      "content_opened": false,
+      "sha256": null,
+      "reported_expected_sha256": "56d8cad962292e59513d214eaa0e3bf494ad02982d28a5a712ac33fb221c58c2",
+      "provenance": "Exact candidate supplied by parent filename inventory; expected identity from retained manifest/public_derivation metadata.",
+      "status": "stat-only public-portable archive candidate"
+    }
+  ],
+  "lineage_metadata_findings": {
+    "reported_source_commit": "d6127a257a433fabb8183180d82cc3b309040c47",
+    "observed_segment_labels": [
+      "original",
+      "leaf-exit",
+      "parent-exit",
+      "startup-591",
+      "startup-625"
+    ],
+    "small_originally_identical_source_candidates": [
+      {
+        "member": "recovery_history/aggregate_v1/aggregate.py",
+        "reported_original_sha256": "1826005e94cb80ce9aafbbd182746fde26a21b89e325854414115eff701f536a",
+        "reported_portable_sha256": "1826005e94cb80ce9aafbbd182746fde26a21b89e325854414115eff701f536a"
+      },
+      {
+        "member": "recovery_history/candidate/papers/completion/law_to_action/benchmark/fixed_action_operator/cell.py",
+        "reported_original_sha256": "984c24297f0802c599fb91677aee39e06af3a1e680f1a09a5bcc14b53f9c2b3d",
+        "reported_portable_sha256": "984c24297f0802c599fb91677aee39e06af3a1e680f1a09a5bcc14b53f9c2b3d"
+      }
+    ],
+    "scope_limit": "These source commitments are reported equal in retained lineage metadata; they are not new recovery of the 1,813 transformed inputs and their payloads were not opened in this pass.",
+    "transformed_result_example": {
+      "member": "recovery_history/actual_operator_run_v1/result.json",
+      "reported_original_sha256": "316c200458b1455f0fde3dce1b40c0bbe69cc0e76030846ab481cb68ffad452c",
+      "reported_portable_sha256": "26a2cef1eaee9a120baf1e39b4d3d384a241120d7ad84a26bce7b4b17e0ad62d",
+      "payload_opened": false,
+      "implication": "Lineage explicitly distinguishes original run-result commitment from portable bytes. A prior portable archive is not automatically that original result."
+    }
+  },
+  "private_public_derivation_findings": {
+    "source": "<PRIOR_RECOVERY_PACKAGE>/author_only/copied_portable_recovery/public_derivation.json",
+    "reported_only_two_indexed_members_changed": true,
+    "reported_all_other_indexed_bytes_unchanged": true,
+    "changed_members": [
+      {
+        "member": "recovery_history/candidate/papers/completion/law_to_action/paper.todo.md",
+        "reported_original_sha256": "f67bbe99b71dbe112922ce153a29038294f219d1cbad7e5f55da79b145ce41e5",
+        "reported_prior_portable_sha256": "f67bbe99b71dbe112922ce153a29038294f219d1cbad7e5f55da79b145ce41e5",
+        "digest_present_in_original_run_manifest_text": false
+      },
+      {
+        "member": "recovery_history/candidate/papers/completion/law_to_action/tasks.json",
+        "reported_original_sha256": "b481b0f3dce145fce354369dcb8a72fd0a133e9985a095d76fbd4b485d289d1f",
+        "reported_prior_portable_sha256": "b481b0f3dce145fce354369dcb8a72fd0a133e9985a095d76fbd4b485d289d1f",
+        "digest_present_in_original_run_manifest_text": false
+      }
+    ],
+    "transform_scope_reported": "Private project URL redactions in two administrative metadata files; earlier path normalization is not reversed.",
+    "targeted_search_scope": "Exact two original SHA-256 strings were searched in original run_manifest.json; neither occurred. No full portable-index join was attempted.",
+    "conclusion": "Finding the pre-publication portable archive may recover its two administrative URL-bearing variants, but these metadata rows do not establish recovery of the 1,813 transformed reducer inputs."
+  },
+  "recovery_result": {
+    "transformed_input_count_reported_by_prior_qualification": 1813,
+    "transformed_input_count_recomputed_this_pass": null,
+    "complete_original_to_portable_index_join": null,
+    "alternate_original_bytes_verified": null,
+    "newly_recovered_input_files": 0,
+    "copied_original_payload_files": 0,
+    "synthesized_or_reconstructed_bytes": 0,
+    "definitive_unrecoverability_claim": false
+  },
+  "safety_scope": {
+    "scientific_replay": false,
+    "database_open": false,
+    "archived_admissions_replayed": false,
+    "raw_secrets_or_keys_opened": false,
+    "protected_C1_C6_finals_opened": false,
+    "brute_force_home_hashing": false,
+    "old_package_modified": false,
+    "reads_after_admission_refusal": "Only small existing lineage/derivation metadata, named-path stat/listing and metadata file hashes; no deferred bulk verification fallback."
+  },
+  "next_bounded_step": {
+    "condition": "Only after genuine shared admission succeeds in a later authorized verification step; no automatic retry in this pass.",
+    "action": "Join original manifest bindings to portable_index.original_sha256, isolate exact transformed rows, then inspect only explicitly retained alternate candidates. Verify exact original digests before calling any candidate recovered.",
+    "prohibit": [
+      "Reverse substitutions or synthesized reconstruction",
+      "Treating original-portable as original run bytes",
+      "Opening archived keys/admissions for execution",
+      "Scanning protected component final panels",
+      "Unbounded home-wide hash search"
+    ]
+  },
+  "visibility": "reviewer_shareable",
+  "redaction": "Absolute host and artifact roots redacted; exact relative paths, archive members and digest commitments retained."
+}

@@ -1,0 +1,80 @@
+{
+  "added_to_selected_32_or_24_cohort": false,
+  "conclusion": "These exact-title-paper Git artifacts are earlier developmental and uninvoked planning records; filenames alone do not identify the selected manuscript32/24cohorts.",
+  "final_freeze": {
+    "final_dispatch_authorized": false,
+    "first_final_attempt_started": false,
+    "freeze_id": "ns-016-prefinal-v1",
+    "retained_executable_arm_count": 0
+  },
+  "final_plan": {
+    "dispatch_authorized": false,
+    "first_final_attempt_started": false,
+    "matches_selected_manuscript_32_terminal_cells": false,
+    "preregistered_units": 384,
+    "units": 192
+  },
+  "gap_update": {
+    "prior_gap": 16,
+    "remaining": "Exact original 32-cell and 24-cell ledgers remain unmatched. Inspect later scoped histories or provide original cohort manifests; do not substitute76developmental rows or192planned units.",
+    "searched_new_routes": [
+      "d0714ecfae25d4ceca1f1c7044a8f542e64f5515:papers/completion/neurosymbolic_supervision/pilot/results.jsonl",
+      "d0714ecfae25d4ceca1f1c7044a8f542e64f5515:papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json",
+      "d0714ecfae25d4ceca1f1c7044a8f542e64f5515:papers/completion/neurosymbolic_supervision/protocol/final_run_manifest.json"
+    ],
+    "status": "unchanged"
+  },
+  "new_executions": 0,
+  "pilot_named_file": {
+    "counts_as_live_repair_rows": 1,
+    "declared_developmental_rows": 76,
+    "declared_fixture_rows": 12,
+    "matches_selected_manuscript_24_cell_cohort": false,
+    "record_kind_counts": {
+      "development": 28,
+      "pilot": 48
+    },
+    "rows": 76,
+    "terminal_reason_counts": {
+      "host-adapter-rejected-or-no-grant": 15,
+      "independent rescore passed on the development unit": 12,
+      "pilot-grant-unavailable-host-rejects-pilot": 48,
+      "signed cold score of the AI-operator-reviewed development candidate": 1
+    },
+    "terminal_state_counts": {
+      "solved": 13,
+      "unavailable": 63
+    }
+  },
+  "schema": "unmatched-historical-population-leads@1",
+  "source_commit": "d0714ecfae25d4ceca1f1c7044a8f542e64f5515",
+  "sources": [
+    {
+      "access_status": "git_blob_read",
+      "bytes": 334965,
+      "commit": "d0714ecfae25d4ceca1f1c7044a8f542e64f5515",
+      "path": "papers/completion/neurosymbolic_supervision/pilot/results.jsonl",
+      "repository": "/home/barberb/lift_coding",
+      "sha256": "320610a6b053ae5c918b930e4a5cef9a92a4e2b536e2c19141e4737e6e2af49a",
+      "signature_verification": "not_performed"
+    },
+    {
+      "access_status": "git_blob_read",
+      "bytes": 11993,
+      "commit": "d0714ecfae25d4ceca1f1c7044a8f542e64f5515",
+      "path": "papers/completion/neurosymbolic_supervision/artifacts/final_experiment_freeze.json",
+      "repository": "/home/barberb/lift_coding",
+      "sha256": "4701a3419a3b96b9361a000e7b8004af9dd625ee1c6a2b120d68c490920d7dfb",
+      "signature_verification": "not_performed"
+    },
+    {
+      "access_status": "git_blob_read",
+      "bytes": 48458,
+      "commit": "d0714ecfae25d4ceca1f1c7044a8f542e64f5515",
+      "path": "papers/completion/neurosymbolic_supervision/protocol/final_run_manifest.json",
+      "repository": "/home/barberb/lift_coding",
+      "sha256": "6ed6e590479d7d71bdcc9cc67fc7cccf51b05230c0f6761fcd7c520bece2ac80",
+      "signature_verification": "not_performed"
+    }
+  ]
+}

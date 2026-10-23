@@ -1,0 +1,18 @@
+{
+  "entrypoint_invoked": false,
+  "external_publications": 0,
+  "offline_resource_admission": "Existing acquire_codebase_resources API, default shared scheduler unchanged,1CPU/512MiB/1child slot,1second admission wait.",
+  "payload_export_invoked": false,
+  "payload_export_null_reason": "No original authorized payload supplied; none fabricated.",
+  "provider_calls": 0,
+  "real_entrypoint": "ipfs-accelerate supervisor run --prompt-file <path>",
+  "reason": "Configured run/preview may materialize or call a provider; no supported generic evidence-inspection delegation boundary was established.",
+  "safe_existing_export": "export_control_plane_state.py --payload <existing snapshot-bound JSON> --destination <fresh path> --view portable --media-type json --dry-run",
+  "scientific_executions": 0,
+  "source_audit": "author_only/supervisor_interface_audit.json",
+  "toolchain_installations": 0,
+  "training_jobs": 0,
+  "typed_owner_api": "TypedStateOwnerConnection.completion_progress_snapshot(task_cids)",
+  "typed_owner_invoked": false,
+  "typed_owner_null_reason": "Original authorized owner grant unavailable. No direct database open/attach performed."
+}

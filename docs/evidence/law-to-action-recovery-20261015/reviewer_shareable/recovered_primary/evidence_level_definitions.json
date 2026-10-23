@@ -1,0 +1,9 @@
+{
+  "hash-checked": "Measured bytes match a specified commitment. A portable derivative hash is distinct from the original-byte commitment.",
+  "newly executed": "New execution during this recovery. Only bounded offline evidence verification/analysis and archival inspection occurred; zero new scientific cells, generation, training, solver/toolchain runs.",
+  "null": "Unavailable or unmeasured value, with reason. CSV empty cells correspond to JSON null; zero is used only for an observed count or explicitly scoped execution count.",
+  "recomputed": "A statistic or integrity check computed now from retained artifacts, preserving its original population/protocol.",
+  "recovered": "Actual artifact bytes located/copied with provenance; scientific validity is not implied.",
+  "replayed": "Historical procedure or effect executed again. No historical admissions or scientific experiments were replayed here.",
+  "reported": "A source states a value; no underlying measurement is thereby verified."
+}

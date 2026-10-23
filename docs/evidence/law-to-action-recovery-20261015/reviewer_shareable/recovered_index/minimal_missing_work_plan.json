@@ -1,0 +1,67 @@
+{
+  "current_gate": "Await exact author-package locator; no new experiment needed to address this locator gap.",
+  "authorized_recovery_next": [
+    {
+      "order": 1,
+      "action": "Read the full recovery prompt,revision notes,ledger,reviewer files and all manuscript includes; hash originals and work on copies.",
+      "requires": "R0"
+    },
+    {
+      "order": 2,
+      "action": "Join the recovered LA029 identity and provisional matrix to exact author claims; preserve all discrepancies.",
+      "requires": "R0"
+    },
+    {
+      "order": 3,
+      "action": "Follow exact C1-C6 repository/Publicus locators read-only; recover allowed manifests,predictions,selection and costs separately. Use an existing typed-owner export where required; no active database opening.",
+      "requires": "R0,R3 and actual supported interfaces"
+    },
+    {
+      "order": 4,
+      "action": "Integrate evidence-supported text on a copy of the exact baseline and validate patch applicability without unapproved toolchain installation.",
+      "requires": "R0"
+    },
+    {
+      "order": 5,
+      "action": "Request existing missing originals,raw observations,native build receipts and qualified review before proposing additional experiments.",
+      "requires": "R1,R2,R4,R5,R6,R7"
+    }
+  ],
+  "conditional_missing_work_only_after_recovery": [
+    {
+      "gap": "Missing original input bytes or effect records",
+      "minimum_action": "Document unavailable originals/retention limits and narrow claims. A new run cannot recover old provenance.",
+      "new_experiment_needed": false
+    },
+    {
+      "gap": "Native checking/refinement evidence absent",
+      "minimum_action": "First obtain original receipts. If unavailable,scope a separately identified bounded development check of existing source/toolchain; obtain specific authorization before execution.",
+      "authorized_now": false
+    },
+    {
+      "gap": "No independently established legal/CVE labels",
+      "minimum_action": "First locate retained qualified reviews. If absent,propose independent adjudication of a named development example/control set with full source context; do not synthesize labels.",
+      "authorized_now": false
+    },
+    {
+      "gap": "No admitted formal-only ablation",
+      "minimum_action": "Leave causal claim unsupported. Only after exact protocol review,propose one separately frozen development-only matched comparison with explicit admission and resource bounds.",
+      "authorized_now": false
+    },
+    {
+      "gap": "C1-C6 incomplete accounting",
+      "minimum_action": "Determine from exact ledger which retained records are missing before designing any followup. No rejected-candidate evaluation on protected finals.",
+      "authorized_now": false
+    }
+  ],
+  "prohibited_in_current_task": [
+    "new training",
+    "paid generation",
+    "GPU campaign",
+    "blind-test access",
+    "toolchain installation",
+    "external publication",
+    "direct active-control-database open/attach",
+    "unrelated supervisor trial substituted for RQ3"
+  ]
+}

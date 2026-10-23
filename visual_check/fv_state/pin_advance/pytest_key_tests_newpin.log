@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.3.4, pluggy-1.6.0
+rootdir: /home/hatch/workspace/lift_coding/external/ipfs_datasets
+configfile: pytest.ini
+plugins: respx-0.22.0
+asyncio: mode=Mode.STRICT
+collected 33 items
+
+tests/unit/logic/ui_ux_ir/projection/test_solver.py .                    [  3%]
+tests/unit/logic/ui_ux_ir/test_mcp_idl_identity_contract.py ............ [ 39%]
+....................                                                     [100%]
+
+============================== 33 passed in 6.97s ==============================

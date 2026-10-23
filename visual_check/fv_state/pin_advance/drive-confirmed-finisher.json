@@ -1,0 +1,21 @@
+{
+  "started_at": "2026-10-15T00:14:30.873Z",
+  "console_errors": [
+    "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+  ],
+  "console": {
+    "status": "empty",
+    "transportMode": "degraded",
+    "healthStatus": "available",
+    "queue": 0,
+    "goals": 0,
+    "receipts": 0
+  },
+  "confirmed_console_path": {
+    "state": "unavailable",
+    "reason": "server_unavailable",
+    "message": "NestedRepositoryError: nested repository or submodule is forbidden at 'docs/fastmcp'",
+    "receipt": null
+  },
+  "finished_at": "2026-10-15T00:17:47.172Z"
+}

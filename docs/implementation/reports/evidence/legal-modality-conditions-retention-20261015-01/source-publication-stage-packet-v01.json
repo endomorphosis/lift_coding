@@ -1,0 +1,207 @@
+{
+  "added_paths": [
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-action-publish-invocation-v01.json",
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-action-resume-invocation-v01.json",
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-chunk01-reconciliation-actual-independent-review-v01.json",
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-publication-completion-independent-review-v01.json",
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-publish-TLS-fixed-byte-classification-v01.json",
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/modality-conditions-retention-result-independent-review-v01.json",
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/next-experiment-proposal-v01.json",
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/postfreeze-conditions-error-observation-v01.json",
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/public-result-summary-v01.json",
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/release-manifest-v01.json",
+    "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/root-result-joins-and-summary-independent-review-v02.json",
+    "docs/autoformalization/legal-modality-conditions-retention-20261015.md",
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_modality_conditions_retention.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_modality_conditions_retention_contracts.py"
+  ],
+  "all_incoming_gitlinks_and_symlinks_exact": true,
+  "all_other_incoming_entries_preserved": true,
+  "archive_completion": {
+    "bytes": 77425,
+    "path": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/hf-publication-completion-independent-review-v01.json",
+    "sha256": "1ade89eda52fe2424bdf1944497d8787b6cbcadad76a77f09302491bb81b2d40"
+  },
+  "archive_revision": "c9cce4586dd96518088662fb12831173e98e36cc",
+  "canonical_git_commands": 0,
+  "diff_check_passed": true,
+  "findings": [],
+  "head": "d0d44b3e0f7c2ba804b0d9115f7a1efd2ad926c3",
+  "incoming_entries": 32227,
+  "index_entries": 32241,
+  "model_source_and_test_unchanged_since_training": true,
+  "modified_incoming_paths": [
+    "docs/autoencoders/inference_and_qualification.md"
+  ],
+  "owned_clone": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/datasets",
+  "passed": true,
+  "public_prose_delta_review": {
+    "bytes": 10026,
+    "path": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/publication-prose-delta-independent-review-v01.json",
+    "sha256": "256d2213a8f0fb8a681f608187e226c420f5d9b6c2636475080b47e101ad8c11"
+  },
+  "qualification_guide_append_bytes": 711,
+  "qualification_guide_exact_prefix_preserved": true,
+  "qualification_guide_original_bytes": 52229,
+  "raw_weights_in_Git": false,
+  "removed_incoming_paths": [],
+  "schema": "modality-conditions-retention-source-publication-stage-packet/v1",
+  "staged": [
+    {
+      "bytes": 52940,
+      "entry": {
+        "kind": "blob",
+        "mode": "100644",
+        "oid": "e2fe6aedac3be86d47ae5753cea281a434dfa38a"
+      },
+      "path": "docs/autoencoders/inference_and_qualification.md",
+      "sha256": "d6589576a5fba43da8f3cb6ec4e302f850fa7eeaf410b8207ff897ade20fddff"
+    },
+    {
+      "bytes": 3016,
+      "entry": {
+        "kind": "blob",
+        "mode": "100644",
+        "oid": "b283ebf49a8cc5335c27a88835ddac55d4a5de74"
+      },
+      "path": "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-action-publish-invocation-v01.json",
+      "sha256": "971108260a32d46b83fb5b433643f40125c745bf567921b894bd47b17b13ba9f"
+    },
+    {
+      "bytes": 3644,
+      "entry": {
+        "kind": "blob",
+        "mode": "100644",
+        "oid": "68ca10c8c39eca6eec616796623971435c68747c"
+      },
+      "path": "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-action-resume-invocation-v01.json",
+      "sha256": "8162086428b7fe21807d1c85c21eee2796d9cf7d15b078016d79781ecce793f8"
+    },
+    {
+      "bytes": 9697,
+      "entry": {
+        "kind": "blob",
+        "mode": "100644",
+        "oid": "9f1c48b05fa988cdb2af8c7646224aa11c85cbdc"
+      },
+      "path": "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-chunk01-reconciliation-actual-independent-review-v01.json",
+      "sha256": "36ce657f7f8e71a0db63051fd1c872c7dff79dbd2344dd28f4cef1f860cf5b32"
+    },
+    {
+      "bytes": 77425,
+      "entry": {
+        "kind": "blob",
+        "mode": "100644",
+        "oid": "922bd1de5e48f75b522f7f41978e3ca36b6a6fc9"
+      },
+      "path": "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-publication-completion-independent-review-v01.json",
+      "sha256": "1ade89eda52fe2424bdf1944497d8787b6cbcadad76a77f09302491bb81b2d40"
+    },
+    {
+      "bytes": 932,
+      "entry": {
+        "kind": "blob",
+        "mode": "100644",
+        "oid": "e99c97e68fbd939caa47c7b3afb3bc4215e654c7"
+      },
+      "path": "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/hf-publish-TLS-fixed-byte-classification-v01.json",
+      "sha256": "c53aaf6fdbe2f096308d0edae948e3885a6fa978b8f3dce2d921287d5d436296"
+    },
+    {
+      "bytes": 181847,
+      "entry": {
+        "kind": "blob",
+        "mode": "100644",
+        "oid": "ba16904e3e10f47df7e2964775810e2df56ffe57"
+      },
+      "path": "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/modality-conditions-retention-result-independent-review-v01.json",
+      "sha256": "0c9d1105006f3d5a6cd92a219a49c8a421e6ecf799ac3c4f83e8aba5dce60d30"
+    },
+    {
+      "bytes": 5527,
+      "entry": {
+        "kind": "blob",
+        "mode": "100644",
+        "oid": "10e13f2e8fb00e2c958e892b0b551b226bdd2e21"
+      },
+      "path": "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/next-experiment-proposal-v01.json",
+      "sha256": "ea0742f491f0c4efacdaae2600434b3b0e2b159090837ed05e227d5707ccf6d8"
+    },
+    {
+      "bytes": 5466,
+      "entry": {
+        "kind": "blob",
+        "mode": "100644",
+        "oid": "53157d7acb3faf033d355bee2c3db423bf22d37e"
+      },
+      "path": "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/postfreeze-conditions-error-observation-v01.json",
+      "sha256": "ac5a216f23558754acf98195c38e64c951cacbb4da4e8052d11545e470a6700d"
+    },
+    {
+      "bytes": 15638,
+      "entry": {
+        "kind": "blob",
+        "mode": "100644",
+        "oid": "b700addfae61f3c020831a32d1f95333588dd43c"
+      },
+      "path": "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/public-result-summary-v01.json",
+      "sha256": "2cbb3f6ea668bdfa86680ac627840b7515d5a63620486b4d842d190547582490"
+    },
+    {
+      "bytes": 204043,
+      "entry": {
+        "kind": "blob",
+        "mode": "100644",
+        "oid": "4eb60a170cdd949a785a76ddf84f787a69685338"
+      },
+      "path": "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/release-manifest-v01.json",
+      "sha256": "37c1305837c11fef6dd95eba5fbef17344a8443e39bad92def1a4418e78993b2"
+    },
+    {
+      "bytes": 10103,
+      "entry": {
+        "kind": "blob",
+        "mode": "100644",
+        "oid": "c9ca2b3e912cb0ee65bf1bed82f5fd0260478c7d"
+      },
+      "path": "docs/autoformalization/evidence/legal-modality-conditions-retention-20261015/root-result-joins-and-summary-independent-review-v02.json",
+      "sha256": "ba42698f013216ebfb856c9e879a133c09664e877327e4a9691bf63931d886fe"
+    },
+    {
+      "bytes": 8532,
+      "entry": {
+        "kind": "blob",
+        "mode": "100644",
+        "oid": "c4ece8870e7e3b5d5fdbba7e727f1f5c82799902"
+      },
+      "path": "docs/autoformalization/legal-modality-conditions-retention-20261015.md",
+      "sha256": "44f7303d44b9240d9842b9e97d73813b4cb2db66610cca9c9c2e95328eba9c29"
+    },
+    {
+      "bytes": 83852,
+      "entry": {
+        "kind": "blob",
+        "mode": "100644",
+        "oid": "324c4dd3b02b0e1a31e1881e9cc8e317c3250e4d"
+      },
+      "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_modality_conditions_retention.py",
+      "sha256": "fb7449d4794ca9a279b2df2ea533b89d360344ff786edc0798395ab799db1823"
+    },
+    {
+      "bytes": 22122,
+      "entry": {
+        "kind": "blob",
+        "mode": "100644",
+        "oid": "daed5dbb1405b316b3686ffeec5f54df152cd006"
+      },
+      "path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_modality_conditions_retention_contracts.py",
+      "sha256": "3094d9fd2bd7f409a913d4096557e9a342c8c79214c5810f7a6980b33f204c58"
+    }
+  ],
+  "staged_tree": "033abb89c28f7d02e8ab0ece156a46acc31002c0",
+  "upstream_intake": {
+    "bytes": 46312,
+    "path": "/home/barberb/lift_coding/artifacts/legal-modality-conditions-retention-20261014-01/upstream-source-intake-independent-review-v01.json",
+    "sha256": "164e5eaf4df7c5b028a68dcdebc598a3eac32404c58222f9fc5b62e5d54e97c4"
+  }
+}

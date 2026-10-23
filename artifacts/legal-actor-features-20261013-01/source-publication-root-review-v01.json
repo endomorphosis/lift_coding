@@ -1,0 +1,314 @@
+{
+  "added_paths": 72,
+  "all_blobs_equal_reviewed_physical_files": true,
+  "all_changes_additions": true,
+  "base": "632c35b37a83be0514628b9e35f7e8fcca79a056",
+  "blobs": {
+    "docs/guides/legal_actor_features_training_20261013.md": {
+      "bytes": 7449,
+      "sha256": "060ba827bf5a7e5037628630357c0976f83aaa3653aae30812344149c7f360ec"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/actor-feature-contract-controls-v01.json": {
+      "bytes": 1026,
+      "sha256": "ef1fe1ac15e12027bd49f29f21c727f03fe1e5a8df6b817b5eec52a05a22f878"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/actor-feature-math-independent-controls-v01.json": {
+      "bytes": 1207,
+      "sha256": "19ca0e20beab07fd5b6e1075ac6ede6784c615379e2271da6fe9d1793420c552"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/actor-features-bootstrap-smoke-controls-v02.json": {
+      "bytes": 7838,
+      "sha256": "4d22116cd43abefef86e2779103b6562eb130030fc5b77053e32d7072afca1fe"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/actor-features-ce-plan-v02.json": {
+      "bytes": 46558,
+      "sha256": "f433954ab6e9f26510096f308e879cac1b027bf33aa94a5df7bf765045e555fc"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/actor-features-ce-runtime-review-v01.json": {
+      "bytes": 84458,
+      "sha256": "f428248fe7f7d003a93125c1978007a9216bcdab968c28055fb9384fe5a3b2f2"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/actor-features-ce-terminal-resource-audit-v02.json": {
+      "bytes": 35986,
+      "sha256": "5fe7cb02e3816f48784383d17d7df28d6e6297eb89e34097f7ba510af47d74cf"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/actor-features-ce-training-review-v02.json": {
+      "bytes": 23906,
+      "sha256": "a94800afd1fcdb1509ab171d0931f61828f85a89db4974bd416fbdad0a675c9a"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/actor-features-output-freeze-v01.json": {
+      "bytes": 21187,
+      "sha256": "56abf07cfc80b79ef7eb48a0f0579310ae8f555e15cc9c49d1f6fe23bd687e2a"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/actor-features-retained-claim-preflight-v01.json": {
+      "bytes": 20562,
+      "sha256": "13ccb471de2de244a3e8cc5f8d2cd1c617579c52ec499121355d4a9906a10850"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/actor-features-retained-claim-reconciliation-v01.json": {
+      "bytes": 13906,
+      "sha256": "ad085ca7094c6e646d7385d8a6a003003fccbd2615762953b79236e178e06490"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/actor-features-storage-diagnostic-v01.json": {
+      "bytes": 19988,
+      "sha256": "7e97f459a9187a401fa77213e67fd6be954080e86ce285dce95c20bf2378ffe8"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/actor-features-terminal-resource-inputs-v02.json": {
+      "bytes": 6423,
+      "sha256": "46720b0d0699950d4797944c52bd39d4d09036f6a0f8843c5f444f8e1e00133d"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/actor-features-terminal-resource-source-independent-review-v03.json": {
+      "bytes": 14099,
+      "sha256": "48b5c7fa3dad5b235edbac53df3464de61c19cf8aced4604f091302c20fe9f5f"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/analyzer-source-independent-review-v04.json": {
+      "bytes": 18111,
+      "sha256": "0e9037d2e40593e469e74561a541487d169ec02329abe3a6f2168e298abf5e48"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/attempt01-child-exit.json": {
+      "bytes": 76,
+      "sha256": "bbb5902ca8ad8fb95b029bf43a4c84e550850660cf478cd6669e175be794b803"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/attempt01-failure-primary.json": {
+      "bytes": 1367,
+      "sha256": "2c030d397b9e67c1700dd8de6692e1195ca71647b54474ffe242fe4cafa50a3c"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/attempt01-guardian-exit.json": {
+      "bytes": 1764,
+      "sha256": "cc2ad9205145b7c48a1f1e2adadc1c8acc187a7215c0164b0fedcb72ce985a0b"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/evaluation-contract-root-review-v01.json": {
+      "bytes": 1243,
+      "sha256": "8102a26b23e3d32060d5cb24d418e9b26169b65d133c56eb0a965cf9c37cbe7a"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/evaluation-contract-v01.json": {
+      "bytes": 22072,
+      "sha256": "19fa0d2f587301b98331b3ce41869b424ee1e1b87bda92d8b321d65034a66e47"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/hf-helper-commit-label-port-derivation-v03.json": {
+      "bytes": 1424,
+      "sha256": "aaa03bb18c4ad461f879867d8f2b10773fe1f4cfa0c415868a8950242cc2bba1"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/hf-helper-source-independent-review-v01.json": {
+      "bytes": 87783,
+      "sha256": "6fe30d71e38d14537d9c4504929cdca16bacf84ba33904b8347aa9289b0c58b0"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/hf-preparation-receipt-v01.json": {
+      "bytes": 74287,
+      "sha256": "d18aa15f8ce98852e657e98331ba1c8cbb5f92d07d9fe3c849292a1eb5eb2b33"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/hf-publication-actual-independent-review-v01.json": {
+      "bytes": 95022,
+      "sha256": "904640da11829ac5a9dd6ae7c1a770860c217653b3c82089020850a81276c536"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/hf-publication-independent-review-v01.json": {
+      "bytes": 56264,
+      "sha256": "5e64ec3bd2c551b63bfb1a2a3b49032d34ef36150a6599bb46705f0964ecaf90"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/hf-publication-verification-v01.json": {
+      "bytes": 76994,
+      "sha256": "802d37766addc58979f28efd704055c5f19340fe3ee1f214f1d1a93d457c4c77"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/hf-release-spec-v01.json": {
+      "bytes": 78636,
+      "sha256": "b708bc3e1496907b5c49c43327e421bf1eb49831d14206356b73a62638a89716"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/history-preintegration-independent-review-v01.json": {
+      "bytes": 30488,
+      "sha256": "bc4088a3c7c33f45d701e5732d95b6e1afd08fc5a40af2377d864cde8fbfe145"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/main-effort-integration-independent-review-v01.json": {
+      "bytes": 15157,
+      "sha256": "86f1e42f97d8cd02e8c2e0aa54c0846b9a7c355e32d1513227dbf96b619c4f0d"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/next-experiment-gaps-v01.json": {
+      "bytes": 3242,
+      "sha256": "246a808f88a45137f5717c75f3b17cc3f64eaa59a741777daaea8ad3f5031b52"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/phase-intake-v01.json": {
+      "bytes": 2798,
+      "sha256": "dbadd15fc572a99a2dd781d4e63993c473bed83c687419f3d159c09824297575"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/public-result-summary-v01.json": {
+      "bytes": 204376,
+      "sha256": "c7349c862816d9f6bbc171ad685a17a53eb19f83547cd133b2ba16dcae0c4151"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/recipe/actor_feature_math_independent_controls_v01.py": {
+      "bytes": 5622,
+      "sha256": "b1fac1c451955222128db585221d1292fca8568e103f41a2e4f1b377f0a5f80c"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/recipe/actor_features_bootstrap_smoke_controls_v02.py": {
+      "bytes": 7068,
+      "sha256": "be673d96eacf5043173233a09e7b53030e7fa0b3561cedaef6ffa772ddaff8a9"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/recipe/adopt_shared_scheduler_actor_ranking_v02.py": {
+      "bytes": 15101,
+      "sha256": "526aa9fa55d955eb92dba37053af2dfdf01f7dd8335cd309cb36770988bab0b7"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/recipe/analyze_actor_features_v04.py": {
+      "bytes": 89265,
+      "sha256": "717e423cdc95b71cbc632f9026793a633553228e829afe6f57381979f9d4baa0"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/recipe/archive_actor_features_hf_v03.py": {
+      "bytes": 19160,
+      "sha256": "572fca3f6445ab2697ab32055f0504163ed7a2c1518dca25b76d36d9d6a0c5a9"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/recipe/audit_actor_features_terminal_resources_v03.py": {
+      "bytes": 48261,
+      "sha256": "3ac3a0b15434562fbb50e35f8883daad2bc674342d259269643bc9ee2cc0d22f"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/recipe/build_actor_features_release_spec_v03.py": {
+      "bytes": 12765,
+      "sha256": "c16cf89b24a2caa30cecb9abee95b1b650af385170718a22bc27319cc03b30dd"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/recipe/diagnose_actor_features_storage_v01.py": {
+      "bytes": 18475,
+      "sha256": "110873039eeeb5e61d02ff10ab959aa74a5af01f4e542871f0816588f753d81b"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/recipe/freeze_actor_features_outputs_v03.py": {
+      "bytes": 18664,
+      "sha256": "1230a59f2a36424adfd79d635f62e6186281335fdb1e87c373ebc218fefd8588"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/recipe/owned_lease_watchdog_actor_ranking_v02.py": {
+      "bytes": 24435,
+      "sha256": "6355884b6737c5b0e5cd1a128ad70a09fcf304f27bbf32492a15d8dbe070b032"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/recipe/prepare_actor_features_v02.py": {
+      "bytes": 15738,
+      "sha256": "f5110cb2c98c6a8b68cf9c21a8055e6ca8f1aa9ae32e355609111882c3c1fd3d"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/recipe/reconcile_actor_features_retained_claim_v01.py": {
+      "bytes": 16708,
+      "sha256": "6debcf28e6e15f5c95623e1e1c6cead5e73c8069d70222c6e9756355cc130049"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/recipe/review_actor_features_resource_baseline_v02.py": {
+      "bytes": 21828,
+      "sha256": "da0d04e5c12d2da47b38c28bb034681a0ab585ddbb6db9276b0d3973c67fab2a"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/recipe/review_actor_features_result_recount_v02.py": {
+      "bytes": 49955,
+      "sha256": "2af389d81a78c45f8dc28b0da5ff44c172d3fc2c18949bf04c2dccddeae05e3c"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/recipe/review_actor_features_retained_claim_preflight_v02.py": {
+      "bytes": 20792,
+      "sha256": "185bce2ddb2ec179368c22ca6bb89bf4b1561bb44cf9d5986c34d5afef0b13fd"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/recipe/run_actor_features_v02.py": {
+      "bytes": 37730,
+      "sha256": "23090332c18ce1b451a116381e072677aa1fef847518e0c08d1b67a60c52cb44"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/recipe/run_scope_guardian_v02.py": {
+      "bytes": 38449,
+      "sha256": "b4811b7b24f584d5cb0f7c921451a234a3e0d84b2d7507e015426e258134c2db"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/recipe/sample_actor_features_private_resources_v02.py": {
+      "bytes": 6661,
+      "sha256": "1b2710c6c8e195f4bcc3f95c6e6369a4dc2f4cc9c18665ce6b54267f8dc81123"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/release-manifest-v01.json": {
+      "bytes": 77982,
+      "sha256": "67b8a4c28f2c3746283cbeac066c4687afe9455c54d679a6185db2b0bb7c55c0"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/resource-baseline-inputs-v02.json": {
+      "bytes": 2353,
+      "sha256": "d37734d3e0ba521cd06bf380fd5f9c96ac60c5e8037f74dee4a9fdd39e2e708e"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/resource-baseline-v02.json": {
+      "bytes": 85505,
+      "sha256": "1f32831b3dc3850bc890be37aeeb6429be3389b9142bfdcc7e4a3cd88a2163c3"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/resource-bridge-source-independent-review-v02.json": {
+      "bytes": 1961,
+      "sha256": "0a9f5e2da7b92ea585e4eca715cda268a2cf399c75e18654f735b766d9f9fe4b"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/resource-observer-source-independent-review-v02.json": {
+      "bytes": 10258,
+      "sha256": "af92cffe666b63f7efa6ca9f73548a6c2f71778beea7f33c3284f50f416d918f"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/result-independent-review-v01.json": {
+      "bytes": 122326,
+      "sha256": "c0df4c577fe2563ec7a47f6d4d146c63d0f9f546db197c8a4e563ef2689fc306"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/result-recount-inputs-v02.json": {
+      "bytes": 584,
+      "sha256": "db94b23fb61efdf7277154bd9a6082cd5775d0ebd606be4f36eacfdc8c775645"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/result-recount-source-independent-review-v02.json": {
+      "bytes": 8398,
+      "sha256": "89e71bdf3138fde6f649fba6542c58a6f9dc07395037ed249aa15a9731e4f013"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/retained-claim-preflight-source-independent-review-v02.json": {
+      "bytes": 8054,
+      "sha256": "204ca77e565c6d5de44be09de6cc1f7a22cd5b61c9e8e62dcb0979ac2280a4b4"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/retained-claim-reconciliation-execution-approval-v01.json": {
+      "bytes": 2057,
+      "sha256": "e3995b4728cb8405dae8e84b74e72abe051f2e17745f193e9c85a870f1e01b37"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/retained-claim-reconciliation-source-independent-review-v01.json": {
+      "bytes": 9116,
+      "sha256": "05f306c75176e8d30d7ae90fd6b553524ad1a5c63606a0e228e42195f770a598"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/retry-producer-port-derivation-v02.json": {
+      "bytes": 22072,
+      "sha256": "863e7d8bdda52c1b129960bd912c25c62626eaacb11d00160549132aa53df52c"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/runner-preparer-source-independent-review-v02.json": {
+      "bytes": 22240,
+      "sha256": "e79d7314be3be343b57c7f896a488ee8ba64e3321d4c4c6a7b85ad9b08ac1271"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/runtime-freeze-source-independent-review-v03.json": {
+      "bytes": 21160,
+      "sha256": "17e9b5d5eccc20faf1357c036476b48f34973ec041850c372a24c5d387e4c41f"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/sampler-source-independent-review-v02.json": {
+      "bytes": 3036,
+      "sha256": "d1c8580d2d648f70551780e0126cecdfe421e1f07fd1dd6da04c4bf875006859"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/storage-diagnostic-source-independent-review-v01.json": {
+      "bytes": 6799,
+      "sha256": "0f714bd686151ce375b9245278efab0afe4b39dff0ff9f9efc6e0ef519c1d83f"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/terminal-compatibility-port-derivation-v03.json": {
+      "bytes": 6826,
+      "sha256": "d61a53a0fde2632939be574705e59cfbd1d21e6111e8173dd623358e1be9214b"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/trainer-source-independent-review-v01.json": {
+      "bytes": 36118,
+      "sha256": "84bf3fe7373f026828a4cafde64f2346097417a23e41b26c91bdb973cb00dce4"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/training-design-v01.json": {
+      "bytes": 14398,
+      "sha256": "e17fabcfd38b6c34469ae67f581da009be7701a63555bbb04a33b314f7cd5656"
+    },
+    "docs/implementation/reports/evidence/legal-actor-features-20261013-01/training-design-v02.json": {
+      "bytes": 17749,
+      "sha256": "cd68c23949fdeb5f5cedb759736f4d682e9530506a6d74960156023f40740f1e"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_actor_features.py": {
+      "bytes": 60367,
+      "sha256": "498093553607bdeac57e42a6dfaf95275efc081ff46c0a7b428b39b99b3c54a3"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_actor_features_contracts.py": {
+      "bytes": 39343,
+      "sha256": "2fce1a325218550bae160a58f9bba4fdd3c1b351d7bf2da320004905bb668ce0"
+    }
+  },
+  "canonical_raw4_unchanged": true,
+  "checkpoint_weight_blobs_in_git": false,
+  "default_promotion": false,
+  "findings": [],
+  "head": "8971464f9fd7debab644335d5d6dab8d2e780311",
+  "hosted_CI_pass_claimed": false,
+  "large_full_analysis_and_recount_in_Hub_only": true,
+  "observed_at_utc": "2026-10-14T01:26:57.393293+00:00",
+  "passed": true,
+  "private_resource_bodies_excluded": true,
+  "schema": "actor-features-source-publication-root-review/v1",
+  "trained_source_sha256": "498093553607bdeac57e42a6dfaf95275efc081ff46c0a7b428b39b99b3c54a3",
+  "tree": "50fd1ba7ffc1ed321c003938f07745df636507fb",
+  "validation": [
+    "19 detached contracts and11 independent scalar controls previously passed on exactmodel/tests",
+    "Guarded32-update numerical run,632-rowinitial/final gates,62frozen outputs,independent43/39/9 primarymetric and32featuretrace recount passed",
+    "174 Hub additions and downloaded original byte hashes independentlyverified;4931 prioridentities preserved"
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "started_at": "2026-10-14T05:02:49.662Z",
+  "console_errors": [
+    "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+  ],
+  "console": {
+    "status": "ready",
+    "transportMode": "degraded",
+    "errors": [
+      {
+        "capability_id": "supervisor.taskboard.links.read",
+        "reason": "capability_unavailable",
+        "message": "The requested Supervisor gateway capability is not mapped."
+      },
+      {
+        "capability_id": "supervisor.logs.read",
+        "reason": "capability_unavailable",
+        "message": "The requested Supervisor gateway capability is not mapped."
+      },
+      {
+        "capability_id": "supervisor.run-history.search",
+        "reason": "capability_unavailable",
+        "message": "The requested Supervisor gateway capability is not mapped."
+      },
+      {
+        "capability_id": "supervisor.policy.assist",
+        "reason": "capability_unavailable",
+        "message": "The requested Supervisor gateway capability is not mapped."
+      },
+      {
+        "capability_id": "supervisor.semantic-goal.assist",
+        "reason": "capability_unavailable",
+        "message": "The requested Supervisor gateway capability is not mapped."
+      }
+    ],
+    "health": {
+      "status": "available",
+      "active_goal_count": 0,
+      "queued_task_count": 0,
+      "running_task_count": 0,
+      "server_time": "2026-10-14T05:02:55.911Z",
+      "backends": [
+        {
+          "owner": "ipfs_kit_py",
+          "status": "available",
+          "transport": "mcp++/libp2p",
+          "receipt": null,
+          "tool_count": 124,
+          "diagnostic_errors": {}
+        },
+        {
+          "owner": "ipfs_datasets_py",
+          "status": "available",
+          "transport": "mcp++/libp2p",
+          "receipt": null,
+          "tool_count": 319,
+          "diagnostic_errors": {}
+        },
+        {
+          "owner": "ipfs_accelerate_py",
+          "status": "available",
+          "transport": "mcp++/libp2p",
+          "receipt": null,
+          "tool_count": 18,
+          "diagnostic_errors": {}
+        }
+      ]
+    },
+    "queueLength": 0,
+    "goalsLength": 0,
+    "receiptsLength": 0,
+    "firstQueueTitle": null,
+    "gatewayInstalled": true
+  },
+  "finished_at": "2026-10-14T05:03:01.468Z"
+}

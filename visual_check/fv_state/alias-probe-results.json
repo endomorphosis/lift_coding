@@ -1,0 +1,43 @@
+{
+  "started_at": "2026-10-14T04:41:56.314Z",
+  "aliases": [
+    {
+      "alias": "code-editor",
+      "canonical": "vibecode",
+      "windowId": "window-1",
+      "opened": true,
+      "closed": true
+    },
+    {
+      "alias": "strudel-grandma",
+      "canonical": "strudel",
+      "windowId": "window-2",
+      "opened": true,
+      "closed": true
+    },
+    {
+      "alias": "p2p-chat-offline",
+      "canonical": "p2p-chat",
+      "windowId": "window-3",
+      "opened": true,
+      "closed": true
+    }
+  ],
+  "canonical": {
+    "id": "terminal",
+    "windowId": "window-4",
+    "opened": true,
+    "closed": true
+  },
+  "unknown": {
+    "id": "no-such-app-xyz",
+    "windowsBefore": 0,
+    "windowsAfter": 0,
+    "noWindowOpened": true
+  },
+  "console_errors": [
+    "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+    "App no-such-app-xyz not found"
+  ],
+  "finished_at": "2026-10-14T04:42:09.884Z"
+}

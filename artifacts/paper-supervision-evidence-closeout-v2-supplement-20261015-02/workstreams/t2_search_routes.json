@@ -1,0 +1,202 @@
+{
+  "absence_scope": "Only this bounded trial artifact tree; no claim that original state never existed or no other archive survives.",
+  "directories_seen": 10,
+  "files": [
+    {
+      "bytes": 6785,
+      "relative_path": "result.json"
+    },
+    {
+      "bytes": 1461,
+      "relative_path": "lock.json"
+    },
+    {
+      "bytes": 131,
+      "relative_path": "trial.log"
+    },
+    {
+      "bytes": 1043,
+      "relative_path": "config.json"
+    },
+    {
+      "bytes": 3873,
+      "relative_path": "agent/instruction.md"
+    },
+    {
+      "bytes": 719333,
+      "relative_path": "agent/admission.json"
+    },
+    {
+      "bytes": 834411,
+      "relative_path": "agent/supervisor-result.json"
+    },
+    {
+      "bytes": 0,
+      "relative_path": "agent/supervisor.stderr"
+    },
+    {
+      "bytes": 3464,
+      "relative_path": "agent/supervisor.stdout"
+    },
+    {
+      "bytes": 2824,
+      "relative_path": "agent/worker-boundary/deployment.json"
+    },
+    {
+      "bytes": 1527,
+      "relative_path": "agent/worker-boundary/qualification/qualification.json"
+    },
+    {
+      "bytes": 1307,
+      "relative_path": "agent/worker-boundary/qualification/probe.log"
+    },
+    {
+      "bytes": 0,
+      "relative_path": "agent/worker-boundary/installation/protect-sudoers.log"
+    },
+    {
+      "bytes": 44,
+      "relative_path": "agent/worker-boundary/installation/sudoers-check.log"
+    },
+    {
+      "bytes": 0,
+      "relative_path": "agent/worker-boundary/installation/protect-validation.log"
+    },
+    {
+      "bytes": 0,
+      "relative_path": "agent/worker-boundary/installation/canonical-git-protect.log"
+    },
+    {
+      "bytes": 409,
+      "relative_path": "agent/worker-boundary/installation/worker-account.log"
+    },
+    {
+      "bytes": 1188,
+      "relative_path": "agent/worker-boundary/installation/installation.json"
+    },
+    {
+      "bytes": 82,
+      "relative_path": "agent/worker-boundary/installation/namespaces.log"
+    },
+    {
+      "bytes": 0,
+      "relative_path": "agent/worker-boundary/installation/protect-boundary.log"
+    },
+    {
+      "bytes": 793,
+      "relative_path": "agent/worker-boundary/installation/native-codex-binary.log"
+    },
+    {
+      "bytes": 0,
+      "relative_path": "agent/worker-boundary/installation/protect-owner.log"
+    },
+    {
+      "bytes": 0,
+      "relative_path": "agent/worker-boundary/installation/protect-worker.log"
+    },
+    {
+      "bytes": 0,
+      "relative_path": "agent/deployment/archive-extract.log"
+    },
+    {
+      "bytes": 28668,
+      "relative_path": "agent/deployment/original-inputs.log"
+    },
+    {
+      "bytes": 18,
+      "relative_path": "agent/deployment/codex-version.log"
+    },
+    {
+      "bytes": 6072,
+      "relative_path": "agent/deployment/system-install.log"
+    },
+    {
+      "bytes": 0,
+      "relative_path": "agent/deployment/model-revision-layout.log"
+    },
+    {
+      "bytes": 115,
+      "relative_path": "agent/deployment/python-create.log"
+    },
+    {
+      "bytes": 65,
+      "relative_path": "agent/deployment/native-imports.log"
+    },
+    {
+      "bytes": 1351,
+      "relative_path": "agent/deployment/empty-native-start.log"
+    },
+    {
+      "bytes": 0,
+      "relative_path": "agent/deployment/account-create.log"
+    },
+    {
+      "bytes": 3041,
+      "relative_path": "agent/deployment/torch-cpu-install.log"
+    },
+    {
+      "bytes": 0,
+      "relative_path": "agent/deployment/root-create.log"
+    },
+    {
+      "bytes": 793,
+      "relative_path": "agent/deployment/codex-native-expose.log"
+    },
+    {
+      "bytes": 1193,
+      "relative_path": "agent/deployment/python-runtime-install.log"
+    },
+    {
+      "bytes": 28668,
+      "relative_path": "agent/deployment/retained-inputs.log"
+    },
+    {
+      "bytes": 18,
+      "relative_path": "agent/deployment/native-extensions.log"
+    },
+    {
+      "bytes": 12428,
+      "relative_path": "agent/deployment/python-install.log"
+    },
+    {
+      "bytes": 73020,
+      "relative_path": "agent/deployment/deployment.json"
+    },
+    {
+      "bytes": 0,
+      "relative_path": "agent/deployment/source-generation.log"
+    },
+    {
+      "bytes": 2,
+      "relative_path": "verifier/reward.txt"
+    },
+    {
+      "bytes": 2489,
+      "relative_path": "verifier/ctrf.json"
+    },
+    {
+      "bytes": 28551,
+      "relative_path": "verifier/test-stdout.txt"
+    },
+    {
+      "bytes": 136553,
+      "relative_path": "verifier/original-repo-ctrf.json"
+    },
+    {
+      "bytes": 178,
+      "relative_path": "artifacts/manifest.json"
+    }
+  ],
+  "files_seen": 46,
+  "max_depth": 4,
+  "max_files": 200,
+  "owner_journal_or_axiom_stdout_export_identified": false,
+  "root": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/jobs/supervisor-full-fix-code-vulnerability/fix-code-vulnerability__z4cVfSR",
+  "routes": [
+    "Exact indexed trial artifacts/manifest.json; exported artifact directory reports empty.",
+    "Exact agent/admission.json container-local lifecycle/profile paths.",
+    "Exact post-publication projection and sealed solver/kernel store references.",
+    "Exact retained agent/supervisor.stdout checked for expected axiom lines only."
+  ],
+  "truncated": false
+}

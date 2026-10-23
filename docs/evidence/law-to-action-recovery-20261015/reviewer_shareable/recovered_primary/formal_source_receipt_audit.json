@@ -1,0 +1,815 @@
+{
+  "actions": {
+    "controller_invoked": false,
+    "database_opened": false,
+    "dependencies_installed": false,
+    "experiments_rerun": false,
+    "original_sources_modified": false,
+    "provider_launched": false,
+    "solver_or_model_checker_executed": false,
+    "task_submitted": false,
+    "tests_executed": false,
+    "toolchains_executed": false
+  },
+  "created_at_utc": "2026-10-15T09:18:59.866957+00:00",
+  "distribution": "reviewer_shareable",
+  "implementation_mapping": {
+    "archived_source_descriptors": [
+      {
+        "archive_member": "recovery_history/candidate/papers/completion/law_to_action/benchmark/fixed_action_operator/cell.py",
+        "bytes": 9229,
+        "id": "cell",
+        "line_count": 159,
+        "line_refs": [
+          {
+            "end": 65,
+            "excerpt_sha256": "790602f0d42388cfe3db0c43bc7e48a8cc66a5e9770079886b4023ef2e3ddf7d",
+            "start": 45
+          },
+          {
+            "end": 105,
+            "excerpt_sha256": "c4d1e4bb94cbcffd782277fc67ac789b3b5424a5e2f3dd93115b4a6011ee10ee",
+            "start": 79
+          },
+          {
+            "end": 145,
+            "excerpt_sha256": "42ea3c7fe6155937219fb8afb734bd67be35225ec79cfe6974f604a3d003282d",
+            "start": 108
+          },
+          {
+            "end": 155,
+            "excerpt_sha256": "fccd6d74db454afbf22c7091b07d9763d18389157fd8e56b6b3ca98ec7332e2a",
+            "start": 146
+          }
+        ],
+        "original_bytes_available_in_this_member": true,
+        "original_sha256": "984c24297f0802c599fb91677aee39e06af3a1e680f1a09a5bcc14b53f9c2b3d",
+        "portable_bytes_verified": true,
+        "portable_sha256": "984c24297f0802c599fb91677aee39e06af3a1e680f1a09a5bcc14b53f9c2b3d",
+        "sha256": "984c24297f0802c599fb91677aee39e06af3a1e680f1a09a5bcc14b53f9c2b3d",
+        "transformation": "byte-identical"
+      },
+      {
+        "archive_member": "recovery_history/candidate/papers/completion/law_to_action/benchmark/handlers/effects.py",
+        "bytes": 12768,
+        "id": "effects",
+        "line_count": 257,
+        "line_refs": [
+          {
+            "end": 5,
+            "excerpt_sha256": "5ee1a75dea065a739bf2d2aaba7e5adaa348a8d43cea77b9c43c907a90bda135",
+            "start": 1
+          },
+          {
+            "end": 19,
+            "excerpt_sha256": "82f0559ffd6f7295636837082632b53d2898f72e8ca6ecdcec4b9b43bf8a262b",
+            "start": 18
+          },
+          {
+            "end": 93,
+            "excerpt_sha256": "34cf062bcf2055bdfca9ca1668b5a25bd21b4bda8cd4d998640396047e8e3bd7",
+            "start": 35
+          },
+          {
+            "end": 104,
+            "excerpt_sha256": "153d9ea93070f881fec738bf8bd0e209e8e7dc49a99cbb628298c29c74cac67e",
+            "start": 96
+          },
+          {
+            "end": 174,
+            "excerpt_sha256": "6ccd10c41fabe54d187bcdedee766bd22baffd52969fd4fd11e154bd5daf1ae7",
+            "start": 119
+          },
+          {
+            "end": 257,
+            "excerpt_sha256": "c4a336221e9227080e407f61994aff2913ab062bc7407bd3a170bbafb4ace90a",
+            "start": 194
+          }
+        ],
+        "original_bytes_available_in_this_member": true,
+        "original_sha256": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b",
+        "portable_bytes_verified": true,
+        "portable_sha256": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b",
+        "sha256": "b05f79e19cabf3c536afffbed71c82bc3c84b7880297bb5004a48e948a192a3b",
+        "transformation": "byte-identical"
+      },
+      {
+        "archive_member": "recovery_history/candidate/papers/completion/law_to_action/benchmark/baselines.py",
+        "bytes": 57307,
+        "id": "baseline",
+        "line_count": 1346,
+        "line_refs": [
+          {
+            "end": 63,
+            "excerpt_sha256": "278d22e9f43b8a8137a15d873c1001056a8ac0bb8f19367e44502f4c5357d55f",
+            "start": 51
+          },
+          {
+            "end": 201,
+            "excerpt_sha256": "3150b7edb454e4e95b3c86c6a8b49bca7a8932aa60ff22800b284ff624cd2d28",
+            "start": 183
+          },
+          {
+            "end": 310,
+            "excerpt_sha256": "9a9b4a1f118fec25694d591069be3479cbe1d6a8a025395d39af9db7079288e3",
+            "start": 294
+          },
+          {
+            "end": 362,
+            "excerpt_sha256": "ef277d4fc99c80ade218dea02a98daa4d83cfefefa77a6aa7015367f7eae016a",
+            "start": 314
+          },
+          {
+            "end": 480,
+            "excerpt_sha256": "f29b985fa45b5db791143e32e0d4db009d9fe19a81af78340e1120d1c2d525d6",
+            "start": 365
+          },
+          {
+            "end": 670,
+            "excerpt_sha256": "593d5d74c5c8eee4f3e368f622917db28e6d69bc7ab147d15c9b702d29dc194e",
+            "start": 578
+          },
+          {
+            "end": 904,
+            "excerpt_sha256": "23ec70ab596195732d59e8885ad004aecf151140b49591e4d85e3869146be029",
+            "start": 896
+          }
+        ],
+        "original_bytes_available_in_this_member": true,
+        "original_sha256": "d7c5cf6a4af336e3fab63d1ff326fe2a9749cf04467d579dc8b5867c7af00f74",
+        "portable_bytes_verified": true,
+        "portable_sha256": "d7c5cf6a4af336e3fab63d1ff326fe2a9749cf04467d579dc8b5867c7af00f74",
+        "sha256": "d7c5cf6a4af336e3fab63d1ff326fe2a9749cf04467d579dc8b5867c7af00f74",
+        "transformation": "byte-identical"
+      },
+      {
+        "archive_member": "recovery_history/candidate/papers/completion/law_to_action/receipts/snapshots/LA-015/run_fixed_actions.py",
+        "bytes": 61888,
+        "id": "harness",
+        "line_count": 1564,
+        "line_refs": [
+          {
+            "end": 324,
+            "excerpt_sha256": "a5d8ac06f570b9932b2ac9ae252c96694505689c9ae5004d4aeb08a1323cce43",
+            "start": 266
+          },
+          {
+            "end": 519,
+            "excerpt_sha256": "20339ab4fcff17b86b3175dda8f56895bec4b6d4b4bc3b336ddd6f472a8c9d6b",
+            "start": 444
+          },
+          {
+            "end": 645,
+            "excerpt_sha256": "b96c22d8a156014d3d97b9a9177e3c1e7940a1221b181e4f230c6835130878ae",
+            "start": 553
+          },
+          {
+            "end": 767,
+            "excerpt_sha256": "04d9406f2edfc96224bad055cc9f6c0f1362cd152d27aea8e59fe19938aa1948",
+            "start": 681
+          },
+          {
+            "end": 871,
+            "excerpt_sha256": "a67c0315945e854e0bcaddce374b5d240fafc9d67967a71237c11114695f7153",
+            "start": 818
+          },
+          {
+            "end": 1016,
+            "excerpt_sha256": "068612745b9f9761485d7d2be5b65ec6d3cdaf3b181eb314c455325a37741373",
+            "start": 875
+          },
+          {
+            "end": 1066,
+            "excerpt_sha256": "b9ce5975c954454a4532abf3752f83b90e7fd20b9faa90e221b23e84718342ad",
+            "start": 1019
+          }
+        ],
+        "original_bytes_available_in_this_member": true,
+        "original_sha256": "7759e746397ac2ef4bb0f75c499088d4689a50e67204fa1f803c748272937dd5",
+        "portable_bytes_verified": true,
+        "portable_sha256": "7759e746397ac2ef4bb0f75c499088d4689a50e67204fa1f803c748272937dd5",
+        "sha256": "7759e746397ac2ef4bb0f75c499088d4689a50e67204fa1f803c748272937dd5",
+        "transformation": "byte-identical"
+      },
+      {
+        "archive_member": "recovery_history/candidate/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/proof/admissibility_enforcement.py",
+        "bytes": 51466,
+        "id": "enforcer",
+        "line_count": 1340,
+        "line_refs": [
+          {
+            "end": 26,
+            "excerpt_sha256": "2026f8a52e6b7db27dc2deee51a50b73074eaf1f5c39e06e6d7b35b0ef89cd2a",
+            "start": 1
+          },
+          {
+            "end": 880,
+            "excerpt_sha256": "ea4c138340ebcba77e6489d7086e9fbfd1c36ae24400f7233be6a6a1cbeb7ddc",
+            "start": 735
+          },
+          {
+            "end": 954,
+            "excerpt_sha256": "e59779f3c02bd72f669db8e7d50ee7086625a8c8c1128ab664e74f644c4a2131",
+            "start": 891
+          },
+          {
+            "end": 993,
+            "excerpt_sha256": "fb828ff8f697f87e9373b21d9532ed625c257a223dcb59682259487ed5b59736",
+            "start": 956
+          },
+          {
+            "end": 1015,
+            "excerpt_sha256": "b4f873e7762fe74eaad73a8aad110250c468098d00c48940e5fb48bd947d9cb5",
+            "start": 997
+          },
+          {
+            "end": 1104,
+            "excerpt_sha256": "949cb1b6538a9303ed5b645fb0b58b22bd40e743eca6e621feb94d6e88d8bea2",
+            "start": 1047
+          },
+          {
+            "end": 1246,
+            "excerpt_sha256": "87c40948a54fbdb20c9ceb9d58e44f28dbf7c4f18174a7219a7c79ce15d21176",
+            "start": 1153
+          }
+        ],
+        "original_bytes_available_in_this_member": true,
+        "original_sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0",
+        "portable_bytes_verified": true,
+        "portable_sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0",
+        "sha256": "8e187ff81f465617f130dce71c80866d87b3903fb153a443d671c8991c01c1c0",
+        "transformation": "byte-identical"
+      },
+      {
+        "archive_member": "recovery_history/candidate/papers/completion/law_to_action/benchmark/durable_consumption.py",
+        "bytes": 71273,
+        "id": "consumption",
+        "line_count": 1785,
+        "line_refs": [
+          {
+            "end": 150,
+            "excerpt_sha256": "45684a521192e5becf475098e711f337762f532f2b838060713305e6ef3a9433",
+            "start": 134
+          },
+          {
+            "end": 241,
+            "excerpt_sha256": "19829985b6ef580be3ba7bfd3a0761455f90b142020c0712e2bfeedc6ac3b78c",
+            "start": 179
+          },
+          {
+            "end": 323,
+            "excerpt_sha256": "e5de9d130ebb32b9a125b722e7cc42f0821443a083b7bfa0fa6492a67aed7f18",
+            "start": 243
+          }
+        ],
+        "original_bytes_available_in_this_member": true,
+        "original_sha256": "3c030e8347e0111979982c6fa5bc6734c597b391e48104e66d928e2b2370f5fe",
+        "portable_bytes_verified": true,
+        "portable_sha256": "3c030e8347e0111979982c6fa5bc6734c597b391e48104e66d928e2b2370f5fe",
+        "sha256": "3c030e8347e0111979982c6fa5bc6734c597b391e48104e66d928e2b2370f5fe",
+        "transformation": "byte-identical"
+      }
+    ],
+    "completed_implementation_from_specs_or_tests_claimed": false,
+    "implementation_proof_claimed": false,
+    "mapping_rows": [
+      {
+        "formal_concept": "Evidence origin/integrity/authority/proof/freshness distinctions",
+        "formal_refs": [
+          "lean_basic:125-136",
+          "lean_basic:398-498"
+        ],
+        "implemented_route": "The archived enforcer checks receipt/capability context, action/effect/delegation/environment/audience/nonce/roots/time and exact allow; these are host checks, not calls into Lean.",
+        "refinement_receipt": null,
+        "runtime_refs": [
+          "enforcer:735-880",
+          "enforcer:1153-1246"
+        ]
+      },
+      {
+        "formal_concept": "Reservation and no duplicate effect",
+        "formal_refs": [
+          "tla_model:255-304",
+          "tla_model:596-597"
+        ],
+        "implemented_route": "Archived enforcement calls durable try_consume before delegate; the retained durable store uses revision/idempotency fencing. Actual bounded handler performs a fresh O_EXCL JSON export. This does not establish crash-safe exactly-once external effects for arbitrary handlers.",
+        "refinement_receipt": null,
+        "runtime_refs": [
+          "enforcer:1153-1246",
+          "consumption:179-323",
+          "effects:53-93"
+        ]
+      },
+      {
+        "formal_concept": "Observation before reported success",
+        "formal_refs": [
+          "lean_basic:427-434",
+          "tla_model:306-340",
+          "tla_model:604-611"
+        ],
+        "implemented_route": "Archived EffectObserver independently inspects filesystem within the same worker, but compact records retain worker-reported effect/journal counts rather than raw append-only journal evidence or all observer-integrity fields.",
+        "independent_retained_journal_artifact": null,
+        "refinement_receipt": null,
+        "runtime_refs": [
+          "effects:96-257",
+          "harness:709-767",
+          "harness:1000-1002"
+        ]
+      },
+      {
+        "formal_concept": "Formal obligation before dispatch",
+        "formal_refs": [],
+        "implemented_route": "The retained LA-029 path uses SymPy DPLL and an exhaustive finite truth-table checker on a small host-constructed Boolean CNF. Forced grant/root literals and host-computed gates are not a proof of Lean algebra, the transactional model, the handler implementation or legal interpretation.",
+        "native_checker_receipt": null,
+        "runtime_refs": [
+          "baseline:387-480",
+          "harness:467-491",
+          "harness:875-1016"
+        ]
+      }
+    ],
+    "observed_relationship": "Conceptual correspondence only. The selected archived LA-029 handler path does not import or invoke FormalClaimAlgebra or TransactionalEffects, and no source-to-model refinement/translation proof or complete runtime-to-model trace join was recovered.",
+    "previous_runtime_audit": {
+      "reviewer_shareable_artifact": "runtime_formal_audit.json",
+      "sha256": "85c98990e2046cf1ee63b2303a6f74d6d16314d31217865a039350fec9bf0bea"
+    },
+    "universal_safety_claimed": false
+  },
+  "lean": {
+    "command_status": "Recovered from test source; not executed in this audit and not independently established as historical completed commands.",
+    "default_lake_target": "FormalClaimAlgebra.Basic only; Promotion is not a lakefile root.",
+    "handler_implementation_refinement_proof": null,
+    "historical_source_binding": [
+      {
+        "bytes": 21238,
+        "commit": "d572b1662922ffda952016f04537711f5c730581",
+        "current_source_id": "lean_basic",
+        "equal_after_stripping_trailing_whitespace": true,
+        "equals_current_source_bytes": false,
+        "matches_summary_hash": true,
+        "path": "formal/lean/FormalClaimAlgebra/Basic.lean",
+        "repository_alias": "mcp_plus_plus_git_objects",
+        "sha256": "f701d92fe1a5141b3273ad2eafe8fbd6d7b78d0d2e9f47708b51abb0c87c7d54"
+      },
+      {
+        "bytes": 19078,
+        "commit": "d572b1662922ffda952016f04537711f5c730581",
+        "current_source_id": "lean_promotion",
+        "equal_after_stripping_trailing_whitespace": true,
+        "equals_current_source_bytes": true,
+        "matches_summary_hash": true,
+        "path": "formal/lean/FormalClaimAlgebra/Promotion.lean",
+        "repository_alias": "mcp_plus_plus_git_objects",
+        "sha256": "f8a32df78c0830ea21fdf4f03d49ccff18cb020c3b20b2b68f1c2daea4ecf9b7"
+      },
+      {
+        "bytes": 302,
+        "commit": "d572b1662922ffda952016f04537711f5c730581",
+        "current_source_id": "lakefile",
+        "equal_after_stripping_trailing_whitespace": true,
+        "equals_current_source_bytes": true,
+        "matches_summary_hash": true,
+        "path": "formal/lean/lakefile.toml",
+        "repository_alias": "mcp_plus_plus_git_objects",
+        "sha256": "e045d9179b637f5ccf92121d95dba94029261b7216055894e1f8a112b9006b8a"
+      }
+    ],
+    "historical_summary": {
+      "canonical_content_digest_verified": true,
+      "canonical_content_sha256": "bf7743f55ebd801d2af4241e7b26bab0a2cdec8520c4a88443f3d176dbc7d248",
+      "classification": "Historical conformance summary with source/toolchain labels and theorem inventory; not a recovered raw compiler/build receipt. Digest verification establishes byte self-consistency, not execution or scientific truth.",
+      "compiled_olean_artifact": null,
+      "compiler_output_artifact": null,
+      "compiler_stderr_sha256": null,
+      "compiler_stdout_sha256": null,
+      "native_checker_receipt": null,
+      "raw_compiler_exit_code": null,
+      "reported_generated_at": "2026-08-19T15:08:52Z",
+      "reported_lake_version": "5.0.0-src+d8b1897",
+      "reported_lean_commit": "d8b18978322de05a8f3dba51ef03cf5461676c17",
+      "reported_lean_version": "4.33.0",
+      "reported_status": "sealed",
+      "schema": "facp/fca-conformance@1",
+      "source_id": "fca_conformance_summary",
+      "task_id": "FACP-020"
+    },
+    "legal_text_to_logic_soundness_proof": null,
+    "promotion_scope": "48 declared theorems: forbidden relabel edges, necessary conditions, and concrete envelope examples of invalid cross-dimension promotion. Many proofs use native_decide; these source declarations alone are not retained compiler/kernel receipts.",
+    "qualified_build_result_recovered": false,
+    "scope_refs": [
+      "lean_basic:125-136",
+      "lean_basic:369-393",
+      "lean_basic:398-498"
+    ],
+    "source_declared_check_commands": [
+      [
+        "lake",
+        "build"
+      ],
+      [
+        "lake",
+        "env",
+        "lean",
+        "FormalClaimAlgebra/Promotion.lean"
+      ]
+    ],
+    "source_drift": "Current Basic.lean differs from the pinned historical blob by trailing whitespace (one byte); current and historical SHA256 must remain distinct. Promotion and lakefile bytes match the summary pins.",
+    "source_scope": "Nine finite evidence dimensions; decidable transition tables; five dimension-only promotion predicates. Evidence bags, cryptographic verification, policy evaluation, filesystem effects and implementation refinement are external to these definitions.",
+    "test_result_retention": "The Promotion test constructs identity/compiler output in an in-memory fixture. A test definition or fixture body is not an original execution receipt.",
+    "theorem_count_static": 48,
+    "theorem_names_match_historical_summary": true
+  },
+  "limitations": [
+    "No experiment, proof build, model checker, benchmark, solver, or database was run.",
+    "No historical summary is represented as fresh validation or as a proof of the executed handler.",
+    "No historical task ID is inferred to be the identity of a revised-paper claim."
+  ],
+  "next_evidence_needed": [
+    "Original bounded Lean execution receipt with command, exit, source/toolchain pins and output hashes for Basic and explicit Promotion check.",
+    "Actual TLC config plus invariant-complete model-check receipt and output/state-count hashes, after any model defects are resolved under separate execution authorization.",
+    "A reviewed source-to-model/refinement mapping and independently retained handler/observer/journal trace identities for the exact implemented route.",
+    "The revised-paper author task/claim ledger to associate historical artifacts with exact current claims."
+  ],
+  "schema": "law_to_action.formal_source_receipt_audit@1",
+  "scope": {
+    "author_package_task_ledger_available": false,
+    "current_revised_paper_claim_identity": null,
+    "historical_primary_evidence_used": "Only source descriptors and findings from the earlier authorized LA-029 archival source audit; no new primary-row reads or recount.",
+    "method": "Read-only filesystem and Git-object source inspection; stable whole-file SHA256 and JSON canonical-content verification. No historical module was imported or executed.",
+    "protected_component_panels_C1_C6_read": false,
+    "separate_diagnostic_receipts": "Other retained diagnostic checker/timing evidence is outside this source/build audit. Missing primary/native Lean/TLC receipts here must not be interpreted as machine-wide absence of diagnostic satisfiability records."
+  },
+  "search_scope": {
+    "historical_git_reads": [
+      "Mcp-Plus-Plus source-introducing commit metadata",
+      "Mcp-Plus-Plus pinned source blobs at d572b1662922ffda952016f04537711f5c730581",
+      "preserved root FACP commit metadata and tracked filename inventory"
+    ],
+    "known_checkout_searches": [
+      "current accelerate agent_supervisor/proof and related docs",
+      "current datasets logic/admissibility and selected formal filenames",
+      "preserved root and child directory inventories",
+      "current Mcp-Plus-Plus formal and test trees",
+      "preserved formal_assurance_control_plane JSON summaries, scheduler paths and selected test source",
+      "preserved FACP runtime subtree inventory"
+    ],
+    "lean_artifact_inventory_result": "Current formal/lean contains lakefile.toml and source directory; no .lake compiled output or retained output logs.",
+    "missing_claim_scope": "Not recovered in the inspected paths. This is not a claim of machine-wide absence. Source-test bodies, completion labels and summary JSON were not promoted into missing raw receipts.",
+    "runtime_tree_inventory_result": "Preserved data/agent_supervisor/formal_assurance_control_plane_v3 contains only state/discovery and two discovery markdown files; no retained build/model-check logs were located there."
+  },
+  "sources": [
+    {
+      "bytes": 21237,
+      "id": "lean_basic",
+      "line_count": 506,
+      "line_refs": [
+        {
+          "end": 16,
+          "excerpt_sha256": "23048a6480afcc2c1465298c72296ef5d73fa8cd7a531a9ee41842698aa6783f",
+          "start": 1
+        },
+        {
+          "end": 136,
+          "excerpt_sha256": "0d4bf5c28b8626c781f8129a7aa25660abd72bc8bd665df191da997c2a1b0a07",
+          "start": 125
+        },
+        {
+          "end": 393,
+          "excerpt_sha256": "2565b93dba4fb04fd32451856a1aa8dc3d5dc2750ddf83e267c01423260131a0",
+          "start": 369
+        },
+        {
+          "end": 498,
+          "excerpt_sha256": "dc448ae189c0f4568731a0960238d33cbea8eb5a909c9c898c2412c45f3ffde3",
+          "start": 398
+        }
+      ],
+      "repository_alias": "mcp_plus_plus_current",
+      "repository_relative_path": "formal/lean/FormalClaimAlgebra/Basic.lean",
+      "sha256": "1fe4e531683b9774bafaa5da40ef999c964c8d04fdf8e91ca2ce1fd9a5b74d45"
+    },
+    {
+      "bytes": 19078,
+      "id": "lean_promotion",
+      "line_count": 441,
+      "line_refs": [
+        {
+          "end": 14,
+          "excerpt_sha256": "c8e0d698a6fa5fb6b98a1ed9e318ad03480906d90c871232e67eabeb3ef41b39",
+          "start": 1
+        },
+        {
+          "end": 171,
+          "excerpt_sha256": "2abbba3c42a2c6286712d69addb2258d1625b0116ffcc3442bacd86f20fecdca",
+          "start": 77
+        },
+        {
+          "end": 276,
+          "excerpt_sha256": "575a9488df4fc54abd9e2139705ab7b60b0133910745e7d92bc7002670c760e4",
+          "start": 176
+        },
+        {
+          "end": 305,
+          "excerpt_sha256": "b0bb8cf655eb0c91fb6566c9690f0d6eadad31ccdbab3a0b34286e59953fe47e",
+          "start": 281
+        },
+        {
+          "end": 439,
+          "excerpt_sha256": "487174437f52ea7f9c69553af6c93532b8d2000ee5065a3deaeed174424dfc78",
+          "start": 309
+        }
+      ],
+      "repository_alias": "mcp_plus_plus_current",
+      "repository_relative_path": "formal/lean/FormalClaimAlgebra/Promotion.lean",
+      "sha256": "f8a32df78c0830ea21fdf4f03d49ccff18cb020c3b20b2b68f1c2daea4ecf9b7"
+    },
+    {
+      "bytes": 302,
+      "id": "lakefile",
+      "line_count": 9,
+      "line_refs": [
+        {
+          "end": 9,
+          "excerpt_sha256": "e045d9179b637f5ccf92121d95dba94029261b7216055894e1f8a112b9006b8a",
+          "start": 1
+        }
+      ],
+      "repository_alias": "mcp_plus_plus_current",
+      "repository_relative_path": "formal/lean/lakefile.toml",
+      "sha256": "e045d9179b637f5ccf92121d95dba94029261b7216055894e1f8a112b9006b8a"
+    },
+    {
+      "bytes": 24529,
+      "id": "tla_model",
+      "line_count": 653,
+      "line_refs": [
+        {
+          "end": 41,
+          "excerpt_sha256": "9faf8ac3f4b04738fa7919c94cea0447451fff9f0ddfd150299030a141f6b7bc",
+          "start": 1
+        },
+        {
+          "end": 189,
+          "excerpt_sha256": "6cd717eded486f76af0e1a064d35a5a8a5f51ea87a14838a01aed998f498928a",
+          "start": 167
+        },
+        {
+          "end": 271,
+          "excerpt_sha256": "68e6854b222c8ed89bdd5fd5b4ee39947be366b5786cd205f2c165a7af894724",
+          "start": 203
+        },
+        {
+          "end": 340,
+          "excerpt_sha256": "70f023753ad50cce02807afdc96742a8dfc642975e0657b96aacbaa30d0570ba",
+          "start": 273
+        },
+        {
+          "end": 465,
+          "excerpt_sha256": "4d3d6963f579b1b76aff2a4ce996d156aa43c6cec1d37dc4f2b5ccd5e25e16c8",
+          "start": 412
+        },
+        {
+          "end": 563,
+          "excerpt_sha256": "c4e09a5ab16da4c062b815b6d28a6886f1521ab41618f51501b3c5a69a3315d8",
+          "start": 496
+        },
+        {
+          "end": 653,
+          "excerpt_sha256": "ccd0bbdd895b5c39dd40e7165f1674b9fbfece92b7ea64063bb9b9b7298455ff",
+          "start": 567
+        }
+      ],
+      "repository_alias": "mcp_plus_plus_current",
+      "repository_relative_path": "formal/protocols/transactional_effects/TransactionalEffects.tla",
+      "sha256": "0e3c05313c76050415fa9ea3984b6d4c610e922caa699f6093450bb686a93e73"
+    },
+    {
+      "bytes": 15623,
+      "id": "lean_basic_test_source",
+      "line_count": 460,
+      "line_refs": [
+        {
+          "end": 355,
+          "excerpt_sha256": "4d11962b3d57051f84c48334b0d7893bf71715b0658b349931ae898aa8a14634",
+          "start": 295
+        }
+      ],
+      "repository_alias": "mcp_plus_plus_current",
+      "repository_relative_path": "tests-py/integration/test_formal_claim_algebra_lean_build.py",
+      "sha256": "fae247604180aa22871f909c505b45c9cfd0f739020dabec2b438e5d9a7546dc"
+    },
+    {
+      "bytes": 15782,
+      "id": "lean_promotion_test_source",
+      "line_count": 462,
+      "line_refs": [
+        {
+          "end": 252,
+          "excerpt_sha256": "ca96c4e4088d1ff2cbf6b4ecfdcbacee30251b24a31a3fe7944b94815951021d",
+          "start": 179
+        },
+        {
+          "end": 324,
+          "excerpt_sha256": "998905ffd5be420fdc1280e8c287f8565ce98b7b04a812f267ffead4bacd785f",
+          "start": 266
+        },
+        {
+          "end": 379,
+          "excerpt_sha256": "d739019e595f7af0c1bc5f3fe130fa56663ea62ce8ceea6b189beb2bb8be7498",
+          "start": 336
+        }
+      ],
+      "repository_alias": "mcp_plus_plus_current",
+      "repository_relative_path": "tests-py/integration/test_formal_claim_algebra_theorems.py",
+      "sha256": "4e578347477a615bdfdb058049d856e1d03f8238f39fa8c1dc49c78b1a7b24c0"
+    },
+    {
+      "bytes": 38821,
+      "id": "tla_test_source",
+      "line_count": 1154,
+      "line_refs": [
+        {
+          "end": 155,
+          "excerpt_sha256": "43e737ec89c64563e866b0f8c1c5150887f94916641f905ce7ad0353d55b4083",
+          "start": 126
+        },
+        {
+          "end": 354,
+          "excerpt_sha256": "8421cf1f817ce3486f1d1850aa85c2485460f05efa0594e4d8d2d38f74a739ec",
+          "start": 328
+        },
+        {
+          "end": 750,
+          "excerpt_sha256": "b0b3feaef972ad130c6d1b04c1681b30e47abe19ab8982195490ce8ecf224790",
+          "start": 707
+        },
+        {
+          "end": 924,
+          "excerpt_sha256": "595f073babc55986a8ce957690a95f10b6f9a7a876c90c12cf09b7140aa9bde8",
+          "start": 901
+        },
+        {
+          "end": 1122,
+          "excerpt_sha256": "81c960c3959ddaa374a5dc9f597d780822b4578e860a47afdc5f5fb796f5d8a5",
+          "start": 1096
+        },
+        {
+          "end": 1154,
+          "excerpt_sha256": "1e65a55dedf60135e2f774e06d1d808d0203a45f6b20cb681a4f6b25ace66c39",
+          "start": 1144
+        }
+      ],
+      "repository_alias": "mcp_plus_plus_current",
+      "repository_relative_path": "tests-py/integration/test_transactional_effect_models.py",
+      "sha256": "59497a07cbb6bfc72cb4b48dcb62d3ced751de4ca9877717e8f7a364b0655946"
+    },
+    {
+      "bytes": 15403,
+      "id": "fca_conformance_summary",
+      "line_count": 380,
+      "line_refs": [
+        {
+          "end": 28,
+          "excerpt_sha256": "352e09d8719813b7377f9fa0cb7be15b5ac594b75b11d6188bc7e774b7429caa",
+          "start": 1
+        },
+        {
+          "end": 45,
+          "excerpt_sha256": "2190e0a41b697a5db0747fb1249569f638c59065f1bead397508680e08b09090",
+          "start": 29
+        },
+        {
+          "end": 282,
+          "excerpt_sha256": "f39df35195455689d60db81def3faecd7a4c058043efbdfdf8f6068c1f92f0ef",
+          "start": 217
+        },
+        {
+          "end": 380,
+          "excerpt_sha256": "f9d42a53b9a0f636e8529bbb942d740385ae5ff290c658eddcfb89fa96f9370e",
+          "start": 374
+        }
+      ],
+      "repository_alias": "preserved_root",
+      "repository_relative_path": "implementation_plan/formal_assurance_control_plane/gates/formal_claim_algebra_v1.json",
+      "sha256": "2b8c0beb013cdad1db1b8d6cdc4f5553fe74d42ab210a0e18c2c65c648cd9d21"
+    },
+    {
+      "bytes": 15466,
+      "id": "historical_tcb",
+      "line_count": 418,
+      "line_refs": [
+        {
+          "end": 65,
+          "excerpt_sha256": "173eb8ea1638d4c52599cccb26635e1f4a0263b218f8d51b6cf28a8d8b825783",
+          "start": 47
+        },
+        {
+          "end": 139,
+          "excerpt_sha256": "061283b4bbeca500d0070bd483e93ed17f0c09cd19f52b70e56372cb788b90bd",
+          "start": 110
+        },
+        {
+          "end": 343,
+          "excerpt_sha256": "472cfa96cfb335402d43e50c1972c794098ee8a4c895ccc0de37fc610912d9c0",
+          "start": 297
+        },
+        {
+          "end": 401,
+          "excerpt_sha256": "37861cbfbaf796184e472bab83de6de5b90b1b2e86f36b90dab3d68c20390b90",
+          "start": 359
+        }
+      ],
+      "repository_alias": "preserved_root",
+      "repository_relative_path": "implementation_plan/formal_assurance_control_plane/baseline/trusted_computing_base.json",
+      "sha256": "03f32a9e9f92e2883a67f44243e9a4d435a2a62a0dc5de4efb02611ec0cb3743"
+    },
+    {
+      "bytes": 21735,
+      "id": "fca_gate_test_source",
+      "line_count": 582,
+      "line_refs": [
+        {
+          "end": 363,
+          "excerpt_sha256": "7f49d118508d620c7f19abd4a46bebe1351851421cde608a9bf4b5e9184efefd",
+          "start": 337
+        }
+      ],
+      "repository_alias": "preserved_root",
+      "repository_relative_path": "test/formal_assurance/test_facp_020_fca_gate.py",
+      "sha256": "3e4617fdea9c28bf36480c52c9d185f49a41f8b22c07c7f565d57935b95c2e5f"
+    },
+    {
+      "bytes": 4391,
+      "id": "historical_scheduler_source",
+      "line_count": 111,
+      "line_refs": [
+        {
+          "end": 12,
+          "excerpt_sha256": "9339b0ab0222ca99ba190b484c3ef51d3baf8469180bc22fa7161e652eaa2ac4",
+          "start": 1
+        }
+      ],
+      "repository_alias": "preserved_root",
+      "repository_relative_path": "config/formal_assurance_control_plane_scheduler.json",
+      "sha256": "a76085554bdb72bdbb4b92a879a07a247cb0778248e6861d9195a72a24c02363"
+    }
+  ],
+  "transactional_tla": {
+    "actual_TLAPS_proof_receipt": null,
+    "actual_cfg_artifact": null,
+    "actual_checked_state_count": null,
+    "actual_command_receipt": null,
+    "actual_counterexample_artifact": null,
+    "actual_model_check_receipt": null,
+    "actual_tlc_stderr_sha256": null,
+    "actual_tlc_stdout_sha256": null,
+    "actual_toolchain_version_receipt": null,
+    "bounds_status": "These appear only in commented example configuration at641-650, not a retained executable TLC config or run binding.",
+    "example_bounds_only": {
+      "CompensatableOps": [
+        "o2"
+      ],
+      "IrreversibleOps": [
+        "o1"
+      ],
+      "MaxFenceGen": 3,
+      "MaxRetries": 2,
+      "Ops": [
+        "o1",
+        "o2"
+      ]
+    },
+    "formalism": "Finite-parameter TLA+ transition-system specification, with an unproved THEOREM declaration at line652.",
+    "handler_refinement_mapping_proof": null,
+    "historical_tcb_claim": "The retained TCB summary marks tla_plus and alloy absent with typed_capability_gap; this describes that historical inventory, not current host availability.",
+    "qualified_model_check_result_recovered": false,
+    "required_invariants": [
+      "NoDoubleEffect",
+      "NoStaleFenceCompletion",
+      "NoSuccessWithoutObservation",
+      "NoConfirmationReuse",
+      "NoReplayOfUnknownIrreversibleEffect"
+    ],
+    "scope": "Abstract admission, lease/fence, reservation, external effect, observation, receipt/current settlement, retries, unknown irreversible effects, crash recovery, compensation and proof-promotion state.",
+    "source_id": "tla_model",
+    "source_level_inference_not_executed_counterexample": {
+      "finding": "BumpFence permits any leaseHeld state below MaxFenceGen, including a sealed receipt. SealReceipt leaves leaseHeld unchanged, while NoStaleFenceCompletion requires the reserved and current generations to agree for a sealed receipt. A post-seal bump appears to violate that invariant unless an additional restriction outside this source excludes it.",
+      "refs": [
+        "tla_model:412-429",
+        "tla_model:520-532",
+        "tla_model:599-602"
+      ],
+      "solver_confirmed": false,
+      "trace_executed": false
+    },
+    "test_source_is_not_completed_model_check": {
+      "acceptance_limit": "The enclosing gate accepts traces when tools are admitted; test labels and passing reference-vector tests are not evidence that all required invariants were checked by TLC.",
+      "binary_branch": "Passes TransactionalEffects.tla itself to -config and does not recover a separate bounds/config artifact.",
+      "jar_branch": "Runs tla2sany.SANY syntax/semantic checking, then labels exit0 as model_proof=True; this does not establish TLC state-space exploration.",
+      "refs": [
+        "tla_test_source:707-750",
+        "tla_test_source:1096-1122"
+      ]
+    }
+  }
+}

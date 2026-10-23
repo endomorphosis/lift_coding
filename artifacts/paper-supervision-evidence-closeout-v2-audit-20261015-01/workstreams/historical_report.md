@@ -1,0 +1,25 @@
+# Historical paper evidence recovery
+
+This bounded pass read 28 hashed inputs from the selected increment-016 paper source and its exact revision evaluation tree. The supplied original v2 package remains unrecovered. Report-native names are retained: no H1/D1–D6/R1/R2 mapping was invented. No law-to-action sources were used. No model, solver, build, grader, or production-state action ran.
+
+## Recovered observations
+
+- Historical final cohort: 32 planned/terminal cells, 9 useful completions (A5/16,B4/16); 14 deadlines,2 known proposal failures,7 original hidden-failure labels, including one zero-hidden-assertion incomplete validation. Usage exists for16/32, so no complete token/cost total. Separate24-cell development pilot has10 useful labels. These are frozen manuscript aggregates; individual original cells remain unrecovered.
+- Routing development: four authored tasks per arm,4/4 successful;4calls/4,865tokens versus2calls/2,430tokens. Separate three-task context development:3/3 successful each;4,866 versus4,637tokens. Their percentages are not additive or general efficiency estimates.
+- Reuse:14 heterogeneous matrix cases include exactly TWO admitted call reuses, both with separate cold checks. One is unchanged/pass; the other reuses the call but correctly fails teardown. Five separate timing pairs add five positive call reuses, also cold checked. Default production plugin probe reports zero reuse. Historical1/26 false reuse is preserved at report tier; its named old-worktree JSON is absent.
+- Scorer integrity: original development scorers admitted5/6 authored incorrect candidates. Supplementary isolation rejects6/6 and7/7 unrepaired controls;10 unique saved candidate bodies still pass and explain14 saved records. This does not qualify the older cold-repair scorer or estimate a general attack rate.
+- Requests cold-v1:7 provider posts,108,981tokens; A/B/C/D totals14,428/65,695/14,589/14,269. Cold-v2:16posts,243,255tokens;56,543/62,439/63,336/60,937. Every arm accepts1/2nodes and completes zero trajectories. The cohorts remain separate. V1 B's outer timer is missing; v2 enclosing timers are complete in its retained aggregate. Raw provider receipts were not re-read.
+- Simple controls: world-memory/exact-JSON/templates each use16actions versus27 without memory, or19versus30 after seed costs; native memory is slower in the retained run (8.947vs8.739seconds before shared seed). Fixed procedure templates match quality with zero synthesis. These controls prevent attributing benefit to a learned world model.
+- Publication:47 source-shipped tests cover constructed boundaries. A separate actual finite-receipt caller publishes and handles real process termination, but native pre-CAS recovery remains pending; an added caller independently replays evidence and completes CAS/WAL. Native integrity alone accepts three internally consistent wrong/stale receipt constructions. Receipt reuse does not omit independent checking.
+
+## Proof scope
+
+The selected formal appendix explicitly labels acceptance/reuse sketches unmachine-checked. The separate compositional-v2 report uses actual Z3 and cvc5, a prescribed fault/repair, source rescanning and selected-test replay; this is not a kernel proof. Exact backend versions and imported-source closure were not revalidated within this allocation.
+
+Native v3 Groth16 proves a bounded four-slot event-root/count relation; three examples and eight negatives are retained. A field-equivalent different full root is accepted by the raw verifier and rejected by the exact caller binder. Native v2 proves three honest bounded Horn chains. Three altered wire fields with unchanged scalar statements verify raw but are rejected by the caller. The deeper textual-binding investigation stopped before custom prover execution. No false-theorem exploit or universal textual soundness claim follows. Development setup/build costs, missing v5 support, and failed attempts remain visible. Signatures, digest custody, finite checks, source semantics and executed effects remain distinct evidence.
+
+## Recomputations and limits
+
+The accompanying deterministic projection script recomputes reported cohort sums, provider schemas (for these Grok records: input + visible output + disjoint reasoning; cache subset), two-versus-fourteen reuse admissions, cold agreement, timing sums and the priming deficit. It does not authenticate originating runs or execute semantic checks. No per-call usage is invented: the session ledger records actual provider call IDs found in retained joins with counters unavailable.
+
+Per-study evidence hashes, explicit limitations, missing paths and proposed remedies are in historical_findings.json. historical_runs.jsonl contains bounded original event/case identifiers and allowlisted statuses; historical_sessions.jsonl contains provider-call identities, not invented conversation sessions. All files are private audit projections, not an anonymous supplement. Raw transcripts, hidden/reference source, credentials and candidate bodies are excluded.

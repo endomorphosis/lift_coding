@@ -1,0 +1,75 @@
+{
+  "byte_identical_reducer_inputs": 8120,
+  "copied_members": [
+    {
+      "bytes": 7145,
+      "evidence_level": "hash-checked",
+      "sha256": "55601c93a89e0b545c90fb42eb6fe2c9df67daaa78dd29b13a6462afcfd890cc",
+      "source_member": "law_to_action_final_supplement/recovery_source_v1/README.md"
+    },
+    {
+      "bytes": 30926382,
+      "evidence_level": "hash-checked",
+      "sha256": "56d8cad962292e59513d214eaa0e3bf494ad02982d28a5a712ac33fb221c58c2",
+      "source_member": "law_to_action_final_supplement/recovery_source_v1/evidence.zip"
+    },
+    {
+      "bytes": 35184,
+      "evidence_level": "hash-checked",
+      "sha256": "6f1e622c82a380075843bb084a7ec3b1f1d12a4a02526d75e78b0924a860aa75",
+      "source_member": "law_to_action_final_supplement/recovery_source_v1/licenses/ipfs_accelerate.LICENSE"
+    },
+    {
+      "bytes": 34523,
+      "evidence_level": "hash-checked",
+      "sha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef",
+      "source_member": "law_to_action_final_supplement/recovery_source_v1/licenses/ipfs_datasets.LICENSE"
+    },
+    {
+      "bytes": 34523,
+      "evidence_level": "hash-checked",
+      "sha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef",
+      "source_member": "law_to_action_final_supplement/recovery_source_v1/licenses/ipfs_kit.LICENSE"
+    },
+    {
+      "bytes": 34523,
+      "evidence_level": "hash-checked",
+      "sha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef",
+      "source_member": "law_to_action_final_supplement/recovery_source_v1/licenses/repository.LICENSE"
+    },
+    {
+      "bytes": 1945,
+      "evidence_level": "hash-checked",
+      "sha256": "8f73043581a9ae05350ffb6312c64cb5ab91ac27f3559ae09a17b2c727a9d37e",
+      "source_member": "law_to_action_final_supplement/recovery_source_v1/manifest.json"
+    },
+    {
+      "bytes": 2420,
+      "evidence_level": "hash-checked",
+      "sha256": "cab35f388a456884db1d9c6095bb9525b6e428afe03d0fe556f9765c05a8bd82",
+      "source_member": "law_to_action_final_supplement/recovery_source_v1/public_derivation.json"
+    },
+    {
+      "bytes": 14387,
+      "evidence_level": "hash-checked",
+      "sha256": "97edb1cb2f33efde8af7e958cafc8181044ecb7da09002866a4117873ae09487",
+      "source_member": "law_to_action_final_supplement/recovery_source_v1/reproduce.py"
+    }
+  ],
+  "null_reason": "Portable derivatives retain original hash commitments; original pre-transformation bytes are not thereby recovered.",
+  "observed_members": 9976,
+  "original_binding_to_index_mismatches": [],
+  "original_untransformed_input_bytes_for_transformed_members": null,
+  "portable_hash_mismatches": [],
+  "reader_returncode": 0,
+  "reducer_bindings": 9933,
+  "source_outer_archive": "papers/revisions/law_to_action_synthesis_20260914/supplement.zip",
+  "source_outer_bytes": 27564897,
+  "source_outer_sha256": "00540f54ff5bdd931b4bfed6e9556aa3130db2f86a9f84e5ed9c90414d63d185",
+  "source_outer_sha256_after": "00540f54ff5bdd931b4bfed6e9556aa3130db2f86a9f84e5ed9c90414d63d185",
+  "source_unchanged_during_recovery": true,
+  "target_author_package_identity": null,
+  "target_author_package_identity_reason": "Requested author recovery prompt and ledger not found; no assertion that historical archive is the requested latest baseline.",
+  "transformed_reducer_inputs": 1813,
+  "wall_seconds": 6.614811121020466
+}

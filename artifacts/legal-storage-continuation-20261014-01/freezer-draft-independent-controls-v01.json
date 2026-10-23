@@ -1,0 +1,85 @@
+{
+  "actual_model_calls": 0,
+  "actual_results_or_reference_reads": 0,
+  "cases": [
+    {
+      "expected_acceptance": true,
+      "name": "exact inherited62 filename inventory and dormant/copy names",
+      "passed": true
+    },
+    {
+      "expected_acceptance": true,
+      "name": "balanced schema/mandatorymodule/mechanical counters accepted with delegated trace stub",
+      "passed": true
+    },
+    {
+      "expected_acceptance": false,
+      "name": "retained N11 mandatorymodule cannot substitute for balanced producer",
+      "passed": true
+    },
+    {
+      "expected_acceptance": false,
+      "name": "unweighted N11 objective rejected",
+      "passed": true
+    },
+    {
+      "expected_acceptance": false,
+      "name": "delegated weighted trace refusal propagated",
+      "passed": true
+    },
+    {
+      "expected_acceptance": false,
+      "name": "copied240 parent rows cannot count as new control forwards",
+      "passed": true
+    },
+    {
+      "expected_acceptance": false,
+      "name": "old actor-feature1552 calls rejected for new1312 scope",
+      "passed": true
+    },
+    {
+      "expected_acceptance": false,
+      "name": "inherited optimizer moments rejected",
+      "passed": true
+    },
+    {
+      "expected_acceptance": true,
+      "name": "balanced initial/protected632 envelope accepted",
+      "passed": true
+    },
+    {
+      "expected_acceptance": false,
+      "name": "partial631 coverage rejected",
+      "passed": true
+    },
+    {
+      "expected_acceptance": false,
+      "name": "updates before initial full632 gate rejected",
+      "passed": true
+    },
+    {
+      "expected_acceptance": false,
+      "name": "unprotected modality rejected",
+      "passed": true
+    },
+    {
+      "expected_acceptance": false,
+      "name": "N11 parity schema rejected",
+      "passed": true
+    }
+  ],
+  "checkpoint_JSON_parses": 0,
+  "count": 13,
+  "findings": [],
+  "fixture_scope": "Synthetic summary/gate envelopes only. Trace validator is a refusal-propagation stub; this receipt does not independently prove weighted trace math. Exact inherited filename algorithm AST proved, unchanged historical broad tests not repeated.",
+  "passed": true,
+  "private_body_reads": 0,
+  "production_imports": 0,
+  "resource_API_calls": 0,
+  "schema": "conditions-balanced-freezer-draft-independent-controls/v1",
+  "source": {
+    "bytes": 18728,
+    "path": "/home/barberb/lift_coding/artifacts/legal-storage-continuation-20261014-01/freeze_conditions_balanced_outputs_draft_v01.py",
+    "sha256": "8e150c915581208f0b3940a6ab72cc86309a1e5c1759e549d8b35bd975161bd8"
+  }
+}

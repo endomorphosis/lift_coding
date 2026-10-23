@@ -1,0 +1,162 @@
+{
+  "PR": {
+    "merged": true,
+    "merged_at": "2026-10-15T04:37:57Z",
+    "number": 1307,
+    "url": "https://github.com/endomorphosis/ipfs_datasets_py/pull/1307"
+  },
+  "PR_premerge_observation": {
+    "bytes": 835,
+    "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/source-pr-premerge-observation-v01.json",
+    "sha256": "f9d0356bfc8e32fb20a82ca4818cce081bf1b972336e7de187bcec9b201624ca"
+  },
+  "actual_incoming": "3101416594780604f6a1346edbc526f11798d35b",
+  "actual_merge": "6deae26e98452669b32b256794b18affb1155c16",
+  "actual_merge_tree": "edb1dfdef81b7d1204c6c3c8c5bc64bb14d513da",
+  "authorship": {
+    "reviewer": "runtime_protocol_n9",
+    "reviewer_authored_merge_or_plan_update": false,
+    "reviewer_authored_prior_source_and_result_reviews": true
+  },
+  "canonical_raw_anchors": [
+    {
+      "bytes": 37,
+      "path": "/home/barberb/lift_coding/.git/HEAD",
+      "sha256": "32a4e0619657da69ad525c8936b759693db31bc061488a69a547266919aac0c7"
+    },
+    {
+      "bytes": 692628,
+      "path": "/home/barberb/lift_coding/.git/index",
+      "sha256": "80b0426031778d38c8b762a273739e08edbf2ce2b18690efb4f541fa6de120a4"
+    },
+    {
+      "bytes": 21,
+      "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/HEAD",
+      "sha256": "28d25bf82af4c0e2b72f50959b2beb859e3e60b9630a5e8c603dad4ddb2b6e80"
+    },
+    {
+      "bytes": 5251025,
+      "path": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/index",
+      "sha256": "8bd28a44ae0a0425cfaba561c3bf8c13f25bbf7e61cbf12c05708c9563dceda8"
+    }
+  ],
+  "checks": {
+    "actual_merge_tree_verified": true,
+    "all10_gitlinks_all4_symlinks_exact": true,
+    "all32281_other_incoming_entry_mode_OIDs_exact": true,
+    "all47_phase_additions_exact_reviewed_blobs_and_rawpins": true,
+    "all_other_plan_bytes_preserved": true,
+    "canonical4_opaque_raw_anchors_unchanged": true,
+    "diff_check_passed": true,
+    "incoming_AGENTS_count": 0,
+    "new_native_parented_storage_owner_daemon_and_validation_doc_preserved": true,
+    "no_hosted_CI_pass_claim": true,
+    "old_checker_refusal_preserved_and_no_merge_retry": true,
+    "ordered_actual_merge_parents_verified_in_owned_object_graph": true,
+    "original_ordinary_merge_attempt_count": 1,
+    "owned_postmerge_main_ref_equals_actual_merge": true,
+    "previous_stage_tree_historical_not_actual_merge_tree": true,
+    "prior_ff07_is_ancestor_of_actual_first_parent": true,
+    "public_plan_exact_four_replacements_against_actual_first_parent": true
+  },
+  "earlier_assumption_refusal": {
+    "bytes": 1115,
+    "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/source-postmerge-assumption-refusal-v01.json",
+    "sha256": "31179d642c7a3d141780850c314d31eddf560b9bce12dd48cfa37aab0877d9e0"
+  },
+  "findings": [],
+  "incoming_entry_count": 32282,
+  "limits": {
+    "PR_server_status_evidence": "Root-owned public postmerge verification plus exact fetched merge graph/ref; no independent server query by this reviewer.",
+    "default_promotion": false,
+    "historical_F19_source_pins_substituted": false,
+    "hosted_CI_passed": false,
+    "new_native_imports_grants_or_resource_claims": 0,
+    "original_summary_capture_reference_teacher_checkpoint_bodies_opened": 0,
+    "own_Git_mutations": 0,
+    "own_canonical_Git_calls": 0,
+    "own_network_or_SDK_calls": 0,
+    "private_bodies_or_numerical_production_imports": 0,
+    "scientific_success_or_weight_composition_qualified": false,
+    "upstream_Parquet_or_viewer_row_data_bodies_opened": 0
+  },
+  "merge_request": {
+    "bytes": 160,
+    "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/source-merge-request-v01.json",
+    "sha256": "3b6314567d33c3bbfe080f49f6d07902cc1221f0a3fd114509ad7a2dcfc7a6e0"
+  },
+  "merged_entry_count": 32329,
+  "new_storage_owner_paths": {
+    "docs/autoencoders/parented_phase_storage.md": {
+      "git_blob": "2eccde5951917e1b846b27a34142b374eb3c3238",
+      "mode": "100644"
+    },
+    "docs/autoencoders/validation_storage.md": {
+      "git_blob": "cedfb522e7de07a5ed205b39e7a482d048fa94c8",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_resources.py": {
+      "git_blob": "64a648e2a0ce0bfe75c6a2cdbfe2a4d2283f19ab",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/parented_phase_resources.py": {
+      "git_blob": "995d3ee22c064665d4d93a75c79a501073f6ddc5",
+      "mode": "100644"
+    }
+  },
+  "observed_remote_ref": "refs/codex/legal-conditions-composition-diagnostic-20261015-01/postmerge-main-v01",
+  "ordered_parents": [
+    "3101416594780604f6a1346edbc526f11798d35b",
+    "a753f4f59857368b375723f133dec54ca4795cc0"
+  ],
+  "owned_repo": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/datasets",
+  "passed": true,
+  "phase_additions": 47,
+  "plan_prose_review": {
+    "bytes": 5141,
+    "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/source-corpus-plan-completion-independent-review-v01.json",
+    "sha256": "f7b1c92438599beafcb8b2ba3eeddee8f2b3c183ce2370a1c1d3c05d4c072b90"
+  },
+  "plan_update": {
+    "bytes": 2825,
+    "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/source-corpus-plan-update-v01.json",
+    "sha256": "435902afe05e89d252b55a5d554876056907e842d14806216af189b316e5c65d"
+  },
+  "postmerge_verification": {
+    "bytes": 31636,
+    "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/source-postmerge-verification-v01.json",
+    "sha256": "e1485dbe26107f0466d68c80442d2f77a6fcf2cf62df6a0b6fc4fd915acab4e6"
+  },
+  "preserved_incoming_entry_count": 32281,
+  "prior_stage_packet": {
+    "bytes": 30723,
+    "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/source-stage-packet-v02.json",
+    "sha256": "ec389e10d29179dcd25ebedd3dca01fbfed881dbf738bbed93071a332a7647f7"
+  },
+  "prior_stage_review": {
+    "bytes": 7607,
+    "path": "/home/barberb/lift_coding/artifacts/legal-conditions-composition-diagnostic-20261015-01/source-stage-independent-review-v02.json",
+    "sha256": "493c2aec7b12fad0e2f0a06029390c5f8fd5ac90dad1a96c0836e49253b8c1df"
+  },
+  "retained_gitlinks": {
+    ".tools/ipfs_kit_py": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+    "ipfs_accelerate_py": "c88c0eece0a91297f2ee33859adc2d71724d59d4",
+    "ipfs_datasets_py/logic/CEC/DCEC_Library": "a4beb5b3280595be6b9221cac3c91dd019e6d371",
+    "ipfs_datasets_py/logic/CEC/Eng-DCEC": "df518c21ef81b8001e6db59f5fd70f10cc04ff6c",
+    "ipfs_datasets_py/logic/CEC/ShadowProver": "3060ede1ac1ec3f8ef9f9c9e41386aed1dbbe7f9",
+    "ipfs_datasets_py/logic/CEC/Talos": "e0b7650d3e3a403924773f8253e924c719748d36",
+    "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type": "d58933631a5362b1e2fdc45254ef620fa231223a",
+    "ipfs_datasets_py/multimedia/omni_converter_mk2": "c1d9b0d517cea022516aab5b5d8fa5e3bc9a65aa",
+    "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine": "0e635cba586e8f6f6ea8126e3b1668b3e675c029",
+    "ipfs_kit_py": "a9b98beac1ef14278b4adf4f2289cd509530fb86"
+  },
+  "retained_symlinks": {
+    "Dockerfile": "93c313e63109b53d8354a76a5feb0d55af5ae033",
+    "docker-compose.yml": "3ccbe9c54fc0917f220e81e75ac108f233425f67",
+    "docker-entrypoint.sh": "53701225067752b1eb310846e6fb9d72fb007c78",
+    "ipfs_datasets_py/static/admin/webfonts": "6bb59df539ec3a1bffeb7156906f49e911d6a441"
+  },
+  "reviewed_contribution_head": "a753f4f59857368b375723f133dec54ca4795cc0",
+  "schema": "conditions-composition-source-postmerge-independent-review/v1",
+  "sole_modified_incoming_path": "docs/autoencoders/legal_ir_uscode_corpus_improvement_plan_20261015.md"
+}

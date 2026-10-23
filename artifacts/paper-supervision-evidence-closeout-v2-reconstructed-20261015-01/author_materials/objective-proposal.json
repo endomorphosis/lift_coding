@@ -1,0 +1,337 @@
+{
+  "approvals": {
+    "create_reconstructed_package_and_standard_library_arithmetic_audit": true,
+    "existing_owner_steer_and_task_lifecycle": true,
+    "inspect_and_run_provided_standard_library_numerical_audit": true,
+    "model_or_solver_invocations": false,
+    "new_experiments": false,
+    "prepare_proposed_manuscript_patch": true,
+    "publication": false,
+    "selected_private_evidence_logs_under_existing_local_access": true,
+    "service_or_threshold_changes": false,
+    "start_bounded_analytical_recovery_tasks": true,
+    "submit_objective_via_existing_owner": true,
+    "training_or_expensive_builds": false
+  },
+  "authorization_status": "authorized_but_gated",
+  "bounds": {
+    "allowed_source_scope": "selected_reconstructed_package_and_explicitly_referenced_permitted_evidence_including_selected_private_logs_under_existing_local_access",
+    "changes_supervisor_admission_limits": false,
+    "limit_response": "record_unresolved_item_without_expanding_scope_or_claiming_completeness",
+    "maximum_per_text_json_file_bytes": 2097152,
+    "maximum_rows_per_task": 200,
+    "maximum_supplied_pdf_bytes": 67108864,
+    "maximum_total_text_json_bytes": 33554432,
+    "maximum_unique_permitted_evidence_files": 120,
+    "pdf_read_scope": "selected_37_page_working_base_reconstruction_and_identity",
+    "private_log_handling": "bounded_local_allowlist_projections_no_raw_export_no_arbitrary_owner_archive_access"
+  },
+  "completion_criteria_for_future_recovery": [
+    "existing_owner_canonical_STEER_admitted_without_direct_state_edits",
+    "selected_working_source_bound_and_original_supplied_identity_discrepancy_explicit",
+    "newly_authored_transcription_arithmetic_audit_run_before_recovery_result_interpretation",
+    "reconstructed_standard_library_audit_inspected_and_executed_with_arithmetic_authenticity_distinction",
+    "all_in_scope_invoked_failures_and_uninvoked_rows_accounted_for",
+    "fresh_no_index_evidence_distinguished_from_other_runs",
+    "training_projection_proof_and_execution_evidence_not_conflated",
+    "full_cross_ir_and_G_F_O_B_framework_preserved",
+    "usage_deduplicated_with_missing_values_retained",
+    "proof_reuse_and_scorer_claims_bounded_by_permitted_evidence",
+    "public_disclosure_review_and_unresolved_items_recorded",
+    "separate_proposed_patch_reviewable_but_not_applied",
+    "normative_applicability_O_P_F_nonvacuity_policy_bounds_and_independent_action_authority_explicit",
+    "repository_adaptation_distinguished_from_loading_global_checkpoints"
+  ],
+  "execution_order": [
+    "I0_select_and_bind_local_reconstructed_working_base",
+    "N0_inspect_then_run_newly_authored_local_transcription_audit",
+    "canonical_existing_owner_objective_submission",
+    "bounded_trial_and_framework_recovery",
+    "evidence_supported_proposed_patch_only"
+  ],
+  "execution_owner": "existing_owner_only",
+  "forbidden_actions": [
+    "new_supervisor",
+    "new_database",
+    "new_planner",
+    "new_task_table",
+    "direct_database_updates",
+    "direct_planner_updates",
+    "direct_task_table_updates",
+    "hidden_or_reference_content_reads",
+    "arbitrary_owner_archive_reads",
+    "credential_reads",
+    "raw_transcript_export",
+    "private_source_export",
+    "credential_export",
+    "hidden_or_reference_content_export",
+    "builds",
+    "solver_invocations",
+    "model_generation",
+    "training",
+    "benchmark_or_scorer_execution",
+    "service_changes",
+    "threshold_changes",
+    "storage_cleanup",
+    "publication"
+  ],
+  "framework_preservation": {
+    "O_P_F_projection_and_check_coverage_required": true,
+    "current_implementation_not_retroactive_run_evidence": true,
+    "definition_source": "selected_source_snapshot_for_historical_text_and_explicit_author_handoff_for_cross_ir_design; original_v2_not_recovered",
+    "definitions_inferred_or_rewritten_by_this_proposal": false,
+    "full_cross_ir_framework": true,
+    "independent_action_authority_required": true,
+    "ir_families_to_trace_if_documented": [
+      "intent_ir",
+      "codebase_ir",
+      "security_ir",
+      "legal_ir",
+      "ui_ux_ir"
+    ],
+    "missing_v2_sections": [
+      "Section 2",
+      "Appendix G"
+    ],
+    "nonvacuity_evidence_required": true,
+    "normative_applicability_mapping_required": true,
+    "notation": "G(F)/O/B",
+    "policy_and_encoding_bounded_counterexamples_only": true,
+    "repository_adaptation_distinguished_from_loaded_global_checkpoint": true,
+    "separate_evidence_stages": [
+      "proposed_capability",
+      "implemented_path",
+      "training",
+      "checkpoint_identity",
+      "invoked_weight_inference",
+      "typed_ir",
+      "logic_projection",
+      "syntax_check",
+      "proved_obligation",
+      "planning_use",
+      "execution",
+      "benchmark_outcome"
+    ],
+    "source_sections": [
+      "selected_snapshot_Section_2_as_historical_source",
+      "author_handoff_cross_ir_chain_as_author_specified_design"
+    ],
+    "training_lineage_split_holdout_and_leakage_limits_required": true
+  },
+  "identity": {
+    "original_supplied_package_recovered": false,
+    "original_supplied_pdf_match_established": false,
+    "package_kind": "new_authorized_reconstruction",
+    "package_path": "/home/barberb/lift_coding/artifacts/paper-supervision-evidence-closeout-v2-reconstructed-20261015-01",
+    "pdf_pages": 37,
+    "pdf_sha256": "51a72d60c7dcb23faa17918091fe172f6cbacf8f25df10e94d1b4071dce05ce7",
+    "selection_is_not_identity_proof": true,
+    "snapshot_members_verified": 29,
+    "status": "selected_local_working_base_verified_original_supplied_identity_unresolved",
+    "working_base": "increment-016"
+  },
+  "local_package_preparation": {
+    "arithmetic_audit_status": "passed",
+    "manuscript_reconstructed": true,
+    "snapshot_members_verified": 29,
+    "supervisor_task_invocations": 0,
+    "transcribed_observations": 18
+  },
+  "manuscript_output_scope": "separate_proposed_patch_only_no_application_in_this_plan",
+  "minimal_experiments": {
+    "approved": false,
+    "policy": "Already authorized bounded recovery and the newly authorized reconstructed arithmetic audit need no renewed permission; recovery still needs the existing admitted owner. New experiments require a separate named-gap proposal and explicit authorization.",
+    "scheduled": []
+  },
+  "new_authorization": {
+    "does_not_authorize": [
+      "service restart",
+      "new owner or bridge",
+      "task table edits",
+      "model calls",
+      "training",
+      "solver runs",
+      "benchmark reruns",
+      "builds",
+      "publication"
+    ],
+    "effect": "Create a new reconstructed manuscript package and newly authored arithmetic audit; do not impersonate recovered supplied files.",
+    "user_reply": "just make one"
+  },
+  "objective": "paper-supervision-evidence-closeout-v2",
+  "objective_submitted": false,
+  "owner_admission": {
+    "canonical_authority_source": "source_only_handoff_discovery.json",
+    "direct_state_writes_authorized": false,
+    "exhaustive_absence_of_other_operator_endpoint_claimed": false,
+    "existing_owner_steer_and_task_lifecycle_authorized": true,
+    "existing_paper_board_populated_reported": true,
+    "external_handoff_state_reported": "in_memory",
+    "gate_before_package_arithmetic_preparation": false,
+    "gate_before_study_recovery": true,
+    "generic_cli_default_has_live_lease_validator_reported": false,
+    "identity_gate_precedes_objective_submission": true,
+    "latest_readiness_observation": {
+      "observed_at_utc": "2026-10-15T09:34:22Z",
+      "recorded_process_matches": false,
+      "recorded_ready": false,
+      "recorded_stopped": true,
+      "scope": "documented_default_root_only"
+    },
+    "live_owner_identity_verified": false,
+    "new_bridge_proposed_or_implemented": false,
+    "ready_bound_paper_campaign_bridge_established": false,
+    "required_bindings": [
+      "owner_bound_DatabaseTaskSource",
+      "admitted_preview",
+      "current_semantic_and_plan_roots",
+      "live_lease_fence",
+      "idempotency_key",
+      "validated_expected_effects"
+    ],
+    "required_route": "canonical_plan_steer_preview_then_authorized_plan_steer_apply_through_existing_PlanSupervisorService",
+    "source_only_caller_discovery_allowed_while_identity_blocked": true,
+    "status": "unresolved_not_admitted"
+  },
+  "predecessor_proposal": "/home/barberb/lift_coding/artifacts/paper-supervision-evidence-closeout-v2-intake-20261015-01/objective-proposal.json",
+  "proposal_executable": false,
+  "proposal_imported": false,
+  "purpose": "Bounded evidence recovery using an explicitly authorized reconstructed package; original supplied-PDF binding remains unresolved.",
+  "report_contents_read_for_this_proposal": false,
+  "schema": "paper-evidence-recovery-reconstructed-objective-proposal@1",
+  "status": "prepared_not_submitted",
+  "target_title": "Proof-Carrying Neurosymbolic Supervision: State, Reasoning, and Evidence Reuse",
+  "tasks": [
+    {
+      "depends_on": [],
+      "file_cap": 12,
+      "id": "I0",
+      "name": "reconstructed_working_package_identity",
+      "output": "Selected working snapshot and derivative provenance; original supplied identity remains unresolved.",
+      "requires_admitted_existing_owner": false,
+      "state": "proposed"
+    },
+    {
+      "arithmetic_consistency_authenticates_trials": false,
+      "depends_on": [
+        "I0"
+      ],
+      "file_cap": 12,
+      "id": "N0",
+      "local_package_preparation_only": true,
+      "name": "inspect_and_run_newly_authored_transcription_arithmetic_audit",
+      "output": "audit/numerical-01/numerical_audit_results.json",
+      "proposed_combined_output_bytes_cap": 1048576,
+      "proposed_execution_seconds_cap": 60,
+      "replacement_script_authorized": true,
+      "requires_admitted_existing_owner": false,
+      "script_execution_authorized": true,
+      "script_execution_status": "passed_as_local_package_preparation_not_supervisor_task",
+      "state": "proposed"
+    },
+    {
+      "count_established_by_this_proposal": false,
+      "depends_on": [
+        "N0"
+      ],
+      "expected_invoked_count_to_verify": 9,
+      "file_cap": 24,
+      "id": "T1",
+      "name": "nine_invoked_target_all_failures_and_uninvoked_reconciliation",
+      "output": "invocation_failure_uninvoked_ledger",
+      "requires_admitted_existing_owner": true,
+      "state": "proposed"
+    },
+    {
+      "depends_on": [
+        "N0"
+      ],
+      "file_cap": 12,
+      "id": "T2",
+      "name": "fresh_no_index_provenance_and_comparability",
+      "new_run_authorized": false,
+      "output": "distinct_run_comparison_table",
+      "requires_admitted_existing_owner": true,
+      "state": "proposed"
+    },
+    {
+      "depends_on": [
+        "N0"
+      ],
+      "file_cap": 16,
+      "id": "T3_T4",
+      "name": "adverse_outcomes_and_training_stage_distinction",
+      "output": "stage_labelled_adverse_and_training_table",
+      "requires_admitted_existing_owner": true,
+      "state": "proposed"
+    },
+    {
+      "depends_on": [
+        "N0"
+      ],
+      "file_cap": 16,
+      "id": "H1",
+      "name": "correct_revision_D1_D6_R1_R2_claim_reconciliation",
+      "output": "claim_evidence_counterevidence_matrix",
+      "requires_admitted_existing_owner": true,
+      "state": "proposed"
+    },
+    {
+      "depends_on": [
+        "N0"
+      ],
+      "does_not_rename_historical_X1": true,
+      "file_cap": 16,
+      "id": "IR1",
+      "name": "full_cross_ir_stage_and_training_ledger",
+      "output": "cross_ir_stage_checkpoint_projection_training_ledger",
+      "requires_admitted_existing_owner": true,
+      "state": "proposed"
+    },
+    {
+      "depends_on": [
+        "T1",
+        "T2",
+        "T3_T4",
+        "IR1"
+      ],
+      "file_cap": 12,
+      "id": "U1",
+      "name": "deduplicated_usage_and_reviewer_proof_reuse",
+      "output": "usage_and_artifact_reuse_table",
+      "requires_admitted_existing_owner": true,
+      "state": "proposed"
+    },
+    {
+      "depends_on": [
+        "N0",
+        "T1",
+        "T2"
+      ],
+      "file_cap": 8,
+      "id": "S1",
+      "name": "permitted_scorer_provenance_and_public_anonymization",
+      "output": "scorer_provenance_and_disclosure_note",
+      "requires_admitted_existing_owner": true,
+      "state": "proposed"
+    },
+    {
+      "depends_on": [
+        "T1",
+        "T2",
+        "T3_T4",
+        "H1",
+        "IR1",
+        "U1",
+        "S1"
+      ],
+      "id": "P1",
+      "name": "proposed_manuscript_patch_only",
+      "new_source_search_authorized": false,
+      "output": "separate_proposed_patch_and_limitations_note",
+      "requires_admitted_existing_owner": true,
+      "state": "proposed"
+    }
+  ],
+  "tasks_started": false
+}

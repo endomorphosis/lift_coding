@@ -1,0 +1,135 @@
+{
+  "artifact_verification": {
+    "artifact_cid": "baguqeeraty5q62r2343sv6vpxzs5ydbfscrjrtqkeo2lkokuv4ovsyssecxq",
+    "checks": {
+      "composition_redischarge": true,
+      "content_identity_reconstructed": true,
+      "discharge_identity_reconstructed": true,
+      "selected_test_receipt_cid": "baguqeerad5k5drxeuyyb7lmn3jyvp6lvyqcwzqbtgsdrvzhh7pkq22xqvtha",
+      "selected_test_receipt_reconstructed": true,
+      "selected_tests_replayed": true,
+      "semantic_index_reconstructed": true,
+      "semantic_state_reconstructed": true
+    },
+    "disposition": "validated",
+    "interface": "CompositionalVerificationArtifactVerifier@1",
+    "issues": [],
+    "replay_receipt_cid": "baguqeerazcs3367rehq4l3q6vq54hm55sljqa37gucealv46me5plvcl7uha",
+    "valid": true
+  },
+  "baseline_disposition": "proved",
+  "evidence": [
+    {
+      "behavior_reexecuted": false,
+      "bytes": 54778,
+      "evidence_tier": "original_record",
+      "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/compositional_v2/loaded_sources.json",
+      "sha256": "9756328b21bbdafe0b718690d31453f786c7ade47428a96b3f5e365c7004bc77",
+      "signature_verification": "not_performed"
+    },
+    {
+      "behavior_reexecuted": false,
+      "bytes": 147181,
+      "evidence_tier": "original_record",
+      "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/compositional_v2/native_result.json",
+      "sha256": "1d5c59c68312899613403cf09d5dffdd608e94e8e5433d760854e46ae5b1789c",
+      "signature_verification": "not_performed"
+    },
+    {
+      "behavior_reexecuted": false,
+      "bytes": 842,
+      "evidence_tier": "original_record",
+      "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/compositional_v2/child.py",
+      "sha256": "0685c149a0ba869627b037266e9fcaa36dd67b3dbb31ba1b9f6f5fbd85c07c37",
+      "signature_verification": "not_performed"
+    }
+  ],
+  "fault_disposition": "disproved",
+  "final_disposition": "proved",
+  "full_tests": {
+    "returncode": 0,
+    "status": "passed"
+  },
+  "incremental_solver_fingerprint": {
+    "configuration_root": "bafkreib5df3tgo2iff37knrs4g4pkitzuzejbhqg65mopj3nwnboedavg4",
+    "deterministic_seed": 0,
+    "environment_root": "baguqeerahp7eydwcm4prqf4t34otry6yimck3t5clnndmqq4bfwkm4svcm4a",
+    "logic": "QF_LIA",
+    "memory_limit_mib": 512,
+    "policy_root": "bafkreieeuslrb555ob4lhzl4jjbyr2eb7p7z7geti5uhdlf6bwy3dpoohe",
+    "provider": "z3",
+    "provider_version": "4.15.4",
+    "schema": "incremental-smt-session/v1",
+    "theory_fingerprint": "QF_LIA:range-failure@1",
+    "timeout_ms": 5000,
+    "translator_identity": "software-verification-smt-structured-term@1"
+  },
+  "interface": "CompositionalVerificationVerticalSlice@1",
+  "interpolant": {
+    "a_implies_i": true,
+    "a_implies_i_receipt": "bafkreidwxzojsf5apzbtnxajnle5hiv75d6xzea325p7gjwxxukslk3opq",
+    "bounds_ok": true,
+    "checks": {
+      "a_implies_i": true,
+      "bounds": true,
+      "i_and_b_unsat": true,
+      "identity": true,
+      "shared_vocabulary": true
+    },
+    "i_and_b_unsat": true,
+    "i_and_b_unsat_receipt": "bafkreihfchczhxblmt34mh7wgnwtzrm7dn52ecrm4cwqsdit6esgwrvs2u",
+    "identity_ok": true,
+    "independent_validator": "z3",
+    "independent_validator_version": "4.15.4",
+    "interpolant_cid": "bafkreibd2gbsolf7lscmipqrg2relzlbd3zm5nnajjoff5s24mqaqtvh5i",
+    "interpolation_api": true,
+    "limitations": [
+      "experimental_cvc5_interpolation_api",
+      "independent_z3_validation_is_solver_diversity_not_kernel_reconstruction",
+      "qualified_qf_lia_fragment_only"
+    ],
+    "provider": "cvc5",
+    "provider_version": "1.3.3",
+    "status": "validated"
+  },
+  "limitations": [
+    "Version strings and runtime checks are original record observations, not new execution or authenticated binary provenance.",
+    "Qualified QF_LIA interpolation/repair fixture; independent Z3 validation is not kernel reconstruction.",
+    "Internal benchmark estimates are not promoted to measured efficiency.",
+    "Full formula/solver-input/source bridge and original imported file bytes were not independently replayed in this supplement."
+  ],
+  "loaded_source_inventory": {
+    "actual_loaded_solver_binary_hashes": null,
+    "full_process_import_closure": false,
+    "recorded_files": 242,
+    "recorded_package_counts": {
+      "ipfs_accelerate_py": 173,
+      "ipfs_datasets_py": 59,
+      "ipfs_kit_py": 8,
+      "test": 2
+    },
+    "scope": "child.py only records sys.modules file paths resolving under the supplied source root",
+    "selected_observed_paths_and_sha256": {
+      "/home/barberb/lift_coding/.worktrees/agent-supervisor-efficiency-and-state-hardening-v1/ipfs_datasets_py/ipfs_datasets_py/logic/backends/smt/interpolation.py": "ed5c2cb85abee7daa340fadca2253bc6a46b87b9d0c88b0a23dec1497b5a5647",
+      "/home/barberb/lift_coding/.worktrees/agent-supervisor-efficiency-and-state-hardening-v1/ipfs_datasets_py/ipfs_datasets_py/logic/software_verification/abstract_interpretation.py": "9e1e2e864851f517dac5b0ca9c42e4563895f3677de929182870833f8e7ed3bd",
+      "/home/barberb/lift_coding/.worktrees/agent-supervisor-efficiency-and-state-hardening-v1/ipfs_datasets_py/ipfs_datasets_py/logic/software_verification/assume_guarantee.py": "709323057666a7d02ed9de57e4235e8e0cd2cc3cf9c01cf25b7843509c5a2b51",
+      "/home/barberb/lift_coding/.worktrees/agent-supervisor-efficiency-and-state-hardening-v1/ipfs_datasets_py/ipfs_datasets_py/logic/software_verification/concurrency.py": "4d47e1ffd235282b841ae00644832ec9105fc90ee9dbf05ced901f937e0e346a",
+      "/home/barberb/lift_coding/.worktrees/agent-supervisor-efficiency-and-state-hardening-v1/ipfs_datasets_py/ipfs_datasets_py/logic/software_verification/incremental_verification.py": "bc5bee5461be237b5ff83320d8bfa5409a188a026bee8a0d409fc19e5eeb7029",
+      "/home/barberb/lift_coding/.worktrees/agent-supervisor-efficiency-and-state-hardening-v1/ipfs_datasets_py/ipfs_datasets_py/logic/software_verification/receipts.py": "4065833e8fa766e587035c456b381fead715f39c1e4e4619ea0d0bb969a609ea",
+      "/home/barberb/lift_coding/.worktrees/agent-supervisor-efficiency-and-state-hardening-v1/ipfs_datasets_py/ipfs_datasets_py/logic/software_verification/translations.py": "c418cf45efd69dd01ced3eb2e05f9bc411ab12855fa408401d1ba74839df6dda"
+    },
+    "source_file_bytes_rehashed_in_supplement": false,
+    "source_root_currently_present": true,
+    "standard_library_and_third_party_included": false
+  },
+  "model_invocation_count": 0,
+  "production_authorized": false,
+  "release_qualified": false,
+  "schema": "paper-original-compositional-proof-recovery/v1",
+  "selected_tests": {
+    "returncode": 0,
+    "status": "passed"
+  },
+  "status": "completed_hermetic_local",
+  "study_id": "compositional-v2"
+}

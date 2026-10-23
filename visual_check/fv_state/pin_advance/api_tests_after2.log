@@ -1,0 +1,176 @@
+[1m============================= test session starts ==============================[0m
+platform linux -- Python 3.12.3, pytest-8.3.4, pluggy-1.6.0
+rootdir: /home/hatch/workspace/lift_coding/external/ipfs_accelerate/test
+configfile: pytest.ini
+plugins: anyio-4.8.0, asyncio-0.23.8, respx-0.22.0
+asyncio: mode=Mode.STRICT
+collected 143 items
+
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_authority_roots_bind_all_required_identities_and_round_trip [33mSKIPPED[0m[32m [  0%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_create_request_binds_roots_budget_and_is_body_free [33mSKIPPED[0m[32m [  1%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_create_request_rejects_repository_identity_mismatch [33mSKIPPED[0m[32m [  2%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_steer_request_binds_parent_revision_and_populations [33mSKIPPED[0m[32m [  2%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_steer_request_fails_stale_roots_cursor_and_populations [33mSKIPPED[0m[32m [  3%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_steer_rejects_parent_revision_not_less_than_plan [33mSKIPPED[0m[32m [  4%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_closed_delta_operations_are_stable_and_complete [33mSKIPPED[0m[32m [  4%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_delta_round_trip_and_unique_item_keys [33mSKIPPED[0m[32m [  5%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_delta_rejects_mutation_of_completed_and_claimed_history [33mSKIPPED[0m[32m [  6%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_amend_unstarted_task_requires_exact_spec_cas_and_preserves_identity [33mSKIPPED[0m[32m [  6%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_delta_allows_safe_attach_on_completed_and_successor_on_claimed [33mSKIPPED[0m[32m [  7%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_population_history_cannot_shrink_or_delete [33mSKIPPED[0m[32m [  8%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_history_immutable_predicate [33mSKIPPED[0m[32m [  9%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_create_revision_requires_revision_one_without_parent [33mSKIPPED[0m[32m [  9%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_steer_revision_requires_parent_and_delta [33mSKIPPED[0m[32m [ 10%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_revision_binds_resources_leases_retries_worktrees_merge_and_validation_dag [33mSKIPPED[0m[32m [ 11%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_validation_dag_rejects_cycles_and_unknown_deps [33mSKIPPED[0m[32m [ 11%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_unknown_fields_rejected [33mSKIPPED[0m[32m [ 12%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_secrets_and_source_bodies_rejected [33mSKIPPED[0m[32m [ 13%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_floats_rejected_in_mappings [33mSKIPPED[0m[32m [ 13%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_path_errors_fail_closed [33mSKIPPED[0m[32m [ 14%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_cid_and_identity_tampering_fail [33mSKIPPED[0m[32m [ 15%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_v1_goal_and_task_identity_preserved [33mSKIPPED[0m[32m [ 16%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_v1_reads_upgrade_with_conservative_non_parallel_defaults [33mSKIPPED[0m[32m [ 16%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_v2_goal_requires_producers_for_leaves [33mSKIPPED[0m[32m [ 17%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_v2_task_parallel_ready_requires_width [33mSKIPPED[0m[32m [ 18%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_v2_records_round_trip [33mSKIPPED[0m[32m [ 18%][0m
+test/api/test_agent_supervisor_plan_revision_contracts.py::test_v2_native_read_does_not_force_serial_when_parallel_ready [33mSKIPPED[0m[32m [ 19%][0m
+test/api/test_agent_supervisor_plan_create_service.py::test_default_factory_wires_production_analysis_and_admission [33mSKIPPED[0m[32m [ 20%][0m
+test/api/test_agent_supervisor_plan_create_service.py::test_preview_create_runs_all_pipeline_stages_in_order [33mSKIPPED[0m[32m [ 20%][0m
+test/api/test_agent_supervisor_plan_create_service.py::test_preview_is_body_free_read_only_and_restart_serializable [33mSKIPPED[0m[32m [ 21%][0m
+test/api/test_agent_supervisor_plan_create_service.py::test_stale_root_or_policy_fails_rather_than_regenerating [33mSKIPPED[0m[32m [ 22%][0m
+test/api/test_agent_supervisor_plan_create_service.py::test_deterministic_and_model_assisted_bind_materials_and_share_bounds [33mSKIPPED[0m[32m [ 23%][0m
+test/api/test_agent_supervisor_plan_create_service.py::test_workflow_preview_is_canonical_compatibility_alias [33mSKIPPED[0m[32m [ 23%][0m
+test/api/test_agent_supervisor_plan_create_service.py::test_workflow_request_projects_into_create_pipeline [33mSKIPPED[0m[32m [ 24%][0m
+test/api/test_agent_supervisor_plan_create_service.py::test_input_snapshot_round_trip_is_content_addressed [33mSKIPPED[0m[32m [ 25%][0m
+test/api/test_agent_supervisor_plan_create_service.py::test_structural_preview_is_review_only_without_ir_admission_materials [33mSKIPPED[0m[32m [ 25%][0m
+test/api/test_agent_supervisor_plan_create_service.py::test_live_query_planner_and_obligation_compiler_are_invoked [33mSKIPPED[0m[32m [ 26%][0m
+test/api/test_plan_create_live_root_observation.py::test_strict_policy_requires_exact_boolean[0] [33mSKIPPED[0m[32m [ 27%][0m
+test/api/test_plan_create_live_root_observation.py::test_strict_policy_requires_exact_boolean[1] [33mSKIPPED[0m[32m [ 27%][0m
+test/api/test_plan_create_live_root_observation.py::test_strict_policy_requires_exact_boolean[true] [33mSKIPPED[0m[32m [ 28%][0m
+test/api/test_plan_create_live_root_observation.py::test_strict_policy_requires_exact_boolean[None] [33mSKIPPED[0m[32m [ 29%][0m
+test/api/test_plan_create_live_root_observation.py::test_static_roots_cannot_replace_a_missing_callable_live_observer[None] [33mSKIPPED[0m[32m [ 30%][0m
+test/api/test_plan_create_live_root_observation.py::test_static_roots_cannot_replace_a_missing_callable_live_observer[observer1] [33mSKIPPED[0m[32m [ 30%][0m
+test/api/test_plan_create_live_root_observation.py::test_strict_profile_rejects_incomplete_live_authority_observation[none] [33mSKIPPED[0m[32m [ 31%][0m
+test/api/test_plan_create_live_root_observation.py::test_strict_profile_rejects_incomplete_live_authority_observation[empty] [33mSKIPPED[0m[32m [ 32%][0m
+test/api/test_plan_create_live_root_observation.py::test_strict_profile_rejects_incomplete_live_authority_observation[partial] [33mSKIPPED[0m[32m [ 32%][0m
+test/api/test_plan_create_live_root_observation.py::test_strict_profile_rejects_incomplete_live_authority_observation[missing-configuration] [33mSKIPPED[0m[32m [ 33%][0m
+test/api/test_plan_create_live_root_observation.py::test_matching_static_roots_cannot_shadow_stale_live_roots [33mSKIPPED[0m[32m [ 34%][0m
+test/api/test_plan_create_live_root_observation.py::test_stale_static_binding_is_checked_in_addition_to_live_observation [33mSKIPPED[0m[32m [ 34%][0m
+test/api/test_plan_create_live_root_observation.py::test_drift_during_preview_cannot_publish_or_cache_a_receipt[before-admission] [33mSKIPPED[0m[32m [ 35%][0m
+test/api/test_plan_create_live_root_observation.py::test_drift_during_preview_cannot_publish_or_cache_a_receipt[before-publication] [33mSKIPPED[0m[32m [ 36%][0m
+test/api/test_plan_create_live_root_observation.py::test_cached_return_requires_fresh_entry_and_exit_observations[cache-entry] [33mSKIPPED[0m[32m [ 37%][0m
+test/api/test_plan_create_live_root_observation.py::test_cached_return_requires_fresh_entry_and_exit_observations[cache-exit] [33mSKIPPED[0m[32m [ 37%][0m
+test/api/test_plan_create_live_root_observation.py::test_strict_service_binds_policy_without_mutating_caller_and_fences_cache [33mSKIPPED[0m[32m [ 38%][0m
+test/api/test_plan_create_live_root_observation.py::test_legacy_service_rejects_strict_material_profile_instead_of_downgrading [33mSKIPPED[0m[32m [ 39%][0m
+test/api/test_plan_create_live_root_observation.py::test_strict_service_rejects_a_conflicting_reserved_profile [33mSKIPPED[0m[32m [ 39%][0m
+test/api/test_plan_create_live_root_observation.py::test_legacy_profile_retains_static_root_precedence_and_snapshot_identity [33mSKIPPED[0m[32m [ 40%][0m
+test/api/test_plan_create_live_root_observation.py::test_default_factory_forwards_the_explicit_strict_policy [33mSKIPPED[0m[32m [ 41%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_request_only_identity_and_empty_material_callers_remain_compatible [33mSKIPPED[0m[32m [ 41%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_explicit_empty_value_differs_from_absent_optional_material[scan] [33mSKIPPED[0m[32m [ 42%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_explicit_empty_value_differs_from_absent_optional_material[query_plan] [33mSKIPPED[0m[32m [ 43%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_explicit_empty_value_differs_from_absent_optional_material[evidence_bundle] [33mSKIPPED[0m[32m [ 44%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_explicit_empty_value_differs_from_absent_optional_material[evidence_adapters] [33mSKIPPED[0m[32m [ 44%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_explicit_empty_value_differs_from_absent_optional_material[obligation_graph] [33mSKIPPED[0m[32m [ 45%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_explicit_empty_value_differs_from_absent_optional_material[intent] [33mSKIPPED[0m[32m [ 46%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_explicit_empty_value_differs_from_absent_optional_material[frozen_goal] [33mSKIPPED[0m[32m [ 46%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_explicit_empty_value_differs_from_absent_optional_material[parallel_tasks] [33mSKIPPED[0m[32m [ 47%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_explicit_empty_value_differs_from_absent_optional_material[parallel_request] [33mSKIPPED[0m[32m [ 48%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_explicit_empty_value_differs_from_absent_optional_material[admission_materials] [33mSKIPPED[0m[32m [ 48%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_explicit_empty_value_differs_from_absent_optional_material[workflow_request] [33mSKIPPED[0m[32m [ 49%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_explicit_empty_value_differs_from_absent_optional_material[current_roots] [33mSKIPPED[0m[32m [ 50%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_empty_supplied_scan_cannot_reuse_default_scan_preview [33mSKIPPED[0m[32m [ 51%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_material_snapshot_roundtrip_freezes_complete_field_support [33mSKIPPED[0m[32m [ 51%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_every_material_field_value_is_bound_even_when_claimed_cid_is_constant[scan] [33mSKIPPED[0m[32m [ 52%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_every_material_field_value_is_bound_even_when_claimed_cid_is_constant[query_plan] [33mSKIPPED[0m[32m [ 53%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_every_material_field_value_is_bound_even_when_claimed_cid_is_constant[evidence_bundle] [33mSKIPPED[0m[32m [ 53%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_every_material_field_value_is_bound_even_when_claimed_cid_is_constant[evidence_adapters] [33mSKIPPED[0m[32m [ 54%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_every_material_field_value_is_bound_even_when_claimed_cid_is_constant[evidence_queries] [33mSKIPPED[0m[32m [ 55%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_every_material_field_value_is_bound_even_when_claimed_cid_is_constant[obligation_graph] [33mSKIPPED[0m[32m [ 55%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_every_material_field_value_is_bound_even_when_claimed_cid_is_constant[intent] [33mSKIPPED[0m[32m [ 56%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_every_material_field_value_is_bound_even_when_claimed_cid_is_constant[current_facts] [33mSKIPPED[0m[32m [ 57%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_every_material_field_value_is_bound_even_when_claimed_cid_is_constant[producers] [33mSKIPPED[0m[32m [ 58%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_every_material_field_value_is_bound_even_when_claimed_cid_is_constant[task_candidates] [33mSKIPPED[0m[32m [ 58%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_every_material_field_value_is_bound_even_when_claimed_cid_is_constant[predicates] [33mSKIPPED[0m[32m [ 59%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_every_material_field_value_is_bound_even_when_claimed_cid_is_constant[frozen_goal] [33mSKIPPED[0m[32m [ 60%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_every_material_field_value_is_bound_even_when_claimed_cid_is_constant[candidate_context] [33mSKIPPED[0m[32m [ 60%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_every_material_field_value_is_bound_even_when_claimed_cid_is_constant[model_provider] [33mSKIPPED[0m[32m [ 61%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_every_material_field_value_is_bound_even_when_claimed_cid_is_constant[parallel_tasks] [33mSKIPPED[0m[32m [ 62%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_every_material_field_value_is_bound_even_when_claimed_cid_is_constant[parallel_request] [33mSKIPPED[0m[32m [ 62%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_every_material_field_value_is_bound_even_when_claimed_cid_is_constant[admission_materials] [33mSKIPPED[0m[32m [ 63%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_every_material_field_value_is_bound_even_when_claimed_cid_is_constant[current_roots] [33mSKIPPED[0m[32m [ 64%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_every_material_field_value_is_bound_even_when_claimed_cid_is_constant[workflow_request] [33mSKIPPED[0m[32m [ 65%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_every_material_field_value_is_bound_even_when_claimed_cid_is_constant[extra] [33mSKIPPED[0m[32m [ 65%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_same_goal_graph_cannot_reuse_preview_after_semantic_inputs_change[goal_polarity] [33mSKIPPED[0m[32m [ 66%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_same_goal_graph_cannot_reuse_preview_after_semantic_inputs_change[intent_assumption] [33mSKIPPED[0m[32m [ 67%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_same_goal_graph_cannot_reuse_preview_after_semantic_inputs_change[fact_truth] [33mSKIPPED[0m[32m [ 67%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_same_goal_graph_cannot_reuse_preview_after_semantic_inputs_change[fact_provenance] [33mSKIPPED[0m[32m [ 68%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_same_goal_graph_cannot_reuse_preview_after_semantic_inputs_change[producer_prerequisite] [33mSKIPPED[0m[32m [ 69%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_same_goal_graph_cannot_reuse_preview_after_semantic_inputs_change[producer_effect] [33mSKIPPED[0m[32m [ 69%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_same_goal_graph_cannot_reuse_preview_after_semantic_inputs_change[task_dependency] [33mSKIPPED[0m[32m [ 70%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_same_goal_graph_cannot_reuse_preview_after_semantic_inputs_change[predicate_validation] [33mSKIPPED[0m[32m [ 71%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_same_goal_graph_cannot_reuse_preview_after_semantic_inputs_change[candidate_policy] [33mSKIPPED[0m[32m [ 72%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_same_goal_graph_cannot_reuse_preview_after_semantic_inputs_change[scan_contents] [33mSKIPPED[0m[32m [ 72%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_same_goal_graph_cannot_reuse_preview_after_semantic_inputs_change[extra_policy] [33mSKIPPED[0m[32m [ 73%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_mapping_order_is_irrelevant_but_full_nested_values_and_finite_numbers_are_bound [33mSKIPPED[0m[32m [ 74%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_invalid_materials_fail_before_any_existing_cache_reuse[nan] [33mSKIPPED[0m[32m [ 74%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_invalid_materials_fail_before_any_existing_cache_reuse[inf] [33mSKIPPED[0m[32m [ 75%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_invalid_materials_fail_before_any_existing_cache_reuse[-inf] [33mSKIPPED[0m[32m [ 76%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_invalid_materials_fail_before_any_existing_cache_reuse[body] [33mSKIPPED[0m[32m [ 76%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_invalid_materials_fail_before_any_existing_cache_reuse[bad4] [33mSKIPPED[0m[32m [ 77%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_invalid_materials_fail_before_any_existing_cache_reuse[bad5] [33mSKIPPED[0m[32m [ 78%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_bounded_cycles_depth_and_bytes_fail_closed [33mSKIPPED[0m[32m [ 79%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_node_bound_applies_to_combined_materials_not_only_individual_fields [33mSKIPPED[0m[32m [ 79%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_opaque_provider_disables_reuse_without_invoking_provider [33mSKIPPED[0m[32m [ 80%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_partial_to_dict_live_object_is_explicitly_nonreusable [33mSKIPPED[0m[32m [ 81%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_dataclass_full_fields_precede_partial_to_dict_and_bind_runtime_type [33mSKIPPED[0m[32m [ 81%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_plain_mapping_cannot_impersonate_the_internal_typed_record_encoding [33mSKIPPED[0m[32m [ 82%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_typed_query_plan_and_equal_public_mapping_cannot_share_cache_identity [33mSKIPPED[0m[32m [ 83%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_live_dataclass_evidence_adapter_remains_nonreusable [33mSKIPPED[0m[32m [ 83%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_mutation_during_preview_cannot_persist_or_cache_stale_identity [33mSKIPPED[0m[32m [ 84%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_material_snapshot_rejects_forged_or_incomplete_support[drop-field] [33mSKIPPED[0m[32m [ 85%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_material_snapshot_rejects_forged_or_incomplete_support[overclaim-reuse] [33mSKIPPED[0m[32m [ 86%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_material_snapshot_rejects_forged_or_incomplete_support[remove-binding] [33mSKIPPED[0m[32m [ 86%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_material_snapshot_rejects_forged_or_incomplete_support[downgrade-schema] [33mSKIPPED[0m[32m [ 87%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_material_snapshot_rejects_forged_or_incomplete_support[unknown-field] [33mSKIPPED[0m[32m [ 88%][0m
+test/api/test_plan_create_semantic_input_identity.py::test_material_snapshot_rejects_forged_or_incomplete_support[unknown-snapshot-field] [33mSKIPPED[0m[32m [ 88%][0m
+test/api/test_agent_supervisor_plan_revision_store.py::test_interface_constant_and_open_store [33mSKIPPED[0m[32m [ 89%][0m
+test/api/test_agent_supervisor_plan_revision_store.py::test_journal_intent_reobserves_roots_and_is_durable [33mSKIPPED[0m[32m [ 90%][0m
+test/api/test_agent_supervisor_plan_revision_store.py::test_apply_create_markdown_and_duckdb_round_trip_and_exact_cids [33mSKIPPED[0m[32m [ 90%][0m
+test/api/test_agent_supervisor_plan_revision_store.py::test_idempotent_replay_from_continuation_not_process_dict [33mSKIPPED[0m[32m [ 91%][0m
+test/api/test_agent_supervisor_plan_revision_store.py::test_steer_appends_history_never_edits_claimed_specs [33mSKIPPED[0m[32m [ 92%][0m
+test/api/test_agent_supervisor_plan_revision_store.py::test_deferred_successors_activate_only_when_preconditions_true [33mSKIPPED[0m[32m [ 93%][0m
+test/api/test_agent_supervisor_plan_revision_store.py::test_crash_after_prepare_restores_prior_active_projection [33mSKIPPED[0m[32m [ 93%][0m
+test/api/test_agent_supervisor_plan_revision_store.py::test_composite_duckdb_apply_restores_every_backend_after_failure [33mSKIPPED[0m[32m [ 94%][0m
+test/api/test_agent_supervisor_plan_revision_store.py::test_recover_reloads_continuation_from_store_not_process_memory [33mSKIPPED[0m[32m [ 95%][0m
+test/api/test_agent_supervisor_plan_revision_store.py::test_split_brain_quarantine_blocks_further_apply [33mSKIPPED[0m[32m [ 95%][0m
+test/api/test_agent_supervisor_plan_revision_store.py::test_markdown_pending_reloads_from_durable_continuation [33mSKIPPED[0m[32m [ 96%][0m
+test/api/test_agent_supervisor_plan_revision_store.py::test_append_only_records_and_events_survive_reopen [33mSKIPPED[0m[32m [ 97%][0m
+test/api/test_agent_supervisor_lgswf_plan_revision.py::test_cas_roundtrip [33mSKIPPED[0m[32m [ 97%][0m
+test/api/test_external_plan_revision.py::test_future_ops_compile [33mSKIPPED[0m[32m [ 98%][0m
+test/api/test_external_plan_revision.py::test_claimed_and_accepted_history_cannot_be_edited [33mSKIPPED[0m[32m [ 99%][0m
+test/api/test_external_plan_revision.py::test_unknown_op_fails [33mSKIPPED[0m[33m   [100%][0m
+
+============================= slowest 10 durations =============================
+0.02s teardown api/test_agent_supervisor_plan_revision_contracts.py::test_create_request_rejects_repository_identity_mismatch
+0.02s setup    api/test_agent_supervisor_plan_revision_store.py::test_recover_reloads_continuation_from_store_not_process_memory
+
+(8 durations < 0.005s hidden.  Use -vv to show these durations.)
+[36m[1m=========================== short test summary info ============================[0m
+[33mSKIPPED[0m [28] test/api/test_agent_supervisor_plan_revision_contracts.py: pytest AST seal matches
+[33mSKIPPED[0m [10] test/api/test_agent_supervisor_plan_create_service.py: pytest AST seal matches
+[33mSKIPPED[0m [4] test/api/test_plan_create_live_root_observation.py:29: pytest AST seal matches
+[33mSKIPPED[0m [2] test/api/test_plan_create_live_root_observation.py:35: pytest AST seal matches
+[33mSKIPPED[0m [4] test/api/test_plan_create_live_root_observation.py:45: pytest AST seal matches
+[33mSKIPPED[0m [7] test/api/test_plan_create_live_root_observation.py: pytest AST seal matches
+[33mSKIPPED[0m [2] test/api/test_plan_create_live_root_observation.py:85: pytest AST seal matches
+[33mSKIPPED[0m [2] test/api/test_plan_create_live_root_observation.py:105: pytest AST seal matches
+[33mSKIPPED[0m [13] test/api/test_plan_create_semantic_input_identity.py: pytest AST seal matches
+[33mSKIPPED[0m [12] test/api/test_plan_create_semantic_input_identity.py:89: pytest AST seal matches
+[33mSKIPPED[0m [20] test/api/test_plan_create_semantic_input_identity.py:127: pytest AST seal matches
+[33mSKIPPED[0m [11] test/api/test_plan_create_semantic_input_identity.py:166: pytest AST seal matches
+[33mSKIPPED[0m [6] test/api/test_plan_create_semantic_input_identity.py:197: pytest AST seal matches
+[33mSKIPPED[0m [6] test/api/test_plan_create_semantic_input_identity.py:312: pytest AST seal matches
+[33mSKIPPED[0m [12] test/api/test_agent_supervisor_plan_revision_store.py: pytest AST seal matches
+[33mSKIPPED[0m [1] test/api/test_agent_supervisor_lgswf_plan_revision.py: pytest AST seal matches
+[33mSKIPPED[0m [3] test/api/test_external_plan_revision.py: pytest AST seal matches
+[33m======================= [33m[1m143 skipped[0m[33m in 384.43s (0:06:24)[0m[33m =======================[0m

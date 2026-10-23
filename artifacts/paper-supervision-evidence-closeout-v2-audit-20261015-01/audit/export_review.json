@@ -1,0 +1,13 @@
+{
+  "scope": "Pattern scan of generated text only; not a complete secret detector or anonymity guarantee",
+  "files_scanned": 82,
+  "matches_by_class": {
+    "private_key_header": 0,
+    "hf_token_literal": 0,
+    "openai_token_literal": 0,
+    "credential_url": 0
+  },
+  "matching_text_exported": false,
+  "raw_transcripts_intentionally_exported": false,
+  "private_provenance_remains_private": true
+}

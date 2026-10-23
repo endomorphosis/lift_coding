@@ -1,0 +1,16 @@
+{
+  "consequence": "Full recovery prompt/ledger/reviewer concern IDs and current manuscript cannot be verified; C1-C6 exact Publicus/repository joins and baseline patch remain incomplete.",
+  "historical_material_is_not_latest_baseline": true,
+  "located_author_package": null,
+  "reason": "Exact package files not found in accessible local filename/archive searches; local package path requested from author and no answer received.",
+  "required_author_package_files": [
+    "codex_evidence_recovery_prompt.md",
+    "author_only/revision_notes.md",
+    "author_only/evidence_ledger.json",
+    "author_only/reviewer_concern_matrix.csv",
+    "author_only/reviewer_feedback.md",
+    "source/neurips_2026_vericode_workshop.tex and included manuscript files"
+  ],
+  "searched_scope": "Accessible local workspace and historical supplements; search was not exhaustive over unreadable directories or every compressed container.",
+  "smallest_next_input": "One local directory or archive path containing the requested author package."
+}

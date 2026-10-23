@@ -1,0 +1,19 @@
+{
+  "anonymous_derivatives": [],
+  "limitations": [
+    "Absolute source paths, stable hashes and original task identifiers remain author-only.",
+    "Derivative hashes will be new commitments, not inherited original signatures.",
+    "No blanket anonymity guarantee is made."
+  ],
+  "local_derivatives": [
+    "manuscript/main.md",
+    "manuscript/appendices.md",
+    "manuscript/abstract.txt"
+  ],
+  "local_derivatives_are_anonymous_release_artifacts": false,
+  "original_signatures_claimed_for_derivatives": false,
+  "private_provenance_manifest": "package_manifest.private.json",
+  "published": false,
+  "release_ready": false,
+  "schema": "anonymous-release-inventory@1"
+}

@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "/home/hatch/workspace/lift_coding/visual_check/fv_state/pin_advance/probe_seed.py", line 29, in <module>
+    run = supervisor.run(os.environ.get("IPFS_ACCELERATE_SUPERVISOR_SEED_PROMPT") or DEFAULT_SEED_PROMPT)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/facade.py", line 303, in run
+    return self._run_from_prompt(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/facade.py", line 483, in _run_from_prompt
+    plan_request = plan_create_request_from_workflow(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/prompt/plan_create_service.py", line 1173, in plan_create_request_from_workflow
+    return PlanCreateRequest(
+           ^^^^^^^^^^^^^^^^^^
+  File "<string>", line 23, in __init__
+  File "/home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py", line 1745, in __post_init__
+    self, "scope_paths", _paths(self.scope_paths, "scope_paths")
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py", line 549, in _paths
+    return tuple(sorted({_relative_path(value, field_name) for value in raw}))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/planning/plan_revision_contracts.py", line 443, in _relative_path
+    raise PlanRevisionPathError(
+ipfs_accelerate_py.agent_supervisor.planning.plan_revision_contracts.PlanRevisionPathError: scope_paths must be a relative repository path
+repository: /home/hatch/workspace/lift_coding/external/ipfs_accelerate
+open OK, composition_cid: baguqeerauqzq7qsd5l23zxfasd7it6rhxabq747agtnelhkmqnbcgfg5tm3a

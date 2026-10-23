@@ -1,0 +1,751 @@
+{
+  "schema": "bounded-nested-publication-coverage@1",
+  "max_depth": 5,
+  "repositories": [
+    {
+      "path": "hallucinate_app",
+      "base_commit": "8a5f89e6d4c1566675d2676b84a99abcf9c48419",
+      "origin": "https://github.com/endomorphosis/hallucinate_app.git",
+      "dirty_tracked_source_count": 0,
+      "depth": 0,
+      "status": "no_dirty_tracked_source"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py",
+      "base_commit": "0cc04ebb640c4c981cf4650016e096a73ab0e8c0",
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+      "dirty_tracked_source_count": 6143,
+      "depth": 1,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "17c17a68fa33aa8dfdf17c3f6d1fc1db3bbf108c",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_accelerate"
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py",
+      "base_commit": "d144be65ffe4c6423e4e1c30cd692812607343eb",
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+      "dirty_tracked_source_count": 6831,
+      "depth": 1,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "af750410a665545a28a3347157e1dda0ded5876f",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_datasets"
+    },
+    {
+      "path": "hallucinate_app/ipfs_kit_py",
+      "base_commit": "f6a574375febbcf9a46fcd24bbc7bc5cfb551de5",
+      "origin": "https://github.com/endomorphosis/ipfs_kit_py.git",
+      "dirty_tracked_source_count": 4353,
+      "depth": 1,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "21f5623d043f838cc060ed5471e0d1ff88e0de8d",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_kit"
+    },
+    {
+      "path": "hallucinate_app/swissknife",
+      "base_commit": "df11f08fae17d35153e420fdcdc5b38d9f6b9a7f",
+      "origin": "https://github.com/endomorphosis/swissknife.git",
+      "dirty_tracked_source_count": 103,
+      "depth": 1,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "fffd055f32118e2784173596a5954db4384cc993",
+      "verified_origin_repository": "/home/barberb/lift_coding/swissknife"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/docs/fastmcp",
+      "base_commit": "f4ae8bb0af04cb315eef262d38433af4b71d9c38",
+      "origin": "https://github.com/jlowin/fastmcp.git",
+      "dirty_tracked_source_count": 18,
+      "depth": 2,
+      "status": "preserved_extra_vendor_patch",
+      "patch_label": "fastmcp-f4ae8bb0af04",
+      "manifest": "extra_vendor_patches/manifest.json"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/docs/mcp-python-sdk",
+      "base_commit": "0da9a074d09267a927d72faa58c26d828f0f8edb",
+      "origin": "https://github.com/jlowin/mcp-python-sdk.git",
+      "dirty_tracked_source_count": 9,
+      "depth": 2,
+      "status": "preserved_extra_vendor_patch",
+      "patch_label": "jlowin-python-sdk-0da9a074d092",
+      "manifest": "extra_vendor_patches/manifest.json"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_accelerate_py/mcplusplus",
+      "base_commit": "f98184f1e041930f0243375af2526d2005f19be1",
+      "origin": "https://github.com/endomorphosis/Mcp-Plus-Plus.git",
+      "dirty_tracked_source_count": 47,
+      "depth": 2,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "265b455edd527862846410f1813d5d2bc0d26c42",
+      "verified_origin_repository": "/home/barberb/lift_coding/Mcp-Plus-Plus"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py",
+      "base_commit": "827e4791d8cc0d52d6d04c5f88e1ec2ac938b240",
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+      "dirty_tracked_source_count": 7282,
+      "depth": 2,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "440b44d31f114e69e85219d1f377c43d3790605f",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_datasets"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_kit_py",
+      "base_commit": "f6a574375febbcf9a46fcd24bbc7bc5cfb551de5",
+      "origin": "https://github.com/endomorphosis/ipfs_kit_py.git",
+      "dirty_tracked_source_count": 4353,
+      "depth": 2,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "ad871798ede079f5c7b5ed193224f9c1048913cf",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_kit"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_model_manager_py",
+      "base_commit": "f6151d2113f42e75ea7d83a1b2362fc97e55e44d",
+      "origin": "https://github.com/endomorphosis/ipfs_model_manager_py.git",
+      "dirty_tracked_source_count": 0,
+      "depth": 2,
+      "status": "no_dirty_tracked_source"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_transformers_py",
+      "base_commit": "b397988ed9e3e656475c1cf4417b84efdb95daf3",
+      "origin": "https://github.com/endomorphosis/ipfs_transformers_py.git",
+      "dirty_tracked_source_count": 0,
+      "depth": 2,
+      "status": "no_dirty_tracked_source"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/test/doc-builder",
+      "base_commit": "6108e850ae1cf2f71bb0815a600bcd50c39abfa7",
+      "origin": "https://github.com/huggingface/doc-builder.git",
+      "dirty_tracked_source_count": 0,
+      "depth": 2,
+      "status": "no_dirty_tracked_source"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/test/huggingface_doc_builder",
+      "base_commit": "6108e850ae1cf2f71bb0815a600bcd50c39abfa7",
+      "origin": "https://github.com/huggingface/doc-builder.git",
+      "dirty_tracked_source_count": 0,
+      "depth": 2,
+      "status": "no_dirty_tracked_source"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/test/huggingface_transformers",
+      "base_commit": "44752c8dd99f3fb0da23006dc4fde4a07d9c417f",
+      "origin": "https://github.com/huggingface/transformers.git",
+      "dirty_tracked_source_count": 556,
+      "depth": 2,
+      "status": "preserved_extra_vendor_patch",
+      "patch_label": "transformers-44752c8dd99f",
+      "manifest": "extra_vendor_patches/manifest.json"
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py/.tools/ipfs_kit_py",
+      "base_commit": "f6a574375febbcf9a46fcd24bbc7bc5cfb551de5",
+      "origin": "https://github.com/endomorphosis/ipfs_kit_py.git",
+      "dirty_tracked_source_count": 4353,
+      "depth": 2,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "420509af7fca077dc0204d8bb3be92a7ce1dac66",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_kit"
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py/ipfs_accelerate_py",
+      "base_commit": "ff401f83b7e722e58af1696243b3aff9679a7002",
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+      "dirty_tracked_source_count": 5928,
+      "depth": 2,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "cd0b03fad8ba245b4bdd5cca06db6ad7c8a7f321",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_accelerate"
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/DCEC_Library",
+      "base_commit": "a4beb5b3280595be6b9221cac3c91dd019e6d371",
+      "origin": "https://github.com/endomorphosis/DCEC_Library.git",
+      "dirty_tracked_source_count": 1,
+      "depth": 2,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "8b01d61e85aa72eb8904dfde407980ef080586df",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/CEC/DCEC_Library"
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/Eng-DCEC",
+      "base_commit": "df518c21ef81b8001e6db59f5fd70f10cc04ff6c",
+      "origin": "https://github.com/endomorphosis/Eng-DCEC.git",
+      "dirty_tracked_source_count": 0,
+      "depth": 2,
+      "status": "no_dirty_tracked_source"
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/ShadowProver",
+      "base_commit": "3060ede1ac1ec3f8ef9f9c9e41386aed1dbbe7f9",
+      "origin": "https://github.com/endomorphosis/ShadowProver.git",
+      "dirty_tracked_source_count": 0,
+      "depth": 2,
+      "status": "no_dirty_tracked_source"
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/Talos",
+      "base_commit": "e0b7650d3e3a403924773f8253e924c719748d36",
+      "origin": "https://github.com/endomorphosis/Talos.git",
+      "dirty_tracked_source_count": 1,
+      "depth": 2,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "5f27c4500cf8eb104b29296ab166357ec29120bb",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/CEC/Talos"
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+      "base_commit": "d58933631a5362b1e2fdc45254ef620fa231223a",
+      "origin": "https://github.com/endomorphosis/convert_to_txt_based_on_mime_type.git",
+      "dirty_tracked_source_count": 89,
+      "depth": 2,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "b0d59fda7b473c7dd8b7b0fab8425652c491498d",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type"
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py/ipfs_datasets_py/multimedia/omni_converter_mk2",
+      "base_commit": "c1d9b0d517cea022516aab5b5d8fa5e3bc9a65aa",
+      "origin": "https://github.com/endomorphosis/omni_converter_mk2.git",
+      "dirty_tracked_source_count": 386,
+      "depth": 2,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "4e345251bcee84ae5e29f4da167be8084e7e787c",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/multimedia/omni_converter_mk2"
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+      "base_commit": "5c7c2ab8a509073f39359b2a35446183855f460a",
+      "origin": "https://github.com/endomorphosis/common_crawl_search_engine.git",
+      "dirty_tracked_source_count": 99,
+      "depth": 2,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "7d9edf423128471ba214e8907c7d5505fa80bd70",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine"
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py/ipfs_kit_py",
+      "base_commit": "f6a574375febbcf9a46fcd24bbc7bc5cfb551de5",
+      "origin": "https://github.com/endomorphosis/ipfs_kit_py.git",
+      "dirty_tracked_source_count": 4353,
+      "depth": 2,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "08207c34112c0cd23519cb25358225e90d33403b",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_kit"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py",
+      "base_commit": "ad19bd0a548139c540bd78163b9bea8dd38bf6cb",
+      "origin": "https://github.com/endomorphosis/ipfs_kit_py.git",
+      "dirty_tracked_source_count": 4353,
+      "depth": 3,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "43efe87b27cfa5f3d4747d6bc778e91d27db917f",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_kit"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/ipfs_accelerate_py",
+      "base_commit": "ff401f83b7e722e58af1696243b3aff9679a7002",
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+      "dirty_tracked_source_count": 5928,
+      "depth": 3,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "cf2ffbcc8876cfbbb53a1bed76f3e43339dfca1f",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_accelerate"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/DCEC_Library",
+      "base_commit": "a4beb5b3280595be6b9221cac3c91dd019e6d371",
+      "origin": "https://github.com/endomorphosis/DCEC_Library.git",
+      "dirty_tracked_source_count": 1,
+      "depth": 3,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "37604c7fc8ed5945e1f945a91035c965594e0b98",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/CEC/DCEC_Library"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/Eng-DCEC",
+      "base_commit": "856a0b164c08bab98c16e7d25c4d96e74b9b2162",
+      "origin": "https://github.com/endomorphosis/Eng-DCEC.git",
+      "dirty_tracked_source_count": 0,
+      "depth": 3,
+      "status": "no_dirty_tracked_source"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/ShadowProver",
+      "base_commit": "0a17d82015649d06261ea2841695b81d10b87785",
+      "origin": "https://github.com/endomorphosis/ShadowProver.git",
+      "dirty_tracked_source_count": 0,
+      "depth": 3,
+      "status": "no_dirty_tracked_source"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/Talos",
+      "base_commit": "cd8e4c71ddda460fbf73a3b15f935d21fb0576b6",
+      "origin": "https://github.com/endomorphosis/Talos.git",
+      "dirty_tracked_source_count": 1,
+      "depth": 3,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "b54c12cc714087593fa6a4132536d4f971d54e8b",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/CEC/Talos"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+      "base_commit": "d58933631a5362b1e2fdc45254ef620fa231223a",
+      "origin": "https://github.com/endomorphosis/convert_to_txt_based_on_mime_type.git",
+      "dirty_tracked_source_count": 89,
+      "depth": 3,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "c78dc464b8665d1affa89f7a1752be5c7c27bc1b",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/multimedia/omni_converter_mk2",
+      "base_commit": "c1d9b0d517cea022516aab5b5d8fa5e3bc9a65aa",
+      "origin": "https://github.com/endomorphosis/omni_converter_mk2.git",
+      "dirty_tracked_source_count": 386,
+      "depth": 3,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "a484d4e9f94b67fbf937ed3eb5fb65b1e7dbe7ce",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/multimedia/omni_converter_mk2"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+      "base_commit": "5c7c2ab8a509073f39359b2a35446183855f460a",
+      "origin": "https://github.com/endomorphosis/common_crawl_search_engine.git",
+      "dirty_tracked_source_count": 99,
+      "depth": 3,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "29698d3aebee605ffc9cad4a26c6930a6ab4321e",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/ipfs_kit_py",
+      "base_commit": "ad19bd0a548139c540bd78163b9bea8dd38bf6cb",
+      "origin": "https://github.com/endomorphosis/ipfs_kit_py.git",
+      "dirty_tracked_source_count": 4353,
+      "depth": 3,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "9cec3022dc5f11d4741f50c49bfd167be5193237",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_kit"
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py/.tools/ipfs_kit_py/docs/filesystem_spec",
+      "base_commit": "d256591c80620c14a574b803831f39f3ff87420b",
+      "origin": "https://github.com/fsspec/filesystem_spec.git",
+      "dirty_tracked_source_count": 1,
+      "depth": 3,
+      "status": "preserved_known_vendor_patch",
+      "manifest": "third_party_patches/manifest.json",
+      "matched_variant": [
+        "filesystem_spec"
+      ],
+      "comparison": "exact_modified_path_set_and_base_result_sha256",
+      "archive_base_commit": [
+        "d256591c80620c14a574b803831f39f3ff87420b"
+      ]
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py/.tools/ipfs_kit_py/docs/ipfs-docs",
+      "base_commit": "4cf83720b59738d93db4068976f9c2a11f023e45",
+      "origin": "https://github.com/ipfs/ipfs-docs.git",
+      "dirty_tracked_source_count": 3,
+      "depth": 3,
+      "status": "preserved_known_vendor_patch",
+      "manifest": "third_party_patches/manifest.json",
+      "matched_variant": [
+        "ipfs-docs"
+      ],
+      "comparison": "exact_modified_path_set_and_base_result_sha256",
+      "archive_base_commit": [
+        "d725e8e945266dda4175a04371a9f9976a990aa7"
+      ]
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py/.tools/ipfs_kit_py/docs/ipfs_cluster",
+      "base_commit": "c7ca8b5f87b41fcc795297ca65b0bb41c10234bf",
+      "origin": "https://github.com/ipfs-cluster/ipfs-cluster-website.git",
+      "dirty_tracked_source_count": 0,
+      "depth": 3,
+      "status": "no_dirty_tracked_source"
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py/.tools/ipfs_kit_py/docs/ipfsspec",
+      "base_commit": "03f5199b9bf5a96c7ebf5e2e6f5dce8cf58b655f",
+      "origin": "https://github.com/fsspec/ipfsspec.git",
+      "dirty_tracked_source_count": 9,
+      "depth": 3,
+      "status": "preserved_known_vendor_patch",
+      "manifest": "third_party_patches/manifest.json",
+      "matched_variant": [
+        "ipfsspec"
+      ],
+      "comparison": "exact_modified_path_set_and_base_result_sha256",
+      "archive_base_commit": [
+        "03f5199b9bf5a96c7ebf5e2e6f5dce8cf58b655f"
+      ]
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py/.tools/ipfs_kit_py/docs/lassie",
+      "base_commit": "c6ba777810d03fed23aea11b5969b7d8a97f1edf",
+      "origin": "https://github.com/filecoin-project/lassie.git",
+      "dirty_tracked_source_count": 0,
+      "depth": 3,
+      "status": "no_dirty_tracked_source"
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py/.tools/ipfs_kit_py/docs/libp2p-universal-connectivity",
+      "base_commit": "e18a6de9c020c5e406d9f61b638f5d276054798d",
+      "origin": "https://github.com/libp2p/universal-connectivity.git",
+      "dirty_tracked_source_count": 0,
+      "depth": 3,
+      "status": "no_dirty_tracked_source"
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py/.tools/ipfs_kit_py/docs/libp2p_docs",
+      "base_commit": "17cee4a438797313d1e878b103abc1dbefdf423e",
+      "origin": "https://github.com/libp2p/docs.git",
+      "dirty_tracked_source_count": 0,
+      "depth": 3,
+      "status": "no_dirty_tracked_source"
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py/.tools/ipfs_kit_py/docs/lighthouse-python-sdk",
+      "base_commit": "6b2c86693090c770d2c9a4d82ba315000a77068b",
+      "origin": "https://github.com/lighthouse-web3/lighthouse-python-sdk.git",
+      "dirty_tracked_source_count": 29,
+      "depth": 3,
+      "status": "preserved_known_vendor_patch",
+      "manifest": "third_party_patches/manifest.json",
+      "matched_variant": [
+        "lighthouse-python-sdk"
+      ],
+      "comparison": "exact_modified_path_set_and_base_result_sha256",
+      "archive_base_commit": [
+        "6b2c86693090c770d2c9a4d82ba315000a77068b"
+      ]
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py/.tools/ipfs_kit_py/docs/mcp-python-sdk",
+      "base_commit": "45f2a88a9aaeee5019d0fd4541693757ace5bbc3",
+      "origin": "https://github.com/modelcontextprotocol/python-sdk.git",
+      "dirty_tracked_source_count": 49,
+      "depth": 3,
+      "status": "preserved_known_vendor_patch",
+      "manifest": "third_party_patches/manifest.json",
+      "matched_variant": [
+        "mcp-python-sdk-hallucinate-datasets"
+      ],
+      "comparison": "exact_modified_path_set_and_base_result_sha256",
+      "archive_base_commit": [
+        "45f2a88a9aaeee5019d0fd4541693757ace5bbc3"
+      ]
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py/.tools/ipfs_kit_py/docs/storacha_specs",
+      "base_commit": "3b6791869635735ddb1a54aed7450ad6ef687c06",
+      "origin": "https://github.com/storacha/specs.git",
+      "dirty_tracked_source_count": 0,
+      "depth": 3,
+      "status": "no_dirty_tracked_source"
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py",
+      "base_commit": "ff401f83b7e722e58af1696243b3aff9679a7002",
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py",
+      "dirty_tracked_source_count": 5928,
+      "depth": 3,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "489d651f6bcfb8b4ad206797d07a1be3fc2a65d8",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_accelerate"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/docs/filesystem_spec",
+      "base_commit": "0907962e6b94eea3b4ba86a6cc20b36ddb29f2dd",
+      "origin": "https://github.com/fsspec/filesystem_spec.git",
+      "dirty_tracked_source_count": 1,
+      "depth": 4,
+      "status": "preserved_known_vendor_patch",
+      "manifest": "third_party_patches/manifest.json",
+      "matched_variant": [
+        "filesystem_spec"
+      ],
+      "comparison": "exact_modified_path_set_and_base_result_sha256",
+      "archive_base_commit": [
+        "d256591c80620c14a574b803831f39f3ff87420b"
+      ]
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/docs/ipfs-docs",
+      "base_commit": "d725e8e945266dda4175a04371a9f9976a990aa7",
+      "origin": "https://github.com/ipfs/ipfs-docs.git",
+      "dirty_tracked_source_count": 3,
+      "depth": 4,
+      "status": "preserved_known_vendor_patch",
+      "manifest": "third_party_patches/manifest.json",
+      "matched_variant": [
+        "ipfs-docs"
+      ],
+      "comparison": "exact_modified_path_set_and_base_result_sha256",
+      "archive_base_commit": [
+        "d725e8e945266dda4175a04371a9f9976a990aa7"
+      ]
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/docs/ipfs_cluster",
+      "base_commit": "c7ca8b5f87b41fcc795297ca65b0bb41c10234bf",
+      "origin": "https://github.com/ipfs-cluster/ipfs-cluster-website.git",
+      "dirty_tracked_source_count": 0,
+      "depth": 4,
+      "status": "no_dirty_tracked_source"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/docs/ipfsspec",
+      "base_commit": "03f5199b9bf5a96c7ebf5e2e6f5dce8cf58b655f",
+      "origin": "https://github.com/fsspec/ipfsspec.git",
+      "dirty_tracked_source_count": 9,
+      "depth": 4,
+      "status": "preserved_known_vendor_patch",
+      "manifest": "third_party_patches/manifest.json",
+      "matched_variant": [
+        "ipfsspec"
+      ],
+      "comparison": "exact_modified_path_set_and_base_result_sha256",
+      "archive_base_commit": [
+        "03f5199b9bf5a96c7ebf5e2e6f5dce8cf58b655f"
+      ]
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/docs/lassie",
+      "base_commit": "c6ba777810d03fed23aea11b5969b7d8a97f1edf",
+      "origin": "https://github.com/filecoin-project/lassie.git",
+      "dirty_tracked_source_count": 0,
+      "depth": 4,
+      "status": "no_dirty_tracked_source"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/docs/libp2p-universal-connectivity",
+      "base_commit": "e18a6de9c020c5e406d9f61b638f5d276054798d",
+      "origin": "https://github.com/libp2p/universal-connectivity.git",
+      "dirty_tracked_source_count": 0,
+      "depth": 4,
+      "status": "no_dirty_tracked_source"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/docs/libp2p_docs",
+      "base_commit": "17cee4a438797313d1e878b103abc1dbefdf423e",
+      "origin": "https://github.com/libp2p/docs.git",
+      "dirty_tracked_source_count": 0,
+      "depth": 4,
+      "status": "no_dirty_tracked_source"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/docs/lighthouse-python-sdk",
+      "base_commit": "6b2c86693090c770d2c9a4d82ba315000a77068b",
+      "origin": "https://github.com/lighthouse-web3/lighthouse-python-sdk.git",
+      "dirty_tracked_source_count": 29,
+      "depth": 4,
+      "status": "preserved_known_vendor_patch",
+      "manifest": "third_party_patches/manifest.json",
+      "matched_variant": [
+        "lighthouse-python-sdk"
+      ],
+      "comparison": "exact_modified_path_set_and_base_result_sha256",
+      "archive_base_commit": [
+        "6b2c86693090c770d2c9a4d82ba315000a77068b"
+      ]
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/docs/mcp-python-sdk",
+      "base_commit": "1216c536937819070981e63177b258b79a615bfd",
+      "origin": "https://github.com/modelcontextprotocol/python-sdk.git",
+      "dirty_tracked_source_count": 49,
+      "depth": 4,
+      "status": "preserved_known_vendor_patch",
+      "manifest": "third_party_patches/manifest.json",
+      "matched_variant": [
+        "mcp-python-sdk-hallucinate-accelerate-datasets"
+      ],
+      "comparison": "exact_modified_path_set_and_base_result_sha256",
+      "archive_base_commit": [
+        "1216c536937819070981e63177b258b79a615bfd"
+      ]
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/docs/storacha_specs",
+      "base_commit": "3b6791869635735ddb1a54aed7450ad6ef687c06",
+      "origin": "https://github.com/storacha/specs.git",
+      "dirty_tracked_source_count": 0,
+      "depth": 4,
+      "status": "no_dirty_tracked_source"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py",
+      "base_commit": "4ad26c94d2f6aa17329fb53a301244a7a9cb1b30",
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py",
+      "dirty_tracked_source_count": 5495,
+      "depth": 4,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "3156114f94a286772390382380830a4f6f80a638",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_accelerate"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/ShadowProver/snark",
+      "base_commit": "1b657eadf4e87f3ba46e030c3e549854b2454a4e",
+      "origin": "https://github.com/RAIRLab/snark",
+      "dirty_tracked_source_count": 0,
+      "depth": 4,
+      "status": "no_dirty_tracked_source"
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/docs/fastmcp",
+      "base_commit": "f4ae8bb0af04cb315eef262d38433af4b71d9c38",
+      "origin": "https://github.com/jlowin/fastmcp.git",
+      "dirty_tracked_source_count": 18,
+      "depth": 4,
+      "status": "preserved_extra_vendor_patch",
+      "patch_label": "fastmcp-f4ae8bb0af04",
+      "manifest": "extra_vendor_patches/manifest.json"
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/docs/mcp-python-sdk",
+      "base_commit": "0da9a074d09267a927d72faa58c26d828f0f8edb",
+      "origin": "https://github.com/jlowin/mcp-python-sdk.git",
+      "dirty_tracked_source_count": 9,
+      "depth": 4,
+      "status": "preserved_extra_vendor_patch",
+      "patch_label": "jlowin-python-sdk-0da9a074d092",
+      "manifest": "extra_vendor_patches/manifest.json"
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_accelerate_py/mcplusplus",
+      "base_commit": "f98184f1e041930f0243375af2526d2005f19be1",
+      "origin": "https://github.com/endomorphosis/Mcp-Plus-Plus.git",
+      "dirty_tracked_source_count": 47,
+      "depth": 4,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "2068d848e40e0da11ccc2e4ac0580b3dfeb014b6",
+      "verified_origin_repository": "/home/barberb/lift_coding/Mcp-Plus-Plus"
+    },
+    {
+      "path": "hallucinate_app/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py",
+      "base_commit": "6672d69242731f53b49f4f793ed3023b7ba36a0d",
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+      "dirty_tracked_source_count": 6722,
+      "depth": 4,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "a02119e5e1e1a5aef724b3c77a5bff5bab6c2aa5",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_datasets"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/docs/fastmcp",
+      "base_commit": "1d932cc778a24cc0bf46fc4baad8306d4fed9c4b",
+      "origin": "https://github.com/jlowin/fastmcp.git",
+      "dirty_tracked_source_count": 13,
+      "depth": 5,
+      "status": "preserved_extra_vendor_patch",
+      "patch_label": "fastmcp-1d932cc778a2",
+      "manifest": "extra_vendor_patches/manifest.json"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/docs/mcp-python-sdk",
+      "base_commit": "0da9a074d09267a927d72faa58c26d828f0f8edb",
+      "origin": "https://github.com/jlowin/mcp-python-sdk.git",
+      "dirty_tracked_source_count": 9,
+      "depth": 5,
+      "status": "preserved_extra_vendor_patch",
+      "patch_label": "jlowin-python-sdk-0da9a074d092",
+      "manifest": "extra_vendor_patches/manifest.json"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_accelerate_py/mcplusplus",
+      "base_commit": "adbfff9818e3d884b9e6e0fc3b47429bd4ec63cb",
+      "origin": "https://github.com/endomorphosis/Mcp-Plus-Plus.git",
+      "dirty_tracked_source_count": 38,
+      "depth": 5,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "10f2e5780549cd16dd33d9ea962a60ef7a2fcf6e",
+      "verified_origin_repository": "/home/barberb/lift_coding/Mcp-Plus-Plus"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py",
+      "base_commit": "3c6f1744c32c0405a43243fbdef8e090d6433187",
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+      "dirty_tracked_source_count": 6000,
+      "depth": 5,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "200520db11cd4824812374022112f0a57c21b674",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_datasets"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_kit_py",
+      "base_commit": "f6a574375febbcf9a46fcd24bbc7bc5cfb551de5",
+      "origin": "https://github.com/endomorphosis/ipfs_kit_py.git",
+      "dirty_tracked_source_count": 4353,
+      "depth": 5,
+      "status": "source_overlay_already_published",
+      "snapshot_sha": "ea67fd3e6875ff373e77bc1dd0de3d681eb37ab1",
+      "verified_origin_repository": "/home/barberb/lift_coding/external/ipfs_kit"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_model_manager_py",
+      "base_commit": "f6151d2113f42e75ea7d83a1b2362fc97e55e44d",
+      "origin": "https://github.com/endomorphosis/ipfs_model_manager_py.git",
+      "dirty_tracked_source_count": 0,
+      "depth": 5,
+      "status": "no_dirty_tracked_source"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_transformers_py",
+      "base_commit": "b397988ed9e3e656475c1cf4417b84efdb95daf3",
+      "origin": "https://github.com/endomorphosis/ipfs_transformers_py.git",
+      "dirty_tracked_source_count": 0,
+      "depth": 5,
+      "status": "no_dirty_tracked_source"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/test/doc-builder",
+      "base_commit": "6108e850ae1cf2f71bb0815a600bcd50c39abfa7",
+      "origin": "https://github.com/huggingface/doc-builder.git",
+      "dirty_tracked_source_count": 0,
+      "depth": 5,
+      "status": "no_dirty_tracked_source"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/test/huggingface_doc_builder",
+      "base_commit": "6108e850ae1cf2f71bb0815a600bcd50c39abfa7",
+      "origin": "https://github.com/huggingface/doc-builder.git",
+      "dirty_tracked_source_count": 0,
+      "depth": 5,
+      "status": "no_dirty_tracked_source"
+    },
+    {
+      "path": "hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/test/huggingface_transformers",
+      "base_commit": "44752c8dd99f3fb0da23006dc4fde4a07d9c417f",
+      "origin": "https://github.com/huggingface/transformers.git",
+      "dirty_tracked_source_count": 556,
+      "depth": 5,
+      "status": "preserved_extra_vendor_patch",
+      "patch_label": "transformers-44752c8dd99f",
+      "manifest": "extra_vendor_patches/manifest.json"
+    }
+  ],
+  "counts": {
+    "no_dirty_tracked_source": 24,
+    "source_overlay_already_published": 30,
+    "preserved_extra_vendor_patch": 8,
+    "preserved_known_vendor_patch": 10
+  },
+  "limits": [
+    "Only initialized gitlinks traversed, up to depth5; no arbitrary directory recursion.",
+    "Only tracked working-tree edits checked; ignored backups, cached runtime trees, and untracked vendor bodies outside scope.",
+    "Published archival source equivalence does not qualify runtime behavior or advance live submodule pointers."
+  ],
+  "no_third_party_pushes": true,
+  "source_repositories_mutated": false
+}

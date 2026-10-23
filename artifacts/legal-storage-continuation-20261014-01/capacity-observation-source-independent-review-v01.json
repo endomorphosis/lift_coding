@@ -1,0 +1,49 @@
+{
+  "accounting_kernel_AST_sha256": "51ba52d5bd7b2b0efacf2ae7725e9e8f5ba0088717c8cc0022ae2c0238b455a0",
+  "actual_numerical_or_model_calls": 0,
+  "actual_observer_main_executed": false,
+  "artifacts": {
+    "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/conditions_balanced_resource_protocol_v01.py": {
+      "bytes": 13965,
+      "sha256": "265d96839054a16d4c4ab0f2550dc69948263a87566e9337a429b3ddb02f69f0"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/resource-protocol-contract-v01.json": {
+      "bytes": 8109,
+      "sha256": "34dd2cf9422d076e647f73666d4d10913ebfa62d4ceb78ba6102797cc857acd5"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/review_conditions_balanced_capacity_clearance_v01.py": {
+      "bytes": 8023,
+      "sha256": "bce76340578fb66a532bf1085f367e9cff703e8df8bac199f2dddbd70c8b8692"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-storage-continuation-20261014-01/capacity-observation-inputs-v01.json": {
+      "bytes": 1595,
+      "sha256": "e805c691cdd16a903d38d196de86d0bf599a78ca6098834cfebd5aa6ba2c08a8"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-storage-continuation-20261014-01/capacity-observer-root-static-review-v01.json": {
+      "bytes": 1239,
+      "sha256": "408ab24eeb4219219ec2e43d9b251d13abbb8ba9152dece8381f1235441ad0c3"
+    },
+    "/home/barberb/lift_coding/artifacts/legal-storage-continuation-20261014-01/review_storage_continuation_capacity_observation_v01.py": {
+      "bytes": 8772,
+      "sha256": "71f56a5d148d8b097b423cf0f396f2e0a313e6b48d118f59cf422bd69ca60632"
+    }
+  },
+  "findings": [],
+  "observed_at_utc": "2026-10-14T05:55:57.113795+00:00",
+  "observer": {
+    "bytes": 8772,
+    "path": "/home/barberb/lift_coding/artifacts/legal-storage-continuation-20261014-01/review_storage_continuation_capacity_observation_v01.py",
+    "sha256": "71f56a5d148d8b097b423cf0f396f2e0a313e6b48d118f59cf422bd69ca60632"
+  },
+  "passed": true,
+  "private_endpoint_body_reads_by_reviewer": 0,
+  "review_basis": [
+    "Full narrow observer diff and control-flow review against qualified F12 source.",
+    "Original source digest checked before import; original F12 protocol and all original custody/538-conservation/source fences retained.",
+    "Exactly identical AST for root identity checks, bounded2M-entry census, claims and conservative accounting equations.",
+    "New metadata outputs exclusive to F13; private bodies retained only in original qualified F12 opening-v03 wrapper.",
+    "Observation-only output and training_authorized=False; no model, claim, reconciliation or cleanup authority."
+  ],
+  "reviewer": "root independent of observer author runtime_protocol_n9",
+  "schema": "storage-continuation-capacity-observation-source-independent-review/v1"
+}

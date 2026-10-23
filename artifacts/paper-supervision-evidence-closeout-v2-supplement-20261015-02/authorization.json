@@ -1,0 +1,55 @@
+{
+  "schema": "paper-bounded-evidence-supplement-authorization@1",
+  "objective": "paper-supervision-evidence-closeout-v2",
+  "user_instruction": "yes, continue",
+  "mode": "continuation of user-authorized direct read-only local audit",
+  "created_at": "2026-10-15T10:41:47.088279+00:00",
+  "prior_audit": "/home/barberb/lift_coding/artifacts/paper-supervision-evidence-closeout-v2-audit-20261015-01",
+  "prior_output_manifest_sha256": "80f9570341b441544a9073f4e0f2423073a84483a5c622ac2c84765cb646892b",
+  "supervisor_submission": false,
+  "production_mutation": false,
+  "allowed": [
+    "bounded original receipt and report recovery",
+    "read-only streaming hashes of named existing runtime/checkpoint assets",
+    "new allowlisted audit projections and proposed sentence changes"
+  ],
+  "forbidden": [
+    "new model/benchmark/solver/training/build/grader execution",
+    "service or acceptance changes",
+    "source report or manuscript mutation",
+    "database writes",
+    "publishing/pushing/uploading",
+    "dependency installation",
+    "package-root imports"
+  ],
+  "limits": {
+    "per_json_text_file_bytes": 8388608,
+    "total_text_json_bytes": 50331648,
+    "stream_file_bytes": 2147483648,
+    "total_stream_bytes": 3221225472,
+    "archive_regular_member_bytes": 5368709120,
+    "archive_header_count": 50000,
+    "archive_hash_seconds": 90,
+    "scoped_git_blob_count": 6,
+    "scoped_git_blob_bytes": 2097152,
+    "git_blobs_charged_to_integration_allocation": true
+  },
+  "allocations": {
+    "t1": {
+      "files": 22,
+      "bytes": 12582912
+    },
+    "t2": {
+      "files": 22,
+      "bytes": 12582912
+    },
+    "historical": {
+      "files": 30,
+      "bytes": 16777216
+    },
+    "integration": {
+      "files": 12,
+      "bytes": 8388608
+    }
+  }
+}

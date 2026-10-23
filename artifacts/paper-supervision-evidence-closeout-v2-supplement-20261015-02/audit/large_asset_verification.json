@@ -1,0 +1,106 @@
+{
+  "all_matched": true,
+  "archives_extracted": false,
+  "behavioral_execution": false,
+  "manifest_path": "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/runtime-campaign/runtime/manifest.json",
+  "manifest_sha256": "54a00df868ea734a75db81bcc3dbf9d1d89b85b874afe63c1866a993c484dd1f",
+  "manifest_structure": {
+    "archive_sha256": {
+      "count": null,
+      "type": "str"
+    },
+    "base_requirements": {
+      "count": 6,
+      "type": "list"
+    },
+    "canonical_cve_training": {
+      "count": null,
+      "type": "NoneType"
+    },
+    "codex_native_runtime": {
+      "count": 6,
+      "type": "dict"
+    },
+    "codex_version": {
+      "count": null,
+      "type": "str"
+    },
+    "credentials_in_archive": {
+      "count": null,
+      "type": "bool"
+    },
+    "files": {
+      "count": 27911,
+      "type": "list"
+    },
+    "learned_requirements": {
+      "count": 4,
+      "type": "list"
+    },
+    "model_snapshot_revision": {
+      "count": null,
+      "type": "str"
+    },
+    "runtime_python_version": {
+      "count": null,
+      "type": "str"
+    },
+    "schema": {
+      "count": null,
+      "type": "str"
+    },
+    "security_checkpoint": {
+      "count": null,
+      "type": "NoneType"
+    },
+    "security_inference_requirements": {
+      "count": 0,
+      "type": "list"
+    },
+    "security_initializer": {
+      "count": null,
+      "type": "NoneType"
+    },
+    "security_training_requirements": {
+      "count": 0,
+      "type": "list"
+    },
+    "task_inputs_in_archive": {
+      "count": null,
+      "type": "bool"
+    },
+    "torch_cpu_requirement": {
+      "count": null,
+      "type": "str"
+    }
+  },
+  "models_loaded": false,
+  "results": [
+    {
+      "asset": "T1 runtime archive",
+      "bytes": 1349592874,
+      "expected_sha256": "f89c7ace1f4387bcb020f223758609dac607c8e6258c208189bbd8dec2f652f8",
+      "inspection_seconds": 2.9435386389959604,
+      "matches_reported_identity": true,
+      "path": "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/runtime-campaign/runtime/runtime.tar.gz",
+      "scope": "byte identity only; no source semantics, model qualification or runtime consumption inferred",
+      "sha256": "f89c7ace1f4387bcb020f223758609dac607c8e6258c208189bbd8dec2f652f8",
+      "signature_verification": "not_performed",
+      "stable_during_read": true
+    },
+    {
+      "asset": "Intent development backend",
+      "bytes": 2243486,
+      "expected_sha256": "699bf438f5340b23eb86fb78d77991a42fa91d8b84cbc8a0ae3e42799382d86d",
+      "inspection_seconds": 0.0042665870860219,
+      "matches_reported_identity": true,
+      "path": "/home/barberb/lift_coding/artifacts/intent-ir-roundtrip-20260929/training-03/model/candidate.json",
+      "scope": "byte identity only; no source semantics, model qualification or runtime consumption inferred",
+      "sha256": "699bf438f5340b23eb86fb78d77991a42fa91d8b84cbc8a0ae3e42799382d86d",
+      "signature_verification": "not_performed",
+      "stable_during_read": true
+    }
+  ],
+  "schema": "paper-supplement-large-asset-byte-check@1",
+  "stream_bytes": 1351836360
+}

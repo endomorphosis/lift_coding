@@ -1,0 +1,23 @@
+{
+  "AGENTS_paths": [],
+  "actual_base": "3101416594780604f6a1346edbc526f11798d35b",
+  "actual_base_entries": 32282,
+  "actual_merge": "6deae26e98452669b32b256794b18affb1155c16",
+  "actual_merge_tree": "edb1dfdef81b7d1204c6c3c8c5bc64bb14d513da",
+  "changed_incoming_paths": [
+    "A\tdocs/autoencoders/parented_phase_storage.md",
+    "M\tdocs/autoencoders/validation_storage.md",
+    "M\tipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_resources.py",
+    "A\tipfs_datasets_py/optimizers/logic_theorem_optimizer/parented_phase_resources.py"
+  ],
+  "checker_returncode": 1,
+  "data_body_reads": 0,
+  "expected_base": "ff07d332e99a4f15cc9d5f864a1b0b275ac51d3d",
+  "failed_before_completion_file_or_root_report_write": true,
+  "merge_attempts": 1,
+  "new_commits": [
+    "3101416594780604f6a1346edbc526f11798d35b Bind durable phase storage to real native child leases"
+  ],
+  "reason": "Main advanced between premerge REST observation and head-conditional merge; expected base/tree assertion refused. No merge retry.",
+  "schema": "conditions-composition-source-merge-base-race-observation/v1"
+}

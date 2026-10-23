@@ -1,0 +1,338 @@
+{
+  "schema": "merge-all-publication-exceptions@1",
+  "generated_at": "2026-10-14T04:11:01.232667+00:00",
+  "scope": "Exceptions derived from existing campaign audit evidence; no new Git/source mutations, tests or model executions.",
+  "publication_wording": "Reviewed branch contributions are integrated. Ten historical raw refs remain preserved separately; six have proven published exact tip-tree equivalents, one has a documented four-archive-to-reference rewrite, and three root snapshots retain non-equivalent historical content requiring further review. Dirty working-copy states were preserved, not indiscriminately committed.",
+  "historical_ref_count": 10,
+  "historical_refs": [
+    {
+      "repository": "lift_coding",
+      "ref": "refs/heads/publication/canonical-current-root-20261004/3560d0e1d9383e2100675998",
+      "head": "ef9c8e4d94d9d427d1bd60168e9bd6d0a15cfe38",
+      "published_exact_tree_commits": [],
+      "equivalence": "exact_tip_tree_equivalence_not_proven",
+      "retained_reason": "This historical snapshot still differs from published trees. Older source variants, bulk raw experiment evidence and publisher state have not been approved by path-level compatibility/custody review; no wholesale restoration or pretend content merge.",
+      "evidence": "remaining-historical-equivalence.json",
+      "unmerged_raw_history": true
+    },
+    {
+      "repository": "lift_coding",
+      "ref": "refs/heads/publication/canonical-wip-20261004/3560d0e1d9383e2100675998",
+      "head": "bc64e1a2d3d3428ae3823fd4754d0051a61d485d",
+      "published_exact_tree_commits": [],
+      "equivalence": "exact_tip_tree_equivalence_not_proven",
+      "retained_reason": "This historical snapshot still differs from published trees. Older source variants, bulk raw experiment evidence and publisher state have not been approved by path-level compatibility/custody review; no wholesale restoration or pretend content merge.",
+      "evidence": "remaining-historical-equivalence.json",
+      "unmerged_raw_history": true
+    },
+    {
+      "repository": "lift_coding",
+      "ref": "refs/heads/publication/main-20261004/root-02",
+      "head": "ce3e21da27d23bfa4ac5490be9a5cb44798945f2",
+      "published_exact_tree_commits": [],
+      "equivalence": "exact_tip_tree_equivalence_not_proven",
+      "retained_reason": "This historical snapshot still differs from published trees. Older source variants, bulk raw experiment evidence and publisher state have not been approved by path-level compatibility/custody review; no wholesale restoration or pretend content merge.",
+      "evidence": "remaining-historical-equivalence.json",
+      "unmerged_raw_history": true
+    },
+    {
+      "repository": "lift_coding",
+      "ref": "refs/heads/publication/main-20261004/root-03",
+      "head": "57fd19895ce42ad68f87b3d7126fbf19da285bdb",
+      "published_exact_tree_commits": [
+        "5f6dded871a71df625643572cbd24940551b2cbd"
+      ],
+      "equivalence": "exact_tip_tree_already_published",
+      "retained_reason": "The tip tree is represented by the listed published rewrite. Merging the raw ancestry would reintroduce removed experiment/checkpoint history.",
+      "evidence": "remaining-historical-equivalence.json",
+      "unmerged_raw_history": true
+    },
+    {
+      "repository": "lift_coding",
+      "ref": "refs/heads/publication/main-refresh-20261004/root-01",
+      "head": "9d1944b9a9fd95abbb6297b4c7d34a1312809f14",
+      "published_exact_tree_commits": [
+        "42a0fc874be073f339d65349f38a0148968cd999"
+      ],
+      "equivalence": "exact_tip_tree_already_published",
+      "retained_reason": "The tip tree is represented by the listed published rewrite. Merging the raw ancestry would reintroduce removed experiment/checkpoint history.",
+      "evidence": "remaining-historical-equivalence.json",
+      "unmerged_raw_history": true
+    },
+    {
+      "repository": "ipfs_accelerate_py",
+      "ref": "refs/heads/archive/pgir-authority-20260817",
+      "head": "04fbb09b4a8b34e77d11bd8da6642e0978baa02c",
+      "published_exact_tree_commits": [
+        "fd3ae399d65f42aed07f41b2db0944196a106456",
+        "75499c674635c0f0f78b27bfd2e32b492c7f702b",
+        "6a3e4ae1a85994ed21724749ae523ac3d3f05e94"
+      ],
+      "equivalence": "exact_tip_tree_already_published",
+      "retained_reason": "The final tip tree is already published through rewritten history. Raw ancestry includes removed oversized generated dataset/database blobs; merging it would restore those objects to the published history.",
+      "large_unpublished_blobs": [
+        {
+          "path": "data/agent_supervisor/proof_grounded_ir_learning/datasets/pgir-objective-ast.jsonl",
+          "size_bytes": 2022179327
+        }
+      ],
+      "evidence": "remaining-historical-equivalence.json",
+      "unmerged_raw_history": true
+    },
+    {
+      "repository": "ipfs_accelerate_py",
+      "ref": "refs/heads/publication/main-20261004/accelerate",
+      "head": "49569f1f2a9aa233e532e92c27f74ba5c004fd48",
+      "published_exact_tree_commits": [
+        "d6163a6cb844617f35f8f56d0b6ccd521fa677b7",
+        "a370dd5cce648e9b46274403c40e9964ee61b423"
+      ],
+      "equivalence": "exact_tip_tree_already_published",
+      "retained_reason": "The final tip tree is already published through rewritten history. Raw ancestry includes removed oversized generated dataset/database blobs; merging it would restore those objects to the published history.",
+      "large_unpublished_blobs": [
+        {
+          "path": "data/agent_supervisor/proof_grounded_ir_learning/datasets/pgir-objective-ast.jsonl",
+          "size_bytes": 2022179327
+        },
+        {
+          "path": "data/agent_supervisor/formal_verification_tactician_readiness/bundles/index.duckdb",
+          "size_bytes": 142880768
+        }
+      ],
+      "evidence": "remaining-historical-equivalence.json",
+      "unmerged_raw_history": true
+    },
+    {
+      "repository": "ipfs_datasets_py",
+      "ref": "refs/heads/publication/main-refresh-20261004/datasets-01",
+      "head": "23540627b1cf6515df0fd84c9417b4cbdb91234a",
+      "published_replacement": "f8c1cd716989cf55800221ea60e261ac1f2d7819",
+      "published_replacement_in_origin_main": true,
+      "published_exact_tree_commits": [
+        "f8c1cd716989cf55800221ea60e261ac1f2d7819"
+      ],
+      "equivalence": "exact_tip_tree_already_published",
+      "retained_reason": "Do not merge original history; source represented by published rewritten history. Original binary evidence was rewritten to Hugging Face references.",
+      "replacement_difference": [],
+      "evidence": "datasets-audit.json",
+      "unmerged_raw_history": true
+    },
+    {
+      "repository": "ipfs_datasets_py",
+      "ref": "refs/heads/publication/main-20261004/datasets",
+      "head": "5eedd23dd8b8ae4e2cac1716f00f1fcaf19a2801",
+      "published_replacement": "1ff5e1e777e4a8bab36f4a7409dc3678e9bacece",
+      "published_replacement_in_origin_main": true,
+      "published_exact_tree_commits": [
+        "1ff5e1e777e4a8bab36f4a7409dc3678e9bacece"
+      ],
+      "equivalence": "exact_tip_tree_already_published",
+      "retained_reason": "Do not merge original history; source represented by published rewritten history. Original binary evidence was rewritten to Hugging Face references.",
+      "replacement_difference": [],
+      "evidence": "datasets-audit.json",
+      "unmerged_raw_history": true
+    },
+    {
+      "repository": "ipfs_datasets_py",
+      "ref": "refs/heads/recovery/local-source-20261004",
+      "head": "b8a9bb35a8234d1c12204f2bae34d2a0c2635056",
+      "published_replacement": "4ecd618ec87cec710480cc204c3b4050886bd93f",
+      "published_replacement_in_origin_main": true,
+      "published_exact_tree_commits": [],
+      "equivalence": "published_rewrite_replaces_four_evidence_archives_with_huggingface_references",
+      "retained_reason": "Do not merge original history; source represented by published rewritten history. Original binary evidence was rewritten to Hugging Face references.",
+      "replacement_difference": [
+        "D\tdocs/implementation/reports/evidence/decoder-action-binding-20261003/evidence.tar.xz",
+        "A\tdocs/implementation/reports/evidence/decoder-action-binding-20261003/evidence.tar.xz.hf.json",
+        "D\tdocs/implementation/reports/evidence/decoder-action-consistency-20261003/evidence.tar.xz",
+        "A\tdocs/implementation/reports/evidence/decoder-action-consistency-20261003/evidence.tar.xz.hf.json",
+        "D\tdocs/implementation/reports/evidence/decoder-context-boundary-training-20261003/evidence.tar.xz",
+        "A\tdocs/implementation/reports/evidence/decoder-context-boundary-training-20261003/evidence.tar.xz.hf.json",
+        "D\tdocs/implementation/reports/evidence/decoder-generated-field-training-r2-20261003/evidence.tar.xz",
+        "A\tdocs/implementation/reports/evidence/decoder-generated-field-training-r2-20261003/evidence.tar.xz.hf.json"
+      ],
+      "evidence": "datasets-audit.json",
+      "unmerged_raw_history": true
+    }
+  ],
+  "preserved_dirty_worktrees": [
+    {
+      "repository": "ipfs_datasets_py",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "head_at_audit": "d5238def256d1c352793ee7d977e6b17b6d8cbee",
+      "classification_counts_at_audit": {
+        "already_identical_in_integration": 2510,
+        "nested_repository_or_directory": 3,
+        "different_from_integration": 59,
+        "missing_both": 13,
+        "size_skipped_over_1MiB": 91,
+        "absent_from_integration": 90
+      },
+      "disposition": "Preserved on disk; uncommitted source, tests, documentation or generated evidence were not blanket-staged into the merge.",
+      "comparison_reference": "0976629bca4f1112955bd0505e6a2277ce090e00",
+      "evidence": "datasets-dirty-relevance.json",
+      "additional_history_comparison": {
+        "different_local_blobs_already_in_history": 26,
+        "different_local_blobs_not_in_history": 33,
+        "absent_paths_seen_in_history": 0,
+        "absent_paths_not_seen_in_history": 90
+      },
+      "hash_limit_bytes": 1048576
+    },
+    {
+      "repository": "ipfs_datasets_py",
+      "path": "/home/barberb/lift_coding/.decoder-release-validation/20260930T233813Z-c2a7a95f/external/ipfs_datasets",
+      "head_at_audit": "28c6bdb833a9e1309db4b01018e588aa427a05f4",
+      "classification_counts_at_audit": {
+        "absent_from_integration": 78,
+        "size_skipped_over_1MiB": 1
+      },
+      "disposition": "Preserved on disk; uncommitted source, tests, documentation or generated evidence were not blanket-staged into the merge.",
+      "comparison_reference": "0976629bca4f1112955bd0505e6a2277ce090e00",
+      "evidence": "datasets-dirty-relevance.json"
+    },
+    {
+      "repository": "ipfs_datasets_py",
+      "path": "/home/barberb/lift_coding/.worktrees/codebase-numerical-replay-20261003",
+      "head_at_audit": "7732a5808828083afb1cd19d126d987991136375",
+      "classification_counts_at_audit": {
+        "different_from_integration": 1,
+        "size_skipped_over_1MiB": 1
+      },
+      "disposition": "Preserved on disk; uncommitted source, tests, documentation or generated evidence were not blanket-staged into the merge.",
+      "comparison_reference": "0976629bca4f1112955bd0505e6a2277ce090e00",
+      "evidence": "datasets-dirty-relevance.json",
+      "paths_at_audit": [
+        "ipfs_datasets_py/logic/ui_ux_ir/decoder.py",
+        "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py"
+      ]
+    },
+    {
+      "repository": "ipfs_datasets_py",
+      "path": "/home/barberb/lift_coding/artifacts/legal-split-feature-20261013-01/datasets",
+      "head_at_audit": "64e93527bed84ecadaab70a570d82a177a859967",
+      "classification_counts_at_audit": {
+        "absent_from_integration": 1
+      },
+      "disposition": "Preserved on disk; uncommitted source, tests, documentation or generated evidence were not blanket-staged into the merge.",
+      "comparison_reference": "0976629bca4f1112955bd0505e6a2277ce090e00",
+      "evidence": "datasets-dirty-relevance.json",
+      "paths_at_audit": [
+        "docs/autoencoders/legal_split_feature_training_20261013.md"
+      ]
+    },
+    {
+      "repository": "ipfs_datasets_py",
+      "path": "/home/barberb/lift_coding/artifacts/legal-temporal-adapter-20261013-01/datasets",
+      "head_at_audit": "9c79e4d476e72dcce42e34666a3faecabbb80e25",
+      "classification_counts_at_audit": {
+        "absent_from_integration": 2
+      },
+      "disposition": "Preserved on disk; uncommitted source, tests, documentation or generated evidence were not blanket-staged into the merge.",
+      "comparison_reference": "0976629bca4f1112955bd0505e6a2277ce090e00",
+      "evidence": "datasets-dirty-relevance.json",
+      "paths_at_audit": [
+        "docs/autoencoders/evidence/temporal-adapter-20261013/analyze_temporal_adapter.py",
+        "docs/autoencoders/evidence/temporal-adapter-20261013/evidence-copy-manifest-v01.json"
+      ]
+    },
+    {
+      "repository": "ipfs_datasets_py",
+      "path": "/home/barberb/lift_coding_worktrees/legal-ir-fenced-span-claims-20261014",
+      "head_at_audit": "d8f9e3dfc77901162e3d32343860aa4678374db0",
+      "classification_counts_at_audit": {
+        "different_from_integration": 3,
+        "absent_from_integration": 4
+      },
+      "disposition": "Preserved on disk; uncommitted source, tests, documentation or generated evidence were not blanket-staged into the merge.",
+      "comparison_reference": "0976629bca4f1112955bd0505e6a2277ce090e00",
+      "evidence": "datasets-dirty-relevance.json",
+      "paths_at_audit": [
+        "docs/autoencoders/control_plane_and_sync.md",
+        "docs/autoencoders/full_logic_reports.md",
+        "ipfs_datasets_py/logic/autoformal/span_cache.py",
+        "ipfs_datasets_py/duckdb_control/span_cache_claims_quack.py",
+        "ipfs_datasets_py/logic/autoformal/span_cache_claims.py",
+        "tests/unit/duckdb_control/test_span_cache_claims_quack.py",
+        "tests/unit/logic/autoformal/test_span_cache_claims.py"
+      ]
+    },
+    {
+      "repository": "lift_coding",
+      "path": "/home/barberb/lift_coding",
+      "differing_regular_files_at_audit": 1,
+      "regular_files_matching_main_at_audit": 1,
+      "paths_sample": [
+        ".gitignore"
+      ],
+      "disposition": "Preserved working-copy edits; no blanket staging of unrelated or old checkout changes.",
+      "evidence": "root-audit.json"
+    },
+    {
+      "repository": "lift_coding",
+      "path": "/home/barberb/lift_coding/.worktrees/vericodegen-lean_refactor_arena-2026",
+      "differing_regular_files_at_audit": 33,
+      "regular_files_matching_main_at_audit": 5,
+      "paths_sample": [
+        "papers/completion/lean_refactor_arena/harness/_jevops_hooks.py",
+        "papers/completion/lean_refactor_arena/harness/autoresearch_mcmc.py",
+        "papers/completion/lean_refactor_arena/harness/bake_oleans.py",
+        "papers/completion/lean_refactor_arena/harness/board_graph.py",
+        "papers/completion/lean_refactor_arena/harness/cascade_edits.py"
+      ],
+      "disposition": "Preserved working-copy edits; no blanket staging of unrelated or old checkout changes.",
+      "evidence": "root-audit.json"
+    },
+    {
+      "repository": "lift_coding",
+      "path": "/home/barberb/lift_coding/artifacts/legal-head-repair-20261014-01/root",
+      "status_at_audit": [
+        "?? implementation_plan/docs/120-legal-conditions-presence-training-2026-10-14.md"
+      ],
+      "disposition": "Concurrent unfinished legal planning document retained in its original worktree.",
+      "evidence": "root-audit.json"
+    }
+  ],
+  "working_copy_limitations": [
+    "Dirty classifications are observations from the timestamped source reports, not a final claim that concurrently active work remains dirty at publication time.",
+    "The datasets canonical comparison hashed files only through 1 MiB; skipped files are not represented as equivalent.",
+    "Several old root worktrees are stripped or have stale registrations. Their mass deletion status is not treated as a requested source change.",
+    "JevOps canonical tracked and untracked edits were verified equal to published origin/main and are not listed as missing source.",
+    "No historical checkpoint tensor correctness, external archive availability, or unseen loose-file coverage is established by tree equivalence."
+  ],
+  "root_unreviewed_historical_variants": {
+    "refs_without_proven_exact_published_tip_tree": [
+      "refs/heads/publication/canonical-current-root-20261004/3560d0e1d9383e2100675998",
+      "refs/heads/publication/canonical-wip-20261004/3560d0e1d9383e2100675998",
+      "refs/heads/publication/main-20261004/root-02"
+    ],
+    "prior_path_level_review": "root-audit.json historical_disposition records most selected postimages already present and remaining historical source/archive differences explicitly unreviewed; it does not prove every path represented.",
+    "followup": "Review unique source deltas against current APIs and validate external/compressed archival custody before any selective port. Preserve raw refs until that review completes."
+  },
+  "sources": [
+    {
+      "path": "root-audit.json",
+      "sha256": "247d087a46297093bc031051815b0292053aeba965be436ebd21572059387dc2"
+    },
+    {
+      "path": "remaining-historical-equivalence.json",
+      "sha256": "49cb8ba6dbd61d108d4b262ae94d1f889daf060a72a74003691b8b4dff9c9613"
+    },
+    {
+      "path": "datasets-audit.json",
+      "sha256": "0ac034d6b3fda135124245d9b568b800d7713ddf27bbdcb9a8be4285df288a09"
+    },
+    {
+      "path": "datasets-dirty-relevance.json",
+      "sha256": "281f112918631441666d7ddef591ae9623564127e90abe4fb2810410392a782e"
+    },
+    {
+      "path": "accelerate-audit.json",
+      "sha256": "d1665c38f571bd602aeda18e821e2509bdddae3bfde11e16e48aad5cb164d09a"
+    },
+    {
+      "path": "historical-object-sizes.json",
+      "sha256": "d7dca9eb9cedb1c528cbf799f6f24c910c2adee5c934175582fa3959379ba540"
+    }
+  ]
+}

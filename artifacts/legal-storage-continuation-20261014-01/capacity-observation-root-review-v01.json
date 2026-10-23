@@ -1,0 +1,45 @@
+{
+  "actual_cleanup": 0,
+  "actual_new_model_calls": 0,
+  "all538_prior_record_bodies_unchanged": true,
+  "all_prior_data_preserved": true,
+  "findings": [],
+  "full_run_charged_bound_bytes": 155026485770,
+  "native_charged_bytes": 154826485770,
+  "new_claims": 0,
+  "observation": {
+    "bytes": 18697,
+    "path": "/home/barberb/lift_coding/artifacts/legal-storage-continuation-20261014-01/capacity-observation-v01.json",
+    "sha256": "b9bb9d5fc0fda7610fdc6524543ee4210c278037b48e6dfbd1079c151894cd36"
+  },
+  "observation_only": true,
+  "observed_at_utc": "2026-10-14T05:57:56.494175+00:00",
+  "passed": true,
+  "per_root_growth_since_prior": {
+    "/home/barberb/lift_coding/external/ipfs_datasets/docs/implementation/reports/evidence": 0,
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/test-logs": 0,
+    "/home/barberb/lift_coding/external/ipfs_datasets/workspace/todo-queues": 0,
+    "/tmp/pytest-of-barberb": 6932991001
+  },
+  "prior_refusal": {
+    "bytes": 19246,
+    "path": "/home/barberb/lift_coding/artifacts/legal-conditions-recall-20261014-01/capacity-clearance-v01.json",
+    "sha256": "4167848eb92ff26fe77ed7b01adf01d7bea56adcf94fec5b7314e0c5b61e4143"
+  },
+  "private_endpoint_body_reads_by_reviewer": 0,
+  "root_input": {
+    "bytes": 1595,
+    "path": "/home/barberb/lift_coding/artifacts/legal-storage-continuation-20261014-01/capacity-observation-inputs-v01.json",
+    "sha256": "e805c691cdd16a903d38d196de86d0bf599a78ca6098834cfebd5aa6ba2c08a8"
+  },
+  "schema": "storage-continuation-observation-root-review/v1",
+  "scope": "Pure independent recount of public qualified observations; not new census, admission, continuity or ownership authority.",
+  "shortfall_bytes": 10026485770,
+  "source_qualification": {
+    "bytes": 2825,
+    "path": "/home/barberb/lift_coding/artifacts/legal-storage-continuation-20261014-01/capacity-observation-source-independent-review-v01.json",
+    "sha256": "4c8bb8afdb3b4a24e4de5be15be3747f1a0a210b3f9587261c2f75d762f793cd"
+  },
+  "storage_limit_bytes": 145000000000,
+  "training_authorized": false
+}

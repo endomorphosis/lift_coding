@@ -1,0 +1,97 @@
+[
+  {
+    "deliverable": "Current findings",
+    "path": "../RECOVERY_REPORT.txt",
+    "status": "partial; explicit blockers"
+  },
+  {
+    "deliverable": "Exact artifact inventory",
+    "path": "artifact_inventory.csv",
+    "status": "hash-checked package contents; underlying experiment validity not implied"
+  },
+  {
+    "deliverable": "Run inventory",
+    "path": "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/primary_run_inventory.json",
+    "status": "recovered historical primary; C1-C6 not identified"
+  },
+  {
+    "deliverable": "Primary recount",
+    "path": "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/primary_recounts.csv",
+    "status": "recomputed retained counters; see ../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/split_analysis.json for family bootstrap"
+  },
+  {
+    "deliverable": "Component recount/status",
+    "path": "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/component_recovery_status.json",
+    "status": "null with reasons; blocked on ledger"
+  },
+  {
+    "deliverable": "Terminal dispositions",
+    "path": "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/terminal_status_counts.json",
+    "status": "observed explicit categories; intermediate gaps in terminal_status_limits.json"
+  },
+  {
+    "deliverable": "Route/check table",
+    "path": "../../law-to-action-author-package-search-20261015T095730Z/reviewer_shareable/consolidated_route_check_matrix.csv",
+    "status": "exact-pin source boundaries; missing runtime attestation explicit"
+  },
+  {
+    "deliverable": "Formal-job table",
+    "path": "../../law-to-action-author-package-search-20261015T095730Z/reviewer_shareable/consolidated_formal_job_table.csv",
+    "status": "source/check records separated from proof claims"
+  },
+  {
+    "deliverable": "Original costs",
+    "path": "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/cost_accounting.json",
+    "status": "science/startup separated; missing costs explicit"
+  },
+  {
+    "deliverable": "Recovery costs",
+    "path": "recovery_operation_accounting.json",
+    "status": "analysis/packaging only; not experiment cost"
+  },
+  {
+    "deliverable": "Claim/reviewer mapping",
+    "path": "claim_to_evidence_matrix.json",
+    "status": "provisional IDs; original reviewer matrix missing"
+  },
+  {
+    "deliverable": "Remaining inputs",
+    "path": "remaining_requests.json",
+    "status": "exact smallest artifact requests"
+  },
+  {
+    "deliverable": "Missing-work plan",
+    "path": "minimal_missing_work_plan.json",
+    "status": "recover before conditional new work; no new experiments authorized here"
+  },
+  {
+    "deliverable": "Manuscript proposal",
+    "path": "proposed_manuscript.patch",
+    "status": "unapplied new-file insertion only; current baseline unavailable"
+  },
+  {
+    "deliverable": "Input lineage followup",
+    "path": "../../law-to-action-author-package-search-20261015T095730Z/reviewer_shareable/original_input_verification.json",
+    "status": "full join and named alternate archive hash verification"
+  },
+  {
+    "deliverable": "Author-package search",
+    "path": "../../law-to-action-author-package-search-20261015T095730Z/reviewer_shareable/author_package_search_status.json",
+    "status": "bounded metadata not-found result; not exhaustive absence"
+  },
+  {
+    "deliverable": "Full retained artifact/binding inventories",
+    "path": "artifact_inventory_sources.json",
+    "status": "Existing exact hashes/provenance; current index does not bulk rehash"
+  },
+  {
+    "deliverable": "Actual supervisor/typed-owner interface audit",
+    "path": "../../law-to-action-evidence-recovery-20261015T084543Z/reviewer_shareable/supervisor_interface_summary.json",
+    "status": "Documented actual interfaces inspected; no invented CLI,generative run or active control DB access"
+  },
+  {
+    "deliverable": "Package dependencies and custody",
+    "path": "dependencies.json",
+    "status": "Local multi-directory evidence package; bulk consolidation refused"
+  }
+]

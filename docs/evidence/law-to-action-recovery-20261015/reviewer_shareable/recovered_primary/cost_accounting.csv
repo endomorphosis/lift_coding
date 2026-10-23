@@ -1,0 +1,18 @@
+evidence_level,metric,null_reason,scope,units,value
+recomputed,group_cpu_total,,"902 host attempts, count each final cumulative parent once",seconds,1608.817478
+recomputed,scientific_group_cpu,,900 scientific cells,seconds,1608.698691
+recomputed,startup_group_cpu,,2 explicitly undispatched failed starts,seconds,0.118787
+recomputed,sum_cell_host_wall_including_cleanup,,"902 host attempts; not experiment makespan, overlaps other clocks",seconds,2686.8702189085307
+recomputed,max_scientific_peak_memory,,maximum per scientific cgroup; not summed,bytes,274812928
+recomputed,max_whole_cell_wall_to_group_exit,,scientific cell execution envelope,seconds,18.022665493073873
+recovered; original reader recomputed identity/cost checks,slot_591_cumulative_active_wall,,"amended allowance across startup+scientific attempts, excludes operator pause",seconds,11.766051943064667
+recovered,slot_591_operator_pause_wall,,operator interruption gap; separate from active cell envelope,seconds,2335.7108575609745
+recovered; original reader recomputed identity/cost checks,slot_625_cumulative_active_wall,,"amended allowance across startup+scientific attempts, excludes operator pause",seconds,19.793533246032894
+recovered,slot_625_operator_pause_wall,,operator interruption gap; separate from active cell envelope,seconds,840.292727435939
+recovered; source-supported,model_calls,,primary LA-029 only; no actual-model prompt/RAG trial,calls,0
+not recovered,input_tokens,No per-call token ledger is needed for this model-free matrix and none is recovered; not inferred from zero calls.,not included in primary measured group CPU,tokens,
+not recovered,output_tokens,No token ledger recovered; not imputed.,not included in primary measured group CPU,tokens,
+not recovered,preparation_cpu,Preparation excluded from reported matrix total; original accounting not recovered.,not included in primary measured group CPU,seconds,
+not recovered,original_diagnostic_cpu,Historical diagnostic runs lacked required process-group measurement.,not included in primary measured group CPU,seconds,
+recovered/hash-checked; phase aggregates recomputed,LA018_phase_timings,A single scalar is inappropriate for48rows across4conditions and multiple phases. Structured measurements are recovered.,Separate LA-018 development diagnostic; see LA018_phase_timings.csv and LA018_timing_reanalysis.json,seconds,
+not recovered,formal_job_latency,No retained primary phase timing; separate LA018 diagnostic measurements are not the primary cost breakdown.,Primary checker work lies within measured descendant-inclusive CPU; its separate phase latency cannot be attributed from compact primary records.,seconds,

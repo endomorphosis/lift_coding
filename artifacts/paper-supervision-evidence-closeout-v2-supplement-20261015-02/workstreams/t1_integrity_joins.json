@@ -1,0 +1,107 @@
+{
+  "candidate_identity_recovered": "fix-code-vulnerability__VkepsZo",
+  "complete_history_total": null,
+  "known_earlier_subtotal": 1357279,
+  "known_nine_trial_subtotal_unchanged": 2523452,
+  "large_runtime_archives_not_read_by_this_workstream": true,
+  "missing_usage_trials": 3,
+  "new_builds_or_tests": false,
+  "new_historical_trials_added": 0,
+  "new_provider_calls": 0,
+  "new_solvers": false,
+  "new_training": false,
+  "objective": "paper-supervision-evidence-closeout-v2",
+  "old_audit_modified": false,
+  "original_bytes": 2669727,
+  "original_inputs": 22,
+  "original_receipt_hash_joins": [
+    {
+      "from": "/home/barberb/lift_coding/artifacts/paper-supervision-evidence-closeout-v2-audit-20261015-01/workstreams/t1_runs.jsonl",
+      "matches": true,
+      "observed_sha256": "84ee12ca5e60c351bfee4efa47002e5b7aa9fd3ecfcdf571ca6ee633a6949f78",
+      "relation": "reports-on",
+      "reported_sha256": "84ee12ca5e60c351bfee4efa47002e5b7aa9fd3ecfcdf571ca6ee633a6949f78",
+      "run_id": "fix-code-vulnerability__aw6yeSh",
+      "to": "/home/barberb/lift_coding/artifacts/supervisor-native-input-live-20261013-01/matched-pilot/native01/receipt.json"
+    },
+    {
+      "from": "/home/barberb/lift_coding/artifacts/paper-supervision-evidence-closeout-v2-audit-20261015-01/workstreams/t1_runs.jsonl",
+      "matches": true,
+      "observed_sha256": "bbb21ec6791fa1ebca70e30a69ac7343b3b078ba58bf6b92bd85efa357ea53a1",
+      "relation": "reports-on",
+      "reported_sha256": "bbb21ec6791fa1ebca70e30a69ac7343b3b078ba58bf6b92bd85efa357ea53a1",
+      "run_id": "fix-code-vulnerability__94TTSCp",
+      "to": "/home/barberb/lift_coding/artifacts/supervisor-native-input-live-20261013-01/matched-pilot/packet01/receipt.json"
+    },
+    {
+      "from": "/home/barberb/lift_coding/artifacts/paper-supervision-evidence-closeout-v2-audit-20261015-01/workstreams/t1_runs.jsonl",
+      "matches": true,
+      "observed_sha256": "21d2a7e22724c2297d4f2c19fbd3e84173087e78d06a2db447e89a753ca9d7e6",
+      "relation": "reports-on",
+      "reported_sha256": "21d2a7e22724c2297d4f2c19fbd3e84173087e78d06a2db447e89a753ca9d7e6",
+      "run_id": "fix-code-vulnerability__8X8hXVw",
+      "to": "/home/barberb/lift_coding/artifacts/supervisor-nomination-publish-fix-20261014-01/matched-pilot/native01/receipt.json"
+    },
+    {
+      "from": "/home/barberb/lift_coding/artifacts/paper-supervision-evidence-closeout-v2-audit-20261015-01/workstreams/t1_runs.jsonl",
+      "matches": true,
+      "observed_sha256": "5510144cf6bba6c155f8ad1d8a143983957bce6139c47357d595774f4c1562ce",
+      "relation": "reports-on",
+      "reported_sha256": "5510144cf6bba6c155f8ad1d8a143983957bce6139c47357d595774f4c1562ce",
+      "run_id": "fix-code-vulnerability__6VzktdR",
+      "to": "/home/barberb/lift_coding/artifacts/supervisor-nomination-publish-fix-20261014-01/matched-pilot/packet01/receipt.json"
+    },
+    {
+      "from": "/home/barberb/lift_coding/artifacts/paper-supervision-evidence-closeout-v2-audit-20261015-01/workstreams/t1_runs.jsonl",
+      "matches": true,
+      "observed_sha256": "fd280c7299623870ed461e2df065f05aa32d0003864ba9440f4616726c0b5753",
+      "relation": "reports-on",
+      "reported_sha256": "fd280c7299623870ed461e2df065f05aa32d0003864ba9440f4616726c0b5753",
+      "run_id": "fix-code-vulnerability__EVjYRri",
+      "to": "/home/barberb/lift_coding/artifacts/supervisor-task-text-projection-20261014-01/matched-pilot/native01/receipt.json"
+    },
+    {
+      "from": "/home/barberb/lift_coding/artifacts/paper-supervision-evidence-closeout-v2-audit-20261015-01/workstreams/t1_runs.jsonl",
+      "matches": true,
+      "observed_sha256": "7eae8c1d8a5779685f99cc5cb7f1c293401956bf0960f5f452429506342d88be",
+      "relation": "reports-on",
+      "reported_sha256": "7eae8c1d8a5779685f99cc5cb7f1c293401956bf0960f5f452429506342d88be",
+      "run_id": "fix-code-vulnerability__zZ44wta",
+      "to": "/home/barberb/lift_coding/artifacts/supervisor-task-text-projection-20261014-01/matched-pilot/packet01/receipt.json"
+    },
+    {
+      "from": "/home/barberb/lift_coding/artifacts/paper-supervision-evidence-closeout-v2-audit-20261015-01/workstreams/t1_runs.jsonl",
+      "matches": true,
+      "observed_sha256": "6a60e3500d6f0afaed5b3d896102e61625dc358ffee2cf1fc8ca85eced9e5e8d",
+      "relation": "reports-on",
+      "reported_sha256": "6a60e3500d6f0afaed5b3d896102e61625dc358ffee2cf1fc8ca85eced9e5e8d",
+      "run_id": "fix-code-vulnerability__coj9Jqt",
+      "to": "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-20261014-01/matched-pilot/native01/receipt.json"
+    },
+    {
+      "from": "prior:T1-retrieval-candidate:null-trial-id",
+      "new_trial": false,
+      "new_usage_charge": false,
+      "original_receipt_hash_matches_diagnostic": true,
+      "relation": "same-session-as",
+      "to": "fix-code-vulnerability__VkepsZo"
+    }
+  ],
+  "prior_projection_hashes": {
+    "/home/barberb/lift_coding/artifacts/paper-supervision-evidence-closeout-v2-audit-20261015-01/workstreams/t1_findings.json": "dbb17f068cda5dfad1dbb64aa6ab648464a4a5a06b296fa49c6c5c4d1ca0ab74",
+    "/home/barberb/lift_coding/artifacts/paper-supervision-evidence-closeout-v2-audit-20261015-01/workstreams/t1_runs.jsonl": "7e463073469118610536e08543cb08bcd4fad7d5a478ea25afae892a196c52d0",
+    "/home/barberb/lift_coding/artifacts/paper-supervision-evidence-closeout-v2-audit-20261015-01/workstreams/t1_sessions.jsonl": "e35542a687a1da76fd376e249937163c3776b7df67fde3af54a92e4b1fa6ea08"
+  },
+  "read_limit_reached": true,
+  "routes": [
+    "Prior allowlisted runs -> seven exact original receipt paths",
+    "Named failure observation/setup metadata",
+    "Four named prior launch intentions",
+    "Named relocation diagnostic -> candidate original receipt and native session binding",
+    "Named installed frontier qualification -> exact18hit metadata",
+    "Deployment-cache validation -> exact hash-bound JUnit",
+    "Prior frontier source_report_path_reported -> two original live supervisor reports"
+  ],
+  "schema": "paper-t1-recovery-supplement@1",
+  "supervisor_state_mutated": false
+}

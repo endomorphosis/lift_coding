@@ -1,0 +1,280 @@
+{
+  "actual_live_loaded_module_origins": null,
+  "all_selected_pin_joins_match": true,
+  "archive_sha256": "f89c7ace1f4387bcb020f223758609dac607c8e6258c208189bbd8dec2f652f8",
+  "canonical_cve_training_manifest_field": null,
+  "codex_version": "0.158.0",
+  "complete_import_closure_claimed_by_freeze": false,
+  "credential_content_scan_performed": false,
+  "credentials_in_archive_reported": false,
+  "embedding_model_snapshot_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+  "executed_git_forest": null,
+  "file_count": 27911,
+  "limitations": [
+    "Archive and manifest bytes self-consistently verified; no execution or import replay.",
+    "Manifest checkpoint null fields do not prove absence of separately mounted runtime assets.",
+    "Current source heads are not substituted for archived files or historical workers.",
+    "No archive link is followed and no files extracted; header modes/links are not execution truth.",
+    "Archive credential/task flags are reported metadata, not a fresh sensitive-content scan."
+  ],
+  "manifest_sha256": "54a00df868ea734a75db81bcc3dbf9d1d89b85b874afe63c1866a993c484dd1f",
+  "native_codex_manifest_sha256": "4cf8f38db44eec94d36b0badde3fb8efd4f70865fe11d01cf9c587d245603a9b",
+  "native_codex_target": "aarch64-unknown-linux-musl",
+  "released_source_freeze_sha256": "1561ab7a7d33fcd4e96f7dc5637df2770b8c67a4fa4dc7acacd3a92b9dd3d30c",
+  "root_counts": {
+    "codex-runtime": 3,
+    "datasets": 8653,
+    "extensions": 3,
+    "kit": 1299,
+    "models": 10,
+    "source": 2757,
+    "toolchains": 15186
+  },
+  "runtime_python_version": "3.12.12",
+  "schema": "paper-runtime-source-forest-byte-projection@1",
+  "security_checkpoint_manifest_field": null,
+  "security_initializer_manifest_field": null,
+  "selected_pin_joins": [
+    {
+      "archive_member_sha256": "bddbf62950642a43843bc2bb253c67de341a4777920988ecc8923ee28de7ee5c",
+      "expected_sha256": "bddbf62950642a43843bc2bb253c67de341a4777920988ecc8923ee28de7ee5c",
+      "group": "overlay_sources",
+      "matches": true,
+      "path": "source/benchmarks/agent_supervisor/container_coding/container_worker_deployment.py"
+    },
+    {
+      "archive_member_sha256": "705547273ee431787566a33a68caf20d5bebb123e3f41f959e6d65e8861c856e",
+      "expected_sha256": "705547273ee431787566a33a68caf20d5bebb123e3f41f959e6d65e8861c856e",
+      "group": "overlay_sources",
+      "matches": true,
+      "path": "source/benchmarks/agent_supervisor/container_coding/full_supervisor_harbor_agent.py"
+    },
+    {
+      "archive_member_sha256": "a0356ea5788aaca1c0bcb7f5eb2312ede63ef04db6928a0d9d113893f17e1ace",
+      "expected_sha256": "a0356ea5788aaca1c0bcb7f5eb2312ede63ef04db6928a0d9d113893f17e1ace",
+      "group": "overlay_sources",
+      "matches": true,
+      "path": "source/benchmarks/agent_supervisor/container_coding/terminal_deployment.py"
+    },
+    {
+      "archive_member_sha256": "bddbf62950642a43843bc2bb253c67de341a4777920988ecc8923ee28de7ee5c",
+      "expected_sha256": "bddbf62950642a43843bc2bb253c67de341a4777920988ecc8923ee28de7ee5c",
+      "group": "root_released_overlay_sha256",
+      "matches": true,
+      "path": "source/benchmarks/agent_supervisor/container_coding/container_worker_deployment.py"
+    },
+    {
+      "archive_member_sha256": "705547273ee431787566a33a68caf20d5bebb123e3f41f959e6d65e8861c856e",
+      "expected_sha256": "705547273ee431787566a33a68caf20d5bebb123e3f41f959e6d65e8861c856e",
+      "group": "root_released_overlay_sha256",
+      "matches": true,
+      "path": "source/benchmarks/agent_supervisor/container_coding/full_supervisor_harbor_agent.py"
+    },
+    {
+      "archive_member_sha256": "a0356ea5788aaca1c0bcb7f5eb2312ede63ef04db6928a0d9d113893f17e1ace",
+      "expected_sha256": "a0356ea5788aaca1c0bcb7f5eb2312ede63ef04db6928a0d9d113893f17e1ace",
+      "group": "root_released_overlay_sha256",
+      "matches": true,
+      "path": "source/benchmarks/agent_supervisor/container_coding/terminal_deployment.py"
+    },
+    {
+      "archive_member_sha256": "00d1427c83bd22b213bd65df53b8de408461cbcd25ba9a38ddbafb9564081762",
+      "expected_sha256": "00d1427c83bd22b213bd65df53b8de408461cbcd25ba9a38ddbafb9564081762",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/benchmarks/agent_supervisor/container_coding/automatic_tokenizer_audit.py"
+    },
+    {
+      "archive_member_sha256": "bddbf62950642a43843bc2bb253c67de341a4777920988ecc8923ee28de7ee5c",
+      "expected_sha256": "bddbf62950642a43843bc2bb253c67de341a4777920988ecc8923ee28de7ee5c",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/benchmarks/agent_supervisor/container_coding/container_worker_deployment.py"
+    },
+    {
+      "archive_member_sha256": "705547273ee431787566a33a68caf20d5bebb123e3f41f959e6d65e8861c856e",
+      "expected_sha256": "705547273ee431787566a33a68caf20d5bebb123e3f41f959e6d65e8861c856e",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/benchmarks/agent_supervisor/container_coding/full_supervisor_harbor_agent.py"
+    },
+    {
+      "archive_member_sha256": "fc1fe05d5e64aadcfa876d7d72aca3311d7ccfa672dbaaf9b7974e2dad406e02",
+      "expected_sha256": "fc1fe05d5e64aadcfa876d7d72aca3311d7ccfa672dbaaf9b7974e2dad406e02",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/benchmarks/agent_supervisor/container_coding/semantic_decision_input_audit.py"
+    },
+    {
+      "archive_member_sha256": "32b602d234520053b375abd35b2abde7a4a5849cfd923db2ecfbbd948d951dfa",
+      "expected_sha256": "32b602d234520053b375abd35b2abde7a4a5849cfd923db2ecfbbd948d951dfa",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/benchmarks/agent_supervisor/container_coding/semantic_decision_nomination_delivery.py"
+    },
+    {
+      "archive_member_sha256": "03c5723f3a83a8bc4ec03d06115027e3caebb342db4647860836184946e9da06",
+      "expected_sha256": "03c5723f3a83a8bc4ec03d06115027e3caebb342db4647860836184946e9da06",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/benchmarks/agent_supervisor/container_coding/terminal_container_supervisor.py"
+    },
+    {
+      "archive_member_sha256": "39556035a8da81201eb71b90d09b508a63ba4fbe5375aae37c385d3634099a4b",
+      "expected_sha256": "39556035a8da81201eb71b90d09b508a63ba4fbe5375aae37c385d3634099a4b",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/benchmarks/agent_supervisor/container_coding/terminal_context_audit.py"
+    },
+    {
+      "archive_member_sha256": "a0356ea5788aaca1c0bcb7f5eb2312ede63ef04db6928a0d9d113893f17e1ace",
+      "expected_sha256": "a0356ea5788aaca1c0bcb7f5eb2312ede63ef04db6928a0d9d113893f17e1ace",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/benchmarks/agent_supervisor/container_coding/terminal_deployment.py"
+    },
+    {
+      "archive_member_sha256": "f2a1b3a552cdbda16bfea7f64b0bff30ada7ae4cd1b438d2dea0c0bf67cda14d",
+      "expected_sha256": "f2a1b3a552cdbda16bfea7f64b0bff30ada7ae4cd1b438d2dea0c0bf67cda14d",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/benchmarks/agent_supervisor/container_coding/terminal_doctor_dispatch.py"
+    },
+    {
+      "archive_member_sha256": "6d74e30268a95525f4fa07e23f0b3395b52725608d22b615f723b45f4fe49971",
+      "expected_sha256": "6d74e30268a95525f4fa07e23f0b3395b52725608d22b615f723b45f4fe49971",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/benchmarks/agent_supervisor/container_coding/terminal_indexed_preparation.py"
+    },
+    {
+      "archive_member_sha256": "437010be9f28f679b11ab6c39de981b36ce58af48611be20ba28c1a567c28271",
+      "expected_sha256": "437010be9f28f679b11ab6c39de981b36ce58af48611be20ba28c1a567c28271",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/benchmarks/agent_supervisor/container_coding/timeout_policy.py"
+    },
+    {
+      "archive_member_sha256": "158c7a7e3d3d2ba5fc1a7abe51f6b32a66711dab10b719564d4a3db89bee0a0b",
+      "expected_sha256": "158c7a7e3d3d2ba5fc1a7abe51f6b32a66711dab10b719564d4a3db89bee0a0b",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/ipfs_accelerate_py/agent_supervisor/runtime/automatic_prompt_tokenizer.py"
+    },
+    {
+      "archive_member_sha256": "1483fe780f9242354b5f397886f0e9dab971ef7bf353a00ed790190bf386ec8c",
+      "expected_sha256": "1483fe780f9242354b5f397886f0e9dab971ef7bf353a00ed790190bf386ec8c",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/ipfs_accelerate_py/agent_supervisor/runtime/container_worker_boundary.py"
+    },
+    {
+      "archive_member_sha256": "9ce4faf70b681bda5270644493f7727782fd8d137d0b9da11eb34cbfd07d4d7b",
+      "expected_sha256": "9ce4faf70b681bda5270644493f7727782fd8d137d0b9da11eb34cbfd07d4d7b",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/ipfs_accelerate_py/agent_supervisor/runtime/cumulative_usage_reconciliation.py"
+    },
+    {
+      "archive_member_sha256": "416da2db6ded8dd1ab578304ee9c07103c5c564cceb785caa8c33bae4732cc00",
+      "expected_sha256": "416da2db6ded8dd1ab578304ee9c07103c5c564cceb785caa8c33bae4732cc00",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/ipfs_accelerate_py/agent_supervisor/runtime/doctor_residual_context.py"
+    },
+    {
+      "archive_member_sha256": "c020e95d4bb7a9d2d09d393fac5673eee0ec5bb75b111b79adf1bbd912413183",
+      "expected_sha256": "c020e95d4bb7a9d2d09d393fac5673eee0ec5bb75b111b79adf1bbd912413183",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/ipfs_accelerate_py/agent_supervisor/runtime/local_prompt_tokenizer.py"
+    },
+    {
+      "archive_member_sha256": "bcb8de1568a6065ee9296cc3817d5f4f34cf335d06580f4c6a896bea69357de3",
+      "expected_sha256": "bcb8de1568a6065ee9296cc3817d5f4f34cf335d06580f4c6a896bea69357de3",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/ipfs_accelerate_py/agent_supervisor/runtime/multi_supervisor_runner.py"
+    },
+    {
+      "archive_member_sha256": "a7362c46c177d3e225af8559b608c67de6a56c2af328ad1d1496c7b77a010c40",
+      "expected_sha256": "a7362c46c177d3e225af8559b608c67de6a56c2af328ad1d1496c7b77a010c40",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/ipfs_accelerate_py/agent_supervisor/runtime/router_implementation_runner.py"
+    },
+    {
+      "archive_member_sha256": "fe0d183e3d2a7495ee37767ea2c0d65fcdcc45a16ce244359e9a9214d9f6b5a5",
+      "expected_sha256": "fe0d183e3d2a7495ee37767ea2c0d65fcdcc45a16ce244359e9a9214d9f6b5a5",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/ipfs_accelerate_py/agent_supervisor/runtime/router_public_instruction.py"
+    },
+    {
+      "archive_member_sha256": "ee0c788b08c1b5a3bbd3c3bdc0acb5c5e387a8cdb9d0052639e814bd9e848e8c",
+      "expected_sha256": "ee0c788b08c1b5a3bbd3c3bdc0acb5c5e387a8cdb9d0052639e814bd9e848e8c",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/ipfs_accelerate_py/agent_supervisor/runtime/semantic_context_projection.py"
+    },
+    {
+      "archive_member_sha256": "a764eb074ad6576ba1c271bae37bde6a44bd3cf59a94a83f4e70b94cf6e4cf96",
+      "expected_sha256": "a764eb074ad6576ba1c271bae37bde6a44bd3cf59a94a83f4e70b94cf6e4cf96",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/ipfs_accelerate_py/agent_supervisor/runtime/semantic_decision_dialogue.py"
+    },
+    {
+      "archive_member_sha256": "3b40fa4e67333e2d9546bceba306c25ac102d00be92985570f7d429f6dddc8a8",
+      "expected_sha256": "3b40fa4e67333e2d9546bceba306c25ac102d00be92985570f7d429f6dddc8a8",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/ipfs_accelerate_py/agent_supervisor/runtime/semantic_decision_owner.py"
+    },
+    {
+      "archive_member_sha256": "c07ffab913818d64041000b15d352232be3220a6e9305e29aa9b1d3ef635d54f",
+      "expected_sha256": "c07ffab913818d64041000b15d352232be3220a6e9305e29aa9b1d3ef635d54f",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/ipfs_accelerate_py/agent_supervisor/runtime/semantic_decision_packet.py"
+    },
+    {
+      "archive_member_sha256": "c4d7c62c66df16c62f994cc172d2fd1f49de9f4c3afae61d0454eb5d14f4ff97",
+      "expected_sha256": "c4d7c62c66df16c62f994cc172d2fd1f49de9f4c3afae61d0454eb5d14f4ff97",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/ipfs_accelerate_py/agent_supervisor/runtime/semantic_decision_provider.py"
+    },
+    {
+      "archive_member_sha256": "5c0c80ec5ad0c27c2e6dee88aeca591e7ae0477b2f5ac700dfa1f30630487b8a",
+      "expected_sha256": "5c0c80ec5ad0c27c2e6dee88aeca591e7ae0477b2f5ac700dfa1f30630487b8a",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/ipfs_accelerate_py/agent_supervisor/runtime/semantic_decision_usage.py"
+    },
+    {
+      "archive_member_sha256": "aa4bf537e5e61ccc12f733860da3d258b1f197940b0fa138ecdbcd0faf2443e0",
+      "expected_sha256": "aa4bf537e5e61ccc12f733860da3d258b1f197940b0fa138ecdbcd0faf2443e0",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/ipfs_accelerate_py/agent_supervisor/runtime/semantic_decision_worker.py"
+    },
+    {
+      "archive_member_sha256": "9322013929bd89df326826e99943883b203b1eb464c96ea074e2c2868be2c312",
+      "expected_sha256": "9322013929bd89df326826e99943883b203b1eb464c96ea074e2c2868be2c312",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/ipfs_accelerate_py/agent_supervisor/runtime/semantic_projection_dispatch.py"
+    },
+    {
+      "archive_member_sha256": "280c45eee97790310c71ff969f79407efab9fd86ce20bc69f337ef5ba8a8973e",
+      "expected_sha256": "280c45eee97790310c71ff969f79407efab9fd86ce20bc69f337ef5ba8a8973e",
+      "group": "selected_and_deadline_sources",
+      "matches": true,
+      "path": "source/ipfs_accelerate_py/agent_supervisor/runtime/semantic_router_translation.py"
+    }
+  ],
+  "source_file_index": "private/runtime_source_files.jsonl",
+  "task_inputs_in_archive_reported": false,
+  "uncompressed_regular_file_bytes": 4113131392
+}

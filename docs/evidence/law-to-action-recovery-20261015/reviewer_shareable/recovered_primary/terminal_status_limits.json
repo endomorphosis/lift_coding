@@ -1,0 +1,14 @@
+{
+  "absent_effect_used_to_infer_status": false,
+  "intermediate_unknown_unsupported_error_timeout_cancellation_counts": null,
+  "native_decision_vocabulary": {
+    "allow": 753,
+    "deny": 147
+  },
+  "native_terminal_vocabulary": {
+    "denial": 147,
+    "success": 753
+  },
+  "null_reason": "Compact worker output does not expose every intermediate checker/transport status; terminal labels alone cannot recover those statuses.",
+  "unmapped_records": 0
+}

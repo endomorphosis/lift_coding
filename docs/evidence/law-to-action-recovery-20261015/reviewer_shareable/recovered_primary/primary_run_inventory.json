@@ -1,0 +1,162 @@
+[
+  {
+    "evidence_level": "recovered; member hashes checked; historical admission not replayed",
+    "kind": "LA-029 historical segment",
+    "segment": {
+      "controller": {
+        "original_sha256": "b51940d97d76478deca1a1283b01360e98d9da4a0cee95df17f6f65a7f1b97a7",
+        "path": "recovery_history/candidate/papers/completion/law_to_action/benchmark/fixed_action_operator/controller.py",
+        "portable_sha256": "b51940d97d76478deca1a1283b01360e98d9da4a0cee95df17f6f65a7f1b97a7"
+      },
+      "driver": {
+        "original_sha256": "b51940d97d76478deca1a1283b01360e98d9da4a0cee95df17f6f65a7f1b97a7",
+        "path": "recovery_history/candidate/papers/completion/law_to_action/benchmark/fixed_action_operator/controller.py",
+        "portable_sha256": "b51940d97d76478deca1a1283b01360e98d9da4a0cee95df17f6f65a7f1b97a7"
+      },
+      "historical_admission": {
+        "original_sha256": "72843af7ea938e762b9878ec1e3973e5ed0fb87e26bb919a42beb9c7904ab336",
+        "path": "recovery_history/root_operator_admission.private.json",
+        "portable_sha256": "c6053d1f56295b74671371b94db84be55d0cc687b31ef22153337e446a068c52"
+      },
+      "host_attempts": 460,
+      "host_indices_inclusive": [
+        0,
+        459
+      ],
+      "result": {
+        "original_sha256": "316c200458b1455f0fde3dce1b40c0bbe69cc0e76030846ab481cb68ffad452c",
+        "path": "recovery_history/actual_operator_run_v1/result.json",
+        "portable_sha256": "26a2cef1eaee9a120baf1e39b4d3d384a241120d7ad84a26bce7b4b17e0ad62d"
+      },
+      "segment": "original"
+    }
+  },
+  {
+    "evidence_level": "recovered; member hashes checked; historical admission not replayed",
+    "kind": "LA-029 historical segment",
+    "segment": {
+      "controller": {
+        "original_sha256": "999d16786471b97b44e97316795a1b72c7786bbaf77550d09bd5c8277aa9b44d",
+        "path": "recovery_history/normal_exit_recovery_v1/candidate/controller.py",
+        "portable_sha256": "999d16786471b97b44e97316795a1b72c7786bbaf77550d09bd5c8277aa9b44d"
+      },
+      "driver": {
+        "original_sha256": "d687ccc8f0a41a8d6e88346dbf4fc60b59110e3c07b97348def810e6b9ed97d2",
+        "path": "recovery_history/normal_exit_recovery_v1/continue_unstarted.py",
+        "portable_sha256": "d687ccc8f0a41a8d6e88346dbf4fc60b59110e3c07b97348def810e6b9ed97d2"
+      },
+      "historical_admission": {
+        "original_sha256": "b7946fc2636995424e50c051514849ddbfddf900d5ecdb13053ea8c98dfffa9a",
+        "path": "recovery_history/normal_exit_recovery_v1/root_execution_admission.private.json",
+        "portable_sha256": "008c7c2f6a1b7fe044168d1f3d2f843301a93d704803d035a2ea488fa6b4323a"
+      },
+      "host_attempts": 101,
+      "host_indices_inclusive": [
+        460,
+        560
+      ],
+      "result": {
+        "original_sha256": "dc08dc0204d9bbb99cccf51bbd2549ea980beaaea6baddcc1377c7aab79c6745",
+        "path": "recovery_history/actual_operator_continuation_v1/result.json",
+        "portable_sha256": "dc08dc0204d9bbb99cccf51bbd2549ea980beaaea6baddcc1377c7aab79c6745"
+      },
+      "segment": "leaf-exit"
+    }
+  },
+  {
+    "evidence_level": "recovered; member hashes checked; historical admission not replayed",
+    "kind": "LA-029 historical segment",
+    "segment": {
+      "controller": {
+        "original_sha256": "ceaecbde169ac6eb959756568a207353a821be0bad4cffde7bd2c51478c2fca2",
+        "path": "recovery_history/parent_exit_recovery_v2/candidate/controller.py",
+        "portable_sha256": "ceaecbde169ac6eb959756568a207353a821be0bad4cffde7bd2c51478c2fca2"
+      },
+      "driver": {
+        "original_sha256": "0a6049f245bf1dd1b7fb568511d8985d8049a8ce4691c603097ca1210aedbddb",
+        "path": "recovery_history/parent_exit_recovery_v2/continue_unstarted.py",
+        "portable_sha256": "0a6049f245bf1dd1b7fb568511d8985d8049a8ce4691c603097ca1210aedbddb"
+      },
+      "historical_admission": {
+        "original_sha256": "a064df3bc1b2130082b30ba060f2468726f1c153f233eb75d63bf36aeb8b80d7",
+        "path": "recovery_history/parent_exit_recovery_v2/root_execution_admission.private.json",
+        "portable_sha256": "3a3f370b8a62a9f18fada1e739ff9326fb2b91370291c5d667d54d1b287d458a"
+      },
+      "host_attempts": 31,
+      "host_indices_inclusive": [
+        561,
+        591
+      ],
+      "result": {
+        "original_sha256": "10ac98602f7305e1f8d9332288186623923cdb3fed9213876ab42dff2b1dbc34",
+        "path": "recovery_history/actual_operator_continuation_v2/result.json",
+        "portable_sha256": "10ac98602f7305e1f8d9332288186623923cdb3fed9213876ab42dff2b1dbc34"
+      },
+      "segment": "parent-exit"
+    }
+  },
+  {
+    "evidence_level": "recovered; member hashes checked; historical admission not replayed",
+    "kind": "LA-029 historical segment",
+    "segment": {
+      "controller": {
+        "original_sha256": "e202a035b6be29ebebf8b2455e2aedf5e074af8e74ffbcc3b99f909efa8321fe",
+        "path": "recovery_history/startup_failure_recovery_v3/candidate_v5/controller.py",
+        "portable_sha256": "e202a035b6be29ebebf8b2455e2aedf5e074af8e74ffbcc3b99f909efa8321fe"
+      },
+      "driver": {
+        "original_sha256": "821681d08f8fbe8728755bb91dca843f51b66f0a188473a01b9274db53586c54",
+        "path": "recovery_history/startup_failure_recovery_v3/continue_undispatched_v5.py",
+        "portable_sha256": "821681d08f8fbe8728755bb91dca843f51b66f0a188473a01b9274db53586c54"
+      },
+      "historical_admission": {
+        "original_sha256": "50fd20adef4493d7820e162534a9aa7744c9b288e18fa76563ae8eb33f1ba966",
+        "path": "recovery_history/startup_failure_recovery_v3/root_execution_admission_v5.private.json",
+        "portable_sha256": "8ada3187dfc15bbcbcede68655499720656123c30770a9005a9cf1ba40c37b6d"
+      },
+      "host_attempts": 35,
+      "host_indices_inclusive": [
+        591,
+        625
+      ],
+      "result": {
+        "original_sha256": "d3736ee70e4e10df75d236b71ca7612d4e3aa773f9a9f45caaea572f8eab281d",
+        "path": "recovery_history/actual_operator_startup_recovery_v3/result.json",
+        "portable_sha256": "d3736ee70e4e10df75d236b71ca7612d4e3aa773f9a9f45caaea572f8eab281d"
+      },
+      "segment": "startup-591"
+    }
+  },
+  {
+    "evidence_level": "recovered; member hashes checked; historical admission not replayed",
+    "kind": "LA-029 historical segment",
+    "segment": {
+      "controller": {
+        "original_sha256": "961feedde72299e86d5baa8ced2bd191f3aae9c6503ec1fcecf60ed27be4f593",
+        "path": "recovery_history/startup625_recovery_v1/candidate/controller.py",
+        "portable_sha256": "961feedde72299e86d5baa8ced2bd191f3aae9c6503ec1fcecf60ed27be4f593"
+      },
+      "driver": {
+        "original_sha256": "f9ef8ccf6c0f8e3a6853d4a3eefd0ace41eb4e7171d145b01f6366c22b952721",
+        "path": "recovery_history/startup625_recovery_v1/continue_undispatched625.py",
+        "portable_sha256": "f9ef8ccf6c0f8e3a6853d4a3eefd0ace41eb4e7171d145b01f6366c22b952721"
+      },
+      "historical_admission": {
+        "original_sha256": "963980dcb7adcaaa931b856b68a1bc45cb071919cc1174b4ce61242eb85951f2",
+        "path": "recovery_history/startup625_recovery_v1/root_execution_admission.private.json",
+        "portable_sha256": "1bbba376820a8380d746dd6b5f2ad5a05bc10fac7f5d622d6b00b799a13e1883"
+      },
+      "host_attempts": 275,
+      "host_indices_inclusive": [
+        625,
+        899
+      ],
+      "result": {
+        "original_sha256": "5c4fe89376b2ec0b3e765d4aa8ddcfab5de06837dbbb035a8bb0b38304e6e279",
+        "path": "recovery_history/actual_operator_startup625_recovery_v1/result.json",
+        "portable_sha256": "5c4fe89376b2ec0b3e765d4aa8ddcfab5de06837dbbb035a8bb0b38304e6e279"
+      },
+      "segment": "startup-625"
+    }
+  }
+]

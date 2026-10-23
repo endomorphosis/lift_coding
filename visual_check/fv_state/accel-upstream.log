@@ -1,0 +1,27 @@
+logic tree pin compiler=/home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_datasets_py/ipfs_datasets_py/logic/legal_ir/canonical_compiler.py decompiler=/home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_datasets_py/ipfs_datasets_py/logic/legal_ir/canonical_decompiler.py parser=/home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_datasets_py/ipfs_datasets_py/logic/deontic/utils/deontic_parser.py
+[ipfs_datasets_py] ergoai: resolving managed ErgoAI for package import ensure missing managed ErgoAI
+[ipfs_datasets_py] ergoai: checking whether ergoai is already available
+[ipfs_datasets_py] ergoai: installation started because package import ensure missing managed ErgoAI
+[ipfs_datasets_py] ergoai: installation did not make the prover available
+INFO:     Started server process [6710]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:9000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:50618 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53452 - "GET /healthz HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53460 - "GET /mcp/tools HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51120 - "GET /mcp/risk/profile HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51126 - "GET /mcp/risk/profile HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39530 - "GET /mcp/risk/profile HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39544 - "GET /mcp/risk/profile HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39530 - "GET /mcp/tasks?limit=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39544 - "GET /mcp/goals?limit=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39530 - "GET /mcp/goals?limit=200 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57492 - "GET /mcp/tasks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57244 - "GET /mcp/risk/profile HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57244 - "GET /mcp/tasks?limit=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57260 - "GET /mcp/goals?limit=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57264 - "GET /mcp/goals?limit=200 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41930 - "GET /mcp/tasks?limit=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41930 - "GET /mcp/goals?limit=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41930 - "GET /mcp/goals?limit=200 HTTP/1.1" 200 OK

@@ -1,0 +1,302 @@
+{
+  "arithmetic_checks_passed": true,
+  "behavioral_reexecution": false,
+  "checks": [
+    {
+      "check": "codex_input_plus_output",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-no-index-08/receipt.json"
+      ],
+      "invocation_id": "db460b0c81be4e9d9ad72d2a18794e01",
+      "passed": true,
+      "run_id": "fix-code-vulnerability__aAjF5Sy"
+    },
+    {
+      "check": "codex_input_plus_output",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-no-index-08/receipt.json"
+      ],
+      "invocation_id": "6154739fecdb47e1b97e59d76eca392d",
+      "passed": true,
+      "run_id": "fix-code-vulnerability__aAjF5Sy"
+    },
+    {
+      "check": "codex_input_plus_output",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/receipt.json"
+      ],
+      "invocation_id": "3bba273ba54540b691a8e3a102d8c526",
+      "passed": true,
+      "run_id": "fix-code-vulnerability__z4cVfSR"
+    },
+    {
+      "check": "codex_input_plus_output",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/no-index-diagnosis-20260929/no-index-observed-01/receipt.json"
+      ],
+      "invocation_id": "ec1772b51d554719be7e047d877298a3",
+      "passed": true,
+      "run_id": "fix-code-vulnerability__t5UzZxv"
+    },
+    {
+      "check": "codex_input_plus_output",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/no-index-diagnosis-20260929/no-index-observed-01/receipt.json"
+      ],
+      "invocation_id": "10cc63755f2d44e39fbb25bc77cece28",
+      "passed": true,
+      "run_id": "fix-code-vulnerability__t5UzZxv"
+    },
+    {
+      "check": "codex_input_plus_output",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/no-index-diagnosis-20260929/no-index-corrected-01/receipt.json"
+      ],
+      "invocation_id": "6109dd854011419d998db19a94c3e14b",
+      "passed": true,
+      "run_id": "fix-code-vulnerability__WAQeD5W"
+    },
+    {
+      "check": "codex_input_plus_output",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/no-index-diagnosis-20260929/no-index-corrected-01/receipt.json"
+      ],
+      "invocation_id": "3f644770a7c743b492c1829a709761c0",
+      "passed": true,
+      "run_id": "fix-code-vulnerability__WAQeD5W"
+    },
+    {
+      "check": "codex_input_plus_output",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/no-index-diagnosis-20260929/no-index-corrected-02/receipt.json"
+      ],
+      "invocation_id": "c9c6a794602f495e8f8b71b1714d49ad",
+      "passed": true,
+      "run_id": "fix-code-vulnerability__2f3LChX"
+    },
+    {
+      "check": "codex_input_plus_output",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/no-index-diagnosis-20260929/no-index-corrected-02/receipt.json"
+      ],
+      "invocation_id": "08cf8c07a5674e368a9edc369f236356",
+      "passed": true,
+      "run_id": "fix-code-vulnerability__2f3LChX"
+    },
+    {
+      "check": "fresh_score_equals_original_receipt_sum",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/no-index-diagnosis-20260929/no-index-corrected-02/receipt.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/no-index-diagnosis-20260929/no-index-corrected-02/token-score.json"
+      ],
+      "passed": true
+    },
+    {
+      "check": "codex_input_plus_output",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal-supervisor-blockers-20261005/largest-eigenval-03/receipt.json"
+      ],
+      "invocation_id": "d3dfd47fd2b34dda96ebdf9c820e87f8",
+      "passed": true,
+      "run_id": "largest-eigenval__iieLP5S"
+    },
+    {
+      "check": "codex_input_plus_output",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal-supervisor-blockers-20261005/largest-eigenval-03/receipt.json"
+      ],
+      "invocation_id": "d4ba27dcb8f343bc82cbe3c27b9e3f73",
+      "passed": true,
+      "run_id": "largest-eigenval__iieLP5S"
+    },
+    {
+      "check": "codex_input_plus_output",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/numerical-live-pair-20261013/live-trials/codex-full-01/receipt.json"
+      ],
+      "invocation_id": "e06268e58e70427cb459a79604e10cd9",
+      "passed": true,
+      "run_id": "largest-eigenval__ePRwqVj"
+    },
+    {
+      "check": "codex_input_plus_output",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/numerical-live-pair-20261013/live-trials/codex-full-01/receipt.json"
+      ],
+      "invocation_id": "32418315cd1f448a8e86148286ba7f1a",
+      "passed": true,
+      "run_id": "largest-eigenval__ePRwqVj"
+    },
+    {
+      "check": "grok_disjoint_categories_sum",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/compact-worker-live-20261014/readouts/original-pair.json"
+      ],
+      "invocation_id": "5fcf7cf9b9b74cb7b07064c4aa57392b",
+      "passed": true
+    },
+    {
+      "check": "grok_disjoint_categories_sum",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/compact-worker-live-20261014/readouts/original-pair.json"
+      ],
+      "invocation_id": "58b4cd57abff48f2bad3827160949bd4",
+      "passed": true
+    },
+    {
+      "check": "grok_disjoint_categories_sum",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/compact-worker-live-20261014/readouts/original-pair.json"
+      ],
+      "invocation_id": "82e692db03804cdab9e48388a5a7f187",
+      "passed": true
+    },
+    {
+      "check": "grok_disjoint_categories_sum",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/compact-worker-live-20261014/readouts/original-pair.json"
+      ],
+      "invocation_id": "185a4d5aacf049d585361271328f4bff",
+      "passed": true
+    },
+    {
+      "check": "grok_disjoint_categories_sum",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/compact-worker-live-20261014/readouts/metadata-treatment.json"
+      ],
+      "invocation_id": "92433d5e52ac4ad6aee933817b1e02b8",
+      "passed": true
+    },
+    {
+      "check": "grok_disjoint_categories_sum",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/external/ipfs_accelerate/docs/agent_supervisor/evidence/compact-worker-live-20261014/readouts/metadata-treatment.json"
+      ],
+      "invocation_id": "d95ec5b2a439416aa591468296ebeeb2",
+      "passed": true
+    }
+  ],
+  "claims": [
+    {
+      "claim": "Fresh 282802-token trial is fix-code-vulnerability__2f3LChX; preserve failed __aAjF5Sy and separate corrected __WAQeD5W success359845.",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/no-index-diagnosis-20260929/no-index-corrected-02/receipt.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/no-index-diagnosis-20260929/no-index-corrected-02/token-score.json"
+      ],
+      "evidence_tier": "reconstructed_join",
+      "id": "T2-distinct-fresh-success"
+    },
+    {
+      "claim": "Doctor local header guard contract and template synthesis were used; no coding model invocation; security IR obligations not discharged and full static analysis false.",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-08/receipt.json"
+      ],
+      "evidence_tier": "original_record",
+      "id": "T2-symbolic-scope"
+    },
+    {
+      "claim": "Independent original receipts for each indexed numerical cohort record Source384 pinned parent and zero target updates. This does not prove OOD as sole cause or qualify repository-trained multi-IR deployment.",
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal-supervisor-blockers-20261005/largest-eigenval-03/receipt.json",
+        "/home/barberb/lift_coding/artifacts/numerical-live-pair-20261013/live-trials/codex-full-01/receipt.json",
+        "/home/barberb/lift_coding/artifacts/repeated-compact-edits-20261013/live-trials/grok-identity-02/receipt.json",
+        "/home/barberb/lift_coding/artifacts/repeated-compact-edits-20261013/live-trials/grok-comments-02/receipt.json",
+        "/home/barberb/lift_coding/artifacts/repeated-compact-edits-20261013/live-trials/grok-comments-metadata-03/receipt.json"
+      ],
+      "evidence_tier": "original_record",
+      "id": "T3-T4-X1-training"
+    }
+  ],
+  "contradictions": [
+    {
+      "apparent": "T2 preliminary Doctor abstained but symbolic repair succeeded",
+      "resolution": "Eligibility snapshot differs from later contract-candidate dispatch and worker materialization; retain both."
+    },
+    {
+      "apparent": "T4 generic refresh succeeded but final formalization current",
+      "resolution": "Report explicitly preserves successor_unavailable; generic refresh is not source-current semantics."
+    },
+    {
+      "apparent": "Grok passing task implies complete usage",
+      "resolution": "Reward1 and completed task remain; absent usage flag leaves totals unknown, retain reported counters separately."
+    },
+    {
+      "apparent": "Historical runtime06 full22,040 tokens vs runtime08 full22,749",
+      "resolution": "Different original trial IDs and runtime archives; not duplicated or repeated samples of final policy."
+    }
+  ],
+  "edges": [
+    {
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/retained-study-inventory.json"
+      ],
+      "from": "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/retained-study-inventory.json",
+      "to": "fix-code-vulnerability__VfZu8VN",
+      "type": "same-control-as"
+    }
+  ],
+  "input_bytes": 2851667,
+  "input_files": 28,
+  "missing": [
+    {
+      "field": "Original final accepted-root publication and finite validation counts for T2",
+      "minimal_remedy": "Read exact owner publication/validation receipt if retained; do not rerun verifier.",
+      "reason": "Original outer receipt has materialization and completion, but publication observation is pending_native_stop; bounded receipt recovery did not inspect owner journal."
+    },
+    {
+      "field": "T2 historical inventory original receipts",
+      "minimal_remedy": "Separate bounded metadata-only read of listed receipts.",
+      "paths": [
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/native-codex-01/receipt.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-01/receipt.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-02/receipt.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-02/receipt.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-03/receipt.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-03/receipt.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-full-04/receipt.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/automation-integration-20260929/supervisor-no-index-04/receipt.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-full-06/receipt.json",
+        "/home/barberb/lift_coding/artifacts/terminal_bench_supervisor/symbolic-security-20260929/supervisor-no-index-06/receipt.json"
+      ],
+      "reason": "Retained inventory found 11 earlier trials, including shared native control; unique older rows preserved at report tier, original content not read after 28-file cap."
+    },
+    {
+      "field": "T4 no-index and native original receipts",
+      "minimal_remedy": "Rehash exact original receipts and compare recorded joins.",
+      "paths": [
+        "artifacts/numerical-live-pair-20261013/live-trials/codex-no-index-01/receipt.json"
+      ],
+      "reason": "Bound three-arm and pair report recovered; original full receipt/preparation prioritized within 28-file cap."
+    },
+    {
+      "field": "Exact weight bytes and archive content",
+      "minimal_remedy": "Read retained asset-verification receipts; no weights download.",
+      "reason": "No large binaries read or model inference run; receipt-reported checkpoint/archive identities kept separate from independently rehashed inspected files."
+    },
+    {
+      "field": "X1 complete native and whole-pipeline usage",
+      "minimal_remedy": "Report counters as incomplete; propose separately approved prospective complete-accounting experiment.",
+      "reason": "Explicit native usage-completeness flag missing in Grok envelopes; no later report can create missing observations."
+    },
+    {
+      "field": "T3/T4/X1 learned semantics validity and adaptation",
+      "minimal_remedy": "Prespecify grammar coverage separately from adaptation and independent qualification; no training authorized here.",
+      "reason": "Actual inference recorded but target training steps zero; supported grammar absent for sampled source; no source-semantic proof."
+    }
+  ],
+  "models_called": 0,
+  "scope": "28 bounded files; provider-free arithmetic/schema/hash joins only",
+  "search_routes": [
+    "Exact named reports in Accelerate checkout",
+    "Exact receipt paths referenced by reports",
+    "Filename-only top-level terminal_bench_supervisor discovery",
+    "Depth-bounded no-index-diagnosis and compact-worker readout filename enumeration"
+  ],
+  "solvers_executed": 0,
+  "study_ids": [
+    "T2",
+    "T3",
+    "T4",
+    "X1"
+  ]
+}

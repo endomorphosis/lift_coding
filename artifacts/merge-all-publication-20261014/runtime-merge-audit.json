@@ -1,0 +1,129 @@
+{
+  "generated_at": "2026-10-14T03:39:44.406421+00:00",
+  "worktree": "/home/barberb/lift_coding_worktrees/merge-all-accelerate-20261014",
+  "files_edited": [
+    {
+      "path": "ipfs_accelerate_py/agent_supervisor/prompt/prompt_goal_planner.py",
+      "sha256": "35a946eeffc7048c4498e671045106f664707fb14774e6c7ffeee89f31bb939a"
+    },
+    {
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/README.md",
+      "sha256": "623d6927cf1b36e0d4bc59135e830ca7f51fb2354be196409e66023b7236af40"
+    },
+    {
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/codex_usage_receipt.py",
+      "sha256": "fe4071e3953dd467a97e438df7f1324e595b7c6c765c10aec8c21eeb719429d4"
+    },
+    {
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/router_implementation_runner.py",
+      "sha256": "c2ee89fda87df324d661d2b1799ac8b64aa860e9bbf3dee5ebef796a2b286af6"
+    },
+    {
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/semantic_capsule_selection.py",
+      "sha256": "7c06484bfa5901a708ec2922ac4babfd8d0a8f0d9ffb2a0fca3b46b60558ee62"
+    },
+    {
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/semantic_context_runtime.py",
+      "sha256": "19d0e6049f2309459e96a1dd36eba5938e019221ff4830469615cb222f028e77"
+    },
+    {
+      "path": "ipfs_accelerate_py/agent_supervisor/runtime/source_view_policy.py",
+      "sha256": "fdee12b247932ace24f2694ce2f42581c812b4beb21050c467e208f466c46b21"
+    },
+    {
+      "path": "test/api/test_codex_tool_diagnostics.py",
+      "sha256": "f4db392fe08fd291c638254769872a54043ae145f512d436fb865cb0fa5b63fd"
+    },
+    {
+      "path": "test/api/test_source_view_policy.py",
+      "sha256": "ee9dffdcbc1a6d26cc2a878f872c1a6c1d694d1937755b92ef0bdc1242db3863"
+    },
+    {
+      "path": "test/api/test_query_reference_context_composition.py",
+      "sha256": "c8caee0665a6d490392a0a718257d284647e431f488a9aa2473b283d66255a1f"
+    },
+    {
+      "path": "test/api/test_source_input_policy.py",
+      "sha256": "a4584facaa3b44259250a6956fc19a651b5f65f3936074ef4797b7a837d809ef"
+    },
+    {
+      "path": "test/api/test_repository_source_router.py",
+      "sha256": "d5836ffec7aede47dbc6ef29a9287915c25b3490f59223aa50009f3bb82856b8"
+    },
+    {
+      "path": "test/api/semantic_state/test_indexed_worker_context.py",
+      "sha256": "3f54f84cbd94371a0dfbe0a9e723de3f2111ed228f00fe6c147c4467b7b61c51"
+    }
+  ],
+  "validation": "All edited Python files statically compiled; no imports, tests, provider calls, source execution, index writes, commits, fetches, merges, or pushes performed by audit agent. Root owns tests and publication.",
+  "merge_decisions": [
+    "Preserve structured SourceViewPolicy recipe plus optional helper functions; helper runner argument/CLI/receipt renamed source_view_advisory_policy.",
+    "Signed source descriptors cannot combine with unqualified advisory/repository/source-input/query-reference projections.",
+    "Signed descriptor and public scope rechecks remain final pre-provider gate after helper-store setup and projection freshness checks.",
+    "Maintain exact source/public/residual guidance suffix in native token-count fallback.",
+    "Indexed full candidate ranking and verified native retrieval partial ranking remain separate policies; refuse combination.",
+    "Retain native usage growth completeness with interaction telemetry; an unknown terminal cumulative snapshot cannot establish completion even after task_complete.",
+    "Valid complete incoming authored usage fixtures now state observed cached_input_tokens explicitly."
+  ],
+  "followup_history_review": {
+    "69bc0b87bb": {
+      "classification": "Bounded request-shape observation before admission; does not grant authority; compatible with runtime merge.",
+      "likely_overlap": [
+        "terminal_source_view_observation.py",
+        "terminal_worker_capability.py"
+      ],
+      "focused_tests": [
+        "test/api/test_worker_source_request_observation.py",
+        "test/api/test_worker_source_broker.py",
+        "test/api/test_worker_source_discovery_transport.py",
+        "benchmarks/agent_supervisor/container_coding/test_terminal_source_request_observation.py"
+      ]
+    },
+    "eff8ef3ecc": {
+      "classification": "Five-commit chain adds Grok usage-event observation, preserves checked Doctor provider-free routes, and bounded capsule count policy with lifecycle/currentness binding plus qualification artifacts.",
+      "runtime_merge_notes": [
+        "router_implementation_runner._grok_progress_emitter must retain new grok_stream_progress_summary projection; only a narrow import/call change.",
+        "published_task_context now pins capsule selection limits across refresh for lexical and retrieval modes; compatible with indexed selector provided same selector remains fixed."
+      ],
+      "benchmark_merge_notes": [
+        "Retain newly merged indexed semantic-context profile and independent verified-retrieval selector guards alongside capsule_budget arguments/options.",
+        "Keep max_capsules from capsule_budget when new indexed profile builds worker payload; do not silently reset to eight.",
+        "Provider-free checked Doctor routes may accept configured but unused model projection controls; must record not_applicable, not dispatch or invented zero usage."
+      ],
+      "focused_tests": [
+        "test/api/test_grok_stream_usage.py",
+        "test/api/test_grok_stream_capture.py",
+        "test/api/test_grok_stream_router.py",
+        "test/api/test_router_implementation_runner.py",
+        "test/api/semantic_state/test_published_capsule_budget.py",
+        "benchmarks/agent_supervisor/container_coding/test_terminal_capsule_budget_*.py",
+        "test/api/test_terminal_doctor_dispatch.py"
+      ]
+    }
+  },
+  "post_followup_merge_static_check_at": "2026-10-14T03:40:56.740562+00:00",
+  "post_followup_merge_findings": "Router preserves advisory API, signed source final rechecks, conservative usage fields, and updated grok_stream_progress_summary. Added indexed budget cold-refresh and competing-ranking refusal coverage; tests not run by audit agent.",
+  "collection_diagnostic": {
+    "observed_at": "2026-10-14T03:47:27.442975+00:00",
+    "pid": 3610369,
+    "observation": "Process running on CPU, not kernel-blocked. Approximately 1GiB RSS; isolated AST-seal DuckDB and WAL open. WAL had grown to447657 bytes with recent modification while quiet pytest log remained empty.",
+    "static_audit": "127 selected test modules have no top-level model/provider/prover execution. Legal test modules load their implementation scripts at import; remaining top-level calls are imports, constants, and fixture descriptors.",
+    "likely_cause": "Mandatory pytest_ast_seal.py collection hook recomputes local AST import closure per distinct test file (up to4096 source files per closure) without cross-file parsed-AST memoization. This is an inference from code and active WAL progress, not a captured Python stack.",
+    "secondary_hook": "proof_reuse plugin is off unless configuration enables it; board ledger collection hook returns early without board context.",
+    "actions": "No process signals, debugger attachment, tests, imports of project code, source changes, bypasses, or optimization applied."
+  },
+  "indexed_observation_integration_fix": {
+    "recorded_at": "2026-10-14T04:05:40.113761+00:00",
+    "commit": "57ca07844e",
+    "failure_group_count": 25,
+    "cause": "Main observation adapter only recognized lexical @1 and verified-retrieval @2; incoming real indexed producer emits @1 plus candidate_snapshot_cid, so closed fields rejected it.",
+    "fix": "Explicit closed indexed branch requires @2 program scope and bounded nonempty candidate snapshot identity; sidecar retains exact producer identity with authority unchanged. Real producer current-source reconstruction still decides acceptance.",
+    "files": [
+      "ipfs_accelerate_py/agent_supervisor/runtime/context_selection_observation.py",
+      "test/api/test_context_selection_observation.py",
+      "test/api/semantic_state/test_indexed_worker_context.py"
+    ],
+    "coverage": "8 new unit cases cover exact roundtrip and rehashed sidecar substitution plus closed-schema/snapshot/scope refusal. Existing real indexed producer test now verifies emitted sidecar against payload.",
+    "validation": "Static compilation and scoped diff check passed; root owns all tests. No test or benchmark execution by this audit agent."
+  }
+}

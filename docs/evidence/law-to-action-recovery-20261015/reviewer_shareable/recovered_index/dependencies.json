@@ -1,0 +1,67 @@
+{
+  "self_contained": false,
+  "bulk_copy_admission": "not_admitted;no copy,retry or bypass",
+  "dependencies": [
+    {
+      "label": "primary",
+      "directory_name": "law-to-action-evidence-recovery-20261015T084543Z",
+      "relative_from_reviewer_directory": "../../law-to-action-evidence-recovery-20261015T084543Z",
+      "manifest_sha256": "a79148fb1a6b7c45c14f9ab464971af1d1b6f2e102bee45d1b43401c41cd87e3",
+      "manifest_rechecked_now": true,
+      "full_payload_rehash_now": false,
+      "payload_validation_source": "The prior package validation and recorded artifact digests; no fresh full rehash claimed.",
+      "copied_into_this_index": false
+    },
+    {
+      "label": "followup",
+      "directory_name": "law-to-action-evidence-followup-20261015T093458Z",
+      "relative_from_reviewer_directory": "../../law-to-action-evidence-followup-20261015T093458Z",
+      "manifest_sha256": "3bb329791f6f04588dc1f28c134fe1793c0cc070ad6ae230b3910dd49120afd7",
+      "manifest_rechecked_now": true,
+      "full_payload_rehash_now": false,
+      "payload_validation_source": "The prior package validation and recorded artifact digests; no fresh full rehash claimed.",
+      "copied_into_this_index": false
+    },
+    {
+      "label": "continuation",
+      "directory_name": "law-to-action-author-package-search-20261015T095730Z",
+      "relative_from_reviewer_directory": "../../law-to-action-author-package-search-20261015T095730Z",
+      "manifest_sha256": null,
+      "null_reason": "Continuation has no whole-directory package manifest. Exact small reviewer-file hashes are listed; author binding payload hash is recorded in its verification report.",
+      "reviewer_files": [
+        {
+          "relative_path": "reviewer_shareable/author_package_search_status.json",
+          "bytes": 2062,
+          "sha256": "15833a2749289c41c302aa3db2ccda703912584178665811a0c19bc571d8beca"
+        },
+        {
+          "relative_path": "reviewer_shareable/consolidated_evidence_notes.json",
+          "bytes": 12209,
+          "sha256": "5cc5ed5ee1611619ac93633cb631fa71324e236bbb0c3f29429eb74e77300cb3"
+        },
+        {
+          "relative_path": "reviewer_shareable/consolidated_formal_job_table.csv",
+          "bytes": 8002,
+          "sha256": "a0824561c8ec0a7a6fb17d68c2c14badf6a49fca36982c1a5c9093a91ce880b8"
+        },
+        {
+          "relative_path": "reviewer_shareable/consolidated_route_check_matrix.csv",
+          "bytes": 20852,
+          "sha256": "b88934518d552b141433e0decf181f95e5d7e9f3d707376e8026f600d21ea49d"
+        },
+        {
+          "relative_path": "reviewer_shareable/original_input_verification.json",
+          "bytes": 11003,
+          "sha256": "efdbeaddfa2ee7e7b8e55c06933f964cc02821175ad338d4d97db7267bbfa0e1"
+        },
+        {
+          "relative_path": "reviewer_shareable/original_input_verification_raw_report.json",
+          "bytes": 9114,
+          "sha256": "51af8695da7f1ec52799e854d7f3f32b4972a147177b94ac6bf0ef579953c2ba"
+        }
+      ],
+      "copied_into_this_index": false
+    }
+  ],
+  "visibility": "Reviewer table dependencies point to reviewer views. Artifact requests may identify author-only filenames without including their contents. Author copies and local provenance remain separately restricted."
+}

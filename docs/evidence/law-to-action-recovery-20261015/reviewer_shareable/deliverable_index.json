@@ -1,0 +1,127 @@
+[
+  {
+    "deliverable": "Current findings",
+    "path": "../RECOVERY_REPORT.txt",
+    "status": "partial; explicit blockers"
+  },
+  {
+    "deliverable": "Exact artifact inventory",
+    "path": "artifact_inventory.csv",
+    "status": "Reviewer-facing file hashes and provenance; full package inventory is ../artifact_manifest.json. Hashes do not establish scientific validity."
+  },
+  {
+    "deliverable": "Run inventory",
+    "path": "recovered_primary/primary_run_inventory.json",
+    "status": "recovered historical primary; C1-C6 not identified"
+  },
+  {
+    "deliverable": "Primary recount",
+    "path": "recovered_primary/primary_recounts.csv",
+    "status": "recomputed retained counters; see recovered_primary/split_analysis.json for family bootstrap"
+  },
+  {
+    "deliverable": "Component recount/status",
+    "path": "recovered_primary/component_recovery_status.json",
+    "status": "null with reasons; blocked on ledger"
+  },
+  {
+    "deliverable": "Terminal dispositions",
+    "path": "recovered_primary/terminal_status_counts.json",
+    "status": "observed explicit categories; intermediate gaps in terminal_status_limits.json"
+  },
+  {
+    "deliverable": "Route/check table",
+    "path": "continuation/consolidated_route_check_matrix.csv",
+    "status": "exact-pin source boundaries; missing runtime attestation explicit"
+  },
+  {
+    "deliverable": "Formal-job table",
+    "path": "continuation/consolidated_formal_job_table.csv",
+    "status": "source/check records separated from proof claims"
+  },
+  {
+    "deliverable": "Original costs",
+    "path": "recovered_primary/cost_accounting.json",
+    "status": "science/startup separated; missing costs explicit"
+  },
+  {
+    "deliverable": "Recovery costs",
+    "path": "recovery_operation_accounting.json",
+    "status": "analysis/packaging only; not experiment cost"
+  },
+  {
+    "deliverable": "Claim/reviewer mapping",
+    "path": "claim_to_evidence_matrix.json",
+    "status": "provisional IDs; original reviewer matrix missing"
+  },
+  {
+    "deliverable": "Remaining inputs",
+    "path": "remaining_requests.json",
+    "status": "exact smallest artifact requests"
+  },
+  {
+    "deliverable": "Missing-work plan",
+    "path": "minimal_missing_work_plan.json",
+    "status": "recover before conditional new work; no new experiments authorized here"
+  },
+  {
+    "deliverable": "Manuscript proposal",
+    "path": "proposed_manuscript.patch",
+    "status": "unapplied new-file insertion only; current baseline unavailable"
+  },
+  {
+    "deliverable": "Input lineage followup",
+    "path": "continuation/original_input_verification.json",
+    "status": "full join and named alternate archive hash verification"
+  },
+  {
+    "deliverable": "Author-package search",
+    "path": "continuation/author_package_search_status.json",
+    "status": "bounded metadata not-found result; not exhaustive absence"
+  },
+  {
+    "deliverable": "Recovered original statute",
+    "path": "pinned_statute_fetch.json",
+    "status": "exact original PDF bytes recovered and hash-checked; not a new IR evaluation"
+  },
+  {
+    "deliverable": "Deferred source comparison",
+    "path": "source_context_validation.json",
+    "status": "shared admission timed out; text and offset comparison results null"
+  },
+  {
+    "deliverable": "Superseded source findings",
+    "path": "source_status_supersession.json",
+    "status": "current original-document and field-count corrections; old reports preserved"
+  },
+  {
+    "deliverable": "Package validation",
+    "path": "package_validation.json",
+    "status": "metadata, reference and construction checks; checksum reuse documented"
+  },
+  {
+    "deliverable": "Physical package assembly",
+    "path": "package_assembly_summary.json",
+    "status": "312 copied files hash-checked under admitted job"
+  },
+  {
+    "deliverable": "LA-017 rejection locator followup",
+    "path": "recovered_locator_followup/la017_rejection_locator_audit.json",
+    "status": "Diagnostic execution recovered; original specific admission rejection reason still missing"
+  },
+  {
+    "deliverable": "Formal build/model-check receipt followup",
+    "path": "recovered_locator_followup/formal_receipt_locator_followup.json",
+    "status": "Scoped retained-output checks; missing raw proof receipts remain unresolved"
+  },
+  {
+    "deliverable": "Historical discrepancy inventory",
+    "path": "recovered_primary/unresolved_discrepancies.json",
+    "status": "Historical record; current claim matrix and source supersession determine latest status"
+  },
+  {
+    "deliverable": "Supervisor interface discovery",
+    "path": "recovered_primary/supervisor_interface_summary.json",
+    "status": "Real entry point documented; no provider-executing handoff or new controller"
+  }
+]

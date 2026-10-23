@@ -1,0 +1,33 @@
+Traceback (most recent call last):
+  File "/home/hatch/workspace/lift_coding/visual_check/fv_state/pin_advance/probe_seed.py", line 29, in <module>
+    run = supervisor.run(os.environ.get("IPFS_ACCELERATE_SUPERVISOR_SEED_PROMPT") or DEFAULT_SEED_PROMPT)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/facade.py", line 303, in run
+    return self._run_from_prompt(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/entrypoints/facade.py", line 511, in _run_from_prompt
+    preview = prompt_service.preview(workflow_request)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/prompt/prompt_workflow.py", line 4443, in preview
+    scan = self._scan(request)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/prompt/prompt_workflow.py", line 4174, in _scan
+    scan = _component_call(
+           ^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/prompt/prompt_workflow.py", line 4052, in _component_call
+    return target(*args, **dict(kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/prompt/prompt_directory_scanner.py", line 2003, in scan
+    details = self.scan_detailed(request, clock_ms=clock_ms)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/prompt/prompt_directory_scanner.py", line 2012, in scan_detailed
+    details = scan_prompt_directory_detailed(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/prompt/prompt_directory_scanner.py", line 1344, in scan_prompt_directory_detailed
+    head, index = _git_entries(root, deadline=deadline)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/lift_coding/external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/prompt/prompt_directory_scanner.py", line 531, in _git_entries
+    raise NestedRepositoryError(f"nested repository or submodule is forbidden at {path!r}")
+ipfs_accelerate_py.agent_supervisor.prompt.prompt_directory_scanner.NestedRepositoryError: nested repository or submodule is forbidden at 'docs/fastmcp'
+repository: /home/hatch/workspace/lift_coding/external/ipfs_accelerate
+open OK, composition_cid: baguqeerauqzq7qsd5l23zxfasd7it6rhxabq747agtnelhkmqnbcgfg5tm3a

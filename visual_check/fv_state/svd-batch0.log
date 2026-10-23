@@ -1,0 +1,24 @@
+[run-with-owned-port] leased verified-free port 3419 for SWISSKNIFE_APP_AUDIT_RUNNER_E2E_PORT.
+Browser toolchain verified: node 22.19.0 (/home/hatch/.npm/_npx/759e7e0cbbdd6854/node_modules/node/bin/node), npm 10.8.2, sha256:584a3304603b208797b50faee86f00f5a6fe987d2289f382ae4f7b93a62dbc21; receipt test-results/browser-toolchain/verification-receipt.json
+
+Running 1 test using 1 worker
+
+[WebServer] [2m5:21:31 AM[22m [33m[1m[vite][22m[39m [33m[2m(client)[22m[39m [33mwarning: 
+[WebServer] [36m/home/hatch/workspace/lift_coding/swissknife/web/js/apps/file-manager.js[33m
+[WebServer] [0m111 |  
+[WebServer] 112 |    try {
+[WebServer] 113 |      const module = await import(COLLABORATIVE_FILE_SYSTEM_MODULE);
+[WebServer]     |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[WebServer] 114 |      return module.CollaborativeFileSystem || CollaborativeFileSystemFallback;
+[WebServer] 115 |    } catch (error) {[0m[33m
+[WebServer] The above dynamic import cannot be analyzed by Vite.
+[WebServer] See [34mhttps://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#limitations[33m for supported dynamic import formats. If this is intended to be left as-is, you can use the /* @vite-ignore */ comment inside the import() call to suppress this warning.
+[WebServer] [33m[39m
+[WebServer]   Plugin: [35mvite:import-analysis[39m
+[WebServer]   File: [36m/home/hatch/workspace/lift_coding/swissknife/web/js/apps/file-manager.js[39m
+BATCH 0: apps=16 passed=15 screenshots=32
+  ✓  1 [chromium] › test/e2e/zz-gap-svd-batch.spec.ts:34:1 › SVD-132 audit batch 0 (7.8m)
+
+  Slow test file: [chromium] › test/e2e/zz-gap-svd-batch.spec.ts (7.8m)
+  Consider running tests from slow files in parallel. See: https://playwright.dev/docs/test-parallel
+  1 passed (8.0m)

@@ -1,0 +1,247 @@
+{
+  "rows": [
+    {
+      "catalog_output_directory_reported": "/opt/ipfs-supervisor/state/benchmark-6b3883ad75e548edaa09548c6852235c/code-autoencoder-catalog",
+      "checkpoint_sha256_reported": "29294ad6a5e1210fe73a2ac01460ad78f8d3f034884dfca05fec555bc10f1f96",
+      "coding_input_audit": {
+        "all_observed_coding_inputs_verified": true,
+        "any_model_input_verified": true,
+        "any_native_input_verified": true,
+        "coding_receipts_seen": 1,
+        "raw_prompts_exported": false,
+        "read_errors": [],
+        "reason": "per_invocation_context_and_input_comparison",
+        "schema": "terminal-final-context-audit@1",
+        "status": "verified_all_observed_model_inputs",
+        "usable_coding_receipts": 1
+      },
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/matched-pilot/native01/receipt.json",
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/matched-pilot/native01-observation.json"
+      ],
+      "evidence_tier": "original_record",
+      "formalization_authority": false,
+      "generic_input_census": {
+        "observed_invocation_count": 1,
+        "raw_content_exported": false,
+        "reason": "one_observation_per_exact_verified_router_invocation",
+        "schema": "terminal-rendered-input-census@1",
+        "status": "complete_for_verified_inputs",
+        "token_savings_established": false,
+        "verified_invocation_count": 1
+      },
+      "hydration": {
+        "catalog_count": 4,
+        "linked_count": 4,
+        "world_payload_sha256": "05f6a21da0e1445108c3897f5f22b34b9c818bbea1e91486ce25578856a114bb",
+        "world_record_cid": "bafkreicnl2mvh2j67ux2n6l57e5aoz7og6c7tcy74qwbdqimylz6jiboce"
+      },
+      "initial_context_descriptor_reported": {
+        "artifact": ".runtime/terminal-initial-context/descriptor.json",
+        "sha256": "859581f7e9e77795deecb2a42acb192e61a11d5d778515a5e69f8eff1f58ac21"
+      },
+      "initial_context_semantic_root": "baguqeeram4zzznmfngkq4kumkdoktfr6ocppytbdybabeur2zhvzn6qwydkq",
+      "latent_dimension": null,
+      "learned_semantic_inference_qualification": null,
+      "learner_descriptor_sha256_reported": "f32d4cbf7eab3f351486ef9b267142259f75ffd5d009660ce038cb5182399fc1",
+      "learner_output_directory_reported": "/opt/ipfs-supervisor/state/benchmark-6b3883ad75e548edaa09548c6852235c/code-autoencoder",
+      "learner_receipt_sha256_reported": "a84a24c42c756d7667f18afcc1745944e7a68db35a5422c9dedab8e79213ee6b",
+      "metadata_ducklake": {
+        "authoritative": false,
+        "completion_authority": false,
+        "status": "projected",
+        "stored_bindings": 0,
+        "stored_catalogs": 4,
+        "stored_links": 4
+      },
+      "notes": [
+        "Original receipt retains container-local output paths and descriptor hashes; no claim those container files survive locally.",
+        "The two source files are retained as hashes only. No private source or test contents exported.",
+        "Initial/final weight-array hashes differ from serialized checkpoint SHA; these identities must not be substituted."
+      ],
+      "original_json_pointer": "/trials/0/supervisor/initial_context",
+      "original_model_descriptor_bytes_recovered": false,
+      "parent_checkpoint": null,
+      "permitted_source_inventory_reported": {
+        ".supervisor-public-smoke.py": "288c73dbd2d7ed0e6e1a6b87f70bd5fe4262ecf50bd3be19988c1c5554b12d55",
+        "bottle.py": "761756ce31753e526c48d28ccbca13a5d2493b16fe37aff3e1e4d2efaf3a2bba"
+      },
+      "proof_authority": false,
+      "receipt_sha256": "dad5e8fd5cc8f9d962197c6771b59cef8b4bc6e4eccfb0cadf88541072f7d3cc",
+      "run_id": "fix-code-vulnerability__6Cahzwm",
+      "source_catalog_status": "hydrated",
+      "source_inventory_independently_admission_checked": false,
+      "source_tree_id_reported": "baguqeeraup6gi7o7miifooupccj2lnhbe7fj2ekdi3ohzsdtuhlhnlomzl4q",
+      "specialized_packet_input_audit": {
+        "all_native_invocations_matched": null,
+        "all_observed_dialogue_inputs_verified": null,
+        "all_recorded_dialogue_inputs_verified": null,
+        "dialogue_expected": null,
+        "historical_round_replays": [],
+        "issues": null,
+        "observed_dialogue_count": null,
+        "raw_prompts_exported": null,
+        "reason": null,
+        "receipt_binding_coverage_complete": null,
+        "schema": null,
+        "source_freshness_revalidated": null,
+        "status": null,
+        "token_savings_established": null
+      },
+      "training_metrics": {
+        "after_reconstruction_loss": 0.004241029939070531,
+        "before_reconstruction_loss": 0.02193685047141167,
+        "epochs": 24,
+        "final_weights_sha256": "b141c1f0d7896d220caff6667395939ed5a471650241ee3b3ca1ea9da1aef62c",
+        "holdout_evaluated": false,
+        "initial_weights_sha256": "d120e4a950516e8ba99465bc54d77e37dc605b6f5d35bfd1b3d4fc9475f984f0",
+        "microbatch_count": 3,
+        "native_kernel_calls": 72,
+        "seed": 1729,
+        "training_elapsed_seconds": 0.162737378035672,
+        "training_scope": "transductive_admitted_code_functions"
+      },
+      "world_ducklake": {
+        "authoritative": false,
+        "completion_authority": false,
+        "status": "projected",
+        "stored_records": 1
+      }
+    },
+    {
+      "catalog_output_directory_reported": "/opt/ipfs-supervisor/state/benchmark-b7eb94adb9d5437b893d021fc0df354c/code-autoencoder-catalog",
+      "checkpoint_sha256_reported": "29294ad6a5e1210fe73a2ac01460ad78f8d3f034884dfca05fec555bc10f1f96",
+      "coding_input_audit": {
+        "all_observed_coding_inputs_verified": true,
+        "any_model_input_verified": true,
+        "any_native_input_verified": true,
+        "coding_receipts_seen": 1,
+        "raw_prompts_exported": false,
+        "read_errors": [],
+        "reason": "per_invocation_context_and_input_comparison",
+        "schema": "terminal-final-context-audit@1",
+        "status": "verified_all_observed_model_inputs",
+        "usable_coding_receipts": 1
+      },
+      "evidence_paths": [
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/matched-pilot/packet01/receipt.json",
+        "/home/barberb/lift_coding/artifacts/supervisor-portable-codex-worker-fix-20261014-01/matched-pilot/packet01-observation.json"
+      ],
+      "evidence_tier": "original_record",
+      "formalization_authority": false,
+      "generic_input_census": {
+        "observed_invocation_count": 0,
+        "raw_content_exported": false,
+        "reason": "census_bound_or_input_unavailable",
+        "schema": "terminal-rendered-input-census@1",
+        "status": "unavailable",
+        "token_savings_established": false,
+        "verified_invocation_count": 1
+      },
+      "hydration": {
+        "catalog_count": 4,
+        "linked_count": 4,
+        "world_payload_sha256": "61c4092428a5366f8407efc9d7332979ac89102fdcd4372091019ba5c9d8ba09",
+        "world_record_cid": "bafkreihaloez3dzndobq4cthtvtn6od7rl2y76nvqvh3gtu2ywkmqcgtly"
+      },
+      "initial_context_descriptor_reported": {
+        "artifact": ".runtime/terminal-initial-context/descriptor.json",
+        "sha256": "2f7ced49e796ab85d279d180e0faef9855abfa8ace94e5fc73f42c189a7d60ad"
+      },
+      "initial_context_semantic_root": "baguqeeram4zzznmfngkq4kumkdoktfr6ocppytbdybabeur2zhvzn6qwydkq",
+      "latent_dimension": null,
+      "learned_semantic_inference_qualification": null,
+      "learner_descriptor_sha256_reported": "e54c9f32094ad5dbea997d0c6287d567a617f8a0b7a02d80586dc1a3102e029c",
+      "learner_output_directory_reported": "/opt/ipfs-supervisor/state/benchmark-b7eb94adb9d5437b893d021fc0df354c/code-autoencoder",
+      "learner_receipt_sha256_reported": "02c04ddaa2a600428b4ceac89040416a73bd1b70360c224a338cd9e0c0071d3c",
+      "metadata_ducklake": {
+        "authoritative": false,
+        "completion_authority": false,
+        "status": "projected",
+        "stored_bindings": 0,
+        "stored_catalogs": 4,
+        "stored_links": 4
+      },
+      "notes": [
+        "Original receipt retains container-local output paths and descriptor hashes; no claim those container files survive locally.",
+        "The two source files are retained as hashes only. No private source or test contents exported.",
+        "Initial/final weight-array hashes differ from serialized checkpoint SHA; these identities must not be substituted."
+      ],
+      "original_json_pointer": "/trials/0/supervisor/initial_context",
+      "original_model_descriptor_bytes_recovered": false,
+      "parent_checkpoint": null,
+      "permitted_source_inventory_reported": {
+        ".supervisor-public-smoke.py": "288c73dbd2d7ed0e6e1a6b87f70bd5fe4262ecf50bd3be19988c1c5554b12d55",
+        "bottle.py": "761756ce31753e526c48d28ccbca13a5d2493b16fe37aff3e1e4d2efaf3a2bba"
+      },
+      "proof_authority": false,
+      "receipt_sha256": "8e9d5b6d6f9d76f4dcdb9df27fe8477863b3e86ac4d8ea14b6a77bf10ccd2669",
+      "run_id": "fix-code-vulnerability__wox8jVM",
+      "source_catalog_status": "hydrated",
+      "source_inventory_independently_admission_checked": false,
+      "source_tree_id_reported": "baguqeeraup6gi7o7miifooupccj2lnhbe7fj2ekdi3ohzsdtuhlhnlomzl4q",
+      "specialized_packet_input_audit": {
+        "all_native_invocations_matched": true,
+        "all_observed_dialogue_inputs_verified": true,
+        "all_recorded_dialogue_inputs_verified": true,
+        "dialogue_expected": true,
+        "historical_round_replays": [
+          {
+            "all_recorded_round_inputs_verified": true,
+            "freshness_revalidated": false,
+            "original_native_input_verified": true,
+            "raw_prompts_exported": false,
+            "reason": "per_round_historical_input_comparison",
+            "recorded_count_algebra_consistent": true,
+            "recorded_local_input_comparison": {
+              "all_round_content_token_sum": 14111,
+              "comparison_scope": "recorded complete user inputs versus one recorded native user input; no task-success equivalence",
+              "count_kind": "estimate",
+              "difference_from_single_native_input": -1717,
+              "historical_counts_recomputed": false,
+              "native_content_tokens": 15828,
+              "provider_usage": false,
+              "tokenizer_binding_sha256": "376fec2fba6b0ed7fe03046bfe387c72f9821ef29ed1496006379eed2dee507d",
+              "tokenizer_compatibility_basis": "utf8_byte_estimate",
+              "tokenizer_compatibility_basis_sha256": "2718d7231f07695ec025517fd302a75da106dad80000d0471abf749d7070e200"
+            },
+            "recorded_round_count": 1,
+            "schema": "terminal-semantic-decision-dialogue-input-audit@1",
+            "status": "verified",
+            "token_savings_established": false,
+            "verified_round_count": 1
+          }
+        ],
+        "issues": [],
+        "observed_dialogue_count": 1,
+        "raw_prompts_exported": false,
+        "reason": null,
+        "receipt_binding_coverage_complete": true,
+        "schema": "terminal-semantic-decision-input-population-audit@1",
+        "source_freshness_revalidated": false,
+        "status": "verified_all_observed_dialogue_inputs",
+        "token_savings_established": false
+      },
+      "training_metrics": {
+        "after_reconstruction_loss": 0.004241029939070531,
+        "before_reconstruction_loss": 0.02193685047141167,
+        "epochs": 24,
+        "final_weights_sha256": "b141c1f0d7896d220caff6667395939ed5a471650241ee3b3ca1ea9da1aef62c",
+        "holdout_evaluated": false,
+        "initial_weights_sha256": "d120e4a950516e8ba99465bc54d77e37dc605b6f5d35bfd1b3d4fc9475f984f0",
+        "microbatch_count": 3,
+        "native_kernel_calls": 72,
+        "seed": 1729,
+        "training_elapsed_seconds": 0.1623870690818876,
+        "training_scope": "transductive_admitted_code_functions"
+      },
+      "world_ducklake": {
+        "authoritative": false,
+        "completion_authority": false,
+        "status": "projected",
+        "stored_records": 1
+      }
+    }
+  ],
+  "schema": "paper-t1-model-preparation-details@1"
+}

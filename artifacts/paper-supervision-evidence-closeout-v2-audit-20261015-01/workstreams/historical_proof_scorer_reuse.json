@@ -1,0 +1,205 @@
+{
+  "execution_in_this_audit": {
+    "builds": 0,
+    "graders": 0,
+    "models": 0,
+    "solvers": 0
+  },
+  "limits": [
+    "Signatures authenticate custody, not semantic truth; signatures not independently verified here.",
+    "Finite behavioral checks, solver answers, cryptographic archive relations, execution observations and kernel checking are distinct."
+  ],
+  "proof_profiles": [
+    {
+      "backend": "none",
+      "evidence": [
+        {
+          "artifact_id": "sha256:b1d1f95188a4c8633332a4bd15c7977062d24d9affd9e0a7830e553e2a7e8664",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/build/increment-016/source_snapshot/appendix/formal_arguments.tex",
+          "sha256": "b1d1f95188a4c8633332a4bd15c7977062d24d9affd9e0a7830e553e2a7e8664",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "machine_checked": false,
+      "profile": "manuscript acceptance/reuse sketches"
+    },
+    {
+      "backends_reported": [
+        "Z3",
+        "cvc5"
+      ],
+      "evidence": [
+        {
+          "artifact_id": "sha256:cd49f85926539063027fbd7a462ee164e96335fbe8e68245f6eb8d7a3937dbc7",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/compositional_v2/README.md",
+          "sha256": "cd49f85926539063027fbd7a462ee164e96335fbe8e68245f6eb8d7a3937dbc7",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:151cf060a686d7c429e2104cc0e0cfa7e38f3d044d2f1fb0bafbc1914e34a077",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/compositional_v2/protocol.json",
+          "sha256": "151cf060a686d7c429e2104cc0e0cfa7e38f3d044d2f1fb0bafbc1914e34a077",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:5789557ae88e22528947b86335d85d0caae205c42e5dec3dd9f4d37116bf5e96",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/compositional_v2/summary.json",
+          "sha256": "5789557ae88e22528947b86335d85d0caae205c42e5dec3dd9f4d37116bf5e96",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "kernel_reconstruction": false,
+      "profile": "compositional-v2",
+      "scope": "bounded composition/refutation/interpolation; Z3 checks cvc5 interpolant; source rescanning and test replay",
+      "source_profile": {
+        "child_sha256": "0685c149a0ba869627b037266e9fcaa36dd67b3dbb31ba1b9f6f5fbd85c07c37",
+        "datasets_git_head": "2328d13f085210484eb1f712c2fbdbcb4dee736f",
+        "entry_sha256": "77b0655c51bb60b646677efaa03da19051756c280e35a185d9262a868ecb6e30",
+        "runner_sha256": "f6709fa3f1adac9eeadc3468e0b6c87c9d7aee8e2456b59f2a52d74e4b7b9974",
+        "source": "/home/barberb/lift_coding/.worktrees/agent-supervisor-efficiency-and-state-hardening-v1",
+        "source_git_head": "aa5e43ec77ed710fb9cb08c8270b4c93f49743e5"
+      },
+      "versions": null
+    },
+    {
+      "backend": "native Groth16",
+      "binary_sha256": "88686a976dac69f4e877b99e1f15c2a3ad39a6cf759c0f2e9614802d3e63e8b4",
+      "evidence": [
+        {
+          "artifact_id": "sha256:ea7300731906bbef2aed6bfe35631d98e645b921dae8e2f216f742c1ad4d941f",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/README.md",
+          "sha256": "ea7300731906bbef2aed6bfe35631d98e645b921dae8e2f216f742c1ad4d941f",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:6481c08e491092bbca20274dea2c47fb68eadf649cf5fe674f6aabb75641e3c8",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/runs/source-built-v1/summary.json",
+          "sha256": "6481c08e491092bbca20274dea2c47fb68eadf649cf5fe674f6aabb75641e3c8",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "exact_caller_binding_rejects_alias": true,
+      "profile": "EventDagCompactionCircuitV3",
+      "raw_alias_acceptance": true,
+      "scope": "four-slot SHA256 event-root relation reduced into BN254 scalar public root; count binding",
+      "test_execution_proven": false
+    },
+    {
+      "backend": "native Groth16",
+      "custom_prover_executed": false,
+      "evidence": [
+        {
+          "artifact_id": "sha256:e46a12a3b9193b01e99e13357792ae83af45a2c4d21fefb1ca05ccaeb8dd0fa3",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/horn_report.md",
+          "sha256": "e46a12a3b9193b01e99e13357792ae83af45a2c4d21fefb1ca05ccaeb8dd0fa3",
+          "signature_verification": "not_performed"
+        },
+        {
+          "artifact_id": "sha256:ef96a045f31f2faba5bd92616a11f62953c91b74d8a36528e81c8e0a4e9fe022",
+          "evidence_tier": "report",
+          "independently_reexecuted": false,
+          "path": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/native_proof/runs/horn-v1/honest_only_summary.json",
+          "sha256": "ef96a045f31f2faba5bd92616a11f62953c91b74d8a36528e81c8e0a4e9fe022",
+          "signature_verification": "not_performed"
+        }
+      ],
+      "pins": {
+        "binary_sha256": "88686a976dac69f4e877b99e1f15c2a3ad39a6cf759c0f2e9614802d3e63e8b4",
+        "proving_key_sha256": "cddcd989b5538d6ef73a056c6304c8868e45c92420b435918bfe4d65daf9e270",
+        "verifying_key_sha256": "c5cb837692d81085ce840d1df7aa03ac37efbbf9d3afde220f7169ced006f154"
+      },
+      "profile": "TDFOLv1DerivationCircuitV2",
+      "raw_wire_scalar_mismatches_accepted": 3,
+      "scope": "three honest bounded implication chains;16axiom/16trace slots",
+      "textual_soundness_assurance": false
+    }
+  ],
+  "reuse": {
+    "additional_timing_cold_audits": 5,
+    "additional_timing_reuses": 5,
+    "cold_oracle_same_constructed_test_oracle": true,
+    "five_pair_wall_difference_seconds": 0.04096012515947223,
+    "general_false_reuse_rate": null,
+    "matrix_cases": 14,
+    "matrix_positive_cases": [
+      "unchanged",
+      "teardown_failure_after_reuse"
+    ],
+    "matrix_positive_cold_audits": 2,
+    "matrix_positive_reuses": 2,
+    "old_false_reuse": {
+      "attempted_cases": 26,
+      "false_reuses": 1,
+      "original_record_recovered": false,
+      "tier": "report"
+    },
+    "prime_plus_issuance_seconds": 0.2618734861025587,
+    "production_default_positive_reuses": 0
+  },
+  "schema": "paper-proof-scorer-reuse-audit/v1",
+  "scorer": {
+    "categories": {
+      "adversarial": {
+        "old_false_admissions": 5,
+        "old_passes": 5,
+        "stronger_false_admissions": 0,
+        "stronger_passes": 0,
+        "units": 6
+      },
+      "saved_control": {
+        "old_false_admissions": 0,
+        "old_passes": 10,
+        "stronger_false_admissions": 0,
+        "stronger_passes": 10,
+        "units": 10
+      },
+      "unfixed_control": {
+        "old_false_admissions": 0,
+        "old_passes": 0,
+        "stronger_false_admissions": 0,
+        "stronger_passes": 0,
+        "units": 7
+      }
+    },
+    "frozen_files_match": true,
+    "provider_calls": 0,
+    "saved_records": 14,
+    "schema": "ns-scorer-integrity-summary/v1",
+    "supplementary_quality": {
+      "context": {
+        "changed_results": 0,
+        "original_successes": 6,
+        "records": 6,
+        "rescored_successes": 6
+      },
+      "routing": {
+        "changed_results": 0,
+        "original_successes": 8,
+        "records": 8,
+        "rescored_successes": 8
+      }
+    },
+    "unique_saved_candidate_bodies": 10,
+    "unique_saved_evaluation_units": 10
+  },
+  "unrecovered": [
+    "Lean/Coq executed proofs in selected historical profiles",
+    "runtime admission checker correspondence theorem",
+    "kernel axiom printouts",
+    "full solver version and source/import closure"
+  ]
+}

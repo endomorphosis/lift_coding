@@ -1,0 +1,24 @@
+{
+  "default": [
+    "dcec",
+    "tdfol",
+    "event_calculus",
+    "frame_logic",
+    "datalog",
+    "horn_chc",
+    "transition_system",
+    "higher_order"
+  ],
+  "explicit_context_or_unsupported": [
+    "separation_logic",
+    "hyperproperty",
+    "epistemic",
+    "doxastic",
+    "refinement",
+    "concurrency",
+    "session_process",
+    "cryptographic_protocol"
+  ],
+  "qualification_scope": "Native parse/shape/roundtrip validations are distinct from optional Lake/SANY/TLC, source semantics, normative compliance and action authority.",
+  "transition_system_additional_view": "tla_plus"
+}

@@ -1,0 +1,43 @@
+{
+  "accelerator_publication": "e21d6e7b41f14f3994b0fd8556bfcd341d9e888c",
+  "child_manifest": {
+    "bytes": 13768,
+    "path": "docs/agent_supervisor/evidence/source-worker-delivery-fences-20261014/manifest.json",
+    "sha256": "52ecafe0ad1558063b854565a96e06ff88253c6df4fbc0e498037959ce9ac874"
+  },
+  "files": [
+    {
+      "bytes": 7377,
+      "path": "implementation_plan/docs/128-supervisor-source-delivery-fences-2026-10-14.md",
+      "sha256": "f314112687cd056dae6b50129df77e11b6aba300641e52a6e76e8b247a2ec9b1"
+    },
+    {
+      "bytes": 23652,
+      "path": "artifacts/router-source-delivery-fences-publication-20261014/child-ci-observation.json",
+      "sha256": "c32c57883b5b2517760998eccea4ae179e95bf1f9f57179c344a8b9d2da697ab"
+    },
+    {
+      "bytes": 5195,
+      "path": "artifacts/router-source-delivery-fences-publication-20261014/observe_hosted_ci.py",
+      "sha256": "812b727b4b9b92d26dde896776c574e94f17bf360f30a75768ecea64a9c1942a"
+    },
+    {
+      "bytes": 25268,
+      "path": "artifacts/router-source-delivery-fences-publication-20261014/publication_checker.py",
+      "sha256": "a7ef41f2c502e655550e72a19256e725d406cdae6a088d4e57d02b4c5025f6ec"
+    },
+    {
+      "bytes": 7729,
+      "path": "artifacts/router-source-delivery-fences-publication-20261014/parent-checks.json",
+      "sha256": "d577fb8b6fe4a32785b5124ea8a0e523d3ff6ef952be8e64a2cd9275e61efd6a"
+    }
+  ],
+  "initial_parent_research_base": "0bb1beb9330f4e6122f9c6debde9af0ffeb524c6",
+  "manifest_self_excluded": true,
+  "parent_base": "2ce0b414079c4e85485d230fc147e72ee9b3206a",
+  "preserved_parent_gitlinks": {
+    "external/ipfs_datasets": "4b50ae4aac65da9166bd3b24608f32ba7e9fb23d",
+    "external/ipfs_kit": "40c98c71b95be750509ffdb21e7e5494d91b4e79"
+  },
+  "schema": "source-worker-delivery-parent-manifest@1"
+}

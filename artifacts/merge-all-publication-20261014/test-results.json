@@ -1,0 +1,959 @@
+{
+  "schema": "merge-validation-results@1",
+  "runs": [
+    {
+      "name": "datasets",
+      "junit_sha256": "a672f89a8060b423fccef2868883d79f4ef216ebbc266801c6a0dd032519d93e",
+      "junit_bytes": 214451,
+      "local_evidence": "/home/barberb/lift_coding/maintenance/merge-all-20261014-01/datasets-tests.xml",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "1190",
+          "time": "365.218",
+          "timestamp": "2026-10-14T03:33:25.422022+00:00",
+          "hostname": "spark-b271"
+        }
+      ],
+      "summary": "1168 passed, 22 subtests passed in 365.24s (0:06:05)",
+      "failures": [],
+      "skips": []
+    },
+    {
+      "name": "datasets-additional",
+      "junit_sha256": "0a9c5ae45ee7be4b99046492ce276239093ae3d8025ce38a13a366b966908830",
+      "junit_bytes": 2128,
+      "local_evidence": "/home/barberb/lift_coding/maintenance/merge-all-20261014-01/datasets-additional-tests.xml",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "9",
+          "time": "0.594",
+          "timestamp": "2026-10-14T03:41:31.960535+00:00",
+          "hostname": "spark-b271"
+        }
+      ],
+      "summary": "9 passed in 0.59s",
+      "failures": [],
+      "skips": []
+    },
+    {
+      "name": "datasets-final",
+      "junit_sha256": "05d135272fc83891f16441d69fa5bb5817beebd8d94abd9340386a1ca74a2622",
+      "junit_bytes": 32683,
+      "local_evidence": "/home/barberb/lift_coding/maintenance/merge-all-20261014-01/datasets-final-tests.xml",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "206",
+          "time": "37.877",
+          "timestamp": "2026-10-14T04:05:54.054140+00:00",
+          "hostname": "spark-b271"
+        }
+      ],
+      "summary": "206 passed in 37.91s",
+      "failures": [],
+      "skips": []
+    },
+    {
+      "name": "kit",
+      "junit_sha256": "3e5adfcfe7f4ba0825a1d6f5822a80a490ef6d9c3cd47041b42d696c9a3a0fb3",
+      "junit_bytes": 21533,
+      "local_evidence": "/home/barberb/lift_coding/maintenance/merge-all-20261014-01/kit-tests.xml",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "132",
+          "time": "12.197",
+          "timestamp": "2026-10-14T03:40:38.563320+00:00",
+          "hostname": "spark-b271"
+        }
+      ],
+      "summary": "132 passed, 2 warnings in 12.20s",
+      "failures": [],
+      "skips": []
+    },
+    {
+      "name": "accelerate-benchmark",
+      "junit_sha256": "43294df46b285c002933924c20584d9882fcd74cd2923fd986388e75647a8d30",
+      "junit_bytes": 1521015,
+      "local_evidence": "/home/barberb/lift_coding/maintenance/merge-all-20261014-01/accelerate-benchmark-tests.xml",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "10",
+          "failures": "79",
+          "skipped": "0",
+          "tests": "1942",
+          "time": "241.044",
+          "timestamp": "2026-10-14T03:57:12.854993+00:00",
+          "hostname": "spark-b271"
+        }
+      ],
+      "summary": "79 failed, 1853 passed, 7 warnings, 10 errors in 241.85s (0:04:01)",
+      "failures": [
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_capsule_budget_outer::test_preparation_dry_run_seals_budget_before_execution[one-capsule@1]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_capsule_budget_outer::test_preparation_dry_run_seals_budget_before_execution[two-capsules@1]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_capsule_budget_outer::test_collection_and_execution_refuse_budget_mutation[remove-preparation]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_capsule_budget_outer::test_collection_and_execution_refuse_budget_mutation[remove-config]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_capsule_budget_outer::test_collection_and_execution_refuse_budget_mutation[change-preparation]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_capsule_budget_outer::test_collection_and_execution_refuse_budget_mutation[change-config]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_capsule_budget_outer::test_collector_marks_only_matching_runtime_declaration[None-False]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_capsule_budget_outer::test_collector_marks_only_matching_runtime_declaration[missing-None]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_capsule_budget_outer::test_collector_marks_only_matching_runtime_declaration[legacy-False]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_capsule_budget_outer::test_collector_marks_only_matching_runtime_declaration[one-capsule@1-True]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_capsule_budget_outer::test_collector_marks_only_matching_runtime_declaration[two-capsules@1-False]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_coding_reply_policy::test_collect_and_execute_detect_reply_mode_drift",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_initial_context::test_indexed_capsule_profile_reaches_real_initial_context_and_refuses_drift[legacy-8-indexed-default@1-8]",
+          "kind": "failure",
+          "message": "ipfs_accelerate_py.agent_supervisor.runtime.context_selection_observation.ContextSelectionObservationError: closed native producer object required"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_initial_context::test_indexed_capsule_profile_reaches_real_initial_context_and_refuses_drift[legacy-8-indexed-compact@1-2]",
+          "kind": "failure",
+          "message": "ipfs_accelerate_py.agent_supervisor.runtime.context_selection_observation.ContextSelectionObservationError: closed native producer object required"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_initial_context::test_indexed_capsule_profile_reaches_real_initial_context_and_refuses_drift[one-capsule@1-1-indexed-default@1-8]",
+          "kind": "failure",
+          "message": "ipfs_accelerate_py.agent_supervisor.runtime.context_selection_observation.ContextSelectionObservationError: closed native producer object required"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_initial_context::test_indexed_capsule_profile_reaches_real_initial_context_and_refuses_drift[one-capsule@1-1-indexed-compact@1-2]",
+          "kind": "failure",
+          "message": "ipfs_accelerate_py.agent_supervisor.runtime.context_selection_observation.ContextSelectionObservationError: closed native producer object required"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_initial_context::test_indexed_capsule_profile_reaches_real_initial_context_and_refuses_drift[two-capsules@1-2-indexed-default@1-8]",
+          "kind": "failure",
+          "message": "ipfs_accelerate_py.agent_supervisor.runtime.context_selection_observation.ContextSelectionObservationError: closed native producer object required"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_initial_context::test_indexed_capsule_profile_reaches_real_initial_context_and_refuses_drift[two-capsules@1-2-indexed-compact@1-2]",
+          "kind": "failure",
+          "message": "ipfs_accelerate_py.agent_supervisor.runtime.context_selection_observation.ContextSelectionObservationError: closed native producer object required"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_metadata_observation::test_collect_keeps_valid_fallback_complete_and_original_attempt_usage[common-bindings@1]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_metadata_observation::test_collect_keeps_valid_fallback_complete_and_original_attempt_usage[legacy]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_metadata_observation::test_collect_refuses_opt_in_completion_on_missing_or_foreign_report_declaration[None]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_metadata_observation::test_collect_refuses_opt_in_completion_on_missing_or_foreign_report_declaration[report1]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_metadata_observation::test_collect_refuses_opt_in_completion_on_missing_or_foreign_report_declaration[report2]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_metadata_observation::test_legacy_collector_retains_historical_receipt_shape",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_provider_backoff::test_real_benchmark_cli_collects_stop_then_defers_fresh_trial_before_harness",
+          "kind": "failure",
+          "message": "AssertionError: Traceback (most recent call last):\n    File \"<frozen runpy>\", line 198, in _run_module_as_main\n    File \"<frozen runpy>\", line 88, in _run_code\n    File \"/home/barberb/lift_coding_worktrees/merge-all-accelerate-20261014/benchmarks/agent_supervisor/container_coding/full_supervisor_benchmark.py\", line 1341, in <module>\n      main()\n    File \"/home/barberb/lift_coding_worktrees/merge-all-accelerate-20261014/benchmarks/agent_supervisor/container_coding/full_supervisor_benchmark.py\", line 1330, in main\n      result = execute(args.output, task_name=args.task,\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    File \"/home/barberb/lift_coding_worktrees/merge-all-accelerate-20261014/benchmarks/agent_supervisor/container_coding/full_supervisor_benchmark.py\", line 1165, in execute\n      result = _execute_once(output, task_name=task_name)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    File \"/home/barberb/lift_coding_worktrees/merge-all-accelerate-20261014/benchmarks/agent_supervisor/container_coding/full_supervisor_benchmark.py\", line 1126, in _execute_once\n      result = collect(output)\n               ^^^^^^^^^^^^^^^\n    File \"/home/barberb/lift_coding_worktrees/merge-all-accelerate-20261014/benchmarks/agent_supervisor/container_coding/full_supervisor_benchmark.py\", line 857, in collect\n      result = {\"schema\": \"terminal-full-supervisor-receipt@1\", \"arm\": prepared[\"arm\"],\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  TypeError: 'str' object is not a mapping\n  \nassert 1 == 0\n +  where 1 = CompletedProcess(args=['/home/barberb/.local/bin/python', '-m', 'benchmarks.agent_supervisor.container_coding.full_sup...^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\nTypeError: \\'str\\' object is not a mapping\\n').returncode"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_query_reference_experiment::test_full_inputs_restore_and_replay_after_workspace_removal",
+          "kind": "failure",
+          "message": "ipfs_accelerate_py.agent_supervisor.runtime.context_selection_observation.ContextSelectionObservationError: closed native producer object required"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_query_reference_experiment::test_ineligible_or_unprofitable_treatment_is_retained[increment-None-unprofitable_query_reference]",
+          "kind": "failure",
+          "message": "ipfs_accelerate_py.agent_supervisor.runtime.context_selection_observation.ContextSelectionObservationError: closed native producer object required"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_query_reference_experiment::test_ineligible_or_unprofitable_treatment_is_retained[Inspect increment in calculation.py and preserve its arithmetic behavior. Use the declared output and validate the existing interface. Inspect increment in calculation.py and preserve its arithmetic behavior. Use the declared output and validate the existing interface. Inspect increment in calculation.py and preserve its arithmetic behavior. Use the declared output and validate the existing interface. Inspect increment in calculation.py and preserve its arithmetic behavior. Use the declared output and validate the existing interface. Inspect increment in calculation.py and preserve its arithmetic behavior. Use the declared output and validate the existing interface. Inspect increment in calculation.py and preserve its arithmetic behavior. Use the declared output and validate the existing interface. Inspect increment in calculation.py and preserve its arithmetic behavior. Use the declared output and validate the existing interface. Inspect increment in calculation.py and preserve its arithmetic behavior. Use the declared output and validate the existing interface. Inspect increment in calculation.py and preserve its arithmetic behavior. Use the declared output and validate the existing interface. Inspect increment in calculation.py and preserve its arithmetic behavior. Use the declared output and validate the existing interface. Inspect increment in calculation.py and preserve its arithmetic behavior. Use the declared output and validate the existing interface. Inspect increment in calculation.py and preserve its arithmetic behavior. Use the declared output and validate the existing interface. -A different authored ranking query-no_exact_required_source]",
+          "kind": "failure",
+          "message": "ipfs_accelerate_py.agent_supervisor.runtime.context_selection_observation.ContextSelectionObservationError: closed native producer object required"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_query_reference_experiment::test_public_profile_uses_canonical_three_support_inputs",
+          "kind": "failure",
+          "message": "ipfs_accelerate_py.agent_supervisor.runtime.context_selection_observation.ContextSelectionObservationError: closed native producer object required"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_query_reference_policy::test_route_builder_selects_only_model_coding[required-instruction-ref@1]",
+          "kind": "failure",
+          "message": "AssertionError: Regex pattern did not match.\n  Expected regex: 'semantic model-router coding route'\n  Actual message: 'committed provider-free Doctor candidate required'"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_query_reference_policy::test_collect_and_execute_detect_policy_drift[required-instruction-ref@1]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_query_reference_policy::test_prepare_freezes_output_policy_without_provider_calls[required-instruction-ref@1]",
+          "kind": "failure",
+          "message": "tarfile.ReadError: not a gzip file"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_repository_source_routing::test_collect_and_execute_refuse_policy_drift[repository-source-raw@1]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_repository_source_routing::test_collect_and_execute_refuse_policy_drift[repository-source-compact@1]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_repository_source_routing::test_route_builder_refuses_provider_free_paths[repository-source-raw@1-doctor0]",
+          "kind": "failure",
+          "message": "AssertionError: Regex pattern did not match.\n  Expected regex: 'semantic model-router coding route'\n  Actual message: 'committed provider-free Doctor candidate required'"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_repository_source_routing::test_route_builder_refuses_provider_free_paths[repository-source-raw@1-doctor1]",
+          "kind": "failure",
+          "message": "AssertionError: Regex pattern did not match.\n  Expected regex: 'semantic model-router coding route'\n  Actual message: 'checked local contract candidate required'"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_repository_source_routing::test_route_builder_refuses_provider_free_paths[repository-source-compact@1-doctor0]",
+          "kind": "failure",
+          "message": "AssertionError: Regex pattern did not match.\n  Expected regex: 'semantic model-router coding route'\n  Actual message: 'committed provider-free Doctor candidate required'"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_repository_source_routing::test_route_builder_refuses_provider_free_paths[repository-source-compact@1-doctor1]",
+          "kind": "failure",
+          "message": "AssertionError: Regex pattern did not match.\n  Expected regex: 'semantic model-router coding route'\n  Actual message: 'checked local contract candidate required'"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_repository_source_routing::test_collection_qualifies_observed_tool_reads_not_selected_flag[repository-source-raw@1-True]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_repository_source_routing::test_collection_qualifies_observed_tool_reads_not_selected_flag[repository-source-raw@1-False]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_repository_source_routing::test_collection_qualifies_observed_tool_reads_not_selected_flag[repository-source-compact@1-True]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_repository_source_routing::test_collection_qualifies_observed_tool_reads_not_selected_flag[repository-source-compact@1-False]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_semantic_context_budget::test_long_public_instruction_keeps_literal_body_and_bounded_context[indexed-default@1]",
+          "kind": "failure",
+          "message": "ipfs_accelerate_py.agent_supervisor.runtime.context_selection_observation.ContextSelectionObservationError: closed native producer object required"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_semantic_context_budget::test_long_public_instruction_keeps_literal_body_and_bounded_context[indexed-compact@1]",
+          "kind": "failure",
+          "message": "ipfs_accelerate_py.agent_supervisor.runtime.context_selection_observation.ContextSelectionObservationError: closed native producer object required"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_semantic_context_budget::test_initial_replay_rejects_valid_capsules_with_foreign_objective",
+          "kind": "failure",
+          "message": "AssertionError: Regex pattern did not match.\n  Expected regex: 'objective differs from its literal public instruction'\n  Actual message: 'closed native producer object required'"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_semantic_context_budget::test_initial_replay_rejects_coherently_rewritten_ranking_query",
+          "kind": "failure",
+          "message": "AssertionError: Regex pattern did not match.\n  Expected regex: 'query differs from its literal public instruction'\n  Actual message: 'closed native producer object required'"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_semantic_context_harness::test_prepare_records_profile_and_preserves_default",
+          "kind": "failure",
+          "message": "tarfile.ReadError: not a gzip file"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_semantic_context_harness::test_profile_drift_blocks_execution_and_receipt_qualification",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_semantic_context_harness::test_collect_requires_observed_runtime_profile[None]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_semantic_context_harness::test_collect_requires_observed_runtime_profile[legacy-bounded@1]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_semantic_context_harness::test_collect_requires_observed_runtime_profile[indexed-default@1]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_semantic_context_harness::test_collect_requires_observed_runtime_profile[indexed-compact@1]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_semantic_transport_policy::test_collection_retains_frozen_transport_and_detects_preparation_drift",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_input_experiment::test_full_captured_inputs_replay_after_workspace_removal",
+          "kind": "failure",
+          "message": "ipfs_accelerate_py.agent_supervisor.runtime.context_selection_observation.ContextSelectionObservationError: closed native producer object required"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_input_policy::test_route_builder_selects_only_model_coding[source-input-raw@1]",
+          "kind": "failure",
+          "message": "AssertionError: Regex pattern did not match.\n  Expected regex: 'semantic model-router coding route'\n  Actual message: 'committed provider-free Doctor candidate required'"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_input_policy::test_route_builder_selects_only_model_coding[source-input-compact@1]",
+          "kind": "failure",
+          "message": "AssertionError: Regex pattern did not match.\n  Expected regex: 'semantic model-router coding route'\n  Actual message: 'committed provider-free Doctor candidate required'"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_input_policy::test_route_builder_selects_only_model_coding[source-input-ast-ref-raw@1]",
+          "kind": "failure",
+          "message": "AssertionError: Regex pattern did not match.\n  Expected regex: 'semantic model-router coding route'\n  Actual message: 'committed provider-free Doctor candidate required'"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_input_policy::test_route_builder_selects_only_model_coding[source-input-ast-ref-compact@1]",
+          "kind": "failure",
+          "message": "AssertionError: Regex pattern did not match.\n  Expected regex: 'semantic model-router coding route'\n  Actual message: 'committed provider-free Doctor candidate required'"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_input_policy::test_collect_and_execute_detect_policy_drift[source-input-raw@1]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_input_policy::test_collect_and_execute_detect_policy_drift[source-input-compact@1]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_input_policy::test_collect_and_execute_detect_policy_drift[source-input-ast-ref-raw@1]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_input_policy::test_collect_and_execute_detect_policy_drift[source-input-ast-ref-compact@1]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_input_policy::test_prepare_freezes_output_policy_without_provider_calls[source-input-raw@1]",
+          "kind": "failure",
+          "message": "tarfile.ReadError: not a gzip file"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_input_policy::test_prepare_freezes_output_policy_without_provider_calls[source-input-compact@1]",
+          "kind": "failure",
+          "message": "tarfile.ReadError: not a gzip file"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_input_policy::test_prepare_freezes_output_policy_without_provider_calls[source-input-ast-ref-raw@1]",
+          "kind": "failure",
+          "message": "tarfile.ReadError: not a gzip file"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_input_policy::test_prepare_freezes_output_policy_without_provider_calls[source-input-ast-ref-compact@1]",
+          "kind": "failure",
+          "message": "tarfile.ReadError: not a gzip file"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_payload_census::test_real_producer_retains_support_and_omits_optional_program",
+          "kind": "error",
+          "message": "failed on setup with \"ipfs_accelerate_py.agent_supervisor.runtime.context_selection_observation.ContextSelectionObservationError: closed native producer object required\""
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_payload_census::test_real_analyzer_elides_child_bodies_but_preserves_own_implementation",
+          "kind": "error",
+          "message": "failed on setup with \"ipfs_accelerate_py.agent_supervisor.runtime.context_selection_observation.ContextSelectionObservationError: closed native producer object required\""
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_payload_census::test_disjoint_byte_partition_reconciles_with_exact_serialization",
+          "kind": "error",
+          "message": "failed on setup with \"ipfs_accelerate_py.agent_supervisor.runtime.context_selection_observation.ContextSelectionObservationError: closed native producer object required\""
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_payload_census::test_diagnostic_exports_counts_and_hashes_without_source_or_mutation",
+          "kind": "error",
+          "message": "failed on setup with \"ipfs_accelerate_py.agent_supervisor.runtime.context_selection_observation.ContextSelectionObservationError: closed native producer object required\""
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_payload_census::test_shape_or_binding_drift_rejected[raw_hash]",
+          "kind": "error",
+          "message": "failed on setup with \"ipfs_accelerate_py.agent_supervisor.runtime.context_selection_observation.ContextSelectionObservationError: closed native producer object required\""
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_payload_census::test_shape_or_binding_drift_rejected[required_missing]",
+          "kind": "error",
+          "message": "failed on setup with \"ipfs_accelerate_py.agent_supervisor.runtime.context_selection_observation.ContextSelectionObservationError: closed native producer object required\""
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_payload_census::test_shape_or_binding_drift_rejected[foreign_capsule]",
+          "kind": "error",
+          "message": "failed on setup with \"ipfs_accelerate_py.agent_supervisor.runtime.context_selection_observation.ContextSelectionObservationError: closed native producer object required\""
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_payload_census::test_shape_or_binding_drift_rejected[duplicate_selection]",
+          "kind": "error",
+          "message": "failed on setup with \"ipfs_accelerate_py.agent_supervisor.runtime.context_selection_observation.ContextSelectionObservationError: closed native producer object required\""
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_payload_census::test_shape_or_binding_drift_rejected[bad_facet]",
+          "kind": "error",
+          "message": "failed on setup with \"ipfs_accelerate_py.agent_supervisor.runtime.context_selection_observation.ContextSelectionObservationError: closed native producer object required\""
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_payload_census::test_existing_census_artifact_never_overwritten",
+          "kind": "error",
+          "message": "failed on setup with \"ipfs_accelerate_py.agent_supervisor.runtime.context_selection_observation.ContextSelectionObservationError: closed native producer object required\""
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_view_policy::test_collect_and_execute_detect_dropped_prepared_profile",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_view_policy::test_route_builder_selects_only_model_coding[source-view-raw@1]",
+          "kind": "failure",
+          "message": "AssertionError: Regex pattern did not match.\n  Expected regex: 'semantic model-router coding route'\n  Actual message: 'committed provider-free Doctor candidate required'"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_view_policy::test_route_builder_selects_only_model_coding[source-view-compact@1]",
+          "kind": "failure",
+          "message": "AssertionError: Regex pattern did not match.\n  Expected regex: 'semantic model-router coding route'\n  Actual message: 'committed provider-free Doctor candidate required'"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_view_policy::test_collect_and_execute_detect_policy_drift[source-view-raw@1]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_view_policy::test_collect_and_execute_detect_policy_drift[source-view-compact@1]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_view_policy::test_prepare_freezes_output_policy_without_provider_calls[source-view-raw@1]",
+          "kind": "failure",
+          "message": "tarfile.ReadError: not a gzip file"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_source_view_policy::test_prepare_freezes_output_policy_without_provider_calls[source-view-compact@1]",
+          "kind": "failure",
+          "message": "tarfile.ReadError: not a gzip file"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_tool_output_policy::test_route_builder_selects_only_model_coding[artifact-preview@1]",
+          "kind": "failure",
+          "message": "AssertionError: Regex pattern did not match.\n  Expected regex: 'semantic model-router coding route'\n  Actual message: 'committed provider-free Doctor candidate required'"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_tool_output_policy::test_route_builder_selects_only_model_coding[artifact-preview@2]",
+          "kind": "failure",
+          "message": "AssertionError: Regex pattern did not match.\n  Expected regex: 'semantic model-router coding route'\n  Actual message: 'committed provider-free Doctor candidate required'"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_tool_output_policy::test_collect_and_execute_detect_policy_drift[artifact-preview@1]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_tool_output_policy::test_collect_and_execute_detect_policy_drift[artifact-preview@2]",
+          "kind": "failure",
+          "message": "TypeError: 'str' object is not a mapping"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_tool_output_policy::test_prepare_freezes_output_policy_without_provider_calls[artifact-preview@1]",
+          "kind": "failure",
+          "message": "tarfile.ReadError: not a gzip file"
+        },
+        {
+          "test": "benchmarks.agent_supervisor.container_coding.test_terminal_tool_output_policy::test_prepare_freezes_output_policy_without_provider_calls[artifact-preview@2]",
+          "kind": "failure",
+          "message": "tarfile.ReadError: not a gzip file"
+        }
+      ],
+      "skips": []
+    },
+    {
+      "name": "accelerate-benchmark-rerun",
+      "junit_sha256": "d98be94d81e999b27decb814e3d07755ea27704981ba14ac25ee2a14c22dbe41",
+      "junit_bytes": 439199,
+      "local_evidence": "/home/barberb/lift_coding/maintenance/merge-all-20261014-01/accelerate-benchmark-rerun-tests.xml",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "1942",
+          "time": "290.376",
+          "timestamp": "2026-10-14T04:34:22.888272+00:00",
+          "hostname": "spark-b271"
+        }
+      ],
+      "summary": "1942 passed, 7 warnings in 290.43s (0:04:50)",
+      "failures": [],
+      "skips": []
+    },
+    {
+      "name": "accelerate-provider-context",
+      "junit_sha256": "31434be4ac9a9d7f429a37ed64cb00c63cd97ecee8c53e5ca3a5c31bfc520087",
+      "junit_bytes": 7058315,
+      "local_evidence": "/home/barberb/lift_coding/maintenance/merge-all-20261014-01/accelerate-provider-context-tests.xml",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "12",
+          "skipped": "2",
+          "tests": "2661",
+          "time": "1454.784",
+          "timestamp": "2026-10-14T04:06:55.357871+00:00",
+          "hostname": "spark-b271"
+        }
+      ],
+      "summary": "12 failed, 2647 passed, 2 skipped in 1454.97s (0:24:14)",
+      "failures": [
+        {
+          "test": "api.test_query_reference_context_composition::test_real_doctor_public_reply_and_both_helpers_compose_with_query_reference[native_fallback]",
+          "kind": "failure",
+          "message": "ValueError: semantic component census requires its translated input"
+        },
+        {
+          "test": "api.test_query_reference_policy::test_native_tokenizer_fallback_is_audited_without_claiming_reference_treatment",
+          "kind": "failure",
+          "message": "ValueError: semantic component census requires its translated input"
+        },
+        {
+          "test": "api.test_query_reference_policy::test_complete_manifest_mutation_during_provider_setup_refuses_dispatch[True-required.md-repository]",
+          "kind": "failure",
+          "message": "ValueError: semantic component census requires its translated input"
+        },
+        {
+          "test": "api.test_query_reference_policy::test_complete_manifest_mutation_during_provider_setup_refuses_dispatch[True-required.md-workspace]",
+          "kind": "failure",
+          "message": "ValueError: semantic component census requires its translated input"
+        },
+        {
+          "test": "api.test_query_reference_policy::test_complete_manifest_mutation_during_provider_setup_refuses_dispatch[True-mod.py-repository]",
+          "kind": "failure",
+          "message": "ValueError: semantic component census requires its translated input"
+        },
+        {
+          "test": "api.test_query_reference_policy::test_complete_manifest_mutation_during_provider_setup_refuses_dispatch[True-mod.py-workspace]",
+          "kind": "failure",
+          "message": "ValueError: semantic component census requires its translated input"
+        },
+        {
+          "test": "api.test_query_reference_policy::test_actual_retained_audit_binds_reference_receipt_and_native_fallback[True]",
+          "kind": "failure",
+          "message": "AssertionError: {'all_observed_coding_inputs_verified': None, 'any_model_input_verified': None, 'any_native_input_verified': None, 'capsules': [], ...}\nassert 'unknown' == 'verified_all..._model_inputs'\n  \n  - verified_all_observed_model_inputs\n  + unknown"
+        },
+        {
+          "test": "api.test_source_input_context_composition::test_real_doctor_public_instruction_reply_and_source_input_replay[native_fallback]",
+          "kind": "failure",
+          "message": "ValueError: semantic component census requires its translated input"
+        },
+        {
+          "test": "api.test_source_input_policy::test_tokenizer_native_fallback_retains_same_source_block_and_exact_audit[legacy]",
+          "kind": "failure",
+          "message": "ValueError: semantic component census requires its translated input"
+        },
+        {
+          "test": "api.test_source_input_policy::test_tokenizer_native_fallback_retains_same_source_block_and_exact_audit[common-bindings@1]",
+          "kind": "failure",
+          "message": "ValueError: semantic component census requires its translated input"
+        },
+        {
+          "test": "api.test_terminal_doctor_dispatch::test_real_automatic_dispatch_publishes_only_candidate_handoff",
+          "kind": "failure",
+          "message": "subprocess.CalledProcessError: Command '['elan', 'which', 'lean']' returned non-zero exit status 1."
+        },
+        {
+          "test": "api.test_terminal_doctor_dispatch::test_compact_controls_keep_real_doctor_publication_validation_and_completion",
+          "kind": "failure",
+          "message": "subprocess.CalledProcessError: Command '['elan', 'which', 'lean']' returned non-zero exit status 1."
+        }
+      ],
+      "skips": [
+        {
+          "test": "api.test_agent_supervisor_usage_rollout::test_opt_in_live_budget_cap_marker",
+          "kind": "skipped",
+          "message": "opt-in live supervisor usage smoke disabled"
+        },
+        {
+          "test": "test_endpoint_usage_admission_revision::test_durable_reopen_preserves_pin[memory]",
+          "kind": "skipped",
+          "message": "durable reopen qualification"
+        }
+      ]
+    },
+    {
+      "name": "accelerate-provider-rerun",
+      "junit_sha256": "1ebc663921ed6b0fffc9d4b1a64b7140e9c8f53feadee15bd25012f879ca8fbf",
+      "junit_bytes": 34310,
+      "local_evidence": "/home/barberb/lift_coding/maintenance/merge-all-20261014-01/accelerate-provider-rerun-tests.xml",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "1",
+          "skipped": "0",
+          "tests": "106",
+          "time": "174.163",
+          "timestamp": "2026-10-14T04:39:35.605383+00:00",
+          "hostname": "spark-b271"
+        }
+      ],
+      "summary": "1 failed, 105 passed in 174.22s (0:02:54)",
+      "failures": [
+        {
+          "test": "api.test_source_input_policy::test_tokenizer_native_fallback_retains_same_source_block_and_exact_audit[common-bindings@1]",
+          "kind": "failure",
+          "message": "ValueError: displacement observation requires retained metadata selection"
+        }
+      ],
+      "skips": []
+    },
+    {
+      "name": "accelerate-legal",
+      "junit_sha256": "daf0de5e5a38987d2f9e38722110297f2c606e0e9408ccde128517e90abffd1a",
+      "junit_bytes": 223191,
+      "local_evidence": "/home/barberb/lift_coding/maintenance/merge-all-20261014-01/accelerate-legal-tests.xml",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "9",
+          "failures": "13",
+          "skipped": "0",
+          "tests": "804",
+          "time": "155.436",
+          "timestamp": "2026-10-14T04:03:08.510713+00:00",
+          "hostname": "spark-b271"
+        }
+      ],
+      "summary": "13 failed, 778 passed, 9 errors, 4 subtests passed in 155.50s (0:02:35)",
+      "failures": [
+        {
+          "test": "api.test_agent_supervisor_backlog_refinery::test_retry_budget_prefers_failed_playwright_paths_for_repair_scope",
+          "kind": "failure",
+          "message": "AssertionError: assert '- Outputs: wallet_interface/ui/src/WorldIdPanel.tsx, data/agent_supervisor/discovery, wallet_interface/ui/tests/world-id-ux.spec.ts' in '# Agent Todos\\n\\n## AUTO-001 Fix the World ID panel\\n\\n- Status: todo\\n- Completion: manual\\n- Priority: P1\\n- Track:...pe: change them only when evidence proves inherited validation debt, and do not weaken correct assertions or policy.\\n'"
+        },
+        {
+          "test": "api.test_agent_supervisor_backlog_refinery::test_retry_budget_classifies_pre_dispatch_validation_stall",
+          "kind": "failure",
+          "message": "AssertionError: assert '- Validation: test -f ' in '# Agent Todos\\n\\n## AUTO-001 Fix validation authority\\n\\n- Status: todo\\n- Completion: manual\\n- Priority: P1\\n- Trac...pe: change them only when evidence proves inherited validation debt, and do not weaken correct assertions or policy.\\n'"
+        },
+        {
+          "test": "api.test_agent_supervisor_worktree_lifecycle::test_multiprocess_peer_cleanup_during_preparing",
+          "kind": "failure",
+          "message": "AssertionError: assert 1 == 0\n +  where 1 = <SpawnProcess name='SpawnProcess-1' pid=4005707 parent=3980841 stopped exitcode=1>.exitcode"
+        },
+        {
+          "test": "api.test_agent_supervisor_worktree_lifecycle::test_simultaneous_lane_startup_exactly_one_owner",
+          "kind": "failure",
+          "message": "AssertionError: assert 1 == 0\n +  where 1 = <SpawnProcess name='SpawnProcess-3' pid=4005715 parent=3980841 stopped exitcode=1>.exitcode"
+        },
+        {
+          "test": "api.test_legal_autoformalization_parent_pages::test_producer_lineage_receives_regenerated_complete_ordered_provenance",
+          "kind": "failure",
+          "message": "ValueError: Real-input observation failed: Traceback (most recent call last):\n  File \"<string>\", line 50, in <module>\nModuleNotFoundError: No module named 'pyarrow'"
+        },
+        {
+          "test": "api.test_legal_autoformalization_parent_pages::test_page_lineage_requires_complete_source_rows_and_fresh_parent_regeneration[None]",
+          "kind": "failure",
+          "message": "ValueError: Real-input observation failed: Traceback (most recent call last):\n  File \"<string>\", line 34, in <module>\nModuleNotFoundError: No module named 'pyarrow'"
+        },
+        {
+          "test": "api.test_legal_autoformalization_runtime_dependencies::test_curated_import_closure_records_actual_origins_versions_and_bytes",
+          "kind": "error",
+          "message": "failed on setup with \"ValueError: Runtime dependency probe requires disabled user site and assertions\""
+        },
+        {
+          "test": "api.test_legal_autoformalization_runtime_dependencies::test_changed_dependency_is_refused_before_its_code_runs",
+          "kind": "error",
+          "message": "failed on setup with \"ValueError: Runtime dependency probe requires disabled user site and assertions\""
+        },
+        {
+          "test": "api.test_legal_autoformalization_runtime_dependencies::test_wrong_dependency_version_or_module_origin_is_refused",
+          "kind": "error",
+          "message": "failed on setup with \"ValueError: Runtime dependency probe requires disabled user site and assertions\""
+        },
+        {
+          "test": "api.test_legal_autoformalization_runtime_dependencies::test_shadow_datasets_source_is_refused",
+          "kind": "error",
+          "message": "failed on setup with \"ValueError: Runtime dependency probe requires disabled user site and assertions\""
+        },
+        {
+          "test": "api.test_legal_autoformalization_runtime_dependencies::test_missing_dependency_and_unbounded_root_are_refused",
+          "kind": "error",
+          "message": "failed on setup with \"ValueError: Runtime dependency probe requires disabled user site and assertions\""
+        },
+        {
+          "test": "api.test_legal_autoformalization_runtime_dependencies::test_alias_or_hacc_dependency_root_is_refused",
+          "kind": "error",
+          "message": "failed on setup with \"ValueError: Runtime dependency probe requires disabled user site and assertions\""
+        },
+        {
+          "test": "api.test_legal_autoformalization_runtime_dependencies::test_record_file_escape_and_unrecorded_package_inventory_are_refused",
+          "kind": "error",
+          "message": "failed on setup with \"ValueError: Runtime dependency probe requires disabled user site and assertions\""
+        },
+        {
+          "test": "api.test_legal_autoformalization_runtime_dependencies::test_undeclared_metadata_change_is_refused",
+          "kind": "error",
+          "message": "failed on setup with \"ValueError: Runtime dependency probe requires disabled user site and assertions\""
+        },
+        {
+          "test": "api.test_legal_autoformalization_runtime_dependencies::test_fresh_probe_ignores_unpinned_preexisting_bytecode",
+          "kind": "error",
+          "message": "failed on setup with \"ValueError: Runtime dependency probe requires disabled user site and assertions\""
+        },
+        {
+          "test": "api.test_legal_autoformalization_source_views_recovery::test_producer_lineage_receives_regenerated_complete_ordered_provenance",
+          "kind": "failure",
+          "message": "ValueError: Real-input observation failed: Traceback (most recent call last):\n  File \"<string>\", line 50, in <module>\nModuleNotFoundError: No module named 'pyarrow'"
+        },
+        {
+          "test": "api.test_legal_autoformalization_span_reconstruction::test_producer_lineage_receives_regenerated_complete_ordered_provenance",
+          "kind": "failure",
+          "message": "ValueError: Real-input observation failed: Traceback (most recent call last):\n  File \"<string>\", line 50, in <module>\nModuleNotFoundError: No module named 'pyarrow'"
+        },
+        {
+          "test": "api.test_legal_autoformalization_span_reconstruction::test_page_lineage_requires_complete_source_rows_and_fresh_parent_regeneration[None]",
+          "kind": "failure",
+          "message": "ValueError: Real-input observation failed: Traceback (most recent call last):\n  File \"<string>\", line 34, in <module>\nModuleNotFoundError: No module named 'pyarrow'"
+        },
+        {
+          "test": "api.test_legal_autoformalization_span_reconstruction::test_occurrence_profile_replays_complete_ordered_cache_and_exact_parent_lineage[None]",
+          "kind": "failure",
+          "message": "ValueError: Real-input observation failed: Traceback (most recent call last):\n  File \"<string>\", line 27, in <module>\nModuleNotFoundError: No module named 'pyarrow'"
+        },
+        {
+          "test": "api.test_legal_autoformalization_span_reconstruction_recovery::test_producer_lineage_receives_regenerated_complete_ordered_provenance",
+          "kind": "failure",
+          "message": "ValueError: Real-input observation failed: Traceback (most recent call last):\n  File \"<string>\", line 50, in <module>\nModuleNotFoundError: No module named 'pyarrow'"
+        },
+        {
+          "test": "api.test_legal_autoformalization_span_reconstruction_recovery::test_page_lineage_requires_complete_source_rows_and_fresh_parent_regeneration[None]",
+          "kind": "failure",
+          "message": "ValueError: Real-input observation failed: Traceback (most recent call last):\n  File \"<string>\", line 34, in <module>\nModuleNotFoundError: No module named 'pyarrow'"
+        },
+        {
+          "test": "api.test_legal_autoformalization_span_reconstruction_recovery::test_occurrence_profile_replays_complete_ordered_cache_and_exact_parent_lineage[None]",
+          "kind": "failure",
+          "message": "ValueError: Real-input observation failed: Traceback (most recent call last):\n  File \"<string>\", line 27, in <module>\nModuleNotFoundError: No module named 'pyarrow'"
+        }
+      ],
+      "skips": []
+    },
+    {
+      "name": "accelerate-legal-rerun",
+      "junit_sha256": "43ad18d87090770a6efa40ee5954f7a38b27739b691e6bfc02aef2fc7a2ba8e6",
+      "junit_bytes": 157191,
+      "local_evidence": "/home/barberb/lift_coding/maintenance/merge-all-20261014-01/accelerate-legal-rerun-tests.xml",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "9",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "804",
+          "time": "129.059",
+          "timestamp": "2026-10-14T04:31:36.492891+00:00",
+          "hostname": "spark-b271"
+        }
+      ],
+      "summary": "791 passed, 9 errors, 4 subtests passed in 131.18s (0:02:11)",
+      "failures": [
+        {
+          "test": "api.test_legal_autoformalization_runtime_dependencies::test_curated_import_closure_records_actual_origins_versions_and_bytes",
+          "kind": "error",
+          "message": "failed on setup with \"ValueError: Runtime dependency probe requires an empty temporary bytecode prefix and -B\""
+        },
+        {
+          "test": "api.test_legal_autoformalization_runtime_dependencies::test_changed_dependency_is_refused_before_its_code_runs",
+          "kind": "error",
+          "message": "failed on setup with \"ValueError: Runtime dependency probe requires an empty temporary bytecode prefix and -B\""
+        },
+        {
+          "test": "api.test_legal_autoformalization_runtime_dependencies::test_wrong_dependency_version_or_module_origin_is_refused",
+          "kind": "error",
+          "message": "failed on setup with \"ValueError: Runtime dependency probe requires an empty temporary bytecode prefix and -B\""
+        },
+        {
+          "test": "api.test_legal_autoformalization_runtime_dependencies::test_shadow_datasets_source_is_refused",
+          "kind": "error",
+          "message": "failed on setup with \"ValueError: Runtime dependency probe requires an empty temporary bytecode prefix and -B\""
+        },
+        {
+          "test": "api.test_legal_autoformalization_runtime_dependencies::test_missing_dependency_and_unbounded_root_are_refused",
+          "kind": "error",
+          "message": "failed on setup with \"ValueError: Runtime dependency probe requires an empty temporary bytecode prefix and -B\""
+        },
+        {
+          "test": "api.test_legal_autoformalization_runtime_dependencies::test_alias_or_hacc_dependency_root_is_refused",
+          "kind": "error",
+          "message": "failed on setup with \"ValueError: Runtime dependency probe requires an empty temporary bytecode prefix and -B\""
+        },
+        {
+          "test": "api.test_legal_autoformalization_runtime_dependencies::test_record_file_escape_and_unrecorded_package_inventory_are_refused",
+          "kind": "error",
+          "message": "failed on setup with \"ValueError: Runtime dependency probe requires an empty temporary bytecode prefix and -B\""
+        },
+        {
+          "test": "api.test_legal_autoformalization_runtime_dependencies::test_undeclared_metadata_change_is_refused",
+          "kind": "error",
+          "message": "failed on setup with \"ValueError: Runtime dependency probe requires an empty temporary bytecode prefix and -B\""
+        },
+        {
+          "test": "api.test_legal_autoformalization_runtime_dependencies::test_fresh_probe_ignores_unpinned_preexisting_bytecode",
+          "kind": "error",
+          "message": "failed on setup with \"ValueError: Runtime dependency probe requires an empty temporary bytecode prefix and -B\""
+        }
+      ],
+      "skips": []
+    },
+    {
+      "name": "accelerate-legal-dependency",
+      "junit_sha256": "a60ae5bef29ef522b73b726f831db0676e33d2b0403b12960570a476813a917d",
+      "junit_bytes": 1938,
+      "local_evidence": "/home/barberb/lift_coding/maintenance/merge-all-20261014-01/accelerate-legal-dependency-tests.xml",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "11",
+          "time": "1.421",
+          "timestamp": "2026-10-14T04:42:53.840317+00:00",
+          "hostname": "spark-b271"
+        }
+      ],
+      "summary": "11 passed in 1.70s",
+      "failures": [],
+      "skips": []
+    },
+    {
+      "name": "accelerate-provider-final",
+      "junit_sha256": "fd1ec23c122c8933cbf07f549ea144c7c3510ee011d1adc0b8f6eca2dd0e9803",
+      "junit_bytes": 34847,
+      "local_evidence": "/home/barberb/lift_coding/maintenance/merge-all-20261014-01/accelerate-provider-final-tests.xml",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "210",
+          "time": "290.433",
+          "timestamp": "2026-10-14T04:45:52.040415+00:00",
+          "hostname": "spark-b271"
+        }
+      ],
+      "summary": "210 passed in 290.51s (0:04:50)",
+      "failures": [],
+      "skips": []
+    },
+    {
+      "name": "accelerate-concurrent",
+      "junit_sha256": "20849bd51e12d9def76f1d3ccf27893e9e269289e2f100d5f2ce9dbdd226faf6",
+      "junit_bytes": 1867,
+      "local_evidence": "/home/barberb/lift_coding/maintenance/merge-all-20261014-01/accelerate-concurrent-tests.xml",
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "10",
+          "time": "15.951",
+          "timestamp": "2026-10-14T04:51:40.091828+00:00",
+          "hostname": "spark-b271"
+        }
+      ],
+      "summary": "10 passed in 16.52s",
+      "failures": [],
+      "skips": []
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "schema": "law-to-action-package-validation/v1",
+  "created_utc": "2026-10-15T11:13:48.210994+00:00",
+  "status": "passed_with_explicit_evidence_limits",
+  "scope": "File custody, current metadata consistency and navigation. No renewed scientific recount, PDF extraction or bulk payload rehash.",
+  "copy_files_verified_at_admitted_copy_time": 312,
+  "copy_bytes_verified_at_admitted_copy_time": 77501588,
+  "copied_payload_hashes_reused_at_finalization": 312,
+  "original_pdf_fetch_hash_reused_at_finalization": true,
+  "copied_payload_size_checks_at_finalization": 312,
+  "pdf_size_check_at_finalization": true,
+  "additional_bulk_payload_rehash": false,
+  "unverified_copy_or_size_mismatches": [],
+  "current_metadata_validation": "current_metadata_validation.json",
+  "metadata_failures": [],
+  "metadata_pending_references_now_resolved": [
+    "artifact_inventory.csv",
+    "package_validation.json"
+  ],
+  "deliverable_paths_checked": 25,
+  "missing_deliverable_paths": [],
+  "reviewer_inventory_scope": "All reviewer files except itself and package_validation.json; both are covered by root artifact_manifest.json.",
+  "reviewer_files_in_inventory": 124,
+  "root_manifest_excludes_only": [
+    "artifact_manifest.json",
+    "checksums.sha256"
+  ],
+  "nested_historical_manifests_included": true,
+  "scientific_validity_implied_by_hashes": false,
+  "complete_author_package_recovered": false,
+  "full_task_complete": false,
+  "missing_author_package_reason": "Exact full prompt, ledger, reviewer documents and latest TeX/includes are not located.",
+  "external_publication_status_scope": "This local package is finalized before any separately requested Git publication; author-only payloads remain local."
+}

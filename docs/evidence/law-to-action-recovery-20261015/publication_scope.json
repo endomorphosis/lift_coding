@@ -1,0 +1,19 @@
+{
+  "schema": "law-to-action-reviewer-publication/v1",
+  "source_package": "law-to-action-statute-source-recovery-20261015T105235Z",
+  "source_package_manifest_sha256": "ff31099e14ef5e358db5a20d96eb0369231d3da253e927231543a387e76a1a54",
+  "publication_scope": "Reviewer summaries and tables only; original author-only payloads and private provenance remain local.",
+  "authorization": "Later user instruction: please push to github origin/main.",
+  "source_reports_are_prepublication_snapshots": true,
+  "current_top_level_views_supersede_historical_recovered_reports": true,
+  "original_author_package_still_missing": true,
+  "new_scientific_execution": false,
+  "scientific_recounts_repeated_for_publication": false,
+  "author_only_copied": false,
+  "source_package_modified": false,
+  "source_package_metadata_validation_checks": 146,
+  "publication_copy_checks": "Every included source and destination SHA-256 matches its finalized source manifest; JSON and CSV syntax validated.",
+  "source_local_validation_scope": "Source package validation covers the local author/reviewer bundle, including intentionally unpublished private references.",
+  "private_artifact_references": "Author-only paths and original host provenance in reports are retention locators, not distributed files.",
+  "public_inventory": "artifact_manifest.json"
+}

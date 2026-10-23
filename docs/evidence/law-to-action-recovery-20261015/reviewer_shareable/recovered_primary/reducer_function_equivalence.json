@@ -1,0 +1,34 @@
+{
+  "functions": [
+    {
+      "ast_identical": true,
+      "function": "ratio",
+      "original_line": 259,
+      "original_source_sha256": "87243cc2e059b5924a8cdec6111eef33d1bebc465aefb463d98d5316602cd983",
+      "reader_line": 79,
+      "reader_source_sha256": "87243cc2e059b5924a8cdec6111eef33d1bebc465aefb463d98d5316602cd983",
+      "source_identical": true
+    },
+    {
+      "ast_identical": true,
+      "function": "metrics",
+      "original_line": 263,
+      "original_source_sha256": "c7bfe48505206db2ce39a5785f05b36a3c575feee4a9f0d8144e7f383f1f3c9e",
+      "reader_line": 82,
+      "reader_source_sha256": "c7bfe48505206db2ce39a5785f05b36a3c575feee4a9f0d8144e7f383f1f3c9e",
+      "source_identical": true
+    },
+    {
+      "ast_identical": true,
+      "function": "summarize",
+      "original_line": 277,
+      "original_source_sha256": "74ccbfcf7937fb830b61f36e0ba7acbc645f216dcc9824e73e995986c6f5eb03",
+      "reader_line": 95,
+      "reader_source_sha256": "74ccbfcf7937fb830b61f36e0ba7acbc645f216dcc9824e73e995986c6f5eb03",
+      "source_identical": true
+    }
+  ],
+  "method": "static AST/source comparison, plus copied portable reader offline execution",
+  "original_reducer_executed": false,
+  "portable_reader_executed": true
+}

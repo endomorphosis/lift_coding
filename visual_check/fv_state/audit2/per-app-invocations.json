@@ -1,0 +1,1964 @@
+[
+  {
+    "app_id": "terminal",
+    "controls_total": 3,
+    "controls_available": 3,
+    "mutating_controls": 2,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "terminal.ipfs_datasets_py.query_catalog",
+      "owner": "ipfs_datasets_py",
+      "tool_id": "load_dataset",
+      "mutates_remote_state": false,
+      "confirmation_required": false,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreiet4daduqngs6q3w5nhz4t6nipza2wjgzy7jhd4der4f6nizvz47a",
+      "event_ref": "bafkreig6t2rsaoysciecohx7xhsif3hiz3pnqcjokyk7pgib74o3tuz5f4",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreicccjmm5k4ybiklmxpyuzcxgz3yulgdyvfiryoo4io5tdlfs4u4uq",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MknVZS35hbu2drTCXTVjZJh3Etgo2cQxMmTURfgRe9BLQq",
+        "identity_proof_cid": "bafkreibvl53gx4wqz3q2o6olurhrtvahzsitoskybv5uikarvoci6qk2cu",
+        "correlation_id": "audit2:terminal.ipfs_datasets_py.query_catalog:1791960040481:0"
+      },
+      "error": null,
+      "ms": 220
+    },
+    "libp2p_call": null,
+    "negative_probe": null
+  },
+  {
+    "app_id": "vibecode",
+    "controls_total": 3,
+    "controls_available": 3,
+    "mutating_controls": 3,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "vibecode.ipfs_kit_py.list_virtual_files",
+      "owner": "ipfs_kit_py",
+      "tool_id": "files_ls",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreieiprnwprmcglcyb7n4rnhpfg3dxcnbqyayp3e3lw5zsfwvuidik4",
+      "event_ref": "bafkreihrrtmleq5zbnqhc6uwzhctr7mf5e7mudgenyzkhvin3hprhalmoq",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidpxzdi5lqj4jytj5orp54lwopx6hzkyhrabyyjea32jqzclxsjme",
+        "correlation_id": "audit2:vibecode.ipfs_kit_py.list_virtual_files:1791960040702:1"
+      },
+      "error": null,
+      "ms": 24
+    },
+    "libp2p_call": null,
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreigq5mybbhvi4inyzuwo55cknzlqzzgc6k7a7c6bmjqab62w3lyeae",
+      "event_ref": "bafkreiczzumkwld7r36z5znut7w2rojwolpcd3nczdr3evipjqvmqmak5a",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 21
+    }
+  },
+  {
+    "app_id": "music-studio-unified",
+    "controls_total": 2,
+    "controls_available": 2,
+    "mutating_controls": 2,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "music-studio-unified.ipfs_kit_py.retrieve_content",
+      "owner": "ipfs_kit_py",
+      "tool_id": "ipfs_cat",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreifkaaz7eidvl4imm7rcyoqiz3p3yw4gom6ocuokg7cqkyejrhn4py",
+      "event_ref": "bafkreie5hfjmdnb6yrwg5bt5x5blc2w47kicwbt5wee3tr6miymreso3uu",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidpxzdi5lqj4jytj5orp54lwopx6hzkyhrabyyjea32jqzclxsjme",
+        "correlation_id": "audit2:music-studio-unified.ipfs_kit_py.retrieve_content:1791960040749:3"
+      },
+      "error": null,
+      "ms": 26
+    },
+    "libp2p_call": null,
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreigip4jzqczpeng6b6shkyeu25qdakqzupgkm7r65xondlzjgqrohu",
+      "event_ref": "bafkreih2bdvicyy6k2ctoyawna2iu45t3nmmxsirlj7gkrcmo3eedpkdzy",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 47
+    }
+  },
+  {
+    "app_id": "ai-chat",
+    "controls_total": 3,
+    "controls_available": 3,
+    "mutating_controls": 2,
+    "libp2p_controls": [
+      "ai-chat.ipfs_kit_py.retrieve_content",
+      "ai-chat.ipfs_datasets_py.query_catalog",
+      "ai-chat.ipfs_accelerate_py.submit_inference"
+    ],
+    "representative": {
+      "binding_id": "ai-chat.ipfs_datasets_py.query_catalog",
+      "owner": "ipfs_datasets_py",
+      "tool_id": "load_dataset",
+      "mutates_remote_state": false,
+      "confirmation_required": false,
+      "transports": [
+        "http",
+        "libp2p"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreicrruytj77wg3cwnajjejsgzp5cvd5ffqol7wsucntyn4ngmttyee",
+      "event_ref": "bafkreihtfcu3cmi7an5k6wohidlseekjuc33llrngylpel4tgm72eplmk4",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreicccjmm5k4ybiklmxpyuzcxgz3yulgdyvfiryoo4io5tdlfs4u4uq",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MknVZS35hbu2drTCXTVjZJh3Etgo2cQxMmTURfgRe9BLQq",
+        "identity_proof_cid": "bafkreibvl53gx4wqz3q2o6olurhrtvahzsitoskybv5uikarvoci6qk2cu",
+        "correlation_id": "audit2:ai-chat.ipfs_datasets_py.query_catalog:1791960040823:5"
+      },
+      "error": null,
+      "ms": 62
+    },
+    "libp2p_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "libp2p",
+      "receipt_id": "bafkreifrkgowfqj2bstqlavsd6sujb66er3ktzfitqj3eao4cp3odqvkni",
+      "event_ref": "bafkreicq3rrfki3oaaehf2xq3idarg2v73qclsfjkocl2o72uhz5m3fsqa",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "libp2p",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreihd5uav4wg7xisdngtyogqudd4uccx5rgzhje7ccwg6g2fd3jpzpi",
+        "correlation_id": "audit2:ai-chat.ipfs_kit_py.retrieve_content:1791960040885:6"
+      },
+      "error": null,
+      "ms": 2838
+    },
+    "negative_probe": null,
+    "libp2p_control": "ai-chat.ipfs_kit_py.retrieve_content"
+  },
+  {
+    "app_id": "file-manager",
+    "controls_total": 2,
+    "controls_available": 2,
+    "mutating_controls": 2,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "file-manager.ipfs_kit_py.retrieve_content",
+      "owner": "ipfs_kit_py",
+      "tool_id": "ipfs_cat",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreifssmqqhrdwqeperodibatu653spzv4hr5owvbhxyzyknqw5hsaau",
+      "event_ref": "bafkreic2mlw6zta7xozjuelsyuzxmpppyc3bmwbzt3fstapl4a6jnpxazm",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidpxzdi5lqj4jytj5orp54lwopx6hzkyhrabyyjea32jqzclxsjme",
+        "correlation_id": "audit2:file-manager.ipfs_kit_py.retrieve_content:1791960043723:7"
+      },
+      "error": null,
+      "ms": 18
+    },
+    "libp2p_call": null,
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreibnnbui7zveqsev4lzmgw4malu44qhf75fekjkc3iynsxsmpctqkm",
+      "event_ref": "bafkreid5o7lxqjoqdtmkom7y4nbwfqenlyzu3k5zzetucnwgxvutcma4ku",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 19
+    }
+  },
+  {
+    "app_id": "task-manager",
+    "controls_total": 2,
+    "controls_available": 2,
+    "mutating_controls": 2,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "task-manager.ipfs_datasets_py.record_provenance",
+      "owner": "ipfs_datasets_py",
+      "tool_id": "record_provenance",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreih7s26by5zw7wllhd3yfeakvdxrh3lsrwhqp7y3bxzjqz2oajvmlu",
+      "event_ref": "bafkreidozb5rpybi542x5wp34dcqrpguxlv4xn2b26zq7trcwa5hrflvli",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreicccjmm5k4ybiklmxpyuzcxgz3yulgdyvfiryoo4io5tdlfs4u4uq",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MknVZS35hbu2drTCXTVjZJh3Etgo2cQxMmTURfgRe9BLQq",
+        "identity_proof_cid": "bafkreibvl53gx4wqz3q2o6olurhrtvahzsitoskybv5uikarvoci6qk2cu",
+        "correlation_id": "audit2:task-manager.ipfs_datasets_py.record_provenance:1791960043761:9"
+      },
+      "error": null,
+      "ms": 23
+    },
+    "libp2p_call": null,
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreic7mck5igszlvbybgc6oj3gyomapaf4kj5vy6jhsgeotrnpcyr57u",
+      "event_ref": "bafkreidyf43feul6cl3c52j34c4quc4tzrteo6gmrsa5xd5axuhthd6xyu",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 17
+    }
+  },
+  {
+    "app_id": "todo",
+    "controls_total": 2,
+    "controls_available": 2,
+    "mutating_controls": 2,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "todo.ipfs_kit_py.retrieve_content",
+      "owner": "ipfs_kit_py",
+      "tool_id": "ipfs_cat",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreide6pmyvm5w6nde7nklud2m6ll25wte5uszg4y2sjesvun4yr2oni",
+      "event_ref": "bafkreickluxkk3qi32cpews4zwbalxyltsc2khptiiqjugzddkbw7nosjy",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidpxzdi5lqj4jytj5orp54lwopx6hzkyhrabyyjea32jqzclxsjme",
+        "correlation_id": "audit2:todo.ipfs_kit_py.retrieve_content:1791960043802:11"
+      },
+      "error": null,
+      "ms": 30
+    },
+    "libp2p_call": null,
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreieujrtb3jnwhl5mxxwv2fmmrety4gf2i4v4pw26sidtepr673uto4",
+      "event_ref": "bafkreidamvbcha74cg5wl4oxrj66vtkh7d3enyzce24mx3tm5ao25stmz4",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 26
+    }
+  },
+  {
+    "app_id": "model-browser",
+    "controls_total": 3,
+    "controls_available": 3,
+    "mutating_controls": 2,
+    "libp2p_controls": [
+      "model-browser.ipfs_kit_py.retrieve_content",
+      "model-browser.ipfs_datasets_py.query_catalog",
+      "model-browser.ipfs_accelerate_py.inspect_model_catalog"
+    ],
+    "representative": {
+      "binding_id": "model-browser.ipfs_datasets_py.query_catalog",
+      "owner": "ipfs_datasets_py",
+      "tool_id": "load_dataset",
+      "mutates_remote_state": false,
+      "confirmation_required": false,
+      "transports": [
+        "http",
+        "libp2p"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreihy4xvhrdz5h5tegyzqzsvcxzh55t4geksfweiszem35c5szg25na",
+      "event_ref": "bafkreif3dzqxpbduwt3tuid73k6vffc2jbyrzpic5a7ltyg6ii6n3daozy",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreicccjmm5k4ybiklmxpyuzcxgz3yulgdyvfiryoo4io5tdlfs4u4uq",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MknVZS35hbu2drTCXTVjZJh3Etgo2cQxMmTURfgRe9BLQq",
+        "identity_proof_cid": "bafkreibvl53gx4wqz3q2o6olurhrtvahzsitoskybv5uikarvoci6qk2cu",
+        "correlation_id": "audit2:model-browser.ipfs_datasets_py.query_catalog:1791960043858:13"
+      },
+      "error": null,
+      "ms": 21
+    },
+    "libp2p_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "libp2p",
+      "receipt_id": "bafkreicpehmeqyyc7eln2cbj2kzywdv5xbybsarlp2e7ita3u4ftnpyscq",
+      "event_ref": "bafkreiemq7kjwxj7pqfd5jw4ncrlw5q5zjwsab5lzllw2vnagc6d5kr3yu",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "libp2p",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidxi7ngxer3s5s3b6xwc4wsyqovyj53o3ug4r5zupaoxm2le3ce7u",
+        "correlation_id": "audit2:model-browser.ipfs_kit_py.retrieve_content:1791960043879:14"
+      },
+      "error": null,
+      "ms": 2017
+    },
+    "negative_probe": null,
+    "libp2p_control": "model-browser.ipfs_kit_py.retrieve_content"
+  },
+  {
+    "app_id": "huggingface",
+    "controls_total": 3,
+    "controls_available": 3,
+    "mutating_controls": 2,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "huggingface.ipfs_datasets_py.query_catalog",
+      "owner": "ipfs_datasets_py",
+      "tool_id": "load_dataset",
+      "mutates_remote_state": false,
+      "confirmation_required": false,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreib7samhcpcktii5izveje4s6ejvyngb6cm72sthvofyourt2w42oi",
+      "event_ref": "bafkreihtdigwxuee2hvq6xd2ruo5r7ql3rb4gxq2exuwlgzcsrtkffpxa4",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreicccjmm5k4ybiklmxpyuzcxgz3yulgdyvfiryoo4io5tdlfs4u4uq",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MknVZS35hbu2drTCXTVjZJh3Etgo2cQxMmTURfgRe9BLQq",
+        "identity_proof_cid": "bafkreibvl53gx4wqz3q2o6olurhrtvahzsitoskybv5uikarvoci6qk2cu",
+        "correlation_id": "audit2:huggingface.ipfs_datasets_py.query_catalog:1791960045897:15"
+      },
+      "error": null,
+      "ms": 21
+    },
+    "libp2p_call": null,
+    "negative_probe": null
+  },
+  {
+    "app_id": "openrouter",
+    "controls_total": 2,
+    "controls_available": 2,
+    "mutating_controls": 2,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "openrouter.ipfs_datasets_py.record_provenance",
+      "owner": "ipfs_datasets_py",
+      "tool_id": "record_provenance",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreifwpvugvufwursbtke6hvnf32yllwhgqe6kofwx42c7csyg4s3pfa",
+      "event_ref": "bafkreifvpm6qqlgya6ptlvow4crpueuozzfa5cv33wkmkqo6hoqakvitie",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreicccjmm5k4ybiklmxpyuzcxgz3yulgdyvfiryoo4io5tdlfs4u4uq",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MknVZS35hbu2drTCXTVjZJh3Etgo2cQxMmTURfgRe9BLQq",
+        "identity_proof_cid": "bafkreibvl53gx4wqz3q2o6olurhrtvahzsitoskybv5uikarvoci6qk2cu",
+        "correlation_id": "audit2:openrouter.ipfs_datasets_py.record_provenance:1791960045919:16"
+      },
+      "error": null,
+      "ms": 15
+    },
+    "libp2p_call": null,
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreianr3n7sk327uekrycaffvoeyvtopbtexvxp57ttysyasmarltt4m",
+      "event_ref": "bafkreifu5l3hz6ydahokl3xcyobjcd66rlnxl6mzviyfmpqieakbz7crci",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 11
+    }
+  },
+  {
+    "app_id": "ipfs-explorer",
+    "controls_total": 1,
+    "controls_available": 1,
+    "mutating_controls": 1,
+    "libp2p_controls": [
+      "ipfs-explorer.ipfs_kit_py.retrieve_content"
+    ],
+    "representative": {
+      "binding_id": "ipfs-explorer.ipfs_kit_py.retrieve_content",
+      "owner": "ipfs_kit_py",
+      "tool_id": "ipfs_cat",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http",
+        "libp2p"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreieduwfnqsdbjmawojpn7zzgr23wwunory7ep6yvrfxuuh5onvlghy",
+      "event_ref": "bafkreidk4omjhthkwh2kji5cvp3n6v7qeeklrftrlwjmybqzqwtgchekcm",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidpxzdi5lqj4jytj5orp54lwopx6hzkyhrabyyjea32jqzclxsjme",
+        "correlation_id": "audit2:ipfs-explorer.ipfs_kit_py.retrieve_content:1791960045945:18"
+      },
+      "error": null,
+      "ms": 19
+    },
+    "libp2p_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "libp2p",
+      "receipt_id": "bafkreiad57wyofp26id4k33wzsvh76nrtnku7h5bahwkm2shcc2lyvnsxq",
+      "event_ref": "bafkreid2qn3skyhmbg4hdfsoigpt4osvw5jsgnnt7nqccdrlmufaplhu6i",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "libp2p",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreifvbxo6znzedugib3y7qkq3rqvte5ktydmkr5rtozjvoymda5i5ve",
+        "correlation_id": "audit2:ipfs-explorer.ipfs_kit_py.retrieve_content:1791960045964:19"
+      },
+      "error": null,
+      "ms": 2328
+    },
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreidyq6rkeyh5a6i25uizej7fqof4w6fur5blma3quehlf7qjvvzehe",
+      "event_ref": "bafkreihxzqoh6zdcfbzg6b46l6eigpvoaudo3jzx7wmxfrrnqwfucsuanq",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 24
+    },
+    "libp2p_control": "ipfs-explorer.ipfs_kit_py.retrieve_content"
+  },
+  {
+    "app_id": "device-manager",
+    "controls_total": 2,
+    "controls_available": 2,
+    "mutating_controls": 2,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "device-manager.ipfs_kit_py.retrieve_content",
+      "owner": "ipfs_kit_py",
+      "tool_id": "ipfs_cat",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreiaw5atnorf6f7wwr3cjrkfbo75wbyipcyqhs3sntj356u5o62fooi",
+      "event_ref": "bafkreifwubeavby5mghtfw5bcsnrcivc34zeplipnqktj2u3gkxledt6da",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidpxzdi5lqj4jytj5orp54lwopx6hzkyhrabyyjea32jqzclxsjme",
+        "correlation_id": "audit2:device-manager.ipfs_kit_py.retrieve_content:1791960048317:21"
+      },
+      "error": null,
+      "ms": 43
+    },
+    "libp2p_call": null,
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreid3t526ifxjovuwl4khwpsc7xkegvu5dk2uzhwpfkgq7zcdnigau4",
+      "event_ref": "bafkreiaq4expn55yhzdxhglfor3cghehifpeedramlkqgqhp6k7xxtn3se",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 22
+    }
+  },
+  {
+    "app_id": "mcp-control",
+    "controls_total": 3,
+    "controls_available": 3,
+    "mutating_controls": 0,
+    "libp2p_controls": [
+      "mcp-control.ipfs_kit_py.inspect_tool_registry",
+      "mcp-control.ipfs_datasets_py.inspect_tool_registry",
+      "mcp-control.ipfs_accelerate_py.inspect_tool_registry"
+    ],
+    "representative": {
+      "binding_id": "mcp-control.ipfs_kit_py.inspect_tool_registry",
+      "owner": "ipfs_kit_py",
+      "tool_id": "node_id",
+      "mutates_remote_state": false,
+      "confirmation_required": false,
+      "transports": [
+        "http",
+        "libp2p"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreifn5jl2mtamz5dvwqj4zdc6xqovdehuesazriudau2nw7gtrzcsre",
+      "event_ref": "bafkreibpue65xjp35ythzbiqfzv6tyaepszyq53dmnjr3t3uykrbukrerq",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidpxzdi5lqj4jytj5orp54lwopx6hzkyhrabyyjea32jqzclxsjme",
+        "correlation_id": "audit2:mcp-control.ipfs_kit_py.inspect_tool_registry:1791960048383:23"
+      },
+      "error": null,
+      "ms": 30
+    },
+    "libp2p_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "libp2p",
+      "receipt_id": "bafkreihj33bmcurjntuikllvx3jne3n6fogpbqjwsb4otje45nimvtyzh4",
+      "event_ref": "bafkreiaejgjho56io76fa6atdjeugeeuaqfet5ofayc2i5akrkx2lb4wi4",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "libp2p",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreid2d7c36quv6yb2nv2wv5tpw27o7j4mqlbwfagyxexouddqvdc7km",
+        "correlation_id": "audit2:mcp-control.ipfs_kit_py.inspect_tool_registry:1791960048413:24"
+      },
+      "error": null,
+      "ms": 1897
+    },
+    "negative_probe": null,
+    "libp2p_control": "mcp-control.ipfs_kit_py.inspect_tool_registry"
+  },
+  {
+    "app_id": "github",
+    "controls_total": 2,
+    "controls_available": 2,
+    "mutating_controls": 2,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "github.ipfs_kit_py.retrieve_content",
+      "owner": "ipfs_kit_py",
+      "tool_id": "ipfs_cat",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreihq4hv3r7laaomwgoeub3skzi5k4krq5ted5dsuhhiphm43zjdlla",
+      "event_ref": "bafkreiaiy3assbm3muhoptqqbnrktjwk47t7oefjpt76vkwd3ptaxiaevy",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidpxzdi5lqj4jytj5orp54lwopx6hzkyhrabyyjea32jqzclxsjme",
+        "correlation_id": "audit2:github.ipfs_kit_py.retrieve_content:1791960050312:25"
+      },
+      "error": null,
+      "ms": 24
+    },
+    "libp2p_call": null,
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreidros6mduba42oxyhleupf2hjozim7sih4kl4vqnuimugcpqpyo6e",
+      "event_ref": "bafkreicnc4kddrnp3a3bgcyybmczslipa7pjrh5axovujmhe6cfmiii6ia",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 19
+    }
+  },
+  {
+    "app_id": "cron",
+    "controls_total": 2,
+    "controls_available": 2,
+    "mutating_controls": 2,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "cron.ipfs_datasets_py.record_provenance",
+      "owner": "ipfs_datasets_py",
+      "tool_id": "record_provenance",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreibkvvgq3n56xipucf4abev224ggya2wo5omrriud2akdf7fsqtfsm",
+      "event_ref": "bafkreie7xg5s5sg3tb7nbbtwioarkxmovgrimbvlvu3fempntjswy5eesi",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreicccjmm5k4ybiklmxpyuzcxgz3yulgdyvfiryoo4io5tdlfs4u4uq",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MknVZS35hbu2drTCXTVjZJh3Etgo2cQxMmTURfgRe9BLQq",
+        "identity_proof_cid": "bafkreibvl53gx4wqz3q2o6olurhrtvahzsitoskybv5uikarvoci6qk2cu",
+        "correlation_id": "audit2:cron.ipfs_datasets_py.record_provenance:1791960050355:27"
+      },
+      "error": null,
+      "ms": 24
+    },
+    "libp2p_call": null,
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreigd6gbgxsunmnbdnndxvmdvb4ciu6uiutuvrwkfgibt73ppvtm754",
+      "event_ref": "bafkreiadu5cwvs7o5lttzzyrfwpxpbmchr5w3lofovp2awxzc47rgunfqu",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 15
+    }
+  },
+  {
+    "app_id": "navi",
+    "controls_total": 1,
+    "controls_available": 1,
+    "mutating_controls": 0,
+    "libp2p_controls": [
+      "navi.ipfs_datasets_py.query_catalog"
+    ],
+    "representative": {
+      "binding_id": "navi.ipfs_datasets_py.query_catalog",
+      "owner": "ipfs_datasets_py",
+      "tool_id": "load_dataset",
+      "mutates_remote_state": false,
+      "confirmation_required": false,
+      "transports": [
+        "http",
+        "libp2p"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreigeh6slh6w5a7vb6gmj7ny353t4at7log2jrohf27fddcbgmafqx4",
+      "event_ref": "bafkreia3xclaig5yyo5ehcphwlbax6wh5skaxph2aiy2465mqwyb5udqte",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreicccjmm5k4ybiklmxpyuzcxgz3yulgdyvfiryoo4io5tdlfs4u4uq",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MknVZS35hbu2drTCXTVjZJh3Etgo2cQxMmTURfgRe9BLQq",
+        "identity_proof_cid": "bafkreibvl53gx4wqz3q2o6olurhrtvahzsitoskybv5uikarvoci6qk2cu",
+        "correlation_id": "audit2:navi.ipfs_datasets_py.query_catalog:1791960050394:29"
+      },
+      "error": null,
+      "ms": 29
+    },
+    "libp2p_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "libp2p",
+      "receipt_id": "bafkreidp5pxcibfv543vfhn2ds6n44jt7btfjdgv3aqlvgabf4dhhtvc7m",
+      "event_ref": "bafkreihzjgijiogjfuc7ampdyprsynd6q5usjkv46aq2w6vuodb5737iky",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "libp2p",
+        "descriptor_cid": "bafkreicccjmm5k4ybiklmxpyuzcxgz3yulgdyvfiryoo4io5tdlfs4u4uq",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MknVZS35hbu2drTCXTVjZJh3Etgo2cQxMmTURfgRe9BLQq",
+        "identity_proof_cid": "bafkreigf2sena7hy3di7kbejkvqqoz2wfwox6xof36op7rvym6ka2nyat4",
+        "correlation_id": "audit2:navi.ipfs_datasets_py.query_catalog:1791960050423:30"
+      },
+      "error": null,
+      "ms": 1888
+    },
+    "negative_probe": null,
+    "libp2p_control": "navi.ipfs_datasets_py.query_catalog"
+  },
+  {
+    "app_id": "p2p-network",
+    "controls_total": 2,
+    "controls_available": 2,
+    "mutating_controls": 1,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "p2p-network.ipfs_kit_py.inspect_peer_network",
+      "owner": "ipfs_kit_py",
+      "tool_id": "swarm_peers",
+      "mutates_remote_state": false,
+      "confirmation_required": false,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreifp4aefhk2g4vbtfz2ezjfgpdga3dxmfvl4h4dtdeo2rga7jslf24",
+      "event_ref": "bafkreid5tb45s2umndgfgqu6zcs533bbimbv7asin42saxtqmqjutdx2pi",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidpxzdi5lqj4jytj5orp54lwopx6hzkyhrabyyjea32jqzclxsjme",
+        "correlation_id": "audit2:p2p-network.ipfs_kit_py.inspect_peer_network:1791960052311:31"
+      },
+      "error": null,
+      "ms": 13
+    },
+    "libp2p_call": null,
+    "negative_probe": null
+  },
+  {
+    "app_id": "p2p-chat-unified",
+    "controls_total": 2,
+    "controls_available": 2,
+    "mutating_controls": 2,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "p2p-chat-unified.ipfs_kit_py.exchange_peer_messages",
+      "owner": "ipfs_kit_py",
+      "tool_id": "swarm_peers",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreig5wlul47tcrqrowebumx3dpfvdxoxnr5zcye4q3ahpsyshvhpdoe",
+      "event_ref": "bafkreih6eb2iap6un4nb74gbbl4f73gceyylx4kofs3c6qaxblgefklzje",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidpxzdi5lqj4jytj5orp54lwopx6hzkyhrabyyjea32jqzclxsjme",
+        "correlation_id": "audit2:p2p-chat-unified.ipfs_kit_py.exchange_peer_messages:1791960052324:32"
+      },
+      "error": null,
+      "ms": 11
+    },
+    "libp2p_call": null,
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreif52su5oe4ka4rdnc7ywqmnsejftcqliemdbvifnpwrwt2si5h6ce",
+      "event_ref": "bafkreifkonb3jo4j75qcezqcs4v6qboqbp24vjtdjlreujrwg5rcnowfuu",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 10
+    }
+  },
+  {
+    "app_id": "neural-network-designer",
+    "controls_total": 2,
+    "controls_available": 2,
+    "mutating_controls": 2,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "neural-network-designer.ipfs_kit_py.retrieve_content",
+      "owner": "ipfs_kit_py",
+      "tool_id": "ipfs_cat",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreibmalsspoxaopnixe6w6bgfc763fd3kcccr4jsbn45m5apql76yyy",
+      "event_ref": "bafkreib3r6hk4uidbgilxnqcdpbclzsnhjy7mtxqqnmxvx5fpbvsk24uri",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidpxzdi5lqj4jytj5orp54lwopx6hzkyhrabyyjea32jqzclxsjme",
+        "correlation_id": "audit2:neural-network-designer.ipfs_kit_py.retrieve_content:1791960052345:34"
+      },
+      "error": null,
+      "ms": 33
+    },
+    "libp2p_call": null,
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreicbasxuwnhvi4nv37xuuwolnfg7kuleloor7qfznxaafmmqyu4e5e",
+      "event_ref": "bafkreihasiraur5uclvy43e7hzv4is75p4fwevgxiw7bp5ujmumca55sbu",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 28
+    }
+  },
+  {
+    "app_id": "training-manager",
+    "controls_total": 3,
+    "controls_available": 3,
+    "mutating_controls": 2,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "training-manager.ipfs_datasets_py.query_catalog",
+      "owner": "ipfs_datasets_py",
+      "tool_id": "load_dataset",
+      "mutates_remote_state": false,
+      "confirmation_required": false,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreibrddaeundud3taq5fes7gvircmd3wx75lua2zocimw2y7tocdgrm",
+      "event_ref": "bafkreiekym2bpt3quxuvkn46bancwl7tl2ncuaygspmwf4ibfygfleuchy",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreicccjmm5k4ybiklmxpyuzcxgz3yulgdyvfiryoo4io5tdlfs4u4uq",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MknVZS35hbu2drTCXTVjZJh3Etgo2cQxMmTURfgRe9BLQq",
+        "identity_proof_cid": "bafkreibvl53gx4wqz3q2o6olurhrtvahzsitoskybv5uikarvoci6qk2cu",
+        "correlation_id": "audit2:training-manager.ipfs_datasets_py.query_catalog:1791960052406:36"
+      },
+      "error": null,
+      "ms": 29
+    },
+    "libp2p_call": null,
+    "negative_probe": null
+  },
+  {
+    "app_id": "calendar",
+    "controls_total": 2,
+    "controls_available": 2,
+    "mutating_controls": 2,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "calendar.ipfs_kit_py.retrieve_content",
+      "owner": "ipfs_kit_py",
+      "tool_id": "ipfs_cat",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreigc5xhvr6bf4sd3byeia5itmvqdaya7sn27wntaskjrnqjrbbvjfi",
+      "event_ref": "bafkreifcff4pexnzdqyvw3f2xkxzynfnsgcfkcz7mquwelt2zlyjxisipm",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidpxzdi5lqj4jytj5orp54lwopx6hzkyhrabyyjea32jqzclxsjme",
+        "correlation_id": "audit2:calendar.ipfs_kit_py.retrieve_content:1791960052435:37"
+      },
+      "error": null,
+      "ms": 20
+    },
+    "libp2p_call": null,
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreiaj2aqkgr3b3k5fc4r3yldxye7ogzr47usobj4amgvqyjbu6cdfye",
+      "event_ref": "bafkreihghggemjdb2v72s7vcknvki6mw6ulw5nahv2lydb2lxbav52yk54",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 12
+    }
+  },
+  {
+    "app_id": "peertube",
+    "controls_total": 2,
+    "controls_available": 2,
+    "mutating_controls": 2,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "peertube.ipfs_kit_py.retrieve_content",
+      "owner": "ipfs_kit_py",
+      "tool_id": "ipfs_cat",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreiaux3o3ca4zyibeeecbixg6jo3s3bjlyt3ea5ogjtewrxnfj6r2ge",
+      "event_ref": "bafkreif6eh6x2hzut2uuwercawon2hiukk5ej535qm65emr7fxcm2essbq",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidpxzdi5lqj4jytj5orp54lwopx6hzkyhrabyyjea32jqzclxsjme",
+        "correlation_id": "audit2:peertube.ipfs_kit_py.retrieve_content:1791960052468:39"
+      },
+      "error": null,
+      "ms": 38
+    },
+    "libp2p_call": null,
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreia62zk27266ttprqrqid3gvk7w5qnprgxmszifyhdwktpmqjtb7ye",
+      "event_ref": "bafkreib2dszdmwgz6oovdnij75mv2z7iomhk45uj6cr7m74uhny5272gia",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 28
+    }
+  },
+  {
+    "app_id": "friends-list",
+    "controls_total": 2,
+    "controls_available": 2,
+    "mutating_controls": 2,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "friends-list.ipfs_kit_py.exchange_peer_messages",
+      "owner": "ipfs_kit_py",
+      "tool_id": "swarm_peers",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreibyrknp5cpvp7quy76g7rqq46vpay7odc7zrepqxlxds32tqa2ccq",
+      "event_ref": "bafkreiblzd7audc4re7msttii5rv4exlh7r2yfsrkcakwfiryuuothqr5i",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidpxzdi5lqj4jytj5orp54lwopx6hzkyhrabyyjea32jqzclxsjme",
+        "correlation_id": "audit2:friends-list.ipfs_kit_py.exchange_peer_messages:1791960052536:41"
+      },
+      "error": null,
+      "ms": 13
+    },
+    "libp2p_call": null,
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreid3njcs26sw66fzajjmttbeqhvintbzv73p2dbpnrjl5hb2qb46iu",
+      "event_ref": "bafkreiepbfkefo5pg4v577zdl7yhddf4oiychtw3wiq77ggqkwcqznogti",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 11
+    }
+  },
+  {
+    "app_id": "image-viewer",
+    "controls_total": 2,
+    "controls_available": 2,
+    "mutating_controls": 2,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "image-viewer.ipfs_kit_py.retrieve_content",
+      "owner": "ipfs_kit_py",
+      "tool_id": "ipfs_cat",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreiek2fs5qap7y3fbavo64sn5hws65gttxkyq5oelu2mkclnm7yvkcm",
+      "event_ref": "bafkreibb2cm5lvj235innuytg23of6lqaxmw4z5sbqyzmbo64sx5jp6dau",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidpxzdi5lqj4jytj5orp54lwopx6hzkyhrabyyjea32jqzclxsjme",
+        "correlation_id": "audit2:image-viewer.ipfs_kit_py.retrieve_content:1791960052561:43"
+      },
+      "error": null,
+      "ms": 34
+    },
+    "libp2p_call": null,
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreieoi5cumqub7zm3mf2bxor7um62hdnrq4ameuvzyruktsdu4eense",
+      "event_ref": "bafkreiapjhuyudhyx63us42rimntuzpvii2tdhtxvycgncbzlql3tzbvhy",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 24
+    }
+  },
+  {
+    "app_id": "notes",
+    "controls_total": 2,
+    "controls_available": 2,
+    "mutating_controls": 2,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "notes.ipfs_kit_py.retrieve_content",
+      "owner": "ipfs_kit_py",
+      "tool_id": "ipfs_cat",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreiet7kcxcogm3ezdlmq7zjtxwjgxpic3cb736b64unrlscf6lp3llm",
+      "event_ref": "bafkreiergn7v6rhna6sob6br2crjamc7gg2dp5yshw45l642qzorobn2ku",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidpxzdi5lqj4jytj5orp54lwopx6hzkyhrabyyjea32jqzclxsjme",
+        "correlation_id": "audit2:notes.ipfs_kit_py.retrieve_content:1791960052619:45"
+      },
+      "error": null,
+      "ms": 28
+    },
+    "libp2p_call": null,
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreid66rlpy4dfucnt5yo4dhx6hsh46sfslcjznqbjndj6cwvujlfrfm",
+      "event_ref": "bafkreigavqfcbzembh52xkqqbtv4e6fu4w7je2gtinmybylvxhb5yo3hyq",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 28
+    }
+  },
+  {
+    "app_id": "media-player",
+    "controls_total": 2,
+    "controls_available": 2,
+    "mutating_controls": 2,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "media-player.ipfs_kit_py.retrieve_content",
+      "owner": "ipfs_kit_py",
+      "tool_id": "ipfs_cat",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreid7irom2bbjvzoyxz45dtojhrv6t34hvj3kpuwebk2yzhevwbzipe",
+      "event_ref": "bafkreidbuo5em2p5yoxpdvbauxvobpeh4glr2dcsunb3mtsnpif6m7cxnm",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidpxzdi5lqj4jytj5orp54lwopx6hzkyhrabyyjea32jqzclxsjme",
+        "correlation_id": "audit2:media-player.ipfs_kit_py.retrieve_content:1791960052676:47"
+      },
+      "error": null,
+      "ms": 18
+    },
+    "libp2p_call": null,
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreihzgqq6pszaxo6gnkizj2educacwcgnvneoj6gfymo6s7fsw5thmi",
+      "event_ref": "bafkreicwsnrmzvl7njgjueflrwp3ioj755jdsu7ao556tyz2iqwdxyaec4",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 14
+    }
+  },
+  {
+    "app_id": "system-monitor",
+    "controls_total": 1,
+    "controls_available": 1,
+    "mutating_controls": 1,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "system-monitor.ipfs_accelerate_py.inspect_telemetry",
+      "owner": "ipfs_accelerate_py",
+      "tool_id": "PrometheusMetrics.generate_metrics",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreifrpvualst66wx2zxii7li3s374nqfw35xkordq3fwlu3uu5rjh2m",
+      "event_ref": "bafkreie26jfyfgmdkpwxcx2lzjj2r4lmhov7tll3sheeyjshkopyolosxq",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreie6klnfqvbzzvinhpnxyldqvxy3hn3zzkqhh5rnf5cyvhdcfxfqna",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6Mkgk3a6K8kGA4Upn2L8Emf29UzYd8D8GwQkp221Th7Deat",
+        "identity_proof_cid": "bafkreif2wykj53zkdpui26urangxedynf3pimltmbakfyom37kkl66zvcu",
+        "correlation_id": "audit2:system-monitor.ipfs_accelerate_py.inspect_telemetry:1791960052708:49"
+      },
+      "error": null,
+      "ms": 21
+    },
+    "libp2p_call": null,
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreidsr744uqchijg6yfum4hzx4veb7ffwza5cpa2dwwzof5a7ouapuq",
+      "event_ref": "bafkreiahli3zfefgiyjqdlqx5jsyk2px54vs3dcgvq3mekdxdpyckfsw4i",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 13
+    }
+  },
+  {
+    "app_id": "neural-photoshop",
+    "controls_total": 2,
+    "controls_available": 2,
+    "mutating_controls": 2,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "neural-photoshop.ipfs_kit_py.retrieve_content",
+      "owner": "ipfs_kit_py",
+      "tool_id": "ipfs_cat",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreidl7s7ngrlm3u4dyjyka5wsl2gd77kouzh5c6wnjkb2jv2lviqube",
+      "event_ref": "bafkreiczlf33sp6ed2efvah77ms3oxrkvrfhowbwzwq4k7q3fknakpun4a",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidpxzdi5lqj4jytj5orp54lwopx6hzkyhrabyyjea32jqzclxsjme",
+        "correlation_id": "audit2:neural-photoshop.ipfs_kit_py.retrieve_content:1791960052742:51"
+      },
+      "error": null,
+      "ms": 36
+    },
+    "libp2p_call": null,
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreiealjjhwcjwpzchouauqlzjqurkrnn5malb3ovljxhh4fzdgatuom",
+      "event_ref": "bafkreib62v5pneve5j6lcxjj55m6e6qmhgvj3dwvwz3onf2iecewvy2fre",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 23
+    }
+  },
+  {
+    "app_id": "cinema",
+    "controls_total": 2,
+    "controls_available": 2,
+    "mutating_controls": 2,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "cinema.ipfs_kit_py.retrieve_content",
+      "owner": "ipfs_kit_py",
+      "tool_id": "ipfs_cat",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreigd3t5qjj3ftcfmi4e6q3y7xhvdax2lijvly3cm3yewbyoe63f7s4",
+      "event_ref": "bafkreihvfhea5pq2kt3zx6j3lgfvfwwygazcbhcmgwnity3v7s3b7nbxiu",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidpxzdi5lqj4jytj5orp54lwopx6hzkyhrabyyjea32jqzclxsjme",
+        "correlation_id": "audit2:cinema.ipfs_kit_py.retrieve_content:1791960052802:53"
+      },
+      "error": null,
+      "ms": 29
+    },
+    "libp2p_call": null,
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreic5kfedgccs6drxb3g6otdtig2a2trqpysikbusfhzgfbcim7thu4",
+      "event_ref": "bafkreifpocv2v65o3dqstj5on67v3wzpfs6t3jc2l6leunpwcooaclp7iq",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 20
+    }
+  },
+  {
+    "app_id": "strudel",
+    "controls_total": 2,
+    "controls_available": 2,
+    "mutating_controls": 2,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "strudel.ipfs_kit_py.retrieve_content",
+      "owner": "ipfs_kit_py",
+      "tool_id": "ipfs_cat",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreiaexrqcu2lywabdl7ffueihyci577xeb7l677ivobdo75zpvhr4am",
+      "event_ref": "bafkreifefaqsf7lkuhj5zx2mzdzhoy6ls74fobnznnujht3ajec3tqvplu",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidpxzdi5lqj4jytj5orp54lwopx6hzkyhrabyyjea32jqzclxsjme",
+        "correlation_id": "audit2:strudel.ipfs_kit_py.retrieve_content:1791960052851:55"
+      },
+      "error": null,
+      "ms": 15
+    },
+    "libp2p_call": null,
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreiauw5ava2vsg2vlmthc4kvif7pc6iwrzmxdk5k2id7e26grylrc3m",
+      "event_ref": "bafkreiaocyvrorhvddqyesy6jx7v2oi2s5jk5wmvwccboubf6mxzbqnnuq",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 11
+    }
+  },
+  {
+    "app_id": "strudel-ai-daw",
+    "controls_total": 2,
+    "controls_available": 2,
+    "mutating_controls": 2,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "strudel-ai-daw.ipfs_kit_py.retrieve_content",
+      "owner": "ipfs_kit_py",
+      "tool_id": "ipfs_cat",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreibblf5zkko355bc7y52spaue5r7qm2qgk6ntnoy73d2fvdndc327e",
+      "event_ref": "bafkreiae4yz7ndfhmbo4wszz2qn7wwr2zchbmgll34hlow6o5sqwq23n5e",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidpxzdi5lqj4jytj5orp54lwopx6hzkyhrabyyjea32jqzclxsjme",
+        "correlation_id": "audit2:strudel-ai-daw.ipfs_kit_py.retrieve_content:1791960052877:57"
+      },
+      "error": null,
+      "ms": 18
+    },
+    "libp2p_call": null,
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreicpm2ew4dj4lkoqly62uhoh5jnkjz7kakmokvxybjloria5xnssdm",
+      "event_ref": "bafkreif4sy2okc66v5bkestd7snej6xfaqvtzbxbormdsqtkhyshddqumy",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 14
+    }
+  },
+  {
+    "app_id": "music-studio",
+    "controls_total": 1,
+    "controls_available": 1,
+    "mutating_controls": 1,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "music-studio.ipfs_kit_py.retrieve_content",
+      "owner": "ipfs_kit_py",
+      "tool_id": "ipfs_cat",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreic24tp52xut6awa56yxjqhcoxhmur4k74xpdc3mcte7fn5hyqb6uu",
+      "event_ref": "bafkreiaolwafqwehkp3onz2j3ivqvalufxemqusxwzozskqpzv3iio4vxa",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidpxzdi5lqj4jytj5orp54lwopx6hzkyhrabyyjea32jqzclxsjme",
+        "correlation_id": "audit2:music-studio.ipfs_kit_py.retrieve_content:1791960052909:59"
+      },
+      "error": null,
+      "ms": 17
+    },
+    "libp2p_call": null,
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreif5tuxc3qic5hdpdivy4wcmtiym32qj5h6oqa43qeurlsnuirs5ue",
+      "event_ref": "bafkreiackzro6c54khcmymqrxrsstnowpuk32i73qvywnc6cttzwpzcj3q",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 13
+    }
+  },
+  {
+    "app_id": "p2p-chat",
+    "controls_total": 1,
+    "controls_available": 1,
+    "mutating_controls": 1,
+    "libp2p_controls": [],
+    "representative": {
+      "binding_id": "p2p-chat.ipfs_kit_py.exchange_peer_messages",
+      "owner": "ipfs_kit_py",
+      "tool_id": "swarm_peers",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreifzfsscxwo6iegrj4p4sqs2yfr46bkefy35ug4mu45cjmu5ftuzhq",
+      "event_ref": "bafkreidsqmwu5a4jvntzlcormwrg3ikhamifponqjyk65fyjgvtppv2dre",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidpxzdi5lqj4jytj5orp54lwopx6hzkyhrabyyjea32jqzclxsjme",
+        "correlation_id": "audit2:p2p-chat.ipfs_kit_py.exchange_peer_messages:1791960052940:61"
+      },
+      "error": null,
+      "ms": 15
+    },
+    "libp2p_call": null,
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreihmb3exwmmyggmtmo4r3p6scxce4y3evsmt6szc5zembrala7e3oq",
+      "event_ref": "bafkreigmzreixdzu3qzeuyd3ddcdb43xhwpb5zunn32gxjtcfa4rchcq5m",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 8
+    }
+  },
+  {
+    "app_id": "datasets-browser",
+    "controls_total": 1,
+    "controls_available": 1,
+    "mutating_controls": 0,
+    "libp2p_controls": [
+      "datasets-browser.ipfs_datasets_py.query_catalog"
+    ],
+    "representative": {
+      "binding_id": "datasets-browser.ipfs_datasets_py.query_catalog",
+      "owner": "ipfs_datasets_py",
+      "tool_id": "load_dataset",
+      "mutates_remote_state": false,
+      "confirmation_required": false,
+      "transports": [
+        "http",
+        "libp2p"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreicdijhtzmke2dfl6c5ejfjyct4jamhggsr7hdqarxq2gsvzbg3oia",
+      "event_ref": "bafkreihkxj2ogcssw4usxbkappl5fwfhkr4w5uwrrtrflff5xivofnlqoi",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreicccjmm5k4ybiklmxpyuzcxgz3yulgdyvfiryoo4io5tdlfs4u4uq",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MknVZS35hbu2drTCXTVjZJh3Etgo2cQxMmTURfgRe9BLQq",
+        "identity_proof_cid": "bafkreibvl53gx4wqz3q2o6olurhrtvahzsitoskybv5uikarvoci6qk2cu",
+        "correlation_id": "audit2:datasets-browser.ipfs_datasets_py.query_catalog:1791960052963:63"
+      },
+      "error": null,
+      "ms": 20
+    },
+    "libp2p_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "libp2p",
+      "receipt_id": "bafkreigjywatyg3uxjexpzozrmqpbsl7gvmblzvvbwdtayrjff2kwpqldq",
+      "event_ref": "bafkreihs3bgjps6nsjmiwmg7jdvedeoqpratvu6hm2ayjytmbd6eseuk4a",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "libp2p",
+        "descriptor_cid": "bafkreicccjmm5k4ybiklmxpyuzcxgz3yulgdyvfiryoo4io5tdlfs4u4uq",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MknVZS35hbu2drTCXTVjZJh3Etgo2cQxMmTURfgRe9BLQq",
+        "identity_proof_cid": "bafkreidnynjzxn3i5orc2rxa63i7plahcng6kth4stofrb4ncypizi3lue",
+        "correlation_id": "audit2:datasets-browser.ipfs_datasets_py.query_catalog:1791960052983:64"
+      },
+      "error": null,
+      "ms": 2014
+    },
+    "negative_probe": null,
+    "libp2p_control": "datasets-browser.ipfs_datasets_py.query_catalog"
+  },
+  {
+    "app_id": "accelerate-panel",
+    "controls_total": 1,
+    "controls_available": 1,
+    "mutating_controls": 1,
+    "libp2p_controls": [
+      "accelerate-panel.ipfs_accelerate_py.inspect_model_catalog"
+    ],
+    "representative": {
+      "binding_id": "accelerate-panel.ipfs_accelerate_py.inspect_model_catalog",
+      "owner": "ipfs_accelerate_py",
+      "tool_id": "get_task",
+      "mutates_remote_state": true,
+      "confirmation_required": true,
+      "transports": [
+        "http",
+        "libp2p"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreidmcpe6auh2ynqczdv6jnmmwd2h56s6v4ogb2wjru4qsyevm4nyoe",
+      "event_ref": "bafkreig2w5d4w3bu7427cbkaogm5hfgyiuzatiggmmd6p4efw6q2swczda",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreie6klnfqvbzzvinhpnxyldqvxy3hn3zzkqhh5rnf5cyvhdcfxfqna",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6Mkgk3a6K8kGA4Upn2L8Emf29UzYd8D8GwQkp221Th7Deat",
+        "identity_proof_cid": "bafkreif2wykj53zkdpui26urangxedynf3pimltmbakfyom37kkl66zvcu",
+        "correlation_id": "audit2:accelerate-panel.ipfs_accelerate_py.inspect_model_catalog:1791960054997:65"
+      },
+      "error": null,
+      "ms": 26
+    },
+    "libp2p_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "libp2p",
+      "receipt_id": "bafkreih4zksgmmb2f4w5juuupv6myd6hse7y266kzi3wqyfwtw5tjohblq",
+      "event_ref": "bafkreiakwhuym2ercfill3vqyflkswvdz2uc2bv4ngbwzz2los26yjgxg4",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "libp2p",
+        "descriptor_cid": "bafkreie6klnfqvbzzvinhpnxyldqvxy3hn3zzkqhh5rnf5cyvhdcfxfqna",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6Mkgk3a6K8kGA4Upn2L8Emf29UzYd8D8GwQkp221Th7Deat",
+        "identity_proof_cid": "bafkreig7sh7phipt4ab5pmrbtgqtinzxm5jezzjraognpc7jqb3inxx6ey",
+        "correlation_id": "audit2:accelerate-panel.ipfs_accelerate_py.inspect_model_catalog:1791960055023:66"
+      },
+      "error": null,
+      "ms": 1808
+    },
+    "negative_probe": {
+      "http_status": 200,
+      "outcome": "denied",
+      "ok": false,
+      "transport": "http",
+      "receipt_id": "bafkreif5nogbmkb2uykc72mtoj64oolcgbgeomzt25dbepnpvbsktcutg4",
+      "event_ref": "bafkreiemtxsde6o66iqrzbbjeej3bwjslslt5457z2j7xuasv4fazf2kuu",
+      "persistence": "persisted",
+      "observation": null,
+      "error": "confirmation_required",
+      "ms": 56
+    },
+    "libp2p_control": "accelerate-panel.ipfs_accelerate_py.inspect_model_catalog"
+  },
+  {
+    "app_id": "orb-auto-ui",
+    "controls_total": 3,
+    "controls_available": 3,
+    "mutating_controls": 0,
+    "libp2p_controls": [
+      "orb-auto-ui.ipfs_kit_py.inspect_tool_descriptor",
+      "orb-auto-ui.ipfs_datasets_py.inspect_tool_descriptor",
+      "orb-auto-ui.ipfs_accelerate_py.inspect_tool_descriptor"
+    ],
+    "representative": {
+      "binding_id": "orb-auto-ui.ipfs_kit_py.inspect_tool_descriptor",
+      "owner": "ipfs_kit_py",
+      "tool_id": "node_id",
+      "mutates_remote_state": false,
+      "confirmation_required": false,
+      "transports": [
+        "http",
+        "libp2p"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreiahccwsfye6we6unwccz7umfb6j6hipfm6pjyduffcd5fhck3ajaq",
+      "event_ref": "bafkreiadfw7kawdqjne6xg7272dwdp7p3ixacng55ukntrklp262lus3c4",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidpxzdi5lqj4jytj5orp54lwopx6hzkyhrabyyjea32jqzclxsjme",
+        "correlation_id": "audit2:orb-auto-ui.ipfs_kit_py.inspect_tool_descriptor:1791960056887:68"
+      },
+      "error": null,
+      "ms": 49
+    },
+    "libp2p_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "libp2p",
+      "receipt_id": "bafkreidsflw5rle5u7emnqwq6jp6j4ars2bmqsyvaxoynuv4bx4paychzy",
+      "event_ref": "bafkreic3en2im75f4diu5ujgrw7vnxjs7yv3njtzi5ifge4x5pdrfmiode",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "libp2p",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreibxjxbtjwygs7x7kkbl35b5syccxcnlmdh57krx7e5hwgpgveimde",
+        "correlation_id": "audit2:orb-auto-ui.ipfs_kit_py.inspect_tool_descriptor:1791960056936:69"
+      },
+      "error": null,
+      "ms": 1784
+    },
+    "negative_probe": null,
+    "libp2p_control": "orb-auto-ui.ipfs_kit_py.inspect_tool_descriptor"
+  },
+  {
+    "app_id": "mcp-plus-plus",
+    "controls_total": 3,
+    "controls_available": 3,
+    "mutating_controls": 0,
+    "libp2p_controls": [
+      "mcp-plus-plus.ipfs_kit_py.inspect_tool_registry",
+      "mcp-plus-plus.ipfs_datasets_py.inspect_tool_registry",
+      "mcp-plus-plus.ipfs_accelerate_py.inspect_tool_registry"
+    ],
+    "representative": {
+      "binding_id": "mcp-plus-plus.ipfs_kit_py.inspect_tool_registry",
+      "owner": "ipfs_kit_py",
+      "tool_id": "node_id",
+      "mutates_remote_state": false,
+      "confirmation_required": false,
+      "transports": [
+        "http",
+        "libp2p"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreiags7iwu3dw4bnuu47g6orbpganv6k5avwkatlmuw4rnt3akytyua",
+      "event_ref": "bafkreidjgzrhsjc7eyptvt3ib34yunwjg2ketzwuh3bb32ddxcsb57hta4",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreidpxzdi5lqj4jytj5orp54lwopx6hzkyhrabyyjea32jqzclxsjme",
+        "correlation_id": "audit2:mcp-plus-plus.ipfs_kit_py.inspect_tool_registry:1791960058720:70"
+      },
+      "error": null,
+      "ms": 12
+    },
+    "libp2p_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "libp2p",
+      "receipt_id": "bafkreialv2thjub44pjdxegji3uqnuuco5evkwrptlocexlkcxu5f4bzpu",
+      "event_ref": "bafkreiaaqy5hq6z27lkb6tq4jw6qckb6g53xjpnn5bbyj5rfzrjltkqnpe",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "libp2p",
+        "descriptor_cid": "bafkreibairjvpmy7mpkosatdi3nm7ldry4dz7l7ptvhivfo6ckbjuwxwdy",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MkqT4K2geqL9NJyMHYNeBsCS7SjUT97vEKWBnSj6yVCuPm",
+        "identity_proof_cid": "bafkreiey3neamxt3op2jpwwbkfgixwqgz2bu4rel6urgppf4ell2tk5kma",
+        "correlation_id": "audit2:mcp-plus-plus.ipfs_kit_py.inspect_tool_registry:1791960058732:71"
+      },
+      "error": null,
+      "ms": 1807
+    },
+    "negative_probe": null,
+    "libp2p_control": "mcp-plus-plus.ipfs_kit_py.inspect_tool_registry"
+  },
+  {
+    "app_id": "agent-supervisor",
+    "controls_total": 3,
+    "controls_available": 3,
+    "mutating_controls": 2,
+    "libp2p_controls": [
+      "agent-supervisor.ipfs_accelerate_py.supervise_agent_work",
+      "agent-supervisor.ipfs_datasets_py.query_catalog",
+      "agent-supervisor.ipfs_kit_py.retrieve_content"
+    ],
+    "representative": {
+      "binding_id": "agent-supervisor.ipfs_datasets_py.query_catalog",
+      "owner": "ipfs_datasets_py",
+      "tool_id": "load_dataset",
+      "mutates_remote_state": false,
+      "confirmation_required": false,
+      "transports": [
+        "http",
+        "libp2p"
+      ]
+    },
+    "http_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "http",
+      "receipt_id": "bafkreigfoxohrqjmg5e7r7b76krs4kxgehndofozwd7slreua6zdpkjjzi",
+      "event_ref": "bafkreid5pg4irvrsq3iuzkvnx3ur4wlpwf5hqydh7xtugvpefmgqb45e7e",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "http",
+        "descriptor_cid": "bafkreicccjmm5k4ybiklmxpyuzcxgz3yulgdyvfiryoo4io5tdlfs4u4uq",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6MknVZS35hbu2drTCXTVjZJh3Etgo2cQxMmTURfgRe9BLQq",
+        "identity_proof_cid": "bafkreibvl53gx4wqz3q2o6olurhrtvahzsitoskybv5uikarvoci6qk2cu",
+        "correlation_id": "audit2:agent-supervisor.ipfs_datasets_py.query_catalog:1791960060539:72"
+      },
+      "error": null,
+      "ms": 19
+    },
+    "libp2p_call": {
+      "http_status": 200,
+      "outcome": "executed",
+      "ok": true,
+      "transport": "libp2p",
+      "receipt_id": "bafkreidzvn4u3oku62ouwixuzs6p6ucgbyqasadx6el2oapw3byi5hhgru",
+      "event_ref": "bafkreibflrbr56xdnxsa7udqufe2sqczohzvwkyyfoscelgv22zhqa2u64",
+      "persistence": "persisted",
+      "observation": {
+        "transport": "libp2p",
+        "descriptor_cid": "bafkreie6klnfqvbzzvinhpnxyldqvxy3hn3zzkqhh5rnf5cyvhdcfxfqna",
+        "ucan_did_verified": true,
+        "remote_did": "did:key:z6Mkgk3a6K8kGA4Upn2L8Emf29UzYd8D8GwQkp221Th7Deat",
+        "identity_proof_cid": "bafkreia24vqw6qr3lpj72r5ndadlxgtod5ceqxnolignxmy5mgbgmcdefi",
+        "correlation_id": "audit2:agent-supervisor.ipfs_accelerate_py.supervise_agent_work:1791960060558:73"
+      },
+      "error": null,
+      "ms": 1922
+    },
+    "negative_probe": null,
+    "libp2p_control": "agent-supervisor.ipfs_accelerate_py.supervise_agent_work"
+  }
+]

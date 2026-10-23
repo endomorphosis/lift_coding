@@ -1,0 +1,164 @@
+{
+  "comparisons": [
+    {
+      "candidate_observation_id": "handoff-t1-delivered-compact",
+      "comparison_id": "t1_delivered_compact",
+      "control_observation_id": "handoff-t1-delivered-native",
+      "interpretation": "Descriptive arithmetic for the reported delivered compact-input pair. Packet and runtime bindings remain unverified."
+    },
+    {
+      "candidate_observation_id": "handoff-t1-configured-candidate",
+      "comparison_id": "t1_configured_native_fallback",
+      "control_observation_id": "handoff-t1-configured-control",
+      "interpretation": "Configured-packet comparison with delivered native fallback; not an actual compression effect."
+    },
+    {
+      "candidate_observation_id": "handoff-t1-retrieval-candidate",
+      "comparison_id": "t1_retrieval_attempts",
+      "control_observation_id": "handoff-t1-retrieval-control",
+      "interpretation": "Failed control versus successful candidate; a token contrast does not estimate comparable successful-trajectory cost."
+    },
+    {
+      "candidate_observation_id": "handoff-t2-indexed",
+      "comparison_id": "t2_native_vs_indexed",
+      "control_observation_id": "handoff-t2-native",
+      "interpretation": "Retained native control is shared with other T2 comparisons; do not add it again in a project total."
+    },
+    {
+      "candidate_observation_id": "handoff-t2-no-index-fresh-success",
+      "comparison_id": "t2_native_vs_fresh_no_index",
+      "control_observation_id": "handoff-t2-native",
+      "interpretation": "Fresh successful no-index trial has unknown original identity; retained native control is reused, not re-executed."
+    },
+    {
+      "candidate_observation_id": "handoff-numerical-earlier-supervisor",
+      "comparison_id": "numerical_earlier_native_vs_supervisor",
+      "control_observation_id": "handoff-numerical-earlier-native",
+      "interpretation": "Failed native versus successful supervisor; no completed native trajectory cost or causal effect is established."
+    },
+    {
+      "candidate_observation_id": "handoff-numerical-later-no-index",
+      "comparison_id": "numerical_later_native_vs_no_index",
+      "control_observation_id": "handoff-numerical-later-native",
+      "interpretation": "Reported three-profile cohort; executed runtime and usage completeness remain unverified."
+    },
+    {
+      "candidate_observation_id": "handoff-numerical-later-indexed",
+      "comparison_id": "numerical_later_native_vs_indexed",
+      "control_observation_id": "handoff-numerical-later-native",
+      "interpretation": "Native control is shared with the other later numerical contrast; do not double charge."
+    },
+    {
+      "candidate_observation_id": "handoff-numerical-later-indexed",
+      "comparison_id": "numerical_later_no_index_vs_indexed",
+      "control_observation_id": "handoff-numerical-later-no-index",
+      "interpretation": "Same transcribed three-profile cohort; no learned-path efficacy claim follows from the arithmetic."
+    }
+  ],
+  "component_sum_expectations": [
+    {
+      "cached_input_tokens": 652032,
+      "input_tokens": 716351,
+      "observation_id": "handoff-t1-delivered-native",
+      "output_tokens": 4489,
+      "total_tokens": 720840
+    },
+    {
+      "cached_input_tokens": 390144,
+      "input_tokens": 441111,
+      "observation_id": "handoff-t1-delivered-compact",
+      "output_tokens": 4222,
+      "total_tokens": 445333
+    }
+  ],
+  "empirical_authenticity": "unverified",
+  "manuscript_aggregate_assertions": [
+    {
+      "assertion_id": "manuscript_abstract_four_constructed_tasks",
+      "candidate_tokens": 2430,
+      "control_tokens": 4865,
+      "empirical_authenticity": "unverified",
+      "limitations": [
+        "Separate manuscript aggregate; not an additional set of authenticated Terminal-Bench trials.",
+        "Task count, source bindings, per-task observations, and aggregate accounting remain independently unverified."
+      ],
+      "provenance": "manuscript_aggregate_transcription",
+      "reported_reduction_percent": "50.05",
+      "reported_task_count": 4,
+      "rounding_decimal_places": 2,
+      "source_binding_check": "not_checked_by_this_arithmetic_script",
+      "source_expected_sha256": "666d0da1c0242cba4b6113be1ea0e76cc6ada16fe276cc0f03347dda4ae261b8",
+      "source_reference": "source_reference/source_snapshot/fragments/abstract.tex"
+    }
+  ],
+  "origin": "newly_authored_reconstruction_not_the_missing_supplied_audit",
+  "prohibited_inferences": [
+    "No empirical authenticity, independent reexecution, new runtime admission, or claim closure.",
+    "No dollars, provider cache-exclusive charges, byte-to-token conversion, pooled percentages, confidence intervals, or causal attribution.",
+    "No addition of overlapping clock scopes, cumulative snapshots, reused controls, or potentially shared sessions.",
+    "Unknown usage completeness remains unknown even when reward or completion is reported."
+  ],
+  "required_observation_ids": [
+    "handoff-t1-delivered-native",
+    "handoff-t1-delivered-compact",
+    "handoff-t1-configured-control",
+    "handoff-t1-configured-candidate",
+    "handoff-t1-retrieval-control",
+    "handoff-t1-retrieval-candidate",
+    "handoff-t2-native",
+    "handoff-t2-indexed",
+    "handoff-t2-no-index-failure",
+    "handoff-t2-no-index-fresh-success",
+    "handoff-numerical-earlier-native",
+    "handoff-numerical-earlier-supervisor",
+    "handoff-numerical-later-native",
+    "handoff-numerical-later-no-index",
+    "handoff-numerical-later-indexed",
+    "handoff-grok-ordinal-1",
+    "handoff-grok-ordinal-2",
+    "handoff-grok-ordinal-3"
+  ],
+  "schema_version": "reconstructed-numerical-audit-spec/v1",
+  "scope": "Provider-free arithmetic and schema checks over user-handoff transcriptions, plus one separately labeled manuscript aggregate. This audit does not authenticate originating experiments.",
+  "transcribed_total_expectations": {
+    "handoff-grok-ordinal-1": 1310764,
+    "handoff-grok-ordinal-2": 1621661,
+    "handoff-grok-ordinal-3": 2452634,
+    "handoff-numerical-earlier-native": 161750,
+    "handoff-numerical-earlier-supervisor": 291432,
+    "handoff-numerical-later-indexed": 333973,
+    "handoff-numerical-later-native": 113883,
+    "handoff-numerical-later-no-index": 358492,
+    "handoff-t1-configured-candidate": 404456,
+    "handoff-t1-configured-control": 278471,
+    "handoff-t1-delivered-compact": 445333,
+    "handoff-t1-delivered-native": 720840,
+    "handoff-t1-retrieval-candidate": 548438,
+    "handoff-t1-retrieval-control": 508303,
+    "handoff-t2-indexed": 22749,
+    "handoff-t2-native": 228630,
+    "handoff-t2-no-index-failure": 194494,
+    "handoff-t2-no-index-fresh-success": 282802
+  },
+  "unreconciled_claims": [
+    {
+      "claim_id": "t1_historical_known_subtotal",
+      "reason": "Actual historical session bindings and all final cumulative counters have not been recovered. This is not a complete project total.",
+      "reported_tokens": 2523452,
+      "status": "unreconciled_not_compared_to_a_fabricated_sum"
+    },
+    {
+      "claim_id": "t1_historical_invoked_inventory",
+      "reason": "Six T1 transcribed observations here are not a reconstructed nine-record invocation ledger and may not have the same scope.",
+      "registered_uninvoked_count": null,
+      "reported_failed_or_missing_usage_records": 3,
+      "reported_invoked_records": 9,
+      "status": "not_recovered"
+    },
+    {
+      "claim_id": "all_session_deduplication",
+      "reason": "Actual session identifiers and final counter observations are missing; no project total is calculated.",
+      "status": "unavailable"
+    }
+  ]
+}

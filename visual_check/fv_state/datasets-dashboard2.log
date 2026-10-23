@@ -1,0 +1,44 @@
+Could not register patent dashboard routes: No module named 'ipfs_datasets_py.patent_dashboard'
+ * Serving Flask app 'ipfs_datasets_py.dashboards.admin_dashboard'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:8899
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Oct/2026 06:31:53] "GET / HTTP/1.1" 200 -
+2026-10-14 06:36:59,354 [INFO] ipfs_datasets_py.mcp_server.mcplusplus: MCP++ module not available: No module named 'ipfs_accelerate_py.mcplusplus_module'
+127.0.0.1 - - [14/Oct/2026 06:37:00] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+2026-10-14 06:37:00,792 [INFO] werkzeug: 127.0.0.1 - - [14/Oct/2026 06:37:00] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+127.0.0.1 - - [14/Oct/2026 06:37:31] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+2026-10-14 06:37:31,814 [INFO] werkzeug: 127.0.0.1 - - [14/Oct/2026 06:37:31] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+127.0.0.1 - - [14/Oct/2026 06:37:41] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+2026-10-14 06:37:41,126 [INFO] werkzeug: 127.0.0.1 - - [14/Oct/2026 06:37:41] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+127.0.0.1 - - [14/Oct/2026 06:37:45] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+2026-10-14 06:37:45,554 [INFO] werkzeug: 127.0.0.1 - - [14/Oct/2026 06:37:45] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+127.0.0.1 - - [14/Oct/2026 06:37:53] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+2026-10-14 06:37:53,498 [INFO] werkzeug: 127.0.0.1 - - [14/Oct/2026 06:37:53] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+127.0.0.1 - - [14/Oct/2026 06:37:55] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+2026-10-14 06:37:55,634 [INFO] werkzeug: 127.0.0.1 - - [14/Oct/2026 06:37:55] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+127.0.0.1 - - [14/Oct/2026 06:38:18] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+2026-10-14 06:38:18,804 [INFO] werkzeug: 127.0.0.1 - - [14/Oct/2026 06:38:18] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+127.0.0.1 - - [14/Oct/2026 06:38:37] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+2026-10-14 06:38:37,726 [INFO] werkzeug: 127.0.0.1 - - [14/Oct/2026 06:38:37] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+127.0.0.1 - - [14/Oct/2026 06:40:40] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+2026-10-14 06:40:40,616 [INFO] werkzeug: 127.0.0.1 - - [14/Oct/2026 06:40:40] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+127.0.0.1 - - [14/Oct/2026 06:40:40] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+2026-10-14 06:40:40,848 [INFO] werkzeug: 127.0.0.1 - - [14/Oct/2026 06:40:40] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+127.0.0.1 - - [14/Oct/2026 06:40:43] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+2026-10-14 06:40:43,866 [INFO] werkzeug: 127.0.0.1 - - [14/Oct/2026 06:40:43] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+127.0.0.1 - - [14/Oct/2026 06:40:45] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+2026-10-14 06:40:45,906 [INFO] werkzeug: 127.0.0.1 - - [14/Oct/2026 06:40:45] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+127.0.0.1 - - [14/Oct/2026 06:40:50] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+2026-10-14 06:40:50,403 [INFO] werkzeug: 127.0.0.1 - - [14/Oct/2026 06:40:50] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+127.0.0.1 - - [14/Oct/2026 06:40:51] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+2026-10-14 06:40:51,797 [INFO] werkzeug: 127.0.0.1 - - [14/Oct/2026 06:40:51] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+127.0.0.1 - - [14/Oct/2026 06:40:52] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+2026-10-14 06:40:52,416 [INFO] werkzeug: 127.0.0.1 - - [14/Oct/2026 06:40:52] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+127.0.0.1 - - [14/Oct/2026 06:40:52] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+2026-10-14 06:40:52,969 [INFO] werkzeug: 127.0.0.1 - - [14/Oct/2026 06:40:52] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+127.0.0.1 - - [14/Oct/2026 06:40:54] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+2026-10-14 06:40:54,540 [INFO] werkzeug: 127.0.0.1 - - [14/Oct/2026 06:40:54] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+127.0.0.1 - - [14/Oct/2026 06:41:00] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -
+2026-10-14 06:41:00,546 [INFO] werkzeug: 127.0.0.1 - - [14/Oct/2026 06:41:00] "POST /api/mcp/tools/dataset_tools/load_dataset/execute HTTP/1.1" 200 -

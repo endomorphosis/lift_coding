@@ -1,0 +1,179 @@
+{
+  "accelerator_execution_head": "e21d6e7b41f14f3994b0fd8556bfcd341d9e888c",
+  "accelerator_publication": "bbcc1350141120b454a9d5e7648b48cf315047c9",
+  "actual_inert_child_probes": true,
+  "additional_provider_model_training_solver_docker_calls": 0,
+  "all_prior_parent_index_objects_preserved_except_accelerator": true,
+  "authored_listener_and_deployment_metadata_seams": true,
+  "baseline_control": {
+    "bytes": 219034,
+    "diagnostic": "broker construction replay must release SERVER",
+    "elapsed_seconds": 24.167,
+    "expected_failures": 1,
+    "path": "docs/agent_supervisor/evidence/source-worker-construction-20261014/baseline-01/commands.json",
+    "promoted_to_pass": false,
+    "sha256": "ece8d1dfd7d56a6cc808b1874397f376a300177dece43d58a5a00344f5c8f888",
+    "status": "expected_regression"
+  },
+  "baseline_control_counted_as_pass": false,
+  "checked_at_utc": "2026-10-14T18:43:52.075184+00:00",
+  "child_manifest": {
+    "bytes": 11551,
+    "path": "docs/agent_supervisor/evidence/source-worker-construction-20261014/manifest.json",
+    "sha256": "61098784f769dbb00fc62f60302023139f22691b09404563933dd8340542785b"
+  },
+  "complete_import_closure_attested": false,
+  "completion_authority": false,
+  "datasets_execution_revision": "4b50ae4aac65da9166bd3b24608f32ba7e9fb23d",
+  "documentation_link_counts": {
+    "anchors": 16,
+    "manual_links": [
+      {
+        "anchors": 2,
+        "errors": [],
+        "path": "docs/agent_supervisor/evidence/source-worker-construction-20261014/README.md",
+        "relative_links": 14
+      },
+      {
+        "anchors": 2,
+        "errors": [],
+        "path": "docs/agent_supervisor/source_lookup_worker.md",
+        "relative_links": 13
+      },
+      {
+        "anchors": 12,
+        "errors": [],
+        "path": "docs/agent_supervisor/reversible_codebase_views_plan.md",
+        "relative_links": 84
+      }
+    ],
+    "relative_links": 111
+  },
+  "documentation_sha256": "8ad04d51e9ff8c756b517880f388834822a78d7585b379a1dd8e45ea04b09874",
+  "execution_authority": false,
+  "four_local_documentation_blocks_passed": true,
+  "git_refs_and_index_mutated": false,
+  "git_state_after": {
+    "/home/barberb/lift_coding/.worktrees/repository-proof-context-kit-20261014": {
+      "head": "40c98c71b95be750509ffdb21e7e5494d91b4e79",
+      "index_sha256": "755c0d46d5ff81281d61fe417cc692e662f9e68bee5403ae5b4470ba854b6233",
+      "refs_sha256": "18f9d26f43abe1a986f904a0a6e91c7e6b65ad20849646b4d4177a78c1b01672"
+    },
+    "/home/barberb/lift_coding/.worktrees/router-source-delivery-fences-datasets-20261014": {
+      "head": "4b50ae4aac65da9166bd3b24608f32ba7e9fb23d",
+      "index_sha256": "7b7862bf3e26280f78aa1e75619b00abb7a8e4f9894a57dc27555d4c80f29cd7",
+      "refs_sha256": "25e045550eab6cc1ace6e09e654ce80cf200fc6a94bc32e31d3f4654e67ad601"
+    },
+    "/home/barberb/lift_coding/.worktrees/source-worker-construction-20261014": {
+      "head": "bbcc1350141120b454a9d5e7648b48cf315047c9",
+      "index_sha256": "524978d6de1d4a0b83be6facd1c904d04f32e0a06e78e1d92cc8624434ce4955",
+      "refs_sha256": "6ec32a23b39b0631c48fc18a9dd3426c5a410bfdd742266415ecfca75b67ade0"
+    },
+    "/home/barberb/lift_coding/.worktrees/source-worker-construction-root-20261014": {
+      "head": "53c06431d0ca7e57fdf74a67e21c6b61530f5042",
+      "index_sha256": "07ce9681c1c2f842ac9f0d3349812600d447402f72710c40782e21b749d0c183",
+      "refs_sha256": "f8e55951db321dc2d9d77ae16b9de8049c187602c24ab4c319115381814d2910"
+    }
+  },
+  "git_state_before": {
+    "/home/barberb/lift_coding/.worktrees/repository-proof-context-kit-20261014": {
+      "head": "40c98c71b95be750509ffdb21e7e5494d91b4e79",
+      "index_sha256": "755c0d46d5ff81281d61fe417cc692e662f9e68bee5403ae5b4470ba854b6233",
+      "refs_sha256": "18f9d26f43abe1a986f904a0a6e91c7e6b65ad20849646b4d4177a78c1b01672"
+    },
+    "/home/barberb/lift_coding/.worktrees/router-source-delivery-fences-datasets-20261014": {
+      "head": "4b50ae4aac65da9166bd3b24608f32ba7e9fb23d",
+      "index_sha256": "7b7862bf3e26280f78aa1e75619b00abb7a8e4f9894a57dc27555d4c80f29cd7",
+      "refs_sha256": "25e045550eab6cc1ace6e09e654ce80cf200fc6a94bc32e31d3f4654e67ad601"
+    },
+    "/home/barberb/lift_coding/.worktrees/source-worker-construction-20261014": {
+      "head": "bbcc1350141120b454a9d5e7648b48cf315047c9",
+      "index_sha256": "524978d6de1d4a0b83be6facd1c904d04f32e0a06e78e1d92cc8624434ce4955",
+      "refs_sha256": "6ec32a23b39b0631c48fc18a9dd3426c5a410bfdd742266415ecfca75b67ade0"
+    },
+    "/home/barberb/lift_coding/.worktrees/source-worker-construction-root-20261014": {
+      "head": "53c06431d0ca7e57fdf74a67e21c6b61530f5042",
+      "index_sha256": "07ce9681c1c2f842ac9f0d3349812600d447402f72710c40782e21b749d0c183",
+      "refs_sha256": "f8e55951db321dc2d9d77ae16b9de8049c187602c24ab4c319115381814d2910"
+    }
+  },
+  "historical_codec_and_edit_mapper_unchanged": true,
+  "hosted_ci_qualified_here": false,
+  "incoming_parent_accelerator_pin": "e21d6e7b41f14f3994b0fd8556bfcd341d9e888c",
+  "initial_parent_base_preserved_as_ancestor": true,
+  "initial_parent_research_base": "53c06431d0ca7e57fdf74a67e21c6b61530f5042",
+  "kit_execution_revision": "40c98c71b95be750509ffdb21e7e5494d91b4e79",
+  "observed_child_origin_main": "bbcc1350141120b454a9d5e7648b48cf315047c9",
+  "optional_raw_child_ci_binding": {
+    "bytes": 23658,
+    "path": "artifacts/source-worker-construction-publication-20261014/child-ci-observation.json",
+    "sha256": "9341f9bcb3bb67bc4e9cdf7e8a2fb260d61ff5244ab3fe3c586a0090a6b4d236"
+  },
+  "original_qualification_counts_added": false,
+  "output_self_excluded": true,
+  "parent_base": "53c06431d0ca7e57fdf74a67e21c6b61530f5042",
+  "parent_inputs": [
+    {
+      "bytes": 7328,
+      "path": "implementation_plan/docs/129-supervisor-source-worker-construction-2026-10-14.md",
+      "sha256": "6ead9c5bc50d324ba97edd4c649024ab8b66bc3a2ac17fbcbaee836bf5455b29"
+    },
+    {
+      "bytes": 23658,
+      "path": "artifacts/source-worker-construction-publication-20261014/child-ci-observation.json",
+      "sha256": "9341f9bcb3bb67bc4e9cdf7e8a2fb260d61ff5244ab3fe3c586a0090a6b4d236"
+    },
+    {
+      "bytes": 5193,
+      "path": "artifacts/source-worker-construction-publication-20261014/observe_hosted_ci.py",
+      "sha256": "dca05ad36705548c9c31bf053a418514696b372a7487077f4e957da97bb52c44"
+    },
+    {
+      "bytes": 34283,
+      "path": "artifacts/source-worker-construction-publication-20261014/publication_checker.py",
+      "sha256": "d28d1b53aa56736119fc968ea2ea6bd05a9b24294a6fa0f4afe899979778c952"
+    }
+  ],
+  "preserved_parent_gitlinks": {
+    "external/ipfs_accelerate": "bbcc1350141120b454a9d5e7648b48cf315047c9",
+    "external/ipfs_datasets": "4b50ae4aac65da9166bd3b24608f32ba7e9fb23d",
+    "external/ipfs_kit": "40c98c71b95be750509ffdb21e7e5494d91b4e79"
+  },
+  "prior_child_evidence_objects_preserved": 9225,
+  "production_coding_child_adoption": false,
+  "proof_authority": false,
+  "qualification_sha256": "8eccfb51778e99018bc2080d37a391ce9ccbcd8787148370779274319a819f05",
+  "qualification_shared_ref_changes": [
+    {
+      "actor_attributed": false,
+      "after": "15eb902935003ee0f4f2b1669d59007e4ed68c88e750791192b3d318036491f2",
+      "before": "db45230d4fbeb41b2520dda606e5ffcb55a14cca5cab5af1ce331bcc7144a5d3",
+      "path": "/home/barberb/lift_coding/.worktrees/source-worker-construction-20261014"
+    },
+    {
+      "actor_attributed": false,
+      "after": "25e045550eab6cc1ace6e09e654ce80cf200fc6a94bc32e31d3f4654e67ad601",
+      "before": "da6e7a76bccd66275bc387b899fdb7735b2fa9fec348333b95cf91266fed3939",
+      "path": "/home/barberb/lift_coding/.worktrees/router-source-delivery-fences-datasets-20261014"
+    },
+    {
+      "actor_attributed": false,
+      "after": "18f9d26f43abe1a986f904a0a6e91c7e6b65ad20849646b4d4177a78c1b01672",
+      "before": "1dad841d10e28b42fd738f9d131f70ab29a570eb9fd78d5c5827fc76f2630980",
+      "path": "/home/barberb/lift_coding/.worktrees/repository-proof-context-kit-20261014"
+    }
+  ],
+  "retained_new_cases": 28,
+  "retained_source_bindings": 275,
+  "retained_suites": 9,
+  "retained_tests": 194,
+  "schema": "source-worker-construction-parent-publication@1",
+  "selected_documentation": "documentation-checks.json",
+  "selected_qualification": "qualification-02",
+  "shared_ref_actor_attributed": false,
+  "status": "pass",
+  "tests_or_workflow_rerun": false,
+  "total_session_token_savings_established": false,
+  "universal_cas_callback_safety": false,
+  "worker_uid_qualified": false
+}

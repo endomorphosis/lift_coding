@@ -1,0 +1,38 @@
+{
+  "actual_cleanup": 0,
+  "broader_logic_family_or_Lake_build_qualified": false,
+  "capacity_observation": {
+    "bytes": 18697,
+    "path": "/home/barberb/lift_coding/artifacts/legal-storage-continuation-20261014-01/capacity-observation-v01.json",
+    "sha256": "b9bb9d5fc0fda7610fdc6524543ee4210c278037b48e6dfbd1079c151894cd36"
+  },
+  "claim_mutations": 0,
+  "conditional_reclaim_bytes": 419024050,
+  "freezer_status": "draft_source_only_independently_reviewed_and_detached_controls_passed; actualrunner_plan_terminal_bindings_missing",
+  "future_training_recipe_changed": false,
+  "guaranteed_reclaimable_bytes": 0,
+  "independent_US_Code_fidelity_qualified": false,
+  "new_accuracy_result": null,
+  "new_model_calls": 0,
+  "new_optimizer_updates": 0,
+  "new_weights": false,
+  "observed_at_utc": "2026-10-14T06:00:13.194101+00:00",
+  "ownership_summary": {
+    "bytes": 3209,
+    "path": "/home/barberb/lift_coding/artifacts/legal-storage-continuation-20261014-01/storage-proposal-compact-summary-v01.json",
+    "sha256": "57e0d76981eadfbe3044fde7fc559f68564f02373bed2f42080bb32b1bb287aa"
+  },
+  "prior_ownership_summary_gap_is_historical": true,
+  "protected_live_N10_N11_bytes": 126166279,
+  "qualified_for_training": false,
+  "question_pending": "Need owner-approved cleanup/retention manifest or responsible agent for sharedpytest or largehistoricalcaptures.",
+  "real_8D_384D_768D_latent_decoding_qualified": false,
+  "real_checkpoint_codec_savings_qualified": false,
+  "remaining_gap_even_if_all_conditional_files_retired_bytes": 9607461720,
+  "root_gitlink_changes": 0,
+  "schema": "storage-continuation-current-disposition/v1",
+  "shortfall_bytes": 10026485770,
+  "source_module_changes": 0,
+  "status": "capacity_refused_owner_information_pending",
+  "verified_archived_original_result_bytes": 545190329
+}
