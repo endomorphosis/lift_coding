@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "taskId": "VDG-001",
+  "authority": "config/virtual_desktop_gui_mcp_supervisor.json",
+  "canonicalLaneIds": [
+    "vdg-ops",
+    "vdg-planning",
+    "vdg-inventory",
+    "vdg-census",
+    "vdg-join",
+    "vdg-harness",
+    "vdg-watchdog",
+    "vdg-storage",
+    "vdg-datasets",
+    "vdg-accelerate",
+    "vdg-network",
+    "vdg-control",
+    "vdg-local",
+    "vdg-gate"
+  ],
+  "parallelReadyRule": "Tasks with the same Depends-on closure may run together only when their Predicted files are disjoint.",
+  "lanes": [
+    {"id": "vdg-ops", "board": "implementation_plan/docs/50-virtual-desktop-gui-mcp.todo.md", "taskPrefix": "## VDG-", "owns": "operator submodule sync receipt"},
+    {"id": "vdg-planning", "board": "implementation_plan/docs/50-virtual-desktop-gui-mcp.todo.md", "taskPrefix": "## VDG-", "owns": "objectives and todo only"},
+    {"id": "vdg-inventory", "board": "implementation_plan/docs/50-virtual-desktop-gui-mcp.todo.md", "taskPrefix": "## VDG-", "owns": "gap ledger"},
+    {"id": "vdg-census", "board": "implementation_plan/docs/50-virtual-desktop-gui-mcp.todo.md", "taskPrefix": "## VDG-", "owns": "control census spec"},
+    {"id": "vdg-join", "board": "implementation_plan/docs/50-virtual-desktop-gui-mcp.todo.md", "taskPrefix": "## VDG-", "owns": "control-tool matrix"},
+    {"id": "vdg-harness", "board": "implementation_plan/docs/50-virtual-desktop-gui-mcp.todo.md", "taskPrefix": "## VDG-", "owns": "shared invocation harness"},
+    {"id": "vdg-watchdog", "board": "implementation_plan/docs/50-virtual-desktop-gui-mcp.todo.md", "taskPrefix": "## VDG-", "owns": "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/rescue"},
+    {"id": "vdg-storage", "board": "implementation_plan/docs/50-virtual-desktop-gui-mcp.todo.md", "taskPrefix": "## VDG-", "owns": "storage and media apps"},
+    {"id": "vdg-datasets", "board": "implementation_plan/docs/50-virtual-desktop-gui-mcp.todo.md", "taskPrefix": "## VDG-", "owns": "datasets apps"},
+    {"id": "vdg-accelerate", "board": "implementation_plan/docs/50-virtual-desktop-gui-mcp.todo.md", "taskPrefix": "## VDG-", "owns": "accelerate apps"},
+    {"id": "vdg-network", "board": "implementation_plan/docs/50-virtual-desktop-gui-mcp.todo.md", "taskPrefix": "## VDG-", "owns": "network apps"},
+    {"id": "vdg-control", "board": "implementation_plan/docs/50-virtual-desktop-gui-mcp.todo.md", "taskPrefix": "## VDG-", "owns": "control-plane apps"},
+    {"id": "vdg-local", "board": "implementation_plan/docs/50-virtual-desktop-gui-mcp.todo.md", "taskPrefix": "## VDG-", "owns": "local-only negative apps"},
+    {"id": "vdg-gate", "board": "implementation_plan/docs/50-virtual-desktop-gui-mcp.todo.md", "taskPrefix": "## VDG-", "owns": "coverage aggregate"}
+  ]
+}

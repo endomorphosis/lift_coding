@@ -1,0 +1,60 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.virtual_desktop_gui_mcp.watchdog@1",
+  "master_pid_path": "data/agent_supervisor/virtual_desktop_gui_mcp/watchdog/master.pid",
+  "report_path": "data/agent_supervisor/virtual_desktop_gui_mcp/watchdog/watchdog-report.json",
+  "unstall_repair_dir": "data/agent_supervisor/virtual_desktop_gui_mcp/unstall-repair",
+  "todo_path": "implementation_plan/docs/50-virtual-desktop-gui-mcp.todo.md",
+  "task_header_prefix": "## VDG-",
+  "allow_bounded_task_implement": true,
+  "autonomous_unstall_policy": {
+    "enabled": true,
+    "rescue_preview_enabled": false,
+    "rescue_execution_enabled": false,
+    "allow_provider_calls": false,
+    "max_incidents": 128,
+    "max_provider_calls": 1,
+    "max_rescue_executions": 1,
+    "circuit_breaker_failures": 2,
+    "deterministic_max_attempts_per_action": 2,
+    "deterministic_max_total_attempts": 8,
+    "deterministic_max_actions": 8,
+    "cooldown_ms": 30000,
+    "deadline_ms": 120000
+  },
+  "lanes": [
+    {
+      "bundle_key": "vdg-planning",
+      "max_resume_seconds": 50400,
+      "state_dir": "data/agent_supervisor/virtual_desktop_gui_mcp/watchdog/lanes/vdg-planning",
+      "state_prefix": "vdg_planning",
+      "log_path": "data/agent_supervisor/virtual_desktop_gui_mcp/watchdog/lanes/vdg-planning/supervisor.log",
+      "storage_paths": [
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/vdg/live-clicks",
+        "swissknife/test-results/virtual-desktop-ipfs-mcp-orb/vdg",
+        "data/agent_supervisor/virtual_desktop_gui_mcp/watchdog/backends"
+      ],
+      "pre_command_recovery": {
+        "schema": "ipfs_accelerate_py.agent_supervisor.vdg_pre_command_recovery.v1",
+        "task_id": "VDG-039-R01",
+        "producer_argv": [
+          "node",
+          "swissknife/scripts/run-with-vdg-openrouter-catalog-input.mjs",
+          "--",
+          "node",
+          "swissknife/scripts/run-vdg-all-families.mjs",
+          "--timeout-seconds",
+          "22200"
+        ],
+        "script": "swissknife/scripts/recover-vdg-capture-deadline.cjs",
+        "script_sha256": "57a4fab03128ed94449c35e0065583f3bd4870abad921477c4506a3a40864ff6",
+        "module_sha256": "f65e59265af707ff5f65b81be04e55e8aa96dbbe4efa9dd1a4e7ae9a19196570",
+        "transports": [
+          "http",
+          "libp2p"
+        ],
+        "timeout_seconds": 300,
+        "require_uninterrupted_after_producer": true
+      }
+    }
+  ]
+}

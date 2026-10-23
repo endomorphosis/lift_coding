@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "taskId": "VOG-001",
+  "authority": "config/virtual_desktop_orb_idl_gui_supervisor.json",
+  "canonicalLaneIds": [
+    "vog-planning",
+    "vog-inventory",
+    "vog-census",
+    "vog-join",
+    "vog-listeners",
+    "vog-routes",
+    "vog-harness",
+    "vog-pilot",
+    "vog-storage",
+    "vog-datasets",
+    "vog-accelerate",
+    "vog-network",
+    "vog-control",
+    "vog-local",
+    "vog-gate",
+    "vog-watchdog"
+  ],
+  "parallelReadyRule": "Tasks with the same Depends-on closure may run together only when their Predicted files are disjoint. Browser run tasks are chained so only one live-click target owns the desktop at a time. The rescue watchdog runs one lane, vog-planning, and executes one ready task per cycle.",
+  "lanes": [
+    {"id": "vog-planning", "board": "implementation_plan/docs/52-virtual-desktop-orb-idl-gui.todo.md", "taskPrefix": "## VOG-", "owns": "objectives, todo, and closeout"},
+    {"id": "vog-inventory", "board": "implementation_plan/docs/52-virtual-desktop-orb-idl-gui.todo.md", "taskPrefix": "## VOG-", "owns": "gap ledger"},
+    {"id": "vog-census", "board": "implementation_plan/docs/52-virtual-desktop-orb-idl-gui.todo.md", "taskPrefix": "## VOG-", "owns": "rendered control census"},
+    {"id": "vog-join", "board": "implementation_plan/docs/52-virtual-desktop-orb-idl-gui.todo.md", "taskPrefix": "## VOG-", "owns": "ORB/IDL matrix"},
+    {"id": "vog-listeners", "board": "implementation_plan/docs/52-virtual-desktop-orb-idl-gui.todo.md", "taskPrefix": "## VOG-", "owns": "swissknife/web/js/main-simple.js"},
+    {"id": "vog-routes", "board": "implementation_plan/docs/52-virtual-desktop-orb-idl-gui.todo.md", "taskPrefix": "## VOG-", "owns": "swissknife/web/js/apps/real-artifact.js"},
+    {"id": "vog-harness", "board": "implementation_plan/docs/52-virtual-desktop-orb-idl-gui.todo.md", "taskPrefix": "## VOG-", "owns": "live-click-session.ts"},
+    {"id": "vog-pilot", "board": "implementation_plan/docs/52-virtual-desktop-orb-idl-gui.todo.md", "taskPrefix": "## VOG-", "owns": "image-viewer.js and the pilot report"},
+    {"id": "vog-storage", "board": "implementation_plan/docs/52-virtual-desktop-orb-idl-gui.todo.md", "taskPrefix": "## VOG-", "owns": "ipfs-explorer.js, media-player.js, peertube.js"},
+    {"id": "vog-datasets", "board": "implementation_plan/docs/52-virtual-desktop-orb-idl-gui.todo.md", "taskPrefix": "## VOG-", "owns": "notes.js, vibecode.js"},
+    {"id": "vog-accelerate", "board": "implementation_plan/docs/52-virtual-desktop-orb-idl-gui.todo.md", "taskPrefix": "## VOG-", "owns": "neural-network-designer.js"},
+    {"id": "vog-network", "board": "implementation_plan/docs/52-virtual-desktop-orb-idl-gui.todo.md", "taskPrefix": "## VOG-", "owns": "friends-list.js, p2p-chat.js, p2p-chat-unified.js"},
+    {"id": "vog-control", "board": "implementation_plan/docs/52-virtual-desktop-orb-idl-gui.todo.md", "taskPrefix": "## VOG-", "owns": "mcp-plus-plus-explorer.js"},
+    {"id": "vog-local", "board": "implementation_plan/docs/52-virtual-desktop-orb-idl-gui.todo.md", "taskPrefix": "## VOG-", "owns": "calendar.js, clock.js"},
+    {"id": "vog-gate", "board": "implementation_plan/docs/52-virtual-desktop-orb-idl-gui.todo.md", "taskPrefix": "## VOG-", "owns": "vog/orb-idl-gui-coverage.json"},
+    {"id": "vog-watchdog", "board": "implementation_plan/docs/52-virtual-desktop-orb-idl-gui.todo.md", "taskPrefix": "## VOG-", "owns": "lane_resume.py and the watchdog test"}
+  ]
+}

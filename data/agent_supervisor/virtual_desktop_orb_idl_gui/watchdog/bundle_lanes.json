@@ -1,0 +1,32 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.virtual_desktop_orb_idl_gui.watchdog@1",
+  "master_pid_path": "data/agent_supervisor/virtual_desktop_orb_idl_gui/watchdog/master.pid",
+  "report_path": "data/agent_supervisor/virtual_desktop_orb_idl_gui/watchdog/watchdog-report.json",
+  "unstall_repair_dir": "data/agent_supervisor/virtual_desktop_orb_idl_gui/unstall-repair",
+  "todo_path": "implementation_plan/docs/52-virtual-desktop-orb-idl-gui.todo.md",
+  "task_header_prefix": "## VOG-",
+  "allow_bounded_task_implement": true,
+  "autonomous_unstall_policy": {
+    "enabled": true,
+    "rescue_preview_enabled": false,
+    "rescue_execution_enabled": false,
+    "allow_provider_calls": false,
+    "max_incidents": 128,
+    "max_provider_calls": 1,
+    "max_rescue_executions": 1,
+    "circuit_breaker_failures": 2,
+    "deterministic_max_attempts_per_action": 2,
+    "deterministic_max_total_attempts": 8,
+    "deterministic_max_actions": 8,
+    "cooldown_ms": 30000,
+    "deadline_ms": 120000
+  },
+  "lanes": [
+    {
+      "bundle_key": "vog-planning",
+      "state_dir": "data/agent_supervisor/virtual_desktop_orb_idl_gui/watchdog/lanes/vog-planning",
+      "state_prefix": "vog_planning",
+      "log_path": "data/agent_supervisor/virtual_desktop_orb_idl_gui/watchdog/lanes/vog-planning/supervisor.log"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "taskId": "VDL-001",
+  "authority": "config/virtual_desktop_live_click_supervisor.json",
+  "canonicalLaneIds": [
+    "vdl-planning",
+    "vdl-harness",
+    "vdl-pilot",
+    "vdl-storage",
+    "vdl-datasets",
+    "vdl-accelerate",
+    "vdl-network",
+    "vdl-control",
+    "vdl-local",
+    "vdl-gate"
+  ],
+  "parallelReadyRule": "Tasks with the same Depends-on closure may run together only when their Predicted files are disjoint.",
+  "lanes": [
+    {"id": "vdl-planning", "board": "implementation_plan/docs/51-virtual-desktop-live-click.todo.md", "taskPrefix": "## VDL-", "owns": "objectives and todo only"},
+    {"id": "vdl-harness", "board": "implementation_plan/docs/51-virtual-desktop-live-click.todo.md", "taskPrefix": "## VDL-", "owns": "live click session and playwright config"},
+    {"id": "vdl-pilot", "board": "implementation_plan/docs/51-virtual-desktop-live-click.todo.md", "taskPrefix": "## VDL-", "owns": "image-viewer pilot report"},
+    {"id": "vdl-storage", "board": "implementation_plan/docs/51-virtual-desktop-live-click.todo.md", "taskPrefix": "## VDL-", "owns": "storage and media click report"},
+    {"id": "vdl-datasets", "board": "implementation_plan/docs/51-virtual-desktop-live-click.todo.md", "taskPrefix": "## VDL-", "owns": "datasets click report"},
+    {"id": "vdl-accelerate", "board": "implementation_plan/docs/51-virtual-desktop-live-click.todo.md", "taskPrefix": "## VDL-", "owns": "accelerate click report"},
+    {"id": "vdl-network", "board": "implementation_plan/docs/51-virtual-desktop-live-click.todo.md", "taskPrefix": "## VDL-", "owns": "network click report"},
+    {"id": "vdl-control", "board": "implementation_plan/docs/51-virtual-desktop-live-click.todo.md", "taskPrefix": "## VDL-", "owns": "control-plane click report"},
+    {"id": "vdl-local", "board": "implementation_plan/docs/51-virtual-desktop-live-click.todo.md", "taskPrefix": "## VDL-", "owns": "local and external click report"},
+    {"id": "vdl-gate", "board": "implementation_plan/docs/51-virtual-desktop-live-click.todo.md", "taskPrefix": "## VDL-", "owns": "live click coverage aggregate"}
+  ]
+}
