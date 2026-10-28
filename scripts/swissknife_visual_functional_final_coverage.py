@@ -1591,7 +1591,7 @@ def projection(root, report):
               'source_identity_sha256': digest(data['source_sha256']), 'source_file_count': len(data['source_sha256']),
               'scenario_phase_order': ['primary_result', 'persist_reopen', 'failure_recovery'],
               'step_index_semantics': 'Zero-based per phase; resets to 0.',
-              'backend_call_phases_semantics': 'Dispatch counts: not validity flags; backend_proof=0:no call; request_phase:exact join.',
+              'backend_call_phases_semantics': 'Dispatch counts per named phase, not validity flags. Zero is only that bucket; other phases and joined owner receipts remain independent.',
               'viewports': []}
     scenario = parse(read(root, 'swissknife/test/e2e/functional-workflows/' + data['app_id'] + '.json'))
     for entry in data['viewport_reports']:
@@ -1637,7 +1637,7 @@ def projection(root, report):
         result['backend_artifact_path_base'] = 'viewport_original_directory'
     result['instruction'] = ('Inspect both results. Initial/demo/layout-only mobile state cannot prove mobile execution. '
         'Owner results: without an inferred phase or broader success. Each phased row is one request; additional_result_assertions use that same request. Unphased rows imply no identity. '
-        'HTMLMediaElement/CID facts only. Phased receipt/event paths are relative to viewport original directory; filenames contain raw CIDs.')
+        'HTMLMediaElement/CID facts only. Phased receipt/event paths are relative to viewport original directory; filenames contain raw CIDs. Final frames follow failure_recovery; compare earlier runs with their phase receipts, not later frames.')
     if any(view.get('decoded_images') for view in result['viewports']):
         result['instruction'] += ' retained_from:IMG source/content/dims, not canvas/layers.'
     result = _factor_projection(result)
