@@ -4345,7 +4345,8 @@ The canonical JSON/DuckDB import is the initial plan snapshot. This Markdown boa
 
 ## SVF-503 Verify Datasets Browser actual results, recovery and final visuals
 
-- Status: ready
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-10-28T10:05:26Z
 - Priority: P1
 - Track: verify
 - Depends on: SVF-502, SVF-041, SVF-035

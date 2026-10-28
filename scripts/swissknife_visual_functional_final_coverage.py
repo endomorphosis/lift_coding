@@ -619,6 +619,43 @@ def validate_backend_request_phases(root, child, scenario):
     return requests
 
 
+def _scenario_error_checkpoints(scenario):
+    """Bind the historical error and optional saved-PNG checkpoint to original steps."""
+    checkpoints = [(phase, index, step)
+                   for phase in BACKEND_PHASES[:3]
+                   for index, step in enumerate(scenario['phases'][phase]) if 'checkpoint_id' in step]
+    need(all('retained_from' not in step or step.get('checkpoint_id') == 'error_image_retained'
+             for steps in scenario['phases'].values() for step in steps)
+         and all('requirement_id' not in row[2] for row in checkpoints)
+         and len(checkpoints) in (1, 2), 'scenario needs one error and at most one saved-image checkpoint')
+    phase, index, step = checkpoints[0]
+    need(phase == 'failure_recovery' and step.get('op') == 'assert'
+         and step.get('checkpoint_id') == 'error_observed', 'scenario lacks its original error checkpoint')
+    if len(checkpoints) == 2:
+        image_phase, image_index, image = checkpoints[1]
+        refs = image.get('retained_from')
+        need(image_phase == phase and image_index > index and image.get('op') == 'assert'
+             and image.get('checkpoint_id') == 'error_image_retained'
+             and image.get('probe', {}).get('kind') == 'image_state'
+             and 'temporal_ms' not in image['probe']
+             and type(refs) is dict and set(refs) == {'primary_result', 'persist_reopen'}
+             and all(item.get('op') in {'assert', 'capture', 'wait_ms', 'wait_for'}
+                     and not (item.get('op') == 'assert' and (item.get('requirement_id')
+                              or item.get('probe', {}).get('kind') == 'backend_result'))
+                     for item in scenario['phases'][phase][index + 1:image_index]),
+             'saved-image checkpoint must precede retry actions and bind both original image steps')
+        for source_phase, source_index in refs.items():
+            steps = scenario['phases'][source_phase]
+            need(type(source_index) is int and 0 <= source_index < min(64, len(steps))
+                 and steps[source_index].get('op') == 'assert'
+                 and steps[source_index].get('probe', {}).get('kind') == 'image_state'
+                 and 'temporal_ms' not in steps[source_index]['probe']
+                 and (bool(re.fullmatch(r'result_[1-9][0-9]*', str(steps[source_index].get('requirement_id', ''))))
+                      if source_phase == 'primary_result' else steps[source_index].get('requirement_id') == source_phase),
+                 'saved-image baseline is not its exact declared native image assertion')
+    return checkpoints
+
+
 def validate_decoded_images(root, child, scenario, child_path):
     rows = child.get('image_observations', [])
     need(type(rows) is list and len(rows) <= 64, 'native image observation count is unbounded')
@@ -658,6 +695,25 @@ def validate_decoded_images(root, child, scenario, child_path):
              and hashlib.sha256(raw).hexdigest() == row['content_sha256']
              and hashlib.sha256(b'data:image/png;base64,' + __import__('base64').b64encode(raw)).hexdigest() == row['source_sha256'],
              'native PNG bytes/dimensions/source identity do not match')
+    has_retention = any(step.get('checkpoint_id') == 'error_image_retained'
+                        for steps in scenario['phases'].values() for step in steps)
+    checkpoints = _scenario_error_checkpoints(scenario) if has_retention else []
+    if len(checkpoints) == 2:
+        phase, index, step = checkpoints[1]
+        references = {phase: index, **step['retained_from']}
+        bound = []
+        for source_phase, source_index in references.items():
+            selector = scenario['phases'][source_phase][source_index]['probe']['selector']
+            matches = [row for row in rows if row['phase'] == source_phase
+                       and row['step_index'] == source_index and row['selector'] == selector]
+            need(len(matches) == 1 and matches[0]['content_sha256'] is not None
+                 and matches[0]['image_artifact'] is not None,
+                 'saved-image checkpoint lacks its own exact artifact-verified native PNG snapshot')
+            bound.append(matches[0])
+        identity = lambda row: tuple(row[key] for key in
+                                    ('content_sha256', 'source_sha256', 'natural_width', 'natural_height'))
+        need(all(identity(row) == identity(bound[0]) for row in bound[1:]),
+             'saved PNG source/content/dimensions changed between primary, reopen and actual error')
     return rows
 
 
@@ -692,7 +748,7 @@ def validate_dual_workflow(root, profile, task, report, *, observation_validator
                 scenario_assertions[role] = (phase, index, step)
             if 'checkpoint_id' in step:
                 scenario_errors.append((phase, index, step))
-    need(set(scenario_assertions) == set(requirements) and len(scenario_errors) == 1,
+    need(set(scenario_assertions) == set(requirements) and scenario_errors == _scenario_error_checkpoints(scenario),
          'final workflow scenario omitted exact requirements or error checkpoint')
     children = []; sessions = set(); expected_artifacts = {}; images = []
     owner_identities = {name: set() for name in ('correlation_id', 'receipt_id', 'event_dag_cid')}
@@ -752,16 +808,16 @@ def validate_dual_workflow(root, profile, task, report, *, observation_validator
                  and all(step.get('op') in {'assert', 'capture', 'wait_ms', 'wait_for'} for step in steps[press_index+1:index]),
                  'final viewport keyboard result was not observed after its actual scenario keypress')
         errors = child.get('error_observations')
-        need(type(errors) is list and len(errors) == 1 and errors[0].get('checkpoint_id') == 'error_observed'
-             and errors[0].get('phase') == 'failure_recovery', 'final viewport lacks its actual error checkpoint')
-        observation_validator(errors[0].get('observed'))
-        error_phase, error_index, error_step = scenario_errors[0]
-        need(errors[0].get('phase') == error_phase and type(errors[0].get('step_index')) is int
-             and errors[0]['step_index'] == error_index
-             and errors[0].get('probe') == error_step['probe']
-             and errors[0].get('observed', {}).get('operator') == error_step['operator']
-             and encoded(errors[0].get('observed', {}).get('expected')) == encoded(error_step['expected']),
-             'final viewport error observation differs from its actual scenario checkpoint')
+        need(type(errors) is list and len(errors) == len(scenario_errors),
+             'final viewport lacks its exact original error checkpoints')
+        for error, (error_phase, error_index, error_step) in zip(errors, scenario_errors):
+            need(type(error) is dict and error.get('checkpoint_id') == error_step['checkpoint_id']
+                 and error.get('phase') == error_phase and type(error.get('step_index')) is int
+                 and error['step_index'] == error_index and error.get('probe') == error_step['probe']
+                 and error.get('observed', {}).get('operator') == error_step['operator']
+                 and encoded(error.get('observed', {}).get('expected')) == encoded(error_step['expected']),
+                 'final viewport error observation differs from its exact scenario checkpoint')
+            observation_validator(error.get('observed'))
         temporal = child.get('temporal_observations')
         timed_assertions = [a for a in [*assertions, *errors] if 'temporal_ms' in a['probe']]
         need(type(temporal) is list and len(temporal) == len(timed_assertions), 'final viewport temporal observations missing')
@@ -968,9 +1024,12 @@ _PHASE_FACT_FIELDS = {
 _MEDIA_PROJECTION_FIELDS = {'decoded_cid', 'src_sha256', 'current_time', 'duration', 'ready_state', 'paused',
                             'ended', 'seeking', 'visible', 'video_width', 'video_height'}
 _CONTROL_PROJECTION_FIELDS = {'present', 'tag', 'type', 'visible', 'enabled', 'value', 'value_as_number', 'min', 'max', 'step'}
-_SHARED_SEMANTICS = ('projection_value_ref selects exact typed JSON from shared_projection_values. '
+_LEGACY_SHARED_SEMANTICS = ('projection_value_ref selects exact typed JSON from shared_projection_values. '
     'overrides replaces named fields only; no deletion. Expand in the same slot. '
     'Shared values imply no shared session/element/event/phase. Original reports stay distinct.')
+
+_PREVIOUS_SHARED_SEMANTICS = ('projection_value_ref: exact same-slot typed shared_projection_values; overrides replace fields, never delete. Equality implies no shared session/element/event/phase.')
+_SHARED_SEMANTICS = 'Same-slot typed refs; overrides replace; equality is not identity.'
 
 
 def _projection_snapshot_slots(result):
@@ -992,8 +1051,11 @@ def _projection_snapshot_slots(result):
     return slots
 
 
-_REVIEW_LITERAL_SEMANTICS = ('The shared_review_literals_reference_key names same-slot references to exact typed JSON in shared_review_literals. '
+_LEGACY_REVIEW_LITERAL_SEMANTICS = ('The shared_review_literals_reference_key names same-slot references to exact typed JSON in shared_review_literals. '
     'Table entries are literal, not links. Expand before phase shared values. No facts are omitted; identical values imply no shared session, element, call or event.')
+
+_PREVIOUS_REVIEW_LITERAL_SEMANTICS = ('shared_review_literals_reference_key selects same-slot literal JSON in shared_review_literals; expand before phase values. No facts lost or shared session/element/call/event implied.')
+_REVIEW_LITERAL_SEMANTICS = 'Key selects literal table first; equality is not identity.'
 
 
 def _review_dictionary_keys(value):
@@ -1018,7 +1080,7 @@ def _expand_review_literals(value):
         return result
     need(type(table) is dict and 0 < len(table) <= 64
          and all(type(key) is str and re.fullmatch(r'r[0-9]+', key) for key in table)
-         and caption == _REVIEW_LITERAL_SEMANTICS and type(marker) is str
+         and caption in {_REVIEW_LITERAL_SEMANTICS, _PREVIOUS_REVIEW_LITERAL_SEMANTICS, _LEGACY_REVIEW_LITERAL_SEMANTICS} and type(marker) is str
          and re.fullmatch(r'review_ref(?:_[0-9]+)?', marker)
          and marker not in _review_dictionary_keys(table), 'review literal table/key/semantics are malformed or cyclic')
     used = set()
@@ -1094,7 +1156,7 @@ def _expand_projection(value):
     need(table is None or type(table) is dict and 0 < len(table) <= 16
          and all(type(key) is str and re.fullmatch(r'v[0-9]+', key) for key in table),
          'projection shared values table is malformed')
-    need((table is None and caption is None) or (table is not None and caption == _SHARED_SEMANTICS),
+    need((table is None and caption is None) or (table is not None and caption in {_SHARED_SEMANTICS, _PREVIOUS_SHARED_SEMANTICS, _LEGACY_SHARED_SEMANTICS}),
          'projection shared values semantics are absent or changed')
     used = set()
     def expand(item, fields, *, overrides=False):
@@ -1204,22 +1266,27 @@ def _project_backend_observations(root, child, child_path):
             name = item[kind + '_artifact']; record = artifacts.get(name)
             need(record is not None, 'projected backend artifact is absent from its child closure')
             check_reference(root, record, prefix=child_path.parent)
-            projected[kind + '_artifact'] = record
-        identity = encoded({key: projected[key] for key in ('owner', 'tool_id', 'binding_id', 'transport', 'outcome', 'receipt_verified', 'semantic_result_verified')})
-        if requests is not None and identity in representatives:
-            representative = representatives[identity]
-            short = {'observation_index': index, 'owner_observation': representative,
-                     'request_phase': projected['request_phase'],
-                     'artifact_indexes': [child['artifacts'].index(projected[kind + '_artifact']) for kind in ('receipt', 'event')]}
-            if encoded(projected['result_assertion']) == encoded(result[representative]['result_assertion']):
-                short['same_result_as'] = representative
-            else:
-                short['result_assertion'] = projected['result_assertion']
-            additional.append(short)
+            projected[kind + '_artifact'] = ({**record, 'path': str(Path(record['path']).relative_to(child_path.parent.relative_to(root)))}
+                if requests is not None else record)
+        if requests is not None:
+            request = requests[item['request_phase_index']]
+            identity = encoded({'request': request, 'correlation_id': item['correlation_id'],
+                'receipt_id': item['receipt_id'], 'event_dag_cid': item['event_dag_cid'],
+                'receipt_artifact': projected['receipt_artifact'], 'event_artifact': projected['event_artifact'],
+                'owner': projected['owner'], 'tool_id': projected['tool_id'], 'binding_id': projected['binding_id'],
+                'transport': projected['transport'], 'outcome': projected['outcome'],
+                'receipt_verified': projected['receipt_verified'], 'semantic_result_verified': projected['semantic_result_verified']})
+            if identity in representatives:
+                row = result[representatives[identity]]
+                row.setdefault('additional_result_assertions', []).append({
+                    'observation_index': index, 'result_assertion': projected['result_assertion']})
+                continue
+            projected['request_phase'] = {key: request[key] for key in ('request_index', 'phase', 'step_index', 'generation', 'correlation_id', 'call_sha256')}
         else:
-            representatives[identity] = len(result)
-            projected['observation_index'] = index
-            result.append(projected)
+            identity = None
+        projected['observation_index'] = index
+        if identity is not None: representatives[identity] = len(result)
+        result.append(projected)
     return result, additional
 
 
@@ -1234,8 +1301,8 @@ def projection(root, report):
               'contract_sha256': data['contract_sha256'], 'scenario_sha256': data['scenario_sha256'],
               'source_identity_sha256': digest(data['source_sha256']), 'source_file_count': len(data['source_sha256']),
               'scenario_phase_order': ['primary_result', 'persist_reopen', 'failure_recovery'],
-              'step_index_semantics': 'Zero-based per named phase; resets to 0, not global chronology.',
-              'backend_call_phases_semantics': 'Dispatch counts, not validity flags. backend_proof=0 means no call in that phase. request_phase requires an actual request/receipt join; missing phases are never inferred.',
+              'step_index_semantics': 'Zero-based per phase; resets to 0.',
+              'backend_call_phases_semantics': 'Dispatch counts: not validity flags; backend_proof=0:no call; request_phase:exact join.',
               'viewports': []}
     scenario = parse(read(root, 'swissknife/test/e2e/functional-workflows/' + data['app_id'] + '.json'))
     for entry in data['viewport_reports']:
@@ -1256,7 +1323,10 @@ def projection(root, report):
             'keyboard_observation_count': len(child['keyboard_observations']),
             'error_observation_count': len(child['error_observations']),
             'error_observations': [{'phase': item['phase'], 'step_index': item['step_index'], 'probe': item['probe'],
-                'checkpoint_id': item['checkpoint_id'], 'observed_sha256': digest(item['observed']),
+                'checkpoint_id': item['checkpoint_id'],
+                **({'retained_from': scenario['phases'][item['phase']][item['step_index']]['retained_from']}
+                   if item['checkpoint_id'] == 'error_image_retained' else {}),
+                'observed_sha256': digest(item['observed']),
                 'observed': item['observed'] if len(encoded(item['observed'])) <= 1024 else {
                     'projection_omitted': True, 'original_bytes': len(encoded(item['observed'])),
                     'original_sha256': digest(item['observed'])}} for item in child['error_observations']],
@@ -1271,15 +1341,13 @@ def projection(root, report):
         phase = phase_projection(child, scenario)
         if phase is not None:
             result['viewports'][-1]['phase_evidence'] = phase
-    result['instruction'] = ('Each image follows the whole original scenario in its independently fixed viewport. '
-        'Initial/demo/layout-only mobile state cannot prove mobile execution. '
-        'Inspect both results/controls; match requirements to phase, local step, probe and actual value. '
-        'Flags, counts, text or pixels alone do not prove replay, recovery, persistence or owner effects; refuse unproven behavior. '
-        'Owner proofs retain exact results without an inferred phase or broader success. Reopen media/identity_pairs describe HTMLMediaElement/CID facts only, not other app state. '
-        'Additional proofs index original child observations/artifacts; owner_observation and same_result_as select exact common values in backend_observations. '
-        'Opaque correlation/CID identities and duplicate initial viewport remain in the immutable validated children.')
+    if any('request_phase' in row for view in result['viewports'] for row in view['backend_observations']):
+        result['backend_artifact_path_base'] = 'viewport_original_directory'
+    result['instruction'] = ('Inspect both results. Initial/demo/layout-only mobile state cannot prove mobile execution. '
+        'Owner results: without an inferred phase or broader success. Each phased row is one request; additional_result_assertions use that same request. Unphased rows imply no identity. '
+        'HTMLMediaElement/CID facts only. Phased receipt/event paths are relative to viewport original directory; filenames contain raw CIDs.')
     if any(view.get('decoded_images') for view in result['viewports']):
-        result['instruction'] += ' Decoded PNG identities hash exact native IMG source bytes; compare phase hashes/dimensions for persistence.'
+        result['instruction'] += ' retained_from:IMG source/content/dims, not canvas/layers.'
     result = _factor_projection(result)
     need(len(encoded(result)) <= 18000, 'final review projection exceeds its bounded prompt share')
     return result

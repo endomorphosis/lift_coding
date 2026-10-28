@@ -1500,19 +1500,51 @@ def workflow(profile: dict, task: dict, directory: Path, *, timeout_seconds: int
         from swissknife_visual_functional_llm import _read
         scenario = json.loads(_read(ROOT, str(scenario_path.relative_to(ROOT)), 1048576))
         phases = scenario.get("phases", {}) if type(scenario) is dict else {}
-        error_checkpoints = 0
+        checkpoints = []
         if type(phases) is dict:
             for phase, steps in phases.items():
                 if type(steps) is not list:
                     continue  # The runner owns the remaining schema admission.
-                for step in steps:
-                    if type(step) is not dict or "checkpoint_id" not in step:
+                for index, step in enumerate(steps):
+                    if type(step) is not dict:
                         continue
-                    error_checkpoints += 1
-                    if (step.get("op") != "assert" or phase != "failure_recovery"
-                            or step["checkpoint_id"] != "error_observed" or error_checkpoints != 1):
-                        raise ValueError("INVALID_SCENARIO: checkpoint_id is only error_observed once in failure_recovery; "
-                                         "positive assertions must use their declared semantic requirement_id")
+                    if "retained_from" in step and step.get("checkpoint_id") != "error_image_retained":
+                        raise ValueError("INVALID_SCENARIO: retained_from is only allowed on error_image_retained")
+                    if "checkpoint_id" in step:
+                        checkpoints.append((phase, index, step))
+        errors = [row for row in checkpoints if row[2]["checkpoint_id"] == "error_observed"]
+        retained = [row for row in checkpoints if row[2]["checkpoint_id"] == "error_image_retained"]
+        if (any(phase != "failure_recovery" or step.get("op") != "assert"
+                or step["checkpoint_id"] not in {"error_observed", "error_image_retained"}
+                or "requirement_id" in step for phase, _, step in checkpoints)
+                or len(errors) > 1 or len(retained) > 1 or retained and len(errors) != 1):
+            raise ValueError("INVALID_SCENARIO: checkpoint_id is only error_observed once in failure_recovery; "
+                             "one typed error_image_retained may follow it before recovery")
+        if retained:
+            _, index, step = retained[0]
+            probe = step.get("probe", {})
+            refs = step.get("retained_from")
+            if (index <= errors[0][1] or type(probe) is not dict or probe.get("kind") != "image_state"
+                    or "temporal_ms" in probe or type(refs) is not dict
+                    or set(refs) != {"primary_result", "persist_reopen"}
+                    or any(type(action) is not dict or action.get("op") not in {"assert", "capture", "wait_for", "wait_ms"}
+                           or action.get("op") == "assert" and (action.get("requirement_id")
+                               or type(action.get("probe", {})) is not dict
+                               or action.get("probe", {}).get("kind") == "backend_result")
+                           for action in phases["failure_recovery"][errors[0][1]+1:index])):
+                raise ValueError("INVALID_SCENARIO: retained image must follow the error before recovery UI or owner action")
+            for phase in ("primary_result", "persist_reopen"):
+                source_index = refs[phase]
+                source_steps = phases.get(phase)
+                source = (source_steps[source_index] if type(source_steps) is list
+                          and type(source_index) is int and 0 <= source_index < min(64, len(source_steps)) else None)
+                if (type(source) is not dict or source.get("op") != "assert"
+                        or type(source.get("probe")) is not dict
+                        or source.get("probe", {}).get("kind") != "image_state"
+                        or "temporal_ms" in source.get("probe", {})
+                        or not (re.fullmatch(r"result_[1-9][0-9]*", str(source.get("requirement_id", "")))
+                                if phase == "primary_result" else source.get("requirement_id") == phase)):
+                    raise ValueError("INVALID_SCENARIO: retained_from must identify the declared original image assertions")
     backend_variables = {"ipfs_kit_py": "SWISSKNIFE_IPFS_KIT_MCP_URL",
                          "ipfs_datasets_py": "SWISSKNIFE_IPFS_DATASETS_MCP_URL",
                          "ipfs_accelerate_py": "SWISSKNIFE_IPFS_ACCELERATE_MCP_URL"}
