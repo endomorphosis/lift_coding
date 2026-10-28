@@ -17,6 +17,7 @@ class ReachedRunner(BaseException):pass
 class ErrorImageWorkerAdmissionTests(unittest.TestCase):
  def setUp(self):
   self.scenario=json.loads(SCENARIO.read_bytes())
+  self.scenario["phases"]["failure_recovery"]=[step for step in self.scenario["phases"]["failure_recovery"] if step.get("checkpoint_id")!="recovery_image_retained"]
  def run_case(self,scenario,accepted):
   with tempfile.TemporaryDirectory(dir='/dev/shm')as tmp:
    root=Path(tmp);p=root/'swissknife/test/e2e/functional-workflows/neural-photoshop.json';p.parent.mkdir(parents=True);p.write_text(json.dumps(scenario))
@@ -49,4 +50,39 @@ class ErrorImageWorkerAdmissionTests(unittest.TestCase):
    return s
   for index in range(11):
    with self.subTest(index=index):self.run_case(mutation(index),False)
+
+class RecoveryImageWorkerAdmissionTests(unittest.TestCase):
+ run_case=ErrorImageWorkerAdmissionTests.run_case
+ def setUp(self):self.scenario=json.loads(SCENARIO.read_bytes())
+ def test_canonical_post_retry_image_reaches_real_original_runner_boundary(self):
+  self.assertEqual(self.scenario['phases']['failure_recovery'][-1]['checkpoint_id'],'recovery_image_retained')
+  self.run_case(self.scenario,True)
+ def test_post_only_and_historical_checkpoint_shapes_reach_runner(self):
+  for omit in ({'error_image_retained'},{'recovery_image_retained'},{'error_image_retained','recovery_image_retained'}):
+   value=copy.deepcopy(self.scenario);value['phases']['failure_recovery']=[step for step in value['phases']['failure_recovery'] if step.get('checkpoint_id') not in omit]
+   with self.subTest(omit=omit):self.run_case(value,True)
+ def test_invalid_post_image_role_order_references_and_retry_refuse_before_browser(self):
+  def mutation(index):
+   s=copy.deepcopy(self.scenario);steps=s['phases']['failure_recovery'];post=steps[-1]
+   if index==0:post['checkpoint_id']='unknown'
+   if index==1:steps.append(copy.deepcopy(post))
+   if index==2:steps.insert(11,steps.pop())
+   if index==3:steps.insert(5,steps.pop())
+   if index==4:post['probe']['kind']='text'
+   if index==5:post['probe']['temporal_ms']=100
+   if index==6:post['retained_from']['primary_result']=0
+   if index==7:post['retained_from']['persist_reopen']=True
+   if index==8:post['retained_from']['extra']=0
+   if index==9:del post['retained_from']
+   if index==10:steps.append({'op':'click','selector':'#new-owner-action'})
+   if index==11:steps.insert(12,{'op':'click','selector':'#changed-image'})
+   if index==12:post['requirement_id']='failure_recovery'
+   if index==13:del steps[6:9]
+   if index==14:s['phases']['primary_result'].append(steps.pop())
+   if index==15:del steps[11]['requirement_id']
+   return s
+  for index in range(16):
+   with self.subTest(index=index):self.run_case(mutation(index),False)
+
 if __name__=='__main__':unittest.main()
+

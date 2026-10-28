@@ -976,6 +976,48 @@ def _backend_producer_fence(profile: dict, task: dict, reference: dict) -> dict:
     return loaded
 
 
+def _independent_review_guidance(profile: dict, task: dict, validated: dict) -> dict:
+    """Explain retained data domains without granting a model or producer verdict."""
+    from swissknife_visual_functional_final_coverage import validate_decoded_images
+    guidance = {
+        "codec": "Shared literal/value refs losslessly encode recorded typed values in each containing phase/step/session. Expand literals before phase values. References neither establish nor refute provenance; check child/session/native-request joins.",
+        "hashes": "PNG content_sha256 hashes PNG bytes; IMG source_sha256 hashes its native URI (data URI when PNG bytes are retained). Media src_sha256 hashes native src URI, not media bytes; new blob URIs can change it without changing content. Owner /sha256 can describe source, not edited PNG. Compare matching domains; URI/CID alone is not full content proof.",
+        "identity": "Gateway actor desktop:<UUID> is used in BOTH viewports, not a viewport label. Check canonical child viewport/session and exact native request/receipt joins.",
+        "requirements": "Indices are phase-local; dispatch counts are not validity flags. Media/identity_pairs describe only HTMLMediaElements. Zero calls alone do not disprove local restoration/retry. Require app_contract/declared owner effects and its supported/unsupported alternatives; unsupported is not rendered output. Retain findings for unproven UI, edits/layers, persistence, recovery or owner behavior; no producer pass forces acceptance.",
+    }
+    scenario_path = path_in_root("swissknife/test/e2e/functional-workflows/" + task["app_id"] + ".json")
+    scenario = json.loads(scenario_path.read_text())
+    retained = [(phase, index, step) for phase, steps in scenario["phases"].items()
+                for index, step in enumerate(steps) if "retained_from" in step]
+    if retained:
+        groups = []
+        for child in validated["children"]:
+            data = child["data"]
+            child_path = path_in_root(child["entry"]["report"]["path"])
+            rows = validate_decoded_images(ROOT, data, scenario, child_path)
+            equalities = {}
+            for phase, index, step in retained:
+                positions = [(phase, index), *step["retained_from"].items()]
+                selected = [[row for row in rows if (row["phase"], row["step_index"]) == position] for position in positions]
+                if any(len(items) != 1 or items[0]["image_artifact"] is None for items in selected):
+                    raise ValueError("review PNG comparison lacks its exact validated native snapshot")
+                first = selected[0][0]
+                keys = ("content_sha256", "source_sha256", "natural_width", "natural_height")
+                identity = tuple(first[key] for key in keys)
+                if any(tuple(items[0][key] for key in keys) != identity for items in selected):
+                    raise ValueError("review PNG comparison changed native bytes/source/dimensions")
+                equalities.setdefault(identity, set()).update(positions)
+            for identity, positions in equalities.items():
+                groups.append({"viewport": data["viewport"]["name"],
+                    "steps": [list(position) for position in sorted(positions,
+                        key=lambda item: (("primary_result", "persist_reopen", "failure_recovery").index(item[0]), item[1]))],
+                    "png_bytes_sha256": identity[0], "img_source_sha256": identity[1], "px": list(identity[2:])})
+        guidance["native_saved_png_equalities"] = {"scope": "Each viewport separately: listed saved native IMG PNG bytes/source/dimensions match; not canvas/layers or unsampled times.", "groups": groups}
+    if len(json.dumps(guidance, sort_keys=True, separators=(",", ":")).encode()) > 2200:
+        guidance.pop("native_saved_png_equalities", None)
+    return guidance
+
+
 def model(profile_path: str, task: dict, mode: str, inputs: list[str], screenshots: list[str], output: Path,
           *, recovery_context: dict | None = None, preserve_feedback: bool = False,
           edit_paths_override: list[str] | None = None, backend_producer: dict | None = None,
@@ -1015,6 +1057,7 @@ def model(profile_path: str, task: dict, mode: str, inputs: list[str], screensho
         if screenshots != [item["path"] for item in final_evidence["images"]]:
             raise ValueError("final viewport review images differ from the exact ordered result screenshots")
         context["final_workflow_evidence"] = binding(task, final_evidence)
+        context["evidence_interpretation"] = _independent_review_guidance(profile, task, final_evidence)
         for name, expected in final_evidence["data"]["source_sha256"].items():
             if expected is None:
                 source = path_in_root(name)
@@ -1508,25 +1551,41 @@ def workflow(profile: dict, task: dict, directory: Path, *, timeout_seconds: int
                 for index, step in enumerate(steps):
                     if type(step) is not dict:
                         continue
-                    if "retained_from" in step and step.get("checkpoint_id") != "error_image_retained":
-                        raise ValueError("INVALID_SCENARIO: retained_from is only allowed on error_image_retained")
+                    if "retained_from" in step and step.get("checkpoint_id") not in {"error_image_retained", "recovery_image_retained"}:
+                        raise ValueError("INVALID_SCENARIO: retained_from is only allowed on retained image checkpoints")
                     if "checkpoint_id" in step:
                         checkpoints.append((phase, index, step))
         errors = [row for row in checkpoints if row[2]["checkpoint_id"] == "error_observed"]
         retained = [row for row in checkpoints if row[2]["checkpoint_id"] == "error_image_retained"]
+        recovered = [row for row in checkpoints if row[2]["checkpoint_id"] == "recovery_image_retained"]
         if (any(phase != "failure_recovery" or step.get("op") != "assert"
-                or step["checkpoint_id"] not in {"error_observed", "error_image_retained"}
+                or step["checkpoint_id"] not in {"error_observed", "error_image_retained", "recovery_image_retained"}
                 or "requirement_id" in step for phase, _, step in checkpoints)
-                or len(errors) > 1 or len(retained) > 1 or retained and len(errors) != 1):
-            raise ValueError("INVALID_SCENARIO: checkpoint_id is only error_observed once in failure_recovery; "
-                             "one typed error_image_retained may follow it before recovery")
-        if retained:
-            _, index, step = retained[0]
+                or len(errors) > 1 or len(retained) > 1 or len(recovered) > 1 or len(checkpoints) > 3
+                or (retained or recovered) and len(errors) != 1):
+            raise ValueError("INVALID_SCENARIO: checkpoint roles must be unique: error_observed, optional pre-retry "
+                             "error_image_retained, optional post-result recovery_image_retained")
+        if recovered:
+            recovery_steps = phases["failure_recovery"]
+            results = [(index, step) for index, step in enumerate(recovery_steps)
+                       if type(step) is dict and step.get("requirement_id") == "failure_recovery"]
+            index = recovered[0][1]
+            passive = {"assert", "capture", "wait_for", "wait_ms"}
+            if (len(results) != 1 or results[0][1].get("op") != "assert"
+                    or not errors[0][1] < results[0][0] < index
+                    or not any(type(action) is dict and action.get("op") not in passive
+                               for action in recovery_steps[errors[0][1]+1:results[0][0]])
+                    or any(type(action) is not dict or action.get("op") not in {"capture", "wait_for", "wait_ms"}
+                           for action in recovery_steps[results[0][0]+1:index] + recovery_steps[index+1:])):
+                raise ValueError("INVALID_SCENARIO: recovery image must follow the existing recovery result and retry, "
+                                 "before any later UI or owner action")
+        for _, index, step in retained + recovered:
             probe = step.get("probe", {})
             refs = step.get("retained_from")
-            if (index <= errors[0][1] or type(probe) is not dict or probe.get("kind") != "image_state"
-                    or "temporal_ms" in probe or type(refs) is not dict
-                    or set(refs) != {"primary_result", "persist_reopen"}
+            if (type(probe) is not dict or probe.get("kind") != "image_state" or "temporal_ms" in probe
+                    or type(refs) is not dict or set(refs) != {"primary_result", "persist_reopen"}):
+                raise ValueError("INVALID_SCENARIO: retained image needs a native image probe and exact source references")
+            if step["checkpoint_id"] == "error_image_retained" and (index <= errors[0][1]
                     or any(type(action) is not dict or action.get("op") not in {"assert", "capture", "wait_for", "wait_ms"}
                            or action.get("op") == "assert" and (action.get("requirement_id")
                                or type(action.get("probe", {})) is not dict

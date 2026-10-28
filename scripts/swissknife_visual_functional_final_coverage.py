@@ -620,38 +620,50 @@ def validate_backend_request_phases(root, child, scenario):
 
 
 def _scenario_error_checkpoints(scenario):
-    """Bind the historical error and optional saved-PNG checkpoint to original steps."""
-    checkpoints = [(phase, index, step)
-                   for phase in BACKEND_PHASES[:3]
+    """Bind one error and optional before/after-retry saved-PNG observations."""
+    allowed = {'error_observed', 'error_image_retained', 'recovery_image_retained'}
+    checkpoints = [(phase, index, step) for phase in BACKEND_PHASES[:3]
                    for index, step in enumerate(scenario['phases'][phase]) if 'checkpoint_id' in step]
-    need(all('retained_from' not in step or step.get('checkpoint_id') == 'error_image_retained'
-             for steps in scenario['phases'].values() for step in steps)
-         and all('requirement_id' not in row[2] for row in checkpoints)
-         and len(checkpoints) in (1, 2), 'scenario needs one error and at most one saved-image checkpoint')
-    phase, index, step = checkpoints[0]
-    need(phase == 'failure_recovery' and step.get('op') == 'assert'
-         and step.get('checkpoint_id') == 'error_observed', 'scenario lacks its original error checkpoint')
-    if len(checkpoints) == 2:
-        image_phase, image_index, image = checkpoints[1]
-        refs = image.get('retained_from')
-        need(image_phase == phase and image_index > index and image.get('op') == 'assert'
-             and image.get('checkpoint_id') == 'error_image_retained'
-             and image.get('probe', {}).get('kind') == 'image_state'
-             and 'temporal_ms' not in image['probe']
-             and type(refs) is dict and set(refs) == {'primary_result', 'persist_reopen'}
-             and all(item.get('op') in {'assert', 'capture', 'wait_ms', 'wait_for'}
-                     and not (item.get('op') == 'assert' and (item.get('requirement_id')
-                              or item.get('probe', {}).get('kind') == 'backend_result'))
-                     for item in scenario['phases'][phase][index + 1:image_index]),
-             'saved-image checkpoint must precede retry actions and bind both original image steps')
+    need(1 <= len(checkpoints) <= 3
+         and all(type(step['checkpoint_id']) is str for _, _, step in checkpoints)
+         and len({step['checkpoint_id'] for _, _, step in checkpoints}) == len(checkpoints)
+         and all(phase == 'failure_recovery' and step.get('op') == 'assert'
+                 and step['checkpoint_id'] in allowed and 'requirement_id' not in step
+                 for phase, _, step in checkpoints)
+         and all('retained_from' not in step or step.get('checkpoint_id') in allowed - {'error_observed'}
+                 for steps in scenario['phases'].values() for step in steps),
+         'scenario needs one error and at most one of each typed saved-image checkpoint')
+    phase, error_index, original_error = checkpoints[0]
+    need(original_error['checkpoint_id'] == 'error_observed', 'scenario lacks its original error checkpoint')
+    steps = scenario['phases'][phase]
+    def passive(items):
+        return all(item.get('op') in {'assert', 'capture', 'wait_ms', 'wait_for'}
+                   and not (item.get('op') == 'assert' and (item.get('requirement_id')
+                            or item.get('probe', {}).get('kind') == 'backend_result')) for item in items)
+    for _, index, image in checkpoints[1:]:
+        refs = image.get('retained_from'); probe = image.get('probe')
+        need(type(probe) is dict and probe.get('kind') == 'image_state' and 'temporal_ms' not in probe
+             and type(refs) is dict and set(refs) == {'primary_result', 'persist_reopen'},
+             'saved-image checkpoint must bind both original native image assertions')
+        if image['checkpoint_id'] == 'error_image_retained':
+            need(index > error_index and passive(steps[error_index + 1:index]),
+                 'saved-image error checkpoint must precede recovery UI or owner actions')
+        else:
+            semantics = [i for i, step in enumerate(steps) if step.get('requirement_id') == 'failure_recovery'
+                         and step.get('op') == 'assert']
+            need(len(semantics) == 1 and error_index < semantics[0] < index
+                 and any(step.get('op') in {'click', 'check', 'uncheck', 'fill', 'select', 'press', 'reopen_app'}
+                         for step in steps[error_index + 1:semantics[0]])
+                 and passive(steps[semantics[0] + 1:index]) and passive(steps[index + 1:]),
+                 'saved-image recovery checkpoint must follow the original recovery assertion/action with no later UI or owner action')
         for source_phase, source_index in refs.items():
-            steps = scenario['phases'][source_phase]
-            need(type(source_index) is int and 0 <= source_index < min(64, len(steps))
-                 and steps[source_index].get('op') == 'assert'
-                 and steps[source_index].get('probe', {}).get('kind') == 'image_state'
-                 and 'temporal_ms' not in steps[source_index]['probe']
-                 and (bool(re.fullmatch(r'result_[1-9][0-9]*', str(steps[source_index].get('requirement_id', ''))))
-                      if source_phase == 'primary_result' else steps[source_index].get('requirement_id') == source_phase),
+            source_steps = scenario['phases'][source_phase]
+            need(type(source_index) is int and 0 <= source_index < min(64, len(source_steps))
+                 and source_steps[source_index].get('op') == 'assert'
+                 and source_steps[source_index].get('probe', {}).get('kind') == 'image_state'
+                 and 'temporal_ms' not in source_steps[source_index]['probe']
+                 and (bool(re.fullmatch(r'result_[1-9][0-9]*', str(source_steps[source_index].get('requirement_id', ''))))
+                      if source_phase == 'primary_result' else source_steps[source_index].get('requirement_id') == source_phase),
                  'saved-image baseline is not its exact declared native image assertion')
     return checkpoints
 
@@ -695,11 +707,18 @@ def validate_decoded_images(root, child, scenario, child_path):
              and hashlib.sha256(raw).hexdigest() == row['content_sha256']
              and hashlib.sha256(b'data:image/png;base64,' + __import__('base64').b64encode(raw)).hexdigest() == row['source_sha256'],
              'native PNG bytes/dimensions/source identity do not match')
-    has_retention = any(step.get('checkpoint_id') == 'error_image_retained'
+    has_retention = any(step.get('checkpoint_id') in {'error_image_retained', 'recovery_image_retained'}
                         for steps in scenario['phases'].values() for step in steps)
     checkpoints = _scenario_error_checkpoints(scenario) if has_retention else []
-    if len(checkpoints) == 2:
-        phase, index, step = checkpoints[1]
+    for phase, index, step in checkpoints[1:]:
+        if step['checkpoint_id'] == 'recovery_image_retained':
+            semantic_index = next(i for i, item in enumerate(scenario['phases'][phase])
+                                  if item.get('requirement_id') == 'failure_recovery')
+            success = [item for item in child['semantic_assertions']
+                       if item.get('phase') == phase and item.get('step_index') == semantic_index
+                       and item.get('requirement_id') == 'failure_recovery']
+            need(len(success) == 1 and success[0].get('passed') is True,
+                 'saved-image recovery checkpoint lacks the original passed recovery assertion')
         references = {phase: index, **step['retained_from']}
         bound = []
         for source_phase, source_index in references.items():
@@ -713,7 +732,7 @@ def validate_decoded_images(root, child, scenario, child_path):
         identity = lambda row: tuple(row[key] for key in
                                     ('content_sha256', 'source_sha256', 'natural_width', 'natural_height'))
         need(all(identity(row) == identity(bound[0]) for row in bound[1:]),
-             'saved PNG source/content/dimensions changed between primary, reopen and actual error')
+             'saved PNG source/content/dimensions changed between primary, reopen and retention checkpoint')
     return rows
 
 
@@ -1325,7 +1344,7 @@ def projection(root, report):
             'error_observations': [{'phase': item['phase'], 'step_index': item['step_index'], 'probe': item['probe'],
                 'checkpoint_id': item['checkpoint_id'],
                 **({'retained_from': scenario['phases'][item['phase']][item['step_index']]['retained_from']}
-                   if item['checkpoint_id'] == 'error_image_retained' else {}),
+                   if item['checkpoint_id'] in {'error_image_retained', 'recovery_image_retained'} else {}),
                 'observed_sha256': digest(item['observed']),
                 'observed': item['observed'] if len(encoded(item['observed'])) <= 1024 else {
                     'projection_omitted': True, 'original_bytes': len(encoded(item['observed'])),
