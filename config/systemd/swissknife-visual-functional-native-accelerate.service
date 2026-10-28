@@ -1,0 +1,24 @@
+[Unit]
+Description=SwissKnife visual functional native accelerator CPU endpoint
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+WorkingDirectory=/home/barberb/lift_coding
+Environment=HF_HUB_OFFLINE=1
+Environment=TRANSFORMERS_OFFLINE=1
+Environment=TOKENIZERS_PARALLELISM=false
+Environment=OMP_NUM_THREADS=2
+Environment=MKL_NUM_THREADS=2
+Environment=IPFS_ACCEL_SKIP_CORE=1
+Environment=SVF_RESTART_ON_SOURCE_DRIFT=1
+ExecStart=/home/barberb/lift_coding/external/ipfs_datasets/.venv/bin/python -B /home/barberb/lift_coding/scripts/svf_backends/foundation_native_entrypoint.py --family accelerate-supervisor
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=5
+KillMode=control-group
+UMask=0077
+NoNewPrivileges=true
+
+[Install]
+WantedBy=default.target

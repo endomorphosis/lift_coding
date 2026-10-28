@@ -1,0 +1,22 @@
+[Unit]
+StartLimitIntervalSec=0
+Description=SVF MCP++ facade for native Python IPFS Kit
+After=network.target swissknife-visual-functional-native-kit.service
+Wants=swissknife-visual-functional-native-kit.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/barberb/lift_coding/swissknife
+Environment=SWISSKNIFE_KIT_NATIVE_MCP_URL=http://127.0.0.1:18314/mcp
+Environment=SWISSKNIFE_KIT_REQUIRE_NATIVE_READY=1
+Environment=PYTHON=/home/barberb/lift_coding/external/ipfs_datasets/.venv/bin/python
+ExecStart=/usr/bin/node scripts/start-ipfs-kit-mcp-compat.cjs --host 127.0.0.1 --port 18316
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=20
+KillMode=control-group
+UMask=0077
+NoNewPrivileges=true
+
+[Install]
+WantedBy=default.target

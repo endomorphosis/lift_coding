@@ -1,0 +1,31 @@
+[Unit]
+# Dedicated SVF owner; existing Datasets listeners remain untouched.
+Description=SVF owned Datasets MCP facade with authoritative matched-document lookup
+After=network.target swissknife-visual-functional-kit-facade.service
+Wants=swissknife-visual-functional-kit-facade.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+WorkingDirectory=/home/barberb/lift_coding/swissknife
+Environment=PYTHON=/home/barberb/lift_coding/external/ipfs_datasets/.venv/bin/python
+Environment=IPFS_DATASETS_PY_ROOT=/home/barberb/lift_coding/external/ipfs_datasets
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=IPFS_DATASETS_VECTOR_INDEXES_DIR=/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/services/notes-datasets/indexes
+Environment=IPFS_DATASETS_VECTOR_CATALOG_PATH=/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/services/notes-datasets/vectors.duckdb
+Environment=MCPPLUSPLUS_ARTIFACT_STORE_DIR=/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/services/notes-datasets/artifacts
+Environment=MCPPLUSPLUS_UCAN_KEY_DIR=/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/services/notes-datasets/identity
+Environment=MCPPLUSPLUS_HELIA_REPO=/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/services/notes-datasets/helia
+Environment=MCPPLUSPLUS_HELIA_LIBP2P=0
+Environment=MCPPLUSPLUS_IPFS_KIT_ARTIFACT_URL=http://127.0.0.1:18316/mcp/artifacts
+ExecStartPre=/usr/bin/mkdir -p /home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/services/notes-datasets
+ExecStart=/usr/bin/node scripts/start-ipfs-datasets-mcp-compat.cjs --host 127.0.0.1 --port 18312
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=20
+KillMode=control-group
+UMask=0077
+NoNewPrivileges=true
+
+[Install]
+WantedBy=default.target

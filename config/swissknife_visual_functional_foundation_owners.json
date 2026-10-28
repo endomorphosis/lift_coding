@@ -1,0 +1,239 @@
+{
+  "schema": "swissknife.foundation-service-registration.v1",
+  "status": "REGISTERED",
+  "root": "/home/barberb/lift_coding",
+  "families": {
+    "kit-pubsub": {
+      "units": [
+        "swissknife-visual-functional-native-kit.service",
+        "swissknife-visual-functional-kit-facade.service"
+      ],
+      "mcp_url": "http://127.0.0.1:18316/mcp",
+      "runtime_root": "/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/native-pubsub",
+      "required_sources": [
+        "external/ipfs_kit/ipfs_kit_py/assurance/pinned_pubsub.py",
+        "scripts/svf_backends/native_pubsub_backend.py",
+        "scripts/svf_backends/owned_pubsub_peers.py",
+        "scripts/svf_backends/native_kit_service.py",
+        "swissknife/scripts/ipfs-kit-native-forwarder.cjs",
+        "swissknife/scripts/start-ipfs-kit-mcp-compat.cjs"
+      ]
+    },
+    "accelerate-supervisor": {
+      "units": [
+        "swissknife-visual-functional-native-accelerate.service",
+        "swissknife-visual-functional-accelerate-facade.service"
+      ],
+      "mcp_url": "http://127.0.0.1:18315/mcp",
+      "runtime_root": "/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/supervisor-fixtures",
+      "required_sources": [
+        "scripts/svf_backends/native_supervisor_backend.py",
+        "scripts/svf_backends/native_accelerate_service.py",
+        "swissknife/scripts/ipfs-accelerate-native-forwarder.cjs",
+        "swissknife/scripts/start-ipfs-accelerate-mcp-compat.cjs"
+      ]
+    }
+  },
+  "units": {
+    "swissknife-visual-functional-native-kit.service": {
+      "fragment": "/home/barberb/.config/systemd/user/swissknife-visual-functional-native-kit.service",
+      "fragment_sha256": "bedddf7d9199ca89c655c0794b2ca5e530d1ea307a0de2f2faed53248d542f25",
+      "argv": [
+        "/home/barberb/lift_coding/external/ipfs_datasets/.venv/bin/python",
+        "-B",
+        "/home/barberb/lift_coding/scripts/svf_backends/foundation_native_entrypoint.py",
+        "--family",
+        "kit-pubsub"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "binary_sha256": "e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f",
+      "environment": {
+        "PYTHONUNBUFFERED": "1"
+      },
+      "ports": [
+        18314
+      ]
+    },
+    "swissknife-visual-functional-kit-facade.service": {
+      "fragment": "/home/barberb/.config/systemd/user/swissknife-visual-functional-kit-facade.service",
+      "fragment_sha256": "c150fb8887208fda9ed0809f81689febb5b9d0eab6aa3ce6d1e3bce20446620b",
+      "argv": [
+        "/usr/bin/node",
+        "scripts/start-ipfs-kit-mcp-compat.cjs",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "18316"
+      ],
+      "cwd": "/home/barberb/lift_coding/swissknife",
+      "binary_sha256": "29427c49702b6da00e600c759e40575d72653e3fa962e6bd204a14619e98ea1c",
+      "environment": {
+        "SWISSKNIFE_KIT_NATIVE_MCP_URL": "http://127.0.0.1:18314/mcp",
+        "SWISSKNIFE_KIT_REQUIRE_NATIVE_READY": "1",
+        "PYTHON": "/home/barberb/lift_coding/external/ipfs_datasets/.venv/bin/python"
+      },
+      "ports": [
+        18316
+      ]
+    },
+    "swissknife-visual-functional-native-accelerate.service": {
+      "fragment": "/home/barberb/.config/systemd/user/swissknife-visual-functional-native-accelerate.service",
+      "fragment_sha256": "30c871fda5040326ef302ea2508f3fda3c5618739b81feb21faf512edf05f68e",
+      "argv": [
+        "/home/barberb/lift_coding/external/ipfs_datasets/.venv/bin/python",
+        "-B",
+        "/home/barberb/lift_coding/scripts/svf_backends/foundation_native_entrypoint.py",
+        "--family",
+        "accelerate-supervisor"
+      ],
+      "cwd": "/home/barberb/lift_coding",
+      "binary_sha256": "e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f",
+      "environment": {
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "TOKENIZERS_PARALLELISM": "false",
+        "OMP_NUM_THREADS": "2",
+        "MKL_NUM_THREADS": "2",
+        "IPFS_ACCEL_SKIP_CORE": "1",
+        "SVF_RESTART_ON_SOURCE_DRIFT": "1"
+      },
+      "ports": [
+        18313
+      ]
+    },
+    "swissknife-visual-functional-accelerate-facade.service": {
+      "fragment": "/home/barberb/.config/systemd/user/swissknife-visual-functional-accelerate-facade.service",
+      "fragment_sha256": "4307d08b4fecc79a72c2256a5ae08d14892528b06a770eb0035774e2fece51e8",
+      "argv": [
+        "/usr/bin/node",
+        "scripts/start-ipfs-accelerate-mcp-compat.cjs",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "18315"
+      ],
+      "cwd": "/home/barberb/lift_coding/swissknife",
+      "binary_sha256": "29427c49702b6da00e600c759e40575d72653e3fa962e6bd204a14619e98ea1c",
+      "environment": {
+        "SWISSKNIFE_ACCELERATE_NATIVE_MCP_URL": "http://127.0.0.1:18313/mcp",
+        "SWISSKNIFE_ACCELERATE_REQUIRE_NATIVE_READY": "1",
+        "PYTHON": "/home/barberb/lift_coding/external/ipfs_datasets/.venv/bin/python",
+        "MCPPLUSPLUS_ARTIFACT_STORE_DIR": "/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/accelerate_facade/artifacts",
+        "MCPPLUSPLUS_UCAN_KEY_DIR": "/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/accelerate_facade/identity",
+        "MCPPLUSPLUS_HELIA_REPO": "/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/accelerate_facade/helia",
+        "MCPPLUSPLUS_HELIA_LIBP2P": "0",
+        "MCPPLUSPLUS_IPFS_KIT_ARTIFACT_URL": "http://127.0.0.1:18316/mcp/artifacts"
+      },
+      "ports": [
+        18315
+      ]
+    }
+  },
+  "protected_sha256": {
+    "config/swissknife_visual_functional_pubsub.json": "906d7c83909028e2c92d56339036e769c0790d9d8868032373f289fea6163fc3",
+    "config/swissknife_visual_functional_supervisor.json": "b2c8b08c60f037b53e7b1d7e624759cf2a08b34e267893df77105eb245afc6a4",
+    "config/swissknife_visual_functional_watchdog.json": "ce25ec0325298f1aa12dc9842354c11f0b6fde8f423be2cb43a8e8eaf13afc6d",
+    "config/systemd/swissknife-visual-functional-native-accelerate.service": "30c871fda5040326ef302ea2508f3fda3c5618739b81feb21faf512edf05f68e",
+    "config/systemd/swissknife-visual-functional-native-kit.service": "bedddf7d9199ca89c655c0794b2ca5e530d1ea307a0de2f2faed53248d542f25",
+    "config/systemd/swissknife-visual-functional-pubsub-a.service": "49913da6de7c4d71cdea5b4dba1b8dc99e78df194570f110d28e32b6c4f8f2c0",
+    "config/systemd/swissknife-visual-functional-pubsub-b.service": "80829f6d03a2af0311ffe4ae9a64c4e4dc89265e41b5ae9c0fbf5c5977aaf513",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/rescue/leased_service_watchdog.py": "ea799a591ba9f75df1c4c91795ecdb5cbdab81b49372748961fa7f9b22653cb6",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py": "937d609aced0f2dd9a74b5444a74ac56eb0e87536b98fba2f410c9d70d2f4055",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/database_task_source.py": "17cc1f39fc1e15f5094dca09ecf40174b76c17dee07e7c08edc1276f7d06829c",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/intent_repository.py": "cfb424da40edc50559600f065198e1a25ab5f0ebc2bff0393b3baec6d55b3127",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/process_runner.py": "4352a90342e8021cedeada94d08678c5a427efbd013c3d63137374a674bba598",
+    "external/ipfs_kit/ipfs_kit_py/assurance/pinned_ipfs.py": "115391905b2a5b0d3e0af7cf3e8febcba0f85575e9dfcff840fd8389d867fda7",
+    "scripts/svf_backends/fixed_supervisor_output_validator.py": "eacb0ce63cf5ef44cfc69975786efe3632c148d261da9817724704f20f1fefcc",
+    "scripts/svf_backends/fixed_supervisor_worker.py": "de7ead7384c1d84dbae895c0edf67aac62df9ca21685bfcc7b830180fc5a9579",
+    "scripts/svf_backends/foundation_native_entrypoint.py": "39f81268bc5775acdf47c025d0d5aeba50c58d844e60fb1218d602c978e54400",
+    "scripts/svf_backends/foundation_service_ownership.py": "8795ec578d869f696af9c258dc8ae2e2a4907831817bf829f239c4849cac4b3a",
+    "scripts/svf_backends/validate_pubsub_foundation.py": "ea6ba88799f8d18554b68ee175317a905760ce93744f9f437ff02dec436250bf",
+    "scripts/svf_backends/validate_supervisor_foundation.py": "21b11173f4b45c95dedec2d1ef72b32d31b8b3e3e71826ff4a8f471cb020e3cc",
+    "scripts/swissknife_visual_functional_native_context.py": "db98d7705829ecf4a4686f4fd9a2eebb3f1ff48dbb4597e3a218938ba0b1fcbf",
+    "scripts/swissknife_visual_functional_phase_budget.py": "cb4b776d29680a6e722270e71956ef1f636972e83b51ca8a2420fa10c2a1f7ca",
+    "scripts/swissknife_visual_functional_recovery.py": "2b84f52213cd4f5e37b5098bb4e49b0e29c2a2b45c9af43b82fbd86804d4f437",
+    "scripts/swissknife_visual_functional_review_recheck.py": "d30c3301c33679296a6e61812ebe1f9d8d6675a20768bf7fb849ff1c36b66f52",
+    "scripts/swissknife_visual_functional_supervisor.py": "0d39b6ddf5b717e237efe9e5c004458f8920757948b9a515b9743fff92e79826",
+    "scripts/swissknife_visual_functional_worker.py": "99a8dcb792e9d9e59049192dd817b8c92343b416a56846868aecc2782e3f7b97",
+    "swissknife/config/visual-functional-app-contracts.json": "7f426fbead37d4ecfdbc087211e9e86b0570a883de64d83c82be353e06979b66",
+    "swissknife/docs/svf-native-foundation-contracts.md": "fde0da83d5818a0fd3e05f6f86601bf2af57e8d43da736d4ca37c6de3a9fe739",
+    "swissknife/docs/svf-pubsub-app-contract.json": "5274ebd64c417df509353a5e4741a02d5ba8e97a02b1dbf72e41a02dba09ed87",
+    "swissknife/docs/svf-supervisor-app-contract.json": "321979f7228caad0387f344a561f60a72b20d3bfa1f4d3c286cb8862f8073189",
+    "swissknife/scripts/capture-visual-functional-baseline.mjs": "20bb94bf534264ef61bc17cb1bbd18fc0cfc1bc6a0bebdb015005a5a72ba6f04",
+    "tests/test_svf_foundation_native_entrypoint.py": "77720e5177ede37c542ded251068c77846393f06bb93f5d666be2d6f93efad77",
+    "tests/test_svf_foundation_service_ownership.py": "70e3bb2d0ce81e67edf6a1538c72f6c6b0269ac025c84f97ba175c9babd6c95a",
+    "tests/test_svf_pubsub_foundation_contract.py": "ea8ff01b8c90eab133c9121d43b01c91ef673bdcd6dd78d0429b2d8b84f0a649",
+    "tests/test_svf_supervisor_foundation_contract.py": "b3a84847a956a760524451f431ade18cd1a22af8fc0f01ca088f6bde078ee4c8",
+    "scripts/swissknife_visual_functional_blocked.py": "24cc4a2a5dc0982bf262366b9439e08b6ab3a152b1ed4ab0c78edb4dc2c9d141",
+    "scripts/swissknife_visual_functional_llm.py": "dbaf86e93124c40acd3ee1fa73ea6ff7ddfe501e5d0b0cd20f004f8012e66ee0",
+    "external/ipfs_accelerate/ipfs_accelerate_py/cli_runtime/grok_stream_capture.py": "945b3362dc0e25522d9f411f1b8dee85cbe72dc3f255308ba4d1e31fd9f12e34",
+    "scripts/swissknife_visual_functional_final_coverage.py": "b3f5fc7970f1c80b5bdd5d2b17f19e919f2e9680864bdf1b08579ac3aa6df2a6",
+    "swissknife/scripts/run-visual-functional-workflow.mjs": "b34707333cbcb9ef0295122b50c4e92c1c67f4abdaab8f2d10a60d132f57d269",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/rescue/lane_resume.py": "70a10dac7c44f8ae8e36fe705440db243c0fd19910346cc04f54804bb89975ae",
+    "scripts/swissknife_visual_functional_phase_remediation.py": "74c6f70bb03638e3e9953ecab9146c19307dd39b41880c1c81738f9be4115e13"
+  },
+  "pubsub_peers": [
+    {
+      "role": "a",
+      "unit": "swissknife-visual-functional-pubsub-a.service",
+      "repo": "/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/native-pubsub/registration-f00364e9aa5d/a/repo",
+      "api": "http://127.0.0.1:5032",
+      "node_id": "12D3KooWRRzvKnDLbtBdPnr3YmtQY4qG2eDHYVq5BgtfLWiPvuEG",
+      "config_sha256": "3fd8de97d4e67acfc3849be03f0a98b19d8b285329e067b98648b5b9cc16a0ba",
+      "unit_registration": {
+        "fragment": "/home/barberb/.config/systemd/user/swissknife-visual-functional-pubsub-a.service",
+        "fragment_sha256": "49913da6de7c4d71cdea5b4dba1b8dc99e78df194570f110d28e32b6c4f8f2c0",
+        "argv": [
+          "/home/barberb/.local/bin/ipfs",
+          "daemon",
+          "--enable-gc",
+          "--migrate=false",
+          "--enable-pubsub-experiment",
+          "--agent-version-suffix=svf-owned-pubsub-v1"
+        ],
+        "cwd": "/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/native-pubsub/registration-f00364e9aa5d/a",
+        "binary_sha256": "86ec314801d226767cb3e767449cbfb685e39be307192a6fd32553e29a0a25ea",
+        "environment": {
+          "IPFS_PATH": "/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/native-pubsub/registration-f00364e9aa5d/a/repo",
+          "GOMAXPROCS": "2",
+          "IPFS_TELEMETRY": "off"
+        },
+        "ports": [
+          5032,
+          40032
+        ]
+      }
+    },
+    {
+      "role": "b",
+      "unit": "swissknife-visual-functional-pubsub-b.service",
+      "repo": "/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/native-pubsub/registration-f00364e9aa5d/b/repo",
+      "api": "http://127.0.0.1:5033",
+      "node_id": "12D3KooWEHL7L4Hs6NR9sdKCxGd1KjopH24oqcLBZYEh21ma1NQH",
+      "config_sha256": "a77a08eaef8302bf6cbd57bdb58a4013776673951813763c36f8540f292807a4",
+      "unit_registration": {
+        "fragment": "/home/barberb/.config/systemd/user/swissknife-visual-functional-pubsub-b.service",
+        "fragment_sha256": "80829f6d03a2af0311ffe4ae9a64c4e4dc89265e41b5ae9c0fbf5c5977aaf513",
+        "argv": [
+          "/home/barberb/.local/bin/ipfs",
+          "daemon",
+          "--enable-gc",
+          "--migrate=false",
+          "--enable-pubsub-experiment",
+          "--agent-version-suffix=svf-owned-pubsub-v1"
+        ],
+        "cwd": "/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/native-pubsub/registration-f00364e9aa5d/b",
+        "binary_sha256": "86ec314801d226767cb3e767449cbfb685e39be307192a6fd32553e29a0a25ea",
+        "environment": {
+          "IPFS_PATH": "/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/native-pubsub/registration-f00364e9aa5d/b/repo",
+          "GOMAXPROCS": "2",
+          "IPFS_TELEMETRY": "off"
+        },
+        "ports": [
+          5033,
+          40033
+        ]
+      }
+    }
+  ]
+}
