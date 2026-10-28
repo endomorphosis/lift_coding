@@ -1246,7 +1246,7 @@ def _expand_review_literals(value):
     need(type(table) is dict and 0 < len(table) <= 64
          and all(type(key) is str and re.fullmatch(r'r[0-9]+', key) for key in table)
          and caption in {_REVIEW_LITERAL_SEMANTICS, _PREVIOUS_REVIEW_LITERAL_SEMANTICS, _LEGACY_REVIEW_LITERAL_SEMANTICS} and type(marker) is str
-         and re.fullmatch(r'review_ref(?:_[0-9]+)?', marker)
+         and re.fullmatch(r'(?:review_ref(?:_[0-9]+)?|~[0-9]*)', marker)
          and marker not in _review_dictionary_keys(table), 'review literal table/key/semantics are malformed or cyclic')
     used = set()
     def visit(item):
@@ -1313,9 +1313,131 @@ def _factor_review_literals(value):
     return result if len(encoded(result)) < len(original) else value
 
 
+def _shorten_projection_literal_marker(value):
+    """Rekey generated references only; table literals and all facts stay exact."""
+    if 'shared_review_literals' not in value:
+        return value
+    expanded = _expand_review_literals(value)
+    result = parse(encoded(value)); old = result['shared_review_literals_reference_key']
+    keys = _review_dictionary_keys(result); marker = '~'; suffix = 0
+    while marker in keys:
+        suffix += 1; marker = '~' + str(suffix)
+    table = result['shared_review_literals']
+    def visit(item):
+        if type(item) is list: return [visit(child) for child in item]
+        if type(item) is not dict: return item
+        if old in item:
+            need(set(item) == {old} and type(item[old]) is str and item[old] in table,
+                 'short literal reference collides or is unknown')
+            return {marker: item[old]}
+        return {key: visit(child) for key, child in item.items()}
+    result = {key: item if key == 'shared_review_literals' else visit(item) for key, item in result.items()}
+    result['shared_review_literals_reference_key'] = marker
+    need(encoded(_expand_review_literals(result)) == encoded(expanded), 'short literal marker changed typed evidence')
+    return result if len(encoded(result)) < len(encoded(value)) else value
+
+
+_OBJECT_ROWS_FIELDS = {'object_schemas', 'object_row_marker', 'object_rows_semantics'}
+_OBJECT_ROWS_SEMANTICS = ('Object marker: schema index then positional values; pipe-separated schema keys match positions. '
+    'Arrays and actual/expected payloads stay literal; path/hash/CID values are unchanged. Expand first; no shared identity.')
+
+
+def _expand_projection_objects(value):
+    """Restore field names only; arbitrary asserted payloads are opaque literals."""
+    result = parse(encoded(value))
+    fields = _OBJECT_ROWS_FIELDS & set(result)
+    if not fields:
+        return result
+    need(fields == _OBJECT_ROWS_FIELDS, 'object row metadata is incomplete')
+    schemas = result.pop('object_schemas')
+    marker = result.pop('object_row_marker')
+    semantics = result.pop('object_rows_semantics')
+    need(type(schemas) is list and 0 < len(schemas) <= 32 and type(marker) is str
+         and re.fullmatch(r'@[0-9]*', marker) and semantics == _OBJECT_ROWS_SEMANTICS,
+         'object row schema/marker/semantics are malformed')
+    keys = []
+    for schema in schemas:
+        need(type(schema) is str, 'object row schema is not a literal key list')
+        names = schema.split('|')
+        need(3 <= len(names) <= 64 and names == sorted(set(names))
+             and all(re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]*', name) for name in names),
+             'object row key list is malformed or duplicated')
+        keys.append(names)
+    need(len(set(schemas)) == len(schemas), 'object row schemas are duplicated')
+    used = set()
+    def visit(item):
+        if type(item) is list:
+            return [visit(child) for child in item]
+        if type(item) is not dict:
+            return item
+        if marker in item:
+            row = item[marker]
+            need(set(item) == {marker} and type(row) is list and row and type(row[0]) is int
+                 and 0 <= row[0] < len(keys) and len(row) == len(keys[row[0]]) + 1,
+                 'object row reference is unknown, colliding or has wrong arity')
+            used.add(row[0])
+            return {name: child if name in {'actual', 'expected'} else visit(child)
+                    for name, child in zip(keys[row[0]], row[1:])}
+        return {name: child if name in {'actual', 'expected'} else visit(child)
+                for name, child in item.items()}
+    result = visit(result)
+    need(used == set(range(len(schemas))), 'object row schema is unused or unreachable')
+    return result
+
+
+def _factor_projection_objects(value):
+    """Final lossless fallback for repeated object field names, never values."""
+    need(not _OBJECT_ROWS_FIELDS & set(value), 'projection already has object row metadata')
+    original = encoded(value)
+    all_keys = _review_dictionary_keys(value)
+    marker = '@'; suffix = 0
+    while marker in all_keys:
+        suffix += 1; marker = '@' + str(suffix)
+    shapes = {}
+    def literal(path, item):
+        return (path and path[-1] in {'original', 'result_screenshot'}
+                or len(path) >= 2 and path[-2] in {'backend_observations', 'additional_backend_phase_proofs'}
+                and type(item) is dict and 'request_phase' not in item)
+    def envelope(path):
+        return len(path) == 2 and path[0] == 'viewports' and type(path[1]) is int
+    def collect(item, path=()):
+        if literal(path, item): return
+        if type(item) is dict:
+            names = tuple(sorted(item))
+            if not envelope(path) and 3 <= len(names) <= 64 and all(re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]*', name) for name in names):
+                shapes[names] = shapes.get(names, 0) + 1
+            for name, child in item.items():
+                if name not in {'actual', 'expected'}: collect(child, (*path, name))
+        elif type(item) is list:
+            for index, child in enumerate(item): collect(child, (*path, index))
+    collect(value)
+    ranked = []
+    for names, count in shapes.items():
+        saving = (sum(len(encoded(name)) + 1 for name in names) - len(encoded({marker: [31]})) - 1) * count - len(encoded('|'.join(names))) - 5
+        if count >= 2 and saving > 0:
+            ranked.append((saving, names))
+    ranked.sort(key=lambda row: (-row[0], row[1]))
+    selected = [names for _, names in ranked[:32]]
+    if not selected:
+        return value
+    indexes = {names: index for index, names in enumerate(selected)}
+    def visit(item, path=()):
+        if literal(path, item): return item
+        if type(item) is list: return [visit(child, (*path, index)) for index, child in enumerate(item)]
+        if type(item) is not dict: return item
+        names = tuple(sorted(item))
+        values = [item[name] if name in {'actual', 'expected'} else visit(item[name], (*path, name)) for name in names]
+        return {marker: [indexes[names], *values]} if not envelope(path) and names in indexes else dict(zip(names, values))
+    result = visit(value)
+    result.update(object_schemas=['|'.join(names) for names in selected],
+                  object_row_marker=marker, object_rows_semantics=_OBJECT_ROWS_SEMANTICS)
+    need(encoded(_expand_projection_objects(result)) == original, 'object row encoding changed typed evidence')
+    return result if len(encoded(result)) < len(original) else value
+
+
 def _expand_projection(value):
     """Invert presentation factoring only at known typed slots; never raw payloads."""
-    result = _expand_review_literals(value)
+    result = _expand_review_literals(_expand_projection_objects(value))
     table = result.pop('shared_projection_values', None)
     caption = result.pop('shared_projection_values_semantics', None)
     need(table is None or type(table) is dict and 0 < len(table) <= 16
@@ -1404,6 +1526,8 @@ def _factor_projection(value):
         result['shared_projection_values_semantics'] = _SHARED_SEMANTICS
     if len(encoded(result)) > 18000:
         result = _factor_review_literals(result)
+    if len(encoded(result)) > 18000:
+        result = _factor_projection_objects(_shorten_projection_literal_marker(result))
     need(encoded(_expand_projection(result)) == original, 'projection factoring changed typed evidence values')
     return result
 
