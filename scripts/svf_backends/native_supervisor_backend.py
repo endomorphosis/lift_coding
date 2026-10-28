@@ -4,6 +4,7 @@ from __future__ import annotations
 import hashlib,json,os,sys,threading,uuid
 from pathlib import Path
 MODE='svf-goal-worker-v1'
+FIXTURE_SCOPE='svf-agent-supervisor-552'
 SUBMIT='WorkflowCoordinator.submit_task'
 ROOT=Path(__file__).resolve().parents[2]
 RUNTIME=ROOT/'data/agent_supervisor/swissknife_visual_functional/backends/supervisor-fixtures'
@@ -20,9 +21,9 @@ SOURCE_PATHS=[
  'external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py',
  'scripts/svf_backends/fixed_supervisor_worker.py','scripts/svf_backends/fixed_supervisor_output_validator.py']
 SDK_CLASSES=['ipfs_accelerate_py.agent_supervisor.task_sources.intent_repository.IntentRepository','ipfs_accelerate_py.agent_supervisor.task_sources.database_task_source.DatabaseTaskSource','ipfs_accelerate_py.agent_supervisor.verification.process_runner.VerificationProcessRunner']
-CREATE_KEYS={'fixture_mode','action','fixture','dry_run','correlation_id'}
-MUTATE_KEYS={'fixture_mode','action','run_id','task_key','dry_run','correlation_id'}
-READ_KEYS={'fixture_mode','run_id','task_key','correlation_id'}
+CREATE_KEYS={'fixture_mode','fixture_scope','action','fixture','dry_run','correlation_id'}
+MUTATE_KEYS={'fixture_mode','fixture_scope','action','run_id','task_key','dry_run','correlation_id'}
+READ_KEYS={'fixture_mode','fixture_scope','run_id','task_key','correlation_id'}
 FIXTURES={'dependency-output-v1','timeout-recovery-v1','cancel-recovery-v1'}
 LOCK=threading.RLock()
 RUNS={}
@@ -57,6 +58,7 @@ def check_common(args,allowed):
     if type(args) is not dict:reject('Tool arguments must be an object')
     if set(args)-allowed:reject('Unsupported supervisor fixture arguments')
     if args.get('fixture_mode')!=MODE:reject('Unsupported supervisor fixture mode')
+    if 'fixture_scope' in args and (type(args['fixture_scope']) is not str or args['fixture_scope']!=FIXTURE_SCOPE):reject('Unsupported supervisor fixture scope')
     if 'dry_run' in args and args['dry_run'] is not False:reject('Preview is not a supervisor fixture execution')
     if 'correlation_id' in args and (type(args['correlation_id']) is not str or not 0<len(args['correlation_id'])<=256):reject('Invalid correlation ID')
 def canonical_uuid(value,label):

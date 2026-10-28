@@ -884,15 +884,25 @@ def _repair_inputs(profile: dict, task: dict, inputs: list[str], context_path: P
                 + 4096 + 256 * len(task.get("edit_paths", [])))
     remaining = budget - overhead
     minimum = 2048
-    if remaining < minimum * len(records):
-        raise ModelContextBudgetError(overhead + minimum * len(records), budget)
+    # A complete short source needs only its exact encoded bytes. Reserving a
+    # larger excerpt floor for it can falsely reject otherwise complete input.
+    def reserve(row: dict) -> int:
+        return min(minimum, row["cost"])
+
+    minimum_total = sum(reserve(row) for row in records)
+    if remaining < minimum_total:
+        raise ModelContextBudgetError(overhead + minimum_total, budget)
     targets = set(task.get("edit_paths", []))
     mandatory_paths = targets | set(task.get("_required_context_paths", []))
     ordered = sorted(records, key=lambda row: (row["path"] not in mandatory_paths, row["index"]))
     selected = {}
 
-    def fits_whole(row: dict, pending: int) -> bool:
-        return len(row["content"].encode()) <= 250000 and row["cost"] <= remaining - minimum * (pending - 1)
+    def other_reserves(row: dict) -> int:
+        return sum(reserve(other) for other in ordered
+                   if other["path"] not in selected and other["path"] != row["path"])
+
+    def fits_whole(row: dict) -> bool:
+        return len(row["content"].encode()) <= 250000 and row["cost"] <= remaining - other_reserves(row)
 
     # Inline-only repair has no way to recover omitted edit bytes. Supporting
     # sources may be projected, but complete existing targets are mandatory.
@@ -902,7 +912,8 @@ def _repair_inputs(profile: dict, task: dict, inputs: list[str], context_path: P
             size = len(row["content"].encode())
             if size > 250000:
                 raise ModelContextBudgetError(size, 250000)
-        required = overhead + sum(row["cost"] for row in mandatory) + minimum * (len(records) - len(mandatory))
+        required = overhead + sum(row["cost"] for row in mandatory) + sum(
+            reserve(row) for row in ordered if row["path"] not in mandatory_paths)
         if required > budget:
             raise ModelContextBudgetError(required, budget)
         for row in mandatory:
@@ -911,18 +922,17 @@ def _repair_inputs(profile: dict, task: dict, inputs: list[str], context_path: P
     # Reserve at least a labelled identity/excerpt for each other input, while
     # retaining all fitting edit targets in full before supporting sources.
     for row in ordered:
-        if row["path"] not in selected and row["path"] in targets and fits_whole(row, len(records) - len(selected)):
+        if row["path"] not in selected and row["path"] in targets and fits_whole(row):
             selected[row["path"]] = row["path"]
             remaining -= row["cost"]
     for row in ordered:
         if row["path"] in selected:
             continue
-        pending = len(records) - len(selected)
-        if fits_whole(row, pending):
+        if fits_whole(row):
             selected[row["path"]] = row["path"]
             remaining -= row["cost"]
             continue
-        allowance = remaining - minimum * (pending - 1)
+        allowance = remaining - other_reserves(row)
         target = context_dir / f"source-{row['index']}.json"
         relative = str(target.relative_to(ROOT))
         excerpt_budget = min(250000, allowance)
