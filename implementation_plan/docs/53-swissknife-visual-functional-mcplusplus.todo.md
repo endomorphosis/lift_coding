@@ -4563,7 +4563,8 @@ The canonical JSON/DuckDB import is the initial plan snapshot. This Markdown boa
 
 ## SVF-543 Verify MCP++ Explorer actual results, recovery and final visuals
 
-- Status: ready
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-10-28T17:07:34Z
 - Priority: P1
 - Track: verify
 - Depends on: SVF-542, SVF-042, SVF-041, SVF-040, SVF-035
