@@ -405,19 +405,32 @@ class RecoveryTests(unittest.TestCase):
         self.assertEqual(len(self.model_calls), before)
 
     def real_verification_shape(self, *, admit_scenario):
-        js = "swissknife/web/js/apps/image-viewer.js"
-        scenario = "swissknife/test/e2e/functional-workflows/image-viewer.json"
+        js = "swissknife/web/js/apps/calculator.js"
+        scenario = "swissknife/test/e2e/functional-workflows/calculator.json"
         self.target = self.root / js; self.target.parent.mkdir(parents=True)
         self.target.write_text("export const state = 'stable';\n")
         workflow = self.root / scenario; workflow.parent.mkdir(parents=True)
-        workflow.write_text('{"schema":"swissknife.visual-functional-scenario.v1","app_id":"image-viewer","state":"before"}\n')
-        self.task.update(kind="verify", app_id="image-viewer", edit_paths=[js, scenario], recovery_edit_paths=[js, scenario],
+        # JSON-only recovery still needs a genuinely valid canonical scenario.
+        repository = Path(os.environ.get("SVF_FOUNDATION_REPOSITORY_ROOT", str(Path(__file__).resolve().parents[1])))
+        value = json.loads((repository / scenario).read_bytes())
+        value["description"] = "before"
+        workflow.write_text(json.dumps(value, separators=(",", ":")) + "\n")
+        contract = "swissknife/config/visual-functional-app-contracts.json"
+        target = self.root / contract; target.parent.mkdir(parents=True)
+        target.write_bytes((repository / contract).read_bytes())
+        self.profile["appContractPath"] = contract
+        for name in ("swissknife/scripts/run-visual-functional-workflow.mjs",
+                     "swissknife/scripts/capture-visual-functional-baseline.mjs",
+                     "swissknife/scripts/lib/pick-free-port.mjs"):
+            target = self.root / name; target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes((repository / name).read_bytes())
+        self.task.update(kind="verify", app_id="calculator", edit_paths=[js, scenario], recovery_edit_paths=[js, scenario],
                          context_paths=[js, "docs/context.txt"], checks=[])
         self.packet["source_before"] = {js: self.sha(self.target), "guard.py": self.sha(self.guard)}
         if admit_scenario:self.packet["source_before"][scenario] = self.sha(workflow)
         self.save_packet()
         self.edits = lambda: [{"path": scenario, "before_sha256": self.packet["source_before"][scenario],
-                              "old": '"state":"before"', "new": '"state":"after"'}]
+                              "old": '"description":"before"', "new": '"description":"after"'}]
         return js, scenario, workflow
 
     def test_real_verify_packet_missing_scenario_hash_fails_before_provider(self):
@@ -433,7 +446,7 @@ class RecoveryTests(unittest.TestCase):
         original_js = self.target.read_bytes()
         result = self.run_recovery()
         self.assertEqual(self.target.read_bytes(), original_js)
-        self.assertEqual(json.loads(workflow.read_bytes())["state"], "after")
+        self.assertEqual(json.loads(workflow.read_bytes())["description"], "after")
         self.assertEqual(result["source_before"][js], result["source_after"][js])
         self.assertNotEqual(result["source_before"][scenario], result["source_after"][scenario])
         self.assertEqual(self.owned, [[scenario]])

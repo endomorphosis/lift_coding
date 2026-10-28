@@ -359,6 +359,143 @@ def _phase_selectors(scenario):
     return media, controls
 
 
+
+
+def _supplemental_encoded(value):
+    """Public JS canonicalJSON bytes for this fixed-key scalar DOM wire."""
+    if value is None:
+        return b'null'
+    if type(value) in {str, bool}:
+        return json.dumps(value, ensure_ascii=False, separators=(',', ':')).encode('utf-8', 'backslashreplace')
+    if type(value) in {int, float}:
+        try:
+            number = float(value)
+        except (OverflowError, ValueError):
+            raise ValueError('supplemental JSON number is not finite') from None
+        need(math.isfinite(number), 'supplemental JSON number is not finite')
+        if number == 0:
+            return b'0'
+        negative = number < 0
+        mantissa, _, exponent = repr(abs(number)).lower().partition('e')
+        point = mantissa.find('.') if '.' in mantissa else len(mantissa)
+        digits = mantissa.replace('.', '')
+        position = point + (int(exponent) if exponent else 0)
+        while digits.startswith('0'):
+            digits = digits[1:]; position -= 1
+        digits = digits.rstrip('0')
+        if 0 < position <= 21:
+            text = (digits + '0' * (position - len(digits)) if position >= len(digits)
+                    else digits[:position] + '.' + digits[position:])
+        elif -6 < position <= 0:
+            text = '0.' + '0' * -position + digits
+        else:
+            power = position - 1
+            text = digits[0] + ('.' + digits[1:] if len(digits) > 1 else '') + 'e' + ('+' if power >= 0 else '') + str(power)
+        return (('-' if negative else '') + text).encode()
+    if type(value) is list:
+        return b'[' + b','.join(_supplemental_encoded(item) for item in value) + b']'
+    need(type(value) is dict and all(type(key) is str for key in value),
+         'supplemental observation is not finite JSON data')
+    return b'{' + b','.join(_supplemental_encoded(key) + b':' + _supplemental_encoded(value[key])
+                            for key in sorted(value)) + b'}'
+
+
+def _supplemental_scalar(value):
+    need(value is None or type(value) in {bool, str, int, float},
+         'supplemental observation must be a JSON scalar')
+    need(len(_supplemental_encoded(value)) <= 512, 'supplemental scalar exceeds its 512-byte bound')
+
+
+def _supplemental_equal(actual, expected):
+    # JSON has one numeric type; bool remains distinct from numbers.
+    if type(actual) in {int, float} and type(expected) in {int, float}:
+        return _supplemental_encoded(actual) == _supplemental_encoded(expected)
+    return type(actual) is type(expected) and actual == expected
+
+
+def supplemental_descriptors(scenario):
+    """Return only bounded anonymous DOM checks, without semantic authority."""
+    rows = []
+    for phase in _PHASES:
+        steps = scenario.get('phases', {}).get(phase)
+        need(type(steps) is list and 0 < len(steps) <= 64,
+             'supplemental source phase is absent or unbounded')
+        for index, step in enumerate(steps):
+            need(type(step) is dict, 'supplemental source step is not an object')
+            if step.get('op') != 'assert':
+                continue
+            if 'requirement_id' in step or 'checkpoint_id' in step:
+                present = [key for key in ('requirement_id', 'checkpoint_id') if key in step]
+                need(len(present) == 1 and type(step[present[0]]) is str and step[present[0]],
+                     'assertion identity must be present and nonempty or both keys absent')
+                continue
+            need(set(step) == {'op', 'probe', 'operator', 'expected'},
+                 'supplemental assertion cannot name identities, retention or other fields')
+            probe = step['probe']
+            need(type(probe) is dict and type(probe.get('kind')) is str and probe['kind'] in {'text', 'value', 'json_attribute'},
+                 'supplemental probe must be a readonly DOM text/value/attribute observation')
+            required = {'kind', 'selector'} | ({'attribute'} if probe['kind'] == 'json_attribute' else set())
+            allowed = required | ({'pointer'} if probe['kind'] == 'json_attribute' else set())
+            need(required <= set(probe) <= allowed,
+                 'supplemental probe cannot add temporal, media, owner or unknown fields')
+            selector = probe['selector']
+            need(type(selector) is str and selector.strip() and len(selector.encode('utf-16-le', 'surrogatepass')) // 2 <= 512
+                 and not re.search(r'[\r\n\x00]', selector)
+                 and not re.search(r'data-svd-(?:vda-marker|workflow)|data-(?:fake-)?proof|data-acceptance-passed', selector),
+                 'supplemental selector is invalid or names synthetic proof')
+            if probe['kind'] == 'json_attribute':
+                attribute = probe['attribute']
+                need(type(attribute) is str and re.fullmatch(r'data-[a-z0-9-]+', attribute)
+                     and not re.search(r'secret|password|token|credential', attribute),
+                     'supplemental attribute must be declared nonsensitive DOM data')
+                if 'pointer' in probe:
+                    pointer = probe['pointer']
+                    need(type(pointer) is str and pointer.startswith('/') and len(pointer) <= 2048
+                         and re.search(r'~(?![01])', pointer) is None,
+                         'supplemental attribute pointer is invalid')
+            need(type(step['operator']) is str and step['operator'] in {'equals', 'not_equals', 'contains', 'at_least'},
+                 'supplemental assertion operator is unsupported')
+            _supplemental_scalar(step['expected'])
+            rows.append({'phase': phase, 'step_index': index, 'probe': probe,
+                         'operator': step['operator'], 'expected': step['expected']})
+    need(len(rows) <= 8 and len(_supplemental_encoded(rows)) <= 2048,
+         'supplemental source exceeds its eight-check/2048-byte bound')
+    return rows
+
+
+def validate_supplemental_observations(child, scenario, observation_validator=None):
+    """Re-evaluate exact per-child supplemental facts, never required roles."""
+    declared = supplemental_descriptors(scenario)
+    if 'supplemental_observations' not in child:
+        need(not declared, 'final viewport omitted declared supplemental observations')
+        return []
+    rows = child['supplemental_observations']
+    need(type(rows) is list and len(rows) == len(declared) and len(_supplemental_encoded(rows)) <= 4096,
+         'supplemental observation count/order or byte bound differs from source')
+    for row, source in zip(rows, declared):
+        need(type(row) is dict and set(row) == {'phase', 'step_index', 'probe', 'observed'}
+             and row['phase'] == source['phase'] and type(row['step_index']) is int
+             and row['step_index'] == source['step_index'] and encoded(row['probe']) == encoded(source['probe']),
+             'supplemental observation is detached from its exact original source step')
+        value = row['observed']
+        need(type(value) is dict and set(value) == {'operator', 'actual', 'expected'}
+             and value['operator'] == source['operator'], 'supplemental observation shape/operator differs')
+        _supplemental_scalar(value['actual']); _supplemental_scalar(value['expected'])
+        need(_supplemental_equal(value['expected'], source['expected']),
+             'supplemental expected value differs from its exact typed source value')
+        operator, actual, expected = value['operator'], value['actual'], value['expected']
+        passed = (_supplemental_equal(actual, expected) if operator == 'equals' else
+                  not _supplemental_equal(actual, expected) if operator == 'not_equals' else
+                  type(actual) is str and type(expected) is str and bool(expected) and expected in actual
+                  if operator == 'contains' else
+                  type(actual) in {int, float} and type(expected) in {int, float}
+                  and expected > 0 and actual >= expected)
+        need(passed, 'supplemental actual observation contradicts its expected value')
+        if observation_validator is not None:
+            observation_validator(value)
+    return rows
+
+
 def validate_phase_evidence(child, scenario):
     """Validate optional actual-step observations, preserving historical V2 absence."""
     if 'phase_evidence' not in child:
@@ -370,8 +507,9 @@ def validate_phase_evidence(child, scenario):
     phases = evidence['phases']
     need(type(phases) is list and len(phases) == 3, 'phase evidence must retain all three original phases')
     media_selectors, control_selectors = _phase_selectors(scenario)
+    supplements = validate_supplemental_observations(child, scenario)
     observations = {(a['phase'], a['step_index']): a['observed']
-                    for a in [*child['semantic_assertions'], *child['error_observations']]}
+                    for a in [*child['semantic_assertions'], *child['error_observations'], *supplements]}
     temporal = []; generation = None; finished = 0
     for phase, name in zip(phases, _PHASES):
         need(type(phase) is dict and set(phase) == {'phase', 'generation_before', 'generation_after', 'steps'}
@@ -386,7 +524,10 @@ def validate_phase_evidence(child, scenario):
             need(type(record) is dict and set(record) == {'step_index', 'step', 'generation_before', 'generation_after',
                  'started_ms', 'finished_ms', 'observed', 'temporal_samples', 'media', 'controls', 'reopen'}
                  and type(record['step_index']) is int and record['step_index'] == index
-                 and encoded(record['step']) == encoded(step), 'phase action differs from its exact original scenario step/order')
+                 and (_supplemental_encoded(record['step']) == _supplemental_encoded(step)
+                      if step['op'] == 'assert' and 'requirement_id' not in step and 'checkpoint_id' not in step
+                      else encoded(record['step']) == encoded(step)),
+                 'phase action differs from its exact original scenario step/order')
             after_generation = generation + (1 if step['op'] == 'reopen_app' else 0)
             need(type(record['generation_before']) is int and type(record['generation_after']) is int
                  and record['generation_before'] == generation and record['generation_after'] == after_generation,
@@ -654,7 +795,8 @@ def _scenario_error_checkpoints(scenario):
             need(len(semantics) == 1 and error_index < semantics[0] < index
                  and any(step.get('op') in {'click', 'check', 'uncheck', 'fill', 'select', 'press', 'reopen_app'}
                          for step in steps[error_index + 1:semantics[0]])
-                 and passive(steps[semantics[0] + 1:index]) and passive(steps[index + 1:]),
+                 and all(item.get('op') in {'capture', 'wait_ms', 'wait_for'}
+                         for item in [*steps[semantics[0] + 1:index], *steps[index + 1:]]),
                  'saved-image recovery checkpoint must follow the original recovery assertion/action with no later UI or owner action')
         for source_phase, source_index in refs.items():
             source_steps = scenario['phases'][source_phase]
@@ -756,6 +898,7 @@ def validate_dual_workflow(root, profile, task, report, *, observation_validator
     scenario = parse(read(root, 'swissknife/test/e2e/functional-workflows/' + task['app_id'] + '.json'))
     need(scenario.get('schema') == 'swissknife.visual-functional-scenario.v1' and scenario.get('app_id') == task['app_id'],
          'final workflow scenario identity is invalid')
+    supplemental_descriptors(scenario)
     scenario_assertions = {}; scenario_errors = []
     for phase in ('primary_result', 'persist_reopen', 'failure_recovery'):
         steps = scenario.get('phases', {}).get(phase)
@@ -837,6 +980,9 @@ def validate_dual_workflow(root, profile, task, report, *, observation_validator
                  and encoded(error.get('observed', {}).get('expected')) == encoded(error_step['expected']),
                  'final viewport error observation differs from its exact scenario checkpoint')
             observation_validator(error.get('observed'))
+        supplements = validate_supplemental_observations(child, scenario, observation_validator)
+        need(not supplements or 'phase_evidence' in child,
+             'supplemental observations require their actual source-bound phase evidence')
         temporal = child.get('temporal_observations')
         timed_assertions = [a for a in [*assertions, *errors] if 'temporal_ms' in a['probe']]
         need(type(temporal) is list and len(temporal) == len(timed_assertions), 'final viewport temporal observations missing')
@@ -1357,6 +1503,9 @@ def projection(root, report):
             'backend_call_count': child['backend_call_count'],
             'backend_call_phases': child['backend_call_phases'],
             'layout': child['viewports'][0]})
+        supplements = validate_supplemental_observations(child, scenario)
+        if supplements:
+            result['viewports'][-1]['supplemental_observations'] = supplements
         phase = phase_projection(child, scenario)
         if phase is not None:
             result['viewports'][-1]['phase_evidence'] = phase

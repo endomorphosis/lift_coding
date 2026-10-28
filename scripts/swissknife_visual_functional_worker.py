@@ -429,6 +429,145 @@ def remember_owned_sources(profile: dict, paths: list[str]) -> None:
     atomic_json(ledger_path, ledger)
 
 
+SCENARIO_PROPOSAL_SCHEMA = "swissknife.scenario-preflight.v1"
+SCENARIO_PROPOSAL_VALIDATOR = r"""
+import fs from 'node:fs';
+import net from 'node:net';
+import tls from 'node:tls';
+import http from 'node:http';
+import https from 'node:https';
+import dgram from 'node:dgram';
+import child from 'node:child_process';
+import {syncBuiltinESMExports} from 'node:module';
+import {pathToFileURL} from 'node:url';
+const deny=()=>{throw new Error('scenario preflight forbids network, child processes and writes');};
+net.connect=net.createConnection=net.createServer=deny;
+net.Socket.prototype.connect=net.Server.prototype.listen=deny;
+tls.connect=tls.createServer=http.request=http.get=http.createServer=https.request=https.get=https.createServer=deny;
+dgram.createSocket=deny;
+for(const name of ['spawn','spawnSync','exec','execSync','execFile','execFileSync','fork'])child[name]=deny;
+for(const name of ['writeFileSync','appendFileSync','mkdirSync','renameSync','unlinkSync','rmSync','rmdirSync','chmodSync','chownSync','symlinkSync','linkSync','truncateSync'])fs[name]=deny;
+for(const name of ['writeFile','appendFile','mkdir','rename','unlink','rm','rmdir','chmod','chown','symlink','link','truncate']){fs[name]=deny;fs.promises[name]=deny;}
+globalThis.fetch=globalThis.WebSocket=deny;syncBuiltinESMExports();
+const payload=JSON.parse(fs.readFileSync(0,'utf8'));
+const {validateScenario,requiredSemantics}=await import(pathToFileURL(payload.runner).href);
+let failure=null;
+for(const item of payload.scenarios){
+ const matches=payload.contract.apps.filter(app=>app.app_id===item.app_id);
+ try{
+  if(matches.length!==1)throw Object.assign(new Error('scenario path has no unique approved app contract'),{code:'INVALID_CONTRACT'});
+  validateScenario(item.value,matches[0]);
+ }catch(error){
+  if(failure)continue;
+  const issues=[],seen=new Map();let required={};
+  try{required=requiredSemantics(matches[0]);}catch{}
+  for(const [phase,steps]of Object.entries(item.value?.phases||{}))if(Array.isArray(steps))for(const [index,step]of steps.entries()){
+   if(!step||typeof step!=='object')continue;
+   if(typeof step.requirement_id==='string'){
+    const id=step.requirement_id,first=seen.get(id),expected=id.startsWith('result_')?'primary_result':id;
+    const reason=!Object.hasOwn(required,id)?'unknown_requirement':expected!==phase?'wrong_phase':first?'duplicate_requirement':null;
+    if(reason){if(first&&reason==='duplicate_requirement')issues.push({...first,reason});issues.push({phase,step_index:index,id:id.slice(0,64),reason});}
+    else seen.set(id,{phase,step_index:index,id:id.slice(0,64)});
+   }
+  }
+  if(!issues.length)for(const [phase,steps]of Object.entries(item.value?.phases||{}))if(Array.isArray(steps))for(const [index,step]of steps.entries())
+   if(step&&typeof step.checkpoint_id==='string')issues.push({phase,step_index:index,id:step.checkpoint_id.slice(0,64),reason:'checkpoint'});
+  failure={path:item.path,validation_code:String(error.code||'INVALID_SCENARIO').slice(0,64),message:String(error.message||error).slice(0,240),
+   issues:issues.filter(row=>['primary_result','persist_reopen','failure_recovery'].includes(row.phase)&&row.step_index<64).slice(0,16)};
+ }
+}
+const result={schema:'swissknife.scenario-preflight.v1',valid:failure===null,paths:payload.scenarios.map(item=>item.path),failure};
+const output=JSON.stringify(result);if(Buffer.byteLength(output)>16384)throw new Error('scenario preflight output bound');
+process.stdout.write(output);process.exitCode=failure?1:0;
+"""
+
+
+class ScenarioProposalError(ValueError):
+    """A proposed scenario failed before any source staging or ledger write."""
+    def __init__(self, diagnostic: dict):
+        self.diagnostic = {"code": "scenario_prevalidation_failed", **diagnostic}
+        super().__init__(json.dumps(self.diagnostic, sort_keys=True, separators=(",", ":")))
+
+
+def validate_proposed_scenarios(root: Path, profile: dict, task: dict, candidates: dict[str, bytes]) -> dict[str, str]:
+    """Validate final scenario overlays with the unchanged public pure validator."""
+    from swissknife_visual_functional_llm import _paths, _read, _parse_json, _snapshot
+    root = Path(root).resolve()
+    names = _paths(root, list(dict.fromkeys([*task.get("edit_paths", []), *candidates])), 128)
+    prefix = "swissknife/test/e2e/functional-workflows/"
+    scenarios = [name for name in names if name.startswith(prefix) and name.endswith(".json")]
+    if not scenarios:
+        return {}
+    def refused(name, code, message):
+        raise ScenarioProposalError({"path": name, "validation_code": code, "message": message[:240], "issues": []})
+    contract_name = _paths(root, [profile["appContractPath"]], 1)[0]
+    runner_name = "swissknife/scripts/run-visual-functional-workflow.mjs"
+    authority = {name: _snapshot(root, name)["sha256"] for name in [contract_name, runner_name]}
+    contract_bytes = _read(root, contract_name, 1048576)
+    if contract_name in candidates and candidates[contract_name] != contract_bytes:
+        refused(scenarios[0], "APPROVED_CONTRACT_CHANGED", "scenario validation cannot use or publish a proposed app contract")
+    contract = _parse_json(contract_bytes.decode("utf-8"))
+    if type(contract) is not dict or type(contract.get("apps")) is not list:
+        refused(scenarios[0], "INVALID_CONTRACT", "approved app contract has no app list")
+    values = []
+    for name in scenarios:
+        app_id = name[len(prefix):-5]
+        if re.fullmatch(r"[a-z][a-z0-9-]*", app_id) is None:
+            refused(name, "INVALID_SCENARIO_PATH", "scenario must use one exact canonical app filename")
+        raw = candidates[name] if name in candidates else _read(root, name, 1048576)
+        if name not in candidates:
+            authority[name] = hashlib.sha256(raw).hexdigest()
+        if len(raw) > 1048576:
+            refused(name, "SCENARIO_TOO_LARGE", "proposed scenario exceeds the existing 1MiB scenario bound")
+        try:
+            value = _parse_json(raw.decode("utf-8"))
+        except (ValueError, UnicodeError) as error:
+            refused(name, "INVALID_SCENARIO_JSON", str(error))
+        values.append({"path": name, "app_id": app_id, "value": value})
+    payload = json.dumps({"runner": str(root / runner_name), "contract": contract, "scenarios": values}, separators=(",", ":"), allow_nan=False)
+    try:
+        process = subprocess.run(["node", "--input-type=module", "-e", SCENARIO_PROPOSAL_VALIDATOR],
+                                 cwd=root, input=payload, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=15)
+    except subprocess.TimeoutExpired:
+        refused(scenarios[0], "SCENARIO_VALIDATOR_TIMEOUT", "public pure scenario validation exceeded 15 seconds")
+    if len(process.stdout.encode()) > 16384 or len(process.stderr.encode()) > 8192:
+        refused(scenarios[0], "SCENARIO_VALIDATOR_OUTPUT", "public pure scenario validation exceeded its output bound")
+    try:
+        result = _parse_json(process.stdout)
+    except ValueError:
+        refused(scenarios[0], "SCENARIO_VALIDATOR_OUTPUT", "public pure scenario validator returned no strict bounded result")
+    if (type(result) is not dict or set(result) != {"schema", "valid", "paths", "failure"}
+            or result["schema"] != SCENARIO_PROPOSAL_SCHEMA or result["paths"] != scenarios
+            or type(result["valid"]) is not bool or process.returncode != (0 if result["valid"] else 1)):
+        refused(scenarios[0], "SCENARIO_VALIDATOR_OUTPUT", "public pure scenario validator returned an invalid result")
+    if not result["valid"]:
+        diagnostic = repair_error_hint({"code": "scenario_prevalidation_failed", **result["failure"]}, {name: None for name in scenarios})
+        if diagnostic is None:
+            refused(scenarios[0], "SCENARIO_VALIDATOR_OUTPUT", "public pure scenario validator returned invalid diagnostics")
+        diagnostic.pop("code")
+        raise ScenarioProposalError(diagnostic)
+    if result["failure"] is not None:
+        refused(scenarios[0], "SCENARIO_VALIDATOR_OUTPUT", "successful scenario preflight retained a failure")
+    for name, expected in authority.items():
+        if _snapshot(root, name)["sha256"] != expected:
+            refused(scenarios[0], "SCENARIO_AUTHORITY_CHANGED", "approved app contract or validator changed during preflight")
+    return authority
+
+
+def apply_task_edits(root: Path, profile: dict, task: dict, edits: list, predicted_files: list[str], *, lease_check=None, applier=None) -> dict:
+    """Resolve and reject invalid whole batches before the atomic source applier."""
+    from swissknife_visual_functional_llm import apply_validated_edits, validate_edit_proposals, _snapshot
+    candidates = validate_edit_proposals(root, edits, predicted_files)
+    authority = validate_proposed_scenarios(root, profile, task, candidates)
+    def fence():
+        if lease_check is not None:
+            lease_check()
+        if any(_snapshot(root, name)["sha256"] != expected for name, expected in authority.items()):
+            raise ValueError("approved scenario contract or validator changed before source application")
+    fence()
+    return (applier or apply_validated_edits)(root, edits, predicted_files, lease_check=fence)
+
+
 def assert_no_campaign_hold(profile: dict) -> None:
     campaign = runtime_root(profile)
     directories = (ROOT, campaign, campaign / "state", campaign / "watchdog")
@@ -816,6 +955,21 @@ def repair_error_hint(value: Any, source_hashes: dict) -> dict | None:
     if type(value) is not dict:
         return None
     code = value.get("code")
+    if code == "scenario_prevalidation_failed":
+        if (set(value) != {"code", "path", "validation_code", "message", "issues"}
+                or value.get("path") not in source_hashes
+                or type(value.get("validation_code")) is not str or not re.fullmatch(r"[A-Z_]{1,64}", value["validation_code"])
+                or type(value.get("message")) is not str or len(value["message"]) > 240
+                or type(value.get("issues")) is not list or len(value["issues"]) > 16):
+            return None
+        for issue in value["issues"]:
+            if (type(issue) is not dict or set(issue) != {"phase", "step_index", "id", "reason"}
+                    or issue["phase"] not in {"primary_result", "persist_reopen", "failure_recovery"}
+                    or type(issue["step_index"]) is not int or not 0 <= issue["step_index"] < 64
+                    or type(issue["id"]) is not str or not 0 < len(issue["id"]) <= 64
+                    or issue["reason"] not in {"unknown_requirement", "wrong_phase", "duplicate_requirement", "checkpoint"}):
+                return None
+        return dict(value)
     if code in {"model_invocation_failed", "task_validation_failed", "source_apply_failed", "model_declined_scope"}:
         if set(value) - {"code", "codes"}:
             return None
@@ -885,7 +1039,7 @@ def load_repair_feedback(profile: dict, task: dict) -> dict | None:
 
 def remember_repair_failure(profile: dict, task: dict, *, source_hashes: dict, output: Path | None = None,
                             previous_output_sha256: str | None = None, validation_failed: bool = False,
-                            apply_failed: bool = False, declined: bool = False) -> None:
+                            apply_failed: bool = False, declined: bool = False, application_error: Exception | None = None) -> None:
     """Keep body-free retry diagnostics across worker/scheduler invocations."""
     from swissknife_visual_functional_llm import RECEIPT_SCHEMA, _read, _response, _json, _sha, safe_rejected_response
     try:
@@ -897,6 +1051,10 @@ def remember_repair_failure(profile: dict, task: dict, *, source_hashes: dict, o
     feedback = {"schema": REPAIR_FEEDBACK_SCHEMA, "task_id": task["task_id"], "task_spec_sha256": stable(task),
                 "source_sha256": source_hashes, "error": {"code": "model_declined_scope" if declined else "source_apply_failed" if apply_failed else "task_validation_failed" if validation_failed else "model_invocation_failed"},
                 "completion_authority": False}
+    if isinstance(application_error, ScenarioProposalError):
+        hint = repair_error_hint(application_error.diagnostic, source_hashes)
+        if hint is not None:
+            feedback["error"] = hint
     if output is not None and output.is_file() and sha(output) != previous_output_sha256:
         try:
             receipt = json.loads(_read(ROOT, str(output.relative_to(ROOT)), 3145728))
@@ -1544,6 +1702,7 @@ def workflow(profile: dict, task: dict, directory: Path, *, timeout_seconds: int
         scenario = json.loads(_read(ROOT, str(scenario_path.relative_to(ROOT)), 1048576))
         phases = scenario.get("phases", {}) if type(scenario) is dict else {}
         checkpoints = []
+        supplemental = []
         if type(phases) is dict:
             for phase, steps in phases.items():
                 if type(steps) is not list:
@@ -1551,10 +1710,38 @@ def workflow(profile: dict, task: dict, directory: Path, *, timeout_seconds: int
                 for index, step in enumerate(steps):
                     if type(step) is not dict:
                         continue
+                    if step.get("op") == "assert" and "requirement_id" not in step and "checkpoint_id" not in step:
+                        import math
+                        probe, expected = step.get("probe"), step.get("expected")
+                        scalar = expected is None or type(expected) in {bool, str, int, float}
+                        try:
+                            finite = type(expected) not in {int, float} or math.isfinite(expected)
+                        except OverflowError:
+                            finite = False
+                        if (phase not in {"primary_result", "persist_reopen", "failure_recovery"}
+                                or task.get("kind") not in {"verify", "final-app-verify"}
+                                or set(step) != {"op", "probe", "operator", "expected"}
+                                or type(probe) is not dict or probe.get("kind") not in {"text", "value", "json_attribute"}
+                                or "temporal_ms" in probe or not scalar
+                                or not finite
+                                or step.get("operator") not in {"equals", "not_equals", "contains", "at_least"}):
+                            raise ValueError("INVALID_SCENARIO: supplemental DOM assertions require independent V2, absent identities, "
+                                             "bounded scalar expectations and text/value/json_attribute probes only")
+                        try:
+                            expected_bytes = len(json.dumps(expected, ensure_ascii=False, allow_nan=False).encode())
+                        except (ValueError, UnicodeError, OverflowError):
+                            raise ValueError("INVALID_SCENARIO: supplemental expectation is not bounded scalar JSON") from None
+                        if expected_bytes > 512:
+                            raise ValueError("INVALID_SCENARIO: supplemental expectation exceeds 512 encoded bytes")
+                        supplemental.append((phase, index, step))
                     if "retained_from" in step and step.get("checkpoint_id") not in {"error_image_retained", "recovery_image_retained"}:
                         raise ValueError("INVALID_SCENARIO: retained_from is only allowed on retained image checkpoints")
                     if "checkpoint_id" in step:
                         checkpoints.append((phase, index, step))
+        if len(supplemental) > 8:
+            raise ValueError("INVALID_SCENARIO: at most eight supplemental DOM assertions are allowed")
+        # The same public pure Node validator used by pre-application checks
+        # owns exact canonical-JSON descriptor and native-value byte bounds.
         errors = [row for row in checkpoints if row[2]["checkpoint_id"] == "error_observed"]
         retained = [row for row in checkpoints if row[2]["checkpoint_id"] == "error_image_retained"]
         recovered = [row for row in checkpoints if row[2]["checkpoint_id"] == "recovery_image_retained"]
@@ -1883,6 +2070,17 @@ def validate_workflow(profile: dict, task: dict, report: Path) -> dict | None:
     app = next(a for a in contracts["apps"] if a["app_id"] == task["app_id"])
     if data.get("schema") != "swissknife.visual-functional-workflow.v1" or data.get("app_id") != app["app_id"]:
         raise ValueError("workflow identity/schema mismatch")
+    if "supplemental_observations" in data and (type(data["supplemental_observations"]) is not list or data["supplemental_observations"]):
+        raise ValueError("legacy V1 cannot consume supplemental observations; independent V2 is required")
+    scenario_path = path_in_root("swissknife/test/e2e/functional-workflows/" + task["app_id"] + ".json")
+    if scenario_path.exists():
+        from swissknife_visual_functional_llm import _read, _parse_json
+        scenario = _parse_json(_read(ROOT, str(scenario_path.relative_to(ROOT)), 1048576).decode("utf-8"))
+        phases = scenario.get("phases", {}) if type(scenario) is dict else {}
+        if type(phases) is dict and any(type(steps) is list and any(type(step) is dict and step.get("op") == "assert"
+                and "requirement_id" not in step and "checkpoint_id" not in step for step in steps)
+                for steps in phases.values()):
+            raise ValueError("legacy V1 cannot consume a supplemental scenario; independent V2 is required")
     if data.get("passed") is not True or data.get("source_template") is not False or data.get("actual_desktop") is not True:
         raise ValueError("workflow did not pass on the actual desktop")
     if data.get("contract_sha256") != sha(path_in_root(profile["appContractPath"])):
@@ -2216,9 +2414,9 @@ def execute(profile_path: str, profile: dict, spec: dict, task: dict) -> dict:
             check_owned_sources(profile, task.get("edit_paths", []))
             source_hashes = repair_target_hashes(task)
             try:
-                applied = apply_validated_edits(ROOT, proposal["response"]["edits"], task.get("edit_paths", []), lease_check=lambda: ensure_lease(profile))
-            except Exception:
-                remember_repair_failure(profile, task, source_hashes=source_hashes, apply_failed=True)
+                applied = apply_task_edits(ROOT, profile, task, proposal["response"]["edits"], task.get("edit_paths", []), lease_check=lambda: ensure_lease(profile))
+            except Exception as error:
+                remember_repair_failure(profile, task, source_hashes=source_hashes, apply_failed=True, application_error=error)
                 raise
             remember_owned_sources(profile, [item["path"] for item in applied["applied"]])
             try:
@@ -2266,7 +2464,7 @@ def execute(profile_path: str, profile: dict, spec: dict, task: dict) -> dict:
         from swissknife_visual_functional_llm import apply_validated_edits
         files, checks, detail = execute_child(ROOT, profile_path, profile, spec, task,
             model=model, workflow=workflow, validate_workflow=validate_workflow,
-            apply_edits=apply_validated_edits, ensure_lease=ensure_lease,
+            apply_edits=lambda root, edits, paths, **options: apply_task_edits(root, profile, task, edits, paths, **options), ensure_lease=ensure_lease,
             check_owned=check_owned_sources, remember_owned=remember_owned_sources)
     elif kind == "verify":
         from swissknife_visual_functional_llm import apply_validated_edits
@@ -2302,7 +2500,12 @@ def execute(profile_path: str, profile: dict, spec: dict, task: dict) -> dict:
                 proposal = model(profile_path, task, "repair", inputs, [], directory / f"verification-repair-{attempt}.json")
                 ensure_lease(profile)
                 check_owned_sources(profile, task["edit_paths"])
-                applied = apply_validated_edits(ROOT, proposal["response"]["edits"], task["edit_paths"], lease_check=lambda: ensure_lease(profile))
+                source_hashes = repair_target_hashes(task)
+                try:
+                    applied = apply_task_edits(ROOT, profile, task, proposal["response"]["edits"], task["edit_paths"], lease_check=lambda: ensure_lease(profile))
+                except Exception as error:
+                    remember_repair_failure(profile, task, source_hashes=source_hashes, apply_failed=True, application_error=error)
+                    raise
                 remember_owned_sources(profile, [item["path"] for item in applied["applied"]])
     elif kind == "regression":
         if task["task_id"] == "SVF-900" or "final_app_tasks" in task:

@@ -309,7 +309,11 @@ def run_recovery(root, profile, task, *, ensure_lease, check_owned, invoke_model
         expected_after = proposal_after(root, receipt, paths, before, originals)
         fence()
         check_owned(paths)
-        applied = apply_validated_edits(root, receipt["response"]["edits"], paths, lease_check=fence)
+        # Lazy import avoids an eager worker/recovery cycle. The helper uses
+        # this explicit root/profile and never invokes a model or browser.
+        from swissknife_visual_functional_worker import apply_task_edits
+        applied = apply_task_edits(root, profile, task, receipt["response"]["edits"], paths,
+                                   lease_check=fence, applier=apply_validated_edits)
         remember_owned([row["path"] for row in applied["applied"]])
         after = current_hashes(root, original_paths)
         require(after == expected_after, "applied recovery source differs from its exact model proposal")
