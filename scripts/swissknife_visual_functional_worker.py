@@ -1001,6 +1001,75 @@ def repair_error_hint(value: Any, source_hashes: dict) -> dict | None:
     return dict(value)
 
 
+def _repair_anchor_context(task: dict, feedback: dict) -> dict | None:
+    """Locate exact retained source bytes for a rejected hunk; never suggest/apply one."""
+    from swissknife_visual_functional_llm import (_read, _response, _json, _sha,
+        safe_rejected_response, validate_edit_proposals)
+    try:
+        sources = repair_target_hashes(task)
+        if sources != feedback.get("source_sha256"):
+            return None
+        error = repair_error_hint(feedback.get("error"), sources)
+        if error is None or error.get("code") != "edit_anchor_match_count":
+            return None
+        reference = feedback.get("rejected_response", {})
+        raw = _read(ROOT, reference["path"], 2097152)
+        response = _response(json.loads(raw), task["task_id"], "repair", [], ROOT,
+                             task.get("edit_paths", []), validate_edit_bytes=False)
+        if (len(raw) != reference["bytes"] or _sha(raw) != reference["sha256"]
+                or _sha(_json(response).encode()) != reference["response_sha256"]
+                or not safe_rejected_response(response)):
+            return None
+        index = error["hunk_index"]
+        edit = response["edits"][index - 1]
+        path = edit["path"]
+        if path != error["path"] or edit["before_sha256"] != sources[path]:
+            return None
+        original = _read(ROOT, path)
+        if _sha(original) != sources[path]:
+            return None
+        # Reuse the exact validator for preceding hunks, in memory only. A
+        # diagnostic must describe the same sequential draft that was refused.
+        drafts = validate_edit_proposals(ROOT, response["edits"][:index - 1], task.get("edit_paths", []))
+        draft_bytes = drafts.get(path, original)
+        draft = draft_bytes.decode("utf-8")
+        old = edit["old"]
+        if not old or draft.count(old) != error.get("match_count") or draft.count(old) == 1:
+            return None
+        if any(error.get(key, actual) != actual for key, actual in (
+                ("old_sha256", _sha(old.encode())), ("new_sha256", _sha(edit["new"].encode())),
+                ("old_bytes", len(old.encode())), ("new_bytes", len(edit["new"].encode())))):
+            return None
+        value = {"path": path, "hunk_index": index, "source_sha256": sources[path],
+                 "unapplied_draft_sha256": _sha(draft_bytes),
+                 "excerpt_basis": "Unapplied sequential draft, after preceding rejected hunks.", "failed_old": old[:256],
+                 "failed_old_complete": len(old) <= 256,
+                 "instruction": "Diagnostic only; preceding rejected hunks remain unapplied. Copy exact unique anchors from current source."}
+        # A literal prefix is only an excerpt locator, never a replacement or
+        # relaxed anchor. Include surrounding bytes to expose inline whitespace.
+        first = next((line.strip() for line in old.splitlines() if line.strip()), "")
+        for size in (128, 96, 64, 32, 16):
+            needle = first[:size]
+            if len(needle) < 16 or draft.count(needle) != 1:
+                continue
+            start = max(0, draft.index(needle) - 96)
+            value["excerpt"] = {"byte_offset": len(draft[:start].encode()),
+                                "line": draft.count("\n", 0, start) + 1,
+                                "text": draft[start:start + 384]}
+            break
+        while len(_json(value).encode()) > 2048:
+            if len(value.get("excerpt", {}).get("text", "")) > 64:
+                value["excerpt"]["text"] = value["excerpt"]["text"][:len(value["excerpt"]["text"]) // 2]
+            elif len(value["failed_old"]) > 32:
+                value["failed_old"] = value["failed_old"][:len(value["failed_old"]) // 2]
+                value["failed_old_complete"] = False
+            else:
+                return None
+        return value
+    except (ValueError, TypeError, KeyError, IndexError, OSError, AttributeError):
+        return None
+
+
 def repair_target_hashes(task: dict) -> dict:
     from swissknife_visual_functional_llm import _paths, _snapshot
     return {name: _snapshot(ROOT, name)["sha256"] for name in _paths(ROOT, task.get("edit_paths", []), 128)}
@@ -1309,6 +1378,9 @@ def model(profile_path: str, task: dict, mode: str, inputs: list[str], screensho
         previous_feedback = load_repair_feedback(profile, task)
         if previous_feedback:
             context["last_repair_error"] = previous_feedback
+            anchor_context = _repair_anchor_context(dict(task, edit_paths=editable), previous_feedback)
+            if anchor_context is not None:
+                context["failed_edit_anchor"] = anchor_context
             context["retry_instruction"] = ("Correct this exact preceding failure before proposing changes. The rejected_response artifact, if present, "
                 "is a bounded rejected JSON proposal supplied as context, not applied code. Use current target hashes and exact unique anchors. "
                 "Do not repeat the rejected hunk or infer success from this feedback.")
@@ -1466,9 +1538,20 @@ def model(profile_path: str, task: dict, mode: str, inputs: list[str], screensho
         from swissknife_visual_functional_llm import ModelContextBudgetError
         for context_attempt in range(3):
             try:
-                inputs, original_sources, complete = _repair_inputs(profile,
-                    dict(task, edit_paths=editable, _required_context_paths=required_feedback),
-                    inputs, context_path, context_dir, limits["modelContextBytes"])
+                try:
+                    inputs, original_sources, complete = _repair_inputs(profile,
+                        dict(task, edit_paths=editable, _required_context_paths=required_feedback),
+                        inputs, context_path, context_dir, limits["modelContextBytes"])
+                except ModelContextBudgetError:
+                    # Optional duplicate source context must never displace a
+                    # mandatory full target or existing repair evidence.
+                    if "failed_edit_anchor" not in context:
+                        raise
+                    context.pop("failed_edit_anchor")
+                    atomic_json(context_path, context, compact=True)
+                    inputs, original_sources, complete = _repair_inputs(profile,
+                        dict(task, edit_paths=editable, _required_context_paths=required_feedback),
+                        inputs, context_path, context_dir, limits["modelContextBytes"])
                 break
             except ModelContextBudgetError as error:
                 if ("shared_stylesheet_context" not in context or context_attempt == 2
