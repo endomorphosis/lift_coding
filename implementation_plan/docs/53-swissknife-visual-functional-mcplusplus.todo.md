@@ -4024,7 +4024,8 @@ The canonical JSON/DuckDB import is the initial plan snapshot. This Markdown boa
 
 ## SVF-443 Verify Neural Photoshop actual results, recovery and final visuals
 
-- Status: ready
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-10-28T11:54:29Z
 - Priority: P1
 - Track: verify
 - Depends on: SVF-442, SVF-042, SVF-040, SVF-035
@@ -4080,7 +4081,7 @@ The canonical JSON/DuckDB import is the initial plan snapshot. This Markdown boa
 - Status: ready
 - Priority: P1
 - Track: verify
-- Depends on: SVF-452, SVF-042, SVF-040, SVF-035
+- Depends on: SVF-452, SVF-042, SVF-040, SVF-035, SVF-PHASE-R453
 - Goal id: SVF-G135-M
 - Outputs: data/agent_supervisor/swissknife_visual_functional/tasks/SVF-453/receipt.json
 - Deterministic command: python3 scripts/swissknife_visual_functional_worker.py --task-id SVF-453
@@ -4292,7 +4293,8 @@ The canonical JSON/DuckDB import is the initial plan snapshot. This Markdown boa
 
 ## SVF-493 Verify P2P Chat Classic actual results, recovery and final visuals
 
-- Status: ready
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-10-28T12:05:50Z
 - Priority: P1
 - Track: verify
 - Depends on: SVF-492, SVF-040, SVF-035, SVF-043
@@ -4453,7 +4455,8 @@ The canonical JSON/DuckDB import is the initial plan snapshot. This Markdown boa
 
 ## SVF-523 Verify Glasses Preview actual results, recovery and final visuals
 
-- Status: ready
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-10-28T13:02:05Z
 - Priority: P1
 - Track: verify
 - Depends on: SVF-522, SVF-035
@@ -4506,7 +4509,8 @@ The canonical JSON/DuckDB import is the initial plan snapshot. This Markdown boa
 
 ## SVF-533 Verify ORB Auto-UI actual results, recovery and final visuals
 
-- Status: ready
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-10-28T15:24:34Z
 - Priority: P1
 - Track: verify
 - Depends on: SVF-532, SVF-042, SVF-041, SVF-040, SVF-035
@@ -4532,7 +4536,8 @@ The canonical JSON/DuckDB import is the initial plan snapshot. This Markdown boa
 
 ## SVF-542 Repair MCP++ Explorer intended workflow and layout
 
-- Status: ready
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-10-28T12:28:44Z
 - Priority: P1
 - Track: repair
 - Depends on: SVF-541, SVF-030
@@ -4584,7 +4589,8 @@ The canonical JSON/DuckDB import is the initial plan snapshot. This Markdown boa
 
 ## SVF-552 Repair Agent Supervisor intended workflow and layout
 
-- Status: ready
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-10-28T12:52:51Z
 - Priority: P1
 - Track: repair
 - Depends on: SVF-551, SVF-030, SVF-044
@@ -5754,3 +5760,19 @@ The canonical JSON/DuckDB import is the initial plan snapshot. This Markdown boa
 - Acceptance: Execute the declared semantic workflow on actual desktop and mobile viewports, check real rendered results, keyboard, persistence/reopen and failure/recovery, and bind screenshots/traces to current source and contract. Require all result_N/persist_reopen/failure_recovery assertions. Tool-backed workflows require genuine owner execution, independently retrieved/hashed receipts+DAG, and useful result assertions; dry-run previews cannot prove writes. Local, external and policy-blocked behavior must remain honest. Final pinned-model visual review must pass; the original task retains its existing historical repair authority and budgets; this readonly followup creates no repair authority. Never report accepted just because an event fired or text changed. This final followup must run the full unchanged scenario in two independent sessions initially at1440x900 and390x844, with separate actual semantic/backend/keyboard/persistence/recovery proof and exact result images. Require the current dual-viewport report and a fresh genuine grok_cli/grok-4.7 review-mode pass bound to both images and both child reports. This task is readonly and allocates no new automatic repair attempts; retain failures and use only separately authorized original repair scopes and existing budgets. Historical V1/layout-only mobile evidence cannot grant this final coverage.
 
 
+## SVF-PHASE-R453 One scoped source remediation for SVF-453
+
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-10-28T15:33:36Z
+- Priority: P0
+- Track: scoped-remediation
+- Goal id: SVF-G135-M
+- Depends on: SVF-452, SVF-042, SVF-040, SVF-035
+- Deterministic command: python3 scripts/swissknife_visual_functional_worker.py --task-id SVF-PHASE-R453
+- Validation: python3 scripts/swissknife_visual_functional_worker.py --validate --task-id SVF-PHASE-R453
+- Resource class: cpu-browser
+- Implementation timeout seconds: 3600
+- Predicted files: data/agent_supervisor/swissknife_visual_functional/tasks/SVF-PHASE-R453/receipt.json, swissknife/web/js/apps/cinema.js, swissknife/test/e2e/functional-workflows/cinema.json
+- Execution inputs: scripts/swissknife_visual_functional_llm.py, config/swissknife_visual_functional_supervisor.json, config/swissknife_visual_functional_tasks.json, swissknife/config/visual-functional-app-contracts.json, swissknife/scripts/capture-visual-functional-baseline.mjs, external/ipfs_accelerate/ipfs_accelerate_py/llm_router.py, external/ipfs_accelerate/ipfs_accelerate_py/cli_runtime/grok_stream_capture.py, scripts/swissknife_visual_functional_recovery.py, scripts/swissknife_visual_functional_supervisor.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/rescue/lane_resume.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/rescue/semantic_recovery.py, swissknife/scripts/run-visual-functional-workflow.mjs, swissknife/web/js/live-tool-gateway.js, swissknife/web/js/main-simple.js, swissknife/build-tools/configs/vite.web.config.ts, swissknife/scripts/lib/pick-free-port.mjs, swissknife/scripts/mcpplusplus-profile-a.cjs, swissknife/scripts/mcpplusplus-artifact-store.cjs, swissknife/scripts/vdg-connector-artifacts.cjs, swissknife/scripts/start-ipfs-kit-mcp-compat.cjs, swissknife/scripts/ipfs-kit-native-forwarder.cjs, scripts/svf_backends/native_kit_service.py, external/ipfs_kit/ipfs_kit_py/assurance/pinned_ipfs.py, external/ipfs_kit/ipfs_kit_py/core/operation_contracts.py, swissknife/src/services/mcp/all-app-tool-mediator.ts, swissknife/src/services/mcp/all-app-tool-gateway.ts, swissknife/src/services/mcp/mcp-plus-plus-connector.ts, swissknife/src/services/mcp/mcp-plus-plus-profile-c.ts, swissknife/src/services/apps/all-app-live-tool-bindings.ts, swissknife/src/services/mcp/all-tools-disposition-catalog.ts, swissknife/src/services/apps/all-app-backend-status-contract.ts, swissknife/docs/visual-functional-driver-contract.md, scripts/svf_backends/common.py, scripts/svf_backends/ipfs_kit_py.py, scripts/svf_backends/ipfs_datasets_py.py, scripts/svf_backends/ipfs_accelerate_py.py, config/systemd/swissknife-visual-functional-native-kit.service, config/systemd/swissknife-visual-functional-kit-facade.service, swissknife/web/js/apps/cinema.js, swissknife/src/services/apps/virtual-desktop-app-manifest.ts, swissknife/src/services/apps/all-app-executable-backend-contract.ts, swissknife/web/css/design-system.css, scripts/swissknife_visual_functional_worker.py, scripts/swissknife_visual_functional_blocked.py, scripts/svf_backends/native_accelerate_backend.py, scripts/svf_backends/native_accelerate_service.py, swissknife/scripts/ipfs-accelerate-native-forwarder.cjs, swissknife/scripts/all-tools-evidence-lib.cjs, swissknife/scripts/start-ipfs-accelerate-mcp-compat.cjs, swissknife/scripts/start-ipfs-datasets-mcp-compat.cjs, config/systemd/swissknife-visual-functional-native-accelerate.service, config/systemd/swissknife-visual-functional-accelerate-facade.service, config/systemd/swissknife-visual-functional-notes-datasets.service, external/ipfs_accelerate/ipfs_accelerate_py/inference_backend_manager.py, external/ipfs_datasets/ipfs_datasets_py/vector_stores/management_engine.py, external/ipfs_datasets/ipfs_datasets_py/vector_stores/duckdb_store.py, scripts/svf_backends/notes_fixture.py, config/swissknife_visual_functional_payload_fixtures.json, scripts/swissknife_visual_functional_phase_budget.py, swissknife/web/js/all-app-backend-status.js, swissknife/web/index.html, swissknife/web/css/desktop.css, swissknife/web/css/windows.css, swissknife/web/css/aero-enhanced.css, swissknife/web/js/apps/network-native-tools.js, swissknife/web/css/terminal.css, swissknife/web/css/apps.css, swissknife/web/css/model-browser.css, swissknife/web/css/strudel.css, swissknife/web/css/strudel-grandma.css, swissknife/web/css/vibecode-enhanced.css, swissknife/web/css/strudel-ai-daw.css, swissknife/web/css/api-keys-enhanced.css, swissknife/web/css/github-oauth.css, swissknife/web/css/huggingface.css, swissknife/web/css/openrouter.css, scripts/svf_backends/native_accelerate_observation.py, external/ipfs_accelerate/ipfs_accelerate_py/hf_model_server/monitoring/health.py, external/ipfs_accelerate/ipfs_accelerate_py/hf_model_server/monitoring/metrics.py, external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/rescue/storage_pressure.py, scripts/svf_backends/owned_kubo_watchdog.py, config/swissknife_visual_functional_ipfs_watchdog.json, config/systemd/swissknife-visual-functional-native-ipfs.service, config/systemd/swissknife-visual-functional-ipfs-watchdog.service, scripts/swissknife_visual_functional_review_recheck.py, scripts/swissknife_visual_functional_native_context.py, scripts/swissknife_visual_functional_phase_remediation.py, data/agent_supervisor/swissknife_visual_functional/tasks/SVF-453/verification/attempt-hqqcakn0/visual-review.json
+- Conflict policy: Edit only the declared application/scenario under the campaign lease; no recovery or child task authority.
+- Acceptance: At most one source proposal and one stale-evidence assessment, exact checked application and fresh original independent V2 functional producer with source-only validation. An obsolete gap needs a positive genuine refresh; functional-only pass is insufficient. Original acceptance remains downstream.
