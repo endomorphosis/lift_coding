@@ -36,6 +36,10 @@ class ValidationCommandError(RuntimeError):
         super().__init__(f"command exit {returncode}: {(stdout + chr(10) + stderr)[-16000:]}")
 
 
+class CoordinatorHold(RuntimeError):
+    """Typed admission refusal; no model, source apply or task failure authority."""
+
+
 class BrowserContention(RuntimeError):
     """A shared browser lease is unavailable; application repair cannot free it."""
 
@@ -573,7 +577,7 @@ def assert_no_campaign_hold(profile: dict) -> None:
     directories = (ROOT, campaign, campaign / "state", campaign / "watchdog")
     if any((directory / name).exists() for directory in directories
            for name in ("HOLD", "OPERATOR_STOP", "watchdog.disabled", "hold", "operator.hold")):
-        raise RuntimeError("coordinator hold is active; no new model invocation or source apply")
+        raise CoordinatorHold("coordinator hold is active; no new model invocation or source apply")
 
 
 def ensure_lease(profile: dict) -> None:
@@ -1713,7 +1717,7 @@ def model(profile_path: str, task: dict, mode: str, inputs: list[str], screensho
             from swissknife_visual_functional_phase_remediation import finish_payment
             finish_payment(ROOT, profile, remediation_payment[0], remediation_admission,
                            error_type=type(error).__name__)
-        if mode == "repair":
+        if mode == "repair" and not isinstance(error, CoordinatorHold):
             remember_repair_failure(profile, task, source_hashes=source_hashes, output=output,
                                     previous_output_sha256=previous_output_sha256, declined=declined)
         raise
@@ -1927,6 +1931,8 @@ def workflow(profile: dict, task: dict, directory: Path, *, timeout_seconds: int
                       + (["--independent-viewports"] if task.get("kind") in {"verify", "final-app-verify"} else []), timeout=min(1200, timeout_seconds) if timeout_seconds is not None else 1200,
                       **({"env": environment} if environment else {}))]
     except Exception as error:
+        if isinstance(error, CoordinatorHold):
+            raise
         resource = storage_refusal(error)
         if resource is not None:
             raise resource from None
@@ -2509,6 +2515,8 @@ def execute(profile_path: str, profile: dict, spec: dict, task: dict) -> dict:
             try:
                 applied = apply_task_edits(ROOT, profile, task, proposal["response"]["edits"], task.get("edit_paths", []), lease_check=lambda: ensure_lease(profile))
             except Exception as error:
+                if isinstance(error, CoordinatorHold):
+                    raise
                 remember_repair_failure(profile, task, source_hashes=source_hashes, apply_failed=True, application_error=error)
                 raise
             remember_owned_sources(profile, [item["path"] for item in applied["applied"]])
@@ -2521,6 +2529,8 @@ def execute(profile_path: str, profile: dict, spec: dict, task: dict) -> dict:
                     files += validate_foundation_pilot(profile, task)
                 break
             except Exception as error:
+                if isinstance(error, CoordinatorHold):
+                    raise
                 remember_repair_failure(profile, task, source_hashes=repair_target_hashes(task), validation_failed=True)
                 failure = directory / f"failure-{attempt}.txt"
                 failure.write_text(str(error)[-24000:])
@@ -2547,7 +2557,7 @@ def execute(profile_path: str, profile: dict, spec: dict, task: dict) -> dict:
                       "readonly_verification": True, "repair_admissions": 0}
             files.append(review_output)
         except Exception as error:
-            if isinstance(error, (BrowserContention, StoragePressure)) or storage_refusal(error) is not None:
+            if isinstance(error, (CoordinatorHold, BrowserContention, StoragePressure)) or storage_refusal(error) is not None:
                 raise
             if not getattr(error, "execution_failure_recorded", False):
                 remember_execution_failure(profile, task, error, stage="verification", review_output=review_output)
@@ -2578,7 +2588,7 @@ def execute(profile_path: str, profile: dict, spec: dict, task: dict) -> dict:
                 files.append(review_output)
                 break
             except Exception as error:
-                if isinstance(error, (BrowserContention, StoragePressure)) or storage_refusal(error) is not None:
+                if isinstance(error, (CoordinatorHold, BrowserContention, StoragePressure)) or storage_refusal(error) is not None:
                     raise  # Waiting for a foreign resource cannot justify an app edit.
                 if not getattr(error, "execution_failure_recorded", False):
                     remember_execution_failure(profile, task, error, stage="verification", review_output=review_output)
@@ -2597,6 +2607,8 @@ def execute(profile_path: str, profile: dict, spec: dict, task: dict) -> dict:
                 try:
                     applied = apply_task_edits(ROOT, profile, task, proposal["response"]["edits"], task["edit_paths"], lease_check=lambda: ensure_lease(profile))
                 except Exception as error:
+                    if isinstance(error, CoordinatorHold):
+                        raise
                     remember_repair_failure(profile, task, source_hashes=source_hashes, apply_failed=True, application_error=error)
                     raise
                 remember_owned_sources(profile, [item["path"] for item in applied["applied"]])
@@ -2792,6 +2804,11 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps({"task_id": result["task_id"], "validated": True, "artifacts": len(result["artifacts"])}), flush=True)
         return 0
     except Exception as error:
+        if isinstance(error, CoordinatorHold):
+            print(json.dumps({"task_id": args.task_id, "error": {"code": "operator_hold"},
+                              "retryable": True, "work_complete": False, "completion_authority": False}),
+                  file=sys.stderr, flush=True)
+            return 75
         from swissknife_visual_functional_phase_budget import PhaseRepairBudgetExhausted
         if isinstance(error, PhaseRepairBudgetExhausted) and task.get("kind") == "verify":
             try:
