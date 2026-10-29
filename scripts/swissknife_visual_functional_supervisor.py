@@ -162,7 +162,7 @@ def dirty_paths(root: Path) -> list[str]:
             path = Path(raw)
             if (path if path.is_absolute() else repository / path).exists():
                 raise PreflightError(f"interrupted Git operation in {repository.name}: {marker}")
-        if _git(repository, "diff", "--name-only", "--diff-filter=U").strip():
+        if _git(repository, "ls-files", "--unmerged", "-z").strip():
             raise PreflightError(f"unresolved index in {repository.name}")
         names = set(_git(repository, "diff", "--no-renames", "--name-only", "HEAD", "-z").split("\0"))
         names.update(_git(repository, "diff", "--cached", "--no-renames", "--name-only", "-z").split("\0"))
