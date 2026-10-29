@@ -1264,14 +1264,14 @@ def _expand_review_literals(value):
     return result
 
 
-def _factor_review_literals(value):
+def _factor_review_literals(value, *, compact_marker=False):
     """Deduplicate exact JSON literals with a marker absent from every input key."""
     original = encoded(value)
     need(not {'shared_review_literals','shared_review_literals_semantics','shared_review_literals_reference_key'} & set(value),
          'projection already has review literal metadata')
-    keys = _review_dictionary_keys(value); marker = 'review_ref'; index = 0
+    keys = _review_dictionary_keys(value); marker = '~' if compact_marker else 'review_ref'; index = 0
     while marker in keys:
-        index += 1; marker = 'review_ref_' + str(index)
+        index += 1; marker = '~' + str(index) if compact_marker else 'review_ref_' + str(index)
     groups = {}
     owner_fields = {'backend_observations', 'additional_backend_phase_proofs'}
     def contains_owner(item):
@@ -1280,7 +1280,7 @@ def _factor_review_literals(value):
     def collect(item, path=()):
         if path and path[-1] in owner_fields: return  # Owner JSON and raw reference records stay literal.
         raw = encoded(item)
-        if path and len(raw) >= 48 and type(item) in {dict, list, str} and not contains_owner(item): groups.setdefault(raw, []).append(path)
+        if path and len(raw) >= (24 if compact_marker else 48) and type(item) in {dict, list, str} and not contains_owner(item): groups.setdefault(raw, []).append(path)
         if type(item) is dict:
             for key, child in item.items(): collect(child, (*path, key))
         elif type(item) is list:
@@ -1340,6 +1340,72 @@ def _shorten_projection_literal_marker(value):
 _OBJECT_ROWS_FIELDS = {'object_schemas', 'object_row_marker', 'object_rows_semantics'}
 _OBJECT_ROWS_SEMANTICS = ('Object marker: schema index then positional values; pipe-separated schema keys match positions. '
     'Arrays and actual/expected payloads stay literal; path/hash/CID values are unchanged. Expand first; no shared identity.')
+_OBJECT_ROWS_ARRAY_SEMANTICS = ('Tag=marker+schema index; values follow pipe keys. '
+    'Original arrays/actual/expected literal; values exact. Expand first; no shared identity.')
+
+_SUPPLEMENTAL_ROWS_FIELDS = {'supplemental_descriptors', 'supplemental_rows_semantics'}
+_SUPPLEMENTAL_ROWS_SEMANTICS = ('Descriptor [phase,step,probe,operator,expected]; per-view [index,actual]. '
+    'Exact literals/order; no shared execution. Expand after literals.')
+
+
+def _expand_supplemental_rows(value):
+    result = parse(encoded(value)); fields = _SUPPLEMENTAL_ROWS_FIELDS & set(result)
+    if not fields:return result
+    need(fields == _SUPPLEMENTAL_ROWS_FIELDS, 'supplemental row metadata is incomplete')
+    descriptors = result.pop('supplemental_descriptors'); semantics = result.pop('supplemental_rows_semantics')
+    need(type(descriptors) is list and 0 < len(descriptors) <= 16 and semantics == _SUPPLEMENTAL_ROWS_SEMANTICS,
+         'supplemental descriptor table/semantics are malformed')
+    for descriptor in descriptors:
+        need(type(descriptor) is list and len(descriptor) == 5
+             and type(descriptor[0]) is str and descriptor[0] in {'primary_result','persist_reopen','failure_recovery'}
+             and type(descriptor[1]) is int and descriptor[1] >= 0
+             and type(descriptor[2]) is dict and type(descriptor[3]) is str,
+             'supplemental descriptor shape is malformed')
+    need(len({encoded(row) for row in descriptors}) == len(descriptors), 'supplemental descriptors are duplicated')
+    used = set()
+    for view in result['viewports']:
+        slot = view.get('supplemental_observations')
+        if type(slot) is not dict:continue
+        need(set(slot) == {'supplemental_rows'} and type(slot['supplemental_rows']) is list
+             and 0 < len(slot['supplemental_rows']) <= 8, 'supplemental row marker is mixed or malformed')
+        observations = []
+        for row in slot['supplemental_rows']:
+            need(type(row) is list and len(row) == 2 and type(row[0]) is int
+                 and 0 <= row[0] < len(descriptors), 'supplemental row index/arity differs')
+            used.add(row[0]); phase, index, probe, operator, expected = descriptors[row[0]]
+            observations.append({'phase': phase, 'step_index': index, 'probe': probe,
+                'observed': {'operator': operator, 'expected': expected, 'actual': row[1]}})
+        view['supplemental_observations'] = observations
+    need(used == set(range(len(descriptors))), 'supplemental descriptor is unused or unreachable')
+    return result
+
+
+def _factor_supplemental_rows(value):
+    need(not _SUPPLEMENTAL_ROWS_FIELDS & set(value), 'projection already has supplemental row metadata')
+    original = encoded(value); result = parse(original); descriptors = []; indexes = {}
+    for view in result['viewports']:
+        rows = view.get('supplemental_observations', [])
+        need(type(rows) is list, 'supplemental observation slot collides with encoded rows')
+        if not rows:continue
+        if not (len(rows) <= 8 and all(type(row) is dict and set(row) == {'phase','step_index','probe','observed'}
+                and type(row['observed']) is dict and set(row['observed']) == {'operator','expected','actual'} for row in rows)):
+            continue
+        packed = []
+        for row in rows:
+            observed = row['observed']; descriptor = [row['phase'], row['step_index'], row['probe'], observed['operator'], observed['expected']]
+            key = encoded(descriptor)
+            if key not in indexes:indexes[key] = len(descriptors); descriptors.append(descriptor)
+            packed.append([indexes[key], observed['actual']])
+        view['supplemental_observations'] = {'supplemental_rows': packed}
+    if not descriptors:return value
+    result.update(supplemental_descriptors=descriptors, supplemental_rows_semantics=_SUPPLEMENTAL_ROWS_SEMANTICS)
+    need(encoded(_expand_supplemental_rows(result)) == original, 'supplemental row factoring changed typed observations')
+    return result if len(encoded(result)) < len(original) else value
+
+
+def _supplemental_opaque_slot(path):
+    return bool(len(path) >= 3 and path[0] == 'supplemental_descriptors' and type(path[1]) is int and path[2] == 4
+        or len(path) >= 3 and path[-3] == 'supplemental_rows' and type(path[-2]) is int and path[-1] == 1)
 
 
 def _expand_projection_objects(value):
@@ -1352,8 +1418,10 @@ def _expand_projection_objects(value):
     schemas = result.pop('object_schemas')
     marker = result.pop('object_row_marker')
     semantics = result.pop('object_rows_semantics')
-    need(type(schemas) is list and 0 < len(schemas) <= 32 and type(marker) is str
-         and re.fullmatch(r'@[0-9]*', marker) and semantics == _OBJECT_ROWS_SEMANTICS,
+    array_rows = semantics == _OBJECT_ROWS_ARRAY_SEMANTICS
+    need(type(schemas) is list and 0 < len(schemas) <= 32 and type(marker) is str and type(semantics) is str
+         and re.fullmatch(r'@(?:[0-9]+:)?' if array_rows else r'@[0-9]*', marker)
+         and semantics in {_OBJECT_ROWS_SEMANTICS, _OBJECT_ROWS_ARRAY_SEMANTICS},
          'object row schema/marker/semantics are malformed')
     keys = []
     for schema in schemas:
@@ -1365,20 +1433,30 @@ def _expand_projection_objects(value):
         keys.append(names)
     need(len(set(schemas)) == len(schemas), 'object row schemas are duplicated')
     used = set()
-    def visit(item):
+    def expand_row(index, values, path):
+        need(type(index) is int and 0 <= index < len(keys) and len(values) == len(keys[index]),
+             'object row reference is unknown or has wrong arity')
+        used.add(index)
+        return {name: child if name in {'actual', 'expected'} else visit(child, (*path, name))
+                for name, child in zip(keys[index], values)}
+    def visit(item, path=()):
+        if _supplemental_opaque_slot(path):return item
         if type(item) is list:
-            return [visit(child) for child in item]
+            if array_rows and item and type(item[0]) is str and item[0].startswith(marker):
+                token = item[0][len(marker):]
+                need(re.fullmatch(r'0|[1-9][0-9]*', token), 'object row array tag is malformed')
+                return expand_row(int(token), item[1:], path)
+            return [visit(child, (*path, index)) for index, child in enumerate(item)]
         if type(item) is not dict:
             return item
         if marker in item:
+            need(not array_rows, 'object row mixes array and dictionary markers')
             row = item[marker]
             need(set(item) == {marker} and type(row) is list and row and type(row[0]) is int
                  and 0 <= row[0] < len(keys) and len(row) == len(keys[row[0]]) + 1,
                  'object row reference is unknown, colliding or has wrong arity')
-            used.add(row[0])
-            return {name: child if name in {'actual', 'expected'} else visit(child)
-                    for name, child in zip(keys[row[0]], row[1:])}
-        return {name: child if name in {'actual', 'expected'} else visit(child)
+            return expand_row(row[0], row[1:], path)
+        return {name: child if name in {'actual', 'expected'} else visit(child, (*path, name))
                 for name, child in item.items()}
     result = visit(result)
     need(used == set(range(len(schemas))), 'object row schema is unused or unreachable')
@@ -1395,7 +1473,7 @@ def _factor_projection_objects(value):
         suffix += 1; marker = '@' + str(suffix)
     shapes = {}
     def literal(path, item):
-        return (path and path[-1] in {'original', 'result_screenshot'}
+        return (_supplemental_opaque_slot(path) or path and path[-1] in {'original', 'result_screenshot'}
                 or len(path) >= 2 and path[-2] in {'backend_observations', 'additional_backend_phase_proofs'}
                 and type(item) is dict and 'request_phase' not in item)
     def envelope(path):
@@ -1435,9 +1513,42 @@ def _factor_projection_objects(value):
     return result if len(encoded(result)) < len(original) else value
 
 
+def _shorten_projection_object_rows(value):
+    """Shorten generated row wrappers; original strings and opaque payloads are untouched."""
+    if 'object_schemas' not in value:return value
+    expanded = _expand_projection_objects(value)
+    if value['object_rows_semantics'] != _OBJECT_ROWS_SEMANTICS:return value
+    strings = set()
+    def collect(item):
+        if type(item) is str:strings.add(item)
+        elif type(item) is dict:
+            strings.update(item)
+            for child in item.values():collect(child)
+        elif type(item) is list:
+            for child in item:collect(child)
+    collect(expanded)
+    marker = '@'; suffix = 0
+    while any(text.startswith(marker) for text in strings):
+        suffix += 1; marker = '@' + str(suffix) + ':'
+    result = parse(encoded(value)); old = result['object_row_marker']; schemas = [s.split('|') for s in result['object_schemas']]
+    def visit(item, path=()):
+        if _supplemental_opaque_slot(path):return item
+        if type(item) is list:return [visit(child, (*path, index)) for index, child in enumerate(item)]
+        if type(item) is not dict:return item
+        if old in item:
+            row = item[old]; index = row[0]
+            return [marker + str(index), *[child if name in {'actual','expected'} else visit(child, (*path, name))
+                for name, child in zip(schemas[index], row[1:])]]
+        return {name: child if name in {'actual','expected'} else visit(child, (*path, name)) for name, child in item.items()}
+    result = visit(result)
+    result['object_row_marker'] = marker; result['object_rows_semantics'] = _OBJECT_ROWS_ARRAY_SEMANTICS
+    need(encoded(_expand_projection_objects(result)) == encoded(expanded), 'object row shortening changed typed evidence')
+    return result if len(encoded(result)) < len(encoded(value)) else value
+
+
 def _expand_projection(value):
     """Invert presentation factoring only at known typed slots; never raw payloads."""
-    result = _expand_review_literals(_expand_projection_objects(value))
+    result = _expand_supplemental_rows(_expand_review_literals(_expand_projection_objects(value)))
     table = result.pop('shared_projection_values', None)
     caption = result.pop('shared_projection_values_semantics', None)
     need(table is None or type(table) is dict and 0 < len(table) <= 16
@@ -1471,6 +1582,16 @@ def _expand_projection(value):
     return result
 
 
+def _smallest_projection_candidate(value):
+    """Try another existing reversible representation without changing fact placement."""
+    original = encoded(_expand_projection(value)); result = value
+    if 'object_schemas' not in value:
+        candidate = _shorten_projection_object_rows(_factor_projection_objects(_shorten_projection_literal_marker(value)))
+        if len(encoded(candidate)) < len(encoded(result)):result = candidate
+    need(encoded(_expand_projection(result)) == original, 'smallest projection changed typed evidence')
+    return result
+
+
 def _factor_projection(value):
     """Losslessly fit repeated typed facts; all source/session/owner data stay literal."""
     need('shared_projection_values' not in value and 'shared_projection_values_semantics' not in value,
@@ -1480,7 +1601,7 @@ def _factor_projection(value):
     _expand_projection(value)
     if len(original) <= 18000:
         return value
-    result = parse(original); table = {}
+    result = _factor_supplemental_rows(parse(original)); table = {}
     slots = _projection_snapshot_slots(result)
     # Bounded deterministic base selection, using typed encoded equality.
     for _ in range(8):
@@ -1525,9 +1646,18 @@ def _factor_projection(value):
         result['shared_projection_values'] = table
         result['shared_projection_values_semantics'] = _SHARED_SEMANTICS
     if len(encoded(result)) > 18000:
-        result = _factor_review_literals(result)
+        before_literals = result
+        result = _factor_review_literals(before_literals)
+        if len(encoded(result)) > 18000:
+            result = _factor_review_literals(before_literals, compact_marker=True)
     if len(encoded(result)) > 18000:
         result = _factor_projection_objects(_shorten_projection_literal_marker(result))
+    if len(encoded(result)) > 18000:
+        result = _shorten_projection_object_rows(result)
+    if len(encoded(result)) > 18000:
+        direct = _factor_review_literals(_factor_supplemental_rows(parse(original)), compact_marker=True)
+        direct = _shorten_projection_object_rows(_factor_projection_objects(_shorten_projection_literal_marker(direct)))
+        if len(encoded(direct)) < len(encoded(result)):result = direct
     need(encoded(_expand_projection(result)) == original, 'projection factoring changed typed evidence values')
     return result
 
@@ -1580,7 +1710,8 @@ def _project_backend_observations(root, child, child_path):
 
 
 
-NATIVE_FACTS_CONTEXT_MAX = 2048
+NATIVE_FACTS_MAX_BYTES = 4096
+NATIVE_FACTS_CONTEXT_MAX = NATIVE_FACTS_MAX_BYTES
 NATIVE_FACTS_MAX_REQUESTS = 16
 
 
@@ -1679,12 +1810,13 @@ def _native_supervisor_provenance(root, body):
 
 def _native_supervisor_pair(root, row):
     body = row['body']; payload = row['call']['input']['payload']; stage = body['task_key']; run = body['run_id']
+    need(body.get('status') == 'completed', 'native output proof lacks completed task status')
     _native_supervisor_provenance(root, body)
     execution = body.get('execution'); need(type(execution) is dict and set(execution) == {'producer', 'validator'}, 'native archive pair absent')
     need(execution['producer'] != execution['validator'], 'native producer/validator must be independent')
     scripts = {'producer': 'scripts/svf_backends/fixed_supervisor_worker.py',
                'validator': 'scripts/svf_backends/fixed_supervisor_output_validator.py'}
-    output = None
+    output = None; proof = {'status': body['status']}
     for role in ('producer', 'validator'):
         ref = execution[role]; target = Path(ref.get('path', ''))
         expected = Path(root) / 'data/agent_supervisor/swissknife_visual_functional/backends/supervisor-fixtures' / run / 'attempts'
@@ -1696,6 +1828,7 @@ def _native_supervisor_pair(root, row):
              and record.get('ok') is True and record.get('process_started') is True and type(record.get('exit_code')) is int and record.get('exit_code') == 0
              and record.get('terminal_status') == 'passed' and record.get('timed_out') is False and record.get('cancelled') is False,
              'native archive did not complete successfully')
+        proof[role + '_exit'] = record['exit_code']
         need(len(argv) >= 4 and argv[:3] == [record.get('executable'), '-I', '-B'] and re.fullmatch(r'python(?:3(?:\.\d+)?)?', Path(argv[0]).name) and argv[3] == str(Path(root) / scripts[role]),
              'native archive uses a different producer/validator')
         def argument(name):
@@ -1713,15 +1846,17 @@ def _native_supervisor_pair(root, row):
             need(output == expected.parent / (stage + '.json'), 'foreign native output path')
             data = read(root, str(output.relative_to(root)))
             need(hashlib.sha256(data).hexdigest() == body['output_sha256'] and len(data) == result.get('bytes'), 'native output bytes differ')
+            proof['output_bytes'] = len(data)
         else:
             need(result.get('validated') is True and result.get('stage') == stage
                  and result.get('validator_source_sha256') == hashlib.sha256(read(root, scripts[role])).hexdigest(), 'native validator result/source differs')
-    return True
+            proof['validated'] = result['validated']
+    return proof
 
 
 def native_request_facts(root, report):
     """Bounded recorded-native facts, not task acceptance or an independent fetch."""
-    root = Path(root); parent = parse(read(root, str(Path(report).relative_to(root)))); views = []; kind = None
+    root = Path(root); parent = parse(read(root, str(Path(report).relative_to(root)))); views = []; kind = None; recovery_sequences = {}
     for entry in parent.get('viewport_reports', []):
         child_path = check_reference(root, entry['report'], prefix=Path(report).parent)
         child = parse(read(root, entry['report']['path'])); selected = []
@@ -1736,7 +1871,7 @@ def native_request_facts(root, report):
         current = selected[0]; need(all(v == current for v in selected) and (kind is None or kind == current), 'mixed native fact formats')
         kind = current; rows, trace = _native_trace_rows(root, child, child_path); projected = []
         if kind == 'supervisor':
-            runs = []; outputs = []; errors = {}
+            runs = []; outputs = []; errors = {}; validated_outputs = []; created_without_output = []
             for row in rows:
                 call, body, witness = row['call'], row['body'], row['witness']; payload = call['input']['payload']; action = payload.get('action', 'read')
                 need(call.get('owner') == 'ipfs_accelerate_py' and action in {'create', 'dispatch', 'read', 'retry'}, 'native supervisor action/owner differs')
@@ -1746,6 +1881,8 @@ def native_request_facts(root, report):
                     item = [body.get('run_id'), body.get('task_ids', {}).get('a'), body.get('task_ids', {}).get('b')]
                     need(all(type(v) is str and re.fullmatch('[0-9a-f-]{36}', v) for v in item) and len(set(item)) == 3 and item not in runs, 'native returned run/task identities malformed')
                     runs.append(item); run_index = len(runs) - 1; stage = None; output = None; checked = None
+                    if all(name not in body for name in ('status', 'output_sha256', 'execution')):
+                        created_without_output.append(witness['request_index'])
                 else:
                     matching = [i for i, value in enumerate(runs) if value[0] == payload.get('run_id')]
                     need(len(matching) == 1 and payload.get('task_key') in {'a', 'b'}, 'native request has no exact created run/task')
@@ -1754,7 +1891,10 @@ def native_request_facts(root, report):
                         need(body.get('run_id') == runs[run_index][0] and body.get('task_id') == runs[run_index][1 if stage == 'a' else 2]
                              and body.get('task_key') == stage and body.get('status') == 'completed'
                              and type(body.get('output_sha256')) is str and re.fullmatch('[0-9a-f]{64}', body['output_sha256']), 'native result run/task/output differs')
-                        if action != 'read':checked = _native_supervisor_pair(root, row)
+                        if action != 'read':
+                            proof = _native_supervisor_pair(root, row); checked = True
+                            validated_outputs.append([witness['request_index'], proof['status'], proof['output_bytes'],
+                                proof['producer_exit'], proof['validator_exit'], proof['validated']])
                         else:
                             prior = [r for r in rows[:witness['request_index']] if r['body'].get('run_id') == body['run_id'] and r['body'].get('task_id') == body['task_id'] and r['body'].get('output_sha256') == body['output_sha256'] and r['call']['input']['payload'].get('action') in {'dispatch', 'retry'}]
                             need(len(prior) == 1, 'native readback lacks one exact prior run/task/output')
@@ -1765,7 +1905,7 @@ def native_request_facts(root, report):
                         need(body == {} and type(error) is str and len(error.encode()) <= 256, 'native failed request lacks its bounded recorded error')
                         errors[str(witness['request_index'])] = error
                 projected.append([witness['request_index'], ['primary_result','persist_reopen','failure_recovery'].index(witness['phase']), witness['step_index'], ['create','dispatch','read','retry'].index(action), run_index, stage, ['executed','failed'].index(row['response']['outcome']), output, checked])
-            texts = {}
+            texts = {}; ui_quotes = []
             for phase in ('primary_result','persist_reopen'):
                 assertions = [item for item in child['semantic_assertions'] if item['phase'] == phase and item['probe'].get('kind') == 'text']
                 need(len(assertions) == 1 and type(assertions[0]['observed'].get('actual')) is str, 'native event DOM observation absent/ambiguous')
@@ -1775,23 +1915,32 @@ def native_request_facts(root, report):
                 steps = [item for item in phase_rows[0]['steps'] if item['step_index'] == assertion['step_index']]
                 need(len(steps) == 1 and encoded(steps[0].get('observed')) == encoded(assertion['observed']), 'native retained DOM/source observation differs')
                 texts[phase] = (assertion['step_index'], assertion['observed']['actual'])
+                candidate = assertion['observed'].get('expected')
+                if type(candidate) is str and 'heartbeat' in candidate.casefold() and 0 < len(candidate.split()) <= 30 and len(candidate.encode()) <= 256:
+                    need(candidate in assertion['observed']['actual'], 'native UI quote differs from its actual source observation')
+                    if candidate not in ui_quotes:ui_quotes.append(candidate)
             reads = [row for row in rows if row['call']['tool_id'] == 'get_task' and row['witness']['phase'] == 'persist_reopen']
             need(len(reads) == 1, 'native owner readback absent/duplicate')
             returned = reads[0]['body']; primary = [row for row in rows if row['witness']['phase'] == 'primary_result' and row['body'].get('task_id') == returned['task_id']]
             need(len(primary) == 1 and reads[0]['witness']['generation'] == primary[0]['witness']['generation'] + 1, 'native reopen generation/source join differs')
-            retained = []
+            retained = []; retained_events = []
             for row in rows:
                 if row['witness']['phase'] != 'primary_result':continue
                 receipt = row['response']['receipt']; event = receipt['event_dag_refs'][0]
                 need(all(receipt['receipt_id'] in text and event in text for _, text in texts.values()), 'native receipt/event history was not observed before and after reopen')
                 retained.append(row['witness']['request_index'])
+                retained_events.append([row['witness']['request_index'], receipt['receipt_id'], event])
             read_receipt = reads[0]['response']['receipt']
             need(all(returned[key] in texts['persist_reopen'][1] for key in ('run_id','task_id','output_sha256'))
                  and read_receipt['receipt_id'] in texts['persist_reopen'][1] and read_receipt['event_dag_refs'][0] in texts['persist_reopen'][1], 'native owner readback differs from persisted DOM')
             views.append({'name': entry['name'], 'trace': trace, 'runs': runs, 'outputs': outputs, 'rows': projected,
                 'errors': errors, 'retained_UI_event_rows': retained, 'retention_positions': [
                     [0,texts['primary_result'][0],primary[0]['witness']['generation']],
-                    [1,texts['persist_reopen'][0],reads[0]['witness']['generation']]], 'readback_request':reads[0]['witness']['request_index']})
+                    [1,texts['persist_reopen'][0],reads[0]['witness']['generation']]], 'readback_request':reads[0]['witness']['request_index'],
+                'retained_UI_events': retained_events, 'observed_UI_text': [
+                    [['primary_result','persist_reopen','failure_recovery'].index(phase), position, quote]
+                    for phase, (position, text) in texts.items() for quote in ui_quotes if quote in text],
+                'created_without_output': created_without_output, 'validated_outputs': validated_outputs})
 
         else:
             import binascii
@@ -1860,14 +2009,42 @@ def native_request_facts(root, report):
                         if matches:
                             need(len(matches) == 1, 'reopened decoded native artifact is ambiguous')
                             decoded.append([1, step['step_index'], matches[0], 0]);decoded.sort();break
+            sequence = []
+            recovery = [phase for phase in child.get('phase_evidence', {}).get('phases', []) if phase['phase'] == 'failure_recovery']
+            for observation in child.get('error_observations', []) + child.get('supplemental_observations', []):
+                probe = observation.get('probe', {}); actual = observation.get('observed', {}).get('actual')
+                if not (observation.get('phase') == 'failure_recovery' and probe.get('kind') == 'text'
+                        and probe.get('selector') in {'[data-cinema-workflow-status]', '[data-cinema-export-outcome]'}
+                        and type(actual) is str and re.match(r'^(?:Unsupported codec |Export unavailable:|Export unsupported;)', actual)):
+                    continue
+                need(len(recovery) == 1 and type(observation.get('step_index')) is int, 'native recovery observation phase/index differs')
+                matches = [step for step in recovery[0]['steps'] if step['step_index'] == observation['step_index']]
+                need(len(matches) == 1 and matches[0]['step'].get('op') == 'assert'
+                     and encoded(matches[0]['step'].get('probe')) == encoded(probe)
+                     and encoded(matches[0].get('observed')) == encoded(observation['observed']), 'native recovery UI/source observation differs')
+                for artifact_index, row in enumerate(rows):
+                    witness = row['witness']
+                    if not (witness['phase'] == 'failure_recovery' and artifacts[artifact_index][2] == 'video-export'
+                            and observation['step_index'] < witness['step_index']):continue
+                    for phase_index, step_index, decoded_artifact, advanced in decoded:
+                        if phase_index == 2 and advanced == 1 and decoded_artifact == artifact_index and witness['step_index'] < step_index:
+                            sequence.append([observation['step_index'], witness['step_index'], step_index, artifact_index])
+            recovery_sequences[entry['name']] = sequence
             views.append({'name': entry['name'], 'trace': trace, 'artifacts': artifacts, 'projects': projects, 'rows': projected, 'decoded_artifact_rows': decoded})
     if not views:return None
     need(len(views) == 2, 'native facts need both independently recorded viewports')
     result = {'format': kind, 'proof': 'Phase/call-joined trace; raw CIDs reconstructed, not fetched. No acceptance; child-relative trace.', 'views': views, 'phases': ['primary_result','persist_reopen','failure_recovery']}
     if kind == 'supervisor':
         result.update(columns=['request','phase','step','action','run','stage','outcome','output','archive_pair'], actions=['create','dispatch','read','retry'], outcomes=['executed','failed'], run_columns=['run_id','task_a_id','task_b_id'], archive_pair='true=distinct producer/validator: full hash/source/args/output joins,started,exit0,no timeout. UI history=receipt/event IDs observed before+after reopen; read=prior run/task/output.')
-    else:result.update(columns=['request','phase','step','tool','artifact'], artifact_columns=['cid','bytes','kind','backend'], project_columns=['source_artifact','output_artifact','trim','tracks[kind,order,in,out]'], tools=['ipfs_cat','artifacts_put'], decoded='phase/step/artifact/advance(1)/ready(0): native VIDEO,ready2+,dimensions>0. UI, no fresh fetch.')
-    need(len(encoded(result)) <= 4096, 'native facts exceed bounded presentation table')
+        result.update(retained_UI_event_columns=['request','receipt_cid','event_cid'],
+            observed_UI_text_columns=['phase','step','literal_UI_text_not_heartbeat_behavior'],
+            created_without_output_fields=['status','output_sha256','execution'],
+            validated_output_columns=['request','status','output_bytes','producer_exit','validator_exit','validated'])
+    else:
+        result.update(columns=['request','phase','step','tool','artifact'], artifact_columns=['cid','bytes','kind','backend'], project_columns=['source_artifact','output_artifact','trim','tracks[kind,order,in,out]'], tools=['ipfs_cat','artifacts_put'], decoded='phase/step/artifact/advance(1)/ready(0): native VIDEO,ready2+,dimensions>0. UI, no fresh fetch.')
+        result.update(legacy_cid_scope='owner_result_cids selects declared result-assertion CIDs, not every owner return; artifacts has all byte/CID-verified returns.',
+            recovery_sequence={'phase': 'failure_recovery', 'columns': ['historical_unsupported_UI_step','later_WebM_owner_step','decoded_step','artifact'], 'views': recovery_sequences})
+    need(len(encoded(result)) <= NATIVE_FACTS_MAX_BYTES, 'native facts exceed bounded presentation table')
     return result
 
 
@@ -1882,8 +2059,8 @@ def projection(root, report):
               'contract_sha256': data['contract_sha256'], 'scenario_sha256': data['scenario_sha256'],
               'source_identity_sha256': digest(data['source_sha256']), 'source_file_count': len(data['source_sha256']),
               'scenario_phase_order': ['primary_result', 'persist_reopen', 'failure_recovery'],
-              'step_index_semantics': 'Zero-based per phase; resets to 0.',
-              'backend_call_phases_semantics': 'Dispatch counts per named phase, not validity flags. Zero is only that bucket; other phases and joined owner receipts remain independent.',
+              'step_index_semantics': 'Zero-based, per phase.',
+              'backend_call_phases_semantics': 'Counts only the named phase, not validity. Zero says nothing about other phases or joined owner receipts.',
               'viewports': []}
     scenario = parse(read(root, 'swissknife/test/e2e/functional-workflows/' + data['app_id'] + '.json'))
     for entry in data['viewport_reports']:
@@ -1927,9 +2104,10 @@ def projection(root, report):
             result['viewports'][-1]['phase_evidence'] = phase
     if any('request_phase' in row for view in result['viewports'] for row in view['backend_observations']):
         result['backend_artifact_path_base'] = 'viewport_original_directory'
-    result['instruction'] = ('Inspect both results. Initial/demo/layout-only mobile state cannot prove mobile execution. '
-        'Owner results: without an inferred phase or broader success. Each phased row is one request; additional_result_assertions use that same request. Unphased rows imply no identity. '
-        'HTMLMediaElement/CID facts only. Phased receipt/event paths are relative to viewport original directory; filenames contain raw CIDs. Final frames follow all phase steps and final checks; earlier unsupported observations are phase-local. Native request rows retain phase/step chronology.')
+    result['instruction'] = ('Inspect both. Initial/demo/layout-only mobile state cannot prove mobile execution. '
+        'Phased owner row/asserts=one request; unphased implies no identity/phase/success. '
+        'HTMLMediaElement/CID only. Phased receipt/event paths use backend_artifact_path_base; filenames are raw CIDs. '
+        'Final frames follow all steps/checks; prior unsupported values are phase-local; native rows keep phase/step order.')
     if any(view.get('decoded_images') for view in result['viewports']):
         result['instruction'] += ' retained_from:IMG source/content/dims, not canvas/layers.'
     result = _factor_projection(result)
@@ -1941,6 +2119,7 @@ def projection(root, report):
             result = enriched
         else:
             need(len(encoded(facts)) <= NATIVE_FACTS_CONTEXT_MAX, 'native fact context exceeds its bounded supplement')
+        result = _smallest_projection_candidate(result)
     return result
 
 

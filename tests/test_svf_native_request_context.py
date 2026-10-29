@@ -354,3 +354,311 @@ class NativeRequestFactsTests(unittest.TestCase):
 
 if __name__ == '__main__':
  unittest.main()
+
+
+class RetainedNativeContextTests(unittest.TestCase):
+ """Add literal identity/observable caution facts without fabricating liveness."""
+ CAUTION = 'Heartbeat and progress percent are not completion.'
+
+ def with_caution(self, fixture, view):
+  fixture.supervisor(view)
+  child = fixture.children[view]
+  for phase in ('primary_result', 'persist_reopen'):
+   assertion = next(row for row in child['semantic_assertions'] if row['phase'] == phase)
+   assertion['observed']['actual'] += ' ' + self.CAUTION
+   assertion['observed']['expected'] = self.CAUTION
+  fixture.save_child(view)
+
+ def test_retained_events_are_literal_exact_request_ids(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   f = Fixture(tmp)
+   for name in ('desktop', 'mobile'):
+    self.with_caution(f, name)
+   facts = e.native_request_facts(f.root, f.report)
+   for view in facts['views']:
+    expected = [[index, f.records[view['name']][index]['response']['receipt']['receipt_id'], f.records[view['name']][index]['response']['receipt']['event_dag_refs'][0]] for index in (0, 1)]
+    self.assertEqual(view['retained_UI_events'], expected)
+    for _, receipt, event in view['retained_UI_events']:
+     self.assertIsInstance(receipt, str)
+     self.assertIsInstance(event, str)
+     self.assertTrue(receipt.startswith('bafkrei'))
+     self.assertTrue(event.startswith('bafkrei'))
+
+ def test_caution_quotes_are_observed_bounded_and_ui_only(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   f = Fixture(tmp)
+   for name in ('desktop', 'mobile'):
+    self.with_caution(f, name)
+   facts = e.native_request_facts(f.root, f.report)
+   for view in facts['views']:
+    quotes = view['observed_UI_text']
+    self.assertEqual(len(quotes), 2)
+    for phase, step, quote in quotes:
+     self.assertIn(phase, (0, 1))
+     self.assertEqual(step, 4)
+     self.assertIn(self.CAUTION, quote)
+     self.assertLessEqual(len(quote.split()), 30)
+     original = next(row for row in f.children[view['name']]['semantic_assertions'] if row['phase'] == PHASES[phase])
+     self.assertIn(quote, original['observed']['actual'])
+   encoded = e.encoded(facts).decode()
+   self.assertNotIn('"heartbeat_fresh"', encoded)
+   self.assertNotIn('"heartbeat_at_ms"', encoded)
+   self.assertNotIn('"progress_percent"', encoded)
+
+ def test_unobserved_caution_is_never_fabricated(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   f = Fixture(tmp);f.supervisor('desktop');f.supervisor('mobile')
+   facts = e.native_request_facts(f.root, f.report)
+   for view in facts['views']:
+    self.assertEqual(view['observed_UI_text'], [])
+
+ def test_created_absence_and_validated_outputs_are_explicit(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   f = Fixture(tmp);f.supervisor('desktop');f.supervisor('mobile')
+   facts = e.native_request_facts(f.root, f.report)
+   for view in facts['views']:
+    self.assertEqual(view['created_without_output'], [0, 3])
+    expected = []
+    for index in (1, 5, 6):
+     body = e._native_body(f.records[view['name']][index]['response']['result'])
+     output = f.fixture_root / body['run_id'] / (body['task_key'] + '.json')
+     expected.append([index, 'completed', len(output.read_bytes()), 0, 0, True])
+    self.assertEqual(view['validated_outputs'], expected)
+    self.assertNotIn(2, [row[0] for row in view['validated_outputs']], 'readback cannot invent a new execution/validation')
+
+ def test_created_output_or_completion_cannot_be_claimed_absent(self):
+  for added in ({'status': 'completed'}, {'output_sha256': 'a' * 64}, {'execution': {}}):
+   with self.subTest(added=added), tempfile.TemporaryDirectory() as tmp:
+    f = Fixture(tmp);f.supervisor('desktop');f.supervisor('mobile')
+    rows = f.records['mobile']
+    body = e._native_body(rows[0]['response']['result']);body.update(added)
+    rows[0]['response'] = f.response(rows[0]['call'], body)
+    first = e._native_body(rows[1]['response']['result'])
+    f.finish('mobile', rows, supervisor_body=first)
+    facts = e.native_request_facts(f.root, f.report)
+    mobile = next(view for view in facts['views'] if view['name'] == 'mobile')
+    self.assertNotIn(0, mobile['created_without_output'])
+
+ def test_previous_supervisor_typed_view_tree_is_unchanged(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   f = Fixture(tmp);f.supervisor('desktop');f.supervisor('mobile')
+   facts = e.native_request_facts(f.root, f.report)
+   old_keys = {'name', 'trace', 'runs', 'outputs', 'rows', 'errors', 'retained_UI_event_rows', 'retention_positions', 'readback_request'}
+   expected_rows = [[0,0,0,0,0,None,0,None,None], [1,0,1,1,0,'a',0,0,True], [2,1,0,2,0,'a',0,0,None], [3,2,0,0,1,None,0,None,None], [4,2,1,1,1,'b',1,None,None], [5,2,2,1,1,'a',0,1,True], [6,2,3,3,1,'b',0,2,True]]
+   for view in facts['views']:
+    records = f.records[view['name']]
+    bodies = [e._native_body(row['response']['result']) for row in records]
+    trace = next(ref for ref in f.children[view['name']]['artifacts'] if ref['path'].endswith('trace.zip'))
+    expected = {'name': view['name'], 'trace': {'path': 'trace.zip', 'sha256': trace['sha256']}, 'runs': [[bodies[i]['run_id'], bodies[i]['task_ids']['a'], bodies[i]['task_ids']['b']] for i in (0,3)], 'outputs': [bodies[i]['output_sha256'] for i in (1,5,6)], 'rows': expected_rows, 'errors': {'4': 'JSON-RPC Error -32603: task is not ready'}, 'retained_UI_event_rows': [0,1], 'retention_positions': [[0,4,0],[1,4,1]], 'readback_request': 2}
+    self.assertEqual({key: view[key] for key in old_keys}, expected)
+
+ def test_cinema_typed_view_tree_has_no_supervisor_additions(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   f = Fixture(tmp);f.cinema('desktop', source_size=100);f.cinema('mobile', source_size=100)
+   facts = e.native_request_facts(f.root, f.report)
+   self.assertEqual(set(facts), {'format', 'proof', 'views', 'phases', 'columns', 'artifact_columns', 'project_columns', 'tools', 'decoded', 'legacy_cid_scope', 'recovery_sequence'})
+   for view in facts['views']:
+    records = f.records[view['name']]
+    bodies = [e._native_body(row['response']['result']) for row in records]
+    artifacts = [[body['cid'], [100,96,len(base64.b64decode(records[2]['call']['input']['payload']['bytes_base64']))][i], ['source','video-export','video-project'][i], body['backend']] for i,body in enumerate(bodies)]
+    trace = next(ref for ref in f.children[view['name']]['artifacts'] if ref['path'].endswith('trace.zip'))
+    expected = {'name': view['name'], 'trace': {'path': 'trace.zip', 'sha256': trace['sha256']}, 'artifacts': artifacts, 'projects': [[0,1,{'start':0,'end':1},[['video',0,0,1]]]], 'rows': [[0,0,0,0,0],[1,0,1,1,1],[2,1,0,1,2]], 'decoded_artifact_rows': [[0,5,0,1],[1,5,1,1]]}
+    self.assertEqual(view, expected)
+
+
+class CinemaRecoveryChronologyTests(unittest.TestCase):
+ def setup_view(self, fixture, view):
+  fixture.cinema(view, source_size=100)
+  phase_evidence = copy.deepcopy(fixture.children[view]['phase_evidence'])
+  rows = fixture.records[view]
+  data = b'\x1aE\xdf\xa3authored later WebM bytes'
+  cid = e._native_raw_cid(data)
+  call = fixture.call(view, 3, {'cid': cid, 'kind': 'video-export', 'bytes_base64': base64.b64encode(data).decode()}, owner='ipfs_kit_py', tool='artifacts_put')
+  body = {'success': True, 'cid': cid, 'backend': 'authored-native-owner', 'persisted': True, 'verified': True, 'bytes': len(data)}
+  rows.append({'call': call, 'response': fixture.response(call, body, video=True), 'phase': 'failure_recovery', 'step': 12, 'generation': 1})
+  fixture.finish(view, rows)
+  child = fixture.children[view];child['phase_evidence'] = phase_evidence
+  recovery = next(phase for phase in phase_evidence['phases'] if phase['phase'] == 'failure_recovery')
+  child['error_observations'] = [];child['supplemental_observations'] = []
+  for index, selector, text in [(2, '[data-cinema-workflow-status]', 'Unsupported codec authored-mp4'), (7, '[data-cinema-export-outcome]', 'Export unsupported; authored unavailable encoder')]:
+   probe = {'kind': 'text', 'selector': selector}
+   observed = {'operator': 'contains', 'expected': 'unsupported', 'actual': text}
+   step = {'op': 'assert', 'probe': probe, 'operator': 'contains', 'expected': 'unsupported'}
+   observation = {'phase': 'failure_recovery', 'step_index': index, 'probe': probe, 'observed': observed}
+   if index == 2:
+    step['checkpoint_id'] = 'error_observed';observation['checkpoint_id'] = 'error_observed';child['error_observations'].append(observation)
+   else:
+    child['supplemental_observations'].append(observation)
+   recovery['steps'].append({'step_index': index, 'step': step, 'observed': observed})
+  selector = '[data-authored-native-recovery-video]'
+  before = {'present': True, 'tag': 'VIDEO', 'visible': True, 'ready_state': 2, 'video_width': 64, 'video_height': 48, 'decoded_cid': cid, 'src_sha256': sha(b'authored recovery object URL'), 'current_time': 0}
+  recovery['steps'].append({'step_index': 17, 'step': {'op': 'assert', 'probe': {'kind': 'media_state', 'selector': selector, 'temporal_ms': 10}}, 'media': [{'selector': selector, 'same_element': True, 'before': before, 'after': {**before, 'current_time': 0.1}}]})
+  recovery['steps'].sort(key=lambda step: step['step_index'])
+  scenario = e.parse((fixture.root / ('swissknife/test/e2e/functional-workflows/' + fixture.app + '.json')).read_bytes())
+  scenario['phases']['failure_recovery'] = [{'op': 'assert'}] * 20
+  fixture.write_json('swissknife/test/e2e/functional-workflows/' + fixture.app + '.json', scenario)
+  fixture.save_child(view)
+
+ def test_literal_cinema_scope_and_strict_actual_recovery_order(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   f = Fixture(tmp)
+   for view in ('desktop', 'mobile'):
+    self.setup_view(f, view)
+   facts = e.native_request_facts(f.root, f.report)
+   self.assertIn('declared result-assertion CIDs', facts['legacy_cid_scope'])
+   self.assertIn('not every owner return', facts['legacy_cid_scope'])
+   sequence = facts['recovery_sequence']
+   self.assertEqual(sequence['phase'], 'failure_recovery')
+   self.assertEqual(sequence['views'], {'desktop': [[2,12,17,3],[7,12,17,3]], 'mobile': [[2,12,17,3],[7,12,17,3]]})
+
+ def test_recovery_metadata_rejects_forged_observation_and_does_not_infer_order(self):
+  for fault in ('forged_observation', 'too_late', 'other_artifact'):
+   with self.subTest(fault=fault), tempfile.TemporaryDirectory() as tmp:
+    f = Fixture(tmp)
+    for view in ('desktop', 'mobile'):
+     self.setup_view(f, view)
+    child = f.children['mobile'];recovery = next(phase for phase in child['phase_evidence']['phases'] if phase['phase'] == 'failure_recovery')
+    if fault == 'forged_observation':
+     # Break the independent observation-to-phase record equality, retaining its
+     # native outcome prefix so the extraction must check the join.
+     child['error_observations'][0]['observed'] = {**child['error_observations'][0]['observed'], 'actual': 'Unsupported codec forged observation'}
+    elif fault == 'too_late':
+     for old, new in ((2,13),(7,14)):
+      observation = next(item for item in child['error_observations'] + child['supplemental_observations'] if item['step_index'] == old)
+      observation['step_index'] = new
+      next(step for step in recovery['steps'] if step['step_index'] == old)['step_index'] = new
+    else:
+     media = next(step for step in recovery['steps'] if step['step_index'] == 17)['media'][0]
+     earlier = e._native_body(f.records['mobile'][1]['response']['result'])['cid']
+     media['before']['decoded_cid'] = media['after']['decoded_cid'] = earlier
+    f.save_child('mobile')
+    if fault == 'forged_observation':
+     with self.assertRaises(ValueError):e.native_request_facts(f.root, f.report)
+    else:
+     facts = e.native_request_facts(f.root, f.report)
+     self.assertEqual(facts['recovery_sequence']['views']['mobile'], [])
+
+
+class SupplementalProjectionRowsTests(unittest.TestCase):
+ """Presentation codec only: preserve every original typed scalar/payload."""
+ def tree(self):
+  values = [None, False, True, 0, -0.0, 1.0, 'literal supplemental_rows', {'supplemental_rows': [[0, 'native literal']], 'supplemental_descriptors': None}]
+  descriptors = [{'phase': PHASES[i % 3], 'step_index': i, 'probe': {'kind': 'text', 'selector': '[data-authored-long-supplemental-selector="' + str(i) + '"]'}, 'observed': {'operator': 'equals', 'actual': copy.deepcopy(values[i]), 'expected': {'native_expected': [i, values[i]], 'supplemental_rows': 'opaque expected marker'}}} for i in range(8)]
+  return {'schema': 'swissknife.visual-functional-review-input.v2', 'viewports': [{'name': name, 'supplemental_observations': copy.deepcopy(descriptors), 'backend_observations': [{'observed': {'actual': {'supplemental_rows': 'unrelated owner literal'}}}]} for name in ('desktop','mobile')], 'unrelated_native_payload': {'supplemental_descriptors': None, 'supplemental_rows_semantics': {'opaque': True}}}
+
+ def test_supplemental_row_codec_preserves_exact_tree_and_opaque_payloads(self):
+  tree = self.tree();before = e.encoded(tree)
+  compact = e._factor_supplemental_rows(tree)
+  self.assertIn('supplemental_descriptors', compact)
+  self.assertIn('supplemental_rows_semantics', compact)
+  self.assertLess(len(e.encoded(compact)), len(before))
+  self.assertEqual(e.encoded(e._expand_supplemental_rows(compact)), before)
+  self.assertEqual(e.encoded(tree), before, 'factor must not mutate original evidence')
+  self.assertEqual(compact['viewports'][0]['supplemental_observations']['supplemental_rows'][7][1], tree['viewports'][0]['supplemental_observations'][7]['observed']['actual'])
+  self.assertEqual(compact['unrelated_native_payload'], tree['unrelated_native_payload'])
+  self.assertEqual(compact['viewports'][0]['backend_observations'], tree['viewports'][0]['backend_observations'])
+
+ def test_supplemental_row_codec_integrates_with_all_existing_lossless_codecs(self):
+  tree = self.tree();tree['retained_literal_padding'] = 'x' * 15000
+  original = e.encoded(tree)
+  factored = e._factor_projection(tree)
+  self.assertEqual(e.encoded(e._expand_projection(factored)), original)
+  self.assertLess(len(e.encoded(factored)), len(original))
+  self.assertEqual(e.encoded(e._expand_supplemental_rows(self.tree())), e.encoded(self.tree()), 'unencoded historical tree remains exact')
+
+ def test_supplemental_row_decoder_refuses_incomplete_ambiguous_or_forged_shapes(self):
+  valid = e._factor_supplemental_rows(self.tree())
+  for fault in ('missing_descriptors','missing_semantics','null_descriptors','null_semantics','descriptor_arity','descriptor_phase_type','row_arity','boolean_index','unknown_index','duplicate_descriptor','unused_descriptor','mixed_marker'):
+   with self.subTest(fault=fault):
+    value = copy.deepcopy(valid)
+    slot = value['viewports'][0]['supplemental_observations']
+    if fault == 'missing_descriptors':value.pop('supplemental_descriptors')
+    elif fault == 'missing_semantics':value.pop('supplemental_rows_semantics')
+    elif fault == 'null_descriptors':value['supplemental_descriptors'] = None
+    elif fault == 'null_semantics':value['supplemental_rows_semantics'] = None
+    elif fault == 'descriptor_arity':value['supplemental_descriptors'][0].append('forged extra field')
+    elif fault == 'descriptor_phase_type':value['supplemental_descriptors'][0][0] = ['not a phase string']
+    elif fault == 'row_arity':slot['supplemental_rows'][0].append('forged extra field')
+    elif fault == 'boolean_index':slot['supplemental_rows'][0][0] = True
+    elif fault == 'unknown_index':slot['supplemental_rows'][0][0] = 999
+    elif fault == 'duplicate_descriptor':value['supplemental_descriptors'].append(copy.deepcopy(value['supplemental_descriptors'][0]))
+    elif fault == 'unused_descriptor':
+     descriptor = copy.deepcopy(value['supplemental_descriptors'][0]);descriptor[1] = 999;value['supplemental_descriptors'].append(descriptor)
+    else:slot['forged_native_field'] = 'mixed encoded/native shape'
+    with self.assertRaises(ValueError):e._expand_supplemental_rows(value)
+
+
+class ObjectArrayProjectionRowsTests(unittest.TestCase):
+ def tree(self):
+  opaque = {'@': [0, 'native dict marker'], '@1:0': 'native tag key', 'actual_nested': ['@2:0', False]}
+  return {'records': [{'alpha_long_field': i, 'beta_long_field': 'retained literal ' + str(i), 'gamma_long_field': {'first_native_key': i, 'second_native_key': False, 'third_native_key': None}, 'actual': copy.deepcopy(opaque), 'expected': ['@0', -0.0, True]} for i in range(30)], 'native_arrays': [['@0', 7], ['@1:0', 8], ['@2:0', 9], [True, 'a native boolean-first array']], '@': 'native root marker key'}
+
+ def test_array_wrappers_roundtrip_and_legacy_dictionary_decode_remain_exact(self):
+  tree = self.tree();original = e.encoded(tree)
+  legacy = e._factor_projection_objects(tree)
+  self.assertEqual(legacy['object_rows_semantics'], e._OBJECT_ROWS_SEMANTICS)
+  self.assertEqual(e.encoded(e._expand_projection_objects(legacy)), original)
+  compact = e._shorten_projection_object_rows(legacy)
+  self.assertEqual(compact['object_rows_semantics'], e._OBJECT_ROWS_ARRAY_SEMANTICS)
+  self.assertIsInstance(compact['records'][0], list)
+  self.assertLess(len(e.encoded(compact)), len(e.encoded(legacy)))
+  self.assertEqual(e.encoded(e._expand_projection_objects(compact)), original)
+  self.assertEqual(e.encoded(tree), original)
+
+ def test_array_prefix_avoids_all_native_strings_and_opaque_values(self):
+  tree = self.tree();compact = e._shorten_projection_object_rows(e._factor_projection_objects(tree));prefix = compact['object_row_marker']
+  def strings(value):
+   if isinstance(value, str):return [value]
+   if isinstance(value, dict):return list(value) + [v for child in value.values() for v in strings(child)]
+   if isinstance(value, list):return [v for child in value for v in strings(child)]
+   return []
+  self.assertFalse(any(text.startswith(prefix) for text in strings(tree)))
+  restored = e._expand_projection_objects(compact)
+  self.assertEqual(restored['native_arrays'], tree['native_arrays'])
+  for before, after in zip(tree['records'], restored['records']):
+   self.assertEqual(e.encoded(before['actual']), e.encoded(after['actual']))
+   self.assertEqual(e.encoded(before['expected']), e.encoded(after['expected']))
+
+ def test_array_decoder_rejects_malformed_tag_arity_index_and_mixed_legacy(self):
+  valid = e._shorten_projection_object_rows(e._factor_projection_objects(self.tree()))
+  prefix = valid['object_row_marker']
+  for fault in ('unknown_schema','noncanonical_index','boolean_spelling','empty_index','row_arity','mixed_legacy'):
+   with self.subTest(fault=fault):
+    value = copy.deepcopy(valid);row = value['records'][0]
+    if fault == 'unknown_schema':row[0] = prefix + '999'
+    elif fault == 'noncanonical_index':row[0] = prefix + '00'
+    elif fault == 'boolean_spelling':row[0] = prefix + 'True'
+    elif fault == 'empty_index':row[0] = prefix
+    elif fault == 'row_arity':row.pop()
+    else:
+     index = int(row[0][len(prefix):]);value['records'][0] = {prefix: [index, *row[1:]]}
+    with self.assertRaises(ValueError):e._expand_projection_objects(value)
+
+
+class NativeProjectionMinimumChoiceTests(unittest.TestCase):
+ """A fitting packet may still need lossless reduction for its full prompt."""
+ def tree(self):
+  value = ObjectArrayProjectionRowsTests().tree()
+  value['viewports'] = []
+  value['native_request_facts'] = {'schema': 'authored-native-facts-only', 'typed': [None, False, True, 0, -0.0, 1.0, '雪'], 'actual': {'@0': ['@1:0', False], 'retained_literal': 'not a protocol row'}, 'expected': ['@2:0', -0.0, True]}
+  return value
+
+ def test_native_private_choice_minimizes_even_when_public_packet_already_fits(self):
+  tree = self.tree();original = e.encoded(tree)
+  self.assertLess(len(original), 18000)
+  self.assertIs(e._factor_projection(tree), tree, 'public fitting/legacy behavior stays unchanged')
+  compact = e._smallest_projection_candidate(tree)
+  self.assertLess(len(e.encoded(compact)), len(original))
+  self.assertEqual(compact['object_rows_semantics'], e._OBJECT_ROWS_ARRAY_SEMANTICS)
+  self.assertEqual(e.encoded(e._expand_projection(compact)), original)
+  self.assertEqual(e.encoded(e._expand_projection(compact)['native_request_facts']), e.encoded(tree['native_request_facts']))
+  self.assertEqual(e.encoded(tree), original, 'candidate choice must not mutate original typed evidence')
+
+ def test_native_private_choice_never_reencodes_existing_tables_or_adds_larger_metadata(self):
+  original = self.tree();compact = e._smallest_projection_candidate(original)
+  self.assertIn('object_schemas', compact)
+  self.assertEqual(e.encoded(e._smallest_projection_candidate(compact)), e.encoded(compact))
+  small = {'viewports': [], 'native_request_facts': {'actual': [False, 0, -0.0, None]}}
+  result = e._smallest_projection_candidate(small)
+  self.assertEqual(e.encoded(result), e.encoded(small))
+  self.assertNotIn('object_schemas', result, 'min choice may not enlarge small evidence with unused schemas')

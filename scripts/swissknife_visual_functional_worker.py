@@ -1299,7 +1299,7 @@ def model(profile_path: str, task: dict, mode: str, inputs: list[str], screensho
             raise ValueError("final viewport review images differ from the exact ordered result screenshots")
         context["final_workflow_evidence"] = binding(task, final_evidence)
         context["evidence_interpretation"] = _independent_review_guidance(profile, task, final_evidence)
-        from swissknife_visual_functional_final_coverage import native_request_facts, NATIVE_FACTS_CONTEXT_MAX, encoded as native_facts_encoded
+        from swissknife_visual_functional_final_coverage import native_request_facts, NATIVE_FACTS_MAX_BYTES, encoded as native_facts_encoded
         native_facts = native_request_facts(ROOT, review_reports[0])
         if native_facts is not None:
             context["native_request_facts"] = native_facts
@@ -1517,7 +1517,7 @@ def model(profile_path: str, task: dict, mode: str, inputs: list[str], screensho
             atomic_json(target, projected)
             compact_inputs.append(str(target.relative_to(ROOT)))
         if "native_request_facts" in context:
-            if len(native_facts_encoded(context["native_request_facts"])) > NATIVE_FACTS_CONTEXT_MAX:
+            if len(native_facts_encoded(context["native_request_facts"])) > NATIVE_FACTS_MAX_BYTES:
                 raise ValueError("native fact context exceeds its bounded supplement")
             atomic_json(context_path, context, compact=True)
         inputs = compact_inputs
