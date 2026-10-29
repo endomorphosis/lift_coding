@@ -1579,6 +1579,298 @@ def _project_backend_observations(root, child, child_path):
     return result, additional
 
 
+
+NATIVE_FACTS_CONTEXT_MAX = 2048
+NATIVE_FACTS_MAX_REQUESTS = 16
+
+
+def _native_raw_cid(raw):
+    return 'b' + base64.b32encode(b'\x01\x55\x12\x20' + hashlib.sha256(raw).digest()).decode().rstrip('=').lower()
+
+
+def _native_body(result):
+    value = result.get('result', {}) if type(result) is dict else {}
+    content = value.get('content', []) if type(value) is dict else []
+    rows = [item['json'] for item in content if type(item) is dict and item.get('type') == 'json' and type(item.get('json')) is dict]
+    return rows[0] if len(rows) == 1 else {}
+
+
+def _native_trace_rows(root, child, child_path):
+    import zipfile
+    refs = [row for row in child['artifacts'] if Path(row['path']).name == 'trace.zip']
+    need(len(refs) == 1, 'native request facts need one retained trace')
+    target = check_reference(root, refs[0], prefix=child_path.parent)
+    scenario = parse(read(root, 'swissknife/test/e2e/functional-workflows/' + child['app_id'] + '.json'))
+    witnesses = validate_backend_request_phases(root, child, scenario)
+    need(type(witnesses) is list and len(witnesses) <= NATIVE_FACTS_MAX_REQUESTS, 'native request fact cardinality exceeds its bounded table')
+    rows = []
+    with zipfile.ZipFile(target) as archive:
+        names = archive.namelist()
+        need(len(names) == len(set(names)), 'duplicate native trace member')
+        def member(name, maximum):
+            need(type(name) is str and name in names and not name.startswith('/') and '..' not in Path(name).parts,
+                 'unsafe native trace resource')
+            info = archive.getinfo(name)
+            need(info.file_size <= maximum, 'native trace resource exceeds its bound')
+            value = archive.read(name)
+            need(len(value) == info.file_size, 'incomplete native trace resource')
+            return value
+        for line in member('trace.network', 8 * 1024 * 1024).splitlines():
+            snapshot = parse(line).get('snapshot', {}); request = snapshot.get('request', {})
+            if not str(request.get('url', '')).endswith('/mcp/tools/call'):
+                continue
+            need(request.get('method') == 'POST', 'native trace tool request must be POST')
+            post = request.get('postData', {}); raw = post.get('text')
+            if not raw:
+                raw = member('resources/' + post.get('_sha1', ''), 2 * 1024 * 1024)
+            call = parse(raw.encode() if type(raw) is str else raw)
+            response = snapshot.get('response', {}); resource = response.get('content', {}).get('_sha1')
+            need(response.get('status') == 200 and type(resource) is str, 'native owner response is incomplete')
+            raw_response = member('resources/' + resource, 2 * 1024 * 1024); result = parse(raw_response)
+            need(call.get('protocol') == 'swissknife.all-app-tool-gateway.v1' and call.get('route') == '/mcp/tools/call'
+                 and call.get('input', {}).get('policy', {}).get('dry_run') is False, 'native trace is not a real governed tool request')
+            index = len(rows); need(index < len(witnesses), 'unjoined extra native request')
+            witness = witnesses[index]
+            need(witness['request_index'] == index and witness['correlation_id'] == call.get('correlation_id')
+                 and witness['call_sha256'] == digest(call) and witness['binding_id'] == call.get('binding_id'),
+                 'native trace request/source-phase identity differs')
+            need(result.get('correlation_id') == call['correlation_id'] and result.get('owner') == call.get('owner')
+                 and result.get('tool_id') == call.get('tool_id') and result.get('transport') == call.get('transport'),
+                 'native trace response identity differs')
+            receipt = result.get('receipt', {}); persistence = receipt.get('persistence', {})
+            need(all(receipt.get(key) == call.get(key) for key in ('owner','tool_id','transport','correlation_id'))
+                 and receipt.get('outcome') == result.get('outcome') and receipt.get('policy_outcome') in {'allow','require_confirmation'}, 'native trace receipt identity/policy differs')
+            receipt_cid = receipt.get('receipt_id'); events = receipt.get('event_dag_refs')
+            need(type(events) is list and len(events) == 1 and persistence.get('status') == 'persisted'
+                 and persistence.get('receipt_cid') == receipt_cid and persistence.get('event_cid') == events[0],
+                 'native trace receipt persistence differs')
+            for kind, cid in [('receipt', receipt_cid), ('event', events[0])]:
+                raw_artifact = encoded({'call': call, 'kind': kind, 'result': result.get('result')})
+                need(_native_raw_cid(raw_artifact) == cid, 'native trace reconstructed raw CID differs')
+                selected = [r for r in child['artifacts'] if Path(r['path']).name == kind + '-' + cid + '.json']
+                if selected:
+                    need(len(selected) == 1, 'duplicate retained native artifact')
+                    checked = check_reference(root, selected[0], prefix=child_path.parent)
+                    need(read(root, str(checked.relative_to(root))) == raw_artifact, 'native trace/retained artifact bytes differ')
+            need(result.get('outcome') in {'executed', 'failed'} and result.get('ok') is (result['outcome'] == 'executed'),
+                 'native trace outcome differs')
+            rows.append({'witness': witness, 'call': call, 'response': result, 'body': _native_body(result.get('result'))})
+    need(len(rows) == len(witnesses) == child['backend_call_count'], 'native request table is incomplete')
+    return rows, {'path': 'trace.zip', 'sha256': refs[0]['sha256']}
+
+
+def _native_supervisor_provenance(root, body):
+    value = body.get('native_provenance', {})
+    expected = {'external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py',
+        'external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/database_task_source.py',
+        'external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/intent_repository.py',
+        'external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/process_runner.py',
+        'scripts/svf_backends/fixed_supervisor_output_validator.py', 'scripts/svf_backends/fixed_supervisor_worker.py',
+        'scripts/svf_backends/native_accelerate_service.py', 'scripts/svf_backends/native_supervisor_backend.py',
+        'swissknife/scripts/ipfs-accelerate-native-forwarder.cjs', 'swissknife/scripts/start-ipfs-accelerate-mcp-compat.cjs'}
+    sources = value.get('source_sha256')
+    need(value.get('schema') == 'swissknife.native-supervisor-execution.v1' and value.get('owner') == 'ipfs_accelerate_py'
+         and value.get('simulated') is False and value.get('cache_fallback') is False and type(sources) is dict
+         and set(sources) == expected, 'native supervisor provenance/source set differs')
+    for name, want in sources.items():
+        need(type(want) is str and re.fullmatch('[0-9a-f]{64}', want)
+             and hashlib.sha256(read(root, name)).hexdigest() == want, 'native supervisor source/archive is stale')
+
+
+def _native_supervisor_pair(root, row):
+    body = row['body']; payload = row['call']['input']['payload']; stage = body['task_key']; run = body['run_id']
+    _native_supervisor_provenance(root, body)
+    execution = body.get('execution'); need(type(execution) is dict and set(execution) == {'producer', 'validator'}, 'native archive pair absent')
+    need(execution['producer'] != execution['validator'], 'native producer/validator must be independent')
+    scripts = {'producer': 'scripts/svf_backends/fixed_supervisor_worker.py',
+               'validator': 'scripts/svf_backends/fixed_supervisor_output_validator.py'}
+    output = None
+    for role in ('producer', 'validator'):
+        ref = execution[role]; target = Path(ref.get('path', ''))
+        expected = Path(root) / 'data/agent_supervisor/swissknife_visual_functional/backends/supervisor-fixtures' / run / 'attempts'
+        need(target.is_absolute() and target.is_relative_to(expected) and target.name == 'result.json'
+             and len(target.relative_to(expected).parts) == 2, 'foreign native archive path')
+        raw = read(root, str(target.relative_to(root))); need(hashlib.sha256(raw).hexdigest() == ref.get('sha256'), 'native archive hash differs')
+        record = parse(raw); argv = record.get('command_argv', [])
+        need(record.get('schema') == 'ipfs_accelerate_py/agent-supervisor/verification-process-runner@1'
+             and record.get('ok') is True and record.get('process_started') is True and type(record.get('exit_code')) is int and record.get('exit_code') == 0
+             and record.get('terminal_status') == 'passed' and record.get('timed_out') is False and record.get('cancelled') is False,
+             'native archive did not complete successfully')
+        need(len(argv) >= 4 and argv[:3] == [record.get('executable'), '-I', '-B'] and re.fullmatch(r'python(?:3(?:\.\d+)?)?', Path(argv[0]).name) and argv[3] == str(Path(root) / scripts[role]),
+             'native archive uses a different producer/validator')
+        def argument(name):
+            need(argv.count(name) == 1 and argv.index(name) + 1 < len(argv), 'native archive argument absent/duplicate')
+            return argv[argv.index(name) + 1]
+        need(argument('--runtime-root') == str(expected.parent.parent) and argument('--run-id') == run and argument('--stage') == stage and argument('--challenge') == body.get('challenge'),
+             'native archive run/stage/challenge differs')
+        stream = record.get('stdout', {}); text = stream.get('preview')
+        need(type(text) is str and stream.get('truncated') is False and stream.get('byte_count') == len(text.encode())
+             and stream.get('captured_byte_count') == len(text.encode()) and stream.get('digest') == 'sha256:' + hashlib.sha256(text.encode()).hexdigest(),
+             'native archive stdout is not complete/hash-joined')
+        result = parse(text.encode()); need(result.get('output_sha256') == body.get('output_sha256'), 'native archive output SHA differs')
+        if role == 'producer':
+            output = Path(result.get('output_path', ''))
+            need(output == expected.parent / (stage + '.json'), 'foreign native output path')
+            data = read(root, str(output.relative_to(root)))
+            need(hashlib.sha256(data).hexdigest() == body['output_sha256'] and len(data) == result.get('bytes'), 'native output bytes differ')
+        else:
+            need(result.get('validated') is True and result.get('stage') == stage
+                 and result.get('validator_source_sha256') == hashlib.sha256(read(root, scripts[role])).hexdigest(), 'native validator result/source differs')
+    return True
+
+
+def native_request_facts(root, report):
+    """Bounded recorded-native facts, not task acceptance or an independent fetch."""
+    root = Path(root); parent = parse(read(root, str(Path(report).relative_to(root)))); views = []; kind = None
+    for entry in parent.get('viewport_reports', []):
+        child_path = check_reference(root, entry['report'], prefix=Path(report).parent)
+        child = parse(read(root, entry['report']['path'])); selected = []
+        for observation in child.get('backend_observations', []):
+            record = parse(read(root, observation['receipt_artifact'])); body = _native_body(record.get('result'))
+            provenance = body.get('native_provenance', {})
+            if provenance.get('schema') == 'swissknife.native-supervisor-execution.v1':selected.append('supervisor')
+            inner = record.get('result', {}).get('result', {})
+            if inner.get('receipt', {}).get('adapter') == 'swissknife-ipfs-kit-compat' and record.get('call', {}).get('input', {}).get('payload', {}).get('kind') in {'video-export', 'video-project'}:selected.append('video-artifacts')
+        if not selected:
+            need(not views, 'native format differs between canonical viewports');continue
+        current = selected[0]; need(all(v == current for v in selected) and (kind is None or kind == current), 'mixed native fact formats')
+        kind = current; rows, trace = _native_trace_rows(root, child, child_path); projected = []
+        if kind == 'supervisor':
+            runs = []; outputs = []; errors = {}
+            for row in rows:
+                call, body, witness = row['call'], row['body'], row['witness']; payload = call['input']['payload']; action = payload.get('action', 'read')
+                need(call.get('owner') == 'ipfs_accelerate_py' and action in {'create', 'dispatch', 'read', 'retry'}, 'native supervisor action/owner differs')
+                if row['response']['outcome'] == 'executed':_native_supervisor_provenance(root, body)
+                if action == 'create':
+                    need(row['response']['outcome'] == 'executed' and _native_body(row['response']['result']).get('native_provenance', {}).get('schema') == 'swissknife.native-supervisor-execution.v1', 'native run creation lacks provenance')
+                    item = [body.get('run_id'), body.get('task_ids', {}).get('a'), body.get('task_ids', {}).get('b')]
+                    need(all(type(v) is str and re.fullmatch('[0-9a-f-]{36}', v) for v in item) and len(set(item)) == 3 and item not in runs, 'native returned run/task identities malformed')
+                    runs.append(item); run_index = len(runs) - 1; stage = None; output = None; checked = None
+                else:
+                    matching = [i for i, value in enumerate(runs) if value[0] == payload.get('run_id')]
+                    need(len(matching) == 1 and payload.get('task_key') in {'a', 'b'}, 'native request has no exact created run/task')
+                    run_index = matching[0]; stage = payload['task_key']; output = None; checked = None
+                    if row['response']['outcome'] == 'executed':
+                        need(body.get('run_id') == runs[run_index][0] and body.get('task_id') == runs[run_index][1 if stage == 'a' else 2]
+                             and body.get('task_key') == stage and body.get('status') == 'completed'
+                             and type(body.get('output_sha256')) is str and re.fullmatch('[0-9a-f]{64}', body['output_sha256']), 'native result run/task/output differs')
+                        if action != 'read':checked = _native_supervisor_pair(root, row)
+                        else:
+                            prior = [r for r in rows[:witness['request_index']] if r['body'].get('run_id') == body['run_id'] and r['body'].get('task_id') == body['task_id'] and r['body'].get('output_sha256') == body['output_sha256'] and r['call']['input']['payload'].get('action') in {'dispatch', 'retry'}]
+                            need(len(prior) == 1, 'native readback lacks one exact prior run/task/output')
+                        if body['output_sha256'] not in outputs:outputs.append(body['output_sha256'])
+                        output = outputs.index(body['output_sha256'])
+                    else:
+                        error = row['response'].get('result', {}).get('error')
+                        need(body == {} and type(error) is str and len(error.encode()) <= 256, 'native failed request lacks its bounded recorded error')
+                        errors[str(witness['request_index'])] = error
+                projected.append([witness['request_index'], ['primary_result','persist_reopen','failure_recovery'].index(witness['phase']), witness['step_index'], ['create','dispatch','read','retry'].index(action), run_index, stage, ['executed','failed'].index(row['response']['outcome']), output, checked])
+            texts = {}
+            for phase in ('primary_result','persist_reopen'):
+                assertions = [item for item in child['semantic_assertions'] if item['phase'] == phase and item['probe'].get('kind') == 'text']
+                need(len(assertions) == 1 and type(assertions[0]['observed'].get('actual')) is str, 'native event DOM observation absent/ambiguous')
+                assertion = assertions[0]
+                phase_rows = [item for item in child['phase_evidence']['phases'] if item['phase'] == phase]
+                need(len(phase_rows) == 1, 'native retained DOM phase absent')
+                steps = [item for item in phase_rows[0]['steps'] if item['step_index'] == assertion['step_index']]
+                need(len(steps) == 1 and encoded(steps[0].get('observed')) == encoded(assertion['observed']), 'native retained DOM/source observation differs')
+                texts[phase] = (assertion['step_index'], assertion['observed']['actual'])
+            reads = [row for row in rows if row['call']['tool_id'] == 'get_task' and row['witness']['phase'] == 'persist_reopen']
+            need(len(reads) == 1, 'native owner readback absent/duplicate')
+            returned = reads[0]['body']; primary = [row for row in rows if row['witness']['phase'] == 'primary_result' and row['body'].get('task_id') == returned['task_id']]
+            need(len(primary) == 1 and reads[0]['witness']['generation'] == primary[0]['witness']['generation'] + 1, 'native reopen generation/source join differs')
+            retained = []
+            for row in rows:
+                if row['witness']['phase'] != 'primary_result':continue
+                receipt = row['response']['receipt']; event = receipt['event_dag_refs'][0]
+                need(all(receipt['receipt_id'] in text and event in text for _, text in texts.values()), 'native receipt/event history was not observed before and after reopen')
+                retained.append(row['witness']['request_index'])
+            read_receipt = reads[0]['response']['receipt']
+            need(all(returned[key] in texts['persist_reopen'][1] for key in ('run_id','task_id','output_sha256'))
+                 and read_receipt['receipt_id'] in texts['persist_reopen'][1] and read_receipt['event_dag_refs'][0] in texts['persist_reopen'][1], 'native owner readback differs from persisted DOM')
+            views.append({'name': entry['name'], 'trace': trace, 'runs': runs, 'outputs': outputs, 'rows': projected,
+                'errors': errors, 'retained_UI_event_rows': retained, 'retention_positions': [
+                    [0,texts['primary_result'][0],primary[0]['witness']['generation']],
+                    [1,texts['persist_reopen'][0],reads[0]['witness']['generation']]], 'readback_request':reads[0]['witness']['request_index']})
+
+        else:
+            import binascii
+            artifacts = []; projects = []
+            for row in rows:
+                call, body, witness = row['call'], row['body'], row['witness']; payload = call['input']['payload']; tool = call['tool_id']
+                need(call.get('owner') == 'ipfs_kit_py' and tool in {'ipfs_cat', 'artifacts_put'} and row['response']['outcome'] == 'executed' and body.get('success') is True, 'native artifact owner/tool/outcome differs')
+                inner = row['response']['result']['result'];need(inner.get('receipt', {}).get('adapter') == 'swissknife-ipfs-kit-compat', 'native artifact adapter differs')
+                encoded_bytes = body.get('bytes_base64') if tool == 'ipfs_cat' else payload.get('bytes_base64')
+                maximum = 1048576 if tool == 'ipfs_cat' else 65536
+                need(type(encoded_bytes) is str and len(encoded_bytes) <= 4 * ((maximum + 2) // 3), 'native artifact encoded bytes absent/oversize')
+                try:data = base64.b64decode(encoded_bytes, validate=True)
+                except (ValueError, binascii.Error):raise ValueError('native artifact base64 differs')
+                cid = body.get('cid');need(len(data) <= maximum and _native_raw_cid(data) == cid == payload.get('cid'), 'native artifact bytes/CID differ')
+                artifact_kind = 'source' if tool == 'ipfs_cat' else payload.get('kind')
+                if tool != 'ipfs_cat':need(artifact_kind in {'video-export','video-project'} and body.get('persisted') is True and body.get('verified') is True and body.get('bytes') == len(data), 'native artifact ACK differs')
+                if artifact_kind == 'source':need(data.startswith(b'\x1aE\xdf\xa3') or len(data) >= 12 and data[4:8] == b'ftyp', 'native source bytes are not supported video')
+                elif artifact_kind == 'video-export':need(data.startswith(b'\x1aE\xdf\xa3'), 'native exported bytes are not WebM')
+                artifacts.append([cid, len(data), artifact_kind, body.get('backend')])
+                if artifact_kind == 'video-project':
+                    project = parse(data);need(project.get('schema') == 'swissknife.cinema.project.v1', 'native video project format differs')
+                    source, output = project.get('source', {}), project.get('output', {})
+                    def matched(value, expected_kind):
+                        indexes = [i for i, a in enumerate(artifacts) if a[0] == value.get('cid') and a[2] == expected_kind]
+                        need(indexes and value.get('size') == artifacts[indexes[-1]][1], 'native project reference lacks exact prior bytes')
+                        need(value.get('sha256') == base64.b32decode(value['cid'][1:].upper() + '=' * ((8-len(value['cid'][1:]) % 8) % 8))[4:].hex(), 'native project content SHA differs')
+                        return indexes[-1]
+                    tracks = project.get('timeline', {}).get('tracks');need(type(tracks) is list and len(tracks) <= 8, 'native project track rows absent/oversize')
+                    projects.append([matched(source, 'source'), matched(output, 'video-export'), output.get('trim'), [[v.get('kind'),v.get('order'),v.get('in'),v.get('out')] for v in tracks]])
+                projected.append([witness['request_index'], ['primary_result','persist_reopen','failure_recovery'].index(witness['phase']), witness['step_index'], ['ipfs_cat','artifacts_put'].index(tool), len(artifacts)-1])
+            decoded = []
+            for phase in child.get('phase_evidence', {}).get('phases', []):
+                for step in phase['steps']:
+                    probe = step['step'].get('probe', {})
+                    if step['step'].get('op') != 'assert' or probe.get('kind') != 'media_state' or 'temporal_ms' not in probe:
+                        continue
+                    media = [item for item in step.get('media', []) if item['selector'] == probe.get('selector')]
+                    need(len(media) == 1, 'native decoded artifact selector is absent/ambiguous')
+                    record = media[0]; before, after = record['before'], record['after']
+                    need(record.get('same_element') is True and all(value.get('present') is True and value.get('tag') == 'VIDEO'
+                         and value.get('visible') is True and type(value.get('ready_state')) is int and value['ready_state'] >= 2
+                         and type(value.get('video_width')) is int and value['video_width'] > 0
+                         and type(value.get('video_height')) is int and value['video_height'] > 0 for value in (before,after))
+                         and before.get('decoded_cid') == after.get('decoded_cid') and before.get('src_sha256') == after.get('src_sha256')
+                         and all(type(value.get('current_time')) in (int,float) and math.isfinite(value['current_time']) for value in (before,after))
+                         and after['current_time'] > before['current_time'], 'native decoded artifact playback is not established')
+                    matching = [i for i, value in enumerate(artifacts) if value[0] == after['decoded_cid']]
+                    phase_index = ['primary_result','persist_reopen','failure_recovery'].index(phase['phase'])
+                    matching = [i for i in matching if (['primary_result','persist_reopen','failure_recovery'].index(rows[i]['witness']['phase']),rows[i]['witness']['step_index']) <= (phase_index,step['step_index'])]
+                    need(matching, 'native decoded CID lacks exact prior owner artifact bytes')
+                    decoded.append([phase_index, step['step_index'], matching[-1], 1])
+            if not any(row[0] == 1 for row in decoded):
+                reopened = next((phase for phase in child.get('phase_evidence', {}).get('phases', []) if phase['phase'] == 'persist_reopen'), None)
+                if reopened is not None:
+                    for step in reversed(reopened['steps']):
+                        matches = []
+                        for record in step.get('media', []):
+                            after = record.get('after', {})
+                            if not (record.get('same_element') is True and after.get('present') is True and after.get('visible') is True
+                                    and after.get('tag') == 'VIDEO' and type(after.get('ready_state')) is int and after['ready_state'] >= 2
+                                    and type(after.get('video_width')) is int and after['video_width'] > 0
+                                    and type(after.get('video_height')) is int and after['video_height'] > 0):continue
+                            candidates = [i for i, value in enumerate(artifacts) if value[0] == after.get('decoded_cid') and value[2] == 'video-export'
+                                and ['primary_result','persist_reopen','failure_recovery'].index(rows[i]['witness']['phase']) <= 1]
+                            if candidates:matches.append(candidates[-1])
+                        if matches:
+                            need(len(matches) == 1, 'reopened decoded native artifact is ambiguous')
+                            decoded.append([1, step['step_index'], matches[0], 0]);decoded.sort();break
+            views.append({'name': entry['name'], 'trace': trace, 'artifacts': artifacts, 'projects': projects, 'rows': projected, 'decoded_artifact_rows': decoded})
+    if not views:return None
+    need(len(views) == 2, 'native facts need both independently recorded viewports')
+    result = {'format': kind, 'proof': 'Phase/call-joined trace; raw CIDs reconstructed, not fetched. No acceptance; child-relative trace.', 'views': views, 'phases': ['primary_result','persist_reopen','failure_recovery']}
+    if kind == 'supervisor':
+        result.update(columns=['request','phase','step','action','run','stage','outcome','output','archive_pair'], actions=['create','dispatch','read','retry'], outcomes=['executed','failed'], run_columns=['run_id','task_a_id','task_b_id'], archive_pair='true=distinct producer/validator: full hash/source/args/output joins,started,exit0,no timeout. UI history=receipt/event IDs observed before+after reopen; read=prior run/task/output.')
+    else:result.update(columns=['request','phase','step','tool','artifact'], artifact_columns=['cid','bytes','kind','backend'], project_columns=['source_artifact','output_artifact','trim','tracks[kind,order,in,out]'], tools=['ipfs_cat','artifacts_put'], decoded='phase/step/artifact/advance(1)/ready(0): native VIDEO,ready2+,dimensions>0. UI, no fresh fetch.')
+    need(len(encoded(result)) <= 4096, 'native facts exceed bounded presentation table')
+    return result
+
+
 def projection(root, report):
     """Bound semantic context; complete immutable observations remain retained."""
     data = parse(read(root, str(Path(report).relative_to(root))))
@@ -1637,11 +1929,18 @@ def projection(root, report):
         result['backend_artifact_path_base'] = 'viewport_original_directory'
     result['instruction'] = ('Inspect both results. Initial/demo/layout-only mobile state cannot prove mobile execution. '
         'Owner results: without an inferred phase or broader success. Each phased row is one request; additional_result_assertions use that same request. Unphased rows imply no identity. '
-        'HTMLMediaElement/CID facts only. Phased receipt/event paths are relative to viewport original directory; filenames contain raw CIDs. Final frames follow failure_recovery; compare earlier runs with their phase receipts, not later frames.')
+        'HTMLMediaElement/CID facts only. Phased receipt/event paths are relative to viewport original directory; filenames contain raw CIDs. Final frames follow all phase steps and final checks; earlier unsupported observations are phase-local. Native request rows retain phase/step chronology.')
     if any(view.get('decoded_images') for view in result['viewports']):
         result['instruction'] += ' retained_from:IMG source/content/dims, not canvas/layers.'
     result = _factor_projection(result)
     need(len(encoded(result)) <= 18000, 'final review projection exceeds its bounded prompt share')
+    facts = native_request_facts(root, report)
+    if facts is not None:
+        enriched = _factor_projection({**_expand_projection(result), 'native_request_facts': facts})
+        if len(encoded(enriched)) <= 18000:
+            result = enriched
+        else:
+            need(len(encoded(facts)) <= NATIVE_FACTS_CONTEXT_MAX, 'native fact context exceeds its bounded supplement')
     return result
 
 
