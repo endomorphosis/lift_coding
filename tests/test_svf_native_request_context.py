@@ -662,3 +662,204 @@ class NativeProjectionMinimumChoiceTests(unittest.TestCase):
   result = e._smallest_projection_candidate(small)
   self.assertEqual(e.encoded(result), e.encoded(small))
   self.assertNotIn('object_schemas', result, 'min choice may not enlarge small evidence with unused schemas')
+
+
+class FetchedFixture(Fixture):
+ """Authored ten-call source/trace/fetched-byte fixtures, never real retrieval."""
+ def supervisor(self, view):
+  old = Fixture.supervisor(self, view)
+  first = e._native_body(old[1]['response']['result'])
+  pending = {k: copy.deepcopy(first[k]) for k in ('run_id','task_key','task_id','native_provenance')}
+  pending['status'] = 'ready'
+  a = {k: copy.deepcopy(v) for k,v in e._native_body(old[5]['response']['result']).items() if k != 'execution'}
+  b = {k: copy.deepcopy(v) for k,v in e._native_body(old[6]['response']['result']).items() if k != 'execution'}
+  source = [old[0], {'call':old[2]['call'],'body':pending}, old[1], old[2], old[3], old[4], old[5], old[6], {'call':old[2]['call'],'body':a}, {'call':old[2]['call'],'body':b}]
+  rows = []
+  for index, item in enumerate(source):
+   body = item.get('body', e._native_body(item.get('response', {}).get('result')))
+   payload = copy.deepcopy(item['call']['input']['payload'])
+   if index in (1,8,9):payload = {'run_id':body['run_id'],'task_key':body['task_key']}
+   call = self.call(view,index,payload,tool='get_task' if index in (1,3,8,9) else 'WorkflowCoordinator.submit_task')
+   response = self.response(call,error='JSON-RPC Error -32603: task is not ready') if index == 5 else self.response(call,body)
+   rows.append({'call':call,'response':response,'phase':PHASES[0 if index < 3 else 1 if index == 3 else 2],
+     'step':[5,13,21,6,4,14,20,25,37,45][index], 'generation':1 if index < 3 else 2 if index < 8 else 3})
+  self.records[view] = rows
+  self.bake(view)
+  return rows
+
+ def fetched(self, view):
+  child = self.children[view];rows = self.records[view];retained = []
+  source_path = self.root / 'swissknife/test/e2e/functional-workflows' / (self.app+'.json')
+  source = e.parse(source_path.read_bytes())
+  for binding in source['backend_bindings']:binding['max_output_bytes'] = 1048576
+  source_path.write_bytes(e.encoded(source))
+  for witness,row in zip(child['backend_request_phases']['requests'],rows):
+   receipt = row['response']['receipt'];item = {k:copy.deepcopy(v) for k,v in witness.items() if k != 'generation'}
+   item.update(receipt_id=receipt['receipt_id'],event_dag_cid=receipt['event_dag_refs'][0])
+   for kind,cid in [('receipt',receipt['receipt_id']),('event',receipt['event_dag_refs'][0])]:
+    item[kind+'_artifact'] = copy.deepcopy(next(r for r in child['artifacts'] if Path(r['path']).name == kind+'-'+cid+'.json'))
+   retained.append(item)
+  child['backend_request_artifacts'] = {'schema':'swissknife.visual-functional-request-artifacts.v1','requests':retained}
+  self.save_child(view)
+
+ def bake(self, view):
+  rows = self.records[view]
+  for row in rows:
+   if row['response']['outcome'] == 'executed':row['response'] = self.response(row['call'],e._native_body(row['response']['result']))
+  Fixture.finish(self,view,rows)
+  child = self.children[view]
+  scenario = {'backend_bindings':[{'binding_id':'authored.binding'}], 'phases':{p:[{'op':'capture'} for _ in range(n)] for p,n in zip(PHASES,(28,11,48))}}
+  history = ' '.join(r['response']['receipt']['receipt_id']+' '+r['response']['receipt']['event_dag_refs'][0] for r in rows[:3])
+  child['phase_evidence']['phases'] = [];child['semantic_assertions'] = [];child['supplemental_observations'] = []
+  for phase,index in [('primary_result',27),('persist_reopen',10),('failure_recovery',27)]:
+   text = history
+   if phase == 'persist_reopen':
+    body = e._native_body(rows[3]['response']['result']);receipt = rows[3]['response']['receipt']
+    text += ' '+' '.join(body[k] for k in ('run_id','task_id','output_sha256'))+' '+receipt['receipt_id']+' '+receipt['event_dag_refs'][0]
+   quote = 'Heartbeat and progress percent are not completion'
+   descriptor = {'op':'assert','probe':{'kind':'text','selector':'[data-authored-active-task]'},'operator':'contains','expected':quote}
+   observed = {'actual':text+' '+quote,'expected':quote}
+   scenario['phases'][phase][index] = descriptor
+   child['phase_evidence']['phases'].append({'phase':phase,'generation_before':1 if phase == 'primary_result' else 2,
+     'generation_after':1 if phase == 'primary_result' else 2 if phase == 'persist_reopen' else 3,
+     'steps':[{'step_index':index,'step':descriptor,'observed':observed}]})
+   child['semantic_assertions'].append({'phase':phase,'step_index':index,'requirement_id':phase,'probe':descriptor['probe'],'observed':observed})
+  for phase,index,stage,field,expected in [('primary_result',15,'a','owner_status','ready'),('primary_result',16,'a','validated',False),
+       ('primary_result',17,'a','output_sha256',''),('failure_recovery',39,'a','readback',True),('failure_recovery',47,'b','readback',True)]:
+   probe = {'kind':'json_attribute','selector':'[data-native-result-stage="'+stage+'"]','attribute':'data-native-state','pointer':'/'+field}
+   descriptor = {'op':'assert','probe':probe,'operator':'equals','expected':expected};observed={'actual':expected,'expected':expected}
+   scenario['phases'][phase][index] = descriptor
+   child['supplemental_observations'].append({'phase':phase,'step_index':index,'probe':probe,'observed':observed})
+   next(p for p in child['phase_evidence']['phases'] if p['phase']==phase)['steps'].append({'step_index':index,'step':descriptor,'observed':observed})
+  self.write_json('swissknife/test/e2e/functional-workflows/'+self.app+'.json',scenario)
+  self.fetched(view)
+
+
+class FetchedNativeRequestTests(unittest.TestCase):
+ def test_all_ten_requests_have_fetched_bytes_pending_and_reopened_two_task_readbacks(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   f=FetchedFixture(tmp);f.supervisor('desktop');f.supervisor('mobile');packed=e.native_request_facts(f.root,f.report)
+   self.assertLessEqual(len(e.encoded(packed)),4096)
+   facts=e._expand_native_views(packed)
+   for view in facts['views']:
+    self.assertEqual(view['fetched_request_rows'],list(range(10)))
+    self.assertEqual(view['pending_without_output'],[[1,'ready']])
+    self.assertEqual(view['readbacks'],[[3,2],[8,6],[9,7]])
+    self.assertEqual(view['retained_UI_event_rows'],[0,1,2])
+    self.assertEqual(view['repair_fetched_events'][0][0],6)
+    row=f.records[view['name']][6]['response']['receipt']
+    self.assertEqual(view['repair_fetched_events'][0][1:],[row['receipt_id'],row['event_dag_refs'][0]])
+    self.assertEqual(view['UI_status_rows'][-2:],[[2,39,8,3,True],[2,47,9,3,True]])
+   self.assertIn('Fetched raw receipt/event bytes',facts['proof'])
+   self.assertEqual(facts['UI_texts'],['Heartbeat and progress percent are not completion'])
+
+ def test_fetched_wire_rejects_incomplete_foreign_or_unretained_records(self):
+  for fault in ('null','schema','missing','index_bool','correlation','cid','sha','membership','foreign_path','mixed_views'):
+   with self.subTest(fault=fault), tempfile.TemporaryDirectory() as tmp:
+    f=FetchedFixture(tmp);f.supervisor('desktop');f.supervisor('mobile');child=f.children['desktop'];packet=child['backend_request_artifacts'];row=packet['requests'][6]
+    if fault=='null':child['backend_request_artifacts']=None
+    elif fault=='schema':packet['schema']='foreign'
+    elif fault=='missing':packet['requests'].pop()
+    elif fault=='index_bool':row['request_index']=True
+    elif fault=='correlation':row['correlation_id']='foreign'
+    elif fault=='cid':row['receipt_id']=e._native_raw_cid(b'foreign')
+    elif fault=='sha':row['receipt_artifact']['sha256']='0'*64
+    elif fault=='membership':child['artifacts']=[r for r in child['artifacts'] if r['path']!=row['receipt_artifact']['path']]
+    elif fault=='foreign_path':
+     old=row['receipt_artifact'];q=f.write('foreign/'+Path(old['path']).name,(f.root/old['path']).read_bytes());row['receipt_artifact']=e.reference(f.root,q);child['artifacts'].append(row['receipt_artifact'])
+    else:del f.children['mobile']['backend_request_artifacts'];f.save_child('mobile')
+    f.save_child('desktop')
+    with self.assertRaises(ValueError):e.native_request_facts(f.root,f.report)
+
+ def test_pending_output_and_final_readback_are_real_typed_source_joins(self):
+  for fault in ('pending_output','pending_execution','pending_status','readback_hash','generation','ui_false','ui_probe','ui_source'):
+   with self.subTest(fault=fault),tempfile.TemporaryDirectory() as tmp:
+    f=FetchedFixture(tmp);rows=f.supervisor('desktop');f.supervisor('mobile')
+    if fault.startswith('pending_'):
+     body=e._native_body(rows[1]['response']['result'])
+     if fault=='pending_output':body['output_sha256']=''
+     elif fault=='pending_execution':body['execution']=None
+     else:body['status']='completed'
+     f.bake('desktop')
+    elif fault=='readback_hash':e._native_body(rows[8]['response']['result'])['output_sha256']='f'*64;f.bake('desktop')
+    elif fault=='generation':rows[8]['generation']=2;f.bake('desktop')
+    else:
+     child=f.children['desktop'];item=child['supplemental_observations'][-1]
+     if fault=='ui_false':item['observed']['actual']=False
+     elif fault=='ui_probe':item['probe']['pointer']='/foreign'
+     else:
+      p=f.root/'swissknife/test/e2e/functional-workflows'/ (f.app+'.json');source=e.parse(p.read_bytes());source['phases']['failure_recovery'][47]['expected']=False;p.write_bytes(e.encoded(source))
+     f.save_child('desktop')
+    with self.assertRaises(ValueError):e.native_request_facts(f.root,f.report)
+
+ def test_cinema_fetched_primary_export_has_literal_receipt_and_event_ids(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   f=FetchedFixture(tmp)
+   for view in ('desktop','mobile'):CinemaRecoveryChronologyTests().setup_view(f,view);f.fetched(view)
+   facts=e.native_request_facts(f.root,f.report)
+   for view in facts['views']:
+    receipt=f.records[view['name']][1]['response']['receipt']
+    self.assertEqual(view['primary_export_fetched_events'],[[1,receipt['receipt_id'],receipt['event_dag_refs'][0]]])
+    self.assertEqual(view['fetched_request_rows'],[0,1,2,3])
+   self.assertIn('Fetched raw receipt/event bytes',facts['proof'])
+
+ def test_common_view_rows_preserve_typed_values_and_reject_malformed_metadata(self):
+  value={'format':'authored-only','views':[{'name':'desktop','shared':{'actual':[False,0,-0.0,None]},'distinct':True},
+      {'name':'mobile','shared':{'actual':[False,0,-0.0,None]},'distinct':1}]}
+  packed=e._factor_native_views(value)
+  if 'common_view' not in packed:
+   value['views'][0]['shared']['long_literal']='authored opaque retained value '*12
+   value['views'][1]['shared']=copy.deepcopy(value['views'][0]['shared']);packed=e._factor_native_views(value)
+  self.assertEqual(e.encoded(e._expand_native_views(packed)),e.encoded(value))
+  self.assertIn('distinct',packed['view_columns'],'bool and int may not become one common value')
+  restored=e._expand_native_views(packed);restored['views'][0]['shared']['actual'].append('local mutation')
+  self.assertEqual(restored['views'][1]['shared']['actual'],[False,0,-0.0,None])
+  for fault in ('null','missing','duplicate','overlap','arity','semantics'):
+   with self.subTest(fault=fault):
+    bad=copy.deepcopy(packed)
+    if fault=='null':bad['common_view']=None
+    elif fault=='missing':del bad['view_columns']
+    elif fault=='duplicate':bad['view_columns'].append(bad['view_columns'][0])
+    elif fault=='overlap':bad['common_view'][bad['view_columns'][0]]=False
+    elif fault=='arity':bad['views'][0].pop()
+    else:bad['view_rows_semantics']='foreign'
+    with self.assertRaises(ValueError):e._expand_native_views(bad)
+
+ def test_generic_fetched_consumer_accepts_actual_ecmascript_number_bytes(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   f=FetchedFixture(tmp);rows=Fixture.cinema(f,'desktop',source_size=96);f.fetched('desktop')
+   child=f.children['desktop'];wire=child['backend_request_artifacts']['requests'][0]
+   call=rows[0]['call'];call['input']['payload']['numeric']={'small':1e-7,'large':1e20,'negative_zero':-0.0}
+   old_paths={wire[k+'_artifact']['path']for k in ('receipt','event')}
+   child['artifacts']=[r for r in child['artifacts']if r['path']not in old_paths]
+   for kind,cid_key in [('receipt','receipt_id'),('event','event_dag_cid')]:
+    record={'call':call,'kind':kind,'result':rows[0]['response']['result']}
+    raw=e.encoded(record).replace(b'1e-07',b'1e-7').replace(b'1e+20',b'100000000000000000000').replace(b'-0.0',b'0')
+    cid=e._native_raw_cid(raw);p=f.write('reports/desktop/backend/'+kind+'-'+cid+'.json',raw);reference=e.reference(f.root,p)
+    wire[cid_key]=cid;wire[kind+'_artifact']=reference;child['artifacts'].append(reference)
+    child['backend_observations'][0][kind+'_artifact']=reference['path']
+    call_bytes=raw[len(b'{"call":'):raw.index(b',"kind":')]
+    wire['call_sha256']=sha(call_bytes);child['backend_request_phases']['requests'][0]['call_sha256']=sha(call_bytes)
+   scenario=e.parse((f.root/'swissknife/test/e2e/functional-workflows'/ (f.app+'.json')).read_bytes())
+   self.assertEqual(len(e.validate_backend_request_artifacts(f.root,child,scenario,f.root/'reports/desktop/workflow.json')),3)
+
+ def test_generic_fetched_consumer_checks_canonical_binding_owner_tools_transport_and_consent(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   f=FetchedFixture(tmp);rows=Fixture.cinema(f,'desktop',source_size=96)
+   for row in rows:
+    call=row['call'];call['input']['policy'].update(outcome='require_confirmation',consent='granted')
+    call['input']['payload']['fixture_scope']='authored.scope'
+    row['response']=f.response(call,e._native_body(row['response']['result']),video=True)
+   Fixture.finish(f,'desktop',rows);f.fetched('desktop');child=f.children['desktop']
+   scenario=e.parse((f.root/'swissknife/test/e2e/functional-workflows'/ (f.app+'.json')).read_bytes());scenario['fixture_scope']='authored.scope'
+   app={'backend_roles':[{'owner':'ipfs_kit_py','bindings':[{'binding_id':'authored.binding','exact_tool_candidates':['ipfs_cat','artifacts_put'],'transports':['http'],'mutates_remote_state':True}]}]}
+   self.assertEqual(len(e.validate_backend_request_artifacts(f.root,child,scenario,f.root/'reports/desktop/workflow.json',app=app)),3)
+   for fault in ('owner','tool','transport','scope','preview_policy'):
+    with self.subTest(fault=fault):
+     bad=copy.deepcopy(app);source=copy.deepcopy(scenario)
+     if fault=='owner':bad['backend_roles'][0]['owner']='foreign'
+     elif fault=='tool':bad['backend_roles'][0]['bindings'][0]['exact_tool_candidates']=['ipfs_cat']
+     elif fault=='transport':bad['backend_roles'][0]['bindings'][0]['transports']=['websocket']
+     elif fault=='scope':source['fixture_scope']='foreign'
+     else:bad['backend_roles'][0]['bindings'][0]['mutates_remote_state']=False
+     with self.assertRaises(ValueError):e.validate_backend_request_artifacts(f.root,child,source,f.root/'reports/desktop/workflow.json',app=bad)

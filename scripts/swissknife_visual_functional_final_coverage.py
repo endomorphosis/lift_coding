@@ -760,6 +760,68 @@ def validate_backend_request_phases(root, child, scenario):
     return requests
 
 
+def validate_backend_request_artifacts(root, child, scenario, child_path, *, app=None):
+    """Validate new raw fetched rows without granting any semantic credit."""
+    if 'backend_request_artifacts' not in child:
+        return None
+    packet = child['backend_request_artifacts']; witnesses = validate_backend_request_phases(root, child, scenario)
+    need(type(packet) is dict and set(packet) == {'schema','requests'}
+         and packet['schema'] == 'swissknife.visual-functional-request-artifacts.v1'
+         and type(packet['requests']) is list and witnesses is not None
+         and len(packet['requests']) == len(witnesses), 'fetched request table shape/count differs')
+    keys = {'request_index','phase','step_index','binding_id','correlation_id','call_sha256',
+            'receipt_id','event_dag_cid','receipt_artifact','event_artifact'}
+    seen = set()
+    for retained, witness in zip(packet['requests'], witnesses):
+        need(type(retained) is dict and set(retained) == keys, 'fetched request row shape differs')
+        for key in ('request_index','phase','step_index','binding_id','correlation_id','call_sha256'):
+            need(encoded(retained[key]) == encoded(witness[key]), 'fetched request/source witness differs')
+        intents = [item for item in scenario['backend_bindings'] if item['binding_id'] == witness['binding_id']]
+        maximum = intents[0].get('max_output_bytes') if len(intents) == 1 else None
+        need(type(maximum) is int and 0 < maximum <= 1048576, 'fetched artifact has no bounded source intent')
+        values = []
+        for kind, cid in [('receipt',retained['receipt_id']),('event',retained['event_dag_cid'])]:
+            reference = retained[kind + '_artifact']
+            need(type(reference) is dict and set(reference) == {'path','sha256','bytes'}
+                 and type(reference['path']) is str and reference['path']
+                 and type(reference['sha256']) is str and re.fullmatch('[0-9a-f]{64}', reference['sha256'])
+                 and type(reference['bytes']) is int and 0 < reference['bytes'] <= maximum,
+                 'fetched artifact reference bound/type differs')
+            need(reference['path'] not in seen, 'fetched artifact reused across request rows');seen.add(reference['path'])
+            members = [item for item in child['artifacts'] if item.get('path') == reference['path']]
+            need(len(members) == 1 and encoded(members[0]) == encoded(reference), 'fetched artifact is not an exact retained member')
+            target = check_reference(root, reference, prefix=Path(child_path).parent)
+            need(target.name == kind + '-' + str(cid) + '.json', 'fetched artifact kind/CID filename differs')
+            raw = read(root, str(target.relative_to(root)), limit=maximum)
+            need(_native_raw_cid(raw) == cid and _raw_call_sha256(raw) == witness['call_sha256'],
+                 'fetched artifact raw CID/call SHA differs')
+            value = parse(raw)
+            need(type(value) is dict and set(value) == {'call','kind','result'} and value['kind'] == kind
+                 and _supplemental_encoded(value) == raw, 'fetched artifact is not its exact canonical record')
+            call = value['call']; policy = call.get('input', {}).get('policy', {})
+            need(call.get('protocol') == 'swissknife.all-app-tool-gateway.v1' and call.get('route') == '/mcp/tools/call'
+                 and call.get('app_id') == child['app_id'] and call.get('receipt_required') is True
+                 and call.get('binding_id') == witness['binding_id'] and call.get('correlation_id') == witness['correlation_id']
+                 and type(call.get('intent_id')) is str and call['intent_id'] and policy.get('dry_run') is False,
+                 'fetched call identity/protocol/preview differs')
+            if app is not None:
+                roles = [(role, binding) for role in app.get('backend_roles', []) for binding in role.get('bindings', [])
+                         if binding.get('binding_id') == witness['binding_id']]
+                need(len(roles) == 1 and call.get('owner') == roles[0][0]['owner']
+                     and call.get('tool_id') in roles[0][1]['exact_tool_candidates']
+                     and call.get('transport') in roles[0][1]['transports'], 'fetched call exceeds canonical binding')
+                mutates = roles[0][1]['mutates_remote_state']
+                need(policy.get('outcome') == ('require_confirmation' if mutates else 'allow')
+                     and policy.get('consent') == ('granted' if mutates else 'not_required')
+                     and (not mutates or call.get('input', {}).get('payload', {}).get('fixture_scope') == scenario.get('fixture_scope')),
+                     'fetched call lacks canonical consent/scope')
+            values.append(value)
+        need(_supplemental_encoded(values[0]['call']) == _supplemental_encoded(values[1]['call'])
+             and _supplemental_encoded(values[0]['result']) == _supplemental_encoded(values[1]['result']),
+             'fetched receipt/event call or result differs')
+    return packet['requests']
+
+
 def _scenario_error_checkpoints(scenario):
     """Bind one error and optional before/after-retry saved-PNG observations."""
     allowed = {'error_observed', 'error_image_retained', 'recovery_image_retained'}
@@ -1022,6 +1084,7 @@ def validate_dual_workflow(root, profile, task, report, *, observation_validator
              and all(type(value) is int and value >= 0 for value in phases.values()) and sum(phases.values()) == count,
              'final viewport actual backend dispatch phase counts are missing or inconsistent')
         request_phases = validate_backend_request_phases(root, child, scenario)
+        fetched_requests = validate_backend_request_artifacts(root, child, scenario, child_path, app=app)
         validate_decoded_images(root, child, scenario, child_path)
         if app['disposition'] == 'tool_backed':
             need(count > 0 and observations, 'final viewport lacks its own actual owner proof')
@@ -1077,6 +1140,7 @@ def validate_dual_workflow(root, profile, task, report, *, observation_validator
                      'final semantic backend result is detached from its actual raw owner proof')
             for key, previous in owner_identities.items():
                 observed = {item.get(key) for item in observations}
+                if fetched_requests is not None:observed.update(item.get(key) for item in fetched_requests)
                 need(all(type(value) is str and value for value in observed) and not previous & observed,
                      'final mobile viewport reused desktop owner correlation/receipt/event evidence')
                 previous.update(observed)
@@ -1726,6 +1790,24 @@ def _native_body(result):
     return rows[0] if len(rows) == 1 else {}
 
 
+def _native_fetched_requests(root, child, child_path, rows):
+    """Join already-retained fetched bytes to the actual traced responses."""
+    scenario = parse(read(root, 'swissknife/test/e2e/functional-workflows/' + child['app_id'] + '.json'))
+    retained = validate_backend_request_artifacts(root, child, scenario, child_path)
+    if retained is None:return False
+    need(len(retained) == len(rows), 'native fetched request table differs')
+    for row, item in zip(rows, retained):
+        receipt = row['response']['receipt']
+        ids = {'receipt':receipt['receipt_id'], 'event':receipt['event_dag_refs'][0]}
+        need(item['receipt_id'] == ids['receipt'] and item['event_dag_cid'] == ids['event'], 'native fetched CID/trace identity differs')
+        for kind in ids:
+            raw = read(root, item[kind + '_artifact']['path'])
+            need(raw == _supplemental_encoded({'call':row['call'], 'kind':kind, 'result':row['response'].get('result')}),
+                 'native fetched bytes/trace call/result differ')
+        row['fetched'] = ids
+    return True
+
+
 def _native_trace_rows(root, child, child_path):
     import zipfile
     refs = [row for row in child['artifacts'] if Path(row['path']).name == 'trace.zip']
@@ -1763,7 +1845,8 @@ def _native_trace_rows(root, child, child_path):
             index = len(rows); need(index < len(witnesses), 'unjoined extra native request')
             witness = witnesses[index]
             need(witness['request_index'] == index and witness['correlation_id'] == call.get('correlation_id')
-                 and witness['call_sha256'] == digest(call) and witness['binding_id'] == call.get('binding_id'),
+                 and witness['call_sha256'] == (hashlib.sha256(_supplemental_encoded(call)).hexdigest() if 'backend_request_artifacts' in child else digest(call))
+                 and witness['binding_id'] == call.get('binding_id'),
                  'native trace request/source-phase identity differs')
             need(result.get('correlation_id') == call['correlation_id'] and result.get('owner') == call.get('owner')
                  and result.get('tool_id') == call.get('tool_id') and result.get('transport') == call.get('transport'),
@@ -1776,7 +1859,8 @@ def _native_trace_rows(root, child, child_path):
                  and persistence.get('receipt_cid') == receipt_cid and persistence.get('event_cid') == events[0],
                  'native trace receipt persistence differs')
             for kind, cid in [('receipt', receipt_cid), ('event', events[0])]:
-                raw_artifact = encoded({'call': call, 'kind': kind, 'result': result.get('result')})
+                canonical = _supplemental_encoded if 'backend_request_artifacts' in child else encoded
+                raw_artifact = canonical({'call': call, 'kind': kind, 'result': result.get('result')})
                 need(_native_raw_cid(raw_artifact) == cid, 'native trace reconstructed raw CID differs')
                 selected = [r for r in child['artifacts'] if Path(r['path']).name == kind + '-' + cid + '.json']
                 if selected:
@@ -1787,6 +1871,7 @@ def _native_trace_rows(root, child, child_path):
                  'native trace outcome differs')
             rows.append({'witness': witness, 'call': call, 'response': result, 'body': _native_body(result.get('result'))})
     need(len(rows) == len(witnesses) == child['backend_call_count'], 'native request table is incomplete')
+    _native_fetched_requests(root, child, child_path, rows)
     return rows, {'path': 'trace.zip', 'sha256': refs[0]['sha256']}
 
 
@@ -1854,9 +1939,59 @@ def _native_supervisor_pair(root, row):
     return proof
 
 
+def _native_ui_scalar(root, child, phase, stage, field, expected, lower, upper=None):
+    probe = {'kind':'json_attribute', 'selector':'[data-native-result-stage="' + stage + '"]',
+             'attribute':'data-native-state', 'pointer':'/' + field}
+    matches = [item for item in child.get('supplemental_observations', [])
+               if item.get('phase') == phase and encoded(item.get('probe')) == encoded(probe)]
+    need(len(matches) == 1, 'native status/readback UI observation is absent/ambiguous')
+    item = matches[0]; index = item.get('step_index'); observed = item.get('observed', {})
+    need(type(index) is int and index > lower and (upper is None or index < upper)
+         and encoded(observed.get('actual')) == encoded(expected), 'native UI status/readback value/order differs')
+    phases = [p for p in child['phase_evidence']['phases'] if p['phase'] == phase]
+    steps = [s for s in phases[0]['steps'] if s['step_index'] == index] if len(phases) == 1 else []
+    need(len(steps) == 1 and encoded(steps[0].get('observed')) == encoded(observed), 'native UI observed/source join differs')
+    source = parse(read(root, 'swissknife/test/e2e/functional-workflows/' + child['app_id'] + '.json'))['phases'][phase]
+    need(index < len(source) and encoded(source[index]) == encoded(steps[0]['step'])
+         and steps[0]['step'].get('op') == 'assert' and encoded(steps[0]['step'].get('probe')) == encoded(probe)
+         and steps[0]['step'].get('operator') == 'equals' and encoded(steps[0]['step'].get('expected')) == encoded(expected),
+         'native UI scalar does not match canonical source')
+    return index
+
+
+_NATIVE_VIEW_ROWS = 'views map view_columns; add common_view literal fields to each; event_columns covers both event tables.'
+
+
+def _expand_native_views(value):
+    fields = {'view_columns','common_view','view_rows_semantics'}
+    if not fields & set(value):return value
+    need(fields <= set(value) and value['view_rows_semantics'] == _NATIVE_VIEW_ROWS
+         and type(value['view_columns']) is list and value['view_columns']
+         and all(type(k) is str for k in value['view_columns']) and len(set(value['view_columns'])) == len(value['view_columns'])
+         and type(value['common_view']) is dict and not set(value['view_columns']) & set(value['common_view'])
+         and type(value.get('views')) is list and len(value['views']) == 2, 'native view-row metadata differs')
+    result = {k:v for k,v in value.items() if k not in fields | {'views'}}
+    result['views'] = []
+    for row in value['views']:
+        need(type(row) is list and len(row) == len(value['view_columns']), 'native view-row arity differs')
+        result['views'].append({**parse(encoded(value['common_view'])), **dict(zip(value['view_columns'],row))})
+    return result
+
+
+def _factor_native_views(value):
+    views = value['views']
+    need(len(views) == 2 and all(type(v) is dict for v in views) and set(views[0]) == set(views[1]), 'native view fields differ')
+    common = {k:v for k,v in views[0].items() if encoded(v) == encoded(views[1][k])}
+    columns = [k for k in views[0] if k not in common]
+    result = {**value, 'view_columns':columns, 'common_view':common, 'view_rows_semantics':_NATIVE_VIEW_ROWS,
+              'views':[[v[k] for k in columns] for v in views]}
+    need(encoded(_expand_native_views(result)) == encoded(value), 'native view factoring changed typed facts')
+    return result if len(encoded(result)) < len(encoded(value)) else value
+
+
 def native_request_facts(root, report):
     """Bounded recorded-native facts, not task acceptance or an independent fetch."""
-    root = Path(root); parent = parse(read(root, str(Path(report).relative_to(root)))); views = []; kind = None; recovery_sequences = {}
+    root = Path(root); parent = parse(read(root, str(Path(report).relative_to(root)))); views = []; kind = None; recovery_sequences = {}; fetched_mode = None; status_readbacks = None
     for entry in parent.get('viewport_reports', []):
         child_path = check_reference(root, entry['report'], prefix=Path(report).parent)
         child = parse(read(root, entry['report']['path'])); selected = []
@@ -1870,8 +2005,20 @@ def native_request_facts(root, report):
             need(not views, 'native format differs between canonical viewports');continue
         current = selected[0]; need(all(v == current for v in selected) and (kind is None or kind == current), 'mixed native fact formats')
         kind = current; rows, trace = _native_trace_rows(root, child, child_path); projected = []
+        fetched = all('fetched' in row for row in rows)
+        need(fetched_mode is None or fetched_mode == fetched, 'native fetched coverage differs between viewports')
+        fetched_mode = fetched
         if kind == 'supervisor':
-            runs = []; outputs = []; errors = {}; validated_outputs = []; created_without_output = []
+            extended = len(rows) == 10
+            need(status_readbacks is None or status_readbacks == extended, 'native supervisor sequence differs between viewports')
+            status_readbacks = extended
+            if extended:
+                need(fetched and [(r['call']['input']['payload'].get('action', 'read'), r['witness']['phase']) for r in rows] == [
+                    ('create','primary_result'), ('read','primary_result'), ('dispatch','primary_result'),
+                    ('read','persist_reopen'), ('create','failure_recovery'), ('dispatch','failure_recovery'),
+                    ('dispatch','failure_recovery'), ('retry','failure_recovery'), ('read','failure_recovery'), ('read','failure_recovery')],
+                    'native status/readback sequence lacks complete fetched requests')
+            runs = []; outputs = []; errors = {}; validated_outputs = []; created_without_output = []; pending = []; readbacks = []
             for row in rows:
                 call, body, witness = row['call'], row['body'], row['witness']; payload = call['input']['payload']; action = payload.get('action', 'read')
                 need(call.get('owner') == 'ipfs_accelerate_py' and action in {'create', 'dispatch', 'read', 'retry'}, 'native supervisor action/owner differs')
@@ -1889,17 +2036,26 @@ def native_request_facts(root, report):
                     run_index = matching[0]; stage = payload['task_key']; output = None; checked = None
                     if row['response']['outcome'] == 'executed':
                         need(body.get('run_id') == runs[run_index][0] and body.get('task_id') == runs[run_index][1 if stage == 'a' else 2]
-                             and body.get('task_key') == stage and body.get('status') == 'completed'
-                             and type(body.get('output_sha256')) is str and re.fullmatch('[0-9a-f]{64}', body['output_sha256']), 'native result run/task/output differs')
+                             and body.get('task_key') == stage, 'native result run/task identity differs')
+                        if extended and witness['request_index'] == 1:
+                            need(action == 'read' and run_index == 0 and stage == 'a' and body.get('status') == 'ready'
+                                 and 'output_sha256' not in body and 'execution' not in body,
+                                 'native pending read must show ready task without output or execution')
+                            pending.append([witness['request_index'], body['status']])
+                        else:
+                            need(body.get('status') == 'completed' and type(body.get('output_sha256')) is str
+                                 and re.fullmatch('[0-9a-f]{64}', body['output_sha256']), 'native result run/task/output differs')
                         if action != 'read':
                             proof = _native_supervisor_pair(root, row); checked = True
                             validated_outputs.append([witness['request_index'], proof['status'], proof['output_bytes'],
                                 proof['producer_exit'], proof['validator_exit'], proof['validated']])
-                        else:
+                        elif not (extended and witness['request_index'] == 1):
                             prior = [r for r in rows[:witness['request_index']] if r['body'].get('run_id') == body['run_id'] and r['body'].get('task_id') == body['task_id'] and r['body'].get('output_sha256') == body['output_sha256'] and r['call']['input']['payload'].get('action') in {'dispatch', 'retry'}]
                             need(len(prior) == 1, 'native readback lacks one exact prior run/task/output')
-                        if body['output_sha256'] not in outputs:outputs.append(body['output_sha256'])
-                        output = outputs.index(body['output_sha256'])
+                            readbacks.append([witness['request_index'], prior[0]['witness']['request_index']])
+                        if 'output_sha256' in body:
+                            if body['output_sha256'] not in outputs:outputs.append(body['output_sha256'])
+                            output = outputs.index(body['output_sha256'])
                     else:
                         error = row['response'].get('result', {}).get('error')
                         need(body == {} and type(error) is str and len(error.encode()) <= 256, 'native failed request lacks its bounded recorded error')
@@ -1921,7 +2077,9 @@ def native_request_facts(root, report):
                     if candidate not in ui_quotes:ui_quotes.append(candidate)
             reads = [row for row in rows if row['call']['tool_id'] == 'get_task' and row['witness']['phase'] == 'persist_reopen']
             need(len(reads) == 1, 'native owner readback absent/duplicate')
-            returned = reads[0]['body']; primary = [row for row in rows if row['witness']['phase'] == 'primary_result' and row['body'].get('task_id') == returned['task_id']]
+            returned = reads[0]['body']; primary = [row for row in rows if row['witness']['phase'] == 'primary_result'
+                and row['body'].get('task_id') == returned['task_id'] and row['body'].get('output_sha256') == returned['output_sha256']
+                and row['call']['input']['payload'].get('action') in {'dispatch','retry'}]
             need(len(primary) == 1 and reads[0]['witness']['generation'] == primary[0]['witness']['generation'] + 1, 'native reopen generation/source join differs')
             retained = []; retained_events = []
             for row in rows:
@@ -1929,7 +2087,8 @@ def native_request_facts(root, report):
                 receipt = row['response']['receipt']; event = receipt['event_dag_refs'][0]
                 need(all(receipt['receipt_id'] in text and event in text for _, text in texts.values()), 'native receipt/event history was not observed before and after reopen')
                 retained.append(row['witness']['request_index'])
-                retained_events.append([row['witness']['request_index'], receipt['receipt_id'], event])
+                if not extended or row['call']['input']['payload'].get('action') in {'create','dispatch'}:
+                    retained_events.append([row['witness']['request_index'], receipt['receipt_id'], event])
             read_receipt = reads[0]['response']['receipt']
             need(all(returned[key] in texts['persist_reopen'][1] for key in ('run_id','task_id','output_sha256'))
                  and read_receipt['receipt_id'] in texts['persist_reopen'][1] and read_receipt['event_dag_refs'][0] in texts['persist_reopen'][1], 'native owner readback differs from persisted DOM')
@@ -1941,6 +2100,27 @@ def native_request_facts(root, report):
                     [['primary_result','persist_reopen','failure_recovery'].index(phase), position, quote]
                     for phase, (position, text) in texts.items() for quote in ui_quotes if quote in text],
                 'created_without_output': created_without_output, 'validated_outputs': validated_outputs})
+            if extended:
+                need(pending == [[1, 'ready']] and readbacks == [[3,2],[8,6],[9,7]],
+                     'native pending/completed readback joins differ')
+                need([r['call']['input']['payload'].get('task_key') for r in rows[5:]] == ['b','a','b','a','b']
+                     and rows[5]['response']['outcome'] == 'failed' and rows[6]['response']['outcome'] == rows[7]['response']['outcome'] == 'executed'
+                     and all(rows[i]['call']['input']['payload'].get('run_id') == runs[1][0] for i in range(5,10)),
+                     'native recovery request/run/stage sequence differs')
+                ui_rows = []
+                for field, expected in [('owner_status','ready'), ('validated',False), ('output_sha256','')]:
+                    index = _native_ui_scalar(root, child, 'primary_result', 'a', field, expected,
+                        rows[1]['witness']['step_index'], rows[2]['witness']['step_index'])
+                    ui_rows.append([0,index,1,['owner_status','validated','output_sha256','readback'].index(field),expected])
+                for index in (8,9):
+                    prior = rows[6 if index == 8 else 7]['witness']; witness = rows[index]['witness']
+                    need(witness['generation'] == prior['generation'] + 1, 'native recovery readback did not reopen a new generation')
+                    position = _native_ui_scalar(root, child, 'failure_recovery', 'a' if index == 8 else 'b', 'readback', True,
+                        witness['step_index'], rows[9]['witness']['step_index'] if index == 8 else None)
+                    ui_rows.append([2,position,index,3,True])
+                repair = rows[6]['fetched']
+                views[-1].update(pending_without_output=pending, readbacks=readbacks,
+                    repair_fetched_events=[[6,repair['receipt'],repair['event']]], UI_status_rows=ui_rows)
 
         else:
             import binascii
@@ -2031,6 +2211,14 @@ def native_request_facts(root, report):
                             sequence.append([observation['step_index'], witness['step_index'], step_index, artifact_index])
             recovery_sequences[entry['name']] = sequence
             views.append({'name': entry['name'], 'trace': trace, 'artifacts': artifacts, 'projects': projects, 'rows': projected, 'decoded_artifact_rows': decoded})
+        if fetched:
+            views[-1]['fetched_request_rows'] = [row['witness']['request_index'] for row in rows]
+            if kind == 'video-artifacts':
+                primary = [row for row in rows if row['witness']['phase'] == 'primary_result'
+                    and row['call']['input']['payload'].get('kind') == 'video-export']
+                need(len(primary) == 1, 'native primary export fetched receipt is absent/ambiguous')
+                row = primary[0]
+                views[-1]['primary_export_fetched_events'] = [[row['witness']['request_index'],row['fetched']['receipt'],row['fetched']['event']]]
     if not views:return None
     need(len(views) == 2, 'native facts need both independently recorded viewports')
     result = {'format': kind, 'proof': 'Phase/call-joined trace; raw CIDs reconstructed, not fetched. No acceptance; child-relative trace.', 'views': views, 'phases': ['primary_result','persist_reopen','failure_recovery']}
@@ -2044,7 +2232,31 @@ def native_request_facts(root, report):
         result.update(columns=['request','phase','step','tool','artifact'], artifact_columns=['cid','bytes','kind','backend'], project_columns=['source_artifact','output_artifact','trim','tracks[kind,order,in,out]'], tools=['ipfs_cat','artifacts_put'], decoded='phase/step/artifact/advance(1)/ready(0): native VIDEO,ready2+,dimensions>0. UI, no fresh fetch.')
         result.update(legacy_cid_scope='owner_result_cids selects declared result-assertion CIDs, not every owner return; artifacts has all byte/CID-verified returns.',
             recovery_sequence={'phase': 'failure_recovery', 'columns': ['historical_unsupported_UI_step','later_WebM_owner_step','decoded_step','artifact'], 'views': recovery_sequences})
-    need(len(encoded(result)) <= NATIVE_FACTS_MAX_BYTES, 'native facts exceed bounded presentation table')
+    if fetched_mode:
+        result['proof'] = 'Fetched raw receipt/event bytes: source/call/result/CID joined; refs=child.backend_request_artifacts. No acceptance.'
+    if status_readbacks:
+        result.update(pending_without_output_columns=['request','status; output_sha256/execution absent'],
+            readback_columns=['request','prior validated request'], repair_fetched_event_columns=['request','receipt_cid','event_cid'],
+            UI_status_columns=['phase','step','request','field','actual'], UI_status_fields=['owner_status','validated','output_sha256','readback'])
+        quotes = []
+        for view in views:
+            for item in view['observed_UI_text']:
+                if item[2] not in quotes:quotes.append(item[2])
+                item[2] = quotes.index(item[2])
+        result.update(UI_texts=quotes, observed_UI_text_columns=['phase','step','UI_texts index'],
+            archive_pair='true=distinct source/argv/output-joined producer+validator,started,exit0,no timeout.')
+        result['event_columns'] = result.pop('retained_UI_event_columns')
+        need(result.pop('repair_fetched_event_columns') == result['event_columns'], 'native event schemas differ')
+        for old, short in [('pending_without_output_columns','pending_columns'), ('observed_UI_text_columns','UI_text_columns'),
+                ('created_without_output_fields','creation_absent_fields'), ('validated_output_columns','validation_columns'),
+                ('UI_status_columns','UI_columns'), ('UI_status_fields','UI_fields')]:
+            result[short] = result.pop(old)
+        result['pending_columns'] = ['request','status; no output/execution']
+        result = _factor_native_views(result)
+    elif kind == 'video-artifacts' and fetched_mode:
+        result['primary_export_fetched_event_columns'] = ['request','receipt_cid','event_cid']
+    need(len(encoded(result)) <= NATIVE_FACTS_MAX_BYTES,
+         'native facts exceed bounded presentation table (' + str(len(encoded(result))) + '/' + str(NATIVE_FACTS_MAX_BYTES) + ')')
     return result
 
 
