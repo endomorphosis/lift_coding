@@ -586,7 +586,7 @@ def ensure_lease(profile: dict) -> None:
     assert_campaign_lease(profile, root=ROOT)
 
 
-def _review_projection(path: Path) -> dict:
+def _review_projection(path: Path, *, retain_primary: bool = True) -> dict:
     """Compact visual context, retaining exact source identity and omission counts.
 
     Repeated console/network rows are diagnostic context, not evidence the
@@ -596,7 +596,7 @@ def _review_projection(path: Path) -> dict:
     schema = data.get("schema")
     if schema == "swissknife.visual-functional-workflow.v2":
         from swissknife_visual_functional_final_coverage import projection
-        return projection(ROOT, path)
+        return projection(ROOT, path) if retain_primary else projection(ROOT, path, retain_primary=False)
     projection = {"schema": "swissknife.visual-functional-review-input.v1", "projection_only": True,
                   "original": artifact(path), "original_schema": schema,
                   "app_id": data.get("app_id"), "source_sha256": data.get("source_sha256"),
@@ -1221,10 +1221,10 @@ def _independent_review_guidance(profile: dict, task: dict, validated: dict) -> 
     """Explain retained data domains without granting a model or producer verdict."""
     from swissknife_visual_functional_final_coverage import validate_decoded_images
     guidance = {
-        "codec": "Shared literal/value refs losslessly encode recorded typed values in each containing phase/step/session. Expand literals before phase values. References neither establish nor refute provenance; check child/session/native-request joins.",
-        "hashes": "PNG content_sha256 hashes PNG bytes; IMG source_sha256 hashes its native URI (data URI when PNG bytes are retained). Media src_sha256 hashes native src URI, not media bytes; new blob URIs can change it without changing content. Owner /sha256 can describe source, not edited PNG. Compare matching domains; URI/CID alone is not full content proof.",
-        "identity": "Gateway actor desktop:<UUID> is used in BOTH viewports, not a viewport label. Check canonical child viewport/session and exact native request/receipt joins.",
-        "requirements": "Indices are phase-local; dispatch counts are not validity flags. Media/identity_pairs describe only HTMLMediaElements. Zero calls alone do not disprove local restoration/retry. Require app_contract/declared owner effects and its supported/unsupported alternatives; unsupported is not rendered output. Retain findings for unproven UI, edits/layers, persistence, recovery or owner behavior; no producer pass forces acceptance.",
+        'codec': 'Expand literals then phase refs: lossless typed phase/step/session data, not provenance. Join child/session/native.',
+        'hashes': 'PNG content_sha256: PNG bytes; IMG source_sha256: URI (retained PNG=data URI); media src_sha256: URI, may change without byte changes. Owner /sha256 may be source not edited PNG. URI/CID alone!=content proof.',
+        'identity': 'desktop:<UUID> actor spans BOTH views; join canonical child viewport/session/native request/receipt.',
+        'requirements': 'Per-phase indices; counts!=validity. Media/identity_pairs=HTMLMediaElements only; zero calls may be local restore/retry. Require app_contract owner effects + supported/unsupported options; unsupported!=rendered. Flag unproven UI/edit/layer/persist/recovery/owner; producer pass!=acceptance.',
     }
     scenario_path = path_in_root("swissknife/test/e2e/functional-workflows/" + task["app_id"] + ".json")
     scenario = json.loads(scenario_path.read_text())
@@ -1263,7 +1263,7 @@ def model(profile_path: str, task: dict, mode: str, inputs: list[str], screensho
           *, recovery_context: dict | None = None, preserve_feedback: bool = False,
           edit_paths_override: list[str] | None = None, backend_producer: dict | None = None,
           remediation_payment: tuple[dict, str] | None = None) -> dict:
-    from swissknife_visual_functional_llm import invoke_task_model, validate_model_receipt, model_call_limits, RECEIPT_SCHEMA
+    from swissknife_visual_functional_llm import invoke_task_model, validate_model_receipt, model_call_limits, RECEIPT_SCHEMA, ModelContextBudgetError
     profile, _spec = load(profile_path)
     assert_no_campaign_hold(profile)
     assert_storage_available(profile)
@@ -1498,6 +1498,7 @@ def model(profile_path: str, task: dict, mode: str, inputs: list[str], screensho
         inputs = list(dict.fromkeys([*inputs, *[path for path in editable if path_in_root(path).is_file()]]))
     cache_input_paths = list(inputs)
     original_sources = []
+    optional_primary_baselines = []
     if mode == "review":
         inputs = [path for path in inputs if path != profile["humanPlanPath"]]
         compact_inputs = []
@@ -1515,6 +1516,20 @@ def model(profile_path: str, task: dict, mode: str, inputs: list[str], screensho
                     atomic_json(context_path, context, compact=mode == "repair")
             target = context_dir / f"evidence-{index}.json"
             atomic_json(target, projected)
+            if projected.get("schema") == "swissknife.visual-functional-review-input.v2":
+                from swissknife_visual_functional_final_coverage import _expand_projection, encoded
+                expanded = _expand_projection(projected)
+                restored_primary = any(row.get("phase") == "primary_result"
+                    and type(row.get("observed")) is dict and "projection_omitted" not in row["observed"]
+                    and len(encoded(row["observed"])) > 1024
+                    for view in expanded["viewports"] for row in view.get("semantic_assertions", []))
+                baseline = _review_projection(source, retain_primary=False) if restored_primary else None
+                if baseline is not None and encoded(expanded) != encoded(_expand_projection(baseline)):
+                    # Optional primary text must never change native-fact placement.
+                    if encoded(_expand_projection(projected).get("native_request_facts")) != encoded(_expand_projection(baseline).get("native_request_facts")):
+                        raise ValueError("optional primary presentation changed native fact placement")
+                    optional_primary_baselines.append({"target": target, "baseline": baseline,
+                                                       "enriched": artifact(target)})
             compact_inputs.append(str(target.relative_to(ROOT)))
         if "native_request_facts" in context:
             if len(native_facts_encoded(context["native_request_facts"])) > NATIVE_FACTS_MAX_BYTES:
@@ -1679,12 +1694,53 @@ def model(profile_path: str, task: dict, mode: str, inputs: list[str], screensho
         remediation_admission = admit_payment(ROOT, profile, _spec, remediation_payment[0], remediation_payment[1], metadata)
     print(f"SVF router grok_cli/grok-4.7 task={task['task_id']} mode={mode}", flush=True)
     declined = False
+    review_provider_started = False
+    def before_optional_review_provider(metadata):
+        nonlocal review_provider_started
+        review_provider_started = True
+        if remediation_payment is not None:
+            before_remediation_provider(metadata)
+    def invoke_once():
+        callback = (before_optional_review_provider if optional_primary_baselines
+                    else before_remediation_provider if remediation_payment is not None else None)
+        return invoke_task_model(profile_path, task["task_id"], mode, input_paths=inputs,
+                                 screenshot_paths=screenshots,
+                                 predicted_files=editable if mode == "repair" else [],
+                                 output_path=str(output.relative_to(ROOT)), root=ROOT, task_limits=task.get("llm_limits"),
+                                 **({"before_provider": callback} if callback is not None else {}))
     try:
-        receipt = invoke_task_model(profile_path, task["task_id"], mode, input_paths=inputs,
-                                    screenshot_paths=screenshots,
-                                    predicted_files=editable if mode == "repair" else [],
-                                    output_path=str(output.relative_to(ROOT)), root=ROOT, task_limits=task.get("llm_limits"),
-                                    **({"before_provider": before_remediation_provider} if remediation_payment is not None else {}))
+        try:
+            receipt = invoke_once()
+        except ModelContextBudgetError as error:
+            if (mode != "review" or not optional_primary_baselines or review_provider_started
+                    or error.limit_bytes != limits["modelContextBytes"]):
+                raise
+            # The adapter raises this class before backend load/provider admission.
+            # Preserve the refused generated bytes before replacing only those
+            # evidence files with the exact legacy projection, then try once.
+            check_artifacts(original_sources)
+            preserved = []
+            for index, row in enumerate(optional_primary_baselines):
+                target = row["target"]
+                if artifact(target) != row["enriched"] or target.parent != context_dir:
+                    raise ValueError("optional primary evidence changed before bounded fallback")
+                raw = target.read_bytes()
+                retained = context_dir / f"primary-overflow-evidence-{index}.json"
+                with retained.open("xb") as file:
+                    file.write(raw); file.flush(); os.fsync(file.fileno())
+                preserved.append({"enriched": row["enriched"], "retained": artifact(retained)})
+            for row in optional_primary_baselines:
+                atomic_json(row["target"], row["baseline"])
+            atomic_json(context_dir / "primary-observation-packing-fallback.json", {
+                "schema": "swissknife.optional-primary-packing-fallback.v1",
+                "actual_bytes": error.actual_bytes, "limit_bytes": error.limit_bytes,
+                "preserved_enriched_evidence": preserved,
+                "baseline_evidence": [artifact(row["target"]) for row in optional_primary_baselines],
+                "raw_sources": original_sources, "before_provider": True, "retry_limit": 1,
+                "work_complete": False, "completion_authority": False})
+            assert_no_campaign_hold(profile)
+            assert_storage_available(profile)
+            receipt = invoke_once()
         validate_model_receipt(ROOT, receipt, task_id=task["task_id"], mode=mode,
                                require_visual=mode == "review", predicted_files=editable)
         if original_sources or supporting_sources:

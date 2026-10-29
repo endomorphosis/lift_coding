@@ -2260,8 +2260,71 @@ def native_request_facts(root, report):
     return result
 
 
-def projection(root, report):
+def _retain_primary_observations(value, sources):
+    """Restore exact retained primary payloads only when the whole packet fits.
+
+    The existing omission is the fallback. A successful addition replaces only
+    that synthetic envelope; no retained observation is shortened or invented.
+    """
+    expanded = _expand_projection(value)
+    need(len(encoded(value)) <= 18000 and type(sources) is list
+         and len(sources) == len(expanded['viewports']), 'primary presentation sources differ')
+    groups = {}
+    for view_index, (view, source) in enumerate(zip(expanded['viewports'], sources)):
+        entry, child = source
+        need(view['name'] == entry['name'] and encoded(view['original']) == encoded(entry['report'])
+             and view['session_id'] == child['session_id'], 'primary presentation viewport/source differs')
+        rows = view['semantic_assertions']; originals = child['semantic_assertions']
+        need(len(rows) == len(originals), 'primary presentation assertion count differs')
+        for row_index, (row, original) in enumerate(zip(rows, originals)):
+            if original['phase'] != 'primary_result' and row['phase'] != 'primary_result':
+                continue
+            fields = ('requirement_id', 'requirement_text', 'phase', 'step_index', 'probe', 'passed')
+            need(all(encoded(row[key]) == encoded(original[key]) for key in fields)
+                 and row['observed_sha256'] == digest(original['observed']),
+                 'primary presentation assertion/source differs')
+            actual = original['observed']; raw = encoded(actual)
+            if encoded(row['observed']) == raw:
+                continue
+            omission = {'projection_omitted': True, 'original_bytes': len(raw),
+                        'original_sha256': digest(actual)}
+            need(len(raw) > 1024 and encoded(row['observed']) == encoded(omission),
+                 'primary presentation omission differs from retained payload')
+            groups.setdefault(raw, []).append((view_index, row_index))
+    result = value
+    # Same payloads are considered together so reversible literal factoring can
+    # share bytes without implying a shared viewport, session or execution.
+    for raw, slots in groups.items():
+        candidate = _expand_projection(result)
+        for view_index, row_index in slots:
+            candidate['viewports'][view_index]['semantic_assertions'][row_index]['observed'] = parse(raw)
+        candidate = _factor_projection(candidate)
+        if len(encoded(candidate)) <= 18000:
+            result = candidate
+    return result
+
+
+def _compact_review_presentation(value):
+    """Try existing reversible codecs even when the 18K share already fits.
+
+    The full model contract can be tighter than this share. This changes only
+    representation, and the explicit legacy projection option stays exact.
+    """
+    original = _expand_projection(value); exact = encoded(original); result = value
+    for source in (original, _factor_supplemental_rows(original)):
+        candidate = _factor_review_literals(source, compact_marker=True)
+        candidate = _shorten_projection_object_rows(_factor_projection_objects(
+            _shorten_projection_literal_marker(candidate)))
+        need(encoded(_expand_projection(candidate)) == exact,
+             'compact review presentation changed typed evidence')
+        if len(encoded(candidate)) < len(encoded(result)):
+            result = candidate
+    return result
+
+
+def projection(root, report, *, retain_primary=True):
     """Bound semantic context; complete immutable observations remain retained."""
+    need(type(retain_primary) is bool, 'primary presentation option must be boolean')
     data = parse(read(root, str(Path(report).relative_to(root))))
     need(data.get('schema') == PARENT_SCHEMA, 'final projection needs independent viewport evidence')
     result = {'schema': 'swissknife.visual-functional-review-input.v2', 'projection_only': True,
@@ -2275,9 +2338,11 @@ def projection(root, report):
               'backend_call_phases_semantics': 'Counts only the named phase, not validity. Zero says nothing about other phases or joined owner receipts.',
               'viewports': []}
     scenario = parse(read(root, 'swissknife/test/e2e/functional-workflows/' + data['app_id'] + '.json'))
+    primary_sources = []
     for entry in data['viewport_reports']:
         child_path = check_reference(root, entry['report'], prefix=Path(report).parent)
         child = parse(read(root, entry['report']['path']))
+        primary_sources.append((entry, child))
         owner_rows, additional_owner_rows = _project_backend_observations(root, child, child_path)
         decoded_images = validate_decoded_images(root, child, scenario, child_path)
         result['viewports'].append({'name': entry['name'], 'viewport': child['viewport'],
@@ -2332,6 +2397,9 @@ def projection(root, report):
         else:
             need(len(encoded(facts)) <= NATIVE_FACTS_CONTEXT_MAX, 'native fact context exceeds its bounded supplement')
         result = _smallest_projection_candidate(result)
+    if retain_primary:
+        result = _retain_primary_observations(result, primary_sources)
+        result = _compact_review_presentation(result)
     return result
 
 

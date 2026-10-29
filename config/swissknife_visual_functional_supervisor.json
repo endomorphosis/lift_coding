@@ -88,5 +88,14 @@
     "max_paid_assessments": 1,
     "max_paid_proposals": 1,
     "child_timeout_seconds": 3600
+  },
+  "finalRemediation": {
+    "schema": "swissknife.final-remediation.v1",
+    "enabled": true,
+    "max_finals": 45,
+    "max_children_per_final": 1,
+    "max_paid_assessments": 1,
+    "max_paid_proposals": 1,
+    "child_timeout_seconds": 3600
   }
 }

@@ -7,6 +7,8 @@ cannot create another child, refund the original phase, or complete its parent.
 """
 from __future__ import annotations
 from contextlib import contextmanager
+from contextvars import ContextVar
+from functools import wraps
 import fcntl
 import hashlib
 import json
@@ -22,6 +24,10 @@ SCHEMA = 'swissknife.phase-remediation.v1'
 KIND = 'scoped-remediation'
 PHASE = 'final_visual_review'
 MAX_ORIGINALS = 45
+FINAL_SCHEMA = 'swissknife.final-remediation.v1'
+FINAL_MODE = 'final-review'
+FINAL_IDS = frozenset('SVF-'+str(i) for i in range(1001,1046))
+_PHASE_MODE = ContextVar('svf_finite_phase_mode', default=None)
 ORIGINAL_APPS = {'SVF-113': 'image-viewer', 'SVF-123': 'notes', 'SVF-133': 'accelerate-panel', 'SVF-143': 'terminal', 'SVF-153': 'vibecode', 'SVF-163': 'music-studio-unified', 'SVF-173': 'ai-chat', 'SVF-183': 'file-manager', 'SVF-193': 'task-manager', 'SVF-203': 'todo', 'SVF-213': 'model-browser', 'SVF-223': 'huggingface', 'SVF-233': 'openrouter', 'SVF-243': 'ipfs-explorer', 'SVF-253': 'device-manager', 'SVF-263': 'settings', 'SVF-273': 'mcp-control', 'SVF-283': 'api-keys', 'SVF-293': 'github', 'SVF-303': 'oauth-login', 'SVF-313': 'cron', 'SVF-323': 'navi', 'SVF-333': 'p2p-network', 'SVF-343': 'p2p-chat-unified', 'SVF-353': 'neural-network-designer', 'SVF-363': 'training-manager', 'SVF-373': 'calculator', 'SVF-383': 'clock', 'SVF-393': 'calendar', 'SVF-403': 'peertube', 'SVF-413': 'friends-list', 'SVF-423': 'media-player', 'SVF-433': 'system-monitor', 'SVF-443': 'neural-photoshop', 'SVF-453': 'cinema', 'SVF-463': 'strudel', 'SVF-473': 'strudel-ai-daw', 'SVF-483': 'music-studio', 'SVF-493': 'p2p-chat', 'SVF-503': 'datasets-browser', 'SVF-513': 'idl-explorer', 'SVF-523': 'glasses-preview', 'SVF-533': 'orb-auto-ui', 'SVF-543': 'mcp-plus-plus', 'SVF-553': 'agent-supervisor'}
 MAX_PLAN_BYTES = 8 * 1024 * 1024
 WORKER = 'scripts/swissknife_visual_functional_worker.py'
@@ -119,14 +125,28 @@ def immutable(root, name, raw):
 
 
 
+def final_policy_enabled(profile):
+    value = profile.get('finalRemediation')
+    if value is None: return False
+    expected = {'schema': FINAL_SCHEMA, 'enabled': True, 'max_finals': 45,
+                'max_children_per_final': 1, 'max_paid_assessments': 1,
+                'max_paid_proposals': 1, 'child_timeout_seconds': 3600}
+    need(type(value) is dict and type(value.get('enabled')) is bool
+         and wire({**value, 'enabled': True}) == wire(expected), 'final remediation opt-in policy expanded')
+    return value['enabled']
+
+
 def policy_enabled(profile):
     value = profile.get('phaseRemediation')
-    if value is None: return False
-    expected = {'schema':SCHEMA,'enabled':True,'max_originals':45,'max_children_per_phase':1,
-                'max_paid_assessments':1,'max_paid_proposals':1,'child_timeout_seconds':3600}
-    need(type(value) is dict and type(value.get('enabled')) is bool
-         and wire({**value,'enabled':True}) == wire(expected), 'phase remediation opt-in policy expanded')
-    return value['enabled']
+    legacy = False
+    if value is not None:
+        expected = {'schema':SCHEMA,'enabled':True,'max_originals':45,'max_children_per_phase':1,
+                    'max_paid_assessments':1,'max_paid_proposals':1,'child_timeout_seconds':3600}
+        need(type(value) is dict and type(value.get('enabled')) is bool
+             and wire({**value,'enabled':True}) == wire(expected), 'phase remediation opt-in policy expanded')
+        legacy = value['enabled']
+    final = final_policy_enabled(profile)
+    return final if _PHASE_MODE.get() == FINAL_MODE else legacy if _PHASE_MODE.get() == 'original' else legacy or final
 
 
 def pending_publications(root, profile):
@@ -165,7 +185,7 @@ def recover_pending(root, profile, *, ensure_authority):
 
 
 def base(profile):
-    return profile['runtimeRoot'] + '/state/phase-remediation'
+    return profile['runtimeRoot'] + ('/state/final-phase-remediation' if _PHASE_MODE.get() == FINAL_MODE else '/state/phase-remediation')
 
 
 @contextmanager
@@ -181,6 +201,7 @@ def locked(root, profile):
 
 
 def originals(spec):
+    if _PHASE_MODE.get() == FINAL_MODE: return finals(spec)
     tasks = [t for t in spec['tasks'] if t.get('kind') == 'verify' and t.get('app_id')]
     need({t['task_id']:t['app_id'] for t in tasks} == ORIGINAL_APPS
          and len(tasks) == MAX_ORIGINALS and len({t['task_id'] for t in tasks}) == MAX_ORIGINALS
@@ -194,6 +215,9 @@ def gap_key(profile, task):
 
 
 def child_id(task):
+    if _PHASE_MODE.get() == FINAL_MODE:
+        need(task.get('kind') == 'final-app-verify' and task['task_id'] in FINAL_IDS, 'derived/final task cannot grow recursive children')
+        return 'SVF-FINAL-R' + task['task_id'][4:]
     need(re.fullmatch(r'SVF-[0-9]+', task['task_id']), 'derived tasks cannot grow remediation children')
     return 'SVF-PHASE-R' + task['task_id'][4:]
 
@@ -213,6 +237,7 @@ def _validate_current_failed_phase(root, profile, task, review_path):
 
 def qualify_gap(root, profile, task):
     """Pure reads only; never touches the phase journal lock or its spend."""
+    if _PHASE_MODE.get() == FINAL_MODE: return qualify_final_gap(root, profile, task)
     from swissknife_visual_functional_phase_budget import _validate, _review, LIMIT
     from swissknife_visual_functional_review_recheck import SCHEMA as FENCE_SCHEMA, _source_contract, _stable
     need(task.get('kind') == 'verify' and re.fullmatch(r'SVF-[0-9]+', task['task_id']), 'not an original verification gap')
@@ -276,11 +301,16 @@ def task_spans(text):
 def child_task(profile, original, gap):
     identity = child_id(original); app = original['app_id']
     scenario = 'swissknife/test/e2e/functional-workflows/' + app + '.json'
-    allowed = [p for p in original.get('edit_paths', []) if p == scenario
+    scope_owner = gap['source_task'] if _PHASE_MODE.get() == FINAL_MODE else original
+    allowed = [p for p in scope_owner.get('edit_paths', []) if p == scenario
                or p == 'swissknife/web/js/main-simple.js'
                or p == 'swissknife/web/js/apps/' + app + '.js'
                or p == 'swissknife/web/css/' + app + '.css']
-    need(allowed and set(allowed) <= set(original['edit_paths']), 'no declared application/scenario remediation scope')
+    if _PHASE_MODE.get() == FINAL_MODE:
+        allowed = list(gap['source_scope'])
+        need(scope_owner.get('kind') == 'verify' and scope_owner.get('app_id') == app
+             and scope_owner['task_id'] == original['original_verify_task'], 'final source basis differs')
+    need(allowed and set(allowed) <= set(scope_owner['edit_paths']), 'no declared application/scenario remediation scope')
     directory = profile['runtimeRoot'] + '/tasks/' + identity
     result = {'task_id': identity, 'stable_task_id': identity, 'title': 'One scoped source remediation for ' + original['task_id'],
               'kind': KIND, 'status': 'ready', 'goal_id': original['goal_id'], 'app_id': app,
@@ -294,6 +324,10 @@ def child_task(profile, original, gap):
               'execution_inputs': list(dict.fromkeys([*original.get('execution_inputs', []), __file_name(), gap['failed_review']['path']])),
               'phase_remediation': {'schema': SCHEMA, 'gap': gap, 'original_task': original,
                                     'max_paid_proposals': 1, 'max_paid_assessments': 1, 'allow_recovery': False, 'allow_children': False}}
+    if _PHASE_MODE.get() == FINAL_MODE:
+        result['phase_remediation']['mode'] = FINAL_MODE
+        result['title'] = 'One bounded source remediation for final review ' + original['task_id']
+        result['acceptance'] = 'One bounded source proposal and at most one stale-gap assessment; exact app/scenario CAS application and fresh independent functional producer. The final readonly task must separately pass its genuine current two-viewport review. No original task or prior spend is reopened or refunded.'
     if original.get('subgoal_id'): result['subgoal_id'] = original['subgoal_id']
     return result
 
@@ -547,7 +581,7 @@ def authenticate_intent(root, profile, directory, intent):
     need(intent.get('schema') == SCHEMA and intent.get('completion_authority') is False
          and intent.get('work_complete') is False, 'invalid remediation intent authority')
     original=intent['original_task'];gap=intent['gap'];child=child_task(profile,original,gap)
-    need(ORIGINAL_APPS.get(original['task_id']) == original['app_id']
+    need((_final_app_map(parse(read(root, profile['taskSpecPath']))).get(original['task_id']) if _PHASE_MODE.get() == FINAL_MODE else ORIGINAL_APPS.get(original['task_id'])) == original['app_id']
          and intent['key'] == gap_key(profile,original) == gap['key']
          and directory == _admission_directory(profile,intent['key'])
          and intent['child'] == child['task_id'] and intent['child_sha256'] == digest(child), 'restart child identity expanded')
@@ -680,12 +714,20 @@ def child_contract(root, profile, spec, task):
     need(commit.get('schema') == SCHEMA and commit.get('child') == task['task_id'] and intent.get('child_sha256') == digest(task),
          'child lacks its exact committed admission')
     check_ref(root, intent['native_admission'])
-    from swissknife_visual_functional_phase_budget import _validate, _review
-    saved = _validate(parse(read(root, directory + '/original-phase.json')), original)
-    current = _validate(parse(read(root, policy['gap']['phase']['path'])), original)
-    need(saved['spent'] == current['spent'] == policy['gap']['spent']
-         and digest(saved['history']) == digest(current['history']), 'original six-spend history changed')
-    _review(root, original, policy['gap']['failed_review'])
+    if _PHASE_MODE.get() == FINAL_MODE:
+        saved = parse(read(root, directory + '/original-phase.json'))
+        current = validate_final_failure(root, profile, original, current=False)
+        need(wire(saved) == wire(current) and ref(root, policy['gap']['fence']['path']) == policy['gap']['fence']
+             and current['failed_review'] == policy['gap']['failed_review'], 'retained final failure was rebound')
+        basis, scope = final_source_basis(root, profile, original, spec)
+        need(basis == policy['gap']['source_task'] and scope == policy['gap']['source_scope'], 'final source authority changed')
+    else:
+        from swissknife_visual_functional_phase_budget import _validate, _review
+        saved = _validate(parse(read(root, directory + '/original-phase.json')), original)
+        current = _validate(parse(read(root, policy['gap']['phase']['path'])), original)
+        need(saved['spent'] == current['spent'] == policy['gap']['spent']
+             and digest(saved['history']) == digest(current['history']), 'original six-spend history changed')
+        _review(root, original, policy['gap']['failed_review'])
     return original, parent, intent
 
 
@@ -1014,11 +1056,11 @@ def between_cycles(root, profile, *, ensure_authority):
     refusals = []
     for identity, task in eligible.items():
         if child_id(task) in {t['task_id'] for t in spec['tasks']}: continue
-        journal = physical(root, profile['runtimeRoot']+'/tasks/'+identity+'/required-phase-repair-budget.json')
+        journal = physical(root, profile['runtimeRoot']+'/tasks/'+identity+('/failed-final-review-source-fence.json' if _PHASE_MODE.get() == FINAL_MODE else '/required-phase-repair-budget.json'))
         if not journal.exists(): continue
         try:
             phase = parse(read(root, str(journal.relative_to(root))))
-            if phase.get('state') != 'exhausted': continue
+            if _PHASE_MODE.get() != FINAL_MODE and phase.get('state') != 'exhausted': continue
             plan = propose(root, profile, identity)
         except (ValueError, OSError, KeyError, TypeError) as error:
             refusals.append({'task_id':identity,'reason':' '.join(str(error).split())[:240],
@@ -1241,3 +1283,151 @@ def validate_child_result(root, profile, spec, task, receipt, *, validate_workfl
         need(all((hashlib.sha256(read(root, name, 250000)).hexdigest() if physical(root, name).exists() else None) == value
                  for name, value in application['after'].items()), 'child applied source changed')
     return value
+
+
+@contextmanager
+def _mode(mode):
+    token = _PHASE_MODE.set(mode)
+    try: yield
+    finally: _PHASE_MODE.reset(token)
+
+
+def _task_mode(task):
+    policy = task.get('phase_remediation', {})
+    if task.get('kind') == 'final-app-verify' or policy.get('mode') == FINAL_MODE:
+        return FINAL_MODE
+    need('mode' not in policy, 'unknown finite child mode')
+    return 'original'
+
+
+def finals(spec):
+    verify = {t['task_id']:t['app_id'] for t in spec['tasks'] if t.get('kind') == 'verify' and t.get('app_id')}
+    need(verify == ORIGINAL_APPS, 'original source allowlist changed')
+    tasks = [t for t in spec['tasks'] if t.get('kind') == 'final-app-verify']
+    need(len(tasks) == 45 and {t['task_id'] for t in tasks} == FINAL_IDS
+         and {t.get('app_id') for t in tasks} == set(ORIGINAL_APPS.values()), 'finite final45 allowlist changed')
+    for task in tasks:
+        need(task.get('checks') == [] and task.get('edit_paths') == []
+             and not {'semantic_recovery_command','recovery_edit_paths'} & set(task)
+             and verify.get(task.get('original_verify_task')) == task.get('app_id')
+             and set(verify) | {'SVF-043','SVF-044'} <= set(task.get('dependencies', [])), 'final readonly/acceptance authority changed')
+    return {t['task_id']:t for t in tasks}
+
+
+def _final_app_map(spec):
+    return {identity:task['app_id'] for identity,task in finals(spec).items()}
+
+
+def final_source_basis(root, profile, task, spec=None):
+    spec = spec or parse(read(root, profile['taskSpecPath']))
+    need(task['task_id'] in finals(spec), 'final is outside finite allowlist')
+    basis = next((t for t in spec['tasks'] if t['task_id'] == task['original_verify_task']), None)
+    need(basis is not None and basis.get('kind') == 'verify' and basis.get('app_id') == task['app_id'], 'same-app original source scope is missing')
+    app = next((a for a in parse(read(root, profile['appContractPath']))['apps'] if a['app_id'] == task['app_id']), None)
+    need(app is not None, 'canonical app source contract missing')
+    scenario = 'swissknife/test/e2e/functional-workflows/' + task['app_id'] + '.json'
+    canonical = {'swissknife/' + name for name in app['source_paths']} | {scenario}
+    registration = parse(read(root, 'config/swissknife_visual_functional_foundation_owners.json'))
+    protected = set(registration['protected_sha256'])
+    allowed = [name for name in basis.get('edit_paths', []) if name in canonical and name not in protected
+               and (name == scenario or name.startswith('swissknife/web/js/apps/') or name.startswith('swissknife/web/css/'))]
+    need(allowed and len(allowed) == len(set(allowed))
+         and all(name == scenario or not {'test','tests','fixtures','.git'}.intersection(Path(name).parts) for name in allowed),
+         'final child has no bounded nonprotected app/scenario scope')
+    return basis, allowed
+
+
+def validate_final_failure(root, profile, task, *, current=True):
+    from swissknife_visual_functional_final_coverage import FAILURE_SCHEMA, task_identity, review_join, _review_identity
+    need(task.get('kind') == 'final-app-verify' and task['task_id'] in FINAL_IDS, 'not an allowed final review')
+    name = profile['runtimeRoot'] + '/tasks/' + task['task_id'] + '/failed-final-review-source-fence.json'
+    value = parse(read(root, name))
+    need(type(value) is dict and set(value) == {'schema','task_id','app_id','task_contract','identity','evidence','failed_review','work_complete','completion_authority'}
+         and value['schema'] == FAILURE_SCHEMA and value['task_id'] == task['task_id'] and value['app_id'] == task['app_id']
+         and value['work_complete'] is False and value['completion_authority'] is False
+         and value['task_contract'] == {k:v for k,v in task.items() if k != 'status'}
+         and value['identity']['task_semantics_sha256'] == task_identity(task), 'genuine final failed-review fence differs')
+    review_path = physical(root, value['failed_review']['path']); check_ref(root, value['failed_review'])
+    need(review_path.is_relative_to(physical(root, profile['runtimeRoot']+'/tasks/'+task['task_id']+'/verification')), 'failed final review escaped owner')
+    review = parse(read(root, value['failed_review']['path']))
+    need(review.get('task_id') == task['task_id'] and review.get('mode') == 'review'
+         and review.get('provider') == 'grok_cli' and review.get('model') == 'grok-4.7'
+         and review.get('success') is True and review.get('response',{}).get('decision') == 'needs_changes', 'real negative pinned final review required')
+    review_join(root, profile, task, value['evidence'], review_path, require_pass=False)
+    if current:
+        need(value['identity'] == _review_identity(root, profile, task), 'stale final gap: rerun fresh readonly verification first')
+        _validate_current_failed_phase(root, profile, task, review_path)
+    return value
+
+
+def qualify_final_gap(root, profile, task):
+    need(final_policy_enabled(profile), 'final remediation is not explicitly opted in')
+    fence = validate_final_failure(root, profile, task)
+    basis, scope = final_source_basis(root, profile, task)
+    name = profile['runtimeRoot']+'/tasks/'+task['task_id']+'/failed-final-review-source-fence.json'
+    review = parse(check_ref(root, fence['failed_review']))
+    return {'key':gap_key(profile, task), 'mode':FINAL_MODE, 'phase':ref(root,name), 'fence':ref(root,name),
+            'failed_review':fence['failed_review'], 'source_contract':source_contract(root,profile,task),
+            'review_invocation_id':review['invocation_id'], 'source_task':basis, 'source_scope':scope}
+
+
+def _task_scoped(function, index):
+    argument_name = function.__code__.co_varnames[index]
+    @wraps(function)
+    def call(*args, **kwargs):
+        task = args[index] if len(args) > index else kwargs[argument_name]
+        with _mode(_task_mode(task)): return function(*args, **kwargs)
+    return call
+
+
+for _name, _index in {'child_id':0, 'child_task':1, 'qualify_gap':2, 'payment_path':1, 'payments':2,
+    'close_payments':2, 'child_can_still_write':2, 'remaining_seconds':2, 'validate_admission':2,
+    'admit_payment':3, 'finish_payment':2, 'recover_payment':2, 'record_assessment':3,
+    'load_assessment':3, 'child_contract':3, 'checked_application':2, 'execute_child':4,
+    'validate_child_result':3}.items():
+    globals()[_name] = _task_scoped(globals()[_name], _index)
+
+_propose_one = propose
+@wraps(_propose_one)
+def propose(root, profile, task_id):
+    with _mode(FINAL_MODE if task_id in FINAL_IDS else 'original'):
+        return _propose_one(root, profile, task_id)
+
+_publish_one = publish
+@wraps(_publish_one)
+def publish(root, profile, plan, **kwargs):
+    with _mode(_task_mode(plan['child'])): return _publish_one(root, profile, plan, **kwargs)
+
+_pending_one = pending_publications
+def pending_publications(root, profile):
+    if _PHASE_MODE.get() is not None: return _pending_one(root, profile)
+    result = []
+    for mode in ('original', FINAL_MODE):
+        with _mode(mode): result.extend(_pending_one(root, profile))
+    return result
+
+_recover_one = recover_pending
+def recover_pending(root, profile, **kwargs):
+    if _PHASE_MODE.get() is not None: return _recover_one(root, profile, **kwargs)
+    results = []
+    for mode in ('original', FINAL_MODE):
+        with _mode(mode): results.append(_recover_one(root, profile, **kwargs))
+    return {'state':'recovered' if any(r['recovered'] for r in results) else 'idle',
+            'recovered':sum(r['recovered'] for r in results)}
+
+_between_one = between_cycles
+def between_cycles(root, profile, **kwargs):
+    if not final_policy_enabled(profile):
+        with _mode('original'): return _between_one(root, profile, **kwargs)
+    for mode in ('original', FINAL_MODE):
+        with _mode(mode):
+            if not policy_enabled(profile): continue
+            result = _between_one(root, profile, **kwargs)
+        if result.get('state') != 'idle': return result
+    return {'state':'idle','completion_authority':False}
+
+_owned_one = recoverable_owned_source
+@wraps(_owned_one)
+def recoverable_owned_source(root, profile, task_id, name):
+    mode = FINAL_MODE if task_id in {'SVF-FINAL-R'+str(i) for i in range(1001,1046)} else 'original'
+    with _mode(mode): return _owned_one(root, profile, task_id, name)
