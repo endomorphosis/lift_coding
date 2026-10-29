@@ -1,0 +1,92 @@
+{
+  "schema": "swissknife.visual-functional-supervisor-profile.v1",
+  "profileId": "swissknife-visual-functional-v1",
+  "repositoryRoot": ".",
+  "primaryRepository": "swissknife",
+  "humanPlanPath": "implementation_plan/docs/53-swissknife-visual-functional-mcplusplus.md",
+  "objectivePath": "implementation_plan/docs/53-swissknife-visual-functional-mcplusplus.objectives.md",
+  "todoPath": "implementation_plan/docs/53-swissknife-visual-functional-mcplusplus.todo.md",
+  "taskSpecPath": "config/swissknife_visual_functional_tasks.json",
+  "appContractPath": "swissknife/config/visual-functional-app-contracts.json",
+  "taskPrefix": "## SVF-",
+  "goalPrefix": "SVF-G",
+  "rootGoalId": "SVF-G000",
+  "runtimeRoot": "data/agent_supervisor/swissknife_visual_functional",
+  "statePrefix": "svf",
+  "router": {
+    "provider": "grok_cli",
+    "model": "grok-4.7",
+    "temperature": 0,
+    "timeoutSeconds": 600,
+    "maxOutputTokens": 16384,
+    "maxTurns": 24,
+    "allowLocalFallback": false,
+    "allowCrossProviderFallback": false,
+    "disableModelRetry": true
+  },
+  "llm": {
+    "provider": "grok_cli",
+    "model": "grok-4.7",
+    "temperature": 0,
+    "timeoutSeconds": 600,
+    "maxOutputTokens": 16384,
+    "maxTurns": 24,
+    "allowLocalFallback": false,
+    "allowCrossProviderFallback": false,
+    "disableModelRetry": true,
+    "repairReadPolicy": "inline_only",
+    "repairReasoningEffort": "low"
+  },
+  "bounds": {
+    "masterDurationSeconds": 28800,
+    "heartbeatSeconds": 30,
+    "defaultTaskTimeoutSeconds": 1800,
+    "browserTaskTimeoutSeconds": 3600,
+    "attemptsPerTask": 3,
+    "modelRepairAttemptsPerTask": 3
+  },
+  "backends": {
+    "ipfs_kit_py": "http://127.0.0.1:18316",
+    "ipfs_datasets_py": "http://127.0.0.1:18312",
+    "ipfs_accelerate_py": "http://127.0.0.1:18315"
+  },
+  "authority": {
+    "model": "proposal_only",
+    "baseline": "not_functional_acceptance",
+    "historicalGO": "not_current_app_acceptance",
+    "supervisor": "task_status_only",
+    "work_complete": false,
+    "completion_authority": false
+  },
+  "safety": {
+    "exclusiveCheckoutLease": "swissknife-supervisor-checkout-lease-v1",
+    "laneId": "swissknife-visual-functional",
+    "maxDirtyAttempts": 0,
+    "ephemeralWorktrees": false,
+    "worktreeReconciliation": false,
+    "mutations": "isolated test fixtures with UI-mediated policy confirmation; no user data or external account actions",
+    "preserveOtherBoards": [
+      "SVD",
+      "SWR",
+      "VDG",
+      "VDL",
+      "VOG"
+    ]
+  },
+  "backendReadiness": {
+    "kuboApi": "http://127.0.0.1:5031",
+    "ipfsGateway": "http://127.0.0.1:8092",
+    "python": "external/ipfs_datasets/.venv/bin/python",
+    "notesIndexesDirectory": "data/agent_supervisor/swissknife_visual_functional/backends/services/notes-datasets/indexes"
+  },
+  "workflowFixturesPath": "config/swissknife_visual_functional_payload_fixtures.json",
+  "phaseRemediation": {
+    "schema": "swissknife.phase-remediation.v1",
+    "enabled": true,
+    "max_originals": 45,
+    "max_children_per_phase": 1,
+    "max_paid_assessments": 1,
+    "max_paid_proposals": 1,
+    "child_timeout_seconds": 3600
+  }
+}

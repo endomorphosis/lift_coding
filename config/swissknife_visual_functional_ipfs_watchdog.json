@@ -1,0 +1,32 @@
+{
+  "identity": {
+    "schema": "swissknife.owned-kubo-supervisor.v1",
+    "owner": "swissknife_visual_functional",
+    "uid": 1003,
+    "unit": "swissknife-visual-functional-native-ipfs.service",
+    "repo": "/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/native-ipfs-recovery-20261027/attempt-cec18d222892/repo",
+    "node_id": "12D3KooWMD4WLAv4DhhEdb1SKVXhExTjcE7cmqu16gcyfqFAMgQK",
+    "api": "http://127.0.0.1:5031",
+    "gateway": "http://127.0.0.1:8092",
+    "binary": "/home/barberb/.local/bin/ipfs",
+    "binary_sha256": "86ec314801d226767cb3e767449cbfb685e39be307192a6fd32553e29a0a25ea",
+    "fragment": "/home/barberb/.config/systemd/user/swissknife-visual-functional-native-ipfs.service",
+    "fragment_sha256": "61e3aa9de849ef7a0d1a9915bfa599d82c8db05274dee3aa91cdca5ff1563031",
+    "argv": [
+      "/home/barberb/.local/bin/ipfs",
+      "daemon",
+      "--enable-gc",
+      "--migrate=false",
+      "--agent-version-suffix=svf-owned-recovery-20261027"
+    ]
+  },
+  "marker": "/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/native-ipfs-recovery-20261027/attempt-cec18d222892/supervised-owner.json",
+  "root": "/home/barberb/lift_coding",
+  "state": "/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/watchdog/owned-ipfs/restart-state.json",
+  "status": "/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/watchdog/owned-ipfs/status.json",
+  "sdk_sha256": "115391905b2a5b0d3e0af7cf3e8febcba0f85575e9dfcff840fd8389d867fda7",
+  "cooldown_seconds": 300,
+  "failure_threshold": 2,
+  "poll_seconds": 30,
+  "hold_path": "/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/HOLD"
+}

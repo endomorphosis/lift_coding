@@ -1,0 +1,27 @@
+[Unit]
+Description=SwissKnife visual functional native accelerator MCP++ facade
+After=network.target swissknife-visual-functional-native-accelerate.service
+Wants=swissknife-visual-functional-native-accelerate.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+WorkingDirectory=/home/barberb/lift_coding/swissknife
+Environment=SWISSKNIFE_ACCELERATE_NATIVE_MCP_URL=http://127.0.0.1:18313/mcp
+Environment=SWISSKNIFE_ACCELERATE_REQUIRE_NATIVE_READY=1
+Environment=PYTHON=/home/barberb/lift_coding/external/ipfs_datasets/.venv/bin/python
+Environment=MCPPLUSPLUS_ARTIFACT_STORE_DIR=/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/accelerate_facade/artifacts
+Environment=MCPPLUSPLUS_UCAN_KEY_DIR=/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/accelerate_facade/identity
+Environment=MCPPLUSPLUS_HELIA_REPO=/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/accelerate_facade/helia
+Environment=MCPPLUSPLUS_HELIA_LIBP2P=0
+Environment=MCPPLUSPLUS_IPFS_KIT_ARTIFACT_URL=http://127.0.0.1:18316/mcp/artifacts
+ExecStart=/usr/bin/node scripts/start-ipfs-accelerate-mcp-compat.cjs --host 127.0.0.1 --port 18315
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=20
+KillMode=control-group
+UMask=0077
+NoNewPrivileges=true
+
+[Install]
+WantedBy=default.target

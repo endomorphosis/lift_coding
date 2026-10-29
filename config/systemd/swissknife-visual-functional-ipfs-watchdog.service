@@ -1,0 +1,21 @@
+[Unit]
+Description=SVF owned Kubo identity and native SDK read/write recovery watchdog
+After=swissknife-visual-functional-native-ipfs.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/barberb/lift_coding
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/home/barberb/lift_coding/external/ipfs_datasets/.venv/bin/python -B /home/barberb/lift_coding/scripts/svf_backends/owned_kubo_watchdog.py --config /home/barberb/lift_coding/config/swissknife_visual_functional_ipfs_watchdog.json --apply
+Restart=on-failure
+RestartSec=30
+KillMode=control-group
+TimeoutStopSec=10
+UMask=0077
+NoNewPrivileges=yes
+MemoryMax=512M
+TasksMax=64
+
+[Install]
+WantedBy=default.target

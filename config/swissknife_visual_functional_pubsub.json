@@ -1,0 +1,27 @@
+{
+  "schema": "swissknife.owned-pubsub-peers.v1",
+  "owner": "swissknife_visual_functional",
+  "peers": [
+    {
+      "role": "a",
+      "repo_path": "/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/native-pubsub/registration-f00364e9aa5d/a/repo",
+      "api_url": "http://127.0.0.1:5032",
+      "node_id": "12D3KooWRRzvKnDLbtBdPnr3YmtQY4qG2eDHYVq5BgtfLWiPvuEG",
+      "unit": "swissknife-visual-functional-pubsub-a.service",
+      "swarm_multiaddr": "/ip4/127.0.0.1/tcp/40032/p2p/12D3KooWRRzvKnDLbtBdPnr3YmtQY4qG2eDHYVq5BgtfLWiPvuEG"
+    },
+    {
+      "role": "b",
+      "repo_path": "/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/native-pubsub/registration-f00364e9aa5d/b/repo",
+      "api_url": "http://127.0.0.1:5033",
+      "node_id": "12D3KooWEHL7L4Hs6NR9sdKCxGd1KjopH24oqcLBZYEh21ma1NQH",
+      "unit": "swissknife-visual-functional-pubsub-b.service",
+      "swarm_multiaddr": "/ip4/127.0.0.1/tcp/40033/p2p/12D3KooWEHL7L4Hs6NR9sdKCxGd1KjopH24oqcLBZYEh21ma1NQH"
+    }
+  ],
+  "allowed_fixture_scopes": [
+    "svf-pubsub-043",
+    "svf-p2p-chat-g030",
+    "svf-p2p-chat-classic"
+  ]
+}

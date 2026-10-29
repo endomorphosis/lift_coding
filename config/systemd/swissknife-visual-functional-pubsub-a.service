@@ -1,0 +1,24 @@
+[Unit]
+Description=SVF owned loopback pubsub peer a
+StartLimitIntervalSec=0
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/native-pubsub/registration-f00364e9aa5d/a
+Environment=IPFS_PATH=/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/native-pubsub/registration-f00364e9aa5d/a/repo
+Environment=GOMAXPROCS=2
+Environment=IPFS_TELEMETRY=off
+ExecStart=/home/barberb/.local/bin/ipfs daemon --enable-gc --migrate=false --enable-pubsub-experiment --agent-version-suffix=svf-owned-pubsub-v1
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=15
+KillMode=control-group
+UMask=0077
+CPUQuota=100%
+MemoryMax=512M
+TasksMax=256
+NoNewPrivileges=true
+
+[Install]
+WantedBy=default.target

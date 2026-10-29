@@ -1,0 +1,22 @@
+[Unit]
+Description=SVF owned isolated writable Kubo backend
+
+[Service]
+Type=simple
+WorkingDirectory=/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/native-ipfs-recovery-20261027/attempt-cec18d222892
+Environment=IPFS_PATH=/home/barberb/lift_coding/data/agent_supervisor/swissknife_visual_functional/backends/native-ipfs-recovery-20261027/attempt-cec18d222892/repo
+Environment=IPFS_TELEMETRY=off
+Environment=GOMAXPROCS=2
+ExecStart=/home/barberb/.local/bin/ipfs daemon --enable-gc --migrate=false --agent-version-suffix=svf-owned-recovery-20261027
+UMask=0077
+CPUQuota=200%
+MemoryMax=1G
+TasksMax=256
+NoNewPrivileges=yes
+Restart=on-failure
+RestartSec=10s
+TimeoutStopSec=60s
+KillMode=control-group
+
+[Install]
+WantedBy=default.target

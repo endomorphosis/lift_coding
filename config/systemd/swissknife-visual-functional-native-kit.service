@@ -1,0 +1,19 @@
+[Unit]
+StartLimitIntervalSec=0
+Description=SVF native Python IPFS Kit MCP (strict real SDK)
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/barberb/lift_coding
+ExecStart=/home/barberb/lift_coding/external/ipfs_datasets/.venv/bin/python -B /home/barberb/lift_coding/scripts/svf_backends/foundation_native_entrypoint.py --family kit-pubsub
+Environment=PYTHONUNBUFFERED=1
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=15
+KillMode=control-group
+UMask=0077
+NoNewPrivileges=true
+
+[Install]
+WantedBy=default.target
