@@ -238,9 +238,14 @@ def model_call_limits(profile: dict, mode: str, task_limits: dict | None = None)
             raise ModelAdapterError("invalid profile repairReasoningEffort value")
         result["reasoningEffort"] = effort
     if task_limits is not None:
-        if type(task_limits) is not dict or set(task_limits) - {"maxTurns", "maxOutputTokens", "modelContextBytes", "reasoningEffort"}:
+        if type(task_limits) is not dict or set(task_limits) - {"maxTurns", "maxOutputTokens", "modelContextBytes", "reasoningEffort", "timeoutSeconds"}:
             raise ModelAdapterError("invalid task LLM budget fields")
         caps = {**_settings(profile), "modelContextBytes": profile_context}
+        if "timeoutSeconds" in task_limits:
+            value = task_limits["timeoutSeconds"]
+            if type(value) is not int or not 0 < value <= caps["timeoutSeconds"]:
+                raise ModelAdapterError("task timeout must be positive and no greater than the profile timeout")
+            result["timeoutSeconds"] = value
         for key, low, high in (("maxTurns", 1, 64), ("maxOutputTokens", 256, 32768), ("modelContextBytes", 2048, MAX_PROMPT_BYTES)):
             if key in task_limits:
                 value = task_limits[key]

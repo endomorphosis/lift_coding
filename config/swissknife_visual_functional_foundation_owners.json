@@ -132,7 +132,7 @@
   "protected_sha256": {
     "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/rescue/maintenance_hold.py": "752a7abc1d2bd880885ba562c79b26f954ad43ec3ec5fdd80aee24e14ec22082",
     "config/swissknife_visual_functional_pubsub.json": "906d7c83909028e2c92d56339036e769c0790d9d8868032373f289fea6163fc3",
-    "config/swissknife_visual_functional_supervisor.json": "d262fe3522ecc58072af954c73d0fffccd42360d19992e5e141692a9511dcc34",
+    "config/swissknife_visual_functional_supervisor.json": "280da3cc959f17f295db481061bfcfa60848cdfb66b370b958a8bfecbfda7bbe",
     "config/swissknife_visual_functional_watchdog.json": "ce25ec0325298f1aa12dc9842354c11f0b6fde8f423be2cb43a8e8eaf13afc6d",
     "config/systemd/swissknife-visual-functional-native-accelerate.service": "30c871fda5040326ef302ea2508f3fda3c5618739b81feb21faf512edf05f68e",
     "config/systemd/swissknife-visual-functional-native-kit.service": "bedddf7d9199ca89c655c0794b2ca5e530d1ea307a0de2f2faed53248d542f25",
@@ -155,7 +155,7 @@
     "scripts/swissknife_visual_functional_recovery.py": "abc3df1c435031964bf2807630383c046306ae6574fabd117c3666b2d9c7caa6",
     "scripts/swissknife_visual_functional_review_recheck.py": "d30c3301c33679296a6e61812ebe1f9d8d6675a20768bf7fb849ff1c36b66f52",
     "scripts/swissknife_visual_functional_supervisor.py": "2bb50687eb37d29a93b7023b0e0ee09028dfcaaad29d7d96671901c4831bd260",
-    "scripts/swissknife_visual_functional_worker.py": "5ddb2504c5a0bfb959bbfd70a891f2fb6ffce497e4dc1368067a8ababad92dca",
+    "scripts/swissknife_visual_functional_worker.py": "190d3129cddb0fd2df84755a3a28e26039c6ab92d874e3c3c94ae88fb9071d40",
     "swissknife/config/visual-functional-app-contracts.json": "7f426fbead37d4ecfdbc087211e9e86b0570a883de64d83c82be353e06979b66",
     "swissknife/docs/svf-native-foundation-contracts.md": "fde0da83d5818a0fd3e05f6f86601bf2af57e8d43da736d4ca37c6de3a9fe739",
     "swissknife/docs/svf-pubsub-app-contract.json": "5274ebd64c417df509353a5e4741a02d5ba8e97a02b1dbf72e41a02dba09ed87",
@@ -166,12 +166,12 @@
     "tests/test_svf_pubsub_foundation_contract.py": "ea8ff01b8c90eab133c9121d43b01c91ef673bdcd6dd78d0429b2d8b84f0a649",
     "tests/test_svf_supervisor_foundation_contract.py": "b3a84847a956a760524451f431ade18cd1a22af8fc0f01ca088f6bde078ee4c8",
     "scripts/swissknife_visual_functional_blocked.py": "24cc4a2a5dc0982bf262366b9439e08b6ab3a152b1ed4ab0c78edb4dc2c9d141",
-    "scripts/swissknife_visual_functional_llm.py": "dbaf86e93124c40acd3ee1fa73ea6ff7ddfe501e5d0b0cd20f004f8012e66ee0",
+    "scripts/swissknife_visual_functional_llm.py": "24d1bccc44115a332d9a36d058f8b78d1bf96866e2d2f6c86076643016208cef",
     "external/ipfs_accelerate/ipfs_accelerate_py/cli_runtime/grok_stream_capture.py": "945b3362dc0e25522d9f411f1b8dee85cbe72dc3f255308ba4d1e31fd9f12e34",
     "scripts/swissknife_visual_functional_final_coverage.py": "dd63719f3ab1fc110870f00efb12c362d266e539c92de345f13cdacdf0b1a559",
     "swissknife/scripts/run-visual-functional-workflow.mjs": "a1b096767c63835ea21644b9afb534073363145d4f344b8e6f81f45347b4f3cb",
     "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/rescue/lane_resume.py": "2ed9ca0bd425f97eebe5d90420e8a25455e6b010a45226457b47d2714572a89a",
-    "scripts/swissknife_visual_functional_phase_remediation.py": "f0cdedaeb780d0fcb1d6ea6fe9efe47fb1259b08028d3572b1e09b612122f4f8"
+    "scripts/swissknife_visual_functional_phase_remediation.py": "f425c4baf6c18f17a94e32d06d380c04129b830ca1048414801fe8fb8f9ddafe"
   },
   "pubsub_peers": [
     {

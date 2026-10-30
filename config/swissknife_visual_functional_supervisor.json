@@ -96,6 +96,23 @@
     "max_children_per_final": 1,
     "max_paid_assessments": 1,
     "max_paid_proposals": 1,
-    "child_timeout_seconds": 3600
+    "child_timeout_seconds": 3600,
+    "max_paid_producer_repairs": 1,
+    "producer_repair_timeout_seconds": 900
+  },
+  "retainedProposalResume": {
+    "schema": "swissknife.retained-proposal-resume.v1",
+    "enabled": true,
+    "max_finals": 45,
+    "max_resumes_per_child": 1,
+    "max_paid_calls": 0,
+    "timeout_seconds": 900
+  },
+  "keyboardConfirmationNormalization": {
+    "schema": "swissknife.keyboard-confirmation-normalization.v1",
+    "enabled": true,
+    "max_normalizations_per_child": 1,
+    "max_paid_calls": 0,
+    "timeout_seconds": 900
   }
 }

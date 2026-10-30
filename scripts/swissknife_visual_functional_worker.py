@@ -1259,14 +1259,220 @@ def _independent_review_guidance(profile: dict, task: dict, validated: dict) -> 
     return guidance
 
 
+def producer_failure_context(profile: dict, child: dict, parent: dict, initial_application: dict,
+                             failure_record: dict, producer_check: dict) -> dict:
+    """Reconstruct bounded diagnostics from a real failed, source-bound producer.
+
+    No request is sent here. Captured catalogs are observations, not permissions
+    to override the separately captured tool-disposition policy.
+    """
+    import zipfile
+    from urllib.parse import parse_qs, urlsplit
+    if (child.get("kind") != "scoped-remediation" or child.get("phase_remediation", {}).get("mode") != "final-review"
+            or child.get("app_id") != parent.get("app_id") or parent.get("kind") != "final-app-verify"
+            or child.get("task_id") != "SVF-FINAL-R" + parent.get("task_id", "").removeprefix("SVF-")):
+        raise ValueError("producer feedback is limited to its final source-remediation child")
+    child_dir = runtime_root(profile) / "tasks" / child["task_id"]
+    parent_dir = runtime_root(profile) / "tasks" / parent["task_id"]
+    check_artifacts([initial_application], allowed_prefix=child_dir)
+    failure_path = path_in_root(failure_record["path"])
+    if not (failure_path.is_relative_to(child_dir) or (failure_path.parent == parent_dir / "execution-failures"
+            and re.fullmatch(r"[0-9a-f]{32}\.json", failure_path.name))):
+        raise ValueError("producer feedback failure record is not its immutable archived failure")
+    check_artifacts([failure_record])
+    application = json.loads(path_in_root(initial_application["path"]).read_text())
+    if (application.get("completion_authority") is not False or set(application.get("after", {})) != set(child.get("edit_paths", []))
+            or application["after"] != repair_target_hashes(child)):
+        raise ValueError("producer feedback applied source changed")
+    failure = json.loads(path_in_root(failure_record["path"]).read_text())
+    if (failure.get("schema") != EXECUTION_FAILURE_SCHEMA or failure.get("task_id") != parent["task_id"]
+            or failure.get("task_context_sha256") != failure_task_context(parent) or failure.get("stage") != "workflow"
+            or failure.get("completion_authority") is not False or failure.get("work_complete") is not False
+            or failure.get("error", {}).get("code") != "ValidationCommandError"):
+        raise ValueError("producer feedback lacks an actual failed workflow")
+    keys = {"argv", "exit_code", "stdout_sha256", "stderr_sha256", "stdout_bytes", "stderr_bytes", "output_tail"}
+    if (type(producer_check) is not dict or set(producer_check) != keys
+            or type(producer_check.get("exit_code")) is not int or producer_check["exit_code"] in {0, 75}
+            or type(producer_check.get("argv")) is not list or len(producer_check["argv"]) != 9
+            or producer_check["argv"][:7] != ["node", "swissknife/scripts/run-visual-functional-workflow.mjs", "--app",
+                parent["app_id"], "--contracts", profile["appContractPath"], "--output-dir"]
+            or producer_check["argv"][-1] != "--independent-viewports"
+            or type(producer_check.get("output_tail")) is not str or len(producer_check["output_tail"]) > 16000):
+        raise ValueError("producer feedback command or nonzero exit differs")
+    for prefix in ("stdout", "stderr"):
+        if (type(producer_check[prefix + "_bytes"]) is not int or producer_check[prefix + "_bytes"] < 0
+                or type(producer_check[prefix + "_sha256"]) is not str
+                or re.fullmatch(r"[0-9a-f]{64}", producer_check[prefix + "_sha256"]) is None):
+            raise ValueError("producer feedback output identity differs")
+    if failure["error"].get("message") != f"command exit {producer_check['exit_code']}: {producer_check['output_tail']}":
+        raise ValueError("producer feedback command output differs from its archived failure")
+    attempt = path_in_root(producer_check["argv"][7])
+    if attempt.parent != parent_dir / "verification" or re.fullmatch(r"attempt-[A-Za-z0-9_-]+", attempt.name) is None:
+        raise ValueError("producer feedback output directory escaped its parent")
+    sources = [initial_application, failure_record]
+    context = {"schema": "swissknife.producer-failure-context.v1", "task_id": child["task_id"],
+        "original_task_id": parent["task_id"], "initial_application": initial_application,
+        "failure_record": failure_record, "source_after": application["after"],
+        "producer_check": {key: value for key, value in producer_check.items() if key != "output_tail"},
+        "producer_output_excerpt": producer_check["output_tail"][:4096], "producer_output_complete": len(producer_check["output_tail"]) <= 4096,
+        "error": {"code": failure["error"]["code"], "message_excerpt": failure["error"]["message"][:4096],
+                  "message_complete": len(failure["error"]["message"]) <= 4096},
+        "authority": "diagnostic proposal context only; no acceptance or policy override",
+        "policy_instruction": "A catalog safe payload is not browser permission. Honor captured dispositions: server_only is unavailable to browser execution. Use an existing declared browser-approved operation or report blocked. Never fabricate confirmation, call an owner endpoint directly, or weaken policy/receipt checks.",
+        "captured_catalogs": [], "captured_dispositions": [], "captured_dom": [], "trace": None}
+    driver = failure.get("driver_failure")
+    if driver is None:
+        context["observation_scope"] = "Failed command output only; no retained driver/DOM/catalog observation."
+        context["sources"] = sources
+        return context
+    check_artifacts([driver], allowed_prefix=attempt)
+    driver_path = path_in_root(driver["path"])
+    if driver_path.parent not in (attempt, attempt / "desktop", attempt / "mobile"):
+        raise ValueError("producer failure viewport path differs")
+    data = json.loads(driver_path.read_text())
+    if (data.get("schema") != "swissknife.visual-functional-workflow-failure.v1" or data.get("app_id") != parent["app_id"]
+            or data.get("completion_authority") is not False or data.get("work_complete") is not False
+            or type(data.get("source_sha256")) is not dict
+            or any(sha(path_in_root(name)) != want for name, want in data["source_sha256"].items())
+            or any(data["source_sha256"].get(name) != want for name, want in application["after"].items())
+            or data.get("scenario_sha256") != application["after"].get("swissknife/test/e2e/functional-workflows/" + parent["app_id"] + ".json")):
+        raise ValueError("producer failure source/driver identity changed")
+    sources.append(driver)
+    context.update(driver_failure=driver, phase=data.get("phase"), step=data.get("step"), driver_error=data.get("error"))
+    artifacts = data.get("artifacts", [])
+    if artifacts:
+        check_artifacts(artifacts, allowed_prefix=driver_path.parent)
+    for item in artifacts:
+        source = path_in_root(item["path"])
+        if source.name != "failure-dom.json":
+            continue
+        if item["bytes"] > 131072:
+            raise ValueError("producer DOM diagnostic exceeds its bound")
+        value = json.loads(source.read_text())
+        if value.get("diagnostic_only") is not True or value.get("redacted") is not True:
+            raise ValueError("producer DOM diagnostic is not redacted")
+        content = value.get("primary_content", {})
+        text = content.get("text", "")
+        if type(text) is not str or type(content.get("controls", [])) is not list:
+            raise ValueError("producer DOM diagnostic malformed")
+        controls = [{key: row[key] for key in ("tag", "role", "type", "name", "disabled", "value", "outside_viewport") if key in row}
+                    for row in content.get("controls", [])[:24] if type(row) is dict]
+        context["captured_dom"].append({"original": item, "text": text[:4096], "text_complete": len(text) <= 4096,
+            "controls": controls, "control_count": len(content.get("controls", [])), "controls_omitted": max(0, len(content.get("controls", [])) - 24)})
+        sources.append(item)
+    trace = driver_path.parent / "trace.zip"
+    if trace.exists():
+        trace = path_in_root(str(trace)); trace_ref = artifact(trace); sources.append(trace_ref); context["trace"] = trace_ref
+        snapshots = {"bindings": {}, "dispositions": {}}
+        origins = set()
+        with zipfile.ZipFile(trace) as archive:
+            infos = archive.infolist()
+            if len(infos) > 4096 or len({info.filename for info in infos}) != len(infos):
+                raise ValueError("producer trace members ambiguous or excessive")
+            members = {info.filename: info for info in infos}
+            def retained_json(name: str, limit: int):
+                if name not in members or members[name].file_size > limit:
+                    raise ValueError("producer trace resource missing or over bound")
+                raw = archive.read(name)
+                return json.loads(raw), {"trace": trace_ref, "member": name, "sha256": hashlib.sha256(raw).hexdigest(), "bytes": len(raw)}
+            for name, info in members.items():
+                if not name.endswith(".network"):
+                    continue
+                if info.file_size > 32 * 1024 * 1024:
+                    raise ValueError("producer network trace exceeds diagnostic scan bound")
+                for line in archive.read(name).splitlines():
+                    event = json.loads(line); snapshot = event.get("snapshot", {}); request = snapshot.get("request", {})
+                    url = urlsplit(request.get("url", ""))
+                    kind = ("bindings" if url.path == "/mcp/tools/bindings" and parse_qs(url.query).get("app_id") == [parent["app_id"]]
+                            else "dispositions" if url.path == "/mcp/tools/dispositions" else None)
+                    if kind is None or request.get("method") != "GET" or snapshot.get("response", {}).get("status") != 200:
+                        continue
+                    if url.scheme not in {"http", "https"} or url.hostname not in {"127.0.0.1", "localhost", "::1"}:
+                        raise ValueError("producer catalog was not captured on a loopback application origin")
+                    origins.add((url.scheme, url.netloc))
+                    key = snapshot["response"].get("content", {}).get("_sha1")
+                    if type(key) is not str or re.fullmatch(r"[0-9a-f]{40}(?:\.[A-Za-z0-9]{1,8})?", key) is None:
+                        raise ValueError("producer catalog trace resource differs")
+                    value, member = retained_json("resources/" + key, 4 * 1024 * 1024)
+                    snapshots[kind][member["sha256"]] = (value, member)
+        if len(origins) > 1 or any(len(rows) > 1 for rows in snapshots.values()):
+            raise ValueError("producer trace contains conflicting catalog/policy snapshots")
+        tool_keys = set()
+        for value, member in snapshots["bindings"].values():
+            if type(value) is not dict or type(value.get("controls")) is not list:
+                raise ValueError("producer binding catalog malformed")
+            controls = [row for row in value["controls"] if row.get("app_id") == parent["app_id"]]
+            for row in controls:
+                for tool in row.get("preferred_tool_ids", [row.get("selected_tool_id")]):
+                    tool_keys.add((row.get("owner"), tool))
+            context["captured_catalogs"].append({"original": member, "controls": controls})
+        for value, member in snapshots["dispositions"].values():
+            if type(value) is not dict or type(value.get("entries")) is not list:
+                raise ValueError("producer disposition catalog malformed")
+            rows = [row for row in value["entries"] if (row.get("owner"), row.get("tool_id")) in tool_keys]
+            context["captured_dispositions"].append({"original": member, "entries": rows,
+                "scope": "Only tools named by this app's captured catalog. server_only is a prohibition, never browser approval."})
+    context["observation_scope"] = "Only retained failed-producer bytes; absent catalog/DOM observations are not approval."
+    context["sources"] = sources + [artifact(path_in_root(name)) for name in data["source_sha256"]]
+    if len(json.dumps(context, ensure_ascii=False, separators=(",", ":")).encode()) > 49152:
+        raise ValueError("producer feedback context exceeds its explicit bound")
+    check_artifacts(context["sources"])
+    return context
+
+
+def _remediation_model_context(profile: dict, spec: dict, task: dict, mode: str, payment, producer_failure):
+    if payment is not None and (type(payment) is not tuple or len(payment) != 2 or type(payment[0]) is not dict):
+        raise ValueError("remediation payment role/task/mode differs")
+    child, role = payment if payment is not None else ({}, None)
+    producer_role = role == "producer_repair"
+    if task.get("kind") == "scoped-remediation" and not (
+            task == child and mode == "repair" and role in {"proposal", "producer_repair"}):
+        raise ValueError("scoped remediation cannot bypass its bounded paid admission")
+    if payment is not None and not ((role == "proposal" and task == child and mode == "repair")
+            or (role == "assessment" and mode == "review" and task["task_id"] == child.get("phase_remediation", {}).get("original_task", {}).get("task_id"))
+            or (producer_role and task == child and mode == "repair" and task.get("kind") == "scoped-remediation"
+                and task.get("phase_remediation", {}).get("mode") == "final-review")):
+        raise ValueError("remediation payment role/task/mode differs")
+    if not producer_role:
+        if producer_failure is not None:
+            raise ValueError("producer feedback cannot accompany another model role")
+        return None
+    if type(producer_failure) is not dict:
+        raise ValueError("producer repair needs its sealed failed-producer packet")
+    from swissknife_visual_functional_phase_remediation import validate_producer_feedback
+    packet = validate_producer_feedback(ROOT, profile, spec, child, packet_ref=producer_failure)
+    parent = child["phase_remediation"]["original_task"]
+    observed = producer_failure_context(profile, child, parent, packet["initial_application"], packet["failure_record"], packet["producer_check"])
+    if stable(observed) != stable(packet.get("context")):
+        raise ValueError("producer feedback context differs from retained failed producer")
+    return observed
+
+
+def _producer_repair_task_limits(profile: dict, task: dict, mode: str) -> dict:
+    """Lower one feedback call inside its existing deadline; never renew it."""
+    from swissknife_visual_functional_llm import model_call_limits
+    from swissknife_visual_functional_phase_remediation import producer_repair_remaining_seconds
+    if (mode != "repair" or task.get("kind") != "scoped-remediation"
+            or task.get("phase_remediation", {}).get("mode") != "final-review"):
+        raise ValueError("deadline-limited provider call belongs only to final producer repair")
+    base = model_call_limits(profile, mode, task.get("llm_limits"))
+    remaining = producer_repair_remaining_seconds(ROOT, profile, task)
+    if type(remaining) is not int or remaining <= 15:
+        raise ValueError("finite child deadline cannot contain a positive feedback call and its reserve")
+    return {**(task.get("llm_limits") or {}), "timeoutSeconds": min(base["timeoutSeconds"], remaining - 15)}
+
+
 def model(profile_path: str, task: dict, mode: str, inputs: list[str], screenshots: list[str], output: Path,
           *, recovery_context: dict | None = None, preserve_feedback: bool = False,
           edit_paths_override: list[str] | None = None, backend_producer: dict | None = None,
-          remediation_payment: tuple[dict, str] | None = None) -> dict:
+          remediation_payment: tuple[dict, str] | None = None, producer_failure: dict | None = None) -> dict:
     from swissknife_visual_functional_llm import invoke_task_model, validate_model_receipt, model_call_limits, RECEIPT_SCHEMA, ModelContextBudgetError
     profile, _spec = load(profile_path)
     assert_no_campaign_hold(profile)
     assert_storage_available(profile)
+    checked_producer_failure = _remediation_model_context(profile, _spec, task, mode, remediation_payment, producer_failure)
+    if checked_producer_failure is not None and output != runtime_root(profile) / "tasks" / task["task_id"] / "producer-repair-proposal.json":
+        raise ValueError("producer repair output differs from its one bounded role")
     if not output.is_relative_to(runtime_root(profile)):
         raise ValueError("model output must remain in this campaign runtime")
     contracts = json.loads(path_in_root(profile["appContractPath"]).read_text())
@@ -1284,6 +1490,15 @@ def model(profile_path: str, task: dict, mode: str, inputs: list[str], screensho
         context_task["edit_paths"] = editable
     context = {"task": context_task, "authority": "proposal_only; do not manufacture test evidence"}
     supporting_sources = []
+    if checked_producer_failure is not None:
+        context["producer_failure"] = checked_producer_failure
+        context["producer_failure_packet"] = producer_failure
+        supporting_sources += [producer_failure, *checked_producer_failure["sources"]]
+        # The packet's exact reconstructed context is already supplied above.
+        # Keep the immutable packet identity fenced without embedding its same
+        # diagnostic body a second time beside the complete edit targets.
+        packet_path = path_in_root(producer_failure["path"])
+        inputs = [name for name in inputs if path_in_root(name) != packet_path]
     absent_final_sources = []
     review_reports = ([path_in_root(name) for name in inputs if Path(name).name == "workflow.json"]
                       if mode == "review" and task.get("kind") in {"verify", "final-app-verify"} else [])
@@ -1364,7 +1579,9 @@ def model(profile_path: str, task: dict, mode: str, inputs: list[str], screensho
                     supporting_sources.append(failure["driver_failure"])
                     supporting_sources += failure.get("diagnostic", {}).get("artifacts", [])
                     supporting_sources += [artifact(path_in_root(p)) for p in failure.get("diagnostic", {}).get("source_sha256", {})]
-    limits = model_call_limits(profile, mode, task.get("llm_limits"))
+    call_task_limits = (_producer_repair_task_limits(profile, task, mode)
+                        if checked_producer_failure is not None else task.get("llm_limits"))
+    limits = model_call_limits(profile, mode, call_task_limits)
     if mode == "repair":
         # Some command tasks have no declared immutable failure-copy input.
         # They still need the current source-bound producer error. Suppress its
@@ -1678,13 +1895,8 @@ def model(profile_path: str, task: dict, mode: str, inputs: list[str], screensho
     if mode == "repair" and task.get("kind") != "scoped-remediation" and current_failure is not None and current_failure["failure"].get("visual_review"):
         from swissknife_visual_functional_phase_budget import admit
         phase_admission = admit(ROOT, task, current_failure["failure"]["visual_review"]["original"], source_hashes)
-    if task.get("kind") == "scoped-remediation" and remediation_payment != (task, "proposal"):
-        raise ValueError("scoped remediation cannot bypass its single proposal admission")
-    if remediation_payment is not None:
-        child, role = remediation_payment
-        if not ((role == "proposal" and task == child and mode == "repair")
-                or (role == "assessment" and mode == "review" and task["task_id"] == child["phase_remediation"]["original_task"]["task_id"])):
-            raise ValueError("remediation payment role/task/mode differs")
+    if stable(_remediation_model_context(profile, _spec, task, mode, remediation_payment, producer_failure)) != stable(checked_producer_failure):
+        raise ValueError("producer feedback changed before paid admission")
     def before_remediation_provider(metadata):
         nonlocal remediation_admission
         ensure_lease(profile)
@@ -1706,7 +1918,7 @@ def model(profile_path: str, task: dict, mode: str, inputs: list[str], screensho
         return invoke_task_model(profile_path, task["task_id"], mode, input_paths=inputs,
                                  screenshot_paths=screenshots,
                                  predicted_files=editable if mode == "repair" else [],
-                                 output_path=str(output.relative_to(ROOT)), root=ROOT, task_limits=task.get("llm_limits"),
+                                 output_path=str(output.relative_to(ROOT)), root=ROOT, task_limits=call_task_limits,
                                  **({"before_provider": callback} if callback is not None else {}))
     try:
         try:
@@ -2023,10 +2235,20 @@ def workflow(profile: dict, task: dict, directory: Path, *, timeout_seconds: int
                     transient = True
         if transient:
             error = BrowserContention("another browser/evidence producer owns the shared browser lease; wait for its owner")
-        remember_execution_failure(profile, task, error, stage="workflow", attempt=attempt)
+        failure_record = remember_execution_failure(profile, task, error, stage="workflow", attempt=attempt)
         error.execution_failure_recorded = True
         if transient:
             raise error from None
+        if isinstance(error, ValidationCommandError) and type(error.returncode) is int and error.returncode not in {0, 75}:
+            # These fields originate at the failed checked-run boundary. A phase
+            # bridge may copy them into one immutable, separately paid feedback
+            # packet; ordinary app recovery and resource refusals gain no role.
+            error.producer_failure_record = artifact(failure_record)
+            error.producer_check = {"argv": list(error.argv), "exit_code": error.returncode,
+                "stdout_sha256": hashlib.sha256(error.stdout.encode()).hexdigest(),
+                "stderr_sha256": hashlib.sha256(error.stderr.encode()).hexdigest(),
+                "stdout_bytes": len(error.stdout.encode()), "stderr_bytes": len(error.stderr.encode()),
+                "output_tail": (error.stdout + "\n" + error.stderr)[-16000:]}
         raise
     if backend_endpoints:
         checks[0]["configured_backend_endpoints"] = backend_endpoints
@@ -2641,7 +2863,8 @@ def execute(profile_path: str, profile: dict, spec: dict, task: dict) -> dict:
         files, checks, detail = execute_child(ROOT, profile_path, profile, spec, task,
             model=model, workflow=workflow, validate_workflow=validate_workflow,
             apply_edits=lambda root, edits, paths, **options: apply_task_edits(root, profile, task, edits, paths, **options), ensure_lease=ensure_lease,
-            check_owned=check_owned_sources, remember_owned=remember_owned_sources)
+            check_owned=check_owned_sources, remember_owned=remember_owned_sources,
+            producer_failure_context=producer_failure_context)
     elif kind == "verify":
         from swissknife_visual_functional_llm import apply_validated_edits
         for attempt in range(1, 4):
