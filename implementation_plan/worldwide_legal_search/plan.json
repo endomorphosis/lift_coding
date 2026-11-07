@@ -1,0 +1,4047 @@
+{
+  "schema": "worldwide-legal-search.plan@1",
+  "created_at": "2026-10-26",
+  "namespace": "worldwide-legal-search-v1",
+  "definition_authority": "Versioned campaign input; native task source owns live execution state",
+  "product": {
+    "repository": "/home/barberb/worldwidelaws.github.io",
+    "runtime": "Static React TypeScript and browser workers on GitHub Pages",
+    "source_organizations": [
+      "justicedao",
+      "endomorphosis"
+    ],
+    "completion_scope": "Worldwide-capable software and all eligible accessible collections in the pinned inventory; not proof that every law in the world has been collected"
+  },
+  "repositories": {
+    "site": {
+      "path": "/home/barberb/worldwidelaws.github.io",
+      "mode": "campaign worktree"
+    },
+    "accelerate": {
+      "path": "/home/barberb/ipfs_accelerate_py",
+      "mode": "isolated campaign adapter and repair worktree"
+    },
+    "datasets_reference": {
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "mode": "read-only"
+    },
+    "datasets_older_reference": {
+      "path": "/home/barberb/ipfs_datasets_py",
+      "mode": "read-only"
+    }
+  },
+  "routing": {
+    "router": "ipfs_accelerate_py.llm_router",
+    "primary_provider": "grok_cli",
+    "primary_model": "grok-4.7",
+    "fallback_provider": "codex_cli",
+    "fallback_model": "resolve from admitted existing Codex configuration",
+    "policy": "grok_quota_auth_or_unavailable",
+    "fallback_conditions": [
+      "typed quota exhaustion",
+      "typed authentication failure",
+      "typed launch unavailability"
+    ],
+    "unchanged_workspace_required": true,
+    "unknown_effects_require_reconciliation": true,
+    "mandatory_routine_codex_review": false
+  },
+  "execution": {
+    "initial_lanes": 1,
+    "task_authority": "Native DatabaseTaskSource materialized via public APIs",
+    "bootstrap_board": "implementation_plan/worldwide_legal_search/tasks.todo.md",
+    "goal_heap": "implementation_plan/worldwide_legal_search/goals.objectives.md",
+    "native_scheduler_profile": "implementation_plan/worldwide_legal_search/supervisor.json",
+    "protected_acceptance_inputs": [
+      "implementation_plan/worldwide_legal_search/plan.json",
+      "implementation_plan/worldwide_legal_search/PLAN.md",
+      "implementation_plan/worldwide_legal_search/build_plan.py",
+      "implementation_plan/worldwide_legal_search/validate_plan.py",
+      "implementation_plan/worldwide_legal_search/tasks.todo.md",
+      "implementation_plan/worldwide_legal_search/goals.objectives.md",
+      "implementation_plan/worldwide_legal_search/supervisor.json",
+      "implementation_plan/worldwide_legal_search/watchdog.policy.json",
+      "implementation_plan/worldwide_legal_search/test_watchdog.py"
+    ],
+    "native_adapter_prerequisite": "WWL-004",
+    "control_canary_prerequisite": "WWL-005",
+    "live_launch_performed": false,
+    "provider_calls_performed_by_plan": 0
+  },
+  "source_expansion": {
+    "admission_task": "WWL-018",
+    "join_task": "WWL-017",
+    "parent_goal": "WWL-G020.S2",
+    "id_pattern": "WWL-SRC-[0-9a-f]{16}-(normalize|index|geo|publish|verify)-[0-9]{4}",
+    "identity_fields": [
+      "dataset_id",
+      "resolved_revision",
+      "config",
+      "split",
+      "jurisdiction_id",
+      "shard_id",
+      "phase"
+    ],
+    "identity_hash": "First 16 hex characters of SHA-256 of canonical identity tuple; reject collisions",
+    "phases": [
+      {
+        "phase": "normalize",
+        "acceptance": "Required IDs, original text, article inheritance, dates/status, rights and provenance pass production schema/integrity checks"
+      },
+      {
+        "phase": "index",
+        "acceptance": "Revisioned postings, citation lookup, bounded artifacts and multilingual retrieval fixtures pass"
+      },
+      {
+        "phase": "geo",
+        "acceptance": "Issuer, territorial scope, geography and per-level coverage join with explicit unknown relationships"
+      },
+      {
+        "phase": "publish",
+        "acceptance": "Publish permitted derived indexes and geometry shards to an admitted public HF artifact destination using host-only credentials; record resolved repository commit, immutable public URLs, hashes, rights/attribution and Pages-origin CORS/Range or shard probes; never mutate source revisions"
+      },
+      {
+        "phase": "verify",
+        "acceptance": "Independent ingest/retrieval/integrity receipt binds the exact published artifact hashes and source revision"
+      }
+    ],
+    "max_wall_seconds_per_child": 5400,
+    "max_attempts_per_child": 3,
+    "task_template": {
+      "repository": "site",
+      "completion": "auto",
+      "outputs": [
+        "artifacts/worldwide-legal-search/sources/{source_key}/{shard_id}/{phase}.manifest.json"
+      ],
+      "validation_argv": [
+        [
+          "node",
+          "scripts/worldwide/audit.mjs",
+          "source-job",
+          "--job-id",
+          "{job_id}",
+          "--phase",
+          "{phase}"
+        ]
+      ],
+      "evidence": [
+        "Exact source and artifact revisions/hashes",
+        "Native independently admitted phase receipt",
+        "Actual production validation argv and results"
+      ],
+      "publish_effect_admission": "Only publish-phase tasks may write to the configured public artifact destination; resolve host-only credentials through native admission, never browser configuration"
+    },
+    "required_rules": [
+      "Deterministic deduplication in native authority",
+      "All prior source phases are verified dependencies",
+      "Batch/shard by measured bytes and memory",
+      "No source or blocker removed to manufacture closure",
+      "WWL-017 joins every required expanded task",
+      "Watchdog task-set refresh requires native expansion receipt and preserves incident budgets"
+    ],
+    "active_plan_requires_native_expansion_receipt": true
+  },
+  "goals": [
+    {
+      "id": "WWL-G000",
+      "title": "Deliver the worldwide place-aware static legal search engine",
+      "parent_ids": [],
+      "task_ids": [
+        "WWL-000",
+        "WWL-001",
+        "WWL-002",
+        "WWL-003",
+        "WWL-004",
+        "WWL-005",
+        "WWL-006",
+        "WWL-010",
+        "WWL-011",
+        "WWL-012",
+        "WWL-013",
+        "WWL-014",
+        "WWL-015",
+        "WWL-016",
+        "WWL-017",
+        "WWL-018",
+        "WWL-020",
+        "WWL-021",
+        "WWL-022",
+        "WWL-023",
+        "WWL-024",
+        "WWL-025",
+        "WWL-030",
+        "WWL-031",
+        "WWL-032",
+        "WWL-033",
+        "WWL-034",
+        "WWL-040",
+        "WWL-041",
+        "WWL-042",
+        "WWL-043",
+        "WWL-044",
+        "WWL-045",
+        "WWL-046",
+        "WWL-047",
+        "WWL-050",
+        "WWL-051",
+        "WWL-052",
+        "WWL-053",
+        "WWL-054",
+        "WWL-055",
+        "WWL-056",
+        "WWL-070",
+        "WWL-071",
+        "WWL-072",
+        "WWL-073",
+        "WWL-080",
+        "WWL-081",
+        "WWL-082",
+        "WWL-083",
+        "WWL-084",
+        "WWL-085",
+        "WWL-100",
+        "WWL-101",
+        "WWL-102",
+        "WWL-103",
+        "WWL-104",
+        "WWL-105",
+        "WWL-106",
+        "WWL-110",
+        "WWL-111",
+        "WWL-112",
+        "WWL-113",
+        "WWL-114"
+      ],
+      "status": "active",
+      "acceptance": "All required current task receipts, inventory disposition, product acceptance and verified public release pass; legal coverage limits remain explicit."
+    },
+    {
+      "id": "WWL-G010",
+      "title": "Preserve the baseline and establish native campaign execution",
+      "parent_ids": [
+        "WWL-G000"
+      ],
+      "task_ids": [
+        "WWL-000",
+        "WWL-001",
+        "WWL-002",
+        "WWL-003",
+        "WWL-004",
+        "WWL-005",
+        "WWL-006"
+      ],
+      "status": "active",
+      "acceptance": "Every child task satisfies its current acceptance contract and independent native completion evidence."
+    },
+    {
+      "id": "WWL-G010.S1",
+      "title": "Repository migration",
+      "parent_ids": [
+        "WWL-G010"
+      ],
+      "task_ids": [
+        "WWL-000",
+        "WWL-001",
+        "WWL-006"
+      ],
+      "status": "active",
+      "acceptance": "All listed task evidence is verified against the accepted source revisions."
+    },
+    {
+      "id": "WWL-G010.S2",
+      "title": "Native supervision",
+      "parent_ids": [
+        "WWL-G010"
+      ],
+      "task_ids": [
+        "WWL-002",
+        "WWL-003",
+        "WWL-004",
+        "WWL-005"
+      ],
+      "status": "active",
+      "acceptance": "All listed task evidence is verified against the accepted source revisions."
+    },
+    {
+      "id": "WWL-G020",
+      "title": "Discover normalize and account for the eligible worldwide corpus",
+      "parent_ids": [
+        "WWL-G000"
+      ],
+      "task_ids": [
+        "WWL-010",
+        "WWL-011",
+        "WWL-012",
+        "WWL-013",
+        "WWL-014",
+        "WWL-015",
+        "WWL-016",
+        "WWL-017",
+        "WWL-018"
+      ],
+      "status": "active",
+      "acceptance": "Every child task satisfies its current acceptance contract and independent native completion evidence."
+    },
+    {
+      "id": "WWL-G020.S1",
+      "title": "Source and rights inventory",
+      "parent_ids": [
+        "WWL-G020"
+      ],
+      "task_ids": [
+        "WWL-010",
+        "WWL-011",
+        "WWL-012"
+      ],
+      "status": "active",
+      "acceptance": "All listed task evidence is verified against the accepted source revisions."
+    },
+    {
+      "id": "WWL-G020.S2",
+      "title": "Data contracts and ingestion",
+      "parent_ids": [
+        "WWL-G020"
+      ],
+      "task_ids": [
+        "WWL-013",
+        "WWL-014",
+        "WWL-015",
+        "WWL-016",
+        "WWL-017",
+        "WWL-018"
+      ],
+      "status": "active",
+      "acceptance": "All listed task evidence is verified against the accepted source revisions."
+    },
+    {
+      "id": "WWL-G030",
+      "title": "Resolve geographic and legal jurisdiction context accurately",
+      "parent_ids": [
+        "WWL-G000"
+      ],
+      "task_ids": [
+        "WWL-020",
+        "WWL-021",
+        "WWL-022",
+        "WWL-023",
+        "WWL-024",
+        "WWL-025"
+      ],
+      "status": "active",
+      "acceptance": "Every child task satisfies its current acceptance contract and independent native completion evidence."
+    },
+    {
+      "id": "WWL-G030.S1",
+      "title": "Place and boundary registry",
+      "parent_ids": [
+        "WWL-G030"
+      ],
+      "task_ids": [
+        "WWL-020",
+        "WWL-021",
+        "WWL-022"
+      ],
+      "status": "active",
+      "acceptance": "All listed task evidence is verified against the accepted source revisions."
+    },
+    {
+      "id": "WWL-G030.S2",
+      "title": "Authority and effective-date context",
+      "parent_ids": [
+        "WWL-G030"
+      ],
+      "task_ids": [
+        "WWL-023",
+        "WWL-024",
+        "WWL-025"
+      ],
+      "status": "active",
+      "acceptance": "All listed task evidence is verified against the accepted source revisions."
+    },
+    {
+      "id": "WWL-G040",
+      "title": "Make location inference and manual control reliable",
+      "parent_ids": [
+        "WWL-G000"
+      ],
+      "task_ids": [
+        "WWL-030",
+        "WWL-031",
+        "WWL-032",
+        "WWL-033",
+        "WWL-034"
+      ],
+      "status": "active",
+      "acceptance": "Every child task satisfies its current acceptance contract and independent native completion evidence."
+    },
+    {
+      "id": "WWL-G040.S1",
+      "title": "Manual place and state control",
+      "parent_ids": [
+        "WWL-G040"
+      ],
+      "task_ids": [
+        "WWL-030",
+        "WWL-031"
+      ],
+      "status": "active",
+      "acceptance": "All listed task evidence is verified against the accepted source revisions."
+    },
+    {
+      "id": "WWL-G040.S2",
+      "title": "GeoIP device and privacy behavior",
+      "parent_ids": [
+        "WWL-G040"
+      ],
+      "task_ids": [
+        "WWL-032",
+        "WWL-033",
+        "WWL-034"
+      ],
+      "status": "active",
+      "acceptance": "All listed task evidence is verified against the accepted source revisions."
+    },
+    {
+      "id": "WWL-G050",
+      "title": "Deliver bounded scalable multilingual static retrieval",
+      "parent_ids": [
+        "WWL-G000"
+      ],
+      "task_ids": [
+        "WWL-040",
+        "WWL-041",
+        "WWL-042",
+        "WWL-043",
+        "WWL-044",
+        "WWL-045",
+        "WWL-046",
+        "WWL-047"
+      ],
+      "status": "active",
+      "acceptance": "Every child task satisfies its current acceptance contract and independent native completion evidence."
+    },
+    {
+      "id": "WWL-G050.S1",
+      "title": "Artifacts and lexical retrieval",
+      "parent_ids": [
+        "WWL-G050"
+      ],
+      "task_ids": [
+        "WWL-040",
+        "WWL-041",
+        "WWL-042",
+        "WWL-043"
+      ],
+      "status": "active",
+      "acceptance": "All listed task evidence is verified against the accepted source revisions."
+    },
+    {
+      "id": "WWL-G050.S2",
+      "title": "Scoped and worldwide federation",
+      "parent_ids": [
+        "WWL-G050"
+      ],
+      "task_ids": [
+        "WWL-044",
+        "WWL-045",
+        "WWL-046",
+        "WWL-047"
+      ],
+      "status": "active",
+      "acceptance": "All listed task evidence is verified against the accepted source revisions."
+    },
+    {
+      "id": "WWL-G060",
+      "title": "Replace the niche interface with worldwide legal research UX",
+      "parent_ids": [
+        "WWL-G000"
+      ],
+      "task_ids": [
+        "WWL-050",
+        "WWL-051",
+        "WWL-052",
+        "WWL-053",
+        "WWL-054",
+        "WWL-055",
+        "WWL-056"
+      ],
+      "status": "active",
+      "acceptance": "Every child task satisfies its current acceptance contract and independent native completion evidence."
+    },
+    {
+      "id": "WWL-G060.S1",
+      "title": "Search and navigation",
+      "parent_ids": [
+        "WWL-G060"
+      ],
+      "task_ids": [
+        "WWL-050",
+        "WWL-051",
+        "WWL-052"
+      ],
+      "status": "active",
+      "acceptance": "All listed task evidence is verified against the accepted source revisions."
+    },
+    {
+      "id": "WWL-G060.S2",
+      "title": "Reader coverage and accessibility",
+      "parent_ids": [
+        "WWL-G060"
+      ],
+      "task_ids": [
+        "WWL-053",
+        "WWL-054",
+        "WWL-055",
+        "WWL-056"
+      ],
+      "status": "active",
+      "acceptance": "All listed task evidence is verified against the accepted source revisions."
+    },
+    {
+      "id": "WWL-G070",
+      "title": "Preserve useful research tools as optional enhancements",
+      "parent_ids": [
+        "WWL-G000"
+      ],
+      "task_ids": [
+        "WWL-070",
+        "WWL-071",
+        "WWL-072",
+        "WWL-073"
+      ],
+      "status": "active",
+      "acceptance": "Every child task satisfies its current acceptance contract and independent native completion evidence."
+    },
+    {
+      "id": "WWL-G070.S1",
+      "title": "Citations graph and semantic retrieval",
+      "parent_ids": [
+        "WWL-G070"
+      ],
+      "task_ids": [
+        "WWL-070",
+        "WWL-071"
+      ],
+      "status": "active",
+      "acceptance": "All listed task evidence is verified against the accepted source revisions."
+    },
+    {
+      "id": "WWL-G070.S2",
+      "title": "Cited answers proofs and comparison",
+      "parent_ids": [
+        "WWL-G070"
+      ],
+      "task_ids": [
+        "WWL-072",
+        "WWL-073"
+      ],
+      "status": "active",
+      "acceptance": "All listed task evidence is verified against the accepted source revisions."
+    },
+    {
+      "id": "WWL-G080",
+      "title": "Prove product quality browser limits and legal provenance",
+      "parent_ids": [
+        "WWL-G000"
+      ],
+      "task_ids": [
+        "WWL-080",
+        "WWL-081",
+        "WWL-082",
+        "WWL-083",
+        "WWL-084",
+        "WWL-085"
+      ],
+      "status": "active",
+      "acceptance": "Every child task satisfies its current acceptance contract and independent native completion evidence."
+    },
+    {
+      "id": "WWL-G080.S1",
+      "title": "Static platform and scale",
+      "parent_ids": [
+        "WWL-G080"
+      ],
+      "task_ids": [
+        "WWL-080",
+        "WWL-081",
+        "WWL-082"
+      ],
+      "status": "active",
+      "acceptance": "All listed task evidence is verified against the accepted source revisions."
+    },
+    {
+      "id": "WWL-G080.S2",
+      "title": "Trust CI and independent acceptance",
+      "parent_ids": [
+        "WWL-G080"
+      ],
+      "task_ids": [
+        "WWL-083",
+        "WWL-084",
+        "WWL-085"
+      ],
+      "status": "active",
+      "acceptance": "All listed task evidence is verified against the accepted source revisions."
+    },
+    {
+      "id": "WWL-G090",
+      "title": "Recover stalled work and repair the native supervisor automatically",
+      "parent_ids": [
+        "WWL-G000"
+      ],
+      "task_ids": [
+        "WWL-100",
+        "WWL-101",
+        "WWL-102",
+        "WWL-103",
+        "WWL-104",
+        "WWL-105",
+        "WWL-106"
+      ],
+      "status": "active",
+      "acceptance": "Every child task satisfies its current acceptance contract and independent native completion evidence."
+    },
+    {
+      "id": "WWL-G090.S1",
+      "title": "Progress lifecycle and blockers",
+      "parent_ids": [
+        "WWL-G090"
+      ],
+      "task_ids": [
+        "WWL-100",
+        "WWL-101",
+        "WWL-104"
+      ],
+      "status": "active",
+      "acceptance": "All listed task evidence is verified against the accepted source revisions."
+    },
+    {
+      "id": "WWL-G090.S2",
+      "title": "Isolated repair and recovery validation",
+      "parent_ids": [
+        "WWL-G090"
+      ],
+      "task_ids": [
+        "WWL-102",
+        "WWL-103",
+        "WWL-105",
+        "WWL-106"
+      ],
+      "status": "active",
+      "acceptance": "All listed task evidence is verified against the accepted source revisions."
+    },
+    {
+      "id": "WWL-G100",
+      "title": "Release and operate the verified worldwide site",
+      "parent_ids": [
+        "WWL-G000"
+      ],
+      "task_ids": [
+        "WWL-110",
+        "WWL-111",
+        "WWL-112",
+        "WWL-113",
+        "WWL-114"
+      ],
+      "status": "active",
+      "acceptance": "Every child task satisfies its current acceptance contract and independent native completion evidence."
+    },
+    {
+      "id": "WWL-G100.S1",
+      "title": "Maintenance and release preparation",
+      "parent_ids": [
+        "WWL-G100"
+      ],
+      "task_ids": [
+        "WWL-110",
+        "WWL-111"
+      ],
+      "status": "active",
+      "acceptance": "All listed task evidence is verified against the accepted source revisions."
+    },
+    {
+      "id": "WWL-G100.S2",
+      "title": "Public verification and campaign closure",
+      "parent_ids": [
+        "WWL-G100"
+      ],
+      "task_ids": [
+        "WWL-112",
+        "WWL-113",
+        "WWL-114"
+      ],
+      "status": "active",
+      "acceptance": "All listed task evidence is verified against the accepted source revisions."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "WWL-000",
+      "title": "Record source revisions and preserve the existing website baseline",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G010",
+      "subgoal_id": "WWL-G010.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [],
+      "repository": "site",
+      "outputs": [
+        "docs/worldwide/baseline.json",
+        "docs/worldwide/migration.md"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-000.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "docs/worldwide/"
+      ],
+      "acceptance": "Record site and reference revisions, unrelated dirty paths, active lanes, reachable application imports, current build/test results and Netherlands behavior; do not overwrite unrelated work.",
+      "validation_argv": [
+        [
+          "python3",
+          "implementation_plan/worldwide_legal_search/validate_plan.py",
+          "--baseline-evidence",
+          "docs/worldwide/baseline.json"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-001",
+      "title": "Establish the worldwide workspace and validation harness",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G010",
+      "subgoal_id": "WWL-G010.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-000"
+      ],
+      "repository": "site",
+      "outputs": [
+        "scripts/worldwide/audit.mjs",
+        "scripts/worldwide/check-contracts.mjs",
+        "tests/worldwide/README.md",
+        "package.json",
+        "package-lock.json",
+        "jest.config.ts",
+        "playwright.config.ts",
+        "tsconfig.json"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-001.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "jest.config.ts",
+        "package-lock.json",
+        "package.json",
+        "playwright.config.ts",
+        "scripts/worldwide/",
+        "tests/worldwide/",
+        "tsconfig.json"
+      ],
+      "acceptance": "Create production-code validation commands used by this board, meaningful fixture conventions and a campaign branch/worktree; harness checks must reject invalid inputs rather than merely find files.",
+      "validation_argv": [
+        [
+          "node",
+          "scripts/worldwide/audit.mjs",
+          "harness"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-002",
+      "title": "Admit goals and tasks through the native supervisor task source",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G010",
+      "subgoal_id": "WWL-G010.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-001"
+      ],
+      "repository": "accelerate",
+      "outputs": [
+        "ipfs_accelerate_py/agent_supervisor/project_adapters/worldwide_legal_search.py",
+        "test/api/test_worldwide_legal_search_admission.py"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-002.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "ipfs_accelerate_py/agent_supervisor/project_adapters/",
+        "test/api/"
+      ],
+      "acceptance": "Materialize stable identities and dependencies with native APIs and idempotent replay in an isolated namespace; derive heap-bound typed-goal contracts with scope, assumptions, non-goals, evidence producers, validation, freshness, resource/refinement and uncertainty bounds, explicitly admit the ten-child root breadth, and pass native goal-quality lint before admission; Markdown remains bootstrap only.",
+      "validation_argv": [
+        [
+          "python3",
+          "-m",
+          "pytest",
+          "test/api/test_worldwide_legal_search_admission.py",
+          "-q"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-003",
+      "title": "Bind and canary the exact Grok emergency Codex route",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G010",
+      "subgoal_id": "WWL-G010.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-002"
+      ],
+      "repository": "accelerate",
+      "outputs": [
+        "test/api/test_worldwide_legal_search_provider_route.py",
+        "docs/worldwide/provider-bindings.md",
+        "ipfs_accelerate_py/agent_supervisor/project_adapters/worldwide_legal_search.py"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-003.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "docs/worldwide/",
+        "ipfs_accelerate_py/agent_supervisor/project_adapters/",
+        "test/api/"
+      ],
+      "acceptance": "Use the canonical llm_router explicit agent route with grok_cli/grok-4.7; prove typed pre-effect emergency fallback, unchanged-workspace requirement, route telemetry and no fallback after ambiguous effects; use only an admitted tiny live canary.",
+      "validation_argv": [
+        [
+          "python3",
+          "-m",
+          "pytest",
+          "test/api/test_worldwide_legal_search_provider_route.py",
+          "-q"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-004",
+      "title": "Bind native lifecycle and the watchdog adapter protocol",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G010",
+      "subgoal_id": "WWL-G010.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-003"
+      ],
+      "repository": "accelerate",
+      "outputs": [
+        "ipfs_accelerate_py/agent_supervisor/project_adapters/worldwide_legal_search_watchdog.py",
+        "test/api/test_worldwide_legal_search_watchdog_bindings.py"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-004.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "ipfs_accelerate_py/agent_supervisor/project_adapters/",
+        "test/api/"
+      ],
+      "acceptance": "Implement WATCHDOG.md observe/dispatch/verify contracts over the existing native authorities; wire lifecycle_restart, rescue planner/orchestrator and request factories, current-tree completion verification, process fencing and durable incident deduplication.",
+      "validation_argv": [
+        [
+          "python3",
+          "-m",
+          "pytest",
+          "test/api/test_worldwide_legal_search_watchdog_bindings.py",
+          "-q"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-005",
+      "title": "Demonstrate canary supervision and recovery before scaling",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G010",
+      "subgoal_id": "WWL-G010.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-004",
+        "WWL-105"
+      ],
+      "repository": "accelerate",
+      "outputs": [
+        "docs/worldwide/control-canary.json",
+        "test/api/test_worldwide_legal_search_control_canary.py"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-005.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "docs/worldwide/",
+        "test/api/"
+      ],
+      "acceptance": "After the complete fault, blocker and restart suite passes, a small real canary proves native admission, Grok execution, independent validation, merge, worker death recovery and validated code-repair promotion; the readiness receipt binds every native component and accepted revision before sustained watchdog repair or corpus expansion.",
+      "validation_argv": [
+        [
+          "python3",
+          "-m",
+          "pytest",
+          "test/api/test_worldwide_legal_search_control_canary.py",
+          "-q"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-006",
+      "title": "Extract reusable TypeScript provider boundaries and Netherlands compatibility",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G010",
+      "subgoal_id": "WWL-G010.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-001"
+      ],
+      "repository": "site",
+      "outputs": [
+        "src/lib/worldwide/contracts.ts",
+        "src/lib/worldwide/adapters/netherlands.ts",
+        "tests/worldwide/netherlands-compat.test.ts",
+        "src/lib/netherlandsCorpus.ts"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-006.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "src/lib/",
+        "src/lib/worldwide/",
+        "src/lib/worldwide/adapters/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Separate generic retrieval contracts from Dutch names while preserving source IDs, version metadata, current sample labels, deep-link behavior and existing relevant logic exports.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/netherlands-compat.test.ts"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-010",
+      "title": "Enumerate both HF organizations and pin every candidate",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G020",
+      "subgoal_id": "WWL-G020.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-001",
+        "WWL-005"
+      ],
+      "repository": "site",
+      "outputs": [
+        "scripts/worldwide/discover.ts",
+        "data/worldwide/source-inventory.json"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-010.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "data/worldwide/",
+        "scripts/worldwide/"
+      ],
+      "acceptance": "Follow pagination for justicedao and endomorphosis; record resolved revisions, cards, files, configs/splits, sizes and access errors; distinguish a complete inventory from a partial probe.",
+      "validation_argv": [
+        [
+          "node",
+          "scripts/worldwide/audit.mjs",
+          "source-inventory"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-011",
+      "title": "Classify corpus and index families without naming assumptions",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G020",
+      "subgoal_id": "WWL-G020.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-010"
+      ],
+      "repository": "site",
+      "outputs": [
+        "scripts/worldwide/classify.ts",
+        "data/worldwide/source-dispositions.json"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-011.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "data/worldwide/",
+        "scripts/worldwide/"
+      ],
+      "acceptance": "Discover national, regional, municipal, country IR, unified Netherlands and legacy indexes; record include/exclude/blocked reasons, schema capabilities, source lineage and code-only releases.",
+      "validation_argv": [
+        [
+          "node",
+          "scripts/worldwide/audit.mjs",
+          "source-dispositions"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-012",
+      "title": "Audit text and artifact redistribution rights",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G020",
+      "subgoal_id": "WWL-G020.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-011"
+      ],
+      "repository": "site",
+      "outputs": [
+        "data/worldwide/rights.json",
+        "docs/worldwide/attribution.md"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-012.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "data/worldwide/",
+        "docs/worldwide/"
+      ],
+      "acceptance": "Bind source-specific rights, attribution and restrictions to pinned artifacts, including boundary/translation/embedding data; unresolved rights remain an explicit blocker and are never inferred from organization membership.",
+      "validation_argv": [
+        [
+          "node",
+          "scripts/worldwide/audit.mjs",
+          "rights"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-013",
+      "title": "Define versioned law section and source schemas",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G020",
+      "subgoal_id": "WWL-G020.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-006",
+        "WWL-011"
+      ],
+      "repository": "site",
+      "outputs": [
+        "src/lib/worldwide/data/schema.ts",
+        "tests/worldwide/schema.test.ts"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-013.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "src/lib/worldwide/data/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Represent source identity, issuer/scope, parent-child relations, language, dates with precision, unknown status, revisions and provenance; reject missing required IDs and invalid associations with useful quarantine reasons.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/schema.test.ts"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-014",
+      "title": "Port normalization identity and article inheritance with Python fixtures",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G020",
+      "subgoal_id": "WWL-G020.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-012",
+        "WWL-013"
+      ],
+      "repository": "site",
+      "outputs": [
+        "scripts/worldwide/normalize.ts",
+        "src/lib/worldwide/data/identity.ts",
+        "tests/worldwide/data-parity.test.ts",
+        "tests/worldwide/fixtures/parity-manifest.json"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-014.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "scripts/worldwide/",
+        "src/lib/worldwide/data/",
+        "tests/worldwide/",
+        "tests/worldwide/fixtures/"
+      ],
+      "acceptance": "Reference fixtures bind upstream source commits/licenses and cover nulls, conflicting status, article inheritance, canonical hashes/CIDs and duplicated mirrors; production TS output matches established fixtures.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/data-parity.test.ts"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-015",
+      "title": "Publish a revision-pinned browser catalog and coverage matrix",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G020",
+      "subgoal_id": "WWL-G020.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-014",
+        "WWL-021"
+      ],
+      "repository": "site",
+      "outputs": [
+        "scripts/worldwide/catalog.ts",
+        "src/lib/worldwide/data/catalog.ts",
+        "data/worldwide/catalog.schema.json"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-015.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "data/worldwide/",
+        "scripts/worldwide/",
+        "src/lib/worldwide/data/"
+      ],
+      "acceptance": "Every jurisdiction/source capability and level has known/partial/missing/unknown/unavailable state with dates and record denominators; validate artifact integrity and distinguish collection counts from legal completeness.",
+      "validation_argv": [
+        [
+          "node",
+          "scripts/worldwide/audit.mjs",
+          "catalog"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-016",
+      "title": "Make ingestion incremental and resilient to schema drift",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G020",
+      "subgoal_id": "WWL-G020.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-015"
+      ],
+      "repository": "site",
+      "outputs": [
+        "scripts/worldwide/update.ts",
+        "tests/worldwide/incremental-data.test.ts"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-016.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "scripts/worldwide/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Changed and removed source revisions update manifests atomically; old snapshots remain readable; incompatible schemas and corrupt artifacts are quarantined without poisoning current results.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/incremental-data.test.ts"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-017",
+      "title": "Dispose every eligible collection in the inventory snapshot",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G020",
+      "subgoal_id": "WWL-G020.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-018"
+      ],
+      "repository": "site",
+      "outputs": [
+        "data/worldwide/ingestion-ledger.json",
+        "docs/worldwide/coverage-audit.json"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-017.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "data/worldwide/",
+        "docs/worldwide/"
+      ],
+      "acceptance": "Wait for every required bounded source child task admitted by WWL-018; every public eligible collection in the pinned inventory has a verified ingest receipt, while missing or inaccessible required inputs remain explicit blockers. National and local counts must be traceable.",
+      "validation_argv": [
+        [
+          "node",
+          "scripts/worldwide/audit.mjs",
+          "inventory-closure"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-018",
+      "title": "Expand the inventory into bounded native source child tasks",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G020",
+      "subgoal_id": "WWL-G020.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-016",
+        "WWL-047",
+        "WWL-081"
+      ],
+      "repository": "accelerate",
+      "outputs": [
+        "test/api/test_worldwide_legal_search_source_expansion.py",
+        "docs/worldwide/source-expansion.json",
+        "ipfs_accelerate_py/agent_supervisor/project_adapters/worldwide_legal_search_source_expansion.py"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-018.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "docs/worldwide/",
+        "ipfs_accelerate_py/agent_supervisor/project_adapters/",
+        "test/api/"
+      ],
+      "acceptance": "Admit deterministic per-source/config/split/jurisdiction/shard normalize, index, geography, immutable publication and verification tasks through native APIs; bind inventory and active plan revision, preserve blockers, join every required receipt in WWL-017, and refresh the persisted watchdog task set without resetting budgets.",
+      "validation_argv": [
+        [
+          "python3",
+          "-m",
+          "pytest",
+          "test/api/test_worldwide_legal_search_source_expansion.py",
+          "-q"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-020",
+      "title": "Define the dated jurisdiction and issuer graph",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G030",
+      "subgoal_id": "WWL-G030.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-013"
+      ],
+      "repository": "site",
+      "outputs": [
+        "src/lib/worldwide/jurisdiction/schema.ts",
+        "tests/worldwide/jurisdiction-schema.test.ts"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-020.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "src/lib/worldwide/jurisdiction/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Support arbitrary levels, multiple parents/coverage relations, issuer IDs, boundaries, aliases, validity intervals, disputed views and explicit unknown relationships without requiring a city for every place.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/jurisdiction-schema.test.ts"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-021",
+      "title": "Acquire and validate the place boundary and identifier registry",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G030",
+      "subgoal_id": "WWL-G030.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-012",
+        "WWL-020"
+      ],
+      "repository": "site",
+      "outputs": [
+        "scripts/worldwide/build-places.ts",
+        "data/worldwide/geography-manifest.json"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-021.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "data/worldwide/",
+        "scripts/worldwide/"
+      ],
+      "acceptance": "Choose licensed, revisioned global country/admin/place data; verify municipality detail availability, attribution, native aliases, coverage limits and a small hierarchical download layout.",
+      "validation_argv": [
+        [
+          "node",
+          "scripts/worldwide/audit.mjs",
+          "geography"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-022",
+      "title": "Implement bounded point and place resolution",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G030",
+      "subgoal_id": "WWL-G030.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-021"
+      ],
+      "repository": "site",
+      "outputs": [
+        "src/lib/worldwide/jurisdiction/resolve.ts",
+        "tests/worldwide/geography.test.ts"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-022.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "src/lib/worldwide/jurisdiction/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Indexed geometry checks handle enclaves, holes, unincorporated areas, islands, antimeridian and border uncertainty; candidate sets and reasons match independently curated fixtures.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/geography.test.ts"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-023",
+      "title": "Join law issuers territorial scope and administrative parents",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G030",
+      "subgoal_id": "WWL-G030.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-014",
+        "WWL-022"
+      ],
+      "repository": "site",
+      "outputs": [
+        "src/lib/worldwide/jurisdiction/authority.ts",
+        "tests/worldwide/authority-stack.test.ts"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-023.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "src/lib/worldwide/jurisdiction/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Return national/regional/local and evidenced special/supranational candidates, preserve issuer/territory distinctions and unknown links, and explain inclusion without assuming proximity establishes applicability.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/authority-stack.test.ts"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-024",
+      "title": "Implement date-aware candidate scope and law status",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G030",
+      "subgoal_id": "WWL-G030.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-023"
+      ],
+      "repository": "site",
+      "outputs": [
+        "src/lib/worldwide/jurisdiction/temporal.ts",
+        "tests/worldwide/temporal-scope.test.ts"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-024.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "src/lib/worldwide/jurisdiction/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "As-of scope uses boundary and law validity, partial dates and source timezones; unknown is not current; commencement, publication, amendment and repeal are separate fields.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/temporal-scope.test.ts"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-025",
+      "title": "Curate cross-system jurisdiction and coverage reference cases",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G030",
+      "subgoal_id": "WWL-G030.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-024",
+        "WWL-015"
+      ],
+      "repository": "site",
+      "outputs": [
+        "tests/worldwide/fixtures/jurisdiction-cases.json",
+        "docs/worldwide/jurisdiction-evaluation.json"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-025.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "docs/worldwide/",
+        "tests/worldwide/fixtures/"
+      ],
+      "acceptance": "Use real cited fixtures for NL, a federal system, multilingual law, RTL/non-Latin text, special/overlapping authority and absent municipal coverage; record uncertainty rather than inventing legal conclusions.",
+      "validation_argv": [
+        [
+          "node",
+          "scripts/worldwide/audit.mjs",
+          "jurisdiction-fixtures"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-030",
+      "title": "Implement the place state machine and stable URL contract",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G040",
+      "subgoal_id": "WWL-G040.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-006",
+        "WWL-020"
+      ],
+      "repository": "site",
+      "outputs": [
+        "src/lib/worldwide/location/state.ts",
+        "src/lib/worldwide/routes.ts",
+        "tests/worldwide/location-state.test.ts"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-030.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "src/lib/worldwide/",
+        "src/lib/worldwide/location/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "URL/manual/saved choices outrank suggestions, late responses cannot override them, place/time survive navigation, precise coordinates are excluded from default shared links and old Dutch links have a tested migration path.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/location-state.test.ts"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-031",
+      "title": "Deliver accessible manual place search and disambiguation",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G040",
+      "subgoal_id": "WWL-G040.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-022",
+        "WWL-030"
+      ],
+      "repository": "site",
+      "outputs": [
+        "src/components/worldwide/PlacePicker.tsx",
+        "tests/worldwide/place-picker.test.tsx"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-031.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "src/components/worldwide/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Country, regional and municipality selection work without geolocation or a map; native aliases, duplicate names, optional licensed postcodes and coordinate entry preserve full parent context and keyboard navigation.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/place-picker.test.tsx"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-032",
+      "title": "Evaluate and implement a replaceable GeoIP suggestion provider",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G040",
+      "subgoal_id": "WWL-G040.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-030",
+        "WWL-012"
+      ],
+      "repository": "site",
+      "outputs": [
+        "docs/worldwide/geoip-provider-decision.json",
+        "src/lib/worldwide/location/geoip.ts",
+        "tests/worldwide/geoip.test.ts"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-032.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "docs/worldwide/",
+        "src/lib/worldwide/location/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Verify current terms, CORS, quota, location precision and retention from the Pages origin; use no secret, one bounded approximate suggestion, clear disclosure/opt-out and complete manual fallback; never send search text.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/geoip.test.ts"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-033",
+      "title": "Implement optional device location and privacy controls",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G040",
+      "subgoal_id": "WWL-G040.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-022",
+        "WWL-031"
+      ],
+      "repository": "site",
+      "outputs": [
+        "src/lib/worldwide/location/device.ts",
+        "src/components/worldwide/LocationPrivacy.tsx",
+        "tests/worldwide/device-location.test.ts"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-033.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "src/components/worldwide/",
+        "src/lib/worldwide/location/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Only a user action requests browser permission; resolve locally where possible; denial/timeouts work, no coordinate history is retained, clear/reset actions and a no-third-party mode work.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/device-location.test.ts"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-034",
+      "title": "Verify location races and changes end to end",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G040",
+      "subgoal_id": "WWL-G040.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-031",
+        "WWL-032",
+        "WWL-033",
+        "WWL-052"
+      ],
+      "repository": "site",
+      "outputs": [
+        "tests/worldwide/location.spec.ts"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-034.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Delayed IP/device responses, URL navigation, VPN/coarse results, border choices and manual changes never show results from a stale scope; keyboard and mobile place changes are usable.",
+      "validation_argv": [
+        [
+          "npm",
+          "run",
+          "test:playwright",
+          "--",
+          "tests/worldwide/location.spec.ts"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-040",
+      "title": "Implement immutable artifact transport and measured Viewer compatibility",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G050",
+      "subgoal_id": "WWL-G050.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-015"
+      ],
+      "repository": "site",
+      "outputs": [
+        "src/lib/worldwide/data/transport.ts",
+        "tests/worldwide/transport.test.ts"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-040.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "src/lib/worldwide/data/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Bound retries, cancellation, CORS/Range capability discovery and viewer config/split pagination; forbid revision-mixing, unbounded country downloads and any assumption that viewer joins or pinning are supported.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/transport.test.ts"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-041",
+      "title": "Port language-aware tokenization and exact citation lookup",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G050",
+      "subgoal_id": "WWL-G050.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-014"
+      ],
+      "repository": "site",
+      "outputs": [
+        "src/lib/worldwide/search/tokenize.ts",
+        "src/lib/worldwide/search/citation.ts",
+        "tests/worldwide/tokenizer-parity.test.ts"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-041.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "src/lib/worldwide/search/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Match pinned upstream tokenization where selected, preserve native identifiers and diacritics, add explicit script/language strategies and exact citation fixtures; document unsupported linguistic behavior.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/tokenizer-parity.test.ts"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-042",
+      "title": "Implement offline TS shard and index preparation",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G050",
+      "subgoal_id": "WWL-G050.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-040",
+        "WWL-041"
+      ],
+      "repository": "site",
+      "outputs": [
+        "scripts/worldwide/build-index.ts",
+        "data/worldwide/index-format.schema.json",
+        "tests/worldwide/index-format.test.ts"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-042.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "data/worldwide/",
+        "scripts/worldwide/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Reuse measured compatible country IR or emit versioned compact postings/document summaries with checksums and term routing; schema encodes shard bytes, coverage and tokenizer; no full corpus is bundled on Pages.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/index-format.test.ts"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-043",
+      "title": "Implement bounded worker BM25 retrieval with parity checks",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G050",
+      "subgoal_id": "WWL-G050.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-042"
+      ],
+      "repository": "site",
+      "outputs": [
+        "src/workers/worldwideSearchWorker.ts",
+        "src/lib/worldwide/search/bm25.ts",
+        "tests/worldwide/bm25-parity.test.ts"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-043.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "src/lib/worldwide/search/",
+        "src/workers/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Search actual compact postings with deterministic scores/ties and cancellation under memory/traversal budgets; compare selected Python reference cases and exercise worker failure without main-thread freezing.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/bm25-parity.test.ts"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-044",
+      "title": "Implement place-scoped federated retrieval and rank fusion",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G050",
+      "subgoal_id": "WWL-G050.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-023",
+        "WWL-024",
+        "WWL-043"
+      ],
+      "repository": "site",
+      "outputs": [
+        "src/lib/worldwide/search/planner.ts",
+        "src/lib/worldwide/search/fusion.ts",
+        "tests/worldwide/search-scope.test.ts"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-044.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "src/lib/worldwide/search/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Select the complete supported authority stack before ranking, isolate strict filters, reconcile duplicates and versions, fuse cross-index results reproducibly and show searched/missing source counts.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/search-scope.test.ts"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-045",
+      "title": "Implement progressive worldwide search without per-country fanout",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G050",
+      "subgoal_id": "WWL-G050.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-044"
+      ],
+      "repository": "site",
+      "outputs": [
+        "scripts/worldwide/build-global-routing.ts",
+        "src/lib/worldwide/search/global.ts",
+        "tests/worldwide/worldwide-search.test.ts"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-045.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "scripts/worldwide/",
+        "src/lib/worldwide/search/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Hierarchical global term/citation routing bounds requests and bytes; common-term queries paginate stably and display partial coverage; continuation visits remaining shards without claiming an unsearched total.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/worldwide-search.test.ts"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-046",
+      "title": "Add revision-keyed caching and offline saved sources",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G050",
+      "subgoal_id": "WWL-G050.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-040",
+        "WWL-044"
+      ],
+      "repository": "site",
+      "outputs": [
+        "src/lib/worldwide/data/cache.ts",
+        "tests/worldwide/cache.test.ts"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-046.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "src/lib/worldwide/data/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "CacheStorage/IndexedDB use integrity keys, LRU and quota bounds, no personal location/query history, visible stale/offline state and atomic catalog invalidation; corruption and storage exhaustion are recoverable.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/cache.test.ts"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-047",
+      "title": "Prove real multi-country national regional and local retrieval",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G050",
+      "subgoal_id": "WWL-G050.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-045",
+        "WWL-046",
+        "WWL-025"
+      ],
+      "repository": "site",
+      "outputs": [
+        "tests/worldwide/fixtures/retrieval-evaluation.json",
+        "docs/worldwide/retrieval-evaluation.json"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-047.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "docs/worldwide/",
+        "tests/worldwide/fixtures/"
+      ],
+      "acceptance": "Search real cited national/regional/municipal records and representative non-Latin queries, measure recall on labelled judgments and exclude wrong jurisdictions; unsupported source coverage stays explicit.",
+      "validation_argv": [
+        [
+          "node",
+          "scripts/worldwide/audit.mjs",
+          "retrieval-evaluation"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-050",
+      "title": "Specify worldwide visual system and all interaction states",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G060",
+      "subgoal_id": "WWL-G060.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-000",
+        "WWL-025",
+        "WWL-030"
+      ],
+      "repository": "site",
+      "outputs": [
+        "docs/worldwide/design.md",
+        "docs/worldwide/interaction-states.json",
+        "src/styles/worldwide.css"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-050.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "docs/worldwide/",
+        "src/styles/"
+      ],
+      "acceptance": "Provide desktop/mobile wireframes, type/spacing/color tokens, search-first hierarchy, complete required states, scope/coverage wording, translated labels, RTL and keyboard flows; no mandatory map or model.",
+      "validation_argv": [
+        [
+          "node",
+          "scripts/worldwide/audit.mjs",
+          "ux-contract"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-051",
+      "title": "Implement the global application shell navigation and context",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G060",
+      "subgoal_id": "WWL-G060.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-050",
+        "WWL-031"
+      ],
+      "repository": "site",
+      "outputs": [
+        "src/components/worldwide/WorldwideLegalSearchApp.tsx",
+        "src/components/worldwide/SearchContext.tsx",
+        "src/AppStatic.tsx",
+        "src/main.tsx",
+        "src/index.css",
+        "index.html",
+        "src/styles/worldwide.css",
+        "tests/worldwide/shell.test.tsx"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-051.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "index.html",
+        "src/",
+        "src/components/worldwide/",
+        "src/styles/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Place, as-of date and language stay visible; the shell loads without old niche initial queries, login, proxy or model warmup; preserve feature-flagged NL migration and semantic landmarks.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/shell.test.tsx"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-052",
+      "title": "Implement search results filters and authority context",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G060",
+      "subgoal_id": "WWL-G060.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-051",
+        "WWL-044"
+      ],
+      "repository": "site",
+      "outputs": [
+        "src/components/worldwide/SearchResults.tsx",
+        "src/components/worldwide/SearchFilters.tsx",
+        "src/components/worldwide/JurisdictionStack.tsx",
+        "tests/worldwide/results.test.tsx"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-052.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "src/components/worldwide/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Display national/regional/local candidates together, exact query highlights, original title, citation, issuer, date/status, source and inclusion reason; filters, cancellation and stale-result prevention execute production retrieval.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/results.test.tsx"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-053",
+      "title": "Implement a versioned accessible law reader",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G060",
+      "subgoal_id": "WWL-G060.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-052",
+        "WWL-024"
+      ],
+      "repository": "site",
+      "outputs": [
+        "src/components/worldwide/LawReader.tsx",
+        "tests/worldwide/reader.test.tsx"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-053.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "src/components/worldwide/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Read real source sections with citation/version, official links, status, article navigation, labelled translations, rights and provenance; copy/share retains exact revision and return navigation retains query/scroll.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/reader.test.tsx"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-054",
+      "title": "Implement place source and coverage pages",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G060",
+      "subgoal_id": "WWL-G060.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-053",
+        "WWL-015"
+      ],
+      "repository": "site",
+      "outputs": [
+        "src/components/worldwide/CoveragePage.tsx",
+        "src/components/worldwide/PlacePage.tsx",
+        "src/components/worldwide/SourcePage.tsx",
+        "tests/worldwide/coverage-ui.test.tsx"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-054.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "src/components/worldwide/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Expose coverage by jurisdiction and level, freshness and known denominators, source lineage and explicit missing/unknown municipal states; empty search cannot imply no law exists.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/coverage-ui.test.tsx"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-055",
+      "title": "Implement internationalization and RTL behavior",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G060",
+      "subgoal_id": "WWL-G060.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-053"
+      ],
+      "repository": "site",
+      "outputs": [
+        "src/lib/worldwide/i18n.ts",
+        "src/locales/worldwide/",
+        "tests/worldwide/i18n.test.tsx"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-055.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "src/lib/worldwide/",
+        "src/locales/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Separate UI locale from law language and search jurisdiction, format dates with precision, render native titles/RTL/CJK correctly and label machine translations; no browser-language jurisdiction inference.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/i18n.test.tsx"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-056",
+      "title": "Verify responsive accessible search and reader flows",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G060",
+      "subgoal_id": "WWL-G060.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-054",
+        "WWL-055",
+        "WWL-034"
+      ],
+      "repository": "site",
+      "outputs": [
+        "tests/worldwide/accessibility.spec.ts",
+        "tests/worldwide/visual.spec.ts"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-056.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Check keyboard-only interaction, screen-reader state announcements, contrast/focus/reduced motion, zoom/reflow/mobile and RTL with recorded screenshots and an accessibility audit; fix observed issues.",
+      "validation_argv": [
+        [
+          "npm",
+          "run",
+          "test:playwright",
+          "--",
+          "tests/worldwide/accessibility.spec.ts",
+          "tests/worldwide/visual.spec.ts"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-070",
+      "title": "Integrate bounded source citations and graph navigation",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G070",
+      "subgoal_id": "WWL-G070.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-053",
+        "WWL-043"
+      ],
+      "repository": "site",
+      "outputs": [
+        "src/lib/worldwide/research/graph.ts",
+        "tests/worldwide/graph-parity.test.ts"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-070.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "src/lib/worldwide/research/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Port selected citation/structure expansion with node/depth/network budgets and original source evidence; graph absence never blocks the reader or promotes a relationship to an applicability claim.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/graph-parity.test.ts"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-071",
+      "title": "Add optional semantic reranking with explicit download consent",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G070",
+      "subgoal_id": "WWL-G070.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-047",
+        "WWL-053"
+      ],
+      "repository": "site",
+      "outputs": [
+        "src/lib/worldwide/research/semantic.ts",
+        "tests/worldwide/semantic-fallback.test.ts"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-071.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "src/lib/worldwide/research/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Measure multilingual benefit before enabling optional model downloads, pin model/embedding versions and budgets, preserve lexical results with no WebGPU/network/model, and remove automatic heavyweight warmup.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/semantic-fallback.test.ts"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-072",
+      "title": "Integrate cited optional answers and existing proof summaries",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G070",
+      "subgoal_id": "WWL-G070.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-070",
+        "WWL-071"
+      ],
+      "repository": "site",
+      "outputs": [
+        "src/components/worldwide/ResearchPanel.tsx",
+        "tests/worldwide/evidence.test.tsx"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-072.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "src/components/worldwide/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Answers reference the exact retrieved version, distinguish generated/translated/source material and simulated/unknown proof output, resist document prompt injection, and never make search depend on an LLM or backend.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/evidence.test.tsx"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-073",
+      "title": "Implement explicit cross-place comparison",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G070",
+      "subgoal_id": "WWL-G070.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-054",
+        "WWL-072",
+        "WWL-045"
+      ],
+      "repository": "site",
+      "outputs": [
+        "src/components/worldwide/ComparePlaces.tsx",
+        "tests/worldwide/compare.test.tsx"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-073.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "src/components/worldwide/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Compare two manually selected place scopes with aligned dates, sources and coverage gaps; results retain jurisdiction identity and cannot merge contradictory local rules into one asserted answer.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/compare.test.tsx"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-080",
+      "title": "Audit browser-only dependency and deployment boundaries",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G080",
+      "subgoal_id": "WWL-G080.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-051",
+        "WWL-043"
+      ],
+      "repository": "site",
+      "outputs": [
+        "docs/worldwide/browser-boundary.json",
+        "tests/worldwide/browser-boundary.test.ts",
+        "vite.config.ts"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-080.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "docs/worldwide/",
+        "tests/worldwide/",
+        "vite.config.ts"
+      ],
+      "acceptance": "Demonstrate core search without Node-only modules, Convex, proxies, Python, login, GPU or secrets; production workers/WASM run without relying on development COOP/COEP headers.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/browser-boundary.test.ts"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-081",
+      "title": "Measure corpus shard scale memory and network budgets",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G080",
+      "subgoal_id": "WWL-G080.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-047",
+        "WWL-080"
+      ],
+      "repository": "site",
+      "outputs": [
+        "scripts/worldwide/benchmark.ts",
+        "docs/worldwide/performance.json",
+        "vite.config.ts",
+        "src/lib/worldwide/search/global.ts",
+        "src/lib/worldwide/data/transport.ts",
+        "src/workers/worldwideSearchWorker.ts"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-081.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "docs/worldwide/",
+        "scripts/worldwide/",
+        "src/lib/worldwide/data/",
+        "src/lib/worldwide/search/",
+        "src/workers/",
+        "vite.config.ts"
+      ],
+      "acceptance": "Record cold/warm p95, shell/catalog/query transfers, four-request concurrency, memory, common-term global fanout and cancellation at representative scale against PLAN.md targets; fix regressions rather than reducing scope invisibly.",
+      "validation_argv": [
+        [
+          "node",
+          "scripts/worldwide/audit.mjs",
+          "performance"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-082",
+      "title": "Exercise source and transport failures from a static origin",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G080",
+      "subgoal_id": "WWL-G080.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-046",
+        "WWL-054"
+      ],
+      "repository": "site",
+      "outputs": [
+        "tests/worldwide/transport.spec.ts",
+        "docs/worldwide/hosted-transport.json"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-082.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "docs/worldwide/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Verify real Pages-origin CORS/Range or shard fallback with dated probes, plus deterministic 429/outage/corruption/missing-Viewer/capped-results cases; partial/sample/offline states remain explicit.",
+      "validation_argv": [
+        [
+          "npm",
+          "run",
+          "test:playwright",
+          "--",
+          "tests/worldwide/transport.spec.ts"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-083",
+      "title": "Harden untrusted content and location privacy",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G080",
+      "subgoal_id": "WWL-G080.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-055",
+        "WWL-072"
+      ],
+      "repository": "site",
+      "outputs": [
+        "tests/worldwide/security.test.ts",
+        "docs/worldwide/privacy.md"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-083.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "docs/worldwide/",
+        "tests/worldwide/"
+      ],
+      "acceptance": "Exercise malicious HTML/links, query/filter injection, oversized artifacts, manifest redirects, prompt injection and cache privacy; inspect build artifacts for secrets or operational state and document external requests.",
+      "validation_argv": [
+        [
+          "npm",
+          "test",
+          "--",
+          "--runInBand",
+          "--runTestsByPath",
+          "tests/worldwide/security.test.ts"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-084",
+      "title": "Require CI gates and preserve existing relevant regressions",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G080",
+      "subgoal_id": "WWL-G080.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-056",
+        "WWL-080",
+        "WWL-083"
+      ],
+      "repository": "site",
+      "outputs": [
+        ".github/workflows/worldwide-checks.yml",
+        "docs/worldwide/regression-selection.json",
+        ".github/workflows/deploy.yml"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-084.json",
+      "write_scope": [
+        ".github/workflows/",
+        "artifacts/worldwide-legal-search/receipts/",
+        "docs/worldwide/"
+      ],
+      "acceptance": "Typecheck/build, meaningful unit/integration/browser tests, corpus integrity, NL compatibility and reused logic parity must pass; remove continue-on-error from required gates without erasing preexisting failures.",
+      "validation_argv": [
+        [
+          "node",
+          "scripts/worldwide/audit.mjs",
+          "ci-contract"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-085",
+      "title": "Run independent product acceptance against the accepted tree",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G080",
+      "subgoal_id": "WWL-G080.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-017",
+        "WWL-073",
+        "WWL-081",
+        "WWL-082",
+        "WWL-084"
+      ],
+      "repository": "site",
+      "outputs": [
+        "docs/worldwide/product-acceptance.json"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-085.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "docs/worldwide/"
+      ],
+      "acceptance": "A separate validation actor executes the recorded place/date/citation/coverage/RTL/mobile/no-backend scenarios against the actual accepted production build; report exact commits, test evidence and unresolved gaps.",
+      "validation_argv": [
+        [
+          "node",
+          "scripts/worldwide/audit.mjs",
+          "product-acceptance"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-100",
+      "title": "Define meaningful progress and durable incident identity",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G090",
+      "subgoal_id": "WWL-G090.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-004"
+      ],
+      "repository": "accelerate",
+      "outputs": [
+        "ipfs_accelerate_py/agent_supervisor/project_adapters/worldwide_legal_search_progress.py",
+        "test/api/test_worldwide_legal_search_progress.py"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-100.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "ipfs_accelerate_py/agent_supervisor/project_adapters/",
+        "test/api/"
+      ],
+      "acceptance": "Observe canonical task/validation/merge stages and accepted artifact changes; log/heartbeat spam, PID changes and repeated same-stage retries do not reset progress or repair budgets.",
+      "validation_argv": [
+        [
+          "python3",
+          "-m",
+          "pytest",
+          "test/api/test_worldwide_legal_search_progress.py",
+          "-q"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-101",
+      "title": "Bind bounded deterministic recovery and lifecycle ownership",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G090",
+      "subgoal_id": "WWL-G090.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-100"
+      ],
+      "repository": "accelerate",
+      "outputs": [
+        "test/api/test_worldwide_legal_search_recovery.py",
+        "ipfs_accelerate_py/agent_supervisor/project_adapters/worldwide_legal_search_recovery.py"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-101.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "ipfs_accelerate_py/agent_supervisor/project_adapters/",
+        "test/api/"
+      ],
+      "acceptance": "Native recovery verifies PID birth and process/lease generation, handles stale claims/dead worker/idle runnable queue, preserves unknown effects and obeys holds, deadlines and durable recovery bounds.",
+      "validation_argv": [
+        [
+          "python3",
+          "-m",
+          "pytest",
+          "test/api/test_worldwide_legal_search_recovery.py",
+          "-q"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-102",
+      "title": "Bind automatic isolated supervisor repair and validated promotion",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G090",
+      "subgoal_id": "WWL-G090.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-101",
+        "WWL-003"
+      ],
+      "repository": "accelerate",
+      "outputs": [
+        "test/api/test_worldwide_legal_search_repair.py",
+        "docs/worldwide/repair-contract.md",
+        "ipfs_accelerate_py/agent_supervisor/project_adapters/worldwide_legal_search_repair.py"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-102.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "docs/worldwide/",
+        "ipfs_accelerate_py/agent_supervisor/project_adapters/",
+        "test/api/"
+      ],
+      "acceptance": "Deduplicate a repair task from a reproduced native defect; Grok through llm_router edits only a campaign-owned repair worktree, permitted paths and reproducer; run regressions/canary, promote via native merge, reload/fence and retain rollback evidence.",
+      "validation_argv": [
+        [
+          "python3",
+          "-m",
+          "pytest",
+          "test/api/test_worldwide_legal_search_repair.py",
+          "-q"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-103",
+      "title": "Test quota fallback unknown effects and repair nonconvergence",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G090",
+      "subgoal_id": "WWL-G090.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-102"
+      ],
+      "repository": "accelerate",
+      "outputs": [
+        "test/api/test_worldwide_legal_search_faults.py"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-103.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "test/api/"
+      ],
+      "acceptance": "Inject quota/auth/unavailable, transport loss after mutation, malformed output, dead supervisor, live-heartbeat frozen progress and repeated repair defects; no duplicate writer, false success or attempt refund is permitted.",
+      "validation_argv": [
+        [
+          "python3",
+          "-m",
+          "pytest",
+          "test/api/test_worldwide_legal_search_faults.py",
+          "-q"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-104",
+      "title": "Classify blockers and continue independent ready work",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G090",
+      "subgoal_id": "WWL-G090.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-101"
+      ],
+      "repository": "accelerate",
+      "outputs": [
+        "test/api/test_worldwide_legal_search_blockers.py",
+        "ipfs_accelerate_py/agent_supervisor/project_adapters/worldwide_legal_search_blockers.py"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-104.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "ipfs_accelerate_py/agent_supervisor/project_adapters/",
+        "test/api/"
+      ],
+      "acceptance": "Distinguish dependency-running, software-defect, source outage, gated input, credentials, permission, hold and exhausted budget; continue independent tasks and recheck only by admitted probes or changed prerequisites.",
+      "validation_argv": [
+        [
+          "python3",
+          "-m",
+          "pytest",
+          "test/api/test_worldwide_legal_search_blockers.py",
+          "-q"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-105",
+      "title": "Verify watchdog persistence restart and guardian behavior",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G090",
+      "subgoal_id": "WWL-G090.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-103",
+        "WWL-104"
+      ],
+      "repository": "accelerate",
+      "outputs": [
+        "test/api/test_worldwide_legal_search_watchdog_restart.py",
+        "docs/worldwide/host-operation.md",
+        "ipfs_accelerate_py/agent_supervisor/project_adapters/worldwide_legal_search_watchdog.py"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-105.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "docs/worldwide/",
+        "ipfs_accelerate_py/agent_supervisor/project_adapters/",
+        "test/api/"
+      ],
+      "acceptance": "Restart loop and supervisor during in-flight recovery; deduplication, cooldown, attempt accounting and stop/hold survive; optional systemd guardian revives only this registered loop with bounded restarts and a hold-aware start check.",
+      "validation_argv": [
+        [
+          "python3",
+          "-m",
+          "pytest",
+          "test/api/test_worldwide_legal_search_watchdog_restart.py",
+          "-q"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-106",
+      "title": "Implement and test native completion verification",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G090",
+      "subgoal_id": "WWL-G090.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-105"
+      ],
+      "repository": "accelerate",
+      "outputs": [
+        "test/api/test_worldwide_legal_search_completion.py",
+        "ipfs_accelerate_py/agent_supervisor/project_adapters/worldwide_legal_search_completion.py"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-106.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "ipfs_accelerate_py/agent_supervisor/project_adapters/",
+        "test/api/"
+      ],
+      "acceptance": "Implement the verifier and prove with valid and adversarial fixtures that done flags, zero exit, stale receipts, skipped work, unresolved source blockers and absent release evidence cannot establish completion; do not require the actual future release to complete this verifier implementation task.",
+      "validation_argv": [
+        [
+          "python3",
+          "-m",
+          "pytest",
+          "test/api/test_worldwide_legal_search_completion.py",
+          "-q"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-110",
+      "title": "Document source refresh and operational maintenance",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G100",
+      "subgoal_id": "WWL-G100.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-016",
+        "WWL-105",
+        "WWL-084"
+      ],
+      "repository": "site",
+      "outputs": [
+        "docs/worldwide/maintenance.md",
+        "scripts/worldwide/refresh.ts"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-110.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "docs/worldwide/",
+        "scripts/worldwide/"
+      ],
+      "acceptance": "A repeatable TS refresh pipeline pins changes, audits rights/schema/coverage and rolls back atomically; source maintenance and host supervisor operations have clear ownership and no credentials enter the site.",
+      "validation_argv": [
+        [
+          "node",
+          "scripts/worldwide/audit.mjs",
+          "maintenance"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-111",
+      "title": "Build and verify the GitHub Pages release candidate",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G100",
+      "subgoal_id": "WWL-G100.S1",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-085",
+        "WWL-106",
+        "WWL-110"
+      ],
+      "repository": "site",
+      "outputs": [
+        "docs/worldwide/release-candidate.json",
+        ".github/workflows/deploy.yml"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-111.json",
+      "write_scope": [
+        ".github/workflows/",
+        "artifacts/worldwide-legal-search/receipts/",
+        "docs/worldwide/"
+      ],
+      "acceptance": "Build clean static output with small shell, hash deep links, .nojekyll, current route redirects and no server/secret dependency; required checks block deployment and preview evidence binds the exact commit.",
+      "validation_argv": [
+        [
+          "node",
+          "scripts/worldwide/audit.mjs",
+          "release-candidate"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-112",
+      "title": "Deploy through the repository GitHub Pages workflow",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G100",
+      "subgoal_id": "WWL-G100.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-111"
+      ],
+      "repository": "site",
+      "outputs": [
+        "docs/worldwide/deployment.json"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-112.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "docs/worldwide/"
+      ],
+      "acceptance": "Use the existing repository release authority and configured GitHub environment to publish the verified commit; record Actions run, artifact digest and resulting URL, or retain a typed external blocker when release authority is unavailable.",
+      "validation_argv": [
+        [
+          "node",
+          "scripts/worldwide/audit.mjs",
+          "deployment"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-113",
+      "title": "Verify the public release and rollback path",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G100",
+      "subgoal_id": "WWL-G100.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-112"
+      ],
+      "repository": "site",
+      "outputs": [
+        "docs/worldwide/public-smoke.json",
+        "docs/worldwide/rollback.md"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-113.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "docs/worldwide/"
+      ],
+      "acceptance": "Exercise place search, real source reading, manual override, direct deep links, no-backend mode and coverage on the public Pages URL; compare artifact identity, test rollback in a preview and preserve the prior release.",
+      "validation_argv": [
+        [
+          "node",
+          "scripts/worldwide/audit.mjs",
+          "public-smoke"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    },
+    {
+      "id": "WWL-114",
+      "title": "Prepare final campaign evidence and continued coverage work",
+      "status": "todo",
+      "completion": "auto",
+      "goal_id": "WWL-G100",
+      "subgoal_id": "WWL-G100.S2",
+      "root_goal_id": "WWL-G000",
+      "depends_on": [
+        "WWL-113",
+        "WWL-017",
+        "WWL-106"
+      ],
+      "repository": "site",
+      "outputs": [
+        "docs/worldwide/campaign-closure.json",
+        "docs/worldwide/future-coverage.json"
+      ],
+      "evidence_output": "artifacts/worldwide-legal-search/receipts/WWL-114.json",
+      "write_scope": [
+        "artifacts/worldwide-legal-search/receipts/",
+        "docs/worldwide/"
+      ],
+      "acceptance": "Verify prior required task/source/public-release evidence, prepare closure metadata with its own receipt explicitly pending, and export remaining worldwide coverage; after this task receives independent admission and merge, native root reconciliation verifies every receipt including WWL-114, publishes root completion and drains owned workers. This task must not require its own future receipt to exist.",
+      "validation_argv": [
+        [
+          "node",
+          "scripts/worldwide/audit.mjs",
+          "campaign-closure"
+        ]
+      ],
+      "bounds": {
+        "max_attempts": 3,
+        "wall_seconds_per_attempt": 5400,
+        "validation_reserve_percent": 25
+      },
+      "preconditions": [
+        "Dependencies have current admitted receipts",
+        "Worktree and native task lease belong to this run",
+        "Write scope and provider budget admitted"
+      ],
+      "completion_evidence": [
+        "Accepted commit and tree",
+        "Actual validation argv and exit status",
+        "Required outputs with hashes",
+        "Independent native validation and merge receipt",
+        "Known limitations and source revisions"
+      ],
+      "recovery": "Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete"
+    }
+  ]
+}

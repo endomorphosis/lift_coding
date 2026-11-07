@@ -1,0 +1,73 @@
+{
+  "schema": "worldwide-legal-search.research@1",
+  "inspection_date": "2026-10-26",
+  "repositories": [
+    {
+      "role": "product",
+      "path": "/home/barberb/worldwidelaws.github.io",
+      "head": "0793a9efefbee25e3ccaa08f5723556b33389350",
+      "observed_worktree": "clean before installing this planning package",
+      "inspected": ["package.json", "ARCHITECTURE.md", "vite.config.ts", "src/components/WetWijzerLegalResearchApp.tsx", "src/lib/netherlandsCorpus.ts", "docs/GITHUB_PAGES_DEPLOYMENT.md", ".github/workflows/deploy.yml"],
+      "findings": [
+        "Vite React TypeScript frontend named wetwijzer with Netherlands initial examples and data providers",
+        "Unified justicedao/wetwijzer_netherlands_legal_corpus plus legacy Dutch corpus/vector/BM25/graph datasets in provider code",
+        "Existing provider fallback can use a small static sample; global UX must label this explicitly",
+        "Initial component effect warms a client model; search-first UX should make heavyweight inference optional",
+        "Development COOP/COEP headers are configured; deployed Pages isolation was not tested",
+        "GitHub Pages Actions workflow exists; the separate typecheck step has continue-on-error true"
+      ]
+    },
+    {
+      "role": "native supervisor and router",
+      "path": "/home/barberb/ipfs_accelerate_py",
+      "head": "e6c05aeccf73f1d9bf6f7d0a1a44931ad5fa0bd5",
+      "observed_worktree": "unrelated nested repository changes present; no operational source edits made by this plan",
+      "inspected": ["ipfs_accelerate_py/llm_router.py", "ipfs_accelerate_py/agent_supervisor/provider_fallback_runner.py", "ipfs_accelerate_py/agent_supervisor/todo_daemon/README.md", "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py", "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py", "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor_runner.py", "ipfs_accelerate_py/agent_supervisor/objectives/objective_graph.py", "ipfs_accelerate_py/agent_supervisor/rescue/campaign_watchdog.py", "ipfs_accelerate_py/agent_supervisor/rescue/supervisor_watchdog.py", "ipfs_accelerate_py/agent_supervisor/rescue/watchdog_guardian.py"],
+      "findings": [
+        "Native task format uses ## TASK-ID Title and - Field: value records, including Status, Completion, Depends on, Outputs, Validation and Acceptance",
+        "Native objectives parse parent_goal_ids_json and arbitrary goal IDs; the plan uses a root, ten goals and twenty subgoals",
+        "load_supervisor_scheduler_config validates scheduler_config@1 profiles without authorizing execution",
+        "Explicit Grok-to-Codex agent route decisions belong to llm_router and reject cross-provider fallback after unknown or mutated effects",
+        "Current router defaults support grok-4.7",
+        "Native SupervisorWatchdog exposes lifecycle_restart and optional rescue planner/orchestrator factories; its default module CLI does not bind these",
+        "Generic enabling of rescue policy booleans is not evidence of wired automatic repair; this is assigned to campaign bootstrap tasks"
+      ]
+    },
+    {
+      "role": "primary datasets porting reference",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets",
+      "head": "7ba681c2eea75ced6592254bf1125d10464b2c2b",
+      "observed_worktree": "unrelated vector-store changes and nested supervisor changes present; read-only reference",
+      "inspected": ["ipfs_datasets_py/processors/legal_scrapers/country_laws_ir/schema.py", "ipfs_datasets_py/processors/legal_scrapers/country_laws_ir/", "ipfs_datasets_py/processors/legal_scrapers/netherlands_laws/", "ipfs_datasets_py/processors/legal_scrapers/national_collectors/", "ipfs_datasets_py/processors/legal_scrapers/hub_integrated/justicedao_world_law_scrapers/"],
+      "findings": [
+        "Newer country IR normalization, schema, BM25, tokenizer, graph, packaging, coverage, catalog and verification surfaces exist",
+        "Schema reference rejects missing law/article identifiers rather than inventing official identities",
+        "Required laws columns include id/title/text; article identity includes id and law_id; optional metadata includes jurisdiction/country/language/status/source and license",
+        "Source layout and semantics must be pinned into parity fixtures at implementation admission"
+      ]
+    },
+    {
+      "role": "secondary older datasets reference",
+      "path": "/home/barberb/ipfs_datasets_py",
+      "head": "a2cf0577d8712424b1213b72f32cc3a93055b1ec",
+      "findings": ["Older package layout includes municipal scraper modules; the newer processors/legal_scrapers/country_laws_ir surface was found in the lift_coding external checkout"]
+    }
+  ],
+  "opened_primary_sources": [
+    {"url": "https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits", "supports": "Published Pages site size limit is 1 GB, deployment timeout is 10 minutes and soft bandwidth is 100 GB monthly; this motivates keeping corpus/index data off Pages"},
+    {"url": "https://docs.x.ai/developers/models/grok-4.7", "supports": "Requested model identifier grok-4.7 is listed in current official model documentation; local account access was not established"},
+    {"url": "https://docs.x.ai/developers/grok-4-7", "supports": "Official guide specifies grok-4.7 and agent/tool integration; the implementation reuses the local router instead of inventing a direct provider path"},
+    {"url": "https://learn.chatgpt.com/docs/non-interactive-mode", "supports": "Codex noninteractive execution exposes JSONL events and structured-output controls; local fallback remains governed by the native router policy"},
+    {"url": "https://huggingface.co/datasets/justicedao/world_law_scrapers", "supports": "Source card describes a code release, source corpus versus country IR families, and national, regional and municipal collection conventions; not proof that all law texts or municipalities are available"},
+    {"url": "https://huggingface.co/datasets/justicedao/ipfs_netherlands_laws_ir", "supports": "A real country IR dataset exposes retrieval-related configs and text provenance; its live full contents were not inventoried"},
+    {"url": "https://huggingface.co/docs/dataset-viewer/en/search", "supports": "Viewer search requires Parquet exports, uses BM25 with English-oriented Porter stemming and caps page length at 100"},
+    {"url": "https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API", "supports": "Browser device geolocation is permission-controlled and secure-context dependent; it is separate from a GeoIP service"}
+  ],
+  "unavailable_remote_probes": [
+    {"url": "https://huggingface.co/api/datasets?author=justicedao&search=laws&limit=5", "result": "Browser tool could not retrieve the API URL; no inventory completeness claim is made"},
+    {"url": "https://huggingface.co/api/datasets?author=endomorphosis&search=laws&limit=5", "result": "Browser tool could not retrieve the API URL; pagination inventory is WWL-010"},
+    {"url": "https://huggingface.co/datasets/endomorphosis/ipfs_germany_laws", "result": "Direct browser probe unavailable; schema mapping was inspected locally rather than treating availability as verified"}
+  ],
+  "not_performed_during_planning": ["live model/provider call", "complete HF organization enumeration", "full corpus ingestion or index download", "GeoIP provider selection or account verification", "website build or browser baseline", "hosted-origin CORS/Range probe", "public release", "native adapter implementation or activation", "live automatic supervisor repair"],
+  "design_proposals_not_measured_results": ["UI routes and location precedence", "performance/memory/transfer targets", "recovery thresholds and attempt bounds", "source-expansion task granularity", "worldwide coverage and applicability model"]
+}

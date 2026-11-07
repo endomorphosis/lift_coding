@@ -1,0 +1,61 @@
+{
+  "schema": "ipfs_accelerate_py.agent_supervisor.worldwide_legal_search.scheduler_config@1",
+  "taskboard_path": "implementation_plan/worldwide_legal_search/tasks.todo.md",
+  "objectives_path": "implementation_plan/worldwide_legal_search/goals.objectives.md",
+  "plan_path": "implementation_plan/worldwide_legal_search/PLAN.md",
+  "task_prefix": "## WWL-",
+  "board_namespace": "worldwide-legal-search-v1",
+  "merge_target_branch": "agent/worldwide-legal-search-v1",
+  "max_lanes": 1,
+  "max_restarts": 3,
+  "max_task_attempts": 3,
+  "implementation_timeout_seconds": 5400,
+  "validation_max_workers": 1,
+  "poll_interval_seconds": 30,
+  "daemon_interval_seconds": 30,
+  "check_interval_seconds": 30,
+  "stale_seconds": 600,
+  "worktree_submodule_paths": [],
+  "protected_paths": [
+    "implementation_plan/worldwide_legal_search/plan.json",
+    "implementation_plan/worldwide_legal_search/PLAN.md",
+    "implementation_plan/worldwide_legal_search/build_plan.py",
+    "implementation_plan/worldwide_legal_search/validate_plan.py",
+    "implementation_plan/worldwide_legal_search/tasks.todo.md",
+    "implementation_plan/worldwide_legal_search/goals.objectives.md",
+    "implementation_plan/worldwide_legal_search/supervisor.json",
+    "implementation_plan/worldwide_legal_search/watchdog.policy.json",
+    "implementation_plan/worldwide_legal_search/test_watchdog.py"
+  ],
+  "derived_refill": {
+    "enabled_at_bootstrap": false
+  },
+  "doctor": {
+    "enabled_at_bootstrap": false,
+    "mutation_authorized": false,
+    "narrow_autonomous_mutation_enabled": false
+  },
+  "rollout": {
+    "automatic_enabled": false
+  },
+  "campaign": {
+    "plan": "implementation_plan/worldwide_legal_search/plan.json",
+    "provider_policy": {
+      "router": "ipfs_accelerate_py.llm_router",
+      "primary_provider": "grok_cli",
+      "primary_model": "grok-4.7",
+      "fallback_provider": "codex_cli",
+      "fallback_model": "resolve from admitted existing Codex configuration",
+      "policy": "grok_quota_auth_or_unavailable",
+      "fallback_conditions": [
+        "typed quota exhaustion",
+        "typed authentication failure",
+        "typed launch unavailability"
+      ],
+      "unchanged_workspace_required": true,
+      "unknown_effects_require_reconciliation": true,
+      "mandatory_routine_codex_review": false
+    },
+    "note": "Campaign metadata is consumed by WWL-002 adapter; the scheduler loader alone does not activate providers, mutation or cross-repository tasks."
+  }
+}

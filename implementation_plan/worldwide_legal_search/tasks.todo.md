@@ -1,0 +1,1347 @@
+# Worldwide legal search task bootstrap
+
+Immutable bootstrap projection of plan.json. Native task state and independent receipts own live progress. All implementation tasks are initially todo.
+
+## WWL-000 Record source revisions and preserve the existing website baseline
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G010
+- Subgoal id: WWL-G010.S1
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: none
+- Outputs: docs/worldwide/baseline.json, docs/worldwide/migration.md, artifacts/worldwide-legal-search/receipts/WWL-000.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, docs/worldwide/
+- Validation: python3 implementation_plan/worldwide_legal_search/validate_plan.py --baseline-evidence docs/worldwide/baseline.json
+- Acceptance: Record site and reference revisions, unrelated dirty paths, active lanes, reachable application imports, current build/test results and Netherlands behavior; do not overwrite unrelated work.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-001 Establish the worldwide workspace and validation harness
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G010
+- Subgoal id: WWL-G010.S1
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-000
+- Outputs: scripts/worldwide/audit.mjs, scripts/worldwide/check-contracts.mjs, tests/worldwide/README.md, package.json, package-lock.json, jest.config.ts, playwright.config.ts, tsconfig.json, artifacts/worldwide-legal-search/receipts/WWL-001.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, jest.config.ts, package-lock.json, package.json, playwright.config.ts, scripts/worldwide/, tests/worldwide/, tsconfig.json
+- Validation: node scripts/worldwide/audit.mjs harness
+- Acceptance: Create production-code validation commands used by this board, meaningful fixture conventions and a campaign branch/worktree; harness checks must reject invalid inputs rather than merely find files.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-002 Admit goals and tasks through the native supervisor task source
+- Status: todo
+- Completion: auto
+- Priority: P1
+- Track: accelerate
+- Root goal: WWL-G000
+- Parent goal: WWL-G010
+- Subgoal id: WWL-G010.S2
+- Owning repository: accelerate
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-001
+- Outputs: ipfs_accelerate_py/agent_supervisor/project_adapters/worldwide_legal_search.py, test/api/test_worldwide_legal_search_admission.py, artifacts/worldwide-legal-search/receipts/WWL-002.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, ipfs_accelerate_py/agent_supervisor/project_adapters/, test/api/
+- Validation: python3 -m pytest test/api/test_worldwide_legal_search_admission.py -q
+- Acceptance: Materialize stable identities and dependencies with native APIs and idempotent replay in an isolated namespace; derive heap-bound typed-goal contracts with scope, assumptions, non-goals, evidence producers, validation, freshness, resource/refinement and uncertainty bounds, explicitly admit the ten-child root breadth, and pass native goal-quality lint before admission; Markdown remains bootstrap only.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-003 Bind and canary the exact Grok emergency Codex route
+- Status: todo
+- Completion: auto
+- Priority: P1
+- Track: accelerate
+- Root goal: WWL-G000
+- Parent goal: WWL-G010
+- Subgoal id: WWL-G010.S2
+- Owning repository: accelerate
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-002
+- Outputs: test/api/test_worldwide_legal_search_provider_route.py, docs/worldwide/provider-bindings.md, ipfs_accelerate_py/agent_supervisor/project_adapters/worldwide_legal_search.py, artifacts/worldwide-legal-search/receipts/WWL-003.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, docs/worldwide/, ipfs_accelerate_py/agent_supervisor/project_adapters/, test/api/
+- Validation: python3 -m pytest test/api/test_worldwide_legal_search_provider_route.py -q
+- Acceptance: Use the canonical llm_router explicit agent route with grok_cli/grok-4.7; prove typed pre-effect emergency fallback, unchanged-workspace requirement, route telemetry and no fallback after ambiguous effects; use only an admitted tiny live canary.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-004 Bind native lifecycle and the watchdog adapter protocol
+- Status: todo
+- Completion: auto
+- Priority: P1
+- Track: accelerate
+- Root goal: WWL-G000
+- Parent goal: WWL-G010
+- Subgoal id: WWL-G010.S2
+- Owning repository: accelerate
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-003
+- Outputs: ipfs_accelerate_py/agent_supervisor/project_adapters/worldwide_legal_search_watchdog.py, test/api/test_worldwide_legal_search_watchdog_bindings.py, artifacts/worldwide-legal-search/receipts/WWL-004.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, ipfs_accelerate_py/agent_supervisor/project_adapters/, test/api/
+- Validation: python3 -m pytest test/api/test_worldwide_legal_search_watchdog_bindings.py -q
+- Acceptance: Implement WATCHDOG.md observe/dispatch/verify contracts over the existing native authorities; wire lifecycle_restart, rescue planner/orchestrator and request factories, current-tree completion verification, process fencing and durable incident deduplication.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-005 Demonstrate canary supervision and recovery before scaling
+- Status: todo
+- Completion: auto
+- Priority: P1
+- Track: accelerate
+- Root goal: WWL-G000
+- Parent goal: WWL-G010
+- Subgoal id: WWL-G010.S2
+- Owning repository: accelerate
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-004, WWL-105
+- Outputs: docs/worldwide/control-canary.json, test/api/test_worldwide_legal_search_control_canary.py, artifacts/worldwide-legal-search/receipts/WWL-005.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, docs/worldwide/, test/api/
+- Validation: python3 -m pytest test/api/test_worldwide_legal_search_control_canary.py -q
+- Acceptance: After the complete fault, blocker and restart suite passes, a small real canary proves native admission, Grok execution, independent validation, merge, worker death recovery and validated code-repair promotion; the readiness receipt binds every native component and accepted revision before sustained watchdog repair or corpus expansion.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-006 Extract reusable TypeScript provider boundaries and Netherlands compatibility
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G010
+- Subgoal id: WWL-G010.S1
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-001
+- Outputs: src/lib/worldwide/contracts.ts, src/lib/worldwide/adapters/netherlands.ts, tests/worldwide/netherlands-compat.test.ts, src/lib/netherlandsCorpus.ts, artifacts/worldwide-legal-search/receipts/WWL-006.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, src/lib/, src/lib/worldwide/, src/lib/worldwide/adapters/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/netherlands-compat.test.ts
+- Acceptance: Separate generic retrieval contracts from Dutch names while preserving source IDs, version metadata, current sample labels, deep-link behavior and existing relevant logic exports.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-010 Enumerate both HF organizations and pin every candidate
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G020
+- Subgoal id: WWL-G020.S1
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-001, WWL-005
+- Outputs: scripts/worldwide/discover.ts, data/worldwide/source-inventory.json, artifacts/worldwide-legal-search/receipts/WWL-010.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, data/worldwide/, scripts/worldwide/
+- Validation: node scripts/worldwide/audit.mjs source-inventory
+- Acceptance: Follow pagination for justicedao and endomorphosis; record resolved revisions, cards, files, configs/splits, sizes and access errors; distinguish a complete inventory from a partial probe.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-011 Classify corpus and index families without naming assumptions
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G020
+- Subgoal id: WWL-G020.S1
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-010
+- Outputs: scripts/worldwide/classify.ts, data/worldwide/source-dispositions.json, artifacts/worldwide-legal-search/receipts/WWL-011.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, data/worldwide/, scripts/worldwide/
+- Validation: node scripts/worldwide/audit.mjs source-dispositions
+- Acceptance: Discover national, regional, municipal, country IR, unified Netherlands and legacy indexes; record include/exclude/blocked reasons, schema capabilities, source lineage and code-only releases.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-012 Audit text and artifact redistribution rights
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G020
+- Subgoal id: WWL-G020.S1
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-011
+- Outputs: data/worldwide/rights.json, docs/worldwide/attribution.md, artifacts/worldwide-legal-search/receipts/WWL-012.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, data/worldwide/, docs/worldwide/
+- Validation: node scripts/worldwide/audit.mjs rights
+- Acceptance: Bind source-specific rights, attribution and restrictions to pinned artifacts, including boundary/translation/embedding data; unresolved rights remain an explicit blocker and are never inferred from organization membership.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-013 Define versioned law section and source schemas
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G020
+- Subgoal id: WWL-G020.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-006, WWL-011
+- Outputs: src/lib/worldwide/data/schema.ts, tests/worldwide/schema.test.ts, artifacts/worldwide-legal-search/receipts/WWL-013.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, src/lib/worldwide/data/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/schema.test.ts
+- Acceptance: Represent source identity, issuer/scope, parent-child relations, language, dates with precision, unknown status, revisions and provenance; reject missing required IDs and invalid associations with useful quarantine reasons.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-014 Port normalization identity and article inheritance with Python fixtures
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G020
+- Subgoal id: WWL-G020.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-012, WWL-013
+- Outputs: scripts/worldwide/normalize.ts, src/lib/worldwide/data/identity.ts, tests/worldwide/data-parity.test.ts, tests/worldwide/fixtures/parity-manifest.json, artifacts/worldwide-legal-search/receipts/WWL-014.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, scripts/worldwide/, src/lib/worldwide/data/, tests/worldwide/, tests/worldwide/fixtures/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/data-parity.test.ts
+- Acceptance: Reference fixtures bind upstream source commits/licenses and cover nulls, conflicting status, article inheritance, canonical hashes/CIDs and duplicated mirrors; production TS output matches established fixtures.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-015 Publish a revision-pinned browser catalog and coverage matrix
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G020
+- Subgoal id: WWL-G020.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-014, WWL-021
+- Outputs: scripts/worldwide/catalog.ts, src/lib/worldwide/data/catalog.ts, data/worldwide/catalog.schema.json, artifacts/worldwide-legal-search/receipts/WWL-015.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, data/worldwide/, scripts/worldwide/, src/lib/worldwide/data/
+- Validation: node scripts/worldwide/audit.mjs catalog
+- Acceptance: Every jurisdiction/source capability and level has known/partial/missing/unknown/unavailable state with dates and record denominators; validate artifact integrity and distinguish collection counts from legal completeness.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-016 Make ingestion incremental and resilient to schema drift
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G020
+- Subgoal id: WWL-G020.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-015
+- Outputs: scripts/worldwide/update.ts, tests/worldwide/incremental-data.test.ts, artifacts/worldwide-legal-search/receipts/WWL-016.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, scripts/worldwide/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/incremental-data.test.ts
+- Acceptance: Changed and removed source revisions update manifests atomically; old snapshots remain readable; incompatible schemas and corrupt artifacts are quarantined without poisoning current results.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-017 Dispose every eligible collection in the inventory snapshot
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G020
+- Subgoal id: WWL-G020.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-018
+- Outputs: data/worldwide/ingestion-ledger.json, docs/worldwide/coverage-audit.json, artifacts/worldwide-legal-search/receipts/WWL-017.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, data/worldwide/, docs/worldwide/
+- Validation: node scripts/worldwide/audit.mjs inventory-closure
+- Acceptance: Wait for every required bounded source child task admitted by WWL-018; every public eligible collection in the pinned inventory has a verified ingest receipt, while missing or inaccessible required inputs remain explicit blockers. National and local counts must be traceable.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-018 Expand the inventory into bounded native source child tasks
+- Status: todo
+- Completion: auto
+- Priority: P1
+- Track: accelerate
+- Root goal: WWL-G000
+- Parent goal: WWL-G020
+- Subgoal id: WWL-G020.S2
+- Owning repository: accelerate
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-016, WWL-047, WWL-081
+- Outputs: test/api/test_worldwide_legal_search_source_expansion.py, docs/worldwide/source-expansion.json, ipfs_accelerate_py/agent_supervisor/project_adapters/worldwide_legal_search_source_expansion.py, artifacts/worldwide-legal-search/receipts/WWL-018.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, docs/worldwide/, ipfs_accelerate_py/agent_supervisor/project_adapters/, test/api/
+- Validation: python3 -m pytest test/api/test_worldwide_legal_search_source_expansion.py -q
+- Acceptance: Admit deterministic per-source/config/split/jurisdiction/shard normalize, index, geography, immutable publication and verification tasks through native APIs; bind inventory and active plan revision, preserve blockers, join every required receipt in WWL-017, and refresh the persisted watchdog task set without resetting budgets.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-020 Define the dated jurisdiction and issuer graph
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G030
+- Subgoal id: WWL-G030.S1
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-013
+- Outputs: src/lib/worldwide/jurisdiction/schema.ts, tests/worldwide/jurisdiction-schema.test.ts, artifacts/worldwide-legal-search/receipts/WWL-020.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, src/lib/worldwide/jurisdiction/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/jurisdiction-schema.test.ts
+- Acceptance: Support arbitrary levels, multiple parents/coverage relations, issuer IDs, boundaries, aliases, validity intervals, disputed views and explicit unknown relationships without requiring a city for every place.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-021 Acquire and validate the place boundary and identifier registry
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G030
+- Subgoal id: WWL-G030.S1
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-012, WWL-020
+- Outputs: scripts/worldwide/build-places.ts, data/worldwide/geography-manifest.json, artifacts/worldwide-legal-search/receipts/WWL-021.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, data/worldwide/, scripts/worldwide/
+- Validation: node scripts/worldwide/audit.mjs geography
+- Acceptance: Choose licensed, revisioned global country/admin/place data; verify municipality detail availability, attribution, native aliases, coverage limits and a small hierarchical download layout.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-022 Implement bounded point and place resolution
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G030
+- Subgoal id: WWL-G030.S1
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-021
+- Outputs: src/lib/worldwide/jurisdiction/resolve.ts, tests/worldwide/geography.test.ts, artifacts/worldwide-legal-search/receipts/WWL-022.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, src/lib/worldwide/jurisdiction/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/geography.test.ts
+- Acceptance: Indexed geometry checks handle enclaves, holes, unincorporated areas, islands, antimeridian and border uncertainty; candidate sets and reasons match independently curated fixtures.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-023 Join law issuers territorial scope and administrative parents
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G030
+- Subgoal id: WWL-G030.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-014, WWL-022
+- Outputs: src/lib/worldwide/jurisdiction/authority.ts, tests/worldwide/authority-stack.test.ts, artifacts/worldwide-legal-search/receipts/WWL-023.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, src/lib/worldwide/jurisdiction/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/authority-stack.test.ts
+- Acceptance: Return national/regional/local and evidenced special/supranational candidates, preserve issuer/territory distinctions and unknown links, and explain inclusion without assuming proximity establishes applicability.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-024 Implement date-aware candidate scope and law status
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G030
+- Subgoal id: WWL-G030.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-023
+- Outputs: src/lib/worldwide/jurisdiction/temporal.ts, tests/worldwide/temporal-scope.test.ts, artifacts/worldwide-legal-search/receipts/WWL-024.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, src/lib/worldwide/jurisdiction/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/temporal-scope.test.ts
+- Acceptance: As-of scope uses boundary and law validity, partial dates and source timezones; unknown is not current; commencement, publication, amendment and repeal are separate fields.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-025 Curate cross-system jurisdiction and coverage reference cases
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G030
+- Subgoal id: WWL-G030.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-024, WWL-015
+- Outputs: tests/worldwide/fixtures/jurisdiction-cases.json, docs/worldwide/jurisdiction-evaluation.json, artifacts/worldwide-legal-search/receipts/WWL-025.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, docs/worldwide/, tests/worldwide/fixtures/
+- Validation: node scripts/worldwide/audit.mjs jurisdiction-fixtures
+- Acceptance: Use real cited fixtures for NL, a federal system, multilingual law, RTL/non-Latin text, special/overlapping authority and absent municipal coverage; record uncertainty rather than inventing legal conclusions.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-030 Implement the place state machine and stable URL contract
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G040
+- Subgoal id: WWL-G040.S1
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-006, WWL-020
+- Outputs: src/lib/worldwide/location/state.ts, src/lib/worldwide/routes.ts, tests/worldwide/location-state.test.ts, artifacts/worldwide-legal-search/receipts/WWL-030.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, src/lib/worldwide/, src/lib/worldwide/location/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/location-state.test.ts
+- Acceptance: URL/manual/saved choices outrank suggestions, late responses cannot override them, place/time survive navigation, precise coordinates are excluded from default shared links and old Dutch links have a tested migration path.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-031 Deliver accessible manual place search and disambiguation
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G040
+- Subgoal id: WWL-G040.S1
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-022, WWL-030
+- Outputs: src/components/worldwide/PlacePicker.tsx, tests/worldwide/place-picker.test.tsx, artifacts/worldwide-legal-search/receipts/WWL-031.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, src/components/worldwide/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/place-picker.test.tsx
+- Acceptance: Country, regional and municipality selection work without geolocation or a map; native aliases, duplicate names, optional licensed postcodes and coordinate entry preserve full parent context and keyboard navigation.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-032 Evaluate and implement a replaceable GeoIP suggestion provider
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G040
+- Subgoal id: WWL-G040.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-030, WWL-012
+- Outputs: docs/worldwide/geoip-provider-decision.json, src/lib/worldwide/location/geoip.ts, tests/worldwide/geoip.test.ts, artifacts/worldwide-legal-search/receipts/WWL-032.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, docs/worldwide/, src/lib/worldwide/location/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/geoip.test.ts
+- Acceptance: Verify current terms, CORS, quota, location precision and retention from the Pages origin; use no secret, one bounded approximate suggestion, clear disclosure/opt-out and complete manual fallback; never send search text.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-033 Implement optional device location and privacy controls
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G040
+- Subgoal id: WWL-G040.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-022, WWL-031
+- Outputs: src/lib/worldwide/location/device.ts, src/components/worldwide/LocationPrivacy.tsx, tests/worldwide/device-location.test.ts, artifacts/worldwide-legal-search/receipts/WWL-033.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, src/components/worldwide/, src/lib/worldwide/location/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/device-location.test.ts
+- Acceptance: Only a user action requests browser permission; resolve locally where possible; denial/timeouts work, no coordinate history is retained, clear/reset actions and a no-third-party mode work.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-034 Verify location races and changes end to end
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G040
+- Subgoal id: WWL-G040.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-031, WWL-032, WWL-033, WWL-052
+- Outputs: tests/worldwide/location.spec.ts, artifacts/worldwide-legal-search/receipts/WWL-034.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, tests/worldwide/
+- Validation: npm run test:playwright -- tests/worldwide/location.spec.ts
+- Acceptance: Delayed IP/device responses, URL navigation, VPN/coarse results, border choices and manual changes never show results from a stale scope; keyboard and mobile place changes are usable.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-040 Implement immutable artifact transport and measured Viewer compatibility
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G050
+- Subgoal id: WWL-G050.S1
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-015
+- Outputs: src/lib/worldwide/data/transport.ts, tests/worldwide/transport.test.ts, artifacts/worldwide-legal-search/receipts/WWL-040.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, src/lib/worldwide/data/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/transport.test.ts
+- Acceptance: Bound retries, cancellation, CORS/Range capability discovery and viewer config/split pagination; forbid revision-mixing, unbounded country downloads and any assumption that viewer joins or pinning are supported.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-041 Port language-aware tokenization and exact citation lookup
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G050
+- Subgoal id: WWL-G050.S1
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-014
+- Outputs: src/lib/worldwide/search/tokenize.ts, src/lib/worldwide/search/citation.ts, tests/worldwide/tokenizer-parity.test.ts, artifacts/worldwide-legal-search/receipts/WWL-041.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, src/lib/worldwide/search/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/tokenizer-parity.test.ts
+- Acceptance: Match pinned upstream tokenization where selected, preserve native identifiers and diacritics, add explicit script/language strategies and exact citation fixtures; document unsupported linguistic behavior.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-042 Implement offline TS shard and index preparation
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G050
+- Subgoal id: WWL-G050.S1
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-040, WWL-041
+- Outputs: scripts/worldwide/build-index.ts, data/worldwide/index-format.schema.json, tests/worldwide/index-format.test.ts, artifacts/worldwide-legal-search/receipts/WWL-042.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, data/worldwide/, scripts/worldwide/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/index-format.test.ts
+- Acceptance: Reuse measured compatible country IR or emit versioned compact postings/document summaries with checksums and term routing; schema encodes shard bytes, coverage and tokenizer; no full corpus is bundled on Pages.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-043 Implement bounded worker BM25 retrieval with parity checks
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G050
+- Subgoal id: WWL-G050.S1
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-042
+- Outputs: src/workers/worldwideSearchWorker.ts, src/lib/worldwide/search/bm25.ts, tests/worldwide/bm25-parity.test.ts, artifacts/worldwide-legal-search/receipts/WWL-043.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, src/lib/worldwide/search/, src/workers/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/bm25-parity.test.ts
+- Acceptance: Search actual compact postings with deterministic scores/ties and cancellation under memory/traversal budgets; compare selected Python reference cases and exercise worker failure without main-thread freezing.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-044 Implement place-scoped federated retrieval and rank fusion
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G050
+- Subgoal id: WWL-G050.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-023, WWL-024, WWL-043
+- Outputs: src/lib/worldwide/search/planner.ts, src/lib/worldwide/search/fusion.ts, tests/worldwide/search-scope.test.ts, artifacts/worldwide-legal-search/receipts/WWL-044.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, src/lib/worldwide/search/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/search-scope.test.ts
+- Acceptance: Select the complete supported authority stack before ranking, isolate strict filters, reconcile duplicates and versions, fuse cross-index results reproducibly and show searched/missing source counts.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-045 Implement progressive worldwide search without per-country fanout
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G050
+- Subgoal id: WWL-G050.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-044
+- Outputs: scripts/worldwide/build-global-routing.ts, src/lib/worldwide/search/global.ts, tests/worldwide/worldwide-search.test.ts, artifacts/worldwide-legal-search/receipts/WWL-045.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, scripts/worldwide/, src/lib/worldwide/search/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/worldwide-search.test.ts
+- Acceptance: Hierarchical global term/citation routing bounds requests and bytes; common-term queries paginate stably and display partial coverage; continuation visits remaining shards without claiming an unsearched total.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-046 Add revision-keyed caching and offline saved sources
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G050
+- Subgoal id: WWL-G050.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-040, WWL-044
+- Outputs: src/lib/worldwide/data/cache.ts, tests/worldwide/cache.test.ts, artifacts/worldwide-legal-search/receipts/WWL-046.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, src/lib/worldwide/data/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/cache.test.ts
+- Acceptance: CacheStorage/IndexedDB use integrity keys, LRU and quota bounds, no personal location/query history, visible stale/offline state and atomic catalog invalidation; corruption and storage exhaustion are recoverable.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-047 Prove real multi-country national regional and local retrieval
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G050
+- Subgoal id: WWL-G050.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-045, WWL-046, WWL-025
+- Outputs: tests/worldwide/fixtures/retrieval-evaluation.json, docs/worldwide/retrieval-evaluation.json, artifacts/worldwide-legal-search/receipts/WWL-047.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, docs/worldwide/, tests/worldwide/fixtures/
+- Validation: node scripts/worldwide/audit.mjs retrieval-evaluation
+- Acceptance: Search real cited national/regional/municipal records and representative non-Latin queries, measure recall on labelled judgments and exclude wrong jurisdictions; unsupported source coverage stays explicit.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-050 Specify worldwide visual system and all interaction states
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G060
+- Subgoal id: WWL-G060.S1
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-000, WWL-025, WWL-030
+- Outputs: docs/worldwide/design.md, docs/worldwide/interaction-states.json, src/styles/worldwide.css, artifacts/worldwide-legal-search/receipts/WWL-050.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, docs/worldwide/, src/styles/
+- Validation: node scripts/worldwide/audit.mjs ux-contract
+- Acceptance: Provide desktop/mobile wireframes, type/spacing/color tokens, search-first hierarchy, complete required states, scope/coverage wording, translated labels, RTL and keyboard flows; no mandatory map or model.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-051 Implement the global application shell navigation and context
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G060
+- Subgoal id: WWL-G060.S1
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-050, WWL-031
+- Outputs: src/components/worldwide/WorldwideLegalSearchApp.tsx, src/components/worldwide/SearchContext.tsx, src/AppStatic.tsx, src/main.tsx, src/index.css, index.html, src/styles/worldwide.css, tests/worldwide/shell.test.tsx, artifacts/worldwide-legal-search/receipts/WWL-051.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, index.html, src/, src/components/worldwide/, src/styles/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/shell.test.tsx
+- Acceptance: Place, as-of date and language stay visible; the shell loads without old niche initial queries, login, proxy or model warmup; preserve feature-flagged NL migration and semantic landmarks.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-052 Implement search results filters and authority context
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G060
+- Subgoal id: WWL-G060.S1
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-051, WWL-044
+- Outputs: src/components/worldwide/SearchResults.tsx, src/components/worldwide/SearchFilters.tsx, src/components/worldwide/JurisdictionStack.tsx, tests/worldwide/results.test.tsx, artifacts/worldwide-legal-search/receipts/WWL-052.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, src/components/worldwide/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/results.test.tsx
+- Acceptance: Display national/regional/local candidates together, exact query highlights, original title, citation, issuer, date/status, source and inclusion reason; filters, cancellation and stale-result prevention execute production retrieval.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-053 Implement a versioned accessible law reader
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G060
+- Subgoal id: WWL-G060.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-052, WWL-024
+- Outputs: src/components/worldwide/LawReader.tsx, tests/worldwide/reader.test.tsx, artifacts/worldwide-legal-search/receipts/WWL-053.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, src/components/worldwide/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/reader.test.tsx
+- Acceptance: Read real source sections with citation/version, official links, status, article navigation, labelled translations, rights and provenance; copy/share retains exact revision and return navigation retains query/scroll.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-054 Implement place source and coverage pages
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G060
+- Subgoal id: WWL-G060.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-053, WWL-015
+- Outputs: src/components/worldwide/CoveragePage.tsx, src/components/worldwide/PlacePage.tsx, src/components/worldwide/SourcePage.tsx, tests/worldwide/coverage-ui.test.tsx, artifacts/worldwide-legal-search/receipts/WWL-054.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, src/components/worldwide/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/coverage-ui.test.tsx
+- Acceptance: Expose coverage by jurisdiction and level, freshness and known denominators, source lineage and explicit missing/unknown municipal states; empty search cannot imply no law exists.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-055 Implement internationalization and RTL behavior
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G060
+- Subgoal id: WWL-G060.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-053
+- Outputs: src/lib/worldwide/i18n.ts, src/locales/worldwide/, tests/worldwide/i18n.test.tsx, artifacts/worldwide-legal-search/receipts/WWL-055.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, src/lib/worldwide/, src/locales/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/i18n.test.tsx
+- Acceptance: Separate UI locale from law language and search jurisdiction, format dates with precision, render native titles/RTL/CJK correctly and label machine translations; no browser-language jurisdiction inference.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-056 Verify responsive accessible search and reader flows
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G060
+- Subgoal id: WWL-G060.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-054, WWL-055, WWL-034
+- Outputs: tests/worldwide/accessibility.spec.ts, tests/worldwide/visual.spec.ts, artifacts/worldwide-legal-search/receipts/WWL-056.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, tests/worldwide/
+- Validation: npm run test:playwright -- tests/worldwide/accessibility.spec.ts tests/worldwide/visual.spec.ts
+- Acceptance: Check keyboard-only interaction, screen-reader state announcements, contrast/focus/reduced motion, zoom/reflow/mobile and RTL with recorded screenshots and an accessibility audit; fix observed issues.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-070 Integrate bounded source citations and graph navigation
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G070
+- Subgoal id: WWL-G070.S1
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-053, WWL-043
+- Outputs: src/lib/worldwide/research/graph.ts, tests/worldwide/graph-parity.test.ts, artifacts/worldwide-legal-search/receipts/WWL-070.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, src/lib/worldwide/research/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/graph-parity.test.ts
+- Acceptance: Port selected citation/structure expansion with node/depth/network budgets and original source evidence; graph absence never blocks the reader or promotes a relationship to an applicability claim.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-071 Add optional semantic reranking with explicit download consent
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G070
+- Subgoal id: WWL-G070.S1
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-047, WWL-053
+- Outputs: src/lib/worldwide/research/semantic.ts, tests/worldwide/semantic-fallback.test.ts, artifacts/worldwide-legal-search/receipts/WWL-071.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, src/lib/worldwide/research/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/semantic-fallback.test.ts
+- Acceptance: Measure multilingual benefit before enabling optional model downloads, pin model/embedding versions and budgets, preserve lexical results with no WebGPU/network/model, and remove automatic heavyweight warmup.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-072 Integrate cited optional answers and existing proof summaries
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G070
+- Subgoal id: WWL-G070.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-070, WWL-071
+- Outputs: src/components/worldwide/ResearchPanel.tsx, tests/worldwide/evidence.test.tsx, artifacts/worldwide-legal-search/receipts/WWL-072.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, src/components/worldwide/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/evidence.test.tsx
+- Acceptance: Answers reference the exact retrieved version, distinguish generated/translated/source material and simulated/unknown proof output, resist document prompt injection, and never make search depend on an LLM or backend.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-073 Implement explicit cross-place comparison
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G070
+- Subgoal id: WWL-G070.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-054, WWL-072, WWL-045
+- Outputs: src/components/worldwide/ComparePlaces.tsx, tests/worldwide/compare.test.tsx, artifacts/worldwide-legal-search/receipts/WWL-073.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, src/components/worldwide/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/compare.test.tsx
+- Acceptance: Compare two manually selected place scopes with aligned dates, sources and coverage gaps; results retain jurisdiction identity and cannot merge contradictory local rules into one asserted answer.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-080 Audit browser-only dependency and deployment boundaries
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G080
+- Subgoal id: WWL-G080.S1
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-051, WWL-043
+- Outputs: docs/worldwide/browser-boundary.json, tests/worldwide/browser-boundary.test.ts, vite.config.ts, artifacts/worldwide-legal-search/receipts/WWL-080.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, docs/worldwide/, tests/worldwide/, vite.config.ts
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/browser-boundary.test.ts
+- Acceptance: Demonstrate core search without Node-only modules, Convex, proxies, Python, login, GPU or secrets; production workers/WASM run without relying on development COOP/COEP headers.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-081 Measure corpus shard scale memory and network budgets
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G080
+- Subgoal id: WWL-G080.S1
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-047, WWL-080
+- Outputs: scripts/worldwide/benchmark.ts, docs/worldwide/performance.json, vite.config.ts, src/lib/worldwide/search/global.ts, src/lib/worldwide/data/transport.ts, src/workers/worldwideSearchWorker.ts, artifacts/worldwide-legal-search/receipts/WWL-081.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, docs/worldwide/, scripts/worldwide/, src/lib/worldwide/data/, src/lib/worldwide/search/, src/workers/, vite.config.ts
+- Validation: node scripts/worldwide/audit.mjs performance
+- Acceptance: Record cold/warm p95, shell/catalog/query transfers, four-request concurrency, memory, common-term global fanout and cancellation at representative scale against PLAN.md targets; fix regressions rather than reducing scope invisibly.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-082 Exercise source and transport failures from a static origin
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G080
+- Subgoal id: WWL-G080.S1
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-046, WWL-054
+- Outputs: tests/worldwide/transport.spec.ts, docs/worldwide/hosted-transport.json, artifacts/worldwide-legal-search/receipts/WWL-082.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, docs/worldwide/, tests/worldwide/
+- Validation: npm run test:playwright -- tests/worldwide/transport.spec.ts
+- Acceptance: Verify real Pages-origin CORS/Range or shard fallback with dated probes, plus deterministic 429/outage/corruption/missing-Viewer/capped-results cases; partial/sample/offline states remain explicit.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-083 Harden untrusted content and location privacy
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G080
+- Subgoal id: WWL-G080.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-055, WWL-072
+- Outputs: tests/worldwide/security.test.ts, docs/worldwide/privacy.md, artifacts/worldwide-legal-search/receipts/WWL-083.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, docs/worldwide/, tests/worldwide/
+- Validation: npm test -- --runInBand --runTestsByPath tests/worldwide/security.test.ts
+- Acceptance: Exercise malicious HTML/links, query/filter injection, oversized artifacts, manifest redirects, prompt injection and cache privacy; inspect build artifacts for secrets or operational state and document external requests.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-084 Require CI gates and preserve existing relevant regressions
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G080
+- Subgoal id: WWL-G080.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-056, WWL-080, WWL-083
+- Outputs: .github/workflows/worldwide-checks.yml, docs/worldwide/regression-selection.json, .github/workflows/deploy.yml, artifacts/worldwide-legal-search/receipts/WWL-084.json
+- Write scope: .github/workflows/, artifacts/worldwide-legal-search/receipts/, docs/worldwide/
+- Validation: node scripts/worldwide/audit.mjs ci-contract
+- Acceptance: Typecheck/build, meaningful unit/integration/browser tests, corpus integrity, NL compatibility and reused logic parity must pass; remove continue-on-error from required gates without erasing preexisting failures.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-085 Run independent product acceptance against the accepted tree
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G080
+- Subgoal id: WWL-G080.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-017, WWL-073, WWL-081, WWL-082, WWL-084
+- Outputs: docs/worldwide/product-acceptance.json, artifacts/worldwide-legal-search/receipts/WWL-085.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, docs/worldwide/
+- Validation: node scripts/worldwide/audit.mjs product-acceptance
+- Acceptance: A separate validation actor executes the recorded place/date/citation/coverage/RTL/mobile/no-backend scenarios against the actual accepted production build; report exact commits, test evidence and unresolved gaps.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-100 Define meaningful progress and durable incident identity
+- Status: todo
+- Completion: auto
+- Priority: P1
+- Track: accelerate
+- Root goal: WWL-G000
+- Parent goal: WWL-G090
+- Subgoal id: WWL-G090.S1
+- Owning repository: accelerate
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-004
+- Outputs: ipfs_accelerate_py/agent_supervisor/project_adapters/worldwide_legal_search_progress.py, test/api/test_worldwide_legal_search_progress.py, artifacts/worldwide-legal-search/receipts/WWL-100.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, ipfs_accelerate_py/agent_supervisor/project_adapters/, test/api/
+- Validation: python3 -m pytest test/api/test_worldwide_legal_search_progress.py -q
+- Acceptance: Observe canonical task/validation/merge stages and accepted artifact changes; log/heartbeat spam, PID changes and repeated same-stage retries do not reset progress or repair budgets.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-101 Bind bounded deterministic recovery and lifecycle ownership
+- Status: todo
+- Completion: auto
+- Priority: P1
+- Track: accelerate
+- Root goal: WWL-G000
+- Parent goal: WWL-G090
+- Subgoal id: WWL-G090.S1
+- Owning repository: accelerate
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-100
+- Outputs: test/api/test_worldwide_legal_search_recovery.py, ipfs_accelerate_py/agent_supervisor/project_adapters/worldwide_legal_search_recovery.py, artifacts/worldwide-legal-search/receipts/WWL-101.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, ipfs_accelerate_py/agent_supervisor/project_adapters/, test/api/
+- Validation: python3 -m pytest test/api/test_worldwide_legal_search_recovery.py -q
+- Acceptance: Native recovery verifies PID birth and process/lease generation, handles stale claims/dead worker/idle runnable queue, preserves unknown effects and obeys holds, deadlines and durable recovery bounds.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-102 Bind automatic isolated supervisor repair and validated promotion
+- Status: todo
+- Completion: auto
+- Priority: P1
+- Track: accelerate
+- Root goal: WWL-G000
+- Parent goal: WWL-G090
+- Subgoal id: WWL-G090.S2
+- Owning repository: accelerate
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-101, WWL-003
+- Outputs: test/api/test_worldwide_legal_search_repair.py, docs/worldwide/repair-contract.md, ipfs_accelerate_py/agent_supervisor/project_adapters/worldwide_legal_search_repair.py, artifacts/worldwide-legal-search/receipts/WWL-102.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, docs/worldwide/, ipfs_accelerate_py/agent_supervisor/project_adapters/, test/api/
+- Validation: python3 -m pytest test/api/test_worldwide_legal_search_repair.py -q
+- Acceptance: Deduplicate a repair task from a reproduced native defect; Grok through llm_router edits only a campaign-owned repair worktree, permitted paths and reproducer; run regressions/canary, promote via native merge, reload/fence and retain rollback evidence.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-103 Test quota fallback unknown effects and repair nonconvergence
+- Status: todo
+- Completion: auto
+- Priority: P1
+- Track: accelerate
+- Root goal: WWL-G000
+- Parent goal: WWL-G090
+- Subgoal id: WWL-G090.S2
+- Owning repository: accelerate
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-102
+- Outputs: test/api/test_worldwide_legal_search_faults.py, artifacts/worldwide-legal-search/receipts/WWL-103.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, test/api/
+- Validation: python3 -m pytest test/api/test_worldwide_legal_search_faults.py -q
+- Acceptance: Inject quota/auth/unavailable, transport loss after mutation, malformed output, dead supervisor, live-heartbeat frozen progress and repeated repair defects; no duplicate writer, false success or attempt refund is permitted.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-104 Classify blockers and continue independent ready work
+- Status: todo
+- Completion: auto
+- Priority: P1
+- Track: accelerate
+- Root goal: WWL-G000
+- Parent goal: WWL-G090
+- Subgoal id: WWL-G090.S1
+- Owning repository: accelerate
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-101
+- Outputs: test/api/test_worldwide_legal_search_blockers.py, ipfs_accelerate_py/agent_supervisor/project_adapters/worldwide_legal_search_blockers.py, artifacts/worldwide-legal-search/receipts/WWL-104.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, ipfs_accelerate_py/agent_supervisor/project_adapters/, test/api/
+- Validation: python3 -m pytest test/api/test_worldwide_legal_search_blockers.py -q
+- Acceptance: Distinguish dependency-running, software-defect, source outage, gated input, credentials, permission, hold and exhausted budget; continue independent tasks and recheck only by admitted probes or changed prerequisites.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-105 Verify watchdog persistence restart and guardian behavior
+- Status: todo
+- Completion: auto
+- Priority: P1
+- Track: accelerate
+- Root goal: WWL-G000
+- Parent goal: WWL-G090
+- Subgoal id: WWL-G090.S2
+- Owning repository: accelerate
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-103, WWL-104
+- Outputs: test/api/test_worldwide_legal_search_watchdog_restart.py, docs/worldwide/host-operation.md, ipfs_accelerate_py/agent_supervisor/project_adapters/worldwide_legal_search_watchdog.py, artifacts/worldwide-legal-search/receipts/WWL-105.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, docs/worldwide/, ipfs_accelerate_py/agent_supervisor/project_adapters/, test/api/
+- Validation: python3 -m pytest test/api/test_worldwide_legal_search_watchdog_restart.py -q
+- Acceptance: Restart loop and supervisor during in-flight recovery; deduplication, cooldown, attempt accounting and stop/hold survive; optional systemd guardian revives only this registered loop with bounded restarts and a hold-aware start check.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-106 Implement and test native completion verification
+- Status: todo
+- Completion: auto
+- Priority: P1
+- Track: accelerate
+- Root goal: WWL-G000
+- Parent goal: WWL-G090
+- Subgoal id: WWL-G090.S2
+- Owning repository: accelerate
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-105
+- Outputs: test/api/test_worldwide_legal_search_completion.py, ipfs_accelerate_py/agent_supervisor/project_adapters/worldwide_legal_search_completion.py, artifacts/worldwide-legal-search/receipts/WWL-106.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, ipfs_accelerate_py/agent_supervisor/project_adapters/, test/api/
+- Validation: python3 -m pytest test/api/test_worldwide_legal_search_completion.py -q
+- Acceptance: Implement the verifier and prove with valid and adversarial fixtures that done flags, zero exit, stale receipts, skipped work, unresolved source blockers and absent release evidence cannot establish completion; do not require the actual future release to complete this verifier implementation task.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-110 Document source refresh and operational maintenance
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G100
+- Subgoal id: WWL-G100.S1
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-016, WWL-105, WWL-084
+- Outputs: docs/worldwide/maintenance.md, scripts/worldwide/refresh.ts, artifacts/worldwide-legal-search/receipts/WWL-110.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, docs/worldwide/, scripts/worldwide/
+- Validation: node scripts/worldwide/audit.mjs maintenance
+- Acceptance: A repeatable TS refresh pipeline pins changes, audits rights/schema/coverage and rolls back atomically; source maintenance and host supervisor operations have clear ownership and no credentials enter the site.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-111 Build and verify the GitHub Pages release candidate
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G100
+- Subgoal id: WWL-G100.S1
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-085, WWL-106, WWL-110
+- Outputs: docs/worldwide/release-candidate.json, .github/workflows/deploy.yml, artifacts/worldwide-legal-search/receipts/WWL-111.json
+- Write scope: .github/workflows/, artifacts/worldwide-legal-search/receipts/, docs/worldwide/
+- Validation: node scripts/worldwide/audit.mjs release-candidate
+- Acceptance: Build clean static output with small shell, hash deep links, .nojekyll, current route redirects and no server/secret dependency; required checks block deployment and preview evidence binds the exact commit.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-112 Deploy through the repository GitHub Pages workflow
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G100
+- Subgoal id: WWL-G100.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-111
+- Outputs: docs/worldwide/deployment.json, artifacts/worldwide-legal-search/receipts/WWL-112.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, docs/worldwide/
+- Validation: node scripts/worldwide/audit.mjs deployment
+- Acceptance: Use the existing repository release authority and configured GitHub environment to publish the verified commit; record Actions run, artifact digest and resulting URL, or retain a typed external blocker when release authority is unavailable.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-113 Verify the public release and rollback path
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G100
+- Subgoal id: WWL-G100.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-112
+- Outputs: docs/worldwide/public-smoke.json, docs/worldwide/rollback.md, artifacts/worldwide-legal-search/receipts/WWL-113.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, docs/worldwide/
+- Validation: node scripts/worldwide/audit.mjs public-smoke
+- Acceptance: Exercise place search, real source reading, manual override, direct deep links, no-backend mode and coverage on the public Pages URL; compare artifact identity, test rollback in a preview and preserve the prior release.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
+
+## WWL-114 Prepare final campaign evidence and continued coverage work
+- Status: todo
+- Completion: auto
+- Priority: P2
+- Track: site
+- Root goal: WWL-G000
+- Parent goal: WWL-G100
+- Subgoal id: WWL-G100.S2
+- Owning repository: site
+- Board namespace: worldwide-legal-search-v1
+- Depends on: WWL-113, WWL-017, WWL-106
+- Outputs: docs/worldwide/campaign-closure.json, docs/worldwide/future-coverage.json, artifacts/worldwide-legal-search/receipts/WWL-114.json
+- Write scope: artifacts/worldwide-legal-search/receipts/, docs/worldwide/
+- Validation: node scripts/worldwide/audit.mjs campaign-closure
+- Acceptance: Verify prior required task/source/public-release evidence, prepare closure metadata with its own receipt explicitly pending, and export remaining worldwide coverage; after this task receives independent admission and merge, native root reconciliation verifies every receipt including WWL-114, publishes root completion and drains owned workers. This task must not require its own future receipt to exist.
+- Preconditions: Dependencies have current admitted receipts; Worktree and native task lease belong to this run; Write scope and provider budget admitted
+- Required evidence: Accepted commit and tree; Actual validation argv and exit status; Required outputs with hashes; Independent native validation and merge receipt; Known limitations and source revisions
+- Timeout seconds: 5400
+- Max attempts: 3
+- Unknown effect rule: Reconcile unknown effects; deduplicate incident; use native bounded recovery; never self-mark complete
