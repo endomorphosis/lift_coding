@@ -281,6 +281,602 @@ class RetainedProposalResumeTests(unittest.TestCase):
                          'Unknown producer reentry must not republish the ledger or application')
         self.assertEqual(len(attempted),1);self.assert_unchanged_originals()
 
+    def test_expired_resume_clock_finishes_sealed_intent_without_renewing_or_paying(self):
+        def after_intent(root, edits, paths, **options):
+            raise RuntimeError('AUTHORED stop after sealed intent')
+        with self.assertRaisesRegex(RuntimeError, 'sealed intent'):
+            self.run_resume(apply_edits=after_intent)
+        phase_path = self.root / self.env.directory / 'retained-proposal-resume-phase.json'
+        phase_raw = phase_path.read_bytes()
+        phase = json.loads(phase_raw)
+        self.assertTrue((self.root / self.env.directory / 'application-intent.json').exists())
+        self.assertEqual({name: (self.root / name).read_bytes() for name in self.env.paths}, self.env.before)
+        with patch.object(r.time, 'time', return_value=(phase['deadline_at_ms'] + 1000) / 1000):
+            with self.assertRaisesRegex(r.RemediationRefusal, 'exhausted'):
+                r.retained_proposal_resume_remaining_seconds(self.root, self.profile, self.child)
+            self.assertTrue(r.child_can_still_write(self.root, self.profile, self.child))
+            files, checks, detail = r.execute_child(self.root, 'profile.json', self.profile, self.spec, self.child, **self.options())
+        self.assertEqual(phase_path.read_bytes(), phase_raw)
+        self.assertEqual({name: (self.root / name).read_bytes() for name in self.env.paths}, self.env.initial_after)
+        self.assertEqual(len(self.producer_calls), 1)
+        self.assertEqual(detail['retained_resume_paid_calls'], 0)
+        self.assertFalse(json.loads((self.root / self.env.directory / 'source-only-result.json').read_text())['completion_authority'])
+        self.assert_unchanged_originals()
+        self.assertTrue(files and checks)
+
+    def test_exhausted_budget_rearms_one_sealed_intent_without_renewing_the_clock(self):
+        def after_intent(root, edits, paths, **options):
+            raise RuntimeError('AUTHORED stop after sealed intent')
+        with self.assertRaisesRegex(RuntimeError, 'sealed intent'):
+            self.run_resume(apply_edits=after_intent)
+        phase_path = self.root / self.env.directory / 'retained-proposal-resume-phase.json'
+        phase_raw = phase_path.read_bytes()
+        phase = json.loads(phase_raw)
+        attempt_name = self.profile['runtimeRoot'] + '/state/lane_resume_attempts.json'
+        later = phase['deadline_at_ms'] + 1000
+        payload = {
+            self.child['task_id']: 3,
+            'SVF-KEEP-EXHAUSTED': 3,
+            '_retry_after_ms': {self.child['task_id']: later + 900000, 'SVF-KEEP-EXHAUSTED': later + 900000},
+            '_validation_fixed_points': {
+                self.child['task_id']: {'execution_progress': {
+                    'semantic_failures': 6, 'escalated': True, 'contract': 'a' * 64}},
+                'SVF-KEEP-EXHAUSTED': {'execution_progress': {'semantic_failures': 6, 'escalated': True}},
+            },
+            '_command_evidence': {'SVF-KEEP-EXHAUSTED': {'exit_code': 1}},
+        }
+        r.atomic(self.root, attempt_name, json.dumps(payload).encode() + b'\n')
+        with patch.object(r.time, 'time', return_value=later / 1000):
+            rearmed = r.rearm_exhausted_sealed_intents(self.root, self.profile)
+        self.assertEqual(rearmed, [self.child['task_id']])
+        saved = json.loads((self.root / attempt_name).read_text())
+        self.assertEqual(saved[self.child['task_id']], 0)
+        self.assertNotIn(self.child['task_id'], saved['_retry_after_ms'])
+        self.assertEqual(saved['_validation_fixed_points'][self.child['task_id']]['execution_progress']['semantic_failures'], 5)
+        self.assertEqual(saved['SVF-KEEP-EXHAUSTED'], 3)
+        self.assertEqual(saved['_validation_fixed_points']['SVF-KEEP-EXHAUSTED']['execution_progress']['semantic_failures'], 6)
+        self.assertEqual(saved['_retry_after_ms']['SVF-KEEP-EXHAUSTED'], later + 900000)
+        self.assertEqual(saved['_command_evidence']['SVF-KEEP-EXHAUSTED']['exit_code'], 1)
+        self.assertEqual(phase_path.read_bytes(), phase_raw)
+        self.assertEqual((self.root / r.payment_path(self.profile, self.child)).read_bytes(), self.oldpaid)
+        self.assertEqual((self.root / self.env.directory / 'execution-deadline.json').read_bytes(), self.env.original_deadline)
+        self.assertEqual(r.payments(self.root, self.profile, self.child)['spent'], {'assessment': 0, 'proposal': 1})
+        self.assertEqual(self.model_calls, [])
+        with patch.object(r.time, 'time', return_value=later / 1000):
+            self.assertEqual(r.rearm_exhausted_sealed_intents(self.root, self.profile), [])
+        refused = json.loads(json.dumps(payload))
+        r.atomic(self.root, attempt_name, json.dumps(refused).encode() + b'\n')
+        with patch('swissknife_visual_functional_llm._parse_json', side_effect=ValueError('authored invalid scenario')):
+            with patch.object(r.time, 'time', return_value=later / 1000):
+                self.assertEqual(r.rearm_exhausted_sealed_intents(self.root, self.profile), [])
+        self.assertEqual(json.loads((self.root / attempt_name).read_text())[self.child['task_id']], 3)
+        self.assertEqual(phase_path.read_bytes(), phase_raw)
+        r.atomic(self.root, r._resume_name(self.profile, self.child, 'producer-claim.json'), b'{}\n', exclusive=True)
+        saved[self.child['task_id']] = 3
+        saved['_retry_after_ms'][self.child['task_id']] = later + 900000
+        saved['_validation_fixed_points'][self.child['task_id']]['execution_progress']['semantic_failures'] = 6
+        r.atomic(self.root, attempt_name, json.dumps(saved).encode() + b'\n')
+        with patch.object(r.time, 'time', return_value=later / 1000):
+            self.assertEqual(r.rearm_exhausted_sealed_intents(self.root, self.profile), [])
+        self.assertEqual(json.loads((self.root / attempt_name).read_text())[self.child['task_id']], 3)
+        self.assertEqual(phase_path.read_bytes(), phase_raw)
+
+    def _phase_bytes(self):
+        path = self.root / self.env.directory / 'retained-proposal-resume-phase.json'
+        return path, path.read_bytes()
+
+    def _seal_intent(self):
+        def after_intent(root, edits, paths, **options):
+            raise RuntimeError('AUTHORED stop after sealed intent')
+        with self.assertRaisesRegex(RuntimeError, 'sealed intent'):
+            self.run_resume(apply_edits=after_intent)
+        return self._phase_bytes()
+
+    def _status(self, task_id):
+        part = r.blocks((self.root / 'board.md').read_text())[task_id]
+        found = [r._STATUS_LINE.fullmatch(line) for line in part.splitlines(keepends=True)]
+        found = [match for match in found if match]
+        self.assertEqual(len(found), 1, task_id)
+        return found[0].group(1)
+
+    def _attempt_payload(self):
+        return json.loads((self.root / (self.profile['runtimeRoot'] + '/state/lane_resume_attempts.json')).read_text())
+
+    def _assert_clock_payment_and_spec(self, phase_raw, spec_raw):
+        _path, raw = self._phase_bytes()
+        self.assertEqual(raw, phase_raw)
+        self.assertEqual(json.loads(raw)['deadline_at_ms'] - json.loads(raw)['created_at_ms'], 900000)
+        self.assertEqual((self.root / r.payment_path(self.profile, self.child)).read_bytes(), self.oldpaid)
+        self.assertEqual((self.root / self.env.directory / 'execution-deadline.json').read_bytes(), self.env.original_deadline)
+        self.assertEqual(r.payments(self.root, self.profile, self.child)['spent'], {'assessment': 0, 'proposal': 1})
+        self.assertEqual((self.root / 'tasks.json').read_bytes(), spec_raw)
+        self.assertEqual((self.root / self.env.initial_admission['output_path']).read_bytes(), self.env.initial_proposal)
+        self.assertFalse((self.root / self.env.directory / 'application.json').exists())
+        self.assertFalse((self.root / self.env.directory / 'source-only-result.json').exists())
+
+    def test_unusable_sealed_intent_is_parked_off_the_frontier_and_unparks_when_it_parses(self):
+        phase_path, phase_raw = self._seal_intent()
+        phase = json.loads(phase_raw)
+        later = (phase['deadline_at_ms'] + 1000) / 1000
+        spec_raw = (self.root / 'tasks.json').read_bytes()
+        attempt_name = self.profile['runtimeRoot'] + '/state/lane_resume_attempts.json'
+        exhausted = {
+            self.child['task_id']: 3,
+            '_retry_after_ms': {self.child['task_id']: int(later * 1000) + 900000},
+            '_validation_fixed_points': {self.child['task_id']: {'execution_progress': {
+                'semantic_failures': 6, 'escalated': True, 'contract': 'b' * 64}}},
+        }
+        r.atomic(self.root, attempt_name, json.dumps(exhausted).encode() + b'\n')
+        with patch('swissknife_visual_functional_llm._parse_json', side_effect=ValueError('authored invalid scenario')), \
+             patch.object(r.time, 'time', return_value=later), \
+             patch.object(r, 'no_hold_or_activity', return_value=None):
+            self.assertEqual(r.rearm_exhausted_sealed_intents(self.root, self.profile), [])
+            parked = r.between_cycles(self.root, self.profile, ensure_authority=self.env.env.authority)
+        self.assertEqual(parked['state'], 'terminal_refusal_parked')
+        self.assertEqual(parked['task_ids'], [self.child['task_id']])
+        self.assertIs(parked['work_complete'], False)
+        self.assertIs(parked['completion_authority'], False)
+        self.assertEqual(self._status(self.child['task_id']), 'blocked')
+        self.assertEqual(self._status('SVF-1001'), 'ready')
+        self.assertEqual(self._status('SVF-1002'), 'ready')
+        record = self._attempt_payload()['_validation_fixed_points'][self.child['task_id']]['terminal_refusal_park']
+        self.assertEqual(record['reason'], 'sealed_scenario_unparseable')
+        self.assertEqual(record['previous_status'], 'ready')
+        self.assertIs(record['work_complete'], False)
+        self.assertIs(record['completion_authority'], False)
+        self._assert_clock_payment_and_spec(phase_raw, spec_raw)
+        board_after_park = (self.root / 'board.md').read_bytes()
+        attempts_after_park = (self.root / attempt_name).read_bytes()
+        with patch('swissknife_visual_functional_llm._parse_json', side_effect=ValueError('authored invalid scenario')), \
+             patch.object(r.time, 'time', return_value=later):
+            self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), [])
+            self.assertEqual(r.rearm_exhausted_sealed_intents(self.root, self.profile), [])
+        self.assertEqual((self.root / 'board.md').read_bytes(), board_after_park)
+        self.assertEqual((self.root / attempt_name).read_bytes(), attempts_after_park)
+        with patch.object(r.time, 'time', return_value=later):
+            self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), [self.child['task_id']])
+        self.assertEqual(self._status(self.child['task_id']), 'ready')
+        self.assertNotIn('terminal_refusal_park', self._attempt_payload()['_validation_fixed_points'][self.child['task_id']])
+        with patch.object(r.time, 'time', return_value=later):
+            self.assertEqual(r.rearm_exhausted_sealed_intents(self.root, self.profile), [self.child['task_id']])
+        self.assertEqual(self._status('SVF-1001'), 'ready')
+        self._assert_clock_payment_and_spec(phase_raw, spec_raw)
+        self.assertEqual(phase_path.read_bytes(), phase_raw)
+
+    def test_parseable_sealed_intent_stays_selectable_for_rearm(self):
+        _phase_path, phase_raw = self._seal_intent()
+        phase = json.loads(phase_raw)
+        later = (phase['deadline_at_ms'] + 1000) / 1000
+        spec_raw = (self.root / 'tasks.json').read_bytes()
+        attempt_name = self.profile['runtimeRoot'] + '/state/lane_resume_attempts.json'
+        r.atomic(self.root, attempt_name, json.dumps({
+            self.child['task_id']: 3,
+            '_retry_after_ms': {self.child['task_id']: int(later * 1000) + 900000},
+            '_validation_fixed_points': {self.child['task_id']: {'execution_progress': {
+                'semantic_failures': 6, 'escalated': True, 'contract': 'c' * 64}}},
+        }).encode() + b'\n')
+        with patch.object(r.time, 'time', return_value=later):
+            self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), [])
+            self.assertEqual(r.rearm_exhausted_sealed_intents(self.root, self.profile), [self.child['task_id']])
+        self.assertEqual(self._status(self.child['task_id']), 'ready')
+        self.assertEqual(self._status('SVF-1001'), 'ready')
+        self._assert_clock_payment_and_spec(phase_raw, spec_raw)
+
+    def test_expired_resume_without_intent_parks_and_an_open_clock_does_not(self):
+        spec_raw = (self.root / 'tasks.json').read_bytes()
+        with patch.object(r.time, 'time', return_value=self.expired_now):
+            phase = r._start_retained_proposal_resume(self.root, self.profile, self.spec, self.child)
+        phase_path, phase_raw = self._phase_bytes()
+        self.assertEqual(phase['deadline_at_ms'], phase['created_at_ms'] + 900000)
+        self.assertFalse((self.root / self.env.directory / 'application-intent.json').exists())
+        opened = phase['created_at_ms'] / 1000
+        with patch.object(r.time, 'time', return_value=opened):
+            self.assertIsNone(r.terminal_refusal_reason(self.root, self.profile, self.child))
+            self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), [])
+        self.assertEqual(self._status(self.child['task_id']), 'ready')
+        with patch.object(r.time, 'time', return_value=(phase['deadline_at_ms'] + 1000) / 1000):
+            self.assertEqual(r.terminal_refusal_reason(self.root, self.profile, self.child), 'resume_deadline_without_sealed_intent')
+            self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), [self.child['task_id']])
+        self.assertEqual(self._status(self.child['task_id']), 'blocked')
+        self.assertEqual(self._status('SVF-1001'), 'ready')
+        record = self._attempt_payload()['_validation_fixed_points'][self.child['task_id']]['terminal_refusal_park']
+        self.assertEqual(record['reason'], 'resume_deadline_without_sealed_intent')
+        self.assertIs(record['work_complete'], False)
+        self.assertIs(record['completion_authority'], False)
+        self.assertEqual(phase_path.read_bytes(), phase_raw)
+        self._assert_clock_payment_and_spec(phase_raw, spec_raw)
+
+    def test_failed_review_fence_drift_parks_child_without_renewing_resume(self):
+        spec_raw = (self.root / 'tasks.json').read_bytes()
+        with patch.object(r.time, 'time', return_value=self.expired_now):
+            phase = r._start_retained_proposal_resume(self.root, self.profile, self.spec, self.child)
+        phase_path, phase_raw = self._phase_bytes()
+        self.assertEqual(phase['deadline_at_ms'] - phase['created_at_ms'], 900000)
+        parent_id = self.child['phase_remediation']['original_task']['task_id']
+        fence_name = self.profile['runtimeRoot'] + '/tasks/' + parent_id + '/failed-final-review-source-fence.json'
+        fence_path = self.root / fence_name
+        fence_raw = fence_path.read_bytes()
+        fence = json.loads(fence_raw)
+        dependencies = list(fence['task_contract']['dependencies'])
+        self.assertNotIn(self.child['task_id'], dependencies)
+        fence['task_contract']['dependencies'] = [*dependencies, self.child['task_id']]
+        fence_path.write_bytes(json.dumps(fence).encode() + b'\n')
+        with patch.object(r.time, 'time', return_value=self.expired_now):
+            self.assertEqual(r.terminal_refusal_reason(self.root, self.profile, self.child),
+                             'final_failure_fence_differs')
+            self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), [self.child['task_id']])
+        self.assertEqual(self._status(self.child['task_id']), 'blocked')
+        self.assertEqual(self._status(parent_id), 'ready')
+        record = self._attempt_payload()['_validation_fixed_points'][self.child['task_id']]['terminal_refusal_park']
+        self.assertEqual(record['reason'], 'final_failure_fence_differs')
+        self.assertEqual(record['previous_status'], 'ready')
+        self.assertIs(record['work_complete'], False)
+        self.assertIs(record['completion_authority'], False)
+        self.assertFalse((self.root / self.env.directory / 'application.json').exists())
+        self._assert_clock_payment_and_spec(phase_raw, spec_raw)
+        fence_path.write_bytes(fence_raw)
+        with patch.object(r.time, 'time', return_value=self.expired_now):
+            self.assertIsNone(r.terminal_refusal_reason(self.root, self.profile, self.child))
+            self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), [self.child['task_id']])
+        self.assertEqual(self._status(self.child['task_id']), 'ready')
+        self.assertEqual(self._status(parent_id), 'ready')
+        self.assertEqual(phase_path.read_bytes(), phase_raw)
+        self._assert_clock_payment_and_spec(phase_raw, spec_raw)
+
+    def test_foreign_source_parks_until_it_returns_to_before_or_after(self):
+        _phase_path, phase_raw = self._seal_intent()
+        spec_raw = (self.root / 'tasks.json').read_bytes()
+        intent = json.loads((self.root / self.env.directory / 'application-intent.json').read_text())
+        self.env.put(self.env.paths[0], b'FOREIGN source must remain')
+        self.assertEqual(r.terminal_refusal_reason(self.root, self.profile, self.child), 'foreign_source_drift')
+        self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), [self.child['task_id']])
+        self.assertEqual(self._status(self.child['task_id']), 'blocked')
+        self.assertEqual(self._status('SVF-1001'), 'ready')
+        self.env.put(self.env.paths[0], self.env.before[self.env.paths[0]])
+        self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), [self.child['task_id']])
+        self.assertEqual(self._status(self.child['task_id']), 'ready')
+        self.env.put(self.env.paths[0], b'FOREIGN source must remain again')
+        self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), [self.child['task_id']])
+        for name, raw in self.env.initial_after.items():
+            self.env.put(name, raw)
+        self.assertEqual({name: hashlib.sha256(raw).hexdigest() for name, raw in self.env.initial_after.items()}, intent['after'])
+        self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), [self.child['task_id']])
+        self.assertEqual(self._status(self.child['task_id']), 'ready')
+        self.assertEqual(self._status('SVF-1002'), 'ready')
+        self._assert_clock_payment_and_spec(phase_raw, spec_raw)
+
+    def test_producer_claim_parks_only_when_supplement_and_keyboard_are_closed(self):
+        spec_raw = (self.root / 'tasks.json').read_bytes()
+        claim_name = r._resume_name(self.profile, self.child, 'producer-claim.json')
+        claim_raw = b'{"claim":"do not rewrite"}\n'
+        r.atomic(self.root, claim_name, claim_raw, exclusive=True)
+        self.assertEqual(r.terminal_refusal_reason(self.root, self.profile, self.child), 'producer_claim_blocks_rerun')
+        self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), [self.child['task_id']])
+        self.assertEqual((self.root / claim_name).read_bytes(), claim_raw)
+        self.assertEqual(self._status(self.child['task_id']), 'blocked')
+        supplement = r._supplement_path(self.profile, self.child)
+        r.atomic(self.root, supplement, b'{"open":true}\n', exclusive=True)
+        self.assertIsNone(r.terminal_refusal_reason(self.root, self.profile, self.child))
+        self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), [self.child['task_id']])
+        self.assertEqual(self._status(self.child['task_id']), 'ready')
+        self.assertEqual((self.root / claim_name).read_bytes(), claim_raw)
+        (self.root / supplement).unlink()
+        keyboard = r._keyboard_name(self.profile, self.child, 'phase.json')
+        r.atomic(self.root, keyboard, b'{"open":true}\n', exclusive=True)
+        self.assertIsNone(r.terminal_refusal_reason(self.root, self.profile, self.child))
+        self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), [])
+        self.assertEqual(self._status(self.child['task_id']), 'ready')
+        self.assertEqual((self.root / claim_name).read_bytes(), claim_raw)
+        (self.root / keyboard).unlink()
+        self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), [self.child['task_id']])
+        self.assertEqual(self._status(self.child['task_id']), 'blocked')
+        self.assertEqual((self.root / claim_name).read_bytes(), claim_raw)
+        self.assertEqual(self._status('SVF-1001'), 'ready')
+        self.assertEqual((self.root / 'tasks.json').read_bytes(), spec_raw)
+        self.assertEqual((self.root / r.payment_path(self.profile, self.child)).read_bytes(), self.oldpaid)
+
+    def test_unchanged_final_parent_parks_until_its_recorded_source_changes(self):
+        parent = next(task for task in json.loads((self.root / 'tasks.json').read_text())['tasks']
+                      if task['task_id'] == 'SVF-1001')
+        from swissknife_visual_functional_final_coverage import task_identity
+        app = 'swissknife/web/js/apps/terminal.js'
+        scenario = 'swissknife/test/e2e/functional-workflows/terminal.json'
+        contract = self.profile['appContractPath']
+        def sha_file(name):
+            return hashlib.sha256((self.root / name).read_bytes()).hexdigest()
+        route = {'provider': 'grok_cli', 'model': 'grok-4.7', 'allowLocalFallback': False,
+                 'allowCrossProviderFallback': False}
+        self.profile['llm'] = route
+        spec_raw = (self.root / 'tasks.json').read_bytes()
+        sources = {app: sha_file(app), scenario: sha_file(scenario), contract: sha_file(contract)}
+        fence_name = self.profile['runtimeRoot'] + '/tasks/SVF-1001/failed-final-review-source-fence.json'
+        self.env.put(fence_name, {'identity': {
+            'task_semantics_sha256': task_identity(parent), 'route': route,
+            'source_snapshot': {'contract_sha256': sources[contract], 'scenario_sha256': sources[scenario],
+                                'source_sha256': sources}}})
+        self.assertEqual(r.terminal_refusal_reason(self.root, self.profile, parent),
+                         'unchanged_final_review_no_new_admission')
+        self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), ['SVF-1001'])
+        self.assertEqual(self._status('SVF-1001'), 'blocked')
+        self.assertEqual(self._status(self.child['task_id']), 'ready')
+        self.assertEqual(self._status('SVF-1002'), 'ready')
+        record = self._attempt_payload()['_validation_fixed_points']['SVF-1001']['terminal_refusal_park']
+        self.assertEqual(record['reason'], 'unchanged_final_review_no_new_admission')
+        self.assertEqual(record['previous_status'], 'ready')
+        self.assertIs(record['work_complete'], False)
+        self.assertIs(record['completion_authority'], False)
+        self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), [])
+        original = (self.root / app).read_bytes()
+        self.env.put(app, original + b'\n')
+        self.assertIsNone(r.terminal_refusal_reason(self.root, self.profile, parent))
+        self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), [])
+        self.assertEqual(self._status('SVF-1001'), 'blocked')
+        os.utime(self.root / app, ns=(1_000_000_000, 1_000_000_000))
+        self.assertIsNone(r.terminal_refusal_reason(self.root, self.profile, parent))
+        self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), ['SVF-1001'])
+        self.assertEqual(self._status('SVF-1001'), 'ready')
+        self.env.put(app, original)
+        os.utime(self.root / app, ns=(1_000_000_000, 1_000_000_000))
+        self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), ['SVF-1001'])
+        self.assertEqual(self._status('SVF-1001'), 'blocked')
+        self.assertEqual((self.root / 'tasks.json').read_bytes(), spec_raw)
+        self.assertEqual(self._status(self.child['task_id']), 'ready')
+
+    def test_harness_only_drift_parks_without_another_review(self):
+        parent = next(task for task in json.loads((self.root / 'tasks.json').read_text())['tasks']
+                      if task['task_id'] == 'SVF-1001')
+        from swissknife_visual_functional_final_coverage import task_identity
+        app = 'swissknife/web/js/apps/terminal.js'
+        harness = 'scripts/swissknife_visual_functional_worker.py'
+        scenario = 'swissknife/test/e2e/functional-workflows/terminal.json'
+        contract = self.profile['appContractPath']
+        def sha_file(name):
+            return hashlib.sha256((self.root / name).read_bytes()).hexdigest()
+        route = {'provider': 'grok_cli', 'model': 'grok-4.7', 'allowLocalFallback': False,
+                 'allowCrossProviderFallback': False}
+        self.profile['llm'] = route
+        spec_raw = (self.root / 'tasks.json').read_bytes()
+        self.env.put(harness, b'print("review harness")\n')
+        sources = {app: sha_file(app), harness: '0' * 64, scenario: sha_file(scenario), contract: sha_file(contract)}
+        fence_name = self.profile['runtimeRoot'] + '/tasks/SVF-1001/failed-final-review-source-fence.json'
+        self.env.put(fence_name, {'identity': {
+            'task_semantics_sha256': task_identity(parent), 'route': route,
+            'source_snapshot': {'contract_sha256': sources[contract], 'scenario_sha256': sources[scenario],
+                                'source_sha256': sources}}})
+        self.assertEqual(r.terminal_refusal_reason(self.root, self.profile, parent),
+                         'unchanged_final_review_no_new_admission')
+        self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), ['SVF-1001'])
+        self.assertEqual(self._status('SVF-1001'), 'blocked')
+        record = self._attempt_payload()['_validation_fixed_points']['SVF-1001']['terminal_refusal_park']
+        self.assertIs(record['work_complete'], False)
+        self.assertIs(record['completion_authority'], False)
+        original = (self.root / app).read_bytes()
+        self.env.put(app, original + b'\n')
+        self.assertIsNone(r.terminal_refusal_reason(self.root, self.profile, parent))
+        os.utime(self.root / app, ns=(1_000_000_000, 1_000_000_000))
+        self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), ['SVF-1001'])
+        self.assertEqual(self._status('SVF-1001'), 'ready')
+        self.assertEqual((self.root / 'tasks.json').read_bytes(), spec_raw)
+        self.assertEqual(self._status(self.child['task_id']), 'ready')
+
+    def test_admitted_child_dependency_does_not_requalify_the_review(self):
+        parent = next(task for task in json.loads((self.root / 'tasks.json').read_text())['tasks']
+                      if task['task_id'] == 'SVF-1001')
+        child_id = self.child['task_id']
+        self.assertEqual(parent['dependencies'][-1], child_id)
+        historical = {key: value for key, value in parent.items() if key != 'status'}
+        historical['dependencies'] = [item for item in parent['dependencies'] if item != child_id]
+        from swissknife_visual_functional_final_coverage import digest, task_identity
+        app = 'swissknife/web/js/apps/terminal.js'
+        harness = 'scripts/swissknife_visual_functional_worker.py'
+        scenario = 'swissknife/test/e2e/functional-workflows/terminal.json'
+        contract = self.profile['appContractPath']
+        def sha_file(name):
+            return hashlib.sha256((self.root / name).read_bytes()).hexdigest()
+        route = {'provider': 'grok_cli', 'model': 'grok-4.7', 'allowLocalFallback': False,
+                 'allowCrossProviderFallback': False}
+        self.profile['llm'] = route
+        spec_raw = (self.root / 'tasks.json').read_bytes()
+        self.env.put(harness, b'print("review harness")\n')
+        sources = {app: sha_file(app), harness: '0' * 64, scenario: sha_file(scenario), contract: sha_file(contract)}
+        fence_name = self.profile['runtimeRoot'] + '/tasks/SVF-1001/failed-final-review-source-fence.json'
+        recorded = task_identity(historical)
+        self.assertEqual(digest(historical), recorded)
+        snapshot = {'contract_sha256': sources[contract], 'scenario_sha256': sources[scenario],
+                    'source_sha256': sources}
+        self.env.put(fence_name, {'identity': {
+            'task_semantics_sha256': recorded, 'route': route, 'source_snapshot': snapshot},
+            'task_contract': {'acceptance': 'not the fenced task'}})
+        self.assertIsNone(r.terminal_refusal_reason(self.root, self.profile, parent))
+        self.env.put(fence_name, {'identity': {
+            'task_semantics_sha256': recorded, 'route': route, 'source_snapshot': snapshot},
+            'task_contract': historical})
+        self.assertEqual(r.terminal_refusal_reason(self.root, self.profile, parent),
+                         'unchanged_final_review_no_new_admission')
+        extra = dict(parent)
+        extra['dependencies'] = list(parent['dependencies']) + ['SVF-NOT-A-CHILD']
+        self.assertIsNone(r.terminal_refusal_reason(self.root, self.profile, extra))
+        app_drift = dict(sources)
+        app_drift[app] = '0' * 64
+        self.env.put(fence_name, {'identity': {
+            'task_semantics_sha256': recorded, 'route': route,
+            'source_snapshot': {**snapshot, 'source_sha256': app_drift}},
+            'task_contract': historical})
+        self.assertIsNone(r.terminal_refusal_reason(self.root, self.profile, parent))
+        self.env.put(fence_name, {'identity': {
+            'task_semantics_sha256': recorded, 'route': route, 'source_snapshot': snapshot},
+            'task_contract': historical})
+        self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), ['SVF-1001'])
+        self.assertEqual(self._status('SVF-1001'), 'blocked')
+        record = self._attempt_payload()['_validation_fixed_points']['SVF-1001']['terminal_refusal_park']
+        self.assertIs(record['work_complete'], False)
+        self.assertIs(record['completion_authority'], False)
+        original = (self.root / app).read_bytes()
+        self.env.put(app, original + b'\n')
+        self.assertIsNone(r.terminal_refusal_reason(self.root, self.profile, parent))
+        os.utime(self.root / app, ns=(1_000_000_000, 1_000_000_000))
+        self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), ['SVF-1001'])
+        self.assertEqual(self._status('SVF-1001'), 'ready')
+        self.assertEqual((self.root / 'tasks.json').read_bytes(), spec_raw)
+        self.assertEqual(self._status(child_id), 'ready')
+
+    def test_terminal_child_dependency_releases_only_the_readonly_review(self):
+        from ipfs_accelerate_py.agent_supervisor.rescue.supervisor_watchdog import selectable_pending_task_ids
+        parent = next(task for task in json.loads((self.root / 'tasks.json').read_text())['tasks']
+                      if task['task_id'] == 'SVF-1001')
+        child_id = self.child['task_id']
+        spec_raw = (self.root / 'tasks.json').read_bytes()
+        claim_name = r._resume_name(self.profile, self.child, 'producer-claim.json')
+        r.atomic(self.root, claim_name, b'{"claim":"authored"}\n', exclusive=True)
+        claim_raw = (self.root / claim_name).read_bytes()
+        board = (self.root / 'board.md').read_text()
+        blocked, previous = r._replace_board_status(board, child_id, 'blocked')
+        self.assertEqual(previous, 'ready')
+        self.env.put('board.md', blocked)
+        self.assertEqual(r.terminal_refusal_reason(self.root, self.profile, self.child),
+                         'producer_claim_blocks_rerun')
+        self.assertIsNone(r.terminal_refusal_reason(self.root, self.profile, parent))
+        before = (self.root / 'board.md').read_text()
+        self.assertNotIn('SVF-1001', selectable_pending_task_ids(before, task_header_prefix='## SVF-'))
+        self.assertEqual(r.release_terminal_child_dependencies(self.root, self.profile), ['SVF-1001'])
+        after = (self.root / 'board.md').read_text()
+        self.assertNotIn(child_id, r._board_dependency_ids(r.blocks(after)['SVF-1001']))
+        self.assertIn('SVF-1001', selectable_pending_task_ids(after, task_header_prefix='## SVF-'))
+        self.assertEqual(self._status(child_id), 'blocked')
+        self.assertEqual(self._status('SVF-1001'), 'ready')
+        self.assertEqual((self.root / 'tasks.json').read_bytes(), spec_raw)
+        self.assertIn(child_id, parent['dependencies'])
+        self.assertEqual((self.root / claim_name).read_bytes(), claim_raw)
+        self.assertEqual(r.release_terminal_child_dependencies(self.root, self.profile), [])
+        parent_part = r.blocks(before)['SVF-1001']
+        unfinished = before.replace(parent_part, parent_part.replace(
+            '- Depends on: ', '- Depends on: SVF-STILL-OPEN, ', 1), 1)
+        self.env.put('board.md', unfinished)
+        self.assertEqual(r.release_terminal_child_dependencies(self.root, self.profile), [])
+        self.assertIn(child_id, r._board_dependency_ids(r.blocks((self.root / 'board.md').read_text())['SVF-1001']))
+        self.env.put('board.md', before)
+        (self.root / claim_name).unlink()
+        self.assertEqual(r.release_terminal_child_dependencies(self.root, self.profile), [])
+        self.assertIn(child_id, r._board_dependency_ids(r.blocks((self.root / 'board.md').read_text())['SVF-1001']))
+        self.assertEqual((self.root / 'tasks.json').read_bytes(), spec_raw)
+
+    def test_repeated_workflow_contract_refusal_parks_until_source_changes(self):
+        parent = next(task for task in json.loads((self.root / 'tasks.json').read_text())['tasks']
+                      if task['task_id'] == 'SVF-1001')
+        app = 'swissknife/web/js/apps/terminal.js'
+        spec_raw = (self.root / 'tasks.json').read_bytes()
+        original = (self.root / app).read_bytes()
+        failure = self.profile['runtimeRoot'] + '/tasks/SVF-1001/verification/attempt-authored/desktop/failure.json'
+        def payload(code):
+            return {'error': {'code': code, 'message': 'authored'},
+                    'source_sha256': {app: hashlib.sha256((self.root / app).read_bytes()).hexdigest()}}
+        self.env.put(failure, payload('BACKEND_JOIN_MISMATCH'))
+        self.assertEqual(r.terminal_refusal_reason(self.root, self.profile, parent), 'unchanged_workflow_refusal')
+        self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), ['SVF-1001'])
+        self.assertEqual(self._status('SVF-1001'), 'blocked')
+        record = self._attempt_payload()['_validation_fixed_points']['SVF-1001']['terminal_refusal_park']
+        self.assertEqual(record['previous_status'], 'ready')
+        self.assertIs(record['work_complete'], False)
+        self.assertIs(record['completion_authority'], False)
+        self.assertEqual(self._status(self.child['task_id']), 'ready')
+        self.env.put(failure, payload('WORKFLOW_TIMEOUT'))
+        self.assertIsNone(r.terminal_refusal_reason(self.root, self.profile, parent))
+        self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), ['SVF-1001'])
+        self.assertEqual(self._status('SVF-1001'), 'ready')
+        self.env.put(failure, payload('ARTIFACT_INVALID'))
+        self.env.put(app, original + b'\n')
+        self.assertIsNone(r.terminal_refusal_reason(self.root, self.profile, parent))
+        self.env.put(app, original)
+        self.assertEqual(r.terminal_refusal_reason(self.root, self.profile, parent), 'unchanged_workflow_refusal')
+        self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), ['SVF-1001'])
+        self.assertEqual(self._status('SVF-1001'), 'blocked')
+        self.assertEqual((self.root / 'tasks.json').read_bytes(), spec_raw)
+
+    def test_repeated_same_bytes_workflow_error_parks_and_one_timeout_does_not(self):
+        parent = next(task for task in json.loads((self.root / 'tasks.json').read_text())['tasks']
+                      if task['task_id'] == 'SVF-1001')
+        app = 'swissknife/web/js/apps/terminal.js'
+        harness = 'scripts/swissknife_visual_functional_worker.py'
+        spec_raw = (self.root / 'tasks.json').read_bytes()
+        original = (self.root / app).read_bytes()
+        base = self.profile['runtimeRoot'] + '/tasks/SVF-1001/verification/'
+        first = base + 'attempt-once/desktop/failure.json'
+        second = base + 'attempt-again/desktop/failure.json'
+        def sources(extra_harness=None):
+            value = {app: hashlib.sha256((self.root / app).read_bytes()).hexdigest()}
+            if extra_harness is not None:
+                value[harness] = extra_harness
+            return value
+        def failure(code, extra_harness=None):
+            return {'error': {'code': code, 'message': 'authored'}, 'source_sha256': sources(extra_harness)}
+        self.env.put(first, failure('WORKFLOW_ERROR'))
+        self.assertIsNone(r.terminal_refusal_reason(self.root, self.profile, parent))
+        os.utime(self.root / first, ns=(1_000_000_000, 1_000_000_000))
+        self.env.put(first, failure('WORKFLOW_ERROR', extra_harness='f' * 64))
+        os.utime(self.root / first, ns=(1_000_000_000, 1_000_000_000))
+        self.env.put(second, failure('WORKFLOW_ERROR'))
+        self.assertEqual(r.terminal_refusal_reason(self.root, self.profile, parent), 'unchanged_workflow_refusal')
+        self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), ['SVF-1001'])
+        self.assertEqual(self._status('SVF-1001'), 'blocked')
+        record = self._attempt_payload()['_validation_fixed_points']['SVF-1001']['terminal_refusal_park']
+        self.assertEqual(record['previous_status'], 'ready')
+        self.assertIs(record['work_complete'], False)
+        self.assertIs(record['completion_authority'], False)
+        self.assertEqual(self._status(self.child['task_id']), 'ready')
+        self.env.put(app, original + b'\n')
+        self.assertIsNone(r.terminal_refusal_reason(self.root, self.profile, parent))
+        self.env.put(app, original)
+        self.assertEqual(r.terminal_refusal_reason(self.root, self.profile, parent), 'unchanged_workflow_refusal')
+        self.env.put(second, failure('MISSING_OBSERVATION'))
+        self.assertIsNone(r.terminal_refusal_reason(self.root, self.profile, parent))
+        self.env.put(first, failure('MISSING_OBSERVATION', extra_harness='f' * 64))
+        os.utime(self.root / first, ns=(1_000_000_000, 1_000_000_000))
+        self.assertEqual(r.terminal_refusal_reason(self.root, self.profile, parent), 'unchanged_workflow_refusal')
+        self.env.put(second, failure('BACKEND_JOIN_MISMATCH', extra_harness='0' * 64))
+        self.assertEqual(r.terminal_refusal_reason(self.root, self.profile, parent), 'unchanged_workflow_refusal')
+        self.env.put(app, original + b'\n')
+        self.assertIsNone(r.terminal_refusal_reason(self.root, self.profile, parent))
+        self.env.put(app, original)
+        self.assertEqual(r.terminal_refusal_reason(self.root, self.profile, parent), 'unchanged_workflow_refusal')
+        self.env.put(second, failure('AMBIGUOUS_TARGET'))
+        os.utime(self.root / second, ns=(5_000_000_000, 5_000_000_000))
+        self.assertIsNone(r.terminal_refusal_reason(self.root, self.profile, parent))
+        self.env.put(first, failure('AMBIGUOUS_TARGET'))
+        os.utime(self.root / first, ns=(1_000_000_000, 1_000_000_000))
+        self.assertEqual(r.terminal_refusal_reason(self.root, self.profile, parent), 'unchanged_workflow_refusal')
+        self.env.put(app, original + b'\n')
+        self.assertIsNone(r.terminal_refusal_reason(self.root, self.profile, parent))
+        self.env.put(app, original)
+        self.assertEqual(r.terminal_refusal_reason(self.root, self.profile, parent), 'unchanged_workflow_refusal')
+        self.assertEqual((self.root / 'tasks.json').read_bytes(), spec_raw)
+
+    def test_human_blocked_heading_without_a_park_record_is_left_alone(self):
+        board = (self.root / 'board.md').read_text()
+        updated, previous = r._replace_board_status(board, self.child['task_id'], 'blocked')
+        self.assertEqual(previous, 'ready')
+        self.env.put('board.md', updated)
+        spec_raw = (self.root / 'tasks.json').read_bytes()
+        self.assertEqual(r.sync_terminal_refusal_frontier(self.root, self.profile), [])
+        self.assertEqual(self._status(self.child['task_id']), 'blocked')
+        self.assertEqual(self._status('SVF-1001'), 'ready')
+        self.assertEqual((self.root / 'tasks.json').read_bytes(), spec_raw)
+        payload = self._attempt_payload()
+        self.assertNotIn(self.child['task_id'], payload.get('_validation_fixed_points', {}))
+
+    def test_expired_resume_without_sealed_intent_still_refuses(self):
+        with patch.object(r.time, 'time', return_value=self.expired_now):
+            phase = r._start_retained_proposal_resume(self.root, self.profile, self.spec, self.child)
+        phase_path = self.root / self.env.directory / 'retained-proposal-resume-phase.json'
+        phase_raw = phase_path.read_bytes()
+        self.assertFalse((self.root / self.env.directory / 'application-intent.json').exists())
+        with patch.object(r.time, 'time', return_value=(phase['deadline_at_ms'] + 1000) / 1000):
+            with self.assertRaisesRegex(r.RemediationRefusal, 'exhausted'):
+                r.execute_child(self.root, 'profile.json', self.profile, self.spec, self.child, **self.options())
+            self.assertFalse(r.child_can_still_write(self.root, self.profile, self.child))
+        self.assertEqual(phase_path.read_bytes(), phase_raw)
+        self.assertEqual(self.producer_calls, [])
+        self.assert_unchanged_originals()
+
     def test_resume_clock_reader_is_readonly_and_cannot_be_renewed_or_repainted(self):
         before={str(p.relative_to(self.root)):p.read_bytes()for p in self.root.rglob('*')if p.is_file()}
         with self.assertRaises((ValueError,OSError)):r.retained_proposal_resume_remaining_seconds(self.root,self.profile,self.child)

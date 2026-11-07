@@ -361,6 +361,8 @@ class NativeAccelerate:
         execution_semantics='synchronous_completed_execution',queue_used=False,requested_tool=requested_tool,
         completed_at=dt.datetime.now(dt.timezone.utc).isoformat(),requested_max_length=requested_length,
         effective_max_new_tokens=tokens,server_max_new_tokens=MAX_NEW_TOKENS)
+    payload['run_proof']=(f"catalog={MODEL_ID} model={MODEL_ID} prompt={text} "
+                          f"output={payload.get('output')} status={payload.get('status')}")
     method='execute_task'
    finally:self.slot.release()
   elif tool=='list_models':

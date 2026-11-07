@@ -50,7 +50,6 @@ def test_valid_frontier_and_goal_relationships(campaign):
     ("- Depends on:", "- Depends on: SVF-001", "dependency cycle"),
     ("- Goal id: SVF-G001", "- Goal id: SVF-G404", "unknown goal"),
     ("- Status: ready", "- Status: todo", "unsupported execution status"),
-    ("- Status: ready", "- Status: blocked", "no selectable"),
     ("--validate --task-id SVF-001", "--task-id SVF-001", "command must be"),
     ("--task-id SVF-001", "--task-id SVF-001 && grok x", "shell syntax"),
     ("- Acceptance: Verifies a real artifact and its provenance.", "- Acceptance:", "semantic acceptance"),
@@ -60,6 +59,33 @@ def test_preflight_refuses_malformed_or_unselectable_work(campaign, before, afte
     board.write_text(task.replace(before, after))
     with pytest.raises(supervisor.PreflightError, match=message):
         supervisor.preflight(root, {}, inspect_git=False)
+
+
+def test_blocked_terminal_frontier_can_start_and_a_ready_leaf_stays_required(campaign):
+    root, board, task = campaign
+    board.write_text(task.replace("- Status: ready", "- Status: blocked"))
+    parked = supervisor.preflight(root, {}, inspect_git=False)
+    assert parked["ready_task_ids"] == []
+    assert parked["remaining_task_ids"] == ["SVF-001"]
+    assert parked["work_complete"] is parked["completion_authority"] is False
+    assert supervisor.blocked_frontier_can_start(supervisor._records(board.read_text(), supervisor.PREFIX)) is True
+
+    waiting = task.replace("- Depends on:", "- Depends on: SVF-002")
+    child = task.replace("SVF-001", "SVF-002").replace("- Status: ready", "- Status: blocked")
+    board.write_text(child + "\n" + waiting)
+    covered = supervisor.preflight(root, {}, inspect_git=False)
+    assert covered["ready_task_ids"] == []
+    assert set(covered["remaining_task_ids"]) == {"SVF-001", "SVF-002"}
+    assert supervisor.blocked_frontier_can_start(supervisor._records(board.read_text(), supervisor.PREFIX)) is True
+
+    sibling = task.replace("SVF-001", "SVF-002").replace("- Status: ready", "- Status: blocked")
+    board.write_text(task + "\n" + sibling)
+    required = supervisor.preflight(root, {}, inspect_git=False)
+    assert required["ready_task_ids"] == ["SVF-001"]
+    assert supervisor.blocked_frontier_can_start(supervisor._records(board.read_text(), supervisor.PREFIX)) is False
+    assert supervisor.blocked_frontier_can_start({
+        "SVF-001": {"status": "pending", "depends_on": ""},
+    }) is False
 
 
 def test_duplicate_tasks_fail_closed(campaign):

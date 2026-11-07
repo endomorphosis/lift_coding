@@ -232,6 +232,35 @@ def active_registered_writers(root: Path) -> list[dict[str, Any]]:
     return found
 
 
+def blocked_frontier_can_start(tasks: dict[str, dict[str, str]]) -> bool:
+    """True when every nonterminal task is blocked or waiting on a blocked task.
+
+    A terminal refusal is parked as blocked so it cannot hold the lane in
+    semantic_failure_wait. That frontier is not a missing-dependency deadlock.
+    A selectable task whose dependencies are already finished stays required.
+    """
+    remaining = [key for key, fields in tasks.items() if fields.get("status", "").lower() not in TERMINAL]
+    frontier = [key for key in remaining
+                if tasks[key].get("status", "").lower() == "blocked"
+                and all(tasks[dep].get("status", "").lower() in TERMINAL
+                        for dep in _dependencies(tasks[key].get("depends_on", "")))]
+    if not frontier:
+        return False
+    covered = set(frontier)
+    changed = True
+    while changed:
+        changed = False
+        for key in remaining:
+            if key in covered:
+                continue
+            deps = _dependencies(tasks[key].get("depends_on", ""))
+            if any(dep in covered for dep in deps) and all(
+                    dep in covered or tasks[dep].get("status", "").lower() in TERMINAL for dep in deps):
+                covered.add(key)
+                changed = True
+    return set(remaining) == covered
+
+
 def preflight(root: Path, profile: dict[str, Any], *, inspect_git: bool = True) -> dict[str, Any]:
     board = _relative_path(root, BOARD, must_exist=True)
     goals_path = _relative_path(root, OBJECTIVES, must_exist=True)
@@ -273,7 +302,7 @@ def preflight(root: Path, profile: dict[str, Any], *, inspect_git: bool = True) 
                                         for dep in _dependencies(fields.get("depends_on", ""))):
             ready.append(task_id)
     remaining = [key for key, fields in tasks.items() if fields.get("status", "").lower() not in TERMINAL]
-    if remaining and not ready:
+    if remaining and not ready and not blocked_frontier_can_start(tasks):
         raise PreflightError("nonterminal tasks have no selectable dependency frontier")
     holds = [directory / name for directory in (root, root / RUNTIME, root / STATE, root / RUNTIME / "watchdog")
              for name in ("HOLD", "OPERATOR_STOP", "watchdog.disabled", "hold", "operator.hold")]

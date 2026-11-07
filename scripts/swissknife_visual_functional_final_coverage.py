@@ -16,6 +16,7 @@ import re
 import stat
 import struct
 import subprocess
+import time
 import uuid
 
 PARENT_SCHEMA = 'swissknife.visual-functional-workflow.v2'
@@ -23,6 +24,8 @@ CHILD_SCHEMA = 'swissknife.visual-functional-viewport.v1'
 COVERAGE_SCHEMA = 'swissknife.current-final-app-coverage.v1'
 JOIN_SCHEMA = 'swissknife.current-final-app-review-join.v1'
 FAILURE_SCHEMA = 'swissknife.unchanged-final-app-review.v1'
+ABSENT_RECEIPT = 'task receipt is absent and cannot be rebuilt from a retained review'
+_ATTEMPT_NAME = re.compile(r'attempt-[A-Za-z0-9_-]{6,80}')
 VIEWPORTS = ({'name': 'desktop', 'width': 1440, 'height': 900},
              {'name': 'mobile', 'width': 390, 'height': 844})
 STATIC_INPUTS = (
@@ -1726,6 +1729,43 @@ def _factor_projection(value):
     return result
 
 
+def _failure_request_scalars(root, artifact):
+    """Inline the failure-phase owner request fields the review is allowed to see.
+
+    A final review may not open event files. delivery_state and status do not
+    name the published text or the chosen route, so those scalars are copied
+    from the retained call. The artifact path is the checkout-relative retained
+    reference. A viewport-relative projection path is not readable from root.
+    Only short strings are kept, and nothing is invented.
+    """
+    path = artifact.get('path') if type(artifact) is dict else artifact
+    if type(path) is not str:
+        return None
+    try:
+        payload = parse(read(root, path)).get('call', {}).get('input', {}).get('payload')
+    except (OSError, ValueError, TypeError, KeyError, AttributeError):
+        return None
+    if type(payload) is not dict:
+        return None
+    found = {}
+    message = payload.get('message')
+    if type(message) is str and len(message) <= 512:
+        try:
+            parsed = json.loads(message)
+        except (ValueError, TypeError):
+            parsed = None
+        text = parsed.get('text') if type(parsed) is dict else None
+        if type(text) is str and 0 < len(text) <= 80:
+            found['text'] = text
+    event = payload.get('event')
+    if type(event) is dict:
+        for key in ('event_type', 'route', 'queued_message'):
+            value = event.get(key)
+            if type(value) is str and 0 < len(value) <= 80:
+                found[key] = value
+    return found or None
+
+
 def _project_backend_observations(root, child, child_path):
     """Present retained observations without inferring a phase or stronger result."""
     artifacts = {item['path']: item for item in child['artifacts']}
@@ -1745,14 +1785,21 @@ def _project_backend_observations(root, child, child_path):
                 'projection_omitted': True, 'original_bytes': len(encoded(value)),
                 'original_sha256': digest(value),
                 'original_child_pointer': '/backend_observations/' + str(index) + '/result_assertion/' + key}
+        event_record = None
         for kind in ('receipt', 'event'):
             name = item[kind + '_artifact']; record = artifacts.get(name)
             need(record is not None, 'projected backend artifact is absent from its child closure')
             check_reference(root, record, prefix=child_path.parent)
+            if kind == 'event':
+                event_record = record
             projected[kind + '_artifact'] = ({**record, 'path': str(Path(record['path']).relative_to(child_path.parent.relative_to(root)))}
                 if requests is not None else record)
         if requests is not None:
             request = requests[item['request_phase_index']]
+            if request.get('phase') == 'failure_recovery':
+                scalars = _failure_request_scalars(root, event_record)
+                if scalars:
+                    projected['request_scalars'] = scalars
             identity = encoded({'request': request, 'correlation_id': item['correlation_id'],
                 'receipt_id': item['receipt_id'], 'event_dag_cid': item['event_dag_cid'],
                 'receipt_artifact': projected['receipt_artifact'], 'event_artifact': projected['event_artifact'],
@@ -2503,21 +2550,279 @@ def final_task_map(root, profile, owner_task, spec=None):
     return mapping, indexed
 
 
+def _task_spec_sha256(task):
+    return hashlib.sha256(json.dumps(task, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+
+
+def _task_dir(root, profile, task):
+    return path(root, profile['runtimeRoot'] + '/tasks/' + task['task_id'])
+
+
+def _receipt_matches(task, value):
+    return (type(value) is dict and value.get('schema') == 'swissknife.visual-functional-task.v1'
+            and value.get('task_id') == task.get('task_id') and value.get('kind') == task.get('kind')
+            and value.get('task_spec_sha256') == _task_spec_sha256(task)
+            and value.get('work_complete') is False and value.get('completion_authority') is False)
+
+
+def _review_decision(root, review_path):
+    payload = parse(read(root, str(Path(review_path).relative_to(root)), 8 * 1024 * 1024))
+    response = payload.get('response')
+    need(type(response) is dict, 'retained visual review lacks a response')
+    decision = response.get('decision')
+    need(decision in {'pass', 'needs_changes', 'blocked'}, 'retained visual review decision is not closed')
+    return decision
+
+
+def _reviewed_attempt(root, profile, task):
+    """Newest retained attempt that actually has a visual review.
+
+    A newer attempt with no review hides an older pass. A needs_changes or
+    blocked review stays available so the refusal can be rebuilt.
+    """
+    try:
+        verification = path(root, profile['runtimeRoot'] + '/tasks/' + task['task_id'] + '/verification')
+    except ValueError:
+        return None
+    if not verification.is_dir():
+        return None
+    attempts = []
+    for child in verification.iterdir():
+        if child.is_symlink() or not child.is_dir() or _ATTEMPT_NAME.fullmatch(child.name) is None:
+            continue
+        try:
+            stamp = child.stat().st_mtime_ns
+        except OSError:
+            continue
+        review = child / 'visual-review.json'
+        attempts.append((stamp, child.name, child, review.is_file() and not review.is_symlink()))
+    if not attempts:
+        return None
+    attempts.sort()
+    reviewed = [item for item in attempts if item[3]]
+    if not reviewed:
+        return None
+    chosen = reviewed[-1]
+    try:
+        decision = _review_decision(root, chosen[2] / 'visual-review.json')
+    except (OSError, ValueError, TypeError):
+        return None
+    if decision == 'pass' and chosen[2] != attempts[-1][2]:
+        return None
+    return chosen[2], decision
+
+
+def _refusal_attempt(value):
+    """Attempt named by a non-positive rebuilt refusal, otherwise None.
+
+    A review join, or any receipt that is not an explicit non-pass, is never
+    replaced. That keeps a real passing receipt ahead of a later refusal.
+    """
+    if type(value) is not dict:
+        return None
+    detail = value.get('detail')
+    if type(detail) is not dict or detail.get('positive_review') is not False:
+        return None
+    if 'final_viewport_review_join' in detail:
+        return None
+    attempt = detail.get('attempt')
+    if (type(attempt) is not str or attempt != value.get('rebuilt_from_retained_attempt')
+            or _ATTEMPT_NAME.fullmatch(attempt) is None):
+        return None
+    return attempt
+
+
+def _write_receipt_bytes(temporary, value):
+    fd = os.open(temporary, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
+    with os.fdopen(fd, 'wb') as stream:
+        stream.write((json.dumps(value, indent=2, ensure_ascii=False) + '\n').encode())
+        stream.flush(); os.fsync(stream.fileno())
+
+
+def _write_absent_receipt(target, value):
+    """Create receipt.json only when it is still absent. Never replace one."""
+    temporary = target.parent / ('.receipt-rebuild-' + uuid.uuid4().hex)
+    try:
+        _write_receipt_bytes(temporary, value)
+        try:
+            os.link(temporary, target)
+        except FileExistsError:
+            return False
+    finally:
+        temporary.unlink(missing_ok=True)
+    return True
+
+
+def _replace_stale_refusal(root, target, value, expected_attempt):
+    """Replace a refusal only if it still names expected_attempt.
+
+    Re-reads immediately before the replace. A positive receipt that landed
+    in that window is returned unchanged.
+    """
+    temporary = target.parent / ('.receipt-rebuild-' + uuid.uuid4().hex)
+    try:
+        _write_receipt_bytes(temporary, value)
+        try:
+            current = parse(read(root, str(target.relative_to(root)), 32 * 1024 * 1024))
+        except (OSError, ValueError, TypeError):
+            return None
+        if _refusal_attempt(current) != expected_attempt:
+            return current
+        os.replace(temporary, target)
+        return value
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
+def _positive_artifacts(root, report, review_path):
+    data = parse(read(root, str(Path(report).relative_to(root))))
+    parent = reference(root, report)
+    records = [parent]
+    seen = {parent['path']}
+    for item in data.get('artifacts', []):
+        check_reference(root, item, prefix=Path(report).parent)
+        need(item['path'] not in seen, 'duplicate workflow artifact')
+        records.append(item); seen.add(item['path'])
+    review = reference(root, review_path)
+    need(review['path'] not in seen, 'visual review collided with a workflow artifact')
+    records.append(review)
+    return records
+
+
+def _receipt_body(root, profile, task, attempt, decision, *, validate_report):
+    review_path = attempt / 'visual-review.json'
+    report = attempt / 'workflow.json'
+    if decision == 'pass':
+        if validate_report is None or not report.is_file() or report.is_symlink():
+            return None
+        try:
+            validated = validate_report(profile, task, report)
+            if not validated:
+                return None
+            joined = review_join(root, profile, task, binding(task, validated), review_path)
+            artifacts = _positive_artifacts(root, report, review_path)
+        except (OSError, ValueError, TypeError, KeyError):
+            return None
+        detail = {'final_viewport_review_join': joined, 'readonly_verification': True, 'repair_admissions': 0}
+        checks = [{'argv': ['node', 'swissknife/scripts/run-visual-functional-workflow.mjs', '--app', task['app_id'],
+                            '--contracts', profile['appContractPath'], '--output-dir', str(report.parent),
+                            '--independent-viewports'], 'exit_code': 0}]
+    else:
+        try:
+            artifacts = [reference(root, review_path)]
+        except (OSError, ValueError, TypeError):
+            return None
+        detail = {'positive_review': False, 'decision': decision, 'attempt': attempt.name,
+                  'readonly_verification': True, 'repair_admissions': 0}
+        checks = []
+    return {'schema': 'swissknife.visual-functional-task.v1', 'task_id': task['task_id'], 'kind': task['kind'],
+            'task_spec_sha256': _task_spec_sha256(task),
+            'created_at': time.strftime('%Y-%m-%dT%H:%M:%S+00:00', time.gmtime(review_path.stat().st_mtime)),
+            'artifacts': artifacts, 'checks': checks, 'detail': detail,
+            'rebuilt_from_retained_attempt': attempt.name,
+            'work_complete': False, 'completion_authority': False}
+
+
+def rebuild_final_receipt(root, profile, task, *, validate_report=None):
+    """Rebuild a missing final receipt, or refresh a stale non-positive one.
+
+    No model, browser, SDK, or backend call. A positive receipt is never
+    replaced. A pass is written only when validate_report joins the newest
+    retained review; otherwise an older refusal stays. Any other closed
+    decision stays non-positive. No review means no receipt.
+    """
+    need(task.get('kind') == 'final-app-verify', 'receipt rebuild is only defined for final app verification')
+    try:
+        task_dir = _task_dir(root, profile, task)
+    except ValueError:
+        return None
+    if not task_dir.is_dir():
+        return None
+    target = task_dir / 'receipt.json'
+    current = None
+    if target.exists() or target.is_symlink():
+        if target.is_symlink() or not target.is_file():
+            return None
+        try:
+            current = parse(read(root, str(target.relative_to(root)), 32 * 1024 * 1024))
+        except (OSError, ValueError, TypeError):
+            return None
+        if not _receipt_matches(task, current):
+            return None
+    chosen = _reviewed_attempt(root, profile, task)
+    stale = _refusal_attempt(current) if current is not None else None
+    if current is not None and (stale is None or chosen is None or chosen[0].name == stale):
+        return current
+    if chosen is None:
+        return current
+    attempt, decision = chosen
+    body = _receipt_body(root, profile, task, attempt, decision, validate_report=validate_report)
+    if body is None:
+        return current
+    if current is None:
+        if not _write_absent_receipt(target, body):
+            try:
+                raced = parse(read(root, str(target.relative_to(root)), 32 * 1024 * 1024))
+            except (OSError, ValueError, TypeError):
+                return None
+            return raced if _receipt_matches(task, raced) else None
+        return body
+    replaced = _replace_stale_refusal(root, target, body, stale)
+    if replaced is None or not _receipt_matches(task, replaced):
+        return None
+    return replaced
+
+
+def rebuild_missing_final_receipts(root, profile, *, validate_report=None, spec=None):
+    """Fill absent final receipts and refresh a stale non-positive refusal.
+
+    Does not replace a positive receipt, unpark a task, or grant completion.
+    """
+    spec = spec or parse(read(root, profile['taskSpecPath']))
+    written = []
+    for task in spec.get('tasks', []):
+        if type(task) is not dict or task.get('kind') != 'final-app-verify':
+            continue
+        try:
+            target = _task_dir(root, profile, task) / 'receipt.json'
+            existed = target.exists() or target.is_symlink()
+            result = rebuild_final_receipt(root, profile, task, validate_report=validate_report)
+        except (OSError, ValueError, TypeError):
+            continue
+        if result is not None and not existed and target.is_file() and not target.is_symlink():
+            written.append(task['task_id'])
+    return written
+
+
 def coverage(root, profile, owner_task, *, validate_task, retained_report, validate_report, spec=None):
     mapping, indexed = final_task_map(root, profile, owner_task, spec)
     groups = []
+    gaps = []
     tasks = [indexed[mapping[app_id]] for app_id in sorted(mapping)]
     with source_snapshot_transaction(root, profile, tasks):
         for task in tasks:
-            receipt = validate_task(profile, task)
+            try:
+                receipt = validate_task(profile, task)
+            except ValueError as exc:
+                if str(exc) != ABSENT_RECEIPT:
+                    raise
+                gaps.append({'app_id': task['app_id'], 'task_id': task['task_id'],
+                             'reason': 'receipt_absent', 'positive_review': False})
+                continue
+            detail = receipt.get('detail') if type(receipt) is dict and type(receipt.get('detail')) is dict else {}
             directory = path(root, profile['runtimeRoot']) / 'tasks' / task['task_id']
+            if detail.get('positive_review') is False:
+                gaps.append({'app_id': task['app_id'], 'task_id': task['task_id'],
+                             'task_receipt': reference(root, directory / 'receipt.json'),
+                             'decision': detail.get('decision'), 'positive_review': False})
+                continue
             report = retained_report(profile, task, receipt, directory / 'verification')
             validated = validate_report(profile, task, report)
             join = review_join(root, profile, task, binding(task, validated), report.parent / 'visual-review.json')
             groups.append({'app_id': task['app_id'], 'task_id': task['task_id'],
                            'task_receipt': reference(root, directory / 'receipt.json'), 'review_join': join})
     return {'schema': COVERAGE_SCHEMA, 'task_id': owner_task['task_id'], 'final_app_tasks': mapping,
-            'app_count': 45, 'fresh_positive_visual_review_count': 45, 'groups': groups,
+            'app_count': 45, 'fresh_positive_visual_review_count': len(groups), 'groups': groups, 'gaps': gaps,
             'work_complete': False, 'completion_authority': False}
 
 
@@ -2528,6 +2833,8 @@ def validate_coverage(root, profile, owner_task, receipt, *, validate_task, reta
     target = check_reference(root, records[0], prefix=directory)
     expected = coverage(root, profile, owner_task, validate_task=validate_task,
                         retained_report=retained_report, validate_report=validate_report)
+    need(expected.get('fresh_positive_visual_review_count') == 45 and expected.get('gaps') == [],
+         'final regression coverage lacks a positive independent review for every canonical app')
     need(parse(read(root, str(target.relative_to(root)))) == expected,
          'final regression coverage is stale or lost a current per-app visual review join')
     return expected

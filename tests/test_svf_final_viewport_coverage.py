@@ -509,6 +509,177 @@ console.log(JSON.stringify({fixed:m.INDEPENDENT_STATIC_INPUTS,snapshot:m.indepen
         with self.assertRaises((ValueError, OSError)):
             worker.regression_workflow_reports(self.f.profile, self.f.aggregate)
 
+    def _receipt(self):
+        return self.f.root / self.f.profile['runtimeRoot'] / 'tasks' / self.g['task']['task_id'] / 'receipt.json'
+
+    def _needs_changes(self):
+        review = json.loads(self.g['review'].read_bytes())
+        review['response']['decision'] = 'needs_changes'
+        self.f.replace_review(self.g, review)
+
+    def test_missing_needs_changes_receipt_rebuilds_without_a_pass(self):
+        self._needs_changes(); self._receipt().unlink()
+        rebuilt = final.rebuild_final_receipt(self.f.root, self.f.profile, self.g['task'])
+        self.assertFalse(rebuilt['detail']['positive_review'])
+        self.assertEqual(rebuilt['detail']['decision'], 'needs_changes')
+        self.assertNotIn('final_viewport_review_join', rebuilt['detail'])
+        self.assertIs(rebuilt['work_complete'], False); self.assertIs(rebuilt['completion_authority'], False)
+        self.assertEqual(rebuilt['task_spec_sha256'], worker.stable(self.g['task']))
+        loaded = worker.validate(self.f.profile, self.g['task'])
+        self.assertFalse(loaded['detail']['positive_review'])
+        self.assertIs(loaded['work_complete'], False); self.assertIs(loaded['completion_authority'], False)
+
+    def test_existing_receipt_is_not_rewritten(self):
+        target = self._receipt(); before = target.read_bytes()
+        self._needs_changes()
+        again = final.rebuild_final_receipt(self.f.root, self.f.profile, self.g['task'],
+                                             validate_report=worker.validate_workflow)
+        self.assertEqual(target.read_bytes(), before)
+        self.assertNotIn('positive_review', again['detail'])
+        self.assertIs(again['work_complete'], False)
+
+    def _sibling_review(self, name, decision):
+        folder = self.g['folder'].parent / name
+        folder.mkdir()
+        review = json.loads(self.g['review'].read_bytes())
+        review['response']['decision'] = decision
+        review['response_sha256'] = hashlib.sha256(llm._json(review['response']).encode()).hexdigest()
+        invocation = folder / 'model-invocations' / ('visual-review-' + review['invocation_id'] + '.json')
+        invocation.parent.mkdir()
+        review['attempt_receipt_path'] = str(invocation.relative_to(self.f.root))
+        payload = (json.dumps(review) + '\n').encode()
+        invocation.write_bytes(payload)
+        (folder / 'visual-review.json').write_bytes(payload)
+        os.utime(folder, ns=(3_000_000_000, 3_000_000_000))
+        os.utime(self.g['folder'], ns=(1_000_000_000, 1_000_000_000))
+        return folder
+
+    def test_newer_needs_changes_refreshes_a_stale_refusal(self):
+        self._needs_changes(); self._receipt().unlink()
+        first = final.rebuild_final_receipt(self.f.root, self.f.profile, self.g['task'])
+        self.assertEqual(first['detail']['attempt'], 'attempt-authored')
+        self._sibling_review('attempt-newerrev', 'needs_changes')
+        refreshed = final.rebuild_final_receipt(self.f.root, self.f.profile, self.g['task'])
+        self.assertEqual(refreshed['detail']['attempt'], 'attempt-newerrev')
+        self.assertEqual(refreshed['detail']['decision'], 'needs_changes')
+        self.assertFalse(refreshed['detail']['positive_review'])
+        self.assertNotIn('final_viewport_review_join', refreshed['detail'])
+        self.assertIs(refreshed['work_complete'], False); self.assertIs(refreshed['completion_authority'], False)
+        raw = self._receipt().read_bytes()
+        again = final.rebuild_final_receipt(self.f.root, self.f.profile, self.g['task'])
+        self.assertEqual(self._receipt().read_bytes(), raw)
+        loaded = worker.validate(self.f.profile, self.g['task'])
+        self.assertEqual(loaded['detail']['attempt'], 'attempt-newerrev')
+        self.assertFalse(loaded['detail']['positive_review'])
+        self.assertIs(loaded['work_complete'], False)
+
+    def test_positive_receipt_survives_a_newer_refusal(self):
+        target = self._receipt(); before = target.read_bytes()
+        self._sibling_review('attempt-newerrev', 'needs_changes')
+        again = final.rebuild_final_receipt(self.f.root, self.f.profile, self.g['task'],
+                                             validate_report=worker.validate_workflow)
+        self.assertEqual(target.read_bytes(), before)
+        self.assertIn('final_viewport_review_join', again['detail'])
+        self.assertNotIn('positive_review', again['detail'])
+        self.assertIs(again['work_complete'], False); self.assertIs(again['completion_authority'], False)
+        loaded = worker.validate(self.f.profile, self.g['task'])
+        self.assertIn('final_viewport_review_join', loaded['detail'])
+        self.assertEqual(target.read_bytes(), before)
+
+    def test_stale_refusal_is_not_upgraded_without_a_review_join(self):
+        self._needs_changes(); self._receipt().unlink()
+        first = final.rebuild_final_receipt(self.f.root, self.f.profile, self.g['task'])
+        before = self._receipt().read_bytes()
+        self._sibling_review('attempt-passonly', 'pass')
+        kept = final.rebuild_final_receipt(self.f.root, self.f.profile, self.g['task'])
+        self.assertEqual(kept['detail']['attempt'], first['detail']['attempt'])
+        self.assertFalse(kept['detail']['positive_review'])
+        self.assertNotIn('final_viewport_review_join', kept['detail'])
+        self.assertEqual(self._receipt().read_bytes(), before)
+        self.assertIs(kept['work_complete'], False); self.assertIs(kept['completion_authority'], False)
+
+    def test_missing_review_does_not_invent_a_pass(self):
+        target = self._receipt(); target.unlink(); self.g['review'].unlink()
+        self.assertIsNone(final.rebuild_final_receipt(self.f.root, self.f.profile, self.g['task'],
+                                                       validate_report=worker.validate_workflow))
+        self.assertFalse(target.exists())
+        with self.assertRaisesRegex(ValueError, 'cannot be rebuilt from a retained review'):
+            worker.validate(self.f.profile, self.g['task'])
+
+    def test_positive_receipt_rebuilds_only_from_the_retained_pass(self):
+        target = self._receipt(); target.unlink()
+        rebuilt = final.rebuild_final_receipt(self.f.root, self.f.profile, self.g['task'],
+                                               validate_report=worker.validate_workflow)
+        self.assertIn('final_viewport_review_join', rebuilt['detail'])
+        self.assertNotIn('positive_review', rebuilt['detail'])
+        self.assertIs(rebuilt['work_complete'], False); self.assertIs(rebuilt['completion_authority'], False)
+        worker.validate(self.f.profile, self.g['task'])
+        target.unlink()
+        self.assertIsNone(final.rebuild_final_receipt(self.f.root, self.f.profile, self.g['task']))
+        self.assertFalse(target.exists())
+
+    def test_older_pass_is_not_rebuilt_over_a_newer_unreviewed_attempt(self):
+        newer = self.g['folder'].parent / 'attempt-noreview'; newer.mkdir()
+        (newer / 'note.txt').write_bytes(b'workflow failed before review')
+        target = self._receipt(); target.unlink()
+        self.assertIsNone(final.rebuild_final_receipt(self.f.root, self.f.profile, self.g['task'],
+                                                       validate_report=worker.validate_workflow))
+        self.assertFalse(target.exists())
+
+    def test_coverage_counts_only_positive_reviews(self):
+        folder = self.f.root / self.f.profile['runtimeRoot'] / 'tasks' / 'SVF-1001'
+        self.f.write(str((folder / 'receipt.json').relative_to(self.f.root)), {'authored': 'refusal'})
+        def validate_task(profile, task):
+            if task['task_id'] == 'SVF-1001':
+                return {'detail': {'positive_review': False, 'decision': 'needs_changes'},
+                        'work_complete': False, 'completion_authority': False}
+            raise ValueError(final.ABSENT_RECEIPT)
+        coverage = final.coverage(self.f.root, self.f.profile, self.f.regression, validate_task=validate_task,
+            retained_report=worker.retained_workflow_report, validate_report=worker.validate_workflow, spec=self.f.spec)
+        self.assertEqual(coverage['fresh_positive_visual_review_count'], 0)
+        self.assertEqual(coverage['groups'], [])
+        self.assertEqual(len(coverage['gaps']), 45)
+        self.assertIs(coverage['work_complete'], False); self.assertIs(coverage['completion_authority'], False)
+        self.assertEqual(coverage['gaps'][0]['decision'], 'needs_changes')
+        manifest = self.f.write(str((self.f.root / self.f.profile['runtimeRoot'] / 'tasks/SVF-900/final-app-coverage.json').relative_to(self.f.root)), coverage)
+        receipt = {'schema': 'swissknife.visual-functional-task.v1', 'task_id': 'SVF-900', 'kind': 'regression',
+            'task_spec_sha256': worker.stable(self.f.regression), 'artifacts': [final.reference(self.f.root, manifest)],
+            'checks': [], 'detail': coverage, 'work_complete': False, 'completion_authority': False}
+        with self.assertRaisesRegex(ValueError, 'positive independent review'):
+            final.validate_coverage(self.f.root, self.f.profile, self.f.regression, receipt, validate_task=validate_task,
+                retained_report=worker.retained_workflow_report, validate_report=worker.validate_workflow)
+
+    def test_regression_refuses_partial_coverage_without_a_success_receipt(self):
+        def partial(*args, **kwargs):
+            return {'schema': final.COVERAGE_SCHEMA, 'task_id': 'SVF-900', 'final_app_tasks': {}, 'app_count': 45,
+                    'fresh_positive_visual_review_count': 24, 'groups': [],
+                    'gaps': [{'task_id': 'SVF-1001', 'positive_review': False}],
+                    'work_complete': False, 'completion_authority': False}
+        with patch.object(worker, 'ensure_lease'), patch.object(worker, 'check_owned_sources'), \
+                patch.object(worker, 'assert_storage_available'), patch.object(final, 'coverage', partial):
+            with self.assertRaisesRegex(ValueError, 'positive independent review'):
+                worker.execute('unused', self.f.profile, self.f.spec, self.f.regression)
+        folder = self.f.root / self.f.profile['runtimeRoot'] / 'tasks/SVF-900'
+        self.assertFalse((folder / 'receipt.json').exists())
+        self.assertTrue((folder / 'final-app-coverage.json').is_file())
+
+    def test_needs_changes_persists_refusal_receipt_before_refusing_admission(self):
+        self._needs_changes(); self._receipt().unlink()
+        def fake_workflow(profile, task, directory):
+            return [self.g['report']], []
+        def fake_model(*args, **kwargs):
+            return json.loads(self.g['review'].read_bytes())
+        with patch.object(worker, 'ensure_lease'), patch.object(worker, 'check_owned_sources'), \
+                patch.object(worker, 'assert_storage_available'), patch.object(worker, 'workflow', side_effect=fake_workflow), \
+                patch.object(worker, 'model', side_effect=fake_model), patch.object(worker, 'remember_execution_failure'):
+            with self.assertRaisesRegex(ValueError, 'no new repair admission'):
+                worker.execute('unused', self.f.profile, self.f.spec, self.g['task'])
+        saved = json.loads(self._receipt().read_bytes())
+        self.assertFalse(saved['detail']['positive_review'])
+        self.assertEqual(saved['detail']['decision'], 'needs_changes')
+        self.assertIs(saved['work_complete'], False); self.assertIs(saved['completion_authority'], False)
+        self.assertNotIn('final_viewport_review_join', saved['detail'])
+
     def test_900_cannot_promote_legacy_workflow_filenames_into_final_coverage(self):
         with patch.object(worker, 'workflow', side_effect=AssertionError('900 must join bounded followups, not run45 browsers')):
             with patch.object(worker, 'ensure_lease'), patch.object(worker, 'check_owned_sources'), patch.object(worker, 'assert_storage_available'):

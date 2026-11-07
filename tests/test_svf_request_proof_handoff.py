@@ -35,6 +35,27 @@ class RequestProofHandoffTests(unittest.TestCase):
             observations.append({'request_phase_index': index, 'owner': 'native.owner', 'tool_id': 'read_content', 'binding_id': 'read.native', 'transport': 'mcp', 'outcome': 'success', 'receipt_verified': True, 'semantic_result_verified': True, 'correlation_id': 'request-' + str(index), 'receipt_id': 'receipt-id-' + str(index), 'event_dag_cid': 'event-id-' + str(index), 'result_assertion': {'pointer': '/cid', 'operator': 'equals', 'actual': 'same-input', 'expected': 'same-input'}, **refs})
         self.child = {'app_id': 'authored', 'backend_call_count': 2, 'backend_call_phases': {phase: int(phase in ('primary_result', 'failure_recovery')) for phase in f.BACKEND_PHASES}, 'backend_request_phases': {'schema': f.BACKEND_REQUEST_PHASE_SCHEMA, 'requests': requests}, 'backend_observations': [observations[1], observations[0], {**copy.deepcopy(observations[1]), 'result_assertion': {'pointer': '/bytes_sha256', 'operator': 'equals', 'actual': '9' * 64, 'expected': '9' * 64}}], 'artifacts': artifacts}
     def rows(self): return f._project_backend_observations(self.root, self.child, self.report)
+    def test_failure_phase_scalars_use_the_retained_event_path(self):
+        message = json.dumps({'text': 'svf-queued-draft'})
+        call = f.encoded({'binding_id': 'read.native', 'correlation_id': 'request-1',
+                          'input': {'payload': {'message': message}}})
+        body = b'{"call":' + call + b'}'
+        failure = self.child['backend_observations'][0]
+        request = self.child['backend_request_phases']['requests'][failure['request_phase_index']]
+        self.assertEqual(request['phase'], 'failure_recovery')
+        for key in ('receipt_artifact', 'event_artifact'):
+            target = self.root / failure[key]
+            target.write_bytes(body)
+            refreshed = f.reference(self.root, target)
+            for record in self.child['artifacts']:
+                if record['path'] == refreshed['path']:
+                    record.clear(); record.update(refreshed)
+        request['call_sha256'] = f._raw_call_sha256(body)
+        rows, _ = self.rows()
+        self.assertEqual(rows[0]['request_scalars'], {'text': 'svf-queued-draft'})
+        self.assertNotIn('request_scalars', rows[1])
+        self.assertNotIn(rows[0]['event_artifact']['path'], str(self.root))
+
     def test_distinct_primary_and_retry_requests_stay_distinct_literal_rows(self):
         rows, additional = self.rows(); self.assertEqual(len(rows), 2); self.assertEqual(additional, [])
         self.assertEqual([row['request_phase']['phase'] for row in rows], ['failure_recovery', 'primary_result'])

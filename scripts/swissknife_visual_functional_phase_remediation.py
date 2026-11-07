@@ -1438,7 +1438,38 @@ def between_cycles(root, profile, **kwargs):
             if not policy_enabled(profile): continue
             result = _between_one(root, profile, **kwargs)
         if result.get('state') != 'idle': return result
-    return {'state':'idle','completion_authority':False}
+    rearmed = []
+    try:
+        with _mode(FINAL_MODE):
+            rearmed = rearm_exhausted_sealed_intents(root, profile)
+    except (OSError, ValueError, TypeError):
+        rearmed = []
+    released = []
+    try:
+        with _mode(FINAL_MODE):
+            released = sync_terminal_refusal_frontier(root, profile, skip=set(rearmed))
+    except (OSError, ValueError, TypeError):
+        released = []
+    opened = []
+    try:
+        with _mode(FINAL_MODE):
+            opened = release_terminal_child_dependencies(root, profile)
+    except (OSError, ValueError, TypeError):
+        opened = []
+    if rearmed:
+        result = {'state':'sealed_intent_rearmed','task_ids':rearmed,'work_complete':False,'completion_authority':False}
+    elif released:
+        result = {'state':'terminal_refusal_parked','task_ids':released,'work_complete':False,'completion_authority':False}
+    elif opened:
+        result = {'state':'terminal_child_dependency_released','task_ids':opened,'work_complete':False,'completion_authority':False}
+    else:
+        result = {'state':'idle','completion_authority':False}
+    try:
+        from swissknife_visual_functional_final_coverage import rebuild_missing_final_receipts
+        rebuild_missing_final_receipts(root, profile)
+    except (OSError, ValueError, TypeError, ImportError):
+        pass
+    return result
 
 _owned_one = recoverable_owned_source
 @wraps(_owned_one)
@@ -1672,10 +1703,16 @@ def _execute_producer_feedback(root,profile_path,profile,spec,task,packet,*,mode
     return [physical(root,name),output],checks,{'source_only_remediation':ref(root,name),'original_acceptance_downstream':True,
         'paid_limits':{'assessment':1,'proposal':1,'producer_repair':1}}
 
+def _initial_child_kwargs(kwargs):
+    # The original child accepts only its declared keywords. Later flags such as
+    # finish_expired_sealed_intent stay on the wrappers that read them.
+    allowed = ('model', 'workflow', 'validate_workflow', 'apply_edits', 'ensure_lease', 'check_owned', 'remember_owned')
+    return {key: kwargs[key] for key in allowed if key in kwargs}
+
 _initial_execute_child = execute_child
 def execute_child(root,profile_path,profile,spec,task,*,producer_failure_context=None,**kwargs):
     with _mode(_task_mode(task)):
-        if not producer_feedback_enabled(profile,task):return _initial_execute_child(root,profile_path,profile,spec,task,**kwargs)
+        if not producer_feedback_enabled(profile,task):return _initial_execute_child(root,profile_path,profile,spec,task,**_initial_child_kwargs(kwargs))
         directory=_feedback_directory(profile,task);packet=directory+'/producer-feedback.json';intent=directory+'/producer-feedback-intent.json'
         result_name=directory+'/source-only-result.json'
         if physical(root,result_name).exists():
@@ -1704,7 +1741,7 @@ def execute_child(root,profile_path,profile,spec,task,*,producer_failure_context
             if retained is not None:
                 _start_producer_supplement(root,profile,spec,task,retained)
                 return _probe_supplement(root,profile_path,profile,spec,task,producer_failure_context,**kwargs)
-        try:return _initial_execute_child(root,profile_path,profile,spec,task,**kwargs)
+        try:return _initial_execute_child(root,profile_path,profile,spec,task,**_initial_child_kwargs(kwargs))
         except Exception as error:
             if getattr(error,'producer_failure_record',None)is None or getattr(error,'producer_check',None)is None:raise
             need(physical(root,directory+'/application.json').exists(),'feedback requires an applied initial proposal')
@@ -2391,6 +2428,19 @@ def child_can_still_write(root, profile, task):
                 validate_model_receipt(root, proposal, task_id=task['task_id'], mode='repair', predicted_files=task['edit_paths'])
                 intent = directory + '/application-intent.json'
                 return not physical(root, intent).exists() or _current_sources(root, task) != parse(read(root, intent))['after']
+            except RemediationRefusal as exc:
+                if 'absolute deadline exhausted' not in str(exc):
+                    return False
+                if physical(root, _resume_name(profile, task, 'producer-claim.json')).exists():
+                    return False
+                intent_name = directory + '/application-intent.json'
+                if not physical(root, intent_name).exists():
+                    return False
+                try:
+                    intent = parse(read(root, intent_name))
+                except (OSError, ValueError, TypeError):
+                    return False
+                return _current_sources(root, task) != intent.get('after')
             except (ValueError, OSError, KeyError, TypeError):
                 return False
     return _r38_child_can_still_write(root, profile, task)
@@ -2482,11 +2532,745 @@ def retained_proposal_resume_remaining_seconds(root, profile, task):
     return remaining
 
 
-def _start_retained_proposal_resume(root, profile, spec, task):
+_SELECTABLE_STATUS = frozenset({'ready', 'pending', 'in_progress'})
+_STATUS_LINE = re.compile(r'^- Status: (ready|pending|in_progress|blocked)[ \t]*(\n?)$')
+
+
+def _sealed_proposal_unusable(root, task, phase, application):
+    """Reason the sealed edit can never land, or None when it can still be applied."""
+    proposal = parse(check_ref(root, phase['proposal']))
+    from swissknife_visual_functional_llm import _parse_json
+    drafts = {name: read(root, record['path'], 250000, allow_empty=True).decode('utf-8')
+              for name, record in application['original_sources'].items()}
+    for edit in proposal['response']['edits']:
+        name, old, new = edit['path'], edit['old'], edit['new']
+        current = drafts[name]
+        if (current == '' if old == '' else current.count(old) != 1):
+            return 'sealed_anchor_not_exact'
+        drafts[name] = new if old == '' else current.replace(old, new, 1)
+    for name in task['edit_paths']:
+        if str(name).endswith('.json'):
+            _parse_json(drafts[name])
+    return None
+
+
+# Review orchestration only. App, scenario, workflow, and contract bytes stay
+# outside this set so a real visual change still runs one requalifying review.
+_REVIEW_HARNESS_DRIFT = frozenset({
+    'scripts/swissknife_visual_functional_worker.py',
+    'scripts/swissknife_visual_functional_llm.py',
+    'scripts/swissknife_visual_functional_final_coverage.py',
+    'scripts/swissknife_visual_functional_phase_budget.py',
+    'scripts/swissknife_visual_functional_review_recheck.py',
+    'scripts/swissknife_visual_functional_blocked.py',
+    'scripts/swissknife_visual_functional_native_context.py',
+    'scripts/swissknife_visual_functional_recovery.py',
+    'scripts/swissknife_visual_functional_phase_remediation.py',
+    'scripts/swissknife_visual_functional_supervisor.py',
+    'config/swissknife_visual_functional_supervisor.json',
+    'external/ipfs_accelerate/ipfs_accelerate_py/llm_router.py',
+    'external/ipfs_accelerate/ipfs_accelerate_py/cli_runtime/grok_stream_capture.py',
+})
+
+
+def _cached_source_sha(root, name, cache):
+    if name in cache:
+        return cache[name]
+    try:
+        path = physical(root, name)
+        cache[name] = hashlib.sha256(path.read_bytes()).hexdigest() if path.is_file() and not path.is_symlink() else None
+    except (OSError, ValueError, TypeError):
+        cache[name] = None
+    return cache[name]
+
+
+def _final_child_dependency(task_id):
+    if type(task_id) is not str or not task_id.startswith('SVF-') or not task_id[4:].isdigit():
+        return None
+    return 'SVF-FINAL-R' + task_id[4:]
+
+
+def _semantics_match_admitted_child(task, recorded, contract):
+    """True when the live task still means the fenced review.
+
+    Appending the admitted final child to dependencies is bookkeeping. Any
+    other task-body change, or a contract that is not the fenced preimage,
+    stays runnable.
+    """
+    from swissknife_visual_functional_final_coverage import digest, task_identity
+    if recorded == task_identity(task):
+        return True
+    child = _final_child_dependency(task.get('task_id'))
+    if child is None or type(contract) is not dict or digest(contract) != recorded:
+        return False
+    current = {key: value for key, value in task.items() if key != 'status'}
+    if set(current) != set(contract):
+        return False
+    for key, previous in contract.items():
+        live = current[key]
+        if live == previous:
+            continue
+        if key != 'dependencies' or type(previous) is not list or type(live) is not list:
+            return False
+        if previous.count(child) != 0 or live.count(child) != 1:
+            return False
+        if [item for item in live if item != child] != previous:
+            return False
+    return True
+
+
+def _unchanged_final_review_terminal(root, profile, task, source_hashes):
+    """Park a readonly final review whose recorded fence still matches the app.
+
+    A missing fence, a changed app or scenario, or a changed route stays
+    runnable. Drift limited to the review harness does not start another
+    review. The dependency id of the already admitted final child is not a
+    new review. The comparison hashes the files named by the fence.
+    """
+    if task.get('kind') != 'final-app-verify' or not retained_proposal_resume_enabled(profile):
+        return None
+    fence_name = _feedback_directory(profile, task) + '/failed-final-review-source-fence.json'
+    if not physical(root, fence_name).is_file():
+        return None
+    try:
+        failed = parse(read(root, fence_name))
+        identity = failed.get('identity') or {}
+        snapshot = identity.get('source_snapshot') or {}
+        sources = snapshot.get('source_sha256') or {}
+        if type(sources) is not dict or not sources:
+            return None
+        if not _semantics_match_admitted_child(task, identity.get('task_semantics_sha256'), failed.get('task_contract')):
+            return None
+        if identity.get('route') != profile.get('llm'):
+            return None
+        for name, expected in sources.items():
+            if type(name) is not str or type(expected) not in (str, type(None)):
+                return None
+            if _cached_source_sha(root, name, source_hashes) != expected and name not in _REVIEW_HARNESS_DRIFT:
+                return None
+        scenario_name = 'swissknife/test/e2e/functional-workflows/' + str(task.get('app_id')) + '.json'
+        if snapshot.get('contract_sha256') != _cached_source_sha(root, profile.get('appContractPath'), source_hashes):
+            return None
+        if snapshot.get('scenario_sha256') != _cached_source_sha(root, scenario_name, source_hashes):
+            return None
+    except (OSError, ValueError, TypeError, KeyError):
+        return None
+    return 'unchanged_final_review_no_new_admission'
+
+
+# A readonly final review cannot admit a repair for these contract refusals.
+# One missing-evidence, timeout, or ambiguous-target failure stays runnable.
+# The same refusal on the same non-harness bytes parks on the second occurrence.
+_TERMINAL_WORKFLOW_CODES = frozenset({
+    'BACKEND_JOIN_MISMATCH',
+    'ARTIFACT_INVALID',
+    'ARTIFACT_CID_MISMATCH',
+    'ARTIFACT_COLLISION',
+    'POLICY_BOUNDARY',
+    'OWNER_RESULT_UNVERIFIED',
+    'BACKEND_OUTPUT_BOUND',
+    'INVALID_OBSERVATION',
+})
+_REPEAT_WORKFLOW_CODES = frozenset({
+    'WORKFLOW_ERROR',
+    'WORKFLOW_TIMEOUT',
+    'MISSING_OBSERVATION',
+    'ARTIFACT_MISSING',
+    'BACKEND_EVIDENCE_MISSING',
+    'BACKEND_EXECUTION_FAILED',
+    'AMBIGUOUS_TARGET',
+})
+
+
+def _latest_workflow_failure(root, profile, task):
+    base = physical(root, _feedback_directory(profile, task) + '/verification')
+    if not base.is_dir() or base.is_symlink():
+        return None
+    newest = None
+    newest_mtime = -1
+    try:
+        for attempt in base.iterdir():
+            if not attempt.is_dir() or attempt.is_symlink():
+                continue
+            for name in ('desktop/failure.json', 'mobile/failure.json'):
+                file = attempt / name
+                if not file.is_file() or file.is_symlink():
+                    continue
+                mtime = file.stat().st_mtime_ns
+                if mtime >= newest_mtime:
+                    newest, newest_mtime = file, mtime
+    except OSError:
+        return None
+    return newest
+
+
+def _substantive_sources(sources):
+    return {name: value for name, value in sources.items() if name not in _REVIEW_HARNESS_DRIFT}
+
+
+def _repeated_substantive_workflow_failure(root, newest, code, sources):
+    """True when an earlier failure has this code and the same non-harness bytes."""
+    substantive = _substantive_sources(sources)
+    if not substantive:
+        return False
+    base = newest.parent.parent.parent
+    try:
+        for attempt in base.iterdir():
+            if not attempt.is_dir() or attempt.is_symlink():
+                continue
+            for name in ('desktop/failure.json', 'mobile/failure.json'):
+                file = attempt / name
+                if file == newest or not file.is_file() or file.is_symlink():
+                    continue
+                try:
+                    value = parse(read(root, file.relative_to(root).as_posix()))
+                except (OSError, ValueError, TypeError, KeyError):
+                    continue
+                other = value.get('source_sha256') or {}
+                if (value.get('error') or {}).get('code') != code or type(other) is not dict:
+                    continue
+                if _substantive_sources(other) == substantive:
+                    return True
+    except OSError:
+        return False
+    return False
+
+
+def _unchanged_workflow_refusal(root, profile, task, source_hashes):
+    """Park a readonly final review whose latest workflow refusal still matches.
+
+    A contract or artifact error on the same source bytes cannot admit a repair.
+    One timeout, missing observation, or ambiguous target stays runnable. The
+    same code on the same non-harness bytes parks on the next occurrence. A
+    changed source stays runnable.
+    """
+    if task.get('kind') != 'final-app-verify' or not retained_proposal_resume_enabled(profile):
+        return None
+    file = _latest_workflow_failure(root, profile, task)
+    if file is None:
+        return None
+    try:
+        value = parse(read(root, file.relative_to(root).as_posix()))
+        error = value.get('error') or {}
+        sources = value.get('source_sha256') or {}
+        code = error.get('code')
+        if type(sources) is not dict or not sources:
+            return None
+        for name, expected in sources.items():
+            if type(name) is not str or type(expected) not in (str, type(None)):
+                return None
+            # Review-harness edits must not release a terminal workflow refusal.
+            # App, scenario, contract, and workflow-runner bytes still do.
+            if name in _REVIEW_HARNESS_DRIFT:
+                continue
+            if _cached_source_sha(root, name, source_hashes) != expected:
+                return None
+        if code in _TERMINAL_WORKFLOW_CODES:
+            return 'unchanged_workflow_refusal'
+        if code not in _REPEAT_WORKFLOW_CODES or not _repeated_substantive_workflow_failure(root, file, code, sources):
+            return None
+    except (OSError, ValueError, TypeError, KeyError):
+        return None
+    return 'unchanged_workflow_refusal'
+
+
+def _refusal_evidence(root, profile, task):
+    directory = _feedback_directory(profile, task)
+    names = [directory + '/proposal.json', directory + '/application-intent.json', directory + '/application.json',
+             directory + '/source-only-result.json', directory + '/failed-final-review-source-fence.json',
+             _resume_name(profile, task),
+             _resume_name(profile, task, 'producer-claim.json'), _supplement_path(profile, task),
+             _keyboard_name(profile, task, 'phase.json'), directory + '/producer-repair-failed.json',
+             payment_path(profile, task), *(task.get('edit_paths') or [])]
+    parts = []
+    for name in names:
+        path = physical(root, name)
+        digest = hashlib.sha256(path.read_bytes()).hexdigest() if path.is_file() else '-'
+        parts.append(name + ':' + digest)
+    return hashlib.sha256('\n'.join(parts).encode()).hexdigest()
+
+
+def _named_refusal(exc, pairs):
+    text = str(exc)
+    for needle, reason in pairs:
+        if needle in text:
+            return reason
+    return None
+
+
+def _supplemental_terminal(root, profile, task):
+    if not physical(root, _supplement_path(profile, task)).exists():
+        return None
+    try:
+        producer_repair_remaining_seconds(root, profile, task)
+    except RemediationRefusal as exc:
+        return _named_refusal(exc, (('no renewal', 'supplemental_deadline_exhausted'),))
+    except (OSError, ValueError, KeyError, TypeError):
+        return None
+    return None
+
+
+def _keyboard_terminal(root, profile, task):
+    directory = _feedback_directory(profile, task)
+    phase_name = _keyboard_name(profile, task, 'phase.json')
+    if not physical(root, phase_name).exists() and not physical(root, directory + '/producer-repair-failed.json').exists():
+        return None
+    if physical(root, phase_name).exists():
+        try:
+            keyboard_normalization_remaining_seconds(root, profile, task)
+        except RemediationRefusal as exc:
+            reason = _named_refusal(exc, (('no renewal', 'keyboard_deadline_exhausted'),))
+            if reason:
+                return reason
+        except (OSError, ValueError, KeyError, TypeError):
+            return None
+    try:
+        _keyboard_normalization_trigger(root, profile, parse(read(root, profile['taskSpecPath'])), task)
+    except RemediationRefusal as exc:
+        return _named_refusal(exc, (
+            ('not the exact current keyboard-result producer failure', 'keyboard_result_refusal'),
+            ('no renewal', 'keyboard_deadline_exhausted')))
+    except (OSError, ValueError, KeyError, TypeError):
+        return None
+    return None
+
+
+def _paid_role_failed(root, profile, task):
+    if not physical(root, payment_path(profile, task)).exists():
+        return None
+    try:
+        paid = payments(root, profile, task)
+    except (RemediationRefusal, OSError, ValueError, KeyError, TypeError):
+        return None
+    if any(isinstance(row, dict) and row.get('role') == 'proposal' and row.get('state') == 'failed'
+           for row in paid.get('history') or []):
+        return 'paid_role_failed_no_refund'
+    return None
+
+
+def terminal_refusal_reason(root, profile, task, *, source_hashes=None):
+    """A stable reason another ordinary attempt cannot succeed, or None.
+
+    Clocks, payments, and proposals are only read. A parseable sealed intent,
+    an open supplement, an in-window resume whose fence still matches, and a
+    final review whose source moved after its fence stay runnable. An admitted
+    child whose failed-review fence no longer matches its stored task is parked.
+    """
+    if task.get('kind') == 'final-app-verify':
+        hashes = source_hashes if source_hashes is not None else {}
+        return (_unchanged_final_review_terminal(root, profile, task, hashes)
+                or _unchanged_workflow_refusal(root, profile, task, hashes))
+    if task.get('kind') != KIND or task.get('phase_remediation', {}).get('mode') != FINAL_MODE:
+        return None
+    if not retained_proposal_resume_enabled(profile, task):
+        return None
+    directory = _feedback_directory(profile, task)
+    if physical(root, directory + '/source-only-result.json').exists():
+        return None
+    if physical(root, _supplement_path(profile, task)).exists():
+        return _supplemental_terminal(root, profile, task)
+    keyboard = _keyboard_terminal(root, profile, task)
+    if keyboard or physical(root, _keyboard_name(profile, task, 'phase.json')).exists() or physical(
+            root, directory + '/producer-repair-failed.json').exists():
+        return keyboard
+    if physical(root, _resume_name(profile, task, 'producer-claim.json')).exists():
+        return 'producer_claim_blocks_rerun'
+    phase_name = _resume_name(profile, task)
+    if not physical(root, phase_name).exists():
+        return _paid_role_failed(root, profile, task)
+    try:
+        phase = _resume_phase(root, profile, task)
+    except (RemediationRefusal, OSError, ValueError, KeyError, TypeError) as exc:
+        return _named_refusal(exc, (
+            ('model receipt', 'model_receipt_rejected'),
+            ('genuine final failed-review fence differs', 'final_failure_fence_differs'),
+        ))
+    intent_name = directory + '/application-intent.json'
+    if not physical(root, intent_name).exists():
+        if type(phase.get('deadline_at_ms')) is int and phase['deadline_at_ms'] <= int(time.time() * 1000):
+            return 'resume_deadline_without_sealed_intent'
+        return _paid_role_failed(root, profile, task)
+    try:
+        application = parse(read(root, intent_name))
+    except (OSError, ValueError, TypeError):
+        return 'sealed_intent_unreadable'
+    if application.get('proposal') != phase.get('proposal'):
+        return None
+    current = _current_sources(root, task)
+    before, after = application.get('before') or {}, application.get('after') or {}
+    if any(current.get(name) not in {before.get(name), after.get(name)} for name in task.get('edit_paths') or []):
+        return 'foreign_source_drift'
+    if current == application.get('after'):
+        return None
+    try:
+        unusable = _sealed_proposal_unusable(root, task, phase, application)
+    except (RemediationRefusal, OSError, ValueError, KeyError, TypeError):
+        return 'sealed_scenario_unparseable'
+    return unusable or _paid_role_failed(root, profile, task)
+
+
+def _board_status(part):
+    """The single status inside one heading, or None when the line is not unique."""
+    found = []
+    for line in part.splitlines(keepends=True):
+        match = _STATUS_LINE.fullmatch(line)
+        if match:
+            found.append(match.group(1))
+    if len(found) != 1:
+        return None
+    return found[0]
+
+
+def _replace_board_status(text, task_id, new_status):
+    part = blocks(text).get(task_id)
+    if part is None:
+        return text, None
+    lines = part.splitlines(keepends=True)
+    found = [index for index, line in enumerate(lines) if _STATUS_LINE.fullmatch(line)]
+    if len(found) != 1:
+        raise RemediationRefusal('board status line is not unique')
+    current = _STATUS_LINE.fullmatch(lines[found[0]]).group(1)
+    if current == new_status:
+        return text, current
+    newline = '\n' if lines[found[0]].endswith('\n') else ''
+    lines[found[0]] = '- Status: ' + new_status + newline
+    updated = ''.join(lines)
+    if text.count(part) != 1:
+        raise RemediationRefusal('board block is not unique')
+    return text.replace(part, updated, 1), current
+
+
+# A split save unparks on the first write. The workflow then starts, the
+# next write lands, and the run dies STALE_SOURCE and rearms. Hold that
+# release until every changed non-harness file has been quiet.
+_SOURCE_SETTLE_NS = 45_000_000_000
+
+
+def _recorded_refusal_sources(root, profile, task):
+    """Bytes a parked final review compared, as path to expected sha256."""
+    recorded = []
+    fence_name = _feedback_directory(profile, task) + '/failed-final-review-source-fence.json'
+    if physical(root, fence_name).is_file():
+        try:
+            failed = parse(read(root, fence_name))
+            snapshot = (failed.get('identity') or {}).get('source_snapshot') or {}
+            sources = snapshot.get('source_sha256') or {}
+            if type(sources) is dict:
+                recorded.append(sources)
+            scenario_name = 'swissknife/test/e2e/functional-workflows/' + str(task.get('app_id')) + '.json'
+            contract_name = profile.get('appContractPath')
+            extra = {}
+            if type(snapshot.get('scenario_sha256')) is str:
+                extra[scenario_name] = snapshot['scenario_sha256']
+            if type(contract_name) is str and type(snapshot.get('contract_sha256')) is str:
+                extra[contract_name] = snapshot['contract_sha256']
+            if extra:
+                recorded.append(extra)
+        except (OSError, ValueError, TypeError, KeyError):
+            pass
+    failure = _latest_workflow_failure(root, profile, task)
+    if failure is not None:
+        try:
+            value = parse(read(root, failure.relative_to(root).as_posix()))
+            sources = value.get('source_sha256') or {}
+            if type(sources) is dict:
+                recorded.append(sources)
+        except (OSError, ValueError, TypeError, KeyError):
+            pass
+    return recorded
+
+
+def _hot_source_release(root, profile, task, source_hashes):
+    """True when a cleared final refusal still has a just-written source file.
+
+    Harness drift does not count. An old substantive change releases. A file
+    that changed within the settle window keeps the park for this cycle.
+    """
+    if task.get('kind') != 'final-app-verify':
+        return False
+    now = time.time_ns()
+    for sources in _recorded_refusal_sources(root, profile, task):
+        for name, expected in sources.items():
+            if type(name) is not str or name in _REVIEW_HARNESS_DRIFT or type(expected) not in (str, type(None)):
+                continue
+            if _cached_source_sha(root, name, source_hashes) == expected:
+                continue
+            path = physical(root, name)
+            try:
+                if path.is_file() and not path.is_symlink() and now - path.stat().st_mtime_ns < _SOURCE_SETTLE_NS:
+                    return True
+            except OSError:
+                return True
+    return False
+
+
+def sync_terminal_refusal_frontier(root, profile, *, skip=()):
+    """Move a task with no legal continuation off the selectable frontier.
+
+    Status becomes blocked, never completed. A later change that clears the
+    refusal restores the previous status once a changed final-app source has
+    been quiet. Payments, proposals, and deadlines stay untouched, and at
+    least the attempt record is written before the board.
+    """
+    if not retained_proposal_resume_enabled(profile):
+        return []
+    todo_name = profile.get('todoPath')
+    if not todo_name or not physical(root, todo_name).exists():
+        return []
+    spec = parse(read(root, profile['taskSpecPath']))
+    attempt_name = profile['runtimeRoot'] + '/state/lane_resume_attempts.json'
+    from ipfs_accelerate_py.agent_supervisor.rescue.lane_resume import _load_attempt_state, _store_attempt_state
+    if physical(root, attempt_name).exists():
+        attempts, retry_after, fixed_points, evidence = _load_attempt_state(physical(root, attempt_name))
+    else:
+        attempts, retry_after, fixed_points, evidence = {}, {}, {}, {}
+    board = read(root, todo_name).decode()
+    statuses = {}
+    for task_id, part in blocks(board).items():
+        status = _board_status(part)
+        if status:
+            statuses[task_id] = status
+    skip = set(skip)
+    changed = []
+    attempt_changed = False
+    source_hashes = {}
+    for task in spec['tasks']:
+        task_id = task['task_id']
+        if task_id in skip:
+            continue
+        status = statuses.get(task_id)
+        record = dict((fixed_points.get(task_id) or {}).get('terminal_refusal_park') or {})
+        if status not in _SELECTABLE_STATUS and not (status == 'blocked' and record):
+            continue
+        try:
+            evidence_now = _refusal_evidence(root, profile, task)
+            reason = terminal_refusal_reason(root, profile, task, source_hashes=source_hashes)
+            settling = not reason and _hot_source_release(root, profile, task, source_hashes)
+        except (RemediationRefusal, OSError, ValueError, KeyError, TypeError):
+            continue
+        slot = fixed_points.setdefault(task_id, {})
+        if reason and status in _SELECTABLE_STATUS:
+            slot['terminal_refusal_park'] = {'reason': reason, 'evidence': evidence_now,
+                                              'previous_status': status, 'work_complete': False,
+                                              'completion_authority': False}
+            board, _current = _replace_board_status(board, task_id, 'blocked')
+            statuses[task_id] = 'blocked'
+            changed.append(task_id)
+            attempt_changed = True
+        elif settling:
+            continue
+        elif status == 'blocked' and record and not reason:
+            previous = record.get('previous_status')
+            if previous not in _SELECTABLE_STATUS:
+                previous = 'ready'
+            slot.pop('terminal_refusal_park', None)
+            board, _current = _replace_board_status(board, task_id, previous)
+            statuses[task_id] = previous
+            changed.append(task_id)
+            attempt_changed = True
+        elif status == 'blocked' and record and (
+                record.get('reason') != reason or record.get('evidence') != evidence_now):
+            record.update(reason=reason, evidence=evidence_now)
+            slot['terminal_refusal_park'] = record
+            attempt_changed = True
+    if attempt_changed:
+        _store_attempt_state(physical(root, attempt_name), attempts, retry_after, fixed_points, evidence)
+    if changed:
+        atomic(root, todo_name, board.encode())
+    return changed
+
+
+_DEPENDS_LINE = re.compile(r'^- Depends on: ([^\n]*)(\n?)$')
+_ANY_STATUS_LINE = re.compile(r'^- Status: (\S+)[ \t]*(\n?)$')
+_COMPLETED_BOARD_STATUS = frozenset({'completed', 'complete', 'done'})
+
+
+def _scheduling_status(part):
+    """The one status line, including completed, or None when it is not unique."""
+    found = []
+    for line in part.splitlines(keepends=True):
+        match = _ANY_STATUS_LINE.fullmatch(line)
+        if match:
+            found.append(match.group(1).lower())
+    if len(found) != 1:
+        return None
+    return found[0]
+
+
+def _board_dependency_ids(part):
+    found = []
+    for line in part.splitlines(keepends=True):
+        match = _DEPENDS_LINE.fullmatch(line)
+        if match:
+            found.append(match.group(1))
+    if len(found) != 1:
+        return None
+    return [item.strip() for item in found[0].split(',')
+            if item.strip() and item.strip().lower() not in {'none', 'n/a', '-'}]
+
+
+def _drop_board_dependency(text, task_id, dependency):
+    part = blocks(text).get(task_id)
+    if part is None:
+        return text, False
+    lines = part.splitlines(keepends=True)
+    found = [index for index, line in enumerate(lines) if _DEPENDS_LINE.fullmatch(line)]
+    if len(found) != 1:
+        raise RemediationRefusal('board dependency line is not unique')
+    match = _DEPENDS_LINE.fullmatch(lines[found[0]])
+    identifiers = _board_dependency_ids(part)
+    if identifiers is None or dependency not in identifiers:
+        return text, False
+    remaining = [item for item in identifiers if item != dependency]
+    lines[found[0]] = '- Depends on: ' + (', '.join(remaining) if remaining else 'none') + match.group(2)
+    updated = ''.join(lines)
+    if text.count(part) != 1:
+        raise RemediationRefusal('board block is not unique')
+    return text.replace(part, updated, 1), True
+
+
+def release_terminal_child_dependencies(root, profile):
+    """Schedule a readonly final review after its one child can no longer run.
+
+    The spec dependency, child status, clock, and payments stay. The board
+    scheduling line drops that child only when it is the sole unfinished
+    dependency and the parent has a real source change. A blocked child with
+    no refusal is left in place.
+    """
+    if not retained_proposal_resume_enabled(profile):
+        return []
+    todo_name = profile.get('todoPath')
+    if not todo_name or not physical(root, todo_name).exists():
+        return []
+    spec = parse(read(root, profile['taskSpecPath']))
+    board = read(root, todo_name).decode()
+    parts = blocks(board)
+    statuses = {}
+    for task_id, part in parts.items():
+        status = _scheduling_status(part)
+        if status:
+            statuses[task_id] = status
+    by_id = {task['task_id']: task for task in spec['tasks']}
+    source_hashes = {}
+    released = []
+    for task in spec['tasks']:
+        if task.get('kind') != 'final-app-verify':
+            continue
+        task_id = task['task_id']
+        if statuses.get(task_id) not in _SELECTABLE_STATUS:
+            continue
+        child = _final_child_dependency(task_id)
+        part = parts.get(task_id)
+        if child is None or child not in by_id or part is None:
+            continue
+        depends = _board_dependency_ids(part)
+        if depends is None or child not in depends:
+            continue
+        if any(statuses.get(dep) not in _COMPLETED_BOARD_STATUS for dep in depends if dep != child):
+            continue
+        if statuses.get(child) != 'blocked':
+            continue
+        try:
+            if terminal_refusal_reason(root, profile, task, source_hashes=source_hashes):
+                continue
+            if not terminal_refusal_reason(root, profile, by_id[child], source_hashes=source_hashes):
+                continue
+        except (RemediationRefusal, OSError, ValueError, KeyError, TypeError):
+            continue
+        board, changed = _drop_board_dependency(board, task_id, child)
+        if not changed:
+            continue
+        parts = blocks(board)
+        released.append(task_id)
+    if released:
+        atomic(root, todo_name, board.encode())
+    return released
+
+
+def rearm_exhausted_sealed_intents(root, profile):
+    """Admit one normal producer while a sealed intent is still unapplied.
+
+    The resume clock, payments, and proposal are not rewritten. A missing
+    intent, a producer claim, or bytes already at the proposal stay parked.
+    """
+    if not retained_proposal_resume_enabled(profile):
+        return []
+    from ipfs_accelerate_py.agent_supervisor.rescue.lane_resume import (
+        _ATTEMPT_LIMIT, _load_attempt_state, _store_attempt_state)
+    spec = parse(read(root, profile['taskSpecPath']))
+    attempt_name = profile['runtimeRoot'] + '/state/lane_resume_attempts.json'
+    if not physical(root, attempt_name).exists():
+        return []
+    attempts, retry_after, fixed_points, evidence = _load_attempt_state(physical(root, attempt_name))
+    now_ms = int(time.time() * 1000)
+    rearmed = []
+    for task in spec['tasks']:
+        if task.get('kind') != KIND or task.get('phase_remediation', {}).get('mode') != FINAL_MODE:
+            continue
+        if not retained_proposal_resume_enabled(profile, task):
+            continue
+        task_id = task['task_id']
+        try:
+            if not physical(root, _resume_name(profile, task)).exists():
+                continue
+            if physical(root, _resume_name(profile, task, 'producer-claim.json')).exists():
+                continue
+            phase = _resume_phase(root, profile, task)
+            application = _sealed_expired_intent(root, profile, task, phase)
+            if application is None or _current_sources(root, task) == application.get('after'):
+                continue
+            # An edit that does not parse can never land. Leave that budget parked.
+            if _sealed_proposal_unusable(root, task, phase, application) is not None:
+                continue
+            raw_limit = task.get('semantic_failure_limit', 6)
+            limit = int(raw_limit) if type(raw_limit) is int and not isinstance(raw_limit, bool) else 6
+            if not 1 <= limit <= 6:
+                limit = 6
+        except (RemediationRefusal, OSError, ValueError, KeyError, TypeError):
+            continue
+        progress = dict((fixed_points.get(task_id) or {}).get('execution_progress') or {})
+        failures = int(progress.get('semantic_failures') or 0)
+        waiting = int(retry_after.get(task_id) or 0) > now_ms
+        attempts_spent = int(attempts.get(task_id) or 0) >= _ATTEMPT_LIMIT
+        if failures < limit and not waiting and not attempts_spent:
+            continue
+        if failures >= limit and progress:
+            progress['semantic_failures'] = limit - 1
+            fixed_points.setdefault(task_id, {})['execution_progress'] = progress
+        if waiting or attempts_spent:
+            attempts[task_id] = 0
+            retry_after.pop(task_id, None)
+        rearmed.append(task_id)
+    if rearmed:
+        _store_attempt_state(physical(root, attempt_name), attempts, retry_after, fixed_points, evidence)
+    return rearmed
+
+
+def _sealed_expired_intent(root, profile, task, phase):
+    """An application intent sealed inside the resume window, after that window.
+
+    Reading it does not renew the clock. A missing intent stays a hard refusal.
+    """
+    if type(phase) is not dict or type(phase.get('deadline_at_ms')) is not int:
+        return None
+    if phase['deadline_at_ms'] > int(time.time() * 1000):
+        return None
+    name = _feedback_directory(profile, task) + '/application-intent.json'
+    if not physical(root, name).exists():
+        return None
+    application = parse(read(root, name))
+    need(type(application) is dict and application.get('proposal') == phase.get('proposal'),
+         'retained application proposal rebound')
+    return application
+
+
+def _start_retained_proposal_resume(root, profile, spec, task, *, allow_expired_sealed=True):
     name = _resume_name(profile, task)
     if physical(root, name).exists():
-        retained_proposal_resume_remaining_seconds(root, profile, task)
-        return _resume_phase(root, profile, task)
+        phase = _resume_phase(root, profile, task)
+        if not (allow_expired_sealed and _sealed_expired_intent(root, profile, task, phase) is not None):
+            retained_proposal_resume_remaining_seconds(root, profile, task)
+        return phase
     directory = _feedback_directory(profile, task)
     need(not physical(root, directory + '/source-only-result.json').exists(), 'source-only result already exists')
     proposal, lineage = _retained_paid_proposal(root, profile, spec, task)
@@ -2515,13 +3299,17 @@ def _start_retained_proposal_resume(root, profile, spec, task):
     return _resume_phase(root, profile, task)
 
 
-def _apply_retained_proposal(root, profile, task, proposal, phase, *, apply_edits, ensure_lease, check_owned, remember_owned):
+def _apply_retained_proposal(root, profile, task, proposal, phase, *, apply_edits, ensure_lease, check_owned, remember_owned,
+                             allow_expired_sealed=True):
     directory = _feedback_directory(profile, task)
     intent_name = directory + '/application-intent.json'
+    expired = _sealed_expired_intent(root, profile, task, phase) if allow_expired_sealed else None
     if physical(root, intent_name).exists():
         application = parse(read(root, intent_name))
         need(application['proposal'] == phase['proposal'], 'retained application proposal rebound')
     else:
+        need(expired is None and phase['deadline_at_ms'] > int(time.time() * 1000),
+             'retained-proposal resume absolute deadline exhausted')
         ensure_lease(profile); check_owned(profile, task['edit_paths'])
         before, original_bytes, retained = {}, {}, {}
         for index, name in enumerate(task['edit_paths']):
@@ -2545,7 +3333,8 @@ def _apply_retained_proposal(root, profile, task, proposal, phase, *, apply_edit
     need(all(ledger.get(name) in {application['before'][name], application['after'][name]} for name in task['edit_paths']),
          'foreign ledger drift during retained proposal application')
     pending = [name for name in task['edit_paths'] if current[name] != application['after'][name]]
-    retained_proposal_resume_remaining_seconds(root, profile, task)
+    if expired is None:
+        retained_proposal_resume_remaining_seconds(root, profile, task)
     ensure_lease(profile)
     if pending:
         check_owned(profile, pending)
@@ -2560,21 +3349,38 @@ def _apply_retained_proposal(root, profile, task, proposal, phase, *, apply_edit
     return application
 
 
+def _resume_producer_budget(root, profile, task, phase, *, allow_expired_sealed):
+    """Bound the unpaid producer. An expired sealed intent does not rewrite its clock."""
+    try:
+        return retained_proposal_resume_remaining_seconds(root, profile, task)
+    except RemediationRefusal as exc:
+        if not allow_expired_sealed or 'absolute deadline exhausted' not in str(exc):
+            raise
+        need(_sealed_expired_intent(root, profile, task, phase) is not None,
+             'retained-proposal resume absolute deadline exhausted')
+        timeout = task.get('timeout_seconds', 900)
+        need(type(timeout) is int and not isinstance(timeout, bool) and 0 < timeout <= 3600,
+             'retained producer budget invalid')
+        return min(1200, timeout)
+
+
 def execute_retained_proposal_resume(root, profile_path, profile, spec, task, *, producer_failure_context=None, **kwargs):
     with _mode(FINAL_MODE):
-        phase = _start_retained_proposal_resume(root, profile, spec, task)
+        allow_expired_sealed = kwargs.get('finish_expired_sealed_intent', True) is not False
+        phase = _start_retained_proposal_resume(root, profile, spec, task, allow_expired_sealed=allow_expired_sealed)
         _, parent, _ = child_contract(root, profile, spec, task)
         claim_name = _resume_name(profile, task, 'producer-claim.json')
         need(not physical(root, claim_name).exists(), 'unpaid resumed producer outcome unknown; never rerun unchanged source')
         proposal = parse(check_ref(root, phase['proposal']))
         application = _apply_retained_proposal(root, profile, task, proposal, phase,
+            allow_expired_sealed=allow_expired_sealed,
             **{key: kwargs[key] for key in ('apply_edits', 'ensure_lease', 'check_owned', 'remember_owned')})
         claim = {'schema': RESUME_SCHEMA, 'task_id': task['task_id'], 'phase': ref(root, _resume_name(profile, task)),
                  'deadline_at_ms': phase['deadline_at_ms'],
                  'application': ref(root, _feedback_directory(profile, task) + '/application.json'),
                  'max_paid_calls': 0, 'completion_authority': False}
         atomic(root, claim_name, wire(claim) + b'\n', exclusive=True)
-        remaining = retained_proposal_resume_remaining_seconds(root, profile, task)
+        remaining = _resume_producer_budget(root, profile, task, phase, allow_expired_sealed=allow_expired_sealed)
         try:
             files, checks = kwargs['workflow'](profile, parent,
                 physical(root, profile['runtimeRoot'] + '/tasks/' + parent['task_id'] + '/verification'),

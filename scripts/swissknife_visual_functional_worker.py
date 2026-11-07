@@ -20,6 +20,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import time
 from typing import Any
 import urllib.request
 import uuid
@@ -402,8 +403,18 @@ def run(argv: list[str], *, timeout: int = 600, env: dict[str, str] | None = Non
 
 def dirty_paths() -> set[str]:
     # Share the supervisor's real nested-repository/index/conflict inspection.
+    # One cold or locked 30s git diff must not burn the semantic budget.
     from swissknife_visual_functional_supervisor import dirty_paths as inspect_dirty_paths
-    return set(inspect_dirty_paths(ROOT))
+    delay = 1
+    for attempt in range(3):
+        try:
+            return set(inspect_dirty_paths(ROOT))
+        except subprocess.TimeoutExpired:
+            if attempt == 2:
+                raise
+            time.sleep(delay)
+            delay *= 2
+    raise RuntimeError("git inspection timed out")
 
 
 def check_owned_sources(profile: dict, paths: list[str]) -> None:
@@ -2845,6 +2856,11 @@ def execute(profile_path: str, profile: dict, spec: dict, task: dict) -> dict:
                 [profile["appContractPath"], str(files[0].relative_to(ROOT))], images, review_output)
             if reviewed["response"]["decision"] != "pass":
                 remember_failed_review(ROOT, profile, task, validated, review_output)
+                from swissknife_visual_functional_final_coverage import rebuild_final_receipt
+                try:
+                    rebuild_final_receipt(ROOT, profile, task)
+                except (OSError, ValueError, TypeError):
+                    pass
                 raise ValueError("final independent desktop/mobile visual review requires scoped remediation; no new repair admission")
             ensure_lease(profile)
             validated = validate_workflow(profile, task, files[0])
@@ -2864,7 +2880,8 @@ def execute(profile_path: str, profile: dict, spec: dict, task: dict) -> dict:
             model=model, workflow=workflow, validate_workflow=validate_workflow,
             apply_edits=lambda root, edits, paths, **options: apply_task_edits(root, profile, task, edits, paths, **options), ensure_lease=ensure_lease,
             check_owned=check_owned_sources, remember_owned=remember_owned_sources,
-            producer_failure_context=producer_failure_context)
+            producer_failure_context=producer_failure_context,
+            finish_expired_sealed_intent=True)
     elif kind == "verify":
         from swissknife_visual_functional_llm import apply_validated_edits
         for attempt in range(1, 4):
@@ -2914,6 +2931,8 @@ def execute(profile_path: str, profile: dict, spec: dict, task: dict) -> dict:
             detail = coverage(ROOT, profile, task, validate_task=validate, retained_report=retained_workflow_report,
                               validate_report=validate_workflow, spec=spec)
             report = directory / "final-app-coverage.json"; atomic_json(report, detail); files = [report]
+            if detail.get("fresh_positive_visual_review_count") != 45 or detail.get("gaps"):
+                raise ValueError("final regression coverage lacks a positive independent review for every canonical app")
         else:
             for app in json.loads(path_in_root(profile["appContractPath"]).read_text())["apps"]:
                 app_task = dict(task, app_id=app["app_id"])
@@ -2947,7 +2966,17 @@ def execute(profile_path: str, profile: dict, spec: dict, task: dict) -> dict:
 
 def validate(profile: dict, task: dict) -> dict:
     directory = runtime_root(profile) / "tasks" / task["task_id"]
-    receipt = json.loads((directory / "receipt.json").read_text())
+    receipt_path = directory / "receipt.json"
+    if task.get("kind") == "final-app-verify":
+        from swissknife_visual_functional_final_coverage import rebuild_final_receipt
+        try:
+            rebuild_final_receipt(ROOT, profile, task, validate_report=validate_workflow)
+        except (OSError, ValueError, TypeError):
+            pass
+    if not receipt_path.is_file():
+        from swissknife_visual_functional_final_coverage import ABSENT_RECEIPT
+        raise ValueError(ABSENT_RECEIPT)
+    receipt = json.loads(receipt_path.read_text())
     if (receipt.get("schema") != "swissknife.visual-functional-task.v1" or receipt.get("kind") != task["kind"]
             or receipt.get("task_id") != task["task_id"] or receipt.get("task_spec_sha256") != stable(task)):
         raise ValueError("task evidence belongs to a different contract")
@@ -3037,6 +3066,24 @@ def validate(profile: dict, task: dict) -> dict:
     if task["kind"] == "final-app-verify":
         from swissknife_visual_functional_final_coverage import validate_final_task_contract, binding, review_join
         validate_final_task_contract(ROOT, profile, task)
+        refusal = receipt.get("detail") if type(receipt.get("detail")) is dict else {}
+        if refusal.get("positive_review") is False:
+            records = [item for item in receipt.get("artifacts", [])
+                       if type(item) is dict and Path(str(item.get("path", ""))).name == "visual-review.json"]
+            if len(records) != 1:
+                raise ValueError("final app refusal receipt lacks its exact retained visual review")
+            review_path = path_in_root(records[0]["path"])
+            if review_path not in artifact_paths:
+                raise ValueError("final app refusal receipt lacks its exact retained visual review")
+            review = json.loads(review_path.read_text())
+            response = review.get("response") if type(review.get("response")) is dict else {}
+            decision = response.get("decision")
+            if (decision == "pass" or decision not in {"needs_changes", "blocked"}
+                    or decision != refusal.get("decision") or refusal.get("readonly_verification") is not True
+                    or type(refusal.get("repair_admissions")) is not int or refusal["repair_admissions"] != 0
+                    or "final_viewport_review_join" in refusal):
+                raise ValueError("final app refusal receipt does not match its retained non-pass review")
+            return receipt
         report = retained_workflow_report(profile, task, receipt, directory / "verification")
         validated = validate_workflow(profile, task, report)
         joined = review_join(ROOT, profile, task, binding(task, validated), report.parent / "visual-review.json")
@@ -3125,6 +3172,10 @@ def main(argv: list[str] | None = None) -> int:
                   file=sys.stderr, flush=True)
             return 75
         print(f"SVF {args.task_id}: {type(error).__name__}: {error}", file=sys.stderr, flush=True)
+        # Exit 76 is the loaded unjudged-native path. A streaming failure has
+        # no review decision, so it must not spend the semantic-failure budget.
+        if type(error).__name__ == "LLMRouterError" and str(error) == "Grok CLI streaming process failed":
+            return 76
         return 1
 
 
