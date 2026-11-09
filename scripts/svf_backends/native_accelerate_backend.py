@@ -72,6 +72,20 @@ class OfflineGPT2Backend:
                 "simulated": False, "echo_fallback": False}
 
 
+def prepare_output_dir(output_dir: Path) -> None:
+    """Create a fresh job directory, or keep one that contains only queue.json."""
+    if output_dir.exists():
+        if output_dir.is_symlink() or not output_dir.is_dir():
+            raise ValueError("Native execution output must be a fresh directory")
+        children = list(output_dir.iterdir())
+        queue = output_dir / "queue.json"
+        if (len(children) != 1 or not queue.is_file() or queue.is_symlink()
+                or children[0].name != "queue.json"):
+            raise ValueError("Native execution output must be a fresh directory")
+        return
+    output_dir.mkdir(parents=True, exist_ok=False)
+
+
 async def execute_native(output_dir: Path, *, model=MODEL_ID, input_data="short test",
                          max_new_tokens=MAX_NEW_TOKENS, qualification=False, backend=None, worker_context=None) -> dict:
     validate_request(model, input_data, max_new_tokens)
@@ -81,7 +95,7 @@ async def execute_native(output_dir: Path, *, model=MODEL_ID, input_data="short 
     output_dir = output_dir.resolve()
     if not output_dir.is_relative_to(ROOT / "data/agent_supervisor/swissknife_visual_functional"):
         raise ValueError("Qualification outputs must remain in the campaign namespace")
-    output_dir.mkdir(parents=True, exist_ok=False)
+    prepare_output_dir(output_dir)
     sys.path.insert(0, str(ROOT / "external/ipfs_accelerate"))
     sdk = importlib.import_module("ipfs_accelerate_py.inference_backend_manager")
     manager_path = ROOT / "external/ipfs_accelerate/ipfs_accelerate_py/inference_backend_manager.py"

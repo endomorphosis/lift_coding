@@ -1469,6 +1469,14 @@ def between_cycles(root, profile, **kwargs):
         rebuild_missing_final_receipts(root, profile)
     except (OSError, ValueError, TypeError, ImportError):
         pass
+    try:
+        from swissknife_visual_functional_proof_ceiling import record_proof_ceiling_plan
+        planned = record_proof_ceiling_plan(root, profile)
+        if planned.get('admitted') and result.get('state') == 'idle':
+            result = {'state':'proof_ceiling_planned','task_ids':list(planned.get('task_ids') or []),
+                      'work_complete':False,'completion_authority':False}
+    except (OSError, ValueError, TypeError, ImportError, KeyError):
+        pass
     return result
 
 _owned_one = recoverable_owned_source

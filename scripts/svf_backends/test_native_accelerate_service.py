@@ -18,7 +18,7 @@ class NativeAccelerateTests(unittest.TestCase):
   self.backend=service.NativeAccelerate(self.runtime,root=self.root)
   recovery=patch.object(self.backend.worker,'recover_async');recovery.start();self.addCleanup(recovery.stop)
  def authored_request(self,request_id,job,model,text,tokens,correlation):
-  Path(job).mkdir(parents=True)
+  Path(job).mkdir(parents=True,exist_ok=True)
   return {'schema':'swissknife.native-accelerate-execution-result.v1','inference_executed':True,
    'source_sha256':self.backend.backend_sha,'manager_source_sha256':self.backend.sdk_sha,'model':model,
    'input':text,'offline':True,'external_provider_called':False,'warm_worker':{'request_id':request_id,'correlation_id':correlation,'worker_id':'authored-unit-only'},
@@ -89,10 +89,59 @@ class NativeAccelerateTests(unittest.TestCase):
   sent=child.call_args.args[3];self.assertIn('retained context',sent);self.assertIn('bounded question',sent)
   read=self.backend.call('get_task',{'task_id':payload['task_id']})
   self.assertEqual(read['receipt']['tool'],'get_task');self.assertTrue(read['content'][0]['json']['read_from_execution_record'])
+ def test_prepare_output_dir_keeps_only_a_queue_file(self):
+  import native_accelerate_backend as backend
+  fresh=Path(self.tmp.name)/'fresh'
+  backend.prepare_output_dir(fresh)
+  self.assertTrue(fresh.is_dir())
+  queued=Path(self.tmp.name)/'queued';queued.mkdir();(queued/'queue.json').write_text('{}')
+  backend.prepare_output_dir(queued)
+  dirty=Path(self.tmp.name)/'dirty';dirty.mkdir();(dirty/'execution.json').write_text('{}')
+  with self.assertRaisesRegex(ValueError,'fresh directory'):backend.prepare_output_dir(dirty)
+ def test_training_fixture_records_real_queue_transitions_and_checkpoint_cid(self):
+  ordinary={'model':'gpt2','input':'x','fixture_scope':'svf-native-readiness'}
+  with patch.object(self.backend.worker,'request',side_effect=self.authored_request):
+   plain=self.backend.call('submit_task',ordinary)['content'][0]['json']
+  self.assertFalse(plain['queue_used']);self.assertEqual(plain['execution_semantics'],'synchronous_completed_execution')
+  self.assertNotIn('checkpoint',plain);self.assertNotIn('queue_observed',plain)
+  prompt='dataset svf-training-isolated model gpt2'
+  args={'model':'gpt2','model_id':'gpt2','input':prompt,'prompt':prompt,'task_type':'inference','max_new_tokens':4,
+   'max_length':4,'backend':'cpu','task':'text-generation','fixture_scope':'svf-training-manager-g032','dry_run':False}
+  with patch.object(self.backend.worker,'request',side_effect=self.authored_request) as child:
+   result=self.backend.call('submit_task',args)
+  payload=result['content'][0]['json']
+  self.assertTrue(payload['queue_used']);self.assertEqual(payload['queue_observed'],'queued running completed')
+  self.assertEqual(payload['execution_semantics'],'queued_running_completed')
+  self.assertRegex(payload['checkpoint'],r'^b[a-z2-7]{58}$');self.assertTrue(payload['checkpoint'].startswith('bafkrei'))
+  job=self.runtime/'jobs'/payload['job_id'];raw=(job/'checkpoint.json').read_bytes()
+  self.assertEqual(payload['checkpoint'],service.raw_cid(raw))
+  body=json.loads(raw);self.assertEqual(body['output'],'Authored unit fixture only');self.assertEqual(body['prompt'],prompt)
+  self.assertNotIn('job_id',body);self.assertEqual((job/'checkpoint.json').stat().st_mode & 0o777,0o600)
+  transitions=[{'order':1,'status':'queued'},{'order':2,'status':'running'},{'order':3,'status':'completed'}]
+  self.assertEqual(payload['queue_transitions'],transitions)
+  self.assertEqual(payload['persisted_selection'],{'dataset_id':'svf-training-isolated','model_id':'gpt2'})
+  self.assertEqual(payload['owner_execution'],{'checkpoint':payload['checkpoint'],'dataset_id':'svf-training-isolated',
+   'model_id':'gpt2','output':'Authored unit fixture only','queue_transitions':transitions,'status':'completed'})
+  history=json.loads((self.runtime/'training-queue'/payload['job_id']/'queue.json').read_text())
+  self.assertEqual([row['status'] for row in history['transitions']],['queued','running','completed'])
+  self.assertEqual(history['transitions'][-1]['checkpoint'],payload['checkpoint'])
+  self.assertEqual(json.loads((job/'queue.json').read_text()),history)
+  child.assert_called_once()
+  read=self.backend.call('get_task',{'task_id':payload['task_id'],'job_id':payload['job_id']})['content'][0]['json']
+  self.assertEqual(read['checkpoint'],payload['checkpoint']);self.assertEqual(read['queue_observed'],'queued running completed')
+  self.assertEqual(read['owner_execution'],payload['owner_execution']);self.assertEqual(read['persisted_selection'],payload['persisted_selection'])
+  self.assertTrue(read['read_from_execution_record']);self.assertNotIn('bounded_recovery',payload)
+  self.assertNotIn('owner_execution',plain);self.assertNotIn('persisted_selection',plain)
+  recovered=dict(args,corrected_from='invalid')
+  with patch.object(self.backend.worker,'request',side_effect=self.authored_request):
+   second=self.backend.call('submit_task',recovered)['content'][0]['json']
+  self.assertEqual(second['bounded_recovery'],{'corrected_from':'invalid','dataset_id':'svf-training-isolated','model_id':'gpt2','output_limit':4,'status':'completed'})
+  self.assertEqual(second['queue_observed'],'queued running completed')
  def test_submit_conflicting_aliases_training_and_oversized_context_fail_without_child(self):
   cases=[{'model_name':'other','model_id':'gpt2','prompt':'x'},
    {'model_name':'gpt2','prompt':'x','payload':{'model_id':'other','prompt':'x'}},
    {'model_name':'gpt2','prompt':'x','task_type':'training'},
+   {'model':'gpt2','input':'dataset svf-training-isolated model gpt2','fixture_scope':'svf-native-readiness','corrected_from':'invalid'},
    {'model_name':'gpt2','prompt':'x','payload':{'context':'x'*513}}]
   with patch.object(self.backend.worker,'request') as child:
    for args in cases:

@@ -1,0 +1,16 @@
+{
+  "schema": "ipfs_accelerate_py/agent-supervisor/board-stall-watch-config@1",
+  "repo_root": "/home/barberb/lift_coding",
+  "profile_path": "config/swissknife_visual_functional_supervisor.json",
+  "board_path": "implementation_plan/docs/53-swissknife-visual-functional-mcplusplus.todo.md",
+  "task_prefix": "## SVF-",
+  "status_path": "data/agent_supervisor/swissknife_visual_functional/state/svf_status.json",
+  "state_dir": "data/agent_supervisor/swissknife_visual_functional/watchdog/board-stall",
+  "supervisor_cmdline_mark": "scripts/swissknife_visual_functional_supervisor.py",
+  "poll_seconds": 60,
+  "idle_stall_seconds": 300,
+  "heartbeat_stale_seconds": 600,
+  "restart_supervisor": false,
+  "work_complete": false,
+  "completion_authority": false
+}

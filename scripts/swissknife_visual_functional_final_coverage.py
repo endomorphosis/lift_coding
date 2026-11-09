@@ -2369,6 +2369,40 @@ def _compact_review_presentation(value):
     return result
 
 
+def _unjoined_failed_requests(root, child, scenario, child_path):
+    """Fetched failed calls that are not semantic success proof.
+
+    Rows are [request_index, phase_index, step_index, error, receipt_cid].
+    phase_index uses the first three scenario phases. Joined executed
+    observations stay in backend_observations and are not repeated here.
+    """
+    if 'backend_request_artifacts' not in child:
+        return []
+    retained = validate_backend_request_artifacts(root, child, scenario, child_path)
+    if not retained:
+        return []
+    joined = {item['request_phase_index'] for item in child.get('backend_observations', [])
+              if type(item.get('request_phase_index')) is int}
+    phases = list(BACKEND_PHASES[:3])
+    rows = []
+    for item in retained:
+        if item['request_index'] in joined or item['phase'] not in phases:
+            continue
+        receipt_id = item['receipt_id']
+        if type(receipt_id) is not str or re.fullmatch(r'b[a-z2-7]{58}', receipt_id) is None:
+            continue
+        reference = item['receipt_artifact']
+        value = parse(read(root, reference['path'], limit=reference['bytes']))
+        result = value.get('result')
+        if type(result) is not dict or set(result) != {'error'}:
+            continue
+        error = result['error']
+        if type(error) is not str or not error or len(error.encode()) > 256:
+            continue
+        rows.append([item['request_index'], phases.index(item['phase']), item['step_index'], error, receipt_id])
+    return rows
+
+
 def projection(root, report, *, retain_primary=True):
     """Bound semantic context; complete immutable observations remain retained."""
     need(type(retain_primary) is bool, 'primary presentation option must be boolean')
@@ -2426,12 +2460,19 @@ def projection(root, report, *, retain_primary=True):
         phase = phase_projection(child, scenario)
         if phase is not None:
             result['viewports'][-1]['phase_evidence'] = phase
+        failed = _unjoined_failed_requests(root, child, scenario, child_path)
+        if failed:
+            result['viewports'][-1]['failed_requests'] = failed
     if any('request_phase' in row for view in result['viewports'] for row in view['backend_observations']):
         result['backend_artifact_path_base'] = 'viewport_original_directory'
     result['instruction'] = ('Inspect both. Initial/demo/layout-only mobile state cannot prove mobile execution. '
         'Phased owner row/asserts=one request; unphased implies no identity/phase/success. '
         'HTMLMediaElement/CID only. Phased receipt/event paths use backend_artifact_path_base; filenames are raw CIDs. '
         'Final frames follow all steps/checks; prior unsupported values are phase-local; native rows keep phase/step order.')
+    if any(view.get('failed_requests') for view in result['viewports']):
+        result['failed_requests_columns'] = ['request', 'phase', 'step', 'error', 'receipt_cid']
+        result['instruction'] += (' failed_requests: request, phase index, step, error, receipt CID. '
+            'Failed outcome, not semantic success.')
     if any(view.get('decoded_images') for view in result['viewports']):
         result['instruction'] += ' retained_from:IMG source/content/dims, not canvas/layers.'
     result = _factor_projection(result)

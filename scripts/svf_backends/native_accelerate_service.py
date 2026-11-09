@@ -2,6 +2,7 @@
 """Isolated native accelerator MCP: cached CPU generation, no external fallback."""
 from __future__ import annotations
 import argparse
+import base64
 import datetime as dt
 import hashlib
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -59,7 +60,7 @@ TOOLS.append({'name':'WorkflowCoordinator.submit_task','description':'Run the ex
 
 def inference_arguments(args,*,submission=False):
  """Normalize reviewed aliases without silently dropping task data."""
- allowed=CONTEXT_ARGS|{'model','model_id','model_name','input','input_data','prompt','max_new_tokens','max_length','backend','task'}
+ allowed=CONTEXT_ARGS|{'model','model_id','model_name','input','input_data','prompt','max_new_tokens','max_length','backend','task','corrected_from'}
  if submission:allowed|={'task_type','payload'}
  if set(args)-allowed:raise ValueError('Unsupported native inference arguments')
  levels=[args]
@@ -92,6 +93,7 @@ def inference_arguments(args,*,submission=False):
  for key in ['max_new_tokens','max_length','backend','task']:
   value=coherent([key])
   if value is not None:result[key]=value
+ if 'corrected_from' in args:result['corrected_from']=args['corrected_from']
  return result
 
 def digest(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
@@ -104,6 +106,53 @@ def safe_runtime(root,path):
   if ancestor==root:break
   if ancestor.is_symlink():raise ValueError('Native accelerator runtime cannot use symlinks')
  return path
+
+def raw_cid(data):
+ if type(data) is not bytes:raise TypeError('CID input must be bytes')
+ return 'b'+base64.b32encode(bytes([1,0x55,0x12,32])+hashlib.sha256(data).digest()).decode().lower().rstrip('=')
+
+def write_private(path,data):
+ if type(data) is not bytes:raise TypeError('private write requires bytes')
+ path=Path(path)
+ path.parent.mkdir(parents=True,mode=0o700,exist_ok=True)
+ path.parent.chmod(0o700)
+ temporary=path.with_name(path.name+'.'+uuid.uuid4().hex+'.tmp')
+ fd=os.open(temporary,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
+ try:
+  view=memoryview(data)
+  while view:
+   written=os.write(fd,view)
+   if written<=0:raise OSError('private write made no progress')
+   view=view[written:]
+  os.fsync(fd)
+ finally:os.close(fd)
+ try:
+  os.chmod(temporary,0o600);os.replace(temporary,path)
+ except Exception:
+  try:os.unlink(temporary)
+  except OSError:pass
+  raise
+ os.chmod(path,0o600)
+
+def training_transition(root,path,status,at,*,fixture_scope,job_id,checkpoint=None):
+ """Append one real queue transition. The job directory itself is created later by the worker."""
+ path=safe_runtime(root,path)
+ if path.is_file():
+  document=json.loads(path.read_text(encoding='utf-8'))
+  transitions=document.get('transitions') if type(document) is dict else None
+  if (type(document) is not dict or document.get('fixture_scope')!=fixture_scope or document.get('job_id')!=job_id
+      or type(transitions) is not list):raise RuntimeError('Training queue history is invalid')
+ elif path.exists():raise RuntimeError('Training queue history is not a file')
+ else:transitions=[];document={'fixture_scope':fixture_scope,'job_id':job_id,'transitions':transitions}
+ if any(item.get('status')==status for item in transitions):raise RuntimeError('Training queue status was repeated')
+ row={'at':at,'status':status}
+ if checkpoint is not None:row['checkpoint']=checkpoint
+ transitions.append(row)
+ raw=json.dumps(document,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()
+ write_private(path,raw)
+ saved=json.loads(path.read_bytes())
+ if saved!=document:raise RuntimeError('Training queue history was not retained')
+ return [item.get('status') for item in saved['transitions']]
 
 class WarmInferenceWorker:
  """One exact owned, source-pinned child; bounded JSONL, never answer caching."""
@@ -329,7 +378,7 @@ class NativeAccelerate:
   request_id=str(uuid.uuid4());native=None
   if requested_tool in OBSERVATION_TOOLS:return self.observe_native(requested_tool,args,request_id,correlation)
   if tool=='run_inference_job':
-   if set(args)-(CONTEXT_ARGS|{'model','model_id','input','input_data','max_new_tokens','max_length','backend','task'}):raise ValueError('Unsupported native inference arguments')
+   if set(args)-(CONTEXT_ARGS|{'model','model_id','input','input_data','max_new_tokens','max_length','backend','task','corrected_from'}):raise ValueError('Unsupported native inference arguments')
    models=[args[k] for k in ['model','model_id'] if k in args]
    inputs=[args[k] for k in ['input','input_data'] if k in args]
    if not models or not inputs or any(x!=models[0] for x in models) or any(x!=inputs[0] for x in inputs):
@@ -342,9 +391,29 @@ class NativeAccelerate:
    if args.get('backend','cpu')!='cpu':raise ValueError('Only the qualified CPU backend is supported')
    if args.get('task','text-generation')!='text-generation':raise ValueError('Only text-generation is supported')
    if args.get('dry_run') is True:raise ValueError('Preview is not actual native inference execution')
+   training_scope=args.get('fixture_scope')=='svf-training-manager-g032'
+   dataset_id=None
+   if training_scope:
+    matched=re.fullmatch(r'dataset ([a-z0-9][a-z0-9_-]{0,80}) model ([A-Za-z0-9][A-Za-z0-9_.:-]{0,80})', text)
+    if matched is None or matched.group(2)!=model:
+     raise ValueError('Training prompt does not name the executed dataset and model')
+    dataset_id=matched.group(1)
+   corrected=args.get('corrected_from')
+   if corrected is not None and (not training_scope or type(corrected) is not str or re.fullmatch(r'[a-z][a-z0-9_-]{0,63}', corrected) is None):
+    raise ValueError('corrected_from is only a short training rejection id')
+   recovery=(corrected, dataset_id) if corrected is not None else None
    if not self.slot.acquire(blocking=False):raise RuntimeError('Native CPU inference is busy; no duplicate generation started')
    try:
     job=self.runtime/'jobs'/request_id;safe_runtime(self.root,job)
+    queued_at=started_at=None
+    queue_ledger=None
+    if training_scope:
+     # The worker creates job and refuses an existing directory, so this history cannot live there yet.
+     queued_at=dt.datetime.now(dt.timezone.utc).isoformat()
+     queue_ledger=self.runtime/'training-queue'/request_id/'queue.json'
+     training_transition(self.root,queue_ledger,'queued',queued_at,fixture_scope=args['fixture_scope'],job_id=request_id)
+     started_at=dt.datetime.now(dt.timezone.utc).isoformat()
+     training_transition(self.root,queue_ledger,'running',started_at,fixture_scope=args['fixture_scope'],job_id=request_id)
     native=self.worker.request(request_id,job,model,text,tokens,correlation)
     payload=dict(native['result'])
     if not self.sources_current():
@@ -363,6 +432,37 @@ class NativeAccelerate:
         effective_max_new_tokens=tokens,server_max_new_tokens=MAX_NEW_TOKENS)
     payload['run_proof']=(f"catalog={MODEL_ID} model={MODEL_ID} prompt={text} "
                           f"output={payload.get('output')} status={payload.get('status')}")
+    if training_scope:
+     completed_at=dt.datetime.now(dt.timezone.utc).isoformat()
+     output=payload.get('output')
+     generated=payload.get('generated_text')
+     if type(output) is not str or not output or type(generated) is not str or not generated:
+      raise RuntimeError('Training checkpoint requires the generated output bytes')
+     checkpoint_bytes=json.dumps({'generated_text':generated,'output':output,'prompt':text},
+      sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()
+     job.chmod(0o700)
+     checkpoint_path=safe_runtime(self.root,job/'checkpoint.json')
+     write_private(checkpoint_path,checkpoint_bytes)
+     retained=checkpoint_path.read_bytes()
+     if retained!=checkpoint_bytes:raise RuntimeError('Training checkpoint bytes were not retained')
+     checkpoint=raw_cid(retained)
+     statuses=training_transition(self.root,queue_ledger,'completed',completed_at,fixture_scope=args['fixture_scope'],
+      job_id=request_id,checkpoint=checkpoint)
+     if statuses!=['queued','running','completed']:raise RuntimeError('Training queue transitions are not queued, running, completed')
+     ledger_bytes=Path(queue_ledger).read_bytes()
+     job_queue=safe_runtime(self.root,job/'queue.json')
+     write_private(job_queue,ledger_bytes)
+     if job_queue.read_bytes()!=ledger_bytes:raise RuntimeError('Training queue history was not retained beside the checkpoint')
+     transitions=[{'order':1,'status':'queued'},{'order':2,'status':'running'},{'order':3,'status':'completed'}]
+     payload.update(queue_used=True,checkpoint=checkpoint,queue_observed='queued running completed',queued_at=queued_at,
+      started_at=started_at,completed_at=completed_at,execution_semantics='queued_running_completed',
+      queue_transitions=transitions)
+     payload['owner_execution']={'checkpoint':checkpoint,'dataset_id':dataset_id,'model_id':model,'output':output,
+      'queue_transitions':transitions,'status':'completed'}
+     payload['persisted_selection']={'dataset_id':dataset_id,'model_id':model}
+     if recovery is not None:
+      payload['bounded_recovery']={'corrected_from':recovery[0],'dataset_id':recovery[1],'model_id':model,
+       'output_limit':tokens,'status':'completed'}
     method='execute_task'
    finally:self.slot.release()
   elif tool=='list_models':

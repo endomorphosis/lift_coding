@@ -2830,3 +2830,123 @@ All goals begin active. Passing tasks supplies evidence; it does not promote a g
 - Outputs: data/agent_supervisor/swissknife_visual_functional/tasks/
 - Acceptance: Execute the declared semantic workflow on actual desktop and mobile viewports, check real rendered results, keyboard, persistence/reopen and failure/recovery, and bind screenshots/traces to current source and contract. Require all result_N/persist_reopen/failure_recovery assertions. Tool-backed workflows require genuine owner execution, independently retrieved/hashed receipts+DAG, and useful result assertions; dry-run previews cannot prove writes. Local, external and policy-blocked behavior must remain honest. Final pinned-model visual review must pass; the original task retains its existing historical repair authority and budgets; this readonly followup creates no repair authority. Never report accepted just because an event fired or text changed. This final followup must run the full unchanged scenario in two independent sessions initially at1440x900 and390x844, with separate actual semantic/backend/keyboard/persistence/recovery proof and exact result images. Require the current dual-viewport report and a fresh genuine grok_cli/grok-4.7 review-mode pass bound to both images and both child reports. This task is readonly and allocates no new automatic repair attempts; retain failures and use only separately authorized original repair scopes and existing budgets. Historical V1/layout-only mobile evidence cannot grant this final coverage.
 
+
+## SVF-G1023-C Align the declared postcondition with the observed synchronous owner result
+
+- Status: active
+- Parent: SVF-G623
+- Priority: P1
+- Track: visual-functional
+- Bundle: swissknife/visual-functional/SVF-G1023-C
+- Goal: Align the declared postcondition with the observed synchronous owner result
+- Evidence: 
+- Outputs: data/agent_supervisor/swissknife_visual_functional/state/proof-ceiling-plan.json
+- Acceptance: The declared result names the observed owner fields: completed status, queue unused, and no checkpoint. A preview completion is labeled as a preview. The parent visual task stays blocked until a new review passes on those terms. The parent task is not completed by this goal.
+
+## SVF-G1032-F Keep the rejected owner call beside the executed semantic result
+
+- Status: active
+- Parent: SVF-G632
+- Priority: P1
+- Track: visual-functional
+- Bundle: swissknife/visual-functional/SVF-G1032-F
+- Goal: Keep the rejected owner call beside the executed semantic result
+- Evidence: 
+- Outputs: data/agent_supervisor/swissknife_visual_functional/state/proof-ceiling-plan.json
+- Acceptance: The failed call stays a request artifact and is not treated as an executed semantic proof. The later executed observation remains the semantic result. No sample, receipt, or content id is added by the planner. The parent task is not completed by this goal.
+
+## SVF-G900-W Keep the ready task unselected while parked dependencies remain
+
+- Status: active
+- Parent: SVF-G050
+- Priority: P1
+- Track: visual-functional
+- Bundle: swissknife/visual-functional/SVF-G900-W
+- Goal: Keep the ready task unselected while parked dependencies remain
+- Evidence: 
+- Outputs: data/agent_supervisor/swissknife_visual_functional/state/proof-ceiling-plan.json
+- Acceptance: The task stays unselected until every unmet dependency is completed by its own evidence. No dependency is removed. The parent task is not completed by this goal.
+
+## SVF-GR1002-X Leave the exhausted remediation child parked
+
+- Status: active
+- Parent: SVF-G602
+- Priority: P1
+- Track: visual-functional
+- Bundle: swissknife/visual-functional/SVF-GR1002-X
+- Goal: Leave the exhausted remediation child parked
+- Evidence: 
+- Outputs: data/agent_supervisor/swissknife_visual_functional/state/proof-ceiling-plan.json
+- Acceptance: The child clock is not renewed. The completed parent receipt remains the parent evidence. This plan does not mark the child completed. The parent task is not completed by this goal.
+
+## SVF-GR1013-X Leave the exhausted remediation child parked
+
+- Status: active
+- Parent: SVF-G613
+- Priority: P1
+- Track: visual-functional
+- Bundle: swissknife/visual-functional/SVF-GR1013-X
+- Goal: Leave the exhausted remediation child parked
+- Evidence: 
+- Outputs: data/agent_supervisor/swissknife_visual_functional/state/proof-ceiling-plan.json
+- Acceptance: The child clock is not renewed. The completed parent receipt remains the parent evidence. This plan does not mark the child completed. The parent task is not completed by this goal.
+
+## SVF-GR1019-X Leave the exhausted remediation child parked
+
+- Status: active
+- Parent: SVF-G619
+- Priority: P1
+- Track: visual-functional
+- Bundle: swissknife/visual-functional/SVF-GR1019-X
+- Goal: Leave the exhausted remediation child parked
+- Evidence: 
+- Outputs: data/agent_supervisor/swissknife_visual_functional/state/proof-ceiling-plan.json
+- Acceptance: The child clock is not renewed. The completed parent receipt remains the parent evidence. This plan does not mark the child completed. The parent task is not completed by this goal.
+
+## SVF-GR1022-X Leave the exhausted remediation child parked
+
+- Status: active
+- Parent: SVF-G622
+- Priority: P1
+- Track: visual-functional
+- Bundle: swissknife/visual-functional/SVF-GR1022-X
+- Goal: Leave the exhausted remediation child parked
+- Evidence: 
+- Outputs: data/agent_supervisor/swissknife_visual_functional/state/proof-ceiling-plan.json
+- Acceptance: The child clock is not renewed. The completed parent receipt remains the parent evidence. This plan does not mark the child completed. The parent task is not completed by this goal.
+
+## SVF-GR1032-X Leave the exhausted remediation child parked
+
+- Status: active
+- Parent: SVF-G632
+- Priority: P1
+- Track: visual-functional
+- Bundle: swissknife/visual-functional/SVF-GR1032-X
+- Goal: Leave the exhausted remediation child parked
+- Evidence: 
+- Outputs: data/agent_supervisor/swissknife_visual_functional/state/proof-ceiling-plan.json
+- Acceptance: The child clock is not renewed. The unfinished parent is not treated as satisfied. This plan does not mark the child completed. The parent task is not completed by this goal.
+
+## SVF-GR1035-X Leave the exhausted remediation child parked
+
+- Status: active
+- Parent: SVF-G635
+- Priority: P1
+- Track: visual-functional
+- Bundle: swissknife/visual-functional/SVF-GR1035-X
+- Goal: Leave the exhausted remediation child parked
+- Evidence: 
+- Outputs: data/agent_supervisor/swissknife_visual_functional/state/proof-ceiling-plan.json
+- Acceptance: The child clock is not renewed. The completed parent receipt remains the parent evidence. This plan does not mark the child completed. The parent task is not completed by this goal.
+
+## SVF-GR1043-X Leave the exhausted remediation child parked
+
+- Status: active
+- Parent: SVF-G643
+- Priority: P1
+- Track: visual-functional
+- Bundle: swissknife/visual-functional/SVF-GR1043-X
+- Goal: Leave the exhausted remediation child parked
+- Evidence: 
+- Outputs: data/agent_supervisor/swissknife_visual_functional/state/proof-ceiling-plan.json
+- Acceptance: The child clock is not renewed. The completed parent receipt remains the parent evidence. This plan does not mark the child completed. The parent task is not completed by this goal.

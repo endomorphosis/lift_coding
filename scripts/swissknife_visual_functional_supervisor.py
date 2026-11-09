@@ -143,7 +143,7 @@ def load_profile(root: Path, profile_path: str = PROFILE) -> dict[str, Any]:
 
 def _git(root: Path, *args: str) -> str:
     result = subprocess.run(["git", "-C", str(root), *args], capture_output=True,
-                            text=True, timeout=30, check=False)
+                            text=True, timeout=120, check=False)
     if result.returncode:
         raise PreflightError(f"Git inspection failed in {root.name}: {' '.join(args[:2])}")
     return result.stdout
