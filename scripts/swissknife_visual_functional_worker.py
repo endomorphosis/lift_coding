@@ -2711,6 +2711,54 @@ def recover(profile_path: str, profile: dict, task: dict) -> dict:
         remember_owned=lambda paths: remember_owned_sources(profile, paths))
 
 
+def _retained_parent_workflow(profile: dict, task: dict) -> Path | None:
+    """Return the receipt's parent attempt workflow, when one is recorded."""
+    directory = runtime_root(profile) / "tasks" / task["task_id"]
+    receipt_path = directory / "receipt.json"
+    if not receipt_path.is_file():
+        return None
+    receipt = json.loads(receipt_path.read_text())
+    verification = directory / "verification"
+    for record in receipt.get("artifacts", []):
+        raw = record.get("path") if type(record) is dict else None
+        if type(raw) is not str or Path(raw).name != "workflow.json":
+            continue
+        target = path_in_root(raw)
+        if target.parent.parent == verification and target.parent.name.startswith("attempt-"):
+            return target
+    return None
+
+
+def _needs_fresh_final_run(profile: dict, task: dict) -> bool:
+    """A final app needs a new dual-viewport run when its retained closure is not current."""
+    report = _retained_parent_workflow(profile, task)
+    if report is None or not report.is_file():
+        return True
+    data = json.loads(report.read_text())
+    sources = data.get("source_sha256")
+    if type(sources) is not dict:
+        return True
+    for name, expected in sources.items():
+        target = path_in_root(name)
+        if expected is None:
+            if target.exists():
+                return True
+            continue
+        if type(expected) is not str or not target.is_file():
+            return True
+        if hashlib.sha256(target.read_bytes()).hexdigest() != expected:
+            return True
+    directory = runtime_root(profile) / "tasks" / task["task_id"]
+    receipt = json.loads((directory / "receipt.json").read_text())
+    try:
+        retained_workflow_report(profile, task, receipt, directory / "verification")
+    except ValueError as exc:
+        if "closure is stale" in str(exc):
+            return True
+        raise
+    return False
+
+
 def execute(profile_path: str, profile: dict, spec: dict, task: dict) -> dict:
     ensure_lease(profile)
     if task.get("kind") != "scoped-remediation":
@@ -2927,7 +2975,13 @@ def execute(profile_path: str, profile: dict, spec: dict, task: dict) -> dict:
                 remember_owned_sources(profile, [item["path"] for item in applied["applied"]])
     elif kind == "regression":
         if task["task_id"] == "SVF-900" or "final_app_tasks" in task:
-            from swissknife_visual_functional_final_coverage import coverage
+            from swissknife_visual_functional_final_coverage import coverage, final_task_map
+            mapping, indexed = final_task_map(ROOT, profile, task, spec)
+            for app_id in sorted(mapping):
+                app_task = indexed[mapping[app_id]]
+                if _needs_fresh_final_run(profile, app_task):
+                    print(f"SVF {task['task_id']} refresh {app_task['task_id']} {app_id}", flush=True)
+                    execute(profile_path, profile, spec, app_task)
             detail = coverage(ROOT, profile, task, validate_task=validate, retained_report=retained_workflow_report,
                               validate_report=validate_workflow, spec=spec)
             report = directory / "final-app-coverage.json"; atomic_json(report, detail); files = [report]

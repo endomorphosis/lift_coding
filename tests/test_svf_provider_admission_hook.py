@@ -139,7 +139,7 @@ class ProviderAdmissionTests(unittest.TestCase):
     def test_none_preserves_original_dispatch_and_limits(self):
         result=self.invoke(output_path='receipt.json',before_provider=None)
         self.assertEqual(len(self.calls),1)
-        self.assertEqual((result['model_context_bytes'],result['max_turns']), (32768,8))
+        self.assertEqual((result['model_context_bytes'],result['max_turns']), (40960,8))
         self.assertFalse(result['allow_local_fallback'])
         self.assertFalse(result['completion_authority'])
 

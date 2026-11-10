@@ -572,7 +572,7 @@ Write scopes are the only paths a task may create or edit. A task leaves every o
 - Must not: change the law view
 
 ## LCM-065 Add the site court view
-- Status: todo
+- Status: completed
 - Parent goal: LCM-G050
 - Subgoal: LCM-G050.S2
 - Track: ui-court
@@ -584,7 +584,7 @@ Write scopes are the only paths a task may create or edit. A task leaves every o
 - Must not: embed caselaw text in the court view
 
 ## LCM-066 Add the SwissKnife view package
-- Status: todo
+- Status: completed
 - Parent goal: LCM-G050
 - Subgoal: LCM-G050.S3
 - Track: ui-swissknife
@@ -596,7 +596,7 @@ Write scopes are the only paths a task may create or edit. A task leaves every o
 - Must not: edit `implementation_plan/docs/53-swissknife-visual-functional-mcplusplus.todo.md`, media-player files, or a running supervisor unit
 
 ## LCM-067 Add the site municipal instrument view
-- Status: todo
+- Status: completed
 - Parent goal: LCM-G050
 - Subgoal: LCM-G050.S2
 - Track: ui-municipal
@@ -608,7 +608,7 @@ Write scopes are the only paths a task may create or edit. A task leaves every o
 - Must not: reorder columns in the view model
 
 ## LCM-070 Document the landed interfaces
-- Status: todo
+- Status: completed
 - Parent goal: LCM-G060
 - Subgoal: LCM-G060.S1
 - Track: docs-interfaces
@@ -619,7 +619,7 @@ Write scopes are the only paths a task may create or edit. A task leaves every o
 - Must not: describe a module that has not landed or update this plan's bootstrap status to completed
 
 ## LCM-071 Document the landed adapters
-- Status: todo
+- Status: completed
 - Parent goal: LCM-G060
 - Subgoal: LCM-G060.S1
 - Track: docs-adapters
@@ -630,7 +630,7 @@ Write scopes are the only paths a task may create or edit. A task leaves every o
 - Must not: claim a live network fetch or a GraphRAG rebuild ran
 
 ## LCM-072 Document the landed display versions
-- Status: todo
+- Status: completed
 - Parent goal: LCM-G060
 - Subgoal: LCM-G060.S1
 - Track: docs-ui
@@ -641,7 +641,7 @@ Write scopes are the only paths a task may create or edit. A task leaves every o
 - Must not: claim GitHub Pages deployed, or claim `tsc`, Jest, or Playwright passed unless those commands were run and their exit status is in the receipt
 
 ## LCM-073 Document the module map after the boundaries land
-- Status: todo
+- Status: completed
 - Parent goal: LCM-G060
 - Subgoal: LCM-G060.S1
 - Track: docs-map
@@ -652,7 +652,7 @@ Write scopes are the only paths a task may create or edit. A task leaves every o
 - Must not: rewrite `docs/legal/justicedao_refresh_plan_20261021.md` history
 
 ## LCM-074 Mark older reports as historical
-- Status: todo
+- Status: completed
 - Parent goal: LCM-G060
 - Subgoal: LCM-G060.S1
 - Track: docs-historical
@@ -663,7 +663,7 @@ Write scopes are the only paths a task may create or edit. A task leaves every o
 - Must not: delete `FINAL_PROJECT_REPORT.md`, `PROJECT_COMPLETE.md`, or the refresh plans
 
 ## LCM-075 Check documentation against the tree
-- Status: todo
+- Status: completed
 - Parent goal: LCM-G060
 - Subgoal: LCM-G060.S2
 - Track: docs-drift
@@ -675,7 +675,7 @@ Write scopes are the only paths a task may create or edit. A task leaves every o
 - Must not: update a doc inside the checker to hide a mismatch
 
 ## LCM-080 Check UI versions against Python versions
-- Status: todo
+- Status: completed
 - Parent goal: LCM-G060
 - Subgoal: LCM-G060.S2
 - Track: accept-versions
@@ -687,7 +687,7 @@ Write scopes are the only paths a task may create or edit. A task leaves every o
 - Must not: loosen either side to force a match
 
 ## LCM-081 Check closed routes and explicit place
-- Status: todo
+- Status: completed
 - Parent goal: LCM-G060
 - Subgoal: LCM-G060.S2
 - Track: accept-guards
@@ -698,7 +698,7 @@ Write scopes are the only paths a task may create or edit. A task leaves every o
 - Must not: flip `LEGAL_QUERY_NORMALIZED` or upload a dataset
 
 ## LCM-082 Prove this plan is not on the worldwide board
-- Status: todo
+- Status: completed
 - Parent goal: LCM-G010
 - Subgoal: LCM-G010.S1
 - Track: guard-admission
@@ -709,7 +709,7 @@ Write scopes are the only paths a task may create or edit. A task leaves every o
 - Must not: edit campaign DuckDB, markdown task status, or the supervisor unit
 
 ## LCM-083 Repeat the non-admission check after the docs land
-- Status: todo
+- Status: completed
 - Parent goal: LCM-G060
 - Subgoal: LCM-G060.S2
 - Track: guard-admission

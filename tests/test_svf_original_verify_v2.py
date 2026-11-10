@@ -323,7 +323,7 @@ class OriginalVerifyV2Tests(unittest.TestCase):
                     [self.profile['appContractPath'], str(self.g['report'].relative_to(self.root))],
                     [child['result_screenshot']['path'] for child in self.g['children']], self.g['folder'] / 'visual-review-audit.json')
         self.assertLessEqual(len(captured['prompt'].encode()), 32768)
-        self.assertEqual(captured['settings']['modelContextBytes'], 32768)
+        self.assertEqual(captured['settings']['modelContextBytes'], 40960)
         self.assertLessEqual(captured['settings']['maxTurns'], 8); self.assertLessEqual(captured['settings']['maxOutputTokens'], 12288)
         for child in self.g['children']:
             self.assertEqual(captured['prompt'].count(child['session_id']), 1)

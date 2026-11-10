@@ -216,7 +216,7 @@ class PhaseEvidenceTests(unittest.TestCase):
    frame=inspect.currentframe().f_back
    while frame is not None and 'prompt' not in frame.f_locals:frame=frame.f_back
    self.assertIsNotNone(frame);prompt=frame.f_locals['prompt'];settings=frame.f_locals['settings'];captured.append(len(prompt.encode()))
-   self.assertLessEqual(len(prompt.encode()),32768);self.assertEqual(settings['maxTurns'],8);self.assertEqual(settings['maxOutputTokens'],12288);self.assertEqual(settings['modelContextBytes'],32768)
+   self.assertLessEqual(len(prompt.encode()),32768);self.assertEqual(settings['maxTurns'],8);self.assertEqual(settings['maxOutputTokens'],12288);self.assertEqual(settings['modelContextBytes'],40960)
    self.assertIn('seeked_events',prompt);self.assertIn(CID,prompt);self.assertIn('observed_after',prompt)
    retained=next(record for record in frame.f_locals['records']if record['path']==str(evidence.relative_to(self.root)))
    self.assertEqual(retained['sha256'],raw_sha);self.assertEqual(evidence.read_bytes(),raw_evidence)

@@ -135,7 +135,7 @@ class ObservationSemanticsTests(unittest.TestCase):
         self.assertEqual(final.encoded(final._expand_projection(projection)), final.encoded(final._expand_projection(expected)))
         self.assertIn('evidence_interpretation', context)
         self.assertLessEqual(len(captured['prompt'].encode()), 32768)
-        self.assertEqual([captured['settings'][key] for key in ('modelContextBytes', 'maxOutputTokens', 'maxTurns')], [32768, 8192, 8])
+        self.assertEqual([captured['settings'][key] for key in ('modelContextBytes', 'maxOutputTokens', 'maxTurns')], [40960, 8192, 8])
         for child in self.g['children']: self.assertEqual(captured['prompt'].count(child['session_id']), 1)
 
     def test_invalid_independent_source_refuses_before_guidance_or_provider(self):

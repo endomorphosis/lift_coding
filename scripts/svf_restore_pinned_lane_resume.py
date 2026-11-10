@@ -17,7 +17,7 @@ from pathlib import Path
 ROOT = Path("/home/barberb/lift_coding")
 REPO = ROOT / "external" / "ipfs_accelerate"
 REL = "ipfs_accelerate_py/agent_supervisor/rescue/lane_resume.py"
-PIN = "efefdab88e91c168311512f55123dccf3626e6db12ffa292e569b4e3c8cf52af"
+PIN = "fb6fd7e56126e59c78287908a92832151da872a373ec5ec9f6cbf9f7f08a5d07"
 
 
 def main() -> int:

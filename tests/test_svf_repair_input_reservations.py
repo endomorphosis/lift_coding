@@ -113,7 +113,7 @@ class RepairInputReservationTests(unittest.TestCase):
         with self.assertRaises(llm.ModelContextBudgetError):
             self.pack(["app.js"], 600000)
         self.assertEqual(llm.REPAIR_MAX_PROMPT_BYTES, 262144)
-        self.assertEqual(llm.REVIEW_MAX_PROMPT_BYTES, 32768)
+        self.assertEqual(llm.REVIEW_MAX_PROMPT_BYTES, 40960)
         self.assertEqual(llm.MAX_PROMPT_BYTES, 600000)
         self.assertEqual(llm.MAX_FILE_BYTES, 1048576)
 

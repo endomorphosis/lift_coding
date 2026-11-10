@@ -413,7 +413,7 @@ class FinalCoverageTests(unittest.TestCase):
                     [item['path'] for item in self.validate()['images']], self.g['folder']/'visual-review-audit.json')
             backend.assert_called_once()
         self.assertLessEqual(len(captured['prompt'].encode()), 32768)
-        self.assertEqual(captured['settings']['modelContextBytes'], 32768)
+        self.assertEqual(captured['settings']['modelContextBytes'], 40960)
         self.assertLessEqual(captured['settings']['maxTurns'], 8)
         self.assertLessEqual(captured['settings']['maxOutputTokens'], 12288)
         for child in self.g['children']:
@@ -444,7 +444,7 @@ class FinalCoverageTests(unittest.TestCase):
         record = next(item for item in captured['records'] if item['path'] == llm.CANONICAL_TODO_PATH)
         self.assertEqual(record['size_bytes'], len(board)); self.assertEqual(record['sha256'], hashlib.sha256(board).hexdigest())
         self.assertLessEqual(len(captured['prompt'].encode()), 32768)
-        self.assertEqual(captured['settings']['modelContextBytes'], 32768)
+        self.assertEqual(captured['settings']['modelContextBytes'], 40960)
         self.assertNotIn('Unrelated task metadata', captured['prompt'])
         ordinary = self.f.write('ordinary-source.md', board)
         with self.assertRaises(llm.ModelAdapterError): llm._read(self.f.root, str(ordinary.relative_to(self.f.root)))

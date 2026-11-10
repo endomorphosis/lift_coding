@@ -665,14 +665,21 @@ def phase_projection(child, scenario):
                         'native_event_count': len(item['seeked_events']),
                         'untrusted_event_count': sum(not event['is_trusted'] for event in item['seeked_events'])}
                     break
-            if step['op'] == 'reopen_app' and selected['reopen'] is None:
-                selected['reopen'] = {'phase': name, 'step_index': index, 'generation_before': row['generation_before'],
+            if step['op'] == 'reopen_app':
+                # The first close/reopen stays in reopen. A later one, such as a
+                # post-delete reload, must remain visible or the review only sees
+                # the earlier generation change.
+                projected = {'phase': name, 'step_index': index, 'generation_before': row['generation_before'],
                     'generation_after': row['generation_after'], 'old_window_disconnected': row['reopen']['old_window_disconnected'],
                     'media': [{'selector': m['selector'], 'before': _phase_media_summary(m['before']),
                                'after': _phase_media_summary(m['after']), 'same_element': m['same_element']} for m in row['media']],
                     'identity_pairs': [{'selector': m['selector'], 'decoded_cid': m['before']['decoded_cid'],
                         'before_src_sha256': m['before']['src_sha256'], 'after_src_sha256': m['after']['src_sha256']}
                         for m in row['media'] if _phase_identity_pair(m['before'], m['after'], owner_cids)]}
+                if selected['reopen'] is None:
+                    selected['reopen'] = projected
+                else:
+                    selected.setdefault('later_reopens', []).append(projected)
             if step.get('checkpoint_id') == 'error_observed':
                 selected['failure_controls'] = {'phase': name, 'step_index': index, 'actual_error': row['observed'],
                     'controls': [{'selector': c['selector'], 'after': c['after']} for c in row['controls']]}
@@ -1126,7 +1133,20 @@ def validate_dual_workflow(root, profile, task, report, *, observation_validator
                 if type(intent.get('result_assertion')) is dict:
                     possible.append(intent['result_assertion'])
                 observed_result = item['result_assertion']
-                need(any(all(encoded(observed_result.get(key)) == encoded(declared.get(key))
+                owner_input = call.get('input') if type(call) is dict else None
+                owner_payload = owner_input.get('payload') if type(owner_input) is dict else None
+                returned_cid = owner_payload.get('cid') if type(owner_payload) is dict else None
+                # A later cat or put can also prove the raw CID that call carried.
+                # That proof stays beside the declared probe; it cannot replace it.
+                returned_cid_proof = (
+                    item.get('tool_id') in {'ipfs_cat', 'artifacts_put'}
+                    and type(returned_cid) is str
+                    and re.fullmatch(r'bafkrei[a-z2-7]{52}', returned_cid) is not None
+                    and observed_result.get('pointer') == '/result/result/content/0/json/cid'
+                    and observed_result.get('operator') == 'equals'
+                    and observed_result.get('expected') == returned_cid
+                    and observed_result.get('actual') == returned_cid)
+                need(returned_cid_proof or any(all(encoded(observed_result.get(key)) == encoded(declared.get(key))
                              for key in ('pointer', 'operator', 'expected')) for declared in possible),
                      'final owner proof result differs from its declared backend probe/fallback intent')
             for assertion in [*assertions, *errors]:
@@ -1149,6 +1169,16 @@ def validate_dual_workflow(root, profile, task, report, *, observation_validator
                 previous.update(observed)
         else:
             need(count == 0 and observations == [], 'final viewport violated its local/external backend boundary')
+            if app['disposition'] == 'policy_blocked':
+                denials = child.get('policy_denials')
+                need(type(denials) is list and 0 < len(denials) <= 8, 'policy-blocked viewport lacks its joined runner refusal')
+                for row in denials:
+                    need(type(row) is dict and row.get('phase') in {'primary_result', 'persist_reopen', 'failure_recovery'}
+                         and type(row.get('step_index')) is int and row['step_index'] >= 0
+                         and row.get('code') == 'POLICY_BOUNDARY' and row.get('outcome') == 'blocked'
+                         and row.get('executed') is False and row.get('route') == '/mcp/tools/call'
+                         and row.get('app_id') == app['app_id'],
+                         'policy refusal is not a joined blocked gateway post')
         image = child.get('result_screenshot'); image_path = check_reference(root, image, prefix=child_path.parent)
         need(image_path == child_path.parent / (name + '.png') and artifacts.get(image['path']) == image,
              'final result image was swapped or omitted from child artifacts')
@@ -1271,9 +1301,15 @@ def _projection_snapshot_slots(result):
         seek = phase.get('seek')
         if type(seek) is dict and 'projection_value_ref' not in seek:
             slots.extend((seek, key, _MEDIA_PROJECTION_FIELDS) for key in ('before', 'after'))
+        reopens = []
         reopen = phase.get('reopen')
         if type(reopen) is dict and 'projection_value_ref' not in reopen:
-            for media in reopen['media']:
+            reopens.append(reopen)
+        later = phase.get('later_reopens')
+        if type(later) is list:
+            reopens.extend(item for item in later if type(item) is dict and 'projection_value_ref' not in item)
+        for reopen_row in reopens:
+            for media in reopen_row['media']:
                 slots.extend((media, key, _MEDIA_PROJECTION_FIELDS) for key in ('before', 'after'))
         failure = phase.get('failure_controls')
         if type(failure) is dict and 'projection_value_ref' not in failure:
@@ -1824,6 +1860,9 @@ def _project_backend_observations(root, child, child_path):
 NATIVE_FACTS_MAX_BYTES = 4096
 NATIVE_FACTS_CONTEXT_MAX = NATIVE_FACTS_MAX_BYTES
 NATIVE_FACTS_MAX_REQUESTS = 16
+# Lossless factoring still targets 18 KiB. A factored packet may be admitted
+# up to this share; the wrapped review call stays under its own llm cap.
+PROMPT_SHARE_MAX = 24576
 
 
 def _native_raw_cid(raw):
@@ -2171,6 +2210,16 @@ def native_request_facts(root, report):
 
         else:
             import binascii
+            def _project_document(blob):
+                if not blob or blob[:1] not in (b'{', b' '):
+                    return None
+                try:
+                    value = json.loads(blob)
+                except (UnicodeDecodeError, json.JSONDecodeError, ValueError):
+                    return None
+                if type(value) is dict and value.get('schema') == 'swissknife.cinema.project.v1':
+                    return value
+                return None
             artifacts = []; projects = []
             for row in rows:
                 call, body, witness = row['call'], row['body'], row['witness']; payload = call['input']['payload']; tool = call['tool_id']
@@ -2182,7 +2231,8 @@ def native_request_facts(root, report):
                 try:data = base64.b64decode(encoded_bytes, validate=True)
                 except (ValueError, binascii.Error):raise ValueError('native artifact base64 differs')
                 cid = body.get('cid');need(len(data) <= maximum and _native_raw_cid(data) == cid == payload.get('cid'), 'native artifact bytes/CID differ')
-                artifact_kind = 'source' if tool == 'ipfs_cat' else payload.get('kind')
+                project_document = _project_document(data) if tool == 'ipfs_cat' else None
+                artifact_kind = 'video-project' if project_document is not None else ('source' if tool == 'ipfs_cat' else payload.get('kind'))
                 if tool != 'ipfs_cat':need(artifact_kind in {'video-export','video-project'} and body.get('persisted') is True and body.get('verified') is True and body.get('bytes') == len(data), 'native artifact ACK differs')
                 if artifact_kind == 'source':need(data.startswith(b'\x1aE\xdf\xa3') or len(data) >= 12 and data[4:8] == b'ftyp', 'native source bytes are not supported video')
                 elif artifact_kind == 'video-export':need(data.startswith(b'\x1aE\xdf\xa3'), 'native exported bytes are not WebM')
@@ -2308,13 +2358,14 @@ def native_request_facts(root, report):
 
 
 def _retain_primary_observations(value, sources):
-    """Restore exact retained primary payloads only when the whole packet fits.
+    """Restore exact retained primary payloads only when that still fits 18 KiB.
 
-    The existing omission is the fallback. A successful addition replaces only
-    that synthetic envelope; no retained observation is shortened or invented.
+    A factored packet up to the admission share keeps its existing omission.
+    A successful addition replaces only that synthetic envelope; no retained
+    observation is shortened or invented.
     """
     expanded = _expand_projection(value)
-    need(len(encoded(value)) <= 18000 and type(sources) is list
+    need(len(encoded(value)) <= PROMPT_SHARE_MAX and type(sources) is list
          and len(sources) == len(expanded['viewports']), 'primary presentation sources differ')
     groups = {}
     for view_index, (view, source) in enumerate(zip(expanded['viewports'], sources)):
@@ -2437,6 +2488,7 @@ def projection(root, report, *, retain_primary=True):
                     'projection_omitted': True, 'original_bytes': len(encoded(item['observed'])),
                     'original_sha256': digest(item['observed'])}} for item in child['semantic_assertions']],
             'keyboard_observation_count': len(child['keyboard_observations']),
+            'keyboard_observations': [{key: item.get(key) for key in ('phase', 'step_index', 'key', 'focused', 'inside_app', 'semantic_requirement_id')} for item in child['keyboard_observations']],
             'error_observation_count': len(child['error_observations']),
             'error_observations': [{'phase': item['phase'], 'step_index': item['step_index'], 'probe': item['probe'],
                 'checkpoint_id': item['checkpoint_id'],
@@ -2454,6 +2506,8 @@ def projection(root, report, *, retain_primary=True):
             'backend_call_count': child['backend_call_count'],
             'backend_call_phases': child['backend_call_phases'],
             'layout': child['viewports'][0]})
+        if child.get('policy_denials'):
+            result['viewports'][-1]['policy_denials'] = child['policy_denials']
         supplements = validate_supplemental_observations(child, scenario)
         if supplements:
             result['viewports'][-1]['supplemental_observations'] = supplements
@@ -2468,19 +2522,26 @@ def projection(root, report, *, retain_primary=True):
     result['instruction'] = ('Inspect both. Initial/demo/layout-only mobile state cannot prove mobile execution. '
         'Phased owner row/asserts=one request; unphased implies no identity/phase/success. '
         'HTMLMediaElement/CID only. Phased receipt/event paths use backend_artifact_path_base; filenames are raw CIDs. '
-        'Final frames follow all steps/checks; prior unsupported values are phase-local; native rows keep phase/step order.')
+        'Final frames follow all steps/checks; prior unsupported values are phase-local; native rows keep phase/step order. '
+        'keyboard_observations are the scenario keypress joined to the following semantic result: phase, step, key, focused, inside_app.')
+    if any((view.get('phase_evidence') or {}).get('later_reopens') for view in result['viewports']):
+        result['instruction'] += (' later_reopens lists each close/reopen after the first, with phase, step, generation_before and generation_after. '
+            'old_window_disconnected true is that later real reload.')
     if any(view.get('failed_requests') for view in result['viewports']):
         result['failed_requests_columns'] = ['request', 'phase', 'step', 'error', 'receipt_cid']
         result['instruction'] += (' failed_requests: request, phase index, step, error, receipt CID. '
             'Failed outcome, not semantic success.')
+    if any(view.get('policy_denials') for view in result['viewports']):
+        result['instruction'] += (' policy_denials are runner-blocked gateway posts for this policy boundary: '
+            'outcome blocked, owner not executed, no receipt. They are not semantic owner success.')
     if any(view.get('decoded_images') for view in result['viewports']):
         result['instruction'] += ' retained_from:IMG source/content/dims, not canvas/layers.'
     result = _factor_projection(result)
-    need(len(encoded(result)) <= 18000, 'final review projection exceeds its bounded prompt share')
+    need(len(encoded(result)) <= PROMPT_SHARE_MAX, 'final review projection exceeds its bounded prompt share')
     facts = native_request_facts(root, report)
     if facts is not None:
         enriched = _factor_projection({**_expand_projection(result), 'native_request_facts': facts})
-        if len(encoded(enriched)) <= 18000:
+        if len(encoded(enriched)) <= PROMPT_SHARE_MAX:
             result = enriched
         else:
             need(len(encoded(facts)) <= NATIVE_FACTS_CONTEXT_MAX, 'native fact context exceeds its bounded supplement')
