@@ -1,0 +1,197 @@
+{
+  "actual_main_integrations": {
+    "ipfs_accelerate_py": {
+      "changes": [
+        "missing canonical dependency-release API",
+        "exact current task/evidence/dependency bindings and CAS",
+        "atomic blocked-obligation decomposition and watchdog integration",
+        "all 67 original historical bootstrap source/docs blobs and two status notes"
+      ],
+      "focused_tests": {
+        "failed": 0,
+        "passed": 56,
+        "skipped": 0
+      },
+      "historical_checks": {
+        "JSON_parsed": 44,
+        "archived_runtime_or_experiments_executed": false,
+        "python_AST_parsed": 23
+      },
+      "implementation_commit": "2c92f8c0c0cf7266929e03b6a7148567f340fac6",
+      "main": "a50677e02dc82a79e59c714bb294ed435cf6d1ec"
+    },
+    "ipfs_datasets_py": {
+      "changes": [
+        "compatible patent workflow and required providers/fictional fixtures",
+        "strict counterexample codec and compatible typed/batch/verification API features",
+        "explicit current storage-policy CAS and idle checks",
+        "corrected two reproduced stale cold-import tests"
+      ],
+      "feature_commits": [
+        "47439c73c11ae469eb7237a7ff77c9770c25b21e",
+        "85d7a4e0b626cf04fcc0c10729371d18635d6d7c",
+        "0bcc6a35a09bfbde7770f2c6b9bbd18a279aa6eb"
+      ],
+      "live_ledger_policy_budget_model_auth_or_native_execution": false,
+      "main": "0bcc6a35a09bfbde7770f2c6b9bbd18a279aa6eb",
+      "tests": {
+        "patent_and_trust_full_offline": {
+          "failed": 0,
+          "passed": 408,
+          "skipped": 0
+        },
+        "storage_and_cold_import_full_modules": {
+          "failed": 0,
+          "passed": 170,
+          "skipped": 0
+        }
+      }
+    },
+    "ipfs_kit_py": {
+      "archived_tips_now_main_ancestors": 6,
+      "explicit_compatibility_fix": "Legacy ProfileG adapter delegates to canonical route registry",
+      "formatting_Python_runtime_AST_preserved": 4091,
+      "main": "7c956aac20a91d9937124813b3bd0c8c73479d08",
+      "source_paths_reconciled": 4337,
+      "tests": {
+        "passed": 119,
+        "subtests_passed": 13
+      }
+    }
+  },
+  "all_possible_historical_branch_behaviors_or_private_data_migrated_claimed": false,
+  "cold_GitHub_source_restore": {
+    "all_bytes_match_remote_committed_blobs": true,
+    "checks": [
+      {
+        "actual_commit": "0bcc6a35a09bfbde7770f2c6b9bbd18a279aa6eb",
+        "all_restored_bytes_match_remote_Git_blobs": true,
+        "elapsed_seconds": 3.2186497231014073,
+        "expected_commit": "0bcc6a35a09bfbde7770f2c6b9bbd18a279aa6eb",
+        "fresh_https_clone": true,
+        "local_object_alternates_used": false,
+        "origin": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+        "restored_file_count": 657,
+        "restored_source_bytes": 22329736,
+        "schema": "github-cold-source-restore-check/v1",
+        "scope": "Changed committed source, tests, docs and small public fixtures restored directly from GitHub. No model/private/native restoration or execution."
+      },
+      {
+        "actual_commit": "a50677e02dc82a79e59c714bb294ed435cf6d1ec",
+        "all_restored_bytes_match_remote_Git_blobs": true,
+        "elapsed_seconds": 2.4829080440104008,
+        "expected_commit": "a50677e02dc82a79e59c714bb294ed435cf6d1ec",
+        "fresh_https_clone": true,
+        "local_object_alternates_used": false,
+        "origin": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+        "restored_file_count": 154,
+        "restored_source_bytes": 12872994,
+        "schema": "github-cold-source-restore-check/v1",
+        "scope": "Changed committed source, tests, docs and small public fixtures restored directly from GitHub. No model/private/native restoration or execution."
+      },
+      {
+        "actual_commit": "7c956aac20a91d9937124813b3bd0c8c73479d08",
+        "all_restored_bytes_match_remote_Git_blobs": true,
+        "expected_commit": "7c956aac20a91d9937124813b3bd0c8c73479d08",
+        "fresh_https_clone": true,
+        "local_object_alternates_used": false,
+        "origin": "https://github.com/endomorphosis/ipfs_kit_py.git",
+        "previous_attempt": "d01fc5 size-query attempt stopped; no restore qualification transferred",
+        "restored_file_count": 4336,
+        "restored_source_bytes": 65423127,
+        "schema": "github-cold-source-restore-check/v1",
+        "scope": "Restored changed source files directly from GitHub; no native/model/private asset or historical experiment restoration."
+      }
+    ],
+    "fresh_HTTPS_clones_without_local_object_alternates": true,
+    "initial_Kit_size_query_failure_preserved": "Own partial-clone long-size query d01fc5 stopped after discovering unintended lazy archive downloads; corrected source-only restore d895e0 passed. No failed attempt qualification transferred.",
+    "scope": "Changed committed source/test/documentation files, not application/native/model environment or private-asset restoration.",
+    "verified_bytes": 100625857,
+    "verified_changed_files": 5147
+  },
+  "containing_parent_commit": "Identified by Git history; all listed child heads were independently read from GitHub before index update.",
+  "parent_updates": {
+    "HACC": "52c728d6a956d51dc61cdb22d5359bfb7593d1c8",
+    "complaint-generator": "2fac9419e0a5eb5c4a9c446f2f93bb3bab5218a3",
+    "cyclic_backreference_churn_performed": false,
+    "direct_root_gitlinks": [
+      {
+        "main": "0bcc6a35a09bfbde7770f2c6b9bbd18a279aa6eb",
+        "origin": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+        "path": "external/ipfs_datasets"
+      },
+      {
+        "main": "a50677e02dc82a79e59c714bb294ed435cf6d1ec",
+        "origin": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+        "path": "external/ipfs_accelerate"
+      },
+      {
+        "main": "7c956aac20a91d9937124813b3bd0c8c73479d08",
+        "origin": "https://github.com/endomorphosis/ipfs_kit_py.git",
+        "path": "external/ipfs_kit"
+      },
+      {
+        "main": "e3e1e771400a6c2b51c7eff325871769e4436ebb",
+        "origin": "https://github.com/endomorphosis/swissknife.git",
+        "path": "swissknife"
+      },
+      {
+        "main": "050b46a7335610f0858d4b4d5142218414685fea",
+        "origin": "https://github.com/endomorphosis/hallucinate_app.git",
+        "path": "hallucinate_app"
+      },
+      {
+        "main": "628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0",
+        "origin": "https://github.com/endomorphosis/Mcp-Plus-Plus.git",
+        "path": "Mcp-Plus-Plus"
+      },
+      {
+        "main": "0491349bd3e92e02dc50992e79b0c0a97a521ede",
+        "origin": "https://github.com/endomorphosis/JevOps.git",
+        "path": "JevOps"
+      },
+      {
+        "main": "f4371bc9f90249d51eb07d7f8a61e8d829294f16",
+        "origin": "https://github.com/facebook/meta-wearables-dat-android.git",
+        "path": "external/meta-wearables-dat-android"
+      },
+      {
+        "main": "bbae597cd1c748cd29b9375a1624a8d75b1c9e14",
+        "origin": "https://github.com/facebook/meta-wearables-dat-ios.git",
+        "path": "external/meta-wearables-dat-ios"
+      }
+    ],
+    "hallucinate_app": "050b46a7335610f0858d4b4d5142218414685fea"
+  },
+  "past_month_source_reconciliation": {
+    "actual_missing_gaps_now_published": [
+      "storage-capacity owner and tests",
+      "two stale cold-import contract expectations",
+      "67 historical bootstrap source/documentation files"
+    ],
+    "cutoff_utc": "2026-10-14T00:00:00Z",
+    "differences_in_old_trees_do_not_prove_missing_current_features": true,
+    "recent_functional_commits_reviewed": 28,
+    "recent_nonancestor_tip_counts": {
+      "accelerate": 19,
+      "datasets": 45,
+      "root": 0
+    }
+  },
+  "preserved_safety_constraints": [
+    "Existing current wire schema and bounded verification authority retained; incompatible raw trust-wire variant not installed.",
+    "No exhausted attempt/budget counter reset, lease bypass or scientific task activation.",
+    "Private archives, runtime keys/databases, checkpoint payloads and personal evidence remain on hold.",
+    "Original dirty user checkouts and indexes are preserved; no destructive cleanup or force push.",
+    "Source-only tests do not establish legal interpretation correctness, trained model quality or native proof validity."
+  ],
+  "recorded_at_utc": "2026-11-14T22:20:07.213863+00:00",
+  "remaining": {
+    "experimental_source": "Unsupported or incompatible variants remain committed on verified preservation branches listed in the inventory.",
+    "hosted_CI": "Ordinary pushes accepted; hosted checks were not independently verified green.",
+    "private_assets": "On hold by explicit user choice; not backed up, moved or wiped by this work.",
+    "scientific_producer_routes": "Thirty saved scientific producer/probe/test paths remain preserved and unqualified; the canonical dependency-release operation does not manufacture their evidence."
+  },
+  "schema": "source-migration-before-decommission/v1",
+  "user_scope": "Merge and push the past month source work; private assets explicitly on hold."
+}
