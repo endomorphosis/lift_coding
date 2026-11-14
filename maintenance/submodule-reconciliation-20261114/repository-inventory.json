@@ -1,0 +1,302 @@
+{
+  "schema": "github-worktree-consolidation-public-safe-coverage/v1",
+  "recorded_at_utc": "2026-11-14T21:32:38.650112+00:00",
+  "scope": "Filesystem/Git inventory of accessible project repositories under home and /tmp, supplemented by registered worktrees and selected .local runtime directories; point-in-time read-only observations, not an atomic global snapshot.",
+  "filesystem_discovery": {
+    "home_git_markers": 16210,
+    "tmp_git_markers": 2739,
+    "additional_local_share_git_markers": 20,
+    "home_permission_denied_directories": 139,
+    "tmp_permission_denied_directories": 14,
+    "malformed_synthetic_test_git_configs": 1,
+    "excluded_directory_categories": [
+      "dependency/cache trees (.cache, .venv, node_modules, site-packages, .lake, __pycache__)",
+      "Codex internal state/cache (.codex)",
+      "unrelated system/application .local data; project runtimes and registered worktrees inspected separately"
+    ],
+    "all_filesystem_contents_exhaustively_read": false
+  },
+  "git_coverage": {
+    "repository_query_roots": 712,
+    "canonical_common_Git_directories": 661,
+    "registered_worktree_records": 45701,
+    "unique_registered_worktree_paths": 28660,
+    "registered_paths_present": 3661,
+    "registered_paths_absent": 24999,
+    "physical_GitHub_worktree_status_queries": 3658,
+    "successful_physical_status_queries": 3657,
+    "non_worktree_bare_path_status_refusals": 1,
+    "tracked_dirty_physical_worktrees": 314,
+    "all_deletion_only_physical_worktrees": 95,
+    "nondeletion_dirty_physical_worktrees": 219,
+    "all_common_repo_local_refs_inspected": true,
+    "all_common_repo_registered_worktree_lists_inspected": true,
+    "untracked_file_observation": "Git normal/collapsed directory output; generated raw output trees were not published."
+  },
+  "core_branch_tip_coverage": {
+    "ipfs_datasets_py": {
+      "verified_current_origin_main": "3f1691d59cc0a310750c0b441b51d3528b17eb85",
+      "unique_local_ref_and_HEAD_oids": 8762,
+      "reference_occurrences": 319413,
+      "ancestor_oid_count": 899,
+      "nonancestor_known_commit_count": 145,
+      "central_missing_object_count": 7718
+    },
+    "ipfs_accelerate_py": {
+      "verified_current_origin_main": "81b5e11f3c6063486a7cadc6c3d4c6ea50e85bb2",
+      "unique_local_ref_and_HEAD_oids": 839,
+      "reference_occurrences": 11322,
+      "ancestor_oid_count": 720,
+      "nonancestor_known_commit_count": 77,
+      "central_missing_object_count": 42
+    },
+    "lift_coding": {
+      "verified_current_origin_main": "8fd1983595060cc36f15f59083910d667fdb3b45",
+      "unique_local_ref_and_HEAD_oids": 112,
+      "reference_occurrences": 248,
+      "ancestor_oid_count": 106,
+      "nonancestor_known_commit_count": 5,
+      "central_missing_object_count": 1
+    }
+  },
+  "core_branch_limitations": [
+    "Thousands of historical rescue/failed-validation/implementation attempt tips were inventoried; they are not automatically eligible for main.",
+    "Central source integration owners review meaningful source changes separately; ancestry absence does not prove a missing feature.",
+    "Root 80ca8550 archived source comparison found 49 exact current blobs and two superseded/additive files; no root feature gap."
+  ],
+  "other_owned_origins": {
+    "fresh_live_main_queries": 21,
+    "successful_queries": 21,
+    "origins": [
+      {
+        "url": "https://github.com/endomorphosis/omni_converter_mk2.git",
+        "main_commit": "ae4f3c2b321e25935f62f99fd50f72bb8916c420"
+      },
+      {
+        "url": "https://github.com/endomorphosis/convert_to_txt_based_on_mime_type.git",
+        "main_commit": "2b7a36e7699dbd451a89acb273ab7090c99d1cc0"
+      },
+      {
+        "url": "https://github.com/endomorphosis/common_crawl_search_engine",
+        "main_commit": "7c806d63b4f019e99bf5a3ca6a105fbd5778b17e"
+      },
+      {
+        "url": "https://github.com/endomorphosis/ShadowProver.git",
+        "main_commit": "8bf6ce7d30bc069b740078bacaee0589b4c2c49b"
+      },
+      {
+        "url": "https://github.com/endomorphosis/Talos.git",
+        "main_commit": "cf386792a15583357ad8640b61a80684430b8e0f"
+      },
+      {
+        "url": "https://github.com/endomorphosis/Eng-DCEC.git",
+        "main_commit": "c96e40dd9351e93b5a573af3fbc82fab644a0eb4"
+      },
+      {
+        "url": "https://github.com/endomorphosis/DCEC_Library.git",
+        "main_commit": "72efd97f0fc8ab95fb5a7fdb0a6f8efd94c20337"
+      },
+      {
+        "url": "https://github.com/endomorphosis/ipfs_kit_py.git",
+        "main_commit": "f5de9ad4a52b37cc771a0d904b91da746e825553"
+      },
+      {
+        "url": "https://github.com/endomorphosis/ipfs_transformers_py.git",
+        "main_commit": "b397988ed9e3e656475c1cf4417b84efdb95daf3"
+      },
+      {
+        "url": "https://github.com/endomorphosis/ipfs_model_manager_py.git",
+        "main_commit": "f6151d2113f42e75ea7d83a1b2362fc97e55e44d"
+      },
+      {
+        "url": "https://github.com/endomorphosis/Mcp-Plus-Plus.git",
+        "main_commit": "628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0"
+      },
+      {
+        "url": "https://github.com/endomorphosis/swissknife.git",
+        "main_commit": "e3e1e771400a6c2b51c7eff325871769e4436ebb"
+      },
+      {
+        "url": "https://github.com/endomorphosis/complaint-generator.git",
+        "main_commit": "9b4974f8608e16c3857464e3fd3d6158ac1fa87e"
+      },
+      {
+        "url": "https://github.com/endomorphosis/HACC.git",
+        "main_commit": "6f3f42b4a4d2d7e6c021abe6eb055c8705d249f7"
+      },
+      {
+        "url": "https://github.com/endomorphosis/211-AI.git",
+        "main_commit": "6530da843b0a2dd57178b6cf52baba27c781128a"
+      },
+      {
+        "url": "https://github.com/endomorphosis/mike.git",
+        "main_commit": "91c8b8bc13c8bc57528121352e067c3ea2828726"
+      },
+      {
+        "url": "https://github.com/endomorphosis/municipal_scrape_workspace.git",
+        "main_commit": "69523e2819292fac6e5537a6e5337cb334f3386d"
+      },
+      {
+        "url": "https://github.com/endomorphosis/Clarity_Act_Deontic_Logic.git",
+        "main_commit": "5508e570800024f42a6ea4f124a39cced56d748e"
+      },
+      {
+        "url": "https://github.com/endomorphosis/hallucinate_app.git",
+        "main_commit": "16d73f200ba972af595c1116be690e973fe1c3d3"
+      },
+      {
+        "url": "https://github.com/endomorphosis/Solana-Slop.git",
+        "main_commit": "8b407556c1b145b6bc6b0b0321060d1541cb7f26"
+      },
+      {
+        "url": "https://github.com/endomorphosis/JevOps",
+        "main_commit": "0491349bd3e92e02dc50992e79b0c0a97a521ede"
+      }
+    ],
+    "empty_commits_created": 0,
+    "JevOps_preserved_history": "One empty checkpoint plus one patch-equivalent implementation; current main already contains the work.",
+    "Swissknife_local_lockfile": "Architecture-specific x64-to-ARM64 installation rewrite retained locally; not promoted as portable source."
+  },
+  "ipfs_kit_preservation": {
+    "main_commit_unchanged": "f5de9ad4a52b37cc771a0d904b91da746e825553",
+    "reason": "Broad old formatting/gitlink variants overlap thousands of current files and remain unreviewed for compatibility; their original trees would roll back newer source if substituted wholesale. Exact tips are archived; no three-way formatting integration/test is claimed.",
+    "pushed_verified_refs": [
+      {
+        "remote_ref": "refs/heads/archive/worktree-sync-20261114/6379120c3901",
+        "commit": "6379120c39015d373b06f38ce587e0a174f03d95",
+        "verified": true
+      },
+      {
+        "remote_ref": "refs/heads/archive/worktree-sync-20261114/beb33a434354",
+        "commit": "beb33a434354252b60130e9bfc1c1cc7436272bd",
+        "verified": true
+      },
+      {
+        "remote_ref": "refs/heads/archive/worktree-sync-20261114/a1c036f5900b",
+        "commit": "a1c036f5900b3dd7e0d21cfcfe945326a5d21a89",
+        "verified": true
+      },
+      {
+        "remote_ref": "refs/heads/archive/worktree-sync-20261114/db900c69ada7",
+        "commit": "db900c69ada76f678954b2031fc3463fb3550ef0",
+        "verified": true
+      },
+      {
+        "remote_ref": "refs/heads/archive/worktree-sync-20261114/58f86c6ee795",
+        "commit": "58f86c6ee795316a1e578067403e1f73ba810526",
+        "verified": true
+      },
+      {
+        "remote_ref": "refs/heads/archive/worktree-sync-20261114/1714155e744d",
+        "commit": "1714155e744d2e359ec284fa81eb5b3032e89c3b",
+        "verified": true
+      }
+    ],
+    "first_push_historical_large_blob_warnings": true,
+    "force_push_performed": false
+  },
+  "excluded_publication_categories": [
+    "Personal legal evidence, audio/transcripts and oversized archives in an unrelated HACC branch.",
+    "Synthetic fixture repositories and empty/uninitialized checkout deletion states.",
+    "Unreviewed historical failed-agent/rescue branches.",
+    "Local locks, generated state, model/checkpoint payloads and keys."
+  ],
+  "remaining_work": {
+    "physical_source_SHA_AST_triage": "Completed: datasets1139files across112dirtyphysicalworktrees; accelerate1394files across105dirtyphysicalworktrees. Candidate APIs require canonical compatibility decisions; historical private fixture variants are excluded from main.",
+    "hallucinate_submodule_pin_publication": "Completed and exact remote main verified at373fc67b5111b470e843f4d9033f010a870f0292.",
+    "HACC_and_complaint_submodule_pin_reconciliation": "Completed and exact remote mains verified; HACC restored two missing URL entries for existing core Gitlinks.",
+    "patent_and_trust_variants": "Exact original source prepared for separate canonical preservation branches; compatibility/software qualification remains pending and not part of main. Owner publication status is tracked separately."
+  },
+  "all_work_published_to_main_claimed": false,
+  "patent_source_preservation_preparation": {
+    "original_source_HEAD": "4003799a00df8764e3c91d0241ee75e975626269",
+    "exact_original_source_files": 71,
+    "original_source_bytes": 1825213,
+    "compatible_private_preview_files": 71,
+    "offline_test_files_proposed": 21,
+    "synthetic_fixture_files": 14,
+    "synthetic_fixture_bytes": 6833,
+    "AST_and_selected_credential_pattern_screen_passed": true,
+    "tests_executed_for_this_variant": false,
+    "main_or_semantic_admission_qualified": false,
+    "canonical_publication_owner_not_this_auditor": true
+  },
+  "published_parent_pin_updates": [
+    {
+      "repository": "https://github.com/endomorphosis/hallucinate_app",
+      "before_main": "16d73f200ba972af595c1116be690e973fe1c3d3",
+      "commit": "373fc67b5111b470e843f4d9033f010a870f0292",
+      "changed_paths": [
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py",
+        "ipfs_kit_py",
+        "swissknife"
+      ],
+      "selected_pins": {
+        "ipfs_accelerate_py": "bf8480b98c7c30ca1242ab14e88efeef87efe4b4",
+        "ipfs_datasets_py": "3178765fef7d73d4cb7ba88cd78634d5d74b8b0a",
+        "ipfs_kit_py": "f5de9ad4a52b37cc771a0d904b91da746e825553",
+        "swissknife": "e3e1e771400a6c2b51c7eff325871769e4436ebb"
+      },
+      "normal_nonforce_push_returncode": 0,
+      "exact_remote_main_verified": true,
+      "missing_gitmodule_metadata_added": []
+    },
+    {
+      "repository": "https://github.com/endomorphosis/complaint-generator",
+      "before_main": "9b4974f8608e16c3857464e3fd3d6158ac1fa87e",
+      "commit": "92033a02f5550f80c26c53c6474ca6cb370248f9",
+      "changed_paths": [
+        "ipfs_datasets_py",
+        "external/ipfs_datasets_py",
+        "external/ipfs_accelerate_py",
+        "external/ipfs_kit_py"
+      ],
+      "selected_pins": {
+        "ipfs_datasets_py": "3178765fef7d73d4cb7ba88cd78634d5d74b8b0a",
+        "external/ipfs_datasets_py": "3178765fef7d73d4cb7ba88cd78634d5d74b8b0a",
+        "external/ipfs_accelerate_py": "bf8480b98c7c30ca1242ab14e88efeef87efe4b4",
+        "external/ipfs_kit_py": "f5de9ad4a52b37cc771a0d904b91da746e825553",
+        "mike": "91c8b8bc13c8bc57528121352e067c3ea2828726",
+        "external/mike": "91c8b8bc13c8bc57528121352e067c3ea2828726"
+      },
+      "normal_nonforce_push_returncode": 0,
+      "exact_remote_main_verified": true,
+      "missing_gitmodule_metadata_added": []
+    },
+    {
+      "repository": "https://github.com/endomorphosis/HACC",
+      "before_main": "6f3f42b4a4d2d7e6c021abe6eb055c8705d249f7",
+      "commit": "909572f9a1aa62facd595955d6ca2a3f426fb42e",
+      "changed_paths": [
+        "complaint-generator",
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py",
+        ".gitmodules"
+      ],
+      "selected_pins": {
+        "complaint-generator": "92033a02f5550f80c26c53c6474ca6cb370248f9",
+        "ipfs_accelerate_py": "bf8480b98c7c30ca1242ab14e88efeef87efe4b4",
+        "ipfs_datasets_py": "3178765fef7d73d4cb7ba88cd78634d5d74b8b0a"
+      },
+      "normal_nonforce_push_returncode": 0,
+      "exact_remote_main_verified": true,
+      "missing_gitmodule_metadata_added": [
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py"
+      ]
+    }
+  ],
+  "core_main_commits_used_for_direct_pins": {
+    "ipfs_datasets_py": "3178765fef7d73d4cb7ba88cd78634d5d74b8b0a",
+    "ipfs_accelerate_py": "bf8480b98c7c30ca1242ab14e88efeef87efe4b4"
+  },
+  "cyclic_submodule_policy": "Only direct owned dependency pins were advanced to verified published mains. Existing nested/cyclic versioned backreferences were preserved; no recursive fixed-point update or foreign upstream reset.",
+  "original_user_worktrees_and_indexes": "No user source files, original worktree indexes, uninitialized deletion states, private corpus files or historical receipts were reset or staged by the other-origin publisher. New parent commits used isolated private indexes.",
+  "publication_checks": [
+    "Exact existing Gitlink paths/modes and before main identities checked.",
+    "Changed path sets independently asserted before commit-tree and again from final commit diff.",
+    "Each parent push used normal fast-forward Git push; exact remote main re-read after success.",
+    "HACC Gitmodule syntax and missing existing core path mappings checked."
+  ]
+}

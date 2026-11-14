@@ -1,0 +1,188 @@
+{
+  "all_historical_or_unfinished_work_merged_to_main_claimed": false,
+  "authoritative_clean_resume_worktrees": {
+    "accelerate": {
+      "commit": "bf8480b98c7c30ca1242ab14e88efeef87efe4b4",
+      "path": "/tmp/lift-sync-accelerate-all-main-20261114"
+    },
+    "datasets": {
+      "commit": "3178765fef7d73d4cb7ba88cd78634d5d74b8b0a",
+      "path": "/tmp/datasets-publish-main-20261114"
+    },
+    "requirement": "Fresh source/runtime/resource profiles are required for subsequent executions; preserved original checkouts differ from published main."
+  },
+  "changes": {
+    "accelerate_features": [
+      "current supervisor/runtime reconciliation",
+      "compatible source-lease recovery mode and tests",
+      "independent parallel planner"
+    ],
+    "accelerate_main_paths": 79,
+    "datasets_nested_pin_commit": "3178765fef7d73d4cb7ba88cd78634d5d74b8b0a",
+    "datasets_other_fixes": [
+      "missing immutable F18JobSpec.margin_weight accessor",
+      "compatible older F18 and lifecycle/recovery source reconciliation"
+    ],
+    "datasets_private_tmp_candidates_integrated": [
+      "complete norm candidate syntax in existing adjudication owner",
+      "full norm source-conditioned proposal adapter in existing advisor owner",
+      "selected prose recompilation in existing roundtrip owner"
+    ],
+    "datasets_source_commit": "a5f3ee7d8ef11fbbe8610baca3d2b8f554cdcc29",
+    "datasets_source_paths": 578,
+    "force_push_reset_clean_or_branch_deletion": false,
+    "original_dirty_worktrees_preserved": true,
+    "original_product_source_files_overwritten_by_publication": false,
+    "root_historical_paper_sources": 80,
+    "root_historical_python_AST_checks": 34
+  },
+  "containing_commit_role": "Final parent pin and audit publication; its commit is identified by Git history, not a circular embedded self-hash.",
+  "direct_parent_gitlinks": [
+    {
+      "main": "3178765fef7d73d4cb7ba88cd78634d5d74b8b0a",
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+      "path": "external/ipfs_datasets"
+    },
+    {
+      "main": "bf8480b98c7c30ca1242ab14e88efeef87efe4b4",
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+      "path": "external/ipfs_accelerate"
+    },
+    {
+      "main": "f5de9ad4a52b37cc771a0d904b91da746e825553",
+      "origin": "https://github.com/endomorphosis/ipfs_kit_py.git",
+      "path": "external/ipfs_kit"
+    },
+    {
+      "main": "e3e1e771400a6c2b51c7eff325871769e4436ebb",
+      "origin": "https://github.com/endomorphosis/swissknife.git",
+      "path": "swissknife"
+    },
+    {
+      "main": "373fc67b5111b470e843f4d9033f010a870f0292",
+      "origin": "https://github.com/endomorphosis/hallucinate_app.git",
+      "path": "hallucinate_app"
+    },
+    {
+      "main": "628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0",
+      "origin": "https://github.com/endomorphosis/Mcp-Plus-Plus.git",
+      "path": "Mcp-Plus-Plus"
+    },
+    {
+      "main": "0491349bd3e92e02dc50992e79b0c0a97a521ede",
+      "origin": "https://github.com/endomorphosis/JevOps.git",
+      "path": "JevOps"
+    },
+    {
+      "main": "f4371bc9f90249d51eb07d7f8a61e8d829294f16",
+      "origin": "https://github.com/facebook/meta-wearables-dat-android.git",
+      "path": "external/meta-wearables-dat-android"
+    },
+    {
+      "main": "bbae597cd1c748cd29b9375a1624a8d75b1c9e14",
+      "origin": "https://github.com/facebook/meta-wearables-dat-ios.git",
+      "path": "external/meta-wearables-dat-ios"
+    }
+  ],
+  "excluded_local_material": [
+    "private attestation keys and runtime databases",
+    "personal legal evidence and oversized archives",
+    "uninitialized all-deleted execution copies and synthetic fixture repositories",
+    "raw model weights/checkpoints, generated dependency copies and machine-specific installation rewrites"
+  ],
+  "preserved_failures_and_limits": [
+    "F18 initial interrupted run recorded 139 passes and 9 failures from missing margin_weight; focused repair checks subsequently passed.",
+    "Initial accelerate broader run recorded 538 passes and 2 failures; final selected reconciliation run passed with 81 skips.",
+    "Collecting all 45 affected accelerate test owners timed out at 120 seconds; no completed collection or pass is claimed.",
+    "Historical superseded documentation verifier failures are retained; current maintained catalog passed.",
+    "Two patent source-admission attempts timed out before any copy or test; compatible proposal remains unqualified.",
+    "Hosted CI success is not verified; remote accepted ordinary pushes with expected documentation checks outstanding."
+  ],
+  "preserved_remote_branches": {
+    "ipfs_accelerate_py": {
+      "preserve/automatic-stall-rearm-20261114": "79f414af2c34a88a656d774544882f74e0f60ebe",
+      "preserve/home-legacy-cleanup-20261114": "fe166e5d8af6840c883cf06e0bc1b95de78a656f",
+      "preserve/incomplete-dependency-release-20261114": "5f7f66ed700a3dc24eebd7fd1f7bc2837a581d15",
+      "preserve/patent-parallel-pending-20261114": "d31a9c94217a56123111d530107983d0c6f8a171",
+      "preserve/state-laws-cohort-pending-20261114": "b065279895bb621278b98e40cd022816420b7712"
+    },
+    "ipfs_datasets_py": {
+      "preserve/patent-review-20261114": "393633609cf2ff8b7459b55c671c9376455640cb",
+      "preserve/trust-envelope-variant-20261114": "0339fc6a6420c3968fff4e1e841fb0a076fbd0ef"
+    },
+    "ipfs_kit_py": "Six exact verified archive/worktree-sync-20261114 refs are recorded in repository-inventory.json; broad compatibility merges remain unreviewed."
+  },
+  "private_evidence_descriptors": [
+    {
+      "bytes": 6490,
+      "path": "/tmp/datasets-git-audit-20261114-v01/final-publication-manifest.json",
+      "sha256": "d21dd660e46bb5a8fa668a08662b333d0cd2025911c48b8cc5376d73b4769345"
+    },
+    {
+      "bytes": 35366,
+      "path": "/tmp/accelerate-git-publication-result-20261114-v01.json",
+      "sha256": "236ee1e93abcb8985113744d792127cb7872c0c4fad0c15bf8413b45463b902a"
+    },
+    {
+      "bytes": 14015,
+      "path": "/tmp/git-publication-audit-20261114/public-safe-coverage-summary-v02.json",
+      "sha256": "63023ab0793af3cd201feebce5ec240aabd444164473c5525e6c122112fbd076"
+    }
+  ],
+  "published_verified_component_main_heads": {
+    "HACC": "909572f9a1aa62facd595955d6ca2a3f426fb42e",
+    "complaint-generator": "92033a02f5550f80c26c53c6474ca6cb370248f9",
+    "hallucinate_app": "373fc67b5111b470e843f4d9033f010a870f0292",
+    "ipfs_accelerate_py": "bf8480b98c7c30ca1242ab14e88efeef87efe4b4",
+    "ipfs_datasets_py": "3178765fef7d73d4cb7ba88cd78634d5d74b8b0a"
+  },
+  "recorded_at_utc": "2026-11-14T21:34:03.690324+00:00",
+  "remaining_main_integration_work": [
+    "Complete compatible patent proposal offline qualification under available source custody.",
+    "Reconcile alternate trust-envelope wire schema while retaining current API, bounded authority ceiling and fail-closed normalization.",
+    "Implement missing IntentRepository.release_dependency_satisfied_blocks before enabling its preserved watchdog.",
+    "Review historical failed-agent/rescue/formatting variants individually; ancestry difference alone does not establish a missing feature."
+  ],
+  "root_published_before_final_pin_commit": {
+    "historical_paper_source": "e70ec4b7c44d7c8feef04a06da05b3f44c393eb0",
+    "planning_and_handoff_docs": "8fd1983595060cc36f15f59083910d667fdb3b45"
+  },
+  "schema": "github-main-consolidation-publication/v1",
+  "scientific_native_model_or_statutory_semantic_qualification_added_by_this_publication": false,
+  "scope": "Accessible project worktrees, submodules and branches in workspace, home and /tmp; reviewed compatible source committed to main; incomplete/incompatible variants retained separately.",
+  "tests": {
+    "accelerate_final_nine_modules": {
+      "failed": 0,
+      "passed": 673,
+      "skipped": 81
+    },
+    "accelerate_parallel_planner": {
+      "failed": 0,
+      "passed": 3
+    },
+    "counts_are_not_summed_as_independent_scientific_results": true,
+    "datasets_F18_focused": {
+      "deselected": 186,
+      "failed": 0,
+      "passed": 125,
+      "scope": "Focused current and reconciled F18 software contracts; not whole-module qualification",
+      "skipped": 0
+    },
+    "datasets_candidate_three_whole_modules": {
+      "failed": 0,
+      "passed": 497,
+      "scope": "P5 complete norm proposals, candidate syntax, prose reconstruction; fictional and adversarial software fixtures",
+      "skipped": 0
+    },
+    "datasets_current_catalog": {
+      "components": 119,
+      "passed": true,
+      "saved_evidence_records": 430,
+      "tasks": 24
+    },
+    "historical_paper_sources": {
+      "Python_AST_parse_passed": 34,
+      "historical_experiments_reexecuted": false
+    }
+  }
+}
