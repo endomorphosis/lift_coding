@@ -28,6 +28,10 @@
       "total_bytes": 11445680,
       "total_file_versions": 59
     },
+    "prior_total_before_source3_v07": {
+      "total_bytes": 11558296,
+      "total_file_versions": 63
+    },
     "proof_feedback_source_increment_v02": {
       "bytes": 112616,
       "file_versions": 4,
@@ -36,10 +40,39 @@
       "publication_receipt_sha256": "44b2759732fc0ceef9817d5abf0f4fb052833db366a9f2dca34f3ec4c621c1d5",
       "scope": "Three source/test variants and one provenance manifest. Current44 software guards retain their separate qualification; the pending legacy-cache RED source remains unexecuted/unqualified. Backup grants no new software, Native, legal, training/gold or model qualification."
     },
-    "total_bytes": 11558296,
-    "total_file_versions": 63
+    "source_candidate_increment_v07": {
+      "audit_sha256": "f082931dfb90230d7ff361631a3e2a57927e5ef1d8da77c9c696e42c083c4cbf",
+      "bytes": 858199,
+      "file_versions": 3,
+      "publication_receipt_sha256": "5dccb19f126ff80be4614300f6efcb6521c2d126c450e305e2f9f967898c22e3",
+      "scope": "One stopped unfinished/unreviewed/unqualified release-coordinator source variant and two SDK version-forwarding source/test variants, separately archived. No main adoption, runtime, Native, scientific activation, legal or model qualification is supplied."
+    },
+    "total_bytes": 12416495,
+    "total_file_versions": 66
   },
   "main_ref_history": {
+    "before_source3_v07_and_alias_docs": {
+      "main_refs_verified": {
+        "ipfs_accelerate_py": "21e94730749848ee76ced9cecf8082494ded8ad1",
+        "ipfs_datasets_py": "a1d446c05b20429f6868a089416db268f63b50f3"
+      },
+      "verification_evidence": {
+        "ipfs_accelerate_py": {
+          "main_commit": "21e94730749848ee76ced9cecf8082494ded8ad1",
+          "preservation_commit": "fdf4ed5faffc3b9f194eb296d0dae12143523924",
+          "scope": "Existing source publication refs freshly reverified unchanged; no new qualification."
+        },
+        "ipfs_datasets_py": {
+          "independent_anonymous_HTTPS_readback_sha256": "1a954f7e2f939bf4bac50d825882ba29253996ee3c80219228c6d36709512a29",
+          "main_commit": "a1d446c05b20429f6868a089416db268f63b50f3",
+          "publication_receipt_sha256": "0890f5f2e82f111b6e96fab144b4869a8011f326d78b86f3b461fadbaca9971a",
+          "scope": "Exact selected four maintained documentation/capsule files only; no new product tests, Native or model operation.",
+          "selected_Main_documentation_bytes": 2290507,
+          "selected_Main_documentation_files": 4
+        }
+      },
+      "verification_scope": "Fresh normal remote refs verified after the four-file proof-feedback source backup and the independently restored four-file datasets Main142 documentation/capsule publication. Source-preservation totals cover the historical35+9+15+4 versions only; the separate Main142 documentation readback is not added again. No wider runtime, Native, legal, model or corpus qualification follows."
+    },
     "before_source4_and_final_Main_publication": {
       "main_refs_verified": {
         "ipfs_accelerate_py": "21e94730749848ee76ced9cecf8082494ded8ad1",
@@ -55,22 +88,22 @@
   "main_ref_verification_evidence": {
     "ipfs_accelerate_py": {
       "main_commit": "21e94730749848ee76ced9cecf8082494ded8ad1",
-      "preservation_commit": "fdf4ed5faffc3b9f194eb296d0dae12143523924",
-      "scope": "Existing source publication refs freshly reverified unchanged; no new qualification."
+      "preservation_commit": "62d117e7e0a11a77c76ad53b7b5d17fae79968a5",
+      "scope": "Existing main and latest source-preservation refs reverified; no product or runtime promotion."
     },
     "ipfs_datasets_py": {
-      "independent_anonymous_HTTPS_readback_sha256": "1a954f7e2f939bf4bac50d825882ba29253996ee3c80219228c6d36709512a29",
-      "main_commit": "a1d446c05b20429f6868a089416db268f63b50f3",
-      "publication_receipt_sha256": "0890f5f2e82f111b6e96fab144b4869a8011f326d78b86f3b461fadbaca9971a",
-      "scope": "Exact selected four maintained documentation/capsule files only; no new product tests, Native or model operation.",
-      "selected_Main_documentation_bytes": 2290507,
+      "independent_anonymous_HTTPS_readback_sha256": "9454fa1484df7db466cdf5656e69be6a4233561c06352fb18b9570ebcf5dac80",
+      "main_commit": "c76bcfc274899d95944365dfaf35554ce729ce77",
+      "publication_receipt_sha256": "f4ed43dc8aef99d5bfe1c304d1fbcb6cfd5cbd4d1aa3fb79af4378c3251f072a",
+      "scope": "Exact selected four maintained alias software documentation/capsule files, independently restored; no new tests, Native, model or activation claim.",
+      "selected_Main_documentation_bytes": 2303401,
       "selected_Main_documentation_files": 4
     }
   },
-  "main_ref_verification_scope": "Fresh normal remote refs verified after the four-file proof-feedback source backup and the independently restored four-file datasets Main142 documentation/capsule publication. Source-preservation totals cover the historical35+9+15+4 versions only; the separate Main142 documentation readback is not added again. No wider runtime, Native, legal, model or corpus qualification follows.",
+  "main_ref_verification_scope": "Fresh main and preservation refs verified at this 66-version source-only checkpoint. The additional three archived source variants have their own independent HTTPS readback and supply no new qualification. Source totals retain the historical35+9+15+4+3 scopes; maintained-documentation publication readbacks are separate and not double-counted.",
   "main_refs_verified": {
     "ipfs_accelerate_py": "21e94730749848ee76ced9cecf8082494ded8ad1",
-    "ipfs_datasets_py": "a1d446c05b20429f6868a089416db268f63b50f3"
+    "ipfs_datasets_py": "c76bcfc274899d95944365dfaf35554ce729ce77"
   },
   "preservation_branch": "preserve/inflight-source-20261114",
   "preservation_commit_history": {
@@ -81,11 +114,15 @@
     "after_first_59_file_versions": {
       "ipfs_accelerate_py": "fdf4ed5faffc3b9f194eb296d0dae12143523924",
       "ipfs_datasets_py": "0082cb50e433953d7189180ca8e3be50084d3524"
+    },
+    "after_first_63_file_versions": {
+      "ipfs_accelerate_py": "fdf4ed5faffc3b9f194eb296d0dae12143523924",
+      "ipfs_datasets_py": "9b05f1f11aa2430dfd118a4de48a933b4f83cab0"
     }
   },
   "preservation_commits": {
-    "ipfs_accelerate_py": "fdf4ed5faffc3b9f194eb296d0dae12143523924",
-    "ipfs_datasets_py": "9b05f1f11aa2430dfd118a4de48a933b4f83cab0"
+    "ipfs_accelerate_py": "62d117e7e0a11a77c76ad53b7b5d17fae79968a5",
+    "ipfs_datasets_py": "0fb758f340f66f9d0906648a6482ba82f341f00f"
   },
   "preserved_constraints": {
     "old_failures_and_source_identities": "Retained; backup is not software, Native, legal or model qualification.",
