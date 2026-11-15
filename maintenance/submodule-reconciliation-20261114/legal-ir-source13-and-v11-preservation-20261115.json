@@ -1,0 +1,112 @@
+{
+  "combined_increment": {
+    "Python_source_versions": 18,
+    "bytes": 3092347,
+    "file_versions": 20,
+    "proposal_or_manifest_JSON_versions": 2
+  },
+  "cumulative_bytes": 15508842,
+  "cumulative_file_versions": 86,
+  "historical_66_versions_preserved": true,
+  "latest_datasets_preserve_commit": "a3cec71ab49e951d977ecd25c16984c6d4031d86",
+  "private_assets_models_checkpoints_and_runtime_logs_included": false,
+  "qualification_or_approval_granted": false,
+  "recorded_date_utc": "2026-11-15",
+  "schema": "legal-ir-source13-and-v11-preservation-evidence/v1",
+  "source13_backup": {
+    "branch": "preserve/inflight-source-20261114",
+    "cumulative_scope": {
+      "counting_rule": "File versions include provenance manifests consistently with earlier increments. The new increment contains thirteen Python source versions and one manifest; totals are not unique-path counts.",
+      "new_total_bytes": 14682432,
+      "new_total_file_versions": 80,
+      "previous_bytes": 12416495,
+      "previous_file_versions": 66
+    },
+    "historical_receipts_failed_claims_and_source_identities_preserved": true,
+    "id": "legal-ir-realization-source13-preservation-20261115",
+    "independent_readback": {
+      "all_SHA256_Git_blob_OIDs_and_modes_matched": true,
+      "all_unselected_base_blobs_modes_and_paths_preserved": true,
+      "clone_has_no_local_alternates_or_borrowed_objects": true,
+      "cold_readback_path": "workspace/test-logs/federal-corpus-audits/legal-ir-peer-revision-reconciliation-20261109-v01/legal-ir-current-source7-preservation-private-v01/v02-source13/independent-anonymous-HTTPS-cold-readback-v01/readback.json",
+      "cold_readback_sha256": "ca1e84215c2f11eb5cf1050b4d6df224d70b3ba7519487ee6b1aba6095afdeee",
+      "fresh_anonymous_HTTPS_clone": true,
+      "main_ref_at_before_and_after": "8336d39eebe6922efcb77d669091593d3a37537b",
+      "publication_receipt_sha256": "25d680520d3a0f311d0df44ff133118e9da8067469013620e863739f550f117f",
+      "restored_bytes": 2265937,
+      "restored_files": 14
+    },
+    "no_new_runtime_permissions_or_budget_reset": true,
+    "preservation_commit": "ffe8a5925c23658bb2ee3b0df35b70c01d5c6a53",
+    "preservation_parent": "0fb758f340f66f9d0906648a6482ba82f341f00f",
+    "preserved_original_state": {
+      "both_original_HEAD_index_peer_bytes_and_modes_unchanged": true,
+      "independent_clone_Source_WRITE_closed": true,
+      "normal_nonforce_preservation_branch_push": true,
+      "original_Source_READ_closed": true,
+      "original_Source_WRITE_claims": 0
+    },
+    "private_assets_models_checkpoints_archives_binaries_or_runtime_logs_included": false,
+    "qualification_granted": {
+      "corpus_release_or_main_adoption": false,
+      "current_merged_Native": false,
+      "current_merged_software": false,
+      "legal_review_or_statutory_meaning": false,
+      "model_improvement": false,
+      "scientific_supervisor_activation": false,
+      "training_or_evaluation_gold": false
+    },
+    "recorded_date_utc": "2026-11-15",
+    "schema": "legal-ir-two-variant-source-preservation-evidence/v1",
+    "selected_scope": {
+      "Python_source_versions": 13,
+      "Root_canonical_source_versions": 7,
+      "provenance_manifests": 1,
+      "source_use_compatible_peer_merge_versions": 6,
+      "total_bytes": 2265937,
+      "total_file_versions": 14
+    },
+    "status": "SOURCE_ONLY_BACKUP_VERIFIED_NO_MAIN_PROMOTION_OR_QUALIFICATION",
+    "why_both_variants": "Committed source-use changes already modify the same owners. The old Root whole-file variants must not overwrite those incoming changes. Both the Root implementation and distinct merged peer candidates are recoverable under separate identities; merged compatibility and Native acceptance need fresh qualification."
+  },
+  "status": "TWO_SOURCE_ONLY_BACKUPS_VERIFIED_NO_MAIN_OR_RUNTIME_QUALIFICATION",
+  "v11_source6_backup": {
+    "Native_legal_meaning_training_model_or_corpus_authority_granted": false,
+    "branch": "preserve/inflight-source-20261114",
+    "cumulative_scope": {
+      "counting_rule": "File versions consistently include selected proposal/provenance JSON files. Totals are not unique-path counts.",
+      "new_total_bytes": 15508842,
+      "new_total_file_versions": 86,
+      "prior_bytes": 14682432,
+      "prior_file_versions": 80
+    },
+    "id": "legal-ir-physical-realization-v11-source6-preservation-20261115",
+    "independent_readback": {
+      "all_six_restored_bytes_SHA256_Git_blob_OIDs_and_modes_matched": true,
+      "all_unselected_base_blobs_modes_and_paths_preserved": true,
+      "cold_readback_sha256": "71e8f9abc6f87be730c80d2415bdddd051dea15e83c21b2184f6b72aa3560548",
+      "fresh_anonymous_HTTPS_clone": true,
+      "local_alternates_or_object_borrowing": false,
+      "main_ref_before_after": "8336d39eebe6922efcb77d669091593d3a37537b",
+      "publication_receipt_sha256": "db5f72b8836e3645bb5ffa2117e806ad464356c94f87427caadb2e9c80ea2f9b"
+    },
+    "original_HEAD_index_peer_source_bytes_and_modes_unchanged": true,
+    "original_Source_READ_and_independent_clone_WRITE_closed": true,
+    "preservation_commit": "a3cec71ab49e951d977ecd25c16984c6d4031d86",
+    "preservation_parent": "ffe8a5925c23658bb2ee3b0df35b70c01d5c6a53",
+    "private_archives_models_checkpoints_binaries_or_runtime_logs_included": false,
+    "qualification_or_approval_granted": false,
+    "recorded_date_utc": "2026-11-15",
+    "runtime_permission_or_budget_reset": false,
+    "schema": "legal-ir-v11-selected-source-preservation-evidence/v1",
+    "scope": "Only the selected current physical-realization v11 four-owner proposal, its owning test and exact proposal JSON. Intermediate drafts and model/source data are excluded. Backup does not execute, install, promote or qualify the proposal.",
+    "selected_scope": {
+      "Python_source_versions": 5,
+      "existing_proposal_JSON_versions": 1,
+      "no_additional_manifest_added": true,
+      "total_bytes": 826410,
+      "total_file_versions": 6
+    },
+    "status": "SOURCE_ONLY_BACKUP_VERIFIED_NO_MAIN_ADOPTION_OR_QUALIFICATION"
+  }
+}
