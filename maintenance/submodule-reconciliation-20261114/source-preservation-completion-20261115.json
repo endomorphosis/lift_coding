@@ -24,30 +24,68 @@
       "total_bytes": 7894120,
       "total_file_versions": 44
     },
-    "total_bytes": 11445680,
-    "total_file_versions": 59
+    "prior_total_before_proof_feedback_source4": {
+      "total_bytes": 11445680,
+      "total_file_versions": 59
+    },
+    "proof_feedback_source_increment_v02": {
+      "bytes": 112616,
+      "file_versions": 4,
+      "independent_HTTPS_readback_recorded_in_receipt": true,
+      "preservation_commit": "9b05f1f11aa2430dfd118a4de48a933b4f83cab0",
+      "publication_receipt_sha256": "44b2759732fc0ceef9817d5abf0f4fb052833db366a9f2dca34f3ec4c621c1d5",
+      "scope": "Three source/test variants and one provenance manifest. Current44 software guards retain their separate qualification; the pending legacy-cache RED source remains unexecuted/unqualified. Backup grants no new software, Native, legal, training/gold or model qualification."
+    },
+    "total_bytes": 11558296,
+    "total_file_versions": 63
   },
   "main_ref_history": {
+    "before_source4_and_final_Main_publication": {
+      "main_refs_verified": {
+        "ipfs_accelerate_py": "21e94730749848ee76ced9cecf8082494ded8ad1",
+        "ipfs_datasets_py": "2a746bcdd2863213a4e7f71fad6c4f25ddf22427"
+      },
+      "verification_scope": "Verified at the completed 15-file source-only preservation publication cutoff; subsequent peer work or runtime evidence is not covered by this record."
+    },
     "previous_record": {
       "ipfs_accelerate_py": "21e94730749848ee76ced9cecf8082494ded8ad1",
       "ipfs_datasets_py": "ad54686ca8403f5ed966d281639e0d7a021d1613"
     }
   },
-  "main_ref_verification_scope": "Verified at the completed 15-file source-only preservation publication cutoff; subsequent peer work or runtime evidence is not covered by this record.",
+  "main_ref_verification_evidence": {
+    "ipfs_accelerate_py": {
+      "main_commit": "21e94730749848ee76ced9cecf8082494ded8ad1",
+      "preservation_commit": "fdf4ed5faffc3b9f194eb296d0dae12143523924",
+      "scope": "Existing source publication refs freshly reverified unchanged; no new qualification."
+    },
+    "ipfs_datasets_py": {
+      "independent_anonymous_HTTPS_readback_sha256": "1a954f7e2f939bf4bac50d825882ba29253996ee3c80219228c6d36709512a29",
+      "main_commit": "a1d446c05b20429f6868a089416db268f63b50f3",
+      "publication_receipt_sha256": "0890f5f2e82f111b6e96fab144b4869a8011f326d78b86f3b461fadbaca9971a",
+      "scope": "Exact selected four maintained documentation/capsule files only; no new product tests, Native or model operation.",
+      "selected_Main_documentation_bytes": 2290507,
+      "selected_Main_documentation_files": 4
+    }
+  },
+  "main_ref_verification_scope": "Fresh normal remote refs verified after the four-file proof-feedback source backup and the independently restored four-file datasets Main142 documentation/capsule publication. Source-preservation totals cover the historical35+9+15+4 versions only; the separate Main142 documentation readback is not added again. No wider runtime, Native, legal, model or corpus qualification follows.",
   "main_refs_verified": {
     "ipfs_accelerate_py": "21e94730749848ee76ced9cecf8082494ded8ad1",
-    "ipfs_datasets_py": "2a746bcdd2863213a4e7f71fad6c4f25ddf22427"
+    "ipfs_datasets_py": "a1d446c05b20429f6868a089416db268f63b50f3"
   },
   "preservation_branch": "preserve/inflight-source-20261114",
   "preservation_commit_history": {
     "after_first_44_file_versions": {
       "ipfs_accelerate_py": "b47367c08c05119a0338e8a6ceb1087643767af6",
       "ipfs_datasets_py": "6f78a4a6f6c77b09aa514d33625ffb0d1b97e9b0"
+    },
+    "after_first_59_file_versions": {
+      "ipfs_accelerate_py": "fdf4ed5faffc3b9f194eb296d0dae12143523924",
+      "ipfs_datasets_py": "0082cb50e433953d7189180ca8e3be50084d3524"
     }
   },
   "preservation_commits": {
     "ipfs_accelerate_py": "fdf4ed5faffc3b9f194eb296d0dae12143523924",
-    "ipfs_datasets_py": "0082cb50e433953d7189180ca8e3be50084d3524"
+    "ipfs_datasets_py": "9b05f1f11aa2430dfd118a4de48a933b4f83cab0"
   },
   "preserved_constraints": {
     "old_failures_and_source_identities": "Retained; backup is not software, Native, legal or model qualification.",
