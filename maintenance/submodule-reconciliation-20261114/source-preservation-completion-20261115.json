@@ -190,6 +190,67 @@
     "runtime_permissions_and_budgets": "Unchanged; backup performs no training or Native verification."
   },
   "recorded_date_utc": "2026-11-15",
+  "registered_worktree_tip_publication_audit_20261115": {
+    "all_registered_HEADs_match_registry": true,
+    "all_registered_tip_records_publicly_reachable": true,
+    "audit_bytes": 33607,
+    "audit_cutoff_main_refs": {
+      "A": "2d4ad8b84d7ef5024c895925393eeb1ea60279e2",
+      "P": "c432084cbb716f57bdefc4d31ff58c097e6d1dfa",
+      "R": "83beb639b64311c5cb6b996acdd65cc959500121"
+    },
+    "audit_path": "workspace/test-logs/federal-corpus-audits/legal-ir-peer-revision-reconciliation-20261109-v01/legal-ir-registered-RAP53-tip-audit-20261115-v01/registered-RAP53-public-tip-audit.json",
+    "audit_sha256": "c1917e8e9d407e7a9c07a339d2c85fff28502128cbf864ddef12fbe2fa329617",
+    "non_main_preservation_refs": {
+      "accelerate_unqualified_capacity_a53": {
+        "branch": "refs/heads/preserve/unqualified-capacity-a53b-20261109",
+        "commit": "a53b173781999cdde0faaccf245ea5b4d404f730",
+        "earlier_failed_attempt": {
+          "genuine_tool": "75373 -> 563538 failure",
+          "push_performed": false,
+          "receipt_bytes": 3280,
+          "receipt_sha256": "5c32772778422573cd88772092653d857f537069e2697d0300c0781e7803329f",
+          "retained": true
+        },
+        "exact_existing_commit_graph_preserved": true,
+        "independent_HTTPS_readback_bytes": 2412,
+        "independent_HTTPS_readback_sha256": "a16aa3abbe5e365fde8aa652a824ca8597d243864610eaa3a5b11e706d02f358",
+        "main_unchanged": true,
+        "origin": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+        "original_HEAD_index_and_five_dirty_peers_unchanged": true,
+        "original_Source_READ_and_independent_clone_WRITE_closed": true,
+        "public_parent": "9df264ec1c624c11e747eacf4e3bdd53e1d51846",
+        "publication_receipt_bytes": 5395,
+        "publication_receipt_sha256": "f83a681c77028cb4f1b509b966bcdda2f1ec55e580027411886a01fd1c83a5d6",
+        "qualification_granted": false,
+        "successful_genuine_tool": "62020 -> bd8a4e EXIT0",
+        "three_source_file_HTTPS_readback_bytes": 345333,
+        "three_source_files_verified": 3
+      },
+      "datasets_V4_context": {
+        "already_public_before_this_preservation": "Exact public reference independently present in the registered audit.",
+        "branch": "refs/heads/preserve/inflight-v4-context-20261115",
+        "commit": "d95427c9e087c841ddf05d37c06cb35a28ba7f84",
+        "origin": "https://github.com/endomorphosis/ipfs_datasets_py.git"
+      }
+    },
+    "reachability_basis": "Each audited HEAD is an ancestor of the public main at the audit cutoff or is available through an explicitly public preservation branch.",
+    "recorded_at_utc": "2026-11-15T21:06:31.393570+00:00",
+    "registered_counts": {
+      "A": 36,
+      "P": 4,
+      "R": 13
+    },
+    "registered_total": 53,
+    "runtime_permissions_budgets_historical_source_epochs_and_private_asset_holds_unchanged": true,
+    "scope": "The53 registered worktree HEAD records from the bounded R/A/P registry audit, including repeated HEADs. This is not a new whole-machine/500-Git-store discovery or a dirty-content/private-asset backup claim.",
+    "source86_totals_unchanged": {
+      "bytes": 15508842,
+      "file_versions": 86
+    },
+    "source_snapshot_byte_increment": 0,
+    "source_snapshot_file_version_increment": 0
+  },
   "schema": "source-only-github-preservation-completion/v1",
   "scope": "Selected source code, tests, documentation and unqualified source candidates before decommission; private assets remain on hold.",
   "source13_backup_cutoff_refs": {
