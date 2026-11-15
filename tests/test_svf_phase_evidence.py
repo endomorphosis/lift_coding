@@ -164,6 +164,21 @@ class PhaseEvidenceTests(unittest.TestCase):
   p=final.phase_projection(child,self.scenario);self.assertEqual(len(p['seek']['seeked_events']),1)
   self.assertEqual(p['seek']['native_event_count'],8);self.assertEqual(len(record['seeked_events']),8)
 
+ def test_equal_catalog_document_cid_is_listed_without_joining_media(self):
+  import base64
+  child=self.group['children'][0]
+  other='b'+base64.b32encode(b'\x01\x55\x12\x20'+bytes(32)).decode().rstrip('=').lower()
+  document={'binary_size':127,'cid':other,'content':'[{"id":"gpt2"}]'}
+  child['backend_observations']=[{'result_assertion':{'operator':'equals','actual':document,'expected':dict(document)}}]
+  p=final.phase_projection(child,self.scenario)
+  self.assertEqual(p['owner_result_cids'],[other])
+  self.assertIsNotNone(p['seek'])
+  self.assertEqual(p['reopen']['identity_pairs'][0]['decoded_cid'],CID)
+  child['backend_observations']=[{'result_assertion':{'operator':'equals','actual':{'cid':other},'expected':{'cid':CID}}}]
+  p=final.phase_projection(child,self.scenario)
+  self.assertEqual(p['owner_result_cids'],[])
+  self.assertIsNotNone(p['seek'])
+
  def test_local_null_CID_native_source_identity_needs_no_backend_call(self):
   child=self.group['children'][0]
   for phase in child['phase_evidence']['phases']:

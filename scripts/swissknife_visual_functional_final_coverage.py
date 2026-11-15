@@ -618,9 +618,31 @@ def _phase_raw_cid(value):
 
 
 def _phase_owner_cids(child):
+    """Raw assertion actuals. Media identity joins use only this set."""
     return sorted({value for row in child.get('backend_observations', []) for value in
                    (row.get('result_assertion', {}).get('actual'),)
                    if _phase_raw_cid(value)})
+
+
+def _phase_declared_owner_cids(child):
+    """Review list: string assertion CIDs, plus a document cid an equals assertion names.
+
+    A catalog result actual is the document, so its cid never satisfies
+    _phase_owner_cids. Putting that cid into the identity set would let one
+    document accept or reject an unrelated decoded media pair.
+    """
+    found = set(_phase_owner_cids(child))
+    for row in child.get('backend_observations', []):
+        assertion = row.get('result_assertion')
+        if type(assertion) is not dict or assertion.get('operator') != 'equals':
+            continue
+        actual, expected = assertion.get('actual'), assertion.get('expected')
+        if type(actual) is not dict or type(expected) is not dict:
+            continue
+        cid = actual.get('cid')
+        if _phase_raw_cid(cid) and expected.get('cid') == cid:
+            found.add(cid)
+    return sorted(found)
 
 
 def _phase_identity_pair(before, after, owner_cids, *, same_source=False):
@@ -641,7 +663,7 @@ def phase_projection(child, scenario):
     if evidence is None:
         return None
     owner_cids = _phase_owner_cids(child)
-    selected = {'schema': PHASE_EVIDENCE_SCHEMA, 'original_sha256': digest(evidence), 'owner_result_cids': owner_cids,
+    selected = {'schema': PHASE_EVIDENCE_SCHEMA, 'original_sha256': digest(evidence), 'owner_result_cids': _phase_declared_owner_cids(child),
                 'step_count': sum(len(p['steps']) for p in evidence['phases']),
                 'seek': None, 'reopen': None, 'failure_controls': None, 'retry_source_values': [], 'probe_temporal_samples': []}
     for phase in evidence['phases']:
@@ -688,6 +710,19 @@ def phase_projection(child, scenario):
                 target = next((c for c in row['controls'] if c['selector'] == step['selector']), None)
                 selected['retry_source_values'].append({'step_index': index, 'selector': step['selector'],
                     'declared_value': step['value'], 'observed_after': target['after'] if target else None})
+            # Final frames are taken after failure_recovery. The reopen click value
+            # is the checkpoint those frames cannot show.
+            if name == 'persist_reopen' and step['op'] in {'click', 'fill', 'press', 'select'}:
+                for item in row['controls']:
+                    before = item['before'] if type(item['before']) is dict else None
+                    after = item['after'] if type(item['after']) is dict else None
+                    before_value = before.get('value') if before else None
+                    after_value = after.get('value') if after else None
+                    if type(before_value) is not str and type(after_value) is not str:
+                        continue
+                    selected.setdefault('persist_values', []).append({
+                        'step_index': index, 'selector': item['selector'],
+                        'before_value': before_value, 'after_value': after_value})
     return selected
 
 
@@ -1799,6 +1834,10 @@ def _failure_request_scalars(root, artifact):
             value = event.get(key)
             if type(value) is str and 0 < len(value) <= 80:
                 found[key] = value
+    for key in ('model', 'model_id', 'input', 'prompt'):
+        value = payload.get(key)
+        if type(value) is str and 0 < len(value) <= 80:
+            found[key] = value
     return found or None
 
 
@@ -2561,6 +2600,30 @@ def _review_identity(root, profile, task):
             'source_snapshot': source_snapshot(root, profile, task), 'route': profile['llm']}
 
 
+def _positive_receipt_supersedes(root, profile, task):
+    """True when the retained receipt is a later pass whose review file is still present."""
+    receipt_path = _task_dir(root, profile, task) / 'receipt.json'
+    if not receipt_path.is_file() or receipt_path.is_symlink():
+        return False
+    try:
+        receipt = parse(read(root, str(receipt_path.relative_to(root)), 32 * 1024 * 1024))
+    except (OSError, ValueError, TypeError):
+        return False
+    if not _receipt_matches(task, receipt):
+        return False
+    detail = receipt.get('detail')
+    if (type(detail) is not dict or 'final_viewport_review_join' not in detail
+            or detail.get('readonly_verification') is not True
+            or type(detail.get('repair_admissions')) is not int or detail['repair_admissions'] != 0):
+        return False
+    reviews = [item for item in receipt.get('artifacts', [])
+               if type(item) is dict and Path(str(item.get('path', ''))).name == 'visual-review.json']
+    if len(reviews) != 1 or type(reviews[0].get('path')) is not str:
+        return False
+    review = path(root, reviews[0]['path'])
+    return review.is_file() and not review.is_symlink()
+
+
 def assert_final_review_allowed(root, profile, task):
     target = _failure_path(root, profile, task)
     if not target.exists() and not target.is_symlink():
@@ -2575,6 +2638,17 @@ def assert_final_review_allowed(root, profile, task):
     need(type(old_task) is dict and old_task.get('task_id') == task['task_id'] and old_task.get('app_id') == task['app_id']
          and old_task.get('kind') == 'final-app-verify' and old_task.get('edit_paths') == [] and old_task.get('checks') == [],
          'final failed-review historical task policy is malformed')
+    failed = value['failed_review']
+    failed_path = path(root, failed['path']) if type(failed) is dict and type(failed.get('path')) is str else None
+    # Pruned failed-attempt bytes cannot be re-authenticated. A same-bytes fence
+    # still parks. A later pass-join whose live source differs may run again.
+    if failed_path is None or failed_path.is_symlink() or not failed_path.is_file():
+        identity = value.get('identity')
+        if type(identity) is dict and identity == _review_identity(root, profile, task):
+            raise ValueError('unchanged_final_app_visual_review: source is unchanged since the genuine failed dual-viewport review; scoped remediation is required')
+        if type(identity) is dict and _positive_receipt_supersedes(root, profile, task):
+            return
+        need(False, 'final failed-review source fence evidence is missing')
     check_reference(root, value['failed_review'])
     # Historical source changes may requalify admission; immutable failure
     # receipt/context/image references must remain authentic before either path.

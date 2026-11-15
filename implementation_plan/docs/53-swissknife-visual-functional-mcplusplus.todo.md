@@ -4645,7 +4645,8 @@ The canonical JSON/DuckDB import is the initial plan snapshot. This Markdown boa
 
 ## SVF-900 Rerun all 45 app workflows against the final shared source
 
-- Status: ready
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-11-15T14:05:57Z
 - Priority: P2
 - Track: regression
 - Depends on: SVF-113, SVF-123, SVF-133, SVF-143, SVF-153, SVF-163, SVF-173, SVF-183, SVF-193, SVF-203, SVF-213, SVF-223, SVF-233, SVF-243, SVF-253, SVF-263, SVF-273, SVF-283, SVF-293, SVF-303, SVF-313, SVF-323, SVF-333, SVF-343, SVF-353, SVF-363, SVF-373, SVF-383, SVF-393, SVF-403, SVF-413, SVF-423, SVF-433, SVF-443, SVF-453, SVF-463, SVF-473, SVF-483, SVF-493, SVF-503, SVF-513, SVF-523, SVF-533, SVF-543, SVF-553, SVF-1001, SVF-1002, SVF-1003, SVF-1004, SVF-1005, SVF-1006, SVF-1007, SVF-1008, SVF-1009, SVF-1010, SVF-1011, SVF-1012, SVF-1013, SVF-1014, SVF-1015, SVF-1016, SVF-1017, SVF-1018, SVF-1019, SVF-1020, SVF-1021, SVF-1022, SVF-1023, SVF-1024, SVF-1025, SVF-1026, SVF-1027, SVF-1028, SVF-1029, SVF-1030, SVF-1031, SVF-1032, SVF-1033, SVF-1034, SVF-1035, SVF-1036, SVF-1037, SVF-1038, SVF-1039, SVF-1040, SVF-1041, SVF-1042, SVF-1043, SVF-1044, SVF-1045
@@ -4666,7 +4667,8 @@ The canonical JSON/DuckDB import is the initial plan snapshot. This Markdown boa
 
 ## SVF-910 Verify cross-app Dataset to inference to saved result
 
-- Status: ready
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-11-15T15:16:06Z
 - Priority: P2
 - Track: implementation
 - Depends on: SVF-900
@@ -4692,7 +4694,8 @@ The canonical JSON/DuckDB import is the initial plan snapshot. This Markdown boa
 
 ## SVF-920 Verify cross-app CID media to edit/export to reopen
 
-- Status: ready
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-11-15T14:43:38Z
 - Priority: P2
 - Track: implementation
 - Depends on: SVF-900
@@ -4718,7 +4721,8 @@ The canonical JSON/DuckDB import is the initial plan snapshot. This Markdown boa
 
 ## SVF-930 Verify cross-app Goal to task to real worker output
 
-- Status: ready
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-11-15T15:12:15Z
 - Priority: P2
 - Track: implementation
 - Depends on: SVF-900, SVF-044
@@ -4744,7 +4748,8 @@ The canonical JSON/DuckDB import is the initial plan snapshot. This Markdown boa
 
 ## SVF-990 Aggregate current app and cross-app acceptance without bypasses
 
-- Status: ready
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-11-15T15:22:14Z
 - Priority: P2
 - Track: aggregate
 - Depends on: SVF-900, SVF-910, SVF-920, SVF-930
