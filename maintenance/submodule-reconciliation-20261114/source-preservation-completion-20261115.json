@@ -13,17 +13,41 @@
       "bytes": 1303825,
       "file_versions": 9
     },
-    "total_bytes": 7894120,
-    "total_file_versions": 44
+    "late_source_increment_v06": {
+      "audit_sha256": "db26fdec29a2083f8a9a7af97d55a2e3c4aa12bbd0fd76ac590fa841ccd4a525",
+      "bytes": 3551560,
+      "file_versions": 15,
+      "publication_receipt_sha256": "d8cf97ade020f0100e026200f966ac703e373ff902df0b195116e2a535db70f4",
+      "scope": "12 current source/test/doc versions, two separately archived unqualified constructive-recursion source/test hypotheses, and one separately archived fictional proof-feedback RED test proposal. No runtime archives, compiled Lean outputs, toolchain binaries, model assets or private legal archives."
+    },
+    "prior_total_before_late_source_increment_v06": {
+      "total_bytes": 7894120,
+      "total_file_versions": 44
+    },
+    "total_bytes": 11445680,
+    "total_file_versions": 59
   },
+  "main_ref_history": {
+    "previous_record": {
+      "ipfs_accelerate_py": "21e94730749848ee76ced9cecf8082494ded8ad1",
+      "ipfs_datasets_py": "ad54686ca8403f5ed966d281639e0d7a021d1613"
+    }
+  },
+  "main_ref_verification_scope": "Verified at the completed 15-file source-only preservation publication cutoff; subsequent peer work or runtime evidence is not covered by this record.",
   "main_refs_verified": {
     "ipfs_accelerate_py": "21e94730749848ee76ced9cecf8082494ded8ad1",
-    "ipfs_datasets_py": "ad54686ca8403f5ed966d281639e0d7a021d1613"
+    "ipfs_datasets_py": "2a746bcdd2863213a4e7f71fad6c4f25ddf22427"
   },
   "preservation_branch": "preserve/inflight-source-20261114",
+  "preservation_commit_history": {
+    "after_first_44_file_versions": {
+      "ipfs_accelerate_py": "b47367c08c05119a0338e8a6ceb1087643767af6",
+      "ipfs_datasets_py": "6f78a4a6f6c77b09aa514d33625ffb0d1b97e9b0"
+    }
+  },
   "preservation_commits": {
-    "ipfs_accelerate_py": "b47367c08c05119a0338e8a6ceb1087643767af6",
-    "ipfs_datasets_py": "6f78a4a6f6c77b09aa514d33625ffb0d1b97e9b0"
+    "ipfs_accelerate_py": "fdf4ed5faffc3b9f194eb296d0dae12143523924",
+    "ipfs_datasets_py": "0082cb50e433953d7189180ca8e3be50084d3524"
   },
   "preserved_constraints": {
     "old_failures_and_source_identities": "Retained; backup is not software, Native, legal or model qualification.",
@@ -39,7 +63,9 @@
       "constructive definition realization preparation and native/incremental integration candidates",
       "loss-admission repair candidates",
       "supervisor repair and scientific-executor source variants",
-      "release coordinator and CLI source work"
+      "release coordinator and CLI source work",
+      "constructive-recursion emitter/source-test hypotheses after the refused native dependency check",
+      "fictional proof-feedback Boolean-admission RED test proposal"
     ],
     "status": "Preserved separately; not merged or promoted to main by this backup."
   }
