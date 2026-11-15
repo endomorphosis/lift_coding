@@ -1,0 +1,604 @@
+{
+  "all_historical_branches_and_dirty_files_merged_to_main": false,
+  "local_evidence_hashes": {
+    "all-discovered-github-branch-ancestry.json": "40783f8154c279255cb1b8f2d526f87d7e4d93a43b6236b69b7aee3dd04b41b5",
+    "core-history-previews.json": "6528110f96450279b5bb7485e0a7400d1627b8a67bfa370a3666ad3353ce3e92",
+    "dirty-worktree-summary.json": "16c1e743a1bc1f1a97a869708770b8314b2aaca5fe14735746d3bc107a0b580a",
+    "discovery.json": "69bae4a379ba4f0cc69dae7fedd35951e140bdb09928ef96910268606015bd51",
+    "inventory.json": "fe77a74af136f89d6721776127763d09bdc127a04d692d07050e24ac5c48537a"
+  },
+  "owned_repository_ancestry_snapshot": [
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0",
+      "observed_unique_tips": 20,
+      "origin": "https://github.com/endomorphosis/mcp-plus-plus",
+      "stores": 48,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 4
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "cf97da21cee2f18f99f5c592372b0a637022e680",
+      "observed_unique_tips": 8790,
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+      "stores": 86,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 7860
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "514f5a6ae361f3608e4e0769cd7804ae4b3c013e",
+      "observed_unique_tips": 148,
+      "origin": "https://github.com/endomorphosis/ipfs_kit_py",
+      "stores": 98,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 9
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "a18069c0c361550c28abb810817b561b87fa331d",
+      "observed_unique_tips": 850,
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py",
+      "stores": 92,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 124
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "c6b42b02d3dc7d7e5d6281ea1a8cc6e806092da0",
+      "observed_unique_tips": 10,
+      "origin": "https://github.com/endomorphosis/dcec_library",
+      "stores": 21,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 0
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "51a91c7b5e41ece82e085061796584863d91210e",
+      "observed_unique_tips": 6,
+      "origin": "https://github.com/endomorphosis/eng-dcec",
+      "stores": 21,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 0
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "dc92f8473e9636bad93c1c1df5bc1502945d54b2",
+      "observed_unique_tips": 7,
+      "origin": "https://github.com/endomorphosis/shadowprover",
+      "stores": 21,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 0
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "f8fb0714f4abcc5eb981d7dd7623763d39fed995",
+      "observed_unique_tips": 11,
+      "origin": "https://github.com/endomorphosis/talos",
+      "stores": 21,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 0
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "5756a6158eba5907cf0ddbd42637ef4668bb0307",
+      "observed_unique_tips": 10,
+      "origin": "https://github.com/endomorphosis/convert_to_txt_based_on_mime_type",
+      "stores": 21,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 0
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "72f459942dd781cbffcffb0e29a84e445273159c",
+      "observed_unique_tips": 10,
+      "origin": "https://github.com/endomorphosis/omni_converter_mk2",
+      "stores": 21,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 0
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "248f17f19e6f3e4b326f651e7a64a6f69cf5be3b",
+      "observed_unique_tips": 15,
+      "origin": "https://github.com/endomorphosis/common_crawl_search_engine",
+      "stores": 22,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 0
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "f6151d2113f42e75ea7d83a1b2362fc97e55e44d",
+      "observed_unique_tips": 2,
+      "origin": "https://github.com/endomorphosis/ipfs_model_manager_py",
+      "stores": 19,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 0
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "b397988ed9e3e656475c1cf4417b84efdb95daf3",
+      "observed_unique_tips": 1,
+      "origin": "https://github.com/endomorphosis/ipfs_transformers_py",
+      "stores": 19,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 0
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "52c728d6a956d51dc61cdb22d5359bfb7593d1c8",
+      "observed_unique_tips": 3,
+      "origin": "https://github.com/endomorphosis/hacc",
+      "stores": 2,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 2
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "6530da843b0a2dd57178b6cf52baba27c781128a",
+      "observed_unique_tips": 1,
+      "origin": "https://github.com/endomorphosis/211-ai",
+      "stores": 1,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 0
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "39f12b38659df29023a2735205951c6abde0d885",
+      "observed_unique_tips": 13,
+      "origin": "https://github.com/211-ai/211-ai.github.io",
+      "stores": 1,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 9
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "5508e570800024f42a6ea4f124a39cced56d748e",
+      "observed_unique_tips": 1,
+      "origin": "https://github.com/endomorphosis/clarity_act_deontic_logic",
+      "stores": 1,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 0
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "2fac9419e0a5eb5c4a9c446f2f93bb3bab5218a3",
+      "observed_unique_tips": 11,
+      "origin": "https://github.com/endomorphosis/complaint-generator",
+      "stores": 2,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 0
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "8b407556c1b145b6bc6b0b0321060d1541cb7f26",
+      "observed_unique_tips": 1,
+      "origin": "https://github.com/endomorphosis/solana-slop",
+      "stores": 1,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 0
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "91c8b8bc13c8bc57528121352e067c3ea2828726",
+      "observed_unique_tips": 1,
+      "origin": "https://github.com/endomorphosis/mike",
+      "stores": 1,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 0
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "2a8d25b42b5176e31d3fb9a6b7bff7ae26bd7019",
+      "observed_unique_tips": 2,
+      "origin": "https://github.com/hallucinate-llc/cookbook",
+      "stores": 1,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 1
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "050b46a7335610f0858d4b4d5142218414685fea",
+      "observed_unique_tips": 2,
+      "origin": "https://github.com/endomorphosis/hallucinate_app",
+      "stores": 2,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 0
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "e3e1e771400a6c2b51c7eff325871769e4436ebb",
+      "observed_unique_tips": 32,
+      "origin": "https://github.com/endomorphosis/swissknife",
+      "stores": 4,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 1
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "d742a0420eb51180cb6e268db4ba22cdcaab6899",
+      "observed_unique_tips": 111,
+      "origin": "https://github.com/endomorphosis/lift_coding",
+      "stores": 5,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 6
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "810e8bd91b14fd945e086840ccd0e2874a7910c3",
+      "observed_unique_tips": 3,
+      "origin": "https://github.com/endomorphosis/jevops",
+      "stores": 1,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 0
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "69523e2819292fac6e5537a6e5337cb334f3386d",
+      "observed_unique_tips": 1,
+      "origin": "https://github.com/endomorphosis/municipal_scrape_workspace",
+      "stores": 1,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 0
+    },
+    {
+      "all_main_ancestry_available": true,
+      "ancestry_query_error": null,
+      "observed_main": "c9e2947019bf022066717ad55e64a356beb2e135",
+      "observed_unique_tips": 1,
+      "origin": "https://github.com/portland-laws/portland-laws.github.io",
+      "stores": 1,
+      "unmerged_or_unknown_tips_at_ancestry_snapshot": 0
+    }
+  ],
+  "publication_receipts": [
+    {
+      "origin": "https://github.com/endomorphosis/jevops",
+      "previous_main": "0491349bd3e92e02dc50992e79b0c0a97a521ede",
+      "published_main": "810e8bd91b14fd945e086840ccd0e2874a7910c3",
+      "receipt": "jevops-publication.json"
+    },
+    {
+      "origin": "https://github.com/endomorphosis/lift_coding",
+      "previous_main": "b7a0dafb00e00914e817684d6c5db1113671f3b7",
+      "published_main": "53c1e452694bce84a0c8745c860c2a99f541d292",
+      "receipt": "parent-jevops-publication.json"
+    },
+    {
+      "origin": "https://github.com/endomorphosis/lift_coding",
+      "previous_main": "53c1e452694bce84a0c8745c860c2a99f541d292",
+      "published_main": "d742a0420eb51180cb6e268db4ba22cdcaab6899",
+      "receipt": "parent-kit-publication.json"
+    },
+    {
+      "origin": "https://github.com/endomorphosis/ipfs_kit_py",
+      "previous_main": "7c956aac20a91d9937124813b3bd0c8c73479d08",
+      "published_main": "514f5a6ae361f3608e4e0769cd7804ae4b3c013e",
+      "receipt": "additional-history-publication.json"
+    },
+    {
+      "origin": "https://github.com/endomorphosis/shadowprover",
+      "previous_main": "8bf6ce7d30bc069b740078bacaee0589b4c2c49b",
+      "published_main": "82ca8e5f971253c7c16ee157690db7712c876589",
+      "receipt": "additional-history-publication.json"
+    },
+    {
+      "origin": "https://github.com/211-ai/211-ai.github.io",
+      "previous_main": "245430606fdb5ef7e309e2f170e5b66f5285bc05",
+      "published_main": "39f12b38659df29023a2735205951c6abde0d885",
+      "receipt": "additional-history-publication.json"
+    },
+    {
+      "origin": "https://github.com/endomorphosis/dcec_library",
+      "previous_main": "72efd97f0fc8ab95fb5a7fdb0a6f8efd94c20337",
+      "published_main": "47f0eb5ab3daf9beab75e5ecc0a7234e84aab136",
+      "receipt": "python-format-publication.json"
+    },
+    {
+      "origin": "https://github.com/endomorphosis/talos",
+      "previous_main": "cf386792a15583357ad8640b61a80684430b8e0f",
+      "published_main": "916c790a8501a4292c19e149e1d30fb49e47e3b1",
+      "receipt": "python-format-publication.json"
+    },
+    {
+      "origin": "https://github.com/endomorphosis/convert_to_txt_based_on_mime_type",
+      "previous_main": "2b7a36e7699dbd451a89acb273ab7090c99d1cc0",
+      "published_main": "3f4477eaadb6595abed6ef37a8a59cf47b02b59a",
+      "receipt": "converter-format-publication.json"
+    },
+    {
+      "origin": "https://github.com/endomorphosis/omni_converter_mk2",
+      "previous_main": "ae4f3c2b321e25935f62f99fd50f72bb8916c420",
+      "published_main": "beed4bb23b6eb9a53f86cfe32b5971b352b0a4dd",
+      "receipt": "formatter-source-publication.json"
+    },
+    {
+      "origin": "https://github.com/endomorphosis/common_crawl_search_engine",
+      "previous_main": "7c806d63b4f019e99bf5a3ca6a105fbd5778b17e",
+      "published_main": "872667c2200065b1c2f0176d86fbae2e6005e4c2",
+      "receipt": "formatter-source-publication.json"
+    },
+    {
+      "origin": "https://github.com/endomorphosis/common_crawl_search_engine",
+      "previous_main": "872667c2200065b1c2f0176d86fbae2e6005e4c2",
+      "published_main": "248f17f19e6f3e4b326f651e7a64a6f69cf5be3b",
+      "receipt": "deletion-recovery-publication.json"
+    },
+    {
+      "origin": "https://github.com/endomorphosis/convert_to_txt_based_on_mime_type",
+      "previous_main": "3f4477eaadb6595abed6ef37a8a59cf47b02b59a",
+      "published_main": "5756a6158eba5907cf0ddbd42637ef4668bb0307",
+      "receipt": "deletion-recovery-publication.json"
+    },
+    {
+      "origin": "https://github.com/endomorphosis/dcec_library",
+      "previous_main": "47f0eb5ab3daf9beab75e5ecc0a7234e84aab136",
+      "published_main": "c6b42b02d3dc7d7e5d6281ea1a8cc6e806092da0",
+      "receipt": "deletion-recovery-publication.json"
+    },
+    {
+      "origin": "https://github.com/endomorphosis/eng-dcec",
+      "previous_main": "c96e40dd9351e93b5a573af3fbc82fab644a0eb4",
+      "published_main": "51a91c7b5e41ece82e085061796584863d91210e",
+      "receipt": "deletion-recovery-publication.json"
+    },
+    {
+      "origin": "https://github.com/endomorphosis/omni_converter_mk2",
+      "previous_main": "beed4bb23b6eb9a53f86cfe32b5971b352b0a4dd",
+      "published_main": "72f459942dd781cbffcffb0e29a84e445273159c",
+      "receipt": "deletion-recovery-publication.json"
+    },
+    {
+      "origin": "https://github.com/endomorphosis/shadowprover",
+      "previous_main": "82ca8e5f971253c7c16ee157690db7712c876589",
+      "published_main": "dc92f8473e9636bad93c1c1df5bc1502945d54b2",
+      "receipt": "deletion-recovery-publication.json"
+    },
+    {
+      "origin": "https://github.com/endomorphosis/talos",
+      "previous_main": "916c790a8501a4292c19e149e1d30fb49e47e3b1",
+      "published_main": "f8fb0714f4abcc5eb981d7dd7623763d39fed995",
+      "receipt": "deletion-recovery-publication.json"
+    },
+    {
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+      "previous_main": "faf3ffb018a9fec0fcbecb6f861caf7dc66eb3da",
+      "published_main": "956b2c013ffca7340eed52bada0b41e6d2e5487d",
+      "receipt": "core-history-publication.json"
+    },
+    {
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+      "previous_main": "956b2c013ffca7340eed52bada0b41e6d2e5487d",
+      "published_main": "cf97da21cee2f18f99f5c592372b0a637022e680",
+      "receipt": "datasets-leaf-pin-publication.json"
+    }
+  ],
+  "published_and_verified_origins": {
+    "https://github.com/211-ai/211-ai.github.io": "39f12b38659df29023a2735205951c6abde0d885",
+    "https://github.com/endomorphosis/common_crawl_search_engine": "248f17f19e6f3e4b326f651e7a64a6f69cf5be3b",
+    "https://github.com/endomorphosis/convert_to_txt_based_on_mime_type": "5756a6158eba5907cf0ddbd42637ef4668bb0307",
+    "https://github.com/endomorphosis/dcec_library": "c6b42b02d3dc7d7e5d6281ea1a8cc6e806092da0",
+    "https://github.com/endomorphosis/eng-dcec": "51a91c7b5e41ece82e085061796584863d91210e",
+    "https://github.com/endomorphosis/ipfs_datasets_py": "cf97da21cee2f18f99f5c592372b0a637022e680",
+    "https://github.com/endomorphosis/ipfs_kit_py": "514f5a6ae361f3608e4e0769cd7804ae4b3c013e",
+    "https://github.com/endomorphosis/jevops": "810e8bd91b14fd945e086840ccd0e2874a7910c3",
+    "https://github.com/endomorphosis/lift_coding": "d742a0420eb51180cb6e268db4ba22cdcaab6899",
+    "https://github.com/endomorphosis/omni_converter_mk2": "72f459942dd781cbffcffb0e29a84e445273159c",
+    "https://github.com/endomorphosis/shadowprover": "dc92f8473e9636bad93c1c1df5bc1502945d54b2",
+    "https://github.com/endomorphosis/talos": "f8fb0714f4abcc5eb981d7dd7623763d39fed995"
+  },
+  "recorded_at_utc": "2026-11-15T06:33:36.896862+00:00",
+  "remaining": {
+    "additional_cache_only_owned_tips": "Nine additional datasets tips are generated validation export repositories; not authored production changes.",
+    "cookbook": {
+      "credential_file_excluded": "examples/voice-chat/.env.voice-chat",
+      "local_branch": "reconcile/voice-chat-source-without-credentials-20261115",
+      "prepared_source_commit": "419233cc6c09a81bc8d3b6eb02f5d5270e7ce41c",
+      "raw_credential_history_published": false,
+      "status": "GitHub push rejected HTTP403; account lacks origin write permission"
+    },
+    "core_nonfailed_preview_counts": {
+      "changes_current_source_or_pins": 10,
+      "merge_conflict_or_unavailable": 343,
+      "safe_unchanged_tree_history_merge": 6,
+      "unchanged_tree_but_unpublished_historical_blobs": 18
+    },
+    "core_preview_notes": [
+      "Six unchanged-tree already-public source histories were subsequently merged.",
+      "339 previews conflict and four Git merge-tree processes failed with signal 11; those tips were not merged.",
+      "Eighteen unchanged-tree histories contain unpublished historical blobs and were not pushed.",
+      "Ten clean previews change current source or pins; prior preservation and qualification requirements remain in force."
+    ],
+    "historical_failed_or_discarded_tips_excluded": {
+      "accelerate": 22,
+      "datasets": 7597
+    },
+    "original_dirty_worktrees_and_indexes": "Preserved; no reset, clean, force-push, private data publication or worktree removal.",
+    "private_assets": "Explicit hold continues, including HACC personal evidence/media and private model/archive payloads.",
+    "third_party_origins_without_main": [
+      {
+        "default_branch": "refs/heads/master",
+        "error": null,
+        "origin": "https://github.com/ggml-org/llama.cpp"
+      },
+      {
+        "default_branch": "refs/heads/master",
+        "error": null,
+        "origin": "https://github.com/dupuisf/bibtexquery"
+      },
+      {
+        "default_branch": "refs/heads/master",
+        "error": null,
+        "origin": "https://github.com/leanprover-community/quote4"
+      },
+      {
+        "default_branch": "refs/heads/master",
+        "error": null,
+        "origin": "https://github.com/leanprover-community/aesop"
+      },
+      {
+        "default_branch": "refs/heads/master",
+        "error": null,
+        "origin": "https://github.com/patrickmassot/checkdecls"
+      },
+      {
+        "default_branch": "refs/heads/master",
+        "error": null,
+        "origin": "https://github.com/quangvdao/loom2"
+      },
+      {
+        "default_branch": "refs/heads/master",
+        "error": null,
+        "origin": "https://github.com/leanprover-community/mathlib4"
+      },
+      {
+        "default_branch": "refs/heads/master",
+        "error": null,
+        "origin": "https://github.com/leanprover-community/physlib"
+      },
+      {
+        "default_branch": "refs/heads/master",
+        "error": null,
+        "origin": "https://github.com/fsspec/filesystem_spec"
+      },
+      {
+        "default_branch": "refs/heads/master",
+        "error": null,
+        "origin": "https://github.com/ipfs-cluster/ipfs-cluster-website"
+      },
+      {
+        "default_branch": "refs/heads/master",
+        "error": null,
+        "origin": "https://github.com/libp2p/docs"
+      },
+      {
+        "default_branch": "refs/heads/master",
+        "error": null,
+        "origin": "https://github.com/mwaskom/seaborn"
+      },
+      {
+        "default_branch": "refs/heads/master",
+        "error": null,
+        "origin": "https://github.com/sphinx-doc/sphinx"
+      },
+      {
+        "default_branch": "refs/heads/master",
+        "error": null,
+        "origin": "https://github.com/sympy/sympy"
+      },
+      {
+        "default_branch": "refs/heads/master",
+        "error": null,
+        "origin": "https://github.com/agronholm/sqlacodegen"
+      },
+      {
+        "default_branch": "refs/heads/master",
+        "error": null,
+        "origin": "https://github.com/getsentry/sentry-python"
+      },
+      {
+        "default_branch": "refs/heads/dev",
+        "error": null,
+        "origin": "https://github.com/marshmallow-code/marshmallow-sqlalchemy"
+      },
+      {
+        "default_branch": "refs/heads/master",
+        "error": null,
+        "origin": "https://github.com/streamlink/streamlink"
+      }
+    ]
+  },
+  "schema": "github-home-tmp-reconciliation-audit/v1",
+  "scope": {
+    "directories_scanned": 3783625,
+    "dirty_worktrees_at_status_snapshot": 559,
+    "existing_github_worktrees_checked": 3870,
+    "filesystem_traversal_errors": 176,
+    "git_markers": 21022,
+    "github_stores": 869,
+    "normalized_github_origins": 101,
+    "possible_bare_stores": 252,
+    "roots": [
+      "/home/barberb",
+      "/tmp"
+    ],
+    "scope_notes": [
+      "Includes home, /tmp, hidden directories, UV dependency caches, nested submodules, linked worktrees, bare object stores, and generated validation exports.",
+      "Synthetic repositories and dependency checkouts were inventoried separately from authored source.",
+      "Permission-denied container filesystem directories remain inaccessible; no permissions were changed."
+    ],
+    "status_errors": 39,
+    "unique_valid_git_stores": 11761
+  },
+  "validation": {
+    "all_publications_normal_fast_forward_pushes": true,
+    "datasets_gitlink_update": [
+      {
+        "path": "ipfs_kit_py",
+        "previous": "7c956aac20a91d9937124813b3bd0c8c73479d08",
+        "target": "514f5a6ae361f3608e4e0769cd7804ae4b3c013e"
+      },
+      {
+        "path": ".tools/ipfs_kit_py",
+        "previous": "7c956aac20a91d9937124813b3bd0c8c73479d08",
+        "target": "514f5a6ae361f3608e4e0769cd7804ae4b3c013e"
+      },
+      {
+        "path": "ipfs_accelerate_py",
+        "previous": "a50677e02dc82a79e59c714bb294ed435cf6d1ec",
+        "target": "a18069c0c361550c28abb810817b561b87fa331d"
+      },
+      {
+        "path": "ipfs_datasets_py/logic/CEC/DCEC_Library",
+        "previous": "72efd97f0fc8ab95fb5a7fdb0a6f8efd94c20337",
+        "target": "c6b42b02d3dc7d7e5d6281ea1a8cc6e806092da0"
+      },
+      {
+        "path": "ipfs_datasets_py/logic/CEC/Talos",
+        "previous": "cf386792a15583357ad8640b61a80684430b8e0f",
+        "target": "f8fb0714f4abcc5eb981d7dd7623763d39fed995"
+      },
+      {
+        "path": "ipfs_datasets_py/logic/CEC/Eng-DCEC",
+        "previous": "c96e40dd9351e93b5a573af3fbc82fab644a0eb4",
+        "target": "51a91c7b5e41ece82e085061796584863d91210e"
+      },
+      {
+        "path": "ipfs_datasets_py/logic/CEC/ShadowProver",
+        "previous": "8bf6ce7d30bc069b740078bacaee0589b4c2c49b",
+        "target": "dc92f8473e9636bad93c1c1df5bc1502945d54b2"
+      },
+      {
+        "path": "ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+        "previous": "2b7a36e7699dbd451a89acb273ab7090c99d1cc0",
+        "target": "5756a6158eba5907cf0ddbd42637ef4668bb0307"
+      },
+      {
+        "path": "ipfs_datasets_py/multimedia/omni_converter_mk2",
+        "previous": "ae4f3c2b321e25935f62f99fd50f72bb8916c420",
+        "target": "72f459942dd781cbffcffb0e29a84e445273159c"
+      },
+      {
+        "path": "ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+        "previous": "7c806d63b4f019e99bf5a3ca6a105fbd5778b17e",
+        "target": "248f17f19e6f3e4b326f651e7a64a6f69cf5be3b"
+      }
+    ],
+    "datasets_peer_files_preserved": 12,
+    "deletion_only_recovery_snapshots_resolved": 11,
+    "deletion_recovery_resolution": "Retain current published files; recovery snapshots contain no new source blobs.",
+    "focused_211_AI_tests": {
+      "config_warnings": "asyncio plugin intentionally disabled for synchronous focused tests",
+      "main_tree": "245430606fdb5ef7e309e2f170e5b66f5285bc05",
+      "runtime_or_network_services_started": false,
+      "same_source_main": "39f12b38659df29023a2735205951c6abde0d885",
+      "tests_passed": 106,
+      "warnings": 2,
+      "worktree_clean_after_tests": true
+    },
+    "hosted_CI_green_claimed": false,
+    "markdown_formatting_files_reviewed": 104,
+    "python_runtime_AST_preserved_except_docstring_whitespace": 472
+  }
+}
