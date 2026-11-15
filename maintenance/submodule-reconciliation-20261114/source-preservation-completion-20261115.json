@@ -1,6 +1,61 @@
 {
   "earlier_source_migration": "source-migration-completion.json retains its original 2026-11-14 cutoff and 5,147-file source restore scope.",
   "independent_anonymous_HTTPS_readback": {
+    "Main_private_source4_plus_selection_increment_v01": {
+      "Python_source_versions": 4,
+      "audit_bytes": 2478,
+      "audit_sha256": "e7ac1d5a68307ef61ea24d25de7660a19927254c50cf0eee0d481a04eb63b2eb",
+      "bytes": 1134160,
+      "existing_selection_JSON_bytes": 8393,
+      "existing_selection_JSON_versions": 1,
+      "file_versions": 5,
+      "main_adoption": false,
+      "preservation_commit": "5ce13837380a25b1fe9a83c65c40eb5d84d5092b",
+      "private_assets_included": false,
+      "qualification_granted": false,
+      "scope": "Four existing unqualified Main preparation source/test versions (v01 metadata @2 and v02 explicit15), plus their exact existing selection JSON. No new code development, source-main adoption, runtime, Native, scientific activation, legal, model, training/gold or corpus qualification.",
+      "selected_public_files": [
+        {
+          "bytes": 406588,
+          "git_blob": "19c0f189d12c85f36bf4d8fe27347e1cf594b040",
+          "git_mode": "100644",
+          "path": "source-preservation/legal-ir-Main-unqualified-preparation-20261115/Main-physical-R-preparation-candidates-v01/ipfs_accelerate_py/agent_supervisor/rescue/scientific_executor.py",
+          "sha256": "e84b1c95e2c4c50310657dd90c5ac9d24015512195dcf610cc63b00698cac55f"
+        },
+        {
+          "bytes": 148965,
+          "git_blob": "cc1d8c3861f4e752d3c0368a100ddce07113f946",
+          "git_mode": "100644",
+          "path": "source-preservation/legal-ir-Main-unqualified-preparation-20261115/Main-physical-R-preparation-candidates-v01/tests/unit/agent_supervisor/test_scientific_closed_capacity_continuation.py",
+          "sha256": "f59b5048a2b2e3d1650a6b650e376bb9e0362ae3a909887907c380de23023ad4"
+        },
+        {
+          "bytes": 412304,
+          "git_blob": "252baea649f6d6d2671f99e1e4be1af4bae909ca",
+          "git_mode": "100644",
+          "path": "source-preservation/legal-ir-Main-unqualified-preparation-20261115/Main-physical-R-preparation-candidates-v02-explicit15/ipfs_accelerate_py/agent_supervisor/rescue/scientific_executor.py",
+          "sha256": "84628496bf1e86d9a9580e6e393ce89782c61215c0c77640a07cb51f1a969213"
+        },
+        {
+          "bytes": 157910,
+          "git_blob": "4677abb45d4d9fd781a72520d01eb8abf8e2996e",
+          "git_mode": "100644",
+          "path": "source-preservation/legal-ir-Main-unqualified-preparation-20261115/Main-physical-R-preparation-candidates-v02-explicit15/tests/unit/agent_supervisor/test_scientific_closed_capacity_continuation.py",
+          "sha256": "677409f854c1f0f03a559c999e86ab3b230553a03cbb84fa02c2abea56e9e09b"
+        },
+        {
+          "bytes": 8393,
+          "git_blob": "8d0e29f057b22b7c194f750d3a6feef618a28959",
+          "git_mode": "100644",
+          "path": "source-preservation/legal-ir-Main-unqualified-preparation-20261115/selection.json",
+          "sha256": "19968630debc6b7a6d11fe3bc72f55da0e7875318c4aefd79c6feaa677f57927"
+        }
+      ],
+      "selection_metadata_publication_receipt_sha256": "9ad9311a4188f8be5bc3e0ac2faf8f824829126641d4dc1f8bc93536c11c485b",
+      "source4_preservation_commit": "5d01884ad905580553dd9a16582ab7b8c6dcd1fe",
+      "source4_publication_receipt_sha256": "199bc8eeb85ccda260998775fc6149ab4cd41c2de607a1a195e4f9758e3fba67",
+      "source_bytes": 1125767
+    },
     "all_selected_source_bytes_match": true,
     "file_versions_are_not_unique_path_counts": true,
     "first_frozen_cutoff": {
@@ -19,6 +74,10 @@
       "file_versions": 15,
       "publication_receipt_sha256": "d8cf97ade020f0100e026200f966ac703e373ff902df0b195116e2a535db70f4",
       "scope": "12 current source/test/doc versions, two separately archived unqualified constructive-recursion source/test hypotheses, and one separately archived fictional proof-feedback RED test proposal. No runtime archives, compiled Lean outputs, toolchain binaries, model assets or private legal archives."
+    },
+    "prior_total_before_Main_private_source4_plus_selection": {
+      "total_bytes": 15508842,
+      "total_file_versions": 86
     },
     "prior_total_before_late_source_increment_v06": {
       "total_bytes": 7894120,
@@ -67,8 +126,8 @@
       "publication_receipt_sha256": "5dccb19f126ff80be4614300f6efcb6521c2d126c450e305e2f9f967898c22e3",
       "scope": "One stopped unfinished/unreviewed/unqualified release-coordinator source variant and two SDK version-forwarding source/test variants, separately archived. No main adoption, runtime, Native, scientific activation, legal or model qualification is supplied."
     },
-    "total_bytes": 15508842,
-    "total_file_versions": 86,
+    "total_bytes": 16643002,
+    "total_file_versions": 91,
     "v11_selected_source_increment_v01": {
       "Python_source_versions": 5,
       "audit_sha256": "71e8f9abc6f87be730c80d2415bdddd051dea15e83c21b2184f6b72aa3560548",
@@ -177,10 +236,14 @@
     "after_first_80_file_versions": {
       "ipfs_accelerate_py": "62d117e7e0a11a77c76ad53b7b5d17fae79968a5",
       "ipfs_datasets_py": "ffe8a5925c23658bb2ee3b0df35b70c01d5c6a53"
+    },
+    "after_first_86_file_versions": {
+      "ipfs_accelerate_py": "62d117e7e0a11a77c76ad53b7b5d17fae79968a5",
+      "ipfs_datasets_py": "a3cec71ab49e951d977ecd25c16984c6d4031d86"
     }
   },
   "preservation_commits": {
-    "ipfs_accelerate_py": "62d117e7e0a11a77c76ad53b7b5d17fae79968a5",
+    "ipfs_accelerate_py": "5ce13837380a25b1fe9a83c65c40eb5d84d5092b",
     "ipfs_datasets_py": "a3cec71ab49e951d977ecd25c16984c6d4031d86"
   },
   "preserved_constraints": {
