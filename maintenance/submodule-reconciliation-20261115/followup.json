@@ -1,0 +1,128 @@
+{
+  "all_historical_branches_and_dirty_files_merged_to_main": false,
+  "changed_stores_since_original_inventory": 5,
+  "gitlinks": {
+    "Mcp-Plus-Plus": "33c0c56e9423e11945837657e3a82fe865c60f91",
+    "external/ipfs_datasets": "842906677d5b8bf8f0a9e850fc477f9a591cd243"
+  },
+  "mcp_additional_main_publication": {
+    "actual_main": "33c0c56e9423e11945837657e3a82fe865c60f91",
+    "candidate_main": "33c0c56e9423e11945837657e3a82fe865c60f91",
+    "merged": [
+      {
+        "conflicts_resolved_to_current_main": [
+          "tests-py/validators/policy_evaluation.py",
+          "tests-py/validators/transport.py",
+          "tests-py/validators/ucan_delegation.py"
+        ],
+        "formatting_only_paths": [
+          "CONTRIBUTING.md",
+          "GETTING_STARTED.md",
+          "SECURITY.md",
+          "docs/API_REFERENCE.md",
+          "docs/ARCHITECTURE.md",
+          "docs/BEST_PRACTICES.md",
+          "docs/testing/TESTING_SUMMARY.md",
+          "tests-py/README.md",
+          "tests-py/TYPE_SAFETY.md",
+          "tests-py/__init__.py",
+          "tests-py/integration/test_absolute_100_percent.py",
+          "tests-py/integration/test_achieve_100_percent.py",
+          "tests-py/integration/test_base_mcp_typed.py",
+          "tests-py/integration/test_cid_envelopes.py",
+          "tests-py/integration/test_complete_coverage.py",
+          "tests-py/integration/test_conformance_vectors.py",
+          "tests-py/integration/test_cross_cutting.py",
+          "tests-py/integration/test_event_dag.py",
+          "tests-py/integration/test_final_3_lines.py",
+          "tests-py/integration/test_final_coverage.py",
+          "tests-py/integration/test_improved_coverage.py",
+          "tests-py/integration/test_last_4_lines.py",
+          "tests-py/integration/test_mcp_baseline.py",
+          "tests-py/integration/test_mcp_idl.py",
+          "tests-py/integration/test_policy_evaluation.py",
+          "tests-py/integration/test_push_to_100_percent.py",
+          "tests-py/integration/test_transport.py",
+          "tests-py/integration/test_ucan_delegation.py",
+          "tests-py/validators/__init__.py",
+          "tests-py/validators/base_mcp.py",
+          "tests-py/validators/base_mcp_typed.py",
+          "tests-py/validators/cid_artifacts.py",
+          "tests-py/validators/event_dag.py",
+          "tests-py/validators/mcp_idl.py",
+          "tests-py/validators/models.py"
+        ],
+        "merge": "a0cd7d4685b74596f4b70ce49229731c7a5c0333",
+        "reviewed_new_historical_blobs": 38,
+        "tip": "9fe3140f6f1baa8af2999defbce7d98ce707d274"
+      },
+      {
+        "conflicts_resolved_to_current_main": [
+          "tests-py/validators/policy_evaluation.py",
+          "tests-py/validators/transport.py",
+          "tests-py/validators/ucan_delegation.py"
+        ],
+        "formatting_only_paths": [],
+        "merge": "897573c4248bdb63b901569d80143a095671221c",
+        "reviewed_new_historical_blobs": 38,
+        "tip": "ecac22c96eb14081b8ee9bbf8640e1a5e1909351"
+      },
+      {
+        "conflicts_resolved_to_current_main": [
+          "tests-py/harness/profile_g_three_peer.py",
+          "tests-py/integration/test_profile_g_three_peer.py",
+          "tests-py/validators/policy_evaluation.py",
+          "tests-py/validators/profile_g.py",
+          "tests-py/validators/profile_h.py",
+          "tests-py/validators/transport.py",
+          "tests-py/validators/ucan_delegation.py"
+        ],
+        "formatting_only_paths": [
+          "tests-py/benchmarks/profile_g_performance.py",
+          "tests-py/benchmarks/run_profile_g_benchmark.py",
+          "tests-py/integration/test_profile_g_codec.py",
+          "tests-py/integration/test_profile_g_performance.py",
+          "tests-py/integration/test_profile_h_codec.py"
+        ],
+        "merge": "319836801fee642e69f15cee7af2ffab03803ad2",
+        "reviewed_new_historical_blobs": 47,
+        "tip": "9ff64935eb0808c6730b426e93dca116f2f97f5e"
+      },
+      {
+        "conflicts_resolved_to_current_main": [
+          "tests-py/harness/profile_g_three_peer.py",
+          "tests-py/integration/test_profile_g_three_peer.py",
+          "tests-py/validators/policy_evaluation.py",
+          "tests-py/validators/profile_g.py",
+          "tests-py/validators/profile_h.py",
+          "tests-py/validators/transport.py",
+          "tests-py/validators/ucan_delegation.py"
+        ],
+        "formatting_only_paths": [],
+        "merge": "33c0c56e9423e11945837657e3a82fe865c60f91",
+        "reviewed_new_historical_blobs": 47,
+        "tip": "a3bf8e8a4008068cf09decb4a668b3e23051780e"
+      }
+    ],
+    "observed_at": 1794731177.9650133,
+    "origin": "https://github.com/endomorphosis/Mcp-Plus-Plus.git",
+    "original_worktrees_indexes_and_refs_untouched": true,
+    "previous_main": "628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0",
+    "published": true,
+    "push_error": null,
+    "push_exit": 0,
+    "runtime_AST_and_docstring_words_preserved": true
+  },
+  "metadata_errors": 0,
+  "new_or_changed_refs_since_original_inventory": 18,
+  "observed_at": 1794731234.4561553,
+  "owned_github_stores_refreshed": 500,
+  "prior_reconciled_main_origins_verified": 12,
+  "remaining": {
+    "active_source_integration": "Datasets and accelerate source preservation branches contain work awaiting successful owning validation and integration.",
+    "cookbook": "Sanitized source commit exists locally; GitHub denied push permission. Credential-bearing original history excluded.",
+    "historical_recovery": "Conflicting and failed historical branches remain documented in the original reconciliation audit.",
+    "private_assets": "Personal files and model/private assets remain local and excluded from publication.",
+    "scan_limit": "Earlier exhaustive home and tmp discovery had inaccessible directories; this refresh covered previously discovered owned stores and their registered worktrees."
+  }
+}

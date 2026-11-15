@@ -1,0 +1,742 @@
+{
+  "schema": "github-worktree-consolidation-public-safe-coverage/v4",
+  "recorded_at_utc": "2026-11-14T22:17:01.019542+00:00",
+  "scope": "Filesystem/Git inventory of accessible project repositories under home and /tmp, supplemented by registered worktrees and selected .local runtime directories; point-in-time read-only observations, not an atomic global snapshot.",
+  "filesystem_discovery": {
+    "home_git_markers": 16210,
+    "tmp_git_markers": 2739,
+    "additional_local_share_git_markers": 20,
+    "home_permission_denied_directories": 139,
+    "tmp_permission_denied_directories": 14,
+    "malformed_synthetic_test_git_configs": 1,
+    "excluded_directory_categories": [
+      "dependency/cache trees (.cache, .venv, node_modules, site-packages, .lake, __pycache__)",
+      "Codex internal state/cache (.codex)",
+      "unrelated system/application .local data; project runtimes and registered worktrees inspected separately"
+    ],
+    "all_filesystem_contents_exhaustively_read": false
+  },
+  "git_coverage": {
+    "repository_query_roots": 712,
+    "canonical_common_Git_directories": 661,
+    "registered_worktree_records": 45701,
+    "unique_registered_worktree_paths": 28660,
+    "registered_paths_present": 3661,
+    "registered_paths_absent": 24999,
+    "physical_GitHub_worktree_status_queries": 3658,
+    "successful_physical_status_queries": 3657,
+    "non_worktree_bare_path_status_refusals": 1,
+    "tracked_dirty_physical_worktrees": 314,
+    "all_deletion_only_physical_worktrees": 95,
+    "nondeletion_dirty_physical_worktrees": 219,
+    "all_common_repo_local_refs_inspected": true,
+    "all_common_repo_registered_worktree_lists_inspected": true,
+    "untracked_file_observation": "Git normal/collapsed directory output; generated raw output trees were not published."
+  },
+  "core_branch_tip_coverage": {
+    "ipfs_datasets_py": {
+      "unique_local_ref_and_HEAD_oids": 8762,
+      "reference_occurrences": 319413,
+      "ancestor_oid_count": 899,
+      "nonancestor_known_commit_count": 145,
+      "central_missing_object_count": 7718,
+      "initial_audit_origin_main": "3f1691d59cc0a310750c0b441b51d3528b17eb85"
+    },
+    "ipfs_accelerate_py": {
+      "unique_local_ref_and_HEAD_oids": 839,
+      "reference_occurrences": 11322,
+      "ancestor_oid_count": 720,
+      "nonancestor_known_commit_count": 77,
+      "central_missing_object_count": 42,
+      "initial_audit_origin_main": "81b5e11f3c6063486a7cadc6c3d4c6ea50e85bb2"
+    },
+    "lift_coding": {
+      "unique_local_ref_and_HEAD_oids": 112,
+      "reference_occurrences": 248,
+      "ancestor_oid_count": 106,
+      "nonancestor_known_commit_count": 5,
+      "central_missing_object_count": 1,
+      "initial_audit_origin_main": "8fd1983595060cc36f15f59083910d667fdb3b45"
+    }
+  },
+  "core_branch_limitations": [
+    "Initial all-ref counts above are historical point-in-time inventory counts; they are not recalculated ancestry counts after the completed integrations.",
+    "Nonancestor ancestry absence is not a missing-feature finding. Historical rescue, failed-validation and captured qualification variants are not promoted wholesale into main.",
+    "Root80ca source was independently compared:49exactcurrentblobs plus2superseded/additivefiles; no missing root feature.",
+    "The targeted past-month functional frontier was independently compared against later canonical owners and genuinely missing software/source was integrated as recorded below."
+  ],
+  "other_owned_origins": {
+    "fresh_live_main_queries": 21,
+    "successful_queries": 21,
+    "origins": [
+      {
+        "url": "https://github.com/endomorphosis/omni_converter_mk2.git",
+        "main_commit": "ae4f3c2b321e25935f62f99fd50f72bb8916c420"
+      },
+      {
+        "url": "https://github.com/endomorphosis/convert_to_txt_based_on_mime_type.git",
+        "main_commit": "2b7a36e7699dbd451a89acb273ab7090c99d1cc0"
+      },
+      {
+        "url": "https://github.com/endomorphosis/common_crawl_search_engine",
+        "main_commit": "7c806d63b4f019e99bf5a3ca6a105fbd5778b17e"
+      },
+      {
+        "url": "https://github.com/endomorphosis/ShadowProver.git",
+        "main_commit": "8bf6ce7d30bc069b740078bacaee0589b4c2c49b"
+      },
+      {
+        "url": "https://github.com/endomorphosis/Talos.git",
+        "main_commit": "cf386792a15583357ad8640b61a80684430b8e0f"
+      },
+      {
+        "url": "https://github.com/endomorphosis/Eng-DCEC.git",
+        "main_commit": "c96e40dd9351e93b5a573af3fbc82fab644a0eb4"
+      },
+      {
+        "url": "https://github.com/endomorphosis/DCEC_Library.git",
+        "main_commit": "72efd97f0fc8ab95fb5a7fdb0a6f8efd94c20337"
+      },
+      {
+        "url": "https://github.com/endomorphosis/ipfs_kit_py.git",
+        "main_commit": "7c956aac20a91d9937124813b3bd0c8c73479d08"
+      },
+      {
+        "url": "https://github.com/endomorphosis/ipfs_transformers_py.git",
+        "main_commit": "b397988ed9e3e656475c1cf4417b84efdb95daf3"
+      },
+      {
+        "url": "https://github.com/endomorphosis/ipfs_model_manager_py.git",
+        "main_commit": "f6151d2113f42e75ea7d83a1b2362fc97e55e44d"
+      },
+      {
+        "url": "https://github.com/endomorphosis/Mcp-Plus-Plus.git",
+        "main_commit": "628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0"
+      },
+      {
+        "url": "https://github.com/endomorphosis/swissknife.git",
+        "main_commit": "e3e1e771400a6c2b51c7eff325871769e4436ebb"
+      },
+      {
+        "url": "https://github.com/endomorphosis/complaint-generator.git",
+        "main_commit": "2fac9419e0a5eb5c4a9c446f2f93bb3bab5218a3"
+      },
+      {
+        "url": "https://github.com/endomorphosis/HACC.git",
+        "main_commit": "52c728d6a956d51dc61cdb22d5359bfb7593d1c8"
+      },
+      {
+        "url": "https://github.com/endomorphosis/211-AI.git",
+        "main_commit": "6530da843b0a2dd57178b6cf52baba27c781128a"
+      },
+      {
+        "url": "https://github.com/endomorphosis/mike.git",
+        "main_commit": "91c8b8bc13c8bc57528121352e067c3ea2828726"
+      },
+      {
+        "url": "https://github.com/endomorphosis/municipal_scrape_workspace.git",
+        "main_commit": "69523e2819292fac6e5537a6e5337cb334f3386d"
+      },
+      {
+        "url": "https://github.com/endomorphosis/Clarity_Act_Deontic_Logic.git",
+        "main_commit": "5508e570800024f42a6ea4f124a39cced56d748e"
+      },
+      {
+        "url": "https://github.com/endomorphosis/hallucinate_app.git",
+        "main_commit": "050b46a7335610f0858d4b4d5142218414685fea"
+      },
+      {
+        "url": "https://github.com/endomorphosis/Solana-Slop.git",
+        "main_commit": "8b407556c1b145b6bc6b0b0321060d1541cb7f26"
+      },
+      {
+        "url": "https://github.com/endomorphosis/JevOps",
+        "main_commit": "0491349bd3e92e02dc50992e79b0c0a97a521ede"
+      }
+    ],
+    "empty_commits_created": 0,
+    "JevOps_preserved_history": "One empty checkpoint plus one patch-equivalent implementation; current main already contains the work.",
+    "Swissknife_local_lockfile": "Architecture-specific x64-to-ARM64 installation rewrite retained locally; not promoted as portable source.",
+    "fresh_verification_utc": "2026-11-14T22:15:56.194319+00:00"
+  },
+  "ipfs_kit_preservation": {
+    "published_verified_main": "7c956aac20a91d9937124813b3bd0c8c73479d08",
+    "previous_main": "f5de9ad4a52b37cc771a0d904b91da746e825553",
+    "actual_integration": "Actual merge-tree comparisons for all six tips and a working three-way merge; 50 conflicts were resolved while preserving newer current APIs, prose and foreign pins. All six tips are verified ancestors of the published main.",
+    "original_archived_tips": [
+      {
+        "remote_ref": "refs/heads/archive/worktree-sync-20261114/6379120c3901",
+        "commit": "6379120c39015d373b06f38ce587e0a174f03d95",
+        "verified": true
+      },
+      {
+        "remote_ref": "refs/heads/archive/worktree-sync-20261114/beb33a434354",
+        "commit": "beb33a434354252b60130e9bfc1c1cc7436272bd",
+        "verified": true
+      },
+      {
+        "remote_ref": "refs/heads/archive/worktree-sync-20261114/a1c036f5900b",
+        "commit": "a1c036f5900b3dd7e0d21cfcfe945326a5d21a89",
+        "verified": true
+      },
+      {
+        "remote_ref": "refs/heads/archive/worktree-sync-20261114/db900c69ada7",
+        "commit": "db900c69ada76f678954b2031fc3463fb3550ef0",
+        "verified": true
+      },
+      {
+        "remote_ref": "refs/heads/archive/worktree-sync-20261114/58f86c6ee795",
+        "commit": "58f86c6ee795316a1e578067403e1f73ba810526",
+        "verified": true
+      },
+      {
+        "remote_ref": "refs/heads/archive/worktree-sync-20261114/1714155e744d",
+        "commit": "1714155e744d2e359ec284fa81eb5b3032e89c3b",
+        "verified": true
+      }
+    ],
+    "changed_paths": 4337,
+    "formatting_python_AST_checks": 4091,
+    "formatting_runtime_AST_differences": 0,
+    "semantic_bug_fixed": "Added thin ProfileG REST compatibility adapter delegating to canonical route resolution; no duplicate routing table.",
+    "actual_initial_unit_result": "Collection failed because ProfileG helper was missing; failure evidence preserved.",
+    "actual_final_unit_result": {
+      "passed": 119,
+      "subtests_passed": 13,
+      "seconds": 10.3,
+      "native_IPFS_daemon_started": false
+    },
+    "test_scope": [
+      "tests/test_pinned_ipfs_identity_peers.py",
+      "tests/test_coordination_storage.py",
+      "tests/test_profile_g_transport.py",
+      "tests/test_duckdb_coordination_storage.py"
+    ],
+    "checks_limitations": [
+      "One existing Markdown-hard-break trailing whitespace remains inside a Python report template;diff-check was not completely clean.",
+      "AST equivalence excludes documentation/type-ignore location metadata.",
+      "Hermetic unit tests do not establish native IPFS, model, Lean, scientific or legal correctness."
+    ],
+    "force_push_performed": false
+  },
+  "excluded_publication_categories": [
+    "Personal legal evidence, audio/transcripts and oversized archives in an unrelated HACC branch.",
+    "Synthetic fixture repositories and empty/uninitialized checkout deletion states.",
+    "Unreviewed historical failed-agent/rescue branches.",
+    "Local locks, generated state, model/checkpoint payloads and keys."
+  ],
+  "remaining_work": {
+    "reviewed_source_publication": "Completed to the verified canonical mains and final direct Other parent pins above.",
+    "root_aggregate_pin_publication": "Owned by parent coordinator; final root pins/report follow these verified Other main commits.",
+    "intentional_non_main_variants": "Archived unsafe rearm, incompatible trust envelope, failed qualification harness and rollback snapshots remain separately attributable; no exhausted-budget reset or unreviewed runtime adoption.",
+    "private_assets": "Explicit userhold:personal legal evidence, model/checkpoint payloads, keys and generated private runtime data remain untouched and are not offbox backups.",
+    "unsupported_semantic_or_native_claims": "Runtime, scientific, legal and native qualification are not implied by source publication; archived bootstrap runtime remains uninstalled and future fault/productive controls remain unresolved."
+  },
+  "all_work_published_to_main_claimed": false,
+  "patent_source_preservation_preparation": {
+    "original_source_HEAD": "4003799a00df8764e3c91d0241ee75e975626269",
+    "exact_original_source_files": 71,
+    "original_source_bytes": 1825213,
+    "compatible_private_preview_files": 71,
+    "offline_test_files_proposed": 21,
+    "synthetic_fixture_files": 14,
+    "synthetic_fixture_bytes": 6833,
+    "AST_and_selected_credential_pattern_screen_passed": true,
+    "tests_executed_for_this_variant": false,
+    "main_or_semantic_admission_qualified": false,
+    "canonical_publication_owner_not_this_auditor": true,
+    "status": "Original 71-file variant retained; compatible canonical integration subsequently implemented and tested on main.",
+    "compatible_main": "0bcc6a35a09bfbde7770f2c6b9bbd18a279aa6eb",
+    "compatible_patent_and_trust_tests_passed": 408,
+    "original_preservation_branch": "preserve/patent-review-20261114",
+    "original_preservation_commit": "393633609cf2ff8b7459b55c671c9376455640cb"
+  },
+  "published_parent_pin_updates": [
+    {
+      "repository": "https://github.com/endomorphosis/hallucinate_app",
+      "previous_main": "373fc67b5111b470e843f4d9033f010a870f0292",
+      "main_commit": "050b46a7335610f0858d4b4d5142218414685fea",
+      "changed_paths": [
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py",
+        "ipfs_kit_py"
+      ],
+      "exact_live_remote_verified": true,
+      "normal_push_returncode": 0
+    },
+    {
+      "repository": "https://github.com/endomorphosis/complaint-generator",
+      "previous_main": "92033a02f5550f80c26c53c6474ca6cb370248f9",
+      "main_commit": "2fac9419e0a5eb5c4a9c446f2f93bb3bab5218a3",
+      "changed_paths": [
+        "ipfs_datasets_py",
+        "external/ipfs_datasets_py",
+        "external/ipfs_accelerate_py",
+        "external/ipfs_kit_py"
+      ],
+      "exact_live_remote_verified": true,
+      "normal_push_returncode": 0
+    },
+    {
+      "repository": "https://github.com/endomorphosis/HACC",
+      "previous_main": "909572f9a1aa62facd595955d6ca2a3f426fb42e",
+      "main_commit": "52c728d6a956d51dc61cdb22d5359bfb7593d1c8",
+      "changed_paths": [
+        "complaint-generator",
+        "ipfs_accelerate_py",
+        "ipfs_datasets_py"
+      ],
+      "exact_live_remote_verified": true,
+      "normal_push_returncode": 0
+    }
+  ],
+  "core_main_commits_used_for_direct_pins": {
+    "ipfs_datasets_py": "0bcc6a35a09bfbde7770f2c6b9bbd18a279aa6eb",
+    "ipfs_accelerate_py": "a50677e02dc82a79e59c714bb294ed435cf6d1ec",
+    "ipfs_kit_py": "7c956aac20a91d9937124813b3bd0c8c73479d08",
+    "swissknife": "e3e1e771400a6c2b51c7eff325871769e4436ebb",
+    "mike": "91c8b8bc13c8bc57528121352e067c3ea2828726"
+  },
+  "cyclic_submodule_policy": "Direct owned pins are verified at publication time; existing nested cyclic backreferences and foreign upstream pins remain versioned. No infinite fixed-point pin updates.",
+  "original_user_worktrees_and_indexes": "Migration used isolated integration worktrees and private indexes; original user worktrees and indexes were preserved. No reset, clean, deletion or force push.",
+  "publication_checks": {
+    "all_three_final_Other_pushes_returned_zero": true,
+    "all_three_final_Other_live_remote_mains_exact": true,
+    "all21Other_remote_mains_queried_successfully": true,
+    "Kit_actual_normal_push_and_exact_remote_verification": true,
+    "canonical_final_core_mains_confirmed_by_sole_publishing_owners": true,
+    "archived_test_outcomes_not_requalified": true
+  },
+  "supersedes": "v02 (retained as historical evidence; v04 records actual completed source integrations)",
+  "actual_canonical_source_integrations": {
+    "ipfs_datasets_py": {
+      "published_verified_main": "0bcc6a35a09bfbde7770f2c6b9bbd18a279aa6eb",
+      "implemented": "Integrated the primary 578 paths and retained F18/P5/Syntax/Phase6 source, then the compatible 71-file patent feature, strict trust-boundary adapters, strict codec fixes, explicit storage migration software and two stale cold-import API tests. The current 250 GB policy was retained; no migration was executed.",
+      "tests": {
+        "earlier_focused": 622,
+        "compatible_patent_and_trust": 408,
+        "storage_and_full_three_owner_test_modules": 170,
+        "catalog": "passed"
+      },
+      "reproduced_failures": "Two stale cold-import public-API expectations reproduced and corrected3\u21926 and6\u219212; original failure evidence preserved.",
+      "private_assets_published": false
+    },
+    "ipfs_accelerate_py": {
+      "published_verified_main": "a50677e02dc82a79e59c714bb294ed435cf6d1ec",
+      "implemented": "Integrated supervised source changes and the source-only parallel planner, then the missing dependency release method with exact evidence bindings. Preserved 67 historical native-bootstrap proposal/source/test/evidence paths plus two historical notes in the existing docs path.",
+      "tests": {
+        "earlier_focused": 673,
+        "earlier_skipped": 81,
+        "parallel_planner": 3,
+        "dependency_release_focused": 56
+      },
+      "historical_source_checks": {
+        "exact_original_blobs_and_modes_verified": 67,
+        "python_AST_parse": 23,
+        "JSON_parse": 44,
+        "original_source_bytes": 2335015,
+        "archived_helpers_or_tests_imported_or_executed": false,
+        "runtime_installed_or_activated": false
+      },
+      "scientific_or_legal_success_claimed": false
+    }
+  },
+  "past_month_source_review": {
+    "cutoff_utc": "2026-10-14T00:00:00Z",
+    "all_nonancestor_tip_dates_classified": {
+      "ipfs_datasets_py": 7863,
+      "ipfs_accelerate_py": 119,
+      "lift_coding": 6
+    },
+    "past_month_nonancestor_tips": {
+      "ipfs_datasets_py": 45,
+      "ipfs_accelerate_py": 19,
+      "lift_coding": 0
+    },
+    "functional_commits_reviewed": {
+      "ipfs_datasets_py": 21,
+      "ipfs_accelerate_py": 7
+    },
+    "changed_source_path_occurrences": 875,
+    "nonidentical_source_path_occurrences_threeway_reviewed": 196,
+    "Python_AST_API_comparisons": 119,
+    "genuine_missing_work_found_and_completed": [
+      "Storage migration source/test owner adapted to current explicit policy/CAS guard.",
+      "Two stale publicAPI test expectations corrected and exercised in full owner modules.",
+      "67 historical native-bootstrap proposal/source/test/evidence files preserved exactly on accelerator main with uninstalled/pending qualification note."
+    ],
+    "semantic_review_limit": "AST/API/body/threeway review distinguishes existing or stronger implementation from source absence; it is not a proof of full semantic equivalence of every historical body.",
+    "full_28_record_review": [
+      {
+        "record": 0,
+        "origin": "ipfs_datasets_py",
+        "commit": "1e328c0da00f2a4e36e0697e46408e22400cd731",
+        "subject": "Add plaintext parent definition review evidence custody",
+        "changed_paths": 3,
+        "changed_source_paths": 3,
+        "nonidentical_source_paths": 1,
+        "nonidentical_python_paths": 0,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "Canonical implementation and test blobs match; documentation differs."
+      },
+      {
+        "record": 1,
+        "origin": "ipfs_datasets_py",
+        "commit": "23c77272121af10bbc1728cc5776087d24e1f583",
+        "subject": "feat(autoformal): capture source inference from restored four-tensor runtime",
+        "changed_paths": 2,
+        "changed_source_paths": 2,
+        "nonidentical_source_paths": 0,
+        "nonidentical_python_paths": 0,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "Canonical source/test blobs already exactly represented."
+      },
+      {
+        "record": 2,
+        "origin": "ipfs_datasets_py",
+        "commit": "2bdfaaf974c2282cd7e77b711a83621475757adb",
+        "subject": "Add source-first review intake for complete legal sampler populations",
+        "changed_paths": 33,
+        "changed_source_paths": 23,
+        "nonidentical_source_paths": 4,
+        "nonidentical_python_paths": 1,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "All branch-added source APIs exist; current owner additionally exposes explicit context review APIs. Corresponding stale cold-import expectations are covered by record7 clean proposals."
+      },
+      {
+        "record": 3,
+        "origin": "ipfs_datasets_py",
+        "commit": "35ba5f8d765b19838e99296ea87f2130e2287231",
+        "subject": "Pin an immutable 200GB backend for headroom migration qualification",
+        "changed_paths": 1,
+        "changed_source_paths": 1,
+        "nonidentical_source_paths": 1,
+        "nonidentical_python_paths": 1,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "Old hardcoded200GB constant is superseded by current 250 GB policy; do not restore an old budget."
+      },
+      {
+        "record": 4,
+        "origin": "ipfs_datasets_py",
+        "commit": "362650fc688ba34d2de6b95f32e97f7914edae4d",
+        "subject": "Add persisted four-tensor F18 checkpoints and bounded continuation",
+        "changed_paths": 2,
+        "changed_source_paths": 2,
+        "nonidentical_source_paths": 2,
+        "nonidentical_python_paths": 2,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "Persisted four-tensor checkpoint/continuation APIs retained; current adds source-conditioned captured_inference and runtime/counter/RNG guards."
+      },
+      {
+        "record": 5,
+        "origin": "ipfs_datasets_py",
+        "commit": "495ef1b3acec19660304d718e9d1e48150be7172",
+        "subject": "Add explicit idle disk capacity migration to 220 GB",
+        "changed_paths": 4,
+        "changed_source_paths": 4,
+        "nonidentical_source_paths": 4,
+        "nonidentical_python_paths": 4,
+        "branch_added_production_APIs_absent_current": [
+          {
+            "path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_storage_capacity.py",
+            "definitions": [
+              "StorageCapacityExpansionError",
+              "StorageCapacityWriteOutcomeUnknown",
+              "StorageCapacityWriteOutcomeUnknown.__init__",
+              "_backup",
+              "_canonical",
+              "_census",
+              "_child",
+              "_decode",
+              "_digest",
+              "_directory",
+              "_directory_identity",
+              "_disk_lock",
+              "_file_identity",
+              "_finite_float",
+              "_idle",
+              "_integer",
+              "_ledger",
+              "_need",
+              "_pairs",
+              "_path",
+              "_read_file",
+              "_replace",
+              "_retired",
+              "_roots",
+              "_sources",
+              "expand_storage_capacity"
+            ]
+          }
+        ],
+        "review": "Actual missing storage-migration owner/test found; canonical agents preparing software-only adaptation preserving250GB policy and explicit target/CAS. Old220GB constant must not replace current policy."
+      },
+      {
+        "record": 6,
+        "origin": "ipfs_datasets_py",
+        "commit": "4c5e99f7bdda839b4c5965253daf931f5ed0e4f9",
+        "subject": "Close LegalIR lexical input and returned-result custody",
+        "changed_paths": 7,
+        "changed_source_paths": 5,
+        "nonidentical_source_paths": 2,
+        "nonidentical_python_paths": 0,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "Canonical source/tests already represented; only documentation differs."
+      },
+      {
+        "record": 7,
+        "origin": "ipfs_datasets_py",
+        "commit": "55e10713440faa79c95210f36e3d1db1a981dbdb",
+        "subject": "Integrate existing norm definition nomination and candidate graph custody",
+        "changed_paths": 27,
+        "changed_source_paths": 27,
+        "nonidentical_source_paths": 16,
+        "nonidentical_python_paths": 11,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "Norm/definition APIs all present with later parent and mixed-relational extensions. Two clean missing cold-import test updates identified:6/12 current public APIs vs stale3/6 expectations. Handed to canonical writer."
+      },
+      {
+        "record": 8,
+        "origin": "ipfs_datasets_py",
+        "commit": "63054bcce61e1dc9c7f6572c229a25db6217b184",
+        "subject": "Integrate retained source-package metadata intake",
+        "changed_paths": 4,
+        "changed_source_paths": 3,
+        "nonidentical_source_paths": 2,
+        "nonidentical_python_paths": 2,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "Package metadata intake APIs present; current has extended replay/custody code. No absent branch API identified."
+      },
+      {
+        "record": 9,
+        "origin": "ipfs_datasets_py",
+        "commit": "72813a35a8b07a9d9dc9d0a9f7249cd6636e63e7",
+        "subject": "Add plaintext definition custody through existing definition owners",
+        "changed_paths": 4,
+        "changed_source_paths": 4,
+        "nonidentical_source_paths": 1,
+        "nonidentical_python_paths": 0,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "Canonical source/tests already represented; only documentation differs."
+      },
+      {
+        "record": 10,
+        "origin": "ipfs_datasets_py",
+        "commit": "7de14edaed611c16650cdd1d7c2f2e7903667186",
+        "subject": "Document retained native4096 publication and verified ModelManager import",
+        "changed_paths": 2,
+        "changed_source_paths": 1,
+        "nonidentical_source_paths": 0,
+        "nonidentical_python_paths": 0,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "Documentation blob already exactly current."
+      },
+      {
+        "record": 11,
+        "origin": "ipfs_datasets_py",
+        "commit": "8e1db8e20b000ec40dadb635555c00a1c12650f4",
+        "subject": "Add plaintext proposed graph custody with qualified relational support",
+        "changed_paths": 8,
+        "changed_source_paths": 8,
+        "nonidentical_source_paths": 6,
+        "nonidentical_python_paths": 4,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "Graph/relational APIs present; current adds mixed-relational profile, deeper explicitly bounded transport, parent replay and output-budget checks. No absent branch API identified."
+      },
+      {
+        "record": 12,
+        "origin": "ipfs_datasets_py",
+        "commit": "ac7d085a34258281ccab0e07df73a0b3d64d50cc",
+        "subject": "feat(legal-ir): support scoped mixed relational graph transport",
+        "changed_paths": 8,
+        "changed_source_paths": 8,
+        "nonidentical_source_paths": 2,
+        "nonidentical_python_paths": 0,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "Canonical source/tests already represented; only documentation differs."
+      },
+      {
+        "record": 13,
+        "origin": "ipfs_datasets_py",
+        "commit": "c15627b976c636b4023223d11c50fdf7f0b89da0",
+        "subject": "Add plaintext context obligations with physical source custody",
+        "changed_paths": 3,
+        "changed_source_paths": 3,
+        "nonidentical_source_paths": 1,
+        "nonidentical_python_paths": 0,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "Canonical source/tests already represented; only documentation differs."
+      },
+      {
+        "record": 14,
+        "origin": "ipfs_datasets_py",
+        "commit": "c2a81bbc782f2b29bbd20299903f7c49d416d4d4",
+        "subject": "Add saved-parent metadata inventory loader with portable tests",
+        "changed_paths": 3,
+        "changed_source_paths": 3,
+        "nonidentical_source_paths": 1,
+        "nonidentical_python_paths": 0,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "Canonical source/tests already represented; only documentation differs."
+      },
+      {
+        "record": 15,
+        "origin": "ipfs_datasets_py",
+        "commit": "d90fb1d391d9c6973431df67af2227df7d1834bb",
+        "subject": "feat(legal-ir): port bounded source review dossier preparation",
+        "changed_paths": 6,
+        "changed_source_paths": 6,
+        "nonidentical_source_paths": 2,
+        "nonidentical_python_paths": 0,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "Canonical source/tests already represented; only documentation differs."
+      },
+      {
+        "record": 16,
+        "origin": "ipfs_datasets_py",
+        "commit": "dbacb17e3ca75042aca45061ebd1a4b8a646ecfc",
+        "subject": "fix(legal-ir): allow exactly pinned empty validation sources",
+        "changed_paths": 2,
+        "changed_source_paths": 2,
+        "nonidentical_source_paths": 2,
+        "nonidentical_python_paths": 2,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "Exactly pinned empty validation source path remains represented; all old owner APIs retained, current adds native/no-child/trainer/source guards. No absent branch API identified."
+      },
+      {
+        "record": 17,
+        "origin": "ipfs_datasets_py",
+        "commit": "eb1aeb9988e62b2bcd41c84f78dfc90704a8aa1b",
+        "subject": "Add bounded Lean compatibility metadata with fresh replay guard controls",
+        "changed_paths": 4,
+        "changed_source_paths": 4,
+        "nonidentical_source_paths": 0,
+        "nonidentical_python_paths": 0,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "All changed source/test/docs blobs already exactly current."
+      },
+      {
+        "record": 18,
+        "origin": "ipfs_datasets_py",
+        "commit": "ed02ef7aebfb4d119389055533280a88b686ba84",
+        "subject": "Add bounded full-parent source metadata scan with portable tests",
+        "changed_paths": 4,
+        "changed_source_paths": 4,
+        "nonidentical_source_paths": 3,
+        "nonidentical_python_paths": 1,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "Owner blob already current; test difference is current pathlib resolution of stdlib.py shadowing; retain newer test."
+      },
+      {
+        "record": 19,
+        "origin": "ipfs_datasets_py",
+        "commit": "f07a8b7a467f2f113ea2a7c0f22b766d3b04fe27",
+        "subject": "Add selected historical parent source inventory with portable tests",
+        "changed_paths": 3,
+        "changed_source_paths": 3,
+        "nonidentical_source_paths": 2,
+        "nonidentical_python_paths": 1,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "Owner blob already current; test difference is current pathlib resolution of stdlib.py shadowing; retain newer test."
+      },
+      {
+        "record": 20,
+        "origin": "ipfs_datasets_py",
+        "commit": "f9e1e6e8bd17e892b72e3011582d2628748d74ae",
+        "subject": "Integrate existing definition applicability and conditional instance binding",
+        "changed_paths": 10,
+        "changed_source_paths": 10,
+        "nonidentical_source_paths": 5,
+        "nonidentical_python_paths": 2,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "Conditional bound-variable definition APIs retained; current adds explicit parent nomination replay and guards without promoting legal authority."
+      },
+      {
+        "record": 21,
+        "origin": "ipfs_accelerate_py",
+        "commit": "30553214a440ef07342c3f00b42675f200741319",
+        "subject": "Repair sealed SAWM runtime paths and matched SQL resources",
+        "changed_paths": 6,
+        "changed_source_paths": 6,
+        "nonidentical_source_paths": 1,
+        "nonidentical_python_paths": 0,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "Only SAWM resource metadata differs; no missing Python owner."
+      },
+      {
+        "record": 22,
+        "origin": "ipfs_accelerate_py",
+        "commit": "56890bf656caacb2158ea661bdb4526f5ac5d12c",
+        "subject": "Record actual native-owner source observations for Legal IR bootstrap",
+        "changed_paths": 1,
+        "changed_source_paths": 1,
+        "nonidentical_source_paths": 1,
+        "nonidentical_python_paths": 0,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "Historical source-binding observation only; do not replace current source-binding record."
+      },
+      {
+        "record": 23,
+        "origin": "ipfs_accelerate_py",
+        "commit": "8e02f9bed9f2a84a5a5245f90b0775ae1e806260",
+        "subject": "docs: document Legal IR native Git bootstrap qualification",
+        "changed_paths": 82,
+        "changed_source_paths": 67,
+        "nonidentical_source_paths": 67,
+        "nonidentical_python_paths": 23,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "67 genuinely absent historical proposal/evidence/source paths prepared byte-exact for current docs directory. Runtime stays uninstalled and qualification remains historical/pending;23Python AST parses only."
+      },
+      {
+        "record": 24,
+        "origin": "ipfs_accelerate_py",
+        "commit": "a53b173781999cdde0faaccf245ea5b4d404f730",
+        "subject": "Unqualified source-only LegalIR capacity candidate",
+        "changed_paths": 3,
+        "changed_source_paths": 3,
+        "nonidentical_source_paths": 2,
+        "nonidentical_python_paths": 2,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "Source-only capacity candidate branch-added atomic source statements already represented in current scientific executor; current original observation owner additionally supports explicit readonly import scope. Do not restore old runtime."
+      },
+      {
+        "record": 25,
+        "origin": "ipfs_accelerate_py",
+        "commit": "cdbc3d8046278ee837021ea6579e3db7dbaf9422",
+        "subject": "Merge commit 'a8f18f6a3fc9a1d3f5efe8307dcff2b25a8cb95f' into feat/legal-ir-programme-watchdog-20261026",
+        "changed_paths": 681,
+        "changed_source_paths": 656,
+        "nonidentical_source_paths": 62,
+        "nonidentical_python_paths": 59,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "All canonical branch-added production APIs present. Current adds verified progress clocks, strict native usage custody, exact source line ranges/owner lifecycle, provider accounting and later guard logic. Missing legacy rearm test does not authorize exhausted-budget reset. No absent production API identified."
+      },
+      {
+        "record": 26,
+        "origin": "ipfs_accelerate_py",
+        "commit": "d065233b1ed4f5f8ba9fa9bfb1a7d872240b3791",
+        "subject": "Authorize parent search before initial worktree provisioning",
+        "changed_paths": 18,
+        "changed_source_paths": 15,
+        "nonidentical_source_paths": 5,
+        "nonidentical_python_paths": 4,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "Parent search-before-provisioning APIs retained; current adds further repository-owner lifecycle observations and capability pins. No absent production API identified."
+      },
+      {
+        "record": 27,
+        "origin": "ipfs_accelerate_py",
+        "commit": "feb96b55e28b282e42b3de85da7f0fc72f781ca2",
+        "subject": "Record actual native-owner source observations for Legal IR bootstrap",
+        "changed_paths": 1,
+        "changed_source_paths": 1,
+        "nonidentical_source_paths": 1,
+        "nonidentical_python_paths": 0,
+        "branch_added_production_APIs_absent_current": [],
+        "review": "Historical source-binding observation only; clean text merge would overwrite current observations, so retain current record."
+      }
+    ]
+  },
+  "reviewed_eligible_source_integrations_published_to_main": true,
+  "all_filesystem_contents_or_private_assets_backed_up_claimed": false
+}
