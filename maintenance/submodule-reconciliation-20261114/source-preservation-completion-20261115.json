@@ -1,0 +1,46 @@
+{
+  "earlier_source_migration": "source-migration-completion.json retains its original 2026-11-14 cutoff and 5,147-file source restore scope.",
+  "independent_anonymous_HTTPS_readback": {
+    "all_selected_source_bytes_match": true,
+    "file_versions_are_not_unique_path_counts": true,
+    "first_frozen_cutoff": {
+      "audit_sha256": "78890a549802dfbef0c77fc496785b5f76d7eab167fec152c9261acd0f8a6dd8",
+      "bytes": 6590295,
+      "file_versions": 35
+    },
+    "late_source_increment": {
+      "audit_sha256": "da74d537ccb4c5e904df35bf68c015219537a5668421a8bc8a6829a41051dcb9",
+      "bytes": 1303825,
+      "file_versions": 9
+    },
+    "total_bytes": 7894120,
+    "total_file_versions": 44
+  },
+  "main_refs_verified": {
+    "ipfs_accelerate_py": "21e94730749848ee76ced9cecf8082494ded8ad1",
+    "ipfs_datasets_py": "ad54686ca8403f5ed966d281639e0d7a021d1613"
+  },
+  "preservation_branch": "preserve/inflight-source-20261114",
+  "preservation_commits": {
+    "ipfs_accelerate_py": "b47367c08c05119a0338e8a6ceb1087643767af6",
+    "ipfs_datasets_py": "6f78a4a6f6c77b09aa514d33625ffb0d1b97e9b0"
+  },
+  "preserved_constraints": {
+    "old_failures_and_source_identities": "Retained; backup is not software, Native, legal or model qualification.",
+    "original_dirty_checkouts": "No reset, stash, cleanup or force push.",
+    "private_archives_and_model_checkpoints": "On hold; no backup, upload, move or deletion by this work.",
+    "runtime_permissions_and_budgets": "Unchanged; backup performs no training or Native verification."
+  },
+  "recorded_date_utc": "2026-11-15",
+  "schema": "source-only-github-preservation-completion/v1",
+  "scope": "Selected source code, tests, documentation and unqualified source candidates before decommission; private assets remain on hold.",
+  "unqualified_candidates": {
+    "includes": [
+      "constructive definition realization preparation and native/incremental integration candidates",
+      "loss-admission repair candidates",
+      "supervisor repair and scientific-executor source variants",
+      "release coordinator and CLI source work"
+    ],
+    "status": "Preserved separately; not merged or promoted to main by this backup."
+  }
+}
