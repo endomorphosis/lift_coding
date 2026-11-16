@@ -6003,7 +6003,8 @@ The canonical JSON/DuckDB import is the initial plan snapshot. This Markdown boa
 - Acceptance: One bounded source proposal and at most one stale-gap assessment; exact app/scenario CAS application and fresh independent functional producer. The final readonly task must separately pass its genuine current two-viewport review. No original task or prior spend is reopened or refunded.
 ## SVF-FINAL-R1013 One bounded source remediation for final review SVF-1013
 
-- Status: blocked
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-11-16T06:09:06Z
 - Priority: P0
 - Track: scoped-remediation
 - Goal id: SVF-G613
@@ -6098,7 +6099,8 @@ The canonical JSON/DuckDB import is the initial plan snapshot. This Markdown boa
 - Acceptance: One bounded source proposal and at most one stale-gap assessment; exact app/scenario CAS application and fresh independent functional producer. The final readonly task must separately pass its genuine current two-viewport review. No original task or prior spend is reopened or refunded.
 ## SVF-FINAL-R1019 One bounded source remediation for final review SVF-1019
 
-- Status: blocked
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-11-16T06:08:34Z
 - Priority: P0
 - Track: scoped-remediation
 - Goal id: SVF-G619
@@ -6241,7 +6243,8 @@ The canonical JSON/DuckDB import is the initial plan snapshot. This Markdown boa
 - Acceptance: One bounded source proposal and at most one stale-gap assessment; exact app/scenario CAS application and fresh independent functional producer. The final readonly task must separately pass its genuine current two-viewport review. No original task or prior spend is reopened or refunded.
 ## SVF-FINAL-R1002 One bounded source remediation for final review SVF-1002
 
-- Status: blocked
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-11-16T06:08:07Z
 - Priority: P0
 - Track: scoped-remediation
 - Goal id: SVF-G602
@@ -6304,7 +6307,8 @@ The canonical JSON/DuckDB import is the initial plan snapshot. This Markdown boa
 - Acceptance: One bounded source proposal and at most one stale-gap assessment; exact app/scenario CAS application and fresh independent functional producer. The final readonly task must separately pass its genuine current two-viewport review. No original task or prior spend is reopened or refunded.
 ## SVF-FINAL-R1022 One bounded source remediation for final review SVF-1022
 
-- Status: blocked
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-11-16T06:07:27Z
 - Priority: P0
 - Track: scoped-remediation
 - Goal id: SVF-G622
@@ -6351,7 +6355,8 @@ The canonical JSON/DuckDB import is the initial plan snapshot. This Markdown boa
 - Acceptance: One bounded source proposal and at most one stale-gap assessment; exact app/scenario CAS application and fresh independent functional producer. The final readonly task must separately pass its genuine current two-viewport review. No original task or prior spend is reopened or refunded.
 ## SVF-FINAL-R1032 One bounded source remediation for final review SVF-1032
 
-- Status: blocked
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-11-16T06:06:56Z
 - Priority: P0
 - Track: scoped-remediation
 - Goal id: SVF-G632
@@ -6382,7 +6387,8 @@ The canonical JSON/DuckDB import is the initial plan snapshot. This Markdown boa
 - Acceptance: One bounded source proposal and at most one stale-gap assessment; exact app/scenario CAS application and fresh independent functional producer. The final readonly task must separately pass its genuine current two-viewport review. No original task or prior spend is reopened or refunded.
 ## SVF-FINAL-R1035 One bounded source remediation for final review SVF-1035
 
-- Status: blocked
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-11-16T06:06:25Z
 - Priority: P0
 - Track: scoped-remediation
 - Goal id: SVF-G635
@@ -6461,7 +6467,8 @@ The canonical JSON/DuckDB import is the initial plan snapshot. This Markdown boa
 - Acceptance: One bounded source proposal and at most one stale-gap assessment; exact app/scenario CAS application and fresh independent functional producer. The final readonly task must separately pass its genuine current two-viewport review. No original task or prior spend is reopened or refunded.
 ## SVF-FINAL-R1043 One bounded source remediation for final review SVF-1043
 
-- Status: blocked
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-11-16T06:09:37Z
 - Priority: P0
 - Track: scoped-remediation
 - Goal id: SVF-G643
@@ -6679,101 +6686,111 @@ The canonical JSON/DuckDB import is the initial plan snapshot. This Markdown boa
 
 ## SVF-ST1023 Record the synchronous owner result without adding a queue, checkpoint, or content id
 
-- Status: blocked
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-11-16T06:10:03Z
 - Depends on: SVF-1023
 - Goal id: SVF-G1023-C
-- Deterministic command: python3 scripts/swissknife_visual_functional_worker.py --task-id SVF-ST1023
-- Validation: python3 scripts/swissknife_visual_functional_worker.py --validate --task-id SVF-ST1023
+- Deterministic command: python3 scripts/svf_close_successor_task.py --task-id SVF-ST1023
+- Validation: python3 scripts/svf_close_successor_task.py --validate --task-id SVF-ST1023
 - Predicted files: data/agent_supervisor/swissknife_visual_functional/state/proof-ceiling-plan.json
 - Acceptance: The declared result names the observed owner fields: completed status, queue unused, and no checkpoint. A preview completion is labeled as a preview. The parent visual task stays blocked until a new review passes on those terms. The parent task is not completed by this task.
 
 ## SVF-ST1032 Record the failed call as a non-semantic request artifact
 
-- Status: blocked
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-11-16T06:10:34Z
 - Depends on: SVF-1032
 - Goal id: SVF-G1032-F
-- Deterministic command: python3 scripts/swissknife_visual_functional_worker.py --task-id SVF-ST1032
-- Validation: python3 scripts/swissknife_visual_functional_worker.py --validate --task-id SVF-ST1032
+- Deterministic command: python3 scripts/svf_close_successor_task.py --task-id SVF-ST1032
+- Validation: python3 scripts/svf_close_successor_task.py --validate --task-id SVF-ST1032
 - Predicted files: data/agent_supervisor/swissknife_visual_functional/state/proof-ceiling-plan.json
 - Acceptance: The failed call stays a request artifact and is not treated as an executed semantic proof. The later executed observation remains the semantic result. No sample, receipt, or content id is added by the planner. The parent task is not completed by this task.
 
 ## SVF-ST900 Record the parked dependencies that keep this task unselected
 
-- Status: blocked
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-11-16T06:11:05Z
 - Depends on: SVF-900
 - Goal id: SVF-G900-W
-- Deterministic command: python3 scripts/swissknife_visual_functional_worker.py --task-id SVF-ST900
-- Validation: python3 scripts/swissknife_visual_functional_worker.py --validate --task-id SVF-ST900
+- Deterministic command: python3 scripts/svf_close_successor_task.py --task-id SVF-ST900
+- Validation: python3 scripts/svf_close_successor_task.py --validate --task-id SVF-ST900
 - Predicted files: data/agent_supervisor/swissknife_visual_functional/state/proof-ceiling-plan.json
 - Acceptance: The task stays unselected until every unmet dependency is completed by its own evidence. No dependency is removed. The parent task is not completed by this task.
 
 ## SVF-STR1002 Record the exhausted child without renewing its clock
 
-- Status: blocked
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-11-16T06:11:36Z
 - Depends on: SVF-FINAL-R1002
 - Goal id: SVF-GR1002-X
-- Deterministic command: python3 scripts/swissknife_visual_functional_worker.py --task-id SVF-STR1002
-- Validation: python3 scripts/swissknife_visual_functional_worker.py --validate --task-id SVF-STR1002
+- Deterministic command: python3 scripts/svf_close_successor_task.py --task-id SVF-STR1002
+- Validation: python3 scripts/svf_close_successor_task.py --validate --task-id SVF-STR1002
 - Predicted files: data/agent_supervisor/swissknife_visual_functional/state/proof-ceiling-plan.json
 - Acceptance: The child clock is not renewed. The completed parent receipt remains the parent evidence. This plan does not mark the child completed. The parent task is not completed by this task.
 
 ## SVF-STR1013 Record the exhausted child without renewing its clock
 
-- Status: blocked
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-11-16T06:12:07Z
 - Depends on: SVF-FINAL-R1013
 - Goal id: SVF-GR1013-X
-- Deterministic command: python3 scripts/swissknife_visual_functional_worker.py --task-id SVF-STR1013
-- Validation: python3 scripts/swissknife_visual_functional_worker.py --validate --task-id SVF-STR1013
+- Deterministic command: python3 scripts/svf_close_successor_task.py --task-id SVF-STR1013
+- Validation: python3 scripts/svf_close_successor_task.py --validate --task-id SVF-STR1013
 - Predicted files: data/agent_supervisor/swissknife_visual_functional/state/proof-ceiling-plan.json
 - Acceptance: The child clock is not renewed. The completed parent receipt remains the parent evidence. This plan does not mark the child completed. The parent task is not completed by this task.
 
 ## SVF-STR1019 Record the exhausted child without renewing its clock
 
-- Status: blocked
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-11-16T06:12:38Z
 - Depends on: SVF-FINAL-R1019
 - Goal id: SVF-GR1019-X
-- Deterministic command: python3 scripts/swissknife_visual_functional_worker.py --task-id SVF-STR1019
-- Validation: python3 scripts/swissknife_visual_functional_worker.py --validate --task-id SVF-STR1019
+- Deterministic command: python3 scripts/svf_close_successor_task.py --task-id SVF-STR1019
+- Validation: python3 scripts/svf_close_successor_task.py --validate --task-id SVF-STR1019
 - Predicted files: data/agent_supervisor/swissknife_visual_functional/state/proof-ceiling-plan.json
 - Acceptance: The child clock is not renewed. The completed parent receipt remains the parent evidence. This plan does not mark the child completed. The parent task is not completed by this task.
 
 ## SVF-STR1022 Record the exhausted child without renewing its clock
 
-- Status: blocked
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-11-16T06:13:09Z
 - Depends on: SVF-FINAL-R1022
 - Goal id: SVF-GR1022-X
-- Deterministic command: python3 scripts/swissknife_visual_functional_worker.py --task-id SVF-STR1022
-- Validation: python3 scripts/swissknife_visual_functional_worker.py --validate --task-id SVF-STR1022
+- Deterministic command: python3 scripts/svf_close_successor_task.py --task-id SVF-STR1022
+- Validation: python3 scripts/svf_close_successor_task.py --validate --task-id SVF-STR1022
 - Predicted files: data/agent_supervisor/swissknife_visual_functional/state/proof-ceiling-plan.json
 - Acceptance: The child clock is not renewed. The completed parent receipt remains the parent evidence. This plan does not mark the child completed. The parent task is not completed by this task.
 
 ## SVF-STR1032 Record the exhausted child without renewing its clock
 
-- Status: blocked
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-11-16T06:13:40Z
 - Depends on: SVF-FINAL-R1032
 - Goal id: SVF-GR1032-X
-- Deterministic command: python3 scripts/swissknife_visual_functional_worker.py --task-id SVF-STR1032
-- Validation: python3 scripts/swissknife_visual_functional_worker.py --validate --task-id SVF-STR1032
+- Deterministic command: python3 scripts/svf_close_successor_task.py --task-id SVF-STR1032
+- Validation: python3 scripts/svf_close_successor_task.py --validate --task-id SVF-STR1032
 - Predicted files: data/agent_supervisor/swissknife_visual_functional/state/proof-ceiling-plan.json
 - Acceptance: The child clock is not renewed. The unfinished parent is not treated as satisfied. This plan does not mark the child completed. The parent task is not completed by this task.
 
 ## SVF-STR1035 Record the exhausted child without renewing its clock
 
-- Status: blocked
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-11-16T06:14:10Z
 - Depends on: SVF-FINAL-R1035
 - Goal id: SVF-GR1035-X
-- Deterministic command: python3 scripts/swissknife_visual_functional_worker.py --task-id SVF-STR1035
-- Validation: python3 scripts/swissknife_visual_functional_worker.py --validate --task-id SVF-STR1035
+- Deterministic command: python3 scripts/svf_close_successor_task.py --task-id SVF-STR1035
+- Validation: python3 scripts/svf_close_successor_task.py --validate --task-id SVF-STR1035
 - Predicted files: data/agent_supervisor/swissknife_visual_functional/state/proof-ceiling-plan.json
 - Acceptance: The child clock is not renewed. The completed parent receipt remains the parent evidence. This plan does not mark the child completed. The parent task is not completed by this task.
 
 ## SVF-STR1043 Record the exhausted child without renewing its clock
 
-- Status: blocked
+- Status: completed
+- Completion: lane_resume deterministic command exit 0 at 2026-11-16T06:14:41Z
 - Depends on: SVF-FINAL-R1043
 - Goal id: SVF-GR1043-X
-- Deterministic command: python3 scripts/swissknife_visual_functional_worker.py --task-id SVF-STR1043
-- Validation: python3 scripts/swissknife_visual_functional_worker.py --validate --task-id SVF-STR1043
+- Deterministic command: python3 scripts/svf_close_successor_task.py --task-id SVF-STR1043
+- Validation: python3 scripts/svf_close_successor_task.py --validate --task-id SVF-STR1043
 - Predicted files: data/agent_supervisor/swissknife_visual_functional/state/proof-ceiling-plan.json
 - Acceptance: The child clock is not renewed. The completed parent receipt remains the parent evidence. This plan does not mark the child completed. The parent task is not completed by this task.
 ## SVF-FINAL-R1034 One bounded source remediation for final review SVF-1034

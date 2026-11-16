@@ -3786,10 +3786,168 @@ _before_keyboard_validate_child_result = validate_child_result
 _before_keyboard_child_can_still_write = child_can_still_write
 _before_keyboard_recoverable_owned_source = recoverable_owned_source
 
+# The passing parent review stays authoritative. A later controller byte may
+# differ only on this stream-capture path; app, scenario, and contract bytes
+# still have to match that review. This does not rerun a browser or refund a child.
+PARENT_REVIEW_DRIFT = frozenset({
+    'external/ipfs_accelerate/ipfs_accelerate_py/cli_runtime/grok_stream_capture.py',
+})
+PARENT_REVIEW_PARK_REASONS = frozenset({
+    'paid_role_failed_no_refund',
+    'supplemental_deadline_exhausted',
+    'final_failure_fence_differs',
+})
+_PARENT_REVIEW_CLOCKS = (
+    'execution-deadline.json',
+    'producer-repair-phase.json',
+    'retained-proposal-resume-phase.json',
+)
+
+
+def _final_parent(spec, task):
+    policy = task.get('phase_remediation')
+    original = policy.get('original_task') if type(policy) is dict else None
+    need(type(policy) is dict and policy.get('mode') == FINAL_MODE
+         and type(original) is dict and original.get('task_id') in FINAL_IDS,
+         'parent review closeout is only a final child')
+    parent = next((item for item in spec['tasks'] if item.get('task_id') == original['task_id']), None)
+    need(parent is not None and parent.get('kind') == 'final-app-verify'
+         and parent.get('app_id') == task.get('app_id') == original.get('app_id'),
+         'parent review closeout parent does not match the child app')
+    return parent
+
+
+def _completed_block(root, profile, task_id):
+    board = blocks(read(root, profile['todoPath']).decode())
+    part = board.get(task_id)
+    need(part is not None and re.search(r'^- Status: completed\s*$', part, re.M),
+         'parent review closeout parent is not completed')
+    return part
+
+
+def _clock_refs(root, profile, task):
+    directory = _feedback_directory(profile, task)
+    return [ref(root, directory + '/' + name) for name in _PARENT_REVIEW_CLOCKS
+            if physical(root, directory + '/' + name).exists()]
+
+
+def _locked_payment(root, profile, task):
+    name = payment_path(profile, task)
+    paid = parse(read(root, name))
+    need(paid.get('task_id') == task['task_id'] and paid.get('closed') is False
+         and paid.get('completion_authority') is False
+         and paid.get('spent') == {'assessment': 0, 'proposal': 1},
+         'parent review closeout refuses a refunded payment')
+    return ref(root, name)
+
+
+def _closure_drift(root, profile, parent, recorded):
+    from swissknife_visual_functional_final_coverage import source_snapshot
+    current = source_snapshot(root, profile, parent)
+    recorded_sources = recorded.get('source_sha256')
+    current_sources = current.get('source_sha256')
+    need(type(recorded_sources) is dict and type(current_sources) is dict
+         and set(recorded_sources) == set(current_sources)
+         and recorded.get('contract_sha256') == current.get('contract_sha256')
+         and recorded.get('scenario_sha256') == current.get('scenario_sha256'),
+         'parent review closeout closure shape changed')
+    drift = []
+    for name in sorted(recorded_sources):
+        if recorded_sources[name] == current_sources[name]:
+            continue
+        need(name in PARENT_REVIEW_DRIFT, 'parent review closeout found non-allowlisted closure drift')
+        drift.append({'path': name, 'workflow_sha256': recorded_sources[name],
+                      'current_sha256': current_sources[name]})
+    return drift
+
+
+def _parent_review_evidence(root, profile, spec, task):
+    """Read-only proof that the completed parent review still covers this child."""
+    need(task.get('kind') == KIND and task.get('phase_remediation', {}).get('mode') == FINAL_MODE,
+         'parent review closeout requires a final scoped child')
+    parent = _final_parent(spec, task)
+    _completed_block(root, profile, parent['task_id'])
+    receipt_name = profile['runtimeRoot'] + '/tasks/' + parent['task_id'] + '/receipt.json'
+    receipt = parse(check_ref(root, ref(root, receipt_name)))
+    join = (receipt.get('detail') or {}).get('final_viewport_review_join')
+    need(receipt.get('schema') == 'swissknife.visual-functional-task.v1'
+         and receipt.get('task_id') == parent['task_id'] and receipt.get('kind') == 'final-app-verify'
+         and receipt.get('work_complete') is False and receipt.get('completion_authority') is False
+         and type(receipt.get('checks')) is list and len(receipt['checks']) == 1
+         and receipt['checks'][0].get('exit_code') == 0
+         and type(join) is dict and set(join) == {
+             'schema', 'task_id', 'app_id', 'task_semantics_sha256', 'workflow', 'children',
+             'images', 'source_identity_sha256', 'review', 'review_context'}
+         and join.get('schema') == 'swissknife.current-final-app-review-join.v1'
+         and join.get('task_id') == parent['task_id'] and join.get('app_id') == parent['app_id']
+         and type(join.get('children')) is list and join['children']
+         and type(join.get('images')) is list and len(join['images']) >= 2,
+         'parent review closeout parent receipt is not a pass join')
+    for item in (*join['children'], *join['images']):
+        check_ref(root, item)
+    review = parse(check_ref(root, join['review']))
+    need(review.get('task_id') == parent['task_id'] and review.get('mode') == 'review'
+         and (review.get('response') or {}).get('decision') == 'pass',
+         'parent review closeout parent visual review did not pass')
+    check_ref(root, join['review_context'])
+    recorded = parse(check_ref(root, join['workflow']))
+    need(recorded.get('schema') == 'swissknife.visual-functional-workflow.v2'
+         and recorded.get('app_id') == parent['app_id'] and recorded.get('passed') is True
+         and recorded.get('work_complete') is False and recorded.get('completion_authority') is False,
+         'parent review closeout workflow is not the passing parent run')
+    return {'schema': SCHEMA, 'task_id': task['task_id'], 'scope': 'parent_review_satisfied',
+            'original_task_id': parent['task_id'], 'original_task_sha256': digest(parent),
+            'parent_review_satisfied': True, 'obsolete_gap': False, 'proposal': None,
+            'application': None, 'assessment': None, 'payments': _locked_payment(root, profile, task),
+            'payment_refunded': False, 'clock_files': _clock_refs(root, profile, task),
+            'clock_renewed': False, 'closure_drift': _closure_drift(root, profile, parent, recorded),
+            'workflow': join['workflow'], 'review': join['review'], 'parent_receipt': ref(root, receipt_name),
+            'work_complete': False, 'completion_authority': False}
+
+
+def _execute_parent_review_closeout(root, profile, spec, task):
+    name = _feedback_directory(profile, task) + '/source-only-result.json'
+    evidence = _parent_review_evidence(root, profile, spec, task)
+    raw = wire(evidence) + b'\n'
+    if physical(root, name).exists():
+        need(read(root, name) == raw, 'parent review result no longer matches the retained pass')
+    else:
+        reason = terminal_refusal_reason(root, profile, task)
+        need(reason in PARENT_REVIEW_PARK_REASONS, 'parent review closeout is only for a parked final child')
+        atomic(root, name, raw, exclusive=True)
+        need(read(root, name) == raw, 'parent review result changed while it was written')
+    return [physical(root, name)], [], {
+        'source_only_remediation': ref(root, name), 'parent_review_satisfied': True,
+        'original_acceptance_downstream': True, 'paid_limits': {'assessment': 1, 'proposal': 1},
+        'payment_refunded': False, 'clock_renewed': False,
+        'work_complete': False, 'completion_authority': False}
+
+
+def _validate_parent_review_result(root, profile, spec, task, receipt):
+    detail = receipt.get('detail') or {}
+    value = parse(check_ref(root, detail.get('source_only_remediation')))
+    need(receipt.get('task_id') == task['task_id'] and receipt.get('kind') == KIND
+         and receipt.get('checks') == [] and receipt.get('work_complete') is False
+         and receipt.get('completion_authority') is False
+         and detail.get('parent_review_satisfied') is True and detail.get('payment_refunded') is False
+         and detail.get('clock_renewed') is False and detail.get('work_complete') is False
+         and detail.get('completion_authority') is False
+         and value.get('parent_review_satisfied') is True
+         and wire(value) == wire(_parent_review_evidence(root, profile, spec, task)),
+         'parent review receipt does not match the retained pass')
+    return value
+
 
 def execute_child(root, profile_path, profile, spec, task, *, producer_failure_context=None, **kwargs):
     with _mode(_task_mode(task)):
         result_name = _feedback_directory(profile, task) + '/source-only-result.json'
+        if task.get('kind') == KIND and task.get('phase_remediation', {}).get('mode') == FINAL_MODE:
+            satisfied = (physical(root, result_name).exists()
+                         and parse(read(root, result_name)).get('parent_review_satisfied') is True)
+            parked = ((not physical(root, result_name).exists())
+                      and terminal_refusal_reason(root, profile, task) in PARENT_REVIEW_PARK_REASONS)
+            if satisfied or parked:
+                return _execute_parent_review_closeout(root, profile, spec, task)
         if physical(root, result_name).exists():
             value = parse(read(root, result_name))
             if value.get('keyboard_confirmation_normalization') is not None:
@@ -3809,6 +3967,8 @@ def execute_child(root, profile_path, profile, spec, task, *, producer_failure_c
 
 def validate_child_result(root, profile, spec, task, receipt, *, validate_workflow):
     value = parse(check_ref(root, receipt['detail']['source_only_remediation']))
+    if value.get('parent_review_satisfied') is True:
+        return _validate_parent_review_result(root, profile, spec, task, receipt)
     if value.get('keyboard_confirmation_normalization') is not None:
         return validate_keyboard_normalization_result(root, profile, spec, task, receipt, validate_workflow=validate_workflow)
     return _before_keyboard_validate_child_result(root, profile, spec, task, receipt, validate_workflow=validate_workflow)

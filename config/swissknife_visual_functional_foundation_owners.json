@@ -141,7 +141,7 @@
     "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/rescue/leased_service_watchdog.py": "a8bd82d2472d85c8565d918cf85844c68caa0ae97903e0a8ec2c08a5a7930a31",
     "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/resource_scheduler.py": "937d609aced0f2dd9a74b5444a74ac56eb0e87536b98fba2f410c9d70d2f4055",
     "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/database_task_source.py": "4260ac11ffc59f36001b307b3efdf54974503c9e603f7461cfe9232cf2bf8537",
-    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/intent_repository.py": "2d42233c066ec953ad5fab7ebd560dd9f6e6de7ba7b2fa0c70ecb85614b9202e",
+    "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/task_sources/intent_repository.py": "76bc54642770a24a16e15796f79f6c43dffe4ab2fd680a3250f6395719519c05",
     "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/verification/process_runner.py": "4352a90342e8021cedeada94d08678c5a427efbd013c3d63137374a674bba598",
     "external/ipfs_kit/ipfs_kit_py/assurance/pinned_ipfs.py": "115391905b2a5b0d3e0af7cf3e8febcba0f85575e9dfcff840fd8389d867fda7",
     "scripts/svf_backends/fixed_supervisor_output_validator.py": "eacb0ce63cf5ef44cfc69975786efe3632c148d261da9817724704f20f1fefcc",
@@ -154,7 +154,7 @@
     "scripts/swissknife_visual_functional_phase_budget.py": "cb4b776d29680a6e722270e71956ef1f636972e83b51ca8a2420fa10c2a1f7ca",
     "scripts/swissknife_visual_functional_recovery.py": "abc3df1c435031964bf2807630383c046306ae6574fabd117c3666b2d9c7caa6",
     "scripts/swissknife_visual_functional_review_recheck.py": "d30c3301c33679296a6e61812ebe1f9d8d6675a20768bf7fb849ff1c36b66f52",
-    "scripts/swissknife_visual_functional_supervisor.py": "1bf94d50baa1195c02a4f5f01778d1e84109cb4c1ee0cffb3a749a2a8fbaad46",
+    "scripts/swissknife_visual_functional_supervisor.py": "14d040e0591432c2241380d0c85f722d5f58a1940849353245a7fd0eee1fc0fb",
     "scripts/swissknife_visual_functional_worker.py": "7f3627c6a64d2dbc30e6dcf6d5e0ca202d55dfb387263a0a7a9f705a3cfac04f",
     "swissknife/config/visual-functional-app-contracts.json": "644516618788f9064a4c546afd34094dc4947a13e783d8b2f0f6eb09bf626192",
     "swissknife/docs/svf-native-foundation-contracts.md": "fde0da83d5818a0fd3e05f6f86601bf2af57e8d43da736d4ca37c6de3a9fe739",
@@ -167,11 +167,11 @@
     "tests/test_svf_supervisor_foundation_contract.py": "b3a84847a956a760524451f431ade18cd1a22af8fc0f01ca088f6bde078ee4c8",
     "scripts/swissknife_visual_functional_blocked.py": "24cc4a2a5dc0982bf262366b9439e08b6ab3a152b1ed4ab0c78edb4dc2c9d141",
     "scripts/swissknife_visual_functional_llm.py": "92d3328ae6db10802f389ffbd1b81d6c56bae79befea87335253861c9b1000e7",
-    "external/ipfs_accelerate/ipfs_accelerate_py/cli_runtime/grok_stream_capture.py": "945b3362dc0e25522d9f411f1b8dee85cbe72dc3f255308ba4d1e31fd9f12e34",
+    "external/ipfs_accelerate/ipfs_accelerate_py/cli_runtime/grok_stream_capture.py": "6283928deef129181338ea11ba1c841c22f128a9ec10899ff3dc7363f0a4b359",
     "scripts/swissknife_visual_functional_final_coverage.py": "4eee9b27ef7fa3078f4369aa336858703b8e8a4488aa03d4629ab58e8502ed99",
     "swissknife/scripts/run-visual-functional-workflow.mjs": "05ef6f82fe355bd1593ab4129dde16d6946ab2637cbf1506e075c0347ff7b33a",
     "external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/rescue/lane_resume.py": "fb6fd7e56126e59c78287908a92832151da872a373ec5ec9f6cbf9f7f08a5d07",
-    "scripts/swissknife_visual_functional_phase_remediation.py": "aefc2664679f552a3201e5ef38b200ea322124108dc3b8ef3ac1f5220ac93324"
+    "scripts/swissknife_visual_functional_phase_remediation.py": "df3ae8d464d5d1bf3738182fbffdfc4149088625cee57f62990cdddb99b0df53"
   },
   "pubsub_peers": [
     {

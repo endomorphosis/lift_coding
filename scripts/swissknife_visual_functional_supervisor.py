@@ -31,6 +31,12 @@ PROFILE = "config/swissknife_visual_functional_supervisor.json"
 RUNTIME = "data/agent_supervisor/swissknife_visual_functional"
 STATE = RUNTIME + "/state"
 WORKER = "scripts/swissknife_visual_functional_worker.py"
+SUCCESSOR_SCRIPT = "scripts/svf_close_successor_task.py"
+SUCCESSOR_TASKS = frozenset({
+    "SVF-ST1023", "SVF-ST1032", "SVF-ST900",
+    "SVF-STR1002", "SVF-STR1013", "SVF-STR1019", "SVF-STR1022",
+    "SVF-STR1032", "SVF-STR1035", "SVF-STR1043",
+})
 PREFIX = "## SVF-"
 STATE_PREFIX = "svf"
 TERMINAL = frozenset({"completed", "complete", "done"})
@@ -109,6 +115,15 @@ def _worker_command(raw: str, task_id: str, *, validation: bool, recovery: bool 
         argv = shlex.split(raw)
     except ValueError as exc:
         raise PreflightError(f"{task_id}: malformed worker command") from exc
+    if task_id in SUCCESSOR_TASKS:
+        if recovery:
+            raise PreflightError(f"{task_id}: successor closeout has no recovery command")
+        expected = ["python3", SUCCESSOR_SCRIPT, "--task-id", task_id]
+        if validation:
+            expected.insert(2, "--validate")
+        if argv != expected:
+            raise PreflightError(f"{task_id}: command must be {shlex.join(expected)}")
+        return
     expected = ["python3", WORKER, "--task-id", task_id]
     if validation or recovery:
         expected.insert(2, "--recover" if recovery else "--validate")
