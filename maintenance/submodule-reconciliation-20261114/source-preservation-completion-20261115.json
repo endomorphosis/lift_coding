@@ -1,6 +1,61 @@
 {
   "earlier_source_migration": "source-migration-completion.json retains its original 2026-11-14 cutoff and 5,147-file source restore scope.",
   "independent_anonymous_HTTPS_readback": {
+    "Main_private_source4_plus_selection_increment_v01": {
+      "Python_source_versions": 4,
+      "audit_bytes": 2478,
+      "audit_sha256": "e7ac1d5a68307ef61ea24d25de7660a19927254c50cf0eee0d481a04eb63b2eb",
+      "bytes": 1134160,
+      "existing_selection_JSON_bytes": 8393,
+      "existing_selection_JSON_versions": 1,
+      "file_versions": 5,
+      "main_adoption": false,
+      "preservation_commit": "5ce13837380a25b1fe9a83c65c40eb5d84d5092b",
+      "private_assets_included": false,
+      "qualification_granted": false,
+      "scope": "Four existing unqualified Main preparation source/test versions (v01 metadata @2 and v02 explicit15), plus their exact existing selection JSON. No new code development, source-main adoption, runtime, Native, scientific activation, legal, model, training/gold or corpus qualification.",
+      "selected_public_files": [
+        {
+          "bytes": 406588,
+          "git_blob": "19c0f189d12c85f36bf4d8fe27347e1cf594b040",
+          "git_mode": "100644",
+          "path": "source-preservation/legal-ir-Main-unqualified-preparation-20261115/Main-physical-R-preparation-candidates-v01/ipfs_accelerate_py/agent_supervisor/rescue/scientific_executor.py",
+          "sha256": "e84b1c95e2c4c50310657dd90c5ac9d24015512195dcf610cc63b00698cac55f"
+        },
+        {
+          "bytes": 148965,
+          "git_blob": "cc1d8c3861f4e752d3c0368a100ddce07113f946",
+          "git_mode": "100644",
+          "path": "source-preservation/legal-ir-Main-unqualified-preparation-20261115/Main-physical-R-preparation-candidates-v01/tests/unit/agent_supervisor/test_scientific_closed_capacity_continuation.py",
+          "sha256": "f59b5048a2b2e3d1650a6b650e376bb9e0362ae3a909887907c380de23023ad4"
+        },
+        {
+          "bytes": 412304,
+          "git_blob": "252baea649f6d6d2671f99e1e4be1af4bae909ca",
+          "git_mode": "100644",
+          "path": "source-preservation/legal-ir-Main-unqualified-preparation-20261115/Main-physical-R-preparation-candidates-v02-explicit15/ipfs_accelerate_py/agent_supervisor/rescue/scientific_executor.py",
+          "sha256": "84628496bf1e86d9a9580e6e393ce89782c61215c0c77640a07cb51f1a969213"
+        },
+        {
+          "bytes": 157910,
+          "git_blob": "4677abb45d4d9fd781a72520d01eb8abf8e2996e",
+          "git_mode": "100644",
+          "path": "source-preservation/legal-ir-Main-unqualified-preparation-20261115/Main-physical-R-preparation-candidates-v02-explicit15/tests/unit/agent_supervisor/test_scientific_closed_capacity_continuation.py",
+          "sha256": "677409f854c1f0f03a559c999e86ab3b230553a03cbb84fa02c2abea56e9e09b"
+        },
+        {
+          "bytes": 8393,
+          "git_blob": "8d0e29f057b22b7c194f750d3a6feef618a28959",
+          "git_mode": "100644",
+          "path": "source-preservation/legal-ir-Main-unqualified-preparation-20261115/selection.json",
+          "sha256": "19968630debc6b7a6d11fe3bc72f55da0e7875318c4aefd79c6feaa677f57927"
+        }
+      ],
+      "selection_metadata_publication_receipt_sha256": "9ad9311a4188f8be5bc3e0ac2faf8f824829126641d4dc1f8bc93536c11c485b",
+      "source4_preservation_commit": "5d01884ad905580553dd9a16582ab7b8c6dcd1fe",
+      "source4_publication_receipt_sha256": "199bc8eeb85ccda260998775fc6149ab4cd41c2de607a1a195e4f9758e3fba67",
+      "source_bytes": 1125767
+    },
     "all_selected_source_bytes_match": true,
     "file_versions_are_not_unique_path_counts": true,
     "first_frozen_cutoff": {
@@ -20,6 +75,10 @@
       "publication_receipt_sha256": "d8cf97ade020f0100e026200f966ac703e373ff902df0b195116e2a535db70f4",
       "scope": "12 current source/test/doc versions, two separately archived unqualified constructive-recursion source/test hypotheses, and one separately archived fictional proof-feedback RED test proposal. No runtime archives, compiled Lean outputs, toolchain binaries, model assets or private legal archives."
     },
+    "prior_total_before_Main_private_source4_plus_selection": {
+      "total_bytes": 15508842,
+      "total_file_versions": 86
+    },
     "prior_total_before_late_source_increment_v06": {
       "total_bytes": 7894120,
       "total_file_versions": 44
@@ -28,9 +87,17 @@
       "total_bytes": 11445680,
       "total_file_versions": 59
     },
+    "prior_total_before_source13_plus_manifest": {
+      "total_bytes": 12416495,
+      "total_file_versions": 66
+    },
     "prior_total_before_source3_v07": {
       "total_bytes": 11558296,
       "total_file_versions": 63
+    },
+    "prior_total_before_v11_source6": {
+      "total_bytes": 14682432,
+      "total_file_versions": 80
     },
     "proof_feedback_source_increment_v02": {
       "bytes": 112616,
@@ -40,6 +107,18 @@
       "publication_receipt_sha256": "44b2759732fc0ceef9817d5abf0f4fb052833db366a9f2dca34f3ec4c621c1d5",
       "scope": "Three source/test variants and one provenance manifest. Current44 software guards retain their separate qualification; the pending legacy-cache RED source remains unexecuted/unqualified. Backup grants no new software, Native, legal, training/gold or model qualification."
     },
+    "source13_plus_manifest_increment_v01": {
+      "Python_source_versions": 13,
+      "audit_sha256": "ca1e84215c2f11eb5cf1050b4d6df224d70b3ba7519487ee6b1aba6095afdeee",
+      "bytes": 2265937,
+      "file_versions": 14,
+      "immutable_capsule_path": "maintenance/submodule-reconciliation-20261114/legal-ir-source13-and-v11-preservation-20261115.json",
+      "immutable_capsule_sha256": "96afa74cd141622ea21b1a9a0b19e53bb3142eee298c203c4baae163076ab9d7",
+      "preservation_commit": "ffe8a5925c23658bb2ee3b0df35b70c01d5c6a53",
+      "provenance_manifests": 1,
+      "publication_receipt_sha256": "25d680520d3a0f311d0df44ff133118e9da8067469013620e863739f550f117f",
+      "scope": "Seven Root source versions and six source-use-compatible unqualified peer merge candidates plus one manifest, restored from a fresh anonymous HTTPS clone. No code is promoted to main by this backup."
+    },
     "source_candidate_increment_v07": {
       "audit_sha256": "f082931dfb90230d7ff361631a3e2a57927e5ef1d8da77c9c696e42c083c4cbf",
       "bytes": 858199,
@@ -47,10 +126,44 @@
       "publication_receipt_sha256": "5dccb19f126ff80be4614300f6efcb6521c2d126c450e305e2f9f967898c22e3",
       "scope": "One stopped unfinished/unreviewed/unqualified release-coordinator source variant and two SDK version-forwarding source/test variants, separately archived. No main adoption, runtime, Native, scientific activation, legal or model qualification is supplied."
     },
-    "total_bytes": 12416495,
-    "total_file_versions": 66
+    "total_bytes": 16643002,
+    "total_file_versions": 91,
+    "v11_selected_source_increment_v01": {
+      "Python_source_versions": 5,
+      "audit_sha256": "71e8f9abc6f87be730c80d2415bdddd051dea15e83c21b2184f6b72aa3560548",
+      "bytes": 826410,
+      "existing_proposal_JSON_versions": 1,
+      "file_versions": 6,
+      "immutable_capsule_path": "maintenance/submodule-reconciliation-20261114/legal-ir-source13-and-v11-preservation-20261115.json",
+      "immutable_capsule_sha256": "96afa74cd141622ea21b1a9a0b19e53bb3142eee298c203c4baae163076ab9d7",
+      "preservation_commit": "a3cec71ab49e951d977ecd25c16984c6d4031d86",
+      "publication_receipt_sha256": "db5f72b8836e3645bb5ffa2117e806ad464356c94f87427caadb2e9c80ea2f9b",
+      "scope": "Source-only current physical realization v11 proposal. No new main promotion, runtime, Native, scientific activation, legal or model qualification."
+    }
   },
   "main_ref_history": {
+    "before_source13_v11_and_Main_A6_publication": {
+      "main_refs_verified": {
+        "ipfs_accelerate_py": "21e94730749848ee76ced9cecf8082494ded8ad1",
+        "ipfs_datasets_py": "c76bcfc274899d95944365dfaf35554ce729ce77"
+      },
+      "verification_evidence": {
+        "ipfs_accelerate_py": {
+          "main_commit": "21e94730749848ee76ced9cecf8082494ded8ad1",
+          "preservation_commit": "62d117e7e0a11a77c76ad53b7b5d17fae79968a5",
+          "scope": "Existing main and latest source-preservation refs reverified; no product or runtime promotion."
+        },
+        "ipfs_datasets_py": {
+          "independent_anonymous_HTTPS_readback_sha256": "9454fa1484df7db466cdf5656e69be6a4233561c06352fb18b9570ebcf5dac80",
+          "main_commit": "c76bcfc274899d95944365dfaf35554ce729ce77",
+          "publication_receipt_sha256": "f4ed43dc8aef99d5bfe1c304d1fbcb6cfd5cbd4d1aa3fb79af4378c3251f072a",
+          "scope": "Exact selected four maintained alias software documentation/capsule files, independently restored; no new tests, Native, model or activation claim.",
+          "selected_Main_documentation_bytes": 2303401,
+          "selected_Main_documentation_files": 4
+        }
+      },
+      "verification_scope": "Fresh main and preservation refs verified at this 66-version source-only checkpoint. The additional three archived source variants have their own independent HTTPS readback and supply no new qualification. Source totals retain the historical35+9+15+4+3 scopes; maintained-documentation publication readbacks are separate and not double-counted."
+    },
     "before_source3_v07_and_alias_docs": {
       "main_refs_verified": {
         "ipfs_accelerate_py": "21e94730749848ee76ced9cecf8082494ded8ad1",
@@ -87,23 +200,20 @@
   },
   "main_ref_verification_evidence": {
     "ipfs_accelerate_py": {
-      "main_commit": "21e94730749848ee76ced9cecf8082494ded8ad1",
+      "main_commit": "2d4ad8b84d7ef5024c895925393eeb1ea60279e2",
       "preservation_commit": "62d117e7e0a11a77c76ad53b7b5d17fae79968a5",
-      "scope": "Existing main and latest source-preservation refs reverified; no product or runtime promotion."
+      "scope": "Fresh remote main ref after the separately owned authorized Main A6 source publication. This parent pin grants no scientific activation or semantic/model authority."
     },
     "ipfs_datasets_py": {
-      "independent_anonymous_HTTPS_readback_sha256": "9454fa1484df7db466cdf5656e69be6a4233561c06352fb18b9570ebcf5dac80",
-      "main_commit": "c76bcfc274899d95944365dfaf35554ce729ce77",
-      "publication_receipt_sha256": "f4ed43dc8aef99d5bfe1c304d1fbcb6cfd5cbd4d1aa3fb79af4378c3251f072a",
-      "scope": "Exact selected four maintained alias software documentation/capsule files, independently restored; no new tests, Native, model or activation claim.",
-      "selected_Main_documentation_bytes": 2303401,
-      "selected_Main_documentation_files": 4
+      "main_commit": "8336d39eebe6922efcb77d669091593d3a37537b",
+      "preservation_commit": "a3cec71ab49e951d977ecd25c16984c6d4031d86",
+      "scope": "Fresh remote main and preservation refs for this parent checkpoint. Backup supplies no qualification of Root or peer source variants."
     }
   },
-  "main_ref_verification_scope": "Fresh main and preservation refs verified at this 66-version source-only checkpoint. The additional three archived source variants have their own independent HTTPS readback and supply no new qualification. Source totals retain the historical35+9+15+4+3 scopes; maintained-documentation publication readbacks are separate and not double-counted.",
+  "main_ref_verification_scope": "Fresh public main/preservation refs at this source-preservation checkpoint. The parent advances only the Accelerator gitlink and retains the incoming datasets gitlink. Historical source86 totals include every selected manifest/proposal file consistently. Source backups and parent pointers grant no new software, Native, legal, training/model, scientific activation or corpus qualification.",
   "main_refs_verified": {
-    "ipfs_accelerate_py": "21e94730749848ee76ced9cecf8082494ded8ad1",
-    "ipfs_datasets_py": "c76bcfc274899d95944365dfaf35554ce729ce77"
+    "ipfs_accelerate_py": "2d4ad8b84d7ef5024c895925393eeb1ea60279e2",
+    "ipfs_datasets_py": "8336d39eebe6922efcb77d669091593d3a37537b"
   },
   "preservation_branch": "preserve/inflight-source-20261114",
   "preservation_commit_history": {
@@ -118,11 +228,23 @@
     "after_first_63_file_versions": {
       "ipfs_accelerate_py": "fdf4ed5faffc3b9f194eb296d0dae12143523924",
       "ipfs_datasets_py": "9b05f1f11aa2430dfd118a4de48a933b4f83cab0"
+    },
+    "after_first_66_file_versions": {
+      "ipfs_accelerate_py": "62d117e7e0a11a77c76ad53b7b5d17fae79968a5",
+      "ipfs_datasets_py": "0fb758f340f66f9d0906648a6482ba82f341f00f"
+    },
+    "after_first_80_file_versions": {
+      "ipfs_accelerate_py": "62d117e7e0a11a77c76ad53b7b5d17fae79968a5",
+      "ipfs_datasets_py": "ffe8a5925c23658bb2ee3b0df35b70c01d5c6a53"
+    },
+    "after_first_86_file_versions": {
+      "ipfs_accelerate_py": "62d117e7e0a11a77c76ad53b7b5d17fae79968a5",
+      "ipfs_datasets_py": "a3cec71ab49e951d977ecd25c16984c6d4031d86"
     }
   },
   "preservation_commits": {
-    "ipfs_accelerate_py": "62d117e7e0a11a77c76ad53b7b5d17fae79968a5",
-    "ipfs_datasets_py": "0fb758f340f66f9d0906648a6482ba82f341f00f"
+    "ipfs_accelerate_py": "5ce13837380a25b1fe9a83c65c40eb5d84d5092b",
+    "ipfs_datasets_py": "a3cec71ab49e951d977ecd25c16984c6d4031d86"
   },
   "preserved_constraints": {
     "old_failures_and_source_identities": "Retained; backup is not software, Native, legal or model qualification.",
@@ -131,8 +253,74 @@
     "runtime_permissions_and_budgets": "Unchanged; backup performs no training or Native verification."
   },
   "recorded_date_utc": "2026-11-15",
+  "registered_worktree_tip_publication_audit_20261115": {
+    "all_registered_HEADs_match_registry": true,
+    "all_registered_tip_records_publicly_reachable": true,
+    "audit_bytes": 33607,
+    "audit_cutoff_main_refs": {
+      "A": "2d4ad8b84d7ef5024c895925393eeb1ea60279e2",
+      "P": "c432084cbb716f57bdefc4d31ff58c097e6d1dfa",
+      "R": "83beb639b64311c5cb6b996acdd65cc959500121"
+    },
+    "audit_path": "workspace/test-logs/federal-corpus-audits/legal-ir-peer-revision-reconciliation-20261109-v01/legal-ir-registered-RAP53-tip-audit-20261115-v01/registered-RAP53-public-tip-audit.json",
+    "audit_sha256": "c1917e8e9d407e7a9c07a339d2c85fff28502128cbf864ddef12fbe2fa329617",
+    "non_main_preservation_refs": {
+      "accelerate_unqualified_capacity_a53": {
+        "branch": "refs/heads/preserve/unqualified-capacity-a53b-20261109",
+        "commit": "a53b173781999cdde0faaccf245ea5b4d404f730",
+        "earlier_failed_attempt": {
+          "genuine_tool": "75373 -> 563538 failure",
+          "push_performed": false,
+          "receipt_bytes": 3280,
+          "receipt_sha256": "5c32772778422573cd88772092653d857f537069e2697d0300c0781e7803329f",
+          "retained": true
+        },
+        "exact_existing_commit_graph_preserved": true,
+        "independent_HTTPS_readback_bytes": 2412,
+        "independent_HTTPS_readback_sha256": "a16aa3abbe5e365fde8aa652a824ca8597d243864610eaa3a5b11e706d02f358",
+        "main_unchanged": true,
+        "origin": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+        "original_HEAD_index_and_five_dirty_peers_unchanged": true,
+        "original_Source_READ_and_independent_clone_WRITE_closed": true,
+        "public_parent": "9df264ec1c624c11e747eacf4e3bdd53e1d51846",
+        "publication_receipt_bytes": 5395,
+        "publication_receipt_sha256": "f83a681c77028cb4f1b509b966bcdda2f1ec55e580027411886a01fd1c83a5d6",
+        "qualification_granted": false,
+        "successful_genuine_tool": "62020 -> bd8a4e EXIT0",
+        "three_source_file_HTTPS_readback_bytes": 345333,
+        "three_source_files_verified": 3
+      },
+      "datasets_V4_context": {
+        "already_public_before_this_preservation": "Exact public reference independently present in the registered audit.",
+        "branch": "refs/heads/preserve/inflight-v4-context-20261115",
+        "commit": "d95427c9e087c841ddf05d37c06cb35a28ba7f84",
+        "origin": "https://github.com/endomorphosis/ipfs_datasets_py.git"
+      }
+    },
+    "reachability_basis": "Each audited HEAD is an ancestor of the public main at the audit cutoff or is available through an explicitly public preservation branch.",
+    "recorded_at_utc": "2026-11-15T21:06:31.393570+00:00",
+    "registered_counts": {
+      "A": 36,
+      "P": 4,
+      "R": 13
+    },
+    "registered_total": 53,
+    "runtime_permissions_budgets_historical_source_epochs_and_private_asset_holds_unchanged": true,
+    "scope": "The53 registered worktree HEAD records from the bounded R/A/P registry audit, including repeated HEADs. This is not a new whole-machine/500-Git-store discovery or a dirty-content/private-asset backup claim.",
+    "source86_totals_unchanged": {
+      "bytes": 15508842,
+      "file_versions": 86
+    },
+    "source_snapshot_byte_increment": 0,
+    "source_snapshot_file_version_increment": 0
+  },
   "schema": "source-only-github-preservation-completion/v1",
   "scope": "Selected source code, tests, documentation and unqualified source candidates before decommission; private assets remain on hold.",
+  "source13_backup_cutoff_refs": {
+    "datasets_main_before_after": "8336d39eebe6922efcb77d669091593d3a37537b",
+    "datasets_preserve_before_after": "ffe8a5925c23658bb2ee3b0df35b70c01d5c6a53",
+    "scope": "Independent source-backup cutoff only. Main code/publication refs retain their earlier explicit verification cutoffs until the pending parent update refreshes them after Main A6 publication."
+  },
   "unqualified_candidates": {
     "includes": [
       "constructive definition realization preparation and native/incremental integration candidates",
@@ -143,5 +331,10 @@
       "fictional proof-feedback Boolean-admission RED test proposal"
     ],
     "status": "Preserved separately; not merged or promoted to main by this backup."
+  },
+  "v11_source6_backup_cutoff_refs": {
+    "datasets_main_before_after": "8336d39eebe6922efcb77d669091593d3a37537b",
+    "datasets_preserve_before_after": "a3cec71ab49e951d977ecd25c16984c6d4031d86",
+    "scope": "Source-only cutoff. Main/parent publication refs require fresh finalization after Main A6 parent-pin closure."
   }
 }
