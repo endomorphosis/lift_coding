@@ -1,0 +1,124 @@
+{
+  "files": [
+    {
+      "archive_file": "stage_A_master.service.PROPOSAL.txt",
+      "future_current_preimages_or_runtime_authority": false,
+      "original_proposal": {
+        "bytes": 4905,
+        "full9": {
+          "st_ctime_ns": "1795336491358238153",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "47624678",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795336491358238153",
+          "st_nlink": "1",
+          "st_size": "4905",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Main-WORLD-existing-service-two-stage-config-private-v01-j1nqu41b/protected-path-extension-v01/stage-A-refill-disabled/legal-ir-autoencoder-v1.service",
+        "role": "stage_A_master",
+        "sha256": "fab50fcb3c71dbf31ca0f3842016ae7f26ad4df3d47f766a7e069f37a82a0036"
+      },
+      "status": "NOT_INSTALLED_NOT_ACTIVATED"
+    },
+    {
+      "archive_file": "stage_A_lane_1.service.PROPOSAL.txt",
+      "future_current_preimages_or_runtime_authority": false,
+      "original_proposal": {
+        "bytes": 4926,
+        "full9": {
+          "st_ctime_ns": "1795336491412416236",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "47624688",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795336491412416236",
+          "st_nlink": "1",
+          "st_size": "4926",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Main-WORLD-existing-service-two-stage-config-private-v01-j1nqu41b/protected-path-extension-v01/stage-A-refill-disabled/legal-ir-autoencoder-v1-lane-1.service",
+        "role": "stage_A_lane_1",
+        "sha256": "2f3f2f8490eb807c6f6f5969798eaf4a6368cc8109f38747360e6638302b68c4"
+      },
+      "status": "NOT_INSTALLED_NOT_ACTIVATED"
+    },
+    {
+      "archive_file": "stage_A_lane_2.service.PROPOSAL.txt",
+      "future_current_preimages_or_runtime_authority": false,
+      "original_proposal": {
+        "bytes": 4926,
+        "full9": {
+          "st_ctime_ns": "1795336491432818353",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "47624693",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795336491432818353",
+          "st_nlink": "1",
+          "st_size": "4926",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Main-WORLD-existing-service-two-stage-config-private-v01-j1nqu41b/protected-path-extension-v01/stage-A-refill-disabled/legal-ir-autoencoder-v1-lane-2.service",
+        "role": "stage_A_lane_2",
+        "sha256": "2ba19547c91efd9901c53eed09800deaccc34acbfdc0e0f719fc8d2974046cd3"
+      },
+      "status": "NOT_INSTALLED_NOT_ACTIVATED"
+    },
+    {
+      "archive_file": "stage_A_lane_3.service.PROPOSAL.txt",
+      "future_current_preimages_or_runtime_authority": false,
+      "original_proposal": {
+        "bytes": 4926,
+        "full9": {
+          "st_ctime_ns": "1795336491453948255",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "47624698",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795336491453948255",
+          "st_nlink": "1",
+          "st_size": "4926",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Main-WORLD-existing-service-two-stage-config-private-v01-j1nqu41b/protected-path-extension-v01/stage-A-refill-disabled/legal-ir-autoencoder-v1-lane-3.service",
+        "role": "stage_A_lane_3",
+        "sha256": "076c973d9da0592cce592207a6486efc47e58a0841675d4159187a7480269177"
+      },
+      "status": "NOT_INSTALLED_NOT_ACTIVATED"
+    },
+    {
+      "archive_file": "stage_B_master.service.PROPOSAL.txt",
+      "future_current_preimages_or_runtime_authority": false,
+      "original_proposal": {
+        "bytes": 4931,
+        "full9": {
+          "st_ctime_ns": "1795336491388079273",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48019077",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795336491388079273",
+          "st_nlink": "1",
+          "st_size": "4931",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Main-WORLD-existing-service-two-stage-config-private-v01-j1nqu41b/protected-path-extension-v01/stage-B-master-refill-enabled/legal-ir-autoencoder-v1.service",
+        "role": "stage_B_master",
+        "sha256": "594338581045367bb469daa155e5ef4b2ecf16e43aa0b38b36491eb1946929b2"
+      },
+      "status": "NOT_INSTALLED_NOT_ACTIVATED"
+    }
+  ],
+  "original_handoff": {
+    "bytes": 13274,
+    "path": "/tmp/Main-WORLD-protected-rollout-complete-v03-r5mh228c/handoff.json",
+    "sha256": "95b2450bfd827d828279936add0d7541c121cc937963d104cedcdcb980455d61"
+  },
+  "root_publication_authority_is_not_service_activation_authority": true,
+  "runtime_Source_service_or_graph_actions": 0,
+  "schema": "preserved-unadopted-five-service-configuration-proposal/v1",
+  "status": "HISTORICAL_PROPOSAL_NOT_INSTALLED_NOT_ACTIVATED",
+  "unique_proposal_bytes": 24614
+}
