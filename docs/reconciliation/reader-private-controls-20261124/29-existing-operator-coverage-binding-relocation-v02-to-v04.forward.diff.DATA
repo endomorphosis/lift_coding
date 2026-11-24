@@ -1,0 +1,15 @@
+--- coverage.v02
++++ coverage.v04
+@@ -1,10 +1,10 @@
+-FINAL_KNOWN_IMPORT_COVERAGE_REFERENCE = None
+-FINAL_KNOWN_IMPORT_COVERAGE_PROJECT_ROOTS = ('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets',)
+ """INERT published-D Phase2 bridge27 through the existing R2 Source42/SDK route.
+ Final Git/READ pins, fixture effects, IO plan and Root runtime selection are NULL.
+ No Source-WRITE installation or qualified statutory/Native result is asserted.
+ """
+ from __future__ import annotations
++FINAL_KNOWN_IMPORT_COVERAGE_REFERENCE = None
++FINAL_KNOWN_IMPORT_COVERAGE_PROJECT_ROOTS = ('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets',)
+ import ast,base64,contextlib,dataclasses,hashlib,importlib,json,os,shutil,stat,subprocess,sys,time,traceback,types,zlib
+ import xml.etree.ElementTree as ET
+ from pathlib import Path

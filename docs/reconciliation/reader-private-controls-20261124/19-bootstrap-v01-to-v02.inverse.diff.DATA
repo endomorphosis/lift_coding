@@ -1,0 +1,106 @@
+--- after
++++ before
+@@ -39,7 +39,6 @@
+ FUNCTION_SELECTORS = None
+ EXPECTED_FUNCTION_CASE_COUNTS = None
+ REQUIRED_CANONICAL_CONFTESTS = None
+-PYTEST_INIFILE = None
+ SELECTED_TEST_REWRITE_POLICY = None
+ ROOT_RUNTIME_SELECTION = None
+ GIT_CANDIDATE_PROVENANCE = None
+@@ -55,7 +54,7 @@
+ if any(value is None for value in (
+     ROOT, ADDITIONAL_A_ROOT, EXPECTED_MODULES, MAINTAINED_OWNER_NAMES,
+     SELECTED_TEST_MODULES, FUNCTION_SELECTORS, EXPECTED_FUNCTION_CASE_COUNTS,
+-    REQUIRED_CANONICAL_CONFTESTS, PYTEST_INIFILE, SELECTED_TEST_REWRITE_POLICY,
++    REQUIRED_CANONICAL_CONFTESTS, SELECTED_TEST_REWRITE_POLICY,
+     ROOT_RUNTIME_SELECTION, GIT_CANDIDATE_PROVENANCE, ADDITIONAL_A_PROVENANCE,
+     BINDING_MANIFEST_REFERENCE, SOURCE_READ_BINDING_REFERENCE,
+     ADMITTED_IO_PLAN_REFERENCE, EFFECT_DECISION_REFERENCE,
+@@ -93,16 +92,10 @@
+     ("function_selectors", FUNCTION_SELECTORS),
+     ("expected_function_case_counts", EXPECTED_FUNCTION_CASE_COUNTS),
+     ("required_canonical_conftests", REQUIRED_CANONICAL_CONFTESTS),
+-    ("pytest_inifile", PYTEST_INIFILE),
+     ("selected_test_rewrite_policy", SELECTED_TEST_REWRITE_POLICY),
+ ):
+     if request[key] != expected:
+         raise RuntimeError("closed Root binding differs: " + key)
+-
+-pytest_inifile = Path(request["pytest_inifile"])
+-if (not pytest_inifile.is_absolute() or pytest_inifile.resolve(strict=True) != pytest_inifile
+-        or not pytest_inifile.is_relative_to(root)):
+-    raise RuntimeError("exact selected real D pytest configuration required")
+ 
+ report = {
+     "schema": "published-D-phase2-bridge27-binding/v1",
+@@ -120,7 +113,6 @@
+             "binding_manifest_reference", "source_read_binding_reference",
+             "admitted_io_plan_reference", "effect_decision_reference"):
+     report[key] = request[key]
+-report["pytest_inifile"] = str(pytest_inifile)
+ 
+ modules = request["modules"]
+ maintained_owner_names = request["maintained_owner_names"]
+@@ -232,24 +224,6 @@
+         raise RuntimeError("bound D module metadata differs: " + name)
+     return dict(name=name, path=path, bytes=observed["bytes"], sha256=observed["sha256"],
+                 scope=row["scope"], full9=observed["full9"])
+-
+-configuration_paths = [str(pytest_inifile)] + list(request["required_canonical_conftests"])
+-if (not request["required_canonical_conftests"] or len(configuration_paths) != len(set(configuration_paths))):
+-    raise RuntimeError("unique explicit normal ini/conftest closure required")
+-def audit_configuration():
+-    result = []
+-    for value in configuration_paths:
+-        path = Path(value)
+-        if (not path.is_absolute() or path.resolve(strict=True) != path
+-                or not (path.is_relative_to(root) or path.is_relative_to(accelerate))):
+-            raise RuntimeError("configuration path is outside bound D/additional A READ roots")
+-        row = epoch[str(path)]
+-        exact(str(path), row["bytes"], row["sha256"])
+-        observed = dict(authenticated[str(path)])
+-        if observed["full9"] != row["full9"]:
+-            raise RuntimeError("normal ini/conftest Source epoch metadata differs")
+-        result.append(observed)
+-    return result
+ 
+ loaded = {}
+ def audit_modules():
+@@ -430,10 +404,9 @@
+         if type(required) is not list or not required or set(required) != set(actual_conftests):
+             raise pytest.UsageError("normal D conftest closure was not loaded")
+         report["actual_inifile"] = str(session.config.inipath)
+-        if report["actual_inifile"] != str(pytest_inifile):
++        if report["actual_inifile"] != str(root / "pytest.ini"):
+             raise pytest.UsageError("normal D pytest.ini differs")
+         report["actual_normal_config_confcutdir"] = session.config.getoption("confcutdir", default=None)
+-        report["collection_configuration_bindings"] = audit_configuration()
+         report["actual_maintained_owner_origins"] = {}
+         for name in maintained_owner_names:
+             module = loaded[name]
+@@ -520,7 +493,6 @@
+ sys.path.insert(0, str(accelerate))
+ sys.path.insert(0, str(root))
+ report["initial_body_bindings"] = [body_identity(name) for name in modules]
+-report["initial_configuration_bindings"] = audit_configuration()
+ importlib.machinery.SourceFileLoader.get_code = normal_guarded_source_code
+ try:
+     for name in maintained_owner_names:
+@@ -535,7 +507,7 @@
+     }
+     rewrite_observer = SelectedTestRewriteObserver(pytest_rewrite, selected_test_specs, exact, authenticated).install()
+     argv = [
+-        "-c", str(pytest_inifile), "--rootdir", str(root),
++        "-c", str(root / "pytest.ini"), "--rootdir", str(root),
+         "--import-mode=importlib", "--showlocals", "-o", "cache_dir=$TMPDIR/pytest-cache",
+         "-o", "tmp_path_retention_policy=all", "--basetemp", str(workspace / "pytest"),
+     ] + [str(root / selector) for selector in selected]
+@@ -547,7 +519,6 @@
+     code = pytest.main(argv, plugins=[BindingEvidence()])
+     report["pytest_exit_code"] = int(code)
+     report["closing_module_bindings"] = audit_modules()
+-    report["closing_configuration_bindings"] = audit_configuration()
+ finally:
+     report["normal_pytest_rewrite_observer_restored"] = True if rewrite_observer is None else rewrite_observer.restore()
+     importlib.machinery.SourceFileLoader.get_code = original_source_loader

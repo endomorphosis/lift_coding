@@ -1,0 +1,109 @@
+"""Private four-document specialization of the existing Source42 CAS stage helper. No execution authority."""
+
+import hashlib, json, os, stat, uuid
+
+from pathlib import Path
+
+KEYS=('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+
+f9=lambda value:{key:str(getattr(value,key)) for key in KEYS}
+
+H=lambda raw:hashlib.sha256(raw).hexdigest()
+
+READ_CALLBACK = None
+
+GUARD_CALLBACK = None
+
+stable_body=lambda path,limit:READ_CALLBACK(path,limit,'private_beforeimage_readback')
+
+verify_guard_evidence_before_effects=lambda:GUARD_CALLBACK()
+
+def seal(path,obj):
+ raw=(json.dumps(obj,sort_keys=True,indent=2)+'\n').encode();return raw_blob(path,raw)
+
+def raw_blob(path,raw):
+ assert type(raw)is bytes
+ fd=os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400)
+ try:
+  with os.fdopen(fd,'wb',closefd=False)as handle:handle.write(raw);handle.flush();os.fsync(fd)
+ finally:os.close(fd)
+ actual,stamp=stable_body(path,len(raw));assert actual==raw and int(stamp['st_mode'])&0o777==0o400
+ return dict(path=str(path),bytes=len(actual),sha256=H(actual),full9=stamp)
+
+def parent_identity(path):
+ assert path.resolve(strict=True)==path and all(not p.is_symlink()for p in(path,*path.parents))
+ info=path.lstat();assert stat.S_ISDIR(info.st_mode)
+ return {k:str(getattr(info,k))for k in('st_dev','st_ino','st_mode','st_uid','st_gid')}
+
+def stage_and_replace_existing(selected,expected9,archive_dir,report,read_fn):
+ # Existing Source42 writer; register each O_EXCL-created stage before any subsequent I/O.
+ stages=[];report['staged']=stages;report['installed']=[];archives=[]
+ try:
+  for row in selected:
+   target=Path(row['path']);old=expected9[str(target)]
+   assert f9(target.lstat())==old and int(old['st_mode'])&0o777 in (0o644,0o664) and old['st_uid']==old['st_gid']=='1000'and old['st_nlink']=='1'
+   archives.append(dict(canonical_path=str(target),actual_before=raw_blob(archive_dir/(str(len(archives))+'-actual-before.DATA'),row['actual_before_body']),actual_before_full9=old))
+  report['actual_beforeimage_blob_manifest']=seal(archive_dir/'raw-beforeimage-blob-manifest.json',dict(schema='actual-four-existing-document-beforeimage-blob-manifest/v1',blobs=archives))
+  for row in selected:
+   target=Path(row['path']);old=expected9[str(target)];parent=parent_identity(target.parent);assert f9(target.lstat())==old
+   tmp=target.with_name('.'+target.name+'.reviewed-documents4-'+uuid.uuid4().hex)
+   stage=dict(target=str(target),temporary_path=str(tmp),parent_identity=parent,creation_returned=False,birth_full9=None,last_owned_FD_full9=None,fully_staged=False,phase='before-open')
+   fd=os.open(tmp,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,int(old['st_mode'])&0o777)
+   stage['creation_returned']=True;stage['opened_FD']=fd;stage['phase']='opened-identity-pending';stages.append(stage)
+   try:
+    stage['birth_full9']=f9(os.fstat(fd));assert stage['birth_full9']['st_nlink']=='1'
+    stage['phase']='owned-before-write'
+    with os.fdopen(fd,'wb',closefd=False)as handle:
+     os.fchmod(fd,int(old['st_mode'])&0o777);assert str(os.fstat(fd).st_uid)==old['st_uid']and str(os.fstat(fd).st_gid)==old['st_gid'];stage['phase']='writing';handle.write(row['body']);handle.flush();stage['phase']='fsync';os.fsync(fd)
+    stage['phase']='written-fsynced'
+   finally:
+    try:stage['last_owned_FD_full9']=f9(os.fstat(fd))
+    except BaseException as identity_error:stage['FD_identity_reconciliation_error']=dict(type=type(identity_error).__name__,message=str(identity_error))
+    try:os.close(fd);stage['FD_closed']=True
+    except BaseException as close_error:stage['FD_close_error']=dict(type=type(close_error).__name__,message=str(close_error))
+   assert stage.get('FD_closed')is True and 'FD_close_error'not in stage,'stage FD closure is uncertain; no readback/readiness/replacement'
+   raw,new9=read_fn(tmp,len(row['body']),'private_staged_readback');assert raw==row['body']and parent_identity(target.parent)==parent
+   assert new9==stage['last_owned_FD_full9']and all(new9[k]==stage['birth_full9'][k]for k in('st_dev','st_ino','st_uid','st_gid','st_nlink'))
+   stage['stage_full9']=new9;stage['fully_staged']=True;stage['phase']='fully-staged'
+  assert len(stages)==3 and all(stage['fully_staged']is True and stage.get('FD_closed')is True and 'FD_close_error'not in stage for stage in stages)
+  report['all3_posts_staged_fsynced_and_readback_before_first_effect']=True
+  for row,stage in zip(selected,stages,strict=True):
+   target=Path(row['path']);tmp=Path(stage['temporary_path']);old=expected9[str(target)]
+   verify_guard_evidence_before_effects()
+   assert stage['fully_staged']is True and stage.get('FD_closed')is True and 'FD_close_error'not in stage
+   assert parent_identity(target.parent)==stage['parent_identity']and f9(target.lstat())==old and f9(tmp.lstat())==stage['stage_full9']
+   os.replace(tmp,target);stage['canonical_replacement_returned']=True;stage['phase']='canonical-replacement-returned'
+   parentfd=os.open(target.parent,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+   try:os.fsync(parentfd)
+   finally:os.close(parentfd)
+   raw,new9=read_fn(target,len(row['body']),'canonical_post');assert raw==row['body']and all(new9[k]==old[k]for k in('st_mode','st_uid','st_gid','st_nlink'))
+   report['installed'].append(dict(path=str(target),bytes=len(raw),sha256=H(raw),full9=new9))
+ finally:
+  report['remaining_own_stages']=[];report['stage_reconciliation']=[]
+  report['uncertain_stage_FDs']=[dict(temporary_path=stage['temporary_path'],opened_FD=stage.get('opened_FD'),birth_full9=stage['birth_full9'],last_owned_FD_full9=stage['last_owned_FD_full9'],close_error=stage.get('FD_close_error'))for stage in stages if stage.get('FD_closed')is not True or 'FD_close_error'in stage]
+  for stage in stages:
+   temp=Path(stage['temporary_path']);result=dict(temporary_path=str(temp),creation_returned=stage['creation_returned'],fully_staged=stage['fully_staged'],phase=stage['phase'])
+   try:observed=f9(temp.lstat())
+   except FileNotFoundError:
+    result['status']='path-absent'if stage.get('FD_closed')is True and 'FD_close_error'not in stage else'path-absent-FD-closure-uncertain'
+    if result['status']!='path-absent':report['remaining_own_stages'].append(dict(stage,reconciliation=result))
+    report['stage_reconciliation'].append(result);continue
+   except BaseException as identity_error:
+    result.update(status='identity-unobservable-retained',error=dict(type=type(identity_error).__name__,message=str(identity_error)));report['stage_reconciliation'].append(result);report['remaining_own_stages'].append(dict(stage,reconciliation=result));continue
+   if stage.get('FD_closed')is not True or 'FD_close_error'in stage:
+    result.update(status='uncertain-FD-closure-retained-not-unlinked',observed_path_full9=observed);report['stage_reconciliation'].append(result);report['remaining_own_stages'].append(dict(stage,reconciliation=result));continue
+   birth=stage['birth_full9'];last=stage['last_owned_FD_full9']
+   known=type(birth)is dict and type(last)is dict and observed==last and birth['st_nlink']==last['st_nlink']=='1'and all(birth[k]==last[k]for k in('st_dev','st_ino','st_uid','st_gid'))
+   if not known:
+    result.update(status='unresolved-identity-retained-not-unlinked',observed_path_full9=observed);report['remaining_own_stages'].append(dict(stage,reconciliation=result))
+   else:
+    try:
+     # Recheck exact path identity immediately before removing only this created stage.
+     assert f9(temp.lstat())==last;temp.unlink();parentfd=os.open(temp.parent,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+     try:os.fsync(parentfd)
+     finally:os.close(parentfd)
+     result['status']='known-owned-stage-removed'
+    except BaseException as cleanup_error:
+     result.update(status='cleanup-error-retained-or-ambiguous',error=dict(type=type(cleanup_error).__name__,message=str(cleanup_error)));report['remaining_own_stages'].append(dict(stage,reconciliation=result))
+   report['stage_reconciliation'].append(result)
+  report['automatic_rollback_attempted']=False

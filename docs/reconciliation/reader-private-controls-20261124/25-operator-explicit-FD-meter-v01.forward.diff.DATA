@@ -1,0 +1,184 @@
+--- /tmp/Reader-D27-known514-bounded-ordinary-preparation-v03/operator-D27-known514-existing-owner-runtime-clock-NULL-v01.py.DATA
++++ /tmp/Reader-D27-Source-accounting-and-meter-repair-private-v01/operator-known514-explicit-FD-meter-INERT-v01.py.DATA
+@@ -6,6 +6,8 @@
+ import ast,base64,contextlib,dataclasses,hashlib,importlib,json,os,shutil,stat,subprocess,sys,time,traceback,types,zlib
+ import xml.etree.ElementTree as ET
+ from pathlib import Path
++SOURCE_IO_ALLOCATION = None
++SOURCE_IO_INITIAL_KNOWN_PRELAUNCH = None
+ ROOT_SELECTION = None
+ ROOT_RUNTIME_SELECTION = None
+ SELECTED_TEST_REWRITE_POLICY = {'cache_policy': 'bypass-read-only-for-selected-owning-test', 'required_compile_and_execution_witness': True, 'rewrite_policy': 'normal-pytest-assertion-rewrite', 'schema': 'selected-test-normal-pytest-source-AST-code-observation/v1', 'selected_test_binding_names': ['tests.unit.logic.autoformal.test_corpus_release_cli'], 'unobserved_or_cached_only_route': 'REFUSE'}
+@@ -37,7 +39,7 @@
+ MAINTAINED_OWNER_NAMES = ['ipfs_datasets_py.logic.autoformal.legal_corpus_definition_use_native_v2', 'ipfs_datasets_py.logic.autoformal.legal_corpus_definition_use_lake_v2', 'ipfs_datasets_py.logic.autoformal.legal_corpus_shared_lake', 'ipfs_datasets_py.logic.autoformal.corpus_contracts', 'ipfs_datasets_py.logic.autoformal.corpus_norm_definition_adapter', 'ipfs_datasets_py.logic.autoformal.legal_graph_dependencies', 'ipfs_datasets_py.logic.autoformal.legal_source_span_entity_join_v1', 'ipfs_datasets_py.logic.autoformal.legal_paired_manifest_inventory_v1', 'ipfs_datasets_py.logic.autoformal.legal_norm_scope_correspondence_v1', 'ipfs_datasets_py.logic.autoformal.legal_norm_content_adjudication_v1', 'ipfs_datasets_py.logic.autoformal.legal_source_package_intake_v1', 'ipfs_datasets_py.logic.autoformal.uscode_ingest', 'ipfs_datasets_py.logic.autoformal.legal_entity_index_intake', 'ipfs_datasets_py.logic.autoformal.constitution_inventory', 'ipfs_datasets_py.logic.autoformal.legal_parent_text_views', 'ipfs_datasets_py.logic.autoformal.meta_ontology', 'ipfs_datasets_py.logic.autoformal.corpus_graph', 'ipfs_datasets_py.processors.legal_data.uscode_hf_release', 'ipfs_datasets_py.processors.legal_data.uscode_release_schema', 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.uscode_dataset', 'ipfs_datasets_py.utils.cid_utils', 'ipfs_datasets_py.logic.autoformal.legal_corpus_lake', 'ipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1']
+ SELECTION = {'expected_function_case_counts': {'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_original_parent_v3_context_cannot_replace_a_missing_handle': 1, 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_original_parent_v3_context_refuses_late_owner_callable_substitution_before_claims': 3, 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_original_parent_v3_entry_refuses_preexisting_helper_substitution': 12, 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_original_parent_v3_omitted_and_explicit_none_keep_retained_default_exact': 1, 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_original_parent_v3_rejects_unissued_before_wire_or_physical_replay': 5, 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_original_parent_v3_serialized_claims_cannot_choose_the_authenticated_path': 4, 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_prepare_original_parent_v3_same_physical_public_inputs': 1}, 'function_count': 7, 'function_selectors': ['tests/unit/logic/autoformal/test_corpus_release_cli.py::test_original_parent_v3_omitted_and_explicit_none_keep_retained_default_exact', 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_original_parent_v3_rejects_unissued_before_wire_or_physical_replay', 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_original_parent_v3_serialized_claims_cannot_choose_the_authenticated_path', 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_original_parent_v3_context_refuses_late_owner_callable_substitution_before_claims', 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_original_parent_v3_context_cannot_replace_a_missing_handle', 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_original_parent_v3_entry_refuses_preexisting_helper_substitution', 'tests/unit/logic/autoformal/test_corpus_release_cli.py::test_prepare_original_parent_v3_same_physical_public_inputs'], 'literal_expected_cases': 27, 'owning_files': ['tests/unit/logic/autoformal/test_corpus_release_cli.py']}
+ EXPECTED_BRIDGE27_CASE_VECTOR = (1,5,4,3,1,12,1)
+-if any(value is None for value in (ROOT_SELECTION,ROOT_RUNTIME_SELECTION,SELECTED_TEST_REWRITE_POLICY,FINAL_OUTPUT_PATH,FINAL_D_ROOT,FINAL_D_HEAD,FINAL_D_TREE,FINAL_A_ROOT,FINAL_A_HEAD,FINAL_A_TREE,D_READ_BINDING_REFERENCE,D_READ_BINDING_ABI,FINAL_BINDING_MANIFEST_REFERENCE,FINAL_BINDING_MANIFEST,FINAL_MODULE_BINDINGS,FINAL_D_PROVENANCE,FINAL_A_PROVENANCE,FINAL_SOURCE_PROJECTS,FINAL_SDK_BINDINGS,FINAL_RESOURCE_STATE_PATH,FINAL_EXPECTED_RESOURCE_CONFIG,FINAL_EXPECTED_CAPACITY,FINAL_FIXTURE_CLOSURE_REFERENCE,FINAL_EFFECT_DECISION_REFERENCE,FINAL_EFFECT_DECISION,FINAL_ADMITTED_IO_PLAN_REFERENCE,FINAL_ADDITIONAL_IMPORT_ROOTS,SELECTED_TEST_MODULES,MAINTAINED_OWNER_NAMES,SELECTION,)):
++if any(value is None for value in (SOURCE_IO_ALLOCATION,SOURCE_IO_INITIAL_KNOWN_PRELAUNCH,ROOT_SELECTION,ROOT_RUNTIME_SELECTION,SELECTED_TEST_REWRITE_POLICY,FINAL_OUTPUT_PATH,FINAL_D_ROOT,FINAL_D_HEAD,FINAL_D_TREE,FINAL_A_ROOT,FINAL_A_HEAD,FINAL_A_TREE,D_READ_BINDING_REFERENCE,D_READ_BINDING_ABI,FINAL_BINDING_MANIFEST_REFERENCE,FINAL_BINDING_MANIFEST,FINAL_MODULE_BINDINGS,FINAL_D_PROVENANCE,FINAL_A_PROVENANCE,FINAL_SOURCE_PROJECTS,FINAL_SDK_BINDINGS,FINAL_RESOURCE_STATE_PATH,FINAL_EXPECTED_RESOURCE_CONFIG,FINAL_EXPECTED_CAPACITY,FINAL_FIXTURE_CLOSURE_REFERENCE,FINAL_EFFECT_DECISION_REFERENCE,FINAL_EFFECT_DECISION,FINAL_ADMITTED_IO_PLAN_REFERENCE,FINAL_ADDITIONAL_IMPORT_ROOTS,SELECTED_TEST_MODULES,MAINTAINED_OWNER_NAMES,SELECTION,)):
+     raise RuntimeError('INERT D27: current D/A Git READ bindings, fixture-effect decision, IO and Root authority remain NULL')
+ PREP=Path('/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01')
+ ROOT=Path(FINAL_D_ROOT); ADDITIONAL_A_ROOT=Path(FINAL_A_ROOT); RUN_OUTPUT=Path(FINAL_OUTPUT_PATH)
+@@ -48,16 +50,101 @@
+ fields=('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+ f9=lambda info:{key:str(getattr(info,key))for key in fields}
+ 
++# Inlined in the existing normal operator/bootstrap; no controller, file queue, or global open proxy.
++SOURCE_IO_SCOPE = 'declared-direct-Source-auth-and-private-control-reads/v1'
++SOURCE_IO_OUTSIDE_BOUNDARY = ['interpreter/bootstrap-selfloading', 'stdlib/thirdparty/generalproject/library-IO-not-through-named-readers', 'SDK-internal-IO-not-through-named-readers', 'complete-kernel/runtime-IO']
++def source_io_start(allocation, authority, role, initial=None):
++    if not isinstance(allocation,dict) or set(allocation)!={'schema','runtime_authority','operation_total_bytes','role_limits','ledger_before','scope'}:
++        raise RuntimeError('unbound or malformed closed Source IO allocation')
++    if allocation['schema']!='Root-selected-declared-direct-Source-IO-allocation/v1' or allocation['scope']!=SOURCE_IO_SCOPE or not isinstance(authority,dict) or allocation['runtime_authority']!=authority:
++        raise RuntimeError('Source IO closed authority/scope differs')
++    limits=allocation['role_limits'];total=allocation['operation_total_bytes'];before=allocation['ledger_before']
++    if not isinstance(limits,dict) or set(limits)!={'parent','collect','run'} or any(type(v)is not int or v<0 for v in limits.values()) or type(total)is not int or total<=0 or sum(limits.values())>total:
++        raise RuntimeError('Source IO closed role limits differ')
++    if not isinstance(before,dict) or any(type(before.get(k))is not int or before[k]<0 for k in ('captures','used','internal_used','global_cap','internal_cap')):
++        raise RuntimeError('Source IO ledger shape differs')
++    if before['used']+total>before['global_cap'] or before['internal_used']+total>before['internal_cap']:
++        raise RuntimeError('Source IO total allocation unavailable before admission')
++    if role not in ('parent','collect','run','bootstrap'):
++        raise RuntimeError('Source IO role differs')
++    limit=min(limits['collect'],limits['run'])if role=='bootstrap'else limits[role]
++    initial={'bytes':0,'captures':0} if initial is None else initial
++    if set(initial)!={'bytes','captures'} or any(type(v)is not int or v<0 for v in initial.values()) or initial['bytes']>limit:
++        raise RuntimeError('Source IO known prelaunch charge differs')
++    return {'schema':'actual-declared-direct-Source-IO-meter/v1','scope':SOURCE_IO_SCOPE,'runtime_authority':authority,'allocation':allocation,'role':role,'limit_bytes':limit,'initial_known_IO':dict(initial),'bytes':initial['bytes'],'captures':initial['captures'],'read_syscalls':0,'inputs':[],'violations':[],'declared_direct_IO_budget_accepted':False,'outside_boundary':SOURCE_IO_OUTSIDE_BOUNDARY,'outside_boundary_actual_bytes':None,'complete_kernel_or_runtime_IO_measured':False,'finished':False}
++def source_io_bind_role(state, role, allocation, authority):
++    if state['finished'] or state['role']!='bootstrap' or role not in ('collect','run') or allocation!=state['allocation'] or authority!=state['runtime_authority']:
++        raise RuntimeError('Source IO child role/authority differs')
++    limit=allocation['role_limits'][role]
++    if state['bytes']>limit:
++        raise RuntimeError('Source IO request read already exceeds role allocation')
++    state['role']=role;state['limit_bytes']=limit
++    return state
++
++def source_io_admit(state,n):
++    if type(n)is not int or n<0 or state['finished'] or state['bytes']+n>state['limit_bytes']:
++        state['violations'].append({'kind':'Source-IO-allocation-refusal','requested_bound':n,'actual_bytes_before':state['bytes']})
++        raise RuntimeError('declared direct Source IO allocation insufficient before read')
++
++def source_io_read_fd(state, fd, maximum_bytes, path, kind):
++    if type(maximum_bytes)is not int or maximum_bytes<0:
++        raise RuntimeError('Source IO read bound differs')
++    source_io_admit(state,maximum_bytes+1)
++    row={'path':str(path),'kind':str(kind),'actual_bytes':0,'read_syscalls':0};state['inputs'].append(row);state['captures']+=1
++    parts=[];total=0
++    try:
++        while total<=maximum_bytes:
++            state['read_syscalls']+=1;row['read_syscalls']+=1
++            piece=os.read(fd,min(65536,maximum_bytes+1-total))
++            # Attempted calls, then actual returned bytes, are retained before later verification.
++            state['bytes']+=len(piece);row['actual_bytes']+=len(piece);total+=len(piece)
++            if not piece:break
++            parts.append(piece)
++        if total>maximum_bytes:
++            state['violations'].append({'kind':'Source-IO-content-length-refusal','path':str(path),'actual_bytes':total})
++            raise RuntimeError('Source IO file grew beyond selected bound')
++    except BaseException as error:
++        state['violations'].append({'kind':'Source-IO-read-error','path':str(path),'type':type(error).__name__,'actual_bytes':row['actual_bytes']})
++        raise
++    return b''.join(parts)
++
++def source_io_finish(state):
++    state['finished']=True
++    state['declared_direct_IO_budget_accepted']=not state['violations'] and state['bytes']<=state['limit_bytes']
++    return state
++
++def source_io_validate_child(child, allocation, authority, role):
++    if role not in ('collect','run'):
++        raise RuntimeError('child Source IO role differs')
++    if not isinstance(child,dict) or child.get('schema')!='actual-declared-direct-Source-IO-meter/v1' or child.get('scope')!=SOURCE_IO_SCOPE or child.get('allocation')!=allocation or child.get('runtime_authority')!=authority or child.get('role')!=role:
++        raise RuntimeError('missing or mismatched declared direct child Source IO meter')
++    limit=child.get('limit_bytes')
++    if type(limit)is not int or limit<0 or limit!=allocation['role_limits'][role]:
++        raise RuntimeError('child direct Source IO limit type or value differs')
++    violations=child.get('violations')
++    if child.get('finished')is not True or child.get('declared_direct_IO_budget_accepted')is not True or type(violations)is not list or violations!=[] or type(child.get('bytes'))is not int or type(child.get('captures'))is not int or child['bytes']<0 or child['captures']<0 or child['bytes']>limit:
++        raise RuntimeError('child declared direct Source IO budget not accepted')
++    initial=child.get('initial_known_IO');inputs=child.get('inputs')
++    if type(initial)is not dict or set(initial)!={'bytes','captures'} or any(type(initial[k])is not int or initial[k]!=0 for k in initial):
++        raise RuntimeError('child initial direct Source IO must be exact integer zero')
++    if type(inputs)is not list or any(type(row)is not dict or set(row)!={'path','kind','actual_bytes','read_syscalls'} or type(row['path'])is not str or type(row['kind'])is not str or type(row['actual_bytes'])is not int or row['actual_bytes']<0 or type(row['read_syscalls'])is not int or row['read_syscalls']<1 for row in inputs):
++        raise RuntimeError('child direct Source IO event shape or read calls differ')
++    if child['captures']!=len(inputs) or child['bytes']!=sum(row['actual_bytes']for row in inputs) or type(child.get('read_syscalls'))is not int or child['read_syscalls']!=sum(row['read_syscalls']for row in inputs):
++        raise RuntimeError('child direct Source IO event totals differ')
++    if child.get('complete_kernel_or_runtime_IO_measured')is not False or 'outside_boundary_actual_bytes'not in child or child['outside_boundary_actual_bytes']is not None or child.get('outside_boundary')!=SOURCE_IO_OUTSIDE_BOUNDARY:
++        raise RuntimeError('child Source IO claim exceeds declared direct boundary')
++    return {'bytes':child['bytes'],'captures':child['captures'],'read_syscalls':child['read_syscalls'],'scope':SOURCE_IO_SCOPE,'complete_kernel_or_runtime_IO_measured':False}
++
+ def read_private(path,size,digest):
+  path=Path(path);before=path.lstat();assert stat.S_ISREG(before.st_mode)and before.st_nlink==1
++ source_io_admit(SOURCE_IO_STATE,size+1)
+  fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW)
+  try:
+-  assert f9(before)==f9(os.fstat(fd));raw=bytearray()
+-  while piece:=os.read(fd,1024**2):
+-   raw.extend(piece);assert len(raw)<=size
++  assert f9(before)==f9(os.fstat(fd))
++  raw=source_io_read_fd(SOURCE_IO_STATE,fd,size,path,'named-private-control')
+   assert f9(before)==f9(os.fstat(fd))==f9(path.lstat())
+  finally:os.close(fd)
+- raw=bytes(raw);assert len(raw)==size and H(raw)==digest,str(path)
++ assert len(raw)==size and H(raw)==digest,str(path)
+  return raw
+ 
+ def validate_runtime_authority(authority, expected_authority, now_utc_ns):
+@@ -81,6 +168,7 @@
+ 
+ validate_runtime_authority(ROOT_RUNTIME_SELECTION,ROOT_RUNTIME_SELECTION,time.time_ns())
+ assert ROOT_SELECTION==ROOT_RUNTIME_SELECTION['root_selection']
++SOURCE_IO_STATE=source_io_start(SOURCE_IO_ALLOCATION,ROOT_RUNTIME_SELECTION,'parent',SOURCE_IO_INITIAL_KNOWN_PRELAUNCH)
+ assert ROOT.is_absolute() and ADDITIONAL_A_ROOT.is_absolute() and ROOT!=ADDITIONAL_A_ROOT
+ assert all(type(v)is str and len(v)==40 and all(c in '0123456789abcdef'for c in v)for v in (FINAL_D_HEAD,FINAL_D_TREE,FINAL_A_HEAD,FINAL_A_TREE))
+ BOOTSTRAP_REFERENCE = {'path': '/tmp/Reader-D27-known514-bounded-ordinary-preparation-v03/bootstrap-D27-known514-authsticky-runtime-clock-NULL-v01.py.DATA', 'bytes': 61459, 'sha256': '6f1ddbd9176e250d7bc55430581147b15b98c3203e4a6bed6dbfca0d14070777'}
+@@ -208,10 +296,11 @@
+     for attempt in range(5):
+         before = STATE.lstat()
+         assert stat.S_ISREG(before.st_mode) and before.st_size < 65536
++        source_io_admit(SOURCE_IO_STATE,65537)
+         fd = os.open(STATE, os.O_RDONLY | os.O_NOFOLLOW)
+         try:
+             opened = os.fstat(fd)
+-            raw = os.read(fd, 65537)
++            raw = source_io_read_fd(SOURCE_IO_STATE,fd,65536,STATE,'named-resource-control')
+             end = os.fstat(fd)
+         finally:
+             os.close(fd)
+@@ -404,6 +493,11 @@
+     report['phase_order'].append(name)
+     validate_runtime_authority(ROOT_RUNTIME_SELECTION,ROOT_RUNTIME_SELECTION,time.time_ns())
+     request = continuation_request(phase, operation, roster, group=group)
++    if not dataclasses.is_dataclass(request):raise RuntimeError('existing canonical SDK request dataclass unavailable')
++    _payload=dict(request.input_files);_data=json.loads(_payload['request.json'])
++    _data['declared_direct_Source_IO_allocation']=SOURCE_IO_ALLOCATION
++    _payload['request.json']=json.dumps(_data,sort_keys=True,separators=(',',':')).encode()
++    request=dataclasses.replace(request,input_files=_payload)
+     expected_count=None if operation=='collect'else len(roster)
+     entry['request'] = {'argv': list(request.argv), 'limits': dataclasses.asdict(request.limits),
+         'output_paths': list(request.output_paths), 'input_file_manifest': [{'path': key, 'bytes': len(value), 'sha256': H(value)} for key, value in request.input_files.items()]}
+@@ -415,6 +509,14 @@
+         # Raw SDK results are already durable; classify actual resource failures before requiring completion outputs.
+         entry['actual_SDK_resource_flags']={key:result.to_dict().get(key) for key in ('returncode','timed_out','cancelled','unavailable','output_truncated','workspace_limit_exceeded','resource_exhausted','workspace_cleaned','error','native_lifecycle')}
+         genuine(result)
++        try:
++            _meter_payload=json.loads(result.output_files['binding.json'])
++            _child_meter=_meter_payload['declared_direct_Source_IO']
++            entry['declared_direct_Source_IO']=source_io_validate_child(_child_meter,SOURCE_IO_ALLOCATION,ROOT_RUNTIME_SELECTION,operation)
++        except BaseException as meter_error:
++            entry['declared_direct_Source_IO_error']={'type':type(meter_error).__name__,'message':str(meter_error)}
++            report['conservative_full_selected_allocation_debit_required']=True
++            if result.returncode==0:raise
+         if result.returncode != 0:
+             entry['primary_actual_phase_failure'] = {'actual_tool_returncode': result.returncode, 'success_binding_checks_skipped': True, 'partial_binding_retained_in_raw_outputs': 'binding.json' in result.output_files, 'raw_stdout_stderr_and_result_already_durable': True}
+             raise RuntimeError('Actual normal pytest phase exited nonzero before success-binding validation: ' + name + ' returncode=' + str(result.returncode))
+@@ -542,6 +644,9 @@
+     raise
+ finally:
+     report['Source_closed'] = all(row['exit_returned'] for row in report.get('actual_Source_context_closure', []))
++    report['declared_direct_Source_IO_parent']=source_io_finish(SOURCE_IO_STATE)
++    report['declared_direct_IO_budget_accepted']=report['declared_direct_Source_IO_parent']['declared_direct_IO_budget_accepted'] and not report.get('conservative_full_selected_allocation_debit_required',False)
++    report['outside_declared_direct_IO_actual_bytes']=None
+     report['qualification_complete'] = report['software_sequence_accepted'] and report['Source_closed'] and report['resource_cleanup_confirmed'] and not report['errors']
+     ref = retain_json('complete-published-D-phase2-bridge27-existing-owner-report.json', report)
+     shutil.rmtree(PARENT_HOME)

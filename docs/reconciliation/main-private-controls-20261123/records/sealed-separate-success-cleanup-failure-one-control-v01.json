@@ -1,0 +1,69 @@
+{
+  "schema": "Main-separate-success-path-cleanup-failure-one-control/v1",
+  "status": "ACTUAL_PRIVATE_RED_REPRODUCED_NO_PRODUCT_CHANGE",
+  "test_fragment": {
+    "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/test_parent_success_cleanup_failure_one_control_v01.py.DATA",
+    "bytes": 10131,
+    "sha256": "713203472d9422438dcbad4924ea6682ee6f52a5076307d705138a7be0c9a164",
+    "digest_origin": "Computed by assigned author from exact saved fragment; Main did not duplicate body read"
+  },
+  "actual_result": {
+    "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/actual-parent-success-cleanup-failure-RED1-v01.json",
+    "bytes": 5333,
+    "sha256": "f0803dad3f8820fce648fed94f97cd23960153a6113ed4e03656e269f95c3c57",
+    "full9": {
+      "st_dev": "66306",
+      "st_ino": "50877691",
+      "st_mode": "33024",
+      "st_nlink": "1",
+      "st_uid": "1000",
+      "st_gid": "1000",
+      "st_size": "5333",
+      "st_mtime_ns": "1795457747055350583",
+      "st_ctime_ns": "1795457747055350583"
+    },
+    "FD_closed_before_JSON": true
+  },
+  "parent_operator_sha256": "087843f1f120467ac86f50dadd511d59a44629cab678c8a09fad787ce88d3516",
+  "actual": {
+    "tests": 1,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0,
+    "returncode": 1
+  },
+  "defect": {
+    "no_active_primary": true,
+    "caught_exact_cleanup_OSError": true,
+    "in_memory_qualification_complete": true,
+    "saved_precleanup_qualification_values": [
+      true
+    ],
+    "meaning": "An otherwise-successful fictional seed saved qualification_complete=True before output cleanup then failed. This is distinct from rejection-path primary-error masking."
+  },
+  "unchanged_old_three_methods": true,
+  "no_counts_pooled": "Original3, separate1, helper20 and ordinaryD27 remain separate populations.",
+  "isolation": "Actual original finalbody AST +4 unchanged pure helpers; hypothetical success/custody/meter seeds, in-memory report retention and exact fake cleanup failure. No successful actual pipeline or Source/SDK/resource execution.",
+  "AST_identity": {
+    "helper_AST_SHA256": {
+      "parent_declared_direct_IO_accepted": "6f262132a00d80c5d70902d28930a630def8a7d86b84f8f11ab293ef8eb7a07d",
+      "retain_json": "037f5409b8d0abea586a6986736d789df48cdffd2d8adb0407687cc69e338739",
+      "source_io_finish": "4e81ae81b0a52e071f03a33957e86c8ed454ab63b603c7aefd4685e5edb3ad9f",
+      "source_io_start": "98b941529b0311a943facd432d9cf314e61227ff032570bccfda9d660aa0e013"
+    },
+    "original_finalbody_AST_SHA256": "9ea566eb9e876cb21861904a36f5e1e71c6362325ff43ceb7820edf555c03ebc",
+    "original_fragment_sha256": "45115ee8c70e14e6c06980963a24a037b34c423ede78618aef0116d97a8ff95c"
+  },
+  "private_inputs": {
+    "assigned_author_reads": 23545,
+    "Main_result_authentication": 5333,
+    "new_unit_total": 28878,
+    "author_private_read_limit": 32768,
+    "previous_three_control_upper_bytes_preserved": 243546,
+    "no_Source_or_global_ledger_reset": true
+  },
+  "Root_Reader_owned_next_action": "Minimal finalizer correction must preserve original primary on rejection and leave both in-memory/durable qualification false on cleanup failure. No product/parent patch or rerun by Main.",
+  "preserved_authoring_failure": "First source packaging11532B exceeded10KiB before file creation or tests; narrowed to10131B. No product or test expectation weakened.",
+  "limits": "Single actual own stdlib control from RAM, CPU1/AS512MiB/CPU30s/wall60s.",
+  "fresh_Source_Git_SDK_Native_or_authority": false
+}

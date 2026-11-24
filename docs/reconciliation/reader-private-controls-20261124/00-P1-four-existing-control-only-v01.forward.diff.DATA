@@ -1,0 +1,67 @@
+--- /tmp/Reader-D27-package-source-closure-request-private-v01/execute-D27-same102-reviewed-boundary-INERT-v03.py.DATA
++++ /tmp/Reader-D27-package-source-closure-request-private-v01/execute-P1-four-reviewed-boundary-INERT-v01.py.DATA
+@@ -2,23 +2,23 @@
+ from pathlib import Path
+ 
+ SEL = None
+-REQ = {'path': '/tmp/Reader-D27-package-source-closure-request-private-v01/next102-reviewed-boundary-current-ledger-Source-READ-request-v03.json', 'bytes': 7158357, 'sha256': '969eb95c64f816dfa2d998b135df62722e75e8d36f639c755f7f51b6675f59b0'}
++REQ = {'path': '/tmp/Reader-D27-package-source-closure-request-private-v01/P1-four-existing-control-normalized-post110-Source-READ-request-v02.json', 'bytes': 19320, 'sha256': 'ff356df8a5800b9561a42ec1d2e917d5d1986ca574b4e9fac51945fc7c1b7e42'}
+ BASE = Path('/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01')
+ N = BASE/'Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01'
+-OUT = N/'actual-D27-same102-reviewed-boundary-Source-READ-v02'
++OUT = N/'actual-P1-current-D-four-owner-test-Source-READ-v01'
+ FIELDS = ('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+ f9 = lambda s:{k:str(getattr(s,k)) for k in FIELDS}
+ H = lambda raw:hashlib.sha256(raw).hexdigest()
+ spent = {'bytes':(SEL['bytes'] if SEL is not None else 0)+globals().get('CARRIED_OPERATOR_BYTES',0),'captures':(1 if SEL is not None else 0)+globals().get('CARRIED_OPERATOR_CAPTURES',0)}
+ report = {'schema':'actual-frozen-A-D-existing-READ-operation/v1','inputs':[], 'captures':[], 'Source_contexts':[], 'errors':[], 'Source_closed':False,'module_closed':False,'prelaunch_carried':dict(spent),'selected_reference':SEL,'request_reference':REQ}
+-before = {'captures': 85746, 'used': 5721558734, 'internal_used': 5530966860, 'global_cap': 6039797760, 'internal_cap': 5771362304}
++before = {'captures': 86655, 'global_cap': 6039797760, 'internal_cap': 5771362304, 'internal_used': 5558187780, 'used': 5748779654}
+ VERIFIED_SELECTED_SOURCE_ROWS = {}
+ ledger = dict(before)
+ source = None
+ cleanup_owned_source42_module = None
+ 
+ def admit(n):
+-    if type(n) is not int or n < 0 or spent['bytes']+n > 33554432:
++    if type(n) is not int or n < 0 or spent['bytes']+n > 2097152:
+         raise RuntimeError('selected READ envelope insufficient before read')
+     if before['used']+spent['bytes']+n > before['global_cap'] or before['internal_used']+spent['bytes']+n > before['internal_cap']:
+         raise RuntimeError('shared Source allowance insufficient before read')
+@@ -90,12 +90,12 @@
+ OUT.mkdir(mode=0o700)
+ (OUT/'raw').mkdir(mode=0o700)
+ (OUT/'matrices').mkdir(mode=0o700)
+-print(json.dumps({'event':'SELECTED_D27_SAME102_REVIEWED_BOUNDARY_READ_STARTED','pid':os.getpid(),'output_namespace':str(OUT)}),flush=True)
++print(json.dumps({'event':'SELECTED_D27_P1_FOUR_INSPECTION_READ_STARTED','pid':os.getpid(),'output_namespace':str(OUT)}),flush=True)
+ try:
+     selected=json.loads(control_read(SEL));request=json.loads(control_read(REQ))
+     assert selected['Root_selected']is True
+     request['roots']=request['frozen_roots']
+-    request['targets']=[dict(r,relative_path=str(Path(r['path']).relative_to(r['root'])),kind='D27_potential_eager_import_source')for r in request['exact_new_body_targets']]
++    request['targets']=[dict(r,relative_path=str(Path(r['path']).relative_to(r['root'])),kind='P1_current_owner_or_owningtest_source_inspection')for r in request['exact_new_body_targets']]
+     assert type(request['target_count']) is int and request['target_count'] > 0
+     assert len(request['targets']) == request['target_count']
+     assert len({row['path'] for row in request['targets']}) == request['target_count']
+@@ -228,7 +228,7 @@
+                 row={'path':t['path'],'bytes':t['bytes'],'sha256':H(back),'full9':actual9,'kind':t['kind'],'root':root,'raw_reference':rr}
+                 if 'relative_path'in t:row['relative_path']=t['relative_path']
+                 report['captures'].append(row)
+-                print(json.dumps({'event':'D27_SAME102_REVIEWED_BOUNDARY_CAPTURED','index':i,'path':t['path'],'bytes':t['bytes']}),flush=True)
++                print(json.dumps({'event':'D27_P1_FOUR_INSPECTION_CAPTURED','index':i,'path':t['path'],'bytes':t['bytes']}),flush=True)
+             report['after']={r:root_facts(r,e)for r,e in roots.items()}
+             report['AGENTS_after']=check_exact_AGENTS()
+             report['candidate_absences_after']=check_candidate_absences()
+@@ -253,8 +253,8 @@
+         # Root-selected before counters plus actual new debits, sealed to its
+         # operation receipt. No invented shared byte-ledger file or authority.
+         report['ledger_after']={k:ledger[k]for k in before}
+-    ref=js(OUT/'actual-D27-same102-reviewed-boundary-Source-READ-v02-closed-report.json',report)
+-    compact=js(OUT/'actual-D27-same102-reviewed-boundary-Source-READ-v02-small-closeout.json',{'schema':'actual-D27-next102-base-and-member-READ-small-closeout/v1','status':'PASS'if not report['errors']and report.get('snapshot_complete')else'FAILED','Source_closed':report['Source_closed'],'owned_module_closed':report['module_closed'],'errors':report['errors'],'roots_before':report.get('before'),'roots_after':report.get('after'),'AGENTS_reuse':report.get('retained_AGENTS_reuse'),'AGENTS_named_absences':len(report.get('AGENTS_after',{}).get('absent',[])),'captures':report['captures'],'actual_IO':spent,'ledger_after':report.get('ledger_after'),'full_report_reference':ref,'SDK_Native_compiler_or_project_execution':False,'cohort_process_free_or_positive_handle_qualified':False})
+-    print(json.dumps({'event':'D27_SAME102_REVIEWED_BOUNDARY_CLOSED_COMPACT','compact':compact},sort_keys=True),flush=True)
+-    print(json.dumps({'event':'D27_SAME102_REVIEWED_BOUNDARY_READ_CLOSED','report':ref,'completed':len(report['captures']),'Source_closed':report['Source_closed'],'module_closed':report['module_closed'],'ledger_after':report.get('ledger_after'),'errors':report['errors']},sort_keys=True),flush=True)
++    ref=js(OUT/'actual-P1-current-D-four-owner-test-Source-READ-v01-closed-report.json',report)
++    compact=js(OUT/'actual-P1-current-D-four-owner-test-Source-READ-v01-small-closeout.json',{'schema':'actual-P1-current-D-four-owner-test-READ-small-closeout/v1','status':'PASS'if not report['errors']and report.get('snapshot_complete')else'FAILED','Source_closed':report['Source_closed'],'owned_module_closed':report['module_closed'],'errors':report['errors'],'roots_before':report.get('before'),'roots_after':report.get('after'),'AGENTS_reuse':report.get('retained_AGENTS_reuse'),'AGENTS_named_absences':len(report.get('AGENTS_after',{}).get('absent',[])),'captures':report['captures'],'actual_IO':spent,'ledger_after':report.get('ledger_after'),'full_report_reference':ref,'SDK_Native_compiler_or_project_execution':False,'cohort_process_free_or_positive_handle_qualified':False})
++    print(json.dumps({'event':'D27_P1_FOUR_INSPECTION_CLOSED_COMPACT','compact':compact},sort_keys=True),flush=True)
++    print(json.dumps({'event':'D27_P1_FOUR_INSPECTION_READ_CLOSED','report':ref,'completed':len(report['captures']),'Source_closed':report['Source_closed'],'module_closed':report['module_closed'],'ledger_after':report.get('ledger_after'),'errors':report['errors']},sort_keys=True),flush=True)
+ if report['errors']:sys.exit(1)

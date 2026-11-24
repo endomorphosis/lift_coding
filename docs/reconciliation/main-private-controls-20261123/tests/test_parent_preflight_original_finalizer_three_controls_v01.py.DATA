@@ -1,0 +1,242 @@
+"""Three fictional stdlib controls of the retained parent preflight/finalizer AST.
+
+No module preamble, Source lease, SDK, package import or complete operator runs.
+Only named actual pure helpers and the unmodified outer try/finally are compiled.
+All filesystem boundaries used by those helpers/finalizer are explicit in-memory IO.
+"""
+import ast
+import base64
+import contextlib
+import copy
+import hashlib
+import io
+import json
+import os
+from pathlib import PurePosixPath
+import stat
+import sys
+import traceback
+import types
+import unittest
+import zlib
+
+PARENT_OPERATOR_SHA256 = '087843f1f120467ac86f50dadd511d59a44629cab678c8a09fad787ce88d3516'
+_EXACT_PARTS_ZLIB_BASE64 = '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'
+_PARTS = json.loads(zlib.decompress(base64.b64decode(_EXACT_PARTS_ZLIB_BASE64)))
+_FUNCTIONS = compile(ast.parse(_PARTS['functions']), '<actual-parent-pure-helpers-AST>', 'exec')
+_MAIN_TRY = compile(ast.parse(_PARTS['main_try']), '<actual-parent-outer-try-finally-AST>', 'exec')
+_REPORT = compile(ast.parse(_PARTS['report_assignment']), '<actual-parent-report-assignment-AST>', 'exec')
+OBSERVATIONS = {}
+
+def install_corrected_parent_ast_for_same_controls(raw, expected_sha256):
+    """Reader may bind a corrected private candidate in RAM, with the same tests."""
+    global _FUNCTIONS, _MAIN_TRY, _REPORT, PARENT_OPERATOR_SHA256
+    if type(raw) is not bytes or hashlib.sha256(raw).hexdigest() != expected_sha256:
+        raise ValueError('exact corrected private parent bytes required')
+    tree = ast.parse(raw)
+    names = set(_PARTS['names'])
+    functions = [copy.deepcopy(n) for n in tree.body if isinstance(n, ast.FunctionDef) and n.name in names]
+    if len(functions) != len(names):
+        raise ValueError('exact retained pure-helper population required')
+    assignment_names = {'H', 'fields', 'f9', 'SOURCE_IO_SCOPE', 'SOURCE_IO_OUTSIDE_BOUNDARY'}
+    assignments = [copy.deepcopy(n) for n in tree.body if isinstance(n, ast.Assign) and any(isinstance(t, ast.Name) and t.id in assignment_names for t in n.targets)]
+    report = [copy.deepcopy(n) for n in tree.body if isinstance(n, ast.Assign) and any(isinstance(t, ast.Name) and t.id == 'report' for t in n.targets)]
+    mains = [copy.deepcopy(n) for n in tree.body if isinstance(n, ast.Try) and n.body and isinstance(n.body[0], ast.Assign) and any(isinstance(x, ast.Call) and isinstance(x.func, ast.Name) and x.func.id == 'check_known_literal_import_coverage' for x in ast.walk(n.body[0]))]
+    if len(assignments) != len(assignment_names) or len(report) != 1 or len(mains) != 1:
+        raise ValueError('exact parent report/outer preflight-finalizer seam required')
+    _FUNCTIONS = compile(ast.fix_missing_locations(ast.Module(body=assignments + functions, type_ignores=[])), '<actual-corrected-parent-pure-helpers-AST>', 'exec')
+    _MAIN_TRY = compile(ast.fix_missing_locations(ast.Module(body=mains, type_ignores=[])), '<actual-corrected-parent-outer-try-finally-AST>', 'exec')
+    _REPORT = compile(ast.fix_missing_locations(ast.Module(body=report, type_ignores=[])), '<actual-corrected-parent-report-assignment-AST>', 'exec')
+    PARENT_OPERATOR_SHA256 = expected_sha256
+
+class ParentPreflightOriginalFinalizerControls(unittest.TestCase):
+    def _exercise(self, kind, *, cleanup_fails=False):
+        root = '/fictional/D'
+        origin = root + '/pkg/owner.py'
+        namespace = root + '/pkg/__init__.py'
+        origin_sha = 'a' * 64
+        coverage = {'project_roots': [root], 'origin_modules': [{'path': origin, 'sha256': origin_sha}], 'required_project_paths': [origin, namespace]}
+        coverage_raw = json.dumps(coverage, sort_keys=True, separators=(',', ':')).encode()
+        artifact_path = '/fictional/owned-control/coverage.json'
+        correct_digest = hashlib.sha256(coverage_raw).hexdigest()
+        ref = {'path': artifact_path, 'bytes': len(coverage_raw), 'sha256': '0' * 64 if kind == 'badSHA' else correct_digest}
+        if kind == 'missingCoverage':
+            ref = None
+        epoch = [{'path': origin, 'sha256': origin_sha}]
+        if kind != 'missingNamespace':
+            epoch.append({'path': namespace, 'sha256': 'b' * 64})
+        io_state = {'offset': 0, 'active_fd': False, 'opens': 0, 'closes': 0, 'cleanup_calls': 0, 'source_calls': 0, 'sdk_calls': 0, 'resource_calls': 0, 'printed': [], 'retained': {}}
+        stamp = types.SimpleNamespace(st_dev=1, st_ino=2, st_mode=stat.S_IFREG | 0o400, st_nlink=1, st_uid=1000, st_gid=1000, st_size=len(coverage_raw), st_mtime_ns=111, st_ctime_ns=111)
+
+        class FakePath(PurePosixPath):
+            def lstat(self):
+                if str(self) != artifact_path:
+                    raise AssertionError('unexpected fictional metadata path')
+                return stamp
+
+        class FakeOS:
+            path = os.path
+            O_RDONLY = os.O_RDONLY
+            O_NOFOLLOW = os.O_NOFOLLOW
+
+            @staticmethod
+            def open(path, flags):
+                if str(path) != artifact_path or not flags & os.O_NOFOLLOW or io_state['active_fd']:
+                    raise AssertionError('unexpected fictional open')
+                io_state['opens'] += 1
+                io_state['active_fd'] = True
+                return 17
+
+            @staticmethod
+            def fstat(fd):
+                if fd != 17 or not io_state['active_fd']:
+                    raise AssertionError('unexpected fictional fstat')
+                return stamp
+
+            @staticmethod
+            def read(fd, count):
+                if fd != 17 or not io_state['active_fd']:
+                    raise AssertionError('unexpected fictional read')
+                offset = io_state['offset']
+                value = coverage_raw[offset:offset + count]
+                io_state['offset'] += len(value)
+                return value
+
+            @staticmethod
+            def close(fd):
+                if fd != 17 or not io_state['active_fd']:
+                    raise AssertionError('unexpected fictional close')
+                io_state['active_fd'] = False
+                io_state['closes'] += 1
+
+        def source_forbidden(*args, **kwargs):
+            io_state['source_calls'] += 1
+            raise AssertionError('Source boundary reached after a rejected preflight')
+
+        def sdk_forbidden(*args, **kwargs):
+            io_state['sdk_calls'] += 1
+            raise AssertionError('SDK/import boundary reached after a rejected preflight')
+
+        def resource_forbidden(*args, **kwargs):
+            io_state['resource_calls'] += 1
+            raise AssertionError('resource observation reached after a rejected preflight')
+
+        def retain_bytes(name, raw):
+            if type(raw) is not bytes or name in io_state['retained']:
+                raise AssertionError('unexpected fictional report persistence')
+            io_state['retained'][name] = raw
+            return {'path': '/fictional/retained/' + name, 'bytes': len(raw), 'sha256': hashlib.sha256(raw).hexdigest()}
+
+        cleanup_error = OSError('fictional owned-output cleanup failure')
+
+        def cleanup(path):
+            io_state['cleanup_calls'] += 1
+            if str(path) != '/fictional/owned-output/parent-home':
+                raise AssertionError('cleanup outside selected fictional output')
+            if cleanup_fails:
+                raise cleanup_error
+
+        authority = {'fictional_control_only': True}
+        ns = {'__builtins__': __builtins__, 'Path': FakePath, 'os': FakeOS, 'stat': stat, 'hashlib': hashlib, 'json': json, 'sys': sys, 'traceback': traceback, 'contextlib': contextlib,
+              'shutil': types.SimpleNamespace(rmtree=cleanup), 'source': types.SimpleNamespace(source_lease=source_forbidden, canonical_source_root=source_forbidden),
+              'importlib': types.SimpleNamespace(import_module=sdk_forbidden), 'execute_phase': sdk_forbidden, 'observe_state': resource_forbidden, 'metadata_guard': source_forbidden,
+              'tracked_source_read': source_forbidden, 'retain_bytes': retain_bytes, 'PARENT_HOME': FakePath('/fictional/owned-output/parent-home'),
+              'ROOT_SELECTION': authority, 'FINAL_KNOWN_IMPORT_COVERAGE_REFERENCE': ref, 'FINAL_KNOWN_IMPORT_COVERAGE_PROJECT_ROOTS': [root],
+              'manifest': {'known_literal_import_coverage_reference': ref}, 'EPOCH': epoch, 'PROJECTS': [{'root': root}], 'parent': None,
+              'print': lambda *args, **kwargs: io_state['printed'].append((args, kwargs))}
+        exec(_FUNCTIONS, ns)
+        allocation = {'schema': 'Root-selected-declared-direct-Source-IO-allocation/v1', 'runtime_authority': authority, 'operation_total_bytes': 65536,
+                      'role_limits': {'parent': 20000, 'collect': 20000, 'run': 20000},
+                      'ledger_before': {'captures': 23, 'used': 100000, 'internal_used': 90000, 'global_cap': 1000000, 'internal_cap': 900000}, 'scope': ns['SOURCE_IO_SCOPE']}
+        ns['SOURCE_IO_STATE'] = ns['source_io_start'](allocation, authority, 'parent', {'bytes': 37, 'captures': 2})
+        ledger_before = copy.deepcopy(allocation['ledger_before'])
+        exec(_REPORT, ns)
+        caught = None
+        try:
+            exec(_MAIN_TRY, ns)
+        except BaseException as error:
+            caught = error
+        report = ns['report']
+        primary = ns.get('_source_io_active_primary_error')
+        meter = ns['SOURCE_IO_STATE']
+        expected_new_bytes = 0 if kind == 'missingCoverage' else len(coverage_raw)
+        expected_new_captures = 0 if kind == 'missingCoverage' else 1
+        retained = io_state['retained'].get('complete-published-D-phase2-bridge27-existing-owner-report.json')
+        saved = None if retained is None else json.loads(retained)
+        observation = {'fixture': kind, 'cleanup_fault_injected': cleanup_fails, 'parent_operator_sha256': PARENT_OPERATOR_SHA256,
+                       'caught_type': None if caught is None else type(caught).__name__, 'primary_type': None if primary is None else type(primary).__name__,
+                       'caught_is_original_primary': caught is primary, 'secondary_cleanup_error_became_primary': caught is cleanup_error,
+                       'initial_bytes': 37, 'actual_meter_bytes': meter['bytes'], 'expected_meter_bytes': 37 + expected_new_bytes,
+                       'initial_captures': 2, 'actual_meter_captures': meter['captures'], 'expected_meter_captures': 2 + expected_new_captures,
+                       'meter_finished': meter['finished'], 'Source_sentinel_calls': io_state['source_calls'], 'SDK_sentinel_calls': io_state['sdk_calls'],
+                       'resource_sentinel_calls': io_state['resource_calls'], 'fake_FDs_opened': io_state['opens'], 'fake_FDs_closed': io_state['closes'],
+                       'qualification_complete': report['qualification_complete'], 'resource_cleanup_confirmed': report['resource_cleanup_confirmed'],
+                       'report_saved_before_cleanup': saved is not None, 'recorded_errors': report['errors'], 'real_Source_SDK_or_full_operator_executed': False}
+        OBSERVATIONS[kind] = observation
+        self.assertIsNotNone(caught)
+        self.assertIsNotNone(primary)
+        self.assertIs(meter['finished'], True)
+        self.assertEqual(meter['bytes'], 37 + expected_new_bytes)
+        self.assertEqual(meter['captures'], 2 + expected_new_captures)
+        self.assertEqual(allocation['ledger_before'], ledger_before)
+        self.assertEqual((io_state['source_calls'], io_state['sdk_calls'], io_state['resource_calls']), (0, 0, 0))
+        self.assertFalse(io_state['active_fd'])
+        self.assertEqual(io_state['opens'], io_state['closes'])
+        self.assertIs(report['qualification_complete'], False)
+        self.assertIs(report['software_sequence_accepted'], False)
+        self.assertEqual(report['phase_order'], [])
+        self.assertEqual(report['phases'], {})
+        self.assertTrue(report['errors'])
+        self.assertEqual(report['errors'][0]['type'], type(primary).__name__)
+        self.assertIsNotNone(saved)
+        self.assertEqual(saved['declared_direct_Source_IO_parent']['bytes'], meter['bytes'])
+        self.assertEqual(saved['declared_direct_Source_IO_parent']['captures'], meter['captures'])
+        self.assertIs(saved['qualification_complete'], False)
+        # A secondary output-cleanup failure must not replace the actual preflight error.
+        self.assertIs(caught, primary)
+        frames = []
+        tb = caught.__traceback__
+        while tb is not None:
+            frames.append(tb.tb_frame.f_code.co_name)
+            tb = tb.tb_next
+        self.assertIn('check_known_literal_import_coverage', frames)
+
+    def test_missing_coverage_reaches_original_finalizer_without_Source_or_SDK(self):
+        self._exercise('missingCoverage')
+
+    def test_bad_SHA_keeps_read_charge_and_primary_error_if_output_cleanup_fails(self):
+        self._exercise('badSHA', cleanup_fails=True)
+
+    def test_missing_namespace_reaches_original_finalizer_without_dispatch(self):
+        self._exercise('missingNamespace')
+
+if __name__ == '__main__':
+    import resource
+    import signal
+    resource.setrlimit(resource.RLIMIT_CPU, (30, 30))
+    resource.setrlimit(resource.RLIMIT_AS, (512 * 1024**2, 512 * 1024**2))
+    if hasattr(os, 'sched_getaffinity'):
+        os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
+    signal.alarm(60)
+    capture = io.StringIO()
+    suite = unittest.defaultTestLoader.loadTestsFromTestCase(ParentPreflightOriginalFinalizerControls)
+    result = unittest.TextTestRunner(stream=capture, verbosity=2).run(suite)
+    payload = {'schema': 'actual-private-parent-preflight-original-finalizer-three-controls/v1', 'parent_operator_sha256': PARENT_OPERATOR_SHA256,
+               'tests': result.testsRun, 'failures': len(result.failures), 'errors': len(result.errors), 'skipped': len(result.skipped),
+               'passed': result.testsRun - len(result.failures) - len(result.errors) - len(result.skipped), 'observations': OBSERVATIONS,
+               'unittest_output': capture.getvalue(), 'scope': 'Exact retained parent outer try/finally and pure helpers with explicit fictional IO; no full operator/Source/SDK/package/native or current-runtime qualification.'}
+    raw = (json.dumps(payload, indent=2) + '\n').encode()
+    fd = os.open(sys.argv[1], os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o400)
+    try:
+        remain = memoryview(raw)
+        while remain:
+            n = os.write(fd, remain)
+            assert n > 0
+            remain = remain[n:]
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+    print(json.dumps({'path': sys.argv[1], 'bytes': len(raw), 'sha256': hashlib.sha256(raw).hexdigest(), 'tests': payload['tests'],
+                      'passed': payload['passed'], 'failures': payload['failures'], 'errors': payload['errors'], 'skipped': payload['skipped'],
+                      'observations': OBSERVATIONS}))
+    raise SystemExit(0 if result.wasSuccessful() else 1)

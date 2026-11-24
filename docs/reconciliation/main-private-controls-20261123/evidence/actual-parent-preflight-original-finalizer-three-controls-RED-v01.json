@@ -1,0 +1,109 @@
+{
+  "schema": "actual-private-parent-preflight-original-finalizer-three-controls/v1",
+  "parent_operator_sha256": "087843f1f120467ac86f50dadd511d59a44629cab678c8a09fad787ce88d3516",
+  "tests": 3,
+  "failures": 1,
+  "errors": 0,
+  "skipped": 0,
+  "passed": 2,
+  "observations": {
+    "badSHA": {
+      "fixture": "badSHA",
+      "cleanup_fault_injected": true,
+      "parent_operator_sha256": "087843f1f120467ac86f50dadd511d59a44629cab678c8a09fad787ce88d3516",
+      "caught_type": "OSError",
+      "primary_type": "AssertionError",
+      "caught_is_original_primary": false,
+      "secondary_cleanup_error_became_primary": true,
+      "initial_bytes": 37,
+      "actual_meter_bytes": 289,
+      "expected_meter_bytes": 289,
+      "initial_captures": 2,
+      "actual_meter_captures": 3,
+      "expected_meter_captures": 3,
+      "meter_finished": true,
+      "Source_sentinel_calls": 0,
+      "SDK_sentinel_calls": 0,
+      "resource_sentinel_calls": 0,
+      "fake_FDs_opened": 1,
+      "fake_FDs_closed": 1,
+      "qualification_complete": false,
+      "resource_cleanup_confirmed": false,
+      "report_saved_before_cleanup": true,
+      "recorded_errors": [
+        {
+          "type": "AssertionError",
+          "message": "/fictional/owned-control/coverage.json",
+          "traceback": "Traceback (most recent call last):\n  File \"<actual-parent-outer-try-finally-AST>\", line 2, in <module>\n  File \"<actual-parent-pure-helpers-AST>\", line 92, in check_known_literal_import_coverage\n  File \"<actual-parent-pure-helpers-AST>\", line 77, in read_private\nAssertionError: /fictional/owned-control/coverage.json\n"
+        }
+      ],
+      "real_Source_SDK_or_full_operator_executed": false
+    },
+    "missingCoverage": {
+      "fixture": "missingCoverage",
+      "cleanup_fault_injected": false,
+      "parent_operator_sha256": "087843f1f120467ac86f50dadd511d59a44629cab678c8a09fad787ce88d3516",
+      "caught_type": "RuntimeError",
+      "primary_type": "RuntimeError",
+      "caught_is_original_primary": true,
+      "secondary_cleanup_error_became_primary": false,
+      "initial_bytes": 37,
+      "actual_meter_bytes": 37,
+      "expected_meter_bytes": 37,
+      "initial_captures": 2,
+      "actual_meter_captures": 2,
+      "expected_meter_captures": 2,
+      "meter_finished": true,
+      "Source_sentinel_calls": 0,
+      "SDK_sentinel_calls": 0,
+      "resource_sentinel_calls": 0,
+      "fake_FDs_opened": 0,
+      "fake_FDs_closed": 0,
+      "qualification_complete": false,
+      "resource_cleanup_confirmed": false,
+      "report_saved_before_cleanup": true,
+      "recorded_errors": [
+        {
+          "type": "RuntimeError",
+          "message": "Selected known literal import coverage is missing or differs from manifest",
+          "traceback": "Traceback (most recent call last):\n  File \"<actual-parent-outer-try-finally-AST>\", line 2, in <module>\n  File \"<actual-parent-pure-helpers-AST>\", line 86, in check_known_literal_import_coverage\nRuntimeError: Selected known literal import coverage is missing or differs from manifest\n"
+        }
+      ],
+      "real_Source_SDK_or_full_operator_executed": false
+    },
+    "missingNamespace": {
+      "fixture": "missingNamespace",
+      "cleanup_fault_injected": false,
+      "parent_operator_sha256": "087843f1f120467ac86f50dadd511d59a44629cab678c8a09fad787ce88d3516",
+      "caught_type": "RuntimeError",
+      "primary_type": "RuntimeError",
+      "caught_is_original_primary": true,
+      "secondary_cleanup_error_became_primary": false,
+      "initial_bytes": 37,
+      "actual_meter_bytes": 289,
+      "expected_meter_bytes": 289,
+      "initial_captures": 2,
+      "actual_meter_captures": 3,
+      "expected_meter_captures": 3,
+      "meter_finished": true,
+      "Source_sentinel_calls": 0,
+      "SDK_sentinel_calls": 0,
+      "resource_sentinel_calls": 0,
+      "fake_FDs_opened": 1,
+      "fake_FDs_closed": 1,
+      "qualification_complete": false,
+      "resource_cleanup_confirmed": false,
+      "report_saved_before_cleanup": true,
+      "recorded_errors": [
+        {
+          "type": "RuntimeError",
+          "message": "Known literal project Source absent before Source/SDK: /fictional/D/pkg/__init__.py",
+          "traceback": "Traceback (most recent call last):\n  File \"<actual-parent-outer-try-finally-AST>\", line 2, in <module>\n  File \"<actual-parent-pure-helpers-AST>\", line 132, in check_known_literal_import_coverage\nRuntimeError: Known literal project Source absent before Source/SDK: /fictional/D/pkg/__init__.py\n"
+        }
+      ],
+      "real_Source_SDK_or_full_operator_executed": false
+    }
+  },
+  "unittest_output": "test_bad_SHA_keeps_read_charge_and_primary_error_if_output_cleanup_fails (__main__.ParentPreflightOriginalFinalizerControls.test_bad_SHA_keeps_read_charge_and_primary_error_if_output_cleanup_fails) ... FAIL\ntest_missing_coverage_reaches_original_finalizer_without_Source_or_SDK (__main__.ParentPreflightOriginalFinalizerControls.test_missing_coverage_reaches_original_finalizer_without_Source_or_SDK) ... ok\ntest_missing_namespace_reaches_original_finalizer_without_dispatch (__main__.ParentPreflightOriginalFinalizerControls.test_missing_namespace_reaches_original_finalizer_without_dispatch) ... ok\n\n======================================================================\nFAIL: test_bad_SHA_keeps_read_charge_and_primary_error_if_output_cleanup_fails (__main__.ParentPreflightOriginalFinalizerControls.test_bad_SHA_keeps_read_charge_and_primary_error_if_output_cleanup_fails)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/test_parent_preflight_original_finalizer_three_controls_v01.py.DATA\", line 208, in test_bad_SHA_keeps_read_charge_and_primary_error_if_output_cleanup_fails\n    self._exercise('badSHA', cleanup_fails=True)\n  File \"/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/test_parent_preflight_original_finalizer_three_controls_v01.py.DATA\", line 196, in _exercise\n    self.assertIs(caught, primary)\nAssertionError: OSError('fictional owned-output cleanup failure') is not AssertionError('/fictional/owned-control/coverage.json')\n\n----------------------------------------------------------------------\nRan 3 tests in 0.002s\n\nFAILED (failures=1)\n",
+  "scope": "Exact retained parent outer try/finally and pure helpers with explicit fictional IO; no full operator/Source/SDK/package/native or current-runtime qualification."
+}

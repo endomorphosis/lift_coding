@@ -1,0 +1,309 @@
+{
+  "schema": "Main-existing-R2-published-D-phase2-bridge27-INERT-controls/v1",
+  "status": "SEALED_PRIVATE_INERT_NOT_SELECTED_NOT_EXECUTED",
+  "refs": {
+    "operator": {
+      "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/existing-R2-published-D27-operator-INERT.v01.py.DATA",
+      "bytes": 47298,
+      "sha256": "2936fa4786a336c5f741c71ee5151f08e75692774f095c8325d79a0a3512dd73",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "50877661",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "47298",
+        "st_mtime_ns": "1795432073660916619",
+        "st_ctime_ns": "1795432073660916619"
+      },
+      "FD_closed": true
+    },
+    "factory": {
+      "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/existing-R2-published-D27-request-INERT.v01.py.DATA",
+      "bytes": 3003,
+      "sha256": "24473ccf82802e37270ba505fc473dcc95d4f2b54ce195f99bf2a4d9f988a78e",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "50877660",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "3003",
+        "st_mtime_ns": "1795432073356913806",
+        "st_ctime_ns": "1795432073356913806"
+      },
+      "FD_closed": true
+    },
+    "bootstrap": {
+      "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/bootstrap-published-D-phase2-bridge27-INERT.v03.py.DATA",
+      "bytes": 33546,
+      "sha256": "2f5fb934f54166a5dbcc6c0fbf5dd35073b190df1c846e28c5b86366fa4e8179",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "50877658",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "33546",
+        "st_mtime_ns": "1795432052700722654",
+        "st_ctime_ns": "1795432052700722654"
+      },
+      "FD_closed": true
+    },
+    "proof": {
+      "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/static-INERT-D27-preservation-proof-v01.json",
+      "bytes": 1499,
+      "sha256": "8b30a6919d71e72a21af35b5cab259b6b38aff161b0bab4f4c8ab4069296d4f7",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "50877666",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "1499",
+        "st_mtime_ns": "1795432073682916822",
+        "st_ctime_ns": "1795432073682916822"
+      },
+      "FD_closed": true
+    }
+  },
+  "diffs": {
+    "operator": {
+      "forward": {
+        "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/operator.v01.forward.diff",
+        "bytes": 54765,
+        "sha256": "8cc63956aac471e51541f5c8436a4268c401ae827a249f8639b657344b6b8580",
+        "full9": {
+          "st_dev": "66306",
+          "st_ino": "50877662",
+          "st_mode": "33024",
+          "st_nlink": "1",
+          "st_uid": "1000",
+          "st_gid": "1000",
+          "st_size": "54765",
+          "st_mtime_ns": "1795432073665916665",
+          "st_ctime_ns": "1795432073665916665"
+        },
+        "FD_closed": true
+      },
+      "inverse": {
+        "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/operator.v01.inverse.diff",
+        "bytes": 54765,
+        "sha256": "89221c9cec03f06c20ff03293360d3297280ee7a5f6c32427a514e335490935e",
+        "full9": {
+          "st_dev": "66306",
+          "st_ino": "50877663",
+          "st_mode": "33024",
+          "st_nlink": "1",
+          "st_uid": "1000",
+          "st_gid": "1000",
+          "st_size": "54765",
+          "st_mtime_ns": "1795432073669916702",
+          "st_ctime_ns": "1795432073669916702"
+        },
+        "FD_closed": true
+      }
+    },
+    "factory": {
+      "forward": {
+        "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/factory.v01.forward.diff",
+        "bytes": 3840,
+        "sha256": "4273507d2c15a6f744277ce4d84c1183842359c41aac9b05f9b5f164fc272043",
+        "full9": {
+          "st_dev": "66306",
+          "st_ino": "50877664",
+          "st_mode": "33024",
+          "st_nlink": "1",
+          "st_uid": "1000",
+          "st_gid": "1000",
+          "st_size": "3840",
+          "st_mtime_ns": "1795432073673916739",
+          "st_ctime_ns": "1795432073673916739"
+        },
+        "FD_closed": true
+      },
+      "inverse": {
+        "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/factory.v01.inverse.diff",
+        "bytes": 3840,
+        "sha256": "e180f8c9fb4f928f4699a40887402e6a5463360a8a7ad2aab3f4c090d588b785",
+        "full9": {
+          "st_dev": "66306",
+          "st_ino": "50877665",
+          "st_mode": "33024",
+          "st_nlink": "1",
+          "st_uid": "1000",
+          "st_gid": "1000",
+          "st_size": "3840",
+          "st_mtime_ns": "1795432073678916785",
+          "st_ctime_ns": "1795432073678916785"
+        },
+        "FD_closed": true
+      }
+    }
+  },
+  "required_final_bindings_all_NULL": [
+    "ROOT_SELECTION",
+    "ROOT_RUNTIME_SELECTION",
+    "SELECTED_TEST_REWRITE_POLICY",
+    "FINAL_OUTPUT_PATH",
+    "FINAL_D_ROOT",
+    "FINAL_D_HEAD",
+    "FINAL_D_TREE",
+    "FINAL_A_ROOT",
+    "FINAL_A_HEAD",
+    "FINAL_A_TREE",
+    "D_READ_BINDING_REFERENCE",
+    "D_READ_BINDING_ABI",
+    "FINAL_BINDING_MANIFEST_REFERENCE",
+    "FINAL_BINDING_MANIFEST",
+    "FINAL_MODULE_BINDINGS",
+    "FINAL_D_PROVENANCE",
+    "FINAL_A_PROVENANCE",
+    "FINAL_SOURCE_PROJECTS",
+    "FINAL_SDK_BINDINGS",
+    "FINAL_RESOURCE_STATE_PATH",
+    "FINAL_EXPECTED_RESOURCE_CONFIG",
+    "FINAL_EXPECTED_CAPACITY",
+    "FINAL_FIXTURE_CLOSURE_REFERENCE",
+    "FINAL_EFFECT_DECISION_REFERENCE",
+    "FINAL_EFFECT_DECISION",
+    "FINAL_ADMITTED_IO_PLAN_REFERENCE",
+    "FINAL_ADDITIONAL_IMPORT_ROOTS",
+    "SELECTED_TEST_MODULES",
+    "MAINTAINED_OWNER_NAMES",
+    "SELECTION"
+  ],
+  "Root_runtime_authority": "Retained four-key v04 schema and same immutable Root selection/window across parent/bootstrap/request; no new authority from provenance.",
+  "selected_roster": {
+    "function_count": 7,
+    "case_counts_in_function_selector_order": [
+      1,
+      5,
+      4,
+      3,
+      1,
+      12,
+      1
+    ],
+    "expanded_case_count": 27,
+    "function_selectors": null,
+    "expanded_literal_ids": null,
+    "actual_collection_order": "Actual COLLECT expanded IDs/order supply RUN; independent seven function counts checked in parent/factory/bootstrap."
+  },
+  "limits": {
+    "CPU_slots": 1,
+    "child_slots": 1,
+    "RSS_bytes": 4294967296,
+    "AS_bytes": 8589934592,
+    "collect_wall_CPU": [
+      120,
+      110
+    ],
+    "run_wall_CPU": [
+      600,
+      540
+    ],
+    "input_bytes": 4194304,
+    "output_bytes": 16777216,
+    "workspace_bytes": 67108864
+  },
+  "provenance": "Frozen published D plus explicitly bound A import root and Source READ; no Source61/HOME WRITE receipt, mandatory A7 list, fake validator, or canonical Home fallback.",
+  "fixture_effects_and_actual_collection": null,
+  "ordinary_execution_requires_actual_Root_effect_decision": true,
+  "Source_SDK_Git_tests_model_or_service_actions": false,
+  "historical_inputs_and_earlier_failures_preserved": true,
+  "previous_sealed_v01": {
+    "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/sealed-existing-R2-published-D27-INERT-tuple-v01.json",
+    "bytes": 7558,
+    "sha256": "700e77569df07d1fdf1308fa84fd153e28e5b9b8d5a8a78d4f5896d698e1dac0",
+    "full9": {
+      "st_dev": "66306",
+      "st_ino": "50877667",
+      "st_mode": "33024",
+      "st_nlink": "1",
+      "st_uid": "1000",
+      "st_gid": "1000",
+      "st_size": "7558",
+      "st_mtime_ns": "1795432073685916850",
+      "st_ctime_ns": "1795432073685916850"
+    },
+    "FD_closed": true
+  },
+  "Root_existing_controls_locator": {
+    "path": "/tmp/Reader-existing-R2-package-ordinary-control-locators-private-v01/existing-R2-operator-bootstrap-factory-and-profile-metadata-v01.json",
+    "bytes": 8679,
+    "sha256": "7a361f1202e09e57055290e2976edc0f893e32a9f3b95870d09de7f9e8d98fae"
+  },
+  "bootstrap_inherited_AST_proof": {
+    "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/bootstrap-bridge27-AST-only-proof-v02.json",
+    "bytes": 4400,
+    "sha256": "cc20aa2280c695be866f3801072de249d5da4b72e0b511019a109bcdb67b000d",
+    "full9": {
+      "st_dev": "66306",
+      "st_ino": "50877656",
+      "st_mode": "33152",
+      "st_nlink": "1",
+      "st_uid": "1000",
+      "st_gid": "1000",
+      "st_size": "4400",
+      "st_mtime_ns": "1795431917894473400",
+      "st_ctime_ns": "1795431917894473400"
+    },
+    "FD_closed": true
+  },
+  "bootstrap_final_derivative": {
+    "before": {
+      "bytes": 33532,
+      "sha256": "58b0c10c41234cf22c18f17940f90560c5c2da52eb8d568b33ed682506e5a11e"
+    },
+    "after": {
+      "bytes": 33546,
+      "sha256": "2f5fb934f54166a5dbcc6c0fbf5dd35073b190df1c846e28c5b86366fa4e8179"
+    },
+    "only_delta": "Unexpanded literal cache_dir=$TMPDIR/pytest-cache replaced with cache_dir= plus actual owned workspace/pytest-cache expression. No inherited helper/observer/control-runtime execution change. v01/v02 originals retained."
+  },
+  "static_private_input_ledger": {
+    "locator": 8679,
+    "initial_parent_four_controls": 65898,
+    "parent_old_and_v04_operator_read": 107639,
+    "own_authoring_syntax_read": 27347,
+    "own_authoring_interpreter_read_upper": 28776,
+    "child_three_private_reads": 75747,
+    "parent_child_v02_alignment_read": 33532,
+    "assembler_old_operator_factory_v04_read": 109948,
+    "assembler_child_reference": 253,
+    "assembler_child_v03_read": 33546,
+    "final_metadata_v01_read": 7558,
+    "inherited_bootstrap_proof_read": 4400
+  },
+  "static_private_input_total_upper_bytes": 503323,
+  "static_private_input_cap_bytes": 524288,
+  "output_FD_readbacks_are_output_verification_not_new_static_inputs": true,
+  "bootstrap_required_NULL_literals": [
+    "ROOT",
+    "ADDITIONAL_A_ROOT",
+    "EXPECTED_MODULES",
+    "MAINTAINED_OWNER_NAMES",
+    "SELECTED_TEST_MODULES",
+    "FUNCTION_SELECTORS",
+    "EXPECTED_FUNCTION_CASE_COUNTS",
+    "REQUIRED_CANONICAL_CONFTESTS",
+    "PYTEST_INIFILE",
+    "SELECTED_TEST_REWRITE_POLICY",
+    "ROOT_RUNTIME_SELECTION",
+    "GIT_CANDIDATE_PROVENANCE",
+    "ADDITIONAL_A_PROVENANCE",
+    "BINDING_MANIFEST_REFERENCE",
+    "SOURCE_READ_BINDING_REFERENCE",
+    "ADMITTED_IO_PLAN_REFERENCE",
+    "EFFECT_DECISION_REFERENCE",
+    "SOURCE_EPOCH_SHA256",
+    "SOURCE_EPOCH_RECORD_COUNT"
+  ],
+  "actual_invocation_contract": "Existing ordinary entry: python -B operator D_READ_binding_path bytes sha256. Generated controls remain INERT until the existing owner binds actual data and selects once.",
+  "actual_results_and_qualification": null
+}

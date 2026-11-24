@@ -1,0 +1,37 @@
+--- parent.v04
++++ parent.v05
+@@ -728,7 +728,33 @@
+             report['errors'].append({'type':'DeclaredDirectSourceIOBudgetRefused','message':'Parent or dispatched child direct Source IO meter was not accepted'})
+     report['qualification_complete'] = report['software_sequence_accepted'] and report['Source_closed'] and report['resource_cleanup_confirmed'] and not report['errors'] and report['declared_direct_IO_budget_accepted']
+     ref = retain_json('complete-published-D-phase2-bridge27-existing-owner-report.json', report)
+-    shutil.rmtree(PARENT_HOME)
++    try:
++        shutil.rmtree(PARENT_HOME)
++        report['parent_home_cleanup_confirmed'] = True
++    except BaseException as parent_home_cleanup_error:
++        report['parent_home_cleanup_confirmed'] = False
++        report['parent_home_cleanup_error'] = {
++            'type': type(parent_home_cleanup_error).__name__,
++            'message': str(parent_home_cleanup_error),
++            'traceback': traceback.format_exc(),
++            'secondary_to_primary': _source_io_active_primary_error is not None,
++        }
++        report['qualification_complete'] = False
++        report['resource_cleanup_confirmed_before_parent_home_failure'] = report['resource_cleanup_confirmed']
++        report['resource_cleanup_confirmed'] = False
++        report['errors'].append(dict(report['parent_home_cleanup_error'], phase='parent_home_cleanup'))
++        try:
++            ref = retain_json('complete-published-D-phase2-bridge27-existing-owner-report.json', report)
++        except BaseException as parent_home_report_error:
++            report['parent_home_cleanup_report_error'] = {
++                'type': type(parent_home_report_error).__name__,
++                'message': str(parent_home_report_error),
++            }
++            print(json.dumps({'event': 'ACTUAL_PARENT_HOME_CLEANUP_REPORT_ERROR',
++                              'cleanup_error': report['parent_home_cleanup_error'],
++                              'report_error': report['parent_home_cleanup_report_error']}, sort_keys=True), flush=True)
++        if _source_io_active_primary_error is None:
++            raise
+     print(json.dumps({'event': 'ACTUAL_PUBLISHED_D_PHASE2_BRIDGE27_CLOSED', 'report': ref, 'Source_closed': report['Source_closed'], 'resource_cleanup_confirmed': report['resource_cleanup_confirmed'], 'qualification_complete': report['qualification_complete'], 'errors': report['errors']}, sort_keys=True), flush=True)
+     if report['declared_direct_IO_budget_accepted']is not True and _source_io_active_primary_error is None:
+         raise RuntimeError('declared direct Source IO budget was not accepted after cleanup')

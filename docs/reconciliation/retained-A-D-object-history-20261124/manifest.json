@@ -1,0 +1,240 @@
+{
+  "actual_pack_restore_receipt": {
+    "bytes": 80568,
+    "file": "actual-private-pack-and-restore-receipt.json.DATA",
+    "sha256": "a1be792986161f1311eb19333737cf357dcecacac1ccdc4f394ac93df4c1aa05"
+  },
+  "archive_scope": "81 accelerator and206 datasets retained historical tips, including all six large data blobs; exact objects missing from the corresponding published base object sets.",
+  "families": {
+    "accelerate": {
+      "actual_private_restore_verified": true,
+      "chunks": [
+        {
+          "bytes": 52428800,
+          "file": "accelerate/accelerate.pack.part-0000.DATA",
+          "sha256": "1f8798702bfa5031ed03e30d26893f63bf743ec1d53254103070e11bd5971c60"
+        },
+        {
+          "bytes": 52428800,
+          "file": "accelerate/accelerate.pack.part-0001.DATA",
+          "sha256": "d94a05a563efde9a9927d09d968f96ed010f8dff45997e689846d37186626b2d"
+        },
+        {
+          "bytes": 52428800,
+          "file": "accelerate/accelerate.pack.part-0002.DATA",
+          "sha256": "0b43cee837c74c2df664b8d1bf474bfeb6f158b60dc0623e91cc03389b7cdc60"
+        },
+        {
+          "bytes": 52428800,
+          "file": "accelerate/accelerate.pack.part-0003.DATA",
+          "sha256": "5da1013d08dc8a711e2b73556cdaf045b4e599cd7c016a1eb761299729a8672d"
+        },
+        {
+          "bytes": 52428800,
+          "file": "accelerate/accelerate.pack.part-0004.DATA",
+          "sha256": "d3dc8269ddb9309ebc6d5900da9b014f883722ec5baee06c381324c57b320945"
+        },
+        {
+          "bytes": 25805953,
+          "file": "accelerate/accelerate.pack.part-0005.DATA",
+          "sha256": "bd57e04bc778a2d8b241d920eb1865bd8aaa8aeeaa7876c2a7061b9acb54a9cd"
+        }
+      ],
+      "exact_object_IDs": {
+        "bytes": 76916,
+        "file": "accelerate/exact-object-IDs.DATA",
+        "sha256": "30b811d8189fbf0c8e54af9cae3454657685d01adee52a65dba1c4b65f5362c1"
+      },
+      "pack_bytes": 287949953,
+      "pack_object_count": 1876,
+      "pack_sha256": "50cf9343aa3643f69f9ed323747e37542e3e05290113271df2617f9ec3373e34",
+      "pack_trailer_sha1": "40f2477f9f0cc970d4dbfca848657bb8f5f4309b",
+      "published_base_commit": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+      "published_origin": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+      "raw_object_summary": {
+        "selected_tip_count": 81,
+        "sufficient_single_prerequisite_commit": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+        "total_raw_unique_object_bytes": 2212644642,
+        "unique_object_count": 1876,
+        "unique_object_type_counts": {
+          "blob": 845,
+          "commit": 457,
+          "tree": 574
+        },
+        "unique_raw_object_bytes_by_type": {
+          "blob": 2208136763,
+          "commit": 198798,
+          "tree": 4309081
+        }
+      },
+      "retained_tip_IDs": {
+        "bytes": 3321,
+        "file": "accelerate/retained-tip-IDs.DATA",
+        "sha256": "ac299bdeba71f8204aaf799dd0ba4e3d252d24a7df0c32a8f41798fc80daf383"
+      },
+      "selected_tip_count": 81
+    },
+    "datasets": {
+      "actual_private_restore_verified": true,
+      "chunks": [
+        {
+          "bytes": 52428800,
+          "file": "datasets/datasets.pack.part-0000.DATA",
+          "sha256": "801bdf61283a1fa54dd48ea8996346c692052743512ac551adb075b5806b508b"
+        },
+        {
+          "bytes": 52428800,
+          "file": "datasets/datasets.pack.part-0001.DATA",
+          "sha256": "dae767fa5ae1732d00d40c3a92f8bd1ea776847c715a76ca82327b9fee5493b3"
+        },
+        {
+          "bytes": 52428800,
+          "file": "datasets/datasets.pack.part-0002.DATA",
+          "sha256": "1c80e9cd56108487a744ffe0f5ed0f1f6102a10c98b834d61a3d4b73199e92c8"
+        },
+        {
+          "bytes": 52428800,
+          "file": "datasets/datasets.pack.part-0003.DATA",
+          "sha256": "e2f7e5a936cee74a4a9c9e50367c9ec4a8b1006fa63f9dd8ba3af5b40a01630f"
+        },
+        {
+          "bytes": 52428800,
+          "file": "datasets/datasets.pack.part-0004.DATA",
+          "sha256": "e7b0966d7596962221c3c8709b731a51d65fee7e63e23cabca998bdb9165c24e"
+        },
+        {
+          "bytes": 52428800,
+          "file": "datasets/datasets.pack.part-0005.DATA",
+          "sha256": "ae7ded0f97c086e5efd736ecb41007647c2e13a175e580feeea0c8619b88f90e"
+        },
+        {
+          "bytes": 52428800,
+          "file": "datasets/datasets.pack.part-0006.DATA",
+          "sha256": "baf892a40f8a7de7751c20267de7b847ab993e82327ab4209961beada15cdbcf"
+        },
+        {
+          "bytes": 52428800,
+          "file": "datasets/datasets.pack.part-0007.DATA",
+          "sha256": "ca4de473013adf4a55d990ff433c85b54b34dfbdd9c0a2115b7d26a39fca3d38"
+        },
+        {
+          "bytes": 52428800,
+          "file": "datasets/datasets.pack.part-0008.DATA",
+          "sha256": "198fc68bfc86d260785059fb9a5befd4711bc37e4103dba1a68da3daa46117cf"
+        },
+        {
+          "bytes": 52428800,
+          "file": "datasets/datasets.pack.part-0009.DATA",
+          "sha256": "19617e907a5893cab4dfad5232344ef8e7956dbce414127c4d870bdcca79c038"
+        },
+        {
+          "bytes": 52428800,
+          "file": "datasets/datasets.pack.part-0010.DATA",
+          "sha256": "88a1e14f983656aff5adffccf463c891a01d5f649fc0938023ef4d85101d4464"
+        },
+        {
+          "bytes": 52428800,
+          "file": "datasets/datasets.pack.part-0011.DATA",
+          "sha256": "cb159fc772eebd02731093b09de899bc4e431dfe7186cb99fa4f7221a9cfe59c"
+        },
+        {
+          "bytes": 2115069,
+          "file": "datasets/datasets.pack.part-0012.DATA",
+          "sha256": "3cc2770395a64b493c638db07587ac923f142279d3b0df2b433a1834df47b03b"
+        }
+      ],
+      "exact_object_IDs": {
+        "bytes": 97580,
+        "file": "datasets/exact-object-IDs.DATA",
+        "sha256": "fa4b7e188899003d05a66daf550b465b0ef8632d4ba8d59384349e93d701e417"
+      },
+      "pack_bytes": 631260669,
+      "pack_object_count": 2380,
+      "pack_sha256": "d905688950215b08e674729a58297f6e3b9272734c4928fb49f095f5cb5f8ee9",
+      "pack_trailer_sha1": "ae8ecf876064e762f21b9d89212c2c30ee8bebef",
+      "published_base_commit": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "published_origin": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+      "raw_object_summary": {
+        "selected_tip_count": 206,
+        "sufficient_single_prerequisite_commit": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+        "total_raw_unique_object_bytes": 656449365,
+        "unique_object_count": 2380,
+        "unique_object_type_counts": {
+          "blob": 592,
+          "commit": 264,
+          "tree": 1524
+        },
+        "unique_raw_object_bytes_by_type": {
+          "blob": 651939946,
+          "commit": 121149,
+          "tree": 4388270
+        }
+      },
+      "retained_tip_IDs": {
+        "bytes": 8446,
+        "file": "datasets/retained-tip-IDs.DATA",
+        "sha256": "499ad65797fbe7fbcce619cd8ed6850f45f8942d4c4634a30b22d003875d34ae"
+      },
+      "selected_tip_count": 206
+    }
+  },
+  "input_plan": {
+    "bytes": 20534,
+    "file": "original-object-input-plan.json.DATA",
+    "sha256": "640c61eeb6a4364fc38cd04547f88edb1d015a9250e5cc19047be668dfba2b07"
+  },
+  "large_historical_objects": [
+    {
+      "bytes": 142880768,
+      "family": "accelerate",
+      "historical_commit": "66459d36f466227984ee4cd29f76a5fe773c5db4",
+      "historical_path": "data/agent_supervisor/formal_verification_tactician_readiness/bundles/index.duckdb",
+      "oid": "14d6706502842110d16161a81d168281d6989a1c"
+    },
+    {
+      "bytes": 2022179327,
+      "family": "accelerate",
+      "historical_commit": "bd7447d29ee06b2cfd12e471ebf645a6fb436017",
+      "historical_path": "data/agent_supervisor/proof_grounded_ir_learning/datasets/pgir-objective-ast.jsonl",
+      "oid": "9b6ded832adffea56cd1402bb08d1dca484eb3c8"
+    },
+    {
+      "bytes": 196205088,
+      "family": "datasets",
+      "historical_commit": "b8a9bb35a8234d1c12204f2bae34d2a0c2635056",
+      "historical_path": "docs/implementation/reports/evidence/decoder-action-consistency-20261003/evidence.tar.xz",
+      "oid": "0be6b6e0639997edb9029c3e32700532c540c0f2"
+    },
+    {
+      "bytes": 106911344,
+      "family": "datasets",
+      "historical_commit": "b8a9bb35a8234d1c12204f2bae34d2a0c2635056",
+      "historical_path": "docs/implementation/reports/evidence/decoder-action-binding-20261003/evidence.tar.xz",
+      "oid": "3328ec7edccf75229b3d402d31a7af1fe8d1dfe5"
+    },
+    {
+      "bytes": 119263308,
+      "family": "datasets",
+      "historical_commit": "b8a9bb35a8234d1c12204f2bae34d2a0c2635056",
+      "historical_path": "docs/implementation/reports/evidence/decoder-context-boundary-training-20261003/evidence.tar.xz",
+      "oid": "81530fd237ea4b1f929dd631cae0a6532d61c6bc"
+    },
+    {
+      "bytes": 203598796,
+      "family": "datasets",
+      "historical_commit": "b8a9bb35a8234d1c12204f2bae34d2a0c2635056",
+      "historical_path": "docs/implementation/reports/evidence/decoder-generated-field-training-r2-20261003/evidence.tar.xz",
+      "oid": "ef215b8ffb1ed15505a0145a50dd080528fcdccf"
+    }
+  ],
+  "no_force_or_history_rewrite_or_LFS_change": true,
+  "published_runtime_native_model_or_legal_qualification": false,
+  "requires_published_base_objects": true,
+  "schema": "retained-unadopted-Git-object-history/v1",
+  "source_object_provenance": {
+    "bytes": 1209658,
+    "file": "source-object-provenance-and-difference.json.DATA",
+    "sha256": "258dcddfd29c0b1f9240ae37bb0bc68df4825cc79644f49480a59569fd642e73"
+  },
+  "status": "HISTORICAL_PRESERVATION_ONLY_NOT_PRODUCT_ADOPTION"
+}

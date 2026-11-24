@@ -1,0 +1,123 @@
+{
+  "AST_identity": {
+    "helper_AST_SHA256": {
+      "parent_declared_direct_IO_accepted": "6f262132a00d80c5d70902d28930a630def8a7d86b84f8f11ab293ef8eb7a07d",
+      "retain_json": "037f5409b8d0abea586a6986736d789df48cdffd2d8adb0407687cc69e338739",
+      "source_io_finish": "4e81ae81b0a52e071f03a33957e86c8ed454ab63b603c7aefd4685e5edb3ad9f",
+      "source_io_start": "98b941529b0311a943facd432d9cf314e61227ff032570bccfda9d660aa0e013"
+    },
+    "original_finalbody_AST_SHA256": "9ea566eb9e876cb21861904a36f5e1e71c6362325ff43ceb7820edf555c03ebc",
+    "original_fragment_sha256": "45115ee8c70e14e6c06980963a24a037b34c423ede78618aef0116d97a8ff95c"
+  },
+  "errors": 0,
+  "failures": 1,
+  "observations": {
+    "caught_is_exact_cleanup_error": true,
+    "caught_type": "OSError",
+    "cleanup_calls": [
+      "/fictional/output/parent-home"
+    ],
+    "hypothetical_only": true,
+    "in_memory_qualification_complete": true,
+    "meter_bytes": 37,
+    "meter_captures": 2,
+    "meter_finished": true,
+    "no_active_primary_at_entry": true,
+    "no_active_primary_in_finalbody": true,
+    "old_three_controls_unchanged": true,
+    "real_Source_SDK_resources_or_pipeline_executed": false,
+    "saved_precleanup_qualification_values": [
+      true
+    ],
+    "saved_reports": [
+      {
+        "Source_WRITE_claimed": false,
+        "Source_closed": true,
+        "actual_Source_context_closure": [
+          {
+            "exit_returned": true,
+            "hypothetical_only": true
+          }
+        ],
+        "actual_collected_roster_is_count_authority": true,
+        "canonical_Source_application": false,
+        "case_count_hint": 27,
+        "declared_direct_IO_budget_accepted": true,
+        "declared_direct_Source_IO_parent": {
+          "allocation": {
+            "ledger_before": {
+              "captures": 23,
+              "global_cap": 1000000,
+              "internal_cap": 900000,
+              "internal_used": 90000,
+              "used": 100000
+            },
+            "operation_total_bytes": 65536,
+            "role_limits": {
+              "collect": 20000,
+              "parent": 20000,
+              "run": 20000
+            },
+            "runtime_authority": {
+              "fictional_control_only": true
+            },
+            "schema": "Root-selected-declared-direct-Source-IO-allocation/v1",
+            "scope": "declared-direct-Source-auth-and-private-control-reads/v1"
+          },
+          "bytes": 37,
+          "captures": 2,
+          "complete_kernel_or_runtime_IO_measured": false,
+          "declared_direct_IO_budget_accepted": true,
+          "finished": true,
+          "initial_known_IO": {
+            "bytes": 37,
+            "captures": 2
+          },
+          "inputs": [],
+          "limit_bytes": 20000,
+          "outside_boundary": [
+            "interpreter/bootstrap-selfloading",
+            "stdlib/thirdparty/generalproject/library-IO-not-through-named-readers",
+            "SDK-internal-IO-not-through-named-readers",
+            "complete-kernel/runtime-IO"
+          ],
+          "outside_boundary_actual_bytes": null,
+          "read_syscalls": 0,
+          "role": "parent",
+          "runtime_authority": {
+            "fictional_control_only": true
+          },
+          "schema": "actual-declared-direct-Source-IO-meter/v1",
+          "scope": "declared-direct-Source-auth-and-private-control-reads/v1",
+          "violations": []
+        },
+        "errors": [],
+        "hypothetical_success_seed": {
+          "custody_safe": true,
+          "finished_meter": true,
+          "no_children": true,
+          "real_pipeline_executed": false
+        },
+        "outside_declared_direct_IO_actual_bytes": null,
+        "phase_order": [],
+        "phases": {},
+        "published_D_Git_READ_application": true,
+        "qualification_complete": true,
+        "resource_cleanup_confirmed": true,
+        "schema": "actual-published-D-phase2-bridge27-existing-owner/v1",
+        "selection": {
+          "fictional_control_only": true
+        },
+        "software_sequence_accepted": true,
+        "statutory_or_modelquality_or_convergence_authority": false
+      }
+    ],
+    "separate_count": 1
+  },
+  "parent_operator_sha256": "087843f1f120467ac86f50dadd511d59a44629cab678c8a09fad787ce88d3516",
+  "schema": "actual-private-success-cleanup-failure-one-control/v1",
+  "scope": "One hypothetical success seed, actual pure meter/finalbody AST, in-memory retain and fake cleanup; no successful pipeline/Source/SDK execution.",
+  "skipped": 0,
+  "tests": 1,
+  "unittest_output": "test_cleanup_fault_cannot_leave_success_qualified (__main__.SuccessCleanupFailureControl.test_cleanup_fault_cannot_leave_success_qualified) ... FAIL\n\n======================================================================\nFAIL: test_cleanup_fault_cannot_leave_success_qualified (__main__.SuccessCleanupFailureControl.test_cleanup_fault_cannot_leave_success_qualified)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"<one-success-cleanup-control-RAM>\", line 74, in test_cleanup_fault_cannot_leave_success_qualified\nAssertionError: True is not false : cleanup fault retained success\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nFAILED (failures=1)\n"
+}

@@ -1,0 +1,64 @@
+{
+  "Source_charges_refunded_or_reset": false,
+  "Source_queries_or_Git_changes_or_model_runs": 0,
+  "cached_input_set_bytes_unique": 219660,
+  "job_if_input_reachability_review": "INDEPENDENT_REVIEW_PENDING; static10 does not prove event scheduling or native execution",
+  "logical_owner_reads_this_unit_bytes": 297448,
+  "mutations": {
+    "job_budget_change_detected": true,
+    "missing_primary_path_detected": true,
+    "toolchain_drift_detected": true
+  },
+  "native_Lean_CI_dispatch_or_billing_action": false,
+  "only_change": "Restore the exact previously archived 96-line push/pull_request affected-path trigger block. All bytes outside on-block unchanged.",
+  "published_source_commit": "eaf1e0e7de5b121a8b6d5ac22019f997225cd68b",
+  "refs": {
+    "legal-v2-reasoner-ci.before.yml.DATA": {
+      "bytes": 56943,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/legal-v2-reasoner-ci.before.yml.DATA",
+      "sha256": "6c52a516fdcaa8cd7f269cd731788c01a822434e723cbb9df1fa504121d4303f"
+    },
+    "legal-v2-reasoner-ci.trigger-only.after.yml.DATA": {
+      "bytes": 62641,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/legal-v2-reasoner-ci.trigger-only.after.yml.DATA",
+      "sha256": "bf2dcbb19df220fe30c969c1f1908831ef385737aa51651cc0f76b5893cb8eef"
+    },
+    "same10-GREEN.json": {
+      "bytes": 1466,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/same10-GREEN.json",
+      "sha256": "f08885d696648733d38578650cce410a448ce741f31a1423eabd5b7144ba9fac"
+    },
+    "same10-RED.json": {
+      "bytes": 12168,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/same10-RED.json",
+      "sha256": "6ec318feb3221d8949932dc8bff729f5d52bb091ff040ea7da722b0459cf1f6f"
+    },
+    "trigger-only.forward.diff": {
+      "bytes": 5973,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/trigger-only.forward.diff",
+      "sha256": "ea3c0b3b292ef0ad0d6090dfa53af8619503f608f61d7bf9165a76e7ed8b2e18"
+    }
+  },
+  "resource_profile": "1CPU/CPU60/512MiB; stdlib-only static source controls",
+  "schema": "private-existing-native-CI-trigger-only-repair/v1",
+  "source_workflow_cache": {
+    "bytes": 56943,
+    "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/publication-remaining2570-selected-source-owner-READ-v02/raw/0734-legal-v2-reasoner-ci.yml.DATA",
+    "sha256": "6c52a516fdcaa8cd7f269cd731788c01a822434e723cbb9df1fa504121d4303f"
+  },
+  "static_same10_GREEN": {
+    "errors": 0,
+    "failures": 0,
+    "skips": 0,
+    "successful": true,
+    "testsRun": 10
+  },
+  "static_same10_RED": {
+    "errors": 0,
+    "failures": 16,
+    "skips": 0,
+    "successful": false,
+    "testsRun": 10
+  },
+  "status": "PRIVATE_NOT_APPLIED_NOT_DISPATCHED"
+}

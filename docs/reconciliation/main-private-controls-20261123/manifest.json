@@ -1,0 +1,264 @@
+{
+  "archive_root": "docs/reconciliation/main-private-controls-20261123",
+  "artifacts": [
+    {
+      "archive_relative_path": "tests/test_parent_preflight_original_finalizer_three_controls_v01.py.DATA",
+      "bytes": 22230,
+      "full9": {
+        "st_ctime_ns": "1795457234832450044",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "50877686",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795457234832450044",
+        "st_nlink": "1",
+        "st_size": "22230",
+        "st_uid": "1000"
+      },
+      "git_blob_sha1": "fd2ee11004438e7e81098632b999c8607f75e4bf",
+      "published_blob_matches": [],
+      "sha256": "45115ee8c70e14e6c06980963a24a037b34c423ede78618aef0116d97a8ff95c",
+      "source_FD_closed": true,
+      "source_path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/test_parent_preflight_original_finalizer_three_controls_v01.py.DATA",
+      "status": "HISTORICAL_TEST_CONTROL"
+    },
+    {
+      "archive_relative_path": "tests/test_parent_success_cleanup_failure_one_control_v01.py.DATA",
+      "bytes": 10131,
+      "full9": {
+        "st_ctime_ns": "1795457716258060521",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "50877690",
+        "st_mode": "33152",
+        "st_mtime_ns": "1795457716258060521",
+        "st_nlink": "1",
+        "st_size": "10131",
+        "st_uid": "1000"
+      },
+      "git_blob_sha1": "93a9521eb33788b580c77f40503e9f6569e82daf",
+      "published_blob_matches": [],
+      "sha256": "713203472d9422438dcbad4924ea6682ee6f52a5076307d705138a7be0c9a164",
+      "source_FD_closed": true,
+      "source_path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/test_parent_success_cleanup_failure_one_control_v01.py.DATA",
+      "status": "HISTORICAL_TEST_CONTROL"
+    },
+    {
+      "archive_relative_path": "controls/existing-R2-published-D27-operator-INERT.v01.py.DATA",
+      "bytes": 47298,
+      "full9": {
+        "st_ctime_ns": "1795432073660916619",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "50877661",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795432073660916619",
+        "st_nlink": "1",
+        "st_size": "47298",
+        "st_uid": "1000"
+      },
+      "git_blob_sha1": "1aec38c1d7a00f51ddc65f6b33930f6997899c06",
+      "published_blob_matches": [],
+      "sha256": "2936fa4786a336c5f741c71ee5151f08e75692774f095c8325d79a0a3512dd73",
+      "source_FD_closed": true,
+      "source_path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/existing-R2-published-D27-operator-INERT.v01.py.DATA",
+      "status": "UNADOPTED_INERT_HISTORICAL_VERSION"
+    },
+    {
+      "archive_relative_path": "controls/existing-R2-published-D27-request-INERT.v01.py.DATA",
+      "bytes": 3003,
+      "full9": {
+        "st_ctime_ns": "1795432073356913806",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "50877660",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795432073356913806",
+        "st_nlink": "1",
+        "st_size": "3003",
+        "st_uid": "1000"
+      },
+      "git_blob_sha1": "7f96c7da7403e564aca2c43492daece4a76ba3f2",
+      "published_blob_matches": [],
+      "sha256": "24473ccf82802e37270ba505fc473dcc95d4f2b54ce195f99bf2a4d9f988a78e",
+      "source_FD_closed": true,
+      "source_path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/existing-R2-published-D27-request-INERT.v01.py.DATA",
+      "status": "UNADOPTED_INERT_HISTORICAL_VERSION"
+    },
+    {
+      "archive_relative_path": "controls/bootstrap-published-D-phase2-bridge27-INERT.v03.py.DATA",
+      "bytes": 33546,
+      "full9": {
+        "st_ctime_ns": "1795432052700722654",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "50877658",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795432052700722654",
+        "st_nlink": "1",
+        "st_size": "33546",
+        "st_uid": "1000"
+      },
+      "git_blob_sha1": "7165d975ebc327e7a953d1d19336cc1cf90e2293",
+      "published_blob_matches": [],
+      "sha256": "2f5fb934f54166a5dbcc6c0fbf5dd35073b190df1c846e28c5b86366fa4e8179",
+      "source_FD_closed": true,
+      "source_path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/bootstrap-published-D-phase2-bridge27-INERT.v03.py.DATA",
+      "status": "UNADOPTED_INERT_HISTORICAL_VERSION"
+    },
+    {
+      "archive_relative_path": "records/sealed-existing-R2-published-D27-INERT-tuple-v02.json",
+      "bytes": 10956,
+      "full9": {
+        "st_ctime_ns": "1795432126359430172",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "50877668",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795432126359430172",
+        "st_nlink": "1",
+        "st_size": "10956",
+        "st_uid": "1000"
+      },
+      "git_blob_sha1": "5d47342f5da2da13ba6be0cbee19dfa20ba0a95e",
+      "published_blob_matches": [],
+      "sha256": "1d71aa16a8f6e43d7289163dbeebe192c469f13ba07a95ecca66524f89434e0c",
+      "source_FD_closed": true,
+      "source_path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/sealed-existing-R2-published-D27-INERT-tuple-v02.json",
+      "status": "HISTORICAL_NULL_BINDING_METADATA"
+    },
+    {
+      "archive_relative_path": "records/sealed-retained-Native3-direct-control-reuse-tuple-v01.json",
+      "bytes": 11552,
+      "full9": {
+        "st_ctime_ns": "1795441805239265940",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "50877677",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795441805239265940",
+        "st_nlink": "1",
+        "st_size": "11552",
+        "st_uid": "1000"
+      },
+      "git_blob_sha1": "a2ac75222a492f2e41ebaca64de7d36283be4489",
+      "published_blob_matches": [],
+      "sha256": "6170026d3db0e6cf70405032e805b1bd807150568a3174bd3bb8ab9ac2f899c6",
+      "source_FD_closed": true,
+      "source_path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/sealed-retained-Native3-direct-control-reuse-tuple-v01.json",
+      "status": "HISTORICAL_REUSE_METADATA_NOT_ENROLLED"
+    },
+    {
+      "archive_relative_path": "records/sealed-test-only-parent-preflight-original-finalizer-three-controls-v01.json",
+      "bytes": 5023,
+      "full9": {
+        "st_ctime_ns": "1795457352818596966",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "50877689",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795457352818596966",
+        "st_nlink": "1",
+        "st_size": "5023",
+        "st_uid": "1000"
+      },
+      "git_blob_sha1": "5c04a444b080e0cdfcf1997097168524883ed8fa",
+      "published_blob_matches": [],
+      "sha256": "0563a56b80997d9e80a021d5514b2669a90b4633cafd2d65b3da3e8206c6e508",
+      "source_FD_closed": true,
+      "source_path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/sealed-test-only-parent-preflight-original-finalizer-three-controls-v01.json",
+      "status": "HISTORICAL_RED3_DESCRIPTOR"
+    },
+    {
+      "archive_relative_path": "records/sealed-separate-success-cleanup-failure-one-control-v01.json",
+      "bytes": 3568,
+      "full9": {
+        "st_ctime_ns": "1795457846798287375",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "50877692",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795457846798287375",
+        "st_nlink": "1",
+        "st_size": "3568",
+        "st_uid": "1000"
+      },
+      "git_blob_sha1": "1fa7534e144a14c2238590cbab23c30fa138f108",
+      "published_blob_matches": [],
+      "sha256": "e881c84b5f768fd61c6497dd4fe3a57a6f5548cb2a2fc1c1a80421262d4b2a3c",
+      "source_FD_closed": true,
+      "source_path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/sealed-separate-success-cleanup-failure-one-control-v01.json",
+      "status": "HISTORICAL_RED1_DESCRIPTOR"
+    },
+    {
+      "archive_relative_path": "evidence/actual-parent-preflight-original-finalizer-three-controls-RED-v01.json",
+      "bytes": 6594,
+      "full9": {
+        "st_ctime_ns": "1795457261123706879",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "50877688",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795457261123706879",
+        "st_nlink": "1",
+        "st_size": "6594",
+        "st_uid": "1000"
+      },
+      "git_blob_sha1": "02176248ae00e0a85422a42c3464b7d419559ad3",
+      "published_blob_matches": [],
+      "sha256": "f05f187ec320993cd1830950b3d1f2163c6d47b0b51b6b7f2778d5dde4eb7fff",
+      "source_FD_closed": true,
+      "source_path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/actual-parent-preflight-original-finalizer-three-controls-RED-v01.json",
+      "status": "ACTUAL_PRIVATE_RED3"
+    },
+    {
+      "archive_relative_path": "evidence/actual-parent-success-cleanup-failure-RED1-v01.json",
+      "bytes": 5333,
+      "full9": {
+        "st_ctime_ns": "1795457747055350583",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "50877691",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795457747055350583",
+        "st_nlink": "1",
+        "st_size": "5333",
+        "st_uid": "1000"
+      },
+      "git_blob_sha1": "6b58379b3116298f78b10e78498cead30c487a36",
+      "published_blob_matches": [],
+      "sha256": "f0803dad3f8820fce648fed94f97cd23960153a6113ed4e03656e269f95c3c57",
+      "source_FD_closed": true,
+      "source_path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/actual-parent-success-cleanup-failure-RED1-v01.json",
+      "status": "ACTUAL_PRIVATE_RED1"
+    }
+  ],
+  "authored_artifact_bytes": 159234,
+  "authored_artifact_count": 11,
+  "comparison": {
+    "bytes": 10276,
+    "exact_blob_matches": 0,
+    "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/Main-authored-private-controls-current-published-blob-comparison-v01.json",
+    "published_commits": {
+      "accelerate": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+      "datasets": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7",
+      "root": "678996d3c02dbd43b77fdf6123a7368a860a6060"
+    },
+    "scope": "Three supplied published trees only; no complete-history or semantic novelty claim.",
+    "sha256": "363f9b32d15def28cb4c93befc726c84dab8b1d9487c57dbc9e9caee46446bb2"
+  },
+  "no_live_operator_or_source_overlay": true,
+  "no_new_authority": true,
+  "original_artifacts_unchanged": true,
+  "proposed_mode": "100644",
+  "qualification": {
+    "D27": "Earlier INERT NULL-bound control version; not a current selected operator or qualification.",
+    "Native3": "Historical reuse metadata only; no enrollment/execution.",
+    "later_correction": "Root-reported Reader v06, SAME3 3PASS and separate1 1PASS; full later paths/hashes unavailable in this packet, not independently authenticated here.",
+    "ordinary_Native_model_legal_corpus_convergence_and_eight_phase_completion": false,
+    "original_three": "Actual private RED: 3 tests,2 PASS,1 failure,0 errors/skips.",
+    "separate_one": "Actual private RED:1 test,1 failure,0 errors/skips."
+  },
+  "schema": "historical-main-private-controls-preservation-manifest/v1",
+  "status": "PROPOSED_ADDITIVE_ARCHIVE_NOT_COMMITTED_OR_PUBLISHED"
+}

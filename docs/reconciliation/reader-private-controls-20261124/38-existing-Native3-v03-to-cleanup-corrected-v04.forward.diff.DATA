@@ -1,0 +1,285 @@
+--- existing-v03
++++ cleanup-corrected-v04
+@@ -1,6 +1,5 @@
+ """Selected Native3 operator; only Reader executes this private program."""
+ from __future__ import annotations
+-
+ import ast
+ import base64
+ import contextlib
+@@ -18,7 +17,6 @@
+ import traceback
+ import types
+ import zlib
+-
+ N = Path('/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01')
+ HERE = Path('/tmp/Native3-existing-direct-wrapper-inert-binding-private-v01-kv733gya/current-e88-concrete-prelude-v02')
+ RUN_OUTPUT = HERE / 'output-v01'
+@@ -29,12 +27,11 @@
+ LEAN_BIN = str(Path(LEAN).parent)
+ PATH_SCOPE = '/home/barberb/.local/bin:/usr/lib/git-core'
+ ROOT_SELECTION = None
+-CURRENT_BINDING_REF = None  # Set only to the exact selected current manifest descriptor.
+-MAX_DIAGNOSTIC_BYTES = 16 * 1024**2
++CURRENT_BINDING_REF = None
++MAX_DIAGNOSTIC_BYTES = 16 * 1024 ** 2
+ FIELDS = ('st_dev', 'st_ino', 'st_mode', 'st_nlink', 'st_uid', 'st_gid', 'st_size', 'st_mtime_ns', 'st_ctime_ns')
+ f9 = lambda value: {key: str(getattr(value, key)) for key in FIELDS}
+ H = lambda raw: hashlib.sha256(raw).hexdigest()
+-
+ 
+ def read_private(path, size, digest):
+     path = Path(path)
+@@ -44,7 +41,7 @@
+     try:
+         assert f9(before) == f9(os.fstat(fd))
+         raw = bytearray()
+-        while piece := os.read(fd, 1024**2):
++        while (piece := os.read(fd, 1024 ** 2)):
+             raw.extend(piece)
+             assert len(raw) <= size
+         assert f9(before) == f9(os.fstat(fd)) == f9(path.lstat())
+@@ -53,40 +50,48 @@
+     raw = bytes(raw)
+     assert len(raw) == size and H(raw) == digest, str(path)
+     return raw
+-
+-
+-# Exact CURRENT selected bindings replace historical large-bundle extraction.
+-# This refusal occurs before private input reads, Source entry or enrollment.
+-assert type(ROOT_SELECTION) is str and ROOT_SELECTION and type(CURRENT_BINDING_REF) is dict, 'current Native3 operation is not selected'
++assert type(ROOT_SELECTION) is str and ROOT_SELECTION and (type(CURRENT_BINDING_REF) is dict), 'current Native3 operation is not selected'
+ _binding = json.loads(read_private(CURRENT_BINDING_REF['path'], CURRENT_BINDING_REF['bytes'], CURRENT_BINDING_REF['sha256']))
+ assert _binding['schema'] == 'existing-direct-Native3-current-bindings/v1' and _binding['Root_selection'] == ROOT_SELECTION
+ assert _binding['Source42_current_owner_binding'] and _binding['Native_enrollment'] and _binding['Source_IO_allocation'], 'actual current owner/enrollment/allocation bindings required'
+ source_record = _binding['Source42_record']
+-_ref = _binding['Source42_raw']; source_raw = read_private(_ref['path'], _ref['bytes'], _ref['sha256'])
++_ref = _binding['Source42_raw']
++source_raw = read_private(_ref['path'], _ref['bytes'], _ref['sha256'])
+ assert len(source_raw) == 10375 and H(source_raw) == '42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9'
+-_ref = _binding['Source_epoch']; epoch_raw = read_private(_ref['path'], _ref['bytes'], _ref['sha256']); EPOCH = json.loads(epoch_raw)
++_ref = _binding['Source_epoch']
++epoch_raw = read_private(_ref['path'], _ref['bytes'], _ref['sha256'])
++EPOCH = json.loads(epoch_raw)
+ assert type(EPOCH) is list and len({row['path'] for row in EPOCH}) == len(EPOCH)
+-W_INDEX = _binding['W_INDEX']; PROJECTS = _binding['PROJECTS']
+-NATIVE = _binding['Native']; NAMESPACES = _binding['normal_namespaces']
+-assert type(NATIVE) is list and len(NATIVE) == 8 and type(NAMESPACES) is list and len(NAMESPACES) == 3
+-LEAN = _binding['lean_executable']; assert type(LEAN) is str and Path(LEAN).is_absolute(); LEAN_BIN = str(Path(LEAN).parent)
+-_resource = _binding['resource']; assert type(_resource) is dict
+-STATE = Path(_resource['state_path']); EXPECTED_CONFIG = _resource['expected_config']; EXPECTED_CAPACITY = _resource['expected_capacity']
++W_INDEX = _binding['W_INDEX']
++PROJECTS = _binding['PROJECTS']
++NATIVE = _binding['Native']
++NAMESPACES = _binding['normal_namespaces']
++assert type(NATIVE) is list and len(NATIVE) == 8 and (type(NAMESPACES) is list) and (len(NAMESPACES) == 3)
++LEAN = _binding['lean_executable']
++assert type(LEAN) is str and Path(LEAN).is_absolute()
++LEAN_BIN = str(Path(LEAN).parent)
++_resource = _binding['resource']
++assert type(_resource) is dict
++STATE = Path(_resource['state_path'])
++EXPECTED_CONFIG = _resource['expected_config']
++EXPECTED_CAPACITY = _resource['expected_capacity']
+ assert type(EXPECTED_CONFIG) is dict and type(EXPECTED_CAPACITY) is dict
+-# The existing trusted scheduler/reader supplies its canonical policy digest.
+ assert EXPECTED_CAPACITY['base_config_sha256'] == _resource['expected_policy_sha256']
+-test_record = _binding['owning_test_record']; _ref = _binding['owning_test_raw']; test_raw = read_private(_ref['path'], _ref['bytes'], _ref['sha256'])
++test_record = _binding['owning_test_record']
++_ref = _binding['owning_test_raw']
++test_raw = read_private(_ref['path'], _ref['bytes'], _ref['sha256'])
+ assert len(test_raw) == 108837 and H(test_raw) == '0ad3389fce78ca14a68d1588ea9e3fa59f8bc377bf824f3b81b561b0665bbcb1'
+-assert next(row for row in EPOCH if row['path'] == test_record['path'])['sha256'] == H(test_raw)
+-_ref = _binding['binder_raw']; binder_path = Path(_ref['path']); binder_raw = read_private(binder_path, _ref['bytes'], _ref['sha256'])
++assert next((row for row in EPOCH if row['path'] == test_record['path']))['sha256'] == H(test_raw)
++_ref = _binding['binder_raw']
++binder_path = Path(_ref['path'])
++binder_raw = read_private(binder_path, _ref['bytes'], _ref['sha256'])
+ assert len(binder_raw) == 5298 and H(binder_raw) == '4eb11c8fe7197eb4ed02e08764ee7fa861b41968a083a9fc9e76f780537a4710'
+-
+ assert not RUN_OUTPUT.exists(), 'distinct selected Native3 output must be absent'
+-RUN_OUTPUT.mkdir(mode=0o700)
++RUN_OUTPUT.mkdir(mode=448)
+ PARENT_HOME = RUN_OUTPUT / 'parent-home'
+-PARENT_HOME.mkdir(mode=0o700)
++PARENT_HOME.mkdir(mode=448)
+ TMP = RUN_OUTPUT / 'original-test-temp'
+-TMP.mkdir(mode=0o700)
++TMP.mkdir(mode=448)
+ FLAGS = {'IPFS_DATASETS_PY_MINIMAL_IMPORTS': '1', 'IPFS_DATASETS_AUTO_INSTALL_TEST_DEPS': '0', 'IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI': '0', 'IPFS_TEST_PROOF_REUSE_AUTO_INSTALL': '0', 'IPFS_ACCEL_AUTO_INSTALL': '0', 'IPFS_ACCEL_SKIP_CORE': '1', 'IPFS_ACCEL_RUN_INTEGRATION_TESTS': '0', 'IPFS_ACCEL_RUN_INTEGRATION_TESTS_SIMULATED': '0', 'PYTEST_DISABLE_PLUGIN_AUTOLOAD': '1', 'PYTHONDONTWRITEBYTECODE': '1', 'RUN_HEAVY_TESTS': '0', 'RUN_LLM_TESTS': '0', 'RUN_LONG_TESTS': '0', 'RUN_NETWORK_TESTS': '0', 'HF_HUB_OFFLINE': '1', 'TRANSFORMERS_OFFLINE': '1', 'CUDA_VISIBLE_DEVICES': '', 'IPFS_DATASETS_RUN_NATIVE_LEAN': '1', 'IPFS_DATASETS_LEAN_EXECUTABLE': LEAN, 'IPFS_DATASETS_LEAN_VERSION': '4.34.1', 'IPFS_DATASETS_NATIVE_LEAN_REPORT': str(RUN_OUTPUT / 'native-lean-v2-result.json'), 'PYTHONPATH': str(A) + ':' + str(W) + ':/home/barberb/.local/lib/python3.12/site-packages', 'PYTHONUSERBASE': '/home/barberb/.local'}
+ os.environ.clear()
+ os.environ.update({'PATH': PATH_SCOPE, 'LANG': 'C.UTF-8', 'HOME': str(PARENT_HOME), 'XDG_CONFIG_HOME': str(PARENT_HOME / 'xdg-config'), 'XDG_CACHE_HOME': str(PARENT_HOME / 'xdg-cache'), 'XDG_DATA_HOME': str(PARENT_HOME / 'xdg-data'), 'GH_CONFIG_DIR': str(PARENT_HOME / 'gh-config'), 'GIT_CONFIG_GLOBAL': '/dev/null', 'GIT_CONFIG_NOSYSTEM': '1'})
+@@ -98,13 +103,12 @@
+ exec(compile(source_raw, source_record['path'], 'exec'), source.__dict__)
+ report = {'schema': 'actual-current-native-three-case-caller-owned-validation/v1', 'selection': ROOT_SELECTION, 'source_epoch_sha256': H(epoch_raw), 'source_epoch_rows': len(EPOCH), 'source_body_reads_by_metadata_fences': 0, 'native_asset_body_reads_by_metadata_fences': 0, 'test_source_sha256': H(test_raw), 'binder_sha256': H(binder_raw), 'native_attempts': [], 'errors': [], 'actual_native_qualification': False, 'full_Phase1_complete': False, 'pytest_case_credit': 0, 'statutory_or_model_or_corpus_admission': False, 'resource_cleanup_confirmed': False, 'Source_closed': False, 'diagnostic_bytes_written': 0, 'actual_test_function_entered': False}
+ 
+-
+ def retain_bytes(name, raw):
+     assert type(raw) is bytes
+     assert '/' not in name and name not in {'', '.', '..'}
+     assert report['diagnostic_bytes_written'] + len(raw) <= MAX_DIAGNOSTIC_BYTES
+     path = RUN_OUTPUT / name
+-    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o400)
++    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 256)
+     with os.fdopen(fd, 'wb') as stream:
+         stream.write(raw)
+         stream.flush()
+@@ -112,10 +116,8 @@
+     report['diagnostic_bytes_written'] += len(raw)
+     return {'path': str(path), 'bytes': len(raw), 'sha256': H(raw)}
+ 
+-
+ def retain_json(name, value):
+     return retain_bytes(name, (json.dumps(value, sort_keys=True, separators=(',', ':'), default=str) + '\n').encode())
+-
+ 
+ def native_guard():
+     seen = []
+@@ -131,7 +133,6 @@
+             os.close(fd)
+         seen.append({'path': str(path), 'bytes': row['bytes'], 'sha256': row['sha256'], 'full9': expected, 'body_read_bytes': 0})
+     return seen
+-
+ 
+ def metadata_guard():
+     records = []
+@@ -163,7 +164,6 @@
+         os.close(fd)
+     return {'records': records, 'Git_HEADS': heads, 'current_authorized_post_doc_W_index': W_INDEX, 'namespaces': NAMESPACES, 'native_assets': native_guard(), 'body_read_bytes': 0, 'all_FDs_closed': True}
+ 
+-
+ def observe_state():
+     for _ in range(5):
+         before = STATE.lstat()
+@@ -180,9 +180,7 @@
+             return {'full9': f9(after), 'bytes': len(raw), 'sha256': H(raw), 'state': json.loads(raw)}
+     raise RuntimeError('bounded existing resource-state snapshot changed')
+ 
+-
+ def retain_sdk_result(result, request, *, returned):
+-    # Preserve actual output bytes before any to_dict conversion or assertions.
+     from collections.abc import Mapping
+     outputs = result.output_files
+     assert isinstance(outputs, Mapping)
+@@ -199,7 +197,6 @@
+     row = {'index': index, 'SDK_returned_result': returned, 'request': {'argv': list(request.argv), 'runtime': str(request.runtime), 'limits': dataclasses.asdict(request.limits), 'input_files': input_refs, 'environment': dict(request.environment)}, 'raw_output_files': raw_refs, 'result': result.to_dict()}
+     report['native_attempts'].append(row)
+     row['durable_actual_event'] = retain_json(f'native-{index}-actual-event.json', row)
+-
+ 
+ def run_with_actual_custody(method, request, **kwargs):
+     native_guard()
+@@ -256,7 +253,6 @@
+             except BaseException as hold_error:
+                 pending['last_hold_error_type'] = type(hold_error).__name__
+ 
+-
+ @contextlib.contextmanager
+ def tracked_source_read(project):
+     manager = source.source_lease(project['root'], mode='read', timeout_seconds=30)
+@@ -273,8 +269,6 @@
+     else:
+         manager.__exit__(None, None, None)
+         observation['exit_returned'] = True
+-
+-
+ parent = None
+ try:
+     with contextlib.ExitStack() as stack:
+@@ -294,8 +288,8 @@
+             for name, (relative, digest) in pins.items():
+                 module = sys.modules[name]
+                 path = W / relative
+-                row = next(row for row in EPOCH if row['path'] == str(path))
+-                assert Path(module.__file__).resolve() == path.resolve() and row['sha256'] == digest and f9(path.lstat()) == row['full9']
++                row = next((row for row in EPOCH if row['path'] == str(path)))
++                assert Path(module.__file__).resolve() == path.resolve() and row['sha256'] == digest and (f9(path.lstat()) == row['full9'])
+                 report['canonical_module_bindings'][name] = {'path': str(path), 'sha256': digest, 'full9': row['full9']}
+             report['resource_before'] = observe_state()
+             assert report['resource_before']['state']['config'] == EXPECTED_CONFIG
+@@ -309,9 +303,9 @@
+             report['actual_parent_lease'] = parent.to_dict()
+ 
+             class ObservedNativeRunner(admitted.ResourceAdmittedToolRunner):
++
+                 def run(self, request, **kwargs):
+                     return run_with_actual_custody(super().run, request, **kwargs)
+-
+             runner = ObservedNativeRunner(parent_lease=parent, cpu_slots=1, child_process_slots=1, base_environment={'PATH': PATH_SCOPE, 'LANG': 'C.UTF-8'}, executable_roots=(LEAN_BIN, '/usr/bin'))
+             test_namespace = {'__name__': 'selected_existing_kernel_test_native3', '__file__': test_record['path']}
+             exec(compile(test_raw, test_record['path'], 'exec'), test_namespace)
+@@ -338,8 +332,8 @@
+             original_fd = os.open(original_path, os.O_RDONLY | os.O_NOFOLLOW)
+             try:
+                 original_before = os.fstat(original_fd)
+-                assert stat.S_ISREG(original_before.st_mode) and original_before.st_nlink == 1 and original_before.st_size <= 1024**2
+-                original_raw = os.read(original_fd, 1024**2 + 1)
++                assert stat.S_ISREG(original_before.st_mode) and original_before.st_nlink == 1 and (original_before.st_size <= 1024 ** 2)
++                original_raw = os.read(original_fd, 1024 ** 2 + 1)
+                 os.fsync(original_fd)
+                 assert len(original_raw) == original_before.st_size and f9(original_before) == f9(os.fstat(original_fd)) == f9(original_path.lstat())
+             finally:
+@@ -352,12 +346,12 @@
+             versions = [row for row in attempts if row['request']['argv'][-1:] == ['--version']]
+             compiled = [row for row in attempts if '--json' in row['request']['argv']]
+             report['actual_command_counts'] = {'all': len(attempts), 'version': len(versions), 'compiler': len(compiled), 'unclassified': len(attempts) - len(versions) - len(compiled)}
+-            assert len(compiled) == 3 and len(versions) >= 1 and report['actual_command_counts']['unclassified'] == 0
++            assert len(compiled) == 3 and len(versions) >= 1 and (report['actual_command_counts']['unclassified'] == 0)
+             for row in attempts:
+                 value = row['result']
+                 assert row['SDK_returned_result'] is True
+                 assert value['workspace_cleaned'] and value.get('native_lifecycle', {}).get('cleanup_confirmed') is True
+-                assert not any(value[key] for key in ('timed_out', 'cancelled', 'unavailable', 'output_truncated', 'workspace_limit_exceeded', 'resource_exhausted'))
++                assert not any((value[key] for key in ('timed_out', 'cancelled', 'unavailable', 'output_truncated', 'workspace_limit_exceeded', 'resource_exhausted')))
+             cases = original['cases']
+             assert [row['case'] for row in cases] == ['positive', 'wrong_type', 'unapproved_dependency']
+             for row, command in zip(cases, compiled, strict=True):
+@@ -365,12 +359,12 @@
+                 assert receipt['theorem_name'] == 'wanted' and receipt['native_identity'] is not None
+                 assert receipt['native_identity_checked_after_compile'] is True and receipt['approved_axioms'] == []
+                 if row['case'] == 'positive':
+-                    assert command['result']['returncode'] == 0 and receipt['accepted'] is True and receipt['expected_proposition_checked'] is True
++                    assert command['result']['returncode'] == 0 and receipt['accepted'] is True and (receipt['expected_proposition_checked'] is True)
+                     assert receipt['axiom_report']['axioms'] == []
+                 elif row['case'] == 'wrong_type':
+                     assert command['result']['returncode'] != 0 and receipt['accepted'] is False
+                     diagnostics = lean._lean_error_diagnostics(command['result']['stdout'], command['result']['stderr'])
+-                    assert any('type mismatch' in value.lower() for value in diagnostics), diagnostics
++                    assert any(('type mismatch' in value.lower() for value in diagnostics)), diagnostics
+                 else:
+                     assert command['result']['returncode'] == 0 and receipt['accepted'] is False
+                     assert receipt['axiom_report']['axioms'] and receipt['axiom_report']['declaration'] == receipt['expected_obligation_declaration']
+@@ -416,7 +410,29 @@
+     report['errors'].append({'type': type(error).__name__, 'message': str(error), 'traceback': traceback.format_exc()})
+     raise
+ finally:
+-    report['Source_closed'] = all(row['exit_returned'] for row in report.get('actual_Source_context_closure', []))
+-    final_ref = retain_json('complete-native3-direct-existing-owner-report.json', report)
+-    shutil.rmtree(PARENT_HOME)
+-    print(json.dumps({'event': 'ACTUAL_NATIVE3_CLOSED', 'report': final_ref, 'Source_closed': report['Source_closed'], 'resource_cleanup_confirmed': report['resource_cleanup_confirmed'], 'actual_native_qualification': report['actual_native_qualification'], 'errors': report['errors']}, sort_keys=True), flush=True)
++    _primary_phase_exception = sys.exc_info()[1]
++    _closure_rows = report.get('actual_Source_context_closure', [])
++    report['Source_entry_observed'] = bool(_closure_rows)
++    report['Source_closed'] = bool(_closure_rows) and all((row['exit_returned'] for row in _closure_rows))
++    report['resource_cleanup_before_parent_home'] = report['resource_cleanup_confirmed']
++    _parent_cleanup_exception = None
++    try:
++        shutil.rmtree(PARENT_HOME)
++    except BaseException as _cleanup_error:
++        _parent_cleanup_exception = _cleanup_error
++        report['parent_home_cleanup_confirmed'] = False
++        report['resource_cleanup_confirmed'] = False
++        report['errors'].append({'phase': 'parent_home_cleanup', 'type': type(_cleanup_error).__name__, 'message': str(_cleanup_error), 'traceback': traceback.format_exc()})
++    else:
++        report['parent_home_cleanup_confirmed'] = True
++    report['actual_native_qualification'] = bool(report['actual_native_qualification'] and report['Source_closed'] and report['resource_cleanup_confirmed'] and report['parent_home_cleanup_confirmed'])
++    final_ref = None
++    try:
++        final_ref = retain_json('complete-native3-direct-existing-owner-report.json', report)
++    except BaseException as _publication_error:
++        if _primary_phase_exception is None and _parent_cleanup_exception is None:
++            raise
++        print(json.dumps({'event': 'ACTUAL_NATIVE3_FINAL_REPORT_PUBLICATION_FAILED', 'type': type(_publication_error).__name__, 'message': str(_publication_error)}), flush=True)
++    print(json.dumps({'event': 'ACTUAL_NATIVE3_CLOSED', 'report': final_ref, 'Source_entry_observed': report['Source_entry_observed'], 'Source_closed': report['Source_closed'], 'resource_cleanup_confirmed': report['resource_cleanup_confirmed'], 'parent_home_cleanup_confirmed': report['parent_home_cleanup_confirmed'], 'actual_native_qualification': report['actual_native_qualification'], 'errors': report['errors']}, sort_keys=True), flush=True)
++    if _primary_phase_exception is None and _parent_cleanup_exception is not None:
++        raise _parent_cleanup_exception

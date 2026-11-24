@@ -1,0 +1,11 @@
+--- /tmp/Reader-D27-Source-accounting-and-meter-repair-private-v01/operator-known514-explicit-FD-meter-INERT-v01.py.DATA
++++ /tmp/Reader-D27-Source-accounting-and-meter-repair-private-v01/operator-known514-explicit-FD-meter-INERT-v02.py.DATA
+@@ -171,7 +171,7 @@
+ SOURCE_IO_STATE=source_io_start(SOURCE_IO_ALLOCATION,ROOT_RUNTIME_SELECTION,'parent',SOURCE_IO_INITIAL_KNOWN_PRELAUNCH)
+ assert ROOT.is_absolute() and ADDITIONAL_A_ROOT.is_absolute() and ROOT!=ADDITIONAL_A_ROOT
+ assert all(type(v)is str and len(v)==40 and all(c in '0123456789abcdef'for c in v)for v in (FINAL_D_HEAD,FINAL_D_TREE,FINAL_A_HEAD,FINAL_A_TREE))
+-BOOTSTRAP_REFERENCE = {'path': '/tmp/Reader-D27-known514-bounded-ordinary-preparation-v03/bootstrap-D27-known514-authsticky-runtime-clock-NULL-v01.py.DATA', 'bytes': 61459, 'sha256': '6f1ddbd9176e250d7bc55430581147b15b98c3203e4a6bed6dbfca0d14070777'}
++BOOTSTRAP_REFERENCE = {'path': '/tmp/Reader-D27-Source-accounting-and-meter-repair-private-v01/bootstrap-known514-explicit-FD-meter-INERT-v01.py.DATA', 'bytes': 70598, 'sha256': '48faac726afc3af10bd321baa7a5872869b370aba35e01720c90d204c56939d8'}
+ _BOOTSTRAP_RAW=read_private(BOOTSTRAP_REFERENCE['path'],BOOTSTRAP_REFERENCE['bytes'],BOOTSTRAP_REFERENCE['sha256'])
+ _BT=ast.parse(_BOOTSTRAP_RAW,filename=BOOTSTRAP_REFERENCE['path'])
+ for _literal_name,_expected in (('ROOT_RUNTIME_SELECTION',ROOT_RUNTIME_SELECTION),('SELECTED_TEST_REWRITE_POLICY',SELECTED_TEST_REWRITE_POLICY)):

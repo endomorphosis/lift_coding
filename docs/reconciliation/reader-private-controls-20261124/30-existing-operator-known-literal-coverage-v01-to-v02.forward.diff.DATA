@@ -1,0 +1,11 @@
+--- coverage.v01
++++ coverage.v02
+@@ -160,7 +160,7 @@
+     path, size, digest = reference['path'], reference['bytes'], reference['sha256']
+     if not isinstance(path, str) or not Path(path).is_absolute() or os.path.normpath(path) != path or type(size) is not int or not 0 < size <= 1048576 or not isinstance(digest, str) or len(digest) != 64 or any(c not in '0123456789abcdef' for c in digest):
+         raise RuntimeError('Known literal import coverage reference identity differs')
+-    raw = read_private(reference)
++    raw = read_private(path, size, digest)
+     def closed_object(pairs):
+         result = {}
+         for key, value in pairs:

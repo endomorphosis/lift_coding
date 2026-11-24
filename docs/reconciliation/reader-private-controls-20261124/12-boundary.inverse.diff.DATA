@@ -1,0 +1,56 @@
+--- boundary.after.py.DATA
++++ boundary.before.py.DATA
+@@ -4,43 +4,34 @@
+     path=t['path']
+     before=parents_fn(path)
+     record['parent_full9_before_source']=copy.deepcopy(before)
+-    # Before-source matrix stays in RAM until the immediate Source-end check.
+-    def archive_failure_matrix(label,value,reference_key,error_key):
+-        try:
+-            record[reference_key]=archive_matrix_fn(label,value)
+-        except BaseException as diagnostic_error:
+-            record[error_key]={'type':type(diagnostic_error).__name__,'stage':'matrix-archive'}
++    record['before_source_matrix_ref']=archive_matrix_fn('before-source',before)
+     source_stage='leaf'
+     try:
+         leaf_fn(t)
+         source_stage='read'
+         raw,actual9=read_fn({'path':path,'bytes':t['bytes'],'full9':t['full9']},'canonical_current_working_file')
+-        # No private output or archive is written before this Source-end observation.
++        # No private output or archive is written between source helper return and this observation.
+         source_stage='immediate-parent-observation'
+         after_source=parents_fn(path)
+     except BaseException as source_error:
+         record['source_phase_original_error']={'type':type(source_error).__name__,'stage':source_stage}
+-        after_exception=None
++        diagnostic_stage='parent-observation'
+         try:
+             after_exception=parents_fn(path)
+             record['parent_full9_after_source_exception']=copy.deepcopy(after_exception)
++            diagnostic_stage='matrix-archive'
++            record['source_exception_matrix_ref']=archive_matrix_fn('after-source-exception',after_exception)
+         except BaseException as diagnostic_error:
+-            record['source_exception_observation_error']={'type':type(diagnostic_error).__name__,'stage':'parent-observation'}
+-        archive_failure_matrix('before-source',before,'before_source_matrix_ref','before_source_archive_error')
+-        if after_exception is not None:
+-            archive_failure_matrix('after-source-exception',after_exception,'source_exception_matrix_ref','source_exception_archive_error')
+-        # Bare raise preserves the ORIGINAL leaf/read/end-observation error and traceback.
++            record['source_exception_observation_error']={'type':type(diagnostic_error).__name__,'stage':diagnostic_stage}
++        # Bare raise preserves the ORIGINAL leaf/read/end-observation exception and traceback.
+         raise
+     record['parent_full9_immediately_after_source']=copy.deepcopy(after_source)
+     record['actual_source_result']={'path':path,'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest(),'full9':actual9}
+     record['source_parent_all_fields_equal']=after_source==before
+     if after_source!=before:
+-        source_error=AssertionError(('source-IO-end parent full9 drift',path,before,after_source))
+-        archive_failure_matrix('before-source',before,'before_source_matrix_ref','before_source_archive_error')
+-        archive_failure_matrix('after-source',after_source,'after_source_matrix_ref','after_source_archive_error')
+-        raise source_error
+-    # Full parent equality passed before any private publication. Archive errors refuse.
+-    record['before_source_matrix_ref']=archive_matrix_fn('before-source',before)
++        record['after_source_matrix_ref']=archive_matrix_fn('after-source',after_source)
++        raise AssertionError(('source-IO-end parent full9 drift',path,before,after_source))
++    # Authoritative source parent equality passed BEFORE any post-source private publication.
+     record['after_source_matrix_ref']=archive_matrix_fn('after-source',after_source)
+     private_error=None
+     try:

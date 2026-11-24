@@ -1,0 +1,123 @@
+{
+  "Git_archive_file_mode": "100644_nonexecutable",
+  "commits": [
+    {
+      "already_published_same_tree_witness": "1714155e744d2e359ec284fa81eb5b3032e89c3b",
+      "archive_relative_file": "kit-e9e85ba2198164bd28e99d6d1150070fa5692695.commit.DATA",
+      "bytes": 319,
+      "oid": "e9e85ba2198164bd28e99d6d1150070fa5692695",
+      "parent_dependencies": [
+        {
+          "kind": "other_selected_commit_in_same_repository",
+          "oid": "fc537feb8c8c51a8d561519a71fbc7600b98cbb6"
+        }
+      ],
+      "parents": [
+        "fc537feb8c8c51a8d561519a71fbc7600b98cbb6"
+      ],
+      "recovery_commit_is_published_main_ancestor": false,
+      "repository": "kit",
+      "sha256": "71f3e1d7582fcbd671ba0f4916e95a4a3dc05658dc516f65d4e5be910a3bcfe3",
+      "tree": "c150c307ee38f48fd1ad1c53f4f864f159a853bd",
+      "witness_is_published_main_ancestor": true,
+      "witness_tree_equal": true
+    },
+    {
+      "already_published_same_tree_witness": "5317f735c6de2796f54266a959ae53f2741e2cec",
+      "archive_relative_file": "kit-fc537feb8c8c51a8d561519a71fbc7600b98cbb6.commit.DATA",
+      "bytes": 302,
+      "oid": "fc537feb8c8c51a8d561519a71fbc7600b98cbb6",
+      "parent_dependencies": [
+        {
+          "kind": "ancestor_of_supplied_published_main",
+          "oid": "f6a574375febbcf9a46fcd24bbc7bc5cfb551de5"
+        }
+      ],
+      "parents": [
+        "f6a574375febbcf9a46fcd24bbc7bc5cfb551de5"
+      ],
+      "recovery_commit_is_published_main_ancestor": false,
+      "repository": "kit",
+      "sha256": "ba38d584803c6a3e3a0041cdac63bd709be973a87511fe146107d9a40ce19f62",
+      "tree": "4d90655b51c168b01c6ec8f515a71b74437a39b1",
+      "witness_is_published_main_ancestor": true,
+      "witness_tree_equal": true
+    },
+    {
+      "already_published_same_tree_witness": "fffd055f32118e2784173596a5954db4384cc993",
+      "archive_relative_file": "swiss-7e7c69c939f79825821b647c44044a3c8029f053.commit.DATA",
+      "bytes": 319,
+      "oid": "7e7c69c939f79825821b647c44044a3c8029f053",
+      "parent_dependencies": [
+        {
+          "kind": "other_selected_commit_in_same_repository",
+          "oid": "4a9c3224275e7d9537de5c35d0a2658a30648d88"
+        }
+      ],
+      "parents": [
+        "4a9c3224275e7d9537de5c35d0a2658a30648d88"
+      ],
+      "recovery_commit_is_published_main_ancestor": false,
+      "repository": "swiss",
+      "sha256": "7dcca2fde61546ff5342256b502127d103fedc5ab7c9f78edccdcbfbdd0f033f",
+      "tree": "c428cf1fa75257a86b7e9fc0c8bf45046a5c5b02",
+      "witness_is_published_main_ancestor": true,
+      "witness_tree_equal": true
+    },
+    {
+      "already_published_same_tree_witness": "df11f08fae17d35153e420fdcdc5b38d9f6b9a7f",
+      "archive_relative_file": "swiss-4a9c3224275e7d9537de5c35d0a2658a30648d88.commit.DATA",
+      "bytes": 302,
+      "oid": "4a9c3224275e7d9537de5c35d0a2658a30648d88",
+      "parent_dependencies": [
+        {
+          "kind": "ancestor_of_supplied_published_main",
+          "oid": "df11f08fae17d35153e420fdcdc5b38d9f6b9a7f"
+        }
+      ],
+      "parents": [
+        "df11f08fae17d35153e420fdcdc5b38d9f6b9a7f"
+      ],
+      "recovery_commit_is_published_main_ancestor": false,
+      "repository": "swiss",
+      "sha256": "f9c973abd2585e4754d3ca3c5a5357abb97aff579713fdf0fa8de5de987dcc08",
+      "tree": "0534225ee42d334318e02afa6c54da0dc2974e36",
+      "witness_is_published_main_ancestor": true,
+      "witness_tree_equal": true
+    }
+  ],
+  "prior_bundle_attempt": {
+    "no_prior_costs_refunded_or_reset": true,
+    "outcome": "failed_before_bundle_due_conservative_rev_list_object_output_assumption",
+    "receipt_bytes": 670904,
+    "receipt_not_read_by_this_unit": true,
+    "receipt_sha256_prefix": "b4a189",
+    "tool": "f6d67d"
+  },
+  "qualification": {
+    "all_parents_are_same_selected_pair_or_published_main_ancestors": true,
+    "connectivity_after_existing_object_prerequisites_supplied": true,
+    "each_tree_has_verified_published_ancestor_witness": true,
+    "exact_git_commit_bytes_and_OIDs_verified": true,
+    "fresh_private_restore_banks_loose_before_alternates": true,
+    "fresh_remote_query": false,
+    "source_code_tests_or_Native_or_model_or_legal_review": false
+  },
+  "raw_commit_count": 4,
+  "raw_commit_total_bytes": 1242,
+  "repositories": {
+    "kit": {
+      "historical_tip": "e9e85ba2198164bd28e99d6d1150070fa5692695",
+      "origin": "https://github.com/endomorphosis/ipfs_kit_py.git",
+      "supplied_published_main": "b15442e490dc39d046a911ea663c73c99ed3c755"
+    },
+    "swiss": {
+      "historical_tip": "7e7c69c939f79825821b647c44044a3c8029f053",
+      "origin": "https://github.com/endomorphosis/swissknife.git",
+      "supplied_published_main": "453a30b01e62b6acdd1c54070821dbacfbf7908e"
+    }
+  },
+  "schema": "historical-raw-Git-recovery-commit-identity-archive/v1",
+  "source_code_overlay": false,
+  "status": "NOT_ADOPTED_HISTORICAL_METADATA_ONLY"
+}

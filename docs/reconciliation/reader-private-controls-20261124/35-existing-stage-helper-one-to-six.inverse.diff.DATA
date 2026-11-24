@@ -1,0 +1,13 @@
+--- existing.stage1
++++ existing.stage6
+@@ -28,8 +28,8 @@
+    raw,new9=read_fn(tmp,len(row['body']),'private_staged_readback');assert raw==row['body']and parent_identity(target.parent)==parent
+    assert new9==stage['last_owned_FD_full9']and all(new9[k]==stage['birth_full9'][k]for k in('st_dev','st_ino','st_uid','st_gid','st_nlink'))
+    stage['stage_full9']=new9;stage['fully_staged']=True;stage['phase']='fully-staged'
+-  assert len(stages)==1 and all(stage['fully_staged']is True and stage.get('FD_closed')is True and 'FD_close_error'not in stage for stage in stages)
+-  report['all1_posts_staged_fsynced_and_readback_before_first_effect']=True
++  assert len(stages)==6 and all(stage['fully_staged']is True and stage.get('FD_closed')is True and 'FD_close_error'not in stage for stage in stages)
++  report['all6_posts_staged_fsynced_and_readback_before_first_effect']=True
+   for row,stage in zip(selected,stages,strict=True):
+    target=Path(row['path']);tmp=Path(stage['temporary_path']);old=expected9[str(target)]
+    verify_guard_evidence_before_effects()

@@ -1,0 +1,53 @@
+--- /tmp/Reader-D27-package-source-closure-request-private-v01/execute-D27-next83-base-member-request-derived-cardinality-INERT-v01.py.DATA
++++ /tmp/Reader-D27-package-source-closure-request-private-v01/execute-D27-next102-base-member-request-derived-cardinality-INERT-v01.py.DATA
+@@ -2,16 +2,16 @@
+ from pathlib import Path
+ 
+ SEL = None
+-REQ = {'path': '/tmp/Reader-D27-package-source-closure-request-private-v01/next-potential-eager2744-base-member-metadata-resolved-Source-READ-request-v01.json', 'bytes': 3574801, 'sha256': '94f559c6a82326ba7db56336521e7df9216fb3855eaa7be10ac9c0b8fa0e4bff'}
++REQ = {'path': '/tmp/Reader-D27-package-source-closure-request-private-v01/next-potential-eager3672-base-member-metadata-resolved-Source-READ-request-v01.json', 'bytes': 7156822, 'sha256': '37e0f34c4cfbb7445803f38be6b07668a814f019614b6b0394369312249ce973'}
+ BASE = Path('/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01')
+ N = BASE/'Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01'
+-OUT = N/'actual-D27-next83-base-and-member-Source-READ-v01'
++OUT = N/'actual-D27-next102-base-and-member-Source-READ-v01'
+ FIELDS = ('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+ f9 = lambda s:{k:str(getattr(s,k)) for k in FIELDS}
+ H = lambda raw:hashlib.sha256(raw).hexdigest()
+ spent = {'bytes':(SEL['bytes'] if SEL is not None else 0)+globals().get('CARRIED_OPERATOR_BYTES',0),'captures':(1 if SEL is not None else 0)+globals().get('CARRIED_OPERATOR_CAPTURES',0)}
+ report = {'schema':'actual-frozen-A-D-existing-READ-operation/v1','inputs':[], 'captures':[], 'Source_contexts':[], 'errors':[], 'Source_closed':False,'module_closed':False,'prelaunch_carried':dict(spent),'selected_reference':SEL,'request_reference':REQ}
+-before = {'captures': 85361, 'used': 5705178898, 'internal_used': 5514587024, 'global_cap': 5972688896, 'internal_cap': 5704253440}
++before = {'captures': 85723, 'used': 5714315861, 'internal_used': 5523723987, 'global_cap': 6039797760, 'internal_cap': 5771362304}
+ VERIFIED_SELECTED_SOURCE_ROWS = {}
+ ledger = dict(before)
+ source = None
+@@ -90,7 +90,7 @@
+ OUT.mkdir(mode=0o700)
+ (OUT/'raw').mkdir(mode=0o700)
+ (OUT/'matrices').mkdir(mode=0o700)
+-print(json.dumps({'event':'SELECTED_D27_NEXT83_READ_STARTED','pid':os.getpid(),'output_namespace':str(OUT)}),flush=True)
++print(json.dumps({'event':'SELECTED_D27_NEXT102_READ_STARTED','pid':os.getpid(),'output_namespace':str(OUT)}),flush=True)
+ try:
+     selected=json.loads(control_read(SEL));request=json.loads(control_read(REQ))
+     assert selected['Root_selected']is True
+@@ -228,7 +228,7 @@
+                 row={'path':t['path'],'bytes':t['bytes'],'sha256':H(back),'full9':actual9,'kind':t['kind'],'root':root,'raw_reference':rr}
+                 if 'relative_path'in t:row['relative_path']=t['relative_path']
+                 report['captures'].append(row)
+-                print(json.dumps({'event':'D27_NEXT83_CAPTURED','index':i,'path':t['path'],'bytes':t['bytes']}),flush=True)
++                print(json.dumps({'event':'D27_NEXT102_CAPTURED','index':i,'path':t['path'],'bytes':t['bytes']}),flush=True)
+             report['after']={r:root_facts(r,e)for r,e in roots.items()}
+             report['AGENTS_after']=check_exact_AGENTS()
+             report['candidate_absences_after']=check_candidate_absences()
+@@ -253,8 +253,8 @@
+         # Root-selected before counters plus actual new debits, sealed to its
+         # operation receipt. No invented shared byte-ledger file or authority.
+         report['ledger_after']={k:ledger[k]for k in before}
+-    ref=js(OUT/'actual-D27-next83-base-and-member-Source-READ-v01-closed-report.json',report)
+-    compact=js(OUT/'actual-D27-next83-base-and-member-Source-READ-v01-small-closeout.json',{'schema':'actual-D27-next83-base-and-member-READ-small-closeout/v1','status':'PASS'if not report['errors']and report.get('snapshot_complete')else'FAILED','Source_closed':report['Source_closed'],'owned_module_closed':report['module_closed'],'errors':report['errors'],'roots_before':report.get('before'),'roots_after':report.get('after'),'AGENTS_reuse':report.get('retained_AGENTS_reuse'),'AGENTS_named_absences':len(report.get('AGENTS_after',{}).get('absent',[])),'captures':report['captures'],'actual_IO':spent,'ledger_after':report.get('ledger_after'),'full_report_reference':ref,'SDK_Native_compiler_or_project_execution':False,'cohort_process_free_or_positive_handle_qualified':False})
+-    print(json.dumps({'event':'D27_NEXT83_CLOSED_COMPACT','compact':compact},sort_keys=True),flush=True)
+-    print(json.dumps({'event':'D27_NEXT83_READ_CLOSED','report':ref,'completed':len(report['captures']),'Source_closed':report['Source_closed'],'module_closed':report['module_closed'],'ledger_after':report.get('ledger_after'),'errors':report['errors']},sort_keys=True),flush=True)
++    ref=js(OUT/'actual-D27-next102-base-and-member-Source-READ-v01-closed-report.json',report)
++    compact=js(OUT/'actual-D27-next102-base-and-member-Source-READ-v01-small-closeout.json',{'schema':'actual-D27-next102-base-and-member-READ-small-closeout/v1','status':'PASS'if not report['errors']and report.get('snapshot_complete')else'FAILED','Source_closed':report['Source_closed'],'owned_module_closed':report['module_closed'],'errors':report['errors'],'roots_before':report.get('before'),'roots_after':report.get('after'),'AGENTS_reuse':report.get('retained_AGENTS_reuse'),'AGENTS_named_absences':len(report.get('AGENTS_after',{}).get('absent',[])),'captures':report['captures'],'actual_IO':spent,'ledger_after':report.get('ledger_after'),'full_report_reference':ref,'SDK_Native_compiler_or_project_execution':False,'cohort_process_free_or_positive_handle_qualified':False})
++    print(json.dumps({'event':'D27_NEXT102_CLOSED_COMPACT','compact':compact},sort_keys=True),flush=True)
++    print(json.dumps({'event':'D27_NEXT102_READ_CLOSED','report':ref,'completed':len(report['captures']),'Source_closed':report['Source_closed'],'module_closed':report['module_closed'],'ledger_after':report.get('ledger_after'),'errors':report['errors']},sort_keys=True),flush=True)
+ if report['errors']:sys.exit(1)

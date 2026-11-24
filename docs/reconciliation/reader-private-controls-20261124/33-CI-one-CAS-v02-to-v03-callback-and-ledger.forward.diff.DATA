@@ -1,0 +1,25 @@
+--- profile.v02
++++ profile.v03
+@@ -5,11 +5,11 @@
+ PREBOUND_OUTPUT_NAMESPACE = None
+ if SEL is None or PREBOUND_OUTPUT_NAMESPACE is None:
+     raise RuntimeError('INERT existing CI CAS: exact Root Source selection and output namespace required')
+-REQ = {'path': '/tmp/Reader-D27-legal-ir-and-CI-next-preparation-private-v01/CI-one-YAML-existing-Source42-CAS-request-INERT-v02.json', 'bytes': 4915, 'sha256': 'fcb5921ba9c01119535c3c099068a0660ca7bae6511c460ec9775973d305b72b'}
++REQ = {'path': '/tmp/Reader-D27-legal-ir-and-CI-next-preparation-private-v01/CI-one-YAML-existing-Source42-CAS-request-INERT-v03.json', 'bytes': 4915, 'sha256': 'fc201b0bcaa3a28eef4d60c0fa5737aeb485f6cd9e4e6bed892ae101abd5512b'}
+ FIELDS=('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+ f9=lambda s:{k:str(getattr(s,k)) for k in FIELDS}
+ H=lambda raw:hashlib.sha256(raw).hexdigest()
+-before = {'captures': 94591, 'used': 6345111063, 'internal_used': 6154519189, 'global_cap': 6576668672, 'internal_cap': 6308233216}
++before = {'captures': 94617, 'used': 6352367707, 'internal_used': 6161775833, 'global_cap': 6576668672, 'internal_cap': 6308233216}
+ spent={'bytes':SEL['bytes']+globals().get('CARRIED_OPERATOR_BYTES',0),'captures':1+globals().get('CARRIED_OPERATOR_CAPTURES',0)}
+ report={'schema':'actual-existing-CI-one-YAML-CAS/v1','inputs':[],'errors':[],'Source_contexts':[],'Source_closed':False,'module_closed':False,'qualification_complete':False,'write_complete':False,'installed':[],'prelaunch_carried':dict(spent)}
+ source=None
+@@ -209,7 +209,7 @@
+             assert control_read(r,'canonical_before_RAW_readback')==raw
+             return r
+         def archive_matrix(label,value):return js(OUT/'matrices'/(label+'.json'),value)
+-        before_ref,actual9=capture_one_at_source_IO_end(t,OUT/'raw'/'actual-workflow-before.DATA',capture_record,parents_fn=parents,leaf_fn=leaf,read_fn=lambda p,n:checked_read(p,n,'canonical_before'),seal_fn=seal_before,archive_matrix_fn=archive_matrix,caller_uid=os.getuid())
++        before_ref,actual9=capture_one_at_source_IO_end(t,OUT/'raw'/'actual-workflow-before.DATA',capture_record,parents_fn=parents,leaf_fn=leaf,read_fn=lambda row,kind:checked_read(row['path'],row['bytes'],kind),seal_fn=seal_before,archive_matrix_fn=archive_matrix,caller_uid=os.getuid())
+         actual_before=held.pop('before')
+         assert actual9==t['full9'] and actual_before==before_raw and H(actual_before)==t['before_sha256']
+         assert hashlib.sha1(b'blob '+str(len(actual_before)).encode()+b'\0'+actual_before).hexdigest()==oid

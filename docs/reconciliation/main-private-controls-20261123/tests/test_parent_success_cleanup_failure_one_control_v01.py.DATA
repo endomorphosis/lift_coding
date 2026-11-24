@@ -1,0 +1,96 @@
+"""One fictional success-seed finalizer control; no successful pipeline/Source/SDK runs."""
+import ast,base64,copy,hashlib,io,json,sys,types,unittest,zlib
+from pathlib import PurePosixPath
+if __name__=="__main__":
+ import os,resource,signal
+ resource.setrlimit(resource.RLIMIT_CPU,(30,30));resource.setrlimit(resource.RLIMIT_AS,(512*1024**2,512*1024**2))
+ if hasattr(os,"sched_getaffinity"):os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})
+ signal.alarm(60)
+PARENT_SHA="087843f1f120467ac86f50dadd511d59a44629cab678c8a09fad787ce88d3516"
+_U=json.loads(zlib.decompress(base64.b64decode("eNqlWG1v4joW/ivefknQQhsSSAK6vVJnYO9UOztUpdVqRZHlxA74TkgYx2EGVf3ve2wnIdD2DrNbaaa1fXxenvPqPF8kZRZLnmfFxfjiE7pGKdlElCBBvo/RmhTrlEeXxZq4Q9+Gvc7lmv2gfMUKaXeesvns8f7jFN/O8Pzj7G4K1y3K4pQIRnuUCxbL3jwvRcx6pJTrHslobyv4jkjWi/NMijztCUZocbXrW21us8eH+e1kij/MHr9Mbu7/A4wXFs8kE1vB4P+rKM9lIQXZ9gqWJmlOKM9WVhdZhaSg8ZVcc0G3RMj91YplTJB0K/I/QZ8rOBVE7Hu3s16Wy55ci7xcrXsZ2YDOShkmCsVoPvlnT0vMSPpT4jjfbFNQrPcV6Fl6JcpM8g2De9byKXvKKEtQoYHAPMeFBMVskqZ5TBT0XaTQyQWX+y4CTFgX8YxLTtLrL3nGOuOnDMEPTxAogXjBM+CQxeyIBeWx7KBcoIK1eXfQ367Rs1XEa7YhStVKNdyIVJv5FiBS5FjmkqQ42kumDVPa4JRvuNTLlNEVEzhiSS6YhjuGq9ZLpaH6EYQXDN0bKVMhcmFbZRblZUaVdhuSwl2AD8VpXsAvEx/odoYOSludxuLD5qI2YqlMsu4hApTzwacq2N6OOvDbgYEKMqXCMUulv+Z4GstAaZ/ifXCThlvjbbf5vUZX826WnZ8gdUCjgqe5eaVVBblJooKuQsi4BtLjSImW05aGTrv1hOxtp1cXjItPbhy7f/leWBrRJyFpNqtwhMxkmTSZkyoXVpFpvWgHZXvblvsts3cd4GvYZ1Id7dBvyEGJ/otnlfmXO5KWrLA7lUP0VW1T+3p1poH47Ro5Zl2UG/uUC/rd4PXLzlLA1y4xjmpF8glIBsQWSAerzdHlClD72jlFwBwuvi4bJL4qJGwrJltZCpO2JWijftcFDNcbqzSPYAm0R8dqDeidba8JBAR94XVIgqmVjkaNJfp7FX6/NwctNZYto070fevmkcrLsxU2bA6xjMqM7AhPSQQeq2Kd0A0viuPyoz1q0AeI3w1b+NV0JOt8GDX3tzIa8m7DsyowF420ZRfVW0rqstOoeH3d1gCxtKgDcaHO61Q1XQWpFDTZPkaOsqYOHVi+KJ41IYSe6kCGX7XZYKOyutqr0rppGw3DX8znit1JQle7i4r/EsJB23Y2zl+z/HuGYHRICUw7axSviVi9Qh4mi1Jkh2Y5RhaJZQnt//3ustHTCDSWpheOTxvJmz133G75VqvzjVG7qetSDntmKLC01bj2nF7pLNbwYG0liIUjVVQa36jgrK6cInns++a02VMEaszBxb6IQbE6YHi2LaVaLBTFjuepVrjZqQHDBjCFRVRCyZCYxDHbQscGyn8QiCo1fAArThnWMwKMZkcQnk6Cb9Bj46UGFxWxrZkMm5kM5wLXfgC+G0YKMLGtRwL2F+vD1svryc2Q2FDCZTOW6cXicHsJ6fUgSnZ0egYg6p7KjOpGC9QlZBCt9+scgBZW7bSjYnkUypqgtsIUL/yGJrUKdkWig7qLtjD+MwwbgrOiNYS2qXSTOse6JvEVNO3ENZpqwI90h2izbSV8/2syFH9dUPRdVVSO7FAGtLhWoQPDPvAttkTGa0ykZBvDsNOp0QOtCM/wn0We2Wr87yJdo2pYKqUrKu2LisxWVy5pudkWtr7ShXgSEqJyX1wrZWHNAFIic1Fc21ZXlZKxBVkLYkmZymuo6R3ohNbTE3SmS5bFOWVQGi+6F4JtgRU83Mwf14fSVVeubRmlOix7k57Gwe1FggNsbtBjP3gh4dnUg7JRFTHLDNS6EN3PZg94Pv08/fhwO/vStQyMuYA3jzWGLDcbkHDPL12LqZJbmP0iT+R3cBUu2LcS1GWtpDe5Zn0D3XjCTZnDdaY2x1B6TMrFKSNZuQWKLOHq1dCQzGsCNXg1uzHJ8gzYgkfNOdluU16X1oqowQRP8B+QOffTm8kxoXZLLeLf97cPUxBEeFt+FThVZwZeIi8gHzAvYA/KTLvWG3axgs+craH7WWM3AKwgQ0vw/F6Vpw04NtXQSL0Gq3cMGpWG8MDOFCdwP5QckkY53TcRsDjBZWkGeNsW+feFBQ6X2ESqPlNZAgcqR8z145yoOME7nf2QmmOpH32Lpc4LfCiLcIPvGIan/UbVYx0MIBmaxiX7EWOeJbndWfShONVqnmZzJQySupqxlOav6m6rsz7cPEw77/N7p76eUQPP17CLatoqE5atJ4Sq2Pr52EYWsCyY2BGNVlKmKa4fsPjQ9UG7SPvpW8mFntq1wzsta+sO+KYdrV6oTFbd8ClTc+KvQPW6WNfX/ycbjnsiKPOz4KkGz6NGYeRXlWZ5CRnLMmo/W2qyVMPapDJsou0y/rqdfdC23bOkfgJtWFGQlb5xpz2pRsy6+KvvEmueUmTAaX2d0O0OfScGmAaql5Zb3qlqyvia5C9qo+ny7+Vx++wvyuPyNPAOgHWOeJwTBcqyRCt/6H2HT13nt5ZelQOKgVVnDeBWrEvJ00uxkYIx++7mfvrlAX+a/UslNoRDJtu989liO5V24Labjw+PN5/x3eOHz7fzT9MJ1PG7TzfzqYs/3N9O/pi6Af74eTafTvTzTEtTMzRL1Ge9477xHt764vtN6CxXAI/3+hz6WcjA3bqlvnLky+kEAbNCkpbF2iz+r2TXMfJryfnW06sW+zqNjPRXeYRIotKrQtFSww0UOGApobk9X0DnW6lmhxNBVhtVws0naWh8g2G/P2QsjAOH9QfMjx1/FDoj3yPugDheEHmDeOB6jLIg9PshYYnT7/t0FJAwSUbDGCQduNcNFd/MYfb5dGNEjBgZ+j6LRiwM/Dhy+8Bo5AyI5ydD1mdBP/Y93/XcYZIMvJhFQeg6jCbD4TB2PBYpEWuWbmE6aLN9vjj5IqwkhdFo0B+6o8jx+n0yGngJienAc+koTjxlXt91gyRxQFjgRHGcUDKivu8Q4jCn74Gk06apIGJhn8C/yCFDlzlBH+4TzxsNAxb6ccjoYDggke9FvuPFASBEB344ZENGI4/QUQJcf944QY6fuL7b91ziODR04iENnJHjUjcceQ7xPQcG2pAENPSjcJCECRgYuSMPNgEy4gRUT7RNqQGG4L5kOHBGUUgdEoEXQp+Ad/3A82kQjmgyCGOaJNSlIaGRM3ACPwzi2B8xzwsDb3Tx8vLyXxoEri8=")))
+_FUNCTIONS=compile(ast.parse(_U["functions"]),"<actual-parent-meter-AST>","exec")
+_REPORT=compile(ast.parse(_U["report"]),"<actual-parent-report-AST>","exec")
+_FINALBODY=compile(ast.parse(_U["finalbody"]),"<actual-parent-finalbody-AST>","exec")
+OBSERVATIONS={}
+def install_corrected_parent_finalbody_for_same_control(raw,sha):
+ """Optional RAM-only finalbody seam; the four original helper ASTs must stay exact."""
+ global _FINALBODY,_REPORT,PARENT_SHA
+ if type(raw)is not bytes or hashlib.sha256(raw).hexdigest()!=sha:raise ValueError("exact candidate bytes required")
+ t=ast.parse(raw)
+ for name,digest in _U["identity"]["helper_AST_SHA256"].items():
+  f=[n for n in t.body if isinstance(n,ast.FunctionDef)and n.name==name]
+  if len(f)!=1 or hashlib.sha256(ast.dump(f[0],include_attributes=False).encode()).hexdigest()!=digest:raise ValueError("candidate changed original helper")
+ m=[n for n in t.body if isinstance(n,ast.Try)and n.body and isinstance(n.body[0],ast.Assign)and any(isinstance(x,ast.Call)and isinstance(x.func,ast.Name)and x.func.id=="check_known_literal_import_coverage"for x in ast.walk(n.body[0]))]
+ r=[n for n in t.body if isinstance(n,ast.Assign)and any(isinstance(x,ast.Name)and x.id=="report"for x in n.targets)]
+ if len(m)!=1 or len(r)!=1:raise ValueError("exact parent seam required")
+ _FINALBODY=compile(ast.fix_missing_locations(ast.Module(body=copy.deepcopy(m[0].finalbody),type_ignores=[])),"<actual-candidate-finalbody-AST>","exec")
+ _REPORT=compile(ast.fix_missing_locations(ast.Module(body=r,type_ignores=[])),"<actual-candidate-report-AST>","exec")
+ PARENT_SHA=sha
+
+class SuccessCleanupFailureControl(unittest.TestCase):
+ def test_cleanup_fault_cannot_leave_success_qualified(self):
+  saved={};calls=[];fault=OSError("fictional owned-output cleanup failure")
+  def retain(name,raw):
+   if type(raw)is not bytes or name in saved:raise AssertionError("fictional persistence differs")
+   saved[name]=raw
+   return {"path":"/fictional/"+name,"bytes":len(raw),"sha256":hashlib.sha256(raw).hexdigest()}
+  def cleanup(path):
+   calls.append(str(path))
+   if str(path)!="/fictional/output/parent-home":raise AssertionError("unowned cleanup")
+   raise fault
+  authority={"fictional_control_only":True}
+  ns={"__builtins__":__builtins__,"hashlib":hashlib,"json":json,"sys":sys,
+      "shutil":types.SimpleNamespace(rmtree=cleanup),"retain_bytes":retain,
+      "PARENT_HOME":PurePosixPath("/fictional/output/parent-home"),"ROOT_SELECTION":authority,"print":lambda *a,**k:None}
+  exec(_FUNCTIONS,ns)
+  allocation={"schema":"Root-selected-declared-direct-Source-IO-allocation/v1","runtime_authority":authority,"operation_total_bytes":65536,
+      "role_limits":{"parent":20000,"collect":20000,"run":20000},"ledger_before":{"captures":23,"used":100000,"internal_used":90000,"global_cap":1000000,"internal_cap":900000},"scope":ns["SOURCE_IO_SCOPE"]}
+  before=copy.deepcopy(allocation["ledger_before"])
+  ns["SOURCE_IO_STATE"]=ns["source_io_start"](allocation,authority,"parent",{"bytes":37,"captures":2})
+  ns["source_io_finish"](ns["SOURCE_IO_STATE"])
+  exec(_REPORT,ns)
+  report=ns["report"];caught=None;entry=sys.exc_info()[1]
+  # Pure hypothetical completed/no-child/custody-safe seeds, never actual work.
+  report.update(software_sequence_accepted=True,resource_cleanup_confirmed=True,
+      actual_Source_context_closure=[{"exit_returned":True,"hypothetical_only":True}],
+      hypothetical_success_seed={"finished_meter":True,"no_children":True,"custody_safe":True,"real_pipeline_executed":False})
+  try:
+   try:pass
+   finally:exec(_FINALBODY,ns)
+  except BaseException as error:caught=error
+  records=[json.loads(raw)for raw in saved.values()]
+  meter=ns["SOURCE_IO_STATE"];primary=ns.get("_source_io_active_primary_error")
+  OBSERVATIONS.update(hypothetical_only=True,real_Source_SDK_resources_or_pipeline_executed=False,
+      caught_type=None if caught is None else type(caught).__name__,caught_is_exact_cleanup_error=caught is fault,
+      no_active_primary_at_entry=entry is None,no_active_primary_in_finalbody=primary is None,
+      cleanup_calls=calls,meter_bytes=meter["bytes"],meter_captures=meter["captures"],meter_finished=meter["finished"],
+      in_memory_qualification_complete=report["qualification_complete"],
+      saved_precleanup_qualification_values=[r.get("qualification_complete")for r in records],saved_reports=records,
+      old_three_controls_unchanged=True,separate_count=1)
+  self.assertIsNone(entry);self.assertIsNone(primary);self.assertIs(caught,fault)
+  self.assertEqual(calls,["/fictional/output/parent-home"])
+  self.assertEqual(allocation["ledger_before"],before)
+  self.assertEqual((meter["bytes"],meter["captures"],meter["finished"]),(37,2,True))
+  self.assertFalse(any(r.get("qualification_complete")is True for r in records),"cleanup fault retained success")
+  self.assertIs(report["qualification_complete"],False,"cleanup fault left in-memory success")
+
+if __name__=="__main__":
+ stream=io.StringIO()
+ result=unittest.TextTestRunner(stream=stream,verbosity=2).run(unittest.defaultTestLoader.loadTestsFromTestCase(SuccessCleanupFailureControl))
+ payload={"schema":"actual-private-success-cleanup-failure-one-control/v1","parent_operator_sha256":PARENT_SHA,
+     "tests":result.testsRun,"failures":len(result.failures),"errors":len(result.errors),"skipped":len(result.skipped),
+     "observations":OBSERVATIONS,"unittest_output":stream.getvalue(),"AST_identity":_U["identity"],
+     "scope":"One hypothetical success seed, actual pure meter/finalbody AST, in-memory retain and fake cleanup; no successful pipeline/Source/SDK execution."}
+ raw=(json.dumps(payload,indent=2,sort_keys=True)+"\n").encode()
+ fd=os.open(sys.argv[1],os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400)
+ try:
+  v=memoryview(raw)
+  while v:
+   n=os.write(fd,v);assert n>0;v=v[n:]
+  os.fsync(fd)
+ finally:os.close(fd)
+ print(json.dumps({"path":sys.argv[1],"bytes":len(raw),"sha256":hashlib.sha256(raw).hexdigest(),
+     "tests":result.testsRun,"failures":len(result.failures),"errors":len(result.errors),"skipped":len(result.skipped),
+     "caught_is_exact_cleanup_error":OBSERVATIONS.get("caught_is_exact_cleanup_error"),
+     "saved_precleanup_qualification_values":OBSERVATIONS.get("saved_precleanup_qualification_values")}))
+ raise SystemExit(0 if result.wasSuccessful()else 1)

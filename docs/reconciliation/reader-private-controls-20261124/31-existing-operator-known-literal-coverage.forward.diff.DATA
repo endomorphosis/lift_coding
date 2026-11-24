@@ -1,0 +1,78 @@
+--- operator1051.before
++++ operator1051.coverage.after
+@@ -1,3 +1,5 @@
++FINAL_KNOWN_IMPORT_COVERAGE_REFERENCE = None
++FINAL_KNOWN_IMPORT_COVERAGE_PROJECT_ROOTS = ('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets',)
+ """INERT published-D Phase2 bridge27 through the existing R2 Source42/SDK route.
+ Final Git/READ pins, fixture effects, IO plan and Root runtime selection are NULL.
+ No Source-WRITE installation or qualified statutory/Native result is asserted.
+@@ -146,6 +148,61 @@
+  finally:os.close(fd)
+  assert len(raw)==size and H(raw)==digest,str(path)
+  return raw
++
++
++def check_known_literal_import_coverage(reference, epoch, expected_roots, root_selection, manifest_reference):
++    if root_selection is None and reference is None and manifest_reference is None:
++        return {'legacy_unselected': True, 'coverage_checked': False, 'execution_authority_granted': False}
++    if root_selection is None or reference is None or manifest_reference != reference:
++        raise RuntimeError('Selected known literal import coverage is missing or differs from manifest')
++    if not isinstance(reference, dict) or set(reference) != {'path', 'bytes', 'sha256'}:
++        raise RuntimeError('Known literal import coverage reference shape differs')
++    path, size, digest = reference['path'], reference['bytes'], reference['sha256']
++    if not isinstance(path, str) or not Path(path).is_absolute() or os.path.normpath(path) != path or type(size) is not int or not 0 < size <= 1048576 or not isinstance(digest, str) or len(digest) != 64 or any(c not in '0123456789abcdef' for c in digest):
++        raise RuntimeError('Known literal import coverage reference identity differs')
++    raw = read_private(reference)
++    def closed_object(pairs):
++        result = {}
++        for key, value in pairs:
++            if key in result:
++                raise RuntimeError('Duplicate known literal import coverage JSON field')
++            result[key] = value
++        return result
++    evidence = json.loads(raw, object_pairs_hook=closed_object)
++    if not isinstance(evidence, dict) or set(evidence) != {'origin_modules', 'required_project_paths', 'project_roots'}:
++        raise RuntimeError('Known literal import coverage schema differs')
++    roots = evidence['project_roots']
++    if not isinstance(roots, list) or not roots or any(not isinstance(r, str) or not Path(r).is_absolute() or os.path.normpath(r) != r for r in roots) or len(set(roots)) != len(roots) or set(roots) != set(expected_roots):
++        raise RuntimeError('Known literal import coverage roots differ')
++    origins, required = evidence['origin_modules'], evidence['required_project_paths']
++    if not isinstance(origins, list) or not origins or not isinstance(required, list) or not required:
++        raise RuntimeError('Known literal import coverage rows are missing')
++    if any(not isinstance(p, str) or not Path(p).is_absolute() or os.path.normpath(p) != p or not p.endswith('.py') or not any(Path(p).is_relative_to(r) and Path(p) != Path(r) for r in roots) for p in required) or len(set(required)) != len(required):
++        raise RuntimeError('Known literal import required paths differ or duplicate')
++    if any(not isinstance(row, dict) or set(row) != {'path', 'sha256'} for row in origins):
++        raise RuntimeError('Known literal import origin row shape differs')
++    origin_paths = []
++    for row in origins:
++        p, h = row['path'], row['sha256']
++        if not isinstance(p, str) or not Path(p).is_absolute() or os.path.normpath(p) != p or not p.endswith('.py') or not any(Path(p).is_relative_to(r) and Path(p) != Path(r) for r in roots) or not isinstance(h, str) or len(h) != 64 or any(c not in '0123456789abcdef' for c in h):
++            raise RuntimeError('Known literal import origin identity differs')
++        origin_paths.append(p)
++    if len(set(origin_paths)) != len(origin_paths) or not isinstance(epoch, list):
++        raise RuntimeError('Known literal import origins duplicate or epoch differs')
++    by_path = {}
++    for row in epoch:
++        if not isinstance(row, dict) or not isinstance(row.get('path'), str) or not isinstance(row.get('sha256'), str) or row['path'] in by_path:
++            raise RuntimeError('Exact Source epoch shape or duplicate differs')
++        by_path[row['path']] = row
++    for row in origins:
++        actual = by_path.get(row['path'])
++        if actual is None or actual['sha256'] != row['sha256']:
++            raise RuntimeError('Known literal import origin is absent or stale: ' + row['path'])
++    missing = [p for p in required if p not in by_path]
++    if missing:
++        raise RuntimeError('Known literal project Source absent before Source/SDK: ' + ', '.join(missing))
++    return {'coverage_checked': True, 'origin_count': len(origins), 'required_path_count': len(required), 'coverage_reference': reference, 'execution_authority_granted': False, 'scope': 'Only authenticated finite literal imports; unknown Source guard and fresh Source checks remain required'}
++
+ 
+ def validate_runtime_authority(authority, expected_authority, now_utc_ns):
+     keys={'schema','root_selection','launch_not_before_utc_ns','launch_deadline_utc_ns'}
+@@ -586,6 +643,7 @@
+ 
+ parent = None
+ try:
++    report['known_literal_import_coverage'] = check_known_literal_import_coverage(FINAL_KNOWN_IMPORT_COVERAGE_REFERENCE, EPOCH, FINAL_KNOWN_IMPORT_COVERAGE_PROJECT_ROOTS, ROOT_SELECTION, manifest.get('known_literal_import_coverage_reference'))
+     with contextlib.ExitStack() as stack:
+         leases = [stack.enter_context(tracked_source_read(project)) for project in sorted(PROJECTS, key=lambda row: str(source.canonical_source_root(row['root'])))]
+         report['Source_leases'] = [lease.to_dict() for lease in leases]

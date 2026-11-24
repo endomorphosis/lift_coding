@@ -1,0 +1,75 @@
+--- /tmp/Reader-D27-Source-accounting-and-meter-repair-private-v01/operator-known514-explicit-FD-meter-INERT-v02.py.DATA
++++ /tmp/Reader-D27-Source-accounting-and-meter-repair-private-v01/operator-known514-explicit-FD-meter-INERT-v03.py.DATA
+@@ -486,6 +486,11 @@
+     return summary
+ 
+ 
++def parent_declared_direct_IO_accepted(parent_meter,phase_entries):
++    if parent_meter.get('declared_direct_IO_budget_accepted')is not True:
++        return False
++    return all(entry.get('declared_direct_IO_budget_accepted')is True for entry in phase_entries if entry.get('actual_SDK_dispatch_attempted'))
++
+ def execute_phase(phase, operation, roster=None, *, group):
+     name = group + '-' + operation
+     entry = {'phase': phase, 'operation': operation, 'selection_group':group, 'actual_results': [], 'accepted': False, 'error': None}
+@@ -504,19 +509,26 @@
+     entry['source_before'] = retain_json(name + '-source-before.json', metadata_guard())
+     try:
+         print(json.dumps({'event': 'ACTUAL_PUBLISHED_D_PHASE2_BRIDGE27_PHASE_START', 'phase': name, 'operator_pid': os.getpid(), 'parent_lease_id': parent.lease_id}), flush=True)
++        entry['actual_SDK_dispatch_attempted']=True
+         result = run_phase_with_actual_custody(name, request)
++        entry['actual_SDK_result_returned']=True
+         entry['source_after'] = retain_json(name + '-source-after.json', metadata_guard())
+         # Raw SDK results are already durable; classify actual resource failures before requiring completion outputs.
+         entry['actual_SDK_resource_flags']={key:result.to_dict().get(key) for key in ('returncode','timed_out','cancelled','unavailable','output_truncated','workspace_limit_exceeded','resource_exhausted','workspace_cleaned','error','native_lifecycle')}
+-        genuine(result)
++        _source_io_meter_error=None
+         try:
+             _meter_payload=json.loads(result.output_files['binding.json'])
+             _child_meter=_meter_payload['declared_direct_Source_IO']
+             entry['declared_direct_Source_IO']=source_io_validate_child(_child_meter,SOURCE_IO_ALLOCATION,ROOT_RUNTIME_SELECTION,operation)
++            entry['declared_direct_IO_budget_accepted']=True
+         except BaseException as meter_error:
+-            entry['declared_direct_Source_IO_error']={'type':type(meter_error).__name__,'message':str(meter_error)}
++            _source_io_meter_error=meter_error
++            entry['declared_direct_IO_budget_accepted']=False
++            entry['declared_direct_Source_IO_error']={'type':type(meter_error).__name__,'message':str(meter_error),'actual_bytes':None,'actual_captures':None}
+             report['conservative_full_selected_allocation_debit_required']=True
+-            if result.returncode==0:raise
++        genuine(result)
++        if _source_io_meter_error is not None and result.returncode==0:
++            raise RuntimeError('child declared direct Source IO meter was not accepted')from _source_io_meter_error
+         if result.returncode != 0:
+             entry['primary_actual_phase_failure'] = {'actual_tool_returncode': result.returncode, 'success_binding_checks_skipped': True, 'partial_binding_retained_in_raw_outputs': 'binding.json' in result.output_files, 'raw_stdout_stderr_and_result_already_durable': True}
+             raise RuntimeError('Actual normal pytest phase exited nonzero before success-binding validation: ' + name + ' returncode=' + str(result.returncode))
+@@ -541,6 +553,10 @@
+         entry['accepted'] = True
+         return actual_roster
+     except BaseException as error:
++        if entry.get('actual_SDK_dispatch_attempted')and entry.get('declared_direct_IO_budget_accepted')is not True:
++            entry['declared_direct_IO_budget_accepted']=False
++            entry.setdefault('declared_direct_Source_IO_error',{'type':'UnavailableChildMeter','message':'SDK dispatch attempted; child direct Source IO meter missing or unaccepted','actual_bytes':None,'actual_captures':None})
++            report['conservative_full_selected_allocation_debit_required']=True
+         entry['error'] = {'type': type(error).__name__, 'message': str(error), 'traceback': traceback.format_exc()}
+         if 'source_after' not in entry:
+             try:
+@@ -644,10 +660,17 @@
+     raise
+ finally:
+     report['Source_closed'] = all(row['exit_returned'] for row in report.get('actual_Source_context_closure', []))
++    _source_io_active_primary_error=sys.exc_info()[1]
+     report['declared_direct_Source_IO_parent']=source_io_finish(SOURCE_IO_STATE)
+-    report['declared_direct_IO_budget_accepted']=report['declared_direct_Source_IO_parent']['declared_direct_IO_budget_accepted'] and not report.get('conservative_full_selected_allocation_debit_required',False)
++    report['declared_direct_IO_budget_accepted']=parent_declared_direct_IO_accepted(report['declared_direct_Source_IO_parent'],report['phases'].values()) and not report.get('conservative_full_selected_allocation_debit_required',False)
+     report['outside_declared_direct_IO_actual_bytes']=None
+-    report['qualification_complete'] = report['software_sequence_accepted'] and report['Source_closed'] and report['resource_cleanup_confirmed'] and not report['errors']
++    if report['declared_direct_IO_budget_accepted']is not True:
++        report['conservative_full_selected_allocation_debit_required']=True
++        if _source_io_active_primary_error is None:
++            report['errors'].append({'type':'DeclaredDirectSourceIOBudgetRefused','message':'Parent or dispatched child direct Source IO meter was not accepted'})
++    report['qualification_complete'] = report['software_sequence_accepted'] and report['Source_closed'] and report['resource_cleanup_confirmed'] and not report['errors'] and report['declared_direct_IO_budget_accepted']
+     ref = retain_json('complete-published-D-phase2-bridge27-existing-owner-report.json', report)
+     shutil.rmtree(PARENT_HOME)
+     print(json.dumps({'event': 'ACTUAL_PUBLISHED_D_PHASE2_BRIDGE27_CLOSED', 'report': ref, 'Source_closed': report['Source_closed'], 'resource_cleanup_confirmed': report['resource_cleanup_confirmed'], 'qualification_complete': report['qualification_complete'], 'errors': report['errors']}, sort_keys=True), flush=True)
++    if report['declared_direct_IO_budget_accepted']is not True and _source_io_active_primary_error is None:
++        raise RuntimeError('declared direct Source IO budget was not accepted after cleanup')

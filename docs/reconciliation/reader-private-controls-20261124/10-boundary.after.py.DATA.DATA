@@ -1,0 +1,68 @@
+import copy, hashlib, stat
+
+def capture_one_at_source_IO_end(t, raw_path, record, *, parents_fn, leaf_fn, read_fn, seal_fn, archive_matrix_fn, caller_uid):
+    path=t['path']
+    before=parents_fn(path)
+    record['parent_full9_before_source']=copy.deepcopy(before)
+    # Before-source matrix stays in RAM until the immediate Source-end check.
+    def archive_failure_matrix(label,value,reference_key,error_key):
+        try:
+            record[reference_key]=archive_matrix_fn(label,value)
+        except BaseException as diagnostic_error:
+            record[error_key]={'type':type(diagnostic_error).__name__,'stage':'matrix-archive'}
+    source_stage='leaf'
+    try:
+        leaf_fn(t)
+        source_stage='read'
+        raw,actual9=read_fn({'path':path,'bytes':t['bytes'],'full9':t['full9']},'canonical_current_working_file')
+        # No private output or archive is written before this Source-end observation.
+        source_stage='immediate-parent-observation'
+        after_source=parents_fn(path)
+    except BaseException as source_error:
+        record['source_phase_original_error']={'type':type(source_error).__name__,'stage':source_stage}
+        after_exception=None
+        try:
+            after_exception=parents_fn(path)
+            record['parent_full9_after_source_exception']=copy.deepcopy(after_exception)
+        except BaseException as diagnostic_error:
+            record['source_exception_observation_error']={'type':type(diagnostic_error).__name__,'stage':'parent-observation'}
+        archive_failure_matrix('before-source',before,'before_source_matrix_ref','before_source_archive_error')
+        if after_exception is not None:
+            archive_failure_matrix('after-source-exception',after_exception,'source_exception_matrix_ref','source_exception_archive_error')
+        # Bare raise preserves the ORIGINAL leaf/read/end-observation error and traceback.
+        raise
+    record['parent_full9_immediately_after_source']=copy.deepcopy(after_source)
+    record['actual_source_result']={'path':path,'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest(),'full9':actual9}
+    record['source_parent_all_fields_equal']=after_source==before
+    if after_source!=before:
+        source_error=AssertionError(('source-IO-end parent full9 drift',path,before,after_source))
+        archive_failure_matrix('before-source',before,'before_source_matrix_ref','before_source_archive_error')
+        archive_failure_matrix('after-source',after_source,'after_source_matrix_ref','after_source_archive_error')
+        raise source_error
+    # Full parent equality passed before any private publication. Archive errors refuse.
+    record['before_source_matrix_ref']=archive_matrix_fn('before-source',before)
+    record['after_source_matrix_ref']=archive_matrix_fn('after-source',after_source)
+    private_error=None
+    try:
+        rr=seal_fn(raw_path,raw)
+        record['written_raw_reference']=copy.deepcopy(rr)
+        back,raw9=read_fn(rr,'immutable_raw_complete_readback')
+        record['private_raw_readback']={'bytes':len(back),'sha256':hashlib.sha256(back).hexdigest(),'full9':raw9}
+        assert back==raw and len(back)==t['bytes']and rr['bytes']==len(raw)and rr['sha256']==hashlib.sha256(raw).hexdigest()
+        assert raw9['st_uid']==str(caller_uid)and raw9['st_nlink']=='1'and stat.S_IMODE(int(raw9['st_mode']))==0o400
+        rr['full9']=raw9
+    except BaseException as error:
+        private_error=error
+        raise
+    finally:
+        try:
+            after_private=parents_fn(path)
+            record['parent_full9_after_private']=copy.deepcopy(after_private)
+            record['post_private_parent_change_observed']=after_private!=after_source
+            record['after_private_matrix_ref']=archive_matrix_fn('after-private',after_private)
+        except BaseException as observation_error:
+            record['post_private_observation_error']={'type':type(observation_error).__name__,'message':str(observation_error)}
+            if private_error is None:raise
+    record['private_output_integrity_and_owner_passed']=True
+    record['capture_timepoint']='before-source through immediate-source-IO-end; no later namespace-equivalence promise'
+    return rr,actual9

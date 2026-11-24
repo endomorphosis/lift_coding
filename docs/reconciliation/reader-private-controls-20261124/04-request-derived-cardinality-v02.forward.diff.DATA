@@ -1,0 +1,106 @@
+--- /tmp/Reader-D27-package-source-closure-request-private-v01/execute-selected-D27-next99-existing-READ-v01.py
++++ /tmp/Reader-D27-package-source-closure-request-private-v01/execute-D27-next99-request-derived-cardinality-INERT-v02.py.DATA
+@@ -1,17 +1,17 @@
+ import os, sys, stat, json, hashlib, traceback, subprocess, contextlib, base64, zlib
+ from pathlib import Path
+ 
+-SEL = {'path': '/tmp/Root-selected-D27-next99-potential-eager-Source-READ-v01.json', 'bytes': 1452, 'sha256': 'e13d7fde3d5cc431827c426a555563273a5793902cfd961224f974ff905f25a7'}
+-REQ = {'path': '/tmp/Reader-D27-package-source-closure-request-private-v01/next-potential-eager255-metadata-resolved-Source-READ-32MiB-request-v01.json', 'bytes': 585519, 'sha256': '68d3e378984b8ee53344bd0d2dadf2bf4cde761725d7d761a3aa84b62bbab7e3'}
++SEL = None
++REQ = {'path': '/tmp/Reader-D27-package-source-closure-request-private-v01/next-potential-eager255-metadata-resolved-Source-READ-32MiB-request-v02-current-ledger.json', 'bytes': 585995, 'sha256': '1db460e9f838503f9bc558dd2b8c444e8958497950ed0fe1996a49dd4c3e507a'}
+ BASE = Path('/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01')
+ N = BASE/'Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01'
+-OUT = N/'actual-D27-next99-potential-eager-Source-READ-v01'
++OUT = N/'actual-D27-next99-potential-eager-Source-READ-v02'
+ FIELDS = ('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+ f9 = lambda s:{k:str(getattr(s,k)) for k in FIELDS}
+ H = lambda raw:hashlib.sha256(raw).hexdigest()
+-spent = {'bytes':1452+globals().get('CARRIED_OPERATOR_BYTES',0),'captures':1+globals().get('CARRIED_OPERATOR_CAPTURES',0)}
++spent = {'bytes':(SEL['bytes'] if SEL is not None else 0)+globals().get('CARRIED_OPERATOR_BYTES',0),'captures':(1 if SEL is not None else 0)+globals().get('CARRIED_OPERATOR_CAPTURES',0)}
+ report = {'schema':'actual-frozen-A-D-existing-READ-operation/v1','inputs':[], 'captures':[], 'Source_contexts':[], 'errors':[], 'Source_closed':False,'module_closed':False,'prelaunch_carried':dict(spent),'selected_reference':SEL,'request_reference':REQ}
+-before = {'captures': 84918, 'used': 5698246458, 'internal_used': 5507654584, 'global_cap': 5972688896, 'internal_cap': 5704253440}
++before = {'captures': 84937, 'used': 5698929921, 'internal_used': 5508338047, 'global_cap': 5972688896, 'internal_cap': 5704253440}
+ VERIFIED_SELECTED_SOURCE_ROWS = {}
+ ledger = dict(before)
+ source = None
+@@ -86,6 +86,7 @@
+     p=Path(t['path']);s=p.lstat();assert stat.S_ISREG(s.st_mode)and s.st_nlink==1
+     assert f9(s)==t['full9']and s.st_size==t['bytes']
+ 
++if SEL is None:raise RuntimeError('INERT: fresh Root selection is unbound')
+ OUT.mkdir(mode=0o700)
+ (OUT/'raw').mkdir(mode=0o700)
+ (OUT/'matrices').mkdir(mode=0o700)
+@@ -95,17 +96,36 @@
+     assert selected['Root_selected']is True
+     request['roots']=request['frozen_roots']
+     request['targets']=[dict(r,relative_path=str(Path(r['path']).relative_to(r['root'])),kind='D27_potential_eager_import_source')for r in request['exact_new_body_targets']]
++    assert type(request['target_count']) is int and request['target_count'] > 0
++    assert len(request['targets']) == request['target_count']
++    assert len({row['path'] for row in request['targets']}) == request['target_count']
++    declared_candidate_rows = json.loads(json.dumps(request['all_candidate_metadata']))
++    assert len(declared_candidate_rows) == request['literal_metadata_candidate_count']
++    assert all(isinstance(row,dict) and isinstance(row.get('path'),str) and type(row.get('exists')) is bool for row in declared_candidate_rows)
++    assert len({row['path'] for row in declared_candidate_rows}) == len(declared_candidate_rows)
++    declared_AGENTS_rows = json.loads(json.dumps(request['AGENTS_chain_metadata']))
++    assert all(isinstance(row,dict) and isinstance(row.get('path'),str) and type(row.get('exists')) is bool for row in declared_AGENTS_rows)
++    assert len({row['path'] for row in declared_AGENTS_rows}) == len(declared_AGENTS_rows)
++    request['AGENTS_exact_chain_metadata'] = json.loads(json.dumps(declared_AGENTS_rows))
++    for ar in request['AGENTS_exact_chain_metadata']:
++        if ar['exists']:
++            assert isinstance(ar.get('reuse_captured_raw'),dict),('present AGENTS needs its exact authenticated retained raw reference',ar['path'])
+     def check_candidate_absences():
+-        absent=[r['path']for r in request['all_candidate_metadata']if not r['exists']]
+-        assert len(absent)==51
++        actual_rows=request['all_candidate_metadata']
++        assert len(actual_rows)==len(declared_candidate_rows)
++        assert len({row['path'] for row in actual_rows})==len(actual_rows)
++        assert {row['path']:row for row in actual_rows}=={row['path']:row for row in declared_candidate_rows}
++        absent=[row['path'] for row in actual_rows if not row['exists']]
+         for path in absent:assert not os.path.lexists(path),('candidate namespace absence changed',path)
++        assert set(absent)=={row['path'] for row in declared_candidate_rows if not row['exists']}
+         return absent
+-    request['AGENTS_exact_chain_metadata']=request['AGENTS_chain_metadata']
+-    for ar in request['AGENTS_exact_chain_metadata']:
+-        if ar['exists']:ar['reuse_captured_raw']={'path':str(N/'actual-current-published-D-six-records-and-AGENTS-READ-v01/raw/06-AGENTS.md.DATA'),'bytes':1686,'sha256':'1a5224005bb2a37763b3a707a7ce055c03aed42a33f07225d8015762d57236b7'}
+     def check_exact_AGENTS():
++        actual_rows=request['AGENTS_exact_chain_metadata']
++        assert len(actual_rows)==len(declared_AGENTS_rows)
++        assert len({row['path'] for row in actual_rows})==len(actual_rows)
++        assert {row['path']:row for row in actual_rows}=={row['path']:row for row in declared_AGENTS_rows}
+         absent=[];present=[]
+-        for row in request['AGENTS_exact_chain_metadata']:
++        for row in actual_rows:
+             if not row['exists']:
+                 assert not os.path.lexists(row['path']),('AGENTS absence changed',row['path']);absent.append(row['path'])
+             else:
+@@ -114,7 +134,8 @@
+                 try:assert f9(os.fstat(fd))==row['full9']==f9(Path(row['path']).lstat())
+                 finally:os.close(fd)
+                 present.append(row['path'])
+-        assert len(absent)==70 and len(present)==0
++        assert set(absent)=={row['path'] for row in declared_AGENTS_rows if not row['exists']}
++        assert set(present)=={row['path'] for row in declared_AGENTS_rows if row['exists']}
+         return {'absent':absent,'present_metadata_only':present}
+     assert request['ledger_before']==before
+     helper_refs={'owner_branch':{'path':'/tmp/Reader-remaining-canonical-owner-guard-fix-and2570-private-v01/existing-read-helper-selected-source-owner-fix.py.DATA','bytes':1283,'sha256':'c605501a8673714725e18dc90f49c0dc680b957420866357a892d122d463163b'},'Source_IO_boundary':{'path':'/tmp/Reader-parent-source-IO-end-timing-and1687-private-v01/v02-best-effort-source-exception-observation/minimal-source-IO-end-parent-caller-v02.py.DATA','bytes':3566,'sha256':'cd17eddb1490bdd7953f8237cab823f9599c4ece77acfc48e7660aabd5407877'},'owned_Source42_loader':{'path':'/tmp/Reader-Source42-owned-module-loader-fix-private-v01/owned-source42-module-loader.py.DATA','bytes':1104,'sha256':'e4dc161c1553b21ee1dd69521f4f49ad0878122fae2b0d66041c22030a4053c7'}}
+@@ -212,7 +233,7 @@
+             report['AGENTS_after']=check_exact_AGENTS()
+             report['candidate_absences_after']=check_candidate_absences()
+             for row in report['captures']:assert f9(Path(row['path']).lstat())==row['full9']
+-            report['snapshot_complete']=len(report['captures'])==99
++            report['snapshot_complete']=len(report['captures'])==request['target_count'] and {row['path'] for row in report['captures']}=={row['path'] for row in request['targets']}
+         finally:
+             # ExitStack closes all genuine leases before their closure flags are set outside.
+             pass
+@@ -232,8 +253,8 @@
+         # Root-selected before counters plus actual new debits, sealed to its
+         # operation receipt. No invented shared byte-ledger file or authority.
+         report['ledger_after']={k:ledger[k]for k in before}
+-    ref=js(OUT/'actual-D27-next99-potential-eager-Source-READ-closed-report.json',report)
+-    compact=js(OUT/'actual-D27-next99-potential-eager-Source-READ-small-closeout.json',{'schema':'actual-D27-next99-potential-eager-READ-small-closeout/v1','status':'PASS'if not report['errors']and report.get('snapshot_complete')else'FAILED','Source_closed':report['Source_closed'],'owned_module_closed':report['module_closed'],'errors':report['errors'],'roots_before':report.get('before'),'roots_after':report.get('after'),'AGENTS_reuse':report.get('retained_AGENTS_reuse'),'AGENTS_named_absences':len(report.get('AGENTS_after',{}).get('absent',[])),'captures':report['captures'],'actual_IO':spent,'ledger_after':report.get('ledger_after'),'full_report_reference':ref,'SDK_Native_compiler_or_project_execution':False,'cohort_process_free_or_positive_handle_qualified':False})
++    ref=js(OUT/'actual-D27-next99-potential-eager-Source-READ-v02-closed-report.json',report)
++    compact=js(OUT/'actual-D27-next99-potential-eager-Source-READ-v02-small-closeout.json',{'schema':'actual-D27-next99-potential-eager-READ-small-closeout/v1','status':'PASS'if not report['errors']and report.get('snapshot_complete')else'FAILED','Source_closed':report['Source_closed'],'owned_module_closed':report['module_closed'],'errors':report['errors'],'roots_before':report.get('before'),'roots_after':report.get('after'),'AGENTS_reuse':report.get('retained_AGENTS_reuse'),'AGENTS_named_absences':len(report.get('AGENTS_after',{}).get('absent',[])),'captures':report['captures'],'actual_IO':spent,'ledger_after':report.get('ledger_after'),'full_report_reference':ref,'SDK_Native_compiler_or_project_execution':False,'cohort_process_free_or_positive_handle_qualified':False})
+     print(json.dumps({'event':'D27_NEXT99_CLOSED_COMPACT','compact':compact},sort_keys=True),flush=True)
+     print(json.dumps({'event':'D27_NEXT99_READ_CLOSED','report':ref,'completed':len(report['captures']),'Source_closed':report['Source_closed'],'module_closed':report['module_closed'],'ledger_after':report.get('ledger_after'),'errors':report['errors']},sort_keys=True),flush=True)
+ if report['errors']:sys.exit(1)

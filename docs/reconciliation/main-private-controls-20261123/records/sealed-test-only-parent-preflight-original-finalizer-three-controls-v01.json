@@ -1,0 +1,120 @@
+{
+  "schema": "Main-test-only-parent-preflight-original-finalizer-three-controls/v1",
+  "status": "ACTUAL_PRIVATE_RED_REPRODUCED_NO_PRODUCT_CHANGE",
+  "refs": {
+    "test_fragment": {
+      "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/test_parent_preflight_original_finalizer_three_controls_v01.py.DATA",
+      "bytes": 22230,
+      "sha256": "45115ee8c70e14e6c06980963a24a037b34c423ede78618aef0116d97a8ff95c",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "50877686",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "22230",
+        "st_mtime_ns": "1795457234832450044",
+        "st_ctime_ns": "1795457234832450044"
+      },
+      "FD_closed": true
+    },
+    "AST_identity_proof": {
+      "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/parent-preflight-finalizer-three-controls-AST-identity-v01.json",
+      "bytes": 1315,
+      "sha256": "a9a9a41ccceb5ee160cd23054bbea4edf615f9ca6416a4b00082bb939916a2f6",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "50877687",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "1315",
+        "st_mtime_ns": "1795457234835450074",
+        "st_ctime_ns": "1795457234835450074"
+      },
+      "FD_closed": true
+    },
+    "actual_result": {
+      "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/actual-parent-preflight-original-finalizer-three-controls-RED-v01.json",
+      "bytes": 6594,
+      "sha256": "f05f187ec320993cd1830950b3d1f2163c6d47b0b51b6b7f2778d5dde4eb7fff",
+      "full9": {
+        "st_dev": "66306",
+        "st_ino": "50877688",
+        "st_mode": "33024",
+        "st_nlink": "1",
+        "st_uid": "1000",
+        "st_gid": "1000",
+        "st_size": "6594",
+        "st_mtime_ns": "1795457261123706879",
+        "st_ctime_ns": "1795457261123706879"
+      },
+      "FD_closed": true
+    }
+  },
+  "parent_operator": {
+    "path": "/tmp/Reader-D27-known-literal-import-coverage-control-private-v01/operator-known1051-known-literal-coverage-INERT-v04-wholecompile.py.DATA",
+    "bytes": 119002,
+    "sha256": "087843f1f120467ac86f50dadd511d59a44629cab678c8a09fad787ce88d3516"
+  },
+  "case_population": [
+    "missingCoverage",
+    "badSHA with fictional output-cleanup OSError",
+    "missingNamespace"
+  ],
+  "actual_results": {
+    "parent_tests": 3,
+    "passed": 2,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0,
+    "returncode": 1
+  },
+  "reproduced_gap": {
+    "original_operator_line": 731,
+    "operation": "shutil.rmtree(PARENT_HOME) in original outer finally",
+    "preflight_primary": "AssertionError from actual read_private SHA check",
+    "secondary": "Fictional cleanup OSError becomes propagated exception instead of original primary",
+    "charges_retained": {
+      "initial_bytes": 37,
+      "after_badSHA_bytes": 289,
+      "initial_captures": 2,
+      "after_badSHA_captures": 3
+    },
+    "fake_private_FD_closed": true,
+    "actual_failure_report_already_retained": true,
+    "Source_SDK_resource_sentinels": 0,
+    "false_qualification": false
+  },
+  "Reader_owned_next_action": "Any minimal parent finalizer error-precedence correction belongs to Reader. Main authored no product/helper/operator patch. Same3 tests support corrected private parent AST supplied in RAM via install_corrected_parent_ast_for_same_controls(raw, expected_sha256).",
+  "isolation": {
+    "actual_outer_try_all_handlers_and_finalbody_unmodified": true,
+    "actual_pure_read_meter_coverage_and_retention_helpers": true,
+    "whole_operator_preamble_or_Source_SDK_imports_executed": false,
+    "explicit_fictional_FD_IO_and_output_cleanup_only": true,
+    "no_real_Source_leases_SDK_Native_Git_or_global_ledger_mutation": true,
+    "normal_package_or_current_runtime_qualification": false,
+    "limits": "Own pure unittest process1CPU,512MiB AS,30s CPU,60s alarm; no project runtime profile expansion."
+  },
+  "counts_not_pooled": "These3 private parent controls are separate from the existing20 helper/order-sentinel controls, and from ordinary D27/Gate51/Native cohorts.",
+  "private_input_ledger_upper": {
+    "packet": 1856,
+    "parent_operator": 119002,
+    "helper": 4407,
+    "coverage_metadata": 5236,
+    "private_template_authoring_input": 14901,
+    "stdlib_test_entry_input": 22230,
+    "assigned_static_review_test_input": 22230,
+    "assigned_static_review_proof_input": 1315,
+    "final_test_identity_readback": 22230,
+    "final_proof_readback": 1315,
+    "final_actual_result_readback": 6594,
+    "conservative_same_testfile_traceback_linecache_upper": 22230
+  },
+  "private_input_total_upper_bytes": 243546,
+  "private_input_ceiling_bytes": 262144,
+  "old_charges_failures_and_operator_versions_preserved": true,
+  "parallel_static_review": "Finite fixture/isolation feedback only; not a new readiness or execution gate."
+}

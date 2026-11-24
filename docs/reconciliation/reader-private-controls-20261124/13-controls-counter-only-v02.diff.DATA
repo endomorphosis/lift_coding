@@ -1,0 +1,18 @@
+--- controls.py
++++ controls.v02.py
+@@ -101,7 +101,7 @@
+  def test_private_owner_and_integrity_contract_still_refuses(self):
+   self.k.private_bad_owner=True
+   with self.assertRaises(AssertionError):self.k.run()
+-  self.assertEqual(self.k.spent,{'bytes':8,'captures':2});self.assertTrue(self.k.record['source_parent_all_fields_equal'])
++  self.assertEqual(self.k.spent,{'bytes':4,'captures':1});self.assertTrue(self.k.record['source_parent_all_fields_equal'])
+  def test_private_read_error_preserved_and_source_counters_stay_spent(self):
+   error=OSError('authored private read error');self.k.private_error=error
+   try:self.k.run()
+@@ -114,5 +114,5 @@
+ for label,n,h in [('before',3566,'cd17eddb1490bdd7953f8237cab823f9599c4ece77acfc48e7660aabd5407877'),('after',4208,'64c726cde30beb825dacf042c82aaea7d7e653b34c743c664c99f22db3d084ba')]:
+  p=D+'/boundary.'+label+'.py.DATA';tree=ast.parse(read_ref(p,n,h));C=type('Exact'+label.capitalize()+'Controls',(Controls,),{'tree':tree});stream=io.StringIO();res=unittest.TextTestRunner(stream=stream,verbosity=2).run(unittest.defaultTestLoader.loadTestsFromTestCase(C));results[label]=dict(tests=res.testsRun,failures=len(res.failures),errors=len(res.errors),skipped=len(res.skipped),successful=res.wasSuccessful(),details=stream.getvalue(),bytes=n,sha256=h)
+ r=dict(schema='actual-private-parent-matrix-placement-RED-GREEN/v1',results=results,wall_seconds=time.monotonic()-start,CPU_slots=1,CPU_seconds=60,AS_bytes=512*1024**2,wall_alarm_seconds=60,Source_project_SDK_pytest_Native_operations=0,scope='Exact helper AST and original selected-source read/leaf functions with authored in-memory fake kernel; not actual filesystem/Source qualification')
+-v=(json.dumps(r,indent=2,sort_keys=True)+'\n').encode();p=D+'/actual-pure-controls-RED-GREEN.json';fd=os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400);os.write(fd,v);os.fsync(fd);os.close(fd)
++v=(json.dumps(r,indent=2,sort_keys=True)+'\n').encode();p=D+'/actual-pure-controls-RED-GREEN-v02.json';fd=os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400);os.write(fd,v);os.fsync(fd);os.close(fd)
+ print(json.dumps({'report':{'path':p,'bytes':len(v),'sha256':hashlib.sha256(v).hexdigest()},'results':{k:{a:b for a,b in x.items()if a!='details'}for k,x in results.items()},'wall_seconds':r['wall_seconds']}));raise SystemExit(0 if results['after']['successful']and not results['before']['successful']else 1)

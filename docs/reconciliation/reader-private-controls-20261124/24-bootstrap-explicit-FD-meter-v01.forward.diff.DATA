@@ -1,0 +1,202 @@
+--- /tmp/Reader-D27-known514-bounded-ordinary-preparation-v03/bootstrap-D27-known514-authsticky-runtime-clock-NULL-v01.py.DATA
++++ /tmp/Reader-D27-Source-accounting-and-meter-repair-private-v01/bootstrap-known514-explicit-FD-meter-INERT-v01.py.DATA
+@@ -11,6 +11,91 @@
+ import stat
+ import sys
+ import time
++
++# Inlined in the existing normal operator/bootstrap; no controller, file queue, or global open proxy.
++SOURCE_IO_SCOPE = 'declared-direct-Source-auth-and-private-control-reads/v1'
++SOURCE_IO_OUTSIDE_BOUNDARY = ['interpreter/bootstrap-selfloading', 'stdlib/thirdparty/generalproject/library-IO-not-through-named-readers', 'SDK-internal-IO-not-through-named-readers', 'complete-kernel/runtime-IO']
++def source_io_start(allocation, authority, role, initial=None):
++    if not isinstance(allocation,dict) or set(allocation)!={'schema','runtime_authority','operation_total_bytes','role_limits','ledger_before','scope'}:
++        raise RuntimeError('unbound or malformed closed Source IO allocation')
++    if allocation['schema']!='Root-selected-declared-direct-Source-IO-allocation/v1' or allocation['scope']!=SOURCE_IO_SCOPE or not isinstance(authority,dict) or allocation['runtime_authority']!=authority:
++        raise RuntimeError('Source IO closed authority/scope differs')
++    limits=allocation['role_limits'];total=allocation['operation_total_bytes'];before=allocation['ledger_before']
++    if not isinstance(limits,dict) or set(limits)!={'parent','collect','run'} or any(type(v)is not int or v<0 for v in limits.values()) or type(total)is not int or total<=0 or sum(limits.values())>total:
++        raise RuntimeError('Source IO closed role limits differ')
++    if not isinstance(before,dict) or any(type(before.get(k))is not int or before[k]<0 for k in ('captures','used','internal_used','global_cap','internal_cap')):
++        raise RuntimeError('Source IO ledger shape differs')
++    if before['used']+total>before['global_cap'] or before['internal_used']+total>before['internal_cap']:
++        raise RuntimeError('Source IO total allocation unavailable before admission')
++    if role not in ('parent','collect','run','bootstrap'):
++        raise RuntimeError('Source IO role differs')
++    limit=min(limits['collect'],limits['run'])if role=='bootstrap'else limits[role]
++    initial={'bytes':0,'captures':0} if initial is None else initial
++    if set(initial)!={'bytes','captures'} or any(type(v)is not int or v<0 for v in initial.values()) or initial['bytes']>limit:
++        raise RuntimeError('Source IO known prelaunch charge differs')
++    return {'schema':'actual-declared-direct-Source-IO-meter/v1','scope':SOURCE_IO_SCOPE,'runtime_authority':authority,'allocation':allocation,'role':role,'limit_bytes':limit,'initial_known_IO':dict(initial),'bytes':initial['bytes'],'captures':initial['captures'],'read_syscalls':0,'inputs':[],'violations':[],'declared_direct_IO_budget_accepted':False,'outside_boundary':SOURCE_IO_OUTSIDE_BOUNDARY,'outside_boundary_actual_bytes':None,'complete_kernel_or_runtime_IO_measured':False,'finished':False}
++def source_io_bind_role(state, role, allocation, authority):
++    if state['finished'] or state['role']!='bootstrap' or role not in ('collect','run') or allocation!=state['allocation'] or authority!=state['runtime_authority']:
++        raise RuntimeError('Source IO child role/authority differs')
++    limit=allocation['role_limits'][role]
++    if state['bytes']>limit:
++        raise RuntimeError('Source IO request read already exceeds role allocation')
++    state['role']=role;state['limit_bytes']=limit
++    return state
++
++def source_io_admit(state,n):
++    if type(n)is not int or n<0 or state['finished'] or state['bytes']+n>state['limit_bytes']:
++        state['violations'].append({'kind':'Source-IO-allocation-refusal','requested_bound':n,'actual_bytes_before':state['bytes']})
++        raise RuntimeError('declared direct Source IO allocation insufficient before read')
++
++def source_io_read_fd(state, fd, maximum_bytes, path, kind):
++    if type(maximum_bytes)is not int or maximum_bytes<0:
++        raise RuntimeError('Source IO read bound differs')
++    source_io_admit(state,maximum_bytes+1)
++    row={'path':str(path),'kind':str(kind),'actual_bytes':0,'read_syscalls':0};state['inputs'].append(row);state['captures']+=1
++    parts=[];total=0
++    try:
++        while total<=maximum_bytes:
++            state['read_syscalls']+=1;row['read_syscalls']+=1
++            piece=os.read(fd,min(65536,maximum_bytes+1-total))
++            # Attempted calls, then actual returned bytes, are retained before later verification.
++            state['bytes']+=len(piece);row['actual_bytes']+=len(piece);total+=len(piece)
++            if not piece:break
++            parts.append(piece)
++        if total>maximum_bytes:
++            state['violations'].append({'kind':'Source-IO-content-length-refusal','path':str(path),'actual_bytes':total})
++            raise RuntimeError('Source IO file grew beyond selected bound')
++    except BaseException as error:
++        state['violations'].append({'kind':'Source-IO-read-error','path':str(path),'type':type(error).__name__,'actual_bytes':row['actual_bytes']})
++        raise
++    return b''.join(parts)
++
++def source_io_finish(state):
++    state['finished']=True
++    state['declared_direct_IO_budget_accepted']=not state['violations'] and state['bytes']<=state['limit_bytes']
++    return state
++
++def source_io_validate_child(child, allocation, authority, role):
++    if role not in ('collect','run'):
++        raise RuntimeError('child Source IO role differs')
++    if not isinstance(child,dict) or child.get('schema')!='actual-declared-direct-Source-IO-meter/v1' or child.get('scope')!=SOURCE_IO_SCOPE or child.get('allocation')!=allocation or child.get('runtime_authority')!=authority or child.get('role')!=role:
++        raise RuntimeError('missing or mismatched declared direct child Source IO meter')
++    limit=child.get('limit_bytes')
++    if type(limit)is not int or limit<0 or limit!=allocation['role_limits'][role]:
++        raise RuntimeError('child direct Source IO limit type or value differs')
++    violations=child.get('violations')
++    if child.get('finished')is not True or child.get('declared_direct_IO_budget_accepted')is not True or type(violations)is not list or violations!=[] or type(child.get('bytes'))is not int or type(child.get('captures'))is not int or child['bytes']<0 or child['captures']<0 or child['bytes']>limit:
++        raise RuntimeError('child declared direct Source IO budget not accepted')
++    initial=child.get('initial_known_IO');inputs=child.get('inputs')
++    if type(initial)is not dict or set(initial)!={'bytes','captures'} or any(type(initial[k])is not int or initial[k]!=0 for k in initial):
++        raise RuntimeError('child initial direct Source IO must be exact integer zero')
++    if type(inputs)is not list or any(type(row)is not dict or set(row)!={'path','kind','actual_bytes','read_syscalls'} or type(row['path'])is not str or type(row['kind'])is not str or type(row['actual_bytes'])is not int or row['actual_bytes']<0 or type(row['read_syscalls'])is not int or row['read_syscalls']<1 for row in inputs):
++        raise RuntimeError('child direct Source IO event shape or read calls differ')
++    if child['captures']!=len(inputs) or child['bytes']!=sum(row['actual_bytes']for row in inputs) or type(child.get('read_syscalls'))is not int or child['read_syscalls']!=sum(row['read_syscalls']for row in inputs):
++        raise RuntimeError('child direct Source IO event totals differ')
++    if child.get('complete_kernel_or_runtime_IO_measured')is not False or 'outside_boundary_actual_bytes'not in child or child['outside_boundary_actual_bytes']is not None or child.get('outside_boundary')!=SOURCE_IO_OUTSIDE_BOUNDARY:
++        raise RuntimeError('child Source IO claim exceeds declared direct boundary')
++    return {'bytes':child['bytes'],'captures':child['captures'],'read_syscalls':child['read_syscalls'],'scope':SOURCE_IO_SCOPE,'complete_kernel_or_runtime_IO_measured':False}
+ 
+ def validate_runtime_authority(authority, expected_authority, now_utc_ns):
+     keys={'schema','root_selection','launch_not_before_utc_ns','launch_deadline_utc_ns'}
+@@ -41,6 +126,7 @@
+ REQUIRED_CANONICAL_CONFTESTS = ['/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/conftest.py', '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/conftest.py', '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/conftest.py']
+ PYTEST_INIFILE = '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/pytest.ini'
+ SELECTED_TEST_REWRITE_POLICY = {'cache_policy': 'bypass-read-only-for-selected-owning-test', 'required_compile_and_execution_witness': True, 'rewrite_policy': 'normal-pytest-assertion-rewrite', 'schema': 'selected-test-normal-pytest-source-AST-code-observation/v1', 'selected_test_binding_names': ['tests.unit.logic.autoformal.test_corpus_release_cli'], 'unobserved_or_cached_only_route': 'REFUSE'}
++SOURCE_IO_ALLOCATION = None
+ ROOT_RUNTIME_SELECTION = None
+ GIT_CANDIDATE_PROVENANCE = {'HEAD': 'eaf1e0e7de5b121a8b6d5ac22019f997225cd68b', 'Source_WRITE_claimed': False, 'actual_source_read_closed_refs': [{'bytes': 37593, 'path': '/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/actual-P2-D21-production-frontier-Source-READ-v01/actual-P2-D21-production-Source-READ-small-closeout.json', 'sha256': 'a680e19dd1624093fb944c29ce8571a286ee48f1c6e0a59b4169007b5a4fb535'}, {'bytes': 11077, 'path': '/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/actual-original-parent-v3-core5-Source-READ-v01/actual-P2-core5-Source-READ-small-closeout.json', 'sha256': '3d1f865f9ce4a79d0c9d140e6f0385f92161c6d251f0a65deba16cc3bf4efb2b'}, {'bytes': 4705, 'path': '/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/actual-P2-legal-corpus-lake-one-owner-Source-READ-v01/actual-P2-legal-corpus-lake-Source-READ-small-closeout.json', 'sha256': 'c8555b5ba7b7935fbb2e46c3caf764f240bccff6cb19c1bbcf756aad41a58f49'}, {'bytes': 6414, 'path': '/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/actual-P2-current-D-product-and-owningtest-first-RAW-READ-v01/actual-P2-current-D2-first-RAW-READ-small-closeout.json', 'sha256': '53043d4fa1551ffac4683f5126f4490567f390395d2471a80a7d9651663eb83e'}, {'path': '/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/actual-D27-batched36-package-and-import-Source-READ-v01/actual-D27-batched36-package-import-Source-READ-small-closeout.json', 'bytes': 62555, 'sha256': '82f583ce72feaa99bd5e06a90d6205f25ba0ab8bca8bb1b01e4fa173a7ebe777'}, {'path': '/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/actual-D27-next44-potential-eager-Source-READ-v01/actual-D27-next44-potential-eager-Source-READ-small-closeout.json', 'bytes': 74216, 'sha256': '1ab32454b359300ba7b8a26e8f848dd2bf06aa9748affe3375408297b904cc15'}, {'path': '/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/actual-D27-next99-potential-eager-Source-READ-v02/actual-D27-next99-potential-eager-Source-READ-v02-small-closeout.json', 'bytes': 164187, 'sha256': 'f73b22279011a5a86b49673a6cd38c3d513b97cf3ee0bdd9e4842822f5c466e4'}, {'path': '/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/actual-D27-next83-base-and-member-Source-READ-v01/actual-D27-next83-base-and-member-Source-READ-v01-small-closeout.json', 'bytes': 139015, 'sha256': '49e3a75f6442afed8a118972c239c38fc1c3191ffdfc7e803b022f0a46a8a35d'}, {'path': '/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/actual-D27-same102-reviewed-boundary-Source-READ-v02/actual-D27-same102-reviewed-boundary-Source-READ-v02-small-closeout.json', 'bytes': 170582, 'sha256': '8fd02be287f99f36ac300ba767d5f83fe4c68685a01da5ee58dfda8069469e7b'}, {'path': '/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/actual-D27-next110-base-and-member-Source-READ-v01/actual-D27-next110-base-and-member-Source-READ-v01-small-closeout.json', 'bytes': 185165, 'sha256': '4d1eda9fdcabf90a90a933c859a7086ea2386b6af84716dcf4f53cec4ce73b7b'}], 'root': '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets', 'tree': 'bdffa26ea057e79489ae849847eadd42ae23e170'}
+ ADDITIONAL_A_PROVENANCE = {'HEAD': 'de4d5a62b6fac2df61769a6461c2ada97f788208', 'Source_WRITE_claimed': False, 'actual_source_read_closed_ref': {'path': '/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/actual-D27-next110-base-and-member-Source-READ-v01/actual-D27-next110-base-and-member-Source-READ-v01-small-closeout.json', 'bytes': 185165, 'sha256': '4d1eda9fdcabf90a90a933c859a7086ea2386b6af84716dcf4f53cec4ce73b7b'}, 'root': '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate', 'tree': '74202f1a6a09085e0b0e238ea6d555806d8fb927'}
+@@ -56,7 +142,7 @@
+     ROOT, ADDITIONAL_A_ROOT, EXPECTED_MODULES, MAINTAINED_OWNER_NAMES,
+     SELECTED_TEST_MODULES, FUNCTION_SELECTORS, EXPECTED_FUNCTION_CASE_COUNTS,
+     REQUIRED_CANONICAL_CONFTESTS, PYTEST_INIFILE, SELECTED_TEST_REWRITE_POLICY,
+-    ROOT_RUNTIME_SELECTION, GIT_CANDIDATE_PROVENANCE, ADDITIONAL_A_PROVENANCE,
++    SOURCE_IO_ALLOCATION, ROOT_RUNTIME_SELECTION, GIT_CANDIDATE_PROVENANCE, ADDITIONAL_A_PROVENANCE,
+     BINDING_MANIFEST_REFERENCE, SOURCE_READ_BINDING_REFERENCE,
+     ADMITTED_IO_PLAN_REFERENCE, EFFECT_DECISION_REFERENCE,
+     SOURCE_EPOCH_SHA256, SOURCE_EPOCH_RECORD_COUNT,
+@@ -66,7 +152,24 @@
+ if not sys.dont_write_bytecode:
+     raise RuntimeError("existing -B/no-bytecode invocation required")
+ workspace = Path(__file__).resolve().parent
+-request = json.loads((workspace / "request.json").read_bytes())
++validate_runtime_authority(ROOT_RUNTIME_SELECTION,ROOT_RUNTIME_SELECTION,time.time_ns())
++SOURCE_IO_STATE=source_io_start(SOURCE_IO_ALLOCATION,ROOT_RUNTIME_SELECTION,'bootstrap')
++def source_io_control_bytes(path):
++ p=Path(path);before=p.lstat()
++ if not stat.S_ISREG(before.st_mode)or before.st_nlink!=1 or not 0<=before.st_size<=4194304:raise RuntimeError('named private control size/type differs')
++ source_io_admit(SOURCE_IO_STATE,before.st_size+1)
++ fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW)
++ try:
++  opened=os.fstat(fd)
++  fields=('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
++  stamp=lambda x:tuple(getattr(x,k)for k in fields)
++  if stamp(before)!=stamp(opened):raise RuntimeError('named private control FD differs')
++  raw=source_io_read_fd(SOURCE_IO_STATE,fd,before.st_size,p,'named-workspace-control')
++  if stamp(before)!=stamp(os.fstat(fd))or stamp(before)!=stamp(p.lstat())or len(raw)!=before.st_size:raise RuntimeError('named private control changed')
++ finally:os.close(fd)
++ return raw
++
++request = json.loads(source_io_control_bytes(workspace / "request.json"))
+ validate_runtime_authority(request.get("runtime_authority"), ROOT_RUNTIME_SELECTION, time.time_ns())
+ root = Path(request["source_root"])
+ accelerate = Path(request["accelerate_root"])
+@@ -77,6 +180,8 @@
+         or root == accelerate):
+     raise RuntimeError("two distinct real Source READ roots required")
+ phase, operation = request["phase"], request["operation"]
++if request.get('declared_direct_Source_IO_allocation')!=SOURCE_IO_ALLOCATION:raise RuntimeError('Source IO request allocation differs')
++source_io_bind_role(SOURCE_IO_STATE,operation,SOURCE_IO_ALLOCATION,ROOT_RUNTIME_SELECTION)
+ group_name = request["selection_group"]
+ if phase != "published-D-phase2-bridge27" or group_name != "phase2-bridge27" or operation not in {"collect", "run"}:
+     raise RuntimeError("one explicit bridge27 phase/group and operation required")
+@@ -194,17 +299,17 @@
+  p=Path(path);assert p.is_absolute()and p.resolve(strict=True)==p
+  a=p.lstat();fields=('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns');stamp=lambda info:{k:str(getattr(info,k))for k in fields}
+  assert stat.S_ISREG(a.st_mode)and a.st_nlink==1 and a.st_size==size
+- fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW);parts=[];total=0
++ source_io_admit(SOURCE_IO_STATE,size+1)
++ fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW)
+  try:
+   assert stamp(a)==stamp(os.fstat(fd))
+-  while piece:=os.read(fd,65536):
+-   total+=len(piece);assert total<=size;parts.append(piece)
+-  b=b''.join(parts);assert total==size and H(b)==digest and stamp(a)==stamp(os.fstat(fd))==stamp(p.lstat())
++  b=source_io_read_fd(SOURCE_IO_STATE,fd,size,p,'named-Source-authentication');total=len(b)
++  assert total==size and H(b)==digest and stamp(a)==stamp(os.fstat(fd))==stamp(p.lstat())
+  finally:os.close(fd)
+  authenticated[str(p)]={'path':str(p),'bytes':total,'sha256':H(b),'full9':stamp(a),'stable_FD_path_before_after':True}
+  return b
+ 
+-epoch_raw = (workspace / "source-epoch.json").read_bytes()
++epoch_raw = source_io_control_bytes(workspace / "source-epoch.json")
+ if (request["source_epoch_sha256"] != SOURCE_EPOCH_SHA256
+         or request["source_epoch_record_count"] != SOURCE_EPOCH_RECORD_COUNT
+         or H(epoch_raw) != SOURCE_EPOCH_SHA256):
+@@ -292,14 +397,12 @@
+     row=_source_epoch_row(path,name)
+     try:
+         before=path.lstat()
++        source_io_admit(SOURCE_IO_STATE,row['bytes']+1)
+         fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW)
+         try:
+             if not stat.S_ISREG(before.st_mode)or before.st_nlink!=1 or f9(before)!=f9(os.fstat(fd)):
+                 raise RuntimeError('actual Source identity differs')
+-            raw=bytearray()
+-            while piece:=os.read(fd,1024**2):
+-                raw.extend(piece)
+-                if len(raw)>row['bytes']:raise RuntimeError('Source byte bound changed')
++            raw=source_io_read_fd(SOURCE_IO_STATE,fd,row['bytes'],path,'named-project-Source-authentication')
+             if f9(before)!=f9(os.fstat(fd))or f9(before)!=f9(path.lstat())or f9(before)!=row['full9']:
+                 raise RuntimeError('actual Source metadata differs')
+         finally:os.close(fd)
+@@ -636,6 +739,7 @@
+     report["actual_Source_authentication_violations"] = [dict(row)for row in source_auth_violations]
+     report["Source_authentication_accepted"] = not source_auth_violations
+     if source_auth_violations:report["collection_accepted"] = False
++    report['declared_direct_Source_IO']=source_io_finish(SOURCE_IO_STATE)
+     raw = json.dumps(report, sort_keys=True, separators=(",", ":")).encode()
+     descriptor = os.open(workspace / "binding.json", os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+     with os.fdopen(descriptor, "wb") as stream:
+@@ -643,6 +747,7 @@
+         stream.flush()
+         os.fsync(stream.fileno())
+ _require_clean_source_authentication()
++if not report['declared_direct_Source_IO']['declared_direct_IO_budget_accepted']:raise SystemExit(5)
+ if not report["collection_accepted"]:
+     raise SystemExit(4)
+ raise SystemExit(code)

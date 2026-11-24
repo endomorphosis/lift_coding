@@ -1,0 +1,113 @@
+{
+  "IO_plan": {
+    "bytes": 16885,
+    "path": "/tmp/Reader-D27-514-known-allowlist-128MiB-cost-note-private-v01/D27-514-retained-allowlist-128MiB-IO-cost-note-v01.json",
+    "sha256": "438fa71cf7f17c8877a2e819f5e1865c9e4a71cfcd6fdc47dca52536cf4eee2c"
+  },
+  "Root_selection": null,
+  "Source_outer514": {
+    "bytes": 229352,
+    "path": "/tmp/Reader-D27-private110-next-import-frontier-v01/D27-retained-multicapture514-Source-path-rows-v01.json",
+    "sha256": "7c1d4f1706b5aa4bf9614554b3fe7c41850745c314e326ffe834f6433b8393a2"
+  },
+  "Source_python509": {
+    "bytes": 240055,
+    "path": "/tmp/Reader-D27-known514-bounded-ordinary-preparation-v03/D27-known514-Python509-retained-rows-v01.json",
+    "sha256": "5fdcec9ddc11190459ba6139aa41ccf2ab872c1f11253667b055c67d3f123e2f"
+  },
+  "binding_manifest": {
+    "bytes": 22256,
+    "path": "/tmp/Reader-D27-known514-bounded-ordinary-preparation-v03/D27-known514-READ-manifest-runtime-clock-NULL-v01.json",
+    "sha256": "3976ee78b8b00c09ff292bb960213b7bdb3d32c9a0c78cf7ce826ce212499966"
+  },
+  "bootstrap": {
+    "bytes": 61459,
+    "path": "/tmp/Reader-D27-known514-bounded-ordinary-preparation-v03/bootstrap-D27-known514-authsticky-runtime-clock-NULL-v01.py.DATA",
+    "sha256": "6f1ddbd9176e250d7bc55430581147b15b98c3203e4a6bed6dbfca0d14070777"
+  },
+  "bounded_strategy": {
+    "bytes": 1480,
+    "path": "/tmp/Root-D27-bounded-guarded-ordinary-strategy-clarification-v01.json",
+    "sha256": "0ce2cd65e8b4f4a40f21eeaec36e5351926dff218387821c43e5160cc6e68636"
+  },
+  "entry": {
+    "argv": [
+      "OPERATOR",
+      "/tmp/Reader-D27-known514-bounded-ordinary-preparation-v03/D27-actual514-retained-closed-READ-aggregate-binding-v01.json",
+      "18046",
+      "d1d7026a827e7ee5b2639390e6bd8f2ddbe2e3b360f1a7009a83482112d8f791"
+    ],
+    "python": "/home/barberb/.local/bin/python"
+  },
+  "expected_case_vector": [
+    1,
+    5,
+    4,
+    3,
+    1,
+    12,
+    1
+  ],
+  "expected_parent_cases": 27,
+  "expected_selectors": 7,
+  "factory": {
+    "bytes": 3003,
+    "path": "/tmp/Reader-D27-current-captured-code-binding-and-config-private-v01/factory-published-D27-actual-READ-v01.py.DATA",
+    "sha256": "24473ccf82802e37270ba505fc473dcc95d4f2b54ce195f99bf2a4d9f988a78e"
+  },
+  "ledger_before_future_prelaunch": {
+    "captures": 86690,
+    "global_cap": 6039797760,
+    "internal_cap": 5771362304,
+    "internal_used": 5558976825,
+    "used": 5749568699
+  },
+  "literal_and_projection_proof": {
+    "bytes": 1183,
+    "path": "/tmp/Reader-D27-known514-bounded-ordinary-preparation-v03/known514-literal-only-control-and-projection-proof-v01.json",
+    "sha256": "86b9c92e9d7a2e3127b29c0ece81ce8c34ee5389acf6cec76f14d4a7bc54f737"
+  },
+  "operator": {
+    "bytes": 91641,
+    "path": "/tmp/Reader-D27-known514-bounded-ordinary-preparation-v03/operator-D27-known514-existing-owner-runtime-clock-NULL-v01.py.DATA",
+    "sha256": "751b10a978621c12eb53244883fd994e4ec3bbafed85ba0c7dc9db59eb476056"
+  },
+  "ordinary_effect_execution_selection": null,
+  "private_input_bytes": 902296,
+  "profile": {
+    "AS_bytes": 8589934592,
+    "CPU_slots": 1,
+    "RSS_bytes": 4294967296,
+    "Source_envelope_bytes": 134217728,
+    "child_slots": 1,
+    "collect_wall_CPU": [
+      120,
+      110
+    ],
+    "input_bytes": 4194304,
+    "output_bytes": 16777216,
+    "run_wall_CPU": [
+      600,
+      540
+    ],
+    "workspace_bytes": 67108864
+  },
+  "reviewed_bootstrap_origin": {
+    "bytes": 58638,
+    "path": "/tmp/D27-bootstrap-auth-sticky-correction-private-v01-fx2r1got/bootstrap.after.py.DATA",
+    "sha256": "ee3cc8ccd9123dac0c0fccb5820affac68cbae5871114996934e7c540268caca"
+  },
+  "row_parent_provenance": {
+    "bytes": 555107,
+    "path": "/tmp/Reader-D27-known514-bounded-ordinary-preparation-v03/D27-known514-row-parent-provenance-v01.json",
+    "sha256": "c3fbe226526b85352b5c4ff6cffe79081672472cff301896436274dcb252497c"
+  },
+  "schema": "existing-D27-bounded-known514-ordinary27-private-preparation/v1",
+  "scope": "Root-selected retained514 allowlist, not exhaustive Python closure. Existing Sourceauth sticky refusal blocksqualification and failedCOLLECT blocksRUN. Exact7defs/27actualcollection/typedparents/subreports/classJUnit/SourceASTcodewitness/cleanup unchanged. P1inspection and realAissuedNativepositive remainseparate/unselected.",
+  "shared_runtime_clock_authority": null,
+  "source_read_binding": {
+    "bytes": 18046,
+    "path": "/tmp/Reader-D27-known514-bounded-ordinary-preparation-v03/D27-actual514-retained-closed-READ-aggregate-binding-v01.json",
+    "sha256": "d1d7026a827e7ee5b2639390e6bd8f2ddbe2e3b360f1a7009a83482112d8f791"
+  }
+}
