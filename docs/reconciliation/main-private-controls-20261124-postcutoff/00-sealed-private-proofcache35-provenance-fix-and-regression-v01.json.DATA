@@ -1,0 +1,104 @@
+{
+  "schema": "sealed-private-proofcache35-exact-provenance-consistency-fix/v1",
+  "created_utc": "2026-11-24T00:50:39.713138+00:00",
+  "status": "PRIVATE_FIX_AND_ACTUAL_STDLIB_REGRESSION_COMPLETE_NO_ORDINARY_QUALIFICATION",
+  "assignment": {
+    "path": "/tmp/Root-Main-proofcache35-provenance-mismatch-private-assignment-v01.json",
+    "bytes": 2809,
+    "sha256": "b4af22b03a7b0a1b2c6fbe364298cd9fcd8d82e7ec05466975ea0b36d015f0ac"
+  },
+  "defect": "Saved factory uses operator FINAL_D4cd/tree26c; selected bootstrap independently retained stale e88/tree2886. Actual request/expected dictionaries differ ONLY HEAD/tree, including same27readrefs/root/Source_WRITE=false; A exact.",
+  "preimage": {
+    "path": "/tmp/Reader-P1-current-published-Source-and-assets-read-preparation-private-v01/Phase1.2-current-proofcache-ordinary-binding-private-v01/actual-Root-selected-current-proofcache35-ordinary-v05-bound-runtime-literals/selected-bootstrap.py.DATA",
+    "bytes": 79804,
+    "sha256": "9796c0036e2607ccdf309c6e95c7ecaa5dde74fedb2eb96c98398bb2116a8d0e"
+  },
+  "private_postimage": {
+    "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/proofcache35-provenance-private-v01/selected-bootstrap-provenance-corrected.after.py.DATA",
+    "bytes": 79804,
+    "sha256": "d0ea55f7b66f1b51a685bbebc8a6f7412601ab5ecf646cb2f0488cb503cb42d4"
+  },
+  "changed_constant": "GIT_CANDIDATE_PROVENANCE",
+  "all_other_top_level_AST_exact_creation_proof": true,
+  "bootstrap_guard_AST_unchanged": true,
+  "all_resource_Source_clock_meter_custody_semantics_unchanged": true,
+  "test": {
+    "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/proofcache35-provenance-private-v01/test_exact_factory_closed_provenance.py.DATA",
+    "bytes": 13042,
+    "sha256": "96597c3978051dab1b0c3e38ce80ad0707b53209749214f9d15504204e8142fe",
+    "parent_methods": 10
+  },
+  "raw_actual_result": {
+    "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/proofcache35-provenance-private-v01/actual-exact-provenance-RED-GREEN-result-v01.json",
+    "bytes": 9741,
+    "sha256": "062acbe73a0fd258d07bff7af0b74723967d7819a8e0ef669b67207c07edfa33"
+  },
+  "actual_RED": {
+    "parents": 10,
+    "passes": 7,
+    "failures": 1,
+    "errors": [
+      "actual collect request refused at exact provenance guard",
+      "authored35 RUN request assembly refused at exact provenance guard"
+    ],
+    "skips": 0,
+    "failure": "coherent historical HEAD/tree pair accepted by stale bootstrap"
+  },
+  "actual_GREEN": {
+    "parents": 10,
+    "passes": 10,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "ordinary_or_SDK_qualification": false
+  },
+  "actual_command_exit_code": 1,
+  "assessment_bug_retained": true,
+  "test_reruns": 0,
+  "evidence": {
+    "forward-two-literal-edits-v01.json": {
+      "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/proofcache35-provenance-private-v01/forward-two-literal-edits-v01.json",
+      "bytes": 1227,
+      "sha256": "a78af33c0c8a193509aba7ebaedb3e66f45930c60e85ede4301487ca7510282d"
+    },
+    "inverse-two-literal-edits-v01.json": {
+      "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/proofcache35-provenance-private-v01/inverse-two-literal-edits-v01.json",
+      "bytes": 1227,
+      "sha256": "6417fa40718cee4ed889d98fff0d7694d3bc2d177d98797d5ca7634b71f93639"
+    },
+    "actual-RED-GREEN-assessment-correction-v01.json": {
+      "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/proofcache35-provenance-private-v01/actual-RED-GREEN-assessment-correction-v01.json",
+      "bytes": 1728,
+      "sha256": "710cbceda361b7b3a2b08334d62504128d7fee51c1fdf2e9bc3922d8a3196c70"
+    }
+  },
+  "accounting": {
+    "original_unit_cap": 524288,
+    "Root_expansions": [
+      32768,
+      16384
+    ],
+    "current_cap": 573440,
+    "cumulative_private_input_and_output_read_bytes": 571693,
+    "remaining": 1747,
+    "all_previous_read_costs_retained": true,
+    "test_execution_authored_script_implicit_interpreter_IO_not_counted_as_explicit_cached_read": true,
+    "no_complete_kernel_IO_measurement_claim": true,
+    "last_output_reads": {
+      "authored_test": 13042,
+      "already_partial_result_tail": 3741
+    }
+  },
+  "history": {
+    "candidate_DATA_staged_before_test_execution": true,
+    "original_files_never_modified": true,
+    "RED_uses_exact_original_constants_before_corrected_constants_in_same_process": true,
+    "first_excerpts_stdout_truncated_full_saved": true,
+    "prior_preparation_and_runtime_failures_retained": true
+  },
+  "finite_peer_feedback": "In-memory peer found no blocker; requested source-write and read-receipt mutations included. No independent execution credit.",
+  "no_canonical_Source_SDK_Git_network_child_Native_or_model_action": true,
+  "next_existing_owner": "Root/Reader compare this two-literal fix with fresh postpublication final Dhead/tree, rebind exact full provenance/controls/clock/IO/source identities through existing path before any new ordinary attempt. This historic4cd consistency packet grants no launch/currentHEAD authority.",
+  "publication_owner": "Advisory solepublisher, separate artifact archive underway",
+  "full_eight_phase_goal_complete": false
+}

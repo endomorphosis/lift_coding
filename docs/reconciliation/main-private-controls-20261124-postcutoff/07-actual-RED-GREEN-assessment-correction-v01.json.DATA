@@ -1,0 +1,42 @@
+{
+  "schema": "same-execution-assessment-correction-no-rerun/v1",
+  "actual_tool": "e34d9c",
+  "actual_command_exit_code": 1,
+  "runner_assessment_bug": "Runner required REDerrors==0 although the two actual positive request methods reproduce the guard refusal as RuntimeError. No assertion or execution-result changed.",
+  "RED": {
+    "parents": 10,
+    "passes": 7,
+    "failures": 1,
+    "errors": [
+      "actual collect request refused at exact provenance guard",
+      "authored35 RUN request assembly refused at exact provenance guard"
+    ],
+    "skips": 0,
+    "failure": "coherent historical HEAD/tree pair accepted by stale bootstrap"
+  },
+  "GREEN": {
+    "parents": 10,
+    "passes": 10,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "ordinary_or_SDK_qualification": false
+  },
+  "same_test_methods_for_RED_and_GREEN": true,
+  "test_reruns_after_assessment_bug": 0,
+  "actual_factory_source_sha256": "a114cb3d5030f4e9eb67adfb435f2dcdb6efdc52d29473bd879a2f3db2ffc3dc",
+  "fictional_seams": [
+    "SDK request/limits value carriers",
+    "bootstrap payload read",
+    "epoch/runtime value carriers",
+    "authored35 RUN request roster"
+  ],
+  "regression_input_is_json_decoded_actual_factory_payload": true,
+  "raw_result": {
+    "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/proofcache35-provenance-private-v01/actual-exact-provenance-RED-GREEN-result-v01.json",
+    "bytes": 9741,
+    "sha256": "062acbe73a0fd258d07bff7af0b74723967d7819a8e0ef669b67207c07edfa33"
+  },
+  "guard_retained": "Exact preexisting fourteen-field equality loop, unchanged AST; missing request key retains KeyError.",
+  "canonical_Source_SDK_Git_network_child_Native_execution": false
+}

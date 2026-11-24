@@ -1,0 +1,9 @@
+# Post-cutoff private proof-cache launch-provenance fix
+
+This is an inert historical archive of Main's selected private work. It preserves the exact failing and corrected bootstrap files, the authored ten-method regression, the saved RED/GREEN result, the forward/inverse two-literal records, the assessment correction, and the sealed author packet. Filenames append `.DATA` to each original basename to keep these copies outside active import and launch paths.
+
+The author reported a mismatch between the private operator's current datasets HEAD/tree and an independently retained older bootstrap HEAD/tree. The correction changes the `GIT_CANDIDATE_PROVENANCE` literal only. The packet reports the same ten regression methods RED with seven passes, one failure and two errors, then GREEN with ten passes and zero failures/errors/skips. The original command nevertheless exited 1 because of a result-assessment bug; that failure, its correction and all original records remain preserved. These are attributed author results and were not rerun during archive preparation.
+
+This archive confers no ordinary 35-case, SDK, Native, legal, model-quality, production-registration, launch or source-write authority. The corrected bootstrap is not an active production change. It retains a historical `4cd`-era consistency fix, not a statement that current repositories, runtime controls or clocks match. A future ordinary attempt must bind current exact provenance through the existing owner path. No payload clocks, ledger fields or default behavior were rewritten. Full project dependencies and large raw caches were deliberately not duplicated.
+
+`manifest.json` supplies exact source paths, observed full9 metadata, sizes, SHA256 and Git blob identities for the copies. The original sealed author packet is included unchanged. The records establish archived byte identity only, preserve historical failures, and do not establish completion of the broader autoformalization goal.

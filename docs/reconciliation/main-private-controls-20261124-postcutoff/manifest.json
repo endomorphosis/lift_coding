@@ -1,0 +1,370 @@
+{
+  "author_packet": {
+    "bytes": 5370,
+    "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/proofcache35-provenance-private-v01/sealed-private-proofcache35-provenance-fix-and-regression-v01.json",
+    "sha256": "ee5df79ec8c3e7b2ba4372216fe13e0637a0110ce8b660b69164019706fc0213"
+  },
+  "author_reported_claims_not_rerun": {
+    "actual_command_exit_code": 1,
+    "assessment_bug_retained": true,
+    "bootstrap_guard_AST_unchanged": true,
+    "changed_constant": "GIT_CANDIDATE_PROVENANCE",
+    "defect": "Saved factory uses operator FINAL_D4cd/tree26c; selected bootstrap independently retained stale e88/tree2886. Actual request/expected dictionaries differ ONLY HEAD/tree, including same27readrefs/root/Source_WRITE=false; A exact.",
+    "private_GREEN": {
+      "errors": 0,
+      "failures": 0,
+      "ordinary_or_SDK_qualification": false,
+      "parents": 10,
+      "passes": 10,
+      "skips": 0
+    },
+    "private_RED": {
+      "errors": [
+        "actual collect request refused at exact provenance guard",
+        "authored35 RUN request assembly refused at exact provenance guard"
+      ],
+      "failure": "coherent historical HEAD/tree pair accepted by stale bootstrap",
+      "failures": 1,
+      "parents": 10,
+      "passes": 7,
+      "skips": 0
+    },
+    "test_reruns": 0
+  },
+  "claim_limits": {
+    "all_prior_failures_and_costs_retained": true,
+    "new_archive_hashes_only_authenticate_current_snapshot_bytes": true,
+    "no_Source_runtime_Native_model_legal_review_or_admission_credit": true,
+    "no_current_HEAD_or_launch_authority": true,
+    "no_ordinary35_or_SDK_qualification": true,
+    "no_production_canonical_adoption_or_default_change": true,
+    "no_tests_imports_or_execution_in_archive_preparation": true,
+    "original_payload_clocks_and_accounting_preserved_without_rewrite": true
+  },
+  "classification": "INERT_HISTORICAL_PRIVATE_FIX_AND_REGRESSION_NOT_CANONICAL_OR_RUNTIME_ADOPTION",
+  "files": [
+    {
+      "exact_source_copy": true,
+      "mode": "100644",
+      "observed_source_full9": {
+        "st_ctime_ns": "1795481439713220642",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "61783988",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795481439713220642",
+        "st_nlink": "1",
+        "st_size": "5370",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "FS_mode": "0o400",
+        "Git_blob_sha1": "636967ebd3f72af31ba741c79b8c947957a3a310",
+        "bytes": 5370,
+        "full9": {
+          "st_ctime_ns": "1795481689755951819",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72007166",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795481689755951819",
+          "st_nlink": "1",
+          "st_size": "5370",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/postcutoff-Main-proofcache35-inert-preparation-v01/00-sealed-private-proofcache35-provenance-fix-and-regression-v01.json.DATA",
+        "sha256": "ee5df79ec8c3e7b2ba4372216fe13e0637a0110ce8b660b69164019706fc0213"
+      },
+      "role": "sealed_author_packet",
+      "source_ref": {
+        "bytes": 5370,
+        "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/proofcache35-provenance-private-v01/sealed-private-proofcache35-provenance-fix-and-regression-v01.json",
+        "sha256": "ee5df79ec8c3e7b2ba4372216fe13e0637a0110ce8b660b69164019706fc0213"
+      },
+      "target_path": "docs/reconciliation/main-private-controls-20261124-postcutoff/00-sealed-private-proofcache35-provenance-fix-and-regression-v01.json.DATA"
+    },
+    {
+      "exact_source_copy": true,
+      "mode": "100644",
+      "observed_source_full9": {
+        "st_ctime_ns": "1795477154889382526",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "35569997",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795477154889382526",
+        "st_nlink": "1",
+        "st_size": "79804",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "FS_mode": "0o400",
+        "Git_blob_sha1": "106feef8707c03e589e42394a5a27c49cdc88fc4",
+        "bytes": 79804,
+        "full9": {
+          "st_ctime_ns": "1795481689759951864",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72007167",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795481689759951864",
+          "st_nlink": "1",
+          "st_size": "79804",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/postcutoff-Main-proofcache35-inert-preparation-v01/01-selected-bootstrap.py.DATA.DATA",
+        "sha256": "9796c0036e2607ccdf309c6e95c7ecaa5dde74fedb2eb96c98398bb2116a8d0e"
+      },
+      "role": "historical_failing_private_bootstrap",
+      "source_ref": {
+        "bytes": 79804,
+        "path": "/tmp/Reader-P1-current-published-Source-and-assets-read-preparation-private-v01/Phase1.2-current-proofcache-ordinary-binding-private-v01/actual-Root-selected-current-proofcache35-ordinary-v05-bound-runtime-literals/selected-bootstrap.py.DATA",
+        "sha256": "9796c0036e2607ccdf309c6e95c7ecaa5dde74fedb2eb96c98398bb2116a8d0e"
+      },
+      "target_path": "docs/reconciliation/main-private-controls-20261124-postcutoff/01-selected-bootstrap.py.DATA.DATA"
+    },
+    {
+      "exact_source_copy": true,
+      "mode": "100644",
+      "observed_source_full9": {
+        "st_ctime_ns": "1795481140646240132",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "61783979",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795481140646240132",
+        "st_nlink": "1",
+        "st_size": "79804",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "FS_mode": "0o400",
+        "Git_blob_sha1": "a170c343a8dc197135ff14cecc7e68ba93a8205e",
+        "bytes": 79804,
+        "full9": {
+          "st_ctime_ns": "1795481689762951898",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72007168",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795481689762951898",
+          "st_nlink": "1",
+          "st_size": "79804",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/postcutoff-Main-proofcache35-inert-preparation-v01/02-selected-bootstrap-provenance-corrected.after.py.DATA.DATA",
+        "sha256": "d0ea55f7b66f1b51a685bbebc8a6f7412601ab5ecf646cb2f0488cb503cb42d4"
+      },
+      "role": "private_two_literal_corrected_bootstrap",
+      "source_ref": {
+        "bytes": 79804,
+        "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/proofcache35-provenance-private-v01/selected-bootstrap-provenance-corrected.after.py.DATA",
+        "sha256": "d0ea55f7b66f1b51a685bbebc8a6f7412601ab5ecf646cb2f0488cb503cb42d4"
+      },
+      "target_path": "docs/reconciliation/main-private-controls-20261124-postcutoff/02-selected-bootstrap-provenance-corrected.after.py.DATA.DATA"
+    },
+    {
+      "exact_source_copy": true,
+      "mode": "100644",
+      "observed_source_full9": {
+        "st_ctime_ns": "1795481314610675229",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "61783983",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795481314610675229",
+        "st_nlink": "1",
+        "st_size": "13042",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "FS_mode": "0o400",
+        "Git_blob_sha1": "2dba6852df9780616cafc93a7cceb7be08aa12c8",
+        "bytes": 13042,
+        "full9": {
+          "st_ctime_ns": "1795481689766951943",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72007169",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795481689766951943",
+          "st_nlink": "1",
+          "st_size": "13042",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/postcutoff-Main-proofcache35-inert-preparation-v01/03-test_exact_factory_closed_provenance.py.DATA.DATA",
+        "sha256": "96597c3978051dab1b0c3e38ce80ad0707b53209749214f9d15504204e8142fe"
+      },
+      "role": "authored_ten_method_stdlib_regression",
+      "source_ref": {
+        "bytes": 13042,
+        "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/proofcache35-provenance-private-v01/test_exact_factory_closed_provenance.py.DATA",
+        "sha256": "96597c3978051dab1b0c3e38ce80ad0707b53209749214f9d15504204e8142fe"
+      },
+      "target_path": "docs/reconciliation/main-private-controls-20261124-postcutoff/03-test_exact_factory_closed_provenance.py.DATA.DATA"
+    },
+    {
+      "exact_source_copy": true,
+      "mode": "100644",
+      "observed_source_full9": {
+        "st_ctime_ns": "1795481328278582023",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "61783984",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795481328278582023",
+        "st_nlink": "1",
+        "st_size": "9741",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "FS_mode": "0o400",
+        "Git_blob_sha1": "7db7d38ea843ed4651d47dce7ad0f882b957af17",
+        "bytes": 9741,
+        "full9": {
+          "st_ctime_ns": "1795481689769951977",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72007170",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795481689769951977",
+          "st_nlink": "1",
+          "st_size": "9741",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/postcutoff-Main-proofcache35-inert-preparation-v01/04-actual-exact-provenance-RED-GREEN-result-v01.json.DATA",
+        "sha256": "062acbe73a0fd258d07bff7af0b74723967d7819a8e0ef669b67207c07edfa33"
+      },
+      "role": "retained_actual_RED_GREEN_result_with_original_exit",
+      "source_ref": {
+        "bytes": 9741,
+        "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/proofcache35-provenance-private-v01/actual-exact-provenance-RED-GREEN-result-v01.json",
+        "sha256": "062acbe73a0fd258d07bff7af0b74723967d7819a8e0ef669b67207c07edfa33"
+      },
+      "target_path": "docs/reconciliation/main-private-controls-20261124-postcutoff/04-actual-exact-provenance-RED-GREEN-result-v01.json.DATA"
+    },
+    {
+      "exact_source_copy": true,
+      "mode": "100644",
+      "observed_source_full9": {
+        "st_ctime_ns": "1795481439703577380",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "61783985",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795481439703577380",
+        "st_nlink": "1",
+        "st_size": "1227",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "FS_mode": "0o400",
+        "Git_blob_sha1": "3d40b00c52019a5fd5fb5f620099b4165888fcdc",
+        "bytes": 1227,
+        "full9": {
+          "st_ctime_ns": "1795481689773952023",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72007171",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795481689773952023",
+          "st_nlink": "1",
+          "st_size": "1227",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/postcutoff-Main-proofcache35-inert-preparation-v01/05-forward-two-literal-edits-v01.json.DATA",
+        "sha256": "a78af33c0c8a193509aba7ebaedb3e66f45930c60e85ede4301487ca7510282d"
+      },
+      "role": "retained_author_evidence_forward-two-literal-edits-v01.json",
+      "source_ref": {
+        "bytes": 1227,
+        "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/proofcache35-provenance-private-v01/forward-two-literal-edits-v01.json",
+        "sha256": "a78af33c0c8a193509aba7ebaedb3e66f45930c60e85ede4301487ca7510282d"
+      },
+      "target_path": "docs/reconciliation/main-private-controls-20261124-postcutoff/05-forward-two-literal-edits-v01.json.DATA"
+    },
+    {
+      "exact_source_copy": true,
+      "mode": "100644",
+      "observed_source_full9": {
+        "st_ctime_ns": "1795481439706828137",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "61783986",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795481439706828137",
+        "st_nlink": "1",
+        "st_size": "1227",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "FS_mode": "0o400",
+        "Git_blob_sha1": "9176aef35380eb3f06d9b5c287840005bea81e1a",
+        "bytes": 1227,
+        "full9": {
+          "st_ctime_ns": "1795481689776952057",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72007172",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795481689776952057",
+          "st_nlink": "1",
+          "st_size": "1227",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/postcutoff-Main-proofcache35-inert-preparation-v01/06-inverse-two-literal-edits-v01.json.DATA",
+        "sha256": "6417fa40718cee4ed889d98fff0d7694d3bc2d177d98797d5ca7634b71f93639"
+      },
+      "role": "retained_author_evidence_inverse-two-literal-edits-v01.json",
+      "source_ref": {
+        "bytes": 1227,
+        "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/proofcache35-provenance-private-v01/inverse-two-literal-edits-v01.json",
+        "sha256": "6417fa40718cee4ed889d98fff0d7694d3bc2d177d98797d5ca7634b71f93639"
+      },
+      "target_path": "docs/reconciliation/main-private-controls-20261124-postcutoff/06-inverse-two-literal-edits-v01.json.DATA"
+    },
+    {
+      "exact_source_copy": true,
+      "mode": "100644",
+      "observed_source_full9": {
+        "st_ctime_ns": "1795481439709590905",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "61783987",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795481439709590905",
+        "st_nlink": "1",
+        "st_size": "1728",
+        "st_uid": "1000"
+      },
+      "prepared_ref": {
+        "FS_mode": "0o400",
+        "Git_blob_sha1": "3f71cbcb0cee2751b377a3aa772055dcc46e4ad7",
+        "bytes": 1728,
+        "full9": {
+          "st_ctime_ns": "1795481689780952102",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72007173",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795481689780952102",
+          "st_nlink": "1",
+          "st_size": "1728",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/postcutoff-Main-proofcache35-inert-preparation-v01/07-actual-RED-GREEN-assessment-correction-v01.json.DATA",
+        "sha256": "710cbceda361b7b3a2b08334d62504128d7fee51c1fdf2e9bc3922d8a3196c70"
+      },
+      "role": "retained_author_evidence_actual-RED-GREEN-assessment-correction-v01.json",
+      "source_ref": {
+        "bytes": 1728,
+        "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/proofcache35-provenance-private-v01/actual-RED-GREEN-assessment-correction-v01.json",
+        "sha256": "710cbceda361b7b3a2b08334d62504128d7fee51c1fdf2e9bc3922d8a3196c70"
+      },
+      "target_path": "docs/reconciliation/main-private-controls-20261124-postcutoff/07-actual-RED-GREEN-assessment-correction-v01.json.DATA"
+    }
+  ],
+  "schema": "Main-proofcache35-private-fix-postcutoff-archive/v1",
+  "scope": "Exact selected private before/after bootstrap, authored regression, RED/GREEN result, forward/inverse literal records and retained assessment correction. Project dependencies, large caches and transcripts are not duplicated.",
+  "source_packet_preserved_verbatim": true
+}

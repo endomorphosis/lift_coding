@@ -1,0 +1,29 @@
+{
+  "schema": "exact-AST-constant-literal-edit/v1",
+  "input": {
+    "path": "/tmp/Reader-P1-current-published-Source-and-assets-read-preparation-private-v01/Phase1.2-current-proofcache-ordinary-binding-private-v01/actual-Root-selected-current-proofcache35-ordinary-v05-bound-runtime-literals/selected-bootstrap.py.DATA",
+    "bytes": 79804,
+    "sha256": "9796c0036e2607ccdf309c6e95c7ecaa5dde74fedb2eb96c98398bb2116a8d0e"
+  },
+  "output": {
+    "path": "/tmp/Main-HOME-normal71-INERT-preparation-v01-w0o_tele/bridge27-INERT-controls-v01/proofcache35-provenance-private-v01/selected-bootstrap-provenance-corrected.after.py.DATA",
+    "bytes": 79804,
+    "sha256": "d0ea55f7b66f1b51a685bbebc8a6f7412601ab5ecf646cb2f0488cb503cb42d4"
+  },
+  "constant": "GIT_CANDIDATE_PROVENANCE",
+  "edits": [
+    {
+      "json_pointer": "/HEAD",
+      "before": "e88e21eed18ac588cce062d62f609d9738fbdfd7",
+      "after": "4cd912f4e4256bde28ae331d6ebbb239e44f2bd7"
+    },
+    {
+      "json_pointer": "/tree",
+      "before": "2886e0104ec2c8093559a127543391fdb639d135",
+      "after": "26c527d48b5f2f4c1ce034f7d76b73abb4bc38c4"
+    }
+  ],
+  "all_other_AST_exact": true,
+  "all_other_provenance_fields_exact": true,
+  "no_runtime_authority": true
+}

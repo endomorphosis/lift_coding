@@ -1,0 +1,267 @@
+"""Private stdlib controls. No Source, SDK, pytest, Git, or child execution.
+
+The exact saved request factory and bootstrap guard are compiled from a pinned
+derived fixture. Only SDK value carriers and bootstrap-payload I/O are fictional.
+The 35-ID RUN roster is authored test DATA, not actual pytest collection.
+"""
+import ast
+import copy
+import hashlib
+import io
+import json
+import os
+from pathlib import Path
+import resource
+import time
+import types
+import unittest
+
+FIXTURE = None
+CONSTANTS = None
+GUARD = None
+CORRECTED_D = None
+CALLS = []
+
+
+def actual_request(operation="collect", roster=None):
+    constants = FIXTURE["bootstrap_constants"]
+    selectors = constants["FUNCTION_SELECTORS"]
+    ns = {
+        "ROOT": CORRECTED_D["root"],
+        "ADDITIONAL_A_ROOT": constants["ADDITIONAL_A_PROVENANCE"]["root"],
+        "EXPECTED_MODULES": constants["EXPECTED_MODULES"],
+        "MAINTAINED_OWNER_NAMES": constants["MAINTAINED_OWNER_NAMES"],
+        "SELECTED_TEST_MODULES": constants["SELECTED_TEST_MODULES"],
+        "REQUIRED_CONFTESTS": constants["REQUIRED_CANONICAL_CONFTESTS"],
+        "fixture": {"pytest_inifile": constants["PYTEST_INIFILE"]},
+        "OWNING_FILES": sorted({s.split("::", 1)[0] for s in selectors}),
+        "SELECTION": {
+            "function_selectors": selectors,
+            "expected_function_case_counts": constants["EXPECTED_FUNCTION_CASE_COUNTS"],
+        },
+        "H": lambda raw: hashlib.sha256(raw).hexdigest(),
+        "epoch_raw": b'{"fictional_source_epoch":true}',
+        "EPOCH": [],
+        "SELECTED_TEST_REWRITE_POLICY": constants["SELECTED_TEST_REWRITE_POLICY"],
+        "ROOT_RUNTIME_SELECTION": {"fictional_value_carrier_only": True},
+        "FINAL_D_PROVENANCE": copy.deepcopy(CORRECTED_D),
+        "FINAL_A_PROVENANCE": constants["ADDITIONAL_A_PROVENANCE"],
+        "FINAL_BINDING_MANIFEST_REFERENCE": constants["BINDING_MANIFEST_REFERENCE"],
+        "D_READ_BINDING_REFERENCE": constants["SOURCE_READ_BINDING_REFERENCE"],
+        "FINAL_ADMITTED_IO_PLAN_REFERENCE": constants["ADMITTED_IO_PLAN_REFERENCE"],
+        "FINAL_EFFECT_DECISION_REFERENCE": constants["EFFECT_DECISION_REFERENCE"],
+        "BOOTSTRAP_REFERENCE": {"path": "/fictional/bootstrap", "bytes": 0, "sha256": "fictional"},
+        "PY": "/fictional/python-never-executed",
+        "FLAGS": {},
+        "sdk": types.SimpleNamespace(
+            ToolRunRequest=lambda **values: types.SimpleNamespace(**values),
+            ToolRunLimits=lambda **values: types.SimpleNamespace(**values),
+        ),
+    }
+
+    def fake_payload_read(path, size, digest):
+        if (path, size, digest) != ("/fictional/bootstrap", 0, "fictional"):
+            raise AssertionError("unselected fictional payload read")
+        CALLS.append("fictional-bootstrap-payload-value")
+        return b"fictional bootstrap payload; never executed"
+
+    ns["read_private"] = fake_payload_read
+    exec(compile(FIXTURE["factory_source"], "<exact-saved-request-factory>", "exec"), ns)
+    carrier = ns["continuation_request"](
+        "published-D-phase2-bridge27", operation, roster, group="phase2-bridge27"
+    )
+    return carrier, json.loads(carrier.input_files["request.json"])
+
+
+def run_closed_guard(request):
+    ns = {**copy.deepcopy(CONSTANTS), "request": request}
+    exec(GUARD, ns)
+
+
+def fictional_roster():
+    result = []
+    for selector, count in FIXTURE["bootstrap_constants"]["EXPECTED_FUNCTION_CASE_COUNTS"].items():
+        result.extend(
+            selector if count == 1 else selector + "[authored-fixture-" + str(i) + "]"
+            for i in range(count)
+        )
+    return result
+
+
+class ExactFactoryClosedProvenanceTests(unittest.TestCase):
+    def assert_refused(self, request, field="git_candidate_provenance", exception=RuntimeError):
+        with self.assertRaises(exception) as caught:
+            run_closed_guard(request)
+        if exception is RuntimeError:
+            self.assertEqual(str(caught.exception), "closed Root binding differs: " + field)
+
+    def test_actual_collect_request_matches_all_fourteen_closed_fields(self):
+        carrier, request = actual_request()
+        self.assertEqual(request["git_candidate_provenance"], CORRECTED_D)
+        self.assertNotIn("actual_collected_roster", request)
+        self.assertEqual(carrier.limits.timeout_seconds, 120)
+        self.assertEqual(carrier.limits.cpu_seconds, 110)
+        run_closed_guard(request)
+
+    def test_run_request_assembly_with_authored_35_id_roster(self):
+        roster = fictional_roster()
+        self.assertEqual(len(roster), 35)
+        self.assertEqual(len(set(roster)), 35)
+        carrier, request = actual_request("run", roster)
+        self.assertEqual(request["actual_collected_roster"], roster)
+        self.assertEqual(carrier.limits.timeout_seconds, 600)
+        self.assertEqual(carrier.limits.cpu_seconds, 540)
+        run_closed_guard(request)
+
+    def test_coherent_historical_head_tree_pair_is_refused(self):
+        _, request = actual_request()
+        old = FIXTURE["bootstrap_constants"]["GIT_CANDIDATE_PROVENANCE"]
+        request["git_candidate_provenance"]["HEAD"] = old["HEAD"]
+        request["git_candidate_provenance"]["tree"] = old["tree"]
+        self.assert_refused(request)
+
+    def test_individually_stale_head_and_tree_are_refused(self):
+        for field in ("HEAD", "tree"):
+            with self.subTest(field=field):
+                _, request = actual_request()
+                request["git_candidate_provenance"][field] = FIXTURE["bootstrap_constants"]["GIT_CANDIDATE_PROVENANCE"][field]
+                self.assert_refused(request)
+
+    def test_root_and_source_write_claim_are_refused(self):
+        for field, value in (("root", "/fictional/wrong-root"), ("Source_WRITE_claimed", True)):
+            with self.subTest(field=field):
+                _, request = actual_request()
+                request["git_candidate_provenance"][field] = value
+                self.assert_refused(request)
+
+    def test_source_read_receipt_identity_change_is_refused(self):
+        for field in ("sha256", "bytes", "path"):
+            with self.subTest(field=field):
+                _, request = actual_request()
+                row = request["git_candidate_provenance"]["actual_source_read_closed_refs"][0]
+                row[field] = row[field] + 1 if field == "bytes" else str(row[field]) + "changed"
+                self.assert_refused(request)
+
+    def test_extra_and_missing_nested_provenance_fields_are_refused(self):
+        for change in ("extra", "missing"):
+            with self.subTest(change=change):
+                _, request = actual_request()
+                if change == "extra":
+                    request["git_candidate_provenance"]["unselected_authority"] = True
+                else:
+                    del request["git_candidate_provenance"]["root"]
+                self.assert_refused(request)
+
+    def test_missing_top_level_provenance_retains_key_error(self):
+        _, request = actual_request()
+        del request["git_candidate_provenance"]
+        self.assert_refused(request, exception=KeyError)
+
+    def test_other_thirteen_closed_fields_remain_exact(self):
+        # Isolate every downstream comparison, including before correction:
+        # baseline D is set to the active expected D only for these negatives.
+        fields = (
+            ("additional_A_provenance", "ADDITIONAL_A_PROVENANCE"),
+            ("binding_manifest_reference", "BINDING_MANIFEST_REFERENCE"),
+            ("source_read_binding_reference", "SOURCE_READ_BINDING_REFERENCE"),
+            ("admitted_io_plan_reference", "ADMITTED_IO_PLAN_REFERENCE"),
+            ("effect_decision_reference", "EFFECT_DECISION_REFERENCE"),
+            ("modules", "EXPECTED_MODULES"),
+            ("maintained_owner_names", "MAINTAINED_OWNER_NAMES"),
+            ("selected_test_modules", "SELECTED_TEST_MODULES"),
+            ("function_selectors", "FUNCTION_SELECTORS"),
+            ("expected_function_case_counts", "EXPECTED_FUNCTION_CASE_COUNTS"),
+            ("required_canonical_conftests", "REQUIRED_CANONICAL_CONFTESTS"),
+            ("pytest_inifile", "PYTEST_INIFILE"),
+            ("selected_test_rewrite_policy", "SELECTED_TEST_REWRITE_POLICY"),
+        )
+        for field, constant in fields:
+            with self.subTest(field=field):
+                _, request = actual_request()
+                request["git_candidate_provenance"] = copy.deepcopy(CONSTANTS["GIT_CANDIDATE_PROVENANCE"])
+                request[field] = {"fictional_mutation": True}
+                self.assertNotEqual(request[field], CONSTANTS[constant])
+                self.assert_refused(request, field)
+
+    def test_actual_factory_retains_roster_and_phase_refusals(self):
+        roster = fictional_roster()
+        bad_rosters = [roster[:-1], roster[:-1] + [roster[0]], ["not_selected.py::case"] + roster[1:]]
+        wrong_distribution = list(roster)
+        wrong_distribution[0] = roster[1] + "[extra-distinct]"
+        bad_rosters.append(wrong_distribution)
+        for bad in bad_rosters:
+            with self.subTest(kind=str(bad[:1])):
+                with self.assertRaises(ValueError):
+                    actual_request("run", bad)
+        with self.assertRaises(ValueError):
+            actual_request("unselected-operation")
+
+
+def run_same_suite(constants, label):
+    global CONSTANTS
+    CONSTANTS = constants
+    stream = io.StringIO()
+    suite = unittest.defaultTestLoader.loadTestsFromTestCase(ExactFactoryClosedProvenanceTests)
+    start = time.monotonic()
+    result = unittest.TextTestRunner(stream=stream, verbosity=2).run(suite)
+    return {
+        "label": label,
+        "tests": result.testsRun,
+        "failures": [{"id": test.id(), "traceback": tb} for test, tb in result.failures],
+        "errors": [{"id": test.id(), "traceback": tb} for test, tb in result.errors],
+        "skips": result.skipped,
+        "elapsed_seconds": time.monotonic() - start,
+        "stdout": stream.getvalue(),
+    }
+
+
+def main():
+    global FIXTURE, GUARD, CORRECTED_D
+    resource.setrlimit(resource.RLIMIT_AS, (536870912, 536870912))
+    resource.setrlimit(resource.RLIMIT_CPU, (30, 30))
+    if hasattr(os, "sched_getaffinity"):
+        os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
+    path = Path(__file__).with_name("runtime-fixture-compact-v01.json")
+    raw = path.read_bytes()
+    if len(raw) != 31711 or hashlib.sha256(raw).hexdigest() != "6fc1a18f8ae763a2d8cf82a91bb9ab1200eb427d4134e4d6a88e488db827841f":
+        raise RuntimeError("derived exact fixture identity mismatch")
+    FIXTURE = json.loads(raw)
+    if hashlib.sha256(FIXTURE["factory_source"].encode()).hexdigest() != FIXTURE["factory_sha256"]:
+        raise RuntimeError("saved actual request factory source mismatch")
+    parsed = ast.parse(FIXTURE["guard_source"])
+    if ast.dump(parsed.body[0], include_attributes=False) != FIXTURE["guard_AST"]:
+        raise RuntimeError("saved actual bootstrap guard AST mismatch")
+    GUARD = compile(parsed, "<exact-saved-bootstrap-closed-guard>", "exec")
+    before = copy.deepcopy(FIXTURE["bootstrap_constants"])
+    CORRECTED_D = copy.deepcopy(before["GIT_CANDIDATE_PROVENANCE"])
+    CORRECTED_D.update(FIXTURE["correction"])
+    after = copy.deepcopy(before)
+    after["GIT_CANDIDATE_PROVENANCE"] = copy.deepcopy(CORRECTED_D)
+    red = run_same_suite(before, "actual-saved-stale-bootstrap-literals")
+    green = run_same_suite(after, "two-literal-correction-same-suite")
+    outcome = {
+        "schema": "actual-exact-factory-closed-provenance-RED-GREEN/v1",
+        "before": red,
+        "after": green,
+        "cached_fixture_bytes_this_process": len(raw),
+        "cached_input_cumulative": 517199 + len(raw),
+        "all_test_methods_unchanged_between_runs": True,
+        "exact_factory_and_guard_code": True,
+        "fictional_seams": ["SDK value carriers", "bootstrap payload read", "epoch bytes/runtime value carriers", "authored 35-ID RUN request roster"],
+        "Source_SDK_Git_network_or_child_execution": False,
+        "ordinary_qualification_or_current_HEAD_acceptance": False,
+        "future_Root_Reader_fresh_binding_required": True,
+    }
+    result_path = path.with_name("actual-exact-provenance-RED-GREEN-result-v01.json")
+    wire = json.dumps(outcome, indent=2).encode()
+    fd = os.open(result_path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o400)
+    with os.fdopen(fd, "wb") as output:
+        output.write(wire)
+        output.flush()
+        os.fsync(output.fileno())
+    print(json.dumps({"path": str(result_path), "bytes": len(wire), "sha256": hashlib.sha256(wire).hexdigest(), "before": {"tests": red["tests"], "failures": len(red["failures"]), "errors": len(red["errors"])}, "after": {"tests": green["tests"], "failures": len(green["failures"]), "errors": len(green["errors"])}, "cached_input_cumulative": outcome["cached_input_cumulative"]}))
+    return 0 if red["failures"] and not red["errors"] and not green["failures"] and not green["errors"] and not green["skips"] else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
